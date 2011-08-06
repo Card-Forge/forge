@@ -617,13 +617,22 @@ public class AbilityFactory_Counters {
 		Counters cType = Counters.valueOf(params.get("CounterType"));
 		int amount = AbilityFactory.calculateAmount(af.getHostCard(), af.getMapParams().get("CounterNum"), sa);
 
-		sb.append("Remove ").append(amount).append(" ").append(cType.getName())
+		sb.append("Remove ");
+		if(params.containsKey("UpTo")) sb.append("up to ");
+		sb.append(amount).append(" ").append(cType.getName())
 				.append(" counter");
 		if(amount != 1) sb.append("s");
 		sb.append(" from");
 		
-		ArrayList<Card> tgts = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
-		for (Card c : tgts)
+		ArrayList<Card> tgtCards;
+		
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtCards = tgt.getTargetCards();
+		else{
+			tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
+		}
+		for (Card c : tgtCards)
 			sb.append(" ").append(c);
 
 		sb.append(".");
@@ -764,6 +773,12 @@ public class AbilityFactory_Counters {
 				PlayerZone zone = AllZone.getZone(tgtCard);
 				
 				if (zone.is(Constant.Zone.Battlefield) || zone.is(Constant.Zone.Exile))
+					if(params.containsKey("UpTo") && sa.getActivatingPlayer().isHuman()) {
+						ArrayList<String> choices = new ArrayList<String>();
+						for(int i = 0; i <= counterAmount; i++) choices.add(""+i);
+						Object o = GuiUtils.getChoice("Select the number of "+type+" counters to remove", choices.toArray());
+						counterAmount = Integer.parseInt((String)o);
+					}
 					tgtCard.subtractCounter(Counters.valueOf(type), counterAmount);
 			}
 		
