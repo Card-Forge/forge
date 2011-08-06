@@ -2391,6 +2391,7 @@ public class GameAction {
                 
             }
             
+            ArrayList<String> RAICards = new ArrayList<String>();
             for(int i = 0; i < computerDeck.countMain(); i++) {
                 card = c.getCard(computerDeck.getMain(i), AllZone.ComputerPlayer);
                 card.setUniqueNumber(nextUniqueNumber++);
@@ -2409,8 +2410,26 @@ public class GameAction {
                 
                 AllZone.Computer_Library.add(card);
                 
+                if (card.getSVar("RemAIDeck").equals("True"))
+                	RAICards.add(card.getName());
                 //get card picture so that it is in the image cache
 //        ImageCache.getImage(card);
+            }
+            
+            if (RAICards.size() > 0)
+            {
+            	StringBuilder sb = new StringBuilder("AI deck contains the following cards that it can't play or may be buggy:\n");
+            	for (int i=0; i<RAICards.size(); i++)
+            	{
+            		sb.append(RAICards.get(i));
+            		if (((i % 4) == 0) && (i > 0))
+            			sb.append("\n");
+            		else if (i != (RAICards.size() - 1))
+            			sb.append(", ");
+            	}
+            	
+            	JOptionPane.showMessageDialog(null, sb.toString(), "", JOptionPane.INFORMATION_MESSAGE);
+            	
             }
         }//end re-numbering
         
