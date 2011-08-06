@@ -2311,7 +2311,16 @@ public class GameAction {
             Random generator = new Random();
             
             for(int i = 0; i < humanDeck.countMain(); i++) {
-                card = c.getCard(humanDeck.getMain(i), AllZone.HumanPlayer);
+                String cardName = humanDeck.getMain(i);
+                String setCode = "";
+                if (cardName.contains("|"))
+                {
+                	String s[] = cardName.split("\\|");
+                	cardName = s[0];
+                	setCode = s[1];
+                }
+            	
+            	card = c.getCard(cardName, AllZone.HumanPlayer);
                 card.setUniqueNumber(nextUniqueNumber++);
                 
                 //if(card.isBasicLand()) {
@@ -2319,7 +2328,9 @@ public class GameAction {
                 //if (PC.matches("[0-9][0-9]?"))
                 //	n = Integer.parseInt(PC);
                 
-                if ((card.getSets().size() > 0) && card.getCurSetCode().equals(""))
+                if (!setCode.equals(""))
+                	card.setCurSetCode(setCode);
+                else if ((card.getSets().size() > 0)) // && card.getCurSetCode().equals(""))
                 	card.setRandomSetCode();
                 
                 if (!card.getCurSetCode().equals("")) {
@@ -2343,7 +2354,16 @@ public class GameAction {
             
             ArrayList<String> RAICards = new ArrayList<String>();
             for(int i = 0; i < computerDeck.countMain(); i++) {
-                card = c.getCard(computerDeck.getMain(i), AllZone.ComputerPlayer);
+                String cardName = computerDeck.getMain(i);
+                String setCode = "";
+                if (cardName.contains("|"))
+                {
+                	String s[] = cardName.split("\\|");
+                	cardName = s[0];
+                	setCode = s[1];
+                }
+            	
+            	card = c.getCard(cardName, AllZone.ComputerPlayer);
                 card.setUniqueNumber(nextUniqueNumber++);
                 
                 //if(card.isBasicLand()) {
@@ -2355,9 +2375,12 @@ public class GameAction {
                 //    card.setRandomPicture(generator.nextInt(n));
                     //System.out.println("computer random number:" + card.getRandomPicture());
                 //}
-                if ((card.getSets().size() > 0) && card.getCurSetCode().equals(""))
-                	card.setRandomSetCode();
                 
+                if (!setCode.equals(""))
+                	card.setCurSetCode(setCode);
+                else if ((card.getSets().size() > 0)) // && card.getCurSetCode().equals(""))
+                	card.setRandomSetCode();
+
                 if (!card.getCurSetCode().equals("")) {
                 	int n = SetInfoUtil.getSetInfo_Code(card.getSets(), card.getCurSetCode()).PicCount;
                 	if (n > 1)
