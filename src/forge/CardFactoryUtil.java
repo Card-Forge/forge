@@ -1785,7 +1785,7 @@ public class CardFactoryUtil {
             }//resolve()
         };//enchant ability
         enchant.setBeforePayMana(CardFactoryUtil.input_targetCreature(enchant));
-        if (! spellDescription[0].equals("Enchanted creature gets 0/0.")) {
+        if (! spellDescription[0].replaceAll("[\\+\\-]", "").equals("Enchanted creature gets 0/0.")) {
             enchant.setDescription(spellDescription[0]);
         }
         enchant.setStackDescription(stackDescription[0]);
@@ -1981,7 +1981,7 @@ public class CardFactoryUtil {
             }//resolve()
         };//enchant ability
         enchant.setBeforePayMana(CardFactoryUtil.input_targetCreature(enchant));
-        if (! spellDescription[0].equals("Enchanted creature gets 0/0.")) {
+        if (! spellDescription[0].replaceAll("[\\+\\-]", "").equals("Enchanted creature gets 0/0.")) {
             enchant.setDescription(spellDescription[0]);
         }
         enchant.setStackDescription(stackDescription[0]);
