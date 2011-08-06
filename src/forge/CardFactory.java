@@ -5884,14 +5884,21 @@ public class CardFactory implements NewConstants {
 				private static final long serialVersionUID = -5286946184688616830L;
 				
 				@Override
-				public boolean canPlayAI() {
-					if(xString && CardFactoryUtil.xCount(card, numString) > 0) {
-						return false;
-					}
-					else{
-						return true;
-					}
-				}
+                public boolean canPlayAI() {
+					
+                    // Copied this from Beast Attack. This is to prevent the 
+                    // AI from casting a spMakeToken spell over and over again.
+                    if (AllZone.GameAction.isCardInGrave(card)) {
+                        return false;
+                    }
+                    
+                    if(xString && CardFactoryUtil.xCount(card, numString) > 0) {
+                        return false;
+                    }
+                    else{
+                        return true;
+                    }
+                }// canPlayAI()
 				
 				@Override
             	public void resolve() {
