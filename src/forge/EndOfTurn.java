@@ -24,8 +24,9 @@ public class EndOfTurn implements java.io.Serializable
 	//Run Triggers
   	HashMap<String,Object> runParams = new HashMap<String,Object>();
   	runParams.put("Phase", Constant.Phase.End_Of_Turn);
+  	runParams.put("Part", "Beginning");
   	runParams.put("Player", AllZone.Phase.getPlayerTurn());
-  	AllZone.TriggerHandler.runTrigger("BeginningOfPhase", runParams);
+  	AllZone.TriggerHandler.runTrigger("Phase", runParams);
 	  
     //Pyrohemia and Pestilence
     CardList all = AllZoneUtil.getCardsInPlay();
@@ -200,9 +201,8 @@ public class EndOfTurn implements java.io.Serializable
     execute(at);
     
 	//Run triggers
-	//HashMap<String,Object> runParams = new HashMap<String,Object>();
-	//runParams.put("Phase", Constant.Phase.End_Of_Turn);
-	AllZone.TriggerHandler.runTrigger("EndOfPhase", runParams);
+	runParams.put("Part", "End");
+	AllZone.TriggerHandler.runTrigger("Phase", runParams);
     
   }//executeAt()
 

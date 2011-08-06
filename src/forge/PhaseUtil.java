@@ -25,8 +25,9 @@ public class PhaseUtil {
     	//Run triggers
     	HashMap<String,Object> runParams = new HashMap<String,Object>();
     	runParams.put("Phase", Constant.Phase.Untap);
+    	runParams.put("Part", "Beginning");
     	runParams.put("Player", AllZone.Phase.getPlayerTurn());
-    	AllZone.TriggerHandler.runTrigger("BeginningOfPhase", runParams);
+    	AllZone.TriggerHandler.runTrigger("Phase", runParams);
 		
         PlayerZone p = AllZone.getZone(Constant.Zone.Battlefield, turn);
         Card[] c = p.getCards();
@@ -58,9 +59,8 @@ public class PhaseUtil {
         AllZone.Human_Battlefield.updateObservers();
         
     	//Run triggers
-    	//HashMap<String,Object> runParams = new HashMap<String,Object>();
-    	//runParams.put("Phase", Constant.Phase.Untap);
-    	AllZone.TriggerHandler.runTrigger("EndOfPhase", runParams);
+    	runParams.put("Part", "End");
+    	AllZone.TriggerHandler.runTrigger("Phase", runParams);
         
         AllZone.Phase.setNeedToNextPhase(true);
 	}
@@ -318,15 +318,15 @@ public class PhaseUtil {
     	//Run triggers
     	HashMap<String,Object> runParams = new HashMap<String,Object>();
     	runParams.put("Phase", Constant.Phase.Upkeep);
+    	runParams.put("Part", "Beginning");
     	runParams.put("Player", AllZone.Phase.getPlayerTurn());
-    	AllZone.TriggerHandler.runTrigger("BeginningOfPhase", runParams);
+    	AllZone.TriggerHandler.runTrigger("Phase", runParams);
 		
         GameActionUtil.executeUpkeepEffects();
         
     	//Run triggers
-    	//HashMap<String,Object> runParams = new HashMap<String,Object>();
-    	//runParams.put("Phase", Constant.Phase.Upkeep);
-    	AllZone.TriggerHandler.runTrigger("EndOfPhase", runParams);
+    	runParams.put("Part", "End");
+    	AllZone.TriggerHandler.runTrigger("Phase", runParams);
 	}
 	
     public static boolean skipUpkeep()
@@ -355,16 +355,16 @@ public class PhaseUtil {
     	//Run triggers
     	HashMap<String,Object> runParams = new HashMap<String,Object>();
     	runParams.put("Phase", Constant.Phase.Draw);
+    	runParams.put("Part", "Beginning");
     	runParams.put("Player", AllZone.Phase.getPlayerTurn());
-    	AllZone.TriggerHandler.runTrigger("BeginningOfPhase", runParams);
+    	AllZone.TriggerHandler.runTrigger("Phase", runParams);
     	
     	playerTurn.drawCard();
         GameActionUtil.executeDrawStepEffects();
         
     	//Run triggers
-    	//HashMap<String,Object> runParams = new HashMap<String,Object>();
-    	//runParams.put("Phase", Constant.Phase.Draw);
-    	AllZone.TriggerHandler.runTrigger("EndOfPhase", runParams);
+    	runParams.put("Part", "End");
+    	AllZone.TriggerHandler.runTrigger("Phase", runParams);
     }
     
 	private static boolean skipDraw(Player player){
@@ -403,10 +403,11 @@ public class PhaseUtil {
         
         //Run triggers
         HashMap<String,Object> runParams = new HashMap<String,Object>();
+        runParams.put("Side", "Attacker");
         for(int i=0;i< list.size();i++)
-        {
+        {        	
         	runParams.put("Attacker", list.get(i));
-        	AllZone.TriggerHandler.runTrigger("Attacks", runParams);
+        	AllZone.TriggerHandler.runTrigger("Battles", runParams);
         }
 	}
 	
@@ -462,12 +463,13 @@ public class PhaseUtil {
         
         //Run Triggers
         HashMap<String,Object> runParams = new HashMap<String,Object>();
+        runParams.put("Side","Blocker");
         for (Card a:attList)
         {
         	CardList blockList = AllZone.Combat.getBlockers(a);
         	for (Card b:blockList)
         	{
-        		runParams.put("Blocker", b);
+        		runParams.put("Battler", b);
         		AllZone.TriggerHandler.runTrigger("Blocks", runParams);
         	}
         }

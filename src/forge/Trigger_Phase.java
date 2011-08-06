@@ -2,15 +2,22 @@ package forge;
 
 import java.util.HashMap;
 
-public class Trigger_BeginningOfPhase extends Trigger {
+public class Trigger_Phase extends Trigger {
 
-	public Trigger_BeginningOfPhase(HashMap<String, String> params, Card host) {
+	public Trigger_Phase(HashMap<String, String> params, Card host) {
 		super(params, host);
 	}
 
 	@Override
-	public boolean performTest(HashMap<String, Object> runParams) 
-	{
+	public boolean performTest(HashMap<String, Object> runParams) {
+		if(mapParams.containsKey("Part"))
+		{
+			if(!mapParams.get("Part").equals(runParams.get("Part")))
+			{
+				System.out.println("Test failed: Phase part was wrong (should be " + mapParams.get("Part") + " but was " + runParams.get("Part") + ")");
+				return false;
+			}
+		}
 		if(mapParams.containsKey("Phase"))
 		{
 			if(!mapParams.get("Phase").equals(runParams.get("Phase")))

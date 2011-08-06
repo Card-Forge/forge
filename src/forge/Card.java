@@ -1981,13 +1981,28 @@ public class Card extends MyObservable {
     
     public void tap() {
     	if (isUntapped())
+    	{
     		GameActionUtil.executeTapSideEffects(this);
+    		
+    		//Run triggers
+    		HashMap<String,Object> runParams = new HashMap<String,Object>();
+    		runParams.put("Action", "Tap");
+    		runParams.put("Card", this);
+    		AllZone.TriggerHandler.runTrigger("TapsUntaps", runParams);
+    	}
     	setTapped(true);
     }
     
     public void untap() {
-    	if( isTapped() ) {
+    	if( isTapped() ) 
+    	{
     		GameActionUtil.executeUntapSideEffects(this);
+    		
+    		//Run triggers
+    		HashMap<String,Object> runParams = new HashMap<String,Object>();
+    		runParams.put("Action", "Untap");
+    		runParams.put("Card", this);
+    		AllZone.TriggerHandler.runTrigger("TapsUntaps", runParams);
     	}
     	if (isTapped() && isReflectedLand()) {
     		Ability_Reflected_Mana am = (Ability_Reflected_Mana) getManaAbility().get(0);
