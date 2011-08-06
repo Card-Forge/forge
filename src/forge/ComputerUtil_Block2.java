@@ -28,22 +28,22 @@ public class ComputerUtil_Block2
    }
    
    //finds blockers that won't be destroyed
-   private static CardList getSafeBlockers(Card attacker, CardList blockersLeft) {
+   private static CardList getSafeBlockers(Card attacker, CardList blockersLeft, Combat combat) {
 	  CardList blockers = new CardList();
 	   
 	  for(Card b : blockersLeft) {
-		  if(!CombatUtil.canDestroyBlocker(b,attacker)) blockers.add(b);
+		  if(!CombatUtil.canDestroyBlocker(b,attacker, combat)) blockers.add(b);
 	  }
 	  
 	  return blockers;   
    }
    
    //finds blockers that destroy the attacker
-   private static CardList getKillingBlockers(Card attacker, CardList blockersLeft) {
+   private static CardList getKillingBlockers(Card attacker, CardList blockersLeft, Combat combat) {
 	  CardList blockers = new CardList();
 	   
 	  for(Card b : blockersLeft) {
-		   if(CombatUtil.canDestroyAttacker(attacker,b)) blockers.add(b);
+		   if(CombatUtil.canDestroyAttacker(attacker,b,combat)) blockers.add(b);
 	  }
 	   
 	  return blockers;   
@@ -102,12 +102,12 @@ public class ComputerUtil_Block2
 		  
 		  CardList blockers = getPossibleBlockers(attacker, blockersLeft, combat);
 		   
-		  CardList safeBlockers = getSafeBlockers(attacker, blockers);
+		  CardList safeBlockers = getSafeBlockers(attacker, blockers, combat);
 		  CardList killingBlockers = new CardList();
 		   
 		  if(safeBlockers.size() > 0) {
 			  // 1.Blockers that can destroy the attacker but won't get destroyed 
-			  killingBlockers = getKillingBlockers(attacker, safeBlockers);
+			  killingBlockers = getKillingBlockers(attacker, safeBlockers, combat);
 			  if(killingBlockers.size() > 0) blocker = CardFactoryUtil.AI_getWorstCreature(killingBlockers);
 
 			  // 2.Blockers that won't get destroyed 
@@ -117,7 +117,7 @@ public class ComputerUtil_Block2
 			  }
 		  } // no safe blockers
 		  else {
-			  killingBlockers = getKillingBlockers(attacker, blockers);
+			  killingBlockers = getKillingBlockers(attacker, blockers, combat);
 			  if(killingBlockers.size() > 0) {
 				  // 3.Blockers that can destroy the attacker and are worth less
 				  Card worst = CardFactoryUtil.AI_getWorstCreature(killingBlockers);
@@ -183,7 +183,7 @@ public class ComputerUtil_Block2
 	  
 	  for(Card attacker : attackersLeft) {
 		  killingBlockers = 
-			  getKillingBlockers(attacker, getPossibleBlockers(attacker, blockersLeft, combat));
+			  getKillingBlockers(attacker, getPossibleBlockers(attacker, blockersLeft, combat), combat);
 		  if(killingBlockers.size() > 0 && CombatUtil.lifeInDanger(combat)) {
 			  Card blocker = CardFactoryUtil.AI_getWorstCreature(killingBlockers);
 			  combat.addBlocker(attacker, blocker);
@@ -254,7 +254,7 @@ public class ComputerUtil_Block2
 		  blockers = getPossibleBlockers(attacker, blockersLeft, combat);
 
 		  //Try to use safe blockers first
-		  safeBlockers = getSafeBlockers(attacker, blockers);
+		  safeBlockers = getSafeBlockers(attacker, blockers, combat);
 		  for(Card blocker : safeBlockers) {
 			  //Add an additional blocker if the current blockers are not enough and the new one would deal additional damage
 			  if(attacker.getKillDamage() > CombatUtil.totalDamageOfBlockers(attacker,combat.getBlockers(attacker)) 
@@ -358,8 +358,8 @@ public class ComputerUtil_Block2
 		  if (CombatUtil.lifeInDanger(combat)) combat = makeChumpBlocks(combat); //choose necessary chump blocks if life is still in danger
 		  //Reinforce blockers blocking attackers with trample if life is still in danger
 		  if (CombatUtil.lifeInDanger(combat)) combat = reinforceBlockersAgainstTrample(combat);
-		  if (!CombatUtil.lifeInDanger(combat)) combat = makeGangBlocks(combat);
-		  if (!CombatUtil.lifeInDanger(combat)) combat = reinforceBlockersToKill(combat);
+		  combat = makeGangBlocks(combat);
+		  combat = reinforceBlockersToKill(combat);
 	  }
 	  
 	  //== 3. If the AI life would be in serious danger make an even safer approach ==
@@ -370,9 +370,9 @@ public class ComputerUtil_Block2
 		  if (!CombatUtil.lifeInDanger(combat)) combat = makeGoodBlocks(combat);
 		  //Reinforce blockers blocking attackers with trample if life is still in danger
 		  if (CombatUtil.lifeInDanger(combat)) combat = reinforceBlockersAgainstTrample(combat);
-		  if (!CombatUtil.lifeInDanger(combat)) combat = makeGangBlocks(combat);
+		  combat = makeGangBlocks(combat);
 		  //Support blockers not destroying the attacker with more blockers to try to kill the attacker
-		  if (!CombatUtil.lifeInDanger(combat)) combat = reinforceBlockersToKill(combat);
+		  combat = reinforceBlockersToKill(combat);
 	  }
 	  
 	  // assign blockers that have to block 

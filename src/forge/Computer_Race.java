@@ -91,8 +91,8 @@ public class Computer_Race
     CardList c = blockList;
 
     for(int i = 0; i < c.size(); i++)
-      if(CombatUtil.canDestroyAttacker(attacker, c.get(i)) &&
-      (! CombatUtil.canDestroyBlocker(c.get(i), attacker)))
+      if(CombatUtil.canDestroyAttacker(attacker, c.get(i), null) &&
+      (! CombatUtil.canDestroyBlocker(c.get(i), attacker, null)))
         return c.get(i);
 
     return null;
@@ -105,7 +105,7 @@ public class Computer_Race
     CardList c = blockList;
 
     for(int i = 0; i < c.size(); i++)
-      if(CombatUtil.canDestroyAttacker(attacker, c.get(i)))
+      if(CombatUtil.canDestroyAttacker(attacker, c.get(i), null))
         return c.get(i);
 
     return null;
@@ -118,7 +118,7 @@ public class Computer_Race
     CardList c = blockList;
 
     for(int i = 0; i < c.size(); i++)
-      if(! CombatUtil.canDestroyBlocker(c.get(i), attacker))
+      if(! CombatUtil.canDestroyBlocker(c.get(i), attacker, null))
         return c.get(i);
 
     return null;

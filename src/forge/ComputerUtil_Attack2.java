@@ -1,9 +1,11 @@
 package forge;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.trigger.Trigger;
 
 //doesHumanAttackAndWin() uses the global variable AllZone.ComputerPlayer
 public class ComputerUtil_Attack2 {
@@ -41,7 +43,29 @@ public class ComputerUtil_Attack2 {
 		blockers  = getPossibleBlockers(possibleBlockers, attackers);
 		this.blockerLife = blockerLife;
 	}//constructor
-       
+    
+	public CardList sortAttackers(CardList in)
+    {
+      CardList list = new CardList();
+      
+      //Cards with triggers should come first (for Battle Cry)
+      for(Card attacker:in) {
+    	  ArrayList<Trigger> registeredTriggers = AllZone.TriggerHandler.getRegisteredTriggers();
+  		  for(Trigger trigger : registeredTriggers)
+  		  {
+  			HashMap<String,String> trigParams = trigger.getMapParams();
+  			if (trigParams.get("Mode").equals("Attacks") && trigger.getHostCard().equals(attacker))
+			list.add(attacker);
+  		  }
+      }
+      
+      for(Card attacker:in) {
+    	  if(!list.contains(attacker)) list.add(attacker);
+      }
+      
+      return list;
+    }//sortAttackers()
+	
 	public CardList getPossibleAttackers(CardList in)
     {
       CardList list = new CardList(in.toArray());
@@ -358,7 +382,8 @@ public class ComputerUtil_Attack2 {
                aiAggression = 5; // attack at all costs
             }else if((playerLifeToDamageRatio < 2 && ratioDiff >= 0) || ratioDiff > 3 || (ratioDiff > 0 && outNumber > 0)){
                aiAggression = 3;  // attack expecting to kill creatures or damage player.
-            }else if(ratioDiff >= 0 || ratioDiff + outNumber >= -1){ // at 0 ratio expect to potentially gain an advantage by attacking first
+            }else if(ratioDiff >= 0 || ratioDiff + outNumber >= -1){ 
+            	// at 0 ratio expect to potentially gain an advantage by attacking first
                 // if the ai has a slight advantage
                 // or the ai has a significant advantage numerically but only a slight disadvantage damage/life
                 aiAggression = 2; // attack expecting to destroy creatures/be unblockable
@@ -412,15 +437,12 @@ public class ComputerUtil_Attack2 {
           else
           {
               System.out.println("Normal attack");
-             //so the biggest creature will usually attack
-             //I think this works, not sure, may have to change it
-             //sortNonFlyingFirst has to be done first, because it reverses everything
-             CardListUtil.sortNonFlyingFirst(attackersLeft);
-             CardListUtil.sortAttackLowFirst(attackersLeft);
-             
+              
              attackersLeft = notNeededAsBlockers(attackersLeft, combat);
-                                     System.out.println(attackersLeft.size());
-             
+                                      System.out.println(attackersLeft.size());
+
+             attackersLeft = sortAttackers(attackersLeft);
+ 
              for(int i = 0; i < attackersLeft.size(); i++)
              {
             	Card attacker = attackersLeft.get(i);
@@ -428,7 +450,7 @@ public class ComputerUtil_Attack2 {
             	if (!attacker.hasFirstStrike() && !attacker.hasDoubleStrike())
             		 totalFirstStrikeBlockPower = CombatUtil.getTotalFirstStrikeBlockPower(attacker, AllZone.HumanPlayer);
         
-                if ( shouldAttack(attacker,blockers, combat) &&	(totalFirstStrikeBlockPower < attacker.getKillDamage() || aiAggression == 5)
+                if (shouldAttack(attacker,blockers,combat) &&	(totalFirstStrikeBlockPower < attacker.getKillDamage() || aiAggression == 5)
                 		&& CombatUtil.canAttack(attacker, combat))
                    combat.addAttacker(attacker);
              }
@@ -474,7 +496,7 @@ public class ComputerUtil_Attack2 {
     	for (Card defender:defenders) {
     		if(CombatUtil.canBlock(attacker, defender)){ //, combat )) {
                 canBeBlocked = true;
-    			if(CombatUtil.canDestroyAttacker(attacker, defender)) {
+    			if(CombatUtil.canDestroyAttacker(attacker, defender, combat)) {
     				canBeKilledByOne = true;  // there is a single creature on the battlefield that can kill the creature
                     // see if the defending creature is of higher or lower value. We don't want to attack only to lose value
                     if(CardFactoryUtil.evaluateCreature(defender) <= CardFactoryUtil.evaluateCreature(attacker)){
@@ -482,7 +504,7 @@ public class ComputerUtil_Attack2 {
                     } 
     			}
                 // see if this attacking creature can destroy this defender, if not record that it can't kill everything
-    			if(!CombatUtil.canDestroyBlocker(defender, attacker)){
+    			if(!CombatUtil.canDestroyBlocker(defender, attacker, combat)){
     				canKillAll = false;
                     if(defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect")){
                     	canKillAllDangerous = false; // there is a dangerous creature that can survive an attack from this creature

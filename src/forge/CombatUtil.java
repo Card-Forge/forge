@@ -601,7 +601,7 @@ public class CombatUtil {
     {
 	  int damage = attacker.getNetCombatDamage();
 	  int sum = 0;
-	  damage += predictPowerBonusOfAttacker(attacker,null);
+	  damage += predictPowerBonusOfAttacker(attacker,null,null);
 	  if (!attacker.hasKeyword("Infect")) {
 		  sum = attacked.predictDamage(damage, attacker, true);
 		  if (attacker.hasKeyword("Double Strike")) sum += attacked.predictDamage(damage, attacker, true);
@@ -614,7 +614,7 @@ public class CombatUtil {
     {
 	  int damage = attacker.getNetCombatDamage();
 	  int poison = 0;
-	  damage += predictPowerBonusOfAttacker(attacker,null);
+	  damage += predictPowerBonusOfAttacker(attacker, null, null);
 	  if (attacker.hasKeyword("Infect")) {
 		  poison += attacked.predictDamage(damage, attacker, true);
 		  if (attacker.hasKeyword("Double Strike")) poison += attacked.predictDamage(damage, attacker, true);
@@ -761,7 +761,7 @@ public class CombatUtil {
     // This calculates the amount of damage a blocker in a blockgang can take from the attacker (for trampling attackers)
     public static int shieldDamage(Card attacker, Card defender) {
     	
-    	if (!canDestroyBlocker(defender,attacker)) return 100;
+    	if (!canDestroyBlocker(defender,attacker, null)) return 100;
     
     	int flankingMagnitude = 0;
     	if(attacker.getKeyword().contains("Flanking") && !defender.getKeyword().contains("Flanking")) {
@@ -796,7 +796,7 @@ public class CombatUtil {
     	CardList blockers = AllZone.Combat.getBlockers(attacker);
     	
     	for (Card defender:blockers) {
-    			if(CombatUtil.canDestroyAttacker(attacker, defender) && 
+    			if(CombatUtil.canDestroyAttacker(attacker, defender, AllZone.Combat) && 
     					!(defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect")))
     				return true;
     	}
@@ -805,20 +805,24 @@ public class CombatUtil {
     }
     
     //Will this trigger trigger?
-    public static boolean combatTriggerWillTrigger(Card attacker, Card defender, Trigger trigger) {
+    public static boolean combatTriggerWillTrigger(Card attacker, Card defender, Trigger trigger, Combat combat) {
 		HashMap<String,String> trigParams = trigger.getMapParams();
 		boolean willTrigger = false;
 		Card source = trigger.getHostCard();
+		if (combat == null) combat = AllZone.Combat;
 		
 		if (!trigger.zonesCheck()) return false;
 		if (!trigger.requirementsCheck()) return false;
 		
 		if (trigParams.get("Mode").equals("Attacks")) {
 			willTrigger = true;
-			if (attacker.isAttacking()) return false; //The trigger should have triggered already
-			if(trigParams.containsKey("ValidCard"))
-				if(!trigger.matchesValid(attacker, trigParams.get("ValidCard").split(","), source))
+			if(attacker.isAttacking()) return false; //The trigger should have triggered already
+			if(trigParams.containsKey("ValidCard")) {
+				if(!trigger.matchesValid(attacker, trigParams.get("ValidCard").split(","), source)
+						&& !(combat.isAttacking(source) &&
+								 trigger.matchesValid(source, trigParams.get("ValidCard").split(","), source)))
 					return false;
+			}
 		}
 		
 		// defender == null means unblocked
@@ -876,14 +880,14 @@ public class CombatUtil {
 			HashMap<String,String> trigParams = trigger.getMapParams();
 			Card source = trigger.getHostCard();
 				
-			if(combatTriggerWillTrigger(attacker, defender, trigger) && trigParams.containsKey("Execute")) {
+			if(combatTriggerWillTrigger(attacker, defender, trigger, null) && trigParams.containsKey("Execute")) {
 				String ability = source.getSVar(trigParams.get("Execute"));
 				AbilityFactory AF = new AbilityFactory();
         		HashMap<String,String> abilityParams = AF.getMapParams(ability, source);
         		if (abilityParams.containsKey("AB")) { 
 					if (abilityParams.get("AB").equals("Pump"))
 						if (!abilityParams.containsKey("ValidTgts") && !abilityParams.containsKey("Tgt"))
-						if (AbilityFactory.getDefinedCards(source, trigParams.get("Defined"), null).contains(defender))
+						if (AbilityFactory.getDefinedCards(source, abilityParams.get("Defined"), null).contains(defender))
 						if (abilityParams.containsKey("NumAtt")){
 							String att = abilityParams.get("NumAtt");
 							if (att.startsWith("+"))
@@ -911,14 +915,14 @@ public class CombatUtil {
 			HashMap<String,String> trigParams = trigger.getMapParams();
 			Card source = trigger.getHostCard();
 
-			if(combatTriggerWillTrigger(attacker, defender, trigger)  && trigParams.containsKey("Execute")) {
+			if(combatTriggerWillTrigger(attacker, defender, trigger, null)  && trigParams.containsKey("Execute")) {
 				String ability = source.getSVar(trigParams.get("Execute"));
 				AbilityFactory AF = new AbilityFactory();
         		HashMap<String,String> abilityParams = AF.getMapParams(ability, source);
         		if (abilityParams.containsKey("AB")) {
 					if (abilityParams.get("AB").equals("Pump"))
 						if (!abilityParams.containsKey("ValidTgts") && !abilityParams.containsKey("Tgt"))
-						if (AbilityFactory.getDefinedCards(source, trigParams.get("Defined"), null).contains(defender))
+						if (AbilityFactory.getDefinedCards(source, abilityParams.get("Defined"), null).contains(defender))
 						if (abilityParams.containsKey("NumDef")) {
 							String def = abilityParams.get("NumDef");
 							if (def.startsWith("+"))
@@ -932,7 +936,7 @@ public class CombatUtil {
     }
     
     //Predict the Power bonus of the blocker if blocking the attacker (Flanking, Bushido and other triggered abilities)
-    public static int predictPowerBonusOfAttacker(Card attacker, Card defender) {
+    public static int predictPowerBonusOfAttacker(Card attacker, Card defender, Combat combat) {
     	int power = 0;
         	
         power += attacker.getKeywordMagnitude("Bushido");
@@ -952,26 +956,38 @@ public class CombatUtil {
 			HashMap<String,String> trigParams = trigger.getMapParams();
 			Card source = trigger.getHostCard();
 
-			if(combatTriggerWillTrigger(attacker, defender, trigger)  && trigParams.containsKey("Execute")) {
+			if(combatTriggerWillTrigger(attacker, defender, trigger, combat)  && trigParams.containsKey("Execute")) {
 				String ability = source.getSVar(trigParams.get("Execute"));
 				AbilityFactory AF = new AbilityFactory();
         		HashMap<String,String> abilityParams = AF.getMapParams(ability, source);
-        		if (abilityParams.containsKey("AB")) { 
+        		if (abilityParams.containsKey("AB")) {
+        			boolean isValid = false;
+        			
+        			//Pump
 					if (abilityParams.get("AB").equals("Pump"))
-						if (!abilityParams.containsKey("ValidTgts") && !abilityParams.containsKey("Tgt"))
-						if (AbilityFactory.getDefinedCards(source, trigParams.get("Defined"), null).contains(attacker))
-						if (abilityParams.containsKey("NumAtt")){
-							String att = abilityParams.get("NumAtt");
-							if (att.startsWith("+"))
-								att = att.substring(1);
-							try {
-								power += Integer.parseInt(att);
-							}
-							catch(NumberFormatException nfe) {
-								//can't parse the number (X for example)
-								power += 0;
-							}
+						if (!abilityParams.containsKey("ValidTgts") && !abilityParams.containsKey("Tgt")) //not targeted
+							if (AbilityFactory.getDefinedCards(source, abilityParams.get("Defined"), null).contains(attacker))
+								isValid = true;
+					
+					//PumpAll
+					if (abilityParams.get("AB").equals("PumpAll") && abilityParams.containsKey("ValidCards"))
+							if (attacker.isValidCard(abilityParams.get("ValidCards").split(","), source.getController(), source)
+									|| attacker.isValidCard(abilityParams.get("ValidCards").replace("attacking+", "").split(",")
+											, source.getController(), source))
+								isValid = true;
+					
+					if (abilityParams.containsKey("NumAtt") && isValid){
+						String att = abilityParams.get("NumAtt");
+						if (att.startsWith("+"))
+							att = att.substring(1);
+						try {
+							power += Integer.parseInt(att);
 						}
+						catch(NumberFormatException nfe) {
+							//can't parse the number (X for example)
+							power += 0;
+						}
+					}
         		}
 			}
 		}
@@ -979,7 +995,7 @@ public class CombatUtil {
     }
     
     //Predict the Toughness bonus of the blocker if blocking the attacker (Flanking, Bushido and other triggered abilities)
-    public static int predictToughnessBonusOfAttacker(Card attacker, Card defender) {
+    public static int predictToughnessBonusOfAttacker(Card attacker, Card defender, Combat combat) {
     	int toughness = 0;
         	
         toughness += attacker.getKeywordMagnitude("Bushido");
@@ -990,15 +1006,27 @@ public class CombatUtil {
 			HashMap<String,String> trigParams = trigger.getMapParams();
 			Card source = trigger.getHostCard();
 
-			if(combatTriggerWillTrigger(attacker, defender, trigger)  && trigParams.containsKey("Execute")) {
+			if(combatTriggerWillTrigger(attacker, defender, trigger, combat) && trigParams.containsKey("Execute")) {
 				String ability = source.getSVar(trigParams.get("Execute"));
 				AbilityFactory AF = new AbilityFactory();
         		HashMap<String,String> abilityParams = AF.getMapParams(ability, source);
         		if (abilityParams.containsKey("AB")) {
+        			boolean isValid = false;
+        			
+        			//Pump
 					if (abilityParams.get("AB").equals("Pump"))
-						if (!abilityParams.containsKey("ValidTgts") && !abilityParams.containsKey("Tgt"))
-						if (AbilityFactory.getDefinedCards(source, trigParams.get("Defined"), null).contains(attacker))
-						if (abilityParams.containsKey("NumDef")) {
+						if (!abilityParams.containsKey("ValidTgts") && !abilityParams.containsKey("Tgt")) //not targeted
+							if (AbilityFactory.getDefinedCards(source, abilityParams.get("Defined"), null).contains(attacker))
+								isValid = true;
+					
+					//PumpAll
+					if (abilityParams.get("AB").equals("PumpAll")  && abilityParams.containsKey("ValidCards"))
+							if (attacker.isValidCard(abilityParams.get("ValidCards").split(","), source.getController(), source)
+									|| attacker.isValidCard(abilityParams.get("ValidCards").replace("attacking+", "").split(",")
+											, source.getController(), source))
+								isValid = true;
+					
+					if (abilityParams.containsKey("NumDef") && isValid){
 							String def = abilityParams.get("NumDef");
 							if (def.startsWith("+"))
 								def = def.substring(1);
@@ -1017,7 +1045,7 @@ public class CombatUtil {
     }
     
     //can the blocker destroy the attacker?
-    public static boolean canDestroyAttacker(Card attacker, Card defender) {
+    public static boolean canDestroyAttacker(Card attacker, Card defender, Combat combat) {
         
         if(attacker.getName().equals("Sylvan Basilisk") && !defender.getKeyword().contains("Indestructible")) return false;
         
@@ -1039,10 +1067,10 @@ public class CombatUtil {
         //int attBushidoMagnitude = attacker.getKeywordMagnitude("Bushido");
         
         int defenderDamage = defender.getNetAttack() + predictPowerBonusOfBlocker(attacker, defender);
-        int attackerDamage = attacker.getNetAttack() + predictPowerBonusOfAttacker(attacker, defender);
+        int attackerDamage = attacker.getNetAttack() + predictPowerBonusOfAttacker(attacker, defender, combat);
         if (AllZoneUtil.isCardInPlay("Doran, the Siege Tower")) {
         	defenderDamage = defender.getNetDefense() + predictToughnessBonusOfBlocker(attacker, defender);
-        	attackerDamage = attacker.getNetDefense() + predictToughnessBonusOfAttacker(attacker, defender);
+        	attackerDamage = attacker.getNetDefense() + predictToughnessBonusOfAttacker(attacker, defender, combat);
         }
         
         // consider Damage Prevention/Replacement
@@ -1050,7 +1078,7 @@ public class CombatUtil {
         attackerDamage = defender.predictDamage(attackerDamage, attacker, true);
         
         int defenderLife = defender.getKillDamage() + predictToughnessBonusOfBlocker(attacker, defender);
-        int attackerLife = attacker.getKillDamage() + predictToughnessBonusOfAttacker(attacker, defender);
+        int attackerLife = attacker.getKillDamage() + predictToughnessBonusOfAttacker(attacker, defender, combat);
         
         if(defender.getKeyword().contains("Double Strike") ) {
             if(defender.getKeyword().contains("Deathtouch") && defenderDamage > 0) return true;
@@ -1088,14 +1116,14 @@ public class CombatUtil {
     public static boolean blockerWouldBeDestroyed(Card blocker) {
     	Card attacker = AllZone.Combat.getAttackerBlockedBy(blocker);
     	
-    	if(canDestroyBlocker(blocker, attacker) && 
+    	if(canDestroyBlocker(blocker, attacker, AllZone.Combat) && 
     					!(attacker.getKeyword().contains("Wither") || attacker.getKeyword().contains("Infect")))
     			return true;
     	return false;
     }
     
     //can the attacker destroy this blocker?
-    public static boolean canDestroyBlocker(Card defender, Card attacker) {
+    public static boolean canDestroyBlocker(Card defender, Card attacker, Combat combat) {
     	
         int flankingMagnitude = 0;
         if(attacker.getKeyword().contains("Flanking") && !defender.getKeyword().contains("Flanking")) {
@@ -1112,10 +1140,10 @@ public class CombatUtil {
         if(attacker.getName().equals("Sylvan Basilisk") && !defender.getKeyword().contains("Indestructible")) return true;
         
         int defenderDamage = defender.getNetAttack() + predictPowerBonusOfBlocker(attacker, defender);
-        int attackerDamage = attacker.getNetAttack() + predictPowerBonusOfAttacker(attacker, defender);
+        int attackerDamage = attacker.getNetAttack() + predictPowerBonusOfAttacker(attacker, defender, combat);
         if (AllZoneUtil.isCardInPlay("Doran, the Siege Tower")) {
         	defenderDamage = defender.getNetDefense() + predictToughnessBonusOfBlocker(attacker, defender);
-        	attackerDamage = attacker.getNetDefense() + predictToughnessBonusOfAttacker(attacker, defender);
+        	attackerDamage = attacker.getNetDefense() + predictToughnessBonusOfAttacker(attacker, defender, combat);
         }
         
         // consider Damage Prevention/Replacement
@@ -1123,7 +1151,7 @@ public class CombatUtil {
         attackerDamage = defender.predictDamage(attackerDamage, attacker, true);
         
         int defenderLife = defender.getKillDamage() + predictToughnessBonusOfBlocker(attacker, defender);
-        int attackerLife = attacker.getKillDamage() + predictToughnessBonusOfAttacker(attacker, defender);
+        int attackerLife = attacker.getKillDamage() + predictToughnessBonusOfAttacker(attacker, defender, combat);
         
         if(attacker.getKeyword().contains("Double Strike") ) {
             if(attacker.getKeyword().contains("Deathtouch") && attackerDamage > 0) return true;

@@ -300,7 +300,7 @@ public class RunTest
 	    Card card = cf.getCard("Sylvan Basilisk", null);
 	    Card card2 = cf.getCard("Exalted Angel", null);
 	    
-	    check("121a", !CombatUtil.canDestroyAttacker(card, card2));
+	    check("121a", !CombatUtil.canDestroyAttacker(card, card2, null));
 	}
 	{
 	    check("122", CardUtil.getConvertedManaCost("0") == 0);
