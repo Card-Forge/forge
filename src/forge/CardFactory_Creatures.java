@@ -9287,98 +9287,6 @@ public class CardFactory_Creatures {
                 });
             }//*************** END ************ END **************************         
 
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Elvish Farmer") || cardName.equals("Mycologist")) {
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = 882942955555047018L;
-                public boolean            firstTime        = true;
-                
-                public void execute() {
-                    
-                    if(firstTime) {
-                        card.setCounter(Counters.SPORE, 0, false);
-                    }
-                    firstTime = false;
-                }
-            };
-            
-            card.addComesIntoPlayCommand(intoPlay);
-            
-            final SpellAbility a2 = new Ability(card, "0") {
-                @Override
-                public void chooseTargetAI() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-                    CardList saps = new CardList(play.getCards());
-                    saps = saps.filter(new CardListFilter() {
-                        
-                        public boolean addCard(Card c) {
-                            if((c.getType().contains("Saproling") || c.getKeyword().contains("Changeling"))
-                                    && AllZone.GameAction.isCardInPlay(c)) return true;
-                            return false;
-                        }
-                        
-                    });
-                    
-                    if(saps.size() != 0) setTargetCard(saps.getCard(0));
-                }
-                
-                @Override
-                public void resolve() {
-                    //get all saprolings:
-                    Card c = getTargetCard();
-                    if(c == null) return;
-                    
-                    if(!AllZone.GameAction.isCardInPlay(c)) return;
-                    
-                    if(AllZone.GameAction.isCardInPlay(c)) {
-                        AllZone.GameAction.sacrifice(c);
-                        c.getController().gainLife(2, card);
-                    }
-                }//resolve
-                
-                @Override
-                public boolean canPlayAI() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-                    CardList saps = new CardList(play.getCards());
-                    saps = saps.filter(new CardListFilter() {
-                        
-                        public boolean addCard(Card c) {
-                            if(c.getType().contains("Saproling") || c.getKeyword().contains("Changeling")
-                                    && AllZone.GameAction.isCardInPlay(c)) return true;
-                            return false;
-                        }
-                        
-                    });
-                    if(AllZone.ComputerPlayer.getLife() < 6 && saps.size() > 0) return true;
-                    else return false;
-                }
-            };//SpellAbility
-            
-            Input runtime = new Input() {
-                private static final long serialVersionUID = -4803541385354247499L;
-                
-                @Override
-                public void showMessage() {
-                    CardList saps = new CardList(
-                            AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
-                    saps = saps.getType("Saproling");
-                    
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(a2, saps, "Select a Saproling to sacrifice.",
-                            false, false));
-                }
-            };
-            
-            card.addSpellAbility(a2);
-            a2.setDescription("Sacrifice a Saproling: You gain 2 life.");
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card.getController()).append(" gains 2 life.");
-            a2.setStackDescription(sb.toString());
-            
-            a2.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
-        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Pallid Mycoderm")) {
@@ -9399,44 +9307,39 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
             
             final SpellAbility a2 = new Ability(card, "0") {
-                final Command eot1 = new Command() {
-                                       private static final long serialVersionUID = -4485431571276851181L;
-                                       
-                                       public void execute() {
-                                    	   Player player = card.getController();
-                                           PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-                                           
-                                           CardList creats = new CardList(play.getCards());
-                                           creats = creats.getType("Creature");
-                                           
-                                           for(int i = 0; i < creats.size(); i++) {
-                                               Card creat = creats.get(i);
-                                               
-                                               if(creat.getType().contains("Fungus")
-                                                       || creat.getType().contains("Saproling")
-                                                       || creat.getKeyword().contains("Changeling")) {
-                                                   creat.addTempAttackBoost(-1);
-                                                   creat.addTempDefenseBoost(-1);
-                                               }
-                                           }
-                                           
-                                       }
-                                   };
+            	final Command eot1 = new Command() {
+            		private static final long serialVersionUID = -4485431571276851181L;
+
+            		public void execute() {
+            			Player player = card.getController();
+            			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
+
+            			CardList creats = new CardList(play.getCards());
+            			creats = creats.getType("Creature");
+
+            			for(int i = 0; i < creats.size(); i++) {
+            				Card creat = creats.get(i);
+
+            				if(creat.getType().contains("Fungus")
+            						|| creat.getType().contains("Saproling")
+            						|| creat.getKeyword().contains("Changeling")) {
+            					creat.addTempAttackBoost(-1);
+            					creat.addTempDefenseBoost(-1);
+            				}
+            			}
+
+            		}
+            	};
                 
                 @Override
                 public void resolve() {
                     //get all player controls saprolings:
                 	Player player = card.getController();
-                    
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-                    
-                    CardList creats = new CardList(play.getCards());
-                    creats = creats.getType("Creature");
+                    CardList creats = AllZoneUtil.getCreaturesInPlay(player);
                     
                     Card c = getTargetCard();
                     
                     if(AllZone.GameAction.isCardInPlay(c)) {
-                        //AllZone.getZone(c).remove(c);
                         AllZone.GameAction.sacrifice(c);
                         
 
@@ -9480,75 +9383,9 @@ public class CardFactory_Creatures {
             a2.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Psychotrope Thallid")) {
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = 8020106056714209199L;
-                public boolean            firstTime        = true;
-                
-                public void execute() {
-                    
-                    if(firstTime) {
-                        card.setCounter(Counters.SPORE, 0, false);
-                    }
-                    firstTime = false;
-                }
-            };
-            
-            card.addComesIntoPlayCommand(intoPlay);
-            
-            final SpellAbility a2 = new Ability(card, "1") {
-                @Override
-                public void resolve() {
-                    
-                    Card c = getTargetCard();
-                    
-                    if(AllZone.GameAction.isCardInPlay(c)) {
-                        //AllZone.getZone(c).remove(c);
-                        AllZone.GameAction.sacrifice(c);
-                        
-                        card.getController().drawCard();
-                    }
-                }//resolve
-                
-                @Override
-                public boolean canPlayAI() {
-                    //TODO: make AI able to use this
-                    return false;
-                }
-            };//SpellAbility
-            
-            Input runtime = new Input() {
-                private static final long serialVersionUID = -6388866343458002392L;
-                
-                @Override
-                public void showMessage() {
-                    CardList saps = new CardList(
-                            AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
-                    saps = saps.getType("Saproling");
-                    
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(a2, saps, "Select a Saproling to sacrifice.",
-                            false, false));
-                }
-            };
-            
-            card.addSpellAbility(a2);
-            a2.setDescription("1, Sacrifice a Saproling: You draw a card.");
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card.getController()).append(" draws a card.");
-            a2.setStackDescription(sb.toString());
-            
-            a2.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
-		*/
         
         //*************** START *********** START **************************
         else if(cardName.equals("Rootwater Thief")) {
-            //final String player = card.getController();
-            //final String opponent = AllZone.GameAction.getOpponent(player);
-            
             final Ability ability2 = new Ability(card, "2") {
                 @Override
                 public void resolve() {
@@ -9578,7 +9415,6 @@ public class CardFactory_Creatures {
                     return false;
                 }
             };// ability2
-            //card.clearSpellAbility();
             card.addSpellAbility(ability2);
             
             StringBuilder sb2 = new StringBuilder();
@@ -10084,27 +9920,6 @@ public class CardFactory_Creatures {
             a2.setDescription("W B: Destroy target creature blocking or blocked by Cromat.");
         }//*************** END ************ END **************************
         
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Energizer")) {
-            Ability_Tap ability = new Ability_Tap(card, "2") {
-                private static final long serialVersionUID = 6444406158364728638L;
-                
-                @Override
-                public void resolve() {
-                    card.addCounter(Counters.P1P1, 1);
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return (true);
-                }
-            };
-            ability.setDescription("2, tap: Put a +1/+1 counter on Energizer.");
-            ability.setStackDescription("Put a +1/+1 counter on target Energizer.");
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Sphinx of Jwar Isle")) {
@@ -10562,32 +10377,6 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         
-        //*************** START *********** START **************************
-        else if (cardName.equals("Crovax, Ascendant Hero"))
-        {
-        	final SpellAbility a1 = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    card.getController().loseLife(2,card);
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getOwner());
-                    
-                    if(card.isToken()) AllZone.getZone(card).remove(card);
-                    else AllZone.GameAction.moveTo(hand, card);
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-            };
-            card.addSpellAbility(a1);
-            a1.setDescription("Pay 2 life: Return Crovax, Ascendant Hero to its owner's hand.");
-            
-            StringBuilder sb1 = new StringBuilder();
-            sb1.append(card.getController()).append(" pays 2 life and returns Crovax, Ascendant Hero back to owner's hand.");
-            a1.setStackDescription(sb1.toString());
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Cavern Harpy")) {
@@ -10674,73 +10463,31 @@ public class CardFactory_Creatures {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Nemata, Grove Guardian")) {
-            /*
-        	final SpellAbility a1 = new Ability(card, "2 G") {
-                @Override
-                public boolean canPlayAI() {
-                    return MyRandom.random.nextBoolean();
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    SpellAbility sa;
-                    //this is a hack, check the stack to see if this card has an ability on the stack
-                    //if so, we can't use the ability
-                    for(int i = 0; i < AllZone.Stack.size(); i++) {
-                        sa = AllZone.Stack.peek(i);
-                        if(sa.getSourceCard().equals(card)) return false;
-                    }
-                    return AllZone.GameAction.isCardInPlay(card) && super.canPlay();
-                    
-                }
-                
-                @Override
-                public void resolve() {
-                    makeToken();
-                }
-                
-                void makeToken() {
-                    CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", card, "G", new String[] {
-                            "Creature", "Saproling"}, 1, 1, new String[] {""});
-                }//makeToken()
-            };//SpellAbility
-            */
             
-            final SpellAbility a2 = new Ability(card, "0") {
-                final Command eot1 = new Command() {
-                                       private static final long serialVersionUID = -389286901477839863L;
-                                       
-                                       public void execute() {
-                                           CardList saps = new CardList();
-                                           saps.addAll(AllZone.Human_Battlefield.getCards());
-                                           saps.addAll(AllZone.Computer_Battlefield.getCards());
-                                           
-                                           saps = saps.getType("Saproling");
-                                           
-                                           for(int i = 0; i < saps.size(); i++) {
-                                               Card sap = saps.get(i);
-                                               
-                                               sap.addTempAttackBoost(-1);
-                                               sap.addTempDefenseBoost(-1);
-                                           }
-                                           
-                                       }
-                                   };
+        	final SpellAbility a2 = new Ability(card, "0") {
+        		final Command eot1 = new Command() {
+        			private static final long serialVersionUID = -389286901477839863L;
+
+        			public void execute() {
+        				CardList saps = AllZoneUtil.getTypeInPlay("Saproling");
+
+        				for(int i = 0; i < saps.size(); i++) {
+        					Card sap = saps.get(i);
+
+        					sap.addTempAttackBoost(-1);
+        					sap.addTempDefenseBoost(-1);
+        				}
+
+        			}
+        		};
                 
                 @Override
                 public void resolve() {
-                    //get all saprolings:
-                    
-                    CardList saps = new CardList();
-                    saps.addAll(AllZone.Human_Battlefield.getCards());
-                    saps.addAll(AllZone.Computer_Battlefield.getCards());
-                    
-                    saps = saps.getType("Saproling");
+                    CardList saps = AllZoneUtil.getTypeInPlay("Saproling");
                     
                     Card c = getTargetCard();
                     
                     if(AllZone.GameAction.isCardInPlay(c)) {
-                        //AllZone.getZone(c).remove(c);
                         AllZone.GameAction.sacrifice(c);
                         
                         for(int i = 0; i < saps.size(); i++) {
@@ -10810,11 +10557,7 @@ public class CardFactory_Creatures {
                         }
                     };
                     
-                    CardList saps = new CardList();
-                    saps.addAll(AllZone.Human_Battlefield.getCards());
-                    saps.addAll(AllZone.Computer_Battlefield.getCards());
-                    
-                    saps = saps.getType("Saproling");
+                    CardList saps = AllZoneUtil.getTypeInPlay("Saproling");
                     for(int i = 0; i < saps.size(); i++) {
                         Card sap = saps.get(i);
                         
@@ -10838,10 +10581,6 @@ public class CardFactory_Creatures {
             		return list.size() > 1 && super.canPlay();
             	}
             };
-            //a1.setDescription("2G: Put a 1/1 green Saproling creature token into play.");
-            //a1.setStackDescription("Put a 1/1 Saproling into play.");
-            //card.addSpellAbility(a1);
-            //a1.setBeforePayMana(new Input_PayManaCost(a1));
             
             card.addSpellAbility(a2);
             a2.setDescription("Sacrifice a Saproling: Saproling creatures get +1/+1 until end of turn");
@@ -11349,12 +11088,8 @@ public class CardFactory_Creatures {
                 @Override
                 public boolean canPlay() {
                 	Player controller = card.getController();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
                     
-                    CardList creats = new CardList();
-                    
-                    creats.addAll(play.getCards());
-                    creats = creats.getType("Creature");
+                    CardList creats = AllZoneUtil.getCreaturesInPlay(controller);
                     creats = creats.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isUntapped() && !c.equals(card);
@@ -11384,196 +11119,6 @@ public class CardFactory_Creatures {
             card.addSpellAbility(bounce);
         }//*************** END ************ END **************************
         
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Nullmage Shepherd")) {
-            final SpellAbility a1 = new Ability(card, "0") {
-                @Override
-                public void chooseTargetAI() {
-                    if(getEnchantment().size() != 0) {
-                        Card bestEnchantment = CardFactoryUtil.AI_getBestEnchantment(getEnchantment(), card, true);
-                        if(getArtifact().size() != 0) {
-                            Card bestArtifact = CardFactoryUtil.AI_getBestArtifact(getArtifact());
-                            if(CardUtil.getConvertedManaCost(bestArtifact.getManaCost()) > CardUtil.getConvertedManaCost(bestEnchantment.getManaCost())) {
-                                setTargetCard(bestArtifact);
-                            } else {
-                                setTargetCard(bestEnchantment);
-                            }
-                        } else {
-                            setTargetCard(bestEnchantment);
-                        }
-                    } else if(getArtifact().size() != 0) {
-                        Card bestArtifact = CardFactoryUtil.AI_getBestArtifact(getArtifact());
-                        setTargetCard(bestArtifact);
-                    }
-                    
-                }
-                
-                CardList getEnchantment() {
-                    CardList list = CardFactoryUtil.AI_getHumanEnchantment(card, true);
-                    return list;
-                }//getEnchantment()
-                
-                CardList getArtifact() {
-                    CardList list = CardFactoryUtil.AI_getHumanArtifact(card, true);
-                    return list;
-                }//getArtifact()
-                
-
-                @Override
-                public boolean canPlayAI() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-                    CardList cards = new CardList();
-                    
-                    cards.addAll(play.getCards());
-                    cards = cards.filter(new CardListFilter() {
-                        
-                        public boolean addCard(Card c) {
-                            return (c.isArtifact() || c.isEnchantment()) && CardFactoryUtil.canTarget(card, c);
-                        }
-                        
-                    });
-                    
-                    return cards.size() > 0;
-                    
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    SpellAbility sa;
-                    for(int i = 0; i < AllZone.Stack.size(); i++) {
-                        sa = AllZone.Stack.peek(i);
-                        if(sa.getSourceCard().equals(card)) return false;
-                    }
-                    
-                    Player controller = card.getController();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-                    
-                    CardList creats = new CardList();
-                    
-                    creats.addAll(play.getCards());
-                    creats = creats.getType("Creature");
-                    creats = creats.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isUntapped();
-                        }
-                    });
-                    
-                    if(creats.size() > 3 && AllZone.GameAction.isCardInPlay(card) && super.canPlay()) return true;
-                    else return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    
-                    if(getTargetCard() == null) return;
-                    
-                    Player player = card.getController();
-                    if(player.equals(AllZone.HumanPlayer)) humanResolve();
-                    else computerResolve();
-                }
-                
-                public void humanResolve() {
-                    Player controller = card.getController();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-                    CardList creats = new CardList();
-                    
-                    creats.addAll(play.getCards());
-                    creats = creats.getType("Creature");
-                    creats = creats.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isUntapped();
-                        }
-                    });
-                    
-                    CardList tappedCreats = new CardList();
-                    
-                    Object o = AllZone.Display.getChoice("Pick first creature to tap", creats.toArray());
-                    
-                    if(o != null) {
-                        Card c1 = (Card) o;
-                        creats.remove(c1);
-                        tappedCreats.add(c1);
-                    } else return;
-                    
-                    o = AllZone.Display.getChoice("Pick second creature to tap", creats.toArray());
-                    if(o != null) {
-                        Card c2 = (Card) o;
-                        creats.remove(c2);
-                        tappedCreats.add(c2);
-                    } else return;
-                    
-                    o = AllZone.Display.getChoice("Pick third creature to tap", creats.toArray());
-                    if(o != null) {
-                        Card c3 = (Card) o;
-                        creats.remove(c3);
-                        tappedCreats.add(c3);
-                    } else return;
-                    
-                    o = AllZone.Display.getChoice("Pick fourth creature to tap", creats.toArray());
-                    if(o != null) {
-                        Card c4 = (Card) o;
-                        creats.remove(c4);
-                        tappedCreats.add(c4);
-                    } else return;
-                    
-
-                    for(int i = 0; i < tappedCreats.size(); i++) {
-                        Card tapCreat = tappedCreats.get(i);
-                        tapCreat.tap();
-                    }
-                    
-                    AllZone.GameAction.destroy(getTargetCard());
-                }//humanResolve
-                
-                public void computerResolve() {
-                    Player controller = card.getController();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-                    CardList creats = new CardList();
-                    
-                    creats.addAll(play.getCards());
-                    creats = creats.getType("Creature");
-                    
-
-                    for(int i = 0; i < 4; i++) {
-                        Card c = creats.get(i);
-                        c.tap();
-                    }
-                    
-                    AllZone.GameAction.destroy(getTargetCard());
-                    
-                }//computerResolve
-                
-            };//a1
-            
-            //card.clearSpellAbility();
-            card.addSpellAbility(a1);
-            a1.setDescription("Tap four untapped creatures you control: Destroy target artifact or enchantment.");
-            
-            Input runtime = new Input() {
-                
-                private static final long serialVersionUID = -7702308833923538927L;
-                
-                @Override
-                public void showMessage() {
-                    CardList all = new CardList();
-                    all.addAll(AllZone.Human_Battlefield.getCards());
-                    all.addAll(AllZone.Computer_Battlefield.getCards());
-                    all = all.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return (c.isEnchantment() || c.isArtifact()) && CardFactoryUtil.canTarget(card, c);
-                        }
-                    });
-                    
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(a1, all,
-                            "Destroy target artifact or enchantment.", true, false));
-                }
-            };
-            a1.setBeforePayMana(runtime);
-            
-        }//*************** END ************ END **************************
-        
-
         //*************** START *********** START **************************
         else if(cardName.equals("Gilt-Leaf Archdruid")) {
             final SpellAbility a1 = new Ability(card, "0") {
@@ -11898,25 +11443,6 @@ public class CardFactory_Creatures {
             ability3.setStackDescription("Figure of Destiny becomes an 8/8 Kithkin Spirit Warrior Avatar with flying and first strike.");
             card.addSpellAbility(ability3);
             
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Jenara, Asura of War")) {
-            
-            Ability ability2 = new Ability(card, "1 W") {
-                @Override
-                public void resolve() {
-                    card.addCounter(Counters.P1P1, 1);
-                }
-            };// ability2
-            
-            StringBuilder sb2 = new StringBuilder();
-            sb2.append(card.getName()).append(" - gets a +1/+1 counter.");
-            ability2.setStackDescription(sb2.toString());
-             
-            ability2.setDescription("1 W: Put a +1/+1 counter on Jenara, Asura of War.");
-            card.addSpellAbility(ability2);
         }//*************** END ************ END **************************
         
         
