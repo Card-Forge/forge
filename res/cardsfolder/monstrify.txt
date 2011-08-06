@@ -1,0 +1,9 @@
+Name:Monstrify
+ManaCost:3 G
+Types:Sorcery
+Text:no text
+A:SP$Pump|Cost$3 G|ValidTgts$Creature|NumAtt$+4|NumDef$+4|SpellDescription$Target creature gets +4/+4 until end of turn.|TgtPrompt$Select target creature.
+A:SP$Pump|Cost$3 G Discard<1/Land>|ActivatingZone$Graveyard|PrecostDesc$Retrace - |ValidTgts$Creature|TgtPrompt$Select target creature.|NumAtt$+4|NumDef$+4|SpellDescription$Target creature gets +4/+4 until end of turn. You may play this card from your graveyard.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/monstrify.jpg
+End

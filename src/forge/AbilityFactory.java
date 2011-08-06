@@ -263,7 +263,12 @@ public class AbilityFactory {
 		// set universal properties of the SpellAbility
         if (hasSpDesc)
         {
-        	StringBuilder sb = new StringBuilder(abCost.toString());
+        	StringBuilder sb = new StringBuilder();
+        	
+        	if (mapParams.containsKey("PrecostDesc"))
+        		sb.append(mapParams.get("PrecostDesc"));
+        	
+        	sb.append(abCost.toString());
         	sb.append(mapParams.get("SpellDescription"));
         	
         	SA.setDescription(sb.toString());

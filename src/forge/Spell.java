@@ -11,16 +11,18 @@ abstract public class Spell extends SpellAbility implements java.io.Serializable
         
         setManaCost(sourceCard.getManaCost());
         setStackDescription(sourceCard.getSpellText());
+        getRestrictions().setActivateZone(Constant.Zone.Hand);
     }
     
     public Spell(Card sourceCard, Ability_Cost abCost, Target abTgt) {
         super(SpellAbility.Spell, sourceCard);
         
         setManaCost(sourceCard.getManaCost());
-        //abCost.setMana(getManaCost());
+
         setPayCosts(abCost);
         setTarget(abTgt);
         setStackDescription(sourceCard.getSpellText());
+        getRestrictions().setActivateZone(Constant.Zone.Hand);
     }
     
     @Override
@@ -35,7 +37,10 @@ abstract public class Spell extends SpellAbility implements java.io.Serializable
         	if  (!Cost_Payment.canPayAdditionalCosts(payCosts, this))
         		return false;
         
-        return ((card.isInstant() || Phase.canCastSorcery(card.getController())) && zone.is(Constant.Zone.Hand));
+    	if (!this.getRestrictions().canPlay(card, this))
+    		return false;
+        
+        return (card.isInstant() || Phase.canCastSorcery(card.getController()));
     }//canPlay()
     
     @Override
