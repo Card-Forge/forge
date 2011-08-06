@@ -18,6 +18,7 @@ abstract public class Ability_Activated extends SpellAbility implements java.io.
         Card c = getSourceCard();
         if (c.isFaceDown() && isIntrinsic())	// Intrinsic abilities can't be activated by face down cards
         	return false;
+        if(c.hasKeyword("CARDNAME's activated abilities can't be activated.")) return false;
         
         CardList Pithing = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
 		Pithing.add(AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer));

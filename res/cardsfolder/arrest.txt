@@ -1,0 +1,9 @@
+Name:Arrest
+ManaCost:2 W
+Types:Enchantment Aura
+Text:Enchanted creature can't attack or block and its activated abilities can't be activated.
+K:Enchant Creature
+K:enPumpCurse:HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/arrest.jpg
+End

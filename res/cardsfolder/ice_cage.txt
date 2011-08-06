@@ -1,0 +1,9 @@
+Name:Ice Cage
+ManaCost:1 U
+Types:Enchantment Aura
+Text:Enchanted creature can't attack or block and its activated abilities can't be activated.
+K:enPumpCurse:HIDDEN CARDNAME can't attack or block. & CARDNAME's activated abilities can't be activated.
+K:When enchanted creature becomes the target of a spell or ability, destroy CARDNAME.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ice_cage.jpg
+End

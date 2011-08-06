@@ -1,0 +1,10 @@
+Name:Gelid Shackles
+ManaCost:W
+Types:Snow Enchantment Aura
+Text:Enchanted creature can't block and its activated abilities can't be activated.
+K:Enchant Creature
+K:enPumpCurse:HIDDEN CARDNAME can't block. & CARDNAME's activated abilities can't be activated.
+A:AB$Pump | Cost$ S | Defined$ Enchanted | KW$ Defender | SpellDescription$ Enchanted creature gains defender until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gelid_shackles.jpg
+End
