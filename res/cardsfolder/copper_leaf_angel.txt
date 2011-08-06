@@ -9,4 +9,5 @@ SVar:X:Sacrificed$Amount
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/copper_leaf_angel.jpg
+SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/137.jpg
 End

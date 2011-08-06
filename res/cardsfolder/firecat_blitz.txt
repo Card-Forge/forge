@@ -9,4 +9,5 @@ SVar:Y:Sacrificed$Amount
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firecat_blitz.jpg
+SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/88.jpg
 End

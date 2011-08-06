@@ -6,4 +6,5 @@ K:stPumpAll:Land.YouCtrl:0/0/Types=Plains & Types=Island & Types=Swamp & Types=M
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prismatic_omen.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/126.jpg
 End
