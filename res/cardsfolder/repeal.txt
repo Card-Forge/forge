@@ -6,5 +6,5 @@ A:SP$ChangeZone | Cost$ X U | Origin$ Battlefield | Destination$ Hand | TgtPromp
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:X:Targeted$CardManaCost
 SVar:Rarity:Common
-SVar:Picture:http:www.wizards.com/global/images/magic/general/repeal.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/repeal.jpg
 End
