@@ -105,8 +105,13 @@ public class TableSorter implements Comparator<Card>, NewConstants
     }
     else if (column == 7 && col7mod == true)//Set
     {
-    	aCom = SetInfoUtil.getSetIndex(a.getCurSetCode());
-    	bCom = SetInfoUtil.getSetIndex(b.getCurSetCode());
+      aCom = SetInfoUtil.getSetIndex(a.getCurSetCode());
+      bCom = SetInfoUtil.getSetIndex(b.getCurSetCode());
+    }
+    else if (column == 8)//AI
+	{
+      aCom = getAI(a);
+      bCom = getAI(b);
     }
     /*else if (column == 99)//New First
     {
@@ -157,6 +162,16 @@ public class TableSorter implements Comparator<Card>, NewConstants
       return list.get(0).toString();
 
     return "multi";
+  }
+  
+  final private Integer getAI(Card c)
+  {
+    if (c.getSVar("RemAIDeck").equals("True"))
+      return Integer.valueOf(3);
+    else if (c.getSVar("RemRandomDeck").equals("True"))
+      return Integer.valueOf(2);
+    else
+      return Integer.valueOf(1);
   }
 
   final private Comparable<String> getType(Card c)
