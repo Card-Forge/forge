@@ -3839,7 +3839,6 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
 
        
-
         //*************** START *********** START **************************
         else if(cardName.equals("Global Ruin")) {
             final CardList target = new CardList();
@@ -3866,7 +3865,7 @@ public class CardFactory_Sorceries {
                     //Vector<?> computerBasic = new Vector();
                     
                     //figure out which basic land types the computer has
-                    CardList land = new CardList(AllZone.Computer_Play.getCards());
+                    CardList land = new CardList(AllZone.Computer_Play.getCards()).getType("Land");
                     String basic[] = {"Forest", "Plains", "Mountain", "Island", "Swamp"};
                     
                     for(int i = 0; i < basic.length; i++) {
@@ -3881,10 +3880,24 @@ public class CardFactory_Sorceries {
                         }
                     }
                     
+                    //need to sacrifice the other non-basic land types
+                    land = land.filter(new CardListFilter() {
+                        public boolean addCard(Card c){
+                            if (c.getName().contains("Dryad Arbor")) return true;
+                            else if (!(c.getType().contains("Forest") 
+                                    || c.getType().contains("Plains") 
+                                    || c.getType().contains("Mountain") 
+                                    || c.getType().contains("Island") 
+                                    || c.getType().contains("Swamp"))) return true;
+                            else return false;
+                        }
+                    });
+                    target.addAll(land.toArray());
+                    
                     //when this spell resolves all basic lands which were not selected are sacrificed.
                     for(int i = 0; i < target.size(); i++)
                         if(AllZone.GameAction.isCardInPlay(target.get(i)) && !saveList.contains(target.get(i))) 
-                        	AllZone.GameAction.sacrifice(target.get(i));
+                            AllZone.GameAction.sacrifice(target.get(i));
                 }//resolve()
             };//SpellAbility
             
@@ -3925,23 +3938,41 @@ public class CardFactory_Sorceries {
                             /*&& !saveList.contains(c) */) {
                         //get all other basic[count] lands human player controls and add them to target
                         PlayerZone humanPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
-                        CardList land = new CardList(humanPlay.getCards());
+                        CardList land = new CardList(humanPlay.getCards()).getType("Land");
                         CardList cl = land.getType(humanBasic.get(count));
                         cl = cl.filter(new CardListFilter()
                         {
-                        	public boolean addCard(Card crd)
-                        	{
-                        		return !saveList.contains(crd);
-                        	}
+                            public boolean addCard(Card crd)
+                            {
+                                return !saveList.contains(crd);
+                            }
                         });
-                        cl.remove(c);
-                        saveList.add(c);
+                        
+                        if (!c.getName().contains("Dryad Arbor")) {
+                            cl.remove(c);
+                            saveList.add(c);
+                        }
                         target.addAll(cl.toArray());
                         
                         index[0]++;
                         showMessage();
                         
                         if(index[0] >= humanBasic.size()) stopSetNext(new Input_PayManaCost(spell));
+                        
+                        //need to sacrifice the other non-basic land types
+                        land = land.filter(new CardListFilter() {
+                            public boolean addCard(Card c){
+                                if (c.getName().contains("Dryad Arbor")) return true;
+                                else if (!(c.getType().contains("Forest") 
+                                        || c.getType().contains("Plains") 
+                                        || c.getType().contains("Mountain") 
+                                        || c.getType().contains("Island") 
+                                        || c.getType().contains("Swamp"))) return true;
+                                else return false;
+                            }
+                        });
+                        target.addAll(land.toArray());
+                        
                     }
                 }//selectCard()
             };//Input
@@ -3979,6 +4010,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
             spell.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
+
         
         //*************** START *********** START **************************
         else if(cardName.equals("Gerrard's Verdict")) {
