@@ -1,3 +1,10 @@
+Rogue Kavu
+1 R
+Creature Kavu
+no text
+1/1
+Whenever CARDNAME attacks alone, it gets +2/+0 until end of turn.
+
 Niv-Mizzet, the Firemind
 2 U U R R
 Legendary Creature Dragon Wizard
