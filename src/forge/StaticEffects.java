@@ -110,6 +110,7 @@ public class StaticEffects
 		cardToEffectsList.put("Master of Etherium", new String[] {"Master_of_Etherium", "Master_of_Etherium_Pump", "Master_of_Etherium_Other"});
 		cardToEffectsList.put("Broodstar", new String[] {"Master_of_Etherium"});
 		cardToEffectsList.put("Daru Warchief", new String[] {"Daru_Warchief"});
+		cardToEffectsList.put("Squirrel Mob", new String[] {"Squirrel_Mob_Other"});
 		cardToEffectsList.put("Relentless Rats", new String[] {"Relentless_Rats_Other"});
 		cardToEffectsList.put("Privileged Position", new String[] {"Privileged_Position", "Privileged_Position_Other"});
 		cardToEffectsList.put("Broodwarden", new String[] {"Broodwarden"});

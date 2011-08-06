@@ -14028,6 +14028,49 @@ public class GameActionUtil {
 		}// execute()
 
 	};
+	
+	public static Command Squirrel_Mob_Other       = new Command() {
+		
+		private static final long serialVersionUID = 5483285906091676339L;
+		int                       otherSquirrels        = 0;
+
+		private int countOtherSquirrels(Card c) {
+			PlayerZone hplay = AllZone.getZone(
+					Constant.Zone.Play, Constant.Player.Human);
+			PlayerZone cplay = AllZone.getZone(
+					Constant.Zone.Play, Constant.Player.Computer);
+			CardList squirrels = new CardList(hplay.getCards());
+			squirrels.addAll(cplay.getCards());
+			
+			squirrels = squirrels.filter(new CardListFilter()
+			{
+				public boolean addCard(Card crd)
+				{
+					return (crd.getType().contains("Squirrel") || crd.getKeyword().contains("Changeling")); 
+						   
+				}
+			});
+			return squirrels.size() - 1;
+		}
+
+		public void execute() {
+
+			CardList creature = new CardList();
+			creature.addAll(AllZone.Human_Play.getCards());
+			creature.addAll(AllZone.Computer_Play.getCards());
+
+			creature = creature.getName("Squirrel Mob");
+
+			for(int i = 0; i < creature.size(); i++) {
+				Card c = creature.get(i);
+				otherSquirrels = countOtherSquirrels(c);
+				c.setOtherAttackBoost(otherSquirrels);
+				c.setOtherDefenseBoost(otherSquirrels);
+
+			}// for inner
+		}// execute()
+
+	};
 
 	public static Command Privileged_Position         = new Command() {
 		private static final long serialVersionUID   = -6677858046910868126L;
@@ -18832,6 +18875,7 @@ public class GameActionUtil {
 		commands.put("Master_of_Etherium", Master_of_Etherium);
 		commands.put("Master_of_Etherium_Pump", Master_of_Etherium_Pump);
 		commands.put("Master_of_Etherium_Other", Master_of_Etherium_Other);
+		commands.put("Squirrel_Mob_Other", Squirrel_Mob_Other);
 		commands.put("Relentless_Rats_Other", Relentless_Rats_Other);
 		commands.put("Privileged_Position", Privileged_Position);
 		commands.put("Privileged_Position_Other", Privileged_Position_Other);
