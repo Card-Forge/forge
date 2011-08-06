@@ -1,7 +1,7 @@
 Name:Promised Kannushi
 ManaCost:G
 Types:Creature Human Druid
-Text:no text
+Text:Soulshift 7
 PT:1/1
 K:Soulshift:7
 SVar:Rarity:Common

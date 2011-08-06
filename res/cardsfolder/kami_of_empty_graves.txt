@@ -1,7 +1,7 @@
 Name:Kami of Empty Graves
 ManaCost:3 B
 Types:Creature Spirit
-Text:no text
+Text:Soulshift 3
 PT:4/1
 K:Soulshift:3
 SVar:Rarity:Common

@@ -1,7 +1,7 @@
 Name:Gibbering Kami
 ManaCost:3 B
 Types:Creature Spirit
-Text:no text
+Text:Soulshift 3
 PT:2/2
 K:Flying
 K:Soulshift:3

@@ -1,7 +1,7 @@
 Name:Burr Grafter
 ManaCost:3 G
 Types:Creature Spirit
-Text:no text
+Text:Soulshift 3
 PT:2/2
 A:AB$Pump | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
 K:Soulshift:3

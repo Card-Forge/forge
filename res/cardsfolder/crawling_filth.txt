@@ -1,7 +1,7 @@
 Name:Crawling Filth
 ManaCost:5 B
 Types:Creature Spirit
-Text:no text
+Text:Soulshift 5
 PT:2/2
 K:Fear
 K:Soulshift:5

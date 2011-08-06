@@ -1,7 +1,7 @@
 Name:Kami of the Palace Fields
 ManaCost:5 W
 Types:Creature Spirit
-Text:no text
+Text:Soulshift 5
 PT:3/2
 K:Flying
 K:First Strike
