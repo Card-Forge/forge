@@ -1076,7 +1076,6 @@ public class CardFactory_Sorceries {
                     }
                     
 					// Opponent Loses 5 Life
-                    //PlayerLife target = AllZone.GameAction.getPlayerLife(opponent);
 			        opponent.loseLife(5,card);
 
 					// Player Returns Creature Card from Graveyard to Hand
@@ -1476,7 +1475,6 @@ public class CardFactory_Sorceries {
 			        PlayerZone RFG = AllZone.getZone(Constant.Zone.Removed_From_Play, Player);   
 			        PlayerZone Library = AllZone.getZone(Constant.Zone.Library, Player);  
                     for(int i = 0; i < GraveandLibrary.size(); i++) AllZone.GameAction.moveTo(RFG,GraveandLibrary.get(i));
-                    //AllZone.GameAction.moveTo(RFG,card); // Not sure if Doomsday is supposed to be exiled
                     for(int i = 0; i < NewLibrary.size(); i++) AllZone.GameAction.moveTo(Library,NewLibrary.get(i));
 
                     //lose half life
@@ -1849,9 +1847,6 @@ public class CardFactory_Sorceries {
                         CardList all = AllZone.CardFactory.getAllCards();
                         all.sort(new Comparator<Card>() {
                             public int compare(Card a1, Card b1) {
-                                //Card a = (Card) a1;
-                               // Card b = (Card) b1;
-                                
                                 return a1.getName().compareTo(b1.getName());
                             }
                         });
@@ -3130,60 +3125,6 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Chatter of the Squirrel")) {
-            SpellAbility spell = new Spell(card) {
-                
-                private static final long serialVersionUID = 3787460988525779623L;
-                
-                @Override
-                public void resolve() {
-                    CardFactoryUtil.makeToken("Squirrel", "G 1 1 Squirrel", card, "G", new String[] {
-                            "Creature", "Squirrel"}, 1, 1, new String[] {""});
-                }
-            };
-            
-            spell.setDescription("Put a 1/1 green Squirrel creature token into play.");
-            spell.setStackDescription(card.getController()
-                    + " puts a 1/1 green Squirrel creature token into play.");
-            
-            card.setFlashback(true);
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "1 G", "0"));
-            
-        }//*************** END ************ END **************************
-        */
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Acorn Harvest")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 4779507778950336252L;
-                
-                @Override
-                public void resolve() {
-                    makeToken();
-                    makeToken();
-                }
-                
-                public void makeToken() {
-                    CardFactoryUtil.makeToken("Squirrel", "G 1 1 Squirrel", card, "G", new String[] {
-                            "Creature", "Squirrel"}, 1, 1, new String[] {""});
-                }//resolve()
-            };
-            
-            spell.setDescription("Put two 1/1 green Squirrel creature tokens into play.");
-            spell.setStackDescription(card.getController()
-                    + " puts two 1/1 green Squirrel creature tokens into play.");
-            
-            card.setFlashback(true);
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "1 G", "3"));
-            
-        }//*************** END ************ END **************************
-        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Parallel Evolution")) {
@@ -3237,62 +3178,6 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
         
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Roar of the Wurm")) {
-            SpellAbility spell = new Spell(card) {
-                
-                private static final long serialVersionUID = -7861877439125080643L;
-                
-                @Override
-                public void resolve() {
-                    CardFactoryUtil.makeToken("Wurm", "G 6 6 Wurm", card, "G", new String[] {"Creature", "Wurm"},
-                            6, 6, new String[] {""});
-                }
-            };
-            
-            spell.setDescription("Put a 6/6 green Wurm creature token into play.");
-            spell.setStackDescription(card.getController() + " put a 6/6 green Wurm creature token into play.");
-            
-            card.setFlashback(true);
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "3 G", "0"));
-            
-        }//*************** END ************ END **************************
-        */
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Crush of Wurms")) {
-            SpellAbility spell = new Spell(card) {
-                
-                private static final long serialVersionUID = 3917531146741977318L;
-                
-                @Override
-                public void resolve() {
-                    makeToken();
-                    makeToken();
-                    makeToken();
-                }
-                
-                public void makeToken() {
-                    CardFactoryUtil.makeToken("Wurm", "G 6 6 Wurm", card, "G", new String[] {"Creature", "Wurm"},
-                            6, 6, new String[] {""});
-                }//resolve()
-            };
-            
-            spell.setDescription("Put three 6/6 green Wurm creature tokens into play.");
-            spell.setStackDescription(card.getController()
-                    + " Put three 6/6 green Wurm creature tokens into play.");
-            
-            card.setFlashback(true);
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "9 G G G", "0"));
-            
-        }//*************** END ************ END **************************
-        */
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Grizzly Fate")) {
             SpellAbility spell = new Spell(card) {
@@ -3336,12 +3221,6 @@ public class CardFactory_Sorceries {
                 public void resolve() {
                 	AllZone.ComputerPlayer.discard(3, this);
                 	AllZone.HumanPlayer.discard(3, this);
-                	/*
-                    for(int i = 0; i < 3; i++)
-                        AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
-                    
-                    AllZone.InputControl.setInput(CardFactoryUtil.input_discard(3, this));
-                    */
                 }//resolve()
             };
             card.clearSpellAbility();
@@ -3720,10 +3599,6 @@ public class CardFactory_Sorceries {
                     
                     Card c1 = list.get(0);
                     list.remove(c1);
-                    /*
-                    AllZone.Computer_Graveyard.add(c1);
-                    AllZone.Computer_Hand.remove(c1);          
-                    */
                     c1.getController().discard(c1, null);
                     
                     if(list.size() == 0) return;
@@ -3731,10 +3606,6 @@ public class CardFactory_Sorceries {
                     Card c2 = list.get(0);
                     list.remove(c2);
                     
-                    /*
-                    AllZone.Computer_Graveyard.add(c2);
-                    AllZone.Computer_Hand.remove(c2);    
-                    */
                     c2.getController().discard(c2, null);
                     
                     if(c1.getType().contains("Land")) {
@@ -3759,10 +3630,6 @@ public class CardFactory_Sorceries {
                         Card c = (Card) o;
                         list.remove(c);
                         
-                        /*
-                        hand.remove(c);
-                        grave.add(c);
-                        */
                         c.getController().discard(c, null);
                         
                         if(c.getType().contains("Land")) {
@@ -3775,10 +3642,6 @@ public class CardFactory_Sorceries {
                             Card c2 = (Card) o2;
                             list.remove(c2);
                             
-                            /*
-                            hand.remove(c2);
-                            grave.add(c2);
-                            */
                             c2.getController().discard(c2, null);
                             
                             if(c2.getType().contains("Land")) {
@@ -4534,31 +4397,6 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************        
         
-        /*
-        //*************** START *********** START **************************
-        if(cardName.equals("Glimpse the Unthinkable") || cardName.equals("Tome Scour")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 42470566751344693L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    Player player = getTargetPlayer();
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    CardList libList = new CardList(lib.getCards());
-                    return libList.size() > 0;
-                }
-                
-                @Override
-                public void resolve() {
-                	getTargetPlayer().mill((cardName.equals("Glimpse the Unthinkable")) ? 10 : 5);
-                }
-            };//SpellAbility
-            spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        */
 
         //*************** START *********** START **************************
         if(cardName.equals("Traumatize")) {
@@ -5609,14 +5447,6 @@ public class CardFactory_Sorceries {
         			else if (humLand.size() > compLand.size())
         			{
         				int diff = humLand.size() - compLand.size();
-        				/*
-        				List<Card> selection = AllZone.Display.getChoicesOptional("Select " + diff + " lands to sacrifice", humLand.toArray());
-        				while(selection.size() != diff)
-        					selection = AllZone.Display.getChoicesOptional("Select " + diff + " lands to sacrifice", humLand.toArray());
-        				
-	                    for(int m = 0; m < diff; m++)
-	                    	AllZone.GameAction.sacrifice(selection.get(m));
-	                    */
         				AllZone.InputControl.setInput(CardFactoryUtil.input_sacrificePermanents(diff, "Land"));
         			}
         			
@@ -5651,14 +5481,6 @@ public class CardFactory_Sorceries {
         			else if (humCreats.size() > compCreats.size())
         			{
         				int diff = humCreats.size() - compCreats.size();
-        				/*
-        				List<Card> selection = AllZone.Display.getChoicesOptional("Select " + diff + " creatures to sacrifice", humCreats.toArray());
-        				while(selection.size() != diff)
-        					selection = AllZone.Display.getChoicesOptional("Select " + diff + " creatures to sacrifice", humCreats.toArray());
-        				
-	                    for(int m = 0; m < diff; m++)
-	                    	AllZone.GameAction.sacrifice(selection.get(m));
-	                    */
         				AllZone.InputControl.setInput(CardFactoryUtil.input_sacrificePermanents(diff, "Creature"));
         			}
         		}
@@ -5830,106 +5652,53 @@ public class CardFactory_Sorceries {
         //*************** START *********** START **************************
         else if(cardName.equals("Explore"))
         {
-       	final SpellAbility spell = new Spell(card) {
-   			private static final long serialVersionUID = 8377957584738695517L;
+        	final SpellAbility spell = new Spell(card) {
+        		private static final long serialVersionUID = 8377957584738695517L;
 
-   			public boolean canPlayAI() {
-   				// The computer should only play this card if it has at least 
-   				// one land in its hand. Because of the way the computer turn
-   				// is structured, it will already have played its first land.
-   				PlayerZone hand = AllZone.getZone(Constant.Zone.Hand,
-   						AllZone.ComputerPlayer);
+        		public boolean canPlayAI() {
+        			// The computer should only play this card if it has at least 
+        			// one land in its hand. Because of the way the computer turn
+        			// is structured, it will already have played its first land.
+        			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand,
+        					AllZone.ComputerPlayer);
 
-   				CardList list = new CardList(hand.getCards());
+        			CardList list = new CardList(hand.getCards());
 
-   				list = list.getType("Land");
-   				if (list.size() > 0)
-   					return true;
-   				else
-   					return false;
-   			}
-   			
-   			public void resolve() {
-   				final Player thePlayer = card.getController();
-   				if (thePlayer.equals(AllZone.HumanPlayer))
-   					AllZone.GameInfo.addHumanMaxPlayNumberOfLands(1);
-   				else
-   					AllZone.GameInfo.addComputerMaxPlayNumberOfLands(1);
-   				
-   				Command untilEOT = new Command()
-   				{
-   					
-   					private static final long serialVersionUID = -2618916698575607634L;
+        			list = list.getType("Land");
+        			if (list.size() > 0)
+        				return true;
+        			else
+        				return false;
+        		}
 
-   					public void execute(){
-   						if (thePlayer.equals(AllZone.HumanPlayer))
-   							AllZone.GameInfo.addHumanMaxPlayNumberOfLands(-1);
-   						else
-   							AllZone.GameInfo.addComputerMaxPlayNumberOfLands(-1);
- 	            	}
-       	        };
-       	        AllZone.EndOfTurn.addUntil(untilEOT);
-       		}
-       	};
-       	card.clearSpellAbility();
-       	card.addSpellAbility(spell);
-       	
-       	card.setSVar("PlayMain1", "TRUE");
-       } //*************** END ************ END **************************
+        		public void resolve() {
+        			final Player thePlayer = card.getController();
+        			if (thePlayer.equals(AllZone.HumanPlayer))
+        				AllZone.GameInfo.addHumanMaxPlayNumberOfLands(1);
+        			else
+        				AllZone.GameInfo.addComputerMaxPlayNumberOfLands(1);
+
+        			Command untilEOT = new Command()
+        			{
+
+        				private static final long serialVersionUID = -2618916698575607634L;
+
+        				public void execute(){
+        					if (thePlayer.equals(AllZone.HumanPlayer))
+        						AllZone.GameInfo.addHumanMaxPlayNumberOfLands(-1);
+        					else
+        						AllZone.GameInfo.addComputerMaxPlayNumberOfLands(-1);
+        				}
+        			};
+        			AllZone.EndOfTurn.addUntil(untilEOT);
+        		}
+        	};
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+
+        	card.setSVar("PlayMain1", "TRUE");
+        } //*************** END ************ END **************************
         
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Rampant Growth")) {
-            SpellAbility spell = new Spell(card) {
-
-				private static final long serialVersionUID = -6598323179507468746L;
-
-				@Override
-                public void resolve() {
-					AllZone.GameAction.searchLibraryBasicLand(card.getController(), 
-							Constant.Zone.Play, true);
-				}
-                
-                public boolean canPlayAI()
-                {
-                	PlayerZone library = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer);
-                	CardList list = new CardList(library.getCards());
-                	list = list.getType("Basic");
-                	return list.size() > 0;
-                }
-            };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Nature's Lore") || cardName.equals("Three Visits")) {
-            SpellAbility spell = new Spell(card) {
-
-				private static final long serialVersionUID = -6598323179507468746L;
-
-				@Override
-                public void resolve() {
-					AllZone.GameAction.searchLibraryLand("Forest", card.getController(), 
-							Constant.Zone.Play, false);
-				}
-                
-                public boolean canPlayAI()
-                {
-                	PlayerZone library = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer);
-                	CardList list = new CardList(library.getCards());
-                	list = list.getType("Forest");
-                	return list.size() > 0;
-                }
-            };//SpellAbility
-            card.clearSpellAbility();
-            String desc = "Search your library for a Forest card and put that card onto the battlefield. Then shuffle your library.";
-            spell.setStackDescription(cardName + " - " + desc);
-            spell.setDescription(desc);
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        */
                 
         //*************** START *********** START **************************
         else if(cardName.equals("Hellion Eruption")) {
@@ -7637,8 +7406,6 @@ public class CardFactory_Sorceries {
 
         		@Override
         		public boolean canPlayAI() {
-        			//PlayerLife compLife = AllZone.GameAction.getPlayerLife(AllZone.ComputerPlayer);
-        			//PlayerLife humanLife = AllZone.GameAction.getPlayerLife(AllZone.HumanPlayer);
         			int humanPoison = AllZone.HumanPlayer.getPoisonCounters();
         			int compPoison = AllZone.ComputerPlayer.getPoisonCounters();
         			
