@@ -1,0 +1,9 @@
+Name:To Arms!
+ManaCost:1 W
+Types:Instant
+Text:no text
+K:spUntapAll:Creature.YouCtrl:Untap all creatures you control.
+K:Draw a card.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/to_arms.jpg
+End

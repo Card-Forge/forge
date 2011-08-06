@@ -1,0 +1,8 @@
+Name:Vitalize
+ManaCost:G
+Types:Instant
+Text:no text
+K:spUntapAll:Creature.YouCtrl:Untap all creatures you control.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vitalize.jpg
+End

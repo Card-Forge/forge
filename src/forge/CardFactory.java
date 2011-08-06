@@ -6077,8 +6077,9 @@ public class CardFactory implements NewConstants {
 				
         		private CardList getTargets() {
         			CardList tmpList = AllZoneUtil.getCardsInPlay();
-        			tmpList = tmpList.getValidCards(Tgts);
-        			tmpList = tmpList.getTargetableCards(card);
+        			tmpList = tmpList.getValidCards(Tgts, card.getController());
+        			//I don't think this is targeted
+        			//tmpList = tmpList.getTargetableCards(card);
         			//tmpList = tmpList.filter(AllZoneUtil.untapped);
         			return tmpList;
         		}
@@ -6094,7 +6095,7 @@ public class CardFactory implements NewConstants {
         			CardList tgts = getTargets();
         			for(Card c:tgts) {
         				if(AllZone.GameAction.isCardInPlay(c)
-        						&& CardFactoryUtil.canTarget(card, c)) {
+        						/*&& CardFactoryUtil.canTarget(card, c)*/) {
         					c.untap();
         				}
         			}
@@ -6322,6 +6323,105 @@ public class CardFactory implements NewConstants {
                 card.addSpellAbility(bbDstryTgt);
              }
         }//End spTapTgt
+        
+        /*
+         * Generic untap all targets spell
+         *
+         * syntax: spUntapAll:{Valid Targets}:{Description}
+         */
+        if (hasKeyword(card, "spUntapAll") != -1) {
+        	int n = hasKeyword(card, "spUntapAll");
+
+        	String parse = card.getKeyword().get(n).toString();
+        	card.removeIntrinsicKeyword(parse);
+
+        	String k[] = parse.split(":");
+        	
+        	final Target untapTargets = new Target("TgtV");
+        	
+        	String Targets = k[1];
+        	final String Tgts[] = Targets.split(",");
+        	untapTargets.setValidTgts(Tgts);
+        	final String spDesc[] = {"none"};
+        	final String stackDesc[] = {"none"};
+        	stackDesc[0] = k[2];
+        	spDesc[0] = stackDesc[0];
+
+        	final SpellAbility SpUntapAll = new Spell(card) {
+				private static final long serialVersionUID = 377021351721926009L;
+
+				@Override
+        		public boolean canPlayAI() {
+        			/*
+        			CardList hCards = getTargets();
+
+        			Random r = new Random();
+        			boolean rr = false;
+        			if (r.nextFloat() <= .6667)
+        				rr = true;
+
+        			if(hCards.size() > 0) {
+        				Card c = null;
+        				CardList dChoices = new CardList();
+
+        				for(int i = 0; i < Tgts.length; i++) {
+        					if (Tgts[i].startsWith("Creature")) {
+        						c = CardFactoryUtil.AI_getBestCreature(hCards);
+        						if (c != null)
+        							dChoices.add(c);
+        					}
+
+        					CardListUtil.sortByTextLen(hCards);
+        					dChoices.add(hCards.get(0));
+
+        					CardListUtil.sortCMC(hCards);
+        					dChoices.add(hCards.get(0));
+        				}
+
+        				c = dChoices.get(CardUtil.getRandomIndex(dChoices));
+        				setTargetCard(c);
+
+        				return rr;
+        			}*/
+
+        			return false;
+        		}
+
+        		CardList getTargets() {
+        			CardList tmpList = AllZoneUtil.getCardsInPlay();
+        			tmpList = tmpList.getValidCards(Tgts, card.getController());
+        			//I don't think this is targeted
+        			//tmpList = tmpList.getTargetableCards(card);
+        			//tmpList = tmpList.filter(AllZoneUtil.untapped);
+        			return tmpList;
+        		}
+
+        		/*
+        		@Override
+        		public boolean canPlay() {
+        			return (CardFactoryUtil.canUseAbility(card) && super.canPlay());
+        		}
+        		 */
+
+        		@Override
+        		public void resolve() {
+        			CardList tgts = getTargets();
+        			for(Card c:tgts) {
+        				if(AllZone.GameAction.isCardInPlay(c)
+        						/*&& CardFactoryUtil.canTarget(card, c)*/ ) {
+        					c.untap();
+        				}
+        			}
+        		}
+        	}; //SpUntapAll
+
+        	card.clearSpellAbility();
+
+        	SpUntapAll.setDescription(spDesc[0]);
+        	SpUntapAll.setStackDescription(card.getName()+" - "+stackDesc[0]);
+        	card.addSpellAbility(SpUntapAll);
+        	card.setSVar("PlayMain1", "TRUE");
+        }//End spUntapAll keyword
 
         
         //**************************************************
