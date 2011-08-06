@@ -360,7 +360,12 @@ public class PhaseUtil {
             return true;
     	}
     	
-    	if (AllZoneUtil.isCardInPlay("Necropotence", player) || AllZoneUtil.isCardInPlay("Yawgmoth's Bargain", player) || AllZoneUtil.isCardInPlay("Dragon Appeasement", player))
+    	CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
+    	
+    	if (list.containsName("Necropotence") || list.containsName("Yawgmoth's Bargain") || list.containsName("Recycle") ||
+    			list.containsName("Dragon Appeasement") || list.containsName("Null Profusion") || list.containsName("Colfenor's Plans") ||
+    			list.containsName("Psychic Possession") || list.containsName("Solitary Confinement") || 
+    			list.containsName("Symbiotic Deployment"))
     		return true;
     	
     	return false;
