@@ -97,6 +97,19 @@ public class CardPanel extends JPanel implements CardContainer{
 		imagePanel.setScalingType(ScalingType.nearestNeighbor);
 		imagePanel.setScalingBlur(true);
 		imagePanel.setScalingMultiPassType(MultipassType.none);
+		
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+            	setCard(gameCard);
+            }
+            
+            @Override
+            public void componentResized(ComponentEvent e) {
+            	setCard(gameCard);
+            }
+        });
+		
 		setCard(newGameCard);
 	}
 
@@ -227,8 +240,6 @@ public class CardPanel extends JPanel implements CardContainer{
 		width = -xOffset + rotCenterX + rotCenterToTopCorner;
 		height = -yOffset + rotCenterY + rotCenterToBottomCorner;
 		setBounds(x + xOffset, y + yOffset, width, height);
-		
-		setCard(gameCard);
 	}
 
 	public void repaint () {
@@ -291,7 +302,7 @@ public class CardPanel extends JPanel implements CardContainer{
         Insets i = getInsets();
         Image image = card == null? null:ImageCache.getImage(card, getWidth() - i.left - i.right, getHeight()
                 - i.top - i.bottom);
-        if(Gui_NewGame.cardOverlay.isSelected()){
+        if(gameCard != null && Gui_NewGame.cardOverlay.isSelected()){
 	        setText(gameCard, true);
 	        showCastingCost = true;
         }

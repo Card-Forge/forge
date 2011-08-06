@@ -220,7 +220,7 @@ abstract public class Animation {
 							public void run () {
 								if (placeholder != null) {
 									placeholder.setDisplayEnabled(true);
-									placeholder.setImage(animationPanel);
+									//placeholder.setImage(animationPanel);
 									placeholder.setCard(placeholder.gameCard);
 								}
 								animationPanel.setVisible(false);

@@ -611,10 +611,9 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
 
         //self hand
         AllZone.Human_Hand.addObserver(new Observer() {
-            public void update(Observable a, Object b) {
+            public void update(Observable a, Object b) {					
                 PlayerZone pZone = (PlayerZone) a;
-                HandArea p = playerHandPanel;
-                //p.removeAllCardPanels();
+                HandArea p = playerHandPanel;;
                
                 Card c[] = pZone.getCards();
                
@@ -654,7 +653,10 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                         endX = toPos.x;
                                 endY = toPos.y;
                                 arcane.ui.CardPanel animationPanel = new arcane.ui.CardPanel(card);
-                        Animation.moveCard(startX, startY, startWidth, endX, endY, endWidth, animationPanel, toPanel, layeredPane, 500);
+                        if(isShowing())
+                        	Animation.moveCard(startX, startY, startWidth, endX, endY, endWidth, animationPanel, toPanel, layeredPane, 500);
+                        else
+                        	Animation.moveCard(toPanel);
                 }
             }
         });

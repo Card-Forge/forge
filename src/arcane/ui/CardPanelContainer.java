@@ -181,6 +181,7 @@ abstract public class CardPanelContainer extends JPanel {
 				cardPanels.remove(fromPanel);
 				remove(fromPanel);
 				invalidate();
+				repaint();
 			}
 		});
 	}
