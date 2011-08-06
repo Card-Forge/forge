@@ -10333,12 +10333,12 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
 
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Slate of Ancestry")) {
         	/*
         	 * 4, Tap, Discard your hand: Draw a card for each creature you control.
-        	 */
+        	 *
             final Ability_Tap ability = new Ability_Tap(card, "4") {
 				private static final long serialVersionUID = 5135410670684913401L;
 
@@ -10375,6 +10375,7 @@ public class CardFactory implements NewConstants {
             ability.setBeforePayMana(new Input_PayManaCost(ability));
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
+        */
         
         
       //*************** START *********** START **************************
