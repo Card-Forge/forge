@@ -13861,7 +13861,7 @@ public class GameActionUtil {
                                                                   }// for inner
                                                               }// for outer
                                                           }// execute()
-                                                      }; // Spidersilk Armor
+                                                      }; // Beastmaster Ascension
                                                          
     public static Command Spidersilk_Armor            = new Command() {
                                                           

@@ -98,14 +98,14 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             String[] allyNames = {
                     "Umara Raptor", "Tuktuk Grunts", "Oran-Rief Survivalist", "Nimana Sell-Sword",
                     "Makindi Shieldmate", "Kazandu Blademaster", "Turntimber Ranger", "Highland Berserker",
-                    "Joraga Bard"};
+                    "Joraga Bard", "Bojuka Brigand", "Graypelt Hunter", "Kazuul Warlord"};
             final ArrayList<String> allyNamesList = new ArrayList<String>();
             
             for(int i = 0; i < allyNames.length; i++) {
                 allyNamesList.add(allyNames[i]);
             }
             
-            if(c.getType().contains("Ally")
+            if(c.getType().contains("Ally") || (c.getKeyword().contains("Changeling") && c.isCreature())
                     || (clist.size() > 0 && (c.getType().contains("Creature") || c.getKeyword().contains(
                             "Changeling"))) || allyNamesList.contains(c.getName())) {
                 CardList list = new CardList(play.getCards());
