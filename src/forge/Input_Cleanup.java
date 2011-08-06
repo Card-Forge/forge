@@ -91,8 +91,13 @@ public class Input_Cleanup extends Input {
         int n = AllZone.Human_Hand.getCards().length;
         
         //MUST showMessage() before stop() or it will overwrite the next Input's message
-        AllZone.Display.showMessage("Cleanup Phase: You can only have a maximum of 7 cards, you currently have "
-                + n + " cards in your hand - select a card to discard");
+        StringBuffer sb = new StringBuffer();
+        sb.append("Cleanup Phase: You can only have a maximum of ").append(MaxHandSize);
+        sb.append(" cards, you currently have ").append(n).append(" cards in your hand - select a card to discard");
+        AllZone.Display.showMessage(sb.toString());
+        
+        // AllZone.Display.showMessage("Cleanup Phase: You can only have a maximum of 7 cards, you currently have "
+        //         + n + " cards in your hand - select a card to discard");
         
         //goes to the next phase
         // if(n <= 7) {
