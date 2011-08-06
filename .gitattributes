@@ -4476,6 +4476,7 @@ res/cardsfolder/shadow_lance.txt -text svneol=native#text/plain
 res/cardsfolder/shadow_rider.txt -text svneol=native#text/plain
 res/cardsfolder/shadow_rift.txt -text svneol=native#text/plain
 res/cardsfolder/shadow_sliver.txt -text svneol=native#text/plain
+res/cardsfolder/shadowblood_egg.txt -text svneol=native#text/plain
 res/cardsfolder/shadowblood_ridge.txt -text svneol=native#text/plain
 res/cardsfolder/shadowfeed.txt -text svneol=native#text/plain
 res/cardsfolder/shadowmage_infiltrator.txt -text svneol=native#text/plain
