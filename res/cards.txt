@@ -1,3 +1,11 @@
+Siren's Call
+U
+Instant
+Cast Siren's Call only during an opponent's turn, before attackers are declared.\r\nCreatures the active player controls attack this turn if able.\r\nAt the beginning of the next end step, destroy all non-Wall creatures that player controls that didn't attack this turn. Ignore this effect for each creature the player didn't control continuously since the beginning of the turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sirens_call.jpg
+
 Abandoned Outpost
 no cost
 Land
@@ -27658,14 +27666,6 @@ Flying
 WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Spirit or Arcane spell, you may draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sire_of_the_storm.jpg
-
-Siren's Call
-U
-Instant
-Cast Siren's Call only during an opponent's turn, before attackers are declared.  Creatures the active player controls attack this turn if able.  At the beginning of the next end step, destroy all non-Wall creatures that player controls that didn't attack this turn. Ignore this effect for each creature the player didn't control continuously since the beginning of the turn.
-SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sirens_call.jpg
 
 Sisay's Ring
 4
