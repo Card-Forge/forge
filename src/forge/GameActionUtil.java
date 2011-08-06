@@ -7354,6 +7354,7 @@ public class GameActionUtil {
 
 		Essence_Warden.execute();
 		Soul_Warden.execute();
+		Souls_Attendant.execute();
 		Wirewood_Hivemaster.execute();
 
 		Sacrifice_NoIslands.execute();
@@ -9707,6 +9708,87 @@ public class GameActionUtil {
 			old = current;
 		}// execute()
 	}; // soul warden
+	
+	public static Command Souls_Attendant                 = new Command() {
+		private static final long serialVersionUID = -472504539729742971L;
+		// Hold old creatures
+		CardList                  old              = new CardList();      // Hold old Soul Wardens
+		CardList                  soul             = new CardList();
+
+		public void execute() {
+			// get all creatures
+			CardList current = new CardList();
+			current.addAll(AllZone.Human_Play.getCards());
+			current.addAll(AllZone.Computer_Play.getCards());
+			//current = current.getType("Creature");
+
+			final ArrayList<String> list = CardFactoryUtil.getCreatureLandNames();
+
+			current = current.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					return c.isCreature()
+					&& !list.contains(c.getName());
+				}
+			});
+
+			// Holds Soul Warden's in play
+			CardList wardenList = current.getName("Soul's Attendant");
+
+			// Holds Soul Warden's that are new to play
+			CardList newWarden = new CardList();
+
+			// Go through the list of Soul Warden's in play
+			for(int i = 0; i < wardenList.size(); i++) {
+				Card c = wardenList.get(i);
+
+				// Check to see which Soul Warden's in play are new
+				if(!soul.contains(c)) {
+					newWarden.add(c);
+					wardenList.remove(c);
+					i -= 1; // Must do as a card was just removed
+				}
+
+				current.remove(c);
+			}
+
+			for(int outer = 0; outer < wardenList.size(); outer++) {
+				// Gain life for new creatures in play - excluding any new Soul
+				// Wardens
+				final int[] n = new int[1];
+				for(int i = 0; i < current.size(); i++) {
+					if(!old.contains(current.getCard(i))) {
+						n[0]++;
+					}
+				}
+
+				// Gain life for new Soul's Attendants
+				n[0] += newWarden.size();
+
+				final PlayerLife life = AllZone.GameAction.getPlayerLife(wardenList.get(
+						outer).getController());
+				SpellAbility ability = new Ability(new Card(),
+						"0") {
+
+					@Override
+					public void resolve() {
+						life.addLife(n[0]);
+					}
+				};
+				ability.setStackDescription(wardenList.get(outer).getName()
+						+ " - "
+						+ wardenList.get(outer).getController()
+						+ " gains " + n[0] + " life");
+
+				if(n[0] != 0) {
+					AllZone.Stack.push(ability);
+				}
+			}// outer for
+
+			soul = wardenList;
+			soul.addAll(newWarden.toArray());
+			old = current;
+		}// execute()
+	}; // soul's Attendant
 
 	public static Command Wirewood_Hivemaster         = new Command() {
 		private static final long serialVersionUID = -6440532066018273862L;

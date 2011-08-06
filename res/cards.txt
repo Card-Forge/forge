@@ -1,3 +1,9 @@
+Soul's Attendant
+W
+Creature Human Cleric
+Whenever another creature comes into play, you gain 1 life.
+1/1
+
 Kazandu Tuskcaller
 1 G
 Creature Human Shaman
