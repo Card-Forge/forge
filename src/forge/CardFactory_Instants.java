@@ -1395,7 +1395,7 @@ public class CardFactory_Instants {
 
         
         //*************** START *********** START **************************
-        if(cardName.equals("Brain Freeze")) {
+        else if(cardName.equals("Brain Freeze")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 4247050159744693L;
                 
@@ -4498,7 +4498,7 @@ public class CardFactory_Instants {
         
         
         //*************** START ********** START *************************
-        if(cardName.equals("Mana Drain"))//NOTE: The AI can't cast this spell due to inability to use a manapool, but provisions are still made for it for if/when we get to that point.
+        else if(cardName.equals("Mana Drain"))//NOTE: The AI can't cast this spell due to inability to use a manapool, but provisions are still made for it for if/when we get to that point.
         {
         	SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 6139754377230333678L;
@@ -4617,7 +4617,7 @@ public class CardFactory_Instants {
         
         
         //*************** START *********** START **************************
-        if( cardName.equals("Siren's Call") ) {
+        else if( cardName.equals("Siren's Call") ) {
             /**
              *  Creatures the active player controls attack this turn if able.
              *  
@@ -4695,7 +4695,7 @@ public class CardFactory_Instants {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        if( cardName.equals("Reset") ) {
+        else if( cardName.equals("Reset") ) {
             /*
              * Cast Reset only during an opponent's turn after his or her upkeep step.
              * Untap all lands you control.
@@ -4760,7 +4760,7 @@ public class CardFactory_Instants {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        if(cardName.equals("Sacrifice")) {
+        else if(cardName.equals("Sacrifice")) {
             final SpellAbility spell = new Spell(card) {
 				private static final long serialVersionUID = 7081747227572709229L;
 
@@ -4812,8 +4812,8 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
-        if(cardName.equals("Brightstone Ritual")) {
+        //*************** START *********** START **************************
+        else if(cardName.equals("Brightstone Ritual")) {
             final SpellAbility spell = new Spell(card) {
 				private static final long serialVersionUID = 7081747227572709229L;
                 @Override
@@ -4837,7 +4837,7 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Berserk")) {
             final SpellAbility spell = new Spell(card) {
 				private static final long serialVersionUID = -4271469206538681785L;
