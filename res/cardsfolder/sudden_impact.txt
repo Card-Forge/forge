@@ -1,12 +1,11 @@
-Name:Storm Seeker
-ManaCost:3 G
+Name:Sudden Impact
+ManaCost:3 R
 Types:Instant
 Text:CARDNAME deals damage equal to the number of cards in target player's hand to that player.
 #xCount needs to be updated before this can be converted to AF.
 #A:SP$DealDamage|Cost$3 G|ValidTgts$Player|NumDmg$X|SpellDescription$CARDNAME deals damage equal to the number of cards in target player's hand to that player.
-#SVar:X:Count$InTgtHand
+#SVar:X:Count$TgtPHand
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_seeker.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/119.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sudden_impact.jpg
 End

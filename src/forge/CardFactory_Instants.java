@@ -4270,7 +4270,7 @@ public class CardFactory_Instants {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Storm Seeker")) {
+        else if(cardName.equals("Storm Seeker") || cardName.equals("Sudden Impact")) {
         	/*
         	 * Storm Seeker deals damage equal to the number of cards in target player's hand to that player.
         	 */
