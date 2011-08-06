@@ -231,6 +231,7 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
         	
         	 for(int i = 0; i < shopList.size(); i++) {
                  Card c = AllZone.CardFactory.getCard(shopList.get(i).toString(), "");
+                 
                  c.setValue(map.get(c.getName()));
                  c.setRarity(pack.getRarity(c.getName()));
              	 shop.add(c);
@@ -242,8 +243,20 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
         
         for(int i = 0; i < list.size(); i++) {
             Card c = AllZone.CardFactory.getCard(list.get(i).toString(), "");
-            c.setValue(map.get(c.getName()));
+            
             c.setRarity(pack.getRarity(c.getName()));
+            if (map.containsKey(c.getName()))
+            	c.setValue(map.get(c.getName()));
+            else //card is not on pricelist
+            {
+            	System.out.println("Card " + c.getName() + " is not in the price list.");
+            	if (c.getRarity().equals("Common"))
+            		c.setValue(10);
+            	else if (c.getRarity().equals("Uncommon"))
+            		c.setValue(50);
+            	else if (c.getRarity().equals("Rare"))
+            		c.setValue(200);
+            }
         	owned.add(c);
         }
        

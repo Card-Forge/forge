@@ -11396,6 +11396,13 @@ public class CardFactory_Creatures {
                 public void execute() {
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
                     CardList choice = new CardList(play.getCards());
+                    choice = choice.filter(new CardListFilter()
+                    {
+                    	public boolean addCard(Card c)
+                    	{
+                    		return !c.getName().equals("Mana Pool");
+                    	}
+                    });
                     AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, choice,
                             "Select a permanent you control.", false, false));
                     ButtonUtil.disableAll();

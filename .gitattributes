@@ -54,6 +54,7 @@ res/pics_link/card-pictures_w.txt -text svneol=native#text/plain
 res/pics_link/card-pictures_x.txt -text svneol=native#text/plain
 res/pics_link/card-pictures_y.txt -text svneol=native#text/plain
 res/pics_link/card-pictures_z.txt -text svneol=native#text/plain
+res/quest/all-prices.txt -text svneol=native#text/plain
 res/quest/common.txt -text svneol=native#text/plain
 res/quest/easy.txt -text svneol=native#text/plain
 res/quest/hard.txt -text svneol=native#text/plain

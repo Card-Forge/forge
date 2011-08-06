@@ -41,7 +41,8 @@ public class ReadPriceList implements NewConstants {
                 	String s[] = line.split("=");
                 	String name = s[0].trim();
                 	String price = s[1].trim();
-
+                	
+                	//System.out.println("Name: " + name + ", Price: " + price);
                     
                     try {
                         long val = Long.parseLong(price.trim());
