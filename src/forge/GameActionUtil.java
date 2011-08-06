@@ -5946,8 +5946,8 @@ public class GameActionUtil {
 			playerCombatDamage_PoisonCounter(c, 1);
     
     	if(c.getName().equals("Marsh Viper")) playerCombatDamage_PoisonCounter(c, 2);
-    	else if(c.getName().equals("Abyssal Specter")) playerCombatDamage_Abyssal_Specter(c);
-    	else if(c.getName().equals("Silent Specter")) playerCombatDamage_Silent_Specter(c);
+    	else if(c.getName().equals("Abyssal Specter")) opponent_Discard(c, 1);
+    	else if(c.getName().equals("Hypnotic Specter")) opponent_Discard_Random(c, 1);
     	else if(c.getName().equals("Nicol Bolas")) playerCombatDamage_Nicol_Bolas(c);
 		else if(c.getName().equals("Goblin Lackey")) playerCombatDamage_Goblin_Lackey(c);
 		else if(c.getName().equals("Thieving Magpie")|| c.getName().equals("Lu Xun, Scholar General")) playerCombatDamage_Shadowmage_Infiltrator(c);
@@ -6040,14 +6040,16 @@ public class GameActionUtil {
         	}
         }//isEquipped
 
-		if(c.getName().equals("Hypnotic Specter")) playerCombatDamage_Hypnotic_Specter(c);
-		else if(c.getName().equals("Dimir Cutpurse")) playerCombatDamage_Dimir_Cutpurse(c);
+		
+		if(c.getName().equals("Dimir Cutpurse")) playerCombatDamage_Dimir_Cutpurse(c);
 		else if(c.getName().equals("Ghastlord of Fugue")) playerCombatDamage_Ghastlord_of_Fugue(c);
 		else if(c.getName().equals("Garza Zol, Plague Queen")) playerCombatDamage_May_draw(c);
 		else if(c.getName().equals("Scalpelexis")) playerCombatDamage_Scalpelexis(c); 
-		else if(c.getName().equals("Guul Draz Specter")
-				|| c.getName().equals("Chilling Apparition") || c.getName().equals("Sedraxis Specter")) playerCombatDamage_Simple_Discard(c);
-		else if((c.getName().equals("Headhunter") || c.getName().equals("Riptide Pilferer")) && !c.isFaceDown()) playerCombatDamage_Simple_Discard(c);
+		else if(c.getName().equals("Guul Draz Specter")) opponent_Discard(c, 1);
+		else if(c.getName().equals("Chilling Apparition")) opponent_Discard(c, 1);
+		else if(c.getName().equals("Sedraxis Specter")) opponent_Discard(c, 1);
+		else if(c.getName().equals("Headhunter")) opponent_Discard(c, 1);
+		else if(c.getName().equals("Riptide Pilferer")) opponent_Discard(c, 1);
 		else if(c.getName().equals("Shadowmage Infiltrator")) playerCombatDamage_Shadowmage_Infiltrator(c);
 		else if(c.getName().equals("Augury Adept")) playerCombatDamage_Augury_Adept(c);
 		else if(c.getName().equals("Spawnwrithe")) playerCombatDamage_Spawnwrithe(c);
@@ -6064,7 +6066,8 @@ public class GameActionUtil {
 		else if(c.getName().equals("Treva, the Renewer")) playerCombatDamage_Treva(c);
 		else if(c.getName().equals("Rith, the Awakener")) playerCombatDamage_Rith(c);
 		else if(c.getName().equals("Vorosh, the Hunter")) playerCombatDamage_Vorosh(c);
-		else if(c.getName().equals("Doomsday Specter")) opponent_Discard_Card_You_Choose(c);
+		else if(c.getName().equals("Doomsday Specter")) opponent_Discard_You_Choose(c);
+		else if(c.getName().equals("Silent Specter")) opponent_Discard(c, 2);
 		else if(c.getName().equals("The Unspeakable")) may_Return_Graveyard_to_Hand(c, "Arcane".split(","));
 		else if(c.getName().equals("Woebearer")) may_Return_Graveyard_to_Hand(c, "Creature".split(","));
 		else if(c.isEnchantedBy("Necromantic Thirst")) may_Return_Graveyard_to_Hand(c, "Creature".split(","));
@@ -6072,7 +6075,7 @@ public class GameActionUtil {
 		//Unused variable
 		//c.setDealtCombatDmgToOppThisTurn(true); 
 
-	}
+	}//executeCombatDamageToPlayerEffects
 	
 	private static void may_Return_Graveyard_to_Hand(final Card source, final String[] valid) {
 		final Player player = source.getController();
@@ -6443,27 +6446,6 @@ public class GameActionUtil {
 		}
 	}
 
-
-	private static void playerCombatDamage_Simple_Discard(Card c) {
-		final Player player = c.getController();
-		final Player opponent = player.getOpponent();
-
-		if(c.getNetAttack() > 0) {
-			Ability ability2 = new Ability(c, "0") {
-				@Override
-				public void resolve() {
-					opponent.discard(this);
-				}
-			};// ability2
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append(c.getName()).append(" - ").append("opponent discards a card.");
-			ability2.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability2);
-		}
-	}
-
 	private static void playerCombatDamage_Scalpelexis(Card c) {
 		final Player player = c.getController();
 		final Player opponent = player.getOpponent();
@@ -6768,63 +6750,49 @@ public class GameActionUtil {
 		}
 	}
 
-	private static void playerCombatDamage_Hypnotic_Specter(Card c) {
-		final Player player = c.getController().getOpponent();
+	private static void opponent_Discard_Random(final Card source, final int num) {
+		final Player player = source.getController().getOpponent();
 
-		if(c.getNetAttack() > 0) {
-			Ability ability = new Ability(c, "0") {
+		if(source.getNetAttack() > 0 && !source.isFaceDown()) {
+			Ability ability = new Ability(source, "0") {
 				@Override
 				public void resolve() {
-					player.discardRandom(this);
+					player.discardRandom(num, this);
 				}
 			};// ability
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append(c.getName()).append(" - ").append(player).append(" discards a card at random");
+			sb.append(source.getName()).append(" - ").append(player).append(" discards ");
+			sb.append(num).append(" card");
+			if(1 != num) sb.append("s");
+			sb.append(" at random");
 			ability.setStackDescription(sb.toString());
 			
 			AllZone.Stack.add(ability);
 		}
 	}
 	
-	private static void playerCombatDamage_Silent_Specter(Card c) {
-		final Player player = c.getController().getOpponent();
+	private static void opponent_Discard(final Card source, final int num) {
+		final Player player = source.getController().getOpponent();
 
-		if(c.getNetAttack() > 0 && !c.isFaceDown()) {
-			Ability ability = new Ability(c, "0") {
+		if(source.getNetAttack() > 0 && !source.isFaceDown()) {
+			Ability ability = new Ability(source, "0") {
 				@Override
 				public void resolve() {
-					player.discard(2, this, true);
+					player.discard(num, this, true);
 				}
 			};// ability
 			StringBuilder sb = new StringBuilder();
-			sb.append(c.getName()).append(" - ").append(player).append(" discards two cards");
+			sb.append(source.getName()).append(" - ").append(player).append(" discards ");
+			sb.append(num).append(" card");
+			if(1 != num) sb.append("s");
 			ability.setStackDescription(sb.toString());
 			
 			AllZone.Stack.add(ability);
 		}
 	}
 	
-	private static void playerCombatDamage_Abyssal_Specter(final Card c) {
-		final Player player = c.getController().getOpponent();
-
-		if(c.getNetAttack() > 0) {
-			SpellAbility ability = new Ability(c, "0") {
-				@Override
-				public void resolve() {
-					player.discard(1, this, true);
-				}
-			};// ability
-
-			StringBuilder sb = new StringBuilder();
-			sb.append(c.getName()).append(" - ").append(player).append(" discards a card");
-			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
-		}
-	}
-	
-	private static void opponent_Discard_Card_You_Choose(final Card source) {
+	private static void opponent_Discard_You_Choose(final Card source) {
 		final Player player = source.getController().getOpponent();
 
 		if(source.getNetAttack() > 0) {
