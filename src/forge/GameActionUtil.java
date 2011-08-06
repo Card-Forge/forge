@@ -4172,27 +4172,27 @@ public class GameActionUtil {
 		AllZone.Stack.add(ability2);
 	}
 
-	//this is for cards like Sengir Vampire
-	public static void executeVampiricEffects(Card c) {
-		ArrayList<String> a = c.getKeyword();
-		for(int i = 0; i < a.size(); i++) {
-			if(AllZone.GameAction.isCardInPlay(c)
-					&& a.get(i).toString().startsWith(
-							"Whenever a creature dealt damage by this card this turn is put into a graveyard, put")) {
-				final Card thisCard = c;
-				Ability ability2 = new Ability(c, "0") {
-					@Override
-					public void resolve() {
-						if(AllZone.GameAction.isCardInPlay(thisCard)) thisCard.addCounter(Counters.P1P1, 1);
-					}
-				}; // ability2
+    //this is for cards like Sengir Vampire
+    public static void executeVampiricEffects(Card c) {
+        ArrayList<String> a = c.getKeyword();
+        for(int i = 0; i < a.size(); i++) {
+            if(AllZone.GameAction.isCardInPlay(c)
+                    && a.get(i).toString().startsWith(
+                            "Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put")) {
+                final Card thisCard = c;
+                Ability ability2 = new Ability(c, "0") {
+                    @Override
+                    public void resolve() {
+                        if(AllZone.GameAction.isCardInPlay(thisCard)) thisCard.addCounter(Counters.P1P1, 1);
+                    }
+                }; // ability2
 
-				ability2.setStackDescription(c.getName() + " - gets a +1/+1 counter");
-				AllZone.Stack.add(ability2);
-			}
+                ability2.setStackDescription(c.getName() + " - gets a +1/+1 counter");
+                AllZone.Stack.add(ability2);
+            }
 
-		}
-	}
+        }
+    }
 
 	public static void executePlayerCombatDamageEffects(Card c) {
 

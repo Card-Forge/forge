@@ -1,3 +1,35 @@
+Garza Zol, Plague Queen
+4 U B R
+Legendary Creature Vampire
+Whenever Garza Zol deals combat damage to a player, you may draw a card.
+5/5
+Flying
+Haste
+Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.
+
+Sengir Bats
+1 B B
+Creature Bat
+no text
+1/2
+Flying
+Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.
+
+Sengir Vampire
+3 B B
+Creature Vampire
+no text
+4/4
+Flying
+Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.
+
+Vampiric Embrace
+2 B B
+Enchantment Aura
+Enchanted creature gets +2/+2 and has flying. Whenever a creature dealt damage by enchanted creature this turn is put into a graveyard, put a +1/+1 counter on that creature.
+Enchant creature
+enPump:+2/+2/Flying & Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.
+
 Mawcor
 3 U U
 Creature Beast
@@ -2926,13 +2958,6 @@ Enchantment Aura
 Enchanted creature has protection from white. This effect doesn't remove White Ward.
 Enchant creature
 enPump:Protection from white
-
-Vampiric Embrace
-2 B B
-Enchantment Aura
-Enchanted creature gets +2/+2 and has flying. Whenever a creature dealt damage by enchanted creature this turn is put into a graveyard, put a +1/+1 counter on that creature.
-Enchant creature
-enPump:+2/+2/Flying & Whenever a creature dealt damage by this card this turn is put into a graveyard, put a +1/+1 counter on this card.
 
 Web
 G
@@ -12872,31 +12897,6 @@ Whenever Mirri the Cursed deals combat damage to a creature, put a +1/+1 counter
 First Strike
 Flying
 Haste
-
-Sengir Bats
-1 B B
-Creature Bat
-no text
-1/2
-Flying
-Whenever a creature dealt damage by this card this turn is put into a graveyard, put a +1/+1 counter on this card.
-
-Garza Zol, Plague Queen
-4 U B R
-Legendary Creature Vampire
-Whenever Garza Zol deals combat damage to a player, you may draw a card.
-5/5
-Flying
-Haste
-Whenever a creature dealt damage by this card this turn is put into a graveyard, put a +1/+1 counter on this card.
-
-Sengir Vampire
-3 B B
-Creature Vampire
-no text
-4/4
-Flying
-Whenever a creature dealt damage by this card this turn is put into a graveyard, put a +1/+1 counter on this card.
 
 Sedge Troll
 2 R
