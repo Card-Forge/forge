@@ -7805,45 +7805,6 @@ public class CardFactory_Creatures {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Lockjaw Snapper")) {
-            final Ability ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    PlayerZone hPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-                    PlayerZone cPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    
-                    CardList creatures = new CardList();
-                    creatures.addAll(hPlay.getCards());
-                    creatures.addAll(cPlay.getCards());
-                    creatures = creatures.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.getCounters(Counters.M1M1) > 0;
-                        }
-                    });
-                    
-                    for(int i = 0; i < creatures.size(); i++) {
-                        Card c = creatures.get(i);
-                        c.addCounter(Counters.M1M1, 1);
-                    }
-                }
-            };
-            
-            Command destroy = new Command() {
-                private static final long serialVersionUID = 6389028698247230474L;
-                
-                public void execute() {
-                	StringBuilder sb = new StringBuilder();
-                	sb.append(card.getName()).append(" - put -1/-1 counter on each creature that has a -1/-1 counter on it.");
-                	ability.setStackDescription(sb.toString());
-                	
-                    AllZone.Stack.add(ability);
-                }
-            };//command
-            card.addDestroyCommand(destroy);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Arctic Nishoba")) {
             final Ability ability = new Ability(card, "0") {
                 @Override
