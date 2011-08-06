@@ -6335,6 +6335,7 @@ res/cardsfolder/tainted_peak.txt -text svneol=native#text/plain
 res/cardsfolder/tainted_strike.txt -text svneol=native#text/plain
 res/cardsfolder/tainted_well.txt -text svneol=native#text/plain
 res/cardsfolder/tainted_wood.txt -text svneol=native#text/plain
+res/cardsfolder/taj_nar_swordsmith.txt svneol=native#text/plain
 res/cardsfolder/tajuru_archer.txt -text svneol=native#text/plain
 res/cardsfolder/take_possession.txt -text svneol=native#text/plain
 res/cardsfolder/takenos_cavalry.txt -text svneol=native#text/plain
