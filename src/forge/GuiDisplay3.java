@@ -861,13 +861,21 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
         oppNumbersPanel.add(oppGraveValue);
         oppNumbersPanel.setBackground(c1);
         
+        oppLifeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        JPanel oppIconLifePanel = new JPanel(new GridLayout(0, 1, 0, 0));
+        oppIconLifePanel.add(oppIconLabel);
+        oppIconLifePanel.add(oppLifeLabel);
+        oppIconLifePanel.setBackground(c1);
+        
         JPanel oppPanel = new JPanel();
         oppPanel.setBackground(c1);
         oppPanel.setBorder(new TitledBorder(new EtchedBorder(), ForgeProps.getLocalized(COMPUTER_TITLE)));
         oppPanel.setLayout(new BorderLayout());
         oppPanel.add(oppNumbersPanel, BorderLayout.WEST);
-        oppPanel.add(oppIconLabel, BorderLayout.CENTER);
-        oppPanel.add(oppLifeLabel, BorderLayout.EAST);
+        // oppPanel.add(oppIconLabel, BorderLayout.CENTER);
+        // oppPanel.add(oppLifeLabel, BorderLayout.EAST);
+        oppPanel.add(oppIconLifePanel, BorderLayout.EAST);
         oppPanel.add(oppPCLabel, BorderLayout.AFTER_LAST_LINE);
         pane.add(new ExternalPanel(oppPanel), "compy");
     }
