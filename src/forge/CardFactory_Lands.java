@@ -1625,7 +1625,7 @@ class CardFactory_Lands {
 	           		  }
 	           	  }
 	        
-	           	  if (cards.size() > 0 && AllZone.GameAction.isCardInPlay(card) && card.isUntapped())
+	           	  if (super.canPlay() && cards.size() > 0 && AllZone.GameAction.isCardInPlay(card) && card.isUntapped())
 	           		  return true;
 	           	  else
 	           		  return false;

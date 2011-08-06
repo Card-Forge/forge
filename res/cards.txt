@@ -1,3 +1,14 @@
+Magus of the Tabernacle
+3 W
+Creature Human Wizard
+All creatures have "At the beginning of your upkeep, sacrifice this creature unless you pay 1."
+2/6
+
+The Tabernacle at Pendrell Vale
+no cost
+Legendary Land
+All creatures have "At the beginning of your upkeep, destroy this creature unless you pay 1."
+
 Donate
 2 U
 Sorcery
@@ -3260,7 +3271,7 @@ no text
 1,tap: add WU
 
 Bog Initiate
-B
+1 B
 Creature Human Wizard
 no text
 1/1

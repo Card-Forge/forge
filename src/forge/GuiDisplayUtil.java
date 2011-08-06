@@ -159,7 +159,8 @@ public class GuiDisplayUtil implements NewConstants {
                 
                 if((o != null) && (o instanceof CardPanel)) {
                     CardPanel cardPanel = (CardPanel) o;
-                    visual.updateCardDetail(cardPanel.getCard());
+                    visual.updateCardDetailText(cardPanel.getCard());
+                    visual.updateCardDetailPicture(cardPanel.getCard());
                 }
             }//mouseMoved
         };
@@ -199,6 +200,80 @@ public class GuiDisplayUtil implements NewConstants {
         return returnString;
     }
     
+    public static ImageIcon getImageIcon(Card c)
+    {
+    	String suffix = ".jpg";
+        String filename = "";
+        if(!c.isFaceDown()) {
+            String basicLandSuffix = "";
+            if(c.isBasicLand()) {
+                if(c.getRandomPicture() != 0) basicLandSuffix = Integer.toString(c.getRandomPicture());
+            }
+            
+            filename = cleanString(c.getImageName()) + basicLandSuffix + suffix;
+        } else filename = "morph" + suffix;
+        
+        String loc = "";
+        if (!c.isToken())
+        	loc = IMAGE_BASE;
+        else
+        	loc = IMAGE_TOKEN;
+        
+        File file = new File(ForgeProps.getFile(loc), filename);
+        
+        //try current directory
+        if(!file.exists()) {
+            filename = cleanString(c.getName()) + suffix;
+            file = new File(filename);
+        }
+        
+
+        if(file.exists()) {
+	        if(c.isFaceDown()){
+	        	 return new ImageIcon(filename);     	
+	        }else{
+	        	int cWidth = 0;
+	        	int cHeight = 0;
+	        	try {
+					cWidth = GuiDisplayUtil.getPictureHQwidth(c);
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+	        	
+				try {
+					cHeight = GuiDisplayUtil.getPictureHQheight(c);
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+				
+	        	if(cWidth<=312 || cHeight<=445) {     	
+	            return new ImageIcon(filename);
+	        	}else{
+	        	return new ImageIcon(filename);	
+	        	}
+	        	}
+        }
+        /*else {
+            ImageIcon i = new ImageIcon();
+            
+            JTextArea text = new JTextArea("\r\n\r\n" + filename, 10, 15);
+            Font f = text.getFont();
+            f = f.deriveFont(f.getSize() + 2.0f);
+            text.setFont(f);
+            text.setBackground(p.getBackground());
+            
+            i.add(text);
+            
+            if(c.isToken()) return new ImageIcon();
+            
+            return i;
+        }//else
+        */
+        return new ImageIcon();
+    }
+    
     public static JPanel getPicture(Card c) {
         if(AllZone.NameChanger.shouldChangeCardName()) return new JPanel();
         
@@ -208,10 +283,13 @@ public class GuiDisplayUtil implements NewConstants {
         if(!c.isFaceDown()) {
             String basicLandSuffix = "";
             if(c.isBasicLand()) {
-                if(c.getRandomPicture() != 0) basicLandSuffix = Integer.toString(c.getRandomPicture());
+                if(c.getRandomPicture() != 0) { 
+                	basicLandSuffix = Integer.toString(c.getRandomPicture());
+                	//c.setImageName(c.getImageName() + basicLandSuffix);
+                }
+
             }
-            
-            filename = cleanString(c.getImageName()) + basicLandSuffix + suffix;
+            filename = cleanString(c.getImageName())+ basicLandSuffix + suffix;
         } else filename = "morph" + suffix;
         
         String loc = "";

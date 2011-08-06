@@ -82,6 +82,9 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     public Color c2 = new Color(50,50,50);
     public Color c3 = new Color(204,204,204);
     */
+    
+    private String current_picture = "";
+    private int count = 0;
 
     public static Color       c1               = new Color(204, 204, 204);
     public static Color       c2               = new Color(204, 204, 204);
@@ -256,7 +259,10 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         if(choices[0] instanceof Card) {
             list.addListSelectionListener(new ListSelectionListener() {
                 public void valueChanged(ListSelectionEvent ev) {
-                    if(list.getSelectedValue() instanceof Card) updateCardDetail((Card) list.getSelectedValue());
+                    if(list.getSelectedValue() instanceof Card){
+                    	updateCardDetailText((Card) list.getSelectedValue());
+                    	updateCardDetailPicture((Card) list.getSelectedValue());
+                    }
                 }
             });
         }
@@ -272,7 +278,10 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         if(choices[0] instanceof Card) {
             list.addListSelectionListener(new ListSelectionListener() {
                 public void valueChanged(ListSelectionEvent ev) {
-                    if(list.getSelectedValue() instanceof Card) updateCardDetail((Card) list.getSelectedValue());
+                    if(list.getSelectedValue() instanceof Card) {
+                    	updateCardDetailText((Card) list.getSelectedValue());
+                    	updateCardDetailPicture((Card) list.getSelectedValue());
+                    }
                 }
             });
         }
@@ -402,7 +411,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
 
     }//addListener()
     
-    public void updateCardDetail(Card c) {
+    public void updateCardDetailText(Card c) {
 //      if(! c.isToken())
 //        System.out.println(c +" " +c.getSpellAbility()[0].canPlay() +" " +c.getSpellAbility()[0].getManaCost());
         
@@ -530,14 +539,24 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         
         cdPanel.setBorder(GuiDisplayUtil.getBorder(c));
         cCardHQ = c;       
-        
-        
+    }
+    public void updateCardDetailPicture(Card c)
+    {
+    	
+    	if (c.getImageName().equals(current_picture) /*&& !c.isBasicLand()*/)
+    		return;
+    		
         //picture
+    	System.out.println("UPDATING PICTURE!!! #:" + count++);
+    	current_picture = c.getImageName();
         picturePanel.removeAll();
         JPanel pic = GuiDisplayUtil.getPicture(c);
         pic.setSize(300, 300);
         picturePanel.add(pic);
         picturePanel.revalidate();
+        System.gc();
+    	
+    	//System.out.println(picturePanel.getComponentCount());
     }//updateCardDetail()
     
     private void addObservers() {
@@ -632,7 +651,8 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
                         
                         @Override
                         public void mouseMoved(MouseEvent me) {
-                            GuiDisplay3.this.updateCardDetail(cardPanel.getCard());
+                            GuiDisplay3.this.updateCardDetailText(cardPanel.getCard());
+                            GuiDisplay3.this.updateCardDetailPicture(cardPanel.getCard());
                         }//mouseMoved
                     });
                     
@@ -1377,7 +1397,10 @@ class Gui_MultipleBlockers3 extends JFrame {
            
             AllZone.GameAction.addAssignedDamage(c, att, /*c.getTotalAssignedDamage() +*/ 1);
             
-            if(guiDisplay != null) guiDisplay.updateCardDetail(c);
+            if(guiDisplay != null) {
+            	guiDisplay.updateCardDetailText(c);
+            	guiDisplay.updateCardDetailPicture(c);
+            }
         }
         //reduce damage, show new user message, exit if necessary
         assignDamage--;
@@ -1395,7 +1418,11 @@ class Gui_MultipleBlockers3 extends JFrame {
             CardPanel cardPanel = (CardPanel) o;
             Card c = cardPanel.getCard();
             
-            if(guiDisplay != null) guiDisplay.updateCardDetail(c);
+            if(guiDisplay != null) { 
+            	guiDisplay.updateCardDetailText(c);
+            	guiDisplay.updateCardDetailPicture(c);
+            }
+            
         }
     }
     

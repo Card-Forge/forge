@@ -127,6 +127,8 @@ public class StateBasedEffects
 		cardToEffectsList.put("Knighthood", new String[] {"Knighthood"});
 		cardToEffectsList.put("Absolute Law", new String[] {"Absolute_Law"});
 		cardToEffectsList.put("Absolute Grace", new String[] {"Absolute_Grace"});
+		cardToEffectsList.put("The Tabernacle at Pendrell Vale", new String[] {"Tabernacle"});
+		cardToEffectsList.put("Magus of the Tabernacle", new String[] {"Magus_of_the_Tabernacle"});
 		cardToEffectsList.put("Mobilization", new String[] {"Mobilization"});
 		cardToEffectsList.put("Serra's Blessing", new String[] {"Serras_Blessing"});
 		cardToEffectsList.put("Cover of Darkness", new String[] {"Cover_of_Darkness"});

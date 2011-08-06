@@ -11,6 +11,8 @@ public class GameActionUtil
 		upkeep_UpkeepCost();
 		upkeep_CumulativeUpkeepCost();
 		upkeep_Echo();
+		upkeep_TabernacleUpkeepCost();
+		upkeep_MagusTabernacleUpkeepCost();
 		// upkeep_CheckEmptyDeck_Lose(); //still a little buggy
 		upkeep_Phyrexian_Arena();
 		upkeep_Honden_of_Cleansing_Fire();
@@ -2468,7 +2470,7 @@ public class GameActionUtil
 		}
 	}
 	
-	public static void upkeep_UpkeepCost()
+	public static void upkeep_TabernacleUpkeepCost()
 	{
 		String player = AllZone.Phase.getActivePlayer();
 		
@@ -2483,10 +2485,11 @@ public class GameActionUtil
 				ArrayList<String> a = c.getKeyword();
 				for (int i = 0; i < a.size(); i++)
 				{
-					if (a.get(i).toString().startsWith("At the beginning of your upkeep, sacrifice "))
+					if (a.get(i).toString().startsWith("At the beginning of your upkeep, destroy this creature unless you pay"))
 					{
-						String k[] = a.get(i).toString().split(":");
-				        c.setUpkeepCost(k[1]);
+						String k[] = a.get(i).toString().split("pay ");
+						k[1] = k[1].substring(0, k[1].length()-1);
+				        c.setTabernacleUpkeepCost(k[1]);
 						return true;
 					}
 				}
@@ -2498,7 +2501,7 @@ public class GameActionUtil
 		{
 			final Card c = list.get(i);
 						 
-		  	final Ability sacAbility = new Ability(c, c.getUpkeepCost())
+		  	final Ability destroyAbility = new Ability(c, c.getTabernacleUpkeepCost())
 		  	{
 		  		public void resolve()
 		  		{
@@ -2511,7 +2514,7 @@ public class GameActionUtil
 				private static final long serialVersionUID = -8737736216222268696L;
 
 				public void execute() {
-	  				AllZone.GameAction.sacrifice(c);
+	  				AllZone.GameAction.destroy(c);
 	  			}
 		  	};
 	  	
@@ -2525,17 +2528,86 @@ public class GameActionUtil
 		  	
 		  	//AllZone.Stack.add(sacAbility);
 		  	if (c.getController().equals(Constant.Player.Human)) {
-		  		AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Upkeep for "+ c +"\r\n", sacAbility.getManaCost(), paidCommand, unpaidCommand));
+		  		AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Tabernacle Upkeep for "+ c +"\r\n", destroyAbility.getManaCost(), paidCommand, unpaidCommand));
 		  	}
 		  	else //computer
 		  	{
-		  		if (ComputerUtil.canPayCost(sacAbility))
-		  			ComputerUtil.playNoStack(sacAbility);
+		  		if (ComputerUtil.canPayCost(destroyAbility))
+		  			ComputerUtil.playNoStack(destroyAbility);
+		  		else
+		  			AllZone.GameAction.destroy(c);
+		  	}	
+		}
+	}//TabernacleUpkeepCost
+	
+	public static void upkeep_MagusTabernacleUpkeepCost()
+	{
+		String player = AllZone.Phase.getActivePlayer();
+		
+		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+		//list = list.getType("Creature");
+		list = list.filter(new CardListFilter()
+		{
+			public boolean addCard(Card c)
+			{
+				ArrayList<String> a = c.getKeyword();
+				for (int i = 0; i < a.size(); i++)
+				{
+					if (a.get(i).toString().startsWith("At the beginning of your upkeep, sacrifice this creature unless you pay"))
+					{
+						String k[] = a.get(i).toString().split("pay ");
+						k[1] = k[1].substring(0, k[1].length()-1);
+				        c.setMagusTabernacleUpkeepCost(k[1]);
+						return true;
+					}
+				}
+				return false;
+			}
+		});
+		
+		for (int i=0; i<list.size();i++)
+		{
+			final Card c = list.get(i);
+						 
+		  	final Ability sacrificeAbility = new Ability(c, c.getMagusTabernacleUpkeepCost())
+		  	{
+		  		public void resolve()
+		  		{
+		  			;
+		  		}
+		  	};
+		  	
+		  	final Command unpaidCommand = new Command() {
+				private static final long serialVersionUID = 660060621665783254L;
+
+				public void execute() {
+	  				AllZone.GameAction.sacrifice(c);
+	  			}
+		  	};
+	  	
+		  	final Command paidCommand = new Command() {
+				private static final long serialVersionUID = 7896720208740364774L;
+
+				public void execute() {
+		  			;
+		  		}
+		  	};
+		  	
+		  	//AllZone.Stack.add(sacAbility);
+		  	if (c.getController().equals(Constant.Player.Human)) {
+		  		AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Magus of the Tabernacle Upkeep for "+ c +"\r\n", sacrificeAbility.getManaCost(), paidCommand, unpaidCommand));
+		  	}
+		  	else //computer
+		  	{
+		  		if (ComputerUtil.canPayCost(sacrificeAbility))
+		  			ComputerUtil.playNoStack(sacrificeAbility);
 		  		else
 		  			AllZone.GameAction.sacrifice(c);
 		  	}	
 		}
-	}//upkeepCost
+	}//MagusTabernacleUpkeepCost
 	
 	public static void upkeep_CumulativeUpkeepCost()
 	{
@@ -2665,11 +2737,80 @@ public class GameActionUtil
 			  			AllZone.GameAction.sacrifice(c);
 			  	}
 			  	
-			  	
 				c.removeIntrinsicKeyword("(Echo unpaid)");
 			}	
 		}
-	}
+	}//echo
+	
+	
+	public static void upkeep_UpkeepCost()
+	{
+		String player = AllZone.Phase.getActivePlayer();
+		
+		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+		//list = list.getType("Creature");
+		list = list.filter(new CardListFilter()
+		{
+			public boolean addCard(Card c)
+			{
+				ArrayList<String> a = c.getKeyword();
+				for (int i = 0; i < a.size(); i++)
+				{
+					if (a.get(i).toString().startsWith("At the beginning of your upkeep, sacrifice " +c.getName()))
+					{
+						String k[] = a.get(i).toString().split(":");
+				        c.setUpkeepCost(k[1]);
+						return true;
+					}
+				}
+				return false;
+			}
+		});
+		
+		for (int i=0; i<list.size();i++)
+		{
+			final Card c = list.get(i);
+						 
+		  	final Ability sacAbility = new Ability(c, c.getUpkeepCost())
+		  	{
+		  		public void resolve()
+		  		{
+		  			;
+		  		}
+		  	};
+		  	
+		  	final Command unpaidCommand = new Command() {
+
+				private static final long serialVersionUID = -6483405139208343935L;
+
+				public void execute() {
+	  				AllZone.GameAction.sacrifice(c);
+	  			}
+		  	};
+	  	
+		  	final Command paidCommand = new Command() {
+				private static final long serialVersionUID = -8303368287601871955L;
+
+				public void execute() {
+		  			;
+		  		}
+		  	};
+		  	
+		  	//AllZone.Stack.add(sacAbility);
+		  	if (c.getController().equals(Constant.Player.Human)) {
+		  		AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Upkeep for "+ c +"\r\n", sacAbility.getManaCost(), paidCommand, unpaidCommand));
+		  	}
+		  	else //computer
+		  	{
+		  		if (ComputerUtil.canPayCost(sacAbility))
+		  			ComputerUtil.playNoStack(sacAbility);
+		  		else
+		  			AllZone.GameAction.sacrifice(c);
+		  	}	
+		}
+	}//upkeepCost
 	
 
 	public static void removeAttackedBlockedThisTurn()
@@ -4834,6 +4975,8 @@ public class GameActionUtil
 		} // if creatures > 0
 
 	}
+	
+	
 	
 	private static void upkeep_AEther_Vial()
 	{
@@ -7669,7 +7812,6 @@ public class GameActionUtil
 		Wirewood_Hivemaster.execute();
 		
 		Sacrifice_NoIslands.execute();
-		
 		//Angelic_Chorus.execute();
 		
 		/*
@@ -8672,6 +8814,114 @@ public class GameActionUtil
 	               }
 	            }// for inner
 	         }// for outer
+	      }// execute()
+	};
+	
+	public static Command Tabernacle = new Command()
+    {
+		  private static final long serialVersionUID = -3233715310427996429L;
+		  CardList gloriousAnthemList = new CardList();
+
+	      public void execute()
+	      {
+	         String keyword = "At the beginning of your upkeep, destroy this creature unless you pay";
+
+	         CardList list = gloriousAnthemList;
+	         Card c;
+	         // reset all cards in list - aka "old" cards
+	         for (int i = 0; i < list.size(); i++)
+	         {
+	            c = list.get(i);
+	            ArrayList<String> a = c.getKeyword();
+	            for (String s : a)
+	            {
+	            	if (s.startsWith(keyword))
+	            		c.removeExtrinsicKeyword(s);
+	            }
+	         }
+
+	         list.clear();
+	         PlayerZone cPlay = AllZone.Computer_Play;
+	         PlayerZone hPlay = AllZone.Human_Play;
+	         CardList clist = new CardList();
+	         clist.addAll(cPlay.getCards());
+	         clist.addAll(hPlay.getCards());
+	         clist = clist.filter(new CardListFilter(){
+	        	public boolean addCard(Card c)
+	        	{
+	        		return c.getName().equals("The Tabernacle at Pendrell Vale"); /*|| c.getName().equals("Magus of the Tabernacle");*/
+	        	}
+	         });
+
+	         int number = clist.size();
+	         //System.out.println("Tabernacle Number:" + number);
+	         if (number > 0) {        
+	             CardList creature = new CardList();
+	             creature.addAll(AllZone.Human_Play.getCards());
+	             creature.addAll(AllZone.Computer_Play.getCards());
+	             creature = creature.getType("Creature");
+	
+	             for (int i = 0; i < creature.size(); i++)
+	             {
+	                c = creature.get(i);
+	                c.addExtrinsicKeyword(keyword + " " + number + ".");
+	                gloriousAnthemList.add(c);
+	             }// for inner
+	         }
+	      }// execute()
+	};
+
+	public static Command Magus_of_the_Tabernacle = new Command()
+    {
+		private static final long serialVersionUID = -249708982895077034L;
+		CardList gloriousAnthemList = new CardList();
+
+	      public void execute()
+	      {
+	         String keyword = "At the beginning of your upkeep, sacrifice this creature unless you pay";
+
+	         CardList list = gloriousAnthemList;
+	         Card c;
+	         // reset all cards in list - aka "old" cards
+	         for (int i = 0; i < list.size(); i++)
+	         {
+	            c = list.get(i);
+	            ArrayList<String> a = c.getKeyword();
+	            for (String s : a)
+	            {
+	            	if (s.startsWith(keyword))
+	            		c.removeExtrinsicKeyword(s);
+	            }
+	         }
+
+	         list.clear();
+	         PlayerZone cPlay = AllZone.Computer_Play;
+	         PlayerZone hPlay = AllZone.Human_Play;
+	         CardList clist = new CardList();
+	         clist.addAll(cPlay.getCards());
+	         clist.addAll(hPlay.getCards());
+	         clist = clist.filter(new CardListFilter(){
+	        	public boolean addCard(Card c)
+	        	{
+	        		return c.getName().equals("Magus of the Tabernacle");
+	        	}
+	         });
+
+	         int number = clist.size();
+	         //System.out.println("Tabernacle Number:" + number);
+	         if (number > 0) {        
+	             CardList creature = new CardList();
+	             creature.addAll(AllZone.Human_Play.getCards());
+	             creature.addAll(AllZone.Computer_Play.getCards());
+	             creature = creature.getType("Creature");
+	
+	             for (int i = 0; i < creature.size(); i++)
+	             {
+	                c = creature.get(i);
+	                c.addExtrinsicKeyword(keyword + " " + number + ".");
+	                gloriousAnthemList.add(c);
+	             }// for inner
+	         }
 	      }// execute()
 	};
 
@@ -15731,6 +15981,8 @@ public class GameActionUtil
 		commands.put("Knighthood", Knighthood);
 		commands.put("Absolute_Law", Absolute_Law);
 		commands.put("Absolute_Grace", Absolute_Grace);
+		commands.put("Tabernacle", Tabernacle);
+		commands.put("Magus_of_the_Tabernacle", Magus_of_the_Tabernacle);
 		commands.put("Mobilization", Mobilization);
 		commands.put("Serras_Blessing", Serras_Blessing);
 		commands.put("Cover_of_Darkness", Cover_of_Darkness);
