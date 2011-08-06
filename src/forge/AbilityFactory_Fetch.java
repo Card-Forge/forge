@@ -124,14 +124,22 @@ public class AbilityFactory_Fetch {
 	        	else
 	        		c = library.get(0);
 
-            	AllZone.Human_Library.remove(c);
+            	AllZone.Computer_Library.remove(c);
             	library.remove(c);
-            	if (destination.equals("Hand")) 
-            		AllZone.Human_Hand.add(c);         			//move to hand
+            	if (destination.equals("Hand")) {
+                    	CardList l = new CardList();
+                    	l.add(c);
+                    	AllZone.Display.getChoiceOptional("Computer picked:", l.toArray());
+            		AllZone.Computer_Hand.add(c);
+            	}//move to hand
             	else if (destination.equals("Battlefield")) 
                 	AllZone.getZone(Constant.Zone.Play, player).add(c); //move to battlefield
-            	else if (destination.equals("Library")) 
-                	AllZone.Human_Library.add(c, libraryPosition); //move to top of library
+            	else if (destination.equals("Library")) {
+                	CardList l = new CardList();
+                	l.add(c);
+                	AllZone.Display.getChoiceOptional("Computer picked:", l.toArray());
+                	AllZone.Computer_Library.add(c, libraryPosition); 
+            	}//move to top of library
 	        }//if
         }
         AllZone.GameAction.shuffle(player);
