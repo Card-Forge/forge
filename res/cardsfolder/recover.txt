@@ -7,6 +7,3 @@ K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recover.jpg
 End
-#
-#K:spReturnTgt:1:Creature:Hand
-#

@@ -6,6 +6,3 @@ A:SP$Retrieve | Cost$ 3 W | Destination$ Battlefield | TgtPrompt$ Choose target 
 SVar:Rarity:Common
 SVar:Picture:http://gatherer.wizards.com/handlers/image.ashx?multiverseid=10509&type=card
 End
-#
-#K:spReturnTgt:1:Creature:Battlefield
-#

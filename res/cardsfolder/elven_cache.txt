@@ -6,6 +6,3 @@ A:SP$Retrieve | Cost$ 2 G G | Destination$ Hand | TgtPrompt$ Choose target card 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elven_cache.jpg
 End
-#
-#K:spReturnTgt:1:Card:Hand
-#

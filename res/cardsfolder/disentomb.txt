@@ -6,6 +6,3 @@ A:SP$Retrieve | Cost$ B | Destination$ Hand | TgtPrompt$ Choose target creature 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disentomb.jpg
 End
-#
-#K:spReturnTgt:1:Creature:Hand
-#

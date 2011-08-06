@@ -3669,18 +3669,12 @@ public class CardFactory implements NewConstants {
         
         
         /*
-         *  NOTE:
-         *  This keyword is still used by 6 cards. AF_Retrieve will 
-         *  need some modifications to be able to support these cards:
-         *  
-         *  Death's Duet        Footbottom Feast        Life from the Loam
-         *  Macabre Waltz       Reinforcements          Urborg Uprising
-         * 
          *  Generic return target card(s) from graveyard to Hand, Battlefield or Top of Library
          *  spReturnTgt:{Num Cards/Parameters}:{Type}:{To Zone}:{DrawBack}:{Spell Desc}
          *  
          *  X Count/Costs are not yet implemented.
          */
+        /*
         if (hasKeyword(card, "spReturnTgt") != -1) {
             int n = hasKeyword(card, "spReturnTgt");
             
@@ -3891,18 +3885,17 @@ public class CardFactory implements NewConstants {
                             list = list.getNotKeyword("At the beginning of the end step, sacrifice CARDNAME.");
                         }
                         
-/*                      // I failed to solve the problem above with this code.
-                        
-                        CardList tmp = list;
-                        for (int i = 0; i < tmp.size(); i++) {
-                            ArrayList<String> kw = tmp.get(i).getKeyword();
-                            for (int j = 0; j < kw.size(); j++) {
-                                if (kw.get(j).toString().startsWith("spReturnTgt")) {
-                                    list.remove(kw.get(j));
-                                }
-                            }
-                        }
-*/
+                        // I failed to solve the problem above with this code.
+                        //
+                        //CardList tmp = list;
+                        //for (int i = 0; i < tmp.size(); i++) {
+                        //    ArrayList<String> kw = tmp.get(i).getKeyword();
+                        //    for (int j = 0; j < kw.size(); j++) {
+                        //        if (kw.get(j).toString().startsWith("spReturnTgt")) {
+                        //            list.remove(kw.get(j));
+                        //        }
+                        //    }
+                        //}
                     }
                     return list;
                 }// getGraveyardList()
@@ -3939,7 +3932,7 @@ public class CardFactory implements NewConstants {
                card.addSpellAbility(bbRtrnTgt);
             }
         }// spReturnTgt
-        
+        */
         
         /**
          *  Generic return target card(s) from graveyard to Hand, Battlefield or Top of Library.

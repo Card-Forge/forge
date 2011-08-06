@@ -7,6 +7,3 @@ K:Madness:0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/call_to_the_netherworld.jpg
 End
-#
-#K:spReturnTgt:1:Creature.Black:Hand
-#

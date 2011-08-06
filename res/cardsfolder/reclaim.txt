@@ -7,6 +7,3 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reclaim.jpg
 End
-#
-#K:spReturnTgt:1:Card:TopofLibrary
-#

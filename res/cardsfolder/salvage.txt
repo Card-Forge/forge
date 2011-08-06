@@ -8,6 +8,3 @@ SVar:Rarity:Common
 #SVar:Picture:http://www.wizards.com/global/images/magic/general/salvage.jpg
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=6622&type=card
 End
-#
-#K:spReturnTgt:1:Card:TopofLibrary
-#

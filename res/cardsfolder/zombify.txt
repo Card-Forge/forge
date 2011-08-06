@@ -6,6 +6,3 @@ A:SP$Retrieve | Cost$ 3 B | Destination$ Battlefield | TgtPrompt$ Choose target 
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83342.jpg
 End
-#
-#K:spReturnTgt:1:Creature:Battlefield
-#

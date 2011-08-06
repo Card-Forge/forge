@@ -6,6 +6,3 @@ A:SP$Retrieve | Cost$ 1 G | Destination$ Hand | TgtPrompt$ Choose target card in
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/1e/en-us/card170.jpg
 End
-#
-#K:spReturnTgt:1:Card:Hand
-#
