@@ -1287,7 +1287,7 @@ public class CardFactory_Instants {
                 	Card attack[] = AllZone.Combat.getAttackers(); 
                 	Card target = null;
                     String player = card.getController();
-                    if(player != "Human"){
+                    if(player != Constant.Player.Human){
                         Object check = AllZone.Display.getChoiceOptional("Select creature", attack);
                         if(check != null) {
                            target = ((Card) check);
@@ -3361,7 +3361,7 @@ public class CardFactory_Instants {
                         CardList lands = new CardList(lib.getCards());
                         lands = lands.getType("Basic");
                         
-                        if(player.equals("Human") && lands.size() > 0) {
+                        if(player.equals(Constant.Player.Human) && lands.size() > 0) {
                             String[] choices = {"Yes", "No"};
                             Object choice = AllZone.Display.getChoice("Search for Basic Land?", choices);
                             if(choice.equals("Yes")) {

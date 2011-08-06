@@ -95,7 +95,7 @@ public class AllZone implements NewConstants {
     public static PlayerZone getZone(String zone, String player)
     {
     if (player.equals("")) { //this is a really bad hack, to allow raging goblin to attack on turn 1
-    	player = "Human"; 
+    	player = Constant.Player.Human; 
     	//TODO - someday, maybe this needs to be fixed so it's *not* an evil hack
     	//System.out.println("Evil hack");
     }

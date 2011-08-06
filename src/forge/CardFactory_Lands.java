@@ -189,7 +189,7 @@ class CardFactory_Lands {
                 public void resolve() {
 		    		String Color = "";
 
-		        	if(card.getController() == "Human"){
+		        	if(card.getController() == Constant.Player.Human){
 	                    if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard())) {                     
 	                        Object o = AllZone.Display.getChoice("Choose mana color", Constant.Color.ColorsOnly);
 	                        Color = (String) o;
@@ -219,7 +219,7 @@ class CardFactory_Lands {
                     	
                     }
                     }
-                    PlayerZone Hzone = AllZone.getZone(Constant.Zone.Play, "Human");  
+                    PlayerZone Hzone = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);  
                     if(zone != null) {
                         CardList creature2 = new CardList();
                         creature2.addAll(Hzone.getCards());
@@ -276,7 +276,7 @@ class CardFactory_Lands {
                             AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
                     creats = creats.getType("Creature");
                     a[0].setStackDescription(card.getName() + " - " + "target creature you control gains protection from the color of your choice until end of turn");
-		        	if(card.getController() == "Human") {
+		        	if(card.getController() == Constant.Player.Human) {
 		        		AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(a[0], creats, "Select target creature you control", false, false));
 		        	} else {
 	                    AllZone.Stack.add(a[0]);  		
@@ -3011,7 +3011,7 @@ class CardFactory_Lands {
             final SpellAbility X_ability = new Ability(card, "0") {
                 @Override
                 public boolean canPlayAI() {
-					PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Play, "Human");
+					PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
 			        CardList opponentCreatureList = new CardList(opponentPlayZone.getCards());
 			        opponentCreatureList = opponentCreatureList.getType("Creature");
       			  int n = ComputerUtil.getAvailableMana().size() - 1;

@@ -2248,7 +2248,7 @@ class CardFactory_Auras {
                 final SpellAbility untapAbility = new Ability(card, "0") {
                     @Override
                     public void resolve() {
-                        if(card.getController().equals("Human")) AllZone.InputControl.setInput(untap);
+                        if(card.getController().equals(Constant.Player.Human)) AllZone.InputControl.setInput(untap);
                         else {
                             CardList list = new CardList(AllZone.Computer_Play.getCards());
                             list = list.filter(new CardListFilter() {
