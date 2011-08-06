@@ -4868,6 +4868,7 @@ res/cardsfolder/opal_caryatid.txt -text svneol=native#text/plain
 res/cardsfolder/opal_champion.txt svneol=native#text/plain
 res/cardsfolder/opal_gargoyle.txt svneol=native#text/plain
 res/cardsfolder/opal_guardian.txt svneol=native#text/plain
+res/cardsfolder/opalescence.txt -text svneol=native#text/plain
 res/cardsfolder/opaline_bracers.txt -text svneol=native#text/plain
 res/cardsfolder/ophidian.txt svneol=native#text/plain
 res/cardsfolder/ophidian_eye.txt -text svneol=native#text/plain
