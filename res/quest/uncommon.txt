@@ -26,6 +26,7 @@ Arcane Sanctum
 Arcbound Lancer
 Arcbound Slith
 Arctic Flats
+Arctic Nishoba
 Arctic Wolves
 Armored Galleon
 Armored Griffin
@@ -233,6 +234,7 @@ Ghor-Clan Bloodscale
 Ghost Ship
 Ghost-Lit Redeemer
 Ghostly Changeling
+Ghostly Prison
 Giant Harbinger
 Giant Octopus
 Gift of Estates
@@ -443,6 +445,7 @@ Primal Boost
 Primeval Shambler
 Primoc Escapee
 Princess Lucrezia
+Propaganda
 Prowess of the Fair
 Psionic Blast
 Psychotrope Thallid

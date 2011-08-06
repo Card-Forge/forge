@@ -198,6 +198,7 @@ Colos Yearling
 Colossal Might
 Commune with Nature
 Compulsive Research
+Convolute
 Copper Myr
 Coral Eel
 Coral Merfolk
@@ -231,6 +232,7 @@ Darksteel Ingot
 Daru Lancer
 Dauthi Marauder
 Dauthi Slayer
+Daze
 Deadly Grub
 Deadly Insect
 Deadly Recluse
@@ -322,6 +324,7 @@ Ethercaste Knight
 Exclude
 Expunge
 Eye of Nowhere
+Eyeblight's Ending
 Faceless Butcher
 Fallen Askari
 False Defeat
@@ -363,6 +366,7 @@ Folk of the Pines
 Fomori Nomad
 Foot Soldiers
 Foothill Guide
+Force Spike
 Forest Bear
 Forgotten Cave
 Foul Imp
@@ -597,12 +601,15 @@ Makindi Shieldmate
 Malachite Golem
 Man-o'-War
 Mana Cylix
+Mana Leak
+Mana Tithe
 Manakin
 Maniacal Rage
 Manta Ray
 Manta Riders
 Marsh Boa
 Marsh Goblins
+Marsh Viper
 Mask of Law and Grace
 Mass of Ghouls
 Master Decoy
@@ -619,6 +626,7 @@ Metathran Zombie
 Minister of Impediments
 Minotaur Warrior
 Mire Boa
+Miscalculation
 Misshapen Fiend
 Mist Leopard
 Moaning Spirit
@@ -824,6 +832,7 @@ Rowan Treefolk
 Royal Falcon
 Rukh Egg
 Rune-Cervin Rider
+Runeboggle
 Runeclaw Bear
 Runed Stalactite
 Rushwood Dryad
@@ -951,6 +960,7 @@ Sootfeather Flock
 Southern Elephant
 Spark Spray
 Sparksmith
+Spell Snip
 Spidersilk Armor
 Spidersilk Net
 Spined Basher
@@ -1132,6 +1142,7 @@ Wall of Heat
 Wall of Ice
 Wall of Spears
 Wall of Wood
+Wanderbrine Rootcutters
 Wandering Goblins
 Wandering Ones
 Wandering Stream

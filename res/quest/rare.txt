@@ -58,6 +58,7 @@ Blinkmoth Nexus
 Blistering Firecat
 Blizzard Elemental
 Blood Crypt
+Bloodghast
 Bloodstained Mire
 Blurred Mongoose
 Boris Devilboon
@@ -99,6 +100,7 @@ Cloud Dragon
 Cloudhoof Kirin
 Cognivore
 Cold-Eyed Selkie
+Collective Restraint
 Collective Unconscious
 Commander Eesha
 Concordant Crossroads
@@ -217,6 +219,7 @@ Global Ruin
 Glorious Anthem
 Goblin Charbelcher
 Goblin Chieftain
+Goblin Guide
 Goblin King
 Goblin Marshal
 Goblin Piledriver
@@ -339,6 +342,7 @@ Magus of the Library
 Magus of the Moat
 Magus of the Tabernacle
 Mahamoti Djinn
+Malakir Bloodwitch
 Marble Titan
 March of Souls
 Maro
@@ -409,6 +413,7 @@ Okina, Temple to the Grandfathers
 Oran-Rief, the Vastwood
 Order of Whiteclay
 Oros, the Avenger
+Overbeing of Myth
 Overgrown Tomb
 Oversold Cemetery
 Oversoul of Dusk
@@ -417,6 +422,7 @@ Paladin en-Vec
 Pale Bears
 Palladia-Mors
 Pardic Dragon
+Peacekeeper
 Pearl Dragon
 Penumbra Wurm
 Phantom Nishoba
@@ -583,6 +589,7 @@ Thriss, Nantuko Primus
 Tidal Kraken
 Timber Protector
 Time Stretch
+Time Vault
 Time Walk
 Time Warp
 Timetwister
@@ -638,6 +645,7 @@ Weathered Wayfarer
 Weatherseed Treefolk
 Wheel of Fortune
 Will-o'-the-Wisp
+Windborn Muse
 Windswept Heath
 Wit's End
 Witch-Maw Nephilim

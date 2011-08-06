@@ -16,7 +16,7 @@ Protection from white
 
 Goblin Guide
 R
-Creature Goblin
+Creature Goblin Scout
 Whenever Goblin Guide attacks, defending player reveals the top card of his or her library. If it's a land card, that player puts it into his or her hand.
 2/2
 Haste
@@ -120,7 +120,7 @@ Upkeep:1 W
 
 Arctic Nishoba
 5 G
-Creature Cat
+Creature Cat Warrior
 When Arctic Nishoba is put into a graveyard from the battlefield, you gain 2 life for each age counter on it.
 6/6
 Trample
