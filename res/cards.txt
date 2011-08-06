@@ -1,3 +1,11 @@
+Glasses of Urza
+1
+Artifact
+tap: Look at target player's hand.
+SVar:Rarity:Uncommon
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/glasses_of_urza.jpg
+
 Gaddock Teeg
 G W
 Legendary Creature Kithkin Advisor
@@ -12054,13 +12062,6 @@ WheneverKeyword:EntersBattleField:Type/Artifact:Play:KeywordPumpEOT/Unblockable!
 SVar:BuffedBy:Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glassdust_hulk.jpg
-
-Glasses of Urza
-1
-Artifact
-tap: Look at target player's hand.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glasses_of_urza.jpg
 
 Glaze Fiend
 1 B
