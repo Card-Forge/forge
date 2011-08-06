@@ -1,3 +1,9 @@
+Witch-Maw Nephilim
+G W U B
+Creature Nephilim
+Whenever you play a spell, you may put two +1/+1 counters on Witch-Maw Nephilim. Whenever Witch-Maw Nephilim attacks, it gains trample until end of turn if its power is 10 or greater.
+1/1
+
 Blazing Specter
 2 B R
 Creature Specter

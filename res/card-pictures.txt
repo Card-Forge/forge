@@ -18,6 +18,7 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+witch_maw_nephilim.jpg      http://www.wizards.com/global/images/magic/general/witch_maw_nephilim.jpg
 scalpelexis.jpg             http://www.wizards.com/global/images/magic/general/scalpelexis.jpg
 riptide_pilferer.jpg        http://www.wizards.com/global/images/magic/general/riptide_pilferer.jpg
 headhunter.jpg              http://www.wizards.com/global/images/magic/general/headhunter.jpg

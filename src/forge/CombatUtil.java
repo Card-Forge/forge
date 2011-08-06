@@ -1041,6 +1041,45 @@ public class CombatUtil
 			  
 			  
 		  }//Flowstone Charger
+		  
+		  else if(c.getName().equals("Witch-Maw Nephilim") && !c.getCreatureAttackedThisTurn() && c.getNetAttack() >= 10)
+		  {
+			  final Card charger = c;
+			  Ability ability2 = new Ability(c,"0")
+			  {
+				 public void resolve() 
+				 {
+					 
+			         final Command untilEOT = new Command()
+			         {
+						private static final long serialVersionUID = -1703473800920781454L;
+
+						public void execute()
+			            {
+			              if(AllZone.GameAction.isCardInPlay(charger))
+			              {
+			                charger.removeIntrinsicKeyword("Trample");			               
+			              }
+			            }
+			          };//Command
+
+			          
+			          if(AllZone.GameAction.isCardInPlay(charger))
+			          {
+			            charger.addIntrinsicKeyword("Trample");			           
+
+			            AllZone.EndOfTurn.addUntil(untilEOT);
+			          }
+				 }//resolve
+				 
+			  };//ability
+			  
+			  ability2.setStackDescription(c.getName() + " -  gains trample until end of turn if its power is 10 or greater.");
+			  AllZone.Stack.add(ability2);
+			  
+			  
+		  }//Witch-Maw Nephilim
+		  
 		  else if(c.getName().equals("Jedit Ojanen of Efrava") && !c.getCreatureAttackedThisTurn())
 		  {
 			  final Card jedit = c;
