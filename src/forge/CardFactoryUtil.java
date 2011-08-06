@@ -200,7 +200,7 @@ public class CardFactoryUtil {
             {"Ghor-Clan Bloodscale", Integer.valueOf(1)}, {"Wild Aesthir", Integer.valueOf(1)},
             {"Viashino Slaughtermaster", Integer.valueOf(1)}, {"Twinblade Slasher", Integer.valueOf(1)},
             {"Boreal Centaur", Integer.valueOf(1)}, {"Knight of the Skyward Eye", Integer.valueOf(1)},
-            {"Chronatog", Integer.valueOf(1)},
+            {"Chronatog", Integer.valueOf(1)}, {"Putrid Leech", Integer.valueOf(1)},
 
             {"Phyrexian Battleflies", Integer.valueOf(2)}, {"Pit Imp", Integer.valueOf(2)},
             {"Roterothopter", Integer.valueOf(2)}, {"Vampire Bats", Integer.valueOf(2)},

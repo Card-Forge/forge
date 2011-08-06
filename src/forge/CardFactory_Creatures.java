@@ -16905,6 +16905,52 @@ public class CardFactory_Creatures {
         }//end Ley Druid
         //**************END****************END***********************
 
+        //****************************START*****************
+        else if(cardName.equals("Putrid Leech")) {
+        	final SpellAbility ability = new Ability_Activated(card, "0") 
+        	{
+				private static final long serialVersionUID = 2092968545127233062L;
+
+				public void resolve()
+        		{
+					//TODO: make this part of the cost
+					AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(2);
+        			final Command EOT = new Command() {
+                         private static final long serialVersionUID = -8840812331316327448L;
+                         
+                         public void execute() {
+                             if(AllZone.GameAction.isCardInPlay(card)) {
+                                 card.addTempAttackBoost(-2);
+                                 card.addTempDefenseBoost(-2);
+                             }
+                         }
+                     };
+                     card.addTempAttackBoost(2);
+                     card.addTempDefenseBoost(2);
+                     AllZone.EndOfTurn.addUntil(EOT);
+                     card.setAbilityUsed(card.getAbilityUsed() + 1);
+        		}
+				
+				
+				public boolean canPlay() {
+                    return super.canPlay() && (CardFactoryUtil.canUseAbility(card));
+				}
+				
+				
+				public boolean canPlayAI()
+				{
+					Combat c = ComputerUtil.getAttackers();
+                    CardList list = new CardList(c.getAttackers());
+                    
+                    //could this creature attack?, if attacks, do not use ability
+					return AllZone.Computer_Life.getLife() > 5 && list.contains(card) && AllZone.Phase.getPhase().equals(Constant.Phase.Main1);
+				}
+        	};
+        	ability.setDescription("Pay 2 life: Putrid Leech gets +2/+2 until end of turn. Activate this ability only once each turn.");
+        	ability.setStackDescription(card + " - gets +2/+2 until end of turn.");
+        	card.addSpellAbility(ability);
+        }
+        //**************END****************END***********************
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

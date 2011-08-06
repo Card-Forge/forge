@@ -1,3 +1,9 @@
+Putrid Leech
+B G
+Creature Zombie Leech
+no text
+2/2
+
 Cave Sense
 1 R
 Enchantment Aura
