@@ -2943,9 +2943,12 @@ public class GameActionUtil {
 									"Creature", "Bird"}, 1, 1, new String[] {"Flying"});
 						}
 					}; // ability2
-
-					ability2.setStackDescription(card.getName() + " - " + c.getController()
-							+ " played a blue spell, put a 1/1 blue Bird token with flying into play.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - ").append(c.getController());
+					sb.append(" played a blue spell, put a 1/1 blue Bird token with flying into play.");
+					ability2.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability2);
 				}
 			}//if
@@ -2962,9 +2965,12 @@ public class GameActionUtil {
 								"Creature", "Wolf"}, 2, 2, new String[] {""});
 					}
 				}; // ability
-
-				ability.setStackDescription(card.getName() + " - " + c.getController()
-						+ " played a green spell, put a 2/2 green Wolf token into play.");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - ").append(c.getController());
+				sb.append(" played a green spell, put a 2/2 green Wolf token into play.");
+				ability.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability);
 			}
 		}//if
@@ -3002,8 +3008,6 @@ public class GameActionUtil {
                             	//AllZone.GameAction.gainLife(card.getController(), 1);
                             	card.getController().gainLife(1);
                             }
-                            	
-
                         }// resolve()
                     };//ability2
                     
@@ -3032,8 +3036,13 @@ public class GameActionUtil {
 							c.getController().subtractLife(1, card);
 						} //resolve
 					};//ability
-					ability.setStackDescription(card.getName() + " - " + c.getController() + 
-							" played a "+card.getChosenColor()+" spell, " + c.getController()+" loses 1 life.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - ").append(c.getController());
+					sb.append(" played a ").append(card.getChosenColor()).append(" spell, ");
+					sb.append(c.getController()).append(" loses 1 life.");
+					ability.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability);
 				}
 			}//if
@@ -3066,10 +3075,13 @@ public class GameActionUtil {
 					player_d.addDamage(1, F_card);
 					//AllZone.GameAction.addDamage(player_d, F_card, 1);
 				}
-			};
-			ability.setStackDescription(list.get(i) + " - Deals 1 damage to him or her");
+			};// Ability
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(list.get(i)).append(" - Deals 1 damage to him or her");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
-
 		}
 	}
 	
@@ -3083,8 +3095,12 @@ public class GameActionUtil {
 				public void resolve() {
 					player.addDamage(1, source);
 				}
-			};
-			ability.setStackDescription(source + " - deals 1 damage to "+player+".");
+			};// Ability
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(source).append(" - deals 1 damage to ").append(player).append(".");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}
 	}
@@ -3644,7 +3660,11 @@ public class GameActionUtil {
 					}
 				}//resolve
 			};//sacrificeCreature
-			sacrificeCreature.setStackDescription(abyss.getName()+" - destroy a nonartifact creatur of your choice.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(abyss.getName()).append(" - destroy a nonartifact creatur of your choice.");
+			sacrificeCreature.setStackDescription(sb.toString());
+			
 			if(abyss_getTargets(player,abyss).size() > 0)
 				AllZone.Stack.add(sacrificeCreature);
 		}//end for
@@ -3765,7 +3785,12 @@ public class GameActionUtil {
 					player.addDamage(2, c);
 				}
 			};
-			sacrificeArtifact.setStackDescription(c.getName()+" - sacrifice an artifact or "+c.getName()+" becomes tapped and deals 2 damage to you.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(c.getName()).append(" - sacrifice an artifact or ");
+			sb.append(c.getName()).append(" becomes tapped and deals 2 damage to you.");
+			sacrificeArtifact.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(sacrificeArtifact);
 		}//end for
 	}
@@ -3812,15 +3837,23 @@ public class GameActionUtil {
 			creatures.remove(c);
 			if(creatures.size() == 0) {
 				//there are no creatures to sacrifice, so we must do the 7 damage
-				sevenDamage.setStackDescription(c.getName()+" - deals 7 damage to controller");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(c.getName()).append(" - deals 7 damage to controller");
+				sevenDamage.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(sevenDamage);
 			}
 			else {
-				sacrificeCreature.setStackDescription(c.getName()+" - sacrifice a creature.");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(c.getName()).append(" - sacrifice a creature.");
+				sacrificeCreature.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(sacrificeCreature);
 			}
 		}//end for
-	}
+	}// upkeep_Lord_of_the_Pit()
 	
 	private static void upkeep_Drop_of_Honey() {
 		/*
@@ -3888,11 +3921,15 @@ public class GameActionUtil {
 						return humanCreatures.get(0);
 					}
 				}
-			};
-			ability.setStackDescription(c.getName()+" - destroy 1 creature with lowest power.");
+			};// Ability
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(c.getName()).append(" - destroy 1 creature with lowest power.");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}//end for
-	}
+	}// upkeep_Drop_of_Honey()
 	
 	/**
 	 * runs the upkeep for Genesis
@@ -3950,7 +3987,11 @@ public class GameActionUtil {
 				private static final long serialVersionUID = -5102763277280782548L;
 
 				public void execute() {
-					ability.setStackDescription(c.getName()+" - return 1 creature from your graveyard to your hand");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(c.getName()).append(" - return 1 creature from your graveyard to your hand");
+					ability.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability);
 				}
 			};
@@ -3966,7 +4007,11 @@ public class GameActionUtil {
 			} else //computer
 			{
 				if(ComputerUtil.canPayCost(ability)) {
-					ability.setStackDescription(c.getName()+" - return 1 creature from your graveyard to your hand");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(c.getName()).append(" - return 1 creature from your graveyard to your hand");
+					ability.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability);
 				}
 			}
@@ -4026,11 +4071,11 @@ public class GameActionUtil {
                     }
                 } // resolve
             }; // ability
+            
             StringBuilder sb = new StringBuilder();
             sb.append("Wall of Reverence - ").append(player).append(" gains life equal to target creature's power.");
             ability.setStackDescription(sb.toString());
-            // ability.setStackDescription("Wall of Reverence - "
-            //         + player + " gains life equal to target creature's power.");
+            
             AllZone.Stack.add(ability);
         }
     }//endOfTurn_Wall_Of_Reverence()
@@ -4075,7 +4120,11 @@ public class GameActionUtil {
 					 AllZone.Phase.addExtraTurn(card.getController());
 				}
 			};
-			ability.setStackDescription(card + " - " +card.getController() + " takes an extra turn.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(card).append(" - ").append(card.getController()).append(" takes an extra turn.");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}
 	}
@@ -4200,7 +4249,10 @@ public class GameActionUtil {
 				crd.addCounter(Counters.P1P1, 1);
 			}
 		};
-		ability.setStackDescription(c.getName() + " - Ally: gets a +1/+1 counter.");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(c.getName()).append(" - Ally: gets a +1/+1 counter.");
+		ability.setStackDescription(sb.toString());
 
 		if(c.getController().equals(AllZone.HumanPlayer)) {
 			if(showAllyDialog(c)) AllZone.Stack.add(ability);
@@ -4219,10 +4271,12 @@ public class GameActionUtil {
 				crd.addCounter(Counters.P1P1, 1);
 			}
 		};
-
-		ability.setStackDescription(c.getName() + " - Ally: " + c.getController()
-				+ " puts a 2/2 green Wolf creature token onto the battlefield, and adds a +1/+1 on " + c.getName()
-				+ ".");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(c.getName()).append(" - Ally: ").append(c.getController());
+		sb.append(" puts a 2/2 green Wolf creature token onto the battlefield, and adds a +1/+1 on ");
+		sb.append(c.getName()).append(".");
+		ability.setStackDescription(sb.toString());
 
 		if(c.getController().equals(AllZone.HumanPlayer)) {
 			if(showAllyDialog(c)) AllZone.Stack.add(ability);
@@ -4282,9 +4336,11 @@ public class GameActionUtil {
 
 			}
 		};
-
-		ability.setStackDescription(c.getName() + " - Ally: Ally creatures you control gain " + keyword
-				+ " until end of turn.");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(c.getName()).append(" - Ally: Ally creatures you control gain ");
+		sb.append(keyword).append(" until end of turn.");
+		ability.setStackDescription(sb.toString());
 
 		if(c.getController().equals(AllZone.HumanPlayer)) {
 			if(showAllyDialog(c)) AllZone.Stack.add(ability);
@@ -4306,8 +4362,10 @@ public class GameActionUtil {
 				crd.getController().gainLife(allies.size());
 			}
 		};
-
-		ability.setStackDescription(c.getName() + " - Ally: gain life equal to the number of allies you control.");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(c.getName()).append(" - Ally: gain life equal to the number of allies you control.");
+		ability.setStackDescription(sb.toString());
 
 		if(c.getController().equals(AllZone.HumanPlayer)) {
 			if(showAllyDialog(c)) AllZone.Stack.add(ability);
@@ -4330,9 +4388,11 @@ public class GameActionUtil {
 					ally.addCounter(Counters.P1P1, 1);
 				}
 			}
-		};
-		ability.setStackDescription(c.getName()
-				+ " - Ally: put a +1/+1 counter on each Ally creature you control.");
+		};// Ability
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(c.getName()).append(" - Ally: put a +1/+1 counter on each Ally creature you control.");
+		ability.setStackDescription(sb.toString());
 
 		if(c.getController().equals(AllZone.HumanPlayer)) {
 			if(showAllyDialog(c)) AllZone.Stack.add(ability);
