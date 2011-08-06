@@ -52,6 +52,7 @@ public class Card extends MyObservable {
     private boolean                      sacrificeAtEOT                    = false;
     private boolean                      kicked                            = false;
     private boolean                      reflectedLand                     = false;
+    private boolean						 levelUp						   = false;
     
     private boolean                      firstStrike                       = false;
     private boolean                      doubleStrike                      = false;
@@ -320,7 +321,12 @@ public class Card extends MyObservable {
      * @return true if this creature can "Level up", false otherwise
      */
     public boolean hasLevelUp() {
-    	return counters.containsKey(Counters.LEVEL);
+    	return levelUp;
+    }
+    
+    public void setLevelUp(boolean b)
+    {
+    	levelUp = b;
     }
     
     public String getSVar(String Var) {

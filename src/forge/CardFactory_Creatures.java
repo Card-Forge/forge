@@ -17531,6 +17531,8 @@ public class CardFactory_Creatures {
                 levelUp.setDescription("Level up " + manacost + " (" + manacost + ": Put a level counter on this. Level up only as a sorcery.)");
                 levelUp.setStackDescription(card + " - put a level counter on this.");
                 
+                card.setLevelUp(true);
+                
             }
         }//level up
         
