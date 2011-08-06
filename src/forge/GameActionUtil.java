@@ -27,6 +27,7 @@ public class GameActionUtil {
 		upkeep_Honden_of_Nights_Reach();
 		upkeep_Honden_of_Infinite_Rage();
 		upkeep_Land_Tax();
+		upkeep_Feedback();
 		upkeep_Greener_Pastures();
 		upkeep_Wort();
 		upkeep_Squee();
@@ -4805,6 +4806,35 @@ public class GameActionUtil {
 		}// if fewer lands than opponent
 
 	}
+	
+	private static void upkeep_Feedback() {
+        final String player = AllZone.Phase.getActivePlayer();
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+        
+        CardList list = new CardList(playZone.getCards());
+        list = list.filter(new CardListFilter() {
+            public boolean addCard(Card c) {
+                return c.isEnchantment() && c.isEnchanted();
+            }
+        });
+        
+        if(list.size() > 0) {
+        	Ability ability;
+        	for(Card target:list) {
+        		if(target.isEnchantedBy("Feedback")) {
+        			ability = new Ability(target, "0") {
+                        @Override
+                        public void resolve() {
+                            AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+                        }
+                    };
+                    
+                    ability.setStackDescription("Feedback -  deals 1 damage to "+ player);
+                    AllZone.Stack.add(ability);
+        		}
+        	}
+        }//list > 0
+    }//upkeep_Feedback()
 
 	private static void upkeep_Squee() {
 		final String player = AllZone.Phase.getActivePlayer();
