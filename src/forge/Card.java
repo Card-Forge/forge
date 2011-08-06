@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map.Entry;
+import forge.error.ErrorViewer;
 
 import com.esotericsoftware.minlog.Log;
 
@@ -2040,15 +2041,13 @@ public class Card extends MyObservable {
             {
                 if (!getController().equals(Controller))
                    return false;
-                Restrictions[i] = Restrictions[i].split("\\+YouCtrl")[0];
-                Restrictions[i].replaceAll(".YouCtrl", "");
+                Restrictions[i] = Restrictions[i].replaceAll(".YouCtrl", "");
             }
             else if (Restrictions[i].contains("YouDontCtrl"))
             {
                 if (getController().equals(Controller))
                    return false;
-                Restrictions[i] = Restrictions[i].split("\\+YouDontCtrl")[0];
-                Restrictions[i].replaceAll(".YouDontCtrl", "");
+                Restrictions[i] = Restrictions[i].replaceAll(".YouDontCtrl", "");
             }
         }
         return isValidCard(Restrictions);

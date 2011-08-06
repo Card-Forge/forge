@@ -1,0 +1,10 @@
+Name:Kiri-Onna
+ManaCost:4 U
+Types:Creature Spirit
+Text:When Kiri-Onna enters the battlefield, return target creature to its owner's hand.
+PT:2/2
+K:etbBounceTgt:Creature:Hand
+K:WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:MoveFrom-Play-Hand:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Spirit or Arcane spell, you may return Kiri-Onna to its owner's hand.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kiri_onna.jpg
+End
