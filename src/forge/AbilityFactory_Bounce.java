@@ -225,6 +225,8 @@ public class AbilityFactory_Bounce {
 			tgtCards.add(card);
 		}
 		
+		Card firstTarget = tgtCards.get(0);
+		
 		for(Card tgtC : tgtCards){
 	 	   if(AllZone.GameAction.isCardInPlay(tgtC) && (tgt == null || CardFactoryUtil.canTarget(card, tgtC))) {
 	         	if(tgtC.isToken())
@@ -252,6 +254,6 @@ public class AbilityFactory_Bounce {
 		}
 		
 		if (af.hasSubAbility())
-			CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
+			CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, firstTarget, sa);
      }
 }
