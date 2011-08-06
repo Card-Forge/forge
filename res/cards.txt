@@ -1,3 +1,126 @@
+Armored Galleon
+4 U
+Creature Human Pirate
+no text
+5/4
+CARDNAME can't attack unless defending player controls an Island.
+
+Dandan
+U U
+Creature Fish
+no text
+4/1
+CARDNAME can't attack unless defending player controls an Island.
+When you control no Islands, sacrifice this creature
+
+Deep-Sea Serpent
+4 U U
+Creature Serpent
+no text
+5/5
+CARDNAME can't attack unless defending player controls an Island.
+
+Ethereal Whiskergill
+3 U
+Creature Elemental
+no text
+4/3
+CARDNAME can't attack unless defending player controls an Island.
+Flying
+
+Manta Ray
+1 U U
+Creature Fish
+Manta Ray can't be blocked except by blue creatures.
+3/3
+CARDNAME can't attack unless defending player controls an Island.
+When you control no Islands, sacrifice this creature
+
+Pirate Ship
+4 U
+Creature Human Pirate
+no text
+4/3
+CARDNAME can't attack unless defending player controls an Island.
+When you control no Islands, sacrifice this creature
+
+Red Cliffs Armada
+4 U
+Creature Human Soldier
+no text
+5/4
+CARDNAME can't attack unless defending player controls an Island.
+
+Sea Monster
+4 U U
+Creature Serpent
+no text
+6/6
+CARDNAME can't attack unless defending player controls an Island.
+
+Sea Serpent
+5 U
+Creature Serpent
+no text
+5/5
+CARDNAME can't attack unless defending player controls an Island.
+When you control no Islands, sacrifice this creature
+
+Serpent of the Endless Sea
+4 U
+Creature Serpent
+Serpent of the Endless Sea's power and toughness are each equal to the number of Islands you control.
+0/0
+CARDNAME can't attack unless defending player controls an Island.
+
+Slipstream Eel
+5 U U
+Creature Fish Beast
+no text
+6/6
+CARDNAME can't attack unless defending player controls an Island.
+Cycling:1 U
+
+Slipstream Serpent
+7 U
+Creature Serpent
+no text
+6/6
+Morph:5 U
+CARDNAME can't attack unless defending player controls an Island.
+When you control no Islands, sacrifice this creature
+
+Steam Frigate
+2 U
+Creature Human Pirate
+no text
+3/3
+CARDNAME can't attack unless defending player controls an Island.
+
+Vodalian Knights
+1 U U
+Creature Merfolk Knight
+no text
+2/2
+First Strike
+CARDNAME can't attack unless defending player controls an Island.
+When you control no Islands, sacrifice this creature
+abPump U:Flying
+
+Wu Warship
+2 U
+Creature Human Soldier
+no text
+3/3
+CARDNAME can't attack unless defending player controls an Island.
+
+Zhou Yu, Chief Commander
+5 U U
+Legendary Creature Human Soldier
+no text
+8/8
+CARDNAME can't attack unless defending player controls an Island.
+
 Kargan Dragonlord
 R R
 Creature Human Warrior
@@ -17,13 +140,6 @@ Land
 Whenever a Mountain enters the battlefield under your control, if you control at least five other Mountains, you may have Valakut, the Molten Pinnacle deal 3 damage to target creature or player.
 Valakut, the Molten Pinnacle enters the battlefield tapped.
 tap: add R
-
-Serpent of the Endless Sea
-4 U
-Creature Serpent
-Serpent of the Endless Sea's power and toughness are each equal to the number of Islands you control.
-0/0
-This creature can't attack unless defending player controls an Island
 
 Sedraxis Specter
 U B R
@@ -6811,89 +6927,6 @@ B B B
 Instant
 As an additional cost to cast Kaervek's Spite, sacrifice all permanents you control and discard your hand. Target player loses 5 life.
 
-Sea Monster
-4 U U
-Creature Serpent
-no text
-6/6
-This creature can't attack unless defending player controls an Island
-
-Red Cliffs Armada
-4 U
-Creature Human Soldier
-no text
-5/4
-This creature can't attack unless defending player controls an Island
-
-Manta Ray
-1 U U
-Creature Fish
-Manta Ray can't be blocked except by blue creatures.
-3/3
-This creature can't attack unless defending player controls an Island
-When you control no Islands, sacrifice this creature
-
-Ethereal Whiskergill
-3 U
-Creature Elemental
-no text
-4/3
-This creature can't attack unless defending player controls an Island
-Flying
-
-Armored Galleon
-4 U
-Creature Human Pirate
-no text
-5/4
-This creature can't attack unless defending player controls an Island
-
-Deep-Sea Serpent
-4 U U
-Creature Serpent
-no text
-5/5
-This creature can't attack unless defending player controls an Island
-
-Sea Serpent
-5 U
-Creature Serpent
-no text
-5/5
-This creature can't attack unless defending player controls an Island
-When you control no Islands, sacrifice this creature
-
-Slipstream Eel
-5 U U
-Creature Fish Beast
-no text
-6/6
-This creature can't attack unless defending player controls an Island
-Cycling:1 U
-
-Slipstream Serpent
-7 U
-Creature Serpent
-no text
-6/6
-Morph:5 U
-This creature can't attack unless defending player controls an Island
-When you control no Islands, sacrifice this creature
-
-Steam Frigate
-2 U
-Creature Human Pirate
-no text
-3/3
-This creature can't attack unless defending player controls an Island
-
-Wu Warship
-2 U
-Creature Human Soldier
-no text
-3/3
-This creature can't attack unless defending player controls an Island
-
 Goblin Chieftain
 1 R R
 Creature Goblin
@@ -6913,39 +6946,6 @@ Creature Illusion
 no text
 2/1
 Flying
-
-Dandan
-U U
-Creature Fish
-no text
-4/1
-This creature can't attack unless defending player controls an Island
-When you control no Islands, sacrifice this creature
-
-Pirate Ship
-4 U
-Creature Human Pirate
-no text
-4/3
-This creature can't attack unless defending player controls an Island
-When you control no Islands, sacrifice this creature
-
-Zhou Yu, Chief Commander
-5 U U
-Legendary Creature Human Soldier
-no text
-8/8
-This creature can't attack unless defending player controls an Island
-
-Vodalian Knights
-1 U U
-Creature Merfolk Knight
-no text
-2/2
-First Strike
-This creature can't attack unless defending player controls an Island
-When you control no Islands, sacrifice this creature
-abPump U:Flying
 
 Serendib Sorcerer
 1 U U

@@ -289,7 +289,7 @@ public class CombatUtil {
         CardList list = new CardList(play.getCards());
         CardList temp;
         
-        if(c.getKeyword().contains("This creature can't attack unless defending player controls an Island")) {
+        if(c.getKeyword().contains("CARDNAME can't attack unless defending player controls an Island.")) {
             temp = list.getType("Island");
             if(temp.isEmpty()) return false;
         }
