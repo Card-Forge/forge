@@ -1,7 +1,7 @@
 Name:Gods' Eye, Gate to the Reikai
 ManaCost:no cost
 Types:Legendary Land
-Text:When Gods' Eye, Gate to the Reikai is put into a graveyard from play, put a 1/1 colorless Spirit creature token into play.
+Text:When CARDNAME is put into a graveyard from the battlefield, put a 1/1 colorless Spirit creature token onto the battlefield.
 K:tap: add 1
 SVar:SacMe:1
 SVar:Rarity:Uncommon

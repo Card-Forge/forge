@@ -1,7 +1,7 @@
 Name:Goblin Ringleader
 ManaCost:3 R
 Types:Creature Goblin
-Text:When Goblin Ringleader comes into play, reveal the top four cards of your library. Put all Goblin cards revealed this way into your hand and the rest on the bottom of your library.
+Text:When CARDNAME enters the battlefield, reveal the top four cards of your library. Put all Goblin cards revealed this way into your hand and the rest on the bottom of your library.
 PT:2/2
 K:Haste
 SVar:RemAIDeck:True

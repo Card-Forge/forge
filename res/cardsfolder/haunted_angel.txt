@@ -1,7 +1,7 @@
 Name:Haunted Angel
 ManaCost:2 W
 Types:Creature Angel
-Text:When Haunted Angel is put into a graveyard from play, remove Haunted Angel from the game and each other player puts a 3/3 black Angel creature token with flying into play.
+Text:When CARDNAME is put into a graveyard from the battlefield, exile Haunted Angel and each other player puts a 3/3 black Angel creature token with flying onto the battlefield.
 PT:3/3
 K:Flying
 SVar:RemAIDeck:True

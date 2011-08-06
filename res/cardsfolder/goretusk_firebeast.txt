@@ -1,7 +1,7 @@
 Name:Goretusk Firebeast
 ManaCost:5 R
 Types:Creature Beast
-Text:When Foretusk Firebeast comes into play, it deals 4 damage to target player.
+Text:When CARDNAME enters the battlefield, it deals 4 damage to target player.
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/jud/en-us/card34917.jpg

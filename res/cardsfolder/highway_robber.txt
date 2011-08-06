@@ -1,7 +1,7 @@
 Name:Highway Robber
 ManaCost:2 B B
 Types:Creature Human Mercenary
-Text:When Highway Robber comes into play, you gain 2 life and target opponent loses 2 life.
+Text:When CARDNAME enters the battlefield, target opponent loses 2 life and you gain 2 life.
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84505.jpg

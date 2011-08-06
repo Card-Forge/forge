@@ -1,7 +1,7 @@
 Name:Goblin Lackey
 ManaCost:R
 Types:Creature Goblin
-Text:Whenever Goblin Lackey deals damage to a player, you may put a Goblin permanent card from your hand into play.
+Text:Whenever CARDNAME deals damage to a player, you may put a Goblin permanent card from your hand onto the battlefield.
 PT:1/1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_lackey.jpg
