@@ -1342,7 +1342,7 @@ public class GameAction {
                         Command_Effects[F_Target] = Proper_resolve;      
                         if(Check_if_All_Targets(F_card, F_k).size() > 0) StackDescription = StackDescription + "all specified permanents get" + F_Amount[0] + " +1/+1 counters";
                         else StackDescription = StackDescription +  F_TargetCard[y] + " gets " + F_Amount[0] + 
-                        " " + (F_k[4].split("/")[0]).replaceFirst("CustomCounter.", "") + " "+((F_Amount[0]>1)?"counters.":"counter.");
+                        " " + (F_k[4].split("/")[0]).replaceFirst("CustomCounter.", "") + " "+((F_Amount[0]>1)?"counters":"counter");
                 	}
                 		
                 		// StatsPumpEOT/Power/Toughness
