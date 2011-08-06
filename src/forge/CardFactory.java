@@ -2210,7 +2210,7 @@ public class CardFactory implements NewConstants {
             tmpDesc = tmpDesc.substring(0, i);
             final String Selec = "Select a target";
             
-            final boolean TopofLibrary = (k.length == 3);
+            final String Destination = k[2];
             
             card.clearSpellAbility();
             
@@ -2268,13 +2268,14 @@ public class CardFactory implements NewConstants {
                     return tmpList.getValidCards(Tgts);
                 }
                 
-                @Override
+               @Override
                 public void resolve() {
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                         	if(getTargetCard().isToken()) AllZone.getZone(getTargetCard()).remove(getTargetCard());
-                        	else {  if(TopofLibrary) AllZone.GameAction.moveToTopOfLibrary(getTargetCard()); 
-					else {
+                        	else {  if(Destination.equals("TopofLibrary")) AllZone.GameAction.moveToTopOfLibrary(getTargetCard());
+					else if(Destination.equals("Exile")) AllZone.GameAction.removeFromGame(getTargetCard()); 
+					else if(Destination.equals("Hand")) {
                             			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, getTargetCard().getOwner());
                            	 		AllZone.GameAction.moveTo(hand, getTargetCard());
 					}
