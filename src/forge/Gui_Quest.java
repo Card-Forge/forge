@@ -440,7 +440,9 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("Harry Potter 2  		medium   	Sloth' deck, easier version of Beached As' mill and counter spell deck");
         sb.append("\r\n");
         sb.append("Harry Potter 3  		hard   	Beached As' deck, various milling cards, some speed up and counter spells");
-        sb.append("\r\n"); 
+        sb.append("\r\n");
+        sb.append("Higgins 3		hard   	Corwin72's Grixis Control deck, lots of threat removal and some creatures");
+        sb.append("\r\n");
         sb.append("Homer Simpson 1	easy	Morph + Regenerate BRU creatures, + Raise Dead");
         sb.append("\r\n");
         sb.append("Homer Simpson 2	medium	Morph + Regenerate BRU creatures, + Raise Dead");
