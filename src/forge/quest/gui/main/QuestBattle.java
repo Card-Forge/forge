@@ -247,7 +247,7 @@ public class QuestBattle extends QuestSelectablePanel {
                         icon));
             }
             catch (NullPointerException e) {
-                System.out.println("Invalid Deck, Fix me:" + opponentName);
+                System.out.println("Missing Deck Description. Fix me:" + opponentName);
                 opponentList.add(new QuestBattle(opponentName,
                         "<<Unknown>>",
                         "<<Unknown>>",
