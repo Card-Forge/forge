@@ -2381,7 +2381,7 @@ public class GameAction {
                 	n = Integer.parseInt(PC);
                 if (n > 1)
                     card.setRandomPicture(generator.nextInt(n));
-                if (card.getSets().size() > 0)
+                if ((card.getSets().size() > 0) && card.getCurSetCode().equals(""))
                 	card.setRandomSetCode();
 
                     //System.out.println("human random number:" + card.getRandomPicture());
@@ -2404,7 +2404,7 @@ public class GameAction {
                     card.setRandomPicture(generator.nextInt(n));
                     //System.out.println("computer random number:" + card.getRandomPicture());
                 //}
-                if (card.getSets().size() > 0)
+                if ((card.getSets().size() > 0) && card.getCurSetCode().equals(""))
                 	card.setRandomSetCode();
                 
                 AllZone.Computer_Library.add(card);
