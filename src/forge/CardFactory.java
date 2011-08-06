@@ -348,7 +348,9 @@ public class CardFactory implements NewConstants {
 
 				@Override
     			public void resolve() {
-    				if(CardFactoryUtil.spCounter_MatchSpellAbility(tgt[0],splitTargetingRestrictions,targetType) && AllZone.Stack.contains(tgt[0]))
+    				if(CardFactoryUtil.spCounter_MatchSpellAbility(tgt[0],splitTargetingRestrictions,targetType) 
+    						&& AllZone.Stack.contains(tgt[0])
+    						&& !tgt[0].getSourceCard().KeywordsContain("CARDNAME can't be countered."))
     				{
     					SpellAbility sa = tgt[0];
     					AllZone.Stack.remove(tgt[0]);
