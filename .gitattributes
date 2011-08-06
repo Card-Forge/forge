@@ -337,6 +337,7 @@ src/arcane/ui/CardArea.java svneol=native#text/plain
 src/arcane/ui/CardPanel.java svneol=native#text/plain
 src/arcane/ui/CardPanelContainer.java svneol=native#text/plain
 src/arcane/ui/HandArea.java svneol=native#text/plain
+src/arcane/ui/PlayArea.java svneol=native#text/plain
 src/arcane/ui/ScaledImagePanel.java -text svneol=native#text/plain
 src/arcane/ui/ViewPanel.java svneol=native#text/plain
 src/arcane/ui/util/Animation.java svneol=native#text/plain

@@ -307,9 +307,6 @@ public class CardPanel extends JPanel implements CardContainer{
 	        showCastingCost = true;
         }
         
-        if(image != imagePanel.srcImage) {
-            setImage(image, image);
-            repaint();
-        }
+        setImage(image, image);
 	}
 }

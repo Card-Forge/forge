@@ -1129,15 +1129,11 @@ public class Card extends MyObservable {
     }
     
     public boolean isEquipped() {
-        Card c[] = new Card[equippedBy.size()];
-        equippedBy.toArray(c);
-        return c.length != 0;
+        return equippedBy.size() != 0;
     }
     
     public boolean isEquipping() {
-        Card c[] = new Card[equipping.size()];
-        equippedBy.toArray();
-        return c.length != 0;
+        return equipping.size() != 0;
     }
     
     public void addEquippedBy(Card c) {
@@ -1199,15 +1195,11 @@ public class Card extends MyObservable {
     }
     
     public boolean isEnchanted() {
-        Card c[] = new Card[enchantedBy.size()];
-        enchantedBy.toArray(c);
-        return c.length != 0;
+        return enchantedBy.size() != 0;
     }
     
-    public boolean isEnchanting() {
-        Card c[] = new Card[enchanting.size()];
-        enchantedBy.toArray();
-        return c.length != 0;
+    public boolean isEnchanting() {;
+        return enchanting.size() != 0;
     }
     
     public void addEnchantedBy(Card c) {

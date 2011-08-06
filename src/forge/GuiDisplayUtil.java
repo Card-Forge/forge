@@ -9,13 +9,18 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.event.MouseInputAdapter;
+
+import arcane.ui.PlayArea;
+import arcane.ui.util.Animation;
 
 import forge.gui.game.CardPanel;
 import forge.properties.NewConstants;
@@ -833,4 +838,64 @@ public class GuiDisplayUtil implements NewConstants {
         }
     }
     //~
+    
+    public static void setupPlayZone(PlayArea p, Card c[]) {
+    	List<Card> tmp, diff;
+        tmp = new ArrayList<Card>();
+        for(arcane.ui.CardPanel cpa : p.cardPanels)
+                tmp.add(cpa.gameCard);
+        diff = new ArrayList<Card>(tmp);
+        diff.removeAll(Arrays.asList(c));
+        if(diff.size() == p.cardPanels.size())
+                p.clear();
+        else {
+                for(Card card : diff) {
+                        p.removeCardPanel(p.getCardPanel(card.getUniqueNumber()));
+                }
+        }
+        diff = new ArrayList<Card>(Arrays.asList(c));
+        diff.removeAll(tmp);
+        
+        arcane.ui.CardPanel toPanel = null;
+        for(Card card : diff) {
+        	toPanel = p.addCard(card);
+        	Animation.moveCard(toPanel);
+        }
+        
+        for(Card card : c){
+        	toPanel = p.getCardPanel(card.getUniqueNumber());
+        	if(card.isTapped()){
+        		toPanel.tapped = true;
+        		toPanel.tappedAngle = arcane.ui.CardPanel.TAPPED_ANGLE;
+        	}
+        	else {
+        		toPanel.tapped = false;
+        		toPanel.tappedAngle = 0;
+        	}
+        	toPanel.attachedPanels.clear();
+        	if(card.isEnchanted()){
+        		ArrayList<Card> enchants = card.getEnchantedBy();
+        		for(Card e : enchants){
+        			toPanel.attachedPanels.add(p.getCardPanel(e.getUniqueNumber()));
+        		}
+        	}
+        	if(card.isEnchanting() && card.getEnchanting().size() == 1){
+        		toPanel.attachedToPanel = p.getCardPanel(card.getEnchanting().get(0).getUniqueNumber());
+        	} 
+        	else toPanel.attachedToPanel = null;
+        	
+        	if(card.isEquipped()){
+        		ArrayList<Card> enchants = card.getEquippedBy();
+        		for(Card e : enchants){
+        			toPanel.attachedPanels.add(p.getCardPanel(e.getUniqueNumber()));
+        		}
+        	}
+        	
+        	if(card.isEquipping() && card.getEquipping().size() == 1){
+        		toPanel.attachedToPanel = p.getCardPanel(card.getEquipping().get(0).getUniqueNumber());
+        	} 
+        	else toPanel.attachedToPanel = null;
+        }
+        p.repaint();
+    }
 }

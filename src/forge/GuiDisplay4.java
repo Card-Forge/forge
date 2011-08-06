@@ -68,6 +68,7 @@ import org.jdesktop.swingx.JXMultiSplitPane;
 import org.jdesktop.swingx.MultiSplitLayout.Node;
 
 import arcane.ui.HandArea;
+import arcane.ui.PlayArea;
 import arcane.ui.ViewPanel;
 import arcane.ui.util.Animation;
 
@@ -329,12 +330,26 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                 }
             }//mouseMoved
         });
-        playerLandPanel.addMouseMotionListener(GuiDisplayUtil.getCardDetailMouse(this));
-        playerCreaturePanel.addMouseMotionListener(GuiDisplayUtil.getCardDetailMouse(this));
+        
+        playerPlayPanel.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent me) {
+                Card c = playerPlayPanel.getCardFromMouseOverPanel();
+                if(c != null) {
+                    setCard(c);
+                }
+            }//mouseMoved
+        });
        
-        oppLandPanel.addMouseMotionListener(GuiDisplayUtil.getCardDetailMouse(this));
-        oppCreaturePanel.addMouseMotionListener(GuiDisplayUtil.getCardDetailMouse(this));
-       
+        oppPlayPanel.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent me) {
+                Card c = oppPlayPanel.getCardFromMouseOverPanel();
+                if(c != null) {
+                    setCard(c);
+                }
+            }//mouseMoved
+        });
 
 
         //opponent life mouse listener
@@ -356,63 +371,56 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         });
        
         //self play (land) ---- Mouse
-        playerLandPanel.addMouseListener(new MouseAdapter() {
+        playerPlayPanel.addMouseListener(new MouseAdapter() {
            
             @Override
             public void mousePressed(MouseEvent e) {
-                Object o = playerLandPanel.getComponentAt(e.getPoint());
-                if(o instanceof CardPanel) {
-                    CardPanel cardPanel = (CardPanel) o;
-                   
-                    if(cardPanel.getCard().isUntapped()) {
+            	Card c = playerPlayPanel.getCardFromMouseOverPanel();
+                if(c != null) {                   
+                    if(c.isUntapped()) {
                         MP3Player mp3 = new MP3Player("tap.mp3");
                         mp3.play();
                     }
                    
-                    if(cardPanel.getCard().isTapped()
+                    if(c.isTapped()
                             && (inputControl.input instanceof Input_PayManaCost || inputControl.input instanceof Input_PayManaCost_Ability)) {
-                       
-                        while(cardPanel.connectedCard != null) {
-                            cardPanel = cardPanel.connectedCard;
-                           
-                            if(cardPanel.getCard().isUntapped()) {
-                               
+                    	arcane.ui.CardPanel cardPanel = playerPlayPanel.getCardPanel(c.getUniqueNumber());
+                    	for(arcane.ui.CardPanel cp : cardPanel.attachedPanels) {                           
+                            if(cp.getCard().isUntapped()) {                              
                                 break;
                             }
                         }
                     }
                    
-                    inputControl.selectCard(cardPanel.getCard(), AllZone.Human_Play);
+                    inputControl.selectCard(c, AllZone.Human_Play);
                    
                 }
             }
         });
         //self play (no land) ---- Mouse
-        playerCreaturePanel.addMouseListener(new MouseAdapter() {
+        playerPlayPanel.addMouseListener(new MouseAdapter() {
            
             @Override
             public void mousePressed(MouseEvent e) {
-                Object o = playerCreaturePanel.getComponentAt(e.getPoint());
-                if(o instanceof CardPanel) {
-                    CardPanel cardPanel = (CardPanel) o;
-                   
+            	Card c = playerPlayPanel.getCardFromMouseOverPanel();
+                if(c != null) {                   
                     CardList att = new CardList(AllZone.Combat.getAttackers());
                     //CardList block = AllZone.Combat.getAllBlockers();
                    
-                    if((cardPanel.getCard().isTapped() || cardPanel.getCard().hasSickness() || ((cardPanel.getCard().getKeyword().contains("Vigilance")) && att.contains(cardPanel.getCard())))
+                    if((c.isTapped() ||c.hasSickness() || ((c.getKeyword().contains("Vigilance")) && att.contains(c)))
                             && (inputControl.input instanceof Input_Attack)) {
-                        while(cardPanel.connectedCard != null) {
-                            cardPanel = cardPanel.connectedCard;
-                            if(cardPanel.getCard().isUntapped() && !cardPanel.getCard().hasSickness()) {
+                    	arcane.ui.CardPanel cardPanel = playerPlayPanel.getCardPanel(c.getUniqueNumber());
+                        for(arcane.ui.CardPanel cp : cardPanel.attachedPanels) {
+                            if(cp.getCard().isUntapped() && !cp.getCard().hasSickness()) {
                                 break;
                             }
                         }
                     }
                     //right click:
                     if(e.isMetaDown()) {
-                        if(att.contains(cardPanel.getCard()) && (inputControl.input instanceof Input_Attack))  {
-                            cardPanel.getCard().untap();
-                            AllZone.Combat.removeFromCombat(cardPanel.getCard());
+                        if(att.contains(c) && (inputControl.input instanceof Input_Attack))  {
+                            c.untap();
+                            AllZone.Combat.removeFromCombat(c);
                         }
                        
                         /*
@@ -426,7 +434,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                        
                     }
 
-                    else inputControl.selectCard(cardPanel.getCard(), AllZone.Human_Play);
+                    else inputControl.selectCard(c, AllZone.Human_Play);
                 }
             }
         });
@@ -448,27 +456,13 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         //computer
        
         //computer play (land) ---- Mouse
-        oppLandPanel.addMouseListener(new MouseAdapter() {
+        oppPlayPanel.addMouseListener(new MouseAdapter() {
            
             @Override
             public void mousePressed(MouseEvent e) {
-                Object o = oppLandPanel.getComponentAt(e.getPoint());
-                if(o instanceof CardPanel) {
-                    CardContainer cardPanel = (CardContainer) o;
-                    inputControl.selectCard(cardPanel.getCard(), AllZone.Computer_Play);
-                }
-            }
-        });
-       
-        //computer play (no land) ---- Mouse
-        oppCreaturePanel.addMouseListener(new MouseAdapter() {
-           
-            @Override
-            public void mousePressed(MouseEvent e) {
-                Object o = oppCreaturePanel.getComponentAt(e.getPoint());
-                if(o instanceof CardPanel) {
-                    CardContainer cardPanel = (CardContainer) o;
-                    inputControl.selectCard(cardPanel.getCard(), AllZone.Computer_Play);
+            	Card c = oppPlayPanel.getCardFromMouseOverPanel();
+                if(c != null) { 
+                    inputControl.selectCard(c, AllZone.Computer_Play);
                 }
             }
         });
@@ -663,68 +657,34 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         AllZone.Human_Hand.updateObservers();
         //END, self hand
        
-        //self play (land)
+        //self play
         AllZone.Human_Play.addObserver(new Observer() {
             public void update(Observable a, Object b) {
-                //PlayerZone pZone = (PlayerZone) a; //unused
-                JPanel p = playerLandPanel;
-                p.removeAll();
+                PlayerZone pZone = (PlayerZone) a;
+                PlayArea p = playerPlayPanel;;
                
-                GuiDisplayUtil.setupLandPanel(p, AllZone.Human_Play.getCards());
-                p.revalidate();
-                p.repaint();
+                Card c[] = pZone.getCards();
+               
+                GuiDisplayUtil.setupPlayZone(p, c);
             }
         });
         AllZone.Human_Play.updateObservers();
-        //END - self play (only land)
+        //END - self play
        
 
-        //self play (no land)
-        AllZone.Human_Play.addObserver(new Observer() {
-            public void update(Observable a, Object b) {
-                //PlayerZone pZone = (PlayerZone) a; //unused
-                JPanel p = playerCreaturePanel;
-                p.removeAll();
-               
-                GuiDisplayUtil.setupNoLandPanel(p, AllZone.Human_Play.getCards());
-                p.revalidate();
-                p.repaint();
-            }
-        });
-        AllZone.Human_Play.updateObservers();
-        //END - self play (no land)
-       
-
-        //computer play (no land)
+        //computer play
         AllZone.Computer_Play.addObserver(new Observer() {
             public void update(Observable a, Object b) {
-                //PlayerZone pZone = (PlayerZone) a; //unused
-                JPanel p = oppCreaturePanel;
-                p.removeAll();
+            	PlayerZone pZone = (PlayerZone) a;
+                PlayArea p = oppPlayPanel;;
                
-                GuiDisplayUtil.setupNoLandPanel(p, AllZone.Computer_Play.getCards());
+                Card c[] = pZone.getCards();
                
-                p.revalidate();
-                p.repaint();
+                GuiDisplayUtil.setupPlayZone(p, c);
             }
         });
         AllZone.Computer_Play.updateObservers();
-        //END - computer play (no land)
-       
-        //computer play (land)
-        AllZone.Computer_Play.addObserver(new Observer() {
-            public void update(Observable a, Object b) {
-                //PlayerZone pZone = (PlayerZone) a; //unused
-                JPanel p = oppLandPanel;
-                p.removeAll();
-               
-                GuiDisplayUtil.setupLandPanel(p, AllZone.Computer_Play.getCards());
-                p.revalidate();
-                p.repaint();
-            }
-        });
-        AllZone.Computer_Play.updateObservers();
-        //END - computer play (only land)
+        //END - computer play
        
     }//addObservers()
    
@@ -772,10 +732,8 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                     + " (LEAF weight=0.2 name=combat)"//
                     + " (LEAF weight=0.2 name=human)) "//
                     + "(COLUMN weight=1"//
-                    + " (LEAF weight=0.2 name=compyLand)"//
-                    + " (LEAF weight=0.2 name=compyPlay)"//
-                    + " (LEAF weight=0.2 name=humanPlay)"//
-                    + " (LEAF weight=0.2 name=humanLand)"//
+                    + " (LEAF weight=0.4 name=compyPlay)"//
+                    + " (LEAF weight=0.4 name=humanPlay)"//
                     + " (LEAF weight=0.2 name=humanHand)) "//
                     + "(COLUMN"//
                     + " (LEAF weight=0.5 name=detail)"//
@@ -1022,25 +980,23 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     }
    
     private void initZones(JPanel pane) {
+    	JScrollPane oppScroll = new JScrollPane();
+ 		oppPlayPanel = new PlayArea(oppScroll);
+ 		oppScroll.setBorder(BorderFactory.createEtchedBorder());
+ 		oppScroll.setViewportView(oppPlayPanel);
+        pane.add(new ExternalPanel(oppScroll), "compyPlay");
+    	
+        JScrollPane playScroll = new JScrollPane();
+		playerPlayPanel = new PlayArea(playScroll);
+		playScroll.setBorder(BorderFactory.createEtchedBorder());
+        playScroll.setViewportView(playerPlayPanel);
+        pane.add(new ExternalPanel(playScroll), "humanPlay");
+        
         JScrollPane handScroll = new JScrollPane();
         playerHandPanel = new HandArea(handScroll, this);
         playerHandPanel.setBorder(BorderFactory.createEtchedBorder());
-        Dimension di = playerHandPanel.getPreferredSize();
-        di.height = 100;
-        playerHandPanel.setPreferredSize(di);
-                handScroll.setViewportView(playerHandPanel);
-                pane.add(new ExternalPanel(handScroll), "humanHand");
-               
-        JPanel[] zones = {oppLandPanel, oppCreaturePanel, playerCreaturePanel, playerLandPanel};
-        String[] names = {"compyLand", "compyPlay", "humanPlay", "humanLand"};
-        for(int i = 0; i < names.length; i++) {
-            zones[i].setLayout(null);
-            zones[i].setBorder(BorderFactory.createEtchedBorder());
-            Dimension d = zones[i].getPreferredSize();
-            d.height = 100;
-            zones[i].setPreferredSize(d);
-            pane.add(new ExternalPanel(new JScrollPane(zones[i])), names[i]);
-        }
+        handScroll.setViewportView(playerHandPanel);
+        pane.add(new ExternalPanel(handScroll), "humanHand");
     }
    
     private void initCardPicture(JPanel pane) {
@@ -1092,10 +1048,8 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     JTextArea                       messageArea              = new JTextArea(1, 10);
     JTextArea                       combatArea               = new JTextArea();
     JPanel                          stackPanel               = new JPanel();
-    JPanel                          oppLandPanel             = new JPanel();
-    JPanel                          oppCreaturePanel         = new JPanel();
-    JPanel                          playerCreaturePanel      = new JPanel();
-    JPanel                          playerLandPanel          = new JPanel();
+    PlayArea                        oppPlayPanel             = null;
+    PlayArea                        playerPlayPanel          = null;
     HandArea                        playerHandPanel          = null;
     JPanel                          cdPanel                  = new JPanel();
     JLabel                          oppLifeLabel             = new JLabel();
