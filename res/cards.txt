@@ -1,3 +1,31 @@
+Belligerent Hatchling
+3 RW
+Creature Elemental
+Belligerent Hatchling enters the battlefield with four -1/-1 counters on it.  Whenever you cast a red spell, remove a -1/-1 counter from Belligerent Hatchling.  Whenever you cast a white spell, remove a -1/-1 counter from Belligerent Hatchling.
+6/6
+First Strike
+
+Noxious Hatchling
+3 BG
+Creature Elemental
+Noxious Hatchling enters the battlefield with four -1/-1 counters on it. Whenever you cast a black spell, remove a -1/-1 counter from Noxious Hatchling.  Whenever you cast a green spell, remove a -1/-1 counter from Noxious Hatchling.
+6/6
+Wither
+
+Sturdy Hatchling
+3 GU
+Creature Elemental
+Sturdy Hatchling enters the battlefield with four -1/-1 counters on it. Whenever you cast a green spell, remove a -1/-1 counter from Sturdy Hatchling.  Whenever you cast a blue spell, remove a -1/-1 counter from Sturdy Hatchling.
+6/6
+KPump GU:Shroud
+
+Voracious Hatchling
+3 WB
+Creature Elemental
+Voracious Hatchling enters the battlefield with four -1/-1 counters on it.  Whenever you cast a white spell, remove a -1/-1 counter from Voracious Hatchling.  Whenever you cast a black spell, remove a -1/-1 counter from Voracious Hatchling.
+6/6
+Lifelink
+
 Glimpse the Unthinkable
 U B
 Sorcery

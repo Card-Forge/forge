@@ -83,7 +83,10 @@ public class GameActionUtil
 		// card gets played
 		// (called in MagicStack.java)
 		Card c = sa.getSourceCard();
-
+		playCard_Belligerent_Hatchling(c);
+		playCard_Voracious_Hatchling(c);
+		playCard_Sturdy_Hatchling(c);
+		playCard_Noxious_Hatchling(c);
 		playCard_Forced_Fruition(c);
 		playCard_Standstill(c);
 		playCard_Memory_Erosion(c);
@@ -99,7 +102,249 @@ public class GameActionUtil
 		playCard_Mold_Adder(c);
 		playCard_Fable_of_Wolf_and_Owl(c);
 	}
+	public static void playCard_Belligerent_Hatchling(Card c)
+	{
+		final String controller = c.getController();
+			
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+				controller);
+		
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Belligerent Hatchling");
+
+		if (list.size() > 0){
+			if (CardUtil.getColors(c).contains(Constant.Color.Red))
+			{
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);
+						
+						Ability ability2 = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+								if (card.getCounters(Counters.M1M1)>0)
+									card.subtractCounter(Counters.M1M1, 1);
+							}
+							
+						}; // ability2
+			
+						ability2.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played a red spell, remove a -1/-1 counter from Belligerent Hatchling.");
+						AllZone.Stack.add(ability2);
+					}
+				}//if
+			}
+		
+			if (CardUtil.getColors(c).contains(Constant.Color.White))
+			{
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);
+						
+						Ability ability = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+							if (card.getCounters(Counters.M1M1)>0)
+								card.subtractCounter(Counters.M1M1, 1);
+							}
+							
+						}; // ability
+			
+						ability.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played a white spell, remove a -1/-1 counter from Belligerent Hatchling.");
+						AllZone.Stack.add(ability);
+					}
+			}//if
+			
+
+	}// Belligerent Hatchling
+
+	public static void playCard_Noxious_Hatchling(Card c)
+	{
+		final String controller = c.getController();
+			
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+				controller);
+		
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Noxious Hatchling");
+
+		if (list.size() > 0){
+			if (CardUtil.getColors(c).contains(Constant.Color.Black))
+			{
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);
+						
+						Ability ability2 = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+								if (card.getCounters(Counters.M1M1)>0)
+									card.subtractCounter(Counters.M1M1, 1);
+							}
+							
+						}; // ability2
+			
+						ability2.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played a black spell, remove a -1/-1 counter from Noxious Hatchling.");
+						AllZone.Stack.add(ability2);
+					}
+				}//if
+			}
+		
+			if (CardUtil.getColors(c).contains(Constant.Color.Green))
+			{
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);
+						
+						Ability ability = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+							if (card.getCounters(Counters.M1M1)>0)
+								card.subtractCounter(Counters.M1M1, 1);
+							}
+							
+						}; // ability
+			
+						ability.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played a green spell, remove a -1/-1 counter from Noxious Hatchling.");
+						AllZone.Stack.add(ability);
+					}
+			}//if
+			
+
+	}// Noxious Hatchling
 	
+	public static void playCard_Sturdy_Hatchling(Card c)
+	{
+		final String controller = c.getController();
+			
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+				controller);
+		
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Sturdy Hatchling");
+
+		if (list.size() > 0){
+			if (CardUtil.getColors(c).contains(Constant.Color.Blue))
+			{
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);
+						
+						Ability ability2 = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+								if (card.getCounters(Counters.M1M1)>0)
+									card.subtractCounter(Counters.M1M1, 1);
+							}
+							
+						}; // ability2
+			
+						ability2.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played a blue spell, remove a -1/-1 counter from Sturdy Hatchling.");
+						AllZone.Stack.add(ability2);
+					}
+				}//if
+			}
+		
+			if (CardUtil.getColors(c).contains(Constant.Color.Green))
+			{
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);
+						
+						Ability ability = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+							if (card.getCounters(Counters.M1M1)>0)
+								card.subtractCounter(Counters.M1M1, 1);
+							}
+							
+						}; // ability
+			
+						ability.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played a green spell, remove a -1/-1 counter from Sturdy Hatchling.");
+						AllZone.Stack.add(ability);
+					}
+			}//if
+			
+
+	}// Sturdy Hatchling
+	
+	public static void playCard_Voracious_Hatchling(Card c)
+	{
+		final String controller = c.getController();
+			
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+				controller);
+		
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Voracious Hatchling");
+
+		if (list.size() > 0){
+			if (CardUtil.getColors(c).contains(Constant.Color.Black))
+			{
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);
+						
+						Ability ability2 = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+								if (card.getCounters(Counters.M1M1)>0)
+									card.subtractCounter(Counters.M1M1, 1);
+							}
+							
+						}; // ability2
+			
+						ability2.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played a black spell, remove a -1/-1 counter from Voracious Hatchling.");
+						AllZone.Stack.add(ability2);
+					}
+				}//if
+			}
+		
+			if (CardUtil.getColors(c).contains(Constant.Color.White))
+			{
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);
+						
+						Ability ability = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+							if (card.getCounters(Counters.M1M1)>0)
+								card.subtractCounter(Counters.M1M1, 1);
+							}
+							
+						}; // ability
+			
+						ability.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played a white spell, remove a -1/-1 counter from Voracious Hatchling.");
+						AllZone.Stack.add(ability);
+					}
+			}//if
+			
+
+	}// Voracious Hatchling
     public static void playCard_Forced_Fruition(Card c)
     {
       PlayerZone hplay = AllZone.getZone(Constant.Zone.Play,

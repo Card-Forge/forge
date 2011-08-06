@@ -16,7 +16,31 @@ public class CardFactory_Creatures {
 
 	public static Card getCard(final Card card, String cardName, String owner, CardFactory cf)
 	{
-		
+		//*************** START *********** START **************************
+	    else if(cardName.equals("Belligerent Hatchling") || cardName.equals("Noxious Hatchling")
+	    		||cardName.equals("Shrewd Hatchling") ||cardName.equals("Sturdy Hatchling")
+	    		 || cardName.equals("Voracious Hatchling"))
+	    {
+	      final SpellAbility ability = new Ability(card, "0")
+	      {
+	        public void resolve()
+	        {
+	        	 card.addCounter(Counters.M1M1, 4); 
+	        }//resolve()
+	      };//SpellAbility
+	      Command intoPlay = new Command()
+	      {
+			private static final long serialVersionUID = 4757054648163014149L;
+
+			public void execute()
+	        {
+	          AllZone.Stack.add(ability);
+	        }
+	      };
+	      ability.setStackDescription(cardName + "enters the battlefield with four -1/-1 counters on it.");
+	      card.addComesIntoPlayCommand(intoPlay);
+	    }//*************** END ************ END **************************
+	    
 		//*************** START *********** START **************************
 	    if(cardName.equals("Filthy Cur"))
 	    {
