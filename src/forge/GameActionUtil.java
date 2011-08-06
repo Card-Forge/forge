@@ -6064,6 +6064,7 @@ public class GameActionUtil {
 		else if(c.getName().equals("Treva, the Renewer")) playerCombatDamage_Treva(c);
 		else if(c.getName().equals("Rith, the Awakener")) playerCombatDamage_Rith(c);
 		else if(c.getName().equals("Vorosh, the Hunter")) playerCombatDamage_Vorosh(c);
+		else if(c.getName().equals("Doomsday Specter")) opponent_Discard_Card_You_Choose(c);
 		
 		//Unused variable
 		//c.setDealtCombatDmgToOppThisTurn(true); 
@@ -6766,6 +6767,52 @@ public class GameActionUtil {
 
 			StringBuilder sb = new StringBuilder();
 			sb.append(c.getName()).append(" - ").append(player).append(" discards a card");
+			ability.setStackDescription(sb.toString());
+			
+			AllZone.Stack.add(ability);
+		}
+	}
+	
+	private static void opponent_Discard_Card_You_Choose(final Card source) {
+		final Player player = source.getController().getOpponent();
+
+		if(source.getNetAttack() > 0) {
+			SpellAbility ability = new Ability(source, "0") {
+				@Override
+				public void resolve() {
+					PlayerZone pzH = AllZone.getZone(Constant.Zone.Hand, player);
+					if(pzH.size() != 0) {
+						CardList dPHand = new CardList(pzH.getCards());
+						CardList dPChHand = new CardList(dPHand.toArray());
+
+						if(source.getController().isComputer()){
+							//hardcoded to 1, but if it needs to be changed...
+							for(int i = 0; i < 1; i++) {
+								if (dPChHand.size() > 0){
+									Card c = CardFactoryUtil.AI_getMostExpensivePermanent(dPChHand, source, false);
+									AllZone.Display.getChoiceOptional("Computer has chosen", new Card[] {c});
+									AllZone.HumanPlayer.discard(c, this);
+								}
+							}
+						}
+						else {
+							//human
+							AllZone.Display.getChoiceOptional("Revealed computer hand", dPHand.toArray());
+
+							//hardcode for 1, but if it needs to be expanded, it's here
+							for(int i = 0; i < 1; i++) {
+								if (dPChHand.size() > 0) {
+									Card dC = AllZone.Display.getChoice("Choose a card to be discarded", dPChHand.toArray());
+									AllZone.ComputerPlayer.discard(dC, this);
+								}
+							}
+						}
+					}
+				}
+			};// ability
+
+			StringBuilder sb = new StringBuilder();
+			sb.append(source.getName()).append(" - ").append(player).append(" discards a card of opponent's choice.");
 			ability.setStackDescription(sb.toString());
 			
 			AllZone.Stack.add(ability);

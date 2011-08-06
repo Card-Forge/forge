@@ -7738,7 +7738,6 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Cavern Harpy")) {
             final SpellAbility a1 = new Ability(card, "0") {
@@ -7824,6 +7823,48 @@ public class CardFactory_Creatures {
             StringBuilder sb = new StringBuilder();
             sb.append(card.getController()).append(" pays 1 life and returns Cavern Harpy back to owner's hand.");
             a1.setStackDescription(sb.toString());
+        }//*************** END ************ END **************************
+        
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Doomsday Specter")) {
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    Card c = getTargetCard();
+                    if(AllZone.GameAction.isCardInPlay(c)) {
+                        AllZone.GameAction.moveToHand(c);
+                    }
+                }
+            };
+            Command intoPlay = new Command() {
+				private static final long serialVersionUID = -1944407110865125254L;
+
+				public void execute() {
+                    CardList creatures = AllZoneUtil.getCreaturesInPlay(card.getController());
+                    creatures = creatures.filter(new CardListFilter() {
+                    	public boolean addCard(Card c) {
+                    		return c.isBlue() || c.isBlack();
+                    	}
+                    });
+                    
+                    AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, creatures,
+                            "Select blue or black creature you control.", false, false));
+                    ButtonUtil.disableAll();
+                    
+                }//execute()
+            };//Command
+            card.addComesIntoPlayCommand(intoPlay);
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(new Spell_Permanent(card) {
+				private static final long serialVersionUID = -1885027663323697759L;
+
+				@Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+            });
         }//*************** END ************ END **************************
         
 

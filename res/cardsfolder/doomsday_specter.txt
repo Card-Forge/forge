@@ -1,0 +1,11 @@
+Name:Doomsday Specter
+ManaCost:2 U B
+Types:Creature Specter
+Text:When CARDNAME enters the battlefield, return a blue or black creature you control to its owner's hand.\r\n\r\nWhenever CARDNAME deals combat damage to a player, look at that player's hand and choose a card from it. The player discards that card.
+PT:2/3
+K:Flying
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/doomsday_specter.jpg
+SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/103.jpg
+End
