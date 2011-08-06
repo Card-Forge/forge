@@ -1,7 +1,7 @@
 Name:Supreme Exemplar
 ManaCost:6 U
 Types:Creature Elemental
-Text:Champion an Elemental (When this enters the battlefield, sacrifice it unless you exile another Elemental you control. When this leaves the battlefield, that card returns to the battlefield.)
+Text:no text
 PT:10/10
 K:Flying
 K:Champion:Elemental

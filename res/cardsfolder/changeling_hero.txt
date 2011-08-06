@@ -1,7 +1,7 @@
 Name:Changeling Hero
 ManaCost:4 W
 Types:Creature Shapeshifter
-Text:Champion a creature (When this enters the battlefield, sacrifice it unless you exile another creature you control. When this leaves the battlefield, that card returns to the battlefield.)
+Text:no text
 PT:4/4
 K:Changeling
 K:Lifelink

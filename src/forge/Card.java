@@ -903,6 +903,21 @@ public class Card extends MyObservable {
                     String k = keyword.get(i);
                     k = k.replace(":", " ");
                     sbLong.append(k).append("\r\n");
+                } else if (keyword.get(i).startsWith("Champion")) {
+                	String k = getKeyword().get(i);
+                	String kk[] = k.split(":");
+                	if (kk[1].equals("Creature")) kk[1] = kk[1].toLowerCase();
+                	sbLong.append("Champion a");
+                	if (kk[1].toLowerCase().startsWith("a") 
+                			|| kk[1].toLowerCase().startsWith("e") 
+                			|| kk[1].toLowerCase().startsWith("i") 
+                			|| kk[1].toLowerCase().startsWith("o") 
+                			|| kk[1].toLowerCase().startsWith("u")) {
+                		sbLong.append("n");
+                	}
+                	sbLong.append(" ").append(kk[1]);
+                	sbLong.append(" (When this enters the battlefield, sacrifice it unless you exile another ").append(kk[1]);
+                	sbLong.append(" you control. When this leaves the battlefield, that card returns to the battlefield.)\r\n");
                 } else if (keyword.get(i).endsWith(".")) {
                     sbLong.append(keyword.get(i).toString()).append("\r\n");
                 } else if (keyword.get(i).contains("At the beginning of your upkeep, ") 
@@ -989,24 +1004,11 @@ public class Card extends MyObservable {
                 String k = getKeyword().get(i);
                 if(k.startsWith("Scry")) {
                     String kk[] = k.split(" ");
-                    //sb.append("Scry " + kk[1] + " (To scry X, look at the top X cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)\r\n");
                     sb.append("Scry ");
                     sb.append(kk[1]);
                     sb.append(" (To scry X, look at the top X cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)\r\n");
                 }
             }
-            
-            // Chapmion
-            if(!sb.toString().contains("Champion")) for(int i = 0; i < getKeyword().size(); i++) {
-                String k = getKeyword().get(i);
-                if(k.startsWith("Champion")) {
-                    String kk[] = k.split(":");
-                    sb.append("Champion a(n) ");
-                    sb.append(kk[1]);
-                    sb.append(" (When this enters the battlefield, sacrifice it unless you exile another "+kk[1]+" you control. When this leaves the battlefield, that card returns to the battlefield.)\r\n");
-                }
-            }
-            
             
             while (sb.toString().endsWith("\r\n")) {
                 sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n")+3);
@@ -1020,23 +1022,6 @@ public class Card extends MyObservable {
         
         sb.append(keywordsToText(keyword));
         
-/*
-        for(int i = 0; i < keyword.size(); i++) {
-            if(!keyword.get(i).toString().contains("CostChange")) {
-                if(i != 0) sb.append(", ");
-                if(!keyword.get(i).toString().contains("WheneverKeyword") 
-                        && !keyword.get(i).toString().contains("StaticEffect")) sb.append(keyword.get(i).toString()); 
-                else if(keyword.get(i).toString().contains("WheneverKeyword")) {                
-                     String k[] = keyword.get(i).split(":");
-                     sb.append(k[9]); 
-                } 
-                else if(keyword.get(i).toString().contains("StaticEffect")) {                
-                    String k[] = keyword.get(i).split(":");
-                    sb.append(k[5]); 
-                }
-            }
-        }
-*/
         // Give spellText line breaks for easier reading
         sb.append("\r\n");
         sb.append(text.replaceAll("\\\\r\\\\n", "\r\n"));
