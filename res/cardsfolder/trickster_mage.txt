@@ -3,7 +3,7 @@ ManaCost:U
 Types:Creature Human Spellshaper
 Text:no text
 PT:1/1
-A:AB$TapOrUntap | Cost$ U T Discard<1/Card> | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | SpellDescription$ You may tap or untap target artifact, creature, or land.
+A:AB$ TapOrUntap | Cost$ U T Discard<1/Card> | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | SpellDescription$ You may tap or untap target artifact, creature, or land.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trickster_mage.jpg

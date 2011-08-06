@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Creature Ogre Warrior
 Text:no text
 PT:5/4
-T:Mode$ SpellCast | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell, tap Ogre Recluse.
+T:Mode$ SpellCast | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell, tap CARDNAME.
 SVar:TrigTap:AB$Tap | Cost$ 0 | Defined$ Self
 SVar:AntiBuffedBy:Spell
 SVar:RemAIDeck:True
