@@ -22,6 +22,7 @@ public enum Counters {
     CHARGE(),
     CORPSE(),
     CREDIT(),
+    CURRENCY(),
     DELAY(),
     DEPLETION(),
     DEVOTION(),
