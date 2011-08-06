@@ -1869,6 +1869,27 @@ class CardFactory_Lands {
         
         
         //*************** START *********** START **************************
+        else if(cardName.equals("Sheltered Valley")) {
+        	
+        	final Command comesIntoPlay = new Command() {
+				private static final long serialVersionUID = 685604326470832887L;
+
+				public void execute() {
+					final Player player = card.getController();
+					CardList land = AllZoneUtil.getPlayerCardsInPlay(player, "Sheltered Valley");
+					land.remove(card);
+
+					if( land.size() > 0 ) {
+						for(Card c:land) AllZone.GameAction.sacrifice(c);
+					}
+				}
+        	};
+
+        	card.addComesIntoPlayCommand(comesIntoPlay);
+        }//*************** END ************ END **************************
+        
+        
+        //*************** START *********** START **************************
         else if(cardName.equals("Scorched Ruins")) {
             final Command comesIntoPlay = new Command() {
                private static final long serialVersionUID = 6175830918425915833L;

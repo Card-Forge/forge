@@ -48,6 +48,7 @@ public class GameActionUtil {
 		upkeep_Honden_of_Infinite_Rage();
 		upkeep_Vensers_Journal();
 		upkeep_Dega_Sanctuary();
+		upkeep_Sheltered_Valley();
 		upkeep_Land_Tax();
 		upkeep_Tangle_Wire();
 		upkeep_Mana_Vault();
@@ -9580,6 +9581,31 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}//for
 	}//upkeep_Dega_Sanctuary()
+	
+	private static void upkeep_Sheltered_Valley() {
+		final Player player = AllZone.Phase.getPlayerTurn();
+
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Sheltered Valley");
+
+		for(Card valley:list) {
+			final Card source = valley;
+			final Ability ability = new Ability(source, "0") {
+				public void resolve() {
+					CardList play = AllZoneUtil.getPlayerLandsInPlay(player);
+					if(play.size() <= 3) {
+						player.gainLife(1, source);
+					}
+				}
+			};//Ability
+
+			StringBuilder sb = new StringBuilder();
+			sb.append(source.getName()).append(" - ");
+			sb.append("if you control three or fewer lands, you gain 1 life.");
+			ability.setStackDescription(sb.toString());
+
+			AllZone.Stack.add(ability);
+		}//for
+	}//upkeep_Sheltered_Valley()
 
 	private static void upkeep_The_Rack() {
 		final Player player = AllZone.Phase.getPlayerTurn();

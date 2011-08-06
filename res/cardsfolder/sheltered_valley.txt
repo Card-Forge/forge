@@ -1,0 +1,8 @@
+Name:Sheltered Valley
+ManaCost:no cost
+Types:Land
+Text:If CARDNAME would enter the battlefield, instead sacrifice each other permanent named CARDNAME you control, then put CARDNAME onto the battlefield.\r\nAt the beginning of your upkeep, if you control three or fewer lands, you gain 1 life.
+K:tap: add 1
+SVar:Rarity:Rare
+SVar:Picture:http://wizards.com/global/images/magic/general/sheltered_valley.jpg
+End
