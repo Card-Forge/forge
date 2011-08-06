@@ -894,7 +894,7 @@ public class AbilityFactory_Counters {
 
 				@Override
 				public void showMessage() {
-					AllZone.Display.showMessage("Choose permanents and/or players");
+					AllZone.Display.showMessage("Proliferate: Choose permanents and/or players");
 					ButtonUtil.enableOnlyOK();
 				}
 

@@ -203,6 +203,9 @@ public class ManaCost {
         //need to reverse everything since the colored mana is stored first
         Collections.reverse(list);
         
+        for(int i = 0; i < xcounter; i++)
+        	sb.append(" ").append("X");
+        
         for(int i = 0; i < list.size(); i++) {
             sb.append(" ");
             sb.append(list.get(i).toString());

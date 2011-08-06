@@ -171,6 +171,7 @@ public class ComputerUtil
   }
   static public boolean canPayCost(SpellAbility sa)
   {
+	  Card card = sa.getSourceCard();
     CardList land = getAvailableMana();
    
     if(sa.getSourceCard().isLand() /*&& sa.isTapAbility()*/)
@@ -179,8 +180,18 @@ public class ComputerUtil
     }
  // Beached - Delete old
     String mana = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : sa.getManaCost();
+    
     ManaCost cost = new ManaCost(mana);
     
+    // Tack xMana Payments into mana here if X is a set value
+    if (sa.getPayCosts() != null && cost.xcounter > 0){
+    	String xSvar = card.getSVar("X").equals("Count$xPaid") ? "PayX" : "X"; 
+    	// For Count$xPaid set PayX in the AFs then use that here
+    	// Else calculate it as appropriate.
+		int manaToAdd = AbilityFactory.calculateAmount(card, xSvar, sa) * cost.xcounter;
+		cost.increaseColorlessMana(manaToAdd);
+    }
+
     cost = AllZone.GameAction.getSpellCostChange(sa, cost);
     if(cost.isPaid())
         return canPayAdditionalCosts(sa);
@@ -196,14 +207,11 @@ public class ComputerUtil
       {
          if(cost.isNeeded(colors.get(j)) && once == 0)
          {
-          //System.out.println(j + " color:" +colors.get(j));
            cost.payMana(colors.get(j));
-           //System.out.println("thinking, I just subtracted " + colors.get(j) + ", cost is now: " + cost.toString());
            once++;
          }
 
          if(cost.isPaid()) {
-            //System.out.println("Cost is paid.");
             return canPayAdditionalCosts(sa);
          }
       }
@@ -404,6 +412,19 @@ public class ComputerUtil
     String mana = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : sa.getManaCost();
     
     ManaCost cost = AllZone.GameAction.getSpellCostChange(sa, new ManaCost(mana));
+    
+    Card card = sa.getSourceCard();
+    // Tack xMana Payments into mana here if X is a set value
+    if (sa.getPayCosts() != null && cost.xcounter > 0){
+    	String xSvar = card.getSVar("X").equals("Count$xPaid") ? "PayX" : "X"; 
+    	// For Count$xPaid set PayX in the AFs then use that here
+    	// Else calculate it as appropriate.
+		int manaToAdd = AbilityFactory.calculateAmount(card, xSvar, sa) * cost.xcounter;
+		cost.increaseColorlessMana(manaToAdd);
+		//i think this is ok here
+		card.setXManaCostPaid(manaToAdd);
+    }
+    
     // Beached - Delete old
     if(cost.isPaid())
         return;
