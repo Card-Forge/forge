@@ -68,7 +68,8 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             AllZone.GameAction.checkWheneverKeyword(c,"EntersBattleField",null);
             
             PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
-            
+
+            /*
             //Amulet of Vigor
             if(c.isTapped()) {
                 final Card untapCrd = c;
@@ -84,7 +85,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 
                 for(int i = 0; i < AllZoneUtil.getPlayerCardsInPlay(c.getController(), "Amulet of Vigor").size(); i++)
                     AllZone.Stack.add(ability);
-            }
+            }*/
             
             if(c.isLand()) {
                 //System.out.println("A land was just put onto the battlefield: " + c.getName());
