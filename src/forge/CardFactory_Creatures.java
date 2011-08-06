@@ -17068,6 +17068,119 @@ public class CardFactory_Creatures {
 	    	card.addSpellAbility(ability);
 	    }//*************** END ************ END **************************
 	      
+	    //*************** START *********** START **************************
+	       if (cardName.equals("Magus of the Coffers"))
+	       {
+	          final SpellAbility ability = new Ability_Tap(card, "2")
+	          {
+	        	  
+				private static final long serialVersionUID = 138661285416402582L;
+				public void resolve()
+	             {
+	                Card mp = AllZone.ManaPool;//list.getCard(0);
+	                
+	                CardList swamps = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
+	                swamps = swamps.getType("Swamp");
+	                
+	                for(int i=0;i<swamps.size();i++)
+	                {
+	               	 mp.addExtrinsicKeyword("ManaPool:B");
+	                }
+	             }
+	             public boolean canPlayAI()
+	             {
+	                return false;
+	             }
+	          };
+	          
+	          ability.setDescription("2, tap: Add B to your mana pool for each Swamp you control.");
+	          ability.setStackDescription(cardName + " adds B to your mana pool for each Swamp you control.");
+	          //card.clearSpellAbility();
+	          //card.setText(card.getText() +  ability.toString());
+	          card.addSpellAbility(ability);
+
+	          return card;
+	       }//*************** END ************ END **************************
+	       
+	       //*************** START *********** START **************************
+		      else if(cardName.equals("Fire Bowman"))
+		      {
+		        final Ability ability = new Ability(card, "0")
+		        {
+		          public boolean canPlayAI() {return getCreature().size() != 0;}
+
+		          public void chooseTargetAI()
+		          {
+		            if(AllZone.Human_Life.getLife() < 3)
+		              setTargetPlayer(Constant.Player.Human);
+		            else
+		            {
+		              CardList list = getCreature();
+		              list.shuffle();
+		              setTargetCard(list.get(0));
+		            }
+		            AllZone.GameAction.sacrifice(card);
+		          }//chooseTargetAI()
+		          CardList getCreature()
+		          {
+		            //toughness of 1
+		            CardList list = CardFactoryUtil.AI_getHumanCreature(1, card, true);
+		            list = list.filter(new CardListFilter()
+		            {
+		              public boolean addCard(Card c)
+		              {
+		                //only get 1/1 flyers or 2/1 creatures
+		                return (2 <= c.getNetAttack()) || c.getKeyword().contains("Flying");
+		              }
+		            });
+		            return list;
+		          }//getCreature()
+
+		          public void resolve()
+		          {
+		            if(getTargetCard() != null)
+		            {
+		              if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
+		                getTargetCard().addDamage(1);
+		            }
+		            else
+		              AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1);
+		          }//resolve()
+		        };//SpellAbility
+
+		        card.addSpellAbility(ability);
+		        ability.setDescription("Sacrifice Fire Bowman: Fire Bowman deals 1 damage to target creature or player. Activate this ability only during your turn, before attackers are declared.");
+		        ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, new Command()
+		        {
+
+				  private static final long serialVersionUID = -3283051501556347775L;
+
+				  public void execute()
+		          {
+		            AllZone.GameAction.sacrifice(card);
+		          }
+		        }, true));
+		      }//*************** END ************ END **************************
+	       
+	          //*************** START *********** START **************************
+		      else if(cardName.equals("Archivist"))
+		      {
+		       final SpellAbility ability = new Ability_Tap(card, "0")
+		       {
+					private static final long serialVersionUID = -3630015833049495309L;
+	
+					public boolean canPlayAI() {return AllZone.Phase.getPhase().equals(Constant.Phase.Main2);}
+	
+			        public void resolve()
+			        {
+			          	 AllZone.GameAction.drawCard(card.getController());
+			        } 
+		        };//SpellAbility
+		        card.addSpellAbility(ability);
+		        ability.setDescription("tap: Draw a card.");
+		        ability.setStackDescription(card.getName() + " - draw a card.");
+		      }//*************** END ************ END **************************
+	      
 	      // Cards with Cycling abilities
 	      // -1 means keyword "Cycling" not found
 	      if (shouldCycle(card) != -1)

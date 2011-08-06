@@ -17067,9 +17067,6 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 	    {
 	    	final Spell spell = new Spell(card)
 	    	{
-	    		/**
-				 * 
-				 */
 				private static final long serialVersionUID = 2626237206744317044L;
 
 				public void resolve()
@@ -17144,6 +17141,53 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 	        card.clearSpellAbility();
 	    	card.addSpellAbility(spell);    
 	  	}//*************** END ************ END **************************
+	  
+	  	//*************** START *********** START **************************
+	    else if(cardName.equals("Riding the Dilu Horse"))
+	    {
+	      SpellAbility spell = new Spell(card)
+	      {
+			private static final long serialVersionUID = -620930445462994580L;
+
+			public boolean canPlayAI()
+	        {
+			  PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+			  
+		      CardList list = new CardList(play.getCards());
+		      list = list.filter(new CardListFilter()
+		      {
+		    	 public boolean addCard(Card c)
+		    	 {
+		    		 return c.isCreature() && !c.getKeyword().contains("Horsemanship") && !c.getKeyword().contains("Defender");
+		    	 }
+		      });
+		      
+		      Card c = CardFactoryUtil.AI_getBestCreature(list, card);
+		      setTargetCard(c);
+	          return list.size() > 0;
+	        }
+	        
+	        public void resolve()
+	        {
+	          final Card[] target = new Card[1];
+	          
+
+	          target[0] = getTargetCard();
+	          if(AllZone.GameAction.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, target[0]))
+	          {
+	            target[0].addTempAttackBoost(2);
+	            target[0].addTempDefenseBoost(2);
+	            target[0].addExtrinsicKeyword("Horsemanship");
+
+	            //String s = target[0].getText();
+	            target[0].setText("(+2/+2 and Horsemanship from " +card+")");
+	          }
+	        }//resolve()
+	      };
+	      spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+	      card.clearSpellAbility();
+	      card.addSpellAbility(spell);
+	    }//*************** END ************ END **************************
 	        
     // Cards with Cycling abilities
     // -1 means keyword "Cycling" not found

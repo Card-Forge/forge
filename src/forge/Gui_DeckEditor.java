@@ -1,6 +1,7 @@
 package forge;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
@@ -71,20 +72,20 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay {
     private JLabel            statsLabel2          = new JLabel();
     private JLabel            jLabel1              = new JLabel();
     
-    private JCheckBox         whiteCheckBox        = new JCheckBox("W", true);
-    private JCheckBox         blueCheckBox         = new JCheckBox("U", true);
-    private JCheckBox         blackCheckBox        = new JCheckBox("B", true);
-    private JCheckBox         redCheckBox          = new JCheckBox("R", true);
-    private JCheckBox         greenCheckBox        = new JCheckBox("G", true);
-    private JCheckBox         colorlessCheckBox    = new JCheckBox("C", true);
+    public JCheckBox         whiteCheckBox        = new JCheckBox("W", true);
+    public JCheckBox         blueCheckBox         = new JCheckBox("U", true);
+    public JCheckBox         blackCheckBox        = new JCheckBox("B", true);
+    public JCheckBox         redCheckBox          = new JCheckBox("R", true);
+    public JCheckBox         greenCheckBox        = new JCheckBox("G", true);
+    public JCheckBox         colorlessCheckBox    = new JCheckBox("C", true);
     
-    private JCheckBox         landCheckBox         = new JCheckBox("Land", true);
-    private JCheckBox         creatureCheckBox     = new JCheckBox("Creature", true);
-    private JCheckBox         sorceryCheckBox      = new JCheckBox("Sorcery", true);
-    private JCheckBox         instantCheckBox      = new JCheckBox("Instant", true);
-    private JCheckBox         planeswalkerCheckBox = new JCheckBox("Planeswalker", true);
-    private JCheckBox         artifactCheckBox     = new JCheckBox("Artifact", true);
-    private JCheckBox         enchantmentCheckBox  = new JCheckBox("Enchant", true);
+    public JCheckBox         landCheckBox         = new JCheckBox("Land", true);
+    public JCheckBox         creatureCheckBox     = new JCheckBox("Creature", true);
+    public JCheckBox         sorceryCheckBox      = new JCheckBox("Sorcery", true);
+    public JCheckBox         instantCheckBox      = new JCheckBox("Instant", true);
+    public JCheckBox         planeswalkerCheckBox = new JCheckBox("Planeswalker", true);
+    public JCheckBox         artifactCheckBox     = new JCheckBox("Artifact", true);
+    public JCheckBox         enchantmentCheckBox  = new JCheckBox("Enchant", true);
     
     private CardList          top;
     private CardList          bottom;
@@ -355,7 +356,14 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay {
         });
         
         setSize(1024, 768);
-        
+        this.setResizable(false);
+        Dimension screen = getToolkit().getScreenSize();
+        Rectangle bounds = getBounds();
+        bounds.width = 1024;
+        bounds.height = 768;
+        bounds.x = (screen.width - bounds.width) / 2;
+        bounds.y = (screen.height - bounds.height) / 2;
+        setBounds(bounds);
         //TODO use this as soon the deck editor has resizable GUI
 //        //Use both so that when "un"maximizing, the frame isn't tiny
 //        setSize(1024, 740);

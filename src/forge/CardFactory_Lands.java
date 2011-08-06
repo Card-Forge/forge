@@ -23,9 +23,7 @@ class CardFactory_Lands {
 			};
 			Ability_Tap ability = new Ability_Tap(card)
 			{
-				/**
-				 * 
-				 */
+
 				private static final long serialVersionUID = 1416258136308898492L;
 
 				CardList inPlay = new CardList();
@@ -933,7 +931,7 @@ class CardFactory_Lands {
 	     	  //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
 	     	  //anyway, this does the trick:
 	     	  //card.removeIntrinsicKeyword("tap: add G");
-	     	  card.setText(card.getSpellText() +  "\r\ntap: Return target legendary creature to its owner's hand.");
+	     	  //card.setText(card.getSpellText() +  "\r\ntap: Return target legendary creature to its owner's hand.");
 	     	  //card.addIntrinsicKeyword("tap: add G");
 	     	  
 	       }//*************** END ************ END **************************
@@ -1035,7 +1033,7 @@ class CardFactory_Lands {
 	   	  //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
 	   	  //anyway, this does the trick:
 	   	  //card.removeIntrinsicKeyword("tap: add G");
-	   	  card.setText(card.getSpellText() +  "\r\ntap: Target 1/1 creature gets +1/+2 until end of turn.");
+	   	  //card.setText(card.getSpellText() +  "\r\ntap: Target 1/1 creature gets +1/+2 until end of turn.");
 	   	  //card.addIntrinsicKeyword("tap: add G");
 	   	  
 	     }//*************** END ************ END **************************
@@ -1137,7 +1135,7 @@ class CardFactory_Lands {
 	   	  //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
 	   	  //anyway, this does the trick:
 	   	  //card.removeIntrinsicKeyword("tap: add G");
-	   	  card.setText(card.getSpellText() +  "\r\nG, tap: Target legendary creature gets +1/+1 until end of turn.");
+	   	  //card.setText(card.getSpellText() +  "\r\nG, tap: Target legendary creature gets +1/+1 until end of turn.");
 	   	  //card.addIntrinsicKeyword("tap: add G");
 	   	  
 	     }//*************** END ************ END **************************
@@ -1203,7 +1201,7 @@ class CardFactory_Lands {
 	   	  //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
 	   	  //anyway, this does the trick:
 	   	  //card.removeIntrinsicKeyword("tap: add 1");
-	   	  card.setText(card.getSpellText() +  "\r\nG, tap: Untap target Elf.");
+	   	  //card.setText(card.getSpellText() +  "\r\nG, tap: Untap target Elf.");
 	   	  //card.addIntrinsicKeyword("tap: add 1");
 	   	  
 	     }//*************** END ************ END **************************
@@ -1307,7 +1305,7 @@ class CardFactory_Lands {
 	   	  //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
 	   	  //anyway, this does the trick:
 	   	  //card.removeIntrinsicKeyword("tap: add 1");
-	   	  card.setText(card.getSpellText() +  "\r\n1 U, tap: Put target artifact card in your graveyard on top of your library.");
+	   	  //card.setText(card.getSpellText() +  "\r\n1 U, tap: Put target artifact card in your graveyard on top of your library.");
 	   	  //card.addExtrinsicKeyword("tap: add 1");
 	   	  
 	     }//*************** END ************ END **************************
@@ -1412,7 +1410,7 @@ class CardFactory_Lands {
 	   	  //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
 	   	  //anyway, this does the trick:
 	   	  //card.removeIntrinsicKeyword("tap: add 1");
-	   	  card.setText(card.getSpellText() +  "\r\n1 B, tap: Put target creature card in your graveyard on top of your library.");
+	   	  //card.setText(card.getSpellText() +  "\r\n1 B, tap: Put target creature card in your graveyard on top of your library.");
 	   	  //card.addExtrinsicKeyword("tap: add 1");
 	   	  
 	     }//*************** END ************ END **************************
@@ -1443,7 +1441,7 @@ class CardFactory_Lands {
 	   	  //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
 	   	  //anyway, this does the trick:
 	   	  //card.removeIntrinsicKeyword("tap: add 1");
-	   	  card.setText(card.getSpellText() +  "\r\n1: Return Oboro, Palace in the Clouds to your hand.");
+	   	  //card.setText(card.getSpellText() +  "\r\n1: Return Oboro, Palace in the Clouds to your hand.");
 	   	  //card.addExtrinsicKeyword("tap: add 1");
 	   	  
 	     }//*************** END ************ END **************************
@@ -1528,7 +1526,7 @@ class CardFactory_Lands {
 	   	  //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
 	   	  //anyway, this does the trick:
 	   	  //card.removeIntrinsicKeyword("tap: add 1");
-	   	  card.setText(card.getSpellText() +  "\r\n5, tap, sacrifice Gargoyle Castle: Put a 3/4 colorless Gargoyle artifact creature token with flying onto the battlefield.");
+	   	  //card.setText(card.getSpellText() +  "\r\n5, tap, sacrifice Gargoyle Castle: Put a 3/4 colorless Gargoyle artifact creature token with flying onto the battlefield.");
 	   	  //card.addIntrinsicKeyword("tap: add 1");
 	   	  
 	     }//*************** END ************ END **************************
@@ -1581,7 +1579,7 @@ class CardFactory_Lands {
 	   	  //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
 	   	  //anyway, this does the trick:
 	   	  //card.removeIntrinsicKeyword("tap: add 1");
-	   	  card.setText(card.getSpellText() +  "\r\n1 R, tap: Put a 0/1 red Kobold creature token named Kobolds of Kher Keep into play.");
+	   	  //card.setText(card.getSpellText() +  "\r\n1 R, tap: Put a 0/1 red Kobold creature token named Kobolds of Kher Keep into play.");
 	   	  //card.addIntrinsicKeyword("tap: add 1");
 	   	  
 	     }//*************** END ************ END **************************
@@ -1635,7 +1633,7 @@ class CardFactory_Lands {
 	   	  //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
 	   	  //anyway, this does the trick:
 	   	  //card.removeIntrinsicKeyword("tap: add 1");
-	   	  card.setText(card.getSpellText() +  "\r\n 2 G W, tap: Put a 1/1 green Saproling creature token into play.");
+	   	  //card.setText(card.getSpellText() +  "\r\n 2 G W, tap: Put a 1/1 green Saproling creature token into play.");
 	   	  //card.addIntrinsicKeyword("tap: add 1");
 	   	  
 	     }//*************** END ************ END **************************
@@ -1799,7 +1797,7 @@ class CardFactory_Lands {
 	         //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
 	   	  //anyway, this does the trick:
 	   	  card.removeIntrinsicKeyword("tap: add 1");
-	   	  card.setText(card.getText() +  "\r\n1: Mutavault becomes a 2/2 creature with all creature types until end of turn. It's still a land.");
+	   	  //card.setText(card.getText() +  "\r\n1: Mutavault becomes a 2/2 creature with all creature types until end of turn. It's still a land.");
 	   	  card.addIntrinsicKeyword("tap: add 1");
 
 	       }//*************** END ************ END **************************
@@ -1834,7 +1832,7 @@ class CardFactory_Lands {
 	          ability.setDescription("tap: Add G to your mana pool for each creature you control.");
 	          ability.setStackDescription(cardName + " adds G to your mana pool for each creature you control.");
 	          //card.clearSpellAbility();
-	          card.setText(card.getText() +  ability.toString());
+	          //card.setText(card.getText() +  ability.toString());
 	          card.addSpellAbility(ability);
 
 	          return card;
@@ -1870,7 +1868,7 @@ class CardFactory_Lands {
 	          ability.setDescription("tap: Add U to your mana pool for each artifact you control.");
 	          ability.setStackDescription(cardName + " adds U to your mana pool for each artifact you control.");
 	          //card.clearSpellAbility();
-	          card.setText(card.getText() +  ability.toString());
+	          //card.setText(card.getText() +  ability.toString());
 	          card.addSpellAbility(ability);
 
 	          return card;
@@ -1906,7 +1904,42 @@ class CardFactory_Lands {
 	          ability.setDescription("tap: Add W to your mana pool for each enchantment you control.");
 	          ability.setStackDescription(cardName + " adds W to your mana pool for each enchantment you control.");
 	          //card.clearSpellAbility();
-	          card.setText(card.getText() +  ability.toString());
+	          //card.setText(card.getText() +  ability.toString());
+	          card.addSpellAbility(ability);
+
+	          return card;
+	       }//*************** END ************ END **************************
+	       
+	     //*************** START *********** START **************************
+	       if (cardName.equals("Cabal Coffers"))
+	       {
+	          final SpellAbility ability = new Ability_Tap(card, "2")
+	          {
+				private static final long serialVersionUID = -3561865824450791583L;
+				public void resolve()
+	             {
+	                /*CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+	                list = list.getName("Mana Pool");*/
+	                Card mp = AllZone.ManaPool;//list.getCard(0);
+	                
+	                CardList swamps = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
+	                swamps = swamps.getType("Swamp");
+	                
+	                for(int i=0;i<swamps.size();i++)
+	                {
+	               	 mp.addExtrinsicKeyword("ManaPool:B");
+	                }
+	             }
+	             public boolean canPlayAI()
+	             {
+	                return false;
+	             }
+	          };
+	          
+	          ability.setDescription("2, tap: Add B to your mana pool for each Swamp you control.");
+	          ability.setStackDescription(cardName + " adds B to your mana pool for each Swamp you control.");
+	          //card.clearSpellAbility();
+	          //card.setText(card.getText() +  ability.toString());
 	          card.addSpellAbility(ability);
 
 	          return card;
@@ -1914,4 +1947,7 @@ class CardFactory_Lands {
 		
 		return card;
 	}
+	
+	
+	
 }

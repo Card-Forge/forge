@@ -1,3 +1,31 @@
+Archivist
+2 U U
+Creature Human Advisor
+no text
+1/1
+
+Fire Bowman
+R
+Creature Human Soldier Archer
+no text
+1/1
+
+Riding the Dilu Horse
+2 G
+Sorcery
+Target creature gets +2/+2 and gains horsemanship.
+
+Magus of the Coffers
+4 B
+Creature Human Wizard
+no text
+4/4
+
+Cabal Coffers
+no cost
+Land
+no text
+
 Xiahou Dun, the One-Eyed
 2 B B
 Legendary Creature Human Soldier

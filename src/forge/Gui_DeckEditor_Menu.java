@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import javax.swing.JFileChooser;
+//import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -85,8 +86,63 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         setDeckData("", false);
         
         setupMenu();
+        setupFilterMenu();
         setupSortMenu();
     }
+    
+    private void setupFilterMenu(){
+    	JMenuItem filter = new JMenuItem("New filter");
+    	JMenuItem clearfilter = new JMenuItem("Clear filter");
+    	JMenu menu = new JMenu("Filter");
+    	menu.add(filter);
+    	menu.add(clearfilter);
+    	this.add(menu);
+    	
+    	 filter.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent ev) {
+            	             	         	 
+                 //GUI_Filter filt = new GUI_Filter( deckDisplay);
+                 
+             }
+         });
+    	 clearfilter.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent ev) {
+            	          	 
+            	 CardList all = AllZone.CardFactory.getAllCards(); 
+            	 deckDisplay.updateDisplay(all, deckDisplay.getBottom()) ;
+            	 Gui_DeckEditor g = (Gui_DeckEditor) deckDisplay;
+            	 g.blackCheckBox.setSelected(true);
+ 				 g.blackCheckBox.setEnabled(true);
+ 				 g.blueCheckBox.setSelected(true);
+				 g.blueCheckBox.setEnabled(true);
+				 g.greenCheckBox.setSelected(true);
+ 				 g.greenCheckBox.setEnabled(true);
+ 				 g.redCheckBox.setSelected(true);
+				 g.redCheckBox.setEnabled(true);
+				 g.whiteCheckBox.setSelected(true);
+ 				 g.whiteCheckBox.setEnabled(true);
+ 				 g.colorlessCheckBox.setSelected(true);
+				 g.colorlessCheckBox.setEnabled(true);
+				 g.artifactCheckBox.setSelected(true);
+ 				 g.artifactCheckBox.setEnabled(true);
+ 				 g.creatureCheckBox.setSelected(true);
+				 g.creatureCheckBox.setEnabled(true);
+				 g.enchantmentCheckBox.setSelected(true);
+ 				 g.enchantmentCheckBox.setEnabled(true);
+ 				 g.instantCheckBox.setSelected(true);
+				 g.instantCheckBox.setEnabled(true);
+				 g.landCheckBox.setSelected(true);
+ 				 g.landCheckBox.setEnabled(true);
+ 				 g.planeswalkerCheckBox.setSelected(true);
+				 g.planeswalkerCheckBox.setEnabled(true);
+				 g.sorceryCheckBox.setSelected(true);
+ 				 g.sorceryCheckBox.setEnabled(true);
+                 
+             }
+         });
+    	 
+    }
+    
     
     private void setupSortMenu() {
         JMenuItem name = new JMenuItem("Card Name");
@@ -118,6 +174,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
                 //private String column[] = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "Rarity"};
                 Gui_DeckEditor g = (Gui_DeckEditor) deckDisplay;
                 g.getTopTableModel().sort(1, true);
+                
             }
         });
         
