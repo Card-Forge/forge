@@ -38,7 +38,6 @@ public class GameActionUtil {
 		upkeep_Demonic_Hordes();
 		upkeep_Phyrexian_Arena();
 		upkeep_Fallen_Empires_Storage_Lands();
-		upkeep_Master_of_the_Wild_Hunt();
 		upkeep_Carnophage();
 		upkeep_Sangrophage();
 		upkeep_Dega_Sanctuary();
@@ -7642,21 +7641,6 @@ public class GameActionUtil {
 			if(land.isTapped()) land.addCounter(Counters.STORAGE, 1);
 		}
 	}// upkeep_Phyrexian_Arena
-
-	private static void upkeep_Master_of_the_Wild_Hunt() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Master of the Wild Hunt");
-
-		for(int i = 0; i < list.size(); i++) {
-		    CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", list.get(i).getController(), "G", new String[] {
-		            "Creature", "Wolf"}, 2, 2, new String[] {""});
-		}
-	}// upkeep_Master_of_the_Wild_Hunt
 	
 	
 	private static void upkeep_Seizan_Perverter_of_Truth() {
