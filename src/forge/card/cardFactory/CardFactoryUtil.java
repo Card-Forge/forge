@@ -3973,7 +3973,7 @@ public class CardFactoryUtil {
             
             @Override
             public void selectCard(Card card, PlayerZone zone) {
-                if(card.isLand() && zone.is(Constant.Zone.Battlefield)) {
+                if(card.isType(type) && zone.is(Constant.Zone.Battlefield)) {
                     card.untap();
                     count++;
                     if(count == stop) stop();

@@ -11,7 +11,10 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.ComputerUtil;
+import forge.GameAction;
 import forge.MyRandom;
+import forge.Player;
+import forge.card.cardFactory.CardFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Sub;
@@ -111,38 +114,44 @@ public class AbilityFactory_PermanentState {
 
 	public static String untapStackDescription(AbilityFactory af, SpellAbility sa){
 		// when getStackDesc is called, just build exactly what is happening
-		 StringBuilder sb = new StringBuilder();
-		 final HashMap<String,String> params = af.getMapParams();
-		 Card hostCard = sa.getSourceCard();
-		 
-		 if (sa instanceof Ability_Sub)
-			 sb.append(" ");
-		 else
-			 sb.append(sa.getSourceCard()).append(" - ");
-		 
-		 sb.append("Untap ");
+		StringBuilder sb = new StringBuilder();
+		final HashMap<String, String> params = af.getMapParams();
+		Card hostCard = sa.getSourceCard();
 
-		ArrayList<Card> tgtCards;
-		Target tgt = af.getAbTgt();
-		if (tgt != null)
-			tgtCards = tgt.getTargetCards();
-		else{
-			tgtCards = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
+		if (sa instanceof Ability_Sub)
+			sb.append(" ");
+		else
+			sb.append(sa.getSourceCard()).append(" - ");
+
+		sb.append("Untap ");
+
+		if (params.containsKey("UntapUpTo")) {
+			sb.append("up to ").append(params.get("Amount")).append(" ");
+			sb.append(params.get("UntapType")).append("s");
+		} 
+		else {
+			ArrayList<Card> tgtCards;
+			Target tgt = af.getAbTgt();
+			if (tgt != null)
+				tgtCards = tgt.getTargetCards();
+			else {
+				tgtCards = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
+			}
+
+			Iterator<Card> it = tgtCards.iterator();
+			while (it.hasNext()) {
+				sb.append(it.next());
+				if (it.hasNext())
+					sb.append(", ");
+			}
 		}
-		
-		Iterator<Card> it = tgtCards.iterator();
-		while(it.hasNext()) {
-			sb.append(it.next());
-			if(it.hasNext()) sb.append(", ");
-		}
-		
 		sb.append(".");
 
-        Ability_Sub subAb = sa.getSubAbility();
-        if (subAb != null)
-        	sb.append(subAb.getStackDescription());
-		
-		 return sb.toString();
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			sb.append(subAb.getStackDescription());
+
+		return sb.toString();
 	}
 	
 	public static boolean untapCanPlayAI(final AbilityFactory af, SpellAbility sa){
@@ -351,18 +360,22 @@ public class AbilityFactory_PermanentState {
 	public static void untapResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
 		Card card = sa.getSourceCard();
-		
-		ArrayList<Card> tgtCards;
 		Target tgt = af.getAbTgt();
-		if (tgt != null)
-			tgtCards = tgt.getTargetCards();
-		else{
-			tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
-		}
-
-		for(Card tgtC : tgtCards){
-			if (AllZone.GameAction.isCardInPlay(tgtC) && (tgt == null || CardFactoryUtil.canTarget(af.getHostCard(), tgtC)))
-				tgtC.untap();
+		ArrayList<Card> tgtCards = null;
+		
+		if (params.containsKey("UntapUpTo"))
+			chooseUntapUpTo(af, sa, params);
+		else{	
+			if (tgt != null)
+				tgtCards = tgt.getTargetCards();
+			else{
+				tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
+			}
+	
+			for(Card tgtC : tgtCards){
+				if (AllZone.GameAction.isCardInPlay(tgtC) && (tgt == null || CardFactoryUtil.canTarget(af.getHostCard(), tgtC)))
+					tgtC.untap();
+			}
 		}
 
 		if (af.hasSubAbility()){
@@ -377,6 +390,32 @@ public class AbilityFactory_PermanentState {
 					 CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, c, sa);
 	        }
 		}
+	}
+	
+	public static void chooseUntapUpTo(AbilityFactory af, SpellAbility sa, HashMap<String,String> params){
+		int num = Integer.parseInt(params.get("Amount"));
+		String valid = params.get("UntapType");
+		
+		Player activatingPlayer = sa.getActivatingPlayer();
+		
+		// Reuse existing UntapUpTo Input
+    	if (activatingPlayer.isHuman()) 
+    		AllZone.InputControl.setInput(CardFactoryUtil.input_UntapUpToNType(num, valid));
+    	else{
+            CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
+            list = list.getType(valid);
+            list = list.getTapState("Tapped");
+            
+            int count = 0;
+            while(list.size() != 0 )
+            for(int i = 0; i < num && i < list.size(); i++){
+
+            	Card c = CardFactoryUtil.AI_getBestLand(list);
+                c.untap();
+                list.remove(c);
+                count++;
+            }
+    	}
 	}
 	
 	// ****************************************
