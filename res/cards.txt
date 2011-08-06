@@ -1,3 +1,10 @@
+Mirror Universe
+6
+Artifact
+Tap, Sacrifice Mirror Universe: Exchange life totals with target opponent. Activate this ability only during your upkeep.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_universe.jpg
+
 Akoum Refuge
 no cost
 Land

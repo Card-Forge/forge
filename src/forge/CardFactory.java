@@ -9980,6 +9980,44 @@ public class CardFactory implements NewConstants {
         	ability.setBeforePayMana(target);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Mirror Universe")) {
+        	/*
+        	 * Tap, Sacrifice Mirror Universe: Exchange life totals with
+        	 * target opponent. Activate this ability only during your upkeep.
+        	 */
+        	final Ability_Tap ability = new Ability_Tap(card, "0") {
+        		private static final long serialVersionUID = -1409850598108909739L;
+
+        		@Override
+        		public void resolve() {
+        			String player = card.getController();
+        			String opponent = AllZone.GameAction.getOpponent(player);
+        			PlayerLife playerLife = AllZone.GameAction.getPlayerLife(player);
+        			PlayerLife opponentLife = AllZone.GameAction.getPlayerLife(opponent);
+        			int tmp = playerLife.getLife();
+        			playerLife.setLife(opponentLife.getLife());
+        			opponentLife.setLife(tmp);
+        			AllZone.GameAction.sacrifice(card);
+        		}
+
+        		@Override
+        		public boolean canPlay() {
+        			//TODO: This should be limited to Upkeep when we have a phase for that
+        			return super.canPlay() && AllZone.Phase.getPhase().equals(Constant.Phase.Main1);
+        		}
+
+        		@Override
+        		public boolean canPlayAI() {
+        			//TODO: add AI.  Should be easy enough
+        			return false;
+        		}
+        	};//SpellAbility
+        	
+        	ability.setStackDescription(cardName+" - Exchange life totals with target opponent.");
+        	card.addSpellAbility(ability);
+        }//*************** END ************ END **************************
+
 
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
