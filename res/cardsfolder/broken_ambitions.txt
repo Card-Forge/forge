@@ -9,4 +9,5 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/broken_ambitions.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/54.jpg
 End

@@ -7,4 +7,5 @@ A:SP$Token | Cost$ 2 U | TokenName$ Weird | TokenOwner$ You | TokenPower$ 3 | To
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderheads.jpg
+SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/37.jpg
 End
