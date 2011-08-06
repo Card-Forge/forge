@@ -11,10 +11,8 @@ import javax.swing.border.LineBorder;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 
 public abstract class QuestAbstractBazaarItem {
 
@@ -29,9 +27,7 @@ public abstract class QuestAbstractBazaarItem {
         this.price = price;
 
         //create a blank image placeholder
-        Image emptyImage = new BufferedImage(40, 40, BufferedImage.TYPE_INT_RGB);
-        image = new ImageIcon(emptyImage);
-
+        this.image = GuiUtils.getEmptyIcon(40, 40);
     }
 
     protected QuestAbstractBazaarItem(String name, String description, int price, ImageIcon image) {
@@ -41,8 +37,7 @@ public abstract class QuestAbstractBazaarItem {
 
         if (image == null) {
             //create a blank image placeholder
-            Image emptyImage = new BufferedImage(40, 40, BufferedImage.TYPE_INT_RGB);
-            this.image = new ImageIcon(emptyImage);
+            this.image = GuiUtils.getEmptyIcon(40, 40);
         }
         else {
             this.image = image;
@@ -58,6 +53,10 @@ public abstract class QuestAbstractBazaarItem {
         ImageIcon resizedImage = GuiUtils.getResizedIcon(image, 40, 40);
 
         JLabel iconLabel = new JLabel(resizedImage);
+        iconLabel.setBorder(new LineBorder(Color.BLACK));
+        JPanel iconPanel = new JPanel(new BorderLayout());
+        iconPanel.add(iconLabel, BorderLayout.NORTH);
+
         JLabel nameLabel = new JLabel(name);
         nameLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
 
@@ -100,7 +99,7 @@ public abstract class QuestAbstractBazaarItem {
         JPanel buyPanel = new JPanel(new BorderLayout());
         buyPanel.add(purchaseButton, BorderLayout.SOUTH);
 
-        itemPanel.add(iconLabel, BorderLayout.WEST);
+        itemPanel.add(iconPanel, BorderLayout.WEST);
         itemPanel.add(centerPanel, BorderLayout.CENTER);
         itemPanel.add(buyPanel, BorderLayout.EAST);
 
