@@ -1,3 +1,14 @@
+Ironclaw Orcs
+1 R
+Creature Orc
+Ironclaw Orcs can't block creatures with power 2 or greater.
+2/2
+
+Copper Tablet
+2
+Artifact
+At the beginning of each player's upkeep, Copper Tablet deals 1 damage to that player.
+
 Bloodshed Fever
 R
 Enchantment Aura

@@ -25,7 +25,7 @@ public class CombatUtil {
         if(!attacker.getKeyword().contains("Shadow") && blocker.getKeyword().contains("Shadow")) return false;
         
         if(attacker.getNetAttack() <= 2 && blocker.getName().equals("Sunweb")) return false;
-        
+        if(attacker.getNetAttack() >= 2 && blocker.getName().equals("Ironclaw Orcs")) return false;
 
         PlayerZone blkPZ = AllZone.getZone(Constant.Zone.Play, blocker.getController());
         CardList blkCL = new CardList(blkPZ.getCards());

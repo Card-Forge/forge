@@ -85,6 +85,7 @@ public class GameActionUtil {
         upkeep_Blaze_Counters();
         upkeep_Dark_Confidant(); // keep this one semi-last
         
+        upkeep_Copper_Tablet();
         upkeep_BlackVise(); 
         upkeep_Ivory_Tower();
 
@@ -5828,6 +5829,30 @@ public class GameActionUtil {
             }
         }// if
     }// upkeep_BlackVice
+    
+    private static void upkeep_Copper_Tablet() {
+        final String player = AllZone.Phase.getActivePlayer();
+         PlayerZone humanPlayZone = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+         PlayerZone compPlayZone = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+        
+         CardList list = new CardList(humanPlayZone.getCards());
+         CardList compList = new CardList(compPlayZone.getCards());
+         list.addAll(compList.toArray());
+         list = list.getName("Copper Tablet");
+        
+         Ability ability;
+         for(int i = 0; i < list.size(); i++) {
+             ability = new Ability(list.get(i), "0") {
+                 @Override
+                 public void resolve() {
+                     AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+                 }
+             };// Ability
+             ability.setStackDescription("Copper Tablet - deals 1 damage to " + player);
+            
+             AllZone.Stack.add(ability);
+         }// for
+     }// upkeep_Copper_Tablet()
     
     private static void upkeep_Klass() {
         final String player = AllZone.Phase.getActivePlayer();
