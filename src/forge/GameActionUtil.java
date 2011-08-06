@@ -3723,7 +3723,7 @@ public class GameActionUtil {
             }
         } else if(c.getName().equals("Scalpelexis")) playerCombatDamage_Scalpelexis(c);
         else if(c.getName().equals("Blazing Specter") || c.getName().equals("Guul Draz Specter")
-                || c.getName().equals("Chilling Apparition")) playerCombatDamage_Simple_Discard(c);
+                || c.getName().equals("Chilling Apparition") || c.getName().equals("Sedraxis Specter")) playerCombatDamage_Simple_Discard(c);
         else if((c.getName().equals("Headhunter") || c.getName().equals("Riptide Pilferer")) && !c.isFaceDown()) playerCombatDamage_Simple_Discard(c);
         else if(c.getName().equals("Shadowmage Infiltrator") || c.getName().equals("Thieving Magpie")
                 || c.getName().equals("Lu Xun, Scholar General")) playerCombatDamage_Shadowmage_Infiltrator(c);
