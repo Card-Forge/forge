@@ -71,7 +71,6 @@ public class GameActionUtil {
 		upkeep_Wolf_Skull_Shaman();
 		
 		upkeep_Oversold_Cemetery();
-		//upkeep_Nether_Spirit();
 		upkeep_Vampire_Lacerator();
 		upkeep_Sleeper_Agent();
 		upkeep_Pillory_of_the_Sleepless();
@@ -88,8 +87,6 @@ public class GameActionUtil {
 		upkeep_Barren_Glory();
 		upkeep_Felidar_Sovereign();
 
-		// upkeep_Convalescence();
-		// upkeep_Convalescent_Care();
 		upkeep_Ancient_Runes();
 		upkeep_Karma();
 		upkeep_Oath_of_Druids();
@@ -4102,46 +4099,6 @@ public class GameActionUtil {
 		}
 	}//Oversold Cemetery
 
-	/*
-    private static void upkeep_Nether_Spirit() {
-        final Player player = AllZone.Phase.getPlayerTurn();
-        final PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-
-        CardList all = new CardList(graveyard.getCards());
-        all = all.getType("Creature");
-
-        CardList list = new CardList(graveyard.getCards());
-        list = list.getName("Nether Spirit");
-
-        if (all.size() == 1 && list.size() == 1) {
-            final Card nether = list.get(0);
-            Ability ability = new Ability(list.get(0), "0") {
-                @Override
-                public void resolve() {
-                    AllZone.GameAction.moveToPlay(nether);
-                }
-            };
-
-            boolean returnNether = false;
-
-            if (player.equals(AllZone.HumanPlayer)) {
-                String question = "Return Nether Spirit to the battlefield?";
-                if (GameActionUtil.showYesNoDialog(nether, question)) {
-                    returnNether = true;
-                }
-            }
-
-            if (player.equals(AllZone.ComputerPlayer) || returnNether) {
-                StringBuilder sb = new StringBuilder();
-                sb.append("Nether Spirit - ").append(player).append(" returns Nether Spirit to the battlefield");
-                ability.setStackDescription(sb.toString());
-
-                AllZone.Stack.addSimultaneousStackEntry(ability);
-
-            }
-        } //if
-    }//nether spirit
-    */
 
 	public static void upkeep_Suspend() {
 		Player player = AllZone.Phase.getPlayerTurn();
@@ -4416,69 +4373,7 @@ public class GameActionUtil {
 			}
 		}// if
 	}// upkeep_Karma()
-	
-	/* Converted to trigger and AF
-	private static void upkeep_Convalescence() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Convalescence");
 
-		for(int i = 0; i < list.size(); i++) {
-			final Card source = list.get(i);
-			Ability ability = new Ability(source, "0") {
-
-				@Override
-				public void resolve() {
-					if (player.getLife() <= 10)
-						player.gainLife(1, source);
-				}
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("Convalescence - ").append(player).append(" gain 1 life");
-			ability.setStackDescription(sb.toString());
-
-			if(player.getLife() <= 10) {
-                AllZone.Stack.addSimultaneousStackEntry(ability);
-
-			}
-		}// for
-	}// upkeep_Convalescence()
-	*/
-
-	/* Converted to trigger and AF
-	private static void upkeep_Convalescent_Care() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Convalescent Care");
-
-		for(int i = 0; i < list.size(); i++) {
-			final Card source = list.get(i);
-            Ability ability = new Ability(source, "0")
-            {
-
-            	public void resolve()
-            	{
-            		if (player.getLife() <= 5){
-	            		player.gainLife(3, source);
-            			player.drawCard();
-            		}
-            	}
-            };// Ability
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append("Convalescent Care - ").append(player).append(" gains 3 life and draws a card");
-            ability.setStackDescription(sb.toString());
-
-            if (player.getLife() <= 5){
-                AllZone.Stack.addSimultaneousStackEntry(ability);
-
-            }
-
-		}// for
-	}// upkeep_Convalescence_Care()
-	*/
 	
 	private static void upkeep_Dega_Sanctuary() {
 		final Player player = AllZone.Phase.getPlayerTurn();
@@ -7590,12 +7485,8 @@ public class GameActionUtil {
 		commands.put("Elspeth_Emblem", Elspeth_Emblem);
 		
 		commands.put("Gaddock_Teeg", Gaddock_Teeg);
-		//commands.put("Gemhide_Sliver", Gemhide_Sliver);
 		commands.put("Homarid", Homarid);
 		commands.put("Iona_Shield_of_Emeria", Iona_Shield_of_Emeria);
-		
-		// Card converted to script
-		// commands.put("Joiner_Adept", Joiner_Adept);
 		
 		commands.put("Koth_Emblem", Koth_Emblem);
 		commands.put("Leyline_of_Singularity", Leyline_of_Singularity);

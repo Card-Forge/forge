@@ -2097,6 +2097,14 @@ public class GameAction {
         
         checkWheneverKeyword(c, "PermanentIntoGraveyard",null);
         
+        //System.out.println("Card " + c.getName() + " is getting sent to GY, and this turn it got damaged by: ");
+        for(Card crd:c.getReceivedDamageFromThisTurn().keySet()) {
+            if(c.getReceivedDamageFromThisTurn().get(crd) > 0) {
+                //System.out.println(crd.getName() );
+                GameActionUtil.executeVampiricEffects(crd);
+            }
+        }
+        
         if(persist) {
         	final Card persistCard = newCard;
         	Ability persistAb = new Ability(persistCard, "0"){
@@ -2116,6 +2124,7 @@ public class GameAction {
         return true;
     }//sacrificeDestroy()
     
+   
     public boolean destroy(Card c) {
         if(!AllZone.GameAction.isCardInPlay(c)
                 || (c.getKeyword().contains("Indestructible") && (!c.isCreature() || c.getNetDefense() > 0))) return false;        
@@ -2141,7 +2150,6 @@ public class GameAction {
         	CardListUtil.sortCMC(list);
         	
         	
-        	
         	if (list.size() != 0)
         	{
         		final Card crd;
@@ -2163,16 +2171,6 @@ public class GameAction {
         	}
         }//totem armor
         
-        //System.out.println("Card " + c.getName() + " is getting sent to GY, and this turn it got damaged by: ");
-        for(Card crd:c.getReceivedDamageFromThisTurn().keySet()) {
-            if(c.getReceivedDamageFromThisTurn().get(crd) > 0) {
-                //System.out.println(crd.getName() );
-                GameActionUtil.executeVampiricEffects(crd);
-            }
-        }
-
-
-
         return sacrificeDestroy(c);
     }
 
