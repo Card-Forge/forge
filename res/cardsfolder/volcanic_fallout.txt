@@ -1,8 +1,9 @@
 Name:Volcanic Fallout
 ManaCost:1 R R
 Types:Instant
-Text:Volcanic Fallout deals 2 damage to each creature and each player.
+Text:no text
 K:CARDNAME can't be countered.
+K:spDamageAll:Player,Creature:2:Volcanic Fallout deals 2 damage to each creature and each player.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_fallout.jpg
 End

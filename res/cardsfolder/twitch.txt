@@ -1,0 +1,9 @@
+Name:Twitch
+ManaCost:U
+Types:Instant
+Text:You may tap or untap target artifact, creature, or land.
+K:Draw a card.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/twitch.jpg
+End
