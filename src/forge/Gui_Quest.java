@@ -417,7 +417,9 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Electro 3  		hard   	Resonantg's Stormfront deck with mods, Arashi, the Sky Asunder + Ball Lightning");
         sb.append("\r\n");
-        sb.append("Endora 3  		hard   	Sloth' enchantress effects deck, enchantments + cards with enchantment effects");
+	sb.append("Endora 2  		medium  enchantress deck, enchantments + cards with enchantment effects");
+        sb.append("\r\n");
+        sb.append("Endora 3  		hard   	enchantress deck, enchantments + cards with enchantment effects");
         sb.append("\r\n");
         sb.append("Fat Albert 1   		easy   	Winter Orb, Keldon Warlord, mana Elves/Slivers + several 4/4 creatures");
         sb.append("\r\n");
