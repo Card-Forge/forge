@@ -257,104 +257,6 @@ public class CardFactory_Instants {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Ashes to Ashes")) {
-            final Card[] target = new Card[2];
-            final int[] index = new int[1];
-            
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -6509598408022853029L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return 2 <= getNonArtifact().size() && 5 < AllZone.Computer_Life.getLife();
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    CardList human = getNonArtifact();
-                    CardListUtil.sortAttack(human);
-                    
-                    target[0] = human.get(0);
-                    target[1] = human.get(1);
-                }
-                
-                CardList getNonArtifact() {
-                    CardList list = CardFactoryUtil.AI_getHumanCreature(card, true);
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return !c.isArtifact();
-                        }
-                    });
-                    return list;
-                }//getNonArtifact()
-                
-                @Override
-                public void resolve() {
-                    for(int i = 0; i < target.length; i++) {
-                        Card c = target[i];
-                        if (AllZone.GameAction.isCardInPlay(c))
-                        	AllZone.GameAction.removeFromGame(c);
-                    }
-                    
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                    life.subtractLife(5,card);
-                }//resolve()
-            };//SpellAbility
-            
-
-            final Input input = new Input() {
-                private static final long serialVersionUID = -4114782677700487264L;
-                
-                @Override
-                public void showMessage() {
-                    if(index[0] == 0) AllZone.Display.showMessage("Select 1st target non-artifact creature to remove from the game");
-                    else AllZone.Display.showMessage("Select 2nd target non-artifact creature to remove from the game");
-                    
-                    ButtonUtil.enableOnlyCancel();
-                }
-                
-                @Override
-                public void selectButtonCancel() {
-                    stop();
-                }
-                
-                @Override
-                public void selectCard(Card c, PlayerZone zone) {
-                    if(!c.isArtifact() && c.isCreature() && zone.is(Constant.Zone.Play)) {
-                        target[index[0]] = c;
-                        index[0]++;
-                        showMessage();
-                        
-                        if(index[0] == target.length) {
-                            if(this.isFree()) {
-                                this.setFree(false);
-                                AllZone.Stack.add(spell);
-                                stop();
-                            } else stopSetNext(new Input_PayManaCost(spell));
-                        }
-                    }
-                }//selectCard()
-            };//Input
-            
-            Input runtime = new Input() {
-                private static final long serialVersionUID = -3162536306318797516L;
-                
-                @Override
-                public void showMessage() {
-                    index[0] = 0;
-                    stopSetNext(input);
-                }
-            };//Input
-            
-            card.setSVar("PlayMain1", "TRUE");
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            spell.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
-        
-
-        //*************** START *********** START **************************
         else if(cardName.equals("Wings of Velis Vel")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = -5744842090293912606L;
@@ -413,7 +315,6 @@ public class CardFactory_Instants {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-        
         
         
         //*************** START *********** START **************************
