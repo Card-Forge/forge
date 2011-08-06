@@ -162,7 +162,13 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         menu.add(type);
         menu.add(stats);
         menu.add(rarity);
-        menu.add(newFirst);
+        
+        // menu.add(newFirst);
+        /*
+         *  The "Most recently added" menu now causes an error exception. This will prevent 
+         *  this option from appearing in the "Sort By" menu. There may be a way (or not) 
+         *  to sort the indivudual card files by the date created or the date last modified.
+         */
         
         this.add(menu);
         
