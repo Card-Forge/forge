@@ -138,7 +138,6 @@ public class GameActionUtil {
 		upkeep_Copper_Tablet();
 		upkeep_Sulfuric_Vortex();
 		upkeep_Power_Surge();
-		upkeep_Ebony_Owl_Netsuke();
 		upkeep_Ivory_Tower();		
 		
 		upkeep_AI_Aluren(); 
@@ -7674,38 +7673,8 @@ public class GameActionUtil {
 		}//for
 	}//upkeep_Sheltered_Valley()
 
-		
 	
-	private static void upkeep_Ebony_Owl_Netsuke() {
-		/*
-		 * At the beginning of each opponent's upkeep, if that player has seven
-		 * or more cards in hand, Ebony Owl Netsuke deals 4 damage to him or her.
-		 */
-		final Player player = AllZone.Phase.getPlayerTurn();
-
-		CardList owls = AllZoneUtil.getPlayerCardsInPlay(player.getOpponent(), "Ebony Owl Netsuke");
-		final CardList hand = AllZoneUtil.getPlayerHand(player);
-
-		// Each owl triggers
-		for(final Card owl:owls) {
-			Ability ability = new Ability(owl, "0") {
-				@Override
-				public void resolve() {
-					player.addDamage(4, owl);
-				}
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append(owl.getName()).append(" deals 4 damage to ").append(player);
-			sb.append(".");
-			ability.setStackDescription(sb.toString());
-			if(hand.size() >= 7) {
-				AllZone.Stack.add(ability);
-			}
-		}
-	}// upkeep_Ebony_Owl_Netsuke
-	
-	private static void upkeep_Plague_Spitter() {
+		private static void upkeep_Plague_Spitter() {
 		/*
 		 * At the beginning of your upkeep, Plague Spitter deals 1 damage
 		 * to each creature and each player
