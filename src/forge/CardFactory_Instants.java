@@ -1021,7 +1021,6 @@ public class CardFactory_Instants {
         }//*************** END ************ END **************************
         
         
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Sprouting Vines")) {
             SpellAbility spell = new Spell(card) {
@@ -1469,6 +1468,7 @@ public class CardFactory_Instants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Accumulated Knowledge")) {
             final SpellAbility spell = new Spell(card) {
@@ -1498,6 +1498,7 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
             
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Echoing Decay")) {
@@ -2054,84 +2055,6 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Think Twice")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 2571730013113893086L;
-                
-                @Override
-                public void resolve() {
-                    AllZone.GameAction.drawCard(card.getController());
-                }//resolve()
-            };
-            card.clearSpellAbility();
-            card.setFlashback(true);
-            card.addSpellAbility(spell);
-            card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "2 U", "0"));
-            
-        }//*************** END ************ END **************************
-        */
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Elephant Ambush")) {
-            SpellAbility spell = new Spell(card) {
-                
-                private static final long serialVersionUID = 1808366787563573082L;
-                
-                @Override
-                public void resolve() {
-                    CardFactoryUtil.makeToken("Elephant", "G 3 3 Elephant", card, "G", new String[] {
-                            "Creature", "Elephant"}, 3, 3, new String[] {""});
-                }//resolve()
-            };
-            
-            spell.setDescription("Put a 3/3 green Elephant creature token into play.");
-            spell.setStackDescription(card.getController()
-                    + " puts a 3/3 green Elephant creature token into play.");
-            
-            card.setFlashback(true);
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "6 G G", "0"));
-            
-        }//*************** END ************ END **************************
-        */
-        
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Beast Attack")) {
-            SpellAbility spell = new Spell(card) {
-                
-                private static final long serialVersionUID = 381753184772980686L;
-                
-                @Override
-                public void resolve() {
-                    makeToken();
-                }
-                
-                //for some reason, without this the AI can keep casting Beast Attack over and over.
-                @Override
-                public boolean canPlayAI() {
-                    return !AllZone.GameAction.isCardInGrave(card);
-                }
-                
-                public void makeToken() {
-                    CardFactoryUtil.makeToken("Beast", "G 4 4 Beast", card, "G",
-                            new String[] {"Creature", "Beast"}, 4, 4, new String[] {""});
-                }//resolve()
-            };
-            
-            spell.setDescription("Put a 4/4 green Beast creature token into play.");
-            spell.setStackDescription(card.getController() + " put a 4/4 green Beast creature token into play.");
-            
-            card.setFlashback(true);
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "2 G G G", "0"));
-            
-        }//*************** END ************ END **************************
-        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Wrap in Vigor")) {
@@ -2320,102 +2243,6 @@ public class CardFactory_Instants {
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
-        /* Converted to AF
-        //*************** START *********** START **************************
-        else if (cardName.equals("Funeral Charm") || cardName.equals("Piracy Charm")) {
-        	final String walk = cardName.equals("Funeral Charm") ? "Swampwalk" : "Islandwalk";
-            //discard
-            final SpellAbility spell_one = new Spell(card) {
-                private static final long serialVersionUID = 8273875515630095127L;
-                
-                @Override
-                public boolean canPlayAI() {
-
-                    setTargetPlayer(AllZone.HumanPlayer);
-                    PlayerZone humanHand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
-                    
-                    return (humanHand.size() >= 1);
-                }
-                
-                @Override
-                public void resolve() {
-                	getTargetPlayer().discard(this);
-                }//resolve()
-            };//SpellAbility
-            
-            spell_one.setDescription("Target player discards a card.");
-            spell_one.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell_one));
-  
-            //creature gets +2/-1
-            final SpellAbility spell_two = new Spell(card) {
-                private static final long serialVersionUID = -4554812851052322555L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    final Card c = getTargetCard();
-                    
-                    if (AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                        c.addTempAttackBoost(2);
-                        c.addTempDefenseBoost(-1);
-                        
-                        Command until = new Command() {
-                            private static final long serialVersionUID = 4674846621452044251L;
-                            
-                            public void execute() {
-                                c.addTempAttackBoost(-2);
-                                c.addTempDefenseBoost(1);
-                            }
-                        };//Command
-                        AllZone.EndOfTurn.addUntil(until);
-                    }//if card in play?
-                }//resolve()
-            };//SpellAbility
-            spell_two.setDescription("Target creature gets +2/-1 until end of turn.");
-            spell_two.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell_two));
-            
-            //creature gets swampwalk/Islandwalk
-            final SpellAbility spell_three = new Spell(card) {
-                private static final long serialVersionUID = -8455677074284271852L;
-
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    final Card c = getTargetCard();
-                    
-                    if (AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c) && !c.getKeyword().contains(walk)) {
-                        c.addExtrinsicKeyword(walk);
-                        
-                        Command until = new Command() {
-                            private static final long serialVersionUID = 1452395016805444249L;
-
-                            public void execute() {
-                                if (AllZone.GameAction.isCardInPlay(c)) {
-                                    c.removeExtrinsicKeyword(walk);
-                                }
-                            }
-                        };//Command
-                        AllZone.EndOfTurn.addUntil(until);
-                    }//if card in play?
-                }//resolve()
-            };//SpellAbility
-            spell_three.setDescription("Target creature gains "+walk+" until end of turn.");
-            spell_three.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell_three));
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(spell_one);
-            card.addSpellAbility(spell_two);
-            card.addSpellAbility(spell_three);
-        }//*************** END ************ END **************************
-        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Eladamri's Call")) {
@@ -2892,55 +2719,6 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-       /* converted to keyword
-      //*************** START *********** START **************************
-        else if(cardName.equals("Nameless Inversion")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 5479536291205544905L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList list = CardFactoryUtil.AI_getHumanCreature(3, card, true);
-                    CardListUtil.sortFlying(list);
-                    
-                    for(int i = 0; i < list.size(); i++)
-                        if(2 <= list.get(i).getNetAttack()) {
-                            setTargetCard(list.get(i));
-                            return true;
-                        }
-                    return false;
-                }//canPlayAI()
-                
-                @Override
-                public void resolve() {
-                    final Card[] target = new Card[1];
-                    final Command untilEOT = new Command() {
-                        private static final long serialVersionUID = -1954104042512587145L;
-                        
-                        public void execute() {
-                            if(AllZone.GameAction.isCardInPlay(target[0])) {
-                                target[0].addTempAttackBoost(-3);
-                                target[0].addTempDefenseBoost(3);
-                            }
-                        }
-                    };
-                    
-                    target[0] = getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, target[0])) {
-                        target[0].addTempAttackBoost(3);
-                        target[0].addTempDefenseBoost(-3);
-                        
-                        AllZone.EndOfTurn.addUntil(untilEOT);
-                    }
-                }//resolve()
-            };
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            card.setSVar("PlayMain1", "TRUE");
-        }//*************** END ************ END **************************
-        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Primal Boost")) {
@@ -4270,7 +4048,6 @@ public class CardFactory_Instants {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        
 
         //*************** START *********** START **************************
         else if (cardName.equals("Suffer the Past"))
@@ -4665,6 +4442,7 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if( cardName.equals("Reset") ) {
             /*
@@ -4730,6 +4508,7 @@ public class CardFactory_Instants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Sacrifice")) {
             final SpellAbility spell = new Spell(card) {
@@ -4783,6 +4562,7 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Brightstone Ritual")) {
             final SpellAbility spell = new Spell(card) {
@@ -4807,6 +4587,7 @@ public class CardFactory_Instants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Berserk")) {

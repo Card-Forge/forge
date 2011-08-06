@@ -12,6 +12,7 @@ import com.esotericsoftware.minlog.Log;
 public class CombatUtil {
 	static boolean Lorthos_Cancelled;
 	
+	//can the creature block at all?
 	public static boolean canBlock(Card blocker) {
 		
 		if(blocker == null) return false;
@@ -46,6 +47,7 @@ public class CombatUtil {
 		return true;
 	}
 	
+	//can the attacker be blocked at all?
 	public static boolean canBeBlocked(Card attacker) {
     	
         if(attacker == null) return true;
@@ -296,10 +298,8 @@ public class CombatUtil {
         
         if(AllZoneUtil.isCardInPlay("Peacekeeper")) return false;
         
-        boolean moatPrevented = false;
-        if(AllZoneUtil.isCardInPlay("Moat") || AllZoneUtil.isCardInPlay("Magus of the Moat")) {
-            if(!c.getKeyword().contains("Flying")) moatPrevented = true;
-        }
+        if(AllZoneUtil.isCardInPlay("Moat") || AllZoneUtil.isCardInPlay("Magus of the Moat")
+            && !c.getKeyword().contains("Flying")) return false;
         
         // CARDNAME can't attack if defending player controls an untapped creature with power ...
         
@@ -361,7 +361,7 @@ public class CombatUtil {
             if(allislands.size() < 5) return false;
         }
         
-        if(c.isTapped() || c.hasSickness() || moatPrevented
+        if(c.isTapped() || c.hasSickness()
                 || AllZoneUtil.isCardInPlay("Blazing Archon", c.getController().getOpponent()) 
                 || c.getKeyword().contains("CARDNAME can't attack.")
                 || c.getKeyword().contains("CARDNAME can't attack or block.")
@@ -535,6 +535,7 @@ public class CombatUtil {
     return false;   
     }
     
+    // This calculates the amount of damage a blockgang can deal to the attacker (first strike not supported)
     public static int totalDamageOfBlockers(Card attacker, CardList defenders) {
     	int damage = 0;
     	
