@@ -485,8 +485,23 @@ public class QuestUtil {
 			CardList humanList = new CardList();
 			for (int i=0;i<3;i++)
 			{
-				Card c = CardFactoryUtil.makeToken("Sheep", "G 0 1 Sheep", Constant.Player.Human, "G", 
-													new String[] {"Creature","Sheep"}, 0, 1, new String[]{""}).get(0);
+				//CANNOT use makeToken because of WheneverKeyword
+				Card c = new Card();
+		        c.setName("Sheep");
+		        c.setImageName("G 0 1 Sheep");
+		        
+		        c.setController(Constant.Player.Human);
+		        c.setOwner(Constant.Player.Computer);
+		        
+		        c.setManaCost("G");
+		        c.setToken(true);
+		        
+		        c.addType("Creature");
+		        c.addType("Sheep");
+		        
+		        c.setBaseAttack(0);
+		        c.setBaseDefense(1);
+			
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);
