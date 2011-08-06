@@ -12367,9 +12367,13 @@ public class GameActionUtil {
   	      		String maxnumber = SpecialConditions.split("/")[1];
 	      		if (Library.size() > Integer.valueOf(maxnumber)) return false;
 	      	}
+  	      if(SpecialConditions.contains("LifeGE")) {
+	      		int life = SourceCard.getController().getLife();
+	      		String maxnumber = SpecialConditions.split("/")[1];
+	      		if (!(life >= Integer.valueOf(maxnumber))) return false;
+	      	}
   	      	if(SpecialConditions.contains("Threshold")) {
-  	      		PlayerZone pYard = AllZone.getZone(Constant.Zone.Graveyard, SourceCard.getController());
-  	      		if (pYard.size() < 7) return false;
+  	      		if (!SourceCard.getController().hasThreshold()) return false;
   	      	}
   	      	if(SpecialConditions.contains("Hellbent")) {
   	      		CardList Handcards = new CardList();
@@ -14034,39 +14038,6 @@ public class GameActionUtil {
 		}
 	};
 
-
-	public static Command Wild_Nacatl                 = new Command() {
-		private static final long serialVersionUID = 6863244333398587274L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Wild Nacatl");
-
-			if(list.size() > 0) {
-				for(int i = 0; i < list.size(); i++) {
-					int pt = 1;
-					Card c = list.get(i);
-					if(hasPlains(c)) pt++;
-					if(hasMountain(c)) pt++;
-
-					c.setBaseAttack(pt);
-					c.setBaseDefense(pt);
-
-				}
-			}
-		}// execute()
-
-		private boolean hasPlains(Card c) {
-			CardList land = AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Plains");
-			return land.size() > 0;
-		}
-
-		private boolean hasMountain(Card c) {
-			CardList land = AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Mountain");
-			return land.size() > 0;
-		}
-
-	};
-
 	public static Command Liu_Bei                     = new Command() {
 
 		private static final long serialVersionUID = 4235093010715735727L;
@@ -14261,65 +14232,6 @@ public class GameActionUtil {
 
 	}; //Naya_Hushblade
 
-	public static Command Werebear                    = new Command() {
-
-		private static final long serialVersionUID = 4599996155083227853L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = AllZoneUtil.getCardsInPlay("Werebear");
-
-			if(list.size() > 0) {
-
-				for(int i = 0; i < list.size(); i++) {
-
-					Card c = list.get(i);
-					if(c.getController().hasThreshold()) {
-						c.setBaseAttack(4);
-						c.setBaseDefense(4);
-					} else {
-						c.setBaseAttack(1);
-						c.setBaseDefense(1);
-					}
-
-				}
-			}
-		}// execute()
-
-	};
-
-	public static Command Divinity_of_Pride           = new Command() {
-		private static final long serialVersionUID = -8809209646381095625L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = AllZoneUtil.getCardsInPlay("Divinity of Pride");
-
-			if(list.size() > 0) {
-				for(int i = 0; i < list.size(); i++) {
-
-					Card c = list.get(i);
-					if(moreThan25Life(c)) {
-						c.setBaseAttack(8);
-						c.setBaseDefense(8);
-					} else {
-						c.setBaseAttack(4);
-						c.setBaseDefense(4);
-					}
-
-				}
-			}
-		}// execute()
-
-		private boolean moreThan25Life(Card c) {
-			int life = c.getController().getLife();
-
-			if(life >= 25) return true;
-			else return false;
-		}
-
-	};
-	
 	public static Command Serra_Ascendant = new Command() {
 		private static final long serialVersionUID = -3183332336954804701L;
 
@@ -16872,7 +16784,6 @@ public class GameActionUtil {
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
 		commands.put("Deaths_Shadow", Deaths_Shadow);
 		commands.put("Deranged_Hermit", Deranged_Hermit);
-		commands.put("Divinity_of_Pride", Divinity_of_Pride);
 		commands.put("Drove_of_Elves", Drove_of_Elves);
 		
 		commands.put("Eldrazi_Monument", Eldrazi_Monument);
@@ -16976,8 +16887,6 @@ public class GameActionUtil {
 		commands.put("Vampire_Nocturnus", Vampire_Nocturnus);
 		commands.put("Vexing_Beetle", Vexing_Beetle);
 		
-		commands.put("Werebear", Werebear);
-		commands.put("Wild_Nacatl", Wild_Nacatl);
 		commands.put("Windwright_Mage", Windwright_Mage);
 		commands.put("Wrens_Run_Packmaster", Wrens_Run_Packmaster);
 		

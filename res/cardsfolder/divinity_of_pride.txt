@@ -1,10 +1,11 @@
 Name:Divinity of Pride
 ManaCost:WB WB WB WB WB
 Types:Creature Spirit Avatar
-Text:Divinity of Pride gets +4/+4 as long as you have 25 or more life.
+Text:no text
 PT:4/4
 K:Flying
 K:Lifelink
+K:stPumpSelf:Creature:4/4:LifeGE/25:Divinity of Pride gets +4/+4 as long as you have 25 or more life.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divinity_of_pride.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/86.jpg

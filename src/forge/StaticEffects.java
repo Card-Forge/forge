@@ -48,7 +48,6 @@ public class StaticEffects
 		cardToEffectsList.put("Dauntless Dourbark", new String[] {"Dauntless_Dourbark"});
 		cardToEffectsList.put("Death's Shadow", new String[] {"Deaths_Shadow"});
 		cardToEffectsList.put("Deranged Hermit", new String[] {"Deranged_Hermit"});
-		cardToEffectsList.put("Divinity of Pride", new String[] {"Divinity_of_Pride"});
 		cardToEffectsList.put("Drove of Elves", new String[] {"Drove_of_Elves"});
 		
 		cardToEffectsList.put("Eldrazi Monument", new String[] {"Eldrazi_Monument"});
@@ -149,8 +148,6 @@ public class StaticEffects
 		cardToEffectsList.put("Vampire Nocturnus", new String[]{"Vampire_Nocturnus"});
 		cardToEffectsList.put("Vexing Beetle", new String[] {"Vexing_Beetle"});
 		
-		cardToEffectsList.put("Werebear", new String[] {"Werebear"});
-		cardToEffectsList.put("Wild Nacatl", new String[] {"Wild_Nacatl"});
 		cardToEffectsList.put("Windwright Mage", new String[] {"Windwright_Mage"});
 		cardToEffectsList.put("Wolf", new String[] {"Sound_the_Call_Wolf"});
 		cardToEffectsList.put("Wren's Run Packmaster", new String[] {"Wrens_Run_Packmaster"});
