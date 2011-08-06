@@ -4120,7 +4120,7 @@ public class CardFactory_Sorceries {
 
       
         
-        //*************** START *********** START **************************
+        /* Converted to keyword
         else if(cardName.equals("Culling Sun")) {
             SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 2169815434022673011L;
@@ -4224,7 +4224,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-  
+  		*/
    
         
         //*************** START *********** START **************************

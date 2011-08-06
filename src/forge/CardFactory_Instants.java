@@ -5055,12 +5055,11 @@ public class CardFactory_Instants {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        
-        //*************** START *********** START **************************
+        /* Converted to keyword
         else if(cardName.equals("Consume the Meek")) {
         	/* Destroy each creature with converted mana cost 3 or less.
         	 * They can't be regenerated.
-        	 */
+        
         	SpellAbility spell = new Spell(card) {
         		private static final long serialVersionUID = 9127892501403187034L;
 
@@ -5108,7 +5107,7 @@ public class CardFactory_Instants {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }// *************** END ************ END **************************
-     
+     	*/
         
         
         //*************** START *********** START **************************
