@@ -1,3 +1,8 @@
+Aluren
+2 G G
+Enchantment
+no text
+
 Coat of Arms
 5
 Artifact
@@ -22849,11 +22854,6 @@ Absorb
 U U W
 Instant
 Counter target spell. You gain 3 life.
-
-Aluren
-2 G G
-Enchantment
-Any player may play creature cards with converted mana cost 3 or less without paying their mana cost any time he or she could play an instant.
 
 Angel of Despair
 3 W W B B
