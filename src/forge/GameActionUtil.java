@@ -34,6 +34,7 @@ public class GameActionUtil
 		upkeep_AEther_Vial();
 		upkeep_Ratcatcher();
 		upkeep_Nath();
+		upkeep_Anowon();
 		upkeep_Cunning_Lethemancer();
 		upkeep_Sensation_Gorger();
 		upkeep_Winnower_Patrol();
@@ -5359,6 +5360,46 @@ public class GameActionUtil
 		}
 	}
 
+	private static void upkeep_Anowon()
+	{
+		final String player = AllZone.Phase.getActivePlayer();
+		CardList list = CardFactoryUtil.getCards("Anowon, the Ruin Sage", player);
+		
+		if (list.size() > 0)
+		{
+			Ability ability = new Ability(list.get(0), "0")
+			{
+				public void resolve()
+				{
+					PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+					PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+					CardList choices = new CardList(hPlay.getCards());
+					
+					CardListFilter filter = new CardListFilter()
+					{
+						public boolean addCard(Card c)
+						{
+							return c.isCreature() && !c.getType().contains("Vampire") && 
+								   !c.getKeyword().contains("Changeling");
+						}
+					};
+					
+					choices = choices.filter(filter);
+					if (choices.size() > 0)
+						AllZone.GameAction.sacrificePermanent(Constant.Player.Human, this, choices);
+					
+					CardList compCreats = new CardList(cPlay.getCards());
+					compCreats = compCreats.filter(filter);
+					
+					if (compCreats.size() > 0)
+						AllZone.GameAction.sacrificePermanent(Constant.Player.Computer, this, compCreats);	
+				}
+			};
+			ability.setStackDescription("At the beginning of your upkeep, each player sacrifices a non-Vampire creature.");
+			AllZone.Stack.add(ability);
+		}
+	}
+	
 	private static void upkeep_Cunning_Lethemancer()
 	{
 		final String player = AllZone.Phase.getActivePlayer();
@@ -10591,6 +10632,41 @@ public class GameActionUtil
 				else {
 					c.removeIntrinsicKeyword("Haste");
 					c.setBaseAttack(1);
+					c.setBaseDefense(1);
+				}
+			}
+		}// execute()
+
+		//does opponent have 10 or less life?
+		private boolean oppLess10Life(Card c)
+		{
+			String opp = AllZone.GameAction.getOpponent(c.getController());
+			return AllZone.GameAction.getPlayerLife(opp).getLife() <= 10;
+		}
+	};
+	
+	public static Command Ruthless_Cullblade = new Command()
+	{
+		private static final long serialVersionUID = 2627513737024865169L;
+
+		public void execute()
+		{
+			// get all creatures
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Ruthless Cullblade");
+
+			for (int i = 0; i < list.size(); i++)
+			{
+				Card c = list.get(i);
+				if (oppLess10Life(c)) {
+					c.setBaseAttack(4);
+					c.setBaseDefense(2);
+				}
+				else 
+				{
+					c.setBaseAttack(2);
 					c.setBaseDefense(1);
 				}
 			}
@@ -15930,6 +16006,7 @@ public class GameActionUtil
 		commands.put("Liu_Bei", Liu_Bei);
 		commands.put("Mystic_Enforcer", Mystic_Enforcer);
 		commands.put("Guul_Draz_Vampire", Guul_Draz_Vampire);
+		commands.put("Ruthless_Cullblade", Ruthless_Cullblade);
 		commands.put("Bloodghast", Bloodghast);
 		commands.put("Bant_Sureblade", Bant_Sureblade);
 		commands.put("Esper_Stormblade", Esper_Stormblade);

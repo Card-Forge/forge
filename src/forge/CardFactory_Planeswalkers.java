@@ -534,6 +534,13 @@ class CardFactory_Planeswalkers {
 	    	   
 	    	   CardList permsToSac = new CardList();
 	    	   CardList oppPermTempList = new CardList(play.getCards());
+	    	   oppPermTempList = oppPermTempList.filter(new CardListFilter()
+	    	   {
+	    		  public boolean addCard(Card c) 
+	    		  {
+	    			  return !c.getName().equals("Mana Pool");
+	    		  }
+	    	   });
 	           
 	           if (player.equals("Human"))
 	           {

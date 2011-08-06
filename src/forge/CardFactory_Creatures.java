@@ -18662,7 +18662,7 @@ public class CardFactory_Creatures {
 	        }//*************** END ************ END **************************
 	      
 	      
-	    //*************** START *********** START **************************
+	      	//*************** START *********** START **************************
 		    else if(cardName.equals("Stoneforge Mystic"))
 		    {
 		      final SpellAbility ability = new Ability(card, "0")
@@ -18884,7 +18884,6 @@ public class CardFactory_Creatures {
 	        }
 	      }//echo
 	      
-	      	      
-		 return card;
+		  return card;
 	}
 }

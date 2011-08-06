@@ -2789,8 +2789,7 @@ class CardFactory_Lands {
 	              c.removeType("Creature");
 	              c.removeType("Warrior");
 	              c.removeIntrinsicKeyword("First Strike");
-	              c.setManaCost("");
-	              
+	              c.setManaCost("");      
 	            }
 	          };
 
@@ -2896,6 +2895,224 @@ class CardFactory_Lands {
 	        	card.clearSpellKeepManaAbility();
 	        	card.addComesIntoPlayCommand(comesIntoPlay);
 	        }//*************** END ************ END **************************
+	        
+	      //*************** START *********** START **************************
+	        else if(cardName.equals("Celestial Colonnade"))
+	        {
+	          final Command eot1 = new Command()
+	          {
+				private static final long serialVersionUID = 7377356496869217420L;
+
+				public void execute()
+	            {
+	              Card c = card;	              
+	              c.removeType("Creature");
+	              c.removeType("Elemental");
+	              c.removeIntrinsicKeyword("Vigilance");
+	              c.removeIntrinsicKeyword("Flying");
+	              c.setManaCost("");
+	              c.setBaseAttack(0);
+	              c.setBaseDefense(0);              
+	            }
+	          };
+
+	          final SpellAbility a1 = new Ability(card, "3 W U")
+	          {            
+	            	 public boolean canPlayAI()
+	                 {
+	               	     return !card.hasSickness();
+	                 }
+	            	            	            
+	            public void resolve()
+	            {
+	              Card c = card;
+
+	              c.setBaseAttack(4);
+	              c.setBaseDefense(4);
+	              c.setManaCost("W U");
+
+	              //to prevent like duplication like "Creature Creature"              
+	              if(!c.getType().contains("Creature"))
+	                  c.addType("Creature");
+	              if(!c.getType().contains("Elemental"))
+	                  c.addType("Elemental");
+	              
+	              if (!c.getIntrinsicKeyword().contains("Flying"))
+	            	  c.addIntrinsicKeyword("Flying");
+	              if (!c.getIntrinsicKeyword().contains("Vigilance"))
+	            	  c.addIntrinsicKeyword("Vigilance");
+	              	                
+	              AllZone.EndOfTurn.addUntil(eot1);
+	            }
+	          };//SpellAbility
+
+	          card.clearSpellKeepManaAbility();
+	          card.addSpellAbility(a1);
+	          a1.setStackDescription(card +" - until end of turn, Celestial Colonnade becomes a 4/4 white and blue Elemental creature with flying and vigilance.");
+	          a1.setDescription("3 W U: Until end of turn, Celestial Colonnade becomes a 4/4 white and blue Elemental creature with flying and vigilance. It's still a land.");
+	        }//*************** END ************ END **************************
+	        
+	      //*************** START *********** START **************************
+	        else if(cardName.equals("Stirring Wildwood"))
+	        {
+	          final Command eot1 = new Command()
+	          {
+				private static final long serialVersionUID = -1329533520874994575L;
+
+				public void execute()
+	            {
+	              Card c = card;	              
+	              c.removeType("Creature");
+	              c.removeType("Elemental");
+	              c.removeIntrinsicKeyword("Reach");
+	              c.setManaCost("");
+	              c.setBaseAttack(0);
+	              c.setBaseDefense(0);              
+	            }
+	          };
+
+	          final SpellAbility a1 = new Ability(card, "1 G W")
+	          {            
+	            	 public boolean canPlayAI()
+	                 {
+	               	     return !card.hasSickness();
+	                 }
+	            	            	            
+	            public void resolve()
+	            {
+	              Card c = card;
+
+	              c.setBaseAttack(3);
+	              c.setBaseDefense(4);
+	              c.setManaCost("G W");
+
+	              //to prevent like duplication like "Creature Creature"              
+	              if(!c.getType().contains("Creature"))
+	                  c.addType("Creature");
+	              if(!c.getType().contains("Elemental"))
+	                  c.addType("Elemental");
+	              
+	              if (!c.getIntrinsicKeyword().contains("Reach"))
+	            	  c.addIntrinsicKeyword("Reach");
+
+	              AllZone.EndOfTurn.addUntil(eot1);
+	            }
+	          };//SpellAbility
+
+	          card.clearSpellKeepManaAbility();
+	          card.addSpellAbility(a1);
+	          a1.setStackDescription(card +" - until end of turn, Stirring Wildwood becomes a 3/4 green and white Elemental creature with reach.");
+	          a1.setDescription("1 G W: Until end of turn, Stirring Wildwood becomes a 3/4 green and white Elemental creature with reach. It's still a land.");
+	        }//*************** END ************ END **************************
+	        
+	        
+	      //*************** START *********** START **************************
+	        else if(cardName.equals("Creeping Tar Pit"))
+	        {
+	          final Command eot1 = new Command()
+	          {
+				private static final long serialVersionUID = -6004932967127014386L;
+
+				public void execute()
+	            {
+	              Card c = card;	              
+	              c.removeType("Creature");
+	              c.removeType("Elemental");
+	              c.removeIntrinsicKeyword("Unblockable");
+	              c.setManaCost("");
+	              c.setBaseAttack(0);
+	              c.setBaseDefense(0);              
+	            }
+	          };
+
+	          final SpellAbility a1 = new Ability(card, "1 U B")
+	          {            
+	            	 public boolean canPlayAI()
+	                 {
+	               	     return !card.hasSickness();
+	                 }
+	            	            	            
+	            public void resolve()
+	            {
+	              Card c = card;
+
+	              c.setBaseAttack(3);
+	              c.setBaseDefense(2);
+	              c.setManaCost("U B");
+
+	              //to prevent like duplication like "Creature Creature"              
+	              if(!c.getType().contains("Creature"))
+	                  c.addType("Creature");
+	              if(!c.getType().contains("Elemental"))
+	                  c.addType("Elemental");
+	              
+	              if (!c.getIntrinsicKeyword().contains("Unblockable"))
+	            	  c.addIntrinsicKeyword("Unblockable");
+
+	              AllZone.EndOfTurn.addUntil(eot1);
+	            }
+	          };//SpellAbility
+
+	          card.clearSpellKeepManaAbility();
+	          card.addSpellAbility(a1);
+	          a1.setStackDescription(card +" - Until end of turn, Creeping Tar Pit becomes a 3/2 blue and black Elemental creature and is unblockable.");
+	          a1.setDescription("1 U B: Until end of turn, Creeping Tar Pit becomes a 3/2 blue and black Elemental creature and is unblockable. It's still a land.");
+	        }//*************** END ************ END **************************
+	        
+	        
+	      //*************** START *********** START **************************
+	        else if(cardName.equals("Raging Ravine"))
+	        {
+	          final Command eot1 = new Command()
+	          {
+				private static final long serialVersionUID = -2632172918887247003L;
+
+				public void execute()
+	            {
+	              Card c = card;	              
+	              c.removeType("Creature");
+	              c.removeType("Elemental");
+	              c.removeIntrinsicKeyword("Whenever this creature attacks, put a +1/+1 counter on it.");
+	              c.setManaCost("");
+	              c.setBaseAttack(0);
+	              c.setBaseDefense(0);              
+	            }
+	          };
+
+	          final SpellAbility a1 = new Ability(card, "2 R G")
+	          {            
+	            	 public boolean canPlayAI()
+	                 {
+	               	     return !card.hasSickness();
+	                 }
+	            	            	            
+	            public void resolve()
+	            {
+	              Card c = card;
+
+	              c.setBaseAttack(3);
+	              c.setBaseDefense(3);
+	              c.setManaCost("R G");
+
+	              //to prevent like duplication like "Creature Creature"              
+	              if(!c.getType().contains("Creature"))
+	                  c.addType("Creature");
+	              if(!c.getType().contains("Elemental"))
+	                  c.addType("Elemental");
+	              
+	              //if (!c.getIntrinsicKeyword().contains("Whenever this creature attacks, put a +1/+1 counter on it."))
+	              c.addIntrinsicKeyword("Whenever this creature attacks, put a +1/+1 counter on it.");
+
+	              AllZone.EndOfTurn.addUntil(eot1);
+	            }
+	          };//SpellAbility
+
+	          card.clearSpellKeepManaAbility();
+	          card.addSpellAbility(a1);
+	          a1.setStackDescription(card +" - until end of turn, Raging Ravine becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\"");
+	          a1.setDescription("2 R G: Until end of turn, Raging Ravine becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" It's still a land.");
+	        }//*************** END ************ END **************************
+    
     
 	        
 	        if (hasKeyword(card, "Cycling") != -1)

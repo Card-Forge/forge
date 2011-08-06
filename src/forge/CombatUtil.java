@@ -873,6 +873,29 @@ public class CombatUtil
 			  }
 		  }//Fervent Charge
 		  
+		  //Raging Ravine, other future creats?
+		  if (c.getKeyword().contains("Whenever this creature attacks, put a +1/+1 counter on it."))
+		  {
+			  ArrayList<String> kw = c.getKeyword();
+			  int count = 0;
+			  for (String s: kw)
+			  {
+				  if (s.equals("Whenever this creature attacks, put a +1/+1 counter on it."))
+					  count++;
+			  }
+			  final Card crd = c;
+			  Ability ability = new Ability(c, "0")
+			  {
+				  public void resolve()
+				  {
+					  crd.addCounter(Counters.P1P1, 1);
+				  }
+			  };
+			  ability.setStackDescription(c +" - Whenever this creature attacks, put a +1/+1 counter on it.");
+			  for (int i=0;i<count;i++)
+				  AllZone.Stack.add(ability);
+		  }//Raging Ravine
+		  
 		  if (c.getName().equals("Zhang He, Wei General") && !c.getCreatureAttackedThisTurn())
 		  {
 			 final PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
@@ -1630,6 +1653,23 @@ public class CombatUtil
 			     ability.setStackDescription("Goblin Guide - defending player reveals the top card of his or her library. If it's a land card, that player puts it into his or her hand.");
 			     AllZone.Stack.add(ability);
 		  }//Goblin Guide
+		  
+		  else if (c.getName().equals("Pulse Tracker") && !c.getCreatureAttackedThisTurn())
+		  {
+			  final String opp =  AllZone.GameAction.getOpponent(c.getController());
+			    
+			     Ability ability = new Ability(c, "0")
+			     {
+			    	public void resolve()
+			    	{
+			    		AllZone.GameAction.getPlayerLife(opp).subtractLife(1);
+			    	}
+			     };
+			     ability.setStackDescription("Pulse Tracker - Whenever Pulse Tracker attacks, each opponent loses 1 life.");
+			     AllZone.Stack.add(ability);
+		  }//Pulse Tracker
+		  
+		  
 		  
 		  c.setCreatureAttackedThisTurn(true);
 		  

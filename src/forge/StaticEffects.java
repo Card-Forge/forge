@@ -64,6 +64,7 @@ public class StaticEffects
 		cardToEffectsList.put("Wild Nacatl", new String[] {"Wild_Nacatl"});
 		cardToEffectsList.put("Liu Bei, Lord of Shu", new String[] {"Liu_Bei"});
 		cardToEffectsList.put("Guul Draz Vampire", new String[] {"Guul_Draz_Vampire"});
+		cardToEffectsList.put("Ruthless Cullblade", new String[] {"Ruthless_Cullblade"});
 		cardToEffectsList.put("Bloodghast", new String[] {"Bloodghast"});
 		cardToEffectsList.put("Bant Sureblade", new String[] {"Bant_Sureblade"});
 		cardToEffectsList.put("Esper Stormblade", new String[] {"Esper_Stormblade"});

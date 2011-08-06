@@ -54,6 +54,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone
 			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
 			PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getController());
 			
+			//Amulet of Vigor
 			if (c.isTapped()) 
 			{
 				final Card untapCrd = c;
@@ -68,8 +69,6 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone
 				for (int i = 0; i < CardFactoryUtil.getCards("Amulet of Vigor", c.getController()).size(); i++)
 					AllZone.Stack.add(ability);
 			}
-			//if (CardFactoryUtil.getCards("Amulet of Vigor", c.getController()).size() > 0 && c.isTapped())
-			//	c.untap();
 			
 			if (c.isLand())
 			{
@@ -138,7 +137,6 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone
 					GameActionUtil.executeAllyEffects(var);
 				}
 			}
-			
 			
 		}
 		if (AllZone.StateBasedEffects.getCardToEffectsList().containsKey(c.getName()))

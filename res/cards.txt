@@ -1,3 +1,53 @@
+Raging Ravine
+no cost
+Land
+no text
+tap add: R
+tap add: G
+Comes into play tapped.
+
+Creeping Tar Pit
+no cost
+Land
+no text
+tap add: U
+tap add: B
+Comes into play tapped.
+
+Stirring Wildwood
+no cost
+Land
+no text
+tap add: G
+tap add: W
+Comes into play tapped.
+
+Celestial Colonnade
+no cost
+Land
+no text
+tap: add W
+tap: add U
+Comes into play tapped.
+
+Ruthless Cullblade
+1 B
+Creature Vampire Warrior
+Ruthless Cullblade gets +2/+1 as long as an opponent has 10 or less life.
+2/1
+
+Anowon, the Ruin Sage
+3 B B
+Legendary Creature Vampire Shaman
+At the beginning of your upkeep, each player sacrifices a non-Vampire creature.
+4/3
+
+Pulse Tracker
+B
+Creature Vampire Rogue
+Whenever Pulse Tracker attacks, each opponent loses 1 life.
+1/1
+
 Harabaz Druid
 1 G
 Creature Human Druid Ally
