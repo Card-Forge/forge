@@ -4034,24 +4034,6 @@ public class CardFactory_Sorceries {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Time Stretch")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -76579316599195788L;
-                
-                @Override
-                public void resolve() {
-                    AllZone.Phase.addExtraTurn(getTargetPlayer());
-                    AllZone.Phase.addExtraTurn(getTargetPlayer());
-                }
-            };
-            card.clearSpellAbility();
-            spell.setChooseTargetAI(CardFactoryUtil.AI_targetComputer());
-            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Time Warp")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = -76579316599195788L;
