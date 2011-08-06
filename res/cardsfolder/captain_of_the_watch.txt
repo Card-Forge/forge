@@ -1,11 +1,12 @@
 Name:Captain of the Watch
 ManaCost:4 W W
 Types:Creature Human Soldier
-Text:When Captain of the Watch enters the battlefield, put three 1/1 white Soldier creature tokens onto the battlefield.
+Text:no text
 PT:3/3
 K:Vigilance
 K:stPumpAll:Creature.Soldier+Other+YouCtrl:1/1/Vigilance:No Condition:Other Soldier creatures you control get +1/+1 and have vigilance.
-K:etbMakeToken<>3<>Soldier<>W 1 1 Soldier<>Controller<>W<>Creature;Soldier<>1<>1<>None<>put three 1/1 white Soldier creature tokens onto the battlefield.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put three 1/1 white Soldier creature tokens onto the battlefield.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 3 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ Controller | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/captain_of_the_watch.jpg
