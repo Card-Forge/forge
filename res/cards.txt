@@ -79,7 +79,6 @@ no text
 abDamageTgtCP 1 R T:X:Drawback$DamageSelf/X:Sunflare Shaman deals X damage to target creature or player and X damage to itself, where X is the number of Elemental cards in your graveyard.:Sunflare Shaman - deals X damage to creature or player and X damage to itself.
 SVar:X:Count$TypeInYourYard.Elemental
 
->>>>>>> .r394
 Flamewave Invoker
 2 R
 Creature Goblin Mutant
