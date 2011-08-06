@@ -151,7 +151,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
         String[] parts = orig.split(":");
         Mana = parts[1];
         Mana = Mana.replaceAll(" add ", "");
-        Mana = Mana.replaceAll(" ", "");
+        //Mana = Mana.replaceAll(" ", ""); // sol - removed for new manapool compatibility
         
         String cost = parts[0];
         cost = cost.replaceAll("Tap", "tap").replaceAll("tap", "T");
