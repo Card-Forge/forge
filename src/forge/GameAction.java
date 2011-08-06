@@ -667,19 +667,26 @@ public class GameAction {
     
     // Whenever Keyword
     public void CheckWheneverKeyword(Card Triggering_Card,String Event, Object[] Custom_Parameters) { 
-		CardList Cards_In_Play = new CardList();
- 		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
- 		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
- 		Cards_In_Play = Cards_In_Play.filter(new CardListFilter() {
+        PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+        PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+        PlayerZone Hgrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human);
+        PlayerZone Cgrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer);
+        
+ 		CardList Cards_WithKeyword = new CardList();
+        Cards_WithKeyword.add(new CardList(Hplay.getCards()));
+        Cards_WithKeyword.add(new CardList(Cplay.getCards()));
+        Cards_WithKeyword.add(new CardList(Hgrave.getCards()));
+        Cards_WithKeyword.add(new CardList(Cgrave.getCards()));
+ 		Cards_WithKeyword = Cards_WithKeyword.filter(new CardListFilter() {
              public boolean addCard(Card c) {
                  if(c.getKeyword().toString().contains("WheneverKeyword")) return true;
                  return false;
              }
          });
  		boolean Triggered = false;
- 		for(int i = 0; i < Cards_In_Play.size() ; i++) {	
+ 		for(int i = 0; i < Cards_WithKeyword.size() ; i++) {	
  		if(Triggered == false) {	
- 			Card card = Cards_In_Play.get(i);
+ 			Card card = Cards_WithKeyword.get(i);
  		        ArrayList<String> a = card.getKeyword();
  		        int WheneverKeywords = 0;
  		        int WheneverKeyword_Number[] = new int[a.size()];
@@ -709,17 +716,24 @@ public class GameAction {
     	 * 					: Custom_Parameters[2] = Damage Source
     	 */
 		final Card F_TriggeringCard = c;
- 		CardList Cards_In_Play = new CardList();
- 		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
- 		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
- 		Cards_In_Play = Cards_In_Play.filter(new CardListFilter() {
+        PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+        PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+        PlayerZone Hgrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human);
+        PlayerZone Cgrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer);
+        
+ 		CardList Cards_WithKeyword = new CardList();
+        Cards_WithKeyword.add(new CardList(Hplay.getCards()));
+        Cards_WithKeyword.add(new CardList(Cplay.getCards()));
+        Cards_WithKeyword.add(new CardList(Hgrave.getCards()));
+        Cards_WithKeyword.add(new CardList(Cgrave.getCards()));
+ 		Cards_WithKeyword = Cards_WithKeyword.filter(new CardListFilter() {
              public boolean addCard(Card c) {
                  if(c.getKeyword().toString().contains("WheneverKeyword")) return true;
                  return false;
              }
          });
- 		for(int i = 0; i < Cards_In_Play.size() ; i++) {	
- 			Card card = Cards_In_Play.get(i);
+ 		for(int i = 0; i < Cards_WithKeyword.size() ; i++) {	
+ 			Card card = Cards_WithKeyword.get(i);
  			final Card F_card = card;
  		        ArrayList<String> a = card.getKeyword();
  		        int WheneverKeywords = 0;
@@ -786,27 +800,47 @@ public class GameAction {
                                 for(int z = 0; z < Color.length - 1; z++) if(!CardUtil.getColors(c).contains(Color[z + 1])) k[4] = "Null";     		
                                      	}
                             }
-
-                  	if(k[8].contains("Initiator - Other than Self")) {
+                    // Zone Condition
+                		String Zones = k[3];
+                        PlayerZone[] Required_Zones = new PlayerZone[1];
+                        	if(Zones.equals("Hand")) Required_Zones[0] = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                        	if(Zones.equals("Graveyard")) Required_Zones[0] = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                        	if(Zones.equals("Play")) Required_Zones[0] = AllZone.getZone(Constant.Zone.Play, card.getController());
+                        	if(Zones.contains("Library")) Required_Zones[0] = AllZone.getZone(Constant.Zone.Library, card.getController());
+                        	if(Zones.contains("Exiled")) Required_Zones[0] = AllZone.getZone(Constant.Zone.Removed_From_Play, card.getController());
+                        //	if(Zones.contains("Sideboard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Sideboard, card.getController());
+                        	final PlayerZone Required_Zone = Required_Zones[0];   
+                    // Special Conditions   
+                        int Special_Conditions = 1;
+                        String Special_ConditionsParse = k[8];                
+                        String Special_Condition[] = Special_ConditionsParse.split("!");
+                        Special_Conditions = Special_Condition.length;
+                            for(int y = 0; y < Special_Conditions; y++) {
+                  	if(Special_Condition[y].contains("Initiator - Other than Self")) {
                  		if(card.equals(c)) k[4] = "Null";      		
                  	}
-                  	if(k[8].contains("Initiator - OwnedByController")) {
+                  	if(Special_Condition[y].contains("Initiator - OwnedByController")) {
                  		if(!c.getController().equals(card.getController())) k[4] = "Null";      		
                  	}
-                  	if(k[8].contains("Initiator - Has Keyword")) {
+                  	if(Special_Condition[y].contains("Initiator - Has Keyword")) {
                   		boolean Nullified = true;
                         String KeywordParse = k[8];                
                         String Keyword[] = KeywordParse.split("/");
                         for(int z = 0; z < Keyword.length - 1; z++) if((c.getKeyword()).contains(Keyword[z + 1])) Nullified = false;  
                         if(Nullified == true) k[4] = "Null";
                  	}
-                  	if(k[8].contains("ControllerUpkeep")) {
+                  	if(Special_Condition[y].contains("ControllerUpkeep")) {
                         if(getLastPlayerToDraw().equals(card.getController())) k[4] = "Null";	
                  	}
-                  	if(k[8].contains("ControllerEndStep")) {
+                  	if(Special_Condition[y].contains("ControllerEndStep")) {
                         if(!getLastPlayerToDraw().equals(card.getController())) k[4] = "Null";	
                  	}
-                  	
+                  	if(Special_Condition[y].contains("MoreCardsInHand")) {
+                        if(((AllZone.getZone(Constant.Zone.Hand, card.getController())).getCards()).length 
+                        		<= (AllZone.getZone(Constant.Zone.Hand, getOpponent(card.getController()))).getCards().length) k[4] = "Null";
+                 	}
+                    }
+                            
                   	// Mana Cost (if Any)
             		String ManaCost = "0";
             		if(k[7].contains("PayMana")) {
@@ -912,7 +946,7 @@ public class GameAction {
                             	private static final long serialVersionUID = 151367344511590317L;
 
                     			public void execute() {
-                    				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInPlay(F_TargetCard[F_Target])) F_TargetCard[F_Target].addCounter(Counters.P1P1, F_Amount);
+                    				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInZone(F_TargetCard[F_Target],Required_Zone)) F_TargetCard[F_Target].addCounter(Counters.P1P1, F_Amount);
                 			};
                 		};
                         Command_Effects[F_Target] = Proper_resolve;      
@@ -924,7 +958,7 @@ public class GameAction {
                             	private static final long serialVersionUID = 151367344511590317L;
 
                     			public void execute() {
-                    				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInPlay(F_card)) {
+                    				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInZone(F_card,Required_Zone)) {
     			          				PlayerLife life = AllZone.GameAction.getPlayerLife(F_TargetPlayer[F_Target]);
     			        				if(F_Amount > -1) life.addLife(F_Amount);
     			        				else life.subtractLife(F_Amount * -1,F_card);
@@ -942,7 +976,7 @@ public class GameAction {
                                 	private static final long serialVersionUID = 151367344511590317L;
 
                         			public void execute() {
-                        				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInPlay(F_card)) {
+                        				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInZone(F_card,Required_Zone)) {
       			                    	  AllZone.GameAction.drawCard(F_TargetPlayer[F_Target]);
       			                      }
 
@@ -958,7 +992,7 @@ public class GameAction {
                                 	private static final long serialVersionUID = 151367344511590317L;
 
                         			public void execute() {
-                        				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInPlay(F_card)) {
+                        				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInZone(F_card,Required_Zone)) {
       			                    	  AllZone.GameAction.discard(F_TargetPlayer[F_Target],F_Amount);
       			                      }
 
@@ -974,7 +1008,7 @@ public class GameAction {
                                 	private static final long serialVersionUID = 151367344511590317L;
 
                         			public void execute() {
-                        				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInPlay(F_card)) {
+                        				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInZone(F_card,Required_Zone)) {
                         					AllZone.CardFactory.copySpellontoStack(F_card,F_TargetCard[F_Target], true);
                                     };
 
@@ -984,13 +1018,41 @@ public class GameAction {
                             StackDescription = StackDescription + F_card.getController() + " copies " + F_TargetCard[y];                     
                 		}
                 		
+                		// MoveFrom/From Zone1/to Zone2
+                		if(Effect[y].contains("MoveFrom")) {
+                            String[] ZoneConditions = AmountParse.split("-");
+                            PlayerZone[] PZones = new PlayerZone[ZoneConditions.length];
+                            for(int z = 0; z < ZoneConditions.length; z++) {
+                            	if(ZoneConditions[z].equals("Hand")) PZones[z] = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                            	if(ZoneConditions[z].equals("Graveyard")) PZones[z] = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                            	if(ZoneConditions[z].equals("Play")) PZones[z] = AllZone.getZone(Constant.Zone.Play, card.getController());
+                            	if(ZoneConditions[z].contains("Library")) PZones[z] = AllZone.getZone(Constant.Zone.Library, card.getController());
+                            	if(ZoneConditions[z].contains("Exiled")) PZones[z] = AllZone.getZone(Constant.Zone.Removed_From_Play, card.getController());
+                            //	if(ZoneConditions[z].contains("Sideboard")) PZones[z] = AllZone.getZone(Constant.Zone.Sideboard, card.getController());
+                            }
+                            final PlayerZone[] F_PZones = PZones;
+                    			Command Proper_resolve = new Command() {
+                                	private static final long serialVersionUID = 151367344511590317L;
+
+                        			public void execute() {
+                        				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInZone(F_TargetCard[F_Target],F_PZones[1])) {
+      			                    	  AllZone.GameAction.moveTo(F_PZones[2], F_TargetCard[F_Target]);
+      			                    	  checkStateEffects(); // For Legendaries
+      			                      }
+
+    			                      }
+                    			};
+                            Command_Effects[F_Target] = Proper_resolve;      
+                            StackDescription = StackDescription + F_TargetCard[y] + " moves from  " + ZoneConditions[1] + " to " + ZoneConditions[2] ;                        
+                		}
+                		
                 		// Deal Damage
                 		if(Effect[y].contains("Damage")) {
                     			Command Proper_resolve = new Command() {
                                 	private static final long serialVersionUID = 151367344511590317L;
 
                         			public void execute() {
-            	                    	if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInPlay(F_card)) {
+            	                    	if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInZone(F_card,Required_Zone)) {
       			                    	  if(F_card.getController().equals(Constant.Player.Human)) {
       			                    	  for(int z = 0; z < Targets_Multi.length; z++) {
       			                    		  if(!(Targets_Multi[z].equals(Constant.Player.Human) || Targets_Multi[z].equals(Constant.Player.Computer))) {
@@ -1030,6 +1092,7 @@ public class GameAction {
     }
     void Whenever_ManaPaid (Card Source, String[] Keyword_Details, final Command Proper_Resolve, SpellAbility ability) {
 		String S_Amount = "0";
+		if(!Keyword_Details[7].contains("No_Condition") || Keyword_Details[7].equals("Yes_No")) {
 		if(Keyword_Details[7].contains("PayMana")) {
             String PayAmountParse = Keyword_Details[7];                
             S_Amount = PayAmountParse.split("/")[1];
@@ -1048,14 +1111,36 @@ public class GameAction {
             	Proper_Resolve.execute();
         }
         }
+		}
+		if(Keyword_Details[7].contains("SacrificeType")) {
+            String PayAmountParse = Keyword_Details[7];                
+            S_Amount = PayAmountParse.split("/")[1];
+            PlayerZone play = AllZone.getZone(Constant.Zone.Play, Source.getController());
+            CardList choice = new CardList(play.getCards());
+            choice = choice.getType(S_Amount);
+        if(Source.getController().equals(Constant.Player.Human)) {
+            AllZone.InputControl.setInput(CardFactoryUtil.Wheneverinput_sacrifice(ability, choice, "Select a " + S_Amount +" to sacrifice.",Proper_Resolve));
+        } /**else {
+            if(choice.size() > 5) {
+            	sacrifice(choice.get(0));
+            	Proper_Resolve.execute();
+        }
+        } **/ 
+		}
     		} else Proper_Resolve.execute();
     }
 	boolean Whenever_Go (Card Source, String[] Keyword_Details) {
 		boolean Go = true;
-	//	final int[] Paid = new int[1];
-		if(Keyword_Details[3].equals("Play")) {
-			PlayerZone Required_Zone = AllZone.getZone(Constant.Zone.Play, Source.getController());
-    		if(AllZone.GameAction.isCardInZone(Source,Required_Zone)) {
+		String Zones = Keyword_Details[3];
+        PlayerZone[] Required_Zone = new PlayerZone[1];
+        	if(Zones.equals("Hand")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Hand, Source.getController());
+        	if(Zones.equals("Graveyard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Graveyard, Source.getController());
+        	if(Zones.equals("Play")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Play, Source.getController());
+        	if(Zones.contains("Library")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Library, Source.getController());
+        	if(Zones.contains("Exiled")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Removed_From_Play, Source.getController());
+        //	if(Zones.contains("Sideboard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Sideboard, Source.getController());
+        	
+    		if(AllZone.GameAction.isCardInZone(Source,Required_Zone[0])) {
 		if(Keyword_Details[7].equals("Yes_No")) {
     	if(Source.getController().equals("Human")) {
         	Object[] possibleValues = {"Yes", "No"};
@@ -1069,15 +1154,21 @@ public class GameAction {
 		}
 
     		}
-    }
 
 		return Go;
 		}
 	
 	public void Whenever_Input(Card Source, String[] Keyword_Details, Command paidCommand, final SpellAbility ability) {
-		if(Keyword_Details[3].equals("Play")) {
-			PlayerZone Required_Zone = AllZone.getZone(Constant.Zone.Play, Source.getController());
-    		if(AllZone.GameAction.isCardInZone(Source,Required_Zone)) {
+		String Zones = Keyword_Details[3];
+        PlayerZone[] Required_Zone = new PlayerZone[1];
+        	if(Zones.equals("Hand")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Hand, Source.getController());
+        	if(Zones.equals("Graveyard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Graveyard, Source.getController());
+        	if(Zones.equals("Play")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Play, Source.getController());
+        	if(Zones.contains("Library")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Library, Source.getController());
+        	if(Zones.contains("Exiled")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Removed_From_Play, Source.getController());
+        //	if(Zones.contains("Sideboard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Sideboard, Source.getController());
+        	
+    		if(AllZone.GameAction.isCardInZone(Source,Required_Zone[0])) {	
     			if(Keyword_Details[6].equals("ASAP")) {
     				if(Keyword_Details[5].equals("InputType - CreatureORPlayer") && Source.getController().equals(Constant.Player.Human)) {
     					paidCommand.execute();
@@ -1086,7 +1177,6 @@ public class GameAction {
         	AllZone.Stack.add(ability);
     				else AllZone.Stack.add(ability);
     			}
-    		}
 		}	
 	}
     // Whenever Keyword

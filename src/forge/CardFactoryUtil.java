@@ -510,6 +510,34 @@ public class CardFactoryUtil {
         return target;
     }//input_sacrifice()
     
+    public static Input Wheneverinput_sacrifice(final SpellAbility spell, final CardList choices, final String message, final Command Paid) {
+        Input target = new Input() {
+            private static final long serialVersionUID = 2685832214519141903L;
+            
+            @Override
+            public void showMessage() {
+                AllZone.Display.showMessage(message);
+                ButtonUtil.enableOnlyCancel();
+            }
+            
+            @Override
+            public void selectButtonCancel() {
+                stop();
+            }
+            
+            @Override
+            public void selectCard(Card card, PlayerZone zone) {
+                if(choices.contains(card)) {
+                    AllZone.getZone(card).remove(card);
+                    AllZone.GameAction.moveToGraveyard(card);
+                    Paid.execute();
+                    stop();
+                }
+            }
+        };
+        return target;
+    }//Wheneverinput_sacrifice()
+    
     public static Input input_sacrifice(final SpellAbility spell, final CardList choices, final String message, final boolean free) {
         Input target = new Input() {
 
