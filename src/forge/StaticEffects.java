@@ -25,7 +25,6 @@ public class StaticEffects
 		cardToEffectsList.put("Windwright Mage", new String[] {"Windwright_Mage"});
 		//cardToEffectsList.put("Baru, Fist of Krosa", new String[] {"Baru"});
 		//cardToEffectsList.put("Reach of Brances", new String[] {"Reach_of_Branches"});
-		//cardToEffectsList.put("Wirewood Hivemaster", new String[] {"Wirewood_Hivemaster"});
 		//cardToEffectsList.put("Angelic Chorus", new String[] {"Angelic_Chorus"});
 		cardToEffectsList.put("Uril, the Miststalker", new String[] {"Uril"});
 		cardToEffectsList.put("Rabid Wombat", new String[] {"Rabid_Wombat"});
@@ -118,7 +117,6 @@ public class StaticEffects
 		cardToEffectsList.put("Cemetery Reaper", new String[] {"Cemetery_Reaper_Pump", "Cemetery_Reaper_Other"});
 		cardToEffectsList.put("Captain of the Watch", new String[] {"Captain_of_the_Watch_Pump", "Captain_of_the_Watch_Other"});
 		cardToEffectsList.put("Veteran Swordsmith", new String[] {"Veteran_Swordsmith_Pump", "Veteran_Swordsmith_Other"});
-		//cardToEffectsList.put("Lord of Atlantis", new String[] {"Lord_of_Atlantis_Pump","Lord_of_Atlantis_Other"});
 		cardToEffectsList.put("Elvish Champion", new String[] {"Elvish_Champion_Pump","Elvish_Champion_Other"});
 		cardToEffectsList.put("Death Baron", new String[] {"Death_Baron_Pump","Death_Baron_Other"});
 		cardToEffectsList.put("Lovisa Coldeyes", new String[] {"Lovisa_Coldeyes_Pump"});
@@ -149,7 +147,6 @@ public class StaticEffects
 		cardToEffectsList.put("Eladamri, Lord of Leaves", new String[] {"Eladamri"});
 		cardToEffectsList.put("Tolsimir Wolfblood", new String[] {"Tolsimir"});
 		cardToEffectsList.put("Imperious Perfect", new String[] {"Imperious_Perfect"});
-		cardToEffectsList.put("Kongming, \"Sleeping Dragon\"", new String[] {"Kongming"});
 		cardToEffectsList.put("Castle", new String[] {"Castle"});
 		cardToEffectsList.put("Giant Tortoise", new String[] {"Giant_Tortoise"});
 		cardToEffectsList.put("Castle Raptors", new String[] {"Castle_Raptors"});

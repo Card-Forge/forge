@@ -18597,47 +18597,6 @@ public class GameActionUtil {
 			}// for
 		}// execute()
 	}; // Giant_Tortoise
-	
-	public static Command Kongming					 = new Command() {
-
-		private static final long serialVersionUID = 5376204832608673379L;
-		CardList                  old              = new CardList();
-
-		public void execute() {
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < old.size(); i++) {
-				c = old.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-			}
-
-			// add +1/+1 to cards
-			old.clear();
-			PlayerZone[] zone = getZone("Kongming, \"Sleeping Dragon\"");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.filter(new CardListFilter(){
-					public boolean addCard(Card c)
-					{
-						return c.isCreature() && !c.getName().equals("Kongming, \"Sleeping Dragon\"");
-					}
-				});
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addSemiPermanentAttackBoost(1);
-					c.addSemiPermanentDefenseBoost(1);
-
-					old.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-
-	};
 
 	public static Command Filth                       = new Command() {
 		private static final long serialVersionUID = -8423145847505L;
@@ -20244,6 +20203,7 @@ public class GameActionUtil {
 		commands.put("Castle_Raptors", Castle_Raptors);
 		commands.put("Cognivore", Cognivore);
 		commands.put("Conspiracy", Conspiracy);
+		commands.put("Cover_of_Darkness", Cover_of_Darkness);
 		commands.put("Crowd_of_Cinders", Crowd_of_Cinders);
 		
 		commands.put("Deaths_Shadow", Deaths_Shadow);
@@ -20253,6 +20213,9 @@ public class GameActionUtil {
 		
 		commands.put("Faerie_Swarm", Faerie_Swarm);
 		
+		commands.put("Gaeas_Anthem", Gaeas_Anthem);
+		commands.put("Glorious_Anthem", Glorious_Anthem);
+		commands.put("Goblin_Assault", Goblin_Assault);
 		commands.put("Guul_Draz_Specter", Guul_Draz_Specter);
 		
 		commands.put("Hada_Spy_Patrol", Hada_Spy_Patrol);
@@ -20270,19 +20233,21 @@ public class GameActionUtil {
 		commands.put("Kor_Spiritdancer", Kor_Spiritdancer);
 		commands.put("Korlash_Heir_to_Blackblade", Korlash_Heir_to_Blackblade);
 		
-		
 		commands.put("Lhurgoyf", Lhurgoyf);
 		commands.put("Lord_of_Extinction", Lord_of_Extinction);
 		
 		commands.put("Magnivore", Magnivore);
 		commands.put("Maro", Maro);
+		commands.put("Marrow_Gnawer", Marrow_Gnawer);
 		commands.put("Masumaro_First_to_Live", Masumaro_First_to_Live);
 		commands.put("Matca_Rioters", Matca_Rioters);
 		commands.put("Molimo_Maro_Sorcerer", Molimo_Maro_Sorcerer);
 		commands.put("Mortivore", Mortivore);
+		commands.put("Mul_Daya_Channelers", Mul_Daya_Channelers);
 		commands.put("Multani_Maro_Sorcerer", Multani_Maro_Sorcerer);
 		
 		commands.put("Nightmare", Nightmare);
+		commands.put("Nirkana_Cutthroat", Nirkana_Cutthroat);
 		commands.put("Nyxathid", Nyxathid);
 		
 		commands.put("Old_Man_of_the_Sea", Old_Man_of_the_Sea);
@@ -20292,20 +20257,22 @@ public class GameActionUtil {
 		commands.put("Plague_Rats", Plague_Rats);
 		commands.put("Primalcrux", Primalcrux);
 		
-		
-		
 		commands.put("Rabid_Wombat", Rabid_Wombat);
 		commands.put("Rakdos_Pit_Dragon", Rakdos_Pit_Dragon);
 		//commands.put("Reach_of_Branches", Reach_of_Branches);
 		
 		commands.put("Serra_Avatar", Serra_Avatar);
+		commands.put("Serras_Blessing", Serras_Blessing);
 		commands.put("Skywatcher_Adept", Skywatcher_Adept);
+		commands.put("Soulsurge_Elemental", Soulsurge_Elemental);
 		commands.put("Sound_the_Call_Wolf", Sound_the_Call_Wolf);
+		commands.put("Steely_Resolve", Steely_Resolve);
 		commands.put("Student_of_Warfare", Student_of_Warfare);
 		commands.put("Svogthos_the_Restless_Tomb", Svogthos_the_Restless_Tomb);
 		
 		commands.put("Tarmogoyf", Tarmogoyf);
 		commands.put("Terravore", Terravore);
+		commands.put("That_Which_Was_Taken", That_Which_Was_Taken);
 		commands.put("Transcendent_Master", Transcendent_Master);
 		
 		commands.put("Uril", Uril);
@@ -20313,7 +20280,6 @@ public class GameActionUtil {
 		commands.put("Vampire_Nocturnus", Vampire_Nocturnus);
 		
 		commands.put("Windwright_Mage", Windwright_Mage);
-		//commands.put("Wirewood_Hivemaster", Wirewood_Hivemaster);
 		
 		commands.put("Yavimaya_Enchantress", Yavimaya_Enchantress);
 		
@@ -20323,11 +20289,6 @@ public class GameActionUtil {
 		
 		
 		commands.put("Dakkon", Dakkon);
-		
-
-		
-		
-		
 		commands.put("Lighthouse_Chronologist", Lighthouse_Chronologist);
 		
 		commands.put("Caravan_Escort", Caravan_Escort);
@@ -20335,9 +20296,9 @@ public class GameActionUtil {
 		commands.put("Knight_of_Cliffhaven", Knight_of_Cliffhaven);
 		commands.put("Beastbreaker_of_Bala_Ged", Beastbreaker_of_Bala_Ged);
 		
-		commands.put("Nirkana_Cutthroat", Nirkana_Cutthroat);
 		
-		commands.put("Soulsurge_Elemental", Soulsurge_Elemental);
+		
+		
 		commands.put("Champions_Drake", Champions_Drake);
 		
 		
@@ -20408,8 +20369,7 @@ public class GameActionUtil {
 		commands.put("Shared_Triumph", Shared_Triumph);
 		commands.put("Crucible_of_Fire", Crucible_of_Fire);
 		commands.put("Time_of_Heroes", Time_of_Heroes);
-		commands.put("Glorious_Anthem", Glorious_Anthem);
-		commands.put("Gaeas_Anthem", Gaeas_Anthem);
+		
 		commands.put("Honor_of_the_Pure", Honor_of_the_Pure);
 		commands.put("Beastmaster_Ascension", Beastmaster_Ascension);
 		commands.put("Spidersilk_Armor", Spidersilk_Armor);
@@ -20428,8 +20388,6 @@ public class GameActionUtil {
 		commands.put("Meng_Huo", Meng_Huo);
 		
 		commands.put("Tolsimir", Tolsimir);
-
-		commands.put("Kongming", Kongming);
 		
 		commands.put("Giant_Tortoise", Giant_Tortoise);
 
@@ -20448,11 +20406,7 @@ public class GameActionUtil {
 		commands.put("Tabernacle", Tabernacle);
 		commands.put("Magus_of_the_Tabernacle", Magus_of_the_Tabernacle);
 		//commands.put("Mobilization", Mobilization);
-		commands.put("Serras_Blessing", Serras_Blessing);
-		commands.put("Cover_of_Darkness", Cover_of_Darkness);
-		commands.put("Steely_Resolve", Steely_Resolve);
-		commands.put("Goblin_Assault", Goblin_Assault);
-		commands.put("That_Which_Was_Taken", That_Which_Was_Taken);
+		
 		commands.put("Concordant_Crossroads", Concordant_Crossroads);
 		commands.put("Mass_Hysteria", Mass_Hysteria);
 		commands.put("Fervor", Fervor);
@@ -20488,9 +20442,7 @@ public class GameActionUtil {
 		
 		///////////////////
 
-		commands.put("Marrow_Gnawer", Marrow_Gnawer);
-
-		commands.put("Mul_Daya_Channelers", Mul_Daya_Channelers);
+		
 		
 		commands.put("Meddling_Mage", Meddling_Mage);
 		commands.put("Gaddock_Teeg", Gaddock_Teeg);
