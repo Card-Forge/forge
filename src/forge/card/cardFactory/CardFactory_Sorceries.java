@@ -3093,49 +3093,6 @@ public class CardFactory_Sorceries {
         
         
         //*************** START *********** START **************************
-        else if (cardName.equals("Perish the Thought")) {
-        	final SpellAbility spell = new Spell(card){
-        		private static final long serialVersionUID = -3317966427398220444L;
-
-        		@Override
-        		public void resolve() {
-        			Player player = card.getController();
-        			Player target = player.getOpponent();
-
-        			CardList handList = AllZoneUtil.getPlayerHand(target);
-        			if(handList.size() == 0) 
-        				return;
-
-        			//choose one card from it
-        			Card perish = null;
-        			if(player.equals(AllZone.HumanPlayer)){ 
-        				Object o = GuiUtils.getChoice("Put into library", handList.toArray());
-        				//if(o == null) break;
-        				perish = (Card) o;
-        			}
-        			else  //computer
-        				perish = CardUtil.getRandom(handList.toArray());
-
-        			if (perish == null)
-        				return;
-        			
-        			AllZone.GameAction.moveToLibrary(perish);
-        			target.shuffle();
-        		}
-
-        		@Override
-        		public boolean canPlayAI() {
-        			return AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer).size() > 0;
-        		}
-        	};
-
-        	// Do not remove SpellAbilities created by AbilityFactory or Keywords.
-        	card.clearFirstSpellAbility();
-        	card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Brood Birthing")) {
         	final SpellAbility spell = new Spell(card)
         	{
