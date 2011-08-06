@@ -1615,15 +1615,19 @@ public class CardFactoryUtil {
         final SpellAbility enchant = new Spell(sourceCard) {
 			private static final long serialVersionUID = -8259560434384053776L;
 			
+			/*
+			 *  for flash, which is not working through the keyword for some reason
+			 *  if not flash then limit to main 1 and 2 on controller's turn and card in hand
+			 */
             @Override
             public boolean canPlay() {
                 return (sourceCard.getKeyword().contains("Flash") && (AllZone.GameAction.isCardInZone(sourceCard, AllZone.Human_Hand) || 
-                        AllZone.GameAction.isCardInZone(sourceCard, AllZone.Computer_Hand))    // for flash, which is not working through the keyword for some reason
-                            ||    // if not flash then limit to main 1 and 2 on controller's turn and card in hand
+                        AllZone.GameAction.isCardInZone(sourceCard, AllZone.Computer_Hand)) 
+                            || 
                        (! sourceCard.getKeyword().contains("Flash") && (sourceCard.getController().equals(AllZone.Phase.getActivePlayer()) &&
                        (AllZone.GameAction.isCardInZone(sourceCard, AllZone.Human_Hand) || AllZone.GameAction.isCardInZone(sourceCard, AllZone.Computer_Hand)) && 
                        (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) || AllZone.Phase.getPhase().equals(Constant.Phase.Main2)))));
-            }
+            }// CanPlay (for auras with Flash)
 			
             public boolean canPlayAI() {
                 CardList list = new CardList(AllZone.Computer_Play.getCards());
@@ -1650,32 +1654,39 @@ public class CardFactoryUtil {
                 	    }
                     }
                 }
-                //else (if aura is keyword only)
                 
-                if (Power == 0 && Tough == 0) {    // This aura is keyword only
+                /*
+                 *  else (if aura is keyword only)
+                 *  Do not duplicate keyword or enchant card with Defender or enchant card already enchanted
+                 */
+                if (Power == 0 && Tough == 0) {
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c){
                             ArrayList<String> extKeywords = new ArrayList<String>(Arrays.asList(extrinsicKeywords));
                             for (String s:extKeywords) {
-                                if (!c.getKeyword().contains(s))
-                                    return true;    // Do not duplicate keyword and do not kill by reducing toughness to <= zero
+                                if (!c.getKeyword().contains(s) && !c.getKeyword().contains("Defender") && !c.isEnchanted())
+                                    return true;
                             }
-                                //no new keywords:
+                                // no new keywords:
                                 return false;
                         }
                     });
                 }
                 
-              //else aura is power/toughness boost and may have keyword(s)
-                
+                /*
+                 *  else aura is power/toughness boost and may have keyword(s)
+                 *  Do not reduce power to <= zero or kill by reducing toughness to <= zero
+                 *  Do not enchant card with Defender or enchant card already enchanted
+                 */
                 CardListUtil.sortAttack(list);
                 CardListUtil.sortFlying(list);
                 
                 for (int i = 0; i < list.size(); i++) {
                     if (CardFactoryUtil.canTarget(sourceCard, list.get(i)) && 
-                            list.get(i).getNetAttack() + Power > 0 && list.get(i).getNetDefense() + Tough > 0) {
-                        setTargetCard(list.get(i));    // Do not reduce power to <= zero
-                        return true;                   // Do not kill by reducing toughness to <= zero
+                            list.get(i).getNetAttack() + Power > 0 && list.get(i).getNetDefense() + Tough > 0 && 
+                            !list.get(i).getKeyword().contains("Defender") && !list.get(i).isEnchanted()) {
+                        setTargetCard(list.get(i));
+                        return true;
                     }
                 }
                 return false;
