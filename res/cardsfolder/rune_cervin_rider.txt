@@ -5,6 +5,6 @@ Text:no text
 PT:2/2
 K:Flying
 K:abPump GW GW:+1/+1
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rune_cervin_rider.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rune_cervin_rider.jpg
 End

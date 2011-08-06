@@ -3,6 +3,6 @@ ManaCost:1 U B
 Types:Instant
 Text:Return target permanent to its owner's hand. Then that player discard a card.
 K:spBounceTgt:Permanent:Hand:Drawback$TgtOwnerDiscard/1
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/recoil.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/recoil.jpg
 End

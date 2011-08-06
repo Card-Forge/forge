@@ -3,6 +3,6 @@ ManaCost:3 W
 Types:Creature Human Soldier
 Text:no text
 PT:3/3
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10627.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10627.jpg
 End

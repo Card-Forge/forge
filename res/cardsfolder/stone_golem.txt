@@ -3,6 +3,6 @@ ManaCost:5
 Types:Artifact Creature Golem
 Text:no text
 PT:4/4
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_golem.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_golem.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Human Wizard
 Text:no text
 PT:2/1
 K:abDrawCardsTgt T:1:Drawback$TgtDiscard/1:Target player draws a card, then discards a card.:Reckless Scholar - target player draws a card and discards a card
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_scholar.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_scholar.jpg
 End

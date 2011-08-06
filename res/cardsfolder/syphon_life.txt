@@ -3,6 +3,6 @@ ManaCost:1 B B
 Types:Sorcery
 Text:(NOTE: "Retrace" is not implemented.)
 K:spLoseLifeTgt:2:Drawback$YouGainLife/2:Target player loses 2 life and you gain 2 life.:Syphone Life - target player loses life and you gain life
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/syphon_life.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/syphon_life.jpg
 End

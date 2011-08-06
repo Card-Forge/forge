@@ -3,7 +3,7 @@ ManaCost:4 U
 Types:Sorcery Arcane
 Text:no text
 K:spDrawCards:X:Draw a card for each Spirit you control.:Ribbons of the Reikai - draw cards.
-K:SVar:X:Count$TypeYouCtrl.Spirit
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ribbons_of_the_reikai.jpg
+SVar:X:Count$TypeYouCtrl.Spirit
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ribbons_of_the_reikai.jpg
 End

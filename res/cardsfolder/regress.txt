@@ -3,6 +3,6 @@ ManaCost:2 U
 Types:Instant
 Text:Return target permanent to its owner's hand.
 K:spBounceTgt:Permanent:Hand
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card49061.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card49061.jpg
 End

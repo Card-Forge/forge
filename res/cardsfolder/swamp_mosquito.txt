@@ -4,6 +4,6 @@ Types:Creature Insect
 Text:Whenever Swamp Mosquito attacks and isn't blocked, defending player gets a poison counter. (A player with ten or more poison counters loses the game.)
 PT:0/1
 K:Flying
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/swamp_mosquito.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/swamp_mosquito.jpg
 End

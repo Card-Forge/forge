@@ -4,6 +4,6 @@ Types:Legendary Creature Human Pirate
 Text:no text
 PT:4/3
 K:First Strike
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ramirez_depietro.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ramirez_depietro.jpg
 End

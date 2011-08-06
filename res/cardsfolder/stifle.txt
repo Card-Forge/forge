@@ -3,6 +3,6 @@ ManaCost:U
 Types:Instant
 Text:Counter target activated or triggered ability.
 K:spCounter:Ability:None:None:None
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/stifle.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stifle.jpg
 End

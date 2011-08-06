@@ -3,6 +3,6 @@ ManaCost:1 G G
 Types:Creature Squirrel
 Text:Squirrel Mob gets +1/+1 for each other Squirrel on the battlefield.
 PT:2/2
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/squirrel_mob.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/squirrel_mob.jpg
 End

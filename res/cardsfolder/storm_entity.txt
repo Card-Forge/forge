@@ -4,6 +4,6 @@ Types:Creature Elemental
 Text:Storm Entity comes into play with a +1/+1 counter on it for each other spell played this turn.
 PT:1/1
 K:Haste
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_entity.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_entity.jpg
 End

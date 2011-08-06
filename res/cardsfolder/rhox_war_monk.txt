@@ -4,6 +4,6 @@ Types:Creature Rhino Monk
 Text:no text
 PT:3/4
 K:Lifelink
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_war_monk.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_war_monk.jpg
 End

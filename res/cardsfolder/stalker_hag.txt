@@ -5,6 +5,6 @@ Text:no text
 PT:3/2
 K:Swampwalk
 K:Forestwalk
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/stalker_hag.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stalker_hag.jpg
 End

@@ -3,6 +3,6 @@ ManaCost:U
 Types:Creature Human Wizard
 Text:When Sage of Epityr enters the battlefield, look at the top four cards of your library, then put them back in any order.
 PT:1/1
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sage_of_epityr.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sage_of_epityr.jpg
 End

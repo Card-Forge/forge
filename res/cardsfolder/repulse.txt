@@ -4,6 +4,6 @@ Types:Instant
 Text:Return target creature to its owner's hand.
 K:spBounceTgt:Creature:Hand
 K:Draw a card.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card22985.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card22985.jpg
 End

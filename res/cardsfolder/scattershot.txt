@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Instant
 Text:Scattershot deals 1 damage to target creature.
 K:Storm
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/scattershot.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scattershot.jpg
 End

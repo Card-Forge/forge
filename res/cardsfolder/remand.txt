@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Instant
 Text:Counter target spell. If that spell is countered this way, put it into it's owner's hand instead of into that player's library.\r\nDraw a card.
 K:spCounter:Spell:None:Hand:My-Draw(1)
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87919.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87919.jpg
 End

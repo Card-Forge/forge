@@ -5,6 +5,6 @@ Text:no text
 K:CARDNAME enters the battlefield tapped unless you control a Mountain or a Forest.
 K:tap: add R
 K:tap: add G
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rootbound_crag.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rootbound_crag.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Human Rebel
 Text:no text
 PT:1/2
 K:SearchRebel:4
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ramosian_lieutenant.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ramosian_lieutenant.jpg
 End

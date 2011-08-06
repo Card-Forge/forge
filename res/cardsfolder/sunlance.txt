@@ -2,6 +2,6 @@ Name:Sunlance
 ManaCost:W
 Types:Sorcery
 Text:Sunlance deals 3 damage to target nonwhite creature.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122355.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122355.jpg
 End

@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Enchantment
 Text:no text
 K:StaticEffect:Play:All Permanents:Keyword/CARDNAME can't attack or block.:Type.Creature!enchanted:Creatures that are enchanted can't attack or block.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/song_of_serenity.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/song_of_serenity.jpg
 End

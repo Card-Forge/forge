@@ -4,7 +4,7 @@ Types:Creature Zombie Mutant
 Text:no text
 PT:3/1
 K:abPumpTgtC 7 B:-3/-3
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/smokespew_invoker.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/smokespew_invoker.jpg
 End

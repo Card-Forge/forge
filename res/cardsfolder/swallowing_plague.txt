@@ -3,7 +3,7 @@ ManaCost:X B B
 Types:Sorcery Arcane
 Text:no text
 K:spDamageTgtC:X:Drawback$YouGainLife/X:Swallowing Plague deals X damage to target creature and you gain X life.
-K:SVar:X:Count$xPaid
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/swallowing_plague.jpg
+SVar:X:Count$xPaid
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/swallowing_plague.jpg
 End

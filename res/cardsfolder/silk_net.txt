@@ -3,6 +3,6 @@ ManaCost:G
 Types:Instant
 Text:no text
 K:spPumpTgt:+1/+1/Reach
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/silk_net.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/silk_net.jpg
 End

@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Enchantment
 Text:Players skip their untap steps.
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay:U
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/stasis.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stasis.jpg
 End

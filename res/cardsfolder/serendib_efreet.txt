@@ -4,6 +4,6 @@ Types:Creature Efreet
 Text:At the beginning of your upkeep, Serendib Efreet deals 1 damage to you.
 PT:3/4
 K:Flying
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/an/en-us/card939.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/an/en-us/card939.jpg
 End

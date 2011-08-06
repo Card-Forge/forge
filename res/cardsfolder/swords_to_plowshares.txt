@@ -3,7 +3,7 @@ ManaCost:W
 Types:Instant
 Text:Exile target creature. Its controller gains life equal to its power.
 K:spBounceTgt:Creature:Exile:Drawback$TgtCtrlrGainLife/dX
-K:SVar:dX:Count$TgtCardPower
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/br/en-us/card21172.jpg
+SVar:dX:Count$TgtCardPower
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/br/en-us/card21172.jpg
 End

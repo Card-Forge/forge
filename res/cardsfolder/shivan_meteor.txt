@@ -4,6 +4,6 @@ Types:Sorcery
 Text:no text
 K:spDamageTgtC:13:Shivan Meteor deals 13 damage to target creature.
 K:Suspend:2:1 R R
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_meteor.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_meteor.jpg
 End

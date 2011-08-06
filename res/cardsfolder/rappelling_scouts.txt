@@ -9,6 +9,6 @@ K:abPump 2 W:Protection from blue
 K:abPump 2 W:Protection from black
 K:abPump 2 W:Protection from red
 K:abPump 2 W:Protection from green
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rappelling_scouts.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rappelling_scouts.jpg
 End

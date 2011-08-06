@@ -3,6 +3,6 @@ ManaCost:W
 Types:Sorcery
 Text:no text
 K:spRaiseDead:1/Artifact
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ritual_of_restoration.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ritual_of_restoration.jpg
 End

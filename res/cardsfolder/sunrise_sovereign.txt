@@ -4,7 +4,7 @@ Types:Creature Giant Warrior
 Text:no text
 PT:5/5
 K:StaticEffect:Play:Permanents you Control:PTBonus/2/2!Keyword/Trample:Type.Creature!Type.Giant!NotSelf:Other Giant creatures you control get +2/+2 and have trample.
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sunrise_sovereign.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sunrise_sovereign.jpg
 End

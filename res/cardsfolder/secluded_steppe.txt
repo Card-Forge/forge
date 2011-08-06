@@ -5,6 +5,6 @@ Text:no text
 K:Comes into play tapped.
 K:tap: add W
 K:Cycling:W
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/secluded_steppe.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/secluded_steppe.jpg
 End

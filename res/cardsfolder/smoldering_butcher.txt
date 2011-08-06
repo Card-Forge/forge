@@ -4,6 +4,6 @@ Types:Creature Elemental Warrior
 Text:no text
 PT:4/2
 K:Wither
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/smoldering_butcher.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/smoldering_butcher.jpg
 End

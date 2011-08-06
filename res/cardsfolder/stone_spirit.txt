@@ -4,6 +4,6 @@ Types:Creature Elemental Spirit
 Text:no text
 PT:4/3
 K:CARDNAME can't be blocked by creatures with flying.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_spirit.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_spirit.jpg
 End

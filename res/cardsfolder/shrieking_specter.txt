@@ -5,6 +5,6 @@ Text:no text
 PT:2/2
 K:Flying
 K:WheneverKeyword:Attacks:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever Shrieking Specter attacks, defending player discards a card.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/shrieking_specter.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shrieking_specter.jpg
 End

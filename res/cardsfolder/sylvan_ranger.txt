@@ -3,6 +3,6 @@ ManaCost:1 G
 Types:Creature Elf Scout
 Text:When Sylvan Ranger enters the battlefield, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
 PT:1/1
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_ranger.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_ranger.jpg
 End

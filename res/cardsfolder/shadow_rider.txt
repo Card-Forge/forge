@@ -4,6 +4,6 @@ Types:Creature Zombie Knight
 Text:no text
 PT:3/3
 K:Flanking
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/shadow_rider.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shadow_rider.jpg
 End

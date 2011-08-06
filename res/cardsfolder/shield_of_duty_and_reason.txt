@@ -4,6 +4,6 @@ Types:Enchantment Aura
 Text:Enchanted creature has protection from green and from blue.
 K:Enchant creature
 K:enPump:Protection from green & Protection from blue
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_of_duty_and_reason.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_of_duty_and_reason.jpg
 End

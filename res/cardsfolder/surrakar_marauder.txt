@@ -4,7 +4,7 @@ Types:Creature Surrakar
 Text:no text
 PT:2/1
 K:WheneverKeyword:EntersBattleField:Type/Land:Play:KeywordPumpEOT/Intimidate:Self:ASAP:No_Condition:Initiator - OwnedByController:Landfall - Whenever a land enters the battlefield under your control, Surrakar Marauder gains intimidate until end of turn. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)
-K:SVar:BuffedBy:Land
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/surrakar_marauder.jpg
+SVar:BuffedBy:Land
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/surrakar_marauder.jpg
 End

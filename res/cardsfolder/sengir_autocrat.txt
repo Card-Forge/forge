@@ -3,6 +3,6 @@ ManaCost:3 B
 Types:Creature Human
 Text:When Sengir Autocrat comes into play, put three 0/1 black Serf creature tokens into play.\r\nWhen Sengir Autocrat leaves play, remove all Serf tokens from the game.
 PT:2/2
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card106638.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card106638.jpg
 End

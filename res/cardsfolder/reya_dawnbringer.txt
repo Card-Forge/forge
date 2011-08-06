@@ -4,6 +4,6 @@ Types:Legendary Creature Angel
 Text:At the beginning of your upkeep, you may return target creature card from your graveyard to play.
 PT:4/6
 K:Flying
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card22965.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card22965.jpg
 End

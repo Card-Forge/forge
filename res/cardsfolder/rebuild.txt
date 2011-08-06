@@ -4,6 +4,6 @@ Types:Instant
 Text:Return all artifacts to their owners' hands.
 K:spBounceAll:Artifact:Hand
 K:Cycling:2
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rebuild.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rebuild.jpg
 End

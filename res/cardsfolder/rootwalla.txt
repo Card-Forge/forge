@@ -4,6 +4,6 @@ Types:Creature Lizard
 Text:Play this ability only once each turn.
 PT:2/2
 K:abPump 1 G:+2/+2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rootwalla.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rootwalla.jpg
 End

@@ -3,6 +3,6 @@ ManaCost:3 W W
 Types:Creature Kor Soldier
 Text:Whenever Silkenfist Order becomes blocked, untap it.
 PT:3/5
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/silkenfist_order.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/silkenfist_order.jpg
 End

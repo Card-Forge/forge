@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Artifact Land
 Text:(Seat of the Synod isn't a spell.)
 K:tap: add U
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/seat_of_the_synod.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seat_of_the_synod.jpg
 End

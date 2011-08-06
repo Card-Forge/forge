@@ -3,8 +3,8 @@ ManaCost:3 B B
 Types:Sorcery
 Text:Destroy target nonblack creature. It can't be regenerated. You gain life equal to its toughness.
 K:spDestroyTgt:Creature.nonBlack:NoRegen:Drawback$YouGainLife/dX
-K:SVar:dX:Count$TgtCardToughness
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sever_soul.jpg
+SVar:dX:Count$TgtCardToughness
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sever_soul.jpg
 End

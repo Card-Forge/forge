@@ -3,6 +3,6 @@ ManaCost:2 R
 Types:Legendary Creature Goblin
 Text:At the beginning of your upkeep, you may return Squee, Goblin Nabob from your graveyard to your hand.
 PT:1/1
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/squee_goblin_nabob.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/squee_goblin_nabob.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Goblin
 Text:no text
 PT:1/1
 K:abPump UR:Flying
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/stream_hopper.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stream_hopper.jpg
 End

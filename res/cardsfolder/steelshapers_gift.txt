@@ -3,7 +3,7 @@ ManaCost:W
 Types:Sorcery
 Text:Search your library for an Equipment card, reveal that card, and put it into your hand. Then shuffle your library.
 K:spTutor:Equipment:Hand
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/steelshapers_gift.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/steelshapers_gift.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Human Assassin
 Text:Whenever Suq'Ata Assassin attacks and isn't blocked, defending player gets a poison counter. (A player with ten or more poison counters loses the game.)
 PT:1/1
 K:Fear
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/suqata_assassin.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/suqata_assassin.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Lizard Beast
 Text:no text
 PT:2/1
 K:Double Strike
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ridgetop_raptor.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ridgetop_raptor.jpg
 End

@@ -6,6 +6,6 @@ PT:5/6
 K:Flying
 K:Defender
 K:CARDNAME can't block creatures with power 2 or less.
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sunweb.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sunweb.jpg
 End

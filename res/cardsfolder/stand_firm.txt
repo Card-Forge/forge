@@ -4,6 +4,6 @@ Types:Instant
 Text:no text
 K:spPumpTgt:+1/+1:
 K:Scry 2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/stand_firm.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stand_firm.jpg
 End

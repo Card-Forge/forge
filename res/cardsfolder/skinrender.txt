@@ -3,5 +3,5 @@ ManaCost:2 B B
 Types:Creature Zombie
 Text:When Skinrender enters the battlefield, put three -1/-1 counters on target creature.
 PT:3/3
-K:SVar:Rarity:Uncommon
+SVar:Rarity:Uncommon
 End

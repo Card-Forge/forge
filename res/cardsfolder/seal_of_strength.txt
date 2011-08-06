@@ -3,6 +3,6 @@ ManaCost:G
 Types:Enchantment
 Text:no text
 K:abPumpTgtC 0 Sac<1/CARDNAME>:+3/+3
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/seal_of_strength.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seal_of_strength.jpg
 End

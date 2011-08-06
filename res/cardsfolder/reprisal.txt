@@ -2,6 +2,6 @@ Name:Reprisal
 ManaCost:1 W
 Types:Instant
 Text:Destroy target creature with power 4 or greater. It can't be regenerated.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/reprisal.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reprisal.jpg
 End

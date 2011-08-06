@@ -5,6 +5,6 @@ Text:Whenever Sedraxis Specter deals combat damage to a player, that player disc
 PT:3/2
 K:Flying
 K:Unearth:1 B
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sedraxis_specter.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sedraxis_specter.jpg
 End

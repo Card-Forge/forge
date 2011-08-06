@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Creature Merfolk Soldier
 Text:As long as you control a plains, Sejiri Merfolk has first strike and lifelink.
 PT:2/1
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sejiri_merfolk.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sejiri_merfolk.jpg
 End

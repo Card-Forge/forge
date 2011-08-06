@@ -5,6 +5,6 @@ Text:no text
 PT:1/5
 K:Reach
 K:abPump R:+1/+0
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/steam_spitter.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/steam_spitter.jpg
 End

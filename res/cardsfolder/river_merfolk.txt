@@ -4,6 +4,6 @@ Types:Creature Merfolk
 Text:no text
 PT:2/1
 K:abPump U:Mountainwalk
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/river_merfolk.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/river_merfolk.jpg
 End

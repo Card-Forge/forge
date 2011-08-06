@@ -5,6 +5,6 @@ Text:no text
 PT:6/6
 K:CARDNAME can't attack unless defending player controls an Island.
 K:Cycling:1 U
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/slipstream_eel.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/slipstream_eel.jpg
 End

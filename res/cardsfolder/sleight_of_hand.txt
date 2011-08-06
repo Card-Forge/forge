@@ -2,6 +2,6 @@ Name:Sleight of Hand
 ManaCost:U
 Types:Sorcery
 Text:Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sleight_of_hand.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sleight_of_hand.jpg
 End

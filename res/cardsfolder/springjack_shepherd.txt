@@ -3,6 +3,6 @@ ManaCost:3 W
 Types:Creature Kithkin Wizard
 Text:Chroma - When Springjack Shepherd comes into play, put a 0/1 white Goat creature token into play for each white mana symbol in the mana costs of permanents you control.
 PT:1/2
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/springjack_shepherd.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/springjack_shepherd.jpg
 End

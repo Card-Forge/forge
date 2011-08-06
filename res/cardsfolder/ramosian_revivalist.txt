@@ -3,6 +3,6 @@ ManaCost:3 W
 Types:Creature Human Rebel Cleric
 Text:no text
 PT:2/2
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ramosian_revivalist.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ramosian_revivalist.jpg
 End

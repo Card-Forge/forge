@@ -4,6 +4,6 @@ Types:Creature Human Soldier
 Text:When Ravaging Horde enters the battlefield, destroy target land.
 PT:3/3
 K:etbDestroyTgt:Land
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ravaging_horde.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ravaging_horde.jpg
 End

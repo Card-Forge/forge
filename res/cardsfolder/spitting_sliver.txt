@@ -4,7 +4,7 @@ Types:Creature Sliver
 Text:no text
 PT:3/3
 K:StaticEffect:Play:All Permanents:Keyword/First Strike:Type.Creature!Type.Sliver:All Sliver creatures have first strike.
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/spitting_sliver.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spitting_sliver.jpg
 End

@@ -5,6 +5,6 @@ Text:Blue spells you cast cost Blue more to cast.
 PT:2/2
 K:Flying
 K:CostChange:Player:More:U:Spell:blue:All:NoSpecial
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sapphire_leech.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sapphire_leech.jpg
 End

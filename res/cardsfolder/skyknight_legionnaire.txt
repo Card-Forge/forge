@@ -5,6 +5,6 @@ Text:no text
 PT:2/2
 K:Flying
 K:Haste
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card109082.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card109082.jpg
 End

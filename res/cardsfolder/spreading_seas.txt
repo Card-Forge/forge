@@ -4,6 +4,6 @@ Types:Enchantment Aura
 Text:Enchanted land is an Island.
 K:Enchant land
 K:When CARDNAME enters the battlefield, draw a card.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/spreading_seas.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spreading_seas.jpg
 End

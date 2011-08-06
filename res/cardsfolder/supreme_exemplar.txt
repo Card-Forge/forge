@@ -4,7 +4,7 @@ Types:Creature Elemental
 Text:Champion an Elemental
 PT:10/10
 K:Flying
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/supreme_exemplar.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/supreme_exemplar.jpg
 End

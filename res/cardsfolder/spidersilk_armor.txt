@@ -2,7 +2,7 @@ Name:Spidersilk Armor
 ManaCost:2 G
 Types:Enchantment
 Text:Creatures you control get +0/+1 and have reach.
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/spidersilk_armor.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spidersilk_armor.jpg
 End

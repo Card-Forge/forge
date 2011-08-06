@@ -3,7 +3,7 @@ ManaCost:W U B R G
 Types:Legendary Creature Sliver
 Text:no text
 PT:7/7
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sliver_queen.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sliver_queen.jpg
 End

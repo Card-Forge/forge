@@ -2,6 +2,6 @@ Name:Rampant Growth
 ManaCost:1 G
 Types:Sorcery
 Text:Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rampant_growth.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rampant_growth.jpg
 End

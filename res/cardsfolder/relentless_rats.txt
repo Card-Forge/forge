@@ -3,8 +3,8 @@ ManaCost:1 B B
 Types:Creature Rat
 Text:Relentless Rats gets +1/+1 for each other creature in play named Relentless Rats.\r\nA deck can have any number of cards named Relentless Rats.
 PT:2/2
-K:SVar:RemAIDeck:True
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73573.jpg
+SVar:RemAIDeck:True
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73573.jpg
 End

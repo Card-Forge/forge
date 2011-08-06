@@ -4,6 +4,6 @@ Types:Creature Giant
 Text:Whenever Sun Titan enters the battlefield or attacks, you may return target permanent card with converted mana cost 3 or less from your graveyard to the battlefield.
 PT:6/6
 K:Vigilance
-K:SVar:Rarity:Mythic
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sun_titan.jpg
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sun_titan.jpg
 End

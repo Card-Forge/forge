@@ -5,7 +5,7 @@ Text:When Shriekmaw enters the battlefield, destroy target nonartifact, nonblack
 PT:3/2
 K:Fear
 K:etbDestroyTgt:Creature.nonArtifact+nonBlack
-K:SVar:Evoke:1 B
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/shriekmaw.jpg
+SVar:Evoke:1 B
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shriekmaw.jpg
 End

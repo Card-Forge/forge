@@ -8,7 +8,7 @@ K:2, tap: add U
 K:2, tap: add B
 K:2, tap: add R
 K:2, tap: add G
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/school_of_the_unseen.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/school_of_the_unseen.jpg
 End

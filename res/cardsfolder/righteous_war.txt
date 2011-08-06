@@ -4,7 +4,7 @@ Types:Enchantment
 Text:no text
 K:StaticEffect:Play:Permanents you Control:Keyword/Protection from black:Type.Creature!Color.white:White creatures you control have protection from black.
 K:StaticEffect:Play:Permanents you Control:Keyword/Protection from white:Type.Creature!Color.black:Black creatures you control have protection from white.
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/righteous_war.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/righteous_war.jpg
 End

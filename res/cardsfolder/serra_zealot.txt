@@ -4,6 +4,6 @@ Types:Creature Human Soldier
 Text:no text
 PT:1/1
 K:First Strike
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_zealot.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_zealot.jpg
 End

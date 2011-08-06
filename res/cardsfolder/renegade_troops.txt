@@ -4,6 +4,6 @@ Types:Creature Human Soldier
 Text:no text
 PT:4/2
 K:Haste
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/renegade_troops.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/renegade_troops.jpg
 End

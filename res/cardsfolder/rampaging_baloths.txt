@@ -5,6 +5,6 @@ Text:Landfall - Whenever a land enters the battlefield under your control, you m
 PT:6/6
 K:Trample
 K:Landfall
-K:SVar:Rarity:Mythic
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rampaging_baloths.jpg
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rampaging_baloths.jpg
 End

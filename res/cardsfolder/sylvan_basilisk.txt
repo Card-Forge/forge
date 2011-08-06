@@ -3,6 +3,6 @@ ManaCost:3 G G
 Types:Creature Basilisk
 Text:Whenever Sylvan Basilisk becomes blocked by a creature, destroy that creature.
 PT:2/4
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_basilisk.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_basilisk.jpg
 End

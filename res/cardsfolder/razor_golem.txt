@@ -5,6 +5,6 @@ Text:Affinity for Plains (This spell costs 1 less to cast for each Plains you co
 PT:3/4
 K:Vigilance
 K:CostChange:Player:Less:1:Self:All:All:Affinity/Plains
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/razor_golem.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/razor_golem.jpg
 End

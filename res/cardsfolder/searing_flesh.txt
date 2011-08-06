@@ -3,6 +3,6 @@ ManaCost:6 R
 Types:Sorcery
 Text:no text
 K:spDamageTgtOpp:7:Searing Flesh deals 7 damage to target opponent.:Searing Flesh - deals 7 damage
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/searing_flesh.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/searing_flesh.jpg
 End

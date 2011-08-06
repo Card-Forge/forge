@@ -3,6 +3,6 @@ ManaCost:1 W
 Types:Creature Kor Soldier
 Text:Whenever Silkenfist Fighter becomes blocked, untap it.
 PT:1/3
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/silkenfist_fighter.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/silkenfist_fighter.jpg
 End

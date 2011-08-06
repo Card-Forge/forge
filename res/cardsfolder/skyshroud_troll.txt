@@ -4,6 +4,6 @@ Types:Creature Troll Giant
 Text:no text
 PT:3/3
 K:RegenerateMe:1 G
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_troll.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_troll.jpg
 End

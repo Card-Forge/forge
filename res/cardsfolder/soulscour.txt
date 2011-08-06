@@ -3,6 +3,6 @@ ManaCost:7 W W W
 Types:Sorcery
 Text:Destroy all nonartifact permanents.
 K:spDestroyAll:Permanent.nonArtifact
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/soulscour.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soulscour.jpg
 End

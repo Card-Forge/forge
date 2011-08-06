@@ -5,6 +5,6 @@ Text:You can't play Serra Avenger during your first, second, or third turns of t
 PT:3/3
 K:Flying
 K:Vigilance
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card113519.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card113519.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Ape
 Text:When Ravenous Baboons enters the battlefield, destroy target nonbasic land.
 PT:2/2
 K:etbDestroyTgt:Land.nonBasic
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_baboons.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_baboons.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Human
 Text:no text
 PT:1/1
 K:abDestroyTgtV G T Sac<1/CARDNAME>:Artifact:Destroy target artifact.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/scavenger_folk.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scavenger_folk.jpg
 End

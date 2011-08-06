@@ -2,6 +2,6 @@ Name:Sprout
 ManaCost:G
 Types:Instant
 Text:no text
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sprout.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sprout.jpg
 End

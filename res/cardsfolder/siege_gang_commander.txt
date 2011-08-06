@@ -3,6 +3,6 @@ ManaCost:3 R R
 Types:Creature Goblin
 Text:When Siege-Gang Commander comes into play, put three 1/1 red Goblin creature tokens into play.
 PT:2/2
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/siege_gang_commander.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/siege_gang_commander.jpg
 End

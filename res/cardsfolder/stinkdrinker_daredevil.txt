@@ -4,6 +4,6 @@ Types:Creature Goblin Rogue
 Text:Giant spells you cast cost 2 less to cast.
 PT:1/3
 K:CostChange:Player:Less:2:Spell:All:Giant:NoSpecial
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/stinkdrinker_daredevil.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stinkdrinker_daredevil.jpg
 End

@@ -3,6 +3,6 @@ ManaCost:GW
 Types:Sorcery
 Text:Search your library for a Forest or Plains card, reveal it, and put it into your hand. Then shuffle your library.
 K:spTutor:Forest,Plains:Hand
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/safewright_quest.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/safewright_quest.jpg
 End

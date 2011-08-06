@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Instant
 Text:no text
 K:spAllPump:YouCtrl:+0/+5:Creatures you control get +0/+5 until end of turn.:Solidarity - Creatures get +0/+5 until EOT
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/8ed/en-us/card45188.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/8ed/en-us/card45188.jpg
 End

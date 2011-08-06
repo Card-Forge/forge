@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Instant
 Text:Counter target creature spell.
 K:spCounter:Spell:Type(Creature):Graveyard:None
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83228.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83228.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Beast
 Text:no text
 PT:1/2
 K:abPump R:+1/+0
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ridgeline_rager.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ridgeline_rager.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Merfolk Wizard
 Text:no text
 PT:1/2
 K:WheneverKeyword:BecomesTapped:Self:Play:MakeToken-Merfolk Wizard-U-1-1-None-/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever Stonybrook Schoolmaster becomes tapped, you may put a 1/1 blue Merfolk Wizard creature token onto the battlefield.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/stonybrook_schoolmaster.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stonybrook_schoolmaster.jpg
 End

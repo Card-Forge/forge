@@ -5,6 +5,6 @@ Text:no text
 PT:3/1
 K:Flash
 K:Haste
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/raging_kavu.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/raging_kavu.jpg
 End

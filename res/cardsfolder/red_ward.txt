@@ -4,6 +4,6 @@ Types:Enchantment Aura
 Text:Enchanted creature has protection from red. This effect doesn't remove Red Ward.
 K:Enchant creature
 K:enPump:Protection from red
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/red_ward.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/red_ward.jpg
 End

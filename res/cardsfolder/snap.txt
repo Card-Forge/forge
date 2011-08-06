@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Instant
 Text:Return target creature to its owner's hand. Untap up to two lands.
 K:spBounceTgt:Creature:Hand:Drawback$YouUntapUpTo/2/Land
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/snap.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/snap.jpg
 End

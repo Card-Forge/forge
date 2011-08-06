@@ -3,6 +3,6 @@ ManaCost:X R R
 Types:Instant
 Text:no text
 K:Cycling:3
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/starstorm.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/starstorm.jpg
 End

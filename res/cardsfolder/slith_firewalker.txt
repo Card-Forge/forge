@@ -4,6 +4,6 @@ Types:Creature Slith
 Text:Whenever Slith Firewalker deals combat damage to a player, put a +1/+1 counter on it.
 PT:1/1
 K:Haste
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/slith_firewalker.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/slith_firewalker.jpg
 End

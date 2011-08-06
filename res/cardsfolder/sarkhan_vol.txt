@@ -2,7 +2,7 @@ Name:Sarkhan Vol
 ManaCost:2 R G
 Types:Planeswalker - Sarkhan
 Text:no text
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Mythic
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sarkhan_vol.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sarkhan_vol.jpg
 End

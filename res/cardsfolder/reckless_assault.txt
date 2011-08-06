@@ -3,7 +3,7 @@ ManaCost:2 B R
 Types:Enchantment
 Text:no text
 K:abDamageTgtCP 1 PayLife<2>:1
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVars:Picture:http://www.wizards.com/global/images/magic/general/reckless_assault.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVars:Picture:http://www.wizards.com/global/images/magic/general/reckless_assault.jpg
 End

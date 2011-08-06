@@ -3,7 +3,7 @@ ManaCost:1 UR
 Types:Creature Shapeshifter
 Text:Whenever you cast a spell that's both blue and red, Riverfall Mimic becomes 3/3 and is unblockable until end of turn.
 PT:2/1
-K:SVar:BuffedBy:Spell.Blue+Red
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/Riverfall_Mimic.jpg
+SVar:BuffedBy:Spell.Blue+Red
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/Riverfall_Mimic.jpg
 End

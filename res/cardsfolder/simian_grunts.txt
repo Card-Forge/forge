@@ -5,6 +5,6 @@ Text:no text
 PT:3/4
 K:Flash
 K:Echo:2 G
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/simian_grunts.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/simian_grunts.jpg
 End

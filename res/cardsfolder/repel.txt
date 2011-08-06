@@ -3,6 +3,6 @@ ManaCost:3 U
 Types:Instant
 Text:Put target creature on top of its owner's library.
 K:spBounceTgt:Creature:TopofLibrary
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/repel.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/repel.jpg
 End

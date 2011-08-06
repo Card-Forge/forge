@@ -3,6 +3,6 @@ ManaCost:1 B
 Types:Sorcery
 Text:no text
 K:spDiscardTgt:AtRandom:1:Target player discards a card at random.:Specter's Wail - target player discards a card
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/specters_wail.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/specters_wail.jpg
 End

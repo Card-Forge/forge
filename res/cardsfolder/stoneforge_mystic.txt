@@ -3,6 +3,6 @@ ManaCost:1 W
 Types:Creature Kor Artificer
 Text:When Stoneforge Mystic enters the battlefield, you may search your library for an Equipment card, reveal it, put it into your hand, then shuffle your library.
 PT:1/2
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/stoneforge_mystic.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stoneforge_mystic.jpg
 End

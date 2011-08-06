@@ -4,6 +4,6 @@ Types:Creature Rhino Monk Soldier
 Text:When Rhox Bodyguard comes into play, you gain 3 life.
 PT:2/3
 K:Exalted
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_bodyguard.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_bodyguard.jpg
 End

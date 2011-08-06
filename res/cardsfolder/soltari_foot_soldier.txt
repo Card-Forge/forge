@@ -4,6 +4,6 @@ Types:Creature Soltari Soldier
 Text:no text
 PT:1/1
 K:Shadow
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_foot_soldier.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_foot_soldier.jpg
 End

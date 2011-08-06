@@ -3,6 +3,6 @@ ManaCost:3 U U
 Types:Sorcery
 Text:Return all artifacts and enchantments to their owners' hands.
 K:spBounceAll:Artifact,Enchantment:Hand
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/reduce_to_dreams.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reduce_to_dreams.jpg
 End

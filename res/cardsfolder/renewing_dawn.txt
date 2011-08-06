@@ -3,8 +3,8 @@ ManaCost:1 W
 Types:Sorcery
 Text:no text
 K:spGainLife:X:You gain 2 life for each Mountain target opponent controls.:Renewing Dawn - player gains X life
-K:SVar:X:Count$TypeOppCtrl.Mountain/Times.2
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal/renewing_dawn.jpg
+SVar:X:Count$TypeOppCtrl.Mountain/Times.2
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal/renewing_dawn.jpg
 End

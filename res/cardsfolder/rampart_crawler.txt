@@ -4,6 +4,6 @@ Types:Creature Lizard Mercenary
 Text:no text
 PT:1/1
 K:CARDNAME can't be blocked by Walls.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rampart_crawler.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rampart_crawler.jpg
 End

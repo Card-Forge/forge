@@ -3,6 +3,6 @@ ManaCost:B B
 Types:Enchantment Aura
 Text:Whenever enchanted creature becomes tapped, put a -0/-2 counter on it.
 K:Enchant Creature Curse
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_shackle.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_shackle.jpg
 End

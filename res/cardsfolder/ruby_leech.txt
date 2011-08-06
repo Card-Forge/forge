@@ -5,6 +5,6 @@ Text:Red spells you cast cost R more to cast.
 PT:2/2
 K:First strike
 K:CostChange:Player:More:R:Spell:red:All:NoSpecial
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ruby_leech.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ruby_leech.jpg
 End

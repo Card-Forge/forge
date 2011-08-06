@@ -4,6 +4,6 @@ Types:Creature Crab
 Text:When Riptide Crab is put into a graveyard from play, draw a card.
 PT:1/3
 K:Vigilance
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide_crab.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide_crab.jpg
 End

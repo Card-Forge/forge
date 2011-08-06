@@ -4,6 +4,6 @@ Types:Artifact Creature Construct
 Text:Whenever damage is dealt to Stuffy Doll, it deals that much damage to your opponent.
 PT:0/1
 K:Indestructible
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card116724.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card116724.jpg
 End

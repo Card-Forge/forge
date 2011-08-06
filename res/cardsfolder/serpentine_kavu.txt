@@ -4,6 +4,6 @@ Types:Creature Kavu
 Text:no text
 PT:4/4
 K:abPump R:Haste
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/serpentine_kavu.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/serpentine_kavu.jpg
 End

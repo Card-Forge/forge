@@ -4,6 +4,6 @@ Types:Sorcery
 Text:no text
 K:spGainLife:6
 K:Cycling:2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rejuvenate.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rejuvenate.jpg
 End

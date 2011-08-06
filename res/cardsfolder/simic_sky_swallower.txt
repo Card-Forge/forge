@@ -6,6 +6,6 @@ PT:6/6
 K:Flying
 K:Trample
 K:Shroud
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card111204.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card111204.jpg
 End

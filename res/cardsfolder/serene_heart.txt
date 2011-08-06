@@ -3,6 +3,6 @@ ManaCost:1 G
 Types:Instant
 Text:Destroy all Auras.
 K:spDestroyAll:Aura
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/serene_heart.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/serene_heart.jpg
 End

@@ -3,6 +3,6 @@ ManaCost:4 G
 Types:Creature Treefolk
 Text:no text
 PT:3/6
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/wl/en-us/card4526.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/wl/en-us/card4526.jpg
 End

@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Instant Arcane
 Text:Destroy target non-Spirit creature.
 K:spDestroyTgt:Creature.nonSpirit
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rend_flesh.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rend_flesh.jpg
 End

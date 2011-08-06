@@ -4,6 +4,6 @@ Types:Creature Serpent
 Text:no text
 PT:3/4
 K:Cycling:2
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sandbar_serpent.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sandbar_serpent.jpg
 End

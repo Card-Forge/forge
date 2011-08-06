@@ -4,6 +4,6 @@ Types:Land
 Text:When Sejiri Steppe enters the battlefield, target creature you control gains protection from the color of your choice until end of turn.
 K:tap: add W
 K:Comes into play tapped.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sejiri_steppe.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sejiri_steppe.jpg
 End

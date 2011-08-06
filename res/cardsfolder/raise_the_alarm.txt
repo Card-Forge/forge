@@ -2,6 +2,6 @@ Name:Raise the Alarm
 ManaCost:1 W
 Types:Instant
 Text:Put two 1/1 white Soldier creature tokens into play.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card48103.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card48103.jpg
 End

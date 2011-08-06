@@ -4,6 +4,6 @@ Types:Instant
 Text:Return target permanent to its owner's hand.
 K:Cycling:2
 K:spBounceTgt:Permanent:Hand
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rescind.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rescind.jpg
 End

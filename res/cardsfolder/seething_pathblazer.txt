@@ -4,6 +4,6 @@ Types:Creature Elemental Warrior
 Text:no text
 PT:2/2
 K:abPump 0 Sac<1/Elemental>:+2/+0/First Strike
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/seething_pathblazer.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seething_pathblazer.jpg
 End

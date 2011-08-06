@@ -2,7 +2,7 @@ Name:Sungrass Prairie
 ManaCost:no cost
 Types:Land
 Text:1, tap: add W G
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sungrass_prairie.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sungrass_prairie.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Merfolk
 Text:no text
 PT:1/2
 K:WheneverKeyword:BecomesBlocked:Self:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:No Special Condition:When Saprazzan Raider becomes blocked, return it to its owner's hand.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/saprazzan_raider.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/saprazzan_raider.jpg
 End

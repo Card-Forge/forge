@@ -3,6 +3,6 @@ ManaCost:1 G
 Types:Creature Bear Spirit
 Text:Whenever Spectral Bears attacks, if defending player controls no black nontoken permanents, it doesn't untap during your next untap step.
 PT:3/3
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_bears.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_bears.jpg
 End

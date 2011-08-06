@@ -5,6 +5,6 @@ Text:no text
 K:CARDNAME enters the battlefield tapped unless you control a Forest or a Plains.
 K:tap: add W
 K:tap: add G
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sunpetal_grove.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sunpetal_grove.jpg
 End

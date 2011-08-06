@@ -4,6 +4,6 @@ Types:Creature Horror
 Text:no text
 PT:1/1
 K:Fear
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/cg/en-us/card15170.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/cg/en-us/card15170.jpg
 End

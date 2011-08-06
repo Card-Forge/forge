@@ -3,7 +3,7 @@ ManaCost:R
 Types:Instant
 Text:no text
 K:spDamageTgtC:X:Skred deals damage to target creature equal to the number of snow permanents you control.
-K:SVar:X:Count$TypeYouCtrl.Snow
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/skred.jpg
+SVar:X:Count$TypeYouCtrl.Snow
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skred.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Merfolk
 Text:no text
 PT:2/2
 K:Islandwalk
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card129733.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card129733.jpg
 End

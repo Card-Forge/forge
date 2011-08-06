@@ -2,8 +2,8 @@ Name:Resuscitate
 ManaCost:1 G
 Types:Instant
 Text:Until end of turn, creatures you control gain "1: Regenerate this creature." (NOTE: This ability is not currently implemented.)
-K:SVar:RemAIDeck:True
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:None
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/resuscitate.jpg
+SVar:RemAIDeck:True
+SVar:PlayMain1:TRUE
+SVar:Rarity:None
+SVar:Picture:http://www.wizards.com/global/images/magic/general/resuscitate.jpg
 End

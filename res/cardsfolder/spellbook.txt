@@ -3,6 +3,6 @@ ManaCost:0
 Types:Artifact
 Text:You have no maximum hand size.
 K:HandSize = INF Self
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/spellbook.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spellbook.jpg
 End

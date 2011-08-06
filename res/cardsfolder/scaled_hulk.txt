@@ -5,7 +5,7 @@ Text:no text
 PT:4/4
 K:WheneverKeyword:CastSpell/Controller:Type/Arcane:Play:StatsPumpEOT/2/2:Self:ASAP:No_Condition:No Special Condition:Whenever you cast a Arcane spell, Scaled Hulk gets +2/+2 until end of turn.
 K:WheneverKeyword:CastSpell/Controller:Type/Spirit:Play:StatsPumpEOT/2/2:Self:ASAP:No_Condition:No Special Condition:Whenever you cast a Spirit spell, Scaled Hulk gets +2/+2 until end of turn.
-K:SVar:BuffedBy:Arcane,Spirit
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/scaled_hulk.jpg
+SVar:BuffedBy:Arcane,Spirit
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scaled_hulk.jpg
 End

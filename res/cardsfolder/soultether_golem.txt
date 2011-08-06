@@ -5,7 +5,7 @@ Text:no text
 PT:3/3
 K:WheneverKeyword:EntersBattleField:Type/Creature:Play:CustomCounter.TIME/1:Self:ASAP:No_Condition:Initiator - Other than Self!Initiator - OwnedByController:Whenever another creature enters the battlefield under your control, put a time counter on Soultether Golem.
 K:Vanishing:1
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/soultether_golem.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soultether_golem.jpg
 End

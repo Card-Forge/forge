@@ -3,7 +3,7 @@ ManaCost:W
 Types:Creature Sliver
 Text:All slivers have flanking.
 PT:1/1
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sidewinder_sliver.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sidewinder_sliver.jpg
 End

@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Artifact Creature Myr
 Text:no text
 PT:2/1
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136212.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136212.jpg
 End

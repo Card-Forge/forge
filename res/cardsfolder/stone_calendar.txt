@@ -3,6 +3,6 @@ ManaCost:5
 Types:Artifact
 Text:Spells you cast cost up to 1 less to cast.
 K:CostChange:Player:Less:1:Spell:All:All:NoSpecial
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_calendar.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_calendar.jpg
 End

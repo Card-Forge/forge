@@ -4,6 +4,6 @@ Types:Artifact Creature Sheep
 Text:When Rustspore Ram enters the battlefield, destroy target Equipment.
 PT:1/3
 K:etbDestroyTgt:Equipment
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rustspore_ram.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rustspore_ram.jpg
 End

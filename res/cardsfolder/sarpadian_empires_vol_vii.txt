@@ -2,6 +2,6 @@ Name:Sarpadian Empires, Vol. VII
 ManaCost:3
 Types:Artifact
 Text:no text
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sarpadian_empires_vol_vii.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sarpadian_empires_vol_vii.jpg
 End

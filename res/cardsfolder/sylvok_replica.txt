@@ -4,6 +4,6 @@ Types:Artifact Creature Shaman
 Text:no text
 PT:1/3
 K:abDestroyTgtV G Sac<1/CARDNAME>:Artifact,Enchantment:Destroy target artifact or enchantment.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://forums.mtgsalvation.com/attachment.php?attachmentid=110273&d=1283832127
+SVar:Rarity:Common
+SVar:Picture:http://forums.mtgsalvation.com/attachment.php?attachmentid=110273&d=1283832127
 End

@@ -2,6 +2,6 @@ Name:Spectral Procession
 ManaCost:2/W 2/W 2/W
 Types:Sorcery
 Text:Put three 1/1 white Spirit creature tokens with flying into play.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_procession.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_procession.jpg
 End

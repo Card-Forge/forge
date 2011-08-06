@@ -4,6 +4,6 @@ Types:Creature Human Assassin
 Text:no text
 PT:1/1
 K:abDestroyTgtV T:Creature.tapped:Destroy target tapped creature.
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83235.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83235.jpg
 End

@@ -2,6 +2,6 @@ Name:Savage Twister
 ManaCost:X R G
 Types:Sorcery
 Text:no text
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_twister.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_twister.jpg
 End

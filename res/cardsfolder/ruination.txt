@@ -3,6 +3,6 @@ ManaCost:3 R
 Types:Sorcery
 Text:Destroy all nonbasic lands.
 K:spDestroyAll:Land.nonBasic
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ruination.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ruination.jpg
 End

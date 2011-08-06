@@ -5,6 +5,6 @@ Text:no text
 PT:2/2
 K:Flying
 K:Trample
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/ia/en-us/card2534.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/ia/en-us/card2534.jpg
 End

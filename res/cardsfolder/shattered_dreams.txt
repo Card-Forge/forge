@@ -3,6 +3,6 @@ ManaCost:B
 Types:Sorcery
 Text:no text
 K:spDiscardOpp:RevealYouChoose/Artifact:1:Target opponent reveals his or her hand. You choose an artifact card from it. That player discards that card.:Shattered Dreams - opponent reveal hand and discards a card
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/shattered_dreams.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shattered_dreams.jpg
 End

@@ -4,6 +4,6 @@ Types:Instant
 Text:Destroy target creature with power 2 or less.
 K:spDestroyTgt:Creature.powerLE2
 K:Cycling:2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/swat.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/swat.jpg
 End

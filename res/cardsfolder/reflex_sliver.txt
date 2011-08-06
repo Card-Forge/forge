@@ -3,8 +3,8 @@ ManaCost:3 G
 Types:Creature Sliver
 Text:All Slivers have haste.
 PT:2/2
-K:SVar:PlayMain1:TRUE
-K:SVar:AntiBuffedBy:Sliver
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/reflex_sliver.jpg
+SVar:PlayMain1:TRUE
+SVar:AntiBuffedBy:Sliver
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reflex_sliver.jpg
 End

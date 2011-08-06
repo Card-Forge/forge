@@ -9,6 +9,6 @@ K:Vigilance
 K:Lifelink
 K:Protection from red
 K:Protection from green
-K:SVar:Rarity:Mythic
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinx_of_the_steel_wind.jpg
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinx_of_the_steel_wind.jpg
 End

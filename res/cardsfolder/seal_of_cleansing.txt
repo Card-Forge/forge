@@ -2,6 +2,6 @@ Name:Seal of Cleansing
 ManaCost:1 W
 Types:Enchantment
 Text:no text
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/seal_of_cleansing.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seal_of_cleansing.jpg
 End

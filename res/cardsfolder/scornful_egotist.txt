@@ -4,6 +4,6 @@ Types:Creature Human Wizard
 Text:no text
 PT:1/1
 K:Morph:U
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/scornful_egotist.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scornful_egotist.jpg
 End

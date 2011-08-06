@@ -2,6 +2,6 @@ Name:Squall Line
 ManaCost:X G G
 Types:Instant
 Text:no text
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/squall_line.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/squall_line.jpg
 End

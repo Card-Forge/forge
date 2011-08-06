@@ -4,6 +4,6 @@ Types:Creature Rat
 Text:no text
 PT:2/1
 K:Fear
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83418.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83418.jpg
 End
