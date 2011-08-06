@@ -1,10 +1,11 @@
 Name:Sharuum the Hegemon
 ManaCost:3 W U B
 Types:Legendary Artifact Creature Sphinx
-Text:When Sharuum the Hegemon enters the battlefield, you may return target artifact card from your graveyard to the battlefield.
+Text:no text
 PT:5/5
 K:Flying
-K:etbReturnTgt:1/MayReturn:Artifact:Battlefield
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | Optional$ True | TriggerDescription$ When CARDNAME enters the battlefield, you may return target artifact card from your graveyard to the battlefield.
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Artifact.YouCtrl
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sharuum_the_hegemon.jpg
 SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/194.jpg

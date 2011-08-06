@@ -1,9 +1,10 @@
 Name:Treasure Hunter
 ManaCost:2 W
 Types:Creature Human
-Text:When Treasure Hunter enters the battlefield, you may return target artifact card from your graveyard to your hand.
+Text:no text
 PT:2/2
-K:etbReturnTgt:1/MayReturn:Artifact:Hand
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | Optional$ True | TriggerDescription$ When CARDNAME enters the battlefield, you may return target artifact card from your graveyard to your hand.
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Artifact.YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treasure_hunter.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/23.jpg

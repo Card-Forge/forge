@@ -1,10 +1,11 @@
 Name:Sanctum Gargoyle
 ManaCost:3 W
 Types:Artifact Creature Gargoyle
-Text:When Sanctum Gargoyle enters the battlefield, you may return target artifact card from your graveyard to your hand.
+Text:no text
 PT:2/3
 K:Flying
-K:etbReturnTgt:1/MayReturn:Artifact:Hand
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | Optional$ True | TriggerDescription$ When CARDNAME enters the battlefield, you may return target artifact card from your graveyard to your hand.
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Artifact.YouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanctum_gargoyle.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/24.jpg
