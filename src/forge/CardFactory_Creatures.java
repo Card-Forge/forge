@@ -9029,16 +9029,13 @@ public class CardFactory_Creatures {
                         card.getController().shuffle();
                         lib.remove(c);
                         hand.add(c);
-                        
+                        if (card.getController().isPlayer(AllZone.ComputerPlayer)) 
+                        	AllZone.Display.getChoiceOptional(card + " - Computer picked:", c);
                     }
                 }//resolve()
             };
             Command intoPlay = new Command() {
                 
-
-                /**
-			 * 
-			 */
                 private static final long serialVersionUID = 4022442363194287539L;
                 
                 public void execute() {
@@ -9086,8 +9083,8 @@ public class CardFactory_Creatures {
                         card.getController().shuffle();
                         lib.remove(c);
                         lib.add(c, 0);
-                        
-
+                        if (card.getController().isPlayer(AllZone.ComputerPlayer)) 
+                        	AllZone.Display.getChoiceOptional(card + " - Computer picked:", c);
                     }
                 }//resolve()
             };
@@ -9139,7 +9136,8 @@ public class CardFactory_Creatures {
                         card.getController().shuffle();
                         lib.remove(c);
                         lib.add(c, 0);
-                        
+                        if (card.getController().isPlayer(AllZone.ComputerPlayer)) 
+                        	AllZone.Display.getChoiceOptional(card + " - Computer picked:", c);
                     }
                 }//resolve()
             };
@@ -13274,8 +13272,8 @@ public class CardFactory_Creatures {
                         card.getController().shuffle();
                         lib.remove(c);
                         lib.add(c, 0);
-                        
-
+                        if (card.getController().isPlayer(AllZone.ComputerPlayer)) 
+                        	AllZone.Display.getChoiceOptional(card + " - Computer picked:", c);
                     }
                 }//resolve()
             };
@@ -13328,6 +13326,8 @@ public class CardFactory_Creatures {
                         card.getController().shuffle();
                         lib.remove(c);
                         lib.add(c, 0);
+                        if (card.getController().isPlayer(AllZone.ComputerPlayer)) 
+                        	AllZone.Display.getChoiceOptional(card + " - Computer picked:", c);
                     }
                 }//resolve()
             };
@@ -13380,8 +13380,8 @@ public class CardFactory_Creatures {
                         card.getController().shuffle();
                         lib.remove(c);
                         lib.add(c, 0);
-                        
-
+                        if (card.getController().isPlayer(AllZone.ComputerPlayer)) 
+                        	AllZone.Display.getChoiceOptional(card + " - Computer picked:", c);
                     }
                 }//resolve()
             };
@@ -13493,8 +13493,8 @@ public class CardFactory_Creatures {
                         card.getController().shuffle();
                         lib.remove(c);
                         lib.add(c, 0);
-                        
-
+                        if (card.getController().isPlayer(AllZone.ComputerPlayer)) 
+                        	AllZone.Display.getChoiceOptional(card + " - Computer picked:", c);
                     }
                 }//resolve()
             };
@@ -13548,6 +13548,8 @@ public class CardFactory_Creatures {
                         card.getController().shuffle();
                         lib.remove(c);
                         lib.add(c, 0);
+                        if (card.getController().isPlayer(AllZone.ComputerPlayer)) 
+                        	AllZone.Display.getChoiceOptional(card + " - Computer picked:", c);
                     }
                 }//resolve()
             };
@@ -13600,8 +13602,8 @@ public class CardFactory_Creatures {
                         card.getController().shuffle();
                         lib.remove(c);
                         lib.add(c, 0);
-                        
-
+                        if (card.getController().isPlayer(AllZone.ComputerPlayer)) 
+                        	AllZone.Display.getChoiceOptional(card + " - Computer picked:", c);
                     }
                 }//resolve()
             };
