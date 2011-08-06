@@ -1290,6 +1290,7 @@ Cease-Fire =25
 Ceaseless Searblades =25
 Celestial Ancient =43
 Celestial Convergence =35
+Celestial Colonnade =539
 Celestial Crusader =5
 Celestial Dawn =25
 Celestial Gatekeeper =25

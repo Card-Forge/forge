@@ -1454,6 +1454,12 @@ public class CombatUtil {
             
         	for (Card c:cl)
         	{
+        		if (!c.getCreatureBlockedThisCombat()) {
+                	for(Ability ab:CardFactoryUtil.getBushidoEffects(c)) {
+                		AllZone.Stack.add(ab);
+                	}
+                }
+        		
 	        	if (c.getKeyword().contains("Defender") && !c.getCreatureBlockedThisCombat())
 	        	{
 	        		final Card crd = c;
@@ -1535,11 +1541,6 @@ public class CombatUtil {
         if(!a.getCreatureGotBlockedThisCombat()) {
             for(Ability ab:CardFactoryUtil.getBushidoEffects(a))
                 AllZone.Stack.add(ab);
-        }
-        if (!b.getCreatureBlockedThisCombat()) {
-        for(Ability ab:CardFactoryUtil.getBushidoEffects(b))
-            AllZone.Stack.add(ab);
-        	b.setCreatureBlockedThisCombat(true);
         }
         
         if(a.getKeyword().contains("Flanking") && !b.getKeyword().contains("Flanking")) {
