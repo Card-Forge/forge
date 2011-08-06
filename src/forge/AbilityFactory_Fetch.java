@@ -26,7 +26,7 @@ public class AbilityFactory_Fetch {
 			
 			@Override
 			public void resolve() {
-				doFetch(af, this.getActivatingPlayer());
+				doFetch(af, this, this.getActivatingPlayer());
 			}
 		
 		};
@@ -50,22 +50,24 @@ public class AbilityFactory_Fetch {
 			
 			@Override
 			public void resolve() {
-				doFetch(af, this.getActivatingPlayer());
+				doFetch(af, this, this.getActivatingPlayer());
 			}		
 		};
 		return spFetch;
 	}
 	
-	private static void doFetch(AbilityFactory af, Player player){
+	private static void doFetch(AbilityFactory af, final SpellAbility sa, Player player){
 		if (player.isComputer()){
-			doFetchAI(af, player);
+			doFetchAI(af, sa, player);
 			return;
 		}
 				
 		HashMap<String,String> params = af.getMapParams();
 		CardList library = AllZoneUtil.getPlayerCardsInLibrary(player);
 		library = filterDeck(library, params);
+		String DrawBack = params.get("SubAbility");
         String destination = params.get("Destination");
+        Card card = af.getHostCard();
 		
         int fetchNum = 1;	// Default to 1
         if (params.containsKey("FetchNum"))
@@ -95,16 +97,18 @@ public class AbilityFactory_Fetch {
 	                		c.tap();
 	            	}
 	            }
-	            else
-	            	break;
+	            if (af.hasSubAbility())
+	    			CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
 	        }//if
         }
 	}
 	
-	private static void doFetchAI(AbilityFactory af, Player player){
+	private static void doFetchAI(AbilityFactory af, final SpellAbility sa, Player player){
 		HashMap<String,String> params = af.getMapParams();
+		Card card = af.getHostCard();
 		CardList library = AllZoneUtil.getPlayerCardsInLibrary(player);
 		library = filterDeck(library, params);
+		String DrawBack = params.get("SubAbility");
         String destination = params.get("Destination");
         String type = params.get("FetchType");
 		
@@ -148,9 +152,11 @@ public class AbilityFactory_Fetch {
                 	l.add(c);
                 	if (!type.equals("Card"))
                 	AllZone.Display.getChoiceOptional(af.getHostCard().getName() + " - Computer picked:", l.toArray());
-                	AllZone.Computer_Library.add(c, libraryPosition); 
+                	AllZone.Computer_Library.add(c, libraryPosition);
             	}//move to top of library
 	        }//if
+	        if (af.hasSubAbility())
+    			CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
         }
 	}
 
