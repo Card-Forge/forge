@@ -2839,37 +2839,6 @@ public class CardFactory_Sorceries {
         //*************** END ************ END **************************
         
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Channel the Suns")) {
-            final SpellAbility spell = new Spell(card) {
-               
-                private static final long serialVersionUID = -8509187529151755266L;
-               
-                @Override
-                public void resolve() {
-                    Card mp = AllZone.ManaPool;
-                    mp.addExtrinsicKeyword("ManaPool:W");
-                    mp.addExtrinsicKeyword("ManaPool:U");
-                    mp.addExtrinsicKeyword("ManaPool:B");
-                    mp.addExtrinsicKeyword("ManaPool:R");
-                    mp.addExtrinsicKeyword("ManaPool:G");
-                }
-               
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-            };
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(cardName).append(" adds W U B R G to your mana pool");
-            spell.setStackDescription(sb.toString());
-           
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-           
-            return card;
-        }//*************** END ************ END **************************
         
         /*
         //*************** START *********** START **************************
