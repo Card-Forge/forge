@@ -197,7 +197,91 @@ public class AbilityFactory_Destroy {
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
 		
+		Target tgt = sa.getTarget();
+		final Card source = sa.getSourceCard();
+		final boolean noRegen = af.getMapParams().containsKey("NoRegen");
+
+		CardList list;
+		list = AllZoneUtil.getCardsInPlay();
+		list = list.getTargetableCards(source);
+		list = list.getValidCards(tgt.getValidTgts(), source.getController(), source);
 		
+		if (tgt != null){
+			if (list.size() == 0 || list.size() < tgt.getMinTargets(sa.getSourceCard(), sa))
+				return false;
+			
+			tgt.resetTargets();
+
+			CardList preferred = list.getNotKeyword("Indestructible");
+			preferred = list.getController(AllZone.HumanPlayer);
+			
+			// If NoRegen is not set, filter out creatures that have a regeneration shield
+			if (!noRegen){
+				// todo: filter out things that could regenerate in response? might be tougher?
+				preferred = preferred.filter(new CardListFilter() {
+					public boolean addCard(Card c) {
+						return c.getShield() == 0;
+					}
+				});
+			}
+			
+			for(Card c : preferred)
+				list.remove(c);
+			
+			while(tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)){ 
+				if (preferred.size() == 0){
+					if (tgt.getNumTargeted() == 0 || tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)){
+						if (!mandatory){
+							tgt.resetTargets();
+							return false;
+						}
+						else
+							break;
+					}
+					else{
+						break;
+					}
+				}
+				else{
+					Card c;
+					if (preferred.getNotType("Creature").size() == 0){
+						c = CardFactoryUtil.AI_getBestCreature(preferred);
+					}
+					else if (preferred.getNotType("Land").size() == 0){
+						c = CardFactoryUtil.AI_getBestLand(preferred);
+					}
+					else{
+						c = CardFactoryUtil.AI_getMostExpensivePermanent(preferred, source, false);
+					}
+					tgt.addTarget(c);
+					preferred.remove(c);
+				}
+			}
+				
+			while(tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)){ 
+				if (list.size() == 0){
+					break;
+				}
+				else{
+					Card c;
+					if (list.getNotType("Creature").size() == 0){
+						c = CardFactoryUtil.AI_getWorstCreature(list);
+					}
+					else{
+						c = CardFactoryUtil.AI_getCheapestPermanent(list, source, false);
+					}
+					tgt.addTarget(c);
+					list.remove(c);
+				}
+			}
+			
+			if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa))
+				return false;
+		}
+		else{
+			if (!mandatory)
+				return false;
+		}
 		
 		Ability_Sub subAb = sa.getSubAbility();
 		if (subAb != null)
@@ -218,8 +302,7 @@ public class AbilityFactory_Destroy {
 		if (tgt != null)
 			tgtCards = tgt.getTargetCards();
 		else{
-			tgtCards = new ArrayList<Card>();
-			tgtCards.add(sa.getSourceCard());
+			tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
 		}
 
 		sb.append(name).append(" - Destroy ");

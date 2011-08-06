@@ -786,7 +786,8 @@ public class TriggerHandler {
 					}
 					else
 					{
-						sa[0].doTrigger(isMandatory);
+						// commented out because i don't think this should be called again here
+						//sa[0].doTrigger(isMandatory);
 						ComputerUtil.playNoStack(sa[0]);
 					}
 				}
