@@ -1,3 +1,28 @@
+Sleeper's Robe
+U B
+Enchantment Aura
+Enchanted creature has fear.
+Enchant creature
+enPump:+0/+0/Fear
+WheneverKeyword:DealsDamage/Opponent:Enchanted_Creature:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever enchanted creature deals damage to an opponent, you may draw a card.
+
+Ophidian Eye
+2 U
+Enchantment Aura
+no text
+Enchant creature
+Flash
+enPump:+0/+0
+WheneverKeyword:DealsDamage/Opponent:Enchanted_Creature:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever enchanted creature deals damage to an opponent, you may draw a card.
+
+Keen Sense
+G
+Enchantment Aura
+no text
+Enchant creature
+enPump:+0/+0
+WheneverKeyword:DealsDamage/Opponent:Enchanted_Creature:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever enchanted creature deals damage to an opponent, you may draw a card.
+
 Mirari
 5
 Legendary Artifact

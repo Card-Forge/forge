@@ -767,7 +767,7 @@ public class GameAction {
                             	if(!card.getController().equals(getOpponent(c.getController()))) k[4] = "Null";    
                                 }
                             if(Conditions[y].contains("Enchanted_Creature")) {
-                            	if(((Card)Custom_Parameters[2]).isEnchantedBy(card.getName()) == false) k[4] = "Null";    
+                            	if(((Card)Custom_Parameters[2]).getEnchantedBy().contains(card) == false) k[4] = "Null";    
                                 }
                            	if(Conditions[y].contains("Type") && !Conditions[y].contains("OneTypeOfMany")) {
                                 String TypeParse = Conditions[y];                
