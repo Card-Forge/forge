@@ -48,13 +48,13 @@ public class TableSorter implements Comparator<Card>, NewConstants
     }
     else if (column == 2)//Cost
     {
-      aCom = Integer.valueOf(CardUtil.getConvertedManaCost(a.getManaCost()));
-      bCom = Integer.valueOf(CardUtil.getConvertedManaCost(b.getManaCost()));
+      aCom = Double.valueOf(CardUtil.getWeightedManaCost(a.getManaCost()));
+      bCom = Double.valueOf(CardUtil.getWeightedManaCost(b.getManaCost()));
 
       if(a.isLand())
-        aCom = Integer.valueOf(-1);
+        aCom = Double.valueOf(-1);
       if(b.isLand())
-        bCom = Integer.valueOf(-1);
+        bCom = Double.valueOf(-1);
     }
     else if (column == 3)//Color
     {

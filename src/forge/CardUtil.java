@@ -309,4 +309,12 @@ public class CardUtil {
 
     	return "none";
     }
+
+	public static double getWeightedManaCost(String manaCost)
+	{
+		if(manaCost.equals("")) return 0;
+
+		ManaCost cost = new ManaCost(manaCost);
+		return cost.getWeightedManaCost();
+	}
 }

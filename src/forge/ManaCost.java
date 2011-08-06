@@ -10,6 +10,7 @@ public class ManaCost {
     //ManaPartColor is stored before ManaPartColorless
     private ArrayList<Object> manaPart;
     private HashMap<String,Integer> sunburstMap = new HashMap<String,Integer>();
+    int xcounter = 0;
     
 //manaCost can be like "0", "3", "G", "GW", "10", "3 GW", "10 GW"
     //or "split hybrid mana" like "2/G 2/G", "2/B 2/B 2/B"
@@ -24,8 +25,10 @@ public class ManaCost {
     	if (manaCost.equals("") || manaCost.equals("X"))
     		manaCost = "0";
     	
-    	while (manaCost.startsWith("X"))
+    	while (manaCost.startsWith("X")){
     		manaCost = manaCost.substring(2);
+            xcounter++;
+        }
     	manaPart = split(manaCost);
     }
     
@@ -184,6 +187,27 @@ public class ManaCost {
 		for(Object s : manaPart){
 			cmc += ((Mana_Part)s).getConvertedManaCost();
 		}
+		return cmc;
+	}
+
+	/**
+	 * Returns Mana cost, adjusted slightly to make colored mana parts more significant.
+     * Should only be used for comparison purposes; using this method allows the sort:
+     * 2 < X 2 < 1 U < U U == UR U < X U U < X X U U
+     *
+	 * @return The converted cost + 0.0001* the number of colored mana in the cost + 0.00001 *
+     * the number of X's in the cost
+	 */
+	public double getWeightedManaCost(){
+		double cmc = 0;
+		for(Object s : manaPart){
+			cmc += ((Mana_Part)s).getConvertedManaCost();
+			if (s instanceof Mana_PartColor){
+				cmc+= 0.0001;
+			}
+		}
+
+        cmc += 0.00001* xcounter;
 		return cmc;
 	}
 
