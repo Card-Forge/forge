@@ -8641,7 +8641,7 @@ public class CardFactory implements NewConstants {
             });
         }//*************** END ************ END **************************
         
-
+        /* keyworded
         //*************** START *********** START **************************
         if(cardName.equals("Legacy Weapon")) {
             final Ability ability = new Ability(card, "W U B R G") {
@@ -8712,7 +8712,7 @@ public class CardFactory implements NewConstants {
             
         }//*************** END ************ END **************************
         
-        /*
+       
         //*************** START *********** START **************************
         else if(cardName.equals("Voltaic Key")) {
             final Ability_Tap ability = new Ability_Tap(card, "1") {

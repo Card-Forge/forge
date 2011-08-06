@@ -1,0 +1,9 @@
+Name:Lawbringer
+ManaCost:2 W
+Types:Creature Kor Rebel
+Text:no text
+PT:2/2
+A:AB$Bounce|Cost$T|ValidTgts$Creature.Red|TgtPrompt$Select target red Creature|Destination$Exile|SpellDescription$Exile target red creature.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lawbringer.jpg
+End

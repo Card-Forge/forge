@@ -121,7 +121,7 @@ public class AbilityFactory_Bounce {
 				list = list.getType("creature");
 			}
 			else{
-				list = list.getValidCards(abTgt.getValidTgts());
+				list = list.getValidCards(abTgt.getValidTgts(), source.getController());
 			}
 			if (list.size() == 0)
 				return false;

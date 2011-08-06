@@ -1,0 +1,9 @@
+Name:Rishadan Pawnshop
+ManaCost:2
+Types:Artifact
+Text:no text
+A:AB$Bounce|Cost$2 T|ValidTgts$Permanent.nonToken+YouCtrl|TgtPrompt$Select target nontoken permanent you control|Destination$ShuffleIntoLibrary|SpellDescription$Shuffle target nontoken permanent you control into its owner's library.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rishadan_pawnshop.jpg
+End

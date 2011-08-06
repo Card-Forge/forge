@@ -2,6 +2,7 @@ Name:Legacy Weapon
 ManaCost:7
 Types:Legendary Artifact
 Text:no text
+A:AB$Bounce|Cost$W U B R G|ValidTgts$Permanent|TgtPrompt$Select target permanent|Destination$Exile|SpellDescription$Exile target permanent.
 K:When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
