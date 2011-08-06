@@ -378,7 +378,11 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             WinLose winLose = Constant.Runtime.WinLose;
             QuestData quest = AllZone.QuestData;
             
-            if(winLose.getWin() == 2) quest.addWin();
+            boolean wonMatch = false;
+            if(winLose.getWin() == 2){
+            	quest.addWin();
+            	wonMatch = true;
+            }
             else quest.addLost();
             
             //System.out.println("QuestData cardpoolsize:" + AllZone.QuestData.getCardpool().size());
@@ -388,17 +392,14 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             if(AllZone.QuestData.getAvailableQuests()!= null)
             	AllZone.QuestData.clearAvailableQuests();
             
-            if(quest.shouldAddCards(winLose.didWinRecently())) {
+            if(quest.shouldAddCards(wonMatch)) {
                 quest.addCards();
                 String fileName = "BookIcon.png";
                 ImageIcon icon = getIcon(fileName);
                 JOptionPane.showMessageDialog(null, "You have won new cards.", "", JOptionPane.INFORMATION_MESSAGE, icon );
             }
             
-            
-            if (winLose.didWinRecently())
-            {
-            	
+            if (wonMatch){
             	long creds = quest.getCreditsToAdd(winLose);
             	String s = getWinText(creds, winLose, quest);
             	            	
@@ -406,7 +407,8 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             	ImageIcon icon = getIcon(fileName);
             	
             	JOptionPane.showMessageDialog(null, s, "",  JOptionPane.INFORMATION_MESSAGE, icon);
-            	if (quest.getWin() % 80 == 0)
+            	int wins = quest.getWin();
+            	if (wins > 0 && wins % 80 == 0)	// at every 80 wins, give 10 random rares
             	{
             		quest.addRandomRare(10);
             		fileName = "BoxIcon.png";
@@ -454,7 +456,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             	JOptionPane.showMessageDialog(null, "You lose! You have lost 15 credits.", "Awwww", JOptionPane.INFORMATION_MESSAGE, icon);
             }
             
-            if(quest.shouldAddAdditionalCards(winLose.didWinRecently())) {
+            if(quest.shouldAddAdditionalCards(wonMatch)) {
             	String fileName = quest.addRandomRare() + ".jpg";
             	ImageIcon icon = getCardIcon(fileName);
                 
