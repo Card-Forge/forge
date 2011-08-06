@@ -13605,6 +13605,7 @@ All Sliver creatures have haste.
 1/1
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Sliver
+SVar:AntiBuffedBy:Sliver
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_sliver.jpg
 
@@ -23787,6 +23788,7 @@ Creature Sliver
 All Slivers have haste.
 2/2
 SVar:PlayMain1:TRUE
+SVar:AntiBuffedBy:Sliver
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reflex_sliver.jpg
 
