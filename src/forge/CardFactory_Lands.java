@@ -690,48 +690,6 @@ class CardFactory_Lands {
             a1.setDescription("2 R G: Until end of turn, Raging Ravine becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" It's still a land.");
         }//*************** END ************ END **************************
         
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Dread Statuary")) {
-        	final long[] timeStamp = new long[1];
-            
-            final SpellAbility a1 = new Ability(card, "4") {
-                @Override
-                public boolean canPlayAI() {
-                    return !card.hasSickness() && super.canPlayAI();
-                }
-                
-                @Override
-                public void resolve() {
-                    Card c = card;
-                    String[] types = { "Artifact", "Creature", "Golem"};
-                    String[] keywords = { };
-                    
-                    timeStamp[0] = CardFactoryUtil.activateManland(c, 4, 2, types, keywords, "0");
-                    
-                    final Command eot1 = new Command() {
-                        private static final long serialVersionUID = -2632172918887247003L;
-                        long stamp = timeStamp[0];
-                        public void execute() {
-                            Card c = card;
-                            
-                            String[] types = { "Artifact", "Creature", "Golem"};
-                            String[] keywords = {  };
-                            CardFactoryUtil.revertManland(c, types, keywords, "", stamp);
-                        }
-                    };
-                    
-                    AllZone.EndOfTurn.addUntil(eot1);
-                }
-            };//SpellAbility
-            
-            card.clearSpellKeepManaAbility();
-            card.addSpellAbility(a1);
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" - until end of turn, becomes a 4/2 Golem artifact creature until end of turn.");
-            a1.setStackDescription(sb.toString());
-            a1.setDescription("4: Until end of turn, becomes a 4/2 Golem artifact creature until end of turn. It's still a land.");
-        }//*************** END ************ END **************************
  
         //*************** START *********** START **************************
         else if(cardName.equals("Lotus Vale")) {
