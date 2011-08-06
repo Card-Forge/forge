@@ -60,7 +60,7 @@ public class StaticEffects
 		
 		cardToEffectsList.put("Hada Spy Patrol", new String[] {"Hada_Spy_Patrol"});
 		cardToEffectsList.put("Halimar Wavewatch", new String[] {"Halimar_Wavewatch"});
-		cardToEffectsList.put("Heedless One", new String[] {"Heedless_One"});
+		//cardToEffectsList.put("Heedless One", new String[] {"Heedless_One"});
 		cardToEffectsList.put("Homarid", new String[] {"Homarid"});
 		
 		cardToEffectsList.put("Ikiral Outrider", new String[] {"Ikiral_Outrider"});

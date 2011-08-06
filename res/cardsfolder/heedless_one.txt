@@ -1,9 +1,10 @@
 Name:Heedless One
 ManaCost:3 G
 Types:Creature Elf Avatar
-Text:Heedless One's power and toughness are each equal to the number of Elves on the battlefield.
-PT:1/1
+Text:no text
+PT:*/*
 K:Trample
+K:stSetPT:Count$TypeOnBattlefield.Elf:Count$TypeOnBattlefield.Elf:CARDNAME's power and toughness are each equal to the number of Elves on the battlefield.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heedless_one.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/265.jpg

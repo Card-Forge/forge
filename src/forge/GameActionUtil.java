@@ -13991,7 +13991,7 @@ public class GameActionUtil {
 			}
 		}// execute()
 	};*/
-	
+	/*
 	public static Command Heedless_One = new Command() {
 		private static final long serialVersionUID = -220650457326100804L;
 
@@ -14009,6 +14009,7 @@ public class GameActionUtil {
 			return AllZoneUtil.getTypeInPlay("Elf").size();
 		}
 	}; 
+	*/
 	
 	public static Command Homarid = new Command() {
 		private static final long serialVersionUID = 7156319758035295773L;
@@ -16275,7 +16276,7 @@ public class GameActionUtil {
 		
 		commands.put("Hada_Spy_Patrol", Hada_Spy_Patrol);
 		commands.put("Halimar_Wavewatch", Halimar_Wavewatch);
-		commands.put("Heedless_One", Heedless_One);
+		//commands.put("Heedless_One", Heedless_One);
 		commands.put("Homarid", Homarid);
 		
 		commands.put("Ikiral_Outrider", Ikiral_Outrider);
