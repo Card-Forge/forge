@@ -70,46 +70,18 @@ public class PhaseUtil {
     		{
     			AllZone.GameAction.moveToHand(c);
     		}
-    	}
-    	
-    	CardList allp = AllZoneUtil.getCardsInPlay();
-    	
-		for(Card ca : allp) {
-			if (ca.hasStartOfKeyword("Permanents don't untap during their controllers' untap steps")) {
-	        	int KeywordPosition = ca.getKeywordPosition("Permanents don't untap during their controllers' untap steps");
-	        	String parse = ca.getKeyword().get(KeywordPosition).toString();
-	    		String k[] = parse.split(":");
-	    		final String restrictions[] = k[1].split(",");
-	    		final Card card = ca;
-				list = list.filter(new CardListFilter() {
-		    		public boolean addCard(Card c)
-		    		{
-		    			return !c.isValidCard(restrictions,card.getController(),card);
-		    		} // filter out cards that should not untap
-		    	});
-			}
-		} // end of Permanents don't untap during their controllers' untap steps
+    	}  	
 		
     	list = list.filter(new CardListFilter()
     	{
     		public boolean addCard(Card c)
     		{
+    			if(!canUntap(c)) return false;
     			if(canOnlyUntapOneLand() && c.isLand()) return false;
-    			return true;
-    		}
-    	});
-    	list = list.filter(new CardListFilter() {
-    		public boolean addCard(Card c) {
     			if((AllZoneUtil.isCardInPlay("Damping Field") || AllZoneUtil.isCardInPlay("Imi Statue"))
     					&& c.isArtifact()) return false;
-    			return true;
-    		}
-    	});
-    	list = list.filter(new CardListFilter() {
-    		public boolean addCard(Card c) {
     			if((AllZoneUtil.isCardInPlay("Smoke") || AllZoneUtil.isCardInPlay("Stoic Angel")
-    					|| AllZoneUtil.isCardInPlay("Intruder Alarm")) && c.isCreature())
-    				return false;
+    					|| AllZoneUtil.isCardInPlay("Intruder Alarm")) && c.isCreature()) return false;
     			return true;
     		}
     	});
@@ -137,22 +109,20 @@ public class PhaseUtil {
     				}
     			}
     		}
-    		else if(isAnZerrinRuinsType(getAnZerrinRuinsTypes(), c)) {
-    			//nothing to do, just doesn't let the card untap
-    		}
     		else if((c.getCounters(Counters.WIND)>0) && AllZoneUtil.isCardInPlay("Freyalise's Winds")) {
     			//remove a WIND counter instead of untapping
     			c.subtractCounter(Counters.WIND, 1);
     		}
-    		else if(!c.getKeyword().contains("CARDNAME doesn't untap during your untap step.")
-    				&& !c.getKeyword().contains("This card doesn't untap during your next untap step.")) {
-    			c.untap();
-    		}
-    		else { 
-    			c.removeExtrinsicKeyword("This card doesn't untap during your next untap step.");
-    			c.removeExtrinsicKeyword("HIDDEN This card doesn't untap during your next untap step.");
-    		}
+    		else c.untap();
     	}
+    	
+    	//Remove temporary keywords
+    	list = AllZoneUtil.getPlayerCardsInPlay(player);
+    	for(Card c : list) {
+    		c.removeExtrinsicKeyword("This card doesn't untap during your next untap step.");
+    		c.removeExtrinsicKeyword("HIDDEN This card doesn't untap during your next untap step.");
+    	}
+    	
     	
     	//opponent untapping during your untap phase
     	if(AllZoneUtil.isCardInPlay("Murkfiend Liege", player.getOpponent())) {
@@ -267,7 +237,31 @@ public class PhaseUtil {
     		}
     	}
     }//end doUntap
+    
+    
+    public static boolean canUntap(Card c) {
+    	
+    	if(c.getKeyword().contains("CARDNAME doesn't untap during your untap step.")
+				|| c.getKeyword().contains("This card doesn't untap during your next untap step.")) return false;
+    	
+    	CardList allp = AllZoneUtil.getCardsInPlay();
+		for(Card ca : allp) {
+			if (ca.hasStartOfKeyword("Permanents don't untap during their controllers' untap steps")) {
+	        	int KeywordPosition = ca.getKeywordPosition("Permanents don't untap during their controllers' untap steps");
+	        	String parse = ca.getKeyword().get(KeywordPosition).toString();
+	    		String k[] = parse.split(":");
+	    		final String restrictions[] = k[1].split(",");
+	    		final Card card = ca;
+				if(c.isValidCard(restrictions,card.getController(),card)) return false;;
+			}
+		} // end of Permanents don't untap during their controllers' untap steps
+		
+    	if(isAnZerrinRuinsType(getAnZerrinRuinsTypes(), c)) return false;
+    	
+    	return true;
+    }
 
+    
     private static boolean canOnlyUntapOneLand() {
     	CardList orbs = AllZoneUtil.getCardsInPlay("Winter Orb");
     	for(Card c : orbs){
