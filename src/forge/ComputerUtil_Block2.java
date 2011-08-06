@@ -49,6 +49,9 @@ public class ComputerUtil_Block2
 	   
 	   ArrayList<Object> defenders = combat.getDefenders();
 	   
+	   //Begin with the attackers that pose the biggest thread
+	   CardListUtil.sortAttack(attackerLists[0]);
+	   
 	   // If I don't have any planeswalkers than sorting doesn't really matter
 	   if (defenders.size() == 1)
 		   return attackerLists[0];
@@ -59,6 +62,8 @@ public class ComputerUtil_Block2
        // defend planeswalkers with more loyalty before planeswalkers with less loyalty
 	   // if planeswalker will be too difficult to defend don't even bother
 	   for(int i = 1; i < attackerLists.length; i++){
+		   //Begin with the attackers that pose the biggest thread
+		   CardListUtil.sortAttack(attackerLists[i]);
 		   for(Card c : attackerLists[i])
 			   sortedAttackers.add(c);
 	   }
@@ -135,10 +140,6 @@ public class ComputerUtil_Block2
 	   
 	  if (blockersLeft.size() == 0)
 		  return combat;
-	   
-	  /*
-	  //Begin with the attackers that pose the biggest thread
-	  CardListUtil.sortAttack(attackersLeft);*/
 	  
 	  //Begin with the weakest blockers
 	  CardListUtil.sortAttackLowFirst(blockersLeft);
