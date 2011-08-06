@@ -13567,6 +13567,49 @@ public class CardFactory_Creatures {
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Karn, Silver Golem")) {
+        	final long[] timeStamp = new long[1];
+        	Ability_Cost abCost = new Ability_Cost("1", cardName, true);
+        	Target target = new Target("Select target noncreature artifact", "Artifact.nonCreature".split(","));
+            Ability_Activated ability = new Ability_Activated(card, abCost, target) {
+				private static final long serialVersionUID = -8888163768273148474L;
+
+				@Override
+                public boolean canPlayAI() {
+					return false;
+                }
+                
+                @Override
+                public void resolve() {
+                	final Card c = getTargetCard();
+                    final String[] types = { "Creature" };
+                    final String[] keywords = { };
+                    int pt = CardUtil.getConvertedManaCost(c);
+                    timeStamp[0] = CardFactoryUtil.activateManland(c, pt, pt, types, keywords, "0");
+
+                    final Command eot1 = new Command() {
+						private static final long serialVersionUID = 1430561816965534163L;
+
+						public void execute() {
+                        	long stamp = timeStamp[0];
+                            CardFactoryUtil.revertManland(c, types, keywords, "0", stamp);
+                        }
+                    };
+                    
+                    AllZone.EndOfTurn.addUntil(eot1);
+                }//resolve()
+            };//SpellAbility
+            ability.setDescription(abCost+"Target noncreature artifact becomes an artifact creature with power and toughness each equal to its converted mana cost until end of turn.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" creating artifact creature.");
+            ability.setStackDescription(sb.toString());
+            card.addSpellAbility(ability);
+            card.setSVar("PlayMain1", "TRUE");
+        }//*************** END ************ END **************************
+        
                
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
         {
