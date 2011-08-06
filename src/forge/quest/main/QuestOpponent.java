@@ -1,4 +1,4 @@
-package forge.quest;
+package forge.quest.main;
 
 
 import forge.AllZone;

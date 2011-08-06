@@ -5,6 +5,7 @@ import forge.Gui_NewGame;
 import forge.QuestData;
 import forge.gui.GuiUtils;
 import forge.quest.bazaar.QuestBazaarPanel;
+import forge.quest.main.QuestMainPanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

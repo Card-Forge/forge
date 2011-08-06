@@ -1,9 +1,11 @@
-package forge.quest;
+package forge.quest.quests;
 
 import forge.*;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.quest.QuestFrame;
+import forge.quest.main.QuestMainPanel;
 
 import javax.swing.*;
 import java.awt.Dimension;

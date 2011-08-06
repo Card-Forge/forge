@@ -1,7 +1,10 @@
-package forge.quest;
+package forge.quest.main;
 
 import forge.*;
 import forge.gui.GuiUtils;
+import forge.quest.QuestAbstractPanel;
+import forge.quest.QuestFrame;
+import forge.quest.quests.Gui_Quest_Assignments;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -492,7 +495,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
             questData.setSelectedPet(pet.toString());
         }
 
-        Gui_Quest_Assignments g = new Gui_Quest_Assignments(human);
+        forge.quest.quests.Gui_Quest_Assignments g = new Gui_Quest_Assignments(human);
         g.setVisible(true);
         mainFrame.dispose();
     }
