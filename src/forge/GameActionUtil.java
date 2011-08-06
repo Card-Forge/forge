@@ -6317,7 +6317,7 @@ public class GameActionUtil {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("Raven Guild Master - ").append(opponent);
-			sb.append(" removes the top ten cards of his or her library from the game");
+			sb.append(" exiles the top ten cards of his or her library.");
 			ability.setStackDescription(sb.toString());
 			
 			AllZone.Stack.add(ability);
@@ -6453,7 +6453,7 @@ public class GameActionUtil {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("Scalpelexis - ").append(opponent);
-			sb.append(" removes the top four cards of his or her library from the game. ");
+			sb.append(" exiles the top four cards of his or her library. ");
 			sb.append("If two or more of those cards have the same name, repeat this process.");
 			ability.setStackDescription(sb.toString());
 			

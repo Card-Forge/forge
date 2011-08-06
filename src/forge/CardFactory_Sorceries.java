@@ -6254,8 +6254,8 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void showMessage() {
-                    if(index[0] == 0) AllZone.Display.showMessage("Select 1st target non-artifact creature to remove from the game");
-                    else AllZone.Display.showMessage("Select 2nd target non-artifact creature to remove from the game");
+                    if(index[0] == 0) AllZone.Display.showMessage("Select 1st target non-artifact creature to exile");
+                    else AllZone.Display.showMessage("Select 2nd target non-artifact creature to exile");
                     
                     ButtonUtil.enableOnlyCancel();
                 }

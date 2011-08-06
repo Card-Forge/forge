@@ -205,9 +205,9 @@ public class AllZoneUtil {
 	////////////// REMOVED FROM GAME
 	
 	/**
-	 * gets a list of all cards owned by both players that have been removed from the game
+	 * gets a list of all cards owned by both players that are in Exile
 	 * 
-	 * @return a CardList with all cards removed from the game
+	 * @return a CardList with all cards in Exile
 	 */
 	public static CardList getCardsRemovedFromGame() {
 		CardList cards = new CardList();
@@ -217,10 +217,10 @@ public class AllZoneUtil {
 	}
 	
 	/**
-	 * gets a list of all cards removed from the game for a given player
+	 * gets a list of all cards in Exile for a given player
 	 * 
-	 * @param player the player whose cards we want that are removed from the game
-	 * @return a CardList with all cards removed from the game for a given player
+	 * @param player the player whose cards we want that are in Exile
+	 * @return a CardList with all cards in Exile for a given player
 	 */
 	public static CardList getPlayerCardsRemovedFromGame(final Player player) {
 		CardList cards = new CardList();

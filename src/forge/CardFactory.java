@@ -5219,7 +5219,7 @@ public class CardFactory implements NewConstants {
                     CardList choice = (CardList) getPerm.execute();
                     
                     stopSetNext(CardFactoryUtil.input_targetSpecific(abilityComes, choice,
-                            "Select target permanent to remove from the game", true, false));
+                            "Select target permanent to exile", true, false));
                     ButtonUtil.disableAll();//to disable the Cancel button
                 }
             };

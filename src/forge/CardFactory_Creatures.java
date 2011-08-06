@@ -3571,7 +3571,7 @@ public class CardFactory_Creatures {
                     CardList choice = (CardList) getCreature.execute();
                     
                     stopSetNext(CardFactoryUtil.input_targetChampionSac(card, abilityComes, choice,
-                            "Select Goblin or Shaman to remove from the game", false, false));
+                            "Select Goblin or Shaman to exile", false, false));
                     ButtonUtil.disableAll();
                 }
                 
@@ -3696,7 +3696,7 @@ public class CardFactory_Creatures {
                     CardList choice = (CardList) getCreature.execute();
                     
                     stopSetNext(CardFactoryUtil.input_targetSpecific(abilityComes, choice,
-                            "Select target creature to remove from the game", true, false));
+                            "Select target creature to exile", true, false));
                     ButtonUtil.disableAll();//to disable the Cancel button
                 }
             };
@@ -6770,7 +6770,7 @@ public class CardFactory_Creatures {
                     }
                 }
             };
-            ability.setStackDescription("Archon of Justice - Remove target permament from the game.");
+            ability.setStackDescription("Archon of Justice - Exile target permanent.");
             
             Command leavesPlay = new Command() {
                 private static final long serialVersionUID = 7552566264976488465L;
