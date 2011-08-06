@@ -728,9 +728,9 @@ public class ComputerUtil_Block2
 		  if(canBlockAttackerWithLure.contains(blockersLeft.get(i))) chumpBlockers.add(blockersLeft.get(i));
 	  }
 	  if (!chumpBlockers.isEmpty()) {
-		  attackersLeft.shuffle();
-		  for(int i = 0; i < attackersLeft.size(); i++) {
-			  attacker = attackersLeft.get(i);
+		  attackers.shuffle();
+		  for(int i = 0; i < attackers.size(); i++) {
+			  attacker = attackers.get(i);
 			  blockers = getPossibleBlockers(attacker, chumpBlockers, canBlockAttackerWithLure, attackersWithLure);
 			  for(int j = 0; j < blockers.size(); j++) {
 				  blocker = blockers.get(j);
