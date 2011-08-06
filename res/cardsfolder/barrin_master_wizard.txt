@@ -1,0 +1,9 @@
+Name:Barrin, Master Wizard
+ManaCost:1 U U
+Types:Legendary Creature Human Wizard
+Text:no text
+PT:1/1
+A:AB$Bounce|Cost$2 Sac<1/Permanent>|ValidTgts$Creature|TgtPrompt$Select target Creature|Destination$Hand|SpellDescription$Return target creature to its owner's hand.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/barrin_master_wizard.jpg
+End

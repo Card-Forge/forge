@@ -212,6 +212,14 @@ public class AbilityFactory {
 			}
 		}
 		
+		if (API.equals("Bounce")){
+			if (isAb)
+				SA = AbilityFactory_Bounce.createAbilityBounce(this);
+			if (isSp){
+				SA = AbilityFactory_Bounce.createSpellBounce(this);
+			}
+		}
+		
 		// *********************************************
 		// set universal properties of the SpellAbility
         if (hasSpDesc)
