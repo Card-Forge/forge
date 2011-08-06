@@ -24,6 +24,10 @@ public class QuestUtil {
 			for (String s:compCards)
 			{
 				Card c = AllZone.CardFactory.getCard(s, AllZone.ComputerPlayer);
+				
+				c.setCurSetCode(c.getMostRecentSet());
+				c.setImageFilename(CardUtil.buildFilename(c));
+				
 				list.add(c);
 			}
 		}
@@ -437,6 +441,10 @@ public class QuestUtil {
 		{
 			CardList humanList = new CardList();
 			Card c = AllZone.CardFactory.getCard("Adventuring Gear", AllZone.HumanPlayer);
+			
+			c.setCurSetCode(c.getMostRecentSet());
+			c.setImageFilename(CardUtil.buildFilename(c));
+			
 			humanList.add(c);
 			
 			qa.setHuman(humanList);
@@ -484,6 +492,10 @@ public class QuestUtil {
 		{
 			CardList humanList = new CardList();
 			Card c = AllZone.CardFactory.getCard("Trailblazer's Boots", AllZone.HumanPlayer);
+			
+			c.setCurSetCode(c.getMostRecentSet());
+			c.setImageFilename(CardUtil.buildFilename(c));
+			
 			humanList.add(c);
 			
 			qa.setHuman(humanList);
@@ -523,6 +535,10 @@ public class QuestUtil {
 		{
 			CardList humanList = new CardList();
 			Card c = AllZone.CardFactory.getCard("Trusty Machete", AllZone.HumanPlayer);
+			
+			c.setCurSetCode(c.getMostRecentSet());
+			c.setImageFilename(CardUtil.buildFilename(c));
+			
 			humanList.add(c);
 			
 			qa.setHuman(humanList);
@@ -538,6 +554,10 @@ public class QuestUtil {
 			CardList humanList = new CardList();
 			
 			Card crd = AllZone.CardFactory.getCard("Wall of Spears", AllZone.HumanPlayer);
+			
+			crd.setCurSetCode(crd.getMostRecentSet());
+			crd.setImageFilename(CardUtil.buildFilename(crd));
+			
 			humanList.add(crd);
 			
 			for (int i=0;i<3;i++)
@@ -575,6 +595,10 @@ public class QuestUtil {
 		{
 			CardList humanList = new CardList();
 			Card c = AllZone.CardFactory.getCard("Seal of Cleansing", AllZone.HumanPlayer);
+			
+			c.setCurSetCode(c.getMostRecentSet());
+			c.setImageFilename(CardUtil.buildFilename(c));
+			
 			humanList.add(c);
 			
 			qa.setHuman(humanList);
@@ -622,6 +646,10 @@ public class QuestUtil {
 		{
 			CardList humanList = new CardList();
 			Card c = AllZone.CardFactory.getCard("Sensei's Divining Top", AllZone.HumanPlayer);
+			
+			c.setCurSetCode(c.getMostRecentSet());
+			c.setImageFilename(CardUtil.buildFilename(c));
+			
 			humanList.add(c);
 			
 			qa.setHuman(humanList);
@@ -639,6 +667,10 @@ public class QuestUtil {
 			for (int i = 0; i < 2; i ++)
 			{
 				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], AllZone.HumanPlayer);
+				
+				c.setCurSetCode(c.getMostRecentSet());
+				c.setImageFilename(CardUtil.buildFilename(c));
+				
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);
@@ -661,6 +693,10 @@ public class QuestUtil {
 			for (int i = 0; i < 2; i ++)
 			{
 				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], AllZone.HumanPlayer);
+				
+				c.setCurSetCode(c.getMostRecentSet());
+				c.setImageFilename(CardUtil.buildFilename(c));
+				
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);
@@ -683,6 +719,10 @@ public class QuestUtil {
 			for (int i = 0; i < 3; i ++)
 			{
 				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], AllZone.HumanPlayer);
+				
+				c.setCurSetCode(c.getMostRecentSet());
+				c.setImageFilename(CardUtil.buildFilename(c));
+				
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);
@@ -706,6 +746,10 @@ public class QuestUtil {
 			for (int i = 0; i < 3; i ++)
 			{
 				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], AllZone.HumanPlayer);
+				
+				c.setCurSetCode(c.getMostRecentSet());
+				c.setImageFilename(CardUtil.buildFilename(c));
+				
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);
@@ -728,6 +772,10 @@ public class QuestUtil {
 			for (int i = 0; i < 3; i ++)
 			{
 				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], AllZone.HumanPlayer);
+				
+				c.setCurSetCode(c.getMostRecentSet());
+				c.setImageFilename(CardUtil.buildFilename(c));
+				
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);
@@ -750,6 +798,10 @@ public class QuestUtil {
 			for (int i = 0; i < 2; i ++)
 			{
 				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], AllZone.HumanPlayer);
+				
+				c.setCurSetCode(c.getMostRecentSet());
+				c.setImageFilename(CardUtil.buildFilename(c));
+				
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);
@@ -772,6 +824,10 @@ public class QuestUtil {
 			for (int i = 0; i < 3; i ++)
 			{
 				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], AllZone.HumanPlayer);
+				
+				c.setCurSetCode(c.getMostRecentSet());
+				c.setImageFilename(CardUtil.buildFilename(c));
+				
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);
@@ -790,7 +846,12 @@ public class QuestUtil {
 		{
 			CardList humanList = new CardList();
 
-			humanList.add(AllZone.CardFactory.getCard("Strip Mine", AllZone.HumanPlayer));
+			Card c = AllZone.CardFactory.getCard("Strip Mine", AllZone.HumanPlayer);
+			
+			c.setCurSetCode(c.getMostRecentSet());
+			c.setImageFilename(CardUtil.buildFilename(c));
+			
+			humanList.add(c);
 			
 			qa.setHuman(humanList);
 			
@@ -810,6 +871,10 @@ public class QuestUtil {
 			for (int i = 0; i < 4; i ++)
 			{
 				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], AllZone.HumanPlayer);
+				
+				c.setCurSetCode(c.getMostRecentSet());
+				c.setImageFilename(CardUtil.buildFilename(c));
+				
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);
