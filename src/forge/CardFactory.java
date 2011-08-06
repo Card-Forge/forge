@@ -6181,7 +6181,7 @@ public class CardFactory implements NewConstants {
 
         		CardList getTargets() {
         			CardList tmpList = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Human);
-        			tmpList = tmpList.getValidCards(Tgts);
+        			tmpList = tmpList.getValidCards(Tgts, card.getController());
         			tmpList = tmpList.getTargetableCards(card);
         			tmpList = tmpList.filter(AllZoneUtil.untapped);
         			return tmpList;
@@ -6273,7 +6273,7 @@ public class CardFactory implements NewConstants {
 
         		CardList getTargets() {
         			CardList tmpList = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Human);
-        			tmpList = tmpList.getValidCards(Tgts);
+        			tmpList = tmpList.getValidCards(Tgts, card.getController());
         			tmpList = tmpList.getTargetableCards(card);
         			tmpList = tmpList.filter(AllZoneUtil.tapped);
         			return tmpList;
