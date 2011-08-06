@@ -14,6 +14,11 @@ public abstract class Player extends MyObservable{
 	protected int assignedDamage;
 	protected int numPowerSurgeLands;
 	
+	protected boolean altWin = false;
+	protected String winCondition = "";
+	protected boolean altLose = false;
+	protected String loseCondition = "";
+	
 	protected boolean bFirstTurn;
 	
 	protected Card lastDrawnCard;
@@ -29,6 +34,10 @@ public abstract class Player extends MyObservable{
 		assignedDamage = 0;
 		lastDrawnCard = null;
 		bFirstTurn = true;
+		altWin = false;
+		altLose = false;
+		winCondition = "";
+		loseCondition = "";
 	}
 	
 	public void reset(){
@@ -37,6 +46,10 @@ public abstract class Player extends MyObservable{
 		assignedDamage = 0;
 		lastDrawnCard = null;
 		bFirstTurn = true;
+		altWin = false;
+		altLose = false;
+		winCondition = "";
+		loseCondition = "";
 		this.updateObservers();
 	}
 	
@@ -295,8 +308,8 @@ public abstract class Player extends MyObservable{
 		}
 		//lose:
 		else if(Constant.Runtime.Mill[0]) {
-			if(!AllZoneUtil.isCardInPlay("Platinum Angel", this) && !AllZoneUtil.isCardInPlay("Abyssal Persecutor", this.getOpponent())) {
-				setLife(0, null);
+			if (cantLose()){
+				altLoseConditionMet("Milled");
 				AllZone.GameAction.checkStateEffects();
 			}
 		}
@@ -508,6 +521,82 @@ public abstract class Player extends MyObservable{
     
     public void sacrificeCreature(CardList choices) {
     	sacrificePermanent("Select a creature to sacrifice.", choices);
+    }
+    
+    // Game win/loss
+    
+    public boolean getAltWin(){
+    	return altWin;
+    }
+    
+    public boolean getAltLose(){
+    	return altLose;
+    }
+    
+    public String getWinCondition(){
+    	return winCondition;
+    }
+    
+    public String getLoseCondition(){
+    	return loseCondition;
+    }
+    
+    public void altWinConditionMet(String s) {
+    	if (cantWin()){
+    		System.out.println("Tried to win, but currently can't.");
+    		return;
+    	}
+    	altWin = true; 
+    	winCondition = s;
+    }
+    
+    public void altLoseConditionMet(String s) { 
+    	if (cantLose()){
+    		System.out.println("Tried to lose, but currently can't.");
+    		return;
+    	}
+    	altLose = true; 
+    	loseCondition = s;
+    }
+    
+    public boolean cantLose(){
+    	if ((AllZoneUtil.getPlayerCardsInPlay(this, "Platinum Angel").size() > 0) ||
+    			(AllZoneUtil.getPlayerCardsInPlay(getOpponent(), "Abyssal Persecutor").size() > 0)){
+    		return true;
+    	}
+    	return false;
+    }
+    
+    public boolean cantWin(){
+    	if ((AllZoneUtil.getPlayerCardsInPlay(getOpponent(), "Platinum Angel").size() > 0) ||
+    			(AllZoneUtil.getPlayerCardsInPlay(this, "Abyssal Persecutor").size() > 0)){
+    		return true;
+    	}
+    	return false;
+    }
+    
+    public boolean hasLost(){
+    	if (cantLose())
+    		return false;
+    	
+    	if (altLose){
+    		return true;
+    	}
+    	
+    	if (poisonCounters >= 10){
+    		altLoseConditionMet("Poison Counters");
+    		return true;
+    	}
+    	
+    	return getLife() <= 0;
+    }
+    
+
+    public boolean hasWon(){
+    	if (cantWin())
+    		return false;
+    	
+    	return altWin;
     }
     
 	////////////////////////////////

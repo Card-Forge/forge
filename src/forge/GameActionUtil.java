@@ -8723,19 +8723,11 @@ public class GameActionUtil {
 
 		if(0 < list.size() && player.getLife() >= 40) {
 			final Card source = list.get(0);
-			Ability ability = new Ability(list.get(0), "0") {
+			Ability ability = new Ability(source, "0") {
 				@Override
 				public void resolve() {
-					Player opponent = player.getOpponent();
-					//PlayerLife life = AllZone.GameAction.getPlayerLife(opponent);
-
-					if (opponent.equals(AllZone.ComputerPlayer)) {
-						int gameNumber = 0;
-						if (Constant.Runtime.WinLose.getWin()==1)
-							gameNumber = 1;
-						Constant.Runtime.WinLose.setWinMethod(gameNumber,"Felidar Sovereign");
-					}
-					opponent.setLife(0, source);
+					if (player.getLife() >= 40)
+						player.altWinConditionMet(source.getName());
 				}
 			};// Ability
 			
@@ -8757,20 +8749,12 @@ public class GameActionUtil {
 
 		if(0 < list.size() && 200 <= libraryZone.size()) {
 			final Card source = list.get(0);
-			Ability ability = new Ability(list.get(0), "0") {
+			Ability ability = new Ability(source, "0") {
 				@Override
 				public void resolve() {
-					Player opponent = player.getOpponent();
-					//PlayerLife life = AllZone.GameAction.getPlayerLife(opponent);
-
-					if (opponent.equals(AllZone.ComputerPlayer)) {
-						int gameNumber = 0;
-						if (Constant.Runtime.WinLose.getWin()==1)
-							gameNumber = 1;
-						Constant.Runtime.WinLose.setWinMethod(gameNumber,"Battle of Wits");
-					}
-
-					opponent.setLife(0, source);
+					PlayerZone libraryZone = AllZone.getZone(Constant.Zone.Library, player);
+					if (libraryZone.size() >= 200)
+						player.altWinConditionMet(source.getName());
 				}
 			};// Ability
 			
@@ -8791,19 +8775,13 @@ public class GameActionUtil {
 
 		if(0 < list.size() && 20 <= grave.size()) {
 			final Card source = list.get(0);
-			Ability ability = new Ability(list.get(0), "0") {
+			Ability ability = new Ability(source, "0") {
 				@Override
 				public void resolve() {
-					Player opponent = player.getOpponent();
-
-					if (opponent.equals(AllZone.ComputerPlayer)) {
-						int gameNumber = 0;
-						if (Constant.Runtime.WinLose.getWin()==1)
-							gameNumber = 1;
-						Constant.Runtime.WinLose.setWinMethod(gameNumber,"Mortal Combat");
-					}
-
-					opponent.setLife(0, source);
+					CardList grave = AllZoneUtil.getPlayerGraveyard(player);
+					grave = grave.filter(AllZoneUtil.creatures);
+					if (grave.size() >= 20)
+						player.altWinConditionMet(source.getName());
 				}
 			};// Ability
 			
@@ -8817,7 +8795,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Epic_Struggle() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Epic Struggle");
@@ -8830,15 +8808,11 @@ public class GameActionUtil {
 			Ability ability = new Ability(source, "0") {
 				@Override
 				public void resolve() {
-					Player opponent = player.getOpponent();
-
-					if (opponent.equals(AllZone.ComputerPlayer)) {
-						int gameNumber = 0;
-						if (Constant.Runtime.WinLose.getWin()==1)
-							gameNumber = 1;
-						Constant.Runtime.WinLose.setWinMethod(gameNumber,"Epic Struggle");
-					}
-					opponent.setLife(0, source);
+					CardList creats = new CardList(playZone.getCards());
+					creats = creats.getType("Creature");
+					
+					if (creats.size() >= 20)
+						player.altWinConditionMet(source.getName());
 				}
 			};// Ability
 			
@@ -8857,22 +8831,16 @@ public class GameActionUtil {
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Helix Pinnacle");
 
-		for(Card c : list) {
-			final Card pin = c;
+		for(final Card c : list) {
 			if (c.getCounters(Counters.TOWER) < 100) continue;
-			Ability ability = new Ability(pin, "0") {
+
+			Ability ability = new Ability(c, "0") {
 				@Override
-				public void resolve() 
-				{
-					if (player.getOpponent().equals(AllZone.ComputerPlayer)) {
-						int gameNumber = 0;
-						if (Constant.Runtime.WinLose.getWin()==1)
-							gameNumber = 1;
-						Constant.Runtime.WinLose.setWinMethod(gameNumber,"Helix Pinnacle");
-					}
-					player.getOpponent().setLife(0, pin);
+				public void resolve() {
+					if (c.getCounters(Counters.TOWER) >= 100)
+						player.altWinConditionMet(c.getName());
 				}
-			};// ability
+			};// Ability
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("Helix Pinnacle - ").append(player).append(" wins the game");
@@ -8896,16 +8864,8 @@ public class GameActionUtil {
 			Ability ability = new Ability(source, "0") {
 				@Override
 				public void resolve() {
-					Player opponent = player.getOpponent();
-
-					if (opponent.equals(AllZone.ComputerPlayer)) {
-						int gameNumber = 0;
-						if (Constant.Runtime.WinLose.getWin()==1)
-							gameNumber = 1;
-						Constant.Runtime.WinLose.setWinMethod(gameNumber,"Near-Death Experience");
-					}
-
-					opponent.setLife(0, source);
+					if (player.getLife() == 1)
+						player.altWinConditionMet(source.getName());
 				}
 			};// Ability
 			
@@ -8927,19 +8887,11 @@ public class GameActionUtil {
 		
 		if(0 < list.size() && player.getLife() >= 50) {
 			final Card source = list.get(0);
-			Ability ability = new Ability(list.get(0), "0") {
+			Ability ability = new Ability(source, "0") {
 				@Override
 				public void resolve() {
-					Player opponent = player.getOpponent();
-
-					if (opponent.equals(AllZone.ComputerPlayer)) {
-						int gameNumber = 0;
-						if (Constant.Runtime.WinLose.getWin()==1)
-							gameNumber = 1;
-						Constant.Runtime.WinLose.setWinMethod(gameNumber,"Test of Endurance");
-					}
-
-					opponent.setLife(0, source);
+					if (player.getLife() >= 50)
+						player.altWinConditionMet(source.getName());
 				}
 			};// Ability
 			
@@ -8969,18 +8921,16 @@ public class GameActionUtil {
 
 		if(playList.size() == 1 && list.size() == 1 && handZone.size() == 0) {
 			final Card source = list.get(0);
-			Ability ability = new Ability(list.get(0), "0") {
+			Ability ability = new Ability(source, "0") {
 				@Override
 				public void resolve() {
-					Player opponent = player.getOpponent();
+					CardList handList = AllZoneUtil.getCardsInZone(Constant.Zone.Hand, player);
+					CardList playList = AllZoneUtil.getCardsInZone(Constant.Zone.Play, player);
+					playList = playList.getValidCards("Permanents".split(","));
+					playList.remove(source);
 					
-					if (opponent.equals(AllZone.ComputerPlayer)) {
-						int gameNumber = 0;
-						if (Constant.Runtime.WinLose.getWin()==1)
-							gameNumber = 1;
-						Constant.Runtime.WinLose.setWinMethod(gameNumber,"Barren Glory");
-					}
-					opponent.setLife(0, source);
+					if (playList.size() == 0 && handList.size() == 0)
+						player.altWinConditionMet(source.getName());
 				}
 			};// Ability
 			

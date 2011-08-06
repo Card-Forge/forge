@@ -433,37 +433,49 @@ public class GameAction {
     	AllZone.Stack.add(activate);
     }
     
-    //do this during combat damage:
-    public void checkWinLoss()
-    {
-    	JFrame frame = (JFrame) AllZone.Display;
-        if(!frame.isDisplayable()) return;
-        
-        boolean stop = false;
-		if(!AllZoneUtil.isCardInPlay("Platinum Angel", AllZone.ComputerPlayer) && !AllZoneUtil.isCardInPlay("Abyssal Persecutor", AllZone.HumanPlayer)) {
-	        if(AllZone.ComputerPlayer.getLife() <= 0 || AllZone.ComputerPlayer.getPoisonCounters() >= 10) {
-	            Constant.Runtime.WinLose.addWin();
-	            stop = true;
-		}
-        }
-		if(!AllZoneUtil.isCardInPlay("Platinum Angel", AllZone.HumanPlayer) && !AllZoneUtil.isCardInPlay("Abyssal Persecutor", AllZone.ComputerPlayer)) {
-        if(AllZone.HumanPlayer.getLife() <= 0 || AllZone.HumanPlayer.getPoisonCounters() >= 10) {
-            Constant.Runtime.WinLose.addLose();
-            stop = true;
-        }
-		}
-        
-        if(stop) {
-            frame.dispose();
-            if (!Constant.Quest.fantasyQuest[0])
-            	new Gui_WinLose();
-            else
-            	new Gui_WinLose(Constant.Quest.humanList[0], Constant.Quest.computerList[0],
-            			Constant.Quest.humanLife[0], Constant.Quest.computerLife[0]);
-            return;
-        }
-        destroyPlaneswalkers();
+    public boolean checkEndGameSate(){
+        // Win / Lose
+    	boolean humanWins = false;
+    	boolean computerWins = false;
+    	Player computer = AllZone.ComputerPlayer;
+    	Player human = AllZone.HumanPlayer;
+    	
+    	int gameWon = Constant.Runtime.WinLose.getWin();
+    	
+    	if (human.hasWon()){	// Winning Conditions can be worth more than losing conditions
+    		// Human wins
+    		humanWins = true;
+    		if (human.getAltWin()){
+	        	Constant.Runtime.WinLose.setWinMethod(gameWon, human.getWinCondition());
+    		}
+	        Constant.Runtime.WinLose.addWin();
+    	}
+    	
+    	else if (computer.hasLost()){
+    		// Human wins
+    		humanWins = true;
+    		
+    		if (computer.getAltLose()){
+	        	Constant.Runtime.WinLose.setWinMethod(gameWon, computer.getLoseCondition());
+    		}
+	        Constant.Runtime.WinLose.addWin();
+    	}
+    	
+
+    	if (computer.hasWon() || human.hasLost()){
+    		if (humanWins){
+    			// both players won/lost at the same time.
+    			// TODO: Handle a Draw here
+    		}
+    		
+    		// Computer wins
+    		computerWins = true;
+    		Constant.Runtime.WinLose.addLose();
+    	}
+    	
+		return humanWins || computerWins;
     }
+    
     
     public void checkStateEffects() {
     	// sol(10/29) added for Phase updates, state effects shouldn't be checked during Spell Resolution
@@ -472,33 +484,8 @@ public class GameAction {
     	
         JFrame frame = (JFrame) AllZone.Display;
         if(!frame.isDisplayable()) return;
-        
-        boolean stop = false;
-        // Win / Lose
-		if(!AllZoneUtil.isCardInPlay("Platinum Angel", AllZone.ComputerPlayer) && !AllZoneUtil.isCardInPlay("Abyssal Persecutor", AllZone.HumanPlayer)) {
-        if(AllZone.ComputerPlayer.getLife() <= 0 ) {
-            Constant.Runtime.WinLose.addWin();
-            stop = true;
-        }
 
-        if (AllZone.ComputerPlayer.getPoisonCounters() >= 10)
-        {
-        	int gameNumber = 0;
-        	
-        	if (Constant.Runtime.WinLose.getWin() == 1)
-        		gameNumber = 1;
-        	Constant.Runtime.WinLose.setWinMethod(gameNumber, "Poison Counters");
-        	Constant.Runtime.WinLose.addWin();
-            stop = true;
-        }
-		} // Win / Lose
-		if(!AllZoneUtil.isCardInPlay("Platinum Angel", AllZone.HumanPlayer) && !AllZoneUtil.isCardInPlay("Abyssal Persecutor", AllZone.ComputerPlayer)) {
-        if(AllZone.HumanPlayer.getLife() <= 0 || AllZone.HumanPlayer.getPoisonCounters() >= 10) {
-            Constant.Runtime.WinLose.addLose();
-            stop = true;
-        }
-		}
-        if(stop) {
+        if(checkEndGameSate()) {
             frame.dispose();
             if (!Constant.Quest.fantasyQuest[0])
             	new Gui_WinLose();

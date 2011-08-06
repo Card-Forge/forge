@@ -652,8 +652,6 @@ public class Combat {
                 }
                 c.addCombatDamage(damageMap);
                 
-                AllZone.GameAction.checkWinLoss();
-                
                 damageMap.clear();
                 c.clearAssignedDamage();
             }
