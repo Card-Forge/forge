@@ -146,7 +146,7 @@ public class AbilityFactory_Copy {
 		//TODO - I'm sure someone can do this AI better
 		
 		HashMap<String,String> params = af.getMapParams();
-		if(params.containsKey("SacAtEOT") && !AllZone.Phase.is(Constant.Phase.Main1)) {
+		if(params.containsKey("AtEOT") && !AllZone.Phase.is(Constant.Phase.Main1)) {
 			return false;
 		}
 		else return copyPermanentTriggerAI(af, sa, false);
@@ -225,7 +225,7 @@ public class AbilityFactory_Copy {
 	}
 
 	private static void copyPermanentResolve(final AbilityFactory af, final SpellAbility sa) {
-		HashMap<String,String> params = af.getMapParams();
+		final HashMap<String,String> params = af.getMapParams();
 		Card card = af.getHostCard();
 		ArrayList<String> keywords = new ArrayList<String>();
 		if(params.containsKey("Keywords")) {
@@ -323,7 +323,13 @@ public class AbilityFactory_Copy {
 							//technically your opponent could steal the token
 							//and the token shouldn't be sacrificed
 							if(AllZone.GameAction.isCardInPlay(target[index])) {
-								AllZone.GameAction.sacrifice(target[index]); //maybe do a setSacrificeAtEOT, but probably not.
+								if(params.get("AtEOT").equals("Sacrifice")) {
+									AllZone.GameAction.sacrifice(target[index]); //maybe do a setSacrificeAtEOT, but probably not.
+								}
+								else if(params.get("AtEOT").equals("Exile")) {
+									AllZone.GameAction.exile(target[index]);
+								}
+								
 								//Slight hack in case we copy a creature with triggers
 								AllZone.TriggerHandler.removeAllFromCard(target[index]);
 							}
@@ -334,11 +340,11 @@ public class AbilityFactory_Copy {
 						private static final long serialVersionUID = -4184510100801568140L;
 
 						public void execute() {
-							sac.setStackDescription("Sacrifice "+target[index]);
+							sac.setStackDescription(params.get("AtEOT")+" "+target[index]+".");
 							AllZone.Stack.addSimultaneousStackEntry(sac);
 						}
 					};//Command
-					if(params.containsKey("SacAtEOT")) {
+					if(params.containsKey("AtEOT")) {
 						AllZone.EndOfTurn.addAt(atEOT);
 					}
 					//end copied Kiki code
