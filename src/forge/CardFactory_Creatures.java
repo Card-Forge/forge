@@ -6093,7 +6093,7 @@ public class CardFactory_Creatures {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Memnarch")) {
-            //has 2 non-tap abilities that effects itself
+            //has 2 non-tap abilities that affect itself
             final SpellAbility ability1 = new Ability(card, "1 U U") {
                 @Override
                 public void resolve() {

@@ -3944,6 +3944,86 @@ public class CardFactory_Instants {
         	card.addSpellAbility(spell);
         }//*************** END ************ END ************************** 
         
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Vengeful Dreams")) {
+        	final CardList targets = new CardList();
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 1593405082929818055L;
+
+				@Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+                
+                @Override
+                public void resolve() {
+                    for(Card c:targets) {
+                    	if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                    		AllZone.GameAction.exile(c);
+                    	}//if isCardInPlay
+                    }
+                    targets.clear();
+                }
+            };
+
+            Input runtime = new Input() {
+				private static final long serialVersionUID = 4656252051002867111L;
+				int max = 0;
+
+				@Override
+                public void showMessage() {
+					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
+					hand.remove(card);
+					hand.updateObservers();
+					max = AllZoneUtil.getPlayerHand(card.getController()).size();
+					if(max == targets.size()) done();
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - Select target attacking creatures.  Currently, (");
+					sb.append(targets.size()).append(") selected.");
+					sb.append(" Press OK when done.");
+                    AllZone.Display.showMessage(sb.toString());
+                    ButtonUtil.enableAll();
+                }
+				
+				@Override
+	            public void selectButtonCancel() { 
+					targets.clear();
+					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
+					hand.add(card);
+					stop();
+				}
+				
+				@Override
+                public void selectCard(Card c, PlayerZone zone) {
+					if(zone.is(Constant.Zone.Battlefield) && !targets.contains(c)
+							&& CardFactoryUtil.canTarget(card, c) && c.isAttacking()) {
+						targets.add(c);
+						showMessage();
+					}
+				}
+				
+				@Override
+				public void selectButtonOK() {
+					done();
+				}
+				
+				private void done() {
+					if(targets.size() > AllZoneUtil.getPlayerHand(card.getController()).size()) stop();
+					else {
+						card.getController().discard(targets.size(), spell, false);
+						stopSetNext(new Input_PayManaCost(spell));
+					}
+					
+				}
+            };
+            spell.setStackDescription(cardName+" - exile X attacking creatures.");
+            spell.setBeforePayMana(runtime);
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
     	return card;
     }//getCard
 }
