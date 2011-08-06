@@ -500,8 +500,6 @@ public class Card extends MyObservable {
         	}
         }
         
-        System.out.println("Adding a "+counterName.toString()+" counter to: "+this);
-        
         //Run triggers
         HashMap<String,Object> runParams = new HashMap<String,Object>();
         runParams.put("Card", this);
