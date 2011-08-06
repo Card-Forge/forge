@@ -251,6 +251,7 @@ public class CardList implements Iterable<Card> {
                             if(exR[j].startsWith("without")) r = r
                                     && (!c.getKeyword().contains(exR[j].substring(7)));
                             else r = r && (c.getKeyword().contains(exR[j].substring(4)));
+                            if(exR[j].startsWith("tapped")) r = r && (c.isTapped());
                             //TODO: converted mana cost
                             //TODO: tapped
                             //TODO: enchanted

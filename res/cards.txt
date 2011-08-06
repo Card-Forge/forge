@@ -1,3 +1,21 @@
+Assassinate
+2 B
+Sorcery
+Destroy target tapped creature.
+spDestroyTgt:Creature.tapped
+
+Death Stroke
+B B
+Sorcery
+Destroy target tapped creature.
+spDestroyTgt:Creature.tapped
+
+Vengeance
+3 W
+Sorcery
+Destroy target tapped creature.
+spDestroyTgt:Creature.tapped
+
 Drekavac
 1 B
 Creature Beast
