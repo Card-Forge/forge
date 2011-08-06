@@ -1,6 +1,7 @@
 package forge;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class AbilityFactory_Regenerate {
@@ -69,28 +70,36 @@ public class AbilityFactory_Regenerate {
 	}
 	
 	private static String regenerateStackDescription(AbilityFactory af, SpellAbility sa){
-		 StringBuilder sb = new StringBuilder();
-		 String name = af.getHostCard().getName();
-		 sb.append(name).append(" - regenerate ");
-		 Card tgt = sa.getTargetCard();
-		 if (tgt != null) {
-			 if(tgt.isFaceDown()) sb.append("Morph");
-			 else sb.append(tgt.getName());
-		 }
-		 else {
-			 sb.append(af.getHostCard().getName());
-		 }
-		 
-		 Ability_Sub abSub = sa.getSubAbility();
-		 if (abSub != null) {
-		 	sb.append(abSub.getStackDescription());
-		 }
-		 
-		 return sb.toString();
+		final HashMap<String,String> params = af.getMapParams();
+		StringBuilder sb = new StringBuilder();
+		String name = af.getHostCard().getName();
+		sb.append(name).append(" - regenerate ");
+		Card tgt = sa.getTargetCard();
+		if (tgt != null) {
+			if(tgt.isFaceDown()) sb.append("Morph");
+			else sb.append(tgt.getName());
+		}
+		else {
+			ArrayList<Card> tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+			for(Card c:tgtCards) {
+				if(c.isFaceDown()) sb.append("Morph ");
+				else sb.append(c.getName()).append(" ");
+			}
+		}
+		sb.append(".");
+
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null) {
+			sb.append(abSub.getStackDescription());
+		}
+
+		return sb.toString();
 	}
 
 	private static boolean doCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+		//final HashMap<String,String> params = af.getMapParams();
 		boolean chance = false;
+		//ArrayList<Card> tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
 		
 		// temporarily disabled until better AI
 		if (af.getAbCost().getSacCost())	 return false;
@@ -166,15 +175,15 @@ public class AbilityFactory_Regenerate {
 	}
 
 	private static void doResolve(final AbilityFactory af, final SpellAbility sa) {
-		Card hostCard = af.getHostCard();
+		//Card hostCard = af.getHostCard();
+		final HashMap<String,String> params = af.getMapParams();
 		
 		ArrayList<Card> tgtCards;
 		Target tgt = af.getAbTgt();
 		if (tgt != null)
 			tgtCards = tgt.getTargetCards();
 		else{
-			tgtCards = new ArrayList<Card>();
-			tgtCards.add(hostCard);
+			tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
 		}
 
 		for(final Card tgtC : tgtCards){
