@@ -1,0 +1,9 @@
+#Uses card-specific code!
+Name:Pithing Needle
+ManaCost:1
+Types:Artifact
+Text:As Pithing Needle enters the battlefield, name a card.\r\nActivated abilities of sources with the chosen name can't be activated unless they're mana abilities.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pithing_needle.jpg
+SVar:RemAIDeck:True
+End
