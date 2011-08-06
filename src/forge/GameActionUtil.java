@@ -11964,8 +11964,11 @@ public class GameActionUtil {
 					SpellAbility mana = new Ability_Mana(c, "T", keyword[i], 2) {
 						private static final long serialVersionUID = 2384540533244132975L;
 					};
-
+					StringBuilder sb = new StringBuilder();
+					sb.append("T: Add ").append(keyword[i]).append(" ").append(keyword[i]).append(" to your mana pool.");
+					
 					mana.setType("Extrinsic");
+					mana.setDescription(sb.toString());
 					c.addSpellAbility(mana);
 				}
 			}
@@ -12039,8 +12042,11 @@ public class GameActionUtil {
 					SpellAbility mana = new Ability_Mana(c, "T", keyword[i]) {
 						private static final long serialVersionUID = 2384540533244132975L;
 					};
-
+					StringBuilder sb = new StringBuilder();
+					sb.append("T: Add ").append(keyword[i]).append(" to your mana pool.");
+					
 					mana.setType("Extrinsic");
+					mana.setDescription(sb.toString());
 					c.addSpellAbility(mana);
 				}
 			}
@@ -12099,7 +12105,11 @@ public class GameActionUtil {
 					SpellAbility mana = new Ability_Mana(c, "T", keyword[i]) {
 						private static final long serialVersionUID = -8909660504657778172L;
 					};
+					StringBuilder sb = new StringBuilder();
+					sb.append("T: Add ").append(keyword[i]).append(" to your mana pool.");
+					
 					mana.setType("Extrinsic");
+					mana.setDescription(sb.toString());
 					c.addSpellAbility(mana);
 				}
 			}
