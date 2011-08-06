@@ -19072,7 +19072,7 @@ public class CardFactory_Creatures {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Old Man of the Sea")) {
+        else if(cardName.equals("Old Man of the Sea") || cardName.equals("Seasinger")) {
         	/*
         	 * Tap: Gain control of target creature with power less than or
         	 * equal to Old Man of the Sea's power for as long as Old Man of
@@ -19171,7 +19171,8 @@ public class CardFactory_Creatures {
             
             card.addSpellAbility(ability);
             
-            Input target = new Input() {
+            //for Old Man of the Sea
+            Input oldMan = new Input() {
 				private static final long serialVersionUID = -2079490830593191467L;
     			public void showMessage() {
                     AllZone.Display.showMessage("Select target Creature with power less or equal to: "+card.getNetAttack());
@@ -19187,7 +19188,31 @@ public class CardFactory_Creatures {
                 	 }
                  }
               };//input
-            ability.setBeforePayMana(target);
+              
+              //for Seasinger
+              Input seasinger = new Input() {
+				private static final long serialVersionUID = -6908603582102989044L;
+				public void showMessage() {
+                      AllZone.Display.showMessage("Select target Creature");
+                      ButtonUtil.enableOnlyCancel();
+                   }
+                   public void selectButtonCancel() {
+                      stop();
+                   }
+                   public void selectCard(Card c, PlayerZone zone) {
+                  	 if(zone.is(Constant.Zone.Play) && c.isCreature() 
+                  			 && (AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Island").size() > 0)) {
+                  		 ability.setTargetCard(c);
+                  		 stopSetNext(new Input_NoCost_TapAbility(ability));
+                  	 }
+                   }
+                };//input
+            if(cardName.equals("Old Man of the Sea")) {
+            	ability.setBeforePayMana(oldMan);
+            }
+            else if( cardName.equals("Seasinger")) {
+            	ability.setBeforePayMana(seasinger);
+            }
         }//*************** END ************ END **************************
         
         
