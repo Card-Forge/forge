@@ -380,10 +380,16 @@ public class Combat {
 		}
 		else// card is a blocker
 		{
-			for (int i = 0; i < att.size(); i++)
-				if (getBlockers(att.get(i)).contains(c))
-					getList(att.get(i)).remove(c);
+			for(Card a : att)
+				if (getBlockers(a).contains(c)){
+					getList(a).remove(c);
+					// TODO if Declare Blockers and Declare Blockers (Abilities) merge this logic needs to be tweaked
+					if (getBlockers(a).size() == 0 && AllZone.Phase.is(Constant.Phase.Combat_Declare_Blockers))
+						blocked.remove(a);
+				}
 		}
+		// update combat 
+		CombatUtil.showCombat();
 	}// removeFromCombat()
 
 	public void verifyCreaturesInPlay() {
