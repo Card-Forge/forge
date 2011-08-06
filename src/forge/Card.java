@@ -579,7 +579,7 @@ public class Card extends MyObservable {
     		cardColor.remove(removeCol);
     }
     
-    public Card_Color getColor(){
+    public Card_Color determineColor(){
     	if (this.isImmutable()){
     		return new Card_Color(this);
     	}
@@ -590,12 +590,14 @@ public class Card extends MyObservable {
     	return colors;
     }
     
-    
     public void setColor(ArrayList<Card_Color> colors){
     	cardColor = colors;
     }
     
-    
+    public ArrayList<Card_Color> getColor(){
+    	return cardColor;
+    }
+
     Card_Color determineColor(ArrayList<Card_Color> globalChanges){
     	Card_Color colors = new Card_Color(this);
     	int i = cardColor.size() - 1;

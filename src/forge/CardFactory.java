@@ -10123,7 +10123,7 @@ public class CardFactory implements NewConstants {
         c.setType(sim.getType());
         c.setText(sim.getSpellText());
         c.setManaCost(sim.getManaCost());
-        c.addColor(sim.getManaCost());
+        c.setColor(sim.getColor());
         c.setSVars(sim.getSVars());
         c.setSets(sim.getSets());
         c.setIntrinsicAbilities(sim.getIntrinsicAbilities());

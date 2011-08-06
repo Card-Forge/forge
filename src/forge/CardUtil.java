@@ -94,7 +94,7 @@ public class CardUtil {
     }
     
     public static ArrayList<String> getColors(Card c) {
-    	return c.getColor().toStringArray();
+    	return c.determineColor().toStringArray();
     }
     
     public static ArrayList<String> getOnlyColors(Card c) {
