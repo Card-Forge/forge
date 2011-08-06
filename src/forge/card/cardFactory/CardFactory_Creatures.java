@@ -4031,36 +4031,7 @@ public class CardFactory_Creatures {
             card.addLeavesPlayCommand(leavesPlay);
         }//*************** END ************ END **************************
                
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Sprouting Phytohydra")) {
-            final Trigger myTrig = TriggerHandler.parseTrigger("Mode$ DamageDone | ValidTarget$ Card.Self | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME is dealt damage, you may put a token that's a copy of CARDNAME onto the battlefield.",card);
 
-            final Ability ability = new Ability(card, "0") {
-                    	@Override
-                    	public void resolve() {
-                    		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, getSourceCard().getController());
-                    		CardList DoublingSeasons = new CardList(play.getCards());
-                    		DoublingSeasons = DoublingSeasons.getName("Doubling Season");
-                    		PlayerZone_ComesIntoPlay.setSimultaneousEntry(true);
-                    		double Count = DoublingSeasons.size();
-                    		Count = Math.pow(2,Count);
-                    		for(int i = 0; i < Count; i++) {
-                    			if(i + 1 == Count) PlayerZone_ComesIntoPlay.setSimultaneousEntry(false);
-                    			Card Copy = AllZone.CardFactory.copyCardintoNew(getSourceCard());
-                    			Copy.setToken(true);
-                    			Copy.setController(getSourceCard().getController());
-
-                    			AllZone.GameAction.moveToPlay(Copy);
-                    		}
-                    	}
-            };
-            myTrig.setOverridingAbility(ability);
-
-            card.addTrigger(myTrig);
-        }//*************** END ************ END **************************
-        
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Singe-Mind Ogre")) {
             final SpellAbility ability = new Ability(card, "0") {
