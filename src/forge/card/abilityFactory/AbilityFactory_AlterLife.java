@@ -177,13 +177,16 @@ public class AbilityFactory_AlterLife {
 			if (abCost.getLifeCost() && life > 5)	 return false;
 			if (abCost.getDiscardCost() && life > 5) return false;
 
-			if (abCost.getSubCounter() && life > 7){
-				// A card has a 25% chance per counter to be able to pass through here
-				// 4+ counters will always pass. 0 counters will never
+			if (abCost.getSubCounter()){
+				//non +1/+1 counters should be used
+				if (abCost.getCounterType().equals(Counters.P1P1)){
+					// A card has a 25% chance per counter to be able to pass through here
+					// 4+ counters will always pass. 0 counters will never
 				int currentNum = source.getCounters(abCost.getCounterType());
 				double percent = .25 * (currentNum / abCost.getCounterNum());
 				if (percent <= r.nextFloat())
 					return false;
+				}
 			}
 		}
 
