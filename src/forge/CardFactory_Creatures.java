@@ -754,8 +754,12 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Gilder Bairn")) {
-            final SpellAbility a1 = new Ability(card, "2 GU") {
-                @Override
+        	Ability_Cost abCost = new Ability_Cost("2 GU Untap", cardName, true);
+        	Target tgt = new Target("Select target permanent.", new String[]{"Permanent"});
+            final Ability_Activated a1 = new Ability_Activated(card, abCost, tgt) {
+				private static final long serialVersionUID = -1847685865277129366L;
+
+				@Override
                 public void resolve() {
                     Card c = getTargetCard();
                     
@@ -763,21 +767,13 @@ public class CardFactory_Creatures {
                     else if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                         //zerker clean up:
                         for(Counters c_1:Counters.values())
-                            if(c.getCounters(c_1) != 0) c.addCounter(c_1, c.getCounters(c_1));
+                            if(c.getCounters(c_1) > 0) c.addCounter(c_1, c.getCounters(c_1));
                     }
                 }
                 
                 @Override
-                public boolean canPlay() {
-                    
-                    if(card.isTapped() && !card.hasSickness() && super.canPlay()) return true;
-                    else return false;
-                }
-                
-                @Override
                 public void chooseTargetAI() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    CardList perms = new CardList(play.getCards());
+                    CardList perms = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                     perms = perms.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.sumAllCounters() > 0 && CardFactoryUtil.canTarget(card, c);
@@ -789,39 +785,18 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    CardList perms = new CardList(play.getCards());
+                	CardList perms = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                     perms = perms.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.sumAllCounters() > 0;
+                            return c.sumAllCounters() > 0 && CardFactoryUtil.canTarget(card, c);
                         }
                     });
                     return perms.size() > 0;
                 }
             };//SpellAbility
-            a1.makeUntapAbility();
-            
-            Input runtime = new Input() {
-                private static final long serialVersionUID = 1571239319226728848L;
-                
-                @Override
-                public void showMessage() {
-                    PlayerZone human = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    CardList perms = new CardList();
-                    perms.addAll(human.getCards());
-                    perms.addAll(comp.getCards());
-                    
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(a1, perms, "Select target permanent.", true,
-                            false));
-                }
-            };
             
             card.addSpellAbility(a1);
-            a1.setDescription("2 GU, Untap: For each counter on target permanent, put another of those counters on that permanent.");
-            
-            a1.setBeforePayMana(runtime);
-            
+            a1.setDescription(abCost+"For each counter on target permanent, put another of those counters on that permanent.");
         }//*************** END ************ END **************************
         
         
