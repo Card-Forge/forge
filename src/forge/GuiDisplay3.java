@@ -1110,6 +1110,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
     }
     
     public boolean savePrefs(){
+    	Constant.Runtime.Mill[0] = canLoseByDecking.isSelected();
     	ForgePreferences fp = Gui_NewGame.preferences;
     	
     	fp.bAIUpkeep = cbAIUpkeep.isSelected();
