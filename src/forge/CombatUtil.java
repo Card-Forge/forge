@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.swing.JOptionPane;
-
 import com.esotericsoftware.minlog.Log;
 
 
@@ -2267,23 +2265,19 @@ public class CombatUtil {
             int numCards = 3;
             if (a.getName().equals("Drelnoch")) numCards = 2;
             if (a.getName().equals("Chambered Nautilus")) numCards = 1;
-            int choice = 0;
             int compLibSize = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer).size();
             int compHandSize = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).size();
             
-            if (player.equals (AllZone.HumanPlayer)) {
-            	StringBuilder title = new StringBuilder();
-                title.append(a.getName()).append(" Ability");
-                StringBuilder message = new StringBuilder();
-                message.append("Do you want to draw ").append(numCards).append(" cards?");
-                choice = JOptionPane.showConfirmDialog(null, message.toString(), title.toString(), JOptionPane.YES_NO_OPTION);
-            }// if player.equals Human
-            
-            if ((choice == JOptionPane.YES_OPTION && player.equals (AllZone.HumanPlayer)) 
-                    || (player.equals (AllZone.ComputerPlayer) && (compLibSize >= (2 * numCards)  && compHandSize <= (7 - numCards)))) {
-                for (int i = 0; i < numCards; i++) {
-                    player.drawCard();
+            if (player.isHuman()) {
+                StringBuilder question = new StringBuilder();
+                question.append("Draw ").append(numCards).append(" cards?");
+                if (GameActionUtil.showYesNoDialog(a, question.toString())) {
+                    player.drawCards(numCards);
                 }
+            }// player isComputer()
+            else if (compLibSize >= (2 * numCards) 
+                        && compHandSize <= (7 - numCards)) {
+                player.drawCards(numCards);
             }
         }// if Saprazzan Heir or Drelnoch or Chambered Nautilus was blocked
         

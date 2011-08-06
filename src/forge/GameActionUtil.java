@@ -4417,31 +4417,29 @@ public class GameActionUtil {
         StringBuilder title = new StringBuilder();
         title.append(c.getName()).append(" - Ability");
         
-        Object answer = null;
-        
         if (!(question.length() > 0)) {
             question = "Activate card's ability?";
         }
         
-        answer = JOptionPane.showConfirmDialog(null, question, title.toString(), JOptionPane.YES_NO_OPTION);
+        int answer = JOptionPane.showConfirmDialog(null, question, title.toString(), JOptionPane.YES_NO_OPTION);
         
-        if (answer == null || answer.equals("No")) return false;
-        else return true;
+        if (answer == JOptionPane.YES_OPTION) return true;
+        else return false;
     }
 /*
-	private static boolean showDialog(Card c) {
-		String[] choices = {"Yes", "No"};
+    private static boolean showDialog(Card c) {
+        String[] choices = {"Yes", "No"};
 
-		Object q = null;
+        Object q = null;
 
-		q = AllZone.Display.getChoiceOptional("Use " + c.getName() + " effect?", choices);
+        q = AllZone.Display.getChoiceOptional("Use " + c.getName() + " effect?", choices);
 
-		if(q == null || q.equals("No")) return false;
-		else return true;
-	}
-
-	//***CREATURES START HERE***
+        if(q == null || q.equals("No")) return false;
+        else return true;
+    }
 */
+    //***CREATURES START HERE***
+
 	public static void executeDestroyCreatureCardEffects(Card c, Card destroyed) {
 		//if (AllZone.GameAction.isCardInPlay(c)){
 		if(c.getName().equals("Goblin Sharpshooter")) destroyCreature_Goblin_Sharpshooter(c, destroyed);
