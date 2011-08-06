@@ -6887,7 +6887,9 @@ public class CardFactory implements NewConstants {
 
         //*************** START *********** START **************************
         else if(cardName.equals("That Which Was Taken")) {
-            final SpellAbility ability = new Ability_Tap(card, "4") {
+        	Ability_Cost abCost = new Ability_Cost("4 T", cardName, true);
+        	Target target = new Target("Select target permanent other than "+cardName, new String[] {"Permanent.Other"});
+            final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
                 private static final long serialVersionUID = -8996435083734446340L;
                 
                 @Override
@@ -6907,18 +6909,14 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void chooseTargetAI() {
-                    //Card c = CardFactoryUtil.AI_getBestCreature(getCreatures());
                     CardList a = getPerms();
                     if (a.size()>0) {
-	                    //CardListUtil.sortAttack(a);
-	                    //CardListUtil.sortFlying(a);
 	                    setTargetCard(a.get(0));
                     }
                 }
                 
                 CardList getPerms() {
-                    CardList list = new CardList();
-                    list.addAll(AllZone.Computer_Battlefield.getCards());
+                    CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                     list = list.filter(new CardListFilter(){
                     	public boolean addCard(Card c)
                     	{
@@ -6929,34 +6927,7 @@ public class CardFactory implements NewConstants {
                     return list;
                 }
             };//SpellAbility
-            
-            Input target = new Input() {
-                private static final long serialVersionUID = 137806881250205274L;
-                
-                @Override
-                public void showMessage() {
-                    AllZone.Display.showMessage("Select target permanent");
-                    ButtonUtil.enableOnlyCancel();
-                }
-                
-                @Override
-                public void selectButtonCancel() {
-                    stop();
-                }
-                
-                @Override
-                public void selectCard(Card c, PlayerZone zone) {
-                    if(zone.is(Constant.Zone.Battlefield) && c != card)//cannot target self
-                    {
-                        ability.setTargetCard(c);
-                        stopSetNext(new Input_PayManaCost(ability));
-                    }
-                }
-            };//Input -- target
-            
-            ability.setBeforePayMana(target);
-            ability.setDescription("4, tap: Put a divinity counter on target permanent other than That Which Was Taken.");
-            
+            ability.setDescription(abCost+"Put a divinity counter on target permanent other than "+cardName+".");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
   
