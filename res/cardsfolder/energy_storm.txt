@@ -1,0 +1,10 @@
+Name:Energy Storm
+ManaCost:1 W
+Types:Enchantment
+Text:Prevent all damage that would be dealt by instant and sorcery spells. Creatures with flying don't untap during their controller's untap step.
+K:Cumulative upkeep:1
+K:Permanents don't untap during their controllers' untap steps:Creature.withFlying
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/energy_storm.jpg
+End

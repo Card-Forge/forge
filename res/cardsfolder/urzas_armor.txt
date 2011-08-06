@@ -1,0 +1,7 @@
+Name:Urza's Armor 
+ManaCost:6
+Types:Artifact
+Text:If a source would deal damage to you, prevent 1 of that damage.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_armor.jpg
+End

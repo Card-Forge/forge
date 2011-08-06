@@ -244,10 +244,11 @@ public abstract class Player extends MyObservable{
 	public int preventDamage(final int damage, Card source, boolean isCombat) {
     	int restDamage = damage;
     	
-    	if (AllZoneUtil.isCardInPlay("Purity", this)) {
+    	if (AllZoneUtil.isCardInPlay("Purity", this) && !isCombat) {
     		gainLife(restDamage,null);
-    		restDamage = 0;
+    		return 0;
     	}
+    	if (AllZoneUtil.isCardInPlay("Energy Storm") && source.isSpell()) return 0;
     	
     	if( preventAllDamageToPlayer(source, isCombat)) {
     		return 0;
@@ -263,24 +264,25 @@ public abstract class Player extends MyObservable{
     	
     	if (AllZoneUtil.isCardInPlay("Sphere of Duty", this) && source.isGreen()) {
 			if (restDamage > 1) restDamage = restDamage - 2;
-			else restDamage = 0;
+			else return 0;
     	}
     	if (AllZoneUtil.isCardInPlay("Sphere of Grace", this) && source.isBlack()) {
 			if (restDamage > 1) restDamage = restDamage - 2;
-			else restDamage = 0;
+			else return 0;
     	}
     	if (AllZoneUtil.isCardInPlay("Sphere of Law", this) && source.isRed()) {
 			if (restDamage > 1) restDamage = restDamage - 2;
-			else restDamage = 0;
+			else return 0;
     	}
     	if (AllZoneUtil.isCardInPlay("Sphere of Reason", this) && source.isBlue()) {
 			if (restDamage > 1) restDamage = restDamage - 2;
-			else restDamage = 0;
+			else return 0;
     	}
     	if (AllZoneUtil.isCardInPlay("Sphere of Truth", this) && source.isWhite()) {
 			if (restDamage > 1) restDamage = restDamage - 2;
-			else restDamage = 0;
+			else return 0;
     	}
+    	if (AllZoneUtil.isCardInPlay("Urza's Armor", this) && restDamage > 0) restDamage = restDamage - 1;
 
     	
     	if(restDamage >= preventNextDamage) {

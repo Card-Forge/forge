@@ -2793,8 +2793,10 @@ public class Card extends MyObservable {
     public int preventDamage(final int damage, Card source, boolean isCombat) {
     	int restDamage = damage;
     	
+    	if (AllZoneUtil.isCardInPlay("Energy Storm") && source.isSpell()) return 0;
+    	
     	if( preventAllDamageToCard(source, isCombat)) {
-    		restDamage = 0;
+    		return 0;
         }
     	
     	if (AllZoneUtil.isCardInPlay("Plated Pegasus") && source.isSpell() 
