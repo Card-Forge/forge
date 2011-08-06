@@ -1,7 +1,7 @@
 Name:Aven Brigadier
 ManaCost:3 W W W
 Types:Creature Bird Soldier
-Text:Other Bird creatures get +1/+1.\r\nOther Soldier creatures get +1/+1.
+Text:no text
 PT:3/5
 K:Flying
 K:stPumpAll:Creature.Bird+Other:1/1:No Condition:Other Bird creatures get +1/+1.
