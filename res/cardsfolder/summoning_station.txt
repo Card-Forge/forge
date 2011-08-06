@@ -1,0 +1,9 @@
+Name:Summoning Station
+ManaCost:7
+Types:Artifact
+Text:no text
+K:WheneverKeyword:PermanentIntoGraveyard:Type/Artifact:Play:UntapPermanent:Self:ASAP:Yes_No:No Special Condition:Whenever an artifact is put into a graveyard from the battlefield, you may untap CARDNAME.
+A:AB$Token | Cost$ T | TokenAmount$ 1 | TokenName$ Pincher | TokenTypes$ Creature,Pincher | TokenOwner$ Controller | TokenColors$ Colorless | TokenPower$ 2 | TokenToughness$ 2 | SpellDescription$Put a 2/2 colorless Pincher creature token onto the battlefield.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/summoning_station.jpg
+End
