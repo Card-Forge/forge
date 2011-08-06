@@ -13,64 +13,56 @@ public class TriggerHandler {
 		Trigger ret = null;
 		
 		String mode = mapParams.get("Mode");
-		if(mode.equals("Attacks"))
+		if(mode.equals("AttackerBlocked"))
 		{
-			System.out.println("Creating: Attacks.");
-			ret = new Trigger_Attacks(mapParams,host);
+			ret = new Trigger_AttackerBlocked(mapParams,host);
 		}
-		else if(mode.equals("Blocks"))
+		else if(mode.equals("AttackerUnblocked"))
 		{
-			System.out.println("Creating: Blocks.");
-			ret = new Trigger_Blocks(mapParams,host);
+			ret = new Trigger_AttackerUnblocked(mapParams,host);
+		}
+		else if(mode.equals("Attacks"))
+		{
+			ret = new Trigger_Attacks(mapParams,host);
 		}
 		else if(mode.equals("ChangesZone"))
 		{
-			System.out.println("Creating: ChangesZone.");
 			ret = new Trigger_ChangesZone(mapParams,host);
 		}
 		else if(mode.equals("DamageDone"))
 		{
-			System.out.println("Creating: DamageDone.");
 			ret = new Trigger_DamageDone(mapParams,host);
 		}
 		else if(mode.equals("Discarded"))
 		{
-			System.out.println("Creating: Discarded.");
 			ret = new Trigger_Discarded(mapParams,host);
 		}
 		else if(mode.equals("LifeGained"))
 		{
-			System.out.println("Creating: LifeGained.");
 			ret = new Trigger_LifeGained(mapParams,host);
 		}
 		else if(mode.equals("LifeLost"))
 		{
-			System.out.println("Creating: LifeLost.");
 			ret = new Trigger_LifeLost(mapParams,host);
 		}
 		else if(mode.equals("Phase"))
 		{
-			System.out.println("Creating: Phase.");
 			ret = new Trigger_Phase(mapParams,host);
 		}
 		else if(mode.equals("Sacrificed"))
 		{
-			System.out.println("Creating: Sacrificed.");
 			ret = new Trigger_Sacrificed(mapParams,host);
 		}
 		else if(mode.equals("SpellCast"))
 		{
-			System.out.println("Creating: SpellCast.");
 			ret = new Trigger_SpellCast(mapParams,host);
 		}
 		else if(mode.equals("Taps"))
 		{
-			System.out.println("Creating: Taps.");
 			ret = new Trigger_Taps(mapParams,host);
 		}
 		else if(mode.equals("Untaps"))
 		{
-			System.out.println("Creating: Untaps.");
 			ret = new Trigger_Untaps(mapParams,host);
 		}
 		

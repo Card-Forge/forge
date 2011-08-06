@@ -3,6 +3,7 @@ package forge;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -921,6 +922,12 @@ public class CombatUtil {
     public static void checkDeclareAttackers(Card c) //this method checks triggered effects of attacking creatures, right before defending player declares blockers
     {
         	AllZone.GameAction.checkWheneverKeyword(c,"Attacks",null);
+        	
+        	//Run triggers
+        	HashMap<String,Object> runParams = new HashMap<String,Object>();
+        	runParams.put("Attacker", c);
+        	AllZone.TriggerHandler.runTrigger("Attacks", runParams);
+        	
         	//Annihilator:
         	if (!c.getCreatureAttackedThisCombat())
         	{
@@ -2042,6 +2049,11 @@ public class CombatUtil {
     	
     	AllZone.GameAction.checkWheneverKeyword(c,"isUnblocked",null);
     	
+    	//Run triggers
+    	HashMap<String,Object> runParams = new HashMap<String,Object>();
+    	runParams.put("Attacker", c);
+    	AllZone.TriggerHandler.runTrigger("AttackerUnblocked", runParams);
+    	
         if(c.getName().equals("Guiltfeeder")) {
             final Player player = c.getController();
             final Player opponent = player.getOpponent();
@@ -2074,11 +2086,16 @@ public class CombatUtil {
         
     }
     
-    static void checkDeclareBlockers(CardList cl) {
+    public static void checkDeclareBlockers(CardList cl) {
     	//System.out.println("Phase during checkDeclareBlockers: " + AllZone.Phase.getPhase());
         	for (Card c:cl)
         	{
         		AllZone.GameAction.checkWheneverKeyword(c,"Blocks",null);
+        		
+        		//Run triggers
+        		HashMap<String,Object> runParams = new HashMap<String,Object>();
+        		runParams.put("Blocker", c);
+        		AllZone.TriggerHandler.runTrigger("Blocks", runParams);
         		
         		if (!c.getCreatureBlockedThisCombat()) {
                 	for(Ability ab:CardFactoryUtil.getBushidoEffects(c)) {
@@ -2144,6 +2161,12 @@ public class CombatUtil {
         if(!a.getCreatureGotBlockedThisCombat()) { 
         	
     		AllZone.GameAction.checkWheneverKeyword(a,"BecomesBlocked",null);
+    		
+    		//Run triggers
+    		HashMap<String, Object> runParams = new HashMap<String,Object>();
+    		runParams.put("Attacker",a);
+    		runParams.put("Blocker",b);
+    		AllZone.TriggerHandler.runTrigger("AttackerBlocked", runParams);
     	
             for(Ability ab:CardFactoryUtil.getBushidoEffects(a))
                 AllZone.Stack.add(ab);
