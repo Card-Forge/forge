@@ -1,0 +1,9 @@
+Name:Choke
+ManaCost:2 G
+Types:Enchantment
+Text:Islands don't untap during their controllers' untap steps.
+K:Permanents don't untap during their controllers' untap steps:Island
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/choke.jpg
+End
