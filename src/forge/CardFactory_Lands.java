@@ -3603,6 +3603,49 @@ class CardFactory_Lands {
             card.addSpellAbility(addMana);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Desert")) {
+        	/*
+        	 * Tap: Add 1 to your mana pool.
+        	 * Tap: Desert deals 1 damage to target attacking creature.
+        	 * Activate this ability only during the end of combat step.
+        	 */
+        	final String Tgts[] = {"Creature.attacking"};
+        	Target target = new Target("TgtV", "Select target attacking creature.", Tgts);
+            Ability_Cost abCost = new Ability_Cost("T", card.getName(), true);
+        	
+        	final SpellAbility ability = new Ability_Activated(card, abCost, target) {
+				private static final long serialVersionUID = 4707010813373688290L;
+
+				@Override
+        		public boolean canPlayAI() {
+					CardList list = AllZoneUtil.getCreaturesInPlay(card.getController().getOpponent());
+					list = list.filter(new CardListFilter() {
+						public boolean addCard(Card c) {
+							return c.isAttacking();
+						}
+					});
+        			return list.size() > 0 && canPlay();
+                }//canPlayAI()
+        		
+        		@Override
+        		public boolean canPlay() {
+        			return AllZone.Phase.getPhase().equals(Constant.Phase.Combat_End);
+        		}
+                
+        		@Override
+        		public void resolve() {
+        			if(getTargetCard() == null) return;
+        			Card c = getTargetCard();
+        			c.addDamage(1, card);
+
+        		}//resolve()
+            };//SpellAbility
+            
+            ability.setDescription(abCost+"Desert deals 1 damage to target attacking creature. Activate this ability only during the end of combat step.");
+            card.addSpellAbility(ability);//ability.setBeforePayMana(CardFactoryUtil.input_targetCreatureKeyword_NoCost_TapAbility("Flying", ability));
+        }//*************** END ************ END **************************
+        
         return card;
     }
     

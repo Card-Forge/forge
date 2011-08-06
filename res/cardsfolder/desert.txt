@@ -1,0 +1,8 @@
+Name:Desert
+ManaCost:no cost
+Types:Land
+Text:no text
+K:tap: add 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/desert.jpg
+End
