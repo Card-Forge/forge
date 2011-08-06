@@ -2,7 +2,7 @@ Name:Aysen Highway
 ManaCost:3 W W W
 Types:Enchantment
 Text:no text
-K:StaticEffect:Play:All Permanents:Keyword/Plainswalk:Type.Creature!Color.white:White creatures have plainswalk.
+K:stPumpAll:Creature.White:0/0/Plainswalk:No Condition:White creatures have plainswalk.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aysen_highway.jpg

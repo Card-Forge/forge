@@ -3,7 +3,7 @@ ManaCost:2 R R
 Types:Creature Minotaur Shaman
 Text:no text
 PT:1/3
-K:StaticEffect:Play:Permanents you Control:PTBonus/1/0:Type.Creature!Type.Minotaur:Minotaur creatures get +1/+0.
+K:stPumpAll:Creature.Minotaur:1/0:No Condition:Minotaur creatures get +1/+0.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anaba_spirit_crafter.jpg
 SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/86.jpg
