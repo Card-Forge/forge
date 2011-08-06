@@ -73,7 +73,7 @@ public class CardFactory_Creatures {
                     SpellAbility ability = new Ability(card, "0") {
                         @Override
                         public void resolve() {
-                            AllZone.GameAction.getPlayerLife(getController()).subtractLife(n);
+                            AllZone.GameAction.getPlayerLife(getController()).subtractLife(n,card);
                         }
                     };
                     ability.setStackDescription("Filthy Cur - causes " + n + " damage to " + getController());
@@ -352,7 +352,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(2);
+                    AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(2,card);
                     AllZone.GameAction.discard(card);
                     AllZone.GameAction.drawCard(card.getController());
                     card.cycle();
@@ -375,7 +375,7 @@ public class CardFactory_Creatures {
                     SpellAbility ability = new Ability(card, "0") {
                         @Override
                         public void resolve() {
-                            AllZone.GameAction.getPlayerLife(getController()).subtractLife(n);
+                            AllZone.GameAction.getPlayerLife(getController()).subtractLife(n,card);
                         }
                     };
                     ability.setStackDescription("Shinka Gatekeeper - causes " + n + " damage to "
@@ -411,7 +411,7 @@ public class CardFactory_Creatures {
                     SpellAbility ability = new Ability(card, "0") {
                         @Override
                         public void resolve() {
-                            AllZone.GameAction.getPlayerLife(getController()).subtractLife(n);
+                            AllZone.GameAction.getPlayerLife(getController()).subtractLife(n,card);
                         }
                     };
                     ability.setStackDescription("Jackal Pup - causes " + n + " damage to " + getController());
@@ -449,7 +449,7 @@ public class CardFactory_Creatures {
                     SpellAbility ability = new Ability(card, "0") {
                         @Override
                         public void resolve() {
-                            AllZone.GameAction.getPlayerLife(opponent).subtractLife(n);
+                            AllZone.GameAction.getPlayerLife(opponent).subtractLife(n,card);
                             
                             if(c.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(c, n);
                             
@@ -1879,7 +1879,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     if(getTargetCard() != null && CardFactoryUtil.canDamage(card, getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(3, card);
-                    else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(3);
+                    else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(3,card);
                 }
             };
             Command leavesPlay = new Command() {
@@ -2178,7 +2178,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                    life.subtractLife(2);
+                    life.subtractLife(2,card);
                     
                     AllZone.GameAction.drawCard(card.getController());
                     AllZone.GameAction.drawCard(card.getController());
@@ -2202,7 +2202,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                    life.subtractLife(1);
+                    life.subtractLife(1,card);
                     
                     AllZone.GameAction.drawCard(card.getController());
                 }//resolve()
@@ -2369,7 +2369,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                    life.subtractLife(3);
+                    life.subtractLife(3,card);
                 }//resolve()
             };//SpellAbility
             Command intoPlay = new Command() {
@@ -2594,7 +2594,7 @@ public class CardFactory_Creatures {
                     PlayerLife opp = AllZone.GameAction.getPlayerLife(opponent);
                     PlayerLife my = AllZone.GameAction.getPlayerLife(card.getController());
                     
-                    opp.subtractLife(5);
+                    opp.subtractLife(5,card);
                     my.addLife(5);
                 }
             };
@@ -2714,7 +2714,7 @@ public class CardFactory_Creatures {
                         	AllZone.GameInfo.addHumanCanPlayNumberOfLands(-1);
                         	if(AllZone.GameInfo.humanPlayedFirstLandThisTurn() == true) {
                         		for(int i = 0; i < Fastbond.size(); i++)
-                        			AllZone.GameAction.addDamage(card.getController(), 1);
+                        			AllZone.GameAction.addDamage(card.getController(), 1,Fastbond.get(0));
                         	}
                         	AllZone.GameInfo.setHumanPlayedFirstLandThisTurn(true);
                         }
@@ -2722,7 +2722,7 @@ public class CardFactory_Creatures {
                         	AllZone.GameInfo.addComputerCanPlayNumberOfLands(-1);
                         	if(AllZone.GameInfo.computerPlayedFirstLandThisTurn() == true) {
                         		for(int i = 0; i < Fastbond.size(); i++)
-                        			AllZone.GameAction.addDamage(card.getController(), 1);
+                        			AllZone.GameAction.addDamage(card.getController(), 1,Fastbond.get(0));
                         	}
                         	AllZone.GameInfo.setComputerPlayedFirstLandThisTurn(true);
                         }
@@ -2753,7 +2753,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     String opponent = AllZone.GameAction.getOpponent(card.getController());
-                    AllZone.GameAction.getPlayerLife(opponent).subtractLife(2);
+                    AllZone.GameAction.getPlayerLife(opponent).subtractLife(2,card);
                     
                     AllZone.GameAction.getPlayerLife(card.getController()).addLife(2);
                 }
@@ -2788,7 +2788,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     
-                    AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(3);
+                    AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(3,card);
                 }
             };
             Command intoPlay = new Command() {
@@ -2807,7 +2807,7 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(5);
+                    AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(5,card);
                 }
                 
                 @Override
@@ -2843,7 +2843,7 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(2);
+                    AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(2,card);
                 }
                 
                 @Override
@@ -2973,7 +2973,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     String opponent = AllZone.GameAction.getOpponent(card.getController());
-                    AllZone.GameAction.getPlayerLife(opponent).subtractLife(4);
+                    AllZone.GameAction.getPlayerLife(opponent).subtractLife(4,card);
                 }
             };
             Command intoPlay = new Command() {
@@ -5393,7 +5393,7 @@ public class CardFactory_Creatures {
                                 Card c = getTargetCard();
                                 c.addDamage(damage, card);
                             }
-                        } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
+                        } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage,card);
                     }
                 }//resolve()
             };//SpellAbility
@@ -5427,7 +5427,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void selectPlayer(String player) {
                     int damage = ((Integer) countZubera.execute()).intValue();
-                    AllZone.GameAction.getPlayerLife(player).subtractLife(damage);
+                    AllZone.GameAction.getPlayerLife(player).subtractLife(damage,card);
                     stop();
                 }//selectPlayer()
             };//Input
@@ -8782,7 +8782,7 @@ public class CardFactory_Creatures {
                         if(AllZone.GameAction.isCardInPlay(getTargetCard())
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(1,
                                 card);
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1);
+                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1,card);
                 }//resolve()
             };//SpellAbility
             
@@ -9313,8 +9313,8 @@ public class CardFactory_Creatures {
                     for(int i = 0; i < list.size(); i++)
                         list.get(i).addDamage(4, card);
                     
-                    AllZone.Human_Life.subtractLife(4);
-                    AllZone.Computer_Life.subtractLife(4);
+                    AllZone.Human_Life.subtractLife(4,card);
+                    AllZone.Computer_Life.subtractLife(4,card);
                 }//resolve()
             };//SpellAbility
             card.addSpellAbility(ability);
@@ -9332,7 +9332,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     String opponent = AllZone.GameAction.getOpponent(card.getController());
-                    AllZone.GameAction.getPlayerLife(opponent).subtractLife(2);
+                    AllZone.GameAction.getPlayerLife(opponent).subtractLife(2,card);
                     
                     AllZone.GameAction.getPlayerLife(card.getController()).addLife(2);
                     
@@ -10990,7 +10990,7 @@ public class CardFactory_Creatures {
                                         //c.addDamage(damage);
                                         AllZone.GameAction.addDamage(crd, card, 2);
                                     }
-                                } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(2);
+                                } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(2,card);
                                 
                             }
                         }
@@ -11070,7 +11070,7 @@ public class CardFactory_Creatures {
                                 String opponent = AllZone.GameAction.getOpponent(player);
                                 
                                 PlayerLife life = AllZone.GameAction.getPlayerLife(opponent);
-                                life.subtractLife(power);
+                                life.subtractLife(power,card);
                                 
                                 GameActionUtil.executeLifeLinkEffects(card, power);
                                 
@@ -12884,8 +12884,8 @@ public class CardFactory_Creatures {
                     Card c = card;
                     PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
                     PlayerLife oppLife = AllZone.GameAction.getPlayerLife(AllZone.GameAction.getOpponent(c.getController()));
-                    life.subtractLife(1);
-                    oppLife.subtractLife(1);
+                    life.subtractLife(1,card);
+                    oppLife.subtractLife(1,card);
                 }
             };
             Command intoPlay = new Command() {
@@ -12907,8 +12907,8 @@ public class CardFactory_Creatures {
                     Card c = card;
                     PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
                     PlayerLife oppLife = AllZone.GameAction.getPlayerLife(AllZone.GameAction.getOpponent(c.getController()));
-                    life.subtractLife(3);
-                    oppLife.subtractLife(3);
+                    life.subtractLife(3,card);
+                    oppLife.subtractLife(3,card);
                 }
             };
             Command intoPlay = new Command() {
@@ -13245,7 +13245,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                    life.subtractLife(1);
+                    life.subtractLife(1,card);
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getOwner());
                     
                     if(card.isToken()) AllZone.getZone(card).remove(card);
@@ -14530,7 +14530,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                    life.subtractLife(1);
+                    life.subtractLife(1,card);
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getOwner());
                     /*
                     AllZone.getZone(card).remove(card);
@@ -15313,7 +15313,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     String opponent = AllZone.GameAction.getOpponent(card.getController());
-                    AllZone.GameAction.getPlayerLife(opponent).subtractLife(1);
+                    AllZone.GameAction.getPlayerLife(opponent).subtractLife(1,card);
                 }
                 
                 @Override
@@ -15373,7 +15373,7 @@ public class CardFactory_Creatures {
                             lib.remove(0);
                             grave.add(c);
                             
-                            AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1);
+                            AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1,card);
                         }
                     }
                 }
@@ -15709,8 +15709,8 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    AllZone.Human_Life.subtractLife(countSwamps("Human"));
-                    AllZone.Computer_Life.subtractLife(countSwamps("Computer"));
+                    AllZone.Human_Life.subtractLife(countSwamps("Human"),card);
+                    AllZone.Computer_Life.subtractLife(countSwamps("Computer"),card);
                 }
                 
                 int countSwamps(String player) {
@@ -15908,7 +15908,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     PlayerLife target = AllZone.GameAction.getPlayerLife(getTargetPlayer());
-        	        target.subtractLife(card.getCounters(Counters.P1P1));
+        	        target.subtractLife(card.getCounters(Counters.P1P1),card);
                 }//resolve()
             };
   
@@ -15986,7 +15986,7 @@ public class CardFactory_Creatures {
                         if(AllZone.GameAction.isCardInPlay(getTargetCard())
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(1,
                                 card);
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1);
+                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1,card);
                 }//resolve()
                 
             };//SpellAbility
@@ -17288,7 +17288,7 @@ public class CardFactory_Creatures {
                         if(AllZone.GameAction.isCardInPlay(getTargetCard())
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(1,
                                 card);
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1);
+                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1,card);
                 }//resolve()
             };//SpellAbility
             
@@ -17373,7 +17373,7 @@ public class CardFactory_Creatures {
             final SpellAbility abilityComes = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(6);
+                    AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(6,card);
                 }//resolve()
             };
             
@@ -17438,7 +17438,7 @@ public class CardFactory_Creatures {
                     });
                     int drain = list.size();
                     AllZone.GameAction.getPlayerLife(AllZone.GameAction.getOpponent(card.getController())).subtractLife(
-                            drain);
+                            drain,card);
                     AllZone.GameAction.getPlayerLife(card.getController()).addLife(drain);
                     
                 }//resolve()
@@ -17952,7 +17952,7 @@ public class CardFactory_Creatures {
             final Ability ability = new Ability(card, "B B B") {
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(3);
+                    AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(3,card);
                     
                     PlayerZone hGrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human);
                     PlayerZone cGrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer);
@@ -18129,7 +18129,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     String opponent = AllZone.GameAction.getOpponent(card.getController());
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opponent);
-                    AllZone.GameAction.getPlayerLife(opponent).subtractLife(1);
+                    AllZone.GameAction.getPlayerLife(opponent).subtractLife(1,card);
                     Card[] handLook = hand.getCards();
                     if(opponent.equals(Constant.Player.Computer)) {
                         AllZone.Display.getChoice("Look", handLook);
@@ -18170,7 +18170,7 @@ public class CardFactory_Creatures {
 	                    }
 	                    AllZone.Display.getChoice("Random card", handChoices);
 	                    AllZone.GameAction.getPlayerLife(opponent).subtractLife(
-	                            CardUtil.getConvertedManaCost(choice.getManaCost()));
+	                            CardUtil.getConvertedManaCost(choice.getManaCost()),card);
                     }
                 }//resolve()
             };
@@ -18824,7 +18824,7 @@ public class CardFactory_Creatures {
 				public void resolve()
         		{
 					//TODO: make this part of the cost
-					AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(2);
+					AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(2,card);
         			final Command EOT = new Command() {
                          private static final long serialVersionUID = -8840812331316327448L;
                          
@@ -19309,7 +19309,7 @@ public class CardFactory_Creatures {
         			
         			AllZone.GameAction.sacrifice(card);
         			
-        			targetLife.subtractLife(1);
+        			targetLife.subtractLife(1,card);
         			playerLife.addLife(1);        			
         		}
         	};
@@ -20348,8 +20348,8 @@ public class CardFactory_Creatures {
                         if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);
                     }
                     
-                    AllZone.Human_Life.subtractLife(1);
-                    AllZone.Computer_Life.subtractLife(1);
+                    AllZone.Human_Life.subtractLife(1,card);
+                    AllZone.Computer_Life.subtractLife(1,card);
                 }//resolve()
             };//SpellAbility
             ability.setDescription("B: Pestilence Demon deals 1 damage to each creature and each player.");

@@ -1523,7 +1523,7 @@ public class CardFactory implements NewConstants {
                                 tgtP = c.getController();
                             }
                         } else {
-                            AllZone.GameAction.addDamage(getTargetPlayer(), damage);
+                            AllZone.GameAction.addDamage(getTargetPlayer(), damage,card);
                             tgtP = getTargetPlayer();
                         }
                         
@@ -2001,7 +2001,7 @@ public class CardFactory implements NewConstants {
                                     }
                                 }
                             } else {
-                                AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(dmg[0]);
+                                AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(dmg[0],card);
                                 if(card.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(
                                         card, dmg[0]);
                                 
@@ -2049,7 +2049,7 @@ public class CardFactory implements NewConstants {
                                     
                                 }
                             } else {
-                                AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(dmg[0]);
+                                AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(dmg[0],card);
                                 if(card.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(
                                         card, dmg[0]);
                                 
@@ -2099,7 +2099,7 @@ public class CardFactory implements NewConstants {
                                     }
                                 }
                             } else {
-                                AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(dmg[0]);
+                                AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(dmg[0],card);
                                 if(card.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(
                                         card, dmg[0]);
                                 
@@ -2665,7 +2665,7 @@ public class CardFactory implements NewConstants {
                       else
                          TgtPlayer = card.getController();
                      
-                      AllZone.GameAction.subLife(TgtPlayer, nlife);
+                      AllZone.GameAction.getPlayerLife(TgtPlayer).subtractLife(nlife,card);
                      
                       if (!DrawBack[0].equals("none"))
                          CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null);
@@ -2832,7 +2832,7 @@ public class CardFactory implements NewConstants {
                           else
                              TgtPlayer = card.getController();
                          
-                          AllZone.GameAction.subLife(TgtPlayer, nlife);
+                          AllZone.GameAction.getPlayerLife(TgtPlayer).subtractLife(nlife,card);
                          
                           if (!DrawBack[0].equals("none"))
                              CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null);
@@ -2893,7 +2893,7 @@ public class CardFactory implements NewConstants {
                           else
                              TgtPlayer = card.getController();
                          
-                          AllZone.GameAction.subLife(TgtPlayer, nlife);
+                          AllZone.GameAction.getPlayerLife(TgtPlayer).subtractLife(nlife,card);
                          
                           if (!DrawBack[0].equals("none"))
                              CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null);
@@ -3022,7 +3022,7 @@ public class CardFactory implements NewConstants {
                         else
                            TgtPlayer = card.getController();
                        
-                        AllZone.GameAction.addLife(TgtPlayer, nlife);
+                        AllZone.GameAction.getPlayerLife(TgtPlayer).addLife(nlife);
                        
                         if (!DrawBack[0].equals("none"))
                            CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null);
@@ -3181,8 +3181,7 @@ public class CardFactory implements NewConstants {
                           else
                              TgtPlayer = card.getController();
                          
-                          AllZone.GameAction.addLife(TgtPlayer, nlife);
-                         
+                          AllZone.GameAction.getPlayerLife(TgtPlayer).addLife(nlife);
                           if (!DrawBack[0].equals("none"))
                              CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null);
                        }//resolve()
@@ -3240,7 +3239,7 @@ public class CardFactory implements NewConstants {
                           else
                              TgtPlayer = card.getController();
                          
-                          AllZone.GameAction.addLife(TgtPlayer, nlife);
+                          AllZone.GameAction.getPlayerLife(TgtPlayer).addLife(nlife);
                          
                           if (!DrawBack[0].equals("none"))
                              CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null);
@@ -3994,7 +3993,7 @@ public class CardFactory implements NewConstants {
                  @Override
                  public void resolve()
                  {
-                    AllZone.GameAction.getPlayerLife(getController()).subtractLife(amountHurt);
+                    AllZone.GameAction.getPlayerLife(getController()).subtractLife(amountHurt,card);
                     super.resolve();
                  }
                  
@@ -4494,8 +4493,8 @@ public class CardFactory implements NewConstants {
                         if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);
                     }
                     
-                    AllZone.Human_Life.subtractLife(1);
-                    AllZone.Computer_Life.subtractLife(1);
+                    AllZone.Human_Life.subtractLife(1,card);
+                    AllZone.Computer_Life.subtractLife(1,card);
                 }//resolve()
             };//SpellAbility
             ability.setDescription("R: Pyrohemia deals 1 damage to each creature and each player.");
@@ -4550,8 +4549,8 @@ public class CardFactory implements NewConstants {
                         if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);
                     }
                     
-                    AllZone.Human_Life.subtractLife(1);
-                    AllZone.Computer_Life.subtractLife(1);
+                    AllZone.Human_Life.subtractLife(1,card);
+                    AllZone.Computer_Life.subtractLife(1,card);
                 }//resolve()
             };//SpellAbility
             ability.setDescription("B: Pestilence deals 1 damage to each creature and each player.");
@@ -5047,7 +5046,7 @@ public class CardFactory implements NewConstants {
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                     	PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                        life.subtractLife(getTargetCard().getNetDefense());
+                        life.subtractLife(getTargetCard().getNetDefense(),card);
                         AllZone.GameAction.destroyNoRegeneration(getTargetCard());
                     }
                 }//resolve()
@@ -5462,7 +5461,7 @@ public class CardFactory implements NewConstants {
                     Card c = getTargetCard();
                     if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                         if(!c.getType().contains("Basic")) AllZone.GameAction.getPlayerLife(c.getController()).subtractLife(
-                                2);
+                                2,card);
                         AllZone.GameAction.destroy(c);
                     }
                     
@@ -5975,7 +5974,7 @@ public class CardFactory implements NewConstants {
                     }
                     
                     PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                    life.subtractLife(5);
+                    life.subtractLife(5,card);
                 }//resolve()
             };//SpellAbility
             
@@ -6504,7 +6503,7 @@ public class CardFactory implements NewConstants {
                     if(cardName.equals("Grim Tutor")) {
                         String player = Constant.Player.Human;
                         PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-                        life.subtractLife(3);
+                        life.subtractLife(3,card);
                     }
                 }
                 
@@ -6523,7 +6522,7 @@ public class CardFactory implements NewConstants {
                     if(cardName.equals("Grim Tutor")) {
                         String player = Constant.Player.Computer;
                         PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-                        life.subtractLife(3);
+                        life.subtractLife(3,card);
                     }
                 }
                 
@@ -6677,7 +6676,7 @@ public class CardFactory implements NewConstants {
                             done();
                         } else AllZone.GameAction.moveToGraveyard(card);
                     } else {
-                        AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(5);
+                        AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(5,card);
                         done();
                     }
                 }//resolve()
@@ -7828,8 +7827,8 @@ public class CardFactory implements NewConstants {
                     if(getTargetCard() != null) {
                         if(AllZone.GameAction.isCardInPlay(getTargetCard())
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(1,card);
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1);
-                    } else AllZone.GameAction.getPlayerLife(AllZone.GameAction.getOpponent(card.getController())).subtractLife(1);
+                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1,card);
+                    } else AllZone.GameAction.getPlayerLife(AllZone.GameAction.getOpponent(card.getController())).subtractLife(1,card);
             };
            };
             card.clearSpellAbility();
@@ -7883,7 +7882,7 @@ public class CardFactory implements NewConstants {
                         }
                         AllZone.Display.getChoice("Random card", handChoices);
                         AllZone.GameAction.getPlayerLife(opponent).subtractLife(
-                                CardUtil.getConvertedManaCost(choice.getManaCost()));
+                                CardUtil.getConvertedManaCost(choice.getManaCost()),card);
                     }                                   
                 }//resolve()
             };
@@ -8218,7 +8217,7 @@ public class CardFactory implements NewConstants {
                     
 					// Opponent Loses 5 Life
                     PlayerLife target = AllZone.GameAction.getPlayerLife(opponent);
-			        target.subtractLife(5);
+			        target.subtractLife(5,card);
 
 					// Player Returns Creature Card from Graveyard to Hand
                     if(player == "Human") {                 	
@@ -8299,7 +8298,7 @@ public class CardFactory implements NewConstants {
 			        PlayerLife player = AllZone.GameAction.getPlayerLife(card.getController());
                     String opponent = AllZone.GameAction.getOpponent(card.getController());
                     PlayerLife target = AllZone.GameAction.getPlayerLife(opponent);
-			        target.subtractLife(2);
+			        target.subtractLife(2,card);
 			        player.addLife(2);
 				}
                 
@@ -8324,7 +8323,7 @@ public class CardFactory implements NewConstants {
                         AllZone.GameAction.destroy(getTargetCard());
                         CardList Grave = new CardList(AllZone.getZone(Constant.Zone.Graveyard, getTargetCard().getController()).getCards());
                         int Damage = (Grave.getType("Land")).size();
-                        AllZone.GameAction.getPlayerLife(getTargetCard().getController()).subtractLife(Damage);
+                        AllZone.GameAction.getPlayerLife(getTargetCard().getController()).subtractLife(Damage,card);
 				}
 				}
                 @Override
@@ -8664,7 +8663,7 @@ public class CardFactory implements NewConstants {
                     //lose half life
                         String player = Constant.Player.Human;
                         PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-                        life.subtractLife(life.getLife() / 2);
+                        life.subtractLife(life.getLife() / 2,card);
                 }
                         
                 @Override
@@ -9259,10 +9258,10 @@ public class CardFactory implements NewConstants {
                     }
                     
                     PlayerLife compLife = AllZone.GameAction.getPlayerLife(Constant.Player.Computer);
-                    compLife.subtractLife(2);
+                    compLife.subtractLife(2,card);
                     
                     PlayerLife humLife = AllZone.GameAction.getPlayerLife(Constant.Player.Human);
-                    humLife.subtractLife(2);
+                    humLife.subtractLife(2,card);
                     
                 }
                 
@@ -9333,8 +9332,8 @@ public class CardFactory implements NewConstants {
                             }
                         }
                     
-                    AllZone.Human_Life.subtractLife(3);
-                    AllZone.Computer_Life.subtractLife(3);
+                    AllZone.Human_Life.subtractLife(3,card);
+                    AllZone.Computer_Life.subtractLife(3,card);
                 }
             };
             card.clearSpellAbility();
@@ -9421,7 +9420,7 @@ public class CardFactory implements NewConstants {
                 @Override
                 public void resolve() {
                     PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                    life.subtractLife(1);
+                    life.subtractLife(1,card);
                 }
             };
             ability2.setStackDescription(card.getController() + " looses 1 life");
@@ -9716,7 +9715,7 @@ public class CardFactory implements NewConstants {
                 @Override
                 public void resolve() {
                     if(cardName.equals("Thoughtseize")) AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(
-                            2);
+                            2,card);
                     
                     Card choice = null;
                     
@@ -10091,7 +10090,7 @@ public class CardFactory implements NewConstants {
                             Card c = getTargetCard();
                             c.addDamage(damage, card);
                         }
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
+                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage,card);
                 }
             };//SpellAbility
             
@@ -10154,7 +10153,7 @@ public class CardFactory implements NewConstants {
                             Card c = getTargetCard();
                             c.addDamage(damage, card);
                         }
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
+                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage,card);
                     
                     grave.remove(card);
                     removed.add(card);
@@ -10234,7 +10233,7 @@ public class CardFactory implements NewConstants {
                     } else {
                         javax.swing.JOptionPane.showMessageDialog(null, "Erratic Explosion causes " + damage
                                 + " to " + getTargetPlayer());
-                        AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
+                        AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage,card);
                     }
                 }
                 
@@ -10272,7 +10271,7 @@ public class CardFactory implements NewConstants {
                 @Override
                 public void resolve() {
                     PlayerLife life = AllZone.GameAction.getPlayerLife(getTargetPlayer());
-                    if(life.getLife() == 10) life.subtractLife(10);
+                    if(life.getLife() == 10) life.subtractLife(10,card);
                 }
                 
                 /*
@@ -10638,7 +10637,7 @@ public class CardFactory implements NewConstants {
         			for(int i = 0; i <card.getChoices().size(); i++) {
         				if(card.getChoice(i).equals(cardChoice[0])) {
         					setTargetPlayer(card.getChoiceTarget(0)); 
-        					AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(4);
+        					AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(4,card);
         				}
         			}
 
@@ -13231,7 +13230,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void showMessage() {
-                    AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(1);
+                    AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(1,card);
                     
                     //this order is very important, do not change
                     stop();
@@ -13295,7 +13294,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void showMessage() {
-                    AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(1);
+                    AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(1,card);
                     
                     //this order is very important, do not change
                     stop();
@@ -13409,7 +13408,7 @@ public class CardFactory implements NewConstants {
                     AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
                     
                     String opponent = AllZone.GameAction.getOpponent(card.getController());
-                    AllZone.GameAction.getPlayerLife(opponent).subtractLife(3);
+                    AllZone.GameAction.getPlayerLife(opponent).subtractLife(3,card);
                     
                 }
                 
@@ -13440,7 +13439,7 @@ public class CardFactory implements NewConstants {
                     AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
                     
                     String opponent = AllZone.GameAction.getOpponent(card.getController());
-                    AllZone.GameAction.getPlayerLife(opponent).subtractLife(3);
+                    AllZone.GameAction.getPlayerLife(opponent).subtractLife(3,card);
                     
                     String player = card.getController();
                     AllZone.GameAction.getPlayerLife(player).addLife(3);
@@ -15075,7 +15074,7 @@ public class CardFactory implements NewConstants {
                         if(AllZone.GameAction.isCardInPlay(getTargetCard())
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(2,
                                 card);
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(2);
+                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(2,card);
                     AllZone.GameAction.sacrifice(getSourceCard());
                 }//resolve()
             };//Ability_Activated
@@ -15281,7 +15280,7 @@ public class CardFactory implements NewConstants {
                         //lose 2 life
                         String player = Constant.Player.Computer;
                         PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-                        life.subtractLife(2);
+                        life.subtractLife(2,card);
                     }
                 }//computerResolve()
                 
@@ -15302,7 +15301,7 @@ public class CardFactory implements NewConstants {
                         //lose 2 life
                         String player = Constant.Player.Human;
                         PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-                        life.subtractLife(2);
+                        life.subtractLife(2,card);
                     }//if
                     
 
@@ -16816,7 +16815,7 @@ public class CardFactory implements NewConstants {
                             //c.addDamage(damage);
                             AllZone.GameAction.addDamage(c, card, 5);
                         }
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(5);
+                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(5,card);
                     //resolve()
                 }
             }; //spellAbility
@@ -17206,7 +17205,7 @@ public class CardFactory implements NewConstants {
                         if(AllZone.GameAction.isCardInPlay(getTargetCard())
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(2,
                                 card);
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(2);
+                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(2,card);
                 }//resolve()
             };//SpellAbility
             
@@ -17507,7 +17506,7 @@ public class CardFactory implements NewConstants {
                     AllZone.GameAction.discardRandom(card.getController(), handList.size());
                     
                     PlayerLife life = AllZone.GameAction.getPlayerLife(getTargetPlayer());
-                    life.subtractLife(5);
+                    life.subtractLife(5,card);
                 }
             };
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
@@ -17682,7 +17681,7 @@ public class CardFactory implements NewConstants {
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) {
                             getTargetCard().addDamage(damage, card);
                         }
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
+                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage,card);
                 }
             };
             ability.setDescription("3, tap: Reveal cards from the top of your library until you reveal a land card. Goblin Charbelcher deals damage equal to the number of nonland cards revealed this way to target creature or player. If the revealed land card was a Mountain, Goblin Charbelcher deals double that damage instead. Put the revealed cards on the bottom of your library in any order.");
@@ -18522,8 +18521,8 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void resolve() {
-                    AllZone.Human_Life.subtractLife(4);
-                    AllZone.Computer_Life.subtractLife(4);
+                    AllZone.Human_Life.subtractLife(4,card);
+                    AllZone.Computer_Life.subtractLife(4,card);
                 }
                 
                 @Override
@@ -18578,7 +18577,7 @@ public class CardFactory implements NewConstants {
                 public void resolve() {
                     Card c = card;
                     PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
-                    life.subtractLife(20);
+                    life.subtractLife(20,card);
                 }
             };
             
@@ -18982,7 +18981,7 @@ public class CardFactory implements NewConstants {
                             && !c.equals(card)) {
                         AllZone.GameAction.removeFromGame(c);
                         String player = card.getController();
-                        AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+                        AllZone.GameAction.getPlayerLife(player).subtractLife(1,card);
                         
                         count++;
                         if(count == stop) {
@@ -19399,8 +19398,8 @@ public class CardFactory implements NewConstants {
                 for(int i = 0; i < all.size(); i++)
                     	all.get(i).addDamage(card.getXManaCostPaid(), card);
                 
-                AllZone.GameAction.addDamage(Constant.Player.Human, damage);
-                AllZone.GameAction.addDamage(Constant.Player.Computer, damage);
+                AllZone.GameAction.addDamage(Constant.Player.Human, damage,card);
+                AllZone.GameAction.addDamage(Constant.Player.Computer, damage,card);
                 
     			card.setXManaCostPaid(0);
     		}
@@ -19468,8 +19467,8 @@ public class CardFactory implements NewConstants {
                 for(int i = 0; i < all.size(); i++)
                     	all.get(i).addDamage(card.getXManaCostPaid(), card);
                 
-                AllZone.GameAction.addDamage(Constant.Player.Human, damage);
-                AllZone.GameAction.addDamage(Constant.Player.Computer, damage);
+                AllZone.GameAction.addDamage(Constant.Player.Human, damage,card);
+                AllZone.GameAction.addDamage(Constant.Player.Computer, damage,card);
                 
     			card.setXManaCostPaid(0);
     		}
@@ -19813,7 +19812,7 @@ public class CardFactory implements NewConstants {
     				  CardList attackers = new CardList();
     				  attackers.addAll(AllZone.Combat.getAttackers());
     				  attackers.addAll(AllZone.pwCombat.getAttackers());
-    				  AllZone.GameAction.addLife(card.getController(), attackers.size());
+    				  AllZone.GameAction.getPlayerLife(card.getController()).addLife(attackers.size());
     			  }
     		}
 			public boolean canPlayAI()
@@ -19858,8 +19857,8 @@ public class CardFactory implements NewConstants {
                 for(int i = 0; i < all.size(); i++)
                     	all.get(i).addDamage(card.getXManaCostPaid(), card);
                 
-                AllZone.GameAction.addDamage(Constant.Player.Human, damage);
-                AllZone.GameAction.addDamage(Constant.Player.Computer, damage);
+                AllZone.GameAction.addDamage(Constant.Player.Human, damage,card);
+                AllZone.GameAction.addDamage(Constant.Player.Computer, damage,card);
                 
     			card.setXManaCostPaid(0);
     		}
@@ -20074,7 +20073,7 @@ public class CardFactory implements NewConstants {
                     	list.get(i).addDamage(card.getXManaCostPaid(), card);
                 }
                 
-                AllZone.GameAction.addDamage(player, damage);
+                AllZone.GameAction.addDamage(player, damage,card);
     			card.setXManaCostPaid(0);
     		}
 			public boolean canPlayAI()
@@ -20926,7 +20925,7 @@ public class CardFactory implements NewConstants {
                         Card c = all.get(i);
                         AllZone.GameAction.destroy(c);
                     }
-                    AllZone.GameAction.addLife(player, all.size()*2);
+  				  AllZone.GameAction.getPlayerLife(player).addLife(all.size()*2);
                 }// resolve()
                
                 @Override
@@ -21068,7 +21067,7 @@ public class CardFactory implements NewConstants {
                             Card c = getTargetCard();
                             c.addDamage(damage, card);
                         }
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
+                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage,card);
                 }
             };//SpellAbility
             
@@ -21120,7 +21119,7 @@ public class CardFactory implements NewConstants {
                             Card c = getTargetCard();
                             c.addDamage(damage, card);
                         }
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
+                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage,card);
                     
                     card.setKicked(true);
                 }
@@ -21540,7 +21539,7 @@ public class CardFactory implements NewConstants {
 						}
 					}
 
-					AllZone.GameAction.getPlayerLife(tPlayer).subtractLife(X);
+					AllZone.GameAction.getPlayerLife(tPlayer).subtractLife(X,card);
 					AllZone.GameAction.getPlayerLife(player).addLife(X);
 					card.setXManaCostPaid(0);
 				}
@@ -22573,8 +22572,8 @@ public class CardFactory implements NewConstants {
         			for(Card c:all) {
         				AllZone.GameAction.addDamage(c, card, damage);
         			}
-        			AllZone.GameAction.addDamage(Constant.Player.Computer, damage);
-        			AllZone.GameAction.addDamage(Constant.Player.Human, damage);
+        			AllZone.GameAction.addDamage(Constant.Player.Computer, damage,card);
+        			AllZone.GameAction.addDamage(Constant.Player.Human, damage,card);
         		}// resolve()
 
         		@Override
@@ -22903,7 +22902,7 @@ public class CardFactory implements NewConstants {
                         AllZone.GameAction.moveTo(play, c);
                         c.setController(card.getController());
                     }
-                    AllZone.GameAction.getPlayerLife(c.getController()).subtractLife(cmc);
+                    AllZone.GameAction.getPlayerLife(c.getController()).subtractLife(cmc,card);
                 }//resolve()
                 
                 @Override

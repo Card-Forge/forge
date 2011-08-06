@@ -44,7 +44,7 @@ public class Input_CombatDamage extends Input {
     public void selectCard(Card card, PlayerZone zone) {
         InputUtil.playInstantAbility(card, zone);
     }//selectCard()
-    
+    /**
     @SuppressWarnings("unused")
     // playerDamage
     private void playerDamage(PlayerLife p) {
@@ -52,7 +52,7 @@ public class Input_CombatDamage extends Input {
         p.setAssignedDamage(0);
         p.subtractLife(n);
     }
-    
+    **/
     //moves assigned damage to damage for all creatures
     //deals damage to player if needed
     public void damageCreatureAndPlayer() {
@@ -61,7 +61,8 @@ public class Input_CombatDamage extends Input {
         	player = Constant.Player.Computer;
         PlayerLife life = AllZone.GameAction.getPlayerLife(player);
         
-        life.subtractLife(AllZone.Combat.getTotalDefendingDamage());
+        life.subtractLife(AllZone.Combat.getTotalDefendingDamage(),AllZone.CardFactory.HumanNullCard); 
+        // Quick Fix, should work for Whenever keyword because of GameActionUtil.ExecutePlayerCombatEffects
         
 
         //why???

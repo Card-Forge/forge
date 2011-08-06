@@ -1776,7 +1776,7 @@ public class CombatUtil {
                 Card top = lib.get(0);
                 if(top.getType().contains("Creature")) {
                     AllZone.GameAction.getPlayerLife(player).addLife(top.getBaseDefense());
-                    AllZone.GameAction.getPlayerLife(player).subtractLife(top.getBaseAttack());
+                    AllZone.GameAction.getPlayerLife(player).subtractLife(top.getBaseAttack(),c);
                     hand.add(top);
                     lib.remove(top);
                 };
@@ -1809,11 +1809,11 @@ public class CombatUtil {
             
             else if(c.getName().equals("Pulse Tracker") && !c.getCreatureAttackedThisCombat()) {
                 final String opp = AllZone.GameAction.getOpponent(c.getController());
-                
+                final Card F_card = c;
                 Ability ability = new Ability(c, "0") {
                     @Override
                     public void resolve() {
-                        AllZone.GameAction.getPlayerLife(opp).subtractLife(1);
+                        AllZone.GameAction.getPlayerLife(opp).subtractLife(1,F_card);
                     }
                 };
                 ability.setStackDescription("Pulse Tracker - Whenever Pulse Tracker attacks, each opponent loses 1 life.");
@@ -1865,7 +1865,7 @@ public class CombatUtil {
         if(c.getName().equals("Guiltfeeder")) {
             final String player = c.getController();
             final String opponent = AllZone.GameAction.getOpponent(player);
-            
+            final Card F_card = c;
             Ability ability2 = new Ability(c, "0") {
                 @Override
                 public void resolve() {
@@ -1874,7 +1874,7 @@ public class CombatUtil {
                     CardList cardsInGrave = new CardList(graveyard.getCards());
                     PlayerLife life = AllZone.GameAction.getPlayerLife(opponent);
                     
-                    life.subtractLife(cardsInGrave.size());
+                    life.subtractLife(cardsInGrave.size(),F_card);
                     
                 }
             };// ability2
@@ -1918,7 +1918,7 @@ public class CombatUtil {
 		        		{
 		        			public void resolve()
 		        			{
-		        				AllZone.GameAction.addLife(crd.getController(), 2);
+		        		        AllZone.GameAction.getPlayerLife(crd.getController()).addLife(2);
 		        			}
 		        		};
 		        		ability.setStackDescription(pcs.get(i) + " - " + c.getController() + " gains 2 life.");
@@ -1971,7 +1971,7 @@ public class CombatUtil {
 	            
 	            else if(c.getName().equals("Meglonoth") && !c.getCreatureBlockedThisCombat()) {
 	                PlayerLife oppLife = AllZone.GameAction.getPlayerLife(AllZone.GameAction.getOpponent(c.getController()));
-	                oppLife.subtractLife(c.getNetAttack());
+	                oppLife.subtractLife(c.getNetAttack(),c);
 	                
 	                //ability2.setStackDescription(c.getName() + " blocks and deals damage equal to its power to attacking player.");
 	                //AllZone.Stack.add(ability2);
@@ -2123,7 +2123,7 @@ public class CombatUtil {
         } else if (a.getName().equals("Sacred Prey") && !a.getCreatureBlockedThisCombat()) {
         	AllZone.GameAction.getPlayerLife(a.getController()).addLife(1);
         } else if (a.getName().equals("Vedalken Ghoul") && !a.getCreatureBlockedThisCombat()) {
-        	AllZone.GameAction.subLife(b.getController(), 4);
+        	 AllZone.GameAction.getPlayerLife(b.getController()).subtractLife(4,a);
         }
         
         if(b.getName().equals("Frostweb Spider") && (a.getKeyword().contains("Flying"))) {

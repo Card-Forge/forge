@@ -793,7 +793,7 @@ public class CardFactoryUtil {
                 grave.remove(sourceCard);
                 removed.add(sourceCard);
                 
-                AllZone.GameAction.getPlayerLife(sourceCard.getController()).subtractLife(loss);
+                AllZone.GameAction.getPlayerLife(sourceCard.getController()).subtractLife(loss,sourceCard);
                 
             }
             
@@ -3560,11 +3560,11 @@ public class CardFactoryUtil {
         
         
 
-        if(d[0].contains("GainLife")) AllZone.GameAction.addLife(dbPlayer, X);
-        
+        if(d[0].contains("GainLife")) AllZone.GameAction.getPlayerLife(dbPlayer).addLife(X);
+
         if(d[0].contains("LoseLifeTgtCtrlr")) //2/10
-        AllZone.GameAction.subLife(TgtC.getController(), X);
-        else if(d[0].contains("LoseLife")) AllZone.GameAction.subLife(dbPlayer, X);
+        AllZone.GameAction.getPlayerLife(TgtC.getController()).subtractLife(X,Src);
+        else if(d[0].contains("LoseLife")) AllZone.GameAction.getPlayerLife(dbPlayer).subtractLife(X,Src);
         
         if(d[0].contains("Discard")) {
             if(d.length > 2) {

@@ -49,7 +49,7 @@ public class Input_FirstStrikeDamage extends Input {
     public void selectCard(Card card, PlayerZone zone) {
         InputUtil.playInstantAbility(card, zone);
     }//selectCard()
-    
+    /**
     @SuppressWarnings("unused")
     // playerDamage
     private void playerDamage(PlayerLife p) {
@@ -57,7 +57,7 @@ public class Input_FirstStrikeDamage extends Input {
         p.setAssignedDamage(0);
         p.subtractLife(n);
     }
-    
+    **/
     //moves assigned damage to damage for all creatures
     //deals damage to player if needed
     private void damageCreatureAndPlayer() {
@@ -67,7 +67,8 @@ public class Input_FirstStrikeDamage extends Input {
         if(player.equals("")) //this is a really bad hack, to allow raging goblin to attack on turn 1
         player = Constant.Player.Computer;
         PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-        life.subtractLife(AllZone.Combat.getTotalFirstStrikeDefendingDamage());
+        life.subtractLife(AllZone.Combat.getTotalFirstStrikeDefendingDamage(),AllZone.CardFactory.HumanNullCard);
+        // Quick Fix, should work for Whenever keyword because of GameActionUtil.ExecutePlayerCombatEffects
         System.out.println("getTotalFirstStrikeDefendingDamage: "
                 + AllZone.Combat.getTotalFirstStrikeDefendingDamage());
         

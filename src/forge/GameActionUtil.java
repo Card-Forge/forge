@@ -175,7 +175,7 @@ public class GameActionUtil {
 					@Override
 					public void resolve() {
 						//Lifeblood controller (opponent in this case) gains 1 life
-						AllZone.GameAction.addLife(opponent, 1);
+						AllZone.GameAction.getPlayerLife(opponent).addLife(1);
 					}
 				};//Ability
 				ability.setStackDescription(lifeblood.getName()+" - Mountain was tapped, "+opponent+" gains 1 life.");
@@ -191,7 +191,7 @@ public class GameActionUtil {
 					@Override
 					public void resolve() {
 						//Lifetap controller (opponent in this case) gains 1 life
-						AllZone.GameAction.addLife(opponent, 1);
+						AllZone.GameAction.getPlayerLife(opponent).addLife(1);
 					}
 				};//Ability
 				ability.setStackDescription(lifetap.getName()+" - Forest was tapped, "+opponent+" gains 1 life.");
@@ -1611,7 +1611,7 @@ public class GameActionUtil {
 								}// if choice yes
 								else target = "Human"; // check for target of spell/abilities should be here
 							} else target = "Human"; // check for target of spell/abilities should be here
-							AllZone.GameAction.getPlayerLife(target).subtractLife(1);
+							AllZone.GameAction.getPlayerLife(target).subtractLife(1,card);
 							PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
 							life.addLife(1);
 
@@ -2968,7 +2968,7 @@ public class GameActionUtil {
 					if(cl.contains(card.getChosenColor())) {
 					Ability ability = new Ability(card, "0") {
 						public void resolve() {
-							AllZone.GameAction.getPlayerLife(c.getController()).subtractLife(1);                      
+							AllZone.GameAction.getPlayerLife(c.getController()).subtractLife(1,card);                      
 						} //resolve
 					};//ability
 					ability.setStackDescription(card.getName() + " - " + c.getController() + 
@@ -2995,11 +2995,12 @@ public class GameActionUtil {
 
 		for(int i = 0; i < list.size(); i++) {
 			Card c = list.get(i);
+			final Card F_card = c;
 			final Ability ability = new Ability(c, "0") {
 				@Override
 				public void resolve() {
 
-					AllZone.GameAction.getPlayerLife(player_d).subtractLife(1);
+					AllZone.GameAction.getPlayerLife(player_d).subtractLife(1,F_card);
 				}
 			};
 			ability.setStackDescription(list.get(i) + " - Deals 1 damage to him or her");
@@ -3051,7 +3052,7 @@ public class GameActionUtil {
 
 						Object q = AllZone.Display.getChoiceOptional("Select computer as target?", choices);
 						if(q != null && q.equals("Yes")) AllZone.GameAction.getPlayerLife(Constant.Player.Computer).subtractLife(
-								1);
+								1,crd);
 						else {
 							CardList cards = new CardList(oppPlay.getCards());
 							CardList oppCreatures = new CardList();
@@ -3077,7 +3078,7 @@ public class GameActionUtil {
 							if(AllZone.GameAction.isCardInPlay(getTargetCard())
 									&& CardFactoryUtil.canTarget(crd, getTargetCard())) getTargetCard().addDamage(
 											1, crd);
-						} else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1);
+						} else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1,crd);
 					}
 				}//resolve()
 			};//SpellAbility
@@ -3463,7 +3464,7 @@ public class GameActionUtil {
 					if(c.getName().equals("Cosmic Horror")) {
 						String player = c.getController();
 						PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-						life.subtractLife(7);
+						life.subtractLife(7,c);
 					}
 					AllZone.GameAction.destroy(c);
 				}
@@ -3536,7 +3537,7 @@ public class GameActionUtil {
 					//AllZone.GameAction.sacrifice(c);
 					String player = c.getController();
 					PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-					life.subtractLife(c.getUpkeepDamage());
+					life.subtractLife(c.getUpkeepDamage(),c);
 				}
 			};
 
@@ -4233,7 +4234,7 @@ public class GameActionUtil {
 			public void resolve() {
 				String player = crd.getController();
 				PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-				life.subtractLife(2);
+				life.subtractLife(2,crd);
 			}
 		};
 		ability.setStackDescription("Dingus Staff - Deals 2 damage to " + destroyed.getController() + ".");
@@ -4353,7 +4354,7 @@ public class GameActionUtil {
 			public void resolve() {
 				String player = crd.getController();
 				PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-				life.subtractLife(2);
+				life.subtractLife(2,crd);
 			}
 		};
 		ability.setStackDescription("Dingus Egg - Deals 2 damage to " + destroyed.getController() + ".");
@@ -4540,7 +4541,7 @@ public class GameActionUtil {
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(valakutCard, getTargetCard())) getTargetCard().addDamage(3,
                             valakutCard);
-                } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(3);
+                } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(3,valakutCard);
             }//resolve()
 
         };
@@ -4648,7 +4649,7 @@ public class GameActionUtil {
 			@Override
 			public void resolve() {
 				PlayerLife life = AllZone.GameAction.getPlayerLife(AllZone.GameAction.getOpponent(crd.getController()));
-				life.subtractLife(3);
+				life.subtractLife(3,crd);
 				crd.addCounter(Counters.P1P1, 3);
 			}
 		};
@@ -4927,7 +4928,7 @@ public class GameActionUtil {
 				if(target != null)
 					target.addDamage(2, src);
 				else 
-					AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(2);
+					AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(2,src);
 				
 				AllZone.GameAction.drawCard(src.getController());
 			}
@@ -5023,7 +5024,12 @@ public class GameActionUtil {
     }
 
 	public static void executePlayerCombatDamageEffects(Card c) {
-
+		// Whenever Keyword
+    	Object[] DealsDamage_Whenever_Parameters = new Object[3];
+    	DealsDamage_Whenever_Parameters[0] = AllZone.GameAction.getOpponent(c.getController());
+    	DealsDamage_Whenever_Parameters[2] = c;
+    	AllZone.GameAction.CheckWheneverKeyword(c, "DealsDamage/Opponent", DealsDamage_Whenever_Parameters);
+    	
 		if(c.getKeyword().contains("Whenever this creature deals damage to a player, that player gets a poison counter.")) 
 			playerCombatDamage_PoisonCounter(c, 1);
 
@@ -5365,7 +5371,7 @@ public class GameActionUtil {
 	private static void playerCombatDamage_lose_halflife_up(Card c) {
 		final String player = c.getController();
 		final String opponent = AllZone.GameAction.getOpponent(player);
-
+		final Card F_card = c;
 		if(c.getNetAttack() > 0) {
 			Ability ability2 = new Ability(c, "0") {
 				@Override
@@ -5385,7 +5391,7 @@ public class GameActionUtil {
 
 						x = (AllZone.Human_Life.getLife() / 2) + y;
 					}
-					AllZone.GameAction.getPlayerLife(opponent).subtractLife(x);
+					AllZone.GameAction.getPlayerLife(opponent).subtractLife(x,F_card);
 
 				}
 			};// ability2
@@ -6639,7 +6645,7 @@ public class GameActionUtil {
 			// System.out.println("top of deck: " + library.get(i).getName());
 			String creatureType = library.get(0).getType().toString();
 			String cardName = library.get(0).getName();
-
+			final Card F_card = list.get(i);
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
@@ -6650,7 +6656,7 @@ public class GameActionUtil {
 
 					if(creatureType.contains("Faerie") || creatureType.contains("Wizard")
 							|| library.get(0).getKeyword().contains("Changeling")) {
-						AllZone.GameAction.getPlayerLife(opponent).subtractLife(2);
+						AllZone.GameAction.getPlayerLife(opponent).subtractLife(2,F_card);
 					}
 
 				}// resolve()
@@ -6834,13 +6840,13 @@ public class GameActionUtil {
 			// System.out.println("top of deck: " + library.get(i).getName());
 			final int convertedManaCost = CardUtil.getConvertedManaCost(library.get(i).getManaCost());
 			String cardName = library.get(i).getName();
-
+			final Card F_card = list.get(i);
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
 					PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
 					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-					AllZone.GameAction.getPlayerLife(player).subtractLife(convertedManaCost);
+					AllZone.GameAction.getPlayerLife(player).subtractLife(convertedManaCost,F_card);
 
 					// AllZone.GameAction.drawCard(player);
 					// !!!can't just draw card, since it won't work with jpb's
@@ -7722,10 +7728,11 @@ public class GameActionUtil {
 
 		Ability ability;
 		for(int i = 0; i < list.size(); i++) {
+			final Card F_card = list.get(i);
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+					AllZone.GameAction.getPlayerLife(player).subtractLife(1,F_card);
 				}
 			};// Ability
 			ability.setStackDescription("Copper Tablet - deals 1 damage to " + player);
@@ -7961,10 +7968,11 @@ public class GameActionUtil {
 
 		Ability ability;
 		for(int i = 0; i < list.size(); i++) {
+			final Card F_card = list.get(i);
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.getPlayerLife(player).subtractLife(2);
+					AllZone.GameAction.getPlayerLife(player).subtractLife(2,F_card);
 				}
 			};
 
@@ -7992,6 +8000,7 @@ public class GameActionUtil {
 			Ability ability;
 			for(int i = 0; i < list.size(); i++) {
 				enchants = list.get(i).getEnchantedBy();
+				final Card F_card = list.get(i);
 				for(Card enchant:enchants) {
 					if(enchant.getName().equals("Cursed Land")) {
 						//final Card c = enchant;
@@ -8000,7 +8009,7 @@ public class GameActionUtil {
 							@Override
 							public void resolve() {
 								//if (c.getController().equals(player))
-								AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+								AllZone.GameAction.getPlayerLife(player).subtractLife(1,F_card);
 							}
 						};
 
@@ -8033,6 +8042,7 @@ public class GameActionUtil {
 			ArrayList<Card> enchants;
 			Ability ability;
 			for(int i = 0; i < list.size(); i++) {
+				final Card F_card = list.get(i);
 				enchants = list.get(i).getEnchantedBy();
 				for(Card enchant:enchants) {
 					if(enchant.getName().equals("Pillory of the Sleepless")) {
@@ -8041,7 +8051,7 @@ public class GameActionUtil {
 							@Override
 							public void resolve() {
 								//if (c.getController().equals(player))
-								AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+								AllZone.GameAction.getPlayerLife(player).subtractLife(1,F_card);
 							}
 						};
 						ability.setStackDescription("Pillory of the Sleepless deals one damage to enchanted creature's controller.");
@@ -8112,7 +8122,7 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+					AllZone.GameAction.getPlayerLife(player).subtractLife(1,crd);
 					CardFactoryUtil.makeToken("Faerie Rogue", "B 1 1 Faerie Rogue", crd, "B", new String[] {
 							"Creature", "Faerie", "Rogue"}, 1, 1, new String[] {"Flying"});
 				}// resolve()
@@ -8310,10 +8320,11 @@ public class GameActionUtil {
 
 		if(blaze.size() > 0) {
 			final int lands = blaze.size();
+			final Card F_card = blaze.get(0); // Quick Fix, will improve later
 			Ability ability = new Ability(blaze.get(0), "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.getPlayerLife(player).subtractLife(lands);
+					AllZone.GameAction.getPlayerLife(player).subtractLife(lands,F_card);
 				}
 			};
 			ability.setStackDescription("Obsidian Fireheart - " + player + " gets dealt " + lands + " damage.");
@@ -8781,13 +8792,13 @@ public class GameActionUtil {
 				Card c = list.get(i);
 				String[] choices = {"Yes", "No"};
 				Object choice = AllZone.Display.getChoice("Pay Carnophage's upkeep?", choices);
-				if(choice.equals("Yes")) AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+				if(choice.equals("Yes")) AllZone.GameAction.getPlayerLife(player).subtractLife(1,c);
 				else c.tap();
 			}
 		}
 		if(player == "Computer") for(int i = 0; i < list.size(); i++) {
 			Card c = list.get(i);
-			if(AllZone.Computer_Life.getLife() > 1) AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+			if(AllZone.Computer_Life.getLife() > 1) AllZone.GameAction.getPlayerLife(player).subtractLife(1,c);
 			else c.tap();
 		}
 	}// upkeep_Carnophage
@@ -8805,13 +8816,13 @@ public class GameActionUtil {
 				Card c = list.get(i);
 				String[] choices = {"Yes", "No"};
 				Object choice = AllZone.Display.getChoice("Pay Sangrophage's upkeep?", choices);
-				if(choice.equals("Yes")) AllZone.GameAction.getPlayerLife(player).subtractLife(2);
+				if(choice.equals("Yes")) AllZone.GameAction.getPlayerLife(player).subtractLife(2,c);
 				else c.tap();
 			}
 		}
 		if(player == "Computer") for(int i = 0; i < list.size(); i++) {
 			Card c = list.get(i);
-			if(AllZone.Computer_Life.getLife() > 2) AllZone.GameAction.getPlayerLife(player).subtractLife(2);
+			if(AllZone.Computer_Life.getLife() > 2) AllZone.GameAction.getPlayerLife(player).subtractLife(2,c);
 			else c.tap();
 		}
 	}// upkeep_Carnophage
@@ -8826,8 +8837,9 @@ public class GameActionUtil {
 		list = list.getName("Phyrexian Arena");
 
 		for(int i = 0; i < list.size(); i++) {
+			final Card F_card = list.get(i);
 			AllZone.GameAction.drawCard(player);
-			AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+			AllZone.GameAction.getPlayerLife(player).subtractLife(1,F_card);
 
 			AllZone.GameAction.checkStateEffects();
 		}
@@ -8973,7 +8985,7 @@ public class GameActionUtil {
 
 						Object q = AllZone.Display.getChoiceOptional("Select computer as target?", choices);
 						if(q != null && q.equals("Yes")) AllZone.GameAction.getPlayerLife(Constant.Player.Computer).subtractLife(
-								hondlist.size());
+								hondlist.size(),card);
 						else {
 							CardList cards = new CardList(oppPlay.getCards());
 							CardList oppCreatures = new CardList();
@@ -9007,7 +9019,7 @@ public class GameActionUtil {
 						if(targetc != null) {
 							if(AllZone.GameAction.isCardInPlay(targetc)) targetc.addDamage(hondlist.size(), card);
 						} else AllZone.GameAction.getPlayerLife(Constant.Player.Human).subtractLife(
-								hondlist.size());
+								hondlist.size(),card);
 					}
 				}//resolve()
 			};//SpellAbility
@@ -9064,11 +9076,11 @@ public class GameActionUtil {
 		list = list.getName("Seizan, Perverter of Truth");
 
 		if(list.size() == 0) return;
-
+		final Card F_card = list.get(0);
 		Ability ability = new Ability(list.get(0), "0") {
 			@Override
 			public void resolve() {
-				AllZone.GameAction.getPlayerLife(player).subtractLife(2);
+				AllZone.GameAction.getPlayerLife(player).subtractLife(2,F_card);
 			}
 		};
 		ability.setStackDescription("Seizan, Perverter of Truth - " + player + " loses 2 life and draws 2 cards");
@@ -9090,7 +9102,8 @@ public class GameActionUtil {
 		list = list.getName("Moroii");
 
 		for(int i = 0; i < list.size(); i++) {
-			AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+			final Card F_card = list.get(i);
+			AllZone.GameAction.getPlayerLife(player).subtractLife(1,F_card);
 		}
 	}// upkeep_Moroii
 
@@ -9104,11 +9117,12 @@ public class GameActionUtil {
 		list = list.getName("Vampire Lacerator");
 
 		for(int i = 0; i < list.size(); i++) {
+			final Card F_card = list.get(i);
 			if(player == "Human" && AllZone.Computer_Life.getLife() > 10) {
-				AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+				AllZone.GameAction.getPlayerLife(player).subtractLife(1,F_card);
 			} else {
 				if(player == "Computer" && AllZone.Human_Life.getLife() > 10) {
-					AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+					AllZone.GameAction.getPlayerLife(player).subtractLife(1,F_card);
 				}
 			}
 		}
@@ -9124,10 +9138,11 @@ public class GameActionUtil {
 		Ability ability;
 		for(int i = 0; i < list.size(); i++) {
 			if(!list.get(i).isFaceDown()) {
+				final Card F_card = list.get(i);
 				ability = new Ability(list.get(i), "0") {
 					@Override
 					public void resolve() {
-						AllZone.GameAction.getPlayerLife(player).subtractLife(2);
+						AllZone.GameAction.getPlayerLife(player).subtractLife(2,F_card);
 					}
 				};// Ability
 				ability.setStackDescription("Grinning Demon - " + player + " loses 2 life");

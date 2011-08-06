@@ -35,9 +35,22 @@ public class PlayerLife extends MyObservable implements java.io.Serializable
     	AllZone.GameAction.CheckWheneverKeyword(WhoGainedLife, "GainLife", Life_Whenever_Parameters);
     	this.updateObservers();
     }
-    public void subtractLife(int life2)
+    public void subtractLife(int life2, Card SourceCard)
     {
+    	Card WhoGainedLife = new Card();
+    	if(AllZone.Human_Life.getLife() != AllZone.Computer_Life.getLife()) {
+    	if(AllZone.Human_Life.getLife() == life) WhoGainedLife = AllZone.CardFactory.HumanNullCard;
+    	else WhoGainedLife = AllZone.CardFactory.ComputerNullCard;
+    	}
     	life -= life2;
+    	if(WhoGainedLife != AllZone.CardFactory.HumanNullCard && WhoGainedLife != AllZone.CardFactory.ComputerNullCard) {
+        if(AllZone.Human_Life.getLife() == life) WhoGainedLife = AllZone.CardFactory.HumanNullCard;
+        else WhoGainedLife = AllZone.CardFactory.ComputerNullCard;	
+    	}
+    	Object[] DealsDamage_Whenever_Parameters = new Object[3];
+    	DealsDamage_Whenever_Parameters[0] = WhoGainedLife.getController();
+    	DealsDamage_Whenever_Parameters[2] = SourceCard;
+    	AllZone.GameAction.CheckWheneverKeyword(WhoGainedLife, "DealsDamage/Opponent", DealsDamage_Whenever_Parameters);
     	this.updateObservers();
     }
 }

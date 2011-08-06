@@ -696,8 +696,16 @@ public class GameAction {
  		}
  		}	
     }
+    
 	static boolean MultiTarget_Cancelled = false;
     public void RunWheneverKeyword(Card c, String Event, Object[] Custom_Parameters) { 
+    	/**
+    	 * Bugs: Combat Damage is recorded, probably due to quick fixes.
+    	 * Custom_Parameters Info: 
+    	 * For GainLife		: Custom_Parameters[0] = Amount of Life Gained
+    	 * For DealsDamage	: Custom_Parameters[0] = Player Target
+    	 * 					: Custom_Parameters[2] = Damage Source
+    	 */
 		final Card F_TriggeringCard = c;
  		CardList Cards_In_Play = new CardList();
  		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
@@ -727,10 +735,23 @@ public class GameAction {
                 	 || (k[1].equals("BeginningOfEndStep")) && Event.equals("BeginningOfEndStep")
                 	 || (k[1].equals("Attacks")) && Event.equals("Attacks")
                 	 || (k[1].equals("EntersBattleField")) && Event.equals("EntersBattleField")
+                	 || (k[1].contains("DealsDamage")) && Event.contains("DealsDamage")
                 	 || (k[1].equals("GainLife")) && Event.equals("GainLife") && c.getController().equals(card.getController()))
                 		 {      
+                    if(k[1].contains("DealsDamage")) {
+                    	boolean Nullified = true;
+                        String DamageTakerParse = k[1];                
+                        String DamageTaker[] = DamageTakerParse.split("/");
+                        for(int z = 0; z < DamageTaker.length - 1; z++) {
+                        	if(DamageTaker[z + 1].equals("Opponent") && ((String)Custom_Parameters[0]).equals(getOpponent(card.getController()))) Nullified = false;  
+                        }
+                        if(Nullified == true) k[4] = "Null";   
+                        }
                     if(k[2].contains("Self")) {
                     	if(!card.equals(c)) k[4] = "Null";    
+                        }
+                    if(k[2].contains("Enchanted_Creature")) {
+                    	if(((Card)Custom_Parameters[2]).isEnchantedBy(card.getName()) == false) k[4] = "Null";    
                         }
                    	if(k[2].contains("Type")) {
                         String TypeParse = k[2];                
@@ -830,7 +851,7 @@ public class GameAction {
     			                      if(Go == true) if(AllZone.GameAction.isCardInPlay(F_card)) {
     			          				PlayerLife life = AllZone.GameAction.getPlayerLife(F_TargetPlayer);
     			        				if(F_Amount > -1) life.addLife(F_Amount);
-    			        				else life.subtractLife(F_Amount * -1);
+    			        				else life.subtractLife(F_Amount * -1,F_card);
     			                      }
                     			}
                             		}
@@ -845,6 +866,50 @@ public class GameAction {
                     		}
                             
                 		}
+                		
+                		// Draw Cards
+                		if(k[4].contains("DrawCards")) {
+                            String AmountParse = k[4];                
+                            String S_Amount = AmountParse.split("/")[1];
+                            int I_Amount = 0;
+                            if(S_Amount.equals("Toughness")) I_Amount = F_TriggeringCard.getNetDefense(); // LOL wut
+                            else I_Amount = Integer.valueOf(S_Amount);
+                            final int F_Amount = I_Amount;
+                    		Ability ability = new Ability(card, "0") {
+                    			@Override
+                    			public void resolve() {
+                    				boolean Go = true;
+                            		if(F_k[3].equals("Play")) {
+                            			PlayerZone Required_Zone = AllZone.getZone(Constant.Zone.Play, F_TargetPlayer);
+                                		if(AllZone.GameAction.isCardInZone(F_card,Required_Zone)) {
+                    				if(F_k[7].equals("Yes_No")) {
+        				        	if(F_TargetPlayer.equals("Human")) {
+        					        	Object[] possibleValues = {"Yes", "No"};
+        					        	Object q = JOptionPane.showOptionDialog(null, "Activate - " + F_card.getName(),F_card.getName() + " Ability", 
+        					        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+        					        			null, possibleValues, possibleValues[0]);
+        			                      if(q.equals(1)) {
+        			                    	  Go = false;
+        				                    }
+        				        	}
+                    				}
+    			                      if(Go == true) if(AllZone.GameAction.isCardInPlay(F_card)) {
+    			                    	  AllZone.GameAction.drawCard(F_TargetPlayer);
+    			                      }
+                    			}
+                            		}
+                    			}
+                    		};
+                    		ability.setStackDescription(F_card + " - " + F_card.getController() + " draws " + F_Amount + " card(s).");
+                    		if(k[3].equals("Play")) {
+                    			PlayerZone Required_Zone = AllZone.getZone(Constant.Zone.Play, F_TargetPlayer);
+                        		if(AllZone.GameAction.isCardInZone(F_card,Required_Zone)) {
+                        			if(k[6].equals("ASAP")) AllZone.Stack.add(ability);
+                        		}
+                    		}
+                            
+                		}
+                		
                 		// Deal Damage
                 		if(k[4].contains("Damage")) {
                             String AmountParse = k[4];                
@@ -890,11 +955,11 @@ public class GameAction {
             			                                  AllZone.GameAction.addDamage(c, F_card, F_Amount);
             			                              }
             			                          } else {
-            			                             AllZone.GameAction.addDamage( (String) Targets[z], F_Amount);
+            			                             AllZone.GameAction.addDamage( (String) Targets[z], F_Amount,F_card);
             			                          }
             			                      }
             			                      }
-            			                    	  if(F_card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.addDamage(Constant.Player.Human, F_Amount*F_Multiple_Targets);
+            			                    	  if(F_card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.addDamage(Constant.Player.Human, F_Amount*F_Multiple_Targets,F_card);
                             			}
                                         		}
                                     		}
@@ -2449,19 +2514,18 @@ public class GameAction {
     	  AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
     }
     */
-
+/**
     public void addLife(String player, int life) {
         // place holder for future life gain modification rules
         
         getPlayerLife(player).addLife(life);
     }
-    
     public void subLife(String player, int life) {
         // place holder for future life loss modification rules
         
         getPlayerLife(player).subtractLife(life);
     }
-    
+    **/
     public void addDamage(String player, int damage, Card source) {
         // place holder for future damage modification rules (prevention?)
         
@@ -2471,17 +2535,17 @@ public class GameAction {
         for(Card c:cl) {
             GameActionUtil.executeGuiltyConscienceEffects(source, c, damage);
         }
-        getPlayerLife(player).subtractLife(damage);
+        getPlayerLife(player).subtractLife(damage,source);
     }
-    
+    /**
     public void addDamage(String player, int damage) {
         // place holder for future damage modification rules (prevention?)
         
         getPlayerLife(player).subtractLife(damage);
     }
-    
+    **/
     public void addDamage(String player, Card source, int damage) {
-        getPlayerLife(player).subtractLife(damage);
+        getPlayerLife(player).subtractLife(damage,source);
         
         if(source.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(source, damage);
         

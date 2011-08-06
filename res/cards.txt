@@ -1,3 +1,11 @@
+Curiosity
+U
+Enchantment Aura
+no text
+Enchant creature
+enPump:+0/+0
+WheneverKeyword:DealsDamage/Opponent:Enchanted_Creature:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever enchanted creature deals damage to an opponent, you may draw a card.
+
 Pyretic Ritual
 1 R
 Instant

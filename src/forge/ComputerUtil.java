@@ -390,7 +390,7 @@ public class ComputerUtil
       else
       {
     	  if (CardFactoryUtil.getFastbonds(Constant.Player.Computer).size() > 0)
-    		  AllZone.GameAction.getPlayerLife(Constant.Player.Computer).subtractLife(1);
+    		  AllZone.GameAction.getPlayerLife(Constant.Player.Computer).subtractLife(1,CardFactoryUtil.getFastbonds(Constant.Player.Computer).get(0));
       }
       
       AllZone.GameAction.checkStateEffects();

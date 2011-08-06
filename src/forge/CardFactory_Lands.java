@@ -108,7 +108,7 @@ class CardFactory_Lands {
                     
                     if(AllZone.Computer_Life.getLife() > 9) pay = MyRandom.random.nextBoolean();
                     
-                    if(pay) AllZone.Computer_Life.subtractLife(2);
+                    if(pay) AllZone.Computer_Life.subtractLife(2,card);
                     else card.tap();
                 }
                 
@@ -117,7 +117,7 @@ class CardFactory_Lands {
                     if(2 < life.getLife()) {
                         String[] choices = {"Yes", "No"};
                         Object o = AllZone.Display.getChoice("Pay 2 life?", choices);
-                        if(o.equals("Yes")) life.subtractLife(2);
+                        if(o.equals("Yes")) life.subtractLife(2,card);
                         else tapCard();
                     }//if
                     else tapCard();
@@ -1323,7 +1323,7 @@ class CardFactory_Lands {
                     if(once) {
                         once = false;
                         String player = card.getController();
-                        AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+                        AllZone.GameAction.getPlayerLife(player).subtractLife(1,card);
                         AllZone.GameAction.sacrifice(card);
                         
                         ability.setStackDescription(card.getController() + " - Search your library for a "
@@ -3350,7 +3350,7 @@ class CardFactory_Lands {
                    
                     if(c != null) {
                         if(CardFactoryUtil.canTarget(card, c) && c.isCreature() ) {
-                           AllZone.GameAction.addLife(c.getController(),c.getNetDefense());
+                        	AllZone.GameAction.getPlayerLife(c.getController()).addLife(c.getNetDefense());
                            AllZone.GameAction.sacrifice(c);
                         }
                     }

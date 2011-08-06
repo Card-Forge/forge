@@ -33,7 +33,7 @@ public class Input_Main extends Input {
                 CardList fastbonds = CardFactoryUtil.getFastbonds(Constant.Player.Human);
                 if(fastbonds.size() > 0) {
                     if(AllZone.GameInfo.humanPlayedFirstLandThisTurn()) {
-                        AllZone.GameAction.getPlayerLife(Constant.Player.Human).subtractLife(1);
+                        AllZone.GameAction.getPlayerLife(Constant.Player.Human).subtractLife(1,fastbonds.get(0));
                     }
                 }
                 InputUtil.playAnyCard(card, zone);

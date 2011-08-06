@@ -520,7 +520,7 @@ class CardFactory_Planeswalkers {
                     CardList oppPerms = new CardList(play.getCards());
                     
                     PlayerLife life = AllZone.GameAction.getPlayerLife(opponent);
-                    life.subtractLife(7);
+                    life.subtractLife(7,card2);
                     
                     for(int j = 0; j < 7; j++) {
                         //will not actually let human choose which cards to discard
@@ -1304,7 +1304,7 @@ class CardFactory_Planeswalkers {
 
                     else {
                         PlayerLife life = AllZone.GameAction.getPlayerLife(getTargetPlayer());
-                        life.subtractLife(1);
+                        life.subtractLife(1,card2);
                     }
                 }
                 
@@ -1464,7 +1464,7 @@ class CardFactory_Planeswalkers {
                     turn[0] = AllZone.Phase.getTurn();
                     
                     PlayerLife life = AllZone.GameAction.getPlayerLife(getTargetPlayer());
-                    life.subtractLife(10);
+                    life.subtractLife(10,card2);
                     
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, getTargetPlayer());
                     CardList list = new CardList(play.getCards());
@@ -2060,7 +2060,7 @@ class CardFactory_Planeswalkers {
                             Card c = getTargetCard();
                             c.addDamage(damage, card2);
                         }
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
+                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage,card2);
                     AllZone.GameAction.getPlayerLife(card2.getController()).addLife(3);
                 }
                 
