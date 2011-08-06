@@ -17,6 +17,7 @@ public class GameActionUtil {
 		upkeep_TabernacleUpkeepCost();
 		upkeep_MagusTabernacleUpkeepCost();
 		// upkeep_CheckEmptyDeck_Lose(); //still a little buggy
+		upkeep_Genesis();
 		upkeep_Phyrexian_Arena();
 		upkeep_Carnophage();
 		upkeep_Sangrophage();
@@ -2679,6 +2680,77 @@ public class GameActionUtil {
 			}
 		}
 	}//damageUpkeepCost
+	
+	public static void upkeep_Genesis() {
+		final String player = AllZone.Phase.getActivePlayer();
+		final CardList grave = AllZoneUtil.getPlayerGraveyard(player, "Genesis");
+
+		for(int i = 0; i < grave.size(); i++) {
+			final Card c = grave.get(i);
+
+			final Ability ability = new Ability(c, "2 G") {
+				CardListFilter creatureFilter = new CardListFilter() {
+					public boolean addCard(Card c) {
+						return c.isCreature();
+					}
+				};
+				@Override
+				public void resolve() {
+					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+					PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
+					if(player.equals("Human") && grave.size() > 0) {
+							CardList creatures = AllZoneUtil.getPlayerGraveyard(player);
+							creatures = creatures.filter(creatureFilter);
+							Object creatureChoice = AllZone.Display.getChoice("Creature to move to hand", creatures.toArray());
+							Card creatureCard = (Card) creatureChoice;
+	                        graveyard.remove(creatureCard);
+	                        hand.add(creatureCard);
+						//}//end choice="Yes"
+					}
+					else{ //computer resolve
+						CardList compCreatures = AllZoneUtil.getPlayerGraveyard(player);
+						compCreatures = compCreatures.filter(creatureFilter);
+						Card target = CardFactoryUtil.AI_getBestCreature(compCreatures);
+						graveyard.remove(target);
+                        hand.add(target);
+					}
+				}
+			};
+
+			final Command unpaidCommand = new Command() {
+				private static final long serialVersionUID = 8969863703446141914L;
+
+				public void execute() {
+					;
+				}
+			};
+
+			final Command paidCommand = new Command() {
+				private static final long serialVersionUID = -5102763277280782548L;
+
+				public void execute() {
+					ability.setStackDescription(c.getName()+" - return 1 creature from your graveyard to your hand");
+					AllZone.Stack.add(ability);
+				}
+			};
+
+			//AllZone.Stack.add(ability);
+			if(c.getController().equals(Constant.Player.Human)) {
+				String[] choices = {"Yes", "No"};
+				Object choice = AllZone.Display.getChoice("Use Genesis?", choices);
+				if(choice.equals("Yes")) {
+				AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Pay cost for " + c + "\r\n",
+						ability.getManaCost(), paidCommand, unpaidCommand));
+				}
+			} else //computer
+			{
+				if(ComputerUtil.canPayCost(ability)) {
+					ability.setStackDescription(c.getName()+" - return 1 creature from your graveyard to your hand");
+					AllZone.Stack.add(ability);
+				}
+			}
+		}
+	}//upkeep_Genesis
 
 	//END UPKEEP CARDS
 

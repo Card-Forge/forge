@@ -94,4 +94,22 @@ public class AllZoneUtil {
 		}
 		return cards;
 	}
+	
+	//////////GRAVEYARD
+	
+	public static CardList getPlayerGraveyard(final String player) {
+		CardList cards = new CardList();
+		if( player.equals(Constant.Player.Human) || player.equals(Constant.Player.Computer) ){
+			PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+			cards.addAll(grave.getCards());
+		}
+		return cards;
+	}
+	
+	public static CardList getPlayerGraveyard(final String player, final String cardName) {
+		CardList cards = new CardList();
+		cards = getPlayerGraveyard(player);
+		cards = cards.getName(cardName);
+		return cards;
+	}
 }
