@@ -1575,7 +1575,7 @@ class CardFactory_Equipment {
 	             {
 	                Card crd = card.getEquipping().get(0);
 	                
-	                crd.addSemiPermanentDefenseBoost(1);
+	                crd.addSemiPermanentAttackBoost(1);
 	             } 
 	           }//execute()
 	       };//Command
@@ -1592,7 +1592,7 @@ class CardFactory_Equipment {
 	             {
 	                Card crd = card.getEquipping().get(0);
 	                
-	                crd.addSemiPermanentDefenseBoost(-1);
+	                crd.addSemiPermanentAttackBoost(-1);
 	                   
 	             }
 	            

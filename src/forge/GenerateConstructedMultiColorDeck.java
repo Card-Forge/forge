@@ -406,6 +406,7 @@ public class GenerateConstructedMultiColorDeck
       
     //cards the AI cannot play (effectively):
     
+    remove.add("Necropotence");
     remove.add("Sensei's Divining Top");
     remove.add("Standstill");
     //remove.add("Counterspell");

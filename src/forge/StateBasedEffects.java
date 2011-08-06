@@ -98,6 +98,10 @@ public class StateBasedEffects
 		cardToEffectsList.put("Radiant, Archangel", new String[] {"Radiant_Archangel"});
 		cardToEffectsList.put("Castle", new String[] {"Castle"});
 		cardToEffectsList.put("Castle Raptors", new String[] {"Castle_Raptors"});
+		cardToEffectsList.put("Levitation", new String[] {"Levitation"});
+		cardToEffectsList.put("Knighthood", new String[] {"Knighthood"});
+		cardToEffectsList.put("Absolute Law", new String[] {"Absolute_Law"});
+		cardToEffectsList.put("Absolute Grace", new String[] {"Absolute_Grace"});
 		cardToEffectsList.put("Mobilization", new String[] {"Mobilization"});
 		cardToEffectsList.put("Serra's Blessing", new String[] {"Serras_Blessing"});
 		cardToEffectsList.put("Cover of Darkness", new String[] {"Cover_of_Darkness"});

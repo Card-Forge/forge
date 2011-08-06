@@ -20,9 +20,11 @@ public class Deck implements Serializable {
     
     private String            deckType;
     
+    /*
     private boolean           isRegular;
     private boolean           isSealed;
     private boolean           isDraft;
+    */
     
     private ArrayList<String> main;
     private ArrayList<String> sideboard;

@@ -18,6 +18,7 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+benalish_trapper.jpg		http://www.wizards.com/global/images/magic/general/benalish_trapper.jpg
 merfolk_looter.jpg			http://www.wizards.com/global/images/magic/general/merfolk_looter.jpg
 thornscape_apprentice.jpg	http://www.wizards.com/global/images/magic/general/thornscape_apprentice.jpg
 scepter_of_insight.jpg		http://www.wizards.com/global/images/magic/general/scepter_of_insight.jpg
@@ -58,7 +59,6 @@ azorius_first_wing.jpg		http://www.wizards.com/global/images/magic/general/azori
 bant_sureblade.jpg			http://www.wizards.com/global/images/magic/general/bant_sureblade.jpg
 bartel_runeaxe.jpg			http://www.wizards.com/global/images/magic/general/bartel_runeaxe.jpg
 benalish_heralds.jpg		http://www.wizards.com/global/images/magic/general/benalish_heralds.jpg
-benalish_hero.jpg			http://www.wizards.com/global/images/magic/general/benalish_hero.jpg
 boris_devilboon.jpg			http://www.wizards.com/global/images/magic/general/boris_devilboon.jpg
 buoyancy.jpg				http://www.wizards.com/global/images/magic/general/buoyancy.jpg
 dakkon_blackblade.jpg		http://www.wizards.com/global/images/magic/general/dakkon_blackblade.jpg

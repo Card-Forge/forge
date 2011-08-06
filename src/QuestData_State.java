@@ -28,7 +28,6 @@ public class QuestData_State implements Serializable {
     ArrayList<String>         cardPool;
     HashMap<String, Deck>     myDecks, aiDecks;
     
-    @SuppressWarnings("unchecked")
     private Object readResolve() throws ObjectStreamException {
 //        System.out.println("resolving obsolete QuestData_State");
         Map<String, forge.Deck> myDecks = new HashMap<String, forge.Deck>();

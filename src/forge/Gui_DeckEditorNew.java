@@ -47,6 +47,7 @@ import forge.properties.NewConstants.LANG;
  * @version V0.0 24.10.2009
  * @author Clemens Koza
  */
+@SuppressWarnings("unused")
 public class Gui_DeckEditorNew extends JFrame implements CardDetail, NewConstants.GUI.GuiDeckEditor {
 	private static final long serialVersionUID = 680850452718332565L;
 
@@ -64,7 +65,7 @@ public class Gui_DeckEditorNew extends JFrame implements CardDetail, NewConstant
 //        jf.pack();
         jf.setVisible(true);
     }
-    
+	
     Gui_DeckEditor_Menu    customMenu;
     
     private ImageIcon      upIcon               = Constant.IO.upIcon;
@@ -73,7 +74,7 @@ public class Gui_DeckEditorNew extends JFrame implements CardDetail, NewConstant
     private JScrollPane    jScrollPane1         = new JScrollPane();
     private JScrollPane    jScrollPane2         = new JScrollPane();
     private JButton        removeButton         = new JButton();
-    @SuppressWarnings("unused")
+    
     // border1
     private Border         border1;
     private TitledBorder   titledBorder1;
@@ -766,7 +767,6 @@ public class Gui_DeckEditorNew extends JFrame implements CardDetail, NewConstant
     }//removeButton_actionPerformed
     */
 
-    @SuppressWarnings("unused")
     private void stats_actionPerformed(CardList list) {
 
     }
@@ -812,7 +812,9 @@ public class Gui_DeckEditorNew extends JFrame implements CardDetail, NewConstant
     */
 
     public abstract static class CardPoolModel extends AbstractTableModel {
-        private static final String[]   labels    = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "R"};
+		private static final long serialVersionUID = 7773113247062724912L;
+		
+		private static final String[]   labels    = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "R"};
         private static final Class<?>[] classes   = {Integer.class, String.class, String.class, String.class};
         //values taken from TableModel
         private static final int[]      minWidth  = {-1, 190, 85, -1, -1, -1, -1};

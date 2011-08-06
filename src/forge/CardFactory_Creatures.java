@@ -18,7 +18,7 @@ public class CardFactory_Creatures {
 	public static Card getCard(final Card card, String cardName, String owner, CardFactory cf)
 	{
 		
-		 //*************** START *********** START **************************
+		//*************** START *********** START **************************
 	    if(cardName.equals("Filthy Cur"))
 	    {
 	      final Card newCard = new Card()
@@ -4073,7 +4073,6 @@ public class CardFactory_Creatures {
 	        ability.setDescription("B R G, Tap: Return target creature card from your graveyard to your hand.");
 	        ability.setStackDescription(cardName + " - return target creature from your graveyard to your hand.");
 	        
-	        card.clearSpellAbility();
 	        card.addSpellAbility(ability);
 	    
 	    
@@ -7658,7 +7657,7 @@ public class CardFactory_Creatures {
 	      else if(cardName.equals("Xira Arien"))
 	      {
 	        //mana tap ability
-	        final Ability_Tap ability = new Ability_Tap(card, "G R B")
+	        final Ability_Tap ability = new Ability_Tap(card, "B R G")
 	        {
 
 	  		private static final long serialVersionUID = 5373361883064666451L;
@@ -7686,7 +7685,7 @@ public class CardFactory_Creatures {
 	          }
 	        };//SpellAbility
 
-	        ability.setDescription("Tap: Target player draws a card.");
+	        ability.setDescription("B R G, Tap: Target player draws a card.");
 	        //ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
 	        ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
 
@@ -15433,8 +15432,86 @@ public class CardFactory_Creatures {
 		    }
 		    //*************** END ************ END **************************
 	      
-	    
-	    
+	      
+
+	      //*************** START *********** START **************************
+	      else if(cardName.equals("Magus of the Disk"))
+	      {
+	        SpellAbility summoningSpell = new Spell_Permanent(card)
+	        {
+	  		private static final long serialVersionUID = 2510163318362956239L;
+
+	  		public boolean canPlayAI()
+	          {
+	            boolean nevinyrralInPlay = false;
+
+	            CardList inPlay = new CardList();
+	            inPlay.addAll(AllZone.Computer_Play.getCards());
+	            for(int i=0; i<inPlay.size(); ++i)
+	            {
+	              if( inPlay.getCard(i).getName().equals("Nevinyrral's Disk"))
+	              {
+	                nevinyrralInPlay = true;
+	              }
+	            }
+	            return ! nevinyrralInPlay && (0 < CardFactoryUtil.AI_getHumanCreature(card, false).size());
+	          }
+	        };
+	        card.clearSpellAbility();
+	        card.addSpellAbility(summoningSpell);
+
+	        card.addComesIntoPlayCommand(new Command()
+	        {
+	  		private static final long serialVersionUID = 1227443034730254929L;
+
+	  		public void execute()
+	          {
+	            card.tap();
+	          }
+	        });
+	        final SpellAbility ability = new Ability_Tap(card, "1")
+	        {
+	  		private static final long serialVersionUID = -4871606824998622131L;
+	  		
+	  		public void resolve()
+	          {
+	            CardList all = new CardList();
+	            all.addAll(AllZone.Human_Play.getCards());
+	            all.addAll(AllZone.Computer_Play.getCards());
+	            all = filter(all);
+
+	            for(int i = 0; i < all.size(); i++)
+	              AllZone.GameAction.destroy(all.get(i));
+	          }
+	          private CardList filter(CardList list)
+	          {
+	            return list.filter(new CardListFilter()
+	            {
+	              public boolean addCard(Card c)
+	              {
+	                return c.isArtifact() || c.isCreature() || c.isEnchantment();
+	              }
+	            });
+	          }//filter()
+	          public boolean canPlayAI()
+	          {
+	            CardList human    = new CardList(AllZone.Human_Play.getCards());
+	            CardList computer = new CardList(AllZone.Computer_Play.getCards());
+
+	            human    = human.getType("Creature");
+	            computer = computer.getType("Creature");
+
+	            //the computer will at least destroy 2 more human creatures
+	            return computer.size() < human.size()-1  || AllZone.Computer_Life.getLife() < 7;
+	          }
+	        };//SpellAbility
+	        card.addSpellAbility(ability);
+	        ability.setDescription("1, tap: Destroy all artifacts, creatures, and enchantments.");
+	        ability.setStackDescription("Destroy all artifacts, creatures, and enchantments.");
+	      }//*************** END ************ END **************************
+
+
+	      	    
 	      // Cards with Cycling abilities
 	      // -1 means keyword "Cycling" not found
 	      if (shouldCycle(card) != -1)

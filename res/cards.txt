@@ -9,14 +9,14 @@ G
 Creature Human Wizard
 no text
 1/1
-TgtKpump R T: First strike
+TgtKpump R T: First Strike
 
 Scepter of Insight
 1 U U
 Artifact
 no text
 
-Asha's favor
+Asha's Favor
 2 W
 Enchantment Aura
 Enchanted creature gains flying, first strike and vigilance.
@@ -29,7 +29,7 @@ no text
 0/1
 Exalted
 
-Blinding mage
+Blinding Mage
 1 W
 Creature Human Wizard
 no text
@@ -57,13 +57,13 @@ spDrawCards:Count$TypeOppCtrlTapped.Creature:Draw a card for each tapped creatur
 Cruel Bargain
 B B B
 Sorcery
-no text
+(NOTE: "You lose half your life, rounded up." is not implemented.)
 spDrawCards:4:Drawback$LoseLifeYou/Count$YourLifeTotal/HalfUp:Draw four cards.:You lose half your life, rounded up.:Cruel Bargain - Draw cards and lose half your life, rounded up.
 
 Infernal Contract
 B B B
 Sorcery
-no text
+(NOTE: "You lose half your life, rounded up." is not implemented.)
 spDrawCards:4:Drawback$LoseLifeYou/Count$YourLifeTotal/HalfUp:Draw four cards.:You lose half your life, rounded up.:Infernal Contract - Draw cards and lose half your life, rounded up.
 
 Theft of Dreams
@@ -100,7 +100,7 @@ Inspiration
 3 U
 Sorcery
 no text
-spDrawCards:2:Draw two cards.:Inspiration - draw 2 cards.
+spDrawCardsTgt:2:Target player draws two cards.:Inspiration - draw 2 cards.
 
 Concentrate
 2 U U
@@ -365,7 +365,7 @@ no text
 Sacred Nectar
 1 W
 Sorcery
-You gain 4 life.
+no text
 
 Maniacal Rage
 1 R
@@ -376,14 +376,14 @@ Enchant creature
 Scavenged Weaponry
 2 B
 Enchantment Aura
-Enchanted creature gets +1/+1.
+Enchanted creature gets +1/+1. Draw a card.
 Enchant creature
 Cantrip
 
 Shield of Duty and Reason
 W
 Enchantment Aura
-Enchanted creature has first protection from green and from blue.
+Enchanted creature has protection from green and from blue.
 Enchant creature
 
 Reflexes
@@ -435,7 +435,7 @@ spDamageTgtCP:Count$NamedInAllYards.Kindle/Plus.2:Kindle deals X damage to targe
 
 Ire of Kaminari
 3 R
-Instant — Arcane
+Instant Arcane
 no text
 spDamageTgtCP:Count$TypeInYourYard.Arcane:Ire of Kaminari deals damage to target creature or player equal to the number of Arcane cards in your graveyard.
 
@@ -479,7 +479,7 @@ Thermal Blast
 4 R
 Instant
 no text
-spDamageTgtC:Count$Hellbent.5.3:Thermal Blast deals 3 damage to target creature. Threshold — Thermal Blast deals 5 damage to that creature instead if seven or more cards are in your graveyard.
+spDamageTgtC:Count$Hellbent.5.3:Thermal Blast deals 3 damage to target creature. Threshold - Thermal Blast deals 5 damage to that creature instead if seven or more cards are in your graveyard.
 
 Spitting Earth
 1 R
@@ -1196,7 +1196,7 @@ tap: add 1
 Darkwater Catacombs
 no cost
 Land
-no text
+1,tap: add U B
 1,tap: add U B
 
 Fetid Heath
@@ -1258,7 +1258,7 @@ tap: add 1
 Mossfire Valley
 no cost
 Land
-no text
+1,tap: add R G
 1,tap: add R G
 
 Mystic Gate
@@ -1293,7 +1293,7 @@ tap: add 1
 Shadowblood Ridge
 no cost
 Land
-no text
+1,tap: add B R
 1,tap: add B R
 
 Shimmering Grotto
@@ -1310,13 +1310,13 @@ tap: add 1
 Skycloud Expanse
 no cost
 Land
-no text
+1,tap: add W U
 1,tap: add W U
 
 Sungrass Prairie
 no cost
 Land
-no text
+1,tap: add W G
 1,tap: add W G
 
 Sunken Ruins
@@ -1803,7 +1803,7 @@ Protection from green
 Dosan's Oldest Chant
 4 G
 Sorcery
-You gain 6 life
+Draw a card.
 Cantrip
 
 Sluggishness
@@ -2318,7 +2318,7 @@ Cantrip
 
 Morsel Theft
 2 B B
-Sorcery
+Tribal Sorcery Rogue
 Target player loses 3 life and you gain 3 life. (NOTE: "Prowl" is not implemented.)
 spLoseLifeGainLife:3
 
@@ -10983,12 +10983,12 @@ Put two 1/1 red Goblin creature tokens into play. Storm (When you play this spel
 
 Feudkiller's Verdict
 4 W W
-Sorcery
+Tribal Sorcery Giant
 You gain 10 life. Then if you have more life than an opponent, put a 5/5 white Giant Warrior creature token into play.
 
 Reach of Branches
 4 G
-Instant
+Tribal Instant Treefolk
 Put a 2/5 green Treefolk Shaman creature token into play.  Whenever a Forest comes into play under your control, you may return Reach of Branches from your graveyard to your hand.
 
 Meadowboon
@@ -11017,7 +11017,7 @@ Fear
 
 Bitterblossom
 1 B
-Enchantment Faerie
+Tribal Enchantment Faerie
 At the beginning of your upkeep, you lose 1 life and put a 1/1 black Faerie Rogue creature token with flying into play.
 
 Ambassador Oak
