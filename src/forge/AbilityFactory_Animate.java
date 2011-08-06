@@ -86,13 +86,14 @@ public class AbilityFactory_Animate {
 
 	private static String animateStackDescription(final AbilityFactory af, SpellAbility sa) {
 		HashMap<String,String> params = af.getMapParams();
-		//TODO - add support for X
-		//String powerString = params.get("Power");
-		//String toughnessString = params.get("Toughness");
-		int power = Integer.parseInt(params.get("Power"));
-		int toughness = Integer.parseInt(params.get("Toughness"));
+		Card host = af.getHostCard();
+
+		int power = AbilityFactory.calculateAmount(host, params.get("Power"), sa);
+		int toughness = AbilityFactory.calculateAmount(host, params.get("Toughness"), sa);
+		
 		boolean permanent = params.containsKey("Permanent") ? true : false;
-		ArrayList<String> types = new ArrayList<String>(Arrays.asList(params.get("Types").split(",")));
+		final ArrayList<String> types = new ArrayList<String>();
+		if(params.containsKey("Types")) types.addAll(Arrays.asList(params.get("Types").split(",")));
 		final ArrayList<String> keywords = new ArrayList<String>();
 		if(params.containsKey("Keywords")) keywords.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
 		ArrayList<String> colors = new ArrayList<String>();
@@ -233,12 +234,13 @@ public class AbilityFactory_Animate {
 		String db = params.get("SubAbility");
 
 		//AF specific params
-		int power = Integer.parseInt(params.get("Power"));
-		int toughness = Integer.parseInt(params.get("Toughness"));
+		int power = AbilityFactory.calculateAmount(host, params.get("Power"), sa);
+		int toughness = AbilityFactory.calculateAmount(host, params.get("Toughness"), sa);
 		
 		boolean permanent = params.containsKey("Permanent") ? true : false;
 		
-		ArrayList<String> types = new ArrayList<String>(Arrays.asList(params.get("Types").split(",")));
+		final ArrayList<String> types = new ArrayList<String>();
+		if(params.containsKey("Types")) types.addAll(Arrays.asList(params.get("Types").split(",")));
 		
 		final ArrayList<String> keywords = new ArrayList<String>();
 		if(params.containsKey("Keywords")) keywords.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
