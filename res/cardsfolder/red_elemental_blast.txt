@@ -1,0 +1,10 @@
+Name:Red Elemental Blast
+ManaCost:R
+Types:Instant
+Text:no text
+A:SP$Destroy | Cost$ R | ValidTgts$ Permanent.Blue | TgtPrompt$ Select target blue permanent | SpellDescription$ Choose one - Destroy target blue permanent
+A:SP$Counter | Cost$ R | Type$ Spell | CounterValid$ Card.Blue | SpellDescription$ or Counter target blue spell. 
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/red_elemental_blast.jpg
+End
