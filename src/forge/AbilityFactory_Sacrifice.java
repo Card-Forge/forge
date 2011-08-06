@@ -277,6 +277,12 @@ public class AbilityFactory_Sacrifice {
 			if (AllZone.getZone(sa.getSourceCard()).is(Constant.Zone.Battlefield))
 				AllZone.GameAction.sacrifice(sa.getSourceCard());
 		}
+		else if( valid.equals("TriggeredCard")) {
+			Card equipee = (Card)(card.getTriggeringObject("Card"));
+			if(tgts.contains(card.getController()) && AllZoneUtil.isCardInPlay(equipee)) {
+				AllZone.GameAction.sacrifice(equipee);
+			}
+		}
 		else{
 			for(Player p : tgts){
 	
