@@ -368,6 +368,13 @@ abPump 0:-1/-1/Protection from red
 abPump 0:-1/-1/Vigilance
 abPump 0:-1/-1/Shadow
 
+Viridian Lorebearers
+3 G
+Creature Elf Shaman
+no text
+3/3
+abPumpTgt 3 G T:Count$TypeOppCtrl.Artifact/Count$TypeOppCtrl.Artifact:Target creature gets +X/+X until end of turn, where X is the number of artifacts your opponents control.
+
 Wormwood Dryad
 2 G
 Creature Dryad
