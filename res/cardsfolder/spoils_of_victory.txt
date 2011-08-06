@@ -1,0 +1,8 @@
+Name:Spoils of Victory
+ManaCost:2 G
+Types:Sorcery
+Text:Search your library for a Plains, Island, Swamp, Mountain, or Forest card and put that card onto the battlefield. Then shuffle your library.
+K:spTutor:Plains,Island,Swamp,Mountain,Forest:Battlefield
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spoils_of_victory.jpg
+End

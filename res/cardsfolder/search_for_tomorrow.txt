@@ -1,0 +1,8 @@
+Name:Search for Tomorrow
+ManaCost:2 G
+Types:Sorcery
+Text:Search your library for a basic land card and put that card onto the battlefield. Then shuffle your library.
+K:spTutor:Land.Basic:Battlefield
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/untamed_wilds.jpg
+End

@@ -3956,8 +3956,9 @@ public class CardFactory implements NewConstants {
                         if (Destination.equals("Hand")) AllZone.Computer_Hand.add(c);         			//move to hand
                         if (Destination.equals("TopOfLibrary")) AllZone.Computer_Library.add(c, 0); //move to top of library
                         if (Destination.equals("ThirdFromTopOfLibrary")) AllZone.Computer_Library.add(c, 2); //move to third from top of library
-                        
-                        if (!Targets.startsWith("Card")) {
+                        if (Destination.equals("Battlefield")) AllZone.getZone(Constant.Zone.Play, "Computer").add(c); //move to battlezone
+
+                        if (!Targets.startsWith("Card") && !Destination.equals("Battlefield")) {
                         	CardList l = new CardList();
                         	l.add(c);
                         	AllZone.Display.getChoiceOptional("Computer picked:", l.toArray());
@@ -3978,6 +3979,7 @@ public class CardFactory implements NewConstants {
                         	if (Destination.equals("Hand")) AllZone.Human_Hand.add((Card) o);         			//move to hand
                             if (Destination.equals("TopOfLibrary")) AllZone.Human_Library.add((Card) o, 0); //move to top of library
                             if (Destination.equals("ThirdFromTopOfLibrary")) AllZone.Human_Library.add((Card) o, 2); //move to third from top of library
+                            if (Destination.equals("Battlefield")) AllZone.getZone(Constant.Zone.Play, "Human").add((Card) o); //move to battlezone
                         }
                     }//if
                 }//resolve()
