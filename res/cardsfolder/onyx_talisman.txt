@@ -2,7 +2,7 @@ Name:Onyx Talisman
 ManaCost:2
 Types:Artifact
 Text:no text
-T:Mode$ SpellCast | ValidCard$ Card.Black | TriggerZones$ Battlefield | Optional$ True | Execute$ TrigUntap | TriggerDescription$ Whenever a player casts a black spell, you may pay 3. If you do, untap target permanent.
+T:Mode$ SpellCast | ValidCard$ Card.Black | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever a player casts a black spell, you may pay 3. If you do, untap target permanent.
 SVar:TrigUntap:AB$Untap | Cost$ 3 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

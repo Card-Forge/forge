@@ -92,7 +92,7 @@ public class AbilityFactory_Token extends AbilityFactory {
 		tokenImage = image;
 		if(mapParams.containsKey("TokenOwner"))
 			tokenOwner = mapParams.get("TokenOwner");
-		else tokenOwner = "Controller";
+		else tokenOwner = "You";
 	}
 	
 	public SpellAbility getAbility()
@@ -326,12 +326,7 @@ public class AbilityFactory_Token extends AbilityFactory {
 		
 		cost = colorDesc.replace('C', '1').trim();
 		
-		if(tokenOwner.equals("Controller")) {
-			controller = AF.getHostCard().getController();
-		}
-		else {
-			controller = AF.getHostCard().getController().getOpponent();
-		}
+		controller = AbilityFactory.getDefinedPlayers(AF.getHostCard(),tokenOwner,sa).get(0);
 
 		int finalPower = AbilityFactory.calculateAmount(AF.getHostCard(), tokenPower, sa);
 		int finalToughness = AbilityFactory.calculateAmount(AF.getHostCard(), tokenToughness, sa);

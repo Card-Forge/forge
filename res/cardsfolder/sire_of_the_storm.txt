@@ -4,7 +4,7 @@ Types:Creature Spirit
 Text:no text
 PT:3/3
 K:Flying
-T:Mode$ SpellCast | ValidCard$ Spirit.YouCtrl,Arcane.YouCtrl | Execute$ TrigDraw | TriggerZones$ Battlefield | Optional$ True | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may draw a card.
+T:Mode$ SpellCast | ValidCard$ Spirit.YouCtrl,Arcane.YouCtrl | Execute$ TrigDraw | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sire_of_the_storm.jpg

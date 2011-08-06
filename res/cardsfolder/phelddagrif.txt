@@ -8,7 +8,7 @@ A:AB$Pump | Cost$ W | KW$ Flying | SubAbility$ SVar=DBGain | SpellDescription$ C
 A:AB$ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Hand | SubAbility$ SVar=DBDraw | SpellDescription$ Return CARDNAME to its owner's hand. Target opponent may draw a card.
 SVar:DBToken:DB$Token | ValidTgts$ Opponent | TokenAmount$ 1 | TokenName$ Hippo | TokenTypes$ Creature,Hippo | TokenOwner$ Opponent | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 SVar:DBGain:DB$GainLife | LifeAmount$ 2 | ValidTgts$ Opponent
-SVar:DBDraw:DB$Draw | LifeAmount$ 2 | ValidTgts$ Opponent | Optional$ True
+SVar:DBDraw:DB$Draw | LifeAmount$ 2 | ValidTgts$ Opponent | OptionalDecider$ You
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phelddagrif.jpg

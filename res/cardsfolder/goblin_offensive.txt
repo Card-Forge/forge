@@ -2,7 +2,7 @@ Name:Goblin Offensive
 ManaCost:X 1 R R
 Types:Sorcery
 Text:Put X 1/1 red Goblin creature tokens onto the battlefield.
-A:SP$ Token | Cost$ X 1 R R | TokenAmount$ X | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenOwner$ Controller | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1
+A:SP$ Token | Cost$ X 1 R R | TokenAmount$ X | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

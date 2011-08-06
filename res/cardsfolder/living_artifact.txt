@@ -3,7 +3,7 @@ ManaCost:G
 Types:Enchantment Aura
 Text:Whenever you're dealt damage, put that many vitality counters on CARDNAME.
 K:Enchant Artifact
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+countersGE1VITALITY | Optional$ True | Execute$ TrigRemoveCounter | TriggerDescription$ At the beginning of your upkeep, you may remove a vitality counter from CARDNAME. If you do, you gain 1 life.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+countersGE1VITALITY | OptionalDecider$ You | Execute$ TrigRemoveCounter | TriggerDescription$ At the beginning of your upkeep, you may remove a vitality counter from CARDNAME. If you do, you gain 1 life.
 SVar:TrigRemoveCounter:AB$RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ VITALITY | CounterNum$ 1 | SubAbility$ SVar=DBGainLife
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1
 SVar:RemAIDeck:True

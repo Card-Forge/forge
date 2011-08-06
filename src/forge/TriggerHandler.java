@@ -314,25 +314,10 @@ public class TriggerHandler {
 			}
 			
 			boolean mand = false;
-			if(trigParams.containsKey("Optional"))
-			{				
-				if(trigParams.get("Optional").equals("True"))
-				{
-					decider[0] = host.getController();
-					mand = false;
-					if (sa[0].getTarget() != null)
-						sa[0].getTarget().setMandatory(false);
-				}
-				else if(trigParams.get("Optional").equals("OpponentDecides"))
-				{
-					mand = false;
-					decider[0] = host.getController().getOpponent();
-				}
-				else if(trigParams.get("Optional").equals("TriggeredControllerDecides")) {
-					mand = false;
-					//decider[0] = sa[0].getTriggeringCard().getController();
-					decider[0] = ((Card)regtrig.getRunParams().get("Card")).getController();
-				}
+			if(trigParams.containsKey("OptionalDecider"))
+			{
+                mand = false;
+                decider[0] = AbilityFactory.getDefinedPlayers(host,trigParams.get("OptionalDecider"),sa[0]).get(0);
 			}
 			else
 			{

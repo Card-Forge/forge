@@ -2,7 +2,7 @@ Name:Telekinetic Bonds
 ManaCost:2 U U U
 Types:Enchantment
 Text:no text
-T:Mode$ Discarded | ValidPlayer$ Player | TriggerZones$ Battlefield | Optional$ True | Execute$ TrigTapOrUntap | TriggerDescription$ Whenever a player discards a card, you may pay 1 U. If you do, you may tap or untap target permanent.
+T:Mode$ Discarded | ValidPlayer$ Player | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigTapOrUntap | TriggerDescription$ Whenever a player discards a card, you may pay 1 U. If you do, you may tap or untap target permanent.
 SVar:TrigTapOrUntap:AB$TapOrUntap | Cost$ 1 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
