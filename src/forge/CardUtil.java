@@ -16,7 +16,6 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
 
-
 public class CardUtil {
     public final static Random r = MyRandom.random;
     
@@ -362,5 +361,30 @@ public class CardUtil {
 
 		ManaCost cost = new ManaCost(manaCost);
 		return cost.getWeightedManaCost();
+	}
+	
+	public static String getShortColorsString(ArrayList<String> colors) {
+		String colorDesc = "";
+		for(String col : colors) {
+			if(col.equals("White")) {
+				colorDesc += "W";
+			}
+			else if(col.equals("Blue")) {
+				colorDesc += "U";
+			}
+			else if(col.equals("Black")) {
+				colorDesc += "B";
+			}
+			else if(col.equals("Red")) {
+				colorDesc += "R";
+			}
+			else if(col.equals("Green")) {
+				colorDesc += "G";
+			}
+			else if(col.equals("Colorless")) {
+				colorDesc = "C";
+			}
+		}
+		return colorDesc;
 	}
 }

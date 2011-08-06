@@ -285,30 +285,8 @@ public class AbilityFactory_Animate {
 			}
 		}
 		
-		ArrayList<String> colors = new ArrayList<String>();
-		if(params.containsKey("Colors")) colors.addAll(Arrays.asList(params.get("Colors").split(",")));
-		String colorDesc = "";
-		for(String col : colors) {
-			if(col.equals("White")) {
-				colorDesc += "W";
-			}
-			else if(col.equals("Blue")) {
-				colorDesc += "U";
-			}
-			else if(col.equals("Black")) {
-				colorDesc += "B";
-			}
-			else if(col.equals("Red")) {
-				colorDesc += "R";
-			}
-			else if(col.equals("Green")) {
-				colorDesc += "G";
-			}
-			else if(col.equals("Colorless")) {
-				colorDesc = "C";
-			}
-		}
-		final String finalDesc = colorDesc;
+		final String finalDesc = params.containsKey("Colors") ? 
+			CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(params.get("Colors").split(",")))) : "";
 		
 		//abilities to add to the animated being
 		ArrayList<String> abilities = new ArrayList<String>();

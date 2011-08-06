@@ -7572,7 +7572,7 @@ public class GameActionUtil {
 	            		//get the affected cards
 						String k[] = keyword.split(":", 7);    
 						
-						if(areSpecialConditionsMet(cardWithKeyword, k[5])) { //special oonditions are isPresent, isValid
+						if(areSpecialConditionsMet(cardWithKeyword, k[5])) { //special conditions are isPresent, isValid
 						
 							final String affected = k[1];			
 							final String specific[] = affected.split(",");
@@ -7596,8 +7596,13 @@ public class GameActionUtil {
 		                 	if(!k[3].equalsIgnoreCase("no types")) {
 		                 		types.addAll(Arrays.asList(k[3].split(",")));
 		                 	}
-		            		
-							addStaticEffects(se, cardWithKeyword, affectedCards, k[2], types); //give the boni to the affected cards
+		                 	
+		                 	String colors = "";
+		                 	if(!k[4].equalsIgnoreCase("no colors")) {
+		                 		colors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(k[4].split(","))));
+		                 	}
+		                 	
+							addStaticEffects(se, cardWithKeyword, affectedCards, k[2], types, colors); //give the boni to the affected cards
 
 							storage.add(se); // store the information
 						}
@@ -7606,7 +7611,7 @@ public class GameActionUtil {
 	    	}
 		}// execute()
 		
-		private void addStaticEffects(StaticEffect se, Card source, CardList affectedCards, String details, ArrayList<String> types) {
+		private void addStaticEffects(StaticEffect se, Card source, CardList affectedCards, String details, ArrayList<String> types, String colors) {
 			
 			String[] keyword = details.split("/", 3);
 			String powerStr = keyword[0];
@@ -7619,14 +7624,17 @@ public class GameActionUtil {
 				int toughness = toughStr.matches("[0-9][0-9]?") ? Integer.parseInt(toughStr) : CardFactoryUtil.xCount(affectedCard, toughStr);
 				affectedCard.setBaseAttack(power);
 				affectedCard.setBaseDefense(toughness);
+				
 				for(String type : types) {
 					if(!affectedCard.isType(type)) {
 						affectedCard.addType(type);
+						se.addType(affectedCard, type);
 					}
 					else {
-						se.removeType(type);
+						se.removeType(affectedCard, type);
 					}
 				}
+				
 				if(keyword.length > 2) {
 					String keywords[] = keyword[2].split(" & ");
 					for(int j = 0; j < keywords.length; j++) {
@@ -7648,6 +7656,9 @@ public class GameActionUtil {
 						else */ affectedCard.addExtrinsicKeyword(kw);
 					}
 				}
+				long t = affectedCard.addColor(colors, affectedCard, true, true);
+				se.addTimestamp(affectedCard, t);
+				System.out.print("Timestamp added for "+affectedCard+"("+t+"): "+se.getTimestamp(affectedCard));
 			}//end for
 		}
 		
@@ -7655,18 +7666,19 @@ public class GameActionUtil {
 			Card source = se.getSource();
 			CardList affected = se.getAffectedCards();
 			int num = se.getKeywordNumber();
-			ArrayList<String> types = se.getTypes();
             String parse = source.getKeyword().get(num).toString();                
             String k[] = parse.split(":");
 			for(int i = 0; i < affected.size(); i++) {
-				removeStaticEffect(se, source, affected.get(i), k, types);
+				Card c = affected.get(i);
+				removeStaticEffect(se, source, c, k);
 			}
-			se.clearTypes();
+			se.clearAllTypes();
+			se.clearTimestamps();
 		}
 		
-		private void removeStaticEffect(StaticEffect se, Card source, Card affectedCard, String[] details, ArrayList<String> types) {
+		private void removeStaticEffect(StaticEffect se, Card source, Card affectedCard, String[] details) {
 			
-			for(String type : types) {
+			for(String type : se.getTypes(affectedCard)) {
 				affectedCard.removeType(type);
 			}
 			String[] kw = details[2].split("/", 3);
@@ -7689,6 +7701,8 @@ public class GameActionUtil {
 					else */ affectedCard.removeExtrinsicKeyword(keyword);
 				}
 			}
+			System.out.print("Timestamp to remove for "+affectedCard+": "+se.getTimestamp(affectedCard));
+			affectedCard.removeColor(se.getColorDesc(), affectedCard, true, se.getTimestamp(affectedCard));
 		}//end removeStaticEffects
 		
 		// Special Conditions
