@@ -2125,7 +2125,7 @@ public class CardFactory implements NewConstants {
                             }
                         } else {
                         	tgtP = getTargetPlayer();
-                            AllZone.GameAction.addDamage(tgtP, card, damage);
+                            tgtP.addDamage(damage, card);
                             
                             if(!DrawBack[0].equals("none")) CardFactoryUtil.doDrawBack(DrawBack[0], damage,
                                     card.getController(), card.getController().getOpponent(), tgtP,
@@ -2307,8 +2307,8 @@ public class CardFactory implements NewConstants {
                         	if(CardFactoryUtil.canDamage(card, all.get(i))) all.get(i).addDamage(ndam, card);
                     	}
                     	if (DmgPlayer[0] == true) {
-                    		AllZone.GameAction.addDamage(AllZone.ComputerPlayer, card, ndam);
-                    		AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, ndam);
+                    		AllZone.ComputerPlayer.addDamage(ndam, card);
+                    		AllZone.HumanPlayer.addDamage(ndam, card);
                     	}
                        // if (!DrawBack[0].equals("none"))
                        //    CardFactoryUtil.doDrawBack(DrawBack[0], ndam, card.getController(), card.getController().getOpponent(), null, card, null);
@@ -2530,7 +2530,7 @@ public class CardFactory implements NewConstants {
                             }
                         } else {
                             tgtP = getTargetPlayer();
-                            AllZone.GameAction.addDamage(tgtP, card, damage);
+                            tgtP.addDamage(damage, card);
                             
                             if(!DrawBack[0].equals("none")) CardFactoryUtil.doDrawBack(DrawBack[0], damage,
                                     card.getController(), card.getController().getOpponent(),
@@ -5537,8 +5537,7 @@ public class CardFactory implements NewConstants {
                  @Override
                  public void resolve()
                  {
-                    //AllZone.GameAction.getPlayerLife(getController()).subtractLife(amountHurt,card);
-                    AllZone.GameAction.addDamage(card.getController(), card, amountHurt);
+                	 card.getController().addDamage(amountHurt, card);
                 	 super.resolve();
                  }
                  
@@ -6615,10 +6614,9 @@ public class CardFactory implements NewConstants {
                         if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);
                     }
                     
-                    //AllZone.Human_Life.subtractLife(1,card);
-                    AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, 1);
+                    AllZone.HumanPlayer.addDamage(1, card);
                     //AllZone.ComputerPlayer.subtractLife(1,card);
-                    AllZone.GameAction.addDamage(AllZone.ComputerPlayer, card, 1);
+                    AllZone.ComputerPlayer.addDamage(1, card);
                 }//resolve()
             };//SpellAbility
             ability.setDescription("R: Pyrohemia deals 1 damage to each creature and each player.");
@@ -6673,10 +6671,8 @@ public class CardFactory implements NewConstants {
                         if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);
                     }
                     
-                    //AllZone.Human_Life.subtractLife(1,card);
-                    //AllZone.ComputerPlayer.subtractLife(1,card);
-                    AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, 1);
-                    AllZone.GameAction.addDamage(AllZone.ComputerPlayer, card, 1);
+                    AllZone.HumanPlayer.addDamage(1, card);
+                    AllZone.ComputerPlayer.addDamage(1, card);
                 }//resolve()
             };//SpellAbility
             ability.setDescription("B: Pestilence deals 1 damage to each creature and each player.");
@@ -9343,7 +9339,7 @@ public class CardFactory implements NewConstants {
                         if(AllZone.GameAction.isCardInPlay(getTargetCard())
                                 && CardFactoryUtil.canTarget(card, getTargetCard()))
                         	getTargetCard().addDamage(2, card);
-                    } else AllZone.GameAction.addDamage(getTargetPlayer(), card, 2);
+                    } else getTargetPlayer().addDamage(2, card);
                 }//resolve()
             };//SpellAbility
             
@@ -9636,7 +9632,7 @@ public class CardFactory implements NewConstants {
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) {
                             getTargetCard().addDamage(damage, card);
                         }
-                    } else AllZone.GameAction.addDamage(getTargetPlayer(), card, damage);
+                    } else getTargetPlayer().addDamage(damage, card);
                 }
             };
             ability.setDescription("3, tap: Reveal cards from the top of your library until you reveal a land card. Goblin Charbelcher deals damage equal to the number of nonland cards revealed this way to target creature or player. If the revealed land card was a Mountain, Goblin Charbelcher deals double that damage instead. Put the revealed cards on the bottom of your library in any order.");
@@ -10151,7 +10147,7 @@ public class CardFactory implements NewConstants {
                  }
                  else{
                     JOptionPane.showMessageDialog(null, "Bottle of Suleiman - Lose - Bottle does 5 damage to "+player+".", "Bottle of Suleiman", JOptionPane.PLAIN_MESSAGE);
-                    AllZone.GameAction.addDamage(card.getController(), card, 5);
+                    card.getController().addDamage(5, card);
                  }
               }
            };//SpellAbility

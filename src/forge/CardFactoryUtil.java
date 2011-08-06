@@ -4005,17 +4005,13 @@ public class CardFactoryUtil {
         else if (d[0].contains("DamageSelf"))
         	AllZone.GameAction.addDamage(Src, Src, X); // 2/10
         else if(d[0].contains("Damage"))
-        	AllZone.GameAction.addDamage(dbPlayer, Src, X);
+        	dbPlayer.addDamage(X, Src);
         
 
         if(d[0].contains("GainLife")) {
-        	//AllZone.GameAction.gainLife(dbPlayer, X);
         	dbPlayer.gainLife(X);
         }
-        	
-
         if(d[0].contains("LoseLife"))  {
-        	//AllZone.GameAction.getPlayerLife(dbPlayer).subtractLife(X,Src);
         	dbPlayer.loseLife(X);
         }
         	
@@ -4745,9 +4741,7 @@ public class CardFactoryUtil {
 	            SpellAbility ability = new Ability(f, "0") {
 	                @Override
 	                public void resolve() {
-	                    //AllZone.GameAction.getPlayerLife(f.getController()).subtractLife(1,f);
-	                    //TODO - change this to add damage
-	                	AllZone.GameAction.addDamage(f.getController(), f, 1);
+	                	f.getController().addDamage(1, f);
 	                }
 	            };
 	            ability.setStackDescription("Fastbond - Deals 1 damage to you.");
