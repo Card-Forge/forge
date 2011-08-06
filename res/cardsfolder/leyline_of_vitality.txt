@@ -4,6 +4,7 @@ Types:Enchantment
 Text:If Leyline of Vitality is in your opening hand, you may begin the game with it on the battlefield.
 K:stPumpAll:Creature.YouCtrl:0/1:No Condition:Creatures you control get +0/+1.
 K:WheneverKeyword:EntersBattleField:Type/Creature:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:Yes_No:Initiator - OwnedByController:Whenever a creature enters the battlefield under your control, you may gain 1 life.
+SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_of_vitality.jpg
 End

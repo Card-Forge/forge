@@ -5,6 +5,7 @@ Text:no text
 PT:5/7
 K:Flying
 K:stPumpAll:Creature.attacking+YouCtrl:0/0/Lifelink:No Condition:Attacking creatures you control have lifelink.
+SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windbrisk_raptor.jpg
 End
