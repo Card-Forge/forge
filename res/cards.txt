@@ -164,7 +164,7 @@ Upkeep:1 W
 
 Arctic Nishoba
 5 G
-Creature Cat
+Creature Cat Warrior
 When Arctic Nishoba is put into a graveyard from the battlefield, you gain 2 life for each age counter on it.
 6/6
 Trample
@@ -6361,7 +6361,7 @@ TgtKPump B B:Shadow
 Ember Shot
 6 R
 Instant
-Draw a card. 
+no text
 spDamageTgtCP:3
 Draw a card.
 
