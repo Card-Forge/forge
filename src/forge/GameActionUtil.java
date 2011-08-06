@@ -7449,64 +7449,58 @@ public class GameActionUtil {
 
     private static void upkeep_Wolf_Skull_Shaman() {
         final Player player = AllZone.Phase.getPlayerTurn();
-        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-        PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+        
+        CardList kinship = AllZoneUtil.getPlayerCardsInPlay(player, "Wolf-Skull Shaman");
+        
+        if (kinship.size() == 0)
+        	return;
+        
+        final String[] shareTypes = { "Elf", "Shaman"};
+        final Card[] prevCardShown = { null };
 
-        CardList list = new CardList(playZone.getCards());
-        list = list.getName("Wolf-Skull Shaman");
-        Card prevCardShown = null;
-
-        Ability ability;
-        for (int i = 0; i < list.size(); i++) {
-            if (library.size() <= 0) return;
-
-            String creatureType = library.get(0).getType().toString();
-            String cardName = library.get(0).getName();
-            final Card crd = list.get(i);
-            boolean wantToken = false;
-            
-            // We assume that both players will want to look at the top card of their library. 
-            // We do not want to slow down the pace of the game by asking too many questions.
-            
-            if (creatureType.contains("Elf") 
-                    || creatureType.contains("Shaman")
-                    || library.get(0).getKeyword().contains("Changeling")) {
-                
-                if (player.isHuman()) {
-                    StringBuilder question = new StringBuilder();
-                    question.append("Your top card is ").append(cardName);
-                    question.append(", put a 2/2 green Wolf creature token into play?");
-                    if (showYesNoDialog(crd, question.toString())) {
-                        wantToken = true;
+        for(final Card k : kinship){
+            Ability ability = new Ability(k, "0") {	// change to triggered abilities when ready
+                @Override
+                public void resolve() {
+                	PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+                    if (library.size() <= 0) return;
+                    
+                    Card peek = library.get(0);
+                	boolean wantToken = false;
+                	
+                    // We assume that both players will want to peek, ask if they want to reveal
+                    // We do not want to slow down the pace of the game by asking too many questions.
+                    if (peek.isValidCard(shareTypes)){
+                        if (player.isHuman()) {
+                            StringBuilder question = new StringBuilder();
+                            question.append("Your top card is ").append(peek.getName());
+                            question.append(", put a 2/2 green Wolf creature token into play?");
+                            if (showYesNoDialog(k, question.toString())) {
+                                wantToken = true;
+                            }
+                        }
+                        // player isComputer()
+                        else 
+                        	wantToken = true;
                     }
-                }
-                // player isComputer()
-                else wantToken = true;
-            }
-            else if (player.isHuman()) {
-                Card topCard = library.get(0);
-                if (topCard != prevCardShown) {
-                    String title = "Top card is";
-                    AllZone.Display.getChoice(title, topCard);
-                    prevCardShown = topCard;
-                }
-            }
+                    if (!wantToken || player.isComputer()){
+                        if (peek != prevCardShown[0]) {
+                            String title = "Top card is ";
+                            AllZone.Display.getChoice(title, peek);
+                            prevCardShown[0] = peek;
+                        }
+                    }
+                	if (wantToken)
+                		CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", k.getController(), "G", 
+                            new String[] {"Creature", "Wolf"}, 2, 2, new String[] {""});
+                }// resolve()
+            };// ability
             
-            if (wantToken) {
-                ability = new Ability(crd, "0") {
-                    @Override
-                    public void resolve() {
-                        CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", crd.getController(), "G", 
-                                new String[] {"Creature", "Wolf"}, 2, 2, new String[] {""});
-                    }// resolve()
-                };// ability
-                
-                StringBuilder sb = new StringBuilder();
-                sb.append("Wolf-Skull Shaman - ").append(player);
-                sb.append(" reveals: ").append(cardName).append(", and puts a 2/2 Wolf into play.");
-                ability.setStackDescription(sb.toString());
-                AllZone.Stack.add(ability);
-            }// if wantToken
+            StringBuilder sb = new StringBuilder();
+            sb.append("Wolf-Skull Shaman - ").append(player);
+            sb.append(" Reveals for Kinship");
+            ability.setStackDescription(sb.toString());
+            AllZone.Stack.add(ability);
         }// for
     }// upkeep_Wolf_Skull_Shaman()
 	
