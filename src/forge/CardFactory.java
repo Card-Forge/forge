@@ -2336,7 +2336,142 @@ public class CardFactory implements NewConstants {
             }
 
         }//spDestroyTgt
-        
+
+// Generic bounce target card
+        if(hasKeyword(card, "spBounceTgt") != -1) {
+            int n = hasKeyword(card, "spBounceTgt");
+            
+            String parse = card.getKeyword().get(n).toString();
+            card.removeIntrinsicKeyword(parse);
+            
+            String k[] = parse.split(":");
+            String Targets = k[1]; // Artifact, Creature, Enchantment, Land, Permanent, White, Blue, Black, Red, Green, Colorless, MultiColor
+            // non-Artifact, non-Creature, non-Enchantment, non-Land, non-Permanent,
+            //non-White, non-Blue, non-Black, non-Red, non-Green, non-Colorless, non-MultiColor
+            final String Tgts[] = Targets.split(",");
+            
+            String tmpDesc = card.getText().substring(15);
+            int i = tmpDesc.indexOf(".");
+            tmpDesc = tmpDesc.substring(0, i);
+            final String Selec = "Select target " + tmpDesc + " to return to owners hand.";
+                       
+            card.clearSpellAbility();
+            
+            final SpellAbility spBnceTgt = new Spell(card) { 
+                private static final long serialVersionUID = 152897134770L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList results = new CardList();
+                    CardList choices = getTargets();
+                    
+                    choices = choices.filter(new CardListFilter(){
+                    	public boolean addCard(Card c)
+                    	{
+                    		return !c.getKeyword().contains("Shroud");
+                    	}
+                    });
+                    
+                    
+                    if(choices.size() > 0) {
+                        for(int i = 0; i < Tgts.length; i++) {
+                            if(Tgts[i].equals("Artifact")) {
+                                if(CardFactoryUtil.AI_getBestArtifact(choices) != null) results.add(CardFactoryUtil.AI_getBestArtifact(choices));
+                            } else if(Tgts[i].equals("Creature")) {
+                                if(CardFactoryUtil.AI_getBestCreature(choices) != null) results.add(CardFactoryUtil.AI_getBestCreature(choices));
+                            } else if(Tgts[i].equals("Enchantment")) {
+                                if(CardFactoryUtil.AI_getBestEnchantment(choices, card, true) != null) results.add(CardFactoryUtil.AI_getBestEnchantment(
+                                        choices, card, true));
+                            } else if(Tgts[i].equals("Land")) {
+                                if(CardFactoryUtil.AI_getBestLand(choices) != null) results.add(CardFactoryUtil.AI_getBestLand(choices));
+                            } else if(Tgts[i].equals("Permanent")) {
+                                if(CardFactoryUtil.AI_getMostExpensivePermanent(choices, card, true) != null) results.add(CardFactoryUtil.AI_getMostExpensivePermanent(
+                                        choices, card, true));
+                            }
+                        }
+                    }
+                    
+                    if(results.size() > 0) {
+                        results.shuffle();
+                        setTargetCard(results.get(0));
+                        return true;
+                    }
+                    return false;
+                }
+                
+                CardList getTargets() {
+                    CardList tmpList = new CardList();
+                    tmpList.addAll(AllZone.Human_Play.getCards());
+                    tmpList = tmpList.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return (CardFactoryUtil.canTarget(card, c));
+                        }
+                    });
+                    
+                    return tmpList.getValidCards(Tgts);
+                }
+                
+                @Override
+                public void resolve() {
+                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                        	if(getTargetCard().isToken()) AllZone.getZone(getTargetCard()).remove(getTargetCard());
+                        	else {
+                            		PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, getTargetCard().getOwner());
+                           	 	AllZone.GameAction.moveTo(hand, getTargetCard());
+				}
+                        }
+
+                    
+                }
+            }; //SpBnceTgt
+
+		Input InGetTarget = CardFactoryUtil.input_targetValid(spBnceTgt, Tgts, Selec);
+            	/*new Input() {
+                private static final long serialVersionUID = -152897134770L;
+                
+                @Override
+                public void showMessage() {
+                    CardList allCards = new CardList();
+                    allCards.addAll(AllZone.Human_Play.getCards());
+                    allCards.addAll(AllZone.Computer_Play.getCards());
+                    / *allCards.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return (CardFactoryUtil.canTarget(card, c));
+                        }
+                    });* ///Input_targetSpecific already checks for this
+                    
+                    CardList choices = allCards.getValidCards(Tgts);
+                    boolean free = false;
+                    if(this.isFree()) free = true;
+                    stopSetNext(CardFactoryUtil.input_targetSpecific(spBnceTgt, choices, Selec, true, free));
+                }
+            };*///InGetTarget
+            
+            //card.clearSpellAbility();
+            
+            card.setSVar("PlayMain1", "TRUE");
+            
+            spBnceTgt.setBeforePayMana(InGetTarget);
+            spBnceTgt.setDescription(card.getText());
+            card.setText("");
+            card.addSpellAbility(spBnceTgt);
+            
+            String bbCost = card.getSVar("Buyback");
+            if (!bbCost.equals(""))
+            {
+               SpellAbility bbBnceTgt = spBnceTgt.copy();
+               bbBnceTgt.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
+               bbBnceTgt.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
+               bbBnceTgt.setIsBuyBackAbility(true);
+               
+               bbBnceTgt.setBeforePayMana(CardFactoryUtil.input_targetValid(bbBnceTgt, Tgts, Selec));
+               
+               card.addSpellAbility(bbBnceTgt);
+            }
+
+        }//spBounceTgt
+
         while(hasKeyword(card, "abDrawCards") != -1) {
             int n = hasKeyword(card, "abDrawCards");
             String parse = card.getKeyword().get(n).toString();

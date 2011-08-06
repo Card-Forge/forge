@@ -1,3 +1,9 @@
+Hoodwink
+1 U
+Instant
+Return target artifact, enchantment, or land to its owner's hand.
+spBounceTgt:Artifact,Enchantment,Land
+
 Exiled Boggart
 1 B
 Creature Goblin Rogue
