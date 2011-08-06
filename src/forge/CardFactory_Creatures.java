@@ -6856,6 +6856,8 @@ public class CardFactory_Creatures {
             ability.setStackDescription("Sacrifice Dauntless Escort: Creatures you control are indestructible this turn.");
         }//*************** END ************ END **************************
         
+        
+/* Converted to the abDestroyTgtV keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Ramses Overdark")) {
             final Ability_Tap ability = new Ability_Tap(card) {
@@ -6909,7 +6911,7 @@ public class CardFactory_Creatures {
             };
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
-        
+*/
         
 /* Converted to the abDestroyTgtV keyword
         //*************** START *********** START **************************

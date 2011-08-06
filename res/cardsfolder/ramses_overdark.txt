@@ -1,0 +1,9 @@
+Name:Ramses Overdark
+ManaCost:2 U U B B
+Types:Legendary Creature Human Assassin
+Text:no text
+PT:4/3
+K:abDestroyTgtV T:Creature.enchanted:Destroy target enchanted creature.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ramses_overdark.jpg
+End

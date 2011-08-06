@@ -1,0 +1,9 @@
+Name:Notorious Assassin
+ManaCost:3 B
+Types:Creature Human Spellshaper Assassin
+Text:no text
+PT:2/2
+K:abDestroyTgtV 2 B T Discard<1/Any>:Creature.nonBlack:NoRegen:Destroy target nonblack creature. It can't be regenerated.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/notorious_assassin.jpg
+End
