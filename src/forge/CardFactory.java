@@ -101,13 +101,8 @@ public class CardFactory implements NewConstants {
         }
     }// readCard()
     
-    final public Card copyCard(Card in) {
-        /*
-    	Card out = getCard(in.getName(), in.getOwner());
-        out.setUniqueNumber(in.getUniqueNumber());
-        return out;
-        */
-    	
+    final public Card dynamicCopyCard(Card in)
+    {
     	if(in.getType().contains("Creature")) {
             Card card2 = new Card();
             card2 = CardFactory_Creatures.getCard(in, in.getName(), in.getOwner(), this);
@@ -140,6 +135,14 @@ public class CardFactory implements NewConstants {
             out.setUniqueNumber(in.getUniqueNumber());
             return out;
         }
+    }
+    
+    final public Card copyCard(Card in) {
+        
+    	Card out = getCard(in.getName(), in.getOwner());
+        out.setUniqueNumber(in.getUniqueNumber());
+        return out;
+    	
     }
     
     /*
@@ -4386,7 +4389,7 @@ public class CardFactory implements NewConstants {
                             //copy card to reset card attributes like attack and defense
                             Card c = abilityComes.getTargetCard();
                             if(!c.isToken()) {
-                                c = AllZone.CardFactory.copyCard(c);
+                                c = AllZone.CardFactory.dynamicCopyCard(c);
                                 c.setController(c.getOwner());
                                 
                                 PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getOwner());
