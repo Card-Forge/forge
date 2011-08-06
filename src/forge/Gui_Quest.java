@@ -569,6 +569,8 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("R2-D2 3   		hard  	Black Vise, bounce (Boomerang) spells, Howling Mine");
         sb.append("\r\n");
+ 	sb.append("Radagast 2  		medium 	Muraganda Petroglyphs, green vanilla creatures and a few tokens");
+        sb.append("\r\n");
         sb.append("Rocky 1		easy	Pro red, Flamebreak + Tremor + Pyroclasm but no Pyrohemia");
         sb.append("\r\n");
         sb.append("Rocky 2		medium	Pro red, Flamebreak + Tremor + Pyroclasm but no Pyrohemia");
