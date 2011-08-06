@@ -8,4 +8,6 @@ A:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ E
 SVar:DBSacrifice:DB$Sacrifice | Defined$ Card.Self
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_wings.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/49.jpg
+SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/46.jpg
 End

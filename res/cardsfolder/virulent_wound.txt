@@ -6,4 +6,5 @@ A:SP$PutCounter | Cost$ B | Tgt$ TgtC | CounterType$ M1M1 | CounterNum$ 1 | SubA
 SVar:DB:DB$Pump | KW$ HIDDEN If CARDNAME is put into a graveyard this turn, its controller gets a poison counter. | Defined$ Targeted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/virulent_wound.jpg
+SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/57.jpg
 End

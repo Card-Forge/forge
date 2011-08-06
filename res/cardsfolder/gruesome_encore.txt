@@ -7,4 +7,5 @@ SVar:DBPump:DB$Pump | KW$ Haste & At the beginning of the end step, exile CARDNA
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruesome_encore.jpg
+SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/44.jpg
 End

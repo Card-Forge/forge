@@ -8,4 +8,7 @@ T:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | IsPresent$ Card.attacki
 SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fog_elemental.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/40.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/69.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/85.jpg
 End
