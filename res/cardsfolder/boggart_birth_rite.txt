@@ -3,6 +3,7 @@ ManaCost:B
 Types:Tribal Sorcery Goblin
 Text:Return target Goblin card from your graveyard to your hand.
 K:spReturnTgt:1:Goblin:Hand
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_birth_rite.jpg
 End
