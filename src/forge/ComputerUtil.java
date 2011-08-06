@@ -619,7 +619,21 @@ public class ComputerUtil
 	        if (prefList.size() != 0){
 	           prefList.shuffle();
 	           return prefList.get(0);
-	        }    
+	        }
+	     }
+	     if (pref.contains("SacCost")) { // search for permanents with SacMe
+	    	 for(int ip = 0; ip < 9; ip++) {    // priority 0 is the lowest, priority 5 the highest 
+	    		 final int priority = 9-ip;
+	    		 CardList SacMeList = typeList.filter(new CardListFilter() {
+	    			 public boolean addCard(Card c) {
+	    				 return (!c.getSVar("SacMe").equals("") && Integer.parseInt(c.getSVar("SacMe")) == priority);
+	    			 }
+	    		 });
+	    		 if (SacMeList.size() != 0){
+	    			 SacMeList.shuffle();
+	    			 return SacMeList.get(0);
+	    		 }
+	    	 }
 	     }
 	     return null;
 	  }
