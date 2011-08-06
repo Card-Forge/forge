@@ -2,10 +2,9 @@ Name:Quest for the Gemblades
 ManaCost:1 G
 Types:Enchantment
 Text:no text
-A:AB$RemoveCounter | Cost$ Sac<1/CARDNAME> | IsPresent$ Card.Self+countersGE1QUEST | CounterType$ QUEST | CounterNum$ 1 | SubAbility$ SVar=DBPutCounter | SpellDescription$ Remove a quest counter from CARDNAME and sacrifice it.
+A:AB$PutCounter | Cost$ SubCounter<1/QUEST> Sac<1/CARDNAME> | Tgt$TgtC | CounterType$ P1P1 | CounterNum$ 4 | SpellDescription$ Put four +1/+1 counters on target creature.
 T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Creature | TriggerZones$ Battlefield | Optional$ True | CombatDamage$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control deals combat damage to a creature, you may put a quest counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
-SVar:DBPutCounter:DB$PutCounter | Cost$ 0 | Tgt$TgtC | CounterType$ P1P1 | CounterNum$ 4 | SpellDescription$ Put four +1/+1 counters on target creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Quest_for_the_Gemblades.jpg
 End
