@@ -3,7 +3,7 @@ ManaCost:4 W
 Types:Creature Spirit Spellshaper
 Text:no text
 PT:2/5
-A:AB$PumpAll|Cost$W T Discard<1/Any>|ValidCards$Creature.YouCtrl|NumAtt$+1|SpellDescription$Creatures you control get +1/+0 until end of turn.
+A:AB$ PumpAll | Cost$ W T Discard<1/Any> | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SpellDescription$ Creatures you control get +1/+0 until end of turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghost_tactician.jpg
