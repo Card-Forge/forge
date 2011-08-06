@@ -92,6 +92,9 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
     private JLabel            statsLabel2          = new JLabel();
     private JLabel            jLabel1              = new JLabel();
     
+    private JLabel            jLabel2              = new JLabel();
+    private JLabel            jLabel3              = new JLabel();
+    
     /*
     public JCheckBox          whiteCheckBox        = new JCheckBox("W", true);
     public JCheckBox          blueCheckBox         = new JCheckBox("U", true);
@@ -129,6 +132,9 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
     private JButton           filterButton         = new JButton();
     private JTextField	      searchTextField	   = new JTextField();
     /*CHOPPIC*/
+    
+    private JTextField	      searchTextField2	   = new JTextField();
+    private JTextField	      searchTextField3	   = new JTextField();
     
     private CardList          top;
     private CardList          bottom;
@@ -267,6 +273,14 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
             }
             
             if(!filteredOut) {
+            	filteredOut = filterByCardType(c);
+            }
+            
+            if(!filteredOut) {
+            	filteredOut = filterByCardDescription(c);
+            }
+            
+            if(!filteredOut) {
                 topModel.addCard(c);
             }
         }// for
@@ -275,7 +289,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
     }
     
     /*CHOPPIC*/
-    private boolean filterByName(Card c){
+    private boolean filterByName(Card c) {
     	boolean filterOut = false;
     	if(!(searchTextField.getText() == "")){
     		filterOut = !(c.getName().toLowerCase().contains(searchTextField.getText().toLowerCase()));
@@ -283,6 +297,22 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
     	return filterOut;
     }
     /*CHOPPIC*/
+    
+    private boolean filterByCardType(Card c) {
+    	boolean filterOut = false;
+    	if(!(searchTextField2.getText() == "")){
+    		filterOut = !(c.getType().toString().toLowerCase().contains(searchTextField2.getText().toLowerCase()));
+    	}
+    	return filterOut;
+    }
+    
+    private boolean filterByCardDescription(Card c) {
+    	boolean filterOut = false;
+    	if(!(searchTextField3.getText() == "")){
+    		filterOut = !(c.getText().toString().toLowerCase().contains(searchTextField3.getText().toLowerCase()));
+    	}
+    	return filterOut;
+    }
     
     
     private boolean filterByColor(Card c) {
@@ -674,8 +704,15 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         this.getContentPane().add(removePictureButton, "align 50% 0%, wrap");
         
         jLabel1.setText("By name: ");
-        this.getContentPane().add(jLabel1, "cell 0 1, split 2");
-        this.getContentPane().add(searchTextField, "wmin 120, wrap");
+        this.getContentPane().add(jLabel1, "cell 0 1, split 6");
+        this.getContentPane().add(searchTextField, "wmin 120");
+        
+        jLabel2.setText("By type: ");
+        this.getContentPane().add(jLabel2, "");
+        this.getContentPane().add(searchTextField2, "wmin 120");
+        jLabel3.setText("By description: ");
+        this.getContentPane().add(jLabel3, "");
+        this.getContentPane().add(searchTextField3, "wmin 200, wrap");
         
         this.getContentPane().add(statsLabel2, "cell 0 4");
         this.getContentPane().add(pictureViewPanel, "wmin 239, hmin 323, grow, cell 1 4 1 4");
