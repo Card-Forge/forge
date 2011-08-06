@@ -123,7 +123,15 @@ public class AbilityFactory_DealDamage {
 		if (!(sa instanceof Ability_Sub))
 			sb.append(name).append(" - ");
 
-		sb.append("Deals ").append(dmg).append(" damage to ");
+		ArrayList<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(), af.getMapParams().get("DamageSource"), sa);
+		Card source = definedSources.get(0);
+		
+		if (source != sa.getSourceCard())
+			sb.append(source.toString()).append(" deals");
+		else
+			sb.append("Deals");
+		
+		sb.append(" ").append(dmg).append(" damage to ");
 
 		for(int i = 0; i < tgts.size(); i++){
 			if (i != 0)
@@ -494,15 +502,18 @@ public class AbilityFactory_DealDamage {
 			tgts = saMe.getTarget().getTargets();
 
 		boolean targeted = (AF.getAbTgt() != null);
+	
+		ArrayList<Card> definedSources = AbilityFactory.getDefinedCards(saMe.getSourceCard(), params.get("DamageSource"), saMe);
+		Card source = definedSources.get(0);
 
 		for(Object o : tgts){
 			if (o instanceof Card){
 				Card c = (Card)o;
 				if(AllZone.GameAction.isCardInPlay(c) && (!targeted || CardFactoryUtil.canTarget(AF.getHostCard(), c))) {
 					if (noPrevention)
-						c.addDamageWithoutPrevention(dmg, AF.getHostCard());
+						c.addDamageWithoutPrevention(dmg, source);
 					else
-						c.addDamage(dmg, AF.getHostCard());
+						c.addDamage(dmg, source);
 				}
 
 			}
@@ -510,9 +521,9 @@ public class AbilityFactory_DealDamage {
 				Player p = (Player) o;
 				if (!targeted || p.canTarget(AF.getHostCard())) {
 					if (noPrevention)
-						p.addDamageWithoutPrevention(dmg, AF.getHostCard());
+						p.addDamageWithoutPrevention(dmg, source);
 					else
-						p.addDamage(dmg, AF.getHostCard());
+						p.addDamage(dmg, source);
 				}
 			}
 		}
