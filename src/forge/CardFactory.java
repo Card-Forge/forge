@@ -3985,7 +3985,7 @@ public class CardFactory implements NewConstants {
                         	if (Destination.equals("Hand")) AllZone.Human_Hand.add((Card) o);         			//move to hand
                             if (Destination.equals("TopOfLibrary")) AllZone.Human_Library.add((Card) o, 0); //move to top of library
                             if (Destination.equals("ThirdFromTopOfLibrary")) AllZone.Human_Library.add((Card) o, 2); //move to third from top of library
-                            if (Destination.equals("Battlefield")) AllZone.getZone(Constant.Zone.Play, "Human").add((Card) o); //move to battlezone
+                            if (Destination.equals("Battlefield")) AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).add((Card) o); //move to battlezone
                         }
                     }//if
                 }//resolve()
@@ -6502,7 +6502,7 @@ public class CardFactory implements NewConstants {
                 
                 public void execute() {
                 	int player = 0;
-                	if(card.getController() == "Human") {
+                	if(card.getController() == Constant.Player.Human) {
                 		player = AllZone.Human_Life.getLife();
                 	} else {
                 		player = AllZone.Computer_Life.getLife();               		
@@ -7216,7 +7216,7 @@ public class CardFactory implements NewConstants {
 						{
 							CardList newGrave;
 							Card c = (Card)o;
-							if (c.getOwner().equals("Human")){
+							if (c.getOwner().equals(Constant.Player.Human)){
 								newGrave = new CardList(AllZone.Human_Graveyard.getCards());
 							}
 							else {

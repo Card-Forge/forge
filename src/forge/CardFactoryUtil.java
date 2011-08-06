@@ -4765,7 +4765,7 @@ public class CardFactoryUtil {
     public static void playLandEffects(Card c){
     	final String player = c.getController();
     	boolean extraLand;
-    	if (player.equals("Human")){
+    	if (player.equals(Constant.Player.Human)){
     		extraLand = AllZone.GameInfo.humanPlayedFirstLandThisTurn();
     	}
     	else{

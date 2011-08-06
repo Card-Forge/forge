@@ -101,7 +101,7 @@ public class Input_PayManaCostUtil
      	
      	// Nirkana Revenant Code
         Card mp = AllZone.ManaPool;
-        if(card.getType().contains("Swamp") && card.getController().equals("Human")) {
+        if(card.getType().contains("Swamp") && card.getController().equals(Constant.Player.Human)) {
          	CardList Nirkana_Human = CardFactoryUtil.getCards("Nirkana Revenant", Constant.Player.Human);
          	for(int x = 0; x < Nirkana_Human.size(); x++) {
         		for(int i = 0; i < abilities.size(); i++) {
@@ -143,7 +143,7 @@ public class Input_PayManaCostUtil
          }
 
        	// High Tide Code
-         if(Phase.HighTideCount > 0 && card.getType().contains("Island") && card.getController().equals("Human")) {
+         if(Phase.HighTideCount > 0 && card.getType().contains("Island") && card.getController().equals(Constant.Player.Human)) {
          	for(int x = 0; x < Phase.HighTideCount; x++) {
         		for(int i = 0; i < abilities.size(); i++) {
         			if(abilities.get(i).mana().contains("U") == true) {
