@@ -444,7 +444,6 @@ public class GuiDisplayUtil implements NewConstants {
         }
     }//setupPanel()
     
-    @SuppressWarnings("unchecked")
     private static void setupNoLandPermPanel(JPanel p, ArrayList<Card> list, boolean stack) {
         
         int maxY = 0;
@@ -461,10 +460,8 @@ public class GuiDisplayUtil implements NewConstants {
             ArrayList<Card> tokenCreatures = getTokenCreatures(list);
             
             //sort tokenCreatures by name (TODO: fix the warning message somehow)
-            Collections.sort(tokenCreatures, new Comparator() {
-                public int compare(Object o1, Object o2) {
-                    Card c1 = (Card) o1;
-                    Card c2 = (Card) o2;
+            Collections.sort(tokenCreatures, new Comparator<Card>() {
+                public int compare(Card c1, Card c2) {
                     return c1.getName().compareTo(c2.getName());
                 }
             });
