@@ -1363,7 +1363,7 @@ class CardFactory_Lands {
 	   	  //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
 	   	  //anyway, this does the trick:
 	   	  //card.removeIntrinsicKeyword("tap: add 1");
-	   	  card.setText(card.getSpellText() +  "\r\n1 U, tap: Put target creature card in your graveyard on top of your library.");
+	   	  card.setText(card.getSpellText() +  "\r\n1 B, tap: Put target creature card in your graveyard on top of your library.");
 	   	  //card.addExtrinsicKeyword("tap: add 1");
 	   	  
 	     }//*************** END ************ END **************************

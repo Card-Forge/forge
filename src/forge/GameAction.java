@@ -150,28 +150,31 @@ private Card getCurrentCard(int ID)
      CardList hand = new CardList();
      hand.addAll(AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).getCards());
     
-     CardList blIP = new CardList();
-     blIP.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
-     blIP = blIP.getType("Basic");
-     if (blIP.size() > 5)
+     if (hand.size() > 0)
      {
-        CardList blIH = hand.getType("Basic");
-        if (blIH.size() > 0)
-        {
-           discard(blIH.get(CardUtil.getRandomIndex(blIH)));
-           return;
-        }
-       
-        CardListUtil.sortAttackLowFirst(hand);
-        CardListUtil.sortNonFlyingFirst(hand);
-        discard(hand.get(0));
-        return;
-     }
-     else
-     {
-        CardListUtil.sortCMC(hand);
-        discard(hand.get(0));
-        return;
+	     CardList blIP = new CardList();
+	     blIP.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
+	     blIP = blIP.getType("Basic");
+	     if (blIP.size() > 5)
+	     {
+	        CardList blIH = hand.getType("Basic");
+	        if (blIH.size() > 0)
+	        {
+	           discard(blIH.get(CardUtil.getRandomIndex(blIH)));
+	           return;
+	        }
+	       
+	        CardListUtil.sortAttackLowFirst(hand);
+	        CardListUtil.sortNonFlyingFirst(hand);
+	        discard(hand.get(0));
+	        return;
+	     }
+	     else
+	     {
+	        CardListUtil.sortCMC(hand);
+	        discard(hand.get(0));
+	        return;
+	     }
      }
   }
 

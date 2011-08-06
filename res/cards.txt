@@ -1,3 +1,13 @@
+Knighthood
+2 W
+Enchantment
+Creatures you control have first strike.
+
+Levitation
+2 U U
+Enchantment
+Creatures you control have flying.
+
 Chilling Shade
 2 B
 Snow Creature Shade
@@ -1381,7 +1391,7 @@ Landfall
 
 Indomitable Will
 1 W
-Enchantment
+Enchantment Aura
 Enchanted creature gets +1/+2.
 Flash
 Enchant creature
