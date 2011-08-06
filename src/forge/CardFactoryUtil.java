@@ -455,30 +455,35 @@ public class CardFactoryUtil {
         if (c.hasKeyword("Flying")) value += power * 10;
         if (c.hasKeyword("Horsemanship")) value += power * 10;
         if (c.hasKeyword("Unblockable")) value += power * 10;
-        if (c.hasKeyword("Fear")) value += power * 5;
-        if (c.hasKeyword("Intimidate")) value += power * 5;
+        if (c.hasKeyword("Fear")) value += power * 6;
+        if (c.hasKeyword("Intimidate")) value += power * 6;
         if (c.hasStartOfKeyword("CARDNAME can't be blocked except by")) value += power * 5;
         if (c.hasStartOfKeyword("CARDNAME can't be blocked by")) value += power * 2;
         
         //Battle stats increasing keywords
         if (c.hasKeyword("Double Strike")) value += power * 15;
-        value += c.getKeywordMagnitude("Bushido") * 20;
-        value += c.getAmountOfKeyword("Flanking") * 20;
+        value += c.getKeywordMagnitude("Bushido") * 16;
+        value += c.getAmountOfKeyword("Flanking") * 15;
         
         //Other good keywords
         if (c.hasKeyword("Deathtouch") && power > 0) value += 25;
-        value += c.getAmountOfKeyword("Exalted") * 20;
+        if (c.hasKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.") 
+        		&& power > 0) value += 24;
+        value += c.getAmountOfKeyword("Exalted") * 15;
         if (c.hasKeyword("First Strike") && !c.hasKeyword("Double Strike") && power > 0) value += 15;
         if (c.hasKeyword("Lifelink")) value += power * 10;
         if (c.hasKeyword("Trample")) value += power * 3;
         if (c.hasKeyword("Vigilance")) value += power * 5 + toughness * 5;
         if (c.hasKeyword("Wither")) value += power * 10;
         value += c.getKeywordMagnitude("Rampage");
-        value += c.getKeywordMagnitude("Annihilator") * 30;
+        value += c.getKeywordMagnitude("Annihilator") * 50;
         if (c.hasKeyword("Changeling")) value += 5;
-        if (c.hasKeyword("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat") && power > 0) value += 15;
-        if (c.hasKeyword("Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.") && power > 0) value += 2;
-        if (c.hasKeyword("Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +2/+2 counter on CARDNAME.") && power > 0) value += 5;
+        if (c.hasKeyword("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat") 
+        		&& power > 0) value += power * 5;
+        if (c.hasKeyword("Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.") 
+        		&& power > 0) value += 2;
+        if (c.hasKeyword("Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +2/+2 counter on CARDNAME.") 
+        		&& power > 0) value += 4;
         
         //Defensive Keywords
         if (c.hasKeyword("Reach")) value += 5;
@@ -489,7 +494,8 @@ public class CardFactoryUtil {
         if (c.hasKeyword("Indestructible")) value += 70;
         if (c.hasKeyword("Shroud")) value += 30;
         if (c.hasKeyword("CARDNAME can't be the target of spells or abilities your opponents control.")) value += 35;
-        if (c.hasStartOfKeyword("Protection from")) value += 20;
+        if (c.hasStartOfKeyword("Protection")) value += 20;
+        if (c.hasStartOfKeyword("PreventAllDamageBy")) value += 10;
         
         //Activated Abilities
         if (c.hasStartOfKeyword("ab")) value += 10;
