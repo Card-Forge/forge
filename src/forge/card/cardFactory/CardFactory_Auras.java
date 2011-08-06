@@ -115,13 +115,7 @@ class CardFactory_Auras {
                 			|| card.getName().equals("Phantasmal Terrain")) {
                 		String[] LandTypes = new String[] { "Plains","Island","Swamp","Mountain","Forest"};
                     	HashMap<String,Integer> humanLandCount = new HashMap<String,Integer>();
-            			CardList humanlands = new CardList(AllZone.Human_Battlefield.getCards());
-            			humanlands = humanlands.getType("Land");
-            			humanlands = humanlands.filter(new CardListFilter() {
-                        	public boolean addCard(Card c) {
-                        		return c.getType().contains("Land");
-                        	}
-                        });
+            			CardList humanlands = AllZoneUtil.getPlayerLandsInPlay(AllZone.HumanPlayer);
             			
             			for(int i=0;i<LandTypes.length;i++)
             			{
@@ -154,8 +148,7 @@ class CardFactory_Auras {
             			
             			NewType[0] = LandTypes[minAt];
                 	}
-                    CardList list = new CardList(AllZone.Human_Battlefield.getCards());
-                    list = list.getType("Land");
+                    CardList list = AllZoneUtil.getPlayerLandsInPlay(AllZone.HumanPlayer);
                     list = list.getNotType(NewType[0]); // Don't enchant lands that already have the type
                     if(list.isEmpty()) return false;
                     
@@ -295,17 +288,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void showMessage() {
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-                    CardList land = new CardList();
-                    land.addAll(comp.getCards());
-                    land.addAll(hum.getCards());
-                    land = land.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isLand();
-                        }
-                    });
-                    
+                    CardList land = AllZoneUtil.getLandsInPlay();
                     stopSetNext(CardFactoryUtil.input_targetSpecific(spell, land, "Select target land", true,
                             false));
                 }
@@ -332,8 +315,8 @@ class CardFactory_Auras {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Human_Battlefield.getCards());
-                    list = list.getType("Creature").getKeyword("Flying");
+                    CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
+                    list = list.getKeyword("Flying");
                     if(list.isEmpty()) return false;
                     
                     CardListFilter f = new CardListFilter() {
@@ -428,8 +411,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Human_Battlefield.getCards());
-                    list = list.getType("Creature");
+                    CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
                     
                     if(list.isEmpty()) return false;
                     
@@ -508,6 +490,7 @@ class CardFactory_Auras {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Guilty Conscience")) {
             final SpellAbility spell = new Spell(card) {
@@ -517,15 +500,13 @@ class CardFactory_Auras {
                 @Override
                 public boolean canPlayAI() {
                     
-                    CardList stuffy = new CardList(AllZone.Computer_Battlefield.getCards());
-                    stuffy = stuffy.getName("Stuffy Doll");
+                    CardList stuffy = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer, "Stuffy Doll");
                     
                     if(stuffy.size() > 0) {
                         setTargetCard(stuffy.get(0));
                         return true;
                     } else {
-                        CardList list = new CardList(AllZone.Human_Battlefield.getCards());
-                        list = list.getType("Creature");
+                        CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
                         
                         if(list.isEmpty()) return false;
                         
@@ -573,14 +554,13 @@ class CardFactory_Auras {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
-                    list = list.getType("Creature");
+                    CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
                     
                     if (list.isEmpty()) return false;
                     
                     //else (is there a Rabid Wombat or a Uril, the Miststalker to target?)
                     
-                    CardList auraMagnetList = new CardList(AllZone.Computer_Battlefield.getCards());
+                    CardList auraMagnetList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                     auraMagnetList = auraMagnetList.getEnchantMagnets();
                     
                     if (! auraMagnetList.isEmpty()) {    // AI has a special target creature(s) to enchant
@@ -679,14 +659,13 @@ class CardFactory_Auras {
 
 				@Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
-                    list = list.getType("Creature");
+                    CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
                     
                     if (list.isEmpty()) return false;
                     
                     //else (is there a Rabid Wombat or a Uril, the Miststalker to target?)
                     
-                    CardList auraMagnetList = new CardList(AllZone.Computer_Battlefield.getCards());
+                    CardList auraMagnetList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                     auraMagnetList = auraMagnetList.getEnchantMagnets();
                     
                     if (! auraMagnetList.isEmpty()) {    // AI has a special target creature(s) to enchant
@@ -1010,14 +989,13 @@ class CardFactory_Auras {
 
 				@Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
-                    list = list.getType("Creature");
+                    CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
                     
                     if (list.isEmpty()) return false;
                     
                     //else (is there a Rabid Wombat or a Uril, the Miststalker to target?)
                     
-                    CardList auraMagnetList = new CardList(AllZone.Computer_Battlefield.getCards());
+                    CardList auraMagnetList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                     auraMagnetList = auraMagnetList.getEnchantMagnets();
                     
                     if (! auraMagnetList.isEmpty()) {    // AI has a special target creature(s) to enchant
@@ -1120,17 +1098,15 @@ class CardFactory_Auras {
             final SpellAbility spell = new Spell(card) {
 				private static final long serialVersionUID = 843412563175285562L;
 				
-
-
                 @Override
                 public boolean canPlayAI() {
                 	
                 	if(!super.canPlayAI()) return false;
                 	
-                	CardList list = new CardList(AllZone.Human_Battlefield.getCards());    // Target human creature
+                	CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);    // Target human creature
                 	list = list.filter(new CardListFilter() {
                 		public boolean addCard(Card c) {
-                			return c.isCreature() && CardFactoryUtil.canTarget(card, c) && 
+                			return CardFactoryUtil.canTarget(card, c) && 
                 			      !c.getKeyword().contains("CARDNAME doesn't untap during your untap step.");
                 		}
                 	});
@@ -1221,26 +1197,14 @@ class CardFactory_Auras {
 
 				@Override
                 public void showMessage() {
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-                    CardList creatures = new CardList();
-                    creatures.addAll(comp.getCards());
-                    creatures.addAll(hum.getCards());
-                    creatures = creatures.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isCreature() && CardFactoryUtil.canTarget(card, c);
-                        }
-                    });
+                    CardList creatures = AllZoneUtil.getCreaturesInPlay();
+                    creatures = creatures.filter(AllZoneUtil.getCanTargetFilter(card));
                     
                     String instruction = "Select target creature";
                     
                     if (card.getKeyword().contains("Enchant tapped creature")) {
                     	instruction = "Select target tapped creature";
-                        creatures = creatures.filter(new CardListFilter() {
-                            public boolean addCard(Card c) {
-                                return c.isTapped();
-                            }
-                        });
+                        creatures = creatures.filter(AllZoneUtil.tapped);
                     }
                     
                     if (card.getKeyword().contains("Enchant creature without flying")) {
@@ -1676,15 +1640,10 @@ class CardFactory_Auras {
 
                     @Override
                     public void showMessage() {
-                        PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                        PlayerZone hum = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-                        CardList creatures = new CardList();
-                        creatures.addAll(comp.getCards());
-                        creatures.addAll(hum.getCards());
+                        CardList creatures = AllZoneUtil.getCreaturesInPlay();
                         creatures = creatures.filter(new CardListFilter() {
                             public boolean addCard(Card c) {
-                                return c.isCreature() 
-                                		&& CardFactoryUtil.canTarget(card, c) 
+                                return CardFactoryUtil.canTarget(card, c) 
                                 		&& ((!optionCmcTwoOrLess[0]) || (optionCmcTwoOrLess[0] 
                                 	    && CardUtil.getConvertedManaCost(c.getManaCost()) <= 2)) 
                                 		&& ((!optionRedOrGreen[0]) || (optionRedOrGreen[0] 
