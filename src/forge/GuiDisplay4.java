@@ -159,8 +159,13 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
            
             @Override
             protected void doAction(Card c) {
-                SpellAbility[] sa = c.getSpellAbility();
-                if(sa[1].canPlay() && !c.isUnCastable()) AllZone.GameAction.playSpellAbility(sa[1]);
+            	if(!c.isLand())
+            	{
+	                SpellAbility[] sa = c.getSpellAbility();
+	                if(sa[1].canPlay() && !c.isUnCastable()) AllZone.GameAction.playSpellAbility(sa[1]);
+            	}
+            	else if (CardFactoryUtil.canHumanPlayLand())
+            		GameAction.playLand(c, AllZone.Human_Graveyard);
             }
         };
         COMPUTER_GRAVEYARD_ACTION = new ZoneAction(AllZone.Computer_Graveyard, COMPUTER_GRAVEYARD);
@@ -253,7 +258,6 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     }
    
     public void showMessage(String s) {
-
     	messageArea.setText(s);
             
         messageArea.setText(s);

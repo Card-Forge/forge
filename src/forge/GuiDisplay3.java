@@ -53,6 +53,8 @@ import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -152,8 +154,13 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
             
             @Override
             protected void doAction(Card c) {
-                SpellAbility[] sa = c.getSpellAbility();
-                if(sa[1].canPlay() && !c.isUnCastable()) AllZone.GameAction.playSpellAbility(sa[1]);
+            	if(!c.isLand())
+            	{
+	                SpellAbility[] sa = c.getSpellAbility();
+	                if(sa[1].canPlay() && !c.isUnCastable()) AllZone.GameAction.playSpellAbility(sa[1]);
+            	}
+            	else if (CardFactoryUtil.canHumanPlayLand())
+            		GameAction.playLand(c, AllZone.Human_Graveyard);
             }
         };
         COMPUTER_GRAVEYARD_ACTION = new ZoneAction(AllZone.Computer_Graveyard, COMPUTER_GRAVEYARD);
@@ -246,7 +253,25 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
     }
     
     public void showMessage(String s) {
+    	messageArea.setText(s);
+        
         messageArea.setText(s);
+        Border border = new EmptyBorder(1, 1, 1, 1);
+            
+        messageArea.setBorder(border);
+            
+        int thickness = 3;
+            
+        if (s.contains("Main "))
+        	border = BorderFactory.createLineBorder(new Color(30, 0, 255), thickness);	
+        else if (s.contains("To Block"))
+        	border = BorderFactory.createLineBorder(new Color(13, 179, 0), thickness);
+        else if (s.contains("Play Instants and Abilities") || s.contains("Spells or Abilities on are on the Stack") )
+           	border = BorderFactory.createLineBorder(new Color(255, 174, 0), thickness);
+        else if (s.contains("Declare Attackers"))
+           	border = BorderFactory.createLineBorder(new Color(255, 0, 0), thickness);
+            
+         messageArea.setBorder(border);
     }
     
     //returned Object could be null

@@ -373,6 +373,14 @@ public class ComputerUtil
   static public void chooseLandsToPlay()
   {
 		ArrayList<Card> landList = PlayerZoneUtil.getCardType(AllZone.Computer_Hand, "Land");
+		
+		if (AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer, "Crucible of Worlds").size() > 0)
+		{
+			CardList lands = AllZoneUtil.getPlayerTypeInGraveyard(Constant.Player.Computer, "Land");
+			for (Card crd : lands)
+				landList.add(crd);
+		}
+		
 		while(!landList.isEmpty() && (AllZone.GameInfo.computerNumberLandPlaysLeft() > 0 ||
 		    	CardFactoryUtil.getCards("Fastbond", "Computer").size() > 0)){
 			// play as many lands as you can
@@ -384,7 +392,7 @@ public class ComputerUtil
 
 	    	Card land = landList.get(ix);
 		    landList.remove(ix);
-		    playLand(land, AllZone.Computer_Hand);
+		    playLand(land, AllZone.getZone(land));
 		    
 		    AllZone.GameAction.checkStateEffects();
 		}

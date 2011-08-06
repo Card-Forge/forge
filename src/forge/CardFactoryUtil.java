@@ -3252,11 +3252,13 @@ public class CardFactoryUtil {
     }
 
     public static CardList getFlashbackUnearthCards(String player) {
+    	final CardList crucible = AllZoneUtil.getPlayerCardsInPlay(player, "Crucible of Worlds");
+    	
         PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
         CardList cl = new CardList(grave.getCards());
         cl = cl.filter(new CardListFilter() {
             public boolean addCard(Card c) {
-                return c.hasFlashback() || c.hasUnearth();
+                return c.hasFlashback() || c.hasUnearth() || (c.isLand() && crucible.size() > 0);
             }
         });
         return cl;
