@@ -829,6 +829,13 @@ public class AbilityFactory {
 			    if (!players.contains(p))
 				    players.add(p);
 		    }
+            else {
+                String triggeringType = defined.substring(9);
+                Player p = (Player)sa.getSourceCard().getTriggeringObject(triggeringType);
+                if(!players.contains(p))
+                    players.add(p);
+            }
+
 
         }
 		else if (defined.equals("EnchantedController")){
