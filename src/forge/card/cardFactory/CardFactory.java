@@ -801,18 +801,16 @@ public class CardFactory implements NewConstants {
                     @Override
                     public void resolve() {
                         int totalCounters = numCreatures[0] * multiplier;
+
+                        AllZone.TriggerHandler.suppressMode("CounterAdded");
+
                         card.addCounter(Counters.P1P1, totalCounters);
+
+                        AllZone.TriggerHandler.clearSuppression("CounterAdded");
                         
                         if(card.getName().equals("Skullmulcher")) {
                             for(int i = 0; i < numCreatures[0]; i++) {
                                 card.getController().drawCard();
-                            }
-                        } else if(card.getName().equals("Caldera Hellion")) {
-                            CardList creatures = AllZoneUtil.getCreaturesInPlay();
-                            
-                            for(int i = 0; i < creatures.size(); i++) {
-                                Card crd = creatures.get(i);
-                                crd.addDamage(3, card);
                             }
                         }
                         
