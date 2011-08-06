@@ -4,6 +4,7 @@ Types:Sorcery
 Text:no text
 A:SP$ PumpAll | Cost$ X 2 R R | ValidCards$ Creature | IsCurse$ True | NumAtt$ +X | NumDef$ -X | SpellDescription$ All Creatures get +X/-X until end of turn.
 SVar:X:Count$xPaid
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_slide.jpg
 SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/83.jpg
