@@ -7073,8 +7073,6 @@ public class GameActionUtil {
 		CardList list = new CardList();
 		list.addAll(AllZone.Human_Play.getCards());
 		list.addAll(AllZone.Computer_Play.getCards());
-
-		// does not check to see if Howling Mine is untapped
 		list = list.getName("Howling Mine");
 
 		for(int i = 0; i < list.size(); i++){
@@ -7090,8 +7088,6 @@ public class GameActionUtil {
 		CardList list = new CardList();
 		list.addAll(AllZone.Human_Play.getCards());
 		list.addAll(AllZone.Computer_Play.getCards());
-
-		// does not check to see if Howling Mine is untapped
 		list = list.getName("Font of Mythos");
 
 		for(int i = 0; i < list.size(); i++) {
