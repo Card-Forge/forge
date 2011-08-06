@@ -6808,6 +6808,7 @@ res/cardsfolder/toils_of_night_and_day.txt svneol=native#text/plain
 res/cardsfolder/tolaria_west.txt -text svneol=native#text/plain
 res/cardsfolder/tolarian_academy.txt -text svneol=native#text/plain
 res/cardsfolder/tolarian_emissary.txt -text svneol=native#text/plain
+res/cardsfolder/tolarian_entrancer.txt -text svneol=native#text/plain
 res/cardsfolder/tolarian_serpent.txt -text svneol=native#text/plain
 res/cardsfolder/tolsimir_wolfblood.txt -text svneol=native#text/plain
 res/cardsfolder/tome_scour.txt -text svneol=native#text/plain

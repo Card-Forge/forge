@@ -12,6 +12,7 @@ import forge.CardList;
 import forge.CardListFilter;
 import forge.Command;
 import forge.Constant;
+import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.Ability_Activated;
@@ -142,7 +143,10 @@ public class AbilityFactory_GainControl {
 			tgtCards = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
 		}
 		
-		sb.append("gain control of ");
+		ArrayList<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("NewController"), sa);
+		if(newController.size() == 0) newController.add(sa.getActivatingPlayer());
+		
+		sb.append(newController).append(" gains control of ");
 		
 		for (Card c : tgtCards) {
 			sb.append(" ");
@@ -238,6 +242,9 @@ public class AbilityFactory_GainControl {
 			tgtCards = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
 		}
 		//tgtCards.add(hostCard);
+		
+		ArrayList<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("NewController"), sa);
+		if(newController.size() == 0) newController.add(sa.getActivatingPlayer());
 
 		int size = tgtCards.size();
 		for(int j = 0; j < size; j++){
@@ -257,7 +264,7 @@ public class AbilityFactory_GainControl {
                     tgtC.setSickness(true);
                 }
                 
-                AllZone.GameAction.changeController(new CardList(tgtC), tgtC.getController(), sa.getActivatingPlayer());
+                AllZone.GameAction.changeController(new CardList(tgtC), tgtC.getController(), newController.get(0));
                 
                 if(bUntap) tgtC.untap();
                 
