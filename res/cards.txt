@@ -1,3 +1,143 @@
+Burst of Speed
+R
+Sorcery
+no text
+spAllPump:YouCtrl:Haste:Creatures you control gain haste until end of turn.:Burst of Speed - Creatures gain haste until EOT
+
+Chorus of Woe
+B
+Sorcery
+no text
+spAllPump:YouCtrl:+1/+0:Creatures you control get +1/+0 until end of turn.:Chorus of Woe - Creatures get +1/+0 until EOT
+
+Dance of Shadows
+3 B B
+Sorcery Arcane
+no text
+spAllPump:YouCtrl:+1/+0/Fear:Creatures you control get +1/+0 and gain fear until end of turn.:Dance of Shadows - Creatures get +1/+0 and gain fear until EOT
+
+Desperate Charge
+2 B
+Sorcery
+no text
+spAllPump:YouCtrl:+2/+0:Creatures you control get +2/+0 until end of turn.:Desperate Charge - Creatures get +2/+0 until EOT
+
+Glorious Charge
+1 W
+Instant
+no text
+spAllPump:YouCtrl:+1/+1:Creatures you control get +1/+1 unti end of turn.:Glorious Charge - Creatures get +1/+1 until EOT
+
+Kjeldoran War Cry
+1 W
+Instant
+no text
+spAllPump:YouCtrl:+X/+X:Creatures you control get +X/+X until end of turn, where X is 1 plus the number of cards named Kjeldoran War Cry in all graveyards.:Kjeldoran War Cry - Creatures get +X/+X until EOT
+SVar:X:Count$NamedInAllYards.Kjeldoran War Cry/Plus.1
+
+Magnify
+G
+Instant
+no text
+spAllPump:All:+1/+1:All creatures get +1/+1 until end of turn.:Magnify - Creatures get +1/+1 until EOT
+
+Nature's Cloak
+2 G
+Sorcery
+no text
+spAllPump:YouCtrl/Green:Forestwalk:Green creatures you control gain forestwalk until end of turn.:Nature's Cloak - Creatures gain forestwalk until EOT
+
+Nocturnal Raid
+2 B B
+Instant
+no text
+spAllPump:All/Black:+2/+0:Black creatures get +2/+0 until end of turn.:Nocturnal Raid - Black creatures get +2/+0 until EOT
+
+Overrun
+2 G G G
+Sorcery
+no text
+spAllPump:YouCtrl:+3/+3/Trample:Creatures you control get +3/+3 and gain trample until end of turn.:Overrun - Creatures you control get +3/+3 and gain trample until EOT
+
+Path of Anger's Flame
+2 R
+Instant - Arcane
+no text
+spAllPump:YouCtrl:+2/+0:Creatures you control get +2/+0 until end of turn.:Path of Anger's Flame - Creatures get +2/+0 until EOT
+
+Righteous Charge
+1 W W
+Sorcery
+no text
+spAllPump:YouCtrl:+2/+2:Creatures you control get +2/+2 until end of turn.:Righteous Charge - Creatures get +2/+2 until EOT
+
+Scare Tactics
+B
+Instant
+no text
+spAllPump:YouCtrl:+1/+0:Creatures you control get +1/+0 until end of turn.:Scare Tactics - Creatures get +1/+0 until EOT
+
+Shield Wall
+1 W
+Instant
+no text
+spAllPump:YouCtrl:+0/+2:Creatures you control get +0/+2 until end of turn.:Shield Wall - Creatures get +0/+2 until EOT
+
+Solidarity
+3 W
+Instant
+no text
+spAllPump:YouCtrl:+0/+5:Creatures you control get +0/+5 until end of turn.:Solidarity - Creatures get +0/+5 until EOT
+
+Steadfastness
+1 W
+Sorcery
+no text
+spAllPump:YouCtrl:+0/+3:Creatures you control get +0/+3 until end of turn.:Steadfastness - Creatures get +0/+3 until EOT
+
+Tortoise Formation
+3 U
+Instant
+no text
+spAllPump:YouCtrl:Shroud:Creatures you control gain shroud until end of turn.:Tortoise Formation - Creatures gain shroud until EOT
+
+Tromp the Domains
+5 G
+Sorcery
+no text
+spAllPump:YouCtrl:+X/+X/Trample:Domain - Until end of turn, creatures you control gain trample and get +1/+1 for each basic land type among lands you control.:Tromp the Domains - Creatures get +X/+X and gain trample until EOT
+SVar:X:Count$Domain
+
+Valorous Charge
+1 W W
+Sorcery
+no text
+spAllPump:All/White:+2/+0:White creatures get +1/+0 until end of turn.:Valorous Charge - Creatures get +1/+0 until EOT
+
+Virtuous Charge
+2 W
+Sorcery
+no text
+spAllPump:YouCtrl:+1/+1:Creatures you control get +1/+1 until end of turn.:Virtuous Charge - Creatures get +1/+1 until EOT
+
+Vitalizing Wind
+8 G
+Instant
+no text
+spAllPump:YouCtrl:+7/+7:Creatures you control get +7/+7 until end of turn.:Vitalizing Wind - Creatures get +7/+7 until EOT
+
+Warrior's Charge
+2 W
+Sorcery
+no text
+spAllPump:YouCtrl:+1/+1:Creatures you control get +1/+1 until end of turn.:Warrior's Charge - Creatures get +1/+1 until EOT
+
+Warrior's Honor
+2 W
+Instant
+no text
+spAllPump:YouCtrl:+1/+1:Creatures you control get +1/+1 until end of turn.:Warrior's Honor - Creatures get +1/+1 until EOT
+
 Gigantomancer
 7 G
 Creature Human Shaman
@@ -10639,31 +10779,6 @@ Essence Scatter
 Instant
 Counter target creature spell.
 
-Tortoise Formation
-3 U
-Instant
-Creatures you control gain shroud until end of turn. (They can't be the targets of spells or abilities.)
-
-Steadfastness
-1 W
-Sorcery
-Creatures you control get +0/+3 until end of turn.
-
-Nature's Cloak
-2 G
-Sorcery
-Green creatures you control gain forestwalk until end of turn.
-
-Glorious Charge
-1 W
-Instant
-Creatures you control get +1/+1 until end of turn.
-
-Burst of Speed
-R
-Sorcery
-Creatures you control gain haste until end of turn.
-
 Armorer Guildmage
 R
 Creature Human Wizard
@@ -16691,76 +16806,6 @@ no text
 Flash
 Reach
 
-Chorus of Woe
-B
-Sorcery
-Creatures you control get +1/+0 until end of turn.
-
-Dance of Shadows
-3 B B
-Sorcery
-Creatures you control get +1/+0 and gain fear until end of turn.
-
-Desperate Charge
-2 B
-Sorcery
-Creatures you control get +2/+0 until end of turn.
-
-Magnify
-G
-Instant
-All creatures get +1/+1 until end of turn.
-
-Nocturnal Raid
-2 B B
-Instant
-Black creatures get +2/+0 until end of turn.
-
-Overrun
-2 G G G
-Sorcery
-Creatures you control get +3/+3 and gain trample until end of turn.
-
-Righteous Charge
-1 W W
-Sorcery
-Creatures you control get +2/+2 until end of turn.
-
-Scare Tactics
-B
-Instant
-Creatures you control get +1/+0 until end of turn.
-
-Shield Wall
-1 W
-Instant
-Creatures you control get +0/+2 until end of turn.
-
-Solidarity
-3 W
-Instant
-Creatures you control get +0/+5 until end of turn.
-
-Valorous Charge
-1 W W
-Sorcery
-White creatures get +2/+0 until end of turn.
-
-Virtuous Charge
-2 W
-Sorcery
-Creatures you control get +1/+1 until end of turn.
-
-Vitalizing Wind
-8 G
-Instant
-Creatures you control get +7/+7 until end of turn.
-
-Warrior's Charge
-2 W
-Sorcery
-Creatures you control get +1/+1 until end of turn.
-
 Joiner Adept
 1 G
 Creature Elf Druid
@@ -19047,11 +19092,6 @@ Legendary Creature Spirit
 (NOTE: "X G, T: Arashi, the Sky Asunder deals X damage to target creature with flying. Channel - X G G, Discard Arashi: Arashi deals X damage to each creature with flying." not implemented.)
 5/5
 
-Tromp the Domains
-5 G
-Sorcery
-Until end of turn, creatures you control gain trample and get +1/+1 for each basic land type among lands you control.
-
 Elvish Fury
 G
 Instant
@@ -19303,11 +19343,6 @@ Creature Zubera Spirit
 When Ember-Fist Zubera is put into a graveyard from play, it deals damage to target creature or player equal to the number of Zubera put into all graveyards from play this turn.
 1/2
 
-Kjeldoran War Cry
-1 W
-Instant
-Creatures you control get +X/+X until end of turn, where X is 1 plus the number of cards name Kjeldoran War Cry in all graveyards.
-
 Inspirit
 2 W
 Instant
@@ -19546,11 +19581,6 @@ Instant
 no text
 spDamageTgtCP:1:Spark Spray deals 1 damage to target creature or player.:Spark Spray - deals 1 damage
 Cycling:R
-
-Path of Anger's Flame
-2 R
-Instant
-Creatures you control get +2/+0 until end of turn.
 
 Lay Waste
 3 R
@@ -22195,10 +22225,5 @@ Creature Human Wizard
 no text
 1/1
 Lifelink
-
-Warrior's Honor
-2 W
-Instant
-Creatures you control get +1/+1 until end of turn.
 
 End

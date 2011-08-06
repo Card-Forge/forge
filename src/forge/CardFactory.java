@@ -3828,7 +3828,17 @@ public class CardFactory implements NewConstants {
             return card2;
         }
         
-
+        
+        //*************** START *********** START **************************
+        if (cardName.equals("Brave the Elements")) {
+        	
+        	/**
+        	 *  This card is currently under construction
+        	 */
+        	
+        }//*************** END ************ END **************************
+        
+/*
         //*************** START *********** START **************************
         if(cardName.equals("Brave the Elements")
         		|| cardName.equals("Burst of Speed") 
@@ -4093,7 +4103,7 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+*/
 
         //*************** START *********** START **************************
         else if(cardName.equals("Pyrohemia")) {
