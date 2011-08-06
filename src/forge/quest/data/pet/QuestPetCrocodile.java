@@ -75,7 +75,7 @@ public class QuestPetCrocodile extends QuestPetAbstract{
         "1/1, B",
         "2/1, B",
         "3/1, B",
-        "4/1, B, Swampwalking"};
+        "3/1, B, Swampwalking"};
     }
 
     @Override
