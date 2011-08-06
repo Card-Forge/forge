@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import forge.AllZone;
+import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.ComputerUtil;
@@ -187,6 +188,7 @@ public class AbilityFactory_Reveal {
 		String destZone1 = params.containsKey("DestinationZone") ? params.get("DestinationZone") : "Hand";
 		int libraryPosition = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : -1;
 		int destZone1ChangeNum = params.containsKey("ChangeNum") ? Integer.parseInt(params.get("ChangeNum")) : 1;
+		boolean mitosis = params.containsKey("Mitosis");
 		String changeValid = params.containsKey("ChangeValid") ? params.get("ChangeValid") : "";
 		boolean anyNumber = params.containsKey("AnyNumber");
 		String destZone2 = params.containsKey("DestinationZone2") ? params.get("DestinationZone2") : "Library";
@@ -218,7 +220,13 @@ public class AbilityFactory_Reveal {
 					//show the user the revealed cards
 					GuiUtils.getChoice("Looking at cards from library", top.toArray());
 
-					if(!changeValid.equals("")) {
+					if(mitosis) {
+						valid = sharesNameWithCardOnBattlefield(top);
+						for(Card c:top) {
+							if(!valid.contains(c)) rest.add(c);
+						}
+					}
+					else if(!changeValid.equals("")) {
 						valid = top.getValidCards(changeValid.split(","), host.getController(), host);
 						for(Card c:top) {
 							if(!valid.contains(c)) rest.add(c);
@@ -283,5 +291,16 @@ public class AbilityFactory_Reveal {
 			}
 		}
 	}//end resolve
+	
+	private static CardList sharesNameWithCardOnBattlefield(CardList list) {
+		CardList toReturn = new CardList();
+		CardList play = AllZoneUtil.getCardsInPlay();
+		for(Card c:list) {
+			for(Card p:play) {
+				if(p.getName().equals(c.getName())) toReturn.add(c);
+			}
+		}
+		return toReturn;
+	}
 
 }//end class AbilityFactory_Reveal
