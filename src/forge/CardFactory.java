@@ -7780,6 +7780,183 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END ************************** 
         
         //*************** START *********** START **************************
+        else if(cardName.equals("Reiterate")) {
+            final SpellAbility spell_one = new Spell(card) {
+
+				private static final long serialVersionUID = -659841515428746L;
+
+				@Override
+                public void resolve() {
+					Card c = copyCardintoNew(getTargetCard());
+					SpellAbility[] sa = c.getSpellAbility();
+					c.setController(card.getController());
+					
+					c.addXManaCostPaid(getTargetCard().getXManaCostPaid());
+					c.addMultiKickerMagnitude(getTargetCard().getMultiKickerMagnitude());
+					if(getTargetCard().isKicked()) c.setKicked(true);
+					c.setCopiedSpell(true);
+					if(c.hasChoices()) {
+						for(int i = 0; i < getTargetCard().getChoices().size(); i++) {
+							c.addSpellChoice(getTargetCard().getChoice(i));
+						}
+					}
+					for(int i = 0; i < sa.length; i++) {
+						if(getTargetCard().getAbilityUsed() == i) {
+							if(c.isKicked() && !sa[i].isKickerAbility())  {
+						} else {
+							if(getTargetCard().getSpellAbility()[i].getTargetCard() != null)
+								sa[i].setTargetCard(getTargetCard().getSpellAbility()[i].getTargetCard());
+							if(getTargetCard().getSpellAbility()[i].getTargetPlayer() != null) {
+							if(getTargetCard().getSpellAbility()[i].getTargetPlayer().equals(Constant.Player.Human)
+									|| (getTargetCard().getSpellAbility()[i].getTargetPlayer().equals(Constant.Player.Computer))) 
+								sa[i].setTargetPlayer(getTargetCard().getSpellAbility()[i].getTargetPlayer());
+							}
+							//TODO Selecting New Targets. Then Apply to storm.
+							AllZone.GameAction.playSpellAbility(sa[i]);
+						}
+						}	
+					}
+					
+				}
+                
+                public boolean canPlay()
+                {
+                	ArrayList<Card> list = AllZone.Stack.getSourceCards();
+                	CardList StackList = new CardList();
+                	for(int i = 0; i < list.size(); i++) StackList.add(list.get(i));
+
+                	StackList = StackList.filter(new CardListFilter() {
+                    	public boolean addCard(Card c) {
+                    		return c.isSorcery() || c.isInstant();
+                    	}
+                    });
+                	return StackList.size() > 0 && super.canPlay();
+                }
+            };//SpellAbility
+            
+            final SpellAbility spell_two = new Spell(card) {
+                
+                private static final long serialVersionUID = -131686114078716307L;
+   				@Override
+                    public void resolve() {
+    					Card c = copyCardintoNew(getTargetCard());
+    					SpellAbility[] sa = c.getSpellAbility();
+    					c.setController(card.getController());
+    					
+    					c.addXManaCostPaid(getTargetCard().getXManaCostPaid());
+    					c.addMultiKickerMagnitude(getTargetCard().getMultiKickerMagnitude());
+    					if(getTargetCard().isKicked()) c.setKicked(true);
+    					c.setCopiedSpell(true);
+    					if(c.hasChoices()) {
+    						for(int i = 0; i < getTargetCard().getChoices().size(); i++) {
+    							c.addSpellChoice(getTargetCard().getChoice(i));
+    						}
+    					}
+    					for(int i = 0; i < sa.length; i++) {
+    						if(getTargetCard().getAbilityUsed() == i) {
+    							if(c.isKicked() && !sa[i].isKickerAbility())  {
+    						} else {
+    							if(getTargetCard().getSpellAbility()[i].getTargetCard() != null)
+    								sa[i].setTargetCard(getTargetCard().getSpellAbility()[i].getTargetCard());
+    							if(getTargetCard().getSpellAbility()[i].getTargetPlayer() != null) {
+    							if(getTargetCard().getSpellAbility()[i].getTargetPlayer().equals(Constant.Player.Human)
+    									|| (getTargetCard().getSpellAbility()[i].getTargetPlayer().equals(Constant.Player.Computer))) 
+    								sa[i].setTargetPlayer(getTargetCard().getSpellAbility()[i].getTargetPlayer());
+    							}
+    							//TODO Selecting New Targets. Then Apply to storm.
+    							AllZone.GameAction.playSpellAbility(sa[i]);
+    						}
+    						}	
+    					}
+                        done();
+                }//resolve()
+    				
+                    
+                    public boolean canPlay()
+                    {
+                    	ArrayList<Card> list = AllZone.Stack.getSourceCards();
+                    	CardList StackList = new CardList();
+                    	for(int i = 0; i < list.size(); i++) StackList.add(list.get(i));
+
+                    	StackList = StackList.filter(new CardListFilter() {
+                        	public boolean addCard(Card c) {
+                        		return c.isSorcery() || c.isInstant();
+                        	}
+                        });
+                    	return StackList.size() > 0 && super.canPlay();
+                    }
+
+                
+                void done() {
+                    //return card to the hand
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                    AllZone.GameAction.moveTo(hand, card);
+                }
+            };//SpellAbility
+            spell_two.setManaCost("4 R R");
+            spell_two.setAdditionalManaCost("3");
+            
+            spell_one.setDescription("Copy target instant or sorcery spell. You may choose new targets for the copy.");
+            spell_one.setStackDescription(cardName + " - " + card.getController() + "Copies " + spell_one.getTargetCard());
+            spell_two.setDescription("Buyback 3 - Pay 4 R R , put this card into your hand as it resolves.");
+            spell_two.setStackDescription(cardName + " - (Buyback) " + card.getController() + "Copies " + spell_two.getTargetCard());
+            spell_two.setIsBuyBackAbility(true);
+            
+            Input runtime1 = new Input() {
+                private static final long serialVersionUID = -7823269301012427007L;
+                
+                @Override
+                public void showMessage() {
+                	ArrayList<Card> list = AllZone.Stack.getSourceCards();
+                	CardList StackList = new CardList();
+                	for(int i = 0; i < list.size(); i++) StackList.add(list.get(i));
+
+                	StackList = StackList.filter(new CardListFilter()
+                    {
+                    	public boolean addCard(Card c)
+                    	{
+                    		return c.isSorcery() || c.isInstant();
+                    	}
+                    });
+                    
+                    stopSetNext(CardFactoryUtil.input_Spell(spell_one, StackList, false));
+                    
+                }//showMessage()
+            };//Input
+           
+            Input runtime2 = new Input() {
+                private static final long serialVersionUID = -7823269301012427007L;
+                
+                @Override
+                public void showMessage() {
+                	ArrayList<Card> list = AllZone.Stack.getSourceCards();
+                	CardList StackList = new CardList();
+                	for(int i = 0; i < list.size(); i++) StackList.add(list.get(i));
+
+                	StackList = StackList.filter(new CardListFilter()
+                    {
+                    	public boolean addCard(Card c)
+                    	{
+                    		return c.isSorcery() || c.isInstant();
+                    	}
+                    });
+                    
+                    stopSetNext(CardFactoryUtil.input_Spell(spell_two, StackList, false));
+                    
+                }//showMessage()
+            };//Input
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(spell_one);
+            card.addSpellAbility(spell_two);
+            card.setCopiesSpells(true);
+            spell_one.setBeforePayMana(runtime1);
+            spell_two.setBeforePayMana(runtime2);
+
+
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
         else if(cardName.equals("Twincast")) {
             final SpellAbility spell = new Spell(card) {
 

@@ -1,3 +1,9 @@
+Reiterate
+1 R R
+Instant
+no text
+SVar:Buyback:3
+
 Violent Ultimatum
 B B R R R G G
 Sorcery
