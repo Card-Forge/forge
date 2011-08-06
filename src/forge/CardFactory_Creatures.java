@@ -8564,10 +8564,20 @@ public class CardFactory_Creatures {
                     });
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                     
-                    if(!land.isEmpty()) {
-                        Object o = AllZone.Display.getChoiceOptional("Select target Land", land.toArray());
-                        Card l = (Card) o;
-                        AllZone.GameAction.moveTo(hand, l);
+                    if (card.getController().equals(Constant.Player.Human))
+                    {
+	                    if(!land.isEmpty()) {
+	                        Object o = AllZone.Display.getChoiceOptional("Select target Land", land.toArray());
+	                        Card l = (Card) o;
+	                        AllZone.GameAction.moveTo(hand, l);
+	                    }
+                    }
+                    else
+                    {
+                    	land.shuffle();
+                    	Card crd = land.get(0);
+                    	if (crd!=null)
+                    		AllZone.GameAction.moveTo(hand, crd);
                     }
                     
                 }//resolve()
@@ -8583,6 +8593,14 @@ public class CardFactory_Creatures {
                         }
                     });
                     return land.size() > 0;
+                }
+                public boolean canPlayAI()
+                {
+                	 PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                     
+                     CardList land = new CardList(play.getCards());
+                     land = land.getType("Land");
+                     return land.size() > 5;
                 }
             };//SpellAbility
             card.addSpellAbility(ability);
