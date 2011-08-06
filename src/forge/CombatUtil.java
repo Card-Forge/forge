@@ -706,7 +706,7 @@ public class CombatUtil {
 		else if (trigParams.get("Mode").equals("AttackerBlocked")) {
 			willTrigger = true;
 			if(trigParams.containsKey("ValidBlocker"))
-				if(!trigger.matchesValid(defender, trigParams.get("ValidBlocked").split(","), source))
+				if(!trigger.matchesValid(defender, trigParams.get("ValidBlocker").split(","), source))
 					willTrigger = false;
 			if(trigParams.containsKey("ValidCard"))
 				if(!trigger.matchesValid(attacker, trigParams.get("ValidCard").split(","), source))
