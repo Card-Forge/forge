@@ -1,7 +1,7 @@
 Name:Lightning Talons
 ManaCost:2 R
 Types:Enchantment Aura
-Text:Enchanted creature gets +3/+0 and has first strike.
+Text:no text
 K:Enchant creature
 K:enPump:+3/+0/First Strike
 SVar:Rarity:Common

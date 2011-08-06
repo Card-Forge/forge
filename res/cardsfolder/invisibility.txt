@@ -1,9 +1,9 @@
 Name:Invisibility
 ManaCost:U U
 Types:Enchantment Aura
-Text:Enchanted creature can't be blocked except by Walls.
+Text:no text
 K:Enchant creature
-K:enPump:HIDDEN CARDNAME can't be blocked except by Walls.
+K:enPump:HIDDEN CARDNAME can't be blocked except by Walls.:Enchanted creature can't be blocked except by Walls.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/invisibility.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/87.jpg
