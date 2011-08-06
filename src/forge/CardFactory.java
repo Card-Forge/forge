@@ -18974,6 +18974,30 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spell);
         }// *************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Acid Rain")) {
+        	final SpellAbility spell = new Spell(card) {
+        		private static final long serialVersionUID = -5709523778051144200L;
+
+        		@Override
+        		public void resolve() {
+        			CardList forests = AllZoneUtil.getTypeInPlay("Forest");
+        			for(int i = 0; i < forests.size(); i++) {
+        				AllZone.GameAction.destroy(forests.get(i));
+        			}
+        		}//resolve()
+
+        		@Override
+        		public boolean canPlayAI() {
+        			CardList forests = AllZoneUtil.getPlayerTypeInPlay(Constant.Player.Human, "Forest");
+        			return 3 < forests.size();
+        		}
+        	};//SpellAbility
+        	spell.setStackDescription(card.getName() + " - destroy all Forests.");
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {

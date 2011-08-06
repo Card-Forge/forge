@@ -1,3 +1,8 @@
+Acid Rain
+3 U
+Sorcery
+Destroy all Forests.
+
 Acidic Soil
 2 R
 Sorcery
