@@ -9,4 +9,5 @@ A:AB$ Tap | Cost$ T | ValidTgts$ Creature.cmcLE3 | TgtPrompt$ Select target crea
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunstrike_legionnaire.jpg
+SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/22.jpg
 End

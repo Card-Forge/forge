@@ -8,4 +8,5 @@ T:Mode$ SpellAbilityCast | TargetsValid$ Card.Self | TriggerZones$ Battlefield |
 SVar:TrigDrain:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tethered_skirge.jpg
+SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/70.jpg
 End
