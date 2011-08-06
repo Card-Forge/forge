@@ -7988,7 +7988,8 @@ public class CardFactory implements NewConstants {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Tranquility") || cardName.equals("Tempest of Light")
-                || cardName.equals("Cleanfall") || cardName.equals("Hush")) {
+                || cardName.equals("Cleanfall") || cardName.equals("Hush") 
+                || cardName.equals("Tranquil Path")) {
             SpellAbility spell = new Spell(card) {
                 
                 private static final long serialVersionUID = 3087098751201624354L;

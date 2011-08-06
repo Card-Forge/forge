@@ -1,3 +1,9 @@
+Tranquil Path
+4 G
+Sorcery
+no text
+Draw a card.
+
 Buried Alive
 2 B
 Sorcery

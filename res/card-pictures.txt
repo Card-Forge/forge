@@ -38,6 +38,7 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+tranquil_path.jpg				http://www.wizards.com/global/images/magic/general/tranquil_path.jpg
 buried_alive.jpg		http://www.wizards.com/global/images/magic/general/buried_alive.jpg
 ulamog_the_infinite_gyre.jpg		http://www.wizards.com/global/images/magic/general/ulamog_the_infinite_gyre.jpg
 alaborn_zealot.jpg      http://serv2.tcgimages.eu/img/cards/Portal_Second_Age/alaborn_zealot.jpg
