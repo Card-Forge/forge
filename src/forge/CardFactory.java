@@ -11366,6 +11366,7 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         
+/* Converted to the spDestroyAll keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Akroma's Vengeance") || cardName.equals("Devastation")
                 || cardName.equals("Jokulhaups") || cardName.equals("Purify") || cardName.equals("Shatterstorm")
@@ -11406,6 +11407,8 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(CardFactoryUtil.ability_cycle(card, "3"));
             if(cardName.equals("Obliterate")) card.setText("Obliterate can't be countered. \r\n" + card.getText());
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Wheel of Fortune")) {

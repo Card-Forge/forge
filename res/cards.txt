@@ -1,3 +1,54 @@
+Akroma's Vengeance
+4 W W
+Sorcery
+Destroy all artifacts, creatures, and enchantments.
+spDestroyAll:Artifact,Creature,Enchantment
+Cycling:3
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/akromas_vengeance.jpg
+
+Devastation
+5 R R
+Sorcery
+Destroy all creatures and lands.
+spDestroyAll:Creature,Land
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/devastation.jpg
+
+Jokulhaups
+4 R R
+Sorcery
+Destroy all artifacts, creatures, and lands. They can't be regenerated.
+spDestroyAll:Artifact,Creature,Land:NoRegen
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card14653.jpg
+
+Obliterate
+6 R R
+Sorcery
+Destroy all artifacts, creatures, and lands. They can't be regenerated.
+spDestroyAll:Artifact,Creature,Land:NoRegen
+CARDNAME can't be countered.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/obliterate.jpg
+
+Purify
+3 W W
+Sorcery
+Destroy all artifacts and enchantments.
+spDestroyAll:Artifact,Enchantment
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/purify.jpg
+
+Shatterstorm
+2 R R
+Sorcery
+Destroy all artifacts. They can't be regenerated.
+spDestroyAll:Artifact:NoRegen
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shatterstorm.jpg
+
 Abyssal Persecutor
 2 B B
 Creature Demon
@@ -973,13 +1024,6 @@ Creatures you control have flying, first strike, vigilance, trample, haste, and 
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akromas_memorial.jpg
-
-Akroma's Vengeance
-4 W W
-Sorcery
-no text
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/akromas_vengeance.jpg
 
 Akuta, Born of Ash
 2 B B
@@ -7611,13 +7655,6 @@ Sorcery
 Each player sacrifices five lands. Destructive Force deals 5 damage to each creature.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/destructive_force.jpg
-
-Devastation
-5 R R
-Sorcery
-Destroy all creatures and lands.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/devastation.jpg
 
 Devoted Hero
 W
@@ -15610,14 +15647,6 @@ Lands you control have "tap: Add one mana of any color to your mana pool."
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/joiner_adept.jpg
 
-Jokulhaups
-4 R R
-Sorcery
-Destroy all artifacts, creatures, and lands. They can't be regenerated.
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card14653.jpg
-
 Jolrael's Centaur
 1 G G
 Creature Centaur Archer
@@ -20877,14 +20906,6 @@ tap: add W
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_naya.jpg
 
-Obliterate
-6 R R
-Sorcery
-Destroy all artifacts, creatures, and lands. They can't be regenerated.
-CARDNAME can't be countered.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/obliterate.jpg
-
 Oblivion Ring
 2 W
 Enchantment
@@ -22827,13 +22848,6 @@ Destroy target artifact creature or black creature. It can't be regenerated.
 spDestroyTgt:Creature.Artifact,Creature.Black:NoRegen
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/purge.jpg
-
-Purify
-3 W W
-Sorcery
-Destroy all artifacts and enchantments.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/purify.jpg
 
 Putrefy
 1 B G
@@ -26125,13 +26139,6 @@ no text
 4/3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shatterskull_giant.jpg
-
-Shatterstorm
-2 R R
-Sorcery
-Destroy all artifacts. They can't be regenerated.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shatterstorm.jpg
 
 Shepherd of the Lost
 4 W
