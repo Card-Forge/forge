@@ -116,7 +116,7 @@ public class AbilityFactory_Clash {
             @Override
             public String getStackDescription()
             {
-                return "Clash with an opponent.";
+                return " Clash with an opponent.";
             }
 
             @Override

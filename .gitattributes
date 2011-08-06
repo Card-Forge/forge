@@ -966,6 +966,7 @@ res/cardsfolder/bringer_of_the_white_dawn.txt -text svneol=native#text/plain
 res/cardsfolder/brink_of_madness.txt svneol=native#text/plain
 res/cardsfolder/brion_stoutarm.txt -text svneol=native#text/plain
 res/cardsfolder/brittle_effigy.txt -text svneol=native#text/plain
+res/cardsfolder/broken_ambitions.txt svneol=native#text/plain
 res/cardsfolder/broken_dam.txt -text svneol=native#text/plain
 res/cardsfolder/broken_fall.txt -text svneol=native#text/plain
 res/cardsfolder/broken_visage.txt svneol=native#text/plain
