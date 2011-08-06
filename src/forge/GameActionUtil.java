@@ -4458,7 +4458,11 @@ public class GameActionUtil {
 				player.subtractLife(2,crd);
 			}
 		};
-		ability.setStackDescription("Dingus Staff - Deals 2 damage to " + destroyed.getController() + ".");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Dingus Staff - Deals 2 damage to ").append(destroyed.getController()).append(".");
+		ability.setStackDescription(sb.toString());
+		
 		AllZone.Stack.add(ability);
 	}
 
@@ -4491,8 +4495,12 @@ public class GameActionUtil {
 						"Creature", "Elf", "Warrior"}, 1, 1, new String[] {""});
 			}
 		};
-		ability.setStackDescription("Prowess of the Fair - " + c.getController()
-				+ " may put a 1/1 green Elf Warrior creature token onto the battlefield.");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Prowess of the Fair - ").append(c.getController());
+		sb.append(" may put a 1/1 green Elf Warrior creature token onto the battlefield.");
+		ability.setStackDescription(sb.toString());
+		
 		AllZone.Stack.add(ability);
 	}
 
@@ -4509,7 +4517,10 @@ public class GameActionUtil {
 				} else player.drawCard(); //computer
 			}
 		};
-		ability.setStackDescription("Fecundity - " + destroyed.getController() + " may draw a card.");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Fecundity - ").append(destroyed.getController()).append(" may draw a card.");
+		ability.setStackDescription(sb.toString());
 
 		AllZone.Stack.add(ability);
 	}
@@ -4523,7 +4534,11 @@ public class GameActionUtil {
 				crd.getController().gainLife(1);
 			}
 		};
-		ability.setStackDescription("Moonlit Wake - " + c.getController() + " gains 1 life.");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Moonlit Wake - ").append(c.getController()).append(" gains 1 life.");
+		ability.setStackDescription(sb.toString());
+		
 		AllZone.Stack.add(ability);
 	}
 
@@ -4537,8 +4552,12 @@ public class GameActionUtil {
 				crd.getController().gainLife(crd2.getNetDefense());
 			}
 		};
-		ability.setStackDescription("Proper Burial - " + c.getController() + " gains " + destroyed.getNetDefense()
-				+ " life.");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Proper Burial - ").append(c.getController()).append(" gains ");
+		sb.append(destroyed.getNetDefense()).append(" life.");
+		ability.setStackDescription(sb.toString());
+		
 		AllZone.Stack.add(ability);
 	}
 
@@ -4576,7 +4595,11 @@ public class GameActionUtil {
 				player.addDamage(2, crd);
 			}
 		};
-		ability.setStackDescription("Dingus Egg - Deals 2 damage to " + destroyed.getController() + ".");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Dingus Egg - Deals 2 damage to ").append(destroyed.getController()).append(".");
+		ability.setStackDescription(sb.toString());
+		
 		AllZone.Stack.add(ability);
 	}
 
@@ -4595,8 +4618,12 @@ public class GameActionUtil {
 						2, 2, new String[] {""});
 			}
 		};
-		ability.setStackDescription("Bridge from Below - " + c.getController()
-				+ "puts a 2/2 black Zombie creature token onto the battlefield.");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Bridge from Below - ").append(c.getController());
+		sb.append("puts a 2/2 black Zombie creature token onto the battlefield.");
+		ability.setStackDescription(sb.toString());
+		
 		AllZone.Stack.add(ability);
 	}
 
@@ -4611,7 +4638,11 @@ public class GameActionUtil {
 				exile.add(crd);
 			}
 		};
-		ability.setStackDescription("Bridge from Below - " + c.getController() + " exile Bridge from Below.");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Bridge from Below - ").append(c.getController()).append(" exile Bridge from Below.");
+		ability.setStackDescription(sb.toString());
+		
 		AllZone.Stack.add(ability);
 	}
 
