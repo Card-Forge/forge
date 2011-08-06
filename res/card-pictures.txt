@@ -22,7 +22,7 @@ door_to_nothingness.jpg		http://www.wizards.com/global/images/magic/general/door
 kazuul_warlord.jpg			http://www.wizards.com/global/images/magic/general/kazuul_warlord.jpg
 seascape_aerialist.jpg		http://www.wizards.com/global/images/magic/general/seascape_aerialist.jpg
 ondu_cleric.jpg				http://www.wizards.com/global/images/magic/general/ondu_cleric.jpg
-joraga_bard.jpg				http://www.wizards.com/global/images/magic/general/ondu_cleric.jpg
+joraga_bard.jpg				http://www.wizards.com/global/images/magic/general/joraga_bard.jpg
 highland_berserker.jpg		http://www.wizards.com/global/images/magic/general/highland_berserker.jpg
 cruel_edict.jpg				http://www.wizards.com/global/images/magic/general/cruel_edict.jpg
 imperial_edict.jpg			http://www.wizards.com/global/images/magic/general/imperial_edict.jpg

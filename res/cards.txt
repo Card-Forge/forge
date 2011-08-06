@@ -347,6 +347,7 @@ Vodalian Knights
 Creature Merfolk Knight
 no text
 2/2
+First Strike
 This creature can't attack unless defending player controls an Island
 When you control no Islands, sacrifice this creature
 KPump U:Flying
