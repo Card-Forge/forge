@@ -11860,12 +11860,17 @@ public class GameActionUtil {
 			
 		}
 	};
+	/*
+	 * replaced with stPump[All][Self] etc
+	 * and
+	 * stSetPT
+	 
 	
 	public static Command StaticEffectKeyword  		= new Command() {
 		/** StaticEffectKeyword
 		 * Syntax:[ k[0] StaticEffect : k[1] Where the Card must be : k[2] Which Cards the Bonus Affects : 
 		 * 			k[3] What Bonus does the Card have : k[4] Special Conditions : k[5] Description
-		 */
+		 *
 		
 		private static final long serialVersionUID = -8467814700545847505L;
 		int						  max			  		 = 100;
@@ -12196,7 +12201,7 @@ public class GameActionUtil {
 				1. To determine which cards should be affected by a static effect
 				2. To determine the value of SetPT bonuses.
 				It works by going through all conditions and finding the cards in the zones
-			**/
+			**
 			CardList Cards_inZone = new CardList();
       		if(Keyword_Details[2].equals("All Permanents")) {
 	      		Cards_inZone.addAll(AllZone.Human_Battlefield.getCards());
@@ -12259,7 +12264,7 @@ public class GameActionUtil {
 			 	This Function determines the value of SetPT Bonuses and sends it to addKeyword
 			 	It calls AffectedCards, to get the cards which would determine the value of the SetPT Bonus 
 			 	and then uses special conditions to determine the proper value.
-			**/
+			**
 			 
 			int[] Bonus = new int[2];
 			String[] CardsinZoneDetails = new String[3];
@@ -12315,6 +12320,7 @@ public class GameActionUtil {
 			return Bonus;
 		}
 	};
+	*/
 	
 	public static Command stPump  		= new Command() {
 		/** StaticEffectKeyword
@@ -12540,6 +12546,11 @@ public class GameActionUtil {
       		if(Range.equals("All")) {
       			Cards_inZone.addAll(AllZone.Human_Battlefield.getCards());
       			Cards_inZone.addAll(AllZone.Computer_Battlefield.getCards());
+      			//this is a hack for Quick Sliver
+      			if(Keyword_Details.length >= 2 && Keyword_Details[2].contains("Flash")) {
+      				Cards_inZone.addAll(AllZone.Human_Hand.getCards());
+      				Cards_inZone.addAll(AllZone.Computer_Hand.getCards());
+      			}
       		}
       		if(Range.equals("Enchanted")) {
       			if (SourceCard.getEnchanting().size() > 0)
