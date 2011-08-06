@@ -798,11 +798,11 @@ public class CombatUtil {
     	
     	if (canDamage)
     	{
-	    	if(c.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(c);
+	    	// if(c.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(c);
 	        
-	        CardList cl = CardFactoryUtil.getAurasEnchanting(c, "Guilty Conscience");
-	        for(Card crd:cl)
-	            GameActionUtil.executeGuiltyConscienceEffects(c, crd);
+	        // CardList cl = CardFactoryUtil.getAurasEnchanting(c, "Guilty Conscience");
+	        // for(Card crd:cl)
+	        //    GameActionUtil.executeGuiltyConscienceEffects(c, crd);
 	        
 	        /*
 	         * Whenever equipped creature deals combat damage, put two
