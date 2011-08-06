@@ -417,7 +417,13 @@ public class AbilityFactory_PermanentState {
 		boolean randomReturn = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
 		
 		if (tgt == null){
-			if (sa.getSourceCard().isTapped())
+			ArrayList<Card> defined = AbilityFactory.getDefinedCards(source, af.getMapParams().get("Defined"), sa);
+			
+			boolean bFlag = false;
+			for(Card c : defined)
+				bFlag |= c.isUntapped();
+			
+			if (!bFlag)	// All of the defined stuff is tapped, not very useful
 				return false;
 		}
 		else{
@@ -483,7 +489,7 @@ public class AbilityFactory_PermanentState {
 		boolean randomReturn = true;
 		
 		if (tgt == null){
-			// who cares if its already tapped, it's only a subability?
+			// either self or defined, either way should be fine
 		}
 		else{
 			// target section, maybe pull this out?
@@ -548,8 +554,7 @@ public class AbilityFactory_PermanentState {
 		if (tgt != null)
 			tgtCards = tgt.getTargetCards();
 		else{
-			tgtCards = new ArrayList<Card>();
-			tgtCards.add(card);
+			tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
 		}
 
 		for(Card tgtC : tgtCards){
