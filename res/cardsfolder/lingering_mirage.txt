@@ -7,7 +7,7 @@ Text:no text
 #
 K:Enchant land
 K:Cycling:2
-SVar:Rarity:Common
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lingering_mirage.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/84.jpg
 End

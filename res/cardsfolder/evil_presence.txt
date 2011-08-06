@@ -3,7 +3,7 @@ ManaCost:B
 Types:Enchantment Aura
 Text:Enchanted land is a Swamp.
 K:Enchant land
-SVar:Rarity:Common
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evil_presence.jpg
 SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/16.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/16.jpg

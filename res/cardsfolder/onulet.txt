@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you gain 2 life.
 SVar:TrigSac:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
-SVar:Rarity:Common
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/onulet.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/269.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/358.jpg
