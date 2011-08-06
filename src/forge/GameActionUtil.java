@@ -8318,18 +8318,16 @@ public class GameActionUtil {
 			}
 		});
 
-		if(blaze.size() > 0) {
-			final int lands = blaze.size();
-			final Card F_card = blaze.get(0); // Quick Fix, will improve later
-			Ability ability = new Ability(blaze.get(0), "0") {
+			for(int i = 0; i < blaze.size(); i++) {
+			final Card Source = blaze.get(i);
+			Ability ability = new Ability(blaze.get(i), "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.getPlayerLife(player).subtractLife(lands,F_card);
+					AllZone.GameAction.getPlayerLife(player).subtractLife(1,Source);
 				}
 			};
-			ability.setStackDescription("Obsidian Fireheart - " + player + " gets dealt " + lands + " damage.");
+			ability.setStackDescription(blaze.get(i) + " - has a blaze counter and " + player + " gets dealt 1 damage.");
 			AllZone.Stack.add(ability);
-
 		}
 
 	}

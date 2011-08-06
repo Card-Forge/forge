@@ -1,3 +1,9 @@
+Liliana's Caress
+1 B
+Enchantment
+no text
+WheneverKeyword:DiscardsCard:ControllingPlayer_Opponent:Play:ModifyLife/-2:ControllingPlayer_Opponent:ASAP:No Condition:No Special Condition:Whenever an opponent discards a card, that player loses 2 life.
+
 Curiosity
 U
 Enchantment Aura
