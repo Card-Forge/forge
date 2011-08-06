@@ -3,7 +3,7 @@ ManaCost:3 R R
 Types:Creature Elemental
 Text:no text
 PT:3/3
-K:Protection from Red
+K:Protection from red
 A:AB$ DamageAll | Cost$ T | NumDmg$ 1 | ValidCards$ Creature.withoutFlying | ValidDescription$ each creature and without flying. | SpellDescription$ CARDNAME deals 1 damage to each creature without flying.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
