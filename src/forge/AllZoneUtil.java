@@ -555,4 +555,21 @@ public class AllZoneUtil {
 			return c.isWhite();
 		}
 	};
+	
+	public static CardList getCardsInGame(){
+        CardList all = new CardList();
+        all.addAll(AllZone.Human_Graveyard.getCards());
+        all.addAll(AllZone.Human_Hand.getCards());
+        all.addAll(AllZone.Human_Library.getCards());
+        all.addAll(AllZone.Human_Play.getCards());
+        all.addAll(AllZone.Human_Removed.getCards());
+        
+        all.addAll(AllZone.Computer_Graveyard.getCards());
+        all.addAll(AllZone.Computer_Hand.getCards());
+        all.addAll(AllZone.Computer_Library.getCards());
+        all.addAll(AllZone.Computer_Play.getCards());
+        all.addAll(AllZone.Computer_Removed.getCards());
+        
+        return all;
+    }
 }

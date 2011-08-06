@@ -36,30 +36,13 @@ public class GameAction {
     }
 
     public void resetActivationsPerTurn(){
-    	CardList all = getCardsInGame();
+    	CardList all = AllZoneUtil.getCardsInGame();
     	
         // Reset Activations per Turn
         for(Card card : all){
         	for(SpellAbility sa : card.getSpellAbility())
         		sa.getRestrictions().resetTurnActivations();
         }
-    }
-    
-    public CardList getCardsInGame(){
-        CardList all = new CardList();
-        all.addAll(AllZone.Human_Graveyard.getCards());
-        all.addAll(AllZone.Human_Hand.getCards());
-        all.addAll(AllZone.Human_Library.getCards());
-        all.addAll(AllZone.Human_Play.getCards());
-        all.addAll(AllZone.Human_Removed.getCards());
-        
-        all.addAll(AllZone.Computer_Graveyard.getCards());
-        all.addAll(AllZone.Computer_Hand.getCards());
-        all.addAll(AllZone.Computer_Library.getCards());
-        all.addAll(AllZone.Computer_Play.getCards());
-        all.addAll(AllZone.Computer_Removed.getCards());
-        
-        return all;
     }
     
     public Card moveTo(PlayerZone zone, Card c) {
@@ -137,13 +120,6 @@ public class GameAction {
         Card[] c = AllZone.getZone(Constant.Zone.Hand, player).getCards();
         if(c.length != 0) discard(CardUtil.getRandom(c), sa);
     }
-    
-    /*
-    public void discardRandom(String player) {
-        Card[] c = AllZone.getZone(Constant.Zone.Hand, player).getCards();
-        if(c.length != 0) discard(CardUtil.getRandom(c));
-    }
-    */
     
     public void mill(Player player, int n)
     {
@@ -679,10 +655,7 @@ public class GameAction {
 
     private void destroyPlaneswalkers() {
         //get all Planeswalkers
-        CardList list = new CardList();
-        list.addAll(AllZone.Human_Play.getCards());
-        list.addAll(AllZone.Computer_Play.getCards());
-        list = list.getType("Planeswalker");
+        CardList list = AllZoneUtil.getTypeInPlay("Planeswalker");
         
         Card c;
         for(int i = 0; i < list.size(); i++) {
@@ -706,13 +679,7 @@ public class GameAction {
         ArrayList<Card> a = PlayerZoneUtil.getCardType(AllZone.Human_Play, "Legendary");
         a.addAll(PlayerZoneUtil.getCardType(AllZone.Computer_Play, "Legendary"));               
 
-        CardList Mirror_Gallery = new CardList();                   // Mirror Gallery suppresses the Legend rule
-        Mirror_Gallery.addAll(AllZone.Human_Play.getCards());
-        Mirror_Gallery.addAll(AllZone.Computer_Play.getCards());
-        Mirror_Gallery = Mirror_Gallery.getName("Mirror Gallery");
-
-        
-        while(!a.isEmpty() && Mirror_Gallery.isEmpty()) {
+        while(!a.isEmpty() && !AllZoneUtil.isCardInPlay("Mirror Gallery")) {
             ArrayList<Card> b = getCardsNamed(a, (a.get(0)).getName());
             a.remove(0);
             if(1 < b.size()) {
@@ -722,14 +689,8 @@ public class GameAction {
         }
     }//destroyLegendaryCreatures()
     
-    public boolean PlayerHasThreshold(Player player)
-    {
-    	PlayerZone pYard = AllZone.getZone(Constant.Zone.Graveyard, player);
-    	
-    	if (pYard.size() >= 7)
-    		return true;
-
-    	return false;
+    public boolean PlayerHasThreshold(Player player) {
+    	return AllZoneUtil.getPlayerGraveyard(player).size() >= 7;
     }
     
     //ArrayList search is all Card objects, returns ArrayList of Cards
@@ -2352,23 +2313,8 @@ public class GameAction {
         return true;
     }
     
-    /*
-    //because originally, MTGForge didn't keep track of cards removed from the game.
-    public void removeFromGame(Card c) {
-        if(AllZone.GameAction.isCardRemovedFromGame(c)) return;
-        
-        PlayerZone zone = AllZone.getZone(c); //could be hand, grave, play, ...
-        PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, c.getOwner());
-        
-        if (zone != null)	// for suspend
-        	zone.remove(c);
-        if(!c.isToken()) removed.add(c);
-        
-    }*/
-    
     /**
-     * basically an alias for removeFromGame to bring the language in the code
-     * to match the mechanics in Forge
+     * exile a card
      * @param c the card to be exiled
      */
     public void exile(Card c) {
@@ -2382,8 +2328,6 @@ public class GameAction {
     		zone.remove(c);
     	if(!c.isToken()) removed.add(c);
     }
-    
-    
     
     public void removeUnearth(Card c)
     {
