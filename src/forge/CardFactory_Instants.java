@@ -996,32 +996,6 @@ public class CardFactory_Instants {
         }//*************** END ************ END **************************
        */
         
-        //*************** START *********** START **************************
-        else if (cardName.equals("Renewed Faith")) { 
-            /**
-             *   The "You gain 6 life." ability is now done via a keyword. This code
-             *   object will give the controller 2 life when this card is cycled.
-             */
-            card.addCycleCommand(new Command() {
-                private static final long serialVersionUID = 7699412574052780825L;
-                    
-                public void execute() {
-                    
-                    Player player = card.getController();
-                    
-                    if (player.isHuman()) {
-                        String question = "Gain 2 life?";
-                        if (GameActionUtil.showYesNoDialog(card, question)) {
-                            player.gainLife(2, card);
-                        }
-                    }
-                    // player is computer
-                    else
-                        player.gainLife(2, card);
-                }
-            });
-        }//*************** END ************ END **************************
-       
 
         //*************** START *********** START **************************
         else if(cardName.equals("Life Burst")) {
@@ -1982,66 +1956,6 @@ public class CardFactory_Instants {
             };//SpellAbility
             card.clearSpellAbility();
             card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Primal Boost")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 2449600319884238808L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return getAttacker() != null;
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    setTargetCard(getAttacker());
-                }
-                
-                public Card getAttacker() {
-                    //target creature that is going to attack
-                    Combat c = ComputerUtil.getAttackers();
-                    
-                    CardList list = new CardList(c.getAttackers());
-                    CardListUtil.sortFlying(list);
-                    
-                    Card[] att = list.toArray();
-                    if(att.length != 0) return att[0];
-                    else return null;
-                }//getAttacker()
-                
-                @Override
-                public void resolve() {
-                    final Card[] target = new Card[1];
-                    final Command untilEOT = new Command() {
-                        private static final long serialVersionUID = 3753684523153747308L;
-                        
-                        public void execute() {
-                            if(AllZone.GameAction.isCardInPlay(target[0])) {
-                                target[0].addTempAttackBoost(-4);
-                                target[0].addTempDefenseBoost(-4);
-                            }
-                        }
-                    };
-                    
-                    target[0] = getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, target[0])) {
-                        target[0].addTempAttackBoost(4);
-                        target[0].addTempDefenseBoost(4);
-                        
-                        AllZone.EndOfTurn.addUntil(untilEOT);
-                    }
-                }//resolve()
-            };
-            spell.setDescription("\r\nTarget creature gets +4/+4 until end of turn.");
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            card.setSVar("PlayMain1", "TRUE");
-            //card.addSpellAbility(CardFactoryUtil.ability_cycle(card, "2 G"));
         }//*************** END ************ END **************************
         
         
