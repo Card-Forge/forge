@@ -103,7 +103,7 @@ public class Cost_Payment {
     	}
     	
     	if (cost.getLifeCost()){
-    		int curLife = AllZone.GameAction.getPlayerLife(card.getController()).getLife();
+    		int curLife = card.getController().getLife();
     		if (curLife < cost.getLifeAmount())
     			return false;
     	}
@@ -231,7 +231,7 @@ public class Cost_Payment {
         			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
         			null, possibleValues, possibleValues[0]);
             if(choice.equals(0)) {
-            	  AllZone.GameAction.getPlayerLife(card.getController()).payLife(cost.getLifeAmount());
+            	  card.getController().payLife(cost.getLifeAmount());
             	  payLife = true;
             }
 			else{
@@ -328,8 +328,7 @@ public class Cost_Payment {
         
         // refund life
         if (cost.getLifeCost() && payLife){
-        	PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-        	life.payLife(cost.getLifeAmount()*-1);
+        	card.getController().payLife(cost.getLifeAmount()*-1);
         }
         
         // can't really undiscard things
@@ -347,7 +346,7 @@ public class Cost_Payment {
     	ArrayList<Card> exileCard = new ArrayList<Card>();
     	ArrayList<Card> tapXCard = new ArrayList<Card>();
     	ArrayList<Card> returnCard = new ArrayList<Card>();
-    	ability.setActivatingPlayer(Constant.Player.Computer);
+    	ability.setActivatingPlayer(AllZone.ComputerPlayer);
     	
     	// double check if something can be sacrificed here. Real check is in ComputerUtil.canPayAdditionalCosts()
     	if (cost.getSacCost()){
@@ -429,7 +428,7 @@ public class Cost_Payment {
     		card.subtractCounter(cost.getCounterType(), cost.getCounterNum());
     	
     	if (cost.getLifeCost())
-    		AllZone.GameAction.getPlayerLife(card.getController()).payLife(cost.getLifeAmount());
+    		card.getController().payLife(cost.getLifeAmount());
     	
     	if (cost.getDiscardCost()){
     		String discType = cost.getDiscardType();
@@ -538,7 +537,7 @@ public class Cost_Payment {
             @Override
             public void showMessage() {
             	Card card = spell.getSourceCard();
-                if(card.getController().equals(Constant.Player.Human) && AllZone.GameAction.isCardInPlay(card)) {
+                if(card.getController().equals(AllZone.HumanPlayer) && AllZone.GameAction.isCardInPlay(card)) {
         			StringBuilder sb = new StringBuilder();
         			sb.append(card.getName());
         			sb.append(" - Sacrifice?");
@@ -632,7 +631,7 @@ public class Cost_Payment {
 			@Override
             public void showMessage() {
             	Card card = spell.getSourceCard();
-                if(card.getController().equals(Constant.Player.Human) && AllZone.GameAction.isCardInPlay(card)) {
+                if(card.getController().equals(AllZone.HumanPlayer) && AllZone.GameAction.isCardInPlay(card)) {
         			StringBuilder sb = new StringBuilder();
         			sb.append(card.getName());
         			sb.append(" - Exile?");
@@ -779,7 +778,7 @@ public class Cost_Payment {
             @Override
             public void showMessage() {
             	Card card = spell.getSourceCard();
-                if(card.getController().equals(Constant.Player.Human) && AllZone.GameAction.isCardInPlay(card)) {
+                if(card.getController().equals(AllZone.HumanPlayer) && AllZone.GameAction.isCardInPlay(card)) {
         			StringBuilder sb = new StringBuilder();
         			sb.append(card.getName());
         			sb.append(" - Return to Hand?");

@@ -1,4 +1,4 @@
-package forge;
+/*package forge;
 public class PlayerPoisonCounter extends MyObservable implements java.io.Serializable
 {
 	private static final long serialVersionUID = 7559655609258111697L;
@@ -23,4 +23,4 @@ public class PlayerPoisonCounter extends MyObservable implements java.io.Seriali
     	poisonCounters -= poisonCounters2;
     	this.updateObservers();
     }
-}
+}*/

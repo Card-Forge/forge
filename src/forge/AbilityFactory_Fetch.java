@@ -56,8 +56,8 @@ public class AbilityFactory_Fetch {
 		return spFetch;
 	}
 	
-	private static void doFetch(AbilityFactory af, String player){
-		if (player.equals(Constant.Player.Computer)){
+	private static void doFetch(AbilityFactory af, Player player){
+		if (player.isComputer()){
 			doFetchAI(af, player);
 			return;
 		}
@@ -98,7 +98,7 @@ public class AbilityFactory_Fetch {
         }
 	}
 	
-	private static void doFetchAI(AbilityFactory af, String player){
+	private static void doFetchAI(AbilityFactory af, Player player){
 		HashMap<String,String> params = af.getMapParams();
 		CardList library = AllZoneUtil.getPlayerCardsInLibrary(player);
 		library = filterDeck(library, params);
@@ -162,7 +162,7 @@ public class AbilityFactory_Fetch {
 				// Sac is ok in general, but should add some decision making based off SacType and Fetch Type
 			}
 			if (abCost.getLifeCost()){
-				if (AllZone.Computer_Life.getLife() < 5)
+				if (AllZone.ComputerPlayer.getLife() < 5)
 					return false;
 			}
 			if (abCost.getDiscardCost()) 	return false;
@@ -192,8 +192,8 @@ public class AbilityFactory_Fetch {
 	}
 	
 	private static Card fetchBasicManaFixing(CardList list){	// Search for a Basic Land
-        CardList combined = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
-        combined.add(AllZoneUtil.getPlayerHand(Constant.Player.Computer));
+        CardList combined = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+        combined.add(AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer));
         
         String names[] = {"Plains", "Island", "Swamp", "Mountain", "Forest"};
         ArrayList<String> basics = new ArrayList<String>();
@@ -224,8 +224,8 @@ public class AbilityFactory_Fetch {
 	}
 	
 	private static Card fetchBasicManaFixing(CardList list, String type){	// type = basic land types
-        CardList combined = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
-        combined.add(AllZoneUtil.getPlayerHand(Constant.Player.Computer));
+        CardList combined = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+        combined.add(AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer));
         
         String names[] = type.split(",");
         ArrayList<String> basics = new ArrayList<String>();

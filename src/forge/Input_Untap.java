@@ -15,7 +15,7 @@ public class Input_Untap extends Input {
         AllZone.GameAction.setPlayerTurn(AllZone.Phase.getActivePlayer());
         
         if (AllZone.Phase.getTurn() != 1 && 
-        	!(AllZone.Phase.getActivePlayer().equals(Constant.Player.Human) && AllZone.Phase.getTurn() == 2) )
+        	!(AllZone.Phase.getActivePlayer().equals(AllZone.HumanPlayer) && AllZone.Phase.getTurn() == 2) )
         {
 	        for(int i = 0; i < c.length; i++)
 	            c[i].setSickness(false);
@@ -48,8 +48,8 @@ public class Input_Untap extends Input {
     	}
     	
     	CardList allp = new CardList();
-    	allp.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
-		allp.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards()); 
+    	allp.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
+		allp.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards()); 
     	
 		for(Card ca : allp) {
 			if (ca.hasStartOfKeyword("Permanents don't untap during their controllers' untap steps")) {
@@ -93,7 +93,7 @@ public class Input_Untap extends Input {
     	for(Card c : list) {
     		if(c.getKeyword().contains("You may choose not to untap CARDNAME during your untap step.")) {
     			if(c.isTapped()) {
-    				if(c.getController().equals(Constant.Player.Human)) {
+    				if(c.getController().equals(AllZone.HumanPlayer)) {
     					String[] choices = {"Yes", "No"};
     					Object o = AllZone.Display.getChoice("Untap "+c.getName()+"?", choices);
     					String answer = (String) o;
@@ -121,9 +121,9 @@ public class Input_Untap extends Input {
 
     	}
     	if( isWinterOrbInEffect() || isMunghaWurmInEffect()[0] || isMunghaWurmInEffect()[1]) {
-    		if( AllZone.Phase.getActivePlayer().equals(Constant.Player.Computer) || isMunghaWurmInEffect()[1] ) {
+    		if( AllZone.Phase.getActivePlayer().equals(AllZone.ComputerPlayer) || isMunghaWurmInEffect()[1] ) {
     			//search for lands the computer has and only untap 1
-    			CardList landList = AllZoneUtil.getPlayerLandsInPlay(Constant.Player.Computer);
+    			CardList landList = AllZoneUtil.getPlayerLandsInPlay(AllZone.ComputerPlayer);
     			landList = landList.filter(AllZoneUtil.tapped);
     			if( landList.size() > 0 ) {
     				landList.get(0).untap();
@@ -145,7 +145,7 @@ public class Input_Untap extends Input {
     					}
     				}//selectCard()
     			};//Input
-    			CardList landList = AllZoneUtil.getPlayerLandsInPlay(Constant.Player.Human);
+    			CardList landList = AllZoneUtil.getPlayerLandsInPlay(AllZone.HumanPlayer);
     			landList = landList.filter(AllZoneUtil.tapped);
     			if( landList.size() > 0 ) {
     				AllZone.InputControl.setInput(target);
@@ -154,8 +154,8 @@ public class Input_Untap extends Input {
     		}
     	}
     	if( AllZoneUtil.isCardInPlay("Damping Field") ) {
-    		if( AllZone.Phase.getActivePlayer().equals(Constant.Player.Computer) ) {
-    			CardList artList = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+    		if( AllZone.Phase.getActivePlayer().equals(AllZone.ComputerPlayer) ) {
+    			CardList artList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
     			artList = artList.filter(AllZoneUtil.artifacts);
     			artList = artList.filter(AllZoneUtil.tapped);
     			if( artList.size() > 0 ) {
@@ -172,13 +172,13 @@ public class Input_Untap extends Input {
     				public void selectButtonCancel() {stop();}
     				public void selectCard(Card c, PlayerZone zone) {
     					if(c.isArtifact() && zone.is(Constant.Zone.Play) 
-    							&& c.getController().equals(Constant.Player.Human)) {
+    							&& c.getController().equals(AllZone.HumanPlayer)) {
     						c.untap();
     						stop();
     					}
     				}//selectCard()
     			};//Input
-    			CardList artList = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Human);
+    			CardList artList = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
     			artList = artList.filter(AllZoneUtil.artifacts);
     			artList = artList.filter(AllZoneUtil.tapped);
     			if( artList.size() > 0 ) {
@@ -187,8 +187,8 @@ public class Input_Untap extends Input {
     		}
     	}
     	if((AllZoneUtil.isCardInPlay("Smoke") || AllZoneUtil.isCardInPlay("Stoic Angel")) ) {
-    		if( AllZone.Phase.getActivePlayer().equals(Constant.Player.Computer) ) {
-    			CardList creatures = AllZoneUtil.getCreaturesInPlay(Constant.Player.Computer);
+    		if( AllZone.Phase.getActivePlayer().equals(AllZone.ComputerPlayer) ) {
+    			CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
     			creatures = creatures.filter(AllZoneUtil.tapped);
     			if( creatures.size() > 0 ) {
     				creatures.get(0).untap();
@@ -204,13 +204,13 @@ public class Input_Untap extends Input {
     				public void selectButtonCancel() {stop();}
     				public void selectCard(Card c, PlayerZone zone) {
     					if(c.isCreature() && zone.is(Constant.Zone.Play) 
-    							&& c.getController().equals(Constant.Player.Human)) {
+    							&& c.getController().equals(AllZone.HumanPlayer)) {
     						c.untap();
     						stop();
     					}
     				}//selectCard()
     			};//Input
-    			CardList creatures = AllZoneUtil.getCreaturesInPlay(Constant.Player.Human);
+    			CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
     			creatures = creatures.filter(AllZoneUtil.tapped);
     			if( creatures.size() > 0 ) {
     				AllZone.InputControl.setInput(target);
@@ -248,11 +248,11 @@ public class Input_Untap extends Input {
     	
     	while (i < all.size()) {
     		Card c = all.get(i);
-    		if (c.getController().equals(Constant.Player.Human)) {
+    		if (c.getController().equals(AllZone.HumanPlayer)) {
     			HumanAI[0] = true;
     		} 
     		
-    		else if (c.getController().equals(Constant.Player.Computer)) {
+    		else if (c.getController().equals(AllZone.ComputerPlayer)) {
     			HumanAI[1] = true;
     		}
     		i++;

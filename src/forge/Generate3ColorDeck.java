@@ -240,7 +240,7 @@ public class Generate3ColorDeck
 			if (lc > 100)
 				throw new RuntimeException("Generate3ColorDeck : get3ColorDeck -- looped too much -- Cr123");
 			
-			tDeck.add(AllZone.CardFactory.getCard(c.getName(), Constant.Player.Computer));
+			tDeck.add(AllZone.CardFactory.getCard(c.getName(), AllZone.ComputerPlayer));
 			int n = CardCounts.get(c.getName());
 			CardCounts.put(c.getName(), n + 1);
 			tmpDeck += c.getName() + " " + c.getManaCost() + "\n";
@@ -259,7 +259,7 @@ public class Generate3ColorDeck
 			if (lc > 100)
 				throw new RuntimeException("Generate3ColorDeck : get3ColorDeck -- looped too much -- Sp123");
 			
-			tDeck.add(AllZone.CardFactory.getCard(c.getName(), Constant.Player.Computer));
+			tDeck.add(AllZone.CardFactory.getCard(c.getName(), AllZone.ComputerPlayer));
 			int n = CardCounts.get(c.getName());
 			CardCounts.put(c.getName(), n + 1);
 			tmpDeck += c.getName() + " " + c.getManaCost() + "\n";
@@ -291,7 +291,7 @@ public class Generate3ColorDeck
 			if (lc > 20)
 				throw new RuntimeException("Generate3ColorDeck : get3ColorDeck -- looped too much -- DL");
 			
-			tDeck.add(AllZone.CardFactory.getCard(s, Constant.Player.Human));
+			tDeck.add(AllZone.CardFactory.getCard(s, AllZone.HumanPlayer));
 			int n = CardCounts.get(s);
 			CardCounts.put(s, n + 1);
 			tmpDeck += s + "\n";
@@ -353,7 +353,7 @@ public class Generate3ColorDeck
 					CardCounts.put(ClrCnts[i].Color, nLand);
 			
 					for (int j=0; j<=nLand; j++)
-						tDeck.add(AllZone.CardFactory.getCard(ClrCnts[i].Color, Constant.Player.Computer));
+						tDeck.add(AllZone.CardFactory.getCard(ClrCnts[i].Color, AllZone.ComputerPlayer));
 				}
 			}
 		}
@@ -378,7 +378,7 @@ public class Generate3ColorDeck
 					throw new RuntimeException("Generate3ColorDeck : get3ColorDeck -- looped too much -- undersize");
 				
 				int n = CardCounts.get(c.getName());
-				tDeck.add(AllZone.CardFactory.getCard(c.getName(), Constant.Player.Computer));
+				tDeck.add(AllZone.CardFactory.getCard(c.getName(), AllZone.ComputerPlayer));
 				CardCounts.put(c.getName(), n + 1);
 				tmpDeck += "Added:" + c.getName() + "\n";
 			}

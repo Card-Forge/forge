@@ -20,10 +20,10 @@ public class Ability_Reflected_Mana extends Ability_Mana {
 		this.undoable = true;
 	}
 	
-	public String getTargetPlayer() {
-		String targetPlayer;
+	public Player getTargetPlayer() {
+		Player targetPlayer;
 		if (this.who.startsWith("Opp")) {
-			targetPlayer = AllZone.GameAction.getOpponent(this.getSourceCard().getController());
+			targetPlayer = this.getSourceCard().getController().getOpponent();
 		} else {
 			targetPlayer = this.getSourceCard().getController();
 		}
@@ -36,9 +36,9 @@ public class Ability_Reflected_Mana extends Ability_Mana {
 	}
 
 	public ArrayList<String> getPossibleColors() {
-		String targetPlayer;
+		Player targetPlayer;
 		if (this.who.startsWith("Opp")) {
-			targetPlayer = AllZone.GameAction.getOpponent(this.getSourceCard().getController());
+			targetPlayer = this.getSourceCard().getController().getOpponent();
 		} else {
 			targetPlayer = this.getSourceCard().getController();
 		}
@@ -106,7 +106,7 @@ public class Ability_Reflected_Mana extends Ability_Mana {
 
     // Return the list of mana types or colors that the target player's land can produce
     // This is used by the mana abilities created by the abReflectedMana keyword
-    public static ArrayList<String> getManaProduceList(String player, String colorOrType) {
+    public static ArrayList<String> getManaProduceList(Player player, String colorOrType) {
 		ArrayList<String> colorsPlayerCanProduce = new ArrayList<String>();
 		ArrayList<String> colorsToLookFor = new ArrayList<String>();
 		
@@ -140,11 +140,11 @@ public class Ability_Reflected_Mana extends Ability_Mana {
 				// We assume reflected lands have only one mana ability
 				// Find out which player it targets
 				Ability_Mana am = amList.get(0);
-				String otherTargetPlayer = am.getTargetPlayer();
+				Player otherTargetPlayer = am.getTargetPlayer();
 				
 				// If the target player of the other land isn't the same as the target player
 				// of this land, we need to search the sets of mana he can produce as well.
-				if (!otherTargetPlayer.equals(player)) {
+				if (!otherTargetPlayer.isPlayer(player)) {
 					addOtherPlayerLands = true; // We only need to record this decision once
 				}
 				// Don't keep reflected lands in the list of lands
@@ -158,7 +158,7 @@ public class Ability_Reflected_Mana extends Ability_Mana {
 		getManaFromCardList(cl, colorsPlayerCanProduce, colorsToLookFor);
 		if (addOtherPlayerLands) {
 			cl.clear();
-			cl.addAll(AllZone.getZone(Constant.Zone.Play,AllZone.GameAction.getOpponent(player)).getCards());
+			cl.addAll(AllZone.getZone(Constant.Zone.Play,player.getOpponent()).getCards());
 			cl = cl.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
 					return c.isLand() && !c.isReflectedLand();

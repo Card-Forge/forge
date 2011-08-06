@@ -27,7 +27,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     
     public Input getInput() {
         final String phase = AllZone.Phase.getPhase();
-        final String player = AllZone.Phase.getActivePlayer();
+        final Player player = AllZone.Phase.getActivePlayer();
         //System.out.println(n++ +" " +phase +" " +player);
         
         if(input != null) return input;
@@ -40,15 +40,15 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         else if(AllZone.Stack.size() > 0) {
             input = new Input_StackNotEmpty();
             return input;
-        } else if(player.equals(Constant.Player.Human)) {
+        } else if(player.isHuman()) {
             if(phase.equals(Constant.Phase.Untap)) {
                 AllZone.Combat.reset();
-                AllZone.Combat.setAttackingPlayer(Constant.Player.Human);
-                AllZone.Combat.setDefendingPlayer(Constant.Player.Computer);
+                AllZone.Combat.setAttackingPlayer(AllZone.HumanPlayer);
+                AllZone.Combat.setDefendingPlayer(AllZone.ComputerPlayer);
                 
                 AllZone.pwCombat.reset();
-                AllZone.pwCombat.setAttackingPlayer(Constant.Player.Human);
-                AllZone.pwCombat.setDefendingPlayer(Constant.Player.Computer);
+                AllZone.pwCombat.setAttackingPlayer(AllZone.HumanPlayer);
+                AllZone.pwCombat.setDefendingPlayer(AllZone.ComputerPlayer);
                 
                 return new Input_Untap();
             }
@@ -85,7 +85,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
                     	AllZone.GameAction.CheckWheneverKeyword(list.get(0), "Attack - Alone", null);
                     	
 //                    if (list.size()==1) {
-                        String attackingPlayer = AllZone.Combat.getAttackingPlayer();
+                        Player attackingPlayer = AllZone.Combat.getAttackingPlayer();
                         PlayerZone play = AllZone.getZone(Constant.Zone.Play, attackingPlayer);
                         CardList exalted = new CardList(play.getCards());
                         exalted = exalted.filter(new CardListFilter() {
@@ -295,12 +295,12 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         else { //computer
             if(phase.equals(Constant.Phase.Untap)) {
                 AllZone.Combat.reset();
-                AllZone.Combat.setAttackingPlayer(Constant.Player.Computer);
-                AllZone.Combat.setDefendingPlayer(Constant.Player.Human);
+                AllZone.Combat.setAttackingPlayer(AllZone.ComputerPlayer);
+                AllZone.Combat.setDefendingPlayer(AllZone.HumanPlayer);
                 
                 AllZone.pwCombat.reset();
-                AllZone.pwCombat.setAttackingPlayer(Constant.Player.Computer);
-                AllZone.pwCombat.setDefendingPlayer(Constant.Player.Human);
+                AllZone.pwCombat.setAttackingPlayer(AllZone.ComputerPlayer);
+                AllZone.pwCombat.setDefendingPlayer(AllZone.HumanPlayer);
                 
                 return new Input_Untap();
             } 

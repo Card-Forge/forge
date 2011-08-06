@@ -19,8 +19,8 @@ public class Combat
   //private int trampleDamage;
   //private int trampleFirstStrikeDamage;
 
-  private String attackingPlayer;
-  private String defendingPlayer;
+  private Player attackingPlayer;
+  private Player defendingPlayer;
   
   private int declaredAttackers;
 
@@ -42,19 +42,19 @@ public class Combat
     defendingFirstStrikeDamageMap.clear();
 
     declaredAttackers = 0;
-    attackingPlayer = "";
-    defendingPlayer = "";
+    attackingPlayer = null;
+    defendingPlayer = null;
   }
   public void setPlaneswalker(Card c){planeswalker = c;}
   public Card getPlaneswalker() {return planeswalker;}
   
   public int getDeclaredAttackers() { return declaredAttackers;}
 
-  public void setAttackingPlayer(String player) {attackingPlayer = player;}
-  public void setDefendingPlayer(String player) {defendingPlayer = player;}
+  public void setAttackingPlayer(Player player) {attackingPlayer = player;}
+  public void setDefendingPlayer(Player player) {defendingPlayer = player;}
 
-  public String getAttackingPlayer() {return attackingPlayer;}
-  public String getDefendingPlayer() {return defendingPlayer;}
+  public Player getAttackingPlayer() {return attackingPlayer;}
+  public Player getDefendingPlayer() {return defendingPlayer;}
 
       //relates to defending player damage
   //public int getDefendingDamage() {return defendingDamage;}
@@ -289,7 +289,7 @@ public class Combat
 		                 }
 		                }
 		             }//1 blocker
-		             else if(getAttackingPlayer().equals(Constant.Player.Computer))
+		             else if(getAttackingPlayer().isComputer())
 		             {
 		                if(attacking.get(i).hasFirstStrike() || attacking.get(i).hasDoubleStrike()){
 		                 int damageDealt = attacking.get(i).getNetAttack();
@@ -421,7 +421,7 @@ public class Combat
 		               }
 	             }//1 blocker
 	             
-	             else if(getAttackingPlayer().equals(Constant.Player.Computer))
+	             else if(getAttackingPlayer().isComputer())
 	             {
 	              int damageDealt = attacking.get(i).getNetAttack();
 	                if (CombatUtil.isDoranInPlay())

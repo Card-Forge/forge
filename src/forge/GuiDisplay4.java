@@ -154,7 +154,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
            
             @Override
             protected Card[] getCards() {
-                return CardFactoryUtil.getFlashbackUnearthCards(Constant.Player.Human).toArray();
+                return CardFactoryUtil.getFlashbackUnearthCards(AllZone.HumanPlayer).toArray();
             }
            
             @Override
@@ -356,7 +356,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
            
             @Override
             public void mousePressed(MouseEvent e) {
-                inputControl.selectPlayer(Constant.Player.Computer);
+                inputControl.selectPlayer(AllZone.ComputerPlayer);
             }
         });
        
@@ -365,7 +365,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
            
             @Override
             public void mousePressed(MouseEvent e) {
-                inputControl.selectPlayer(Constant.Player.Human);
+                inputControl.selectPlayer(AllZone.HumanPlayer);
             }
         });
        
@@ -461,7 +461,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                     playerHandValue.setText("" + AllZone.Human_Hand.getCards().length);
                     playerGraveValue.setText("" + AllZone.Human_Graveyard.getCards().length);
                     playerLibraryValue.setText("" + AllZone.Human_Library.getCards().length);
-                    playerFBValue.setText("" + CardFactoryUtil.getFlashbackUnearthCards(Constant.Player.Human).size());
+                    playerFBValue.setText("" + CardFactoryUtil.getFlashbackUnearthCards(AllZone.HumanPlayer).size());
                     playerRemovedValue.setText("" + AllZone.Human_Removed.getCards().length);
                    
                 }
@@ -488,14 +488,14 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
        
 
         //opponent life
-        oppLifeLabel.setText("" + AllZone.Computer_Life.getLife());
-        AllZone.Computer_Life.addObserver(new Observer() {
+        oppLifeLabel.setText("" + AllZone.ComputerPlayer.getLife());
+        AllZone.ComputerPlayer.addObserver(new Observer() {
             public void update(Observable a, Object b) {
-                int life = AllZone.Computer_Life.getLife();
+                int life = AllZone.ComputerPlayer.getLife();
                 oppLifeLabel.setText("" + life);
             }
         });
-        AllZone.Computer_Life.updateObservers();
+        AllZone.ComputerPlayer.updateObservers();
        
         if (AllZone.QuestData != null) {
                 File base = ForgeProps.getFile(IMAGE_ICON);
@@ -510,33 +510,33 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                 }
         }
        
-        oppPCLabel.setText("Poison Counters: " + AllZone.Computer_PoisonCounter.getPoisonCounters());
-        AllZone.Computer_PoisonCounter.addObserver(new Observer() {
+        oppPCLabel.setText("Poison Counters: " + AllZone.ComputerPlayer.getPoisonCounters());
+        AllZone.ComputerPlayer.addObserver(new Observer() {
             public void update(Observable a, Object b) {
-                int pcs = AllZone.Computer_PoisonCounter.getPoisonCounters();
+                int pcs = AllZone.ComputerPlayer.getPoisonCounters();
                 oppPCLabel.setText("Poison Counters: " + pcs);
             }
         });
-        AllZone.Computer_PoisonCounter.updateObservers();
+        AllZone.ComputerPlayer.updateObservers();
        
         //player life
-        playerLifeLabel.setText("" + AllZone.Human_Life.getLife());
-        AllZone.Human_Life.addObserver(new Observer() {
+        playerLifeLabel.setText("" + AllZone.HumanPlayer.getLife());
+        AllZone.HumanPlayer.addObserver(new Observer() {
             public void update(Observable a, Object b) {
-                int life = AllZone.Human_Life.getLife();
+                int life = AllZone.HumanPlayer.getLife();
                 playerLifeLabel.setText("" + life);
             }
         });
-        AllZone.Human_Life.updateObservers();
+        AllZone.HumanPlayer.updateObservers();
        
-        playerPCLabel.setText("Poison Counters: " + AllZone.Human_PoisonCounter.getPoisonCounters());
-        AllZone.Human_PoisonCounter.addObserver(new Observer() {
+        playerPCLabel.setText("Poison Counters: " + AllZone.HumanPlayer.getPoisonCounters());
+        AllZone.HumanPlayer.addObserver(new Observer() {
             public void update(Observable a, Object b) {
-                int pcs = AllZone.Human_PoisonCounter.getPoisonCounters();
+                int pcs = AllZone.HumanPlayer.getPoisonCounters();
                 playerPCLabel.setText("Poison Counters: " + pcs);
             }
         });
-        AllZone.Human_PoisonCounter.updateObservers();
+        AllZone.HumanPlayer.updateObservers();
        
         //stack
         AllZone.Stack.addObserver(new Observer() {
@@ -1118,10 +1118,10 @@ class Gui_MultipleBlockers4 extends JFrame {
    
     public static void main(String[] args) {
         CardList list = new CardList();
-        list.add(AllZone.CardFactory.getCard("Elvish Piper", ""));
-        list.add(AllZone.CardFactory.getCard("Lantern Kami", ""));
-        list.add(AllZone.CardFactory.getCard("Frostling", ""));
-        list.add(AllZone.CardFactory.getCard("Frostling", ""));
+        list.add(AllZone.CardFactory.getCard("Elvish Piper", null));
+        list.add(AllZone.CardFactory.getCard("Lantern Kami", null));
+        list.add(AllZone.CardFactory.getCard("Frostling", null));
+        list.add(AllZone.CardFactory.getCard("Frostling", null));
        
         for(int i = 0; i < 2; i++)
             new Gui_MultipleBlockers4(null, list, i + 1, null);

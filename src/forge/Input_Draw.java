@@ -12,7 +12,7 @@ public class Input_Draw extends Input {
 
     	AllZone.GameInfo.setHumanPlayedLands(0);	// this should move to untap phase probably.
     	
-    	String playerTurn = AllZone.GameAction.getPlayerTurn();
+    	Player playerTurn = AllZone.GameAction.getPlayerTurn();
     	
     	if (GameActionUtil.draw_ShouldSkipDraw(playerTurn)){
     		AllZone.Phase.setNeedToNextPhase(true);

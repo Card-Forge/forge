@@ -251,7 +251,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
         oppLifeLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                inputControl.selectPlayer(Constant.Player.Computer);
+                inputControl.selectPlayer(AllZone.ComputerPlayer);
             }
         });
         
@@ -259,7 +259,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
         playerLifeLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                inputControl.selectPlayer(Constant.Player.Human);
+                inputControl.selectPlayer(AllZone.HumanPlayer);
             }
         });
         
@@ -365,24 +365,24 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
         
 
         //opponent life
-        oppLifeLabel.setText("" + AllZone.Computer_Life.getLife());
-        AllZone.Computer_Life.addObserver(new Observer() {
+        oppLifeLabel.setText("" + AllZone.ComputerPlayer.getLife());
+        AllZone.ComputerPlayer.addObserver(new Observer() {
             public void update(Observable a, Object b) {
-                int life = AllZone.Computer_Life.getLife();
+                int life = AllZone.ComputerPlayer.getLife();
                 oppLifeLabel.setText("" + life);
             }
         });
-        AllZone.Computer_Life.updateObservers();
+        AllZone.ComputerPlayer.updateObservers();
         
         //player life
-        playerLifeLabel.setText("" + AllZone.Human_Life.getLife());
-        AllZone.Human_Life.addObserver(new Observer() {
+        playerLifeLabel.setText("" + AllZone.HumanPlayer.getLife());
+        AllZone.HumanPlayer.addObserver(new Observer() {
             public void update(Observable a, Object b) {
-                int life = AllZone.Human_Life.getLife();
+                int life = AllZone.HumanPlayer.getLife();
                 playerLifeLabel.setText("" + life);
             }
         });
-        AllZone.Human_Life.updateObservers();
+        AllZone.HumanPlayer.updateObservers();
         
         //stack
         AllZone.Stack.addObserver(new Observer() {

@@ -28,8 +28,8 @@ interface IPlayerZone
   public void reset();
 
   public boolean is(String zone);
-  public boolean is(String zone, String player);
+  public boolean is(String zone, Player player);
 
-  public String getPlayer();//the Player that owns this zone
+  public Player getPlayer();//the Player that owns this zone
   public String getZone();//returns the Zone's name like Graveyard
 }

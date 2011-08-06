@@ -28,7 +28,7 @@ public class Input_Main extends Input {
     @Override
     public void selectCard(Card card, PlayerZone zone) {
         //these if statements cannot be combined
-        if(card.isLand() && zone.is(Constant.Zone.Hand, Constant.Player.Human)) {
+        if(card.isLand() && zone.is(Constant.Zone.Hand, AllZone.HumanPlayer)) {
             if(CardFactoryUtil.canHumanPlayLand()) {
                 InputUtil.playAnyCard(card, zone);
                 AllZone.GameAction.checkStateEffects();

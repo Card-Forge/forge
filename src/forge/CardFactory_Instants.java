@@ -16,7 +16,7 @@ public class CardFactory_Instants {
         return -1;
     }
     
-    public static Card getCard(final Card card, final String cardName, String owner) {
+    public static Card getCard(final Card card, final String cardName, Player owner) {
     	
     	
         //*************** START *********** START **************************
@@ -122,7 +122,7 @@ public class CardFactory_Instants {
 				String getChosenColor() {
 	                   // Choose color for protection in Brave the Elements
 	             	   String color = "";
-	             	   if (card.getController().equals(Constant.Player.Human)) {
+	             	   if (card.getController().equals(AllZone.HumanPlayer)) {
 
 	             		   // String[] colors = Constant.Color.Colors;
 	             		   // colors[colors.length-1] = null;
@@ -134,8 +134,8 @@ public class CardFactory_Instants {
 	             		   color = (String)o;
 	             	   }
 	             	   else {
-	             		   PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Human);
-	             		   PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human);
+	             		   PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
+	             		   PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
 	             		   CardList list = new CardList();
 	             		   list.addAll(lib.getCards());
 	             		   list.addAll(hand.getCards());
@@ -436,7 +436,7 @@ public class CardFactory_Instants {
                 public void resolve() {
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                    	String controller = getTargetCard().getController();
+                    	Player controller = getTargetCard().getController();
                     	
                         AllZone.GameAction.removeFromGame(getTargetCard());
                         
@@ -488,8 +488,8 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    String player = card.getController();
-                    if(player.equals(Constant.Player.Human)) humanResolve();
+                	Player player = card.getController();
+                    if(player.equals(AllZone.HumanPlayer)) humanResolve();
                     else computerResolve();
                 }
                 
@@ -500,7 +500,7 @@ public class CardFactory_Instants {
                         PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
                         AllZone.GameAction.moveTo(grave, (Card) check);
                     }
-                    AllZone.GameAction.shuffle(Constant.Player.Human);
+                    AllZone.GameAction.shuffle(AllZone.HumanPlayer);
                 }
                 
                 public void computerResolve() {
@@ -881,7 +881,7 @@ public class CardFactory_Instants {
                 private static final long serialVersionUID = 6399831162328201755L;
                 
                 public void execute() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
                     CardList list = new CardList(play.getCards());
                     list = list.getType("Island");
                     //TODO: sort by tapped
@@ -907,8 +907,8 @@ public class CardFactory_Instants {
                 
                 @Override                
                 public boolean canPlay() {
-                	String player = AllZone.Phase.getActivePlayer();
-            		String opponent = AllZone.GameAction.getOpponent(player);
+                	Player player = AllZone.Phase.getActivePlayer();
+                	Player opponent = player.getOpponent();
                     PlayerZone PlayerPlayZone = AllZone.getZone(Constant.Zone.Play, player);
             		PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Play, opponent);                  
                     CardList start = new CardList(PlayerPlayZone.getCards());
@@ -929,7 +929,7 @@ public class CardFactory_Instants {
                 }
                 
                 public Card getAttacker() {
-					String Computer = AllZone.Phase.getActivePlayer();
+                	Player Computer = AllZone.Phase.getActivePlayer();
 					PlayerZone ComputerPlayZone = AllZone.getZone(Constant.Zone.Play, Computer);
 			        CardList ComputerCreatureList = new CardList(ComputerPlayZone.getCards());
 			        ComputerCreatureList = ComputerCreatureList.getType("Creature");
@@ -1080,7 +1080,7 @@ public class CardFactory_Instants {
                 
                 public boolean canPlayAI()
                 {
-                	PlayerZone library = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
+                	PlayerZone library = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer);
                 	CardList list = new CardList(library.getCards());
                 	list = list.getType("Basic");
                 	return list.size() > Phase.StormCount;
@@ -1286,15 +1286,15 @@ public class CardFactory_Instants {
                 public void resolve() {
                 	Card attack[] = AllZone.Combat.getAttackers(); 
                 	Card target = null;
-                    String player = card.getController();
-                    if(player != Constant.Player.Human){
+                	Player player = card.getController();
+                    if(!player.isHuman()){
                         Object check = AllZone.Display.getChoiceOptional("Select creature", attack);
                         if(check != null) {
                            target = ((Card) check);
                         } 
                     } else {
                         CardList Targets = new CardList();
-                        String TPlayer = AllZone.GameAction.getOpponent(card.getController());
+                        Player TPlayer = card.getController().getOpponent();
     					PlayerZone TZone = AllZone.getZone(Constant.Zone.Play, TPlayer);
                         for(int i = 0; i < attack.length; i++) {
             				Card crd = attack[i];			                                
@@ -1355,7 +1355,7 @@ public class CardFactory_Instants {
 
                         AllZone.Display.getChoice("Revealing top " + Count + " cards of library: ", cards.toArray());
                         //Human chooses
-                        if(card.getController().equals(Constant.Player.Computer)) {
+                        if(card.getController().equals(AllZone.ComputerPlayer)) {
                         for(int i = 0; i < Count; i++) {
                         	if(stop == false) {
                         choice = AllZone.Display.getChoiceOptional("Choose cards to put into the first pile: ", cards.toArray());
@@ -1448,7 +1448,7 @@ public class CardFactory_Instants {
                 
                 @Override
                 public boolean canPlayAI() {
-                    String player = getTargetPlayer();
+                	Player player = getTargetPlayer();
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
                     CardList libList = new CardList(lib.getCards());
                     return (libList.size() > 0 && ((AllZone.Phase.getPhase().equals(Constant.Phase.Main2)) || Phase.StormCount*3 >= libList.size()));
@@ -1481,10 +1481,10 @@ public class CardFactory_Instants {
                         if(CardFactoryUtil.canDamage(card, all.get(i))) all.get(i).addDamage(2, card);
                     }
                     
-                    PlayerLife compLife = AllZone.GameAction.getPlayerLife(Constant.Player.Computer);
+                    PlayerLife compLife = AllZone.GameAction.getPlayerLife(AllZone.ComputerPlayer);
                     compLife.subtractLife(2,card);
                     
-                    PlayerLife humLife = AllZone.GameAction.getPlayerLife(Constant.Player.Human);
+                    PlayerLife humLife = AllZone.GameAction.getPlayerLife(AllZone.HumanPlayer);
                     humLife.subtractLife(2,card);
                     
                 }
@@ -1500,7 +1500,7 @@ public class CardFactory_Instants {
                     human = CardListUtil.filterToughness(human, 2);
                     computer = CardListUtil.filterToughness(computer, 2);
                     
-                    PlayerLife compLife = AllZone.GameAction.getPlayerLife(Constant.Player.Computer);
+                    PlayerLife compLife = AllZone.GameAction.getPlayerLife(AllZone.ComputerPlayer);
                     
                     //the computer will at least destroy 2 more human creatures
                     return computer.size() < human.size() - 1 && compLife.getLife() > 3;
@@ -1521,7 +1521,8 @@ public class CardFactory_Instants {
                 private static final long serialVersionUID = 7699412574052780825L;
                     
                 public void execute() {
-                	AllZone.GameAction.gainLife(card.getController(), 2);
+                	//AllZone.GameAction.gainLife(card.getController(), 2);
+                	card.getController().gainLife(2);
                 }
             });
         }//*************** END ************ END **************************
@@ -1543,7 +1544,8 @@ public class CardFactory_Instants {
                         }
                     });
                     
-                    AllZone.GameAction.gainLife(getTargetPlayer(), 4 + (4 * count.size()));
+                    //AllZone.GameAction.gainLife(getTargetPlayer(), 4 + (4 * count.size()));
+                    getTargetPlayer().gainLife(4 + (4 * count.size()));
                 }
             };
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetComputer());
@@ -1677,8 +1679,11 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(getTargetPlayer());
-                    if(life.getLife() == 10) AllZone.GameAction.addDamage(getTargetPlayer(), card, 10);
+                    //PlayerLife life = AllZone.GameAction.getPlayerLife(getTargetPlayer());
+                    if(getTargetPlayer().getLife() == 10) {
+                    	//AllZone.GameAction.addDamage(getTargetPlayer(), card, 10);
+                    	getTargetPlayer().addDamage(10, card);
+                    }
                 }
                 
                 /*
@@ -1692,8 +1697,8 @@ public class CardFactory_Instants {
                 
                 @Override
                 public boolean canPlayAI() {
-                    PlayerLife humanLife = AllZone.GameAction.getPlayerLife(Constant.Player.Human);
-                    return humanLife.getLife() == 10;
+                    //PlayerLife humanLife = AllZone.GameAction.getPlayerLife(AllZone.HumanPlayer);
+                    return AllZone.HumanPlayer.getLife() == 10;
                 }
                 
             };
@@ -1731,7 +1736,7 @@ public class CardFactory_Instants {
                         }
                     };
                     
-                    if(card.getController().equals(Constant.Player.Computer)) {
+                    if(card.getController().equals(AllZone.ComputerPlayer)) {
                         AllZone.InputControl.setInput(new Input_PayManaCost_Ability(card + "\r\n",
                                 ability.getManaCost(), Command.Blank, unpaidCommand));
                     } else {
@@ -1748,7 +1753,7 @@ public class CardFactory_Instants {
                     if(AllZone.Stack.size() == 0) return false;
                     
                     //see if spell is on stack and that opponent played it
-                    String opponent = AllZone.GameAction.getOpponent(card.getController());
+                    Player opponent = card.getController().getOpponent();
                     SpellAbility sa = AllZone.Stack.peek();
                     
                     //is spell?, did opponent play it?, is this a creature spell?
@@ -1792,7 +1797,7 @@ public class CardFactory_Instants {
                         }
                     };
                     
-                    if(card.getController().equals(Constant.Player.Computer)) {
+                    if(card.getController().equals(AllZone.ComputerPlayer)) {
                         AllZone.InputControl.setInput(new Input_PayManaCost_Ability(card + "\r\n",
                                 ability.getManaCost(), Command.Blank, unpaidCommand));
                     } else {
@@ -1810,7 +1815,7 @@ public class CardFactory_Instants {
                     if(AllZone.Stack.size() == 0) return false;
                     
                     //see if spell is on stack and that opponent played it
-                    String opponent = AllZone.GameAction.getOpponent(card.getController());
+                    Player opponent = card.getController().getOpponent();
                     SpellAbility sa = AllZone.Stack.peek();
                     
                     return sa.isSpell() && opponent.equals(sa.getSourceCard().getController())
@@ -1837,7 +1842,7 @@ public class CardFactory_Instants {
                         if(AllZone.Stack.size() == 0) return false;
                         
                         //see if spell is on stack and that opponent played it
-                        String opponent = AllZone.GameAction.getOpponent(card.getController());
+                        Player opponent = card.getController().getOpponent();
                         SpellAbility sa = AllZone.Stack.peek();
                         
                         PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
@@ -2043,8 +2048,8 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    String player = card.getController();
-                    if(player.equals(Constant.Player.Human)) humanResolve();
+                	Player player = card.getController();
+                    if(player.isHuman()) humanResolve();
                     else computerResolve();
                 }
                 
@@ -2098,8 +2103,8 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    String player = card.getController();
-                    if(player.equals(Constant.Player.Human)) humanResolve();
+                	Player player = card.getController();
+                    if(player.equals(AllZone.HumanPlayer)) humanResolve();
                     else computerResolve();
                 }
                 
@@ -2159,6 +2164,32 @@ public class CardFactory_Instants {
             card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "2 U", "0"));
             
         }//*************** END ************ END **************************
+        
+        /*
+        //*************** START *********** START **************************
+        else if(cardName.equals("Elephant Ambush")) {
+            SpellAbility spell = new Spell(card) {
+                
+                private static final long serialVersionUID = 1808366787563573082L;
+                
+                @Override
+                public void resolve() {
+                    CardFactoryUtil.makeToken("Elephant", "G 3 3 Elephant", card, "G", new String[] {
+                            "Creature", "Elephant"}, 3, 3, new String[] {""});
+                }//resolve()
+            };
+            
+            spell.setDescription("Put a 3/3 green Elephant creature token into play.");
+            spell.setStackDescription(card.getController()
+                    + " puts a 3/3 green Elephant creature token into play.");
+            
+            card.setFlashback(true);
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "6 G G", "0"));
+            
+        }//*************** END ************ END **************************
+        */
         
         
         //*************** START *********** START **************************
@@ -2318,7 +2349,7 @@ public class CardFactory_Instants {
                     if(c.isEmpty()) return false;
                     else {
                         setTargetCard(c.get(0));
-                        PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
+                        PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
                         return AllZone.GameAction.isCardInZone(card, hand);
                     }
                 }//canPlayAI()
@@ -2459,15 +2490,15 @@ public class CardFactory_Instants {
                 @Override
                 public boolean canPlayAI() {
 
-                    setTargetPlayer(Constant.Player.Human);
-                    PlayerZone humanHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human);
+                    setTargetPlayer(AllZone.HumanPlayer);
+                    PlayerZone humanHand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
                     
                     return (humanHand.size() >= 1);
                 }
                 
                 @Override
                 public void resolve() {
-                    if (Constant.Player.Computer.equals(getTargetPlayer())) AllZone.GameAction.discardRandom(getTargetPlayer(), this);
+                    if (AllZone.ComputerPlayer.equals(getTargetPlayer())) AllZone.GameAction.discardRandom(getTargetPlayer(), this);
                     else AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
                 }//resolve()
             };//SpellAbility
@@ -2553,8 +2584,8 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    String player = card.getController();
-                    if(player.equals(Constant.Player.Human)) humanResolve();
+                	Player player = card.getController();
+                    if(player.isHuman()) humanResolve();
                     else computerResolve();
                 }
                 
@@ -2567,7 +2598,7 @@ public class CardFactory_Instants {
                         PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                         AllZone.GameAction.moveTo(hand, (Card) check);
                     }
-                    AllZone.GameAction.shuffle(Constant.Player.Human);
+                    AllZone.GameAction.shuffle(AllZone.HumanPlayer);
                 }
                 
                 public void computerResolve() {
@@ -2620,8 +2651,8 @@ public class CardFactory_Instants {
     					for(int i = 0; i < Sacrificed.getNetAttack(); i++) {
     						AllZone.GameAction.drawCard(card.getController());
     					}
-                        AllZone.GameAction.gainLife(card.getController(), Sacrificed.getNetDefense());
-                        
+                        //AllZone.GameAction.gainLife(card.getController(), Sacrificed.getNetDefense());
+                        card.getController().gainLife( Sacrificed.getNetDefense() );
     				}
                   }
                 
@@ -2688,7 +2719,7 @@ public class CardFactory_Instants {
                     if(AllZone.Stack.size() == 0) return false;
                     
                     //see if spell is on stack and that opponent played it
-                    String opponent = AllZone.GameAction.getOpponent(card.getController());
+                    Player opponent = card.getController().getOpponent();
                     SpellAbility sa = AllZone.Stack.peek();
                     return sa.isSpell() && opponent.equals(sa.getSourceCard().getController())
                             && sa.getSourceCard().getType().contains("Creature")
@@ -2777,16 +2808,16 @@ public class CardFactory_Instants {
 
 				@Override
                 public boolean canPlayAI() {
-                    PlayerLife compLife = AllZone.GameAction.getPlayerLife(Constant.Player.Computer);
-                    int life = compLife.getLife();
+                    //PlayerLife compLife = AllZone.GameAction.getPlayerLife(AllZone.ComputerPlayer);
+                    int life = AllZone.ComputerPlayer.getLife();
                     if(4 < AllZone.Phase.getTurn() && AllZone.Computer_Library.size() > 0 && life >= 4) return true;
                     else return false;
                 }
                 
                 @Override
                 public void resolve() {
-                    String player = card.getController();
-                    if(player.equals(Constant.Player.Human)) humanResolve();
+                	Player player = card.getController();
+                    if(player.equals(AllZone.HumanPlayer)) humanResolve();
                     else computerResolve();
                 }
                 
@@ -2809,9 +2840,9 @@ public class CardFactory_Instants {
                         AllZone.Computer_Library.add(c, 0);
                         
                         //lose 2 life
-                        String player = Constant.Player.Computer;
-                        PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-                        life.subtractLife(2,card);
+                        Player player = AllZone.ComputerPlayer;
+                        //PlayerLife life = AllZone.GameAction.getPlayerLife(player);
+                        player.subtractLife(2,card);
                     }
                 }//computerResolve()
                 
@@ -2830,9 +2861,9 @@ public class CardFactory_Instants {
                             library.add((Card) o, 0);
                         }
                         //lose 2 life
-                        String player = Constant.Player.Human;
-                        PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-                        life.subtractLife(2,card);
+                        Player player = AllZone.HumanPlayer;
+                        //PlayerLife life = AllZone.GameAction.getPlayerLife(player);
+                        player.subtractLife(2,card);
                     }//if
                     
 
@@ -2850,8 +2881,8 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    String player = card.getController();
-                    if(player.equals(Constant.Player.Human)) humanResolve();
+                	Player player = card.getController();
+                    if(player.equals(AllZone.HumanPlayer)) humanResolve();
                     else computerResolve();
                 }
                 
@@ -2903,7 +2934,7 @@ public class CardFactory_Instants {
                     grave.add(toGrave1);
                     grave.add(toGrave2);
                     
-                    AllZone.GameAction.shuffle(Constant.Player.Human);
+                    AllZone.GameAction.shuffle(AllZone.HumanPlayer);
                 }
                 
                 public void computerResolve() {
@@ -2995,7 +3026,7 @@ public class CardFactory_Instants {
                 private static final long serialVersionUID = 1504792204536793942L;
                 
                 public boolean oppMoreLand() {
-                    String oppPlayer = AllZone.GameAction.getOpponent(card.getController());
+                	Player oppPlayer = card.getController().getOpponent();
                     
                     PlayerZone selfZone = AllZone.getZone(Constant.Zone.Play, card.getController());
                     PlayerZone oppZone = AllZone.getZone(Constant.Zone.Play, oppPlayer);
@@ -3200,7 +3231,7 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    //CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+                    //CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
                     //list = list.getName("Mana Pool");
                     Card mp = AllZone.ManaPool;//list.getCard(0);
                     mp.addExtrinsicKeyword("ManaPool:R");
@@ -3232,7 +3263,7 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    /*CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+                    /*CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
                     list = list.getName("Mana Pool");*/
                     Card mp = AllZone.ManaPool;//list.getCard(0);
                     mp.addExtrinsicKeyword("ManaPool:B");
@@ -3264,7 +3295,7 @@ public class CardFactory_Instants {
 
 				@Override
                 public void resolve() {
-                    /*CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+                    /*CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
                     list = list.getName("Mana Pool");*/
                     Card mp = AllZone.ManaPool;//list.getCard(0);
                     mp.addExtrinsicKeyword("ManaPool:R");
@@ -3302,7 +3333,7 @@ public class CardFactory_Instants {
                 
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
                     CardList hList = new CardList(hPlay.getCards());
                     hList = hList.getType("Creature");
                     return hList.size() > 0;
@@ -3326,7 +3357,7 @@ public class CardFactory_Instants {
                 public void resolve() {
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        String player = getTargetCard().getController();
+                    	Player player = getTargetCard().getController();
                         PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
                         
                         //remove card from play
@@ -3336,7 +3367,7 @@ public class CardFactory_Instants {
                         CardList lands = new CardList(lib.getCards());
                         lands = lands.getType("Basic");
                         
-                        if(player.equals(Constant.Player.Human) && lands.size() > 0) {
+                        if(player.equals(AllZone.HumanPlayer) && lands.size() > 0) {
                             String[] choices = {"Yes", "No"};
                             Object choice = AllZone.Display.getChoice("Search for Basic Land?", choices);
                             if(choice.equals("Yes")) {
@@ -3352,7 +3383,7 @@ public class CardFactory_Instants {
                                 }
                             }// if choice yes
                         } // player equals human
-                        else if(player.equals(Constant.Player.Computer) && lands.size() > 0) {
+                        else if(player.equals(AllZone.ComputerPlayer) && lands.size() > 0) {
                             Card card = lands.get(0);
                             lib.remove(card);
                             // hand.add(card);
@@ -3462,7 +3493,7 @@ public class CardFactory_Instants {
                 private static final long serialVersionUID = 235908265780575226L;
                 
                 public void execute() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
                     CardList list = new CardList(play.getCards());
                     list = list.getType("Island");
                     //TODO: sort by tapped
@@ -3497,7 +3528,7 @@ public class CardFactory_Instants {
                     if(AllZone.Stack.size() == 0) return false;
                     
                     //see if spell is on stack and that opponent played it
-                    String opponent = AllZone.GameAction.getOpponent(card.getController());
+                    Player opponent = card.getController().getOpponent();
                     SpellAbility sa = AllZone.Stack.peek();
                     
                     return sa.isSpell() && opponent.equals(sa.getSourceCard().getController())
@@ -3526,7 +3557,7 @@ public class CardFactory_Instants {
                     if(AllZone.Stack.size() == 0) return false;
                     
                     //see if spell is on stack and that opponent played it
-                    String opponent = AllZone.GameAction.getOpponent(card.getController());
+                    Player opponent = card.getController().getOpponent();
                     SpellAbility sa = AllZone.Stack.peek();
                     
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
@@ -3582,7 +3613,7 @@ public class CardFactory_Instants {
                 private static final long serialVersionUID = 8250154784542733353L;
                 
                 public void execute() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
                     CardList list = new CardList(play.getCards());
                     list = list.getType("Island");
                     //TODO: sort by tapped
@@ -3617,7 +3648,7 @@ public class CardFactory_Instants {
                     if(AllZone.Stack.size() == 0) return false;
                     
                     //see if spell is on stack and that opponent played it
-                    String opponent = AllZone.GameAction.getOpponent(card.getController());
+                    Player opponent = card.getController().getOpponent();
                     SpellAbility sa = AllZone.Stack.peek();
                     
                     return sa.isSpell() && opponent.equals(sa.getSourceCard().getController())
@@ -3646,7 +3677,7 @@ public class CardFactory_Instants {
                     if(AllZone.Stack.size() == 0) return false;
                     
                     //see if spell is on stack and that opponent played it
-                    String opponent = AllZone.GameAction.getOpponent(card.getController());
+                    Player opponent = card.getController().getOpponent();
                     SpellAbility sa = AllZone.Stack.peek();
                     
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
@@ -3691,8 +3722,9 @@ public class CardFactory_Instants {
                     if(c.isBlue() && zone.is(Constant.Zone.Hand)
                             && !c.equals(card)) {
                         AllZone.GameAction.removeFromGame(c);
-                        String player = card.getController();
-                        AllZone.GameAction.getPlayerLife(player).subtractLife(1,card);
+                        Player player = card.getController();
+                        //AllZone.GameAction.getPlayerLife(player).subtractLife(1,card);
+                        player.subtractLife(1, card);
                         
                         count++;
                         if(count == stop) {
@@ -3713,7 +3745,7 @@ public class CardFactory_Instants {
 
             public void execute()
               {
-            	  PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+            	  PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
             	  CardList list = new CardList(play.getCards());
             	  list = list.getType("Island");
             	  //TODO: sort by tapped
@@ -3758,8 +3790,8 @@ public class CardFactory_Instants {
                   for(int i = 0; i < all.size(); i++)
                       	all.get(i).addDamage(card.getXManaCostPaid(), card);
                   
-                  AllZone.GameAction.addDamage(Constant.Player.Human, card, damage);
-                  AllZone.GameAction.addDamage(Constant.Player.Computer, card, damage);
+                  AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, damage);
+                  AllZone.GameAction.addDamage(AllZone.ComputerPlayer, card, damage);
                   
       			card.setXManaCostPaid(0);
       		}
@@ -3767,7 +3799,7 @@ public class CardFactory_Instants {
   			{
   				final int maxX = ComputerUtil.getAvailableMana().size() - 1;
   				
-  				if (AllZone.Human_Life.getLife() <= maxX)
+  				if (AllZone.HumanPlayer.getLife() <= maxX)
   					return true;
   				
   				CardListFilter filter = new CardListFilter(){
@@ -3784,7 +3816,7 @@ public class CardFactory_Instants {
   			    CardList compFliers = new CardList(AllZone.Computer_Play.getCards());
   			    compFliers = compFliers.filter(filter);
   			    
-  			    return humanFliers.size() > (compFliers.size() + 2) && AllZone.Computer_Life.getLife() > maxX + 3;
+  			    return humanFliers.size() > (compFliers.size() + 2) && AllZone.ComputerPlayer.getLife() > maxX + 3;
   			}
       	  };
       	  spell.setDescription(cardName + " deals X damage to each creature with flying and each player.");
@@ -3824,8 +3856,8 @@ public class CardFactory_Instants {
                   for(int i = 0; i < all.size(); i++)
                       	all.get(i).addDamage(card.getXManaCostPaid(), card);
                   
-                  AllZone.GameAction.addDamage(Constant.Player.Human, card, damage);
-                  AllZone.GameAction.addDamage(Constant.Player.Computer, card, damage);
+                  AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, damage);
+                  AllZone.GameAction.addDamage(AllZone.ComputerPlayer, card, damage);
                   
       			card.setXManaCostPaid(0);
       		}
@@ -3833,7 +3865,7 @@ public class CardFactory_Instants {
   			{
   				final int maxX = ComputerUtil.getAvailableMana().size() - CardUtil.getConvertedManaCost(card);
   				
-  				if (AllZone.Human_Life.getLife() <= maxX)
+  				if (AllZone.HumanPlayer.getLife() <= maxX)
   					return true;
   				
   				CardListFilter filter = new CardListFilter(){
@@ -3850,7 +3882,7 @@ public class CardFactory_Instants {
   			    CardList comp = new CardList(AllZone.Computer_Play.getCards());
   			    comp = comp.filter(filter);
   			    
-  			    return human.size() > (comp.size() + 2) && AllZone.Computer_Life.getLife() > maxX + 3;
+  			    return human.size() > (comp.size() + 2) && AllZone.ComputerPlayer.getLife() > maxX + 3;
   			}
       	  };
       	  spell.setDescription(cardName + " deals X damage to each creature without "+ keyword[0]+" and each player.");
@@ -3870,7 +3902,7 @@ public class CardFactory_Instants {
 
   			public void resolve()
       		  {
-      			  String player = getTargetPlayer();
+  				Player player = getTargetPlayer();
       			  for(int i=0;i<card.getXManaCostPaid();i++)
       			  {
       				  AllZone.GameAction.drawCard(player);
@@ -4066,7 +4098,8 @@ public class CardFactory_Instants {
       				  CardList attackers = new CardList();
       				  attackers.addAll(AllZone.Combat.getAttackers());
       				  attackers.addAll(AllZone.pwCombat.getAttackers());
-      				  AllZone.GameAction.gainLife(card.getController(), attackers.size());
+      				  //AllZone.GameAction.gainLife(card.getController(), attackers.size());
+      				  card.getController().gainLife(attackers.size());
       			  }
       		}
   			public boolean canPlayAI()
@@ -4151,14 +4184,15 @@ public class CardFactory_Instants {
 
   			  public void resolve()
       		  {
-  				  AllZone.GameAction.gainLife(card.getController(), card.getXManaCostPaid() + 3);
+  				  //AllZone.GameAction.gainLife(card.getController(), card.getXManaCostPaid() + 3);
+  				  card.getController().gainLife(card.getXManaCostPaid()+3);
       			  card.setXManaCostPaid(0);
       		  }
       		  
       		  public boolean canPlayAI()
       		  {
-      			  int humanLife = AllZone.Human_Life.getLife();
-      			  int computerLife = AllZone.Computer_Life.getLife();
+      			  int humanLife = AllZone.HumanPlayer.getLife();
+      			  int computerLife = AllZone.ComputerPlayer.getLife();
       			  
       			  final int maxX = ComputerUtil.getAvailableMana().size() - 1;
       			  return maxX > 3 && (humanLife >= computerLife);
@@ -4184,7 +4218,7 @@ public class CardFactory_Instants {
 
         		@Override
         		public void resolve() {
-        			String player = getTargetPlayer();
+        			Player player = getTargetPlayer();
         			AllZoneUtil.rearrangeTopOfLibrary(player, 3, false);
         			AllZone.GameAction.promptForShuffle(player);
         		}
@@ -4211,7 +4245,7 @@ public class CardFactory_Instants {
 
         		@Override
         		public boolean canPlayAI() {
-        			PlayerZone humanPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+        			PlayerZone humanPlay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
         			CardList humanArts = new CardList(humanPlay.getCards());
         			humanArts = humanArts.getType("Artifact");
         			if(humanArts.size() > 0) {
@@ -4224,15 +4258,15 @@ public class CardFactory_Instants {
 
         		@Override
         		public void chooseTargetAI() {
-        			setTargetPlayer(Constant.Player.Human);
+        			setTargetPlayer(AllZone.HumanPlayer);
         		}//chooseTargetAI()
 
         		@Override
         		public void resolve() {
-        			String player = getTargetPlayer();
+        			Player player = getTargetPlayer();
         			PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
         			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-        			final String opponent = AllZone.GameAction.getOpponent(player);
+        			final Player opponent = player.getOpponent();
         			PlayerZone oppPlay = AllZone.getZone(Constant.Zone.Play, opponent);
         			CardList artifacts = new CardList(play.getCards());
         			artifacts.addAll(oppPlay.getCards());
@@ -4273,14 +4307,14 @@ public class CardFactory_Instants {
                 @Override
                 public void chooseTargetAI() {
                     
-                    CardList creatures = AllZoneUtil.getCreaturesInPlay(Constant.Player.Human);
+                    CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
                     creatures = creatures.filter(new CardListFilter() {
                     	public boolean addCard(Card c) {
                     		return c.getNetAttack() <= damage && !c.getKeyword().contains("Indestructible");
                     	}
                     });
-                    if(AllZone.Human_Life.getLife() <= damage || 0 == creatures.size()) {
-                        setTargetPlayer(Constant.Player.Human);
+                    if(AllZone.HumanPlayer.getLife() <= damage || 0 == creatures.size()) {
+                        setTargetPlayer(AllZone.HumanPlayer);
                         return;
                     }
                     Card c = CardFactoryUtil.AI_getBestCreature(creatures);
@@ -4308,14 +4342,14 @@ public class CardFactory_Instants {
                 @Override
                 public void chooseTargetAI() {
                 	
-                    CardList creatures = AllZoneUtil.getCreaturesInPlay(Constant.Player.Human);
+                    CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
                     creatures = creatures.filter(new CardListFilter() {
                     	public boolean addCard(Card c) {
                     		return c.getNetAttack() <= damage && !c.getKeyword().contains("Indestructible");
                     	}
                     });
-                    if(AllZone.Human_Life.getLife() <= damage || 0 == creatures.size()) {
-                        setTargetPlayer(Constant.Player.Human);
+                    if(AllZone.HumanPlayer.getLife() <= damage || 0 == creatures.size()) {
+                        setTargetPlayer(AllZone.HumanPlayer);
                         return;
                     }
                     Card c = CardFactoryUtil.AI_getBestCreature(creatures);
@@ -4421,15 +4455,15 @@ public class CardFactory_Instants {
 				
 				@Override
 				public void resolve() {
-					String tPlayer = getTargetPlayer();
-					String player = card.getController();
+					Player tPlayer = getTargetPlayer();
+					Player player = card.getController();
 					final int max = card.getXManaCostPaid();
 
 					PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, tPlayer);
 					CardList graveList = new CardList(grave.getCards());
 					int X = Math.min(max, graveList.size());
 					
-					if( player.equals(Constant.Player.Human)) {
+					if( player.equals(AllZone.HumanPlayer)) {
 						for(int i = 0; i < X; i++) {
 							Object o = AllZone.Display.getChoice("Remove from game", graveList.toArray());
 							if(o == null) break;
@@ -4446,23 +4480,23 @@ public class CardFactory_Instants {
 						}
 					}
 
-					AllZone.GameAction.getPlayerLife(tPlayer).subtractLife(X,card);
-					AllZone.GameAction.gainLife(player, X);
+					tPlayer.subtractLife(X,card);
+					player.gainLife(X);
 					card.setXManaCostPaid(0);
 				}
 				
 				@Override
         		public void chooseTargetAI() {
-        			setTargetPlayer(Constant.Player.Human);
+        			setTargetPlayer(AllZone.HumanPlayer);
         		}//chooseTargetAI()
 				
 				@Override
         		public boolean canPlayAI() {
-        			String player = getTargetPlayer();
+					Player player = getTargetPlayer();
         			PlayerZone grave = AllZone.getZone(Constant.Zone.Library, player);
         			CardList graveList = new CardList(grave.getCards());
         			
-        			//int computerLife = AllZone.Computer_Life.getLife();
+        			//int computerLife = AllZone.ComputerPlayer.getLife();
 
         			final int maxX = ComputerUtil.getAvailableMana().size() - 1;
         			return (maxX >= 3) && (graveList.size() > 0);
@@ -4487,7 +4521,7 @@ public class CardFactory_Instants {
 
 				@Override
         		public void resolve() {
-        			String player = card.getController();
+					Player player = card.getController();
         			CardList artifacts = AllZoneUtil.getPlayerCardsInPlay(player);
         			artifacts = artifacts.getType("Artifact");
         			AllZoneUtil.rearrangeTopOfLibrary(player, artifacts.size(), false);
@@ -4517,24 +4551,24 @@ public class CardFactory_Instants {
         			for(Card c:all) {
         				AllZone.GameAction.addDamage(c, card, damage);
         			}
-        			AllZone.GameAction.addDamage(Constant.Player.Computer, card, damage);
-        			AllZone.GameAction.addDamage(Constant.Player.Human, card, damage);
+        			AllZone.GameAction.addDamage(AllZone.ComputerPlayer, card, damage);
+        			AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, damage);
         		}// resolve()
 
         		@Override
         		public boolean canPlayAI() {
-        			CardList human = AllZoneUtil.getCreaturesInPlay(Constant.Player.Human);
+        			CardList human = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
         			human = human.filter(powerSix);
         			human = human.getNotKeyword("Indestructible");
-        			CardList computer = AllZoneUtil.getCreaturesInPlay(Constant.Player.Computer);
+        			CardList computer = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
         			computer = computer.filter(powerSix);
         			computer = computer.getNotKeyword("Indestructible");
         			
         			// the computer will at least destroy 2 more human creatures
         			return  (AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
         			(computer.size() < human.size() - 1
-        					|| (AllZone.Computer_Life.getLife() > 6 && !human.isEmpty())))
-        					|| AllZone.Human_Life.getLife() < 7;
+        					|| (AllZone.ComputerPlayer.getLife() > 6 && !human.isEmpty())))
+        					|| AllZone.HumanPlayer.getLife() < 7;
         		}
         		
         		private CardListFilter powerSix = new CardListFilter() {
@@ -4556,7 +4590,7 @@ public class CardFactory_Instants {
 
                 @Override
                 public void resolve() {
-                    String player = AllZone.Phase.getActivePlayer();
+                	Player player = AllZone.Phase.getActivePlayer();
                     PlayerZone PlayerHand = AllZone.getZone(Constant.Zone.Hand, player);
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
                     CardList libList = new CardList(lib.getCards());
@@ -4612,12 +4646,12 @@ public class CardFactory_Instants {
                 public void resolve() {
                 	SpellAbility sa = AllZone.Stack.pop();
                 	
-                	if(card.getController().equals(Constant.Player.Human))
+                	if(card.getController().equals(AllZone.HumanPlayer))
                 	{
                 		Phase.ManaDrain_BonusMana_Human.add(CardUtil.getConvertedManaCost(sa.getSourceCard()));
                 		Phase.ManaDrain_Source_Human.add(card);
                 	}
-                	else if(card.getController().equals(Constant.Player.Computer))
+                	else if(card.getController().equals(AllZone.ComputerPlayer))
                 	{
                 		Phase.ManaDrain_BonusMana_AI.add(CardUtil.getConvertedManaCost(sa.getSourceCard()));
                 		Phase.ManaDrain_Source_AI.add(card);        		
@@ -4654,9 +4688,9 @@ public class CardFactory_Instants {
                 
                 @Override
                 public boolean canPlayAI() {
-                    if(AllZone.Human_Life.getLife() <= 5) return true;
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
+                    if(AllZone.HumanPlayer.getLife() <= 5) return true;
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer);
                     
                     CardList playList = new CardList(play.getCards());
                     CardList libList = new CardList(lib.getCards());
@@ -4664,7 +4698,7 @@ public class CardFactory_Instants {
                     playList = playList.getName("Academy Rector");
                     libList = libList.getName("Barren Glory");
                     
-                    return (AllZone.Human_Life.getLife() <= 5) || (playList.size() == 1 && libList.size() >= 1);
+                    return (AllZone.HumanPlayer.getLife() <= 5) || (playList.size() == 1 && libList.size() >= 1);
                 }
                 
                 @Override
@@ -4684,8 +4718,8 @@ public class CardFactory_Instants {
                     }
                     AllZone.GameAction.discardRandom(card.getController(), handList.size(), this);
                     
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(getTargetPlayer());
-                    life.subtractLife(5,card);
+                    //PlayerLife life = AllZone.GameAction.getPlayerLife(getTargetPlayer());
+                    getTargetPlayer().subtractLife(5,card);
                 }
             };
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
@@ -4754,8 +4788,8 @@ public class CardFactory_Instants {
                 @Override
                 public void resolve() {
                 	//this needs to get a list of opponents creatures and set the siren flag
-                	String player = card.getController();
-                	String opponent = AllZone.GameAction.getOpponent(player);
+                	Player player = card.getController();
+                	Player opponent = player.getOpponent();
                 	CardList creatures = AllZoneUtil.getCreaturesInPlay(opponent);
                 	for(Card creature:creatures) {
                 		//skip walls, skip creatures with summoning sickness
@@ -4770,8 +4804,8 @@ public class CardFactory_Instants {
 						private static final long serialVersionUID = 5369528776959445848L;
 
 						public void execute() {
-							String player = card.getController();
-							String opponent = AllZone.GameAction.getOpponent(player);
+							Player player = card.getController();
+							Player opponent = player.getOpponent();
 							CardList creatures = AllZoneUtil.getCreaturesInPlay(opponent);
 							
 							for(Card creature:creatures) {
@@ -4807,7 +4841,7 @@ public class CardFactory_Instants {
 
 				@Override
                 public boolean canPlay() {
-					String opponent = AllZone.GameAction.getOpponent(card.getController());
+					Player opponent = card.getController().getOpponent();
 					return Phase.canPlayAfterUpkeep() && AllZone.GameAction.isPlayerTurn(opponent);
 				}//canPlay
 				

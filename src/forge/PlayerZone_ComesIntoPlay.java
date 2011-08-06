@@ -13,7 +13,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
 	static boolean SimultaneousEntry = false; // For Cards with Multiple Token Entry. Only Affects Allies at the moment.
 	static int SimultaneousEntryCounter = 1; // For Cards with Multiple Token Entry. Only Affects Allies at the moment.
     
-    public PlayerZone_ComesIntoPlay(String zone, String player) {
+    public PlayerZone_ComesIntoPlay(String zone, Player player) {
         super(zone, player);
     }
     
@@ -24,7 +24,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         super.add(o);
         
         Card c = (Card) o;
-        final String player = c.getController();
+        final Player player = c.getController();
         
         if(trigger && ((CardFactoryUtil.oppHasKismet(c.getController()) && (c.isLand() || c.isCreature() || c.isArtifact()))
         		|| (AllZoneUtil.isCardInPlay("Root Maze") && (c.isLand() || c.isArtifact()))
@@ -33,7 +33,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         //cannot use addComesIntoPlayCommand - trigger might be set to false;
         // Keep track of max lands can play per turn
         int addMax = 0;
-        boolean isHuman = c.getController().equals(Constant.Player.Human);
+        boolean isHuman = c.getController().equals(AllZone.HumanPlayer);
         boolean adjustLandPlays = false;
         boolean eachPlayer = false;
         
@@ -249,7 +249,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 Ability ability = new Ability(meek.get(i), "0") {
                     @Override
                     public void resolve() {
-                        if(crd.getController().equals(Constant.Player.Human)) {
+                        if(crd.getController().equals(AllZone.HumanPlayer)) {
                             String[] choices = {"Yes", "No"};
                             
                             Object q = null;
@@ -303,7 +303,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         
         // Keep track of max lands can play per turn
         int addMax = 0;
-        boolean isHuman = c.getController().equals(Constant.Player.Human);
+        boolean isHuman = c.getController().equals(AllZone.HumanPlayer);
         boolean adjustLandPlays = false;
         boolean eachPlayer = false;
         

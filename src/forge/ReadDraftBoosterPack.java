@@ -56,20 +56,20 @@ public class ReadDraftBoosterPack implements NewConstants {
             list.addAll(getBoosterPack().toArray());
         
         for(int i = 0; i < 20; i++) {
-            list.add(AllZone.CardFactory.getCard("Forest", Constant.Player.Human));
-            list.add(AllZone.CardFactory.getCard("Island", Constant.Player.Human));
-            list.add(AllZone.CardFactory.getCard("Plains", Constant.Player.Human));
-            list.add(AllZone.CardFactory.getCard("Mountain", Constant.Player.Human));
-            list.add(AllZone.CardFactory.getCard("Swamp", Constant.Player.Human));
-            list.add(AllZone.CardFactory.getCard("Snow-Covered Forest", Constant.Player.Human));
-            list.add(AllZone.CardFactory.getCard("Snow-Covered Island", Constant.Player.Human));
-            list.add(AllZone.CardFactory.getCard("Snow-Covered Plains", Constant.Player.Human));
-            list.add(AllZone.CardFactory.getCard("Snow-Covered Mountain", Constant.Player.Human));
-            list.add(AllZone.CardFactory.getCard("Snow-Covered Swamp", Constant.Player.Human));
+            list.add(AllZone.CardFactory.getCard("Forest", AllZone.HumanPlayer));
+            list.add(AllZone.CardFactory.getCard("Island", AllZone.HumanPlayer));
+            list.add(AllZone.CardFactory.getCard("Plains", AllZone.HumanPlayer));
+            list.add(AllZone.CardFactory.getCard("Mountain", AllZone.HumanPlayer));
+            list.add(AllZone.CardFactory.getCard("Swamp", AllZone.HumanPlayer));
+            list.add(AllZone.CardFactory.getCard("Snow-Covered Forest", AllZone.HumanPlayer));
+            list.add(AllZone.CardFactory.getCard("Snow-Covered Island", AllZone.HumanPlayer));
+            list.add(AllZone.CardFactory.getCard("Snow-Covered Plains", AllZone.HumanPlayer));
+            list.add(AllZone.CardFactory.getCard("Snow-Covered Mountain", AllZone.HumanPlayer));
+            list.add(AllZone.CardFactory.getCard("Snow-Covered Swamp", AllZone.HumanPlayer));
         }
         
         for(int i = 0; i < 4; i++)
-            list.add(AllZone.CardFactory.getCard("Terramorphic Expanse", Constant.Player.Human));
+            list.add(AllZone.CardFactory.getCard("Terramorphic Expanse", AllZone.HumanPlayer));
         
         return list;
     }//getBoosterPack5()
@@ -224,7 +224,7 @@ public class ReadDraftBoosterPack implements NewConstants {
             while(line != null && (line.trim().length() != 0)) {
                 Card c;
                 if(!line.startsWith(comment)) {
-                    c = AllZone.CardFactory.getCard(line.trim(), Constant.Player.Human);
+                    c = AllZone.CardFactory.getCard(line.trim(), AllZone.HumanPlayer);
                     cardList.add(c);
                 }
                 

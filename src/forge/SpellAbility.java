@@ -12,13 +12,13 @@ public abstract class SpellAbility {
     public static final int Ability_Tap        = 2;
     
     private String          description        = "";
-    private String          targetPlayer       = "";
+    private Player          targetPlayer       = null;
     private String          stackDescription   = "";
     private String          manaCost           = "";
     private String          additionalManaCost = "";
     private String			multiKickerManaCost= "";
     private String 			xManaCost		   = "";
-    private String			activatingPlayer   = "";
+    private Player			activatingPlayer   = null;
     
     private String          type               = "Intrinsic";  //set to Intrinsic by default
                                                                 
@@ -138,12 +138,12 @@ public abstract class SpellAbility {
     	xManaCost = cost;
     }
     
-    public String getActivatingPlayer()
+    public Player getActivatingPlayer()
     {
     	return activatingPlayer;
     }
     
-    public void setActivatingPlayer(String player)
+    public void setActivatingPlayer(Player player)
     {
     	activatingPlayer = player;
     }
@@ -357,16 +357,16 @@ public abstract class SpellAbility {
         setStackDescription(sb.toString());
     }
     
-    public void setTargetPlayer(String p) {
+    public void setTargetPlayer(Player p) {
         targetCard = null;//reset setTargetCard()
         
-        if(p == null || (!(p.equals(Constant.Player.Human) || p.equals(Constant.Player.Computer)))) throw new RuntimeException(
+        if(p == null || (!(p.isHuman() || p.isComputer()))) throw new RuntimeException(
                 "SpellAbility : setTargetPlayer() error, argument is " + p + " source card is " + getSourceCard());
         targetPlayer = p;
         setStackDescription(getSourceCard().getName() + " - targeting " + p);
     }
     
-    public String getTargetPlayer() {
+    public Player getTargetPlayer() {
         return targetPlayer;
     }
     

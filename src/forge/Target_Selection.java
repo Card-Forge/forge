@@ -106,7 +106,7 @@ public class Target_Selection {
             }//selectCard()
             
             @Override
-            public void selectPlayer(String player) {
+            public void selectPlayer(Player player) {
                 ability.setTargetPlayer(player);
                 // if multitarget increment then select again
                 done();
@@ -182,7 +182,7 @@ public class Target_Selection {
             }//selectCard()
             
             @Override
-            public void selectPlayer(String player) {
+            public void selectPlayer(Player player) {
                 ability.setTargetPlayer(player);
                 done();
             }
@@ -252,8 +252,8 @@ public class Target_Selection {
             }//selectCard()
             
             @Override
-            public void selectPlayer(String player) {
-            	if (bTgtPlayer){	// todo: check if the player has Shroud too
+            public void selectPlayer(Player player) {
+            	if (bTgtPlayer && !player.hasShroud()){	// todo: check if the player has Shroud too
 	            	spell.setTargetPlayer(player);
 	                done();
             	}

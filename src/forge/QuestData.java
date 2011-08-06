@@ -414,7 +414,7 @@ public class QuestData implements NewConstants {
     	
     	/*
     	for(String s : newCards ) {
-    		Card c = AllZone.CardFactory.getCard(s, Constant.Player.Human);
+    		Card c = AllZone.CardFactory.getCard(s, AllZone.HumanPlayer);
     		list.add(c);
     	}*/
     	return newCards;

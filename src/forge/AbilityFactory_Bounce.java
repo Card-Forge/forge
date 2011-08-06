@@ -109,7 +109,7 @@ public class AbilityFactory_Bounce {
 		CardList list;
 		Card choice = null;
 		
-		list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+		list = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
 		list = list.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
 				return CardFactoryUtil.canTarget(source, c);
@@ -201,7 +201,7 @@ public class AbilityFactory_Bounce {
          		}
          	}
          	if (af.hasSubAbility())
-			CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), card.getController(), card, null, sa);
+			CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
          }
 	}
 }

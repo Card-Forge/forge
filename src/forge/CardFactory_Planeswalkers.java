@@ -9,7 +9,7 @@ import com.esotericsoftware.minlog.Log;
 
 
 class CardFactory_Planeswalkers {
-    public static Card getCard(final Card card, String cardName, String owner) {
+    public static Card getCard(final Card card, String cardName, Player owner) {
         //*************** START *********** START **************************
         if(cardName.equals("Elspeth, Knight-Errant")) {
             //computer only plays ability 1 and 3, put 1/1 Soldier in play and make everything indestructible
@@ -169,7 +169,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+                    CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                     list = list.filter(new CardListFilter(){
                     	public boolean addCard(Card c)
                     	{
@@ -299,13 +299,14 @@ class CardFactory_Planeswalkers {
                     CardList elves = new CardList(play.getCards());
                     elves = elves.getType("Elf");
                     
-                    AllZone.GameAction.gainLife(card.getController(), 2 * elves.size());
+                    //AllZone.GameAction.gainLife(card.getController(), 2 * elves.size());
+                    card.getController().gainLife(2 * elves.size());
                     
                 }//resolve()
                 
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
+                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer);
                     
                     CardList chosens = new CardList(lib.getCards());
                     chosens = chosens.getName("Nissa's Chosen");
@@ -363,7 +364,7 @@ class CardFactory_Planeswalkers {
                     list.addAll(library.getCards());
                     list = list.getType("Elf");
                     
-                    if (card.getController().equals(Constant.Player.Human))
+                    if (card.getController().equals(AllZone.HumanPlayer))
                     {
 	                    List<Card> selection = AllZone.Display.getChoicesOptional("Select Elves to put into play", list.toArray());
 	                    
@@ -400,7 +401,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
+                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer);
                     
                     CardList elves = new CardList(lib.getCards());
                     elves = elves.getType("Elf");
@@ -431,7 +432,7 @@ class CardFactory_Planeswalkers {
                     card2.addCounterFromNonEffect(Counters.LOYALTY, 1);
                     turn[0] = AllZone.Phase.getTurn();
                     
-                    if(card2.getController().equals(Constant.Player.Human)) {
+                    if(card2.getController().equals(AllZone.HumanPlayer)) {
                         Object check = AllZone.Display.getChoiceOptional("Search for Nissa's Chosen",
                                 AllZone.Human_Library.getCards());
                         if(check != null) {
@@ -445,7 +446,7 @@ class CardFactory_Planeswalkers {
                                 play.add(c);
                             }
                         }
-                        AllZone.GameAction.shuffle(Constant.Player.Human);
+                        AllZone.GameAction.shuffle(AllZone.HumanPlayer);
                     }//human
                     else {
                         PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card2.getController());
@@ -458,7 +459,7 @@ class CardFactory_Planeswalkers {
                             lib.remove(nissa);
                             play.add(nissa);
                         }
-                        AllZone.GameAction.shuffle(Constant.Player.Computer);
+                        AllZone.GameAction.shuffle(AllZone.ComputerPlayer);
                     }
                     
                 }
@@ -548,8 +549,8 @@ class CardFactory_Planeswalkers {
                     card2.subtractCounter(Counters.LOYALTY, 9);
                     turn[0] = AllZone.Phase.getTurn();
                     
-                    String player = card2.getController();
-                    String opponent = AllZone.GameAction.getOpponent(player);
+                    Player player = card2.getController();
+                    Player opponent = player.getOpponent();
                     
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, opponent);
                     CardList oppPerms = new CardList(play.getCards());
@@ -571,7 +572,7 @@ class CardFactory_Planeswalkers {
                         }
                     });
                     
-                    if(player.equals(Constant.Player.Human)) {
+                    if(player.equals(AllZone.HumanPlayer)) {
                         for(int k = 0; k < oppPerms.size(); k++) {
                             Card c = oppPerms.get(k);
                             
@@ -782,7 +783,7 @@ class CardFactory_Planeswalkers {
                 }//chooseTargetAI()
                 
                 Card getNonCreaturePermanent() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
                     int highestCost = 0;
                     Card bestCard = null;
                     CardList nonCreaturePermanents = new CardList(play.getCards());
@@ -875,9 +876,9 @@ class CardFactory_Planeswalkers {
                                            private static final long serialVersionUID = -5436621445704076988L;
                                            
                                            public void execute() {
-                                               String player = card2.getController();
+                                        	   Player player = card2.getController();
                                                CardList creatures;
-                                               if(player.equals(Constant.Player.Human)) {
+                                               if(player.equals(AllZone.HumanPlayer)) {
                                                    creatures = new CardList(AllZone.Human_Play.getCards());
                                                } else {
                                                    creatures = new CardList(AllZone.Computer_Play.getCards());
@@ -899,9 +900,9 @@ class CardFactory_Planeswalkers {
                     card2.subtractCounter(Counters.LOYALTY, 1);
                     turn[0] = AllZone.Phase.getTurn();
                     
-                    String player = card2.getController();
+                    Player player = card2.getController();
                     CardList creatures;
-                    if(player.equals(Constant.Player.Human)) {
+                    if(player.equals(AllZone.HumanPlayer)) {
                         creatures = new CardList(AllZone.Human_Play.getCards());
                     } else {
                         creatures = new CardList(AllZone.Computer_Play.getCards());
@@ -960,7 +961,7 @@ class CardFactory_Planeswalkers {
                     turn[0] = AllZone.Phase.getTurn();
                     
                     //Create token
-                    int n = AllZone.GameAction.getPlayerLife(card.getController()).getLife();
+                    int n = card.getController().getLife();
                     CardFactoryUtil.makeToken("Avatar", "W N N Avatar", card2, "W", new String[] {
                             "Creature", "Avatar"}, n, n,
                             new String[] {"This creature's power and toughness are each equal to your life total"});
@@ -1007,7 +1008,8 @@ class CardFactory_Planeswalkers {
                     turn[0] = AllZone.Phase.getTurn();
                     
 
-                    AllZone.GameAction.gainLife(card2.getController(), 2);
+                    //AllZone.GameAction.gainLife(card2.getController(), 2);
+                    card2.getController().gainLife(2);
                     Log.debug("Ajani Goldmane", "current phase: " + AllZone.Phase.getPhase());
                 }
                 
@@ -1095,8 +1097,8 @@ class CardFactory_Planeswalkers {
                     card2.subtractCounter(Counters.LOYALTY, 2);
                     turn[0] = AllZone.Phase.getTurn();
                     
-                    String player = card2.getController();
-                    if(player.equals(Constant.Player.Human)) humanResolve();
+                    Player player = card2.getController();
+                    if(player.equals(AllZone.HumanPlayer)) humanResolve();
                     else computerResolve();
                 }
                 
@@ -1238,18 +1240,18 @@ class CardFactory_Planeswalkers {
                     card2.addCounterFromNonEffect(Counters.LOYALTY, 1);
                     turn[0] = AllZone.Phase.getTurn();
                     
-                    String s = getTargetPlayer();
+                    Player s = getTargetPlayer();
                     setStackDescription("Liliana Vess - " + s + " discards a card");
                     
-                    if(s.equals(Constant.Player.Human)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
-                    else AllZone.GameAction.discardRandom(Constant.Player.Computer, this);
+                    if(s.equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
+                    else AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
                 }
                 
                 @Override
                 public boolean canPlayAI() {
                     if(ability3.canPlay() && ability3.canPlayAI()) return false;
                     else {
-                        setTargetPlayer(Constant.Player.Human);
+                        setTargetPlayer(AllZone.HumanPlayer);
                         return true;
                     }
                 }
@@ -1281,7 +1283,7 @@ class CardFactory_Planeswalkers {
                 }
                 
                 @Override
-                public void selectPlayer(String player) {
+                public void selectPlayer(Player player) {
                     turn[0] = AllZone.Phase.getTurn();
                     ability1.setTargetPlayer(player);
                     AllZone.Stack.add(ability1);
@@ -1369,8 +1371,8 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlayAI() {
-                    setTargetPlayer(Constant.Player.Human);
-                    setStackDescription("Chandra Nalaar - deals 1 damage to " + Constant.Player.Human);
+                    setTargetPlayer(AllZone.HumanPlayer);
+                    setStackDescription("Chandra Nalaar - deals 1 damage to " + AllZone.HumanPlayer);
                     return card2.getCounters(Counters.LOYALTY) < 8;
                 }
             };//SpellAbility ability1
@@ -1401,7 +1403,7 @@ class CardFactory_Planeswalkers {
                 }//selectCard()
                 
                 @Override
-                public void selectPlayer(String player) {
+                public void selectPlayer(Player player) {
                     ability1.setTargetPlayer(player);
                     //stopSetNext(new Input_PayManaCost(ability1));
                     AllZone.Stack.add(ability1);
@@ -1540,8 +1542,8 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlayAI() {
-                    setTargetPlayer(Constant.Player.Human);
-                    setStackDescription("Chandra Nalaar - deals 10 damage to " + Constant.Player.Human
+                    setTargetPlayer(AllZone.HumanPlayer);
+                    setStackDescription("Chandra Nalaar - deals 10 damage to " + AllZone.HumanPlayer
                             + " and each creature he or she controls.");
                     return true;
                 }
@@ -1562,7 +1564,7 @@ class CardFactory_Planeswalkers {
                 }
                 
                 @Override
-                public void selectPlayer(String player) {
+                public void selectPlayer(Player player) {
                     turn[0] = AllZone.Phase.getTurn();
                     
                     ability3.setTargetPlayer(player);
@@ -1858,8 +1860,8 @@ class CardFactory_Planeswalkers {
                     
                     turn[0] = AllZone.Phase.getTurn();
                     
-                    AllZone.GameAction.drawCard(Constant.Player.Computer);
-                    AllZone.GameAction.drawCard(Constant.Player.Human);
+                    AllZone.GameAction.drawCard(AllZone.ComputerPlayer);
+                    AllZone.GameAction.drawCard(AllZone.HumanPlayer);
                     
                 }//resolve()
                 
@@ -1890,7 +1892,7 @@ class CardFactory_Planeswalkers {
                     card2.subtractCounter(Counters.LOYALTY, 1);
                     
                     turn[0] = AllZone.Phase.getTurn();
-                    String player = getTargetPlayer();
+                    Player player = getTargetPlayer();
                     
                     AllZone.GameAction.drawCard(player);
                     
@@ -1928,7 +1930,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlayAI() {
-                    setTargetPlayer(Constant.Player.Human);
+                    setTargetPlayer(AllZone.HumanPlayer);
                     return card2.getCounters(Counters.LOYALTY) >= 11;
                 }
                 
@@ -1992,7 +1994,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlayAI() {
-                	CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+                	CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
                 	list = list.filter(new CardListFilter()
                 	{
                 		public boolean addCard(Card c)
@@ -2028,7 +2030,7 @@ class CardFactory_Planeswalkers {
                 
                 /*
                 Card getPermanent() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
                     int highestCost = 0;
                     Card bestCard = null;
                     CardList perms = new CardList(play.getCards());
@@ -2083,8 +2085,8 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlayAI() {
-                    setTargetPlayer(Constant.Player.Human);
-                    return AllZone.Human_Life.getLife() <= damage;
+                    setTargetPlayer(AllZone.HumanPlayer);
+                    return AllZone.HumanPlayer.getLife() <= damage;
                     
                 }
                 
@@ -2099,10 +2101,14 @@ class CardFactory_Planeswalkers {
                             c.addDamage(damage, card2);
                         }
                     } 
-                    else 
-                    	AllZone.GameAction.addDamage(getTargetPlayer(), card2, damage);
+                    else { 
+                    	//AllZone.GameAction.addDamage(getTargetPlayer(), card2, damage);
+                    	getTargetPlayer().addDamage(damage, card2);
+                    }
                     
-                    AllZone.GameAction.gainLife(card2.getController(), 3);
+                    
+                    //AllZone.GameAction.gainLife(card2.getController(), 3);
+                    card2.getController().gainLife(3);
                 }
                 
                 @Override
@@ -2145,7 +2151,7 @@ class CardFactory_Planeswalkers {
                 }//selectCard()
                 
                 @Override
-                public void selectPlayer(String player) {
+                public void selectPlayer(Player player) {
                     ability2.setTargetPlayer(player);
                     //stopSetNext(new Input_PayManaCost(ability2));
                     AllZone.Stack.add(ability2);
@@ -2163,7 +2169,7 @@ class CardFactory_Planeswalkers {
                     card2.subtractCounter(Counters.LOYALTY, 7);
                     
                     turn[0] = AllZone.Phase.getTurn();
-                    String player = getTargetPlayer();
+                    Player player = getTargetPlayer();
                     
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
                     CardList land = new CardList(play.getCards());
@@ -2177,11 +2183,11 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone pz = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    PlayerZone pz = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
                     CardList land = new CardList(pz.getCards());
                     land = land.getType("Land");
                     
-                    setTargetPlayer(Constant.Player.Human);
+                    setTargetPlayer(AllZone.HumanPlayer);
                     return card2.getCounters(Counters.LOYALTY) >= 8 && land.size() >= 4;
                 }
                 
@@ -2479,7 +2485,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
                     CardList list = new CardList(play.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
@@ -2603,7 +2609,7 @@ class CardFactory_Planeswalkers {
             
             final PlayerZone[] orig = new PlayerZone[1];
             final PlayerZone[] temp = new PlayerZone[1];
-            final String[] controllerEOT = new String[1];
+            final Player[] controllerEOT = new Player[1];
             final Card[] target = new Card[1];
             
             final Command untilEOT = new Command() {
@@ -2725,7 +2731,7 @@ class CardFactory_Planeswalkers {
             return card2;
         }//*************** END ************ END **************************    
         
-        
+
         //*************** START *********** START **************************
         if(cardName.equals("Jace, the Mind Sculptor")) {
             final int turn[] = new int[1];
@@ -2760,7 +2766,7 @@ class CardFactory_Planeswalkers {
                 public void resolve() {
                     turn[0] = AllZone.Phase.getTurn();
                     card2.addCounterFromNonEffect(Counters.LOYALTY, 2);
-                    String targetPlayer = getTargetPlayer();
+                    Player targetPlayer = getTargetPlayer();
                     
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, targetPlayer);
                     
@@ -2768,7 +2774,7 @@ class CardFactory_Planeswalkers {
                     
                     Card c = lib.get(0);
                     
-                    if(card2.getController().equals(Constant.Player.Human)) {
+                    if(card2.getController().equals(AllZone.HumanPlayer)) {
                         
                         String[] choices = {"Yes", "No"};
                         Object choice = AllZone.Display.getChoice("Put " + c + " on bottom of owner's library?",
@@ -2781,7 +2787,7 @@ class CardFactory_Planeswalkers {
                         }
                     } else //compy
                     {
-                        PlayerZone humanPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                        PlayerZone humanPlay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
                         CardList land = new CardList(humanPlay.getCards());
                         land = land.getType("Land");
                         
@@ -2826,15 +2832,15 @@ class CardFactory_Planeswalkers {
                     AllZone.GameAction.drawCard(card.getController());
                     AllZone.GameAction.drawCard(card.getController());
                     
-                    String player = card.getController();
-                    if(player.equals(Constant.Player.Human)) humanResolve();
+                    Player player = card.getController();
+                    if(player.equals(AllZone.HumanPlayer)) humanResolve();
                     //else
                     //  computerResolve();
                 }
                 
                 public void humanResolve() {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human);
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Human);
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
+                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
                     
                     CardList putOnTop = new CardList(hand.getCards());
                     
@@ -2916,7 +2922,7 @@ class CardFactory_Planeswalkers {
                     turn[0] = AllZone.Phase.getTurn();
                     card2.subtractCounter(Counters.LOYALTY, 12);
                     
-                    String player = getTargetPlayer();
+                    Player player = getTargetPlayer();
                     
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
@@ -3002,7 +3008,7 @@ class CardFactory_Planeswalkers {
                     card2.addCounterFromNonEffect(Counters.LOYALTY, 0);
                     turn[0] = AllZone.Phase.getTurn();
                     
-                    final String player = card.getController();
+                    final Player player = card.getController();
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
                     Card topCard = lib.get(0);
@@ -3031,7 +3037,7 @@ class CardFactory_Planeswalkers {
                 public boolean canPlay() {
                 	//looks like standard Planeswalker stuff...
                 	//maybe should check if library is empty, or 1 card?
-                	final String player = card.getController();
+                	final Player player = card.getController();
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
                     
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
@@ -3065,7 +3071,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
                     CardList creatures = new CardList(play.getCards());
                     creatures = creatures.filter(new CardListFilter() {
                     	public boolean addCard(Card c) {
@@ -3077,7 +3083,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public void chooseTargetAI() {
-                	PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                	PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
                     CardList cards = new CardList(play.getCards());
                     //avoid targeting the dragon tokens we just put in play...
                     cards = cards.filter(new CardListFilter() {
@@ -3115,8 +3121,8 @@ class CardFactory_Planeswalkers {
                     card2.subtractCounter(Counters.LOYALTY, 4);
                     turn[0] = AllZone.Phase.getTurn();
                     
-                    final String target = getTargetPlayer();
-                    final String player = card2.getController();
+                    final Player target = getTargetPlayer();
+                    final Player player = card2.getController();
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
                     CardList dragons = new CardList(play.getCards());
                     dragons = dragons.filter(new CardListFilter() {
@@ -3127,15 +3133,16 @@ class CardFactory_Planeswalkers {
                     for(int i = 0; i < dragons.size(); i++) {
                     	Card dragon = dragons.get(i);
                     	int damage = dragon.getNetAttack();
-                    	AllZone.GameAction.addDamage(target, dragon, damage);
+                    	//AllZone.GameAction.addDamage(target, dragon, damage);
+                    	target.addDamage(damage, dragon);
                     }
                     
                 }//resolve()
                 
                 @Override
                 public boolean canPlayAI() {
-                    setTargetPlayer(Constant.Player.Human);
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    setTargetPlayer(AllZone.HumanPlayer);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
                     CardList dragons = new CardList(play.getCards());
                     dragons = dragons.filter(new CardListFilter() {
                     	public boolean addCard(Card c) {
@@ -3217,8 +3224,8 @@ class CardFactory_Planeswalkers {
             	
             	public boolean canPlayAI()
             	{
-            		CardList humanList = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Human);
-            		CardList compList = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+            		CardList humanList = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
+            		CardList compList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
             		
             		CardListFilter filter = new CardListFilter()
             		{
@@ -3269,7 +3276,8 @@ class CardFactory_Planeswalkers {
                     turn[0] = AllZone.Phase.getTurn();
                     
                     int life = AllZoneUtil.getCreaturesInPlay(card2.getController()).size();
-                    AllZone.GameAction.gainLife(card2.getController(), life);
+                    //AllZone.GameAction.gainLife(card2.getController(), life);
+                    card2.getController().gainLife(life);
                     Log.debug("Elspeth Tirel", "current phase: " + AllZone.Phase.getPhase());
                 }
                 
@@ -3405,7 +3413,7 @@ class CardFactory_Planeswalkers {
                     turn[0] = AllZone.Phase.getTurn();
                     
                     Card mp = AllZone.ManaPool;//list.getCard(0);
-                    CardList list = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Human);
+                    CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
                     list = list.filter(new CardListFilter()
                     {
                     	public boolean addCard(Card crd)
@@ -3479,7 +3487,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+                    CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                     list = list.filter(new CardListFilter(){
                     	public boolean addCard(Card c)
                     	{
@@ -3549,7 +3557,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlayAI() {
-                	CardList list = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+                	CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                 	list = list.filter(new CardListFilter()
                 	{
                 		public boolean addCard(Card crd)
@@ -3558,7 +3566,7 @@ class CardFactory_Planeswalkers {
                 		}
                 	});
                 	
-                	CardList mountains = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+                	CardList mountains = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                 	mountains = mountains.filter(new CardListFilter()
                 	{
                 		public boolean addCard(Card crd)
@@ -3690,7 +3698,7 @@ class CardFactory_Planeswalkers {
                 	{
                 		public boolean addCard(Card c)
                 		{
-                			return CardFactoryUtil.canTarget(card2, c) && c.getOwner().equals(Constant.Player.Computer) &&
+                			return CardFactoryUtil.canTarget(card2, c) && c.getOwner().equals(AllZone.ComputerPlayer) &&
                 				   !c.equals(card2);
                 		}
                 	});
@@ -3745,7 +3753,7 @@ class CardFactory_Planeswalkers {
                     list.addAll(AllZone.Computer_Play.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.isPermanent() && c.getOwner().equals(Constant.Player.Human) 
+                            return c.isPermanent() && c.getOwner().equals(AllZone.HumanPlayer) 
                             	   && CardFactoryUtil.canTarget(card, c) && !c.equals(card2);
                         }
                     });
@@ -3801,7 +3809,7 @@ class CardFactory_Planeswalkers {
                 @Override
                 public boolean canPlayAI() {
                     
-                	CardList list = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+                	CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                     list = list.filter(new CardListFilter()
                     {
                     	public boolean addCard(Card crd)
@@ -3810,7 +3818,7 @@ class CardFactory_Planeswalkers {
                     	}
                     });
                 	
-                    CardList creatList = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+                    CardList creatList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                     creatList = creatList.filter(new CardListFilter()
                     {
                     	public boolean addCard(Card crd)
@@ -3871,7 +3879,7 @@ class CardFactory_Planeswalkers {
                 public boolean canPlayAI() {
                 	//multiple venser emblems are NOT redundant
                 	/*
-                    CardList list = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+                    CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                     list = list.filter(new CardListFilter(){
                     	public boolean addCard(Card c)
                     	{

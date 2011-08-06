@@ -32,7 +32,7 @@ public class Input_Mulligan extends Input {
         }
         
         for(int i = 0; i < 100; i++)
-            AllZone.GameAction.shuffle(Constant.Player.Human);
+            AllZone.GameAction.shuffle(AllZone.HumanPlayer);
         
         
         int newHand = hand.length - 1;
@@ -47,7 +47,7 @@ public class Input_Mulligan extends Input {
         		newHand = hand.length;
         }
         for(int i = 0; i < newHand; i++)
-            AllZone.GameAction.drawCard(Constant.Player.Human);
+            AllZone.GameAction.drawCard(AllZone.HumanPlayer);
         
         if(newHand == 0) {
         	AllZone.GameInfo.setHumanMulliganedToZero(true);
@@ -57,9 +57,9 @@ public class Input_Mulligan extends Input {
     
     void end() {
         ButtonUtil.reset();
-        CardList HHandList = new CardList(AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human).getCards());
-        PlayerZone HPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
-        PlayerZone HHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human);
+        CardList HHandList = new CardList(AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer).getCards());
+        PlayerZone HPlay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+        PlayerZone HHand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
         for(int i = 0; i < HHandList.size() ; i++) {
         	if(HHandList.get(i).getName().startsWith("Leyline")) {
             String[] choices = {"Yes", "No"};
@@ -72,9 +72,9 @@ public class Input_Mulligan extends Input {
             }
         }
         }
-        CardList CHandList = new CardList(AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).getCards());
-        PlayerZone CPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
-        PlayerZone CHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
+        CardList CHandList = new CardList(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
+        PlayerZone CPlay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+        PlayerZone CHand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
         for(int i = 0; i < CHandList.size() ; i++) {
         	if(CHandList.get(i).getName().startsWith("Leyline") && (AllZoneUtil.getCardsInPlay("Leyline of Singularity").size() == 0)) {
             	CPlay.add(CHandList.get(i));
@@ -85,8 +85,8 @@ public class Input_Mulligan extends Input {
     }
         if(AllZone.GameAction.Start_Cut == true && !(HHandList.contains(AllZone.GameAction.HumanCut) 
         		|| CHandList.contains(AllZone.GameAction.ComputerCut)))  {
-        AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, Constant.Player.Human),AllZone.GameAction.HumanCut);
-        AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer),AllZone.GameAction.ComputerCut);
+        AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer),AllZone.GameAction.HumanCut);
+        AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer),AllZone.GameAction.ComputerCut);
         }
         AllZone.GameAction.checkStateEffects();
         stop();

@@ -40,7 +40,7 @@ public class GuiInput extends MyObservable implements Observer {
         input.selectButtonCancel();
     }
     
-    public void selectPlayer(String player) {
+    public void selectPlayer(Player player) {
         input.selectPlayer(player);
     }
     

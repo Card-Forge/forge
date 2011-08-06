@@ -107,37 +107,37 @@ public class GenerateConstructedMultiColorDeck
 	    for(int i = 0; i < numberBasic; i++)
 	    {
 	    
-		      land = AllZone.CardFactory.getCard(map.get(color1).toString(), Constant.Player.Computer);
+		      land = AllZone.CardFactory.getCard(map.get(color1).toString(), AllZone.ComputerPlayer);
 		      list.add(land);
 		
-		      land = AllZone.CardFactory.getCard(map.get(color2).toString(), Constant.Player.Computer);
+		      land = AllZone.CardFactory.getCard(map.get(color2).toString(), AllZone.ComputerPlayer);
 		      list.add(land);
 		      
-		      land = AllZone.CardFactory.getCard(map.get(color3).toString(), Constant.Player.Computer);
+		      land = AllZone.CardFactory.getCard(map.get(color3).toString(), AllZone.ComputerPlayer);
 		      list.add(land);
 	    }
 	    
 	    int numberDual = 4;
 	    for (int i = 0; i < numberDual;i++)
 	    {
-	    	land = AllZone.CardFactory.getCard(multiMap.get(color1+color2)[0], Constant.Player.Computer);
+	    	land = AllZone.CardFactory.getCard(multiMap.get(color1+color2)[0], AllZone.ComputerPlayer);
 		    list.add(land);
 		    	
-		    land = AllZone.CardFactory.getCard(multiMap.get(color1+color3)[0], Constant.Player.Computer);
+		    land = AllZone.CardFactory.getCard(multiMap.get(color1+color3)[0], AllZone.ComputerPlayer);
 		    list.add(land);
 		    
-		    land = AllZone.CardFactory.getCard(multiMap.get(color2+color3)[0], Constant.Player.Computer);
+		    land = AllZone.CardFactory.getCard(multiMap.get(color2+color3)[0], AllZone.ComputerPlayer);
 		    list.add(land);
 	    }
 	    for (int i=0; i<2;i++)
 	    {
-		    land = AllZone.CardFactory.getCard(multiMap.get(color1+color2)[1], Constant.Player.Computer);
+		    land = AllZone.CardFactory.getCard(multiMap.get(color1+color2)[1], AllZone.ComputerPlayer);
 		    list.add(land);
 		    	
-		    land = AllZone.CardFactory.getCard(multiMap.get(color1+color3)[1], Constant.Player.Computer);
+		    land = AllZone.CardFactory.getCard(multiMap.get(color1+color3)[1], AllZone.ComputerPlayer);
 		    list.add(land);
 		    
-		    land = AllZone.CardFactory.getCard(multiMap.get(color2+color3)[1], Constant.Player.Computer);
+		    land = AllZone.CardFactory.getCard(multiMap.get(color2+color3)[1], AllZone.ComputerPlayer);
 		    list.add(land);
 	    }
 	}
@@ -148,19 +148,19 @@ public class GenerateConstructedMultiColorDeck
 	    for(int i = 0; i < numberBasic; i++)
 	    {
 	    
-		      land = AllZone.CardFactory.getCard(map.get(color1).toString(), Constant.Player.Computer);
+		      land = AllZone.CardFactory.getCard(map.get(color1).toString(), AllZone.ComputerPlayer);
 		      list.add(land);
 		
-		      land = AllZone.CardFactory.getCard(map.get(color2).toString(), Constant.Player.Computer);
+		      land = AllZone.CardFactory.getCard(map.get(color2).toString(), AllZone.ComputerPlayer);
 		      list.add(land);
 		      
-		      land = AllZone.CardFactory.getCard(map.get(color3).toString(), Constant.Player.Computer);
+		      land = AllZone.CardFactory.getCard(map.get(color3).toString(), AllZone.ComputerPlayer);
 		      list.add(land);
 		      
-		      land = AllZone.CardFactory.getCard(map.get(color4).toString(), Constant.Player.Computer);
+		      land = AllZone.CardFactory.getCard(map.get(color4).toString(), AllZone.ComputerPlayer);
 		      list.add(land);
 		      
-		      land = AllZone.CardFactory.getCard(map.get(color5).toString(), Constant.Player.Computer);
+		      land = AllZone.CardFactory.getCard(map.get(color5).toString(), AllZone.ComputerPlayer);
 		      list.add(land);
 	    }
 	    
@@ -168,34 +168,34 @@ public class GenerateConstructedMultiColorDeck
 		int numberDual = 2;
 	    for (int i = 0; i < numberDual;i++)
 	    {
-	    	land = AllZone.CardFactory.getCard(multiMap.get(color1+color2)[0], Constant.Player.Computer);
+	    	land = AllZone.CardFactory.getCard(multiMap.get(color1+color2)[0], AllZone.ComputerPlayer);
 		    list.add(land);
 		    	
-		    land = AllZone.CardFactory.getCard(multiMap.get(color1+color3)[0], Constant.Player.Computer);
+		    land = AllZone.CardFactory.getCard(multiMap.get(color1+color3)[0], AllZone.ComputerPlayer);
 		    list.add(land);
 		    
-		    land = AllZone.CardFactory.getCard(multiMap.get(color1+color4)[0], Constant.Player.Computer);
+		    land = AllZone.CardFactory.getCard(multiMap.get(color1+color4)[0], AllZone.ComputerPlayer);
 		    list.add(land);
 		    
-		    land = AllZone.CardFactory.getCard(multiMap.get(color1+color5)[0], Constant.Player.Computer);
+		    land = AllZone.CardFactory.getCard(multiMap.get(color1+color5)[0], AllZone.ComputerPlayer);
 		    list.add(land);
 		    
-		    land = AllZone.CardFactory.getCard(multiMap.get(color2+color3)[0], Constant.Player.Computer);
+		    land = AllZone.CardFactory.getCard(multiMap.get(color2+color3)[0], AllZone.ComputerPlayer);
 		    list.add(land);
 		    
-		    land = AllZone.CardFactory.getCard(multiMap.get(color2+color4)[0], Constant.Player.Computer);
+		    land = AllZone.CardFactory.getCard(multiMap.get(color2+color4)[0], AllZone.ComputerPlayer);
 		    list.add(land);
 		    
-		    land = AllZone.CardFactory.getCard(multiMap.get(color2+color5)[0], Constant.Player.Computer);
+		    land = AllZone.CardFactory.getCard(multiMap.get(color2+color5)[0], AllZone.ComputerPlayer);
 		    list.add(land);
 		    
-		    land = AllZone.CardFactory.getCard(multiMap.get(color3+color4)[0], Constant.Player.Computer);
+		    land = AllZone.CardFactory.getCard(multiMap.get(color3+color4)[0], AllZone.ComputerPlayer);
 		    list.add(land);
 		    
-		    land = AllZone.CardFactory.getCard(multiMap.get(color3+color5)[0], Constant.Player.Computer);
+		    land = AllZone.CardFactory.getCard(multiMap.get(color3+color5)[0], AllZone.ComputerPlayer);
 		    list.add(land);
 		    
-		    land = AllZone.CardFactory.getCard(multiMap.get(color4+color5)[0], Constant.Player.Computer);
+		    land = AllZone.CardFactory.getCard(multiMap.get(color4+color5)[0], AllZone.ComputerPlayer);
 		    list.add(land);
 	    }
 

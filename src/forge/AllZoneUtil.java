@@ -19,7 +19,7 @@ public class AllZoneUtil {
 	 * @param player the player to get creatures for
 	 * @return a CardList containing all creatures a given player has in play
 	 */
-	public static CardList getCreaturesInPlay(final String player) {
+	public static CardList getCreaturesInPlay(final Player player) {
 		CardList creatures = AllZoneUtil.getPlayerCardsInPlay(player);
 		return creatures.filter(AllZoneUtil.creatures);
 	}
@@ -58,7 +58,7 @@ public class AllZoneUtil {
 	 * @param player the player whose lands we want to get
 	 * @return a CardList containing all lands the given player has in play
 	 */
-	public static CardList getPlayerLandsInPlay(final String player) {
+	public static CardList getPlayerLandsInPlay(final Player player) {
 		CardList cards = getPlayerCardsInPlay(player);
 		return cards.filter(lands);
 	}
@@ -89,8 +89,8 @@ public class AllZoneUtil {
 	 */
 	public static CardList getCardsInPlay(final String cardName) {
 		CardList cards = new CardList();
-		cards.add(getPlayerCardsInPlay(Constant.Player.Human));
-		cards.add(getPlayerCardsInPlay(Constant.Player.Computer));
+		cards.add(getPlayerCardsInPlay(AllZone.HumanPlayer));
+		cards.add(getPlayerCardsInPlay(AllZone.ComputerPlayer));
 		if( cardName != null && !"".equals(cardName) ) {
 			cards = cards.getName(cardName);
 		}
@@ -103,9 +103,9 @@ public class AllZoneUtil {
 	 * @param player the player's cards to get
 	 * @return a CardList with all cards in the Play zone for the given player
 	 */
-	public static CardList getPlayerCardsInPlay(final String player) {
+	public static CardList getPlayerCardsInPlay(final Player player) {
 		CardList cards = new CardList();
-		if( player.equals(Constant.Player.Human) || player.equals(Constant.Player.Computer) ){
+		if( player.equals(AllZone.HumanPlayer) || player.equals(AllZone.ComputerPlayer) ){
 			PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
 			cards.addAll(play.getCards());
 		}
@@ -119,9 +119,9 @@ public class AllZoneUtil {
 	 * @param cardName the card name to look for in that zone
 	 * @return a CardList with all cards of a given name the player has in play
 	 */
-	public static CardList getPlayerCardsInPlay(final String player, final String cardName) {
+	public static CardList getPlayerCardsInPlay(final Player player, final String cardName) {
 		CardList cards = new CardList();
-		if( player.equals(Constant.Player.Human) || player.equals(Constant.Player.Computer) ){
+		if( player.isHuman() || player.isComputer() ){
 			cards = getPlayerCardsInPlay(player);
 			cards = cards.getName(cardName);
 		}
@@ -138,8 +138,8 @@ public class AllZoneUtil {
 	 */
 	public static CardList getCardsInGraveyard() {
 		CardList cards = new CardList();
-		cards.add(getPlayerGraveyard(Constant.Player.Human));
-		cards.add(getPlayerGraveyard(Constant.Player.Computer));
+		cards.add(getPlayerGraveyard(AllZone.HumanPlayer));
+		cards.add(getPlayerGraveyard(AllZone.ComputerPlayer));
 		return cards;
 	}
 	
@@ -150,9 +150,9 @@ public class AllZoneUtil {
 	 * @param player the player whose graveyard we want to get
 	 * @return a CardList containing all cards in that player's graveyard
 	 */
-	public static CardList getPlayerGraveyard(final String player) {
+	public static CardList getPlayerGraveyard(final Player player) {
 		CardList cards = new CardList();
-		if( player.equals(Constant.Player.Human) || player.equals(Constant.Player.Computer) ){
+		if( player.isHuman() || player.isComputer() ){
 			PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
 			cards.addAll(grave.getCards());
 		}
@@ -166,7 +166,7 @@ public class AllZoneUtil {
 	 * @param cardName the card name to find in the graveyard
 	 * @return a CardList containing all cards with that name in the target graveyard
 	 */
-	public static CardList getPlayerGraveyard(final String player, final String cardName) {
+	public static CardList getPlayerGraveyard(final Player player, final String cardName) {
 		CardList cards = getPlayerGraveyard(player);
 		cards = cards.getName(cardName);
 		return cards;
@@ -180,9 +180,9 @@ public class AllZoneUtil {
 	 * @param player the player's hand to target
 	 * @return a CardList containing all cards in target player's hand
 	 */
-	public static CardList getPlayerHand(final String player) {
+	public static CardList getPlayerHand(final Player player) {
 		CardList cards = new CardList();
-		if( player.equals(Constant.Player.Human) || player.equals(Constant.Player.Computer) ){
+		if( player.isHuman() || player.isComputer() ){
 			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
 			cards.addAll(hand.getCards());
 		}
@@ -198,8 +198,8 @@ public class AllZoneUtil {
 	 */
 	public static CardList getCardsRemovedFromGame() {
 		CardList cards = new CardList();
-		cards.add(getPlayerCardsRemovedFromGame(Constant.Player.Computer));
-		cards.add(getPlayerCardsRemovedFromGame(Constant.Player.Human));
+		cards.add(getPlayerCardsRemovedFromGame(AllZone.ComputerPlayer));
+		cards.add(getPlayerCardsRemovedFromGame(AllZone.HumanPlayer));
 		return cards;
 	}
 	
@@ -209,9 +209,9 @@ public class AllZoneUtil {
 	 * @param player the player whose cards we want that are removed from the game
 	 * @return a CardList with all cards removed from the game for a given player
 	 */
-	public static CardList getPlayerCardsRemovedFromGame(final String player) {
+	public static CardList getPlayerCardsRemovedFromGame(final Player player) {
 		CardList cards = new CardList();
-		if( player.equals(Constant.Player.Human) || player.equals(Constant.Player.Computer) ){
+		if( player.equals(AllZone.HumanPlayer) || player.equals(AllZone.ComputerPlayer) ){
 			PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, player);
 			cards.addAll(removed.getCards());
 		}
@@ -225,9 +225,9 @@ public class AllZoneUtil {
 	 * 
 	 * @return a CardList with all the cards currently in that player's library
 	 */
-	public static CardList getPlayerCardsInLibrary(final String player) {
+	public static CardList getPlayerCardsInLibrary(final Player player) {
 		CardList cards = new CardList();
-		if( player.equals(Constant.Player.Human) || player.equals(Constant.Player.Computer) ){
+		if( player.equals(AllZone.HumanPlayer) || player.equals(AllZone.ComputerPlayer) ){
 			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
 			cards.addAll(lib.getCards());
 		}
@@ -241,7 +241,7 @@ public class AllZoneUtil {
 	 * @param cardName the card's name that one is interested in
 	 * @return a CardList of all cards of the given name in the given player's library
 	 */
-	public static CardList getPlayerCardsInLibrary(final String player, final String cardName) {
+	public static CardList getPlayerCardsInLibrary(final Player player, final String cardName) {
 		CardList cards = getPlayerCardsInLibrary(player);
 		return cards.getName(cardName);
 	}
@@ -271,7 +271,7 @@ public class AllZoneUtil {
 	 * @param player the player whose battlefield we want to check
 	 * @return true if that player has that card in play, false otherwise
 	 */
-	public static boolean isCardInPlay(final String cardName, final String player) {
+	public static boolean isCardInPlay(final String cardName, final Player player) {
 		return getPlayerCardsInPlay(player, cardName).size() > 0;
 	}
 	
@@ -295,7 +295,7 @@ public class AllZoneUtil {
 	 * @param cardType the card type to check for
 	 * @return a CardList with all cards of a certain type the player has in play
 	 */
-	public static CardList getPlayerTypeInPlay(final String player, final String cardType) {
+	public static CardList getPlayerTypeInPlay(final Player player, final String cardType) {
 		CardList cards = getPlayerCardsInPlay(player);
 		cards = cards.getType(cardType);
 		return cards;
@@ -307,7 +307,7 @@ public class AllZoneUtil {
 	 * @param cardType the card type to check for
 	 * @return a CardList with all cards of a certain type the player has in his library
 	 */
-	public static CardList getPlayerTypeInLibrary(final String player, final String cardType) {
+	public static CardList getPlayerTypeInLibrary(final Player player, final String cardType) {
 		CardList cards = getPlayerCardsInLibrary(player);
 		cards = cards.getType(cardType);
 		return cards;	
@@ -319,7 +319,7 @@ public class AllZoneUtil {
 	 * @param cardType the card type to check for
 	 * @return a CardList with all cards of a certain type the player has in graveyard
 	 */
-	public static CardList getPlayerTypeInGraveyard(final String player, final String cardType) {
+	public static CardList getPlayerTypeInGraveyard(final Player player, final String cardType) {
 		CardList cards = getPlayerGraveyard(player);
 		cards = cards.getType(cardType);
 		return cards;
@@ -328,12 +328,12 @@ public class AllZoneUtil {
 	//////////////// getting all cards of a given color
 	
 	public static CardList getColorInPlay(final String color) {
-		CardList cards = getPlayerColorInPlay(Constant.Player.Computer, color);
-		cards.add(getPlayerColorInPlay(Constant.Player.Human, color));
+		CardList cards = getPlayerColorInPlay(AllZone.ComputerPlayer, color);
+		cards.add(getPlayerColorInPlay(AllZone.HumanPlayer, color));
 		return cards;
 	}
 	
-	public static CardList getPlayerColorInPlay(final String player, final String color) {
+	public static CardList getPlayerColorInPlay(final Player player, final String color) {
 		CardList cards = getPlayerCardsInPlay(player);
 		cards = cards.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
@@ -353,7 +353,7 @@ public class AllZoneUtil {
 	 * @param numCards the number of cards from the top to rearrange
 	 * @param shuffle true if a shuffle is desired at the end, false otherwise
 	 */
-	public static void rearrangeTopOfLibrary(final String player, final int numCards, boolean shuffle) {
+	public static void rearrangeTopOfLibrary(final Player player, final int numCards, boolean shuffle) {
 		PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
 		int maxCards = lib.size();
 		maxCards = Math.min(maxCards, numCards);
@@ -402,19 +402,19 @@ public class AllZoneUtil {
 		if(shuffle) AllZone.GameAction.shuffle(zone.getPlayer());
 	}
 	
-	public static int CompareTypeAmountInPlay(final String player, String type)
+	public static int CompareTypeAmountInPlay(final Player player, String type)
 	{
 		// returns the difference between player's
-		String opponent = AllZone.GameAction.getOpponent(player);
+		Player opponent = player.getOpponent();
 		CardList playerList = getPlayerTypeInPlay(player, type);
 		CardList opponentList = getPlayerTypeInPlay(opponent, type);
 		return (playerList.size() - opponentList.size());
 	}
 	
-	public static int CompareTypeAmountInGraveyard(final String player, String type)
+	public static int CompareTypeAmountInGraveyard(final Player player, String type)
 	{
 		// returns the difference between player's
-		String opponent = AllZone.GameAction.getOpponent(player);
+		Player opponent = player.getOpponent();
 		CardList playerList = getPlayerTypeInGraveyard(player, type);
 		CardList opponentList = getPlayerTypeInGraveyard(opponent, type);
 		return (playerList.size() - opponentList.size());

@@ -109,7 +109,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
         		{
 					//  The computer can now use this card. A version of the 
 					//  line of code below was added to ComputerUtil.payManaCost()
-        			AllZone.Stack.add(CardFactoryUtil.getForbiddenOrchardAbility(crd, Constant.Player.Computer));
+        			AllZone.Stack.add(CardFactoryUtil.getForbiddenOrchardAbility(crd, AllZone.ComputerPlayer));
         		}
         	});
         }
@@ -266,15 +266,15 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     	AllZone.ManaPool.addMana(this);
     	
     	// Nirkana Revenant Code
-    	CardList Nirkana_Human = CardFactoryUtil.getCards("Nirkana Revenant", Constant.Player.Human);
-        if(Nirkana_Human.size() > 0 && sourceCard.getType().contains("Swamp") && sourceCard.getController().equals(Constant.Player.Human)) {
+    	CardList Nirkana_Human = CardFactoryUtil.getCards("Nirkana Revenant", AllZone.HumanPlayer);
+        if(Nirkana_Human.size() > 0 && sourceCard.getType().contains("Swamp") && sourceCard.getController().isHuman()) {
         	for(int i = 0; i < Nirkana_Human.size(); i++) {
         		AllZone.ManaPool.addManaToFloating("B", Nirkana_Human.get(i));	
         	}
         } 
 
     	// High Tide Code
-        if(Phase.HighTideCount > 0 && sourceCard.getType().contains("Island") && sourceCard.getController().equals(Constant.Player.Human)) {
+        if(Phase.HighTideCount > 0 && sourceCard.getType().contains("Island") && sourceCard.getController().isHuman()) {
         	for(int i = 0; i < Phase.HighTideCount; i++) {
         		AllZone.ManaPool.addManaToFloating("U", sourceCard);	
         	}
@@ -345,7 +345,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
         
     }//override for all non-X variable mana,
     
-    public String getController() {
+    public Player getController() {
         return getSourceCard().getController();
     }
     
@@ -359,7 +359,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
         Card card = getSourceCard();
 		 if(card.isCreature() == true) {
     		 
-	 			CardList Silence = AllZoneUtil.getPlayerCardsInPlay(AllZone.GameAction.getOpponent(card.getController())); 	
+	 			CardList Silence = AllZoneUtil.getPlayerCardsInPlay(card.getController().getOpponent()); 	
 	     		Silence = Silence.getName("Linvala, Keeper of Silence");
 	     		if(Silence.size() > 0) return false;
 	     		}

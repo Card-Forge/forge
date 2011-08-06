@@ -131,7 +131,7 @@ public class AbilityFactory_Counters {
 		CardList list;
 		Card choice = null;
 		
-		String player = af.isCurse() ? Constant.Player.Human : Constant.Player.Computer;
+		Player player = af.isCurse() ? AllZone.HumanPlayer : AllZone.ComputerPlayer;
 		
 		list = new CardList(AllZone.getZone(Constant.Zone.Play, player).getCards());
 		list = list.filter(new CardListFilter() {
@@ -234,7 +234,7 @@ public class AbilityFactory_Counters {
 		tgtCard.addCounter(Counters.valueOf(type), counterAmount);
 		
 		if (af.hasSubAbility())
-			 CardFactoryUtil.doDrawBack(DrawBack, counterAmount, card.getController(), AllZone.GameAction.getOpponent(card.getController()), card.getController(), card, null, sa);
+			 CardFactoryUtil.doDrawBack(DrawBack, counterAmount, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
 
 	}
 }

@@ -74,7 +74,7 @@ public class ComputerAI_counterSpells {
 	
 	public static CardList getPlayableCounterSpells()
 	{
-		PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
+		PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
 		CardList list = new CardList(hand.getCards());
 		list = list.filter(new CardListFilter()
 		{
@@ -98,7 +98,7 @@ public class ComputerAI_counterSpells {
 	}
 	public static CardList getPlayableCreatureCounterSpells()
 	{
-		PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
+		PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
 		CardList list = new CardList(hand.getCards());
 		list = list.filter(new CardListFilter()
 		{

@@ -844,7 +844,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         Card c;
         ReadBoosterPack pack = new ReadBoosterPack();
         for(int i = 0; i < deck.countMain(); i++) {
-            c = AllZone.CardFactory.getCard(deck.getMain(i), Constant.Player.Human);
+            c = AllZone.CardFactory.getCard(deck.getMain(i), AllZone.HumanPlayer);
             
             //add rarity to card if this is a sealed card pool
             if(Constant.Runtime.GameType[0].equals(Constant.GameType.Sealed)) c.setRarity(pack.getRarity(c.getName()));
@@ -855,7 +855,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         if(deck.isSealed() || deck.isDraft()) {
             //add sideboard to GUI
             for(int i = 0; i < deck.countSideboard(); i++) {
-                c = AllZone.CardFactory.getCard(deck.getSideboard(i), Constant.Player.Human);
+                c = AllZone.CardFactory.getCard(deck.getSideboard(i), AllZone.HumanPlayer);
                 c.setRarity(pack.getRarity(c.getName()));
                 topModel.addCard(c);
             }

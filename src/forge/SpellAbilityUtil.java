@@ -4,7 +4,7 @@ import java.util.*;
 public class SpellAbilityUtil
 {   
     //only works for MONO-COLORED spells
-    static public UndoCommand getPayCostCommand(final String player, final String manaCost)
+    static public UndoCommand getPayCostCommand(final Player player, final String manaCost)
     {
 	return new UndoCommand()
 	{
@@ -38,7 +38,7 @@ public class SpellAbilityUtil
 	};//UndoCommand
     }//payCost()
     
-    static public CardList getAvailableMana(String player)
+    static public CardList getAvailableMana(Player player)
     {
 	PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
 	CardList all = new CardList(play.getCards());

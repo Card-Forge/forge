@@ -40,7 +40,7 @@ public class ComputerUtil
 	        payManaCost(all[i]);
 	        all[i].chooseTargetAI();
 	        all[i].getBeforePayManaAI().execute();
-	        all[i].setActivatingPlayer(Constant.Player.Computer);
+	        all[i].setActivatingPlayer(AllZone.ComputerPlayer);
 	        AllZone.Stack.add(all[i]);
         }
         else{
@@ -65,7 +65,7 @@ public class ComputerUtil
 		  if (AllZone.GameAction.isCardInZone(sa.getSourceCard(),AllZone.Computer_Hand))
 	    		AllZone.Computer_Hand.remove(sa.getSourceCard());
 	  
-		  sa.setActivatingPlayer(Constant.Player.Computer);
+		  sa.setActivatingPlayer(AllZone.ComputerPlayer);
 	  
 		  if (sa.getSourceCard().getKeyword().contains("Draw a card."))
 		      	AllZone.GameAction.drawCard(sa.getSourceCard().getController());
@@ -77,7 +77,7 @@ public class ComputerUtil
   
   final static public void playStackFree(SpellAbility sa)
   {
-	  sa.setActivatingPlayer(Constant.Player.Computer);
+	  sa.setActivatingPlayer(AllZone.ComputerPlayer);
 	  
 	  if (AllZone.GameAction.isCardInZone(sa.getSourceCard(),AllZone.Computer_Hand))
 		  AllZone.Computer_Hand.remove(sa.getSourceCard());
@@ -101,7 +101,7 @@ public class ComputerUtil
         //sa.getSourceCard().comesIntoPlay(); - messes things up, maybe for the future fix this
       }
 
-      sa.setActivatingPlayer(Constant.Player.Computer);
+      sa.setActivatingPlayer(AllZone.ComputerPlayer);
       
       if(sa instanceof Ability_Tap)
         sa.getSourceCard().tap();
@@ -136,7 +136,7 @@ public class ComputerUtil
     CardList all = new CardList();
     all.addAll(AllZone.Computer_Play.getCards());
     all.addAll(AllZone.Computer_Hand.getCards());
-    all.addAll(CardFactoryUtil.getFlashbackUnearthCards(Constant.Player.Computer).toArray());
+    all.addAll(CardFactoryUtil.getFlashbackUnearthCards(AllZone.ComputerPlayer).toArray());
     
     CardList humanPlayable = new CardList();
     humanPlayable.addAll(AllZone.Human_Play.getCards());
@@ -234,7 +234,7 @@ public class ComputerUtil
 		
 		if (cost.getTapXTypeCost())
 		{
-			PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
 			CardList typeList = new CardList(play.getCards());
 			typeList = typeList.getValidCards(cost.getTapXType().split(","));
 			
@@ -258,7 +258,7 @@ public class ComputerUtil
 		}
 		
 		if (cost.getLifeCost()){
-			if (AllZone.GameAction.getPlayerLife(Constant.Player.Computer).getLife() <= cost.getLifeAmount())
+			if (AllZone.ComputerPlayer.getLife() <= cost.getLifeAmount())
 				return false;
 		}
 	  
@@ -285,11 +285,11 @@ public class ComputerUtil
 		if (cost.getSacCost()){
 			  // if there's a sacrifice in the cost, just because we can Pay it doesn't mean we want to. 
 			if (!cost.getSacThis()){
-			    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+			    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
 			    CardList typeList = new CardList(play.getCards());
 			    typeList = typeList.getValidCards(cost.getSacType().split(","));
 			    Card target = sa.getTargetCard();
-				if (target != null && target.getController().equals(Constant.Player.Computer)) // don't sacrifice the card we're pumping
+				if (target != null && target.getController().equals(AllZone.ComputerPlayer)) // don't sacrifice the card we're pumping
 					  typeList.remove(target);
 				
 				if (cost.getSacAmount() > typeList.size())
@@ -302,11 +302,11 @@ public class ComputerUtil
 		if (cost.getExileCost()){
 			  // if there's an exile in the cost, just because we can Pay it doesn't mean we want to. 
 			if (!cost.getExileThis()){
-			    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+			    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
 			    CardList typeList = new CardList(play.getCards());
 			    typeList = typeList.getValidCards(cost.getExileType().split(","));
 			    Card target = sa.getTargetCard();
-				if (target != null && target.getController().equals(Constant.Player.Computer)) // don't exile the card we're pumping
+				if (target != null && target.getController().equals(AllZone.ComputerPlayer)) // don't exile the card we're pumping
 					  typeList.remove(target);
 				
 				if (cost.getExileAmount() > typeList.size())
@@ -319,11 +319,11 @@ public class ComputerUtil
 		if (cost.getReturnCost()){
 			  // if there's a return in the cost, just because we can Pay it doesn't mean we want to. 
 			if (!cost.getReturnThis()){
-			    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+			    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
 			    CardList typeList = new CardList(play.getCards());
 			    typeList = typeList.getValidCards(cost.getReturnType().split(","));
 			    Card target = sa.getTargetCard();
-				if (target != null && target.getController().equals(Constant.Player.Computer)) // don't bounce the card we're pumping
+				if (target != null && target.getController().equals(AllZone.ComputerPlayer)) // don't bounce the card we're pumping
 					  typeList.remove(target);
 				
 				if (cost.getReturnAmount() > typeList.size())
@@ -399,7 +399,7 @@ public class ComputerUtil
             }
             
             if (land.get(i).getName().equals("Forbidden Orchard")) {
-            	AllZone.Stack.add(CardFactoryUtil.getForbiddenOrchardAbility(land.get(i), Constant.Player.Human));
+            	AllZone.Stack.add(CardFactoryUtil.getForbiddenOrchardAbility(land.get(i), AllZone.HumanPlayer));
             }
             
             //System.out.println("just subtracted " + colors.get(j) + ", cost is now: " + cost.toString());
@@ -527,15 +527,15 @@ public class ComputerUtil
   {
 		ArrayList<Card> landList = PlayerZoneUtil.getCardType(AllZone.Computer_Hand, "Land");
 		
-		if (AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer, "Crucible of Worlds").size() > 0)
+		if (AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer, "Crucible of Worlds").size() > 0)
 		{
-			CardList lands = AllZoneUtil.getPlayerTypeInGraveyard(Constant.Player.Computer, "Land");
+			CardList lands = AllZoneUtil.getPlayerTypeInGraveyard(AllZone.ComputerPlayer, "Land");
 			for (Card crd : lands)
 				landList.add(crd);
 		}
 		
 		while(!landList.isEmpty() && (AllZone.GameInfo.computerNumberLandPlaysLeft() > 0 ||
-		    	CardFactoryUtil.getCards("Fastbond", Constant.Player.Computer).size() > 0)){
+		    	CardFactoryUtil.getCards("Fastbond", AllZone.ComputerPlayer).size() > 0)){
 			// play as many lands as you can
 		    int ix = 0;
 		    while (landList.get(ix).isReflectedLand() && (ix+1 < landList.size())) {
@@ -560,10 +560,10 @@ public class ComputerUtil
   }
   
   static public Card chooseSacrificeType(String type, Card activate, Card target){
-      PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+      PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
       CardList typeList = new CardList(play.getCards());
       typeList = typeList.getValidCards(type.split(","));
-	  if (target != null && target.getController().equals(Constant.Player.Computer) && typeList.contains(target)) // don't sacrifice the card we're pumping
+	  if (target != null && target.getController().equals(AllZone.ComputerPlayer) && typeList.contains(target)) // don't sacrifice the card we're pumping
 		  typeList.remove(target);
 	  
 	  if (typeList.size() == 0)
@@ -579,7 +579,7 @@ public class ComputerUtil
   }
   
   static public Card chooseTapType(String type, Card activate, boolean tap, int index){
-	  PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+	  PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
       CardList typeList = new CardList(play.getCards());
       typeList = typeList.getValidCards(type.split(","));
 	  
@@ -603,10 +603,10 @@ public class ComputerUtil
   }
   
   static public Card chooseReturnType(String type, Card activate, Card target){
-      PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+      PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
       CardList typeList = new CardList(play.getCards());
       typeList = typeList.getValidCards(type.split(","));
-	  if (target != null && target.getController().equals(Constant.Player.Computer) && typeList.contains(target)) // don't bounce the card we're pumping
+	  if (target != null && target.getController().equals(AllZone.ComputerPlayer) && typeList.contains(target)) // don't bounce the card we're pumping
 		  typeList.remove(target);
 	  
 	  if (typeList.size() == 0)
@@ -631,7 +631,7 @@ public class ComputerUtil
   {
     ComputerUtil_Attack2 att = new ComputerUtil_Attack2(
         AllZone.Computer_Play.getCards(),
-        AllZone.Human_Play.getCards()   ,  AllZone.Human_Life.getLife());
+        AllZone.Human_Play.getCards()   ,  AllZone.HumanPlayer.getLife());
 
     return att.getAttackers();
   }
@@ -639,7 +639,7 @@ public class ComputerUtil
   {
     ComputerUtil_Block2 block = new ComputerUtil_Block2(
       AllZone.Combat.getAttackers()   ,
-      AllZone.Computer_Play.getCards(), AllZone.Computer_Life.getLife());
+      AllZone.Computer_Play.getCards(), AllZone.ComputerPlayer.getLife());
 
     return block.getBlockers();
   }

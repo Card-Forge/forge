@@ -14,7 +14,7 @@ public abstract class Input implements java.io.Serializable {
     
     public void selectCard(Card c, PlayerZone zone) {}
     
-    public void selectPlayer(String player) {}
+    public void selectPlayer(Player player) {}
     
     public void selectButtonOK() {}
     

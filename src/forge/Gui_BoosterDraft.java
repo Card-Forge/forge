@@ -427,7 +427,7 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
         Card c;
         ReadDraftBoosterPack pack = new ReadDraftBoosterPack();
         for(int i = 0; i < deck.countMain(); i++) {
-            c = AllZone.CardFactory.getCard(deck.getMain(i), Constant.Player.Human);
+            c = AllZone.CardFactory.getCard(deck.getMain(i), AllZone.HumanPlayer);
             
             //add rarity to card if this is a sealed card pool
             if(!Constant.Runtime.GameType[0].equals(Constant.GameType.Constructed)) c.setRarity(pack.getRarity(c.getName()));;
@@ -438,7 +438,7 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
         if(deck.isSealed() || deck.isRegular()) {
             //add sideboard to GUI
             for(int i = 0; i < deck.countSideboard(); i++) {
-                c = AllZone.CardFactory.getCard(deck.getSideboard(i), Constant.Player.Human);
+                c = AllZone.CardFactory.getCard(deck.getSideboard(i), AllZone.HumanPlayer);
                 c.setRarity(pack.getRarity(c.getName()));
                 allCardModel.addCard(c);
             }

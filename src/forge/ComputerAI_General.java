@@ -11,7 +11,7 @@ import com.esotericsoftware.minlog.Log;
 public class ComputerAI_General implements Computer {
     //private boolean          playLand = true;
 	//private int numberPlayLand = 1;
-	//private int numberPlayLand = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Computer);
+	//private int numberPlayLand = CardFactoryUtil.getCanPlayNumberOfLands(AllZone.ComputerPlayer);
     //private Collection<Card> playMain1Cards;
         
     // @SuppressWarnings("unchecked")
@@ -176,12 +176,12 @@ public class ComputerAI_General implements Computer {
                 if(c.isLand()) return false;
 
                 CardList Vengevines = new CardList();
-                Vengevines.addAll(AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer).getCards());       
+                Vengevines.addAll(AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer).getCards());       
                 Vengevines = Vengevines.getName("Vengevine");
                 if(Vengevines.size() > 0) {
                 CardList Creatures = new CardList();  
                 CardList Creatures2 = new CardList();       
-                Creatures.addAll(AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).getCards());
+                Creatures.addAll(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
         		for(int i = 0; i < Creatures.size(); i++) {
         			if(Creatures.get(i).getType().contains("Creature") && CardUtil.getConvertedManaCost(Creatures.get(i).getManaCost()) <= 3) {
         				Creatures2.add(Creatures.get(i));
@@ -218,7 +218,7 @@ public class ComputerAI_General implements Computer {
         CardList all = new CardList();
         all.addAll(AllZone.Computer_Hand.getCards());
         all.addAll(AllZone.Computer_Play.getCards());
-        all.addAll(CardFactoryUtil.getFlashbackCards(Constant.Player.Computer).toArray());
+        all.addAll(CardFactoryUtil.getFlashbackCards(AllZone.ComputerPlayer).toArray());
         
         // Prevent the computer from summoning Ball Lightning type creatures during main phase 2
         all = all.getNotKeyword("At the beginning of the end step, sacrifice CARDNAME.");
@@ -254,7 +254,7 @@ public class ComputerAI_General implements Computer {
                 //This try/catch should fix the "computer is thinking" bug
                 try {
                     if(ComputerUtil.canPayCost(sa) && sa.canPlayAI() && 
-                    		(sa.isAnyPlayer() || sa.getSourceCard().getController().equals(Constant.Player.Computer)))
+                    		(sa.isAnyPlayer() || sa.getSourceCard().getController().equals(AllZone.ComputerPlayer)))
                     			spellAbility.add(sa);
                 } catch(Exception ex) {
                     showError(ex, "There is an error in the card code for %s:%n", c.getName(), ex.getMessage());
@@ -273,7 +273,7 @@ public class ComputerAI_General implements Computer {
         c.setDefendingPlayer(AllZone.Combat.getDefendingPlayer());
         
         //check for planeswalker
-        Card walker = AllZone.GameAction.getPlaneswalker(Constant.Player.Human);
+        Card walker = AllZone.GameAction.getPlaneswalker(AllZone.HumanPlayer);
         
         if(walker != null && MyRandom.random.nextBoolean()) {
             c.setPlaneswalker(walker);
@@ -319,7 +319,7 @@ public class ComputerAI_General implements Computer {
     
     private Combat getCombat(Card[] attackers, CardList availableBlockers) {
         ComputerUtil_Block2 com = new ComputerUtil_Block2(attackers, availableBlockers.toArray(),
-                AllZone.Computer_Life.getLife());
+                AllZone.ComputerPlayer.getLife());
         
         Combat c = com.getBlockers();
         c.setAttackingPlayer(AllZone.Combat.getAttackingPlayer());
@@ -399,8 +399,8 @@ public class ComputerAI_General implements Computer {
         /*
             for(int i = 0; i < 10; i++)
             {
-              library.add(cf.getCard("Kodama's Reach", Constant.Player.Computer));
-              library.add(cf.getCard("Forest", Constant.Player.Computer));
+              library.add(cf.getCard("Kodama's Reach", AllZone.ComputerPlayer));
+              library.add(cf.getCard("Forest", AllZone.ComputerPlayer));
             }
         */
         return library.toArray();

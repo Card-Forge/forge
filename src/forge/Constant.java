@@ -88,10 +88,12 @@ public interface Constant {
         //public static final String Stack             = "Stack";
     }
     
+    /*
     public interface Player {
         public static final String Human    = "Human";
         public static final String Computer = "Computer";
     }
+    */
     
     /*
     public interface CardType

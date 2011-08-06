@@ -298,13 +298,13 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         for(int i = 0; i < (15 * 5); i++)
             random.add(all.remove(0));
         
-        random.add(AllZone.CardFactory.getCard("Forest", Constant.Player.Human));
-        random.add(AllZone.CardFactory.getCard("Island", Constant.Player.Human));
-        random.add(AllZone.CardFactory.getCard("Plains", Constant.Player.Human));
-        random.add(AllZone.CardFactory.getCard("Mountain", Constant.Player.Human));
-        random.add(AllZone.CardFactory.getCard("Swamp", Constant.Player.Human));
+        random.add(AllZone.CardFactory.getCard("Forest", AllZone.HumanPlayer));
+        random.add(AllZone.CardFactory.getCard("Island", AllZone.HumanPlayer));
+        random.add(AllZone.CardFactory.getCard("Plains", AllZone.HumanPlayer));
+        random.add(AllZone.CardFactory.getCard("Mountain", AllZone.HumanPlayer));
+        random.add(AllZone.CardFactory.getCard("Swamp", AllZone.HumanPlayer));
         
-        random.add(AllZone.CardFactory.getCard("Terramorphic Expanse", Constant.Player.Human));
+        random.add(AllZone.CardFactory.getCard("Terramorphic Expanse", AllZone.HumanPlayer));
         
 
         deckDisplay.updateDisplay(random, new CardList());
@@ -353,10 +353,10 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         CardList top = new CardList();
         
         for(int i = 0; i < deck.countMain(); i++)
-            top.add(AllZone.CardFactory.getCard(deck.getMain(i), Constant.Player.Human));
+            top.add(AllZone.CardFactory.getCard(deck.getMain(i), AllZone.HumanPlayer));
         
         for(int i = 0; i < deck.countSideboard(); i++)
-            top.add(AllZone.CardFactory.getCard(deck.getSideboard(i), Constant.Player.Human));
+            top.add(AllZone.CardFactory.getCard(deck.getSideboard(i), AllZone.HumanPlayer));
         
         deckDisplay.updateDisplay(top, new CardList());
     }//new draft
@@ -682,7 +682,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         CardList all = new CardList();
         for(int i = 0; i < aDeck.countMain(); i++) {
             String cardName = aDeck.getMain(i);
-            Card c = AllZone.CardFactory.getCard(cardName, "");
+            Card c = AllZone.CardFactory.getCard(cardName, null);
             
             all.add(c);
         }
@@ -817,7 +817,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         
         CardList main = new CardList();
         for(int i = 0; i < deck.countMain(); i++)
-            main.add(AllZone.CardFactory.getCard(deck.getMain(i), Constant.Player.Human));
+            main.add(AllZone.CardFactory.getCard(deck.getMain(i), AllZone.HumanPlayer));
         
         deckDisplay.updateDisplay(AllZone.CardFactory.getAllCards(), main);
     }//showConstructedDeck()
@@ -845,11 +845,11 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         
         CardList top = new CardList();
         for(int i = 0; i < deck.countSideboard(); i++)
-            top.add(AllZone.CardFactory.getCard(deck.getSideboard(i), Constant.Player.Human));
+            top.add(AllZone.CardFactory.getCard(deck.getSideboard(i), AllZone.HumanPlayer));
         
         CardList bottom = new CardList();
         for(int i = 0; i < deck.countMain(); i++)
-            bottom.add(AllZone.CardFactory.getCard(deck.getMain(i), Constant.Player.Human));
+            bottom.add(AllZone.CardFactory.getCard(deck.getMain(i), AllZone.HumanPlayer));
         
         deckDisplay.updateDisplay(top, bottom);
     }//showSealedDeck()
@@ -874,11 +874,11 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         
         CardList top = new CardList();
         for(int i = 0; i < deck.countSideboard(); i++)
-            top.add(AllZone.CardFactory.getCard(deck.getSideboard(i), Constant.Player.Human));
+            top.add(AllZone.CardFactory.getCard(deck.getSideboard(i), AllZone.HumanPlayer));
         
         CardList bottom = new CardList();
         for(int i = 0; i < deck.countMain(); i++)
-            bottom.add(AllZone.CardFactory.getCard(deck.getMain(i), Constant.Player.Human));
+            bottom.add(AllZone.CardFactory.getCard(deck.getMain(i), AllZone.HumanPlayer));
         
         deckDisplay.updateDisplay(top, bottom);
     }//showDraftDeck()

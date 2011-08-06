@@ -171,13 +171,13 @@ public class ComputerUtil_Block2
 
       int attack = getAttack(attacker);
       //if computer can't save himself:
-      if(attack > (CardListUtil.sumDefense(c) + AllZone.GameAction.getPlayerLife(Constant.Player.Computer).getLife() ))
+      if(attack > (CardListUtil.sumDefense(c) + AllZone.ComputerPlayer.getLife() ))
     	  return new Card[] {};
 		
       CardList block = new CardList();
       c.shuffle();
 
-      while(attack >= (CardListUtil.sumDefense(block) + AllZone.GameAction.getPlayerLife(Constant.Player.Computer).getLife() )
+      while(attack >= (CardListUtil.sumDefense(block) + AllZone.ComputerPlayer.getLife() )
     		&& c.size() != 0)
     	  block.add(c.remove(0));
 
@@ -279,7 +279,7 @@ public class ComputerUtil_Block2
          
          boolean multiTrample = false;
          //multiblocks for trample
-         if (trample && AllZone.Computer_Life.getLife() <= getAttack(attackers.get(i)) )
+         if (trample && AllZone.ComputerPlayer.getLife() <= getAttack(attackers.get(i)) )
          {
         	 Card[] m = multipleTrampleBlock(attackers.get(i));
              for(int inner = 0; inner < m.length; inner++)
@@ -327,7 +327,7 @@ public class ComputerUtil_Block2
 	            testing("chumping");
 	         }
 	
-	         if(c == null && doubleStrike && AllZone.Computer_Life.getLife() <= (getAttack(attackers.get(i))*2))
+	         if(c == null && doubleStrike && AllZone.ComputerPlayer.getLife() <= (getAttack(attackers.get(i))*2))
 	         {
 	            c = forceBlock(attackers.get(i));
 	            if (c != null)

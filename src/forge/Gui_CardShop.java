@@ -242,7 +242,7 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
         	shop = new CardList();
         	
         	 for(int i = 0; i < shopList.size(); i++) {
-                 Card c = AllZone.CardFactory.getCard(shopList.get(i).toString(), "");
+                 Card c = AllZone.CardFactory.getCard(shopList.get(i).toString(), null);
                  c.setRarity(pack.getRarity(c.getName()));
                  if (map.containsKey(c.getName()))
                  	c.setValue(map.get(c.getName()));
@@ -265,7 +265,7 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
         CardList owned = new CardList();
         
         for(int i = 0; i < list.size(); i++) {
-            Card c = AllZone.CardFactory.getCard(list.get(i).toString(), "");
+            Card c = AllZone.CardFactory.getCard(list.get(i).toString(), null);
             
             c.setRarity(pack.getRarity(c.getName()));
             if (map.containsKey(c.getName()))
@@ -598,7 +598,7 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
         Card c;
         ReadBoosterPack pack = new ReadBoosterPack();
         for(int i = 0; i < deck.countMain(); i++) {
-            c = AllZone.CardFactory.getCard(deck.getMain(i), Constant.Player.Human);
+            c = AllZone.CardFactory.getCard(deck.getMain(i), AllZone.HumanPlayer);
             
             //add rarity to card if this is a sealed card pool
             if(Constant.Runtime.GameType[0].equals(Constant.GameType.Sealed)) c.setRarity(pack.getRarity(c.getName()));
@@ -609,7 +609,7 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
         if(deck.isSealed() || deck.isDraft()) {
             //add sideboard to GUI
             for(int i = 0; i < deck.countSideboard(); i++) {
-                c = AllZone.CardFactory.getCard(deck.getSideboard(i), Constant.Player.Human);
+                c = AllZone.CardFactory.getCard(deck.getSideboard(i), AllZone.HumanPlayer);
                 c.setRarity(pack.getRarity(c.getName()));
                 topModel.addCard(c);
             }

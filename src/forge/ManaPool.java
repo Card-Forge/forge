@@ -16,12 +16,13 @@ public class ManaPool extends Card {
 	
     public final static String colors  = "WUBRG";
     public final static String mcolors = "1WUBRG";
-    private String owner;
+    private Player owner;
 	
-    public ManaPool(String player) {
+    public ManaPool(Player player) {
         super();
         updateObservers();
         owner = player;
+        this.setController(player);
         setName("Mana Pool");
         addIntrinsicKeyword("Shroud");
         addIntrinsicKeyword("Indestructible");
@@ -472,7 +473,7 @@ public class ManaPool extends Card {
         //Omnath, Locus of Mana Pump Trigger
         if(Phase.GameBegins == 1) {
             CardList Omnath_Human = new CardList();
-            PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);                   
+            PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);                   
             Omnath_Human.addAll(play.getCards());
             Omnath_Human = Omnath_Human.getName("Omnath, Locus of Mana"); 
             if(Omnath_Human.size() > 0) {

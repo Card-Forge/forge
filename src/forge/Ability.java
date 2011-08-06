@@ -20,7 +20,7 @@ abstract public class Ability extends SpellAbility {
     public boolean canPlay() {
 //      if(getSourceCard().isCreature() && (!getSourceCard().hasSickness()))
     	if(getSourceCard().isCreature() == true) {
-		CardList Silence = AllZoneUtil.getPlayerCardsInPlay(AllZone.GameAction.getOpponent(getSourceCard().getController()));
+		CardList Silence = AllZoneUtil.getPlayerCardsInPlay(getSourceCard().getController().getOpponent());
 		Silence = Silence.getName("Linvala, Keeper of Silence");		
         return AllZone.GameAction.isCardInPlay(getSourceCard()) && !getSourceCard().isFaceDown() && getSourceCard().getName().equals("Spreading Seas") == false && Silence.size() == 0; // For Spreading Seas
     	}

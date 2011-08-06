@@ -23,7 +23,7 @@ public class QuestUtil {
 			
 			for (String s:compCards)
 			{
-				Card c = AllZone.CardFactory.getCard(s, Constant.Player.Computer);
+				Card c = AllZone.CardFactory.getCard(s, AllZone.ComputerPlayer);
 				list.add(c);
 			}
 		}
@@ -119,8 +119,8 @@ public class QuestUtil {
         
         c.setImageName(imageName);
         
-        c.setController(Constant.Player.Human);
-        c.setOwner(Constant.Player.Human);
+        c.setController(AllZone.HumanPlayer);
+        c.setOwner(AllZone.HumanPlayer);
         
         c.setManaCost("G");
         c.addColor("G");
@@ -150,7 +150,8 @@ public class QuestUtil {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.gainLife(crd.getController(), 1);
+                    //AllZone.GameAction.gainLife(crd.getController(), 1);
+                	crd.getController().gainLife(1);
                 }
             };
             c.addSpellAbility(ability);
@@ -200,8 +201,8 @@ public class QuestUtil {
         
         c.setImageName(imageName);
         
-        c.setController(Constant.Player.Human);
-        c.setOwner(Constant.Player.Human);
+        c.setController(AllZone.HumanPlayer);
+        c.setOwner(AllZone.HumanPlayer);
         
         c.setManaCost("G");
         c.addColor("G");
@@ -257,8 +258,8 @@ public class QuestUtil {
         
         c.setImageName(imageName);
         
-        c.setController(Constant.Player.Human);
-        c.setOwner(Constant.Player.Human);
+        c.setController(AllZone.HumanPlayer);
+        c.setOwner(AllZone.HumanPlayer);
         
         c.setManaCost("B");
         c.addColor("B");
@@ -314,8 +315,8 @@ public class QuestUtil {
         
         c.setImageName(imageName);
         
-        c.setController(Constant.Player.Human);
-        c.setOwner(Constant.Player.Human);
+        c.setController(AllZone.HumanPlayer);
+        c.setOwner(AllZone.HumanPlayer);
         
         c.setManaCost("W");
         c.addColor("W");
@@ -373,8 +374,8 @@ public class QuestUtil {
         
         c.setImageName(imageName);
         
-        c.setController(Constant.Player.Human);
-        c.setOwner(Constant.Player.Human);
+        c.setController(AllZone.HumanPlayer);
+        c.setOwner(AllZone.HumanPlayer);
         
         c.setManaCost("R");
         c.addColor("R");
@@ -431,7 +432,7 @@ public class QuestUtil {
 		if (id == 1) //White Dungeon
 		{
 			CardList humanList = new CardList();
-			Card c = AllZone.CardFactory.getCard("Adventuring Gear", Constant.Player.Human);
+			Card c = AllZone.CardFactory.getCard("Adventuring Gear", AllZone.HumanPlayer);
 			humanList.add(c);
 			
 			qa.setHuman(humanList);
@@ -478,7 +479,7 @@ public class QuestUtil {
 		else if (id == 7) //Gold Dungeon
 		{
 			CardList humanList = new CardList();
-			Card c = AllZone.CardFactory.getCard("Trailblazer's Boots", Constant.Player.Human);
+			Card c = AllZone.CardFactory.getCard("Trailblazer's Boots", AllZone.HumanPlayer);
 			humanList.add(c);
 			
 			qa.setHuman(humanList);
@@ -495,8 +496,8 @@ public class QuestUtil {
 		        c.setName("Sheep");
 		        c.setImageName("G 0 1 Sheep");
 		        
-		        c.setController(Constant.Player.Human);
-		        c.setOwner(Constant.Player.Human);
+		        c.setController(AllZone.HumanPlayer);
+		        c.setOwner(AllZone.HumanPlayer);
 		        
 		        c.setManaCost("G");
 		        c.addColor("G");
@@ -517,7 +518,7 @@ public class QuestUtil {
 		else if (id == 9)
 		{
 			CardList humanList = new CardList();
-			Card c = AllZone.CardFactory.getCard("Trusty Machete", Constant.Player.Human);
+			Card c = AllZone.CardFactory.getCard("Trusty Machete", AllZone.HumanPlayer);
 			humanList.add(c);
 			
 			qa.setHuman(humanList);
@@ -532,7 +533,7 @@ public class QuestUtil {
 		{
 			CardList humanList = new CardList();
 			
-			Card crd = AllZone.CardFactory.getCard("Wall of Spears", Constant.Player.Human);
+			Card crd = AllZone.CardFactory.getCard("Wall of Spears", AllZone.HumanPlayer);
 			humanList.add(crd);
 			
 			for (int i=0;i<3;i++)
@@ -541,8 +542,8 @@ public class QuestUtil {
 		        c.setName("Citizen");
 		        c.setImageName("W 1 1 Citizen");
 		        
-		        c.setController(Constant.Player.Human);
-		        c.setOwner(Constant.Player.Human);
+		        c.setController(AllZone.HumanPlayer);
+		        c.setOwner(AllZone.HumanPlayer);
 		        
 		        c.setManaCost("W");
 		        c.addColor("W");
@@ -569,7 +570,7 @@ public class QuestUtil {
 		else if (id == 11)  // The King's Contest
 		{
 			CardList humanList = new CardList();
-			Card c = AllZone.CardFactory.getCard("Seal of Cleansing", Constant.Player.Human);
+			Card c = AllZone.CardFactory.getCard("Seal of Cleansing", AllZone.HumanPlayer);
 			humanList.add(c);
 			
 			qa.setHuman(humanList);
@@ -588,8 +589,8 @@ public class QuestUtil {
 		        c.setName("Soldier Ally");
 		        c.setImageName("W 1 1 Soldier Ally");
 		        
-		        c.setController(Constant.Player.Human);
-		        c.setOwner(Constant.Player.Human);
+		        c.setController(AllZone.HumanPlayer);
+		        c.setOwner(AllZone.HumanPlayer);
 		        
 		        c.setManaCost("W");
 		        c.addColor("W");
@@ -616,7 +617,7 @@ public class QuestUtil {
 		else if (id == 13)  // The Court Jester
 		{
 			CardList humanList = new CardList();
-			Card c = AllZone.CardFactory.getCard("Sensei's Divining Top", Constant.Player.Human);
+			Card c = AllZone.CardFactory.getCard("Sensei's Divining Top", AllZone.HumanPlayer);
 			humanList.add(c);
 			
 			qa.setHuman(humanList);
@@ -633,7 +634,7 @@ public class QuestUtil {
 			
 			for (int i = 0; i < 2; i ++)
 			{
-				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], Constant.Player.Human);
+				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], AllZone.HumanPlayer);
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);
@@ -658,7 +659,7 @@ public class QuestUtil {
 			
 			for (int i = 0; i < 2; i ++)
 			{
-				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], Constant.Player.Human);
+				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], AllZone.HumanPlayer);
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);
@@ -684,7 +685,7 @@ public class QuestUtil {
 			
 			for (int i = 0; i < 3; i ++)
 			{
-				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], Constant.Player.Human);
+				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], AllZone.HumanPlayer);
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);
@@ -714,7 +715,7 @@ public class QuestUtil {
 			
 			for (int i = 0; i < 3; i ++)
 			{
-				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], Constant.Player.Human);
+				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], AllZone.HumanPlayer);
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);
@@ -736,7 +737,7 @@ public class QuestUtil {
 			
 			for (int i = 0; i < 3; i ++)
 			{
-				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], Constant.Player.Human);
+				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], AllZone.HumanPlayer);
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);
@@ -758,7 +759,7 @@ public class QuestUtil {
 			
 			for (int i = 0; i < 2; i ++)
 			{
-				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], Constant.Player.Human);
+				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], AllZone.HumanPlayer);
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);
@@ -780,7 +781,7 @@ public class QuestUtil {
 			
 			for (int i = 0; i < 3; i ++)
 			{
-				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], Constant.Player.Human);
+				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], AllZone.HumanPlayer);
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);
@@ -799,7 +800,7 @@ public class QuestUtil {
 		{
 			CardList humanList = new CardList();
 
-			humanList.add(AllZone.CardFactory.getCard("Strip Mine", Constant.Player.Human));
+			humanList.add(AllZone.CardFactory.getCard("Strip Mine", AllZone.HumanPlayer));
 			
 			qa.setHuman(humanList);
 			
@@ -818,7 +819,7 @@ public class QuestUtil {
 			
 			for (int i = 0; i < 4; i ++)
 			{
-				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], Constant.Player.Human);
+				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], AllZone.HumanPlayer);
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);

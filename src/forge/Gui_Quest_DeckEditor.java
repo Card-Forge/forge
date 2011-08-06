@@ -334,7 +334,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardContainer, DeckD
         //convert Deck main into CardList to show on the screen
         CardList bottom = new CardList();
         for(int i = 0; i < deck.countMain(); i++) {
-            bottom.add(AllZone.CardFactory.getCard(deck.getMain(i), ""));
+            bottom.add(AllZone.CardFactory.getCard(deck.getMain(i), null));
         }
         
 
@@ -916,7 +916,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardContainer, DeckD
         Card c;
         ReadBoosterPack pack = new ReadBoosterPack();
         for(int i = 0; i < deck.countMain(); i++) {
-            c = AllZone.CardFactory.getCard(deck.getMain(i), Constant.Player.Human);
+            c = AllZone.CardFactory.getCard(deck.getMain(i), AllZone.HumanPlayer);
             
             c.setRarity(pack.getRarity(c.getName()));
             
@@ -927,7 +927,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardContainer, DeckD
         if(deck.isSealed() || deck.isDraft()) {
             //add sideboard to GUI
             for(int i = 0; i < deck.countSideboard(); i++) {
-                c = AllZone.CardFactory.getCard(deck.getSideboard(i), Constant.Player.Human);
+                c = AllZone.CardFactory.getCard(deck.getSideboard(i), AllZone.HumanPlayer);
                 c.setRarity(pack.getRarity(c.getName()));
                 topModel.addCard(c);
             }

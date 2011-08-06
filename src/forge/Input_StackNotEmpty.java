@@ -13,7 +13,7 @@ public class Input_StackNotEmpty extends Input implements java.io.Serializable {
         
         ButtonUtil.enableOnlyOK();
         String phase = AllZone.Phase.getPhase();
-        String player = AllZone.Phase.getActivePlayer();
+        Player player = AllZone.Phase.getActivePlayer();
         AllZone.Display.showMessage("Spells or Abilities on are on the Stack\nPhase: " + phase + ", Player: "
                 + player);
     }
@@ -30,7 +30,7 @@ public class Input_StackNotEmpty extends Input implements java.io.Serializable {
         	// Fizzling will only work for Abilities that use the Target class, since the info isn't available otherwise
         	fizzle = !CardFactoryUtil.isTargetStillValid(sa, sa.getTargetCard());
         }
-        else if (sa.getTargetPlayer() != "") {
+        else if (sa.getTargetPlayer() != null) {
         	fizzle = !CardFactoryUtil.canTarget(c, sa.getTargetPlayer());
         }
         

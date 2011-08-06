@@ -230,10 +230,10 @@ public class BoosterDraftAI
     Card land;
     for(int i = 0; i < 9; i++)
     {
-      land = AllZone.CardFactory.getCard(colorToLand.get(color[0]).toString(), Constant.Player.Computer);
+      land = AllZone.CardFactory.getCard(colorToLand.get(color[0]).toString(), AllZone.ComputerPlayer);
       list.add(land);
 
-      land = AllZone.CardFactory.getCard(colorToLand.get(color[1]).toString(), Constant.Player.Computer);
+      land = AllZone.CardFactory.getCard(colorToLand.get(color[1]).toString(), AllZone.ComputerPlayer);
       list.add(land);
     }
 

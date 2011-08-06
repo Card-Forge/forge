@@ -115,7 +115,7 @@ public class MagicStack extends MyObservable
 	  }
 	  
 	  // if activating player slips through the cracks, assign activating Player to the controller here
-	  if (sp.getActivatingPlayer().equals("")){
+	  if (null == sp.getActivatingPlayer()){
 			sp.setActivatingPlayer(sp.getSourceCard().getController());
 			//System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
 	  }
@@ -193,7 +193,7 @@ public class MagicStack extends MyObservable
 				}
 			  };
 			  Card crd = sa.getSourceCard();
-			  if(sp.getSourceCard().getController().equals(Constant.Player.Human)) {
+			  if(sp.getSourceCard().getController().equals(AllZone.HumanPlayer)) {
 				  AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Pay X cost for " + sp.getSourceCard().getName() + " (X=" +crd.getXManaCostPaid()+")\r\n",
                         ability.getManaCost(), paidCommand, unpaidCommand, true));
 			  } 
@@ -255,7 +255,7 @@ public class MagicStack extends MyObservable
 	                }
 	          };
 			  
-			  if(sp.getSourceCard().getController().equals(Constant.Player.Human)) {
+			  if(sp.getSourceCard().getController().equals(AllZone.HumanPlayer)) {
 				  ManaCost manaCost = GetMultiKickerSpellCostChange(ability); 
 			       
 				  if(manaCost.isPaid()) {
@@ -301,7 +301,7 @@ public void push(SpellAbility sp)
 	if(sp.isSpell() && !sp.getSourceCard().isCopiedSpell())
 	{
 	    Phase.StormCount = Phase.StormCount + 1;
-	    if(sp.getSourceCard().getController() == Constant.Player.Human) {
+	    if(sp.getSourceCard().getController() == AllZone.HumanPlayer) {
 		    Phase.PlayerSpellCount = Phase.PlayerSpellCount + 1; 
 		    if(sp.getSourceCard().isCreature() == true) {
 		   	    Phase.PlayerCreatureSpellCount = Phase.PlayerCreatureSpellCount + 1;   	    	
@@ -313,7 +313,7 @@ public void push(SpellAbility sp)
 		    }
 	    }
 		//attempt to counter human spell
-		if (sp.getSourceCard().getController().equals(Constant.Player.Human) &&
+		if (sp.getSourceCard().getController().equals(AllZone.HumanPlayer) &&
 			CardFactoryUtil.isCounterable(sp.getSourceCard()) )
 			ComputerAI_counterSpells2.counter_Spell(sp);	
 		//put code for Standstill here

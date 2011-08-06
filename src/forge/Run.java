@@ -22,149 +22,149 @@ public class Run {
         
         //CardFactory cf = AllZone.CardFactory;
         
-        //AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Dauthi Marauder", Constant.Player.Computer));
-        //AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Dauthi Marauder", Constant.Player.Computer));
+        //AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Dauthi Marauder", AllZone.ComputerPlayer));
+        //AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Dauthi Marauder", AllZone.ComputerPlayer));
         
 
-        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Deeptread Merrow", Constant.Player.Human));
-        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Vampire Bats", Constant.Player.Human));
+        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Deeptread Merrow", AllZone.HumanPlayer));
+        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Vampire Bats", AllZone.HumanPlayer));
         
-        //AllZone.Human_Hand.add(AllZone.CardFactory.getCard("Soul Feast", Constant.Player.Human));
+        //AllZone.Human_Hand.add(AllZone.CardFactory.getCard("Soul Feast", AllZone.HumanPlayer));
         
-        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Plains", Constant.Player.Human));
-        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Plains", Constant.Player.Human));
-        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Forest", Constant.Player.Human));
+        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Plains", AllZone.HumanPlayer));
+        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Plains", AllZone.HumanPlayer));
+        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Forest", AllZone.HumanPlayer));
         
 
-        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Island", Constant.Player.Human));
-        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Island", Constant.Player.Human));
-        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Swamp", Constant.Player.Human));
-        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Swamp", Constant.Player.Human));
-        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Swamp", Constant.Player.Human));
+        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Island", AllZone.HumanPlayer));
+        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Island", AllZone.HumanPlayer));
+        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Swamp", AllZone.HumanPlayer));
+        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Swamp", AllZone.HumanPlayer));
+        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Swamp", AllZone.HumanPlayer));
         
         /*
-            AllZone.Human_Play.add(AllZone.CardFactory.getCard("Island", Constant.Player.Human));
-              AllZone.Human_Play.add(AllZone.CardFactory.getCard("Island", Constant.Player.Human));
-              AllZone.Human_Play.add(AllZone.CardFactory.getCard("Mountain", Constant.Player.Human));
-              AllZone.Human_Play.add(AllZone.CardFactory.getCard("Plains", Constant.Player.Human));
-              AllZone.Human_Play.add(AllZone.CardFactory.getCard("Mountain", Constant.Player.Human));
+            AllZone.Human_Play.add(AllZone.CardFactory.getCard("Island", AllZone.HumanPlayer));
+              AllZone.Human_Play.add(AllZone.CardFactory.getCard("Island", AllZone.HumanPlayer));
+              AllZone.Human_Play.add(AllZone.CardFactory.getCard("Mountain", AllZone.HumanPlayer));
+              AllZone.Human_Play.add(AllZone.CardFactory.getCard("Plains", AllZone.HumanPlayer));
+              AllZone.Human_Play.add(AllZone.CardFactory.getCard("Mountain", AllZone.HumanPlayer));
         */
         /*
               for(int i = 0; i < 8; i++)
               {
-                AllZone.Human_Play.add(AllZone.CardFactory.getCard("Swamp", Constant.Player.Human));
+                AllZone.Human_Play.add(AllZone.CardFactory.getCard("Swamp", AllZone.HumanPlayer));
               }
         */
 
-//    AllZone.Human_Hand.add(AllZone.CardFactory.getCard("Giant Growth", Constant.Player.Human));
+//    AllZone.Human_Hand.add(AllZone.CardFactory.getCard("Giant Growth", AllZone.HumanPlayer));
 //    for(int i = 0; i < 9; i++)
-//      AllZone.Human_Play.add(AllZone.CardFactory.getCard("Mountain", Constant.Player.Human));
-//    AllZone.Human_Hand.add(AllZone.CardFactory.getCard("Isochron Scepter", Constant.Player.Human));
-//    AllZone.Human_Hand.add(AllZone.CardFactory.getCard("Isochron Scepter", Constant.Player.Human));
-//    AllZone.Human_Hand.add(AllZone.CardFactory.getCard("Briarhorn", Constant.Player.Human));
+//      AllZone.Human_Play.add(AllZone.CardFactory.getCard("Mountain", AllZone.HumanPlayer));
+//    AllZone.Human_Hand.add(AllZone.CardFactory.getCard("Isochron Scepter", AllZone.HumanPlayer));
+//    AllZone.Human_Hand.add(AllZone.CardFactory.getCard("Isochron Scepter", AllZone.HumanPlayer));
+//    AllZone.Human_Hand.add(AllZone.CardFactory.getCard("Briarhorn", AllZone.HumanPlayer));
         
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
-//    AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Bitterblossom", Constant.Player.Computer));
-//    AllZone.Computer_Hand.add(AllZone.CardFactory.getCard("Anaconda", Constant.Player.Computer));
+//    AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Bitterblossom", AllZone.ComputerPlayer));
+//    AllZone.Computer_Hand.add(AllZone.CardFactory.getCard("Anaconda", AllZone.ComputerPlayer));
         
         for(int i = 0; i < 17; i++) {
-            AllZone.Computer_Library.add(AllZone.CardFactory.getCard("Forest", Constant.Player.Computer));
+            AllZone.Computer_Library.add(AllZone.CardFactory.getCard("Forest", AllZone.ComputerPlayer));
         }
         
-        //AllZone.Computer_Library.add(AllZone.CardFactory.getCard("Elvish Piper", Constant.Player.Computer));
+        //AllZone.Computer_Library.add(AllZone.CardFactory.getCard("Elvish Piper", AllZone.ComputerPlayer));
         
 
         /*
-            AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Lantern Kami", Constant.Player.Computer));
-            AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Lantern Kami", Constant.Player.Computer));
-            AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Lantern Kami", Constant.Player.Computer));
-            AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Lantern Kami", Constant.Player.Computer));
-            AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Garruk Wildspeaker", Constant.Player.Computer));
+            AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Lantern Kami", AllZone.ComputerPlayer));
+            AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Lantern Kami", AllZone.ComputerPlayer));
+            AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Lantern Kami", AllZone.ComputerPlayer));
+            AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Lantern Kami", AllZone.ComputerPlayer));
+            AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Garruk Wildspeaker", AllZone.ComputerPlayer));
         */
 
 
         /*
-            AllZone.Human_Play.add(AllZone.CardFactory.getCard("Filthy Cur", Constant.Player.Human));
-            AllZone.Human_Hand.add(AllZone.CardFactory.getCard("Shock", Constant.Player.Human));
-            AllZone.Human_Hand.add(AllZone.CardFactory.getCard("Char", Constant.Player.Human));
+            AllZone.Human_Play.add(AllZone.CardFactory.getCard("Filthy Cur", AllZone.HumanPlayer));
+            AllZone.Human_Hand.add(AllZone.CardFactory.getCard("Shock", AllZone.HumanPlayer));
+            AllZone.Human_Hand.add(AllZone.CardFactory.getCard("Char", AllZone.HumanPlayer));
 
-            AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Filthy Cur", Constant.Player.Computer));
+            AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Filthy Cur", AllZone.ComputerPlayer));
         /*
-              AllZone.Human_Library.add(AllZone.CardFactory.getCard("Ancient Silverback", Constant.Player.Human));
-              AllZone.Human_Library.add(AllZone.CardFactory.getCard("Ancient Silverback", Constant.Player.Human));
-              AllZone.Human_Library.add(AllZone.CardFactory.getCard("Forest", Constant.Player.Human));
-              AllZone.Human_Library.add(AllZone.CardFactory.getCard("Plains", Constant.Player.Human));
+              AllZone.Human_Library.add(AllZone.CardFactory.getCard("Ancient Silverback", AllZone.HumanPlayer));
+              AllZone.Human_Library.add(AllZone.CardFactory.getCard("Ancient Silverback", AllZone.HumanPlayer));
+              AllZone.Human_Library.add(AllZone.CardFactory.getCard("Forest", AllZone.HumanPlayer));
+              AllZone.Human_Library.add(AllZone.CardFactory.getCard("Plains", AllZone.HumanPlayer));
 
-              AllZone.Computer_Library.add(AllZone.CardFactory.getCard("Elvish Piper", Constant.Player.Computer));
-              AllZone.Computer_Library.add(AllZone.CardFactory.getCard("Serra Angel", Constant.Player.Computer));
-              AllZone.Computer_Library.add(AllZone.CardFactory.getCard("Birds of Paradise", Constant.Player.Computer));
-              AllZone.Computer_Library.add(AllZone.CardFactory.getCard("Forest", Constant.Player.Computer));
-              AllZone.Computer_Library.add(AllZone.CardFactory.getCard("Elvish Piper", Constant.Player.Computer));
-              AllZone.Computer_Library.add(AllZone.CardFactory.getCard("Serra Angel", Constant.Player.Computer));
-              AllZone.Computer_Library.add(AllZone.CardFactory.getCard("Birds of Paradise", Constant.Player.Computer));
+              AllZone.Computer_Library.add(AllZone.CardFactory.getCard("Elvish Piper", AllZone.ComputerPlayer));
+              AllZone.Computer_Library.add(AllZone.CardFactory.getCard("Serra Angel", AllZone.ComputerPlayer));
+              AllZone.Computer_Library.add(AllZone.CardFactory.getCard("Birds of Paradise", AllZone.ComputerPlayer));
+              AllZone.Computer_Library.add(AllZone.CardFactory.getCard("Forest", AllZone.ComputerPlayer));
+              AllZone.Computer_Library.add(AllZone.CardFactory.getCard("Elvish Piper", AllZone.ComputerPlayer));
+              AllZone.Computer_Library.add(AllZone.CardFactory.getCard("Serra Angel", AllZone.ComputerPlayer));
+              AllZone.Computer_Library.add(AllZone.CardFactory.getCard("Birds of Paradise", AllZone.ComputerPlayer));
 
 
             for(int i = 0; i < 2; i++)
             {
-              AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Mountain", Constant.Player.Computer));
-              AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Plains", Constant.Player.Computer));
-              AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Swamp", Constant.Player.Computer));
-              AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Forest", Constant.Player.Computer));
-              AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Island", Constant.Player.Computer));
+              AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Mountain", AllZone.ComputerPlayer));
+              AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Plains", AllZone.ComputerPlayer));
+              AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Swamp", AllZone.ComputerPlayer));
+              AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Forest", AllZone.ComputerPlayer));
+              AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Island", AllZone.ComputerPlayer));
 
-              AllZone.Human_Play.add(AllZone.CardFactory.getCard("Mountain", Constant.Player.Human));
-              AllZone.Human_Play.add(AllZone.CardFactory.getCard("Plains", Constant.Player.Human));
-              AllZone.Human_Play.add(AllZone.CardFactory.getCard("Swamp", Constant.Player.Human));
-              AllZone.Human_Play.add(AllZone.CardFactory.getCard("Forest", Constant.Player.Human));
-              AllZone.Human_Play.add(AllZone.CardFactory.getCard("Island", Constant.Player.Human));
+              AllZone.Human_Play.add(AllZone.CardFactory.getCard("Mountain", AllZone.HumanPlayer));
+              AllZone.Human_Play.add(AllZone.CardFactory.getCard("Plains", AllZone.HumanPlayer));
+              AllZone.Human_Play.add(AllZone.CardFactory.getCard("Swamp", AllZone.HumanPlayer));
+              AllZone.Human_Play.add(AllZone.CardFactory.getCard("Forest", AllZone.HumanPlayer));
+              AllZone.Human_Play.add(AllZone.CardFactory.getCard("Island", AllZone.HumanPlayer));
             }
         */
 
         /*
 
-            AllZone.Human_Hand.add(AllZone.CardFactory.getCard("Angelfire Crusader", Constant.Player.Human));
-            AllZone.Human_Hand.add(AllZone.CardFactory.getCard("March of Souls", Constant.Player.Human));
-            AllZone.Human_Hand.add(AllZone.CardFactory.getCard("Reviving Dose", Constant.Player.Human));
-            AllZone.Human_Hand.add(AllZone.CardFactory.getCard("Breath of Life", Constant.Player.Human));
-            AllZone.Human_Play.add(AllZone.CardFactory.getCard("Mountain", Constant.Player.Human));
+            AllZone.Human_Hand.add(AllZone.CardFactory.getCard("Angelfire Crusader", AllZone.HumanPlayer));
+            AllZone.Human_Hand.add(AllZone.CardFactory.getCard("March of Souls", AllZone.HumanPlayer));
+            AllZone.Human_Hand.add(AllZone.CardFactory.getCard("Reviving Dose", AllZone.HumanPlayer));
+            AllZone.Human_Hand.add(AllZone.CardFactory.getCard("Breath of Life", AllZone.HumanPlayer));
+            AllZone.Human_Play.add(AllZone.CardFactory.getCard("Mountain", AllZone.HumanPlayer));
 
         /*
-         AllZone.Human_Hand.add(AllZone.CardFactory.getCard("Nevinyrral's Disk", Constant.Player.Human));
-         AllZone.Human_Play.add(AllZone.CardFactory.getCard("Swamp", Constant.Player.Human));
-         AllZone.Human_Play.add(AllZone.CardFactory.getCard("Swamp", Constant.Player.Human));
-         AllZone.Human_Play.add(AllZone.CardFactory.getCard("Swamp", Constant.Player.Human));
-         AllZone.Human_Play.add(AllZone.CardFactory.getCard("Swamp", Constant.Player.Human));
+         AllZone.Human_Hand.add(AllZone.CardFactory.getCard("Nevinyrral's Disk", AllZone.HumanPlayer));
+         AllZone.Human_Play.add(AllZone.CardFactory.getCard("Swamp", AllZone.HumanPlayer));
+         AllZone.Human_Play.add(AllZone.CardFactory.getCard("Swamp", AllZone.HumanPlayer));
+         AllZone.Human_Play.add(AllZone.CardFactory.getCard("Swamp", AllZone.HumanPlayer));
+         AllZone.Human_Play.add(AllZone.CardFactory.getCard("Swamp", AllZone.HumanPlayer));
         */
         /*
         for(int i = 0; i < 5; i++)
-            AllZone.Human_Play.add(AllZone.CardFactory.getCard("Mountain", Constant.Player.Human));
-        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Plains", Constant.Player.Human));
-        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Forest", Constant.Player.Human));
-        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Elvish Piper", Constant.Player.Human));
+            AllZone.Human_Play.add(AllZone.CardFactory.getCard("Mountain", AllZone.HumanPlayer));
+        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Plains", AllZone.HumanPlayer));
+        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Forest", AllZone.HumanPlayer));
+        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Elvish Piper", AllZone.HumanPlayer));
 
-        //	    AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Tanglebloom", Constant.Player.Computer));
+        //	    AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Tanglebloom", AllZone.ComputerPlayer));
 
-           //	AllZone.Human_Play.add(AllZone.CardFactory.getCard("Swamp", Constant.Player.Human));
+           //	AllZone.Human_Play.add(AllZone.CardFactory.getCard("Swamp", AllZone.HumanPlayer));
 
 
         /*
         Card c = null;
-        c = AllZone.CardFactory.getCard("Hymn to Tourach", Constant.Player.Human);
+        c = AllZone.CardFactory.getCard("Hymn to Tourach", AllZone.HumanPlayer);
         AllZone.Human_Hand.add(c);
 
 
-        c = AllZone.CardFactory.getCard("Swamp", Constant.Player.Human);
+        c = AllZone.CardFactory.getCard("Swamp", AllZone.HumanPlayer);
         AllZone.Human_Play.add(c);
 
-        c = AllZone.CardFactory.getCard("Swamp", Constant.Player.Human);
+        c = AllZone.CardFactory.getCard("Swamp", AllZone.HumanPlayer);
         AllZone.Human_Play.add(c);
 
         /*
-        c = AllZone.CardFactory.getCard("Forest", Constant.Player.Human);
+        c = AllZone.CardFactory.getCard("Forest", AllZone.HumanPlayer);
         AllZone.Human_Play.add(c);
 
-        c = AllZone.CardFactory.getCard("Birds of Paradise", Constant.Player.Human);
+        c = AllZone.CardFactory.getCard("Birds of Paradise", AllZone.HumanPlayer);
         AllZone.Human_Play.add(c);
         */
 
@@ -172,36 +172,36 @@ public class Run {
          Card c = null;
          for(int i = 0; i < 3; i++)
          {
-             c = AllZone.CardFactory.getCard(s[i], Constant.Player.Human);
+             c = AllZone.CardFactory.getCard(s[i], AllZone.HumanPlayer);
              AllZone.Human_Hand.add(c);
          }
-         c = AllZone.CardFactory.getCard("Elvish Piper", Constant.Player.Human);
+         c = AllZone.CardFactory.getCard("Elvish Piper", AllZone.HumanPlayer);
          AllZone.Human_Play.add(c);
 
-             c = AllZone.CardFactory.getCard("Swamp", Constant.Player.Human);
+             c = AllZone.CardFactory.getCard("Swamp", AllZone.HumanPlayer);
          AllZone.Human_Play.add(c);
 
-         c = AllZone.CardFactory.getCard("Forest", Constant.Player.Human);
+         c = AllZone.CardFactory.getCard("Forest", AllZone.HumanPlayer);
          AllZone.Human_Play.add(c);
 
-         c = AllZone.CardFactory.getCard("Forest", Constant.Player.Human);
+         c = AllZone.CardFactory.getCard("Forest", AllZone.HumanPlayer);
          AllZone.Human_Play.add(c);
 
-         c = AllZone.CardFactory.getCard("Forest", Constant.Player.Human);
+         c = AllZone.CardFactory.getCard("Forest", AllZone.HumanPlayer);
          AllZone.Human_Play.add(c);
 
-         c = AllZone.CardFactory.getCard("Forest", Constant.Player.Human);
+         c = AllZone.CardFactory.getCard("Forest", AllZone.HumanPlayer);
          AllZone.Human_Play.add(c);
 
          CardFactory cf = AllZone.CardFactory;
          for(int i = 0; i < 5; i++)
          {
             //graveyard - tests Dredge
-            //AllZone.Human_Graveyard.add(cf.getCard("Darkblast", Constant.Player.Human));
-             AllZone.Human_Library.add(cf.getCard("Darkblast", Constant.Player.Human));
+            //AllZone.Human_Graveyard.add(cf.getCard("Darkblast", AllZone.HumanPlayer));
+             AllZone.Human_Library.add(cf.getCard("Darkblast", AllZone.HumanPlayer));
          }
-         AllZone.Human_Library.add(cf.getCard("Mountain", Constant.Player.Human));
-         AllZone.Human_Library.add(cf.getCard("Plains", Constant.Player.Human));
+         AllZone.Human_Library.add(cf.getCard("Mountain", AllZone.HumanPlayer));
+         AllZone.Human_Library.add(cf.getCard("Plains", AllZone.HumanPlayer));
         */
     }//main()
 }

@@ -6,15 +6,15 @@ public class InputUtil
     //plays activated abilities and instants
     static public void playInstantAbility(Card card, PlayerZone zone)
     {
-		if (zone.is(Constant.Zone.Hand, Constant.Player.Human) || zone.is(Constant.Zone.Play) && 
-				(card.getController().equals(Constant.Player.Human) || card.canAnyPlayerActivate()))
+		if (zone.is(Constant.Zone.Hand, AllZone.HumanPlayer) || zone.is(Constant.Zone.Play) && 
+				(card.getController().equals(AllZone.HumanPlayer) || card.canAnyPlayerActivate()))
 	    AllZone.GameAction.playCard(card);
     }
     
     //plays activated abilities and any card including land, sorceries, and instants
     static public void playAnyCard(Card card, PlayerZone zone)
     {
-		if(zone.is(Constant.Zone.Hand, Constant.Player.Human)){	// activate from hand
+		if(zone.is(Constant.Zone.Hand, AllZone.HumanPlayer)){	// activate from hand
 			if (card.isLand())
 			{
 				//hacky stuff: see if there's cycling/transmute/other hand abilities on the land:
@@ -42,7 +42,7 @@ public class InputUtil
 		}
 		// (sol) Can activate if: You control it & it's in play or if your opponent controls it and Any Player Can activate.
 		else if (zone.is(Constant.Zone.Play) && 
-				(card.getController().equals(Constant.Player.Human) || card.canAnyPlayerActivate()))
+				(card.getController().equals(AllZone.HumanPlayer) || card.canAnyPlayerActivate()))
 				AllZone.GameAction.playCard(card);
     }//selectCard()
     

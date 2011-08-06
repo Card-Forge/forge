@@ -13,8 +13,8 @@ public class CombatPlaneswalker
   //private int attackingDamage;
   //private int defendingDamage;
 
-  private String attackingPlayer;
-  private String defendingPlayer;
+  private Player attackingPlayer;
+  private Player defendingPlayer;
 
   private Card planeswalker;
 
@@ -30,17 +30,17 @@ public class CombatPlaneswalker
     defendingFirstStrikeDamageMap.clear();
     defendingDamageMap.clear();
 
-    attackingPlayer = "";
-    defendingPlayer = "";
+    attackingPlayer = null;
+    defendingPlayer = null;
   }
   public void setPlaneswalker(Card c){planeswalker = c;}
   public Card getPlaneswalker() {return planeswalker;}
 
-  public void setAttackingPlayer(String player) {attackingPlayer = player;}
-  public void setDefendingPlayer(String player) {defendingPlayer = player;}
+  public void setAttackingPlayer(Player player) {attackingPlayer = player;}
+  public void setDefendingPlayer(Player player) {defendingPlayer = player;}
 
-  public String getAttackingPlayer() {return attackingPlayer;}
-  public String getDefendingPlayer() {return defendingPlayer;}
+  public Player getAttackingPlayer() {return attackingPlayer;}
+  public Player getDefendingPlayer() {return defendingPlayer;}
 
   //relates to defending player damage
   public int getTotalDefendingDamage()         
@@ -196,7 +196,7 @@ public class CombatPlaneswalker
           */
 
       }//1 blocker
-      else if(getAttackingPlayer().equals(Constant.Player.Computer))
+      else if(getAttackingPlayer().isComputer())
       {
     	for (Card b : block)
     		addAssignedDamage(b, attacking.get(i), attacking.get(i).getNetAttack());

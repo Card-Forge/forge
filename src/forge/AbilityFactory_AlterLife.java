@@ -135,7 +135,7 @@ public class AbilityFactory_AlterLife {
 		Random r = new Random();
 		Ability_Cost abCost = sa.getPayCosts();
 		final Card source = sa.getSourceCard();
-		int life = AllZone.GameAction.getPlayerLife(Constant.Player.Computer).getLife();
+		int life = AllZone.ComputerPlayer.getLife();
 
 		if (abCost != null){
 			// AI currently disabled for these costs
@@ -167,7 +167,7 @@ public class AbilityFactory_AlterLife {
 		 // prevent run-away activations - first time will always return true
 		 boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
 		 
-		 sa.setTargetPlayer(Constant.Player.Computer);
+		 sa.setTargetPlayer(AllZone.ComputerPlayer);
 		 
 		 return ((r.nextFloat() < .6667) && chance);
 	}
@@ -177,13 +177,14 @@ public class AbilityFactory_AlterLife {
 		String DrawBack = params.get("SubAbility");
 		Card card = af.getHostCard();
 		
-		String player = sa.getActivatingPlayer();
+		Player player = sa.getActivatingPlayer();
 		if (af.getAbTgt() != null)
 			player = sa.getTargetPlayer();
 		
-		AllZone.GameAction.gainLife(player, lifeAmount);
+		//AllZone.GameAction.gainLife(player, lifeAmount);
+		player.gainLife(lifeAmount);
 		
 		if (af.hasSubAbility())
-			 CardFactoryUtil.doDrawBack(DrawBack, lifeAmount, card.getController(), AllZone.GameAction.getOpponent(card.getController()), card.getController(), card, null, sa);
+			 CardFactoryUtil.doDrawBack(DrawBack, lifeAmount, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
 	}
 }

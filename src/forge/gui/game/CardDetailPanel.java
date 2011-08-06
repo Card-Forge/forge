@@ -17,9 +17,9 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 
+import forge.AllZone;
 import forge.Card;
 import forge.CardContainer;
-import forge.Constant;
 import forge.Counters;
 import forge.GuiDisplayUtil;
 import forge.Gui_NewGame;
@@ -90,7 +90,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         this.card = card;
         if(card == null) return;
         
-        boolean faceDown = card.isFaceDown() && card.getController() != Constant.Player.Human;
+        boolean faceDown = card.isFaceDown() && card.getController() != AllZone.HumanPlayer;
         if(!faceDown) {
             if(card.isLand()) cdLabel1.setText(card.getName());
             else cdLabel1.setText(card.getName() + "  - " + card.getManaCost());

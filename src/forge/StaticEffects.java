@@ -277,9 +277,9 @@ public class StaticEffects
 	{
 		reset();
 		PlayerZone playerZone = AllZone.getZone(Constant.Zone.Play,
-				Constant.Player.Human);
+				AllZone.HumanPlayer);
 		PlayerZone computerZone = AllZone.getZone(Constant.Zone.Play,
-				Constant.Player.Computer);
+				AllZone.ComputerPlayer);
 
 		CardList cards = new CardList();
 		cards.addAll(playerZone.getCards());

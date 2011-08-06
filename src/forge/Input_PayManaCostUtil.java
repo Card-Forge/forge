@@ -9,7 +9,7 @@ public class Input_PayManaCostUtil
   public static ManaCost tapCard(Card card, ManaCost manaCost)
   {
 	//make sure computer's lands aren't selected
-	if(card.getController().equals(Constant.Player.Computer))
+	if(card.getController().equals(AllZone.ComputerPlayer))
 		return manaCost;
 	
     if(card instanceof ManaPool) 
@@ -101,8 +101,8 @@ public class Input_PayManaCostUtil
      	
      	// Nirkana Revenant Code
         Card mp = AllZone.ManaPool;
-        if(card.getType().contains("Swamp") && card.getController().equals(Constant.Player.Human)) {
-         	CardList Nirkana_Human = CardFactoryUtil.getCards("Nirkana Revenant", Constant.Player.Human);
+        if(card.getType().contains("Swamp") && card.getController().equals(AllZone.HumanPlayer)) {
+         	CardList Nirkana_Human = CardFactoryUtil.getCards("Nirkana Revenant", AllZone.HumanPlayer);
          	for(int x = 0; x < Nirkana_Human.size(); x++) {
         		for(int i = 0; i < abilities.size(); i++) {
         			if(abilities.get(i).mana().contains("B")) {
@@ -143,7 +143,7 @@ public class Input_PayManaCostUtil
          }
 
        	// High Tide Code
-         if(Phase.HighTideCount > 0 && card.getType().contains("Island") && card.getController().equals(Constant.Player.Human)) {
+         if(Phase.HighTideCount > 0 && card.getType().contains("Island") && card.getController().equals(AllZone.HumanPlayer)) {
          	for(int x = 0; x < Phase.HighTideCount; x++) {
         		for(int i = 0; i < abilities.size(); i++) {
         			if(abilities.get(i).mana().contains("U") == true) {

@@ -29,7 +29,7 @@ public class ComputerAI_Rats2 implements Computer
     
     public void declare_blockers()
     {
-	if(random.nextBoolean() || AllZone.Computer_Life.getLife() < 10)
+	if(random.nextBoolean() || AllZone.ComputerPlayer.getLife() < 10)
 	{
 	    //presumes all creatures the Computer owns are the same size, because they are Relentless Rats
 	    Card block[] = CardUtil.toCard(PlayerZoneUtil.getUntappedCreatures(AllZone.Computer_Play));
@@ -73,7 +73,7 @@ public class ComputerAI_Rats2 implements Computer
 	}	
 	else if(a.length != 0)
 	{	    
-	    MoveAttack m = new MoveAttack(a, b, AllZone.Computer_Life.getLife(), AllZone.Human_Life.getLife());
+	    MoveAttack m = new MoveAttack(a, b, AllZone.ComputerPlayer.getLife(), AllZone.HumanPlayer.getLife());
 	    m.max(m, 2, true);
 	    Card[] att = m.getBestMove().getAttackers().toArray();
 
@@ -96,21 +96,21 @@ public class ComputerAI_Rats2 implements Computer
 	
 	//computer library
 	for(int i = 0; i < 18; i++)
-	    a.add(cf.getCard("Swamp", Constant.Player.Computer));
+	    a.add(cf.getCard("Swamp", AllZone.ComputerPlayer));
 	//    for(int i = 0; i < 3; i++)
-	//      a.add(cf.getCard("Steel Wall", Constant.Player.Computer));
+	//      a.add(cf.getCard("Steel Wall", AllZone.ComputerPlayer));
 	
 	for(int i = 0; i < 0;i ++)
 	{
-	    a.add(cf.getCard("Nantuko Shade", Constant.Player.Computer));
-	    a.add(cf.getCard("Hymn to Tourach", Constant.Player.Computer));
+	    a.add(cf.getCard("Nantuko Shade", AllZone.ComputerPlayer));
+	    a.add(cf.getCard("Hymn to Tourach", AllZone.ComputerPlayer));
 	}
 	for(int i = 0; i < 2;i ++)
 	{
-	    a.add(cf.getCard("Royal Assassin", Constant.Player.Computer));
+	    a.add(cf.getCard("Royal Assassin", AllZone.ComputerPlayer));
 	}
 	while(a.size() < 40)
-	    a.add(cf.getCard("Relentless Rats", Constant.Player.Computer));
+	    a.add(cf.getCard("Relentless Rats", AllZone.ComputerPlayer));
 
 	
 	return CardUtil.toCard(a);

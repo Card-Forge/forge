@@ -15,14 +15,14 @@ public class PhaseObserver implements Observer
 
   public void update(Observable o1, Object o2)
   {
-    String player = AllZone.Phase.getActivePlayer();
+    Player player = AllZone.Phase.getActivePlayer();
     PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
     String phase = AllZone.Phase.getPhase();
 
 
     if(phase.equals(Constant.Phase.Main1))
     {
-      if(player.equals(Constant.Player.Human))
+      if(player.equals(AllZone.HumanPlayer))
         canPlayLand = true;
 
       //untap all permanents
@@ -36,7 +36,7 @@ public class PhaseObserver implements Observer
         AllZone.GameAction.drawCard(player);
     }
 
-    else if(AllZone.Phase.is(Constant.Phase.Combat_Declare_Blockers, Constant.Player.Human) &&
+    else if(AllZone.Phase.is(Constant.Phase.Combat_Declare_Blockers, AllZone.HumanPlayer) &&
             AllZone.Combat.getAttackers().length == 0)
     {
 	      
@@ -44,7 +44,7 @@ public class PhaseObserver implements Observer
     	  //for debugging: System.out.println("need to nextPhase(PhaseObserver.update,phase.is(Combat_Declare_Blockers & Human)) = true; Note, this has not been tested, did it work?");
 	      AllZone.Phase.setNeedToNextPhase(true);
     }
-    else if(AllZone.Phase.is(Constant.Phase.Combat_Declare_Blockers_InstantAbility, Constant.Player.Human) &&
+    else if(AllZone.Phase.is(Constant.Phase.Combat_Declare_Blockers_InstantAbility, AllZone.HumanPlayer) &&
             AllZone.Combat.getAttackers().length == 0)
     {
     	
@@ -52,7 +52,7 @@ public class PhaseObserver implements Observer
     	//for debugging: System.out.println("need to nextPhase(PhaseObserver.update,phase.is(Combat_Declare_Blockers_InstantAbility & Human)) = true; Note, this has not been tested, did it work?");
         AllZone.Phase.setNeedToNextPhase(true);
     }
-    else if(AllZone.Phase.is(Constant.Phase.Combat_Damage, Constant.Player.Human) &&
+    else if(AllZone.Phase.is(Constant.Phase.Combat_Damage, AllZone.HumanPlayer) &&
             AllZone.Combat.getAttackers().length == 0)
     {
     	
@@ -60,7 +60,7 @@ public class PhaseObserver implements Observer
     	//for debugging: System.out.println("need to nextPhase(PhaseObserver.update,phase.is(Combat_Damage & Human)) = true; Note, this has not been tested, did it work?");
         AllZone.Phase.setNeedToNextPhase(true);
     }
-    else if(AllZone.Phase.is(Constant.Phase.Combat_Declare_Attackers, Constant.Player.Human) &&
+    else if(AllZone.Phase.is(Constant.Phase.Combat_Declare_Attackers, AllZone.HumanPlayer) &&
             AllZone.Combat.getAttackers().length == 0)
     {
       if(PlayerZoneUtil.getCardType(AllZone.Human_Play, "Creature").size() == 0)

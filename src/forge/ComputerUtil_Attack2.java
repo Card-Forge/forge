@@ -1,7 +1,7 @@
 package forge;
 import java.util.*;
 
-    //doesHumanAttackAndWin() uses the global variable AllZone.Computer_Life
+    //doesHumanAttackAndWin() uses the global variable AllZone.ComputerPlayer
     public class ComputerUtil_Attack2
     {
        //possible attackers and blockers
@@ -100,9 +100,9 @@ import java.util.*;
           // (human will get an extra first attack with a creature that untaps)
           // In addition, if the computer guesses it needs no blockers, make sure that
           // it won't be surprised by Exalted
-          int humanExaltedBonus = countExaltedBonus(Constant.Player.Human);
+          int humanExaltedBonus = countExaltedBonus(AllZone.HumanPlayer);
           if (humanExaltedBonus > 0) {
-        	  int nFinestHours = GameActionUtil.countFinestHours(Constant.Player.Human);
+        	  int nFinestHours = GameActionUtil.countFinestHours(AllZone.HumanPlayer);
         	  
         	  if ( (blockersNeeded == 0 || nFinestHours > 0) && humanList.size() > 0) {
         		  //
@@ -112,9 +112,9 @@ import java.util.*;
         			  // For Finest Hour, one creature could attack and get the bonus TWICE
         			  humanBaseAttack = humanBaseAttack + humanExaltedBonus;
         		  }	
-        		  int totalExaltedAttack = GameActionUtil.isRafiqInPlay(Constant.Player.Human) ? 
+        		  int totalExaltedAttack = GameActionUtil.isRafiqInPlay(AllZone.HumanPlayer) ? 
         				  2 * humanBaseAttack: humanBaseAttack;
-        		  if ((AllZone.Computer_Life.getLife() - 3) <= totalExaltedAttack) {
+        		  if ((AllZone.ComputerPlayer.getLife() - 3) <= totalExaltedAttack) {
         			  // We will lose if there is an Exalted attack -- keep one blocker
         			  if (blockersNeeded == 0)
         				  blockersNeeded++;
@@ -143,7 +143,7 @@ import java.util.*;
     	  //originally -3 so the computer will try to stay at 3 life
           //+1 now to prevent the AI from not attacking when it's got low life
           //(seems to happen too often)
-    	  return (AllZone.Computer_Life.getLife() + 1) <= totalAttack;
+    	  return (AllZone.ComputerPlayer.getLife() + 1) <= totalAttack;
        }
 
        private boolean doAssault()
@@ -179,10 +179,10 @@ import java.util.*;
                 combat.addAttacker(attackers.get(i));
           }
 
-          if (combat.getAttackers().length == 0 && (countExaltedBonus(Constant.Player.Computer) >= 3 ||
-                   GameActionUtil.isRafiqInPlay(Constant.Player.Computer) ||
-                   GameActionUtil.getBattleGraceAngels(Constant.Player.Computer) >= 2 ||
-                   (GameActionUtil.countFinestHours(Constant.Player.Computer)>=1) && AllZone.Phase.isFirstCombat())
+          if (combat.getAttackers().length == 0 && (countExaltedBonus(AllZone.ComputerPlayer) >= 3 ||
+                   GameActionUtil.isRafiqInPlay(AllZone.ComputerPlayer) ||
+                   GameActionUtil.getBattleGraceAngels(AllZone.ComputerPlayer) >= 2 ||
+                   (GameActionUtil.countFinestHours(AllZone.ComputerPlayer)>=1) && AllZone.Phase.isFirstCombat())
                    && !doAssault())
           {
              int biggest = 0;
@@ -251,7 +251,7 @@ import java.util.*;
             	 
             	 int totalFirstStrikeAttackPower = 0;
             	 if (!attackers.get(i).hasFirstStrike() && !attackers.get(i).hasDoubleStrike())
-            		 totalFirstStrikeAttackPower = CombatUtil.getTotalFirstStrikeAttackPower(attackers.get(i), Constant.Player.Human);
+            		 totalFirstStrikeAttackPower = CombatUtil.getTotalFirstStrikeAttackPower(attackers.get(i), AllZone.HumanPlayer);
         
                 //if attacker can destroy biggest blocker or
                 //biggest blocker cannot destroy attacker
@@ -277,7 +277,7 @@ import java.util.*;
       if(CombatUtil.canBlock(attack, blockers.get(i)))
         return blockers.get(i);
 
-    return AllZone.CardFactory.getCard("Birds of Paradise", "");
+    return AllZone.CardFactory.getCard("Birds of Paradise", null);
   }
 
   //returns 1/1 Card if no blockers found
@@ -288,10 +288,10 @@ import java.util.*;
       if(CombatUtil.canBlock(attack, blockers.get(i)))
         return blockers.get(i);
 
-    return AllZone.CardFactory.getCard("Elvish Piper", "");
+    return AllZone.CardFactory.getCard("Elvish Piper", null);
   }
 
-       public int countExaltedBonus(String player)
+       public int countExaltedBonus(Player player)
        {
           PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
           CardList list = new CardList();

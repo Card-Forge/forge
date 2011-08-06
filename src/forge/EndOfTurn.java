@@ -50,8 +50,8 @@ public class EndOfTurn implements java.io.Serializable
     AllZone.StaticEffects.rePopulateStateBasedList();
     
     /*
-    PlayerZone cz = AllZone.getZone(Constant.Zone.Removed_From_Play, Constant.Player.Computer);
-    PlayerZone hz = AllZone.getZone(Constant.Zone.Removed_From_Play, Constant.Player.Human);
+    PlayerZone cz = AllZone.getZone(Constant.Zone.Removed_From_Play, AllZone.ComputerPlayer);
+    PlayerZone hz = AllZone.getZone(Constant.Zone.Removed_From_Play, AllZone.HumanPlayer);
     
     CardList c = new CardList(cz.getCards());
     CardList h = new CardList(hz.getCards());

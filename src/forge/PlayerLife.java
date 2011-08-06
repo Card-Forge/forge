@@ -1,4 +1,4 @@
-package forge;
+/*package forge;
 public class PlayerLife extends MyObservable implements java.io.Serializable
 {
 	private static final long serialVersionUID = -1614695903669967202L;
@@ -16,7 +16,7 @@ public class PlayerLife extends MyObservable implements java.io.Serializable
     public PlayerLife(String pl)
     {
     	player = pl;
-    	if (player.equals(Constant.Player.Human))
+    	if (player.isHuman())
     		setPlayerCard(AllZone.CardFactory.HumanNullCard);
     	else
     		setPlayerCard(AllZone.CardFactory.ComputerNullCard);
@@ -47,4 +47,4 @@ public class PlayerLife extends MyObservable implements java.io.Serializable
     {
     	subtractLife(life2, null);
     }
-}
+} */

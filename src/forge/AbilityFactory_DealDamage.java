@@ -111,13 +111,13 @@ public class AbilityFactory_DealDamage {
     }
     
     private boolean shouldTgtP(int d) {
-        PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
+        PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
         CardList hand = new CardList(compHand.getCards());
         
         if(AF.isSpell() && hand.size() > 7) // anti-discard-at-EOT
         	return true;
         
-        if(AllZone.Human_Life.getLife() - d < 10) // if damage from this spell would drop the human to less than 10 life
+        if(AllZone.HumanPlayer.getLife() - d < 10) // if damage from this spell would drop the human to less than 10 life
         	return true;
         
         return false;
@@ -125,12 +125,12 @@ public class AbilityFactory_DealDamage {
     
     private Card chooseTgtC(final int d) {
         // Combo alert!!
-        PlayerZone compy = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+        PlayerZone compy = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
         CardList cPlay = new CardList(compy.getCards());
         if(cPlay.size() > 0) for(int i = 0; i < cPlay.size(); i++)
             if(cPlay.get(i).getName().equals("Stuffy Doll")) return cPlay.get(i);
         
-        PlayerZone human = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+        PlayerZone human = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
         CardList hPlay = new CardList(human.getCards());
         hPlay = hPlay.filter(new CardListFilter() {
             public boolean addCard(Card c) {
@@ -183,7 +183,7 @@ public class AbilityFactory_DealDamage {
         
         if(AF.getAbTgt().canTgtCreaturePlayer()) {
             if(shouldTgtP(damage)) {
-                saMe.setTargetPlayer(Constant.Player.Human);
+                saMe.setTargetPlayer(AllZone.HumanPlayer);
                 return rr;
             }
             
@@ -195,7 +195,7 @@ public class AbilityFactory_DealDamage {
         }
         
         if(AF.getAbTgt().canTgtPlayer() || TgtOpp == true) {
-            saMe.setTargetPlayer(Constant.Player.Human);
+            saMe.setTargetPlayer(AllZone.HumanPlayer);
             return rr;
         }
         
@@ -213,10 +213,10 @@ public class AbilityFactory_DealDamage {
     private void doResolve(SpellAbility saMe)
     {
         int damage = getNumDamage(saMe);
-        String tgtP = "";
+        Player tgtP = null;
         
         if(TgtOpp == true) {
-            tgtP = AllZone.GameAction.getOpponent(AF.getHostCard().getController());
+            tgtP = AF.getHostCard().getController().getOpponent();
             saMe.setTargetPlayer(tgtP);
         }
         
@@ -228,7 +228,7 @@ public class AbilityFactory_DealDamage {
                 
                 if(AF.hasSubAbility())
                 	CardFactoryUtil.doDrawBack(AF.getMapParams().get("SubAbility"), damage,
-                        AF.getHostCard().getController(), AllZone.GameAction.getOpponent(AF.getHostCard().getController()),
+                        AF.getHostCard().getController(), AF.getHostCard().getController().getOpponent(),
                         tgtP, AF.getHostCard(), c, saMe);
 
             }
@@ -238,7 +238,7 @@ public class AbilityFactory_DealDamage {
             
             if(AF.hasSubAbility()) 
             	CardFactoryUtil.doDrawBack(AF.getMapParams().get("SubAbility"), damage,
-                    AF.getHostCard().getController(), AllZone.GameAction.getOpponent(AF.getHostCard().getController()),
+                    AF.getHostCard().getController(), AF.getHostCard().getController().getOpponent(),
                     tgtP, AF.getHostCard(), null, saMe);
 
         }

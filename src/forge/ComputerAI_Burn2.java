@@ -13,7 +13,7 @@ public class ComputerAI_Burn2 implements Computer {
             public void run() {
                 synchronized(ComputerAI_Burn2.this) {
                     if(AllZone.Stack.size() == 0
-                            && AllZone.Phase.is(Constant.Phase.Main1, Constant.Player.Computer)) {
+                            && AllZone.Phase.is(Constant.Phase.Main1, AllZone.ComputerPlayer)) {
                         SpellAbilityList list = null; //Move3.getBestMove();
 
                         if(list != null && list.size() != 0) {
@@ -36,7 +36,7 @@ public class ComputerAI_Burn2 implements Computer {
                                     + ComputerUtil.getAvailableMana().size());
                         }//list.size != 0
                         if(AllZone.Stack.size() == 0
-                                && AllZone.Phase.is(Constant.Phase.Main1, Constant.Player.Computer)) {
+                                && AllZone.Phase.is(Constant.Phase.Main1, AllZone.ComputerPlayer)) {
                             
                             //AllZone.Phase.nextPhase();
                             //for debugging: System.out.println("need to nextPhase(ComputerAI_Burn2.running) = true; Note, this is untested, did it work?");
@@ -133,29 +133,29 @@ public class ComputerAI_Burn2 implements Computer {
         CardFactory cf = AllZone.CardFactory;
         CardList library = new CardList();
         for(int i = 0; i < 4; i++) {
-            library.add(cf.getCard("Lightning Bolt", Constant.Player.Computer));
-            library.add(cf.getCard("Shock", Constant.Player.Computer));
-            library.add(cf.getCard("Steel Wall", Constant.Player.Computer));
+            library.add(cf.getCard("Lightning Bolt", AllZone.ComputerPlayer));
+            library.add(cf.getCard("Shock", AllZone.ComputerPlayer));
+            library.add(cf.getCard("Steel Wall", AllZone.ComputerPlayer));
         }
         for(int i = 0; i < 3; i++) {
-            library.add(cf.getCard("Char", Constant.Player.Computer));
-            library.add(cf.getCard("Shock", Constant.Player.Computer));
-//      library.add(cf.getCard("Nevinyrral's Disk", Constant.Player.Computer));
+            library.add(cf.getCard("Char", AllZone.ComputerPlayer));
+            library.add(cf.getCard("Shock", AllZone.ComputerPlayer));
+//      library.add(cf.getCard("Nevinyrral's Disk", AllZone.ComputerPlayer));
         }
         for(int i = 0; i < 2; i++) {
-            library.add(cf.getCard("Pyroclasm", Constant.Player.Computer));
-//      library.add(cf.getCard("Hidetsugu's Second Rite", Constant.Player.Computer));
-//      library.add(cf.getCard("Char", Constant.Player.Computer));
-            library.add(cf.getCard("Flamebreak", Constant.Player.Computer));
+            library.add(cf.getCard("Pyroclasm", AllZone.ComputerPlayer));
+//      library.add(cf.getCard("Hidetsugu's Second Rite", AllZone.ComputerPlayer));
+//      library.add(cf.getCard("Char", AllZone.ComputerPlayer));
+            library.add(cf.getCard("Flamebreak", AllZone.ComputerPlayer));
         }
         
-        library.add(cf.getCard("Lava Spike", Constant.Player.Computer));
+        library.add(cf.getCard("Lava Spike", AllZone.ComputerPlayer));
         
 
-        //	library.add(cf.getCard("Tanglebloom", Constant.Player.Computer));
+        //	library.add(cf.getCard("Tanglebloom", AllZone.ComputerPlayer));
         
         for(int i = 0; i < 17; i++)
-            library.add(cf.getCard("Mountain", Constant.Player.Computer));
+            library.add(cf.getCard("Mountain", AllZone.ComputerPlayer));
         
         if(library.size() != 40)
             throw new RuntimeException("ComputerAI_Burn : getLibrary() error, library size is " + library.size());

@@ -51,9 +51,9 @@ public class ComputerAI_counterSpells2 {
 			"Convolute"
 		};
 		
-		final int usableManaSources = CardFactoryUtil.getUsableManaSources(Constant.Player.Human);
+		final int usableManaSources = CardFactoryUtil.getUsableManaSources(AllZone.HumanPlayer);
 		
-		PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
+		PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
 		CardList list = new CardList(hand.getCards());
 		list = list.filter(new CardListFilter()
 		{

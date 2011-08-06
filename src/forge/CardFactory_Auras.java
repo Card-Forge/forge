@@ -34,7 +34,7 @@ class CardFactory_Auras {
         return -1;
     }
     
-    public static Card getCard(final Card card, String cardName, String owner) {
+    public static Card getCard(final Card card, String cardName, Player owner) {
     	
     	Command standardUnenchant = new Command() {
 			private static final long serialVersionUID = 3938247133551483568L;
@@ -190,7 +190,7 @@ class CardFactory_Auras {
             final SpellAbility a2 = new Ability(card, "0") {
                 @Override
                 public void chooseTargetAI() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
                     CardList saps = new CardList(play.getCards());
                     saps = saps.filter(new CardListFilter() {
                         
@@ -216,13 +216,14 @@ class CardFactory_Auras {
                     if(AllZone.GameAction.isCardInPlay(c)) {
                         //AllZone.getZone(c).remove(c);
                         AllZone.GameAction.sacrifice(c);
-                        AllZone.GameAction.gainLife(c.getController(), 1);
+                        //AllZone.GameAction.gainLife(c.getController(), 1);
+                        c.getController().gainLife(1);
                     }
                 }//resolve
                 
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
                     CardList cars = new CardList(play.getCards());
                     cars = cars.filter(new CardListFilter() {
                         
@@ -233,7 +234,7 @@ class CardFactory_Auras {
                         }
                         
                     });
-                    if(AllZone.Computer_Life.getLife() < 4 && cars.size() > 0) return true;
+                    if(AllZone.ComputerPlayer.getLife() < 4 && cars.size() > 0) return true;
                     else return false;
                 }
             };//SpellAbility
@@ -269,7 +270,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void showMessage() {
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
                     CardList land = new CardList();
                     land.addAll(hum.getCards());
                     land = land.filter(new CardListFilter() {
@@ -408,8 +409,8 @@ class CardFactory_Auras {
                 
                 @Override
                 public void showMessage() {
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
                     CardList land = new CardList();
                     land.addAll(comp.getCards());
                     land.addAll(hum.getCards());
@@ -546,8 +547,8 @@ class CardFactory_Auras {
                 
                 @Override
                 public void showMessage() {
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
                     CardList land = new CardList();
                     land.addAll(comp.getCards());
                     land.addAll(hum.getCards());
@@ -605,7 +606,7 @@ class CardFactory_Auras {
                 	else
                 	{
                 		String[] LandTypes = new String[] { "Plains","Island","Swamp","Mountain","Forest"};
-                		if(card.getController().equals(Constant.Player.Computer))
+                		if(card.getController().equals(AllZone.ComputerPlayer))
                 		{
                 			HashMap<String,Integer> humanLandCount = new HashMap<String,Integer>();
                 			CardList humanlands = new CardList(AllZone.Human_Play.getCards());
@@ -794,8 +795,8 @@ class CardFactory_Auras {
                 
                 @Override
                 public void showMessage() {
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
                     CardList land = new CardList();
                     land.addAll(comp.getCards());
                     land.addAll(hum.getCards());
@@ -863,8 +864,8 @@ class CardFactory_Auras {
                 
                 @Override
                 public void showMessage() {
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
                     CardList land = new CardList();
                     land.addAll(comp.getCards());
                     land.addAll(hum.getCards());
@@ -977,8 +978,8 @@ class CardFactory_Auras {
 				// Can't allow an artifact equipment that is equipping a creature to become animated
 				@Override
                 public void showMessage() {
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
                     CardList artifacts = new CardList();
                     artifacts.addAll(comp.getCards());
                     artifacts.addAll(hum.getCards());
@@ -1951,8 +1952,8 @@ class CardFactory_Auras {
 
 				@Override
                 public void showMessage() {
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
                     CardList creatures = new CardList();
                     creatures.addAll(comp.getCards());
                     creatures.addAll(hum.getCards());
@@ -2014,12 +2015,12 @@ class CardFactory_Auras {
 
 				@Override
         		public boolean canPlayAI() {
-					String player;
+					Player player;
 					if(curse) {
-						player = Constant.Player.Human;
+						player = AllZone.HumanPlayer;
 					}
 					else {
-						player = Constant.Player.Computer;
+						player = AllZone.ComputerPlayer;
 					}
         			CardList list = AllZoneUtil.getPlayerTypeInPlay(player, type);
 
@@ -2248,7 +2249,7 @@ class CardFactory_Auras {
                 final SpellAbility untapAbility = new Ability(card, "0") {
                     @Override
                     public void resolve() {
-                        if(card.getController().equals(Constant.Player.Human)) AllZone.InputControl.setInput(untap);
+                        if(card.getController().equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(untap);
                         else {
                             CardList list = new CardList(AllZone.Computer_Play.getCards());
                             list = list.filter(new CardListFilter() {
@@ -2335,7 +2336,7 @@ class CardFactory_Auras {
                          *  Do we want the AI to hold these auras when
                          *  losing game and at a creature disadvatange
                          */
-                        if (3 <= tgts.get(0).getNetAttack() && AllZone.Human_Life.getLife() > AllZone.Computer_Life.getLife()) {
+                        if (3 <= tgts.get(0).getNetAttack() && AllZone.HumanPlayer.getLife() > AllZone.ComputerPlayer.getLife()) {
                             setTargetCard(tgts.get(0));
                             return true;
                         }
@@ -2408,7 +2409,7 @@ class CardFactory_Auras {
                                 
                                 AllZone.Combat.removeFromCombat(crd);
                                 
-                                String opp = AllZone.GameAction.getOpponent(crd.getController());
+                                Player opp = crd.getController().getOpponent();
                                 crd.setController(opp);
                                 
                                 PlayerZone to = AllZone.getZone(Constant.Zone.Play, opp);
@@ -2444,8 +2445,8 @@ class CardFactory_Auras {
 
                     @Override
                     public void showMessage() {
-                        PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
-                        PlayerZone hum = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                        PlayerZone comp = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+                        PlayerZone hum = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
                         CardList creatures = new CardList();
                         creatures.addAll(comp.getCards());
                         creatures.addAll(hum.getCards());

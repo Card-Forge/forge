@@ -112,8 +112,8 @@ public class Card extends MyObservable {
     
     private int 					     multiKickerMagnitude			   = 0;
     
-    private String                       owner                             = "";
-    private String                       controller                        = "";
+    private Player                       owner                             = null;
+    private Player                      controller                        = null;
     private String                       name                              = "";
     private String                       imageName                         = "";
     private String                       rarity                            = "";
@@ -1377,11 +1377,11 @@ public class Card extends MyObservable {
         return name;
     }
     
-    public String getOwner() {
+    public Player getOwner() {
         return owner;
     }
     
-    public String getController() {
+    public Player getController() {
         return controller;
     }
     
@@ -1390,13 +1390,13 @@ public class Card extends MyObservable {
         this.updateObservers();
     }
     
-    public void setOwner(String player) {
+    public void setOwner(Player player) {
         owner = player;
         this.updateObservers();
     }
     
-    public void setController(String player) {
-    	if( "" != controller && !controller.equals(player)) {
+    public void setController(Player player) {
+    	if( null != controller && !controller.isPlayer(player)) {
     		for(Command var:changeControllerCommandList)
                 var.execute();
     	}
@@ -2279,7 +2279,7 @@ public class Card extends MyObservable {
     }
     	
     
-    public boolean isValidCard(String Restris[], String You) {
+    public boolean isValidCard(String Restris[], Player You) {
     	/////////////////// temporary DEBUG code
     	System.out.println("DEBUG: "+this.getName()+" - isValidCard Restrictions length: "+Restris.length);
     	System.out.print("DEBUG: "+this.getName()+" - isValidCard Restrictions: ");
@@ -2296,7 +2296,7 @@ public class Card extends MyObservable {
         	Restriction[i] = Restris[i];
             if (Restriction[i].contains("YouCtrl"))
             {
-                if (!getController().equals(You)) {
+                if (!getController().isPlayer(You)) {
                     return false;
                  }
                 st = Restriction[i].replaceAll(".YouCtrl", "");
@@ -2304,7 +2304,7 @@ public class Card extends MyObservable {
             }
             else if (Restriction[i].contains("YouDontCtrl"))
             {
-                if (getController().equals(You)) {
+                if (getController().isPlayer(You)) {
                    return false;
                 }
                 st = Restriction[i].replaceAll(".YouDontCtrl", "");

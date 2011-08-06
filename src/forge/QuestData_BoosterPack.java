@@ -72,7 +72,7 @@ public class QuestData_BoosterPack implements NewConstants {
         
         Card c;
         for(int i = 0; i < list.size(); i++) {
-            c = AllZone.CardFactory.getCard(list.get(i).toString(), "");
+            c = AllZone.CardFactory.getCard(list.get(i).toString(), null);
             
             if(c.isCreature()) nCreature++;
             else nSpell++;
@@ -228,7 +228,7 @@ public class QuestData_BoosterPack implements NewConstants {
         String s;
         for(int i = 0; i < list.size(); i++) {
             s = list.get(i).toString();
-            c = AllZone.CardFactory.getCard(s, "");
+            c = AllZone.CardFactory.getCard(s, null);
             if(getColor(c).equals(color)) return s;
         }
         //just get a random card

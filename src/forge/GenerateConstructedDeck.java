@@ -44,10 +44,10 @@ public class GenerateConstructedDeck
     Card land;
     for(int i = 0; i < 13; i++)
     {
-      land = AllZone.CardFactory.getCard(map.get(color1).toString(), Constant.Player.Computer);
+      land = AllZone.CardFactory.getCard(map.get(color1).toString(), AllZone.ComputerPlayer);
       list.add(land);
 
-      land = AllZone.CardFactory.getCard(map.get(color2).toString(), Constant.Player.Computer);
+      land = AllZone.CardFactory.getCard(map.get(color2).toString(), AllZone.ComputerPlayer);
       list.add(land);
     }
   }//addLand()

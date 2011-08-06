@@ -67,7 +67,7 @@ public class AbilityFactory_Combat {
 		AllZone.GameInfo.setPreventCombatDamageThisTurn(true);
 		
 		if (af.hasSubAbility())
-			 CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), card.getController(), card, null, sa);
+			 CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
 
 	}
 }

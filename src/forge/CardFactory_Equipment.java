@@ -18,7 +18,7 @@ class CardFactory_Equipment {
     }
 
     
-    public static Card getCard(final Card card, String cardName, String owner) {
+    public static Card getCard(final Card card, String cardName, Player owner) {
     	
         //*************** START *********** START **************************
         if (cardName.equals("Sword of the Meek")) {

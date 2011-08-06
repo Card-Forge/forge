@@ -332,7 +332,7 @@ public class CardList implements Iterable<Card> {
     	});
     }
     
-    public CardList getValidCards(final String Restrictions[], final String Controller) {
+    public CardList getValidCards(final String Restrictions[], final Player Controller) {
         return this.filter(new CardListFilter() {
             public boolean addCard(Card c) {
                 return c.isValidCard(Restrictions, Controller);

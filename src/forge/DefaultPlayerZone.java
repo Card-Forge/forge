@@ -7,13 +7,13 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
 
   private ArrayList<Card> cards = new ArrayList<Card>();
   private String zoneName;
-  private String playerName;
+  private Player player;
   private boolean update = true;
 
-  public DefaultPlayerZone(String zone, String player)
+  public DefaultPlayerZone(String zone, Player inPlayer)
   {
     zoneName = zone;
-    playerName = player;
+    player = inPlayer;
   }
   //************ BEGIN - these methods fire updateObservers() *************
   public void add(Object o)
@@ -127,13 +127,13 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
   {
     return zone.equals(zoneName);
   }
-  public boolean is(String zone, String player)
+  public boolean is(String zone, Player player)
   {
-    return (zone.equals(zoneName) && player.equals(playerName));
+    return (zone.equals(zoneName) && player.isPlayer(player));
   }
-  public String getPlayer()
+  public Player getPlayer()
   {
-    return playerName;
+    return player;
   }
   public String getZone()
   {

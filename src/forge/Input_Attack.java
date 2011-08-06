@@ -10,7 +10,7 @@ public class Input_Attack extends Input {
         ButtonUtil.enableOnlyOK();
         AllZone.Display.showMessage("Declare Attackers: Select creatures that you want to attack with");
         
-        PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+        PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
         CardList creats = new CardList(play.getCards());
         creats = creats.getType("Creature");
         
@@ -53,7 +53,7 @@ public class Input_Attack extends Input {
     
     @Override
     public void selectCard(Card card, PlayerZone zone) {
-        if(zone.is(Constant.Zone.Play, Constant.Player.Human) && card.isCreature() && card.isUntapped()
+        if(zone.is(Constant.Zone.Play, AllZone.HumanPlayer) && card.isCreature() && card.isUntapped()
                 && CombatUtil.canAttack(card)) {
             
             if(!card.getKeyword().contains("Vigilance")) {

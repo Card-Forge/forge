@@ -37,47 +37,47 @@ public class Phase extends MyObservable
 	private String phases[][] =
 	{
     //human's turn
-			{Constant.Player.Human, Constant.Phase.Untap},
-//	{Constant.Player.Human, Constant.Phase.Upkeep},
-            {Constant.Player.Human, Constant.Phase.Draw},
-            {Constant.Player.Human, Constant.Phase.Main1},
-            {Constant.Player.Human, Constant.Phase.Combat_Declare_Attackers},
-            {Constant.Player.Human, Constant.Phase.Combat_Declare_Attackers_InstantAbility},
-            {Constant.Player.Computer, Constant.Phase.Combat_Declare_Blockers},
-            {Constant.Player.Human, Constant.Phase.Combat_Declare_Blockers_InstantAbility},
-            {Constant.Player.Computer, Constant.Phase.Combat_Declare_Blockers_InstantAbility},
-            {Constant.Player.Computer, Constant.Phase.Combat_After_Declare_Blockers},
-            {Constant.Player.Human, Constant.Phase.Combat_FirstStrikeDamage}, //TODO: need to allow computer to have priority (play instants and abilities).
-            {Constant.Player.Human, Constant.Phase.Combat_Damage},
-            {Constant.Player.Human, Constant.Phase.End_Of_Combat},
-            {Constant.Player.Human, Constant.Phase.Main2},
-            {Constant.Player.Human, Constant.Phase.At_End_Of_Turn},
-//	{Constant.Player.Computer , Constant.Phase.End_Of_Turn},
-            {Constant.Player.Human, Constant.Phase.Until_End_Of_Turn},
-            {Constant.Player.Human, Constant.Phase.Cleanup},
+			{AllZone.HumanPlayer.getName(), Constant.Phase.Untap},
+//	{AllZone.HumanPlayer, Constant.Phase.Upkeep},
+            {AllZone.HumanPlayer.getName(), Constant.Phase.Draw},
+            {AllZone.HumanPlayer.getName(), Constant.Phase.Main1},
+            {AllZone.HumanPlayer.getName(), Constant.Phase.Combat_Declare_Attackers},
+            {AllZone.HumanPlayer.getName(), Constant.Phase.Combat_Declare_Attackers_InstantAbility},
+            {AllZone.ComputerPlayer.getName(), Constant.Phase.Combat_Declare_Blockers},
+            {AllZone.HumanPlayer.getName(), Constant.Phase.Combat_Declare_Blockers_InstantAbility},
+            {AllZone.ComputerPlayer.getName(), Constant.Phase.Combat_Declare_Blockers_InstantAbility},
+            {AllZone.ComputerPlayer.getName(), Constant.Phase.Combat_After_Declare_Blockers},
+            {AllZone.HumanPlayer.getName(), Constant.Phase.Combat_FirstStrikeDamage}, //TODO: need to allow computer to have priority (play instants and abilities).
+            {AllZone.HumanPlayer.getName(), Constant.Phase.Combat_Damage},
+            {AllZone.HumanPlayer.getName(), Constant.Phase.End_Of_Combat},
+            {AllZone.HumanPlayer.getName(), Constant.Phase.Main2},
+            {AllZone.HumanPlayer.getName(), Constant.Phase.At_End_Of_Turn},
+//	{AllZone.ComputerPlayer , Constant.Phase.End_Of_Turn},
+            {AllZone.HumanPlayer.getName(), Constant.Phase.Until_End_Of_Turn},
+            {AllZone.HumanPlayer.getName(), Constant.Phase.Cleanup},
             
             //computer's turn
-            {Constant.Player.Computer, Constant.Phase.Untap},
-//	{Constant.Player.Computer, Constant.Phase.Upkeep},
-            {Constant.Player.Computer, Constant.Phase.Draw},
-            {Constant.Player.Computer, Constant.Phase.Main1},
-            {Constant.Player.Human, Constant.Phase.Combat_Before_Declare_Attackers_InstantAbility},
-            {Constant.Player.Computer, Constant.Phase.Combat_Declare_Attackers},
-            {Constant.Player.Human, Constant.Phase.Combat_Declare_Attackers_InstantAbility},
-            {Constant.Player.Human, Constant.Phase.Combat_Declare_Blockers},
-            {Constant.Player.Computer, Constant.Phase.Combat_Declare_Blockers_InstantAbility},
-            {Constant.Player.Human, Constant.Phase.Combat_Declare_Blockers_InstantAbility},
-            {Constant.Player.Computer, Constant.Phase.Combat_After_Declare_Blockers},
-            /*{Constant.Player.Human, Constant.Phase.Combat_After_Declare_Blockers},*/
-            {Constant.Player.Human, Constant.Phase.Combat_FirstStrikeDamage}, //TODO: need to allow computer to have priority (play instants and abilities).
-            {Constant.Player.Human, Constant.Phase.Combat_Damage},
-            {Constant.Player.Human, Constant.Phase.End_Of_Combat},
-            {Constant.Player.Computer, Constant.Phase.End_Of_Combat},
-            {Constant.Player.Computer, Constant.Phase.Main2},
-            {Constant.Player.Computer, Constant.Phase.At_End_Of_Turn},
-            {Constant.Player.Human, Constant.Phase.End_Of_Turn},
-            {Constant.Player.Computer, Constant.Phase.Until_End_Of_Turn},
-            {Constant.Player.Computer, Constant.Phase.Cleanup},};
+            {AllZone.ComputerPlayer.getName(), Constant.Phase.Untap},
+//	{AllZone.ComputerPlayer, Constant.Phase.Upkeep},
+            {AllZone.ComputerPlayer.getName(), Constant.Phase.Draw},
+            {AllZone.ComputerPlayer.getName(), Constant.Phase.Main1},
+            {AllZone.HumanPlayer.getName(), Constant.Phase.Combat_Before_Declare_Attackers_InstantAbility},
+            {AllZone.ComputerPlayer.getName(), Constant.Phase.Combat_Declare_Attackers},
+            {AllZone.HumanPlayer.getName(), Constant.Phase.Combat_Declare_Attackers_InstantAbility},
+            {AllZone.HumanPlayer.getName(), Constant.Phase.Combat_Declare_Blockers},
+            {AllZone.ComputerPlayer.getName(), Constant.Phase.Combat_Declare_Blockers_InstantAbility},
+            {AllZone.HumanPlayer.getName(), Constant.Phase.Combat_Declare_Blockers_InstantAbility},
+            {AllZone.ComputerPlayer.getName(), Constant.Phase.Combat_After_Declare_Blockers},
+            /*{AllZone.HumanPlayer, Constant.Phase.Combat_After_Declare_Blockers},*/
+            {AllZone.HumanPlayer.getName(), Constant.Phase.Combat_FirstStrikeDamage}, //TODO: need to allow computer to have priority (play instants and abilities).
+            {AllZone.HumanPlayer.getName(), Constant.Phase.Combat_Damage},
+            {AllZone.HumanPlayer.getName(), Constant.Phase.End_Of_Combat},
+            {AllZone.ComputerPlayer.getName(), Constant.Phase.End_Of_Combat},
+            {AllZone.ComputerPlayer.getName(), Constant.Phase.Main2},
+            {AllZone.ComputerPlayer.getName(), Constant.Phase.At_End_Of_Turn},
+            {AllZone.HumanPlayer.getName(), Constant.Phase.End_Of_Turn},
+            {AllZone.ComputerPlayer.getName(), Constant.Phase.Until_End_Of_Turn},
+            {AllZone.ComputerPlayer.getName(), Constant.Phase.Cleanup},};
     
     public Phase() {
         reset();
@@ -95,7 +95,7 @@ public class Phase extends MyObservable
         this.updateObservers();
     }
     
-    public void setPhase(String phase, String player) {
+    public void setPhase(String phase, Player player) {
         phaseIndex = findIndex(phase, player);
         this.updateObservers();
     }
@@ -126,7 +126,7 @@ public class Phase extends MyObservable
         }
         
         //empty manapool:
-        //CardList cl = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+        //CardList cl = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
         //cl = cl.getName("Mana Pool");
         //if (cl.size() > 0)
         //{
@@ -144,10 +144,10 @@ public class Phase extends MyObservable
 
         
         //time vault:
-        if((is(Constant.Phase.Cleanup, Constant.Player.Human) && humanExtraTurns >= 0)
-                || (is(Constant.Phase.Cleanup, Constant.Player.Computer) && computerExtraTurns >= 0)) {
-            String player = getActivePlayer();
-            String opponent = AllZone.GameAction.getOpponent(player);
+        if((is(Constant.Phase.Cleanup, AllZone.HumanPlayer) && humanExtraTurns >= 0)
+                || (is(Constant.Phase.Cleanup, AllZone.ComputerPlayer) && computerExtraTurns >= 0)) {
+            Player player = getActivePlayer();
+            Player opponent = player.getOpponent();
             CardList list = CardFactoryUtil.getCards("Time Vault", opponent);
             list = list.filter(new CardListFilter() {
                 public boolean addCard(Card c) {
@@ -164,7 +164,7 @@ public class Phase extends MyObservable
                 	public void resolve()
                 	{
                 		String controller = crd.getController();
-                		if (controller.equals(Constant.Player.Human))
+                		if (controller.equals(AllZone.HumanPlayer))
                 			humanExtraTurns--;
                 		else
                 			computerExtraTurns--;
@@ -175,7 +175,7 @@ public class Phase extends MyObservable
                 ability.setStackDescription(crd + " - skip this turn instead, untap Time Vault.");
                 */
 
-                if(player.equals(Constant.Player.Computer)) {
+                if(player.equals(AllZone.ComputerPlayer)) {
                     String[] choices = {"Yes", "No"};
                     Object q = null;
                     q = AllZone.Display.getChoiceOptional("Untap " + crd + "?", choices);
@@ -194,30 +194,30 @@ public class Phase extends MyObservable
         }
         
         //if (getPhase().equals(Constant.Phase.Cleanup) && extraTurns > 0)
-        if((is(Constant.Phase.Cleanup, Constant.Player.Human) && humanExtraTurns > 0)
-                || (is(Constant.Phase.Cleanup, Constant.Player.Computer) && computerExtraTurns > 0)) {
+        if((is(Constant.Phase.Cleanup, AllZone.HumanPlayer) && humanExtraTurns > 0)
+                || (is(Constant.Phase.Cleanup, AllZone.ComputerPlayer) && computerExtraTurns > 0)) {
             //System.out.println("CLEANUP!");
-            String player = getActivePlayer();
+            Player player = getActivePlayer();
             
-            if(player.equals(Constant.Player.Computer)) computerExtraTurns--;
+            if(player.equals(AllZone.ComputerPlayer)) computerExtraTurns--;
             else humanExtraTurns--;
             
             setPhase(Constant.Phase.Untap, player);
-        } else if((is(Constant.Phase.Cleanup, Constant.Player.Computer) && humanExtraTurns < 0)
-                || (is(Constant.Phase.Cleanup, Constant.Player.Human) && computerExtraTurns < 0)) {
-            String player = getActivePlayer();
+        } else if((is(Constant.Phase.Cleanup, AllZone.ComputerPlayer) && humanExtraTurns < 0)
+                || (is(Constant.Phase.Cleanup, AllZone.HumanPlayer) && computerExtraTurns < 0)) {
+            Player player = getActivePlayer();
 
-            if(player.equals(Constant.Player.Computer)) humanExtraTurns++;
+            if(player.equals(AllZone.ComputerPlayer)) humanExtraTurns++;
             else computerExtraTurns++;
             
             setPhase(Constant.Phase.Untap, player);
-        } else if ((is(Constant.Phase.End_Of_Combat, Constant.Player.Human) && humanExtraCombats > 0) ||
-        		(is(Constant.Phase.End_Of_Combat, Constant.Player.Computer) && computerExtraCombats > 0) )
+        } else if ((is(Constant.Phase.End_Of_Combat, AllZone.HumanPlayer) && humanExtraCombats > 0) ||
+        		(is(Constant.Phase.End_Of_Combat, AllZone.ComputerPlayer) && computerExtraCombats > 0) )
         {
-        	String player = getActivePlayer();
-        	String opp = AllZone.GameAction.getOpponent(player);
+        	Player player = getActivePlayer();
+        	Player opp = player.getOpponent();
 
-        	if (player.equals(Constant.Player.Computer)) {
+        	if (player.equals(AllZone.ComputerPlayer)) {
         		computerExtraCombats--;
         	} else {
         		humanExtraCombats--;
@@ -237,7 +237,7 @@ public class Phase extends MyObservable
         
 
         //if(getPhase().equals(Constant.Phase.Untap)) {
-        if(is(Constant.Phase.Untap, Constant.Player.Human)) {
+        if(is(Constant.Phase.Untap, AllZone.HumanPlayer)) {
         	StormCount = 0;
         	
         	HighTideCount = 0;
@@ -253,7 +253,7 @@ public class Phase extends MyObservable
             else if(humanExtraTurns < 0)
               humanExtraTurns++;
               */
-        } else if(is(Constant.Phase.Untap, Constant.Player.Computer)) {       	
+        } else if(is(Constant.Phase.Untap, AllZone.ComputerPlayer)) {       	
         	StormCount = 0;
         	GameBegins = 1;
         	HighTideCount = 0;
@@ -271,7 +271,7 @@ public class Phase extends MyObservable
               computerExtraTurns++;
               */
         }
-        if(turn == 1 && is(Constant.Phase.Main1, Constant.Player.Human)) {
+        if(turn == 1 && is(Constant.Phase.Main1, AllZone.HumanPlayer)) {
         	StormCount = 0;
             PlayerSpellCount = 0;
             PlayerCreatureSpellCount = 0;   
@@ -281,7 +281,7 @@ public class Phase extends MyObservable
         
         //Mana Drain's delayed bonus mana.The AI can't cast Mana Drain yet, but there are 
         //provisions for that here for future use
-        if((is(Constant.Phase.Main1,Constant.Player.Human) || is(Constant.Phase.Main2,Constant.Player.Human) )&& Phase.ManaDrain_BonusMana_Human.size() != 0)
+        if((is(Constant.Phase.Main1,AllZone.HumanPlayer) || is(Constant.Phase.Main2,AllZone.HumanPlayer) )&& Phase.ManaDrain_BonusMana_Human.size() != 0)
         {        	
         	for(int i=0;i<Phase.ManaDrain_BonusMana_Human.size();i++)
         	{
@@ -291,7 +291,7 @@ public class Phase extends MyObservable
         	Phase.ManaDrain_BonusMana_Human.clear();
         	Phase.ManaDrain_Source_Human.clear();
         }
-        if((is(Constant.Phase.Main1,Constant.Player.Computer) || is(Constant.Phase.Main2,Constant.Player.Computer) )&& Phase.ManaDrain_BonusMana_AI.size() != 0)
+        if((is(Constant.Phase.Main1,AllZone.ComputerPlayer) || is(Constant.Phase.Main2,AllZone.ComputerPlayer) )&& Phase.ManaDrain_BonusMana_AI.size() != 0)
         {
         	for(int i=0;i<Phase.ManaDrain_BonusMana_AI.size();i++)
         	{
@@ -315,21 +315,25 @@ public class Phase extends MyObservable
         }
     }
     
-    public synchronized boolean is(String phase, String player) {
-        return (getPhase().equals(phase) && getActivePlayer().equals(player));
+    public synchronized boolean is(String phase, Player player) {
+        return (getPhase().equals(phase) && getActivePlayer().isPlayer(player));
     }
     
-    private int findIndex(String phase, String player) {
+    private int findIndex(String phase, Player player) {
         for(int i = 0; i < phases.length; i++) {
-            if(player.equals(phases[i][0]) && phase.equals(phases[i][1])) return i;
+            if(player.getName().equals(phases[i][0]) && phase.equals(phases[i][1])) return i;
         }
         throw new RuntimeException("Phase : findIndex() invalid argument, phase = " + phase + " player = "
                 + player);
     }
     
-    public String getActivePlayer() {
-        //hack
-        return phases[phaseIndex][0];
+    public Player getActivePlayer() {
+    	//TODO - Player class conversion - see if there's a better way than this hack.
+        String name = phases[phaseIndex][0];
+        if(name.equals("Human")) return AllZone.HumanPlayer;
+        else return AllZone.ComputerPlayer;
+        
+        //return phases[phaseIndex][0];
     }
     
     public String getPhase() {
@@ -344,29 +348,29 @@ public class Phase extends MyObservable
         turn = in_turn;
     }
     
-    public void addExtraTurn(String player) {
-        if(player.equals(Constant.Player.Human)) humanExtraTurns++;
+    public void addExtraTurn(Player player) {
+        if(player.equals(AllZone.HumanPlayer)) humanExtraTurns++;
         else computerExtraTurns++;
     }
     
-    public void subtractExtraTurn(String player) {
-        if(player.equals(Constant.Player.Human)) humanExtraTurns--;
+    public void subtractExtraTurn(Player player) {
+        if(player.equals(AllZone.HumanPlayer)) humanExtraTurns--;
         else computerExtraTurns--;
     }
     
-    public int getExtraTurns(String player) {
-        if(player.equals(Constant.Player.Human)) return humanExtraTurns;
+    public int getExtraTurns(Player player) {
+        if(player.equals(AllZone.HumanPlayer)) return humanExtraTurns;
         else return computerExtraTurns;
     }
     
-    public void setExtraTurns(int i, String player) {
-        if(player.equals(Constant.Player.Human)) humanExtraTurns = i;
+    public void setExtraTurns(int i, Player player) {
+        if(player.equals(AllZone.HumanPlayer)) humanExtraTurns = i;
         else computerExtraTurns = i;
     }
     
     // Could have a full set of accessors here but for Finest Hour there's no need
-    public void addExtraCombat(String player) {
-    	if (player.equals(Constant.Player.Human))
+    public void addExtraCombat(Player player) {
+    	if (player.equals(AllZone.HumanPlayer))
     		humanExtraCombats++;
     	else
     		computerExtraCombats++;
@@ -376,7 +380,7 @@ public class Phase extends MyObservable
     	return (nCombatsThisTurn == 1);
     }
     
-    public void resetAttackedThisCombat(String player) {
+    public void resetAttackedThisCombat(Player player) {
         // resets the status of attacked/blocked this phase
         PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
         
@@ -432,7 +436,7 @@ public class Phase extends MyObservable
         return false;
     }
 
-	public static boolean canCastSorcery(String player)
+	public static boolean canCastSorcery(Player player)
 	{
 		return ((AllZone.Phase.getPhase().equals(Constant.Phase.Main2) || (AllZone.Phase.getPhase().equals(Constant.Phase.Main1)) 
 				&& AllZone.GameAction.isPlayerTurn(player)) && AllZone.Stack.size() == 0);
