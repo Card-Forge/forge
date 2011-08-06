@@ -484,6 +484,27 @@ public class QuestUtil {
 			
 			qa.setCardRewardList(pack.getRare(4, 4));
 		}
+		else if (id == 17)  // House Party
+		{
+			CardList humanList = new CardList();
+			String cardsInPlay[] = {"Hopping Automaton", "Honden of Life's Web", "Forbidden Orchard"};
+			
+			for (int i = 0; i < 3; i ++)
+			{
+				Card c = AllZone.CardFactory.getCard(cardsInPlay[i], Constant.Player.Human);
+				humanList.add(c);
+			}
+			qa.setHuman(humanList);
+			
+			String compyCards[] = {"Honden of Infinite Rage", "Mikokoro, Center of the Sea", "Tidehollow Strix"};
+			
+			for (int i = 0; i < 3; i ++)
+			{
+				qa.addCompy(compyCards[i]);
+			}
+			
+			qa.setCardRewardList(pack.getRare(4, 1));
+		}
 			
 	}
 	

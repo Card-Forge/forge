@@ -158,4 +158,14 @@ Four green rares
 250
 noIcon
 
+17
+House Party
+Your friends decide to hold a house party at your home tonight. Later that night uninvited guest show up and disrupt the party.
+Hard
+Not Repeatable
+50
+Four colorless rares
+250
+noIcon
+
 End
