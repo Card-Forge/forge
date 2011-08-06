@@ -4474,6 +4474,8 @@ public class CardFactoryUtil {
 	            AllZone.Stack.add(ability);
 			}
 		}
+		
+		AllZone.GameAction.CheckWheneverKeyword(c, "PlayLand", null);
     }
     
     

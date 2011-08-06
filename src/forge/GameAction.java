@@ -830,6 +830,17 @@ public class GameAction {
                         }
                         if(Nullified == true) k[4] = "Null";   
                         }
+                    if(k[1].contains("PlayLand")) {
+                    	boolean Nullified = true;              	
+                        String SpellControllerParse = k[1];                
+                        String SpellController[] = SpellControllerParse.split("/");
+                        for(int z = 0; z < SpellController.length - 1; z++) {
+                        	if(SpellController[z + 1].equals("Controller") && (c.getController()).equals(card.getController())) Nullified = false;  
+                        	if(SpellController[z + 1].equals("Opponent") && (c.getController()).equals(card.getController().getOpponent())) Nullified = false;
+                        	if(SpellController[z + 1].equals("Any")) Nullified = false;
+                        }
+                        if(Nullified == true) k[4] = "Null";   
+                        }
                     int Initiator_Conditions = 1;
                     String ConditionsParse = k[2];                
                     String Conditions[] = ConditionsParse.split("!");
