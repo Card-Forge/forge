@@ -3370,7 +3370,7 @@ public class CardFactoryUtil {
     public static ArrayList<String> getCreatureLandNames() {
         String[] creatureLands = {
                 "Faerie Conclave", "Forbidding Watchtower", "Treetop Village", "Ghitu Encampment",
-                "Blinkmoth Nexus", "Mishra's Factory"};
+                "Blinkmoth Nexus", "Mishra's Factory", "Mutavault"};
         final ArrayList<String> list = new ArrayList<String>();
         for(int i = 0; i < creatureLands.length; i++)
             list.add(creatureLands[i]);
