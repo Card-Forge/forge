@@ -38,6 +38,10 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+howl_of_the_night_pack.jpg		http://www.wizards.com/global/images/magic/general/howl_of_the_night_pack.jpg
+beacon_of_creation.jpg		http://www.wizards.com/global/images/magic/general/beacon_of_creation.jpg
+echoing_courage.jpg		http://www.wizards.com/global/images/magic/general/echoing_courage.jpg
+brush_with_death.jpg		http://www.wizards.com/global/images/magic/general/brush_with_death.jpg
 windstorm.jpg		http://www.wizards.com/global/images/magic/general/windstorm.jpg
 lightkeeper_of_emeria.jpg		http://www.wizards.com/global/images/magic/general/lightkeeper_of_emeria.jpg
 bloodcurdling_scream.jpg		http://www.wizards.com/global/images/magic/general/bloodcurdling_scream.jpg

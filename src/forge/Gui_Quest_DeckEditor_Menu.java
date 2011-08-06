@@ -22,6 +22,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.JList;
+import javax.swing.JDialog;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 import forge.error.ErrorViewer;
 
@@ -685,6 +690,119 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
         JMenuItem delete = new JMenuItem("Delete");
         JMenuItem exit = new JMenuItem("Exit");
         
+        ////////////////////////////////////////////
+        //below is new code
+
+        //adds a card to human player's cardpool
+        JMenuItem addCard = new JMenuItem("Cheat - Add Card");
+
+        //add card
+        addCard.addActionListener(new ActionListener()
+        {
+        	public void actionPerformed(ActionEvent a)
+        	{
+        		//sort cards by card name
+        		CardList cardList = AllZone.CardFactory.getAllCards();
+        		TableSorter sorter = new TableSorter(cardList, 1, true);
+        		cardList.sort(sorter);
+
+        		//create a new Card object with a different toString() method
+        		//so that that JList only shows the card's name
+        		//
+        		//this is alot of work just to make it a little
+        		//easier and prettier for the user, gui stuff is very complicated
+        		class BetterCard extends Card
+        		{
+        			private Card card;
+
+        			BetterCard(Card c)
+        			{
+        				card = c;
+
+        				//this line is very important
+        				//if you omit this, errors will occur
+        				this.setName(c.getName());
+        			}
+
+        			public String toString()
+        			{
+        				return card.getName();
+        			}
+        		}//BetterCard
+
+        		Card[] card = cardList.toArray();
+
+        		for(int i = 0; i < card.length; i++)
+        		{
+        			card[i] = new BetterCard(card[i]);
+        		}
+
+        		final JList list = new JList(card);
+        		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        		//update the "card detail" on the right with the card info
+        		list.addListSelectionListener(new ListSelectionListener()
+        		{
+        			public void valueChanged(ListSelectionEvent e)
+        			{
+        				
+        				/*	I think that the code that was based in CardDetailUtil 
+        				  	has been changed and moved to a new/different class?
+        				 
+        				CardDetail cd = (CardDetail)deckDisplay;
+        				cd.updateCardDetail((Card)list.getSelectedValue());
+        				
+        				*/
+        				
+        			}
+        		});
+
+        		Object[] o = {"Add Card to Your Cardpool", new JScrollPane(list)};
+        		JOptionPane pane = new JOptionPane(o, JOptionPane.INFORMATION_MESSAGE, JOptionPane.OK_CANCEL_OPTION);
+
+        		JDialog dialog = pane.createDialog(null, "Cheat - Add Card");
+        		dialog.setModal(true);
+        		dialog.setVisible(true);
+
+        		Object choice = pane.getValue();
+        		boolean cancel = false;
+
+        		//there are a ton of ways to cancel
+        		if(
+        			choice == null ||
+        			choice.equals(JOptionPane.UNINITIALIZED_VALUE)
+        			)
+        			cancel = true;
+        		else
+        		{
+        			int n = ((Integer)choice).intValue();
+        			if(n == JOptionPane.CANCEL_OPTION)
+        				cancel = true;
+        		}
+
+        		if(cancel || list.getSelectedValue() == null)
+        		{
+        			//System.out.println("cancelled");
+        		}
+        		else
+        		{
+        			//show the choice that the user selected
+        			//System.out.println(list.getSelectedValue());
+
+        			Card c = (Card) list.getSelectedValue();
+
+        			Gui_Quest_DeckEditor g = (Gui_Quest_DeckEditor)deckDisplay;
+        			TableModel table = g.getTopTableModel();
+        			table.addCard(c);
+        			table.resort();
+        		}
+        	}//actionPerformed()
+        });//add card
+
+
+        //above is new code
+        ///////////////////////////////////////
+        
         //human
         open.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent a) {
@@ -804,6 +922,9 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
         deckMenu.add(rename);
         deckMenu.add(save);
         deckMenu.add(copy);
+        
+        deckMenu.addSeparator();//new code
+        deckMenu.add(addCard); //new code
         
         deckMenu.addSeparator();
         addImportExport(deckMenu, true);
