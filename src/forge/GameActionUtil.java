@@ -71,7 +71,7 @@ public class GameActionUtil {
 		upkeep_Wolf_Skull_Shaman();
 		
 		upkeep_Oversold_Cemetery();
-		upkeep_Nether_Spirit();
+		//upkeep_Nether_Spirit();
 		upkeep_Vampire_Lacerator();
 		upkeep_Sleeper_Agent();
 		upkeep_Pillory_of_the_Sleepless();
@@ -4105,6 +4105,7 @@ public class GameActionUtil {
 		}
 	}//Oversold Cemetery
 
+	/*
     private static void upkeep_Nether_Spirit() {
         final Player player = AllZone.Phase.getPlayerTurn();
         final PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
@@ -4141,6 +4142,7 @@ public class GameActionUtil {
             }
         } //if
     }//nether spirit
+    */
 
 	public static void upkeep_Suspend() {
 		Player player = AllZone.Phase.getPlayerTurn();
