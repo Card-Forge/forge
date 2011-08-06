@@ -120,6 +120,18 @@ public class GameActionUtil {
              AllZone.Stack.add(ability);
         }//end City of Brass
         
+        if (c.getName().equals("Fallowsage")) {
+            final String player = c.getController();
+            Ability ability = new Ability(c, "0") {
+                @Override
+                public void resolve() {
+                	AllZone.GameAction.drawCard(player);
+                }
+            };// Ability
+            ability.setStackDescription("Fallowsage - draw a card");
+            AllZone.Stack.add(ability);
+        }//end Fallowsage
+        
      }
 
     

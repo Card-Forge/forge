@@ -1,3 +1,9 @@
+Fallowsage
+3 U
+Creature Merfolk Wizard
+Whenever Fallowsage becomes tapped, you may draw a card.
+2/2
+
 Vithian Stinger
 2 R
 Creature Human Shaman
@@ -17757,6 +17763,7 @@ Renewed Faith
 Instant
 no text
 Cycling:1 W
+spGainLife:6
 
 Hymn to Tourach
 B B
