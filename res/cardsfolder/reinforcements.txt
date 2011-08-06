@@ -1,8 +1,8 @@
 Name:Reinforcements
 ManaCost:W
 Types:Instant
-Text:Put up to three target creature cards from your graveyard on top of your library. 
-K:spReturnTgt:3/UpTo:Creature:TopofLibrary
+Text:no text
+A:SP$Retrieve | Cost$ W | Destination$ Library | LibraryPosition$ 0 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | TargetMin$0 | TargetMax$3 | SpellDescription$ Put up to three target creature cards from your graveyard on top of your library.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reinforcements.jpg
