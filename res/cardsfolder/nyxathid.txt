@@ -1,8 +1,10 @@
 Name:Nyxathid
 ManaCost:1 B B
 Types:Creature Elemental
-Text:As Nyxathid comes into play, choose an opponent.\r\nNyxathid gets -1/-1 for each card in the chosen player's hand.
+Text:As Nyxathid comes into play, choose an opponent.
 PT:7/7
+K:stPumpSelf:Permanent:-X/-X:No Condition:CARDNAME gets -1/-1 for each card in the chosen player's hand.
+SVar:X:Count$InOppHand/Negative
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nyxathid.jpg
 SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/49.jpg
