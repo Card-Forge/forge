@@ -2,7 +2,8 @@ Name:Maze of Ith
 ManaCost:no cost
 Types:Land
 Text:no text
-A:AB$Pump|Cost$T|ValidTgts$Creature.attacking|TgtPrompt$Select target attacking creature| KW$ Prevent all combat damage that would be dealt to and dealt by CARDNAME.|SpellDescription$Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.|SubAbility$UntapTgt::
+A:AB$Pump | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | KW$ HIDDEN Prevent all combat damage that would be dealt to and dealt by CARDNAME. | SpellDescription$ Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn. | SubAbility$ UntapTgt::
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maze_of_ith.jpg
 End

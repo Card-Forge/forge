@@ -445,7 +445,7 @@ public class AbilityFactory_Fetch {
 	     }
 		 
 		 if(destination.equals("Exile"))
-			 sb.append(" Exile").append(targetname);
+			 sb.append("Exile").append(targetname);
 		 
 		 return sb.toString();
 	}

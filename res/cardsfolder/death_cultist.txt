@@ -3,6 +3,7 @@ ManaCost:B
 Types:Creature Human Wizard
 Text:Sacrifice Death Cultist: Target player loses 1 life and you gain 1 life.
 PT:1/1
+A:AB$LoseLife | Cost$ Sac<1/CARDNAME> | ValidTgts$ player | TgtPrompt$ Target a player to lose a  life | LifeAmount$ 1 | SubAbility$ YouGainLife/1 | SpellDescription$ Target player loses 1 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_cultist.jpg
 End

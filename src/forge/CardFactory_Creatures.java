@@ -18660,12 +18660,12 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
 
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Death Cultist")) {
-        	/*
-        	 * Sacrifice Death Cultist: Target player loses 1 life and you gain 1 life.
-        	 */
+        	
+        	// Sacrifice Death Cultist: Target player loses 1 life and you gain 1 life.
+        	 
         	final SpellAbility ability = new Ability(card, "0") {
         		
         		@Override
@@ -18689,7 +18689,7 @@ public class CardFactory_Creatures {
         	card.addSpellAbility(ability);
         	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Sage Owl") || cardName.equals("Inkfathom Divers") ||
