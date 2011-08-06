@@ -1,0 +1,9 @@
+Name:Nomad Stadium
+ManaCost:no cost
+Types:Land
+Text:no text
+K:paintap:1:W
+A:AB$GainLife | Cost$ W T Sac<1/CARDNAME> | LifeAmount$4 |Threshold$True|PrecostDesc$ Threshold - | SpellDescription$ You gain 4 life. Activate this ability only if seven or more cards are in your graveyard.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nomad_stadium.jpg
+End
