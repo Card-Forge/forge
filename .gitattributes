@@ -4032,6 +4032,7 @@ res/cardsfolder/living_armor.txt -text svneol=native#text/plain
 res/cardsfolder/living_artifact.txt -text svneol=native#text/plain
 res/cardsfolder/living_death.txt -text svneol=native#text/plain
 res/cardsfolder/living_hive.txt svneol=native#text/plain
+res/cardsfolder/living_lands.txt -text svneol=native#text/plain
 res/cardsfolder/living_wall.txt -text svneol=native#text/plain
 res/cardsfolder/livonya_silone.txt -text svneol=native#text/plain
 res/cardsfolder/lizard_warrior.txt -text svneol=native#text/plain
