@@ -2154,36 +2154,6 @@ public class CombatUtil {
         	
         	AllZone.Stack.add(ability);
         }
-
-        else if(b.getName().equals("AEther Membrane") || b.getName().equals("Aether Membrane") || b.getName().equals("Wall of Tears") 
-        		|| b.getName().equals("Kaijin of the Vanishing Touch")) {
-            final Card attacker = a;
-            final Ability ability = new Ability(b, "0") {
-                @Override
-                public void resolve() {
-                	if(attacker.isToken())
-                		AllZone.GameAction.exile(attacker);
-                	else {
-                		PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, attacker.getOwner());
-                		AllZone.GameAction.moveTo(hand, attacker);
-                	}
-                }
-            };
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(b).append(" - return blocked creature to owner's hand.");
-            ability.setStackDescription(sb.toString());
-            
-            final Command atEOC = new Command() {
-                private static final long serialVersionUID = 5263273480814811314L;
-                
-                public void execute() {
-                    if(AllZone.GameAction.isCardInPlay(attacker)) AllZone.Stack.add(ability);
-                }
-            };
-            
-            AllZone.EndOfCombat.addAt(atEOC);
-        }
         
         a.setCreatureGotBlockedThisCombat(true);
     }
