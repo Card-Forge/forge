@@ -3,7 +3,7 @@ ManaCost:G
 Types:Creature Elf Warrior
 Text:no text
 PT:1/1
-K:abDestroyTgtV 4 G Sac<1/Creature>:Creature.withFlying:Destroy target creature with flying.
+A:AB$Destroy | Cost$ 4 G Sac<1/Creature> | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SpellDescription$ Destroy target creature with flying.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_skysweeper.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/162.jpg

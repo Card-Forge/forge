@@ -3,7 +3,7 @@ ManaCost:W
 Types:Creature Human Cleric
 Text:no text
 PT:1/1
-K:abDestroyTgtV T Sac<1/CARDNAME>:Aura:Destroy target Aura.
+A:AB$Destroy | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Aura | TgtPrompt$ Select target Aura | SpellDescription$ Destroy target Aura.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haazda_exonerator.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/11.jpg

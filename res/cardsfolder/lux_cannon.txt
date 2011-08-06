@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact
 Text:no text
 A:AB$PutCounter | Cost$ T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
-K:abDestroyTgtV T SubCounter<3/CHARGE>:Permanent:Destroy target permanent.
+A:AB$Destroy | Cost$ T SubCounter<3/CHARGE> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Destroy target permanent.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lux_cannon.jpg
 SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/173.jpg

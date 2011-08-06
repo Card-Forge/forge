@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Creature Spirit
 Text:no text
 PT:2/2
-K:abDestroyTgtV Sac<1/CARDNAME>:Enchantment:Destroy target enchantment.
+A:AB$Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_ancient_law.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/21.jpg

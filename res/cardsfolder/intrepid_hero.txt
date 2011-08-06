@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Creature Soldier
 Text:no text
 PT:1/1
-K:abDestroyTgtV T:Creature.powerGE4:Destroy target creature with power 4 or greater.
+A:AB$Destroy | Cost$ T | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/8ed/en-us/card45208.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/26.jpg

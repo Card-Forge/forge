@@ -5,7 +5,7 @@ Text:no text
 PT:4/4
 K:Flying
 K:Untap:2 U
-K:abDestroyTgtV 1 W B T:Creature,Enchantment:Destroy target creature or enchantment.
+A:AB$Destroy | Cost$ 1 W B T | ValidTgts$ Creature,Enchantment | TgtPrompt$ Select target creature or enchantment | SpellDescription$ Destroy target creature or enchantment.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ethersworn_adjudicator.jpg
 SetInfo:CFX|Mythic|http://magiccards.info/scans/en/cfx/26.jpg

@@ -3,7 +3,7 @@ ManaCost:R
 Types:Creature Goblin
 Text:no text
 PT:1/1
-K:abDestroyTgtV Sac<1/CARDNAME>:Wall:Destroy target Wall.
+A:AB$Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Wall | TgtPrompt$ Select target Wall | SpellDescription$ Destroy target Wall.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_digging_team.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/234.jpg
