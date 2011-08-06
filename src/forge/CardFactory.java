@@ -19194,6 +19194,34 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Ponder")) {
+        	/* 
+        	 * Look at the top three cards of your library, then put them back
+        	 * in any order. You may shuffle your library.  Draw a card. 
+        	 */
+        	final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 484615053209732769L;
+				
+				@Override
+        		public void resolve() {
+        			String player = getTargetPlayer();
+        			AllZoneUtil.rearrangeTopOfLibrary(player, 3, false);
+        			AllZone.GameAction.promptForShuffle(player);
+        			//AllZone.GameAction.drawCards(player, 1);
+        		}
+				
+        		@Override
+        		public boolean canPlayAI() {
+        			//basically the same reason as Sensei's Diving Top
+        			return false;
+        		}
+        	};//spell
+        	spell.setStackDescription("Rearrange the top 3 cards in your library in any order.  You may shuffle you library.  Draw a card.");
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
