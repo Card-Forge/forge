@@ -383,7 +383,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Catwoman 2		medium	Cats creatures G+W+R with Lightning Helix");
         sb.append("\r\n");
-        sb.append("Comic Book Guy 3	hard	Dragons, Chandra Nalaar, Crucible of Fire + Enlightened Tutor, Moat");
+        sb.append("Comic Book Guy 3	hard	Roc and Rukh Eggs, Flamebrake, Earthquake, Auriok Champion, Kor Firewalker");
         sb.append("\r\n");
         sb.append("Crocodile Dundee 1	easy	Some Mountainwalk creatures, Rakka Mar");
         sb.append("\r\n");
