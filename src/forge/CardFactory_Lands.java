@@ -32,7 +32,7 @@ class CardFactory_Lands {
                 public boolean addCard(Card c) {
                     return AllZone.GameAction.isCardInPlay(c) && c.isCreature()
                             && c.getTurnInZone() == AllZone.Phase.getTurn()
-                            && CardUtil.getColors(c).contains(Constant.Color.Green);
+                            && c.isGreen();
                 }
                 
             };
@@ -2882,7 +2882,7 @@ class CardFactory_Lands {
                     evildead.addAll(Grave.getCards());
                     evildead = evildead.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return (c.isCreature() && CardUtil.getColors(c).contains(Constant.Color.Black));
+                            return (c.isCreature() && c.isBlack());
                         }
                     });
                     
