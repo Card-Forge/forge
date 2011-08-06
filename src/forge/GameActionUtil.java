@@ -5320,6 +5320,172 @@ public class GameActionUtil
 			}// for outer
 		}// execute()
 	};// Muscles_Sliver
+	
+	public static Command Knighthood = new Command()
+	{
+
+		private static final long serialVersionUID = -6904191523315339355L;
+		CardList gloriousAnthemList = new CardList();
+
+	      public void execute()
+	      {
+	         String keyword = "First Strike";
+
+	         CardList list = gloriousAnthemList;
+	         Card c;
+	         // reset all cards in list - aka "old" cards
+	         for (int i = 0; i < list.size(); i++)
+	         {
+	            c = list.get(i);
+	            c.removeExtrinsicKeyword(keyword);
+	         }
+
+	         list.clear();
+	         PlayerZone[] zone = getZone("Knighthood");
+
+	         for (int outer = 0; outer < zone.length; outer++)
+	         {
+	            CardList creature = new CardList(zone[outer].getCards());
+	            creature = creature.getType("Creature");
+
+	            for (int i = 0; i < creature.size(); i++)
+	            {
+	               c = creature.get(i);
+	               if (!c.getKeyword().contains(keyword))
+	               {
+	                  c.addExtrinsicKeyword(keyword);
+	                  gloriousAnthemList.add(c);
+	               }
+	            }// for inner
+	         }// for outer
+	      }// execute()
+	};
+	
+	public static Command Levitation = new Command()
+	{
+
+		private static final long serialVersionUID = -6707183535529395830L;
+		CardList gloriousAnthemList = new CardList();
+
+	      public void execute()
+	      {
+	         String keyword = "Flying";
+
+	         CardList list = gloriousAnthemList;
+	         Card c;
+	         // reset all cards in list - aka "old" cards
+	         for (int i = 0; i < list.size(); i++)
+	         {
+	            c = list.get(i);
+	            c.removeExtrinsicKeyword(keyword);
+	         }
+
+	         list.clear();
+	         PlayerZone[] zone = getZone("Levitation");
+
+	         for (int outer = 0; outer < zone.length; outer++)
+	         {
+	            CardList creature = new CardList(zone[outer].getCards());
+	            creature = creature.getType("Creature");
+
+	            for (int i = 0; i < creature.size(); i++)
+	            {
+	               c = creature.get(i);
+	               if (!c.getKeyword().contains(keyword))
+	               {
+	                  c.addExtrinsicKeyword(keyword);
+	                  gloriousAnthemList.add(c);
+	               }
+	            }// for inner
+	         }// for outer
+	      }// execute()
+	   };
+
+	
+	public static Command Absolute_Grace = new Command()
+	{
+		private static final long serialVersionUID = -6904191523315339355L;
+		CardList gloriousAnthemList = new CardList();
+
+	      public void execute()
+	      {
+	         String keyword = "Protection from black";
+
+	         CardList list = gloriousAnthemList;
+	         Card c;
+	         // reset all cards in list - aka "old" cards
+	         for (int i = 0; i < list.size(); i++)
+	         {
+	            c = list.get(i);
+	            c.removeExtrinsicKeyword(keyword);
+	         }
+
+	         list.clear();
+	         PlayerZone[] zone = getZone("Absolute Grace");
+
+	         for (int outer = 0; outer < zone.length; outer++)
+	         {
+	            CardList creature = new CardList();
+	            creature.addAll(AllZone.Human_Play.getCards());
+	            creature.addAll(AllZone.Computer_Play.getCards());
+	            creature = creature.getType("Creature");
+
+	            for (int i = 0; i < creature.size(); i++)
+	            {
+	               c = creature.get(i);
+	               if (!c.getKeyword().contains(keyword))
+	               {
+	                  c.addExtrinsicKeyword(keyword);
+	                  gloriousAnthemList.add(c);
+	               }
+	            }// for inner
+	         }// for outer
+	      }// execute()
+	};
+	
+	
+	public static Command Absolute_Law = new Command()
+    {
+	      
+		private static final long serialVersionUID = -6707183535529395830L;
+		CardList gloriousAnthemList = new CardList();
+
+	      public void execute()
+	      {
+	         String keyword = "Protection from red";
+
+	         CardList list = gloriousAnthemList;
+	         Card c;
+	         // reset all cards in list - aka "old" cards
+	         for (int i = 0; i < list.size(); i++)
+	         {
+	            c = list.get(i);
+	            c.removeExtrinsicKeyword(keyword);
+	         }
+
+	         list.clear();
+	         PlayerZone[] zone = getZone("Absolute Law");
+
+	         for (int outer = 0; outer < zone.length; outer++)
+	         {
+	            CardList creature = new CardList();
+	            creature.addAll(AllZone.Human_Play.getCards());
+	            creature.addAll(AllZone.Computer_Play.getCards());
+	            creature = creature.getType("Creature");
+
+	            for (int i = 0; i < creature.size(); i++)
+	            {
+	               c = creature.get(i);
+	               if (!c.getKeyword().contains(keyword))
+	               {
+	                  c.addExtrinsicKeyword(keyword);
+	                  gloriousAnthemList.add(c);
+	               }
+	            }// for inner
+	         }// for outer
+	      }// execute()
+	};
+
 
 	public static Command Serras_Blessing = new Command()
 	{
@@ -10804,6 +10970,10 @@ public class GameActionUtil
 		commands.put("Castle", Castle);
 		commands.put("Castle_Raptors", Castle_Raptors);
 
+		commands.put("Levitation", Levitation);	
+		commands.put("Knighthood", Knighthood);
+		commands.put("Absolute_Law", Absolute_Law);
+		commands.put("Absolute_Grace", Absolute_Grace);
 		commands.put("Mobilization", Mobilization);
 		commands.put("Serras_Blessing", Serras_Blessing);
 		commands.put("Cover_of_Darkness", Cover_of_Darkness);

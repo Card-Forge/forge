@@ -1,3 +1,78 @@
+Disentomb
+B
+Sorcery
+no text
+spRaiseDead:1
+
+Raise Dead
+B
+Sorcery
+no text
+spRaiseDead:1
+
+Recover
+2 B
+Sorcery
+Draw a card.
+spRaiseDead:1
+Cantrip
+
+Return to Battle
+B
+Sorcery
+no text
+spRaiseDead:1
+
+Lich Lord of Unx
+1 U B
+Creature Zombie Wizard
+no text
+2/2
+
+Jund Battlemage
+2 R
+Creature Human Shaman
+no text
+2/2
+
+Rejuvenate
+3 G
+Sorcery
+You gain 6 life. Cycling 2.
+
+Absolute Grace
+1 W
+Enchantment
+All creatures gain protection from black.
+
+Absolute Law
+1 W
+Enchantment
+All creatures gain protection from red.
+
+Braidwood Cup
+3
+Artifact
+no text
+
+Onyx Goblet
+2 B
+Artifact
+no text
+
+Lightning Talons
+2 R
+Enchantment Aura
+Enchanted creature gets +3/+0 and has first strike.
+Enchant creature
+
+Despondency
+1 B
+Enchantment Aura
+Enchanted creature gets -2/+0.
+When this card is put into a graveyard from the battlefield, return this card to its owner's hand
+Enchant creature
+
 Snow-Covered Forest
 no cost
 Basic Snow Land Forest
@@ -68,6 +143,103 @@ Comes into play tapped.
 tap: add B
 tap: add R
 
+No-Dachi
+2
+Artifact Equipment
+Equipped creature gets +2/+0 and has first strike.
+
+Shuko
+1
+Artifact Equipment
+Equipped creature gets +1/+0.
+
+Tiger Claws
+2 G
+Enchantment Aura
+Enchanted creature gets +1/+1 and has trample.
+Enchant creature
+Flash
+
+Mageta's Boon
+1 W
+Enchantment Aura
+Enchanted creature gets +1/+2.
+Enchant creature
+Flash
+
+Buoyancy
+1 U
+Enchantment Aura
+Enchanted creature has Flying.
+Enchant creature
+Flash
+
+Feast of the Unicorn
+3 B
+Enchantment Aura
+Enchanted creature gets +4/+0.
+Enchant creature
+
+Vigilance
+W
+Enchantment Aura
+Enchanted creature has vigilance.
+Enchant creature
+
+Mask of Law and Grace
+W
+Enchantment Aura
+Enchanted creature has protection from black and from red.
+Enchant creature
+
+Benalish Heralds
+3 W
+Creature Human Soldier
+no text
+2/4
+
+Magefire Wings
+U R
+Enchantment Aura
+Enchanted creature gets +2/+0 and has flying.
+Enchant creature
+
+Benalish Hero
+1 W
+Creature Human Soldier
+no text
+1/2
+
+Sacred Nectar
+1 W
+Sorcery
+You gain 4 life.
+
+Maniacal Rage
+1 R
+Enchantment Aura
+Enchanted creature gets +2/+2 and this creature cannot block.
+Enchant creature
+
+Scavenged Weaponry
+2 B
+Enchantment Aura
+Enchanted creature gets +1/+1.
+Enchant creature
+Cantrip
+
+Shield of Duty and Reason
+W
+Enchantment Aura
+Enchanted creature has first protection from green and from blue.
+Enchant creature
+
+Reflexes
+R
+Enchantment Aura
+Enchanted creature has first strike.
+Enchant creature
+
 Dakmor Ghoul
 2 B B
 Creature Zombie
@@ -111,7 +283,7 @@ spDamageTgtCP:Count$NamedInAllYards.Kindle/Plus.2:Kindle deals X damage to targe
 
 Ire of Kaminari
 3 R
-Instant � Arcane
+Instant — Arcane
 no text
 spDamageTgtCP:Count$TypeInYourYard.Arcane:Ire of Kaminari deals damage to target creature or player equal to the number of Arcane cards in your graveyard.
 
@@ -155,7 +327,7 @@ Thermal Blast
 4 R
 Instant
 no text
-spDamageTgtC:Count$Hellbent.5.3:Thermal Blast deals 3 damage to target creature. Threshold � Thermal Blast deals 5 damage to that creature instead if seven or more cards are in your graveyard.
+spDamageTgtC:Count$Hellbent.5.3:Thermal Blast deals 3 damage to target creature. Threshold — Thermal Blast deals 5 damage to that creature instead if seven or more cards are in your graveyard.
 
 Spitting Earth
 1 R
@@ -218,7 +390,7 @@ Legendary Creature Zombie Wizard
 no text
 2/2
 
-Aedun Oakenshield
+Adun Oakenshield
 G R B
 Legendary Creature Human Knight
 no text
@@ -279,7 +451,7 @@ Legendary Creature Human Warrior
 When Stangg enters the battlefield, if Stangg is on the battlefield, put a legendary 3/4 red and green Human Warrior creature token named Stangg Twin onto the battlefield. When Stangg leaves the battlefield, exile that token. When that token leaves the battlefield, sacrifice Stangg.
 3/4
 
-Bartel Runaxe
+Bartel Runeaxe
 3 G R B
 Legendary Creature Giant Warrior
 no text
@@ -335,7 +507,7 @@ no text
 Azusa, Lost but Seeking
 2 G
 Legendary Creature Human Monk
-no text
+You may play two additional lands on each of your turns.
 1/2
 
 Temporal Spring
@@ -1111,7 +1283,7 @@ Enchanted creature has double strike.
 Enchant creature
 
 Uncontrollable Anger
-2 R
+2 R R
 Enchantment Aura
 Enchanted creature gets +2/+2 and attacks each turn if able.
 Flash
@@ -1468,12 +1640,6 @@ Sprout
 G
 Instant
 no text
-
-Recover
-2 B
-Sorcery
-Return target creature card from your graveyard to your hand. Draw a card.
-Cantrip
 
 Dunerider Outlaw
 B B
@@ -2015,11 +2181,6 @@ Shu Grain Caravan
 Creature Human Soldier
 When Shu Grain Caravan enters the battlefield, you gain 2 life.
 2/2
-
-Return to Battle
-B
-Sorcery
-Return target creature card from your graveyard to your hand.
 
 Corrupt Court Official
 1 B
@@ -2815,11 +2976,6 @@ G
 Creature Fungus Snake
 Whenever an opponent casts a blue or black spell, you may put a +1/+1 counter on Mold Adder.
 1/1
-
-Disentomb
-B
-Sorcery
-Return target creature card from your graveyard to your hand.
 
 Planar Cleansing
 3 W W W
@@ -5598,12 +5754,12 @@ When Oubliette comes into play, remove target creature and all Auras attached to
 Exploration
 G
 Enchantment
-no text
+You may play an additional land each of your turns.
 
 Fastbond
 G
 Enchantment
-no text
+You may play as many lands as you choose on your turn. Whenever you play a land other than the first land of the turn, Fastbond deals 1 damage to you.
 
 Tempest of Light
 2 W
@@ -11908,11 +12064,6 @@ Douse in Gloom
 2 B
 Instant
 Douse in Gloom deals 2 damage to target creature and you gain 2 life.
-
-Raise Dead
-B
-Sorcery
-Return target creature card from your graveyard to your hand.
 
 Infest
 1 B B

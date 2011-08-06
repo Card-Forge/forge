@@ -351,6 +351,16 @@ public class CardFactory implements NewConstants {
           
           return -1;
    }
+   
+   // spRaiseDead
+   private final int shouldSpRaiseDead(Card c){
+       ArrayList<String> a = c.getKeyword();
+       for (int i = 0; i < a.size(); i++)
+          if (a.get(i).toString().startsWith("spRaiseDead"))
+             return i;
+       
+       return -1;
+   }
     
     private final int shouldManaAbility(Card c){
         ArrayList<String> a = c.getIntrinsicKeyword();
@@ -2590,6 +2600,174 @@ public class CardFactory implements NewConstants {
        card.clearSpellAbility();
        card.addSpellAbility(spPump);
     }
+    
+    if (shouldSpRaiseDead(card)  != -1)
+    {
+       int n = shouldSpRaiseDead(card);
+       if (n != -1)
+       {
+          String parse = card.getKeyword().get(n).toString();
+          card.removeIntrinsicKeyword(parse);
+          String k[] = parse.split(":");         // charm descriptions will appear at k[2] and k[3]
+          final String kk[] = k[1].split("/");   // numCreatures = kk[0], other fields = kk[1] through kk[2]
+          int numFieldsKK = kk.length;
+          final int numCreatures = Integer.parseInt(kk[0]);
+          boolean quantifier = false;
+          String tmpTgt = "Creature";
+          
+          for (int i=2; i<=numFieldsKK; i++)
+          {
+             if (kk[(i-1)].equals ("Some"))
+             {
+                quantifier = true;
+             }
+             else   // can only be a specific creature type at his time, Goblin for goblin creatures and Tarfire
+             {
+                tmpTgt = kk[i-1];
+             }
+          }
+          
+          final String targetTypeToReturn = tmpTgt;
+          final boolean weReturnUpTo = quantifier;
+          final String spDesc[] = {"none"};
+          final String stDesc[] = {"none"};
+          
+          if (k.length > 2)
+             spDesc[0] = k[2];
+          if (k.length > 3)
+             stDesc[0] = k[3];
+          
+          final SpellAbility spell = new Spell(card)
+          {
+             private static final long serialVersionUID = 6938982619919149188L;
+             public boolean canPlayAI() {return getGraveCreatures().size() >= numCreatures;}
+
+             CardList targets;
+             public void chooseTargetAI()
+             {
+                CardList grave = getGraveCreatures();
+                targets = new CardList();
+                
+                if (targetTypeToReturn.equals ("Creature"))
+                {
+                   for (int i=0; i<numCreatures; i++)
+                   {
+                      Card c = CardFactoryUtil.AI_getBestCreature(grave);
+                      targets.add(c);
+                      grave.remove(c);
+                   }
+                }
+                else      // this is for returning Goblins and Tarfire (and Changelings ?)
+                {
+                   for (int i=0; i<numCreatures; i++)
+                   {
+                      Card c = CardFactoryUtil.getRandomCard(grave);      // getRandomCard(grave);
+                      targets.add(c);
+                      grave.remove(c);
+                   }
+                }
+             }
+
+             public void resolve()
+             {
+                if (card.getController().equals(Constant.Player.Human))
+                {
+                   CardList grave = getGraveCreatures();
+                   targets = new CardList();
+                   
+                   if (weReturnUpTo)      // this is for spells which state Return up to X target creature card
+                   {
+                      for (int i=0; i<numCreatures ; i++)
+                      {
+                         Card c = AllZone.Display.getChoiceOptional("Select card", grave.toArray());
+                         targets.add(c);
+                         grave.remove(c);
+                      }
+                   }
+                   
+                   else if (grave.size() > numCreatures)      // this is for spells which state Return target creature card
+                      for (int i=0; i<numCreatures ; i++)
+                      {
+                         Card c = AllZone.Display.getChoice("Select card", grave.toArray());
+                         targets.add(c);
+                         grave.remove(c);
+                      }
+                   else targets = grave;
+                }
+
+                PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                for (Card c : targets)
+                   if (AllZone.GameAction.isCardInZone(c, grave))
+                      AllZone.GameAction.moveTo(hand, c);
+             }//resolve()
+             
+             public boolean canPlay()
+             {
+                return getGraveCreatures().size() >= numCreatures;
+             }
+             
+             CardList getGraveCreatures()
+             {
+                PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                CardList list = new CardList(grave.getCards());
+                String cardController = card.getController();
+                
+                if (cardController.equals ("Human") || (cardController.equals ("Computer")) && (targetTypeToReturn.equals ("Creature")))
+                {
+                   list = list.getType(targetTypeToReturn);
+                }
+                else   // prevent the computer from using a Boggart Birth Rite to return a Boggart Birth Rite
+                {
+                   CardList tempList = new CardList(grave.getCards());
+                   tempList = list.getType(targetTypeToReturn);
+                   list = new CardList();
+                   for (int i=0; i<tempList.size(); i++)
+                   {
+                      if (! cardName.equals (tempList.get(i).getName()))
+                      {
+                         list.add(tempList.get(i));
+                      }
+                   }
+                }
+                return list;
+             }
+          };//SpellAbility
+          
+          if (spDesc[0].equals("none"))   // create the card descriptiopn
+          {
+             spDesc[0] = ("Return ");
+             if (weReturnUpTo)
+             {   spDesc[0] = (spDesc[0] + "up to ");   }
+             if (numCreatures > 1)
+             {   spDesc[0] = (spDesc[0] + numCreatures + " ");   }
+             spDesc[0] = (spDesc[0] + "target ");
+             if (targetTypeToReturn.equals ("Creature"))
+             {   spDesc[0] = (spDesc[0] + "creature");   }
+             else
+             {   spDesc[0] = (spDesc[0] + targetTypeToReturn);   }
+             if (numCreatures > 1)
+             {   spDesc[0] = (spDesc[0] + "s");   }
+             spDesc[0] = (spDesc[0] + " card");
+             if (numCreatures > 1)
+             {   spDesc[0] = (spDesc[0] + "s");   }
+             spDesc[0] = (spDesc[0] + " from your graveyard to your hand.");
+          }
+          
+          if (stDesc[0].equals("none"))   // create the card stack descriptiopn
+          {
+             stDesc[0] = (card.getName() + " - returns target card");
+             if (numCreatures > 1)
+             {   stDesc[0] = (stDesc[0] + "s");   }
+             stDesc[0] = (stDesc[0] + " from " + card.getController() + "'s graveyard to " + card.getController() + "'s hand.");
+          }
+          
+          spell.setDescription(spDesc[0]);
+          spell.setStackDescription(stDesc[0]);
+          card.clearSpellAbility();
+          card.addSpellAbility(spell);
+       }
+    }// spRaiseDead
 
     
     while (shouldManaAbility(card) != -1)
@@ -3873,6 +4051,7 @@ public class CardFactory implements NewConstants {
 
 
 
+    /*
     //*************** START *********** START **************************
     if(cardName.equals("Raise Dead") || cardName.equals("Disentomb") || cardName.equals("Return to Battle") ||
        cardName.equals("Recover"))
@@ -3919,7 +4098,7 @@ public class CardFactory implements NewConstants {
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
 
-
+	*/
 
 
     //*************** START *********** START **************************
@@ -16588,6 +16767,48 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     	   DamageCP.setAfterPayMana(target);
     	   card.clearSpellAbility();
     	   card.addSpellAbility(DamageCP);
+    }//*************** END ************ END **************************
+    
+    
+    //*************** START *********** START **************************
+    if(cardName.equals("Onyx Goblet"))
+    {
+      final Ability_Tap ability = new Ability_Tap(card)
+      {
+		private static final long serialVersionUID = -5726693225692494554L;
+
+		public boolean canPlayAI() {return AllZone.Phase.getPhase().equals(Constant.Phase.Main2);}
+	
+	      public void resolve()
+	        {
+	          String opponent = AllZone.GameAction.getOpponent(card.getController());
+	          AllZone.GameAction.getPlayerLife(opponent).subtractLife(1);
+	        }
+      };//SpellAbility
+      card.addSpellAbility(ability);
+      ability.setDescription("tap: Target player loses 1 life.");
+      ability.setStackDescription(card.getName() + " - Opponent loses 1 life.");
+      ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
+    }//*************** END ************ END **************************
+	
+	//*************** START *********** START **************************
+    if(cardName.equals("Braidwood Cup"))
+    {
+      final Ability_Tap ability = new Ability_Tap(card)
+      {
+		private static final long serialVersionUID = -7784976576326683976L;
+
+		public boolean canPlayAI() {return AllZone.Phase.getPhase().equals(Constant.Phase.Main2);}
+	
+	      public void resolve()
+	      {
+	          AllZone.GameAction.getPlayerLife(card.getController()).addLife(1);      
+	      }
+      };//SpellAbility
+      card.addSpellAbility(ability);
+      ability.setDescription("tap: You gain 1 life.");
+      ability.setStackDescription("Braidwood Cup -"+card.getController() + " gains 1 life.");
+      ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
     }//*************** END ************ END **************************
     
     

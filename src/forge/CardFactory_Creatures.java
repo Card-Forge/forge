@@ -15143,6 +15143,146 @@ public class CardFactory_Creatures {
 
 	     }//*************** END ************ END **************************
 	    
+	  //*************** START *********** START **************************
+	    if (cardName.equals("Jund Battlemage"))
+	    {
+	    	final SpellAbility ability = new Ability_Tap(card, "G")
+	        {
+				private static final long serialVersionUID = -2775698532993198968L;
+
+				public void resolve()
+		        {
+	                Card c = new Card();
+	                c.setName("Saproling");
+	                c.setImageName("G 1 1 Saproling");
+	
+	                c.setOwner(card.getController());
+	                c.setController(card.getController());
+	
+	                c.setManaCost("G");
+	                c.setToken(true);
+	
+	                c.addType("Creature");
+	                c.addType("Saproling");
+	
+	                c.setBaseAttack(1);
+	                c.setBaseDefense(1);
+	
+	                PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+	                play.add(c);
+	              }//resolve()
+            };
+
+
+	       final SpellAbility ability2 = new Ability_Tap(card, "B")
+	       {
+	    	    private static final long serialVersionUID = -8102068245477091900L;
+				public void resolve()
+	             {
+	              String opponent = AllZone.GameAction.getOpponent(card.getController());
+	              AllZone.GameAction.getPlayerLife(opponent).subtractLife(1);
+	            }
+	            public boolean canPlayAI()
+	            {
+	              //computer should play ability if this creature doesn't attack
+	              Combat c = ComputerUtil.getAttackers();
+	              CardList list = new CardList(c.getAttackers());
+
+	              //could this creature attack?, if attacks, do not use ability
+	              return (! list.contains(card));
+	            }
+	            };//SpellAbility
+
+
+	            card.addSpellAbility(ability);
+	            ability.setDescription("G , tap: put a 1/1 green Saproling creature token onto the battlefield.");
+	            ability.setStackDescription(card.getName() +  " - Put a 1/1 green Saproling token onto the battlefield.");
+
+	            card.addSpellAbility(ability2);
+		        ability2.setDescription("B, tap: Target player loses 1 life.");
+		        ability2.setStackDescription(card.getName() + " - Opponent loses 1 life.");
+
+	         }//*************** END ************ END **************************
+
+	    	 //*************** START *********** START **************************
+	    	 if (cardName.equals("Lich Lord of Unx"))
+	    	 {
+	    		 final SpellAbility ability = new Ability_Tap(card, "U B")
+	 	         {
+					private static final long serialVersionUID = 8909297504020264315L;
+
+					public void resolve()
+	 		        {
+	 	                Card c = new Card();
+	 	                c.setName("Zombie Wizard");
+	 	                c.setImageName("UB 1 1 Zombie Wizard");
+	 	
+	 	                c.setOwner(card.getController());
+	 	                c.setController(card.getController());
+	 	
+	 	                c.setManaCost("UB");
+	 	                c.setToken(true);
+	 	
+	 	                c.addType("Creature");
+	 	                c.addType("Zombie");
+	 	                c.addType("Wizard");
+	 	
+	 	                c.setBaseAttack(1);
+	 	                c.setBaseDefense(1);
+	 	
+	 	                PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+	 	                play.add(c);
+	 	              }//resolve()
+	              };
+	              
+	              ability.setDescription("U B, Tap: Put a 1/1 blue and black Zombie Wizard creature token onto the battlefield.");
+	              ability.setStackDescription(card.getName() + " - " + card.getController() + "puts a 1/1 blue and black Zombie Wizard creature token onto the battlefield.");
+
+	              final Ability ability2 = new Ability(card, "U U B B")
+	              {
+	            	  public boolean canPlayAI()
+	            	  {
+	            		  setTargetPlayer(Constant.Player.Human);
+	            		  return countZombies() >= 3;
+	            	  }
+	            	  
+	            	  public void resolve()
+	            	  {
+	            		  if (getTargetPlayer() != null) {
+		            		  PlayerZone lib = AllZone.getZone(Constant.Zone.Library, getTargetPlayer());
+		            		  PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, getTargetPlayer());
+		            		  
+		            		  for (int i=0;i<countZombies();i++)
+		            		  {
+		            			  Card c = lib.get(0);
+		            			  lib.remove(0);
+		            			  grave.add(c);
+		            			  
+		            			  AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1);
+		            		  }
+	            		  }
+	            	  }
+	            	  
+	            	  public int countZombies()
+	            	  {
+	            		  PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+	            		  CardList list = new CardList(play.getCards());
+	            		  list = list.getType("Zombie");
+	            		  
+	            		  return list.size();
+	            	  }
+	            	  
+	              };
+	              
+	              ability2.setDescription("U U B B: Target player loses X life and puts the top X cards of his or her library into his or her graveyard, where X is the number of Zombies you control.");
+	              ability2.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability2));
+	              
+	              card.addSpellAbility(ability);
+	              card.addSpellAbility(ability2);
+	              
+	    		 
+			 }//*************** END ************ END **************************
+	    
 	    
 	      // Cards with Cycling abilities
 	      // -1 means keyword "Cycling" not found
