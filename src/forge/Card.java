@@ -3055,6 +3055,11 @@ public class Card extends MyObservable {
     		preventNextDamage = preventNextDamage - restDamage;
     	}
     	
+    	if(getName().equals("Phyrexian Hydra")) {
+    		addCounter(Counters.M1M1, restDamage);
+    		return 0;
+    	}
+    	
     	return restDamage;
     }
     
