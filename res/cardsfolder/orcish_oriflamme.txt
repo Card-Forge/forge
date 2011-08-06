@@ -1,0 +1,9 @@
+Name:Orcish Oriflamme
+ManaCost:3 R
+Types:Enchantment
+Text:no text
+K:stPumpAll:Creature.attacking+YouCtrl:1/0:No Condition:Attacking creatures you control get +1/+0.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_oriflamme.jpg
+End
