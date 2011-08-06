@@ -1,7 +1,8 @@
 Name:Recurring Nightmare
 ManaCost:2 B
 Types:Enchantment
-Text:Sacrifice a creature, Return Recurring Nightmare to its owner's hand: Return target creature card from your graveyard to the battlefield. Activate this ability only any time you could cast a sorcery.
+Text:no text
+A:AB$Retrieve | Cost$ Sac<1/Creature> Return<1/CARDNAME> | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | Destination$ Battlefield | SorcerySpeed$ True | SpellDescription$ Return target creature card from your graveyard to the battlefield. Activate this ability only any time you could cast a sorcery.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recurring_nightmare.jpg

@@ -10498,7 +10498,7 @@ public class CardFactory implements NewConstants {
         	});//addSpellAbility
         }//*************** END ************ END **************************
 
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Recurring Nightmare")) {
         	/*
@@ -10506,7 +10506,7 @@ public class CardFactory implements NewConstants {
         	 * hand: Return target creature card from your graveyard to the
         	 * battlefield. Activate this ability only any time you could cast
         	 * a sorcery.
-        	 */
+        	 *
         	final Ability ability = new Ability(card, "0") {
         		
         		@Override
@@ -10561,7 +10561,7 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(ability);
         	ability.setBeforePayMana(target);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Mirror Universe")) {
@@ -10569,7 +10569,8 @@ public class CardFactory implements NewConstants {
         	 * Tap, Sacrifice Mirror Universe: Exchange life totals with
         	 * target opponent. Activate this ability only during your upkeep.
         	 */
-        	final Ability_Tap ability = new Ability_Tap(card, "0") {
+        	Ability_Cost abCost = new Ability_Cost("T Sac<1/CARDNAME>", cardName, true);
+            final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
         		private static final long serialVersionUID = -1409850598108909739L;
 
         		@Override
@@ -10579,7 +10580,6 @@ public class CardFactory implements NewConstants {
         			int tmp = player.getLife();
         			player.setLife(opponent.getLife(), card);
         			opponent.setLife(tmp, card);
-        			AllZone.GameAction.sacrifice(card);
         		}
 
         		@Override
@@ -11095,89 +11095,6 @@ public class CardFactory implements NewConstants {
 
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Lifeforce")) {
-        	final SpellAbility counter = new Ability(card, "G G") {
-        		
-        		@Override
-        		public boolean canPlayAI() {
-        			System.out.println("AI is pondering using "+cardName);
-        			if(AllZone.Stack.size() == 0){
-        				return false;
-        			}
-        			SpellAbility sa = AllZone.Stack.peek();
-        			return canPlay() && sa.getSourceCard().getController().equals(AllZone.HumanPlayer);
-        		}
-
-				@Override
-				public boolean canPlay() {
-					if(AllZone.Stack.size() == 0){
-        				return false;
-        			}
-					else {
-						SpellAbility sa = AllZone.Stack.peek();
-						if(sa.isAbility()) return false;
-						Card tgtCard = sa.getSourceCard();
-						if(tgtCard.isBlack()) return true;
-					}
-					return false;
-				}
-
-        		@Override
-        		public void resolve() {
-        			System.out.println("Resolving " + card.getName());
-        			SpellAbility sa = AllZone.Stack.pop();
-        			AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
-        		}
-
-        	};//Ability
-        	counter.setStackDescription(cardName+" - counter target black spell.");
-        	card.addSpellAbility(counter);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Deathgrip")) {
-        	final SpellAbility counter = new Ability(card, "B B") {
-        		
-        		@Override
-        		public boolean canPlayAI() {
-        			System.out.println("AI is pondering using "+cardName);
-        			if(AllZone.Stack.size() == 0){
-        				return false;
-        			}
-        			SpellAbility sa = AllZone.Stack.peek();
-        			return canPlay() && sa.getSourceCard().getController().equals(AllZone.HumanPlayer);
-        		}
-
-				@Override
-				public boolean canPlay() {
-					if(AllZone.Stack.size() == 0){
-        				return false;
-        			}
-					else {
-						SpellAbility sa = AllZone.Stack.peek();
-						if(sa.isAbility()) return false;
-						Card tgtCard = sa.getSourceCard();
-						if(tgtCard.isGreen()) return true;
-					}
-					return false;
-				}
-
-        		@Override
-        		public void resolve() {
-        			System.out.println("Resolving " + card.getName());
-        			SpellAbility sa = AllZone.Stack.pop();
-        			AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
-        		}
-
-        	};//Ability
-        	counter.setStackDescription(cardName+" - counter target green spell.");
-        	card.addSpellAbility(counter);
-        }//*************** END ************ END **************************
-        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Pithing Needle")) {
