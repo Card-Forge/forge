@@ -17259,9 +17259,6 @@ public class CardFactory_Creatures {
         {
         	Ability_Mana ma = new Ability_Mana(card, "tap: add an amount of G to your mana pool equal to CARDNAME's power.")
         	{
-        		/**
-				 * 
-				 */
 				private static final long serialVersionUID = 3818278127211421729L;
 
 				public String Mana()
@@ -17273,6 +17270,35 @@ public class CardFactory_Creatures {
         		}
         	};
         	card.addSpellAbility(ma);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Wolfbriar Elemental"))
+        {
+        	final Ability ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    for (int i=0;i<card.getMultiKickerMagnitude();i++) {
+                    	 CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", card, "G", new String[] {"Creature", "Wolf"},
+                                 2, 2, new String[] {""});
+                    }
+                    card.setMultiKickerMagnitude(0);
+                }
+            };
+            StringBuilder sb = new StringBuilder();
+            sb.append("When ");
+            sb.append(cardName);
+            sb.append(" enters the battlefield, put a 2/2 green Wolf creature token onto the battlefield for each time it was kicked.");
+            ability.setStackDescription(sb.toString());
+            
+            final Command comesIntoPlay = new Command() {
+				private static final long serialVersionUID = -4362419545718133008L;
+
+				public void execute() {
+                    AllZone.Stack.add(ability);
+                }
+            };
+            card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
         
         // Cards with Cycling abilities

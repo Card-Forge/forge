@@ -27,7 +27,8 @@ public class MagicStack extends MyObservable
 			  {
 				  public void resolve()
 				  {
-					  this.getSourceCard().addXManaCostPaid(1);
+					  Card crd = this.getSourceCard();
+					  crd.addXManaCostPaid(1);
 				  }
 			  };
 			  

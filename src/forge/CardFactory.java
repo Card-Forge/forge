@@ -1379,6 +1379,7 @@ public class CardFactory implements NewConstants {
                 final boolean TgtPlayer[] = {false};
                 final boolean TgtCP[] = {false};
                 final boolean TgtOpp[] = {false};
+                final boolean usesXCost[] = {false};
                 
                 if(k[0].contains("CP")) TgtCP[0] = true;
                 else if(k[0].contains("P")) TgtPlayer[0] = true;
@@ -1395,7 +1396,11 @@ public class CardFactory implements NewConstants {
                         String kk[] = x.split("\\$");
                         NumDmgX[0] = kk[1];
                     }
-                    
+                    if (x.equals("Count$xPaid"))
+                    {
+                    	usesXCost[0] = true;
+                    }
+ 
                 } else if(k[1].matches("[0-9][0-9]?")) NumDmg[0] = Integer.parseInt(k[1]);
                 
                 //drawbacks and descriptions
@@ -1426,15 +1431,20 @@ public class CardFactory implements NewConstants {
                         return 0;
                     }
                     
+                    public int getNumXDamage()
+                    {
+                    	return card.getXManaCostPaid();
+                    }
+                    
                     boolean shouldTgtP() {
                         PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
                         CardList hand = new CardList(compHand.getCards());
                         
                         if(hand.size() >= 7) // anti-discard-at-EOT
-                        return true;
+                        	return true;
                         
                         if(AllZone.Human_Life.getLife() < (10 - damage)) // if damage from this spell would drop the human to less than 10 life
-                        return true;
+                        	return true;
                         
                         return false;
                     }
@@ -1479,6 +1489,9 @@ public class CardFactory implements NewConstants {
                     public boolean canPlayAI() {
                         damage = getNumDamage();
                         
+                        if (damage == 0)
+                        	return false;
+                        
                         if(TgtCP[0] == true) {
                             if(shouldTgtP() == true) {
                                 setTargetPlayer(Constant.Player.Human);
@@ -1511,6 +1524,8 @@ public class CardFactory implements NewConstants {
                     @Override
                     public void resolve() {
                         damage = getNumDamage();
+                        if (usesXCost[0])
+                        	damage = getNumXDamage();
                         String tgtP = "";
                         
                         if(TgtOpp[0] == true) setTargetPlayer(AllZone.GameAction.getOpponent(card.getController()));

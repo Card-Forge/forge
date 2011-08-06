@@ -1,3 +1,17 @@
+Blaze
+X R
+Sorcery
+no text
+spDamageTgtCP:X:Blaze deals X damage to target creature or player.
+SVar:X:Count$xPaid
+
+Wolfbriar Elemental
+2 G G
+Creature Elemental
+When Wolfbriar Elemental enters the battlefield, put a 2/2 green Wolf creature token onto the battlefield for each time it was kicked.
+4/4
+Multikicker G
+
 Isochron Scepter
 2
 Artifact

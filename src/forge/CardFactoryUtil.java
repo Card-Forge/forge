@@ -2317,9 +2317,22 @@ public class CardFactoryUtil {
         final String[] sq;
         sq = l[0].split("\\.");
         
+        if(sq[0].contains("xPaid")) {
+        	if (c.getController().equals(Constant.Player.Human)) {
+        		return c.getXManaCostPaid();
+        	}
+        	else {
+        		int dam = ComputerUtil.getAvailableMana().size()- CardUtil.getConvertedManaCost(c);
+        		if (dam < 0) dam = 0;
+        		return dam;
+        	}
+        }
+        
         CardList someCards = new CardList();
         
         //Complex counting methods
+        
+        
         
         // Count$Domain
         if(sq[0].contains("Domain")) {
