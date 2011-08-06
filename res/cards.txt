@@ -13673,13 +13673,13 @@ Enchantment
 At the beginning of your upkeep, if you control 10 or more Elves, you win the game.
 
 Treetop Village
-G
+no cost
 Land
 Treetop Village comes into play tapped.
 tap: add G
 
 Forbidding Watchtower
-W
+no cost
 Land
 Forbidding Watchtower comes into play tapped.
 tap: add W

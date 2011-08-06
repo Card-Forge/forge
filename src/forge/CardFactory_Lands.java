@@ -198,6 +198,7 @@ class CardFactory_Lands {
 	          c.removeIntrinsicKeyword("Flying");
 	          c.removeType("Creature");
 	          c.removeType("Faerie");
+	          c.setManaCost("");
 	        }
 	      };
 
@@ -220,11 +221,12 @@ class CardFactory_Lands {
 	            c.addIntrinsicKeyword("Flying");
 	            c.addType("Creature");
 	            c.addType("Faerie");
+	            c.setManaCost("U");
 	          }
 	          AllZone.EndOfTurn.addUntil(eot1);
 	        }
 	      };//SpellAbility
-	      card.setManaCost("U");
+//	      card.setManaCost("U");
 
 	      card.clearSpellKeepManaAbility();
 	      card.addSpellAbility(a1);
@@ -237,7 +239,6 @@ class CardFactory_Lands {
 		  };
 
 	      a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
-
 	    }//*************** END ************ END **************************
 
 
@@ -266,6 +267,7 @@ class CardFactory_Lands {
 	          c.setBaseDefense(0);
 	          c.removeType("Creature");
 	          c.removeType("Soldier");
+	          c.setManaCost("");
 	        }
 	      };
 
@@ -287,6 +289,7 @@ class CardFactory_Lands {
 	          {
 	            c.addType("Creature");
 	            c.addType("Soldier");
+	            c.setManaCost("W");
 	          }
 	          AllZone.EndOfTurn.addUntil(eot1);
 	        }
@@ -303,7 +306,6 @@ class CardFactory_Lands {
 	      };
 
 	      a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
-
 	    }//*************** END ************ END **************************
 
 
@@ -334,6 +336,7 @@ class CardFactory_Lands {
 	          c.removeType("Creature");
 	          c.removeType("Ape");
 	          c.removeIntrinsicKeyword("Trample");
+	          c.setManaCost("");
 	        }
 	      };
 
@@ -356,6 +359,7 @@ class CardFactory_Lands {
 	            c.addType("Creature");
 	            c.addType("Ape");
 	            c.addIntrinsicKeyword("Trample");
+	            c.setManaCost("G");
 	          }
 	          AllZone.EndOfTurn.addUntil(eot1);
 	        }
@@ -373,8 +377,9 @@ class CardFactory_Lands {
 		  };
 
 	      a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
-
 	    }//*************** END ************ END **************************
+	    
+	    
 	    
 	    //*************** START *********** START **************************
 	    else if(cardName.equals("Blinkmoth Nexus"))
@@ -2951,7 +2956,7 @@ class CardFactory_Lands {
 
 	              c.setBaseAttack(1);
 	              c.setBaseDefense(1);
-	              c.setManaCost("B");
+	              c.setManaCost("B G");
 
 	              //to prevent like duplication like "Creature Creature"              
 	                if(!c.getType().contains("Creature"))
@@ -2968,8 +2973,9 @@ class CardFactory_Lands {
 	          card.addSpellAbility(a1);
 	          a1.setStackDescription(card +" becomes a black and green Plant Zombie creature with power and toughness each equal to the number of creature cards in your graveyard until EOT");
 	          a1.setDescription("3 B G: Until end of turn, Svogthos, the Restless Tomb becomes a black and green Plant Zombie creature with This creature's power and toughness are each equal to the number of creature cards in your graveyard. It's still a land.");
-
 	        }//*************** END ************ END **************************
+	        
+	        
 	 
 	        //*************** START *********** START **************************
 	        else if(cardName.equals("Ghitu Encampment"))
