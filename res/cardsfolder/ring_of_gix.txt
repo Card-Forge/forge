@@ -1,0 +1,9 @@
+Name:Ring of Gix
+ManaCost:3
+Types:Artifact
+Text:no text
+K:Echo:3
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ring_of_gix.jpg
+End

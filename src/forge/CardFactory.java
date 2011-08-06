@@ -9109,7 +9109,7 @@ public class CardFactory implements NewConstants {
         
     
         //*****************************START*******************************
-        else if(cardName.equals("Icy Manipulator")) {
+        else if(cardName.equals("Icy Manipulator") || cardName.equals("Ring of Gix")) {
            /* The Rules state that this can target a tapped card, but it won't do anything */
            
            final Ability_Tap ability = new Ability_Tap(card, "1") {
