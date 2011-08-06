@@ -100,7 +100,7 @@ public class ComputerUtil_Block2
       {
          //do not block a non-flyer with a flyer
          if((! c.get(i).getKeyword().contains("Flying")) || attacker.getKeyword().contains("Flying"))
-         return c.get(i);
+        	 return c.get(i);
       }
       return null;
    }//tradeSingleBlock()
@@ -223,7 +223,7 @@ public class ComputerUtil_Block2
          //the computer blocks 50% of the time or if the computer would lose the game
          shouldBlock = random.nextBoolean() || blockersLife <= sumUnblockedAttackers(combat);
 
-
+         
          testing("shouldBlock - " +shouldBlock);
          c = null;
 
@@ -231,14 +231,16 @@ public class ComputerUtil_Block2
          //safe block - attacker dies, blocker lives
          //if there is only one attacker it might be a trap
          //if holding a Giant Growth and a 2/2 attacking into a 3/3
-         if(shouldBlock)
-         {
-            c = safeSingleBlock(attackers.get(i));
-            if(c != null)
-            testing("safe");
+         Random random = new Random();
+         int randomInt = random.nextInt(100);
+         
+         if (randomInt >= 10)
+         { 	 
+	         c = safeSingleBlock(attackers.get(i));
+	         if(c != null)
+	        	 testing("safe");
          }
-
-         if(c == null && shouldBlock)
+         if(c == null && randomInt >= 15)
          {
             //shield block - attacker lives, blocker lives
             c = shieldSingleBlock(attackers.get(i));
