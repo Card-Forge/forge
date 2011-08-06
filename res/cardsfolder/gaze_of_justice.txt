@@ -1,0 +1,9 @@
+Name:Gaze of Justice
+ManaCost:W
+Types:Sorcery
+Text:no text
+A:SP$Bounce | Cost$ W tapXType<3/Creature.White> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Destination$ Exile | SpellDescription$ Exile target creature.
+A:SP$Bounce | Cost$ 5 W tapXType<3/Creature.White> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Destination$ Exile | Flashback$ True | CostDesc$ Flashback 5 W | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gaze_of_justice.jpg
+End

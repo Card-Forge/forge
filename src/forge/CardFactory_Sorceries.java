@@ -1987,7 +1987,7 @@ public class CardFactory_Sorceries {
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if (cardName.equals("Morbid Hunger")) {
             final SpellAbility spell = new Spell(card) {
@@ -2142,7 +2142,7 @@ public class CardFactory_Sorceries {
             
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Erratic Explosion")) {
