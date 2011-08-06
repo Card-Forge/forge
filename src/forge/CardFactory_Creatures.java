@@ -19614,6 +19614,72 @@ public class CardFactory_Creatures {
         	card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Dwarven Demolition Team")) {
+            final Ability_Tap ability = new Ability_Tap(card) {
+				private static final long serialVersionUID = -4635857814967376792L;
+				
+				@Override
+                public boolean canPlayAI() {
+					CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
+					human = human.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.getType().contains("Wall");
+                        }
+                    });
+					
+					CardListUtil.sortAttack(human);
+                    CardListUtil.sortFlying(human);
+                    
+                    if (0 < human.size()) setTargetCard(human.get(0));
+                    
+                    return 0 < human.size();
+				}//canPlayAI()
+
+				@Override
+                public void resolve() {
+                    Card c = getTargetCard();
+                    
+                    if (AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                        AllZone.GameAction.destroy(c);
+                    }
+                }//resolve()
+            };//SpellAbility
+            
+            Input target = new Input() {
+				private static final long serialVersionUID = 3550520287933502665L;
+
+				@Override
+                public void showMessage() {
+                    AllZone.Display.showMessage("Select target Wall to destroy");
+                    ButtonUtil.enableOnlyCancel();
+                }
+                
+                @Override
+                public void selectButtonCancel() {
+                    stop();
+                }
+                
+                @Override
+                public void selectCard(Card c, PlayerZone zone) {
+                    if (!CardFactoryUtil.canTarget(card, c)) {
+                        AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
+                    } else if (c.isCreature() && zone.is(Constant.Zone.Play) && c.getType().contains("Wall")) {
+                        //tap ability
+                        card.tap();
+                        
+                        ability.setTargetCard(c);
+                        AllZone.Stack.add(ability);
+                        stop();
+                    }
+                }//selectCard()
+            };//Input
+            
+            card.addSpellAbility(ability);
+            ability.setDescription("tap: Destroy target Wall.");
+            ability.setBeforePayMana(target);
+        }//*************** END ************ END **************************
+        
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

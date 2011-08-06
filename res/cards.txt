@@ -1,3 +1,9 @@
+Dwarven Demolition Team
+2 R
+Creature Dwarf
+no text
+1/1
+
 Oracle of Mul Daya
 3 G
 Creature Elf Shaman
