@@ -50,6 +50,7 @@ public class Gui_Quest extends JFrame {
     private ButtonGroup       oppGroup           = new ButtonGroup();
     private static JCheckBox  smoothLandCheckBox = new JCheckBox("", true);
     private static JCheckBox  resizeCheckbox     = new JCheckBox("", true);
+    private static JCheckBox  millLoseCheckBox 	 = new JCheckBox("", true);
     
     public static void main(String[] args) {
         new Gui_Quest();
@@ -72,7 +73,7 @@ public class Gui_Quest extends JFrame {
         //center window on the screen
         Dimension screen = this.getToolkit().getScreenSize();
         setBounds(screen.width / 4, 50, //position
-                500, 500); //size
+                500, 540); //size
         
         //if user closes this window, go back to "Quest Options" screen
         this.addWindowListener(new WindowAdapter() {
@@ -140,7 +141,7 @@ public class Gui_Quest extends JFrame {
         jPanel2.setBorder(titledBorder1);
         jPanel2.setBounds(new Rectangle(39, 173, 441, 173));
         jPanel2.setLayout(null);
-        playGameButton.setBounds(new Rectangle(150, 418, 161, 37));
+        playGameButton.setBounds(new Rectangle(150, 446, 161, 37));
         playGameButton.setFont(new java.awt.Font("Dialog", 0, 18));
         playGameButton.setText("Play Game");
         playGameButton.addActionListener(new java.awt.event.ActionListener() {
@@ -163,6 +164,9 @@ public class Gui_Quest extends JFrame {
         //smoothLandCheckBox.setSelected(true);
         resizeCheckbox.setText("Resizable Game Area");
         resizeCheckbox.setBounds(new Rectangle(154, 354, 156, 24));
+        millLoseCheckBox.setText("Milling = Loss Condition");
+        millLoseCheckBox.setBounds(new Rectangle(154, 414, 165, 25));
+        
         //resizeCheckbox.setSelected(true);
         this.getContentPane().add(rankLabel, null);
         this.getContentPane().add(jLabel1, null);
@@ -177,6 +181,7 @@ public class Gui_Quest extends JFrame {
         this.getContentPane().add(playGameButton, null);
         this.getContentPane().add(smoothLandCheckBox, null);
         this.getContentPane().add(resizeCheckbox, null);
+        this.getContentPane().add(millLoseCheckBox, null);
         this.getContentPane().add(jPanel2, null);
         oppGroup.add(oppOneRadio);
         oppGroup.add(oppTwoRadio);
@@ -221,6 +226,11 @@ public class Gui_Quest extends JFrame {
         
         if(smoothLandCheckBox.isSelected()) Constant.Runtime.Smooth[0] = true;
         else Constant.Runtime.Smooth[0] = false;
+        
+        if(millLoseCheckBox.isSelected())
+        	Constant.Runtime.Mill[0] = true;
+        else
+        	Constant.Runtime.Mill[0] = false;
         
         AllZone.GameAction.newGame(human, computer);
         AllZone.Display.setVisible(true);
