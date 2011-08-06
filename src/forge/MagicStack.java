@@ -312,7 +312,7 @@ public class MagicStack extends MyObservable {
 					};
 					
 					Card crd = sa.getSourceCard();
-					if (sp.getSourceCard().getController().equals(AllZone.HumanPlayer)) {
+					if (sp.getSourceCard().getController().isHuman()) {
 						AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Pay X cost for " +
 										sp.getSourceCard().getName() + " (X=" + crd.getXManaCostPaid() + ")\r\n", 
 												ability.getManaCost(), paidCommand, unpaidCommand, true));
@@ -536,7 +536,7 @@ public class MagicStack extends MyObservable {
 
 						@Override
 						public void selectCard(Card c, PlayerZone zone) {
-							if(zone.is(Constant.Zone.Battlefield) && c.getController().equals(AllZone.HumanPlayer)
+							if(zone.is(Constant.Zone.Battlefield) && c.getController().isHuman()
 									&& c.isLand()) {
 								AllZone.GameAction.sacrifice(c);
 								stop();

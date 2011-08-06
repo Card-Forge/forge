@@ -790,7 +790,7 @@ public class CardFactory_Sorceries {
 
                         GuiUtils.getChoice("Revealing top " + Count + " cards of library: ", cards.toArray());
                         //Human chooses
-                        if(card.getController().equals(AllZone.ComputerPlayer)) {
+                        if(card.getController().isComputer()) {
                         	for(int i = 0; i < Count; i++) {
                         		if(stop == false) {
                         			choice = GuiUtils.getChoiceOptional("Choose cards to put into the first pile: ", cards.toArray());
@@ -1825,7 +1825,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public void selectCard(Card c, PlayerZone zone) {
                     if(c.isLand() && zone.is(Constant.Zone.Battlefield)
-                            && c.getController().equals(AllZone.HumanPlayer)
+                            && c.getController().isHuman()
                             /*&& c.getName().equals(humanBasic.get(count))*/
                             && c.getType().contains(humanBasic.get(count)) 
                             /*&& !saveList.contains(c) */) {
@@ -1922,7 +1922,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
                     Player player = card.getController();
-                    if(player.equals(AllZone.HumanPlayer)) humanResolve();
+                    if(player.isHuman()) humanResolve();
                     else computerResolve();
                 }
                 
@@ -2939,7 +2939,7 @@ public class CardFactory_Sorceries {
 					int size = graveList.size();
 					int damage = 0;
 					
-					if( player.equals(AllZone.HumanPlayer)) {
+					if( player.isHuman()) {
 						for(int i = 0; i < size; i++) {
 							Object o = GuiUtils.getChoice("Remove from game", graveList.toArray());
 							if(o == null) break;
@@ -3249,7 +3249,7 @@ public class CardFactory_Sorceries {
         			printCardTargets();
         			Log.debug("Fireball", "Fireball - player targets: ");
         			printPlayerTargets();
-        			if(card.getController().equals(AllZone.ComputerPlayer)) {
+        			if(card.getController().isComputer()) {
         				StringBuilder sb = new StringBuilder();
         				sb.append(cardName+" - Computer causes "+damage+" to:\n\n");
         				for(int i = 0; i < targets.size(); i++) {
@@ -3441,7 +3441,7 @@ public class CardFactory_Sorceries {
         			int maxCards = AllZoneUtil.getPlayerHand(player).size();
         			if(numCards != 0) {
         				numCards = Math.min(numCards, maxCards);
-        			if(player.equals(AllZone.HumanPlayer)) {
+        			if(player.isHuman()) {
         				AllZone.InputControl.setInput(CardFactoryUtil.input_discardRecall(numCards, card, this));
         			}
            			}

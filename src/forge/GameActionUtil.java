@@ -210,7 +210,7 @@ public class GameActionUtil {
 
                         if (cascadedCard != null && !cascadedCard.isUnCastable()) {
 
-                            if (cascadedCard.getController().equals(AllZone.HumanPlayer)) {
+                            if (cascadedCard.getController().isHuman()) {
                                 StringBuilder title = new StringBuilder();
                                 title.append(cascCard.getName()).append(" - Cascade Ability");
                                 StringBuilder question = new StringBuilder();
@@ -270,11 +270,11 @@ public class GameActionUtil {
 				Computer_ThrummingStone = Computer_ThrummingStone.getName("Thrumming Stone");
 						for (int i=0;i<Human_ThrummingStone.size();i++)
 						{
-							if(c.getController().equals(AllZone.HumanPlayer)) c.addExtrinsicKeyword("Ripple:4");
+							if(c.getController().isHuman()) c.addExtrinsicKeyword("Ripple:4");
 						}
 						for (int i=0;i<Computer_ThrummingStone.size();i++)
 						{ 
-							if(c.getController().equals(AllZone.ComputerPlayer)) c.addExtrinsicKeyword("Ripple:4");
+							if(c.getController().isComputer()) c.addExtrinsicKeyword("Ripple:4");
 						}
 		 		        ArrayList<String> a = c.getKeyword();
 		 		        for(int x = 0; x < a.size(); x++)
@@ -320,7 +320,7 @@ public class GameActionUtil {
 							for(int i = 0; i < RippleMax; i++) {
 						if(RippledCards[i] != null && !RippledCards[i].isUnCastable()) {
 
-							if(RippledCards[i].getController().equals(AllZone.HumanPlayer)) {
+							if(RippledCards[i].getController().isHuman()) {
 					        	Object[] possibleValues = {"Yes", "No"};
 					        	Object q = JOptionPane.showOptionDialog(null, "Cast " + RippledCards[i].getName() + "?", "Ripple", 
 					        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
@@ -499,7 +499,7 @@ public class GameActionUtil {
             };//Input
 
 			ability.setBeforePayMana(runtime);
-			if (controller.equals(AllZone.HumanPlayer))
+			if (controller.isHuman())
 				AllZone.GameAction.playSpellAbility(ability);
 			else {
 				ability.chooseTargetAI();
@@ -594,7 +594,7 @@ public class GameActionUtil {
 							} else target = AllZone.HumanPlayer; // check for target of spell/abilities should be here
 							PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, target);
 							CardList fullHand = new CardList(hand.getCards());
-							if(fullHand.size() > 0 && target.equals(AllZone.ComputerPlayer)) GuiUtils.getChoice(
+							if(fullHand.size() > 0 && target.isComputer()) GuiUtils.getChoice(
 									"Revealing hand", fullHand.toArray());
 							CardList discard = new CardList(hand.getCards());
 							discard = discard.filter(new CardListFilter() {
@@ -896,7 +896,7 @@ public class GameActionUtil {
 			final Ability destroyAbility = new Ability(c, c.getTabernacleUpkeepCost()) {
 				@Override
 				public void resolve() {
-					if(c.getController().equals(AllZone.HumanPlayer)) {
+					if(c.getController().isHuman()) {
 						payManaDuringAbilityResolve(sb.toString(), c.getTabernacleUpkeepCost(), paidCommand, unpaidCommand);
 					}
 					else
@@ -952,7 +952,7 @@ public class GameActionUtil {
 			final Ability upkeepAbility = new Ability(c, c.getMagusTabernacleUpkeepCost()) {
 				@Override
 				public void resolve() {
-					if(c.getController().equals(AllZone.HumanPlayer)) {
+					if(c.getController().isHuman()) {
 						payManaDuringAbilityResolve(sb.toString(), c.getMagusTabernacleUpkeepCost(), paidCommand, unpaidCommand);
 					}
 					else
@@ -1011,7 +1011,7 @@ public class GameActionUtil {
 			final Ability upkeepAbility = new Ability(c, c.getUpkeepCost()) {
 				@Override
 				public void resolve() {
-					if(c.getController().equals(AllZone.HumanPlayer)) {
+					if(c.getController().isHuman()) {
 						payManaDuringAbilityResolve(sb.toString(), c.getUpkeepCost(), paidCommand, unpaidCommand);
 					}
 					else
@@ -1058,7 +1058,7 @@ public class GameActionUtil {
 				final Ability sacAbility = new Ability(c, "0") {
 					@Override
 					public void resolve() {
-						if(c.getController().equals(AllZone.HumanPlayer)) {
+						if(c.getController().isHuman()) {
 							payManaDuringAbilityResolve(sb.toString(), c.getEchoCost(), paidCommand, unpaidCommand);
 						}
 						else //computer
@@ -1165,7 +1165,7 @@ public class GameActionUtil {
 			final Ability upkeepAbility = new Ability(c, c.getUpkeepCost()) {
 				@Override
 				public void resolve() {
-					if(c.getController().equals(AllZone.HumanPlayer)) {
+					if(c.getController().isHuman()) {
 						payManaDuringAbilityResolve(sb.toString(), c.getUpkeepCost(), paidCommand, unpaidCommand);
 					} 
 					else //computer
@@ -1224,7 +1224,7 @@ public class GameActionUtil {
 			final Ability upkeepAbility = new Ability(c, c.getUpkeepCost()) {
 				@Override
 				public void resolve() {
-					if(c.getController().equals(AllZone.HumanPlayer)) {
+					if(c.getController().isHuman()) {
 						payManaDuringAbilityResolve(sb.toString(), c.getUpkeepCost(), paidCommand, unpaidCommand);
 					} 
 					else //computer
@@ -1288,7 +1288,7 @@ public class GameActionUtil {
 			final Ability upkeepAbility = new Ability(c, c.getUpkeepCost()) {
 				@Override
 				public void resolve() {
-					if(c.getController().equals(AllZone.HumanPlayer)) {
+					if(c.getController().isHuman()) {
 						payManaDuringAbilityResolve(sb.toString(), c.getUpkeepCost(), paidCommand, unpaidCommand);
 
 					} 
@@ -1335,7 +1335,7 @@ public class GameActionUtil {
 			final Ability sacrificeCreature = new Ability(abyss, "") {
 				@Override
 				public void resolve() {
-					if(player.equals(AllZone.HumanPlayer)) {
+					if(player.isHuman()) {
 						if(abyss_getTargets(player, abyss).size() > 0) {
 							AllZone.InputControl.setInput( new Input() {
 								private static final long serialVersionUID = 4820011040853968644L;
@@ -1346,7 +1346,7 @@ public class GameActionUtil {
 								public void selectCard(Card selected, PlayerZone zone) {
 									//probably need to restrict by controller also
 									if(selected.isCreature() && !selected.isArtifact() && CardFactoryUtil.canTarget(abyss, selected)
-											&& zone.is(Constant.Zone.Battlefield) && zone.getPlayer().equals(AllZone.HumanPlayer)) {
+											&& zone.is(Constant.Zone.Battlefield) && zone.getPlayer().isHuman()) {
 										AllZone.GameAction.destroyNoRegeneration(selected);
 										stop();
 									}
@@ -1489,7 +1489,7 @@ public class GameActionUtil {
 					CardList artifacts = AllZoneUtil.getPlayerCardsInPlay(player);
 					artifacts = artifacts.filter(AllZoneUtil.artifacts);
 					
-					if(player.equals(AllZone.HumanPlayer)) {
+					if(player.isHuman()) {
 						AllZone.InputControl.setInput( new Input() {
 							private static final long serialVersionUID = -1698502376924356936L;
 							public void showMessage() {
@@ -1503,7 +1503,7 @@ public class GameActionUtil {
 							public void selectCard(Card artifact, PlayerZone zone) {
 								//probably need to restrict by controller also
 								if(artifact.isArtifact() && zone.is(Constant.Zone.Battlefield)
-										&& zone.getPlayer().equals(AllZone.HumanPlayer)) {
+										&& zone.getPlayer().isHuman()) {
 									AllZone.GameAction.sacrifice(artifact);
 									stop();
 								}
@@ -1555,7 +1555,7 @@ public class GameActionUtil {
 					//TODO: this should handle the case where you sacrifice 2 LOTPs to each other
 					CardList creatures = AllZoneUtil.getCreaturesInPlay(player);
 					creatures.remove(c);
-					if(player.equals(AllZone.HumanPlayer)) {
+					if(player.isHuman()) {
         				AllZone.InputControl.setInput(CardFactoryUtil.input_sacrificePermanent(creatures, c.getName()+" - Select a creature to sacrifice."));
         			}
 					else { //computer
@@ -1617,7 +1617,7 @@ public class GameActionUtil {
 					if(creatures.size() > 0) {
 						CardListUtil.sortAttackLowFirst(creatures);
 						int power = creatures.get(0).getNetAttack();
-						if(player.equals(AllZone.HumanPlayer)) {
+						if(player.isHuman()) {
 							AllZone.InputControl.setInput(CardFactoryUtil.input_destroyNoRegeneration(getLowestPowerList(creatures), "Select creature with power: "+power+" to sacrifice."));
 						}
 						else { //computer
@@ -1642,7 +1642,7 @@ public class GameActionUtil {
 					CardList options = getLowestPowerList(original);
 					CardList humanCreatures = options.filter(new CardListFilter() {
 						public boolean addCard(Card c) {
-							return c.getController().equals(AllZone.HumanPlayer);
+							return c.getController().isHuman();
 						}
 					});
 					if(humanCreatures.isEmpty()) {
@@ -1698,7 +1698,7 @@ public class GameActionUtil {
 					} //end resolve()
 			}; //end noPay ability
 			
-            if (c.getController().equals(AllZone.HumanPlayer)) {
+            if (c.getController().isHuman()) {
                 String question = "Pay Demonic Hordes upkeep cost?";
                 if (GameActionUtil.showYesNoDialog(c, question)) {
                     final Ability pay = new Ability(c, "0") {
@@ -1726,7 +1726,7 @@ public class GameActionUtil {
                 }
             } //end human
 			else { //computer
-				if((c.getController().equals(AllZone.ComputerPlayer) && (ComputerUtil.canPayCost(noPay)))) {
+				if((c.getController().isComputer() && (ComputerUtil.canPayCost(noPay)))) {
 					final Ability computerPay = new Ability(c, "0") {
 						private static final long serialVersionUID = 4820011440852868644L;
 						public void resolve() {
@@ -1778,7 +1778,7 @@ public class GameActionUtil {
                     if (validTargets.size() == 0)
                         return;
 
-                    if (player.equals(AllZone.HumanPlayer))
+                    if (player.isHuman())
                     {
                         Object o = GuiUtils.getChoiceOptional("Select creature for Wall of Reverence life gain", validTargets.toArray());
                         if (o != null) {
@@ -2127,7 +2127,7 @@ public class GameActionUtil {
 		sb.append(c.getName()).append(" - add one mana of any color to your mana pool.");
 		ability.setStackDescription(sb.toString());
 
-		if(c.getController().equals(AllZone.HumanPlayer)) {
+		if(c.getController().isHuman()) {
 			if(showLandfallDialog(c)) AllZone.Stack.addSimultaneousStackEntry(ability);
 		}
 		else{
@@ -2307,7 +2307,7 @@ public class GameActionUtil {
                 	 return;
                  }
                  
-                 if(src.getController().equals(AllZone.HumanPlayer)) {
+                 if(src.getController().isHuman()) {
                      Object o = GuiUtils.getChoiceOptional("Select target card", list.toArray());
                      if(o != null) {
                          ability.setTargetCard((Card) o);
@@ -2511,7 +2511,7 @@ public class GameActionUtil {
 					final Player player = crd.getController();
 					final Player opponent = player.getOpponent();
 
-					if(opponent.equals(AllZone.HumanPlayer)) 
+					if(opponent.isHuman()) 
 						AllZone.HumanPlayer.addPoisonCounters(poison);
 					else
 						AllZone.ComputerPlayer.addPoisonCounters(poison);
@@ -2611,7 +2611,7 @@ public class GameActionUtil {
 
 	private static void playerCombatDamage_Rootwater_Thief(Card c) {
 		SpellAbility[] sa = c.getSpellAbility();
-		if(c.getController().equals(AllZone.HumanPlayer)) AllZone.GameAction.playSpellAbility(sa[2]); //because sa[1] is the kpump u: flying
+		if(c.getController().isHuman()) AllZone.GameAction.playSpellAbility(sa[2]); //because sa[1] is the kpump u: flying
 		else ComputerUtil.playNoStack(sa[2]);
 
 
@@ -2619,14 +2619,14 @@ public class GameActionUtil {
 
 	private static void playerCombatDamage_Treva(Card c) {
 		SpellAbility[] sa = c.getSpellAbility();
-		if(c.getController().equals(AllZone.HumanPlayer)) AllZone.GameAction.playSpellAbility(sa[1]);
+		if(c.getController().isHuman()) AllZone.GameAction.playSpellAbility(sa[1]);
 		else ComputerUtil.playNoStack(sa[1]);
 
 	}
 
 	private static void playerCombatDamage_Rith(Card c) {
 		SpellAbility[] sa = c.getSpellAbility();
-		if(c.getController().equals(AllZone.HumanPlayer)) AllZone.GameAction.playSpellAbility(sa[1]);
+		if(c.getController().isHuman()) AllZone.GameAction.playSpellAbility(sa[1]);
 		else ComputerUtil.playNoStack(sa[1]);
 	}
 	
@@ -4012,7 +4012,7 @@ public class GameActionUtil {
 						CardList graveyardCreatures = AllZoneUtil.getPlayerTypeInGraveyard(player, "Creature");
 
 						if(graveyardCreatures.size() >= 4) {
-							if(player.equals(AllZone.HumanPlayer)) {
+							if(player.isHuman()) {
 								Object o = GuiUtils.getChoiceOptional("Pick a creature to return to hand",
 										graveyardCreatures.toArray());
 								if(o != null) {
@@ -4021,7 +4021,7 @@ public class GameActionUtil {
 									AllZone.GameAction.moveToHand(card);
 								}
 							} 
-							else if(player.equals(AllZone.ComputerPlayer)) {
+							else if(player.isComputer()) {
 								Card card = graveyardCreatures.get(0);
 								AllZone.GameAction.moveToHand(card);
 							}
@@ -4214,7 +4214,7 @@ public class GameActionUtil {
 						CardList graveyardCreatures = AllZoneUtil.getPlayerTypeInGraveyard(player, "Creature");
 
 						if(AllZoneUtil.compareTypeAmountInGraveyard(player, "Creature") > 0) {
-							if(player.equals(AllZone.HumanPlayer)) {
+							if(player.isHuman()) {
 								Object o = GuiUtils.getChoiceOptional("Pick a creature to return to hand",
 										graveyardCreatures.toArray());
 								if(o != null) {
@@ -4223,7 +4223,7 @@ public class GameActionUtil {
 									AllZone.GameAction.moveToHand(card);
 								}
 							} 
-							else if(player.equals(AllZone.ComputerPlayer)) {
+							else if(player.isComputer()) {
 								Card card = graveyardCreatures.get(0);
 
 								AllZone.GameAction.moveToHand(card);
@@ -4890,7 +4890,7 @@ public class GameActionUtil {
 			ability = new Ability(crd, "0") {
 				@Override
 				public void resolve() {
-					if(crd.getController().equals(AllZone.HumanPlayer)) {
+					if(crd.getController().isHuman()) {
 						if(AllZone.Human_Hand.getCards().length == 0) AllZone.GameAction.sacrifice(crd);
 						else AllZone.InputControl.setInput(discard);
 					} else //comp
@@ -5066,7 +5066,7 @@ public class GameActionUtil {
 
 							//System.out.println("Creats size: " + creats.size());
 
-							if(card.getController().equals(AllZone.HumanPlayer)) {
+							if(card.getController().isHuman()) {
 								Object o = null;
 								int creatsSize = creats.size();
 

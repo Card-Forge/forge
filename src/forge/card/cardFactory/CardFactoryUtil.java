@@ -1132,7 +1132,7 @@ public class CardFactoryUtil {
                 }
                 if(mercs.size() == 0) return;
                 
-                if(sourceCard.getController().equals(AllZone.ComputerPlayer)) {
+                if(sourceCard.getController().isComputer()) {
                     Card merc = AI_getBestCreature(mercs);
                     AllZone.GameAction.moveToPlay(merc);
                 } else //human
@@ -1226,7 +1226,7 @@ public class CardFactoryUtil {
                 }
                 if(rebels.size() == 0) return;
                 
-                if(sourceCard.getController().equals(AllZone.ComputerPlayer)) {
+                if(sourceCard.getController().isComputer()) {
                     Card rebel = AI_getBestCreature(rebels);
                     AllZone.GameAction.moveToPlay(rebel);
                 } else //human
@@ -3910,7 +3910,7 @@ public class CardFactoryUtil {
         if (d[0].contains("UntapUpTo"))	// 8/10
         {
         	int n = Integer.parseInt(d[1]);
-        	if (dbPlayer.equals(AllZone.HumanPlayer))
+        	if (dbPlayer.isHuman())
         		AllZone.InputControl.setInput(CardFactoryUtil.input_UntapUpToNType(n, d[2]));
         	else
         	{

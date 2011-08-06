@@ -1528,7 +1528,7 @@ public class CombatUtil {
                 soldiers = soldiers.getType("Soldier");
                 
                 if(soldiers.size() > 0) {
-                    if(c.getController().equals(AllZone.HumanPlayer)) {
+                    if(c.getController().isHuman()) {
                         Object o = GuiUtils.getChoiceOptional("Pick a soldier to put onto the battlefield",
                                 soldiers.toArray());
                         if(o != null) {
@@ -1540,7 +1540,7 @@ public class CombatUtil {
 
                             card.setCreatureAttackedThisCombat(true);
                         }
-                    } else if(c.getController().equals(AllZone.ComputerPlayer)) {
+                    } else if(c.getController().isComputer()) {
                         Card card = CardFactoryUtil.AI_getBestCreature(soldiers);
                         if (card != null){
 	                        AllZone.GameAction.moveToPlay(card);
@@ -1602,7 +1602,7 @@ public class CombatUtil {
                 ability.setStackDescription(sb.toString());
 
         		setLorthosCancelled(false);
-                if(c.getController().equals(AllZone.HumanPlayer)) {
+                if(c.getController().isHuman()) {
                     AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Activate " + c.getName() + "'s ability: " + "\r\n",
                             ability.getManaCost(), paidCommand, unpaidCommand));
                 } else //computer

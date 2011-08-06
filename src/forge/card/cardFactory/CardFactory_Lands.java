@@ -47,7 +47,7 @@ class CardFactory_Lands {
                 private static final long serialVersionUID = 7352127748114888255L;
                 
                 public void execute() {
-                    if (card.getController().equals(AllZone.HumanPlayer)) humanExecute();
+                    if (card.getController().isHuman()) humanExecute();
                     else computerExecute();
                 }
                 
@@ -100,6 +100,7 @@ class CardFactory_Lands {
         			}
         		};
         	};
+
         	a[0] = new Ability(card, "0") {
         		@Override
         		public void resolve() {
@@ -112,60 +113,50 @@ class CardFactory_Lands {
         				}
 
         			} else {
-        				CardList creature = new CardList();
-        				PlayerZone zone = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);             
-        				if(zone != null) {
-        					creature.addAll(zone.getCards());
-        					creature = creature.getType("Creature"); 
-        					creature = creature.filter(new CardListFilter()
+        				CardList creature = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
+        				creature = creature.filter(new CardListFilter()
+        				{
+        					public boolean addCard(Card c)
         					{
-        						public boolean addCard(Card c)
-        						{
-        							return (AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(a[0], c) && !c.hasKeyword("Defender"));
-        						}
-        					});
-        					Card biggest = null;
-        					if(creature.size() > 0) {
-        						biggest = creature.get(0);
-
-        						for(int i = 0; i < creature.size(); i++) {
-        							if(biggest.getNetAttack() < creature.get(i).getNetAttack()) biggest = creature.get(i);   
-        						}
-        						setTargetCard(biggest);
-
+        						return CardFactoryUtil.canTarget(a[0], c) && !c.hasKeyword("Defender");
         					}
+        				});
+        				Card biggest = null;
+        				if(creature.size() > 0) {
+        					biggest = creature.get(0);
+
+        					for(int i = 0; i < creature.size(); i++) {
+        						if(biggest.getNetAttack() < creature.get(i).getNetAttack()) biggest = creature.get(i);   
+        					}
+        					setTargetCard(biggest);
+
         				}
-        				PlayerZone Hzone = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);  
-        				if(zone != null) {
-        					CardList creature2 = new CardList();
-        					creature2.addAll(Hzone.getCards());
-        					creature2 = creature2.getType("Creature"); 
-        					creature2 = creature2.filter(new CardListFilter()
+        				CardList creature2 = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
+        				creature2 = creature2.filter(new CardListFilter()
+        				{
+        					public boolean addCard(Card c)
         					{
-        						public boolean addCard(Card c)
-        						{
-        							return (!c.isTapped() && !CardUtil.getColors(c).contains(Constant.Color.Colorless));
-        						}
-        					});
-        					Card biggest2 = null;
-        					if(creature2.size() > 0) {
-        						biggest2 = creature2.get(0);
-        						for(int i = 0; i < creature2.size(); i++) {
-        							if(biggest2.getNetAttack() < creature2.get(i).getNetAttack()) biggest2 = creature2.get(i);   
-        						}
-        						if(biggest2 != null) {  
-        							if(biggest2.isGreen()) Color = "green";
-        							if(biggest2.isBlue()) Color = "blue";
-        							if(biggest2.isWhite()) Color = "white";
-        							if(biggest2.isRed()) Color = "red";
-        							if(biggest2.isBlack()) Color = "black";
-        						} else {
-        							Color = "black";          			
-        						}
-
-        					} else {
-        						Color = "black"; 
+        						return (!c.isTapped() && !CardUtil.getColors(c).contains(Constant.Color.Colorless));
         					}
+        				});
+        				Card biggest2 = null;
+        				if(creature2.size() > 0) {
+        					biggest2 = creature2.get(0);
+        					for(int i = 0; i < creature2.size(); i++) {
+        						if(biggest2.getNetAttack() < creature2.get(i).getNetAttack()) biggest2 = creature2.get(i);   
+        					}
+        					if(biggest2 != null) {  
+        						if(biggest2.isGreen()) Color = "green";
+        						if(biggest2.isBlue()) Color = "blue";
+        						if(biggest2.isWhite()) Color = "white";
+        						if(biggest2.isRed()) Color = "red";
+        						if(biggest2.isBlack()) Color = "black";
+        					} else {
+        						Color = "black";          			
+        					}
+
+        				} else {
+        					Color = "black"; 
         				}
         			}
         			Card Target = getTargetCard();
@@ -188,16 +179,14 @@ class CardFactory_Lands {
         		private static final long serialVersionUID = 5055232386220487221L;
 
         		public void execute() {
-        			CardList creats = new CardList(
-        					AllZone.getZone(Constant.Zone.Battlefield, card.getController()).getCards());
-        			creats = creats.getType("Creature");
+        			CardList creats = AllZoneUtil.getCreaturesInPlay(card.getController());
         			StringBuilder sb = new StringBuilder();
         			sb.append(card.getName()).append(" - target creature you control gains protection from the color of your choice until end of turn");
         			a[0].setStackDescription(sb.toString());
         			if(card.getController().isHuman()) {
         				AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(a[0], creats, "Select target creature you control", false, false));
         			} else {
-                        AllZone.Stack.addSimultaneousStackEntry(a[0]);
+        				AllZone.Stack.addSimultaneousStackEntry(a[0]);
 
         			}
         		}
@@ -296,18 +285,17 @@ class CardFactory_Lands {
                 
                 @Override
                 public boolean canPlayAI() {
-                    if(!(AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && AllZone.Phase.getPlayerTurn().equals(
-                            AllZone.ComputerPlayer))) return false;
+                    if(!(AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && AllZone.Phase.getPlayerTurn().isComputer()))
+                    	return false;
                     inPlay.clear();
-                    inPlay.addAll(AllZone.Computer_Battlefield.getCards());
+                    inPlay.add(AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer));
                     return (inPlay.filter(targets).size() > 1) && super.canPlayAI();
                 }
                 
                 @Override
                 public void resolve() {
                     inPlay.clear();
-                    inPlay.addAll(AllZone.Human_Battlefield.getCards());
-                    inPlay.addAll(AllZone.Computer_Battlefield.getCards());
+                    inPlay.add(AllZoneUtil.getCardsInPlay());
                     for(Card targ:inPlay.filter(targets))
                         targ.addCounter(Counters.P1P1, 1);
                 }
@@ -388,7 +376,7 @@ class CardFactory_Lands {
         		public void execute() {
         			final CardList land = AllZoneUtil.getPlayerCardsInPlay(player).getValidCards(type[0], player, card);
 
-        			if( player.equals(AllZone.ComputerPlayer)) {
+        			if( player.isComputer()) {
         				if( land.size() > 0 ) {
         					CardList tappedLand = new CardList(land.toArray());
         					tappedLand = tappedLand.filter(AllZoneUtil.tapped);
@@ -464,7 +452,7 @@ class CardFactory_Lands {
                   plains = plains.getType("Land");
                   plains = plains.getTapState("Untapped");
 
-                  if( player.equals(AllZone.ComputerPlayer)) {
+                  if( player.isComputer()) {
                      if( plains.size() > 1 ) {
                         CardList tappedPlains = new CardList(plains.toArray());
                         tappedPlains = tappedPlains.getType("Basic");
@@ -849,7 +837,7 @@ class CardFactory_Lands {
         			final Player player = card.getController();
         			final CardList land = AllZoneUtil.getPlayerCardsInPlay(player).getValidCards(type[0]+".untapped", player, card);
 
-        			if( player.equals(AllZone.ComputerPlayer)) {
+        			if( player.isComputer()) {
         				if( land.size() > 0 ) {
         					Card c = CardFactoryUtil.getWorstLand(land);
         					AllZone.GameAction.moveToHand(c);

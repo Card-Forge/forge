@@ -72,7 +72,7 @@ public class CardFactory_Instants {
 				String getChosenColor() {
 	                   // Choose color for protection in Brave the Elements
 	             	   String color = "";
-	             	   if (card.getController().equals(AllZone.HumanPlayer)) {
+	             	   if (card.getController().isHuman()) {
 
 	             		   // String[] colors = Constant.Color.Colors;
 	             		   // colors[colors.length-1] = null;
@@ -474,7 +474,7 @@ public class CardFactory_Instants {
 
                         GuiUtils.getChoice("Revealing top " + Count + " cards of library: ", cards.toArray());
                         //Human chooses
-                        if(card.getController().equals(AllZone.ComputerPlayer)) {
+                        if(card.getController().isComputer()) {
                         for(int i = 0; i < Count; i++) {
                         	if(stop == false) {
                         choice = GuiUtils.getChoiceOptional("Choose cards to put into the first pile: ", cards.toArray());
@@ -966,7 +966,7 @@ public class CardFactory_Instants {
                 @Override
                 public void resolve() {
                 	Player player = card.getController();
-                    if(player.equals(AllZone.HumanPlayer)) humanResolve();
+                    if(player.isHuman()) humanResolve();
                     else computerResolve();
                     player.shuffle();
                 }
@@ -1264,7 +1264,7 @@ public class CardFactory_Instants {
 					CardList graveList = new CardList(grave.getCards());
 					int X = Math.min(max, graveList.size());
 					
-					if( player.equals(AllZone.HumanPlayer)) {
+					if( player.isHuman()) {
 						for(int i = 0; i < X; i++) {
 							Object o = GuiUtils.getChoice("Remove from game", graveList.toArray());
 							if(o == null) break;
@@ -1377,12 +1377,12 @@ public class CardFactory_Instants {
                 public void resolve() {
                 	SpellAbility sa = AllZone.Stack.pop();
                 	
-                	if(card.getController().equals(AllZone.HumanPlayer))
+                	if(card.getController().isHuman())
                 	{
                 		Phase.getManaDrain_BonusMana_Human().add(CardUtil.getConvertedManaCost(sa.getSourceCard()));
                 		Phase.getManaDrain_Source_Human().add(card);
                 	}
-                	else if(card.getController().equals(AllZone.ComputerPlayer))
+                	else if(card.getController().isComputer())
                 	{
                 		Phase.getManaDrain_BonusMana_AI().add(CardUtil.getConvertedManaCost(sa.getSourceCard()));
                 		Phase.getManaDrain_Source_AI().add(card);        		
@@ -1548,7 +1548,7 @@ public class CardFactory_Instants {
                 public void resolve() {
                 	CardList lands = AllZoneUtil.getPlayerLandsInPlay(getTargetPlayer());
                 	for(Card c:lands) c.tap();
-                	if(getTargetPlayer().equals(AllZone.HumanPlayer)) AllZone.ManaPool.clearPool();
+                	if(getTargetPlayer().isHuman()) AllZone.ManaPool.clearPool();
                 }//resolve()
             };//SpellAbility
             

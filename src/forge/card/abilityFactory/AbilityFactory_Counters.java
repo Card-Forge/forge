@@ -942,7 +942,7 @@ public class AbilityFactory_Counters {
 			}
 		});
 		
-		if (AF.getHostCard().getController().equals(AllZone.HumanPlayer)) {	
+		if (AF.getHostCard().getController().isHuman()) {	
 			cperms.addAll(hperms.toArray());
 			final CardList unchosen = cperms;
 			AllZone.InputControl.setInput(new Input() {
@@ -974,12 +974,12 @@ public class AbilityFactory_Counters {
 				boolean selHuman = false;
 				@Override
 				public void selectPlayer(Player player) {
-					if (player.equals(AllZone.HumanPlayer) && selHuman == false) {
+					if (player.isHuman() && selHuman == false) {
 						selHuman = true;
 						if (AllZone.HumanPlayer.getPoisonCounters() > 0)
 							AllZone.HumanPlayer.addPoisonCounters(1);
 					}
-					if (player.equals(AllZone.ComputerPlayer) && selComputer == false) {
+					if (player.isComputer() && selComputer == false) {
 						selComputer = true;
 						if (AllZone.ComputerPlayer.getPoisonCounters() > 0)
 							AllZone.ComputerPlayer.addPoisonCounters(1);

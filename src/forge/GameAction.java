@@ -256,11 +256,11 @@ public class GameAction {
 		    		boolean shouldRecoverForAI = false;
 		    		boolean shouldRecoverForHuman = false;
 		    					
-		    		if(c.getOwner().equals(AllZone.HumanPlayer))
+		    		if(c.getOwner().isHuman())
 		    		{
 		    			shouldRecoverForHuman = GameActionUtil.showYesNoDialog(recoverable, question.toString());
 		    		}
-		    		else if(c.getOwner().equals(AllZone.ComputerPlayer))
+		    		else if(c.getOwner().isComputer())
 		    		{
 		    			shouldRecoverForAI = ComputerUtil.canPayCost(abRecover);
 		    		}
@@ -1001,7 +1001,7 @@ public class GameAction {
 					final SpellAbility F_SpellAbility = SpellAbility[0];
 
 					if(k[7].contains("Choice_Instant") && k[4] != "Null") {
-						if(card.getController().equals(AllZone.HumanPlayer)) {
+						if(card.getController().isHuman()) {
 							Object[] possibleValues = {"Yes", "No"};
 							Object q = JOptionPane.showOptionDialog(null, "Activate - " + card.getName(),card.getName() + " Ability", 
 									JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
@@ -1084,7 +1084,7 @@ public class GameAction {
 								public void execute() {             						
 									String WhichInput = F_k[5].split("/")[1]; 
 									if(WhichInput.equals("Creature")) 
-										if(F_card.getController().equals(AllZone.HumanPlayer))
+										if(F_card.getController().isHuman())
 											AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreature(F_SpellAbility, GetTargetsCommand));
 										else {
 											CardList PossibleTargets = new CardList();	
@@ -1094,7 +1094,7 @@ public class GameAction {
 											if(Whenever_AI_GoodEffect(F_k)) {
 												PossibleTargets = PossibleTargets.filter(new CardListFilter() {
 													public boolean addCard(Card c) {
-														if(c.getController().equals(AllZone.ComputerPlayer)) return true;
+														if(c.getController().isComputer()) return true;
 														return false;
 													}
 												});
@@ -1106,7 +1106,7 @@ public class GameAction {
 											} else {
 												PossibleTargets = PossibleTargets.filter(new CardListFilter() {
 													public boolean addCard(Card c) {
-														if(c.getController().equals(AllZone.HumanPlayer)) return true;
+														if(c.getController().isHuman()) return true;
 														return false;
 													}
 												});
@@ -1119,7 +1119,7 @@ public class GameAction {
 
 										}
 									if(WhichInput.equals("Player")) 
-										if(F_card.getController().equals(AllZone.HumanPlayer))
+										if(F_card.getController().isHuman())
 											AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(F_SpellAbility, GetTargetsCommand));
 										else {
 											if(Whenever_AI_GoodEffect(F_k)) {
@@ -1183,13 +1183,13 @@ public class GameAction {
 											}
 											Restriction_Count[0]++;
 										}
-										if(F_card.getController().equals(AllZone.HumanPlayer))
+										if(F_card.getController().isHuman())
 											AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(F_SpellAbility, Cards_inPlay, "Select a Valid Card", GetTargetsCommand, true, true));
 										else {
 											if(Whenever_AI_GoodEffect(F_k)) {
 												Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
 													public boolean addCard(Card c) {
-														if(c.getController().equals(AllZone.ComputerPlayer)) return true;
+														if(c.getController().isComputer()) return true;
 														return false;
 													}
 												});
@@ -1201,7 +1201,7 @@ public class GameAction {
 											} else {
 												Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
 													public boolean addCard(Card c) {
-														if(c.getController().equals(AllZone.HumanPlayer)) return true;
+														if(c.getController().isHuman()) return true;
 														return false;
 													}
 												});
@@ -1683,7 +1683,7 @@ public class GameAction {
 												}
 											}
 											else if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
-												if(F_card.getController().equals(AllZone.HumanPlayer)) {
+												if(F_card.getController().isHuman()) {
 													for(int z = 0; z < Targets_Multi.length; z++) {
 														if(!(Targets_Multi[z].equals(AllZone.HumanPlayer) || Targets_Multi[z].equals(AllZone.ComputerPlayer))) {
 															if(AllZoneUtil.isCardInPlay((Card) Targets_Multi[z])
@@ -1697,7 +1697,7 @@ public class GameAction {
 														}
 													}
 												}
-												if(F_card.getController().equals(AllZone.ComputerPlayer)) AllZone.HumanPlayer.addDamage(F_Amount[0]*F_Multiple_Targets, F_card);
+												if(F_card.getController().isComputer()) AllZone.HumanPlayer.addDamage(F_Amount[0]*F_Multiple_Targets, F_card);
 											}
 										}
 									};
@@ -1706,7 +1706,7 @@ public class GameAction {
 								Command_Effects[F_Target] = Proper_resolve; 
 								if(Check_if_All_Targets(F_card, F_k).size() > 0) StackDescription = StackDescription  + "deals " + F_Amount[0]*F_Multiple_Targets + " damage" + " to all specified permanents/players";
 								else if(F_Multiple_Targets != 1) StackDescription = StackDescription + "deals " + F_Amount[0]*F_Multiple_Targets + " damage" + " divided among up to " +  Multiple_Targets + " target creatures and/or players";
-								else if(F_card.getController().equals(AllZone.ComputerPlayer)) StackDescription = StackDescription + "targeting Human ";
+								else if(F_card.getController().isComputer()) StackDescription = StackDescription + "targeting Human ";
 								else StackDescription = StackDescription + "targeting " + ((F_TargetCard[y] != null)? F_TargetCard[y]:"") + 
 								((F_TargetPlayer[y] != null)? F_TargetPlayer[y]:"");
 							}
@@ -1815,7 +1815,7 @@ public class GameAction {
     	String SearchDescription = " ";
     	boolean SearchLib = true;
     	if(Keyword_Details[7].contains("Choice_Instant-SearchLibrary")) {
-    		if(Source.getController().equals(AllZone.HumanPlayer)) {
+    		if(Source.getController().isHuman()) {
     			Object[] possibleValues = {"Yes", "No"};
     			Object q = JOptionPane.showOptionDialog(null, "Search Libraries?",Source.getName() + " F_SpellAbility", 
     					JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
@@ -1946,7 +1946,7 @@ public class GameAction {
     			String PayAmountParse = Keyword_Details[7];                
     			S_Amount = PayAmountParse.split("/")[1];
 
-    			if(Source.getController().equals(AllZone.HumanPlayer)) {
+    			if(Source.getController().isHuman()) {
     				final Command paid = new Command() {
     					private static final long serialVersionUID = 151367344511590317L;
 
@@ -1971,7 +1971,7 @@ public class GameAction {
     			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, Source.getController());
     			CardList choice = new CardList(play.getCards());
     			choice = choice.getType(S_Amount);
-    			if(Source.getController().equals(AllZone.HumanPlayer)) {
+    			if(Source.getController().isHuman()) {
     				AllZone.InputControl.setInput(CardFactoryUtil.Wheneverinput_sacrifice(ability, choice, "Select a " + S_Amount +" to sacrifice.",Proper_Resolve));
     			} /*else {
     				if(choice.size() > 5) {
@@ -1998,7 +1998,7 @@ public class GameAction {
 
     	if(AllZoneUtil.isCardInZone(Required_Zone[0], Source) || Zones.equals("Any")) {
     		if(Keyword_Details[7].equals("Yes_No")) {
-    			if(Source.getController().equals(AllZone.HumanPlayer)) {
+    			if(Source.getController().isHuman()) {
     				Object[] possibleValues = {"Yes", "No"};
     				Object q = JOptionPane.showOptionDialog(null, "Activate - " + Source.getName(),Source.getName() + " Ability", 
     						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
@@ -2009,7 +2009,7 @@ public class GameAction {
     			}
     		}
     		if(Keyword_Details[7].equals("Opponent_Yes_No")) {
-    			if(!Source.getController().equals(AllZone.HumanPlayer)) {
+    			if(!Source.getController().isHuman()) {
     				Object[] possibleValues = {"Yes", "No"};
     				Object q = JOptionPane.showOptionDialog(null, "Activate - " + Source.getName(),Source.getName() + " Ability", 
     						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
@@ -2037,10 +2037,10 @@ public class GameAction {
 
 			if(AllZoneUtil.isCardInZone(Required_Zone[0], Source) || Zones.equals("Any")) {	
 				if(Keyword_Details[6].equals("ASAP")) {
-					if(Keyword_Details[5].equals("InputType - CreatureORPlayer") && Source.getController().equals(AllZone.HumanPlayer)) {
+					if(Keyword_Details[5].equals("InputType - CreatureORPlayer") && Source.getController().isHuman()) {
 						paidCommand.execute();
 					}
-					else if(Keyword_Details[5].equals("InputType - CreatureORPlayer") && Source.getController().equals(AllZone.ComputerPlayer)) 
+					else if(Keyword_Details[5].equals("InputType - CreatureORPlayer") && Source.getController().isComputer()) 
 						AllZone.Stack.add(ability);
 					else if(Keyword_Details[5].contains("NormalInput")) {
 						paidCommand.execute();
@@ -3287,7 +3287,7 @@ public class GameAction {
     public void searchLibraryTwoLand(String type, Player player,
     		String Zone1, boolean tapFirstLand, 
     		String Zone2, boolean tapSecondLand) {
-        if(player.equals(AllZone.HumanPlayer)) {
+        if(player.isHuman()) {
         	humanSearchTwoLand(type, Zone1, tapFirstLand, Zone2, tapSecondLand);
         } else {
         	aiSearchTwoLand(type, Zone1, tapFirstLand, Zone2, tapSecondLand);

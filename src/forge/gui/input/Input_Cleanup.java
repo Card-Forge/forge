@@ -2,6 +2,7 @@
 package forge.gui.input;
 
 import forge.AllZone;
+import forge.AllZoneUtil;
 import forge.ButtonUtil;
 import forge.Card;
 import forge.CombatUtil;
@@ -19,7 +20,7 @@ public class Input_Cleanup extends Input {
     	}
     	
         ButtonUtil.disableAll();
-        int n = AllZone.Human_Hand.getCards().length;
+        int n = AllZoneUtil.getPlayerHand(AllZone.HumanPlayer).size();
         
         //MUST showMessage() before stop() or it will overwrite the next Input's message
         StringBuffer sb = new StringBuffer();
@@ -47,7 +48,7 @@ public class Input_Cleanup extends Input {
     
     
     public void AI_CleanupDiscard(){
-    	int size = AllZone.Computer_Hand.getCards().length;
+    	int size = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer).size();
     	
     	if (AllZone.ComputerPlayer.getMaxHandSize() != -1){
     		int numDiscards = size - AllZone.ComputerPlayer.getMaxHandSize(); 

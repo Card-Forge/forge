@@ -741,7 +741,7 @@ public class Cost_Payment {
             @Override
             public void selectPlayer(Player player)
             {
-                if(player.equals(AllZone.HumanPlayer))
+                if(player.isHuman())
                 {
                     if(manaCost.payPhyrexian())
                     {
@@ -934,7 +934,7 @@ public class Cost_Payment {
             @Override
             public void showMessage() {
             	Card card = sa.getSourceCard();
-                if(card.getController().equals(AllZone.HumanPlayer) && AllZoneUtil.isCardInPlay(card)) {
+                if(card.getController().isHuman() && AllZoneUtil.isCardInPlay(card)) {
         			StringBuilder sb = new StringBuilder();
         			sb.append(card.getName());
         			sb.append(" - Sacrifice?");
@@ -1088,7 +1088,7 @@ public class Cost_Payment {
 			@Override
             public void showMessage() {
             	Card card = sa.getSourceCard();
-                if(card.getController().equals(AllZone.HumanPlayer) && AllZoneUtil.isCardInPlay(card)) {
+                if(card.getController().isHuman() && AllZoneUtil.isCardInPlay(card)) {
         			StringBuilder sb = new StringBuilder();
         			sb.append(card.getName());
         			sb.append(" - Exile?");
@@ -1122,7 +1122,7 @@ public class Cost_Payment {
 			@Override
             public void showMessage() {
             	Card card = spell.getSourceCard();
-                if(card.getController().equals(AllZone.HumanPlayer) && AllZoneUtil.isCardInPlayerHand(card.getController(), card)) {
+                if(card.getController().isHuman() && AllZoneUtil.isCardInPlayerHand(card.getController(), card)) {
         			StringBuilder sb = new StringBuilder();
         			sb.append(card.getName());
         			sb.append(" - Exile?");
@@ -1155,7 +1155,7 @@ public class Cost_Payment {
 			@Override
             public void showMessage() {
             	Card card = spell.getSourceCard();
-                if(card.getController().equals(AllZone.HumanPlayer) && AllZoneUtil.isCardInPlayerHand(card.getController(), card)) {
+                if(card.getController().isHuman() && AllZoneUtil.isCardInPlayerHand(card.getController(), card)) {
         			//This can't really happen, but if for some reason it could....
                     if(AllZoneUtil.getPlayerCardsInLibrary(card.getController()).size() > 0) {
                     	payment.setPayExileFromTop(true);
@@ -1182,7 +1182,7 @@ public class Cost_Payment {
 			@Override
             public void showMessage() {
             	Card card = spell.getSourceCard();
-                if(card.getController().equals(AllZone.HumanPlayer) && AllZoneUtil.isCardInPlayerGraveyard(card.getController(), card)) {
+                if(card.getController().isHuman() && AllZoneUtil.isCardInPlayerGraveyard(card.getController(), card)) {
         			StringBuilder sb = new StringBuilder();
         			sb.append(card.getName());
         			sb.append(" - Exile?");
@@ -1492,7 +1492,7 @@ public class Cost_Payment {
             @Override
             public void showMessage() {
             	Card card = sa.getSourceCard();
-                if(card.getController().equals(AllZone.HumanPlayer) && AllZoneUtil.isCardInPlay(card)) {
+                if(card.getController().isHuman() && AllZoneUtil.isCardInPlay(card)) {
         			StringBuilder sb = new StringBuilder();
         			sb.append(card.getName());
         			sb.append(" - Return to Hand?");

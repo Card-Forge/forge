@@ -147,7 +147,7 @@ public class PhaseUtil {
     	//end opponent untapping during your untap phase
     	
     	if( canOnlyUntapOneLand()) {
-    		if( AllZone.Phase.getPlayerTurn().equals(AllZone.ComputerPlayer)) {
+    		if( AllZone.Phase.getPlayerTurn().isComputer()) {
     			//search for lands the computer has and only untap 1
     			CardList landList = AllZoneUtil.getPlayerLandsInPlay(AllZone.ComputerPlayer);
     			landList = landList.filter(AllZoneUtil.tapped);
@@ -196,7 +196,7 @@ public class PhaseUtil {
     				public void selectButtonCancel() {stop();}
     				public void selectCard(Card c, PlayerZone zone) {
     					if(c.isArtifact() && zone.is(Constant.Zone.Battlefield) 
-    							&& c.getController().equals(AllZone.HumanPlayer)) {
+    							&& c.getController().isHuman()) {
     						c.untap();
     						stop();
     					}
@@ -211,7 +211,7 @@ public class PhaseUtil {
     		}
     	}
     	if((AllZoneUtil.isCardInPlay("Smoke") || AllZoneUtil.isCardInPlay("Stoic Angel")) ) {
-    		if( AllZone.Phase.getPlayerTurn().equals(AllZone.ComputerPlayer) ) {
+    		if( AllZone.Phase.getPlayerTurn().isComputer() ) {
     			CardList creatures = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
     			creatures = creatures.filter(AllZoneUtil.tapped);
     			if( creatures.size() > 0 ) {
@@ -228,7 +228,7 @@ public class PhaseUtil {
     				public void selectButtonCancel() {stop();}
     				public void selectCard(Card c, PlayerZone zone) {
     					if(c.isCreature() && zone.is(Constant.Zone.Battlefield) 
-    							&& c.getController().equals(AllZone.HumanPlayer)) {
+    							&& c.getController().isHuman()) {
     						c.untap();
     						stop();
     					}

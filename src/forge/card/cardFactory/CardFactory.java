@@ -259,7 +259,7 @@ public class CardFactory implements NewConstants {
     		if(sa.isReplicate()) copySA.setIsReplicate(true);
     	}
     	
-    	if(source.getController().equals(AllZone.HumanPlayer))
+    	if(source.getController().isHuman())
     		AllZone.GameAction.playSpellAbilityForFree(copySA);
     	
     	else if(copySA.canPlayAI())
@@ -328,12 +328,12 @@ public class CardFactory implements NewConstants {
     		copySA.setTargetCard(sa.getTargetCard());
     	
     	if(sa.getTargetPlayer() != null) {
-    		if(sa.getTargetPlayer().equals(AllZone.HumanPlayer)
-    				|| (sa.getTargetPlayer().equals(AllZone.ComputerPlayer))) 
+    		if(sa.getTargetPlayer().isHuman()
+    				|| (sa.getTargetPlayer().isComputer())) 
     			copySA.setTargetPlayer(sa.getTargetPlayer());
     	}
     	
-    	if(source.getController().equals(AllZone.HumanPlayer))
+    	if(source.getController().isHuman())
     		AllZone.GameAction.playSpellAbilityForFree(copySA);
     	
     	else if(copySA.canPlayAI())
@@ -821,7 +821,7 @@ public class CardFactory implements NewConstants {
                         
                         //System.out.println("Creats size: " + creats.size());
                         
-                        if(card.getController().equals(AllZone.HumanPlayer)) {
+                        if(card.getController().isHuman()) {
                             if (creats.size() > 0)
                             {
 	                        	List<Card> selection = GuiUtils.getChoicesOptional("Select creatures to sacrifice", creats.toArray());
@@ -895,7 +895,7 @@ public class CardFactory implements NewConstants {
                     
                     public void execute() {
                         // Target as Modular is Destroyed
-                        if(card.getController().equals(AllZone.ComputerPlayer)) {
+                        if(card.getController().isComputer()) {
                             CardList choices = new CardList(AllZone.Computer_Battlefield.getCards()).filter(new CardListFilter() {
                                 public boolean addCard(Card c) {
                                     return c.isCreature() && c.isArtifact();
@@ -1090,7 +1090,7 @@ public class CardFactory implements NewConstants {
             final SpellAbility ability = new Ability_Static(card, "0") {
                 @Override
                 public void resolve() {
-                    if(player.equals(AllZone.HumanPlayer)) {
+                    if(player.isHuman()) {
                         input[0] = JOptionPane.showInputDialog(null, "Which creature type?", "Pick type",
                                 JOptionPane.QUESTION_MESSAGE);
                         
@@ -1139,11 +1139,11 @@ public class CardFactory implements NewConstants {
                     String imageName = "";
                     String color = "";
                     
-                    if(player.equals(AllZone.ComputerPlayer)) {
+                    if(player.isComputer()) {
                         type = "Thrull";
                         imageName = "B 1 1 Thrull";
                         color = "B";
-                    } else if(player.equals(AllZone.HumanPlayer)) {
+                    } else if(player.isHuman()) {
                         Object q = GuiUtils.getChoiceOptional("Select type of creature", choices);
                         if(q != null){
 	                        if(q.equals("Citizen")) {
@@ -1452,7 +1452,7 @@ public class CardFactory implements NewConstants {
 						{
 							CardList newGrave;
 							Card c = (Card)o;
-							if (c.getOwner().equals(AllZone.HumanPlayer)){
+							if (c.getOwner().isHuman()){
 								newGrave = AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer);
 							}
 							else {
@@ -1744,7 +1744,7 @@ public class CardFactory implements NewConstants {
                                 
                 @Override
                 public boolean canPlayAI() {
-                	return card.getController().equals(AllZone.HumanPlayer) && AllZone.ComputerPlayer.getLife() >= 9 && 
+                	return card.getController().isHuman() && AllZone.ComputerPlayer.getLife() >= 9 && 
                 			super.canPlay() && AllZone.Computer_Hand.size() > 0;
                 }
 
@@ -1790,7 +1790,7 @@ public class CardFactory implements NewConstants {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    if(card.getController().equals(AllZone.HumanPlayer)) {
+                    if(card.getController().isHuman()) {
                         if(AllZone.Human_Hand.getCards().length == 0) AllZone.GameAction.sacrifice(card);
                         else AllZone.InputControl.setInput(discard);
                     } else {
@@ -1977,7 +1977,7 @@ public class CardFactory implements NewConstants {
         				return;
         			}
         			Card c = copyCard(getSourceCard().getAttachedCards()[0]);
-        			if(getSourceCard().getController().equals(AllZone.ComputerPlayer))
+        			if(getSourceCard().getController().isComputer())
         			{
         				for(SpellAbility sa:getSourceCard().getAttachedCards()[0].getSpellAbility())
         					if(sa.canPlayAI())
@@ -2046,7 +2046,7 @@ public class CardFactory implements NewConstants {
         	final SpellAbility ability = new Ability(card, "0") {
         		@Override
         		public void resolve() {
-        			if(card.getController().equals(AllZone.HumanPlayer)) {
+        			if(card.getController().isHuman()) {
         				if(AllZone.Human_Hand.getCards().length > 0)
         					AllZone.InputControl.setInput(exile);
         			} else {
@@ -2179,7 +2179,7 @@ public class CardFactory implements NewConstants {
 
         			CardList lands = new CardList(grave.getCards());
         			lands = lands.filter(AllZoneUtil.basicLands);
-        			if(card.getController().equals(AllZone.HumanPlayer)){ 
+        			if(card.getController().isHuman()){ 
         				//now, select up to four lands
         				int end = -1;
         				end = Math.min(lands.size(), limit);
@@ -2326,7 +2326,7 @@ public class CardFactory implements NewConstants {
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    if(card.getController().equals(AllZone.HumanPlayer)) {
+                    if(card.getController().isHuman()) {
                         
                         String color = "";
                         String[] colors = Constant.Color.Colors;
@@ -2422,7 +2422,7 @@ public class CardFactory implements NewConstants {
                 @Override
                 public void resolve() {
                 	String chosenType = "";
-        			if(card.getController().equals(AllZone.HumanPlayer)) {
+        			if(card.getController().isHuman()) {
         				chosenType = JOptionPane.showInputDialog(null, "Enter a creature type:", card.getName(),
         						JOptionPane.QUESTION_MESSAGE);
         			}
@@ -2671,7 +2671,7 @@ public class CardFactory implements NewConstants {
                 	 final String[] input = new String[1];
                 	 CardList allCards = factory.getAllCards();
                 	 input[0] = "";
-                    if(card.getController().equals(AllZone.HumanPlayer)) {
+                    if(card.getController().isHuman()) {
                     	while(input[0] == "")
                     	{
                     		input[0] = JOptionPane.showInputDialog(null, "Which source?", "Pick a card",JOptionPane.QUESTION_MESSAGE);
@@ -3439,13 +3439,13 @@ public class CardFactory implements NewConstants {
                
                public void execute() {
                   Log.debug("HandSize", "Control changed: " + card.getController());
-                  if(card.getController().equals(AllZone.HumanPlayer)) {
+                  if(card.getController().isHuman()) {
                 	 AllZone.HumanPlayer.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
                 	 AllZone.ComputerPlayer.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
                      
                      AllZone.ComputerPlayer.sortHandSizeOperations();
                   }
-                  else if(card.getController().equals(AllZone.ComputerPlayer)) {
+                  else if(card.getController().isComputer()) {
                 	 AllZone.ComputerPlayer.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
                      AllZone.HumanPlayer.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
                      

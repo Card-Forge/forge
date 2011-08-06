@@ -139,7 +139,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         cdLabel5.setText("Card ID  " + card.getUniqueNumber());
         
         //rarity and set of a face down card should not be visible to the opponent
-        if (!card.isFaceDown() || card.getController().equals(AllZone.HumanPlayer)) cdLabel7.setText(card.getCurSetCode());
+        if (!card.isFaceDown() || card.getController().isHuman()) cdLabel7.setText(card.getCurSetCode());
         
         if (!cdLabel7.getText().equals(""))
         {

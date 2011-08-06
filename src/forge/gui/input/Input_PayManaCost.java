@@ -101,7 +101,7 @@ public class Input_PayManaCost extends Input {
     public void selectPlayer(Player player)
     {
 
-        if(player.equals(AllZone.HumanPlayer))
+        if(player.isHuman())
         {
             if(manaCost.payPhyrexian())
             {

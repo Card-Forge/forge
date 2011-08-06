@@ -75,7 +75,7 @@ public class ComputerUtil_Attack2 {
 		ArrayList<Trigger> registeredTriggers = AllZone.TriggerHandler.getRegisteredTriggers();
 		for(Trigger trigger : registeredTriggers)
 			if (CombatUtil.combatTriggerWillTrigger(attacker,null,trigger, combat) 
-					&& trigger.getHostCard().getController().equals(AllZone.ComputerPlayer)) return true;
+					&& trigger.getHostCard().getController().isComputer()) return true;
 
 		return false;
 	}

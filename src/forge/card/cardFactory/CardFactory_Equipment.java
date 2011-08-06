@@ -194,11 +194,10 @@ class CardFactory_Equipment {
 
         		//not changed
         		CardList getCreature() {
-        			CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
+        			CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
         			list = list.filter(new CardListFilter() {
         				public boolean addCard(Card c) {
-        					return c.isCreature() 
-        							&& CardFactoryUtil.AI_doesCreatureAttack(c)
+        					return CardFactoryUtil.AI_doesCreatureAttack(c)
         							&& CardFactoryUtil.canTarget(card, c)
         							&& (!c.getKeyword().contains("Defender"));
         				}

@@ -17,7 +17,7 @@ public class RunTest
 	    CardFactory cf = AllZone.CardFactory;
 	    //********* test Card
 	    c = cf.getCard("Elvish Warrior", AllZone.ComputerPlayer);
-	    check("1", c.getOwner().equals(AllZone.ComputerPlayer));
+	    check("1", c.getOwner().isComputer());
 	    check("1.1", c.getName().equals("Elvish Warrior"));
 	    check("2", c.getManaCost().equals("G G"));
 	    check("2.1", c.getType().contains("Creature"));

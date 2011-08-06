@@ -257,7 +257,7 @@ class CardFactory_Planeswalkers {
                 	public void execute() {
                 		Player player = card.getController();
                 		CardList creatures;
-                		if(player.equals(AllZone.HumanPlayer)) {
+                		if(player.isHuman()) {
                 			creatures = new CardList(AllZone.Human_Battlefield.getCards());
                 		} else {
                 			creatures = new CardList(AllZone.Computer_Battlefield.getCards());
@@ -281,7 +281,7 @@ class CardFactory_Planeswalkers {
                     
                     Player player = card.getController();
                     CardList creatures;
-                    if(player.equals(AllZone.HumanPlayer)) {
+                    if(player.isHuman()) {
                         creatures = new CardList(AllZone.Human_Battlefield.getCards());
                     } else {
                         creatures = new CardList(AllZone.Computer_Battlefield.getCards());
@@ -1016,7 +1016,7 @@ class CardFactory_Planeswalkers {
                     
                     Card c = lib.get(0);
                     
-                    if (card.getController().equals(AllZone.HumanPlayer)) {
+                    if (card.getController().isHuman()) {
                         StringBuilder question = new StringBuilder();
                         question.append("Put the card ").append(c).append(" on the bottom of the ");
                         question.append(c.getController()).append("'s library?");
@@ -1067,7 +1067,7 @@ class CardFactory_Planeswalkers {
                     card.getController().drawCards(3);
                     
                     Player player = card.getController();
-                    if(player.equals(AllZone.HumanPlayer)) humanResolve();
+                    if(player.isHuman()) humanResolve();
                     //else
                     //  computerResolve();
                 }
@@ -1658,7 +1658,7 @@ class CardFactory_Planeswalkers {
                 	{
                 		public boolean addCard(Card c)
                 		{
-                			return CardFactoryUtil.canTarget(card, c) && c.getOwner().equals(AllZone.ComputerPlayer) &&
+                			return CardFactoryUtil.canTarget(card, c) && c.getOwner().isComputer() &&
                 				   !c.equals(card);
                 		}
                 	});
@@ -1710,7 +1710,7 @@ class CardFactory_Planeswalkers {
                     list.addAll(AllZone.Computer_Battlefield.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.isPermanent() && c.getOwner().equals(AllZone.HumanPlayer) 
+                            return c.isPermanent() && c.getOwner().isHuman() 
                             	   && CardFactoryUtil.canTarget(card, c);
                         }
                     });

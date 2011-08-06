@@ -409,7 +409,7 @@ public class Phase extends MyObservable
 		if (vaults.size() > 0){
             final Card crd = vaults.get(0);
 
-            if(turn.equals(AllZone.HumanPlayer)) {
+            if(turn.isHuman()) {
             	if(GameActionUtil.showYesNoDialog(crd, "Untap " + crd + "?")) {
             		crd.untap();
             		turn = extraTurns.isEmpty() ?  turn.getOpponent() : extraTurns.pop();

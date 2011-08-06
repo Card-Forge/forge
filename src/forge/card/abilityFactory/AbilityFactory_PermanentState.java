@@ -1044,12 +1044,12 @@ public class AbilityFactory_PermanentState {
 		if(validTappables.size() > 0) {
 			CardList human = validTappables.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
-					return c.getController().equals(AllZone.HumanPlayer);
+					return c.getController().isHuman();
 				}
 			});
 			CardList compy = validTappables.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
-					return c.getController().equals(AllZone.HumanPlayer);
+					return c.getController().isHuman();
 				}
 			});
 			if(human.size() > compy.size()) {
@@ -1113,12 +1113,12 @@ public class AbilityFactory_PermanentState {
 		if(validTappables.size() > 0) {
 			CardList human = validTappables.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
-					return c.getController().equals(AllZone.HumanPlayer);
+					return c.getController().isHuman();
 				}
 			});
 			CardList compy = validTappables.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
-					return c.getController().equals(AllZone.HumanPlayer);
+					return c.getController().isHuman();
 				}
 			});
 			if(human.size() > compy.size()) {

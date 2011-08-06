@@ -192,7 +192,7 @@ public class AbilityFactory_ZoneAffecting {
 		
 		if (tgt != null){
 			ArrayList<Player> players = tgt.getTargetPlayers();
-			if (players.size() > 0 && players.get(0).equals(AllZone.HumanPlayer))
+			if (players.size() > 0 && players.get(0).isHuman())
 				return true;
 		}
 		
@@ -829,9 +829,8 @@ public class AbilityFactory_ZoneAffecting {
 
 				else if(mode.equals("RevealYouChoose") || mode.equals("RevealOppChoose")) {
 					// Is Reveal you choose right? I think the wrong player is being used?
-					PlayerZone pzH = AllZone.getZone(Constant.Zone.Hand, p);
-					if(pzH.size() != 0) {
-						CardList dPHand = new CardList(pzH.getCards());
+					CardList dPHand = AllZoneUtil.getPlayerHand(p);
+					if(dPHand.size() != 0) {
 						CardList dPChHand = new CardList(dPHand.toArray());
 
 						if (params.containsKey("DiscardValid")) {	// Restrict card choices

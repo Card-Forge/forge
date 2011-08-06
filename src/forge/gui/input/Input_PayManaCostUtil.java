@@ -21,7 +21,7 @@ public class Input_PayManaCostUtil
   public static ManaCost activateManaAbility(SpellAbility sa, Card card, ManaCost manaCost)
   {
 	//make sure computer's lands aren't selected
-	if(card.getController().equals(AllZone.ComputerPlayer))
+	if(card.getController().isComputer())
 		return manaCost;
 	
     if(card instanceof ManaPool) 

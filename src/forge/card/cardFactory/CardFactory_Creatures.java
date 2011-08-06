@@ -106,7 +106,7 @@ public class CardFactory_Creatures {
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
                     Card c = lib.get(0);
                     
-                    if(card.getController().equals(AllZone.HumanPlayer)) {
+                    if(card.getController().isHuman()) {
                     	if(GameActionUtil.showYesNoDialog(card, "Mill "+c.getName()+"?")) {
                             AllZone.GameAction.moveToGraveyard(c);
                     	}
@@ -774,7 +774,7 @@ public class CardFactory_Creatures {
                     };//Input target
                     
 
-                    if(card.getController().equals(AllZone.HumanPlayer)) {
+                    if(card.getController().isHuman()) {
                     	CardList artifacts = AllZoneUtil.getPlayerTypeInPlay(AllZone.HumanPlayer, "Artifact");
                         
                         if(artifacts.size() != 0) AllZone.InputControl.setInput(target);
@@ -929,7 +929,7 @@ public class CardFactory_Creatures {
                     if(creature.size() == 0) {
                         AllZone.GameAction.sacrifice(card);
                         return;
-                    } else if(s.equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(inputComes);
+                    } else if(s.isHuman()) AllZone.InputControl.setInput(inputComes);
                     else //computer
                     {
                         Card target;
@@ -1469,7 +1469,7 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                     index[0] = 0;
-                    if(card.getController().equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(input);
+                    if(card.getController().isHuman()) AllZone.InputControl.setInput(input);
                 }
             };
             
@@ -1785,7 +1785,7 @@ public class CardFactory_Creatures {
                     if(AllZoneUtil.isCardInPlay(card)) {
                         card.addTempAttackBoost(1);
                         card.addTempDefenseBoost(1);
-                        if(card.getController().equals(AllZone.HumanPlayer)) {
+                        if(card.getController().isHuman()) {
                             String[] colors = Constant.Color.onlyColors;
                             
                             Object o = GuiUtils.getChoice("Choose color", colors);
@@ -1863,7 +1863,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     if(AllZoneUtil.isCardInPlay(card)) {
-                        if(card.getController().equals(AllZone.HumanPlayer)) {
+                        if(card.getController().isHuman()) {
                             String[] colors = Constant.Color.onlyColors;
                             
                             Object o = GuiUtils.getChoice("Choose color", colors);
@@ -1938,7 +1938,7 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = -2823505283781217181L;
                 
                 public void execute() {
-                    if(card.getController().equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreature(ability));
+                    if(card.getController().isHuman()) AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreature(ability));
                     else if(ability.canPlayAI()) {
                         ability.chooseTargetAI();
                         //need to add this to the stack
@@ -1962,7 +1962,7 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = 333134223161L;
                 
                 public void execute() {
-                    if(card.getController().equals(AllZone.HumanPlayer)) {
+                    if(card.getController().isHuman()) {
                         String[] colors = Constant.Color.onlyColors;
 
                         Object o = GuiUtils.getChoice("Choose color", colors);
@@ -2442,7 +2442,7 @@ public class CardFactory_Creatures {
                     CardList cards = new CardList(lib.getCards());
                     
                     if(cards.size() > 0) {
-                        if(card.getController().equals(AllZone.HumanPlayer)) {
+                        if(card.getController().isHuman()) {
                             Object o = GuiUtils.getChoiceOptional("Select card to remove: ",
                                     cards.toArray());
                             Card c = (Card) o;
@@ -2479,7 +2479,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     int lifeGain = 0;
-                    if(card.getController().equals(AllZone.HumanPlayer)) {
+                    if(card.getController().isHuman()) {
                         String choices[] = {"white", "blue", "black", "red", "green"};
                         Object o = GuiUtils.getChoiceOptional("Select Color: ", choices);
                         Log.debug("Treva, the Renewer", "Color:" + o);
@@ -2518,7 +2518,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     int numberTokens = 0;
-                    if(card.getController().equals(AllZone.HumanPlayer)) {
+                    if(card.getController().isHuman()) {
                         String choices[] = {"white", "blue", "black", "red", "green"};
                         Object o = GuiUtils.getChoiceOptional("Select Color: ", choices);
                         //System.out.println("Color:" + o);
@@ -2781,7 +2781,7 @@ public class CardFactory_Creatures {
                     CardList sins = new CardList(graveyard.getCards());
                     sins = sins.getType("Assassin");
                     
-                    if(card.getController().equals(AllZone.HumanPlayer)) {
+                    if(card.getController().isHuman()) {
                         Object o = GuiUtils.getChoiceOptional("Select an Assassin to exile", sins.toArray());
                         
                         if(o != null) {
@@ -3240,7 +3240,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     
-                    if (card.getController().equals(AllZone.HumanPlayer)) {
+                    if (card.getController().isHuman()) {
                         StringBuilder question = new StringBuilder();
                         if (card.getName().equals("Academy Rector")) {
                             question.append("Exile ").append(card.getName()).append(" and place ");
@@ -3442,7 +3442,7 @@ public class CardFactory_Creatures {
                     });
                     
                     if(list.size() > 0) {
-                        if(card.getController().equals(AllZone.HumanPlayer)) {
+                        if(card.getController().isHuman()) {
                             GuiUtils.getChoiceOptional("Revealing hand", list.toArray());
                             if(nonLandList.size() > 0) {
                                 Object o = GuiUtils.getChoiceOptional("Select nonland card",
@@ -3470,10 +3470,10 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = -5052568979553782714L;
                 
                 public void execute() {
-                    if(card.getController().equals(AllZone.HumanPlayer)) {
+                    if(card.getController().isHuman()) {
                         AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(ability));
                         ButtonUtil.disableAll();
-                    } else if(card.getController().equals(AllZone.ComputerPlayer)) {
+                    } else if(card.getController().isComputer()) {
                         ability.setTargetPlayer(AllZone.HumanPlayer);
                         AllZone.Stack.addSimultaneousStackEntry(ability);
 
@@ -3569,7 +3569,7 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = -4246229185669164581L;
                 
                 public void execute() {
-                    if(card.getController().equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(inputComes);
+                    if(card.getController().isHuman()) AllZone.InputControl.setInput(inputComes);
                     else //computer
                     {
                         abilityComes.setTargetPlayer(AllZone.HumanPlayer);
@@ -3614,7 +3614,7 @@ public class CardFactory_Creatures {
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    if(card.getController().equals(AllZone.HumanPlayer)) {
+                    if(card.getController().isHuman()) {
                         input[0] = JOptionPane.showInputDialog(null, "Which card?", "Pick card",
                                 JOptionPane.QUESTION_MESSAGE);
                         card.setNamedCard(input[0]);
@@ -3675,7 +3675,7 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = 3331342605626623161L;
                 
                 public void execute() {
-                    if(card.getController().equals(AllZone.HumanPlayer)) {
+                    if(card.getController().isHuman()) {
 
                         String color = "";
                         String[] colors = Constant.Color.Colors;
@@ -3978,7 +3978,7 @@ public class CardFactory_Creatures {
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                	if (card.getController().equals(AllZone.ComputerPlayer))
+                	if (card.getController().isComputer())
                 		setTargetPlayer(AllZone.HumanPlayer);
                 	getTargetPlayer().sacrificeCreature();
 
@@ -3991,7 +3991,7 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                     if(card.isKicked()) {
-                        if(card.getController().equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(ability));
+                        if(card.getController().isHuman()) AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(ability));
                         else //computer
                         {
                             ability.setStackDescription("Gatekeeper of Malakir - targeting Human");

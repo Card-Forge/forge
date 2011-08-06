@@ -72,7 +72,7 @@ public class Spell_Permanent extends Spell {
             if(creature.size() == 0) {
                 AllZone.GameAction.sacrifice(getSourceCard());
                 return;
-            } else if(s.equals(AllZone.HumanPlayer)) {
+            } else if(s.isHuman()) {
             	AllZone.InputControl.setInput(championInputComes);
             }
             else { //Computer
