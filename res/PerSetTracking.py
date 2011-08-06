@@ -75,7 +75,10 @@ for currentSet in setCodes :
         percentage = 100        
         if total > 0 :
                 percentage = (float(len(currentImplemented))/float(total))*100
-                
+        
+		currentMissing.sort()
+		currentImplemented.sort()
+		
         with open(sys.path[0] + "\PerSetTracking Results\set_" + currentSet + ".txt","w") as output :
                 output.write("Implemented (" + str(len(currentImplemented)) + "):\n")
                 for everyImplemented in currentImplemented :
