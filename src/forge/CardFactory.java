@@ -5652,45 +5652,40 @@ public class CardFactory implements NewConstants {
                 public void resolve() {
                     Card c = getTargetCard();
                     
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) c.addExtrinsicKeyword("Indestructible");
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) 
+                    	//c.addExtrinsicKeyword("Indestructible");
+                    	c.addCounter(Counters.DIVINITY, 1);
                 }
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList creatures = getCreatures();
+                    CardList perms = getPerms();
                     
-                    for(int i = 0; i < creatures.size(); i++) {
-                        if(!creatures.get(i).getKeyword().contains("Indestructible")) {
-                            return true;
-                        }
-                    }
-                    
-                    return false;
+                    return perms.size()>0;
                 }
                 
                 @Override
                 public void chooseTargetAI() {
                     //Card c = CardFactoryUtil.AI_getBestCreature(getCreatures());
-                    CardList a = getCreatures();
-                    CardListUtil.sortAttack(a);
-                    CardListUtil.sortFlying(a);
-                    
-                    Card c = null;
-                    
-                    for(int i = 0; i < a.size(); i++) {
-                        if(!a.get(i).getKeyword().contains("Indestructible")) {
-                            c = a.get(i);
-                            break;
-                        }
+                    CardList a = getPerms();
+                    if (a.size()>0) {
+	                    //CardListUtil.sortAttack(a);
+	                    //CardListUtil.sortFlying(a);
+	                    setTargetCard(a.get(0));
                     }
-                    
-                    setTargetCard(c);
                 }
                 
-                CardList getCreatures() {
+                CardList getPerms() {
                     CardList list = new CardList();
                     list.addAll(AllZone.Computer_Play.getCards());
-                    return list.getType("Creature");
+                    list = list.filter(new CardListFilter(){
+                    	public boolean addCard(Card c)
+                    	{
+                    		return c.getCounters(Counters.DIVINITY) == 0 && (CardUtil.getConvertedManaCost(c.getManaCost()) > 3 || c.getNetAttack() > 4) &&
+                    			   !c.getName().equals("That Which Was Taken");
+                    	}
+                    });
+                    return list;
                 }
             };//SpellAbility
             

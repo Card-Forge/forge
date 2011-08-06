@@ -19968,6 +19968,7 @@ public class GameActionUtil {
 		commands.put("Cover_of_Darkness", Cover_of_Darkness);
 		commands.put("Steely_Resolve", Steely_Resolve);
 		commands.put("Goblin_Assault", Goblin_Assault);
+		commands.put("That_Which_Was_Taken", That_Which_Was_Taken);
 		commands.put("Concordant_Crossroads", Concordant_Crossroads);
 		commands.put("Mass_Hysteria", Mass_Hysteria);
 		commands.put("Fervor", Fervor);

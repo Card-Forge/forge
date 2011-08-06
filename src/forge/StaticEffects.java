@@ -189,6 +189,7 @@ public class StaticEffects
 		cardToEffectsList.put("Cover of Darkness", new String[] {"Cover_of_Darkness"});
 		cardToEffectsList.put("Steely Resolve", new String[] {"Steely_Resolve"});
 		cardToEffectsList.put("Concordant Crossroads", new String[] {"Concordant_Crossroads"});
+		cardToEffectsList.put("That Which Was Taken", new String[] {"That_Which_Was_Taken"});
 		cardToEffectsList.put("Mass Hysteria", new String[] {"Mass_Hysteria"});
 		cardToEffectsList.put("Fervor", new String[] {"Fervor"});
 		cardToEffectsList.put("Madrush Cyclops", new String[] {"Madrush_Cyclops"});
