@@ -108,7 +108,6 @@ public class GameActionUtil {
 		upkeep_Mirror_Sigil_Sergeant();
 		upkeep_Verdant_Force();
 		upkeep_Dragon_Broodmother(); //put this before bitterblossom and mycoloth, so that they will resolve FIRST
-		upkeep_Bitterblossom();
 		upkeep_Goblin_Assault();
 		upkeep_Awakening_Zone();
 		upkeep_Nut_Collector();
@@ -9790,29 +9789,6 @@ public class GameActionUtil {
 		}//else
 	}// upkeep_Greener_Pastures()
 
-	private static void upkeep_Bitterblossom() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Bitterblossom");
-
-		Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-			final Card crd = list.get(i);
-			ability = new Ability(list.get(i), "0") {
-				@Override
-				public void resolve() {
-					player.loseLife(1,crd);
-					CardFactoryUtil.makeToken("Faerie Rogue", "B 1 1 Faerie Rogue", crd.getController(), "B", new String[] {
-							"Creature", "Faerie", "Rogue"}, 1, 1, new String[] {"Flying"});
-				}// resolve()
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("Bitterblossom - ").append(player).append(" loses 1 life and puts a 1/1 token onto the battlefield.");
-			ability.setStackDescription(sb.toString());
-
-			AllZone.Stack.add(ability);
-		}// for
-	}// upkeep_Bitterblossom()
 
 	private static void upkeep_Goblin_Assault() {
 		final Player player = AllZone.Phase.getPlayerTurn();
