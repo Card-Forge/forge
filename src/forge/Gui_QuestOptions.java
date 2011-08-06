@@ -56,7 +56,7 @@ public class Gui_QuestOptions extends JFrame {
         setup();
         setupRadioButtonText();
 
-        this.setSize(420,570);
+        this.setSize(540,555);
         GuiUtils.centerFrame(this);
         setVisible(true);
     }
@@ -99,7 +99,7 @@ public class Gui_QuestOptions extends JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 25));
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel1.setText("Quest Options");
-        jLabel1.setBounds(new Rectangle(1, 0, 419, 63));
+        jLabel1.setBounds(new Rectangle(1, 0, 539, 63));
         this.setTitle("Quest Options");
         this.getContentPane().setLayout(null);
         continueQuestButton.setBounds(new Rectangle(69, 28, 179, 35));
@@ -111,10 +111,10 @@ public class Gui_QuestOptions extends JFrame {
             }
         });
         jPanel1.setBorder(titledBorder1);
-        jPanel1.setBounds(new Rectangle(20, 63, 380, 353));
+        jPanel1.setBounds(new Rectangle(20, 63, 500, 353));
         jPanel1.setLayout(null);
         
-        jPanel2.setBounds(new Rectangle(20, 27, 340, 101));
+        jPanel2.setBounds(new Rectangle(20, 27, 460, 101));
         jPanel2.setLayout(gridLayout1);
         
         gridLayout1.setColumns(2);
@@ -129,9 +129,9 @@ public class Gui_QuestOptions extends JFrame {
         
         realisticRadio.setSelected(true);
         
-        cbStandardStart.setText("Standard Starting Pool");
+        cbStandardStart.setText("Standard (Type 2) Starting Pool");
         
-        newQuestButton.setBounds(new Rectangle(117, 292, 145, 38));
+        newQuestButton.setBounds(new Rectangle(179, 292, 140, 38));
         newQuestButton.setFont(new java.awt.Font("Dialog", 0, 16));
         newQuestButton.setText("New Quest");
         newQuestButton.addActionListener(new java.awt.event.ActionListener() {
@@ -157,10 +157,10 @@ public class Gui_QuestOptions extends JFrame {
         jTextArea1.setText(sb.toString());
         jTextArea1.setLineWrap(true);
         jTextArea1.setWrapStyleWord(true);
-        jTextArea1.setBounds(new Rectangle(27, 145, 327, 128));
+        jTextArea1.setBounds(new Rectangle(86, 145, 327, 128));
         
         jPanel3.setBorder(titledBorder2);
-        jPanel3.setBounds(new Rectangle(50, 427, 320, 86));
+        jPanel3.setBounds(new Rectangle(110, 427, 323, 86));
         jPanel3.setLayout(null);
         
         jPanel2.add(easyRadio, null);
