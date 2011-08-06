@@ -14277,6 +14277,35 @@ public class GameActionUtil {
 		}// execute()
 	};
 	
+	public static Command Maraxus_of_Keld = new Command() {
+		private static final long serialVersionUID = 7128144927031872127L;
+
+		public void execute() {
+			CardList list = AllZoneUtil.getCardsInPlay("Maraxus of Keld");
+
+			for(int i = 0; i < list.size(); i++) {
+				
+				Card c = list.get(i);
+				String controller = c.getController();
+				int pt = countUntapped(controller);
+				
+				c.setBaseAttack(pt);
+				c.setBaseDefense(pt);
+			}
+		}// execute()
+		
+		private int countUntapped(String player) {
+			CardList num = AllZoneUtil.getPlayerCardsInPlay(player);
+			num = num.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					return c.isArtifact() || c.isCreature() || c.isLand();
+				}
+			});
+			num = num.filter(AllZoneUtil.untapped);
+			return num.size();
+		}
+	};
+	
 	public static Command Old_Man_of_the_Sea = new Command() {
 		private static final long serialVersionUID = 8076177362922156784L;
 
@@ -20714,6 +20743,7 @@ public class GameActionUtil {
 		commands.put("Omnath", Omnath);
 		commands.put("Arena_of_the_Ancients", Arena_of_the_Ancients);
 		commands.put("Angry_Mob", Angry_Mob);
+		commands.put("Maraxus_of_Keld", Maraxus_of_Keld);
 		
 		//System.out.println("size of commands: " + commands.size());
 
