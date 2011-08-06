@@ -1,0 +1,11 @@
+Name:Jor Kadeen, the Prevailer
+ManaCost:3 R W
+Types:Legendary Creature Human Warrior
+Text:no text
+PT:5/4
+K:First Strike
+K:stPumpAll:Creature.YouCtrl:3/0:Metalcraft:Metalcraft - Creatures you control get +3/+0 as long as you control three or more artifacts.
+SVar:BuffedBy:Artifact
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jor_kadeen_the_prevailer.jpg
+End
