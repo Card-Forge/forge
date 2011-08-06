@@ -4667,7 +4667,10 @@ public class GameActionUtil {
 				crd.getController().drawCard();
 			}
 		};
-		ability.setStackDescription("Femeref Enchantress - " + c.getController() + " draws a card.");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Femeref Enchantress - ").append(c.getController()).append(" draws a card.");
+		ability.setStackDescription(sb.toString());
 
 		AllZone.Stack.add(ability);
 	}
@@ -4844,7 +4847,10 @@ public class GameActionUtil {
 				AllZone.EndOfTurn.addUntil(untilEOT);
 			}
 		};
-		ability.setStackDescription(c + " - Landfall: gets +2/+2 until EOT.");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(c).append(" - Landfall: gets +2/+2 until EOT.");
+		ability.setStackDescription(sb.toString());
 
 		/*if(c.getController().equals(AllZone.HumanPlayer)) {
 			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
@@ -4863,9 +4869,11 @@ public class GameActionUtil {
 						4, new String[] {""});
 			}
 		};
-
-		ability.setStackDescription(c.getName() + " - Landfall: " + c.getController()
-				+ " puts a 4/4 green Beast creature token onto the battlefield.");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(c.getName()).append(" - Landfall: ").append(c.getController());
+		sb.append(" puts a 4/4 green Beast creature token onto the battlefield.");
+		ability.setStackDescription(sb.toString());
 
 		if(c.getController().equals(AllZone.HumanPlayer)) {
 			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
@@ -4884,9 +4892,11 @@ public class GameActionUtil {
 						new String[] {"Flying"});
 			}
 		};
-
-		ability.setStackDescription(c.getName() + " - Landfall: " + c.getController()
-				+ " puts a 1/1 white Bird creature token with flying onto the battlefield.");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(c.getName()).append(" - Landfall: ").append(c.getController());
+		sb.append(" puts a 1/1 white Bird creature token with flying onto the battlefield.");
+		ability.setStackDescription(sb.toString());
 
 		if(c.getController().equals(AllZone.HumanPlayer)) {
 			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
@@ -4905,9 +4915,11 @@ public class GameActionUtil {
 				crd.addCounter(Counters.P1P1, 3);
 			}
 		};
-
-		ability.setStackDescription("Landfall: " + c.getController().getOpponent()
-				+ " loses 3 life and " + c.getName() + " gets three +1/+1 counters.");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Landfall: ").append(c.getController().getOpponent());
+		sb.append(" loses 3 life and ").append(c.getName()).append(" gets three +1/+1 counters.");
+		ability.setStackDescription(sb.toString());
 
 		if(c.getController().equals(AllZone.HumanPlayer)) {
 			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
@@ -4922,8 +4934,10 @@ public class GameActionUtil {
 				crd.addCounter(Counters.QUEST, 1);
 			}
 		};
-
-		ability.setStackDescription(c.getName() + " - gets a Quest counter.");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(c.getName()).append(" - gets a Quest counter.");
+		ability.setStackDescription(sb.toString());
 
 		if(c.getController().equals(AllZone.HumanPlayer)) {
 			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
@@ -4954,8 +4968,10 @@ public class GameActionUtil {
 				mp.addExtrinsicKeyword("ManaPool:" + color);
 			}
 		};
-
-		ability.setStackDescription(c.getName() + " - add one mana of any color to your mana pool.");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(c.getName()).append(" - add one mana of any color to your mana pool.");
+		ability.setStackDescription(sb.toString());
 
 		if(c.getController().equals(AllZone.HumanPlayer)) {
 			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
@@ -4972,7 +4988,11 @@ public class GameActionUtil {
 				AllZone.GameAction.mill(getTargetPlayer(),3);
 			}
 		};
-		ability.setStackDescription(c.getName() + " - Landfall: " + targetPlayer + " puts the top three cards of his or her library into his or her graveyard.");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(c.getName()).append(" - Landfall: ").append(targetPlayer);
+		sb.append(" puts the top three cards of his or her library into his or her graveyard.");
+		ability.setStackDescription(sb.toString());
 
 		if(c.getController().equals(AllZone.HumanPlayer)) {
 			AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(ability));
@@ -5003,8 +5023,10 @@ public class GameActionUtil {
 				}
 			}
 		};
-
-		ability.setStackDescription(c + " - return Bloodghast from your graveyard to the battlefield.");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(c).append(" - return Bloodghast from your graveyard to the battlefield.");
+		ability.setStackDescription(sb.toString());
 
 		if(c.getController().equals(AllZone.HumanPlayer)) {
 			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
@@ -5033,7 +5055,10 @@ public class GameActionUtil {
 					plant.addCounter(Counters.P1P1, 1);
 			}
 		};
-		ability.setStackDescription(c + " - put a +1/+1 counter on each Plant creature you control.");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(c).append(" - put a +1/+1 counter on each Plant creature you control.");
+		ability.setStackDescription(sb.toString());
 
 		if(c.getController().equals(AllZone.HumanPlayer)) {
 			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
@@ -5070,7 +5095,11 @@ public class GameActionUtil {
                         Target.getController().setLife(lifeGain);
 			}
 		};
-		ability.setStackDescription("Landfall: Whenever a land enters the battlefield under your control, you may have your life total become the number of charge counters on Eternity Vessel.");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Landfall: Whenever a land enters the battlefield under your control, you may ");
+		sb.append("have your life total become the number of charge counters on Eternity Vessel.");
+		ability.setStackDescription(sb.toString());
 
 		if(c.getController().equals(AllZone.HumanPlayer)) {
 			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
@@ -5106,8 +5135,12 @@ public class GameActionUtil {
 				player.gainLife(power);
 			}
 		}; // ability2
-
-		ability2.setStackDescription(c.getName() + " (Lifelink) - " + player + " gains " + power + " life.");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(c.getName()).append(" (Lifelink) - ").append(player);
+		sb.append(" gains ").append(power).append(" life.");
+		ability2.setStackDescription(sb.toString());
+		
 		AllZone.Stack.add(ability2);
 	}
 
@@ -5124,8 +5157,11 @@ public class GameActionUtil {
 				crd.addDamage(damage, src);
 			}
 		}; // ability2
-
-		ability2.setStackDescription("Guilty Conscience deals " + damage + " damage to " + c.getName());
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Guilty Conscience deals ").append(damage).append(" damage to ").append(c.getName());
+		ability2.setStackDescription(sb.toString());
+		
 		if (damage >= 0)
 			AllZone.Stack.add(ability2);
 	}
@@ -5140,8 +5176,11 @@ public class GameActionUtil {
 				crd.addDamage(damage, src);
 			}
 		}; // ability2
-
-		ability2.setStackDescription("Guilty Conscience deals " + n + " damage to " + c.getName());
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Guilty Conscience deals ").append(n).append(" damage to ").append(c.getName());
+		ability2.setStackDescription(sb.toString());
+		
 		AllZone.Stack.add(ability2);
 	}
 
@@ -5225,7 +5264,11 @@ public class GameActionUtil {
              }//execute()
         };//Command
         
-		ability.setStackDescription("Sword of Light and Shadow - You gain 3 life and you may return up to one target creature card from your graveyard to your hand" );
+        StringBuilder sb = new StringBuilder();
+        sb.append("Sword of Light and Shadow - You gain 3 life and you may return ");
+        sb.append("up to one target creature card from your graveyard to your hand");
+        ability.setStackDescription(sb.toString());
+		
 		res.execute();
 	}
 	
@@ -5246,8 +5289,12 @@ public class GameActionUtil {
 				//AllZone.GameAction.getPlayerLife(src.getController()).addLife(3);
 			}
 		}; // ability
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Sword of Body and Mind - put a 2/2 green Wolf creature token onto the battlefield ");
+		sb.append("and opponent puts the top ten cards of his or her library into his or her graveyard.");
+		ability.setStackDescription(sb.toString());
 
-		ability.setStackDescription("Sword of Body and Mind - put a 2/2 green Wolf creature token onto the battlefield and opponent puts the top ten cards of his or her library into his or her graveyard. " );
 		AllZone.Stack.add(ability);
 	}
 	
@@ -5265,11 +5312,13 @@ public class GameActionUtil {
                         if(AllZone.GameAction.isCardInPlay(thisCard)) thisCard.addCounter(Counters.P1P1, 1);
                     }
                 }; // ability2
-
-                ability2.setStackDescription(c.getName() + " - gets a +1/+1 counter");
+                
+                StringBuilder sb = new StringBuilder();
+                sb.append(c.getName()).append(" - gets a +1/+1 counter");
+                ability2.setStackDescription(sb.toString());
+                
                 AllZone.Stack.add(ability2);
             }
-
         }
     }
 
@@ -5300,7 +5349,12 @@ public class GameActionUtil {
     							c.getController().addDamage(damage, source);
     						}
     					};
-    					ability.setStackDescription(source.getName()+" - deals "+damage+" damage to "+ c.getController());
+    					
+    					StringBuilder sb = new StringBuilder();
+    					sb.append(source.getName()).append(" - deals ").append(damage);
+    					sb.append(" damage to ").append(c.getController());
+    					ability.setStackDescription(sb.toString());
+    					
     					AllZone.Stack.add(ability);
     				}
     			}//auras > 0
@@ -5321,7 +5375,12 @@ public class GameActionUtil {
     							CardFactoryUtil.makeToken11WSoldier(darien.getController());
     					}
     				};
-    				ability.setStackDescription(darien.getName()+" - "+darien.getController()+" puts "+damage+" Soldier tokens in play.");
+    				
+    				StringBuilder sb = new StringBuilder();
+    				sb.append(darien.getName()).append(" - ").append(darien.getController());
+    				sb.append(" puts ").append(damage).append(" Soldier tokens in play.");
+    				ability.setStackDescription(sb.toString());
+    				
     				AllZone.Stack.add(ability);
     			}
     		}
@@ -5546,11 +5605,13 @@ public class GameActionUtil {
 
 				}
 			};// ability2
-
-			ability2.setStackDescription(c.getName() + " - " + player + " draws a card, opponent discards a card");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(c.getName()).append(" - ").append(player).append(" draws a card, opponent discards a card");
+			ability2.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability2);
 		}
-
 	}
 	
 	private static void playerDamage_Dissipation_Field(final Card c, final Card crd)
@@ -5565,8 +5626,12 @@ public class GameActionUtil {
 					AllZone.GameAction.moveTo(hand, c);
 				}
 			}	
-		};
-		ability.setStackDescription("Dissipation Field - returns " +c + " back to owner's hand.");
+		};// Ability
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Dissipation Field - returns ").append(c).append(" back to owner's hand.");
+		ability.setStackDescription(sb.toString());
+		
 		AllZone.Stack.add(ability);
 	}
 	
@@ -5580,8 +5645,12 @@ public class GameActionUtil {
 					AllZone.GameAction.destroy(c);
 				}
 			}	
-		};
-		ability.setStackDescription(crd + " - destroys " +c + ".");
+		};// Ability
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(crd).append(" - destroys ").append(c).append(".");
+		ability.setStackDescription(sb.toString());
+		
 		AllZone.Stack.add(ability);
 	}
 	
@@ -5640,8 +5709,11 @@ public class GameActionUtil {
 					return in;
 				}//removeLand() 
 			};// ability2
-
-			ability2.setStackDescription(c.getName() + " - " + "opponent discards a card.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(c.getName()).append(" - ").append("opponent discards a card.");
+			ability2.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability2);
 		}
 	} //Ghastlord of Fugue
@@ -5685,8 +5757,11 @@ public class GameActionUtil {
 					card.addCounter(Counters.P1P1, 1);
 				}
 			};// ability2
-
-			ability2.setStackDescription(c.getName() + " - gets a +1/+1 counter.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(c.getName()).append(" - gets a +1/+1 counter.");
+			ability2.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability2);
 		} // if
 	}
@@ -5702,8 +5777,10 @@ public class GameActionUtil {
 					card.addCounter(Counters.P1P1, 1);
 				}
 			};// ability2
-
-			ability2.setStackDescription(c.getName() + " - gets a +1/+1 counter.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(c.getName()).append(" - gets a +1/+1 counter.");
+			ability2.setStackDescription(sb.toString());
 
 			Command dealtDmg = new Command() {
 				private static final long serialVersionUID = 2200679209414069339L;
