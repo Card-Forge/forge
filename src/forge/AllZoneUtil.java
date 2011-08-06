@@ -504,4 +504,34 @@ public class AllZoneUtil {
 		};
 		return filter;
 	}
+	
+	public static CardListFilter black = new CardListFilter() {
+		public boolean addCard(Card c) {
+			return c.isBlack();
+		}
+	};
+	
+	public static CardListFilter blue = new CardListFilter() {
+		public boolean addCard(Card c) {
+			return c.isBlue();
+		}
+	};
+	
+	public static CardListFilter green = new CardListFilter() {
+		public boolean addCard(Card c) {
+			return c.isGreen();
+		}
+	};
+	
+	public static CardListFilter red = new CardListFilter() {
+		public boolean addCard(Card c) {
+			return c.isRed();
+		}
+	};
+	
+	public static CardListFilter white = new CardListFilter() {
+		public boolean addCard(Card c) {
+			return c.isWhite();
+		}
+	};
 }

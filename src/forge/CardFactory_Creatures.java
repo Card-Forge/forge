@@ -11343,7 +11343,7 @@ public class CardFactory_Creatures {
                     cards = cards.getType("Creature");
                     
                     for(int i = 0; i < cards.size(); i++) {
-                        if(!CardUtil.getColors(cards.get(i)).contains(Constant.Color.White)
+                        if(!(cards.get(i)).isWhite()
                                 && CardFactoryUtil.canDamage(card, cards.get(i))) {
                             cards.get(i).addDamage(3, card);
                         }
@@ -12200,10 +12200,9 @@ public class CardFactory_Creatures {
                     
 
                     for(int i = 0; i < creatures.size(); i++) {
-                        //if(!CardUtil.getColors(nonBlackCards.get(i)).contains(Constant.Color.Black))
-                        if(CardUtil.getColors(creatures.get(i)).contains(Constant.Color.Red)) {
+                        if((creatures.get(i)).isRed()) {
                             redGreen.add(creatures.get(i));
-                        } else if(CardUtil.getColors(creatures.get(i)).contains(Constant.Color.Green)) {
+                        } else if((creatures.get(i)).isGreen()) {
                             redGreen.add(creatures.get(i));
                         }
                     }
@@ -12264,10 +12263,9 @@ public class CardFactory_Creatures {
                     
 
                     for(int i = 0; i < creatures.size(); i++) {
-                        //if(!CardUtil.getColors(nonBlackCards.get(i)).contains(Constant.Color.Black))
-                        if(CardUtil.getColors(creatures.get(i)).contains(Constant.Color.White)) {
+                        if((creatures.get(i)).isWhite()) {
                             whiteBlue.add(creatures.get(i));
-                        } else if(CardUtil.getColors(creatures.get(i)).contains(Constant.Color.Blue)) {
+                        } else if((creatures.get(i)).isBlue()) {
                             whiteBlue.add(creatures.get(i));
                         }
                     }
@@ -12325,10 +12323,9 @@ public class CardFactory_Creatures {
                     
 
                     for(int i = 0; i < creatures.size(); i++) {
-                        //if(!CardUtil.getColors(nonBlackCards.get(i)).contains(Constant.Color.Black))
-                        if(CardUtil.getColors(creatures.get(i)).contains(Constant.Color.Green)) {
+                        if((creatures.get(i)).isGreen()) {
                             greenWhite.add(creatures.get(i));
-                        } else if(CardUtil.getColors(creatures.get(i)).contains(Constant.Color.White)) {
+                        } else if((creatures.get(i)).isWhite()) {
                             greenWhite.add(creatures.get(i));
                         }
                     }
@@ -12514,10 +12511,9 @@ public class CardFactory_Creatures {
                     
 
                     for(int i = 0; i < creatures.size(); i++) {
-                        //if(!CardUtil.getColors(nonBlackCards.get(i)).contains(Constant.Color.Black))
-                        if(CardUtil.getColors(creatures.get(i)).contains(Constant.Color.Black)) {
+                        if(creatures.get(i).isBlack()) {
                             blackBlue.add(creatures.get(i));
-                        } else if(CardUtil.getColors(creatures.get(i)).contains(Constant.Color.Blue)) {
+                        } else if(creatures.get(i).isBlue()) {
                             blackBlue.add(creatures.get(i));
                         }
                     }
@@ -15831,11 +15827,7 @@ public class CardFactory_Creatures {
                         PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                         PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
                         CardList list = new CardList(grave.getCards());
-                        list = list.filter(new CardListFilter() {
-                            public boolean addCard(Card c) {
-                                return CardUtil.getColors(c).contains(Constant.Color.Black);
-                            }
-                        });
+                        list = list.filter(AllZoneUtil.black);
                         
                         if(list.size() > 0) {
                             if(card.getController().equals(Constant.Player.Human)) {
@@ -15858,11 +15850,7 @@ public class CardFactory_Creatures {
                 public boolean canPlay() {
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
                     CardList list = new CardList(grave.getCards());
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return CardUtil.getColors(c).contains(Constant.Color.Black);
-                        }
-                    });
+                    list = list.filter(AllZoneUtil.black);
                     
                     SpellAbility sa;
                     for(int i = 0; i < AllZone.Stack.size(); i++) {

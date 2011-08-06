@@ -238,11 +238,11 @@ class CardFactory_Lands {
                                     if(biggest2.getNetAttack() < creature2.get(i).getNetAttack()) biggest2 = creature2.get(i);   
                                 }
                              		if(biggest2 != null) {  
-                             			if(CardUtil.getColors(biggest2).contains(Constant.Color.Green)) Color = "green";
-                             			if(CardUtil.getColors(biggest2).contains(Constant.Color.Blue)) Color = "blue";
-                             			if(CardUtil.getColors(biggest2).contains(Constant.Color.White)) Color = "white";
-                             			if(CardUtil.getColors(biggest2).contains(Constant.Color.Red)) Color = "red";
-                             			if(CardUtil.getColors(biggest2).contains(Constant.Color.Black)) Color = "black";
+                             			if(biggest2.isGreen()) Color = "green";
+                             			if(biggest2.isBlue()) Color = "blue";
+                             			if(biggest2.isWhite()) Color = "white";
+                             			if(biggest2.isRed()) Color = "red";
+                             			if(biggest2.isBlack()) Color = "black";
                              		} else {
                              			Color = "black";          			
                              		}
