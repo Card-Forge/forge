@@ -892,7 +892,10 @@ public class CombatUtil {
 	                    			
 	                    	}
 	                    };
-	                    ability.setStackDescription("Annihilator - Defending player sacrifices " + a + " permanents.");
+	                    StringBuilder sb = new StringBuilder();
+	                    sb.append("Annihilator - Defending player sacrifices ").append(a).append(" permanents.");
+	                    ability.setStackDescription(sb.toString());
+	                    
 	                    AllZone.Stack.add(ability);
 	        		} //find
 	        	} //for
@@ -945,7 +948,10 @@ public class CombatUtil {
                         
                     };//ability
                     
-                    ability2.setStackDescription(var.getName() + " - " + c.getName() + " gets +2/+2 until EOT.");
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(var.getName()).append(" - ").append(c.getName()).append(" gets +2/+2 until EOT.");
+                    ability2.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability2);
                     
                 }
@@ -965,7 +971,10 @@ public class CombatUtil {
                         crd.addCounter(Counters.P1P1, 1);
                     }
                 };
-                ability.setStackDescription(c + " - Whenever this creature attacks, put a +1/+1 counter on it.");
+                StringBuilder sb = new StringBuilder();
+                sb.append(c).append(" - Whenever this creature attacks, put a +1/+1 counter on it.");
+                ability.setStackDescription(sb.toString());
+                
                 for(int i = 0; i < count; i++)
                     AllZone.Stack.add(ability);
             }//Raging Ravine
@@ -1002,7 +1011,10 @@ public class CombatUtil {
 	                    
 	                };//ability
 	                
-	                ability2.setStackDescription(c.getName() + " - attacks alone and gets +2/+0 until EOT.");
+	                StringBuilder sb2 = new StringBuilder();
+	                sb2.append(c.getName()).append(" - attacks alone and gets +2/+0 until EOT.");
+	                ability2.setStackDescription(sb2.toString());
+	                
 	                AllZone.Stack.add(ability2);
 	            }
             }
@@ -1047,8 +1059,10 @@ public class CombatUtil {
                     }
                 };
                 
-                ability2.setStackDescription(c.getName()
-                        + " - all other creatures you control get +1/+0 until end of turn.");
+                StringBuilder sb2 = new StringBuilder();
+                sb2.append(c.getName()).append(" - all other creatures you control get +1/+0 until end of turn.");
+                ability2.setStackDescription(sb2.toString());
+                
                 AllZone.Stack.add(ability2);
             }//Zhang He
             
@@ -1092,8 +1106,10 @@ public class CombatUtil {
                     }
                 };
                 
-                ability2.setStackDescription(c.getName()
-                        + " - all other creatures you control get +1/+1 until end of turn.");
+                StringBuilder sb2 = new StringBuilder();
+                sb2.append(c.getName()).append(" - all other creatures you control get +1/+1 until end of turn.");
+                ability2.setStackDescription(sb2.toString());
+                
                 AllZone.Stack.add(ability2);
             }//Soltari Champion
             
@@ -1138,8 +1154,10 @@ public class CombatUtil {
                     }
                 };
                 
-                ability2.setStackDescription(c.getName()
-                        + " - Goblin creatures you control get +1/+1 until end of turn.");
+                StringBuilder sb2 = new StringBuilder();
+                sb2.append(c.getName()).append(" - Goblin creatures you control get +1/+1 until end of turn.");
+                ability2.setStackDescription(sb2.toString());
+                
                 AllZone.Stack.add(ability2);
             }//Goblin General
             
@@ -1175,7 +1193,10 @@ public class CombatUtil {
                     }
                 };
                 
-                ability2.setStackDescription(c.getName() + " - attacking creatures get +1/+1 until end of turn.");
+                StringBuilder sb2 = new StringBuilder();
+                sb2.append(c.getName()).append(" - attacking creatures get +1/+1 until end of turn.");
+                ability2.setStackDescription(sb2.toString());
+                
                 AllZone.Stack.add(ability2);
             }//Pianna, Nomad Captain
             
@@ -1316,13 +1337,13 @@ public class CombatUtil {
                             AllZone.EndOfTurn.addUntil(untilEOT);
                         }
                     }//resolve
-                    
                 };//ability
                 
-                ability2.setStackDescription(c.getName() + " - gets +3/-3 until EOT.");
-                AllZone.Stack.add(ability2);
+                StringBuilder sb2 = new StringBuilder();
+                sb2.append(c.getName()).append(" - gets +3/-3 until EOT.");
+                ability2.setStackDescription(sb2.toString());
                 
-
+                AllZone.Stack.add(ability2);
             }//Flowstone Charger
             
             else if(c.getName().equals("Timbermaw Larva") && !c.getCreatureAttackedThisCombat()) {
@@ -1412,12 +1433,13 @@ public class CombatUtil {
                     
                 };//ability
                 
-                ability2.setStackDescription(c.getName()
-                        + " - gets +1/+1 until end of turn for each untapped creature" + c.getController()
-                        + "controls.");
+                StringBuilder sb2 = new StringBuilder();
+                sb2.append(c.getName()).append(" - gets +1/+1 until end of turn for each untapped creature ");
+                sb2.append(c.getController()).append(" controls.");
+                ability2.setStackDescription(sb2.toString());
+                
                 AllZone.Stack.add(ability2);
                 
-
             }//Knotvine Paladin
             
 
@@ -1452,11 +1474,12 @@ public class CombatUtil {
                             AllZone.EndOfTurn.addUntil(untilEOT);
                         }
                     }//resolve
-                    
                 };//ability
                 
-                ability2.setStackDescription(c.getName()
-                        + " - gets +2/+0 until end of turn for each other attacking Goblin.");
+                StringBuilder sb2 = new StringBuilder();
+                sb2.append(c.getName()).append(" - gets +2/+0 until end of turn for each other attacking Goblin.");
+                ability2.setStackDescription(sb2.toString());
+                
                 AllZone.Stack.add(ability2);
                 
             }//Goblin Piledriver
@@ -1492,7 +1515,10 @@ public class CombatUtil {
                     
                 };//ability
                 
-                ability2.setStackDescription(c.getName() + " - gets +2/+0 until EOT.");
+                StringBuilder sb2 = new StringBuilder();
+                sb2.append(c.getName()).append(" - gets +2/+0 until EOT.");
+                ability2.setStackDescription(sb2.toString());
+                
                 AllZone.Stack.add(ability2);
                 
             }//+2+0 Chargers
@@ -1542,21 +1568,20 @@ public class CombatUtil {
                             }
                         };//Command
                         
-
                         if(AllZone.GameAction.isCardInPlay(charger)) {
                             charger.addIntrinsicKeyword("Trample");
                             
                             AllZone.EndOfTurn.addUntil(untilEOT);
                         }
                     }//resolve
-                    
                 };//ability
                 
-                ability2.setStackDescription(c.getName()
-                        + " - gains trample until end of turn if its power is 10 or greater.");
+                StringBuilder sb2 = new StringBuilder();
+                sb2.append(c.getName()).append(" - gains trample until end of turn if its power is 10 or greater.");
+                ability2.setStackDescription(sb2.toString());
+                
                 AllZone.Stack.add(ability2);
                 
-
             }//Witch-Maw Nephilim
             
             else if(c.getName().equals("Jedit Ojanen of Efrava") && !c.getCreatureAttackedThisCombat()) {
@@ -1572,9 +1597,10 @@ public class CombatUtil {
                     }
                 }; //Ability
                 
-
-                ability2.setStackDescription(c.getName()
-                        + " - put a 2/2 green Cat Warrior creature token with forestwalk into play.");
+                StringBuilder sb2 = new StringBuilder();
+                sb2.append(c.getName()).append(" - put a 2/2 green Cat Warrior creature token with forestwalk into play.");
+                ability2.setStackDescription(sb2.toString());
+                
                 AllZone.Stack.add(ability2);
                 
             }//Jedit
@@ -1592,9 +1618,10 @@ public class CombatUtil {
                     }
                 }; //Ability
                 
-
-                ability2.setStackDescription(c.getName()
-                        + " - put a 2/2 black Zombie creature token into play.");
+                StringBuilder sb2 = new StringBuilder();
+                sb2.append(c.getName()).append(" - put a 2/2 black Zombie creature token into play.");
+                ability2.setStackDescription(sb2.toString());
+                
                 AllZone.Stack.add(ability2);
                 
             }//Grave Titan
@@ -1611,9 +1638,11 @@ public class CombatUtil {
                     }
                 }; //Ability
                 
-
-                ability2.setStackDescription(c.getName()
-                        + " - search your library for up to two land cards, put them onto the battlefield tapped, then shuffle your library.");
+                StringBuilder sb2 = new StringBuilder();
+                sb2.append(c.getName()).append(" - search your library for up to two land cards, ");
+                sb2.append("put them onto the battlefield tapped, then shuffle your library.");
+                ability2.setStackDescription(sb2.toString());
+                
                 AllZone.Stack.add(ability2);
                 
             }//Primeval Titan
@@ -1798,7 +1827,11 @@ public class CombatUtil {
                     	AllZone.Stack.add(ability);
                     }
                 };
-                ability.setStackDescription(c.getName() + " - taps up to 8 target permanents.");
+                
+                StringBuilder sb = new StringBuilder();
+                sb.append(c.getName()).append(" - taps up to 8 target permanents.");
+                ability.setStackDescription(sb.toString());
+               
         		CardList Silence = AllZoneUtil.getPlayerCardsInPlay(c.getController().getOpponent()); 		
         		Silence = Silence.getName("Linvala, Keeper of Silence");
         		if(Silence.size() == 0) {
@@ -1883,8 +1916,14 @@ public class CombatUtil {
                         }
                     }
                 };
-                ability.setStackDescription("Goblin Guide - defending player reveals the top card of his or her library. If it's a land card, that player puts it into his or her hand.");
+                
+                StringBuilder sb = new StringBuilder();
+                sb.append("Goblin Guide - defending player reveals the top card of his or her library. ");
+                sb.append("If it's a land card, that player puts it into his or her hand.");
+                ability.setStackDescription(sb.toString()); 
+                
                 AllZone.Stack.add(ability);
+                
             }//Goblin Guide
             
             else if(c.getName().equals("Pulse Tracker") && !c.getCreatureAttackedThisCombat()) {
@@ -1910,14 +1949,21 @@ public class CombatUtil {
             			player.addDamage(5, source);
             		}
             	};
-            	damage.setStackDescription(c + " - deals 5 damage to controller.");
+            	
+            	StringBuilder sbDam = new StringBuilder();
+            	sbDam.append(c).append(" - deals 5 damage to controller.");
+            	damage.setStackDescription(sbDam.toString());
+            	
             	final Ability sacrifice = new Ability(c, "0") {
             		@Override
             		public void resolve() {
             			AllZone.GameAction.sacrifice(source);
             		}
             	};
-            	sacrifice.setStackDescription("Sacrifice "+c);
+            	
+            	StringBuilder sbSac = new StringBuilder();
+            	sbSac.append("Sacrifice ").append(c);
+            	sacrifice.setStackDescription(sbSac.toString());
                 
                 final Command atEOCdamage = new Command() {
     				private static final long serialVersionUID = 1513673469721590317L;
@@ -1961,8 +2007,10 @@ public class CombatUtil {
                 }
             };// ability2
             
-            ability2.setStackDescription(c.getName() + " - " + opponent
-                    + " loses life equal to cards in graveyard.");
+            StringBuilder sb2 = new StringBuilder();
+            sb2.append(c.getName()).append(" - ").append(opponent).append(" loses life equal to cards in graveyard.");
+            ability2.setStackDescription(sb2.toString());
+            
             AllZone.Stack.add(ability2);
             
         } else if(c.getName().equals("Crypt Cobra") || c.getName().equals("Suq'Ata Assassin")
@@ -1974,7 +2022,6 @@ public class CombatUtil {
             else AllZone.ComputerPlayer.addPoisonCounters(1);
         }
         
-
     }
     
     static void checkDeclareBlockers(CardList cl) {
@@ -2005,7 +2052,10 @@ public class CombatUtil {
 		        				crd.getController().gainLife(2);
 		        			}
 		        		};
-		        		ability.setStackDescription(pcs.get(i) + " - " + c.getController() + " gains 2 life.");
+		        		
+		        		StringBuilder sb = new StringBuilder();
+		        		sb.append(pcs.get(i)).append(" - ").append(c.getController()).append(" gains 2 life.");
+		        		ability.setStackDescription(sb.toString());
 		        		
 		        		if (c.getController().equals(AllZone.HumanPlayer)) {
 			        		String[] choices = {"Yes", "No"};
@@ -2132,7 +2182,10 @@ public class CombatUtil {
             };//ability
             b.setCreatureAttackedThisCombat(true);
             
-            ability2.setStackDescription(b.getName() + " - gets -" + mag + "/-" + mag + " until EOT.");
+            StringBuilder sb2 = new StringBuilder();
+            sb2.append(b.getName()).append(" - gets -").append(mag).append("/-").append(mag).append(" until EOT.");
+            ability2.setStackDescription(sb2.toString());
+            
             AllZone.Stack.add(ability2);
             Log.debug("Adding Flanking!");
             //AllZone.GameAction.checkStateEffects();
@@ -2284,7 +2337,9 @@ public class CombatUtil {
                 }
             };
             
-            ability.setStackDescription(spider + " - gets a +1/+1 counter.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(spider).append(" - gets a +1/+1 counter.");
+            ability.setStackDescription(sb.toString());
             
             final Command atEOC = new Command() {
                 private static final long serialVersionUID = 6617320324660612694L;
@@ -2309,7 +2364,10 @@ public class CombatUtil {
         		}
         	};
         	
-        	ability.setStackDescription(b + " - destroy attacking creature.");
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(b).append(" - destroy attacking creature.");
+        	ability.setStackDescription(sb.toString());
+        	
         	AllZone.Stack.add(ability);
         }
 
@@ -2327,7 +2385,9 @@ public class CombatUtil {
                 }
             };
             
-            ability.setStackDescription(b + " - return blocked creature to owner's hand.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(b).append(" - return blocked creature to owner's hand.");
+            ability.setStackDescription(sb.toString());
             
             final Command atEOC = new Command() {
                 private static final long serialVersionUID = 5263273480814811314L;
@@ -2349,14 +2409,21 @@ public class CombatUtil {
         			player.addDamage(5, source);
         		}
         	};
-        	damage.setStackDescription(b + " - deals 5 damage to controller.");
+        	
+        	StringBuilder sbDmg = new StringBuilder();
+        	sbDmg.append(b).append(" - deals 5 damage to controller.");
+        	damage.setStackDescription(sbDmg.toString());
+        	
         	final Ability sacrifice = new Ability(b, "0") {
         		@Override
         		public void resolve() {
         			AllZone.GameAction.sacrifice(source);
         		}
         	};
-        	sacrifice.setStackDescription("Sacrifice "+b);
+        	
+        	StringBuilder sbSac = new StringBuilder();
+        	sbSac.append("Sacrifice ").append(b);
+        	sacrifice.setStackDescription(sbSac.toString());
             
             final Command atEOCdamage = new Command() {
 				private static final long serialVersionUID = -1470724468078097507L;
@@ -2407,7 +2474,11 @@ public class CombatUtil {
                 }//resolve
                 
             };//ability
-            ability.setStackDescription(c + " - (Exalted) gets +1/+1 until EOT.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(c).append(" - (Exalted) gets +1/+1 until EOT.");
+            ability.setStackDescription(sb.toString());
+            
             AllZone.Stack.add(ability);
         }
         
@@ -2421,7 +2492,11 @@ public class CombatUtil {
 				    crd.untap();
 				}
 			};
-			fhUntap.setStackDescription(c + " - (Exalted) untap.");
+			
+			StringBuilder sbUntap = new StringBuilder();
+			sbUntap.append(c).append(" - (Exalted) untap.");
+			fhUntap.setStackDescription(sbUntap.toString());
+			
 			AllZone.Stack.add(fhUntap);
 		
 			// If any Finest Hours, queue up a new combat phase
@@ -2431,10 +2506,15 @@ public class CombatUtil {
 						AllZone.Phase.addExtraCombat(crd.getController());				
 					}
 				};
-				fhAddCombat.setStackDescription(c + " - (Exalted) " + phasingPlayer + " gets Extra Combat Phase.");
+				
+				StringBuilder sbACom = new StringBuilder();
+				sbACom.append(c).append(" - (Exalted) ").append(phasingPlayer).append(" gets Extra Combat Phase.");
+				fhAddCombat.setStackDescription(sbACom.toString());
+				
 				AllZone.Stack.add(fhAddCombat);
 			}
 		}
+		
         if(AllZoneUtil.isCardInPlay("Rafiq of the Many", phasingPlayer)) {
             Ability ability2 = new Ability(c, "0") {
                 @Override
@@ -2454,7 +2534,11 @@ public class CombatUtil {
                 }//resolve
                 
             };//ability2
-            ability2.setStackDescription(c + " - (Exalted) gets Double Strike until EOT.");
+            
+            StringBuilder sb2 = new StringBuilder();
+            sb2.append(c).append(" - (Exalted) gets Double Strike until EOT.");
+            ability2.setStackDescription(sb2.toString());
+            
             AllZone.Stack.add(ability2);
         }
         
@@ -2477,9 +2561,14 @@ public class CombatUtil {
                 }//resolve
                 
             };//ability2
-            ability3.setStackDescription(c + " - (Exalted) gets Lifelink until EOT.");
+            
+            StringBuilder sb3 = new StringBuilder();
+            sb3.append(c).append(" - (Exalted) gets Lifelink until EOT.");
+            ability3.setStackDescription(sb3.toString());
+            
             AllZone.Stack.add(ability3);
         }
+        
         if(AllZoneUtil.getPlayerCardsInPlay(phasingPlayer, "Sovereigns of Lost Alara").size() > 0) {
             for(int i = 0; i < AllZoneUtil.getPlayerCardsInPlay(phasingPlayer, "Sovereigns of Lost Alara").size(); i++) { 
             	final Card attacker = c;
@@ -2523,7 +2612,12 @@ public class CombatUtil {
                         if(player.isHuman()) attacker.getController().shuffle();	                    
                 }//resolve
             };// ability4
-            ability4.setStackDescription(c + " - (Exalted) searches library for an Aura card that could enchant that creature, put it into play attached to that creature, then shuffles library. ");
+            
+            StringBuilder sb4 = new StringBuilder();
+            sb4.append(c).append(" - (Exalted) searches library for an Aura card that could enchant that creature, ");
+            sb4.append("put it into play attached to that creature, then shuffles library.");
+            ability4.setStackDescription(sb4.toString());
+            
             AllZone.Stack.add(ability4);
             } // For
         }
@@ -2566,7 +2660,11 @@ public class CombatUtil {
     			}//resolve
 
     		};//ability
-    		ability.setStackDescription(c + " - (Rampage) gets +"+pump+"/+"+pump+" until EOT.");
+    		
+    		StringBuilder sb = new StringBuilder();
+    		sb.append(c).append(" - (Rampage) gets +").append(pump).append("/+").append(pump).append(" until EOT.");
+    		ability.setStackDescription(sb.toString());
+    		
     		AllZone.Stack.add(ability);
     	}
     }
