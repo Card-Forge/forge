@@ -1,3 +1,99 @@
+Wild Cantor
+RG
+Creature Human Druid
+no text
+1/1
+Sacrifice CARDNAME: Add W to your mana pool.
+Sacrifice CARDNAME: Add U to your mana pool.
+Sacrifice CARDNAME: Add B to your mana pool.
+Sacrifice CARDNAME: Add R to your mana pool.
+Sacrifice CARDNAME: Add G to your mana pool.
+
+Tinder Farm
+no cost
+Land
+no text
+tap: add G
+tap, Sacrifice CARDNAME: Add R W to your mana pool.
+Comes into play tapped.
+
+Timberland Ruins
+no cost
+Land
+no text
+tap: add G
+tap, Sacrifice CARDNAME: Add W to your mana pool.
+tap, Sacrifice CARDNAME: Add U to your mana pool.
+tap, Sacrifice CARDNAME: Add B to your mana pool.
+tap, Sacrifice CARDNAME: Add R to your mana pool.
+tap, Sacrifice CARDNAME: Add G to your mana pool.
+Comes into play tapped.
+
+Svyelunite Temple
+no cost
+Land
+no text
+tap: add U
+tap, Sacrifice CARDNAME: Add U U to your mana pool.
+Comes into play tapped.
+
+Sulfur Vent
+no cost
+Land
+no text
+tap: add B
+tap, Sacrifice CARDNAME: Add U R to your mana pool.
+Comes into play tapped.
+
+Seafloor Debris
+no cost
+Land
+no text
+tap: add U
+tap, Sacrifice CARDNAME: Add W to your mana pool.
+tap, Sacrifice CARDNAME: Add U to your mana pool.
+tap, Sacrifice CARDNAME: Add B to your mana pool.
+tap, Sacrifice CARDNAME: Add R to your mana pool.
+tap, Sacrifice CARDNAME: Add G to your mana pool.
+Comes into play tapped.
+
+Ruins of Trokair
+no cost
+Land
+no text
+tap: add W
+tap, Sacrifice CARDNAME: Add W W to your mana pool.
+Comes into play tapped.
+
+Ravaged Highlands
+no cost
+Land
+no text
+tap: add R
+tap, Sacrifice CARDNAME: Add W to your mana pool.
+tap, Sacrifice CARDNAME: Add U to your mana pool.
+tap, Sacrifice CARDNAME: Add B to your mana pool.
+tap, Sacrifice CARDNAME: Add R to your mana pool.
+tap, Sacrifice CARDNAME: Add G to your mana pool.
+Comes into play tapped.
+
+Morgue Toad
+2 B
+Creature Frog
+no text
+2/2
+Sacrifice CARDNAME: Add U R to your mana pool.
+
+Lotus Petal
+0
+Artifact
+no text
+tap, Sacrifice CARDNAME: Add W to your mana pool.
+tap, Sacrifice CARDNAME: Add U to your mana pool.
+tap, Sacrifice CARDNAME: Add B to your mana pool.
+tap, Sacrifice CARDNAME: Add R to your mana pool.
+tap, Sacrifice CARDNAME: Add G to your mana pool.
+
 Black Lotus
 0
 Artifact
@@ -13,7 +109,21 @@ no cost
 Land
 no text
 tap: add 1
-tap, Sacrifice Crystal Vein: Add 2 to your mana pool.
+tap, Sacrifice CARDNAME: Add 2 to your mana pool.
+
+Tooth of Ramos
+3
+Artifact
+no text
+tap: add W
+Sacrifice CARDNAME: Add W to your mana pool.
+
+Skull of Ramos
+3
+Artifact
+no text
+tap: add B
+Sacrifice CARDNAME: Add B to your mana pool.
 
 Horn of Ramos
 3
@@ -41,28 +151,42 @@ Coal Golem
 Artifact Creature Golem
 no text
 3/3
-3, Sacrifice Coal Golem: Add R R R to your mana pool.
+3, Sacrifice CARDNAME: Add R R R to your mana pool.
+
+Treva's Attendant
+5
+Artifact Creature Golem
+no text
+3/3
+1, Sacrifice CARDNAME: Add G W U to your mana pool.
+
+Rith's Attendant
+5
+Artifact Creature Golem
+no text
+3/3
+1, Sacrifice CARDNAME: Add R G W to your mana pool.
 
 Dromar's Attendant
 5
 Artifact Creature Golem
 no text
 3/3
-1, Sacrifice Dromar's Attendant: Add W U B to your mana pool.
+1, Sacrifice CARDNAME: Add W U B to your mana pool.
 
 Darigaaz's Attendant
 5
 Artifact Creature Golem
 no text
 3/3
-1, Sacrifice Darigaaz's Attendant: Add B R G to your mana pool.
+1, Sacrifice CARDNAME: Add B R G to your mana pool.
 
 Crosis's Attendant
 5
 Artifact Creature Golem
 no text
 3/3
-1, Sacrifice Crosis's Attendant: Add U B R to your mana pool.
+1, Sacrifice CARDNAME: Add U B R to your mana pool.
 
 Blood Vassal
 2 B
