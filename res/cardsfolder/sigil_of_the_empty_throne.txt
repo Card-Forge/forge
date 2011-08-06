@@ -1,7 +1,7 @@
 Name:Sigil of the Empty Throne
 ManaCost:3 W W
 Types:Enchantment
-Text:Whenever you play an enchantment spell, put a 4/4 white Angel token with flying into play.
+Text:Whenever you cast an enchantment spell, put a 4/4 white Angel creature token with flying onto the battlefield.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_of_the_empty_throne.jpg
 SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/18.jpg

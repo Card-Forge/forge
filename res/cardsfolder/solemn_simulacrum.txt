@@ -1,7 +1,7 @@
 Name:Solemn Simulacrum
 ManaCost:4
 Types:Artifact Creature Golem
-Text:When Solemn Simulacrum comes into play, you may search your library for a basic land card and put that card into play tapped. If you do, shuffle your library.\r\nWhen Solemn Simulacrum is put into a graveyard from play, you may draw a card.
+Text:When CARDNAME enters the battlefield, you may search your library for a basic land card and put that card onto the battlefield tapped. If you do, shuffle your library.\r\nWhen CARDNAME is put into a graveyard from the battlefield, you may draw a card.
 PT:2/2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/solemn_simulacrum.jpg

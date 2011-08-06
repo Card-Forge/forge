@@ -1,7 +1,7 @@
 Name:Singe-Mind Ogre
 ManaCost:2 B R
 Types:Creature Ogre Mutant
-Text:When Singe-Mind Ogre comes into play, target player reveals a card at random from his or her hand, then loses life equal to that card's converted mana cost.
+Text:When CARDNAME enters the battlefield, target player reveals a card at random from his or her hand, then loses life equal to that card's converted mana cost.
 PT:3/2
 SVar:Rarity:Common
 SVar:Picture:http://magic.tcgplayer.com/db/cards/17138.jpg

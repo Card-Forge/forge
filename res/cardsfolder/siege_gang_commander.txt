@@ -1,7 +1,7 @@
 Name:Siege-Gang Commander
 ManaCost:3 R R
 Types:Creature Goblin
-Text:When Siege-Gang Commander comes into play, put three 1/1 red Goblin creature tokens into play.
+Text:When CARDNAME enters the battlefield, put three 1/1 red Goblin creature tokens onto the battlefield.
 PT:2/2
 A:AB$DealDamage | Cost$ 1 R Sac<1/Goblin> | Tgt$ CP | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
 K:etbMakeToken<>3<>Goblin<>R 1 1 Goblin<>Controller<>R<>Creature;Goblin<>1<>1<>None<>put three 1/1 red Goblin creature tokens onto the battlefield.

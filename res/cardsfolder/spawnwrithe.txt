@@ -1,7 +1,7 @@
 Name:Spawnwrithe
 ManaCost:2 G
 Types:Creature Elemental
-Text:Whenever Spawnwrithe deals combat damage to a player, put a token into play that's a copy of Spawnwrithe.
+Text:Whenever CARDNAME deals combat damage to a player, put a token that's a copy of CARDNAME onto the battlefield.
 PT:2/2
 K:Trample
 SVar:Rarity:Rare
