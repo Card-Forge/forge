@@ -42,7 +42,7 @@ filigree_sages.jpg				http://www.wizards.com/global/images/magic/general/filigre
 spire_owl.jpg					http://www.wizards.com/global/images/magic/general/spire_owl.jpg
 sage_aven.jpg					http://www.wizards.com/global/images/magic/general/sage_aven.jpg
 sage_of_epityr.jpg				http://www.wizards.com/global/images/magic/general/sage_of_epityr.jpg
-omen.jpg						http://www.wizards.com/global/images/magic/general/omen.jpg
+omen.jpg						http://www.magickartenmarkt.de/img/cards/Portal/omen.jpg
 inkfathom_divers.jpg			http://www.wizards.com/global/images/magic/general/inkfathom_divers.jpg
 index.jpg						http://www.wizards.com/global/images/magic/general/index.jpg
 sage_owl.jpg					http://www.wizards.com/global/images/magic/general/sage_owl.jpg
