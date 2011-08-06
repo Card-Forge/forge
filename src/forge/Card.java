@@ -313,7 +313,7 @@ public class Card extends MyObservable {
         else return "";
     }
     
-    public void SetSVar(String Var, String str) {
+    public void setSVar(String Var, String str) {
         if(SVars.containsKey(Var)) SVars.remove(Var);
         
         SVars.put(Var, str);

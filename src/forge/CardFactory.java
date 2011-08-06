@@ -215,7 +215,7 @@ public class CardFactory implements NewConstants {
                 
                 String k[] = parse.split(":");
                 
-                if(k.length > 2) card.SetSVar(k[1], k[2]);
+                if(k.length > 2) card.setSVar(k[1], k[2]);
             }
         }
         
@@ -16951,21 +16951,15 @@ public class CardFactory implements NewConstants {
     	  {
     		  public void resolve()
     		  {
-    			  getSourceCard().addCounter(Counters.TOWER, getSourceCard().getX());
+    			  getSourceCard().addCounter(Counters.TOWER, Integer.parseInt(getManaCost()));
     		  }
     		  public boolean canPlayAI()
     		  {
-    			  getSourceCard().setX(ComputerUtil.getAvailableMana().size());
-    			  setManaCost(getSourceCard().getX() + "");
-    			  int n = getSourceCard().getX();
-    			  for (Card c : AllZone.Computer_Play.getCards())
-    			  {
-    				  if (c.getName().equals("Doubling Season"))
-    					  n*=2;
-    				  if (n > 20)
-    					  return true;
-    			  }
-    			  return false;
+    			  int m = (int)Math.pow(2, CardFactoryUtil.getCards("Doubling Season", Constant.Player.Computer).size());
+    			  int n = Math.max(1, Math.min((int)Math.ceil((100-getSourceCard().getCounters(Counters.TOWER))/m),
+    					           ComputerUtil.getAvailableMana().size())) ;
+    			  setManaCost(n + "");
+    			  return m*n <=20;
     		  }
     	  };
     	  ability.setBeforePayMana(new Input()
@@ -16976,13 +16970,13 @@ public class CardFactory implements NewConstants {
     		 {
     			 String s = JOptionPane.showInputDialog("What would you like X to be?");
     	  		 try {
-    	  				 ability.getSourceCard().setX(Integer.parseInt(s));
+    	  			     Integer.parseInt(s);
     	  				 ability.setManaCost(s);
     	  				 stopSetNext(new Input_PayManaCost(ability));
     	  			 }
     	  			 catch(NumberFormatException e){
     	  				 AllZone.Display.showMessage("\"" + s + "\" is not a number.");
-    	  				 stop();
+    	  				 showMessage();
     	  			 }
     		 }
     	  });
