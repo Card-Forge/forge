@@ -5,6 +5,7 @@ Text:no text
 PT:*/3
 K:stSetPT:Count$Valid Rat:3:Pestilence Rats's power is equal to the number of other Rats on the battlefield.
 SVar:BuffedBy:Rat
+SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pestilence_rats.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/45.jpg
