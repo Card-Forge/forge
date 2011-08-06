@@ -9467,6 +9467,7 @@ public class GameActionUtil {
 					c.setName("Dragon");
 					c.setImageName("RG 1 1 Dragon");
 					c.setManaCost("RG");
+					c.addColor("RG");
 					c.setToken(true);
 
 					c.addType("Creature");
