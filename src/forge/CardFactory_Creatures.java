@@ -4169,6 +4169,8 @@ public class CardFactory_Creatures {
                             abilityComes.setTargetCard(target);
                             AllZone.Stack.add(abilityComes);
                         }
+                        else
+                        	AllZone.GameAction.sacrifice(card);
                     }//else
                 }//execute()
             };//CommandComes
@@ -4295,9 +4297,7 @@ public class CardFactory_Creatures {
                             AllZone.Stack.add(abilityComes);
                         }
                         else
-                        {
                         	AllZone.GameAction.sacrifice(card);
-                        }
                     }//computer
                 }//execute()
             };//CommandComes
@@ -4461,6 +4461,8 @@ public class CardFactory_Creatures {
                             abilityComes.setTargetCard(target);
                             AllZone.Stack.add(abilityComes);
                         }
+                        else
+                        	AllZone.GameAction.sacrifice(card);
                     }//else
                 }//execute()
             };//CommandComes
