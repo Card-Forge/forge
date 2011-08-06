@@ -1,7 +1,7 @@
 Name:Jedit Ojanen of Efrava
 ManaCost:3 G G G
-Types:Legendary Creature Cat Warrior Lord
-Text:Whenever Jedit Ojanen of Efrava attacks or blocks, put a 2/2 green Cat Warrior creature token with forestwalk into play.
+Types:Legendary Creature Cat Warrior
+Text:Whenever CARDNAME attacks or blocks, put a 2/2 green Cat Warrior creature token with forestwalk into play.
 PT:5/5
 K:Forestwalk
 SVar:Rarity:Rare

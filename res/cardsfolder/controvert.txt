@@ -1,5 +1,6 @@
 Name:Controvert
 ManaCost:2 U U
+Types:Instant
 Text:no text
 A:SP$Counter | Cost$ 2 U U | Type$ Spell | SpellDescription$ Counter target spell.
 K:Recover:2 U U

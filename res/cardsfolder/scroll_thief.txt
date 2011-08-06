@@ -1,9 +1,10 @@
 Name:Scroll Thief
 ManaCost:2 U
-Types:Snow Merfolk Rogue
+Types:Creature Merfolk Rogue
 Text:no text
 PT:1/3
 K:WheneverKeyword:DealsCombatDamage/Opponent:Self:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever CARDNAME deals combat damage to a player, you may draw a card.
 SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scroll_thief.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/72.jpg
 End
