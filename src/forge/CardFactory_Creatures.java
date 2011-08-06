@@ -9586,7 +9586,7 @@ public class CardFactory_Creatures {
                 });
             }//*************** END ************ END **************************         
 
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Elvish Farmer") || cardName.equals("Mycologist")) {
             Command intoPlay = new Command() {
@@ -9677,7 +9677,7 @@ public class CardFactory_Creatures {
             
             a2.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Pallid Mycoderm")) {
@@ -9779,7 +9779,7 @@ public class CardFactory_Creatures {
             a2.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Psychotrope Thallid")) {
             Command intoPlay = new Command() {
@@ -9841,7 +9841,7 @@ public class CardFactory_Creatures {
             
             a2.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
-
+		*/
         
         //*************** START *********** START **************************
         else if(cardName.equals("Rootwater Thief")) {

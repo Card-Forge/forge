@@ -1,9 +1,10 @@
 Name:Psychotrope Thallid
 ManaCost:2 G
 Types:Creature Fungus
-Text:At the beginning of your upkeep, put a spore counter on Psychotrope Thallid.
+Text:At the beginning of your upkeep, put a spore counter on CARDNAME.
 PT:1/1
-K:Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
+A:AB$Token | Cost$ SubCounter<3/SPORE> | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ Controller | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield.
+A:AB$Draw | Cost$Sac<1/Saproling> | NumCards$1 | SpellDescription$Draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychotrope_thallid.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/137.jpg

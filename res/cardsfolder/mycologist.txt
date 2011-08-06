@@ -1,9 +1,10 @@
 Name:Mycologist
 ManaCost:1 W
 Types:Creature Human Druid
-Text:At the beginning of your upkeep, put a spore counter on Mycologist.
+Text:At the beginning of your upkeep, put a spore counter on CARDNAME.
 PT:0/2
-K:Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
+A:AB$Token | Cost$ SubCounter<3/SPORE> | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ Controller | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield.
+A:AB$GainLife | Cost$Sac<1/Saproling> | LifeAmount$2 | SpellDescription$You gain 2 life.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mycologist.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/27.jpg
