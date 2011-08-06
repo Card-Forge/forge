@@ -15,7 +15,7 @@ public class Input_Untap extends Input
 
     if(isMarbleTitanInPlay())
       marbleUntap();
-    else
+    else if(!isStasisInPlay())
       regularUntap();
 
     GameActionUtil.executeUpkeepEffects();
@@ -51,6 +51,25 @@ public class Input_Untap extends Input
     
     return all.size() > 0;
   }
+  
+  private boolean isStasisInPlay()
+  {
+    CardList all = new CardList();
+    all.addAll(AllZone.Human_Play.getCards());
+    all.addAll(AllZone.Computer_Play.getCards());
+    
+    all = all.filter(new CardListFilter()
+    {
+		public boolean addCard(Card c) {
+			return c.getName().equals("Stasis");
+		}	
+    });
+    
+    return all.size() > 0;
+  }
+  
+ 
+  
   private void regularUntap()
   {
     PlayerZone p =  AllZone.getZone(Constant.Zone.Play, AllZone.Phase.getActivePlayer());
