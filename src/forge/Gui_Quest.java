@@ -487,6 +487,8 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Harry Potter 3  		hard   	Beached As' deck, various milling cards, some speed up and counter spells");
         sb.append("\r\n");
+        sb.append("Hellboy 3  		hard   	A BR direct damage deck");
+        sb.append("\r\n");
         sb.append("Higgins 3		hard   	Corwin72's Grixis Control deck, lots of threat removal and some creatures");
         sb.append("\r\n");
         sb.append("Homer Simpson 1	easy	Morph + Regenerate BRU creatures, + Raise Dead");
@@ -543,11 +545,11 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("King Kong 3		hard	Squirrel tokens, changelings and Deranged Hermit + threat removal");
         sb.append("\r\n");
-        sb.append("Kojak 1		easy	Some Islandwalk creatures GU + filler");
+        sb.append("Kojak 1		easy	Mono blue deck with Sunken City, Inundate, counterspells and bounce");
         sb.append("\r\n");
-        sb.append("Kojak 2		medium	Some Islandwalk creatures GU + filler");
+        sb.append("Kojak 2		medium	Mono blue deck with Sunken City, Inundate, counterspells and bounce");
         sb.append("\r\n");
-        sb.append("Kojak 3		hard	Some Islandwalk creatures GUB + filler");
+        sb.append("Kojak 3		hard	Mono blue deck with Sunken City, Inundate, counterspells and bounce");
         sb.append("\r\n");
         sb.append("Lisa Simpson 3   	hard   	GW deck, creates tokens which are devoured by Skullmulcher and Gluttonous Slime");
         sb.append("\r\n");
