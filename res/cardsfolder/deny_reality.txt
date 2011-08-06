@@ -1,9 +1,9 @@
 Name:Deny Reality
 ManaCost:3 U B
 Types:Instant
-Text:Return target permanent to its owner's hand.
+Text:no text
 K:Cascade
-K:spBounceTgt:Permanent:Hand
+A:SP$Bounce|Cost$3 U B|ValidTgts$Permanent|TgtPrompt$Select target permanent|Destination$Hand|SpellDescription$Return target permanent to its owner's hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deny_reality.jpg
 End
