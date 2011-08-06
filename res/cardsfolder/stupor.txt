@@ -2,7 +2,7 @@ Name:Stupor
 ManaCost:2 B
 Types:Sorcery
 Text:no text
-K:spDiscardOpp:AtRandom:1:Drawback$OppDiscard/1:Target opponent discards a card at random, then discards a card.:Stupor - opponent discards cards
+A:SP$Discard|Cost$2 B|ValidTgts$Player|NumCards$1|Mode$Random|SpellDescription$Target player discards a card at random, then discards a card.|SubAbility$OppDiscard/1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stupor.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/158.jpg
