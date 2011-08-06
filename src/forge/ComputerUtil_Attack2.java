@@ -23,22 +23,10 @@ import java.util.*;
        public ComputerUtil_Attack2(CardList possibleAttackers, CardList possibleBlockers, int blockerLife)
        {
           humanList = new CardList(possibleBlockers.toArray());
-          humanList = humanList.filter(new CardListFilter()   
-          {
-             public boolean addCard(Card c)
-             {
-                return c.isCreature();
-             }
-          });
+          humanList = humanList.getType("Creature");
 
           computerList = new CardList(possibleAttackers.toArray()); 
-          computerList = computerList.filter(new CardListFilter()   
-          {
-             public boolean addCard(Card c)
-             {
-                return c.isCreature();
-             }
-          }); 
+          computerList = computerList.getType("Creature");
 
           attackers = getUntappedCreatures(possibleAttackers, true);
           blockers  = getUntappedCreatures(possibleBlockers , false);
@@ -56,6 +44,7 @@ import java.util.*;
           }
         });
       }//constructor
+       
       public CardList getUntappedCreatures(CardList in, final boolean checkCanAttack)
       {
         CardList list = new CardList(in.toArray());
@@ -65,14 +54,14 @@ import java.util.*;
           {
             boolean b = c.isCreature() && c.isUntapped();
 
-        if(checkCanAttack)
-          return b && CombatUtil.canAttack(c);
+            if(checkCanAttack)
+            	return b && CombatUtil.canAttack(c);
 
-        return b;
-      }
-    });
-    return list;
-  }//getUntappedCreatures()
+            return b;
+          }
+        });
+        return list;
+      }//getUntappedCreatures()
 
        //this checks to make sure that the computer player
        //doesn't lose when the human player attacks
@@ -172,9 +161,10 @@ import java.util.*;
 
           for (int i=0; i<attackers.size();i++)
           {
-             if ( (attackers.get(i).getKeyword().contains("CARDNAME attacks each turn if able.") 
-            	   || attackers.get(i).getKeyword().contains("At the beginning of the end step, sacrifice CARDNAME."))
-                   /*&& CombatUtil.canAttack(attackers.get(i))*/
+             if ( attackers.get(i).getKeyword().contains("CARDNAME attacks each turn if able.") 
+            	   || attackers.get(i).getKeyword().contains("At the beginning of the end step, destroy CARDNAME.")
+                   || attackers.get(i).getKeyword().contains("At the beginning of the end step, exile CARDNAME.")
+                   || attackers.get(i).getKeyword().contains("At the beginning of the end step, sacrifice CARDNAME.")
             	   || attackers.get(i).getSirenAttackOrDestroy())
                 combat.addAttacker(attackers.get(i));
           }
@@ -300,15 +290,13 @@ import java.util.*;
           CardList list = new CardList();
           list.addAll(play.getCards());
           list = list.filter(new CardListFilter(){
-
-		public boolean addCard(Card c) {
-			return c.getKeyword().contains("Exalted");
-		}
-		  
-	  });
+        	 public boolean addCard(Card c) {
+        		 return c.getKeyword().contains("Exalted");
+        	 }
+		  });
 	  
-	  return list.size();
-  }
+          return list.size();
+      }
     
        public int getAttack(Card c)
        {
