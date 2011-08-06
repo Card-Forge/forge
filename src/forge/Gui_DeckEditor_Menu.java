@@ -828,7 +828,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
             	setCode = s[1];
             }
             
-            Card c = AllZone.CardFactory.getCard(deck.getMain(i), AllZone.HumanPlayer);
+            Card c = AllZone.CardFactory.getCard(cardName, AllZone.HumanPlayer);
             
             if (!setCode.equals(""))
             	c.setCurSetCode(setCode);
