@@ -3240,7 +3240,6 @@ public class CardFactory implements NewConstants {
     	if (hasKeyword(card, "Replicate") != -1) {
         	int n = hasKeyword(card, "Replicate");
         	if (n!= -1) {
-        		System.out.println("Got replicate for: "+card);
         		String parse = card.getKeyword().get(n).toString();
         		String k[] = parse.split("cate ");
         	

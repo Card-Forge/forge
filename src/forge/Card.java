@@ -929,6 +929,7 @@ public class Card extends MyObservable {
     public String getNonAbilityText() {
         StringBuilder sb = new StringBuilder();
         ArrayList<String> keyword = getHiddenExtrinsicKeyword();
+        if(name.equals("Gigadrowse")) System.out.println("Keywords for nonability text for "+this.getName()+": "+keyword);
         
         sb.append(keywordsToText(keyword));
         
@@ -937,6 +938,7 @@ public class Card extends MyObservable {
     
     // convert a keyword list to the String that should be displayed ingame
     public String keywordsToText(ArrayList<String> keyword) {
+    	if(name.equals("Gigadrowse")) System.out.println("Keywords for "+this.getName()+": "+keyword);
         StringBuilder sb = new StringBuilder();
         StringBuilder sbLong = new StringBuilder();
         StringBuilder sbMana = new StringBuilder();
@@ -978,7 +980,8 @@ public class Card extends MyObservable {
                     String k = keyword.get(i);
                     k = k.replace(":", " ");
                     sbLong.append(k).append("\r\n");
-                } else if (keyword.get(i).startsWith("Champion")) {
+                }
+                else if (keyword.get(i).startsWith("Champion")) {
                 	String k = getKeyword().get(i);
                 	String kk[] = k.split(":");
                 	if (kk[1].equals("Creature")) kk[1] = kk[1].toLowerCase();
@@ -1003,7 +1006,8 @@ public class Card extends MyObservable {
                 }else if(keyword.get(i).contains("Bloodthirst")) {
                 	sbLong.append(keyword.get(i));
                 	sbLong.append(" (If an opponent was dealt damage this turn, this creature enters the battlefield with a +1/+1 counter on it.)");
-                } else {
+                }
+                else {
                     if (i != 0 && sb.length() != 0) sb.append(", ");
                     sb.append(keyword.get(i).toString());
                 }
@@ -1078,6 +1082,19 @@ public class Card extends MyObservable {
                     sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n")+3);
                 }
                 sb.append("Storm (When you cast this spell, copy it for each spell cast before it this turn.");
+                if (sb.toString().contains("Target") || sb.toString().contains("target")) {
+                    sb.append(" You may choose new targets for the copies.");
+                }
+                sb.append(")\r\n");
+            }
+            
+            //Replicate
+            if(kw.contains("Replicate") && !sb.toString().contains("you paid its replicate cost.")) {
+            	if (sb.toString().endsWith("\r\n\r\n")) {
+                    sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n")+3);
+                }
+                sb.append("Replicate ").append(spellAbility.get(0).getReplicateManaCost());
+                sb.append("(When you cast this spell, copy it for each time you paid its replicate cost.");
                 if (sb.toString().contains("Target") || sb.toString().contains("target")) {
                     sb.append(" You may choose new targets for the copies.");
                 }
