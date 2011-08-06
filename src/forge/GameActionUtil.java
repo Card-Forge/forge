@@ -9890,6 +9890,40 @@ public class GameActionUtil {
 		}
 	};
 	
+	public static Command Skywatcher_Adept  = new Command() {
+		private static final long serialVersionUID = -7568530551652446195L;
+
+		public void execute()
+		{
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Skywatcher Adept");
+
+			for (Card c:list)
+			{
+				int lcs = c.getCounters(Counters.LEVEL);
+				if ( lcs < 1)
+				{
+					c.setBaseAttack(1);
+					c.setBaseDefense(1);
+				}
+				else if ( lcs >=1 && lcs < 3 )
+				{
+					c.setBaseAttack(2);
+					c.setBaseDefense(2);
+					c.addNonStackingIntrinsicKeyword("Flying");
+				}
+				else
+				{
+					c.setBaseAttack(4);
+					c.setBaseDefense(2);
+					c.addNonStackingIntrinsicKeyword("Flying");
+				}
+			}
+		}
+	};
+	
 	public static Command Student_of_Warfare 		  = new Command() {
 		private static final long serialVersionUID = 2627513737024865169L;
 
@@ -15273,6 +15307,7 @@ public class GameActionUtil {
 		commands.put("Student_of_Warfare", Student_of_Warfare);
 		commands.put("Transcendent_Master", Transcendent_Master);
 		commands.put("Lighthouse_Chronologist", Lighthouse_Chronologist);
+		commands.put("Skywatcher_Adept", Skywatcher_Adept);
 		
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
 		commands.put("People_of_the_Woods", People_of_the_Woods);

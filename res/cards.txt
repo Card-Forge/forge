@@ -1,6 +1,14 @@
+Skywatcher Adept
+U
+Creature Merfolk Wizard
+LEVEL 1-2 2/2 Flying LEVEL 3+ 4/2 Flying
+1/1
+Level up:3
+maxLevel:3
+
 Lighthouse Chronologist
 1 U
-Creature
+Creature Human Wizard
 LEVEL 4-6 2/4 LEVEL 7+ 3/5
 1/3
 Level up:U
