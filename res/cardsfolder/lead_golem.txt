@@ -1,0 +1,12 @@
+Name:Lead Golem
+ManaCost:5
+Types:Artifact Creature Golem
+Text:no text
+PT:3/5
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ StayTapped | TriggerDescription$ Whenever CARDNAME attacks, it doesn't untap during its controller's next untap step.
+SVar:StayTapped:DB$Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Permanent$ True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lead_golem.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/295.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/271.jpg
+End
