@@ -14534,6 +14534,37 @@ public class GameActionUtil {
 
 	}; //Guul Draz Specter
 
+	public static Command Sound_the_Call_Wolf      = new Command() {
+		private static final long serialVersionUID = 4614281706799537283L;
+
+		public void execute() {
+			// get all creatures
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.filter(new CardListFilter(){
+				public boolean addCard(Card c)
+				{
+					return c.getName().equals("Wolf") && c.getKeyword().contains("This creature gets +1/+1 for each card named Sound the Call in each graveyard.");
+				}
+			});
+
+			for(int i = 0; i < list.size(); i++) {
+				Card c = list.get(i);
+				c.setBaseAttack(1 + countSoundTheCalls());
+				c.setBaseDefense(c.getBaseAttack());
+			}
+		}
+
+		private int countSoundTheCalls() {
+			CardList list = AllZoneUtil.getCardsInGraveyard();
+
+			list = list.getName("Sound the Call");
+			return list.size();
+		}
+
+	}; //Sound_the_Call_Wolf
+	
 	public static Command Mortivore                   = new Command() {
 		private static final long serialVersionUID = -8778902687347191964L;
 
@@ -16662,6 +16693,7 @@ public class GameActionUtil {
 		commands.put("Terravore", Terravore);
 		commands.put("Magnivore", Magnivore);
 		commands.put("Tarmogoyf", Tarmogoyf);
+		commands.put("Sound_the_Call_Wolf", Sound_the_Call_Wolf);
 		commands.put("Multani_Maro_Sorcerer", Multani_Maro_Sorcerer);
 		commands.put("Molimo_Maro_Sorcerer", Molimo_Maro_Sorcerer);
 		commands.put("Maro", Maro);

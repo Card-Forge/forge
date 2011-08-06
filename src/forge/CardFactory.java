@@ -19719,6 +19719,21 @@ public class CardFactory implements NewConstants {
         	card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Sound the Call")) {
+            SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -2359398136467055521L;
+
+				@Override
+                public void resolve() {
+                    CardFactoryUtil.makeToken("Wolf", "G 1 1 Wolf", card, "G", new String[] {"Creature", "Wolf"},
+                            1, 1, new String[] {"This creature gets +1/+1 for each card named Sound the Call in each graveyard."});
+                }//resolve()
+            };
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {

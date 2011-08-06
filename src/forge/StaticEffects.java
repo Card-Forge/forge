@@ -43,6 +43,7 @@ public class StaticEffects
 		cardToEffectsList.put("Magnivore", new String[] {"Magnivore"});
 		cardToEffectsList.put("Tarmogoyf", new String[] {"Tarmogoyf"});
 		cardToEffectsList.put("Lhurgoyf", new String[] {"Lhurgoyf"});
+		cardToEffectsList.put("Wolf", new String[] {"Sound_the_Call_Wolf"});
 		cardToEffectsList.put("Drove of Elves", new String[] {"Drove_of_Elves"});		
 		cardToEffectsList.put("Crowd of Cinders", new String[] {"Crowd_of_Cinders"});
 		cardToEffectsList.put("Faerie Swarm", new String[] {"Faerie_Swarm"});
