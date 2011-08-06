@@ -153,7 +153,6 @@ public class GameActionUtil {
 	public static void executeTapSideEffects(Card c) {
 		
 		AllZone.GameAction.checkWheneverKeyword(c,"BecomesTapped",null);
-		final Player activePlayer = AllZone.Phase.getPlayerTurn();
 
 		/* cards with Tap side effects can be listed here, just like in
 		 * the CardFactory classes
@@ -8655,9 +8654,6 @@ public class GameActionUtil {
 		Filth.execute();
 		Dauntless_Escort.execute();
 
-		//Souls_Attendant.execute();
-		Wirewood_Hivemaster.execute();
-
 		Sacrifice_NoIslands.execute();
 		Sacrifice_NoForests.execute();
 		Sacrifice_NoSwamps.execute();
@@ -9772,87 +9768,6 @@ public class GameActionUtil {
 			}// for
 		}// execute
 	}; // Windwright Mage
-
-	public static Command Wirewood_Hivemaster         = new Command() {
-		private static final long serialVersionUID = -6440532066018273862L;
-
-		// Hold old creatures
-		CardList                  old              = new CardList();       // Hold old Wirewood Hivemasters
-		CardList                  wirewood         = new CardList();
-
-		public void execute() {
-			// get all creatures
-			CardList current = new CardList();
-			current.addAll(AllZone.Human_Battlefield.getCards());
-			current.addAll(AllZone.Computer_Battlefield.getCards());
-			current = current.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return !c.isToken()
-					&& (c.getType().contains("Elf") || c.getKeyword().contains("Changeling"));
-				}
-
-			});
-
-			// Holds Wirewood_Hivemaster's in play
-			CardList hivemasterList = current.getName("Wirewood Hivemaster");
-
-			// Holds Wirewood_Hivemaster's that are new the battlefield
-			CardList newHivemaster = new CardList();
-
-			// Go through the list of Wirewood_Hivemaster's on the battlefield
-			for(int i = 0; i < hivemasterList.size(); i++) {
-				Card c = hivemasterList.get(i);
-
-				// Check to see which Wirewood_Hivemaster's on the battlefield are new
-				if(!wirewood.contains(c)) {
-					newHivemaster.add(c);
-					hivemasterList.remove(c);
-					i -= 1; // Must do as a card was just removed
-				}
-
-				current.remove(c);
-			}
-
-			for(int outer = 0; outer < hivemasterList.size(); outer++) {
-
-				final int[] n = new int[1];
-				for(int i = 0; i < current.size(); i++) {
-					if(!old.contains(current.getCard(i))) {
-						n[0]++;
-					}
-				}
-
-				// Gain life for new Wirewood_Hivemaster
-				n[0] += newHivemaster.size();
-				final Card crd = hivemasterList.get(outer);
-
-				SpellAbility ability = new Ability(crd, "0") {
-
-					@Override
-					public void resolve() {
-						for(int i = 0; i < n[0]; i++) {
-							CardFactoryUtil.makeToken("Insect",
-									"G 1 1 Insect", crd.getController(), "G",
-									new String[] {"Creature", "Insect"}, 1, 1, new String[] {""});
-						}
-					}
-				};// SpellAbility
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(hivemasterList.get(outer).getName()).append(" - ").append(hivemasterList.get(outer).getController());
-				sb.append(" puts ").append(n[0]).append(" insect tokens onto the battlefield.");
-				ability.setStackDescription(sb.toString());
-
-				if(n[0] != 0) {
-					AllZone.Stack.add(ability);
-				}
-			}// outer for
-
-			wirewood = hivemasterList;
-			wirewood.addAll(newHivemaster.toArray());
-			old = current;
-		}// execute()
-	}; // Wirewood_Hivemaster
 	
 	public static Command Old_Man_of_the_Sea = new Command() {
 		private static final long serialVersionUID = 8076177362922156784L;
@@ -9893,12 +9808,12 @@ public class GameActionUtil {
 		public void execute() {
 
 			// Human Activates Dauntless Escort
-	        PlayerZone PlayerPlayZone = AllZone.getZone(Constant.Zone.Battlefield,AllZone.HumanPlayer);
-	        CardList PlayerCreatureList = new CardList(PlayerPlayZone.getCards());
-	        PlayerCreatureList = PlayerCreatureList.getType("Creature");
+			PlayerZone PlayerPlayZone = AllZone.getZone(Constant.Zone.Battlefield,AllZone.HumanPlayer);
+			CardList PlayerCreatureList = new CardList(PlayerPlayZone.getCards());
+			PlayerCreatureList = PlayerCreatureList.getType("Creature");
 			PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Battlefield,AllZone.ComputerPlayer);
-	        CardList opponentCreatureList = new CardList(opponentPlayZone.getCards());
-	        opponentCreatureList = opponentCreatureList.getType("Creature");
+			CardList opponentCreatureList = new CardList(opponentPlayZone.getCards());
+			opponentCreatureList = opponentCreatureList.getType("Creature");
 			if(Phase.Sac_Dauntless_Escort == true) {
 				if(PlayerCreatureList.size() != 0) {
 					for(int i = 0; i < PlayerCreatureList.size(); i++) {
@@ -9908,56 +9823,54 @@ public class GameActionUtil {
 					}
 				}
 				if(opponentCreatureList.size() != 0) {
-                for(int i = 0; i < opponentCreatureList.size(); i++) {
-                	Card c = opponentCreatureList.get(i);
-                	if(c.getOwner() == AllZone.HumanPlayer) {
-                		if(old.size() == 0) {
-                    		c.removeExtrinsicKeyword("Indestructible");	 
-                    		old.add(c);              			
-                		}
-                        for(int x = 0; x < old.size(); x++) {
-                    		if(old.get(x) == c) break;
-                		c.removeExtrinsicKeyword("Indestructible");	 
-                		old.add(c);
-                    		}
-                        }
-                	}
-                }
+					for(int i = 0; i < opponentCreatureList.size(); i++) {
+						Card c = opponentCreatureList.get(i);
+						if(c.getOwner() == AllZone.HumanPlayer) {
+							if(old.size() == 0) {
+								c.removeExtrinsicKeyword("Indestructible");	 
+								old.add(c);              			
+							}
+							for(int x = 0; x < old.size(); x++) {
+								if(old.get(x) == c) break;
+								c.removeExtrinsicKeyword("Indestructible");	 
+								old.add(c);
+							}
+						}
+					}
+				}
 			}            
-		
-
 
 			// Computer Activates Dauntless Escort
-	        PlayerPlayZone = AllZone.getZone(Constant.Zone.Battlefield,AllZone.ComputerPlayer);
-	        PlayerCreatureList = new CardList(PlayerPlayZone.getCards());
-	        PlayerCreatureList = PlayerCreatureList.getType("Creature");
+			PlayerPlayZone = AllZone.getZone(Constant.Zone.Battlefield,AllZone.ComputerPlayer);
+			PlayerCreatureList = new CardList(PlayerPlayZone.getCards());
+			PlayerCreatureList = PlayerCreatureList.getType("Creature");
 			opponentPlayZone = AllZone.getZone(Constant.Zone.Battlefield,AllZone.HumanPlayer);
-	        opponentCreatureList = new CardList(opponentPlayZone.getCards());
-	        opponentCreatureList = opponentCreatureList.getType("Creature");
+			opponentCreatureList = new CardList(opponentPlayZone.getCards());
+			opponentCreatureList = opponentCreatureList.getType("Creature");
 			if(Phase.Sac_Dauntless_Escort_Comp == true) {
 				if(PlayerCreatureList.size() != 0) {
-                for(int i = 0; i < PlayerCreatureList.size(); i++) {
-                    	Card c = PlayerCreatureList.get(i);
-                        c.removeExtrinsicKeyword("Indestructible");	
-                        c.addExtrinsicKeyword("Indestructible");
-                }
+					for(int i = 0; i < PlayerCreatureList.size(); i++) {
+						Card c = PlayerCreatureList.get(i);
+						c.removeExtrinsicKeyword("Indestructible");	
+						c.addExtrinsicKeyword("Indestructible");
+					}
 				}
 				if(opponentCreatureList.size() != 0) {
-	                for(int i = 0; i < opponentCreatureList.size(); i++) {
-	                	Card c = opponentCreatureList.get(i);
-	                	if(c.getOwner() == AllZone.ComputerPlayer) {
-	                		if(old.size() == 0) {
-	                    		c.removeExtrinsicKeyword("Indestructible");	 
-	                    		old.add(c);              			
-	                		}
-	                        for(int x = 0; x < old.size(); x++) {
-	                    		if(old.get(x) == c) break;
-	                		c.removeExtrinsicKeyword("Indestructible");	 
-	                		old.add(c);
-	                    		}
-	                        }
-	                }
-	                }            
+					for(int i = 0; i < opponentCreatureList.size(); i++) {
+						Card c = opponentCreatureList.get(i);
+						if(c.getOwner() == AllZone.ComputerPlayer) {
+							if(old.size() == 0) {
+								c.removeExtrinsicKeyword("Indestructible");	 
+								old.add(c);              			
+							}
+							for(int x = 0; x < old.size(); x++) {
+								if(old.get(x) == c) break;
+								c.removeExtrinsicKeyword("Indestructible");	 
+								old.add(c);
+							}
+						}
+					}
+				}            
 			} 			
 		}// execute()
 
