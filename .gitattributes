@@ -6738,7 +6738,6 @@ src/forge/properties/ForgeProps.java svneol=native#text/plain
 src/forge/properties/NewConstants.java svneol=native#text/plain
 src/forge/properties/Preferences.java svneol=native#text/plain
 src/forge/properties/SavePreferencesListener.java svneol=native#text/plain
-src/forge/quest/Gui_QuestOptions.java svneol=native#text/plain
 src/forge/quest/Gui_Quest_Assignments.java svneol=native#text/plain
 src/forge/quest/QuestAbstractPanel.java svneol=native#text/plain
 src/forge/quest/QuestFrame.java svneol=native#text/plain
