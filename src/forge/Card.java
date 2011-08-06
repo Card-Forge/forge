@@ -2851,7 +2851,39 @@ public class Card extends MyObservable {
         		}
         	};
         	StringBuilder sb = new StringBuilder();
-            sb.append("Stuffy Doll - causes ").append(stuffyDamage).append(" damage to ").append(opponent);
+            sb.append(this.getName()+" - Deals ").append(stuffyDamage).append(" damage to ").append(opponent);
+            ability.setStackDescription(sb.toString());
+            
+            AllZone.Stack.add(ability);
+        }
+        
+        if(this.getName().equals("Jackal Pup") || this.getName().equals("Shinka Gatekeeper")) {
+        	final Player player = this.getController();
+        	final int selfDamage = damageToAdd;
+        	SpellAbility ability = new Ability(this, "0") {
+        		@Override
+        		public void resolve() {
+        			player.addDamage(selfDamage, Card.this);
+        		}
+        	};
+        	StringBuilder sb = new StringBuilder();
+            sb.append(this.getName()+" - Deals ").append(selfDamage).append(" damage to ").append(player);
+            ability.setStackDescription(sb.toString());
+            
+            AllZone.Stack.add(ability);
+        }
+        
+        if(this.getName().equals("Filthy Cur")) {
+        	final Player player = this.getController();
+        	final int life = damageToAdd;
+        	SpellAbility ability = new Ability(this, "0") {
+        		@Override
+        		public void resolve() {
+        			player.loseLife(life, Card.this);
+        		}
+        	};
+        	StringBuilder sb = new StringBuilder();
+            sb.append(this.getName()+" - ").append(player).append(" loses ").append(life).append("life");
             ability.setStackDescription(sb.toString());
             
             AllZone.Stack.add(ability);

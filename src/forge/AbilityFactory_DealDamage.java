@@ -19,37 +19,37 @@ import java.util.Random;
     	
     	public Ability_Sub getSubAbility() { return subAbAF; }
         
-       public AbilityFactory_DealDamage(AbilityFactory newAF)
-       {
-          AF = newAF;
-          
-           damage = AF.getMapParams().get("NumDmg");
-           
-          if(AF.getMapParams().containsKey("Tgt"))
-             if (AF.getMapParams().get("Tgt").equals("TgtOpp"))
-                TgtOpp = true;
-          
-            if(AF.hasSubAbility())
-            {
-               String sSub = AF.getMapParams().get("SubAbility");
-               
-               if (sSub.startsWith("SVar="))
-                  sSub = AF.getHostCard().getSVar(sSub.split("=")[1]);
-               
-               if (sSub.startsWith("DB$"))
-               {
-                  AbilityFactory afDB = new AbilityFactory();
-                  subAbAF = (Ability_Sub)afDB.getAbility(sSub, AF.getHostCard());
-                  hasSubAbAF = true;
-               }
-               else
-               {
-                  subAbStr = sSub;
-                  hasSubAbStr = true;
-               }
-            }
+    	public AbilityFactory_DealDamage(AbilityFactory newAF)
+    	{
+    		AF = newAF;
 
-       }
+    		damage = AF.getMapParams().get("NumDmg");
+
+    		if(AF.getMapParams().containsKey("Tgt"))
+    			if (AF.getMapParams().get("Tgt").equals("TgtOpp"))
+    				TgtOpp = true;
+
+    		if(AF.hasSubAbility())
+    		{
+    			String sSub = AF.getMapParams().get("SubAbility");
+
+    			if (sSub.startsWith("SVar="))
+    				sSub = AF.getHostCard().getSVar(sSub.split("=")[1]);
+
+    			if (sSub.startsWith("DB$"))
+    			{
+    				AbilityFactory afDB = new AbilityFactory();
+    				subAbAF = (Ability_Sub)afDB.getAbility(sSub, AF.getHostCard());
+    				hasSubAbAF = true;
+    			}
+    			else
+    			{
+    				subAbStr = sSub;
+    				hasSubAbStr = true;
+    			}
+    		}
+
+    	}
        
        public SpellAbility getAbility()
        {
@@ -224,6 +224,10 @@ import java.util.Random;
 
           // TODO handle proper calculation of X values based on Cost
            
+           if(AF.getHostCard().equals("Stuffy Doll")) {
+        	   return true;
+           }
+           
             if (AF.isAbility())
             {
                Random r = new Random(); // prevent run-away activations
@@ -320,18 +324,23 @@ import java.util.Random;
         	   sb.append(name).append(" - ");
            
            sb.append("Deals ").append(dmg).append(" damage to ");
-           for(int i = 0; i < tgts.size(); i++){
-        	   if (i != 0)
-        		   sb.append(" ");
-        	   
-              Object o = tgts.get(0);
-              if (o instanceof Player){
-                 sb.append(((Player)o).getName());
-              }
-              else{
-                 sb.append(((Card)o).getName());
-              }
-              
+           if(tgts == null || tgts.size() == 0) {
+        	   sb.append("itself");
+           }
+           else {
+        	   for(int i = 0; i < tgts.size(); i++){
+        		   if (i != 0)
+        			   sb.append(" ");
+
+        		   Object o = tgts.get(0);
+        		   if (o instanceof Player){
+        			   sb.append(((Player)o).getName());
+        		   }
+        		   else{
+        			   sb.append(((Card)o).getName());
+        		   }
+
+        	   }
            }
            sb.append(". ");
            
@@ -375,30 +384,38 @@ import java.util.Random;
             boolean targeted = (AF.getAbTgt() != null) || TgtOpp;
 
             if (tgts == null || tgts.size() == 0){
-               System.out.println("No targets?");
-               return;
+            	System.out.println("AF_DealDamage ("+AF.getHostCard()+") - No targets?  Ok.  Just making sure.");
+            	//if no targets, damage goes to self (Card; i.e. Stuffy Doll)
+            	Card c = saMe.getSourceCard();
+            	if(AllZone.GameAction.isCardInPlay(c)) {
+    				if (noPrevention)
+    					c.addDamageWithoutPrevention(dmg, AF.getHostCard());
+    				else
+    					c.addDamage(dmg, AF.getHostCard());
+    			}
             }
-           
-            for(Object o : tgts){
-               if (o instanceof Card){
-                   Card c = (Card)o;
-                   if(AllZone.GameAction.isCardInPlay(c) && (!targeted || CardFactoryUtil.canTarget(AF.getHostCard(), c))) {
-                	   if (noPrevention)
-                	   		c.addDamageWithoutPrevention(dmg, AF.getHostCard());
-                	   else
-               	   			c.addDamage(dmg, AF.getHostCard());
-                   }
-                         
-               }
-               else if (o instanceof Player){
-                  Player p = (Player) o;
-                  if (!targeted || p.canTarget(AF.getHostCard())) {
-               	   	if (noPrevention)
-           	   			p.addDamageWithoutPrevention(dmg, AF.getHostCard());
-               	   	else
-          	   			p.addDamage(dmg, AF.getHostCard());
-                  }
-               }
+            else {
+            	for(Object o : tgts){
+            		if (o instanceof Card){
+            			Card c = (Card)o;
+            			if(AllZone.GameAction.isCardInPlay(c) && (!targeted || CardFactoryUtil.canTarget(AF.getHostCard(), c))) {
+            				if (noPrevention)
+            					c.addDamageWithoutPrevention(dmg, AF.getHostCard());
+            				else
+            					c.addDamage(dmg, AF.getHostCard());
+            			}
+
+            		}
+            		else if (o instanceof Player){
+            			Player p = (Player) o;
+            			if (!targeted || p.canTarget(AF.getHostCard())) {
+            				if (noPrevention)
+            					p.addDamageWithoutPrevention(dmg, AF.getHostCard());
+            				else
+            					p.addDamage(dmg, AF.getHostCard());
+            			}
+            		}
+            	}
             }
    
            if (hasSubAbAF) {

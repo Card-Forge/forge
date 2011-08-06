@@ -56,7 +56,7 @@ public class CardFactory_Creatures {
     
 
     public static Card getCard(final Card card, String cardName, Player owner, CardFactory cf) {
-        
+        /*
         //*************** START *********** START **************************
         if(cardName.equals("Filthy Cur")) {
             final Card newCard = new Card() {
@@ -94,9 +94,10 @@ public class CardFactory_Creatures {
             
             return newCard;
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Stone Giant")) {
+        if(cardName.equals("Stone Giant")) {
         	final ArrayList<Card> Tgt = new ArrayList<Card>();
         	
         	final Command untilEOT = new Command() {
@@ -243,7 +244,7 @@ public class CardFactory_Creatures {
             a1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(a1));
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Shinka Gatekeeper")) {
             final Card newCard = new Card() {
@@ -327,7 +328,7 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Stuffy Doll")) {
-        	/*
+        	/
             final Card newCard = new Card() {
                 Card c = this;
                 
@@ -365,7 +366,7 @@ public class CardFactory_Creatures {
             newCard.setBaseDefense(1);
             
             newCard.addIntrinsicKeyword("Indestructible");
-            */
+            *
             
 			Ability_Cost abilCost = new Ability_Cost("T", cardName, true);
 
@@ -394,9 +395,9 @@ public class CardFactory_Creatures {
             
             newCard.setSVars(card.getSVars());
             
-            return newCard;*/
+            return newCard;*
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Serra Avenger")) {
