@@ -17086,35 +17086,7 @@ public class CardFactory_Creatures {
             a1.setBeforePayMana(new Input_PayManaCost(a1));
             a1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(a1));
         }//*************** END ************ END **************************
-        
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Vedalken Entrancer")) {
-            final SpellAbility a1 = new Ability_Tap(card, "U") {
-                private static final long serialVersionUID = 2359247592519063187L;
-                
-                @Override
-                public void resolve() {
-                    getTargetPlayer().mill(2);
-                    
-                }
-                
-                
-                @Override
-                public boolean canPlayAI() {
-                    Player player = getTargetPlayer();
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    CardList libList = new CardList(lib.getCards());
-                    return libList.size() > 0;
-                }
-            };//SpellAbility
-            card.addSpellAbility(a1);
-            a1.setDescription("U, tap: Target player puts the top two cards of his or her library into his or her graveyard.");
-            a1.setStackDescription("Player puts the top two cards of his or her library into his or her graveyard");
-            a1.setBeforePayMana(new Input_PayManaCost(a1));
-            a1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(a1));
-        }//*************** END ************ END **************************
-        
+           
         
         //*************** START *********** START **************************
         else if(cardName.equals("Cathartic Adept")) {

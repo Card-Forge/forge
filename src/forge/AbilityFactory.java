@@ -280,6 +280,14 @@ public class AbilityFactory {
 			}
 		}
 		
+		if (API.equals("Mill")){
+			if (isAb)
+				SA = AbilityFactory_ZoneAffecting.createAbilityMill(this);
+			if (isSp){
+				SA = AbilityFactory_ZoneAffecting.createSpellMill(this);
+			}
+		}
+		
 		// *********************************************
 		// set universal properties of the SpellAbility
         if (hasSpDesc)
