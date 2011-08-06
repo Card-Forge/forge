@@ -1,3 +1,10 @@
+Spire Owl
+1 U
+Creature Bird
+When Spire Owl enters the battlefield, look at the top four cards of your library, then put them back in any order.
+1/1
+Flying
+
 Sage Aven
 3 U
 Creature Bird Soldier
