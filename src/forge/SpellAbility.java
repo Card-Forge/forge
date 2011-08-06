@@ -324,7 +324,9 @@ public abstract class SpellAbility {
     }
     
     public void setTargetList(CardList list) {
-        targetPlayer = null;//reset setTargetPlayer()
+        // The line below started to create a null error at forge.CardFactoryUtil.canTarget(CardFactoryUtil.java:3329)
+        // after ForgeSVN r2699. I hope that commenting out the line below will not result in other bugs.  :)
+        // targetPlayer = null;//reset setTargetPlayer()
         
         targetList = list;
         StringBuilder sb = new StringBuilder();
