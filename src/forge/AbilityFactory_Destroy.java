@@ -381,7 +381,9 @@ public class AbilityFactory_Destroy {
 		 for(Card c : tgtCards)
 			 sb.append(c.getName()).append(" ");
 						 
-		 if(noRegen){
+		 if (noRegen) {
+			 if (sb.toString().endsWith(" "))
+                 sb.deleteCharAt(sb.toString().length() - 1);
 			 sb.append(". ");
 			 if (tgtCards.size() == 1)
 				 sb.append("It");
