@@ -17128,7 +17128,9 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public boolean canPlayAI() {
-                    return AllZone.Human_Hand.size() > 1;
+                	final int maxX = ComputerUtil.getAvailableMana().size() - 1;
+                    return ((cardName.equals("Mind Twist") && AllZone.Human_Hand.size() > 1 && maxX >= 2) || 
+                    		(cardName.equals("Mind Shatter") && AllZone.Human_Hand.size() > 1 && maxX >= 3));
                 }
                 
                 @Override
