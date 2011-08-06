@@ -1717,7 +1717,10 @@ public class GameAction {
                         					String Color = F_TokenConditions[2];
                         					if(F_TokenConditions[2].equals("c")) Color = "1";
                         					for(int z = 0; z < F_Amount[0]; z++) 
-                                            CardFactoryUtil.makeToken( F_TokenConditions[1] + " Token", F_TokenConditions[2]+ " " + 
+                        						
+                        					// CardFactoryUtil.makeToken( F_TokenConditions[1] + " Token", F_TokenConditions[2]+ " " + 
+                        						
+                                            CardFactoryUtil.makeToken( F_TokenConditions[1], F_TokenConditions[2]+ " " + 
                                             		Integer.valueOf(F_TokenConditions[3])+ " " + Integer.valueOf(F_TokenConditions[4])
                                              + " " + F_TokenConditions[1], F_card, Color, creatTypes, Integer.valueOf(F_TokenConditions[3]), 
                                              Integer.valueOf(F_TokenConditions[4]), F_KeyWordConditions);
