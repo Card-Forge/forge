@@ -356,7 +356,11 @@ public class GameAction {
         			owner.addDamage(2, thisMegrim);
         		}
         	};
-        	ability.setStackDescription(megrim.getName()+" - deals 2 damage to "+owner);
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(megrim.getName()).append(" - deals 2 damage to ").append(owner);
+        	ability.setStackDescription(sb.toString());
+        	
         	AllZone.Stack.add(ability);
         }
     }
@@ -379,7 +383,10 @@ public class GameAction {
     			System.out.println("Madness cost paid");
     		}
     	};
-    	cast.setStackDescription(madness.getName()+" - Cast via Madness");
+    	
+    	StringBuilder sb = new StringBuilder();
+    	sb.append(madness.getName()).append(" - Cast via Madness");
+    	cast.setStackDescription(sb.toString());
     	
     	final Ability activate = new Ability(madness, "0") {
     		@Override
@@ -393,8 +400,11 @@ public class GameAction {
     				ComputerUtil.playStack(cast);	
     		}
     	};
+    	
+    	StringBuilder sbAct = new StringBuilder();
+    	sbAct.append(madness.getName()).append(" - Discarded. Pay Madness Cost?");
+    	activate.setStackDescription(sbAct.toString());
         
-        activate.setStackDescription(madness.getName() + " - Discarded. Pay Madness Cost?");
     	AllZone.Stack.add(activate);
     }
     
@@ -695,7 +705,11 @@ public class GameAction {
 	    	        	
 	        		}
 	        	};
-	        	ability.setStackDescription(crd + " - Totem armor: destroy this aura.");
+	        	
+	        	StringBuilder sb = new StringBuilder();
+	        	sb.append(crd).append(" - Totem armor: destroy this aura.");
+	        	ability.setStackDescription(sb.toString());
+	        	
 	        	AllZone.Stack.add(ability);
 	        	return;
         	}
@@ -1719,17 +1733,17 @@ public class GameAction {
                 		if(Effects_Count[0] != Effects) StackDescription = StackDescription + " and ";
                 		else StackDescription = StackDescription + ".";
                 		 }  // For     
-                    		F_SpellAbility.setStackDescription(StackDescription);
-                    		for(int Check = 0; Check < Command_Effects.length; Check++)
-                    			if(!Command_Effects[Check].equals(Command.Blank)) {
-                    				Whenever_Input(F_card,F_k,CommandExecute[0],F_SpellAbility);
-                    				break;
-                    			}
- 		        }
-                		 }
- 		}	
- 		}
-    }
+                        F_SpellAbility.setStackDescription(StackDescription);
+                        for(int Check = 0; Check < Command_Effects.length; Check++)
+                        	if(!Command_Effects[Check].equals(Command.Blank)) {
+                        		Whenever_Input(F_card,F_k,CommandExecute[0],F_SpellAbility);
+                        		break;
+                        	}
+                		}
+                	}
+ 		        }	
+ 			}
+		}
     
 	PlayerZone[] Whenever_GetMoveToZone (Card Target, String[] Keyword_Details) {
 		String Zones = Keyword_Details[4];
@@ -2215,7 +2229,11 @@ public class GameAction {
 	    	        	
 	        		}
 	        	};
-	        	ability.setStackDescription(crd + " - Totem armor: destroy this aura.");
+	        	
+	        	StringBuilder sb = new StringBuilder();
+	        	sb.append(crd).append(" - Totem armor: destroy this aura.");
+	        	ability.setStackDescription(sb.toString());
+	        	
 	        	AllZone.Stack.add(ability);
 	        	return false;
         	}
@@ -3420,10 +3438,14 @@ public class GameAction {
         			player.drawCards(2);
         		}
         	};//Ability
-        	draw.setStackDescription("Skullclamp - " + skullclamp.getController() + " draws 2 cards (" + c.getName() + ").");
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append("Skullclamp - ").append(skullclamp.getController());
+        	sb.append(" draws 2 cards (").append(c.getName()).append(").");
+        	draw.setStackDescription(sb.toString());
+        	
         	AllZone.Stack.add(draw);
         }
-        
     }
     
     public void searchLibraryLand(String type, Player player, String Zone1, boolean tapLand) {
@@ -3725,10 +3747,13 @@ public class GameAction {
     			} //comp
     		}
     	};
-    	ability.setStackDescription(c + " - Proliferate (You choose any number of permanents and/or players with " +
-									"counters on them, then give each another counter of a kind already there.)");
-    	return ability;
     	
+    	StringBuilder sb = new StringBuilder();
+    	sb.append(c).append(" - Proliferate (You choose any number of permanents and/or players with ");
+    	sb.append("counters on them, then give each another counter of a kind already there.)");
+    	ability.setStackDescription(sb.toString());
+    	
+    	return ability;
     }
     
     public static void main(String[] args) {
