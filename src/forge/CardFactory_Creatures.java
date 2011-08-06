@@ -9060,7 +9060,7 @@ public class CardFactory_Creatures {
             
         }//*************** END ************ END **************************
         */
-        
+        /*
         //*************** START *********** START **************************
         if(cardName.equals("Rathi Trapper")) {
             final SpellAbility ability = new Ability_Tap(card, "B") {
@@ -9113,6 +9113,7 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
             
         }//*************** END ************ END **************************
+        */
         
         /*
         //*************** START *********** START **************************
