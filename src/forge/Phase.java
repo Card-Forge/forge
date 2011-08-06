@@ -243,8 +243,6 @@ public class Phase extends MyObservable
 			else{
 				AllZone.EndOfCombat.executeUntil();
 				AllZone.EndOfCombat.executeAt();
-		        AllZone.Combat.reset();
-		        AllZone.Display.showCombat("");
 			}
         }
 
@@ -320,6 +318,7 @@ public class Phase extends MyObservable
         
         if (getPhase().equals(Constant.Phase.Combat_End)) {
             AllZone.Combat.reset();
+            AllZone.pwCombat.reset();
             AllZone.Display.showCombat("");
         	resetAttackedThisCombat(getPlayerTurn());
         	this.bCombat = false;
