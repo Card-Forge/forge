@@ -80,7 +80,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     }
    
     public void assignDamage(Card attacker, CardList blockers, int damage) {
-    	if (damage == 0)
+    	if (damage <= 0)
     		return;
         new Gui_MultipleBlockers4(attacker, blockers, damage, this);
     }
