@@ -99,6 +99,10 @@ public class Input_Untap extends Input {
     				}
     			}
     		}
+    		else if((c.getCounters(Counters.WIND)>0) && AllZoneUtil.isCardInPlay("Freyalise's Winds")) {
+    			//remove a WIND counter instead of untapping
+    			c.subtractCounter(Counters.WIND, 1);
+    		}
     		else if(!c.getKeyword().contains("CARDNAME doesn't untap during your untap step.")
     				&& !c.getKeyword().contains("This card doesn't untap during your next untap step.")) {
     			c.untap();
