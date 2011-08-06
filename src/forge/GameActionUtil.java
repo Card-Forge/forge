@@ -9011,6 +9011,7 @@ public class GameActionUtil {
 		Anger.execute();
 		Valor.execute();
 		Brawn.execute();
+		Filth.execute();
 		Dauntless_Escort.execute();
 	
 		Baru.execute();
@@ -16980,7 +16981,344 @@ public class GameActionUtil {
 
 	};
 
+	public static Command Filth                       = new Command() {
+		private static final long serialVersionUID = -8423145847505L;
+
+		CardList                  old              = new CardList();
+		CardList                  next             = new CardList();
+
+		public void execute() {
+			if(Phase.GameBegins == 1) {
+			// reset creatures
+			removeSwampwalk(old);
+
+			if(isInGrave(Constant.Player.Computer)) addSwampwalk(Constant.Player.Computer);
+
+			if(isInGrave(Constant.Player.Human)) addSwampwalk(Constant.Player.Human);
+			}
+		}// execute()
+
+		void addSwampwalk(String player) {
+			next.clear();
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+			CardList playlist = new CardList(play.getCards());
+			playlist = playlist.getType("Creature");
+			for(int i = 0; i < playlist.size(); i++) {
+				if(!old.contains(playlist.get(i))) next.add(playlist.get(i));
+			}
+			// add creatures to "old" or previous list of creatures
+			
+			
+			addSwampwalk(next);
+		}
+
+		boolean isInGrave(String player) {
+			PlayerZone grave = AllZone.getZone(
+					Constant.Zone.Graveyard, player);
+			CardList list = new CardList(grave.getCards());
+
+			PlayerZone play = AllZone.getZone(
+					Constant.Zone.Play, player);
+			CardList lands = new CardList(play.getCards());
+			lands = lands.getType("Swamp");
+
+
+			if(!list.containsName("Filth") || lands.size() == 0) return false;
+			else return true;
+		}
+
+		void removeSwampwalk(CardList list) {
+        	CardList List_Copy = new CardList();
+        	List_Copy.add(list);
+			for(int i = 0; i < List_Copy.size(); i++) {
+				Card c = List_Copy.get(i);
+				if(!isInGrave(c.getController()) && old.contains(c)) {
+					List_Copy.get(i).removeExtrinsicKeyword("Swampwalk");
+					old.remove(c);
+				}
+		}
+		}
+
+		void addSwampwalk(CardList list) {
+			int Count = list.size();
+			for(int i = 0; i < Count; i++) {
+				list.get(i).addExtrinsicKeyword("Swampwalk");
+				old.add(list.get(i));
+			}
+		}
+	}; // Flith
+	
 	public static Command Valor                       = new Command() {
+		private static final long serialVersionUID = -846781470342847505L;
+
+		CardList                  old              = new CardList();
+		CardList                  next             = new CardList();
+
+		public void execute() {
+			if(Phase.GameBegins == 1) {
+			// reset creatures
+			removeFirstStrike(old);
+
+			if(isInGrave(Constant.Player.Computer)) addFirstStrike(Constant.Player.Computer);
+
+			if(isInGrave(Constant.Player.Human)) addFirstStrike(Constant.Player.Human);
+			}
+		}// execute()
+
+		void addFirstStrike(String player) {
+			next.clear();
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+			CardList playlist = new CardList(play.getCards());
+			playlist = playlist.getType("Creature");
+			for(int i = 0; i < playlist.size(); i++) {
+				if(!old.contains(playlist.get(i))) next.add(playlist.get(i));
+			}
+			// add creatures to "old" or previous list of creatures
+			
+			
+			addFirstStrike(next);
+		}
+
+		boolean isInGrave(String player) {
+			PlayerZone grave = AllZone.getZone(
+					Constant.Zone.Graveyard, player);
+			CardList list = new CardList(grave.getCards());
+
+			PlayerZone play = AllZone.getZone(
+					Constant.Zone.Play, player);
+			CardList lands = new CardList(play.getCards());
+			lands = lands.getType("Plains");
+
+
+			if(!list.containsName("Valor") || lands.size() == 0) return false;
+			else return true;
+		}
+
+		void removeFirstStrike(CardList list) {
+        	CardList List_Copy = new CardList();
+        	List_Copy.add(list);
+			for(int i = 0; i < List_Copy.size(); i++) {
+				Card c = List_Copy.get(i);
+				if(!isInGrave(c.getController()) && old.contains(c)) {
+					List_Copy.get(i).removeExtrinsicKeyword("First Strike");
+					old.remove(c);
+				}
+		}
+		}
+
+		void addFirstStrike(CardList list) {
+			int Count = list.size();
+			for(int i = 0; i < Count; i++) {
+				list.get(i).addExtrinsicKeyword("First Strike");
+				old.add(list.get(i));
+			}
+		}
+	}; // Valor
+
+	public static Command Anger                       = new Command() {
+		private static final long serialVersionUID = -8463420545847505L;
+
+		CardList                  old              = new CardList();
+		CardList                  next             = new CardList();
+
+		public void execute() {
+			if(Phase.GameBegins == 1) {
+			// reset creatures
+			removeHaste(old);
+
+			if(isInGrave(Constant.Player.Computer)) addHaste(Constant.Player.Computer);
+
+			if(isInGrave(Constant.Player.Human)) addHaste(Constant.Player.Human);
+			}
+		}// execute()
+
+		void addHaste(String player) {
+			next.clear();
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+			CardList playlist = new CardList(play.getCards());
+			playlist = playlist.getType("Creature");
+			for(int i = 0; i < playlist.size(); i++) {
+				if(!old.contains(playlist.get(i))) next.add(playlist.get(i));
+			}
+			// add creatures to "old" or previous list of creatures
+			
+			
+			addHaste(next);
+		}
+
+		boolean isInGrave(String player) {
+			PlayerZone grave = AllZone.getZone(
+					Constant.Zone.Graveyard, player);
+			CardList list = new CardList(grave.getCards());
+
+			PlayerZone play = AllZone.getZone(
+					Constant.Zone.Play, player);
+			CardList lands = new CardList(play.getCards());
+			lands = lands.getType("Mountain");
+
+
+			if(!list.containsName("Anger") || lands.size() == 0) return false;
+			else return true;
+		}
+
+		void removeHaste(CardList list) {
+        	CardList List_Copy = new CardList();
+        	List_Copy.add(list);
+			for(int i = 0; i < List_Copy.size(); i++) {
+				Card c = List_Copy.get(i);
+				if(!isInGrave(c.getController()) && old.contains(c)) {
+					List_Copy.get(i).removeExtrinsicKeyword("Haste");
+					old.remove(c);
+				}
+		}
+		}
+
+		void addHaste(CardList list) {
+			int Count = list.size();
+			for(int i = 0; i < Count; i++) {
+				list.get(i).addExtrinsicKeyword("Haste");
+				old.add(list.get(i));
+			}
+		}
+	}; // Anger
+
+	public static Command Wonder                      = new Command() {
+		private static final long serialVersionUID = -846723300545847505L;
+
+		CardList                  old              = new CardList();
+		CardList                  next             = new CardList();
+
+		public void execute() {
+			if(Phase.GameBegins == 1) {
+			// reset creatures
+			removeFlying(old);
+
+			if(isInGrave(Constant.Player.Computer)) addFlying(Constant.Player.Computer);
+
+			if(isInGrave(Constant.Player.Human)) addFlying(Constant.Player.Human);
+			}
+		}// execute()
+
+		void addFlying(String player) {
+			next.clear();
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+			CardList playlist = new CardList(play.getCards());
+			playlist = playlist.getType("Creature");
+			for(int i = 0; i < playlist.size(); i++) {
+				if(!old.contains(playlist.get(i))) next.add(playlist.get(i));
+			}
+			// add creatures to "old" or previous list of creatures
+			
+			
+			addFlying(next);
+		}
+
+		boolean isInGrave(String player) {
+			PlayerZone grave = AllZone.getZone(
+					Constant.Zone.Graveyard, player);
+			CardList list = new CardList(grave.getCards());
+
+			PlayerZone play = AllZone.getZone(
+					Constant.Zone.Play, player);
+			CardList lands = new CardList(play.getCards());
+			lands = lands.getType("Island");
+
+
+			if(!list.containsName("Wonder") || lands.size() == 0) return false;
+			else return true;
+		}
+
+		void removeFlying(CardList list) {
+        	CardList List_Copy = new CardList();
+        	List_Copy.add(list);
+			for(int i = 0; i < List_Copy.size(); i++) {
+				Card c = List_Copy.get(i);
+				if(!isInGrave(c.getController()) && old.contains(c)) {
+					List_Copy.get(i).removeExtrinsicKeyword("Flying");
+					old.remove(c);
+				}
+		}
+		}
+
+		void addFlying(CardList list) {
+			int Count = list.size();
+			for(int i = 0; i < Count; i++) {
+				list.get(i).addExtrinsicKeyword("Flying");
+				old.add(list.get(i));
+			}
+		}
+	}; // Wonder
+
+	public static Command Brawn                       = new Command() {
+		private static final long serialVersionUID = -8467814700545847505L;
+
+		CardList                  old              = new CardList();
+		CardList                  next             = new CardList();
+
+		public void execute() {
+			if(Phase.GameBegins == 1) {
+			// reset creatures
+			removeTrample(old);
+
+			if(isInGrave(Constant.Player.Computer)) addTrample(Constant.Player.Computer);
+
+			if(isInGrave(Constant.Player.Human)) addTrample(Constant.Player.Human);
+			}
+		}// execute()
+
+		void addTrample(String player) {
+			next.clear();
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+			CardList playlist = new CardList(play.getCards());
+			playlist = playlist.getType("Creature");
+			for(int i = 0; i < playlist.size(); i++) {
+				if(!old.contains(playlist.get(i))) next.add(playlist.get(i));
+			}
+			// add creatures to "old" or previous list of creatures
+			
+			
+			addTrample(next);
+		}
+
+		boolean isInGrave(String player) {
+			PlayerZone grave = AllZone.getZone(
+					Constant.Zone.Graveyard, player);
+			CardList list = new CardList(grave.getCards());
+
+			PlayerZone play = AllZone.getZone(
+					Constant.Zone.Play, player);
+			CardList lands = new CardList(play.getCards());
+			lands = lands.getType("Forest");
+
+
+			if(!list.containsName("Brawn") || lands.size() == 0) return false;
+			else return true;
+		}
+
+		void removeTrample(CardList list) {
+        	CardList List_Copy = new CardList();
+        	List_Copy.add(list);
+			for(int i = 0; i < List_Copy.size(); i++) {
+				Card c = List_Copy.get(i);
+				if(!isInGrave(c.getController()) && old.contains(c)) {
+					List_Copy.get(i).removeExtrinsicKeyword("Trample");
+					old.remove(c);
+				}
+		}
+		}
+
+		void addTrample(CardList list) {
+			int Count = list.size();
+			for(int i = 0; i < Count; i++) {
+				list.get(i).addExtrinsicKeyword("Trample");
+				old.add(list.get(i));
+			}
+		}
+	}; // Brawn
+	
+	/**
+	public static Command Valor                       = new Command() {
+		
 		private static final long serialVersionUID = 1664342157638418864L;
 
 		CardList                  old              = new CardList();
@@ -17188,7 +17526,8 @@ public class GameActionUtil {
 				list.get(i).addExtrinsicKeyword("Trample");
 		}
 	}; // Brawn
-
+**/
+	
 	public static Command Crucible_of_Fire            = new Command() {
 		private static final long serialVersionUID   = 3620025773676030026L;
 

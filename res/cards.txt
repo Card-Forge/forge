@@ -1,3 +1,45 @@
+Glory
+3 W W
+Creature Incarnation
+no text
+3/3
+Flying
+
+Filth
+3 B
+Creature Incarnation
+As long as Filth is in your graveyard and you control a Swamp, creatures you control have swampwalk.
+2/2
+Swampwalk
+
+Valor
+3 W
+Creature Incarnation
+As long as Valor is in your graveyard and you control a Plains, creatures you control have First Strike.
+2/2
+First Strike
+
+Anger
+3 R
+Creature Incarnation
+As long as Anger is in your graveyard and you control a Mountain, creatures you control have Haste.
+2/2
+Haste
+
+Wonder
+3 U
+Creature Incarnation
+As long as Wonder is in your graveyard and you control an Island, creatures you control have Flying.
+2/2
+Flying
+
+Brawn
+3 G
+Creature Incarnation
+As long as Brawn is in your graveyard and you control a Forest, creatures you control have trample.
+3/3
+Trample
+
 Rite of Replication
 2 U U
 Sorcery
@@ -12631,13 +12673,6 @@ Creature Treefolk Warrior
 Dauntless Dourbark's power and toughness are each equal to the number of Forests you control plus the number of Treefolk you control. Dauntless Dourbark has trample as long as you control another Treefolk.
 1/1
 
-Brawn
-3 G
-Creature Incarnation
-As long as Brawn is in your graveyard and you control a Forest, creatures you control have trample. (NOTE: Your computer will slow down when an Incarnation is placed in a graveyard.)
-3/3
-Trample
-
 Aladdin's Ring
 8
 Artifact
@@ -20326,27 +20361,6 @@ Veteran Armorer
 Creature Human Soldier
 All creatures you control get +0/+1.
 2/1
-
-Valor
-3 W
-Creature Incarnation
-As long as Valor is in your graveyard and you control a Plains, creatures you control have First Strike. (NOTE: Your computer will slow down when an Incarnation is placed in a graveyard.)
-2/2
-First Strike
-
-Anger
-3 R
-Creature Incarnation
-As long as Anger is in your graveyard and you control a Mountain, creatures you control have Haste. (NOTE: Your computer will slow down when an Incarnation is placed in a graveyard.)
-2/2
-Haste
-
-Wonder
-3 U
-Creature Incarnation
-As long as Wonder is in your graveyard and you control an Island, creatures you control have Flying. (NOTE: Your computer will slow down when an Incarnation is placed in a graveyard.)
-2/2
-Flying
 
 Glorious Anthem
 1 W W
