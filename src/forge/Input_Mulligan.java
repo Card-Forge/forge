@@ -86,6 +86,7 @@ public class Input_Mulligan extends Input {
         }
         AllZone.GameAction.checkStateEffects();
         Phase.GameBegins = 1;
+        AllZone.Phase.setNeedToNextPhase(false);
         stop();
     }
 }

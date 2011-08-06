@@ -428,10 +428,7 @@ public class Phase extends MyObservable
         if(getPhase().equals(Constant.Phase.Untap)){
             turn++;
         }
-        if(turn == 1 && is(Constant.Phase.Upkeep, AllZone.HumanPlayer)) {
-        	turnReset();	// Not sure if Untap is skipped on first turn?
-        }
-        
+
         // When consecutively skipping phases (like in combat) this section pushes through that block
         this.updateObservers();
         if(AllZone.Phase != null && AllZone.Phase.isNeedToNextPhase()) {

@@ -268,8 +268,7 @@ public class PhaseUtil {
 	        return;
 		}
 		
-        if (AllZone.Phase.getTurn() != 1)
-            GameActionUtil.executeUpkeepEffects();
+        GameActionUtil.executeUpkeepEffects();
 	}
 	
     public static boolean skipUpkeep()
