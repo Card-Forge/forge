@@ -137,6 +137,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
         //cost = cost.replaceAll("T, ", "");
         setManaCost(cost.replaceAll("T", "").split(",")[0]);
         if(getManaCost().equals("")) setManaCost("0");
+        /**
         //pain lands
         ArrayList<String> pain = new ArrayList<String>();
         pain.add("Battlefield Forge");
@@ -157,6 +158,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
                 AllZone.GameAction.getPlayerLife(getController()).subtractLife(1);
             }
         });
+        **/
         //parseCosts();
         /*for(String subcost : cost.split(","))
         {

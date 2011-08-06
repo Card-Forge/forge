@@ -1,3 +1,168 @@
+Adarkar Wastes
+no cost
+Land
+no text
+tap: add 1
+paintap:1:W
+paintap:1:U
+
+Brushland
+no cost
+Land
+no text
+tap: add 1
+paintap:1:W
+paintap:1:G
+
+Karplusan Forest
+no cost
+Land
+no text
+tap: add 1
+paintap:1:R
+paintap:1:G
+
+Sulfurous Springs
+no cost
+Land
+no text
+tap: add 1
+paintap:1:B
+paintap:1:R
+
+Underground River
+no cost
+Land
+no text
+tap: add 1
+paintap:1:U
+paintap:1:B
+
+Battlefield Forge
+no cost
+Land
+no text
+tap: add 1
+paintap:1:W
+paintap:1:R
+
+Caves of Koilos
+no cost
+Land
+no text
+tap: add 1
+paintap:1:W
+paintap:1:B
+
+Llanowar Wastes
+no cost
+Land
+no text
+tap: add 1
+paintap:1:B
+paintap:1:G
+
+Shivan Reef
+no cost
+Land
+no text
+tap: add 1
+paintap:1:U
+paintap:1:R
+
+Yavimaya Coast
+no cost
+Land
+no text
+tap: add 1
+paintap:1:U
+paintap:1:G
+
+Salt Flats
+no cost
+Land
+no text
+tap: add 1
+paintap:1:W
+paintap:1:B
+Comes into play tapped.
+
+Pine Barrens
+no cost
+Land
+no text
+tap: add 1
+paintap:1:B
+paintap:1:G
+Comes into play tapped.
+
+Skyshroud Forest
+no cost
+Land
+no text
+tap: add 1
+paintap:1:G
+paintap:1:U
+Comes into play tapped.
+
+Caldera Lake
+no cost
+Land
+no text
+tap: add 1
+paintap:1:U
+paintap:1:R
+Comes into play tapped.
+
+Scabland
+no cost
+Land
+no text
+tap: add 1
+paintap:1:R
+paintap:1:W
+Comes into play tapped.
+
+Talisman of Dominance
+2
+Artifact
+no text
+tap: add 1
+paintap:1:U
+paintap:1:B
+
+Talisman of Impulse
+2
+Artifact
+no text
+tap: add 1
+paintap:1:R
+paintap:1:G
+
+Talisman of Indulgence
+2
+Artifact
+no text
+tap: add 1
+paintap:1:B
+paintap:1:R
+
+Talisman of Progress
+2
+Artifact
+no text
+tap: add 1
+paintap:1:W
+paintap:1:U
+
+Talisman of Unity
+2
+Artifact
+no text
+tap: add 1
+paintap:1:G
+paintap:1:W
+
 Predatory Advantage
 3 R G
 Enchantment

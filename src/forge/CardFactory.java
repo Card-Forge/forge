@@ -3760,6 +3760,33 @@ public class CardFactory implements NewConstants {
             }
         }
         
+        while(hasKeyword(card,"paintap") != -1)
+        {
+           String toParse = card.getIntrinsicKeyword().get(hasKeyword(card,"paintap"));
+           card.removeIntrinsicKeyword(toParse);
+           String[] splitkeyword = toParse.split(":");
+
+           final int amountHurt = Integer.parseInt(splitkeyword[1]);
+           final String manaGenerated = splitkeyword[2];
+           final Ability_Mana addMana = new Ability_Mana(card, "tap: add " + manaGenerated + " to your mana pool.CARDNAME deals " + amountHurt + " damage to you.") {
+                 private static final long serialVersionUID = -259088242789L;
+                 
+                 @Override
+                 public void resolve()
+                 {
+                    AllZone.GameAction.getPlayerLife(getController()).subtractLife(amountHurt);
+                    super.resolve();
+                 }
+                 
+                 @Override
+                 public String mana() {
+                 return manaGenerated;
+              }
+                                                
+            };
+            card.addSpellAbility(addMana);
+        }//paintap
+        
         ////////////////////////////////////////////////////////////////
         
         if (card.getKeyword().contains("When CARDNAME enters the battlefield, draw a card.") || 
