@@ -14506,8 +14506,9 @@ public class CardFactory_Creatures {
             ability.setStackDescription("Stern Judge - Each player loses 1 life for each Swamp he or she controls");
             ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
         }//*************** END ************ END **************************
+  
         
-
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Cackling Imp") || cardName.equals("Blightspeaker")) {
             final Ability_Tap ability = new Ability_Tap(card) {
@@ -14534,7 +14535,7 @@ public class CardFactory_Creatures {
             ability.setStackDescription(card.getName() + " - Opponent loses 1 life.");
             ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
         }//*************** END ************ END **************************
-        
+*/
 
 /*
         //*************** START *********** START **************************

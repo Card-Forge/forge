@@ -10843,6 +10843,7 @@ Blightspeaker
 Creature Human Rebel Cleric
 no text
 1/1
+abLoseLifeTgt T:1
 SearchRebel:4
 
 Amrou Scout
@@ -16164,6 +16165,7 @@ Creature Imp
 no text
 2/2
 Flying
+abLoseLifeTgt T:1
 
 Chittering Rats
 1 B B
