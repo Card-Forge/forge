@@ -311,7 +311,10 @@ public class Target_Selection {
     public static boolean matchSpellAbility(SpellAbility sa, SpellAbility match, Target tgt){
     	String saType = tgt.getTargetSpellAbilityType();
     	
-    	if (match.isSpell()){
+    	if(null == saType) {
+    		//just take this to mean no restrictions - carry on.
+    	}
+    	else if (match.isSpell()){
     		if (!saType.contains("Spell"))
     			return false;
     	}

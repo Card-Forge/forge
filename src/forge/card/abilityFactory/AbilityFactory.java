@@ -631,13 +631,27 @@ public class AbilityFactory {
 				SA = AbilityFactory_Choose.createDrawbackChooseType(this);
 		}
 		
-		if(API.equals("CopyPermanent")){
+		if(API.equals("CopyPermanent")) {
 			if(isAb)
 				SA = AbilityFactory_Copy.createAbilityCopyPermanent(this);
 			else if(isSp)
 				SA = AbilityFactory_Copy.createSpellCopyPermanent(this);
 			else if(isDb)
 				SA = AbilityFactory_Copy.createDrawbackCopyPermanent(this);
+		}
+		
+		if(API.equals("CopySpell")) {
+			if (isTargeted)	// Since all "CopySpell" ABs copy things on the Stack no need for it to be everywhere
+				abTgt.setZone("Stack");
+			
+			if(isAb)
+				SA = AbilityFactory_Copy.createAbilityCopySpell(this);
+			else if(isSp)
+				SA = AbilityFactory_Copy.createSpellCopySpell(this);
+			else if(isDb)
+				SA = AbilityFactory_Copy.createDrawbackCopySpell(this);
+			
+			hostCard.setCopiesSpells(true);
 		}
 		
 		if (SA == null)

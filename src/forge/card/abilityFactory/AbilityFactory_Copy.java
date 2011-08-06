@@ -175,13 +175,13 @@ public class AbilityFactory_Copy {
 			list = list.getValidCards(abTgt.getValidTgts(), source.getController(), source);
 			abTgt.resetTargets();
 			// target loop
-			while(abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)){ 
-				if (list.size() == 0){
-					if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa) || abTgt.getNumTargeted() == 0){
+			while(abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) { 
+				if(list.size() == 0) {
+					if(abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa) || abTgt.getNumTargeted() == 0) {
 						abTgt.resetTargets();
 						return false;
 					}
-					else{
+					else {
 						// TODO is this good enough? for up to amounts?
 						break;
 					}
@@ -195,12 +195,12 @@ public class AbilityFactory_Copy {
 					choice = CardFactoryUtil.AI_getMostExpensivePermanent(list, source, true);
 				}
 
-				if (choice == null){	// can't find anything left
-					if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa) || abTgt.getNumTargeted() == 0){
+				if(choice == null) {	// can't find anything left
+					if(abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa) || abTgt.getNumTargeted() == 0) {
 						abTgt.resetTargets();
 						return false;
 					}
-					else{
+					else {
 						// TODO is this good enough? for up to amounts?
 						break;
 					}
@@ -209,15 +209,15 @@ public class AbilityFactory_Copy {
 				abTgt.addTarget(choice);
 			}
 		}
-		else{
+		else {
 			//if no targeting, it should always be ok
 		}
 		
 		//end Targeting
 
-		if (af.hasSubAbility()){
+		if (af.hasSubAbility()) {
 			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
+			if(abSub != null) {
 				return randomReturn && abSub.chkAI_Drawback();
 			}
 		}
@@ -359,6 +359,169 @@ public class AbilityFactory_Copy {
 				}
 			}
 		}//end foreach Card
+	}//end resolve
+	
+	// *************************************************************************
+	// ************************* CopySpell *************************************
+	// *************************************************************************
+
+	public static SpellAbility createAbilityCopySpell(final AbilityFactory af) {
+
+		final SpellAbility abCopySpell = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+			private static final long serialVersionUID = 5232548517225345052L;
+
+			@Override
+			public String getStackDescription() {
+				return copySpellStackDescription(af, this);
+			}
+
+			@Override
+			public boolean canPlayAI() {
+				return copySpellCanPlayAI(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				copySpellResolve(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return copySpellTriggerAI(af, this, mandatory);
+			}
+
+		};
+		return abCopySpell;
+	}
+
+	public static SpellAbility createSpellCopySpell(final AbilityFactory af) {
+		final SpellAbility spCopySpell = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+			private static final long serialVersionUID = 1878946074608916745L;
+
+			@Override
+			public String getStackDescription() {
+				return copySpellStackDescription(af, this);
+			}
+
+			@Override
+			public boolean canPlayAI() {
+				return copySpellCanPlayAI(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				copySpellResolve(af, this);
+			}
+
+		};
+		return spCopySpell;
+	}
+
+	public static SpellAbility createDrawbackCopySpell(final AbilityFactory af) {
+		final SpellAbility dbCopySpell = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+			private static final long serialVersionUID = 1927508119173644632L;
+
+			@Override
+			public String getStackDescription(){
+				return copySpellStackDescription(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				copySpellResolve(af, this);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return true;
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return copySpellTriggerAI(af, this, mandatory);
+			}
+
+		};
+		return dbCopySpell;
+	}
+
+	private static String copySpellStackDescription(AbilityFactory af, SpellAbility sa) {
+		StringBuilder sb = new StringBuilder();
+
+		if (!(sa instanceof Ability_Sub))
+			sb.append(sa.getSourceCard().getName()).append(" - ");
+		else
+			sb.append(" ");
+
+		ArrayList<SpellAbility> tgtSpells;
+
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtSpells = tgt.getTargetSAs();
+		else
+			tgtSpells = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+
+		sb.append("Copy ");
+		Iterator<SpellAbility> it = tgtSpells.iterator();
+		while(it.hasNext()) {
+			sb.append(it.next().getSourceCard());
+			if(it.hasNext()) sb.append(", ");
+		}
+		sb.append(".");
+		//TODO probably add an optional "You may choose new targets..."
+
+		Ability_Sub abSub = sa.getSubAbility();
+		if(abSub != null) {
+			sb.append(abSub.getStackDescription());
+		}
+
+		return sb.toString();
+	}
+
+	private static boolean copySpellCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+		return false;
+	}
+
+	private static boolean copySpellTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory) {
+		boolean randomReturn = false;
+		
+		if(af.hasSubAbility()) {
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+				return randomReturn && abSub.chkAI_Drawback();
+			}
+		}
+		return randomReturn;
+	}
+
+	private static void copySpellResolve(final AbilityFactory af, final SpellAbility sa) {
+		//final HashMap<String,String> params = af.getMapParams();
+		Card card = af.getHostCard();
+
+		ArrayList<SpellAbility> tgtSpells;
+
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtSpells = tgt.getTargetSAs();
+		else
+			tgtSpells = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+
+		for(SpellAbility tgtSA: tgtSpells) {
+			if (tgt == null || CardFactoryUtil.canTarget(card, tgtSA.getSourceCard())) {
+
+				//copied from Twincast
+				AllZone.CardFactory.copySpellontoStack(card, tgtSA.getSourceCard(), true);				
+				//end copied from Twincast
+
+			}//end canTarget
+
+			if(af.hasSubAbility()) {
+				Ability_Sub abSub = sa.getSubAbility();
+				if(abSub != null) {
+					abSub.resolve();
+				}
+			}
+		}//end foreach SpellAbility
 	}//end resolve
 
 }//end class AbilityFactory_Copy
