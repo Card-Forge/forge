@@ -1,3 +1,59 @@
+Grizzled Wolverine
+1 R R
+Creature Wolverine
+no text
+2/2
+WheneverKeyword:BecomesBlocked:Self:Play:StatsPumpEOT/2/0:Self:ASAP:PayMana/R:No Special Condition:Whenever Grizzled Wolverine becomes blocked, you may pay {R}. If you do, Grizzled Wolverine gets +2/+0 until end of turn.
+
+Havoc
+1 R
+Enchantment
+no text
+WheneverKeyword:CastSpell/Opponent:Color/white:Play:ModifyLife/-2:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever an opponent casts a white spell, he or she loses 2 life.
+
+Mogg Sentry
+R
+Creature Goblin Warrior
+no text
+1/1
+WheneverKeyword:CastSpell/Opponent:No_Initiator:Play:StatsPumpEOT/2/2:Self:ASAP:No_Condition:No Special Condition:Whenever an opponent casts a spell, Mogg Sentry gets +2/+2 until end of turn.
+
+Taurean Mauler
+2 R
+Creature Shapeshifter
+no text
+2/2
+Changeling
+WheneverKeyword:CastSpell/Opponent:No_Initiator:Play:+1+1 Counters/1:Self:ASAP:Yes_No:No Special Condition:Whenever an opponent casts a spell, you may put a +1/+1 counter on Taurean Mauler.
+
+Kavu Monarch
+2 R R
+Creature Kavu
+no text
+3/3
+StaticEffect:Play:All Permanents:Keyword/Trample:Type.Creature!Type.Kavu:Kavu creatures have trample.
+WheneverKeyword:EntersBattleField:Type/Kavu:Play:+1+1 Counters/1:Self:ASAP:No_Condition:Initiator - Other than Self:Whenever another Kavu enters the battlefield, put a +1/+1 counter on Kavu Monarch.
+
+Flowstone Surge
+1 R
+Enchantment
+no text
+StaticEffect:Play:Permanents you Control:PTBonus/1/-1:Type.Creature:Creatures you control get +1/-1.
+
+Anaba Spirit Crafter
+2 R R
+Creature Minotaur Shaman
+no text
+1/3
+StaticEffect:Play:Permanents you Control:PTBonus/1/0:Type.Creature!Type.Minotaur:Minotaur creatures get +1/+0.
+
+Hissing Iguanar
+2 R
+Creature Lizard
+no text
+3/1
+WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:Damage/1:NormalInput/Player:ASAP:Yes_No:Initiator - Other than Self:Whenever another creature is put into a graveyard from the battlefield, you may have Hissing Iguanar deal 1 damage to target player.
+
 Insight
 2 U
 Enchantment
