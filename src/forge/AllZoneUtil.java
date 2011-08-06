@@ -582,6 +582,6 @@ public class AllZoneUtil {
 	
 	public static boolean hasAllUrzas(Player player) {
 		return isCardInPlay("Urza's Power Plant", player) && isCardInPlay("Urza's Mine", player)
-			&& isCardInPlay("Urza's Tower");
+			&& isCardInPlay("Urza's Tower", player);
 	}
 }
