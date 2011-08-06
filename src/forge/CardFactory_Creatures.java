@@ -2764,7 +2764,7 @@ public class CardFactory_Creatures {
             };
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Skirk Prospector")) {
             final Ability_Mana ability = new Ability_Mana(card, "Sacrifice a Goblin: Add R") {
@@ -15276,106 +15276,6 @@ public class CardFactory_Creatures {
         */
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Spitting Hydra")) {      
-            SpellAbility spell = new Spell_Permanent(card) {
-                private static final long serialVersionUID = -11489323314L;
-                
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            final Ability ability = new Ability(card, "1 R") {
-                
-                @Override
-                public boolean canPlay() {
-                    return card.getCounters(Counters.P1P1) > 0 && super.canPlay();
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return getCreature().size() != 0;
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    if(AllZone.HumanPlayer.getLife() < card.getCounters(Counters.P1P1)) setTargetPlayer(AllZone.HumanPlayer);
-                    else {
-                        CardList list = getCreature();
-                        list.shuffle();
-                        setTargetCard(list.get(0));
-                    }
-                    card.subtractCounter(Counters.P1P1, 1); 
-                }//chooseTargetAI()
-                
-                CardList getCreature() {
-                    //toughness of 1
-                    CardList list = CardFactoryUtil.AI_getHumanCreature(1, card, true);
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return (1 == c.getKillDamage());
-                        }
-                    });
-                    return list;
-                }//getCreature()
-                
-                @Override
-                public void resolve() {
-                    if(getTargetCard() != null) {
-                        if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                                && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(1,
-                                card);
-                    } else getTargetPlayer().loseLife(1,card);
-                }//resolve()
-                
-            };//SpellAbility
-            Input target = new Input() {
-                
-                private static final long serialVersionUID = 4246601245231656L;
-                
-                @Override
-                public void showMessage() {
-                    AllZone.Display.showMessage("Select creature or player to target: ");
-                    ButtonUtil.enableOnlyCancel();
-                }
-                
-                @Override
-                public void selectPlayer(Player player) {
-                	ability.setTargetPlayer(player);
-                	card.subtractCounter(Counters.P1P1, 1);
-                    AllZone.Stack.add(ability);
-                    stopSetNext(new ComputerAI_StackNotEmpty());	
-                }
-                
-                @Override
-                public void selectButtonCancel() {
-                    stop();
-                }
-                @Override
-                public void selectCard(Card c, PlayerZone zone) {
-                    PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-                    PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-                    if(AllZone.GameAction.isCardInZone(c, Hplay) || AllZone.GameAction.isCardInZone(c, Cplay)) {
-                    	card.subtractCounter(Counters.P1P1, 1);
-                    	ability.setTargetCard(c);
-                        AllZone.Stack.add(ability);
-                        stopSetNext(new ComputerAI_StackNotEmpty());
-                    }
-                }//selectCard()
-            };//Input
-            card.addSpellAbility(ability);
-            ability.setAfterPayMana(target);
-            Command intoPlay = new Command() {
-                
-                private static final long serialVersionUID = 255901529244894L;
-                
-                public void execute() {
-                    card.addCounter(Counters.P1P1, 4);                   
-                }//execute()
-            };//Command
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Molten Hydra")) {
             
             final Ability ability1 = new Ability(card, "1 R R") {
@@ -17608,8 +17508,11 @@ public class CardFactory_Creatures {
                 }
             };
             
-            final Ability ability = new Ability(card, "0") {
-                @Override
+            Ability_Cost abCost = new Ability_Cost("0", cardName, true);
+            final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
+				private static final long serialVersionUID = -8345060615720565828L;
+
+				@Override
                 public void resolve() {
                     if(AllZone.GameAction.isCardInPlay(card)) {
                         card.addTempAttackBoost(3);
@@ -18058,7 +17961,7 @@ public class CardFactory_Creatures {
             };
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
-        
+
         
         //*************** START *********** START **************************
         else if(cardName.equals("Viridian Joiner"))
