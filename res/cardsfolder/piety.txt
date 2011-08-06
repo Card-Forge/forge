@@ -2,7 +2,7 @@ Name:Piety
 ManaCost:2 W
 Types:Instant
 Text:no text
-A:SP$PumpAll | Cost$ 2 W | ValidCards$ Creature.blocking | NumDef$ +3 | SpellDescription$ Blocking creatures get +0/+3 until end of turn.
+A:SP$ PumpAll | Cost$ 2 W | ValidCards$ Creature.blocking | NumDef$ +3 | SpellDescription$ Blocking creatures get +0/+3 until end of turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/piety.jpg
