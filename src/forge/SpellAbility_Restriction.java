@@ -72,10 +72,22 @@ public class SpellAbility_Restriction {
 			activatePhases.add(s);
 	}
 	
+	private int nCardsInHand = -1;
+	public void setActivateCardsInHand(int cards){
+		nCardsInHand = cards;
+	}
+	
+	private boolean bNeedsThreshold = false;
+	public void setThreshold(boolean bThreshold){
+		bNeedsThreshold = bThreshold;
+	}
+	
+	final private int THRESHOLD = 7;
+	
+	
+	
 	/*
 	 * Restrictions of the future
-	 * cardsInHand
-		boolean bHasThreshold = false;
 		boolean bHasMetalcraft = false;
 		int levelMin = 0;
 		int levelMax = 0;
@@ -89,19 +101,19 @@ public class SpellAbility_Restriction {
 		if (!AllZone.getZone(c).getZone().equals(activateZone))
 			return false;
 		
-		Player activater = sa.getActivatingPlayer();
-		if (activater == null){
+		Player activator = sa.getActivatingPlayer();
+		if (activator == null){
 			c.getController();
 			System.out.println(c.getName() + " Did not have activater set in SpellAbility_Restriction.canPlay()");
 		}
 		
-		if (bSorcerySpeed && !Phase.canCastSorcery(activater))
+		if (bSorcerySpeed && !Phase.canCastSorcery(activator))
 			return false;
 		
-		if (bPlayerTurn && !AllZone.Phase.isPlayerTurn(activater))
+		if (bPlayerTurn && !AllZone.Phase.isPlayerTurn(activator))
 			return false;
 		
-		if (!bAnyPlayer && !activater.equals(c.getController()))
+		if (!bAnyPlayer && !activator.equals(c.getController()))
 			return false;
 		
 		if (activationLimit != -1 && numberTurnActivations >= activationLimit)
@@ -118,6 +130,18 @@ public class SpellAbility_Restriction {
 			}
 			
 			if (!isPhase)
+				return false;
+		}
+		
+		if (nCardsInHand != -1){
+			// Can handle Library of Alexandria, or Hellbent
+			if (AllZone.getZone(Constant.Zone.Hand, activator).size() != nCardsInHand)
+				return false;
+		}
+		
+		if (bNeedsThreshold){
+			// Threshold
+			if (AllZone.getZone(Constant.Zone.Hand, activator).size() < THRESHOLD)
 				return false;
 		}
 			

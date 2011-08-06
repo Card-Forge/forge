@@ -280,6 +280,12 @@ public class AbilityFactory {
         if (mapParams.containsKey("ActivatingPhases"))
         	SA.getRestrictions().setActivatePhases(mapParams.get("ActivatingPhases"));
         
+        if (mapParams.containsKey("ActivatingCardsInHand"))
+        	SA.getRestrictions().setActivateCardsInHand(Integer.parseInt(mapParams.get("ActivatingCardsInHand")));
+        
+        if (mapParams.containsKey("Threshold"))
+        	SA.getRestrictions().setThreshold(true);
+        
         return SA;
 	}
 	
