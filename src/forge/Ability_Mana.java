@@ -318,6 +318,9 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
             int count = CardFactoryUtil.xCount(sourceCard, countSB.toString());
             
             StringBuilder sb = new StringBuilder();
+            
+            if(count == 0) sb.append("0");
+            
             for(int i = 0; i < count; i++){
             	if (i != 0)
                     sb.append(" "); 	// added a space here to play nice with the new ManaPool
