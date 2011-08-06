@@ -1,3 +1,9 @@
+Fauna Shaman
+1 G
+Creature Elf Shaman
+no text
+2/2
+
 Arrogant Wurm
 3 G G
 Creature Wurm
