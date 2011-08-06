@@ -395,6 +395,248 @@ public class CardFactory implements NewConstants {
             } //if (should RegenerateMe)
         } //while - card has more RegenerateMe - Jungle Troll has two Regenerate keywords
         
+        if (hasKeyword(card, "spAllPump") != -1)
+        {
+        	int n = hasKeyword(card, "spAllPump");
+        	
+        	String parse = card.getKeyword().get(n).toString();
+        	card.removeIntrinsicKeyword(parse);
+        	
+        	String k[] = parse.split(":");
+        	
+        	final String Scope[] = k[1].split("/");
+        	
+        	final int NumAttack[] = {-1138};
+        	final String AttackX[] = {"none"};
+        	final int NumDefense[] = {-1138};
+        	final String DefenseX[] = {"none"};
+        	final String Keyword[] = {"none"};
+        	
+        	String ptk[] = k[2].split("/");
+        	
+        	if (ptk.length == 1)
+        		Keyword[0] = ptk[0];
+        	
+        	if (ptk.length >= 2)
+        	{
+        		if (ptk[0].matches("[\\+\\-][XY]"))
+        		{
+        			String xy = card.getSVar(ptk[0].replaceAll("[\\+\\-]", ""));
+        			if (xy.startsWith("Count$"))
+        			{
+        				String kk[] = xy.split("\\$");
+        				AttackX[0] = kk[1];
+        				
+        				if (ptk[0].contains("-"))
+        				{
+        					if (AttackX[0].contains("/"))
+        						AttackX[0] = AttackX[0].replace("/", "/Negative");
+        					else
+        						AttackX[0] += "/Negative";
+        				}
+        				
+        			}
+        		}
+        		else if (ptk[0].matches("[\\+\\-][0-9]"))
+        			NumAttack[0] = Integer.parseInt(ptk[0].replace("+", ""));
+        		
+        		if (ptk[1].matches("[\\+\\-][XY]"))
+        		{
+        			String xy = card.getSVar(ptk[1].replaceAll("[\\+\\-]", ""));
+        			if (xy.startsWith("Count$"))
+        			{
+        				String kk[] = xy.split("\\$");
+        				DefenseX[0] = kk[1];
+        				
+        				if (ptk[0].contains("-"))
+        				{
+        					if (DefenseX[0].contains("/"))
+        						DefenseX[0] = DefenseX[0].replace("/", "/Negative");
+        					else
+        						DefenseX[0] += "/Negative";
+        				}
+        				
+        			}
+        		}
+        		else if (ptk[1].matches("[\\+\\-][0-9]"))
+        			NumDefense[0] = Integer.parseInt(ptk[1].replace("+", ""));
+        	}
+        	
+        	if (ptk.length == 3)
+        		Keyword[0] = ptk[2];
+        	
+        	final String DrawBack[] = {"none"};
+        	final String spDesc[] = {"none"};
+        	final String stDesc[] = {"none"};
+        	
+        	if (k.length > 3)
+        	{
+        		if (k[3].contains("Drawback$"))
+        		{
+        			String kk[] = k[3].split("\\$");
+        			DrawBack[0] = kk[1];
+        			if (k.length > 4) spDesc[0] = k[4];
+        			if (k.length > 5) stDesc[0] = k[5];
+        		}
+        		else
+        		{
+        			if (k.length > 3) spDesc[0] = k[3];
+        			if (k.length > 4) stDesc[0] = k[4];
+        		}
+        	}
+        	
+        	SpellAbility spAllPump = new Spell(card)
+        	{
+        		private static final long serialVersionUID = 837472987492L;
+        		
+                private int getNumAttack() {
+                    if(NumAttack[0] != -1138) return NumAttack[0];
+                    
+                    if(!AttackX[0].equals("none")) return CardFactoryUtil.xCount(card, AttackX[0]);
+                    
+                    return 0;
+                }
+                
+                private int getNumDefense() {
+                    if(NumDefense[0] != -1138) return NumDefense[0];
+                    
+                    if(!DefenseX[0].equals("none")) return CardFactoryUtil.xCount(card, DefenseX[0]);
+                    
+                    return 0;
+                }
+                
+                private int getNumKeyword()
+                {
+                	if (!Keyword[0].equals("none"))
+                		return Keyword[0].split(" & ").length;
+                	else return 0;
+                }
+                
+                private CardList getScopeList()
+                {
+                	CardList l = new CardList();
+                	
+                	if (Scope[0].contains("YouCtrl"))
+                		l.addAll(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
+                	
+                	if (Scope[0].contains("All")) {
+                		l.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+                		l.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
+                	}
+                	
+                	String fc[] = {"Creature"};
+                	l = l.getValidCards(fc);
+                	
+                	if (Scope.length > 1)
+                	{
+                		String v = Scope[1]; 
+                		if (v.length() > 0)
+                			l = l.getValidCards(v.split(","));
+                	}
+                	
+                	return l;
+                }
+
+                public boolean canPlayAI()
+                {
+                	System.out.println("Phase - " + AllZone.Phase.getPhase());
+                	String curPhase = AllZone.Phase.getPhase();
+                	if (curPhase.equals(Constant.Phase.Main2)) 
+                		return false;
+                
+                	CardList sl = getScopeList();
+                	int NumScope = sl.size();
+                	
+                	int defense = getNumDefense();
+                	int attack = getNumAttack();
+                	int key = getNumKeyword();
+                	int th = (attack + defense + key) / 2; // Benefit Threshold
+                	
+                	if (NumScope > th) // have enough creatures in play
+                	{
+                		Combat c = ComputerUtil.getAttackers();
+                		if (c.getAttackers().length >= th) // have enough creatures that will attack
+                		{
+                			int ndead = 0;
+                			for (int i=0; i<sl.size(); i++) // check to see if this will kill any creatures
+                				if ((sl.get(i).getNetDefense() + defense) < 1)
+                					ndead++;
+                			if (!(ndead > (sl.size() / 2))) // don't kill more than half of the creatures
+                					return true;
+                		}
+                	}
+                	
+                	return false;
+                }
+                
+                public void resolve()
+                {
+                	final int attack = getNumAttack();
+                	final int defense = getNumDefense();
+                	
+                	final CardList sl = getScopeList();
+                	
+                	System.out.println("Phase - " + AllZone.Phase.getPhase());
+                	
+                	final Command untilEOT = new Command()
+                	{
+                		private static final long serialVersionUID = 92848209484928L;
+                		
+                		public void execute()
+                		{
+                			for (int i=0; i<sl.size(); i++)
+                			{
+                				Card c = sl.get(i);
+                				if (AllZone.GameAction.isCardInPlay(c))
+                				{
+                					c.addTempAttackBoost(-attack);
+                					c.addTempDefenseBoost(-defense);
+                					
+                					if (!Keyword[0].equals("none"))
+                					{
+                						String kws[] = Keyword[0].split(" & ");
+                						for (int j=0; j<kws.length; j++)
+                							c.removeExtrinsicKeyword(kws[j]);
+                					}
+                				}
+                			}
+                		}
+                	}; // untilEOT command
+                	
+                	for (int i=0; i<sl.size(); i++)
+                	{
+                		Card c = sl.get(i);
+                		
+                		if (AllZone.GameAction.isCardInPlay(c))
+                		{
+                			c.addTempAttackBoost(attack);
+                			c.addTempDefenseBoost(defense);
+                			
+                			if (!Keyword[0].equals("none"))
+                			{
+                				String kws[] = Keyword[0].split(" & ");
+                				for (int j=0; j<kws.length; j++)
+                					c.addExtrinsicKeyword(kws[j]);
+                			}
+                		}
+                	}
+                	
+                	AllZone.EndOfTurn.addUntil(untilEOT);
+                	
+                	if (!DrawBack[0].equals("none"))
+                		CardFactoryUtil.doDrawBack(DrawBack[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), card.getController(), card, card);
+                } // resolve
+        	}; // spAllPump
+        	
+        	spAllPump.setDescription(spDesc[0]);
+        	spAllPump.setStackDescription(stDesc[0]);
+        	
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spAllPump);
+        	
+        	card.setSVar("PlayMain1", "TRUE");
+        }
+        
         while(hasKeyword(card, "abPump") != -1) {
             int n = hasKeyword(card, "abPump");
             if(n != -1) {
@@ -1060,6 +1302,9 @@ public class CardFactory implements NewConstants {
                                 card, getTargetCard());
                     }// resolove
                 }; //spellAbility
+                
+                card.setSVar("PlayMain1", "TRUE");
+                
                 if(!spDesc[0].equals("none")) DamageTgt.setDescription(spDesc[0]);
                 else {
                     String s;
@@ -1735,6 +1980,9 @@ public class CardFactory implements NewConstants {
             };*///InGetTarget
             
             //card.clearSpellAbility();
+            
+            card.setSVar("PlayMain1", "TRUE");
+            
             spDstryTgt.setBeforePayMana(InGetTarget);
             spDstryTgt.setDescription(card.getText());
             card.setText("");
@@ -3157,7 +3405,9 @@ public class CardFactory implements NewConstants {
                 public boolean canPlayAI() {
                     int defense = getNumDefense();
                     
-                    if(AllZone.Phase.getPhase().equals(Constant.Phase.Main2)) return false;
+                    String curPhase = AllZone.Phase.getPhase();
+                    if(curPhase.equals(Constant.Phase.Main2))
+                    	return false;
                     
                     CardList list = getCreatures();
                     if(!list.isEmpty()) {
@@ -3247,6 +3497,8 @@ public class CardFactory implements NewConstants {
             spPump.setBeforePayMana(CardFactoryUtil.input_targetCreature(spPump));
             spPump.setDescription(spDesc[0]);
             spPump.setStackDescription(stDesc[0]);
+            
+            card.setSVar("PlayMain1", "TRUE");
             
             card.clearSpellAbility();
             card.addSpellAbility(spPump);
@@ -3409,6 +3661,8 @@ public class CardFactory implements NewConstants {
                 spell.setStackDescription(stDesc[0]);
                 card.clearSpellAbility();
                 card.addSpellAbility(spell);
+                
+                card.setSVar("PlayMain1", "TRUE");
             }
         }// spRaiseDead
         
@@ -3502,7 +3756,7 @@ public class CardFactory implements NewConstants {
 
         //*************** START *********** START **************************
         if(cardName.equals("Brave the Elements")
-        		|| cardName.equals("Burst of Speed") || cardName.equals("Chorus of Woe")
+        		|| cardName.equals("Burst of Speed") 
                 || cardName.equals("Dance of Shadows") || cardName.equals("Desperate Charge")
                 || cardName.equals("Glorious Charge") || cardName.equals("Kjeldoran War Cry")
                 || cardName.equals("Magnify") || cardName.equals("Nature's Cloak")
@@ -3816,6 +4070,8 @@ public class CardFactory implements NewConstants {
             });
             
             card.addSpellAbility(ability);
+            
+            card.setSVar("PlayMain1", "TRUE");
         }
         //*************** END ************ END **************************
         
@@ -3870,6 +4126,8 @@ public class CardFactory implements NewConstants {
             });
             
             card.addSpellAbility(ability);
+            
+            card.setSVar("PlayMain1", "TRUE");
         }
         //*************** END ************ END **************************
         
@@ -4299,6 +4557,8 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
             
+            card.setSVar("PlayMain1", "TRUE");
+            
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
@@ -4341,6 +4601,8 @@ public class CardFactory implements NewConstants {
                     }
                 }//resolve()
             };
+            
+            card.setSVar("PlayMain1", "TRUE");
             
             card.clearSpellAbility();
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
@@ -4489,6 +4751,8 @@ public class CardFactory implements NewConstants {
             card.addComesIntoPlayCommand(commandComes);
             card.addLeavesPlayCommand(commandLeavesPlay);
             
+            card.setSVar("PlayMain1", "TRUE");
+            
             card.clearSpellAbility();
             card.addSpellAbility(new Spell_Permanent(card) {
                 private static final long serialVersionUID = -3250095291930182087L;
@@ -4606,6 +4870,8 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(enchantment);
             
+            card.setSVar("PlayMain1", "TRUE");
+            
             enchantment.setBeforePayMana(CardFactoryUtil.input_targetCreature(enchantment));
         }//*************** END ************ END **************************
         
@@ -4671,6 +4937,8 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             spell.setBeforePayMana(CardFactoryUtil.input_targetType(spell, "All"));
             card.addSpellAbility(spell);
+            
+            card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
 
@@ -4728,6 +4996,8 @@ public class CardFactory implements NewConstants {
             };
             card.clearSpellAbility();
             card.addSpellAbility(spell);
+            
+            card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
 
@@ -4928,6 +5198,8 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
             spell.setBeforePayMana(runtime);
+            
+            card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
 
@@ -5117,6 +5389,8 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
             spell.setBeforePayMana(runtime);
+            
+            card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
 
@@ -5210,6 +5484,8 @@ public class CardFactory implements NewConstants {
                 }
             };//Input
             
+            card.setSVar("PlayMain1", "TRUE");
+            
             card.clearSpellAbility();
             card.addSpellAbility(spell);
             spell.setBeforePayMana(runtime);
@@ -5270,6 +5546,8 @@ public class CardFactory implements NewConstants {
             };//SpellAbility
             card.clearSpellAbility();
             card.addSpellAbility(spell);
+            
+            card.setSVar("PlayMain1", "TRUE");
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
@@ -5562,6 +5840,8 @@ public class CardFactory implements NewConstants {
             
             card.clearSpellAbility();
             card.addSpellAbility(spell);
+            
+            card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
@@ -5650,6 +5930,8 @@ public class CardFactory implements NewConstants {
                 
             };
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+            
+            card.setSVar("PlayMain1", "TRUE");
             
             card.clearSpellAbility();
             card.addSpellAbility(spell);
@@ -5808,6 +6090,8 @@ public class CardFactory implements NewConstants {
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
             
+            card.setSVar("PlayMain1", "TRUE");
+            
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
@@ -5832,6 +6116,8 @@ public class CardFactory implements NewConstants {
             };//SpellAbility
             card.clearSpellAbility();
             card.addSpellAbility(spell);
+            
+            card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
 
@@ -5864,6 +6150,9 @@ public class CardFactory implements NewConstants {
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHumanCreatureOrPlayer());
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true, false));
+            
+            card.setSVar("PlayMain1", "TRUE");
+            
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
@@ -6031,6 +6320,7 @@ public class CardFactory implements NewConstants {
         
 
         //*************** START *********** START **************************
+        // TODO: Use spPumpTgt with sVar:Buyback
         else if(cardName.equals("Elvish Fury")) {
             
             final SpellAbility spell_one = new Spell(card) {
@@ -6134,6 +6424,8 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell_one);
             card.addSpellAbility(spell_two);
+            
+            card.setSVar("PlayMain1", "TRUE");
             
         }//*************** END ************ END **************************
         
@@ -6324,6 +6616,8 @@ public class CardFactory implements NewConstants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
             card.clearSpellAbility();
             card.addSpellAbility(spell);
+            
+            card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
 
@@ -6595,6 +6889,9 @@ public class CardFactory implements NewConstants {
                     return false;
                 }
             };
+            
+            card.setSVar("PlayMain1", "TRUE");
+            
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
@@ -7752,6 +8049,8 @@ public class CardFactory implements NewConstants {
             };
             card.clearSpellAbility();
             card.addSpellAbility(spell);
+            
+            card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
 /*
@@ -7914,6 +8213,8 @@ public class CardFactory implements NewConstants {
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
             card.clearSpellAbility();
             card.addSpellAbility(spell);
+            
+            card.setSVar("PlayMain1", "TRUE");
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
@@ -8253,6 +8554,8 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
             
+            card.setSVar("PlayMain1", "TRUE");
+            
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
@@ -8390,6 +8693,8 @@ public class CardFactory implements NewConstants {
             };//SpellAbility
             card.clearSpellAbility();
             card.addSpellAbility(spell);
+            
+            card.setSVar("PlayMain1", "TRUE");
             
             //target
             Input target = new Input() {
@@ -8575,6 +8880,8 @@ public class CardFactory implements NewConstants {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true, false));
             card.setFlashback(true);
+            
+            card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
 
@@ -8660,6 +8967,8 @@ public class CardFactory implements NewConstants {
             
             card.addSpellAbility(spell);
             
+            card.setSVar("PlayMain1", "TRUE");
+            
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true, false));
         }//*************** END ************ END **************************
         
@@ -8684,6 +8993,8 @@ public class CardFactory implements NewConstants {
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
             card.clearSpellAbility();
             card.addSpellAbility(spell);
+            
+            card.setSVar("PlayMain1", "TRUE");
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
@@ -9177,6 +9488,8 @@ public class CardFactory implements NewConstants {
             };//SpellAbility
             card.clearSpellAbility();
             card.addSpellAbility(spell);
+            
+            card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
@@ -9205,6 +9518,7 @@ public class CardFactory implements NewConstants {
         
 
         //*************** START *********** START **************************
+        // TODO: use spAllPump keyword when ready
         else if(cardName.equals("Path of Anger's Flame")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = -4070937328002003491L;
@@ -9246,6 +9560,8 @@ public class CardFactory implements NewConstants {
             };//SpellAbility
             card.clearSpellAbility();
             card.addSpellAbility(spell);
+            
+            card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
 
@@ -9840,6 +10156,8 @@ public class CardFactory implements NewConstants {
                 }
             };//Input
             
+            card.setSVar("PlayMain1", "TRUE");
+            
             spell.setBeforePayMana(target);
             card.clearSpellAbility();
             card.addSpellAbility(spell);
@@ -9914,6 +10232,8 @@ public class CardFactory implements NewConstants {
             spell.setBeforePayMana(target);
             card.clearSpellAbility();
             card.addSpellAbility(spell);
+            
+            card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
 
@@ -10131,6 +10451,8 @@ public class CardFactory implements NewConstants {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
             
+            card.setSVar("PlayMain1", "TRUE");
+            
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
@@ -10318,6 +10640,8 @@ public class CardFactory implements NewConstants {
             };
             card.clearSpellAbility();
             card.addSpellAbility(spell);
+            
+            card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
 
@@ -10894,6 +11218,8 @@ public class CardFactory implements NewConstants {
             };//SpellAbility
             card.clearSpellAbility();
             card.addSpellAbility(spell);
+            
+            card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
@@ -11103,6 +11429,8 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(flashback);
             
             card.setFlashback(true);
+            
+            card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
@@ -11183,6 +11511,8 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
             card.addSpellAbility(CardFactoryUtil.ability_cycle(card, "2"));
+            
+            card.setSVar("PlayMain1", "TRUE");
             
             spell.setBeforePayMana(target);
         }//*************** END ************ END **************************
@@ -13948,6 +14278,8 @@ public class CardFactory implements NewConstants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
             card.clearSpellAbility();
             card.addSpellAbility(spell);
+            
+            card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
 
@@ -14064,6 +14396,8 @@ public class CardFactory implements NewConstants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
             card.clearSpellAbility();
             card.addSpellAbility(spell);
+            
+            card.setSVar("PlayMain1", "TRUE");
             //card.addSpellAbility(CardFactoryUtil.ability_cycle(card, "2 G"));
         }//*************** END ************ END **************************
 
@@ -14127,6 +14461,8 @@ public class CardFactory implements NewConstants {
             };//SpellAbility
             card.clearSpellAbility();
             card.addSpellAbility(spell);
+            
+            card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
@@ -18582,6 +18918,8 @@ public class CardFactory implements NewConstants {
        	};
        	card.clearSpellAbility();
        	card.addSpellAbility(spell);
+       	
+       	card.setSVar("PlayMain1", "TRUE");
        } //*************** END ************ END **************************
         
       //*************** START *********** START **************************
@@ -21048,6 +21386,12 @@ public class CardFactory implements NewConstants {
 
         }//*************** END ************ END **************************
         
+        
+        
+        
+        
+        
+        
       //*************** START *********** START **************************
         else if (cardName.equals("Natural Order")){
             final SpellAbility spell = new Spell(card) {
@@ -21171,6 +21515,15 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
+        
+      //*************** START ********** START *************************
+        if (cardName.equals("Finest Hour") || cardName.equals("Gaea's Anthem") ||
+        		cardName.equals("Glorious Anthem"))  
+        	// no card factory code, cards handled elsewhere, 
+        {
+        	card.setSVar("PlayMain1", "TRUE");
+        }//*************** END ************ END **************************        
+
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
@@ -21185,7 +21538,7 @@ public class CardFactory implements NewConstants {
                 card.addSpellAbility(CardFactoryUtil.ability_cycle(card, manacost));
             }
         }//Cycling
-        
+
         while(hasKeyword(card, "TypeCycling") != -1) {
             int n = hasKeyword(card, "TypeCycling");
             if(n != -1) {
