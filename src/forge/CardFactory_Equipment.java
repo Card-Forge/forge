@@ -42,13 +42,15 @@ class CardFactory_Equipment {
                 @Override
                 public boolean canPlay() {
                     return AllZone.getZone(card).is(Constant.Zone.Play)
-                            && Phase.canCastSorcery(card.getController());
+                            && Phase.canCastSorcery(card.getController())
+                            && super.canPlay();
                 }
                 
                 @Override
                 public boolean canPlayAI() {
                     return getCreature().size() != 0 
-                    		&& !card.isEquipping();
+                    		&& !card.isEquipping()
+                    		&& super.canPlayAI();
                 }
                 
                 
@@ -249,13 +251,15 @@ class CardFactory_Equipment {
                 @Override
                 public boolean canPlay() {
                     return AllZone.getZone(card).is(Constant.Zone.Play)
-                            && Phase.canCastSorcery(getSourceCard().getController());
+                            && Phase.canCastSorcery(getSourceCard().getController())
+                            && super.canPlay();
                 }
                 
                 @Override
                 public boolean canPlayAI() {
                     return getCreature().size() != 0 
-                    		&& !card.isEquipping();
+                    		&& !card.isEquipping()
+                    		&& super.canPlayAI();
                 }
                 
                 @Override
@@ -321,14 +325,16 @@ class CardFactory_Equipment {
         		@Override
         		public boolean canPlay() {
         			return AllZone.getZone(card).is(Constant.Zone.Play)
-        					&& Phase.canCastSorcery(card.getController());
+        					&& Phase.canCastSorcery(card.getController())
+        					&& super.canPlay();
         		}
 
         		//not changed
         		@Override
         		public boolean canPlayAI() {
         			return getCreature().size() != 0 
-        					&& !card.isEquipping();
+        					&& !card.isEquipping()
+        					&& super.canPlayAI();
         		}
 
         		//not changed
@@ -423,13 +429,15 @@ class CardFactory_Equipment {
                 @Override
                 public boolean canPlay() {
                     return AllZone.getZone(card).is(Constant.Zone.Play)
-                            && Phase.canCastSorcery(getSourceCard().getController());
+                            && Phase.canCastSorcery(getSourceCard().getController())
+                            && super.canPlay();
                 }
                 
                 @Override
                 public boolean canPlayAI() {
                     return getCreature().size() != 0 
-                    		&& !card.isEquipping();
+                    		&& !card.isEquipping()
+                    		&& super.canPlayAI();
                 }
                 
                 @Override
@@ -508,13 +516,15 @@ class CardFactory_Equipment {
                 @Override
                 public boolean canPlay() {
                     return AllZone.getZone(card).is(Constant.Zone.Play)
-                            && Phase.canCastSorcery(getSourceCard().getController());
+                            && Phase.canCastSorcery(getSourceCard().getController())
+                            && super.canPlay();
                 }
                 
                 @Override
                 public boolean canPlayAI() {
                     return getCreature().size() != 0 
-                    		&& !card.isEquipping();
+                    		&& !card.isEquipping()
+                    		&& super.canPlayAI();
                 }
                 
                 @Override
@@ -607,13 +617,15 @@ class CardFactory_Equipment {
                 @Override
                 public boolean canPlay() {
                     return AllZone.getZone(card).is(Constant.Zone.Play)
-                            && Phase.canCastSorcery(getSourceCard().getController());
+                            && Phase.canCastSorcery(getSourceCard().getController())
+                            && super.canPlay();
                 }
                 
                 @Override
                 public boolean canPlayAI() {
                     return getCreature().size() != 0 
-                    		&& !card.isEquipping();
+                    		&& !card.isEquipping()
+                    		&& super.canPlayAI();
                 }
                 
                 @Override
@@ -709,13 +721,15 @@ class CardFactory_Equipment {
                 public boolean canPlay() {
                     return AllZone.getZone(card).is(Constant.Zone.Play)
                             && AllZone.Phase.getPlayerTurn().equals(card.getController())
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+                            && super.canPlay();
                 }
                 
                 @Override
                 public boolean canPlayAI() {
                     return getCreature().size() != 0 
-                    		&& !card.isEquipping();
+                    		&& !card.isEquipping()
+                    		&& super.canPlayAI();
                 }
                 
                 @Override

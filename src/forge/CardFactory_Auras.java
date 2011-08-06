@@ -81,7 +81,7 @@ class CardFactory_Auras {
                     else {
                         list.shuffle();
                         setTargetCard(list.get(0));
-                        return true;
+                        return super.canPlayAI();
                     }
                 }//canPlayAI()
                 
@@ -200,7 +200,7 @@ class CardFactory_Auras {
                         }
                         
                     });
-                    if(AllZone.ComputerPlayer.getLife() < 4 && cars.size() > 0) return true;
+                    if(AllZone.ComputerPlayer.getLife() < 4 && cars.size() > 0) return super.canPlayAI();
                     else return false;
                 }
             };//SpellAbility
@@ -281,7 +281,7 @@ class CardFactory_Auras {
                     else {
                         list.shuffle();
                         setTargetCard(list.get(0));
-                        return true;
+                        return super.canPlayAI();
                     }
                 }//canPlayAI()
                 
@@ -408,7 +408,7 @@ class CardFactory_Auras {
                     else {
                     	list.shuffle();
                         setTargetCard(list.get(0));
-                        return true;
+                        return super.canPlayAI();
                     }
                 }//canPlayAI()
                 
@@ -523,6 +523,9 @@ class CardFactory_Auras {
                 
                 @Override
                 public boolean canPlayAI() {
+                	
+                	if(!super.canPlayAI()) return false;
+                	
                 	if(card.getName().equals("Spreading Seas")
                 			|| card.getName().equals("Lingering Mirage")
                 			|| card.getName().equals("Sea's Claim")
@@ -777,7 +780,7 @@ class CardFactory_Auras {
                     if(list.isEmpty()) return false;
                     
                     setTargetCard(list.get(0));
-                    return true;
+                    return super.canPlayAI();
                 }//canPlayAI()
                 
                 @Override
@@ -866,7 +869,7 @@ class CardFactory_Auras {
                     	if (CardUtil.getConvertedManaCost(crd) >= 2) setTargetCard(crd);
                     	else return false;
                     }
-                    return true;
+                    return super.canPlayAI();
                 }//canPlayAI()
                 
                 @Override
@@ -981,7 +984,7 @@ class CardFactory_Auras {
                     for(int i = 0; i < list.size(); i++) {
                         if(CardFactoryUtil.canTarget(card, list.get(i))) {
                             setTargetCard(list.get(i));
-                            return true;
+                            return super.canPlayAI();
                         }
                     }
                     return false;
@@ -1075,7 +1078,7 @@ class CardFactory_Auras {
                         if(CardFactoryUtil.canTarget(card, list.get(i))
                                 && !list.get(i).getKeyword().contains("Defender")) {
                             setTargetCard(list.get(i));
-                            return true;
+                            return super.canPlayAI();
                         }
                     }
                     return false;
@@ -1172,7 +1175,7 @@ class CardFactory_Auras {
                                     && (list.get(i).getNetAttack() >= list.get(i).getNetDefense())
                                     && list.get(i).getNetAttack() >= 3) {
                                 setTargetCard(list.get(i));
-                                return true;
+                                return super.canPlayAI();
                             }
                         }
                     }
@@ -1222,7 +1225,7 @@ class CardFactory_Auras {
                         for (int i = 0; i < auraMagnetList.size(); i++) {
                             if (CardFactoryUtil.canTarget(card, auraMagnetList.get(i))) {
                                 setTargetCard(auraMagnetList.get(i));    // Target only Rabid Wombat or Uril, the Miststalker
-                    	        return true;
+                    	        return super.canPlayAI();
                     	    }
                     	}
                     }
@@ -1235,7 +1238,7 @@ class CardFactory_Auras {
                         if (CardFactoryUtil.canTarget(card, list.get(i))
                                 && !list.get(i).getKeyword().contains("Vigilance")) {
                             setTargetCard(list.get(i));
-                            return true;
+                            return super.canPlayAI();
                         }
                     }
                   
@@ -1328,7 +1331,7 @@ class CardFactory_Auras {
                         for (int i = 0; i < auraMagnetList.size(); i++) {
                             if (CardFactoryUtil.canTarget(card, auraMagnetList.get(i))) {
                                 setTargetCard(auraMagnetList.get(i));    // Target only Rabid Wombat or Uril, the Miststalker
-                    	        return true;
+                    	        return super.canPlayAI();
                     	    }
                     	}
                     }
@@ -1341,7 +1344,7 @@ class CardFactory_Auras {
                         if (CardFactoryUtil.canTarget(card, list.get(i))
                                 && !list.get(i).getKeyword().contains("CARDNAME can't be blocked except by artifact creatures and/or white creatures.")) {
                             setTargetCard(list.get(i));
-                            return true;
+                            return super.canPlayAI();
                         }
                     }
                     return false;
@@ -1432,7 +1435,7 @@ class CardFactory_Auras {
                         for (int i = 0; i < auraMagnetList.size(); i++) {
                             if (CardFactoryUtil.canTarget(card, auraMagnetList.get(i))) {
                                 setTargetCard(auraMagnetList.get(i));    // Target only Rabid Wombat or Uril, the Miststalker
-                    	        return true;
+                    	        return super.canPlayAI();
                     	    }
                     	}
                     }
@@ -1450,7 +1453,7 @@ class CardFactory_Auras {
                                 && !list.get(i).getKeyword().contains("Defender") 
                                 && !list.get(i).isEnchanted()) {
                             setTargetCard(list.get(i));
-                            return true;
+                            return super.canPlayAI();
                         }
                     }
                   
@@ -1552,7 +1555,7 @@ class CardFactory_Auras {
         			Card c = CardFactoryUtil.AI_getBestCreature(cList);
         			
         			setTargetCard(c);
-        			boolean playable = 2 < c.getNetAttack() && 2 < c.getNetDefense();
+        			boolean playable = 2 < c.getNetAttack() && 2 < c.getNetDefense() && super.canPlayAI();
         			return playable;
         		}//canPlayAI
 				
@@ -1683,7 +1686,7 @@ class CardFactory_Auras {
                         for (int i = 0; i < auraMagnetList.size(); i++) {
                             if (CardFactoryUtil.canTarget(card, auraMagnetList.get(i))) {
                                 setTargetCard(auraMagnetList.get(i));    // Target only Rabid Wombat or Uril, the Miststalker
-                    	        return true;
+                    	        return super.canPlayAI();
                     	    }
                     	}
                     }
@@ -1701,7 +1704,7 @@ class CardFactory_Auras {
                         		&& !list.get(i).getKeyword().contains("Defender") 
                         		&& !list.get(i).isEnchanted()) {
                             setTargetCard(list.get(i));
-                            return true;
+                            return super.canPlayAI();
                         }
                     }
                     return false;
@@ -1782,6 +1785,8 @@ class CardFactory_Auras {
 
                 @Override
                 public boolean canPlayAI() {
+                	
+                	if(!super.canPlayAI()) return false;
                 	
                 	CardList list = new CardList(AllZone.Human_Play.getCards());    // Target human creature
                 	list = list.filter(new CardListFilter() {
@@ -1954,7 +1959,7 @@ class CardFactory_Auras {
         			//TODO - maybe do something intelligent here if it's not a curse, like
         			//checking the aura magnet list
         			setTargetCard(list.get(0));
-        			return true;
+        			return super.canPlayAI();
         		}//canPlayAI()
 
         		@Override
@@ -2210,6 +2215,9 @@ class CardFactory_Auras {
 
 					@Override
                     public boolean canPlayAI() {
+						
+						if(!super.canPlayAI()) return false;
+						
                         CardList tgts = CardFactoryUtil.AI_getHumanCreature(card, true);
                         CardListUtil.sortAttack(tgts);
                         CardListUtil.sortFlying(tgts);

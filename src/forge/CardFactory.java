@@ -630,7 +630,7 @@ public class CardFactory implements NewConstants {
     				}
     				if(CardFactoryUtil.spCounter_MatchSpellAbility(card, AllZone.Stack.peek(),splitTargetingRestrictions, targetType)) {
     					tgt[0] = AllZone.Stack.peek();
-    					return true;
+    					return  super.canPlayAI();
     				}
     				return false;
     			}
@@ -1248,7 +1248,7 @@ public class CardFactory implements NewConstants {
                 				if ((sl.get(i).getNetDefense() + defense) < 1)
                 					ndead++;
                 			if (!(ndead > (sl.size() / 2))) // don't kill more than half of the creatures
-                					return true;
+                					return super.canPlayAI();
                 		}
                 	}
                 	
@@ -1528,7 +1528,7 @@ public class CardFactory implements NewConstants {
             						if ((sl.get(i).getNetDefense() + defense) < 1)
             							ndead++;
             					if (!(ndead > (sl.size() / 2))) // don't kill more than half of the creatures
-            							return true;
+            							return super.canPlayAI();
             				}
             			}
             			
@@ -2116,26 +2116,26 @@ public class CardFactory implements NewConstants {
                         if(TgtCP[0] == true) {
                             if(shouldTgtP() == true) {
                                 setTargetPlayer(AllZone.HumanPlayer);
-                                return true;
+                                return super.canPlayAI();
                             }
                             
                             Card c = chooseTgtC();
                             if(c != null) {
                                 setTargetCard(c);
-                                return true;
+                                return super.canPlayAI();
                             }
                         }
                         
                         if(TgtPlayer[0] == true || TgtOpp[0] == true) {
                             setTargetPlayer(AllZone.HumanPlayer);
-                            return true;
+                            return super.canPlayAI();
                         }
                         
                         if(TgtCreature[0] == true) {
                             Card c = chooseTgtC();
                             if(c != null) {
                                 setTargetCard(c);
-                                return true;
+                                return super.canPlayAI();
                             }
                         }
                         
@@ -2291,6 +2291,8 @@ public class CardFactory implements NewConstants {
                    
                    public boolean canPlayAI()
                    {
+                	   	if(!super.canPlayAI()) return false;
+                	   
                 	   	int ndam = getNumDam();
                 	   	
                     	if (DmgPlayer[0] && AllZone.ComputerPlayer.getLife() <= ndam) 
@@ -3461,17 +3463,17 @@ public class CardFactory implements NewConstants {
                     hCards = hCards.getValidCards(Tgts,card.getController(),card);
                     hCards = hCards.getTargetableCards(card);
                     if (hCards.size() > 0)
-                    	return true;
+                    	return super.canPlayAI();
                     
                     CardList cCards = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards());
                     cCards = cCards.getValidCards(Tgts,card.getController(),card);
                     cCards = cCards.getTargetableCards(card);
                     if (cCards.size() == 0)
-                    	return true;
+                    	return super.canPlayAI();
                     else
                     {
                     	if (r.nextInt(100) > 67)
-                    		return true;
+                    		return super.canPlayAI();
                     }
                     
                 	return false;
@@ -3638,6 +3640,9 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public boolean canPlayAI() {
+                	
+                	if(!super.canPlayAI()) return false;
+                	
                     CardList human = new CardList(AllZone.Human_Play.getCards());
                     CardList computer = new CardList(AllZone.Computer_Play.getCards());
                     
@@ -5368,7 +5373,8 @@ public class CardFactory implements NewConstants {
                 @Override
                 public boolean canPlayAI() {
                     return getCreature().size() != 0 && ComputerUtil.canPayCost(this)
-                            && !CardFactoryUtil.AI_doesCreatureAttack(card);
+                            && !CardFactoryUtil.AI_doesCreatureAttack(card)
+                    		&& super.canPlayAI();
                 }//canPlayAI()
                 
                 @Override
@@ -6029,7 +6035,7 @@ public class CardFactory implements NewConstants {
 						return false;
 					}
 					else{
-						return true;
+						return super.canPlayAI();
 					}
 				}
 				
@@ -6197,7 +6203,7 @@ public class CardFactory implements NewConstants {
 
 				@Override
         		public boolean canPlayAI() {
-        			if (!ComputerUtil.canPayCost(this))
+        			if (!ComputerUtil.canPayCost(this) || !super.canPlayAI())
         				return false;
 
         			CardList hCards = getTargets();
@@ -6636,7 +6642,7 @@ public class CardFactory implements NewConstants {
                     human = human.getType("Creature");
                     computer = computer.getType("Creature");
                     
-                    return AllZone.ComputerPlayer.getLife() > 2 && !(human.size() == 0 && 0 < computer.size());
+                    return AllZone.ComputerPlayer.getLife() > 2 && !(human.size() == 0 && 0 < computer.size()) && super.canPlayAI();
                 }
                 
                 @Override

@@ -38,7 +38,7 @@ class CardFactory_Lands {
                             AllZone.ComputerPlayer))) return false;
                     inPlay.clear();
                     inPlay.addAll(AllZone.Computer_Play.getCards());
-                    return (inPlay.filter(targets).size() > 1);
+                    return (inPlay.filter(targets).size() > 1) && super.canPlayAI();
                 }
                 
                 @Override
@@ -630,7 +630,7 @@ class CardFactory_Lands {
             final SpellAbility a1 = new Ability(card, "1 G") {
                 @Override
                 public boolean canPlayAI() {
-                    return !card.getType().contains("Creature");
+                    return !card.getType().contains("Creature")  && super.canPlayAI();
                 }
                 
                 @Override
@@ -739,7 +739,7 @@ class CardFactory_Lands {
                 
                 @Override
                 public boolean canPlayAI() {
-                    return getAttacker() != null;
+                    return getAttacker() != null  && super.canPlayAI();
                 }
                 
                 @Override
@@ -910,7 +910,7 @@ class CardFactory_Lands {
                             return CardUtil.getColors(c).contains(Constant.Color.Colorless)  && c.isCreature();
                         }
                     });
-                    if(super.canPlay() && list.size() > 0 && AllZone.GameAction.isCardInPlay(card)) return true;
+                    if(super.canPlay() && list.size() > 0 && AllZone.GameAction.isCardInPlay(card)) return  super.canPlayAI();
                     else return false;                  
                 }//canPlay()
                 
@@ -972,119 +972,6 @@ class CardFactory_Lands {
              ability.setDescription("7, Tap: Search your library for a colorless creature card, reveal it, and put it into your hand. Then shuffle your library.");
         }//*************** END ************ END **************************
         
-        /*keyworded
-        //*************** START *********** START **************************
-        else if(cardName.equals("Terramorphic Expanse") || cardName.equals("Evolving Wilds")) {
-            //tap sacrifice
-            final Ability_Tap ability = new Ability_Tap(card, "0") {
-                private static final long serialVersionUID = 5441740362881917927L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                    
-                    //sacrifice Sakura-Tribe Elder if Human has any creatures
-                    CardList list = new CardList(AllZone.Human_Play.getCards());
-                    list = list.getType("Creature");
-                    return list.size() != 0 && card.isUntapped();
-                    
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    AllZone.GameAction.sacrifice(card);
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    CardList list = new CardList(library.getCards());
-                    list = list.getType("Basic");
-                    if(super.canPlay() && list.size() > 0 && AllZone.GameAction.isCardInPlay(card)) return true;
-                    else return false;
-                    
-                }//canPlay()
-                
-                @Override
-                public void resolve() {
-                    if(card.getOwner().equals(AllZone.HumanPlayer)) humanResolve();
-                    else computerResolve();
-                }
-                
-                public void computerResolve() {
-                    CardList play = new CardList(AllZone.Computer_Play.getCards());
-                    play = play.getType("Basic");
-                    
-                    CardList library = new CardList(AllZone.Computer_Library.getCards());
-                    library = library.getType("Basic");
-                    
-                    //this shouldn't happen, but it is defensive programming, haha
-                    if(library.isEmpty()) return;
-                    
-                    Card land = null;
-                    
-                    //try to find a basic land that isn't in play
-                    for(int i = 0; i < library.size(); i++)
-                        if(!play.containsName(library.get(i))) {
-                            land = library.get(i);
-                            break;
-                        }
-                    
-                    //if not found
-                    //library will have at least 1 basic land because canPlay() checks that
-                    if(land == null) land = library.get(0);
-                    
-                    land.tap();
-                    AllZone.Computer_Library.remove(land);
-                    AllZone.Computer_Play.add(land);
-                    
-                    AllZone.GameAction.shuffle(AllZone.ComputerPlayer);
-                }//computerResolve()
-                
-                public void humanResolve() {
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    
-                    CardList basicLand = new CardList(library.getCards());
-                    basicLand = basicLand.getType("Basic");
-                    
-                    Object o = AllZone.Display.getChoiceOptional("Choose a basic land", basicLand.toArray());
-                    if(o != null) {
-                        Card land = (Card) o;
-                        land.tap();
-                        
-                        library.remove(land);
-                        play.add(land);
-                    }
-                    AllZone.GameAction.shuffle(card.getController());
-                }//resolve()
-            };//SpellAbility
-            
-            Input runtime = new Input() {
-                private static final long serialVersionUID = -4379321114820908030L;
-                boolean                   once             = true;
-                
-                @Override
-                public void showMessage() {
-                    //this is necessary in order not to have a StackOverflowException
-                    //because this updates a card, it creates a circular loop of observers
-                    if(once) {
-                        once = false;
-                        AllZone.GameAction.sacrifice(card);
-                        
-                        ability.setStackDescription(card.getController()
-                                + " - Search your library for a basic land card and put it into play tapped. Then shuffle your library.");
-                        AllZone.Stack.add(ability);
-                        
-                        stop();
-                    }
-                }//showMessage()
-            };
-            card.addSpellAbility(ability);
-            ability.setDescription("tap, Sacrifice " + card.getName() + ": Search your library for a basic land card and put it into play tapped. Then shuffle your library.");
-            ability.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
-        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Wasteland") || cardName.equals("Tectonic Edge")) {
@@ -1177,7 +1064,7 @@ class CardFactory_Lands {
                 @Override
                 public boolean canPlayAI() {
                     String phase = AllZone.Phase.getPhase();
-                    return phase.equals(Constant.Phase.Main2);
+                    return phase.equals(Constant.Phase.Main2) && super.canPlayAI();
                 }
                 
                 @Override
@@ -1201,7 +1088,7 @@ class CardFactory_Lands {
                 
                 @Override
                 public boolean canPlayAI() {
-                    return canPlay();
+                    return canPlay() && super.canPlayAI();
                 }
                 
                 @Override
@@ -1226,70 +1113,6 @@ class CardFactory_Lands {
             
         }//*************** END ************ END **************************
         
-        /*converted to keyword
-        //*************** START *********** START **************************
-        else if(cardName.equals("Karakas")) {
-            final Ability_Tap ability = new Ability_Tap(card, "0") {
-                
-                private static final long serialVersionUID = -6589125907956046586L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Human_Play.getCards());
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isCreature() && c.getKeyword().contains("Legendary");
-                        }
-                    });
-                    
-                    if(list.size() > 0) setTargetCard(CardFactoryUtil.AI_getBestCreature(list, card));
-                    
-                    return list.size() > 0;
-                }
-                
-                @Override
-                public void resolve() {
-                    Card c = getTargetCard();
-                    
-                    if(c != null) {
-                        if(CardFactoryUtil.canTarget(card, c) && c.isCreature()
-                                && c.getType().contains("Legendary")) AllZone.GameAction.moveTo(AllZone.getZone(
-                                Constant.Zone.Hand, c.getOwner()), c);
-                    }
-                }
-            };
-            
-            Input runtime = new Input() {
-                
-                private static final long serialVersionUID = -7649200192384343204L;
-                
-                @Override
-                public void showMessage() {
-                    CardList choice = new CardList();
-                    choice.addAll(AllZone.Human_Play.getCards());
-                    choice.addAll(AllZone.Computer_Play.getCards());
-                    
-                    choice = choice.getType("Creature");
-                    choice = choice.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return (c.isCreature() && c.getType().contains("Legendary"));
-                        }
-                    });
-                    
-                    //System.out.println("size of choice: " + choice.size());
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choice,
-                            "Select target Legendary creature:", true, false));
-                }
-            };
-            
-            ability.setDescription("tap: Return target legendary creature to its owner's hand.");
-            //ability.setStackDescription(card.getName() + " - gives target creature +1/+2 until end of turn.");
-            
-            card.addSpellAbility(ability);
-            ability.setBeforePayMana(runtime);
-            
-        }//*************** END ************ END **************************
-        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Okina, Temple to the Grandfathers")) {
@@ -1298,7 +1121,7 @@ class CardFactory_Lands {
                 
                 @Override
                 public boolean canPlayAI() {
-                    return getAttacker() != null;
+                    return getAttacker() != null && super.canPlayAI();
                 }
                 
                 @Override
@@ -1798,7 +1621,7 @@ class CardFactory_Lands {
             final SpellAbility a1 = new Ability(card, "1 B") {
                 @Override
                 public boolean canPlayAI() {
-                    return !card.getType().contains("Creature");
+                    return !card.getType().contains("Creature") && super.canPlayAI();
                 }
                 
                 @Override
@@ -1870,7 +1693,7 @@ class CardFactory_Lands {
                 
                 @Override
                 public boolean canPlayAI() {
-                    return getLegendaryAttackers().size() > 0;
+                    return getLegendaryAttackers().size() > 0 && super.canPlayAI();
                 }
                 
                 @Override
@@ -1997,7 +1820,7 @@ class CardFactory_Lands {
                             AllZone.ComputerPlayer))) return false;
                     inPlay.clear();
                     inPlay.addAll(AllZone.Computer_Play.getCards());
-                    return (inPlay.filter(targets).size() > 1);
+                    return (inPlay.filter(targets).size() > 1) && super.canPlayAI();
                 }
                 
                 @Override
@@ -2035,7 +1858,7 @@ class CardFactory_Lands {
                 
                 @Override
                 public boolean canPlayAI() {
-                    return getAttacker() != null;
+                    return getAttacker() != null && super.canPlayAI();
                 }
                 
                 @Override
@@ -2162,7 +1985,7 @@ class CardFactory_Lands {
                 
                 @Override
                 public boolean canPlayAI() {
-                    return getAttacker() != null;
+                    return getAttacker() != null && super.canPlayAI();
                 }
                 
                 @Override
@@ -2282,7 +2105,7 @@ class CardFactory_Lands {
                 	Player player = getTargetPlayer();
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
                     CardList libList = new CardList(lib.getCards());
-                    return libList.size() > 0;
+                    return libList.size() > 0 && super.canPlayAI();
                 }
                 
                 @Override
@@ -2361,7 +2184,7 @@ class CardFactory_Lands {
                     PlayerZone hand_h = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
                     CardList hand_comp = new CardList(hand_c.getCards());
                     CardList hand_hum = new CardList(hand_h.getCards());
-                    return ((hand_comp.size() - hand_hum.size()) > 1 && hand_hum.size() > 0);
+                    return ((hand_comp.size() - hand_hum.size()) > 1 && hand_hum.size() > 0) && super.canPlayAI();
                 }
                 
                 @Override
@@ -2394,7 +2217,7 @@ class CardFactory_Lands {
                             return c.isCreature();
                         }
                     });
-                    return ((list.size() > 0) & !card.getType().contains("Creature"));
+                    return ((list.size() > 0) & !card.getType().contains("Creature")) && super.canPlayAI();
                 }
                 
                 @Override
@@ -2437,7 +2260,7 @@ class CardFactory_Lands {
             final SpellAbility a1 = new Ability(card, "1 R") {
                 @Override
                 public boolean canPlayAI() {
-                    return !card.getType().contains("Creature");
+                    return !card.getType().contains("Creature") && super.canPlayAI();
                 }
                 
                 @Override
@@ -2487,7 +2310,7 @@ class CardFactory_Lands {
             final SpellAbility a1 = new Ability(card, "6") {
                 @Override
                 public boolean canPlayAI() {
-                    return !card.getType().contains("Creature");
+                    return !card.getType().contains("Creature") && super.canPlayAI();
                 }
                 
                 @Override
@@ -2525,7 +2348,7 @@ class CardFactory_Lands {
             final SpellAbility a1 = new Ability(card, "3 W U") {
                 @Override
                 public boolean canPlayAI() {
-                    return !card.hasSickness();
+                    return !card.hasSickness() && super.canPlayAI();
                 }
                 
                 @Override
@@ -2570,7 +2393,7 @@ class CardFactory_Lands {
 			        opponentCreatureList = opponentCreatureList.getType("Creature");
       			  int n = ComputerUtil.getAvailableMana().size() - 1;
       			  if(n > 0) setManaCost(n + "");
-                    return (n > 0 && opponentCreatureList.size() == 0);
+                    return (n > 0 && opponentCreatureList.size() == 0) && super.canPlayAI();
                 }
                 
                 @Override
@@ -2618,7 +2441,7 @@ class CardFactory_Lands {
             final SpellAbility a1 = new Ability(card, "1 B R") {
                 @Override
                 public boolean canPlayAI() {
-                    return (!card.hasSickness() && !card.getType().contains("Creature"));
+                    return (!card.hasSickness() && !card.getType().contains("Creature")) && super.canPlayAI();
                 }
                 
                 @Override
@@ -2675,7 +2498,7 @@ class CardFactory_Lands {
             final SpellAbility a1 = new Ability(card, "1 G W") {
                 @Override
                 public boolean canPlayAI() {
-                    return !card.hasSickness();
+                    return !card.hasSickness() && super.canPlayAI();
                 }
                 
                 @Override
@@ -2717,7 +2540,7 @@ class CardFactory_Lands {
             final SpellAbility a1 = new Ability(card, "1 U B") {
                 @Override
                 public boolean canPlayAI() {
-                    return !card.hasSickness();
+                    return !card.hasSickness() && super.canPlayAI();
                 }
                 
                 @Override
@@ -2758,7 +2581,7 @@ class CardFactory_Lands {
             final SpellAbility a1 = new Ability(card, "2 R G") {
                 @Override
                 public boolean canPlayAI() {
-                    return !card.hasSickness();
+                    return !card.hasSickness() && super.canPlayAI();
                 }
                 
                 @Override
@@ -2803,7 +2626,7 @@ class CardFactory_Lands {
             final SpellAbility a1 = new Ability(card, "4") {
                 @Override
                 public boolean canPlayAI() {
-                    return !card.hasSickness();
+                    return !card.hasSickness() && super.canPlayAI();
                 }
                 
                 @Override
@@ -3133,7 +2956,7 @@ class CardFactory_Lands {
                     if(c == null) return false;
                     else {
                         setTargetCard(c);
-                        return true;
+                        return super.canPlayAI();
                     }
                 }//canPlayAI()
                 
