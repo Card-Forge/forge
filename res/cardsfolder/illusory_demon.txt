@@ -5,7 +5,7 @@ Text:no text
 PT:4/3
 T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When you cast a spell, sacrifice CARDNAME.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | SacValid$ Self
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/illusory_demon.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/21.jpg

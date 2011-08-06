@@ -2,7 +2,7 @@ Name:Ill-Gotten Gains
 ManaCost:2 B B
 Types:Sorcery
 Text:no text
-A:SP$ Discard | Cost$ 2 B B | Mode$ Hand | Defined$ Each | SubAbility$ SVar=DBExile | SpellDescription$ Exile CARDNAME.  Each player discards his or her hand, then returns up to three cards from his or her graveyard to his or her hand.
+A:SP$ Discard | Cost$ 2 B B | Mode$ Hand | Defined$ Each | SubAbility$ SVar=DBExile | SpellDescription$ Exile CARDNAME. Each player discards his or her hand, then returns up to three cards from his or her graveyard to his or her hand.
 SVar:DBExile:DB$ChangeZone | Origin$ Stack | Destination$ Exile | SubAbility$ SVar=DBChangeZoneChoose
 SVar:DBChangeZoneChoose:DB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeNum$ 3 | ChangeType$ Card | SubAbility$ SVar=DBChangeZonePC | Hidden$ True
 SVar:DBChangeZonePC:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeNum$ 3 | ChangeType$ Card | Defined$ Opponent | Hidden$ True
