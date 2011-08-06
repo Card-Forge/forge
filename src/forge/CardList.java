@@ -229,7 +229,7 @@ public class CardList implements Iterable<Card> {
             String incR[] = Restrictions[i].split("\\."); // Inclusive restrictions are Card types
             
             if(!incR[0].equals("Permanent")) // Since the cards don't actually say "Permanent"
-            tmpList = getType(incR[0]);
+            tmpList = getType(incR[0]); else tmpList = new CardList(toArray());
             
             if(incR.length > 1) {
                 final String excR = incR[1];

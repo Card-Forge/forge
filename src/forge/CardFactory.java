@@ -2194,22 +2194,22 @@ public class CardFactory implements NewConstants {
                     
                     if(choices.size() > 0) {
                         for(int i = 0; i < Tgts.length; i++) {
-                            if(Tgts[i].equals("Artifact")) {
+                            if(Tgts[i].startsWith("Artifact")) {
                                 if(CardFactoryUtil.AI_getBestArtifact(choices) != null) results.add(CardFactoryUtil.AI_getBestArtifact(choices));
-                            } else if(Tgts[i].equals("Creature")) {
+                            } else if(Tgts[i].startsWith("Creature")) {
                                 if(CardFactoryUtil.AI_getBestCreature(choices) != null) results.add(CardFactoryUtil.AI_getBestCreature(choices));
-                            } else if(Tgts[i].equals("Enchantment")) {
+                            } else if(Tgts[i].startsWith("Enchantment")) {
                                 if(CardFactoryUtil.AI_getBestEnchantment(choices, card, true) != null) results.add(CardFactoryUtil.AI_getBestEnchantment(
                                         choices, card, true));
-                            } else if(Tgts[i].equals("Land")) {
+                            } else if(Tgts[i].startsWith("Land")) {
                                 if(CardFactoryUtil.AI_getBestLand(choices) != null) results.add(CardFactoryUtil.AI_getBestLand(choices));
-                            } else if(Tgts[i].equals("Permanent")) {
+                            } else if(Tgts[i].startsWith("Permanent")) {
                                 if(CardFactoryUtil.AI_getMostExpensivePermanent(choices, card, true) != null) results.add(CardFactoryUtil.AI_getMostExpensivePermanent(
                                         choices, card, true));
                             }
                         }
                     }
-                    
+
                     if(results.size() > 0) {
                         results.shuffle();
                         setTargetCard(results.get(0));
@@ -6197,7 +6197,8 @@ public class CardFactory implements NewConstants {
             
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
-        
+
+/* Converted to keyword     
         //*************** START *********** START **************************
         else if(cardName.equals("Unmake")) {
             SpellAbility spell = new Spell(card) {
@@ -6236,7 +6237,7 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+*/        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Crib Swap")) {
@@ -17476,7 +17477,8 @@ public class CardFactory implements NewConstants {
             ability.setStackDescription(card + " - take an extra turn after this one.");
             ability.setDescription("Tap: Take an extra turn after this one.");
         }//*************** END ************ END **************************
-        
+
+/* Converted to keyword 
         //*************** START *********** START **************************
         if(cardName.equals("Celestial Purge")) {
             final Spell spell = new Spell(card) {
@@ -17560,7 +17562,7 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+*/        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Millstone")) {
