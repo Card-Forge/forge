@@ -46,6 +46,20 @@ public class Trigger_DamageDone extends Trigger {
 					}
 				}
 			}
+			else if(mapParams.get("CombatDamage").equals("False"))
+			{
+				if(src.isAttacking() || src.isBlocking())
+				{
+					return false;
+				}
+				if(tgt instanceof Card)
+				{
+					if(((Card)tgt).isAttacking() || ((Card)tgt).isBlocking())
+					{
+						return false;
+					}
+				}
+			}
 		}
 		
 		return true;
