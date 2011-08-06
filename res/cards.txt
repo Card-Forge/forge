@@ -1,3 +1,96 @@
+Obelisk of Esper
+3
+Artifact
+no text
+tap: add W
+tap: add U
+tap: add B
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_esper.jpg
+
+Obelisk of Grixis
+3
+Artifact
+no text
+tap: add U
+tap: add B
+tap: add R
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_grixis.jpg
+
+Obelisk of Jund
+3
+Artifact
+no text
+tap: add B
+tap: add R
+tap: add G
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_jund.jpg
+
+Obelisk of Naya
+3
+Artifact
+no text
+tap: add W
+tap: add R
+tap: add G
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_naya.jpg
+
+Plateau
+no cost
+Land Mountain Plains
+no text
+tap: add W
+tap: add R
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/plateau.jpg
+
+Prophetic Prism
+2
+Artifact
+no text
+When CARDNAME enters the battlefield, draw a card.
+1, tap: add W
+1, tap: add U
+1, tap: add B
+1, tap: add R
+1, tap: add G
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/prophetic_prism.jpg
+
+Sacred Foundry
+no cost
+Land Mountain Plains
+As Sacred Foundry comes into play, you may pay 2 life. If you don't, Sacred Foundry comes into play tapped instead.
+tap: add W
+tap: add R
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card89066.jpg
+
+Salt Marsh
+no cost
+Land
+no text
+Comes into play tapped.
+tap: add U
+tap: add B
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/salt_marsh.jpg
+
+Scabland
+no cost
+Land
+no text
+tap: add 1
+paintap:1:W
+paintap:1:R
+Comes into play tapped.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scabland.jpg
+
 Elfhame Palace
 no cost
 Land
@@ -21120,46 +21213,6 @@ SVar:BuffedBy:Land
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ob_nixilis_the_fallen.jpg
 
-Obelisk of Esper
-3
-Artifact
-no text
-tap: add B
-tap: add U
-tap: add W
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_esper.jpg
-
-Obelisk of Grixis
-3
-Artifact
-no text
-tap: add B
-tap: add R
-tap: add U
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_grixis.jpg
-
-Obelisk of Jund
-3
-Artifact
-no text
-tap: add B
-tap: add G
-tap: add R
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_jund.jpg
-
-Obelisk of Naya
-3
-Artifact
-no text
-tap: add G
-tap: add R
-tap: add W
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_naya.jpg
-
 Obliterate
 6 R R
 Sorcery
@@ -22598,15 +22651,6 @@ Unblockable
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73562.jpg
 
-Plateau
-no cost
-Land Mountain Plains
-no text
-tap: add R
-tap: add W
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/plateau.jpg
-
 Plated Geopede
 1 R
 Creature Insect
@@ -23043,19 +23087,6 @@ no text
 Whenever a creature you control is put into a graveyard from the battlefield, you gain life equal to that creature's toughness.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/proper_burial.jpg
-
-Prophetic Prism
-2
-Artifact
-no text
-When CARDNAME enters the battlefield, draw a card.
-1, tap: add W
-1, tap: add B
-1, tap: add U
-1, tap: add R
-1, tap: add G
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/prophetic_prism.jpg
 
 Prosperity
 X U
@@ -25235,15 +25266,6 @@ First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sabretooth_tiger.jpg
 
-Sacred Foundry
-no cost
-Land Mountain Plains
-As Sacred Foundry comes into play, you may pay 2 life. If you don't, Sacred Foundry comes into play tapped instead.
-tap: add R
-tap: add W
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card89066.jpg
-
 Sacred Nectar
 1 W
 Sorcery
@@ -25340,16 +25362,6 @@ Comes into play tapped.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/salt_flats.jpg
-
-Salt Marsh
-no cost
-Land
-no text
-Comes into play tapped.
-tap: add B
-tap: add U
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/salt_marsh.jpg
 
 Saltblast
 3 W W
@@ -25562,18 +25574,6 @@ no text
 2/1
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83246.jpg
-
-Scabland
-no cost
-Land
-no text
-tap: add 1
-paintap:1:R
-paintap:1:W
-Comes into play tapped.
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scabland.jpg
 
 Scalding Tarn
 no cost
