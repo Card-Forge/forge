@@ -9,7 +9,7 @@ Ajani's Pridemate
 Creature Cat Soldier
 no text
 2/2
-WheneverKeyword:GainLife:No_Initiator:Play:+1+1 Counters/1:Self:ASAP:No_Condition:No Special Condition:Whenever you gain life, you may put a +1/+1 counter on Ajani's Pridemate.
+WheneverKeyword:GainLife:No_Initiator:Play:+1+1 Counters/1:Self:ASAP:Yes_No:No Special Condition:Whenever you gain life, you may put a +1/+1 counter on Ajani's Pridemate.
 
 Ageless Entity
 3 G G
