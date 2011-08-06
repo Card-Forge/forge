@@ -856,7 +856,7 @@ class CardFactory_Lands {
 	           	 }// if counters == 0
 	              }
 	            };
-	            ability.setDescription("3: Remove an ice counter from Dark Depths.");
+	            ability.setDescription("Dark Depths enters the battlefield with ten ice counters on it.\r\n\r\n3: Remove an ice counter from Dark Depths.\r\n\r\nWhen Dark Depths has no ice counters on it, sacrifice it. If you do, put an indestructible legendary 20/20 black Avatar creature token with flying named Marit Lage onto the battlefield.");
 	            ability.setStackDescription(card.getName() +" - remove an ice counter.");
 	            
 	            card.addSpellAbility(ability);
@@ -1470,7 +1470,7 @@ class CardFactory_Lands {
 	   	  //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
 	   	  //anyway, this does the trick:
 	   	  //card.removeIntrinsicKeyword("tap: add 1");
-	   	  card.setText(card.getSpellText() +  "\r\n2, tap: Each player draws a card.");
+	   	  //card.setText(card.getSpellText() +  "\r\n2, tap: Each player draws a card.");
 	   	  //card.addExtrinsicKeyword("tap: add 1");
 	   	  
 	     }//*************** END ************ END **************************

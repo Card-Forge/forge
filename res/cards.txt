@@ -1956,7 +1956,7 @@ tap: add 1
 Mossfire Valley
 no cost
 Land
-1,tap: add RG
+no text
 1,tap: add RG
 
 Mystic Gate
@@ -1991,7 +1991,7 @@ tap: add 1
 Shadowblood Ridge
 no cost
 Land
-1,tap: add BR
+no text
 1,tap: add BR
 
 Shimmering Grotto
@@ -2008,7 +2008,7 @@ tap: add 1
 Skycloud Expanse
 no cost
 Land
-1,tap: add WU
+no text
 1,tap: add WU
 
 Sungrass Prairie
@@ -5152,7 +5152,7 @@ Protection from artifacts
 Tower of the Magistrate
 no cost
 Land
-1, tap: Target creature gains Protection from artifacts until end of turn.
+no text
 tap: add 1
 TgtKPump 1 T:Protection from artifacts
 
@@ -7618,7 +7618,7 @@ no text
 Dark Depths
 no cost
 Legendary Snow Land
-Dark Depths comes into play with ten ice counters on it. 3: Remove an ice counter from Dark Depths. When Dark Depths has no ice counters on it, sacrifice it. If you do, put an indestructible legendary 20/20 black Avatar creature token with flying named Marit Lage into play.
+no text
 
 Font of Mythos
 4
@@ -7741,7 +7741,7 @@ RegenerateMe:1 B
 Sunhome, Fortress of the Legion
 no cost
 Land
-2 R W, tap:Target creature gains Double Strike until end of turn.
+no text
 tap: add 1
 TgtKPump 2 R W T:Double Strike
 
@@ -12080,7 +12080,7 @@ tap: add 1
 Library of Alexandria
 no cost
 Land
-tap: Draw a card. Play this ability only if you have exactly 7 cards in your hand.
+no text
 tap: add 1
 
 Tendrils of Corruption
@@ -14059,12 +14059,12 @@ Flying
 Terramorphic Expanse
 no cost
 Land
-Tap, Sacrifice Terramorphic Expanse: Search your library for a basic land card and put it into play tapped. Then shuffle your library.
+no text
 
 Blinkmoth Nexus
 no cost
 Land
-1: Blinkmoth Nexus becomes a 1/1 Blinkmoth artifact creature with flying until end of turn. It's still a land.
+no text
 tap: add 1
 
 Forest
