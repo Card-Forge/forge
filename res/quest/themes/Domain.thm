@@ -1,6 +1,6 @@
 BasicLandPercentage=0
 
-[Group MaxCnt=4 Percentage=40]
+[Group MaxCnt=2 Percentage=20]
 Underground Sea
 Plateau
 Taiga
@@ -13,12 +13,26 @@ Badlands
 Volcanic Island
 [/Group]
 
+[Group MaxCnt=2 Percentage=20]
+Arid Mesa
+Bloodstained Mire
+Flooded Strand
+Marsh Flats
+Misty Rainforest
+Polluted Delta
+Scalding Tarn
+Verdant Catacombs
+Windswept Heath
+Wooded Foothills
+[/Group]
+
 [Group MaxCnt=4 Percentage=30]
 Aven Trailblazer
 Drag Down
 Tribal Flames
 Allied Strategies
 Matca Rioters
+Tek
 [/Group]
 
 [Group MaxCnt=4 Percentage=20]

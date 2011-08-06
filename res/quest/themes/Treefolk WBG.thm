@@ -1,0 +1,56 @@
+BasicLandPercentage=0
+
+[Group MaxCnt=4 Percentage=37]
+Forest
+Snow-Covered Forest
+Bayou
+Savannah
+Windswept Heath
+Verdant Catacombs
+[/Group]
+
+[Group MaxCnt=4 Percentage=24]
+Bosk Banneret
+Doran, the Siege Tower
+Leaf-Crowned Elder
+Orchard Warden
+Timber Protector
+[/Group]
+
+[Group MaxCnt=3 Percentage=20]
+Battlewand Oak
+Cradle Guard
+Dauntless Dourbark
+Ebony Treefolk
+Lignify
+Reach of Branches
+Sapling of Colfenor
+Treefolk Harbinger
+[/Group]
+
+[Group MaxCnt=4 Percentage=19]
+Ambassador Oak
+Blanchwood Treefolk
+Bog-Strider Ash
+Cloudcrown Oak
+Crabapple Cohort
+Foxfire Oak
+Gaea's Avenger
+Guardian of Cloverdell
+Heartwood Treefolk
+Indomitable Ancients
+Ironroot Treefolk
+Nemata, Grove Guardian
+Oakgnarl Warrior
+Old Ghastbark
+Redwood Treefolk
+Rowan Treefolk
+Scarwood Treefolk
+Weatherseed Treefolk
+Woodfall Primus
+Wormwood Treefolk
+Yavimaya Ancients
+Yavimaya Scion
+[/Group]
+
+End
