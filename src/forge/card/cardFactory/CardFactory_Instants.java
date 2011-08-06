@@ -961,14 +961,13 @@ public class CardFactory_Instants {
                 
                 @Override
                 public boolean canPlay() {
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    return library.getCards().length >= 3;
+                    CardList library = AllZoneUtil.getPlayerCardsInLibrary(card.getController());
+                    return library.size() >= 3;
                 }
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList creature = new CardList();
-                    creature.addAll(AllZone.Computer_Library.getCards());
+                    CardList creature = AllZoneUtil.getPlayerCardsInLibrary(AllZone.ComputerPlayer);
                     creature = creature.getType("Creature");
                     return creature.size() >= 3;
                 }
@@ -1172,8 +1171,7 @@ public class CardFactory_Instants {
 					Player player = card.getController();
 					final int max = card.getXManaCostPaid();
 
-					PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, tPlayer);
-					CardList graveList = new CardList(grave.getCards());
+					CardList graveList = AllZoneUtil.getPlayerGraveyard(tPlayer);
 					int X = Math.min(max, graveList.size());
 					
 					if( player.isHuman()) {
@@ -1205,10 +1203,7 @@ public class CardFactory_Instants {
 				
 				@Override
         		public boolean canPlayAI() {
-        			PlayerZone grave = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
-        			CardList graveList = new CardList(grave.getCards());
-        			
-        			//int computerLife = AllZone.ComputerPlayer.getLife();
+        			CardList graveList = AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer);
 
         			final int maxX = ComputerUtil.getAvailableMana().size() - 1;
         			return (maxX >= 3) && (graveList.size() > 0);
@@ -1230,10 +1225,8 @@ public class CardFactory_Instants {
 
                 @Override
                 public void resolve() {
-                	Player player = AllZone.Phase.getPlayerTurn();
-                    PlayerZone PlayerHand = AllZone.getZone(Constant.Zone.Hand, player);
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    CardList libList = new CardList(lib.getCards());
+                	Player player = card.getController();
+                    CardList libList = AllZoneUtil.getPlayerCardsInLibrary(player);
                     final String[] input = new String[1];
                     input[0] = JOptionPane.showInputDialog(null, "Which card?", "Pick card", JOptionPane.QUESTION_MESSAGE);
                     
@@ -1248,7 +1241,7 @@ public class CardFactory_Instants {
                         Card c = libList.get(i);
                         if(c.getName().equals(input[0])) {
                             if(stop == 0) {
-                                AllZone.GameAction.moveTo(PlayerHand, c);
+                                AllZone.GameAction.moveToHand(c);
                                 stop = 1;
                             }
                             
@@ -1260,9 +1253,8 @@ public class CardFactory_Instants {
 
                 @Override
                 public boolean canPlay() {
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-
-                    return library.getCards().length > 6 && super.canPlay();
+                	CardList libList = AllZoneUtil.getPlayerCardsInLibrary(card.getController());
+                    return libList.size() > 6 && super.canPlay();
                 }
 
                 @Override
@@ -1334,16 +1326,14 @@ public class CardFactory_Instants {
                 @Override
                 public boolean canPlayAI() {
                     if(AllZone.HumanPlayer.getLife() <= 5) return true;
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer);
                     
-                    CardList playList = new CardList(play.getCards());
-                    CardList libList = new CardList(lib.getCards());
+                    CardList playList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+                    CardList libList = AllZoneUtil.getPlayerCardsInLibrary(AllZone.ComputerPlayer);
                     
                     playList = playList.getName("Academy Rector");
                     libList = libList.getName("Barren Glory");
                     
-                    return (AllZone.HumanPlayer.getLife() <= 5) || (playList.size() == 1 && libList.size() >= 1);
+                    return playList.size() == 1 && libList.size() >= 1;
                 }
                 
                 @Override
