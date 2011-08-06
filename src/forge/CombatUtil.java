@@ -418,7 +418,7 @@ public class CombatUtil {
             if(allislands.size() < 5) return false;
         }
         
-        if(c.isTapped() || c.isSick()
+        if(c.isTapped() || (c.isSick() && !c.isEnchantedBy("Instill Energy"))
                 || AllZoneUtil.isCardInPlay("Blazing Archon", c.getController().getOpponent()) 
                 || c.getKeyword().contains("CARDNAME can't attack.")
                 || c.getKeyword().contains("CARDNAME can't attack or block.")
