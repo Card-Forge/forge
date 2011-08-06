@@ -152,10 +152,6 @@ public class GameActionUtil {
 	public static void executeTapSideEffects(Card c) {
 		
 		AllZone.GameAction.checkWheneverKeyword(c,"BecomesTapped",null);
-
-		/* cards with Tap side effects can be listed here, just like in
-		 * the CardFactory classes
-		 */
 		
 		//Blight can't be converted to triggers until AF_Destroy properly handles "Defined"
 		//which in turn requires lastKnownInfo to get Enchanted right, otherwise Parallax Dementia doesn't work
@@ -183,33 +179,6 @@ public class GameActionUtil {
 				}
 			}
 		}//end Blight
-		
-		/*
-		 * Royal Decree - Whenever a Swamp, Mountain, black permanent, or red
-		 * permanent becomes tapped, Royal Decree deals 1 damage to that
-		 * permanent's controller.
-		 */
-		if(c.getType().contains("Mountain") || c.getType().contains("Swamp") ||
-				(c.isPermanent() && (c.isRed() || c.isBlack()))) {
-			final CardList decrees = AllZoneUtil.getCardsInPlay("Royal Decree");
-			for(Card decree:decrees) {
-				final Card crd = decree;
-				final Card source = c;
-				Ability ability = new Ability(decree, "0") {
-					@Override
-					public void resolve() {
-						source.getController().addDamage(1, crd);
-					}
-				};//Ability
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(decree.getName()).append(" - does 1 damage to ").append(c.getController());
-				sb.append(".  (").append(c.getName()).append(" was tapped.)");
-				ability.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability);
-			}//for
-		}//end Royal Decree
 
 	}//end executeTapSideEffects()
 
