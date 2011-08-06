@@ -1,7 +1,7 @@
 Name:Yore-Tiller Nephilim
 ManaCost:W U B R
 Types:Creature Nephilim
-Text:Whenever Yore-Tiller Nephilim attacks, return target creature card from your graveyard to play tapped and attacking.
+Text:Whenever Yore-Tiller Nephilim attacks, return target creature card from your graveyard to the battlefield tapped and attacking.
 PT:2/2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yore_tiller_nephilim.jpg

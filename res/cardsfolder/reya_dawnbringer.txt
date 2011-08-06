@@ -1,7 +1,7 @@
 Name:Reya Dawnbringer
 ManaCost:6 W W W
 Types:Legendary Creature Angel
-Text:At the beginning of your upkeep, you may return target creature card from your graveyard to play.
+Text:At the beginning of your upkeep, you may return target creature card from your graveyard to the battlefield.
 PT:4/6
 K:Flying
 SVar:Rarity:Rare

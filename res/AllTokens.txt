@@ -41,7 +41,7 @@ Bat
 B
 Creature Bat
 1/2
-"1B, Sacrifice the creature: Return to play under its owner's control, a card named Sengir Nosferatu that's removed from the game."
+"1B, Sacrifice this creature: Return an exiled card named Sengir Nosferatu to the battlefield under its owner's control."
 
 Bear
 G
@@ -569,7 +569,7 @@ Sand Warrior
 R G W
 Creature Sand Warrior
 1/1
-"When a permanent name Hazezon Tamar isn't in play, remove this creature from the game."
+"When a permanent name Hazezon Tamar isn't on the battlefield, exile this creature."
 
 Saproling
 G
