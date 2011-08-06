@@ -174,26 +174,25 @@ public class GenerateThemeDeck
 					
 			// count each instance of a color in mana costs
 			// TODO: count hybrid mana differently?
-			// TODO: count all color letters? ie: 2 W W counts as 2
 			for (int i=0;i<tDeck.size(); i++)
 			{
-				Card c = tDeck.get(i);
-				String mc = c.getManaCost();
+				String mc = tDeck.get(i).getManaCost();
 				
-				if (mc.contains("W"))
-					ClrCnts[0].Count++;
-				
-				if (mc.contains("U"))
-					ClrCnts[1].Count++;
-				
-				if (mc.contains("B"))
-					ClrCnts[2].Count++;
-				
-				if (mc.contains("R"))
-					ClrCnts[3].Count++;
-	
-				if (mc.contains("G"))
-					ClrCnts[4].Count++;
+				for (int j=0; j<mc.length(); j++)
+				{
+					char c = mc.charAt(j);
+					
+					if (c == 'W')
+						ClrCnts[0].Count++;
+					else if (c == 'U')
+						ClrCnts[1].Count++;
+					else if (c == 'B')
+						ClrCnts[2].Count++;
+					else if (c == 'R')
+						ClrCnts[3].Count++;
+					else if (c == 'G')
+						ClrCnts[4].Count++;
+				}
 			}
 	
 			int totalColor = 0;

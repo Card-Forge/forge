@@ -14,10 +14,15 @@ public class Generate2ColorDeck
 	private Random r = null;
 	private Map<String,String> ClrMap = null;
 	private ArrayList<String> notColors = null;
+	private ArrayList<DLnd> DualLands = null;
+	private ArrayList<String> DL = null;
+	private Map<String, Integer> CardCounts = null;
 	
 	public Generate2ColorDeck(String Clr1, String Clr2)
 	{				
 		r = new Random();
+		
+		CardCounts = new HashMap<String, Integer>();
 		
 		ClrMap = new HashMap<String,String>();
 		ClrMap.put("White", "W");
@@ -33,6 +38,28 @@ public class Generate2ColorDeck
 		notColors.add("Red");
 		notColors.add("Green");
 		
+		DualLands = new ArrayList<DLnd>();
+		DualLands.add(new DLnd("Tundra", "WU"));
+		DualLands.add(new DLnd("Hallowed Fountain", "WU"));
+		DualLands.add(new DLnd("Underground Sea", "UB"));
+		DualLands.add(new DLnd("Watery Grave", "UB"));
+		DualLands.add(new DLnd("Badlands", "BR"));
+		DualLands.add(new DLnd("Blood Crypt", "BR"));
+		DualLands.add(new DLnd("Taiga", "RG"));
+		DualLands.add(new DLnd("Stomping Ground", "RG"));
+		DualLands.add(new DLnd("Savannah", "GW"));
+		DualLands.add(new DLnd("Temple Garden", "GW"));
+		DualLands.add(new DLnd("Scrubland", "WB"));
+		DualLands.add(new DLnd("Godless Shrine", "WB"));
+		DualLands.add(new DLnd("Volcanic Island", "UR"));
+		DualLands.add(new DLnd("Steam Vents", "UR"));
+		DualLands.add(new DLnd("Bayou", "BG"));
+		DualLands.add(new DLnd("Overgrown Tomb", "BG"));
+		DualLands.add(new DLnd("Plateau", "RW"));
+		DualLands.add(new DLnd("Sacred Foundry", "RW"));
+		DualLands.add(new DLnd("Tropical Island", "GU"));
+		DualLands.add(new DLnd("Breeding Pool", "GU"));
+				
 		if (Clr1.equals("AI"))
 		{
 			// choose first color
@@ -52,14 +79,25 @@ public class Generate2ColorDeck
 		
 		notColors.remove(color1);
 		notColors.remove(color2);
+		
+		DL = new ArrayList<String>();
+		for (int i=0; i<DualLands.size(); i++)
+		{
+			DLnd d = DualLands.get(i);
+			if (d.Mana.contains(ClrMap.get(color1)) && d.Mana.contains(ClrMap.get(color2)))
+			{
+				DL.add(d.Name);
+				CardCounts.put(d.Name, 0);
+			}
+		}
+
 	}
 
 	public CardList get2ColorDeck(int Size)
 	{
+		int lc = 0; // loop counter to prevent infinite card selection loops
 		String tmpDeck = "";
 		CardList tDeck = new CardList();
-		
-		Map<String, Integer> CardCounts = new HashMap<String, Integer>();
 		
 		int LandsPercentage = 42;
 		int CreatPercentage = 34;
@@ -167,8 +205,15 @@ public class Generate2ColorDeck
 		for (int i=0; i<CreatCnt; i++)
 		{
 			Card c = Cr12.get(r.nextInt(Cr12.size()));
-			while (CardCounts.get(c.getName()) > 3)
+			
+			lc = 0;
+			while (CardCounts.get(c.getName()) > 3 || lc > 100)
+			{
 				c = Cr12.get(r.nextInt(Cr12.size()));
+				lc++;
+			}
+			if (lc > 100)
+				throw new RuntimeException("Generate2ColorDeck : get2ColorDeck -- looped too much -- Cr12");
 			
 			tDeck.add(AllZone.CardFactory.getCard(c.getName(), Constant.Player.Computer));
 			int n = CardCounts.get(c.getName());
@@ -179,8 +224,15 @@ public class Generate2ColorDeck
 		for (int i=0; i<SpellCnt; i++)
 		{
 			Card c = Sp12.get(r.nextInt(Sp12.size()));
-			while (CardCounts.get(c.getName()) > 3)
+			
+			lc = 0;
+			while (CardCounts.get(c.getName()) > 3 || lc > 100)
+			{
 				c = Sp12.get(r.nextInt(Sp12.size()));
+				lc++;
+			}
+			if (lc > 100)
+				throw new RuntimeException("Generate2ColorDeck : get2ColorDeck -- looped too much -- Sp12");
 			
 			tDeck.add(AllZone.CardFactory.getCard(c.getName(), Constant.Player.Computer));
 			int n = CardCounts.get(c.getName());
@@ -188,20 +240,41 @@ public class Generate2ColorDeck
 			tmpDeck += c.getName() + " " + c.getManaCost() + "\n";
 		}
 		
-		// Add basic lands
-		// TODO: dual lands?
-		int numBLands = 0;
+		// Add lands
+		int numLands = 0;
 		if (LandsPercentage > 0)
 		{
 			p = (float)((float)LandsPercentage * .01);
-			numBLands = (int)(p * (float)Size);
+			numLands = (int)(p * (float)Size);
 		}
 		else 	// otherwise, just fill in the rest of the deck with basic lands
-			numBLands = Size - tDeck.size();
+			numLands = Size - tDeck.size();
 		
-		tmpDeck += "numBLands:" + numBLands + "\n";
+		tmpDeck += "numLands:" + numLands + "\n";
 		
-		if (numBLands > 0)	// attempt to optimize basic land counts according to color representation
+		int nDLands = (numLands / 6);
+		for (int i=0; i<nDLands; i++)
+		{
+			String s = DL.get(r.nextInt(DL.size()));
+			
+			lc = 0;
+			while (CardCounts.get(s) > 3 || lc > 20)
+			{
+				s = DL.get(r.nextInt(DL.size()));
+				lc++;
+			}
+			if (lc > 20)
+				throw new RuntimeException("Generate2ColorDeck : get2ColorDeck -- looped too much -- DL");
+			
+			tDeck.add(AllZone.CardFactory.getCard(s, Constant.Player.Human));
+			int n = CardCounts.get(s);
+			CardCounts.put(s, n + 1);
+			tmpDeck += s + "\n";
+		}
+		
+		numLands -= nDLands;
+		
+		if (numLands > 0)	// attempt to optimize basic land counts according to color representation
 		{
 			CCnt ClrCnts[] = {new CCnt("Plains", 0),
 							  new CCnt("Island", 0),
@@ -211,26 +284,26 @@ public class Generate2ColorDeck
 					
 			// count each card color using mana costs
 			// TODO: count hybrid mana differently?
-			// TODO: count all color letters? ie: 2 W W counts as 2
 			for (int i=0;i<tDeck.size(); i++)
 			{
-				Card c = tDeck.get(i);
-				String mc = c.getManaCost();
+				String mc = tDeck.get(i).getManaCost();
 				
-				if (mc.contains("W"))
-					ClrCnts[0].Count++;
-				
-				if (mc.contains("U"))
-					ClrCnts[1].Count++;
-				
-				if (mc.contains("B"))
-					ClrCnts[2].Count++;
-				
-				if (mc.contains("R"))
-					ClrCnts[3].Count++;
-	
-				if (mc.contains("G"))
-					ClrCnts[4].Count++;
+				// count each mana symbol in the mana cost
+				for (int j=0; j<mc.length(); j++)
+				{
+					char c = mc.charAt(j);
+					
+					if (c == 'W')
+						ClrCnts[0].Count++;
+					else if (c == 'U')
+						ClrCnts[1].Count++;
+					else if (c == 'B')
+						ClrCnts[2].Count++;
+					else if (c == 'R')
+						ClrCnts[3].Count++;
+					else if (c == 'G')
+						ClrCnts[4].Count++;
+				}
 			}
 	
 			// total of all ClrCnts
@@ -248,12 +321,12 @@ public class Generate2ColorDeck
 				if (ClrCnts[i].Count > 0)
 				{	// calculate number of lands for each color
 					p = (float)ClrCnts[i].Count / (float)totalColor;
-					int nLand = (int)((float)numBLands * p);
-					tmpDeck += "numLand-" + ClrCnts[i].Color + ":" + nLand + "\n";
+					int nLand = (int)((float)numLands * p);
+					tmpDeck += "nLand-" + ClrCnts[i].Color + ":" + nLand + "\n";
 					
 					// just to prevent a null exception by the deck size fixing code
 					CardCounts.put(ClrCnts[i].Color, nLand);
-				
+			
 					for (int j=0; j<=nLand; j++)
 						tDeck.add(AllZone.CardFactory.getCard(ClrCnts[i].Color, Constant.Player.Computer));
 				}
@@ -270,8 +343,14 @@ public class Generate2ColorDeck
 			{
 				Card c = tDeck.get(r.nextInt(tDeck.size()));
 				
-				while (CardCounts.get(c.getName()) >= 4)
+				lc = 0;
+				while (CardCounts.get(c.getName()) > 3 || lc > Size)
+				{
 					c = tDeck.get(r.nextInt(tDeck.size()));
+					lc++;
+				}
+				if (lc > Size)
+					throw new RuntimeException("Generate2ColorDeck : get2ColorDeck -- looped too much -- undersize");
 				
 				int n = CardCounts.get(c.getName());
 				tDeck.add(AllZone.CardFactory.getCard(c.getName(), Constant.Player.Computer));
@@ -296,7 +375,7 @@ public class Generate2ColorDeck
 		}
 
 		tmpDeck += "DeckSize:" + tDeck.size() + "\n";
-		//ErrorViewer.showError(tmpDeck);
+		ErrorViewer.showError(tmpDeck);
 		
 		return tDeck;
 	}
@@ -310,6 +389,18 @@ public class Generate2ColorDeck
 		{
 			Color = clr;
 			Count = cnt;
+		}
+	}
+	
+	class DLnd
+	{
+		public String Name;
+		public String Mana;
+		
+		public DLnd(String nm, String mn)
+		{
+			Name = nm;
+			Mana = mn;
 		}
 	}
 }
