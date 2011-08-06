@@ -161,17 +161,26 @@ public class ComputerUtil
     Card originalCard = sa.getSourceCard();
     ManaCost cost = new ManaCost(sa.getManaCost());
     if(originalCard.getName().equals("Avatar of Woe")){
-      String player = AllZone.Phase.getActivePlayer();
-      String opponent = AllZone.GameAction.getOpponent(player);
+		String player = AllZone.Phase.getActivePlayer();
+		String opponent = AllZone.GameAction.getOpponent(player);
         PlayerZone PlayerGraveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
         CardList PlayerCreatureList = new CardList(PlayerGraveyard.getCards());
         PlayerCreatureList = PlayerCreatureList.getType("Creature");
-      PlayerZone OpponentGraveyard = AllZone.getZone(Constant.Zone.Graveyard, opponent);
+		PlayerZone OpponentGraveyard = AllZone.getZone(Constant.Zone.Graveyard, opponent);
         CardList OpponentCreatureList = new CardList(OpponentGraveyard.getCards());
         OpponentCreatureList = OpponentCreatureList.getType("Creature");
         if((PlayerCreatureList.size() + OpponentCreatureList.size()) >= 10) {
-           ManaCost cost2 = new ManaCost("B B");
-           cost = cost2;
+        	ManaCost cost2 = new ManaCost("B B"); 
+        	cost = cost2;
+        }
+    } else if(originalCard.getName().equals("Avatar of Will")){
+		String player = AllZone.Phase.getActivePlayer();
+		String opponent = AllZone.GameAction.getOpponent(player);
+        PlayerZone OpponentHand = AllZone.getZone(Constant.Zone.Hand, opponent); 
+        CardList OpponentHandList = new CardList(OpponentHand.getCards());	        
+        if(OpponentHandList.size() == 0) {
+        	ManaCost cost2 = new ManaCost("U U"); 
+        	cost = cost2;
         }
     }   
     ArrayList<String> colors;
@@ -248,19 +257,28 @@ public class ComputerUtil
     Card originalCard = sa.getSourceCard();
     ManaCost cost = new ManaCost(sa.getManaCost());
     if(originalCard.getName().equals("Avatar of Woe")){
-      String player = AllZone.Phase.getActivePlayer();
-      String opponent = AllZone.GameAction.getOpponent(player);
+		String player = AllZone.Phase.getActivePlayer();
+		String opponent = AllZone.GameAction.getOpponent(player);
         PlayerZone PlayerGraveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
         CardList PlayerCreatureList = new CardList(PlayerGraveyard.getCards());
         PlayerCreatureList = PlayerCreatureList.getType("Creature");
-      PlayerZone OpponentGraveyard = AllZone.getZone(Constant.Zone.Graveyard, opponent);
+		PlayerZone OpponentGraveyard = AllZone.getZone(Constant.Zone.Graveyard, opponent);
         CardList OpponentCreatureList = new CardList(OpponentGraveyard.getCards());
         OpponentCreatureList = OpponentCreatureList.getType("Creature");
         if((PlayerCreatureList.size() + OpponentCreatureList.size()) >= 10) {
-           ManaCost cost2 = new ManaCost("B B");
-           cost = cost2;
+        	ManaCost cost2 = new ManaCost("B B"); 
+        	cost = cost2;
         }
-    }
+    } else if(originalCard.getName().equals("Avatar of Will")){
+		String player = AllZone.Phase.getActivePlayer();
+		String opponent = AllZone.GameAction.getOpponent(player);
+        PlayerZone OpponentHand = AllZone.getZone(Constant.Zone.Hand, opponent); 
+        CardList OpponentHandList = new CardList(OpponentHand.getCards());	        
+        if(OpponentHandList.size() == 0) {
+        	ManaCost cost2 = new ManaCost("U U"); 
+        	cost = cost2;
+        }
+    } 
     ArrayList<String> colors;
 
     for(int i = 0; i < land.size(); i++)

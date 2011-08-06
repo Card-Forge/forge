@@ -24,19 +24,29 @@ public class Input_PayManaCost extends Input {
         spell = sa;
 
         if(originalCard.getName().equals("Avatar of Woe")){
-         String player = AllZone.Phase.getActivePlayer();
-         String opponent = AllZone.GameAction.getOpponent(player);
-           PlayerZone PlayerGraveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-           CardList PlayerCreatureList = new CardList(PlayerGraveyard.getCards());
-           PlayerCreatureList = PlayerCreatureList.getType("Creature");
-         PlayerZone OpponentGraveyard = AllZone.getZone(Constant.Zone.Graveyard, opponent);
-           CardList OpponentCreatureList = new CardList(OpponentGraveyard.getCards());
-           OpponentCreatureList = OpponentCreatureList.getType("Creature");
-           if((PlayerCreatureList.size() + OpponentCreatureList.size()) >= 10) {
+			String player = AllZone.Phase.getActivePlayer();
+			String opponent = AllZone.GameAction.getOpponent(player);
+	        PlayerZone PlayerGraveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
+	        CardList PlayerCreatureList = new CardList(PlayerGraveyard.getCards());
+	        PlayerCreatureList = PlayerCreatureList.getType("Creature");
+			PlayerZone OpponentGraveyard = AllZone.getZone(Constant.Zone.Graveyard, opponent);
+	        CardList OpponentCreatureList = new CardList(OpponentGraveyard.getCards());
+	        OpponentCreatureList = OpponentCreatureList.getType("Creature");
+	        if((PlayerCreatureList.size() + OpponentCreatureList.size()) >= 10) {
             manaCost = new ManaCost("B B");   
-           } else {
-               manaCost = new ManaCost(sa.getManaCost());              
-           }
+	        } else {
+	            manaCost = new ManaCost(sa.getManaCost());	        	
+	        }
+        } else if(originalCard.getName().equals("Avatar of Will")) {
+			String player = AllZone.Phase.getActivePlayer();
+			String opponent = AllZone.GameAction.getOpponent(player);
+	        PlayerZone OpponentHand = AllZone.getZone(Constant.Zone.Hand, opponent); 
+	        CardList OpponentHandList = new CardList(OpponentHand.getCards());	        
+	        if(OpponentHandList.size() == 0) {
+            manaCost = new ManaCost("U U");   
+	        } else {
+	            manaCost = new ManaCost(sa.getManaCost());	        	
+	        }
         } else {
         manaCost = new ManaCost(sa.getManaCost());
         }
