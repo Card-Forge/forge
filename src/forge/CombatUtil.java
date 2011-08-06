@@ -531,13 +531,10 @@ public class CombatUtil {
 
  	   CardList attackers = combat.sortAttackerByDefender()[0];
  	   CardList unblocked = new CardList();
- 	   CardList blockers = new CardList();
- 	   Card attacker = new Card();
  	   
- 	   for(int i = 0; i < attackers.size(); i++) {
- 			  attacker = attackers.get(i);
+ 	   for(Card attacker : attackers) {
  			  
- 			  blockers = combat.getBlockers(attacker);
+ 			  CardList blockers = combat.getBlockers(attacker);
  			  
  			  if(blockers.size() == 0) unblocked.add(attacker);
  			  else if(attacker.hasKeyword("Trample") && getAttack(attacker) > CombatUtil.totalShieldDamage(attacker,blockers)) {

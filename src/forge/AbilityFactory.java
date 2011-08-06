@@ -665,7 +665,6 @@ public class AbilityFactory {
 		ArrayList<Player> players = new ArrayList<Player>();
 		String defined = (def == null) ? "You" : def;
 		
-		players = new ArrayList<Player>();
 		if (defined.equals("Targeted")){
 			Target tgt = sa.getTarget();
 			if (tgt != null && tgt.getTargetPlayers().size() != 0){
@@ -694,7 +693,6 @@ public class AbilityFactory {
 		ArrayList<Object> objects = new ArrayList<Object>();
 		String defined = (def == null) ? "Self" : def;
 		
-		objects = new ArrayList<Object>();
 		if (defined.equals("Targeted")){
 			Target tgt = sa.getTarget();
 			if (tgt != null && tgt.getTargets().size() != 0){

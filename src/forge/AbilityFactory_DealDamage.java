@@ -270,7 +270,7 @@ public class AbilityFactory_DealDamage {
 		// TODO handle proper calculation of X values based on Cost
 
 		// todo: this should only happen during Players EOT or if Stuffy is going to die
-		if(AF.getHostCard().equals("Stuffy Doll")) {
+		if(AF.getHostCard().getName().equals("Stuffy Doll")) {
 			return true;
 		}
 

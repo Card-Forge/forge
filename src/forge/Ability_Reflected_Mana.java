@@ -13,8 +13,8 @@ public class Ability_Reflected_Mana extends Ability_Mana {
 
 	public Ability_Reflected_Mana(final Card card, String abString, String colorOrType, String who) {
 		super(card, abString);
-		this.colorOrType = new String(colorOrType);
-		this.who = new String(who);
+		this.colorOrType = colorOrType;
+		this.who = who;
 		this.setReflectedMana(true);
 		this.colorChosen = "0"; // Default -- add no mana
 		this.undoable = true;
