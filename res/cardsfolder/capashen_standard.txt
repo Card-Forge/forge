@@ -1,0 +1,10 @@
+Name:Capashen Standard
+ManaCost:W
+Types:Enchantment Aura
+Text:Enchanted creature gets +1/+1
+K:Enchant creature
+K:enPump:+1/+1
+A:AB$Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/capashen_standard.jpg
+End

@@ -1,0 +1,10 @@
+Name:Conviction
+ManaCost:1 W
+Types:Enchantment Aura
+Text:Enchanted creature gets +1/+3
+K:Enchant creature
+K:enPump:+1/+3
+A:AB$ChangeZone | Cost$ W | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/conviction.jpg
+End
