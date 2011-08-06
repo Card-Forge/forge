@@ -9721,6 +9721,7 @@ public class CardFactory_Creatures {
                     if (targetables.size() == 0)
                     	return false;
                     
+                    getTarget().resetTargets();
                     setTargetCard(CardFactoryUtil.AI_getBestCreature(targetables));
                     
                 	return true;
