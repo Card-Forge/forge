@@ -1301,6 +1301,14 @@ public class Card extends MyObservable {
         //}
     }
     
+    public void addStackingExtrinsicKeyword(String s) {
+    	if (s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, s)
+    	{
+    		private static final long serialVersionUID = 2443750124751086033L;  
+    	});
+    	else extrinsicKeyword.add(s);
+    }
+    
     public void removeExtrinsicKeyword(String s) {
         extrinsicKeyword.remove(s);
         this.updateObservers();

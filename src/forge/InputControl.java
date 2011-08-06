@@ -313,6 +313,7 @@ import java.util.*;
            {
                   return new Computer_Cleanup();
            }
+           /*
            else if (phase.equals(Constant.Phase.Combat_Declare_Blockers))
            {
     		   CardList list = new CardList();
@@ -346,7 +347,8 @@ import java.util.*;
         	   return AllZone.Computer;
            }
            else
-        	   return AllZone.Computer;
+           */
+           return AllZone.Computer;
        }//Computer
 
        return new Input()

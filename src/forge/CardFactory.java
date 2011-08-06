@@ -14288,7 +14288,6 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
 
 
-
     //*************** START *********** START **************************
     else if(cardName.equals("Primal Boost"))
     {
@@ -15699,13 +15698,13 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
         }//chooseTargetAI()
         CardList getCreature()
         {
-          CardList list = new CardList(AllZone.Computer_Play.getCards());
+          CardList list = new CardList(AllZone.Human_Play.getCards());
           list = list.filter(new CardListFilter()
           {
             public boolean addCard(Card c)
             {
               return c.isCreature() && (c.getNetAttack() >= 3|| c.getKeyword().contains("Flying") ||
-            		 c.isEnchanted());
+            		 c.isEnchanted()) && CardFactoryUtil.canTarget(card, c);
             }
           });
           return list;

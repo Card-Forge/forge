@@ -17,6 +17,7 @@ public class Phase extends MyObservable
     {Constant.Player.Human    , Constant.Phase.Draw}                                   ,
     {Constant.Player.Human    , Constant.Phase.Main1}                                  ,
     {Constant.Player.Human    , Constant.Phase.Combat_Declare_Attackers}               ,
+    {Constant.Player.Human	  , Constant.Phase.Combat_Declare_Attackers_InstantAbility},
     {Constant.Player.Computer , Constant.Phase.Combat_Declare_Blockers}                ,
     {Constant.Player.Human    , Constant.Phase.Combat_Declare_Blockers_InstantAbility} ,
     {Constant.Player.Computer , Constant.Phase.Combat_Declare_Blockers_InstantAbility} ,

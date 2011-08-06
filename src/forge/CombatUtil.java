@@ -736,7 +736,7 @@ public class CombatUtil
 	  final boolean[] canAttack = new boolean[1];
 	  canAttack[0] = false;
 	  //if (AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Attackers))
-	  if (AllZone.Phase.getPhase().equals("Declare Blockers") ||
+	  if ( /*AllZone.Phase.getPhase().equals("Declare Blockers") || */
 		  AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility))
 	  {
 		  //if (!c.getCreatureAttackedThisTurn())
@@ -794,7 +794,7 @@ public class CombatUtil
   public static void checkDeclareAttackers(Card c) //this method checks triggered effects of attacking creatures, right before defending player declares blockers
   {  
 	  //human does not have an "attackers_instantAbility" phase during his turn (yet), so triggers will happen at the beginning of declare blockers
-	  if (AllZone.Phase.getPhase().equals("Declare Blockers") ||
+	  if ( /*AllZone.Phase.getPhase().equals("Declare Blockers") ||*/
 		  AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility))
 	  {
 		  

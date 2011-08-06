@@ -140,7 +140,6 @@ src/forge/FileUtil.java -text svneol=native#text/plain
 src/forge/GUI_DeckAnalysis.java -text svneol=native#text/plain
 src/forge/GUI_Filter.java -text svneol=native#text/plain
 src/forge/GUI_ImportPicture.java -text svneol=native#text/plain
-src/forge/GUI_PictureHQ.java -text svneol=native#text/plain
 src/forge/GUI_Quest_Filter.java -text svneol=native#text/plain
 src/forge/GameAction.java svneol=native#text/plain
 src/forge/GameActionUtil.java svneol=native#text/plain
