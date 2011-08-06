@@ -11448,6 +11448,7 @@ public class GameActionUtil {
 		Sacrifice_NoIslands.execute();
 		Sacrifice_NoForests.execute();
 		Sacrifice_NoArtifacts.execute();
+		Sacrifice_NoEnchantments.execute();
 		Sacrifice_NoLands.execute();
 		Sacrifice_NoCreatures.execute();
 		Sacrifice_NoOtherCreatures.execute();
@@ -14106,35 +14107,6 @@ public class GameActionUtil {
 			return artifacts.size();
 		}
 	};
-
-	public static Command Tethered_Griffin            = new Command() {
-
-		private static final long serialVersionUID = 572286202401670996L;
-		int                       enchantments     = 0;
-
-		public void execute() {
-			CardList creature = AllZoneUtil.getCardsInPlay("Tethered Griffin");
-
-			for(int i = 0; i < creature.size(); i++) {
-				Card c = creature.get(i);
-				enchantments = countEnchantments(c);
-				if(enchantments == 0) {
-					AllZone.GameAction.sacrifice(c);
-				}
-			}
-
-		}//execute()
-
-		private int countEnchantments(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Battlefield, c.getController());
-			CardList enchantments = new CardList(play.getCards());
-			enchantments = enchantments.getType("Enchantment");
-			return enchantments.size();
-		}
-
-
-	};
 	
 	public static Command topCardReveal_Update      = new Command() {
 
@@ -14246,6 +14218,36 @@ public class GameActionUtil {
 
 	};
 	
+	private static Command Sacrifice_NoEnchantments = new Command() {
+		private static final long serialVersionUID = -8280843743243927861L;
+		int enchs = 0;
+
+		public void execute() {
+			CardList list = AllZoneUtil.getCardsInPlay();
+
+			list = list.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					return c.getKeyword().contains("When you control no enchantments, sacrifice CARDNAME.");
+				}
+			});
+
+			for(int i = 0; i < list.size(); i++) {
+				Card c = list.get(i);
+				enchs = countEnchs(c);
+				if(enchs == 0) {
+					AllZone.GameAction.sacrifice(c);
+				}
+			}
+
+		}//execute()
+
+		private int countEnchs(Card c) {
+			CardList enchs = AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Artifact");
+			return enchs.size();
+		}
+
+	};
+	
 	public static Command Sacrifice_NoLands = new Command() {
 		private static final long serialVersionUID = 2768929064034728027L;
 
@@ -14291,6 +14293,7 @@ public class GameActionUtil {
 	};
 	
 	private static Command Sacrifice_NoOtherCreatures = new Command() {
+		private static final long serialVersionUID = 6941452572773927921L;
 
 		public void execute() {
 			CardList cards = AllZoneUtil.getCardsInPlay();
@@ -14675,7 +14678,7 @@ public class GameActionUtil {
 		}
 
 	}; //Sound_the_Call_Wolf
-	
+	/*
 	public static Command Mortivore                   = new Command() {
 		private static final long serialVersionUID = -8778902687347191964L;
 
@@ -14696,7 +14699,7 @@ public class GameActionUtil {
 		}
 
 	}; //Mortivore
-
+	*/
 	/*
 	public static Command Cognivore                   = new Command() {
 		private static final long serialVersionUID = -8778902687347191964L;
@@ -14914,7 +14917,7 @@ public class GameActionUtil {
 		}
 	}; //Lord of Extinction
 
-
+	/*
 	public static Command Terravore                   = new Command() {
 		private static final long serialVersionUID = -7848248012651247059L;
 
@@ -14942,6 +14945,7 @@ public class GameActionUtil {
 		}
 
 	}; //terravore
+	*/
 	/*
 	public static Command Magnivore                   = new Command() {
 
@@ -16004,7 +16008,7 @@ public class GameActionUtil {
 		//commands.put("Matca_Rioters", Matca_Rioters);
 		commands.put("Meddling_Mage", Meddling_Mage);
 		//commands.put("Molimo_Maro_Sorcerer", Molimo_Maro_Sorcerer);
-		commands.put("Mortivore", Mortivore);
+		//commands.put("Mortivore", Mortivore);
 		commands.put("Mul_Daya_Channelers", Mul_Daya_Channelers);
 		//commands.put("Multani_Maro_Sorcerer", Multani_Maro_Sorcerer);
 		commands.put("Muraganda_Petroglyphs", Muraganda_Petroglyphs);
@@ -16035,8 +16039,7 @@ public class GameActionUtil {
 		
 		commands.put("The_Tabernacle_at_Pendrell_Vale", The_Tabernacle_at_Pendrell_Vale);
 		commands.put("Tarmogoyf", Tarmogoyf);
-		commands.put("Terravore", Terravore);
-		commands.put("Tethered_Griffin", Tethered_Griffin);
+		//commands.put("Terravore", Terravore);
 		commands.put("Transcendent_Master", Transcendent_Master);
 		
 		commands.put("Umbra_Stalker", Umbra_Stalker);

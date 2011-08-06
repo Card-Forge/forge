@@ -84,7 +84,7 @@ public class StaticEffects
 		//cardToEffectsList.put("Matca Rioters", new String[] {"Matca_Rioters"});
 		cardToEffectsList.put("Meddling Mage", new String[] {"Meddling_Mage"});
 		//cardToEffectsList.put("Molimo, Maro-Sorcerer", new String[] {"Molimo_Maro_Sorcerer"});
-		cardToEffectsList.put("Mortivore", new String[] {"Mortivore"});
+		//cardToEffectsList.put("Mortivore", new String[] {"Mortivore"});
 		cardToEffectsList.put("Mul Daya Channelers", new String[] {"Mul_Daya_Channelers"});
 		//cardToEffectsList.put("Multani, Maro-Sorcerer", new String[] {"Multani_Maro_Sorcerer"});
 		cardToEffectsList.put("Muraganda Petroglyphs", new String[] {"Muraganda_Petroglyphs"});
@@ -113,8 +113,7 @@ public class StaticEffects
 		cardToEffectsList.put("Svogthos, the Restless Tomb", new String[] {"Svogthos_the_Restless_Tomb"});
 		
 		cardToEffectsList.put("Tarmogoyf", new String[] {"Tarmogoyf"});
-		cardToEffectsList.put("Terravore", new String[] {"Terravore"});
-		cardToEffectsList.put("Tethered Griffin", new String[] {"Tethered_Griffin"});
+		//cardToEffectsList.put("Terravore", new String[] {"Terravore"});
 		cardToEffectsList.put("The Tabernacle at Pendrell Vale", new String[] {"The_Tabernacle_at_Pendrell_Vale"});
 		cardToEffectsList.put("Transcendent Master", new String[]{"Transcendent_Master"});
 		

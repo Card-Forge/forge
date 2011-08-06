@@ -1,9 +1,10 @@
 Name:Tethered Griffin
 ManaCost:W
 Types:Creature Griffin
-Text:When you control no enchantments, sacrifice Tethered Griffin.
+Text:no text
 PT:2/3
 K:Flying
+K:When you control no enchantments, sacrifice CARDNAME.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tethered_griffin.jpg

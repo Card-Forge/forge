@@ -1,8 +1,9 @@
 Name:Mortivore
 ManaCost:2 B B
 Types:Creature Lhurgoyf
-Text:Mortivore's power and toughness are each equal to the number of creature cards in all graveyards.
-PT:1/1
+Text:no text
+PT:*/*
+K:stSetPT:Count$TypeInAllYards.Creature:Count$TypeInAllYards.Creature:CARDNAME's power and toughness are each equal to the number of creature cards in all graveyards.
 A:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mortivore.jpg
