@@ -1,9 +1,16 @@
 Name:Moment's Peace
 ManaCost:1 G
 Types:Instant
-Text:Prevent all combat damage that would be dealt this turn.
+Text:no text
+A:SP$Fog | Cost$ 1 G | SpellDescription$ Prevent all combat damage that would be dealt this turn.
+K:Flashback:2 G
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moments_peace.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/251.jpg
 End
+
+
+
+
+

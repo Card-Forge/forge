@@ -3356,7 +3356,7 @@ public class CardFactory_Instants {
         	spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
-        
+        /* Cards converted to AF_SP$Fog
         //*************** START *********** START **************************
         else if(cardName.equals("Fog") || cardName.equals("Angelsong") || cardName.equals("Darkness") ||
       		  cardName.equals("Holy Day") || cardName.equals("Lull") || cardName.equals("Moment's Peace") ||
@@ -3397,7 +3397,7 @@ public class CardFactory_Instants {
       		  card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "2 G"));
       	  }
         }//*************** END ************ END **************************
-          
+        */
         
         //*************** START *********** START **************************
         else if (cardName.equals("Starstorm"))

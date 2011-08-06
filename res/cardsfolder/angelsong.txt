@@ -2,6 +2,7 @@ Name:Angelsong
 ManaCost:1 W
 Types:Instant
 Text:no text
+A:SP$Fog | Cost$ 1 W | SpellDescription$ Prevent all combat damage that would be dealt this turn.
 K:Cycling:2
 SVar:RemAIDeck:True
 SVar:Rarity:Common
