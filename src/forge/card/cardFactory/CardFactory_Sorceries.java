@@ -3211,50 +3211,6 @@ public class CardFactory_Sorceries {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Strategic Planning")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -1481868510981621671L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    CardList top = new CardList();
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    
-                    int j = 3;
-                    
-                    if(library.size() < j) j = library.size();
-                    for(int i = 0; i < j; i++) {
-                        top.add(library.get(i));
-                    }
-                    
-                    if(top.size() > 0) {
-                        //let user get choice
-                        Card chosen = GuiUtils.getChoice("Choose a card to put into your hand",
-                                top.toArray());
-                        top.remove(chosen);
-                        
-                        //put card in hand
-                        AllZone.GameAction.moveToHand(chosen);
-                        
-                        //add cards to bottom of library
-                        for(int i = 0; i < top.size(); i++)
-                        	AllZone.GameAction.moveToGraveyard(top.get(i));
-                    }
-                }//resolve()
-            };//SpellAbility
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Fireball")) {
         	/*
         	 * Fireball deals X damage divided evenly, rounded down, among
