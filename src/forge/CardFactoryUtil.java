@@ -483,7 +483,15 @@ public class CardFactoryUtil {
             
             @Override
             public void showMessage() {
-            	
+            	CardList list = new CardList(AllZone.Human_Play.getCards());
+                list = list.filter(new CardListFilter(){
+                	public boolean addCard(Card c)
+                	{
+                		return c.isPermanent() && !c.getName().equals("Mana Pool");
+                	}
+                });
+                if(n == nCards || list.size() == 0) stop();
+                
                 AllZone.Display.showMessage("Select a permanent to sacrifice (" +(nCards-n) +" left)");
                 ButtonUtil.disableAll();
             }
@@ -518,6 +526,10 @@ public class CardFactoryUtil {
             
             @Override
             public void showMessage() {
+            	//in case no more {type}s in play
+                CardList list = new CardList(AllZone.Human_Play.getCards());
+                list = list.getType(type);
+                if(n == nCards || list.size() == 0) stop();
             	
                 AllZone.Display.showMessage("Select a " +type +" to sacrifice (" +(nCards-n) +" left)");
                 ButtonUtil.disableAll();
