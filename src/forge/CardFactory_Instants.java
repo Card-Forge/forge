@@ -512,7 +512,7 @@ public class CardFactory_Instants {
                             done();
                         } else AllZone.GameAction.moveToGraveyard(card);
                     } else {
-                        AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(5,card);
+                        AllZone.GameAction.addDamage(getTargetPlayer(), card, 5);
                         done();
                     }
                 }//resolve()
@@ -1640,7 +1640,7 @@ public class CardFactory_Instants {
                 @Override
                 public void resolve() {
                     PlayerLife life = AllZone.GameAction.getPlayerLife(getTargetPlayer());
-                    if(life.getLife() == 10) life.subtractLife(10,card);
+                    if(life.getLife() == 10) AllZone.GameAction.addDamage(getTargetPlayer(), card, 10);
                 }
                 
                 /*
@@ -4504,7 +4504,7 @@ public class CardFactory_Instants {
                             Card c = getTargetCard();
                             c.addDamage(damage, card);
                         }
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage,card);
+                    } else AllZone.GameAction.addDamage(getTargetPlayer(), card, damage);
                 }
             };//SpellAbility
             
@@ -4556,7 +4556,7 @@ public class CardFactory_Instants {
                             Card c = getTargetCard();
                             c.addDamage(damage, card);
                         }
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage,card);
+                    } else AllZone.GameAction.addDamage(getTargetPlayer(), card, damage);
                     
                     card.setKicked(true);
                 }
