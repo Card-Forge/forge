@@ -678,45 +678,50 @@ public class ComputerUtil
 	     return null;
 	  }
   
-  static public Card chooseSacrificeType(String type, Card activate, Card target){
+  static public CardList chooseSacrificeType(String type, Card activate, Card target, int amount){
       PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
       CardList typeList = new CardList(play.getCards());
       typeList = typeList.getValidCards(type.split(","),activate.getController() ,activate);
 	  if (target != null && target.getController().equals(AllZone.ComputerPlayer) && typeList.contains(target))  
 		  typeList.remove(target);		// don't sacrifice the card we're pumping
-	  
+
 	  if (typeList.size() == 0)
 		  return null;
 	  
-	  Card prefCard = getCardPreference(activate, "SacCost", typeList);
-	  if (prefCard != null)
-		  return prefCard;
+	  CardList sacList = new CardList();
+	  int count = 0;
+	  
+	  while(count < amount){
+		  Card prefCard = getCardPreference(activate, "SacCost", typeList);
+		  if (prefCard != null){
+			  sacList.add(prefCard);
+			  typeList.remove(prefCard);
+			  count++;
+		  }
+		  else
+			  break;
+	  }
 	  
       CardListUtil.sortAttackLowFirst(typeList);
-	  return typeList.get(0);
+      
+      for(int i = count; i < amount; i++) sacList.add(typeList.get(i));
+	  return sacList;
   }
   
-  static public Card chooseExileType(String type, Card activate, Card target){
-	  //logic is the same as sacrifice...
-      return chooseSacrificeType(type, activate, target);
+  static public CardList chooseExileType(String type, Card activate, Card target, int amount){
+      return chooseExileFrom(Constant.Zone.Battlefield, type, activate, target, amount);
   }
   
-  static public Card chooseExileFromHandType(String type, Card activate, Card target){
-	  PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
-      CardList typeList = new CardList(hand.getCards());
-      typeList = typeList.getValidCards(type.split(","),activate.getController() ,activate);
-	  if (target != null && target.getController().equals(AllZone.ComputerPlayer) && typeList.contains(target)) 
-		  typeList.remove(target);	// don't exile the card we're pumping
-	  
-	  if (typeList.size() == 0)
-		  return null;
-	  
-      CardListUtil.sortAttackLowFirst(typeList);
-	  return typeList.get(0);
+  static public CardList chooseExileFromHandType(String type, Card activate, Card target, int amount){
+	  return chooseExileFrom(Constant.Zone.Hand, type, activate, target, amount);
   }
   
   static public CardList chooseExileFromGraveType(String type, Card activate, Card target, int amount){
-	  PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer);
+	  return chooseExileFrom(Constant.Zone.Graveyard, type, activate, target, amount);
+  }
+  
+  static public CardList chooseExileFrom(String zone, String type, Card activate, Card target, int amount){
+	  PlayerZone grave = AllZone.getZone(zone, AllZone.ComputerPlayer);
       CardList typeList = new CardList(grave.getCards());
       typeList = typeList.getValidCards(type.split(","),activate.getController() ,activate);
 	  if (target != null && target.getController().equals(AllZone.ComputerPlayer) && typeList.contains(target))
@@ -729,13 +734,13 @@ public class ComputerUtil
       CardList exileList = new CardList();
       
       for(int i = 0; i < amount; i++) exileList.add(typeList.get(i));
-	  return exileList;
+	  return exileList;  
   }
   
-  static public Card chooseTapType(String type, Card activate, boolean tap, int index){
+  static public CardList chooseTapType(String type, Card activate, boolean tap, int amount){
 	  PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
       CardList typeList = new CardList(play.getCards());
-      typeList = typeList.getValidCards(type.split(","),activate.getController() ,activate);
+      typeList = typeList.getValidCards(type.split(","), activate.getController(), activate);
 	  
       //is this needed?
       typeList = typeList.filter(new CardListFilter()
@@ -749,14 +754,18 @@ public class ComputerUtil
       if (tap)
     	  typeList.remove(activate);
     	  
-	  if (typeList.size() == 0 || index >= typeList.size())
+	  if (typeList.size() == 0 || amount >= typeList.size())
 		  return null;
 	  
       CardListUtil.sortAttackLowFirst(typeList);
-	  return typeList.get(index);
+      
+      CardList tapList = new CardList();
+      
+      for(int i = 0; i < amount; i++) tapList.add(typeList.get(i));
+	  return tapList;
   }
   
-  static public Card chooseReturnType(String type, Card activate, Card target){
+  static public CardList chooseReturnType(String type, Card activate, Card target, int amount){
       PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
       CardList typeList = new CardList(play.getCards());
       typeList = typeList.getValidCards(type.split(","),activate.getController() ,activate);
@@ -767,7 +776,10 @@ public class ComputerUtil
 		  return null;
 	  
       CardListUtil.sortAttackLowFirst(typeList);
-	  return typeList.get(0);
+      CardList returnList = new CardList();
+      
+      for(int i = 0; i < amount; i++) returnList.add(typeList.get(i));
+	  return returnList;
   }
 
   static public CardList getPossibleAttackers()

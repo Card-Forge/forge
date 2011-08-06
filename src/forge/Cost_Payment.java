@@ -461,21 +461,21 @@ public class Cost_Payment {
     public void payComputerCosts(){
     	// ******** NOTE for Adding Costs ************
     	// make sure ComputerUtil.canPayAdditionalCosts() is updated so the AI knows if they can Pay the cost
-    	ArrayList<Card> sacCard = new ArrayList<Card>();
-    	ArrayList<Card> exileCard = new ArrayList<Card>();
+    	CardList sacCard = new CardList();
+    	CardList exileCard = new CardList();
+    	CardList exileFromHandCard = new CardList();
     	CardList exileFromGraveCard = new CardList();
-    	ArrayList<Card> tapXCard = new ArrayList<Card>();
-    	ArrayList<Card> returnCard = new ArrayList<Card>();
+    	CardList tapXCard = new CardList();
+    	CardList returnCard = new CardList();
     	ability.setActivatingPlayer(AllZone.ComputerPlayer);
     	
     	// double check if something can be sacrificed here. Real check is in ComputerUtil.canPayAdditionalCosts()
     	if (cost.getSacCost()){
     		if (cost.getSacThis())
     			sacCard.add(card);
-    		else{
-    			for(int i = 0; i < cost.getSacAmount(); i++)
-    				sacCard.add(ComputerUtil.chooseSacrificeType(cost.getSacType(), card, ability.getTargetCard()));
-    		}
+    		else
+    			sacCard = ComputerUtil.chooseSacrificeType(cost.getSacType(), card, ability.getTargetCard(),  cost.getSacAmount());
+    		
     		
 	    	if (sacCard.size() != cost.getSacAmount()){
 	    		System.out.println("Couldn't find a valid card to sacrifice for: "+card.getName());
@@ -487,12 +487,24 @@ public class Cost_Payment {
     	if (cost.getExileCost()){
     		if (cost.getExileThis())
     			exileCard.add(card);
-    		else{
-    			for(int i = 0; i < cost.getExileAmount(); i++)
-    				exileCard.add(ComputerUtil.chooseExileType(cost.getExileType(), card, ability.getTargetCard()));
-    		}
+    		else
+    			exileCard = ComputerUtil.chooseExileType(cost.getExileType(), card, ability.getTargetCard(), cost.getExileAmount());
+    		
     		
 	    	if (exileCard.size() != cost.getExileAmount()){
+	    		System.out.println("Couldn't find a valid card to exile for: "+card.getName());
+	    		return;
+	    	}
+    	}
+    	
+    	// double check if something can be exiled here. Real check is in ComputerUtil.canPayAdditionalCosts()
+    	if (cost.getExileFromHandCost()){
+    		if (cost.getExileFromHandThis())
+    			exileFromHandCard.add(card);
+    		else
+    			exileFromHandCard = ComputerUtil.chooseExileType(cost.getExileFromHandType(), card, ability.getTargetCard(), cost.getExileFromHandAmount());
+    		
+	    	if (exileFromHandCard.size() != cost.getExileFromHandAmount()){
 	    		System.out.println("Couldn't find a valid card to exile for: "+card.getName());
 	    		return;
 	    	}
@@ -501,10 +513,9 @@ public class Cost_Payment {
     	if (cost.getExileFromGraveCost()){
     		if (cost.getExileFromGraveThis())
     			exileFromGraveCard.add(card);
-    		else{
+    		else
     			exileFromGraveCard = ComputerUtil.chooseExileFromGraveType(
     					cost.getExileFromGraveType(), card, ability.getTargetCard(),cost.getExileFromGraveAmount());
-    		}
     		
 	    	if (exileFromGraveCard.size() != cost.getExileFromGraveAmount()){
 	    		System.out.println("Couldn't find a valid card to exile for: "+card.getName());
@@ -515,10 +526,8 @@ public class Cost_Payment {
     	if (cost.getReturnCost()){
     		if (cost.getReturnThis())
     			returnCard.add(card);
-    		else{
-    			for(int i = 0; i < cost.getReturnAmount(); i++)
-    				returnCard.add(ComputerUtil.chooseReturnType(cost.getReturnType(), card, ability.getTargetCard()));
-    		}
+    		else
+    			returnCard = ComputerUtil.chooseReturnType(cost.getReturnType(), card, ability.getTargetCard(), cost.getReturnAmount());
     		
 	    	if (returnCard.size() != cost.getReturnAmount()){
 	    		System.out.println("Couldn't find a valid card to return for: "+card.getName());
@@ -537,10 +546,9 @@ public class Cost_Payment {
     	if (cost.getTapXTypeCost()) {
     		boolean tap = cost.getTap();
     		
-    		for(int i = 0; i < cost.getTapXTypeAmount(); i++)
-    			tapXCard.add(ComputerUtil.chooseTapType(cost.getTapXType(), card, tap, i));
+    		tapXCard = ComputerUtil.chooseTapType(cost.getTapXType(), card, tap, cost.getTapXTypeAmount());
     		
-    		if (tapXCard.size() != cost.getTapXTypeAmount()){
+    		if (tapXCard == null || tapXCard.size() != cost.getTapXTypeAmount()){
 	    		System.out.println("Couldn't find a valid card to tap for: "+card.getName());
 	    		return;
 	    	}
@@ -609,6 +617,11 @@ public class Cost_Payment {
 		
 		if (cost.getExileCost()){
 			for(Card c : exileCard)
+				AllZone.GameAction.exile(c);
+		}
+		
+		if (cost.getExileFromHandCost()){
+			for(Card c : exileFromHandCard)
 				AllZone.GameAction.exile(c);
 		}
 		
