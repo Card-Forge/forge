@@ -2,7 +2,7 @@ Name:Essence Drain
 ManaCost:4 B
 Types:Sorcery
 Text:no text
-K:spDamageTgtCP:3:Drawback$YouGainLife/3:Essence Drain deals 3 damage to target creature or player and you gain 3 life.:Essence Drain - deals 3 damage and you gain 3 life.
+A:SP$DealDamage | Cost$ 4 B | Tgt$ TgtCP | NumDmg$ 3 | SubAbility$ YouGainLife/3 | SpellDescription$ Essence Drain deals 3 damage to target creature or player and you gain 3 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_drain.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/43.jpg

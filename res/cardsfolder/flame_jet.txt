@@ -2,7 +2,7 @@ Name:Flame Jet
 ManaCost:1 R
 Types:Sorcery
 Text:no text
-K:spDamageTgtP:3
+A:SP$DealDamage | Cost$ 1 R | Tgt$ TgtP | NumDmg$ 3 | SpellDescription$ Flame Jet deals 3 damage to target player.
 K:Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flame_jet.jpg

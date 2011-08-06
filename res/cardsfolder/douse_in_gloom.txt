@@ -2,7 +2,7 @@ Name:Douse in Gloom
 ManaCost:2 B
 Types:Instant
 Text:no text
-K:spDamageTgtC:2:Drawback$YouGainLife/2:Douse in Gloom deals 2 damage to target creature and you gain 2 life.:Douse in Gloom - deals 2 damage and you gain 2 life.
+A:SP$DealDamage | Cost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SubAbility$ YouGainLife/2 | SpellDescription$ Douse in Gloom deals 2 damage to target creature and you gain 2 life.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card97221.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/49.jpg

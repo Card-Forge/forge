@@ -2,7 +2,7 @@ Name:Corrupt
 ManaCost:5 B
 Types:Sorcery
 Text:no text
-K:spDamageTgtCP:X:Drawback$YouGainLife/X:Corrupt deals damage equal to the number of Swamps you control to target creature or player. You gain life equal to the damage dealt this way.:Corrupt deals damage and you gain life.
+A:SP$DealDamage | Cost$ 5 B | Tgt$ TgtCP | NumDmg$ X | SubAbility$ YouGainLife/X | SpellDescription$ Corrupt deals damage equal to the number of Swamps you control to target creature or player. You gain life equal to the damage dealt this way.
 SVar:X:Count$TypeYouCtrl.Swamp
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corrupt.jpg

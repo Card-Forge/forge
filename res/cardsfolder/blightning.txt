@@ -2,7 +2,7 @@ Name:Blightning
 ManaCost:1 B R
 Types:Sorcery
 Text:no text
-K:spDamageTgtP:3:Drawback$TgtDiscard/2:Blightning deals 3 damage to target player. That player discards two cards.:Blightning - deals 3 damage and that player discards two cards.
+A:SP$DealDamage | Cost$ 1 B R | Tgt$ TgtP | NumDmg$ 3 | SubAbility$ TgtDiscard/2 | SpellDescription$ Blightning deals 3 damage to target player. That player discards two cards.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blightning.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/156.jpg

@@ -2,7 +2,7 @@ Name:Lava Axe
 ManaCost:4 R
 Types:Sorcery
 Text:no text
-K:spDamageTgtP:5
+A:SP$DealDamage | Cost$ 4 R | Tgt$ TgtP | NumDmg$ 5 | SpellDescription$ Lava Axe deals 5 damage to target player.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lava_axe.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/197.jpg
