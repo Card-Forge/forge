@@ -154,22 +154,22 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Gunslinger 3", "hard", "WGRB Cascade");
         
         addToDeckList("Han Solo 3", "hard", "WG enchantments deck with Sigil of the Empty Throne");
-//        addToDeckList("Hans 2", "medium", "GRW Allies");
-        addToDeckList("Harry Potter 1", "easy", "Mill and counter spell deck");
-        addToDeckList("Harry Potter 2", "medium", "Mill and counter spell deck");
-        addToDeckList("Harry Potter 3", "hard", "Various milling cards, some speed up and counter spells");
-        addToDeckList("Hellboy 3", "hard", "A BR direct damage deck");
-        addToDeckList("Higgins 3", "hard", "Grixis Control deck, lots of threat removal and some creatures");
-        addToDeckList("Homer Simpson 1", "easy", "BRU Morph + Regenerate creatures, + Raise Dead");
-        addToDeckList("Homer Simpson 2", "medium", "BRU Morph + Regenerate creatures, + Raise Dead");
-        addToDeckList("Homer Simpson 3", "hard", "BRU Morph + Regenerate creatures, + card draw and creature buff");
-//        addToDeckList("Hulk 2", "medium", "G Men with Pants");
-//        addToDeckList("Hulk 3", "hard", "G Midrange");
+//        addToDeckList("Hans 2", "medium", "WRG Allies deck");
+        addToDeckList("Harry Potter 1", "easy", "U Mill and counter spell deck");
+        addToDeckList("Harry Potter 2", "medium", "UB Mill and counter spell deck");
+        addToDeckList("Harry Potter 3", "hard", "UB Mill and counter spell deck with card draw");
+        addToDeckList("Hellboy 3", "hard", "BR direct damage deck");
+        addToDeckList("Higgins 3", "hard", "UBR Grixis Control deck with threat removal and some creatures");
+        addToDeckList("Homer Simpson 1", "easy", "UBR Morph deck with Regenerate creatures and Raise Dead");
+        addToDeckList("Homer Simpson 2", "medium", "UBR Morph deck with Regenerate creatures and Raise Dead");
+        addToDeckList("Homer Simpson 3", "hard", "UBR Morph deck with Regenerate creatures, card draw and creature buff");
+//        addToDeckList("Hulk 2", "medium", "G Men with Pants deck");
+//        addToDeckList("Hulk 3", "hard", "G Midrange deck");
         
-        addToDeckList("Iceman 3", "hard", "BU Bounce and Control style deck");
-        addToDeckList("Indiana Jones 1", "easy", "Sol'kanar + buff");
-        addToDeckList("Indiana Jones 2", "medium", "Sol'kanar + buff + Raise Dead");
-        addToDeckList("Indiana Jones 3", "hard", "Sol'kanar + buff + Terminate");
+        addToDeckList("Iceman 3", "hard", "UB Bounce and Control deck");
+        addToDeckList("Indiana Jones 1", "easy", "UBR Sol'kanar the Swamp King and buff");
+        addToDeckList("Indiana Jones 2", "medium", "UBR Sol'kanar the Swamp King, buff and Raise Dead");
+        addToDeckList("Indiana Jones 3", "hard", "UBR Sol'kanar the Swamp King, buff and Terminate");
         
         addToDeckList("Jabba the Hut 3", "hard", "WUG Exalted deck with land walkers");
 //        addToDeckList("Jack 2", "medium", "BG Aggressive deck");
