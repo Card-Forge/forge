@@ -394,18 +394,10 @@ public class CardFactory_Creatures {
                     super.addDamage(n, source);
                     final String opponent = AllZone.GameAction.getOpponent(card.getOwner());
                     
-                    SpellAbility ability = new Ability(card, "0") {
+                    SpellAbility ability = new Ability(c, "0") {
                         @Override
                         public void resolve() {
-                            AllZone.GameAction.getPlayerLife(opponent).subtractLife(n,card);
-                            
-                            if(c.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(c, n);
-                            
-                            CardList cl = CardFactoryUtil.getAurasEnchanting(c, "Guilty Conscience");
-                            for(Card crd:cl) {
-                                GameActionUtil.executeGuiltyConscienceEffects(c, crd, n);
-                            }
-                            
+                        	AllZone.GameAction.addDamage(opponent, c, n);
                         }
                     };
                     ability.setStackDescription("Stuffy Doll - causes " + n + " damage to " + opponent);
@@ -427,35 +419,25 @@ public class CardFactory_Creatures {
             
             newCard.addIntrinsicKeyword("Indestructible");
             
-            final Ability_Tap ability = new Ability_Tap(newCard) {
+			Ability_Cost abilCost = new Ability_Cost("T", cardName, true);
+
+			final Ability_Activated ability = new Ability_Activated(newCard, abilCost, null){
                 private static final long serialVersionUID = 577739727089395613L;
                 
                 @Override
                 public void resolve() {
-                    newCard.addDamage(1, newCard);
-                    
-                    if(newCard.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(newCard, 1);
-                    
-                    CardList cl = CardFactoryUtil.getAurasEnchanting(newCard, "Guilty Conscience");
-                    for(Card crd:cl) {
-                        GameActionUtil.executeGuiltyConscienceEffects(newCard, crd, 1);
-                    }
+                    AllZone.GameAction.addDamage(newCard, newCard, 1);
                 }
             };//SpellAbility
-            ability.setDescription("tap: Stuffy Doll deals 1 damage to itself.");
+            ability.setDescription(abilCost.toString() + "Stuffy Doll deals 1 damage to itself.");
             ability.setStackDescription("Stuffy Doll - deals 1 damage to itself.");
-            ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
             
-//	      card.addSpellAbility(ability);
-//	      return card;
-            ///*
             newCard.addSpellAbility(new Spell_Permanent(newCard));
             newCard.addSpellAbility(ability);
             
             newCard.setSVars(card.getSVars());
             
             return newCard;
-            //*/
         }//*************** END ************ END **************************
         
 
@@ -8461,7 +8443,7 @@ public class CardFactory_Creatures {
             ability1.setBeforePayMana(CardFactoryUtil.input_targetType(ability1, "All"));
             ability2.setBeforePayMana(CardFactoryUtil.input_targetType(ability2, "Artifact"));
         }//*************** END ************ END **************************
-       
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Hammerfist Giant")) {
@@ -13452,11 +13434,10 @@ public class CardFactory_Creatures {
         
       //*************** START *********** START **************************
         else if(cardName.equals("Tradewind Rider")) {
-            Target target = new Target("TgtV");
-            target.setVTSelection("Select target permanent to return to owner's hand.");
+        	String select = "Select target permanent to return to owner's hand.";
             final String Tgts[] = {"Permanent"};
-            target.setValidTgts(Tgts);
-           
+            Target target = new Target("TgtV", select, Tgts);
+
             final Ability_Cost cost = new Ability_Cost("T tapXType<2/Creature>", card.getName(), true);
         	
             final SpellAbility bounce = new Ability_Activated(card, cost, target) {
@@ -19316,10 +19297,8 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Singing Tree")) {
-            Target target = new Target("TgtV");
-            target.setVTSelection("Select target attacking creature.");
             final String Tgts[] = {"Creature.attacking"};
-            target.setValidTgts(Tgts);
+            Target target = new Target("TgtV", "Select target attacking creature.", Tgts);
           
             final Ability_Cost cost = new Ability_Cost("T", card.getName(), true);
 

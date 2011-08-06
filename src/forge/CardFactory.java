@@ -8640,16 +8640,26 @@ public class CardFactory implements NewConstants {
 
         //*************** START ************ START **************************
         else if(cardName.equals("Ashnod's Transmogrant")) {
-            final Ability_Tap ability = new Ability_Tap(card) {
+        	final String[] Tgts = { "Creature.nonArtifact" };
+        	
+        	Ability_Cost abCost = new Ability_Cost("T Sac<1/CARDNAME>", cardName, true);
+        	Target abTgt = new Target("TgtV", "Target a non-Artifact Creature to Transmogrify", Tgts);
+
+        	final Ability_Activated ability = new Ability_Activated(card, abCost, abTgt){
                 private static final long serialVersionUID = -401631574059431293L;
                 
                 @Override
                 public void resolve() {
-                    if(card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.sacrifice(card);
-                    if(getTargetCard() == null || !getTargetCard().isCreature()) return;
                     Card crd = getTargetCard();
+                    // if it's not a valid target on resolution, spell fizzles
+                    if (crd == null || !AllZone.GameAction.isCardInPlay(crd) || !crd.isValidCard(Tgts))
+                    	return;
                     crd.addCounter(Counters.P1P1, 1);
-                    if(!crd.getType().contains("Artifact")) crd.addType("Artifact");
+                    
+                    // trick to get Artifact on the card type side of the type line
+                    ArrayList<String> types = crd.getType();
+                    types.add(0, "Artifact");
+                    crd.setType(types);
                 }
                 
                 @Override
@@ -8664,33 +8674,8 @@ public class CardFactory implements NewConstants {
                     return (getTargetCard() != null);
                 }
             };
-            Input runtime = new Input() {
-                private static final long serialVersionUID = 141164423096887945L;
-                
-                @Override
-                public void showMessage() {
-                    AllZone.Display.showMessage("Select target creature for " + card);
-                    ButtonUtil.enableOnlyCancel();
-                }
-                
-                @Override
-                public void selectButtonCancel() {
-                    stop();
-                }
-                
-                @Override
-                public void selectCard(Card c, PlayerZone zone) {
-                    if(!CardFactoryUtil.canTarget(ability, c)) {
-                        AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-                    } else if(c.isCreature() && !c.isArtifact() && zone.is(Constant.Zone.Play)) {
-                        ability.setTargetCard(c);
-                        AllZone.GameAction.sacrifice(card);
-                        stopSetNext(new Input_NoCost_TapAbility(ability));
-                    }
-                }
-            };
-            ability.setBeforePayMana(runtime);
-            ability.setDescription("tap, Sacrifice Ashnod's Transmogrant: put a +1/+1 counter on target nonartifact creature. That creature becomes an artifact in addition to its other types.");
+
+            ability.setDescription(abCost.toString() + "Put a +1/+1 counter on target nonartifact creature. That creature becomes an artifact in addition to its other types.");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
        
@@ -9312,9 +9297,11 @@ public class CardFactory implements NewConstants {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Time Vault")) {
-            final Ability_Tap ability = new Ability_Tap(card) {
+        	final Ability_Cost abCost = new Ability_Cost("T", cardName, true);
+
+        	final Ability_Activated ability = new Ability_Activated(card, abCost, null){
                 private static final long serialVersionUID = 5784473766585071504L;
-                
+
                 @Override
                 public void resolve() {
                     //System.out.println("Turn: " + AllZone.Phase.getTurn());

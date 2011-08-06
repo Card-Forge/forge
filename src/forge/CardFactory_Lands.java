@@ -3734,10 +3734,8 @@ class CardFactory_Lands {
         
         //*************** START ********** START *************************
         else if(cardName.equals("Elephant Graveyard")) {
-        	Target target = new Target("TgtV");
-        	target.setVTSelection("Select target Elephant.");
         	final String Tgts[] = {"Creature.Elephant"};
-        	target.setValidTgts(Tgts);
+        	Target target = new Target("TgtV", "Select target Elephant to Regenerate.", Tgts);
 
         	final Ability_Cost cost = new Ability_Cost("T", card.getName(), true);
         	

@@ -169,8 +169,7 @@ public class AbilityFactory {
                 
                 @Override
                 public boolean canPlay(){
-                	Cost_Payment pay = new Cost_Payment(abCost, this);
-                    return (pay.canPayAdditionalCosts(abCost, this) && CardFactoryUtil.canUseAbility(hostCard) && super.canPlay());
+                    return (Cost_Payment.canPayAdditionalCosts(abCost, this) && CardFactoryUtil.canUseAbility(hostCard) && super.canPlay());
                 }
                 
                 @Override
