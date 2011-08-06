@@ -7,4 +7,5 @@ K:abDamageTgtV T:2:Creature.attacking,Creature.blocking:Tor Wauki deals 2 damage
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tor_wauki.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/305.jpg
 End

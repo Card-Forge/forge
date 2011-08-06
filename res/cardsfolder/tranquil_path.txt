@@ -6,4 +6,5 @@ K:spDestroyAll:Enchantment
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_path.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/89.jpg
 End

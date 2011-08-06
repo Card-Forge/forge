@@ -10,4 +10,5 @@ K:paintap:3:R
 K:paintap:3:G
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tarnished_citadel.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/329.jpg
 End

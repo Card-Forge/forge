@@ -5,4 +5,5 @@ Text:Destroy all non-Aura enchantments.
 K:spDestroyAll:Enchantment.nonAura
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_domain.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/143.jpg
 End

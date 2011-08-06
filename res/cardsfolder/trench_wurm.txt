@@ -6,4 +6,5 @@ PT:3/3
 K:abDestroyTgtV 2 R T:Land.nonBasic:Desroy target nonbasic land.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trench_wurm.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/127.jpg
 End

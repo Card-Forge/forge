@@ -7,4 +7,5 @@ K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay U
 K:When CARDNAME enters the battlefield, tap enchanted creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thirst.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/99.jpg
 End

@@ -6,4 +6,5 @@ PT:2/3
 SVar:BuffedBy:Spell.Red,Spell.Green
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tattermunge_duo.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/218.jpg
 End

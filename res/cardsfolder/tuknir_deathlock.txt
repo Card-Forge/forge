@@ -7,4 +7,5 @@ K:Flying
 K:abPumpTgtC R G T:+2/+2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tuknir_deathlock.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/307.jpg
 End

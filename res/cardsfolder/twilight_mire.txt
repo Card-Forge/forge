@@ -9,4 +9,5 @@ K:BG, tap: add G G
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twilight_mire.jpg
+SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/180.jpg
 End

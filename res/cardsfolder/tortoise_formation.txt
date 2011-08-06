@@ -6,4 +6,5 @@ K:spAllPump:YouCtrl:Shroud:Creatures you control gain shroud until end of turn.:
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tortoise_formation.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/61.jpg
 End

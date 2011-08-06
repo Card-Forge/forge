@@ -8,4 +8,5 @@ K:stPumpEquipped:Creature.Red:0/0/Trample:No Condition:As long as it's red, it h
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tenza_godos_maul.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/271.jpg
 End

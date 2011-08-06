@@ -6,4 +6,5 @@ PT:2/1
 K:CostChange:Player:Less:1:Spell:red/white:All:OnlyOneBonus
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thornscape_familiar.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/95.jpg
 End

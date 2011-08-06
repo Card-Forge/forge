@@ -7,4 +7,5 @@ SVar:X:Count$Valid Island.YouDontCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/typhoon.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/123.jpg
 End

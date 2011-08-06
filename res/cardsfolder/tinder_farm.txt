@@ -8,4 +8,5 @@ K:Comes into play tapped.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tinder_farm.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/329.jpg
 End

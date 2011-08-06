@@ -4,4 +4,5 @@ Types:Instant
 Text:Search your library for a Plains card. If you control fewer lands than an opponent, you may search your library for an additional Plains card. Put them into your hand.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/vi/en-us/card3730.jpg
+SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/123.jpg
 End

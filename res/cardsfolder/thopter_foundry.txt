@@ -5,4 +5,5 @@ Text:no text
 SVar:AIPreference:SacCost$Permanent.namedSword of the Meek
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thopter_foundry.jpg
+SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/133.jpg
 End

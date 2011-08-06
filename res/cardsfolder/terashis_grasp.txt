@@ -7,4 +7,5 @@ SVar:dX:Count$TgtCardManaCost
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terashis_grasp.jpg
+SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/26.jpg
 End

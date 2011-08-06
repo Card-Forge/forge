@@ -6,4 +6,5 @@ A:SP$Pump | Cost$ G | Tgt$ TgtC | NumAtt$ +1 | NumDef$ +2 | SpellDescription$ Ta
 K:Flashback:W
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thrill_of_the_hunt.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/229.jpg
 End

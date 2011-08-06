@@ -5,4 +5,8 @@ Text:Destroy all enchantments.
 K:spDestroyAll:Enchantment
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tempest_of_light.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/28.jpg
+SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/36.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/50.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/51.jpg
 End

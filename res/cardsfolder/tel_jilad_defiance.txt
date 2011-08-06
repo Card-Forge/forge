@@ -6,4 +6,6 @@ K:spPumpTgt:Protection from artifacts
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_defiance.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/som/129.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/129.jpg
 End

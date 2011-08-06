@@ -5,4 +5,5 @@ Text:no text
 K:abTapTgt T:Artifact+YouDontCtrl:Tap target artifact you don't control.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/touchstone.jpg
+SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/161.jpg
 End

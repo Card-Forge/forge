@@ -5,4 +5,8 @@ Text:no text
 A:AB$Fetch | Cost$ T Sac<1/CARDNAME> | Destination$ Battlefield | Tapped$ True | FetchType$ Land.Basic | FetchNum$ 1 | SpellDescription$ Search your library for a basic land card and put it onto the battlefield tapped. Then shuffle your library.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card118874.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/229.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/229.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/279.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/360.jpg
 End

@@ -6,4 +6,5 @@ PT:3/3
 K:WheneverKeyword:EntersBattleField:Type/Beast:Play:ModifyLife/3:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever a Beast enters the battlefield, you may gain 3 life.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/totem_speaker.jpg
+SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/141.jpg
 End

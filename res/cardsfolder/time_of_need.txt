@@ -6,4 +6,5 @@ A:SP$Fetch | Cost$ 1 G | Destination$ Hand | FetchType$ Creature.Legendary | Fet
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/time_of_need.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/247.jpg
 End

@@ -4,4 +4,5 @@ Types:Sorcery
 Text:As an additional cost to cast Tinker, sacrifice an artifact.\r\nSearch your library for an artifact card and put that card onto the battlefield. Then shuffle your library.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tinker.jpg
+SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/45.jpg
 End

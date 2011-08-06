@@ -6,4 +6,6 @@ PT:2/2
 K:CARDNAME can't be the target of spells or abilities your opponents control.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taoist_hermit.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/p3k/150.jpg
+SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/150.jpg
 End

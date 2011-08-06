@@ -5,4 +5,5 @@ Text:When Teroh's Faithful comes into play, you gain 4 life.
 PT:1/4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terohs_faithful.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/18.jpg
 End

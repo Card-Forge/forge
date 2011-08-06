@@ -6,4 +6,5 @@ PT:1/1
 K:Trample
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terravore.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/278.jpg
 End

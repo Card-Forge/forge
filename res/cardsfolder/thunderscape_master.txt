@@ -7,4 +7,5 @@ K:abLoseLifeTgt B B T:2:Drawback$YouGainLife/2:Target player loses 2 life and yo
 K:abAllPump G G T:YouCtrl:+2/+2:Creatures you control get +2/+2 until end of turn.:Thunderscape Master - creatures get +2/+2 until EOT.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderscape_master.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/175.jpg
 End

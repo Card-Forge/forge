@@ -5,4 +5,14 @@ Text:Destroy all enchantments.
 K:spDestroyAll:Enchantment
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquility.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/155.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/129.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/276.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/161.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/217.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/280.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/259.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/128.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/195.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/129.jpg
 End

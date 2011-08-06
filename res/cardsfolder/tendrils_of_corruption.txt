@@ -6,4 +6,6 @@ K:spDamageTgtC:X:Drawback$YouGainLife/X:Tendrils of Corruption deals X damage to
 SVar:X:Count$TypeYouCtrl.Swamp
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card106632.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/114.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/136.jpg
 End

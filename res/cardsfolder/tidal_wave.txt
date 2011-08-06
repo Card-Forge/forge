@@ -7,4 +7,5 @@ A:SP$Token | Cost$ 2 U | TokenAmount$ 1 | TokenName$ Wall | TokenTypes$ Creature
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidal_wave.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/100.jpg
 End

@@ -8,4 +8,5 @@ K:Protection:Creature.Legendary:protection from legendary creatures
 K:abDestroyTgtV B B T:Creature.Legendary:NoRegen:Destroy target legendary creature. It can't be regenerated.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tsabo_tavoc.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/281.jpg
 End

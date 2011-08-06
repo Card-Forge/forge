@@ -5,4 +5,5 @@ Text:no text
 K:spAllPump:YouCtrl:+5/+5/First Strike & Lifelink & Trample:Until end of turn, creatures you control get +5/+5 and gain first strike, lifelink and trample.:Titanic Ultimatum - Creatures get +5/+5 and gain first strike, lifelink and trample until EOT
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/titanic_ultimatum.jpg
+SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/204.jpg
 End

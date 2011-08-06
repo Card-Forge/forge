@@ -5,4 +5,8 @@ Text:U U U, tap: Return target permanent to its owner's hand.
 PT:1/1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_adept.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/106.jpg
+SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/48.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/102.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/103.jpg
 End

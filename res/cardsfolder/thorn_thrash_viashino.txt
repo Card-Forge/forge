@@ -7,4 +7,5 @@ K:abPump G:Trample
 K:Devour:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thorn_thrash_viashino.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/116.jpg
 End

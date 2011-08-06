@@ -6,4 +6,5 @@ K:tap: add 1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tectonic_edge.jpg
+SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/145.jpg
 End

@@ -5,4 +5,5 @@ Text:no text
 A:SP$Draw | Cost$ 2 U | NumCards$ 3 | SpellDescription$ Draw three cards. Then discard two cards unless you discard an artifact card. | SubAbility$ YouDiscard/2/UnlessDiscardType.Artifact
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thirst_for_knowledge.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/53.jpg
 End

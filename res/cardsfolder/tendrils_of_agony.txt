@@ -5,4 +5,5 @@ Text:Target player loses 2 life and you gain 2 life.
 K:Storm
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tendrils_of_agony.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/75.jpg
 End

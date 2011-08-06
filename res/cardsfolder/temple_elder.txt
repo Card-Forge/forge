@@ -6,4 +6,6 @@ PT:1/2
 A:AB$GainLife | Cost$ T | LifeAmount$ 1 | PlayerTurn$ True | ActivatingPhases$ Upkeep,Draw,Main1,BeginCombat | SpellDescription$ You gain 1 life. Activate this ability only during your turn, before attackers are declared.
 SVar:Rarity:Uncommon
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=6507&type=card
+SetInfo:P02|Uncommon|http://magiccards.info/scans/en/po2/144.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po2/144.jpg
 End

@@ -5,4 +5,6 @@ Text:no text
 K:abDamageTgtC 8 T:12
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_of_calamities.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/som/212.jpg
+SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/212.jpg
 End

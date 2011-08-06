@@ -9,4 +9,6 @@ SVar:Rarity:Common
 # SVar:RemAIDeck:True
 # I've run some tests where the AI does use both abilities of this card, but it can be flakey.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trigon_of_corruption.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/som/213.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/213.jpg
 End

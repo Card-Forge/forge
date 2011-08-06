@@ -5,4 +5,5 @@ Text:no text
 K:Each permanent with a divinity counter on it is indestructible.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/bok/en-us/card74644.jpg
+SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/162.jpg
 End

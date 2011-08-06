@@ -7,4 +7,5 @@ K:Flying
 K:Haste
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136139.jpg
+SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/123.jpg
 End

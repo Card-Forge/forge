@@ -7,4 +7,5 @@ SVar:X:Count$Domain
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card116726.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/230.jpg
 End

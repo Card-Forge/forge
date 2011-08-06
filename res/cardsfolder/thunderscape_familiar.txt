@@ -7,4 +7,5 @@ K:First strike
 K:CostChange:Player:Less:1:Spell:black/green:All:OnlyOneBonus
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderscape_familiar.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/76.jpg
 End

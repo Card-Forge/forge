@@ -5,4 +5,5 @@ Text:Counter target spell with converted mana cost 4 or less.
 K:spCounter:Spell:CMC(<=,4):Graveyard:None
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtbind.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/96.jpg
 End

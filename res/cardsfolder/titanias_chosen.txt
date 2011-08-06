@@ -7,4 +7,5 @@ K:WheneverKeyword:CastSpell/Any:Color/green:Play:+1+1 Counters/1:Self:ASAP:Yes_N
 SVar:BuffedBy:Spell.Green
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/titanias_chosen.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/277.jpg
 End

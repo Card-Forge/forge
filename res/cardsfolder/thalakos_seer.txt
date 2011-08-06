@@ -7,4 +7,5 @@ K:Shadow
 K:WheneverKeyword:LeavesBattleField:Self:Any:DrawCards/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Thalakos Seer leaves the battlefield, draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thalakos_seer.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/94.jpg
 End

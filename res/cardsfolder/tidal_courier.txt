@@ -7,4 +7,5 @@ K:abPump 3 U:Flying
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidal_courier.jpg
+SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/31.jpg
 End

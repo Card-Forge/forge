@@ -5,4 +5,6 @@ Text:no text
 A:SP$Draw | Cost$ 3 U | NumCards$ 2 | SpellDescription$ Draw two cards.
 SVar:Rarity:Common
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/touch_of_brilliance.jpg
+SetInfo:P02|Common|http://magiccards.info/scans/en/po2/58.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/77.jpg
 End

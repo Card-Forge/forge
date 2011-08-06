@@ -8,4 +8,5 @@ K:stPumpEnchanted:Creature:2/0:Hellbent:Hellbent - Enchanted creature gets an ad
 SVar:BuffedBy:Card
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taste_for_mayhem.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/75.jpg
 End

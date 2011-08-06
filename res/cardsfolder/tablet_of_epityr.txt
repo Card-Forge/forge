@@ -5,4 +5,5 @@ Text:no text
 K:WheneverKeyword:PermanentIntoGraveyard:Type/Artifact:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:PayMana/1:Initiator - OwnedByController:Whenever an artifact you control is put into a graveyard from the battlefield, you may pay 1. If you do, you gain 1 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tablet_of_epityr.jpg
+SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/32.jpg
 End

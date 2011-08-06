@@ -6,4 +6,5 @@ K:tap: add 3
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_dynamo.jpg
+SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/139.jpg
 End

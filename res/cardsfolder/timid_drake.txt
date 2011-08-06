@@ -8,4 +8,6 @@ K:WheneverKeyword:EntersBattleField:Type/Creature:Play:MoveFrom-Play-Hand:Self:A
 SVar:AntiBuffedBy:Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timid_drake.jpg
+SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/54.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/111.jpg
 End

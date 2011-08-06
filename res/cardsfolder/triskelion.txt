@@ -8,4 +8,8 @@ K:abDamageTgtCP SubCounter<1/P1P1>:1
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/triskelion.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/218.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/269.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/372.jpg
+SetInfo:ATQ|Rare|http://magiccards.info/scans/en/aq/38.jpg
 End

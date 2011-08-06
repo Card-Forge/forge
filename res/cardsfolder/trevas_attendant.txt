@@ -7,4 +7,5 @@ K:1, Sacrifice CARDNAME: Add G W U to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trevas_attendant.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/315.jpg
 End

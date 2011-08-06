@@ -6,4 +6,5 @@ K:CostChange:All:More:1:Spell:All:Creature:NonType
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thorn_of_amethyst.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/262.jpg
 End

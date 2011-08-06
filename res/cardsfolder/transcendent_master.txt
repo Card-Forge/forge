@@ -7,4 +7,5 @@ K:Level up:1
 K:maxLevel:12
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/transcendent_master.jpg
+SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/51.jpg
 End

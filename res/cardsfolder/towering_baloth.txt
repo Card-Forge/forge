@@ -6,4 +6,5 @@ PT:7/6
 K:Morph:6 G
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/towering_baloth.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/292.jpg
 End

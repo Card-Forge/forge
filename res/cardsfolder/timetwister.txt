@@ -4,4 +4,6 @@ Types:Sorcery
 Text:Each player shuffles his or her hand and graveyard into his or her library and then draws seven cards.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timetwister.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/85.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/85.jpg
 End

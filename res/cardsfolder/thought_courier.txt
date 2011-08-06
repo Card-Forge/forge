@@ -6,4 +6,5 @@ PT:1/1
 A:AB$Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ YouDiscard/1
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card82980.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/38.jpg
 End

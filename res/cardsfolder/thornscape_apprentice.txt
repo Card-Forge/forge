@@ -5,7 +5,8 @@ Text:no text
 PT:1/1
 K:abPumpTgtC R T:First Strike
 #K:abTapTgt W T:Creature:Tap target creature.
-A:AB$Tap | Cost$ W T | Tgt$TgtC| SpellDescription$ Tap target creature.  
+A:AB$Tap | Cost$ W T | Tgt$TgtC| SpellDescription$ Tap target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thornscape_apprentice.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/215.jpg
 End

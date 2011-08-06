@@ -6,4 +6,5 @@ K:spDestroyAll:Goblin
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tivadars_crusade.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/91.jpg
 End

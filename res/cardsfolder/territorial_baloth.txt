@@ -7,4 +7,5 @@ K:Landfall - Whenever a land enters the battlefield under your control, CARDNAME
 SVar:BuffedBy:Land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/territorial_baloth.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/188.jpg
 End

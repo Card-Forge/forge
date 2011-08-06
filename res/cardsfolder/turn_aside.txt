@@ -5,4 +5,6 @@ Text:Counter target spell that targets a permanent you control.
 K:spCounter:Spell:Targets(My-Creature,My-Land,My-Enchantment,My-Artifact,My-Planeswalker,My-Equipment):Graveyard:None
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/turn_aside.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/som/49.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/49.jpg
 End

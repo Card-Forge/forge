@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPump:+3/-1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twisted_experiment.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/74.jpg
 End

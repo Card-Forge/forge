@@ -7,4 +7,6 @@ K:Protection from artifacts
 K:Infect
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_fallen.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/som/130.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/130.jpg
 End

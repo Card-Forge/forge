@@ -5,4 +5,7 @@ Text:When Trinket Mage comes into play, you may search your library for an artif
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trinket_mage.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/som/48.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/48.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/39.jpg
 End

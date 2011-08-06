@@ -6,4 +6,6 @@ K:stPumpAll:Creature.YouCtrl:0/0/Lifelink & Double Strike:No Condition:Creatures
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/true_conviction.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/som/25.jpg
+SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/25.jpg
 End

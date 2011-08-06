@@ -5,4 +5,6 @@ Text:no text
 A:AB$Proliferate | Cost$ T Sac<1/Artifact> | SpellDescription$ Proliferate
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/throne_of_geth.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/som/211.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/211.jpg
 End

@@ -6,4 +6,7 @@ PT:5/5
 K:Haste
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thundermare.jpg
+SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/116.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/158.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/224.jpg
 End

@@ -7,4 +7,5 @@ K:tap: add U
 K:Transmute:1 U U
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tolaria_west.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/173.jpg
 End

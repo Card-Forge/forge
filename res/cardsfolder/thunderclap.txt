@@ -6,4 +6,5 @@ A:SP$DealDamage | Cost$ 2 R | Tgt$ TgtC | NumDmg$ 3 | SpellDescription$ Thunderc
 SVar:AltCost:Sac<1/Mountain>
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderclap.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/219.jpg
 End

@@ -6,4 +6,5 @@ PT:5/4
 K:CostChange:Player:Less:1:Self:All:All:Affinity/Forest
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tangle_golem.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/151.jpg
 End

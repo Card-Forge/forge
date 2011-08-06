@@ -7,4 +7,5 @@ K:Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature 
 K:Defender
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thallid_shell_dweller.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/226.jpg
 End

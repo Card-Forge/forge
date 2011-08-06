@@ -6,4 +6,6 @@ PT:1/1
 A:AB$Draw | Cost$ T | NumCards$ 1 | PlayerTurn$ True | ActivatingPhases$ Upkeep,Draw,Main1,BeginCombat | SpellDescription$ Draw a card. Activate this ability only during your turn, before attackers are declared.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talas_researcher.jpg
+SetInfo:P02|Rare|http://magiccards.info/scans/en/po2/51.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po2/51.jpg
 End

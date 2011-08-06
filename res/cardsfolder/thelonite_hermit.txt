@@ -6,4 +6,5 @@ PT:1/1
 K:Morph:3 G G
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thelonite_hermit.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/228.jpg
 End

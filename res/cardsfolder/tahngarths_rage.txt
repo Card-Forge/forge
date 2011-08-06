@@ -9,4 +9,5 @@ K:stPumpEnchanted:Creature.notattacking:-2/-1:No Condition:no text
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tahngarths_rage.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/209.jpg
 End

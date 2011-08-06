@@ -5,4 +5,6 @@ Text:When Tarpan is put into a graveyard from play, you gain 1 life.
 PT:1/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tarpan.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/192.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/155.jpg
 End

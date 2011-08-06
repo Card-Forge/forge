@@ -5,4 +5,5 @@ Text:All creatures have "At the beginning of your upkeep, destroy this creature 
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_tabernacle_at_pendrell_vale.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/252.jpg
 End

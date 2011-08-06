@@ -5,4 +5,5 @@ Text:Equipped creature gets +2/+1.
 K:eqPump 2:+2/+1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trusty_machete.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/209.jpg
 End

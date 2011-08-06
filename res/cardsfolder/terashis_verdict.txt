@@ -6,4 +6,5 @@ K:spDestroyTgt:Creature.powerLE3+attacking
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terashis_verdict.jpg
+SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/27.jpg
 End

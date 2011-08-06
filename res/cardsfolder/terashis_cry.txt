@@ -6,4 +6,5 @@ A:SP$Tap | Cost$ 3 W | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Choose target cr
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terashis_cry.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/47.jpg
 End

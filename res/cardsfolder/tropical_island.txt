@@ -6,4 +6,7 @@ K:tap: add U
 K:tap: add G
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tropical_island.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/299.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/303.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/299.jpg
 End

@@ -7,4 +7,5 @@ K:Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature 
 K:abPump Sac<1/Saproling>:+1/+2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thallid_devourer.jpg
+SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/91.jpg
 End

@@ -7,4 +7,5 @@ K:HandSize - 3 Self
 K:Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_eater.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/106.jpg
 End

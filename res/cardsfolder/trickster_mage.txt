@@ -8,4 +8,5 @@ K:abUntapTgt U T Discard<1/Any>:Artifact,Creature,Land:Untap target artifact, cr
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trickster_mage.jpg
+SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/49.jpg
 End

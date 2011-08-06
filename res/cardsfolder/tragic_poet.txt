@@ -7,4 +7,5 @@ A:AB$Retrieve | Cost$ T Sac<1/CARDNAME> | TgtPrompt$ Choose target enchantment c
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tragic_poet.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/24.jpg
 End

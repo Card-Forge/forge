@@ -7,4 +7,6 @@ K:stPumpSelf:Creature:2/2/Flying & First Strike & Trample:isEnchanted:As long as
 SVar:EnchantMe:Once
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_golem.jpg
+SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/141.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/313.jpg
 End

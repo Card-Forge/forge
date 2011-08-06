@@ -7,4 +7,5 @@ K:Flying
 K:abPump 1 R:+1/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/torch_drake.jpg
+SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/38.jpg
 End

@@ -7,4 +7,5 @@ K:CARDNAME attacks each turn if able.
 K:Echo:4 R R
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tectonic_fiend.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/181.jpg
 End

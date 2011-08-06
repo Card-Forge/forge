@@ -5,4 +5,5 @@ Text:When Totem-Guard Hartbeest enters the battlefield, you may search your libr
 PT:2/5
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/totem_guide_hartebeest.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/50.jpg
 End

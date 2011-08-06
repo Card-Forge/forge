@@ -6,4 +6,5 @@ PT:2/2
 A:AB$GainControl|Cost$T|ValidTgts$Creature.Thrull|TgtPrompt$Select target Thrull.|LoseControl$LoseControl,LeavesPlay|SpellDescription$Gain control of target Thrull for as long as you control CARDNAME.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thrull_champion.jpg
+SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/29.jpg
 End

@@ -6,4 +6,5 @@ K:tap: add R
 K:tap: add G
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/troll_horn_cameo.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/316.jpg
 End

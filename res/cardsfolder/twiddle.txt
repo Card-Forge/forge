@@ -5,4 +5,10 @@ Text:You may tap or untap target artifact, creature, or land.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twiddle.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/111.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/86.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/107.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/130.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/109.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/86.jpg
 End

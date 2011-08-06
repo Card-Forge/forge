@@ -5,4 +5,6 @@ Text:no text
 K:abGainLife 1 T:1
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card95221.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/258.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/311.jpg
 End

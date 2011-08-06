@@ -5,4 +5,5 @@ Text:no text
 K:abDamageTgtP 2 T:1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/telimtors_darts.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/286.jpg
 End

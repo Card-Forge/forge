@@ -5,4 +5,5 @@ Text:no text
 A:SP$Bounce | Cost$ 1 G U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Destination$ TopofLibrary | SpellDescription$ Put target permanent on top of its owner's library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_spring.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/125.jpg
 End

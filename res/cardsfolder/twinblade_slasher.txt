@@ -7,4 +7,5 @@ A:AB$Pump | Cost$ 1 G | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | SpellDesc
 K:Wither
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twinblade_slasher.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/79.jpg
 End

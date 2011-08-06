@@ -5,4 +5,5 @@ Text:no text
 PT:4/4
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1691.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/304.jpg
 End

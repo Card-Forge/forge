@@ -8,4 +8,5 @@ K:abUntapTgt Sac<1/CARDNAME>:Creature:Untap target creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/teardrop_kami.jpg
+SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/55.jpg
 End

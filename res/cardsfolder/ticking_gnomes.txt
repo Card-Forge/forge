@@ -7,4 +7,5 @@ K:Echo:3
 K:abDamageTgtCP Sac<1/CARDNAME>:1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ticking_gnomes.jpg
+SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/136.jpg
 End

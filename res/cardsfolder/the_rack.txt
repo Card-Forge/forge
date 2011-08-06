@@ -4,4 +4,7 @@ Types:Artifact
 Text:At the beginning of opponent's upkeep, The Rack deals X damage to that player, where X is 3 minus the number of cards in his or her hand.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_rack.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/278.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/370.jpg
+SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/37.jpg
 End

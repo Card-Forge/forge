@@ -6,4 +6,5 @@ PT:5/5
 K:abPumpTgtC G T:+5/+5
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thriss_nantuko_primus.jpg
+SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/134.jpg
 End
