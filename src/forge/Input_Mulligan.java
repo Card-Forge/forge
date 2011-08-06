@@ -52,7 +52,7 @@ public class Input_Mulligan extends Input {
 
         Card dummy = CHandList.get(0);
         //Computer mulligans if there are no cards with converted mana cost of 0 in its hand
-        if(CHandList.getValidCards("Card.cmcEQ0",AllZone.ComputerPlayer,dummy).size() == 0) {
+        while(CHandList.size() > 4 && CHandList.getValidCards("Card.cmcEQ0",AllZone.ComputerPlayer,dummy).size() == 0) {
         	for(Card c : CHandList)
         		AllZone.GameAction.moveToLibrary(c);
 	        
@@ -62,6 +62,8 @@ public class Input_Mulligan extends Input {
 	        int newHand = CHandList.size() - 1;
 	        for(int i = 0; i < newHand; i++)
 	            AllZone.ComputerPlayer.drawCard();
+	        
+	        CHandList = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
         }
         
         //Human Leylines
