@@ -5735,16 +5735,10 @@ public class CardFactory implements NewConstants {
 				@Override
             	public void resolve() {
 					String controller = (controllerString.equals("Controller") ? card.getController() : AllZone.GameAction.getOpponent(card.getController()));
+					if(keywords[0].equals("None")) keywords[0] = "";
 					
-					int multiplier = 1;
-                    int doublingSeasons = AllZoneUtil.getPlayerCardsInPlay("Doubling Season", card.getController()).size();
-                    if(doublingSeasons > 0) multiplier = (int) Math.pow(2, doublingSeasons);
-                    
 					int num = xString ? CardFactoryUtil.xCount(card, numString) : Integer.valueOf(numString);
-		            num = num*multiplier;
-		            
-            		for(int i = 0; i < num; i ++ ){
-            			if(keywords[0].equals("None")) keywords[0] = "";
+		            for(int i = 0; i < num; i ++ ){
                     	CardFactoryUtil.makeToken(name, imageName, controller, manaCost, types, attack, defense, keywords);
                     }
             	}
