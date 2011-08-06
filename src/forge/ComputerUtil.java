@@ -27,7 +27,7 @@ public class ComputerUtil
 	    	all[i].setActivatingPlayer(AllZone.ComputerPlayer);
 	    	if(canPayCost(all[i]) && all[i].canPlay() && all[i].canPlayAI())
 	    	{
-		    	
+		    	AllZone.Stack.freezeStack();
 	    		if(all[i].isSpell() && AllZone.GameAction.isCardInZone(all[i].getSourceCard(),AllZone.Computer_Hand))
 		        	AllZone.Computer_Hand.remove(all[i].getSourceCard());
 		
@@ -41,7 +41,7 @@ public class ComputerUtil
 			        payManaCost(all[i]);
 			        all[i].chooseTargetAI();
 			        all[i].getBeforePayManaAI().execute();
-			        AllZone.Stack.add(all[i]);
+			        AllZone.Stack.addAndUnfreeze(all[i]);
 		        }
 		        else{
 		        	if (tgt != null && tgt.doesTarget())

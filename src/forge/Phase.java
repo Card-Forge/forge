@@ -48,14 +48,31 @@ public class Phase extends MyObservable
     
     // priority player
     
-    private Player bPlayerPriority = AllZone.HumanPlayer;
-    
+    private Player pPlayerPriority = AllZone.HumanPlayer;
     public Player getPriorityPlayer() {
-    	return bPlayerPriority;
+    	return pPlayerPriority;
     }
     
     public void setPriorityPlayer(Player p) {
-    	bPlayerPriority = p;
+    	pPlayerPriority = p;
+    }
+    
+    private Player pFirstPriority = AllZone.HumanPlayer;
+    public Player getFirstPriority() {
+    	return pFirstPriority;
+    }
+    
+    public void setFirstPriority(Player p) {
+    	pFirstPriority = p;
+    }
+    
+    public void setPriority(Player p) {
+    	pFirstPriority = p;
+    	pPlayerPriority = p;
+    }
+    
+    public void resetPriority() {
+    	setPriority(playerTurn);
     }
     
 	private boolean bPhaseEffects = true;
@@ -101,7 +118,7 @@ public class Phase extends MyObservable
     public void reset() {
         turn = 1;
         playerTurn = AllZone.HumanPlayer;
-        bPlayerPriority = playerTurn;
+        resetPriority();
         bPhaseEffects = true;
         needToNextPhase = false;
         GameBegins = 0;
@@ -257,7 +274,7 @@ public class Phase extends MyObservable
 	    	AllZone.EndOfTurn.executeUntil();
 	    }
         
-		bPlayerPriority = playerTurn;
+		resetPriority();
 	}
 	
     public void nextPhase() {
@@ -509,28 +526,21 @@ public class Phase extends MyObservable
 
     public void passPriority(){
     	Player actingPlayer = getPriorityPlayer();
-    	Player lastToAct = (AllZone.Stack.size() == 0) ? getPlayerTurn() : AllZone.Stack.peek().getActivatingPlayer();
-    	
-    	if (lastToAct == null){	// Just in case it slips through, I think I have it nailed down now though?
-    		Card c = AllZone.Stack.peek().getSourceCard();
-    		System.out.println(c.getName() + " :Activating Player not set.");
-    		lastToAct = c.getController();
-    	}
+    	Player lastToAct = getFirstPriority();
     	
     	// actingPlayer is the player who may act
-    	// the lastToActed player is the person that is the most recent act, either that players turn, or last player to use a SA
+    	// the lastToAct is the player who gained Priority First in this segment of Priority
     	
     	if (lastToAct.equals(actingPlayer)){
     		// pass the priority to other player
-    		bPlayerPriority = actingPlayer.getOpponent();
-    		//if (!actingPlayer.isComputer())
+    		setPriorityPlayer(actingPlayer.getOpponent());
     		AllZone.InputControl.resetInput();
     	}
     	else{
     		if (AllZone.Stack.size() == 0){
     			// end phase
     			needToNextPhase = true;
-    			bPlayerPriority = getPlayerTurn();	// think this is needed here, but not elsewhere
+    			pPlayerPriority = getPlayerTurn();	// this needs to be set early as we exit the phase
     		}
     		else{
     			AllZone.Stack.resolveStack();

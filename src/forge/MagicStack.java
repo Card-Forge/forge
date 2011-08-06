@@ -142,6 +142,11 @@ public class MagicStack extends MyObservable {
 			sp.setActivatingPlayer(sp.getSourceCard().getController());
 			System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
 		}
+		
+		// TODO: triggered abilities need to be fixed 
+		if (!(sp instanceof Ability_Triggered || sp instanceof Ability_Static))	
+			AllZone.Phase.setPriority(sp.getActivatingPlayer());	// when something is added we need to setPriority
+		
 		// WheneverKeyword Test
 		boolean ActualEffectTriggered = false;
 		if (sp.getSourceCard().getKeyword().toString().contains("WheneverKeyword")) {
@@ -371,8 +376,10 @@ public class MagicStack extends MyObservable {
 		GuiDisplayUtil.updateGUI();
 		this.freezeStack();	// freeze the stack while we're in the middle of resolving
 		AllZone.InputControl.setResolving(true);
+		
 		SpellAbility sa = AllZone.Stack.pop();
-		AllZone.Phase.setPriorityPlayer(AllZone.Phase.getPlayerTurn());
+		
+		AllZone.Phase.resetPriority();	// ActivePlayer gains priority first after Resolve
 		Card c = sa.getSourceCard();
 		boolean fizzle = false;
 

@@ -505,7 +505,7 @@ public class Cost_Payment {
 				AllZone.GameAction.moveToHand(c);
 		}
 
-        AllZone.Stack.add(ability);
+		AllZone.Stack.addAndUnfreeze(ability);
     }
     
 	public void changeCost(){
