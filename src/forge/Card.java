@@ -2690,53 +2690,10 @@ public class Card extends MyObservable {
             
             damageToAdd = preventDamage(damageToAdd, source, true);
             
-            if (damageToAdd > 0) {
-	            if(isCreature() && source.getName().equals("Mirri the Cursed") ) {
-	                final Card thisCard = source;
-	                Ability ability2 = new Ability(thisCard, "0") {
-	                    @Override
-	                    public void resolve() {
-	                        thisCard.addCounter(Counters.P1P1, 1);
-	                    }
-	                }; // ability2
-	                
-	                StringBuilder sb2 = new StringBuilder();
-	                sb2.append(thisCard.getName()).append(" - gets a +1/+1 counter");
-	                ability2.setStackDescription(sb2.toString());
-	                
-	                AllZone.Stack.add(ability2);
-	            }
-	            
-	            /*
-	            if(source.getKeyword().contains("Deathtouch") && isCreature()) {
-	                AllZone.GameAction.destroy(this);
-	            }*/
-
-	            if(isCreature() 
-	            	&& source.hasKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.")) 
-	            {
-	            	final Card damagedCard = this;
-	            	final Ability ability = new Ability(source, "0") {
-	                	@Override
-	                	public void resolve() { AllZone.GameAction.destroy(damagedCard); }
-	            	};
-	            
-	            	StringBuilder sb = new StringBuilder();
-	            	sb.append(source).append(" - destroy damaged creature.");
-	            	ability.setStackDescription(sb.toString());
-	            
-	            	final Command atEOC = new Command() {
-	                	private static final long serialVersionUID = 3789617910009764326L;
-	                
-	                	public void execute() {
-	                		if(AllZone.GameAction.isCardInPlay(damagedCard)) 
-	                			AllZone.Stack.add(ability);
-	                	}
-	            	};
-	            
-	            	AllZone.EndOfCombat.addAt(atEOC);
-	            }//Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.
-            }
+            if( damageToAdd == 0 ) return;  //Rule 119.8
+            
+            GameActionUtil.executeCombatDamageToCreatureEffects(source, this, damageToAdd);
+            
 	        map.put(source, damageToAdd);
         }
         

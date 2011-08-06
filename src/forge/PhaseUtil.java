@@ -128,7 +128,10 @@ public class PhaseUtil {
     				&& !c.getKeyword().contains("This card doesn't untap during your next untap step.")) {
     			c.untap();
     		}
-    		else c.removeExtrinsicKeyword("This card doesn't untap during your next untap step.");    		
+    		else { 
+    			c.removeExtrinsicKeyword("This card doesn't untap during your next untap step.");
+    			c.removeExtrinsicKeyword("HIDDEN This card doesn't untap during your next untap step.");
+    		}
     	}
     	if( canOnlyUntapOneLand()) {
     		if( AllZone.Phase.getPlayerTurn().equals(AllZone.ComputerPlayer)) {

@@ -1,0 +1,9 @@
+Name:Kashi-Tribe Warriors
+ManaCost:3 G G
+Types:Snow Creature Snake Warrior
+Text:no text
+PT:2/4
+K:Whenever CARDNAME deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kashi_tribe_warriors.jpg
+End

@@ -5363,6 +5363,70 @@ public class GameActionUtil {
         }
 	}
 	
+	//not restricted to combat damage and dealing damage to creatures
+	public static void executeCombatDamageToCreatureEffects(final Card source, final Card affected, int damage) {
+		
+        if(source.getKeyword().contains("Whenever CARDNAME deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.")) {
+			
+	    	Ability ability = new Ability(affected, "0") {
+	    		@Override
+	    		public void resolve() {
+	    			affected.tap();
+	    			affected.addExtrinsicKeyword("HIDDEN This card doesn't untap during your next untap step.");
+	    		}
+	    	};
+	    	StringBuilder sb = new StringBuilder();
+	        sb.append(affected.getName()+" - tap");
+	        ability.setStackDescription(sb.toString());
+        	int amount = source.getAmountOfKeyword("Whenever CARDNAME deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.");
+	        
+	        for(int i=0 ; i < amount ; i++)
+	        	AllZone.Stack.add(ability);
+        }
+        
+    	if(source.getName().equals("Mirri the Cursed") ) {
+	        final Card thisCard = source;
+	        Ability ability2 = new Ability(thisCard, "0") {
+	            @Override
+	            public void resolve() {
+	                thisCard.addCounter(Counters.P1P1, 1);
+	            }
+	        }; // ability2
+        
+	        StringBuilder sb2 = new StringBuilder();
+	        sb2.append(thisCard.getName()).append(" - gets a +1/+1 counter");
+	        ability2.setStackDescription(sb2.toString());
+	        
+	        AllZone.Stack.add(ability2);
+    	}
+
+
+        if( source.hasKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.")) {
+        	final Card damagedCard = affected;
+        	final Ability ability = new Ability(source, "0") {
+            	@Override
+            	public void resolve() { AllZone.GameAction.destroy(damagedCard); }
+        	};
+        
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(source).append(" - destroy damaged creature.");
+        	ability.setStackDescription(sb.toString());
+        
+        	final Command atEOC = new Command() {
+            	private static final long serialVersionUID = 3789617910009764326L;
+            
+            	public void execute() {
+            		if(AllZone.GameAction.isCardInPlay(damagedCard)) AllZone.Stack.add(ability);
+            	}
+        	};
+        	int amount = source.getAmountOfKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.");
+	        
+	        for(int i=0 ; i < amount ; i++)
+	        	AllZone.EndOfCombat.addAt(atEOC);
+        }//Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.
+	}
+	
+	
 	//not restricted to combat damage, restricted to dealing damage to creatures
 	public static void executeDamageToCreatureEffects(final Card source, final Card affected, int damage) {
 		
