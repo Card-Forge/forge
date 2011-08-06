@@ -4463,7 +4463,7 @@ public class CardFactory implements NewConstants {
             }
         }// etbReturnTgt
         
-
+        /* all cards converted to SP$Fetch
         // Generic Tutor cards
         if(hasKeyword(card, "spTutor") != -1) {
             int n = hasKeyword(card, "spTutor");
@@ -4547,7 +4547,8 @@ public class CardFactory implements NewConstants {
             card.setText("");
             card.addSpellAbility(spTtr);
         }//spTutor
-
+		*/
+        
         while(hasKeyword(card, "abDrawCards") != -1) {
             int n = hasKeyword(card, "abDrawCards");
             String parse = card.getKeyword().get(n).toString();
