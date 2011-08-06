@@ -239,6 +239,7 @@ public class StaticEffects
 		cardToEffectsList.put("Maraxus of Keld", new String[] {"Maraxus_of_Keld"});
 		cardToEffectsList.put("Umbra Stalker", new String[] {"Umbra_Stalker"});
 		cardToEffectsList.put("Primalcrux",new String[] {"Primalcrux"});
+		cardToEffectsList.put("Homarid", new String[] {"Homarid"});
 	}
 	
 	public HashMap<String, String[]> getCardToEffectsList()

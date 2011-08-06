@@ -14420,6 +14420,33 @@ public class GameActionUtil {
 			return AllZoneUtil.getTypeInPlay("Elf").size();
 		}
 	}; 
+	
+	public static Command Homarid = new Command() {
+		private static final long serialVersionUID = 7156319758035295773L;
+
+		public void execute() {
+			CardList list = AllZoneUtil.getCardsInPlay("Homarid");
+
+			for(Card homarid:list) {
+				int tide = homarid.getCounters(Counters.TIDE);
+				if(tide == 4) {
+					homarid.setCounter(Counters.TIDE, 0, true);
+				}
+				if(tide == 1) {
+					homarid.setBaseAttack(1);
+					homarid.setBaseDefense(1);
+				}
+				else if (tide == 3) {
+					homarid.setBaseAttack(3);
+					homarid.setBaseDefense(3);
+				}
+				else {
+					homarid.setBaseAttack(2);
+					homarid.setBaseDefense(2);
+				}
+			}
+		}// execute()
+	};
 
 	public static Command Omnath = new Command() {
 		private static final long serialVersionUID = -22045167326100804L;
@@ -20939,6 +20966,7 @@ public class GameActionUtil {
 		commands.put("Maraxus_of_Keld", Maraxus_of_Keld);
 		commands.put("Umbra_Stalker", Umbra_Stalker);
 		commands.put("Primalcrux", Primalcrux);
+		commands.put("Homarid", Homarid);
 		
 		//System.out.println("size of commands: " + commands.size());
 
