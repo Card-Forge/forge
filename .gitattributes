@@ -5485,6 +5485,7 @@ res/cardsfolder/scrubland.txt -text svneol=native#text/plain
 res/cardsfolder/scryb_ranger.txt -text svneol=native#text/plain
 res/cardsfolder/scryb_sprites.txt -text svneol=native#text/plain
 res/cardsfolder/scute_mob.txt -text svneol=native#text/plain
+res/cardsfolder/scuttling_death.txt -text svneol=native#text/plain
 res/cardsfolder/scuzzback_marauders.txt -text svneol=native#text/plain
 res/cardsfolder/scuzzback_scrapper.txt -text svneol=native#text/plain
 res/cardsfolder/sea_drake.txt svneol=native#text/plain
