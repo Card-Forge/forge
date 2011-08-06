@@ -1768,7 +1768,10 @@ public class CardFactoryUtil {
         
         equip.setBeforePayMana(runtime);
         
-        equip.setDescription("Equip: " + Manacost);
+        StringBuilder sbDesc = new StringBuilder();
+        sbDesc.append("Equip: ").append(Manacost);
+        equip.setDescription(sbDesc.toString());
+        
         return equip;
     }//eqPump_Equip() ( was vanila_equip() )
     
@@ -2020,7 +2023,10 @@ public class CardFactoryUtil {
                         "Creature", "Spirit"}, 1, 1, new String[] {""});
     		}
     	};
-    	ability.setStackDescription(card + " - put a 1/1 colorless Spirit creature token onto the battlefield under target opponent's control.");
+    	StringBuilder sb = new StringBuilder();
+    	sb.append(card);
+    	sb.append(" - put a 1/1 colorless Spirit creature token onto the battlefield under target opponent's control.");
+    	ability.setStackDescription(sb.toString());
     	
     	return ability;
     }
@@ -2251,11 +2257,16 @@ public class CardFactoryUtil {
                 }
             }
         };
-        desc.setDescription("Soulshift "
-                + Manacost
-                + " - When this permanent is put into a graveyard from play, you may return target Spirit card with converted mana cost "
-                + Manacost + " or less from your graveyard to your hand.");
-        desc.setStackDescription(sourceCard.getName() + " - Soulshift " + Manacost);
+        StringBuilder sbDesc = new StringBuilder();
+        sbDesc.append("Soulshift ").append(Manacost);
+        sbDesc.append(" - When this permanent is put into a graveyard from play, you may return target Spirit card with converted mana cost ");
+        sbDesc.append(Manacost).append(" or less from your graveyard to your hand.");
+        desc.setDescription(sbDesc.toString());
+        
+        StringBuilder sbStack = new StringBuilder();
+        sbStack.append(sourceCard.getName()).append(" - Soulshift ").append(Manacost);
+        desc.setStackDescription(sbStack.toString());
+        
         return desc;
     }//soul_desc()
     
@@ -4529,7 +4540,10 @@ public class CardFactoryUtil {
 	                	player.drawCard();
 	                }
 	            };
-	            ability.setStackDescription("Horn of Greed - " + player + " draws a card.");
+	            StringBuilder sb = new StringBuilder();
+	            sb.append("Horn of Greed - ").append(player).append(" draws a card.");
+	            ability.setStackDescription(sb.toString());
+	            
 	            AllZone.Stack.add(ability);
 			}
 		}
@@ -4581,7 +4595,10 @@ public class CardFactoryUtil {
     				AllZone.GameAction.moveToHand(c);
     			}
     		};
-    		ability.setStackDescription(c + " - return CARDNAME to its owner's hand.");
+    		StringBuilder sb = new StringBuilder();
+    		sb.append(c).append(" - return CARDNAME to its owner's hand.");
+    		ability.setStackDescription(sb.toString());
+    		
     		AllZone.Stack.add(ability);
     	}
     	if (c.getKeyword().contains("When CARDNAME becomes the target of a spell or ability, destroy CARDNAME.") 
@@ -4594,7 +4611,10 @@ public class CardFactoryUtil {
     				AllZone.GameAction.destroy(c); 	
     			}
     		};
-    		ability.setStackDescription(c + " - destroy CARDNAME.");
+    		StringBuilder sb = new StringBuilder();
+    		sb.append(c).append(" - destroy CARDNAME.");
+    		ability.setStackDescription(sb.toString());
+    		
     		AllZone.Stack.add(ability);
     	}
     	if (c.getKeyword().contains("When CARDNAME becomes the target of a spell or ability, sacrifice it.")) {
@@ -4605,7 +4625,10 @@ public class CardFactoryUtil {
     				AllZone.GameAction.sacrifice(c);	
     			}
     		};
-    		ability.setStackDescription(c + " - sacrifice CARDNAME.");
+    		StringBuilder sb = new StringBuilder();
+    		sb.append(c).append(" - sacrifice CARDNAME.");
+    		ability.setStackDescription(sb.toString());
+    		
     		AllZone.Stack.add(ability);
     	}
     	//}
