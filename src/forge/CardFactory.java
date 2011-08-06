@@ -6946,11 +6946,9 @@ public class CardFactory implements NewConstants {
 
 				@Override
         		public boolean canPlayAI() {
-					Player player = getTargetPlayer();
-        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-        			CardList libList = new CardList(lib.getCards());
-        			CardList list = AllZoneUtil.getCardsInPlay("Painter's Servant");
-        			return libList.size() > 0 && list.size() > 0;
+        			CardList libList = AllZoneUtil.getPlayerCardsInLibrary(AllZone.HumanPlayer);
+        			//CardList list = AllZoneUtil.getCardsInPlay("Painter's Servant");
+        			return libList.size() > 0;// && list.size() > 0;
         		}
 
         		@Override
