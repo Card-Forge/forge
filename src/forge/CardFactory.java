@@ -170,6 +170,38 @@ public class CardFactory implements NewConstants {
     	
     }
     
+    final void copySpellontoStack(Card Source, Card in, boolean CopyDetails) {
+		Card c = AllZone.CardFactory.copyCardintoNew(in);
+		SpellAbility[] sa = c.getSpellAbility();
+		c.setController(Source.getController());
+		if(CopyDetails == true) {
+		c.addXManaCostPaid(in.getXManaCostPaid());
+		c.addMultiKickerMagnitude(in.getMultiKickerMagnitude());
+		if(in.isKicked()) c.setKicked(true);
+		
+		if(c.hasChoices()) {
+			for(int i = 0; i < in.getChoices().size(); i++) {
+				c.addSpellChoice(in.getChoice(i));
+			}
+		}
+		}
+		for(int i = 0; i < sa.length; i++) {
+			if(in.getAbilityUsed() == i) {
+				if(c.isKicked() && !sa[i].isKickerAbility())  {
+			} else {
+				if(in.getSpellAbility()[i].getTargetCard() != null)
+					sa[i].setTargetCard(in.getSpellAbility()[i].getTargetCard());
+				if(in.getSpellAbility()[i].getTargetPlayer() != null) {
+				if(in.getSpellAbility()[i].getTargetPlayer().equals(Constant.Player.Human)
+						|| (in.getSpellAbility()[i].getTargetPlayer().equals(Constant.Player.Computer))) 
+					sa[i].setTargetPlayer(in.getSpellAbility()[i].getTargetPlayer());
+				}
+				AllZone.GameAction.playSpellAbility(sa[i]);
+			}
+			}	
+}   	
+    }
+    
     /*
     final public Card getCard(String cardName, String owner) {
         cardName = AllZone.NameChanger.getOriginalName(cardName);
@@ -7787,36 +7819,7 @@ public class CardFactory implements NewConstants {
 
 				@Override
                 public void resolve() {
-					Card c = copyCardintoNew(getTargetCard());
-					SpellAbility[] sa = c.getSpellAbility();
-					c.setController(card.getController());
-					
-					c.addXManaCostPaid(getTargetCard().getXManaCostPaid());
-					c.addMultiKickerMagnitude(getTargetCard().getMultiKickerMagnitude());
-					if(getTargetCard().isKicked()) c.setKicked(true);
-					c.setCopiedSpell(true);
-					if(c.hasChoices()) {
-						for(int i = 0; i < getTargetCard().getChoices().size(); i++) {
-							c.addSpellChoice(getTargetCard().getChoice(i));
-						}
-					}
-					for(int i = 0; i < sa.length; i++) {
-						if(getTargetCard().getAbilityUsed() == i) {
-							if(c.isKicked() && !sa[i].isKickerAbility())  {
-						} else {
-							if(getTargetCard().getSpellAbility()[i].getTargetCard() != null)
-								sa[i].setTargetCard(getTargetCard().getSpellAbility()[i].getTargetCard());
-							if(getTargetCard().getSpellAbility()[i].getTargetPlayer() != null) {
-							if(getTargetCard().getSpellAbility()[i].getTargetPlayer().equals(Constant.Player.Human)
-									|| (getTargetCard().getSpellAbility()[i].getTargetPlayer().equals(Constant.Player.Computer))) 
-								sa[i].setTargetPlayer(getTargetCard().getSpellAbility()[i].getTargetPlayer());
-							}
-							//TODO Selecting New Targets. Then Apply to storm.
-							AllZone.GameAction.playSpellAbility(sa[i]);
-						}
-						}	
-					}
-					
+					copySpellontoStack(card,getTargetCard(), true);					
 				}
                 
                 public boolean canPlay()
@@ -7839,35 +7842,7 @@ public class CardFactory implements NewConstants {
                 private static final long serialVersionUID = -131686114078716307L;
    				@Override
                     public void resolve() {
-    					Card c = copyCardintoNew(getTargetCard());
-    					SpellAbility[] sa = c.getSpellAbility();
-    					c.setController(card.getController());
-    					
-    					c.addXManaCostPaid(getTargetCard().getXManaCostPaid());
-    					c.addMultiKickerMagnitude(getTargetCard().getMultiKickerMagnitude());
-    					if(getTargetCard().isKicked()) c.setKicked(true);
-    					c.setCopiedSpell(true);
-    					if(c.hasChoices()) {
-    						for(int i = 0; i < getTargetCard().getChoices().size(); i++) {
-    							c.addSpellChoice(getTargetCard().getChoice(i));
-    						}
-    					}
-    					for(int i = 0; i < sa.length; i++) {
-    						if(getTargetCard().getAbilityUsed() == i) {
-    							if(c.isKicked() && !sa[i].isKickerAbility())  {
-    						} else {
-    							if(getTargetCard().getSpellAbility()[i].getTargetCard() != null)
-    								sa[i].setTargetCard(getTargetCard().getSpellAbility()[i].getTargetCard());
-    							if(getTargetCard().getSpellAbility()[i].getTargetPlayer() != null) {
-    							if(getTargetCard().getSpellAbility()[i].getTargetPlayer().equals(Constant.Player.Human)
-    									|| (getTargetCard().getSpellAbility()[i].getTargetPlayer().equals(Constant.Player.Computer))) 
-    								sa[i].setTargetPlayer(getTargetCard().getSpellAbility()[i].getTargetPlayer());
-    							}
-    							//TODO Selecting New Targets. Then Apply to storm.
-    							AllZone.GameAction.playSpellAbility(sa[i]);
-    						}
-    						}	
-    					}
+   					copySpellontoStack(card,getTargetCard(), true);
                         done();
                 }//resolve()
     				
@@ -7964,36 +7939,7 @@ public class CardFactory implements NewConstants {
 
 				@Override
                 public void resolve() {
-					Card c = copyCardintoNew(getTargetCard());
-					SpellAbility[] sa = c.getSpellAbility();
-					c.setController(card.getController());
-					
-					c.addXManaCostPaid(getTargetCard().getXManaCostPaid());
-					c.addMultiKickerMagnitude(getTargetCard().getMultiKickerMagnitude());
-					if(getTargetCard().isKicked()) c.setKicked(true);
-					c.setCopiedSpell(true);
-					if(c.hasChoices()) {
-						for(int i = 0; i < getTargetCard().getChoices().size(); i++) {
-							c.addSpellChoice(getTargetCard().getChoice(i));
-						}
-					}
-					for(int i = 0; i < sa.length; i++) {
-						if(getTargetCard().getAbilityUsed() == i) {
-							if(c.isKicked() && !sa[i].isKickerAbility())  {
-						} else {
-							if(getTargetCard().getSpellAbility()[i].getTargetCard() != null)
-								sa[i].setTargetCard(getTargetCard().getSpellAbility()[i].getTargetCard());
-							if(getTargetCard().getSpellAbility()[i].getTargetPlayer() != null) {
-							if(getTargetCard().getSpellAbility()[i].getTargetPlayer().equals(Constant.Player.Human)
-									|| (getTargetCard().getSpellAbility()[i].getTargetPlayer().equals(Constant.Player.Computer))) 
-								sa[i].setTargetPlayer(getTargetCard().getSpellAbility()[i].getTargetPlayer());
-							}
-							//TODO Selecting New Targets. Then Apply to storm.
-							AllZone.GameAction.playSpellAbility(sa[i]);
-						}
-						}	
-					}
-					
+					copySpellontoStack(card,getTargetCard(), true);				
 				}
                 
                 public boolean canPlay()
@@ -8467,24 +8413,24 @@ public class CardFactory implements NewConstants {
                 public void execute() {
 					String player = AllZone.Phase.getActivePlayer();
 					PlayerZone Play = AllZone.getZone(Constant.Zone.Play, player);
+					Card Minds_D = card;
 					if(player == "Human") AllZone.GameAction.shuffle(card.getController());
                 		CardList MindsList = new CardList(Play.getCards());
                 		MindsList = MindsList.getName("Mind's Desire");
                 		MindsList.remove(card);
-                		if(MindsList.contains(card) == true) {
-                			Play.remove(card);                			                	 
+                		if(MindsList.size() > 0) {
+                			Play.remove(card);   
+                			Minds_D = MindsList.get(0);
                 		} else JOptionPane.showMessageDialog(null, "Click Mind's Desire to see the available cards to play without paying its mana cost.", "", JOptionPane.INFORMATION_MESSAGE);			
         			        PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
         			        CardList libList = new CardList(lib.getCards());
         			        Card c = null;
         			        if(libList.size() > 0) {
         			        	c = libList.get(0);
-        			        }
-        	                if(c != null) {
             			        PlayerZone RFG = AllZone.getZone(Constant.Zone.Removed_From_Play, player);
                                 AllZone.GameAction.moveTo(RFG, c);
-                                card.attachCard(c);  
-        	                }
+                                Minds_D.attachCard(c); 
+        			        }
                                 final Card Minds = card;  
             	            //	AllZone.GameAction.exile(Minds);                         
                                 Command untilEOT = new Command() {
@@ -8513,7 +8459,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
             card.addSpellAbility(freeCast);
         }
-        //*************** END ************ END ************************** 
+        //*************** END ************ END **************************  
         
         //*************** START *********** START **************************
         else if(cardName.equals("Doomsday")) {

@@ -643,6 +643,24 @@ public class GameActionUtil {
 	}
 	
 	public static void playCard_Storm(Card c) {
+		if(c.getKeyword().contains("Storm") && !c.isCopiedSpell())
+		{		
+			final Card StormCard = c;
+			StormCard.removeIntrinsicKeyword("Storm");
+			final int StormNumber  = Phase.StormCount - 1;		
+			final Ability Storm = new Ability(c, "0") {	
+				public void resolve() {
+					for(int i = 0; i < (StormNumber); i++) {
+						AllZone.CardFactory.copySpellontoStack(StormCard,StormCard,true);   	
+				};	// For
+				}
+			};
+			Storm.setStackDescription(c + " - Storm.");
+			AllZone.Stack.add(Storm);			
+		}
+	}
+	/**
+	public static void playCard_Storm(Card c) {
 		if(c.getKeyword().contains("Storm"))
 		{
 
@@ -1035,7 +1053,7 @@ public class GameActionUtil {
 			AllZone.Stack.add(Storm);			
 		}
 	}
-	
+	**/
 	public static void playCard_Vengevine(Card c) {
 		if (c.isCreature() == true && (Phase.PlayerCreatureSpellCount == 2 || Phase.ComputerCreatureSpellCount == 2))
 		{

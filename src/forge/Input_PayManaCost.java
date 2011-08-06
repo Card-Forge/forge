@@ -19,17 +19,20 @@ public class Input_PayManaCost extends Input {
     private final SpellAbility spell;
    
     public Input_PayManaCost(SpellAbility sa) {
-        originalManaCost = sa.getManaCost();
+        originalManaCost = sa.getManaCost(); // Change
         originalCard = sa.getSourceCard();
             
         spell = sa;
         
-        manaCost = new ManaCost(sa.getManaCost());
         if(Phase.GameBegins == 1)  {
         	if(sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
-        		manaCost = new ManaCost("0"); 
+                if(spell.getAfterPayMana() != null) stopSetNext(spell.getAfterPayMana());
+                else {
+                	manaCost = new ManaCost("0"); 
+                    AllZone.Stack.add(spell);
+                }
         	} else {
-        		manaCost = AllZone.GameAction.GetSpellCostChange(sa);   		
+        		manaCost = AllZone.GameAction.GetSpellCostChange(sa); 
         	}    	
         }
     }
@@ -57,6 +60,11 @@ public class Input_PayManaCost extends Input {
     }
     
     private void done() {
+    	if(spell.getSourceCard().isCopiedSpell()) {
+            if(spell.getAfterPayMana() != null) {
+            	stopSetNext(spell.getAfterPayMana());            	
+            } else stopSetNext(new ComputerAI_StackNotEmpty());
+    	} else {
         AllZone.ManaPool.paid();
         resetManaCost();
         
@@ -73,6 +81,7 @@ public class Input_PayManaCost extends Input {
             AllZone.Stack.add(spell);
             stopSetNext(new ComputerAI_StackNotEmpty());
         }
+    }
     }
     
     @Override
