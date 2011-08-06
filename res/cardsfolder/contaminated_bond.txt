@@ -9,4 +9,7 @@ T:Mode$ Blocks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execut
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredController | LifeAmount$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/contaminated_bond.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/61.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/120.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/132.jpg
 End

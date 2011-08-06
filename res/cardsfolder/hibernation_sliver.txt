@@ -8,4 +8,5 @@ SVar:Bounce:AB$ChangeZone | Cost$ PayLife<2> | Defined$ Self | Origin$ Battlefie
 SVar:BuffedBy:Sliver
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hibernation_sliver.jpg
+SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/140.jpg
 End

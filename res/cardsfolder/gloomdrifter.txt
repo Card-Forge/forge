@@ -9,4 +9,5 @@ SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.nonBlack | NumAtt$ 
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gloomdrifter.jpg
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/61.jpg
 End

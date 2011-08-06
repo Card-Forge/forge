@@ -9,5 +9,5 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/juju_bubble.jpg
+SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/147.jpg
 End
-

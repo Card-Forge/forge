@@ -6,4 +6,5 @@ A:SP$PutCounter | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target cre
 SVar:DBPutCounter:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (2) | CounterType$ P1P1 | CounterNum$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elven_rite.jpg
+SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/56.jpg
 End

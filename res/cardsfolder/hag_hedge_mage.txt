@@ -9,4 +9,5 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select ta
 SVar:TrigChangeZone:AB$ChangeZone | Cost$  0 | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0 | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Card.YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hag_hedge_mage.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/123.jpg
 End

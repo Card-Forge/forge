@@ -8,4 +8,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | ValidTgts$ Creature.Green+YouCtrl | TgtPrompt$ Select target green creature | Origin$ Battlefield | Destination$ Hand
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stampeding_wildebeests.jpg
+SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/71.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/300.jpg
 End

@@ -7,4 +7,5 @@ SVar:Buyback:3
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/change_of_heart.jpg
+SetInfo:STH|Common|http://magiccards.info/scans/en/sh/103.jpg
 End

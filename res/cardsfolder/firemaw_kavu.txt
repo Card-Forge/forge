@@ -10,4 +10,5 @@ SVar:TrigDealDamage2pts:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPromp
 SVar:TrigDealDamage4pts:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firemaw_kavu.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/153.jpg
 End

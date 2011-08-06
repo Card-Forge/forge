@@ -7,4 +7,5 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredController | NumDmg$
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heat_of_battle.jpg
+SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/88.jpg
 End

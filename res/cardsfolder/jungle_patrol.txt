@@ -7,4 +7,5 @@ A:AB$ Token | Cost$ 1 G T | TokenAmount$ 1 | TokenName$ Wood | TokenTypes$ Creat
 A:AB$ Mana | Cost$ Sac<1/Permanent.token+namedWood> | CostDesc$ Sacrifice a token named Wood: | Produced$ R | SpellDescription$ Add R to your mana pool.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jungle_patrol.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/121.jpg
 End

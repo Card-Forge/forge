@@ -7,4 +7,5 @@ SVar:Buyback:3
 SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fanning_the_flames.jpg
+SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/80.jpg
 End
