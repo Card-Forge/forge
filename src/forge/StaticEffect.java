@@ -12,15 +12,96 @@ public class StaticEffect {
 	private int			 		xValue				  			= 0;
 	private int					yValue							= 0;
 	
+	//for P/T
+	private HashMap<Card, String> originalPT					= new HashMap<Card, String>();
+	
 	//for types
-	//private ArrayList<String>	types							= new ArrayList<String>();
 	private HashMap<Card, ArrayList<String>> types				= new HashMap<Card, ArrayList<String>>();
+	private HashMap<Card, ArrayList<String>> originalTypes		= new HashMap<Card, ArrayList<String>>();
+	private boolean				overwriteTypes					= false;
+	
 	
 	//for colors
 	private	String				colorDesc 						= "";
 	private	HashMap<Card, Long>	timestamps						= new HashMap<Card, Long>();
 	
+	//original power/toughness
+	public void addOriginalPT(Card c, int power, int toughness) {
+		String pt = power+"/"+toughness;
+		if(!originalPT.containsKey(c)) {
+			originalPT.put(c, pt);
+		}
+	}
 	
+    public int getOriginalPower(Card c) {
+    	int power = -1;
+    	if(originalPT.containsKey(c)) {
+			power = Integer.parseInt(originalPT.get(c).split("/")[0]);
+		}
+    	return power;
+    }
+    
+    public int getOriginalToughness(Card c) {
+    	int tough = -1;
+    	if(originalPT.containsKey(c)) {
+			tough = Integer.parseInt(originalPT.get(c).split("/")[1]);
+		}
+    	return tough;
+    }
+    
+    public void clearAllOriginalPTs() {
+    	originalPT.clear();
+    }
+	
+	//should we overwrite types?
+	public boolean isOverwriteTypes() {
+		return overwriteTypes;
+	}
+
+	public void setOverwriteTypes(boolean overwriteTypes) {
+		this.overwriteTypes = overwriteTypes;
+	}
+
+	//original types
+	public void addOriginalType(Card c, String s) {
+		if(!originalTypes.containsKey(c)) {
+			ArrayList<String> list = new ArrayList<String>();
+			list.add(s);
+			originalTypes.put(c, list);
+		}
+		else originalTypes.get(c).add(s);
+	}
+	
+	public void addOriginalTypes(Card c, ArrayList<String> s) {
+		ArrayList<String> list = new ArrayList<String>(s);
+		if(!originalTypes.containsKey(c)) {
+			originalTypes.put(c, list);
+		}
+		else {
+			originalTypes.remove(c);
+			originalTypes.put(c, list);
+		}
+	}
+    
+    public ArrayList<String> getOriginalTypes(Card c) {
+    	ArrayList<String> returnList = new ArrayList<String>();
+    	if(originalTypes.containsKey(c)) {
+			returnList.addAll(originalTypes.get(c));
+		}
+    	return returnList;
+    }
+    
+    public void clearOriginalTypes(Card c) {
+    	if(originalTypes.containsKey(c)) {
+			originalTypes.get(c).clear();
+		}
+    }
+    
+    public void clearAllOriginalTypes() {
+    	originalTypes.clear();
+    }
+	
+	//statically assigned types
 	public void addType(Card c, String s) {
 		if(!types.containsKey(c)) {
 			ArrayList<String> list = new ArrayList<String>();

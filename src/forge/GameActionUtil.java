@@ -7573,6 +7573,10 @@ public class GameActionUtil {
 		                 	ArrayList<String> types = new ArrayList<String>();
 		                 	if(!k[3].equalsIgnoreCase("no types")) {
 		                 		types.addAll(Arrays.asList(k[3].split(",")));
+		                 		if(types.contains("Overwrite")) {
+		                 			types.remove("Overwrite");
+		                 			se.setOverwriteTypes(true);
+		                 		}
 		                 	}
 		                 	
 		                 	String colors = "";
@@ -7594,15 +7598,21 @@ public class GameActionUtil {
 			String[] keyword = details.split("/", 3);
 			String powerStr = keyword[0];
 			String toughStr = keyword[1];
+			boolean overwriteTypes = se.isOverwriteTypes();
 			
 			for(int i = 0; i < affectedCards.size(); i++) {
 				Card affectedCard = affectedCards.get(i);
 				//copied from stSetPT power/toughness
 				int power = powerStr.matches("[0-9][0-9]?") ? Integer.parseInt(powerStr) : CardFactoryUtil.xCount(affectedCard, powerStr);
 				int toughness = toughStr.matches("[0-9][0-9]?") ? Integer.parseInt(toughStr) : CardFactoryUtil.xCount(affectedCard, toughStr);
+				se.addOriginalPT(affectedCard, affectedCard.getBaseAttack(), affectedCard.getBaseDefense());
 				affectedCard.setBaseAttack(power);
 				affectedCard.setBaseDefense(toughness);
 				
+				if(overwriteTypes) {
+					se.addOriginalTypes(affectedCard, affectedCard.getType());
+					affectedCard.clearAllTypes();
+				}
 				for(String type : types) {
 					if(!affectedCard.isType(type)) {
 						affectedCard.addType(type);
@@ -7655,9 +7665,16 @@ public class GameActionUtil {
 		
 		private void removeStaticEffect(StaticEffect se, Card source, Card affectedCard, String[] details) {
 			
+			affectedCard.setBaseAttack(se.getOriginalPower(affectedCard));
+			affectedCard.setBaseDefense(se.getOriginalToughness(affectedCard));
+			
 			for(String type : se.getTypes(affectedCard)) {
 				affectedCard.removeType(type);
 			}
+			if(se.isOverwriteTypes()) {
+				for(String type : se.getOriginalTypes(affectedCard)) affectedCard.addType(type);
+			}
+			
 			String[] kw = details[2].split("/", 3);
 			if (kw.length > 2) {
 				String kws[] = kw[2].split(" & ");
