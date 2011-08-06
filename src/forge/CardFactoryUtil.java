@@ -1130,6 +1130,7 @@ public class CardFactoryUtil {
         
     }//ability_Unearth()
     
+    /*
     public static SpellAbility ability_Spore_Saproling(final Card sourceCard) {
         final SpellAbility ability = new Ability(sourceCard, "0") {
             @Override
@@ -1167,6 +1168,7 @@ public class CardFactoryUtil {
         
         return ability;
     }//ability_Spore_Saproling()
+    */
     
     public static SpellAbility ability_Morph_Down(final Card sourceCard) {
         final Player player = sourceCard.getController();

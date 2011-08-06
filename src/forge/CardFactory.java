@@ -1959,7 +1959,7 @@ public class CardFactory implements NewConstants {
             }
         }
         */
-        
+        /*
         if(hasKeyword(card, "Remove three spore counters") != -1) {
             int n = hasKeyword(card, "Remove three spore counters");
             if(n != -1) {
@@ -1969,6 +1969,7 @@ public class CardFactory implements NewConstants {
                 card.addSpellAbility(CardFactoryUtil.ability_Spore_Saproling(card));
             }
         }//Spore Saproling
+        */
         
         if (hasKeyword(card, "abAddReflectedMana") != -1) {
         	int n = hasKeyword(card,"abAddReflectedMana");
