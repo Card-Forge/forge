@@ -1,3 +1,8 @@
+Winter Orb
+2
+Artifact
+As long as Winter Orb is untapped, players can't untap more than one land during their untap steps.
+
 Keldon Warlord
 2 R R
 Creature Human Barbarian
