@@ -199,7 +199,7 @@ class CardFactory_Planeswalkers {
             });
             
             ability1.setDescription("+1: Put a 1/1 white Soldier creature token onto the battlefield.");
-            ability1.setStackDescription("Elspeth, Knight-Errant - put 1/1 token onto the battlefield.");
+            ability1.setStackDescription("Elspeth, Knight-Errant - put a 1/1 token onto the battlefield.");
             card.addSpellAbility(ability1);
             
             ability2.setDescription("+1: Target creature gets +3/+3 and gains flying until end of turn.");
