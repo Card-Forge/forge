@@ -1,3 +1,9 @@
+Venerated Teacher
+2 U
+Creature Human Wizard
+When Venerated Teacher enters the battlefield, put two level counters on each creature you control with level up.
+2/2
+
 Knight of Cliffhaven
 1 W
 Creature Kor Knight

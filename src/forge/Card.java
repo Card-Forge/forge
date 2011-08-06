@@ -315,6 +315,10 @@ public class Card extends MyObservable {
         this.updateObservers();
     }
     
+    public boolean hasLevelUp() {
+    	return counters.containsKey(Counters.LEVEL);
+    }
+    
     public String getSVar(String Var) {
         if(SVars.containsKey(Var)) return SVars.get(Var);
         else return "";

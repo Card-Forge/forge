@@ -17312,6 +17312,42 @@ public class CardFactory_Creatures {
             
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Venerated Teacher")) {
+        	/*
+        	 * When Venerated Teacher enters the battlefield, put two level counters
+        	 * on each creature you control with level up.
+        	 */
+        	final Ability ability = new Ability(card, "0") {
+        		
+        		@Override
+        		public void resolve() {
+        			PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+        			CardList level = new CardList(play.getCards());
+        			level = level.filter(new CardListFilter() {
+        				public boolean addCard(Card c) {
+        					return c.hasLevelUp();
+        				}
+        			});
+        			for( int i = 0; i < level.size(); i++ ) {
+        				Card c = level.get(i);
+        				c.addCounter(Counters.LEVEL, 2);
+        			}
+        		}//resolve()
+        	};//Ability
+
+        	Command addLevelCounters = new Command() {
+				private static final long serialVersionUID = 1919112942772054206L;
+
+				public void execute() {
+        			ability.setStackDescription(card.getName()
+        					+ " - Add 2 Level counters to each creature you control with Level up.");
+        			AllZone.Stack.add(ability);
+        		}
+        	};
+        	card.addComesIntoPlayCommand(addLevelCounters);
+        }//*************** END ************ END **************************
+        
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
@@ -17416,6 +17452,9 @@ public class CardFactory_Creatures {
                 card.removeIntrinsicKeyword(parse);
                 card.removeIntrinsicKeyword(parseMax);
                 
+                //slapshot5 - so we know which cards have Level up powers
+                //Card.java now uses this for a hasLevelUp() check
+                card.setCounter(Counters.LEVEL, 0);
                 
                 String k[] = parse.split(":");
                 final String manacost = k[1];
