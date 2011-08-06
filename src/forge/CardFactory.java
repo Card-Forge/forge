@@ -12713,7 +12713,7 @@ public class CardFactory implements NewConstants {
             
             ability.setStackDescription("Counterbalance - " + player
                     + " reveals top card and counters spell if it has the same converted manacost");
-            ability.setBeforePayMana(new Input_PayManaCost(ability));
+            //ability.setBeforePayMana(new Input_PayManaCost(ability));
             card.addSpellAbility(ability);
             
 
