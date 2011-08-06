@@ -2286,8 +2286,7 @@ public class CardFactoryUtil {
                 int Cost = CardUtil.getConvertedManaCost(Manacost);
                 for(int i = 0; i < cards.size(); i++) {
                     if((CardUtil.getConvertedManaCost(cards.get(i).getManaCost()) <= Cost)
-                            && (cards.get(i).getType().contains("Spirit") || cards.get(i).getType().contains(
-                                    "Changeling"))) {
+                            && cards.get(i).isType("Spirit")) {
                         sameCost.add(cards.get(i));
                     }
                 }
