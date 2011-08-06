@@ -368,7 +368,7 @@ public class CombatUtil {
                 || (AllZoneUtil.isCardInPlay("Reverence", c.getController().getOpponent()) && c.getNetAttack() < 3))
         	return false;
         
-        if(c.getKeyword().contains("Defender") && !AllZoneUtil.isCardInPlay("Rolling Stones")) {
+        if(c.getKeyword().contains("Defender") && !(c.isType("Wall") && AllZoneUtil.isCardInPlay("Rolling Stones"))) {
         	return false;
         }
         
