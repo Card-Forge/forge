@@ -21,6 +21,8 @@ public interface NewConstants {
     public static final String FORUM         = "program/forum";
     public static final String VERSION       = "program/version";
     
+    public static final String SHOW2CDECK    = "showdeck/2color";
+    
     public static final String DECKS         = "decks";
     public static final String BOOSTER_DECKS = "booster-decks";
     public static final String NEW_DECKS     = "decks-dir";

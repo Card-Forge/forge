@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Random;
 
 import forge.error.ErrorViewer;
+import forge.properties.ForgeProps;
 
 public class Generate2ColorDeck
 {
@@ -375,7 +376,8 @@ public class Generate2ColorDeck
 		}
 
 		tmpDeck += "DeckSize:" + tDeck.size() + "\n";
-		ErrorViewer.showError(tmpDeck);
+		if (ForgeProps.getProperty("showdeck/2color", "false").equals("true"))
+			ErrorViewer.showError(tmpDeck);
 		
 		return tDeck;
 	}
