@@ -139,6 +139,7 @@ public class Card extends MyObservable {
     private String                       namedCard                         = "";
     private String						 topCardName					   = "";
     private String						 reflectableMana				   = "";
+    private String						cloneOrigin							= "";
     private ArrayList<Card>				gainControlTargets					= new ArrayList<Card>();	
     private ArrayList<Command>			gainControlReleaseCommands			= new ArrayList<Command>();;
     
@@ -308,7 +309,15 @@ public class Card extends MyObservable {
     
     public boolean getSirenAttackOrDestroy() {
     	return sirenAttackOrDestroy;
-    }    
+    }
+    
+    public String getCloneOrigin() {
+    	return cloneOrigin;
+    }
+    
+    public void setCloneOrigin(String name) {
+    	cloneOrigin = name;
+    }
     
     public boolean getSacrificeAtEOT() {
         return sacrificeAtEOT || getKeyword().contains("At the beginning of the end step, sacrifice CARDNAME.");
