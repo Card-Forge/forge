@@ -1,0 +1,11 @@
+Name:Doubtless One
+ManaCost:3 W
+Types:Creature Cleric Avatar
+Text:no text
+PT:*/*
+K:Whenever CARDNAME deals damage, you gain that much life.
+K:stSetPT:Count$Valid Cleric:Count$Valid Cleric:Doubtless One's power and toughness are each equal to the number of Clerics on the battlefield.
+SVar:BuffedBy:Cleric
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/doubtless_one.jpg
+End
