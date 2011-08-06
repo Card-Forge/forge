@@ -7,6 +7,6 @@ K:stSetPT:Count$TypeOnBattlefield.Zombie/Plus.Y:Count$TypeOnBattlefield.Zombie/P
 #SVar:X:Count$TypeOnBattlefield.Zombie/Plus.Y
 SVar:Y:Count$TypeInAllYards.Zombie
 SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soulless_academy.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soulless_one.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/171.jpg
 End

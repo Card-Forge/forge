@@ -2326,6 +2326,7 @@ res/cardsfolder/fault_line.txt -text svneol=native#text/plain
 res/cardsfolder/fault_riders.txt svneol=native#text/plain
 res/cardsfolder/faultgrinder.txt -text svneol=native#text/plain
 res/cardsfolder/fauna_shaman.txt -text svneol=native#text/plain
+res/cardsfolder/favor_of_the_mighty.txt -text svneol=native#text/plain
 res/cardsfolder/favor_of_the_overbeing.txt -text svneol=native#text/plain
 res/cardsfolder/fear.txt -text svneol=native#text/plain
 res/cardsfolder/feast_of_blood.txt -text svneol=native#text/plain

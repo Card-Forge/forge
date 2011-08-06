@@ -5533,6 +5533,50 @@ public class GameActionUtil {
 			}
 		}// execute()
 	};
+
+    public static Command Favor_of_the_Mighty = new Command() {
+        private CardList pumped = new CardList();
+        public void execute() {
+            //Reset old cards
+            for(Card c : pumped)
+            {
+                c.removeIntrinsicKeyword("Protection from white");
+                c.removeIntrinsicKeyword("Protection from blue");
+                c.removeIntrinsicKeyword("Protection from black");
+                c.removeIntrinsicKeyword("Protection from red");
+                c.removeIntrinsicKeyword("Protection from green");
+            }
+            pumped.clear();
+
+            //Find creature(s) with highest cmc
+            int maxCMC = -1;
+            boolean keepLooping = true;
+            CardList creats = AllZoneUtil.getCreaturesInPlay();
+            for(Card c : creats)
+            {
+                if(c.getCMC() > maxCMC)
+                {
+                    pumped.clear();
+                    pumped.add(c);
+                    maxCMC = c.getCMC();
+                }
+                else if(c.getCMC() == maxCMC)
+                {
+                    pumped.add(c);
+                }
+            }
+
+            //Pump new cards
+            for(Card c : pumped)
+            {
+                c.addIntrinsicKeyword("Protection from white");
+                c.addIntrinsicKeyword("Protection from blue");
+                c.addIntrinsicKeyword("Protection from black");
+                c.addIntrinsicKeyword("Protection from red");
+                c.addIntrinsicKeyword("Protection from green");
+            }
+        }
+    };
 	
 	public static Command Koth_Emblem = new Command() {
 
@@ -7433,7 +7477,7 @@ public class GameActionUtil {
 		commands.put("Coat_of_Arms", Coat_of_Arms);
 		commands.put("Conspiracy", Conspiracy);
 		commands.put("Elspeth_Emblem", Elspeth_Emblem);
-		
+		commands.put("Favor_of_the_Mighty",Favor_of_the_Mighty);
 		commands.put("Gaddock_Teeg", Gaddock_Teeg);
 		commands.put("Homarid", Homarid);
 		commands.put("Iona_Shield_of_Emeria", Iona_Shield_of_Emeria);
@@ -7459,7 +7503,7 @@ public class GameActionUtil {
 		
 		///The commands above are in alphabetical order by cardname.
 	}
-	
+
 	public static Command stAnimate = new Command() {
 		/** stAnimate
 		 * Syntax:[ k[0] stAnimate[All][Self][Enchanted] : k[1] AnimateValid : 
