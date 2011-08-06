@@ -294,6 +294,15 @@ public class CardUtil {
         	if (f.exists())
         		return sbKey.toString();
         	
+        	sbKey = new StringBuilder();
+        	
+        	//Really last-ditch effort, forget the picture number
+        	sbKey.append(GuiDisplayUtil.cleanString(card.getImageName()));
+        	
+        	f = new File(path, sbKey.toString() + ".jpg");
+        	if (f.exists())
+        		return sbKey.toString();
+        	
         	//if still no file, download if option enabled?
         }
 

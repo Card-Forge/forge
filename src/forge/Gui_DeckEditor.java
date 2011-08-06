@@ -150,8 +150,12 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
                 filteredOut = filterByType(c);
             }
             
-        	c.setCurSetCode(c.getMostRecentSet());
-            c.setImageFilename(CardUtil.buildFilename(c));
+        	if (c.getCurSetCode().equals(""))
+        	{
+        		c.setCurSetCode(c.getMostRecentSet());
+        		c.setImageFilename(CardUtil.buildFilename(c));
+        	}
+            
 
             if(!filteredOut) {
                 topModel.addCard(c);
@@ -165,6 +169,12 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
             // add rarity to card if this is a sealed card pool
             if(!customMenu.getGameType().equals(Constant.GameType.Constructed)) c.setRarity(pack.getRarity(c.getName()));
             
+        	if (c.getCurSetCode().equals(""))
+        	{
+        		c.setCurSetCode(c.getMostRecentSet());
+        		c.setImageFilename(CardUtil.buildFilename(c));
+        	}
+
             bottomModel.addCard(c);
         }// for
         

@@ -2395,6 +2395,7 @@ public class GameAction {
                 //}
                 if ((card.getSets().size() > 0) && card.getCurSetCode().equals(""))
                 	card.setRandomSetCode();
+                card.setImageFilename(CardUtil.buildFilename(card));
                 
                 AllZone.Computer_Library.add(card);
                 

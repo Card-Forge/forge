@@ -11695,6 +11695,8 @@ public class CardFactory implements NewConstants {
         c.setSVars(sim.getSVars());
         c.setSets(sim.getSets());
         c.setIntrinsicAbilities(sim.getIntrinsicAbilities());
+        c.setCurSetCode(sim.getCurSetCode());
+        c.setImageFilename(sim.getImageFilename());
         
         return c;
     }// copyStats()

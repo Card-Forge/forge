@@ -140,8 +140,12 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardContainer, DeckD
             
             if(addedList.contains(cardName)) c.setRarity("new");
             
-        	c.setCurSetCode(c.getMostRecentSet());
-            c.setImageFilename(CardUtil.buildFilename(c));
+        	if (c.getCurSetCode().equals(""))
+            {	
+        		c.setCurSetCode(c.getMostRecentSet());
+        		c.setImageFilename(CardUtil.buildFilename(c));
+            }
+            
 
             topModel.addCard(c);
         }//for
@@ -150,8 +154,13 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardContainer, DeckD
         for(int i = 0; i < bottom.size(); i++) {
             c = bottom.get(i);
             
-
             c.setRarity(pack.getRarity(c.getName()));;
+
+            if (c.getCurSetCode().equals(""))
+        	{
+        		c.setCurSetCode(c.getMostRecentSet());
+        		c.setImageFilename(CardUtil.buildFilename(c));
+        	}
             
             bottomModel.addCard(c);
         }//for

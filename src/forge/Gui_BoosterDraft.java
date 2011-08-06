@@ -432,6 +432,7 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
             //add rarity to card if this is a sealed card pool
             if(!Constant.Runtime.GameType[0].equals(Constant.GameType.Constructed)) c.setRarity(pack.getRarity(c.getName()));;
             
+            
             deckModel.addCard(c);
         }//for
         
@@ -504,6 +505,13 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
         for(int i = 0; i < list.size(); i++) {
             c = list.get(i);
             c.setRarity(pack.getRarity(c.getName()));
+            
+            if (c.getCurSetCode().equals(""))
+            {
+            	c.setCurSetCode(c.getMostRecentSet());
+            	c.setImageFilename(CardUtil.buildFilename(c));
+            }
+            
             allCardModel.addCard(c);
         }
         allCardModel.resort();

@@ -113,6 +113,14 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
             if(!pack.getRarity(cardName).equals("error")) {
                 c.setRarity(pack.getRarity(cardName));
             }
+            
+        	if (c.getCurSetCode().equals(""))
+        	{
+        		c.setCurSetCode(c.getMostRecentSet());
+        		c.setImageFilename(CardUtil.buildFilename(c));
+        	}
+            
+
             topModel.addCard(c);
             
         }// for
@@ -123,7 +131,13 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
             
             // add rarity to card if this is a sealed card pool
             if(!customMenu.getGameType().equals(Constant.GameType.Constructed)) c.setRarity(pack.getRarity(c.getName()));
-            
+
+        	if (c.getCurSetCode().equals(""))
+        	{
+        		c.setCurSetCode(c.getMostRecentSet());
+        		c.setImageFilename(CardUtil.buildFilename(c));
+        	}
+
             bottomModel.addCard(c);
         }// for
         

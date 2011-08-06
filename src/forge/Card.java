@@ -2975,7 +2975,7 @@ public class Card extends MyObservable {
     	return SetInfoUtil.getMostRecentSet(Sets);
     }
     
-    private String ImageFilename = "none";
+    private String ImageFilename = "";
     
     public void setImageFilename(String iFN)
     {

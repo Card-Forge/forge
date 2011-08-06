@@ -249,6 +249,7 @@ class CardFactory_Planeswalkers {
             card2.addSpellAbility(ability3);
             
             card2.setSVars(card.getSVars());
+            card2.setSets(card.getSets());
             
             return card2;
         }
@@ -496,6 +497,7 @@ class CardFactory_Planeswalkers {
             card2.addSpellAbility(ability3);
             
             card2.setSVars(card.getSVars());
+            card2.setSets(card.getSets());
             
             return card2;
         }
@@ -810,6 +812,7 @@ class CardFactory_Planeswalkers {
             card2.addSpellAbility(ability3);
             
             card2.setSVars(card.getSVars());
+            card2.setSets(card.getSets());
             
             return card2;
         }
@@ -1023,6 +1026,7 @@ class CardFactory_Planeswalkers {
             card2.addSpellAbility(ability3);
             
             card2.setSVars(card.getSVars());
+            card2.setSets(card.getSets());
             
             return card2;
         }
@@ -1253,6 +1257,7 @@ class CardFactory_Planeswalkers {
             card2.addSpellAbility(ability3);
             
             card2.setSVars(card.getSVars());
+            card2.setSets(card.getSets());
             
             return card2;
         }
@@ -1526,6 +1531,7 @@ class CardFactory_Planeswalkers {
             //end ability3
             
             card2.setSVars(card.getSVars());
+            card2.setSets(card.getSets());
             
             return card2;
         }
@@ -1769,6 +1775,7 @@ class CardFactory_Planeswalkers {
             //end ability 3
             
             card2.setSVars(card.getSVars());
+            card2.setSets(card.getSets());
             
             return card2;
         }//*************** END ************ END **************************
@@ -1890,6 +1897,7 @@ class CardFactory_Planeswalkers {
             card2.addSpellAbility(ability3);
             
             card2.setSVars(card.getSVars());
+            card2.setSets(card.getSets());
             
             return card2;
         }//*************** END ************ END **************************
@@ -2135,6 +2143,7 @@ class CardFactory_Planeswalkers {
             card2.addSpellAbility(ability3);
             
             card2.setSVars(card.getSVars());
+            card2.setSets(card.getSets());
             
             return card2;
         }//*************** END ************ END **************************
@@ -2427,6 +2436,7 @@ class CardFactory_Planeswalkers {
             card2.addSpellAbility(ability3);
             
             card2.setSVars(card.getSVars());
+            card2.setSets(card.getSets());
             
             return card2;
         }//*************** END ************ END **************************
@@ -2647,6 +2657,7 @@ class CardFactory_Planeswalkers {
             //end ability 3
             
             card2.setSVars(card.getSVars());
+            card2.setSets(card.getSets());
             
             return card2;
         }//*************** END ************ END **************************    
@@ -2874,6 +2885,7 @@ class CardFactory_Planeswalkers {
             card2.addSpellAbility(ability4);
             
             card2.setSVars(card.getSVars());
+            card2.setSets(card.getSets());
             
             return card2;
         }//*************** END ************ END **************************
@@ -3068,6 +3080,7 @@ class CardFactory_Planeswalkers {
             card2.addSpellAbility(ability3);
             
             card2.setSVars(card.getSVars());
+            card2.setSets(card.getSets());
             
             return card2;
         }//*************** END ************ END **************************
@@ -3269,6 +3282,7 @@ class CardFactory_Planeswalkers {
             card2.addSpellAbility(ability3);
             
             card2.setSVars(card.getSVars());
+            card2.setSets(card.getSets());
             
             return card2;
     	}//*************** END ************ END **************************
@@ -3519,6 +3533,7 @@ class CardFactory_Planeswalkers {
             card2.addSpellAbility(ability3);
             
             card2.setSVars(card.getSVars());
+            card2.setSets(card.getSets());
             
             return card2;
         }
@@ -3782,6 +3797,7 @@ class CardFactory_Planeswalkers {
             card2.addSpellAbility(ability3);
             
             card2.setSVars(card.getSVars());
+            card2.setSets(card.getSets());
             
             return card2;
         }//*************** END ************ END **************************
