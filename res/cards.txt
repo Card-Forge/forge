@@ -13869,13 +13869,6 @@ Radiant, Archangel gets +1/+1 for each creature with flying in play.
 Flying
 Vigilance
 
-Torii Watchward
-4 W
-Creature Spirit
-(NOTE: "Soulshift" not implemented.)
-3/3
-Vigilance
-
 Veteran Armorer
 1 W
 Creature Human Soldier
