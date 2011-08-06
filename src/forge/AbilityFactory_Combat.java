@@ -3,6 +3,10 @@ package forge;
 import java.util.HashMap;
 
 public class AbilityFactory_Combat {
+	//**************************************************************
+	// ****************************** FOG **************************
+	//**************************************************************
+	
 	public static SpellAbility createAbilityFog(final AbilityFactory AF){
 		final SpellAbility abFog = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
 			private static final long serialVersionUID = -1933592438783630254L;
@@ -56,7 +60,7 @@ public class AbilityFactory_Combat {
 
 			@Override
 			public boolean chkAI_Drawback() {
-				return fogCanPlayAI(af, this);
+				return fogPlayDrawbackAI(af, this);
 			}
 			
 		};
