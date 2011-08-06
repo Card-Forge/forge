@@ -4473,6 +4473,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        /* converted to keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Feral Lightning")) {
             SpellAbility spell = new Spell(card) {
@@ -4534,6 +4535,7 @@ public class CardFactory_Sorceries {
             
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
+        */
         
         
         //*************** START *********** START **************************
