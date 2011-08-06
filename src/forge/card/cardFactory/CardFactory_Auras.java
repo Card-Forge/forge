@@ -87,7 +87,7 @@ class CardFactory_Auras {
     	// Enchant land you control:   *************************************
         // *****************************************************************
         
-        /* Converted to generic aura and trigger + AF
+        /* Converted to generic aura + AF
         //*************** START *********** START **************************
         if(cardName.equals("Caribou Range")) {
             
@@ -281,7 +281,7 @@ class CardFactory_Auras {
         }//*************** END ************ END **************************
         */
         
-        /* Converted to generic aura and trigger + AF
+        /* Converted to generic aura + AF
         //*************** START *********** START **************************
         if(cardName.equals("Leafdrake Roost")) {
             
