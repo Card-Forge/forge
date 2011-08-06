@@ -1,3 +1,32 @@
+Cagemail
+1 W
+Enchantment Aura
+Enchanted creature gets +2/+2 and can't attack.
+Enchant creature
+enPumpCurse:+2/+2/This creature can't attack
+
+Cursed Flesh
+B
+Enchantment Aura
+Enchanted creature gets -1/-1 and has fear.
+Enchant creature
+enPump:-1/-1/Fear
+
+Leaden Fists
+2 U
+Enchantment Aura
+Enchanted creature gets +3/+3 and doesn't untap during its controller's untap step.
+Flash
+Enchant creature
+enPumpCurse:+3/+3/This card doesn't untap during your untap step.
+
+Zephyr Net
+1 U
+Enchantment Aura
+Enchanted creature has defender and flying.
+Enchant creature
+enPumpCurse:Defender & Flying
+
 Immolation
 R
 Enchantment Aura

@@ -1589,16 +1589,19 @@ public class CardFactoryUtil {
                 //     then remove creatures with Vigilance from the list
                 
                 if (extKeywords.contains("This card doesn't untap during your untap step.")) {
-                	list = list.filter(new CardListFilter() {
-                	    public boolean addCard(Card c) {
-                	    	return c.isCreature() && !c.getKeyword().contains("Vigilance");
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isCreature() && 
+                                  (c.getKeyword().contains("Vigilance") && c.isTapped()) ||
+                                (! c.getKeyword().contains("Vigilance") && 
+                               ((! c.isTapped() && Power < 1) || c.isTapped()));
                 	    }
                 	});
                 }
                                 
-                //else (if aura is keyword only)
+                //else (if aura is keyword only or is Cagemail)
                 
-                if (Power == 0 && Tough == 0) {    // This aura is keyword only
+                if (Power >= 0 && Tough >= 0) {    // This aura is keyword only or is Cagemail
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c){
                             ArrayList<String> extKeywords = new ArrayList<String>(Arrays.asList(extrinsicKeywords));
@@ -1613,7 +1616,7 @@ public class CardFactoryUtil {
                     
                 }
                 
-                //else aura is power/toughness boost and may have keyword(s)
+                //else aura is power/toughness decrease and may have keyword(s)
                 
                 CardListUtil.sortAttack(list);
                 CardListUtil.sortFlying(list);
