@@ -1175,7 +1175,10 @@ public class CardFactoryUtil {
         };//morph_up
         
         morph_up.setManaCost(cost);
-        morph_up.setDescription(cost + " - turn this card face up.");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Morph ").append(cost).append(" - turn this card face up.");
+        morph_up.setDescription(sb.toString());
+        // morph_up.setDescription("Morph " + cost + " - turn this card face up.");
         morph_up.setStackDescription(sourceCard.getName() + " - turn this card face up.");
         
         return morph_up;
