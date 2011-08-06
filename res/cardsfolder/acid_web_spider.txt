@@ -1,0 +1,10 @@
+Name:Acid Web Spider
+ManaCost:3 G G
+Types:Creature Spider
+Text:no text
+PT:3/5
+K:Reach
+K:etbDestroyTgt:Equipment
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/acid_web_spider.jpg
+End
