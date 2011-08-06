@@ -4007,7 +4007,10 @@ public class CardFactory implements NewConstants {
                                 PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getOwner());
                                 PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, c.getOwner());
                                 removed.remove(c);
+                                if (c.isTapped())
+                                	c.untap();
                                 play.add(c);
+                                
                             }
                         }//resolve()
                     };//SpellAbility

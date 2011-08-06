@@ -193,6 +193,20 @@ public class CardListUtil
 	   list.sort(com);
   }
   
+  public static void sortByName(CardList list)
+  {
+	  Comparator<Card> com = new Comparator<Card>()
+	  {
+		public int compare(Card a, Card b) {
+			String aName = a.getName();
+			String bName = b.getName();
+			
+			return aName.compareTo(bName);
+		}
+		  
+	  };
+	  list.sort(com);
+  }
   
   public static void sortCMC(CardList list)
   {

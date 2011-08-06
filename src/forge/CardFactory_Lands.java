@@ -1699,12 +1699,6 @@ class CardFactory_Lands {
                 private static final long serialVersionUID = 1781653158406511188L;
                 
                 @Override
-                public boolean canPlay() {
-                    if(AllZone.GameAction.isCardInPlay(card)) return true;
-                    else return false;
-                }
-                
-                @Override
                 public void resolve() {
                     CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", card, "G", new String[] {
                             "Creature", "Saproling"}, 1, 1, new String[] {""});
