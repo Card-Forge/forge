@@ -989,18 +989,38 @@ class CardFactory_Auras {
                     CardList list = new CardList(AllZone.Computer_Play.getCards());
                     list = list.getType("Creature");
                     
-                    if(list.isEmpty()) return false;
+                    if (list.isEmpty()) return false;
                     
-                    //else
+                    //else (is there a Rabid Wombat or a Uril, the Miststalker to target?)
+                    
+                    CardList auraMagnetList = new CardList(AllZone.Computer_Play.getCards());
+                    auraMagnetList = auraMagnetList.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                    	    return c.isCreature() && (c.getName().equals("Rabid Wombat") || c.getName().equals("Uril, the Miststalker"));
+                    	}
+                    });
+                    if (! auraMagnetList.isEmpty()) {    // AI has a special target creature(s) to enchant
+                        auraMagnetList.shuffle();
+                        for (int i = 0; i < auraMagnetList.size(); i++) {
+                            if (CardFactoryUtil.canTarget(card, auraMagnetList.get(i))) {
+                                setTargetCard(auraMagnetList.get(i));    // Target only Rabid Wombat or Uril, the Miststalker
+                    	        return true;
+                    	    }
+                    	}
+                    }
+                    //else target another creature
+                    
                     CardListUtil.sortAttack(list);
                     CardListUtil.sortFlying(list);
                     
-                    for(int i = 0; i < list.size(); i++) {
-                        if(CardFactoryUtil.canTarget(card, list.get(i))) {
+                    for (int i = 0; i < list.size(); i++) {
+                        if (CardFactoryUtil.canTarget(card, list.get(i))
+                                && !list.get(i).getKeyword().contains("Vigilance")) {
                             setTargetCard(list.get(i));
                             return true;
                         }
                     }
+                  
                     return false;
                 }//canPlayAI()
                 
