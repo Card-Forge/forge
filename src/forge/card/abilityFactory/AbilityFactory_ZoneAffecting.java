@@ -196,6 +196,7 @@ public class AbilityFactory_ZoneAffecting {
 				return true;
 		}
 		
+		//Don't use draw abilities before main 2 if possible
 		if(AllZone.Phase.isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases"))
         	return false;
 		
@@ -519,6 +520,7 @@ public class AbilityFactory_ZoneAffecting {
 	}
 	
 	public static boolean millCanPlayAI(final AbilityFactory af, SpellAbility sa){
+		HashMap<String,String> params = af.getMapParams();
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
 
@@ -546,6 +548,10 @@ public class AbilityFactory_ZoneAffecting {
 			return false;
 		
 		Random r = MyRandom.random;
+		
+		//Don't use draw abilities before main 2 if possible
+		if(AllZone.Phase.isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases"))
+        	return false;
 		
 		double chance = .4;	// 40 percent chance of milling with instant speed stuff
 		if (AbilityFactory.isSorcerySpeed(sa))
@@ -952,6 +958,7 @@ public class AbilityFactory_ZoneAffecting {
 	}
 	
 	private static boolean discardCanPlayAI(final AbilityFactory af, SpellAbility sa){
+		HashMap<String,String> params = af.getMapParams();
 		// AI cannot use this properly until he can use SAs during Humans turn
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
@@ -1012,6 +1019,10 @@ public class AbilityFactory_ZoneAffecting {
 				source.setSVar("PayX", Integer.toString(cardsToDiscard));
 			}
 		}
+		
+		//Don't use draw abilities before main 2 if possible
+		if(AllZone.Phase.isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases"))
+        	return false;
 		
 		double chance = .5;	// 50 percent chance of discarding with instant speed stuff
 		if (AbilityFactory.isSorcerySpeed(sa))
