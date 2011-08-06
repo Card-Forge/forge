@@ -1,0 +1,11 @@
+Name:Stinkweed Imp
+ManaCost:2 B
+Types:Creature Imp
+Text:no text
+PT:1/2
+K:Flying
+K:Whenever CARDNAME deals combat damage to a creature, destroy that creature.
+K:Dredge 5
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stinkweed_imp.jpg
+End

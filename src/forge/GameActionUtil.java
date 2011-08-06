@@ -5472,8 +5472,8 @@ public class GameActionUtil {
 	        
 	        AllZone.Stack.add(ability2);
     	}
-
-        if( source.hasKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.")) {
+    	
+        if( source.hasStartOfKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature")) {
         	final Card damagedCard = affected;
         	final Ability ability = new Ability(source, "0") {
             	@Override
@@ -5483,6 +5483,23 @@ public class GameActionUtil {
         	StringBuilder sb = new StringBuilder();
         	sb.append(source).append(" - destroy damaged creature.");
         	ability.setStackDescription(sb.toString());
+        	
+        	final Ability abilityWithoutRegen = new Ability(source, "0") {
+            	@Override
+            	public void resolve() { AllZone.GameAction.destroyNoRegeneration(damagedCard); }
+        	};
+        
+        	sb = new StringBuilder();
+        	sb.append(source).append(" - destroy damaged creature. It can't be regenerated");
+        	abilityWithoutRegen.setStackDescription(sb.toString());
+        
+        	int amountWithoutRegeneration = source.getAmountOfKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature. It can't be regenerated.");
+        	int amountWithRegeneration = source.getAmountOfKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature.") - amountWithoutRegeneration;
+        	
+	        for(int i=0 ; i < amountWithRegeneration ; i++)
+	        	AllZone.Stack.add(ability);
+	        for(int i=0 ; i < amountWithoutRegeneration ; i++)
+	        	AllZone.Stack.add(abilityWithoutRegen);
         
         	final Command atEOC = new Command() {
             	private static final long serialVersionUID = 3789617910009764326L;
