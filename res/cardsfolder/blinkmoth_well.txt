@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:tap: add 1
-K:abTapTgt 2 T:Artifact.nonCreature:Tap target noncreature artifact.
+A:AB$Tap | Cost$ 2 T | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | SpellDescription$ Tap target noncreature artifact.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinkmoth_well.jpg
