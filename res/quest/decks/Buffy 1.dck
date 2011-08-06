@@ -2,31 +2,42 @@ Buffy 1
 [general]
 constructed
 [main]
-3 Aggressive Urge
-4 Taiga
-1 Jabari's Banner
-2 Blightspeaker
-3 Boggart Ram-Gang
-2 Threaten
-1 Sorceress Queen
-2 Sengir Vampire
-1 Flying Carpet
-4 Bayou
-1 Regrowth
-2 Bog Imp
-1 Moss Diamond
-1 Arrogant Vampire
-3 Swamp
-3 Sengir Bats
-3 Wildsize
-3 Dakmor Bat
-3 Forest
-4 Badlands
-2 Stone-Throwing Devils
-2 Animate Dead
-1 Fire Diamond
-1 Charcoal Diamond
-2 Raise Dead
-3 Smoldering Butcher
-2 Mountain
+1 Blind Creeper|5DN
+1 Skulking Knight|TSP
+1 Withered Wretch|TSB
+1 Grixis Slavedriver|CFX
+1 Undead Warchief|TSB
+1 Smokespew Invoker|LGN
+19 Swamp|MBS
+1 Null Champion|ROE
+1 Grave Defiler|APC
+1 Wretched Anurid|ONS
+1 Grasp of Darkness|SOM
+4 Verdant Catacombs|ZEN
+1 Unholy Grotto|ONS
+1 Spined Basher|ONS
+1 Legions of Lim-Dul|ICE
+1 Stromgald Crusader|CSP
+1 Dreg Reaver|ALA
+1 Dross Crocodile|10E
+1 Cackling Fiend|USG
+1 Rank and File|ULG
+1 Festering Goblin|10E
+1 Nested Ghoul|MBS
+1 Infectious Horror|CFX
+1 Anurid Murkdiver|ONS
+1 Mass of Ghouls|10E
+1 Aphetto Vulture|ONS
+1 Cadaverous Knight|MIR
+1 Tresserhorn Skyknight|CSP
+1 Waning Wurm|PLC
+2 Cruel Revival|ONS
+1 Feeding Frenzy|ONS
+1 Spineless Thug|10E
+1 Phyrexian Bloodstock|PLS
+1 Infernal Caretaker|LGN
+1 Vengeful Dead|SCG
+1 Bog Raiders|M11
+1 Creakwood Ghoul|EVE
+1 Cyclopean Mummy|LEG
 [sideboard]
