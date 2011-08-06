@@ -4331,15 +4331,17 @@ public class CardFactoryUtil {
     }
     
     public static boolean canHumanPlayLand(){
-    	// LandsToPlay Left or Fastbond in play, Human's turn, Stack is Empty, In Main Phase
-    	return (AllZone.GameInfo.humanNumberLandPlaysLeft() > 0 || CardFactoryUtil.getCards("Fastbond", "Human").size() > 0) &&
-    		Phase.canCastSorcery("Human");
+    	return canPlayerPlayLand(Constant.Player.Human, AllZone.GameInfo.humanNumberLandPlaysLeft());
     }
     
     public static boolean canComputerPlayLand(){
+    	return canPlayerPlayLand(Constant.Player.Computer, AllZone.GameInfo.computerNumberLandPlaysLeft());
+    }
+    
+    public static boolean canPlayerPlayLand(String player, int landPlaysLeft){
     	// LandsToPlay Left or Fastbond in play, Computer's turn, Stack is Empty, In Main Phase
-    	return (AllZone.GameInfo.computerNumberLandPlaysLeft() > 0 || CardFactoryUtil.getCards("Fastbond", "Computer").size() > 0) &&
-			Phase.canCastSorcery("Computer");
+    	return (Phase.canCastSorcery(player) && (landPlaysLeft > 0 || 
+    			CardFactoryUtil.getCards("Fastbond", player).size() > 0));
     }
     
     public static void playLandEffects(Card c){
