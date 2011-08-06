@@ -72,7 +72,7 @@ public class MagicStack extends MyObservable {
 				AllZone.GameAction.moveToStack(source);
 		}
 
-		if (!ability.isTrigger())
+		if (ability.isTrigger())
 			unfreezeStack();
 	}
 
