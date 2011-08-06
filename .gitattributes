@@ -3264,6 +3264,7 @@ res/cardsfolder/minotaur_illusionist.txt -text svneol=native#text/plain
 res/cardsfolder/minotaur_tactician.txt -text svneol=native#text/plain
 res/cardsfolder/minotaur_warrior.txt -text svneol=native#text/plain
 res/cardsfolder/mirari.txt -text svneol=native#text/plain
+res/cardsfolder/miraris_wake.txt svneol=native#text/plain
 res/cardsfolder/mire_blight.txt -text svneol=native#text/plain
 res/cardsfolder/mire_boa.txt -text svneol=native#text/plain
 res/cardsfolder/mire_kavu.txt -text svneol=native#text/plain

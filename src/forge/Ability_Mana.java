@@ -49,6 +49,8 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
 		// change this, once ManaPool moves to the Player
 		// this.getActivatingPlayer().ManaPool.addManaToFloating(origProduced, getSourceCard());
 		AllZone.ManaPool.addManaToFloating(produced, source);
+		
+		System.out.println("Mana produced: "+produced);
 
 		// TODO: all of the following would be better as trigger events "tapped for mana"
 		
@@ -127,6 +129,33 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
 				AllZone.ManaPool.addManaToFloating("G", c);
 			}
         }
+        
+        if(AllZoneUtil.isCardInPlay("Mirari's Wake", source.getController())) {
+        	CardList list = AllZoneUtil.getPlayerCardsInPlay(source.getController(), "Mirari's Wake");
+        	ArrayList<String> colors = new ArrayList<String>();
+    		if(mirariCanAdd("W", produced)) colors.add("W");
+    		if(mirariCanAdd("G", produced)) colors.add("G");
+    		if(mirariCanAdd("U", produced)) colors.add("U");
+    		if(mirariCanAdd("B", produced)) colors.add("B");
+    		if(mirariCanAdd("R", produced)) colors.add("R");
+    		if(colors.size() > 0) {
+    			if(colors.size() == 1) {
+    				AllZone.ManaPool.addManaToFloating(colors.get(0), source);
+    			}
+    			else {
+    				for(int i = 0; i < list.size(); i++) {
+    					String s = (String)AllZone.Display.getChoice("Mirari's Wake"+" - Select a color to add", colors.toArray());
+    					if(s != null) {
+    						AllZone.ManaPool.addManaToFloating(s, source);
+    					}
+    				}
+    			}
+    		}
+        }
+	}
+	
+	private boolean mirariCanAdd(String c, String produced) {
+		return produced.contains(c);
 	}
 	
 	public String mana() { return origProduced; }
