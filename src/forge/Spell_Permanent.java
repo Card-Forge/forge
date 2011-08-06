@@ -192,9 +192,9 @@ public class Spell_Permanent extends Spell {
         	if(list.size() > 0) return false;
         }
         
-        if(card.getType().contains("Creature") && card.getNetDefense() <= 0) {
-        	 return false;
-        }
+        if(card.getType().contains("Creature") && card.getNetDefense() <= 0 && 
+        		!card.hasStartOfKeyword("etbCounter") && !card.getText().contains("Modular"))
+        	return false;
         
         if(willChampion) {
         	Object o = championGetCreature.execute();
