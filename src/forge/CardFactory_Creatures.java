@@ -18265,16 +18265,15 @@ public class CardFactory_Creatures {
             
             Input target = new Input() {
 				private static final long serialVersionUID = -2079490830593191467L;
-				final private int power = card.getNetAttack();
     			public void showMessage() {
-                    AllZone.Display.showMessage("Select target Creature with power less or equal to: "+power);
+                    AllZone.Display.showMessage("Select target Creature with power less or equal to: "+card.getNetAttack());
                     ButtonUtil.enableOnlyCancel();
                  }
                  public void selectButtonCancel() {
                     stop();
                  }
                  public void selectCard(Card c, PlayerZone zone) {
-                	 if(zone.is(Constant.Zone.Play) && c.isCreature() && (c.getNetAttack() <= power)) {
+                	 if(zone.is(Constant.Zone.Play) && c.isCreature() && (c.getNetAttack() <= card.getNetAttack())) {
                 		 ability.setTargetCard(c);
                 		 stopSetNext(new Input_NoCost_TapAbility(ability));
                 	 }
