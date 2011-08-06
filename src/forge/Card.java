@@ -1825,7 +1825,7 @@ public class Card extends MyObservable {
         total += getTempDefenseBoost() + getSemiPermanentDefenseBoost() + getOtherDefenseBoost()
                 + getCounters(Counters.P1P1) + (2*getCounters(Counters.P1P2)) 
                 - getCounters(Counters.M1M1) + getCounters(Counters.P0P1 ) 
-                - getCounters(Counters.P0M1) - (2*getCounters(Counters.P0M2))
+                - (2*getCounters(Counters.P0M2))
                 + (2*getCounters(Counters.P2P2)) - getCounters(Counters.M0M1)
                 - getCounters(Counters.M2M1);
         return total;

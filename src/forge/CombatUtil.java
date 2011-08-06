@@ -2138,7 +2138,7 @@ public class CombatUtil {
 	            }//Jedit
 	            
 	            else if(c.getName().equals("Shield Sphere") && !c.getCreatureBlockedThisCombat()) {
-	                c.addCounter(Counters.P0M1, 1);
+	                c.addCounter(Counters.M0M1, 1);
 	                
 	            }//Shield Sphere
 	            
