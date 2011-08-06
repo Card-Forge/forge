@@ -13368,7 +13368,68 @@ public class CardFactory_Creatures {
             copy.setStackDescription(cardName+" - enters the battlefield as a copy of selected card.");
             copy.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
+        
+        
+        //*************** START ************ START **************************
+        else if(cardName.equals("Nebuchadnezzar")) {
+        	/*
+        	 * X, T: Name a card. Target opponent reveals X cards at random from his or her hand. 
+        	 * Then that player discards all cards with that name revealed this way. 
+        	 * Activate this ability only during your turn.
+        	 */ 
+        	Ability_Cost abCost = new Ability_Cost("X T", cardName, true);
+        	Target target = new Target("Select target opponent", "Opponent".split(","));
+        	Ability_Activated discard = new Ability_Activated(card, abCost, target) {
+				private static final long serialVersionUID = 4839778470534392198L;
+
+				@Override
+        		public void resolve() {
+        			//name a card
+					String choice = JOptionPane.showInputDialog(null, "Name a card", cardName, JOptionPane.QUESTION_MESSAGE);
+					CardList hand = AllZoneUtil.getPlayerHand(getTargetPlayer());
+					int numCards = card.getXManaCostPaid();
+					numCards = Math.min(hand.size(), numCards);
+					
+					CardList revealed = new CardList();
+					for(int i = 0; i < numCards; i++) {
+						Card random = CardUtil.getRandom(hand.toArray());
+						revealed.add(random);
+						hand.remove(random);
+					}
+					if(!revealed.isEmpty()) {
+						AllZone.Display.getChoice("Revealed at random", revealed.toArray());
+					}
+					else {
+						AllZone.Display.getChoice("Revealed at random", new String[] {"Nothing to reveal"});
+					}
+					
+					for(Card c:revealed) {
+						if(c.getName().equals(choice)) c.getController().discard(c, this);
+					}
+        		}
+				
+				@Override
+				public boolean canPlayAI() {
+					return false;
+				}
+        	};
+        	
+        	discard.getRestrictions().setPlayerTurn(true);
+        	
+        	StringBuilder sbDesc = new StringBuilder();
+        	sbDesc.append(abCost).append("Name a card. Target opponent reveals X cards at random from his or her hand. ");
+        	sbDesc.append("Then that player discards all cards with that name revealed this way. ");
+        	sbDesc.append("Activate this ability only during your turn.");
+        	discard.setDescription(sbDesc.toString());
+        	
+        	StringBuilder sbStack = new StringBuilder();
+        	sbStack.append(cardName).append(" - name a card.");
+        	discard.setStackDescription(sbStack.toString());
+        	
+        	card.addSpellAbility(discard);
+        }//*************** END ************ END **************************
                
+        
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
         {
         	int n = hasKeyword(card, "Level up");
