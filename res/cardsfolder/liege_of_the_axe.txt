@@ -1,0 +1,12 @@
+Name:Liege of the Axe
+ManaCost:3 W
+Types:Creature Human Soldier
+Text:no text
+PT:2/3
+K:Vigilance
+K:Morph:1 W
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ When CARDNAME is turned face up, untap it.
+SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/liege_of_the_axe.jpg
+End
