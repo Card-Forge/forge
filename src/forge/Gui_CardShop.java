@@ -211,7 +211,7 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
         ReadBoosterPack pack = new ReadBoosterPack();
         CardList shop;
         
-        if (questData.getShopList().size() == 0)
+        if (questData.getShopList() == null || questData.getShopList().size() == 0)
         {
 	        shop = pack.getShopCards(questData.getWin());
 	        ArrayList<String> shopListToBeSaved = new ArrayList<String>();

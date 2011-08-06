@@ -6362,6 +6362,7 @@ Zephid's Embrace
 Enchantment Aura
 Enchanted creature gets +2/+2 and has flying and shroud.
 Enchant creature
+enPump:+2/+2/Flying & Shroud
 
 Sunastian Falconer
 3 R G
@@ -6419,6 +6420,7 @@ Battle Mastery
 Enchantment Aura
 Enchanted creature has double strike.
 Enchant creature
+enPump:Double Strike
 
 Uncontrollable Anger
 2 R R
@@ -6838,15 +6840,17 @@ Rancor
 G
 Enchantment Aura
 Enchanted creature gets +2/+0 and has trample.
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 Enchant creature
+enPump:+2/+0/Trample
+When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 
 Undying Rage
 2 R
 Enchantment Aura
 Enchanted creature gets +2/+2 and can't block.
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 Enchant creature
+enPump:+2/+2/This creature cannot block
+When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 
 Vedalken Plotter
 2 U
