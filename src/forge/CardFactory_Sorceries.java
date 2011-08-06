@@ -2918,41 +2918,6 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Repay in Kind")) {
-        	final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = -4587825292642224776L;
-
-				@Override
-        		public boolean canPlayAI() {
-        			return AllZone.HumanPlayer.getLife() > AllZone.ComputerPlayer.getLife();
-        		}
-
-        		@Override
-        		public void resolve() {
-        			int humanLife = AllZone.HumanPlayer.getLife();
-        			int compLife = AllZone.ComputerPlayer.getLife();
-        			if( humanLife > compLife ) {
-        				AllZone.HumanPlayer.setLife(compLife, card);
-        			}
-        			else if( compLife > humanLife ) {
-        				AllZone.ComputerPlayer.setLife(humanLife, card);
-        			}
-        			else {
-        				//they must be equal, so nothing to do
-        			}
-        		}
-        	};//SpellAbility
-        	
-        	StringBuilder sb = new StringBuilder();
-        	sb.append(card.getName()).append(" - Each player's life total becomes the lowest life total among all players.");
-        	spell.setStackDescription(sb.toString());
-        	
-        	card.clearSpellAbility();
-        	card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
 
         
         //*************** START *********** START **************************

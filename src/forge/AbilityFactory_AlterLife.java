@@ -878,7 +878,8 @@ public class AbilityFactory_AlterLife {
 		final Card source = sa.getSourceCard();
 		int life = AllZone.ComputerPlayer.getLife();
 		int hlife = AllZone.HumanPlayer.getLife();
-		String amountStr = af.getMapParams().get("LifeAmount");
+		HashMap<String,String> params = af.getMapParams();
+		String amountStr = params.get("LifeAmount");
 
 		if(!ComputerUtil.canPayCost(sa))
 			return false;
@@ -918,6 +919,12 @@ public class AbilityFactory_AlterLife {
 			}
 		}
 		else {
+			if(params.containsKey("Each") && params.get("Defined").equals("Each")) {
+				if(amount == 0) return false;
+				else if(life > amount) { //will decrease computer's life
+					if( life < 5 || ((life - amount) > (hlife - amount))) return false;
+				}
+			}
 			if(amount < life) return false;
 		}
 		

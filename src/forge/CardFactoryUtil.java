@@ -3381,6 +3381,16 @@ public class CardFactoryUtil {
             return 0;
         }
         
+        // Count$HighestLifeTotal
+        if(sq[0].contains("HighestLifeTotal")) {
+            return Math.max(AllZone.HumanPlayer.getLife(), AllZone.ComputerPlayer.getLife());
+        }
+        
+        // Count$LowestLifeTotal
+        if(sq[0].contains("LowestLifeTotal")) {
+            return Math.min(AllZone.HumanPlayer.getLife(), AllZone.ComputerPlayer.getLife());
+        }
+        
         // Count$Chroma.<mana letter>
         if(sq[0].contains("Chroma")) return doXMath(
                 getNumberOfManaSymbolsControlledByColor(sq[1], cardController), m);
