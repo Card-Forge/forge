@@ -5349,7 +5349,9 @@ public class CardFactory_Creatures {
         	
             //mana tap ability
             final SpellAbility ability = new Ability_Activated(card, abCost, null) {
-                @Override
+				private static final long serialVersionUID = 5443609178720006665L;
+
+				@Override
                 public boolean canPlayAI() {
                     Card[] hand = AllZone.Computer_Hand.getCards();
                     return CardFactoryUtil.AI_doesCreatureAttack(card) && (hand.length > 3);
@@ -13294,6 +13296,8 @@ public class CardFactory_Creatures {
                     cloned[0] = cfact.getCard(copyTarget[0].getName(), card.getController());
                     cloned[0].setCloneOrigin(card.getName());
                     cloned[0].addLeavesPlayCommand(leaves);
+                    cloned[0].setCurSetCode(copyTarget[0].getCurSetCode());
+                    cloned[0].setImageFilename(copyTarget[0].getImageFilename());
                     PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     play.add(cloned[0]);
                 }
@@ -13320,6 +13324,7 @@ public class CardFactory_Creatures {
             copy.setStackDescription(cardName+" - enters the battlefield as a copy of selected card.");
             copy.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Quicksilver Gargantuan")) {
