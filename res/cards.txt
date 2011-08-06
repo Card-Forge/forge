@@ -1,3 +1,11 @@
+Kazandu Tuskcaller
+1 G
+Creature Human Shaman
+no text
+1/1
+Level up:1 G
+maxLevel:6
+
 Venerated Teacher
 2 U
 Creature Human Wizard

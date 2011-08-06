@@ -9907,6 +9907,7 @@ public class GameActionUtil {
 				{
 					c.setBaseAttack(1);
 					c.setBaseDefense(1);
+					c.removeIntrinsicKeyword("Flying");
 				}
 				else if ( lcs >=1 && lcs < 3 )
 				{

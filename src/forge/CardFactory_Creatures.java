@@ -17312,6 +17312,53 @@ public class CardFactory_Creatures {
             
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Kazandu Tuskcaller"))
+        {
+        	final Ability_Tap ability = new Ability_Tap(card, "0") {
+                /**
+				 * 
+				 */
+				private static final long serialVersionUID = 5172811502850812588L;
+				@Override
+                public void resolve() {
+                    String controller = card.getController();
+                    CardFactoryUtil.makeToken("Elephant", "G 3 3 Elephant", controller, "G", new String[] {
+                                "Creature", "Elephant"}, 3, 3, new String[] {""});
+                }
+                public boolean canPlay()
+                {
+                	int lcs = card.getCounters(Counters.LEVEL);
+                	return super.canPlay() && lcs >= 2 && lcs <= 5;
+                }
+            };//Ability
+            ability.setDescription("tap: Put a 3/3 green Elephant creature token onto the battlefield.(LEVEL 2-5)");
+            ability.setStackDescription(card + " - Put a 3/3 green Elephant creature token onto the battlefield.");
+            
+            final Ability_Tap ability2 = new Ability_Tap(card, "0") {
+
+				private static final long serialVersionUID = 4795715660485178553L;
+				@Override
+                public void resolve() {
+                    String controller = card.getController();
+                    for (int i=0;i<2;i++)
+                    	CardFactoryUtil.makeToken("Elephant", "G 3 3 Elephant", controller, "G", new String[] {
+                                "Creature", "Elephant"}, 3, 3, new String[] {""});
+                }
+                public boolean canPlay()
+                {
+                	int lcs = card.getCounters(Counters.LEVEL);
+                	return super.canPlay() && lcs >= 6;
+                }
+            };//Ability
+            ability2.setDescription("tap: Put two 3/3 green Elephant creature tokens onto the battlefield.(LEVEL 6+)");
+            ability2.setStackDescription(card + " - Put two 3/3 green Elephant creature tokens onto the battlefield.");
+            
+            card.addSpellAbility(ability);
+            card.addSpellAbility(ability2);
+        
+    	}//*************** END ************ END **************************
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Venerated Teacher")) {
         	/*
@@ -17347,7 +17394,6 @@ public class CardFactory_Creatures {
         	};
         	card.addComesIntoPlayCommand(addLevelCounters);
         }//*************** END ************ END **************************
-        
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
@@ -17452,9 +17498,6 @@ public class CardFactory_Creatures {
                 card.removeIntrinsicKeyword(parse);
                 card.removeIntrinsicKeyword(parseMax);
                 
-                //slapshot5 - so we know which cards have Level up powers
-                //Card.java now uses this for a hasLevelUp() check
-                card.setCounter(Counters.LEVEL, 0);
                 
                 String k[] = parse.split(":");
                 final String manacost = k[1];
