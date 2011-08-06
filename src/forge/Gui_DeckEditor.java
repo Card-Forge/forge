@@ -7,6 +7,7 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
@@ -41,6 +42,8 @@ import javax.swing.event.MouseInputListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileFilter;
+
+import net.miginfocom.swing.MigLayout;
 
 import forge.error.ErrorViewer;
 import forge.gui.game.CardDetailPanel;
@@ -421,19 +424,10 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
             }
         });
         
-        setSize(1024, 768);
-        this.setResizable(false);
-        Dimension screen = getToolkit().getScreenSize();
-        Rectangle bounds = getBounds();
-        bounds.width = 1024;
-        bounds.height = 768;
-        bounds.x = (screen.width - bounds.width) / 2;
-        bounds.y = (screen.height - bounds.height) / 2;
-        setBounds(bounds);
         //TODO use this as soon the deck editor has resizable GUI
-//        //Use both so that when "un"maximizing, the frame isn't tiny
-//        setSize(1024, 740);
-//        setExtendedState(Frame.MAXIMIZED_BOTH);
+        //Use both so that when "un"maximizing, the frame isn't tiny
+        setSize(1024, 740);
+        setExtendedState(Frame.MAXIMIZED_BOTH);
     }//setupAndDisplay()
     
     private String getStats(CardList deck) {
@@ -475,10 +469,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         titledBorder2 = new TitledBorder(border2, "Deck");
         this.getContentPane().setLayout(null);
         jScrollPane1.setBorder(titledBorder1);
-        jScrollPane1.setBounds(new Rectangle(19, 20, 726, 346));
         jScrollPane2.setBorder(titledBorder2);
-        jScrollPane2.setBounds(new Rectangle(19, 458, 726, 218));
-        removeButton.setBounds(new Rectangle(180, 403, 146, 49));
         //removeButton.setIcon(upIcon);
         if(!Gui_NewGame.useLAFFonts.isSelected()) removeButton.setFont(new java.awt.Font("Dialog", 0, 13));
         removeButton.setText("Remove Card");
@@ -495,7 +486,6 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         });
         //addButton.setIcon(downIcon);
         if(!Gui_NewGame.useLAFFonts.isSelected()) addButton.setFont(new java.awt.Font("Dialog", 0, 13));
-        addButton.setBounds(new Rectangle(23, 403, 146, 49));
         
         analysisButton.setText("Deck Analysis");
         analysisButton.addActionListener(new java.awt.event.ActionListener() {
@@ -504,7 +494,6 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
             }
         });
         if(!Gui_NewGame.useLAFFonts.isSelected()) analysisButton.setFont(new java.awt.Font("Dialog", 0, 13));
-        analysisButton.setBounds(new Rectangle(578, 426, 166, 25));
         
         changePictureButton.setText("Change picture...");
         changePictureButton.addActionListener(new java.awt.event.ActionListener() {
@@ -513,7 +502,6 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
             }
         });
         if(!Gui_NewGame.useLAFFonts.isSelected()) changePictureButton.setFont(new java.awt.Font("Dialog", 0, 10));
-        changePictureButton.setBounds(new Rectangle(765, 349, 118, 20));
         
         removePictureButton.setText("Remove picture...");
         removePictureButton.addActionListener(new java.awt.event.ActionListener() {
@@ -522,13 +510,11 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
             }
         });
         if(!Gui_NewGame.useLAFFonts.isSelected()) removePictureButton.setFont(new java.awt.Font("Dialog", 0, 10));
-        removePictureButton.setBounds(new Rectangle(885, 349, 118, 20));
         
         /**
          * Type filtering
          */
         Font f = new Font("Tahoma", Font.PLAIN, 10);
-        landCheckBox.setBounds(340, 400, 48, 20);
         if(!Gui_NewGame.useLAFFonts.isSelected()) landCheckBox.setFont(f);
         landCheckBox.setOpaque(false);
         landCheckBox.addItemListener(new ItemListener() {
@@ -536,7 +522,6 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
                 updateDisplay();
             }
         });
-        creatureCheckBox.setBounds(385, 400, 65, 20);
         if(!Gui_NewGame.useLAFFonts.isSelected()) creatureCheckBox.setFont(f);
         creatureCheckBox.setOpaque(false);
         creatureCheckBox.addItemListener(new ItemListener() {
@@ -544,7 +529,6 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
                 updateDisplay();
             }
         });
-        sorceryCheckBox.setBounds(447, 400, 62, 20);
         if(!Gui_NewGame.useLAFFonts.isSelected()) sorceryCheckBox.setFont(f);
         sorceryCheckBox.setOpaque(false);
         sorceryCheckBox.addItemListener(new ItemListener() {
@@ -552,7 +536,6 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
                 updateDisplay();
             }
         });
-        instantCheckBox.setBounds(505, 400, 60, 20);
         if(!Gui_NewGame.useLAFFonts.isSelected()) instantCheckBox.setFont(f);
         instantCheckBox.setOpaque(false);
         instantCheckBox.addItemListener(new ItemListener() {
@@ -561,7 +544,6 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
                 updateDisplay();
             }
         });
-        planeswalkerCheckBox.setBounds(558, 400, 85, 20);
         if(!Gui_NewGame.useLAFFonts.isSelected()) planeswalkerCheckBox.setFont(f);
         planeswalkerCheckBox.setOpaque(false);
         planeswalkerCheckBox.addItemListener(new ItemListener() {
@@ -569,7 +551,6 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
                 updateDisplay();
             }
         });
-        artifactCheckBox.setBounds(638, 400, 58, 20);
         if(!Gui_NewGame.useLAFFonts.isSelected()) artifactCheckBox.setFont(f);
         artifactCheckBox.setOpaque(false);
         artifactCheckBox.addItemListener(new ItemListener() {
@@ -578,7 +559,6 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
                 updateDisplay();
             }
         });
-        enchantmentCheckBox.setBounds(692, 400, 80, 20);
         if(!Gui_NewGame.useLAFFonts.isSelected()) enchantmentCheckBox.setFont(f);
         enchantmentCheckBox.setOpaque(false);
         enchantmentCheckBox.addItemListener(new ItemListener() {
@@ -591,7 +571,6 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         /**
          * Color filtering
          */
-        whiteCheckBox.setBounds(340, 430, 40, 20);
         whiteCheckBox.setOpaque(false);
         whiteCheckBox.addItemListener(new ItemListener() {
             
@@ -599,7 +578,6 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
                 updateDisplay();
             }
         });
-        blueCheckBox.setBounds(380, 430, 40, 20);
         blueCheckBox.setOpaque(false);
         blueCheckBox.addItemListener(new ItemListener() {
             
@@ -607,7 +585,6 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
                 updateDisplay();
             }
         });
-        blackCheckBox.setBounds(420, 430, 40, 20);
         blackCheckBox.setOpaque(false);
         blackCheckBox.addItemListener(new ItemListener() {
             
@@ -615,7 +592,6 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
                 updateDisplay();
             }
         });
-        redCheckBox.setBounds(460, 430, 40, 20);
         redCheckBox.setOpaque(false);
         redCheckBox.addItemListener(new ItemListener() {
             
@@ -623,7 +599,6 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
                 updateDisplay();
             }
         });
-        greenCheckBox.setBounds(500, 430, 40, 20);
         greenCheckBox.setOpaque(false);
         greenCheckBox.addItemListener(new ItemListener() {
             
@@ -631,7 +606,6 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
                 updateDisplay();
             }
         });
-        colorlessCheckBox.setBounds(540, 430, 40, 20);
         colorlessCheckBox.setOpaque(false);
         colorlessCheckBox.addItemListener(new ItemListener() {
             
@@ -639,55 +613,57 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
                 updateDisplay();
             }
         });
-        detail.setBounds(new Rectangle(765, 23, 239, 323));
-        picture.setBounds(new Rectangle(765, 372, 239, 338));
         picture.addMouseListener(new CustomListener());
         if(!Gui_NewGame.useLAFFonts.isSelected()) statsLabel.setFont(new java.awt.Font("Dialog", 0, 14));
         statsLabel.setText("Total - 0, Creatures - 0 Land - 0");
-        statsLabel.setBounds(new Rectangle(19, 672, 720, 31));
         //Do not lower statsLabel any lower, we want this to be visible at 1024 x 768 screen size
         this.setTitle("Deck Editor");
         jScrollPane3.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane3.setBounds(new Rectangle(6, 168, 225, 143));
-        jPanel3.setBounds(new Rectangle(7, 21, 224, 141));
         jPanel3.setLayout(gridLayout1);
         gridLayout1.setColumns(1);
         gridLayout1.setRows(0);
-        statsLabel2.setBounds(new Rectangle(19, 365, 720, 31));
         statsLabel2.setText("Total - 0, Creatures - 0 Land - 0");
         if(!Gui_NewGame.useLAFFonts.isSelected()) statsLabel2.setFont(new java.awt.Font("Dialog", 0, 14));
         jLabel1.setText("Click on the column name (like name or color) to sort the cards");
-        jLabel1.setBounds(new Rectangle(20, 1, 400, 19));
-        this.getContentPane().add(detail, null);
-        this.getContentPane().add(picture, null);
-        this.getContentPane().add(jScrollPane1, null);
-        this.getContentPane().add(jScrollPane2, null);
-        this.getContentPane().add(addButton, null);
-        this.getContentPane().add(removeButton, null);
-        this.getContentPane().add(analysisButton, null);
-        this.getContentPane().add(changePictureButton, null);
-        this.getContentPane().add(removePictureButton, null);
-        this.getContentPane().add(statsLabel2, null);
-        this.getContentPane().add(statsLabel, null);
-        this.getContentPane().add(jLabel1, null);
+        
+        
+        this.getContentPane().setLayout(new MigLayout("fill"));
+        
+        this.getContentPane().add(jLabel1, "span 3, wrap");
+        
+        this.getContentPane().add(jScrollPane1, "span 2 2, pushy, grow");      
+        this.getContentPane().add(detail, "w 239, h 323, grow, flowy, wrap");
+        this.getContentPane().add(changePictureButton, "align 50% 0%,split 2, flowx");
+        this.getContentPane().add(removePictureButton, "align 50% 0%, wrap");
+        
+        this.getContentPane().add(statsLabel2, "span 2");
+        this.getContentPane().add(picture, "wmin 239, hmin 323, grow, span 1 4, wrap");
+        
+        this.getContentPane().add(addButton, "align 50% 50%, w 146, h 49, sg button, span 1 2, split 2");
+        this.getContentPane().add(removeButton, "w 146, h 49, sg button");
+        
+        this.getContentPane().add(landCheckBox, ", egx checkbox, split 7");
+        this.getContentPane().add(creatureCheckBox, "");
+        this.getContentPane().add(sorceryCheckBox, "");
+        this.getContentPane().add(instantCheckBox, "");
+        this.getContentPane().add(planeswalkerCheckBox, "");
+        this.getContentPane().add(artifactCheckBox, "");
+        this.getContentPane().add(enchantmentCheckBox, "wrap");
+        
+        this.getContentPane().add(whiteCheckBox, "split 7");
+        this.getContentPane().add(blueCheckBox, "");
+        this.getContentPane().add(blackCheckBox, "");
+        this.getContentPane().add(redCheckBox, "");
+        this.getContentPane().add(greenCheckBox, "");
+        this.getContentPane().add(colorlessCheckBox, "");
+        this.getContentPane().add(analysisButton, "wmin 166, hmin 25, wrap");       
+        
+        this.getContentPane().add(jScrollPane2, "span 2, grow, wrap");
+        this.getContentPane().add(statsLabel, "span 2");
+
         jScrollPane2.getViewport().add(bottomTable, null);
         jScrollPane1.getViewport().add(topTable, null);
-        
-        this.getContentPane().add(landCheckBox, null);
-        this.getContentPane().add(creatureCheckBox, null);
-        this.getContentPane().add(sorceryCheckBox, null);
-        this.getContentPane().add(instantCheckBox, null);
-        this.getContentPane().add(planeswalkerCheckBox, null);
-        this.getContentPane().add(artifactCheckBox, null);
-        this.getContentPane().add(enchantmentCheckBox, null);
-        
-        this.getContentPane().add(whiteCheckBox, null);
-        this.getContentPane().add(blueCheckBox, null);
-        this.getContentPane().add(blackCheckBox, null);
-        this.getContentPane().add(redCheckBox, null);
-        this.getContentPane().add(greenCheckBox, null);
-        this.getContentPane().add(colorlessCheckBox, null);
-        
+
         glassPane = new JPanel() {
             private static final long serialVersionUID = 7394924497724994317L;
             
