@@ -18,7 +18,7 @@ public class ReadCard implements Runnable, NewConstants {
     
     public static void main(String args[]) throws Exception {
         try {
-            ReadCard read = new ReadCard(ForgeProps.getFile(CARDS));
+            ReadCard read = new ReadCard(ForgeProps.getFile(CARDSFOLDER));
             
             javax.swing.SwingUtilities.invokeAndWait(read);
             //    read.run();

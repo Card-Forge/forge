@@ -35,7 +35,7 @@ public class TableSorter implements Comparator<Card>, NewConstants
   private HashMap<String, Integer> readCardsTxt()
   {
     HashMap<String, Integer>  map = new HashMap<String, Integer> ();
-    ArrayList<String> list = FileUtil.readFile(ForgeProps.getFile(CARDS));
+    ArrayList<String> list = FileUtil.readFile(ForgeProps.getFile(CARDSFOLDER));
    
     for(int i = 0; i < list.size(); i++)
        map.put(list.get(i).toString().trim(), Integer.valueOf(i));

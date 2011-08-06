@@ -11,7 +11,7 @@ import forge.properties.NewConstants;
 
 public class PrintCardPictures implements NewConstants {
     public static void main(String[] args) throws Exception {
-        ReadCard read = new ReadCard(ForgeProps.getFile(CARDS));
+        ReadCard read = new ReadCard(ForgeProps.getFile(CARDSFOLDER));
         
         //javax.swing.SwingUtilities.invokeAndWait(read);
         read.run();
