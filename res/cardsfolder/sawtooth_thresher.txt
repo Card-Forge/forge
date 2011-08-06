@@ -6,6 +6,6 @@ PT:1/1
 K:Sunburst
 A:AB$Pump | Cost$ SubCounter<2/P1P1> | NumAtt$ 4 | NumDef$ 4 | SpellDescription$ CARDNAME gets +4/+4 until end of turn.
 SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/opaline_bracers.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sawtooth_thresher.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/149.jpg
 End
