@@ -2,11 +2,11 @@
 package forge;
 
 
-public class Player extends MyObservable{
-	private String name;
-	private int poisonCounters;
-	private int life;
-	private int assignedDamage;
+public abstract class Player extends MyObservable{
+	protected String name;
+	protected int poisonCounters;
+	protected int life;
+	protected int assignedDamage;
 	
 	public Player(String myName) {
 		this(myName, 20, 0);
@@ -23,24 +23,11 @@ public class Player extends MyObservable{
 		return name;
 	}
 	
-	public boolean isHuman() {
-		return name.equals("Human");
-	}
+	public abstract boolean isHuman();
+	public abstract boolean isComputer();
+	public abstract boolean isPlayer(Player p1);
 	
-	public boolean isComputer() {
-		return name.equals("Computer");
-	}
-	
-	public boolean isPlayer(Player p1) {
-		return p1.getName().equals(this.name);
-	}
-	
-	public Player getOpponent() {
-		if(isPlayer(AllZone.HumanPlayer)) {
-			return AllZone.ComputerPlayer;
-		}
-		else return AllZone.HumanPlayer;
-	}
+	public abstract Player getOpponent();
 	
 	//////////////////////////
 	//
@@ -203,6 +190,8 @@ public class Player extends MyObservable{
 		//TODO
 		return new CardList();
 	}
+	
+	//public abstract void discard(int n, SpellAbility sa);
 	
 	public String toString() {
 		return name;

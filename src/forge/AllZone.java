@@ -13,8 +13,8 @@ public class AllZone implements NewConstants {
     //only for testing, should read decks from local directory
 //  public static final IO IO = new IO("all-decks");
 	
-	public static final Player					HumanPlayer				= new Player("Human");
-    public static final Player					ComputerPlayer			= new Player("Computer");
+	public static final Player					HumanPlayer				= new HumanPlayer("Human");
+    public static final Player					ComputerPlayer			= new AIPlayer("Computer");
     
     public static QuestData                      QuestData          = null;
     public static Quest_Assignment 			     QuestAssignment    = null;
