@@ -6090,8 +6090,12 @@ public class GameActionUtil {
 					}
 				}
 			};
-			ability2.setStackDescription(c.getName() + " - " + c.getController()
-					+ " puts a goblin into play from his or her hand.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(c.getName()).append(" - ").append(c.getController());
+			sb.append(" puts a goblin into play from his or her hand.");
+			ability2.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability2);
 		}
 	}
@@ -6134,8 +6138,12 @@ public class GameActionUtil {
 					}
 				}
 			};
-			ability2.setStackDescription(c.getName() + " - " + c.getController()
-					+ " puts a goblin into play from his or her hand.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(c.getName()).append(" - ").append(c.getController());
+			sb.append(" puts a goblin into play from his or her hand.");
+			ability2.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability2);
 		}
 	}//warren instigator
@@ -6153,7 +6161,11 @@ public class GameActionUtil {
 				}
 			};
 			opp[0] = c.getController().getOpponent();
-			ability.setStackDescription(c.getName() + " - " + opp[0] + " discards his or her hand.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(c.getName()).append(" - ").append(opp[0]).append(" discards his or her hand.");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}
 	}//nicol bolas
@@ -6174,10 +6186,13 @@ public class GameActionUtil {
 			};// ability2
 
 			player[0] = c.getController();
-			ability2.setStackDescription(c.getName() + " - " + player[0] + " draws a card.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(c.getName()).append(" - ").append(player[0]).append(" draws a card.");
+			ability2.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability2);
 		}
-
 	}
 
 	private static void playerCombatDamage_Augury_Adept(Card c) {
@@ -6206,13 +6221,15 @@ public class GameActionUtil {
 			};// ability2
 
 			player[0] = c.getController();
-			ability2.setStackDescription(c.getName()
-					+ " - "
-					+ player[0]
-					         + " reveals the top card of his library and put that card into his hand. He gain life equal to its converted mana cost.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(c.getName()).append(" - ").append(player[0]);
+			sb.append(" reveals the top card of his library and put that card into his hand. ");
+			sb.append("He gain life equal to its converted mana cost.");
+			ability2.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability2);
 		}
-
 	}
 
 	private static void playerCombatDamage_Hypnotic_Specter(Card c) {
@@ -6231,7 +6248,11 @@ public class GameActionUtil {
 			};// ability
 
 			opponent[0] = player[0].getOpponent();
-			ability.setStackDescription("Hypnotic Specter - " + opponent[0] + " discards a card at random");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Hypnotic Specter - ").append(opponent[0]).append(" discards a card at random");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}
 	}
@@ -6280,7 +6301,11 @@ public class GameActionUtil {
 				}
 			};// ability
 			opponent[0] = player[0].getOpponent();
-			ability.setStackDescription("Silent Specter - " + opponent[0] + " discards two cards");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Silent Specter - ").append(opponent[0]).append(" discards two cards");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}
 	}
@@ -6321,7 +6346,11 @@ public class GameActionUtil {
 			};// ability
 
 			opponent[0] = player[0].getOpponent();
-			ability.setStackDescription("Abyssal Specter - " + opponent[0] + " discards a card");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Abyssal Specter - ").append(opponent[0]).append(" discards a card");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}
 	}
