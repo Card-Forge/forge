@@ -8787,6 +8787,46 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
+      
+        //*************** START *********** START **************************
+        else if(cardName.equals("Gore Vassal")) {
+        	Ability_Cost abCost = new Ability_Cost("Sac<1/CARDNAME>", cardName, true);
+        	final Ability_Activated ability = new Ability_Activated(card, abCost, new Target(card, "TgtC")) {
+        		private static final long serialVersionUID = 3689290210743241201L;
+
+        		@Override
+        		public boolean canPlayAI() {
+        			return false;
+        		}
+
+        		@Override
+        		public void resolve() {
+        			final Card target = getTargetCard();
+
+        			if(AllZoneUtil.isCardInPlay(target) && CardFactoryUtil.canTarget(card, target)) {
+        				target.addCounter(Counters.M1M1, 1);
+        				if(target.getNetDefense() >= 1) {
+        					target.addShield();
+        					AllZone.EndOfTurn.addUntil(new Command() {
+        						private static final long serialVersionUID = -3332692040606224591L;
+
+        						public void execute() {
+        							target.resetShield();
+        						}
+        					});
+        				}
+        			}
+        		}//resolve()
+        	};//SpellAbility
+            
+            card.addSpellAbility(ability);
+            ability.setDescription(abCost+"Put a -1/-1 counter on target creature. Then if that creature's toughness is 1 or greater, regenerate it.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(cardName).append(" put a -1/-1 counter on target creature.");
+            ability.setStackDescription(sb.toString());
+        }//*************** END ************ END **************************
+        
         
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
         {

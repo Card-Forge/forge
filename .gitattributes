@@ -2524,6 +2524,7 @@ res/cardsfolder/golgari_thug.txt -text svneol=native#text/plain
 res/cardsfolder/goliath_beetle.txt -text svneol=native#text/plain
 res/cardsfolder/goliath_sphinx.txt -text svneol=native#text/plain
 res/cardsfolder/goliath_spider.txt -text svneol=native#text/plain
+res/cardsfolder/gore_vassal.txt svneol=native#text/plain
 res/cardsfolder/goretusk_firebeast.txt -text svneol=native#text/plain
 res/cardsfolder/gorger_wurm.txt -text svneol=native#text/plain
 res/cardsfolder/gorgon_flail.txt -text svneol=native#text/plain
