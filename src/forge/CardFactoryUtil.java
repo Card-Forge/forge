@@ -2783,7 +2783,7 @@ public class CardFactoryUtil
     
      String d[] = DB.split("/");
      int X = 0;
-     if (d.length > 0)
+     if (d.length > 1)
     	 if (d[1].matches("dX")) // 2/10
     	 {
     		 String dX = Src.getSVar(d[1]);
