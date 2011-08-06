@@ -185,6 +185,15 @@ public class TriggerHandler {
 		
 		return mapParams;
 	}
+
+    public void registerDelayedTrigger(Trigger trig)
+    {
+        delayedTriggers.add(trig);
+
+        String mode = trig.getMapParams().get("Mode");
+        if(!registeredModes.contains(mode))
+            registeredModes.add(mode);
+    }
 	
 	public void registerTrigger(Trigger trig)
 	{
@@ -934,7 +943,7 @@ public class TriggerHandler {
                     {
                         String SVarName = regtrig.getMapParams().get("DelayedTrigger");
                         Trigger deltrig = parseTrigger(regtrig.getHostCard().getSVar(SVarName),regtrig.getHostCard());
-                        delayedTriggers.add(deltrig);
+                        registerDelayedTrigger(deltrig);
                     }
 				}
 			};
