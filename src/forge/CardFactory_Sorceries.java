@@ -3744,8 +3744,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public boolean canPlayAI() {
-                    Player player = getTargetPlayer();
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
                     CardList libList = new CardList(lib.getCards());
                     return libList.size() > 0;
                 }
@@ -3767,6 +3766,8 @@ public class CardFactory_Sorceries {
                     }
                 }
             };//SpellAbility
+            
+            spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
             card.clearSpellAbility();
             card.addSpellAbility(spell);
