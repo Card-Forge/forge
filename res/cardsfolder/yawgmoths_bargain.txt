@@ -2,7 +2,7 @@ Name:Yawgmoth's Bargain
 ManaCost:4 B B
 Types:Enchantment
 Text:Skip your draw step.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/yawgmoths_bargain.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/yawgmoths_bargain.jpg
 End

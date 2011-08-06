@@ -3,7 +3,7 @@ ManaCost:5 B B
 Types:Sorcery
 Text:no text
 K:spDiscardTgt:Hand:0:Target player discards his or her hand.:Wit's End - target player discards cards
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card107562.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card107562.jpg
 End

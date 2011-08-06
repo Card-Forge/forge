@@ -2,6 +2,6 @@ Name:Underworld Dreams
 ManaCost:B B B
 Types:Enchantment
 Text:Whenever an opponent draws a card, Underworld Dreams deals 1 damage to him or her.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/underworld_dreams.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/underworld_dreams.jpg
 End

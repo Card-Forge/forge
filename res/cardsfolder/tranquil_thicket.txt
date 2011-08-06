@@ -5,6 +5,6 @@ Text:no text
 K:Comes into play tapped.
 K:tap: add G
 K:Cycling:G
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_thicket.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_thicket.jpg
 End

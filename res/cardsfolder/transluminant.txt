@@ -3,6 +3,6 @@ ManaCost:1 G
 Types:Creature Dryad Shaman
 Text:no text
 PT:2/2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87946.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87946.jpg
 End

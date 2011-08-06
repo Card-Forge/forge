@@ -4,6 +4,6 @@ Types:Creature Kraken
 Text:no text
 PT:6/6
 K:Unblockable
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83301.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83301.jpg
 End

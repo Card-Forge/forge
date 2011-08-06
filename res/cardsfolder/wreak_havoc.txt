@@ -4,6 +4,6 @@ Types:Sorcery
 Text:Wreak Havoc can't be countered by spells or abilities. Destroy target artifact or land.
 K:spDestroyTgt:Artifact,Land
 K:CARDNAME can't be countered.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wreak_havoc.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wreak_havoc.jpg
 End

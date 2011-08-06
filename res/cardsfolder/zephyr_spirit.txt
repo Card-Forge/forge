@@ -4,6 +4,6 @@ Types:Creature Spirit
 Text:no text
 PT:0/6
 K:WheneverKeyword:Blocks:Self:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:No Special Condition:When Zephyr Spirit blocks, return it to its owner's hand.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/zephyr_spirit.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/zephyr_spirit.jpg
 End

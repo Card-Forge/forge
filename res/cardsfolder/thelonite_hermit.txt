@@ -4,6 +4,6 @@ Types:Creature Elf Shaman
 Text:Saproling creatures get +1/+1.\r\nWhen Thelonite Hermit is turned face up, put four 1/1 green Saproling creature tokens into play.
 PT:1/1
 K:Morph:3 G G
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/thelonite_hermit.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thelonite_hermit.jpg
 End

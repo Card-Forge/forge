@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Land
 Text:CARDNAME enters the battlefield with one charge counter on it.
 K:tap: add 1
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tendo_ice_bridge.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tendo_ice_bridge.jpg
 End

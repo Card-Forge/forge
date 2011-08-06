@@ -6,7 +6,7 @@ K:tap: add 1
 K:1, tap: add U
 K:2, tap: add W
 K:2, tap: add B
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wizards_school.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wizards_school.jpg
 End

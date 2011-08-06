@@ -3,6 +3,6 @@ ManaCost:2
 Types:Artifact Equipment
 Text:Equipped creature has nonbasic landwalk.
 K:eqPump 2:Nonbasic landwalk
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/trailblazers_boots.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/trailblazers_boots.jpg
 End

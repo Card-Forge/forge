@@ -4,6 +4,6 @@ Types:Creature Fungus
 Text:no text
 PT:1/1
 K:WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:MakeToken-Saproling-G-1-1-None-/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Tukatongue Thallid is put into a graveyard from the battlefield, put a 1/1 green Saproling creature token onto the battlefield.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tukatongue_thallid.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tukatongue_thallid.jpg
 End

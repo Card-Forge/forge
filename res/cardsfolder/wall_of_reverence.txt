@@ -5,6 +5,6 @@ Text:At the beginning of your end step, you may gain life equal to the power of 
 PT:1/6
 K:Defender
 K:Flying
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_reverence.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_reverence.jpg
 End

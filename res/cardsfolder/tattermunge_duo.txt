@@ -3,7 +3,7 @@ ManaCost:2 RG
 Types:Creature Goblin Warrior Shaman
 Text:Whenever you cast a red spell, Tattermunge Duo gets +1/+1 until end of turn.\r\nWhenever you cast a green spell, Tattermunge Duo gains forestwalk until end of turn.
 PT:2/3
-K:SVar:BuffedBy:Spell.Red,Spell.Green
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tattermunge_duo.jpg
+SVar:BuffedBy:Spell.Red,Spell.Green
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tattermunge_duo.jpg
 End

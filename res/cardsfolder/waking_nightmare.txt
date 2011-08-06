@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Sorcery Arcane
 Text:no text
 K:spDiscardTgt:TgtChoose:2:Target player discards two cards.:Waking Nightmare - target player discards cards
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/waking_nightmare.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/waking_nightmare.jpg
 End

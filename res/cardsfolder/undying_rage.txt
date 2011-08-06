@@ -5,6 +5,6 @@ Text:Enchanted creature gets +2/+2 and can't block.
 K:Enchant creature
 K:enPump:+2/+2/CARDNAME can't block.
 K:When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/undying_rage.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/undying_rage.jpg
 End

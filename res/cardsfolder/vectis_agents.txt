@@ -4,6 +4,6 @@ Types:Artifact Creature Human Rogue
 Text:no text
 PT:4/3
 K:abPump U B:-2/-0/Unblockable
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vectis_agents.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vectis_agents.jpg
 End

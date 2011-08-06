@@ -4,6 +4,6 @@ Types:Legendary Creature Dragon
 Text:Whenever Vorosh, the Hunter deals combat damage to a player, you may pay 2 G. If you do, put six +1/+1 counters on Vorosh.
 PT:6/6
 K:Flying
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vorosh_the_hunter.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vorosh_the_hunter.jpg
 End

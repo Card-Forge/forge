@@ -5,6 +5,6 @@ Text:no text
 K:tap: add 1
 K:paintap:1:B
 K:paintap:1:R
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/talisman_of_indulgence.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/talisman_of_indulgence.jpg
 End

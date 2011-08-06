@@ -5,6 +5,6 @@ Text:no text
 PT:3/4
 K:abPump R:+1/-1
 K:Unearth:2 B
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_leotau.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_leotau.jpg
 End

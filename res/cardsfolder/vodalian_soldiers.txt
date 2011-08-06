@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Creature Merfolk Soldier
 Text:no text
 PT:1/2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/fe/en-us/card1901.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/fe/en-us/card1901.jpg
 End

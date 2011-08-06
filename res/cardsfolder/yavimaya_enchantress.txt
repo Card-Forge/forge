@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Human Druid
 Text:Yavimaya Enchantress gets +1/+1 for each Enchantment in play.
 PT:2/2
-K:SVar:BuffedBy:Enchantment
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_enchantress.jpg
+SVar:BuffedBy:Enchantment
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_enchantress.jpg
 End

@@ -4,6 +4,6 @@ Types:Sorcery
 Text:Return target permanent to its owner's hand.
 K:spBounceTgt:Permanent:Hand
 K:Storm
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_fissure.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_fissure.jpg
 End

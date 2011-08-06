@@ -4,6 +4,6 @@ Types:Creature Insect
 Text:Red spells and white spells you cast cost 1 less to cast.
 PT:2/1
 K:CostChange:Player:Less:1:Spell:red/white:All:OnlyOneBonus
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/thornscape_familiar.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thornscape_familiar.jpg
 End

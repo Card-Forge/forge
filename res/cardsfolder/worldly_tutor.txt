@@ -2,6 +2,6 @@ Name:Worldly Tutor
 ManaCost:G
 Types:Instant
 Text:Search your library for a creature card and reveal that card. Shuffle your library, then put the revealed card back on top of it.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/mi/en-us/card3424.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/mi/en-us/card3424.jpg
 End

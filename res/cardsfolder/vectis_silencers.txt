@@ -4,6 +4,6 @@ Types:Artifact Creature Human Rogue
 Text:no text
 PT:1/2
 K:abPump 2 B:Deathtouch
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vectis_silencers.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vectis_silencers.jpg
 End

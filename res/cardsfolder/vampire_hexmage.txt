@@ -4,6 +4,6 @@ Types:Creature Vampire Shaman
 Text:Sacrifice Vampire Hexmage: Remove all counters from target permanent.
 PT:2/1
 K:First Strike
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_hexmage.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_hexmage.jpg
 End

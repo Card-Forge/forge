@@ -5,6 +5,6 @@ Text:At the beginning of your upkeep, put a spore counter on Thallid Shell-Dwell
 PT:0/5
 K:Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
 K:Defender
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/thallid_shell_dweller.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thallid_shell_dweller.jpg
 End

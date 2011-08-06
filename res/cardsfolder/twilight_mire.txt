@@ -6,7 +6,7 @@ K:tap: add 1
 K:BG, tap: add B B
 K:BG, tap: add B G
 K:BG, tap: add G G
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/twilight_mire.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/twilight_mire.jpg
 End

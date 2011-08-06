@@ -3,6 +3,6 @@ ManaCost:2 W W
 Types:Sorcery
 Text:Destroy all creatures. They can't be regenerated.
 K:spDestroyAll:Creature:NoRegen
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83339.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83339.jpg
 End

@@ -5,6 +5,6 @@ Text:no text
 PT:1/1
 K:Flying
 K:abPumpTgtC T:Flying
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wind_dancer.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wind_dancer.jpg
 End

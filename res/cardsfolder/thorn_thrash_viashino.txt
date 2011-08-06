@@ -5,6 +5,6 @@ Text:no text
 PT:2/2
 K:abPump G:Trample
 K:Devour:2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/thorn_thrash_viashino.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thorn_thrash_viashino.jpg
 End

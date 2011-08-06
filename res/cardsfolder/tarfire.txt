@@ -3,6 +3,6 @@ ManaCost:R
 Types:Tribal Instant Goblin
 Text:no text
 K:spDamageTgtCP:2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tarfire.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tarfire.jpg
 End

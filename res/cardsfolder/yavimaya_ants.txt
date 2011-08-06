@@ -6,6 +6,6 @@ PT:5/1
 K:Trample
 K:Haste
 K:Cumulative upkeep:G G
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_ants.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_ants.jpg
 End

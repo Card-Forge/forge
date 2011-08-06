@@ -3,7 +3,7 @@ ManaCost:1 BG
 Types:Creature Shapeshifter
 Text:Whenever you cast a spell that's both black and green, Woodlurker Mimic becomes 4/5 and gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)
 PT:2/1
-K:SVar:BuffedBy:Spell.Black+Green
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/Woodlurker_Mimic.jpg
+SVar:BuffedBy:Spell.Black+Green
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/Woodlurker_Mimic.jpg
 End

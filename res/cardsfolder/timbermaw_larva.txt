@@ -3,6 +3,6 @@ ManaCost:3 G
 Types:Creature Beast
 Text:Whenever Timbermaw Larva attacks, it gets +1/+1 until end of turn for each Forest you control.
 PT:2/2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/timbermaw_larva.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/timbermaw_larva.jpg
 End

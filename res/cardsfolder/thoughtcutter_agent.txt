@@ -3,6 +3,6 @@ ManaCost:U B
 Types:Artifact Creature Human Rogue
 Text:no text
 PT:1/1
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://magic.tcgplayer.com/db/cards/16857.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://magic.tcgplayer.com/db/cards/16857.jpg
 End

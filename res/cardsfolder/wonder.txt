@@ -4,6 +4,6 @@ Types:Creature Incarnation
 Text:As long as Wonder is in your graveyard and you control an Island, creatures you control have Flying.
 PT:2/2
 K:Flying
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wonder.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wonder.jpg
 End

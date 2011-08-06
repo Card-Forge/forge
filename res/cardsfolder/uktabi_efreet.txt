@@ -4,6 +4,6 @@ Types:Creature Efreet
 Text:no text
 PT:5/4
 K:Cumulative upkeep:G
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/uktabi_efreet.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/uktabi_efreet.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Boar
 Text:no text
 PT:3/2
 K:Swampwalk
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card16458.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card16458.jpg
 End

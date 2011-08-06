@@ -4,6 +4,6 @@ Types:Creature Ape
 Text:no text
 PT:1/1
 K:Reach
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84665.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84665.jpg
 End

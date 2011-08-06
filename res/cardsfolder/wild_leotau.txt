@@ -4,6 +4,6 @@ Types:Creature Cat
 Text:no text
 PT:5/4
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay:G
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_leotau.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_leotau.jpg
 End

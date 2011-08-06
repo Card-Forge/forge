@@ -4,6 +4,6 @@ Types:Legendary Creature Goblin
 Text:When Tuktuk the Explorer is put into a graveyard from the battlefield, put a legendary 5/5 colorless Goblin Golem artifact creature token named Tuktuk the Returned onto the battlefield.
 PT:1/1
 K:Haste
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tuktuk_the_explorer.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tuktuk_the_explorer.jpg
 End

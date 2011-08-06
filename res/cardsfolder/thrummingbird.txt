@@ -5,6 +5,6 @@ Text:no text
 PT:1/1
 K:Flying
 K:Whenever CARDNAME deals combat damage to a player, proliferate.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://serv3.tcgimages.eu/img/cards/Scars_of_Mirrodin/thrummingbird.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://serv3.tcgimages.eu/img/cards/Scars_of_Mirrodin/thrummingbird.jpg
 End

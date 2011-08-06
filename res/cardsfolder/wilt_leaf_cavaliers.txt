@@ -4,6 +4,6 @@ Types:Creature Elf Knight
 Text:no text
 PT:3/4
 K:Vigilance
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.magickartenmarkt.de/img/cards/Shadowmoor/wilt_leaf_cavaliers.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.magickartenmarkt.de/img/cards/Shadowmoor/wilt_leaf_cavaliers.jpg
 End

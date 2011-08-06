@@ -3,6 +3,6 @@ ManaCost:4 U U
 Types:Sorcery
 Text:Return all permanents to their owners' hands.
 K:spBounceAll:Permanent:Hand
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/upheaval.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/upheaval.jpg
 End

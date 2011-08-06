@@ -5,6 +5,6 @@ Text:no text
 PT:4/1
 K:Defender
 K:First Strike
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_razors.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_razors.jpg
 End

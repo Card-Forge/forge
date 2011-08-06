@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Creature Merfolk
 Text:When Whirlpool Rider comes into play, shuffle the cards from your hand into your library, then draw that many cards.
 PT:1/1
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card27670.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card27670.jpg
 End

@@ -4,6 +4,6 @@ Types:Sorcery
 Text:no text
 K:spPumpTgt:Unblockable
 K:Draw a card.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/touch_of_invisibility.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/touch_of_invisibility.jpg
 End

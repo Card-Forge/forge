@@ -3,6 +3,6 @@ ManaCost:1 B
 Types:Creature Human Soldier
 Text:When Wei Ambush Force attacks, it gets +2/+0 until the end of the turn.
 PT:1/1
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Three_Kingdoms/wei_ambush_force.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Three_Kingdoms/wei_ambush_force.jpg
 End

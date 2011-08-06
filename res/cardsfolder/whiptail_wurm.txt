@@ -3,6 +3,6 @@ ManaCost:6 G
 Types:Creature Wurm
 Text:no text
 PT:8/5
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20230.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20230.jpg
 End

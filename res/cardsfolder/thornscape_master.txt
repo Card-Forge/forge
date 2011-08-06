@@ -9,6 +9,6 @@ K:abPumpTgtC W W T:Protection from blue
 K:abPumpTgtC W W T:Protection from black
 K:abPumpTgtC W W T:Protection from red
 K:abPumpTgtC W W T:Protection from green
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/thornscape_master.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thornscape_master.jpg
 End

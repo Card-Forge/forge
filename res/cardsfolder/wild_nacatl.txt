@@ -3,6 +3,6 @@ ManaCost:G
 Types:Creature Cat Warrior
 Text:Wild Nacatl gets +1/+1 as long as you control a Mountain. Wild Nacatl gets +1/+1 as long as you control a Plains.
 PT:1/1
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_nacatl.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_nacatl.jpg
 End

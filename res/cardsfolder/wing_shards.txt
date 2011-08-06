@@ -3,6 +3,6 @@ ManaCost:1 W W
 Types:Instant
 Text:Target player sacrifices an attacking creature.
 K:Storm
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wing_shards.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wing_shards.jpg
 End

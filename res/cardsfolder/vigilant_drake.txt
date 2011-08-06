@@ -5,6 +5,6 @@ Text:no text
 PT:3/3
 K:Flying
 K:Untap:2 U
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vigilant_drake.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vigilant_drake.jpg
 End

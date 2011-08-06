@@ -3,6 +3,6 @@ ManaCost:B R
 Types:Instant
 Text:Destroy target creature. It can't be regenerated.
 K:spDestroyTgt:Creature:NoRegen
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/terminate.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/terminate.jpg
 End

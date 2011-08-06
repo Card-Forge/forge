@@ -6,6 +6,6 @@ PT:1/1
 K:tap: add U
 K:tap: add B
 K:tap: add G
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card26717.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card26717.jpg
 End

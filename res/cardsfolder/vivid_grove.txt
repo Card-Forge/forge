@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Land
 Text:CARDNAME enters the battlefield tapped with two charge counters on it.
 K:tap: add G
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vivid_grove.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vivid_grove.jpg
 End

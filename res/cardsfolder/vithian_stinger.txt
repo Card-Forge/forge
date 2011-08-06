@@ -5,6 +5,6 @@ Text:no text
 PT:0/1
 K:abDamageTgtCP T:1
 K:Unearth:1 R
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vithian_stinger.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vithian_stinger.jpg
 End

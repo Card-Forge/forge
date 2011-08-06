@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Artifact Land
 Text:(Tree of Tales isn't a spell.)
 K:tap: add G
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tree_of_tales.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tree_of_tales.jpg
 End

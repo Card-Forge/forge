@@ -4,8 +4,8 @@ Types:Creature Elf
 Text:no text
 PT:1/1
 K:abGainLife T:X:You gain 1 life for each Elf on the battlefield.:Wellwisher - you gain life
-K:SVar:X:Count$TypeOnBattlefield.Elf
-K:SVar:BuffedBy:Elf
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39497.jpg
+SVar:X:Count$TypeOnBattlefield.Elf
+SVar:BuffedBy:Elf
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39497.jpg
 End

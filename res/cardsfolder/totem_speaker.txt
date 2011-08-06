@@ -4,6 +4,6 @@ Types:Creature Elf Druid
 Text:no text
 PT:3/3
 K:WheneverKeyword:EntersBattleField:Type/Beast:Play:ModifyLife/3:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever a Beast enters the battlefield, you may gain 3 life.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/totem_speaker.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/totem_speaker.jpg
 End

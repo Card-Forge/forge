@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Enchantment
 Text:no text
 K:WheneverKeyword:CastSpell/Opponent:Color/white:Play:ModifyLife/1!ModifyLife/-1:ControllingPlayer_Self!ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever an opponent casts a white spell, that player loses 1 life and you gain 1 life.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/yawgmoths_edict.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/yawgmoths_edict.jpg
 End

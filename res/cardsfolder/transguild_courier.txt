@@ -8,6 +8,6 @@ K:CARDNAME is blue.
 K:CARDNAME is black.
 K:CARDNAME is red.
 K:CARDNAME is green.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/transguild_courier.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/transguild_courier.jpg
 End

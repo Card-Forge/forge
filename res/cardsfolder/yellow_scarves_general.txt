@@ -5,6 +5,6 @@ Text:no text
 PT:2/2
 K:Horsemanship
 K:CARDNAME can't block.
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/yellow_scarves_general.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/yellow_scarves_general.jpg
 End

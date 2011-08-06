@@ -5,6 +5,6 @@ Text:no text
 PT:2/2
 K:First Strike
 K:Protection from black
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/white_knight.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/white_knight.jpg
 End

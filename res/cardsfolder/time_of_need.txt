@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Sorcery
 Text:Search your library for a legendary creature card, reveal it, and put it into your hand. Then shuffle your library.
 K:spTutor:Creature.Legendary:Hand
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/time_of_need.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/time_of_need.jpg
 End

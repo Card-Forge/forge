@@ -3,6 +3,6 @@ ManaCost:3 R
 Types:Creature Viashino Warrior
 Text:no text
 PT:4/2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card12974.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card12974.jpg
 End

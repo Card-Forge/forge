@@ -3,6 +3,6 @@ ManaCost:WB WB WB
 Types:Instant
 Text:Remove target creature from the game.
 K:spBounceTgt:Creature:Exile
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/unmake.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/unmake.jpg
 End

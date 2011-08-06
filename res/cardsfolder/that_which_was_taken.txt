@@ -3,6 +3,6 @@ ManaCost:5
 Types:Legendary Artifact
 Text:no text
 K:Each permanent with a divinity counter on it is indestructible.
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/bok/en-us/card74644.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/bok/en-us/card74644.jpg
 End

@@ -8,6 +8,6 @@ K:paintap:3:U
 K:paintap:3:B
 K:paintap:3:R
 K:paintap:3:G
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tarnished_citadel.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tarnished_citadel.jpg
 End

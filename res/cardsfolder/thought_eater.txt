@@ -5,6 +5,6 @@ Text:Your maximum hand size is reduced by three.
 PT:2/2
 K:HandSize - 3 Self
 K:Flying
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_eater.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_eater.jpg
 End

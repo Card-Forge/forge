@@ -5,6 +5,6 @@ Text:Whenever Thicket Basilisk blocks or becomes blocked by a non-Wall creature,
 PT:2/4
 K:Whenever CARDNAME blocks a creature, destroy that creature at end of combat:Creature.nonWall
 K:Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat:Creature.nonWall
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/thicket_basilisk.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thicket_basilisk.jpg
 End

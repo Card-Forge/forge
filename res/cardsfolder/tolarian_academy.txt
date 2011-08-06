@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Legendary Land
 Text:no text
 K:tap: add U to your mana pool for each Artifact you control.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tolarian_academy.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tolarian_academy.jpg
 End

@@ -5,6 +5,6 @@ Text:no text
 PT:4/4
 K:Vigilance
 K:Horsemanship
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/zhang_fei_fierce_warrior.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/zhang_fei_fierce_warrior.jpg
 End

@@ -2,6 +2,6 @@ Name:Time Reversal
 ManaCost:3 U U
 Types:Sorcery
 Text:Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards. Exile Time Reversal.
-K:SVar:Rarity:Mythic
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/time_reversal.jpg
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/time_reversal.jpg
 End

@@ -5,7 +5,7 @@ Text:no text
 PT:5/3
 K:Haste
 K:WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:ControllerEndStep:At the beginning of the end step, return Viashino Cutthroat to its owner's hand.
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_cutthroat.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_cutthroat.jpg
 End

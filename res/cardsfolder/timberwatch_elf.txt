@@ -4,7 +4,7 @@ Types:Creature Elf
 Text:no text
 PT:1/2
 K:abPumpTgtC T:+X/+X:Target creature get +X/+X until end of turn, where X is the number of Elves on the battlefield.
-K:SVar:X:Count$TypeOnBattlefield.Elf
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/lgn/en-us/card45121.jpg
+SVar:X:Count$TypeOnBattlefield.Elf
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/lgn/en-us/card45121.jpg
 End

@@ -5,6 +5,6 @@ Text:no text
 PT:2/2
 K:Flying
 K:abPump 1 R:First Strike
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/volcano_imp.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/volcano_imp.jpg
 End

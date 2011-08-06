@@ -3,6 +3,6 @@ ManaCost:W
 Types:Enchantment Aura
 Text:Enchanted creature has vigilance.
 K:Enchant creature
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vigilance.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vigilance.jpg
 End

@@ -3,6 +3,6 @@ ManaCost:3 G
 Types:Sorcery Arcane
 Text:Put target land on top of its owner's library.
 K:spBounceTgt:Land:TopofLibrary
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/uproot.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/uproot.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Goat Beast
 Text:no text
 PT:2/2
 K:Haste
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/cg/en-us/card15198.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/cg/en-us/card15198.jpg
 End

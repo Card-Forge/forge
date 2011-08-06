@@ -3,6 +3,6 @@ ManaCost:3 U U
 Types:Sorcery
 Text:no text
 K:spDrawCards:4:Draw four cards.:Tidings - Draw 4 cards.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tidings.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tidings.jpg
 End

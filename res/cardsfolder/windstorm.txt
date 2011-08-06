@@ -2,6 +2,6 @@ Name:Windstorm
 ManaCost:X G
 Types:Instant
 Text:no text
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/windstorm.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/windstorm.jpg
 End

@@ -5,6 +5,6 @@ Text:no text
 PT:4/4
 K:abPump G G:Forestwalk:Drawback$DamageYou/2:Wormwood Dryad gains forestwalk until end of turn and deals 2 damage to you.
 K:abPump B B:Swampwalk:Drawback$DamageYou/2:Wormwood Dryad gains swampwalk until end of turn and deals 2 damage to you.
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wormwood_treefolk.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wormwood_treefolk.jpg
 End

@@ -3,6 +3,6 @@ ManaCost:B
 Types:Sorcery
 Text:no text
 K:spDiscardTgt:RevealYouChoose/Artifact.nonLand,Creature.nonLand,Enchantment,Instant,Planeswalker,Sorcery:1:Drawback$YouLoseLife/2:Target player reveals his or her hand. You choose a nonland card from it. That player discards that card. You lose 2 life.:Thoughtsieze - player reveals hand and discards a card
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card145969.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card145969.jpg
 End

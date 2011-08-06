@@ -4,6 +4,6 @@ Types:Creature Elf Mutant
 Text:no text
 PT:6/6
 K:TypeCycling:Forest:2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_guardian.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_guardian.jpg
 End

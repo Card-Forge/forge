@@ -3,6 +3,6 @@ ManaCost:4 W
 Types:Creature Human Cleric
 Text:When Tireless Missionaries enters the battlefield, you gain 3 life.
 PT:2/3
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tireless_missionaries.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tireless_missionaries.jpg
 End

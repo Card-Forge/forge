@@ -3,6 +3,6 @@ ManaCost:1 W B
 Types:Sorcery
 Text:Destroy target permanent.
 K:spDestroyTgt:Permanent
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vindicate.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vindicate.jpg
 End

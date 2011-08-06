@@ -3,6 +3,6 @@ ManaCost:2 W
 Types:Sorcery
 Text:no text
 K:spAllPump:YouCtrl:+1/+1:Creatures you control get +1/+1 until end of turn.:Warrior's Charge - Creatures get +1/+1 until EOT
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4407.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4407.jpg
 End

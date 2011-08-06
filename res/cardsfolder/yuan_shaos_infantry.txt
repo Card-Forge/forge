@@ -4,6 +4,6 @@ Types:Creature Human Soldier
 Text:no text
 PT:2/2
 K:WheneverKeyword:Attack - Alone:Self:Play:KeywordPumpEOT/Unblockable:Self:ASAP:No_Condition:No Special Condition:Whenever Yuan Shao's Infantry attacks alone, Yuan Shao's Infantry is unblockable this combat.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/yuan_shaos_infantry.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/yuan_shaos_infantry.jpg
 End

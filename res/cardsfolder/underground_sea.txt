@@ -4,6 +4,6 @@ Types:Land Island Swamp
 Text:no text
 K:tap: add U
 K:tap: add B
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/underground_sea.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/underground_sea.jpg
 End

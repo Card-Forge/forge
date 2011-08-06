@@ -5,6 +5,6 @@ Text:At the beginning of your upkeep, put a spore counter on Vitaspore Thallid.
 PT:1/1
 K:Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
 K:abPumpTgtC Sac<1/Saproling>:Haste
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vitaspore_thallid.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vitaspore_thallid.jpg
 End

@@ -3,6 +3,6 @@ ManaCost:2 B R
 Types:Instant
 Text:Destroy target creature or land.
 K:spDestroyTgt:Creature,Land
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wrecking_ball.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wrecking_ball.jpg
 End

@@ -6,7 +6,7 @@ K:tap: add 1
 K:WG, tap: add W W
 K:WG, tap: add W G
 K:WG, tap: add G G
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wooded_bastion.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wooded_bastion.jpg
 End

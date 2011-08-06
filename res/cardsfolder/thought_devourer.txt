@@ -5,6 +5,6 @@ Text:Your maximum hand size is reduced by four.
 PT:4/4
 K:HandSize - 4 Self
 K:Flying
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_devourer.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_devourer.jpg
 End

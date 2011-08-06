@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Sorcery
 Text:Destroy target creature with horsemanship.
 K:spDestroyTgt:Creature.withHorsemanship
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/trip_wire.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/trip_wire.jpg
 End

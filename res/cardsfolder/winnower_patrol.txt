@@ -3,6 +3,6 @@ ManaCost:2 G
 Types:Creature Elf Warrior
 Text:Kinship - At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Winnower Patrol, you may reveal it. If you do, put a +1/+1 counter on Winnower Patrol.
 PT:3/2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/winnower_patrol.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/winnower_patrol.jpg
 End

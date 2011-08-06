@@ -6,6 +6,6 @@ PT:6/6
 K:Trample
 K:etbDestroyTgt:Permanent.nonCreature
 K:Persist
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/woodfall_primus.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/woodfall_primus.jpg
 End

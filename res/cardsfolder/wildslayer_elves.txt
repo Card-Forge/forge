@@ -4,6 +4,6 @@ Types:Creature Elf Warrior
 Text:no text
 PT:3/3
 K:Wither
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wildslayer_elves.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wildslayer_elves.jpg
 End

@@ -5,6 +5,6 @@ Text:no text
 PT:1/2
 K:Flying
 K:abDrawCardsTgt B R G T:1:Target player draws a card.:Xira Arien - target player draws a card
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/xira_arien.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/xira_arien.jpg
 End

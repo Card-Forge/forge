@@ -4,6 +4,6 @@ Types:Creature Bird Scout
 Text:no text
 PT:2/3
 K:Flying
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/talon_trooper.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/talon_trooper.jpg
 End

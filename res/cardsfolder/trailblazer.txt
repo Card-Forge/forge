@@ -3,6 +3,6 @@ ManaCost:2 G G
 Types:Instant
 Text:no text
 K:spPumpTgt:Unblockable
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/trailblazer.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/trailblazer.jpg
 End

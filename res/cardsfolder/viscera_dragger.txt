@@ -5,6 +5,6 @@ Text:no text
 PT:3/3
 K:Cycling:2
 K:Unearth:1 B
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/viscera_dragger.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/viscera_dragger.jpg
 End

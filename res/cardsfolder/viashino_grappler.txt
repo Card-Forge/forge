@@ -4,6 +4,6 @@ Types:Creature Viashino
 Text:no text
 PT:3/1
 K:abPump G:Trample
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_grappler.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_grappler.jpg
 End

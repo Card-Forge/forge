@@ -4,6 +4,6 @@ Types:Legendary Creature Spirit
 Text:no text
 PT:4/4
 K:WheneverKeyword:PermanentIntoGraveyard:Type/Legendary:Play:MoveFrom-Graveyard-Hand:Initiating_Card:ASAP:No_Condition:No Special Condition:Whenever a legendary permanent other than Yomiji, Who Bars the Way is put into a graveyard from the battlefield, return that card to its owner's hand.
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/yomiji_who_bars_the_way.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/yomiji_who_bars_the_way.jpg
 End

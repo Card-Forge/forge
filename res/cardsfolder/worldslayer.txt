@@ -4,6 +4,6 @@ Types:Artifact Equipment
 Text:no text
 K:eqPump 5:+0/+0
 K:WheneverKeyword:DealsDamage/Opponent:Equipped_Creature:Play:Destroy:All/None:ASAP:No_Condition:AllTargets - Except Self:Whenever equipped creature deals combat damage to a player, destroy all permanents other than Worldslayer.
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/worldslayer.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/worldslayer.jpg
 End

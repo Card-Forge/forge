@@ -4,6 +4,6 @@ Types:Legendary Creature Human Soldier
 Text:no text
 PT:3/2
 K:Horsemanship
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/xiahou_dun_the_one_eyed.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/xiahou_dun_the_one_eyed.jpg
 End

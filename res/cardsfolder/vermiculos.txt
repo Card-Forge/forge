@@ -4,7 +4,7 @@ Types:Creature Horror
 Text:no text
 PT:1/1
 K:WheneverKeyword:EntersBattleField:Type/Artifact:Play:StatsPumpEOT/4/4:Self:ASAP:No_Condition:No Special Condition:Whenever an artifact enters the battlefield, Vermiculos gets +4/+4 until end of turn.
-K:SVar:BuffedBy:Artifact
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vermiculos.jpg
+SVar:BuffedBy:Artifact
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vermiculos.jpg
 End

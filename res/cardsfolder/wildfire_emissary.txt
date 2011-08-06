@@ -5,6 +5,6 @@ Text:no text
 PT:2/4
 K:Protection from white
 K:abPump 1 R:+1/+0
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wildfire_emissary.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wildfire_emissary.jpg
 End

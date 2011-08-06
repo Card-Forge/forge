@@ -4,6 +4,6 @@ Types:Creature Human Pirate
 Text:no text
 PT:3/2
 K:Flying
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6524.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6524.jpg
 End

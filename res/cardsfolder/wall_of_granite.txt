@@ -4,6 +4,6 @@ Types:Creature Wall
 Text:no text
 PT:0/7
 K:Defender
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_granite.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_granite.jpg
 End

@@ -8,6 +8,6 @@ K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay:B R G
 K:abPump B:+1/+0
 K:abPump R:+1/+0
 K:abPump G:+1/+0
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vaevictis_asmadi.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vaevictis_asmadi.jpg
 End

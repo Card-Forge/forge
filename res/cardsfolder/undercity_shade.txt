@@ -5,6 +5,6 @@ Text:no text
 PT:1/1
 K:Fear
 K:abPump B:+1/+1
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/undercity_shade.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/undercity_shade.jpg
 End

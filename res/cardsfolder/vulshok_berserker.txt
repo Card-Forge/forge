@@ -4,6 +4,6 @@ Types:Creature Human Berserker
 Text:no text
 PT:3/2
 K:Haste
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card5585.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card5585.jpg
 End

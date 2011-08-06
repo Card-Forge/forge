@@ -4,6 +4,6 @@ Types:Creature Spirit
 Text:no text
 PT:6/6
 K:Soulshift:7
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/thousand_legged_kami.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thousand_legged_kami.jpg
 End

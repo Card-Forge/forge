@@ -2,6 +2,6 @@ Name:The Hive
 ManaCost:5
 Types:Artifact
 Text:no text
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/the_hive.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/the_hive.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Elf Shaman
 Text:When Viridian Shaman enters the battlefield, destroy target artifact.
 PT:2/2
 K:etbDestroyTgt:Artifact
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_shaman.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_shaman.jpg
 End

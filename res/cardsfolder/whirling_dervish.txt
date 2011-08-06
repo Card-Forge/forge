@@ -4,6 +4,6 @@ Types:Creature Human Monk
 Text:At the beginning of the end step, if Whirling Dervish dealt damage to an opponent this turn, put a +1/+1 counter on it.
 PT:1/1
 K:Protection from black
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/whirling_dervish.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/whirling_dervish.jpg
 End

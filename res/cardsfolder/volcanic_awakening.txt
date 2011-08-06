@@ -3,6 +3,6 @@ ManaCost:4 R R
 Types:Sorcery
 Text:Destroy target land.
 K:Storm
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_awakening.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_awakening.jpg
 End

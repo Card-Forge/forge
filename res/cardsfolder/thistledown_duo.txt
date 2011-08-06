@@ -3,7 +3,7 @@ ManaCost:2 WU
 Types:Creature Kithkin Soldier Wizard
 Text:Whenever you cast a white spell, Thistledown Duo gets +1/+1 until end of turn.\r\nWhenever you cast a blue spell, Thistledown Duo gains flying until end of turn.
 PT:2/2
-K:SVar:BuffedBy:Spell.White,Spell.Blue
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/thistledown_duo.jpg
+SVar:BuffedBy:Spell.White,Spell.Blue
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thistledown_duo.jpg
 End

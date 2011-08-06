@@ -4,6 +4,6 @@ Types:Instant
 Text:no text
 K:spAllPump:YouCtrl:+1/+0:Creatures you control get +1/+0 until end of turn.:Violent Outburst - Creatures get +1/+0 until EOT
 K:Cascade
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/violent_outburst.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/violent_outburst.jpg
 End

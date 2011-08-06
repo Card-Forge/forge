@@ -4,6 +4,6 @@ Types:Creature Zombie Scout
 Text:no text
 PT:2/2
 K:Protection from green
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_outlander.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_outlander.jpg
 End

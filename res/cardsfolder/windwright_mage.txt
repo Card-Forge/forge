@@ -4,6 +4,6 @@ Types:Artifact Creature Human Wizard
 Text:Windwright Mage has flying as long as an artifact card is in your graveyard.
 PT:2/2
 K:Lifelink
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/windwright_mage.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/windwright_mage.jpg
 End

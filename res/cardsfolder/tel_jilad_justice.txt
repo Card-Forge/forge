@@ -4,6 +4,6 @@ Types:Instant
 Text:Destroy target artifact.
 K:spDestroyTgt:Artifact
 K:Scry 2
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_justice.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_justice.jpg
 End

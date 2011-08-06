@@ -4,6 +4,6 @@ Types:Creature Viashino
 Text:no text
 PT:4/3
 K:Echo:2 R
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_outrider.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_outrider.jpg
 End

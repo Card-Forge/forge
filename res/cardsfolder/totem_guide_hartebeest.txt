@@ -3,6 +3,6 @@ ManaCost:4 W
 Types:Creature Antelope
 Text:When Totem-Guard Hartbeest enters the battlefield, you may search your library for an Aura card, reveal it, put it into your hand, then shuffle your library.
 PT:2/5
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/totem_guide_hartebeest.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/totem_guide_hartebeest.jpg
 End

@@ -2,6 +2,6 @@ Name:Temporal Manipulation
 ManaCost:3 U U
 Types:Sorcery
 Text:Take an extra turn after this one.
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_manipulation.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_manipulation.jpg
 End

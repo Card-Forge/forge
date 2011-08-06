@@ -4,6 +4,6 @@ Types:Legendary Creature Human Soldier
 Text:no text
 PT:8/8
 K:CARDNAME can't attack unless defending player controls an Island.
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/zhou_yu_chief_commander.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/zhou_yu_chief_commander.jpg
 End

@@ -3,6 +3,6 @@ ManaCost:1 G
 Types:Instant Arcane
 Text:no text
 K:spGainLife:3
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vital_surge.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vital_surge.jpg
 End

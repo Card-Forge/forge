@@ -8,6 +8,6 @@ K:Sacrifice CARDNAME: Add U to your mana pool.
 K:Sacrifice CARDNAME: Add B to your mana pool.
 K:Sacrifice CARDNAME: Add R to your mana pool.
 K:Sacrifice CARDNAME: Add G to your mana pool.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_cantor.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_cantor.jpg
 End

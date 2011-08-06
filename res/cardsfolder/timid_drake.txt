@@ -5,7 +5,7 @@ Text:no text
 PT:3/3
 K:Flying
 K:WheneverKeyword:EntersBattleField:Type/Creature:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:Initiator - Other than Self:When another creature enters the battlefield, return Timid Drake to its owner's hand.
-K:SVar:AntiBuffedBy:Creature
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/timid_drake.jpg
+SVar:AntiBuffedBy:Creature
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/timid_drake.jpg
 End

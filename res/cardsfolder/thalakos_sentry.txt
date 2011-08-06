@@ -4,6 +4,6 @@ Types:Creature Thalakos Soldier
 Text:no text
 PT:1/2
 K:Shadow
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/thalakos_sentry.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thalakos_sentry.jpg
 End
