@@ -1,8 +1,8 @@
 Name:Call to Heel
 ManaCost:1 U
 Types:Instant
-Text:Return target creature to its owner's hand. Its controller draws a card.
-K:spBounceTgt:Creature:Hand:Drawback$TgtCtrlrDraw/1
+Text:no text
+A:SP$Bounce|Cost$1 U|ValidTgts$Creature|TgtPrompt$Select target creature|Destination$Hand|SpellDescription$Return target creature to its owner's hand. Its controller draws a card.|SubAbility$TgtCtrlrDraw/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/call_to_heel.jpg
 End

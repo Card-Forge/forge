@@ -1,8 +1,8 @@
 Name:Clutch of the Undercity
 ManaCost:1 U U B
 Types:Instant
-Text:Return target permanent to its owner's hand. Its controller loses 3 life.
-K:spBounceTgt:Permanent:Hand:Drawback$TgtCtrlrLoseLife/3
+Text:no text
+A:SP$Bounce|Cost$1 U U B|ValidTgts$Permanent|TgtPrompt$Select target permanent|Destination$Hand|SpellDescription$Return target permanent to its owner's hand. Its controller loses 3 life.|SubAbility$TgtCtrlrLoseLife/3
 K:Transmute: 1 U B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clutch_of_the_undercity.jpg
