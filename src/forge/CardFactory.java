@@ -4551,6 +4551,7 @@ public class CardFactory implements NewConstants {
         }//end if
         */
         
+        /* Cards converted to Trigger + AF
         if (card.getKeyword().contains("When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library."))
         {
         	final SpellAbility ability = new Ability(card, "0")
@@ -4609,7 +4610,7 @@ public class CardFactory implements NewConstants {
             };
             card.addComesIntoPlayCommand(intoPlay);
         }
-        
+        */
         
         /*  All cards using etbMakeToken converted to use AF + Triggers.
         
