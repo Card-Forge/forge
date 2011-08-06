@@ -3535,54 +3535,6 @@ public class CardFactory_Creatures {
             ability2.setStackDescription(sb2.toString());
         }//*************** END ************ END **************************
         
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Cromat")) {
-            //Kill ability
-            
-            final Ability a2 = new Ability(card, "W B") {
-                @Override
-                public boolean canPlay() {
-                    return (AllZone.GameAction.isCardInPlay(card) && (AllZone.Combat.isBlocked(card) || AllZone.Combat.getAllBlockers().contains(
-                            card)) && super.canPlay());
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                    //TODO
-                }
-                
-                @Override
-                public void resolve() {
-                    AllZone.GameAction.destroy(getTargetCard());
-                }//resolve()
-            };
-            Input runtime2 = new Input() {
-                private static final long serialVersionUID = 1L;
-                
-                @Override
-                public void showMessage() {
-                    CardList targets = new CardList();
-                    if(AllZone.Combat.isBlocked(card) || AllZone.Combat.getAllBlockers().contains(card)) {
-                        if(AllZone.Combat.isBlocked(card)) {
-                            targets = AllZone.Combat.getBlockers(card);
-                        } else {
-                            targets = new CardList();
-                            for(Card c:AllZone.Combat.getAttackers()) {
-                                if(AllZone.Combat.isBlocked(c)) if(AllZone.Combat.getBlockers(c).contains(card)) targets.add(c);
-                            }
-                        }
-                    }
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(a2, targets,
-                            "Select target blocking or blocked by Cromat.", true, false));
-                }
-            };
-            card.addSpellAbility(a2);
-            a2.setBeforePayMana(runtime2);
-            a2.setDescription("W B: Destroy target creature blocking or blocked by Cromat.");
-        }//*************** END ************ END **************************
-        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Sphinx of Jwar Isle")) {
@@ -3614,48 +3566,6 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability1);
         }//*************** END ************ END **************************
          
-        /* Converteded to AF Trigger
-        //*************** START *********** START **************************
-        else if(cardName.equals("Doomsday Specter")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    Card c = getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(c)) {
-                        AllZone.GameAction.moveToHand(c);
-                    }
-                }
-            };
-            Command intoPlay = new Command() {
-				private static final long serialVersionUID = -1944407110865125254L;
-
-				public void execute() {
-                    CardList creatures = AllZoneUtil.getCreaturesInPlay(card.getController());
-                    creatures = creatures.filter(new CardListFilter() {
-                    	public boolean addCard(Card c) {
-                    		return c.isBlue() || c.isBlack();
-                    	}
-                    });
-                    
-                    AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, creatures,
-                            "Select blue or black creature you control.", false, false));
-                    ButtonUtil.disableAll();
-                    
-                }//execute()
-            };//Command
-            card.addComesIntoPlayCommand(intoPlay);
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(new Spell_Permanent(card) {
-				private static final long serialVersionUID = -1885027663323697759L;
-
-				@Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-            });
-        }//*************** END ************ END **************************
-        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Master of the Wild Hunt")) {
