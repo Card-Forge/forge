@@ -17,11 +17,14 @@ public class ManaCost {
     //"GW" can be paid with either G or W
     
     public ManaCost(String manaCost) {
-    	if (manaCost.equals("") || manaCost.equals("X"))
+    	if (manaCost.equals(""))
     		manaCost = "0";
     	
     	while (manaCost.startsWith("X")){
-    		manaCost = manaCost.substring(2);
+    		if (manaCost.length() < 2)
+    			manaCost = "0";
+    		else
+    			manaCost = manaCost.substring(2);
             xcounter++;
         }
     	manaPart = split(manaCost);
