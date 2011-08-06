@@ -176,13 +176,7 @@ public class AbilityFactory_GainControl {
 		list = list.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
 				Hashtable<String, String> vars = c.getSVars();
-				return !vars.containsKey("RemAIDeck");
-			}
-		});
-		//filter in only cards human controls
-		list = list.filter(new CardListFilter() {
-			public boolean addCard(Card c) {
-				return c.getController().isHuman();
+				return !vars.containsKey("RemAIDeck") && CardFactoryUtil.canTarget(hostCard, c);
 			}
 		});
 		
