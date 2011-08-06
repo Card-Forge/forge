@@ -1,3 +1,18 @@
+Karplusan Wolverine
+R
+Creature Wolverine Beast
+no text
+1/1
+WheneverKeyword:BecomesBlocked:Self:Play:Damage/1:InputType - CreatureORPlayer:ASAP:Yes_No:SingleTarget:Whenever Karplusan Wolverine becomes blocked, you may have it deal 1 damage to target creature or player.
+
+Soultether Golem
+2
+Artifact Creature Golem
+no text
+3/3
+WheneverKeyword:EntersBattleField:Type/Creature:Play:CustomCounter.TIME/1:Self:ASAP:No_Condition:Initiator - Other than Self!Initiator - OwnedByController:Whenever another creature enters the battlefield under your control, put a time counter on Soultether Golem.
+Vanishing:1
+
 Necrogenesis
 B G
 Enchantment
@@ -130,14 +145,6 @@ R
 Enchantment
 no text
 WheneverKeyword:CastSpell/Controller:Type/Creature:Play:TapPermanent:NormalInput/Creature:ASAP:No_Condition:No Special Condition:Whenever you cast a creature spell, tap target creature.
-
-Soultether Golem
-2
-Artifact Creature Golem
-no text
-3/3
-WheneverKeyword:EntersBattleField:Type/Creature:Play:CustomCounter.TIME/1:Self:ASAP:No_Condition:Initiator - Other than Self:Whenever another creature enters the battlefield under your control, put a time counter on Soultether Golem.
-Vanishing:1
 
 Recumbent Bliss
 2 W
@@ -1058,13 +1065,6 @@ Creature Goblin Shaman
 no text
 1/1
 WheneverKeyword:BecomesTapped:Self:Play:Damage/1:InputType - CreatureORPlayer:ASAP:No_Condition:SingleTarget:Whenever Goblin Medics becomes tapped, it deals 1 damage to target creature or player.
-
-Karplusan Wolverine
-R
-Creature Human Mercenary
-no text
-1/1
-WheneverKeyword:BecomesBlocked:Self:Play:Damage/1:InputType - CreatureORPlayer:ASAP:Yes_No:SingleTarget:Whenever Karplusan Wolverine becomes blocked, you may have it deal 1 damage to target creature or player.
 
 Akki Raider
 1 R
