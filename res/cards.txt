@@ -1,3 +1,9 @@
+Muddle the Mixture
+U U
+Instant
+no text
+Transmute:1 U U
+
 Cursed Rack
 4
 Artifact
@@ -75,12 +81,6 @@ B B
 Creature Zombie
 At the beginning of your upkeep, tap Sangrophage unless you pay 2 life
 3/3
-
-Muddle the Mixture
-U U
-Instant
-(NOTE: The computer can not use this spell.)
-Transmute:1 U U
 
 Journey to Nowhere
 1 W
