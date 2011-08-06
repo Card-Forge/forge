@@ -4072,40 +4072,6 @@ public class CardFactory_Sorceries {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true, false));
         }//*************** END ************ END **************************
         
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Ponder") || cardName.equals("Omen")) {
-        	/* 
-        	 * Look at the top three cards of your library, then put them back
-        	 * in any order. You may shuffle your library.  Draw a card. 
-        	 */
-        	final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = 484615053209732769L;
-				
-				@Override
-        		public void resolve() {
-					Player player = card.getController();
-        			AllZoneUtil.rearrangeTopOfLibrary(player, 3, false);
-        			AllZone.GameAction.promptForShuffle(player);
-        		}
-				
-        		@Override
-        		public boolean canPlayAI() {
-        			//basically the same reason as Sensei's Diving Top
-        			return false;
-        		}
-        	};//spell
-        	
-        	StringBuilder sb = new StringBuilder();
-        	sb.append(cardName).append(" - Rearrange the top 3 cards in your library in any order. ");
-        	sb.append("You may shuffle you library. Draw a card.");
-        	spell.setStackDescription(sb.toString());
-        	
-        	card.clearSpellAbility();
-        	card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Strategic Planning")) {
             final SpellAbility spell = new Spell(card) {
@@ -4148,38 +4114,6 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
                
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Index")) {
-        	/* 
-        	 * Look at the top five cards of your library, then put them back
-        	 * in any order.
-        	 */
-        	final SpellAbility spell = new Spell(card) {
-        		private static final long serialVersionUID = -3175286661458692699L;
-
-        		@Override
-        		public void resolve() {
-        			Player player = card.getController();
-        			AllZoneUtil.rearrangeTopOfLibrary(player, 5, false);
-        		}
-
-        		@Override
-        		public boolean canPlayAI() {
-        			//basically the same reason as Sensei's Diving Top
-        			return false;
-        		}
-        	};//spell
-        	
-        	StringBuilder sb = new StringBuilder();
-        	sb.append(cardName).append(" - Rearrange the top 5 cards in your library in any order. You may shuffle you library. Draw a card.");
-        	spell.setStackDescription(sb.toString());
-        	
-        	card.clearSpellAbility();
-        	card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Fireball")) {
         	/*

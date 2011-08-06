@@ -424,6 +424,15 @@ public class AbilityFactory {
 				SA = AbilityFactory_ZoneAffecting.createDrawbackScry(this);
 		}
 		
+		if(API.equals("RearrangeTopOfLibrary")){
+			if(isAb)
+				SA = AbilityFactory_ZoneAffecting.createRearrangeTopOfLibraryAbility(this);
+			else if(isSp)
+				SA = AbilityFactory_ZoneAffecting.createRearrangeTopOfLibrarySpell(this);
+			else if(isDb)
+				SA = AbilityFactory_ZoneAffecting.createRearrangeTopOfLibraryDrawback(this);
+		}
+		
 		if (API.equals("Sacrifice")){
 			if (isAb)
 				SA = AbilityFactory_Sacrifice.createAbilitySacrifice(this);

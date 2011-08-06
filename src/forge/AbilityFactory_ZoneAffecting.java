@@ -1185,4 +1185,190 @@ public class AbilityFactory_ZoneAffecting {
 		return randomReturn;
 	}
 
+	//**********************************************************************
+	//*********************** REARRANGETOPOFLIBRARY ************************
+	//**********************************************************************
+	
+	public static SpellAbility createRearrangeTopOfLibraryAbility(final AbilityFactory AF)
+	{
+		final SpellAbility RTOLAbility = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+			private static final long serialVersionUID = -548494891203983219L;
+
+			@Override
+			public String getStackDescription()
+			{
+				return rearrangeTopOfLibraryStackDescription(AF, this);
+			}
+			
+			@Override
+			public boolean canPlayAI()
+			{
+				return false;
+			}
+			
+			@Override
+			public void resolve() {
+				rearrangeTopOfLibraryResolve(AF, this);
+			}
+			
+		};
+		
+		return RTOLAbility;
+	}
+	
+	public static SpellAbility createRearrangeTopOfLibrarySpell(final AbilityFactory AF)
+	{
+		final SpellAbility RTOLSpell = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+			private static final long serialVersionUID = 6977502611509431864L;
+
+			@Override
+			public String getStackDescription()
+			{
+				return rearrangeTopOfLibraryStackDescription(AF, this);
+			}
+			
+			@Override
+			public boolean canPlayAI()
+			{
+				return false;
+			}
+			
+			@Override
+			public void resolve() {
+				rearrangeTopOfLibraryResolve(AF, this);			
+			}
+			
+		};
+		
+		return RTOLSpell;
+	}
+	
+	public static SpellAbility createRearrangeTopOfLibraryDrawback(final AbilityFactory AF){
+		final SpellAbility dbDraw = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()){
+			private static final long serialVersionUID = -777856059960750319L;
+
+			@Override
+			public String getStackDescription(){
+				// when getStackDesc is called, just build exactly what is happening
+				return rearrangeTopOfLibraryStackDescription(AF, this);
+			}
+
+			@Override
+			public void resolve() {
+				rearrangeTopOfLibraryResolve(AF, this);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return false;
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return rearrangeTopOfLibraryTrigger(AF, this, mandatory);
+			}
+			
+		};
+		return dbDraw;
+	}
+	
+	private static String rearrangeTopOfLibraryStackDescription(final AbilityFactory AF, final SpellAbility sa)
+	{
+		int numCards = 0;
+		ArrayList<Player> tgtPlayers = new ArrayList<Player>();
+		boolean shuffle = false;
+		
+		Target tgt = AF.getAbTgt();
+		if (tgt != null && !AF.getMapParams().containsKey("Defined"))
+			tgtPlayers = tgt.getTargetPlayers();
+		else
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), AF.getMapParams().get("Defined"), sa);
+		
+		numCards = AbilityFactory.calculateAmount(AF.getHostCard(), AF.getMapParams().get("NumCards"), sa);
+		shuffle = AF.getMapParams().containsKey("MayShuffle") ? true : false;
+		
+		StringBuilder ret = new StringBuilder();
+		if(!(sa instanceof Ability_Sub))
+		{
+			ret.append(AF.getHostCard().getName());
+			ret.append(" - ");
+		}
+		ret.append("Look at the top ");
+		ret.append(numCards);
+		ret.append(" cards of ");
+		for(Player p : tgtPlayers)
+		{
+			ret.append(p.getName());
+			ret.append("s");
+			ret.append(" & ");
+		}
+		ret.delete(ret.length()-3, ret.length());
+		
+		ret.append(" library. Then put them back in any order.");
+		
+		if(shuffle)
+		{
+			ret.append("You may have ");
+			if(tgtPlayers.size() > 1)
+			{
+				ret.append("those");
+			}
+			else
+			{
+				ret.append("that");
+			}
+			
+			ret.append(" player shuffle his or her library.");
+		}
+		
+		return ret.toString();
+	}
+	
+	private static boolean rearrangeTopOfLibraryTrigger(final AbilityFactory AF, final SpellAbility sa, final boolean mandatory)
+	{
+		if(!ComputerUtil.canPayCost(sa))
+			return false;
+		
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null) {
+			return abSub.doTrigger(mandatory);
+		}
+    	
+		return false;
+	}
+	
+	private static void rearrangeTopOfLibraryResolve(final AbilityFactory AF,final SpellAbility sa)
+	{
+		int numCards = 0;
+		ArrayList<Player> tgtPlayers = new ArrayList<Player>();
+		boolean shuffle = false;
+		
+		if(sa.getActivatingPlayer().isHuman())
+		{
+			Target tgt = AF.getAbTgt();
+			if (tgt != null && !AF.getMapParams().containsKey("Defined"))
+				tgtPlayers = tgt.getTargetPlayers();
+			else
+				tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), AF.getMapParams().get("Defined"), sa);
+			
+			numCards = AbilityFactory.calculateAmount(AF.getHostCard(), AF.getMapParams().get("NumCards"), sa);
+			shuffle = AF.getMapParams().containsKey("MayShuffle") ? true : false;
+			
+			for(Player p : tgtPlayers)
+				if (tgt == null || p.canTarget(AF.getHostCard()))
+					AllZoneUtil.rearrangeTopOfLibrary(AF.getHostCard(), p, numCards, shuffle);
+		}
+		if (AF.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+	     	   abSub.resolve();
+	        }
+			else{
+				String DrawBack = AF.getMapParams().get("SubAbility");
+				if (AF.hasSubAbility())
+					 CardFactoryUtil.doDrawBack(DrawBack, numCards, AF.getHostCard().getController(), AF.getHostCard().getController().getOpponent(), tgtPlayers.get(0), AF.getHostCard(), null, sa);
+			}
+		}
+		
+	}
 }

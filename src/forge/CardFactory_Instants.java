@@ -1683,35 +1683,6 @@ public class CardFactory_Instants {
         }
         //*************** END ************ END **************************
         
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Natural Selection")) {
-        	/* Look at the top 3 cards of target player's library and put them
-        	 * back in any order. You may have that player shuffle his or
-        	 * her library */
-
-        	final SpellAbility spell = new Spell(card) {
-        		private static final long serialVersionUID = 8649520296192617609L;
-
-        		@Override
-        		public void resolve() {
-        			Player player = getTargetPlayer();
-        			AllZoneUtil.rearrangeTopOfLibrary(player, 3, false);
-        			AllZone.GameAction.promptForShuffle(player);
-        		}
-        		@Override
-        		public boolean canPlayAI() {
-        			//basically the same reason as Sensei's Diving Top
-        			return false;
-        		}
-        	};//spell
-        	card.clearSpellAbility();
-        	card.addSpellAbility(spell);
-        	spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-        }
-        //*************** END ************ END **************************
-        
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Hurkyl's Recall")) {
         	/*
@@ -1987,7 +1958,7 @@ public class CardFactory_Instants {
 					Player player = card.getController();
         			CardList artifacts = AllZoneUtil.getPlayerCardsInPlay(player);
         			artifacts = artifacts.getType("Artifact");
-        			AllZoneUtil.rearrangeTopOfLibrary(player, artifacts.size(), false);
+        			AllZoneUtil.rearrangeTopOfLibrary(card, player, artifacts.size(), false);
         		}
 
         		@Override

@@ -474,11 +474,12 @@ public class AllZoneUtil {
 	 * use this when Human needs to rearrange the top X cards in a player's library.  You
 	 * may also specify a shuffle when done
 	 * 
+	 * @param src the source card
 	 * @param player the player to target
 	 * @param numCards the number of cards from the top to rearrange
 	 * @param shuffle true if a shuffle is desired at the end, false otherwise
 	 */
-	public static void rearrangeTopOfLibrary(final Player player, final int numCards, boolean shuffle) {
+	public static void rearrangeTopOfLibrary(final Card src,final Player player, final int numCards, boolean mayshuffle) {
 		PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
 		int maxCards = lib.size();
 		maxCards = Math.min(maxCards, numCards);
@@ -503,8 +504,11 @@ public class AllZoneUtil {
 			topCards.remove(c_1);
 			AllZone.GameAction.moveToLibrary(c_1, i - 1);
 		}
-		if(shuffle) {
-			player.shuffle();
+		if(mayshuffle) {
+			if(GameActionUtil.showYesNoDialog(src, "Do you want to shuffle the library?"))
+			{
+				player.shuffle();
+			}
 		}
 	}
 	

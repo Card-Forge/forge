@@ -439,7 +439,7 @@ public class AbilityFactory_CounterMagic {
 				if(isOptional) {
 					if(Target == AllZone.HumanPlayer) {
 						if(GameActionUtil.showYesNoDialog(srcSA.getSourceCard(), "Do you want to rearrange the top " + SplitActionParams[0] + " cards of your library?")) {
-							AllZoneUtil.rearrangeTopOfLibrary(Target, Integer.parseInt(SplitActionParams[0]), false);
+							AllZoneUtil.rearrangeTopOfLibrary(srcSA.getSourceCard(), Target, Integer.parseInt(SplitActionParams[0]), false);
 						}
 					}
 					else {
@@ -448,7 +448,7 @@ public class AbilityFactory_CounterMagic {
 				}
 				else {
 					if(Target == AllZone.HumanPlayer) {
-						AllZoneUtil.rearrangeTopOfLibrary(Target, Integer.parseInt(SplitActionParams[0]), false);
+						AllZoneUtil.rearrangeTopOfLibrary(srcSA.getSourceCard(), Target, Integer.parseInt(SplitActionParams[0]), false);
 					}
 					else {
 						CardList list = AllZoneUtil.getCardsInZone(Constant.Zone.Hand, AllZone.ComputerPlayer);

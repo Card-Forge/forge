@@ -1,0 +1,9 @@
+Name:Gilt-Leaf Seer
+Manacost:2 G
+Types:Creature Elf Shaman
+Text:no text
+PT:2/2
+A:AB$RearrangeTopOfLibrary | Cost$ G | Defined$ You | NumCards$ 2 | SpellDescription$ Look at the top two cards of your library, then put them back in any order.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gilt_leaf_seer.jpg
+End

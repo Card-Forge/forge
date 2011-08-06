@@ -8354,37 +8354,7 @@ public class CardFactory_Creatures {
 
         	card.addTurnFaceUpCommand(turnsFaceUp);
         }//*************** END ************ END **************************
-  
-        //*************** START *********** START **************************
-        else if(cardName.equals("Sage Owl") || cardName.equals("Inkfathom Divers") ||
-        		cardName.equals("Sage Aven") || cardName.equals("Sage of Epityr") ||
-        		cardName.equals("Spire Owl")) {
-        	final SpellAbility ability = new Ability(card, "0") {
-        		
-        		@Override
-        		public void resolve() {
-        			if(card.getController().equals(AllZone.HumanPlayer)) {
-        				AllZoneUtil.rearrangeTopOfLibrary(card.getController(), 4, false);
-        			}
-        		}//resolve()
-        	};//SpellAbility
-        	
-        	Command intoPlay = new Command() {
-        		private static final long serialVersionUID = 4757054648163014149L;
 
-        		public void execute() {
-        			AllZone.Stack.add(ability);
-        		}
-        	};
-        	
-        	StringBuilder sb = new StringBuilder();
-        	sb.append(cardName).append(" - Rearrange the top 4 cards in your library in any order.");
-        	ability.setStackDescription(sb.toString());
-        	
-        	card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Storm Entity")) {
         	final SpellAbility intoPlay = new Ability(card, "0") {
@@ -8417,116 +8387,6 @@ public class CardFactory_Creatures {
         	
         	card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END ************************** 
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Aven Fateshaper")) {
-        	/*
-        	 * When Aven Fateshaper enters the battlefield, look at the top four
-        	 * cards of your library, then put them back in any order.
-        	 * 4U: Look at the top four cards of your library, then put them back
-        	 * in any order.
-        	 */
-        	final SpellAbility ability = new Ability(card, "4 U") {
-        		@Override
-        		public boolean canPlayAI() {
-        			return false;
-        		}
-        		@Override
-        		public void resolve() {
-        			if(card.getController().equals(AllZone.HumanPlayer)) {
-        				AllZoneUtil.rearrangeTopOfLibrary(card.getController(), 4, false);
-        			}
-        		}   
-        	};
-        	final SpellAbility intoPlay = new Ability(card, "0") {
-        		@Override
-        		public void resolve() {
-        			if(card.getController().equals(AllZone.HumanPlayer)) {
-        				AllZoneUtil.rearrangeTopOfLibrary(card.getController(), 4, false);
-        			}
-        		}   
-        	};
-        	Command comesIntoPlay = new Command() {
-				private static final long serialVersionUID = -3735668300887854295L;
-
-				public void execute() {
-        			AllZone.Stack.add(intoPlay);
-        		}
-        	};
-        	card.addSpellAbility(ability);
-        	
-        	StringBuilder sbIntoPlay = new StringBuilder();
-        	sbIntoPlay.append(cardName).append(" - Rearrange the top 4 cards in your library in any order.");
-        	intoPlay.setStackDescription(sbIntoPlay.toString());
-        	
-        	ability.setDescription("4U: Look at the top four cards of your library, then put them back in any order.");
-        	
-        	StringBuilder sbStack = new StringBuilder();
-        	sbStack.append(cardName).append(" - Rearrange the top 4 cards in your library in any order.");
-        	ability.setStackDescription(sbStack.toString());
-        	
-        	card.addComesIntoPlayCommand(comesIntoPlay);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Descendant of Soramaro")) {
-        	/*
-        	 * 1U: Look at the top X cards of your library, where X is the number
-        	 * of cards in your hand, then put them back in any order.
-        	 */
-        	final SpellAbility ability = new Ability(card, "1 U") {
-        		@Override
-        		public boolean canPlayAI() {
-        			return false;
-        		}
-        		@Override
-        		public void resolve() {
-        			if(card.getController().equals(AllZone.HumanPlayer)) {
-        				int x = AllZoneUtil.getPlayerHand(card.getController()).size();
-        				AllZoneUtil.rearrangeTopOfLibrary(card.getController(), x, false);
-        			}
-        		}   
-        	};
-        	card.addSpellAbility(ability);
-        	
-        	StringBuilder sb = new StringBuilder();
-        	sb.append(cardName).append(" - Rearrange the top X cards in your library in any order.");
-        	ability.setStackDescription(sb.toString());
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Information Dealer")) {
-        	/*
-        	 * Tap: Look at the top X cards of your library, where X is the
-        	 * number of Wizards on the battlefield, then put them back in any order.
-        	 */
-        	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
-        	final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
-				private static final long serialVersionUID = 3451190255076340818L;
-				
-				@Override
-        		public boolean canPlayAI() {
-        			return false;
-        		}
-        		@Override
-        		public void resolve() {
-        			if(card.getController().equals(AllZone.HumanPlayer)) {
-        				int x = AllZoneUtil.getPlayerTypeInPlay(card.getController(), "Wizard").size();
-        				AllZoneUtil.rearrangeTopOfLibrary(card.getController(), x, false);
-        			}
-        		}   
-        	};
-        	ability.setDescription(abCost+"Look at the top X cards of your library, where X is the number of Wizards on the battlefield, then put them back in any order.");
-        	card.addSpellAbility(ability);
-        	
-        	StringBuilder sb = new StringBuilder();
-        	sb.append(cardName).append(" - Rearrange the top X cards in your library in any order.");
-        	ability.setStackDescription(sb.toString());
-        }//*************** END ************ END **************************
-
         
         //*************** START *********** START **************************
         else if(cardName.equals("Dawnglare Invoker")) {
@@ -9162,73 +9022,7 @@ public class CardFactory_Creatures {
         	
         	card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Architects of Will")) {
-        	/*
-        	 * When Architects of Will enters the battlefield, look at the
-        	 * top three cards of target player's library, then put them
-        	 * back in any order.
-        	 */
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    AllZoneUtil.rearrangeTopOfLibrary(getTargetPlayer(), 3, false);
-                }//resolve()
-            };//SpellAbility
-            Command intoPlay = new Command() {
-				private static final long serialVersionUID = 3539746365351917811L;
-
-				public void execute() {
-                	if(card.getController().equals(AllZone.HumanPlayer)) {
-                        AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(ability));
-                        ButtonUtil.disableAll();
-                    }
-                	else { //Computer
-                        //not implemented for computer
-                    }//else
-                }
-            };
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(cardName).append(" - rearrange top 3 cards of target player's library.");
-            ability.setStackDescription(sb.toString());
-            
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        
-        
-        /* Converteded to AF Trigger
-        //*************** START *********** START **************************
-        else if(cardName.equals("Leveler")) {
-            //
-            // When Leveler enters the battlefield, exile all cards from your library.
-            //
-            final Ability ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    CardList lib = AllZoneUtil.getPlayerCardsInLibrary(card.getController());
-                    for(Card c:lib) AllZone.GameAction.exile(c);
-                }//resolve()
-            };//SpellAbility
-            
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = -5462488189911159119L;
-
-                public void execute() {
-                    AllZone.Stack.add(ability);
-                }
-            };
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(cardName).append(" - exile all cards from your library.");
-            ability.setStackDescription(sb.toString());
-            
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        */
-        
-        
+       
         //*************** START *********** START **************************
         else if(cardName.equals("Banshee")) {
         	/*

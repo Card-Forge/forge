@@ -1485,37 +1485,7 @@ class CardFactory_Lands {
 
             card.addComesIntoPlayCommand(comesIntoPlay);
          }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Halimar Depths")) {
-        	/*
-        	 * When Halimar Depths enters the battlefield, look at the top three
-        	 * cards of your library, then put them back in any order.
-        	 */
-        	final SpellAbility ability = new Ability(card, "0") {
-        		@Override
-        		public void resolve() {
-        			if(card.getController().equals(AllZone.HumanPlayer)) {
-        				AllZoneUtil.rearrangeTopOfLibrary(card.getController(), 3, false);
-        			}
-        		}//resolve()
-        	};//SpellAbility
-        	Command intoPlay = new Command() {
-				private static final long serialVersionUID = 4523264604845132603L;
 
-				public void execute() {
-        			AllZone.Stack.add(ability);
-        		}
-        	};
-        	
-        	StringBuilder sb = new StringBuilder();
-        	sb.append(cardName).append(" - Rearrange the top 3 cards in your library in any order.");
-        	ability.setStackDescription(sb.toString());
-        	card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Island of Wak-Wak")) {
         	/*
