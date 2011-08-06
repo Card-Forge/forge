@@ -2425,17 +2425,21 @@ public class CardFactory implements NewConstants {
             String bbCost = card.getSVar("Buyback");
             if (!bbCost.equals(""))
             {
-               SpellAbility bbDstryTgt = spDstryTgt.copy();
-               bbDstryTgt.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
-               bbDstryTgt.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
-               bbDstryTgt.setIsBuyBackAbility(true);
-               
-               bbDstryTgt.setBeforePayMana(CardFactoryUtil.input_targetValid(bbDstryTgt, Tgts, Selec));
-               
-               card.addSpellAbility(bbDstryTgt);
-            }
-
-        }//spDestroyTgt
+                SpellAbility bbDstryTgt = spDstryTgt.copy();
+                bbDstryTgt.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
+                
+                StringBuilder sb = new StringBuilder();
+                sb.append("Buyback ").append(bbCost).append(" (You may pay an additional ").append(bbCost);
+                sb.append(" as you cast this spell. If you do, put this card into your hand as it resolves.)");
+                bbDstryTgt.setDescription(sb.toString());
+                // bbDstryTgt.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
+                bbDstryTgt.setIsBuyBackAbility(true);
+                
+                bbDstryTgt.setBeforePayMana(CardFactoryUtil.input_targetValid(bbDstryTgt, Tgts, Selec));
+                
+                card.addSpellAbility(bbDstryTgt);
+             }
+         }//spDestroyTgt
 
         // Generic destroy all card
         if(hasKeyword(card, "spDestroyAll") != -1) {
