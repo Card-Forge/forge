@@ -1,0 +1,7 @@
+Name:Lay Bare
+ManaCost:2 U U
+Types:Instant
+Text:Counter target spell. Look at its controller's hand.
+K:spCounter:Spell:None:Graveyard:None:CC-RevealHand()
+SVar:Rarity:Common
+End

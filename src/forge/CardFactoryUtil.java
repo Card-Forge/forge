@@ -21,16 +21,15 @@ public class CardFactoryUtil {
         else return "" + n;
     }
     
-    public static boolean spCounter_MatchSpellAbility(SpellAbility sa,String[] splitRestrictions,String targetType)
+    public static boolean spCounter_MatchSpellAbility(Card srcCard,SpellAbility sa,String[] splitRestrictions,String targetType)
     {
     	boolean fullResult = true;
-        Card card = sa.getSourceCard();
         			
         if(targetType.equals("Spell"))
         {
         	if(sa.isAbility())
         	{
-        		System.out.println(card.getName() + " can only counter spells, not abilities.");
+        		System.out.println(srcCard.getName() + " can only counter spells, not abilities.");
         		return false;
         	}
         }
@@ -38,7 +37,7 @@ public class CardFactoryUtil {
         {
         	if(sa.isSpell())
         	{
-        		System.out.println(card.getName() + " can only counter abilities, not spells.");
+        		System.out.println(srcCard.getName() + " can only counter abilities, not spells.");
         		return false;
         	}
         }
@@ -48,7 +47,7 @@ public class CardFactoryUtil {
         }
         else
         {
-        	throw new IllegalArgumentException("Invalid target type for card " + card.getName());
+        	throw new IllegalArgumentException("Invalid target type for card " + srcCard.getName());
         }
         			
         for(int i=0;i<splitRestrictions.length;i++)
@@ -65,7 +64,7 @@ public class CardFactoryUtil {
         				
 	        String[] SplitParameters = Parameters.split(",");
         				
-        	System.out.println(card.getName() + " currently checking restriction '" + RestrictionID + "'");
+        	System.out.println(srcCard.getName() + " currently checking restriction '" + RestrictionID + "'");
         	if(RestrictionID.equals("Color"))
         	{
         		for(int p=0;p<SplitParameters.length;p++)
@@ -73,11 +72,11 @@ public class CardFactoryUtil {
         			System.out.println("Parameter: " + SplitParameters[p]);
         			if(SplitParameters[p].startsWith("Non-"))
         			{
-        				subResult |= !CardUtil.getColors(card).contains(SplitParameters[p].substring(4).toLowerCase()); 
+        				subResult |= !CardUtil.getColors(sa.getSourceCard()).contains(SplitParameters[p].substring(4).toLowerCase()); 
         			}
         			else
         			{
-        				subResult |= CardUtil.getColors(card).contains(SplitParameters[p].toLowerCase());
+        				subResult |= CardUtil.getColors(sa.getSourceCard()).contains(SplitParameters[p].toLowerCase());
         			}
         		}
         	}
@@ -89,11 +88,11 @@ public class CardFactoryUtil {
 					if(SplitParameters[p].startsWith("Non-"))
 					{
 						System.out.println(SplitParameters[p].substring(4));
-						subResult |= !card.getType().contains(SplitParameters[p].substring(4));
+						subResult |= !sa.getSourceCard().getType().contains(SplitParameters[p].substring(4));
 					}
 					else
 					{
-						subResult |= card.getType().contains(SplitParameters[p]);
+						subResult |= sa.getSourceCard().getType().contains(SplitParameters[p]);
 					}
 				}
         	}
@@ -106,46 +105,60 @@ public class CardFactoryUtil {
         					
 				if(mode.equals("<"))
 				{
-					subResult |= (CardUtil.getConvertedManaCost(card) < value);
+					subResult |= (CardUtil.getConvertedManaCost(sa.getSourceCard()) < value);
 				}
 				else if(mode.equals(">"))
 				{
-					subResult |= (CardUtil.getConvertedManaCost(card) > value);
+					subResult |= (CardUtil.getConvertedManaCost(sa.getSourceCard()) > value);
 				}
 				else if(mode.equals("=="))
 				{
-					subResult |= (CardUtil.getConvertedManaCost(card) == value);
+					subResult |= (CardUtil.getConvertedManaCost(sa.getSourceCard()) == value);
 				}
 				else if(mode.equals("!="))
 				{
- 					subResult |= (CardUtil.getConvertedManaCost(card) != value);
+ 					subResult |= (CardUtil.getConvertedManaCost(sa.getSourceCard()) != value);
 				}
 				else if(mode.equals("<="))
 				{
-					subResult |= (CardUtil.getConvertedManaCost(card) <= value);
+					subResult |= (CardUtil.getConvertedManaCost(sa.getSourceCard()) <= value);
 				}
 				else if(mode.equals(">="))
 				{
-					subResult |= (CardUtil.getConvertedManaCost(card) >= value);
+					subResult |= (CardUtil.getConvertedManaCost(sa.getSourceCard()) >= value);
 				}        					
 				else
 				{
-					throw new IllegalArgumentException("spCounter: Invalid mode parameter to CMC restriction in card " + card.getName());
+					throw new IllegalArgumentException("spCounter: Invalid mode parameter to CMC restriction in card " + srcCard.getName());
 				}
 			}
 			else if(RestrictionID.equals("Targets"))
 			{        		
-				if(sa.getTargetCard() == null)
+				if(sa.getTargetCard() == null && sa.getTargetPlayer() == null)
 				{
+					System.out.println("Current counterspell has Targets() but current spell has no target! Exiting...");
 					return false;
 				}
 
 				for(int p=0;p<SplitParameters.length;p++)
 				{
 					System.out.println("Parameter: " + SplitParameters[p]);
-					if(SplitParameters[p].startsWith("My-")) //Targets my <type> permanent
+					if(SplitParameters[p].equals("My")) //Targets the controller of the counterspell.
 					{
-						if(sa.getTargetCard().getController() != card.getController())
+						subResult |= (sa.getTargetPlayer() == srcCard.getController());
+
+					}
+					else if(SplitParameters[p].equals("Opp")) //Targets the opponent of the controller of the counterspell.
+					{
+						subResult |= (sa.getTargetPlayer() != srcCard.getController());
+					}
+					else if(SplitParameters[p].equals("CC")) //Targets the controller of the countered spell.
+					{
+						subResult |= (sa.getTargetPlayer() == sa.getSourceCard().getController());
+					}
+					else if(SplitParameters[p].startsWith("My-")) //Targets my <type> permanent
+					{
+						if(sa.getTargetCard().getController() != srcCard.getController())
 						{
 							return false;
 						}
@@ -161,7 +174,7 @@ public class CardFactoryUtil {
 					}
 					else if(SplitParameters[p].startsWith("Opp-")) //Targets opponent's <type> permanent
 					{
-						if(sa.getTargetCard().getController() == card.getController())
+						if(sa.getTargetCard().getController() == srcCard.getController())
   						{
 							return false;
   						}
@@ -193,7 +206,7 @@ public class CardFactoryUtil {
         } //End Targeting parsing
         System.out.println("Success: " + Boolean.toString(fullResult));
 		return fullResult;
-    }
+    }//spCounter_MatchSpellAbility
     
     public static Card AI_getMostExpensivePermanent(CardList list, final Card spell, boolean targeted) {
         CardList all = list;

@@ -1,0 +1,7 @@
+Name:Hindering Light
+ManaCost:W U
+Types:Instant
+Text:Counter target spell that targets you or a permanent you control.\r\nDraw a card.
+K:spCounter:Spell:Targets(My,My-Land,My-Creature,My-Artifact,My-Enchantment,My-Planeswalker):Graveyard:My-Draw(1)
+SVar:Rarity:Common
+End

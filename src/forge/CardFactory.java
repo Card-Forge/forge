@@ -348,7 +348,7 @@ public class CardFactory implements NewConstants {
 
 				@Override
     			public void resolve() {
-    				if(CardFactoryUtil.spCounter_MatchSpellAbility(tgt[0],splitTargetingRestrictions,targetType) 
+    				if(CardFactoryUtil.spCounter_MatchSpellAbility(card,tgt[0],splitTargetingRestrictions,targetType) 
     						&& AllZone.Stack.contains(tgt[0])
     						&& !tgt[0].getSourceCard().KeywordsContain("CARDNAME can't be countered."))
     				{
@@ -427,11 +427,11 @@ public class CardFactory implements NewConstants {
             						Target = sa.getSourceCard().getController();
             					}
 
-    						if(ActionID.startsWith("May-"))
-    						{
-    							ActionID = ActionID.substring(4);
-    							isOptional = true;
-    						}
+            					if(ActionID.startsWith("May-"))
+            					{
+            						ActionID = ActionID.substring(4);
+            						isOptional = true;
+            					}
             				
             					if(ActionID.equals("Draw"))
             					{
@@ -446,7 +446,7 @@ public class CardFactory implements NewConstants {
     								}
     								else
     								{//AI decision-making, only draws a card if it doesn't risk discarding it.
-    									if(AllZone.getZone(Constant.Zone.Hand,AllZone.ComputerPlayer).getCards().length < 7)
+    									if(AllZone.getZone(Constant.Zone.Hand,AllZone.ComputerPlayer).getCards().length + Integer.parseInt(SplitActionParams[0]) < 6)
     									{
     			        						Target.drawCards(Integer.parseInt(SplitActionParams[0]));
     									}
@@ -460,66 +460,126 @@ public class CardFactory implements NewConstants {
             					}
             					else if(ActionID.equals("Discard"))
             					{
-    							if(isOptional)
-    							{
-    								if(Target == AllZone.HumanPlayer)
-    								{
-    									if(AllZone.Display.getChoice("Do you want to discard" + SplitActionParams[0] + "card(s)?","Yes","No").equals("Yes"))
-    									{
-    			        						Target.discard(Integer.parseInt(SplitActionParams[0]),this);
-    									}
-    								}
-    								else
-    								{//AI decisionmaking. Should take Madness cards and the like into account in the future.Right now always refuses to discard.
-    								}
-    							}
-    							else
-    							{
+            						if(isOptional)
+            						{
+            							if(Target == AllZone.HumanPlayer)
+            							{
+            								if(AllZone.Display.getChoice("Do you want to discard" + SplitActionParams[0] + "card(s)?","Yes","No").equals("Yes"))
+            								{
+            									Target.discard(Integer.parseInt(SplitActionParams[0]),this);
+            								}
+            							}
+            							else
+            							{//AI decisionmaking. Should take Madness cards and the like into account in the future.Right now always refuses to discard.
+            							}
+            						}
+            						else
+            						{
     	        						Target.discard(Integer.parseInt(SplitActionParams[0]), this);
-    							}
+            						}
             					}
             					else if(ActionID.equals("LoseLife"))
             					{
-    							if(isOptional)
-    							{
-    								if(Target == AllZone.HumanPlayer)
-    								{
-    									if(AllZone.Display.getChoice("Do you want to lose" + SplitActionParams[0] + "life?","Yes","No").equals("Yes"))
-    									{
-    			        						Target.loseLife(Integer.parseInt(SplitActionParams[0]), card);
-    									}
-    								}
-    								else
-    								{//AI decisionmaking. Not sure why one would ever want to agree to this, except for the rare case of Near-Death Experience+Ali Baba.
-    								}
-    							}
-    							else
-    							{
+            						if(isOptional)
+            						{
+            							if(Target == AllZone.HumanPlayer)
+            							{
+            								if(AllZone.Display.getChoice("Do you want to lose" + SplitActionParams[0] + "life?","Yes","No").equals("Yes"))
+            								{
+    			        							Target.loseLife(Integer.parseInt(SplitActionParams[0]), card);
+            								}
+            							}
+            							else
+            							{//AI decisionmaking. Not sure why one would ever want to agree to this, except for the rare case of Near-Death Experience+Ali Baba.
+            							}
+            						}
+            						else
+            						{
     	        						Target.loseLife(Integer.parseInt(SplitActionParams[0]), card);
-    							}
+            						}
             						
             					}
             					else if(ActionID.equals("GainLife"))
             					{
-    							if(isOptional)
-    							{
-    								if(Target == AllZone.HumanPlayer)
+            						if(isOptional)
     								{
-    									if(AllZone.Display.getChoice("Do you want to gain" + SplitActionParams[0] + "life?","Yes","No").equals("Yes"))
+    									if(Target == AllZone.HumanPlayer)
     									{
+    										if(AllZone.Display.getChoice("Do you want to gain" + SplitActionParams[0] + "life?","Yes","No").equals("Yes"))
+    										{
     			        						Target.gainLife(Integer.parseInt(SplitActionParams[0]), card);
+    										}
+    									}
+    									else
+    									{//AI decisionmaking. Not sure why one would ever want to decline this, except for the rare case of Near-Death Experience.
+    		        						Target.gainLife(Integer.parseInt(SplitActionParams[0]), card);
     									}
     								}
     								else
-    								{//AI decisionmaking. Not sure why one would ever want to decline this, except for the rare case of Near-Death Experience.
-    		        						Target.gainLife(Integer.parseInt(SplitActionParams[0]), card);
+    								{
+    	        						Target.gainLife(Integer.parseInt(SplitActionParams[0]), card);
+    								}
+            					}
+						else if(ActionID.equals("RevealHand"))
+						{
+    							if(isOptional)
+    							{
+    								System.out.println(Target);
+    								if(Target == AllZone.HumanPlayer)
+    								{
+    									if(AllZone.Display.getChoice("Do you want to reveal your hand?","Yes","No").equals("Yes"))
+    									{//Does nothing now, of course, but sometime in the future the AI may be able to remember cards revealed and prioritize discard spells accordingly.
+
+    									}
+    								}
+    								else
+    								{//AI decisionmaking. Not sure why one would ever want to agree to this
+
     								}
     							}
     							else
     							{
-    	        						Target.gainLife(Integer.parseInt(SplitActionParams[0]), card);
+    								System.out.println(Target);
+    	        						if(Target == AllZone.HumanPlayer)
+    	        						{//Does nothing now, of course, but sometime in the future the AI may be able to remember cards revealed and prioritize discard spells accordingly.
+
+    	        						}
+    	        						else
+    	        						{
+    	        							CardList list = new CardList(AllZone.getZone(Constant.Zone.Hand,AllZone.ComputerPlayer).getCards());
+    	        							AllZone.Display.getChoiceOptional("Revealed cards",list.toArray());
+    	        						}
     							}
-            					}
+						}
+						else if(ActionID.equals("RearrangeTopOfLibrary")) //A'la Aven Fateshaper
+						{
+							if(isOptional)
+    							{
+    								if(Target == AllZone.HumanPlayer)
+    								{
+    									if(AllZone.Display.getChoice("Do you want to rearrange the top " + SplitActionParams[0] + " cards of your library?","Yes","No").equals("Yes"))
+    									{
+										AllZoneUtil.rearrangeTopOfLibrary(Target, Integer.parseInt(SplitActionParams[0]), false);
+    									}
+    								}
+    								else
+    								{//AI decisionmaking. AI simply can't atm, and wouldn't know how best to do it anyway.
+
+    								}
+    							}
+    							else
+    							{
+    	        						if(Target == AllZone.HumanPlayer)
+								{
+									AllZoneUtil.rearrangeTopOfLibrary(Target, Integer.parseInt(SplitActionParams[0]), false);
+								}
+								else
+								{
+									CardList list = new CardList(AllZone.getZone(Constant.Zone.Hand,AllZone.ComputerPlayer).getCards());
+									AllZone.Display.getChoiceOptional("Revealed cards",list.toArray());
+								}
+    							}
+						}
             					else
             					{
             						throw new IllegalArgumentException("spCounter: Invalid Extra Action for card " + card.getName());
@@ -540,7 +600,7 @@ public class CardFactory implements NewConstants {
 
     				for(int i=0;i<choosables.size();i++)
     				{
-    					if(!CardFactoryUtil.spCounter_MatchSpellAbility(choosables.get(i),splitTargetingRestrictions,targetType))
+    					if(!CardFactoryUtil.spCounter_MatchSpellAbility(card,choosables.get(i),splitTargetingRestrictions,targetType))
     					{
     						choosables.remove(i);
     					}
@@ -565,7 +625,7 @@ public class CardFactory implements NewConstants {
 
     				for(int i=0;i<choosables.size();i++)
     				{
-    					if(!CardFactoryUtil.spCounter_MatchSpellAbility(choosables.get(i),splitTargetingRestrictions,targetType) || choosables.get(i).getSourceCard().equals(card))
+    					if(!CardFactoryUtil.spCounter_MatchSpellAbility(card,choosables.get(i),splitTargetingRestrictions,targetType) || choosables.get(i).getSourceCard().equals(card))
     					{
     						choosables.remove(i);
     					}
@@ -574,7 +634,7 @@ public class CardFactory implements NewConstants {
 
     				for(SpellAbility sa : choosables)
     				{
-    					map.put(sa.toString(),sa);
+    					map.put(sa.getStackDescription(),sa);
     				}
 
     				String[] choices = new String[map.keySet().size()];
