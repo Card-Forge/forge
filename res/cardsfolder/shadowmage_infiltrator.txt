@@ -1,6 +1,6 @@
 Name:Shadowmage Infiltrator
 ManaCost:1 U B
-Types:Creature Wizard
+Types:Creature Human Wizard
 Text:Whenever Shadowmage Infiltrator deals combat damage to a player, you may draw a card.
 PT:1/3
 K:Fear

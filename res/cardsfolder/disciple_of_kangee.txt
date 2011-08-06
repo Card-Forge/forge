@@ -1,6 +1,6 @@
 Name:Disciple of Kangee
 ManaCost:2 W
-Types:Creature Wizard
+Types:Creature Human Wizard
 Text:no text
 PT:2/2
 SVar:Rarity:Common

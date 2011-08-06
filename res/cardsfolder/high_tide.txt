@@ -1,7 +1,7 @@
 Name:High Tide
 ManaCost:U
 Types:Instant
-Text:Until end of turn, whenever a player taps an Island for mana, that player adds Blue to his or her mana pool (in addition to the mana the land produces).
+Text:Until end of turn, whenever a player taps an Island for mana, that player adds U to his or her mana pool (in addition to the mana the land produces).
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/high_tide.jpg
