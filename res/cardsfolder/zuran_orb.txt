@@ -1,7 +1,8 @@
 Name:Zuran Orb
 ManaCost:0
 Types:Artifact
-Text:0: Sacrifice a land to gain 2 life.
+Text:no text
+K:abGainLife Sac<1/Land>:2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zuran_orb.jpg
 End

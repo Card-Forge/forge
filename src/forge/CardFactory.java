@@ -3780,7 +3780,7 @@ public class CardFactory implements NewConstants {
 
             spDesc[0] = abCost.toString() + spDesc[0];
             
-            final SpellAbility abDraw = new Ability_Activated(card, abCost.getMana()) {
+            final Ability_Activated abDraw = new Ability_Activated(card, abCost, abTgt) {
                 private static final long serialVersionUID = -206739246009089196L;
                 
                 private int               ncards;
@@ -4198,7 +4198,7 @@ public class CardFactory implements NewConstants {
                    }
                 }
 
-                final SpellAbility abLoseLife = new Ability_Activated(card, abCost.getMana())
+                final Ability_Activated abLoseLife = new Ability_Activated(card, abCost, abTgt)
                 {
 	                private static final long serialVersionUID = -936369754466156082L;
 	
@@ -4487,7 +4487,7 @@ public class CardFactory implements NewConstants {
                       stDesc[0] = cardName + " - you gain life";
                    }
                 }
-                final SpellAbility abGainLife = new Ability_Activated(card, abCost.getMana())
+                final Ability_Activated abGainLife = new Ability_Activated(card, abCost, abTgt)
                 {
 					private static final long serialVersionUID = -936369754466156082L;
 					
@@ -7197,11 +7197,15 @@ public class CardFactory implements NewConstants {
         
         //*************** START *********** START **************************
         else if(cardName.equals("AEther Spellbomb")) {
-            
-            final Ability ability = new Ability(card, "U") {
-                @Override
+        	Ability_Cost abCost = new Ability_Cost("U Sac<1/CARDNAME>", cardName, true);
+        	String[] valid = {"Creature"};
+        	Target abTgt = new Target("TgtV", "Target a creature to bounce", valid);
+            final Ability_Activated ability = new Ability_Activated(card, abCost, abTgt) {
+				private static final long serialVersionUID = 1L;
+
+				@Override
                 public boolean canPlay() {
-                    return AllZone.GameAction.isCardInPlay(card) && !AllZone.Stack.getSourceCards().contains(card);
+                    return AllZone.GameAction.isCardInPlay(card);
                 }
                 
                 @Override
@@ -7226,23 +7230,24 @@ public class CardFactory implements NewConstants {
                         if(!target[0].isToken()) AllZone.GameAction.moveTo(hand, target[0]);
                         else AllZone.getZone(target[0]).remove(target[0]);
                     }
-                    AllZone.GameAction.sacrifice(getSourceCard());
                 }//resolve()
             };//SpellAbility
             ability.setDescription("U, Sacrifice AEther Spellbomb: Return target creature to its owner's hand.");
             card.addSpellAbility(ability);
-            ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
         }//*************** END ************ END **************************
         
         
         //*************** START *********** START **************************
         else if(cardName.equals("Lifespark Spellbomb")) {
-            final SpellAbility ability = new Ability_Activated(card, "G") {
+        	Ability_Cost abCost = new Ability_Cost("G Sac<1/CARDNAME>", cardName, true);
+        	String[] valid = {"Land"};
+        	Target abTgt = new Target("TgtV", "Target a land to animate", valid);
+            final Ability_Activated ability = new Ability_Activated(card, abCost, abTgt) {
                 private static final long serialVersionUID = -5744842090293912606L;
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.GameAction.isCardInPlay(card) && !AllZone.Stack.getSourceCards().contains(card);
+                    return AllZone.GameAction.isCardInPlay(card);
                 }
                 
                 @Override
@@ -7293,90 +7298,24 @@ public class CardFactory implements NewConstants {
                     };
                     
                     AllZone.EndOfTurn.addUntil(untilEOT);
-                    AllZone.GameAction.sacrifice(getSourceCard());
                 }//resolve()
             };//SpellAbility
             card.addSpellAbility(ability);
             ability.setDescription("G, Sacrifice Lifespark Spellbomb: Target land becomes a 3/3 Creature until end of turn. It is still a land.");
-            ability.setBeforePayMana(CardFactoryUtil.input_targetType(ability, "Land"));
             
         }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Pyrite Spellbomb")) {
-            
-            final SpellAbility ability = new Ability_Activated(card, "R") {
-                private static final long serialVersionUID = 1L;
-                
-                @Override
-                public boolean canPlay() {
-                    return AllZone.GameAction.isCardInPlay(card) && !AllZone.Stack.getSourceCards().contains(card);
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    Random r = new Random();
-                    if(r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed())) return true;
-                    else return false;
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    CardList list = CardFactoryUtil.AI_getHumanCreature(2, card, true);
-                    list.shuffle();
-                    
-                    if(list.isEmpty() || AllZone.Human_Life.getLife() < 5 + 2) setTargetPlayer(Constant.Player.Human);
-                    else setTargetCard(list.get(0));
-                }//chooseTargetAI
-                
-                @Override
-                public void resolve() {
-                    if(getTargetCard() != null) {
-                        if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                                && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(2,
-                                card);
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(2,card);
-                    AllZone.GameAction.sacrifice(getSourceCard());
-                }//resolve()
-            };//Ability_Activated
-            
-            ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
-            ability.setDescription("R, Sacrifice Pyrite Spellbomb: Pyrite Spellbomb deals 2 damage to target creature or player.");
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Sunbeam Spellbomb")) {
-            final Ability ability = new Ability(card, "W") {
-                @Override
-                public boolean canPlay() {
-                    return AllZone.GameAction.isCardInPlay(card) && !AllZone.Stack.getSourceCards().contains(card);
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return (AllZone.GameAction.getPlayerLife(Constant.Player.Computer).getLife() < 7);
-                }
-                
-                @Override
-                public void resolve() {
-                	AllZone.GameAction.gainLife(card.getController(), 5);
-                    AllZone.GameAction.sacrifice(getSourceCard());
-                }//resolve()
-            };//SpellAbility
-            ability.setDescription("W, Sacrifice Sunbeam Spellbomb: You gain 5 life.");
-            ability.setStackDescription(card.getName() + " - " + card.getController() + " gains 5 life.");
-            card.addSpellAbility(ability);
-        } //*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Necrogen Spellbomb")) {
-            final Ability ability = new Ability(card, "B") {
-                @Override
+        	Ability_Cost abCost = new Ability_Cost("B Sac<1/CARDNAME>", cardName, true);
+        	String[] valid = {"player"};
+        	Target abTgt = new Target("TgtV","Target player discards a card", valid);
+            final Ability_Activated ability = new Ability_Activated(card, abCost, abTgt) {
+				private static final long serialVersionUID = -5712428914792877529L;
+
+				@Override
                 public boolean canPlay() {
-                    return AllZone.GameAction.isCardInPlay(card) && !AllZone.Stack.getSourceCards().contains(card);
+                    return AllZone.GameAction.isCardInPlay(card);
                 }
                 
                 @Override
@@ -7396,11 +7335,9 @@ public class CardFactory implements NewConstants {
                     
                     if(Constant.Player.Computer.equals(getTargetPlayer())) AllZone.GameAction.discardRandom(getTargetPlayer(), this);
                     else AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
-                    AllZone.GameAction.sacrifice(getSourceCard());
                 }//resolve()
             };//SpellAbility
             ability.setDescription("B, Sacrifice Necrogen Spellbomb: Target player discards a card.");
-            ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
             card.addSpellAbility(ability);
         } //*************** END ************ END **************************
         
@@ -9440,7 +9377,8 @@ public class CardFactory implements NewConstants {
             * put a 5/5 colorless Djinn artifact creature token with flying
             * onto the battlefield.
             */
-           final SpellAbility ability = new Ability_Activated(card, "1") {
+        	Ability_Cost abCost = new Ability_Cost("1 Sac<1/CARDNAME>", cardName, true);
+           final SpellAbility ability = new Ability_Activated(card, abCost, null) {
              private static final long serialVersionUID = -5741302550353410000L;
              
              @Override
@@ -9470,8 +9408,6 @@ public class CardFactory implements NewConstants {
                     choice = choices[MyRandom.random.nextInt(2)];
                  }
 
-                 AllZone.GameAction.sacrifice(card);
-
                  if( (flip == true && choice.equals("heads")) ||   (flip == false && choice.equals("tails"))) {
                     JOptionPane.showMessageDialog(null, "Bottle of Suleiman - Win! - "+player+" puts a 5/5 Flying Djinn in play.", "Bottle of Suleiman", JOptionPane.PLAIN_MESSAGE);
                     CardFactoryUtil.makeToken("Djinn", "C 5 5 Djinn", card, "", new String[] {"Creature", "Artifact", "Djinn"}, 5, 5, new String[] {"Flying"});
@@ -9484,55 +9420,11 @@ public class CardFactory implements NewConstants {
            };//SpellAbility
 
            card.addSpellAbility(ability);
-           ability.setDescription("1: Flip a coin.  Win: Put 5/5 Djinn in play.  Lose: Does 5 damage to you.");
+           ability.setDescription("1, Sacrifice Bottle of Suleiman: Flip a coin.  Win: Put 5/5 Djinn in play.  Lose: Does 5 damage to you.");
            ability.setStackDescription("Bottle of Suleiman - flip a coin");
         }//*************** END ************ END **************************
         
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Zuran Orb")) {
-        	final SpellAbility ability = new Ability_Activated(card,"0") {
-        		private static final long serialVersionUID = 6349074098650435648L;
-        		public boolean canPlayAI() {
-        			if( CardFactoryUtil.getLandsInPlay(Constant.Player.Computer).size() > 0 ) {
-        				if( AllZone.GameAction.getPlayerLife(Constant.Player.Computer).getLife() < 5 ) {
-        					return true;
-        				}
-        				else {
-        					return false;
-        				}
-        			}
-        			else return false;
-        		}
-        		public void chooseTargetAI() {
-        			Card target = null;
-        			target = CardFactoryUtil.getWorstLand(Constant.Player.Computer);
-        			setTargetCard(target);
-        		}//chooseTargetAI()
-        		public void resolve() {
-        			AllZone.GameAction.gainLife(card.getController(), 2);
-        			AllZone.GameAction.sacrifice(getTargetCard());
-        		}
-        	};//SpellAbility
-
-        	Input runtime = new Input() {
-        		private static final long serialVersionUID = -64941510699003443L;
-
-        		public void showMessage() {
-        			ability.setStackDescription(card +" - Sacrifice a land to gain 2 life.");
-        			PlayerZone play = AllZone.getZone(Constant.Zone.Play,card.getController());
-        			CardList choice = new CardList(play.getCards());
-        			choice  = choice.getType("Land");
-        			stopSetNext(CardFactoryUtil.input_sacrifice(ability,choice,"Select a land to sacrifice."));
-        		}
-        	};
-
-        	ability.setStackDescription("Zuran Orb - Gain 2 life.");
-        	card.addSpellAbility(ability);
-        	ability.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
-        
-        
+      
         //*************** START *********** START **************************
         else if(cardName.equals("Lodestone Bauble")) {
         	/* 1, Tap, Sacrifice Lodestone Bauble: Put up to four target basic
@@ -10495,7 +10387,14 @@ public class CardFactory implements NewConstants {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Barl's Cage")) {
-            final SpellAbility ability = new Ability_Activated(card, "3") {
+            Target target = new Target("TgtV");
+            target.setVTSelection("Select target creature.");
+            final String Tgts[] = {"Creature"};
+            target.setValidTgts(Tgts);
+
+            final Ability_Cost cost = new Ability_Cost("3", card.getName(), true);
+        	
+            final SpellAbility ability = new Ability_Activated(card, cost, target) {
 				private static final long serialVersionUID = 8941566961041310961L;
 
 				@Override
@@ -10527,16 +10426,6 @@ public class CardFactory implements NewConstants {
                     }//is card in play?
                 }//resolve()
             };//SpellAbility
-            
-            Target target = new Target("TgtV");
-            target.setVTSelection("Select target creature.");
-            final String Tgts[] = {"Creature"};
-            target.setValidTgts(Tgts);
-            
-            ability.setTarget(target);
-           
-            final Ability_Cost cost = new Ability_Cost("3", card.getName(), true);
-            ability.setPayCosts(cost);
             
             card.addSpellAbility(ability); 
         }//*************** END ************ END **************************

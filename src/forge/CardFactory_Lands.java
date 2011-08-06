@@ -3731,6 +3731,13 @@ class CardFactory_Lands {
         
         //*************** START ********** START *************************
         else if(cardName.equals("Elephant Graveyard")) {
+        	Target target = new Target("TgtV");
+        	target.setVTSelection("Select target Elephant.");
+        	final String Tgts[] = {"Creature.Elephant"};
+        	target.setValidTgts(Tgts);
+
+        	final Ability_Cost cost = new Ability_Cost("T", card.getName(), true);
+        	
         	final Card[] tgt = new Card[1];
         	final Command untilEOT = new Command() {
 				private static final long serialVersionUID = -5392534004045270599L;
@@ -3740,7 +3747,7 @@ class CardFactory_Lands {
         		}
         	};
 
-        	final SpellAbility ability = new Ability_Activated(card, "0") {
+        	final SpellAbility ability = new Ability_Activated(card, cost, target) {
 				private static final long serialVersionUID = -3783236452506062253L;
 
 				@Override
@@ -3764,17 +3771,6 @@ class CardFactory_Lands {
         	};
 
         	ability.setDescription("tap: Regenerate target Elephant.");
-
-        	Target target = new Target("TgtV");
-        	target.setVTSelection("Select target Elephant.");
-        	final String Tgts[] = {"Creature.Elephant"};
-        	target.setValidTgts(Tgts);
-
-        	ability.setTarget(target);
-
-        	final Ability_Cost cost = new Ability_Cost("T", card.getName(), true);
-        	ability.setPayCosts(cost);
-
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         

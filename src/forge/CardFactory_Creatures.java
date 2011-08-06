@@ -8141,29 +8141,31 @@ public class CardFactory_Creatures {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Sakura-Tribe Elder")) {
+        	Ability_Cost abCost = new Ability_Cost("Sac<1/CARDNAME>", cardName, true);
+        	
             //tap sacrifice
-            final SpellAbility ability = new Ability_Activated(card, "0") {
+            final SpellAbility ability = new Ability_Activated(card, abCost, null) {
                 private static final long serialVersionUID = 1135117614484689768L;
                 
                 @Override
                 public boolean canPlayAI() {
                     //sacrifice Sakura-Tribe Elder if Human has any creatures
-                    CardList list = new CardList(AllZone.Human_Play.getCards());
-                    list = list.getType("Creature");
-                    return list.size() != 0;
+                    CardList creature = new CardList(AllZone.Human_Play.getCards());
+                    creature = creature.getType("Creature");
+                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
+                    CardList basic = new CardList(library.getCards());
+                    basic = basic.getType("Basic");
+                    return creature.size() > 0 && basic.size() != 0;
                 }
                 
                 @Override
                 public void chooseTargetAI() {
-                    AllZone.GameAction.sacrifice(card);
+                    //AllZone.GameAction.sacrifice(card);
                 }
                 
                 @Override
                 public boolean canPlay() {
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    CardList list = new CardList(library.getCards());
-                    list = list.getType("Basic");
-                    return list.size() > 0 && super.canPlay();
+                	return super.canPlay();
                 }//canPlay()
                 
                 @Override
@@ -8222,26 +8224,8 @@ public class CardFactory_Creatures {
                     AllZone.GameAction.shuffle(card.getController());
                 }//resolve()
             };//SpellAbility
-            
-            Input runtime = new Input() {
-                private static final long serialVersionUID = 1959709104655340395L;
-                boolean                   once             = true;
-                
-                @Override
-                public void showMessage() {
-                    //this is necessary in order not to have a StackOverflowException
-                    //because this updates a card, it creates a circular loop of observers
-                    if(once) {
-                        once = false;
-                        AllZone.GameAction.sacrifice(card);
-                        AllZone.Stack.add(ability);
-                        
-                        stop();
-                    }
-                }//showMessage()
-            };
+
             card.addSpellAbility(ability);
-            ability.setBeforePayMana(runtime);
             ability.setDescription("Sacrifice Sakura-Tribe Elder: Search your library for a basic land card, put that card into play tapped, then shuffle your library.");
             ability.setStackDescription("Search your library for a basic land card, put that card into play tapped, then shuffle your library.");
         }//*************** END ************ END **************************
@@ -13528,7 +13512,14 @@ public class CardFactory_Creatures {
         
       //*************** START *********** START **************************
         else if(cardName.equals("Tradewind Rider")) {
-            final SpellAbility a1 = new Ability_Activated(card, "0") {
+            Target target = new Target("TgtV");
+            target.setVTSelection("Select target permanent to return to owner's hand.");
+            final String Tgts[] = {"Permanent"};
+            target.setValidTgts(Tgts);
+           
+            final Ability_Cost cost = new Ability_Cost("T tapXType<2/Creature>", card.getName(), true);
+        	
+            final SpellAbility bounce = new Ability_Activated(card, cost, target) {
                 private static final long serialVersionUID = 3438865371487994984L;
                 
                 @Override
@@ -13621,44 +13612,8 @@ public class CardFactory_Creatures {
                 
             };//a1
             
-            Target target = new Target("TgtV");
-            target.setVTSelection("Select target permanent to return to owner's hand.");
-            final String Tgts[] = {"Permanent"};
-            target.setValidTgts(Tgts);
-            
-            a1.setTarget(target);
-           
-            final Ability_Cost cost = new Ability_Cost("T tapXType<2/Creature>", card.getName(), true);
-            a1.setPayCosts(cost);
-            
-            //card.clearSpellAbility();
-            card.addSpellAbility(a1);
-            a1.setDescription("tap, Tap two untapped creatures you control: Return target permanent to its owner's hand.");
-            
-            /*
-            Input runtime = new Input() {
-                
-
-                private static final long serialVersionUID = 5673846456179861542L;
-                
-                @Override
-                public void showMessage() {
-                    CardList all = new CardList();
-                    all.addAll(AllZone.Human_Play.getCards());
-                    all.addAll(AllZone.Computer_Play.getCards());
-                    all = all.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return (c.isPermanent()) && CardFactoryUtil.canTarget(card, c);
-                        }
-                    });
-                    
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(a1, all, "Return target permanent", true,
-                            false));
-                }
-            };
-            a1.setBeforePayMana(runtime);
-            
-            */
+            bounce.setDescription("tap, Tap two untapped creatures you control: Return target permanent to its owner's hand.");
+            card.addSpellAbility(bounce);
         }//*************** END ************ END **************************
         
 
@@ -17391,54 +17346,6 @@ public class CardFactory_Creatures {
         //**************END****************END***********************
 
         
-        //****************************START*****************
-        else if(cardName.equals("Putrid Leech")) {
-        	final SpellAbility ability = new Ability_Activated(card, "0") 
-        	{
-				private static final long serialVersionUID = 2092968545127233062L;
-
-				public void resolve()
-        		{
-					//TODO: make this part of the cost
-					AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(2,card);
-        			final Command EOT = new Command() {
-                         private static final long serialVersionUID = -8840812331316327448L;
-                         
-                         public void execute() {
-                             if(AllZone.GameAction.isCardInPlay(card)) {
-                                 card.addTempAttackBoost(-2);
-                                 card.addTempDefenseBoost(-2);
-                             }
-                         }
-                     };
-                     card.addTempAttackBoost(2);
-                     card.addTempDefenseBoost(2);
-                     AllZone.EndOfTurn.addUntil(EOT);
-                     card.setAbilityUsed(card.getAbilityUsed() + 1);
-        		}
-				
-				
-				public boolean canPlay() {
-                    return super.canPlay() && (CardFactoryUtil.canUseAbility(card));
-				}
-				
-				
-				public boolean canPlayAI()
-				{
-					Combat c = ComputerUtil.getAttackers();
-                    CardList list = new CardList(c.getAttackers());
-                    
-                    //could this creature attack?, if attacks, do not use ability
-					return AllZone.Computer_Life.getLife() > 5 && list.contains(card) && AllZone.Phase.getPhase().equals(Constant.Phase.Main1);
-				}
-        	};
-        	ability.setDescription("Pay 2 life: Putrid Leech gets +2/+2 until end of turn. Activate this ability only once each turn.");
-        	ability.setStackDescription(card + " - gets +2/+2 until end of turn.");
-        	card.addSpellAbility(ability);
-        }
-        //**************END****************END***********************
-        
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Borderland Ranger") || cardName.equals("Sylvan Ranger")
         		|| cardName.equals("Civic Wayfinder") || cardName.equals("Pilgrim's Eye")) {
@@ -18699,7 +18606,9 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if (cardName.equals("Kargan Dragonlord"))
         {
-	        final SpellAbility ability = new Ability_Activated(card, "R") {
+        	Ability_Cost abCost = new Ability_Cost("R", cardName, true);
+        	
+	        final SpellAbility ability = new Ability_Activated(card, abCost, null) {
 				private static final long serialVersionUID = -2252408767635375616L;
 
 				@Override
@@ -19337,66 +19246,6 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         
-      //*************** START *********** START **************************
-        else if(cardName.equals("Ravenous Baloth")) {
-        	final SpellAbility ability = new Ability_Activated(card,"0") {
-
-				private static final long serialVersionUID = 4242089395799673253L;
-				public boolean canPlayAI() {
-        			CardList creats = AllZoneUtil.getCreaturesInPlay(Constant.Player.Computer);
-        			creats = creats.filter(new CardListFilter()
-        			{
-        				public boolean addCard(Card c)
-        				{
-        					return c.getType().contains("Beast") || c.getKeyword().contains("Changeling") 
-        						   && CardFactoryUtil.canTarget(card, c);
-        				}
-        			});
-        			if( creats.size() > 0) {
-        				if (AllZone.GameAction.getPlayerLife(Constant.Player.Computer).getLife() < 5 ) {
-        					CardListUtil.sortAttackLowFirst(creats);
-        					setTargetCard(creats.get(0));
-        					return true;
-        				}
-        				else {
-        					return false;
-        				}
-        			}
-        			else return false;
-        		}
-
-        		public void resolve() {
-        			AllZone.GameAction.gainLife(card.getController(), 4);
-        			AllZone.GameAction.sacrifice(getTargetCard());
-        		}
-        	};//SpellAbility
-
-        	Input runtime = new Input() {
-        		
-				private static final long serialVersionUID = 6566691243159414430L;
-
-				public void showMessage() {
-        			//ability.setStackDescription(card +" - Sacrifice a land to gain 2 life.");
-        			PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-        			CardList choice = new CardList(play.getCards());
-        			choice  = choice.filter(new CardListFilter()
-        			{
-        				public boolean addCard(Card c)
-        				{
-        				   return c.getType().contains("Beast") || c.getKeyword().contains("Changeling") 
- 						   		  && CardFactoryUtil.canTarget(card, c);
-        				}
-        			});
-        			stopSetNext(CardFactoryUtil.input_sacrifice(ability,choice,"Select a Beast to sacrifice."));
-        		}
-        	};
-        	ability.setDescription("Sacrifice a Beast: You gain 4 life.");
-        	ability.setStackDescription(card + " - You gain 4 life.");
-        	card.addSpellAbility(ability);
-        	ability.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
-        
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Myr Galvanizer"))
         {
@@ -19525,7 +19374,14 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Singing Tree")) {
-            final SpellAbility ability = new Ability_Activated(card, "0") {
+            Target target = new Target("TgtV");
+            target.setVTSelection("Select target attacking creature.");
+            final String Tgts[] = {"Creature.attacking"};
+            target.setValidTgts(Tgts);
+          
+            final Ability_Cost cost = new Ability_Cost("T", card.getName(), true);
+
+            final SpellAbility ability = new Ability_Activated(card, cost, target) {
 				private static final long serialVersionUID = 3750045284339229395L;
 
 				@Override
@@ -19580,16 +19436,6 @@ public class CardFactory_Creatures {
                     }//is card in play?
                 }//resolve()
             };//SpellAbility
-            
-            Target target = new Target("TgtV");
-            target.setVTSelection("Select target attacking creature.");
-            final String Tgts[] = {"Creature.attacking"};
-            target.setValidTgts(Tgts);
-            
-            ability.setTarget(target);
-           
-            final Ability_Cost cost = new Ability_Cost("T", card.getName(), true);
-            ability.setPayCosts(cost);
             
             card.addSpellAbility(ability); 
         }//*************** END ************ END **************************

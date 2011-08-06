@@ -3,6 +3,7 @@ ManaCost:B G
 Types:Creature Zombie Leech
 Text:no text
 PT:2/2
+K:abPump PayLife<2>:+2/+2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/putrid_leech.jpg
 End
