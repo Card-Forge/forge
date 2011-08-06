@@ -1,8 +1,9 @@
 Name:Sejiri Merfolk
 ManaCost:1 U
 Types:Creature Merfolk Soldier
-Text:As long as you control a plains, Sejiri Merfolk has first strike and lifelink.
+Text:no text
 PT:2/1
+K:stPumpSelf:Creature:0/0/First Strike & Lifelink:isPresent Plains.YouCtrl:As long as you control a Plains, CARDNAME has first strike and lifelink.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sejiri_merfolk.jpg
 End

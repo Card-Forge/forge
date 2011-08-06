@@ -14788,7 +14788,7 @@ public class GameActionUtil {
 			return opp.getLife() <= 10;
 		}
 	};
-
+	/*
 	public static Command Sejiri_Merfolk                   = new Command() {
 
 		private static final long serialVersionUID = 3624165284236103054L;
@@ -14826,7 +14826,7 @@ public class GameActionUtil {
 			else return false;
 		}
 	};
-
+	*/
 
 	public static Command Gaeas_Avenger                   = new Command() {
 		private static final long serialVersionUID = 1987511098173387864L;
@@ -20668,7 +20668,7 @@ public class GameActionUtil {
 		commands.put("Serpent_of_the_Endless_Sea", Serpent_of_the_Endless_Sea);
 		commands.put("Gaeas_Avenger", Gaeas_Avenger);
 		commands.put("Vexing_Beetle", Vexing_Beetle);
-		commands.put("Sejiri_Merfolk", Sejiri_Merfolk);
+		//commands.put("Sejiri_Merfolk", Sejiri_Merfolk);
 		commands.put("Wild_Nacatl", Wild_Nacatl);
 		commands.put("Liu_Bei", Liu_Bei);
 		commands.put("Mystic_Enforcer", Mystic_Enforcer);

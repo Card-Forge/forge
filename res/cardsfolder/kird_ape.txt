@@ -2,8 +2,8 @@ Name:Kird Ape
 ManaCost:R
 Types:Creature Ape
 Text:no text
-#Kird Ape gets +1/+2 as long as you control a Forest.
 PT:1/1
+#Kird Ape gets +1/+2 as long as you control a Forest.
 K:stPumpSelf:Creature:1/2:isPresent Forest.YouCtrl:CARDNAME gets +1/+2 as long as you control a Forest.  
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kird_ape.jpg
