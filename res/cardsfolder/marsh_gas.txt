@@ -1,0 +1,8 @@
+Name:Marsh Gas
+ManaCost:B
+Types:Instant
+Text:no text
+K:spAllPump:All:-2/-0:All creatures get -2/-0 until end of turn.:Marsh Gas - all creatures get -2/-0 until EOT.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/marsh_gas.jpg
+End
