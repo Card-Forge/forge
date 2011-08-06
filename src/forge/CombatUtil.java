@@ -2689,8 +2689,8 @@ public class CombatUtil {
             ability3.setStackDescription(c + " - (Exalted) gets Lifelink until EOT.");
             AllZone.Stack.add(ability3);
         }
-        if(AllZoneUtil.getPlayerCardsInPlay(phasingPlayer, "Sovereigns of Lost Alaras").size() > 0) {
-            for(int i = 0; i < AllZoneUtil.getPlayerCardsInPlay(phasingPlayer, "Sovereigns of Lost Alaras").size(); i++) { 
+        if(AllZoneUtil.getPlayerCardsInPlay(phasingPlayer, "Sovereigns of Lost Alara").size() > 0) {
+            for(int i = 0; i < AllZoneUtil.getPlayerCardsInPlay(phasingPlayer, "Sovereigns of Lost Alara").size(); i++) { 
             	final Card attacker = c;
             Ability ability4 = new Ability(c, "0") {
                 @Override
