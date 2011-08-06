@@ -15443,6 +15443,28 @@ public class CardFactory_Creatures {
 		    }
 		    //*************** END ************ END **************************
 	      
+	      //*************** START *********** START **************************
+	      if(cardName.equals("Magus of the Library"))
+	      {
+	        final Ability_Tap ability2 = new Ability_Tap(card)
+	        {
+	  		private static final long serialVersionUID = 6567685794684744457L;
+	  		public boolean canPlay()
+	          {
+	            PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+	            return hand.getCards().length == 7 && super.canPlay();
+	          }
+	          public void resolve()
+	          {
+	            AllZone.GameAction.drawCard(card.getController());
+	          }
+	        };//SpellAbility
+	        card.addSpellAbility(ability2);
+	        ability2.setDescription("tap: Draw a card. Play this ability only if you have exactly 7 cards in hand.");
+	        ability2.setStackDescription("Magus of the Library - draw a card.");
+	        ability2.setBeforePayMana(new Input_NoCost_TapAbility(ability2));
+
+	      }//*************** END ************ END **************************
 	      
 
 	      //*************** START *********** START **************************

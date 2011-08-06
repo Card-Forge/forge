@@ -1,3 +1,50 @@
+Boreal Griffin
+3 W W
+Snow Creature Griffin
+no text
+3/2
+Flying
+KPump S:First Strike
+
+Frost Raptor
+2 U
+Snow Creature Bird
+no text
+2/2
+Flying
+KPump S S:Shroud
+
+Goblin Rimerunner
+2 R
+Snow Creature Goblin Warrior
+no text
+2/2
+TgtKPump T:This creature cannot block
+KPump S:Haste
+
+Phyrexian Snowcrusher
+6
+Snow Artifact Creature Juggernaut
+no text
+6/5
+This card attacks each turn if able.
+PTPump 1 S:+1/+0
+
+Rimebound Dead
+B
+Snow Creature Skeleton
+no text
+1/1
+RegenerateMe:S
+
+Phyrexian Ironfoot
+3
+Snow Artifact Creature Construct
+no text
+3/4
+This card doesn't untap during your untap step.
+Untap:1 S
+
 Door to Nothingness
 5
 Artifact
@@ -9542,7 +9589,7 @@ no text
 
 Boreal Druid
 G
-Creature Elf Druid
+Snow Creature Elf Druid
 no text
 1/1
 tap: add 1

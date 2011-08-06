@@ -18,6 +18,12 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+boreal_griffin.jpg            http://www.wizards.com/global/images/magic/general/boreal_griffin.jpg
+frost_raptor.jpg            http://www.wizards.com/global/images/magic/general/frost_raptor.jpg
+goblin_rimerunner.jpg            http://www.wizards.com/global/images/magic/general/goblin_rimerunner.jpg
+phyrexian_snowcrusher.jpg         http://www.wizards.com/global/images/magic/general/phyrexian_snowcrusher.jpg
+rimebound_dead.jpg                 http://www.wizards.com/global/images/magic/general/rimebound_dead.jpg
+phyrexian_ironfoot.jpg      http://www.wizards.com/global/images/magic/general/phyrexian_ironfoot.jpg
 dauthi_ghoul.jpg			http://www.wizards.com/global/images/magic/general/dauthi_ghoul.jpg
 dingus_egg.jpg				http://www.wizards.com/global/images/magic/general/dingus_egg.jpg
 dingus_staff.jpg			http://www.wizards.com/global/images/magic/general/dingus_staff.jpg
