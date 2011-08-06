@@ -47,7 +47,6 @@ public class GameActionUtil {
 		upkeep_Sheltered_Valley();
 		upkeep_Living_Artifact();
 		upkeep_Tangle_Wire();
-		upkeep_Mana_Vault();
 		upkeep_Dance_of_the_Dead();
 		upkeep_Mana_Crypt();
 		upkeep_Feedback();
@@ -162,7 +161,6 @@ public class GameActionUtil {
 		draw_Kami_Crescent_Moon(player);
 		draw_Font_of_Mythos(player);
 		draw_Overbeing_of_Myth(player);
-		draw_Mana_Vault(player);
 		draw_Sylvan_Library(player);
 		AllZone.Stack.unfreezeStack();	
 	}
@@ -5426,44 +5424,7 @@ public class GameActionUtil {
 			AllZone.GameAction.playSpellAbilityForFree(c.getSpellPermanent());
 	}
 
-	private static void upkeep_Mana_Vault() {
-		//this card is filtered out for the computer, so we will only worry about Human here
-		final Player player = AllZone.Phase.getPlayerTurn();
 		
-		if(!player.equals(AllZone.HumanPlayer)) return; // AI doesn't try to untap
-		
-		CardList vaults = AllZoneUtil.getPlayerCardsInPlay(player, "Mana Vault");
-		for(Card vault:vaults) {
-			if(vault.isTapped()) {
-				final Card thisVault = vault;
-				
-				Ability vaultChoice = new Ability(thisVault, "0"){
-				
-					@Override
-					public void resolve(){
-						if(GameActionUtil.showYesNoDialog(thisVault, "Untap "+thisVault.getName()+"?")) {
-							//prompt for pay mana cost, then untap
-							final SpellAbility untap = new Ability(thisVault, "4") {
-								@Override
-								public void resolve() {
-									thisVault.untap();
-								}
-							};//Ability
-							
-							StringBuilder sb = new StringBuilder();
-							sb.append("Untap ").append(thisVault);
-							untap.setStackDescription(sb.toString());
-							
-							AllZone.GameAction.playSpellAbility(untap);
-						}
-					}
-				};
-				vaultChoice.setStackDescription(thisVault.getName()+" - Untap during Upkeep?");
-				AllZone.Stack.add(vaultChoice);
-			}
-		}
-	}
-	
 	private static void upkeep_Dance_of_the_Dead() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		
@@ -9050,32 +9011,7 @@ public class GameActionUtil {
 		player.drawCards(list.size());
 	}// Overbeing_of_Myth()
 
-	private static void draw_Mana_Vault(final Player player){
-        /*
-         * Mana Vault - At the beginning of your draw step, if Mana Vault
-         * is tapped, it deals 1 damage to you.
-         */
-        CardList manaVaults = AllZoneUtil.getPlayerCardsInPlay(player, "Mana Vault");
-        for(Card manaVault:manaVaults) {
-        	final Card vault = manaVault;
-        	if(vault.isTapped()) {
-        		final Ability damage = new Ability(vault, "0") {
-        			@Override
-        			public void resolve() {
-        				player.addDamage(1, vault);
-        			}
-        		};//Ability
-        		
-        		StringBuilder sb = new StringBuilder();
-        		sb.append(vault).append(" - does 1 damage to ").append(player);
-        		damage.setStackDescription(sb.toString());
-        		
-        		AllZone.Stack.add(damage);
-        	}
-        }
-	}
-	
-	private static void upkeep_Carnophage() {
+		private static void upkeep_Carnophage() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 
