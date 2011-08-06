@@ -650,6 +650,9 @@ public class Card extends MyObservable {
                     sbLong.append(k[5]).append("\r\n");
                 } else if (keyword.get(i).endsWith(".")) {
                     sbLong.append(keyword.get(i).toString()).append("\r\n");
+                } else if (keyword.get(i).contains("At the beginning of your upkeep, ") 
+                        && keyword.get(i).contains(" unless you pay:")) {
+                    sbLong.append(keyword.get(i).toString()).append("\r\n");
                 } else if (keyword.get(i).toString().contains("tap: add ")) {
                     sbMana.append(keyword.get(i).toString()).append("\r\n");
                 } else {
@@ -658,6 +661,7 @@ public class Card extends MyObservable {
                 }
             }
         }
+        
         if (sb.length() > 0) sb.append("\r\n\r\n");
         if (sbLong.length() > 0) sbLong.append("\r\n");
         sb.append(sbLong);
