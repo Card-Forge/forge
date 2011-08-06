@@ -9401,6 +9401,11 @@ public class CardFactory_Creatures {
                         
                         if(!c.isToken()) {
                             Card newCard = AllZone.CardFactory.getCard(c.getName(), c.getOwner());
+
+                            //TODO: Stop making new cards! Need a common card copier to fix multiple isues including images:
+                            newCard.setCurSetCode(c.getCurSetCode());
+                            newCard.setImageFilename(c.getImageFilename());
+                            
                             hand.add(newCard);
                         }
                     }
