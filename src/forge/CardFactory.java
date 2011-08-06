@@ -6799,7 +6799,7 @@ public class CardFactory implements NewConstants {
                         input[0] = JOptionPane.showInputDialog(null, "Which creature type?", "Pick type",
                                 JOptionPane.QUESTION_MESSAGE);
                         
-                        if(!CardUtil.isCreatureType(input[0])) input[0] = "";
+                        if(!CardUtil.isACreatureType(input[0])) input[0] = "";
                         //TODO: some more input validation, case-sensitivity, etc.
                         
                         input[0] = input[0].trim(); //this is to prevent "cheating", and selecting multiple creature types,eg "Goblin Soldier"
@@ -11075,7 +11075,7 @@ public class CardFactory implements NewConstants {
         			else {
         				//not implemented for AI
         			}
-        			if (!CardUtil.isCreatureType(chosenType)) chosenType = "";
+        			if (!CardUtil.isACreatureType(chosenType)) chosenType = "";
         			card.setChosenType(chosenType);
                 }//resolve()
             }; //comesIntoPlayAbility

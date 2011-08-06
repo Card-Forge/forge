@@ -7074,7 +7074,7 @@ public class CardFactory_Sorceries {
                 			input[0] = JOptionPane.showInputDialog(null, "Which creature type?", "Pick type",
                                 JOptionPane.QUESTION_MESSAGE);
                 			if(input[0] == null) break;
-                        	if(!CardUtil.isCreatureType(input[0])) input[0] = "";
+                        	if(!CardUtil.isACreatureType(input[0])) input[0] = "";
                         	//TODO: some more input validation, case-sensitivity, etc.
                         
                         	input[0] = input[0].trim(); //this is to prevent "cheating", and selecting multiple creature types,eg "Goblin Soldier"
@@ -7090,7 +7090,7 @@ public class CardFactory_Sorceries {
                         {
                             for(String type:c.getType())
                             {
-                                if(CardUtil.isCreatureType(type))
+                                if(CardUtil.isACreatureType(type))
                                 {
                                     if(countInGraveyard.containsKey(type))
                                     {

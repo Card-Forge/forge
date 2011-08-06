@@ -2252,7 +2252,7 @@ public class Card extends MyObservable {
     	
     	if (type.contains(cardType)
                     || ( (isCreature() || isTribal())
-                    		&& CardUtil.isCreatureType(cardType) && getKeyword().contains("Changeling"))) return true;
+                    		&& CardUtil.isACreatureType(cardType) && getKeyword().contains("Changeling"))) return true;
         return false;
     }
     

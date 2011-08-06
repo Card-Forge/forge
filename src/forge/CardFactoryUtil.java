@@ -4223,7 +4223,7 @@ public class CardFactoryUtil {
             ArrayList<String> typeList = c.getType();
             
             for(String var:typeList) {
-                if(CardUtil.isCreatureType(var) && !map.containsKey(var)) map.put(var, 1);
+                if(CardUtil.isACreatureType(var) && !map.containsKey(var)) map.put(var, 1);
                 else {
                     map.put(var, map.get(var) + 1);
                 }

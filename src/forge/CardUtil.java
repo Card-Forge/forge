@@ -201,24 +201,35 @@ public class CardUtil {
     	else throw new IllegalArgumentException("Error at CardUtil.getRelative: " + relation + "is not a valid relation");
     }
     
-    // Check if a Type is a Creature Type (by excluding all other types)
-    public static boolean isCreatureType(String cardType) {
-    	return (!cardType.equals("Creature")
-    			&& !cardType.equals("Legendary") && !cardType.equals("Planeswalker")
-                && !cardType.equals("Basic") && !cardType.equals("Enchantment")
-                && !cardType.equals("Land") && !cardType.equals("Sorcery")
-                && !cardType.equals("Instant") && !cardType.equals("Artifact")
-                && !cardType.equals("Snow") && !cardType.equals("Arcane")
-                && !cardType.equals("Equipment") && !cardType.equals("Aura")
-                && !cardType.equals("World") && !cardType.equals("Locus")
-                && !cardType.equals("Fortification") && !cardType.equals("Lair")
-                && !cardType.equals("Desert") && !cardType.equals("Trap")
-                && !cardType.equals("Plains") && !cardType.equals("Mountain")
-                && !cardType.equals("Island") && !cardType.equals("Forest")
-                && !cardType.equals("Swamp"));
+    public static boolean isACardType(String cardType) {
+    	return (   cardType.equals("Artifact") || cardType.equals("Creature")
+    			|| cardType.equals("Enchantment") || cardType.equals("Instant")
+    			|| cardType.equals("Land") || cardType.equals("Planeswalker")
+    			|| cardType.equals("Sorcery"));
     }
     
-    public static boolean isBasicLandType(String cardType) {
+    public static boolean isASuperType(String cardType) {
+    	return (   cardType.equals("Basic") || cardType.equals("Legendary")
+    			|| cardType.equals("Snow") || cardType.equals("World"));
+    }
+    
+    // Check if a Type is a Creature Type (by excluding all other types)
+    public static boolean isACreatureType(String cardType) {
+    	return (!isACardType(cardType) && !isASuperType(cardType) && !isALandType(cardType)
+                && !cardType.equals("Arcane") && !cardType.equals("Trap")
+                && !cardType.equals("Aura") && !cardType.equals("Shrine") 
+                && !cardType.equals("Equipment") && !cardType.equals("Fortification"));
+    }
+    
+    public static boolean isALandType(String cardType) {
+    	return (isABasicLandType(cardType)
+    			|| cardType.equals("Locus") || cardType.equals("Lair")
+    			|| cardType.equals("Mine") || cardType.equals("Power-Plant")
+    			|| cardType.equals("Tower") || cardType.equals("Urza's")
+    			|| cardType.equals("Desert"));
+    }
+    
+    public static boolean isABasicLandType(String cardType) {
     	return (cardType.equals("Plains")
     			|| cardType.equals("Island") || cardType.equals("Swamp")
     			|| cardType.equals("Mountain") || cardType.equals("Forest"));
