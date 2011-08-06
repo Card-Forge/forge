@@ -1,6 +1,6 @@
 Name:Albino Troll
 ManaCost:1 G
-Types:Creature Ape
+Types:Creature Troll
 Text:no text
 PT:3/3
 K:Echo:1 G
