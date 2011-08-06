@@ -3803,6 +3803,25 @@ public class CardFactoryUtil {
         		ut.get(i).untap();
         }
         
+        if (d[0].contains("UntapUpTo"))	// 8/10
+        {
+        	int n = Integer.parseInt(d[1]);
+        	if (dbPlayer.equals(Constant.Player.Human))
+        		AllZone.InputControl.setInput(CardFactoryUtil.input_UntapUpToNType(n, d[2]));
+        	else
+        	{
+                CardList list = new CardList(AllZone.Computer_Play.getCards());
+                list = list.getType(d[2]);
+                list = list.getTapState("Tapped");
+                
+                for(int i = 0; i < n && i < list.size(); i++)
+                {
+                    list.shuffle();
+                	list.get(0).untap();
+                }
+        	}
+        }
+        
         if(d[0].contains("TapTgt")) // 2/10
         TgtC.tap();
         
@@ -3819,6 +3838,38 @@ public class CardFactoryUtil {
     public static int getNumberOfMostProminentCreatureType(CardList list, String type) {
         list = list.getType(type);
         return list.size();
+    }
+    
+    public static Input input_UntapUpToNType(final int n, final String type)
+    {
+        Input untap = new Input() {
+            private static final long serialVersionUID = -2167059918040912025L;
+            
+            int stop = n;
+            int count = 0;
+            
+            @Override
+            public void showMessage() {
+                AllZone.Display.showMessage("Select a " + type + " to untap");
+                ButtonUtil.enableOnlyCancel();
+            }
+            
+            @Override
+            public void selectButtonCancel() {
+                stop();
+            }
+            
+            @Override
+            public void selectCard(Card card, PlayerZone zone) {
+                if(card.isLand() && zone.is(Constant.Zone.Play)) {
+                    card.untap();
+                    count++;
+                    if(count == stop) stop();
+                }
+            }//selectCard()
+        };
+     
+        return untap;
     }
     
     public static String getMostProminentCreatureType(CardList list) {
