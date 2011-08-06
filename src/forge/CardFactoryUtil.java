@@ -277,6 +277,71 @@ public class CardFactoryUtil {
         return false;
     }
     
+    public static int evaluateCreature(Card c) {
+
+        int value = 100;
+        int power = c.getNetAttack();
+        int toughness = c.getNetDefense();
+        
+        //Doran
+        if (AllZoneUtil.isCardInPlay("Doran, the Siege Tower")) power = toughness;
+        
+        value += power * 15;
+        value += toughness * 10;
+        value += c.getCMC() * 5;
+        
+        //Evasion keywords
+        if (c.hasKeyword("Flying")) value += power * 10;
+        if (c.hasKeyword("Horsemanship")) value += power * 10;
+        if (c.hasKeyword("Unblockable")) value += power * 10;
+        if (c.hasKeyword("Fear")) value += power * 5;
+        if (c.hasKeyword("Intimidate")) value += power * 5;
+        if (c.hasStartOfKeyword("CARDNAME can't be blocked except by")) value += power * 5;
+        
+        //Battle stats increasing keywords
+        if (c.hasKeyword("Double Strike")) value += power * 15;
+        value += getTotalBushidoMagnitude(c) * 20;
+        value += getTotalFlankingMagnitude(c) * 20;
+        
+        //Other good keywords
+        if (c.hasKeyword("Deathtouch")) value += 25;
+        if (c.hasKeyword("Exalted")) value += 20;
+        if (c.hasKeyword("First Strike")) value += 15;
+        if (c.hasKeyword("Lifelink")) value += power * 10;
+        if (c.hasKeyword("Rampage")) value += 2;
+        if (c.hasKeyword("Reach")) value += 5;
+        if (c.hasKeyword("Trample")) value += 15;
+        if (c.hasKeyword("Vigilance")) value += power * 5 + toughness * 5;
+        if (c.hasKeyword("Wither")) value += power * 10;
+        if (c.hasKeyword("Annihilator")) value += 30;
+
+        //Protection
+        if (c.hasKeyword("Indestructible")) value += 70;
+        if (c.hasKeyword("Shroud")) value += 25;
+        if (c.hasKeyword("CARDNAME can't be the target of spells or abilities your opponents control.")) value += 35;
+        if (c.hasStartOfKeyword("Protection from")) value += 20;
+        
+        //Bad keywords
+        if (c.hasKeyword("Defender")) value -= power * 10 + 50;
+        if (c.hasKeyword("CARDNAME can't block.")) value -= 10;
+        if (c.hasKeyword("CARDNAME attacks each turn if able.")) value -= 5;
+        if (c.hasKeyword("CARDNAME can block only creatures with flying.")) value -= toughness * 5;
+        if (c.hasKeyword("CARDNAME can't attack or block.")) value -= power * 15 + toughness * 10;
+        if (c.hasKeyword("CARDNAME can't block.")) value -= 10;
+        if (c.hasKeyword("At the beginning of the end step, destroy CARDNAME.")) value -= 50;
+        if (c.hasKeyword("At the beginning of the end step, exile CARDNAME.")) value -= 50;
+        if (c.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")) value -= 50;
+        if (c.hasStartOfKeyword("At the beginning of your upkeep, CARDNAME deals")) value -= 20;
+        if (c.hasStartOfKeyword("At the beginning of your upkeep, destroy CARDNAME unless you pay")) value -= 20;
+        if (c.hasStartOfKeyword("At the beginning of your upkeep, sacrifice CARDNAME unless you pay")) value -= 20;
+        if (c.hasStartOfKeyword("Cumulative upkeep")) value -= 20;
+        if (c.hasStartOfKeyword("Fading")) value -= 20;
+        if (c.hasStartOfKeyword("Vanishing")) value -= 20;
+        
+        return value;
+        
+    } //evaluateCreature
+    
     public static Card AI_getBestCreature(CardList list, Card c) {
         final Card crd = c;
         list = list.filter(new CardListFilter() {
@@ -293,27 +358,14 @@ public class CardFactoryUtil {
     public static Card AI_getBestCreature(CardList list) {
         CardList all = list;
         all = all.getType("Creature");
-        
-        CardList flying = all.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return c.getKeyword().contains("Flying");
-            }
-        });
-        //get biggest flying creature
         Card biggest = null;
-        if(flying.size() != 0) {
-            biggest = flying.get(0);
-            
-            for(int i = 0; i < flying.size(); i++)
-                if(biggest.getNetAttack() < flying.get(i).getNetAttack()) biggest = flying.get(i);
-        }
         
         //if flying creature is small, get biggest non-flying creature
         if(all.size() != 0 && (biggest == null || biggest.getNetAttack() < 3)) {
             biggest = all.get(0);
             
             for(int i = 0; i < all.size(); i++)
-                if(biggest.getNetAttack() < all.get(i).getNetAttack()) biggest = all.get(i);
+                if(evaluateCreature(biggest) < evaluateCreature(all.get(i))) biggest = all.get(i);
         }
         return biggest;
     }
@@ -329,7 +381,7 @@ public class CardFactoryUtil {
             smallest = all.get(0);
             
             for(int i = 0; i < all.size(); i++)
-                if(smallest.getNetAttack() > all.get(i).getNetAttack()) smallest = all.get(i);
+                if(evaluateCreature(smallest) > evaluateCreature(all.get(i))) smallest = all.get(i);
         }
         return smallest;
     }
@@ -3245,6 +3297,14 @@ public class CardFactoryUtil {
         if (target.isImmutable())
         	return false;
         
+        if (AllZoneUtil.isCardInPlay("Leonin Abunas", target.getController()) && target.isArtifact()
+        		&& !spell.getController().equals(target.getController())) return false;
+        
+        if (AllZoneUtil.isCardInPlay("Spellbane Centaur", target.getController()) && target.isCreature()
+        		&& spell.isBlue()) return false;
+        
+        if (target.getName().equals("Gaea's Revenge") && !spell.isGreen()) return false;
+        
         if(target.getKeyword() != null) {
             ArrayList<String> list = target.getKeyword();
             
@@ -4323,6 +4383,18 @@ public class CardFactoryUtil {
     	
     	return list;
     }
+    
+    public static int getTotalFlankingMagnitude(Card c) {
+	int flankingMagnitude = 0;
+        String kw = "";
+        ArrayList<String> lst = c.getKeyword();
+        
+        for(int j = 0; j < lst.size(); j++) {
+            kw = lst.get(j);
+            if(kw.equals("Flanking")) flankingMagnitude++;
+        }
+    return flankingMagnitude;
+	}
     
     public static int getTotalBushidoMagnitude(Card c) {
         int count = 0;
