@@ -3,7 +3,7 @@ ManaCost:5 B
 Types:Creature Horror
 Text:no text
 PT:3/4
-A:AB$Pump | Cost$ 2 B Discard<1/Card> | KW$ Fear | SpellDescription$ CARDNAME gains fear until end of turn.
+A:AB$ Pump | Cost$ 2 B Discard<1/Card> | KW$ Fear | SpellDescription$ CARDNAME gains fear until end of turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/face_of_fear.jpg
