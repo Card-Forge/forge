@@ -1,3 +1,43 @@
+Archon of Redemption
+3 W W
+Creature Archon
+no text
+3/4
+Flying
+WheneverKeyword:EntersBattleField:Type/Creature:Play:ModifyLife/Power:ControllingPlayer_Self:ASAP:Yes_No:Initiator - Has Keyword/Flying:Whenever Archon of Redemption or another creature with flying enters the battlefield under your control, you may gain life equal to that creature's power.
+
+Inspired Sprite
+3 U
+Creature Faerie Wizard
+no text
+2/2
+Flash
+Flying
+WheneverKeyword:CastSpell/Controller:Type/Wizard:Play:UntapPermanent:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Wizard spell, you may untap Inspired Sprite.
+abDrawCards T:1:Drawback$YouDiscard/1:Draw a card, then discard a card.:Inspired Sprite - draw a card and discard a card
+
+Terra Eternal
+2 W
+Enchantment
+no text
+StaticEffect:Play:All Permanents:Keyword/Indestructible:Type.Land:All lands are indestructible.
+
+Glassdust Hulk
+3 W U
+Artifact Creature Golem
+no text
+3/4
+Cycling:WU
+WheneverKeyword:EntersBattleField:Type/Artifact:Play:KeywordPumpEOT/Unblockable!StatsPumpEOT/1/1:Self!Self:ASAP:No_Condition:Initiator - OwnedByController!Initiator - Other than Self:Whenever another artifact enters the battlefield under your control, Glassdust Hulk gets +1/+1 until end of turn and is unblockable this turn.
+
+Harbor Guardian
+2 W U
+Creature Gargoyle
+no text
+3/4
+Reach
+WheneverKeyword:Attacks:Self:Play:DrawCards/1:ControllingPlayer_Opponent:ASAP:Opponent_Yes_No:No Special Condition:Whenever Harbor Guardian attacks, defending player may draw a card.
+
 Baloth Woodcrasher
 4 G G
 Creature Beast
