@@ -14303,36 +14303,7 @@ public class GameActionUtil {
 
 	}; //Liu_Bei
 
-	public static Command Mystic_Enforcer             = new Command() {
-
-		private static final long serialVersionUID = 4569052031336290843L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = AllZoneUtil.getCardsInPlay("Mystic Enforcer");
-
-			if(list.size() > 0) {
-				for(int i = 0; i < list.size(); i++) {
-
-					Card c = list.get(i);
-					if(c.getController().hasThreshold()) {
-						c.setBaseAttack(6);
-						c.setBaseDefense(6);
-						if(!c.getIntrinsicKeyword().contains(
-								"Flying")) c.addIntrinsicKeyword("Flying");
-					} else {
-						c.setBaseAttack(3);
-						c.setBaseDefense(3);
-						if(c.getIntrinsicKeyword().contains(
-								"Flying")) c.removeIntrinsicKeyword("Flying");
-					}
-
-				}
-			}
-		}// execute()
-
-	}; //Mystic_Enforcer
-
+	
 	public static Command Bant_Sureblade              = new Command() {
 
 		private static final long serialVersionUID = 1987511205573387864L;
@@ -14491,12 +14462,11 @@ public class GameActionUtil {
 			CardList list = AllZoneUtil.getCardsInPlay("Werebear");
 
 			if(list.size() > 0) {
-				//Card crd = list.get(0); //unused
 
 				for(int i = 0; i < list.size(); i++) {
 
 					Card c = list.get(i);
-					if(hasThreshold(c)) {
+					if(c.getController().hasThreshold()) {
 						c.setBaseAttack(4);
 						c.setBaseDefense(4);
 					} else {
@@ -14507,17 +14477,6 @@ public class GameActionUtil {
 				}
 			}
 		}// execute()
-
-		private boolean hasThreshold(Card c) {
-			PlayerZone grave = AllZone.getZone(
-					Constant.Zone.Graveyard, c.getController());
-
-			CardList gy = new CardList();
-			gy.addAll(grave.getCards());
-
-			if(gy.size() >= 7) return true;
-			else return false;
-		}
 
 	};
 
@@ -14715,20 +14674,13 @@ public class GameActionUtil {
 
 	}; //Broodwarden
 
-	
-	
-	
 	public static Command Covetous_Dragon             = new Command() {
 		private static final long serialVersionUID = -8898010588711890705L;
 
 		int                       artifacts        = 0;
 
 		public void execute() {
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
-
-			creature = creature.getName("Covetous Dragon");
+			CardList creature = AllZoneUtil.getCardsInPlay("Covetous Dragon");
 
 			for(int i = 0; i < creature.size(); i++) {
 				Card c = creature.get(i);
@@ -16728,125 +16680,6 @@ public class GameActionUtil {
 		}// execute()
 	}; // Time of Heroes
 
-	
-	public static Command Jacques                     = new Command() {
-
-		private static final long serialVersionUID   = -4568356486065355565L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentDefenseBoost(-2);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Jacques le Vert");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Creature");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(c.isGreen()) {
-						c.addSemiPermanentDefenseBoost(2);
-						gloriousAnthemList.add(c);
-					}
-
-
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Jacques
-
-	
-
-	public static Command Eladamri                    = new Command() {
-		private static final long serialVersionUID   = -6406997129429105950L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword("Shroud");
-				c.removeExtrinsicKeyword("Forestwalk");
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Eladamri, Lord of Leaves");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Elf");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(!c.getName().equals(
-							"Eladamri, Lord of Leaves")) {
-						c.addExtrinsicKeyword("Shroud");
-						c.addExtrinsicKeyword("Forestwalk");
-						gloriousAnthemList.add(c);
-					}
-
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Eladamri
-
-	public static Command Honor_of_the_Pure           = new Command() {
-
-		private static final long serialVersionUID   = -2784700121894495478L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Honor of the Pure");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Creature");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(c.isWhite() && !c.isFaceDown()) {
-						c.addSemiPermanentAttackBoost(1);
-						c.addSemiPermanentDefenseBoost(1);
-						gloriousAnthemList.add(c);
-					}
-
-
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Honor of the Pure
-
 	public static Command Beastmaster_Ascension       = new Command() {
 
 		private static final long serialVersionUID   = -3455855754974451348L;
@@ -17371,26 +17204,6 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	}; //
-	public static Command Kor_Duelist           = new Command() {
-		private static final long serialVersionUID = -8050975750696096661L;
-
-		/*
-		 * As long as Kor Duelist is equipped, it has double strike.
-		 */
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Kor Duelist");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				if(c.isEquipped()
-						&& !c.getIntrinsicKeyword().contains(
-								"Double Strike")) c.addIntrinsicKeyword("Double Strike");
-				else if(!c.isEquipped()
-						&& c.getIntrinsicKeyword().contains(
-								"Double Strike")) c.removeIntrinsicKeyword("Double Strike");
-			}
-		}
-	}; //Kor Duelist
 
 	public static Command Keldon_Warlord                   = new Command() {
 		private static final long serialVersionUID = 3804539422363462063L;
@@ -17512,7 +17325,6 @@ public class GameActionUtil {
 		commands.put("Divinity_of_Pride", Divinity_of_Pride);
 		commands.put("Drove_of_Elves", Drove_of_Elves);
 		
-		commands.put("Eladamri", Eladamri);
 		commands.put("Eldrazi_Monument", Eldrazi_Monument);
 		commands.put("Elspeth_Emblem", Elspeth_Emblem);
 		commands.put("Emperor_Crocodile", Emperor_Crocodile);
@@ -17535,13 +17347,11 @@ public class GameActionUtil {
 		commands.put("Halimar_Wavewatch", Halimar_Wavewatch);
 		commands.put("Heedless_One", Heedless_One);
 		commands.put("Homarid", Homarid);
-		commands.put("Honor_of_the_Pure", Honor_of_the_Pure);
 		
 		commands.put("Ikiral_Outrider", Ikiral_Outrider);
 		commands.put("Imperious_Perfect", Imperious_Perfect);
 		commands.put("Iona_Shield_of_Emeria", Iona_Shield_of_Emeria);
 		
-		commands.put("Jacques", Jacques);
 		commands.put("Joiner_Adept", Joiner_Adept);
 		commands.put("Jund_Hackblade", Jund_Hackblade);
 		
@@ -17549,7 +17359,6 @@ public class GameActionUtil {
 		commands.put("Keldon_Warlord", Keldon_Warlord);
 		commands.put("Kithkin_Rabble", Kithkin_Rabble);
 		commands.put("Knight_of_Cliffhaven", Knight_of_Cliffhaven);
-		commands.put("Kor_Duelist", Kor_Duelist);
 		commands.put("Kor_Spiritdancer", Kor_Spiritdancer);
 		commands.put("Korlash_Heir_to_Blackblade", Korlash_Heir_to_Blackblade);
 		commands.put("Koth_Emblem", Koth_Emblem);
@@ -17575,7 +17384,6 @@ public class GameActionUtil {
 		commands.put("Mul_Daya_Channelers", Mul_Daya_Channelers);
 		commands.put("Multani_Maro_Sorcerer", Multani_Maro_Sorcerer);
 		commands.put("Muraganda_Petroglyphs", Muraganda_Petroglyphs);
-		commands.put("Mystic_Enforcer", Mystic_Enforcer);
 		
 		commands.put("Naya_Hushblade", Naya_Hushblade);
 		commands.put("Nightmare", Nightmare);

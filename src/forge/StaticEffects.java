@@ -57,7 +57,6 @@ public class StaticEffects
 		cardToEffectsList.put("Divinity of Pride", new String[] {"Divinity_of_Pride"});
 		cardToEffectsList.put("Drove of Elves", new String[] {"Drove_of_Elves"});
 		
-		cardToEffectsList.put("Eladamri, Lord of Leaves", new String[] {"Eladamri"});
 		cardToEffectsList.put("Eldrazi Monument", new String[] {"Eldrazi_Monument"});
 		cardToEffectsList.put("Emperor Crocodile", new String[] {"Emperor_Crocodile"});
 		cardToEffectsList.put("Engineered Plague", new String[] {"Engineered_Plague"});
@@ -79,13 +78,11 @@ public class StaticEffects
 		cardToEffectsList.put("Halimar Wavewatch", new String[] {"Halimar_Wavewatch"});
 		cardToEffectsList.put("Heedless One", new String[] {"Heedless_One"});
 		cardToEffectsList.put("Homarid", new String[] {"Homarid"});
-		cardToEffectsList.put("Honor of the Pure", new String[] {"Honor_of_the_Pure"});
 		
 		cardToEffectsList.put("Ikiral Outrider", new String[] {"Ikiral_Outrider"});
 		cardToEffectsList.put("Imperious Perfect", new String[] {"Imperious_Perfect"});
 		cardToEffectsList.put("Iona, Shield of Emeria", new String[] {"Iona_Shield_of_Emeria"});
 		
-		cardToEffectsList.put("Jacques le Vert", new String[] {"Jacques"});
 		cardToEffectsList.put("Joiner Adept", new String[] {"Joiner_Adept"});
 		cardToEffectsList.put("Jund Hackblade", new String[] {"Jund_Hackblade"});
 		
@@ -93,7 +90,6 @@ public class StaticEffects
 		cardToEffectsList.put("Keldon Warlord", new String[] {"Keldon_Warlord"});
 		cardToEffectsList.put("Kithkin Rabble", new String[] {"Kithkin_Rabble"});
 		cardToEffectsList.put("Knight of Cliffhaven", new String[] {"Knight_of_Cliffhaven"});
-		cardToEffectsList.put("Kor Duelist", new String[] {"Kor_Duelist"});
 		cardToEffectsList.put("Kor Spiritdancer", new String[] {"Kor_Spiritdancer"});
 		cardToEffectsList.put("Korlash, Heir to Blackblade", new String[] {"Korlash_Heir_to_Blackblade"});
 		
@@ -118,7 +114,6 @@ public class StaticEffects
 		cardToEffectsList.put("Mul Daya Channelers", new String[] {"Mul_Daya_Channelers"});
 		cardToEffectsList.put("Multani, Maro-Sorcerer", new String[] {"Multani_Maro_Sorcerer"});
 		cardToEffectsList.put("Muraganda Petroglyphs", new String[] {"Muraganda_Petroglyphs"});
-		cardToEffectsList.put("Mystic Enforcer", new String[] {"Mystic_Enforcer"});
 		
 		cardToEffectsList.put("Naya Hushblade", new String[] {"Naya_Hushblade"});
 		cardToEffectsList.put("Nightmare", new String[] {"Nightmare"});
