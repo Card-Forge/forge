@@ -3888,7 +3888,7 @@ public class CardFactory_Creatures {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Gravedigger") || cardName.equals("Cadaver Imp") || cardName.equals("Mnemonic Wall")) {
+        else if(cardName.equals("Gravedigger") || cardName.equals("Cadaver Imp") || cardName.equals("Mnemonic Wall") || cardName.equals("Corpse Cur")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
@@ -3910,7 +3910,9 @@ public class CardFactory_Creatures {
                         public boolean addCard(Card crd) {
                             return ((card.getName().equals("Gravedigger") || card.getName().equals("Cadaver Imp")) && crd.isCreature())
                                         ||
-                                    (card.getName().equals("Mnemonic Wall") && (crd.isInstant() || crd.isSorcery()));
+                                    (card.getName().equals("Mnemonic Wall") && (crd.isInstant() || crd.isSorcery())
+                                    	||
+                                    (card.getName().equals("Corpse Cur") && crd.isCreature() && crd.KeywordsContain("Infect")));
                         }
                     });
                     // list = list.getType("Creature");
@@ -3927,9 +3929,9 @@ public class CardFactory_Creatures {
                     else//computer
                     {
                         Card best = card;
-                        if (card.getName().equals("Gravedigger") || card.getName().equals("Cadaver Imp")) {
+                        if (card.getName().equals("Gravedigger") || card.getName().equals("Cadaver Imp") || card.getName().equals("Corpse Cur")) {
                             best = CardFactoryUtil.AI_getBestCreature(list);
-                        } else {
+                    	} else{
                             // compy will select a random Instant or Sorcery
                             list.shuffle();
                             best = list.get(0);

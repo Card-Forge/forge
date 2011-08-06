@@ -1,7 +1,7 @@
 Name:Gravedigger
 ManaCost:3 B
 Types:Creature Zombie
-Text:When Gravedigger comes into play, you may return target creature card from your graveyard to your hand.
+Text:When Gravedigger enters the battlefield, you may return target creature card from your graveyard to your hand.
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83114.jpg
