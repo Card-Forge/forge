@@ -8154,6 +8154,74 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
+      
+        //*************** START *********** START **************************
+        else if(cardName.equals("Day of the Dragons")) {
+        	final CardList exiled = new CardList();
+            final SpellAbility exileAll = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    CardList myCreatures = AllZoneUtil.getCreaturesInPlay(card.getController());
+                    for(Card c:myCreatures) {
+                    	exiled.add(c);
+                    	AllZone.GameAction.exile(c);
+                    }
+                    for(int i = 0; i < exiled.size(); i++) {
+                    	CardFactoryUtil.makeToken("Dragon", "R 5 5 Dragon", card.getController(),
+                    			"R", new String[] {"Creature", "Dragon"}, 5, 5, 
+                    			new String[] {"Flying"});
+                    }
+                }
+            };
+            
+            Command intoPlay = new Command() {
+				private static final long serialVersionUID = 7181675096954076868L;
+
+				public void execute() {
+                	
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(cardName).append(" - ");
+                	sb.append("exile all creatures you control. ");
+                	sb.append("Then put that many 5/5 red Dragon creature tokens with flying onto the battlefield.");
+                	exileAll.setStackDescription(sb.toString());
+                    
+                    AllZone.Stack.add(exileAll);
+                }
+            };
+            
+            final SpellAbility returnAll = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    CardList dragons = AllZoneUtil.getPlayerTypeInPlay(card.getController(), "Dragon");
+                    for(Card c:dragons) {
+                    	AllZone.GameAction.sacrifice(c);
+                    }
+                    for(Card c:exiled) {
+                    	AllZone.GameAction.moveToPlay(c);
+                    }
+                    exiled.clear();
+                }
+            };
+            
+            Command leavesPlay = new Command() {
+				private static final long serialVersionUID = -5553218901524553718L;
+
+				public void execute() {
+                	
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(cardName).append(" - ");
+                	sb.append("sacrifice all Dragons you control. ");
+                	sb.append("Then return the exiled cards to the battlefield under your control.");
+                	returnAll.setStackDescription(sb.toString());
+                    
+                    AllZone.Stack.add(returnAll);
+                }
+            };
+            
+            card.addComesIntoPlayCommand(intoPlay);
+            card.addLeavesPlayCommand(leavesPlay);
+        }//*************** END ************ END **************************
+        
 
         return postFactoryKeywords(card);
     }//getCard2
