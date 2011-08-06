@@ -19038,8 +19038,10 @@ public class CardFactory_Creatures {
 				private static final long serialVersionUID = 4193134733200317562L;
 
 				public void execute() {
-                    comesIntoPlayAbility.setStackDescription(card.getName()
-                            + " - put two 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield.");
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - put two 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield.");
+					comesIntoPlayAbility.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(comesIntoPlayAbility);
                 }
             };
@@ -19071,8 +19073,11 @@ public class CardFactory_Creatures {
 				private static final long serialVersionUID = -8661023016178518439L;
 
 				public void execute() {
-                    comesIntoPlayAbility.setStackDescription(card.getName()
-                            + " - put three 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - put three 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield.");
+					comesIntoPlayAbility.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(comesIntoPlayAbility);
                 }
             };
@@ -19102,8 +19107,10 @@ public class CardFactory_Creatures {
 				private static final long serialVersionUID = 2179492272870559564L;
 
 				public void execute() {
-                    comesIntoPlayAbility.setStackDescription(card.getName()
-                            + " - put a 0/1 colorless Eldrazi Spawn creature token onto the battlefield.");
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - put a 0/1 colorless Eldrazi Spawn creature token onto the battlefield.");
+					comesIntoPlayAbility.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(comesIntoPlayAbility);
                 }
             };
@@ -19148,6 +19155,7 @@ public class CardFactory_Creatures {
         		cardName.equals("Sage Aven") || cardName.equals("Sage of Epityr") ||
         		cardName.equals("Spire Owl")) {
         	final SpellAbility ability = new Ability(card, "0") {
+        		
         		@Override
         		public void resolve() {
         			if(card.getController().equals(AllZone.HumanPlayer)) {
@@ -19155,6 +19163,7 @@ public class CardFactory_Creatures {
         			}
         		}//resolve()
         	};//SpellAbility
+        	
         	Command intoPlay = new Command() {
         		private static final long serialVersionUID = 4757054648163014149L;
 
@@ -19162,7 +19171,11 @@ public class CardFactory_Creatures {
         			AllZone.Stack.add(ability);
         		}
         	};
-        	ability.setStackDescription(cardName + " - Rearrange the top 4 cards in your library in any order.");
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(cardName).append(" - Rearrange the top 4 cards in your library in any order.");
+        	ability.setStackDescription(sb.toString());
+        	
         	card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
@@ -19170,6 +19183,7 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Storm Entity")) {
         	final SpellAbility intoPlay = new Ability(card, "0") {
+        		
         		@Override
         		public boolean canPlayAI() {
     			CardList human = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
@@ -19179,10 +19193,11 @@ public class CardFactory_Creatures {
         		@Override
         		public void resolve() {
                     for(int i = 0; i < Phase.StormCount - 1; i++) {
-                    card.addCounter(Counters.P1P1, 1);
-        		}  
+                        card.addCounter(Counters.P1P1, 1);
+        		    }  
         		}
-        	};
+        	};//SpellAbility
+        	
         	Command comesIntoPlay = new Command() {
 				private static final long serialVersionUID = -3734151854295L;
 
@@ -19190,7 +19205,11 @@ public class CardFactory_Creatures {
         			AllZone.Stack.add(intoPlay);
         		}
         	};
-        	intoPlay.setStackDescription(cardName + " - comes into play with a +1/+1 counter on it for each other spell played this turn. ");
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(cardName).append(" - comes into play with a +1/+1 counter on it for each other spell played this turn.");
+        	intoPlay.setStackDescription(sb.toString());
+        	
         	card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END ************************** 
         
@@ -19275,9 +19294,17 @@ public class CardFactory_Creatures {
         		}
         	};
         	card.addSpellAbility(ability);
-        	intoPlay.setStackDescription(cardName + " - Rearrange the top 4 cards in your library in any order.");
+        	
+        	StringBuilder sbIntoPlay = new StringBuilder();
+        	sbIntoPlay.append(cardName).append(" - Rearrange the top 4 cards in your library in any order.");
+        	intoPlay.setStackDescription(sbIntoPlay.toString());
+        	
         	ability.setDescription("4U: Look at the top four cards of your library, then put them back in any order.");
-        	ability.setStackDescription(cardName + " - Rearrange the top 4 cards in your library in any order.");
+        	
+        	StringBuilder sbStack = new StringBuilder();
+        	sbStack.append(cardName).append(" - Rearrange the top 4 cards in your library in any order.");
+        	ability.setStackDescription(sbStack.toString());
+        	
         	card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
         
@@ -19302,7 +19329,10 @@ public class CardFactory_Creatures {
         		}   
         	};
         	card.addSpellAbility(ability);
-        	ability.setStackDescription(cardName + " - Rearrange the top X cards in your library in any order.");
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(cardName).append(" - Rearrange the top X cards in your library in any order.");
+        	ability.setStackDescription(sb.toString());
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
@@ -19327,7 +19357,10 @@ public class CardFactory_Creatures {
         		}   
         	};
         	card.addSpellAbility(ability);
-        	ability.setStackDescription(cardName + " - Rearrange the top X cards in your library in any order.");
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(cardName).append(" - Rearrange the top X cards in your library in any order.");
+        	ability.setStackDescription(sb.toString());
         }//*************** END ************ END **************************
 
         
@@ -19375,7 +19408,10 @@ public class CardFactory_Creatures {
         		}   
         	};
         	card.addSpellAbility(ability);
-        	ability.setStackDescription(cardName+" - add a +1+1 counter and draw a card.");
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(cardName).append(" - add a +1+1 counter and draw a card.");
+        	ability.setStackDescription(sb.toString());
         }//*************** END ************ END **************************
         
         /*
@@ -19522,9 +19558,16 @@ public class CardFactory_Creatures {
 				}
         	};
         	card.addSpellAbility(ability);
-        	ability.setDescription("2 B, tap: Exile target creature card from a graveyard. Put a 2/2 black Zombie creature token onto the battlefield.");
-        	 ability.setStackDescription(card + "Exile target creature card from a graveyard. Put a 2/2 black Zombie creature token onto the battlefield.");
-        
+        	
+        	StringBuilder sbDesc = new StringBuilder();
+        	sbDesc.append("2 B, tap: Exile target creature card from a graveyard. ");
+        	sbDesc.append("Put a 2/2 black Zombie creature token onto the battlefield.");
+        	ability.setDescription(sbDesc.toString());
+        	
+        	StringBuilder sbStack = new StringBuilder();
+        	sbStack.append(card).append("Exile target creature card from a graveyard. ");
+        	sbStack.append("Put a 2/2 black Zombie creature token onto the battlefield.");
+        	ability.setStackDescription(sbStack.toString());
     	}//*************** END ************ END **************************
         
         
@@ -19814,7 +19857,11 @@ public class CardFactory_Creatures {
         	};
         	
         	card.addSpellAbility(ability);
-        	ability.setStackDescription(card.getName() + " - return target creature to owner's hand.");
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(card.getName()).append(" - return target creature to owner's hand.");
+        	ability.setStackDescription(sb.toString());
+        	
         	ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
@@ -19933,10 +19980,12 @@ public class CardFactory_Creatures {
                 }
             };//SpellAbility
             ability.setDescription("1 B, Tap: Return target Zombie card from your graveyard to your hand.");
-            ability.setStackDescription(cardName + " - Return target Zombie card from your graveyard to your hand.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(cardName).append(" - Return target Zombie card from your graveyard to your hand.");
+            ability.setStackDescription(sb.toString());
             
             card.addSpellAbility(ability);
-
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
@@ -19998,8 +20047,7 @@ public class CardFactory_Creatures {
 	        
 	        ability.setTargetCard(card);
 	        card.addSpellAbility(ability);
-        }
-        //*************** END ************ END **************************
+        }//*************** END ************ END **************************
         
         
         //*************** START *********** START **************************
@@ -20023,8 +20071,10 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = -7121390569051656027L;
 
                 public void execute() {
-                    ability.setStackDescription("Symbiotic Wurm - " + card.getController()
-                            + " puts seven 1/1 tokens into play ");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append("Symbiotic Wurm - ").append(card.getController()).append(" puts seven 1/1 tokens into play");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
@@ -20120,7 +20170,10 @@ public class CardFactory_Creatures {
                 }//resolve()
             };//SpellAbility
             ability.setDescription("B: Pestilence Demon deals 1 damage to each creature and each player.");
-            ability.setStackDescription(card + " deals 1 damage to each creature and each player.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" deals 1 damage to each creature and each player.");
+            ability.setStackDescription(sb.toString());
             
             card.clearSpellAbility();
             card.addSpellAbility(new Spell_Permanent(card) {
@@ -20141,8 +20194,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
             
             card.setSVar("PlayMain1", "TRUE");
-        }
-        //*************** END ************ END **************************
+        }//*************** END ************ END **************************
         
         else if(cardName.equals("Thrashing Wumpus")) {
             final SpellAbility ability = new Ability(card, "B") {
@@ -20180,7 +20232,10 @@ public class CardFactory_Creatures {
                 }//resolve()
             };//SpellAbility
             ability.setDescription("B: Thrashing Wumpus deals 1 damage to each creature and each player.");
-            ability.setStackDescription(card + " deals 1 damage to each creature and each player.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" deals 1 damage to each creature and each player.");
+            ability.setStackDescription(sb.toString());
             
             card.clearSpellAbility();
             card.addSpellAbility(new Spell_Permanent(card) {
@@ -20201,8 +20256,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
             
             card.setSVar("PlayMain1", "TRUE");
-        }
-        //*************** END ************ END **************************
+        }//*************** END ************ END **************************
         
         
         //*************** START *********** START **************************
@@ -20248,12 +20302,19 @@ public class CardFactory_Creatures {
                     AllZone.ComputerPlayer.addDamage(1, card);
                 }//resolve()
             };//SpellAbility
-            ability.setDescription("G: Ifh-Biff Efreet deals 1 damage to each creature with flying and each player. Any player may activate this ability");
-            ability.setStackDescription(card + " deals 1 damage to each flying creature and each player.");
+            
+            StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("G: Ifh-Biff Efreet deals 1 damage to each creature with ");
+            sbDesc.append("flying and each player. Any player may activate this ability");
+            ability.setDescription(sbDesc.toString());
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" deals 1 damage to each flying creature and each player.");
+            ability.setStackDescription(sb.toString());
+            
             ability.getRestrictions().setAnyPlayer(true);
             card.addSpellAbility(ability);
-        }
-        //*************** END ************ END **************************
+        }//*************** END ************ END **************************
         
         
         //*************** START *********** START **************************
@@ -20310,8 +20371,14 @@ public class CardFactory_Creatures {
     	                card.getController().drawCard();
     	            }
     	        };
-    	        ability.setDescription("2, Sacrifice " + card.getName() + ": Draw a card.");
-    	        ability.setStackDescription(card.getName() + " - Draw a card.");
+    	        
+    	        StringBuilder sbDesc = new StringBuilder();
+    	        sbDesc.append("2, Sacrifice ").append(card.getName()).append(": Draw a card.");
+    	        ability.setDescription(sbDesc.toString());
+    	        
+    	        StringBuilder sbStack = new StringBuilder();
+    	        sbStack.append(card.getName()).append(" - Draw a card.");
+    	        ability.setStackDescription(sbStack.toString());
     	        
     	        final Command destroy = new Command()
     	        {
@@ -20560,11 +20627,13 @@ public class CardFactory_Creatures {
 				}
         	};
         	ability.setDescription("1, tap: Untap each other Myr you control.");
-        	ability.setStackDescription(card + " - Untap each other Myr you control.");
-        	card.addSpellAbility(ability);
         	
-        }
-      //*************** END ************ END **************************
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(card).append(" - Untap each other Myr you control.");
+        	ability.setStackDescription(sb.toString());
+        	
+        	card.addSpellAbility(ability);
+        }//*************** END ************ END **************************
         
         
         //*************** START *********** START **************************
@@ -20583,11 +20652,13 @@ public class CardFactory_Creatures {
             ability.setPayCosts(cost);
         	
         	ability.setDescription("Tap five untapped Elves you control: Put a 7/7 green Elemental creature token with trample onto the battlefield.");
-        	ability.setStackDescription(card +" - Put a 7/7 green Elemental creature token with trample onto the battlefield.");
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(card).append(" - Put a 7/7 green Elemental creature token with trample onto the battlefield.");
+        	ability.setStackDescription(sb.toString());
         	
         	card.addSpellAbility(ability);
-	    }
-	    //*************** END ************ END **************************
+	    }//*************** END ************ END **************************
         
         /*
       //*************** START *********** START **************************
@@ -20626,7 +20697,10 @@ public class CardFactory_Creatures {
             untap.setPayCosts(cost);
         	
             untap.setDescription("Tap five untapped creatures you control: Untap Altar Golem.");
-        	untap.setStackDescription(card +" untaps.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" untaps.");
+            untap.setStackDescription(sb.toString());
         	
         	card.addSpellAbility(untap);
     	}//*************** END ************ END **************************
@@ -20648,12 +20722,18 @@ public class CardFactory_Creatures {
 
         		@Override
         		public void showMessage() {
-        			intoLibrary.setStackDescription("Shuffle " + card + " into its owner's library");     
+        			StringBuilder sb = new StringBuilder();
+        			sb.append("Shuffle ").append(card).append(" into its owner's library");
+        			intoLibrary.setStackDescription(sb.toString());
+        			
         			stopSetNext(new Input_PayManaCost(intoLibrary));
         		}
         	};
-
-        	intoLibrary.setStackDescription(card +" - shuffle "+card+" into owner's library");
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(card).append(" - shuffle ").append(card).append(" into owner's library");
+        	intoLibrary.setStackDescription(sb.toString());
+        	
         	card.addSpellAbility(intoLibrary);
         	intoLibrary.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
@@ -20741,7 +20821,10 @@ public class CardFactory_Creatures {
 				private static final long serialVersionUID = -8702934390670388771L;
 
 				public void execute() {
-					ability.setStackDescription(card+" - destroy all tapped creatures.");
+					StringBuilder sb = new StringBuilder();
+					sb.append(card).append(" - destroy all tapped creatures.");
+					ability.setStackDescription(sb.toString());
+					
                     AllZone.Stack.add(ability);
                 }//execute()
             };
@@ -20755,6 +20838,7 @@ public class CardFactory_Creatures {
         	 * When Thundermare enters the battlefield, tap all other creatures.
         	 */
         	final SpellAbility ability = new Ability(card, "0") {
+        		
         		@Override
         		public void resolve() {
         			CardList cards = AllZoneUtil.getCreaturesInPlay();
@@ -20762,6 +20846,7 @@ public class CardFactory_Creatures {
         			for(Card c:cards) c.tap();
         		}//resolve()
         	};//SpellAbility
+        	
         	Command intoPlay = new Command() {
 				private static final long serialVersionUID = -692103773738198353L;
 
@@ -20769,7 +20854,11 @@ public class CardFactory_Creatures {
         			AllZone.Stack.add(ability);
         		}
         	};
-        	ability.setStackDescription(cardName + " - tap all other creatures.");
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(cardName).append(" - tap all other creatures.");
+        	ability.setStackDescription(sb.toString());
+        	
         	card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END *************************
        
@@ -20819,6 +20908,7 @@ public class CardFactory_Creatures {
         			player.loseLife(loseLife);
         		}//resolve()
         	};//SpellAbility
+        	
         	Command intoPlay = new Command() {
 				private static final long serialVersionUID = 931101364538995898L;
 
@@ -20826,7 +20916,11 @@ public class CardFactory_Creatures {
         			AllZone.Stack.add(ability);
         		}
         	};
-        	ability.setStackDescription(cardName + " - pay any amount of life.");
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(cardName).append(" - pay any amount of life.");
+        	ability.setStackDescription(sb.toString());
+        	
         	card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
@@ -20910,8 +21004,15 @@ public class CardFactory_Creatures {
         	};//SpellAbility
         	
         	card.addSpellAbility(ability);
-        	ability.setDescription(abCost+"Return target creature an opponent controls to its owner's hand.");
-        	ability.setStackDescription(card.getName() + " - return target creature to owner's hand.");
+        	
+        	StringBuilder sbDesc = new StringBuilder();
+        	sbDesc.append(abCost).append("Return target creature an opponent controls to its owner's hand.");
+        	ability.setDescription(sbDesc.toString());
+        	
+        	StringBuilder sbStack = new StringBuilder();
+        	sbStack.append(card.getName()).append(" - return target creature to owner's hand.");
+        	ability.setStackDescription(sbStack.toString());
+        	
         	//ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
@@ -21045,7 +21146,11 @@ public class CardFactory_Creatures {
         	};//SpellAbility
         	
         	card.addSpellAbility(ability);
-        	ability.setStackDescription(card.getName() + " - return target permanent to owner's hand.");
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(card.getName()).append(" - return target permanent to owner's hand.");
+        	ability.setStackDescription(sb.toString());
+        	
         	ability.setBeforePayMana(CardFactoryUtil.input_targetPermanent(ability));
         }//*************** END ************ END **************************
         
@@ -21075,7 +21180,11 @@ public class CardFactory_Creatures {
                     }//else
                 }
             };
-            ability.setStackDescription(cardName + " - rearrange top 3 cards of target player's library.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(cardName).append(" - rearrange top 3 cards of target player's library.");
+            ability.setStackDescription(sb.toString());
+            
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
@@ -21132,6 +21241,7 @@ public class CardFactory_Creatures {
                     for(Card c:lib) AllZone.GameAction.exile(c);
                 }//resolve()
             };//SpellAbility
+            
             Command intoPlay = new Command() {
 				private static final long serialVersionUID = -5462488189911159119L;
 
@@ -21139,7 +21249,11 @@ public class CardFactory_Creatures {
                     AllZone.Stack.add(ability);
                 }
             };
-            ability.setStackDescription(cardName + " - exile all cards from your library.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(cardName).append(" - exile all cards from your library.");
+            ability.setStackDescription(sb.toString());
+            
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
                
@@ -21184,8 +21298,15 @@ public class CardFactory_Creatures {
                 	
                 };
                 card.addSpellAbility(levelUp);
-                levelUp.setDescription("Level up " + manacost + " (" + manacost + ": Put a level counter on this. Level up only as a sorcery.)");
-                levelUp.setStackDescription(card + " - put a level counter on this.");
+                
+                StringBuilder sbDesc = new StringBuilder();
+                sbDesc.append("Level up ").append(manacost).append(" (").append(manacost);
+                sbDesc.append(": Put a level counter on this. Level up only as a sorcery.)");
+                levelUp.setDescription(sbDesc.toString());
+                
+                StringBuilder sbStack = new StringBuilder();
+                sbStack.append(card).append(" - put a level counter on this.");
+                levelUp.setStackDescription(sbStack.toString());
                 
                 card.setLevelUp(true);
                 
