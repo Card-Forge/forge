@@ -1,0 +1,8 @@
+Name:Whitesun's Passage
+ManaCost:1 W
+Types:Instant
+Text:no text
+K:spGainLife:5
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/whitesuns_passage.jpg
+End
