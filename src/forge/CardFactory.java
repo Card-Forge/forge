@@ -11632,7 +11632,7 @@ public class CardFactory implements NewConstants {
         	card.addLeavesPlayCommand(leavesPlay);
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Candelabra of Tawnos")) {
         	/*
         	 * X, Tap: Untap X target lands.
@@ -11647,14 +11647,11 @@ public class CardFactory implements NewConstants {
 
 				@Override
         		public void resolve() {
-        			System.out.println("Candelabra of Tawnos - card targets: ");
         			printCardTargets();
         			for(int i = 0; i < target.length; i++) {
         				if(AllZone.GameAction.isCardInPlay(target[i])
         						&& CardFactoryUtil.canTarget(card, target[i])
         						&& null != target[i]) {
-        					//DEBUG
-        					System.out.println("Candelabra of Tawnos - untapping: "+target[i]);
         					target[i].untap();
         				}
         			}
@@ -11741,7 +11738,6 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(ability);
         	ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
-        
         
 
         return postFactoryKeywords(card);
