@@ -62,6 +62,24 @@ class CardFactory_Lands {
             card.addSpellAbility(ability);
         }
         //*************** END ************ END **************************
+
+        //*************** START *********** START **************************
+        if (hasKeyword(card, "abAddReflectedMana") != -1) {
+        	int n = hasKeyword(card,"abAddReflectedMana");
+        	
+        	String parse = card.getKeyword().get(n).toString();
+            card.removeIntrinsicKeyword(parse);
+        	String[] k = parse.split(":");
+        	
+        	// Reflecting Pool, Exotic Orchard
+        	card.setReflectedLand(true);
+        	//
+            final Ability_Mana reflectedManaAbility = CardFactoryUtil.getReflectedManaAbility(card, k[1], k[2]); 
+
+            card.addSpellAbility(reflectedManaAbility);
+        } // ReflectingPool
+        //*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         //Ravinca Dual Lands

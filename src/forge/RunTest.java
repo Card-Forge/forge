@@ -189,8 +189,8 @@ public class RunTest
 	    check("97", c.isUntapped());
 	    
 	    //test Input_PayManaCostUtil
-	    check("98", Input_PayManaCostUtil.getColor("G").equals(Constant.Color.Green));
-	    check("99", Input_PayManaCostUtil.getColor("1").equals(Constant.Color.Colorless));
+	    check("98", Input_PayManaCostUtil.getLongColorString("G").equals(Constant.Color.Green));
+	    check("99", Input_PayManaCostUtil.getLongColorString("1").equals(Constant.Color.Colorless));
 	    
 	    /*
 	    check("101", Input_PayManaCostUtil.isManaNeeded(Constant.Color.Green, new ManaCost("5")) == true);

@@ -195,7 +195,7 @@ public class ManaPool extends Card {
     }
     
     String getColor(String s) {
-        return Input_PayManaCostUtil.getColor(s);
+        return Input_PayManaCostUtil.getLongColorString(s);
     }
     
     public void addMana(Ability_Mana am) {
@@ -405,11 +405,11 @@ public class ManaPool extends Card {
     }
     
     public String getColor2(String s) {
-        return Input_PayManaCostUtil.getColor2(s);
+        return Input_PayManaCostUtil.getShortColorString(s);
     }//wrapper
     
     public int hasMana(String color) {
-        String s = (color.length() == 1? color:Input_PayManaCostUtil.getColor2(color));
+        String s = (color.length() == 1? color:Input_PayManaCostUtil.getShortColorString(color));
         Mana_Part.checkSingleMana(s);
         return (containsColor(color));
     }

@@ -167,7 +167,7 @@ public class Phase extends MyObservable
         }
         
         if (getPhase().equals(Constant.Phase.End_Of_Combat)) {
-        	resetAttackedThisPhase(getActivePlayer());
+        	resetAttackedThisCombat(getActivePlayer());
         }
         
         //if (getPhase().equals(Constant.Phase.Cleanup) && extraTurns > 0)
@@ -308,7 +308,7 @@ public class Phase extends MyObservable
     	return (nCombatsThisTurn == 1);
     }
     
-    public void resetAttackedThisPhase(String player) {
+    public void resetAttackedThisCombat(String player) {
         // resets the status of attacked/blocked this phase
         PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
         

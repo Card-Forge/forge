@@ -10,6 +10,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     public String              orig;
     private String             Mana;
     private Card               sourceCard;
+    private boolean            reflectedMana = false;	   
     
     public boolean isBasic() {
         return (orig.length() == 10 && orig.startsWith("tap: add ") && "1WBURG".contains("" + orig.charAt(9)));
@@ -21,6 +22,13 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     {
     this(sourceCard, "0");
     }*/
+    
+    public void setReflectedMana(boolean b) {
+    	this.reflectedMana = b;
+    }
+    public boolean isReflectedMana() {
+    	return (this.reflectedMana);
+    }
     public boolean isSnow() {
         return getSourceCard().isSnow();
     }//override?
@@ -28,6 +36,16 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     @Override
     public boolean isTapAbility() {
         return isTapAbility(orig);
+    }
+    
+    // This is a work-in-progress *coughcough HACK coughcough*
+    // This should return the list of all possible colors for the mana ability
+    // Instead, right now it only does so for reflected lands, which override 
+    // this ability. 
+    // For any other kind of land, the method asserts. If you find you need to call
+    // this method, implement it...
+    public ArrayList<String> getPossibleColors() {
+    	throw new RuntimeException("Ability_Mana : getPossibleColors() not implemented");
     }
     
     private static boolean isTapAbility(String orig) {
@@ -76,7 +94,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
             setManaCost("0");
             return;
         }
-        String[] parts = orig.split(":");
+       String[] parts = orig.split(":");
         Mana = parts[1];
         Mana = Mana.replaceAll(" add ", "");
         Mana = Mana.replaceAll(" ", "");
@@ -201,8 +219,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     }//i.e. "T, remove X charge counters from {name}: add X+1 <color> mana to your mana pool"
     
     public String mana() {
-        if(!orig.contains("for each")) return Mana;
-        else {
+    	if (orig.contains("for each")) {
             /*String[] manaPart = orig.split(": add ");
             String m = manaPart[1];
             m = m.replaceAll(" add ", "");
@@ -231,6 +248,8 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
                 sb.append(m);
             return sb.toString();
             
+        } else {
+        	return Mana;
         }
         
     }//override for all non-X variable mana,

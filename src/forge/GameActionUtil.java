@@ -2688,6 +2688,121 @@ public class GameActionUtil {
     
     //END ENDOFTURN CARDS
     
+    // Return the list of mana types or colors that the target player's land can produce
+    // This is used by the mana abilities created by the abReflectedMana keyword
+    public static ArrayList<String> getManaProduceList(String player, String colorOrType) {
+		ArrayList<String> colorsPlayerCanProduce = new ArrayList<String>();
+		ArrayList<String> colorsToLookFor = new ArrayList<String>();
+		
+		if (colorOrType.startsWith("Type")) {
+			// Includes colorless (like Reflecting Pool)
+			for (int ic = 0; ic < Constant.Color.Colors.length; ic++) {
+				colorsToLookFor.add(Constant.Color.Colors[ic]);
+			}
+		} else {
+			// Excludes colorless (like Exotic Orchard)
+			for (int ic = 0; ic < Constant.Color.onlyColors.length; ic++) {
+				colorsToLookFor.add(Constant.Color.onlyColors[ic]);
+			}
+		}
+
+		// Build the list of cards to search for mana colors
+		// First, add all the cards owned by the target player
+    	CardList cl = new CardList();
+    	cl.addAll(AllZone.getZone(Constant.Zone.Play,player).getCards());
+    	
+		// Narrow down the card list to only non-reflected lands
+		// If during this search we find another reflected land, and it targets a different player
+		// than this land, then we have to search that player's lands as well
+    	boolean addOtherPlayerLands = false;
+		int ix = 0;
+		while (ix < cl.size()) {
+    		Card otherCard = cl.get(ix);
+    		if (otherCard.isLand()) {
+    			if (otherCard.isReflectedLand() && !addOtherPlayerLands) {    				
+    				ArrayList<Ability_Mana> amList = otherCard.getManaAbility();
+    				// We assume reflected lands have only one mana ability
+    				// Find out which player it targets
+    				Ability_Mana am = amList.get(0);
+    				String otherTargetPlayer = am.getTargetPlayer();
+    				
+    				// If the target player of the other land isn't the same as the target player
+    				// of this land, we need to search the sets of mana he can produce as well.
+    				if (!otherTargetPlayer.equals(player)) {
+    					addOtherPlayerLands = true; // We only need to record this decision once
+    				}
+    				// Don't keep reflected lands in the list of lands
+    				cl.remove(ix);
+    			} else {
+    				// Other card is a land but not a reflected land
+    				ix++; // leave in list & look at next card
+    			}
+    		} else {
+    			// Other card is not a land -- remove it
+    			cl.remove(ix);
+    		}
+    	} // while ix < cl.size
+
+		GameActionUtil.getManaFromCardList(cl, colorsPlayerCanProduce, colorsToLookFor);
+		if (addOtherPlayerLands) {
+			cl.clear();
+			cl.addAll(AllZone.getZone(Constant.Zone.Play,AllZone.GameAction.getOpponent(player)).getCards());
+			cl.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					return c.isLand() && !c.isReflectedLand();
+				}
+			});
+			
+			// Exotic Orchard, which is the only way to get colors from another
+			// player's lands, looks for colors. Therefore, we should not look
+			// through another player's lands for colorless mana. This is true
+			// even if the original card happens to have been a reflecting pool.
+			if (colorsToLookFor.contains(Constant.Color.Colorless)) {
+				colorsToLookFor.remove(Constant.Color.Colorless);
+			}
+			if (!colorsToLookFor.isEmpty()) {
+				GameActionUtil.getManaFromCardList(cl, colorsPlayerCanProduce, colorsToLookFor);
+			}
+		}
+		return colorsPlayerCanProduce;
+    }
+    
+    public static void getManaFromCardList(CardList cl, ArrayList<String> colorsPlayerCanProduce, ArrayList<String>colorsToLookFor) {
+    	int ix;
+    	// In this routine, the list cl must be a list of lands that are not reflected lands
+    	// Otherwise if both players had Exotic Orchards we might keep searching
+    	// their lands forever.
+    	for (ix = 0; ix < cl.size(); ix++) {
+    		Card otherCard = cl.get(ix);
+    		ArrayList<Ability_Mana> amList = otherCard.getManaAbility();
+    		for (int im = 0; im < amList.size(); im++) {
+    			// Search all the mana abilities and add colors of mana
+    			Ability_Mana am = amList.get(im);
+    			String newMana = am.mana(); // This call would break for a reflected mana ability
+    			int ic = 0;
+    			// Check if any of the remaining colors are in this mana ability
+    			while (ic < colorsToLookFor.size()) {
+    				if (newMana.contains(Input_PayManaCostUtil.getShortColorString(colorsToLookFor.get(ic)))) {
+    					colorsPlayerCanProduce.add(colorsToLookFor.remove(ic));
+    					continue; // Don't increment index -- list got smaller
+    				}
+    				ic++; // Only increment if nothing was found
+    			}
+
+    			// If the search list is empty stop
+    			if (colorsToLookFor.isEmpty()) {
+    				break; // No point in continuing
+    			}
+    		} // Loop over mana abilities
+
+    		if (colorsToLookFor.isEmpty()) {
+    			break;  
+    		}
+    	} // loop over list of lands
+    		    	
+    }
+    
+ 
     public static void removeAttackedBlockedThisTurn() {
         // resets the status of attacked/blocked this turn
         String player = AllZone.Phase.getActivePlayer();

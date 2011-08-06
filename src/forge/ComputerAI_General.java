@@ -103,6 +103,7 @@ public class ComputerAI_General implements Computer {
         play.add("Expunge");
         play.add("Faceless Butcher");
         play.add("Feral Lightning");
+        play.add("Finest Hour");
         play.add("Firebolt");
         play.add("Flamebreak");
         

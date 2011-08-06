@@ -52,6 +52,7 @@ public class Card extends MyObservable {
     private boolean                      faceDown                          = false;
     private boolean                      sacrificeAtEOT                    = false;
     private boolean                      kicked                            = false;
+    private boolean                      reflectedLand                     = false;
     
     private boolean                      firstStrike                       = false;
     private boolean                      doubleStrike                      = false;
@@ -510,10 +511,24 @@ public class Card extends MyObservable {
         return new ArrayList<Ability_Mana>(manaAbility);
     }
     
-    public ArrayList<Ability_Mana> getBasicMana() {
+    // Returns basic mana abilities plus "reflected mana" abilities
+    public ArrayList<Ability_Mana> getAIPlayableMana() {
         ArrayList<Ability_Mana> res = new ArrayList<Ability_Mana>();
-        for(Ability_Mana am:getManaAbility())
-            if(am.isBasic() && !res.contains(am)) res.add(am);
+    	for(Ability_Mana am:getManaAbility())
+    		if(am.isBasic() && !res.contains(am)) {
+    			res.add(am);
+    		} else if (am.isReflectedMana() && !res.contains(am)) {
+    			res.add(am);
+    		}	
+        
+        return res;
+        
+    }
+    
+    public ArrayList<Ability_Mana> getBasicMana() {
+    	ArrayList<Ability_Mana> res = new ArrayList<Ability_Mana>();
+    	for(Ability_Mana am:getManaAbility())
+    		if(am.isBasic() && !res.contains(am)) res.add(am);
         return res;
     }
     
@@ -1543,4 +1558,12 @@ public class Card extends MyObservable {
     public boolean isKicked() {
         return kicked;
     }
+
+    public void setReflectedLand(boolean b) {
+    	reflectedLand = b;
+    }
+    
+	public boolean isReflectedLand() {
+		return reflectedLand;
+	}
 }

@@ -13842,7 +13842,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void showMessage() {
-                    retrieve.choices_made[0] = Input_PayManaCostUtil.getColor2(AllZone.Display.getChoiceOptional(
+                    retrieve.choices_made[0] = Input_PayManaCostUtil.getShortColorString(AllZone.Display.getChoiceOptional(
                             "Select a Color", Constant.Color.onlyColors));
                     AllZone.Stack.add(retrieve);
                     stop();

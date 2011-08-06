@@ -236,21 +236,19 @@ public class ComputerUtil
 
     for(int i = 0; i < land.size(); i++)
     {
-      colors = getColors(land.get(i));
-      
-      for(int j = 0; j <colors.size();j++)
-      {
-    	  if(cost.isNeeded(colors.get(j)) && land.get(i).isUntapped())
-    	  {
-    		  land.get(i).tap();
-    		  cost.subtractMana(colors.get(j));
-    		  //System.out.println("just subtracted " + colors.get(j) + ", cost is now: " + cost.toString());
-    		  
-    	  }
-    	  if(cost.isPaid())
-    	     break;
-      }
+    	colors = getColors(land.get(i));
+		for(int j = 0; j <colors.size();j++)
+		{
+			if(cost.isNeeded(colors.get(j)) && land.get(i).isUntapped())
+			{
+				land.get(i).tap();
+				cost.subtractMana(colors.get(j));
+				//System.out.println("just subtracted " + colors.get(j) + ", cost is now: " + cost.toString());
 
+			}
+			if(cost.isPaid())
+				break;
+		}
       
     }
     if(! cost.isPaid())
@@ -284,20 +282,24 @@ public class ComputerUtil
   */
   public static ArrayList<String> getColors(Card land)
   {
-	ArrayList<String> colors = new ArrayList<String>();
-	if (land.getKeyword().contains("tap: add B"))
-		colors.add(Constant.Color.Black);
-	if (land.getKeyword().contains("tap: add W"))
-		colors.add(Constant.Color.White);
-	if (land.getKeyword().contains("tap: add G"))
-		colors.add(Constant.Color.Green);
-	if (land.getKeyword().contains("tap: add R"))
-		colors.add(Constant.Color.Red);
-	if (land.getKeyword().contains("tap: add U"))
-		colors.add(Constant.Color.Blue);
-	if (land.getKeyword().contains("tap: add 1"))
-		colors.add(Constant.Color.Colorless);
-	
+		ArrayList<String> colors = new ArrayList<String>();
+	  	if (land.isReflectedLand()){
+	  		ArrayList<Ability_Mana> amList = land.getManaAbility();
+	  		colors = amList.get(0).getPossibleColors();
+	  	} else {  		 
+	  		if (land.getKeyword().contains("tap: add B"))
+	  			colors.add(Constant.Color.Black);
+	  		if (land.getKeyword().contains("tap: add W"))
+	  			colors.add(Constant.Color.White);
+	  		if (land.getKeyword().contains("tap: add G"))
+	  			colors.add(Constant.Color.Green);
+	  		if (land.getKeyword().contains("tap: add R"))
+	  			colors.add(Constant.Color.Red);
+	  		if (land.getKeyword().contains("tap: add U"))
+	  			colors.add(Constant.Color.Blue);
+	  		if (land.getKeyword().contains("tap: add 1"))
+	  			colors.add(Constant.Color.Colorless);
+	  	} 	
 	return colors;		
 	  
   }
@@ -332,8 +334,9 @@ public class ComputerUtil
         //if(c.isCreature() && c.hasSickness())
         //  return false;
 
-        for (Ability_Mana am : c.getBasicMana())
+        for (Ability_Mana am : c.getAIPlayableMana())
         	if (am.canPlay()) return true;
+                
         return false;
       }
     });//CardListFilter
@@ -353,6 +356,7 @@ public class ComputerUtil
     	sortedMana.add(mana.get(j));
     }
     
+    
     return sortedMana;
     
   }//getAvailableMana()
@@ -362,9 +366,15 @@ public class ComputerUtil
   {
     ArrayList<Card> landList = PlayerZoneUtil.getCardType(AllZone.Computer_Hand, "Land");
     if(! landList.isEmpty())
-    {
-      AllZone.Computer_Hand.remove(landList.get(0));
-      AllZone.Computer_Play.add(landList.get(0));
+    { 
+      int ix = 0;
+      while (landList.get(ix).isReflectedLand() && (ix+1 < landList.size())) {
+    	  // Play reflected lands LAST so that there is colored mana in play
+    	  // Don't increment past the end of the list!
+    	  ix++;
+      }
+      AllZone.Computer_Hand.remove(landList.get(ix));
+      AllZone.Computer_Play.add(landList.get(ix));
       
       if (!AllZone.GameInfo.computerPlayedFirstLandThisTurn()) {
     	  AllZone.GameInfo.setComputerPlayedFirstLandThisTurn(true);

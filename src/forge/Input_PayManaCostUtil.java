@@ -14,7 +14,7 @@ public class Input_PayManaCostUtil
     StringBuilder cneeded = new StringBuilder();
     for(String color : Constant.Color.ManaColors)
     	if(manaCost.isNeeded(color))
-    		cneeded.append(getColor2(color));
+    		cneeded.append(getShortColorString(color));
     Iterator<Ability_Mana> it = abilities.iterator();//you can't remove unneded abilitie inside a for(am:abilities) loop :(
     while(it.hasNext())
     {
@@ -41,7 +41,9 @@ public class Input_PayManaCostUtil
     }
   }
   public static ArrayList<Ability_Mana> getManaAbilities(Card card)
-  {return card.getManaAbility();}
+  {
+	  return card.getManaAbility();
+  }
   //color is like "G", returns "Green"
   public static boolean canMake(Ability_Mana am, String mana)
   {
@@ -51,7 +53,9 @@ public class Input_PayManaCostUtil
   		if(mana.contains(color)) return true;
   	  return false;
   }
-  public static String getColor(String color)
+  
+
+  public static String getLongColorString(String color)
   {
     Map<String, String> m = new HashMap<String, String>();
     m.put("G", Constant.Color.Green);
@@ -70,7 +74,7 @@ public class Input_PayManaCostUtil
     return o.toString();
   }
   
-  public static String getColor2(String color)
+  public static String getShortColorString(String color)
   {
      Map<String, String> m = new HashMap<String, String>();
      m.put(Constant.Color.Green, "G");
