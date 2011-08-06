@@ -20796,7 +20796,7 @@ public class CardFactory_Creatures {
                     Card tgtC = getTargetCard();
                 	if(AllZone.GameAction.isCardInPlay(tgtC) && CardFactoryUtil.canTarget(card, tgtC)) {
                         tgtC.addCounter(Counters.BRIBERY, 1);
-                        
+                        AllZone.GameAction.drawCard(tgtC.getController());
                     }//is card in play?
                 }//resolve()
                 
