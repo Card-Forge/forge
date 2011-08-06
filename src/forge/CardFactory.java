@@ -4581,8 +4581,28 @@ public class CardFactory implements NewConstants {
                     list.addAll(AllZone.Computer_Play.getCards());
                     list = list.getType("Creature");
                     
-                    for(int i = 0; i < list.size(); i++)
-                        list.get(i).addDamage(2, card);
+                    for(int i = 0; i < list.size(); i++) {
+                        final Card[] target = new Card[1];
+                        target[0] = list.get(i);
+                        
+                        final Command untilEOT = new Command() {
+							private static final long serialVersionUID = 38760668661487826L;
+
+							public void execute() {
+                                if(AllZone.GameAction.isCardInPlay(target[0])) {
+                                    target[0].addTempAttackBoost(2);
+                                    target[0].addTempDefenseBoost(2);
+                                }
+                            }
+                        };//Command
+                        
+                        if(AllZone.GameAction.isCardInPlay(target[0])) {
+                            target[0].addTempAttackBoost(-2);
+                            target[0].addTempDefenseBoost(-2);
+                            
+                            AllZone.EndOfTurn.addUntil(untilEOT);
+                        }//if
+                    }//for
                 }//resolve()
             };
             card.clearSpellAbility();
@@ -4927,8 +4947,8 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void showMessage() {
-                    if(index[0] == 0) AllZone.Display.showMessage("Select target creature you control to bounce return to their owners' hand");
-                    else AllZone.Display.showMessage("Select target creature you don't control to return to their owners' hand");
+                    if(index[0] == 0) AllZone.Display.showMessage("Select target creature you control to bounce to your hand");
+                    else AllZone.Display.showMessage("Select target creature you don't control to return to its owner's hand");
                     
                     ButtonUtil.enableOnlyCancel();
                 }
@@ -5484,6 +5504,19 @@ public class CardFactory implements NewConstants {
                 public boolean canPlayAI() {
                     CardList creature = new CardList(AllZone.Human_Play.getCards());
                     creature = creature.getType("Creature");
+                    creature = creature.filter(new CardListFilter()
+                    {
+                    	public boolean addCard(Card c)
+                    	{
+                    		return !c.getName().equals("Shapeshifter");
+                    	}
+                    });
+                    
+                    if (creature.size()>0) {
+                    	Card target = CardFactoryUtil.AI_getBestCreature(creature);
+                    	setTargetCard(target);
+                    }
+                    
                     return creature.size() != 0 && (AllZone.Phase.getTurn() > 4);
                 }
                 
