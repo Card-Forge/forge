@@ -143,9 +143,9 @@ public class ComputerUtil_Attack2 {
         	  totalAttack += getAttack(humanList.get(i));
                     
     	  //originally -3 so the computer will try to stay at 3 life
-          //+1 now to prevent the AI from not attacking when it's got low life
+          //0 now to prevent the AI from not attacking when it's got low life
           //(seems to happen too often)
-    	  return (AllZone.ComputerPlayer.getLife() + 1) <= totalAttack;
+    	  return AllZone.ComputerPlayer.getLife() <= totalAttack;
        }
 
        private boolean doAssault()
