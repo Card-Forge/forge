@@ -151,12 +151,16 @@ public class GameAction {
     }
     
     public Card moveToGraveyard(Card c) {
-    	
+    	final PlayerZone origZone = AllZone.getZone(c);
     	final PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getOwner());
 
     	if (AllZoneUtil.isCardInPlay("Leyline of the Void", c.getOwner().getOpponent())) {
     		return moveTo(AllZone.getZone(Constant.Zone.Exile, c.getOwner()), c);
     	}
+    	
+    	if(c.getName().equals("Nissa's Chosen") && origZone.is(Constant.Zone.Battlefield)) {
+            return moveToLibrary(c);
+        }
     	
     	if(c.hasKeyword("If CARDNAME would be put into a graveyard this turn, exile it instead.")) {
     		return moveTo(AllZone.getZone(Constant.Zone.Exile, c.getOwner()), c);
@@ -2081,11 +2085,6 @@ public class GameAction {
         	};
         	persistAb.setStackDescription(newCard.getName() + " - Returning from Persist");
         	AllZone.Stack.add(persistAb);
-        }
-        
-        if(c.getName().equals("Nissa's Chosen")) {
-            PlayerZone library = AllZone.getZone(Constant.Zone.Library, newCard.getOwner());
-            moveTo(library, newCard);
         }
     }//sacrificeDestroy()
     
