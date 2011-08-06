@@ -6,5 +6,5 @@ PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | TriggerZones$ Battlefield | Execute$ TrigChange | Optional$ True | TriggerDescription$ When CARDNAME enters the battlefield, you may have target opponent sacrifice a creature.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | ValidTgts$ Opponent | SacValid$ Creature
 SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/predatory_nightstalker.jpg
+SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Second_Age/predatory_nightstalker.jpg
 End
