@@ -2,7 +2,7 @@ Name:Mind Rot
 ManaCost:2 B
 Types:Sorcery
 Text:no text
-K:spDiscardTgt:TgtChoose:2:Target player discards two cards.:Mind Rot - target player discards cards
+A:SP$Discard|Cost$2 B|ValidTgts$Player|NumCards$2|Mode$TgtChoose|SpellDescription$Target player discards two cards.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_rot.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/144.jpg

@@ -2,7 +2,7 @@ Name:Mindstab
 ManaCost:5 B
 Types:Sorcery
 Text:no text
-K:spDiscardTgt:TgtChoose:3:Target player discards three cards.:Mindstab - target player discards a card
+A:SP$Discard|Cost$5 B|ValidTgts$Player|NumCards$3|Mode$TgtChoose|SpellDescription$Target player discards three cards.
 K:Suspend:4:B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindstab.jpg

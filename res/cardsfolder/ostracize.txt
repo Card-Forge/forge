@@ -2,7 +2,7 @@ Name:Ostracize
 ManaCost:B
 Types:Sorcery
 Text:no text
-K:spDiscardOpp:RevealYouChoose/Creature:1:Target opponent reveals his or her hand. Choose a creature card from it. That player discards that card.:Ostracize - opponent reveals hand and discards a card
+A:SP$Discard|Cost$B|Opponent$True|NumCards$1|DiscardValid$Creature|Mode$RevealYouChoose|SpellDescription$Target opponent reveals his or her hand. You choose a creature card from it. That player discards that card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ostracize.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/57.jpg
