@@ -1,3 +1,348 @@
+Nantuko Elder
+2 G
+Creature Insect Druid
+no text
+1/2
+tap: add 1 G
+SVar:RemAIDeck:True
+
+Knotvine Mystic
+W R G
+Creature Elf Druid
+no text
+2/2
+1, tap: add W R G
+SVar:RemAIDeck:True
+
+Fyndhorn Elder
+2 G
+Creature Elf Druid
+no text
+1/1
+tap: add G G
+SVar:RemAIDeck:True
+
+Greenweaver Druid
+2 G
+Creature Elf Druid
+no text
+1/1
+tap: add G G
+SVar:RemAIDeck:True
+
+Gilded Lotus
+5
+Artifact
+no text
+tap: add W W W
+tap: add U U U
+tap: add B B B
+tap: add R R R
+tap: add G G G
+SVar:RemAIDeck:True
+
+Crystal Quarry
+no cost
+Land
+no text
+tap: add 1
+5, tap: add W U B R G
+SVar:RemAIDeck:True
+
+Golgari Rot Farm
+no cost
+Land
+no text
+Golgari Rot Farm enters the battlefield tapped.
+When Golgari Rot Farm enters the battlefield, return a land you control to its owner's hand.
+Tap: add B G
+SVar:RemAIDeck:True
+
+Gruul Turf
+no cost
+Land
+no text
+Gruul Turf enters the battlefield tapped.
+When Gruul Turf enters the battlefield, return a land you control to its owner's hand.
+Tap: add R G
+SVar:RemAIDeck:True
+
+Boros Garrison
+no cost
+Land
+no text
+Boros Garrison enters the battlefield tapped.
+When Boros Garrison enters the battlefield, return a land you control to its owner's hand.
+Tap: add R W
+SVar:RemAIDeck:True
+
+Azorius Chancery
+no cost
+Land
+no text
+Azorius Chancery enters the battlefield tapped.
+When Azorius Chancery enters the battlefield, return a land you control to its owner's hand.
+Tap: add W U
+SVar:RemAIDeck:True
+
+Dimir Aqueduct
+no cost
+Land
+no text
+Dimir Aqueduct enters the battlefield tapped.
+When Dimir Aqueduct enters the battlefield, return a land you control to its owner's hand.
+Tap: add U B
+SVar:RemAIDeck:True
+
+Izzet Boilerworks
+no cost
+Land
+no text
+Izzet Boilerworks enters the battlefield tapped.
+When Izzet Boilerworks enters the battlefield, return a land you control to its owner's hand.
+Tap: add U R
+SVar:RemAIDeck:True
+
+Simic Growth Chamber
+no cost
+Land
+no text
+Simic Growth Chamber enters the battlefield tapped.
+When Simic Growth Chamber enters the battlefield, return a land you control to its owner's hand.
+Tap: add G U
+SVar:RemAIDeck:True
+
+Selesnya Sanctuary
+no cost
+Land
+no text
+Selesnya Sanctuary enters the battlefield tapped.
+When Selesnya Sanctuary enters the battlefield, return a land you control to its owner's hand.
+Tap: add G W
+SVar:RemAIDeck:True
+
+Rakdos Carnarium
+no cost
+Land
+no text
+Rakdos Carnarium enters the battlefield tapped.
+When Rakdos Carnarium enters the battlefield, return a land you control to its owner's hand.
+Tap: add B R
+SVar:RemAIDeck:True
+
+Orzhov Basilica
+no cost
+Land
+no text
+Orzhov Basilica enters the battlefield tapped.
+When Orzhov Basilica enters the battlefield, return a land you control to its owner's hand.
+Tap: add W B
+SVar:RemAIDeck:True
+
+Darkwater Catacombs
+no cost
+Land
+no text
+1, tap: add U B
+SVar:RemAIDeck:True
+
+Mossfire Valley
+no cost
+Land
+no text
+1, tap: add R G
+SVar:RemAIDeck:True
+
+Shadowblood Ridge
+no cost
+Land
+no text
+1, tap: add B R
+SVar:RemAIDeck:True
+
+Skycloud Expanse
+no cost
+Land
+no text
+1, tap: add W U
+SVar:RemAIDeck:True
+
+Sungrass Prairie
+no cost
+Land
+1, tap: add W G
+SVar:RemAIDeck:True
+
+Orzhov Signet
+2
+Artifact
+no text
+1, tap: add W B
+SVar:RemAIDeck:True
+
+Golgari Signet
+2
+Artifact
+no text
+1, tap: add B G
+SVar:RemAIDeck:True
+
+Gruul Signet
+2
+Artifact
+no text
+1, tap: add R G
+SVar:RemAIDeck:True
+
+Boros Signet
+2
+Artifact
+no text
+1, tap: add W R
+SVar:RemAIDeck:True
+
+Azorius Signet
+2
+Artifact
+no text
+1, tap: add W U
+SVar:RemAIDeck:True
+
+Dimir Signet
+2
+Artifact
+no text
+1, tap: add U B
+SVar:RemAIDeck:True
+
+Izzet Signet
+2
+Artifact
+no text
+1, tap: add U R
+SVar:RemAIDeck:True
+
+Simic Signet
+2
+Artifact
+no text
+1, tap: add U G
+SVar:RemAIDeck:True
+
+Selesnya Signet
+2
+Artifact
+no text
+1, tap: add W G
+SVar:RemAIDeck:True
+
+Rakdos Signet
+2
+Artifact
+no text
+1, tap: add B R
+SVar:RemAIDeck:True
+
+Fetid Heath
+no cost
+Land
+no text
+tap: add 1
+WB, tap: add W W
+WB, tap: add W B
+WB, tap: add B B
+SVar:RemAIDeck:True
+
+Fire-Lit Thicket
+no cost
+Land
+no text
+tap: add 1
+RG, tap: add R R
+RG, tap: add R G
+RG, tap: add G G
+SVar:RemAIDeck:True
+
+Flooded Grove
+no cost
+Land
+no text
+tap: add 1
+UG, tap: add U U
+UG, tap: add U G
+UG, tap: add G G
+SVar:RemAIDeck:True
+
+Graven Cairns
+no cost
+Land
+no text
+tap: add 1
+BR, tap: add B B
+BR, tap: add B R
+BR, tap: add R R
+SVar:RemAIDeck:True
+
+Sunken Ruins
+no cost
+Land
+no text
+tap: add 1
+UB, tap: add U U
+UB, tap: add U B
+UB, tap: add B B
+SVar:RemAIDeck:True
+
+Twilight Mire
+no cost
+Land
+no text
+tap: add 1
+BG, tap: add B B
+BG, tap: add B G
+BG, tap: add G G
+SVar:RemAIDeck:True
+
+Wooded Bastion
+no cost
+Land
+no text
+tap: add 1
+WG, tap: add W W
+WG, tap: add W G
+WG, tap: add G G
+SVar:RemAIDeck:True
+
+Mystic Gate
+no cost
+Land
+no text
+tap: add 1
+WU, tap: add W W
+WU, tap: add W U
+WU, tap: add U U
+SVar:RemAIDeck:True
+
+Rugged Prairie
+no cost
+Land
+no text
+tap: add 1
+WR, tap: add W W
+WR, tap: add W R
+WR, tap: add R R
+SVar:RemAIDeck:True
+
+Cascade Bluffs
+no cost
+Land
+no text
+tap: add 1
+UR, tap: add U U
+UR, tap: add U R
+UR, tap: add R R
+SVar:RemAIDeck:True
+
 Steel Overseer
 2
 Artifact Creature Construct
@@ -53,22 +398,6 @@ no text
 U, tap: add 3
 SVar:RemAIDeck:True
 
-Azorius Chancery
-no cost
-Land
-no text
-Azorius Chancery enters the battlefield tapped.
-When Azorius Chancery enters the battlefield, return a land you control to its owner's hand.
-Tap: add WU
-SVar:RemAIDeck:True
-
-Azorius Signet
-2
-Artifact
-no text
-1, tap: add WU
-SVar:RemAIDeck:True
-
 Basal Thrull
 B B
 Creature Thrull
@@ -111,22 +440,6 @@ Creature Human Wizard
 no text
 1/1
 1: add B
-SVar:RemAIDeck:True
-
-Boros Garrison
-no cost
-Land
-no text
-Boros Garrison enters the battlefield tapped.
-When Boros Garrison enters the battlefield, return a land you control to its owner's hand.
-Tap: add RW
-SVar:RemAIDeck:True
-
-Boros Signet
-2
-Artifact
-no text
-1, tap: add WR
 SVar:RemAIDeck:True
 
 Cabal Coffers
@@ -223,22 +536,6 @@ Instant
 Add B B B to your mana pool.
 SVar:RemAIDeck:True
 
-Dimir Aqueduct
-no cost
-Land
-no text
-Dimir Aqueduct enters the battlefield tapped.
-When Dimir Aqueduct enters the battlefield, return a land you control to its owner's hand.
-Tap: add UB
-SVar:RemAIDeck:True
-
-Dimir Signet
-2
-Artifact
-no text
-1, tap: add UB
-SVar:RemAIDeck:True
-
 Dreamstone Hedron
 6
 Artifact
@@ -304,14 +601,6 @@ Flying
 G, tap: add R
 SVar:RemAIDeck:True
 
-Fyndhorn Elder
-2 G
-Creature Elf Druid
-no text
-1/1
-tap: add GG
-SVar:RemAIDeck:True
-
 Gaea's Cradle
 no cost
 Legendary Land
@@ -328,41 +617,6 @@ tap, Sacrifice CARDNAME: Add B G to your mana pool.
 Comes into play tapped.
 SVar:RemAIDeck:True
 
-Gilded Lotus
-5
-Artifact
-no text
-tap: add WWW
-tap: add UUU
-tap: add BBB
-tap: add RRR
-tap: add GGG
-SVar:RemAIDeck:True
-
-Golgari Rot Farm
-no cost
-Land
-no text
-Golgari Rot Farm enters the battlefield tapped.
-When Golgari Rot Farm enters the battlefield, return a land you control to its owner's hand.
-Tap: add BG
-SVar:RemAIDeck:True
-
-Golgari Signet
-2
-Artifact
-no text
-1, tap: add BG
-SVar:RemAIDeck:True
-
-Greenweaver Druid
-2 G
-Creature Elf Druid
-no text
-1/1
-tap: add GG
-SVar:RemAIDeck:True
-
 Grim Monolith
 2
 Artifact
@@ -370,22 +624,6 @@ no text
 CARDNAME doesn't untap during your untap step.
 Untap:4
 tap: add 3
-SVar:RemAIDeck:True
-
-Gruul Signet
-2
-Artifact
-no text
-1, tap: add RG
-SVar:RemAIDeck:True
-
-Gruul Turf
-no cost
-Land
-no text
-Gruul Turf enters the battlefield tapped.
-When Gruul Turf enters the battlefield, return a land you control to its owner's hand.
-Tap: add RG
 SVar:RemAIDeck:True
 
 Harabaz Druid
@@ -458,36 +696,12 @@ tap, Sacrifice CARDNAME: Add G U to your mana pool.
 Comes into play tapped.
 SVar:RemAIDeck:True
 
-Izzet Boilerworks
-no cost
-Land
-no text
-Izzet Boilerworks enters the battlefield tapped.
-When Izzet Boilerworks enters the battlefield, return a land you control to its owner's hand.
-Tap: add UR
-SVar:RemAIDeck:True
-
-Izzet Signet
-2
-Artifact
-no text
-1, tap: add UR
-SVar:RemAIDeck:True
-
 Kaleidostone
 2
 Artifact
 no text
 When CARDNAME enters the battlefield, draw a card.
 5, tap, Sacrifice CARDNAME: Add W U B R G to your mana pool.
-SVar:RemAIDeck:True
-
-Knotvine Mystic
-W R G
-Creature Elf Druid
-no text
-2/2
-1, tap: add WRG
 SVar:RemAIDeck:True
 
 Lotus Bloom
@@ -557,14 +771,6 @@ no text
 Sacrifice CARDNAME: Add U R to your mana pool.
 SVar:RemAIDeck:True
 
-Nantuko Elder
-2 G
-Creature Insect Druid
-no text
-1/2
-tap: add 1G
-SVar:RemAIDeck:True
-
 Nomadic Elf
 1 G
 Creature Elf Nomad
@@ -586,22 +792,6 @@ G: add W
 G: add U
 G: add B
 G: add R
-SVar:RemAIDeck:True
-
-Orzhov Basilica
-no cost
-Land
-no text
-Orzhov Basilica enters the battlefield tapped.
-When Orzhov Basilica enters the battlefield, return a land you control to its owner's hand.
-Tap: add WB
-SVar:RemAIDeck:True
-
-Orzhov Signet
-2
-Artifact
-no text
-1, tap: add WB
 SVar:RemAIDeck:True
 
 Priest of Titania
@@ -628,22 +818,6 @@ Pyretic Ritual
 1 R
 Instant
 Add R R R to your mana pool.
-SVar:RemAIDeck:True
-
-Rakdos Carnarium
-no cost
-Land
-no text
-Rakdos Carnarium enters the battlefield tapped.
-When Rakdos Carnarium enters the battlefield, return a land you control to its owner's hand.
-Tap: add BR
-SVar:RemAIDeck:True
-
-Rakdos Signet
-2
-Artifact
-no text
-1, tap: add BR
 SVar:RemAIDeck:True
 
 Rith's Attendant
@@ -686,43 +860,11 @@ Instant
 Add R R R R R to your mana pool.
 SVar:RemAIDeck:True
 
-Selesnya Sanctuary
-no cost
-Land
-no text
-Selesnya Sanctuary enters the battlefield tapped.
-When Selesnya Sanctuary enters the battlefield, return a land you control to its owner's hand.
-Tap: add GW
-SVar:RemAIDeck:True
-
-Selesnya Signet
-2
-Artifact
-no text
-1, tap: add WG
-SVar:RemAIDeck:True
-
 Serra's Sanctum
 no cost
 Legendary Land
 no text
 tap: add W to your mana pool for each Enchantment you control.
-SVar:RemAIDeck:True
-
-Simic Growth Chamber
-no cost
-Land
-no text
-Simic Growth Chamber enters the battlefield tapped.
-When Simic Growth Chamber enters the battlefield, return a land you control to its owner's hand.
-Tap: add GU
-SVar:RemAIDeck:True
-
-Simic Signet
-2
-Artifact
-no text
-1, tap: add UG
 SVar:RemAIDeck:True
 
 Sisay's Ring
@@ -903,16 +1045,6 @@ tap: add 1
 2, tap: add G
 SVar:RemAIDeck:True
 
-Cascade Bluffs
-no cost
-Land
-no text
-tap: add 1
-UR, tap: add UU
-UR, tap: add UR
-UR, tap: add RR
-SVar:RemAIDeck:True
-
 Castle Sengir
 no cost
 Land
@@ -921,61 +1053,6 @@ tap: add 1
 1, tap: add B
 2, tap: add U
 2, tap: add R
-SVar:RemAIDeck:True
-
-Crystal Quarry
-no cost
-Land
-no text
-tap: add 1
-5, tap: add WUBRG
-SVar:RemAIDeck:True
-
-Darkwater Catacombs
-no cost
-Land
-no text
-1, tap: add UB
-SVar:RemAIDeck:True
-
-Fetid Heath
-no cost
-Land
-no text
-tap: add 1
-WB, tap: add WW
-WB, tap: add WB
-WB, tap: add BB
-SVar:RemAIDeck:True
-
-Fire-Lit Thicket
-no cost
-Land
-no text
-tap: add 1
-RG, tap: add RR
-RG, tap: add RG
-RG, tap: add GG
-SVar:RemAIDeck:True
-
-Flooded Grove
-no cost
-Land
-no text
-tap: add 1
-UG, tap: add UU
-UG, tap: add UG
-UG, tap: add GG
-SVar:RemAIDeck:True
-
-Graven Cairns
-no cost
-Land
-no text
-tap: add 1
-BR, tap: add BB
-BR, tap: add BR
-BR, tap: add RR
 SVar:RemAIDeck:True
 
 Henge of Ramos
@@ -1000,33 +1077,6 @@ tap: add 1
 2, tap: add G
 SVar:RemAIDeck:True
 
-Mossfire Valley
-no cost
-Land
-no text
-1, tap: add RG
-SVar:RemAIDeck:True
-
-Mystic Gate
-no cost
-Land
-no text
-tap: add 1
-WU, tap: add WW
-WU, tap: add WU
-WU, tap: add UU
-SVar:RemAIDeck:True
-
-Rugged Prairie
-no cost
-Land
-no text
-tap: add 1
-WR, tap: add WW
-WR, tap: add WR
-WR, tap: add RR
-SVar:RemAIDeck:True
-
 School of the Unseen
 no cost
 Land
@@ -1037,13 +1087,6 @@ tap: add 1
 2, tap: add B
 2, tap: add R
 2, tap: add G
-SVar:RemAIDeck:True
-
-Shadowblood Ridge
-no cost
-Land
-no text
-1, tap: add BR
 SVar:RemAIDeck:True
 
 Shimmering Grotto
@@ -1058,39 +1101,6 @@ tap: add 1
 1, tap: add G
 SVar:RemAIDeck:True
 
-Skycloud Expanse
-no cost
-Land
-no text
-1, tap: add WU
-SVar:RemAIDeck:True
-
-Sungrass Prairie
-no cost
-Land
-1, tap: add WG
-SVar:RemAIDeck:True
-
-Sunken Ruins
-no cost
-Land
-no text
-tap: add 1
-UB, tap: add UU
-UB, tap: add UB
-UB, tap: add BB
-SVar:RemAIDeck:True
-
-Twilight Mire
-no cost
-Land
-no text
-tap: add 1
-BG, tap: add BB
-BG, tap: add BG
-BG, tap: add GG
-SVar:RemAIDeck:True
-
 Wizards' School
 no cost
 Land
@@ -1099,16 +1109,6 @@ tap: add 1
 1, tap: add U
 2, tap: add W
 2, tap: add B
-SVar:RemAIDeck:True
-
-Wooded Bastion
-no cost
-Land
-no text
-tap: add 1
-WG, tap: add WW
-WG, tap: add WG
-WG, tap: add GG
 SVar:RemAIDeck:True
 
 Adarkar Wastes

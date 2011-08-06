@@ -1,71 +1,190 @@
-
 package forge;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.StringTokenizer;
 
-//import java.util.*; //unused
-
-
-//this is just a wrapper for Mana_PayCost
-//it was easier to change this than to update a bunch of stuff
-class ManaCost {
-    private Mana_PayCost m;
+public class ManaCost {
+    //holds Mana_Part objects
+    //ManaPartColor is stored before ManaPartColorless
+    private ArrayList<Object> manaPart;
     
-    public ManaCost(String cost) {
-    	while (cost.startsWith("X"))
-    		cost = cost.substring(2);
-        m = new Mana_PayCost(cost);
+//manaCost can be like "0", "3", "G", "GW", "10", "3 GW", "10 GW"
+    //or "split hybrid mana" like "2/G 2/G", "2/B 2/B 2/B"
+    //"GW" can be paid with either G or W
+    
+    //can barely handle Reaper King mana cost "2/W 2/U 2/B 2/R 2/G"
+    //to pay the colored costs for Reaper King you have to tap the colored
+    //mana in the order shown from right to left (wierd I know)
+    //note that when the cost is displayed it is backward "2/G 2/R 2/B 2/U 2/W"
+    //so you would have to tap W, then U, then B, then R, then G (order matters)
+    public ManaCost(String manaCost) {
+    	while (manaCost.startsWith("X"))
+    		manaCost = manaCost.substring(2);
+    	manaPart = split(manaCost);
+    }
+    
+    public boolean isColor(String color){
+    	for(Object s : manaPart){
+    		if (Input_PayManaCostUtil.getLongColorString(s.toString()).equals(color))
+    			return true;
+    	}
+    	
+    	return false;
+    }
+    
+    // isNeeded(String) still used by the Computer, might have problems activating Snow abilities
+    public boolean isNeeded(String mana) {
+        if (mana.length() > 1)
+        	mana = Input_PayManaCostUtil.getShortColorString(mana);
+    	Mana_Part m;
+        for(int i = 0; i < manaPart.size(); i++) {
+            m = (Mana_Part) manaPart.get(i);
+            if(m.isNeeded(mana)) return true;
+        }
+        return false;
+    }
+    
+    public boolean isNeeded(Mana mana) {
+    	Mana_Part m;
+        for(int i = 0; i < manaPart.size(); i++) {
+            m = (Mana_Part) manaPart.get(i);
+            if(m.isNeeded(mana)) return true;
+            if (m instanceof Mana_PartSnow && mana.isSnow()) return true;
+        }
+        return false;
     }
     
     public boolean isPaid() {
-        return m.isPaid();
+        Mana_Part m;
+        for(int i = 0; i < manaPart.size(); i++) {
+            m = (Mana_Part) manaPart.get(i);
+            if(!m.isPaid()) return false;
+        }
+        return true;
+    }//isPaid()
+    
+    public boolean payMana(Mana mana) {
+        return addMana(mana);
+    }
+    
+    public boolean payMana(String color) {
+        color = Input_PayManaCostUtil.getShortColorString(color);
+        return addMana(color);
+    }
+    
+    public boolean addMana(String mana) {
+        if(!isNeeded(mana)) throw new RuntimeException("ManaCost : addMana() error, mana not needed - " + mana);
+        
+        Mana_Part choice = null;
+        
+        for(int i = 0; i < manaPart.size(); i++) {
+        	Mana_Part m = (Mana_Part) manaPart.get(i);
+            if(m.isNeeded(mana)) {
+            	// if m is a better to pay than choice
+            	if (choice == null){
+	            	choice = m;
+	            	continue;
+            	}
+            	if (m.isColor(mana) && choice.isEasierToPay(m))
+            	{
+            		choice = m;
+            	}
+            }
+        }//for
+        if (choice == null)
+        	return false;
+        
+        choice.reduce(mana);
+        return true;
+    }
+    
+    public boolean addMana(Mana mana) {
+        if(!isNeeded(mana)) throw new RuntimeException("ManaCost : addMana() error, mana not needed - " + mana);
+        
+        Mana_Part choice = null;
+        
+        for(int i = 0; i < manaPart.size(); i++) {
+        	Mana_Part m = (Mana_Part) manaPart.get(i);
+            if(m.isNeeded(mana)) {
+            	// if m is a better to pay than choice
+            	if (choice == null){
+	            	choice = m;
+	            	continue;
+            	}
+            	if (m.isColor(mana) && choice.isEasierToPay(m))
+            	{
+            		choice = m;
+            	}
+            }
+        }//for
+        if (choice == null)
+        	return false;
+        
+        choice.reduce(mana);
+        return true;
     }
     
     @Override
     public String toString() {
-        return m.toString();
-    }
-    
-    public void subtractMana(String color) {
-        color = getShortManaString(color);
-        m.addMana(color);
-    }
-    
-    //convert "white" to "W"
-    //convert "colorless" to "1" for Mana_PartColorless
-    private String getShortManaString(String longManaString) {
-        String s = longManaString;
-        if(s.equals(Constant.Color.White)) return "W";
-        if(s.equals(Constant.Color.Black)) return "B";
-        if(s.equals(Constant.Color.Blue)) return "U";
-        if(s.equals(Constant.Color.Green)) return "G";
-        if(s.equals(Constant.Color.Red)) return "R";
-        if(s.equals(Constant.Color.Colorless)) return "1";
-        if(s.equals(Constant.Color.Snow)) return "S";
-        else if((s.equals("G") || s.equals("U") || s.equals("W") || s.equals("B") || s.equals("R")
-                || s.equals("1") || s.equals("S"))) return s;
+        StringBuilder sb = new StringBuilder();
+        ArrayList<Object> list = new ArrayList<Object>(manaPart);
+        //need to reverse everything since the colored mana is stored first
+        Collections.reverse(list);
         
-        throw new RuntimeException("ManaCost : getShortManaString() invalid argument - " + longManaString);
-    }//getShortManaString()
-    
-    public boolean isNeeded(String color) {
-        color = getShortManaString(color);
-        return m.isNeeded(color);
+        for(int i = 0; i < list.size(); i++) {
+            sb.append(" ");
+            sb.append(list.get(i).toString());
+        }
+        
+        return sb.toString().trim();
     }
     
-    /*
-      public int getColor(String color)
-      {
-        return (int)Math.abs(manaPool.getColor(color));
-      }
-      public boolean isNeeded(String color)
-      {
-        int a = getColor(color);
-        int b = getColor(Constant.Color.Colorless);
-
-        if(0 < a || 0 < b)
-          return true;
-
-        return false;
-      }
-      */
-}//ManaCost
+    private ArrayList<Object> split(String cost) {
+        ArrayList<Object> list = new ArrayList<Object>();
+        
+        //handles costs like "3", "G", "GW", "10", "S"
+        if(cost.length() == 1 || cost.length() == 2) {
+            if(Character.isDigit(cost.charAt(0))) list.add(new Mana_PartColorless(cost));
+            else if(cost.charAt(0) == 'S') list.add(new Mana_PartSnow());
+            else list.add(new Mana_PartColor(cost));
+        } else//handles "3 GW", "10 GW", "1 G G", "G G", "S 1"
+        {
+            //all costs that have a length greater than 2 have a space
+            StringTokenizer tok = new StringTokenizer(cost);
+            
+            while(tok.hasMoreTokens())
+                list.add(getManaPart(tok.nextToken()));
+            
+            //ManaPartColorless needs to be added AFTER the colored mana
+            //in order for isNeeded() and addMana() to work correctly
+            Object o = list.get(0);
+            if(o instanceof Mana_PartSnow) {
+                //move snow cost to the end of the list
+                list.remove(0);
+                list.add(o);
+            }
+            o = list.get(0);
+            
+            if(o instanceof Mana_PartColorless) {
+                //move colorless cost to the end of the list
+                list.remove(0);
+                list.add(o);
+            }
+        }//else
+        
+        return list;
+    }//split()
+    
+    private Mana_Part getManaPart(String partCost) {
+        if(partCost.length() == 3) {
+            return new Mana_PartSplit(partCost);
+        } else if(Character.isDigit(partCost.charAt(0))) {
+            return new Mana_PartColorless(partCost);
+        } else if(partCost.equals("S")) {
+            return new Mana_PartSnow();
+        } else {
+            return new Mana_PartColor(partCost);
+        }
+    }
+}

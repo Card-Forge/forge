@@ -128,7 +128,7 @@ public class Phase extends MyObservable
         //}
         
 
-        AllZone.ManaPool.clear();
+        AllZone.ManaPool.clearPool();
         if (getPhase().equals(Constant.Phase.Combat_Declare_Attackers)) {
         	nCombatsThisTurn++;
         } else if (getPhase().equals(Constant.Phase.Main1)) {

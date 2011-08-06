@@ -12,7 +12,8 @@ public class Input_PayManaCostUtil
 	if(card.getController().equals(Constant.Player.Computer))
 		return manaCost;
 	
-    if(card instanceof ManaPool) return ((ManaPool)card).subtractMana(manaCost);
+    if(card instanceof ManaPool) 
+    	return ((ManaPool)card).subtractMana(manaCost);
 	ArrayList<Ability_Mana> abilities = getManaAbilities(card);
 
     StringBuilder cneeded = new StringBuilder();
@@ -62,87 +63,81 @@ public class Input_PayManaCostUtil
  		   AllZone.GameAction.playSpellAbility(chosen);
  	   }
      	manaCost = AllZone.ManaPool.subtractMana(manaCost, chosen);
+     	
      	// Nirkana Revenant Code
-         CardList Nirkana_Human = new CardList();
-         PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);                   
-         Nirkana_Human.addAll(play.getCards());
-         Nirkana_Human = Nirkana_Human.getName("Nirkana Revenant"); 
-         Card mp = AllZone.ManaPool;
-         if(Nirkana_Human.size() > 0 && card.getType().contains("Swamp") && card.getController().equals("Human")) {
+        Card mp = AllZone.ManaPool;
+        if(card.getType().contains("Swamp") && card.getController().equals("Human")) {
+         	CardList Nirkana_Human = CardFactoryUtil.getCards("Nirkana Revenant", Constant.Player.Human);
          	for(int x = 0; x < Nirkana_Human.size(); x++) {
         		for(int i = 0; i < abilities.size(); i++) {
-        			if(abilities.get(i).mana().contains("B") == true) {
-         		if(card.isSnow() == false) {
-         			chosen = abilities.get(i);	
-         			manaCost = AllZone.ManaPool.subtractMana(manaCost, chosen);
-         		} else { 
-         			
-         			if(manaCost.toString().trim() != "") {
-         			if(manaCost.toString().contains("B"))  {
-         				manaCost.subtractMana("B");
-         				if(AllZone.ManaPool.has == "") {
-         					AllZone.ManaPool.paid = AllZone.ManaPool.paid.replaceFirst("B", "");
-         					mp.removeExtrinsicKeyword("ManaPool:B");
-         				}
-         				else  {
-         					AllZone.ManaPool.has = AllZone.ManaPool.has.replaceFirst("B", "");
-         					
-         				}
-         			}
-         			else {
-         				if(manaCost.toString().length() > 0) {
-         				manaCost.subtractMana("1");
-         				
-         				if(AllZone.ManaPool.has == "") {
-         					AllZone.ManaPool.paid = AllZone.ManaPool.paid.replaceFirst("B", "");
-         					mp.removeExtrinsicKeyword("ManaPool:B");
-         				}
-         				else {
-         					AllZone.ManaPool.has = AllZone.ManaPool.has.replaceFirst("B", "");
-         					
-         				}
-         			}
-         			}
-         			
-         			}
-         		}       		
-         	}      		
-         	}
-         } 
+        			if(abilities.get(i).mana().contains("B")) {
+		         		if(!card.isSnow()) {
+		         			chosen = abilities.get(i);	
+		         			manaCost = AllZone.ManaPool.subtractMana(manaCost, chosen);
+		         		} 
+		         		else {
+		         			if(manaCost.toString().trim() != "") {
+			         			if(manaCost.toString().contains("B"))  {
+			         				manaCost.payMana("B");
+			         				if(AllZone.ManaPool.isEmpty()) {
+			         					AllZone.ManaPool.removeManaFromPaying(new ManaCost("B"), Nirkana_Human.get(x));
+			         					mp.removeExtrinsicKeyword("ManaPool:B");
+			         				}
+			         				else  {
+			         					AllZone.ManaPool.removeManaFromFloating(new ManaCost("B"),  Nirkana_Human.get(x));
+			         				}
+			         			}
+			         			else {
+			         				if(manaCost.toString().length() > 0) {
+				         				manaCost.payMana("1");
+				         				
+				         				if(AllZone.ManaPool.isEmpty()) {
+				         					AllZone.ManaPool.removeManaFromPaying(new ManaCost("B"),  Nirkana_Human.get(x));
+				         					mp.removeExtrinsicKeyword("ManaPool:B");
+				         				}
+				         				else {
+				         					AllZone.ManaPool.removeManaFromFloating(new ManaCost("B"),  Nirkana_Human.get(x));
+				         				}
+			         				}
+			         			}
+		         			}
+		         		}
+        			}      		
+        		}
+         	} 
          }
-         	// Nirkana Revenant Code
+
        	// High Tide Code
          if(Phase.HighTideCount > 0 && card.getType().contains("Island") && card.getController().equals("Human")) {
          	for(int x = 0; x < Phase.HighTideCount; x++) {
         		for(int i = 0; i < abilities.size(); i++) {
         			if(abilities.get(i).mana().contains("U") == true) {
-         		if(card.isSnow() == false) {
-         			chosen = abilities.get(i);	
-         			manaCost = AllZone.ManaPool.subtractMana(manaCost, chosen);
-         		} else { 
-         			
-         			if(manaCost.toString().trim() != "") {
-         			if(manaCost.toString().contains("U"))  {
-         				manaCost.subtractMana("U");
-         				if(AllZone.ManaPool.has == "") {
-         					AllZone.ManaPool.paid = AllZone.ManaPool.paid.replaceFirst("U", "");
-         					mp.removeExtrinsicKeyword("ManaPool:U");
-         				}
-         				else  {
-         					AllZone.ManaPool.has = AllZone.ManaPool.has.replaceFirst("U", "");
-         					
-         				}
-         			}
+        				chosen = abilities.get(i);	
+	         		if(card.isSnow() == false) {
+	         			manaCost = AllZone.ManaPool.subtractMana(manaCost, chosen);
+	         		} else { 
+	         			
+	         			if(manaCost.toString().trim() != "") {
+	         			if(manaCost.toString().contains("U"))  {
+	         				manaCost.payMana("U");
+	         				if(AllZone.ManaPool.isEmpty()) {
+	         					AllZone.ManaPool.removeManaFromPaying(new ManaCost("U"), chosen.getSourceCard());
+	         					mp.removeExtrinsicKeyword("ManaPool:U");
+	         				}
+	         				else  {
+	         					AllZone.ManaPool.removeManaFromFloating(new ManaCost("U"), chosen.getSourceCard());
+	         				}
+	         			}
          			else {
          				if(manaCost.toString().length() > 0) {
-         				manaCost.subtractMana("1");
+         				manaCost.payMana("1");
          				
-         				if(AllZone.ManaPool.has == "") {
-         					AllZone.ManaPool.paid = AllZone.ManaPool.paid.replaceFirst("U", "");
+         				if(AllZone.ManaPool.isEmpty()) {
+         					AllZone.ManaPool.removeManaFromPaying(new ManaCost("U"), chosen.getSourceCard());
          					mp.removeExtrinsicKeyword("ManaPool:U");
          				}
          				else {
-         					AllZone.ManaPool.has = AllZone.ManaPool.has.replaceFirst("U", "");
+         					AllZone.ManaPool.removeManaFromFloating(new ManaCost("U"), chosen.getSourceCard());
          					
          				}
          			}
@@ -177,7 +172,7 @@ public class Input_PayManaCostUtil
 		  }
 		  return false;
 	  }
-	  for(String color : ManaPool.getManaParts(am))
+	  for(String color : ManaPool.formatMana(am))
   		if(mana.contains(color)) return true;
   	  return false;
   }

@@ -31,7 +31,42 @@ public class Mana_PartColorless extends Mana_Part {
     }
     
     @Override
+    public boolean isNeeded(Mana mana) {
+        //ManaPart method
+    	if (mana.getAmount() > 1) throw new RuntimeException("Mana_PartColorless received Mana type with amount > 1");
+    	
+        return 0 < manaNeeded;
+    }
+    
+    @Override
+    public boolean isColor(String mana) {
+    	return false;
+    }
+    
+    @Override
+	public boolean isColor(Mana mana) {
+    	return false;
+	}
+    
+    @Override
+    public boolean isEasierToPay(Mana_Part mp)
+    {
+    	// Colorless is always easier to Pay for
+    	return true;
+    }
+    
+    @Override
     public void reduce(String mana) {
+        //if mana is needed, then this mana cost is all paid up
+        if(!isNeeded(mana)) throw new RuntimeException(
+                "Mana_PartColorless : reduce() error, argument mana not needed, mana - " + mana
+                        + ", toString() - " + toString());
+        
+        manaNeeded--;
+    }
+    
+    @Override
+    public void reduce(Mana mana) {
         //if mana is needed, then this mana cost is all paid up
         if(!isNeeded(mana)) throw new RuntimeException(
                 "Mana_PartColorless : reduce() error, argument mana not needed, mana - " + mana

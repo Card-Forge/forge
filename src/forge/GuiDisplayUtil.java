@@ -800,11 +800,9 @@ public class GuiDisplayUtil implements NewConstants {
     public static ArrayList<Card> getManaPools(ArrayList<Card> cards) {
         ArrayList<Card> ret = new ArrayList<Card>();
         for(Card c:cards) {
-            if(c instanceof ManaPool && !c.isSnow()) {
-                ret.add(((ManaPool) c).smp);
+            if(c instanceof ManaPool) {
                 ret.add(c);
             }
-            
         }
         return ret;
     }

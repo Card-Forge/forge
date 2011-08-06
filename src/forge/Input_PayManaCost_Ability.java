@@ -75,7 +75,7 @@ public class Input_PayManaCost_Ability extends Input {
             resetManaCost();
             //(was) VERY IMPORTANT, otherwise land can be "magical" untapped
             //tappedLand.clear();
-            AllZone.ManaPool.paid();
+            AllZone.ManaPool.clearPay(false);
             
             //Command MUST BE AFTER, for Urborg Syphon-Mage - tap, mana, discard ability
             //does it really have to be after?

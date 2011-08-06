@@ -28,12 +28,48 @@ public class Mana_PartColor extends Mana_Part {
         //ManaPart method
         checkSingleMana(mana);
         
-        int index = manaCost.indexOf(mana);
-        return index != -1;
+        return !isPaid() && isColor(mana);
+    }
+    
+    @Override
+	public boolean isNeeded(Mana mana) {
+    	return (!isPaid() && isColor(mana));
+	}
+    
+    @Override
+    public boolean isColor(String mana) {
+        //ManaPart method
+        checkSingleMana(mana);
+        
+        return manaCost.indexOf(mana) != -1;
+    }
+    
+    @Override
+	public boolean isColor(Mana mana) {
+    	String color = Input_PayManaCostUtil.getShortColorString(mana.getColor());
+    	
+    	return manaCost.indexOf(color) != -1;
+	}
+    
+    @Override
+    public boolean isEasierToPay(Mana_Part mp)
+    {
+    	if (mp instanceof Mana_PartColorless) return false;
+    	return toString().length() >= mp.toString().length();
     }
     
     @Override
     public void reduce(String mana) {
+        //if mana is needed, then this mana cost is all paid up
+        if(!isNeeded(mana)) throw new RuntimeException(
+                "Mana_PartColor : reduce() error, argument mana not needed, mana - " + mana + ", toString() - "
+                        + toString());
+        
+        manaCost = "";
+    }
+    
+    @Override
+    public void reduce(Mana mana) {
         //if mana is needed, then this mana cost is all paid up
         if(!isNeeded(mana)) throw new RuntimeException(
                 "Mana_PartColor : reduce() error, argument mana not needed, mana - " + mana + ", toString() - "

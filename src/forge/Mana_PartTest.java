@@ -6,49 +6,49 @@ public class Mana_PartTest
     {
       //test constructor
       @SuppressWarnings("unused")
-	  Mana_PayCost p = new Mana_PayCost("G");
-      p = new Mana_PayCost("U");
-      p = new Mana_PayCost("W");
-      p = new Mana_PayCost("R");
-      p = new Mana_PayCost("B");
-      p = new Mana_PayCost("0");
-      p = new Mana_PayCost("1");
-      p = new Mana_PayCost("2");
-      p = new Mana_PayCost("3");
-      p = new Mana_PayCost("4");
-      p = new Mana_PayCost("5");
-      p = new Mana_PayCost("6");
-      p = new Mana_PayCost("7");
-      p = new Mana_PayCost("8");
-      p = new Mana_PayCost("9");
-      p = new Mana_PayCost("10");
+	  ManaCost p = new ManaCost("G");
+      p = new ManaCost("U");
+      p = new ManaCost("W");
+      p = new ManaCost("R");
+      p = new ManaCost("B");
+      p = new ManaCost("0");
+      p = new ManaCost("1");
+      p = new ManaCost("2");
+      p = new ManaCost("3");
+      p = new ManaCost("4");
+      p = new ManaCost("5");
+      p = new ManaCost("6");
+      p = new ManaCost("7");
+      p = new ManaCost("8");
+      p = new ManaCost("9");
+      p = new ManaCost("10");
 
-      p = new Mana_PayCost("GW");
-      p = new Mana_PayCost("1 G");
-      p = new Mana_PayCost("1 GW");
-      p = new Mana_PayCost("GW GW");
-      p = new Mana_PayCost("GW GW GW");
-      p = new Mana_PayCost("GW GW GW GW");
+      p = new ManaCost("GW");
+      p = new ManaCost("1 G");
+      p = new ManaCost("1 GW");
+      p = new ManaCost("GW GW");
+      p = new ManaCost("GW GW GW");
+      p = new ManaCost("GW GW GW GW");
 
-      p = new Mana_PayCost("G G");
-      p = new Mana_PayCost("G G G");
-      p = new Mana_PayCost("G G G");
-      p = new Mana_PayCost("G G G G");
+      p = new ManaCost("G G");
+      p = new ManaCost("G G G");
+      p = new ManaCost("G G G");
+      p = new ManaCost("G G G G");
 
-      p = new Mana_PayCost("2 GW GW GW");
-      p = new Mana_PayCost("3 G G G");
-      p = new Mana_PayCost("12 GW GW GW");
-      p = new Mana_PayCost("11 G G G");
+      p = new ManaCost("2 GW GW GW");
+      p = new ManaCost("3 G G G");
+      p = new ManaCost("12 GW GW GW");
+      p = new ManaCost("11 G G G");
 
-      p = new Mana_PayCost("2/U");
-      p = new Mana_PayCost("2/B 2/B");
-      p = new Mana_PayCost("2/G 2/G 2/G");
-      p = new Mana_PayCost("2/R 2/R 2/R 2/R");
-      p = new Mana_PayCost("2/W 2/B 2/U 2/R 2/G");
+      p = new ManaCost("2/U");
+      p = new ManaCost("2/B 2/B");
+      p = new ManaCost("2/G 2/G 2/G");
+      p = new ManaCost("2/R 2/R 2/R 2/R");
+      p = new ManaCost("2/W 2/B 2/U 2/R 2/G");
     }
 
     {
-      Mana_PayCost p = new Mana_PayCost("2/U");
+      ManaCost p = new ManaCost("2/U");
 
       check(0.3, p.isNeeded("G"));
       check(0.4, p.isNeeded("U"));
@@ -65,7 +65,7 @@ public class Mana_PartTest
 
 
     {
-      Mana_PayCost p = new Mana_PayCost("G");
+      ManaCost p = new ManaCost("G");
       check(1, p.isNeeded("G"));
 
       check(1.1, !p.isNeeded("U"));
@@ -82,7 +82,7 @@ public class Mana_PartTest
     }
 
     {
-      Mana_PayCost p = new Mana_PayCost("1");
+      ManaCost p = new ManaCost("1");
 
       check(3, p.isNeeded("G"));
       check(4, p.isNeeded("U"));
@@ -98,7 +98,7 @@ public class Mana_PartTest
     }
 
     {
-      Mana_PayCost p = new Mana_PayCost("GW");
+      ManaCost p = new ManaCost("GW");
 
       check(10, p.isNeeded("G"));
       check(13, p.isNeeded("W"));
@@ -116,7 +116,7 @@ public class Mana_PartTest
 
 
     {
-      Mana_PayCost p = new Mana_PayCost("BR");
+      ManaCost p = new ManaCost("BR");
 
       check(17.1, p.isNeeded("B"));
       check(17.2, p.isNeeded("R"));
@@ -134,7 +134,7 @@ public class Mana_PartTest
 
 
     {
-      Mana_PayCost p = new Mana_PayCost("1 G G");
+      ManaCost p = new ManaCost("1 G G");
 
       p.addMana("G");
 
@@ -154,7 +154,7 @@ public class Mana_PartTest
     }
 
     {
-      Mana_PayCost p = new Mana_PayCost("0");
+      ManaCost p = new ManaCost("0");
 
       check(19.1, !p.isNeeded("1"));
       check(19.2, !p.isNeeded("G"));
@@ -166,7 +166,7 @@ public class Mana_PartTest
     }
 
     {
-      Mana_PayCost p = new Mana_PayCost("G G");
+      ManaCost p = new ManaCost("G G");
 
       check(20.1, !p.isNeeded("1"));
       check(20.2, p.isNeeded("G"));
@@ -182,7 +182,7 @@ public class Mana_PartTest
     }
 
     {
-      Mana_PayCost p = new Mana_PayCost("G G G");
+      ManaCost p = new ManaCost("G G G");
 
       check(21.1, !p.isNeeded("W"));
       check(21.2, p.isNeeded("G"));
@@ -199,7 +199,7 @@ public class Mana_PartTest
     }
 
     {
-      Mana_PayCost p = new Mana_PayCost("G G G G");
+      ManaCost p = new ManaCost("G G G G");
 
       check(22.1, !p.isNeeded("W"));
       check(22.2, p.isNeeded("G"));
@@ -217,7 +217,7 @@ public class Mana_PartTest
     }
 
     {
-      Mana_PayCost p = new Mana_PayCost("GW");
+      ManaCost p = new ManaCost("GW");
 
       check(23.1, p.isNeeded("W"));
       check(23.2, p.isNeeded("G"));
@@ -231,7 +231,7 @@ public class Mana_PartTest
     }
 
     {
-      Mana_PayCost p = new Mana_PayCost("GW");
+      ManaCost p = new ManaCost("GW");
 
       check(24.1, p.isNeeded("W"));
       check(24.2, p.isNeeded("G"));
@@ -245,7 +245,7 @@ public class Mana_PartTest
     }
 
     {
-      Mana_PayCost p = new Mana_PayCost("3 GW GW");
+      ManaCost p = new ManaCost("3 GW GW");
 
       check(25.1, p.isNeeded("W"));
       check(25.2, p.isNeeded("G"));
@@ -271,7 +271,7 @@ public class Mana_PartTest
     }
 
     {
-      Mana_PayCost p = new Mana_PayCost("4");
+      ManaCost p = new ManaCost("4");
 
       check(26.1, p.isNeeded("W"));
       check(26.2, p.isNeeded("G"));
@@ -286,7 +286,7 @@ public class Mana_PartTest
     }
 
     {
-      Mana_PayCost p = new Mana_PayCost("10");
+      ManaCost p = new ManaCost("10");
 
       p.addMana("G");
       p.addMana("W");
@@ -305,7 +305,7 @@ public class Mana_PartTest
     }
 
     {
-      Mana_PayCost p = new Mana_PayCost("12 G GW");
+      ManaCost p = new ManaCost("12 G GW");
 
       for (int i = 0; i < 12; i++)
         p.addMana("R");
@@ -317,7 +317,7 @@ public class Mana_PartTest
     }
 
     {
-      Mana_PayCost p = new Mana_PayCost("2 W B U R G");
+      ManaCost p = new ManaCost("2 W B U R G");
 
       for (int i = 0; i < 1; i++)
         p.addMana("R");
@@ -337,7 +337,7 @@ public class Mana_PartTest
     }
 
     {
-      Mana_PayCost p = new Mana_PayCost("W B U R G W");
+      ManaCost p = new ManaCost("W B U R G W");
 
       p.addMana("R");
       p.addMana("G");
@@ -351,7 +351,7 @@ public class Mana_PartTest
     }
 
     {
-      Mana_PayCost p = new Mana_PayCost("W B U R G W B U R G");
+      ManaCost p = new ManaCost("W B U R G W B U R G");
 
       for (int i = 0; i < 2; i++)
       {
@@ -366,7 +366,7 @@ public class Mana_PartTest
     }
 
     {
-      Mana_PayCost p = new Mana_PayCost("2 W B U R G W B U R G G");
+      ManaCost p = new ManaCost("2 W B U R G W B U R G G");
 
       for (int i = 0; i < 2; i++)
       {
@@ -385,7 +385,7 @@ public class Mana_PartTest
     }
 
     {
-      Mana_PayCost p = new Mana_PayCost("1 B R");
+      ManaCost p = new ManaCost("1 B R");
 
       p.addMana("B");
       p.addMana("1");
@@ -395,7 +395,7 @@ public class Mana_PartTest
     }
 
     {
-      Mana_PayCost p = new Mana_PayCost("B R");
+      ManaCost p = new ManaCost("B R");
 
       p.addMana("B");
       p.addMana("R");
@@ -405,7 +405,7 @@ public class Mana_PartTest
 
 
     {
-      Mana_PayCost p = new Mana_PayCost("2/B 2/B 2/B");
+      ManaCost p = new ManaCost("2/B 2/B 2/B");
 
       check(35, p.isNeeded("G"));
 
@@ -421,7 +421,7 @@ public class Mana_PartTest
 
 
     {
-      Mana_PayCost p = new Mana_PayCost("2/G");
+      ManaCost p = new ManaCost("2/G");
 
       p.addMana("1");
       check(39, p.toString().equals("1"));
@@ -431,7 +431,7 @@ public class Mana_PartTest
     }
 
     {
-      Mana_PayCost p = new Mana_PayCost("2/R 2/R");
+      ManaCost p = new ManaCost("2/R 2/R");
 
       p.addMana("1");
       check(41, p.toString().equals("2/R 1"));
@@ -441,7 +441,7 @@ public class Mana_PartTest
     }
 
     {
-      Mana_PayCost p = new Mana_PayCost("2/W 2/W");
+      ManaCost p = new ManaCost("2/W 2/W");
 
       for(int i = 0; i < 4; i++)
       {
@@ -451,6 +451,34 @@ public class Mana_PartTest
 
       check(44, p.isPaid());
     }
+    
+    {
+    	ManaCost p = new ManaCost("2/W 2/B 2/U 2/R 2/G");
+    	check(45, p.isPaid() == false);
+    	
+    	p.addMana("B");
+    	p.addMana("R");
+    	p.addMana("G");
+    	p.addMana("W");
+    	p.addMana("U");
+    	
+    	check(45.1, p.isPaid(), p);
+    }
+    
+    {
+    	ManaCost p = new ManaCost("2/W 2/B 2/U 2/R 2/G");
+    	check(46, p.isPaid() == false);
+    	
+    	Card c = new Card();
+    	
+    	p.addMana(new Mana(Constant.Color.Black, 1, c));
+    	p.addMana(new Mana(Constant.Color.Red, 1, c));
+    	p.addMana(new Mana(Constant.Color.Green, 1, c));
+    	p.addMana(new Mana(Constant.Color.White, 1, c));
+    	p.addMana(new Mana(Constant.Color.Blue, 1, c));
+    	
+    	check(46.1, p.isPaid(), p);
+    }
 
   } //testPayManaCost()
 
@@ -459,6 +487,14 @@ public class Mana_PartTest
   {
     if (!b)
       System.out.println("failed : " + n);
+  }
+  
+  static void check(double n, boolean b, ManaCost p)
+  {
+    if (!b){
+    	System.out.println("failed : " + n);
+    	System.out.println(p.toString());
+    }
   }
 
   public static void main(String[] args)

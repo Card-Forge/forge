@@ -191,7 +191,7 @@ public class ComputerUtil
          if(cost.isNeeded(colors.get(j)) && once == 0)
          {
           //System.out.println(j + " color:" +colors.get(j));
-           cost.subtractMana(colors.get(j));
+           cost.payMana(colors.get(j));
            //System.out.println("thinking, I just subtracted " + colors.get(j) + ", cost is now: " + cost.toString());
            once++;
          }
@@ -224,7 +224,7 @@ public class ComputerUtil
       {
 	      if(manacost.isNeeded(colors.get(j)) && once == 0)
 	      { 
-	        manacost.subtractMana(colors.get(j));
+	        manacost.payMana(colors.get(j));
 	        once++;
 	      }
 
@@ -261,7 +261,7 @@ public class ComputerUtil
          if(cost.isNeeded(colors.get(j)) && land.get(i).isUntapped())
          {
             land.get(i).tap();
-            cost.subtractMana(colors.get(j));
+            cost.payMana(colors.get(j));
             
             if (land.get(i).getName().equals("Forbidden Orchard")) {
             	AllZone.Stack.add(CardFactoryUtil.getForbiddenOrchardAbility(land.get(i), Constant.Player.Human));

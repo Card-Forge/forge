@@ -13501,33 +13501,12 @@ public class GameActionUtil {
 		private static final long serialVersionUID = -22045167326100804L;
 
 		public void execute() {
+			// todo: when computer manapool is made, this needs to be fixed
 			CardList list = AllZoneUtil.getCardsInPlay("Omnath, Locus of Mana");
-			
-			for(int i = 0; i < list.size(); i++) { // Should be 1.
-				Card c = list.get(i);
-				if(c.getController() == "Human") {
-				String Mana = AllZone.ManaPool.has + AllZone.ManaPool.smp.getText();
-				
-				int Count = 0;
-		        if(Mana != null) Count = Mana.length();		        
-		        int Bonus = 0;
-		        if(Count > 0) {
-	            for(int x = 0; x < Count; x++) {
-	            	if(Mana.contains("G") == true) {
-	    				
-	            		Mana = Mana.replaceFirst("G", "");
-	            		Bonus = Bonus + 1;
-	            		
-	            	}
-	            }	           	
-				c.setBaseAttack(Bonus + 1);
-				c.setBaseDefense(Bonus + 1);
-		        }
-				
-			} else {
-				c.setBaseAttack(1);
-				c.setBaseDefense(1);
-			}
+			int bonus = AllZone.ManaPool.getAmountOfColor(Constant.Color.Green);
+			for(Card c: list){
+				c.setBaseAttack(bonus + 1);
+				c.setBaseDefense(bonus + 1);
 			}
 		}// execute()
 	};

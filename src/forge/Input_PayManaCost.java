@@ -69,7 +69,7 @@ public class Input_PayManaCost extends Input {
             	stopSetNext(spell.getAfterPayMana());            	
             } else stopSetNext(new ComputerAI_StackNotEmpty());
     	} else {
-        AllZone.ManaPool.paid();
+        AllZone.ManaPool.clearPay(false);
         resetManaCost();
         
         //if tap ability, tap card

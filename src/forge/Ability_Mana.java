@@ -264,24 +264,22 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     	if (isSacrifice())
     		AllZone.GameAction.sacrifice(sourceCard);
     	AllZone.ManaPool.addMana(this);
+    	
     	// Nirkana Revenant Code
-        CardList Nirkana_Human = new CardList();
-        PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);                   
-        Nirkana_Human.addAll(play.getCards());
-        Nirkana_Human = Nirkana_Human.getName("Nirkana Revenant"); 
+    	CardList Nirkana_Human = CardFactoryUtil.getCards("Nirkana Revenant", Constant.Player.Human);
         if(Nirkana_Human.size() > 0 && sourceCard.getType().contains("Swamp") && sourceCard.getController().equals("Human")) {
         	for(int i = 0; i < Nirkana_Human.size(); i++) {
-        		AllZone.ManaPool.addMana("B");	
+        		AllZone.ManaPool.addManaToFloating("B", Nirkana_Human.get(i));	
         	}
         } 
-        	// Nirkana Revenant Code
+
     	// High Tide Code
         if(Phase.HighTideCount > 0 && sourceCard.getType().contains("Island") && sourceCard.getController().equals("Human")) {
         	for(int i = 0; i < Phase.HighTideCount; i++) {
-        		AllZone.ManaPool.addMana("U");	
+        		AllZone.ManaPool.addManaToFloating("U", sourceCard);	
         	}
         } 
-        	// High Tide Code
+
         if(!runcommands.isEmpty()) for(Command c:runcommands)
             c.execute();
     }
@@ -320,8 +318,11 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
             int count = CardFactoryUtil.xCount(sourceCard, countSB.toString());
             
             StringBuilder sb = new StringBuilder();
-            for(int i = 0; i < count; i++)
+            for(int i = 0; i < count; i++){
+            	if (i != 0)
+                    sb.append(" "); 	// added a space here to play nice with the new ManaPool
                 sb.append(m);
+            } 
             return sb.toString();
             
         } 

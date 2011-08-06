@@ -1,177 +1,93 @@
 
 package forge;
 
-
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class ManaPool extends Card {
-    private ArrayList<Ability_Mana> used = new ArrayList<Ability_Mana>();
-    
-    //boolean[] spendAsCless ={true,true,true,true,true,true};
-    //boolean spendAll = true;
-    /*	private int cIndex(String s)
-    	{
-    		//String c =(s.length()==1 ? s : Input_PayManaCostUtil.getColor2(s)); 
-    		if(s.length()!=1) throw new IllegalArgumentException(s + "isn't an indexable single character.");
-    		if(!colors.contains(s)) return 0;
-    		return colors.indexOf(s) + 1;
-    	}
-    	private String indexC(int index)
-    	{
-    		if (index == 0) return "1";
-    		return colors.charAt(index - 1) + "";
-    	}*/
-    private void updateKeywords() {
-        extrinsicKeyword.clear();
-        for(char c:has.toCharArray())
-            /*for(int val=0;val<6;val++)
-            	for(int i=0; i < has[val]; i++)*/
-            extrinsicKeyword.add("ManaPool:" + c);//indexC(val));*/
-    }
-    
-    private ArrayList<String> extrinsicKeyword = new ArrayList<String>();
-    
-    @Override
-    public ArrayList<String> getExtrinsicKeyword() {
-        return new ArrayList<String>(extrinsicKeyword);
-    }
-    
-    @Override
-    public void setExtrinsicKeyword(ArrayList<String> a) {
-        extrinsicKeyword = new ArrayList<String>(a);
-        //Arrays.fill(has, 0);
-        has = "";
-        for(String Manaword:extrinsicKeyword)
-            if(Manaword.startsWith("ManaPool:")) {
-                String[] cost = Manaword.split(":");
-                if(cost[1].length() == 1) has += cost[1];//[cIndex(cost[1])]++;
-            }
-        this.updateObservers();
-    }
-    
-    @Override
-    public void addExtrinsicKeyword(String s) {
-        if(s.startsWith("ManaPool:")) {
-            extrinsicKeyword.add(s);
-            addMana(s.split(":")[1]);
-        }
-    }
-    
-    @Override
-    public void removeExtrinsicKeyword(String s) {
-        if(s.startsWith("ManaPool:")) {
-            updateKeywords();
-            extrinsicKeyword.remove(s);
-            subtractOne(s.split(":")[1]);
-            this.updateObservers();
-        }
-    }
-    
-    @Override
-    public int getExtrinsicKeywordSize() {
-        updateKeywords();
-        return extrinsicKeyword.size();
-    }
-    
-    public ManaPool smp;
-    
-    public ManaPool(String contents) {
-        this();
-        this.addMana(contents);
-    }
-    
-    public ManaPool() {
-        this(false);
-    }
-    
-    public ManaPool(boolean snow) {
+	private ArrayList<Mana> floatingMana = new ArrayList<Mana>();
+	private int[] floatingTotals = new int[7];	// WUBRGCS
+	private final static Map<String,Integer> map = new HashMap<String,Integer>();
+	 
+	private ArrayList<Mana> payingMana = new ArrayList<Mana>();
+	private ArrayList<Ability_Mana> paidAbilities = new ArrayList<Ability_Mana>();
+	
+    public final static String colors  = "WUBRG";
+    public final static String mcolors = "1WUBRG";
+    private String owner;
+	
+    public ManaPool(String player) {
         super();
-        if(!snow) smp = new ManaPool(true);
-        else {
-            smp = this;
-            addType("Snow");
-        }
         updateObservers();
-        
+        owner = player;
         setName("Mana Pool");
         addIntrinsicKeyword("Shroud");
         addIntrinsicKeyword("Indestructible");
-        clear();
+        clearPool();
+        map.put(Constant.Color.White, 0);
+        map.put(Constant.Color.Blue, 1);
+        map.put(Constant.Color.Black, 2);
+        map.put(Constant.Color.Red, 3);
+        map.put(Constant.Color.Green, 4);
+        map.put(Constant.Color.Colorless, 5);
+        map.put(Constant.Color.Snow, 6);
     }
     
     @Override
     public String getText() {
-        //empty = true;
-        String res = (isSnow()? "Snow ":"") + "Mana available:\r\n";
-        StringBuilder sb = new StringBuilder();
-        sb.append(res);
-        if(isEmpty()) sb.append("None\r\n");
-        //if(has[0]>0) {res+=Integer.toString(has[0]); empty = false;}
-        else for(char c:mcolors.toCharArray())//int j=0; j<colors.length();j++){char c=colors.charAt(j);
+    	Mana[] pool = floatingMana.toArray(new Mana[floatingMana.size()]);
+    	
+    	//Arrays.sort(pool);
+    	// gotta sort it at some point
+    	
+    	StringBuilder normalMana = new StringBuilder();
+    	StringBuilder snowMana = new StringBuilder();
+
+    	int snowColorless = 0;
+    	int colorless = 0;
+    	
+        for(Mana m:pool)
         {
-            int n = containsColor(c);//has[cIndex(c+"")];
-            if(n == 0) continue;
-            if(c == '1') sb.append(n);
-            else {
-                for(int i = 0; i < n; i++)
-                    sb.append(c);//(c+"");
-                //if (n > 0) {
-                //res+="("+n/*(Integer.toString(n)*/+")";// empty = false;}
-                sb.append("(");
-                sb.append(n);
-                sb.append(")");
-            }
-            sb.append("\r\n");
+        	int mColorless = m.getColorlessAmount();
+        	if (mColorless > 0){
+	        	if (m.isSnow())
+	        		snowColorless += mColorless;
+	        	else
+	        		colorless += mColorless;
+	        	continue;
+        	}
+
+        	if (m.isSnow())
+        		snowMana.append(m.toString());
+        	else
+        		normalMana.append(m.toString());
         }
-        if(!isSnow()) sb.append(smp.getText());
-        return sb.toString();
+        
+        if (colorless != 0)
+        	normalMana.insert(0, colorless);
+        if (snowColorless != 0)
+        	snowMana.insert(0, snowColorless);
+        
+    	normalMana.insert(0, "Mana Available:\n");
+    	snowMana.insert(0, "Snow Mana Available:\n");
+
+        return normalMana + "\n" + snowMana;
     }
     
-    public final static String colors  = "WUBRG";
-    public final static String mcolors = "1WUBRG";
-    
-    public boolean isEmpty() {
-        return has.equals("");
+    public int getAmountOfColor(String color){
+    	return floatingTotals[map.get(color)];
     }
     
-    /*	private boolean empty = false;
-    	private int[] paid= new int[6];
-    	private int[] has = new int[6];*/
-    String paid = "";
-    String has  = "";
+    public int getAmountOfColor(char color){
+    	return getAmountOfColor(Character.toString(color));
+	}
     
-    void sortContents() {
-        has = sortContents(has);
-        paid = sortContents(paid);
-    }
-    
-    String sortContents(String mana) {
-        StringBuilder sb = new StringBuilder();
-        for(char color:mcolors.toCharArray())
-            for(char c:mana.toCharArray())
-                if(c == color) sb.append(c);
-        return sb.toString();
-    }
-    
-    int containsColor(String color) {
-        sortContents();
-        if(color.length() > 1) throw new IllegalArgumentException(color + " is not a color");
-        if(color.equals("")) return Integer.MAX_VALUE;
-        return containsColor(color.charAt(0));
-    }
-    
-    int containsColor(char color) {
-        sortContents();
-        if(!has.contains(color + "")) return 0;
-        int res = has.lastIndexOf(color) - has.indexOf(color) + 1;
-        if(!isSnow()) res += smp.containsColor(color);
-        return res;
-    }
+    public boolean isEmpty() { return floatingMana.size() == 0; }
     
     public static String oraclize(String manaCost) {
-        //if(!manaCost.contains(" ")) return manaCost;
+        // converts RB to (R/B)
         String[] parts = manaCost.split(" ");
         StringBuilder res = new StringBuilder();
         for(String s:parts) {
@@ -184,106 +100,255 @@ public class ManaPool extends Card {
         return res.toString();
     }
     
-    public ArrayList<String> getColors() {
-        ArrayList<String> mana = new ArrayList<String>();
-        for(char c:mcolors.toCharArray())//int i = 1; i <= 5; i++)
-        {
-            if(containsColor(c)/*has[i]*/> 0) mana.add(getColor("" + c));//olors.charAt(i-1)+""));
-        }
-        //if(has[0]>0) mana.add(Constant.Color.Colorless);
-        return mana;
-    }
-    
-    String getColor(String s) {
-        return Input_PayManaCostUtil.getLongColorString(s);
-    }
-    
     public void addMana(Ability_Mana am) {
-        (!isSnow() && am.isSnow()? smp:this).addMana(!am.mana().contains("X")? am.mana():am.mana().replaceAll("X",
-                am.getX() + ""));
+    	//addMana(!am.mana().contains("X")? am.mana():am.mana().replaceAll("X", am.getX() + ""));
+    	addManaToFloating(am.mana(), am.getSourceCard());
     }
     
-    public void addMana(String mana) {
-        if(mana.length() <= 1) {
-            addOne(mana);
-            return;
-        }
-        String[] cost = mana.split("");
-        String Colorless = "";
-        int cless = 0;
-        for(String s:cost) {
-            if(s.trim().equals("")) continue;//mana.split gave me a "" for some reason
-            if(colors.contains(s)) {
-                addOne(s);//has[colors.indexOf(s) + 1]++;
-                if(!Colorless.trim().equals("")) {
-                    try {
-                        cless += Integer.parseInt(Colorless);
-                        Colorless = "";
-                    } catch(NumberFormatException ex) {
-                        throw new RuntimeException("Mana_Pool : Error, noncolor mana cost is not a number - "
-                                + Colorless);
-                    }
-                }
-            } else Colorless += s;
-        }
-        addOne(cless + "");
+    public void addManaToPool(ArrayList<Mana> pool, Mana mana){
+    	pool.add(mana);
+    	if (pool.equals(floatingMana)){
+    		floatingTotals[map.get(mana.getColor())] += mana.getAmount();
+    		if (mana.isSnow())
+    			floatingTotals[map.get(Constant.Color.Snow)] += mana.getAmount();
+    	}
+    }
+    
+    public void addManaToFloating(String manaStr, Card card) {
+    	manaStr = manaStr.trim();
+    	String[] manaArr = manaStr.split(" ");
+    	
+    	String color = "";
+    	int currentTotal = 0;
+    	int genericTotal = 0;
+    	int snowTotal = 0;
+    	
+    	for(String c : manaArr){
+    		String longStr = Input_PayManaCostUtil.getLongColorString(c);
+    		if (longStr.equals(Constant.Color.Colorless)){
+    			genericTotal += Integer.parseInt(c);
+    			if (card.isSnow())
+    				snowTotal += Integer.parseInt(c);
+    		}
+    		else if (color.equals("")){	
+    			color = longStr;
+    			currentTotal = 1;
+    		}
+    		else if (color.equals(longStr)){
+    			currentTotal++;
+    		}
+    		else{	// color != longstr
+    			// add aggregate color
+    			floatingMana.add(new Mana(color, currentTotal, card));
+    			floatingTotals[map.get(color)] += currentTotal;
+    			if (card.isSnow())
+    				floatingTotals[map.get(Constant.Color.Snow)] += currentTotal;
+    			
+    			color = longStr;
+    			currentTotal = 1;
+    		}
+    	}
+    	if (!color.equals("")){	// some colored mana was produced
+			floatingMana.add(new Mana(color, currentTotal, card));
+			floatingTotals[map.get(color)] += currentTotal;
+			if (card.isSnow())
+				floatingTotals[map.get(Constant.Color.Snow)] += currentTotal;
+    	}
+    	
+    	if (genericTotal > 0){	
+    		floatingMana.add(new Mana(Constant.Color.Colorless, genericTotal, card));
+    		floatingTotals[map.get(Constant.Color.Colorless)] += genericTotal;
+    		floatingTotals[map.get(Constant.Color.Snow)] += snowTotal;
+    	}
+
         //Omnath, Locus of Mana Pump Trigger
         if(Phase.GameBegins == 1) {
-            CardList Omnath_Human = new CardList();
-            PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);                   
-            Omnath_Human.addAll(play.getCards());
-            Omnath_Human = Omnath_Human.getName("Omnath, Locus of Mana"); 
-            if(Omnath_Human.size() > 0) {
+            CardList omnathList = CardFactoryUtil.getCards("Omnath, Locus of Mana", owner);
+            if(omnathList.size() > 0) {
             	Command com = GameActionUtil.commands.get("Omnath");
                 com.execute();
             }
         }
-        //Omnath, Locus of Mana Pump Trigger
-        //has[0]+=cless;
     }
     
-    public void addOne(String Mana) {
-        if(Mana.trim().equals("")) return;
-//		int cInt = cIndex(Mana);
-        if(Mana.length() == 1 && colors.contains(Mana)) //cInt > 0)
-        has += Mana;//[cInt]++;
-        else try {
-            for(int i = Integer.parseInt(Mana); i > 0; i--)
-                //	has[cInt]+= Integer.parseInt(Mana);
-                has = "1" + has;
-        } catch(NumberFormatException ex) {
-            throw new RuntimeException("Mana_Pool.AddOne : Error, noncolor mana cost is not a number - " + Mana);
-        }
-        //Omnath, Locus of Mana Pump Trigger
-        if(Phase.GameBegins == 1) {
-            CardList Omnath_Human = new CardList();
-            PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);                   
-            Omnath_Human.addAll(play.getCards());
-            Omnath_Human = Omnath_Human.getName("Omnath, Locus of Mana"); 
-            if(Omnath_Human.size() > 0) {
-            	Command com = GameActionUtil.commands.get("Omnath");
-                com.execute();
-            }
-        }
-        //Omnath, Locus of Mana Pump Trigger
+    public void addManaToPaying(String manaStr, Card card) {
+    	manaStr = manaStr.trim();
+    	String[] manaArr = manaStr.split(" ");
+    	
+    	String color = "";
+    	int total = 0;
+    	int genericTotal = 0;
+    	
+    	for(String c : manaArr){
+    		String longStr = Input_PayManaCostUtil.getLongColorString(c);
+    		if (longStr.equals(Constant.Color.Colorless))
+    			genericTotal += Integer.parseInt(c);
+    		else if (color.equals("")){	
+    			color = longStr;
+    			total = 1;
+    		}
+    		else if (color.equals(longStr)){
+    			total++;
+    		}
+    		else{	// more than one color generated
+    			// add aggregate color
+    			payingMana.add(new Mana(color, total, card));
+    			
+    			color = longStr;
+    			total = 1;
+    		}
+    	}
+    	if (total > 0)
+    		payingMana.add(new Mana(color, total, card));
+    	if (genericTotal > 0)	
+    		payingMana.add(new Mana(Constant.Color.Colorless, genericTotal, card));
     }
     
-    public static String[] getManaParts(Ability_Mana manaAbility) {
-        return getManaParts(manaAbility.mana(), true);
+    public void clearPool()
+    {
+    	if (floatingMana.size() == 0) return;
+    	
+    	if(Phase.GameBegins == 1){
+	    	CardList omnathList = CardFactoryUtil.getCards("Omnath, Locus of Mana", owner);
+	    	if (omnathList.size() == 0){
+	    		floatingMana.clear();
+	    		return;
+	    	}
+	    	
+	    	// Omnath in play, clear all non-green mana
+	    	int i = 0;
+	    	while(i < floatingMana.size()){
+	    		if (floatingMana.get(i).isColor(Constant.Color.Green)){
+	    			i++;
+	    			continue;
+	    		}
+	    		floatingMana.remove(i);
+	    	}
+    	}
+    	else
+    		floatingMana.clear();
+    }
+
+    public Mana getManaFrom(ArrayList<Mana> pool, String manaStr)
+    {
+    	String[] colors = manaStr.split("/");
+    	boolean wantSnow = false;
+    	for(int i = 0; i < colors.length; i++){
+    		colors[i] = Input_PayManaCostUtil.getLongColorString(colors[i]);
+    		if (colors[i].equals(Constant.Color.Snow))
+    			wantSnow = true;
+    	}
+    	
+    	Mana choice = null;
+    	ArrayList<Mana> manaChoices = new ArrayList<Mana>();
+    	
+    	for(Mana mana : pool){
+    		if (mana.isColor(colors)){
+    			if (choice == null)
+    				choice = mana;
+    			else if (choice.isSnow() && !mana.isSnow())
+    				choice = mana;
+    		}
+    		else if (wantSnow && mana.isSnow()){
+				if (choice == null)
+					choice = mana;
+				else if (!choice.isColor(Constant.Color.Colorless) && mana.isColor(Constant.Color.Colorless)){
+					// give preference to Colorless Snow mana over Colored snow mana
+					choice = mana;
+				}
+				else if (choice.isColor(Constant.Color.Colorless)){
+					// do nothing Snow Colorless should be used first to pay for Snow mana
+				}
+				else if (floatingTotals[map.get(mana.getColor())] > floatingTotals[map.get(choice.getColor())]){
+					// give preference to Colored mana that there is more of to pay Snow costs
+					choice = mana;
+				}
+    		}
+    		else if (colors[0].equals(Constant.Color.Colorless)){	// colorless
+    			if (choice == null && mana.isColor(Constant.Color.Colorless))
+    				choice = mana;
+    			else if (choice == null){
+    				manaChoices.add(mana);
+    			}
+//    			if (choice == null ||
+//    				(!choice.isColor(Constant.Color.Colorless) && mana.isColor(Constant.Color.Colorless)))
+//    				choice = mana;
+    		}
+    	}
+    	
+    	// after this is submitted change the choice dialog to be more descriptive
+    	if (choice == null && colors[0].equals(Constant.Color.Colorless)){
+    		if (manaChoices.size() == 1)
+    			choice = manaChoices.get(0);
+    		else if (manaChoices.size() > 1){
+	    		Object o = AllZone.Display.getChoiceOptional("Pay Mana from Mana Pool", manaChoices.toArray());
+	    		if (o != null)
+	    			choice = (Mana)o;
+	    	}
+	    }
+    	
+    	return choice;
+    }
+    
+    public void removeManaFromPaying(ManaCost mc, Card c){
+    	removeManaFrom(payingMana, mc, c);
+    }
+    
+    public void removeManaFromFloating(ManaCost mc, Card c){
+    	removeManaFrom(floatingMana, mc, c);
+    }
+    
+    public void removeManaFrom(ArrayList<Mana> pool, ManaCost mc, Card c){
+		int i = 0;
+		Mana choice = null;
+		boolean flag = false;
+		while(i < pool.size()){
+			Mana mana = pool.get(i);
+			if (flag)	c = this;
+			if (c == this && mc.isNeeded(mana)){
+				c = mana.getSourceCard();
+				flag = true;
+			}
+			if (mana.fromSourceCard(c)){
+				choice = mana;
+			}
+			i++;
+		}
+		removeManaFrom(pool, choice);
+    }
+    
+    public void removeManaFrom(ArrayList<Mana> pool, Mana choice){
+		if (choice != null){
+			if (choice.getAmount() == 1)
+				pool.remove(choice);
+			else
+				choice.decrementAmount();
+	    	if (pool.equals(floatingMana)){
+	    		floatingTotals[map.get(choice.getColor())] -= choice.getAmount();
+	    		if (choice.isSnow())
+	    			floatingTotals[map.get(Constant.Color.Snow)] -= choice.getAmount();
+	    	}
+	    }
+    }
+    
+    
+    public static String[] formatMana(Ability_Mana manaAbility) {
+        return formatMana(manaAbility.mana(), true);
     }//wrapper
     
-    public static String[] getManaParts(String Mana_2)//turns "G G" -> {"G","G"}, "2 UG"->"{"2","U/G"}, "B W U R G" -> {"B","W","U","R","G"}, etc.
-    {
-        return getManaParts(Mana_2, false);
+    public static String[] formatMana(String Mana_2){
+    	//turns "G G" -> {"G","G"}, "2 UG"->"{"2","U/G"}, "B W U R G" -> {"B","W","U","R","G"}, etc.
+        return formatMana(Mana_2, false);
     }
     
-    public static String[] getManaParts(String Mana_2, boolean parsed) {
+    public static String[] formatMana(String Mana_2, boolean parsed) {
         String Mana = Mana_2;
         //if (Mana.isEmpty()) return null;
         if(Mana.trim().equals("")) return null;
-        if(!parsed) Mana = oraclize(Mana);
+        if(!parsed) 
+        	Mana = oraclize(Mana);
         try {
-            String[] Colorless = {Integer.parseInt(Mana) + ""};
+            String[] Colorless = { Integer.toString(Integer.parseInt(Mana)) };
             return Colorless;
         } catch(NumberFormatException ex) {}
         
@@ -328,46 +393,38 @@ public class ManaPool extends Card {
         return res.toArray(new String[0]);
     }
     
-    public ManaCost subtractMana(ManaCost m, Ability_Mana... mabilities) {
-        if(mabilities.length == 0) {
-            //spendAll = true;//TODO:check something? GUI?
-            if(m.isPaid() || (isEmpty() && (isSnow() || smp.isEmpty()))) return m;
-            else if(isEmpty()) return smp.subtractMana(m, mabilities);
-            String mana = oraclize(m.toString());
-            if(mana.length() == 1) {
-                m = subtractOne(m, mana);
-                return m;
-            }
-            String[] cost = getManaParts(m.toString());
+    public ManaCost subtractMana(ManaCost m, Ability_Mana... mAbilities) {
+        if(mAbilities.length == 0) {
+        	// paying from Mana Pool
+            if(m.isPaid() || isEmpty()) return m;
+
+            String[] cost = formatMana(m.toString());
             for(String s:cost)
-                m = subtractOne(m, s);
+            	if (!isEmpty())
+            		m = subtractOne(m, s);
             return m;
-        } else //redundant
-        for(Ability_Mana mability:mabilities) {
-            if(mability.isSnow() && !isSnow()) {
-                m = smp.subtractMana(m, mability);
-                continue;
-            }
-            used.add(mability);
-            if(null != getManaParts(mability)) {
-            	for(String c:getManaParts(mability)) {
-            		if(c.equals("")) continue; // some sort of glitch
-            		m = subtractOne(m, c);
+        }
+        
+        // paying via Mana Abilities
+        for(Ability_Mana mability:mAbilities) {
+            paidAbilities.add(mability);
+            if(null != formatMana(mability)) {
+            	for(String s:formatMana(mability)) {
+            		if(s.equals("")) 
+            			continue; // some sort of glitch
+            		m = subtractOne(m, s);
             	}
             }
         }
         //Omnath, Locus of Mana Pump Trigger
         if(Phase.GameBegins == 1) {
-            CardList Omnath_Human = new CardList();
-            PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);                   
-            Omnath_Human.addAll(play.getCards());
-            Omnath_Human = Omnath_Human.getName("Omnath, Locus of Mana"); 
-            if(Omnath_Human.size() > 0) {
+	    	CardList omnathList = CardFactoryUtil.getCards("Omnath, Locus of Mana", owner);
+            if(omnathList.size() > 0) {
             	Command com = GameActionUtil.commands.get("Omnath");
                 com.execute();
             }
         }
-        //Omnath, Locus of Mana Pump Trigger
+
         return m;
     }
     
@@ -375,70 +432,27 @@ public class ManaPool extends Card {
         subtractOne(new ManaCost(Mana), Mana);
     }
     
-    public ManaCost subtractOne(ManaCost manaCost, String Mana) {
-        if(Mana.trim().equals("") || manaCost.isPaid()) return manaCost;
-        if(colors.contains(Mana))//Index(Mana) > 0 )
-        {
-            if(containsColor(Mana) == 0) return manaCost;
-            if(isSnow() && manaCost.isNeeded("S")) manaCost.subtractMana("S");
-            else {
-                if(!manaCost.isNeeded(Mana)) return manaCost;
-                manaCost.subtractMana(getColor(Mana));
-            }
-            has = has.replaceFirst(Mana, "");
-            paid += Mana;
-        } else {
-            
-            if(Mana.equals("S")) manaCost = smp.subtractOne(manaCost, "1");
-            else if(Mana.equals("1") || !Character.isDigit(Mana.charAt(0))) {
-                if(containsColor('1') > 0 && manaCost.isNeeded(Constant.Color.Colorless)) {
-                    has = has.replaceFirst("1", "");
-                    paid += Mana;//[0]++;
-                    manaCost.subtractMana(Constant.Color.Colorless);
-                    return manaCost;
-                } else {
-                    //if (has[0]>0){manaCost=subtractOne(manaCost,"1"); cless--; continue;}
-                    String chosen;
-                    ArrayList<String> choices = getColors();
-                    if(!Mana.equals("1")) {
-                        choices.clear();
-                        if(containsColor(Mana.charAt(2)) > 0) choices.add(getColor(Mana.charAt(2) + ""));
-                        if(Mana.charAt(1) == '2'? choices.isEmpty():containsColor(Mana.charAt(0)) > 0) choices.add(getColor(Mana.charAt(0)
-                                + ""));
-                    }
-                    if(isSnow() && manaCost.isNeeded("S")) choices.add(0, Constant.Color.Snow);
-                    Iterator<String> it = choices.iterator();
-                    while(it.hasNext())
-                        if(!manaCost.isNeeded(getColor2(it.next()))) it.remove();
-                    if(choices.size() == 0) return manaCost;
-                    chosen = choices.get(0);
-                    if(choices.size() > 1) chosen = (String) AllZone.Display.getChoiceOptional("Choose "
-                            + (isSnow()? "snow ":"") + "mana to pay " + Mana, choices.toArray());
-                    if(chosen == null) {
-                        //spendAll = false;
-                        return manaCost;
-                    }
-                    if(chosen.equals(Constant.Color.Snow)) manaCost.subtractMana(chosen);
-                    else manaCost = subtractOne(manaCost, getColor2(chosen));
-                }
-            } else {
-                int cless;
-                try {
-                    cless = Integer.parseInt(Mana);
-                } catch(NumberFormatException ex) {
-                    throw new RuntimeException(
-                            "Mana_Pool.SubtractOne : Error, noncolor mana cost is not a number - " + Mana);
-                }
-                //if (cless == 0) return manaCost;
-                if(cless > totalMana()) {
-                    manaCost = subtractOne(manaCost, totalMana() + "");
-                    return manaCost;
-                } else while(totalMana() > 0 && cless > 0) {
-                    cless--;
-                    manaCost = subtractOne(manaCost, "1");
-                }
-            }
-        }
+    public ManaCost subtractOne(ManaCost manaCost, String manaStr) {
+    	if (manaStr.trim().equals("") || manaCost.isPaid()) return manaCost;
+    	
+    	// get a mana of this type from floating, bail if none available
+    	Mana mana = getManaFrom(floatingMana, manaStr);
+    	if (mana == null) return manaCost;	// no matching mana in the pool
+    	Card c = mana.getSourceCard();
+    	
+    	Mana[] manaArray = mana.toSingleArray();
+    	
+    	for(int i = 0; i< manaArray.length; i++){
+    		Mana m = manaArray[i];
+	    	if (manaCost.isNeeded(m)){
+	    		manaCost.payMana(m);
+	    		payingMana.add(m);
+	    		removeManaFromFloating(manaCost, c);
+	    	}
+	    	else
+	    		break;
+    	}
+    	
         //Omnath, Locus of Mana Pump Trigger
         if(Phase.GameBegins == 1) {
             CardList Omnath_Human = new CardList();
@@ -450,87 +464,146 @@ public class ManaPool extends Card {
                 com.execute();
             }
         }
-        //Omnath, Locus of Mana Pump Trigger
         return manaCost;
     }
     
-    public String getColor2(String s) {
-        return Input_PayManaCostUtil.getShortColorString(s);
-    }//wrapper
-    
-    public int hasMana(String color) {
-        String s = (color.length() == 1? color:Input_PayManaCostUtil.getShortColorString(color));
-        Mana_Part.checkSingleMana(s);
-        return (containsColor(color));
-    }
-    
     public int totalMana() {
-        /*int res = 0;
-        for (int n : has)
-        	res += n;*/
-        sortContents();
-        int res = has.length();
-        if(!isSnow()) res += smp.totalMana();
-        return res;
+        int total = 0;
+        for(Mana c:floatingMana)
+        	total += c.getAmount();
+        return total;
     }
     
-    public void clear() {
-        if(!isSnow()) smp.clear();
-        used.clear();
-        paid = "";//Arrays.fill(paid, 0);
-        //Omnath, Locus of Mana Mana Storage
-        if(Phase.GameBegins == 1) {
-        CardList Omnath_Human = new CardList();
-        PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);                   
-        Omnath_Human.addAll(play.getCards());
-        Omnath_Human = Omnath_Human.getName("Omnath, Locus of Mana"); 
-        StringBuffer New_ManaPool = new StringBuffer();
-        if(Omnath_Human.size() > 0) {
-	        String Human_ManaPool = has;
-	        int Count = Human_ManaPool.length();
-            for(int i = 0; i < Count; i++) {          	
-            	if(Human_ManaPool.contains("G") == true) {
-            		Human_ManaPool = Human_ManaPool.replaceFirst("G", "");
-            		New_ManaPool.append("G");
-            	}
-            }
-            has = New_ManaPool.toString().trim();
-          //Omnath, Locus of Mana Mana Storage
-        } else {
-            has = "";//Arrays.fill(has, 0); 	
+    public void clearPay(boolean refund) {
+        paidAbilities.clear();
+        // move non-undoable paying mana back to floating
+        if (refund){	
+	        for(Mana m : payingMana)
+	        	addManaToPool(floatingMana, m);
         }
-        } else {
-            has = "";//Arrays.fill(has, 0); // This is required to prevent crashing on the first turn.
-        }
+        
+        payingMana.clear();
+    }
+    
+    public boolean accountFor(String[] mana, Card c){
+    	// This might be more complex then it needs to be but here's the rundown
+    	// When attempting to undo mana from a source, account for all of the mana produced by the source
+    	// in both Paying and Floating pools. Marking mana as we go through. If it's accounted for
+    	// remove the mana at the end and return true, so undo() can be called.
+    	// Otherwise, clearPay will be called and dump the Paying Pool back into the Floating
+    	// Example: Sol Ring taps for 2 to partially play for a Spell that costs 1G. One colorless goes in paying 
+    	// and one goes into the mana pool. Now if the spell is canceled, each needs to be removed so Sol can untap.
+    	boolean flag = false;
+    	boolean paying = true;
+    	int j = 0, i = 0;
+    	Mana m;
+    	ArrayList<Mana> removePaying = new ArrayList<Mana>();
+    	ArrayList<Mana> removeFloating = new ArrayList<Mana>();
+    	String manaStr = mana[i];
+    	String color = Input_PayManaCostUtil.getLongColorString(manaStr);
+    	while(i < mana.length){
+    		m = paying ? payingMana.get(j) : floatingMana.get(j);
+    		
+			if (m.fromSourceCard(c) && m.getColor().equals(color)){
+				int amt = m.getColorlessAmount();
+				if (amt > 0){
+					int difference = Integer.parseInt(manaStr) - amt;
+					if (difference > 0)
+						manaStr = Integer.toString(difference);
+					else{
+						i += amt;
+						if (i < mana.length)
+							manaStr = mana[i];
+					}
+				}
+				else{
+					i += m.getAmount();
+					if (i < mana.length)
+						manaStr = mana[i];
+				}
+				color = Input_PayManaCostUtil.getLongColorString(manaStr);
+				if (paying)
+					removePaying.add(m);
+				else
+					removeFloating.add(m);
+				
+				if (i == mana.length)
+					break;
+			}
+			j++;
+			// account for paying mana first, then 
+			if (paying && payingMana.size() == j){
+				j = 0;
+				paying = false;
+			}
+			else if (!paying && floatingMana.size() == j && !flag)
+			{
+				return false;
+			}
+    	}
+    	
+    	for(int k = 0; k < removePaying.size(); k++){
+    		removeManaFrom(payingMana, removePaying.get(k));
+    	}
+    	for(int k = 0; k < removeFloating.size(); k++){
+    		removeManaFrom(floatingMana, removeFloating.get(k));
+    	}
+    	
+    	return true;
+    }
 
-    }
-    
-    public void paid() {
-        if(!isSnow()) smp.paid();
-        used.clear();
-        paid = "";//Arrays.fill(paid, 0);
-        sortContents();
-    }
     
     public void unpaid() {
-        if(!isSnow()) smp.unpaid();
-        String hasbak = has;
-        has = paid;
-        if(!used.isEmpty()) {
-            for(Ability_Mana am:used) {
-                if(am.undoable()) {
-                    for(String c:getManaParts(am))
-                        //paid[cIndex(am.Mana())]--;
-                        subtractOne(c);
-                    am.undo();
-                }
+    	// go through paidAbilities if they are undoable 
+        for(Ability_Mana am:paidAbilities) {
+            if(am.undoable()) {
+            	// todo(sol) for Sol Ring/Unpaid. Make sure mana is accounted for in both pools before undoing
+            	// Account for every mana produced by am. 
+            	// if accounted for remove from paying and remove from floating if needed
+            	String[] formattedMana = formatMana(am);
+            	if (accountFor(formattedMana, am.getSourceCard())){
+	                am.undo();
+            	}
+                // else can't account let clearPay move paying back to floating
             }
-            
         }
-        //for(int i = 0; i < 6; i++)
-        //has[i]+=paid[i];
-        has += hasbak;
-        paid();
+        clearPay(true);
     }
     
+    private void updateKeywords() {
+        extrinsicKeyword.clear();
+        for(Mana m:floatingMana)
+            extrinsicKeyword.add("ManaPool:" + m.toString());
+    }
+    
+    private ArrayList<String> extrinsicKeyword = new ArrayList<String>();
+    
+    @Override
+    public ArrayList<String> getExtrinsicKeyword() {
+        return new ArrayList<String>(extrinsicKeyword);
+    }
+    
+    @Override
+    public void addExtrinsicKeyword(String s) {
+        if(s.startsWith("ManaPool:")) {
+            extrinsicKeyword.add(s);
+            addManaToFloating(s.split(":")[1], this);
+        }
+    }
+    
+    @Override
+    public void removeExtrinsicKeyword(String s) {
+        if(s.startsWith("ManaPool:")) {
+            updateKeywords();
+            extrinsicKeyword.remove(s);
+            subtractOne(s.split(":")[1]);
+            this.updateObservers();
+        }
+    }
+    
+    @Override
+    public int getExtrinsicKeywordSize() {
+        updateKeywords();
+        return extrinsicKeyword.size();
+    }
 }

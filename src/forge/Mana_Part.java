@@ -8,9 +8,19 @@ public abstract class Mana_Part {
     
     abstract public void reduce(String mana);
     
+    abstract public void reduce(Mana mana);
+    
     abstract public boolean isPaid();
     
     abstract public boolean isNeeded(String mana);
+    
+    abstract public boolean isNeeded(Mana mana);
+    
+    abstract public boolean isColor(String mana);
+    
+    abstract public boolean isColor(Mana mana);
+    
+    abstract public boolean isEasierToPay(Mana_Part mp);
     
     public static void checkSingleMana(String m) {
         if(m.length() != 1) throw new RuntimeException(

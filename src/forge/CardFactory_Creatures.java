@@ -18859,8 +18859,11 @@ public class CardFactory_Creatures {
 				public String mana()
         		{
         			StringBuilder sb = new StringBuilder();
-                    for(int i = 0; i < card.getNetAttack(); i++)
-                        sb.append('G');
+                    for(int i = 0; i < card.getNetAttack(); i++){
+                    	if (i != 0)
+                    		sb.append(" ");
+                    	sb.append("G");
+                    }
                     return sb.toString();
         		}
         	};

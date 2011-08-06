@@ -2585,7 +2585,6 @@ public class GameAction {
         }
 
         ManaPool mp = AllZone.ManaPool;
-        AllZone.Human_Play.add(mp.smp);
         AllZone.Human_Play.add(mp);
         
         AllZone.Stack.reset();//this works, it clears the stack of Upkeep effects like Bitterblossom
@@ -2980,9 +2979,9 @@ public class GameAction {
     public ManaCost GetSpellCostChange(SpellAbility sa) {
     	// Beached
         Card  originalCard = sa.getSourceCard();
-        ManaCost manaCost;       
+        ManaCost manaCost;
         SpellAbility spell = sa;
-         manaCost = new ManaCost(sa.getManaCost());
+        manaCost = new ManaCost(sa.getManaCost());
          if(spell.isSpell() == true) {
          if(originalCard.getName().equals("Avatar of Woe")){
  			String player = AllZone.Phase.getActivePlayer();

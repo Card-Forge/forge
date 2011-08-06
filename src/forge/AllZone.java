@@ -56,7 +56,7 @@ public class AllZone implements NewConstants {
     public final static PlayerZone Computer_Library   = new DefaultPlayerZone(Constant.Zone.Library   , Constant.Player.Computer);
     public final static PlayerZone Computer_Removed   = new DefaultPlayerZone(Constant.Zone.Removed_From_Play, Constant.Player.Computer);
     
-    public static final ManaPool ManaPool = new ManaPool();
+    public static final ManaPool ManaPool = new ManaPool(Constant.Player.Human);
     
     public static Display Display = new GuiDisplay2();
 
