@@ -68,8 +68,8 @@ public class Input_Block extends Input {
         //is attacking?
         if(CardUtil.toList(AllZone.Combat.getAttackers()).contains(card)) {
             currentAttacker = card;
-        } else if(zone.is(Constant.Zone.Battlefield, AllZone.HumanPlayer) && card.isCreature() && card.isUntapped()
-                && CombatUtil.canBlock(currentAttacker, card)) {
+        } else if(zone.is(Constant.Zone.Battlefield, AllZone.HumanPlayer) && card.isCreature() 
+        		&& CombatUtil.canBlock(currentAttacker, card)) {
             if(currentAttacker != null && (!allBlocking.contains(card))) {
                 allBlocking.add(card);
                 AllZone.Combat.addBlocker(currentAttacker, card);

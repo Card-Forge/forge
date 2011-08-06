@@ -28,8 +28,8 @@ public class ComputerUtil_Attack2 {
 		computerList = new CardList(possibleAttackers.toArray()); 
 		computerList = computerList.getType("Creature");
 		
-		attackers = getUntappedCreatures(possibleAttackers, true);
-		blockers  = getUntappedCreatures(possibleBlockers , false);
+		attackers = getPossibleAttackers(possibleAttackers);
+		blockers  = getPossibleBlockers(possibleBlockers);
 		this.blockerLife = blockerLife;
 		
 		final ArrayList<String> valuable = new ArrayList<String>();
@@ -45,18 +45,23 @@ public class ComputerUtil_Attack2 {
 		});
 	}//constructor
        
-      public CardList getUntappedCreatures(CardList in, final boolean checkCanAttack)
+	public CardList getPossibleAttackers(CardList in)
+    {
+      CardList list = new CardList(in.toArray());
+      list = list.filter(new CardListFilter()
+      {
+        public boolean addCard(Card c) { return c.isCreature() && CombatUtil.canAttack(c); }
+      });
+      return list;
+    }//getUntappedCreatures()
+	
+      public CardList getPossibleBlockers(CardList in)
       {
         CardList list = new CardList(in.toArray());
         list = list.filter(new CardListFilter()
         {
-          public boolean addCard(Card c)
-          {
-            boolean b = c.isCreature() && c.isUntapped();
+          public boolean addCard(Card c) { return c.isCreature() && CombatUtil.canBlock(c); }
 
-            if(checkCanAttack) return b && CombatUtil.canAttack(c);
-            else return b && CombatUtil.canBlock(c);
-          }
         });
         return list;
       }//getUntappedCreatures()

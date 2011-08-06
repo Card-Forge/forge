@@ -17,7 +17,7 @@ public class CombatUtil {
 		
 		if(blocker == null) return false;
 		
-		if(blocker.isTapped()) return false;
+		if(blocker.isTapped() && !AllZoneUtil.isCardInPlay("Masako the Humorless",blocker.getController())) return false;
 		
         if(blocker.getKeyword().contains("CARDNAME can't block.") || blocker.getKeyword().contains("CARDNAME can't attack or block.")) 
         	return false;
@@ -293,6 +293,7 @@ public class CombatUtil {
         
         return true;
     }//canBlock()
+    
     
     public static boolean canAttack(Card c) {
         
@@ -2186,7 +2187,8 @@ public class CombatUtil {
             
             final int blockers = AllZone.Combat.getBlockers(a).size();
             
-        	if(a.getKeyword().contains("Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.")) {
+        	if(a.getKeyword().contains(
+        			"Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.")) {
         		Ability ability = new Ability(a, "0") {
 	        		@Override
 	    			public void resolve() {

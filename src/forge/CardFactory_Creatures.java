@@ -11888,7 +11888,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlayAI() {
-                    return !card.getType().contains("Spirit");
+                    return !card.getType().contains("Spirit") && super.canPlayAI();
                 }
                 
             };// ability1
@@ -11901,7 +11901,7 @@ public class CardFactory_Creatures {
             Ability ability2 = new Ability(card, "RW RW RW") {
                 @Override
                 public void resolve() {
-                    if(card.getType().contains("Spirit") || card.getKeyword().contains("Changeling")) {
+                    if(card.isType("Spirit")) {
                         boolean artifact = false;
                         card.setBaseAttack(4);
                         card.setBaseDefense(4);
@@ -11922,12 +11922,12 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlay() {
-                    return card.getType().contains("Spirit") || card.getKeyword().contains("Changeling") && super.canPlay();
+                    return card.isType("Spirit") && super.canPlay();
                 }
                 
                 @Override
                 public boolean canPlayAI() {
-                    return !card.getType().contains("Warrior");
+                    return !card.getType().contains("Warrior") && super.canPlayAI();
                 }
                 
             };// ability2
@@ -11940,7 +11940,7 @@ public class CardFactory_Creatures {
             Ability ability3 = new Ability(card, "RW RW RW RW RW RW") {
                 @Override
                 public void resolve() {
-                    if(card.getType().contains("Warrior") || card.getKeyword().contains("Changeling")) {
+                    if(card.isType("Warrior")) {
                         boolean artifact = false;
                         card.setBaseAttack(8);
                         card.setBaseDefense(8);
@@ -11962,12 +11962,12 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlay() {
-                    return card.getType().contains("Warrior") || card.getKeyword().contains("Changeling") && super.canPlay();
+                    return card.isType("Warrior") && super.canPlay();
                 }
                 
                 @Override
                 public boolean canPlayAI() {
-                    return !card.getType().contains("Avatar");
+                    return !card.getType().contains("Avatar") && super.canPlayAI();
                 }
             };// ability3
             
