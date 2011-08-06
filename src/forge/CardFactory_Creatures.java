@@ -5850,7 +5850,7 @@ public class CardFactory_Creatures {
         */
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Arashi the Sky Asunder")) {
+        else if(cardName.equals("Arashi, the Sky Asunder")) {
 
             final SpellAbility ability = new Ability_Tap(card, "0") {
                 private static final long serialVersionUID = 7698358771800336470L;
