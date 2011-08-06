@@ -185,30 +185,6 @@ public class GameActionUtil {
 		}//end Blight
 		
 		/*
-		 * Whenever enchanted creature becomes tapped, put a -0/-2 counter on it.
-		 */
-		if(c.isEnchantedBy("Spirit Shackle")) {
-			final ArrayList<Card> cards = c.getEnchantedBy();
-			for(Card card:cards) {
-				final Card enchantedCard = c;
-				if(card.getName().equals("Spirit Shackle")) {
-					Ability ability = new Ability(card, "0") {
-						@Override
-						public void resolve() {
-							enchantedCard.addCounter(Counters.M0M2, 1);
-						}
-					};//Ability
-					
-					StringBuilder sb = new StringBuilder();
-					sb.append(card.getName()).append(" - enchanted creature gets a -0/-2 counter.");
-					ability.setStackDescription(sb.toString());
-					
-					AllZone.Stack.add(ability);
-				}
-			}
-		}//end Spirit Shackle
-		
-		/*
 		 * Royal Decree - Whenever a Swamp, Mountain, black permanent, or red
 		 * permanent becomes tapped, Royal Decree deals 1 damage to that
 		 * permanent's controller.
