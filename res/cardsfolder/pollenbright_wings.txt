@@ -9,4 +9,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Saproling | Toke
 SVar:X:Count$TriggeredDamageAmount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pollenbright_wings.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/219.jpg
 End

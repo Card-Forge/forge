@@ -10,4 +10,5 @@ SVar:TrigPeek:AB$ RearrangeTopOfLibrary | Cost$ 0 | ValidTgts$ Player | TgtPromp
 SVar:RemAI:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dewdrop_spy.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/30.jpg
 End

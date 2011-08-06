@@ -8,4 +8,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Insect | TokenTy
 SVar:X:Count$TriggeredDamageAmount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saber_ants.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/267.jpg
 End

@@ -7,4 +7,5 @@ K:stPumpSelf:Creature:X/X:no Condition:CARDNAME gets +1/+1 for each untapped per
 SVar:X:Count$Valid Permanent.untapped+YouDontCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/copperhoof_vorrac.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/116.jpg
 End

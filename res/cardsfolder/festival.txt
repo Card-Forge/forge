@@ -7,4 +7,5 @@ SVar:KWPump:stPumpAll:Creature:0/0/HIDDEN CARDNAME can't attack.:no Condition:Cr
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/festival.jpg
+SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/81.jpg
 End

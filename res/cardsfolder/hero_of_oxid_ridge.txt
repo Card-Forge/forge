@@ -11,4 +11,5 @@ SVar:TrigEffect:AB$Effect | Cost$ 0 | Name$ Hero of Oxid Ridge Effect | Keywords
 SVar:KWPump:stPumpAll:Creature.powerLE1:0/0/HIDDEN CARDNAME can't block.:no Condition:Creatures with power 1 or less can't block this turn.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hero_of_oxid_ridge.jpg
+SetInfo:MBS|Mythic|http://magiccards.info/scans/en/mbs/66.jpg
 End
