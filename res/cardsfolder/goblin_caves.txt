@@ -7,4 +7,5 @@ K:stPumpAll:Creature.Goblin:0/2:isPresent Land.AttachedBy+Basic+Mountain:If ench
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_caves.jpg
+SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/63.jpg
 End

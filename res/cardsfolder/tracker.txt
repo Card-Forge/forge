@@ -9,4 +9,5 @@ SVar:X:Count$CardPower
 SVar:Y:Targeted$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tracker.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/52.jpg
 End

@@ -8,4 +8,5 @@ A:AB$PutCounter | Cost$ ExileFromGrave<1/Creature> | CounterType$ P0P1 | Counter
 SVar:X:Exiled$CardManaCost
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necropolis.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/102.jpg
 End
