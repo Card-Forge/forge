@@ -1,3 +1,71 @@
+Cleanse
+2 W W
+Sorcery
+Destroy all black creatures.
+spDestroyAll:Creature.Black
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cleanse.jpg
+
+Damnation
+2 B B
+Sorcery
+Destroy all creatures. They can't be regenerated.
+spDestroyAll:Creature:NoRegen
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122423.jpg
+
+Day of Judgment
+2 W W
+Sorcery
+Destroy all creatures.
+spDestroyAll:Creature
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/day_of_judgment.jpg
+
+Mass Calcify
+5 W W
+Sorcery
+Destroy all nonwhite creatures.
+spDestroyAll:Creature.nonWhite
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mass_calcify.jpg
+
+Nature's Ruin
+2 B
+Sorcery
+Destroy all green creatures.
+spDestroyAll:Creature.Green
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/natures_ruin.jpg
+
+Perish
+2 B
+Sorcery
+Destroy all green creatures. They can't be regenerated.
+spDestroyAll:Creature.Green:NoRegen
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/perish.jpg
+
+Virtue's Ruin
+2 B
+Sorcery
+Destroy all white creatures.
+spDestroyAll:Creature.White
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/virtues_ruin.jpg
+
+Wrath of God
+2 W W
+Sorcery
+Destroy all creatures. They can't be regenerated.
+spDestroyAll:Creature:NoRegen
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83339.jpg
+
 Gravitational Shift
 3 U U
 Enchantment
@@ -5418,14 +5486,6 @@ no text
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cleanfall.jpg
 
-Cleanse
-2 W W
-Sorcery
-Destroy all black creatures.
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cleanse.jpg
-
 Clear
 1 W
 Instant
@@ -6573,13 +6633,6 @@ no text
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20383.jpg
 
-Damnation
-2 B B
-Sorcery
-Destroy all creatures. They can't be regenerated.
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122423.jpg
-
 Dance of Shadows
 3 B B
 Sorcery Arcane
@@ -6881,13 +6934,6 @@ SVar:RemAIDeck:True
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/day_of_destiny.jpg
-
-Day of Judgment
-2 W W
-Sorcery
-Destroy all creatures.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/day_of_judgment.jpg
 
 Daze
 1 U
@@ -18349,13 +18395,6 @@ WheneverKeyword:CastSpell/Controller:Type/Creature:Graveyard:MoveFrom-Graveyard-
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/masked_admirers.jpg
 
-Mass Calcify
-5 W W
-Sorcery
-Destroy all nonwhite creatures.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mass_calcify.jpg
-
 Mass Hysteria
 R
 Enchantment
@@ -19909,14 +19948,6 @@ Sorcery
 no text
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_lore.jpg
-
-Nature's Ruin
-2 B
-Sorcery
-Destroy all green creatures.
-SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/natures_ruin.jpg
 
 Naya Battlemage
 2 G
@@ -21565,14 +21596,6 @@ Whenever a creature you control with defender blocks, you may gain 2 life.
 Defender
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/perimeter_captain.jpg
-
-Perish
-2 B
-Sorcery
-Destroy all green creatures. They can't be regenerated.
-SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/perish.jpg
 
 Perish the Thought
 2 B
@@ -32604,14 +32627,6 @@ no text
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_zealot.jpg
 
-Virtue's Ruin
-2 B
-Sorcery
-Destroy all white creatures.
-SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/virtues_ruin.jpg
-
 Virtuous Charge
 2 W
 Sorcery
@@ -34578,13 +34593,6 @@ Instant
 Regenerate each creature you control.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130331.jpg
-
-Wrath of God
-2 W W
-Sorcery
-Destroy all creatures. They can't be regenerated.
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83339.jpg
 
 Wreak Havoc
 2 R G

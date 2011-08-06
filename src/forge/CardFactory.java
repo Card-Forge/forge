@@ -10755,7 +10755,8 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-
+        
+   /* Converted to the spDestroyAll keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Wrath of God") || cardName.equals("Damnation")) {
             SpellAbility spell = new Spell(card) {
@@ -10797,7 +10798,9 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }// *************** END ************ END **************************
-
+*/
+        
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Martial Coup")) {
             SpellAbility spell = new Spell(card) {
@@ -10839,6 +10842,8 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }// *************** END ************ END **************************
         
+        
+/* Converted to the spDestroyAll keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Day of Judgment")) {
             SpellAbility spell = new Spell(card) {
@@ -10875,6 +10880,7 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }// *************** END ************ END **************************
+*/
         
 
         //*************** START *********** START **************************
@@ -14263,6 +14269,8 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        
+/* Converted to the spDestroyAll keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Mass Calcify")) {
             SpellAbility spell = new Spell(card) {
@@ -14297,7 +14305,9 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+*/
         
+/* Converted to the spDestroyAll keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Cleanse")) {
             SpellAbility spell = new Spell(card) {
@@ -14349,7 +14359,9 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+*/
         
+ /* Converted to the spDestroyAll keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Nature's Ruin")) {
             SpellAbility spell = new Spell(card) {
@@ -14399,7 +14411,9 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+*/
         
+/* Converted to the spDestroyAll keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Perish")) {
             SpellAbility spell = new Spell(card) {
@@ -14449,7 +14463,9 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+*/
         
+/* Converted to the spDestroyAll keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Virtue's Ruin")) {
             SpellAbility spell = new Spell(card) {
@@ -14500,6 +14516,8 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Overwhelming Intellect")) {
