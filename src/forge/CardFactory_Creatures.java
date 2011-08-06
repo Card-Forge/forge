@@ -18114,7 +18114,8 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Gnarlid Pack") || cardName.equals("Apex Hawks") || cardName.equals("Enclave Elite") || 
-                cardName.equals("Quag Vampires") || cardName.equals("Skitter of Lizards"))
+                cardName.equals("Quag Vampires") || cardName.equals("Skitter of Lizards") ||
+                cardName.equals("Joraga Warcaller"))
         {
         	final Ability_Static ability = new Ability_Static(card, "0") {
                 @Override
