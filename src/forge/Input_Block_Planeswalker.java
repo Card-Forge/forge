@@ -23,7 +23,24 @@ public class Input_Block_Planeswalker extends Input {
         //could add "Reset Blockers" button
         ButtonUtil.enableOnlyOK();
         
-        if(currentAttacker == null) AllZone.Display.showMessage("Planeswalker Combat\r\nTo Block, click on your Opponents attacker first , then your blocker(s)");
+        if(currentAttacker == null) {
+        	//Lure
+        	CardList attackers = new CardList(AllZone.Combat.getAttackers());
+        	for(Card attacker:attackers) {
+        		if(attacker.isEnchantedBy("Lure")) {
+        			CardList bls = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
+        			bls = bls.filter(AllZoneUtil.untapped);
+        			for(Card bl:bls) {
+        				if(CombatUtil.canBlock(attacker, bl)) {
+        					allBlocking.add(bl);
+        					AllZone.Combat.addBlocker(attacker, bl);
+        				}
+        			}
+        		}
+        	}
+        	
+        	AllZone.Display.showMessage("Planeswalker Combat\r\nTo Block, click on your Opponents attacker first , then your blocker(s)");
+        }
         else {
         	String attackerName = currentAttacker.isFaceDown() ? "Morph" : currentAttacker.getName();
         	AllZone.Display.showMessage("Select a creature to block " + attackerName + " ("

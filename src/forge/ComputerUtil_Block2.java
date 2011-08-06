@@ -269,6 +269,18 @@ public class ComputerUtil_Block2
          
          testing("shouldBlock - " +shouldBlock);
          c = null;
+         
+         System.out.println("Computer checking to block: "+attackers.get(i).getName());
+         //Lure
+         if(attackers.get(i).isEnchantedBy("Lure")) {
+        	 for(Card blocker:possibleBlockers) {
+        		 if(CombatUtil.canBlock(attackers.get(i), blocker)) {
+        			 System.out.println("Computer adding "+blocker+" to block "+attackers.get(i));
+        			 possibleBlockers.remove(blocker);
+        			 combat.addBlocker(attackers.get(i), blocker);
+        		 }
+        	 }
+         }
 
 
          //safe block - attacker dies, blocker lives

@@ -1,0 +1,8 @@
+Name:Lure
+ManaCost:1 G G
+Types:Enchantment Aura
+Text:All creatures able to block enchanted creature do so.
+K:Enchant Creature
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lure.jpg
+End
