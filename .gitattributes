@@ -4688,6 +4688,7 @@ res/cardsfolder/salt_flats.txt -text svneol=native#text/plain
 res/cardsfolder/salt_marsh.txt -text svneol=native#text/plain
 res/cardsfolder/saltblast.txt -text svneol=native#text/plain
 res/cardsfolder/saltcrusted_steppe.txt -text svneol=native#text/plain
+res/cardsfolder/saltfield_recluse.txt -text svneol=native#text/plain
 res/cardsfolder/salvage.txt -text svneol=native#text/plain
 res/cardsfolder/salvage_scout.txt -text svneol=native#text/plain
 res/cardsfolder/salvage_slasher.txt -text svneol=native#text/plain
