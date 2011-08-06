@@ -1641,36 +1641,9 @@ public class GameActionUtil {
     	Object[] DrawCard_Whenever_Parameters = new Object[1];
     	DrawCard_Whenever_Parameters[0] = player;
 		AllZone.GameAction.checkWheneverKeyword(AllZone.CardFactory.HumanNullCard,"DrawCard",DrawCard_Whenever_Parameters);
-		drawCardTriggered_Hoofprints_of_the_Stag(player);
-		//drawCardTriggered_Lorescale_Coatl(player);
-		//drawCardTriggered_Underworld_Dreams(player);
+		
 		drawCardTriggered_Spiteful_Visions(player);
 	}
-	
-	/*
-	public static void drawCardTriggered_Underworld_Dreams(Player player) {
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player.getOpponent());
-		CardList list = new CardList(playZone.getCards());
-		final Player player_d = player;
-		list = list.getName("Underworld Dreams");
-
-		for(int i = 0; i < list.size(); i++) {
-			Card c = list.get(i);
-			final Card F_card = c;
-			final Ability ability = new Ability(c, "0") {
-				@Override
-				public void resolve() {
-					player_d.addDamage(1, F_card);
-				}
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append(list.get(i)).append(" - Deals 1 damage to him or her");
-			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
-		}
-	}*/
 	
 	private static void drawCardTriggered_Spiteful_Visions(final Player player) {
 		CardList list = AllZoneUtil.getCardsInPlay("Spiteful Visions");
@@ -1689,31 +1662,6 @@ public class GameActionUtil {
 			ability.setStackDescription(sb.toString());
 			
 			AllZone.Stack.add(ability);
-		}
-	}
-	
-	/*
-	public static void drawCardTriggered_Lorescale_Coatl(Player player) {
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-		CardList list = new CardList(playZone.getCards());
-
-		list = list.getName("Lorescale Coatl");
-
-		for(int i = 0; i < list.size(); i++) {
-			Card c = list.get(i);
-			c.addCounter(Counters.P1P1, 1);
-		}
-	}*/
-
-	public static void drawCardTriggered_Hoofprints_of_the_Stag(Player player) {
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-		CardList list = new CardList(playZone.getCards());
-
-		list = list.getName("Hoofprints of the Stag");
-
-		for(int i = 0; i < list.size(); i++) {
-			Card c = list.get(i);
-			c.addCounter(Counters.HOOFPRINT, 1);
 		}
 	}
 
