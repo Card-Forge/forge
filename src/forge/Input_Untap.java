@@ -93,7 +93,7 @@ public class Input_Untap extends Input {
 
     	for(Card c : list) {
     		if(c.getKeyword().contains("You may choose not to untap CARDNAME during your untap step.")) {
-    			if(c.isUntapped()) {
+    			if(c.isTapped()) {
     				if(c.getController().equals(Constant.Player.Human)) {
     					String[] choices = {"Yes", "No"};
     					Object o = AllZone.Display.getChoice("Untap "+c.getName()+"?", choices);
