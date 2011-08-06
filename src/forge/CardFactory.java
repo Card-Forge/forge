@@ -18516,6 +18516,58 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Slate of Ancestry")) {
+        	/*
+        	 * 4, Tap, Discard your hand: Draw a card for each creature you control.
+        	 */
+            final Ability_Tap ability = new Ability_Tap(card, "4") {
+				private static final long serialVersionUID = 5135410670684913401L;
+
+				@Override
+                public void resolve() {
+                	final String player = card.getController();
+                	// Discard hand into graveyard
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+                    Card[] c = hand.getCards();
+                    for(int i = 0; i < c.length; i++)
+                        AllZone.GameAction.discard(c[i]);
+                    
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+                    CardList creatures = new CardList(play.getCards());
+                    creatures = creatures.filter(new CardListFilter() {
+                    	public boolean addCard(Card c) {
+                    		return c.isCreature();
+                    	}
+                    });
+                    // Draw a card for each creature
+                    for(int i = 0; i < creatures.size(); i++)
+                        AllZone.GameAction.drawCard(player);
+                	
+                }//resolve()
+
+                @Override
+                public boolean canPlayAI() {
+                	PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    CardList creatures = new CardList(play.getCards());
+                    creatures = creatures.filter(new CardListFilter() {
+                    	public boolean addCard(Card c) {
+                    		return c.isCreature();
+                    	}
+                    });
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
+                    CardList handList = new CardList(hand.getCards());
+                    return creatures.size() > handList.size();
+                }
+                
+            };//Ability_Tap
+            
+            ability.setDescription("4, tap: Discard your hand: Draw a card for each creature you control.");
+            ability.setStackDescription(cardName+" - discard hand and draw 1 card for every creature you control.");
+            ability.setBeforePayMana(new Input_PayManaCost(ability));
+            card.addSpellAbility(ability);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
