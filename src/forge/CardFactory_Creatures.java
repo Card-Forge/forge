@@ -14547,7 +14547,7 @@ public class CardFactory_Creatures {
                     CardList merfolk = new CardList(play.getCards());
                     merfolk = merfolk.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.isCreature() && c.getType().contains("Merfolk")
+                            return c.isCreature() && (c.getType().contains("Merfolk") || c.getKeyword().contains("Changeling"))
                                     && CardFactoryUtil.AI_doesCreatureAttack(c) && !c.equals(card)
                                     && !c.getKeyword().contains("Unblockable");
                         }
