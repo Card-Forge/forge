@@ -1778,22 +1778,6 @@ public class CardFactory_Creatures {
             
             final SpellAbility a2 = new Ability(card, "G") {
                 @Override
-                public void chooseTargetAI() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
-                    CardList kiths = new CardList(play.getCards());
-                    kiths = kiths.filter(new CardListFilter() {
-                        
-                        public boolean addCard(Card c) {
-                            if(c.getType().contains("Kithkin") || c.getKeyword().contains("Changeling")) return true;
-                            return false;
-                        }
-                        
-                    });
-                    
-                    if(kiths.size() != 0) setTargetCard(kiths.getCard(0));
-                }
-                
-                @Override
                 public void resolve() {
                     //get all Kithkin:
                     Card c = getTargetCard();
@@ -1809,7 +1793,18 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlayAI() {
-                    if(AllZone.Computer_Life.getLife() < 4) return true;
+                	PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    CardList kiths = new CardList(play.getCards());
+                    kiths = kiths.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            if(c.getType().contains("Kithkin") || c.getKeyword().contains("Changeling")) return true;
+                            return false;
+                        }
+                    });
+                    
+                    if(kiths.size() != 0) setTargetCard(kiths.getCard(0));
+                    
+                    if(AllZone.Computer_Life.getLife() < 4 && kiths.size() > 0) return true;
                     else return false;
                 }
             };//SpellAbility

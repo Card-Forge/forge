@@ -1348,16 +1348,21 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public void selectCard(Card card, PlayerZone zone) {
-                    if(card.isPlaneswalker() && zone.is(Constant.Zone.Play)) {
+                    if(card.isPlaneswalker() && zone.is(Constant.Zone.Play) &&
+                       CardFactoryUtil.canTarget(card2, card)) {
                         ability1.setTargetCard(card);
-                        stopSetNext(new Input_PayManaCost(ability1));
+                        //stopSetNext(new Input_PayManaCost(ability1));
+                        AllZone.Stack.add(ability1);
+                        stop();
                     }
                 }//selectCard()
                 
                 @Override
                 public void selectPlayer(String player) {
                     ability1.setTargetPlayer(player);
-                    stopSetNext(new Input_PayManaCost(ability1));
+                    //stopSetNext(new Input_PayManaCost(ability1));
+                    AllZone.Stack.add(ability1);
+                    stop();
                 }
             };
             ability1.setBeforePayMana(target1);

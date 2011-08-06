@@ -8798,6 +8798,13 @@ public class CardFactory implements NewConstants {
                     all.addAll(AllZone.Computer_Play.getCards());
                     
                     CardList sameName = all.getName(getTargetCard().getName());
+                    sameName = sameName.filter(new CardListFilter()
+                    {
+                    	public boolean addCard(Card c)
+                    	{
+                    		return !c.isFaceDown();
+                    	}
+                    });
                     
                     if(!getTargetCard().isFaceDown()) {
                         //bounce all permanents with the same name
