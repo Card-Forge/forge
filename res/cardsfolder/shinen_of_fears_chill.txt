@@ -4,7 +4,7 @@ Types:Creature Spirit
 Text:no text
 PT:3/2
 K:CARDNAME can't block.
-A:AB$Pump|Cost$1 B Discard<1/CARDNAME>|Tgt$TgtC|PreCostDesc$Channel - |KW$CARDNAME can't block.|ActivatingZone$Hand|SpellDescription$Target creature can't block this turn.
+A:AB$Pump|Cost$1 B Discard<1/CARDNAME>|Tgt$TgtC|PreCostDesc$Channel - |KW$CARDNAME can't block.|ActivatingZone$Hand|IsCurse$True|SpellDescription$Target creature can't block this turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shinen_of_fears_chill.jpg
 End
