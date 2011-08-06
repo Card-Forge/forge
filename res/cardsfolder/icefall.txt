@@ -1,5 +1,5 @@
 Name:Icefall
-ManaCost: 2 R R
+ManaCost:2 R R
 Types:Sorcery
 Text:no text
 A:SP$Destroy | Cost$ 2 R R | ValidTgts$ Artifact,Land | TgtPrompt$ Select target artifact or land. | SpellDescription$ Destroy target artifact or land.
