@@ -7,6 +7,7 @@ A:AB$ Mana | Cost$ T tapXType<1/Creature> | Produced$ U | SpellDescription$ Add 
 A:AB$ Mana | Cost$ T tapXType<1/Creature> | Produced$ B | SpellDescription$ Add B to your mana pool.
 A:AB$ Mana | Cost$ T tapXType<1/Creature> | Produced$ R | SpellDescription$ Add R to your mana pool.
 A:AB$ Mana | Cost$ T tapXType<1/Creature> | Produced$ G | SpellDescription$ Add G to your mana pool.
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/springleaf_drum.jpg
 End
