@@ -51,7 +51,10 @@ public class Input_Attack extends Input {
     
     @Override
     public void selectCard(Card card, PlayerZone zone) {
-        if(zone.is(Constant.Zone.Battlefield, AllZone.HumanPlayer) && CombatUtil.canAttack(card) && !card.isAttacking()) {
+    	if (card.isAttacking() || card.getController().isComputer())
+    		return;
+    	
+        if(zone.is(Constant.Zone.Battlefield, AllZone.HumanPlayer) && CombatUtil.canAttack(card)) {
             
         	// todo add the propaganda code here and remove it in Phase.nextPhase()
         	// if (!CombatUtil.checkPropagandaEffects(card))
