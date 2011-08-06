@@ -219,6 +219,30 @@ public class GameActionUtil {
 		}//end Blight
 		
 		/*
+		 * Relic Putrescense - When enchanted artifact becomes tapped,
+		 * controller gets a poison counter.
+		 */
+		if(c.isEnchantedBy("Relic Putrescence")) {
+			final ArrayList<Card> auras = c.getEnchantedBy();
+			final Card target = c;
+			for(Card aura:auras) {
+				if(aura.getName().equals("Relic Putrescence")) {
+					Ability ability = new Ability(aura, "0") {
+						@Override
+						public void resolve() {
+							if (target.getController().equals(Constant.Player.Human))
+								AllZone.Human_PoisonCounter.addPoisonCounters(1);
+							else
+								AllZone.Computer_PoisonCounter.addPoisonCounters(1);
+						}
+					};//Ability
+					ability.setStackDescription(aura.getName()+" - "+target.getController()+" gets a poison counter.");
+					AllZone.Stack.add(ability);
+				}
+			}
+		}//end relic putrescence
+		
+		/*
 		 * Psychic Venom - When enchanted land becomes tapped, it deals 2 damage
 		 * to enchanted lands' controller
 		 */

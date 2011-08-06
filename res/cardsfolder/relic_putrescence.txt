@@ -1,0 +1,8 @@
+Name:Relic Putrescence
+ManaCost:2 B
+Types:Enchantment Aura
+Text:Whenever enchanted artifact becomes tapped, its controller gets a poison counter.
+K:Enchant Artifact Curse
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_putrescence.jpg
+End
