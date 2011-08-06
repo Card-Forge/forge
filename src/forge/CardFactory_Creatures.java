@@ -17422,6 +17422,8 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
+        
+/* Converted to the abDestroyTgtV keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Capashen Unicorn")) {
             final Ability_Tap ability = new Ability_Tap(card, "1 W") {
@@ -17497,6 +17499,8 @@ public class CardFactory_Creatures {
             });
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Kor Cartographer")) {

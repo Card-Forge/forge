@@ -1,0 +1,10 @@
+Name:Boggart Loggers
+ManaCost:2 B
+Types:Creature Goblin Rogue
+Text:no text
+PT:2/1
+K:Forestwalk
+K:abDestroyTgtV 2 B Sac<1/CARDNAME>:Treefolk,Forest:Destroy target Treefolk or Forest.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_loggers.jpg
+End

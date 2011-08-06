@@ -3,6 +3,7 @@ ManaCost:1 W
 Types:Creature Unicorn
 Text:no text
 PT:1/2
+K:abDestroyTgtV 1 W T Sac<1/CARDNAME>:Artifact,Enchantment:Destory target artifact or enchantment.
 K:SVar:Rarity:Common
 K:SVar:Picture:http://www.wizards.com/global/images/magic/general/capashen_unicorn.jpg
 End
