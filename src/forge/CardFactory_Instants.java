@@ -2161,32 +2161,7 @@ public class CardFactory_Instants {
         }//*************** END ************ END **************************
         
         
-      //*************** START *********** START **************************
-        else if(cardName.equals("Elephant Ambush")) {
-            SpellAbility spell = new Spell(card) {
-                
-                private static final long serialVersionUID = 1808366787563573082L;
-                
-                @Override
-                public void resolve() {
-                    CardFactoryUtil.makeToken("Elephant", "G 3 3 Elephant", card, "G", new String[] {
-                            "Creature", "Elephant"}, 3, 3, new String[] {""});
-                }//resolve()
-            };
-            
-            spell.setDescription("Put a 3/3 green Elephant creature token into play.");
-            spell.setStackDescription(card.getController()
-                    + " puts a 3/3 green Elephant creature token into play.");
-            
-            card.setFlashback(true);
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "6 G G", "0"));
-            
-        }//*************** END ************ END **************************
-        
-        
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Beast Attack")) {
             SpellAbility spell = new Spell(card) {
                 
