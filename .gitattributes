@@ -5340,6 +5340,7 @@ res/cardsfolder/urzas_armor.txt -text svneol=native#text/plain
 res/cardsfolder/urzas_blueprints.txt -text svneol=native#text/plain
 res/cardsfolder/urzas_chalice.txt -text svneol=native#text/plain
 res/cardsfolder/urzas_factory.txt -text svneol=native#text/plain
+res/cardsfolder/urzas_guilt.txt -text svneol=native#text/plain
 res/cardsfolder/urzas_mine.txt -text svneol=native#text/plain
 res/cardsfolder/urzas_power_plant.txt -text svneol=native#text/plain
 res/cardsfolder/urzas_rage.txt -text svneol=native#text/plain
