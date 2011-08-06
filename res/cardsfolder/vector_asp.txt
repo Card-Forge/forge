@@ -1,0 +1,9 @@
+Name:Vector Asp
+ManaCost:1
+Types:Artifact Creature Snake
+Text:no text
+PT:1/1
+K:abPump B:Infect
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vector_asp.jpg
+End
