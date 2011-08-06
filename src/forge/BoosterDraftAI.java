@@ -92,27 +92,30 @@ public class BoosterDraftAI
     	//for (int i=0; i<creatures.size(); i++)
     		//System.out.println("creature[" + i + "]: " + creatures.get(i).getName());
     	
-    	pickedCard = creatures.get(creatures.size() - 1);
-    	playerColors.get(player).Color1 = pickedCard.getColor().get(0).toStringArray().get(0);
-    	if (Constant.Runtime.DevMode[0])
-    		System.out.println("Player["+player+"] Color1: "+playerColors.get(player).Color1);
+    	if (creatures.size() > 0) {
+    		pickedCard = creatures.get(creatures.size() - 1);
+    		playerColors.get(player).Color1 = pickedCard.getColor().get(0).toStringArray().get(0);
+    		if (Constant.Runtime.DevMode[0])
+    			System.out.println("Player["+player+"] Color1: "+playerColors.get(player).Color1);
     	
-    	playerColors.get(player).Mana1 = playerColors.get(player).ColorToMana(playerColors.get(player).Color1);
-    	hasPicked = true;
-    	
+    		playerColors.get(player).Mana1 = playerColors.get(player).ColorToMana(playerColors.get(player).Color1);
+    		hasPicked = true;
+    	}
     } else if (!playerColors.get(player).Color1.equals("none") && playerColors.get(player).Color2.equals("none")) {
     	CardList creatures = in_choose.getType("Creature").getColored();
     	creatures.sort(bestCreature);
     	//for (int i=0; i<creatures.size(); i++)
     		//System.out.println("creature[" + i + "]: " + creatures.get(i).getName());
     	
-    	pickedCard = creatures.get(creatures.size() - 1);
-    	playerColors.get(player).Color2 = pickedCard.getColor().get(0).toStringArray().get(0);
-    	if (Constant.Runtime.DevMode[0])
-    		System.out.println("Player["+player+"] Color2: "+playerColors.get(player).Color2);
-    	
-    	playerColors.get(player).Mana2 = playerColors.get(player).ColorToMana(playerColors.get(player).Color2);
-    	hasPicked = true;
+    	if (creatures.size() > 0) {
+	    	pickedCard = creatures.get(creatures.size() - 1);
+	    	playerColors.get(player).Color2 = pickedCard.getColor().get(0).toStringArray().get(0);
+	    	if (Constant.Runtime.DevMode[0])
+	    		System.out.println("Player["+player+"] Color2: "+playerColors.get(player).Color2);
+	    	
+	    	playerColors.get(player).Mana2 = playerColors.get(player).ColorToMana(playerColors.get(player).Color2);
+	    	hasPicked = true;
+    	}
     }
     else {
     	CardList typeList = new CardList();
@@ -197,24 +200,23 @@ public class BoosterDraftAI
     		}
     	}
     	
-    	if (!hasPicked) {
-    		Random r = new Random();
-    		
-    		if (list.size() > 0) {
-				list.shuffle();
-				pickedCard = list.get(r.nextInt(list.size()));
-				hasPicked = true;
-			}
-			else {
-				in_choose.shuffle();
-				pickedCard = in_choose.get(r.nextInt(in_choose.size()));
-				hasPicked = true;
-			}
-				
-    	}
-
     	
     }
+	if (!hasPicked) {
+		Random r = new Random();
+		
+		if (list.size() > 0) {
+			list.shuffle();
+			pickedCard = list.get(r.nextInt(list.size()));
+			hasPicked = true;
+		}
+		else {
+			in_choose.shuffle();
+			pickedCard = in_choose.get(r.nextInt(in_choose.size()));
+			hasPicked = true;
+		}
+			
+	}
     
     if (hasPicked) {
 		in_choose.remove(pickedCard);
@@ -316,14 +318,17 @@ public class BoosterDraftAI
 		i++;
 	}
 	
-	while (nCreatures > 1) {
-		CardList otherCreatures = dList.getType("Creature");
+	CardList otherCreatures = dList.getType("Creature");
+	while (nCreatures > 1 && otherCreatures.size() > 1) {
+		
 		Random r = new Random();
 		Card c = otherCreatures.get(r.nextInt(otherCreatures.size() - 1));
 		outList.add(c);
 		cardsNeeded--;
 		nCreatures--;
 		dList.remove(c);
+		
+		otherCreatures = dList.getType("Creature");
 		
 		if (Constant.Runtime.DevMode[0])
 			System.out.println("AddCreature: " + c.getName() + " (" + c.getManaCost() + ")");
@@ -348,8 +353,9 @@ public class BoosterDraftAI
 	}
 	
 	ii = 0;
-	while (cardsNeeded > 0) {
-		CardList z = dList.getNotType("Land");
+	CardList z = dList.getNotType("Land");
+	while (cardsNeeded > 0 && z.size() > 1) {
+		
 		//if (z.size() < 1)
 		//	throw new RuntimeException("BoosterDraftAI : buildDeck() error, deck does not have enough non-lands");
 		Random r = new Random();
@@ -360,21 +366,22 @@ public class BoosterDraftAI
 		cardsNeeded--;
 		dList.remove(c);
 		
+		z = dList.getNotType("Land");
+		
 		if (Constant.Runtime.DevMode[0])
 			System.out.println("NonLands[" + ii++ + "]:" + c.getName() + "(" + c.getManaCost() + ")");
 	}
 	
 	CardList lands = dList.getType("Land");
-	if (lands.size() > 0) {
-		for (i=0; i<lands.size(); i++) {
-			//out.addMain(lands.get(i).getName());
-			outList.add(lands.get(i));
-			landsNeeded--;
-			dList.remove(lands.get(i));
-			
-			if (Constant.Runtime.DevMode[0])
-				System.out.println("Lands[" + i + "]:" + lands.get(i).getName());
-		}
+	while (landsNeeded > 0 && lands.size() > 0) {
+		outList.add(lands.get(0));
+		landsNeeded--;
+		dList.remove(lands.get(0));
+		
+		lands = dList.getType("Land");
+		
+		if (Constant.Runtime.DevMode[0])
+			System.out.println("Lands[" + i + "]:" + lands.get(i).getName());		
 	}
 	
 	if (landsNeeded > 0)	// attempt to optimize basic land counts according to color representation
