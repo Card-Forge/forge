@@ -4528,6 +4528,415 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Profane Command")) {
+            //not sure what to call variables, so I just made up something
+            final Player[] ab0player = new Player[1];
+            final Card[] ab1card = new Card[1];
+            final Card[] ab2card = new Card[1];
+            final ArrayList<Card> ab3cards = new ArrayList<Card>();
+            final int x[] = new int[1];
+            
+            final ArrayList<String> userChoice = new ArrayList<String>();
+            
+            final String[] cardChoice = {
+            		"Target player loses X life",
+            		"Return target creature card with converted mana cost X or less from your graveyard to the battlefield",
+            		"Target creature gets -X/-X until end of turn",
+            		"Up to X target creatures gain fear until end of turn"
+            };
+            
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -2924301460675657126L;
+
+				@Override
+                public void resolve() {
+                	System.out.println(userChoice);
+                	System.out.println("0: "+ab0player[0]);
+                	System.out.println("1: "+ab1card[0]);
+                	System.out.println("2: "+ab2card[0]);
+                	System.out.println("3: "+ab3cards);
+                	
+                	//"Target player loses X life",
+                	for(int i = 0; i < card.getChoices().size(); i++) {
+                		if(card.getChoice(i).equals(cardChoice[0])) {
+                			if(ab0player != null) {
+                				if(ab0player[0].equals(AllZone.HumanPlayer.getName())) {
+                					setTargetPlayer(AllZone.HumanPlayer); 
+                				}
+                				else {
+                					setTargetPlayer(AllZone.ComputerPlayer);
+                				}
+                				if(getTargetPlayer().canTarget(card)) {
+                					getTargetPlayer().addDamage(x[0], card);
+                				}
+                			}
+                		}
+                	}
+
+                    //"Return target creature card with converted mana cost X or less from your graveyard to the battlefield",
+                    if(userChoice.contains(cardChoice[1]) || card.getChoices().contains(cardChoice[1])) {
+                        /*
+                    	//get all creatures
+                        CardList grave = AllZoneUtil.getPlayerGraveyard(card.getController());
+                        grave = grave.filter(AllZoneUtil.creatures);
+                        //grave = grave.filter(); //need to filter by cmc
+                        
+                        Object o = GuiUtils.getChoiceOptional("Select target creature card", grave);
+                        Card c = (Card)o;
+                        */
+                    	Card c = ab1card[0];
+                    	if(c != null) {
+                    		if(AllZoneUtil.isCardInPlayerGraveyard(card.getController(), c) && CardFactoryUtil.canTarget(card, c)) {
+                    			AllZone.GameAction.moveToPlay(c);
+                    		}
+                    	}
+                    }
+                    
+                    //"Target creature gets -X/-X until end of turn",
+        			for(int i = 0; i <card.getChoices().size(); i++) {
+        				if(card.getChoice(i).equals(cardChoice[2])) {
+        					final Card c = ab2card[0];
+        					if(c != null) {
+        						if(AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+        							final int boost = x[0] * -1;
+                        			c.addTempAttackBoost(boost);
+                        			c.addTempDefenseBoost(boost);
+                        			final Command untilEOT = new Command() {
+										private static final long serialVersionUID = -6010783402521993651L;
+
+										public void execute() {
+                    		                if(AllZone.GameAction.isCardInPlay(c)) {
+                    		                	c.addTempAttackBoost(-1 * boost);
+                    		                	c.addTempDefenseBoost(-1 * boost);
+                    		                    	
+                    		                }
+                    		            }
+                    		        };
+                    		        AllZone.EndOfTurn.addUntil(untilEOT);
+                        		}
+        					}
+        				}
+        			}//end ab[2]
+
+                    //"Up to X target creatures gain fear until end of turn"
+                    if(userChoice.contains(cardChoice[3]) || card.getChoices().contains(cardChoice[3])) {
+                        ArrayList<Card> cs = new ArrayList<Card>();
+                        cs.addAll(ab3cards);
+                        for(final Card c : cs) {
+                        	if(AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                        		c.addExtrinsicKeyword("Fear");
+                        		final Command untilEOT = new Command() {
+									private static final long serialVersionUID = 986259855862338866L;
+
+									public void execute() {
+                        				if(AllZone.GameAction.isCardInPlay(c)) {
+                        					c.removeExtrinsicKeyword("Fear");
+                        				}
+                        			}
+                		        };
+                		        AllZone.EndOfTurn.addUntil(untilEOT);
+                    		}
+                        }
+                    }//end ab[3]
+                }//resolve()
+                
+                @Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+            };//SpellAbility
+            
+            final Command setStackDescription = new Command() {
+				private static final long serialVersionUID = 5840471361149632482L;
+
+				public void execute() {
+                    ArrayList<String> a = new ArrayList<String>();
+                    if(userChoice.contains(cardChoice[0]) || card.getChoices().contains(cardChoice[0])) a.add(ab0player[0]+" loses X life");
+                    
+                    if(userChoice.contains(cardChoice[1]) || card.getChoices().contains(cardChoice[1])) a.add("return "+ab1card[0]+" from graveyard to play");
+                    
+                    if(userChoice.contains(cardChoice[2]) || card.getChoices().contains(cardChoice[2])) a.add(ab2card[0]+" gets -X/-X until end of turn");
+                    
+                    if(userChoice.contains(cardChoice[3]) || card.getChoices().contains(cardChoice[3])) a.add("up to X target creatures gain Fear until end of turn");
+                    
+                    String s = a.get(0) + ", " + a.get(1);
+                    spell.setStackDescription(card.getName() + " - " + s);
+                }
+            };//Command
+            
+            //for ab[3] - X creatures gain fear until EOT
+            final Input targetXCreatures = new Input() {
+				private static final long serialVersionUID = 2584765431286321048L;
+				
+				int stop = 0;
+                int count = 0;
+                
+                @Override
+                public void showMessage() {
+                	if(count == 0) stop = x[0];
+                    AllZone.Display.showMessage(cardName+" - Select a target creature to gain Fear (up to " + (stop-count) + " more)");
+                    ButtonUtil.enableAll();
+                }
+                
+                @Override
+                public void selectButtonCancel() {
+                    stop();
+                }
+                
+                @Override
+                public void selectButtonOK() {
+                    done();
+                }
+                
+                @Override
+                public void selectCard(Card c, PlayerZone zone) {
+                    if(c.isCreature() && zone.is(Constant.Zone.Battlefield) && CardFactoryUtil.canTarget(card, c) &&
+                    		!ab3cards.contains(c)) {
+                        ab3cards.add(c);
+                        count++;
+                        if(count == stop) done();
+                        else showMessage();
+                    }
+                }//selectCard()
+                
+                private void done() {
+                	setStackDescription.execute();
+                	stopSetNext(new Input_PayManaCost(spell));
+                }
+            };
+            
+            //for ab[2] target creature gets -X/-X
+            final Input targetCreature = new Input() {
+				private static final long serialVersionUID = -6879692803780014943L;
+
+				@Override
+                public void showMessage() {
+                    AllZone.Display.showMessage(cardName+" - Select target creature to get -X/-X");
+                    ButtonUtil.enableOnlyCancel();
+                }
+                
+                @Override
+                public void selectButtonCancel() { stop(); }
+                
+                @Override
+                public void selectCard(Card c, PlayerZone zone) {
+                    if(c.isCreature() && zone.is(Constant.Zone.Battlefield) && CardFactoryUtil.canTarget(card, c)) {
+                    	if(card.isCopiedSpell()) card.getChoiceTargets().remove(0);
+                        ab2card[0] = c;
+                        //spell.setTargetCard(c);
+                        card.setSpellChoiceTarget(String.valueOf(c.getUniqueNumber()));
+                        setStackDescription.execute();                        
+                        
+                        if(userChoice.contains(cardChoice[3]) || card.getChoices().contains(cardChoice[3])) stopSetNext(targetXCreatures);
+            			else {
+            				System.out.println("Input_PayManaCost for spell is getting: "+spell.getManaCost());
+            				stopSetNext(new Input_PayManaCost(spell));
+            			}
+                    }//if
+                }//selectCard()
+            };//Input targetCreature
+            
+            //for ab[1] - return creature from grave to the battlefield
+            final Input targetGraveCreature = new Input() {
+				private static final long serialVersionUID = -7558252187229252725L;
+
+				@Override
+    	        public void showMessage() {
+    	        	CardList grave = AllZoneUtil.getPlayerGraveyard(card.getController());
+    	        	grave = grave.filter(AllZoneUtil.creatures);
+    	        	grave = grave.filter(new CardListFilter() {
+    	        		public boolean addCard(Card c) {
+    	        			return c.getCMC() <= x[0];
+    	        		}
+    	        	});
+    	        	
+    	            Object check = GuiUtils.getChoiceOptional("Select target creature with CMC < X", grave.toArray());
+    	            if(check != null) {
+    	            	Card c = (Card)check;
+    	            	if(CardFactoryUtil.canTarget(card, c)) {
+    	            		ab1card[0] = c;
+    	            	}
+    	            }
+    	            else
+    	            	stop();
+    	            
+    	            done();
+    	        }//showMessage()
+    	        
+    	        public void done(){
+    	        	if(userChoice.contains(cardChoice[2]) || card.getChoices().contains(cardChoice[2])) stopSetNext(targetCreature);
+        			else if(userChoice.contains(cardChoice[3]) || card.getChoices().contains(cardChoice[3])) stopSetNext(targetXCreatures);
+        			else {
+        				stopSetNext(new Input_PayManaCost(spell));
+        			}
+    	        }
+    	    };//Input
+            
+            //for ab[0] - target player loses X life
+            final Input targetPlayer = new Input() {
+				private static final long serialVersionUID = 9101387253945650303L;
+
+				@Override
+            	public void showMessage() {
+            		AllZone.Display.showMessage(cardName+" - Select target player to lose life");
+            		ButtonUtil.enableOnlyCancel();
+            	}
+
+            	@Override
+            	public void selectButtonCancel() {
+            		stop();
+            	}
+
+            	@Override
+            	public void selectPlayer(Player player) {
+            		if(player.canTarget(card)) {
+            			if(card.isCopiedSpell()) card.getChoiceTargets().remove(0);
+            			ab0player[0] = player;
+            			//spell.setTargetPlayer(player);
+            			card.setSpellChoiceTarget(player.toString());
+            			setStackDescription.execute();
+            			
+            			if(userChoice.contains(cardChoice[1]) || card.getChoices().contains(cardChoice[1])) stopSetNext(targetGraveCreature);
+            			else if(userChoice.contains(cardChoice[2]) || card.getChoices().contains(cardChoice[2])) stopSetNext(targetCreature);
+            			else if(userChoice.contains(cardChoice[3]) || card.getChoices().contains(cardChoice[3])) stopSetNext(targetXCreatures);
+            			else {
+            				stopSetNext(new Input_PayManaCost(spell));
+            			}
+            		}
+            	}//selectPlayer()
+            };//Input targetPlayer
+            
+            final Input chooseX = new Input() {
+                private static final long serialVersionUID = 5625588008756700226L;
+                
+                @Override
+                public void showMessage() {
+                	if(card.isCopiedSpell()) {
+                		x[0] = 0;
+                		if(userChoice.contains(cardChoice[0])) stopSetNext(targetPlayer);
+                		else if(userChoice.contains(cardChoice[1])) stopSetNext(targetGraveCreature);
+                		else if(userChoice.contains(cardChoice[2])) stopSetNext(targetCreature);
+                		else if(userChoice.contains(cardChoice[3])) stopSetNext(targetXCreatures);
+                		else {
+                			throw new RuntimeException("Something in if(isCopiedSpell()) in Profane Command selection is FUBAR.");
+                		}
+                	}
+                	else {
+                		ArrayList<String> choices = new ArrayList<String>();
+                		for(int i = 0; i <= card.getController().getLife(); i++) {
+                			choices.add(""+i);
+                		}
+                		Object o = GuiUtils.getChoice("Choose X", choices.toArray());
+                		//everything stops here if user cancelled
+                		if(o == null) {
+                			stop();
+                			return;
+                		}
+
+                		String answer = (String)o;
+                		
+                		x[0] = Integer.parseInt(answer);
+                		spell.setManaCost(x[0]+" B B");
+                		spell.setIsXCost(false);
+
+                		if(userChoice.contains(cardChoice[0])) stopSetNext(targetPlayer);
+                		else if(userChoice.contains(cardChoice[1])) stopSetNext(targetGraveCreature);
+                		else if(userChoice.contains(cardChoice[2])) stopSetNext(targetCreature);
+                		else if(userChoice.contains(cardChoice[3])) stopSetNext(targetXCreatures);
+                		else {
+                			throw new RuntimeException("Something in Profane Command selection is FUBAR.");
+                		}
+                	}
+                }//showMessage()
+            };//Input chooseX
+
+            Input chooseTwoInput = new Input() {
+                private static final long serialVersionUID = 5625588008756700226L;
+                
+                @Override
+                public void showMessage() {
+                	if(card.isCopiedSpell()) {
+                		if(userChoice.contains(cardChoice[0])) stopSetNext(targetPlayer);
+                		else if(userChoice.contains(cardChoice[1])) stopSetNext(targetGraveCreature);
+                		else if(userChoice.contains(cardChoice[2])) stopSetNext(targetCreature);
+                		else if(userChoice.contains(cardChoice[3])) stopSetNext(targetXCreatures);
+                		else {
+                			throw new RuntimeException("Something in if(isCopiedSpell()) in Profane Command selection is FUBAR.");
+                		}
+                	}
+                	else {
+                		//reset variables
+                		ab0player[0] = null;
+                		ab1card[0] = null;
+                		ab2card[0] = null;
+                		ab3cards.clear();
+                		card.getChoices().clear();
+                		card.getChoiceTargets().clear();
+                		userChoice.clear();
+
+                		ArrayList<String> display = new ArrayList<String>();
+
+                		//get all
+                		CardList creatures = AllZoneUtil.getCreaturesInPlay();
+                		CardList grave = AllZoneUtil.getPlayerGraveyard(card.getController());
+                		grave = grave.filter(AllZoneUtil.creatures);
+
+                		if(AllZone.HumanPlayer.canTarget(card) || AllZone.ComputerPlayer.canTarget(card)) 
+                			display.add("Target player loses X life");
+                		if(grave.size() > 0) display.add("Return target creature card with converted mana cost X or less from your graveyard to the battlefield");
+                		if(creatures.size() > 0) display.add("Target creature gets -X/-X until end of turn");
+                		display.add("Up to X target creatures gain fear until end of turn");
+
+                		ArrayList<String> a = chooseTwo(display);
+                		//everything stops here if user cancelled
+                		if(a == null) {
+                			stop();
+                			return;
+                		}
+
+                		userChoice.addAll(a);
+                		
+                		stopSetNext(chooseX);
+
+                		/*
+                		if(userChoice.contains(cardChoice[0])) stopSetNext(targetPlayer);
+                		else if(userChoice.contains(cardChoice[1])) stopSetNext(targetGraveCreature);
+                		else if(userChoice.contains(cardChoice[2])) stopSetNext(targetCreature);
+                		else if(userChoice.contains(cardChoice[3])) stopSetNext(targetXCreatures);
+                		else {
+                			throw new RuntimeException("Something in Profane Command selection is FUBAR.");
+                		}
+                		*/
+                	}
+                }//showMessage()
+                
+                private ArrayList<String> chooseTwo(ArrayList<String> choices) {
+                	ArrayList<String> out = new ArrayList<String>();
+                	Object o = GuiUtils.getChoiceOptional("Choose Two", choices.toArray());
+                	if(o == null) return null;
+
+                	out.add((String) o);
+                	card.addSpellChoice((String) o);
+                	choices.remove(out.get(0));
+                	o = GuiUtils.getChoiceOptional("Choose Two", choices.toArray());
+                	if(o == null) return null;
+
+                	out.add((String) o);
+                	card.addSpellChoice((String) o);
+                	return out;
+                }//chooseTwo()
+            };//Input chooseTwoInput
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
+            card.addSpellAbility(spell);
+            
+            card.setSpellWithChoices(true);
+            spell.setBeforePayMana(chooseTwoInput);
+        }//*************** END ************ END **************************
+        
+        
     	return card;
     }//getCard
 }
