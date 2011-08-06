@@ -1,3 +1,8 @@
+Balance
+1 W
+Sorcery
+Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way.
+
 Deepwood Tantiv
 4 G
 Creature Beast
@@ -69,7 +74,6 @@ Hagra Crocodile
 Creature Crocodile
 no text
 3/1
-This creature cannot block
 Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
 
 Steppe Lynx
@@ -250,7 +254,7 @@ Cycling:2
 Lull
 1 G
 Instant
-Prevent all combat damage that would be dealt this turn.
+no text
 Cycling:2
 
 Holy Day

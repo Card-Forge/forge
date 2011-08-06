@@ -223,7 +223,7 @@ public abstract class SpellAbility {
         if(stackDescription.equals(getSourceCard().getText().trim())) return getSourceCard().getName() + " - "
                 + getSourceCard().getText();
         
-        return stackDescription;
+        return stackDescription.replaceAll("CARDNAME", this.getSourceCard().getName());
     }
     
     public boolean isIntrinsic() {

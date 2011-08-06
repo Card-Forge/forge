@@ -12,7 +12,7 @@ badlands.jpg	http://[server]/U/Badlands.full.jpg
 bakis_curse.jpg	http://[server]/HL/Baki's%20Curse.full.jpg
 baku_altar.jpg	http://[server]/BOK/Baku%20Altar.full.jpg
 bala_ged_thief.jpg	http://[server]/ZEN/Bala%20Ged%20Thief.full.jpg
-balance.jpg	http://[server]/OV/Balance.full.jpg
+balance.jpg	http://[server]/4E/Balance.full.jpg
 balance_of_power.jpg	http://[server]/8E/Balance%20of%20Power.full.jpg
 balancing_act.jpg	http://[server]/OD/Balancing%20Act.full.jpg
 balduvian_barbarians.jpg	http://[server]/9E/Balduvian%20Barbarians.full.jpg

@@ -16286,8 +16286,13 @@ public class CardFactory implements NewConstants {
 				return false;
 			}
     	  };
+    	  if (card.getName().equals("Lull")) {
+    		  spell.setDescription("Prevent all combat damage that would be dealt this turn.");
+    		  spell.setStackDescription(card.getName() + " - Prevent all combat damage that would be dealt this turn.");
+    	  }
     	  card.clearSpellAbility();
     	  card.addSpellAbility(spell);
+    		  
     	  if (cardName.equals("Moment's Peace")) {
     		  card.setFlashback(true);
     		  card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "2 G", "0"));
@@ -16707,6 +16712,111 @@ public class CardFactory implements NewConstants {
         }
         //*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Balance"))
+        {
+        	final SpellAbility spell = new Spell(card)
+        	{
+				private static final long serialVersionUID = -5941893280103164961L;
+
+				public void resolve()
+        		{
+					//Lands:
+					CardList humLand = new CardList(AllZone.Human_Play.getCards());
+        			humLand = humLand.getType("Land");
+        			CardList compLand = new CardList(AllZone.Computer_Play.getCards());
+        			compLand = compLand.getType("Land");
+        			
+        			if (compLand.size() > humLand.size())
+        			{
+        				compLand.shuffle();
+        				for (int i=0; i < compLand.size()-humLand.size();i++)
+        					AllZone.GameAction.sacrifice(compLand.get(i));
+        			}
+        			else if (humLand.size() > compLand.size())
+        			{
+        				int diff = humLand.size() - compLand.size();
+        				/*
+        				List<Card> selection = AllZone.Display.getChoicesOptional("Select " + diff + " lands to sacrifice", humLand.toArray());
+        				while(selection.size() != diff)
+        					selection = AllZone.Display.getChoicesOptional("Select " + diff + " lands to sacrifice", humLand.toArray());
+        				
+	                    for(int m = 0; m < diff; m++)
+	                    	AllZone.GameAction.sacrifice(selection.get(m));
+	                    */
+        				AllZone.InputControl.setInput(CardFactoryUtil.input_sacrificePermanents(diff, "Land"));
+        			}
+        			
+        			//Hand
+        			CardList humHand = new CardList(AllZone.Human_Hand.getCards());
+        			CardList compHand = new CardList(AllZone.Computer_Hand.getCards());
+        			
+        			if (compHand.size() > humHand.size())
+        			{
+        				for (int i=0; i < compHand.size()-humHand.size();i++)
+        					AllZone.GameAction.discardRandom(Constant.Player.Computer);
+        			}
+        			else if (humHand.size() > compHand.size())
+        			{
+        				int diff = humHand.size() - compHand.size();
+        				AllZone.GameAction.discard(Constant.Player.Human, diff);
+        			}
+        			
+        			//Creatures:
+        			CardList humCreats = new CardList(AllZone.Human_Play.getCards());
+        			humCreats = humCreats.getType("Creature");
+        			CardList compCreats = new CardList(AllZone.Computer_Play.getCards());
+        			compCreats = compCreats.getType("Creature");
+        				
+        			if (compCreats.size() > humCreats.size())
+        			{
+        				CardListUtil.sortAttackLowFirst(compCreats);
+        				CardListUtil.sortCMC(compCreats);
+        				for (int i=0; i < compCreats.size()-humCreats.size();i++)
+        					AllZone.GameAction.sacrifice(compCreats.get(i));
+        			}
+        			else if (humCreats.size() > compCreats.size())
+        			{
+        				int diff = humCreats.size() - compCreats.size();
+        				/*
+        				List<Card> selection = AllZone.Display.getChoicesOptional("Select " + diff + " creatures to sacrifice", humCreats.toArray());
+        				while(selection.size() != diff)
+        					selection = AllZone.Display.getChoicesOptional("Select " + diff + " creatures to sacrifice", humCreats.toArray());
+        				
+	                    for(int m = 0; m < diff; m++)
+	                    	AllZone.GameAction.sacrifice(selection.get(m));
+	                    */
+        				AllZone.InputControl.setInput(CardFactoryUtil.input_sacrificePermanents(diff, "Creature"));
+        			}
+        		}
+        		
+        		public boolean canPlayAI()
+        		{
+        			int diff = 0;
+        			CardList humLand = new CardList(AllZone.Human_Play.getCards());
+        			humLand = humLand.getType("Land");
+        			CardList compLand = new CardList(AllZone.Computer_Play.getCards());
+        			compLand = compLand.getType("Land");
+        			diff += humLand.size() - compLand.size();
+        			
+        			CardList humCreats = new CardList(AllZone.Human_Play.getCards());
+        			humCreats = humCreats.getType("Creature");
+        			CardList compCreats = new CardList(AllZone.Computer_Play.getCards());
+        			compCreats = compCreats.getType("Creature");
+        			diff += 1.5 * (humCreats.size() - compCreats.size());
+        			
+        			CardList humHand = new CardList(AllZone.Human_Hand.getCards());
+        			CardList compHand = new CardList(AllZone.Computer_Hand.getCards());
+        			diff += 0.5 * (humHand.size() - compHand.size());
+        			
+        			return diff > 2;
+        		}
+        	};
+        	
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }
+        //*************** END ************ END **************************
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

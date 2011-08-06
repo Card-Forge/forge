@@ -465,6 +465,38 @@ public class CardFactoryUtil {
         return target;
     }//input_sacrifice()
     
+    
+    public static Input input_sacrificePermanents(final int nCards, final String type) {
+    	Input target = new Input() {
+			private static final long serialVersionUID = 1981791992623774490L;
+			int                       n                = 0;
+            
+            @Override
+            public void showMessage() {
+            	
+                AllZone.Display.showMessage("Select a " +type +" to sacrifice (" +(nCards-n) +" left)");
+                ButtonUtil.disableAll();
+            }
+            
+            @Override
+            public void selectCard(Card card, PlayerZone zone) {
+                if(zone.equals(AllZone.Human_Play) && card.getType().contains(type)) {
+                    AllZone.GameAction.sacrifice(card);
+                    n++;
+                    
+                    //in case no more {type}s in play
+                    CardList list = new CardList(AllZone.Human_Play.getCards());
+                    list = list.getType(type);
+                    if(n == nCards || list.size() == 0) stop();
+                    else
+                    	showMessage();
+                }
+            }
+        };
+        return target;
+    }//input_sacrificePermanents()
+    
+    
     public static Input input_putFromHandToLibrary(final String TopOrBottom, final int num) {
         Input target = new Input() {
             private static final long serialVersionUID = 5178077952030689103L;
@@ -512,8 +544,6 @@ public class CardFactoryUtil {
                 AllZone.Display.showMessage("Select " + (nCards - n) + " cards to discard, unless you discard a "
                         + uType + ".");
                 ButtonUtil.disableAll();
-                
-                if(n == nCards || AllZone.Human_Hand.getCards().length == 0) stop();
             }
             
             @Override
@@ -527,9 +557,13 @@ public class CardFactoryUtil {
                     AllZone.GameAction.discard(card);
                     n++;
                     
-                    if(card.getType().contains(uType)) stop();
+                    if(card.getType().contains(uType.toString())) stop();
                     
-                    showMessage();
+                    else {
+	                    if(n == nCards || AllZone.Human_Hand.getCards().length == 0) stop();
+	                    else
+	                    	showMessage();
+                    }
                 }
             }
         };
@@ -1592,11 +1626,10 @@ public class CardFactoryUtil {
             
             @Override
             public void showMessage() {
+            	
+                
                 AllZone.Display.showMessage("Select a card to discard");
                 ButtonUtil.disableAll();
-                
-                //in case no more cards in hand
-                if(n == nCards || AllZone.Human_Hand.getCards().length == 0) stop();
             }
             
             @Override
@@ -1604,7 +1637,11 @@ public class CardFactoryUtil {
                 if(zone.is(Constant.Zone.Hand)) {
                     AllZone.GameAction.discard(card);
                     n++;
-                    showMessage();
+                    
+                    //in case no more cards in hand
+                    if(n == nCards || AllZone.Human_Hand.getCards().length == 0) stop();
+                    else
+                    	showMessage();
                 }
             }
         };
