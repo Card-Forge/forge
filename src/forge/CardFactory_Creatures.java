@@ -11651,6 +11651,38 @@ public class CardFactory_Creatures {
             
         }//*************** END ************ END **************************
         
+        
+        //*************** START *********** START **************************  
+        else if(cardName.equals("Wurmcoil Engine")) {
+            final Ability ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    makeTokens();
+                }//resolve()
+                
+                void makeTokens() {
+                	CardFactoryUtil.makeToken("Wurm", "C 3 3 Wurm", card, "", new String[] {
+                            "Artifact", "Creature", "Wurm"}, 3, 3, new String[] {"Deathtouch"});
+                    CardFactoryUtil.makeToken("Wurm", "C 3 3 Wurm", card, "", new String[] {
+                            "Artifact", "Creature", "Wurm"}, 3, 3, new String[] {"Lifelink"});
+                }//makeToken()
+            };//Ability
+            
+            Command makeTokens = new Command() {
+                
+				private static final long serialVersionUID = 8458814538376248271L;
+
+				public void execute() {
+                    ability.setStackDescription(card.getName()
+                            + " - put creature tokens into play.");
+                    AllZone.Stack.add(ability);
+                }
+            };
+            
+            card.addDestroyCommand(makeTokens);
+            
+        }//*************** END ************ END **************************
+        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Solemn Simulacrum")) {

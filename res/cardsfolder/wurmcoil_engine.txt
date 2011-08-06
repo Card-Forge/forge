@@ -1,0 +1,9 @@
+Name:Wurmcoil Engine
+ManaCost:6
+Types:Artifact Creature Wurm
+Text:When Wurmcoil Engine is put into a graveyard from the battlefield, put a 3/3 colorless Wurm artifact creature token with deathtouch and a 3/3 colorless Wurm artifact creature token with lifelink onto the battlefield.
+PT:6/6
+K:Deathtouch
+K:Lifelink
+SVar:Rarity:Mythic
+End
