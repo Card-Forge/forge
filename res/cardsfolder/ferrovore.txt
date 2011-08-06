@@ -1,0 +1,9 @@
+Name:Ferrovore
+ManaCost:2 R
+Types:Creature Beast
+Text:no text
+PT:2/2
+K:abPump R Sac<1/Artifact>:+3/+0
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ferrovore.jpg
+End
