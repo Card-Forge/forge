@@ -339,7 +339,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Albert Einstein 3	hard	Stronger version of the above deck");
         sb.append("\r\n");
-        sb.append("Aragorn 2			medium	WBRG Landfall deck");
+        sb.append("Aragorn 2		medium	WBRG Landfall deck");
         sb.append("\r\n");
         sb.append("Bamm Bamm Rubble 1	easy	WUBRG domain deck, creatures and spells with the Domain ability");
         sb.append("\r\n");
@@ -627,11 +627,11 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Secret Squirrel 3	hard	Dennis' squirrel deck, Squirrel Mob + Deranged Hermit + Coat of Arms + Nut Collector");
         sb.append("\r\n");
-        sb.append("Sherlock Holmes 1	easy	Some Forestwalk creatures, Damnation + pump spells");
+        sb.append("Sherlock Holmes 1	easy	Mono green deck, Baru, Fist of Krosa + land fetch + some buff cards.");
         sb.append("\r\n");
-        sb.append("Sherlock Holmes 2	medium	Some Forestwalk creatures, gain life + threat removal spells");
+        sb.append("Sherlock Holmes 2	medium	Mono green deck, Baru, Fist of Krosa + lots of good green creatures.");
         sb.append("\r\n");
-        sb.append("Sherlock Holmes 3	hard	Some Forestwalk creatures, gain life + threat removal spells + Eladamri, Lord of Leaves");
+        sb.append("Sherlock Holmes 3	hard	Mono green deck, Baru, Fist of Krosa + lots of great green creatures.");
         sb.append("\r\n");
         sb.append("Silver Surfer 3		hard	Green creature beat down deck with several pump spells");
         sb.append("\r\n");
@@ -675,11 +675,11 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Wolverine 3		hard	Nightmare + Korlash, Heir to Blackblade + Kodama's Reach");
         sb.append("\r\n");
-        sb.append("Wyatt Earp 1		easy	Some Plainswalk creatures + filler");
+        sb.append("Wyatt Earp 1		easy	Mono white deck, Crovax, Ascendant Hero + Crusade + small to medium sized creatures.");
         sb.append("\r\n");
-        sb.append("Wyatt Earp 2		medium	Some Plainswalk creatures + filler");
+        sb.append("Wyatt Earp 2		medium	Mono white deck, Crovax, Ascendant Hero + Crusade + small to medium sized creatures.");
         sb.append("\r\n");
-        sb.append("Wyatt Earp 3		hard	Some Plainswalk creatures + filler");
+        sb.append("Wyatt Earp 3		hard	Mono white deck, Crovax, Ascendant Hero + Honor of the Pure + small to medium sized creatures.");
 
         File base = ForgeProps.getFile(IMAGE_ICON);
     	File file = new File(base, "notesIcon.png");
