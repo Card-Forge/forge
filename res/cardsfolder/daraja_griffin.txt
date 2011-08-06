@@ -1,0 +1,10 @@
+Name:Daraja Griffin
+ManaCost:3 W
+Types:Creature Griffin
+Text:no text
+PT:2/2
+K:Flying
+K:abDestroyTgtV 0 Sac<1/CARDNAME>:Creature.Black:Destroy target black creature.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/daraja_griffin.jpg
+End

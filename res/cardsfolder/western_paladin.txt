@@ -1,0 +1,9 @@
+Name:Western Paladin
+ManaCost:2 B B
+Types:Creature Zombie Knight
+Text:no text
+PT:3/3
+K:abDestroyTgtV B B T:Creature.White:Destroy target white creature.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/western_paladin.jpg
+End
