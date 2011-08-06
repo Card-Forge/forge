@@ -1,3 +1,30 @@
+Broodstar
+8 U U
+Creature Beast
+Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.) Broodstar's power and toughness are each equal to the number of artifacts you control.
+1/1
+Flying
+CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+
+Matca Rioters
+2 G
+Creature Human Warrior
+Domain - Matca Rioters's power and toughness are each equal to the number of basic land types among lands you control.
+1/1
+
+Serpent of the Endless Sea
+4 U
+Creature Serpent
+Serpent of the Endless Sea's power and toughness are each equal to the number of Islands you control.
+1/1
+CARDNAME can't attack unless defending player controls an Island.
+
+Overbeing of Myth
+GU GU GU GU GU
+Creature Spirit Avatar
+Overbeing of Myth's power and toughness are each equal to the number of cards in your hand. At the beginning of your draw step, draw an additional card.
+1/1
+
 Thalakos Seer
 U U
 Creature Thalakos Wizard
@@ -1212,12 +1239,6 @@ Sorcery
 no text
 spDiscardTgt:TgtChoose:X:Target player discards a card for each Swamp you control.:Mind Sludge - target player discards cards
 SVar:X:Count$TypeYouCtrl.Swamp
-
-Matca Rioters
-2 G
-Creature Human Warrior
-Domain - Matca Rioters's power and toughness are each equal to the number of basic land types among lands you control.
-0/0
 
 Aven Trailblazer
 2 W
@@ -2522,14 +2543,6 @@ Creature Human Soldier
 Soldier spells you cast cost 1 less to cast. Soldier creatures you control get +1/+2.
 1/1
 CostChange:Player:Less:1:Spell:All:Soldier:NoSpecial
-
-Broodstar
-8 U U
-Creature Beast
-Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.) Broodstar's power and toughness are each equal to the number of artifacts you control.
-0/0
-Flying
-CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
 
 Blinkmoth Infusion
 12 U U
@@ -4685,13 +4698,6 @@ Sea Monster
 Creature Serpent
 no text
 6/6
-CARDNAME can't attack unless defending player controls an Island.
-
-Serpent of the Endless Sea
-4 U
-Creature Serpent
-Serpent of the Endless Sea's power and toughness are each equal to the number of Islands you control.
-0/0
 CARDNAME can't attack unless defending player controls an Island.
 
 Slipstream Eel
@@ -9199,12 +9205,6 @@ Creature Goblin Scout
 Whenever Goblin Guide attacks, defending player reveals the top card of his or her library. If it's a land card, that player puts it into his or her hand.
 2/2
 Haste
-
-Overbeing of Myth
-GU GU GU GU GU
-Creature Spirit Avatar
-Overbeing of Myth's power and toughness are each equal to the number of cards in your hand. At the beginning of your draw step, draw an additional card.
-0/0
 
 Wanderbrine Rootcutters
 2 UB UB
