@@ -1,10 +1,11 @@
 Name:Faultgrinder
 ManaCost:6 R
 Types:Creature Elemental
-Text:When Faultgrinder enters the battlefield, destroy target land.
+Text:no text
 PT:4/4
 K:Trample
-K:etbDestroyTgt:Land
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target land.
+SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Select a land.
 SVar:Evoke:4 R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faultgrinder.jpg

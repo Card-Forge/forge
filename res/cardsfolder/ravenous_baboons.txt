@@ -1,9 +1,10 @@
 Name:Ravenous Baboons
 ManaCost:3 R
 Types:Creature Ape
-Text:When Ravenous Baboons enters the battlefield, destroy target nonbasic land.
+Text:no text
 PT:2/2
-K:etbDestroyTgt:Land.nonBasic
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target nonbasic land.
+SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Land.nonBasic | TgtPrompt$ Select a nonbasic land.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_baboons.jpg
 SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/97.jpg
