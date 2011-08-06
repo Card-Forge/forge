@@ -660,7 +660,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             LAFMap.put("Gemini", "org.jvnet.substance.api.skin.SubstanceGeminiLookAndFeel");
             LAFMap.put("Graphite Aqua", "org.jvnet.substance.api.skin.SubstanceGraphiteAquaLookAndFeel");
             LAFMap.put("Moderate", "org.jvnet.substance.skin.SubstanceModerateLookAndFeel");
-            LAFMap.put("Magellan", "org.jvnet.substance.skin.SubstanceMagellanLookAndFeel");
+            //LAFMap.put("Magellan", "org.jvnet.substance.skin.SubstanceMagellanLookAndFeel");
             LAFMap.put("Magma", "org.jvnet.substance.skin.SubstanceMagmaLookAndFeel");
             LAFMap.put("Mist Aqua", "org.jvnet.substance.skin.SubstanceMistAquaLookAndFeel");
             LAFMap.put("Mist Silver", "org.jvnet.substance.skin.SubstanceMistSilverLookAndFeel");

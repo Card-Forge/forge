@@ -16234,10 +16234,9 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 
 	            if (player.equals("Human") && lands.size() > 0)
 	            {
-	               String[] choices =
-	               { "Yes", "No" };
+	               String[] choices = { "Yes", "No" };
 	               Object choice = AllZone.Display.getChoice(
-	                     "Search fo Basic Land?", choices);
+	                     "Search for Basic Land?", choices);
 	               if (choice.equals("Yes"))
 	               {
 	                  Object o = AllZone.Display

@@ -2728,6 +2728,241 @@ class CardFactory_Planeswalkers {
 	      //end ability 3
 	      
 	      return card2;
+	    }//*************** END ************ END **************************    
+	    
+	
+	    //*************** START *********** START **************************
+	    if(cardName.equals("Jace, the Mind Sculptor"))
+	    {
+			  final int turn[] = new int[1];
+			  turn[0] = -1;
+			
+			  final Card card2 = new Card()
+			  {
+			    public void addDamage(int n, Card source)
+			    {
+			      subtractCounter(Counters.LOYALTY,n);
+			      AllZone.GameAction.checkStateEffects();
+			    }
+			  };
+			  card2.setOwner(owner);
+			  card2.setController(owner);
+			
+			  card2.setName(card.getName());
+			  card2.setType(card.getType());
+			  card2.setManaCost(card.getManaCost());
+			  card2.addSpellAbility(new Spell_Permanent(card2));
+			  card2.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(card2, Counters.LOYALTY, 3));
+			  
+			  final Ability ability1 = new Ability(card2, "0")
+			  {
+				  public void resolve()
+				  {
+					  turn[0] = AllZone.Phase.getTurn();
+					  card2.addCounterFromNonEffect(Counters.LOYALTY, 2);
+					  String targetPlayer = getTargetPlayer();
+					  
+					  PlayerZone lib = AllZone.getZone(Constant.Zone.Library, targetPlayer);
+					  
+					  if (lib.size() == 0)
+						  return;
+					  
+					  Card c = lib.get(0);
+					  
+					  if (card2.getController().equals(Constant.Player.Human))
+					  {
+						  
+						  String[] choices = { "Yes", "No" };
+			              Object choice = AllZone.Display.getChoice("Put " + c + " on bottom of owner's library?", choices);
+			              if (choice != null)
+			              {
+			            	  if (choice.equals("Yes"))
+			            	  {
+			            		  lib.remove(c);
+			            		  lib.add(c);
+			            	  }
+			              }
+					  }
+					  else //compy
+					  {
+						  PlayerZone humanPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+						  CardList land = new CardList(humanPlay.getCards());
+						  land = land.getType("Land");
+						  
+						  //TODO: improve this:
+						  if (land.size() > 4 && c.isLand())
+							  ;
+						  else
+						  {
+							  lib.remove(c);
+		            		  lib.add(c);
+						  }
+					  }
+				  }
+				  
+				  public boolean canPlayAI()
+			      {
+			          return card2.getCounters(Counters.LOYALTY) < 13 && AllZone.Human_Library.size() > 2;
+			      }
+				  
+				  public boolean canPlay()
+			      {
+			          return 	  AllZone.getZone(card2).is(Constant.Zone.Play) &&
+			                      turn[0] != AllZone.Phase.getTurn() &&
+			                      AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
+			                      !AllZone.Phase.getPhase().equals("End of Turn") && 
+			                      (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2")) 
+			                      && AllZone.Stack.size() == 0;
+			      }//canPlay()
+			  };
+			  ability1.setDescription("+2: Look at the top card of target player's library. You may put that card on the bottom of that player's library.");
+			  ability1.setStackDescription(card2 + " - Look at the top card of target player's library. You may put that card on the bottom of that player's library.");
+			  ability1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability1));
+			  ability1.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+			  card2.addSpellAbility(ability1);
+			  
+			  final Ability ability2 = new Ability(card2, "0")
+		      {
+				   public void resolve()
+			       {   
+					    turn[0] = AllZone.Phase.getTurn();
+			            AllZone.GameAction.drawCard(card.getController());
+			            AllZone.GameAction.drawCard(card.getController());
+			            AllZone.GameAction.drawCard(card.getController());
+			            
+			            String player = card.getController();
+			            if(player.equals(Constant.Player.Human))
+			              humanResolve();
+			            //else
+			            //  computerResolve();
+			        }
+			        
+			        public void humanResolve()
+			        {
+			        	PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human);
+			        	PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Human);
+			        	
+			        	CardList putOnTop = new CardList(hand.getCards());
+			        	
+			        	Object o = AllZone.Display.getChoiceOptional("First card to put on top: ", putOnTop.toArray());
+			        	if(o != null)
+			            {
+			        		Card c1 = (Card)o;
+			        		putOnTop.remove(c1);
+			        		hand.remove(c1);
+			        		lib.add(c1,0);
+			            }
+			        	o = AllZone.Display.getChoiceOptional("Second card to put on top: ", putOnTop.toArray());
+			        	if(o != null)
+			            {
+			        		Card c2 = (Card)o;
+			        		putOnTop.remove(c2);
+			        		hand.remove(c2);
+			        		lib.add(c2,0);
+			            }	
+			        }
+			        
+			        public boolean canPlayAI()
+			        {
+			        	return false;
+			        }
+			        
+			        public boolean canPlay()
+			        {
+			          return 	  AllZone.getZone(card2).is(Constant.Zone.Play) &&
+			                      turn[0] != AllZone.Phase.getTurn() &&
+			                      AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
+			                      !AllZone.Phase.getPhase().equals("End of Turn") && 
+			                      (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2")) 
+			                      && AllZone.Stack.size() == 0;
+			        }//canPlay()
+		      };
+		      ability2.setDescription("0: Draw three cards, then put two cards from your hand on top of your library in any order.");
+		      ability2.setStackDescription(card2 + " - Draw three cards, then put two cards from your hand on top of your library in any order.");
+		      card2.addSpellAbility(ability2);
+		      
+		      final Ability ability3 = new Ability(card, "0")
+		      {
+		    	  public void resolve()
+		          {
+		    		turn[0] = AllZone.Phase.getTurn();
+		    		card2.subtractCounter(Counters.LOYALTY, 1);
+		    		
+		            if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
+		            {
+		              if(getTargetCard().isToken())
+		                AllZone.getZone(getTargetCard()).remove(getTargetCard());
+		              else
+		              {
+		                PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, getTargetCard().getOwner());
+		                AllZone.GameAction.moveTo(hand, getTargetCard());
+		              }
+		            }//if
+		          }//resolve()
+		    	  
+		    	  public boolean canPlay()
+		    	  {
+			    	  return card2.getCounters(Counters.LOYALTY) >= 1 && AllZone.getZone(card2).is(Constant.Zone.Play) &&
+		              turn[0] != AllZone.Phase.getTurn() &&
+		              AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
+		              !AllZone.Phase.getPhase().equals("End of Turn") && 
+		              (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+		              && AllZone.Stack.size() == 0;
+		    	  }
+		      };
+		      ability3.setDescription("-1: Return target creature to its owner's hand.");
+		      ability3.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability3));
+		      card2.addSpellAbility(ability3);
+		      
+		      final Ability ability4 = new Ability(card, "0")
+		      {
+		    	  public void resolve()
+		    	  {
+		    		  turn[0] = AllZone.Phase.getTurn();
+		    		  card2.subtractCounter(Counters.LOYALTY, 12);
+		    		  
+		    		  String player = getTargetPlayer();
+		    		  
+		    		  PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+		    		  PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+		    		  
+		    		  CardList libList = new CardList(lib.getCards());
+		    		  CardList handList = new CardList(hand.getCards());
+		    		  
+		    		  for (Card c:libList)
+		    			  AllZone.GameAction.removeFromGame(c);
+		    		  
+		    		  handList.shuffle();
+		    		  for (Card c:handList)
+		    		  {
+		    			  hand.remove(c);
+		    			  lib.add(c);
+		    		  }
+		    	  }
+		    	  
+		    	  public boolean canPlayAI()
+		    	  {
+		    		  int libSize = AllZone.Human_Library.size();
+		    		  int handSize = AllZone.Human_Hand.size();
+		    		  return libSize > 10 && (libSize > handSize);
+		    	  }
+		    	  
+		    	  public boolean canPlay()
+		    	  {
+			    	  return card2.getCounters(Counters.LOYALTY) >= 12 && AllZone.getZone(card2).is(Constant.Zone.Play) &&
+		              turn[0] != AllZone.Phase.getTurn() &&
+		              AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
+		              !AllZone.Phase.getPhase().equals("End of Turn") && 
+		              (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+		              && AllZone.Stack.size() == 0;
+		    	  }
+		      };
+		      ability4.setDescription("-12: Exile all cards from target player's library, then that player shuffles his or her hand into his or her library.");
+		      ability4.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability4));
+		      ability4.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+		      card2.addSpellAbility(ability4);
+			  
+			  return card2;
 	    }//*************** END ************ END **************************
 	    
 	    return card;

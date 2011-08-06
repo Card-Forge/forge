@@ -3,8 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="res/lib/google-collect-1.0.jar"/>
-	<classpathentry kind="lib" path="res/lib/jdom-1.0.jar"/>
-	<classpathentry kind="lib" path="res/lib/jl1.0.1.jar"/>
 	<classpathentry kind="lib" path="res/lib/jsr305.jar"/>
 	<classpathentry kind="lib" path="res/lib/napkinlaf-1.2.jar"/>
 	<classpathentry kind="lib" path="res/lib/napkinlaf-swingset-1.2.jar"/>
