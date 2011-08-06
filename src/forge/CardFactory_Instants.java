@@ -4118,6 +4118,32 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Beacon of Immortality")) {
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -3200073459471937520L;
+
+				@Override
+                public void resolve() {
+                    Player p = getTargetPlayer();
+                    p.setLife(p.getLife()*2, card);
+                    done();
+                }//resolve()
+                
+                void done() {
+                    //shuffle card back into the library
+                    AllZone.GameAction.moveToLibrary(card);
+                    card.getController().shuffle();
+                }
+            };
+            spell.setChooseTargetAI(CardFactoryUtil.AI_targetComputer());
+            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
     	return card;
     }//getCard
 }
