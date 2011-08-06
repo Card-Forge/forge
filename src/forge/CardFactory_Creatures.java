@@ -13147,6 +13147,19 @@ public class CardFactory_Creatures {
             
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
+        
+      
+        //*************** START *********** START **************************
+        else if(cardName.equals("Cyclopean Mummy")) {
+            Command exile = new Command() {
+				private static final long serialVersionUID = -5254763975019516955L;
+
+				public void execute() {
+                    AllZone.GameAction.exile(card);
+                }//execute()
+            };//Command
+            card.addDestroyCommand(exile);
+        }//*************** END ************ END **************************
                
         
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)

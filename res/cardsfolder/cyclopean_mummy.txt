@@ -1,0 +1,8 @@
+Name:Cyclopean Mummy
+ManaCost:1 B
+Types:Creature Zombie
+Text:When CARDNAME is put into a graveyard from the battlefield, exile CARDNAME.
+PT:2/1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cyclopean_mummy.jpg
+End
