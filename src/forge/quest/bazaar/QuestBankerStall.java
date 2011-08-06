@@ -1,5 +1,7 @@
 package forge.quest.bazaar;
 
+import forge.gui.GuiUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +23,7 @@ public class QuestBankerStall extends QuestAbstractBazaarStall {
                     "Estate management training",
                     getEstatesDesc(),
                     getEstatePrice(),
-                    getIcon("GoldIconLarge.png")) {
+                    GuiUtils.getIconFromFile("GoldIconLarge.png")) {
                 @Override
                 public void purchaseItem() {
                     questData.addEstatesLevel(1);
@@ -35,7 +37,7 @@ public class QuestBankerStall extends QuestAbstractBazaarStall {
                     "This coin is believed to give good luck to its owner.<br>"+
                             "Improves the chance of getting a random <br>rare after each match by <b>15%</b>.",
                     2000,
-                    getIcon("CoinIcon.png")){
+                    GuiUtils.getIconFromFile("CoinIcon.png")){
                 @Override
                 public void purchaseItem() {
                     questData.addLuckyCoinLevel(1);

@@ -1,5 +1,7 @@
 package forge.quest.bazaar;
 
+import forge.gui.GuiUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class QuestAlchemistStall extends QuestAbstractBazaarStall {
                 "Gives +1 to max Life.<br><u>Current life:</u> " +
                         questData.getLife(),
                 price,
-                getIcon("ElixirIcon.png")) {
+                GuiUtils.getIconFromFile("ElixirIcon.png")) {
             @Override
             public void purchaseItem() {
                 questData.addLife(1);

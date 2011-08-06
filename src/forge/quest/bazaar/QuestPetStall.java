@@ -1,5 +1,7 @@
 package forge.quest.bazaar;
 
+import forge.gui.GuiUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,7 @@ public class QuestPetStall extends QuestAbstractBazaarStall {
             itemList.add(new QuestAbstractBazaarItem("Wolf Pet",
                     getDesc(WOLF),
                     getPrice(WOLF),
-                    getIcon(getImageString(WOLF))) {
+                    GuiUtils.getIconFromFile(getImageString(WOLF))) {
                 @Override
                 public void purchaseItem() {
                     questData.addWolfPetLevel();
@@ -30,7 +32,7 @@ public class QuestPetStall extends QuestAbstractBazaarStall {
             itemList.add(new QuestAbstractBazaarItem("Crocodile Pet",
                     getDesc(CROC),
                     getPrice(CROC),
-                    getIcon(getImageString(CROC))) {
+                    GuiUtils.getIconFromFile(getImageString(CROC))) {
                 @Override
                 public void purchaseItem() {
                     questData.addCrocPetLevel();
@@ -41,7 +43,7 @@ public class QuestPetStall extends QuestAbstractBazaarStall {
             itemList.add(new QuestAbstractBazaarItem("Bird Pet",
                     getDesc(BIRD),
                     getPrice(BIRD),
-                    getIcon(getImageString(BIRD))) {
+                    GuiUtils.getIconFromFile(getImageString(BIRD))) {
                 @Override
                 public void purchaseItem() {
                     questData.addBirdPetLevel();
@@ -52,7 +54,7 @@ public class QuestPetStall extends QuestAbstractBazaarStall {
             itemList.add(new QuestAbstractBazaarItem("Hound Pet",
                     getDesc(HOUND),
                     getPrice(HOUND),
-                    getIcon(getImageString(HOUND))) {
+                    GuiUtils.getIconFromFile(getImageString(HOUND))) {
                 @Override
                 public void purchaseItem() {
                     questData.addHoundPetLevel();

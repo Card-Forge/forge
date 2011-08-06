@@ -2,13 +2,12 @@ package forge.quest.bazaar;
 
 import forge.AllZone;
 import forge.QuestData;
-import forge.properties.ForgeProps;
+import forge.gui.GuiUtils;
 import forge.properties.NewConstants;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.io.File;
 
 public abstract class QuestAbstractBazaarStall extends JPanel implements NewConstants{
 	private static final long serialVersionUID = -4147745071116906043L;
@@ -24,7 +23,7 @@ public abstract class QuestAbstractBazaarStall extends JPanel implements NewCons
 
     protected QuestAbstractBazaarStall(String stallName, String iconName, String fluff) {
         this.fluff = fluff;
-        this.icon = getIcon(iconName);
+        this.icon = GuiUtils.getIconFromFile(iconName);
         this.stallName = stallName;
  
         JLabel stallNameLabel;
@@ -132,14 +131,9 @@ public abstract class QuestAbstractBazaarStall extends JPanel implements NewCons
 
     protected abstract java.util.List<QuestAbstractBazaarItem> populateItems();
 
-    ImageIcon getIcon(String fileName){
-    	File base = ForgeProps.getFile(IMAGE_ICON);
-    	File file = new File(base, fileName);
-    	ImageIcon icon = new ImageIcon(file.toString());
-    	return icon;
-    }
 
-    public ImageIcon getIcon() {
+
+    public ImageIcon getStallIcon() {
         return icon;
     }
 

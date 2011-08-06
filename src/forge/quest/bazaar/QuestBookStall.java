@@ -1,5 +1,7 @@
 package forge.quest.bazaar;
 
+import forge.gui.GuiUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +22,7 @@ public class QuestBookStall extends QuestAbstractBazaarStall{
                     "These volumes explain how to perform the most difficult of sleights.<br>"+
                             "<u>Your first mulligan is <b>free</b></u>.",
                     2000,
-                    getIcon("BookIcon.png")) {
+                    GuiUtils.getIconFromFile("BookIcon.png")) {
                 @Override
                 public void purchaseItem() {
                     questData.addSleightOfHandLevel(1);

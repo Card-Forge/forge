@@ -1,5 +1,7 @@
 package forge.quest.bazaar;
 
+import forge.gui.GuiUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class QuestGearStall extends QuestAbstractBazaarStall{
                     "These ancient charts should facilitate navigation during your travels significantly.<br>"+
                             "<u>Quest assignments become available more frequently</u>.",
                     2000,
-                    getIcon("MapIconLarge.png")) {
+                    GuiUtils.getIconFromFile("MapIconLarge.png")) {
                 @Override
                 public void purchaseItem() {questData.addGearLevel(1);
                 }
@@ -35,7 +37,7 @@ public class QuestGearStall extends QuestAbstractBazaarStall{
                     "This extremely comfortable airship allows for more efficient and safe travel<br>to faraway destinations. <br>"+
                             "<u>Quest assignments become available more frequently, adds +3 to max life</u>.",
                     5000,
-                    getIcon("ZeppelinIcon.png")) {
+                    GuiUtils.getIconFromFile("ZeppelinIcon.png")) {
                 @Override
                 public void purchaseItem() {questData.addGearLevel(1);
                 }

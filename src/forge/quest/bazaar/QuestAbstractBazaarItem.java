@@ -2,6 +2,7 @@ package forge.quest.bazaar;
 
 import forge.AllZone;
 import forge.QuestData;
+import forge.gui.GuiUtils;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -54,7 +55,7 @@ public abstract class QuestAbstractBazaarItem {
     public abstract void purchaseItem();
 
     protected final JPanel getItemPanel() {
-        ImageIcon resizedImage = new ImageIcon(image.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+        ImageIcon resizedImage = GuiUtils.getResizedIcon(image, 40, 40);
 
         JLabel iconLabel = new JLabel(resizedImage);
         JLabel nameLabel = new JLabel(name);

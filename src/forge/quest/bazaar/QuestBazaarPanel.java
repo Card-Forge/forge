@@ -49,7 +49,7 @@ public class QuestBazaarPanel extends JPanel{
         double maxHeight=0;
 
         for(QuestAbstractBazaarStall stall:stallList){
-            JToggleButton stallButton = new JToggleButton(stall.getStallName(), stall.getIcon());
+            JToggleButton stallButton = new JToggleButton(stall.getStallName(), stall.getStallIcon());
             stallButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
 

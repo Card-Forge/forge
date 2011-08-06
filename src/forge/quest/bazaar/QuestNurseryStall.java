@@ -1,5 +1,7 @@
 package forge.quest.bazaar;
 
+import forge.gui.GuiUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +24,7 @@ public class QuestNurseryStall extends QuestAbstractBazaarStall{
         itemList.add(new QuestAbstractBazaarItem("Wall of plants",
                 getDesc(),
                 getPrice(),
-                getIcon(getImageString())) {
+                GuiUtils.getIconFromFile(getImageString())) {
             @Override
             public void purchaseItem() {
                 questData.addPlantLevel();
