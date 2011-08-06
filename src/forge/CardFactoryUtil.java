@@ -2246,7 +2246,14 @@ public class CardFactoryUtil {
              }
              if( foundCardType && zone.is(Constant.Zone.Play)) {
                 spell.setTargetCard(card);
-                stopSetNext(new Input_PayManaCost(spell));
+                if(spell.getManaCost().equals("0") || this.isFree())//for "sacrifice this card" abilities
+                {
+                    this.setFree(false);
+                    AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
+                    stop();
+                }
+                else
+                	stopSetNext(new Input_PayManaCost(spell));
              }
           }
        };
