@@ -10214,13 +10214,13 @@ public class CardFactory implements NewConstants {
     		  }
     		  public boolean canPlayAI()
     		  {
-    			  int m = (int)Math.pow(2, AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer, "Doubling Season").size());
+    			  int m = AllZoneUtil.getDoublingSeasonMagnitude(AllZone.ComputerPlayer);
     			  int n = Math.max(1, Math.min((100-getSourceCard().getCounters(Counters.TOWER))/m,
     					           ComputerUtil.getAvailableMana().size())) ;
     			  setManaCost(n + "");
     			  return !(new CardList(AllZone.Computer_Hand.getCards()).containsName("Doubling Season") && n>=5 )
     			  			&&  m*n >= Math.min(20, 100 - getSourceCard().getCounters(Counters.TOWER));
-    			  //Persuming if AI cast the Pinnacle, it has green mana
+    			  //Presuming if AI cast the Pinnacle, it has green mana
     		  }
     	  };
     	  ability.setBeforePayMana(new Input()

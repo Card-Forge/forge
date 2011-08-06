@@ -4284,11 +4284,8 @@ public class CardFactory_Sorceries {
                 if(AllZone.GameAction.isCardInPlay(getTargetCard())
                         && CardFactoryUtil.canTarget(card, getTargetCard())) {
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    CardList DoublingSeasons = new CardList(play.getCards());
-                    DoublingSeasons = DoublingSeasons.getName("Doubling Season");
                     PlayerZone_ComesIntoPlay.SimultaneousEntry = true;      
-                    double Count = DoublingSeasons.size();
-                    Count = Math.pow(2,Count);
+                    double Count = AllZoneUtil.getDoublingSeasonMagnitude(card.getController());
                     for(int i = 0; i < Count; i++) {
                     	if(i + 1== Count) PlayerZone_ComesIntoPlay.SimultaneousEntry = false;                 
                     Card Copy = AllZone.CardFactory.copyCardintoNew(getTargetCard());
@@ -4354,11 +4351,8 @@ public class CardFactory_Sorceries {
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                         PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                        CardList DoublingSeasons = new CardList(play.getCards());
-                        DoublingSeasons = DoublingSeasons.getName("Doubling Season");
-                        PlayerZone_ComesIntoPlay.SimultaneousEntry = true;      
-                        int Count = DoublingSeasons.size();
-                        Count = 5 * (int)Math.pow(2,Count);
+                        PlayerZone_ComesIntoPlay.SimultaneousEntry = true;
+                        int Count = 5 * AllZoneUtil.getDoublingSeasonMagnitude(card.getController());
                         for(int i = 0; i < Count; i++) {
                         	if(i + 1 == Count) PlayerZone_ComesIntoPlay.SimultaneousEntry = false;                 
                         Card Copy = AllZone.CardFactory.copyCardintoNew(getTargetCard());

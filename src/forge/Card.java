@@ -327,10 +327,7 @@ public class Card extends MyObservable {
     }
     
     public void addCounter(Counters counterName, int n) {
-        int multiplier = 1;
-        int doublingSeasons = AllZoneUtil.getPlayerCardsInPlay(this.getController(), "Doubling Season").size();
-        if(doublingSeasons > 0) multiplier = (int) Math.pow(2, doublingSeasons);
-
+    	int multiplier = AllZoneUtil.getDoublingSeasonMagnitude(this.getController());
         if(counters.containsKey(counterName)) {
             Integer aux = counters.get(counterName) + (multiplier * n);
             counters.put(counterName, aux);

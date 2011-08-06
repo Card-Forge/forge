@@ -572,4 +572,11 @@ public class AllZoneUtil {
         
         return all;
     }
+	
+	public static int getDoublingSeasonMagnitude(Player player) {
+		int multiplier = 1;
+        int doublingSeasons = getPlayerCardsInPlay(player, "Doubling Season").size();
+        if(doublingSeasons > 0) multiplier = (int) Math.pow(2, doublingSeasons);
+        return multiplier;
+	}
 }
