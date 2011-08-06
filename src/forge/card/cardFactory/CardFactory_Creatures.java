@@ -199,25 +199,43 @@ public class CardFactory_Creatures {
                          {
 	                        //TODO: Use central copy methods
 	                        Card copy;
+	                        if(!getTargetCard().isToken()) {
+	                            //CardFactory cf = new CardFactory("cards.txt");
+	                            
+	
+	                            //copy creature and put it onto the battlefield
+	                            //copy = getCard(getTargetCard(), getTargetCard().getName(), card.getController());
+	                            copy = cfact.getCard(getTargetCard().getName(), getTargetCard().getOwner());
+	                            
+	                            //when copying something stolen:
+	                            copy.setController(getTargetCard().getController());
+	                            
+	                            copy.setToken(true);
+	                            copy.setCopiedToken(true);
+	                            
+	                            copy.addIntrinsicKeyword("Haste");
+	                        } else //isToken()
+	                        {
 	                            Card c = getTargetCard();
-
+	                            
 	                            copy = CardFactory.copyStats(c);
-
+	                            
 	                            copy.setName(c.getName());
 	                            copy.setImageName(c.getImageName());
-
+	                            
 	                            copy.setOwner(c.getController());
 	                            copy.setController(c.getController());
-
+	                            
 	                            copy.setManaCost(c.getManaCost());
 	                            copy.setColor(c.getColor());
 	                            copy.setToken(true);
-
+	                            
 	                            copy.setType(c.getType());
-
+	                            
 	                            copy.setBaseAttack(c.getBaseAttack());
 	                            copy.setBaseDefense(c.getBaseDefense());
 	                            copy.addIntrinsicKeyword("Haste");
+	                        }
 	                        
 	                        //Slight hack in case Kiki copies a creature with triggers.
                             for(Trigger t : copy.getTriggers())
@@ -260,9 +278,9 @@ public class CardFactory_Creatures {
 	                                //and the token shouldn't be sacrificed
 	                                if(AllZone.GameAction.isCardInPlay(target[index]))
 	                                {
-	                                	//Slight hack in case kiki copies a creature with triggers
                                         AllZone.GameAction.sacrifice(target[index]); //maybe do a setSacrificeAtEOT, but probably not.
-	                                	AllZone.TriggerHandler.removeAllFromCard(target[index]);
+	                                	//Slight hack in case kiki copies a creature with triggers
+                                        AllZone.TriggerHandler.removeAllFromCard(target[index]);
 	                                }
 	                            }
 	                        };//Command
@@ -369,41 +387,6 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
 
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Rukh Egg")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    CardFactoryUtil.makeToken("Bird", "R 4 4 Bird", card.getController(), "R", new String[] {"Creature", "Bird"},
-                            4, 4, new String[] {"Flying"});
-                }
-            }; //ability
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(cardName).append(" - Put a 4/4 red Bird creature token with flying onto the battlefield.");
-            ability.setStackDescription(sb.toString());
-            
-            final Command createBird = new Command() {
-                private static final long serialVersionUID = 2856638426932227407L;
-                
-                public void execute() {
-                    AllZone.Stack.addSimultaneousStackEntry(ability);
-
-                }
-            };
-            
-            final Command destroy = new Command() {
-                private static final long serialVersionUID = 2320128493809478823L;
-                
-                public void execute() {
-                    AllZone.EndOfTurn.addAt(createBird);
-                }
-            };
-            
-            card.addDestroyCommand(destroy);
-        }//*************** END ************ END **************************
-        
-
         //*************** START *********** START **************************
         else if(cardName.equals("Primal Plasma") || cardName.equals("Primal Clay")) {
         	card.setBaseAttack(3);
