@@ -156,7 +156,8 @@ public class GameAction {
     
     public void moveToHand(Card c) {
         PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getOwner());
-        moveTo(hand, c);
+        if(c.isToken()) AllZone.getZone(c).remove(c);
+        else moveTo(hand, c);
     }
     
     public void moveToPlay(Card c) {
