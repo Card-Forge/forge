@@ -2533,8 +2533,12 @@ public class Card extends MyObservable {
         else if (Property.startsWith("Other")) { if(this.equals(source)) return false; }
         else if (Property.startsWith("Self")) { if(!this.equals(source)) return false; }
 		
+        else if (Property.startsWith("AttachedBy")){
+        	if (!equippedBy.contains(source) && !enchantedBy.contains(source)) return false; }
         else if (Property.startsWith("Attached")) {
         	if (!equipping.contains(source) && !enchanting.contains(source)) return false; }
+
+
         else if (Property.startsWith("SharesColorWith")) { if(!sharesColorWith(source)) return false; }
 				
              else if (Property.startsWith("with")) // ... Card keywords

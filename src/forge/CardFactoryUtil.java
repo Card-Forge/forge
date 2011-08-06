@@ -1772,14 +1772,15 @@ public class CardFactoryUtil {
                 return false;
             }//canPlayAI()
 
+            @Override
 			public void resolve() {
-				AllZone.GameAction.moveToPlay(sourceCard);
+				Card aura = AllZone.GameAction.moveToPlay(sourceCard);
 
                 Card c = getTargetCard();
                 
                 // i think this is checked for already in fizzle?
                 if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(sourceCard, c)) {
-                	sourceCard.enchantCard(c);
+                	aura.enchantCard(c);
                 }
             }//resolve()
         };//enchant ability
@@ -2451,7 +2452,10 @@ public class CardFactoryUtil {
                 {
                 	if (spell.getAfterPayMana() == null){
 	                    this.setFree(false);
-	                    AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
+	                    Card source = spell.getSourceCard();
+	                    if (spell.isSpell() && source.isCopiedSpell())
+	                    	AllZone.GameAction.moveToStack(source);
+	                    AllZone.Stack.add(spell, source.getManaCost().contains("X"));
 	                    stop();
                 	}
                 	else{
