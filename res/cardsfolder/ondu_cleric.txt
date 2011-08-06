@@ -1,8 +1,11 @@
 Name:Ondu Cleric
 ManaCost:1 W
 Types:Creature Kor Cleric Ally
-Text:Whenever Ondu Cleric or another Ally enters the battlefield under your control, you may gain life equal to the number of Allies you control.
+Text:no text
 PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Ally.YouCtrl | TriggerZones$ Battlefield | Optional$ True | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may gain life equal to the number of Allies you control.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
+SVar:X:Count$Valid Ally.YouCtrl
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ondu_cleric.jpg

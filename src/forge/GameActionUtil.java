@@ -3332,12 +3332,6 @@ public class GameActionUtil {
 				|| c.getName().equals("Tuktuk Grunts") || c.getName().equals("Umara Raptor")
 				|| c.getName().equals("Hada Freeblade") || c.getName().equals("Bojuka Brigand")
 				|| c.getName().equals("Graypelt Hunter")) ally_Generic_P1P1(c);
-		else if(c.getName().equals("Turntimber Ranger")) ally_Turntimber_Ranger(c);
-		else if(c.getName().equals("Highland Berserker")) ally_BoostUntilEOT(c, "First Strike");
-		else if(c.getName().equals("Joraga Bard")) ally_BoostUntilEOT(c, "Vigilance");
-		else if(c.getName().equals("Seascape Aerialist")) ally_BoostUntilEOT(c, "Flying");
-		else if(c.getName().equals("Ondu Cleric")) ally_Ondu_Cleric(c);
-
 	}
 
 	private static boolean showAllyDialog(Card c) {
@@ -3364,118 +3358,6 @@ public class GameActionUtil {
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append(c.getName()).append(" - Ally: gets a +1/+1 counter.");
-		ability.setStackDescription(sb.toString());
-
-		if(c.getController().equals(AllZone.HumanPlayer)) {
-			if(showAllyDialog(c)) AllZone.Stack.add(ability);
-		}
-
-		else if(c.getController().equals(AllZone.ComputerPlayer)) AllZone.Stack.add(ability);
-	}
-
-	private static void ally_Turntimber_Ranger(Card c) {
-		final Card crd = c;
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", crd.getController(), "G", new String[] {"Creature", "Wolf"}, 2, 2,
-						new String[] {""});
-				crd.addCounter(Counters.P1P1, 1);
-			}
-		};
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append(c.getName()).append(" - Ally: ").append(c.getController());
-		sb.append(" puts a 2/2 green Wolf creature token onto the battlefield, and adds a +1/+1 on ");
-		sb.append(c.getName()).append(".");
-		ability.setStackDescription(sb.toString());
-
-		if(c.getController().equals(AllZone.HumanPlayer)) {
-			if(showAllyDialog(c)) AllZone.Stack.add(ability);
-		}
-
-		else if(c.getController().equals(AllZone.ComputerPlayer)) {
-
-			PlayerZone cPlay = AllZone.Computer_Battlefield;
-			CardList list = new CardList();
-			list.addAll(cPlay.getCards());
-
-			CardList cl = list.filter(new CardListFilter() {
-				public boolean addCard(Card crd) {
-					return crd.getName().equals("Conspiracy") && crd.getChosenType().equals("Ally");
-				}
-			});
-
-			list = list.getName("Wolf");
-
-			if((list.size() > 15 && cl.size() > 0)) ;
-			else AllZone.Stack.add(ability);
-		}
-	}
-
-	private static void ally_BoostUntilEOT(Card c, String k) {
-		final Card crd = c;
-		final String keyword = k;
-
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, crd.getController());
-				CardList list = new CardList(play.getCards());
-				list = list.getType("Ally");
-
-				final CardList allies = list;
-
-				final Command untilEOT = new Command() {
-
-					private static final long serialVersionUID = -8434529949884582940L;
-
-					public void execute() {
-						for(Card creat:allies) {
-							if(AllZone.GameAction.isCardInPlay(creat)) {
-								creat.removeExtrinsicKeyword(keyword);
-							}
-						}
-					}
-				};//Command
-
-				for(Card creat:allies) {
-					if(AllZone.GameAction.isCardInPlay(creat)) {
-						creat.addExtrinsicKeyword(keyword);
-					}
-				}
-				AllZone.EndOfTurn.addUntil(untilEOT);
-
-			}
-		};
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append(c.getName()).append(" - Ally: Ally creatures you control gain ");
-		sb.append(keyword).append(" until end of turn.");
-		ability.setStackDescription(sb.toString());
-
-		if(c.getController().equals(AllZone.HumanPlayer)) {
-			if(showAllyDialog(c)) AllZone.Stack.add(ability);
-		}
-
-		else if(c.getController().equals(AllZone.ComputerPlayer)) AllZone.Stack.add(ability);
-	}
-
-	private static void ally_Ondu_Cleric(final Card c) {
-		final Card crd = c;
-
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, crd.getController());
-				CardList allies = new CardList(play.getCards());
-				allies = allies.getType("Ally");
-				crd.getController().gainLife(allies.size(), c);
-			}
-		};
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append(c.getName()).append(" - Ally: gain life equal to the number of allies you control.");
 		ability.setStackDescription(sb.toString());
 
 		if(c.getController().equals(AllZone.HumanPlayer)) {
