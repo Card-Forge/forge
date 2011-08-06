@@ -18862,9 +18862,8 @@ public class CardFactory_Creatures {
         }
         //**************END****************END***********************
         
-        
         //*************** START *********** START **************************
-        else if(cardName.equals("Borderland Ranger")) {
+        else if(cardName.equals("Borderland Ranger") || cardName.equals("Sylvan Ranger")) {
             
             final Ability ability = new Ability(card, "0") {
                 @Override
@@ -18903,16 +18902,18 @@ public class CardFactory_Creatures {
 				private static final long serialVersionUID = 7042012311958529153L;
 
 				public void execute() {
-                    ability.setStackDescription(card.getName()
-                            + " - search library for a basic land card and put it into your hand.");
+					StringBuffer sb = new StringBuffer();
+					sb.append(card.getName()).append(" - search library for a basic land card and put it into your hand.");
+					ability.setStackDescription(sb.toString());
+                    // ability.setStackDescription(card.getName()
+                    //         + " - search library for a basic land card and put it into your hand.");
                     AllZone.Stack.add(ability);
                 }
             };
             card.addComesIntoPlayCommand(fetchBasicLand);
-            
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Kazandu Tuskcaller"))
         {
         	final Ability_Tap ability = new Ability_Tap(card, "0") {
