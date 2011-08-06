@@ -2,7 +2,7 @@ Name:Opportunity
 ManaCost:4 U U
 Types:Instant
 Text:no text
-K:spDrawCardsTgt:4:Target player draws four cards.:Opportunity - Target player draws 4 cards.
+A:SP$Draw | Cost$ 4 U U | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player to draw four cards | SpellDescription$ Target player draws four cards.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opportunity.jpg
 End

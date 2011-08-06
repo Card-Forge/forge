@@ -2,7 +2,7 @@ Name:Jace's Ingenuity
 ManaCost:3 U U
 Types:Instant
 Text:no text
-K:spDrawCards:3:Draw three cards.:Jace's Ingenuity - draw 3 cards.
+A:SP$Draw | Cost$ 3 U U | NumCards$ 3 | SpellDescription$ Draw three cards.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jaces_ingenuity.jpg
 End
