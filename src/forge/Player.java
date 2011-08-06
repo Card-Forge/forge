@@ -370,7 +370,8 @@ public abstract class Player extends MyObservable{
     
     public Card getPlaneswalker() {
     	CardList c = AllZoneUtil.getPlayerTypeInPlay(this, "Planeswalker");
-    	return c.get(0);
+    	if(null != c && c.size() > 0) return c.get(0);
+    	else return null;
     }
 	
 	////////////////////////////////
