@@ -1,3 +1,50 @@
+Recumbent Bliss
+2 W
+Enchantment Aura
+Enchanted creature can't attack or block.
+Enchant creature
+enPumpCurse:CARDNAME can't attack or block.
+WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:Yes_No:ControllerUpkeep:At the beginning of your upkeep, you may gain 1 life.
+
+Harrier Griffin
+5 W
+Creature Griffin
+no text
+3/3
+Flying
+WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:TapPermanent:NormalInput/Creature:ASAP:No_Condition:ControllerUpkeep:At the beginning of your upkeep, tap target creature.
+
+Goblin War Wagon
+4
+Artifact Creature Juggernaut
+no text
+3/3
+CARDNAME doesn't untap during your untap step.
+WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:UntapPermanent:Self:ASAP:PayMana/2:ControllerUpkeep:At the beginning of your upkeep, you may pay {2}. If you do, untap Goblin War Wagon.
+
+Piranha Marsh
+no cost
+Land
+no text
+Piranha Marsh enters the battlefield tapped.
+WheneverKeyword:EntersBattleField:Self:Play:Damage/1:NormalInput/Player:ASAP:No_Condition:No Special Condition:When Piranha Marsh enters the battlefield, target player loses 1 life.
+tap: add B
+
+Kitsune Dawnblade
+4 W
+Creature Fox Samurai
+no text
+2/3
+Bushido 1
+WheneverKeyword:EntersBattleField:Self:Play:TapPermanent:NormalInput/Creature:ASAP:No_Condition:No Special Condition:When Kitsune Dawnblade enters the battlefield, you may tap target creature.
+
+Somnomancer
+1 UW
+Creature Kithkin Wizard
+no text
+2/1
+WheneverKeyword:EntersBattleField:Self:Play:TapPermanent:NormalInput/Creature:ASAP:No_Condition:No Special Condition:When Somnomancer enters the battlefield, you may tap target creature.
+
 Long-Forgotten Gohei
 3
 Artifact
