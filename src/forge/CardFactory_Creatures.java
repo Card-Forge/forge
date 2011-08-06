@@ -20227,6 +20227,50 @@ public class CardFactory_Creatures {
         	card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        //*************** START ********** START *************************
+        else if(cardName.equals("Niall Silvain")) {
+        	/*
+        	 * G G G G, Tap: Regenerate target creature.
+        	 */
+
+        	final String Tgts[] = {"Creature"};
+        	Target target = new Target("TgtV", "Select target creature.", Tgts);
+        	final Ability_Cost abCost = new Ability_Cost("G G G G T", card.getName(), true);
+
+        	final Card[] tgt = new Card[1];
+        	final Command untilEOT = new Command() {
+        		private static final long serialVersionUID = -3935745263639942311L;
+
+        		public void execute() {
+        			tgt[0].setShield(0);                    
+        		}
+        	};
+
+        	SpellAbility ability = new Ability_Activated(card, abCost, target) {
+        		private static final long serialVersionUID = -8962229818065931663L;
+
+        		@Override
+        		public void resolve() {
+        			tgt[0] = getTargetCard();
+        			tgt[0].addShield();
+        			AllZone.EndOfTurn.addUntil(untilEOT);
+        		}
+
+        		@Override
+        		public boolean canPlayAI() {
+        			return false;
+        		}
+
+        		@Override
+        		public boolean canPlay() {
+        			CardList creats = AllZoneUtil.getCreaturesInPlay();
+        			return creats.size() != 0 && super.canPlay();
+        		}
+        	};
+        	ability.setDescription(abCost+"Regenerate target creature.");
+        	card.addSpellAbility(ability); 
+        }//*************** END ************ END **************************
+        
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
