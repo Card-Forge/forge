@@ -389,9 +389,11 @@ public class AbilityFactory_Animate {
 				c.addType(r);
 		}
 		for(String k : keywords) {
+        	if(k.startsWith("HIDDEN"))
+        		c.addExtrinsicKeyword(k);
 			//this maybe should just blindly add since multiple instances of a keyword sometimes have effects
 			//practically, this shouldn't matter though, and will display more cleanly
-			if(!c.getIntrinsicKeyword().contains(k))
+        	else if(!c.getIntrinsicKeyword().contains(k))
 				c.addIntrinsicKeyword(k);	
 		}
 
@@ -412,6 +414,8 @@ public class AbilityFactory_Animate {
 		c.removeColor(colorDesc, c, false, timestamp);
 
 		for(String k : originalKeywords) {
+        	if(k.startsWith("HIDDEN"))
+        		c.removeExtrinsicKeyword(k);
 			//TODO - may want to look at saving off intrinsic and extrinsic separately and add back that way
 			c.removeIntrinsicKeyword(k);
 		}
