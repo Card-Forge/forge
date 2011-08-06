@@ -7506,7 +7506,7 @@ public class CardFactory_Creatures {
 	        card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
-        
+        /* Converteded to AF Trigger
         //*************** START *********** START **************************
         else if(cardName.equals("Symbiotic Wurm")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -7537,6 +7537,7 @@ public class CardFactory_Creatures {
             };
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
+        */
         
         /* Converteded to AF Trigger
         //*************** START *********** START **************************
