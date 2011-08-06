@@ -1,3 +1,10 @@
+Avatar of Woe
+6 B B
+Creature Avatar
+If there are ten or more creature cards total in all graveyards, Avatar of Woe costs 6 less to play.
+6/5
+Fear
+
 Akroma's Memorial
 7
 Legendary Artifact

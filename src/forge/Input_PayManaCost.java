@@ -17,15 +17,31 @@ public class Input_PayManaCost extends Input {
     
     //private final ArrayList<Card> tappedLand = new ArrayList<Card>();
     private final SpellAbility spell;
-    
+   
     public Input_PayManaCost(SpellAbility sa) {
         originalManaCost = sa.getManaCost();
-        originalCard = sa.getSourceCard();
-        
+        originalCard = sa.getSourceCard();     
         spell = sa;
+
+        if(originalCard.getName().equals("Avatar of Woe")){
+         String player = AllZone.Phase.getActivePlayer();
+         String opponent = AllZone.GameAction.getOpponent(player);
+           PlayerZone PlayerGraveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
+           CardList PlayerCreatureList = new CardList(PlayerGraveyard.getCards());
+           PlayerCreatureList = PlayerCreatureList.getType("Creature");
+         PlayerZone OpponentGraveyard = AllZone.getZone(Constant.Zone.Graveyard, opponent);
+           CardList OpponentCreatureList = new CardList(OpponentGraveyard.getCards());
+           OpponentCreatureList = OpponentCreatureList.getType("Creature");
+           if((PlayerCreatureList.size() + OpponentCreatureList.size()) >= 10) {
+            manaCost = new ManaCost("B B");   
+           } else {
+               manaCost = new ManaCost(sa.getManaCost());              
+           }
+        } else {
         manaCost = new ManaCost(sa.getManaCost());
+        }
     }
-    
+   
     private void resetManaCost() {
         manaCost = new ManaCost(originalManaCost);
     }

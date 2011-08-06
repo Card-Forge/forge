@@ -5968,24 +5968,24 @@ public class CardFactory_Creatures {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Visara the Dreadful")) {
+        else if(cardName.equals("Visara the Dreadful") || cardName.equals("Avatar of Woe")) {
             final Ability_Tap ability = new Ability_Tap(card) {
                 private static final long serialVersionUID = 6371765024236754171L;
-                
+               
                 @Override
                 public boolean canPlayAI() {
                     if(CardFactoryUtil.AI_doesCreatureAttack(card)) return false;
-                    
+                   
                     return CardFactoryUtil.AI_getHumanCreature(card, true).size() != 0;
                 }
-                
+               
                 @Override
                 public void chooseTargetAI() {
                     CardList creature = CardFactoryUtil.AI_getHumanCreature(card, true);
                     Card target = CardFactoryUtil.AI_getBestCreature(creature);
                     setTargetCard(target);
                 }
-                
+               
                 @Override
                 public void resolve() {
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
@@ -5996,7 +5996,7 @@ public class CardFactory_Creatures {
             };//SpellAbility
             card.addSpellAbility(ability);
             ability.setDescription("tap: Destroy target creature. It can't be regenerated");
-            
+           
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
         }//*************** END ************ END **************************
         

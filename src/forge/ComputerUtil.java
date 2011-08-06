@@ -153,34 +153,48 @@ public class ComputerUtil
        return true;
 
     CardList land = getAvailableMana();
-    
+   
     if(sa.getSourceCard().isLand() /*&& sa.isTapAbility()*/)
     {
-    	land.remove(sa.getSourceCard());
+       land.remove(sa.getSourceCard());
     }
-    
+    Card originalCard = sa.getSourceCard();
     ManaCost cost = new ManaCost(sa.getManaCost());
+    if(originalCard.getName().equals("Avatar of Woe")){
+      String player = AllZone.Phase.getActivePlayer();
+      String opponent = AllZone.GameAction.getOpponent(player);
+        PlayerZone PlayerGraveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
+        CardList PlayerCreatureList = new CardList(PlayerGraveyard.getCards());
+        PlayerCreatureList = PlayerCreatureList.getType("Creature");
+      PlayerZone OpponentGraveyard = AllZone.getZone(Constant.Zone.Graveyard, opponent);
+        CardList OpponentCreatureList = new CardList(OpponentGraveyard.getCards());
+        OpponentCreatureList = OpponentCreatureList.getType("Creature");
+        if((PlayerCreatureList.size() + OpponentCreatureList.size()) >= 10) {
+           ManaCost cost2 = new ManaCost("B B");
+           cost = cost2;
+        }
+    }   
     ArrayList<String> colors;
 
     for(int i = 0; i < land.size(); i++)
     {
       colors = getColors(land.get(i));
       int once = 0;
-      
+     
       for(int j =0; j < colors.size(); j++)
       {
-	      if(cost.isNeeded(colors.get(j)) && once == 0)
-	      { 
-	    	//System.out.println(j + " color:" +colors.get(j));
-	        cost.subtractMana(colors.get(j));
-	        //System.out.println("thinking, I just subtracted " + colors.get(j) + ", cost is now: " + cost.toString());
-	        once++;
-	      }
+         if(cost.isNeeded(colors.get(j)) && once == 0)
+         {
+          //System.out.println(j + " color:" +colors.get(j));
+           cost.subtractMana(colors.get(j));
+           //System.out.println("thinking, I just subtracted " + colors.get(j) + ", cost is now: " + cost.toString());
+           once++;
+         }
 
-	      if(cost.isPaid()) {
-	    	  //System.out.println("Cost is paid.");
-	    	  return true;
-	      }
+         if(cost.isPaid()) {
+            //System.out.println("Cost is paid.");
+            return true;
+         }
       }
     }
     return false;
@@ -224,32 +238,47 @@ public class ComputerUtil
        return;
 
     CardList land = getAvailableMana();
-    
+   
     //this is to prevent errors for land cards that have abilities that cost mana.
     if(sa.getSourceCard().isLand() /*&& sa.isTapAbility()*/)
     {
-    	land.remove(sa.getSourceCard());
+       land.remove(sa.getSourceCard());
     }
-    
+   
+    Card originalCard = sa.getSourceCard();
     ManaCost cost = new ManaCost(sa.getManaCost());
+    if(originalCard.getName().equals("Avatar of Woe")){
+      String player = AllZone.Phase.getActivePlayer();
+      String opponent = AllZone.GameAction.getOpponent(player);
+        PlayerZone PlayerGraveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
+        CardList PlayerCreatureList = new CardList(PlayerGraveyard.getCards());
+        PlayerCreatureList = PlayerCreatureList.getType("Creature");
+      PlayerZone OpponentGraveyard = AllZone.getZone(Constant.Zone.Graveyard, opponent);
+        CardList OpponentCreatureList = new CardList(OpponentGraveyard.getCards());
+        OpponentCreatureList = OpponentCreatureList.getType("Creature");
+        if((PlayerCreatureList.size() + OpponentCreatureList.size()) >= 10) {
+           ManaCost cost2 = new ManaCost("B B");
+           cost = cost2;
+        }
+    }
     ArrayList<String> colors;
 
     for(int i = 0; i < land.size(); i++)
     {
-    	colors = getColors(land.get(i));
-		for(int j = 0; j <colors.size();j++)
-		{
-			if(cost.isNeeded(colors.get(j)) && land.get(i).isUntapped())
-			{
-				land.get(i).tap();
-				cost.subtractMana(colors.get(j));
-				//System.out.println("just subtracted " + colors.get(j) + ", cost is now: " + cost.toString());
+       colors = getColors(land.get(i));
+      for(int j = 0; j <colors.size();j++)
+      {
+         if(cost.isNeeded(colors.get(j)) && land.get(i).isUntapped())
+         {
+            land.get(i).tap();
+            cost.subtractMana(colors.get(j));
+            //System.out.println("just subtracted " + colors.get(j) + ", cost is now: " + cost.toString());
 
-			}
-			if(cost.isPaid())
-				break;
-		}
-      
+         }
+         if(cost.isPaid())
+            break;
+      }
+     
     }
     if(! cost.isPaid())
       throw new RuntimeException("ComputerUtil : payManaCost() cost was not paid for " + sa.getSourceCard().getName());
