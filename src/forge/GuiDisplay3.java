@@ -83,17 +83,9 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
     Font                      statFont         = new Font("Dialog", Font.PLAIN, 12);
     Font                      lifeFont         = new Font("Dialog", Font.PLAIN, 40);
     Font                      checkboxFont     = new Font("Dialog", Font.PLAIN, 9);
+
     
-    /*
-    public Color c1 = new Color(112,112,112);
-    public Color c2 = new Color(50,50,50);
-    public Color c3 = new Color(204,204,204);
-    */
-    //private int count = 0;
-    
-    public static Color       c1               = new Color(204, 204, 204);
-    public static Color       c2               = new Color(204, 204, 204);
-    public static Color       c3               = new Color(0, 164, 0);
+    public static Color       greenColor               = new Color(0, 164, 0);
     
     private Action            HUMAN_GRAVEYARD_ACTION;
     private Action            HUMAN_REMOVED_ACTION;
@@ -591,7 +583,6 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
                     p.add(panel);
                 }
                 
-                p.setBackground(c2);
                 p.revalidate();
                 p.repaint();
             }
@@ -607,7 +598,6 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
                 p.removeAll();
                 
                 GuiDisplayUtil.setupLandPanel(p, AllZone.Human_Play.getCards());
-                p.setBackground(c2);
                 p.revalidate();
                 p.repaint();
             }
@@ -624,7 +614,6 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
                 p.removeAll();
                 
                 GuiDisplayUtil.setupNoLandPanel(p, AllZone.Human_Play.getCards());
-                p.setBackground(c2);
                 p.revalidate();
                 p.repaint();
             }
@@ -642,7 +631,6 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
                 
                 GuiDisplayUtil.setupNoLandPanel(p, AllZone.Computer_Play.getCards());
                 
-                p.setBackground(c2);
                 p.revalidate();
                 p.repaint();
             }
@@ -658,7 +646,6 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
                 p.removeAll();
                 
                 GuiDisplayUtil.setupLandPanel(p, AllZone.Computer_Play.getCards());
-                p.setBackground(c2);
                 p.revalidate();
                 p.repaint();
             }
@@ -807,7 +794,6 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
         //if(okButton.isEnabled())
         //okButton.doClick();
         JPanel yesNoPanel = new JPanel(new FlowLayout());
-        yesNoPanel.setBackground(c1);
         yesNoPanel.setBorder(new EtchedBorder());
         yesNoPanel.add(cancelButton);
         yesNoPanel.add(okButton);
@@ -824,7 +810,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
         //oppLifeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
         //oppPCLabel.setHorizontalAlignment(SwingConstants.TOP);
-        oppPCLabel.setForeground(c3);
+        oppPCLabel.setForeground(greenColor);
         
         JLabel oppHandLabel = new JLabel(ForgeProps.getLocalized(COMPUTER_HAND.TITLE), SwingConstants.TRAILING);
         if(!Gui_NewGame.useLAFFonts.isSelected()) oppHandLabel.setFont(statFont);
@@ -861,17 +847,14 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
         oppNumbersPanel.add(oppLibraryValue);
         oppNumbersPanel.add(gravePanel);
         oppNumbersPanel.add(oppGraveValue);
-        oppNumbersPanel.setBackground(c1);
         
         oppLifeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
         JPanel oppIconLifePanel = new JPanel(new GridLayout(0, 1, 0, 0));
         oppIconLifePanel.add(oppIconLabel);
         oppIconLifePanel.add(oppLifeLabel);
-        oppIconLifePanel.setBackground(c1);
         
         JPanel oppPanel = new JPanel();
-        oppPanel.setBackground(c1);
         oppPanel.setBorder(new TitledBorder(new EtchedBorder(), ForgeProps.getLocalized(COMPUTER_TITLE)));
         oppPanel.setLayout(new BorderLayout());
         oppPanel.add(oppNumbersPanel, BorderLayout.WEST);
@@ -891,10 +874,8 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
         combatArea.setEditable(false);
         combatArea.setLineWrap(true);
         combatArea.setWrapStyleWord(true);
-        combatArea.setBackground(c1);
         
         JScrollPane combatPane = new JScrollPane(combatArea);
-        combatPane.setBackground(c1);
         
         combatPane.setBorder(new TitledBorder(new EtchedBorder(), ForgeProps.getLocalized(COMBAT)));
         pane.add(new ExternalPanel(combatPane), "combat");
@@ -904,7 +885,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
         //int fontSize = 12;
         playerLifeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
-        playerPCLabel.setForeground(c3);
+        playerPCLabel.setForeground(greenColor);
         
         JLabel playerLibraryLabel = new JLabel(ForgeProps.getLocalized(HUMAN_LIBRARY.TITLE),
                 SwingConstants.TRAILING);
@@ -959,10 +940,8 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
         playerNumbersPanel.add(playerGraveValue);
         playerNumbersPanel.add(playerFBPanel);
         playerNumbersPanel.add(playerFBValue);
-        playerNumbersPanel.setBackground(c1);
         
         JPanel playerPanel = new JPanel();
-        playerPanel.setBackground(c1);
         playerPanel.setBorder(new TitledBorder(new EtchedBorder(), ForgeProps.getLocalized(HUMAN_TITLE)));
         playerPanel.setLayout(new BorderLayout());
         playerPanel.add(playerNumbersPanel, BorderLayout.WEST);

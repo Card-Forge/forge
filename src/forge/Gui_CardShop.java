@@ -427,7 +427,6 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
         this.getContentPane().setLayout(null);
         jScrollPane1.setBorder(titledBorder1);
         jScrollPane1.setBounds(new Rectangle(19, 20, 726, 346));
-        jScrollPane2.getViewport().setBackground(new Color(204, 204, 204));
         jScrollPane2.setBorder(titledBorder2);
         jScrollPane2.setBounds(new Rectangle(19, 458, 726, 218));
         sellButton.setBounds(new Rectangle(180, 403, 146, 49));

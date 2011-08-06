@@ -242,7 +242,6 @@ public class GUI_ImportPicture extends JDialog implements NewConstants {
     private JCheckBox getJCheckBox() {
         if(jCheckBox == null) {
             jCheckBox = new JCheckBox();
-            jCheckBox.setBackground(new Color(204, 204, 204));
             jCheckBox.setSelected(false);
             jCheckBox.setText("Overwriting picture in resource folder");
             jCheckBox.addMouseListener(new java.awt.event.MouseAdapter() {

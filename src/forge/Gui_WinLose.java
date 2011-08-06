@@ -20,6 +20,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import net.miginfocom.swing.MigLayout;
+
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -171,23 +173,19 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         titleLabel.setFont(new java.awt.Font("Dialog", 0, 26));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setText("You Won");
-        titleLabel.setBounds(new Rectangle(-4, 0, 198, 60));
-        this.getContentPane().setLayout(null);
-        continueButton.setBounds(new Rectangle(22, 21, 123, 30));
+        this.getContentPane().setLayout(new MigLayout("fill"));
         continueButton.setText("Continue Match");
         continueButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 continueButton_actionPerformed(e);
             }
         });
-        restartButton.setBounds(new Rectangle(22, 90, 123, 30));
         restartButton.setText("Restart Match");
         restartButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 restartButton_actionPerformed(e);
             }
         });
-        quitButton.setBounds(new Rectangle(22, 158, 123, 30));
         quitButton.setText("Quit Match");
         quitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -196,23 +194,21 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         });
         statsLabel.setFont(new java.awt.Font("Dialog", 0, 16));
         statsLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        statsLabel.setText("Wins 2, Lost 1");
-        statsLabel.setBounds(new Rectangle(12, 59, 170, 30));
         jPanel2.setBorder(BorderFactory.createLineBorder(Color.black));
-        jPanel2.setBounds(new Rectangle(20, 104, 166, 217));
-        jPanel2.setLayout(null);
+        jPanel2.setLayout(new MigLayout("align center"));
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 this_windowClosing(e);
             }
         });
-        this.getContentPane().add(statsLabel, null);
-        this.getContentPane().add(jPanel2, null);
-        jPanel2.add(continueButton, null);
-        jPanel2.add(quitButton, null);
-        jPanel2.add(restartButton, null);
-        this.getContentPane().add(titleLabel, null);
+        this.getContentPane().add(titleLabel, "align center, grow, wrap");
+        this.getContentPane().add(statsLabel, "align center, grow, wrap");
+        this.getContentPane().add(jPanel2, "grow");
+        jPanel2.add(continueButton, "sg buttons, w 80%, h 20%, wrap");
+        jPanel2.add(quitButton, "sg buttons, wrap");
+        jPanel2.add(restartButton, "sg buttons");
+        
     }
     
     void editDeckButton_actionPerformed(ActionEvent e) {
