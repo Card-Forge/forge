@@ -163,12 +163,6 @@ public class Phase extends MyObservable
         final Player turn = AllZone.Phase.getPlayerTurn();
         AllZone.Phase.setSkipPhase(true);
 
-        //Run triggers
-        HashMap<String,Object> runParams = new HashMap<String,Object>();
-		runParams.put("Phase", phase);
-		runParams.put("Player", turn);
-		AllZone.TriggerHandler.runTrigger("Phase", runParams);
-        
         if(phase.equals(Constant.Phase.Untap)) {
             PhaseUtil.handleUntap();
 	    }
@@ -294,6 +288,15 @@ public class Phase extends MyObservable
 	    	AllZone.HumanPlayer.resetNumDrawnThisTurn();
 	    	AllZone.ComputerPlayer.resetNumDrawnThisTurn();
 	    }
+        
+        if (!AllZone.Phase.isNeedToNextPhase()){
+            // Run triggers if phase isn't being skipped
+            HashMap<String,Object> runParams = new HashMap<String,Object>();
+    		runParams.put("Phase", phase);
+    		runParams.put("Player", turn);
+    		AllZone.TriggerHandler.runTrigger("Phase", runParams);
+            
+        }
         
         //This line fixes Combat Damage triggers not going off when they should
         AllZone.Stack.unfreezeStack();
