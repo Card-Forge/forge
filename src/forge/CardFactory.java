@@ -478,7 +478,11 @@ public class CardFactory implements NewConstants {
         					}
         				}
         				else if(RestrictionID.equals("Targets"))
-        				{        					
+        				{        		
+							if(sa.getTargetCard() == null)
+							{
+								return false;
+							}
         					for(int p=0;p<SplitParameters.length;p++)
         					{
         						System.out.println("Parameter: " + SplitParameters[p]);
