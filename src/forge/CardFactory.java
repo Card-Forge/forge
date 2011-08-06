@@ -6592,28 +6592,6 @@ public class CardFactory implements NewConstants {
 
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Time Vault")) {
-        	final Ability_Cost abCost = new Ability_Cost("T", cardName, true);
-
-        	final Ability_Activated ability = new Ability_Activated(card, abCost, null){
-                private static final long serialVersionUID = 5784473766585071504L;
-
-                @Override
-                public void resolve() {
-                    AllZone.Phase.addExtraTurn(card.getController());
-                }
-            };
-            card.addSpellAbility(ability);
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" - take an extra turn after this one.");
-            ability.setStackDescription(sb.toString());
-            
-            ability.setDescription("Tap: Take an extra turn after this one.");
-        }//*************** END ************ END **************************
-                 
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Illusions of Grandeur")) {
             final SpellAbility gainLife = new Ability(card, "0") {
                 @Override
