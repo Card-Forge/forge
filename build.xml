@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="Forge">
+    <property name="target" value="1.5"/>
+    <property name="source" value="1.5"/>
+    <path id="Forge.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="res/lib/napkinlaf-1.2.jar"/>
+        <pathelement location="res/lib/nimrodlf.jar"/>
+        <pathelement location="res/lib/substance.jar"/>
+        <pathelement location="res/lib/java-image-scaling-0.8.4.jar"/>
+        <pathelement location="res/lib/google-collections-1.0.jar"/>
+        <pathelement location="res/lib/miglayout-3.7.3.1-swing.jar"/>
+        <pathelement location="res/lib/jl1.0.1.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="init" name="build">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac destdir="bin" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="Forge.classpath"/>
+        </javac>
+    </target>
+    <target name="Forge">
+        <java classname="forge.Gui_NewGame" failonerror="true" fork="yes">
+            <classpath refid="Forge.classpath"/>
+        </java>
+    </target>
+</project>

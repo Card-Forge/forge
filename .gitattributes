@@ -2,6 +2,7 @@
 /.classpath -text
 /.project -text
 .settings/org.eclipse.jdt.core.prefs -text
+/build.xml -text svneol=native#text/xml
 build/forge.ico -text svneol=unset#image/ico
 build/forge.jardesc -text
 build/forge.xml svneol=native#text/xml
