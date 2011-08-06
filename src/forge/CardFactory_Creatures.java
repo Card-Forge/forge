@@ -17672,6 +17672,27 @@ public class CardFactory_Creatures {
         	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Sage Owl")) {
+        	final SpellAbility ability = new Ability(card, "0") {
+        		@Override
+        		public void resolve() {
+        			if(card.getController().equals(Constant.Player.Human)) {
+        				AllZoneUtil.rearrangeTopOfLibrary(card.getController(), 4, false);
+        			}
+        		}//resolve()
+        	};//SpellAbility
+        	Command intoPlay = new Command() {
+        		private static final long serialVersionUID = 4757054648163014149L;
+
+        		public void execute() {
+        			AllZone.Stack.add(ability);
+        		}
+        	};
+        	ability.setStackDescription(cardName + " - Rearrange the top 4 cards in your library in any order.");
+        	card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(shouldCycle(card) != -1) {

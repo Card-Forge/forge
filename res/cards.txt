@@ -1,3 +1,10 @@
+Sage Owl
+1 U
+Creature Bird
+When Sage Owl enters the battlefield, look at the top four cards of your library, then put them back in any order.
+1/1
+Flying
+
 Ponder
 U
 Sorcery
