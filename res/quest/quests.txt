@@ -138,4 +138,14 @@ Four random rares
 250
 noIcon
 
+15
+Don't Play With Matches
+The goblins are battling the elves. Those pesky elves, will they ever learn. Do not play with fire!
+Hard
+Not Repeatable
+50
+Four red rares
+200
+noIcon
+
 End

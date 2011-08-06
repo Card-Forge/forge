@@ -445,6 +445,24 @@ public class QuestUtil {
 			
 			qa.setCardRewardList(pack.getRare(4));
 		}
+		else if (id == 15)  // Don't Play With Matches
+		{
+			CardList humanList = new CardList();
+			String cardsInPlay[] = {"Mudbutton Torchrunner", "Scuzzback Scrapper"};
+			
+			for (int i = 0; i < 2; i ++)
+			{
+				Card c = AllZone.CardFactory.getCard(cardsInPlay[i], Constant.Player.Human);
+				humanList.add(c);
+			}
+			qa.setHuman(humanList);
+			
+			qa.addCompy("Heedless One");
+			qa.addCompy("Norwood Archers");
+			qa.addCompy("Wildslayer Elves");
+			
+			qa.setCardRewardList(pack.getRare(4, 5));
+		}
 			
 	}
 	
