@@ -1,3 +1,23 @@
+Strength of Isolation
+1 W
+Enchantment Aura
+Enchanted creature gets +1/+2 and has protection from black.
+Enchant creature
+enPump:+1/+2/Protection from black
+Madness:W
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_isolation.jpg
+
+Strength of Lunacy
+1 B
+Enchantment Aura
+Enchanted creature gets +2/+1 and has protection from white.
+Enchant creature
+enPump:+2/+1/Protection from white
+Madness:B
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_lunacy.jpg
+
 Obsessive Search
 U
 Instant
