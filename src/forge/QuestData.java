@@ -55,6 +55,8 @@ public class QuestData implements NewConstants {
     private int 				  plantLevel;
     private int					  wolfPetLevel;
     private int					  crocPetLevel;
+    private int 				  birdPetLevel;
+    private int					  houndPetLevel;
     
     private String			      selectedPet;
     
@@ -261,6 +263,8 @@ public class QuestData implements NewConstants {
             data.plantLevel = state.plantLevel;
             data.wolfPetLevel = state.wolfPetLevel;
             data.crocPetLevel = state.crocPetLevel;
+            data.birdPetLevel = state.birdPetLevel;
+            data.houndPetLevel = state.houndPetLevel;
             data.selectedPet  = state.selectedPet;
             data.life = state.life;
             data.estatesLevel = state.estatesLevel;
@@ -667,6 +671,26 @@ public class QuestData implements NewConstants {
     	return crocPetLevel;
     }
     
+    public void addBirdPetLevel()
+    {
+    	birdPetLevel++;
+    }
+    
+    public int getBirdPetLevel()
+    {
+    	return birdPetLevel;
+    }
+    
+    public void addHoundPetLevel()
+    {
+    	houndPetLevel++;
+    }
+    
+    public int getHoundPetLevel()
+    {
+    	return houndPetLevel;
+    }
+    
     public void setSelectedPet(String s)
     {
     	selectedPet = s;
@@ -858,6 +882,8 @@ public class QuestData implements NewConstants {
             state.plantLevel = q.plantLevel;
             state.wolfPetLevel = q.wolfPetLevel;
             state.crocPetLevel = q.crocPetLevel;
+            state.birdPetLevel = q.birdPetLevel;
+            state.houndPetLevel = q.houndPetLevel;
             state.selectedPet = q.selectedPet;
             state.life = q.life;
             state.estatesLevel = q.estatesLevel;

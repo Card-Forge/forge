@@ -43,6 +43,10 @@ public class QuestUtil {
 				list.add(getWolfPetToken(qd.getWolfPetLevel()));
 			else if (qd.getSelectedPet().equals("Croc") && qd.getCrocPetLevel() > 0)
 				list.add(getCrocPetToken(qd.getCrocPetLevel()));
+			else if (qd.getSelectedPet().equals("Bird") && qd.getBirdPetLevel() > 0)
+				list.add(getBirdPetToken(qd.getBirdPetLevel()));
+			else if (qd.getSelectedPet().equals("Hound") && qd.getHoundPetLevel() > 0)
+				list.add(getHoundPetToken(qd.getHoundPetLevel()));
 		}
 		
 		if (qd.getPlantLevel() > 0) 
@@ -270,6 +274,123 @@ public class QuestUtil {
         return c;
 	}//getCrocPetToken
 	
+	public static Card getBirdPetToken(int level)
+	{
+		String imageName = "";
+		int baseAttack = 0;
+		int baseDefense = 0;
+		
+		if (level == 1)
+		{
+			imageName = "W 0 1 Bird Pet";
+			baseDefense = 1;
+			baseAttack = 0;
+		}
+		else if (level == 2)
+		{
+			imageName = "W 1 1 Bird Pet";
+			baseDefense = 1;
+			baseAttack = 1;
+		}
+		else if (level == 3)
+		{
+			imageName = "W 2 1 Bird Pet";
+			baseDefense = 1;
+			baseAttack = 2;
+		}
+		else if (level == 4)
+		{
+			imageName = "W 2 1 Bird Pet First Strike";
+			baseDefense = 1;
+			baseAttack = 2;
+		}
+		
+
+        Card c = new Card();
+        c.setName("Bird Pet");
+        
+        c.setImageName(imageName);
+        
+        c.setController(Constant.Player.Human);
+        c.setOwner(Constant.Player.Human);
+        
+        c.setManaCost("W");
+        c.setToken(true);
+
+        c.addType("Creature");
+        c.addType("Bird");
+        c.addType("Pet");
+        
+        c.addIntrinsicKeyword("Flying");
+        
+        if (level >= 4)
+        	c.addIntrinsicKeyword("First Strike");
+        
+        c.setBaseAttack(baseAttack);
+        c.setBaseDefense(baseDefense);
+        
+        return c;
+	}
+	
+	public static Card getHoundPetToken(int level)
+	{
+		String imageName = "";
+		int baseAttack = 0;
+		int baseDefense = 0;
+		
+		if (level == 1)
+		{
+			imageName = "R 1 1 Hound Pet";
+			baseDefense = 1;
+			baseAttack = 0;
+		}
+		else if (level == 2)
+		{
+			imageName = "R 1 1 Hound Pet Haste";
+			baseDefense = 1;
+			baseAttack = 1;
+		}
+		else if (level == 3)
+		{
+			imageName = "R 2 1 Hound Pet";
+			baseDefense = 1;
+			baseAttack = 2;
+		}
+		else if (level == 4)
+		{
+			imageName = "R 2 1 Hound Pet Alone";
+			baseDefense = 1;
+			baseAttack = 2;
+		}
+		
+
+        Card c = new Card();
+        c.setName("Hound Pet");
+        
+        c.setImageName(imageName);
+        
+        c.setController(Constant.Player.Human);
+        c.setOwner(Constant.Player.Human);
+        
+        c.setManaCost("R");
+        c.setToken(true);
+
+        c.addType("Creature");
+        c.addType("Hound");
+        c.addType("Pet");
+        
+        if (level >= 2)
+        	c.addIntrinsicKeyword("Haste");
+        
+        if (level >= 4)
+        	c.addIntrinsicKeyword("Whenever this creature attacks alone, it gets +2/+0 until end of turn.");
+        
+        c.setBaseAttack(baseAttack);
+        c.setBaseDefense(baseDefense);
+        
+        return c;
+	}
+	
 	public static ArrayList<String> getPetNames(QuestData questData)
 	{
 		ArrayList<String> list = new ArrayList<String>();
@@ -277,6 +398,11 @@ public class QuestUtil {
 			list.add("Wolf");
 		if (questData.getCrocPetLevel() > 0)
 			list.add("Croc");
+		if (questData.getBirdPetLevel() > 0)
+			list.add("Bird");
+		if (questData.getHoundPetLevel() > 0)
+			list.add("Hound");
+		
 		return list;
 	}
 	
@@ -313,6 +439,9 @@ public class QuestUtil {
 		
 		else if (id == 2) //Blue Dungeon
 		{
+			for (int i=0;i<3;i++)
+				qa.addCompy("Merfolk of the Pearl Trident");
+			
 			qa.setCardRewardList(pack.getRare(3, 3));
 		}
 		
@@ -323,6 +452,9 @@ public class QuestUtil {
 		
 		else if (id == 4) //Red Dungeon
 		{
+			for (int i=0;i<3;i++)
+				qa.addCompy("Mons's Goblin Raiders");
+			
 			qa.setCardRewardList(pack.getRare(3, 5));
 		}
 		

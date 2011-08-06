@@ -262,7 +262,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         smoothLandCheckBox.setText("Stack AI land");
         smoothLandCheckBox.setBounds(new Rectangle(65, 62, 153, 21));
         //smoothLandCheckBox.setSelected(true);
-        resizeCheckbox.setText("Resizable Game Area");
+        resizeCheckbox.setText("New GUI");
         resizeCheckbox.setBounds(new Rectangle(65, 28, 165, 24));
         millLoseCheckBox.setText("Milling = Loss Condition");
         millLoseCheckBox.setBounds(new Rectangle(65, 94, 190, 25));
@@ -579,7 +579,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Samantha Stephens 3	hard	Sloth' Painter's Servant Grindstone deck, an interesting combo");
         sb.append("\r\n");
-	  sb.append("Saruman 3		hard	Sloth' Discard deck with Megrim, Liliana's Caress and Burning Inquiry ");
+        sb.append("Saruman 3		hard	Sloth' Discard deck with Megrim, Liliana's Caress and Burning Inquiry ");
         sb.append("\r\n");
         sb.append("Scooby Doo 3   	hard   	Rares' Red deck, Dragonmaster Outcast, Rakdos Pit Dragon, Kamahl, Pit Fighter");
         sb.append("\r\n");
@@ -643,7 +643,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
     	File file = new File(base, "notesIcon.png");
     	ImageIcon icon = new ImageIcon(file.toString());
             
-        JTextArea area = new JTextArea(sb.toString(), 35, 70);
+        JTextArea area = new JTextArea(sb.toString(), 35, 120);
         area.setWrapStyleWord(true);
         area.setLineWrap(true);
         area.setEditable(false);

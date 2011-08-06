@@ -140,11 +140,67 @@ public class Gui_PetShop extends JFrame implements NewConstants{
     			sb.append("Gives Swampwalk to your croc.<br>");
         		sb.append("<u><b>Level 4</b></u>: 3/1 Swampwalk<br>");
     		}
+    		/*
     		else if (questData.getCrocPetLevel() >= 4)
     		{
     			sb.append("Croc Level Maxed out.<br>");
     		}
-    	}
+    		*/
+
+    		else if (questData.getBirdPetLevel() == 0)
+    		{
+    			sb.append("Unmatched in speed, agility and awareness,<br>");
+    			sb.append("this trained hawk makes a fantastic hunter.<br><br>");
+        		sb.append("<u><b>Level 1</b></u>: 0/1 Flying<br>");
+        		sb.append("<u><b>Next Level</b></u>: 1/1<br>");
+        		sb.append("<u><b>Can learn</b></u>: First strike");
+    		}
+    		else if (questData.getBirdPetLevel() == 1)
+    		{
+    			sb.append("Improve the attack power of your bird.<br>");
+        		sb.append("<u><b>Level 2</b></u>: 1/1<br>");
+        		sb.append("<u><b>Next Level</b></u>: 2/1 <br>");
+        		sb.append("<u><b>Can learn</b></u>: First strike");
+    		}
+    		else if (questData.getBirdPetLevel() == 2)
+    		{
+    			sb.append("Improve the attack power of your bird.<br>");
+        		sb.append("<u><b>Level 3</b></u>: 2/1<br>");
+        		sb.append("<u><b>Next Level</b></u>: 2/1 First strike<br>");
+    		}
+    		else if (questData.getBirdPetLevel() == 3)
+    		{
+    			sb.append("Gives First strike to your bird.<br>");
+        		sb.append("<u><b>Level 4</b></u>: 2/1 First strike<br>");
+    		}
+    		else if (questData.getHoundPetLevel() == 0)
+    		{
+    			sb.append("Dogs are said to be man's best friend.<br>");
+    			sb.append("Definitely not this one.<br><br>");
+        		sb.append("<u><b>Level 1</b></u>: 1/1<br>");
+        		sb.append("<u><b>Next Level</b></u>: 1/1 Haste<br>");
+        		sb.append("<u><b>Can learn</b></u>: Whenever this creature attacks alone,<br> it gets +2/+0 until end of turn.");
+    		}
+    		else if (questData.getHoundPetLevel() == 1)
+    		{
+    			sb.append("Gives haste to your hound.<br>");
+        		sb.append("<u><b>Level 2</b></u>: 1/1 Haste<br>");
+        		sb.append("<u><b>Next Level</b></u>: 2/1 Haste<br>");
+        		sb.append("<u><b>Can learn</b></u>: Whenever this creature attacks alone,<br> it gets +2/+0 until end of turn.");
+    		}
+    		else if (questData.getHoundPetLevel() == 2)
+    		{
+    			sb.append("Improve the attack power of your hound.<br>");
+        		sb.append("<u><b>Level 3</b></u>: 2/1 Haste<br>");
+        		sb.append("<u><b>Next Level</b></u>: 2/1 Whenever this creature attacks<br> alone, it gets +2/+0 until end of turn.<br>");
+    		}
+    		else if (questData.getHoundPetLevel() == 3)
+    		{
+    			sb.append("Greatly improves your hound's attack power if it<br> attacks alone.<br>");
+        		sb.append("<u><b>Level 4</b></u>: 2/1 Haste, whenever this creature attacks alone, it gets +2/+0 until end of turn.<br>");
+    		}
+    	}//wolfPetLevel >= 4
+    	
     	
     	sb.append("</html>");
     	return sb.toString();
@@ -171,6 +227,22 @@ public class Gui_PetShop extends JFrame implements NewConstants{
     			l = 450;
     		else if (questData.getCrocPetLevel() == 3)
     			l = 600;
+    		else if (questData.getBirdPetLevel() == 0)
+    			l = 200;
+    		else if (questData.getBirdPetLevel() == 1)
+    			l = 300;
+    		else if (questData.getBirdPetLevel() == 2)
+    			l = 450;
+    		else if (questData.getBirdPetLevel() == 3)
+    			l = 400;
+    		else if (questData.getHoundPetLevel() == 0)
+    			l = 200;
+    		else if (questData.getHoundPetLevel() == 1)
+    			l = 350;
+    		else if (questData.getHoundPetLevel() == 2)
+    			l = 450;
+    		else if (questData.getHoundPetLevel() == 3)
+    			l = 750;
     	}
     	return l;
     }
@@ -187,6 +259,20 @@ public class Gui_PetShop extends JFrame implements NewConstants{
     	else if (pet.equals("Croc"))
     	{
     		if (questData.getCrocPetLevel() == 0)
+	    		s = "Buy " + pet;
+	    	else
+	    		s = "Train " + pet;
+    	}
+    	else if (pet.equals("Bird"))
+    	{
+    		if (questData.getBirdPetLevel() == 0)
+	    		s = "Buy " + pet;
+	    	else
+	    		s = "Train " + pet;
+    	}
+    	else if (pet.equals("Hound"))
+    	{
+    		if (questData.getHoundPetLevel() == 0)
 	    		s = "Buy " + pet;
 	    	else
 	    		s = "Train " + pet;
@@ -208,7 +294,7 @@ public class Gui_PetShop extends JFrame implements NewConstants{
 	    	sb.append(" Wolf Pet (current level ");
 	    	sb.append(questData.getWolfPetLevel());
     	} //getWolfPetLevel < 4
-    	else if (questData.getCrocPetLevel() <= 4)
+    	else if (questData.getCrocPetLevel() < 4)
     	{
     		if (questData.getCrocPetLevel() == 1)
 	    		sb.append("1/1");
@@ -219,6 +305,30 @@ public class Gui_PetShop extends JFrame implements NewConstants{
 
 	    	sb.append(" Croc Pet (current level ");
 	    	sb.append(questData.getCrocPetLevel());
+    	}
+    	else if (questData.getBirdPetLevel() < 4)
+    	{
+    		if (questData.getBirdPetLevel() == 1)
+	    		sb.append("0/1");
+	    	else if (questData.getBirdPetLevel() == 2)
+	    		sb.append("1/1");
+	    	else if (questData.getBirdPetLevel() >= 3)
+	    		sb.append("2/1");
+
+	    	sb.append(" Bird Pet (current level ");
+	    	sb.append(questData.getBirdPetLevel());
+    	}
+    	else if (questData.getHoundPetLevel() <= 4)
+    	{
+    		if (questData.getHoundPetLevel() == 1)
+	    		sb.append("1/1");
+	    	else if (questData.getHoundPetLevel() == 2)
+	    		sb.append("1/1");
+	    	else if (questData.getHoundPetLevel() >= 3)
+	    		sb.append("2/1");
+
+	    	sb.append(" Hound Pet (current level ");
+	    	sb.append(questData.getHoundPetLevel());
     	}
     	
     	sb.append("/4)");
@@ -231,7 +341,8 @@ public class Gui_PetShop extends JFrame implements NewConstants{
     private String getImageString()
     {
     	String s = "";
-    	if (questData.getWolfPetLevel() < 4) {
+    	if (questData.getWolfPetLevel() < 4)
+    	{
 	    	if (questData.getWolfPetLevel() == 0)
 	    		s = "g_1_1_wolf_pet_small.jpg";
 	    	else if (questData.getWolfPetLevel() == 1)
@@ -251,6 +362,29 @@ public class Gui_PetShop extends JFrame implements NewConstants{
 	    		s = "b_3_1_crocodile_pet_small.jpg";
 	    	else if (questData.getCrocPetLevel() == 3)
 	    		s = "b_3_1_crocodile_pet_swampwalk_small.jpg";
+    	}
+    	else if (questData.getBirdPetLevel() < 4)
+    	{
+    		if (questData.getBirdPetLevel() == 0)
+	    		s = "w_0_1_bird_pet_small.jpg";
+	    	else if (questData.getBirdPetLevel() == 1)
+	    		s = "w_1_1_bird_pet_small.jpg";
+	    	else if (questData.getBirdPetLevel() == 2)
+	    		s = "w_2_1_bird_pet_small.jpg";
+	    	else if (questData.getBirdPetLevel() == 3)
+	    		s = "w_2_1_bird_pet_first_strike_small.jpg";
+    	}
+    	
+    	else if (questData.getHoundPetLevel() < 4)
+    	{
+    		if (questData.getHoundPetLevel() == 0)
+	    		s = "r_1_1_hound_pet_small.jpg";
+	    	else if (questData.getHoundPetLevel() == 1)
+	    		s = "r_1_1_hound_pet_haste_small.jpg";
+	    	else if (questData.getHoundPetLevel() == 2)
+	    		s = "r_2_1_hound_pet_small.jpg";
+	    	else if (questData.getHoundPetLevel() == 3)
+	    		s = "r_2_1_hound_pet_alone_small.jpg";
     	}
     	
     	return s;
@@ -289,9 +423,13 @@ public class Gui_PetShop extends JFrame implements NewConstants{
     		buyPetButton.setText(getButtonText("Wolf"));
     	else if (questData.getCrocPetLevel() < 4)
     		buyPetButton.setText(getButtonText("Croc"));
+    	else if (questData.getBirdPetLevel() < 4)
+    		buyPetButton.setText(getButtonText("Bird"));
+    	else if (questData.getHoundPetLevel() < 4)
+    		buyPetButton.setText(getButtonText("Hound"));
         
     	buyPetButton.setEnabled(true);
-    	if (questData.getCredits() < getPrice() || questData.getCrocPetLevel() >= 4)
+    	if (questData.getCredits() < getPrice() || questData.getHoundPetLevel() >= 4)
     		buyPetButton.setEnabled(false);
        
         quitButton.setBounds(new Rectangle(140, 297, 120, 50));
@@ -336,6 +474,10 @@ public class Gui_PetShop extends JFrame implements NewConstants{
     		questData.addWolfPetLevel();
     	else if (questData.getCrocPetLevel() < 4)
     		questData.addCrocPetLevel();
+    	else if (questData.getBirdPetLevel() < 4)
+    		questData.addBirdPetLevel();
+    	else if (questData.getHoundPetLevel() < 4)
+    		questData.addHoundPetLevel();
     		
     	QuestData.saveData(questData);
     	jbInit();
