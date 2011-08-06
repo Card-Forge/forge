@@ -3,7 +3,7 @@ ManaCost:5 W W
 Types:Creature Giant
 Text:no text
 PT:3/4
-K:Suspend 5:W
+K:Suspend:5:W
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When Ivory Giant enters the battlefield, tap all nonwhite creatures.
 SVar:TrigTapAll:AB$TapAll | Cost$ 0 | ValidCards$ Creature.nonWhite
 SVar:RemAIDeck:True
