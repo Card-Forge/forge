@@ -501,7 +501,6 @@ public class GameActionUtil {
 		playCard_Forced_Fruition(c);
 		playCard_Gelectrode(c);
 		playCard_Standstill(c);
-		playCard_SolKanar(c);
 		playCard_Reki(c);
 		playCard_Vedalken_Archmage(c);
 		playCard_Sigil_of_the_Empty_Throne(c);
@@ -2157,30 +2156,6 @@ public class GameActionUtil {
 			
 			AllZone.Stack.add(ability2);
 
-		}
-
-	}
-
-	public static void playCard_SolKanar(Card c) {
-		CardList list = AllZoneUtil.getCardsInPlay("Sol'kanar the Swamp King");
-
-		if(list.size() > 0 && c.isBlack()) {
-			final Card card = list.get(0);
-			final Player controller = card.getController();
-
-			Ability ability2 = new Ability(card, "0") {
-				@Override
-				public void resolve() {
-					controller.gainLife(1, card);
-				}
-			}; // ability2
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append(card.getName()).append(" - ").append(c.getController());
-			sb.append(" played a black spell, ").append(card.getController()).append(" gains 1 life.");
-			ability2.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability2);
 		}
 
 	}
