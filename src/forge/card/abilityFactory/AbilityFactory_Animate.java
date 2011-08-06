@@ -333,25 +333,24 @@ public class AbilityFactory_Animate {
 			final long timestamp = doAnimate(c, af, power, toughness, types, finalDesc, keywords);
 			
 			//give abilities
-			final ArrayList<SpellAbility> actualAbilities= new ArrayList<SpellAbility>();
+			final ArrayList<SpellAbility> addedAbilities= new ArrayList<SpellAbility>();
 			if(abilities.size() > 0){
 				for(String s : abilities) {
-					System.out.println("Adding ab "+s+" to: "+c);
 					String actualAbility = host.getSVar(s);
 					SpellAbility grantedAbility = af.getAbility(actualAbility, c);
-					actualAbilities.add(grantedAbility);
+					addedAbilities.add(grantedAbility);
 					c.addSpellAbility(grantedAbility);
 				}
 			}
 			
 			//Grant triggers
-			final ArrayList<Trigger> actualTriggers = new ArrayList<Trigger>();
+			final ArrayList<Trigger> addedTriggers = new ArrayList<Trigger>();
 			if(triggers.size() > 0) {
 				for(String s : triggers) {
 					String actualTrigger = host.getSVar(s);
-						Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c);
-						actualTriggers.add(c.addTrigger(parsedTrigger));
-						AllZone.TriggerHandler.registerTrigger(parsedTrigger);
+					Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c);
+					addedTriggers.add(c.addTrigger(parsedTrigger));
+					AllZone.TriggerHandler.registerTrigger(parsedTrigger);
 				}
 			}
 
@@ -359,7 +358,7 @@ public class AbilityFactory_Animate {
 				private static final long serialVersionUID = -5861759814760561373L;
 
 				public void execute() {
-					doUnanimate(c, origPower, origToughness, originalTypes, finalDesc, keywords, actualAbilities, actualTriggers, timestamp);
+					doUnanimate(c, origPower, origToughness, originalTypes, finalDesc, keywords, addedAbilities, addedTriggers, timestamp);
 				}
 			};
 
@@ -396,11 +395,11 @@ public class AbilityFactory_Animate {
 				c.addIntrinsicKeyword(k);	
 		}
 
-		long timestamp = c.addColor(colors, c, false, true);
+		long timestamp = c.addColor(colors, c, !af.getMapParams().containsKey("OverwriteColors"), true);		
 		return timestamp;
 	}
 
-	private static void doUnanimate(Card c, int originalPower, int originalToughness, ArrayList<String> originalTypes, String colorDesc, ArrayList<String> originalKeywords, ArrayList<SpellAbility> actualAbilities, ArrayList<Trigger> actualTriggers, long timestamp) {
+	private static void doUnanimate(Card c, int originalPower, int originalToughness, ArrayList<String> originalTypes, String colorDesc, ArrayList<String> originalKeywords, ArrayList<SpellAbility> actualAbilities, ArrayList<Trigger> addedTriggers, long timestamp) {
 		c.setBaseAttack(originalPower);
 		c.setBaseDefense(originalToughness);
 
@@ -409,6 +408,7 @@ public class AbilityFactory_Animate {
 			c.addType(type);
 		}
 
+		//TODO - this will have to handle adding back original colors
 		c.removeColor(colorDesc, c, false, timestamp);
 
 		for(String k : originalKeywords) {
@@ -420,7 +420,7 @@ public class AbilityFactory_Animate {
 			c.removeSpellAbility(sa);
 		}
 		
-		for(Trigger t : actualTriggers) {
+		for(Trigger t : addedTriggers) {
 			AllZone.TriggerHandler.removeRegisteredTrigger(t);
 			c.removeTrigger(t);
 		}
