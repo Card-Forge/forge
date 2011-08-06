@@ -20122,7 +20122,7 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	}; // Tolsimir
-
+	/*
 	public static Command Bad_Moon                    = new Command() {
 		private static final long serialVersionUID   = 7137954808896324237L;
 
@@ -20162,6 +20162,7 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	}; // Bad Moon
+	
 
 	public static Command Crusade                     = new Command() {
 		private static final long serialVersionUID   = 880902091818475216L;
@@ -20198,6 +20199,7 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	}; // Crusade
+	*/
 
 	public static Command Honor_of_the_Pure           = new Command() {
 
@@ -21031,8 +21033,8 @@ public class GameActionUtil {
 		commands.put("Time_of_Heroes", Time_of_Heroes);
 		commands.put("Glorious_Anthem", Glorious_Anthem);
 		commands.put("Gaeas_Anthem", Gaeas_Anthem);
-		commands.put("Bad_Moon", Bad_Moon);
-		commands.put("Crusade", Crusade);
+		//commands.put("Bad_Moon", Bad_Moon);
+		//commands.put("Crusade", Crusade);
 		commands.put("Honor_of_the_Pure", Honor_of_the_Pure);
 		commands.put("Beastmaster_Ascension", Beastmaster_Ascension);
 		commands.put("Spidersilk_Armor", Spidersilk_Armor);

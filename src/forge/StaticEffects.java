@@ -141,8 +141,8 @@ public class StaticEffects
 		cardToEffectsList.put("Time of Heroes", new String[] {"Time_of_Heroes"});
 		cardToEffectsList.put("Glorious Anthem", new String[] {"Glorious_Anthem"});
 		cardToEffectsList.put("Gaea's Anthem", new String[] {"Gaeas_Anthem"});
-		cardToEffectsList.put("Bad Moon", new String[] {"Bad_Moon"});
-		cardToEffectsList.put("Crusade", new String[] {"Crusade"});
+		//cardToEffectsList.put("Bad Moon", new String[] {"Bad_Moon"});
+		//cardToEffectsList.put("Crusade", new String[] {"Crusade"});
 		cardToEffectsList.put("Honor of the Pure", new String[] {"Honor_of_the_Pure"});
 		cardToEffectsList.put("Beastmaster Ascension", new String[] {"Beastmaster_Ascension"});
 		cardToEffectsList.put("Spidersilk Armor", new String[] {"Spidersilk_Armor"});
