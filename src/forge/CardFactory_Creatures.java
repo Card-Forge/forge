@@ -4298,7 +4298,145 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
-
+      //*************** START *********** START **************************
+        else if(cardName.equals("Great Whale")) {
+            final Input untap = new Input() {
+                private static final long serialVersionUID = -2167059018040912025L;
+                
+                int                       stop             = 7;
+                int                       count            = 0;
+                
+                @Override
+                public void showMessage() {
+                    AllZone.Display.showMessage("Select a land to untap");
+                    ButtonUtil.enableOnlyCancel();
+                }
+                
+                @Override
+                public void selectButtonCancel() {
+                    stop();
+                }
+                
+                @Override
+                public void selectCard(Card card, PlayerZone zone) {
+                    if(card.isLand() && zone.is(Constant.Zone.Play)) {
+                        card.untap();
+                        count++;
+                        if(count == stop) stop();
+                    }
+                }//selectCard()
+            };
+            
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    if(card.getController().equals("Human")) AllZone.InputControl.setInput(untap);
+                    else {
+                        CardList list = new CardList(AllZone.Computer_Play.getCards());
+                        list = list.filter(new CardListFilter() {
+                            public boolean addCard(Card c) {
+                                return c.isLand() && c.isTapped();
+                            }
+                        });
+                        for(int i = 0; i < 7 && i < list.size(); i++) {
+                            list.get(i).untap();
+                        }
+                    }//else
+                }//resolve()
+            };
+            Command intoPlay = new Command() {
+                private static final long serialVersionUID = 7222997838266323277L;
+                
+                public void execute() {
+                    ability.setStackDescription(card.getController() + " untaps up to 7 lands.");
+                    AllZone.Stack.add(ability);
+                }
+            };
+            card.addComesIntoPlayCommand(intoPlay);
+            
+        }//*************** END ************ END ***************************
+        
+      //*************** START *********** START **************************
+        else if(cardName.equals("Palinchron")) {
+            final Input untap = new Input() {
+                private static final long serialVersionUID = -2167159918040912025L;
+                
+                int                       stop             = 7;
+                int                       count            = 0;
+                
+                @Override
+                public void showMessage() {
+                    AllZone.Display.showMessage("Select a land to untap");
+                    ButtonUtil.enableOnlyCancel();
+                }
+                
+                @Override
+                public void selectButtonCancel() {
+                    stop();
+                }
+                
+                @Override
+                public void selectCard(Card card, PlayerZone zone) {
+                    if(card.isLand() && zone.is(Constant.Zone.Play)) {
+                        card.untap();
+                        count++;
+                        if(count == stop) stop();
+                    }
+                }//selectCard()
+            };
+            
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    if(card.getController().equals("Human")) AllZone.InputControl.setInput(untap);
+                    else {
+                        CardList list = new CardList(AllZone.Computer_Play.getCards());
+                        list = list.filter(new CardListFilter() {
+                            public boolean addCard(Card c) {
+                                return c.isLand() && c.isTapped();
+                            }
+                        });
+                        for(int i = 0; i < 7 && i < list.size(); i++) {
+                            list.get(i).untap();
+                        }
+                    }//else
+                }//resolve()
+            };
+            Command intoPlay = new Command() {
+                private static final long serialVersionUID = 7222997848166323277L;
+                
+                public void execute() {
+                    ability.setStackDescription(card.getController() + " untaps up to 7 lands.");
+                    AllZone.Stack.add(ability);
+                }
+            };
+            card.addComesIntoPlayCommand(intoPlay);
+            
+            final SpellAbility a1 = new Ability(card, "2 U U") {
+                @Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+                
+                @Override
+                public void resolve() {
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getOwner());
+                    /*
+                    AllZone.getZone(card).remove(card);
+                    hand.add(card);
+                    */
+                    if(card.isToken()) AllZone.getZone(card).remove(card);
+                    else AllZone.GameAction.moveTo(hand, card);
+                    
+                }
+            };//a1
+            
+            //card.clearSpellAbility();
+            card.addSpellAbility(a1);
+            a1.setStackDescription(card.getController() + " returns Palinchron back to its owner's hand.");
+            a1.setDescription("2 U U: Return Palinchron to its owner's hand.");
+        }//*************** END ************ END ***************************
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Cloud of Faeries")) {
             final Input untap = new Input() {
