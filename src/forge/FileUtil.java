@@ -1,14 +1,11 @@
 package forge;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+
+import forge.error.ErrorViewer;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import forge.error.ErrorViewer;
 
 
 public class FileUtil {
@@ -39,7 +36,7 @@ public class FileUtil {
             ErrorViewer.showError(ex);
             throw new RuntimeException("FileUtil : writeFile() error, problem writing file - " + file + " : " + ex);
         }
-    }//writeFile()
+    }//writeAllDecks()
     
     public static ArrayList<String> readFile(String filename) {
         return readFile(new File(filename));

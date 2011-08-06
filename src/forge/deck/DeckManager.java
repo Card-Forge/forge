@@ -122,7 +122,7 @@ public class DeckManager {
     }
 
     public void close() {
-        writeFile();
+        writeAllDecks();
     }
 
 
@@ -262,7 +262,7 @@ public class DeckManager {
         return deckName.replaceAll("[^-_$#@.{[()]} a-zA-Z0-9]", "");
     }
 
-    public void writeFile() {
+    public void writeAllDecks() {
         try {
             //store the files that do exist
             List<File> files = new ArrayList<File>();
