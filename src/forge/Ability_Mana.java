@@ -350,8 +350,9 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     public boolean canPlay() {
         Card card = getSourceCard();
         
-        if (card.getController().isComputer())
-        	return false;
+        // this isn't right
+        //if (card.getController().isComputer())
+        //	return false;
         
 		 if(card.isCreature()) {
     		 
