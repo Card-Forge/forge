@@ -265,6 +265,7 @@ res/cardsfolder/arc_lightning.txt -text svneol=native#text/plain
 res/cardsfolder/arc_mage.txt -text svneol=native#text/plain
 res/cardsfolder/arc_runner.txt -text svneol=native#text/plain
 res/cardsfolder/arc_slogger.txt -text svneol=native#text/plain
+res/cardsfolder/arc_trail.txt svneol=native#text/plain
 res/cardsfolder/arcades_sabboth.txt -text svneol=native#text/plain
 res/cardsfolder/arcane_sanctum.txt -text svneol=native#text/plain
 res/cardsfolder/arcane_teachings.txt -text svneol=native#text/plain
