@@ -3,7 +3,7 @@ ManaCost:5 B
 Types:Creature Zombie Mutant
 Text:no text
 PT:5/3
-K:RegenerateMe:B
+A:AB$Regenerate|Cost$B|SpellDescription$Regenerate CARDNAME.
 K:TypeCycling:Swamp:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twisted_abomination.jpg

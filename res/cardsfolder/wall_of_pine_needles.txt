@@ -4,7 +4,7 @@ Types:Creature Plant Wall
 Text:no text
 PT:3/3
 K:Defender
-K:RegenerateMe:G
+A:AB$Regenerate|Cost$G|SpellDescription$Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_pine_needles.jpg
 End
