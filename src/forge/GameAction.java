@@ -24,17 +24,6 @@ public class GameAction {
     
     //private boolean           fantasyQuest     = false;
     
-    //returns null if player does not have a Planeswalker
-    public Card getPlaneswalker(Player player) {
-        PlayerZone p = AllZone.getZone(Constant.Zone.Play, player);
-        CardList c = new CardList(p.getCards());
-        c = c.getType("Planeswalker");
-        
-        if(c.isEmpty()) return null;
-        
-        return c.get(0);
-    }
-
     public void resetActivationsPerTurn(){
     	CardList all = AllZoneUtil.getCardsInGame();
     	

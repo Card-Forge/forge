@@ -358,6 +358,20 @@ public abstract class Player extends MyObservable{
         doScry(topN, topN.size());
     }
     ///////////////////////////////
+    
+    ///////////////////////////////
+    ////
+    ////	properties about the player and his/her cards/game status
+    ////
+    ///////////////////////////////
+    public boolean hasPlaneswalker() {
+        return null != getPlaneswalker();
+    }
+    
+    public Card getPlaneswalker() {
+    	CardList c = AllZoneUtil.getPlayerTypeInPlay(this, "Planeswalker");
+    	return c.get(0);
+    }
 	
 	////////////////////////////////
 	//

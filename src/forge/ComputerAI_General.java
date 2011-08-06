@@ -274,7 +274,7 @@ public class ComputerAI_General implements Computer {
         c.setDefendingPlayer(AllZone.Combat.getDefendingPlayer());
         
         //check for planeswalker
-        Card walker = AllZone.GameAction.getPlaneswalker(AllZone.HumanPlayer);
+        Card walker = AllZone.HumanPlayer.getPlaneswalker();
         
         if(walker != null && MyRandom.random.nextBoolean()) {
             c.setPlaneswalker(walker);
