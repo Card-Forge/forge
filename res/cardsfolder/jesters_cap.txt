@@ -1,0 +1,8 @@
+Name:Jester's Cap
+ManaCost:4
+Types:Artifact
+Text:2, Tap, Sacrifice Jester's Cap: Search target player's library for three cards and exile them. Then that player shuffles his or her library.
+K:SVars:RemAIDeck:True
+K:SVars:Rarity:Rare
+K:SVars:Picture:http://www.wizards.com/global/images/magic/general/jesters_cap.txt
+End

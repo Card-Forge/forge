@@ -381,6 +381,24 @@ public class AllZoneUtil {
 		}
 	}
 	
+	public static void exileNCardsFromZone(final PlayerZone zone, final CardListFilter filter, final int n, final boolean shuffle) {
+		CardList cards = new CardList(zone.getCards());
+		if(null != filter) {
+			cards = cards.filter(filter);
+		}
+		int maxCards = n;
+		int numCards = cards.size();
+		maxCards = Math.min(maxCards, numCards);
+		for(int i = 1; i <= maxCards; i++) {
+			String title = "Select card to exile: " + i + "/" + maxCards;
+			Object o = AllZone.Display.getChoiceOptional(title, cards.toArray());
+			if(o == null) break;
+			Card card = (Card) o;
+			AllZone.GameAction.exile(card);
+		}
+		if(shuffle) AllZone.GameAction.shuffle(zone.getPlayer());
+	}
+	
 	public static int CompareTypeAmountInPlay(final String player, String type)
 	{
 		// returns the difference between player's

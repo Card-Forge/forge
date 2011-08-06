@@ -10189,6 +10189,42 @@ public class CardFactory implements NewConstants {
             
             a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
         }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Jester's Cap")) {
+        	/*
+        	 * 2, Tap, Sacrifice Jester's Cap: Search target player's library
+        	 * for three cards and exile them. Then that player shuffles his
+        	 * or her library.
+        	 */
+        	final Ability_Tap ability = new Ability_Tap(card, "2") {
+				private static final long serialVersionUID = 222308932796127795L;
+
+				@Override
+        		public boolean canPlayAI() {
+        			//TODO
+        			return false;
+        		}
+
+        		@Override
+        		public void resolve() {
+        			String target = getTargetPlayer();
+        			String player = card.getController();
+        			PlayerZone zone = AllZone.getZone(Constant.Zone.Library, target);
+        			if(player.equals(Constant.Player.Human)) {
+        				AllZoneUtil.exileNCardsFromZone(zone, null, 3, true);
+        			}
+        			else { //computer
+        				
+        			}
+        			AllZone.GameAction.sacrifice(card);
+        		}
+
+        	};//Ability
+
+        	card.addSpellAbility(ability);
+        	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
+        }//*************** END ************ END **************************
 
 
         // Cards with Cycling abilities
