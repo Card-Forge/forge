@@ -4105,42 +4105,6 @@ public class CardFactory_Instants {
         
         
         //*************** START *********** START **************************
-        else if( cardName.equals("Reset") ) {
-            /*
-             * Cast Reset only during an opponent's turn after his or her upkeep step.
-             * Untap all lands you control.
-             */
-            final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = 1399682288920959188L;
-
-				@Override
-                public boolean canPlay() {
-					Player opponent = card.getController().getOpponent();
-					return Phase.canPlayAfterUpkeep() && AllZone.Phase.isPlayerTurn(opponent);
-				}//canPlay
-				
-				@Override
-				public boolean canPlayAI() {
-					return false;
-				}//canPlayAI
-                
-                @Override
-                public void resolve() {
-                	CardList lands = AllZoneUtil.getPlayerLandsInPlay(card.getController());
-                	for(Card land:lands) land.untap();
-                }
-            };//SpellAbility
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" - untap all lands you control.");
-            spell.setStackDescription(sb.toString());
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Mana Short")) {
             /*
              * Tap all lands target player controls and empty his or her mana pool.

@@ -491,8 +491,28 @@ public class AbilityFactory {
         if (mapParams.containsKey("ActivationNumberSacrifice"))
         	restrict.setActivationNumberSacrifice(Integer.parseInt(mapParams.get("ActivationNumberSacrifice")));
 
-        if (mapParams.containsKey("ActivatingPhases"))
-        	restrict.setActivatePhases(mapParams.get("ActivatingPhases"));
+        if (mapParams.containsKey("ActivatingPhases")) {
+        	String phases = mapParams.get("ActivatingPhases");
+        	if(phases.equals("AfterUpkeep")) {
+        		String newPhase = "";
+        		newPhase = newPhase + Constant.Phase.Draw +",";
+        		newPhase = newPhase + Constant.Phase.Main1 +",";
+        		newPhase = newPhase + Constant.Phase.Combat_Begin +",";
+        		newPhase = newPhase + Constant.Phase.Combat_Declare_Attackers +",";
+        		newPhase = newPhase + Constant.Phase.Combat_Declare_Attackers_InstantAbility +",";
+        		newPhase = newPhase + Constant.Phase.Combat_Declare_Blockers +",";
+        		newPhase = newPhase + Constant.Phase.Combat_Declare_Blockers_InstantAbility +",";
+        		newPhase = newPhase + Constant.Phase.Combat_Damage +",";
+        		newPhase = newPhase + Constant.Phase.Combat_FirstStrikeDamage +",";
+        		newPhase = newPhase + Constant.Phase.Combat_End +",";
+        		newPhase = newPhase + Constant.Phase.Main2 +",";
+        		newPhase = newPhase + Constant.Phase.End_Of_Turn +",";
+        		newPhase = newPhase + Constant.Phase.Cleanup;
+        		
+        		restrict.setActivatePhases(newPhase);
+        	}
+        	else restrict.setActivatePhases(phases);
+        }
         
         if (mapParams.containsKey("ActivatingCardsInHand"))
         	restrict.setActivateCardsInHand(Integer.parseInt(mapParams.get("ActivatingCardsInHand")));
