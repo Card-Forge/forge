@@ -1,7 +1,7 @@
 Name:Shield of Duty and Reason
 ManaCost:W
 Types:Enchantment Aura
-Text:Enchanted creature has protection from green and from blue.
+Text:no text
 K:Enchant creature
 K:enPump:Protection from green & Protection from blue
 SVar:Rarity:Common

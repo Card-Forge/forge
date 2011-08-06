@@ -1,9 +1,9 @@
 Name:Red Ward
 ManaCost:W
 Types:Enchantment Aura
-Text:Enchanted creature has protection from red. This effect doesn't remove Red Ward.
+Text:no text
 K:Enchant creature
-K:enPump:Protection from red
+K:enPump:Protection from red:Enchanted creature has protection from red. This effect doesn't remove Red Ward.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/red_ward.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/219.jpg

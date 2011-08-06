@@ -1,7 +1,7 @@
 Name:Robe of Mirrors
 ManaCost:U
 Types:Enchantment Aura
-Text:Enchanted creature has shroud.
+Text:no text
 K:Enchant creature
 K:enPump:Shroud
 SVar:Rarity:Common

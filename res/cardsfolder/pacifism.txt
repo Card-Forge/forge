@@ -1,9 +1,9 @@
 Name:Pacifism
 ManaCost:1 W
 Types:Enchantment Aura
-Text:Enchanted creature can't attack or block.
+Text:no text
 K:Enchant creature
-K:enPumpCurse:HIDDEN CARDNAME can't attack or block.
+K:enPumpCurse:HIDDEN CARDNAME can't attack or block.:Enchanted creature can't attack or block.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pacifism.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/33.jpg
