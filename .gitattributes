@@ -7150,10 +7150,6 @@ res/quest/themes/Wolves[!!-~]WG.thm -text
 res/reprintSetInfo.py -text svneol=native#text/x-python
 res/setInfoScript.py -text svneol=native#text/x-python
 res/sound/tap.mp3 -text svneol=unset#audio/mpeg
-src/Deck.java svneol=native#text/plain
-src/DeckConverter.java svneol=native#text/plain
-src/OldDeckIO.java svneol=native#text/plain
-src/QuestData_State.java svneol=native#text/plain
 src/arcane/ui/CardArea.java svneol=native#text/plain
 src/arcane/ui/CardPanel.java svneol=native#text/plain
 src/arcane/ui/CardPanelContainer.java svneol=native#text/plain
