@@ -5,4 +5,6 @@ Text:Destroy all creatures.
 K:spDestroyAll:Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/day_of_judgment.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/12.jpg
+SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/9.jpg
 End

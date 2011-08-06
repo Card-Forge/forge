@@ -7,4 +7,5 @@ K:Flying
 K:Protection from Dragons
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonstalker.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/11.jpg
 End

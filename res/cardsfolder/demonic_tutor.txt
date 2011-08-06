@@ -4,4 +4,7 @@ Types:Sorcery
 Text:Search your library for a card and put that card into your hand. Then shuffle your library.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/3e/en-us/card1155.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/13.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/13.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/13.jpg
 End

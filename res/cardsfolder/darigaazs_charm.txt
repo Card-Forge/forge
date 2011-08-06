@@ -8,4 +8,5 @@ A:SP$Pump | Cost$ B R G | ValidTgts$ Creature | NumAtt$ +3 | NumDef$ +3 | TgtPro
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darigaazs_charm.jpg
+SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/100.jpg
 End

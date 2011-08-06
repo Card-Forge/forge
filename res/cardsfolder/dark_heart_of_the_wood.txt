@@ -6,4 +6,6 @@ K:abGainLife Sac<1/Forest>:3
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_heart_of_the_wood.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/200.jpg
+SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/117.jpg
 End

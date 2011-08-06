@@ -6,4 +6,6 @@ PT:2/1
 K:abPump Sac<1/Creature>:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dross_hopper.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/som/60.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/60.jpg
 End

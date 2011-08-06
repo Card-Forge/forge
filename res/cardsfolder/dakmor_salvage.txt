@@ -7,4 +7,5 @@ K:tap: add B
 K:Dredge 2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dakmor_salvage.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/169.jpg
 End

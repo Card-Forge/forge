@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPumpCurse:HIDDEN CARDNAME can't attack. & HIDDEN Prevent all combat damage that would be dealt by CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonic_torment.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/9.jpg
 End

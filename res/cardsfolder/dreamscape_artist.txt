@@ -6,4 +6,5 @@ PT:1/1
 A:AB$Fetch | Cost$ 2 U T Discard<1/Any> Sac<1/Land> | Destination$ Battlefield | FetchType$ Land.Basic | FetchNum$ 2 | SpellDescription$ Search your library for up to two basic land cards and put them onto the battlefield. Then shuffle your library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreamscape_artist.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/40.jpg
 End

@@ -5,4 +5,5 @@ Text:Prevent all combat damage that would be dealt this turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darkness.jpg
+SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/8.jpg
 End

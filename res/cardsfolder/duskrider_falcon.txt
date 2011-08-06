@@ -7,4 +7,5 @@ K:Flying
 K:Protection from black
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duskrider_falcon.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/128.jpg
 End

@@ -5,4 +5,5 @@ Text:no text
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daze.jpg
+SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/30.jpg
 End

@@ -6,4 +6,7 @@ PT:1/1
 K:abDestroyTgtV T:Wall:Destroy target Wall.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_demolition_team.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/184.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/144.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/143.jpg
 End

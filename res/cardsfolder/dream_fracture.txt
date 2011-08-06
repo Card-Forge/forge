@@ -5,4 +5,5 @@ Text:Counter target spell. Its controller draws a card.\r\nDraw a card.
 K:spCounter:Spell:None:Graveyard:My-Draw(1) CC-Draw(1)
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_fracture.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/19.jpg
 End

@@ -7,4 +7,5 @@ A:AB$LoseLife | Cost$ Sac<1/CARDNAME> | ValidTgts$ player | TgtPrompt$ Target a 
 SVar:DB1:DB$GainLife | LifeAmount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_cultist.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/105.jpg
 End

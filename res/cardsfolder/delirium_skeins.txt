@@ -5,4 +5,5 @@ Text:Each player discards three cards.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card107435.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/41.jpg
 End

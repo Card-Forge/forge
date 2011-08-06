@@ -5,4 +5,5 @@ Text:no text
 K:abPumpTgtC B B:Shadow
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_embrace.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/14.jpg
 End

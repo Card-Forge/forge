@@ -6,4 +6,5 @@ PT:2/1
 K:Unearth:B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dregscape_zombie.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/74.jpg
 End

@@ -8,4 +8,5 @@ K:abDamageTgtV T Sac<1/CARDNAME>:2:Creature.attacking,Creature.blocking:Dive Bom
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dive_bomber.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/26.jpg
 End

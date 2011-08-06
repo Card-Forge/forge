@@ -6,4 +6,5 @@ K:spPumpTgtCurse:-1/-1
 K:Dredge 3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darkblast.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/82.jpg
 End

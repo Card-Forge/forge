@@ -6,4 +6,5 @@ K:spDamageTgtCP:X:Drawback$YouGainLife/X:Death Grasp deals X damage to target cr
 SVar:X:Count$xPaid
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_grasp.jpg
+SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/95.jpg
 End

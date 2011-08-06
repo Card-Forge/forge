@@ -7,4 +7,5 @@ A:AB$DealDamage | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select ta
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desert.jpg
+SetInfo:ARN|Land|http://magiccards.info/scans/en/an/86.jpg
 End

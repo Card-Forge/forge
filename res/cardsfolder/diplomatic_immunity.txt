@@ -7,4 +7,5 @@ K:enPump:Shroud
 K:Shroud
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diplomatic_immunity.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/75.jpg
 End

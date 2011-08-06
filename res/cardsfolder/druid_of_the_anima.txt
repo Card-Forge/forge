@@ -8,4 +8,5 @@ K:tap: add R
 K:tap: add G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/druid_of_the_anima.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/128.jpg
 End

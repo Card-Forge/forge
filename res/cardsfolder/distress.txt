@@ -5,4 +5,6 @@ Text:no text
 K:spDiscardTgt:RevealYouChoose/Artifact.nonLand,Creature.nonLand,Enchantment,Instant,Planeswalker,Sorcery:1:Target player reveals his or her hand. You choose a nonland card from it. That player discards that card.:Distress - player reveals hand and discards a card 
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card135219.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/111.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/136.jpg
 End

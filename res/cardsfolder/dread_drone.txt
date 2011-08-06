@@ -5,4 +5,5 @@ Text:When Dread Drone enters the battlefield, put two 0/1 colorless Eldrazi Spaw
 PT:4/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_drone.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/108.jpg
 End

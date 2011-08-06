@@ -7,4 +7,5 @@ K:Flying
 K:Lifelink
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divinity_of_pride.jpg
+SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/86.jpg
 End

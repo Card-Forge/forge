@@ -5,4 +5,6 @@ Text:B, Tap, Sacrifice Doomed Necromancer: Return target creature card from your
 PT:2/2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/doomed_necromancer.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/140.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/137.jpg
 End

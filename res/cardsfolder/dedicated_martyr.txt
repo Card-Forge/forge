@@ -6,4 +6,5 @@ PT:1/1
 A:AB$GainLife | Cost$ W Sac<1/CARDNAME> | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dedicated_martyr.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/16.jpg
 End

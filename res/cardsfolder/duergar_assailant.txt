@@ -7,4 +7,5 @@ K:abDamageTgtV Sac<1/CARDNAME>:1:Creature.attacking,Creature.blocking:Duergar As
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duergar_assailant.jpg
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/136.jpg
 End

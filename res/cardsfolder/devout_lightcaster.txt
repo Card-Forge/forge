@@ -7,4 +7,5 @@ K:Protection from black
 K:etbBounceTgt:Permanent.Black:Exile
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devout_lightcaster.jpg
+SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/10.jpg
 End

@@ -6,4 +6,5 @@ PT:1/1
 K:abPump 1 U R:+3/+0/Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreadwing.jpg
+SetInfo:CON|Uncommon|http://magiccards.info/scans/en/cfx/43.jpg
 End

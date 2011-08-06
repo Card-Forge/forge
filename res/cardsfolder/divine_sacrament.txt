@@ -7,4 +7,5 @@ K:stPumpAll:Creature.White:1/1:Threshold:Threshold - White creatures get an addi
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_sacrament.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/19.jpg
 End

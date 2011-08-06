@@ -7,4 +7,5 @@ K:spDestroyTgt:Creature.nonBlack:NoRegen:Drawback$MakeToken<>X<>Saproling<>G 1 1
 SVar:X:Count$CardManaCost
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_mutation.jpg
+SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/96.jpg
 End

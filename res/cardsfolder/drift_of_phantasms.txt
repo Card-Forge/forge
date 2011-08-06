@@ -8,4 +8,5 @@ K:Flying
 K:Transmute:1 U U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drift_of_phantasms.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/46.jpg
 End

@@ -5,4 +5,5 @@ Text:Destroy target land. Its controller loses 2 life.
 K:spDestroyTgt:Land:Drawback$LoseLifeTgtCtrlr/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/despoil.jpg
+SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/62.jpg
 End

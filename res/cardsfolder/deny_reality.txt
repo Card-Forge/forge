@@ -6,4 +6,5 @@ K:Cascade
 A:SP$Bounce | Cost$ 3 U B | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deny_reality.jpg
+SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/19.jpg
 End

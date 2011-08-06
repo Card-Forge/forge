@@ -4,4 +4,5 @@ Types:Enchantment
 Text:At the beginning of your upkeep, put target creature card in a graveyard into play under your control.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/debtors_knell.jpg
+SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/141.jpg
 End

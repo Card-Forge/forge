@@ -7,4 +7,5 @@ K:Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature 
 K:abPumpTgtC Sac<1/Saproling>:-1/-1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathspore_thallid.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/102.jpg
 End

@@ -5,4 +5,5 @@ Text:no text
 K:stPumpAll:Creature.attacking+YouCtrl:0/0/HIDDEN Prevent all combat damage that would be dealt to CARDNAME.:No Condition:Prevent all combat damage that would be dealt to attacking creatures you control.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dolmen_gate.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/256.jpg
 End

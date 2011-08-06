@@ -7,4 +7,7 @@ SVar:dX:Count$TgtCardManaCost
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_offering.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/303.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/215.jpg
+SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/178.jpg
 End

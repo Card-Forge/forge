@@ -7,4 +7,5 @@ K:Flying
 A:AB$Pump | Cost$ U | NumAtt$ +1 | ActivationLimit$ 1 | SpellDescription$ Drake Hatchling gets +1/+0 until end of turn. Activate this ability only once each turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drake_hatchling.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/76.jpg
 End

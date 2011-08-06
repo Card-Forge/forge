@@ -5,4 +5,5 @@ Text:no text
 K:spPumpTgtCurse:-2/-2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disfigure.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/87.jpg
 End

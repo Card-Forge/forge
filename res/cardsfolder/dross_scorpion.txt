@@ -6,4 +6,5 @@ PT:3/1
 K:WheneverKeyword:PermanentIntoGraveyard:Type/Artifact/Creature:Play:UntapPermanent:NormalInput/Specific/Type.Artifact:ASAP:No_Condition:No Special Condition:Whenever Dross Scorpion or another artifact creature is put into a graveyard from the battlefield, you may untap target artifact.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dross_scorpion.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/164.jpg
 End

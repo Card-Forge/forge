@@ -8,4 +8,5 @@ K:stPumpSelf:Creature:X/X:Creature+Self:Drift of the Dead's power and toughness 
 SVar:X:Count$Valid Land.Snow+YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drift_of_the_dead.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/11.jpg
 End

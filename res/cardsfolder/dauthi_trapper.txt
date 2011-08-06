@@ -6,4 +6,5 @@ PT:1/1
 K:abPumpTgtC T:Shadow
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_trapper.jpg
+SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/6.jpg
 End

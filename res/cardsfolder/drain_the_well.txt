@@ -5,4 +5,5 @@ Text:Destroy target land. You gain 2 life.
 K:spDestroyTgt:Land:Drawback$YouGainLife/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drain_the_well.jpg
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/121.jpg
 End

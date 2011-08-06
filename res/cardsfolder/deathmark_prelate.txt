@@ -7,4 +7,5 @@ A:AB$Destroy | Cost$ 2 B T Sac<1/Zombie> | ValidTgts$ Creature.nonZombie | TgtPr
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathmark_prelate.jpg
+SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/65.jpg
 End

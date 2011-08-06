@@ -4,4 +4,5 @@ Types:Sorcery
 Text:Each player loses X life, then discards X cards, then sacrifices X creatures, then sacrifices X lands.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_cloud.jpg
+SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/40.jpg
 End

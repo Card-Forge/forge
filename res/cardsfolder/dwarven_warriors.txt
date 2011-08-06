@@ -6,4 +6,9 @@ PT:1/1
 A:AB$Pump | Cost$ T | ValidTgts$ Creature.powerLE2 | KW$ Unblockable | SpellDescription$ Target creature with power 2 or less is unblockable this turn. | TgtPrompt$ Select target creature with power 2 or less.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_warriors.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/222.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/145.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/143.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/205.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/144.jpg
 End

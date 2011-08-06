@@ -5,4 +5,6 @@ Text:Destroy target nonblack creature.
 K:spDestroyTgt:Creature.nonBlack
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/doom_blade.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/95.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/93.jpg
 End

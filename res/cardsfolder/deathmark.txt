@@ -5,4 +5,8 @@ Text:Destroy target green or white creature.
 K:spDestroyTgt:Creature.Green,Creature.White
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathmark.jpg
+SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/91.jpg
+SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/90.jpg
+SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/54.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/134.jpg
 End

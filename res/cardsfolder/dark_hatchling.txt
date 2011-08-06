@@ -7,4 +7,5 @@ K:Flying
 K:etbDestroyTgt:Creature.nonBlack:NoRegen
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_hatchling.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/126.jpg
 End

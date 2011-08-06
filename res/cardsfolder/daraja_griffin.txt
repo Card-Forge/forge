@@ -7,4 +7,6 @@ K:Flying
 K:abDestroyTgtV 0 Sac<1/CARDNAME>:Creature.Black:Destroy target black creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daraja_griffin.jpg
+SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/102.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/14.jpg
 End

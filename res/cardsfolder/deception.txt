@@ -5,4 +5,6 @@ Text:no text
 K:spDiscardOpp:OppChoose:2:Target opponent discards two cards.:Deception - opponent discards cards
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deception.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/73.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/p3k/73.jpg
 End

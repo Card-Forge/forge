@@ -6,4 +6,5 @@ PT:5/5
 K:Suspend:5:G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/durkwood_baloth.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/193.jpg
 End

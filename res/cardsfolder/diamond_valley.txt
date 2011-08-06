@@ -6,4 +6,5 @@ SVar:X:Sacrificed$CardToughness
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diamond_valley.jpg
+SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/87.jpg
 End

@@ -6,4 +6,5 @@ PT:1/1
 K:abPumpTgtC G T Discard<1/Any>:+2/+2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deepwood_drummer.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/239.jpg
 End

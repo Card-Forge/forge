@@ -7,4 +7,7 @@ A:AB$Destroy | ValidTgts$ Land | TgtPrompt$ Select target land. | Cost$ T | Spel
 SVar:PlayMain1:FALSE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonic_hordes.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/12.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/12.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/12.jpg
 End

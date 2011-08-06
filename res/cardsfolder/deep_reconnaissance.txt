@@ -6,4 +6,5 @@ A:SP$Fetch | Cost$ 2 G | Destination$ Battlefield | Fetchtype$ Land.Basic | Fetc
 K:Flashback:4 G
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deep_reconnaissance.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/236.jpg
 End

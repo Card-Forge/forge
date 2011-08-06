@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPump:Forestwalk
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dryads_favor.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/169.jpg
 End

@@ -8,4 +8,5 @@ A:AB$PutCounter | Cost$ R T Discard<1/Any> | Tgt$ TgtC | CounterType$ P0P1 | Cou
 SVar:Rarity:Rare
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_armorer.jpg
+SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/104.jpg
 End

@@ -7,4 +7,5 @@ K:Flying
 K:abPumpTgtC W W:Indestructible
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathless_angel.jpg
+SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/17.jpg
 End

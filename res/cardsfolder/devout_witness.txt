@@ -6,4 +6,5 @@ PT:2/2
 K:abDestroyTgtV 1 W T Discard<1/Any>:Artifact,Enchantment:Destroy target artifact or enchantment.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devout_witness.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/17.jpg
 End

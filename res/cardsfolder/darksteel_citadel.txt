@@ -6,4 +6,5 @@ K:tap: add 1
 K:Indestructible
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_citadel.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/164.jpg
 End

@@ -5,4 +5,5 @@ Text:no text
 K:tap: add 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_statuary.jpg
+SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/135.jpg
 End

@@ -5,4 +5,6 @@ Text:Counter target spell. Look at the top four cards of your library, then put 
 K:spCounter:Spell:None:Graveyard:My-RearrangeTopOfLibrary(4)
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/discombobulate.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/79.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/81.jpg
 End

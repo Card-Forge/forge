@@ -4,4 +4,5 @@ Types:Enchantment
 Text:Whenever a player casts a noncreature spell, counter that spell. That player puts X 1/1 white and blue Bird creature tokens with flying onto the battlefield, where X is the spell's converted mana cost.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dovescape.jpg
+SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/143.jpg
 End

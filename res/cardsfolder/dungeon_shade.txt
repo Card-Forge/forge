@@ -7,4 +7,5 @@ K:Flying
 K:abPump B:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dungeon_shade.jpg
+SetInfo:STH|Common|http://magiccards.info/scans/en/sh/8.jpg
 End

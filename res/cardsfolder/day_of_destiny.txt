@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/day_of_destiny.jpg
+SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/1.jpg
 End

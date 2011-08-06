@@ -7,4 +7,6 @@ K:tap: add U
 K:tap: add B
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drowned_catacomb.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/224.jpg
+SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/224.jpg
 End

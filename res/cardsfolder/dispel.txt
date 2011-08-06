@@ -5,4 +5,5 @@ Text:Counter target instant spell.
 K:spCounter:Spell:Type(Instant):Graveyard:None
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dispel.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/26.jpg
 End

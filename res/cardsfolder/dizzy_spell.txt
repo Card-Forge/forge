@@ -7,4 +7,5 @@ K:Transmute:1 U U
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dizzy_spell.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/43.jpg
 End

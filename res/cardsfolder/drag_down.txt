@@ -6,4 +6,5 @@ K:spPumpTgtCurse:-X/-X:Domain - Target creature gets -1/-1 until end of turn for
 SVar:X:Count$Domain
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drag_down.jpg
+SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/42.jpg
 End

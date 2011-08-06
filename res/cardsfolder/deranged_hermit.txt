@@ -7,4 +7,5 @@ K:Echo:3 G G
 K:etbMakeToken<>4<>Squirrel<>G 1 1 Squirrel<>Controller<>G<>Creature;Squirrel<>1<>1<>None<>put four 1/1 green Squirrel creature tokens onto the battlefield.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deranged_hermit.jpg
+SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/101.jpg
 End

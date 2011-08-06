@@ -8,4 +8,5 @@ K:abDamageTgtV W T:1:Creature.attacking,Creature.blocking:Dawnray Archer deals 1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dawnray_archer.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/39.jpg
 End

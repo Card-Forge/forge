@@ -7,4 +7,5 @@ K:First Strike
 K:Morph:2 W W
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daru_lancer.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/20.jpg
 End

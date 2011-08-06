@@ -6,4 +6,5 @@ PT:5/5
 K:Flying
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defiler_of_souls.jpg
+SetInfo:ARB|Mythic|http://magiccards.info/scans/en/arb/37.jpg
 End

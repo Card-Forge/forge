@@ -5,4 +5,10 @@ Text:Destroy target nonblack creature. It can't be regenerated.
 K:spDestroyTgt:Creature.nonBlack:NoRegen
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83046.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/123.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/11.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/127.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/122.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/7.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/13.jpg
 End

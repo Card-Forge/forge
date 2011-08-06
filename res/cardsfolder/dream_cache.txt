@@ -5,4 +5,6 @@ Text:no text
 A:SP$Draw | Cost$ 2 U | NumCards$ 3 | SpellDescription$ Draw three cards, then put two cards from your hand both on top of your library or both on the bottom of your library. | SubAbility$ YouHandToLibrary/2/TopOrBottom
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_cache.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/59.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/62.jpg
 End

@@ -7,4 +7,5 @@ K:StaticEffect:Play:Permanents you Control:Keyword/Unblockable:Type.Creature!Col
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deepchannel_mentor.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/35.jpg
 End

@@ -6,4 +6,6 @@ PT:1/1
 K:Protection from black
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_speakers.jpg
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/109.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/300.jpg
 End

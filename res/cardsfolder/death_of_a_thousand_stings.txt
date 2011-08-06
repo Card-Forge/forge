@@ -6,4 +6,5 @@ K:spLoseLifeTgt:1:Drawback$YouGainLife/1:Target player loses 1 life and you gain
 K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Graveyard:MoveFrom-Graveyard-Hand:Self:ASAP:Yes_No:ControllerUpkeep!MoreCardsInHand:At the beginning of your upkeep, if you have more cards in hand than each opponent, you may return Death of a Thousand Stings from your graveyard to your hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_of_a_thousand_stings.jpg
+SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/64.jpg
 End

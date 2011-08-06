@@ -6,4 +6,8 @@ K:Enchant creature
 K:enPumpCurse:HIDDEN CARDNAME doesn't untap during your untap step.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dehydration.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/75.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/73.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/73.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/78.jpg
 End

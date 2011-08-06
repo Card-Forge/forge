@@ -6,4 +6,5 @@ PT:1/1
 K:WheneverKeyword:BecomesBlocked:Self:Play:StatsPumpEOT/2/0:Self:ASAP:No_Condition:No Special Condition:Whenever Deepwood Wolverine becomes blocked, it gets +2/+0 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deepwood_wolverine.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/242.jpg
 End

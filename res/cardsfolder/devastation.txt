@@ -5,4 +5,6 @@ Text:Destroy all creatures and lands.
 K:spDestroyAll:Creature,Land
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devastation.jpg
+SetInfo:S99|Rare|http://magiccards.info/scans/en/st/94.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/128.jpg
 End

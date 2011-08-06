@@ -5,4 +5,5 @@ Text:When Dripping-Tongue is put into a graveyard from play, put a 1/1 colorless
 PT:1/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80511.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/206.jpg
 End

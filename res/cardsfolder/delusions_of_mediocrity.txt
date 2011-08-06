@@ -6,4 +6,6 @@ K:WheneverKeyword:EntersBattleField:Self:Any:ModifyLife/10:ControllingPlayer_Sel
 K:WheneverKeyword:LeavesBattleField:Self:Any:ModifyLife/-10:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Delusions of Mediocrity leaves the battlefield, you lose 10 life.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/delusions_of_mediocrity.jpg
+SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/30.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/70.jpg
 End

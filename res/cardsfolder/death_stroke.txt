@@ -5,4 +5,5 @@ Text:Destroy target tapped creature.
 K:spDestroyTgt:Creature.tapped
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_stroke.jpg
+SetInfo:STH|Common|http://magiccards.info/scans/en/sh/7.jpg
 End

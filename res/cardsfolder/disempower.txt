@@ -5,4 +5,5 @@ Text:no text
 A:SP$Bounce | Cost$ 1 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Destination$ TopofLibrary | SpellDescription$ Put target artifact or enchantment on top of its owner's library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disempower.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/213.jpg
 End

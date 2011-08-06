@@ -7,4 +7,5 @@ K:Wither
 K:abPump RW:+1/+0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duergar_cave_guard.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/51.jpg
 End

@@ -6,4 +6,5 @@ PT:4/4
 K:Flying
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_broodmother.jpg
+SetInfo:ARB|Mythic|http://magiccards.info/scans/en/arb/53.jpg
 End

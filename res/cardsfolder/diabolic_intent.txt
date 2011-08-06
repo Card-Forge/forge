@@ -6,4 +6,5 @@ A:SP$Fetch | Cost$ 1 B Sac<1/Creature> | Destination$ Hand | FetchType$ Card | F
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diabolic_intent.jpg
+SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/42.jpg
 End

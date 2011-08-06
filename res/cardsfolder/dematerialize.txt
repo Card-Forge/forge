@@ -6,4 +6,5 @@ A:SP$Bounce | Cost$ 3 U | ValidTgts$ Permanent | Destination$ Hand | TgtPrompt$ 
 K:Flashback:5 U U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dematerialize.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/81.jpg
 End

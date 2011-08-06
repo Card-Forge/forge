@@ -5,4 +5,5 @@ Text:Whenever Deepwood Tantiv becomes blocked, you gain 2 life.
 PT:2/4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deepwood_tantiv.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/241.jpg
 End

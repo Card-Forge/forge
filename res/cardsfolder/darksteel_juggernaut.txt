@@ -9,4 +9,6 @@ K:StaticEffect:Play:Self:SetPT/Type.Artifact/Type.Artifact:Permanents you Contro
 SVar:BuffedBy:Artifact
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_juggernaut.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/som/150.jpg
+SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/150.jpg
 End

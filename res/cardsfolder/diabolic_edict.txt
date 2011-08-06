@@ -4,4 +4,5 @@ Types:Instant
 Text:Target player sacrifices a creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diabolic_edict.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/22.jpg
 End

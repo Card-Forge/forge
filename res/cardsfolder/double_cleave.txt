@@ -5,4 +5,5 @@ Text:no text
 K:spPumpTgt:Double Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/double_cleave.jpg
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/135.jpg
 End

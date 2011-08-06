@@ -6,4 +6,5 @@ K:tap: add 3
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreamstone_hedron.jpg
+SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/216.jpg
 End

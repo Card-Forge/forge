@@ -6,4 +6,5 @@ K:spPumpTgtCurse:-7/-0
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disorient.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/48.jpg
 End

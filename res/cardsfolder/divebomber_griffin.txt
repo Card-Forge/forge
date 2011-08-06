@@ -8,4 +8,5 @@ K:abDamageTgtV T Sac<1/CARDNAME>:3:Creature.attacking,Creature.blocking:Divebomb
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divebomber_griffin.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/14.jpg
 End

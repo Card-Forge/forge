@@ -7,4 +7,5 @@ K:Shadow
 K:CARDNAME attacks each turn if able.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_slayer.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/20.jpg
 End

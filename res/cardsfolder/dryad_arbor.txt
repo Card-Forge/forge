@@ -7,4 +7,5 @@ K:Dryad Arbor is green.
 K:tap: add G
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136196.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/174.jpg
 End

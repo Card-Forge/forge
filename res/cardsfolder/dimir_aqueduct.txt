@@ -8,4 +8,5 @@ K:Tap: add U B
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dimir_aqueduct.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/276.jpg
 End

@@ -7,4 +7,5 @@ K:Flash
 K:Protection from red
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defender_of_law.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/5.jpg
 End

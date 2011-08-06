@@ -4,4 +4,6 @@ Types:Artifact
 Text:no text
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_blood.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/163.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/293.jpg
 End

@@ -8,4 +8,5 @@ K:stPumpSelf:Creature:2/1:Hellbent:Hellbent - Demon's Jester gets +2/+1 as long 
 SVar:BuffedBy:Card
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demons_jester.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/42.jpg
 End

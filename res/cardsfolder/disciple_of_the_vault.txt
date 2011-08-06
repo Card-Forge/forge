@@ -6,4 +6,5 @@ PT:1/1
 K:WheneverKeyword:PermanentIntoGraveyard:Type/Artifact:Play:ModifyLife/-1:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever an artifact is put into a graveyard from the battlefield, you may have target opponent lose 1 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disciple_of_the_vault.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/62.jpg
 End

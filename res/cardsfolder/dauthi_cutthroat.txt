@@ -7,4 +7,5 @@ K:Shadow
 K:abDestroyTgtV 1 B T:Creature.withShadow:Destroy target creature with shadow.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_cutthroat.jpg
+SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/57.jpg
 End

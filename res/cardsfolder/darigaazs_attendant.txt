@@ -7,4 +7,5 @@ K:1, Sacrifice CARDNAME: Add B R G to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darigaazs_attendant.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/301.jpg
 End

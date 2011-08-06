@@ -5,4 +5,5 @@ Text:no text
 K:spAllPump:YouCtrl:+1/+0/Fear:Creatures you control get +1/+0 and gain fear until end of turn.:Dance of Shadows - Creatures get +1/+0 and gain fear until EOT
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card79094.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/108.jpg
 End

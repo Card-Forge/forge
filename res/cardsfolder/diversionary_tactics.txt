@@ -6,4 +6,5 @@ K:abTapTgt tapXType<2/Creature>:Creature:Tap target creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diversionary_tactics.jpg
+SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/7.jpg
 End

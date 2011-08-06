@@ -7,4 +7,5 @@ K:abPumpTgtC tapXType<2/Dwarf>:+2/+0
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_bloodboiler.jpg
+SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/84.jpg
 End

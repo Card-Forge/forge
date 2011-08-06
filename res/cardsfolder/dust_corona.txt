@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPump:+2/+0/CARDNAME can't be blocked by creatures with flying.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dust_corona.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/97.jpg
 End

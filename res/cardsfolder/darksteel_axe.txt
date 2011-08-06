@@ -6,4 +6,6 @@ K:Indestructible
 K:eqPump 2:+2/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_axe.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/som/149.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/149.jpg
 End

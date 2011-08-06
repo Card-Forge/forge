@@ -5,4 +5,5 @@ Text:Death's Shadow gets -X/-X, where X is your life total.
 PT:13/13
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deaths_shadow.jpg
+SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/57.jpg
 End

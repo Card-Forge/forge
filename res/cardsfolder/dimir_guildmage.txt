@@ -5,4 +5,5 @@ Text:no text
 PT:2/2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dimir_guildmage.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/245.jpg
 End

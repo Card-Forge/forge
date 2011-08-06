@@ -5,4 +5,6 @@ Text:Search your library and graveyard for five cards and exile the rest. Put th
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/doomsday.jpg
+SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/8.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/121.jpg
 End

@@ -6,4 +6,5 @@ PT:1/1
 K:WheneverKeyword:BecomesBlocked:Self:Play:KeywordPumpEOT/Trample!StatsPumpEOT/3/0:Self!Self:ASAP:No_Condition:No Special Condition:Whenever Dwarven Berserker becomes blocked, it gets +3/+0 and gains trample until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_berserker.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/97.jpg
 End

@@ -5,4 +5,5 @@ Text:Whenever Drelnoch becomes blocked, you may draw two cards.
 PT:3/3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drelnoch.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/32.jpg
 End

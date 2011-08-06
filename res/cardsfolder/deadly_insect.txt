@@ -6,4 +6,6 @@ PT:6/1
 K:Shroud
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadly_insect.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/64.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/238.jpg
 End

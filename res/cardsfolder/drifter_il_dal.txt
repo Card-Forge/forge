@@ -7,4 +7,5 @@ K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay U
 K:Shadow
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drifter_il_dal.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/59.jpg
 End

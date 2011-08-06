@@ -5,4 +5,5 @@ Text:Counter target spell.\r\nDraw a card.
 K:spCounter:Spell:None:Graveyard:My-Draw(1)
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dismiss.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/58.jpg
 End

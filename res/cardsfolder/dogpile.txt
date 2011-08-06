@@ -7,4 +7,5 @@ SVar:X:Count$Valid Creature.attacking+YouCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dogpile.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/120.jpg
 End

@@ -5,4 +5,5 @@ Text:Name a card. Exile the top six cards of your library, then reveal cards fro
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonic_consultation.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/9.jpg
 End

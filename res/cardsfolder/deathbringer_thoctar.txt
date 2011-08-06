@@ -7,4 +7,5 @@ K:WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:+1+1 Counters/1:Self
 K:abDamageTgtCP SubCounter<1/P1P1>:1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathbringer_thoctar.jpg
+SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/36.jpg
 End

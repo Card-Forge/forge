@@ -5,4 +5,12 @@ Text:no text
 K:Whenever a land is put into a graveyard from the battlefield, Dingus Egg deals 2 damage to that land's controller.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dingus_egg.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/297.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/243.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/292.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/364.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/333.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/280.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/244.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/242.jpg
 End

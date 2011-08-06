@@ -6,4 +6,5 @@ Text:Put two 1/1 red Goblin creature tokens onto the battlefield.
 A:SP$Token | Cost$ 1 R | TokenAmount$ 2 | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenOwner$ Controller | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_fodder.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/97.jpg
 End

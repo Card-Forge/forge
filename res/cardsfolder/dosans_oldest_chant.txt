@@ -6,4 +6,5 @@ K:spGainLife:6
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dosans_oldest_chant.jpg
+SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/127.jpg
 End
