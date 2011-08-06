@@ -17,6 +17,8 @@ public class GameActionUtil
 		upkeep_MagusTabernacleUpkeepCost();
 		// upkeep_CheckEmptyDeck_Lose(); //still a little buggy
 		upkeep_Phyrexian_Arena();
+		upkeep_Carnophage();
+		upkeep_Sangrophage();
 		upkeep_Honden_of_Cleansing_Fire();
 		upkeep_Honden_of_Seeing_Winds();
 		upkeep_Honden_of_Lifes_Web();
@@ -7561,6 +7563,62 @@ public class GameActionUtil
 			AllZone.GameAction.drawCard(player);
 		}
 	}// upkeep_Font_of_Mythos()
+	
+	private static void upkeep_Carnophage()
+	{
+		final String player = AllZone.Phase.getActivePlayer();
+		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Carnophage");
+        if ( player == "Human" ) {
+		for (int i = 0; i < list.size(); i++) {
+			Card c = list.get(i);
+            String[] choices =
+            { "Yes", "No" };
+            Object choice = AllZone.Display.getChoice(
+                  "Pay Carnophage's upkeep?", choices);
+            if (choice.equals("Yes"))
+			AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+            else c.tap();
+		}                      }
+        if ( player == "Computer" )
+        for (int i = 0; i < list.size(); i++) {
+    	     Card c = list.get(i);
+    	     if ( AllZone.Computer_Life.getLife() > 1 )
+    	     AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+    	     else c.tap();                     }
+	}// upkeep_Carnophage
+	
+	private static void upkeep_Sangrophage()
+	{
+		final String player = AllZone.Phase.getActivePlayer();
+		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Sangrophage");
+        if ( player == "Human" ) {
+		for (int i = 0; i < list.size(); i++) {
+			Card c = list.get(i);
+            String[] choices =
+            { "Yes", "No" };
+            Object choice = AllZone.Display.getChoice(
+                  "Pay Sangrophage's upkeep?", choices);
+            if (choice.equals("Yes"))
+			AllZone.GameAction.getPlayerLife(player).subtractLife(2);
+            else c.tap();
+		}                      }
+        if ( player == "Computer" )
+        for (int i = 0; i < list.size(); i++) {
+    	     Card c = list.get(i);
+    	     if ( AllZone.Computer_Life.getLife() > 2 )
+    	     AllZone.GameAction.getPlayerLife(player).subtractLife(2);
+    	     else c.tap();                     }
+	}// upkeep_Carnophage
 	
 	private static void upkeep_Phyrexian_Arena()
 	{

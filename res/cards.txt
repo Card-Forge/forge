@@ -1,3 +1,15 @@
+Carnophage
+B
+Creature Zombie
+At the beginning of your upkeep, tap Carnophage unless you pay 1 life
+2/2
+
+Sangrophage
+B B
+Creature Zombie
+At the beginning of your upkeep, tap Carnophage unless you pay 2 life
+3/3
+
 Chronatog
 1 U
 Creature Atog
