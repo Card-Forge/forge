@@ -1,6 +1,6 @@
 Name:Akki Underminer
 ManaCost:3 R
-Types:creature Goblin Rogue Shaman
+Types:Creature Goblin Rogue Shaman
 Text:no text
 PT:1/1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player sacrifices a permanent.
