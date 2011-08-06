@@ -168,7 +168,7 @@ public class AllZoneUtil {
 	 * gets a list of all cards removed from the game for a given player
 	 * 
 	 * @param player the player whose cards we want that are removed from the game
-	 * @return a CardList withh all cards removed from the game for a given player
+	 * @return a CardList with all cards removed from the game for a given player
 	 */
 	public static CardList getPlayerCardsRemovedFromGame(final String player) {
 		CardList cards = new CardList();
@@ -206,6 +206,30 @@ public class AllZoneUtil {
 		CardList cards = new CardList();
 		cards = getPlayerCardsInLibrary(player);
 		return cards.getName(cardName);
+	}
+	
+	
+	///Check if a certain card is in play
+	
+	/**
+	 * Answers the question: "Is <card name> in play?"
+	 * 
+	 * @param cardName the name of the card to look for
+	 * @return true is the card is in play, false otherwise
+	 */
+	public static boolean isCardInPlay(final String cardName) {
+		return getCardsInPlay(cardName).size() > 0;
+	}
+	
+	/**
+	 * Answers the question: "Does <player> have <card name> in play?"
+	 * 
+	 * @param cardName the name of the card to look for
+	 * @param player the player whose battlefield we want to check
+	 * @return true if that player has that card in play, false otherwise
+	 */
+	public static boolean isCardInPlay(final String cardName, final String player) {
+		return getPlayerCardsInPlay(player, cardName).size() > 0;
 	}
 	
 }

@@ -367,7 +367,7 @@ public class GameAction {
         }
     }
     
-    
+    /*
     private boolean isAliFromCairoInPlay(PlayerZone zone) {
     	   if( zone == null ) {
     	      return false;
@@ -377,7 +377,7 @@ public class GameAction {
     	      all.addAll(zone.getCards());
     	      return all.containsName("Ali from Cairo");
     	   }
-    }
+    } */
     
     //do this during combat damage:
     public void checkWinLoss()
@@ -387,10 +387,10 @@ public class GameAction {
         
         boolean stop = false;
         
-        if (isAliFromCairoInPlay(AllZone.Computer_Play) && AllZone.Computer_Life.getLife() < 1) 
+        if (AllZoneUtil.isCardInPlay("Ali from Cairo", Constant.Player.Computer) && AllZone.Computer_Life.getLife() < 1) 
         	AllZone.Computer_Life.setLife(1);
         
-        if (isAliFromCairoInPlay(AllZone.Human_Play) && AllZone.Human_Life.getLife() < 1) 
+        if (AllZoneUtil.isCardInPlay("Ali from Cairo", Constant.Player.Human) && AllZone.Human_Life.getLife() < 1) 
         	AllZone.Human_Life.setLife(1);
         
         if(AllZone.Computer_Life.getLife() <= 0 || AllZone.Computer_PoisonCounter.getPoisonCounters() >= 10) {
@@ -420,10 +420,10 @@ public class GameAction {
         
         boolean stop = false;
         
-        if (isAliFromCairoInPlay(AllZone.Computer_Play) && AllZone.Computer_Life.getLife() < 1) 
+        if (AllZoneUtil.isCardInPlay("Ali from Cairo", Constant.Player.Computer) && AllZone.Computer_Life.getLife() < 1) 
         	AllZone.Computer_Life.setLife(1);
         
-        if (isAliFromCairoInPlay(AllZone.Human_Play) && AllZone.Human_Life.getLife() < 1) 
+        if (AllZoneUtil.isCardInPlay("Ali from Cairo", Constant.Player.Human) && AllZone.Human_Life.getLife() < 1) 
         	AllZone.Human_Life.setLife(1);
         
         if(AllZone.Computer_Life.getLife() <= 0 ) {
