@@ -324,7 +324,7 @@ public class CardFactory implements NewConstants {
                 String parse = card.getKeyword().get(n).toString();
                 card.removeIntrinsicKeyword(parse);
                 
-                String k[] = parse.split(":");
+                String k[] = parse.split(":", 3);
                 
                 if(k.length > 2) card.setSVar(k[1], k[2]);
             }
