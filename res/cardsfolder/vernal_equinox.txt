@@ -6,4 +6,5 @@ K:stPumpAll:Creature,Enchantment:0/0/HIDDEN Flash:No Condition:Any player may ca
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vernal_equinox.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/283.jpg
 End

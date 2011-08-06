@@ -6,4 +6,5 @@ A:SP$ PumpAll | Cost$ 1 R | ValidCards$ Creature.withoutFlying | KW$ HIDDEN CARD
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/falter.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/184.jpg
 End

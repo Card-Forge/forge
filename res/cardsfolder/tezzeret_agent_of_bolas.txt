@@ -6,4 +6,5 @@ Loyalty:3
 SVar:RemAIDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tezzeret_agent_of_bolas.jpg
+SetInfo:MBS|Mythic|http://magiccards.info/scans/en/mbs/97.jpg
 End
