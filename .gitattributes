@@ -3453,6 +3453,7 @@ res/cardsfolder/orcish_cannoneers.txt -text svneol=native#text/plain
 res/cardsfolder/orcish_healer.txt -text svneol=native#text/plain
 res/cardsfolder/orcish_mechanics.txt -text svneol=native#text/plain
 res/cardsfolder/orcish_oriflamme.txt -text svneol=native#text/plain
+res/cardsfolder/orcish_settlers.txt -text svneol=native#text/plain
 res/cardsfolder/order_of_leitbur.txt -text svneol=native#text/plain
 res/cardsfolder/order_of_the_ebon_hand.txt -text svneol=native#text/plain
 res/cardsfolder/order_of_the_golden_cricket.txt -text svneol=native#text/plain
