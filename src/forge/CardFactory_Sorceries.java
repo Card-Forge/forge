@@ -3342,10 +3342,14 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void resolve() {
+                	AllZone.ComputerPlayer.discard(3, this);
+                	AllZone.HumanPlayer.discard(3, this);
+                	/*
                     for(int i = 0; i < 3; i++)
                         AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
                     
                     AllZone.InputControl.setInput(CardFactoryUtil.input_discard(3, this));
+                    */
                 }//resolve()
             };
             card.clearSpellAbility();
@@ -5668,16 +5672,15 @@ public class CardFactory_Sorceries {
         			//Hand
         			CardList humHand = new CardList(AllZone.Human_Hand.getCards());
         			CardList compHand = new CardList(AllZone.Computer_Hand.getCards());
+        			int handDiff = humHand.size() - compHand.size();
         			
         			if (compHand.size() > humHand.size())
         			{
-        				for (int i=0; i < compHand.size()-humHand.size();i++)
-        					AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
+        				AllZone.ComputerPlayer.discard(handDiff, this);
         			}
         			else if (humHand.size() > compHand.size())
         			{
-        				int diff = humHand.size() - compHand.size();
-        				AllZone.HumanPlayer.discard(diff, this);
+        				AllZone.HumanPlayer.discard(handDiff, this);
         			}
         			
         			//Creatures:

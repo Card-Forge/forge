@@ -87,8 +87,10 @@ public class AIPlayer extends Player{
 	////////////////////////////////
 	
 	public CardList discard(final int num, final SpellAbility sa) {
+		int max = AllZoneUtil.getPlayerHand(this).size();
+		max = Math.min(max, num);
 		CardList discarded = new CardList();
-		for(int i = 0; i < num; i++) {
+		for(int i = 0; i < max; i++) {
 			CardList hand = AllZoneUtil.getPlayerHand(this);
 
 			if(hand.size() > 0) {

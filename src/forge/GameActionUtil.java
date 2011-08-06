@@ -5493,9 +5493,11 @@ public class GameActionUtil {
 			Ability ability2 = new Ability(c, "0") {
 				@Override
 				public void resolve() {
+					opponent.discard(this);
 					player.drawCard();
-					if(opponent.equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
-					else AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
+					
+					//if(opponent.equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
+					//else AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
 
 				}
 			};// ability2
@@ -5806,9 +5808,9 @@ public class GameActionUtil {
 			Ability ability2 = new Ability(c, "0") {
 				@Override
 				public void resolve() {
-
-					if(opponent.equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
-					else AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this); // Should be changed to wise discard  
+					opponent.discard(this);
+					//if(opponent.equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
+					//else AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this); // Should be changed to wise discard  
 
 				}
 			};// ability2
@@ -6137,7 +6139,7 @@ public class GameActionUtil {
 				public void resolve() {
 
 					opponent[0] = player[0].getOpponent();
-					AllZone.GameAction.discardRandom(opponent[0], this);
+					opponent[0].discardRandom(this);
 				}
 			};// ability
 
@@ -7013,7 +7015,7 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.discardRandom(opponent, this);
+					opponent.discardRandom(this);
 				}
 			}; // ability
 			
@@ -7073,7 +7075,9 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
+					AllZone.ComputerPlayer.discard(this);
+					AllZone.HumanPlayer.discard(this);
+					/*PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
 
 					CardList cardsInHand = new CardList(hand.getCards());
 
@@ -7085,6 +7089,7 @@ public class GameActionUtil {
 					}
 
 					AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
+					*/
 
 				}
 			}; // ability
@@ -9902,13 +9907,16 @@ public class GameActionUtil {
 					CardList hondlist = new CardList();
 					hondlist.addAll(Play.getCards());
 					hondlist = hondlist.getType("Shrine");
-
+					
+					opponent.discard(hondlist.size(), this);
+					/*
 					for(int j = 0; j < hondlist.size(); j++) {
 						if(opponent.equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
 						else {
 							AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
 						}
 					}
+					*/
 				}
 			};// ability
 			
