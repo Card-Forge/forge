@@ -1,3 +1,53 @@
+Windrider Eel
+3 U
+Creature Fish
+no text
+2/2
+Flying
+Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
+
+Territorial Baloth
+4 G
+Creature Beast
+no text
+4/4
+Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
+
+Plated Geopede
+1 R
+Creature Insect
+no text
+1/1
+First Strike
+Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
+
+Hedron Rover
+4
+Artifact Creature Construct
+no text
+2/2
+Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
+
+Hagra Crocodile
+3 B
+Creature Crocodile
+no text
+3/1
+Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
+
+Steppe Lynx
+W
+Creature Cat
+no text
+0/1
+Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
+
+Talon Sliver
+1 W
+Creature Sliver
+All sliver creatures have first strike.
+1/1
+
 Stormscape Apprentice
 U
 Creature Human Wizard

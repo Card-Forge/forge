@@ -156,6 +156,7 @@ public class StaticEffects
 		cardToEffectsList.put("Winged Sliver", new String[] {"Winged_Sliver"});
 		cardToEffectsList.put("Synchronous Sliver", new String[] {"Synchronous_Sliver"});
 		cardToEffectsList.put("Fury Sliver", new String[] {"Fury_Sliver"});
+		cardToEffectsList.put("Talon Sliver", new String[] {"Talon_Sliver"});
 		cardToEffectsList.put("Plated Sliver", new String[] {"Plated_Sliver"});
 		cardToEffectsList.put("Virulent Sliver", new String[] {"Virulent_Sliver"});
 		cardToEffectsList.put("Sidewinder Sliver", new String[] {"Sidewinder_Sliver"});

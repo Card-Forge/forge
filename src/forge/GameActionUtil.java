@@ -3282,7 +3282,10 @@ public class GameActionUtil {
     //***ENCHANTMENTS END HERE***
     
     public static void executeLandfallEffects(Card c) {
-        if(c.getName().equals("Rampaging Baloths")) landfall_Rampaging_Baloths(c);
+   	    if (c.getKeyword().contains("Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.")) 
+   	    	landfall_Generic_P2P2_UntilEOT(c);
+   	    
+    	if(c.getName().equals("Rampaging Baloths")) landfall_Rampaging_Baloths(c);
         else if(c.getName().equals("Emeria Angel")) landfall_Emeria_Angel(c);
         else if(c.getName().equals("Ob Nixilis, the Fallen")) landfall_Ob_Nixilis(c);
         else if(c.getName().equals("Ior Ruin Expedition")) landfall_Ior_Ruin_Expedition(c);
@@ -3301,6 +3304,39 @@ public class GameActionUtil {
         
         if(q == null || q.equals("No")) return false;
         else return true;
+    }
+    
+    private static void landfall_Generic_P2P2_UntilEOT(Card c)
+    {
+    	final Card crd = c;
+    	Ability ability = new Ability(c, "0")
+    	{
+    		@Override
+    		public void resolve()
+    		{
+    			final Command untilEOT = new Command() {
+					private static final long serialVersionUID = 8919719388859986796L;
+
+					public void execute() {
+                        if(AllZone.GameAction.isCardInPlay(crd)) {
+                            crd.addTempAttackBoost(-2);
+                            crd.addTempDefenseBoost(-2);
+                        }
+                    }
+                };
+                crd.addTempAttackBoost(2);
+                crd.addTempDefenseBoost(2);
+                
+                AllZone.EndOfTurn.addUntil(untilEOT);
+    		}
+    	};
+    	ability.setStackDescription(c + " - Landfall: gets +2/+2 until EOT.");
+    	
+    	if(c.getController().equals(Constant.Player.Human)) {
+            if(showLandfallDialog(c)) AllZone.Stack.add(ability);
+        }
+
+        else if(c.getController().equals(Constant.Player.Computer)) AllZone.Stack.add(ability);
     }
     
     private static void landfall_Rampaging_Baloths(Card c) {
@@ -8361,6 +8397,41 @@ public class GameActionUtil {
                                                               }// for outer
                                                           }// execute()
                                                       };
+                                                      
+     public static Command Talon_Sliver                 = new Command() {
+    	 												 
+    	 												private static final long serialVersionUID = -7392607614574103064L;
+														CardList                  gloriousAnthemList = new CardList();
+                                                          
+                                                          public void execute() {
+                                                              String keyword = "First Strike";
+                                                              
+                                                              CardList list = gloriousAnthemList;
+                                                              Card c;
+                                                              // reset all cards in list - aka "old" cards
+                                                              for(int i = 0; i < list.size(); i++) {
+                                                                  c = list.get(i);
+                                                                  c.removeExtrinsicKeyword(keyword);
+                                                              }
+                                                              
+                                                              list.clear();
+                                                              PlayerZone[] zone = getZone("Talon Sliver");
+                                                              
+                                                              for(int outer = 0; outer < zone.length; outer++) {
+                                                                  CardList creature = new CardList();
+                                                                  creature.addAll(AllZone.Human_Play.getCards());
+                                                                  creature.addAll(AllZone.Computer_Play.getCards());
+                                                                  creature = creature.getType("Sliver");
+                                                                  
+                                                                  for(int i = 0; i < creature.size(); i++) {
+                                                                      c = creature.get(i);
+                                                                      c.addExtrinsicKeyword(keyword);
+                                                                      
+                                                                      gloriousAnthemList.add(c);
+                                                                  }// for inner
+                                                              }// for outer
+                                                          }// execute()
+    };    
     
     public static Command Crystalline_Sliver          = new Command() {
                                                           
@@ -14539,6 +14610,7 @@ public class GameActionUtil {
         commands.put("Winged_Sliver", Winged_Sliver);
         commands.put("Synchronous_Sliver", Synchronous_Sliver);
         commands.put("Fury_Sliver", Fury_Sliver);
+        commands.put("Talon_Sliver", Talon_Sliver);
         commands.put("Plated_Sliver", Plated_Sliver);
         commands.put("Crystalline_Sliver", Crystalline_Sliver);
         commands.put("Virulent_Sliver", Virulent_Sliver);

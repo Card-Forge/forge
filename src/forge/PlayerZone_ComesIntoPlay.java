@@ -67,7 +67,8 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
-                        return c.getKeyword().contains("Landfall");
+                        return c.getKeyword().contains("Landfall") || 
+                        	   c.getKeyword().contains("Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.");
                     }
                 });
                 
