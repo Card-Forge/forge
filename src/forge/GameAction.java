@@ -717,12 +717,16 @@ public class GameAction {
         PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
         PlayerZone Hgrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human);
         PlayerZone Cgrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer);
+        PlayerZone HRFG = AllZone.getZone(Constant.Zone.Removed_From_Play, Constant.Player.Human);
+        PlayerZone CRFG = AllZone.getZone(Constant.Zone.Removed_From_Play, Constant.Player.Computer);
         
  		CardList Cards_WithKeyword = new CardList();
         Cards_WithKeyword.add(new CardList(Hplay.getCards()));
         Cards_WithKeyword.add(new CardList(Cplay.getCards()));
         Cards_WithKeyword.add(new CardList(Hgrave.getCards()));
         Cards_WithKeyword.add(new CardList(Cgrave.getCards()));
+        Cards_WithKeyword.add(new CardList(HRFG.getCards()));
+        Cards_WithKeyword.add(new CardList(CRFG.getCards()));
  		Cards_WithKeyword = Cards_WithKeyword.filter(new CardListFilter() {
              public boolean addCard(Card c) {
                  if(c.getKeyword().toString().contains("WheneverKeyword")) return true;
@@ -775,12 +779,16 @@ public class GameAction {
         PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
         PlayerZone Hgrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human);
         PlayerZone Cgrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer);
+        PlayerZone HRFG = AllZone.getZone(Constant.Zone.Removed_From_Play, Constant.Player.Human);
+        PlayerZone CRFG = AllZone.getZone(Constant.Zone.Removed_From_Play, Constant.Player.Computer);
         
  		CardList Cards_WithKeyword = new CardList();
         Cards_WithKeyword.add(new CardList(Hplay.getCards()));
         Cards_WithKeyword.add(new CardList(Cplay.getCards()));
         Cards_WithKeyword.add(new CardList(Hgrave.getCards()));
         Cards_WithKeyword.add(new CardList(Cgrave.getCards()));
+        Cards_WithKeyword.add(new CardList(HRFG.getCards()));
+        Cards_WithKeyword.add(new CardList(CRFG.getCards()));
  		Cards_WithKeyword = Cards_WithKeyword.filter(new CardListFilter() {
              public boolean addCard(Card c) {
                  if(c.getKeyword().toString().contains("WheneverKeyword")) return true;
@@ -823,6 +831,7 @@ public class GameAction {
                         String SpellController[] = SpellControllerParse.split("/");
                         for(int z = 0; z < SpellController.length - 1; z++) {
                         	if(SpellController[z + 1].equals("Controller") && (c.getController()).equals(card.getController())) Nullified = false;  
+                        	if(SpellController[z + 1].equals("Opponent") && (c.getController()).equals(getOpponent(card.getController()))) Nullified = false;
                         }
                         if(Nullified == true) k[4] = "Null";   
                         }
@@ -920,6 +929,9 @@ public class GameAction {
                     	Custom_Strings_Count++;
                     	}
                  	}
+                  	if(Special_Condition[y].contains("Suspended")) {
+                 		if(!card.hasSuspend()) k[4] = "Null";      		
+                 	}  	
                     }
                             
                   	// Mana Cost (if Any)
@@ -1910,7 +1922,8 @@ public class GameAction {
     
     void Whenever_ManaPaid (Card Source, String[] Keyword_Details, final Command Proper_Resolve, SpellAbility ability) {
 		String S_Amount = "0";
-		if(!Keyword_Details[7].contains("No_Condition") && !Keyword_Details[7].equals("Yes_No") && !Keyword_Details[7].contains("Choice_Instant")) {
+		if(!Keyword_Details[7].contains("No_Condition") && !Keyword_Details[7].equals("Yes_No") 
+				&& !Keyword_Details[7].equals("Opponent_Yes_No")&& !Keyword_Details[7].contains("Choice_Instant")) {
 		if(Keyword_Details[7].contains("PayMana")) {
             String PayAmountParse = Keyword_Details[7];                
             S_Amount = PayAmountParse.split("/")[1];
@@ -1973,7 +1986,17 @@ public class GameAction {
                 }
     	}
 		}
-
+		if(Keyword_Details[7].equals("Opponent_Yes_No")) {
+	    	if(!Source.getController().equals("Human")) {
+	        	Object[] possibleValues = {"Yes", "No"};
+	        	Object q = JOptionPane.showOptionDialog(null, "Activate - " + Source.getName(),Source.getName() + " Ability", 
+	        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+	        			null, possibleValues, possibleValues[0]);
+	              if(q.equals(1)) {
+	            	  Go = false;
+	                }
+	    	}
+			}
     		}
 
 		return Go;

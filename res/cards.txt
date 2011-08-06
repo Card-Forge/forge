@@ -1,3 +1,13 @@
+Pardic Dragon
+4 R R
+Creature Dragon
+no text
+4/4
+Flying
+Suspend:2:R R
+abPump R:+1/+0
+WheneverKeyword:CastSpell/Opponent:No_Initiator:Exiled:CustomCounter.TIME/1:Self:ASAP:Opponent_Yes_No:Suspended:Whenever an opponent casts a spell, if Pardic Dragon is suspended, that player may put a time counter on Pardic Dragon.
+
 Broodstar
 8 U U
 Creature Beast
@@ -185,15 +195,6 @@ no text
 1/2
 Suspend:3:W
 abPump W:+1/+1
-
-Pardic Dragon
-4 R R
-Creature Dragon
-(Note: Opponent adding time counters when playing spell not implemented. Might be able to do with Whenever keyword)
-4/4
-Flying
-Suspend:2:R R
-abPump R:+1/+0
 
 Viscerid Deepwalker
 4 U
