@@ -11184,7 +11184,6 @@ public class GameActionUtil {
 		Dauntless_Escort.execute();
 	
 		Baru.execute();
-		//Reach_of_Branches.execute();
 		Sosukes_Summons.execute();
 
 		//Souls_Attendant.execute();
@@ -11196,7 +11195,6 @@ public class GameActionUtil {
 		Sacrifice_NoCreatures.execute();
 		
 		topCardReveal_Update.execute();
-		//Angelic_Chorus.execute();
 	}// executeCardStateEffects()
 
 	public static Command Conspiracy                  = new Command() {
@@ -11304,42 +11302,7 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	}; //Engineered Plague
-	/*
-	public static Command Night_of_Souls_Betrayal     = new Command() {
-		private static final long serialVersionUID   = 867116049464930958L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(1);
-				c.addSemiPermanentDefenseBoost(1);
-			}
-
-			list.clear();
-			CardList cards = AllZoneUtil.getCardsInPlay("Night of Souls' Betrayal");
-
-			for(int outer = 0; outer < cards.size(); outer++) {
-
-				CardList creature = AllZoneUtil.getCreaturesInPlay();
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addSemiPermanentAttackBoost(-1);
-					c.addSemiPermanentDefenseBoost(-1);
-
-					gloriousAnthemList.add(c);
-
-				}// for inner
-			}// for outer
-		}// execute()
-	}; //Night of Souls' Betrayal
-	*/
+	
 
 	public static Command Rolling_Stones              = new Command() {
 		private static final long serialVersionUID   = -3317318747868440229L;
@@ -13985,13 +13948,12 @@ public class GameActionUtil {
 		}// execute
 	}; // Windwright Mage
 	
-	// Reach of Branches
+	// Copied from Reach of Branches
 	public static Command Sosukes_Summons= new Command() {
 		private static final long serialVersionUID = -6316413742244380102L;
 		CardList oldSnakes = new CardList();
 
 		public void execute() {
-			// count card "Reach of Branches" in graveyard
 			final Player player = AllZone.Phase.getPlayerTurn();
 			final CardList nCard = AllZoneUtil.getPlayerGraveyard(player, "Sosuke's Summons");
 
@@ -14004,7 +13966,7 @@ public class GameActionUtil {
 				SpellAbility ability = new Ability( new Card(), "0" ) {
 					@Override
 					public void resolve() {
-						// return all Reach of Branches to hand
+						// return all Summons' to hand
 						PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
 						PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
 						for(int i = 0; i < nCard.size(); i++) {
@@ -14021,9 +13983,7 @@ public class GameActionUtil {
 				AllZone.Stack.add(ability);
 			}// if
 
-			// potential problem: if a Forest is bounced to your hand
-			// "Reach Branches"
-			// won't trigger when you play that Forest
+			// potential problem: if a snake is bounced to your hand - won't trigger when you play that snake
 			oldSnakes.addAll(newSnakes.toArray());
 		}// execute
 
@@ -19986,11 +19946,11 @@ public class GameActionUtil {
 		commands.put("Absolute_Law", Absolute_Law);
 		commands.put("Adamaro_First_to_Desire", Adamaro_First_to_Desire);
 		commands.put("Ajani_Avatar_Token", Ajani_Avatar_Token);
-		//commands.put("Angelic_Chorus", Angelic_Chorus);
 		commands.put("Angry_Mob", Angry_Mob);
 		commands.put("Aven_Trailblazer", Aven_Trailblazer);
 		
-		//commands.put("Baru", Baru);
+		commands.put("Bant_Sureblade", Bant_Sureblade);
+		commands.put("Bloodghast", Bloodghast);
 		
 		commands.put("Cantivore", Cantivore);
 		commands.put("Castle", Castle);
@@ -20053,7 +20013,6 @@ public class GameActionUtil {
 		
 		commands.put("Rabid_Wombat", Rabid_Wombat);
 		commands.put("Rakdos_Pit_Dragon", Rakdos_Pit_Dragon);
-		//commands.put("Reach_of_Branches", Reach_of_Branches);
 		
 		commands.put("Serra_Avatar", Serra_Avatar);
 		commands.put("Serras_Blessing", Serras_Blessing);
@@ -20107,13 +20066,11 @@ public class GameActionUtil {
 		commands.put("Mystic_Enforcer", Mystic_Enforcer);
 		commands.put("Guul_Draz_Vampire", Guul_Draz_Vampire);
 		commands.put("Ruthless_Cullblade", Ruthless_Cullblade);
-		commands.put("Bloodghast", Bloodghast);
-		commands.put("Bant_Sureblade", Bant_Sureblade);
+		
 		commands.put("Esper_Stormblade", Esper_Stormblade);
 		commands.put("Grixis_Grimblade", Grixis_Grimblade);
 		commands.put("Jund_Hackblade", Jund_Hackblade);
 		commands.put("Naya_Hushblade", Naya_Hushblade);
-		//commands.put("Nimble_Mongoose", Nimble_Mongoose);
 		commands.put("Werebear", Werebear);
 		commands.put("Divinity_of_Pride", Divinity_of_Pride);
 		commands.put("Serra_Ascendant", Serra_Ascendant);
@@ -20173,7 +20130,6 @@ public class GameActionUtil {
 		commands.put("Nut_Collector", Nut_Collector);
 
 		commands.put("Engineered_Plague", Engineered_Plague);
-		//commands.put("Night_of_Souls_Betrayal", Night_of_Souls_Betrayal);
 
 		commands.put("Thelonite_Hermit", Thelonite_Hermit);
 		commands.put("Deranged_Hermit", Deranged_Hermit);
@@ -20199,7 +20155,6 @@ public class GameActionUtil {
 		
 		commands.put("Tabernacle", Tabernacle);
 		commands.put("Magus_of_the_Tabernacle", Magus_of_the_Tabernacle);
-		//commands.put("Mobilization", Mobilization);
 		
 		commands.put("Concordant_Crossroads", Concordant_Crossroads);
 		commands.put("Mass_Hysteria", Mass_Hysteria);

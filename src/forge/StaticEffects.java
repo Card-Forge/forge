@@ -23,9 +23,6 @@ public class StaticEffects
 		cardToEffectsList.put("Serra Avatar", new String[] {"Serra_Avatar"});
 		cardToEffectsList.put("Avatar",  new String[] {"Ajani_Avatar_Token"});
 		cardToEffectsList.put("Windwright Mage", new String[] {"Windwright_Mage"});
-		//cardToEffectsList.put("Baru, Fist of Krosa", new String[] {"Baru"});
-		//cardToEffectsList.put("Reach of Brances", new String[] {"Reach_of_Branches"});
-		//cardToEffectsList.put("Angelic Chorus", new String[] {"Angelic_Chorus"});
 		cardToEffectsList.put("Uril, the Miststalker", new String[] {"Uril"});
 		cardToEffectsList.put("Rabid Wombat", new String[] {"Rabid_Wombat"});
 		cardToEffectsList.put("Kithkin Rabble", new String[] {"Kithkin_Rabble"});
@@ -92,7 +89,6 @@ public class StaticEffects
 		cardToEffectsList.put("Jund Hackblade", new String[] {"Jund_Hackblade"});
 		cardToEffectsList.put("Naya Hushblade", new String[] {"Naya_Hushblade"});
 		cardToEffectsList.put("Mystic Enforcer", new String[] {"Mystic_Enforcer"});
-		//cardToEffectsList.put("Nimble Mongoose", new String[] {"Nimble_Mongoose"});
 		cardToEffectsList.put("Werebear", new String[] {"Werebear"});
 		cardToEffectsList.put("Divinity of Pride", new String[] {"Divinity_of_Pride"});
 		cardToEffectsList.put("Serra Ascendant", new String[] {"Serra_Ascendant"});
@@ -138,7 +134,6 @@ public class StaticEffects
 		cardToEffectsList.put("Muraganda Petroglyphs", new String[] {"Muraganda_Petroglyphs"});
 		cardToEffectsList.put("Nut Collector", new String[] {"Nut_Collector"});
 		cardToEffectsList.put("Engineered Plague", new String[] {"Engineered_Plague"});
-		//cardToEffectsList.put("Night of Souls' Betrayal", new String[] {"Night_of_Souls_Betrayal"});
 		cardToEffectsList.put("Thelonite Hermit", new String[] {"Thelonite_Hermit"});
 		cardToEffectsList.put("Deranged Hermit", new String[] {"Deranged_Hermit"});
 		cardToEffectsList.put("Jacques le Vert", new String[] {"Jacques"});
@@ -162,7 +157,6 @@ public class StaticEffects
 		cardToEffectsList.put("Absolute Grace", new String[] {"Absolute_Grace"});
 		cardToEffectsList.put("The Tabernacle at Pendrell Vale", new String[] {"Tabernacle"});
 		cardToEffectsList.put("Magus of the Tabernacle", new String[] {"Magus_of_the_Tabernacle"});
-		//cardToEffectsList.put("Mobilization", new String[] {"Mobilization"});
 		cardToEffectsList.put("Goblin Assault", new String[] {"Goblin_Assault"});
 		cardToEffectsList.put("Serra's Blessing", new String[] {"Serras_Blessing"});
 		cardToEffectsList.put("Cover of Darkness", new String[] {"Cover_of_Darkness"});
