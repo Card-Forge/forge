@@ -19206,15 +19206,15 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
         }//*************** END ************ END **************************
         
-        
+        /*cardName.equals("Old Man of the Sea") || 
         //*************** START *********** START **************************
-        else if(cardName.equals("Old Man of the Sea") || cardName.equals("Seasinger")) {
+        else if(  cardName.equals("Seasinger")) {
         	/*
         	 * Tap: Gain control of target creature with power less than or
         	 * equal to Old Man of the Sea's power for as long as Old Man of
         	 * the Sea remains tapped and that creature's power remains less
         	 * than or equal to Old Man of the Sea's power.
-        	 */
+        	 *
         	//final Card movedCreature[] = new Card[1];
             final Ability_Tap ability = new Ability_Tap(card, "0") {
 				private static final long serialVersionUID = -7792654590884377028L;
@@ -19306,7 +19306,7 @@ public class CardFactory_Creatures {
             card.setOldManReleaseCommand(untapLeavesPlay);
             
             card.addSpellAbility(ability);
-            
+            /*
             //for Old Man of the Sea
             Input oldMan = new Input() {
 				private static final long serialVersionUID = -2079490830593191467L;
@@ -19324,6 +19324,7 @@ public class CardFactory_Creatures {
                 	 }
                  }
               };//input
+              *
               
               //for Seasinger
               Input seasinger = new Input() {
@@ -19343,14 +19344,15 @@ public class CardFactory_Creatures {
                   	 }
                    }
                 };//input
+            /*
             if(cardName.equals("Old Man of the Sea")) {
             	ability.setBeforePayMana(oldMan);
             }
-            else if( cardName.equals("Seasinger")) {
+            else * if( cardName.equals("Seasinger")) {
             	ability.setBeforePayMana(seasinger);
             }
         }//*************** END ************ END **************************
-        
+        */
         /*
         //*************** START *********** START **************************
         else if(cardName.equals("Time Elemental")) {

@@ -1,10 +1,11 @@
 Name:Seasinger
 ManaCost:1 U U
 Types:Creature Merfolk
-Text:Gain control of target creature whose controller controls an Island for as long as you control Seasinger and Seasinger remains tapped.
+Text:no text
 PT:0/1
 K:You may choose not to untap CARDNAME during your untap step.
 K:When you control no Islands, sacrifice CARDNAME.
+A:AB$GainControl|Cost$T|ValidTgts$Creature.ControllerControlsIsland|TgtPrompt$Select target creature whose controller controls an Island.|LoseControl$Untap,LeavesPlay,LoseControl|SpellDescription$Gain control of target creature whose controller controls an Island for as long as you control Seasinger and Seasinger remains tapped.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seasinger.jpg
 End
