@@ -584,21 +584,19 @@ public class Card extends MyObservable {
             for(int i = 0; i < sa.length; i++)
                 sb.append(sa[i].toString() + "\r\n");
             
-            // Ripple
+            // Ripple + Dredge + Madness
             ArrayList<String> kw = getKeyword();
             for (int i = 0; i < kw.size(); i++) {
-                if (kw.get(i).toString().startsWith("Ripple") && !sb.toString().contains("Ripple")) {
+                if ((kw.get(i).toString().startsWith("Ripple") && !sb.toString().contains("Ripple")) 
+                        || (kw.get(i).toString().startsWith("Dredge") && !sb.toString().contains("Dredge")) 
+                        || (kw.get(i).toString().startsWith("Madness") && !sb.toString().contains("Madness"))){
                     if (sb.toString().endsWith(".") && !sb.toString().endsWith("\r\n")) sb.append("\r\n");
-                    sb.append(kw.get(i).toString()).append("\r\n");
-                }
-            }
-
-            // Madness
-            ArrayList<String> kw2 = getKeyword();
-            for (int i = 0; i < kw2.size(); i++) {
-                if (kw2.get(i).toString().startsWith("Madness") && !sb.toString().contains("Madness")) {
-                    if (sb.toString().endsWith(".") && !sb.toString().endsWith("\r\n")) sb.append("\r\n");
-                    sb.append(kw2.get(i).toString()).append("\r\n");
+                    // sb.append(kw.get(i).toString()).append("\r\n");
+                    if (kw.get(i).contains(":")) {
+                        String k[] = kw.get(i).split(":");
+                        sb.append(k[0]).append(" ").append(k[1]).append("\r\n");
+                    } else sb.append(kw.get(i)).append("\r\n");
+                    
                 }
             }
             
