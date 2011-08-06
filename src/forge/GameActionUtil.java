@@ -16186,24 +16186,7 @@ public class GameActionUtil {
 		}// execute()
 	};
 	*/
-	public static void Elvish_Vanguard(Card c) {
-		final Card crd = c;
-
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				crd.addCounter(Counters.P1P1, 1);
-			}
-		};// Ability
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append(c.getName()).append(" - gets a +1/+1 counter.");
-		ability.setStackDescription(sb.toString());
-		
-		AllZone.Stack.add(ability);
-	}
-
-
+	
 	// returns all PlayerZones that has at least 1 Glorious Anthem
 	// if Computer has 2 Glorious Anthems, AllZone.Computer_Play will be
 	// returned twice

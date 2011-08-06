@@ -95,7 +95,19 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             	//not for the Elvish Vanguard coming into play now
             	list.remove(c);
                 for(Card var:list) {
-                    GameActionUtil.Elvish_Vanguard(var);
+                	final Card crd = var;
+                	Ability ability = new Ability(c, "0") {
+            			@Override
+            			public void resolve() {
+            				crd.addCounter(Counters.P1P1, 1);
+            			}
+            		};// Ability
+            		
+            		StringBuilder sb = new StringBuilder();
+            		sb.append(c.getName()).append(" - gets a +1/+1 counter.");
+            		ability.setStackDescription(sb.toString());
+            		
+            		AllZone.Stack.add(ability);
                 }
             }
             
