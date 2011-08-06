@@ -490,95 +490,73 @@ public class GameAction {
             			Constant.Quest.humanLife[0], Constant.Quest.computerLife[0]);
             return;
         }
+        
         //do this twice, sometimes creatures/permanents will survive when they shouldn't
-        for (int q=0;q<2;q++)
-        {
-        	//int size = AllZone.StaticEffects.getStateBasedMap().keySet().size();
-        	//Object[] arr = AllZone.StaticEffects.getStateBasedMap().keySet().toArray();
-        	
-	        //card state effects like Glorious Anthem
-	        for(String effect:AllZone.StaticEffects.getStateBasedMap().keySet()) {
-	            Command com = GameActionUtil.commands.get(effect);
-	            com.execute();
-	        }
-	        
-	        GameActionUtil.executeCardStateEffects();
-	        GameActionUtil.stAnimate.execute();
-	        GameActionUtil.stSetPT.execute();
-	        GameActionUtil.stPump.execute();
-	        
-	        //System.out.println("checking state effects");
-	        CardList creature = AllZoneUtil.getCreaturesInPlay();
-	        
-	        Card c;
-	        Iterator<Card> it = creature.iterator();
-	        
-	        while(it.hasNext()) {
-	            c = it.next();
-	            
-	            if(c.isEquipped()) {
-	                for(int i = 0; i < c.getEquippedBy().size(); i++) {
-	                    Card equipment = c.getEquippedBy().get(i);
-	                    if(!AllZoneUtil.isCardInPlay(equipment)) {
-	                        equipment.unEquipCard(c);
-	                    }
-	                }
-	            }//if isEquipped()
-	            
-	            if(c.getNetDefense() <= c.getDamage() && !c.getKeyword().contains("Indestructible")) {
-	                destroy(c);
-	                AllZone.Combat.removeFromCombat(c); //this is untested with instants and abilities but required for First Strike combat phase
-	            }
-	
-	            else if(c.getNetDefense() <= 0) {
-	                destroy(c);
-	                AllZone.Combat.removeFromCombat(c);
-	            }
-	            
-	        }//while it.hasNext()
-	        
-	
-	        CardList enchantments = AllZoneUtil.getCardsInPlay();
-	        enchantments = enchantments.filter(AllZoneUtil.enchantments);
-	        
-	        Iterator<Card> iterate = enchantments.iterator();
-	        while(iterate.hasNext()) {
-	            c = iterate.next();
-	            
-	            if(c.isAura()) {
-	                for(int i = 0; i < c.getEnchanting().size(); i++) {
-	                    Card perm = c.getEnchanting().get(i);
-	                    if(!AllZoneUtil.isCardInPlay(perm)
-	                            || CardFactoryUtil.hasProtectionFrom(c, perm)
-	                            || ((c.getKeyword().contains("Enchant creature") || c.getKeyword().contains("Enchant tapped creature") ) 
-	                               && !perm.getType().contains("Creature"))
-	                            || (c.getKeyword().contains("Enchant tapped creature") && perm.isUntapped() ) ) {
-	                        c.unEnchantCard(perm);
-	                        //changed from destroy (and rules-wise, I don't think it's a sacrifice)
-	                        moveToGraveyard(c);
-	                    }
-	                }
-	            }//if isAura
-	            
-	        }//while iterate.hasNext()
-	        
-	        //Make sure all equipment stops equipping previously equipped creatures that have left play.
-	        CardList equip = AllZoneUtil.getCardsInPlay();
+        for (int q = 0; q < 2; q++) {
+        	//card state effects like Glorious Anthem
+        	for(String effect:AllZone.StaticEffects.getStateBasedMap().keySet()) {
+        		Command com = GameActionUtil.commands.get(effect);
+        		com.execute();
+        	}
 
-	        //don't filter, so we catch cases where a card loses the subtype "Equipment"
-	        //equip = equip.filter(AllZoneUtil.equipment);
+        	GameActionUtil.executeCardStateEffects();
+        	GameActionUtil.stAnimate.execute();
+        	GameActionUtil.stSetPT.execute();
+        	GameActionUtil.stPump.execute();
 
-	        Iterator<Card> iter = equip.iterator();
-	        while(iter.hasNext()) {
-	        	c = iter.next();
-	        	if(c.isEquipping()) {
-	        		Card equippedCreature = c.getEquipping().get(0);
-	        		if(!AllZoneUtil.isCardInPlay(equippedCreature)) c.unEquipCard(equippedCreature);
+        	//System.out.println("checking state effects");
+        	CardList list = AllZoneUtil.getCardsInPlay();
+        	Card c;
 
-	        		//make sure any equipment that has become a creature stops equipping
-	        		if(c.isCreature()) c.unEquipCard(equippedCreature);
-	        	}
-	        }//while iter.hasNext()
+        	Iterator<Card> it = list.iterator();
+
+        	while(it.hasNext()) {
+        		c = it.next();
+
+        		if(c.isEquipped()) {
+        			for(int i = 0; i < c.getEquippedBy().size(); i++) {
+        				Card equipment = c.getEquippedBy().get(i);
+        				if(!AllZoneUtil.isCardInPlay(equipment)) {
+        					equipment.unEquipCard(c);
+        				}
+        			}
+        		}//if isEquipped()
+
+        		if(c.isEquipping()) {
+        			Card equippedCreature = c.getEquipping().get(0);
+        			if(!AllZoneUtil.isCardInPlay(equippedCreature)) c.unEquipCard(equippedCreature);
+
+        			//make sure any equipment that has become a creature stops equipping
+        			if(c.isCreature()) c.unEquipCard(equippedCreature);
+        		}//if isEquipping()
+
+        		if(c.isAura()) {
+        			for(int i = 0; i < c.getEnchanting().size(); i++) {
+        				Card perm = c.getEnchanting().get(i);
+        				if(!AllZoneUtil.isCardInPlay(perm)
+        						|| CardFactoryUtil.hasProtectionFrom(c, perm)
+        						|| ((c.getKeyword().contains("Enchant creature") || c.getKeyword().contains("Enchant tapped creature") ) 
+        								&& !perm.getType().contains("Creature"))
+        								|| (c.getKeyword().contains("Enchant tapped creature") && perm.isUntapped() ) ) {
+        					c.unEnchantCard(perm);
+        					//changed from destroy (and rules-wise, I don't think it's a sacrifice)
+        					moveToGraveyard(c);
+        				}
+        			}
+        		}//if isAura
+
+        		if(c.getNetDefense() <= c.getDamage() && !c.getKeyword().contains("Indestructible")) {
+        			destroy(c);
+        			AllZone.Combat.removeFromCombat(c); //this is untested with instants and abilities but required for First Strike combat phase
+        		}
+
+        		else if(c.getNetDefense() <= 0) {
+        			destroy(c);
+        			AllZone.Combat.removeFromCombat(c);
+        		}
+
+        	}//while it.hasNext()
+
         }//for q=0;q<2
         
         destroyLegendaryCreatures();
