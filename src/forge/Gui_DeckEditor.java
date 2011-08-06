@@ -414,7 +414,7 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay {
         titledBorder3 = new TitledBorder(border3, "Card Detail");
         this.getContentPane().setLayout(null);
         jScrollPane1.setBorder(titledBorder1);
-        jScrollPane1.setBounds(new Rectangle(19, 28, 726, 346));
+        jScrollPane1.setBounds(new Rectangle(19, 20, 726, 346));
         jScrollPane2.getViewport().setBackground(new Color(204, 204, 204));
         jScrollPane2.setBorder(titledBorder2);
         jScrollPane2.setBounds(new Rectangle(19, 458, 726, 218));
@@ -587,11 +587,11 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay {
         cdTextArea.setFont(new java.awt.Font("Dialog", 0, 12));
         cdTextArea.setLineWrap(true);
         cdTextArea.setWrapStyleWord(true);
-        statsLabel2.setBounds(new Rectangle(19, 371, 720, 31));
+        statsLabel2.setBounds(new Rectangle(19, 365, 720, 31));
         statsLabel2.setText("Total - 0, Creatures - 0 Land - 0");
         statsLabel2.setFont(new java.awt.Font("Dialog", 0, 14));
         jLabel1.setText("Click on the column name (like name or color) to sort the cards");
-        jLabel1.setBounds(new Rectangle(20, 9, 400, 19));
+        jLabel1.setBounds(new Rectangle(20, 1, 400, 19));
         this.getContentPane().add(cardDetailPanel, null);
         cardDetailPanel.add(jScrollPane3, null);
         jScrollPane3.getViewport().add(cdTextArea, null);
