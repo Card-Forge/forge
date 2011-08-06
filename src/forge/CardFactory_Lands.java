@@ -740,7 +740,6 @@ class CardFactory_Lands {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Wasteland") || cardName.equals("Strip Mine")) {
-            
 
             //tap sacrifice
             final Ability_Tap ability = new Ability_Tap(card, "0") {
@@ -814,7 +813,7 @@ class CardFactory_Lands {
                         });
                         
                         Object o = AllZone.Display.getChoice("Choose a "
-                                + (card.getName().equals("Wasteland")? "nonbasic":"") + "land to destroy",
+                                + (card.getName().equals("Wasteland")? "nonbasic":"") + " land to destroy",
                                 list.toArray());
                         ability.setTargetCard((Card) o);
                         
@@ -830,7 +829,7 @@ class CardFactory_Lands {
             };
             card.addSpellAbility(ability);
             ability.setDescription("Tap, Sacrifice " + card.getName() + ": Destroy target "
-                    + (card.getName().equals("Wasteland")? "nonbasic":"") + "land.");
+                    + (card.getName().equals("Wasteland")? "nonbasic":"") + " land.");
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
