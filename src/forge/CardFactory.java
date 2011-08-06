@@ -18337,6 +18337,67 @@ public class CardFactory implements NewConstants {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if (cardName.equals("Suffer the Past"))
+        {
+        	final SpellAbility spell = new Spell(card){
+				private static final long serialVersionUID = 1168802375190293222L;
+				
+				@Override
+				public void resolve() {
+					String tPlayer = getTargetPlayer();
+					String player = card.getController();
+					final int max = card.getXManaCostPaid();
+
+					PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, tPlayer);
+					CardList graveList = new CardList(grave.getCards());
+					int X = Math.min(max, graveList.size());
+					
+					if( player.equals(Constant.Player.Human)) {
+						for(int i = 0; i < X; i++) {
+							Object o = AllZone.Display.getChoice("Remove from game", graveList.toArray());
+							if(o == null) break;
+							Card c_1 = (Card) o;
+							graveList.remove(c_1); //remove from the display list
+							AllZone.GameAction.removeFromGame(c_1);
+						}
+					}
+					else { //Computer
+						//Random random = new Random();
+						for(int j = 0; j < X; j++) {
+							//int index = random.nextInt(X-j);
+							AllZone.GameAction.removeFromGame(graveList.get(j));
+						}
+					}
+
+					AllZone.GameAction.getPlayerLife(tPlayer).subtractLife(X);
+					AllZone.GameAction.getPlayerLife(player).addLife(X);
+					card.setXManaCostPaid(0);
+				}
+				
+				@Override
+        		public void chooseTargetAI() {
+        			setTargetPlayer(Constant.Player.Human);
+        		}//chooseTargetAI()
+				
+				@Override
+        		public boolean canPlayAI() {
+        			String player = getTargetPlayer();
+        			PlayerZone grave = AllZone.getZone(Constant.Zone.Library, player);
+        			CardList graveList = new CardList(grave.getCards());
+        			
+        			//int computerLife = AllZone.Computer_Life.getLife();
+
+        			final int maxX = ComputerUtil.getAvailableMana().size() - 1;
+        			return (maxX >= 3) && (graveList.size() > 0);
+        		}
+        	};
+        	
+        	spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
 
         
         // Cards with Cycling abilities

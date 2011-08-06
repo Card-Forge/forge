@@ -1,3 +1,8 @@
+Suffer the Past
+X B
+Sorcery
+Exile X target cards from target player's graveyard. For each card exiled this way, that player loses 1 life and you gain 1 life.
+
 Repay in Kind
 5 B B
 Sorcery
