@@ -45,7 +45,8 @@ public class PhaseUtil {
 	
     private static void doUntap()
     {
-    	PlayerZone p = AllZone.getZone(Constant.Zone.Battlefield, AllZone.Phase.getPlayerTurn());
+    	Player player = AllZone.Phase.getPlayerTurn();
+    	PlayerZone p = AllZone.getZone(Constant.Zone.Battlefield, player);
     	CardList list = new CardList(p.getCards());
     	
     	for(Card c : list) {
@@ -133,6 +134,13 @@ public class PhaseUtil {
     			c.removeExtrinsicKeyword("HIDDEN This card doesn't untap during your next untap step.");
     		}
     	}
+    	
+    	if(AllZoneUtil.isCardInPlay("Seedborn Muse", player.getOpponent())) {
+    		CardList opp = AllZoneUtil.getPlayerCardsInPlay(player.getOpponent());
+    		for(Card oppCard:opp) oppCard.untap();
+    		
+    	}
+    	
     	if( canOnlyUntapOneLand()) {
     		if( AllZone.Phase.getPlayerTurn().equals(AllZone.ComputerPlayer)) {
     			//search for lands the computer has and only untap 1
