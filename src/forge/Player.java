@@ -125,8 +125,8 @@ public abstract class Player extends MyObservable{
 	protected abstract Card getPlayerCard();
 	
 	public boolean canGainLife() {
-		if(AllZoneUtil.isCardInPlay("Sulfuric Vortex")) return false;
-		if(AllZoneUtil.isCardInPlay("Platinum Emperion",this)) return false;
+		if(AllZoneUtil.isCardInPlay("Sulfuric Vortex") || AllZoneUtil.isCardInPlay("Leyline of Punishment") || 
+				AllZoneUtil.isCardInPlay("Platinum Emperion",this)) return false;
 		return true;
 	}
 	
@@ -220,6 +220,9 @@ public abstract class Player extends MyObservable{
 	
 	//This should be also usable by the AI to forecast an effect (so it must not change the game state) 
 	public int staticDamagePrevention(final int damage, final Card source, final boolean isCombat) {
+		
+    	if(AllZoneUtil.isCardInPlay("Leyline of Punishment")) return damage;
+		
 		int restDamage = damage;
 		
     	if(isCombat) {
@@ -280,6 +283,9 @@ public abstract class Player extends MyObservable{
 	}
 	
 	public int preventDamage(final int damage, Card source, boolean isCombat) {
+		
+    	if(AllZoneUtil.isCardInPlay("Leyline of Punishment")) return damage;
+    	
     	int restDamage = damage;
     	
     	// Purity has to stay here because it changes the game state

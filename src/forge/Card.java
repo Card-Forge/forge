@@ -2646,6 +2646,9 @@ public class Card extends MyObservable {
     
 	//This should be also usable by the AI to forecast an effect (so it must not change the game state) 
 	public int staticDamagePrevention(final int damage, final Card source, final boolean isCombat) {
+		
+    	if(AllZoneUtil.isCardInPlay("Leyline of Punishment")) return damage;
+		
 		int restDamage = damage;
 		Player player = source.getController();
 		
@@ -2701,6 +2704,9 @@ public class Card extends MyObservable {
     }
     
     public int preventDamage(final int damage, Card source, boolean isCombat) {
+    	
+    	if(AllZoneUtil.isCardInPlay("Leyline of Punishment")) return damage;
+    	
     	int restDamage = damage;
     	
     	restDamage = staticDamagePrevention(restDamage, source, isCombat);

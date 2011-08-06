@@ -1,0 +1,10 @@
+Name:Kor Haven
+ManaCost:no cost
+Types:Legendary Land
+Text:no text
+K:tap: add 1
+A:AB$Pump | Cost$ 1 W T | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | isCurse$True | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SpellDescription$ Prevent all combat damage that would be dealt by target attacking creature this turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_haven.jpg
+End
