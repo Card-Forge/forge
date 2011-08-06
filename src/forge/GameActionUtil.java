@@ -57,7 +57,7 @@ public class GameActionUtil {
 		upkeep_Scute_Mob();
 		upkeep_Lichenthrope();
 		upkeep_Heartmender();
-		upkeep_AEther_Vial();
+		//upkeep_AEther_Vial();
 		upkeep_Ratcatcher();
 		upkeep_Nath();
 		upkeep_Anowon();
@@ -6753,7 +6753,7 @@ public class GameActionUtil {
 
 	}
 
-
+	/*
 	private static void upkeep_AEther_Vial() {
 		final Player player = AllZone.Phase.getActivePlayer();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
@@ -6794,6 +6794,7 @@ public class GameActionUtil {
 			}//for
 		}
 	}
+	*/
 
 	private static void upkeep_Dragonmaster_Outcast() {
 		final Player player = AllZone.Phase.getActivePlayer();
