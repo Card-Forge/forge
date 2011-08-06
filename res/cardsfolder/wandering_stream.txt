@@ -2,7 +2,7 @@ Name:Wandering Stream
 ManaCost:2 G
 Types:Sorcery
 Text:no text
-K:spGainLife:X:Domain - You gain 2 life for each basic land type among lands you control.:Wandering Stream - player gains X life
+A:SP$GainLife | Cost$ 2 G | LifeAmount$ X | SpellDescription$ Domain - You gain 2 life for each basic land type among lands you control.
 SVar:X:Count$Domain/Times.2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card23119.jpg
