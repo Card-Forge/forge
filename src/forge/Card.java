@@ -2183,5 +2183,30 @@ public class Card extends MyObservable {
 	public boolean isImmutable() {
 		return isImmutable;
 	}
+	
+	/*
+	 * there are easy checkers for Color.  The CardUtil functions should
+	 * be made part of the Card class, so calling out is not necessary
+	 */
+	
+	public boolean isBlack() {
+		return CardUtil.getColors(this).contains(Constant.Color.Black);
+	}
+	
+	public boolean isBlue() {
+		return CardUtil.getColors(this).contains(Constant.Color.Blue);
+	}
+	
+	public boolean isRed() {
+		return CardUtil.getColors(this).contains(Constant.Color.Red);
+	}
+	
+	public boolean isGreen() {
+		return CardUtil.getColors(this).contains(Constant.Color.Green);
+	}
+	
+	public boolean isWhite() {
+		return CardUtil.getColors(this).contains(Constant.Color.White);
+	}
 
 }

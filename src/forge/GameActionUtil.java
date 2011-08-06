@@ -257,6 +257,28 @@ public class GameActionUtil {
 				}
 			}
 		}//end Spirit Shackle
+		
+		/*
+		 * Royal Decree - Whenever a Swamp, Mountain, black permanent, or red
+		 * permanent becomes tapped, Royal Decree deals 1 damage to that
+		 * permanent's controller.
+		 */
+		if(c.getType().contains("Mountain") || c.getType().contains("Swamp") ||
+				(c.isPermanent() && (c.isRed() || c.isBlack()))) {
+			final CardList decrees = AllZoneUtil.getCardsInPlay("Royal Decree");
+			for(Card decree:decrees) {
+				final Card crd = decree;
+				final Card source = c;
+				Ability ability = new Ability(decree, "0") {
+					@Override
+					public void resolve() {
+						AllZone.GameAction.addDamage(source.getController(), crd, 1);
+					}
+				};//Ability
+				ability.setStackDescription(decree.getName()+" - does 1 damage to "+c.getController()+".  ("+c.getName()+" was tapped.)");
+				AllZone.Stack.add(ability);
+			}//for
+		}
 
 	}//end executeTapSideEffects()
 	
