@@ -545,33 +545,7 @@ public class CardFactory_Instants {
         }//*************** END ************ END **************************
         
 
-        //*************** START *********** START **************************
-        else if(cardName.equals("Life Burst")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 5653342880372240806L;
-                
-                @Override
-                public void resolve() {
-                    CardList count = new CardList();
-                    count.addAll(AllZone.Human_Graveyard.getCards());
-                    count.addAll(AllZone.Computer_Graveyard.getCards());
-                    count = count.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.getName().equals("Life Burst");
-                        }
-                    });
-                    
-                    getTargetPlayer().gainLife(4 + (4 * count.size()), card);
-                }
-            };
-            spell.setChooseTargetAI(CardFactoryUtil.AI_targetComputer());
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-        }//*************** END ************ END **************************
-        
-        
+             
         //*************** START *********** START **************************
         else if(cardName.equals("Accumulated Knowledge")) {
             final SpellAbility spell = new Spell(card) {
