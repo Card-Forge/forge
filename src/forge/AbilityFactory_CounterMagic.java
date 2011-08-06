@@ -254,11 +254,17 @@ public class AbilityFactory_CounterMagic {
 		if(AllZone.Stack.size() < 1) {
 			return false;
 		}
-		if(matchSpellAbility(sa.getSourceCard(), AllZone.Stack.peek(), splitTargetingRestrictions, targetType)) {
-			tgt[0] = AllZone.Stack.peek();
+		
+		SpellAbility topSA = AllZone.Stack.peek();
+		if (!CardFactoryUtil.isCounterable(topSA.getSourceCard()))
+			return false;
+		
+		if(matchSpellAbility(sa.getSourceCard(), topSA, splitTargetingRestrictions, targetType)) {
+			tgt[0] = topSA;
 			toReturn = true;
 		}
 
+		
 		Ability_Sub subAb = sa.getSubAbility();
 		if (subAb != null)
 			toReturn &= subAb.chkAI_Drawback();
