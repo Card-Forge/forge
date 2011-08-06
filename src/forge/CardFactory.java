@@ -6555,32 +6555,30 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList creature = new CardList(AllZone.Human_Play.getCards());
-                    creature = creature.getType("Creature");
-                    creature = creature.filter(new CardListFilter()
-                    {
-                    	public boolean addCard(Card c)
-                    	{
-                    		return !c.getName().equals("Shapeshifter");
-                    	}
-                    });
-                    
-                    if (creature.size()>0) {
-                    	Card target = CardFactoryUtil.AI_getBestCreature(creature);
-                    	setTargetCard(target);
-                    }
-                    
-                    return creature.size() != 0 && (AllZone.Phase.getTurn() > 4);
-                }
+                	return (getCreature().size() != 0) && (AllZone.Phase.getTurn() > 4);
+                }//canPlayAI()
                 
+                CardList getCreature() {
+                	CardList list = CardFactoryUtil.AI_getHumanCreature(card, true);
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return (c.getNetAttack() > 2 
+                            		&& CardFactoryUtil.canTarget(card, c) 
+                            		&& (!c.getName().equals("Shapeshifter") 
+                            		|| (c.getName().equals("Shapeshifter") 
+                            		&& (c.isEnchanted() 
+                            		|| c.getCounters(Counters.P1P1) != 0))));
+                        }
+                    });
+                    return list;
+                }//getCreature()
+
                 @Override
                 public void chooseTargetAI() {
-                    CardList play = new CardList(AllZone.Human_Play.getCards());
-                    Card target = CardFactoryUtil.AI_getBestCreature(play);
-                    setTargetCard(target);
-                }
-                
-            };
+                	Card best = CardFactoryUtil.AI_getBestCreature(getCreature());
+                    setTargetCard(best);
+                }//chooseTargetAI()
+            };//SpellAbility
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
             
             card.setSVar("PlayMain1", "TRUE");
