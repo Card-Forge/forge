@@ -50,7 +50,6 @@ public class GameActionUtil {
 		
 		upkeep_Greener_Pastures();
 		upkeep_Heartmender();
-		upkeep_Anowon();
 		upkeep_Cunning_Lethemancer();
 		upkeep_Shapeshifter();
 		upkeep_Vesuvan_Doppelganger_Keyword();
@@ -3807,38 +3806,6 @@ public class GameActionUtil {
 			} // for
 		} // if creatures > 0
 	}//upkeep_Heartmender
-
-	private static void upkeep_Anowon() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Anowon, the Ruin Sage");
-
-		if(list.size() > 0) {
-			Ability ability = new Ability(list.get(0), "0") {
-				@Override
-				public void resolve() {
-					PlayerZone hPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-					PlayerZone cPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-					CardList choices = new CardList(hPlay.getCards());
-
-					CardListFilter filter = new CardListFilter() {
-						public boolean addCard(Card c) {
-							return (c.isCreature() && !c.isType("Vampire"));
-						}
-					};
-
-					choices = choices.filter(filter);
-					if(choices.size() > 0) AllZone.HumanPlayer.sacrificeCreature(choices);
-
-					CardList compCreats = new CardList(cPlay.getCards());
-					compCreats = compCreats.filter(filter);
-
-					if(compCreats.size() > 0) AllZone.ComputerPlayer.sacrificeCreature(compCreats);
-				}
-			};
-			ability.setStackDescription("At the beginning of your upkeep, each player sacrifices a non-Vampire creature.");
-			AllZone.Stack.add(ability);
-		}
-	}
 
 	private static void upkeep_Cunning_Lethemancer() {
 		final Player player = AllZone.Phase.getPlayerTurn();
