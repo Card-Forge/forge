@@ -84,7 +84,7 @@ public class Input_StackNotEmpty extends Input implements java.io.Serializable {
         
         //special consideration for "Beacon of Unrest" and other "Beacon" cards
         if((c.isInstant() || c.isSorcery() || (c.isAura() && fizzle)) && (!c.getName().startsWith("Beacon"))
-                && (!c.getName().startsWith("Pulse")) && !AllZone.GameAction.isCardRemovedFromGame(c)) //hack to make flashback work
+                && (!c.getName().startsWith("Pulse")) && !AllZone.GameAction.isCardExiled(c)) //hack to make flashback work
         {
             if(c.getReplaceMoveToGraveyard().size() == 0) AllZone.GameAction.moveToGraveyard(c);
             else c.replaceMoveToGraveyard();
