@@ -6,6 +6,7 @@ A:SP$ChangeZone | Cost$ 3 W | Origin$ Graveyard | Destination$ Library | TargetM
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:X:Count$TypeInYourYard.Artifact
 SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frantic_salvage.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/6.jpg
