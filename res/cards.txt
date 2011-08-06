@@ -1,3 +1,161 @@
+Amnesia
+3 U U U
+Sorcery
+Target player reveals his or her hand and discards all nonland cards.
+SVar:RemAIDeck:True
+
+Ashes to Ashes
+1 B B
+Sorcery
+Ashes to Ashes removes two target non-artifact creatures from the game and does 5 damage to you.
+SVar:RemAIDeck:True
+
+Battle of Wits
+3 U U
+Enchantment
+At the beginning of your upkeep, if you have 200 or more cards in your library, you win the game.
+SVar:RemAIDeck:True
+
+Blinding Light
+2 W
+Sorcery
+Tap all nonwhite creatures.
+SVar:RemAIDeck:True
+
+Darksteel Colossus
+11
+Artifact Creature Golem
+no text
+11/11
+Trample
+Indestructible
+When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
+SVar:RemAIDeck:True
+
+Delirium Skeins
+2 B
+Sorcery
+Each player discards three cards.
+SVar:RemAIDeck:True
+
+Force of Savagery
+2 G
+Creature Elemental
+no text
+8/0
+Trample
+SVar:RemAIDeck:True
+
+Haunted Angel
+2 W
+Creature Angel
+When Haunted Angel is put into a graveyard from play, remove Haunted Angel from the game and each other player puts a 3/3 black Angel creature token with flying into play.
+3/3
+Flying
+SVar:RemAIDeck:True
+
+Hymn to Tourach
+B B
+Sorcery
+no text
+spDiscardTgt:AtRandom:2:Target player discards two cards at random.:Hymn to Tourach - target player discards cards
+SVar:RemAIDeck:True
+
+Incendiary Command
+3 R R
+Sorcery
+Choose two - Incendiary Command deals 4 damage to target player; or Incendiary Command deals 2 damage to each creature; or destroy target nonbasic land; or each player discards all cards in his or her hand, then draws that many cards.
+SVar:RemAIDeck:True
+
+Jokulhaups
+4 R R
+Sorcery
+Destroy all artifacts, creatures, and lands. They can't be regenerated.
+SVar:RemAIDeck:True
+
+Magus of the Library
+G G
+Creature Human Wizard
+no text
+1/1
+tap: add 1
+SVar:RemAIDeck:True
+
+Memnarch
+7
+Legendary Artifact Creature Wizard
+no text
+4/5
+SVar:RemAIDeck:True
+
+Ornithopter
+0
+Artifact Creature Thopter
+no text
+0/2
+Flying
+SVar:RemAIDeck:True
+
+Plague Wind
+7 B B
+Sorcery
+Destroy all creatures you don't control. They can't be regenerated.
+SVar:RemAIDeck:True
+
+Sarcomite Myr
+2 U
+Artifact Creature Myr
+no text
+2/1
+SVar:RemAIDeck:True
+
+Sky Swallower
+3 U U
+Creature Leviathan
+When Sky Swallower comes into play, target opponent gains control of all other permanents you control.
+8/8
+Flying
+SVar:RemAIDeck:True
+
+Steel Wall
+1
+Artifact Creature Wall
+no text
+0/4
+Defender
+SVar:RemAIDeck:True
+
+The Unspeakable
+6 U U U
+Legendary Creature Spirit
+(NOTE: "Whenever The Unspeakable deals combat damage to a player, you may return target Arcane card from your graveyard to your hand." not implemented.)
+6/7
+Flying
+Trample
+SVar:RemAIDeck:True
+
+Undying Beast
+3 B
+Creature Beast
+When Undying Beast is put into a graveyard from play, put Undying Beast on top of its owner's library.
+3/2
+SVar:RemAIDeck:True
+
+Wall of Kelp
+U U
+Creature Wall
+no text
+0/3
+Defender
+SVar:RemAIDeck:True
+
+Wit's End
+5 B B
+Sorcery
+no text
+spDiscardTgt:Hand:0:Target player discards his or her hand.:Wit's End - target player discards cards
+SVar:RemAIDeck:True
+
 Deglamer
 1 G
 Instant
@@ -2912,12 +3070,6 @@ Land
 no text
 tap: add 1
 
-Hymn to Tourach
-B B
-Sorcery
-no text
-spDiscardTgt:AtRandom:2:Target player discards two cards at random.:Hymn to Tourach - target player discards cards
-
 Mind Shatter
 X B B
 Sorcery
@@ -2938,12 +3090,6 @@ Sorcery
 no text
 spDiscardTgt:TgtChoose:1:Target player discards a card.:Surging Dementia - Target player discards a card.
 Ripple:4
-
-Wit's End
-5 B B
-Sorcery
-no text
-spDiscardTgt:Hand:0:Target player discards his or her hand.:Wit's End - target player discards cards
 
 Rend Spirit 
 2 B
@@ -3384,11 +3530,6 @@ Violent Ultimatum
 B B R R R G G
 Sorcery
 Destroy three target permanents.
-
-Incendiary Command
-3 R R
-Sorcery
-Choose two - Incendiary Command deals 4 damage to target player; or Incendiary Command deals 2 damage to each creature; or destroy target nonbasic land; or each player discards all cards in his or her hand, then draws that many cards.
 
 Twincast
 U U
@@ -5546,15 +5687,6 @@ Sorcery
 Wreak Havoc can't be countered by spells or abilities. Destroy target artifact or land.
 spDestroyTgt:Artifact,Land
 CARDNAME can't be countered.
-
-Darksteel Colossus
-11
-Artifact Creature Golem
-no text
-11/11
-Trample
-Indestructible
-When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
 
 Legacy Weapon
 7
@@ -18995,11 +19127,6 @@ no text
 2/3
 abPump R:+1/+0
 
-Jokulhaups
-4 R R
-Sorcery
-Destroy all artifacts, creatures, and lands. They can't be regenerated.
-
 Viashino Slaughtermaster
 1 R
 Creature Viashino Warrior
@@ -22497,11 +22624,6 @@ Creature Elemental
 When Meadowboon leaves play, put a +1/+1 counter on each creature you control.
 3/3
 
-Battle of Wits
-3 U U
-Enchantment
-At the beginning of your upkeep, if you have 200 or more cards in your library, you win the game.
-
 Mad Auntie
 2 B
 Creature Goblin Shaman
@@ -22754,13 +22876,6 @@ Trample
 Haste
 At the beginning of the end step, sacrifice CARDNAME.
 
-Force of Savagery
-2 G
-Creature Elemental
-no text
-8/0
-Trample
-
 Moorish Cavalry
 2 W W
 Creature Human Knight
@@ -22795,14 +22910,6 @@ Creature Beast
 no text
 3/3
 Flying 
-Trample
-
-The Unspeakable
-6 U U U
-Legendary Creature Spirit
-(NOTE: "Whenever The Unspeakable deals combat damage to a player, you may return target Arcane card from your graveyard to your hand." not implemented.)
-6/7
-Flying
 Trample
 
 Rootbreaker Wurm
@@ -22849,13 +22956,6 @@ Magus of the Disk
 Creature Human Wizard
 Magus of the Disk comes into play tapped.
 2/4
-
-Magus of the Library
-G G
-Creature Human Wizard
-no text
-1/1
-tap: add 1
 
 Library of Alexandria
 no cost
@@ -22927,12 +23027,6 @@ Creature Zombie Warrior
 no text
 5/3
 
-Sarcomite Myr
-2 U
-Artifact Creature Myr
-no text
-2/1
-
 Bonded Fetch
 2 U
 Creature Homunculus
@@ -22997,16 +23091,6 @@ Animate Dead
 1 B
 Sorcery
 Put target creature card from any graveyard into play under your control.  That creature gets -1/-0. (NOTE: This spell is currently treated as a Sorcery rather than as an Enchantment.)
-
-Ashes to Ashes
-1 B B
-Sorcery
-Ashes to Ashes removes two target non-artifact creatures from the game and does 5 damage to you.
-
-Amnesia
-3 U U U
-Sorcery
-Target player reveals his or her hand and discards all nonland cards.
 
 Sprout Swarm
 1 G
@@ -23286,11 +23370,6 @@ B B
 Instant
 Destroy target creature. It can't be regenerated. You lose life equal to that creature's toughness.
 
-Delirium Skeins
-2 B
-Sorcery
-Each player discards three cards.
-
 Keening Banshee
 2 B B
 Creature Spirit
@@ -23395,13 +23474,6 @@ Instant
 no text
 spPumpTgt:+2/+4:Drawback$UntapTgt:Untap target creature. It gets +2/+4 until end of turn.:Insprit - Untap target creature. It gets +2/+4 until end of turn.
 
-Haunted Angel
-2 W
-Creature Angel
-When Haunted Angel is put into a graveyard from play, remove Haunted Angel from the game and each other player puts a 3/3 black Angel creature token with flying into play.
-3/3
-Flying
-
 Castle Raptors
 4 W
 Creature Bird Soldier
@@ -23420,11 +23492,6 @@ Phyrexian Gargantua
 Creature Horror
 When Phyrexian Gargantua comes into play, you draw two cards and you lose 2 life.
 4/4
-
-Plague Wind
-7 B B
-Sorcery
-Destroy all creatures you don't control. They can't be regenerated.
 
 Sengir Autocrat
 3 B
@@ -23503,12 +23570,6 @@ Creature Imp
 no text
 2/1
 Flying
-
-Undying Beast
-3 B
-Creature Beast
-When Undying Beast is put into a graveyard from play, put Undying Beast on top of its owner's library.
-3/2
 
 Slaughterhouse Bouncer
 4 B
@@ -23924,13 +23985,6 @@ Creature Vedalken Wizard
 no text
 1/2
 
-Wall of Kelp
-U U
-Creature Wall
-no text
-0/3
-Defender
-
 Whirlpool Rider
 1 U
 Creature Merfolk
@@ -23950,24 +24004,11 @@ no text
 3/3
 Flying
 
-Memnarch
-7
-Legendary Artifact Creature Wizard
-no text
-4/5
-
 Keiga, the Tide Star
 5 U
 Legendary Creature Dragon Spirit
 When Keiga, the Tide Star is put into a graveyard from play, gain control of target creature.
 5/5
-Flying
-
-Sky Swallower
-3 U U
-Creature Leviathan
-When Sky Swallower comes into play, target opponent gains control of all other permanents you control.
-8/8
 Flying
 
 Meloku the Clouded Mirror
@@ -24083,11 +24124,6 @@ Breath of Life
 Sorcery
 Return target creature card from your graveyard to play.
 
-Blinding Light
-2 W
-Sorcery
-Tap all nonwhite creatures.
-
 Reviving Dose
 2 W
 Instant
@@ -24181,13 +24217,6 @@ Phyrexian Hulk
 Artifact Creature Golem
 no text
 5/4
-
-Ornithopter
-0
-Artifact Creature Thopter
-no text
-0/2
-Flying
 
 Dancing Scimitar
 4
@@ -24536,13 +24565,6 @@ Legendary Creature Dragon Spirit
 When Jugan, the Rising Star is put into a graveyard from play, you may put five +1/+1 counters on ONE target creature.
 5/5
 Flying
-
-Steel Wall
-1
-Artifact Creature Wall
-no text
-0/4
-Defender
 
 Nantuko Shade
 B B
