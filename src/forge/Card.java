@@ -866,8 +866,14 @@ public class Card extends MyObservable {
             sb.insert(sb.indexOf(".) ")+3, "\r\n");
         }
         
-        while (sb.toString().contains("\r\n\r\n\r\n")) {
-            sb.replace(sb.lastIndexOf("\r\n\r\n\r\n"), sb.lastIndexOf("\r\n\r\n\r\n")+4, "\r\n");
+        // replace tripple line feeds with double line feeds
+        int start;
+        String s = "\r\n\r\n\r\n";
+        while (sb.toString().contains(s)) {
+            start = sb.lastIndexOf(s);
+            if (start < 0 || start >= sb.length())
+                break;
+            sb.replace(start, start+4, "\r\n");
         }
         
         return sb.toString().replaceAll("CARDNAME", getName()).trim();
