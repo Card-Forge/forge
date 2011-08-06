@@ -3382,7 +3382,7 @@ public class CardFactory implements NewConstants {
         
         ////////////////////////////////////////////////////////////////
         
-        if(card.getKeyword().contains("When this card comes into play, draw a card.")) {
+        if(card.getKeyword().contains("When CARDNAME comes into play, draw a card.")) {
             
             final SpellAbility ability = new Ability(card, "0") {
                 @Override

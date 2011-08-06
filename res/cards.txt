@@ -1,3 +1,152 @@
+Arctic Wolves
+3 G G
+Creature Wolf
+no text
+4/5
+Cumulative upkeep:2
+When CARDNAME comes into play, draw a card.
+
+Carven Caryatid
+1 G G
+Creature Spirit
+no text
+2/5
+Defender
+When CARDNAME comes into play, draw a card.
+
+Council of Advisors
+2 U
+Creature Human Advisor
+no text
+1/1
+When CARDNAME comes into play, draw a card.
+
+Elvish Visionary
+1 G
+Creature Elf Shaman
+no text
+1/1
+When CARDNAME comes into play, draw a card.
+
+Eternity Snare
+5 U
+Enchantment Aura
+Enchanted creature doesn't untap during its controller's untap step.
+Enchant creature
+enPumpCurse:This card doesn't untap during your untap step.
+When CARDNAME comes into play, draw a card.
+
+Frog Tongue
+G
+Enchantment Aura
+Enchanted creature has reach.
+Enchant creature
+enPump:Reach
+When CARDNAME comes into play, draw a card.
+
+Jungle Barrier
+2 G U
+Creature Plant Wall
+no text
+2/6
+Defender
+When CARDNAME comes into play, draw a card.
+
+Kavu Climber
+3 G G
+Creature Kavu
+no text
+3/3
+When CARDNAME comes into play, draw a card.
+
+Merchant of Secrets
+2 U
+Creature Human Wizard
+no text
+1/1
+When CARDNAME comes into play, draw a card.
+
+Messenger Falcons
+2 GU W
+Creature Bird
+no text
+2/2
+Flying
+When CARDNAME comes into play, draw a card.
+
+Multani's Acolyte
+G G
+Creature Elf
+no text
+2/1
+When CARDNAME comes into play, draw a card.
+Echo:G G
+
+Prophetic Prism
+2
+Artifact
+no text
+When CARDNAME comes into play, draw a card.
+tap: add W
+tap: add B
+tap: add U
+tap: add R
+tap: add G
+
+Scavenged Weaponry
+2 B
+Enchantment Aura
+Enchanted creature gets +1/+1.
+Enchant creature
+enPump:+1/+1
+When CARDNAME comes into play, draw a card.
+
+Shielding Plax
+2 GU
+Enchantment Aura
+Enchanted creature can't be the target of spells or abilities your opponents control.
+Enchant creature
+enPump:This card can't be the target of spells or abilities your opponents control.
+When CARDNAME comes into play, draw a card.
+
+Striped Bears
+3 G
+Creature Bear
+no text
+2/2
+When CARDNAME comes into play, draw a card.
+
+Unquestioned Authority
+2 W
+Enchantment Aura
+Enchanted creature has protection from creatures.
+Enchant creature
+enPump:Protection from creatures
+When CARDNAME comes into play, draw a card.
+
+Wall of Blossoms
+1 G
+Creature Wall
+no text
+0/4
+Defender
+When CARDNAME comes into play, draw a card.
+
+Wall of Omens
+1 W
+Creature Wall
+no text
+0/4
+Defender
+When CARDNAME comes into play, draw a card.
+
+Wistful Selkie
+GU GU GU
+Creature Merfolk Wizard
+no text
+2/2
+When CARDNAME comes into play, draw a card.
+
 Tribal Forcemage
 1 G
 Creature Elf Wizard
@@ -554,17 +703,6 @@ Artifact Equipment
 Equipped creature gets +5/+0.
 eqPump 5:+5/+0
 
-Prophetic Prism
-2
-Artifact
-no text
-When this card comes into play, draw a card.
-tap: add W
-tap: add B
-tap: add U
-tap: add R
-tap: add G
-
 Skeletal Wurm
 7 B
 Creature Skeleton Wurm
@@ -593,14 +731,6 @@ Creature Beast
 no text
 5/3
 Trample
-
-Wall of Omens
-1 W
-Creature Wall
-no text
-0/4
-Defender
-When this card comes into play, draw a card.
 
 Wildheart Invoker
 2 G G
@@ -1137,14 +1267,6 @@ Enchanted creature has protection from white. This effect doesn't remove White W
 Enchant creature
 enPump:Protection from white
 
-Unquestioned Authority
-2 W
-Enchantment Aura
-Enchanted creature has protection from creatures.
-Enchant creature
-enPump:Protection from creatures
-When this card comes into play, draw a card.
-
 Vampiric Embrace
 2 B B
 Enchantment Aura
@@ -1165,14 +1287,6 @@ Enchantment Aura
 Enchanted creature has trample.
 Enchant creature
 enPump:Trample
-
-Shielding Plax
-2 GU
-Enchantment Aura
-Enchanted creature can't be the target of spells or abilities your opponents control.
-Enchant creature
-enPump:This card can't be the target of spells or abilities your opponents control.
-When this card comes into play, draw a card.
 
 Squee's Embrace
 R W
@@ -1238,14 +1352,6 @@ Enchanted creature gets +1/+0 and has first strike.
 Flash
 Enchant creature
 enPump:+1/+0/First Strike
-
-Frog Tongue
-G
-Enchantment Aura
-Enchanted creature has reach.
-Enchant creature
-enPump:Reach
-When this card comes into play, draw a card.
 
 Putrid Leech
 B G
@@ -3321,14 +3427,6 @@ no text
 spDamageTgtOpp:X:Jovial Evil deals X damage to target opponent, where X is twice the number of white creatures that player controls.:Jovial Evil - deals twice X damage.
 SVar:X:Count$NumTypeWhiteOppCtrl.Creature/Twice
 
-Arctic Wolves
-3 G G
-Creature Wolf
-no text
-4/5
-Cumulative upkeep:2
-When this card comes into play, draw a card.
-
 Arnjlot's Ascent
 1 U U
 Enchantment
@@ -3614,14 +3712,6 @@ Creature Cat
 no text
 2/2
 Echo:G
-
-Multani's Acolyte
-G G
-Creature Elf
-no text
-2/1
-When this card comes into play, draw a card.
-Echo:G G
 
 Lightning Dragon
 2 R R
@@ -5680,14 +5770,6 @@ no text
 Whenever a creature with shadow is put into a graveyard from the battlefield, put a +1/+1 counter on Dauthi Ghoul.
 Shadow
 
-Eternity Snare
-5 U
-Enchantment Aura
-Enchanted creature doesn't untap during its controller's untap step.
-Enchant creature
-enPumpCurse:This card doesn't untap during your untap step.
-When this card comes into play, draw a card.
-
 Elvish Hunter
 1 G
 Creature Elf Archer
@@ -6076,14 +6158,6 @@ Enchantment Aura
 Enchanted creature gets +2/+2 and can't block.
 Enchant creature
 enPump:+2/+2/This creature cannot block
-
-Scavenged Weaponry
-2 B
-Enchantment Aura
-Enchanted creature gets +1/+1.
-Enchant creature
-enPump:+1/+1
-When this card comes into play, draw a card.
 
 Shield of Duty and Reason
 W
@@ -9217,80 +9291,6 @@ Sunbeam Spellbomb
 Artifact
 no text
 1, Sacrifice CARDNAME: Draw a card.
-
-Wall of Blossoms
-1 G
-Creature Wall
-no text
-0/4
-Defender
-When this card comes into play, draw a card.
-
-Jungle Barrier
-2 G U
-Creature Plant Wall
-no text
-2/6
-Defender
-When this card comes into play, draw a card.
-
-Striped Bears
-3 G
-Creature Bear
-no text
-2/2
-When this card comes into play, draw a card.
-
-Merchant of Secrets
-2 U
-Creature Human Wizard
-no text
-1/1
-When this card comes into play, draw a card.
-
-Council of Advisors
-2 U
-Creature Human Advisor
-no text
-1/1
-When this card comes into play, draw a card.
-
-Carven Caryatid
-1 G G
-Creature Spirit
-no text
-2/5
-Defender
-When this card comes into play, draw a card.
-
-Kavu Climber
-3 G G
-Creature Kavu
-no text
-3/3
-When this card comes into play, draw a card.
-
-Elvish Visionary
-1 G
-Creature Elf Shaman
-no text
-1/1
-When this card comes into play, draw a card.
-
-Messenger Falcons
-2 GU W
-Creature Bird
-no text
-2/2
-Flying
-When this card comes into play, draw a card.
-
-Wistful Selkie
-GU GU GU
-Creature Merfolk Wizard
-no text
-2/2
-When this card comes into play, draw a card.
 
 Cromat
 W U B R G
