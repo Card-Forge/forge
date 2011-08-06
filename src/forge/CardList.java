@@ -80,6 +80,14 @@ public class CardList implements Iterable<Card> {
         list.add(n, c);
     }
     
+    /**
+     * add(CardList) - lets you add one CardList to another directly
+     * @param in - CardList to add to the current CardList
+     */
+    public void add(CardList in) {
+    	addAll(in.toArray());
+    }
+    
     public boolean contains(Card c) {
         return list.contains(c);
     }
