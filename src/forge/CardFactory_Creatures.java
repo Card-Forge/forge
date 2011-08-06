@@ -13002,7 +13002,7 @@ public class CardFactory_Creatures {
                 
                 void makeToken() {
                     CardFactoryUtil.makeToken("Goblin", "R 1 1 Goblin", card, "R", new String[] {
-                            "Creature", "Goblin "}, 1, 1, new String[] {"Flying"});
+                            "Creature", "Goblin"}, 1, 1, new String[] {""});
                 }
             };
             Command intoPlayDestroy = new Command() {

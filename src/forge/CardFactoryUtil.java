@@ -2523,7 +2523,8 @@ public class CardFactoryUtil {
         // 1/10
         if(d[0].contains("DamageTgtC")) AllZone.GameAction.addDamage(TgtC, Src, X);
         else if(d[0].contains("DamageSelf")) AllZone.GameAction.addDamage(Src, Src, X); // 2/10
-        else if(d[0].contains("Damage")) AllZone.GameAction.addDamage(dbPlayer, X);
+        else if(d[0].contains("Damage")) AllZone.GameAction.addDamage(dbPlayer, X, Src);
+        
         
 
         if(d[0].contains("GainLife")) AllZone.GameAction.addLife(dbPlayer, X);

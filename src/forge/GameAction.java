@@ -1459,6 +1459,18 @@ public class GameAction {
         getPlayerLife(player).subtractLife(life);
     }
     
+    public void addDamage(String player, int damage, Card source) {
+        // place holder for future damage modification rules (prevention?)
+        
+    	if(source.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(source, damage);
+    	
+    	CardList cl = CardFactoryUtil.getAurasEnchanting(source, "Guilty Conscience");
+        for(Card c:cl) {
+            GameActionUtil.executeGuiltyConscienceEffects(source, c, damage);
+        }
+        getPlayerLife(player).subtractLife(damage);
+    }
+    
     public void addDamage(String player, int damage) {
         // place holder for future damage modification rules (prevention?)
         
