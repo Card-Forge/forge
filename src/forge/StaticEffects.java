@@ -92,7 +92,7 @@ public class StaticEffects
 		//cardToEffectsList.put("Molimo, Maro-Sorcerer", new String[] {"Molimo_Maro_Sorcerer"});
 		cardToEffectsList.put("Mortivore", new String[] {"Mortivore"});
 		cardToEffectsList.put("Mul Daya Channelers", new String[] {"Mul_Daya_Channelers"});
-		cardToEffectsList.put("Multani, Maro-Sorcerer", new String[] {"Multani_Maro_Sorcerer"});
+		//cardToEffectsList.put("Multani, Maro-Sorcerer", new String[] {"Multani_Maro_Sorcerer"});
 		cardToEffectsList.put("Muraganda Petroglyphs", new String[] {"Muraganda_Petroglyphs"});
 		
 		//cardToEffectsList.put("Nightmare", new String[] {"Nightmare"});

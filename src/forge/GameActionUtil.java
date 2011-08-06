@@ -14658,7 +14658,7 @@ public class GameActionUtil {
 		}// execute()
 	}; // Drove of Elves
 	*/
-
+	/*
 	public static Command Multani_Maro_Sorcerer       = new Command() {
 		private static final long serialVersionUID = -8778902687347191964L;
 
@@ -14684,6 +14684,7 @@ public class GameActionUtil {
 		}
 
 	}; //Multani, Maro-Sorcerer
+	*/
 	/*
 	public static Command Molimo_Maro_Sorcerer        = new Command() {
 		private static final long serialVersionUID = -8778902687347191964L;
@@ -16288,7 +16289,7 @@ public class GameActionUtil {
 		//commands.put("Molimo_Maro_Sorcerer", Molimo_Maro_Sorcerer);
 		commands.put("Mortivore", Mortivore);
 		commands.put("Mul_Daya_Channelers", Mul_Daya_Channelers);
-		commands.put("Multani_Maro_Sorcerer", Multani_Maro_Sorcerer);
+		//commands.put("Multani_Maro_Sorcerer", Multani_Maro_Sorcerer);
 		commands.put("Muraganda_Petroglyphs", Muraganda_Petroglyphs);
 		
 		//commands.put("Nightmare", Nightmare);

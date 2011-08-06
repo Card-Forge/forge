@@ -1,9 +1,10 @@
 Name:Multani, Maro-Sorcerer
 ManaCost:4 G G
 Types:Legendary Creature Elemental
-Text:Multani, Maro-Sorcerer's power and toughness are each equal to the total number of cards in all players' hands.
-PT:1/1
+Text:no text
+PT:*/*
 K:Shroud
+K:stSetPT:Count$NumInAllHands:Count$NumInAllHands:CARDNAME's power and toughness are each equal to the total number of cards in all players' hands.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/multani_maro_sorcerer.jpg
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/107.jpg
