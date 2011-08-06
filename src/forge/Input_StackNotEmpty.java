@@ -19,7 +19,7 @@ public class Input_StackNotEmpty extends Input implements java.io.Serializable
     SpellAbility sa = AllZone.Stack.pop();
     Card c = sa.getSourceCard();
 
-    if (sa.getSourceCard().getKeyword().contains("Cantrip"))
+    if (sa.getSourceCard().getKeyword().contains("Draw a card."))
       	AllZone.GameAction.drawCard(sa.getSourceCard().getController());
     
 
