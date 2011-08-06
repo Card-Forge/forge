@@ -4118,11 +4118,13 @@ No-Dachi
 2
 Artifact Equipment
 Equipped creature gets +2/+0 and has first strike.
+VanillaEquipment:2:0:3:First Strike:none:none
 
 Shuko
 1
 Artifact Equipment
 Equipped creature gets +1/+0.
+VanillaEquipment:1:0:0:none:none:none
 
 Tiger Claws
 2 G
