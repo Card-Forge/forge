@@ -2695,25 +2695,6 @@ public class GameActionUtil {
         
 	}
 	
-	//effects restricted to combat damage but not to dealing to creatures/players
-    public static void executeCombatDamageEffects(final Card source, int damage) {
-    	
-    	if (damage <= 0) return;
-        
-        /*if(source.isEquipped()) {
-        	ArrayList<Card> equips = source.getEquippedBy();
-        	for(Card equip:equips) {
-        		/*
-                 * Whenever equipped creature deals combat damage, put two
-                 * charge counters on Umezawa's Jitte.
-                 *
-        		if(equip.getName().equals("Umezawa's Jitte")) {
-        			equip.addCounter(Counters.CHARGE, 2);
-        		}
-        	}
-        }//isEquipped*/
-    }
-	
 	//restricted to combat damage and dealing damage to creatures
 	public static void executeCombatDamageToCreatureEffects(final Card source, final Card affected, int damage) {
 		
@@ -2814,24 +2795,6 @@ public class GameActionUtil {
             ability.setStackDescription(sb.toString());
             
             AllZone.Stack.add(ability);
-        }
-        
-        if(affected.getKeyword().contains("Whenever CARDNAME is dealt damage, you lose that much life.")) {
-			final int life = damage;
-			
-	    	Ability ability = new Ability(affected, "0") {
-	    		@Override
-	    		public void resolve() {
-	    			player.loseLife(life, affected);
-	    		}
-	    	};
-	    	StringBuilder sb = new StringBuilder();
-	        sb.append(affected.getName()+" - ").append(player).append(" loses ").append(life).append(" life");
-	        ability.setStackDescription(sb.toString());
-        	int amount = affected.getAmountOfKeyword("Whenever CARDNAME is dealt damage, you lose that much life.");
-	        
-	        for(int i=0 ; i < amount ; i++)
-	        	AllZone.Stack.add(ability);
         }
         
 		if(source.getName().equals("Spiritmonger")) {

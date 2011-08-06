@@ -330,7 +330,6 @@ public class CardFactoryUtil {
         if (c.hasKeyword("CARDNAME can block only creatures with flying.")) value -= toughness * 5;
         
         if (c.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.")) value -= (toughness - 1) * 9;
-        if (c.hasStartOfKeyword("Whenever CARDNAME is dealt damage, you lose that much life.")) value -= 15;
         
         if (c.hasKeyword("CARDNAME can't attack or block.")) value = 90 + c.getCMC() * 5; //reset everything - useless
         if (c.hasKeyword("At the beginning of the end step, destroy CARDNAME.")) value -= 50;

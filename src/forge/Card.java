@@ -3017,7 +3017,6 @@ public class Card extends MyObservable {
             if( damageToAdd > 0 ) {
             	if (isCreature())
             		GameActionUtil.executeCombatDamageToCreatureEffects(source, this, damageToAdd);
-            	GameActionUtil.executeCombatDamageEffects(source, damageToAdd);
             }
         	map.put(source, damageToAdd);
         }

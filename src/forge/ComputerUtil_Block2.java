@@ -126,8 +126,10 @@ public class ComputerUtil_Block2
 	  boolean bLifeInDanger = CombatUtil.lifeInDanger(combat);
 	  
 	  //These creatures won't prevent any damage
-	  if (bLifeInDanger) 
+	  if (bLifeInDanger) {
+		  //TODO - this keyword is no longer present.  Somehow, this will need to check triggers.
 		  blockersLeft = blockersLeft.getNotKeyword("Whenever CARDNAME is dealt damage, you lose that much life.");
+	  }
 	   
 	  if (blockersLeft.size() == 0)
 		  return combat;

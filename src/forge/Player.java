@@ -467,7 +467,6 @@ public abstract class Player extends MyObservable{
     	
     	if ( damageToDo > 0 ) {
     		GameActionUtil.executeCombatDamageToPlayerEffects(this, source, damageToDo);
-    		GameActionUtil.executeCombatDamageEffects(source, damageToDo);
     	}
     }
 	
