@@ -428,6 +428,12 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Jabba the Hut 3	hard	Creatures with exalted and land walking abilities");
         sb.append("\r\n");
+        sb.append("Jack Sparrow 1		easy	Pirate type creatures + draw cards + counter spells");
+        sb.append("\r\n");
+        sb.append("Jack Sparrow 2		medium	Pirate type creatures + draw cards + threat removal");
+        sb.append("\r\n");
+        sb.append("Jack Sparrow 3		hard	Pirate type creatures + draw cards + creature control");
+        sb.append("\r\n");
         sb.append("James Bond 1		easy	gohongohon's easy WG Agro with several Slivers");
         sb.append("\r\n");
         sb.append("James Bond 2		medium	gohongohon's Medium WG Agro with several Slivers + Glorious Anthem");

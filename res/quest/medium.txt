@@ -10,6 +10,7 @@ Frodo 2
 Genghis Khan 2
 Homer Simpson 2
 Indiana Jones 2
+Jack Sparrow 2
 James Bond 2
 King Arthur 2
 King Edward 2

@@ -9,6 +9,7 @@ Frodo 1
 Genghis Khan 1
 Homer Simpson 1
 Indiana Jones 1
+Jack Sparrow 1
 James Bond 1
 King Arthur 1
 King Edward 1
