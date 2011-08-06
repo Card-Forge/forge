@@ -1,3 +1,8 @@
+Inferno
+5 R R
+Instant
+Inferno deals 6 damage to each creature and each player.
+
 Guan Yu's 1,000-Li March
 4 W W
 Sorcery

@@ -19354,39 +19354,80 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Guan Yu's 1,000-Li March")) {
-            SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = -4623601047712563137L;
+        	SpellAbility spell = new Spell(card) {
+        		private static final long serialVersionUID = -4623601047712563137L;
+
+        		@Override
+        		public void resolve() {
+        			CardList all = AllZoneUtil.getCreaturesInPlay();
+        			all = all.filter(AllZoneUtil.tapped);
+
+        			CardListUtil.sortByIndestructible(all);
+        			CardListUtil.sortByDestroyEffect(all);
+
+        			for(int i = 0; i < all.size(); i++) {
+        				Card c = all.get(i);
+        				AllZone.GameAction.destroy(c);
+        			}
+        		}// resolve()
+
+        		@Override
+        		public boolean canPlayAI() {
+        			CardList human = AllZoneUtil.getCreaturesInPlay(Constant.Player.Human);
+        			CardList computer = AllZoneUtil.getCreaturesInPlay(Constant.Player.Computer);
+
+        			// the computer will at least destroy 2 more human creatures
+        			return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
+        			(computer.size() < human.size() - 1
+        					|| (AllZone.Computer_Life.getLife() < 7 && !human.isEmpty()));
+        		}
+        	};// SpellAbility
+        	spell.setStackDescription(cardName+" - Destroy all tapped creatures.");
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }// *************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Inferno")) {
+        	SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 4728714298882795253L;
 
 				@Override
-                public void resolve() {
-                    CardList all = AllZoneUtil.getCreaturesInPlay();
-                    all = all.filter(AllZoneUtil.tapped);
-                    
-                    CardListUtil.sortByIndestructible(all);
-                    CardListUtil.sortByDestroyEffect(all);
-                    
-                    for(int i = 0; i < all.size(); i++) {
-                        Card c = all.get(i);
-                        AllZone.GameAction.destroy(c);
-                    }
-                }// resolve()
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList human = AllZoneUtil.getCreaturesInPlay(Constant.Player.Human);
-                    CardList computer = AllZoneUtil.getCreaturesInPlay(Constant.Player.Computer);
+        		public void resolve() {
+        			int damage = 6;
+        			CardList all = AllZoneUtil.getCreaturesInPlay();
+        			for(Card c:all) {
+        				AllZone.GameAction.addDamage(c, card, damage);
+        			}
+        			AllZone.GameAction.addDamage(Constant.Player.Computer, damage);
+        			AllZone.GameAction.addDamage(Constant.Player.Human, damage);
+        		}// resolve()
 
-                    // the computer will at least destroy 2 more human creatures
-                    return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
-                    		(computer.size() < human.size() - 1
-                            || (AllZone.Computer_Life.getLife() < 7 && !human.isEmpty()));
-                }
-            };// SpellAbility
-            spell.setStackDescription(cardName+" - Destroy all tapped creatures.");
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
+        		@Override
+        		public boolean canPlayAI() {
+        			CardList human = AllZoneUtil.getCreaturesInPlay(Constant.Player.Human);
+        			human = human.filter(powerSix);
+        			CardList computer = AllZoneUtil.getCreaturesInPlay(Constant.Player.Computer);
+        			computer = computer.filter(powerSix);
+        			
+        			// the computer will at least destroy 2 more human creatures
+        			return  (AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
+        			(computer.size() < human.size() - 1
+        					|| (AllZone.Computer_Life.getLife() > 6 && !human.isEmpty())))
+        					|| AllZone.Human_Life.getLife() < 7;
+        		}
+        		
+        		private CardListFilter powerSix = new CardListFilter() {
+        			public boolean addCard(Card c) {
+        				return c.getNetDefense() <= 6;
+        			}
+        		};
+        	};// SpellAbility
+        	spell.setStackDescription(cardName+" - Deal 6 damage to all creatures and all players.");
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
         }// *************** END ************ END **************************
         
         // Cards with Cycling abilities
