@@ -1,3 +1,8 @@
+Harrow
+2 G
+Instant
+As an additional cost to cast Harrow, sacrifice a land. Search your library for up to two basic land cards and put them onto the battlefield. Then shuffle your library.
+
 Soul's Attendant
 W
 Creature Human Cleric
