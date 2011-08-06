@@ -1,3 +1,10 @@
+Tuktuk the Explorer
+2 R
+Legendary Creature Goblin
+When Tuktuk the Explorer is put into a graveyard from the battlefield, put a legendary 5/5 colorless Goblin Golem artifact creature token named Tuktuk the Returned onto the battlefield.
+1/1
+Haste
+
 Dreamstone Hedron
 6
 Artifact

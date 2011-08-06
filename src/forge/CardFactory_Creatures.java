@@ -17395,6 +17395,29 @@ public class CardFactory_Creatures {
         	card.addComesIntoPlayCommand(addLevelCounters);
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Tuktuk the Explorer")) {
+            final Ability ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    CardFactoryUtil.makeToken("Tuktuk the Returned", "C 5 5 Tuktuk the Returned", card, "C", 
+                    		new String[] {"Legendary", "Creature", "Goblin", "Golem"}, 5, 5, new String[] {""});
+                }//resolve()
+            };//Ability
+            
+            Command destroy = new Command() {
+				private static final long serialVersionUID = -2301867871037110012L;
+
+				public void execute() {
+                    ability.setStackDescription(card.getController()
+                            + " puts a 5/5 Legendary Goblin Golem creature onto the battlefield.");
+                    AllZone.Stack.add(ability);
+                }
+            };
+            card.addDestroyCommand(destroy);
+        }//*************** END ************ END **************************
+        
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(shouldCycle(card) != -1) {
