@@ -25,8 +25,8 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         
         Card c = (Card) o;
         
-        if(trigger && CardFactoryUtil.oppHasKismet(c.getController())
-                && (c.isLand() || c.isCreature() || c.isArtifact())) c.tap();
+        if(trigger && ((CardFactoryUtil.oppHasKismet(c.getController()) && (c.isLand() || c.isCreature() || c.isArtifact()))
+        		|| (AllZoneUtil.isCardInPlay("Root Maze") && (c.isLand() || c.isArtifact())))) c.tap();
         
         //cannot use addComesIntoPlayCommand - trigger might be set to false;
         // Keep track of max lands can play per turn
