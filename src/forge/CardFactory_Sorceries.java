@@ -2997,32 +2997,6 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Call of the Herd")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 1959302998030377554L;
-                
-                @Override
-                public void resolve() {
-                    CardFactoryUtil.makeToken("Elephant", "G 3 3 Elephant", card, "G", new String[] {
-                            "Creature", "Elephant"}, 3, 3, new String[] {""});
-                }//resolve()
-            };
-            
-            spell.setDescription("Put a 3/3 green Elephant creature token into play.");
-            spell.setStackDescription(card.getController()
-                    + " puts a 3/3 green Elephant creature token into play.");
-            
-            card.setFlashback(true);
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "3 G", "0"));
-            
-        }//*************** END ************ END **************************
-        
-        
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Chatter of the Squirrel")) {
             SpellAbility spell = new Spell(card) {
