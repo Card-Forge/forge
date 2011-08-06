@@ -8,3 +8,4 @@ K:Haste
 K:Infect
 K:At the beginning of the end step, sacrifice CARDNAME
 K:SVar:Rarity:Rare
+End
