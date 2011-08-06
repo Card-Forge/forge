@@ -4708,20 +4708,7 @@ public class GameActionUtil {
 		final Ability ability = new Ability(c, "0") {
 			@Override
 			public void resolve() {
-				String player = getTargetPlayer();
-
-				PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-				PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-				CardList libList = new CardList(lib.getCards());
-
-				int max = 3;
-				if(libList.size() < 3) max = libList.size();
-
-				for(int i = 0; i < max; i++) {
-					Card c = libList.get(i);
-					lib.remove(c);
-					grave.add(c);
-				}
+				AllZone.GameAction.mill(getTargetPlayer(),3);
 			}
 		};
 		ability.setStackDescription(c.getName() + " - Landfall: " + targetPlayer + " puts the top three cards of his or her library into his or her graveyard.");
@@ -5004,13 +4991,7 @@ public class GameActionUtil {
 						new String[] {"Creature", "Wolf"}, 2, 2, new String[] {""});
 				
 				
-				CardList lib = AllZoneUtil.getPlayerCardsInLibrary(opponent);
-				int max = lib.size();
-				if (max > 10)
-					max = 10;
-				
-				for (int i=0;i<max;i++)
-					AllZone.GameAction.moveToGraveyard(lib.get(i));
+				AllZone.GameAction.mill(opponent,10);
 				
 				//AllZone.GameAction.getPlayerLife(src.getController()).addLife(3);
 			}

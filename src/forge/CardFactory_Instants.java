@@ -1451,20 +1451,7 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    String player = getTargetPlayer();
-                    
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-                    CardList libList = new CardList(lib.getCards());
-                    
-                    int max = 3;
-                    if(libList.size() < max) max = libList.size();
-                    
-                    for(int i = 0; i < max; i++) {
-                        Card c = libList.get(i);
-                        lib.remove(c);
-                        grave.add(c);
-                    }
+                    AllZone.GameAction.mill(getTargetPlayer(),3);
                 }
             };//SpellAbility
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));

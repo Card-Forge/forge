@@ -138,6 +138,17 @@ public class GameAction {
     }
     */
     
+    public void mill(String player, int n)
+    {
+    	CardList lib = AllZoneUtil.getPlayerCardsInLibrary(player);
+		
+        int max = Math.min(n, lib.size());
+        
+        for(int i = 0; i < max; i++) {
+            AllZone.GameAction.moveToGraveyard(lib.get(i));
+        }
+    }
+    
     public void discard(Card c, SpellAbility sa)
     {
     	if (sa!= null)
@@ -1632,6 +1643,7 @@ public class GameAction {
                             Command_Effects[F_Target] = Proper_resolve;      
                             StackDescription = StackDescription +  F_TargetPlayer[F_Target] + " draws " + F_Amount[0] + " card(s)";                     
                 		}
+
                 		
                 		// Discard Cards
                 		if(Effect[y].contains("DiscardCards")) {
@@ -2301,9 +2313,13 @@ public class GameAction {
      * to match the mechanics in Forge
      * @param c
      */
+    
+    
     public void exile(Card c) {
     	removeFromGame(c);
     }
+    
+    
     
     public void removeUnearth(Card c)
     {

@@ -1778,25 +1778,7 @@ public class CombatUtil {
             }//Preeminent Captain
             
             else if(c.getName().equals("Nemesis of Reason") && !c.getCreatureAttackedThisCombat()) {
-                String player = AllZone.GameAction.getOpponent(c.getController());
-                //if (c.getController().equals(Constant.Player.Human))
-                //player="Human";
-                //else if (c.getController().equals(Constant.Player.Computer))
-                //player="Computer";
-                
-                PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-                CardList libList = new CardList(lib.getCards());
-                
-                int max = 10;
-                if(libList.size() < 10) max = libList.size();
-                
-                for(int i = 0; i < max; i++) {
-                    Card c1 = libList.get(i);
-                    lib.remove(c1);
-                    grave.add(c1);
-                }
-                
+                AllZone.GameAction.mill( AllZone.GameAction.getOpponent(c.getController()),10);
             }//Nemesis of Reason
             
             else if(c.getName().equals("Novablast Wurm") && !c.getCreatureAttackedThisCombat()) {

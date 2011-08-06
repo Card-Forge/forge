@@ -8841,20 +8841,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void resolve() {
-                    String player = getTargetPlayer();
-                    
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-                    CardList libList = new CardList(lib.getCards());
-                    
-                    int max = 2;
-                    if(libList.size() < 2) max = libList.size();
-                    
-                    for(int i = 0; i < max; i++) {
-                        Card c = libList.get(i);
-                        lib.remove(c);
-                        grave.add(c);
-                    }
+                    AllZone.GameAction.mill(getTargetPlayer(), 2);
                 }
             };
             ab1.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
@@ -9457,20 +9444,8 @@ public class CardFactory implements NewConstants {
         		@Override
         		public void resolve() {
         			String player = getTargetPlayer();
-        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-        			PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-        			CardList libList = new CardList(lib.getCards());
-        			
-        			int numCards = grave.size();
-
-        			int max = libList.size();
-        			if(numCards > max) numCards = max;
-
-        			for(int i = 0; i < numCards; i++) {
-        				Card c = libList.get(i);
-        				lib.remove(c);
-        				grave.add(c);
-        			}
+        			AllZone.GameAction.mill(player,
+        					AllZone.getZone(Constant.Zone.Graveyard, player).size());
         		}
         	};
         	ab1.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());

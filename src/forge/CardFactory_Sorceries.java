@@ -5261,22 +5261,8 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void resolve() {
-                    String player = getTargetPlayer();
-                    
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-                    CardList libList = new CardList(lib.getCards());
-                    
-                    int max = 0;
-                    if(cardName.equals("Glimpse the Unthinkable")) max = 10;
-                    else max = 5;
-                    if(libList.size() < max) max = libList.size();
-                    
-                    for(int i = 0; i < max; i++) {
-                        Card c = libList.get(i);
-                        lib.remove(c);
-                        grave.add(c);
-                    }
+                    AllZone.GameAction.mill(getTargetPlayer(),
+                    		(cardName.equals("Glimpse the Unthinkable")) ? 10 : 5);
                 }
             };//SpellAbility
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
@@ -6335,26 +6321,7 @@ public class CardFactory_Sorceries {
 
         		public void resolve()
         		{
-        			String player = getTargetPlayer();
-        			
-        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-        			PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-        			CardList libList = new CardList(lib.getCards());
-        			
-        			int limit;
-        			
-        			if (card.getXManaCostPaid() > lib.size()) {
-        				limit = lib.size();
-        			} else {
-        				limit = card.getXManaCostPaid();
-        			}
-        			
-        			// for (int i = 0; i < card.getXManaCostPaid(); i++) {
-        			for (int i = 0; i < limit; i++) {
-        				Card c = libList.get(i);
-        				lib.remove(c);
-        				grave.add(c);
-        			}
+        			AllZone.GameAction.mill(getTargetPlayer(),card.getXManaCostPaid());
         			
         			AllZone.GameAction.getPlayerLife(card.getController()).addLife(card.getXManaCostPaid());
         			card.setXManaCostPaid(0);

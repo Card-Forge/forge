@@ -2850,20 +2850,7 @@ class CardFactory_Lands {
                 
                 @Override
                 public void resolve() {
-                    String player = getTargetPlayer();
-                    
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-                    CardList libList = new CardList(lib.getCards());
-                    
-                    int max = 1;
-                    if(libList.size() < 1) max = libList.size();
-                    
-                    for(int i = 0; i < max; i++) {
-                        Card c = libList.get(i);
-                        lib.remove(c);
-                        grave.add(c);
-                    }
+                    AllZone.GameAction.mill(getTargetPlayer(),1);
                 }
             };
             ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));

@@ -1912,20 +1912,7 @@ class CardFactory_Planeswalkers {
                     card2.subtractCounter(Counters.LOYALTY, 10);
                     
                     turn[0] = AllZone.Phase.getTurn();
-                    String player = getTargetPlayer();
-                    
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-                    CardList libList = new CardList(lib.getCards());
-                    
-                    int max = 20;
-                    if(libList.size() < 20) max = libList.size();
-                    
-                    for(int i = 0; i < max; i++) {
-                        Card c = libList.get(i);
-                        lib.remove(c);
-                        grave.add(c);
-                    }
+                    AllZone.GameAction.mill(getTargetPlayer(),20);
                     
                 }//resolve()
                 

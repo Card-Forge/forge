@@ -17803,21 +17803,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    String player = getTargetPlayer();
-                    
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-                    CardList libList = new CardList(lib.getCards());
-                    
-                    int max = 3;
-                    if(libList.size() < 3) max = libList.size();
-                    
-                    for(int i = 0; i < max; i++) {
-                        Card c = libList.get(i);
-                        lib.remove(c);
-                        grave.add(c);
-                    }
-                    
+                    AllZone.GameAction.mill(getTargetPlayer(),3);                    
                 }
                 
                 @Override
@@ -17843,20 +17829,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    String player = getTargetPlayer();
-                    
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-                    CardList libList = new CardList(lib.getCards());
-                    
-                    int max = 2;
-                    if(libList.size() < 2) max = libList.size();
-                    
-                    for(int i = 0; i < max; i++) {
-                        Card c = libList.get(i);
-                        lib.remove(c);
-                        grave.add(c);
-                    }
+                    AllZone.GameAction.mill(getTargetPlayer(),2);
                     
                 }
                 
@@ -17883,20 +17856,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    String player = getTargetPlayer();
-                    
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-                    CardList libList = new CardList(lib.getCards());
-                    
-                    int max = 1;
-                    if(libList.size() < 1) max = libList.size();
-                    
-                    for(int i = 0; i < max; i++) {
-                        Card c = libList.get(i);
-                        lib.remove(c);
-                        grave.add(c);
-                    }
+                    AllZone.GameAction.mill(getTargetPlayer(),1);
                     
                 }
                 
@@ -20569,7 +20529,7 @@ public class CardFactory_Creatures {
                     AllZone.Computer_Life.subtractLife(1,card);
                 }//resolve()
             };//SpellAbility
-            ability.setDescription("G: Ifh-Bíff Efreet deals 1 damage to each creature with flying and each player. Any player may activate this ability");
+            ability.setDescription("G: Ifh-Bï¿½ff Efreet deals 1 damage to each creature with flying and each player. Any player may activate this ability");
             ability.setStackDescription(card + " deals 1 damage to each flying creature and each player.");
             ability.setAnyPlayer(true);
             card.addSpellAbility(ability);
