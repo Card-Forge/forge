@@ -1,0 +1,10 @@
+Name:Pennon Blade
+ManaCost:3
+Types:Artifact Equipment
+Text:Equipped creature gets +1/+1 for each creature you control.
+K:eqPump 4:+0/+0
+K:stPumpEquipped:Creature:X/X:no Condition:no text
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pennon_blade.jpg
+End

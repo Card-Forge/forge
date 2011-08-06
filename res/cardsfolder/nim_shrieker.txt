@@ -1,0 +1,12 @@
+Name:Nim Shrieker
+ManaCost:3 B
+Types:Creature Zombie
+Text:no text
+PT:0/1
+K:Flying
+K:stPumpSelf:Creature:X/0:no Condition:Nim Shrieker gets +1/+0 for each artifact you control.
+SVar:X:Count$Valid Artifact.YouCtrl
+SVar:BuffedBy:Artifact
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nim_shrieker.jpg
+End

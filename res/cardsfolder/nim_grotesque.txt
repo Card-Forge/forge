@@ -1,0 +1,11 @@
+Name:Nim Grotesque
+ManaCost:6 B
+Types:Creature Zombie
+Text:no text
+PT:3/6
+K:stPumpSelf:Creature:X/0:no Condition:Nim Grotesque gets +1/+0 for each artifact you control.
+SVar:X:Count$Valid Artifact.YouCtrl
+SVar:BuffedBy:Artifact
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nim_grotesque.jpg
+End

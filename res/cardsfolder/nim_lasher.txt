@@ -1,0 +1,11 @@
+Name:Nim Lasher
+ManaCost:2 B
+Types:Creature Zombie
+Text:no text
+PT:1/1
+K:stPumpSelf:Creature:X/0:no Condition:Nim Lasher gets +1/+0 for each artifact you control.
+SVar:X:Count$Valid Artifact.YouCtrl
+SVar:BuffedBy:Artifact
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nim_lasher.jpg
+End
