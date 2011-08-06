@@ -1422,9 +1422,8 @@ public class CardFactoryUtil {
                 }
             }//resolve()
         };//enchant ability
-        sourceCard.clearSpellAbility();
         enchant.setBeforePayMana(CardFactoryUtil.input_targetCreature(enchant));
-//      enchant.setDescription("Test");
+        enchant.setDescription("This is a test of a setDescription");
         
 		return enchant;
     }//enPump_Enchant()

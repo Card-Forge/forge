@@ -6,6 +6,14 @@ import java.util.ArrayList;
 
 
 class CardFactory_Auras {
+	
+    public static int shouldCycle(Card c) {
+        ArrayList<String> a = c.getKeyword();
+        for(int i = 0; i < a.size(); i++)
+            if(a.get(i).toString().startsWith("Cycling")) return i;
+        
+        return -1;
+    }
     
     public static int shouldVanish(Card c) {
         ArrayList<String> a = c.getKeyword();
@@ -5287,13 +5295,29 @@ class CardFactory_Auras {
                         extrinsicKeywords[i] = tempKwds[i].trim();
                     }
                 }
-
+                card.clearSpellAbility();
                 card.addSpellAbility(CardFactoryUtil.enPump_Enchant(card, Power, Tough, extrinsicKeywords));
+                
                 card.addEnchantCommand(CardFactoryUtil.enPump_onEnchant(card, Power, Tough, extrinsicKeywords));
                 card.addUnEnchantCommand(CardFactoryUtil.enPump_unEnchant(card, Power, Tough, extrinsicKeywords));
                 card.addLeavesPlayCommand(CardFactoryUtil.enPump_LeavesPlay(card, Power, Tough, extrinsicKeywords));
             }
         }// enPump
+        
+        // Cards with Cycling abilities
+        // -1 means keyword "Cycling" not found
+        if(shouldCycle(card) != -1) {
+            int n = shouldCycle(card);
+            if(n != -1) {
+                String parse = card.getKeyword().get(n).toString();
+                card.removeIntrinsicKeyword(parse);
+                
+                String k[] = parse.split(":");
+                final String manacost = k[1];
+                
+                card.addSpellAbility(CardFactoryUtil.ability_cycle(card, manacost));
+            }
+        }//Cycling
         
         return card;
     }
