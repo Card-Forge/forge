@@ -1,0 +1,9 @@
+Name:Tainted Well
+ManaCost:2 B
+Types:Enchantment Aura
+Text:Enchanted land is a Swamp.
+K:Enchant land
+K:When CARDNAME enters the battlefield, draw a card.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tainted_well.jpg
+End

@@ -1,0 +1,9 @@
+Name:Lingering Mirage
+ManaCost:1 U
+Types:Enchantment Aura
+Text:Enchanted land is an Island.
+K:Enchant land
+K:Cycling:2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lingering_mirage.jpg
+End

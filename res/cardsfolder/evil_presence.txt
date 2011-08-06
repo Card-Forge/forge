@@ -1,0 +1,8 @@
+Name:Evil Presence
+ManaCost:B
+Types:Enchantment Aura
+Text:Enchanted land is a Swamp.
+K:Enchant land
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/evil_presence.jpg
+End

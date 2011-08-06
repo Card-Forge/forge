@@ -565,7 +565,10 @@ class CardFactory_Auras {
         }//*************** END ************ END **************************		
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Convincing Mirage") || cardName.equals("Phantasmal Terrain") || cardName.equals("Spreading Seas")) {
+        else if(cardName.equals("Convincing Mirage") || cardName.equals("Phantasmal Terrain")
+        		|| cardName.equals("Spreading Seas") || cardName.equals("Evil Presence")
+        		|| cardName.equals("Lingering Mirage") || cardName.equals("Sea's Claim")
+        		|| cardName.equals("Tainted Well")) {
             
         	final String[] NewType = new String[1];
             final SpellAbility spell = new Spell(card) {
@@ -589,9 +592,15 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                	if(card.getName().equals("Spreading Seas"))
+                	if(card.getName().equals("Spreading Seas")
+                			|| card.getName().equals("Lingering Mirage")
+                			|| card.getName().equals("Sea's Claim"))
                 	{
                 		NewType[0] = "Island";
+                	}
+                	else if(card.getName().equals("Evil Presence") 
+                			||card.getName().equals("Tainted Well")) {
+                		NewType[0] = "Swamp";
                 	}
                 	else
                 	{
