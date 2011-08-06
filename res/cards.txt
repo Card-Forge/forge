@@ -1,3 +1,12 @@
+Lightning Dragon
+2 R R
+Creature Dragon
+no text
+4/4
+Flying
+Echo:2 R R
+abPump R:+1/+0
+
 Kami of the Crescent Moon
 U U
 Legndray Creature Spirit
@@ -7750,16 +7759,6 @@ Creature Cat
 no text
 2/2
 Echo:G
-
-Lightning Dragon
-2 R R
-Creature Dragon
-no text
-4/4
-Flying
-Haste
-Echo:2 R R
-abPump R:+1/+0
 
 Herald of Serra
 2 W W

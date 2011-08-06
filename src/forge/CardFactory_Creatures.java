@@ -18709,13 +18709,13 @@ public class CardFactory_Creatures {
         	card.addComesIntoPlayCommand(addLevelCounters);
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Tuktuk the Explorer")) {
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
                     CardFactoryUtil.makeToken("Tuktuk the Returned", "C 5 5 Tuktuk the Returned", card, "C", 
-                    		new String[] {"Legendary", "Creature", "Goblin", "Golem"}, 5, 5, new String[] {""});
+                    		new String[] {"Legendary", "Artifact", "Creature", "Goblin", "Golem"}, 5, 5, new String[] {""});
                 }//resolve()
             };//Ability
             
@@ -18724,7 +18724,7 @@ public class CardFactory_Creatures {
 
 				public void execute() {
                     ability.setStackDescription(card.getController()
-                            + " puts a 5/5 Legendary Goblin Golem creature onto the battlefield.");
+                            + " puts a 5/5 Legendary Artifact Goblin Golem creature onto the battlefield.");
                     AllZone.Stack.add(ability);
                 }
             };
