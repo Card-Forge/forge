@@ -3278,34 +3278,31 @@ class CardFactory_Lands {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Diamond Valley")) {
+        	/*
+        	 * Tap, Sacrifice a creature: You gain life equal to the
+        	 * sacrificed creature's toughness.
+        	 */
             final Ability_Tap ability = new Ability_Tap(card, "0") {
-               
                 private static final long serialVersionUID = -6589125674356046586L;
                
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Computer_Play.getCards());
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isCreature();
-                        }
-                    });
-                   
-                    if(list.size() > 0 && AllZone.Computer_Life.getLife() < 5 ) setTargetCard(CardFactoryUtil.AI_getBestCreature(list, card));
+                    CardList list = AllZoneUtil.getCreaturesInPlay(Constant.Player.Computer);
+                    if(AllZoneUtil.getCreaturesInPlay(Constant.Player.Computer).size() > 0
+                    		&& AllZone.Computer_Life.getLife() < 5 )
+                    	setTargetCard(CardFactoryUtil.AI_getBestCreature(list, card));
                    
                     return list.size() > 0;
                 }
                
                 @Override
                 public void resolve() {
-                    Card c = getTargetCard();
-                   
-                    if(c != null) {
-                        if(CardFactoryUtil.canTarget(card, c) && c.isCreature() ) {
-                        	AllZone.GameAction.gainLife(c.getController(), c.getNetDefense());
-                           AllZone.GameAction.sacrifice(c);
-                        }
-                    }
+                	Card c = getTargetCard();
+
+                	if(c != null && c.isCreature()) {
+                		AllZone.GameAction.gainLife(c.getController(), c.getNetDefense());
+                		AllZone.GameAction.sacrifice(c);
+                	}
                 }
             };
            
@@ -3315,17 +3312,8 @@ class CardFactory_Lands {
                
                 @Override
                 public void showMessage() {
-                    CardList choice = new CardList();
-                    final String player = card.getController();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-                    choice.addAll(play.getCards());
-
-                    choice = choice.getType("Creature");
-                    choice = choice.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return (c.isCreature());
-                        }
-                    });
+                	final String player = card.getController();
+                	CardList choice = AllZoneUtil.getCreaturesInPlay(player);
                    
                     stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choice,
                             "Select target creature:", true, false));
@@ -3334,7 +3322,6 @@ class CardFactory_Lands {
 
             card.addSpellAbility(ability);
             ability.setBeforePayMana(runtime);
-           
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
