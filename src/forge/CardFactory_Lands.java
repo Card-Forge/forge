@@ -2,6 +2,7 @@
 package forge;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -447,11 +448,13 @@ class CardFactory_Lands {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Blinkmoth Nexus")) {
+        else if(cardName.equals("Blinkmoth Nexus") || cardName.equals("Inkmoth Nexus")) {
         	final long[] timeStamp = new long[1];
-            final SpellAbility a1 = new Ability(card, "1") {
-                
-                @Override
+        	Ability_Cost abCost = new Ability_Cost("1", cardName, true);
+            final SpellAbility a1 = new Ability_Activated(card, abCost, null) {
+				private static final long serialVersionUID = -8834858776517935070L;
+
+				@Override
                 public boolean canPlayAI() {
                     return false;
                 }
@@ -459,18 +462,18 @@ class CardFactory_Lands {
                 @Override
                 public void resolve() {
                     Card c = card;
-                    String[] types = { "Artifact", "Creature", "Blinkmoth" };
-                    String[] keywords = { "Flying" };
-                    timeStamp[0] = CardFactoryUtil.activateManland(c, 1, 1, types, keywords, "0");
+                    final String[] types = { "Artifact", "Creature", "Blinkmoth" };
+                    final ArrayList<String> keywords = new ArrayList<String>();
+                    keywords.add("Flying");
+                    if(cardName.equals("Inkmoth Nexus")) keywords.add("Infect");
+                    final String[] kwArray = new String[keywords.size()];
+                    timeStamp[0] = CardFactoryUtil.activateManland(c, 1, 1, types, keywords.toArray(kwArray), "0");
                     
                     final Command eot1 = new Command() {
                     	private static final long serialVersionUID = 3564161001279001235L;
                     	long stamp = timeStamp[0];
                     	public void execute() {
-                    		Card c = card;
-                    		String[] types = { "Artifact", "Creature", "Blinkmoth" };
-                    		String[] keywords = { "Flying" };
-                    		CardFactoryUtil.revertManland(c, types, keywords, "", stamp);
+                    		CardFactoryUtil.revertManland(card, types, keywords.toArray(kwArray), "", stamp);
                     	}
                     };
                     
@@ -478,19 +481,16 @@ class CardFactory_Lands {
                 }
             };//SpellAbility
             card.addSpellAbility(a1);
-            a1.setDescription("1: Blinkmoth Nexus becomes a 1/1 Blinkmoth artifact creature with flying until end of turn. It's still a land.");
+            StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append(abCost).append(cardName).append(" becomes a 1/1 Blinkmoth artifact creature with flying ");
+            if(cardName.equals("Inkmoth Nexus")) sbDesc.append("and infect ");
+            sbDesc.append("until end of turn. It's still a land.");
+            a1.setDescription(sbDesc.toString());
             StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" becomes a 1/1 creature with flying until EOT");
+            sb.append(card).append(" becomes a 1/1 creature with flying ");
+            if(cardName.equals("Inkmoth Nexus")) sb.append("and infect ");
+            sb.append("until EOT");
             a1.setStackDescription(sb.toString());
-            
-            Command paid1 = new Command() {
-                private static final long serialVersionUID = -5122292582368202498L;
-                
-                public void execute() {
-                    AllZone.Stack.add(a1);
-                }
-            };
-            a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
         }//*************** END ************ END **************************
         
         

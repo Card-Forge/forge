@@ -1,0 +1,8 @@
+Name:Inkmoth Nexus
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/inkmoth_nexus.jpg
+End
