@@ -7068,14 +7068,18 @@ public class CardFactory_Sorceries {
 
                 @Override
                 public void resolve() {
-
-                        input[0] = JOptionPane.showInputDialog(null, "Which creature type?", "Pick type",
+                		input[0] = "";
+                		while(input[0] != null) {
+                			input[0] = JOptionPane.showInputDialog(null, "Which creature type?", "Pick type",
                                 JOptionPane.QUESTION_MESSAGE);
+                			if(input[0] == null) break;
+                        	if(!CardUtil.isCreatureType(input[0])) input[0] = "";
+                        	//TODO: some more input validation, case-sensitivity, etc.
                         
-                        if(!CardUtil.isCreatureType(input[0])) input[0] = "";
-                        //TODO: some more input validation, case-sensitivity, etc.
-                        
-                        input[0] = input[0].trim(); //this is to prevent "cheating", and selecting multiple creature types,eg "Goblin Soldier"
+                        	input[0] = input[0].trim(); //this is to prevent "cheating", and selecting multiple creature types,eg "Goblin Soldier"
+                		}
+                		
+                		if(input[0] == null) input[0] = "";
 
                         PlayerZone aiGrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer);
                         HashMap<String,Integer> countInGraveyard = new HashMap<String,Integer>();
@@ -7112,16 +7116,21 @@ public class CardFactory_Sorceries {
                         else input[1] = "Sliver";
 
                         //Actually put everything  on the battlefield 
-                        PlayerZone humanGrave = AllZone.getZone(Constant.Zone.Graveyard,AllZone.HumanPlayer);
-                        PlayerZone humanBattlefield = AllZone.getZone(Constant.Zone.Play,AllZone.HumanPlayer);
-                        for(Card c:humanGrave.getCards())
+                        if(input[0] != "")
                         {
-                            if(c.isType(input[0]))
+                        	PlayerZone humanGrave = AllZone.getZone(Constant.Zone.Graveyard,AllZone.HumanPlayer);
+                            PlayerZone humanBattlefield = AllZone.getZone(Constant.Zone.Play,AllZone.HumanPlayer);
+                            for(Card c:humanGrave.getCards())
                             {
-                                humanGrave.remove(c);
-                                humanBattlefield.add(c);
+                            	
+                                if(c.isType(input[0]))
+                                {
+                                    humanGrave.remove(c);
+                                    humanBattlefield.add(c);
+                                }
                             }
                         }
+                        
                         PlayerZone computerGrave = AllZone.getZone(Constant.Zone.Graveyard,AllZone.ComputerPlayer);
                         PlayerZone computerBattlefield = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
                         for(Card c:computerGrave.getCards())
@@ -7152,7 +7161,6 @@ public class CardFactory_Sorceries {
             sb.append(card.getName()).append(" - choose a creature type.");
             spell.setStackDescription(sb.toString());
         }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Ashes to Ashes")) {
