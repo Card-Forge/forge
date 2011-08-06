@@ -1,21 +1,21 @@
 Drove of Elves
 3 G
 Creature Elf
-Drove of Elves’s power and toughness are each equal to the number of green permanents you control.
+Drove of Elves's power and toughness are each equal to the number of green permanents you control.
 1/1
 This card can't be the target of spells or abilities your opponents control.
 
 Faerie Swarm
 3 U
 Creature Faerie
-Faerie Swarm’s power and toughness are each equal to the number of blue permanents you control.
+Faerie Swarm's power and toughness are each equal to the number of blue permanents you control.
 1/1
 Flying
 
 Crowd of Cinders
 3 B
 Creature Elemental
-Crowd of Cinders’s power and toughness are each equal to the number of black permanents you control.
+Crowd of Cinders's power and toughness are each equal to the number of black permanents you control.
 1/1
 Fear
 
@@ -85,13 +85,13 @@ Unblockable
 Quietus Spike
 3
 Artifact Equipment
-Equipped creature has deathtouch.  Whenever equipped creature deals combat damage to a player, that player loses half his or her life, rounded up.
+Equipped creature has deathtouch. Whenever equipped creature deals combat damage to a player, that player loses half his or her life, rounded up.
 VanillaEquipment:0:0:3:Deathtouch:none:none
 
 Mask of Riddles
 U B
 Artifact Equipment
-Equipped creature has fear. (It can’t be blocked except by artifact creatures and/or black creatures.)  Whenever equipped creature deals combat damage to a player, you may draw a card. 
+Equipped creature has fear. (It can't be blocked except by artifact creatures and/or black creatures.) Whenever equipped creature deals combat damage to a player, you may draw a card. 
 VanillaEquipment:0:0:2:Fear:none:none
 
 Peregrine Mask
@@ -140,7 +140,7 @@ Vulshok Gauntlets
 2
 Artifact Equipment
 Equipped creature gets +4/+2 and doesn't untap during its controller's untap step.
-VanillaEquipment:4:2:2:This card doesn't untap during your untap step.:none:none
+VanillaEquipment:4:2:3:This card doesn't untap during your untap step.:none:none
 
 Vulshok Morningstar
 2
@@ -280,7 +280,7 @@ Haste
 Guul Draz Specter
 2 B B
 Creature Specter
-Guul Draz Specter gets +3/+3 as long as an opponent has no cards in hand.  Whenever Guul Draz Specter deals combat damage to a player, that player discards a card.
+Guul Draz Specter gets +3/+3 as long as an opponent has no cards in hand. Whenever Guul Draz Specter deals combat damage to a player, that player discards a card.
 2/2
 Flying
 
@@ -296,19 +296,19 @@ Headhunter
 Creature Human Cleric
 Whenever Headhunter deals combat damage to a player, that player discards a card
 1/1
-Morph: B
+Morph:B
 
 Riptide Pilferer
 1 U
 Creature Merfolk Rogue
 Whenever Riptide Pilferer deals combat damage to a player, that player discards a card.
 1/1
-Morph: U
+Morph:U
 
 Scalpelexis
 4 U
 Creature Beast
-Whenever Scalpelexis deals combat damage to a player, that player removes the top four cards of his or her library from the game.  If two or more of those cards have the same name, repeat this process.
+Whenever Scalpelexis deals combat damage to a player, that player removes the top four cards of his or her library from the game. If two or more of those cards have the same name, repeat this process.
 1/5
 Flying
 
@@ -362,7 +362,7 @@ TypeCycling:Basic:1 R
 Absorb Vis
 6 B
 Sorcery
-no text
+Target player loses 4 life and you gain 4 life.
 spLoseLifeGainLife:4
 TypeCycling:Basic:1 B
 
@@ -616,31 +616,31 @@ Shroud
 Emberstrike Duo
 1 BR
 Creature Elemental Warrior Shaman
-Whenever you cast a black spell, Emberstrike Duo gets +1/+1 until end of turn.  Whenever you cast a red spell, Emberstrike Duo gains first strike until end of turn.
+Whenever you cast a black spell, Emberstrike Duo gets +1/+1 until end of turn. Whenever you cast a red spell, Emberstrike Duo gains first strike until end of turn.
 1/1
 
 Gravelgill Duo
 2 UB
 Creature Merfolk Rogue Warrior
-Whenever you cast a blue spell, Gravelgill Duo gets +1/+1 until end of turn.  Whenever you cast a black spell, Gravelgill Duo gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
+Whenever you cast a blue spell, Gravelgill Duo gets +1/+1 until end of turn. Whenever you cast a black spell, Gravelgill Duo gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
 2/1
 
 Safehold Duo
 3 GW
 Creature Elf Warrior Shaman
-Whenever you cast a green spell, Safehold Duo gets +1/+1 until end of turn.  Whenever you cast a white spell, Safehold Duo gains vigilance until end of turn.
+Whenever you cast a green spell, Safehold Duo gets +1/+1 until end of turn. Whenever you cast a white spell, Safehold Duo gains vigilance until end of turn.
 2/4
 
 Tattermunge Duo
 2 RG
 Creature Goblin Warrior Shaman
-Whenever you cast a red spell, Tattermunge Duo gets +1/+1 until end of turn.  Whenever you cast a green spell, Tattermunge Duo gains forestwalk until end of turn.
+Whenever you cast a red spell, Tattermunge Duo gets +1/+1 until end of turn. Whenever you cast a green spell, Tattermunge Duo gains forestwalk until end of turn.
 2/3
 
 Thistledown Duo
 2 WU
 Creature Kithkin Soldier Wizard
-Whenever you cast a white spell, Thistledown Duo gets +1/+1 until end of turn.  Whenever you cast a blue spell, Thistledown Duo gains flying until end of turn.
+Whenever you cast a white spell, Thistledown Duo gets +1/+1 until end of turn. Whenever you cast a blue spell, Thistledown Duo gains flying until end of turn.
 2/2
 
 Phantom Centaur
@@ -680,44 +680,44 @@ As Meddling Mage enters the battlefield, name a nonland card. The named card can
 Shorecrasher Mimic
 1 GU
 Creature Shapeshifter
-Whenever you cast a spell thatï¿½s both green and blue, Shorecrasher Mimic becomes 5/3 and gains trample until end of turn.
+Whenever you cast a spell that's both green and blue, Shorecrasher Mimic becomes 5/3 and gains trample until end of turn.
 2/1
 
 Woodlurker Mimic
 1 BG
 Creature Shapeshifter
-Whenever you cast a spell thatï¿½s both black and green, Woodlurker Mimic becomes 4/5 and gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)
+Whenever you cast a spell that's both black and green, Woodlurker Mimic becomes 4/5 and gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)
 2/1
 
 Battlegate Mimic
 1 RW
 Creature Shapeshifter
-Whenever you cast a spell thatï¿½s both red and white, Battlegate Mimic becomes 4/2 and gains first strike until end of turn.
+Whenever you cast a spell that's both red and white, Battlegate Mimic becomes 4/2 and gains first strike until end of turn.
 2/1
 
 Nightsky Mimic
 1 WB
 Creature Shapeshifter
-Whenever you cast a spell thatï¿½s both white and black, Nightsky Mimic becomes 4/4 and gains flying until end of turn.
+Whenever you cast a spell that's both white and black, Nightsky Mimic becomes 4/4 and gains flying until end of turn.
 2/1
 
 Riverfall Mimic
 1 UR
 Creature Shapeshifter
-Whenever you cast a spell thatï¿½s both blue and red, Riverfall Mimic becomes 3/3 and is unblockable until end of turn.
+Whenever you cast a spell that's both blue and red, Riverfall Mimic becomes 3/3 and is unblockable until end of turn.
 2/1
 
 Sapling of Colfenor
 3 BG BG
 Legendary Creature Treefolk Shaman
-Whenever Sapling of Colfenor attacks, reveal the top card of your library. If itï¿½s a creature card, you gain life equal to that cardï¿½s toughness, lose life equal to its power, then put it into your hand.
+Whenever Sapling of Colfenor attacks, reveal the top card of your library. If it's a creature card, you gain life equal to that card's toughness, lose life equal to its power, then put it into your hand.
 2/5
 Indestructible
 
 Dovescape
 3 WU WU WU
 Enchantment
-Whenever a player casts a noncreature spell, counter that spell. That player puts X 1/1 white and blue Bird creature tokens with flying onto the battlefield, where X is the spellï¿½s converted mana cost.
+Whenever a player casts a noncreature spell, counter that spell. That player puts X 1/1 white and blue Bird creature tokens with flying onto the battlefield, where X is the spell's converted mana cost.
 
 Lurking Informant
 1 UB
@@ -728,28 +728,28 @@ no text
 Belligerent Hatchling
 3 RW
 Creature Elemental
-Belligerent Hatchling enters the battlefield with four -1/-1 counters on it.  Whenever you cast a red spell, remove a -1/-1 counter from Belligerent Hatchling.  Whenever you cast a white spell, remove a -1/-1 counter from Belligerent Hatchling.
+Belligerent Hatchling enters the battlefield with four -1/-1 counters on it. Whenever you cast a red spell, remove a -1/-1 counter from Belligerent Hatchling. Whenever you cast a white spell, remove a -1/-1 counter from Belligerent Hatchling.
 6/6
 First Strike
 
 Noxious Hatchling
 3 BG
 Creature Elemental
-Noxious Hatchling enters the battlefield with four -1/-1 counters on it. Whenever you cast a black spell, remove a -1/-1 counter from Noxious Hatchling.  Whenever you cast a green spell, remove a -1/-1 counter from Noxious Hatchling.
+Noxious Hatchling enters the battlefield with four -1/-1 counters on it. Whenever you cast a black spell, remove a -1/-1 counter from Noxious Hatchling. Whenever you cast a green spell, remove a -1/-1 counter from Noxious Hatchling.
 6/6
 Wither
 
 Sturdy Hatchling
 3 GU
 Creature Elemental
-Sturdy Hatchling enters the battlefield with four -1/-1 counters on it. Whenever you cast a green spell, remove a -1/-1 counter from Sturdy Hatchling.  Whenever you cast a blue spell, remove a -1/-1 counter from Sturdy Hatchling.
+Sturdy Hatchling enters the battlefield with four -1/-1 counters on it. Whenever you cast a green spell, remove a -1/-1 counter from Sturdy Hatchling. Whenever you cast a blue spell, remove a -1/-1 counter from Sturdy Hatchling.
 6/6
 KPump GU:Shroud
 
 Voracious Hatchling
 3 WB
 Creature Elemental
-Voracious Hatchling enters the battlefield with four -1/-1 counters on it.  Whenever you cast a white spell, remove a -1/-1 counter from Voracious Hatchling.  Whenever you cast a black spell, remove a -1/-1 counter from Voracious Hatchling.
+Voracious Hatchling enters the battlefield with four -1/-1 counters on it. Whenever you cast a white spell, remove a -1/-1 counter from Voracious Hatchling. Whenever you cast a black spell, remove a -1/-1 counter from Voracious Hatchling.
 6/6
 Lifelink
 
@@ -825,12 +825,12 @@ Exile all cards from target player's hand and graveyard.
 Lobotomy
 2 U B
 Sorcery
-Target player reveals his or her hand, then you choose a card other than a basic land card from it.  Search that player's graveyard, hand, and library for all cards with the same name as the chosen card and remove them from the game.  Then that player shuffles his or her library.
+Target player reveals his or her hand, then you choose a card other than a basic land card from it. Search that player's graveyard, hand, and library for all cards with the same name as the chosen card and remove them from the game. Then that player shuffles his or her library.
 
 Haunting Echoes
 3 B B
 Sorcery
-Remove all cards in target player's graveyard other than basic land cards from the game.  Search that player's library for all cards with the same name as cards removed this way, and remove them from the game. Then that player shuffles his or her library.
+Remove all cards in target player's graveyard other than basic land cards from the game. Search that player's library for all cards with the same name as cards removed this way, and remove them from the game. Then that player shuffles his or her library.
 
 Daru Encampment
 no cost
@@ -886,7 +886,7 @@ no text
 Wood Elves
 2 G
 Creature Elf Scout
-When Wood Elves comes into play, search your library for a Forest card and put that card into play.  Then shuffle your library.
+When Wood Elves comes into play, search your library for a Forest card and put that card into play. Then shuffle your library.
 1/1
 
 Assembly-Worker
@@ -12597,7 +12597,7 @@ You gain 10 life. Then if you have more life than an opponent, put a 5/5 white G
 Reach of Branches
 4 G
 Tribal Instant Treefolk
-Put a 2/5 green Treefolk Shaman creature token into play.  Whenever a Forest comes into play under your control, you may return Reach of Branches from your graveyard to your hand.
+Put a 2/5 green Treefolk Shaman creature token into play. Whenever a Forest comes into play under your control, you may return Reach of Branches from your graveyard to your hand.
 
 Meadowboon
 2 W W
@@ -12739,7 +12739,7 @@ Sorcery
 Each player shuffles his or her hand and graveyard into his or her library and then draws seven cards.
 
 Inner-Flame Acolyte
-1 R R   
+1 R R 
 Creature Elemental Shaman
 When Inner-Flame Acolyte comes into play, target creature gets +2/+0 and gains haste until end of turn.
 2/2
@@ -12752,7 +12752,7 @@ When Briarhorn comes into play, target creature gets +3/+3 until end of turn.
 Flash
 
 Shriekmaw 
-4 B  
+4 B
 Creature Elemental
 When Shriekmaw comes into play, destroy target nonartifact, nonblack creature.
 3/2
@@ -12852,7 +12852,7 @@ Garruk Wildspeaker
 Planeswalker - Garruk
 no text
 
-Liliana Vess  
+Liliana Vess
 3 B B
 Planeswalker - Liliana
 no text
@@ -13102,7 +13102,7 @@ no text
 Take Possession
 5 U U
 Sorcery
-Gain control of target permanent. (NOTE: "Split second" not implemented.  This spell is currently treated as a Sorcery rather than as an Enchantment.)
+Gain control of target permanent. (NOTE: "Split second" not implemented. This spell is currently treated as a Sorcery rather than as an Enchantment.)
 
 Cloudseeder
 1 U
@@ -13111,7 +13111,7 @@ no text
 1/1
 Flying
 
-Goldmeadow Lookout  
+Goldmeadow Lookout
 3 W
 Creature Kithkin Spellshaper
 no text
@@ -13147,7 +13147,7 @@ Indestructible
 Animate Dead
 1 B
 Sorcery
-Put target creature card from any graveyard into play under your control.  That creature gets -1/-0. (NOTE: This spell is currently treated as a Sorcery rather than as an Enchantment.)
+Put target creature card from any graveyard into play under your control. That creature gets -1/-0. (NOTE: This spell is currently treated as a Sorcery rather than as an Enchantment.)
 
 Ashes to Ashes
 1 B B
@@ -13520,7 +13520,7 @@ no text
 Erratic Explosion
 2 R
 Sorcery
-Choose target creature or player.  The computer will randomly choose a nonland card from your library.  Erratic Explosion deals damage equal to that card's converted mana cost to that creature or player.
+Choose target creature or player. The computer will randomly choose a nonland card from your library. Erratic Explosion deals damage equal to that card's converted mana cost to that creature or player.
 
 Tribal Flames
 1 R
@@ -13806,7 +13806,7 @@ All creatures get -2/-2 until end of turn.
 Do or Die
 1 B
 Sorcery
-Randomly destroy half of the creatures target player controls.  They can't be regenerated.
+Randomly destroy half of the creatures target player controls. They can't be regenerated.
 
 Cao Cao, Lord of Wei
 3 B B
@@ -14050,7 +14050,7 @@ Until end of turn, target land is 3/3 creature that's still a land.
 
 Kodama's Reach
 2 G
-Sorcery  
+Sorcery
 Search your library for two basic land cards, reveal those cards, and put one into play tapped and the other into your hand. Then shuffle your library.
 
 Wandering Stream
@@ -14799,70 +14799,70 @@ PTPump B:+1/+1
 Blood Crypt
 no cost
 Land Swamp Mountain
-As Blood Crypt comes into play, you may pay 2 life.  If you don't, Blood Crypt comes into play tapped instead.
+As Blood Crypt comes into play, you may pay 2 life. If you don't, Blood Crypt comes into play tapped instead.
 tap: add B
 tap: add R
 
 Breeding Pool
 no cost
 Land Forest Island
-As Breeding Pool into play, you may pay 2 life.  If you don't, Breeding Pool comes into play tapped instead.
+As Breeding Pool into play, you may pay 2 life. If you don't, Breeding Pool comes into play tapped instead.
 tap: add G
 tap: add U
 
 Godless Shrine
 no cost
 Land Plains Swamp
-As Godless Shrine comes into play, you may pay 2 life.  If you don't, Godless Shrine comes into play tapped instead.
+As Godless Shrine comes into play, you may pay 2 life. If you don't, Godless Shrine comes into play tapped instead.
 tap: add W
 tap: add B
 
 Hallowed Fountain
 no cost
 Land Plains Island
-As Hallowed Fountain comes into play, you may pay 2 life.  If you don't, Hallowed Fountain comes into play tapped instead.
+As Hallowed Fountain comes into play, you may pay 2 life. If you don't, Hallowed Fountain comes into play tapped instead.
 tap: add W
 tap: add U
 
 Overgrown Tomb
 no cost
 Land Swamp Forest
-As Overgrown Tomb comes into play, you may pay 2 life.  If you don't, Overgrown Tomb comes into play tapped instead.
+As Overgrown Tomb comes into play, you may pay 2 life. If you don't, Overgrown Tomb comes into play tapped instead.
 tap: add B
 tap: add G
 
 Sacred Foundry
 no cost
 Land Mountain Plains
-As Sacred Foundry comes into play, you may pay 2 life.  If you don't, Sacred Foundry comes into play tapped instead.
+As Sacred Foundry comes into play, you may pay 2 life. If you don't, Sacred Foundry comes into play tapped instead.
 tap: add R
 tap: add W
 
 Steam Vents
 no cost
 Land Island Mountain
-As Steam Vents comes into play, you may pay 2 life.  If you don't, Steam Vents comes into play tapped instead.
+As Steam Vents comes into play, you may pay 2 life. If you don't, Steam Vents comes into play tapped instead.
 tap: add U
 tap: add R
 
 Stomping Ground
 no cost
 Land Mountain Forest
-As Stomping Ground comes into play, you may pay 2 life.  If you don't, Stomping Ground comes into play tapped instead.
+As Stomping Ground comes into play, you may pay 2 life. If you don't, Stomping Ground comes into play tapped instead.
 tap: add R
 tap: add G
 
 Temple Garden
 no cost
 Land Forest Plains
-As Temple Garden comes into play, you may pay 2 life.  If you don't, Temple Garden comes into play tapped instead.
+As Temple Garden comes into play, you may pay 2 life. If you don't, Temple Garden comes into play tapped instead.
 tap: add G
 tap: add W
 
 Watery Grave
 no cost
 Land Island Swamp
-As Watery Grave comes into play, you may pay 2 life.  If you don't, Watery Grave comes into play tapped instead.
+As Watery Grave comes into play, you may pay 2 life. If you don't, Watery Grave comes into play tapped instead.
 tap: add U
 tap: add B
 
