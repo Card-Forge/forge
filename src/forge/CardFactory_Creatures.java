@@ -7664,37 +7664,6 @@ public class CardFactory_Creatures {
         */
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Callous Giant")) {
-            final Card newCard = new Card() {
-                @Override
-                public void addDamage(int n, Card source) {
-                    if(n <= 3) n = 0;
-                    super.addDamage(n, source);
-                }
-            };
-            
-            newCard.setOwner(card.getOwner());
-            newCard.setController(card.getController());
-            
-            newCard.setManaCost(card.getManaCost());
-            newCard.setName(card.getName());
-            newCard.addType("Creature");
-            newCard.addType("Giant");
-            newCard.setText(card.getSpellText());
-            newCard.setBaseAttack(card.getBaseAttack());
-            newCard.setBaseDefense(card.getBaseDefense());
-            
-            newCard.addSpellAbility(new Spell_Permanent(newCard));
-            
-            newCard.setSVars(card.getSVars());
-            newCard.setSets(card.getSets());
-            
-            
-            return newCard;
-        }//*************** END ************ END **************************
-        
-
-        //*************** START *********** START **************************
         else if(cardName.equals("Chronatog")) {
             
             final Command untilEOT = new Command() {

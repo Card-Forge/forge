@@ -3050,6 +3050,8 @@ public class Card extends MyObservable {
     		
     		if (isType("Cleric") && AllZoneUtil.isCardInPlay("Daunting Defender", player))
     			restDamage = restDamage - AllZoneUtil.getPlayerCardsInPlay(player, "Daunting Defender").size();
+    		
+    		if(getName().equals("Callous Giant") && restDamage <= 3) return 0;
     	} //Creature end
     	
 		if (AllZoneUtil.isCardInPlay("Energy Storm") && source.isSpell()) return 0;
