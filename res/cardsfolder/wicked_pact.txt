@@ -1,0 +1,8 @@
+Name:Wicked Pact
+ManaCost:1 B B
+Types:Sorcery
+Text:no text
+A:SP$Destroy|Cost$1 B B|TargetMin$2|TargetMax$2|ValidTgts$Creature.nonBlack|TgtPrompt$Select target nonblack creatures|SubAbility$YouLoseLife/5|SpellDescription$Destroy two target nonblack creatures. You lose 5 life.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wicked_pact.jpg
+End
