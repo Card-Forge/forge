@@ -2,6 +2,7 @@ Kor Duelist
 W
 Creature Kor Soldier
 As long as Kor Duelist is equipped, it has double strike.
+1/1
 
 Stalking Assassin
 1 U B
