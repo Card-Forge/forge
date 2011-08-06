@@ -2174,6 +2174,7 @@ res/cardsfolder/flood.txt -text svneol=native#text/plain
 res/cardsfolder/flood_plain.txt -text svneol=native#text/plain
 res/cardsfolder/floodbringer.txt -text svneol=native#text/plain
 res/cardsfolder/flooded_grove.txt -text svneol=native#text/plain
+res/cardsfolder/flooded_shoreline.txt svneol=native#text/plain
 res/cardsfolder/flooded_strand.txt -text svneol=native#text/plain
 res/cardsfolder/floodwater_dam.txt -text svneol=native#text/plain
 res/cardsfolder/flow_of_ideas.txt -text svneol=native#text/plain
