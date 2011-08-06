@@ -2749,9 +2749,12 @@ public class GameActionUtil {
 						card.getController().drawCard();
 					}
 				}; // ability2
-
-				ability2.setStackDescription(card.getName() + " - " + c.getController()
-						+ " plays an Artifact spell and draws a card");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - ").append(c.getController());
+				sb.append(" plays an Artifact spell and draws a card");
+				ability2.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability2);
 
 			} // for
@@ -2777,9 +2780,12 @@ public class GameActionUtil {
 								"Creature", "Angel"}, 4, 4, new String[] {"Flying"});
 					}
 				}; // ability2
-
-				ability2.setStackDescription(card.getName() + " - " + c.getController()
-						+ " puts a 4/4 White Angel token with flying into play.");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - ").append(c.getController());
+				sb.append(" puts a 4/4 White Angel token with flying into play.");
+				ability2.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability2);
 
 			} // for
@@ -2805,8 +2811,11 @@ public class GameActionUtil {
 						if(card.isTapped()) card.untap();
 					}
 				}; // ability2
-
-				ability2.setStackDescription(card.getName() + " - " + " untaps");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - ").append(" untaps");
+				ability2.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability2);
 
 			} // for
@@ -2832,9 +2841,12 @@ public class GameActionUtil {
 						card.getController().drawCard();
 					}
 				}; // ability2
-
-				ability2.setStackDescription(card.getName() + " - " + c.getController()
-						+ " plays a Creature spell and draws a card");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - ").append(c.getController());
+				sb.append(" plays a Creature spell and draws a card");
+				ability2.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability2);
 
 			} // for
@@ -2861,9 +2873,13 @@ public class GameActionUtil {
 						card.addCounter(Counters.P1P1, 1);
 					}
 				}; // ability2
-
-				ability2.setStackDescription(card.getName() + " - " + c.getController()
-						+ " played a white, blue, black or red spell,  " + " gets a +1/+1 counter.");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - ").append(c.getController());
+				sb.append(" played a white, blue, black or red spell, ");
+				sb.append(card.getName()).append(" gets a +1/+1 counter.");
+				ability2.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability2);
 			}
 		}
@@ -2891,9 +2907,13 @@ public class GameActionUtil {
 						card.addCounter(Counters.P1P1, 1);
 					}
 				}; // ability2
-
-				ability2.setStackDescription(card.getName() + " - " + c.getController()
-						+ " played a blue or black spell,  " + card.getName() + " gets a +1/+1 counter.");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - ").append(c.getController());
+				sb.append(" played a blue or black spell, ").append(card.getName());
+				sb.append(" gets a +1/+1 counter.");
+				ability2.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability2);
 
 			}
