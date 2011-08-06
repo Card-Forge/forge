@@ -2,6 +2,7 @@ Name:Lifeforce
 ManaCost:G G
 Types:Enchantment
 Text:G G: Counter target black spell.
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lifeforce.jpg
 End
