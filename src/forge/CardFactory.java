@@ -3646,8 +3646,10 @@ public class CardFactory implements NewConstants {
         }//spBounceAll
         
         
-        // Generic return target card(s) from graveyard to Hand or Battlefield cards
-        // spReturnTgt:{Num Cards/Parameters}:{Type}:{To Zone}:{DrawBack}
+        /**
+         *  Generic return target card(s) from graveyard to Hand or Battlefield cards
+         *  spReturnTgt:{Num Cards/Parameters}:{Type}:{To Zone}:{DrawBack}
+         */
         if (hasKeyword(card, "spReturnTgt") != -1) {
             int n = hasKeyword(card, "spReturnTgt");
             
@@ -3809,6 +3811,11 @@ public class CardFactory implements NewConstants {
                     
                     if (card.getController().equals(Constant.Player.Computer)) {
                         list = list.getNotName(card.getName());
+                        if (Destination.equals("Battlefield")) {
+                            list = list.getNotKeyword("At the beginning of the end step, destroy CARDNAME.");
+                            list = list.getNotKeyword("At the beginning of the end step, exile CARDNAME.");
+                            list = list.getNotKeyword("At the beginning of the end step, sacrifice CARDNAME.");
+                        }
                         
 /*                      // I failed to solve the problem above with this code.
                         
@@ -3879,7 +3886,9 @@ public class CardFactory implements NewConstants {
             spRtrnTgt.setBeforePayMana(target);
             card.addSpellAbility(spRtrnTgt);
             
-            card.setSVar("PlayMain1", "TRUE");
+            if (Destination.equals("Hand")) {
+                card.setSVar("PlayMain1", "TRUE");
+            }
         }// spReturnTgt
         
 
