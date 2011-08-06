@@ -1257,6 +1257,7 @@ public class Cost_Payment {
                     card.tap();
                     payTapXTypeTappedList.add(card);
                     cardList.remove(card);
+                    payment.getAbility().addTappedCost(card);
                     nTapped++;
                     
                     if(nTapped == nCards) 

@@ -70,6 +70,7 @@ public abstract class SpellAbility {
     private CardList 		sacrificedCards	   = null;
     private CardList 		discardedCards	   = null;
     private CardList		exiledCards			 = null;
+    private CardList		tappedCards			= null;
     
     private Command         cancelCommand      = Command.Blank;
     private Command         beforePayManaAI    = Command.Blank;
@@ -337,6 +338,21 @@ public abstract class SpellAbility {
     	exiledCards = null;
     }
     
+    public void addTappedCost(Card c){
+    	if (tappedCards == null)
+    		tappedCards = new CardList();
+    	
+    	tappedCards.add(c);
+    }
+    
+    public CardList getTappedCost(){
+    	return tappedCards;
+    }
+    
+    public void resetTappedCost(){
+    	tappedCards = null;
+    }
+    
     public void addDiscardedCost(Card c){
     	if (discardedCards == null)
     		discardedCards = new CardList();
@@ -355,6 +371,7 @@ public abstract class SpellAbility {
     	resetDiscardedCost();
     	resetSacrificedCost();
     	resetExiledCost();
+    	resetTappedCost();
 
     	if (chosenTarget != null)
     		chosenTarget.resetTargets();

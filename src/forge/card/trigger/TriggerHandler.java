@@ -392,6 +392,18 @@ public class TriggerHandler {
 				}
 				
 				@Override
+				public void addExiledCost(Card c)
+				{
+					sa[0].addExiledCost(c);
+				}
+				
+				@Override 
+				public void addTappedCost(Card c)
+				{
+					sa[0].addTappedCost(c);
+				}
+				
+				@Override
 				public boolean canPlay()
 				{
 					return sa[0].canPlay();
@@ -501,6 +513,11 @@ public class TriggerHandler {
 				@Override
 				public CardList getExiledCost() {
 					return sa[0].getExiledCost();
+				}
+				
+				@Override
+				public CardList getTappedCost() {
+					return sa[0].getTappedCost();
 				}
 				
 				@Override
@@ -672,6 +689,12 @@ public class TriggerHandler {
 				public void resetExiledCost()
 				{
 					sa[0].resetExiledCost();
+				}
+				
+				@Override
+				public void resetTappedCost()
+				{
+					sa[0].resetTappedCost();
 				}
 				
 				@Override
