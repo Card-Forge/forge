@@ -300,59 +300,6 @@ class CardFactory_Lands {
             card.addSpellAbility(sacrifice);            
         }//*************** END ************ END **************************
         
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Mutavault")) {
-        	final long[] timeStamp = new long[1];
-            
-            final SpellAbility a1 = new Ability(card, "1") {
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    Card c = card;
-                    String[] types = { "Creature" };
-                    String[] keywords = { "Changeling" };
-                    timeStamp[0] = CardFactoryUtil.activateManland(c, 2, 2, types, keywords, "0");
-
-                    final Command eot1 = new Command() {
-                        private static final long serialVersionUID = 5106629534549783845L;
-                        long stamp = timeStamp[0];
-                        public void execute() {
-                            Card c = card;
-
-                            String[] types = { "Creature" };
-                            String[] keywords = { "Changeling" };
-                            CardFactoryUtil.revertManland(c, types, keywords, "", stamp);
-                        }
-                    };
-                    
-                    AllZone.EndOfTurn.addUntil(eot1);
-                }
-            };//SpellAbility
-            
-            card.clearSpellKeepManaAbility();
-            card.addSpellAbility(a1);
-            a1.setDescription("1: Mutavault becomes a 2/2 creature with all creature types until end of turn. It's still a land.");
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" becomes a 2/2 creature with changeling until EOT");
-            a1.setStackDescription(sb.toString());
-            
-            Command paid1 = new Command() {
-                private static final long serialVersionUID = -601119544294387668L;
-                
-                public void execute() {
-                    AllZone.Stack.add(a1);
-                }
-            };
-            
-            a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
-            
-        }//*************** END ************ END **************************
-        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Spawning Pool")) {
