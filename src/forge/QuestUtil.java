@@ -156,7 +156,11 @@ public class QuestUtil {
             };
             c.addSpellAbility(ability);
         	ability.setDescription("tap: You gain 1 life.");
-            ability.setStackDescription("Plant Wall - " + c.getController() + " gains 1 life.");
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append("Plant Wall - ").append(c.getController()).append(" gains 1 life.");
+        	ability.setStackDescription(sb.toString());
+            
             c.setText("tap: You gain 1 life.");
         }
         
@@ -639,9 +643,6 @@ public class QuestUtil {
 			}
 			qa.setHuman(humanList);
 			
-			// qa.addCompy("Bad Moon");
-			// qa.addCompy("Wall of Brambles");
-			
             String compySetupCards[] = {"Bad Moon", "Wall of Brambles"};
             
             for (int i = 0; i < 2; i ++)
@@ -664,10 +665,6 @@ public class QuestUtil {
 			}
 			qa.setHuman(humanList);
 			
-			// qa.addCompy("Heedless One");
-			// qa.addCompy("Norwood Archers");
-			// qa.addCompy("Wildslayer Elves");
-			
 			String compySetupCards[] = {"Heedless One", "Norwood Archers", "Wildslayer Elves"};
             
             for (int i = 0; i < 3; i ++)
@@ -689,13 +686,6 @@ public class QuestUtil {
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);
-			
-			// qa.addCompy("Wall of Earth");
-			// qa.addCompy("Wall of Air");
-			// qa.addCompy("Wall of Ice");
-			// qa.addCompy("Wall of Light");
-			// qa.addCompy("Carrion Wall");
-			// qa.addCompy("Steel Wall");
 			
 			String compySetupCards[] = 
 				{"Wall of Earth", "Wall of Air", "Wall of Ice", "Wall of Light", "Carrion Wall" ,"Steel Wall"};
