@@ -1,0 +1,9 @@
+Name:Thorn Thallid
+ManaCost:1 G G
+Types:Creature Fungus
+Text:At the beginning of your upkeep, put a spore counter on Thorn Thallid.
+PT:2/2
+K:Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thorn_thallid.jpg
+End
