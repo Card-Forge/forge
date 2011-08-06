@@ -377,8 +377,8 @@ public class AbilityFactory {
 				SA = AbilityFactory_PermanentState.createAbilityUntapAll(this);
 			else if (isSp)
 				SA = AbilityFactory_PermanentState.createSpellUntapAll(this);
-			//else if (isDb)
-				//SA = AbilityFactory_PermanentState.createDrawbackUntapAll(this);
+			else if (isDb)
+				SA = AbilityFactory_PermanentState.createDrawbackUntapAll(this);
 		}
 		
 		if (API.equals("Tap")){

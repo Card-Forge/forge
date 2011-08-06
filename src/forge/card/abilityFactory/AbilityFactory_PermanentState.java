@@ -841,6 +841,38 @@ public class AbilityFactory_PermanentState {
 		};
 		return spUntap;
 	}
+	
+	public static SpellAbility createDrawbackUntapAll(final AbilityFactory af) {
+		final SpellAbility dbUntapAll = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+			private static final long serialVersionUID = -5187900994680626766L;
+
+			@Override
+			public String getStackDescription(){
+				return untapAllStackDescription(af, this);
+			}
+			
+			@Override
+			public void resolve() {
+				untapAllResolve(af, this);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return untapAllPlayDrawbackAI(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return untapAllPlayDrawbackAI(af, this);
+			}
+			
+		};
+		return dbUntapAll;
+	}
+	
+	private static boolean untapAllPlayDrawbackAI(final AbilityFactory af, SpellAbility sa){
+		return true;
+	}
 
 	private static void untapAllResolve(final AbilityFactory af, final SpellAbility sa) {
 		HashMap<String,String> params = af.getMapParams();
