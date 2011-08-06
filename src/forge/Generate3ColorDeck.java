@@ -400,7 +400,7 @@ public class Generate3ColorDeck
 		}
 
 		tmpDeck += "DeckSize:" + tDeck.size() + "\n";
-		if (ForgeProps.getProperty("showdeck/3color", "true").equals("true"))
+		if (ForgeProps.getProperty("showdeck/3color", "false").equals("true"))
 			ErrorViewer.showError(tmpDeck);
 		
 		return tDeck;
