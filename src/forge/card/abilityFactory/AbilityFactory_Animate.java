@@ -181,6 +181,7 @@ public class AbilityFactory_Animate {
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
 		
+		HashMap<String,String> params = af.getMapParams();
 		Target tgt = af.getAbTgt();
 		Card source = sa.getSourceCard();
 		
@@ -189,8 +190,8 @@ public class AbilityFactory_Animate {
 		//TODO - add some kind of check to answer "Am I going to attack with this?"
 		//TODO - add some kind of check for during human turn to answer "Can I use this to block something?"
 		
-		//don't activate during main2
-		if(AllZone.Phase.getPhase().equals(Constant.Phase.Main2))
+		//don't activate during main2 unless this effect is permanent
+		if(AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && !params.containsKey("Permanent"))
         	return false;
 		
 		if(null == tgt) {
@@ -283,6 +284,7 @@ public class AbilityFactory_Animate {
 			}
 		}
 		
+		//colors to be added or changed to
 		final String finalDesc = params.containsKey("Colors") ? 
 			CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(params.get("Colors").split(",")))) : "";
 		
