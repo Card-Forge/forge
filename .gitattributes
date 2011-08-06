@@ -1380,6 +1380,7 @@ res/cardsfolder/feast_of_flesh.txt -text svneol=native#text/plain
 res/cardsfolder/feast_of_the_unicorn.txt -text svneol=native#text/plain
 res/cardsfolder/fecundity.txt -text svneol=native#text/plain
 res/cardsfolder/feebleness.txt -text svneol=native#text/plain
+res/cardsfolder/feedback.txt -text svneol=native#text/plain
 res/cardsfolder/feedback_bolt.txt -text svneol=native#text/plain
 res/cardsfolder/feeding_frenzy.txt -text svneol=native#text/plain
 res/cardsfolder/feldons_cane.txt -text svneol=native#text/plain

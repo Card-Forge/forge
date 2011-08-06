@@ -1,0 +1,8 @@
+Name:Feedback
+ManaCost:2 U
+Types:Enchantment Aura
+Text:At the beginning of the upkeep of enchanted enchantment's controller, Feedback deals 1 damage to that player.
+K:Enchant Enchantment Curse
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/feedback.jpg
+End
