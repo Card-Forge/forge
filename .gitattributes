@@ -7074,6 +7074,7 @@ res/cardsfolder/thoughtbind.txt -text svneol=native#text/plain
 res/cardsfolder/thoughtcast.txt -text svneol=native#text/plain
 res/cardsfolder/thoughtcutter_agent.txt -text svneol=native#text/plain
 res/cardsfolder/thoughtleech.txt -text svneol=native#text/plain
+res/cardsfolder/thoughtpicker_witch.txt -text svneol=native#text/plain
 res/cardsfolder/thoughtseize.txt -text svneol=native#text/plain
 res/cardsfolder/thoughtweft_gambit.txt svneol=native#text/plain
 res/cardsfolder/thousand_legged_kami.txt -text svneol=native#text/plain
