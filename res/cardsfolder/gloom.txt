@@ -4,7 +4,7 @@ Types:Enchantment
 Text:White spells cost 3 more to cast. Activated abilities of white enchantments cost 3 more to activate.
 K:CostChange:All:More:3:Spell:white:All:NoSpecial
 K:CostChange:All:More:3:Ability:white:Enchantment:NoSpecial
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gloom.jpg
 SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/19.jpg

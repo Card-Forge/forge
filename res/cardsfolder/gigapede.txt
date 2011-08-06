@@ -3,7 +3,7 @@ ManaCost:3 G G
 Types:Creature Insect
 Text:no text
 PT:6/1
-A:AB$ChangeZone | Cost$Discard<1/Card> | Origin$ Graveyard | Destination$ Hand | ActivatingZone$ Graveyard | ActivatingPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Return Gigapede from your graveyard to your hand. Play this ability only during your upkeep.
+A:AB$ ChangeZone | Cost$ Discard<1/Card> | Origin$ Graveyard | Destination$ Hand | ActivatingZone$ Graveyard | ActivatingPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Return CARDNAME from your graveyard to your hand. Play this ability only during your upkeep.
 K:Shroud
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

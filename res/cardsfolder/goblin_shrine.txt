@@ -8,6 +8,7 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigDealDamage:AB$DamageAll | Cost$ 0 | ValidCards$ Creature.Goblin | NumDmg$ 1
 SVar:RemAIDeck:True
 SVar:PlayMain1:TRUE
+SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_shrine.jpg
 SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/67.jpg
