@@ -2357,8 +2357,10 @@ public class GameAction {
     	playerTurn = s;
     }
     
+    public String getPlayerTurn() {
+    	return playerTurn;
+    }
     
-    private boolean shouldDraw       = false;	// Starts false to skip first draw
     private String  lastPlayerToDraw = Constant.Player.Human;
     
     public String getLastPlayerToDraw() {
@@ -2384,29 +2386,12 @@ public class GameAction {
     }
     
     public void drawCard(String player) {
-        
-        boolean isDrawPhase = AllZone.Phase.getPhase().equals(Constant.Phase.Draw);
-        if(isDrawPhase) {
-            String currentPlayer = AllZone.Phase.getActivePlayer();
-
-            if(!currentPlayer.equals(lastPlayerToDraw) && AllZone.Phase.getTurn() != 1) {
-                shouldDraw = true;
-            }
-
-            lastPlayerToDraw = currentPlayer;
-            
-            if(!shouldDraw) {
-                return;
-            }
-            //so they can't draw twice in a row during the draw phase
-            shouldDraw = false;
-        }
         PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
         PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
         
         //only allow dredge by the human for now
         //TODO - allow dredge by the computer (probably 50% of the time at random so compy doesn't mill itself
-        if(0 < getDredge().size() && player.equals(Constant.Player.Human)) {
+        if(player.equals(Constant.Player.Human) && 0 < getDredge().size()) {
             String choices[] = {"Yes", "No"};
             Object o = AllZone.Display.getChoice("Do you want to dredge?", choices);
             if(o.equals("Yes")) {

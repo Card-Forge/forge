@@ -563,14 +563,6 @@ public class ComputerUtil
 	  return typeList.get(index);
   }
 
-  static public void untapDraw()
-  {
-    AllZone.GameAction.drawCard(Constant.Player.Computer);
-
-    CardList permanent = new CardList(AllZone.Computer_Play.getCards());
-    for(int i = 0; i < permanent.size(); i++)
-      permanent.get(i).untap();
-  }
   static public CardList getPossibleAttackers()
   {
 	  CardList list = new CardList(AllZone.Computer_Play.getCards());

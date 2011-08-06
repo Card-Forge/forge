@@ -303,7 +303,10 @@ public class InputControl extends MyObservable implements java.io.Serializable {
                 AllZone.pwCombat.setDefendingPlayer(Constant.Player.Human);
                 
                 return new Input_Untap();
-            } else if(phase.equals(Constant.Phase.Draw)) return new Computer_Draw();
+            } 
+            
+            else if(phase.equals(Constant.Phase.Draw))
+				return new Input_Draw();
             
             else if(phase.equals(Constant.Phase.Cleanup)) {
                 return new Computer_Cleanup();

@@ -99,13 +99,13 @@ public class GameActionUtil {
 		CardList Abyssallist = new CardList(playZone.getCards());
 		Abyssallist = Abyssallist.getName("Abyssal Persecutor");
 		if(Platinumlist.size() == 0 && Abyssallist.size() == 0) {
-		upkeep_Battle_of_Wits();
-		upkeep_Epic_Struggle();
-		upkeep_Near_Death_Experience();
-		upkeep_Helix_Pinnacle();
-		upkeep_Barren_Glory();
-		upkeep_Felidar_Sovereign();
-		upkeep_Klass();
+			upkeep_Battle_of_Wits();
+			upkeep_Epic_Struggle();
+			upkeep_Near_Death_Experience();
+			upkeep_Helix_Pinnacle();
+			upkeep_Barren_Glory();
+			upkeep_Felidar_Sovereign();
+			upkeep_Klass();
 		}
 		//Win / Lose
 		
@@ -132,16 +132,18 @@ public class GameActionUtil {
 		upkeep_BlackVise(); 
 		upkeep_Ivory_Tower();
 
-		upkeep_Howling_Mine(); // keep this one even laster, since it would
-		// cause black vise to do an extra point of
-		// damage if black vise was in play
-		upkeep_Kami_Crescent_Moon();
-		upkeep_Font_of_Mythos();
-		upkeep_Teferi_Puzzle_Box();
-		upkeep_Overbeing_of_Myth();
-
 		upkeep_AI_Aluren(); // experimental, just have the AI dump his small
 		// creats in play when aluren is there
+	}
+
+	public static void executeDrawStepEffects() {
+		final String player = AllZone.GameAction.getPlayerTurn();
+		draw_Teferi_Puzzle_Box(player);
+		draw_Howling_Mine(player);
+		draw_Kami_Crescent_Moon(player);
+		draw_Font_of_Mythos(player);
+		draw_Overbeing_of_Myth(player);
+		draw_Mana_Vault(player);
 	}
 
 	public static void executeTapSideEffects(Card c) {
@@ -8965,9 +8967,25 @@ public class GameActionUtil {
 		}// for
 	}// upkeep_Nettletooth_Djinn()
 
-	private static void upkeep_Howling_Mine() {
-		final String player = AllZone.Phase.getActivePlayer();
-
+	static boolean draw_ShouldSkipDraw(String player){
+    	if(AllZone.Phase.getTurn() == 1){
+            return true;
+    	}
+    	// Any card that says Skip your draw phase
+    	// todo: this would be better off as a keyword SkipPhase:Draw
+        CardList cards = new CardList();
+        
+        cards.addAll(AllZone.getZone(Constant.Zone.Play, player).getCards());
+        boolean skipDraw = false;
+        for(Card c : cards){
+        	if (c.getName().equals("Necropotence") || c.getName().equals("Yawgmoth's Bargain"))
+        		skipDraw = true;
+        }
+        
+        return (AllZone.Phase.getPhase().equals(Constant.Phase.Draw) && skipDraw);
+	}
+	
+	private static void draw_Howling_Mine(String player) {
 		CardList list = new CardList();
 		list.addAll(AllZone.Human_Play.getCards());
 		list.addAll(AllZone.Computer_Play.getCards());
@@ -8978,38 +8996,27 @@ public class GameActionUtil {
 				AllZone.GameAction.drawCard(player);
 			}
 		}
-	}// upkeep_Howling_Mine()
+	}// Howling_Mine()
 	
-	private static void upkeep_Kami_Crescent_Moon() {
-		final String player = AllZone.Phase.getActivePlayer();
-
+	private static void draw_Kami_Crescent_Moon(String player) {
 		CardList list = new CardList();
 		list.addAll(AllZone.Human_Play.getCards());
 		list.addAll(AllZone.Computer_Play.getCards());
 		list = list.getName("Kami of the Crescent Moon");
 
-		for(int i = 0; i < list.size(); i++){
-			AllZone.GameAction.drawCard(player);
-		}
-	}// upkeep_Kami_Crescent_Moon()
+		AllZone.GameAction.drawCards(player, list.size());
+	}// Kami_Crescent_Moon()
 
-	private static void upkeep_Font_of_Mythos() {
-		final String player = AllZone.Phase.getActivePlayer();
-
+	private static void draw_Font_of_Mythos(String player) {
 		CardList list = new CardList();
 		list.addAll(AllZone.Human_Play.getCards());
 		list.addAll(AllZone.Computer_Play.getCards());
 		list = list.getName("Font of Mythos");
 
-		for(int i = 0; i < list.size(); i++) {
-			AllZone.GameAction.drawCard(player);
-			AllZone.GameAction.drawCard(player);
-		}
-	}// upkeep_Font_of_Mythos()
+		AllZone.GameAction.drawCards(player, 2*list.size());
+	}// Font_of_Mythos()
 	
-	private static void upkeep_Teferi_Puzzle_Box() {
-		final String player = AllZone.Phase.getActivePlayer();
-
+	private static void draw_Teferi_Puzzle_Box(String player) {
 		CardList list = new CardList();
 		list.addAll(AllZone.Human_Play.getCards());		
 		list.addAll(AllZone.Computer_Play.getCards());
@@ -9022,50 +9029,64 @@ public class GameActionUtil {
 		if(list.size() > 0) {
             AllZone.Display.showMessage("Shuffle cards back into your library: ");
             ButtonUtil.enableOnlyCancel();
-		AllZone.GameAction.drawCard(player); // Player draws a card in the draw phase before this card activates
-        hand.addAll(Playerhand.getCards());            
+            hand.addAll(Playerhand.getCards());            
 			int Count = hand.size();
             for(int i = 0; i < list.size(); i++) {           	
             	if(player == "Human") {            
                     for(int e = 0; e < Count; e++) {
-                    if(hand.size() == 0) hand.addAll(Playerhand.getCards());
-                    handlist = hand.toArray();
-                    Object check = AllZone.Display.getChoice("Select card to put on bottom of library", handlist);
-                    if(check != null) {
-                      Card target = ((Card) check);
-                      hand.remove(target);
-                       AllZone.GameAction.moveTo(lib, target);    
-                    }
+	                    if(hand.size() == 0) hand.addAll(Playerhand.getCards());
+	                    handlist = hand.toArray();
+	                    Object check = AllZone.Display.getChoice("Select card to put on bottom of library", handlist);
+	                    if(check != null) {
+		                     Card target = ((Card) check);
+		                     hand.remove(target);
+		                     AllZone.GameAction.moveTo(lib, target);    
+	                    }
                     }
             	}else {
                     for(int x = 0; x < hand.size(); x++) hand.remove(hand.get(x));
                     hand.addAll(Playerhand.getCards());
                     for(int e = 0; e < hand.size(); e++) {
-                    AllZone.GameAction.moveTo(lib, hand.get(e)); 
+                    	AllZone.GameAction.moveTo(lib, hand.get(e)); 
                     }
             	}
-            	if(i == list.size() - 1) Count = Count - 1; // To remove the effect of the initial hack draw
-			for(int d = 0; d < Count; d++) {			
-				AllZone.GameAction.drawCard(player);
-			}
-		}
+            			
+				AllZone.GameAction.drawCards(player, Count);
+            }
 		}
 
 	}// Teferi_Puzzle_Box
 
-	private static void upkeep_Overbeing_of_Myth() {
-		final String player = AllZone.Phase.getActivePlayer();
+	private static void draw_Overbeing_of_Myth(String player) {
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-
 		CardList list = new CardList();
-
 		list.addAll(play.getCards());
 		list = list.getName("Overbeing of Myth");
 
-		for(int i = 0; i < list.size(); i++)
-			AllZone.GameAction.drawCard(player);
-	}// upkeep_Overbeing_of_Myth()
+		AllZone.GameAction.drawCards(player, list.size());
+	}// Overbeing_of_Myth()
 
+	private static void draw_Mana_Vault(final String player){
+        /*
+         * Mana Vault - At the beginning of your draw step, if Mana Vault
+         * is tapped, it deals 1 damage to you.
+         */
+        CardList manaVaults = AllZoneUtil.getPlayerCardsInPlay(player, "Mana Vault");
+        for(Card manaVault:manaVaults) {
+        	final Card vault = manaVault;
+        	if(vault.isTapped()) {
+        		final Ability damage = new Ability(vault, "0") {
+        			@Override
+        			public void resolve() {
+        				AllZone.GameAction.addDamage(player, vault, 1);
+        			}
+        		};//Ability
+        		damage.setStackDescription(vault+" - does 1 damage to "+player);
+        		AllZone.Stack.add(damage);
+        	}
+        }
+	}
+	
 	private static void upkeep_Carnophage() {
 		final String player = AllZone.Phase.getActivePlayer();
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
