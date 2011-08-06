@@ -1768,6 +1768,7 @@ res/cardsfolder/diabolic_edict.txt -text svneol=native#text/plain
 res/cardsfolder/diabolic_intent.txt -text svneol=native#text/plain
 res/cardsfolder/diabolic_machine.txt -text svneol=native#text/plain
 res/cardsfolder/diabolic_tutor.txt -text svneol=native#text/plain
+res/cardsfolder/diabolic_vision.txt -text svneol=native#text/plain
 res/cardsfolder/diamond_faerie.txt -text svneol=native#text/plain
 res/cardsfolder/diamond_kaleidoscope.txt svneol=native#text/plain
 res/cardsfolder/diamond_valley.txt -text svneol=native#text/plain
