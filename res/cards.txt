@@ -16866,6 +16866,7 @@ Creature Spirit
 When Keening Banshee comes into play, target creature gets -2/-2 until end of turn.
 2/2
 Flying
+SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card83599.jpg
 
@@ -16958,6 +16959,7 @@ Keldon Warlord
 Creature Human Barbarian
 Keldon Warlord's power and toughness are each equal to the number of non-Wall creatures you control.
 1/1
+SVar:BuffedBy:Creature.nonWall
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_warlord.jpg
 
@@ -16973,7 +16975,8 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/kelinore_bat.jpg
 Kemuri-Onna
 4 B
 Creature Spirit
-When Kemuri-Onna comes into play, target player discards a card. (NOTE: "Whenever you cast a Spirit or Arcane spell, you may return Kemuri-Onna to its owner's hand." not implemented.)
+When Kemuri-Onna comes into play, target player discards a card.
+WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:MoveFrom-Play-Hand:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Spirit or Arcane spell, you may return Kemuri-Onna to its owner's hand.
 3/3
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card84705.jpg
