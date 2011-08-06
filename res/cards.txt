@@ -1,3 +1,22 @@
+Elvish Vanguard
+1 G
+Creature Elf
+Whenever another Elf enters the battlefield, put a +1/+1 counter on Elvish Vanguard.
+1/1
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_vanguard.jpg
+
+Juniper Order Ranger
+2 W G
+Creature Human Knight
+no text
+2/4
+WheneverKeyword:EntersBattleField:Type/Creature:Play:+1+1 Counters/1!+1+1 Counters/1:Self!Initiating_Card:ASAP:No_Condition:Initiator - Other than Self!Initiator - OwnedByController:Whenever another creature enters the battlefield under your control, put a +1/+1 counter on that creature and a +1/+1 counter on Juniper Order Ranger.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/juniper_order_ranger.jpg
+
 Mad Auntie
 2 B
 Creature Goblin Shaman
@@ -10007,14 +10026,6 @@ no text
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4296.jpg
 
-Elvish Vanguard
-1 G
-Creature Elf
-Whenever another Elf enters the battlefield, put a +1/+1 counter on Elvish Vanguard.
-1/1
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_vanguard.jpg
-
 Elvish Visionary
 1 G
 Creature Elf Shaman
@@ -16346,15 +16357,6 @@ Reach
 Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jungle_weaver.jpg
-
-Juniper Order Ranger
-2 W G
-Creature Human Knight
-no text
-2/4
-WheneverKeyword:EntersBattleField:Type/Creature:Play:+1+1 Counters/1!+1+1 Counters/1:Self!Initiating_Card:ASAP:No_Condition:Initiator - Other than Self!Initiator - OwnedByController:Whenever another creature enters the battlefield under your control, put a +1/+1 counter on that creature and a +1/+1 counter on Juniper Order Ranger.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/juniper_order_ranger.jpg
 
 Junun Efreet
 1 B B
