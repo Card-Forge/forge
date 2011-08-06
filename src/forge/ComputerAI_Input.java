@@ -76,6 +76,8 @@ public class ComputerAI_Input extends Input {
             computer.declare_blockers();
         } else if(phase.equals(Constant.Phase.End_Of_Turn)) {
             computer.end_of_turn();
+        } else if(phase.equals(Constant.Phase.End_Of_Combat)) {
+        	computer.end_of_combat();
         }
     }//think
 }

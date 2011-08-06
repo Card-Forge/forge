@@ -294,7 +294,7 @@ public class ComputerAI_General implements Computer {
             list = list.filter(new CardListFilter(){
             	public boolean addCard(Card c)
             	{
-            		return !c.getCreatureBlockedThisTurn();
+            		return !c.getCreatureBlockedThisCombat();
             	}
             });
             

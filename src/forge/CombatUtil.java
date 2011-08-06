@@ -656,7 +656,7 @@ public class CombatUtil {
         AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility)) {
             
             //Beastmaster Ascension
-            if(!c.getCreatureAttackedThisTurn()) {
+            if(!c.getCreatureAttackedThisCombat()) {
                 PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
                 CardList list = new CardList(play.getCards());
                 list = list.getName("Beastmaster Ascension");
@@ -667,7 +667,7 @@ public class CombatUtil {
             } //BMA
             
             //Fervent Charge
-            if(!c.getCreatureAttackedThisTurn()) {
+            if(!c.getCreatureAttackedThisCombat()) {
                 PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
                 CardList list = new CardList(play.getCards());
                 list = list.getName("Fervent Charge");
@@ -726,7 +726,7 @@ public class CombatUtil {
                     AllZone.Stack.add(ability);
             }//Raging Ravine
             
-            if(c.getName().equals("Zhang He, Wei General") && !c.getCreatureAttackedThisTurn()) {
+            if(c.getName().equals("Zhang He, Wei General") && !c.getCreatureAttackedThisCombat()) {
                 final PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
                 
                 //final Card crd = c;
@@ -770,7 +770,7 @@ public class CombatUtil {
                 AllZone.Stack.add(ability2);
             }//Zhang He
             
-            if(c.getName().equals("Soltari Champion") && !c.getCreatureAttackedThisTurn()) {
+            if(c.getName().equals("Soltari Champion") && !c.getCreatureAttackedThisCombat()) {
                 final PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
                 
                 final Card crd = c;
@@ -815,7 +815,7 @@ public class CombatUtil {
                 AllZone.Stack.add(ability2);
             }//Soltari Champion
             
-            if(c.getName().equals("Goblin General") && !c.getCreatureAttackedThisTurn()) {
+            if(c.getName().equals("Goblin General") && !c.getCreatureAttackedThisCombat()) {
                 final PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
                 
                 //final Card crd = c;
@@ -861,7 +861,7 @@ public class CombatUtil {
                 AllZone.Stack.add(ability2);
             }//Goblin General
             
-            if(c.getName().equals("Pianna, Nomad Captain") && !c.getCreatureAttackedThisTurn()) {
+            if(c.getName().equals("Pianna, Nomad Captain") && !c.getCreatureAttackedThisCombat()) {
                 
                 //final Card crd = c;
                 Ability ability2 = new Ability(c, "0") {
@@ -897,7 +897,7 @@ public class CombatUtil {
                 AllZone.Stack.add(ability2);
             }//Goblin General
             
-            if(c.getName().equals("Zur the Enchanter") && !c.getCreatureAttackedThisTurn()) {
+            if(c.getName().equals("Zur the Enchanter") && !c.getCreatureAttackedThisCombat()) {
                 PlayerZone library = AllZone.getZone(Constant.Zone.Library, c.getController());
                 PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
                 PlayerZone oppPlay = AllZone.getZone(Constant.Zone.Play,
@@ -971,7 +971,7 @@ public class CombatUtil {
                 } //enchantments.size > 0
             }//Zur the enchanter
             
-            else if(c.getName().equals("Yore-Tiller Nephilim") && !c.getCreatureAttackedThisTurn()) {
+            else if(c.getName().equals("Yore-Tiller Nephilim") && !c.getCreatureAttackedThisCombat()) {
                 PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getController());
                 PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
                 
@@ -1005,7 +1005,7 @@ public class CombatUtil {
                     
                 } //if (creatures.size() > 0) 
             }//Yore-Tiller Nephilim
-            else if(c.getName().equals("Flowstone Charger") && !c.getCreatureAttackedThisTurn()) {
+            else if(c.getName().equals("Flowstone Charger") && !c.getCreatureAttackedThisCombat()) {
                 final Card charger = c;
                 Ability ability2 = new Ability(c, "0") {
                     @Override
@@ -1039,7 +1039,7 @@ public class CombatUtil {
 
             }//Flowstone Charger
             
-            else if(c.getName().equals("Timbermaw Larva") && !c.getCreatureAttackedThisTurn()) {
+            else if(c.getName().equals("Timbermaw Larva") && !c.getCreatureAttackedThisCombat()) {
                 final Card charger = c;
                 Ability ability2 = new Ability(c, "0") {
                     @Override
@@ -1089,7 +1089,7 @@ public class CombatUtil {
             }//Timbermaw Larva
             
 
-            else if(c.getName().equals("Knotvine Paladin") && !c.getCreatureAttackedThisTurn()) {
+            else if(c.getName().equals("Knotvine Paladin") && !c.getCreatureAttackedThisCombat()) {
                 final Card charger = c;
                 Ability ability2 = new Ability(c, "0") {
                     @Override
@@ -1135,7 +1135,7 @@ public class CombatUtil {
             }//Knotvine Paladin
             
 
-            else if(c.getName().equals("Goblin Piledriver") && !c.getCreatureAttackedThisTurn()) {
+            else if(c.getName().equals("Goblin Piledriver") && !c.getCreatureAttackedThisCombat()) {
                 final Card piledriver = c;
                 Ability ability2 = new Ability(c, "0") {
                     @Override
@@ -1177,7 +1177,7 @@ public class CombatUtil {
             else if((c.getName().equals("Charging Bandits") || c.getName().equals("Wei Ambush Force")
                     || c.getName().equals("Ravenous Skirge") || c.getName().equals("Vicious Kavu")
                     || c.getName().equals("Lurking Nightstalker") || c.getName().equals("Hollow Dogs"))
-                    && !c.getCreatureAttackedThisTurn()) {
+                    && !c.getCreatureAttackedThisCombat()) {
                 final Card charger = c;
                 Ability ability2 = new Ability(c, "0") {
                     @Override
@@ -1238,7 +1238,7 @@ public class CombatUtil {
                 }
             }
 
-            else if(c.getName().equals("Witch-Maw Nephilim") && !c.getCreatureAttackedThisTurn()
+            else if(c.getName().equals("Witch-Maw Nephilim") && !c.getCreatureAttackedThisCombat()
                     && c.getNetAttack() >= 10) {
                 final Card charger = c;
                 Ability ability2 = new Ability(c, "0") {
@@ -1272,7 +1272,7 @@ public class CombatUtil {
 
             }//Witch-Maw Nephilim
             
-            else if(c.getName().equals("Jedit Ojanen of Efrava") && !c.getCreatureAttackedThisTurn()) {
+            else if(c.getName().equals("Jedit Ojanen of Efrava") && !c.getCreatureAttackedThisCombat()) {
                 final Card jedit = c;
                 Ability ability2 = new Ability(c, "0") {
                     @Override
@@ -1292,7 +1292,7 @@ public class CombatUtil {
                 
             }//Jedit
             
-            else if(c.getName().equals("Preeminent Captain") && !c.getCreatureAttackedThisTurn()) {
+            else if(c.getName().equals("Preeminent Captain") && !c.getCreatureAttackedThisCombat()) {
                 System.out.println("Preeminent Captain Attacks");
                 PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getController());
                 PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
@@ -1314,7 +1314,7 @@ public class CombatUtil {
                             //the card that gets put into play tapped and attacking might trigger another ability:
                             //however, this turns out to be incorrect rules-wise
                             //checkDeclareAttackers(card); 
-                            card.setCreatureAttackedThisTurn(true);
+                            card.setCreatureAttackedThisCombat(true);
                         }
                     } else if(c.getController().equals("Computer")) {
                         Card card = soldiers.get(0);
@@ -1324,13 +1324,13 @@ public class CombatUtil {
                         card.tap();
                         AllZone.Combat.addAttacker(card);
                         //checkDeclareAttackers(card);
-                        card.setCreatureAttackedThisTurn(true);
+                        card.setCreatureAttackedThisCombat(true);
                     }
                     
                 } //if (creatures.size() > 0) 
             }//Preeminent Captain
             
-            else if(c.getName().equals("Nemesis of Reason") && !c.getCreatureAttackedThisTurn()) {
+            else if(c.getName().equals("Nemesis of Reason") && !c.getCreatureAttackedThisCombat()) {
                 String player = AllZone.GameAction.getOpponent(c.getController());
                 //if (c.getController().equals(Constant.Player.Human))
                 //player="Human";
@@ -1352,7 +1352,7 @@ public class CombatUtil {
                 
             }//Nemesis of Reason
             
-            else if(c.getName().equals("Sapling of Colfenor") && !c.getCreatureAttackedThisTurn()) {
+            else if(c.getName().equals("Sapling of Colfenor") && !c.getCreatureAttackedThisCombat()) {
                 String player = c.getController();
                 
                 PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
@@ -1373,7 +1373,7 @@ public class CombatUtil {
 
             }//Sapling of Colfenor
             
-            else if(c.getName().equals("Goblin Guide") && !c.getCreatureAttackedThisTurn()) {
+            else if(c.getName().equals("Goblin Guide") && !c.getCreatureAttackedThisCombat()) {
                 final String opp = AllZone.GameAction.getOpponent(c.getController());
                 
                 Ability ability = new Ability(c, "0") {
@@ -1396,7 +1396,7 @@ public class CombatUtil {
                 AllZone.Stack.add(ability);
             }//Goblin Guide
             
-            else if(c.getName().equals("Pulse Tracker") && !c.getCreatureAttackedThisTurn()) {
+            else if(c.getName().equals("Pulse Tracker") && !c.getCreatureAttackedThisCombat()) {
                 final String opp = AllZone.GameAction.getOpponent(c.getController());
                 
                 Ability ability = new Ability(c, "0") {
@@ -1410,7 +1410,7 @@ public class CombatUtil {
             }//Pulse Tracker
             
 
-            c.setCreatureAttackedThisTurn(true);
+            c.setCreatureAttackedThisCombat(true);
             
         }//if Phase = declare attackers
     }//checkDeclareAttackers
@@ -1454,7 +1454,7 @@ public class CombatUtil {
             
         	for (Card c:cl)
         	{
-	        	if (c.getKeyword().contains("Defender") && !c.getCreatureBlockedThisTurn())
+	        	if (c.getKeyword().contains("Defender") && !c.getCreatureBlockedThisCombat())
 	        	{
 	        		final Card crd = c;
 	        		CardList pcs = CardFactoryUtil.getCards("Perimeter Captain", c.getController());
@@ -1482,7 +1482,7 @@ public class CombatUtil {
 		        	}
 	        	}
 	        	
-	            if(c.getName().equals("Jedit Ojanen of Efrava") && !c.getCreatureBlockedThisTurn()) {
+	            if(c.getName().equals("Jedit Ojanen of Efrava") && !c.getCreatureBlockedThisCombat()) {
 	                Card card = new Card();
 	                
 	                card.setOwner(c.getController());
@@ -1506,7 +1506,7 @@ public class CombatUtil {
 	                //(anger) :
 	                GameActionUtil.executeCardStateEffects();
 	            }//Jedit
-	            else if(c.getName().equals("Shield Sphere") && !c.getCreatureBlockedThisTurn()) {
+	            else if(c.getName().equals("Shield Sphere") && !c.getCreatureBlockedThisCombat()) {
 	                //int toughness = c.getNetDefense();
 	                //c.setDefense(toughness-1);
 	                c.addCounter(Counters.P0M1, 1);
@@ -1515,7 +1515,7 @@ public class CombatUtil {
 	                
 	            }//Shield Sphere
 	            
-	            else if(c.getName().equals("Meglonoth") && !c.getCreatureBlockedThisTurn()) {
+	            else if(c.getName().equals("Meglonoth") && !c.getCreatureBlockedThisCombat()) {
 	                PlayerLife oppLife = AllZone.GameAction.getPlayerLife(AllZone.GameAction.getOpponent(c.getController()));
 	                oppLife.subtractLife(c.getNetAttack());
 	                
@@ -1523,24 +1523,23 @@ public class CombatUtil {
 	                //AllZone.Stack.add(ability2);
 	                
 	            }//Shield Sphere
-	            c.setCreatureBlockedThisTurn(true);
+	            c.setCreatureBlockedThisCombat(true);
         	}//for
             
         }//if Phase == after declare blockers
     }//checkDeclareBlockers
     
-   
     public static void checkBlockedAttackers(Card a, Card b) {
         //System.out.println(a.getName() + " got blocked by " + b.getName());
         
-        if(!a.getCreatureGotBlockedThisTurn()) {
+        if(!a.getCreatureGotBlockedThisCombat()) {
             for(Ability ab:CardFactoryUtil.getBushidoEffects(a))
                 AllZone.Stack.add(ab);
         }
-        if (!b.getCreatureBlockedThisTurn()) {
+        if (!b.getCreatureBlockedThisCombat()) {
         for(Ability ab:CardFactoryUtil.getBushidoEffects(b))
             AllZone.Stack.add(ab);
-        	b.setCreatureBlockedThisTurn(true);
+        	b.setCreatureBlockedThisCombat(true);
         }
         
         if(a.getKeyword().contains("Flanking") && !b.getKeyword().contains("Flanking")) {
@@ -1580,20 +1579,20 @@ public class CombatUtil {
                 }//resolve
                 
             };//ability
-            b.setCreatureAttackedThisTurn(true);
+            b.setCreatureAttackedThisCombat(true);
             
             ability2.setStackDescription(b.getName() + " - gets -" + mag + "/-" + mag + " until EOT.");
             AllZone.Stack.add(ability2);
             
         }//flanking
         if((a.getName().equals("Chambered Nautilus") || a.getName().equals("Slith Strider"))
-                && !a.getCreatureGotBlockedThisTurn()) {
+                && !a.getCreatureGotBlockedThisCombat()) {
             String player = a.getController();
             AllZone.GameAction.drawCard(player);
-        } else if(a.getName().equals("Corrupt Official") && !a.getCreatureGotBlockedThisTurn()) {
+        } else if(a.getName().equals("Corrupt Official") && !a.getCreatureGotBlockedThisCombat()) {
             String opp = b.getController();
             AllZone.GameAction.discardRandom(opp);
-        } else if (a.getName().equals("Robber Fly") && !a.getCreatureGotBlockedThisTurn()) {
+        } else if (a.getName().equals("Robber Fly") && !a.getCreatureGotBlockedThisCombat()) {
         	String opp = b.getController();
         	PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opp);
         	CardList list = new CardList(hand.getCards());
@@ -1608,7 +1607,7 @@ public class CombatUtil {
         } else if(a.getName().equals("Sylvan Basilisk")) {
             AllZone.GameAction.destroy(b);
             System.out.println("destroyed blocker " + b.getName());
-        } else if(a.getName().equals("Alley Grifters") && !a.getCreatureGotBlockedThisTurn()) {
+        } else if(a.getName().equals("Alley Grifters") && !a.getCreatureGotBlockedThisCombat()) {
             String player = a.getController();
             String opp = b.getController();
             
@@ -1635,23 +1634,23 @@ public class CombatUtil {
             
             play.remove(b);
             library.add(b, 0);
-        } else if(a.getName().equals("Saprazzan Heir") && !a.getCreatureBlockedThisTurn()) {
+        } else if(a.getName().equals("Saprazzan Heir") && !a.getCreatureBlockedThisCombat()) {
             String player = a.getController();
             AllZone.GameAction.drawCard(player);
             AllZone.GameAction.drawCard(player);
             AllZone.GameAction.drawCard(player);
-        } else if (a.getName().equals("Drelnoch") && !a.getCreatureBlockedThisTurn()) {
+        } else if(a.getName().equals("Drelnoch") && !a.getCreatureBlockedThisCombat()) {
             String player = a.getController();
             AllZone.GameAction.drawCard(player);
             AllZone.GameAction.drawCard(player);
         } else if((a.getName().equals("Silkenfist Order") || a.getName().equals("Silkenfist Fighter"))
-                && !a.getCreatureBlockedThisTurn()) {
+                && !a.getCreatureBlockedThisCombat()) {
             a.untap();
-        } else if (a.getName().equals("Deepwood Tantiv") && !a.getCreatureBlockedThisTurn()) {
+        } else if (a.getName().equals("Deepwood Tantiv") && !a.getCreatureBlockedThisCombat()) {
         	AllZone.GameAction.getPlayerLife(a.getController()).addLife(2);
-        } else if (a.getName().equals("Sacred Prey") && !a.getCreatureBlockedThisTurn()) {
+        } else if (a.getName().equals("Sacred Prey") && !a.getCreatureBlockedThisCombat()) {
         	AllZone.GameAction.getPlayerLife(a.getController()).addLife(1);
-        } else if (a.getName().equals("Vedalken Ghoul") && !a.getCreatureBlockedThisTurn()) {
+        } else if (a.getName().equals("Vedalken Ghoul") && !a.getCreatureBlockedThisCombat()) {
         	AllZone.GameAction.subLife(b.getController(), 4);
         }
         
@@ -1750,7 +1749,7 @@ public class CombatUtil {
             AllZone.EndOfCombat.addAt(atEOC);
         }
         
-        a.setCreatureGotBlockedThisTurn(true);
+        a.setCreatureGotBlockedThisCombat(true);
     }
     
     public static void executeExaltedAbility(Card c, int magnitude) {
@@ -1785,7 +1784,31 @@ public class CombatUtil {
             AllZone.Stack.add(ability);
         }
         
-        if(GameActionUtil.isRafiqInPlay(c.getController())) {
+        String phasingPlayer = c.getController();
+        // Finest Hour untaps the creature on the first combat phase
+		if ((GameActionUtil.countFinestHours(phasingPlayer)>0) &&
+				AllZone.Phase.isFirstCombat()) {
+			// Untap the attacking creature
+			Ability fhUntap = new Ability(c, "0") {
+				public void resolve() {
+				    crd.untap();
+				}
+			};
+			fhUntap.setStackDescription(c + " - (Exalted) untap.");
+			AllZone.Stack.add(fhUntap);
+		
+			// If any Finest Hours, queue up a new combat phase
+			for (int ix = 0; ix < GameActionUtil.countFinestHours(phasingPlayer); ix++) {
+				Ability fhAddCombat = new Ability(c, "0") {
+					public void resolve() {
+						AllZone.Phase.addExtraCombat(crd.getController());				
+					}
+				};
+				fhAddCombat.setStackDescription(c + " - (Exalted) " + phasingPlayer + " gets Extra Combat Phase.");
+				AllZone.Stack.add(fhAddCombat);
+			}
+		}
+        if(GameActionUtil.isRafiqInPlay(phasingPlayer)) {
             Ability ability2 = new Ability(c, "0") {
                 @Override
                 public void resolve() {
@@ -1808,7 +1831,7 @@ public class CombatUtil {
             AllZone.Stack.add(ability2);
         }
         
-        if(GameActionUtil.getBattleGraceAngels(c.getController()) > 0) {
+        if(GameActionUtil.getBattleGraceAngels(phasingPlayer) > 0) {
             Ability ability3 = new Ability(c, "0") {
                 @Override
                 public void resolve() {

@@ -80,12 +80,53 @@ import java.util.*;
        public int getStartIndex()
        {
           CardListUtil.sortAttack(humanList);
-
-          for(int i = 0; i < computerList.size(); i++)
-             if(!doesHumanAttackAndWin(i))
-                return i;
-
-          return computerList.size();
+          int blockersNeeded = computerList.size();
+          
+          for(int i = 0; i < computerList.size(); i++) {
+             if(!doesHumanAttackAndWin(i)) {
+                blockersNeeded= i;
+                break;
+             }
+          }
+          
+          if (blockersNeeded == computerList.size()) {
+        	  // Human will win unless everything is kept back to block
+        	  return blockersNeeded;
+          }
+          
+          // Increase the total number of blockers needed by 1 if Finest Hour in play
+          // (human will get an extra first attack with a creature that untaps)
+          // In addition, if the computer guesses it needs no blockers, make sure that
+          // it won't be surprised by Exalted
+          int humanExaltedBonus = countExaltedBonus(Constant.Player.Human);
+          if (humanExaltedBonus > 0) {
+        	  int nFinestHours = GameActionUtil.countFinestHours(Constant.Player.Human);
+        	  
+        	  if ((blockersNeeded == 0) || (nFinestHours > 0)) {
+        		  //
+        		  // total attack = biggest creature + exalted, *2 if Rafiq is in play
+        		  int humanBaseAttack = getAttack(humanList.get(0)) + humanExaltedBonus;
+        		  if (nFinestHours > 0) {
+        			  // For Finest Hour, one creature could attack and get the bonus TWICE
+        			  humanBaseAttack = humanBaseAttack + humanExaltedBonus;
+        		  }	
+        		  int totalExaltedAttack = GameActionUtil.isRafiqInPlay(Constant.Player.Human) ? 
+        				  2 * humanBaseAttack: humanBaseAttack;
+        		  if ((AllZone.Computer_Life.getLife() - 3) <= totalExaltedAttack) {
+        			  // We will lose if there is an Exalted attack -- keep one blocker
+        			  if (blockersNeeded == 0)
+        				  blockersNeeded++;
+        			  
+        			  // Finest Hour allows a second Exalted attack: keep a blocker for that too
+            		  if (nFinestHours > 0)
+            			  blockersNeeded++;
+        		  }
+        	  }
+           }
+         
+          if (blockersNeeded > computerList.size())
+        	  blockersNeeded = computerList.size();
+          return blockersNeeded;
        }
 
        //this uses a global variable, which isn't perfect
@@ -95,10 +136,10 @@ import java.util.*;
           int stop = humanList.size() - nBlockingCreatures;
 
           for(int i = 0; i < stop; i++)
-             totalAttack += getAttack(humanList.get(i));
-
-          //-3 so the computer will try to stay at 3 life
-          return (AllZone.Computer_Life.getLife() - 3) <= totalAttack;
+        	  totalAttack += getAttack(humanList.get(i));
+                    
+    	  //-3 so the computer will try to stay at 3 life
+    	  return (AllZone.Computer_Life.getLife() - 3) <= totalAttack;
        }
 
        private boolean doAssault()
@@ -131,9 +172,11 @@ import java.util.*;
                 combat.addAttacker(attackers.get(i));
           }
 
-          if (combat.getAttackers().length == 0 && (countExaltedCreatures() >= 3 ||
+          if (combat.getAttackers().length == 0 && (countExaltedBonus(Constant.Player.Computer) >= 3 ||
                    GameActionUtil.isRafiqInPlay(Constant.Player.Computer) ||
-                   GameActionUtil.getBattleGraceAngels(Constant.Player.Computer) >= 2) && !doAssault())
+                   GameActionUtil.getBattleGraceAngels(Constant.Player.Computer) >= 2 ||
+                   (GameActionUtil.countFinestHours(Constant.Player.Computer)>=1) && AllZone.Phase.isFirstCombat())
+                   && !doAssault())
           {
              int biggest = 0;
              Card att = null;
@@ -230,9 +273,9 @@ import java.util.*;
     return AllZone.CardFactory.getCard("Elvish Piper", "");
   }
 
-       public int countExaltedCreatures()
+       public int countExaltedBonus(String player)
        {
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+          PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
           CardList list = new CardList();
           list.addAll(play.getCards());
           list = list.filter(new CardListFilter(){

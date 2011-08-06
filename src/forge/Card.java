@@ -42,9 +42,9 @@ public class Card extends MyObservable {
     private boolean                      sickness                          = true;                              //summoning sickness
     private boolean                      token                             = false;
     private boolean 					 checkedPropagandaThisTurn		   = false;
-    private boolean                      creatureAttackedThisTurn          = false;
-    private boolean                      creatureBlockedThisTurn           = false;
-    private boolean                      creatureGotBlockedThisTurn        = false;
+    private boolean                      creatureAttackedThisCombat        = false;
+    private boolean                      creatureBlockedThisCombat         = false;
+    private boolean                      creatureGotBlockedThisCombat      = false;
     private boolean                      dealtCombatDmgToOppThisTurn       = false;
     private boolean                      dealtDmgToOppThisTurn             = false;
     private boolean                      exaltedBonus                      = false;
@@ -180,29 +180,29 @@ public class Card extends MyObservable {
     	return checkedPropagandaThisTurn;
     }
     
-    //used to see if an attacking creature with a triggering attack ability triggered this turn:
-    public void setCreatureAttackedThisTurn(boolean b) {
-        creatureAttackedThisTurn = b;
+    //used to see if an attacking creature with a triggering attack ability triggered this phase:
+    public void setCreatureAttackedThisCombat(boolean b) {
+        creatureAttackedThisCombat = b;
     }
     
-    public boolean getCreatureAttackedThisTurn() {
-        return creatureAttackedThisTurn;
+    public boolean getCreatureAttackedThisCombat() {
+        return creatureAttackedThisCombat;
     }
     
-    public void setCreatureBlockedThisTurn(boolean b) {
-        creatureBlockedThisTurn = b;
+    public void setCreatureBlockedThisCombat(boolean b) {
+        creatureBlockedThisCombat = b;
     }
     
-    public boolean getCreatureBlockedThisTurn() {
-        return creatureBlockedThisTurn;
+    public boolean getCreatureBlockedThisCombat() {
+        return creatureBlockedThisCombat;
     }
     
-    public void setCreatureGotBlockedThisTurn(boolean b) {
-        creatureGotBlockedThisTurn = b;
+    public void setCreatureGotBlockedThisCombat(boolean b) {
+        creatureGotBlockedThisCombat = b;
     }
     
-    public boolean getCreatureGotBlockedThisTurn() {
-        return creatureGotBlockedThisTurn;
+    public boolean getCreatureGotBlockedThisCombat() {
+        return creatureGotBlockedThisCombat;
     }
     
     public void setDealtCombatDmgToOppThisTurn(boolean b) {

@@ -12,6 +12,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     private Input             input;
     static int                n                = 0;
     private Stack<Input>      inputStack       = new Stack<Input>();
+    private boolean appliedExaltedEffects = false;
     
     public void setInput(final Input in) {
         if(!(input == null || input instanceof Input_StackNotEmpty)) inputStack.add(in);
@@ -67,6 +68,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             }
 
             else if(phase.equals(Constant.Phase.Combat_Declare_Attackers)) {
+                appliedExaltedEffects = false;
                 return new Input_Attack();
             }
 
@@ -77,7 +79,9 @@ public class InputControl extends MyObservable implements java.io.Serializable {
                     list.addAll(AllZone.pwCombat.getAttackers());
                     
                     //check for exalted:
-                    if(list.size() == 1) {
+                    if ((AllZone.Combat.getDeclaredAttackers() + AllZone.pwCombat.getDeclaredAttackers() == 1) &&
+                    		!appliedExaltedEffects) {
+//                    if (list.size()==1) {
                         String attackingPlayer = AllZone.Combat.getAttackingPlayer();
                         PlayerZone play = AllZone.getZone(Constant.Zone.Play, attackingPlayer);
                         CardList exalted = new CardList(play.getCards());
@@ -87,6 +91,8 @@ public class InputControl extends MyObservable implements java.io.Serializable {
                             }
                         });
                         if(exalted.size() > 0) CombatUtil.executeExaltedAbility(list.get(0), exalted.size());
+                        // Make sure exalted effects get applied only once per combat
+                        appliedExaltedEffects = true;
                     }
                     
                     for(Card c:list)
@@ -182,6 +188,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             else if(phase.equals(Constant.Phase.End_Of_Combat)) {
                 AllZone.EndOfCombat.executeAt();
                 AllZone.Phase.setNeedToNextPhase(true);
+                appliedExaltedEffects = false;
                 return null;
             } else if(phase.equals(Constant.Phase.At_End_Of_Turn)) {
                 AllZone.EndOfTurn.executeAt();

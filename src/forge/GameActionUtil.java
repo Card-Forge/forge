@@ -2663,10 +2663,10 @@ public class GameActionUtil {
         for(int i = 0; i < list.size(); i++) {
             Card c = list.get(i);
             if(c.getCheckedPropagandaThisTurn()) c.setCheckedPropagandaThisTurn(false);
-            if(c.getCreatureAttackedThisTurn()) c.setCreatureAttackedThisTurn(false);
-            if(c.getCreatureBlockedThisTurn()) c.setCreatureBlockedThisTurn(false);
+            if(c.getCreatureAttackedThisCombat()) c.setCreatureAttackedThisCombat(false);
+            if(c.getCreatureBlockedThisCombat()) c.setCreatureBlockedThisCombat(false);
             
-            if(c.getCreatureGotBlockedThisTurn()) c.setCreatureGotBlockedThisTurn(false);
+            if(c.getCreatureGotBlockedThisCombat()) c.setCreatureGotBlockedThisCombat(false);
             
             c.resetReceivedDamageFromThisTurn();
         }
@@ -2843,6 +2843,18 @@ public class GameActionUtil {
         
         return cards.size();
     }
+    
+	public static int countFinestHours(String controller) {
+        PlayerZone playerZone = AllZone.getZone(Constant.Zone.Play, controller);
+        
+        CardList cards = new CardList();
+        cards.addAll(playerZone.getCards());
+        
+        cards = cards.getName("Finest Hour");
+        
+        return cards.size();
+	}
+
     
     public static void executeAllyEffects(Card c) {
         if(c.getName().equals("Kazandu Blademaster") || c.getName().equals("Makindi Shieldmate")
