@@ -1,0 +1,9 @@
+Name:Sandstorm
+ManaCost:G
+Types:Instant
+Text:no text
+K:spDamageAll:Creature.attacking:1:Sandstorm deals 1 damage to each attacking creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sandstorm.jpg
+End

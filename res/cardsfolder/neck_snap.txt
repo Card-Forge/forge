@@ -1,0 +1,9 @@
+Name:Neck Snap
+ManaCost:3 W
+Types:Instant
+Text:Destroy target attacking or blocking creature.
+K:spDestroyTgt:Creature.attacking,Creature.blocking
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/neck_snap.jpg
+End

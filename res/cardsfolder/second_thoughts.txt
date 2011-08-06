@@ -1,0 +1,10 @@
+Name:Second Thoughts
+ManaCost:4 W
+Types:Instant
+Text:Exile target attacking creature.
+K:spBounceTgt:Creature.attacking:Exile
+K:Draw a card.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/second_thoughts.jpg
+End
