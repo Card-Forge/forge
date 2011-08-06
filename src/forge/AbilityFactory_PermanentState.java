@@ -428,6 +428,7 @@ public class AbilityFactory_PermanentState {
 			// filter out enchantments and planeswalkers, their tapped state doesn't matter.
 			String[] tappablePermanents = {"Creature", "Land", "Artifact"}; 
 			tapList = tapList.getValidCards(tappablePermanents, source.getController(), source);
+			tapList = tapList.getTargetableCards(source);
 
 			if (tapList.size() == 0)
 				return false;
