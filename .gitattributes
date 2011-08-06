@@ -3271,6 +3271,7 @@ res/cardsfolder/kathari_remnant.txt -text svneol=native#text/plain
 res/cardsfolder/kathari_screecher.txt -text svneol=native#text/plain
 res/cardsfolder/kavu_climber.txt -text svneol=native#text/plain
 res/cardsfolder/kavu_glider.txt -text svneol=native#text/plain
+res/cardsfolder/kavu_lair.txt -text svneol=native#text/plain
 res/cardsfolder/kavu_monarch.txt -text svneol=native#text/plain
 res/cardsfolder/kavu_runner.txt -text svneol=native#text/plain
 res/cardsfolder/kavu_scout.txt -text svneol=native#text/plain
