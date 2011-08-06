@@ -1,8 +1,10 @@
 Name:Great Whale
 ManaCost:5 U U
 Types:Creature Whale
-Text:When Great Whale enters the battlefield, untap up to 7 lands.
+Text:no text
 PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, untap up to seven lands.
+SVar:TrigUntap:AB$Untap | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Choose target land | TargetMin$ 0 | TargetMax$ 7
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/great_whale.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/77.jpg
