@@ -6441,6 +6441,7 @@ res/cardsfolder/terashis_verdict.txt -text svneol=native#text/plain
 res/cardsfolder/terminal_moraine.txt -text svneol=native#text/plain
 res/cardsfolder/terminate.txt -text svneol=native#text/plain
 res/cardsfolder/terohs_faithful.txt -text svneol=native#text/plain
+res/cardsfolder/terohs_vanguard.txt svneol=native#text/plain
 res/cardsfolder/terra_eternal.txt -text svneol=native#text/plain
 res/cardsfolder/terra_stomper.txt -text svneol=native#text/plain
 res/cardsfolder/terrain_generator.txt svneol=native#text/plain

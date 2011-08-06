@@ -1,0 +1,10 @@
+Name:Teroh's Vanguard
+ManaCost:3 W
+Types:Creature Nomad
+Text:no text
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | Threshold$ True | TriggerDescription$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME has "When CARDNAME enters the battlefield, creatures you control gain protection from black until end of turn."
+SVar:TrigPump:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | KW$ Protection from black
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/terohs_vanguard.jpg
+End
