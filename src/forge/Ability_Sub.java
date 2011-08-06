@@ -20,7 +20,6 @@ abstract public class Ability_Sub extends SpellAbility implements java.io.Serial
 	
 	public void setParent(SpellAbility parent) {
 		this.parent = parent;
-		this.setActivatingPlayer(parent.getActivatingPlayer());
 	}
 
 	public SpellAbility getParent() {

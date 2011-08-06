@@ -14,14 +14,7 @@ public class AbilityFactory_Token extends AbilityFactory {
 	private String tokenPower;
 	private String tokenToughness;
 	private String tokenImage;
-	
-	private Ability_Sub subAbAF = null;
-    private boolean hasSubAbAF = false;
-    private String subAbStr = "none";
-    private boolean hasSubAbStr = false;
     
-    public Ability_Sub getSubAbility() { return subAbAF; }
-	
 	public AbilityFactory_Token(final AbilityFactory af) {
 		AF = af;
 		
@@ -69,26 +62,6 @@ public class AbilityFactory_Token extends AbilityFactory {
 		if(mapParams.containsKey("TokenOwner"))
 			tokenOwner = mapParams.get("TokenOwner");
 		else tokenOwner = "Controller";
-		
-		if(AF.hasSubAbility())
-        {
-           String sSub = AF.getMapParams().get("SubAbility");
-           
-           if (sSub.startsWith("SVar="))
-              sSub = AF.getHostCard().getSVar(sSub.split("=")[1]);
-           
-           if (sSub.startsWith("DB$"))
-           {
-              AbilityFactory afDB = new AbilityFactory();
-              subAbAF = (Ability_Sub)afDB.getAbility(sSub, AF.getHostCard());
-              hasSubAbAF = true;
-           }
-           else
-           {
-              subAbStr = sSub;
-              hasSubAbStr = true;
-           }
-        }
 	}
 	
 	public SpellAbility getAbility()
@@ -215,9 +188,8 @@ public class AbilityFactory_Token extends AbilityFactory {
 			sb.append(".");
 		}
 		
-		if (hasSubAbAF){
-     	   subAbAF.setParent(sa);
-     	   sb.append(subAbAF.getStackDescription());
+        if (sa.getSubAbility() != null){
+     	   sb.append(sa.getSubAbility().getStackDescription());
         }
 		
 		return sb.toString();
@@ -300,16 +272,15 @@ public class AbilityFactory_Token extends AbilityFactory {
 			CardFactoryUtil.makeToken(tokenName, imageName, controller, cost, tokenTypes, finalPower, finalToughness, tokenKeywords);
 		}
 		
-		if (hasSubAbAF) {
-     	   if (subAbAF.getParent() == null)
-     		   subAbAF.setParent(sa);
-			   subAbAF.resolve();
-        }
-		else if (hasSubAbStr){
-
-           CardFactoryUtil.doDrawBack(subAbStr, 0, AF.getHostCard().getController(),
-              AF.getHostCard().getController().getOpponent(), null, AF.getHostCard(), null, sa);
-           
-        }
+		if (AF.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+			   abSub.resolve();
+			}
+			else{
+               CardFactoryUtil.doDrawBack(AF.getMapParams().get("SubAbility"), finalAmount, AF.getHostCard().getController(),
+            		   AF.getHostCard().getController().getOpponent(), null, AF.getHostCard(), null, sa);
+			}
+		}
 	}
 }

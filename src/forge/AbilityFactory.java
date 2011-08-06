@@ -183,7 +183,6 @@ public class AbilityFactory {
 				SA = dd.getSpell();
 			else if (isDb)
 				SA = dd.getDrawback();
-			SA.setSubAbility(dd.getSubAbility());
 	      }
 		
 		if (API.equals("PutCounter")){
@@ -245,8 +244,6 @@ public class AbilityFactory {
 				SA = AbilityFactory_AlterLife.createSpellGainLife(this);
 			else if (isDb)
 				SA = AbilityFactory_AlterLife.createDrawbackGainLife(this);
-			if(hasSubAbility())
-				SA.setSubAbility(getSubAbility());
 		}
 
 		if (API.equals("LoseLife")){
@@ -256,8 +253,6 @@ public class AbilityFactory {
 				SA = AbilityFactory_AlterLife.createSpellLoseLife(this);
 			else if (isDb)
 				SA = AbilityFactory_AlterLife.createDrawbackLoseLife(this);
-			if(hasSubAbility())
-				SA.setSubAbility(getSubAbility());
 		}
 		
 		if (API.equals("Fog")){
@@ -303,8 +298,6 @@ public class AbilityFactory {
 				SA = AbilityFactory_ZoneAffecting.createSpellDraw(this);
 			else if (isDb)
 				SA = AbilityFactory_ZoneAffecting.createDrawbackDraw(this);
-			if(hasSubAbility())
-				SA.setSubAbility(getSubAbility());
 		}
 		
 		if (API.equals("Mill")){
@@ -314,8 +307,6 @@ public class AbilityFactory {
 				SA = AbilityFactory_ZoneAffecting.createSpellMill(this);
 			else if (isDb)
 				SA = AbilityFactory_ZoneAffecting.createDrawbackMill(this);
-			if(hasSubAbility())
-				SA.setSubAbility(getSubAbility());
 		}
 		
 		if (API.equals("Destroy")){
@@ -343,8 +334,6 @@ public class AbilityFactory {
 				SA = AFT.getSpell();
 			if(isDb)
 				SA = AFT.getDrawback();
-			if(hasSubAbility())
-				SA.setSubAbility(getSubAbility());
 		}
 		
 		if (API.equals("GainControl")) {
@@ -361,10 +350,8 @@ public class AbilityFactory {
 				SA = AbilityFactory_ZoneAffecting.createAbilityDiscard(this);
 			else if (isSp)
 				SA = AbilityFactory_ZoneAffecting.createSpellDiscard(this);
-			//else if (isDb)
-				//SA = AbilityFactory_ZoneAffecting.createDrawbackDiscard(this);
-			if(hasSubAbility())
-				SA.setSubAbility(getSubAbility());
+			else if (isDb)
+				SA = AbilityFactory_ZoneAffecting.createDrawbackDiscard(this);
 		}
 		
 		if(API.equals("Counter")){
@@ -375,6 +362,11 @@ public class AbilityFactory {
 				SA = c.getAbilityCounter(this);
 			if(isSp)
 				SA = c.getSpellCounter(this);
+		}
+		
+		if (SA != null){
+			if(hasSubAbility())
+				SA.setSubAbility(getSubAbility());
 		}
 		
 		// *********************************************
@@ -453,7 +445,8 @@ public class AbilityFactory {
           abSub = (Ability_Sub)afDB.getAbility(sSub, getHostCard());
        }
        else{
-    	   // Older style Drawback. May not be necessary?
+    	   // Older style Drawback doesn't create an abSub
+    	   // on Resolution use getMapParams().get("SubAbility"); to call Drawback
        }
 
         return abSub;

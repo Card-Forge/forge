@@ -234,7 +234,6 @@ public class AbilityFactory_AlterLife {
 
 		Ability_Sub abSub = sa.getSubAbility();
 		if (abSub != null) {
-			abSub.setParent(sa);
 			sb.append(abSub.getStackDescription());
 		}
 
@@ -258,7 +257,6 @@ public class AbilityFactory_AlterLife {
 	
 		Ability_Sub abSub = sa.getSubAbility();
 		if (abSub != null) {
-			abSub.setParent(sa);
 			sb.append(abSub.getStackDescription());
 		}
 		 
@@ -333,8 +331,6 @@ public class AbilityFactory_AlterLife {
 		if (af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
 			if (abSub != null){
-	     	   if (abSub.getParent() == null)
-	     		  abSub.setParent(sa);
 	     	   abSub.resolve();
 	        }
 			else{
@@ -411,8 +407,6 @@ public class AbilityFactory_AlterLife {
 		if (af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
 			if (abSub != null){
-	     	   if (abSub.getParent() == null)
-	     		  abSub.setParent(sa);
 	     	   abSub.resolve();
 	        }
 			else{

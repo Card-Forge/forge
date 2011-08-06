@@ -109,7 +109,6 @@ public class AbilityFactory_ZoneAffecting {
 		
 		Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null){
-        	abSub.setParent(sa);
         	sb.append(abSub.getStackDescription());
         }
 		
@@ -244,8 +243,6 @@ public class AbilityFactory_ZoneAffecting {
 		if (af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
 			if (abSub != null){
-	     	   if (abSub.getParent() == null)
-	     		  abSub.setParent(sa);
 	     	   abSub.resolve();
 	        }
 	        else{
@@ -368,7 +365,6 @@ public class AbilityFactory_ZoneAffecting {
 		
 		Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null){
-        	abSub.setParent(sa);
         	sb.append(abSub.getStackDescription());
         }
 		
@@ -466,8 +462,6 @@ public class AbilityFactory_ZoneAffecting {
 		if (af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
 			if (abSub != null){
-	     	   if (abSub.getParent() == null)
-	     		  abSub.setParent(sa);
 	     	   abSub.resolve();
 	        }
 			else{
@@ -564,6 +558,45 @@ public class AbilityFactory_ZoneAffecting {
 		return spDraw;
 	}
 	
+	public static SpellAbility createDrawbackDiscard(final AbilityFactory AF) {
+		final SpellAbility dbDraw = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()) {
+			private static final long serialVersionUID = 4348585353456736817L;
+			final AbilityFactory af = AF;
+			
+			@Override
+			public String getStackDescription() {
+				// when getStackDesc is called, just build exactly what is happening
+				return discardStackDescription(af, this);
+			}
+			
+			@Override
+			public boolean canPlay() {
+				// super takes care of AdditionalCosts
+				return super.canPlay();	
+			}
+			
+			@Override
+			public boolean canPlayAI() {
+				discardTargetAI(af);
+				return discardCanPlayAI(af, this);
+			}
+			
+			@Override
+			public void resolve() {
+				discardResolve(af, this);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				discardTargetAI(af);
+				return discardCheckDrawbackAI(af, this);
+			}
+			
+		};
+		return dbDraw;
+	}
+	
+	
 	private static void discardResolve(final AbilityFactory af, final SpellAbility sa){
 		Card source = sa.getSourceCard();
 		HashMap<String,String> params = af.getMapParams();
@@ -576,18 +609,20 @@ public class AbilityFactory_ZoneAffecting {
 		Target tgt = af.getAbTgt();
 		if (tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
-		else if(opp) {
+		else{
+			tgtPlayers = new ArrayList<Player>();
+			
+			Player activator = sa.getActivatingPlayer();
+
 			/*
 			 * This may need to check that the opponent can be targeted.
 			 * I think, ideally, this is handled by something like ValidTgts$Player.Opponent
 			 * actually, canTarget is checked slightly below here...
 			 */
-			tgtPlayers = new ArrayList<Player>();
-			tgtPlayers.add(sa.getActivatingPlayer().getOpponent());
-		}
-		else{
-			tgtPlayers = new ArrayList<Player>();
-			tgtPlayers.add(sa.getActivatingPlayer());
+			if (opp)
+				tgtPlayers.add(activator.getOpponent());
+			else
+				tgtPlayers.add(activator);
 		}
 
 		for(Player p : tgtPlayers)
@@ -671,8 +706,6 @@ public class AbilityFactory_ZoneAffecting {
 		if (af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
 			if (abSub != null){
-				if (abSub.getParent() == null)
-					abSub.setParent(sa);
 				abSub.resolve();
 			}
 			else{
@@ -688,10 +721,11 @@ public class AbilityFactory_ZoneAffecting {
 		String mode = params.get("Mode");
 		Player player;
 		if(af.getAbTgt() == null) {
+			player = sa.getActivatingPlayer();
+			
 			if(params.containsKey("Opponent")) {
-				player = sa.getActivatingPlayer().getOpponent();
+				player = player.getOpponent();
 			}
-			else player = sa.getActivatingPlayer(); 
 		}
 		else {
 			player = sa.getTargetPlayer();
@@ -704,10 +738,12 @@ public class AbilityFactory_ZoneAffecting {
 			sb.append(" ");
 		
 		sb.append(player.toString());
+		
 		if(mode.equals("RevealYouChoose")) sb.append(" reveals his or her hand.");
 		if(mode.equals("RevealYouChoose")) sb.append("  You choose (");
 		else sb.append(" discards (");
-		if(params.get("Mode").equals("Hand")) {
+		
+		if(mode.equals("Hand")) {
 			sb.append("Hand");
 		}
 		else sb.append(af.getMapParams().get("NumCards"));
@@ -721,7 +757,6 @@ public class AbilityFactory_ZoneAffecting {
 		
 		Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null){
-        	abSub.setParent(sa);
         	sb.append(abSub.getStackDescription());
         }
 		
@@ -802,4 +837,11 @@ public class AbilityFactory_ZoneAffecting {
 		}
 		return false;
 	}// discardTargetAI()
+	
+	
+	private static boolean discardCheckDrawbackAI(AbilityFactory af, Ability_Sub subAb) {
+		// Drawback AI improvements
+		// if parent draws cards, make sure cards in hand + cards drawn > 0
+		return true;
+	}// discardCheckDrawbackAI()
 }

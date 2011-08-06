@@ -75,8 +75,6 @@ public class AbilityFactory_Combat {
 		if (af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
 			if (abSub != null){
-			   if (abSub.getParent() == null)
-				  abSub.setParent(sa);
 			   abSub.resolve();
 			}
 			else

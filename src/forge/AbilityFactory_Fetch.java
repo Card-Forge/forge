@@ -116,8 +116,6 @@ public class AbilityFactory_Fetch {
 	            if (af.hasSubAbility()){
 	            	Ability_Sub abSub = sa.getSubAbility();
 	            	if (abSub != null){
-	            	   if (abSub.getParent() == null)
-	            		  abSub.setParent(sa);
 	            	   abSub.resolve();
 	            	}
 	            	else
@@ -192,8 +190,6 @@ public class AbilityFactory_Fetch {
 	        if (af.hasSubAbility()){
 	        	Ability_Sub abSub = sa.getSubAbility();
 	        	if (abSub != null){
-	        	   if (abSub.getParent() == null)
-	        		  abSub.setParent(sa);
 	        	   abSub.resolve();
 	        	}
 	        	else
@@ -471,7 +467,6 @@ public class AbilityFactory_Fetch {
 		 
 		 Ability_Sub abSub = sa.getSubAbility();
 		 if (abSub != null) {
-		 	abSub.setParent(sa);
 		 	sb.append(abSub.getStackDescription());
 		 }
 		 
@@ -600,20 +595,20 @@ public class AbilityFactory_Fetch {
 	private static void doRetrieve(AbilityFactory af, final SpellAbility sa){
 		ArrayList<Card> tgtCards;
 		Target tgt = af.getAbTgt();
+		Player player = sa.getActivatingPlayer();
+		
 		if (tgt != null)
 			tgtCards = tgt.getTargetCards();
 		else{
 			tgtCards = new ArrayList<Card>();
 			Card retrieval;
 			if (af.getMapParams().containsKey("Defined"))
-				retrieval = retrieveDetermineDefined(af.getMapParams().get("Defined"), sa.getActivatingPlayer());
+				retrieval = retrieveDetermineDefined(af.getMapParams().get("Defined"), player);
 			else
 				retrieval = sa.getSourceCard();
 			tgtCards.add(retrieval);
 		}
 
-		Player player = sa.getActivatingPlayer();
-		
 		for(Card tgtC : tgtCards){
 			HashMap<String,String> params = af.getMapParams();
 			
@@ -661,8 +656,6 @@ public class AbilityFactory_Fetch {
 		if (af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
 			if (abSub != null){
-			   if (abSub.getParent() == null)
-				  abSub.setParent(sa);
 			   abSub.resolve();
 			}
 			else{

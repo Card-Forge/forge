@@ -144,14 +144,15 @@ public abstract class SpellAbility {
     	xManaCost = cost;
     }
     
-    public Player getActivatingPlayer()
-    {
+    public Player getActivatingPlayer(){
     	return activatingPlayer;
     }
     
-    public void setActivatingPlayer(Player player)
-    {
+    public void setActivatingPlayer(Player player){
+    	// trickle down activating player
     	activatingPlayer = player;
+    	if (subAbility != null)
+    		subAbility.setActivatingPlayer(player);
     }
     
     public boolean isSpell() {
@@ -339,7 +340,9 @@ public abstract class SpellAbility {
     }
     
 	public void setSubAbility(Ability_Sub subAbility) {
-		this.subAbility = subAbility;		
+		this.subAbility = subAbility;
+		if (subAbility != null)
+			subAbility.setParent(this);
 	}
 	
 	public Ability_Sub getSubAbility() {

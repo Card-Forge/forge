@@ -11,14 +11,7 @@ import java.util.Random;
         private String damage;
 
         private boolean TgtOpp = false;
-        
-        private Ability_Sub subAbAF = null;
-        private boolean hasSubAbAF = false;
-        private String subAbStr = "none";
-        private boolean hasSubAbStr = false;
     	
-    	public Ability_Sub getSubAbility() { return subAbAF; }
-        
     	public AbilityFactory_DealDamage(AbilityFactory newAF)
     	{
     		AF = newAF;
@@ -28,27 +21,6 @@ import java.util.Random;
     		if(AF.getMapParams().containsKey("Tgt"))
     			if (AF.getMapParams().get("Tgt").equals("TgtOpp"))
     				TgtOpp = true;
-
-    		if(AF.hasSubAbility())
-    		{
-    			String sSub = AF.getMapParams().get("SubAbility");
-
-    			if (sSub.startsWith("SVar="))
-    				sSub = AF.getHostCard().getSVar(sSub.split("=")[1]);
-
-    			if (sSub.startsWith("DB$"))
-    			{
-    				AbilityFactory afDB = new AbilityFactory();
-    				subAbAF = (Ability_Sub)afDB.getAbility(sSub, AF.getHostCard());
-    				hasSubAbAF = true;
-    			}
-    			else
-    			{
-    				subAbStr = sSub;
-    				hasSubAbStr = true;
-    			}
-    		}
-
     	}
        
        public SpellAbility getAbility()
@@ -138,7 +110,7 @@ import java.util.Random;
 				doResolve(this);
 			}
 
-		}; // Spell
+		}; // Drawback
 
 		return dbDealDamage;
 	}
@@ -344,10 +316,9 @@ import java.util.Random;
            }
            sb.append(". ");
            
-           if (hasSubAbAF){
-        	   subAbAF.setParent(sa);
-        	   sb.append(subAbAF.getStackDescription());
-           }
+           if (sa.getSubAbility() != null){
+         	   sb.append(sa.getSubAbility().getStackDescription());
+            }
 
            return sb.toString();
         }
@@ -418,29 +389,27 @@ import java.util.Random;
             	}
             }
    
-           if (hasSubAbAF) {
-        	   if (subAbAF.getParent() == null)
-        		   subAbAF.setParent(saMe);
-			   subAbAF.resolve();
-           }
-           
-           else if (hasSubAbStr){
-               Object obj = tgts.get(0);
-               
-               Player pl = null;
-               Card c = null;
-              
-               if (obj instanceof Card){
-                  c = (Card)obj;
-                  pl = c.getController();
-               }
-               else{
-                  pl = (Player)obj;
-               }
-              CardFactoryUtil.doDrawBack(subAbStr, dmg, AF.getHostCard().getController(),
-                 AF.getHostCard().getController().getOpponent(),   pl, AF.getHostCard(), c, saMe);
-              
-           }
-
+    		if (AF.hasSubAbility()){
+    			Ability_Sub abSub = saMe.getSubAbility();
+    			if (abSub != null){
+    			   abSub.resolve();
+    			}
+    			else{
+	               Object obj = tgts.get(0);
+	               
+	               Player pl = null;
+	               Card c = null;
+	              
+	               if (obj instanceof Card){
+	                  c = (Card)obj;
+	                  pl = c.getController();
+	               }
+	               else{
+	                  pl = (Player)obj;
+	               }
+	               CardFactoryUtil.doDrawBack(params.get("SubAbility"), dmg, AF.getHostCard().getController(),
+	            		   AF.getHostCard().getController().getOpponent(),   pl, AF.getHostCard(), c, saMe);
+    			}
+    		}
         }
     }

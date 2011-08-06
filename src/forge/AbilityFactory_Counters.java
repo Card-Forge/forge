@@ -401,8 +401,6 @@ public class AbilityFactory_Counters {
 		if (af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
 			if (abSub != null){
-			   if (abSub.getParent() == null)
-				  abSub.setParent(sa);
 			   abSub.resolve();
 			}
 			else
@@ -432,8 +430,6 @@ public class AbilityFactory_Counters {
 		if (af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
 			if (abSub != null){
-			   if (abSub.getParent() == null)
-				  abSub.setParent(sa);
 			   abSub.resolve();
 			}
 			else
@@ -663,8 +659,6 @@ public class AbilityFactory_Counters {
 		if (AF.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
 			if (abSub != null){
-			   if (abSub.getParent() == null)
-				  abSub.setParent(sa);
 			   abSub.resolve();
 			}
 		}

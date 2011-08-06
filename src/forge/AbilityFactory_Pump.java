@@ -242,6 +242,7 @@ public class AbilityFactory_Pump {
         	return false;
         
 		Target tgt = AF.getAbTgt();
+		tgt.resetTargets();
 		CardList list;
         if (AF.isCurse())  // Curse means spells with negative effect
         	list = getCurseCreatures(sa);
@@ -347,7 +348,6 @@ public class AbilityFactory_Pump {
 		 
 		 Ability_Sub abSub = sa.getSubAbility();
 		 if (abSub != null) {
-		 	abSub.setParent(sa);
 		 	sb.append(abSub.getStackDescription());
 		 }
 		 
@@ -421,8 +421,6 @@ public class AbilityFactory_Pump {
 		if (AF.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
 			if (abSub != null){
-			   if (abSub.getParent() == null)
-				  abSub.setParent(sa);
 			   abSub.resolve();
 			}
 			else{
