@@ -2423,36 +2423,26 @@ public class GameActionUtil {
 
         CardList list = new CardList();
         list.addAll(play.getCards());
-
         list = list.getName("Cinder Pyromancer");
 
         if (list.size() > 0 && c.isRed()) {
-
             for (int i = 0; i < list.size(); i++) {
                 final Card card = list.get(i);
-
+                
                 Ability ability2 = new Ability(card, "0") {
                     @Override
                     public void resolve() {
-                        if (card.getController().equals(AllZone.HumanPlayer)) {
-                        	StringBuilder title = new StringBuilder();
-                            title.append("Cinder Pyromancer Ability");
-                            StringBuilder message = new StringBuilder();
-                            message.append("Will you untap your Cinder Pyromancer?");
-                            int choice = JOptionPane.showConfirmDialog(
-                            		null, message.toString(), title.toString(), JOptionPane.YES_NO_OPTION);
-                            
-                            if (choice == JOptionPane.YES_OPTION) {
+                        if (controller.isHuman()) {
+                            String question = "Untap your Cinder Pyromancer?";
+                            if (showYesNoDialog(card, question)) {
                                 card.untap();
                             }
-                        }// Human
+                        }// controller isComputer()
+                        else card.untap(); 
                         
-                        if (card.getController().equals(AllZone.ComputerPlayer)) {
-                            card.untap();
-                        }// Computer
                     }// resolve()
                 };// ability2
-                
+
                 StringBuilder sb = new StringBuilder();
                 sb.append(card.getName()).append(" - ").append(c.getController());
                 sb.append(" played a red spell, you may untap Cinder Pyromancer.");
