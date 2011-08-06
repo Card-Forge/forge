@@ -102,9 +102,44 @@ public class CardFactory implements NewConstants {
     }// readCard()
     
     final public Card copyCard(Card in) {
-        Card out = getCard(in.getName(), in.getOwner());
+        /*
+    	Card out = getCard(in.getName(), in.getOwner());
         out.setUniqueNumber(in.getUniqueNumber());
         return out;
+        */
+    	
+    	if(in.getType().contains("Creature")) {
+            Card card2 = new Card();
+            card2 = CardFactory_Creatures.getCard(in, in.getName(), in.getOwner(), this);
+            
+            return card2;
+        } else if(in.getType().contains("Aura")) {
+            Card card2 = new Card();
+            card2 = CardFactory_Auras.getCard(in, in.getName(), in.getOwner());
+            
+            return card2;
+        } else if(in.getType().contains("Equipment")) {
+            Card card2 = new Card();
+            card2 = CardFactory_Equipment.getCard(in, in.getName(), in.getOwner());
+            
+            return card2;
+        } else if(in.getType().contains("Planeswalker")) {
+            Card card2 = new Card();
+            card2 = CardFactory_Planeswalkers.getCard(in, in.getName(), in.getOwner());
+            
+            return card2;
+        } else if(in.getType().contains("Land")) {
+            Card card2 = new Card();
+            card2 = CardFactory_Lands.getCard(in, in.getName(), in.getOwner());
+            
+            return card2;
+        }
+        else
+        {
+        	Card out = getCard(in.getName(), in.getOwner());
+            out.setUniqueNumber(in.getUniqueNumber());
+            return out;
+        }
     }
     
     /*

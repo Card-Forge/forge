@@ -2670,6 +2670,14 @@ class CardFactory_Planeswalkers {
             card2.setManaCost(card.getManaCost());
             card2.addSpellAbility(new Spell_Permanent(card2));
             card2.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(card2, Counters.LOYALTY, 3));
+            /*
+            card2.addComesIntoPlayCommand(new Command() {
+            	public void execute()
+            	{
+            		turn[0] = -1;
+            	}
+            });
+            */
             
             final Ability ability1 = new Ability(card2, "0") {
                 @Override
