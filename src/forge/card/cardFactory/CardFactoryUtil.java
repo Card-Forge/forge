@@ -3162,6 +3162,7 @@ public class CardFactoryUtil {
                 if(kw.equals("Protection from Demons") && card.isType("Demon")) return true;
                 if(kw.equals("Protection from Goblins") && card.isType("Goblin")) return true;
                 if(kw.equals("Protection from Clerics") && card.isType("Cleric")) return true;
+                if(kw.equals("Protection from Gorgons") && card.isType("Gorgon")) return true;
 
                 if(kw.startsWith("Protection:")) { //uses isValidCard
                 	String characteristic = kw.split(":")[1];
