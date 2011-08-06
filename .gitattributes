@@ -1097,6 +1097,7 @@ res/cardsfolder/coral_reef.txt svneol=native#text/plain
 res/cardsfolder/coralhelm_commander.txt -text svneol=native#text/plain
 res/cardsfolder/core_prowler.txt -text svneol=native#text/plain
 res/cardsfolder/coretapper.txt -text svneol=native#text/plain
+res/cardsfolder/corpse_connoisseur.txt -text svneol=native#text/plain
 res/cardsfolder/corpse_cur.txt -text svneol=native#text/plain
 res/cardsfolder/corpse_harvester.txt -text svneol=native#text/plain
 res/cardsfolder/corpulent_corpse.txt -text svneol=native#text/plain

@@ -5263,7 +5263,7 @@ public class CardFactory_Creatures {
             card.addTurnFaceUpCommand(turnsFaceUp);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Imperial Hellkite")) {
             Command turnsFaceUp = new Command() {
@@ -5291,7 +5291,7 @@ public class CardFactory_Creatures {
             
             card.addTurnFaceUpCommand(turnsFaceUp);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Serra Avatar")) {
