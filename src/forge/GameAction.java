@@ -23,9 +23,6 @@ public class GameAction {
 	//private CardList          humanList;
     //private CardList          computerList;
     
-    //private int               humanLife;
-    //private int               computerLife;
-    
     //private boolean           fantasyQuest     = false;
     
     //returns null if player does not have a Planeswalker
@@ -185,35 +182,12 @@ public class GameAction {
         	moveToGraveyard(c);
     }
     
-    /*
-    public void discard(Card c) {
-    	AllZone.GameAction.CheckWheneverKeyword(c,"DiscardsCard",null);
-        discard_nath(c);
-        discard_megrim(c);
-        if(CardFactoryUtil.getCards("Necropotence", c.getOwner()).size() > 0){	// necro disrupts madness
-        	removeFromGame(c);
-        	return;
-        }
-        discard_madness(c);
-        moveToGraveyard(c);
-    }
-    */
-    
     public void discardRandom(Player player, int numDiscard, SpellAbility sa) {
         for(int i = 0; i < numDiscard; i++) {
             Card[] c = AllZone.getZone(Constant.Zone.Hand, player).getCards();
             if(c.length != 0) discard(CardUtil.getRandom(c), sa);
         }
     }
-    
-    /*
-    public void discardRandom(String player, int numDiscard) {
-        for(int i = 0; i < numDiscard; i++) {
-            Card[] c = AllZone.getZone(Constant.Zone.Hand, player).getCards();
-            if(c.length != 0) discard(CardUtil.getRandom(c));
-        }
-    }
-    */
     
     public void discard(Player player, int numDiscard, SpellAbility sa) {
         if(player.isHuman()) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(numDiscard, sa));
@@ -222,16 +196,6 @@ public class GameAction {
                 AI_discard(sa);
         }
     }
-    
-    /*
-    public void discard(String player, int numDiscard) {
-        if(player.equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(numDiscard, null));
-        else {
-            for(int i = 0; i < numDiscard; i++)
-                AI_discard();
-        }
-    }
-    */
     
     public void discardUnless(Player player, int numDiscard, String uType, SpellAbility sa) {
         if(player.isHuman()) AllZone.InputControl.setInput(CardFactoryUtil.input_discardNumUnless(
@@ -279,23 +243,6 @@ public class GameAction {
         for(int i = 0; i < numDiscard; i++)
             AI_discard(sa);
     }
-    
-    /*
-    public void AI_discardNumUnless(int numDiscard, String uType) {
-        CardList hand = new CardList();
-        hand.addAll(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
-        CardList tHand = hand.getType(uType);
-        
-        if(tHand.size() > 0) {
-            CardListUtil.sortCMC(tHand);
-            tHand.reverse();
-            discard(tHand.get(0));
-            return;
-        }
-        for(int i = 0; i < numDiscard; i++)
-            AI_discard();
-    }
-    */
     
     public void AI_discard(SpellAbility sa) {
         CardList hand = new CardList();
@@ -522,7 +469,7 @@ public class GameAction {
         	final Ability ability = new Ability(megrim, "0") {
         		@Override
         		public void resolve() {
-        			AllZone.GameAction.addDamage(owner, thisMegrim, 2);
+        			owner.addDamage(2, thisMegrim);
         		}
         	};
         	ability.setStackDescription(megrim.getName()+" - deals 2 damage to "+owner);
@@ -795,21 +742,7 @@ public class GameAction {
             if(c[i].getName().equals(name)) a.add(c[i]);
         }
         return a;
-    }
-    
-    /* no longer needed
-    public CardList getPlaneswalkerSubtype(CardList search, String subtype, Card planeswalker) {
-        CardList list = search;
-        final String type = subtype;
-        list = list.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return c.getType().toString().contains(type);
-            }
-        });
-        
-        return list;
-    }*/
-    
+    }    
     
     public void sacrificeCreature(Player player, SpellAbility sa) {
         PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
@@ -1888,7 +1821,7 @@ public class GameAction {
       			                          }
       			                      }
       			                      }
-      			                    	  if(F_card.getController().equals(AllZone.ComputerPlayer)) AllZone.GameAction.addDamage(AllZone.HumanPlayer, F_card, F_Amount[0]*F_Multiple_Targets);
+      			                    	  if(F_card.getController().equals(AllZone.ComputerPlayer)) AllZone.HumanPlayer.addDamage(F_Amount[0]*F_Multiple_Targets, F_card);
                       			}
                         				}
                                     };
@@ -2583,10 +2516,6 @@ public class GameAction {
                 || PlayerZoneUtil.isCardInZone(AllZone.Human_Removed, c);
     }
     
-    /*public String getOpponent(Player p) {
-        return p.equals(AllZone.HumanPlayer)? AllZone.ComputerPlayer:AllZone.HumanPlayer;
-    } */
-    
     //TODO: shuffling seems to change a card's unique number but i'm not 100% sure
     public void shuffle(Player player) {
         PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
@@ -2644,14 +2573,6 @@ public class GameAction {
         ArrayList<Card> list = new ArrayList<Card>(Arrays.asList(p.getCards()));
         return list.contains(card);
     }
-    
-    /*public PlayerLife getPlayerLife(Player player) {
-        if(player == null) throw new RuntimeException("GameAction : getPlayerLife() player == null");
-        
-        if(player.isHuman()) return AllZone.Human_Life;
-        else if(player.equals(AllZone.ComputerPlayer)) return AllZone.ComputerPlayer;
-        else throw new RuntimeException("GameAction : getPlayerLife() invalid player string " + player);
-    } */
     
     public boolean payLife(Player player, int lifePayment, Card source){
     	if( null == player ) return false;
@@ -3866,112 +3787,7 @@ public class GameAction {
             GameActionUtil.executeGuiltyConscienceEffects(source, c, damageToAdd);
         }
         
-    }
-    /*
-    public void addDamage(String player, int damage, Card source) {
-        // place holder for future damage modification rules (prevention?)
-        
-    	if(source.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(source, damage);
-    	
-    	CardList cl = CardFactoryUtil.getAurasEnchanting(source, "Guilty Conscience");
-        for(Card c:cl) {
-            GameActionUtil.executeGuiltyConscienceEffects(source, c, damage);
-        }
-        getPlayerLife(player).subtractLife(damage,source);
-    }
-    */
-    public void addCombatDamage(Player player, Card source, int damage)
-    {
-    	player.addCombatDamage(damage, source);
-    	/*
-    	if (source.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")
-    			|| source.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME."))
-        	damage = 0;
-    	if (source.getKeyword().contains("Infect")) {
-    		//addPoison(player, damage);
-    	}
-        else {
-        	addDamage(player, source, damage);
-        }
-    	
-    	//GameActionUtil.executePlayerDamageEffects(player, source, damage, true);
-    	GameActionUtil.executePlayerCombatDamageEffects(source);
-    	CombatUtil.executeCombatDamageEffects(source);
-    	*/
-    }
-    
-    @Deprecated
-    public void addDamage(Player player, Card source, int damage) {
-        player.addDamage(damage, source);
-    	/*
-    	if (source.getKeyword().contains("Infect")) {
-        	//addPoison(player, damage);
-        }
-        else {
-        	int damageToDo = damage;
-        	int life = player.getLife();
-        	if(worshipFlag(player) && life <= damageToDo) {
-        		damageToDo = Math.min(damageToDo, life - 1);
-        	}
-        	player.subtractLife(damageToDo,source);
-        }
-        	
-        if(source.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(source, damage);
-        
-        CardList cl = CardFactoryUtil.getAurasEnchanting(source, "Guilty Conscience");
-        for(Card c:cl) {
-            GameActionUtil.executeGuiltyConscienceEffects(source, c, damage);
-        }
-        
-        GameActionUtil.executePlayerDamageEffects(player, source, damage, false); */
-    }
-    //moved to PlayerUtil.java
-    /*
-    public boolean worshipFlag(Player player) {
-    	if( AllZoneUtil.isCardInPlay("Ali from Cairo", player)
-    			|| (AllZoneUtil.isCardInPlay("Worship", player) && AllZoneUtil.getCreaturesInPlay(player).size() > 0)
-    			|| AllZoneUtil.isCardInPlay("Fortune Thief", player)
-    			|| AllZoneUtil.isCardInPlay("Sustaining Spirit", player)) {
-    		return true;
-    	}
-    	else {
-    		return false;
-    	}
-    }
-    */
-    
-    /*public void addPoison(Player player, int poison)
-    {
-    	if(player.isHuman()) 
-    		AllZone.Human_PoisonCounter.addPoisonCounters(poison);
-    	else
-    		AllZone.ComputerPlayer.addPoisonCounters(poison);
-	}
-    public int getPoison(Player player)
-    {
-    	if(player.isHuman()) 
-    		return AllZone.HumanPlayer.getPoisonCounters();
-    	else
-    		return AllZone.ComputerPlayer.getPoisonCounters();
-	}*/
-    
-    /*public void gainLife(Player player, int lifeGained){
-    	PlayerLife p = getPlayerLife(player); 
-    	p.addLife(lifeGained);
-    	
-    	Object[] Life_Whenever_Parameters = new Object[1];
-    	Life_Whenever_Parameters[0] = lifeGained;
-    	AllZone.GameAction.CheckWheneverKeyword(p.getPlayerCard(), "GainLife", Life_Whenever_Parameters);
-    } */
-    
-    /*public void loseLife(String player, int lifeLost){
-    	PlayerLife p = getPlayerLife(player); 
-    	p.payLife(lifeLost);
-    	
-    	Object[] Life_Whenever_Parameters = new Object[1];
-    	Life_Whenever_Parameters[0] = lifeLost;
-    	AllZone.GameAction.CheckWheneverKeyword(p.getPlayerCard(), "LoseLife", Life_Whenever_Parameters);
-    }*/
+    }    
     
     public void searchLibraryLand(String type, Player player, String Zone1, boolean tapLand) {
     	searchLibraryTwoLand(type, player, Zone1, tapLand, "", false);

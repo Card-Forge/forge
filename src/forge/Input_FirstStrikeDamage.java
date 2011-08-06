@@ -64,7 +64,8 @@ public class Input_FirstStrikeDamage extends Input {
         HashMap<Card, Integer> defMap = AllZone.Combat.getDefendingFirstStrikeDamageMap();
         
         for(Entry<Card, Integer> entry : defMap.entrySet()) {
-        	AllZone.GameAction.addCombatDamage(player, entry.getKey(), entry.getValue());
+        	//AllZone.GameAction.addCombatDamage(player, entry.getKey(), entry.getValue());
+        	player.addCombatDamage(entry.getValue(), entry.getKey());
             //this.addDamage(entry.getValue(), entry.getKey());
         }
         
