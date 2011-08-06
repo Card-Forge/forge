@@ -2822,7 +2822,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Armageddon") || cardName.equals("Ravages of War")) {
             final SpellAbility spell = new Spell(card) {
@@ -2861,7 +2861,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-
+        */
 
         
         //*************** START *********** START **************************
