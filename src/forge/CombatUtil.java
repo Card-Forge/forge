@@ -570,6 +570,25 @@ public class CombatUtil
     return display;
   }//getPlaneswalkerBlockers()
   
+  public static void executeCombatDamageEffects(Card c)
+  {
+	  if (c.getKeyword().contains("Lifelink"))
+  		  GameActionUtil.executeLifeLinkEffects(c);
+		
+      CardList cl = CardFactoryUtil.getAurasEnchanting(c, "Guilty Conscience");
+	  for (Card crd : cl)
+		  GameActionUtil.executeGuiltyConscienceEffects(c, crd);
+	    
+	  if(CardFactoryUtil.hasNumberEquipments(c, "Umezawa's Jitte") == 1 && c.getNetAttack() > 0)
+	  {
+		PlayerZone play = AllZone.getZone(c);
+		CardList clist = new CardList(play.getCards());
+		clist = clist.getName("Umezawa's Jitte");
+		Card jitte = clist.get(0);
+		jitte.addCounter(Counters.CHARGE, 2);
+	  }
+  }
+  
   private static boolean canBlockProtection(Card attacker, Card blocker)
   {
 	  ArrayList<String> list = attacker.getKeyword();

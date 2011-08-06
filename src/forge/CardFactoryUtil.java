@@ -2916,6 +2916,14 @@ public class CardFactoryUtil
 	  }
 	  return s;
   }
+  
+  public static boolean hasNecropotence(String player)
+  {
+	  PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+	  CardList list = new CardList(play.getCards());
+	  list = list.getName("Necropotence");
+	  return list.size() > 0;	  
+  }
 
   public static int getCanPlayNumberOfLands(String player)
   {
@@ -2940,6 +2948,7 @@ public class CardFactoryUtil
 	  
 	  return count;
   }
+  
   
   public static CardList getFastbonds(String player)
   {  

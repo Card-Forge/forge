@@ -95,31 +95,7 @@ private void playerDamage(PlayerLife p)
         
        if ((attackers.getCard(i).hasFirstStrike() || attackers.getCard(i).hasDoubleStrike()))
         {
-    	   if (attackers.getCard(i).getKeyword().contains("Lifelink"))
-           {
-       			GameActionUtil.executeLifeLinkEffects(attackers.getCard(i));
-           }
-    	   
-    	   /*
-    	   for(int j=0; j < CardFactoryUtil.hasNumberEnchantments(attackers.getCard(i), "Guilty Conscience"); j++)
-        	   GameActionUtil.executeGuiltyConscienceEffects(attackers.getCard(i));
-           */
-    	   CardList cl = CardFactoryUtil.getAurasEnchanting(attackers.getCard(i), "Guilty Conscience");
-    	   for (Card c : cl)
-    	   {
-    		   GameActionUtil.executeGuiltyConscienceEffects(attackers.getCard(i), c);
-    	   }
-    	   
-    	   
-    	   
-    	   if(CardFactoryUtil.hasNumberEquipments(attackers.getCard(i), "Umezawa's Jitte") == 1 && attackers.get(i).getNetAttack() > 0)
-   			{
-	   			PlayerZone play = AllZone.getZone(attackers.getCard(i));
-	   			CardList clist = new CardList(play.getCards());
-	   			clist = clist.getName("Umezawa's Jitte");
-	   			Card jitte = clist.get(0);
-	   			jitte.addCounter(Counters.CHARGE, 2);
-   			}
+    	   CombatUtil.executeCombatDamageEffects(attackers.getCard(i));
     	   
     	   /*
     	   
@@ -150,14 +126,7 @@ private void playerDamage(PlayerLife p)
        //System.out.println("blocker #" + i + ": " + blockers.getCard(i).getName() +" " + blockers.getCard(i).getAttack());
        if ( (blockers.getCard(i).hasFirstStrike() || blockers.getCard(i).hasDoubleStrike()))
         {
-    	   if (blockers.getCard(i).getKeyword().contains("Lifelink"))
-    		   GameActionUtil.executeLifeLinkEffects(blockers.getCard(i));
-    	   
-    	   CardList cl = CardFactoryUtil.getAurasEnchanting(blockers.getCard(i), "Guilty Conscience");
-    	   for (Card c : cl)
-    	   {
-    		   GameActionUtil.executeGuiltyConscienceEffects(blockers.getCard(i), c);
-    	   }
+    	   CombatUtil.executeCombatDamageEffects(blockers.getCard(i));
         }
     }
     
@@ -170,31 +139,17 @@ private void playerDamage(PlayerLife p)
        //System.out.println("attacker #" + i + ": " + attackers.getCard(i).getName() +" " + attackers.getCard(i).getAttack());
        if ( (pwAttackers.getCard(i).hasFirstStrike() || pwAttackers.getCard(i).hasDoubleStrike()))
         {
-    	   if (pwAttackers.getCard(i).getKeyword().contains("Lifelink"))
-    		   GameActionUtil.executeLifeLinkEffects(pwAttackers.getCard(i));
-    	   
-    	   CardList cl = CardFactoryUtil.getAurasEnchanting(pwAttackers.getCard(i), "Guilty Conscience");
-    	   for (Card c : cl)
-    	   {
-    		   GameActionUtil.executeGuiltyConscienceEffects(pwAttackers.getCard(i), c);
-    	   }
+    	   CombatUtil.executeCombatDamageEffects(pwAttackers.getCard(i));
         }
     }
     for (int i=0; i < pwBlockers.size(); i++){
        //System.out.println("blocker #" + i + ": " + blockers.getCard(i).getName() +" " + blockers.getCard(i).getAttack());
        if ((pwBlockers.getCard(i).hasFirstStrike() || pwBlockers.getCard(i).hasDoubleStrike()))
         {
-    	  if ( pwAttackers.getCard(i).getKeyword().contains("Lifelink"))
-    		  GameActionUtil.executeLifeLinkEffects(pwBlockers.getCard(i));
-
-          CardList cl = CardFactoryUtil.getAurasEnchanting(pwBlockers.getCard(i), "Guilty Conscience");
-		  for (Card c : cl)
-		  {
-			  GameActionUtil.executeGuiltyConscienceEffects(pwBlockers.getCard(i), c);
-		  }
+    	   CombatUtil.executeCombatDamageEffects(pwBlockers.getCard(i));
         }
     }
-   
+    
     //get all attackers and blockers
     CardList check = new CardList();
     check.addAll(AllZone.Human_Play.getCards());
@@ -226,6 +181,8 @@ private void playerDamage(PlayerLife p)
     	
 		AllZone.GameAction.addDamage(c, damageMap);
     	
+		AllZone.GameAction.checkStateEffects();
+		
     	damageMap.clear();
         c.clearAssignedDamage();
       }

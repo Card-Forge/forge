@@ -99,6 +99,8 @@ private Card getCurrentCard(int ID)
 	discard_nath(c);
 	discard_megrim(c);
     moveToGraveyard(c);
+    if (CardFactoryUtil.hasNecropotence(c.getOwner()))
+    	removeFromGame(c);	
   }
   
   public void discardRandom(String player, int numDiscard)

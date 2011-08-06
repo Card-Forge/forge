@@ -3630,6 +3630,9 @@ public class GameActionUtil
 	public static void executePlayerCombatDamageEffects(Card c)
 	{
 
+		if (c.getKeyword().contains("Whenever this creature deals damage to a player, that player gets a poison counter."))
+			playerCombatDamage_PoisonCounter(c);
+		
 		if (c.getName().equals("Hypnotic Specter"))
 			playerCombatDamage_Hypnotic_Specter(c);
 		else if (c.getName().equals("Dimir Cutpurse"))
@@ -3724,6 +3727,18 @@ public class GameActionUtil
 		}//for
 	}
 	*/
+	
+	private static void playerCombatDamage_PoisonCounter(Card c)
+	{
+		final String player = c.getController();
+		final String opponent = AllZone.GameAction.getOpponent(player);
+		
+		if (opponent.equals(Constant.Player.Human))
+			AllZone.Human_PoisonCounter.addPoisonCounters(1);
+		else
+			AllZone.Computer_PoisonCounter.addPoisonCounters(1);
+	}
+	
 	private static void playerCombatDamage_Oros(Card c)
 	{
 		SpellAbility[] sa = c.getSpellAbility();
@@ -13291,7 +13306,6 @@ public class GameActionUtil
 	             else  k = countHand_Computer();
 	            c.setBaseAttack(k);
 	            c.setBaseDefense(k);
-	                       
 	         }
 	      }   
 	         private int countHand_Human()
@@ -14036,7 +14050,7 @@ public class GameActionUtil
 			{
 				public boolean addCard(Card c)
 				{
-					return c.isCreature() && c.getKeyword().contains("Flying");
+					return c.isCreature() && c.getKeyword().contains("Flying") && !c.getName().equals("Radiant, Archangel");
 				}
 			});
 			return flying.size();

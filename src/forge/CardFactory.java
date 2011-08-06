@@ -17801,8 +17801,46 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 	    	};
 	    	card.clearSpellAbility();
 	    	card.addSpellAbility(spell);
-	    }
+	    }//*************** END ************ END **************************
 
+	    
+	    
+		  //*************** START *********** START **************************
+		    if (cardName.equals("Serpent Generator"))
+		    {
+		    	final SpellAbility ability = new Ability_Tap(card, "4")
+		    	{
+					private static final long serialVersionUID = 8428205362391909464L;
+
+					public void resolve()
+		    		{
+		    			PlayerZone play = AllZone.getZone(card);
+		    			Card c = new Card();
+
+		    	        c.setOwner(card.getController());
+		    	        c.setController(card.getController());
+
+		    	        c.setName("Snake");
+		    	        c.setImageName("C 1 1 Snake");
+		    	        c.setManaCost("");
+		    	        c.setToken(true);
+
+		    	        c.addType("Artifact");
+		    	        c.addType("Creature");
+		    	        c.addType("Snake");
+		    	        c.setBaseAttack(1);
+		    	        c.setBaseDefense(1);
+		    	        
+		    	        c.addIntrinsicKeyword("Whenever this creature deals damage to a player, that player gets a poison counter.");
+
+		    	        play.add(c);
+		    		}
+		    	};
+		    	ability.setStackDescription("Put a 1/1 colorless Snake artifact creature token onto the battlefield. This creature has \"Whenever this creature deals damage to a player, that player gets a poison counter.\"");
+		    	ability.setDescription("4, Tap: Put a 1/1 colorless Snake artifact creature token onto the battlefield. This creature has \"Whenever this creature deals damage to a player, that player gets a poison counter.\" (A player with ten or more poison counters loses the game.)");
+		    	card.addSpellAbility(ability);
+		    	
+		    }//*************** END ************ END **************************
 	        
     // Cards with Cycling abilities
     // -1 means keyword "Cycling" not found

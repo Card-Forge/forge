@@ -1,3 +1,14 @@
+Serpent Generator
+6
+Artifact
+no text
+
+Pit Scorpion
+2 B
+Creature Scorpion
+Whenever this creature deals damage to a player, that player gets a poison counter.
+1/1
+
 Bridge from Below
 B B B
 Enchantment
@@ -13933,7 +13944,7 @@ Radiant, Archangel
 3 W W
 Legendary Creature Angel
 Radiant, Archangel gets +1/+1 for each creature with flying in play.
-2/2
+3/3
 Flying
 Vigilance
 
