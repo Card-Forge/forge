@@ -15812,24 +15812,18 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     if(getTargetPlayer() != null) {
                         PlayerZone lib = AllZone.getZone(Constant.Zone.Library, getTargetPlayer());
-                        PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, getTargetPlayer());
-                        
                         for(int i = 0; i < countZombies(); i++) {
-                            Card c = lib.get(0);
-                            lib.remove(0);
-                            grave.add(c);
-                            
+                            //probably should be updated to AllZone.GameAction.mill(getTargetPlayer(),1);
+                        	if(lib.size() > 0) {
+                            	AllZone.GameAction.moveToGraveyard(lib.get(0));
+                            }
                             AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1,card);
                         }
                     }
-                }
+                }//end resolve
                 
                 public int countZombies() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    CardList list = new CardList(play.getCards());
-                    list = list.getType("Zombie");
-                    
-                    return list.size();
+                    return AllZoneUtil.getPlayerTypeInPlay(card.getController(), "Zombie").size();
                 }
                 
             };
@@ -15838,8 +15832,7 @@ public class CardFactory_Creatures {
             ability2.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability2));
             
             card.addSpellAbility(ability);
-            card.addSpellAbility(ability2);
-            
+            card.addSpellAbility(ability2);         
         }//*************** END ************ END **************************
         
                 
