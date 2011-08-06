@@ -5349,13 +5349,13 @@ public class CardFactory_Creatures {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Disciple of Kangee")) {
+        else if (cardName.equals("Disciple of Kangee")) {
             final SpellAbility ability = new Ability_Tap(card, "U") {
                 private static final long serialVersionUID = -5169389637917649036L;
                 
                 @Override
                 public boolean canPlayAI() {
-                    if(CardFactoryUtil.AI_doesCreatureAttack(card)) return false;
+                    if (CardFactoryUtil.AI_doesCreatureAttack(card)) return false;
                     
                     return CardFactoryUtil.AI_getHumanCreature("Flying", card, false).isEmpty()
                             && (getCreature().size() != 0);
@@ -5372,8 +5372,10 @@ public class CardFactory_Creatures {
                     CardList list = new CardList(AllZone.Computer_Play.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.isCreature() && (!CardFactoryUtil.AI_doesCreatureAttack(c))
-                                    && (!c.getKeyword().contains("Flying")) && CardFactoryUtil.canTarget(card, c);
+                            return c.isCreature() && 
+                            	   (!CardFactoryUtil.AI_doesCreatureAttack(c)) && 
+                            	   (!c.getKeyword().contains("Flying")) && 
+                            	   CardFactoryUtil.canTarget(card, c);
                         }
                     });
                     list.remove(card);
@@ -5382,8 +5384,8 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                    if (AllZone.GameAction.isCardInPlay(getTargetCard()) && 
+                    		CardFactoryUtil.canTarget(card, getTargetCard())) {
                         final Card[] creature = new Card[1];
                         
                         creature[0] = getTargetCard();
@@ -5395,7 +5397,7 @@ public class CardFactory_Creatures {
                         final boolean[] colorFlag = {false, false, false, false, false, false};
                         
                         for(int i = 0; i < 6; i++) {
-                            if(creature[0].getIntrinsicKeyword().contains(creatureIsColor[i])) {
+                            if (creature[0].getIntrinsicKeyword().contains(creatureIsColor[i])) {
                                 colorFlag[i] = true;
                             }
                         }
@@ -5404,12 +5406,12 @@ public class CardFactory_Creatures {
                             private static final long serialVersionUID = -1899153704584793548L;
                             
                             public void execute() {
-                                if(AllZone.GameAction.isCardInPlay(creature[0])) {
+                                if (AllZone.GameAction.isCardInPlay(creature[0])) {
                                     creature[0].removeExtrinsicKeyword("Flying");
-                                    creature[0].removeIntrinsicKeyword(tgtName + " is blue.");
+                                    creature[0].removeIntrinsicKeyword("CARDNAME is blue.");
                                     creature[0].setManaCost(origManaCost);
-                                    for(int i = 0; i < 6; i++) {
-                                        if(colorFlag[i]) {
+                                    for (int i = 0; i < 6; i++) {
+                                        if (colorFlag[i]) {
                                             creature[0].addIntrinsicKeyword(creatureIsColor[i]);
                                         }
                                     }
@@ -5417,13 +5419,13 @@ public class CardFactory_Creatures {
                             }
                         };
                         creature[0].setManaCost(Integer.toString(CardUtil.getConvertedManaCost(origManaCost)));
-                        for(int i = 0; i < 6; i++) {
-                            if(colorFlag[i]) {
+                        for (int i = 0; i < 6; i++) {
+                            if (colorFlag[i]) {
                                 creature[0].removeIntrinsicKeyword(creatureIsColor[i]);
                             }
                         }
                         creature[0].addExtrinsicKeyword("Flying");
-                        creature[0].addIntrinsicKeyword(tgtName + " is blue.");
+                        creature[0].addIntrinsicKeyword("CARDNAME is blue.");
                         AllZone.EndOfTurn.addUntil(EOT);
                     }//if (card is in play)
                 }//resolve()
