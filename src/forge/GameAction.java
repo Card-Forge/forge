@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 import java.util.Map.Entry;
 
@@ -3861,6 +3862,159 @@ public class GameAction {
             secondZone.add(c);
         }
     }
+    
+    public void proliferate(final Card c, String cost)
+    {
+    	Ability p = getProliferateAbility(c, cost);
+    	AllZone.Stack.add(p);
+    }
+    
+    public Ability getProliferateAbility(final Card c, final String cost)
+    {
+    	final Ability ability = new Ability(c, cost)
+    	{
+    		public void resolve()
+    		{
+    			CardList hperms = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Human);
+    			hperms = hperms.filter(new CardListFilter(){
+    				public boolean addCard(Card crd)
+    				{
+    					return !crd.getName().equals("Mana Pool") /*&& crd.hasCounters()*/;
+    				}
+    			});
+    			
+    			CardList cperms = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+    			cperms = cperms.filter(new CardListFilter(){
+    				public boolean addCard(Card crd)
+    				{
+    					return !crd.getName().equals("Mana Pool") /*&& crd.hasCounters()*/;
+    				}
+    			});
+    			
+    			if (c.getController().equals(Constant.Player.Human))
+    			{	
+    				List<Card> selection1 = AllZone.Display.getChoicesOptional("Select permanent(s) computer controls", cperms.toArray());
+    				List<Card> selection2 = AllZone.Display.getChoicesOptional("Select permanent(s) you control", hperms.toArray());
+    				
+    				String[] choices = {"Human", "Computer"};
+    				List<String> playerSelection = AllZone.Display.getChoicesOptional("Select player(s)", choices);
+    			
+                    for(int m = 0; m < selection1.size(); m++) {
+                    	Card crd = selection1.get(m);
+                    	for(Counters c_1:Counters.values())
+                            if(crd.getCounters(c_1) != 0) crd.addCounter(c_1, 1);
+                    }
+
+                    for(int m = 0; m < selection2.size(); m++) {
+                    	Card crd = selection2.get(m);
+                    	for(Counters c_1:Counters.values())
+                            if(crd.getCounters(c_1) != 0) crd.addCounter(c_1, 1);
+                    }
+                
+                    for (int i=0;i<playerSelection.size();i++)
+                    {
+                    	String s = playerSelection.get(i);
+                    	if (s.equals("Human") && AllZone.Human_PoisonCounter.getPoisonCounters() > 0)
+                    		AllZone.Human_PoisonCounter.addPoisonCounters(1);
+                    	if (s.equals("Computer") && AllZone.Computer_PoisonCounter.getPoisonCounters() > 0)
+                    		AllZone.Computer_PoisonCounter.addPoisonCounters(1);
+                    }
+    			}
+    			else //comp
+    			{
+    				cperms = cperms.filter(new CardListFilter(){
+    					public boolean addCard(Card crd)
+    					{
+    						int pos = 0;
+    						int neg = 0;
+    						for(Counters c_1:Counters.values()) {
+                                if(crd.getCounters(c_1) != 0)
+                                {
+                                	if (CardFactoryUtil.isNegativeCounter(c_1))
+                                		neg++;
+                                	else
+                                		pos++;
+                                }
+    						}
+    						return pos > neg;
+    					}
+    				});
+    				
+    				hperms = hperms.filter(new CardListFilter(){
+    					public boolean addCard(Card crd)
+    					{
+    						int pos = 0;
+    						int neg = 0;
+    						for(Counters c_1:Counters.values()) {
+                                if(crd.getCounters(c_1) != 0)
+                                {
+                                	if (CardFactoryUtil.isNegativeCounter(c_1))
+                                		neg++;
+                                	else
+                                		pos++;
+                                }
+    						}
+    						return pos < neg;
+    					}
+    				});
+    				
+    				StringBuilder sb = new StringBuilder();
+    				sb.append("<html>Proliferate: <br>Computer selects ");
+    				if (cperms.size() == 0 && hperms.size() == 0 && AllZone.Human_PoisonCounter.getPoisonCounters() == 0)
+    					sb.append("<b>nothing</b>.");
+    				else
+    				{
+    					if (cperms.size()>0) {
+	    					sb.append("<br>From Computer's permanents: <br><b>");
+	    					for (Card c:cperms)
+	    					{
+	    						sb.append(c);
+	    						sb.append(" ");
+	    					}
+	    					sb.append("</b><br>");
+    					}
+    					if (hperms.size()>0) {
+	    					sb.append("<br>From Human's permanents: <br><b>");
+	    					for (Card c:cperms)
+	    					{
+	    						sb.append(c);
+	    						sb.append(" ");
+	    					}
+	    					sb.append("</b><br>");
+    					}
+    					if (AllZone.Human_PoisonCounter.getPoisonCounters() > 0)
+    						sb.append("<b>Human Player</b>.");
+    				}//else
+    				sb.append("</html>");
+    				
+    				
+    				//add a counter for each counter type, if it would benefit the computer
+    				for (Card c:cperms)
+    				{
+    					for(Counters c_1:Counters.values())
+                            if(c.getCounters(c_1) != 0) c.addCounter(c_1, 1);
+    				}
+    				
+    				//add a counter for each counter type, if it would screw over the player
+    				for (Card c:hperms)
+    				{
+    					for(Counters c_1:Counters.values())
+                            if(c.getCounters(c_1) != 0) c.addCounter(c_1, 1);
+    				}
+    				
+    				//give human a poison counter, if he has one
+    				if (AllZone.Human_PoisonCounter.getPoisonCounters() > 0)
+                		AllZone.Human_PoisonCounter.addPoisonCounters(1);
+    				
+    			} //comp
+    		}
+    	};
+    	ability.setStackDescription(c + " - Proliferate (You choose any number of permanents and/or players with " +
+									"counters on them, then give each another counter of a kind already there.)");
+    	return ability;
+    	
+    }
+    
     public static void main(String[] args) {
         GameAction gameAction = new GameAction();
         GenerateConstructedDeck gen = new GenerateConstructedDeck();

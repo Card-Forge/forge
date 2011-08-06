@@ -1,3 +1,18 @@
+Steady Progress
+2 U
+Instant
+no text
+spDrawCards:1:Draw a card. Proliferate.:Steady Progress - draw a card, proliferate.
+Proliferate
+
+Thrummingbird
+1 U
+Creature Bird Horror
+no text
+1/1
+Flying
+Whenever CARDNAME deals combat damage to a player, proliferate.
+
 Astral Steel
 2 W
 Instant

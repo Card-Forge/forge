@@ -49,6 +49,9 @@ public class Input_StackNotEmpty extends Input implements java.io.Serializable {
         		&& !(sa.getSourceCard().getKeyword().contains("Ripple:4") && sa.isAbility())) 
         	AllZone.GameAction.drawCard(sa.getSourceCard().getController());
         
+        if(sa.getSourceCard().getKeyword().contains("Proliferate"))
+        	AllZone.GameAction.getProliferateAbility(sa.getSourceCard(), "0").resolve();
+        
         for(int i = 0; i < sa.getSourceCard().getKeyword().size(); i++) {
             String k = sa.getSourceCard().getKeyword().get(i);
             if(k.startsWith("Scry")) {

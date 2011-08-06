@@ -4473,6 +4473,23 @@ public class CardFactoryUtil {
 			}
 		}
     }
+    
+    public static boolean isNegativeCounter(Counters c)
+    {	
+    	
+    	/*
+    	AGE(),
+        BLAZE(),
+        BRIBERY(),
+        ICE(),
+        M1M1("-1/-1"),
+        P0M1("+0/-1"),
+        P0M2("+0/-2"),
+        TIME(),
+        */
+    	return c == Counters.AGE || c == Counters.BLAZE || c == Counters.BRIBERY || c == Counters.ICE ||
+        		c == Counters.M1M1 || c == Counters.P0M1 || c == Counters.P0M2 || c == Counters.TIME;
+    }
 
     public static void main(String[] args) {
         
@@ -4492,7 +4509,13 @@ public class CardFactoryUtil {
         System.out.println(manacost + " times 2 = " + multipliedTwice);
         System.out.println(manacost + " times 3 = " + multipliedThrice);
         
-
+        if (isNegativeCounter(Counters.M1M1))
+        {
+        	System.out.println("M1M1 is a bad counter!");
+        }
+        else
+        	System.out.println("M1M1 is a good counter!");
+        
     }
     
 }

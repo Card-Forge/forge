@@ -5085,6 +5085,9 @@ public class GameActionUtil {
 			}
 		}
 		
+		if (c.getKeyword().contains("Whenever CARDNAME deals combat damage to a player, proliferate."))
+			AllZone.GameAction.proliferate(c, "0");
+		
 		/*
 		if (c.getKeyword().contains("Infect"))
 		{
