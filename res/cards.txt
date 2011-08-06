@@ -6912,7 +6912,7 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5555.jpg
 
 Creakwood Liege
-2 BG BG BG
+1 BG BG BG
 Creature Horror
 At the beginning of your upkeep, you may put a 1/1 black and green Worm creature token onto the battlefield.
 2/2
