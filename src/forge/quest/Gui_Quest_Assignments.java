@@ -270,7 +270,7 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
     
     void quitButton_actionPerformed() {
         dispose();
-        new QuestMainFrame();
+        new QuestFrame();
 
     }
 

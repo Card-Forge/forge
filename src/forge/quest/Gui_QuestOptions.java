@@ -196,7 +196,7 @@ public class Gui_QuestOptions extends JFrame {
         AllZone.QuestData = QuestData.loadData();
         AllZone.QuestData.setDifficultyIndex();
         dispose();
-        new QuestMainFrame();
+        new QuestFrame();
     }
     
     void newQuestButton_actionPerformed(ActionEvent e) {
@@ -238,7 +238,7 @@ public class Gui_QuestOptions extends JFrame {
         AllZone.QuestData = questData;
         
         dispose();
-        new QuestMainFrame();
+        new QuestFrame();
     }
     
     //copy AI decks from old to newData

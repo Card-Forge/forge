@@ -1,6 +1,6 @@
 package forge.quest.bazaar;
 
-import forge.quest.QuestMainFrame;
+import forge.quest.QuestFrame;
 
 import javax.swing.*;
 import java.awt.BorderLayout;
@@ -16,7 +16,7 @@ import java.util.List;
 public class QuestBazaarPanel extends JPanel{
 	private static final long serialVersionUID = 1418913010051869222L;
 	
-	QuestMainFrame mainFrame;
+	QuestFrame mainFrame;
     static List<QuestAbstractBazaarStall> stallList = new ArrayList<QuestAbstractBazaarStall>();
 
     JPanel buttonPanel = new JPanel(new BorderLayout());
@@ -28,7 +28,7 @@ public class QuestBazaarPanel extends JPanel{
 
     CardLayout stallLayout = new CardLayout();
 
-    public QuestBazaarPanel(QuestMainFrame mainFrame) {
+    public QuestBazaarPanel(QuestFrame mainFrame) {
         this.mainFrame = mainFrame;
         this.setLayout(new BorderLayout());
 
@@ -99,7 +99,7 @@ public class QuestBazaarPanel extends JPanel{
         quitButton.setSize(max);
         quitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                QuestBazaarPanel.this.mainFrame.showPane(QuestMainFrame.MAIN_PANEL);
+                QuestBazaarPanel.this.mainFrame.showPane(QuestFrame.MAIN_PANEL);
             }
         });
 

@@ -24,7 +24,7 @@ import java.util.List;
 public class QuestMainPanel extends JPanel {
     private QuestData questData;
 
-    private QuestMainFrame mainFrame;
+    private QuestFrame mainFrame;
 
     JLabel creditsLabel = new JLabel();
     JLabel lifeLabel = new JLabel();
@@ -47,7 +47,7 @@ public class QuestMainPanel extends JPanel {
 
     private static final String NO_DECKS_AVAILABLE = "No decks available";
 
-    public QuestMainPanel(QuestMainFrame mainFrame) {
+    public QuestMainPanel(QuestFrame mainFrame) {
         questData = AllZone.QuestData;
         this.mainFrame = mainFrame;
 
@@ -334,7 +334,7 @@ public class QuestMainPanel extends JPanel {
                 //saves all deck data
                 QuestData.saveData(AllZone.QuestData);
 
-                new QuestMainFrame();
+                new QuestFrame();
             }
         };
 
@@ -346,7 +346,7 @@ public class QuestMainPanel extends JPanel {
     }//deck editor button
 
     void showBazaar() {
-        mainFrame.showPane(QuestMainFrame.BAZAAR_PANEL);
+        mainFrame.showPane(QuestFrame.BAZAAR_PANEL);
     }
 
     void showCardShop() {
@@ -357,7 +357,7 @@ public class QuestMainPanel extends JPanel {
                 //saves all deck data
                 QuestData.saveData(AllZone.QuestData);
 
-                new QuestMainFrame();
+                new QuestFrame();
             }
         };
 

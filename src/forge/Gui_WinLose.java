@@ -6,7 +6,7 @@ import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.properties.NewConstants.LANG.Gui_WinLose.WINLOSE_TEXT;
-import forge.quest.QuestMainFrame;
+import forge.quest.QuestFrame;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -488,7 +488,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             
             QuestData.saveData(quest);
             if (AllZone.QuestData.useNewQuestUI){
-                new QuestMainFrame();
+                new QuestFrame();
             }
             else{
                 new Gui_Quest();

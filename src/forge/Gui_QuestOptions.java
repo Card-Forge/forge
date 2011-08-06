@@ -1,6 +1,6 @@
 package forge;
 import forge.error.ErrorViewer;
-import forge.quest.QuestMainFrame;
+import forge.quest.QuestFrame;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -202,7 +202,7 @@ public class Gui_QuestOptions extends JFrame {
         
         if(useNewQuestUI.isSelected()){
             AllZone.QuestData.useNewQuestUI = true;
-            new QuestMainFrame();
+            new QuestFrame();
         }
         else
         {
@@ -253,7 +253,7 @@ public class Gui_QuestOptions extends JFrame {
         dispose();
         if(useNewQuestUI.isSelected()){
             AllZone.QuestData.useNewQuestUI = true;
-            new QuestMainFrame();
+            new QuestFrame();
         }
         else{
             AllZone.QuestData.useNewQuestUI = false;

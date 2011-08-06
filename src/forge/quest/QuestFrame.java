@@ -12,7 +12,7 @@ import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 
-public class QuestMainFrame extends JFrame {
+public class QuestFrame extends JFrame {
 	private static final long serialVersionUID = -2832625381531838412L;
 	
 	JPanel visiblePanel;
@@ -21,7 +21,7 @@ public class QuestMainFrame extends JFrame {
     public static final String MAIN_PANEL = "Main";
     public static final String BAZAAR_PANEL = "Bazaar";
 
-    public QuestMainFrame() throws HeadlessException {
+    public QuestFrame() throws HeadlessException {
         this.setTitle("Quest Mode");
 
         visiblePanel = new JPanel(new BorderLayout());
