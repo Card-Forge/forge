@@ -1,0 +1,8 @@
+Name:Corrupted Harvester
+ManaCost:4 B B
+Types:Creature Horror
+Text:no text
+A:AB$Regenerate|Cost$B Sac<1/Creature>|SpellDescription$Regenerate CARDNAME.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/corrupted_harvester.jpg
+End

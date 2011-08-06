@@ -893,6 +893,7 @@ res/cardsfolder/corrupt.txt -text svneol=native#text/plain
 res/cardsfolder/corrupt_court_official.txt -text svneol=native#text/plain
 res/cardsfolder/corrupt_eunuchs.txt -text svneol=native#text/plain
 res/cardsfolder/corrupt_official.txt -text svneol=native#text/plain
+res/cardsfolder/corrupted_harvester.txt -text svneol=native#text/plain
 res/cardsfolder/cosis_ravager.txt -text svneol=native#text/plain
 res/cardsfolder/cosmic_horror.txt -text svneol=native#text/plain
 res/cardsfolder/council_of_advisors.txt -text svneol=native#text/plain
