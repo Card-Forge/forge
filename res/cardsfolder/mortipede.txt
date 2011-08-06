@@ -1,0 +1,10 @@
+Name:Mortipede
+ManaCost:3 B
+Types:Creature Insect
+Text:no text
+PT:4/1
+A:AB$Pump | Cost$ 2 G | KW$ HIDDEN All creatures able to block CARDNAME do so. | SpellDescription$ All creatures able to block Mortipede this turn do so.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mortipede.jpg
+End

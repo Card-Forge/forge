@@ -1,0 +1,9 @@
+Name:Bloodscent
+ManaCost:3 G
+Types:Instant
+Text:no text
+A:SP$Pump | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN All creatures able to block CARDNAME do so. | SpellDescription$ All creatures able to block target creature this turn do so.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodscent.jpg
+End

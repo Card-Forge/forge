@@ -1,0 +1,11 @@
+Name:Seton's Desire
+ManaCost:2 G
+Types:Enchantment Aura
+Text:Enchanted creature gets +2/+2.
+K:Enchant creature
+K:enPump:+2/+2
+K:stPumpEnchanted:Creature:0/0/HIDDEN All creatures able to block CARDNAME do so.:Threshold:Threshold - As long as seven or more cards are in your graveyard, all creatures able to block enchanted creature do so.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/setons_desire.jpg
+End

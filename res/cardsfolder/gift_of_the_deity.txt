@@ -1,0 +1,12 @@
+Name:Gift of the Deity
+ManaCost:4 BG
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+K:enPump:+0/+0
+K:stPumpEnchanted:Creature.Black:1/1/Deathtouch:No Condition:As long as enchanted creature is black, it gets +1/+1 and has deathtouch. (Any amount of damage it deals to a creature is enough to destroy that creature.)
+K:stPumpEnchanted:Creature.Green:1/1/HIDDEN All creatures able to block CARDNAME do so.:No Condition:As long as enchanted creature is green, it gets +1/+1 and all creatures able to block it do so.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gift_of_the_deity.jpg
+End

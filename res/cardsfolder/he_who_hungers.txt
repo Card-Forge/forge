@@ -1,0 +1,12 @@
+Name:He Who Hungers
+ManaCost:4 B
+Types:Legendary Creature Spirit
+Text:no text
+PT:3/2
+K:Flying
+A:AB$Discard | Cost$ 1 Sac<1/Spirit> | ValidTgts$ Opponent | SorcerySpeed$ True | NumCards$ 1 | Mode$ RevealYouChoose | SpellDescription$ Target opponent reveals his or her hand. You choose a card from it. That player discards that card. Activate this ability only any time you could cast a sorcery.
+K:Soulshift:4
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/he_who_hungers.jpg
+End
