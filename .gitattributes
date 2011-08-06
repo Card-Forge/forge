@@ -4274,6 +4274,7 @@ res/cardsfolder/nova_cleric.txt -text svneol=native#text/plain
 res/cardsfolder/novablast_wurm.txt -text svneol=native#text/plain
 res/cardsfolder/novijen_heart_of_progress.txt -text svneol=native#text/plain
 res/cardsfolder/noxious_field.txt svneol=native#text/plain
+res/cardsfolder/noxious_ghoul.txt -text svneol=native#text/plain
 res/cardsfolder/noxious_hatchling.txt -text svneol=native#text/plain
 res/cardsfolder/noxious_toad.txt svneol=native#text/plain
 res/cardsfolder/nucklavee.txt -text svneol=native#text/plain

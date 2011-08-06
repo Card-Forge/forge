@@ -1,0 +1,12 @@
+Name:Noxious Ghoul
+ManaCost:3 B B
+Types:Creature Zombie
+Text:no text
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Zombie.Other | Execute$ TrigPumpAll | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another Zombie enters the battlefield, all non-Zombie creatures get -1/-1 until end of turn.
+SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.nonZombie | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/noxious_ghoul.jpg
+End
+
