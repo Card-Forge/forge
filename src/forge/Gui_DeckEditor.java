@@ -667,8 +667,8 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         this.getContentPane().add(filterButton, "wmin 100, hmin 25");
         
         this.getContentPane().add(jScrollPane1, "cell 0 1 1 2, pushy, grow");
-        /*this.getContentPane().add(detail, "w 239, h 323, grow, flowy, wrap");*/
-        this.getContentPane().add(detail, "align 50% 50%, wmin 239, hmin 323, cell 1 0 1 2, flowy");
+        this.getContentPane().add(detail, "w 239, h 323, grow, flowy, wrap");
+        // this.getContentPane().add(detail, "align 50% 50%, wmin 239, hmin 323, cell 1 0 1 2, flowy");
         this.getContentPane().add(changePictureButton, "align 50% 0%, cell 1 2, split 2, flowx");
         this.getContentPane().add(removePictureButton, "align 50% 0%, wrap");
         
