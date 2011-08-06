@@ -18654,7 +18654,7 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Blood Birthing")) {
+        else if(cardName.equals("Brood Birthing")) {
         	final SpellAbility spell = new Spell(card)
         	{
 				private static final long serialVersionUID = -8303724057068847270L;
