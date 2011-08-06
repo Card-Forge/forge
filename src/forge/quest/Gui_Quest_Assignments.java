@@ -1,8 +1,12 @@
 package forge.quest;
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Rectangle;
+import forge.*;
+import forge.error.ErrorViewer;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -11,26 +15,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 
-import javax.swing.AbstractButton;
-import javax.swing.ButtonGroup;
-import javax.swing.ButtonModel;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JRadioButton;
-import javax.swing.SwingConstants;
-
-import forge.*;
-import forge.error.ErrorViewer;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
-
 public class Gui_Quest_Assignments extends JFrame implements NewConstants{
 	
 	private static final long serialVersionUID = 2409591658245091210L;
-		
-	private JFrame 			  questGui;
+
 	private JLabel            titleLabel       = new JLabel();
 	    
 	private JButton           startQuestButton = new JButton();
@@ -44,15 +32,14 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
     
     private ReadQuest_Assignment read;
     
-    public Gui_Quest_Assignments(JFrame parent, Deck humanDeck) {
+    public Gui_Quest_Assignments(Deck humanDeck) {
         try {
             jbInit();
         } catch(Exception ex) {
             ErrorViewer.showError(ex);
         }
         
-        questGui = parent;
-        hDeck = humanDeck; 
+        hDeck = humanDeck;
         
         setup();
 
@@ -106,17 +93,9 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
     		ArrayList<Quest_Assignment> availableQuests = read.getQuestsByIds(questData.getAvailableQuests());
         	questsToDisplay = availableQuests;
     		
-    		/*
-    		for (Quest_Assignment qa : availableQuests)
-    		{
-    			System.out.println(qa.getId() + " : " + qa.getName());
-    		}*/
-    		
-    		//System.out.println("Not null");
     	}
-    	else //generate some random quests
-    	{
-    		//System.out.println("null");
+    	else
+        {
     		ArrayList<Quest_Assignment> allAvailableQuests = read.getQuests();
     		
     		ArrayList<Integer> availableInts = new ArrayList<Integer>();
@@ -279,7 +258,7 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
     	if (questData.getGearLevel() == 2)
     		extraLife = 3;
     	
-	    if(Gui_Quest.newGUICheckbox.isSelected()) AllZone.Display = new GuiDisplay4();
+	    if(QuestMainPanel.newGUICheckbox.isSelected()) AllZone.Display = new GuiDisplay4();
         else AllZone.Display = new GuiDisplay3();
     	
 	    AllZone.GameAction.newGame(hDeck, computerDeck, QuestUtil.getHumanPlantAndPet(questData, selectedQuest), new CardList(), questData.getLife()+extraLife, 
@@ -300,13 +279,11 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
     void quitButton_actionPerformed(ActionEvent e) {
     	//QuestData.saveData(questData);
         //new Gui_Shops();
-    	questGui.setVisible(true);
-    	
+
         dispose();
     }
     
     void this_windowClosing(WindowEvent e) {
-		questGui.setVisible(true);
     }
     
 }

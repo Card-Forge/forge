@@ -1,20 +1,15 @@
 package forge.quest.bazaar;
 
-import forge.*;
+import forge.QuestData;
 import forge.error.ErrorViewer;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.WindowEvent;
-import java.io.File;
 
 public class QuestPetStall extends QuestAbstractBazaarStall{
 	
 	private static final long serialVersionUID = -2910767196498677881L;
-	private JFrame 			  shopsGUI;
 	private JLabel            titleLabel         = new JLabel();
 	
 	private JLabel 			  petDescLabel   	 = new JLabel();
@@ -29,27 +24,15 @@ public class QuestPetStall extends QuestAbstractBazaarStall{
 	private JButton           buyPetButton   	 = new JButton();
 
 
-    public QuestPetStall(JFrame parent) {
+    public QuestPetStall() {
+        super("Pet Shop", "FoxIconSmall.png", "");
         try {
             jbInit();
         } catch(Exception ex) {
             ErrorViewer.showError(ex);
         }
-        
-        shopsGUI = parent;
-        
+
         setup();
-        
-        //for some reason, the Bazaar window does not return when closing with X
-        //for now, just disable X closing:
-        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); 
-        
-        Dimension screen = this.getToolkit().getScreenSize();
-        setBounds(screen.width / 3, 100, //position
-                530, 430); //size
-        setVisible(true);
-        
-        
     }
     
     //only do this ONCE:
@@ -132,12 +115,6 @@ public class QuestPetStall extends QuestAbstractBazaarStall{
     			sb.append("Gives Swampwalk to your croc.<br>");
         		sb.append("<u><b>Level 4</b></u>: 3/1 Swampwalk<br>");
     		}
-    		/*
-    		else if (questData.getCrocPetLevel() >= 4)
-    		{
-    			sb.append("Croc Level Maxed out.<br>");
-    		}
-    		*/
 
     		else if (questData.getBirdPetLevel() == 0)
     		{
@@ -387,7 +364,7 @@ public class QuestPetStall extends QuestAbstractBazaarStall{
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setText("Beast Emporium");
         titleLabel.setBounds(new Rectangle(150, 5, 198, 60));
-        this.getContentPane().setLayout(null);
+        stallPanel.setLayout(null);
         
         petStatsLabel.setFont(new Font("sserif", Font.BOLD, 12));
         petStatsLabel.setText(getPetStats());
@@ -423,42 +400,18 @@ public class QuestPetStall extends QuestAbstractBazaarStall{
     	buyPetButton.setEnabled(true);
     	if (questData.getCredits() < getPrice() || questData.getHoundPetLevel() >= 4)
     		buyPetButton.setEnabled(false);
-       
-        quitButton.setBounds(new Rectangle(140, 297, 120, 50));
-        quitButton.setText("Quit");
-        quitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                quitButton_actionPerformed(e);
-            }
-        });
 
 
         //jPanel2.add(quitButton, null);
-        this.getContentPane().add(buyPetButton, null);
-        this.getContentPane().add(titleLabel, null);
-        this.getContentPane().add(petStatsLabel, null);
-        this.getContentPane().add(petDescLabel, null);
-        this.getContentPane().add(petIconLabel, null);
-        this.getContentPane().add(petPriceLabel, null);
-        this.getContentPane().add(creditsLabel, null);
-        this.getContentPane().add(quitButton,null);
+        stallPanel.add(buyPetButton, null);
+        stallPanel.add(titleLabel, null);
+        stallPanel.add(petStatsLabel, null);
+        stallPanel.add(petDescLabel, null);
+        stallPanel.add(petIconLabel, null);
+        stallPanel.add(petPriceLabel, null);
+        stallPanel.add(creditsLabel, null);
     }
-    
-    void editDeckButton_actionPerformed(ActionEvent e) {
-        Command exit = new Command() {
-            private static final long serialVersionUID = 4735992294414389187L;
-            
-            public void execute() {
-                new Gui_WinLose();
-            }
-        };
-        Gui_DeckEditor editor = new Gui_DeckEditor();
-        
-        editor.show(exit);
-        
-        dispose();
-    }//editDeckButton_actionPerformed()
-    
+
     void buyPetButton_actionPerformed(ActionEvent e) throws Exception {
     	questData.subtractCredits(getPrice());
     	
@@ -474,35 +427,4 @@ public class QuestPetStall extends QuestAbstractBazaarStall{
     	QuestData.saveData(questData);
     	jbInit();
     }
-    
-    void restartButton_actionPerformed(ActionEvent e) {
-        Constant.Runtime.WinLose.reset();
-        AllZone.GameAction.newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
-        AllZone.Display.setVisible(true);
-        
-        dispose();
-    }
-    
-    private ImageIcon getIcon(String fileName)
-    {
-    	File base = ForgeProps.getFile(IMAGE_ICON);
-    	File file = new File(base, fileName);
-    	ImageIcon icon = new ImageIcon(file.toString());
-    	return icon;
-    }
-    
-    void quitButton_actionPerformed(ActionEvent e) {
-    	QuestData.saveData(questData);
-        //new Gui_Shops();
-    	shopsGUI.setVisible(true);
-    	
-        
-        dispose();
-       
-    }
-    
-    void this_windowClosing(WindowEvent e) {
-        quitButton_actionPerformed(null);
-    }
-    
 }

@@ -1,6 +1,5 @@
 package forge.quest.bazaar;
 
-import forge.AllZone;
 import forge.QuestData;
 import forge.error.ErrorViewer;
 
@@ -10,8 +9,7 @@ import java.awt.event.ActionEvent;
 
 public class QuestAlchemistStall extends QuestAbstractBazaarStall{
 
-	private JLabel            titleLabel       = new JLabel();
-	
+
 	private JLabel 			  potionDescLabel   = new JLabel();
 	private JLabel			  potionStatsLabel  = new JLabel();
 	private JLabel 			  potionPriceLabel  = new JLabel();
@@ -20,13 +18,10 @@ public class QuestAlchemistStall extends QuestAbstractBazaarStall{
 	private JLabel			  creditsLabel     = new JLabel();
 
 	private JButton           buyPotionButton   = new JButton();
-    private JButton			  quitButton 	   = new JButton();
     
-    private QuestData 		  questData 	   = AllZone.QuestData;
-
 
     protected QuestAlchemistStall() {
-        super("Apothecary", "ElixirIcon.png", "");
+        super("Alchemist", "BottlesIconSmall.png", "");
 
         try {
             jbInit();
@@ -88,18 +83,10 @@ public class QuestAlchemistStall extends QuestAbstractBazaarStall{
     {
     	return "Elixir of Health";
     }
-    
-    private String getImageString()
-    {
-    	return "ElixirIcon.png";
-    }
+
     
     private void jbInit() throws Exception {
-        titleLabel.setFont(new Font("sserif", Font.BOLD, 22));
-        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        titleLabel.setText("Apothecary");
-        titleLabel.setBounds(new Rectangle(130, 5, 198, 60));
-        stallPanel.setLayout(null);
+
         
         potionStatsLabel.setFont(new Font("sserif", Font.BOLD, 12));
         potionStatsLabel.setText(getStats());
@@ -132,13 +119,11 @@ public class QuestAlchemistStall extends QuestAbstractBazaarStall{
 
         //jPanel2.add(quitButton, null);
         stallPanel.add(buyPotionButton, null);
-        stallPanel.add(titleLabel, null);
         stallPanel.add(potionStatsLabel, null);
         stallPanel.add(potionDescLabel, null);
         stallPanel.add(potionIconLabel, null);
         stallPanel.add(potionPriceLabel, null);
         stallPanel.add(creditsLabel, null);
-        stallPanel.add(quitButton,null);
     }
 
     void buyPotionButton_actionPerformed(ActionEvent e) throws Exception {

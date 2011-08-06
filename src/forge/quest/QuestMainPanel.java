@@ -52,14 +52,13 @@ public class QuestMainPanel extends JPanel implements NewConstants{
     private static JCheckBox  smoothLandCheckBox = new JCheckBox("", false);
     public static JCheckBox   newGUICheckbox	 = new JCheckBox("", true);
     private static JCheckBox  devModeCheckBox 	 = new JCheckBox("", true);
-    
-    public static void main(String[] args) {
-        new QuestMainPanel();
-    }
-    
-    public QuestMainPanel() {
+
+    private QuestMainFrame mainFrame;
+
+    public QuestMainPanel(QuestMainFrame mainFrame) {
     	questData = AllZone.QuestData;
-    	
+
+        this.mainFrame = mainFrame;
     	try {
             jbInit();
         } catch(Exception ex) {
@@ -314,46 +313,22 @@ public class QuestMainPanel extends JPanel implements NewConstants{
     }
     
     void deckEditorButton_actionPerformed(ActionEvent e) {
-        Command exit = new Command() {
-            private static final long serialVersionUID = -5110231879441074581L;
-            
-            public void execute() {
-                //saves all deck data
-                QuestData.saveData(AllZone.QuestData);
-                
-                new QuestMainPanel();
-            }
-        };
-        
+
         Gui_Quest_DeckEditor g = new Gui_Quest_DeckEditor();
-        
-        g.show(exit);
+
         g.setVisible(true);
         
     }//deck editor button
     
     void otherShopsButton_actionPerformed(ActionEvent e)
     {
-        Gui_Shops g = new Gui_Shops();
-        g.setVisible(true);
-        
+        mainFrame.showPane(QuestMainFrame.BAZAAR_PANEL);
     }
     
     void cardShopButton_actionPerformed(ActionEvent e) {
-        Command exit = new Command() {
-			private static final long serialVersionUID = 8567193482568076362L;
-
-			public void execute() {
-                //saves all deck data
-                QuestData.saveData(AllZone.QuestData);
-                
-                new QuestMainPanel();
-            }
-        };
-        
         Gui_CardShop g = new Gui_CardShop(questData);
         
-        g.show(exit);
+        g.show(null);
         g.setVisible(true);
         
     }//card shop button

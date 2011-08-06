@@ -12,7 +12,11 @@ public abstract class QuestAbstractBazaarStall extends JPanel implements NewCons
     String stallName;
     String blurb;
     ImageIcon icon;
+
     JPanel stallPanel;
+
+    JLabel stallNameLabel;
+
     protected  QuestData questData = AllZone.QuestData;
 
     protected QuestAbstractBazaarStall(String stallName, String iconName, String blurb) {
@@ -20,14 +24,26 @@ public abstract class QuestAbstractBazaarStall extends JPanel implements NewCons
         this.icon = getIcon(iconName);
         this.stallName = stallName;
         this.stallPanel = new JPanel();
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        stallNameLabel = new JLabel();
+
+        this.add(stallPanel);
     }
 
     
-    private ImageIcon getIcon(String fileName){
+    ImageIcon getIcon(String fileName){
     	File base = ForgeProps.getFile(IMAGE_ICON);
     	File file = new File(base, fileName);
     	ImageIcon icon = new ImageIcon(file.toString());
     	return icon;
     }
 
+    public ImageIcon getIcon() {
+        return icon;
+    }
+
+    public String getStallName() {
+        return stallName;
+    }
 }

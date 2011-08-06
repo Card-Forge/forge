@@ -1,22 +1,17 @@
 package forge.quest.bazaar;
 
-import forge.AllZone;
 import forge.QuestData;
 import forge.error.ErrorViewer;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.WindowEvent;
-import java.io.File;
 
 public class QuestBookStall extends QuestAbstractBazaarStall{
 	
 	private static final long serialVersionUID = 2409591658245091210L;
 		
-	private JFrame 			  shopsGUI;
+	
 	private JLabel            titleLabel        = new JLabel();
 	
 	private JLabel 			  sleightOfHandDescLabel  = new JLabel();
@@ -29,31 +24,16 @@ public class QuestBookStall extends QuestAbstractBazaarStall{
 	private ImageIcon		  sleightOfHandIcon	  	= new ImageIcon();
 	    
 	private JButton           sleightOfHandButton= new JButton();
-    private JButton			  quitButton 	    = new JButton();
     
-    private QuestData 		  questData 	    = AllZone.QuestData;
-    
-    public QuestBookStall(JFrame parent) {
+    public QuestBookStall() {
+        super("Bookstore", "BookIconSmall.png", "");
         try {
             jbInit();
         } catch(Exception ex) {
             ErrorViewer.showError(ex);
         }
-        
-        shopsGUI = parent;
-        
+       
         setup();
-        
-        //for some reason, the Bazaar window does not return when closing with X
-        //for now, just disable X closing:
-        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); 
-        
-        Dimension screen = this.getToolkit().getScreenSize();
-        setBounds(screen.width / 3, 100, //position
-                530, 430); //size
-        setVisible(true);
-        
-        
     }
     
     //only do this ONCE:
@@ -118,7 +98,7 @@ public class QuestBookStall extends QuestAbstractBazaarStall{
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setText("Library");
         titleLabel.setBounds(new Rectangle(130, 5, 198, 60));
-        this.getContentPane().setLayout(null);
+        stallPanel.setLayout(null);
         
         /*
         potionStatsLabel.setFont(new Font("sserif", Font.BOLD, 12));
@@ -144,30 +124,19 @@ public class QuestBookStall extends QuestAbstractBazaarStall{
         sleightOfHandIconLabel.setBounds(new Rectangle(300, 135, 128, 128));
         sleightOfHandIconLabel.setIconTextGap(0);
         
-        //String fileName = "LeafIconSmall.png";
-    	//ImageIcon icon = getIcon(fileName);
-    	
         sleightOfHandButton.setEnabled(true);
     	if (questData.getCredits() < getPrice() || questData.getSleightOfHandLevel() >= 1)
     		sleightOfHandButton.setEnabled(false);
        
-        quitButton.setBounds(new Rectangle(140, 297, 120, 50));
-        quitButton.setText("Quit");
-        quitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                quitButton_actionPerformed(e);
-            }
-        });
 
 
         //jPanel2.add(quitButton, null);
-        this.getContentPane().add(sleightOfHandButton, null);
-        this.getContentPane().add(titleLabel, null);
-        this.getContentPane().add(sleightOfHandDescLabel, null);
-        this.getContentPane().add(sleightOfHandIconLabel, null);
-        this.getContentPane().add(sleightOfHandPriceLabel, null);
-        this.getContentPane().add(creditsLabel, null);
-        this.getContentPane().add(quitButton,null);
+        stallPanel.add(sleightOfHandButton, null);
+        stallPanel.add(titleLabel, null);
+        stallPanel.add(sleightOfHandDescLabel, null);
+        stallPanel.add(sleightOfHandIconLabel, null);
+        stallPanel.add(sleightOfHandPriceLabel, null);
+        stallPanel.add(creditsLabel, null);
     }
     
     void learnEstatesButton_actionPerformed(ActionEvent e) throws Exception {
@@ -181,25 +150,6 @@ public class QuestBookStall extends QuestAbstractBazaarStall{
 	    	jbInit();
     }
     
-    private ImageIcon getIcon(String fileName)
-    {
-    	File base = ForgeProps.getFile(IMAGE_ICON);
-    	File file = new File(base, fileName);
-    	ImageIcon icon = new ImageIcon(file.toString());
-    	return icon;
-    }
-    
-    void quitButton_actionPerformed(ActionEvent e) {
-    	QuestData.saveData(questData);
-        //new Gui_Shops();
-    	shopsGUI.setVisible(true);
-    	
-        dispose();
-       
-    }
-    
-    void this_windowClosing(WindowEvent e) {
-        quitButton_actionPerformed(null);
-    }
+
     
 }

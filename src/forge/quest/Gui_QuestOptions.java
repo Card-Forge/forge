@@ -1,28 +1,18 @@
 package forge.quest;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Rectangle;
+
+import forge.AllZone;
+import forge.Gui_NewGame;
+import forge.QuestData;
+import forge.error.ErrorViewer;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
-
-import forge.*;
-import forge.error.ErrorViewer;
 
 
 public class Gui_QuestOptions extends JFrame {
@@ -203,7 +193,7 @@ public class Gui_QuestOptions extends JFrame {
         AllZone.QuestData = QuestData.loadData();
         AllZone.QuestData.setDifficultyIndex();
         dispose();
-        new Gui_Quest();
+        new QuestMainFrame();
     }
     
     void newQuestButton_actionPerformed(ActionEvent e) {
@@ -245,7 +235,7 @@ public class Gui_QuestOptions extends JFrame {
         AllZone.QuestData = questData;
         
         dispose();
-        new Gui_Quest();
+        new QuestMainFrame();
     }
     
     //copy AI decks from old to newData

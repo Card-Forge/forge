@@ -1,22 +1,16 @@
 package forge.quest.bazaar;
 
-import forge.AllZone;
 import forge.QuestData;
 import forge.error.ErrorViewer;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.WindowEvent;
-import java.io.File;
 
 public class QuestGearStall extends QuestAbstractBazaarStall{
 	
 	private static final long serialVersionUID = -2124386606846472829L;
 	
-	private JFrame 			  shopsGUI;
 	private JLabel            titleLabel        = new JLabel();
 	
 	private JLabel 			  gearDescLabel  = new JLabel();
@@ -29,30 +23,18 @@ public class QuestGearStall extends QuestAbstractBazaarStall{
 	private ImageIcon		  gearIcon	  	= new ImageIcon();
 	    
 	private JButton           gearButton 	= new JButton();
-    private JButton			  quitButton 	    = new JButton();
     
-    private QuestData 		  questData 	    = AllZone.QuestData;
     
-    public QuestGearStall(JFrame parent) {
+    public QuestGearStall() {
+        super("Gear","GearIconSmall.png","");
+        
         try {
             jbInit();
         } catch(Exception ex) {
             ErrorViewer.showError(ex);
         }
         
-        shopsGUI = parent;
-        
         setup();
-        
-        //for some reason, the Bazaar window does not return when closing with X
-        //for now, just disable X closing:
-        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); 
-        
-        Dimension screen = this.getToolkit().getScreenSize();
-        setBounds(screen.width / 3, 100, //position
-                530, 430); //size
-        setVisible(true);
-        
         
     }
     
@@ -131,7 +113,7 @@ public class QuestGearStall extends QuestAbstractBazaarStall{
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setText("Adventurer's Gear");
         titleLabel.setBounds(new Rectangle(155, 5, 198, 60));
-        this.getContentPane().setLayout(null);
+        stallPanel.setLayout(null);
         
         /*
         potionStatsLabel.setFont(new Font("sserif", Font.BOLD, 12));
@@ -164,22 +146,14 @@ public class QuestGearStall extends QuestAbstractBazaarStall{
     	if (questData.getCredits() < getPrice() || questData.getGearLevel() >= 2)
     		gearButton.setEnabled(false);
        
-        quitButton.setBounds(new Rectangle(140, 297, 120, 50));
-        quitButton.setText("Quit");
-        quitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                quitButton_actionPerformed(e);
-            }
-        });
 
         //jPanel2.add(quitButton, null);
-        this.getContentPane().add(gearButton, null);
-        this.getContentPane().add(titleLabel, null);
-        this.getContentPane().add(gearDescLabel, null);
-        this.getContentPane().add(gearIconLabel, null);
-        this.getContentPane().add(gearPriceLabel, null);
-        this.getContentPane().add(creditsLabel, null);
-        this.getContentPane().add(quitButton,null);
+        stallPanel.add(gearButton, null);
+        stallPanel.add(titleLabel, null);
+        stallPanel.add(gearDescLabel, null);
+        stallPanel.add(gearIconLabel, null);
+        stallPanel.add(gearPriceLabel, null);
+        stallPanel.add(creditsLabel, null);
     }
     
     void learnEstatesButton_actionPerformed(ActionEvent e) throws Exception {
@@ -192,26 +166,5 @@ public class QuestGearStall extends QuestAbstractBazaarStall{
 	    	QuestData.saveData(questData);
 	    	jbInit();
     }
-    
-    private ImageIcon getIcon(String fileName)
-    {
-    	File base = ForgeProps.getFile(IMAGE_ICON);
-    	File file = new File(base, fileName);
-    	ImageIcon icon = new ImageIcon(file.toString());
-    	return icon;
-    }
-    
-    void quitButton_actionPerformed(ActionEvent e) {
-    	QuestData.saveData(questData);
-        //new Gui_Shops();
-    	shopsGUI.setVisible(true);
-    	
-        dispose();
-       
-    }
-    
-    void this_windowClosing(WindowEvent e) {
-        quitButton_actionPerformed(null);
-    }
-    
+
 }

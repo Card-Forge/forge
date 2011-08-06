@@ -1,7 +1,5 @@
 package forge.quest.bazaar;
 
-import forge.AllZone;
-import forge.QuestData;
 import forge.error.ErrorViewer;
 
 import javax.swing.*;
@@ -23,7 +21,6 @@ public class QuestNurseryStall extends QuestAbstractBazaarStall{
 	private ImageIcon		  plantIcon		   = new ImageIcon();
 	    
 	private JButton           buyPlantButton   = new JButton();
-    private QuestData 		  questData 	   = AllZone.QuestData;
     
     public QuestNurseryStall() {
         super("Nursery", "LeafIconSmall.png", "");
