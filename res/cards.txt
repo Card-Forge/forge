@@ -1,3 +1,10 @@
+Phantom Centaur
+2 G G
+Creature Centaur Spirit
+Phantom Centaur enters the battlefield with three +1/+1 counters on it. If damage would be dealt to Phantom Centaur, prevent that damage. Remove a +1/+1 counter from Phantom Centaur.
+2/0
+Protection from black
+
 Phantom Nishoba
 5 G W
 Creature Cat Beast Spirit

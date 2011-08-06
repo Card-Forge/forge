@@ -9506,7 +9506,13 @@ public class GameActionUtil
 			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c
 					.getController());
 			CardList cenns = new CardList(play.getCards());
-			cenns = cenns.getName("Wizened Cenn");
+			cenns = cenns.filter(new CardListFilter()
+			{
+				public boolean addCard(Card c)
+				{
+					return c.getName().equals("Wizened Cenn") && (c.getType().contains("Kithkin") ||c.getKeyword().contains("Changeling"));
+				}
+			});
 			return cenns.size()-1;
 
 		}
@@ -9514,7 +9520,6 @@ public class GameActionUtil
 		public void execute()
 		{
 
-			
 			CardList creature = new CardList();
 			creature.addAll(AllZone.Human_Play.getCards());
 			creature.addAll(AllZone.Computer_Play.getCards());

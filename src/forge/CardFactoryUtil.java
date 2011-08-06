@@ -2374,6 +2374,52 @@ public class CardFactoryUtil
 	  return s;
   }
   
+  public static String getMostProminentColor(CardList list)
+  {
+	  
+	  Map<String,Integer> map = new HashMap<String,Integer>();
+	  String s = "";
+	  
+	  for (int i=0;i<list.size();i++)
+	  {
+		  Card c = list.get(i);
+		  ArrayList<String> colorList = CardUtil.getColors(c);
+		  
+		  for (String color : colorList)
+		  {
+			  if (color.equals("colorless"))
+				  ;
+			  else if (!map.containsKey(color))
+				  map.put(color, 1);
+			  else 
+			  {
+				  map.put(color, map.get(color)+1);
+			  }
+		  }
+	  }//for
+	  
+	  int max = 0;
+	  String maxColor = "";
+	  
+	  for (int i=0;i<map.size();i++)
+	  {
+		  Iterator<String> iter = map.keySet().iterator();
+		  while(iter.hasNext()) {
+			  String color = iter.next();
+		      System.out.println(color + " - " + map.get(color));
+		      
+		      if (max < map.get(color))
+		      {
+		    	  max = map.get(color);
+		    	  maxColor = color;
+		      }
+		  }
+	  }
+	  s = maxColor;
+	  return s;
+  }
+  
+  
   
   public static String chooseCreatureTypeAI(Card c)
   {

@@ -17718,7 +17718,7 @@ public class CardFactory_Creatures {
 
 	                          String color = new String();
 	                          String[] colors = Constant.Color.Colors;
-	                          colors[colors.length-1] = "";
+	                          colors[colors.length-1] = null;
 	                          
 	                          Object o = AllZone.Display.getChoice("Choose color", colors);
 	                          color = (String)o;
@@ -17726,7 +17726,24 @@ public class CardFactory_Creatures {
 	        			  }
 	        			  else
 	        			  {
+	        				  PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Human);
+	        				  PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human);
+	        				  CardList list = new CardList();
+	        				  list.addAll(lib.getCards());
+	        				  list.addAll(hand.getCards());
 	        				  
+	        				  if (list.size() > 0)
+	        				  {  
+	        					  String color = CardFactoryUtil.getMostProminentColor(list);
+	        					  if (!color.equals(""))
+	        						  card.setChosenColor(color);
+	        					  else
+	        						  card.setChosenColor("black");
+	        				  }
+	        				  else 
+	        				  {
+	        					  card.setChosenColor("black");
+	        				  }
 	        			  }
 	        		  }
 	        	  };
@@ -17743,6 +17760,7 @@ public class CardFactory_Creatures {
 	    	      card.addComesIntoPlayCommand(comesIntoPlay);
 	       }//*************** END ************ END **************************
 	       
+	     //*************** START *********** START **************************
 	      else if (cardName.equals("Phantom Nishoba"))
 	      {
 	    	  final Card newCard = new Card()
@@ -17785,6 +17803,48 @@ public class CardFactory_Creatures {
     	      
 		      return newCard;
 	      }
+	       
+	      //*************** START *********** START **************************
+	      else if (cardName.equals("Phantom Centaur"))
+	      {
+	    	  final Card newCard = new Card()
+	    	  {
+		    	  public void addDamage(final int n)
+			      {
+		    		  this.subtractCounter(Counters.P1P1, 1);
+			      }
+	    	  };
+	    	  newCard.setOwner(card.getOwner());
+		      newCard.setController(card.getController());
+
+		      newCard.setManaCost(card.getManaCost());
+		      newCard.setName(card.getName());
+		      newCard.addType("Creature");
+		      newCard.addType("Centaur");
+		      newCard.addType("Spirit");
+		      newCard.setText(card.getSpellText());
+		      newCard.setBaseAttack(card.getBaseAttack());
+		      newCard.setBaseDefense(card.getBaseDefense());
+		      
+		      newCard.addIntrinsicKeyword("Protection from black");
+
+		      newCard.addSpellAbility(new Spell_Permanent(newCard));
+		      
+		      Command comesIntoPlay = new Command()
+    	      {
+
+				private static final long serialVersionUID = 4217898403350036317L;
+
+				public void execute()
+    	        {
+    	           newCard.addCounter(Counters.P1P1, 3);
+    	        }
+    	      };//Command
+		      
+    	      newCard.addComesIntoPlayCommand(comesIntoPlay);
+    	      
+		      return newCard;
+	      }//*************** END ************ END **************************
 	       
 	       
 	      // Cards with Cycling abilities
