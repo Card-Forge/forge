@@ -38,6 +38,13 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+paralyzing_grasp.jpg		http://www.wizards.com/global/images/magic/general/paralyzing_grasp.jpg
+artifact_ward.jpg		http://www.wizards.com/global/images/magic/general/artifact_ward.jpg
+black_ward.jpg		http://www.wizards.com/global/images/magic/general/black_ward.jpg
+blue_ward.jpg		http://www.wizards.com/global/images/magic/general/blue_ward.jpg
+green_ward.jpg		http://www.wizards.com/global/images/magic/general/green_ward.jpg
+red_ward.jpg		http://www.wizards.com/global/images/magic/general/red_ward.jpg
+white_ward.jpg		http://www.wizards.com/global/images/magic/general/white_ward.jpg
 unquestioned_authority.jpg		http://www.wizards.com/global/images/magic/general/unquestioned_authority.jpg
 vampiric_embrace.jpg		http://www.wizards.com/global/images/magic/general/vampiric_embrace.jpg
 web.jpg		http://www.wizards.com/global/images/magic/general/web.jpg

@@ -1,3 +1,51 @@
+Paralyzing Grasp
+2 U
+Enchantment Aura
+Enchanted creature doesn't untap during its controller's untap step.
+Enchant creature
+
+Artifact Ward
+W
+Enchantment Aura
+Enchanted creature has protection from artifacts. This effect doesn't remove Artifact Ward.
+Enchant creature
+enPump:Protection from artifacts
+
+Black Ward
+W
+Enchantment Aura
+Enchanted creature has protection from black. This effect doesn't remove Black Ward.
+Enchant creature
+enPump:Protection from black
+
+Blue Ward
+W
+Enchantment Aura
+Enchanted creature has protection from blue. This effect doesn't remove Blue Ward.
+Enchant creature
+enPump:Protection from blue
+
+Green Ward
+W
+Enchantment Aura
+Enchanted creature has protection from green. This effect doesn't remove Green Ward.
+Enchant creature
+enPump:Protection from green
+
+Red Ward
+W
+Enchantment Aura
+Enchanted creature has protection from red. This effect doesn't remove Red Ward.
+Enchant creature
+enPump:Protection from red
+
+White Ward
+W
+Enchantment Aura
+Enchanted creature has protection from white. This effect doesn't remove White Ward.
+Enchant creature
+enPump:Protection from white
+
 Unquestioned Authority
 2 W
 Enchantment Aura
@@ -4334,6 +4382,7 @@ Treetop Bracers
 Enchantment Aura
 Enchanted creature gets +1/+1 and can't be blocked except by creatures with flying.
 Enchant creature
+enPump:+1/+1/This creature can't be blocked except by creatures with flying
 
 Silhana Ledgewalker
 1 G
@@ -4906,8 +4955,9 @@ Tiger Claws
 2 G
 Enchantment Aura
 Enchanted creature gets +1/+1 and has trample.
-Enchant creature
 Flash
+Enchant creature
+enPump:+1/+1/Trample
 
 Mageta's Boon
 1 W
@@ -4937,6 +4987,7 @@ W
 Enchantment Aura
 Enchanted creature has vigilance.
 Enchant creature
+enPump:Vigilance
 
 Mask of Law and Grace
 W

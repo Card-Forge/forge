@@ -1122,7 +1122,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    CardList list = new CardList(AllZone.Human_Play.getCards());
                     list = list.getType("Creature");
                     
                     if(list.isEmpty()) return false;
@@ -1433,7 +1433,7 @@ class CardFactory_Auras {
                 public void execute() {
                     if(card.isEnchanting()) {
                         Card crd = card.getEnchanting().get(0);
-                        crd.addExtrinsicKeyword("This card does not untap during your untap phase");
+                        crd.addExtrinsicKeyword("This card doesn't untap during your untap step.");
                     }
                 }//execute()
             };//Command
@@ -1447,7 +1447,7 @@ class CardFactory_Auras {
                     if(card.isEnchanting()) {
                         Card crd = card.getEnchanting().get(0);
                         
-                        crd.removeExtrinsicKeyword("This card does not untap during your untap phase");
+                        crd.removeExtrinsicKeyword("This card doesn't untap during your untap step.");
                     }
                     
                 }//execute()
@@ -3161,7 +3161,9 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-
+        
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Tiger Claws")) {
             final SpellAbility spell = new Spell(card) {
@@ -3260,7 +3262,9 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-
+*/
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Treetop Bracers")) {
             final SpellAbility spell = new Spell(card) {
@@ -3352,7 +3356,7 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-
+*/
         
 /*
         //*************** START *********** START **************************
