@@ -3039,7 +3039,6 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					player_d.addDamage(1, F_card);
-					//AllZone.GameAction.addDamage(player_d, F_card, 1);
 				}
 			};// Ability
 			
@@ -3468,7 +3467,6 @@ public class GameActionUtil {
 				public void execute() {
 					if(c.getName().equals("Cosmic Horror")) {
 						Player player = c.getController();
-						//AllZone.GameAction.addDamage(player, c, 7);
 						player.addDamage(7, c);
 					}
 					AllZone.GameAction.destroy(c);
@@ -3794,7 +3792,6 @@ public class GameActionUtil {
 
 				private void tapAndDamage(Player player) {
 					c.tap();
-					//AllZone.GameAction.addDamage(player, c, 2);
 					player.addDamage(2, c);
 				}
 			};
@@ -3841,7 +3838,6 @@ public class GameActionUtil {
 			final Ability sevenDamage = new Ability(c, "") {
 				@Override
 				public void resolve() {
-					//AllZone.GameAction.addDamage(player, c, 7);
 					player.addDamage(7, c);
 				}
 			};
@@ -4597,7 +4593,6 @@ public class GameActionUtil {
 			@Override
 			public void resolve() {
 				Player player = crd.getController();
-				//AllZone.GameAction.addDamage(player, crd, 2);
 				player.addDamage(2, crd);
 			}
 		};
@@ -4800,7 +4795,6 @@ public class GameActionUtil {
                             && CardFactoryUtil.canTarget(valakutCard, getTargetCard())) getTargetCard().addDamage(3,
                             valakutCard);
                 } else {
-                	//AllZone.GameAction.addDamage(getTargetPlayer(), valakutCard, 3);
                 	getTargetPlayer().addDamage(3, valakutCard);
                 }
             }//resolve()
@@ -8249,7 +8243,6 @@ public class GameActionUtil {
 					@Override
 					public void resolve() {
 						if(damage>0){
-							//AllZone.GameAction.addDamage(player, src, damage);
 							player.addDamage(damage,src);
 						}
 					}
@@ -8486,7 +8479,6 @@ public class GameActionUtil {
 				Ability ability = new Ability(src, "0") {
 					@Override
 					public void resolve() {
-						//AllZone.GameAction.addDamage(player, src, damage);
 						player.addDamage(damage, src);
 					}
 				};// Ability
@@ -8519,7 +8511,6 @@ public class GameActionUtil {
 				Ability ability = new Ability(source, "0") {
 					@Override
 					public void resolve() {
-						//AllZone.GameAction.addDamage(player, source, damage);
 						player.addDamage(damage, source);
 					}
 				};// Ability
@@ -8562,7 +8553,6 @@ public class GameActionUtil {
 			Ability ability = new Ability(src, "0") {
 				@Override
 				public void resolve() {
-					//AllZone.GameAction.addDamage(player, src, damage);
 					player.addDamage(damage, src);
 				}
 			};// Ability
@@ -8686,8 +8676,6 @@ public class GameActionUtil {
 	private static void upkeep_Felidar_Sovereign() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-
-		//PlayerLife plife = AllZone.GameAction.getPlayerLife(player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Felidar Sovereign");
@@ -8868,7 +8856,6 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					Player opponent = player.getOpponent();
-					//PlayerLife oppLife = AllZone.GameAction.getPlayerLife(opponent);
 
 					if (opponent.equals(AllZone.ComputerPlayer)) {
 						int gameNumber = 0;
@@ -9338,7 +9325,6 @@ public class GameActionUtil {
 			Ability ability = new Ability(blaze.get(i), "0") {
 				@Override
 				public void resolve() {
-					//AllZone.GameAction.addDamage(player, Source, 1);
 					player.addDamage(1, Source);
 				}
 			};// ability
@@ -10061,7 +10047,6 @@ public class GameActionUtil {
 						if(targetc != null) {
 							if(AllZone.GameAction.isCardInPlay(targetc)) targetc.addDamage(hondlist.size(), card);
 						} else {
-							//AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, hondlist.size());
 							AllZone.HumanPlayer.addDamage(hondlist.size(), card);
 						}
 					}
@@ -11325,7 +11310,6 @@ public class GameActionUtil {
 					            	getTargetCard().addDamage(1, c);
 					          }
 					          else {
-					        	  //AllZone.GameAction.addDamage(getTargetPlayer(), c, 1);
 					        	  getTargetPlayer().addDamage(1, c);
 					          }
 					        }//resolve()
