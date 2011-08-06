@@ -1906,67 +1906,16 @@ public class CombatUtil {
     }
     
     public static void checkDeclareBlockers(CardList cl) {
-    	//System.out.println("Phase during checkDeclareBlockers: " + AllZone.Phase.getPhase());
-        	for (Card c:cl)
-        	{
-        		AllZone.GameAction.checkWheneverKeyword(c,"Blocks",null);
-        		
-        		if (!c.getCreatureBlockedThisCombat()) {
-                	for(Ability ab:CardFactoryUtil.getBushidoEffects(c)) {
-                		AllZone.Stack.add(ab);
-                	}
-                }
-        		
-                if (c.getKeyword().contains("Defender") && !c.getCreatureBlockedThisCombat())
-                {
-                    final Card crd = c;
-                    CardList pcs = AllZoneUtil.getPlayerCardsInPlay(c.getController(), "Perimeter Captain");
-                    for (int i = 0; i < pcs.size();i++)
-                    {
-                        final Card pc = pcs.get(i);
-                        Ability ability = new Ability(pcs.get(i), "0")
-                        {
-                            public void resolve()
-                            {
-                                crd.getController().gainLife(2, pc);
-                            }
-                        };
-                        
-                        StringBuilder sb = new StringBuilder();
-                        sb.append(pcs.get(i)).append(" - ").append(c.getController()).append(" gains 2 life.");
-                        ability.setStackDescription(sb.toString());
-                        
-                        if (c.getController().equals(AllZone.HumanPlayer)) {
-                            StringBuilder question = new StringBuilder();
-                            question.append("Your creature ").append(c).append(" blocked. Gain 2 life from ");
-                            question.append(pcs.get(i)).append("?");
-                            
-                            if (GameActionUtil.showYesNoDialog(pcs.get(i), question.toString())) {
-                                AllZone.Stack.add(ability);
-                            }
-                        }
-                        else
-                            AllZone.Stack.add(ability);
-                    }
-                }// Perimeter Captain
-	        	
-	            if(c.getName().equals("Jedit Ojanen of Efrava") && !c.getCreatureBlockedThisCombat()) {
-	            	CardFactoryUtil.makeToken("Cat Warrior", "G 2 2 Cat Warrior", c.getController(), "G", new String[] {"Creature", "Cat", "Warrior"},
-	            			2, 2, new String[] {"Forestwalk"});
-	                
-	            }//Jedit
-	            
-	            else if(c.getName().equals("Shield Sphere") && !c.getCreatureBlockedThisCombat()) {
-	                c.addCounter(Counters.M0M1, 1);
-	                
-	            }//Shield Sphere
-	            
-	            else if(c.getName().equals("Meglonoth") && !c.getCreatureBlockedThisCombat()) {
-	            	c.getController().getOpponent().addDamage(c.getNetAttack(), c);
-	            }//Meglonoth
-	            c.setCreatureBlockedThisCombat(true);
-        	}//for
-            
+    	for (Card c:cl) {
+    		if (!c.getCreatureBlockedThisCombat()) {
+    			for(Ability ab:CardFactoryUtil.getBushidoEffects(c)) {
+    				AllZone.Stack.add(ab);
+    			}
+    		}
+    		
+    		c.setCreatureBlockedThisCombat(true);
+    	}//for
+
     }//checkDeclareBlockers
     
     public static void checkBlockedAttackers(final Card a, Card b) {
@@ -2184,30 +2133,6 @@ public class CombatUtil {
         } else if (a.getName().equals("Vedalken Ghoul") && !a.getCreatureBlockedThisCombat()) {
              b.getController().loseLife(4, a);
         }
-        
-        /*
-        else if ((a.getName().equals("Chambered Nautilus") || a.getName().equals("Saprazzan Heir") 
-                || a.getName().equals("Drelnoch")) && !a.getCreatureBlockedThisCombat()) {
-            Player player = a.getController();
-            int numCards = 3;
-            if (a.getName().equals("Drelnoch")) numCards = 2;
-            if (a.getName().equals("Chambered Nautilus")) numCards = 1;
-            int computerHandSize = AllZoneUtil.getCardsInZone(Constant.Zone.Hand, AllZone.ComputerPlayer).size();
-            int computerLibrarySize = AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.ComputerPlayer).size();
-            int computerMaxHandSize = AllZone.ComputerPlayer.getMaxHandSize();
-            
-            if (player.isHuman()) {
-                StringBuilder question = new StringBuilder();
-                question.append("Draw ").append(numCards).append(" cards?");
-                if (GameActionUtil.showYesNoDialog(a, question.toString())) {
-                    player.drawCards(numCards);
-                }
-            }// player isComputer()
-            else if (computerLibrarySize >= 3 + numCards && computerHandSize < computerMaxHandSize) {
-                player.drawCards(numCards);
-            }
-        }// if Saprazzan Heir or Drelnoch or Chambered Nautilus was blocked
-        */        
         
         else if (b.getName().equals("Alaborn Zealot") || b.getName().equals("Loyal Sentry")) {
         	final Card blocker = b; 
