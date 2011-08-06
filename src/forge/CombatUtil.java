@@ -232,16 +232,12 @@ public class CombatUtil {
         	if(!CardUtil.getColors(blocker).contains(Constant.Color.Black))return false; 
         }
         
-//      if(attacker.getName().equals("Goldmeadow Dodger")) return blocker.getNetAttack() < 4;
+        if (attacker.getKeyword().contains("CARDNAME can't be blocked by Walls.") && blocker.isType("Wall")) return false;
         
-//      if(attacker.getName().equals("Juggernaut") && blocker.getType().contains("Wall")) return false;
-        
-        if (attacker.getKeyword().contains("CARDNAME can't be blocked by Walls.") && blocker.getType().contains("Wall")) return false;
-        
-        if (attacker.getKeyword().contains("CARDNAME can't be blocked except by Walls.") && !blocker.getType().contains("Wall")) return false;
+        if (attacker.getKeyword().contains("CARDNAME can't be blocked except by Walls.") && !blocker.isType("Wall")) return false;
         
         if (attacker.getKeyword().contains("CARDNAME can't be blocked except by Walls and/or creatures with flying.") && 
-        		!(blocker.getType().contains("Wall") || blocker.getKeyword().contains("Flying"))) return false;
+        		!(blocker.isType("Wall") || blocker.getKeyword().contains("Flying"))) return false;
         
         if (blocker.getCounters(Counters.BRIBERY) > 0 && isCardInPlay("Gwafa Hazid, Profiteer"))
         	return false;
