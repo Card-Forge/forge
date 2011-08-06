@@ -7,4 +7,5 @@ A:AB$Mana | Cost$ R Return<1/CARDNAME> | Produced$ 2 R | Amount$ 1 | SorcerySpee
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grinning_ignus.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/116.jpg
 End

@@ -9,4 +9,5 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ Self
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blitz_hellion.jpg
+SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/49.jpg
 End

@@ -6,4 +6,5 @@ A:AB$ChangeZoneAll | Cost$ 3 T Sac<1/CARDNAME> | ChangeType$ Enchantment.YouOwn 
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_chimes.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/292.jpg
 End

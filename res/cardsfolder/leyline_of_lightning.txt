@@ -6,4 +6,5 @@ T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execut
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 1 | Tgt$ TgtP | NumDmg$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_of_lightning.jpg
+SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/68.jpg
 End

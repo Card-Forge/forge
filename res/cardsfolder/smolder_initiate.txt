@@ -7,4 +7,5 @@ T:Mode$SpellCast | ValidCard$ Card.Black | TriggerZones$ Battlefield | Execute$ 
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Tgt$ TgtP | LifeAmount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smolder_initiate.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/78.jpg
 End

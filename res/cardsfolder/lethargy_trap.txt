@@ -7,4 +7,5 @@ A:SP$PumpAll | Cost$ U | ValidCards$ Creature.attacking | NumAtt$ -3 | IsPresent
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lethargy_trap.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/51.jpg
 End

@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Forest | Tapped$ True | ChangeNum$ 3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seedguide_ash.jpg
+SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/235.jpg
 End

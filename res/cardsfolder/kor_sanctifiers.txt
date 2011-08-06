@@ -8,4 +8,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigKicker:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Kor_sanctifiers.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/22.jpg
 End

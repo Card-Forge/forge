@@ -6,4 +6,5 @@ A:SP$ChangeZoneAll | Cost$ 5 W W | ChangeType$ Artifact | Origin$ Graveyard | De
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roar_of_reclamation.jpg
+SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/14.jpg
 End

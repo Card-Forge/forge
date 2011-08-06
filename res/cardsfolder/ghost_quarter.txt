@@ -8,4 +8,5 @@ SVar:DBChange:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | Optio
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghost_quarter.jpg
+SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/173.jpg
 End

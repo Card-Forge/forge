@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Tgt$ TgtP | LifeAmount$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infectious_host.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/91.jpg
 End

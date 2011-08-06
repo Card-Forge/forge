@@ -8,4 +8,5 @@ SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Exile | SubAbility$ S
 SVar:DBPutCounter:DB$PutCounter | CounterType$ TIME | CounterNum$ 3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reality_strobe.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/43.jpg
 End

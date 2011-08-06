@@ -10,4 +10,5 @@ SVar:TrigKicker:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select targ
 SVar:PlayMain1:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Kor_Aeronaut.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/17.jpg
 End

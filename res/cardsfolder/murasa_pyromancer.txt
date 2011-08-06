@@ -9,4 +9,5 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtC | NumDmg$ NumAllies | TgtPro
 SVar:NumAllies:Count$Valid Ally.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murasa_pyromancer.jpg
 SVar:Rarity:Uncommon
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/139.jpg
 End

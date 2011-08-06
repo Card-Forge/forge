@@ -6,4 +6,5 @@ T:Mode$ SpellCast | ValidCard$ Card.Red | TriggerZones$ Battlefield | Execute$ T
 SVar:TrigDealDamage:AB$DealDamage | Cost$ R | Tgt$ TgtCP | NumDmg$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_cloud.jpg
+SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/87.jpg
 End

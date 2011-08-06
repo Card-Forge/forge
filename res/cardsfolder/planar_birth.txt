@@ -6,4 +6,5 @@ A:SP$ChangeZoneAll | Cost$ 1 W | ChangeType$ Land.Basic | Origin$ Graveyard | De
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_birth.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/31.jpg
 End

@@ -9,4 +9,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 3 | SubAbility$ SVar=DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/casting_of_bones.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/2.jpg|2
 End

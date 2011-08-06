@@ -8,4 +8,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ Triggered
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/false_demise.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/40.jpg|2
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/80.jpg
 End
