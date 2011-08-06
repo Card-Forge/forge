@@ -16292,7 +16292,7 @@ public class CardFactory implements NewConstants {
                             Copy.setToken(true);
                             Copy.setController(card.getController());
                             play.add(Copy); 
-                            AllZone.Display.showMessage("Hack for Legendaries going to the graveyard :)"); // Not Working + AI is stuffed
+                            AllZone.Display.showMessage("Hack for Legendaries going to the graveyard :)");
                     }//for
                     
                     }
