@@ -195,9 +195,14 @@ public class EndOfTurn implements java.io.Serializable
     		
     		AllZone.Stack.add(change);
     	}
-    	if(c.getCreatureAttackedThisTurn()) c.setCreatureAttackedThisTurn(false);
+    	
     }
     execute(at);
+    
+    CardList all2 = AllZoneUtil.getCardsInPlay();
+    for(Card c:all2) {
+    	if(c.getCreatureAttackedThisTurn()) c.setCreatureAttackedThisTurn(false);
+    }
         
   }//executeAt()
 
