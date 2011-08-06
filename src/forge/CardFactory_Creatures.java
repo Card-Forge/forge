@@ -3513,7 +3513,7 @@ public class CardFactory_Creatures {
             ability.setDescription(sb.toString());
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Steel Overseer")) {
         	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
@@ -3547,7 +3547,7 @@ public class CardFactory_Creatures {
             sb.append(cardName).append(" - Put a +1/+1 counter on each artifact creature you control.");
             ability.setStackDescription(sb.toString());
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Vedalken Plotter")) {
