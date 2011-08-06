@@ -1,3 +1,9 @@
+Earthbind
+R
+Enchantment Aura
+When Earthbind enters the battlefield, if enchanted creature has flying, Earthbind deals 2 damage to that creature and enchanted creature loses flying.
+Enchant creature
+
 Chainer, Dementia Master
 3 B B
 Legendary Creature Human Minion
@@ -132,44 +138,44 @@ As Meddling Mage enters the battlefield, name a nonland card. The named card can
 Shorecrasher Mimic
 1 GU
 Creature Shapeshifter
-Whenever you cast a spell that’s both green and blue, Shorecrasher Mimic becomes 5/3 and gains trample until end of turn.
+Whenever you cast a spell thatï¿½s both green and blue, Shorecrasher Mimic becomes 5/3 and gains trample until end of turn.
 2/1
 
 Woodlurker Mimic
 1 BG
 Creature Shapeshifter
-Whenever you cast a spell that’s both black and green, Woodlurker Mimic becomes 4/5 and gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)
+Whenever you cast a spell thatï¿½s both black and green, Woodlurker Mimic becomes 4/5 and gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)
 2/1
 
 Battlegate Mimic
 1 RW
 Creature Shapeshifter
-Whenever you cast a spell that’s both red and white, Battlegate Mimic becomes 4/2 and gains first strike until end of turn.
+Whenever you cast a spell thatï¿½s both red and white, Battlegate Mimic becomes 4/2 and gains first strike until end of turn.
 2/1
 
 Nightsky Mimic
 1 WB
 Creature Shapeshifter
-Whenever you cast a spell that’s both white and black, Nightsky Mimic becomes 4/4 and gains flying until end of turn.
+Whenever you cast a spell thatï¿½s both white and black, Nightsky Mimic becomes 4/4 and gains flying until end of turn.
 2/1
 
 Riverfall Mimic
 1 UR
 Creature Shapeshifter
-Whenever you cast a spell that’s both blue and red, Riverfall Mimic becomes 3/3 and is unblockable until end of turn.
+Whenever you cast a spell thatï¿½s both blue and red, Riverfall Mimic becomes 3/3 and is unblockable until end of turn.
 2/1
 
 Sapling of Colfenor
 3 BG BG
 Legendary Creature Treefolk Shaman
-Whenever Sapling of Colfenor attacks, reveal the top card of your library. If it’s a creature card, you gain life equal to that card’s toughness, lose life equal to its power, then put it into your hand.
+Whenever Sapling of Colfenor attacks, reveal the top card of your library. If itï¿½s a creature card, you gain life equal to that cardï¿½s toughness, lose life equal to its power, then put it into your hand.
 2/5
 Indestructible
 
 Dovescape
 3 WU WU WU
 Enchantment
-Whenever a player casts a noncreature spell, counter that spell. That player puts X 1/1 white and blue Bird creature tokens with flying onto the battlefield, where X is the spell’s converted mana cost.
+Whenever a player casts a noncreature spell, counter that spell. That player puts X 1/1 white and blue Bird creature tokens with flying onto the battlefield, where X is the spellï¿½s converted mana cost.
 
 Lurking Informant
 1 UB
@@ -12774,7 +12780,7 @@ Flying
 Arashi, the Sky Asunder
 3 G G
 Legendary Creature Spirit
-(NOTE: "X G, T: Arashi, the Sky Asunder deals X damage to target creature with flying. Channel Ñ X G G, Discard Arashi: Arashi deals X damage to each creature with flying." not implemented.)
+(NOTE: "X G, T: Arashi, the Sky Asunder deals X damage to target creature with flying. Channel ï¿½ X G G, Discard Arashi: Arashi deals X damage to each creature with flying." not implemented.)
 5/5
 
 Spitting Spider

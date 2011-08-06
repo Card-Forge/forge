@@ -119,6 +119,14 @@ public class CardList implements Iterable<Card>
 		}
 	return c;
     }//getType()
+	public CardList getKeyword(final String keyword) {
+		return this.filter(new CardListFilter(){
+			public boolean addCard(Card c){
+				return c.getKeyword().contains(keyword);
+			}
+		});
+	}
+	
     public CardList filter(CardListFilter f)
     {
 	CardList c = new CardList();

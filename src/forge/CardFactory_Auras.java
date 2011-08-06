@@ -5654,7 +5654,119 @@ class CardFactory_Auras {
 
 		  spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
 		}//*************** END ************ END **************************
+	    
+		//*************** START *********** START **************************
+	    else if(cardName.equals("Earthbind"))
+	    {
+	      final SpellAbility spell = new Spell(card)
+	      {
 
+
+			private static final long serialVersionUID = 142389375702113977L;
+	       
+	       public boolean canPlayAI()
+	        {
+	          CardList list = new CardList(AllZone.Human_Play.getCards());
+	          list = list.getType("Creature").getKeyword("Flying");
+	          if(list.isEmpty())
+	           return false;
+
+	          CardListFilter f = new CardListFilter(){
+	        	  public boolean addCard(Card c){
+	        		  return c.getNetDefense() - c.getDamage() <= 2;
+	        	  }
+	          };
+	          if(!list.filter(f).isEmpty())
+	        	  list=list.filter(f);
+	          CardListUtil.sortAttack(list);
+
+	          for (int i=0;i<list.size();i++) {
+	             if (CardFactoryUtil.canTarget(card, list.get(i)))
+	             {
+	                setTargetCard(list.get(i));
+	                return true;
+	             }
+	          }
+	          return false;
+	        }//canPlayAI()
+	        public void resolve()
+	        {
+	          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+	          play.add(card);
+	         
+	          Card c = getTargetCard();
+	         
+	          if(AllZone.GameAction.isCardInPlay(c)  && CardFactoryUtil.canTarget(card, c))
+	          {
+	             card.enchantCard(c);
+	             System.out.println("Enchanted: " +getTargetCard());
+	          }
+	        }//resolve()
+	      };//SpellAbility
+	      card.clearSpellAbility();
+	      card.addSpellAbility(spell);
+
+	      final boolean[] badTarget = {true};
+		  Command onEnchant = new Command()
+	      {   
+
+			private static final long serialVersionUID = -5302506578307993978L;
+			
+			public void execute()
+	          {
+	             if (card.isEnchanting())
+	             {
+	                Card crd = card.getEnchanting().get(0);
+	                if(crd.getKeyword().contains("Flying"))
+	                {
+	                	badTarget[0] = false;
+	                	AllZone.GameAction.addDamage(crd, 2);
+	                	crd.removeIntrinsicKeyword("Flying");
+	                	crd.removeExtrinsicKeyword("Flying");
+	                }
+	                else badTarget[0] = true;
+	             }
+	          }//execute()
+	      };//Command
+
+
+	      Command onUnEnchant = new Command()
+	      {   
+
+			private static final long serialVersionUID = -6908757692588823391L;
+
+			public void execute()
+	          {
+	             if (card.isEnchanting() && !badTarget[0])
+	             {
+	                Card crd = card.getEnchanting().get(0);
+	                crd.addIntrinsicKeyword("Flying");
+	             }
+	         
+	          }//execute()
+	       };//Command
+	       
+	       Command onLeavesPlay = new Command()
+	       {
+
+			private static final long serialVersionUID = -7833240882415702940L;
+
+			public void execute()
+	          {
+	             if (card.isEnchanting())
+	             {
+	                Card crd = card.getEnchanting().get(0);
+	                card.unEnchantCard(crd);
+	             }
+	          }
+	       };
+
+	      card.addEnchantCommand(onEnchant);
+	      card.addUnEnchantCommand(onUnEnchant);
+	      card.addLeavesPlayCommand(onLeavesPlay);
+
+	      spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+	    }//*************** END ************ END **************************
 		
 	    return card;
 	}
