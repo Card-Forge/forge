@@ -303,6 +303,18 @@ public class AllZoneUtil {
 		return cards;	
 	}
 	
+	/**
+	 * gets a list of all cards of a certain type that a given player has in graveyard
+	 * @param player the player to check for cards in play
+	 * @param cardType the card type to check for
+	 * @return a CardList with all cards of a certain type the player has in graveyard
+	 */
+	public static CardList getPlayerTypeInGraveyard(final String player, final String cardType) {
+		CardList cards = getPlayerGraveyard(player);
+		cards = cards.getType(cardType);
+		return cards;
+	}
+	
 	////////////// cardListFilter for different types
 	public static CardListFilter artifacts = new CardListFilter() {
 		public boolean addCard(Card c) {
@@ -369,6 +381,25 @@ public class AllZoneUtil {
 		}
 	}
 	
+	public static int CompareTypeAmountInPlay(final String player, String type)
+	{
+		// returns the difference between player's
+		String opponent = AllZone.GameAction.getOpponent(player);
+		CardList playerList = getPlayerTypeInPlay(player, type);
+		CardList opponentList = getPlayerTypeInPlay(opponent, type);
+		return (playerList.size() - opponentList.size());
+	}
+	
+	public static int CompareTypeAmountInGraveyard(final String player, String type)
+	{
+		// returns the difference between player's
+		String opponent = AllZone.GameAction.getOpponent(player);
+		CardList playerList = getPlayerTypeInGraveyard(player, type);
+		CardList opponentList = getPlayerTypeInGraveyard(opponent, type);
+		return (playerList.size() - opponentList.size());
+	}
+	
+	
 	/**
 	 * a CardListFilter to get all cards that are tapped
 	 */
@@ -403,5 +434,5 @@ public class AllZoneUtil {
 		public boolean addCard(Card c) {
 			return !c.isEnchanted();
 		}
-	};
+	};	
 }

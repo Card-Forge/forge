@@ -104,6 +104,7 @@ public class GameActionUtil {
 		upkeep_Karma();
 		upkeep_Defense_of_the_Heart();
 		upkeep_Oath_of_Druids();
+		upkeep_Oath_of_Ghouls();
 		upkeep_Mycoloth();
 		upkeep_Spore_Counters();
 		upkeep_Vanishing();
@@ -4794,7 +4795,7 @@ public class GameActionUtil {
                         life.setLife(lifeGain);
 			}
 		};
-		ability.setStackDescription("Landfall — Whenever a land enters the battlefield under your control, you may have your life total become the number of charge counters on Eternity Vessel.");
+		ability.setStackDescription("Landfall: Whenever a land enters the battlefield under your control, you may have your life total become the number of charge counters on Eternity Vessel.");
 
 		if(c.getController().equals(Constant.Player.Human)) {
 			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
@@ -6929,51 +6930,41 @@ public class GameActionUtil {
 
 	private static void upkeep_Oversold_Cemetery() {
 		final String player = AllZone.Phase.getActivePlayer();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-		PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
 
-		CardList creatures = new CardList(graveyard.getCards());
-		creatures = creatures.getType("Creature");
+		CardList graveyardCreatures = AllZoneUtil.getPlayerTypeInGraveyard(player, "Creature");
+		CardList cemeteryList = AllZoneUtil.getCardsInPlay("Oversold Cemetery");
 
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Oversold Cemetery");
-
-		if(creatures.size() >= 4) {
-			for(int i = 0; i < list.size(); i++) {
-				Ability ability = new Ability(list.get(0), "0") {
+		if(graveyardCreatures.size() >= 4) {
+			for(int i = 0; i < cemeteryList.size(); i++) {
+				Ability ability = new Ability(cemeteryList.get(0), "0") {
 					@Override
 					public void resolve() {
+						CardList graveyardCreatures = AllZoneUtil.getPlayerTypeInGraveyard(player, "Creature");
 						PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
 						PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
 
-						CardList creatures = new CardList(graveyard.getCards());
-						creatures = creatures.getType("Creature");
-
-						if(creatures.size() >= 4) {
+						if(graveyardCreatures.size() >= 4) {
 							if(player.equals("Human")) {
 								Object o = AllZone.Display.getChoiceOptional("Pick a creature to return to hand",
-										creatures.toArray());
+										graveyardCreatures.toArray());
 								if(o != null) {
 									Card card = (Card) o;
 									graveyard.remove(card);
 									hand.add(card);
 								}
-							} else if(player.equals("Computer")) {
-								Card card = creatures.get(0);
+							} 
+							else if(player.equals("Computer")) {
+								Card card = graveyardCreatures.get(0);
 								graveyard.remove(card);
 								hand.add(card);
-
 							}
 						}
 					}
-
 				};// Ability
 				ability.setStackDescription("Oversold Cemetary returns creature from the graveyard to its owner's hand.");
 				AllZone.Stack.add(ability);
-
 			}
 		}
-
 	}//Oversold Cemetery
 
 	private static void upkeep_Reya() {
@@ -7448,7 +7439,46 @@ public class GameActionUtil {
 	            }
 	         
 	      }// if
-	   }// upkeep_Oath of Druids() 
+	   }// upkeep_Oath of Druids()
+	
+	private static void upkeep_Oath_of_Ghouls() {
+		final String player = AllZone.Phase.getActivePlayer();		
+		CardList oathList = AllZoneUtil.getCardsInPlay("Oath of Ghouls");
+		
+		if (AllZoneUtil.CompareTypeAmountInGraveyard(player, "Creature") > 0)
+		{
+			for(int i = 0; i < oathList.size(); i++)
+			{
+				Ability ability = new Ability(oathList.get(0), "0") {
+					@Override
+					public void resolve() {
+						CardList graveyardCreatures = AllZoneUtil.getPlayerTypeInGraveyard(player, "Creature");
+						PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
+						PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+
+						if(AllZoneUtil.CompareTypeAmountInGraveyard(player, "Creature") > 0) {
+							if(player.equals("Human")) {
+								Object o = AllZone.Display.getChoiceOptional("Pick a creature to return to hand",
+										graveyardCreatures.toArray());
+								if(o != null) {
+									Card card = (Card) o;
+									graveyard.remove(card);
+									hand.add(card);
+								}
+							} 
+							else if(player.equals("Computer")) {
+								Card card = graveyardCreatures.get(0);
+								graveyard.remove(card);
+								hand.add(card);
+							}
+						}
+					}
+				};// Ability
+				ability.setStackDescription("At the beginning of each player's upkeep, Oath of Ghouls returns a creature from their graveyard to owner's hand if they have more than an opponent.");
+				AllZone.Stack.add(ability);
+			}
+		}
+	}//Oath of Ghouls
 
 	private static void upkeep_Karma() {
 		final String player = AllZone.Phase.getActivePlayer();
