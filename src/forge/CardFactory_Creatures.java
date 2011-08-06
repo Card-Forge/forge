@@ -20357,6 +20357,57 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(cip);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START ************************
+        if(cardName.equals("Sharuum the Hegemon")) {
+            final SpellAbility ability = new Ability(card, "0") {
+                
+                @Override
+                public void chooseTargetAI() {
+                    CardList grave = getGraveArts();
+                    Card target = CardFactoryUtil.AI_getBestArtifact(grave);
+                    setTargetCard(target);
+                }
+                
+                @Override
+                public void resolve() {
+                    if(card.getController().equals(Constant.Player.Human)) {
+                        Card c = AllZone.Display.getChoice("Select card", getGraveArts().toArray());
+                        setTargetCard(c);
+                    }
+                    
+                    Card target = getTargetCard();
+                    
+                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    if(AllZone.GameAction.isCardInZone(target, grave)
+                    		&& CardFactoryUtil.canTarget(card, target)) 
+                    	AllZone.GameAction.moveTo(play, target);
+                }//resolve()
+                
+                CardList getGraveArts() {
+                    CardList list = AllZoneUtil.getPlayerGraveyard(card.getController());
+                    return list.filter(AllZoneUtil.artifacts);
+                }
+            };//SpellAbility
+            
+            final Command cip = new Command() {
+				private static final long serialVersionUID = 7977273396908140261L;
+
+				CardList getGraveArts() {
+                    CardList list = AllZoneUtil.getPlayerGraveyard(card.getController());
+                    return list.filter(AllZoneUtil.artifacts);
+                }
+				
+				public void execute() {
+					if(getGraveArts().size() > 0)
+						AllZone.Stack.add(ability);
+            	}
+            };
+            
+            ability.setStackDescription(cardName + " - return target artifact from your graveyard to the battlefield.");
+            card.addComesIntoPlayCommand(cip);
+        }//*************** END ************ END **************************
+        
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
