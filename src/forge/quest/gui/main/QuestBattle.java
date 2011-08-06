@@ -10,8 +10,9 @@ import java.util.List;
 import java.util.TreeMap;
 
 public class QuestBattle extends QuestSelectablePanel {
+	private static final long serialVersionUID = 3112668476017792084L;
 
-    static TreeMap<String, DeckInfo> nameDeckMap = new TreeMap<String, DeckInfo>();
+	static TreeMap<String, DeckInfo> nameDeckMap = new TreeMap<String, DeckInfo>();
 
     String deckName;
 
@@ -36,30 +37,30 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Atomic Robo 2", "medium", "Artifact Singleton deck");
 //        addToDeckList("Atomic Robo 3", "hard", "Artifact Standard Constructed deck");
         
-        addToDeckList("Bamm Bamm Rubble 1", "easy", "WBURG Domain deck");
+        addToDeckList("Bamm Bamm Rubble 1", "easy", "WUBRG Domain deck");
         addToDeckList("Barney Rubble 1", "easy", "WU Sovereigns of Lost Alara deck with walls and auras");
         addToDeckList("Barney Rubble 2", "medium", "WU Sovereigns of Lost Alara deck with walls and auras");
         addToDeckList("Barney Rubble 3", "hard", "WU Sovereigns of Lost Alara deck with walls and auras");
-        addToDeckList("Bart Simpson 1", "easy", "BUG creatures that will tap your creatures and will use auras to keep them tapped");
-        addToDeckList("Bart Simpson 2", "medium", "WUG creatures that will tap your creatures and will use auras to keep them tapped");
-        addToDeckList("Bart Simpson 3", "hard", "WUG creatures that will tap your creatures and will use auras to keep them tapped");
-        addToDeckList("Batman 3", "hard", "RG Valakut Titan");
-//        addToDeckList("Bear 1", "easy", "G Bear theme");
-//        addToDeckList("Bear 2", "medium", "2/2s with abilities ");
-//        addToDeckList("Bear 3", "hard", "Token 2/2s, a lot of Token 2/2s");
-//        addToDeckList("Beast 2", "medium", "GR Furnace Celebration");
-//        addToDeckList("Beast 3", "hard", "UWB Standard Constructed");
-        addToDeckList("Bela Lugosi 3", "hard", "Vampire deck, B creatures, little to no spells");
-        addToDeckList("Betty Rubble 3", "hard", "Summer Bloom deck with mods, features Plant + Eldrazi Spawn tokens");
-        addToDeckList("Blackbeard 3", "hard", "W Soldiers with Preeminent Captain, Captain of the Watch and Daru Warchief");
-        addToDeckList("Boba Fett 3", "hard", "Dragons, Chandra Nalaar, Crucible of Fire and Dragon Roost");
-        addToDeckList("Boris Karloff 3", "hard", "Boros Aggro (RW) deck with mods, Kors, levelers and threat removal");
-        addToDeckList("Boromir 2", "medium", "Elvish Piper and Quicksilver Amulet with huge creatures");
-        addToDeckList("Boromir 3", "hard", "Elvish Piper and Quicksilver Amulet with huge creatures");
-//        addToDeckList("Brood 2", "medium", "W Battlecry");
-        addToDeckList("Buffy 1", "easy", "Vampires and creatures with wither + Sorceress Queen");
-        addToDeckList("Buffy 2", "medium", "Vampires and creatures with wither + Sorceress Queen");
-        addToDeckList("Buffy 3", "hard", "Vampires and creatures with wither + Sorceress Queen");
+        addToDeckList("Bart Simpson 1", "easy", "UBG deck with Rathi Trapper and Paralyzing Grasp");
+        addToDeckList("Bart Simpson 2", "medium", "WUG deck with Minister of Impediments and Paralyzing Grasp");
+        addToDeckList("Bart Simpson 3", "hard", "WUG deck with Harrier Griffin and Entangling Vines");
+        addToDeckList("Batman 3", "hard", "RG Valakut Titan deck");
+//        addToDeckList("Bear 1", "easy", "G Bear theme deck");
+//        addToDeckList("Bear 2", "medium", "2/2s with abilities deck");
+//        addToDeckList("Bear 3", "hard", "Token 2/2s, a lot of Token 2/2s deck");
+//        addToDeckList("Beast 2", "medium", "GR Furnace Celebration deck");
+//        addToDeckList("Beast 3", "hard", "UWB Standard Constructed deck");
+        addToDeckList("Bela Lugosi 3", "hard", "B Vampire Aggro deck");
+        addToDeckList("Betty Rubble 3", "hard", "G deck with Broodwarden and Eldrazi Spawn tokens");
+        addToDeckList("Blackbeard 3", "hard", "W Soldiers deck with Preeminent Captain, Captain of the Watch and Daru Warchief");
+        addToDeckList("Boba Fett 3", "hard", "WRG Dragons deck with Chandra Nalaar, Crucible of Fire and Dragon Roost");
+        addToDeckList("Boris Karloff 3", "hard", "WR Boros Aggro deck with Kors, levelers and threat removal");
+        addToDeckList("Boromir 2", "medium", "WUBRG Elvish Piper deck with Quicksilver Amulet and huge creatures");
+        addToDeckList("Boromir 3", "hard", "WUBRG Elvish Piper deck with Quicksilver Amulet and huge creatures");
+//        addToDeckList("Brood 2", "medium", "W Battlecry deck");
+        addToDeckList("Buffy 1", "easy", "BRG Vampires deck with wither and Sorceress Queen");
+        addToDeckList("Buffy 2", "medium", "BRG Vampires deck with wither and Sorceress Queen");
+        addToDeckList("Buffy 3", "hard", "BRG Vampires deck with wither and Sorceress Queen");
         
         addToDeckList("C3PO 1", "easy", "BR Goblins, Goblin Ringleader, Mad Auntie and Sensation Gorger");
         addToDeckList("C3PO 2", "medium", "BR Goblins, Goblin Ringleader, Kiki-Jiki, Mad Auntie and Sensation Gorger");
