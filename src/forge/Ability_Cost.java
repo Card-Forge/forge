@@ -33,6 +33,16 @@ public class Ability_Cost {
 	// future expansion of Ability_Cost class: untap, and lifeCost
 	// private boolean untapCost = false;	
 	
+	private boolean subtractCounterCost = false;
+	public boolean getSubCounter() { return subtractCounterCost; }
+	private boolean addCounterCost = false;
+	public boolean getAddCounter() { return addCounterCost; } 
+	
+	private int counterAmount = 0;
+	public int getCounterNum() { return counterAmount; }
+	private Counters counterType;
+	public Counters getCounterType() { return counterType; }
+	
 	private boolean lifeCost = false;
 	private int lifeAmount = 0;
 	
@@ -73,6 +83,22 @@ public class Ability_Cost {
 			}
 		}
 		
+        if(parse.contains("SubCounter<")) {
+        	// SubCounter/<Counter Type>/counters removed
+        	subtractCounterCost = true;
+        	int counterPos = parse.indexOf("SubCounter<");
+        	int endPos = parse.indexOf(">", counterPos);
+        	String str = parse.substring(counterPos, endPos+1);
+        	parse = parse.replace(str, "").trim();
+        	
+        	str = str.replace("SubCounter<", "");
+        	str = str.replace(">", "");
+        	String[] strSplit = str.split("/");
+        	// convert strSplit[0] to Counter.something
+        	counterType = Counters.valueOf(strSplit[0]);
+        	counterAmount = Integer.parseInt(strSplit[1]);
+        }       
+		
         if(parse.contains("Sac-")) {
         	sacCost = true;
         	int sacPos = parse.indexOf("Sac-");
@@ -105,6 +131,25 @@ public class Ability_Cost {
 				cost.append("Tap");
 			else
 				cost.append(", tap");
+			caps = false;
+		}
+		
+		if (subtractCounterCost){
+			if (caps)
+				cost.append("Remove ");
+			else
+				cost.append(", remove ");
+			if (counterAmount != 1)
+				cost.append(counterAmount);
+			else
+				cost.append("a");
+			cost.append(" " + counterType.getName());
+			cost.append(" counter");
+			if (counterAmount != 1)
+				cost.append("s");
+			cost.append(" from CARDNAME");
+
+			caps = false;
 		}
 		
 		if (lifeCost){
@@ -113,6 +158,8 @@ public class Ability_Cost {
 			else
 				cost.append(", Pay");
 			cost.append(lifeAmount);
+
+			caps = false;
 		}
 		
 		cost.append(sacString(caps));

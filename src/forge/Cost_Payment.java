@@ -12,6 +12,7 @@ public class Cost_Payment {
 	
 	private boolean payTap = false;
 	private boolean payMana = false;
+	private boolean paySubCounter = false;
 	private boolean paySac = false;
 	private boolean bCancel = false;
 	private boolean bCasting = false;
@@ -30,8 +31,37 @@ public class Cost_Payment {
 		card = this.ability.getSourceCard();
 		payTap = !cost.getTap();
 		payMana = cost.hasNoManaCost();
+		paySubCounter = !cost.getSubCounter();
 		paySac = !cost.getSacCost();
 	}
+	
+    public boolean canPayAdditionalCosts(){
+    	if (cost.getTap() && (card.isTapped() || card.isSick()))
+    		return false;
+    	
+    	int countersLeft = 0;
+    	if (cost.getSubCounter()){
+			Counters c = cost.getCounterType();
+			countersLeft = card.getCounters(c) - cost.getCounterNum();
+			if (countersLeft < 0){
+	    		return false;
+			}
+    	}
+    	
+		if (cost.getSacCost()){
+			if (!cost.getSacThis()){
+			    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+			    CardList typeList = new CardList(play.getCards());
+			    typeList = typeList.getType(cost.getSacType());
+				if (typeList.size() == 0)
+					return false;
+			}
+			else if (cost.getSacThis() && !AllZone.GameAction.isCardInPlay(card))
+				return false;
+		}  
+    	
+    	return true;
+    }
 	
 	public boolean payCost(){
 		if (bCancel || bDoneTarget && cost.getNumTargeted() < cost.getMinTargets()){
@@ -71,8 +101,22 @@ public class Cost_Payment {
 		if (!payMana && !cost.hasNoManaCost()){
 			// pay mana here
 			changeInput.stopSetNext(new Input_PayCostMana(this));
+			return false;
 		}
-		else if (!paySac && cost.getSacCost())
+		if (!paySubCounter && cost.getSubCounter()){
+			// subtract counters here. 
+			Counters c = cost.getCounterType();
+			int countersLeft = card.getCounters(c) - cost.getCounterNum();
+			if (countersLeft >= 0){
+				card.setCounter(c, countersLeft);
+				paySubCounter = true;
+			}
+			else{
+				cancelPayment();
+				return false;
+			}
+		}
+		if (!paySac && cost.getSacCost())
     	{
     		// sacrifice stuff here
     		if (cost.getSacThis())
@@ -82,9 +126,13 @@ public class Cost_Payment {
     		return false;
     	}
 
-		if (payTap && payMana && paySac)
+		if (isAllPaid())
 			allPaid();
 		return true;
+	}
+
+	public boolean isAllPaid(){
+		return (payTap && payMana && paySubCounter && paySac);
 	}
 	
 	public void allPaid(){
@@ -106,6 +154,14 @@ public class Cost_Payment {
 		}
 		// refund mana
         AllZone.ManaPool.unpaid();
+        
+        // refund counters
+        if (cost.getSubCounter() && paySubCounter){
+			Counters c = cost.getCounterType();
+			int countersLeft = card.getCounters(c) + cost.getCounterNum();
+			card.setCounter(c, countersLeft);
+        }
+        
 		// can't really unsacrifice things
 	}
 	
@@ -303,7 +359,7 @@ public class Cost_Payment {
     	if (cost.doesTarget())
     		ability.chooseTargetAI();
     	
-    	// make sure something is there to be sacrificed before going through payments
+    	// double check if something can be sacrificed here. Real check is in ComputerUtil.canPayAdditionalCosts()
     	if (cost.getSacCost()){
     		if (cost.getSacThis())
     			sacCard = card;
@@ -315,18 +371,26 @@ public class Cost_Payment {
 	    		return;
 	    	}
     	}
+    	// double check if counters available? Real check is in ComputerUtil.canPayAdditionalCosts()
+    	int countersLeft = 0;
+    	if (cost.getSubCounter()){
+			Counters c = cost.getCounterType();
+			countersLeft = card.getCounters(c) - cost.getCounterNum();
+			if (countersLeft < 0){
+	    		System.out.println("Not enough " + c.getName() + " on "+card.getName());
+	    		return;
+			}
+    	}
     	
     	if (cost.getTap())
     		card.tap();
     	if (!cost.hasNoManaCost())
     		ComputerUtil.payManaCost(ability);
+    	if (cost.getSubCounter())
+    		card.setCounter(cost.getCounterType(), countersLeft);
 		if (cost.getSacCost())
 			AllZone.GameAction.sacrifice(sacCard);
 
         AllZone.Stack.add(ability);
     }
-    
-    
-    
-    
 }

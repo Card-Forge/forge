@@ -1692,9 +1692,7 @@ public class CardFactory implements NewConstants {
                     public boolean canPlayAI() {
                     	// temporarily disabled until AI is improved
                     	if (abCost.getSacCost()) return false;	
-                    	
-                    	if (abCost.getTap() && (card.isTapped() || card.isSick()))
-                    		return false;
+                    	if (abCost.getSubCounter()) return false;
                     	
                     	if (!ComputerUtil.canPayCost(this))
                     		return false;
@@ -1745,10 +1743,8 @@ public class CardFactory implements NewConstants {
                     
                     @Override
                     public boolean canPlay() {
-                    	if (abCost.getTap() && (card.isTapped() || card.isSick()))
-                    		return false;
-                    	
-                        return (CardFactoryUtil.canUseAbility(card) && super.canPlay());
+                    	Cost_Payment pay = new Cost_Payment(abCost, this);
+                        return (pay.canPayAdditionalCosts() && CardFactoryUtil.canUseAbility(card) && super.canPlay());
                     }
                     
                     private CardList getCreatures() {
@@ -2212,21 +2208,19 @@ public class CardFactory implements NewConstants {
                     
                     @Override
                     public boolean canPlay(){
-                    	if (abCost.getTap() && (card.isTapped() || card.isSick()))
-                    		return false;
-                    	
-                        return (CardFactoryUtil.canUseAbility(card) && super.canPlay());
+                    	Cost_Payment pay = new Cost_Payment(abCost, this);
+                        return (pay.canPayAdditionalCosts() && CardFactoryUtil.canUseAbility(card) && super.canPlay());
                     }
                     
                     @Override
                     public boolean canPlayAI() {
-                    	// temporarily disable sac canPlay until better AI
-                    	//if (abCost.getSacCost())	 return false;
-                    	if (abCost.getTap() && (card.isTapped() || card.isSick()))
-                    		return false;
+                    	// temporarily disabled until better AI
+                    	if (abCost.getSacCost())	 return false;
+                    	if (abCost.getSubCounter())  return false;
                     	
                     	if (!ComputerUtil.canPayCost(this))
                     		return false;
+
                         damage = getNumDamage();
                         
                         Random r = new Random(); // prevent run-away activations 

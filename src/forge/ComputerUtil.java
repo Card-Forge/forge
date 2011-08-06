@@ -216,28 +216,39 @@ public class ComputerUtil
   
   static public boolean canPayAdditionalCosts(SpellAbility sa)
   {
-	  Ability_Cost cost = sa.getPayCosts();
-	  if (cost == null)
-		  return true;
+	  	// Add additional cost checks here before attempting to activate abilities
+		Ability_Cost cost = sa.getPayCosts();
+		if (cost == null)
+			return true;
+	  	Card card = sa.getSourceCard();
+
+    	if (cost.getTap() && (card.isTapped() || card.isSick()))
+    		return false;
+		
+		if (cost.getSubCounter()){
+			Counters c = cost.getCounterType();
+			if (card.getCounters(c) - cost.getCounterNum() < 0 || !AllZone.GameAction.isCardInPlay(card)){
+				return false;
+			}
+		}
 	  
-	  // check additional costs.
-	  if (cost.getSacCost()){
-		  // if there's a sacrifice in the cost, just because we can Pay it doesn't mean we want to. 
-		  if (!cost.getSacThis()){
-			  String type = cost.getSacType();
-		      PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
-		      CardList typeList = new CardList(play.getCards());
-		      typeList = typeList.getType(type);
-		      Card target = sa.getTargetCard();
-			  if (target != null && target.getController().equals(Constant.Player.Computer)) // don't sacrifice the card we're pumping
-				  typeList.remove(target);
-			  return typeList.size() > 0;
-		  }
-		  else if (cost.getSacThis() && AllZone.GameAction.isCardInPlay(sa.getSourceCard()))
-			  return false;
-	  }
-	  
-	  return true;
+		// check additional costs.
+		if (cost.getSacCost()){
+			  // if there's a sacrifice in the cost, just because we can Pay it doesn't mean we want to. 
+			if (!cost.getSacThis()){
+				String type = cost.getSacType();
+			    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+			    CardList typeList = new CardList(play.getCards());
+			    typeList = typeList.getType(type);
+			    Card target = sa.getTargetCard();
+				if (target != null && target.getController().equals(Constant.Player.Computer)) // don't sacrifice the card we're pumping
+					  typeList.remove(target);
+				return typeList.size() > 0;
+			}
+			else if (cost.getSacThis() && !AllZone.GameAction.isCardInPlay(card))
+				return false;
+		}
+		return true;
   }
   
   static public boolean canPayCost(String cost)
