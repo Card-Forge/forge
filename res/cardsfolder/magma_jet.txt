@@ -6,5 +6,5 @@ A:SP$DealDamage | Cost$ 1 R | Tgt$ TgtCP | NumDmg$ 2 | SubAbility$SVar=DBScry | 
 SVar:DBScry:DB$Scry | ScryNum$ 2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_jet.jpg
-SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/jvc/52.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/73.jpg
 End
