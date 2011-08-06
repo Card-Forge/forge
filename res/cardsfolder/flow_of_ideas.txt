@@ -2,8 +2,9 @@ Name:Flow of Ideas
 ManaCost:5 U
 Types:Sorcery
 Text:no text
-K:spDrawCards:X:Draw a card for each Island you control.:Flow of Ideas - draw cards.
+A:SP$Draw | Cost$ 5 U | NumCards$ X | SpellDescription$ Draw a card for each Island you control.
 SVar:X:Count$TypeYouCtrl.Island
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flow_of_ideas.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/50.jpg

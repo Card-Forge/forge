@@ -2,8 +2,9 @@ Name:Biomantic Mastery
 ManaCost:4 UG UG UG
 Types:Sorcery
 Text:no text
-K:spDrawCards:X:Draw a card for each creature target player controls, then draw a card for each creature another target player controls.:Biomantic Mastery - Draw cards.
+A:SP$Draw | Cost$ 4 UG UG UG | NumCards$ X | SpellDescription$ Draw a card for each creature target player controls, then draw a card for each creature another target player controls.
 SVar:X:Count$TypeOnBattlefield.Creature
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/biomantic_mastery.jpg
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/142.jpg
