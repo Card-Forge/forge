@@ -119,6 +119,7 @@ public abstract class Player extends MyObservable{
 	
 	public boolean canGainLife() {
 		if(AllZoneUtil.isCardInPlay("Sulfuric Vortex")) return false;
+		if(AllZoneUtil.isCardInPlay("Platinum Emperion",this)) return false;
 		return true;
 	}
 	

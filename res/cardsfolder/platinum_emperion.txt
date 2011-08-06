@@ -1,0 +1,9 @@
+Name:Platinum Emperion
+ManaCost:8
+Types:Artifact Creature Colossus
+Text:Your life total can't change. (You can't gain or lose life. You can't pay any amount of life except 0.)
+PT:8/8
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/platinum_emperion.jpg
+#Uses card-specific code!
+End
