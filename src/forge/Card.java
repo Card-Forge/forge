@@ -447,6 +447,7 @@ public class Card extends MyObservable
   
   public ArrayList<Command> getReplaceMoveToGraveyard() { return replaceMoveToGraveyardCommandList; }
   public void addReplaceMoveToGraveyardCommand(Command c)  { replaceMoveToGraveyardCommandList.add(c);}
+  public void clearReplaceMoveToGraveyardCommandList() {replaceMoveToGraveyardCommandList.clear(); }
   public void replaceMoveToGraveyard()				
   { 
 	  for (Command var : replaceMoveToGraveyardCommandList)

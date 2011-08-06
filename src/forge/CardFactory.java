@@ -6082,6 +6082,8 @@ public class CardFactory implements NewConstants {
         }//resolve()
       };//SpellAbility
 
+      final Card crd = card;
+      
       final SpellAbility spell_two = new Spell(card)
       {
 
@@ -6113,14 +6115,11 @@ public class CardFactory implements NewConstants {
            	  else
            		  AllZone.GameAction.removeFromGame(target[0]);
             }
-            done();
+            else
+            {
+          	  crd.clearReplaceMoveToGraveyardCommandList();
+            }
         }//resolve()
-        void done()
-        {
-          //return card to the hand
-          PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-          AllZone.GameAction.moveTo(hand, card);
-        }
       };//SpellAbility
       spell_two.setManaCost("4 U U");
 
@@ -6221,6 +6220,7 @@ public class CardFactory implements NewConstants {
     //*************** START *********** START **************************
     else if(cardName.equals("Elvish Fury"))
     {
+    
       final SpellAbility spell_one = new Spell(card)
       {
 		private static final long serialVersionUID = 3356401944678089378L;
@@ -6252,9 +6252,14 @@ public class CardFactory implements NewConstants {
 
             AllZone.EndOfTurn.addUntil(untilEOT);
           }
+          else{
+        	  
+          }
         }//resolve()
       };//SpellAbility
 
+      final Card crd = card;
+      
       final SpellAbility spell_two = new Spell(card)
       {
 		private static final long serialVersionUID = 3898017438147188882L;
@@ -6307,15 +6312,12 @@ public class CardFactory implements NewConstants {
             target[0].addTempDefenseBoost(2);
 
             AllZone.EndOfTurn.addUntil(untilEOT);
-            done();
+          }
+          else
+          {
+        	  crd.clearReplaceMoveToGraveyardCommandList();
           }
         }//resolve()
-        void done()
-        {
-          //return card to the hand
-          PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-          AllZone.GameAction.moveTo(hand, card);
-        }
       };//SpellAbility
       spell_two.setManaCost("4 G");
 
@@ -16535,6 +16537,8 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 				public void resolve() {
 					PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard , card.getController());
 					PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, card.getController());
+					
+					AllZone.GameAction.sacrificeCreature(getTargetPlayer(), this);
 					
 					grave.remove(card);
 					removed.add(card);
