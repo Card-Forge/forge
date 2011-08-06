@@ -9,4 +9,5 @@ SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | ChangeType$ Artifact.YouCtrl | ChangeN
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/esperzoa.jpg
+SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/25.jpg
 End
