@@ -6422,6 +6422,98 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(SpUntapAll);
         	card.setSVar("PlayMain1", "TRUE");
         }//End spUntapAll keyword
+        
+        /*
+         *  Generic untap target ___ spell
+         *  
+         *  syntax: spUntapTgt:{Valid Targets}:{Description}
+         */
+        if (hasKeyword(card, "spUntapTgt") != -1) {
+        	int n = hasKeyword(card, "spUntapTgt");
+
+        	String parse = card.getKeyword().get(n).toString();
+        	card.removeIntrinsicKeyword(parse);
+
+        	String k[] = parse.split(":");
+        	
+        	final Target untapTargets = new Target("TgtV");
+        	final String Tgts[] = k[1].split(",");
+        	untapTargets.setValidTgts(Tgts);
+        	final String spDesc[] = {"none"};
+        	spDesc[0] = k[2];
+
+        	String tmpDesc = spDesc[0].substring(13);
+        	int i = tmpDesc.indexOf(".");
+        	tmpDesc = tmpDesc.substring(0, i);
+        	String Selec = "Select target " + tmpDesc + " to untap.";
+
+        	final SpellAbility SpUntapTgt = new Spell(card) {
+        		private static final long serialVersionUID = 1740994300027185986L;
+
+        		@Override
+        		public boolean canPlayAI() {
+        			/*CardList hCards = getTargets();
+
+        			Random r = new Random();
+        			boolean rr = false;
+        			if (r.nextFloat() <= .6667)
+        				rr = true;
+
+        			if(hCards.size() > 0) {
+        				Card c = null;
+        				CardList dChoices = new CardList();
+
+        				for(int i = 0; i < Tgts.length; i++) {
+        					if (Tgts[i].startsWith("Creature")) {
+        						c = CardFactoryUtil.AI_getBestCreature(hCards);
+        						if (c != null)
+        							dChoices.add(c);
+        					}
+
+        					CardListUtil.sortByTextLen(hCards);
+        					dChoices.add(hCards.get(0));
+
+        					CardListUtil.sortCMC(hCards);
+        					dChoices.add(hCards.get(0));
+        				}
+
+        				c = dChoices.get(CardUtil.getRandomIndex(dChoices));
+        				setTargetCard(c);
+
+        				return rr;
+        			}
+					*/
+        			return false;
+        		}
+
+        		/*
+        		CardList getTargets() {
+        			CardList tmpList = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Human);
+        			tmpList = tmpList.getValidCards(Tgts);
+        			tmpList = tmpList.getTargetableCards(card);
+        			tmpList = tmpList.filter(AllZoneUtil.untapped);
+        			return tmpList;
+        		}*/
+
+        		@Override
+        		public void resolve() {
+        			Card tgtC = getTargetCard();
+        			if(AllZone.GameAction.isCardInPlay(tgtC)
+        					&& CardFactoryUtil.canTarget(card, tgtC)) {
+        				tgtC.untap();
+        			}
+        		}
+        	}; //SpUntapTgt
+
+        	card.clearSpellAbility();
+        	Input InGetTarget = CardFactoryUtil.input_targetValid(SpUntapTgt, Tgts, Selec);
+
+        	SpUntapTgt.setBeforePayMana(InGetTarget);
+
+        	//SpUntapTgt.setDescription(spDesc[0]);
+        	card.addSpellAbility(SpUntapTgt);
+        	card.setSVar("PlayMain1", "TRUE");
+        }//End spUntapTgt
 
         
         //**************************************************

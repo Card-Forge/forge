@@ -1,0 +1,9 @@
+Name:Burst of Energy
+ManaCost:W
+Types:Instant
+Text:no text
+K:spUntapTgt:Permanent:Untap target permanent.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/burst_of_energy.jpg
+End
