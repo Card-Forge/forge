@@ -1,3 +1,362 @@
+Absorb
+W U U
+Instant
+Counter target spell. You gain 3 life.
+spCounter:Spell:None:Graveyard:My-GainLife(3)
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card23155.jpg
+
+Annul
+U
+Instant
+Counter target artifact or enchantment spell.
+spCounter:Spell:Type(Artifact,Enchantment):Graveyard:None
+SVar:Rarity:Common
+
+Artifact Blast
+R
+Instant
+Counter target artifact spell.
+spCounter:Spell:Type(Artifact):Graveyard:None
+SVar:Rarity:Common
+
+Assert Authority
+5 U U
+Instant
+Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
+spCounter:Spell:None:Exile:None
+CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/assert_authority.jpg
+
+Avoid Fate
+G
+Instant
+Counter target instant or Aura spell that targets a permanent you control.
+spCounter:Spell:Type(Instant,Aura) Targets(My-Creature,My-Enchantment,My-Artifact,My-Land,My-Equipment,My-Planeswalker):Graveyard:None
+SVar:Rarity:Common
+
+Bind
+1 G
+Instant
+Counter target activated ability. Draw a card.
+spCounter:Ability:None:None:My-Draw(1)
+SVar:Rarity:Rare
+
+Cancel
+1 U U
+Instant
+Counter target spell.
+spCounter:Spell::Graveyard:None
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cancel.jpg
+
+Confound
+1 U
+Instant
+Counter target spell that targets one or more creatures. Draw a card.
+spCounter:Spell:Targets(Creature):Graveyard:My-Draw(1)
+SVar:Rarity:Common
+
+Counterspell
+U U
+Instant
+Counter target spell.
+spCounter:Spell:None:Graveyard:None
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card19570.jpg
+
+Countersquall
+U B
+Instant
+Counter target noncreature spell. It's controller loses 2 life.
+spCounter:Spell:Type(Non-Creature):Graveyard:Opp-LoseLife(2)
+SVar:Rarity:Uncommon
+
+Dismal Failure
+2 U U
+Instant
+Counter target spell. Its controller discards a card.
+spCounter:Spell:None:Graveyard:Opp-Discard(1)
+SVar:Rarity:Uncommon
+
+Dismiss
+2 U U
+Instant
+Counter target spell. Draw a card.
+spCounter:Spell:None:Graveyard:My-Draw(1)
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dismiss.jpg
+
+Dispel
+U
+Instant
+Counter target instant spell.
+spCounter:Spell:Type(Instant):Graveyard:None
+SVar:Rarity:Common
+
+Dissipate
+1 U U
+Instant
+Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
+spCounter:Spell:None:Exile:None
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dissipate.jpg
+
+Dream Fracture
+1 U U
+Counter target spell. Its controller draws a card. Draw a card.
+spCounter:Spell:None:Graveyard:My-Draw(1) Opp-Draw(1)
+SVar:Rarity:Uncommon
+
+Envelop
+U
+Instant
+Counter target sorcery spell.
+spCounter:Spell:Type(Sorcery):Graveyard:None
+SVar:Rarity:Common
+
+Essence Scatter
+1 U
+Instant
+Counter target creature spell.
+spCounter:Spell:Type(Creature):Graveyard:None
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_scatter.jpg
+
+Exclude
+2 U
+Instant 
+Counter target creature spell. Draw a card.
+spCounter:Spell:Type(Creature):Graveyard:My-Draw(1)
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/exclude.jpg
+
+Extinguish
+2 U
+Instant
+Counter target sorcery spell.
+spCounter:Spell:Type(Sorcery):Graveyard:None
+SVar:Rarity:Common
+
+Faerie Trickery
+1 U U
+Tribal Instant Faerie
+Counter target non-Faerie spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
+spCounter:Spell:Type(Non-Faerie):Exile:None
+SVar:Rarity:Common
+
+False Summoning
+1 U
+Instant
+Counter target creature spell.
+spCounter:Spell:Type(Creature):Graveyard:None
+SVar:Rarity:Common
+SVar:Picture:http://gatherer.wizards.com/handlers/image.ashx?multiverseid=6533&type=card
+
+Fervent Denial
+3 U U
+Instant
+Counter target spell.
+spCounter:Spell:None:Graveyard:None
+Flashback:5 U U
+SVar:Rarity:Uncommon
+
+Flash Counter
+1 U
+Instant
+Counter target instant spell.
+spCounter:Spell:Type(Instant):Graveyard:None
+SVar:Rarity:Common
+
+Flashfreeze
+1 U
+Instant
+Counter target red or green spell.
+spCounter:Spell:Color(red,green):Graveyard:None
+SVar:Rarity:Uncommon
+
+Frazzle
+3 U
+Instant
+Counter target nonblue spell.
+spCounter:Spell:Color(Non-blue):Graveyard:None
+SVar:Rarity:Uncommon
+
+Gainsay
+1 U
+Instant
+Counter target blue spell.
+spCounter:Spell:Color(blue):Graveyard:None
+SVar:Rarity:Uncommon
+
+Guttural Response
+RG
+Instant
+Counter target blue instant spell.
+spCounter:Spell:Type(Instant) Color(blue):Graveyard:None
+SVar:Rarity:Uncommon
+
+Hisoka's Defiance
+1 U
+Instant
+Counter target Spirit or Arcane spell.
+spCounter:Spell:Type(Spirit,Arcane):Graveyard:None
+SVar:Rarity:Common
+
+Intervene
+U
+Instant
+Counter target spell that targets a creature.
+spCounter:Spell:Targets(Creature):Graveyard:None
+SVar:Rarity:Common
+
+Lapse of Certainty
+2 W
+Instant
+Counter target spell. If that spell is countered this way, put it on top of its owner's library instead of into that player's graveyard.
+spCounter:Spell:None:Topdeck:None
+SVar:Rarity:Common
+
+Last Word
+2 U U
+Instant
+Counter target spell.
+spCounter:Spell:None:Graveyard:None
+CARDNAME can't be countered.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/last_word.jpg
+
+Liquify
+2 U
+Instant
+Counter target spell with converted mana cost 3 or less. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
+spCounter:Spell:CMC(<=,3):Exile:None
+SVar:Rarity:Common
+
+Memory Lapse
+1 U
+Instant
+Counter target spell. If that spell is countered this way, put it on top of its owner's library instead of into that player's graveyard.
+spCounter:Spell:None:Topdeck:None
+SVar:Rarity:Common
+
+Muddle the Mixture
+U U
+Instant
+Counter target instant or sorcery spell.
+spCounter:Spell:Type(Instant,Sorcery):Graveyard:None
+Transmute:1 U U
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/muddle_the_mixture.jpg
+
+Mystic Denial
+1 U U
+Instant
+Counter target creature or sorcery spell.
+spCounter:Spell:Type(Creature,Sorcery):Graveyard:None
+SVar:Rarity:Uncommon
+
+Negate
+1 U
+Instant
+Counter target noncreature spell.
+spCounter:Spell:Type(Non-Creature):Graveyard:None
+SVar:Rarity:Common
+
+Preemptive Strike
+1 U
+Instant
+Counter target creature spell.
+spCounter:Spell:Type(Creature):Graveyard:None
+SVar:Rarity:Common
+SVar:Picture:http://gatherer.wizards.com/handlers/image.ashx?multiverseid=10530&type=card
+
+Punish Ignorance
+W U U B
+Instant
+Counter target spell. It's controller loses 3 life and you gain 3 life.
+spCounter:Spell:None:Graveyard:Opp-LoseLife(3) My-GainLife(3)
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/punish_ignorance.jpg
+
+Rebuff the Wicked
+W
+Instant
+Counter target spell that targets a permanent you control.
+spCounter:Spell:Targets(My-Creature,My-Land,My-Enchantment,My-Artifact,My-Planeswalker,My-Equipment):Graveyard:None
+SVar:Rarity:Uncommon
+
+Remand
+1 U
+Instant
+Counter target spell.If that spell is countered this way, put it into it's owner's hand instead of into that player's library. Draw a card.
+spCounter:Spell:None:Hand:My-Draw(1)
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87919.jpg
+
+Remove Soul
+1 U
+Instant
+Counter target creature spell.
+spCounter:Spell:Type(Creature):Graveyard:None
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83228.jpg
+
+Spell Snare
+U
+Instant
+Counter target spell with converted mana cost 2.
+spCounter:Spell:CMC(==,2):Graveyard:None
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_snare.jpg
+
+Squelch
+1 U
+Instant
+Counter target activated ability. Draw a card.
+spCounter:Ability:None:None:My-Draw(1)
+SVar:Rarity:Uncommon
+
+Stifle
+U
+Instant
+Counter target activated or triggered ability.
+spCounter:Ability:None:None:None
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stifle.jpg
+
+Thoughtbind
+2 U
+Instant
+Counter target spell with converted mana cost 4 or less.
+spCounter:Spell:CMC(<=,4):Graveyard:None
+SVar:Rarity:Common
+
+Traumatic Visions
+3 U U
+Instant
+Counter target spell.
+spCounter:Spell:None:Graveyard:None
+TypeCycling:Basic:1 U
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/traumatic_visions.jpg
+
+Undermine
+U U B
+Instant
+Counter target spell. It's controller loses 3 life.
+spCounter:Spell:None:Graveyard:Opp-LoseLife(3)
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card23190.jpg
+
+Voidslime
+G U U
+Instant
+Counter target spell, activated ability, or triggered ability.
+spCounter:SpellOrAbility:None:Graveyard:None
+SVar:Rarity:Rare
+
 Surging AEther
 3 U
 Instant
@@ -381,13 +740,6 @@ Enchantment
 All creatures gain protection from red.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/absolute_law.jpg
-
-Absorb
-U U W
-Instant
-Counter target spell. You gain 3 life.
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card23155.jpg
 
 Absorb Vis
 6 B
@@ -2095,14 +2447,6 @@ no text
 2/2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/assembly_worker.jpg
-
-Assert Authority
-5 U U
-Instant
-Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.) Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
-CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/assert_authority.jpg
 
 Astral Steel
 2 W
@@ -4601,13 +4945,6 @@ If a source would deal 3 or less damage to Callous Giant, prevent that damage.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/callous_giant.jpg
 
-Cancel
-1 U U
-Instant
-no text
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cancel.jpg
-
 Canopy Spider
 1 G
 Creature Spider
@@ -6089,13 +6426,6 @@ Whenever an opponent plays a spell, you may reveal the top card of your library.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/counterbalance.jpg
-
-Counterspell
-U U
-Instant
-no text
-SVar:Rarity:Uncommon
-SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card19570.jpg
 
 Courier Hawk
 1 W
@@ -7652,14 +7982,6 @@ spRaiseDead:1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disentomb.jpg
 
-Dismiss
-2 U U 
-Instant
-Counter target spell.
-Draw a card.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dismiss.jpg
-
 Disorient
 3 U
 Instant
@@ -7675,13 +7997,6 @@ Return target nonland permanent to its owner's hand.
 spBounceTgt:Permanent.nonLand:Hand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disperse.jpg
-
-Dissipate
-1 U U
-Instant
-Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dissipate.jpg
 
 Distress
 B B
@@ -9104,13 +9419,6 @@ As long as you control another multicolored permanent, Esper Stormblade gets +1/
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/esper_stormblade.jpg
 
-Essence Scatter
-1 U
-Instant
-Counter target creature spell.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_scatter.jpg
-
 Essence Sliver
 3 W
 Creature Sliver
@@ -9280,14 +9588,6 @@ Lifelink
 Morph:2 W W
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exalted_angel.jpg
-
-Exclude
-2 U
-Instant
-Counter target creature spell.
-Draw a card.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/exclude.jpg
 
 Excommunicate
 2 W
@@ -9520,13 +9820,6 @@ Sorcery
 Return target creature card from your graveyard to the battlefield.
 SVar:Rarity:Common
 SVar:Picture:http://gatherer.wizards.com/handlers/image.ashx?multiverseid=10509&type=card
-
-False Summoning
-1 U
-Instant
-Counter target creature spell.
-SVar:Rarity:Common
-SVar:Picture:http://gatherer.wizards.com/handlers/image.ashx?multiverseid=6533&type=card
 
 Fanatical Fever
 2 G G
@@ -16594,14 +16887,6 @@ spDamageTgtC:2:Drawback$YouGainLife/2:Last Kiss deals 2 damage to target creatur
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/last_kiss.jpg
 
-Last Word
-2 U U
-Instant
-no text 
-CARDNAME can't be countered.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/last_word.jpg
-
 Launch
 1 U
 Enchantment Aura
@@ -19320,14 +19605,6 @@ When Mudbutton Torchrunner is put into a graveyard from play, it deals 3 damage 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mudbutton_torchrunner.jpg
 
-Muddle the Mixture
-U U
-Instant
-no text
-Transmute:1 U U
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/muddle_the_mixture.jpg
-
 Mul Daya Channelers
 1 G G
 Creature Elf Druid Shaman
@@ -21887,13 +22164,6 @@ First Strike
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/preeminent_captain.jpg
 
-Preemptive Strike
-1 U
-Instant
-Counter target creature spell.
-SVar:Rarity:Common
-SVar:Picture:http://gatherer.wizards.com/handlers/image.ashx?multiverseid=10530&type=card
-
 Presence of the Wise
 2 W W
 Sorcery
@@ -22216,13 +22486,6 @@ Whenever Pulse Tracker attacks, each opponent loses 1 life.
 1/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pulse_tracker.jpg
-
-Punish Ignorance
-W U U B
-Instant
-Counter target spell. Its controller loses 3 life and you gain 3 life.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/punish_ignorance.jpg
 
 Puppeteer
 2 U
@@ -23128,14 +23391,6 @@ tap: add 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reliquary_tower.jpg
 
-Remand
-1 U
-Instant
-Counter target spell. If that spell is countered this way, put it into its owner's hand instead of into that player's graveyard.
-Draw a card.
-SVar:Rarity:Uncommon
-SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87919.jpg
-
 Reminisce
 2 U
 Sorcery
@@ -23152,13 +23407,6 @@ tap: add U
 Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/remote_isle.jpg
-
-Remove Soul
-1 U
-Instant
-Counter target creature spell.
-SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83228.jpg
 
 Rend Flesh
 2 B
@@ -27138,13 +27386,6 @@ Counter target noncreature spell unless its controller pays 2.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_pierce.jpg
 
-Spell Snare
-U
-Instant
-Counter target spell with converted mana cost 2.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_snare.jpg
-
 Spell Snip
 2 U
 Instant
@@ -27840,13 +28081,6 @@ tap: add G
 Vigilance
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steward_of_valeron.jpg
-
-Stifle
-U
-Instant
-no text
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stifle.jpg
 
 Stillmoon Cavalier
 1 WB WB
@@ -30515,14 +30749,6 @@ Persist
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trapjaw_kelpie.jpg
 
-Traumatic Visions
-3 U U
-Instant
-no text
-TypeCycling:Basic:1 U
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/traumatic_visions.jpg
-
 Traumatize
 3 U U
 Sorcery
@@ -31036,13 +31262,6 @@ tap: add U
 tap: add B
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/underground_sea.jpg
-
-Undermine
-U U B
-Instant
-Counter target spell. Its controller loses 3 life.
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card23190.jpg
 
 Underworld Dreams
 B B B

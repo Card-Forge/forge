@@ -64,10 +64,12 @@ public class ReadCard implements Runnable, NewConstants {
         Card c;
         String s = readLine();
         ArrayList<String> cardNames = new ArrayList<String>();
+        int linenum = 1;
         
         while(!s.equals("End")) {
             c = new Card();
-            if(s.equals("")) throw new RuntimeException("ReadCard : run() reading error, cardname is blank");
+            if(s.equals("")) throw new RuntimeException("ReadCard : run() reading error, cardname is blank! Line: " + Integer.toString(linenum));
+            linenum += 4;
             c.setName(s);
             
 //for debugging
@@ -93,13 +95,16 @@ public class ReadCard implements Runnable, NewConstants {
                 c.setBaseAttack(att);
                 c.setBaseDefense(def);
                 s = readLine();
+                linenum++;
             }
             
             while(!s.equals("")) {
                 c.addIntrinsicKeyword(s);
                 s = readLine();
+                linenum++;
             }
             s = readLine();
+            linenum++;
             
             if(cardNames.contains(c.getName())) {
                 System.out.println("ReadCard:run() error - duplicate card name: " + c.getName());

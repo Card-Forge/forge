@@ -10972,38 +10972,7 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
 
-        //*************** START *********** START **************************
-        else if(cardName.equals("Remove Soul") || cardName.equals("False Summoning")
-                || cardName.equals("Essence Scatter") || cardName.equals("Preemptive Strike")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 4685055135070191326L;
-                
-                @Override
-                public void resolve() {
-                    SpellAbility sa = AllZone.Stack.pop();
-                    AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    if(AllZone.Stack.size() == 0) return false;
-                    
-                    //see if spell is on stack and that opponent played it
-                    String opponent = AllZone.GameAction.getOpponent(card.getController());
-                    SpellAbility sa = AllZone.Stack.peek();
-                    
-                    //is spell?, did opponent play it?, is this a creature spell?
-                    return sa.isSpell() && opponent.equals(sa.getSourceCard().getController())
-                            && sa.getSourceCard().getType().contains("Creature")
-                            && CardFactoryUtil.isCounterable(sa.getSourceCard());
-                }//canPlay()
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Spell Pierce")) {
             SpellAbility spell = new Spell(card) {
@@ -11057,50 +11026,6 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Counterspell") || cardName.equals("Cancel") || cardName.equals("Last Word")
-                || cardName.equals("Traumatic Visions") || cardName.equals("Stifle")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -2489268054171391552L;
-                
-                @Override
-                public void resolve() {
-                    SpellAbility sa = AllZone.Stack.pop();
-                    if(!cardName.equals("Stifle")) AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    if(AllZone.Stack.size() == 0) return false;
-                    
-                    //see if spell is on stack and that opponent played it
-                    String opponent = AllZone.GameAction.getOpponent(card.getController());
-                    SpellAbility sa = AllZone.Stack.peek();
-                    
-                    if(cardName.equals("Stifle")) return !sa.isSpell()
-                            && CardFactoryUtil.isCounterable(sa.getSourceCard());
-                    
-
-                    return sa.isSpell() && opponent.equals(sa.getSourceCard().getController())
-                            && CardFactoryUtil.isCounterable(sa.getSourceCard());
-                }
-            };
-            card.clearSpellAbility();
-            String desc = "";
-            if(cardName.equals("Last Word")) {
-                desc = "Last Word can't be countered by spells or abilities.\r\n";
-            }
-            if(cardName.equals("Stifle")) {
-                spell.setDescription(desc + "Counter target triggered or activated ability.");
-                spell.setStackDescription(card.getName() + " - Counters target triggered or activated ability.");
-            } else {
-                spell.setDescription(desc + "Counter target spell.");
-                spell.setStackDescription(card.getName() + " - Counters target spell.");
-            }
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Mana Leak") || cardName.equals("Convolute") || cardName.equals("Daze")
@@ -11236,39 +11161,6 @@ public class CardFactory implements NewConstants {
                 spell.setDescription(card.getText());
                 card.setText("");
             }
-        }//*************** END ************ END **************************
-        
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Remand")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 7259402997927108504L;
-                
-                @Override
-                public void resolve() {
-                    //counter spell, return it to owner's hand
-                    SpellAbility sa = AllZone.Stack.pop();
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, sa.getSourceCard().getOwner());
-                    AllZone.GameAction.moveTo(hand, sa.getSourceCard());
-                    
-                    //draw card
-                    // AllZone.GameAction.drawCard(card.getController());
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    if(AllZone.Stack.size() == 0) return false;
-                    
-                    //see if spell is on stack and that opponent played it
-                    String opponent = AllZone.GameAction.getOpponent(card.getController());
-                    SpellAbility sa = AllZone.Stack.peek();
-                    
-                    return sa.isSpell() && opponent.equals(sa.getSourceCard().getController())
-                            && CardFactoryUtil.isCounterable(sa.getSourceCard());
-                }
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
 /* Converted to keyword
@@ -13308,134 +13200,7 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Absorb")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -2007620906017942538L;
-                
-                @Override
-                public void resolve() {
-                    SpellAbility sa = AllZone.Stack.pop();
-                    AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
-                    
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                    life.addLife(3);
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    if(AllZone.Stack.size() == 0) return false;
-                    
-                    //see if spell is on stack and that opponent played it
-                    String opponent = AllZone.GameAction.getOpponent(card.getController());
-                    SpellAbility sa = AllZone.Stack.peek();
-                    
-                    return sa.isSpell() && opponent.equals(sa.getSourceCard().getController())
-                            && CardFactoryUtil.isCounterable(sa.getSourceCard());
-                }
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
 
-        //*************** START *********** START **************************
-        else if(cardName.equals("Undermine")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -4999966043862729936L;
-                
-                @Override
-                public void resolve() {
-                    SpellAbility sa = AllZone.Stack.pop();
-                    AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
-                    
-                    String opponent = AllZone.GameAction.getOpponent(card.getController());
-                    AllZone.GameAction.getPlayerLife(opponent).subtractLife(3,card);
-                    
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    if(AllZone.Stack.size() == 0) return false;
-                    
-                    //see if spell is on stack and that opponent played it
-                    String opponent = AllZone.GameAction.getOpponent(card.getController());
-                    SpellAbility sa = AllZone.Stack.peek();
-                    
-                    return sa.isSpell() && opponent.equals(sa.getSourceCard().getController())
-                            && CardFactoryUtil.isCounterable(sa.getSourceCard());
-                }
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Punish Ignorance")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 6845184687406705133L;
-                
-                @Override
-                public void resolve() {
-                    SpellAbility sa = AllZone.Stack.pop();
-                    AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
-                    
-                    String opponent = AllZone.GameAction.getOpponent(card.getController());
-                    AllZone.GameAction.getPlayerLife(opponent).subtractLife(3,card);
-                    
-                    String player = card.getController();
-                    AllZone.GameAction.getPlayerLife(player).addLife(3);
-                    
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    if(AllZone.Stack.size() == 0) return false;
-                    
-                    //see if spell is on stack and that opponent played it
-                    String opponent = AllZone.GameAction.getOpponent(card.getController());
-                    SpellAbility sa = AllZone.Stack.peek();
-                    
-                    return sa.isSpell() && opponent.equals(sa.getSourceCard().getController())
-                            && CardFactoryUtil.isCounterable(sa.getSourceCard());
-                }
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Exclude")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -5615796501064636046L;
-                
-                @Override
-                public void resolve() {
-                    SpellAbility sa = AllZone.Stack.pop();
-                    AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
-                    // AllZone.GameAction.drawCard(card.getController());
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    if(AllZone.Stack.size() == 0) return false;
-                    
-                    //see if spell is on stack and that opponent played it
-                    String opponent = AllZone.GameAction.getOpponent(card.getController());
-                    SpellAbility sa = AllZone.Stack.peek();
-                    
-                    //is spell?, did opponent play it?, is this a creature spell?
-                    return sa.isSpell() && opponent.equals(sa.getSourceCard().getController())
-                            && sa.getSourceCard().getType().contains("Creature")
-                            && CardFactoryUtil.isCounterable(sa.getSourceCard());
-                }//canPlay()
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Eladamri's Call")) {
             final SpellAbility spell = new Spell(card) {
@@ -13494,37 +13259,7 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Dismiss")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -7959473218345045760L;
-                
-                @Override
-                public void resolve() {
-                    SpellAbility sa = AllZone.Stack.pop();
-                    AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
-                    
-                    // AllZone.GameAction.drawCard(card.getController());
-                    
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    if(AllZone.Stack.size() == 0) return false;
-                    
-                    //see if spell is on stack and that opponent played it
-                    String opponent = AllZone.GameAction.getOpponent(card.getController());
-                    SpellAbility sa = AllZone.Stack.peek();
-                    
-                    return sa.isSpell() && opponent.equals(sa.getSourceCard().getController())
-                            && CardFactoryUtil.isCounterable(sa.getSourceCard());
-                }
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
+
         //*************** START *********** START **************************
         else if(cardName.equals("Global Ruin")) {
             final CardList target = new CardList();
@@ -17788,35 +17523,6 @@ public class CardFactory implements NewConstants {
             ability.setBeforePayMana(runtime);
             
         }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Spell Snare")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -3254886985412814994L;
-                
-                @Override
-                public void resolve() {
-                    SpellAbility sa = AllZone.Stack.pop();
-                    AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    if(AllZone.Stack.size() == 0) return false;
-                    
-                    //see if spell is on stack and that opponent played it
-                    String opponent = AllZone.GameAction.getOpponent(card.getController());
-                    SpellAbility sa = AllZone.Stack.peek();
-                    
-                    return sa.isSpell() && opponent.equals(sa.getSourceCard().getController())
-                            && CardFactoryUtil.isCounterable(sa.getSourceCard())
-                            && CardUtil.getConvertedManaCost(sa.getSourceCard().getManaCost()) == 2;
-                }
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Time Walk") || cardName.equals("Temporal Manipulation")
@@ -19118,7 +18824,7 @@ public class CardFactory implements NewConstants {
 				if (getSourceCard().getAttachedCards().length > 0)
 				{
 					Card c = copyCard(getSourceCard().getAttachedCards()[0]);
-					if (c.getName().equals("Counterspell") || c.getName().equals("Stifle"))
+					if (ComputerAI_counterSpells2.KeywordedCounterspells.contains(c.getName()))
 					{
 						SpellAbility sa = c.getSpellAbility()[0];
 						return sa.canPlay();
@@ -21982,35 +21688,6 @@ public class CardFactory implements NewConstants {
         }// *************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Dissipate") || cardName.equals("Assert Authority")) {
-        	SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = 4165714000804564686L;
-
-				@Override
-        		public void resolve() {
-        			//counter spell, remove it from the game
-        			SpellAbility sa = AllZone.Stack.pop();
-        			PlayerZone rfg = AllZone.getZone(Constant.Zone.Removed_From_Play, sa.getSourceCard().getOwner());
-        			AllZone.GameAction.moveTo(rfg, sa.getSourceCard());
-        		}
-
-        		@Override
-        		public boolean canPlay() {
-        			if(AllZone.Stack.size() == 0) return false;
-
-        			//see if spell is on stack and that opponent played it
-        			String opponent = AllZone.GameAction.getOpponent(card.getController());
-        			SpellAbility sa = AllZone.Stack.peek();
-
-        				return sa.isSpell() && opponent.equals(sa.getSourceCard().getController())
-        					&& CardFactoryUtil.isCounterable(sa.getSourceCard());
-        		}
-        	};
-        	card.clearSpellAbility();
-        	card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Acidic Soil")) {
         	/*
         	 * Acidic Soil deals damage to each player equal to the number of
@@ -23518,41 +23195,7 @@ public class CardFactory implements NewConstants {
         		}//canPlayAI
         	});//addSpellAbility
         }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Muddle the Mixture")) {
-        	/*
-        	 *  This card can not be used by the computer at this time.
-        	 */
-        	SpellAbility spell = new Spell(card) {
-        		private static final long serialVersionUID = -2489268054171391552L;
 
-        		@Override
-        		public void resolve() {
-        			SpellAbility sa = AllZone.Stack.pop();
-        			AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
-        		}//resolve()
-
-        		@Override
-        		public boolean canPlay() {
-        			if(AllZone.Stack.size() == 0) return false;
-
-        			//see if spell is on stack and that opponent played it
-        			String opponent = AllZone.GameAction.getOpponent(card.getController());
-        			SpellAbility sa = AllZone.Stack.peek();
-
-        			return sa.isSpell() 
-        					&& opponent.equals(sa.getSourceCard().getController())
-        					&& CardFactoryUtil.isCounterable(sa.getSourceCard())
-        					&& (sa.getSourceCard().isInstant() || sa.getSourceCard().isSorcery());
-        		}//canPlay()
-        	};//SpellAbility
-        	card.clearSpellAbility();
-        	spell.setDescription("Counter target instant or sorcery spell.");
-        	spell.setStackDescription("Muddle The Mixture - Counters target instant or sorcery.");
-        	card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
         //*************** START ********** START *************************
         if (cardName.equals("Destructive Force") || cardName.equals("Wildfire"))
         {
@@ -23866,6 +23509,313 @@ public class CardFactory implements NewConstants {
             card.addLeavesPlayCommand(leavesPlay);
             card.addChangeControllerCommand(controllerChanges);
          } //HandSize
+        
+        if(hasKeyword(card,"spCounter") != -1) {
+        	System.out.println("Processing spCounter for card " + card.getName());
+        	ComputerAI_counterSpells2.KeywordedCounterspells.add(card.getName());
+        	String keyword = card.getKeyword().get(hasKeyword(card,"spCounter"));
+        	if(keyword.contains("X"))
+        	{
+        		keyword = keyword.replace("X", card.getSVar("X"));
+        	}
+            card.removeIntrinsicKeyword(keyword);
+        	
+        	String[] splitkeyword = keyword.split(":");
+        	
+        	final String TargetType = splitkeyword[1];
+        	final String TargetingRestrictions = splitkeyword[2];
+        	final String Destination = splitkeyword[3];
+        	final String ExtraActions = splitkeyword[4];
+        	
+        	final String[] SplitTargetingRestrictions = TargetingRestrictions.split(" ");
+        	final String[] SplitExtraActions = ExtraActions.split(" ");
+        	
+        	SpellAbility spCounterAbility = new Spell(card)
+        	{
+        		private static final long serialVersionUID = 9763720166553L;
+        		
+        		@Override
+        		public boolean canPlayAI()
+        		{
+        			System.out.println("AI is pondering us...");
+        			return canPlay();
+        		}
+        		
+        		@Override
+        		public boolean canPlay()
+        		{
+        			if(AllZone.Stack.size() == 0)
+        			{
+        				return false;
+        			}
+        			
+        			boolean fullResult = true;
+        			SpellAbility sa = AllZone.Stack.peek();
+        			Card tgtCard = sa.getSourceCard();
+        			
+        			if(TargetType.equals("Spell"))
+        			{
+        				if(sa.isAbility())
+        				{
+        					System.out.println(card.getName() + " can only counter spells, not abilities.");
+        					return false;
+        					
+        				}
+        			}
+        			else if(TargetType.equals("Ability"))
+        			{
+        				if(sa.isSpell())
+        				{
+        					System.out.println(card.getName() + " can only counter abilities, not spells.");
+        					return false;
+        				}
+        			}
+        			else if(TargetType.equals("SpellOrAbility"))
+        			{
+        				//Do nothing. This block is only for clarity and enforcing parameters.
+        			}
+        			else
+        			{
+        				throw new IllegalArgumentException("Invalid target type for card " + card.getName());
+        			}
+        			
+        			for(int i=0;i<SplitTargetingRestrictions.length;i++)
+        			{
+        				boolean subResult = false;
+        				if(TargetingRestrictions.equals("None"))
+        				{
+        					return true;
+        				}
+        				
+        				String RestrictionID = SplitTargetingRestrictions[i].substring(0,SplitTargetingRestrictions[i].indexOf('('));
+        				String Parameters = SplitTargetingRestrictions[i].substring(SplitTargetingRestrictions[i].indexOf('(')+1);
+        				Parameters = Parameters.substring(0,Parameters.length()-1);
+        				
+        				String[] SplitParameters = Parameters.split(",");
+        				
+        				System.out.println(card.getName() + " currently checking restriction '" + RestrictionID + "'");
+        				if(RestrictionID.equals("Color"))
+        				{
+        					for(int p=0;p<SplitParameters.length;p++)
+        					{
+        						System.out.println("Parameter: " + SplitParameters[p]);
+        						if(SplitParameters[p].startsWith("Non-"))
+        						{
+        							subResult |= !CardUtil.getColors(tgtCard).contains(SplitParameters[p].substring(4).toLowerCase()); 
+        						}
+        						else
+        						{
+        							subResult |= CardUtil.getColors(tgtCard).contains(SplitParameters[p].toLowerCase());
+        						}
+        					}
+        				}
+        				else if(RestrictionID.equals("Type"))
+        				{
+        					for(int p=0;p<SplitParameters.length;p++)
+        					{
+        						System.out.println("Parameter: " + SplitParameters[p]);
+        						if(SplitParameters[p].startsWith("Non-"))
+        						{
+        							System.out.println(SplitParameters[p].substring(4));
+        							subResult |= !tgtCard.getType().contains(SplitParameters[p].substring(4));
+        						}
+        						else
+        						{
+        							subResult |= tgtCard.getType().contains(SplitParameters[p]);
+        						}
+        					}
+        				}
+        				else if(RestrictionID.equals("CMC"))
+        				{
+        					String mode = SplitParameters[0];
+        					int value = Integer.parseInt(SplitParameters[1]);
+        					System.out.println(mode);
+        					System.out.println(Integer.toString(value));
+        					
+        					if(mode.equals("<"))
+        					{
+        						subResult |= (CardUtil.getConvertedManaCost(tgtCard) < value);
+        					}
+        					else if(mode.equals(">"))
+        					{
+        						subResult |= (CardUtil.getConvertedManaCost(tgtCard) > value);
+        					}
+        					else if(mode.equals("=="))
+        					{
+        						subResult |= (CardUtil.getConvertedManaCost(tgtCard) == value);
+        					}
+        					else if(mode.equals("!="))
+        					{
+        						subResult |= (CardUtil.getConvertedManaCost(tgtCard) != value);
+        					}
+        					else if(mode.equals("<="))
+        					{
+        						subResult |= (CardUtil.getConvertedManaCost(tgtCard) <= value);
+        					}
+        					else if(mode.equals(">="))
+        					{
+        						subResult |= (CardUtil.getConvertedManaCost(tgtCard) >= value);
+        					}        					
+        					else
+        					{
+        						throw new IllegalArgumentException("spCounter: Invalid mode parameter to CMC restriction in card " + card.getName());
+        					}
+        				}
+        				else if(RestrictionID.equals("Targets"))
+        				{        					
+        					for(int p=0;p<SplitParameters.length;p++)
+        					{
+        						System.out.println("Parameter: " + SplitParameters[p]);
+        						if(SplitParameters[p].startsWith("My-")) //Targets my <type> permanent
+        						{
+        							if(sa.getTargetCard().getController() != card.getController())
+        							{
+        								return false;
+        							}
+        							if(SplitParameters[p].contains("Non-"))
+        							{
+        								subResult |= !sa.getTargetCard().getType().contains(SplitParameters[p].substring(7));
+        							}
+        							else
+        							{
+        								subResult |= (sa.getTargetCard().getType().contains(SplitParameters[p].substring(3)));
+        							}
+        						}
+        						else if(SplitParameters[p].startsWith("Opp-")) //Targets opponent's <type> permanent
+        						{
+        							if(sa.getTargetCard().getController() == card.getController())
+        							{
+        								return false;
+        							}
+        							
+        							if(SplitParameters[p].contains("Non-"))
+        							{
+        								subResult |= !(sa.getTargetCard().getType().contains(SplitParameters[p].substring(8)));
+        							}
+        							else
+        							{
+        								subResult |= (sa.getTargetCard().getType().contains(SplitParameters[p].substring(4)));
+        							}
+        						}
+        						else
+        						{
+        							if(SplitParameters[p].contains("Non-"))
+        							{
+        								subResult |= !(sa.getTargetCard().getType().contains(SplitParameters[p].substring(4)));
+        							}
+        							else
+        							{
+        								subResult |= (sa.getTargetCard().getType().contains(SplitParameters[p]));
+        							}
+        						}
+        					}
+        				}
+        				System.out.println("Sub: " + Boolean.toString(subResult));
+        				fullResult &= subResult;
+        			} //End Targeting parsing
+        			System.out.println("Success: " + Boolean.toString(fullResult));
+        			return fullResult;
+        		}
+        		
+        		@Override
+        		public void resolve()
+        		{
+        			System.out.println("Resolving " + card.getName());
+        			SpellAbility sa = AllZone.Stack.pop();
+        			
+        			System.out.println("Send countered spell to " + Destination);
+        			
+        			if(Destination.equals("None") || TargetType.contains("Ability")) //For Ability-targeting counterspells
+        			{
+        				
+        			}
+        			else if(Destination.equals("Graveyard"))
+        			{
+        				AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
+        			}
+        			else if(Destination.equals("Exile"))
+        			{
+        				AllZone.GameAction.exile(sa.getSourceCard());
+        			}
+        			else if(Destination.equals("Topdeck"))
+        			{
+        				AllZone.GameAction.moveToTopOfLibrary(sa.getSourceCard());
+        			}
+        			else if(Destination.equals("Hand"))
+        			{
+        				AllZone.GameAction.moveToHand(sa.getSourceCard());
+        			}
+        			else if(Destination.equals("BottomDeck"))
+        			{
+        				AllZone.GameAction.moveToBottomOfLibrary(sa.getSourceCard());
+        			}
+        			else if(Destination.equals("Shuffle"))
+        			{
+        				AllZone.GameAction.moveToBottomOfLibrary(sa.getSourceCard());
+        				AllZone.GameAction.shuffle(sa.getSourceCard().getController());
+        			}
+        			else
+        			{
+        				throw new IllegalArgumentException("spCounter: Invalid Destination argument for card " + card.getName());
+        			}
+        			
+        			for(int ea = 0;ea<SplitExtraActions.length;ea++)
+        			{
+        				
+        				if(ExtraActions.equals("None"))
+        				{
+        					break;
+        				}
+        				String ActionID = SplitExtraActions[ea].substring(0,SplitExtraActions[ea].indexOf('('));
+        				
+        				String Target = "";
+        				
+        				String ActionParams = SplitExtraActions[ea].substring(SplitExtraActions[ea].indexOf('(')+1);
+        				ActionParams = ActionParams.substring(0,ActionParams.length()-1);
+        				
+        				String[] SplitActionParams = ActionParams.split(",");
+        				
+        				System.out.println("Extra Action: " + ActionID);
+        				System.out.println("Parameters: " + ActionParams);
+        				
+        				if(ActionID.startsWith("My-"))
+        				{
+        					ActionID = ActionID.substring(3);
+        					Target = card.getController();
+        				}
+        				else if(ActionID.startsWith("Opp-"))
+        				{
+        					ActionID = ActionID.substring(4);
+        					Target = AllZone.GameAction.getOpponent(card.getController());
+        				}
+        				
+        				if(ActionID.equals("Draw"))
+        				{
+        					AllZone.GameAction.drawCards(Target, Integer.parseInt(SplitActionParams[0]));
+        				}
+        				else if(ActionID.equals("Discard"))
+        				{
+        					AllZone.GameAction.discard(Target, Integer.parseInt(SplitActionParams[0]));
+        				}
+        				else if(ActionID.equals("LoseLife"))
+        				{
+        					AllZone.GameAction.getPlayerLife(Target).subtractLife(Integer.parseInt(SplitActionParams[0]), card);
+        				}
+        				else if(ActionID.equals("GainLife"))
+        				{
+        					AllZone.GameAction.getPlayerLife(Target).addLife(Integer.parseInt(SplitActionParams[0]));
+        				}
+        				else
+        				{
+        					throw new IllegalArgumentException("spCounter: Invalid Extra Action for card " + card.getName());
+        				}
+        			}
+        		}
+        	};
+        	
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spCounterAbility);
+        } //spCounter
         
         if (card.getManaCost().contains("X"))
         {

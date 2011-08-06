@@ -1,6 +1,10 @@
 package forge;
 
+import java.util.ArrayList;
+
 public class ComputerAI_counterSpells2 {
+	
+	public static ArrayList<String> KeywordedCounterspells = new ArrayList<String>();
 	
 	public static void counter_Spell(SpellAbility sa)
 	{
@@ -24,16 +28,11 @@ public class ComputerAI_counterSpells2 {
 	
 	public static CardList getPlayableCounterSpells(final SpellAbility sa){
 		final String[] basic = {
-				"Counterspell", "Remand", "Cancel", "Mystic Snake", "Absorb", "Undermine", "Punish Ignorance",
-				"Dismiss", "Last Word", "Dissipate", "Assert Authority" /*, "Force of Will",  "Thwart" */
+				"Mystic Snake"/*, "Force of Will",  "Thwart" */
 		};
 		
 		final String[] creature = {
-			"Exclude", "Overwhelming Intellect", "Preemptive Strike", "Remove Soul", "Essence Scatter", "False Summoning"
-		};
-		
-		final String[] nonCreature = {
-			""
+			"Overwhelming Intellect"
 		};
 		
 		final String[] nonCreatureUnlessPay2 = {
@@ -51,7 +50,7 @@ public class ComputerAI_counterSpells2 {
 		final String[] unlessPay4 = {
 			"Convolute"
 		};
-
+		
 		final int usableManaSources = CardFactoryUtil.getUsableManaSources(Constant.Player.Human);
 		
 		PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
@@ -60,13 +59,11 @@ public class ComputerAI_counterSpells2 {
 		{
 			public boolean addCard(Card c)
 			{
-				if(sa.getSourceCard().getType().contains("Sorcery") || sa.getSourceCard().getType().contains("Instant")) {
-					if(c.getName().equals("Muddle the Mixture"))
-						return true;
+				if(KeywordedCounterspells.contains(c.getName()))
+				{
+					System.out.println("Counterspell is keyworded, casting is a-go.");
+					return c.getSpells().get(0).canPlayAI();
 				}
-				if (CardUtil.getConvertedManaCost(sa.getSourceCard().getManaCost()) == 2)
-					if (c.getName().equals("Spell Snare"))
-						return true;
 				
 				if (usableManaSources == 0) {
 					if (checkArray(c, unlessPay1))
@@ -85,11 +82,6 @@ public class ComputerAI_counterSpells2 {
 				
 				if (sa.getSourceCard().isCreature()) {
 					if (checkArray(c, creature))
-						return true;
-				}
-
-				else if (!sa.getSourceCard().isCreature()) {
-					if (checkArray(c, nonCreature))
 						return true;
 				}
 				
