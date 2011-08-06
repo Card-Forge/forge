@@ -5019,6 +5019,7 @@ res/cardsfolder/roar_of_the_wurm.txt -text svneol=native#text/plain
 res/cardsfolder/robber_fly.txt -text svneol=native#text/plain
 res/cardsfolder/robe_of_mirrors.txt -text svneol=native#text/plain
 res/cardsfolder/roc_egg.txt -text svneol=native#text/plain
+res/cardsfolder/roc_hatchling.txt svneol=native#text/plain
 res/cardsfolder/roc_of_kher_ridges.txt -text svneol=native#text/plain
 res/cardsfolder/rock_badger.txt -text svneol=native#text/plain
 res/cardsfolder/rock_basilisk.txt -text svneol=native#text/plain
