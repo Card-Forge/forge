@@ -1,0 +1,10 @@
+Name:Blackcleave Goblin
+ManaCost:3 B
+Types:Creature Goblin Zombie
+Text:no text
+PT:2/1
+K:Haste
+K:Infect
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blackcleave_goblin.jpg
+End
