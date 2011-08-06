@@ -1,3 +1,87 @@
+Fill with Fright
+3 B
+Sorcery
+no text
+spDiscardTgt:TgtChoose:2:Target player discards two cards.:Fill with Fright - target player discards cards
+Scry 2
+
+Fugue
+3 B B
+Sorcery
+no text
+spDiscardTgt:TgtChoose:3:Target player discards three cards.:Fugue - target player discards cards
+
+Haunting Hymn
+4 B B
+Instant
+no text
+spDiscardTgt:TgtChoose:X:Target player discards two cards. If you cast this spell during your main phase, that player discards four cards instead.:Haunting Hymn - target player discards cards
+SVar:X:Count$IfMainPhase.4.2
+
+Mind Burst
+1 B
+Sorcery
+no text
+spDiscardTgt:TgtChoose:X:Target player discards X cards, where X is one plus the number of cards named Mind Burst in all graveyards.:Mind Burst - target player discards cards
+SVar:X:Count$NamedInAllYards.Mind Burst/Plus.1
+
+Mind Rot
+2 B
+Sorcery
+no text
+spDiscardTgt:TgtChoose:2:Target player discards two cards.:Mind Rot - target player discards cards
+
+Mind Sludge
+4 B
+Sorcery
+no text
+spDiscardTgt:TgtChoose:X:Target player discards a card for each Swamp you control.:Mind Sludge - target player discards cards
+SVar:X:Count$TypeYouCtrl.Swamp
+
+Specter's Wail
+1 B 
+Sorcery
+no text
+spDiscardTgt:AtRandom:1:Target player discards a card at random.:Specter's Wail - target player discards a card
+
+Three Tragedies
+3 B B
+Sorcery Arcane
+no text
+spDiscardTgt:TgtChoose:3:Target player discards three cards.:Three Tragedies - target player discards cards
+
+Unburden
+1 B B
+Sorcery
+no text
+spDiscardTgt:TgtChoose:2:Target player discards two cards.:Unburden - target player discards cards
+Cycling:2
+
+Unhinge
+2 B
+Sorcery
+no text
+spDiscardTgt:TgtChoose:1:Target player discards a card.:Unhinge - target player discards a card
+Draw a card.
+
+Voices from the Void
+4 B
+Sorcery
+no text
+spDiscardTgt:TgtChoose:X:Domain - Target player discards a card for each basic land type among lands you control.:Voices from the Void - target player discards cards
+
+Waking Nightmare
+2 B
+Sorcery Arcane
+no text
+spDiscardTgt:TgtChoose:2:Target player discards two cards.:Waking Nightmare - target player discards cards
+
+Wrench Mind
+B B
+Sorcery
+no text
+spDiscardTgt:TgtChoose:2/UnlessDiscardType.Artifact:Target player discards two cards unless he or she discards an artifact card.:Wrench Mind - target player discards cards
+
 Chill to the Bone
 3 B
 Instant
