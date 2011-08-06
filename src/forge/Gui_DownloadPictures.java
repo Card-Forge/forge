@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
@@ -216,8 +217,8 @@ public class Gui_DownloadPictures extends DefaultBoundedRangeModel implements Ru
     
 
     public void run() {
-        BufferedInputStream in;
-        BufferedOutputStream out;
+        BufferedInputStream in = null;
+        BufferedOutputStream out = null;
         
         File base = ForgeProps.getFile(IMAGE_BASE);
         
@@ -271,9 +272,7 @@ public class Gui_DownloadPictures extends DefaultBoundedRangeModel implements Ru
                     while((len = in.read(buf)) != -1) {
                         //user cancelled
                         if(cancel) {
-                            in.close();
-                            out.flush();
-                            out.close();
+                            flushAndCloseStreams(in, out);
                             
                             //delete what was written so far
                             f.delete();
@@ -284,16 +283,29 @@ public class Gui_DownloadPictures extends DefaultBoundedRangeModel implements Ru
                         out.write(buf, 0, len);
                     }//while - read and write file
                     
-                    in.close();
-                    out.flush();
-                    out.close();
                 } catch(Exception ex) {
                 	Log.error("HQ Pictures", "Error downloading pictures", ex);
+                }
+                finally{
+                	try {
+						flushAndCloseStreams(in, out);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}                	
                 }
             }//for
         }
         close.setText(ForgeProps.getLocalized(BUTTONS.CLOSE));
     }//run
+
+	private void flushAndCloseStreams(BufferedInputStream in, BufferedOutputStream out) throws IOException {
+		if(in != null)
+			in.close();
+		if(out != null){
+			out.flush();
+			out.close();
+		}
+	}
     
     public static void startDownload(JFrame frame) {
         final Card[] card = getNeededCards();
