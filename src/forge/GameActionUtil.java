@@ -3738,7 +3738,7 @@ public class GameActionUtil {
 		 * or her graveyard to the battlefield.
 		 */
 		final Player player = AllZone.Phase.getPlayerTurn();
-		CardList eves = AllZoneUtil.getPlayerCardsRemovedFromGame(player, "All Hallow's Eve");
+		CardList eves = AllZoneUtil.getPlayerCardsInExile(player, "All Hallow's Eve");
 		
 		for(Card c:eves) {
 			final Card eve = c;

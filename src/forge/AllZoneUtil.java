@@ -42,9 +42,9 @@ public class AllZoneUtil {
 	}
 	
 	/**
-	 * use to get a CardList of all creatures in play for both players
+	 * use to get a CardList of all creatures on the battlefield for both players
 	 * 
-	 * @return a CardList of all creatures in play on both sides
+	 * @return a CardList of all creatures on the battlefield on both sides
 	 */
 	public static CardList getCreaturesInPlay() {
 		CardList creatures = getCardsInPlay();
@@ -54,7 +54,7 @@ public class AllZoneUtil {
 	///////////////// Lands
 	
 	/**
-	 * use to get a list of all lands a given player has in play
+	 * use to get a list of all lands a given player has on the battlefield
 	 * 
 	 * @param player the player whose lands we want to get
 	 * @return a CardList containing all lands the given player has in play
@@ -62,6 +62,17 @@ public class AllZoneUtil {
 	public static CardList getPlayerLandsInPlay(final Player player) {
 		CardList cards = getPlayerCardsInPlay(player);
 		return cards.filter(lands);
+	}
+	
+	/**
+	 * gets a list of all lands in play
+	 * @return a CardList of all lands on the battlefield
+	 */
+	public static CardList getLandsInPlay() {
+		CardList lands = new CardList();
+		lands.add(getPlayerLandsInPlay(AllZone.HumanPlayer));
+		lands.add(getPlayerLandsInPlay(AllZone.ComputerPlayer));
+		return lands;
 	}
 	
 	//=============================================================================
@@ -177,6 +188,12 @@ public class AllZoneUtil {
 	}
 	
 	// Get a Cards in All Graveyards with a certain name
+	/**
+	 * gets a CardList of all cards with a given name in all graveyards
+	 * 
+	 * @param cardName the card name to look for
+	 * @return a CardList of all cards with the given name in all graveyards
+	 */
 	public static CardList getCardsInGraveyard(final String cardName) {
 		CardList cards = new CardList();
 		cards.add(getPlayerGraveyard(AllZone.HumanPlayer));
@@ -202,17 +219,28 @@ public class AllZoneUtil {
 		return cards;
 	}
 	
-	////////////// REMOVED FROM GAME
+	/**
+	 * answers the question "is a certain, specific card in this player's hand?"
+	 * 
+	 * @param player the player's hand to check
+	 * @param card the specific card to look for
+	 * @return true if the card is present in this player's hand; false otherwise
+	 */
+	public static boolean isCardInPlayerHand(Player player, Card card) {
+		return PlayerZoneUtil.isCardInZone(AllZone.getZone(Constant.Zone.Hand, player), card);
+	}
+	
+	////////////// EXILE
 	
 	/**
 	 * gets a list of all cards owned by both players that are in Exile
 	 * 
 	 * @return a CardList with all cards in Exile
 	 */
-	public static CardList getCardsRemovedFromGame() {
+	public static CardList getCardsInExile() {
 		CardList cards = new CardList();
-		cards.add(getPlayerCardsRemovedFromGame(AllZone.ComputerPlayer));
-		cards.add(getPlayerCardsRemovedFromGame(AllZone.HumanPlayer));
+		cards.add(getPlayerCardsInExile(AllZone.ComputerPlayer));
+		cards.add(getPlayerCardsInExile(AllZone.HumanPlayer));
 		return cards;
 	}
 	
@@ -222,7 +250,7 @@ public class AllZoneUtil {
 	 * @param player the player whose cards we want that are in Exile
 	 * @return a CardList with all cards in Exile for a given player
 	 */
-	public static CardList getPlayerCardsRemovedFromGame(final Player player) {
+	public static CardList getPlayerCardsInExile(final Player player) {
 		CardList cards = new CardList();
 		if( player.equals(AllZone.HumanPlayer) || player.equals(AllZone.ComputerPlayer) ){
 			PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, player);
@@ -238,8 +266,8 @@ public class AllZoneUtil {
 	 * @param cardName the card name to find in the exile
 	 * @return a CardList containing all cards with that name in the target exile
 	 */
-	public static CardList getPlayerCardsRemovedFromGame(final Player player, final String cardName) {
-		CardList cards = getPlayerCardsRemovedFromGame(player);
+	public static CardList getPlayerCardsInExile(final Player player, final String cardName) {
+		CardList cards = getPlayerCardsInExile(player);
 		cards = cards.getName(cardName);
 		return cards;
 	}
@@ -270,10 +298,6 @@ public class AllZoneUtil {
 	public static CardList getPlayerCardsInLibrary(final Player player, final String cardName) {
 		CardList cards = getPlayerCardsInLibrary(player);
 		return cards.getName(cardName);
-	}
-	
-	public static boolean isCardInPlayerHand(Player player, Card card) {
-		return PlayerZoneUtil.isCardInZone(AllZone.getZone(Constant.Zone.Hand, player), card);
 	}
 	
 	///Check if a certain card is in play
@@ -356,12 +380,25 @@ public class AllZoneUtil {
 	
 	//////////////// getting all cards of a given color
 	
+	/**
+	 * gets a list of all Cards of a given color on the battlefield
+	 * 
+	 * @param color the color of cards to get
+	 * @return a CardList of all cards in play of a given color
+	 */
 	public static CardList getColorInPlay(final String color) {
 		CardList cards = getPlayerColorInPlay(AllZone.ComputerPlayer, color);
 		cards.add(getPlayerColorInPlay(AllZone.HumanPlayer, color));
 		return cards;
 	}
 	
+	/**
+	 * gets a list of all Cards of a given color a given player has on the battlefield
+	 * 
+	 * @param player the player's cards to get
+	 * @param color the color of cards to get
+	 * @return a CardList of all cards in play of a given color
+	 */
 	public static CardList getPlayerColorInPlay(final Player player, final String color) {
 		CardList cards = getPlayerCardsInPlay(player);
 		cards = cards.filter(new CardListFilter() {
@@ -547,18 +584,27 @@ public class AllZoneUtil {
 		}
 	};
 	
+	/**
+	 * a CardListFilter to get all nontoken cards
+	 */
 	public static CardListFilter nonToken = new CardListFilter() {
 		public boolean addCard(Card c) {
 			return !c.isToken();
 		}
 	};
 	
+	/**
+	 * a CardListFilter to get all nonbasic lands
+	 */
 	public static CardListFilter nonBasicLand = new CardListFilter() {
 		public boolean addCard(Card c) {
 			return !c.isBasicLand();
 		}
 	};
 	
+	/**
+	 * a CardListFilter to get all basicLands
+	 */
 	public static CardListFilter basicLands = new CardListFilter() {
 		public boolean addCard(Card c) {
 			//the isBasicLand() check here may be sufficient...
@@ -566,24 +612,36 @@ public class AllZoneUtil {
 		}
 	};
 	
+	/**
+	 * a CardListFilter to get all artifacts
+	 */
 	public static CardListFilter artifacts = new CardListFilter() {
 		public boolean addCard(Card c) {
 			return c.isArtifact();
 		}
 	};
 	
+	/**
+	 * a CardListFilter to get all nonartifacts
+	 */
 	public static CardListFilter nonartifacts = new CardListFilter() {
 		public boolean addCard(Card c) {
 			return !c.isArtifact();
 		}
 	};
 	
+	/**
+	 * a CardListFilter to get all lands
+	 */
 	public static CardListFilter lands = new CardListFilter() {
 		public boolean addCard(Card c) {
 			return c.isLand();
 		}
 	};
 	
+	/**
+	 * a CardListFilter to get all nonlands
+	 */
 	public static CardListFilter nonlands = new CardListFilter() {
 		public boolean addCard(Card c) {
 			return c.isLand();
@@ -635,36 +693,54 @@ public class AllZoneUtil {
 		return filter;
 	}
 	
+	/**
+	 * a CardListFilter to get all cards that are black
+	 */
 	public static CardListFilter black = new CardListFilter() {
 		public boolean addCard(Card c) {
 			return c.isBlack();
 		}
 	};
 	
+	/**
+	 * a CardListFilter to get all cards that are blue
+	 */
 	public static CardListFilter blue = new CardListFilter() {
 		public boolean addCard(Card c) {
 			return c.isBlue();
 		}
 	};
 	
+	/**
+	 * a CardListFilter to get all cards that are green
+	 */
 	public static CardListFilter green = new CardListFilter() {
 		public boolean addCard(Card c) {
 			return c.isGreen();
 		}
 	};
 	
+	/**
+	 * a CardListFilter to get all cards that are red
+	 */
 	public static CardListFilter red = new CardListFilter() {
 		public boolean addCard(Card c) {
 			return c.isRed();
 		}
 	};
 	
+	/**
+	 * a CardListFilter to get all cards that are white
+	 */
 	public static CardListFilter white = new CardListFilter() {
 		public boolean addCard(Card c) {
 			return c.isWhite();
 		}
 	};
 	
+	/**
+	 * a CardListFilter to get all cards that are a part of this game
+	 */
 	public static CardList getCardsInGame(){
         CardList all = new CardList();
         all.addAll(AllZone.Human_Graveyard.getCards());
@@ -672,12 +748,16 @@ public class AllZoneUtil {
         all.addAll(AllZone.Human_Library.getCards());
         all.addAll(AllZone.Human_Battlefield.getCards());
         all.addAll(AllZone.Human_Exile.getCards());
+        //should this include Human_Command ?
+        //all.addAll(AllZone.Human_Sideboard.getCards());
         
         all.addAll(AllZone.Computer_Graveyard.getCards());
         all.addAll(AllZone.Computer_Hand.getCards());
         all.addAll(AllZone.Computer_Library.getCards());
         all.addAll(AllZone.Computer_Battlefield.getCards());
         all.addAll(AllZone.Computer_Exile.getCards());
+        //should this include Computer_Command ?
+        //all.addAll(AllZone.Computer_Sideboard.getCards());
         
         return all;
     }
@@ -694,13 +774,12 @@ public class AllZoneUtil {
 			&& isCardInPlay("Urza's Tower", player);
 	}
 
-	public static CardList getLandsInPlay() {
-		CardList lands = new CardList();
-		lands.add(getPlayerLandsInPlay(AllZone.HumanPlayer));
-		lands.add(getPlayerLandsInPlay(AllZone.ComputerPlayer));
-		return lands;
-	}
 	
+	
+	/**
+	 * get a list of all players participating in this game
+	 * @return a list of all player participating in this game
+	 */
 	public static ArrayList<Player> getPlayersInGame() {
 		ArrayList<Player> list = new ArrayList<Player>();
 		list.add(AllZone.HumanPlayer);
@@ -708,6 +787,11 @@ public class AllZoneUtil {
 		return list;
 	}
 	
+	/**
+	 * gets a list of all opponents of a given player
+	 * @param p the player whose opponents to get
+	 * @return a list of all opponents
+	 */
 	public static ArrayList<Player> getOpponents(Player p) {
 		ArrayList<Player> list = new ArrayList<Player>();
 		list.add(p.getOpponent());
