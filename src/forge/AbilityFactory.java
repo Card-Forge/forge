@@ -88,11 +88,8 @@ public class AbilityFactory {
 		return getAbility(abString,hostCard,null);
 	}
 	
-	public SpellAbility getAbility(String abString, Card hostCard,Card triggeringCard){
-		
-		SpellAbility SA = null;
-		
-		hostC = hostCard;
+	public HashMap<String,String> getMapParams(String abString, Card hostCard, Card triggeringCard) {
+		HashMap<String,String> mapParameters = new HashMap<String,String>();
 		
 		if (!(abString.length() > 0))
 			throw new RuntimeException("AbilityFactory : getAbility -- abString too short in " + hostCard.getName());
@@ -119,8 +116,19 @@ public class AbilityFactory {
 				throw new RuntimeException(sb.toString());
 			}
 			
-			mapParams.put(aa[0], aa[1]);
+			mapParameters.put(aa[0], aa[1]);
 		}
+		
+		return mapParameters;
+	}
+	
+	public SpellAbility getAbility(String abString, Card hostCard,Card triggeringCard){
+		
+		SpellAbility SA = null;
+		
+		hostC = hostCard;
+		
+		mapParams = getMapParams(abString, hostCard, triggeringCard);
 		
 		// parse universal parameters
 		

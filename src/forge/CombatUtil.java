@@ -653,7 +653,7 @@ public class CombatUtil {
         return defenderDefense;
     }//shieldDamage
     
-  //For AI safety measures like Regeneration
+    //For AI safety measures like Regeneration
     public static boolean combatantWouldBeDestroyed(Card combatant) {
 
     	if(combatant.isAttacking())
@@ -676,7 +676,59 @@ public class CombatUtil {
     	return totalDamageOfBlockers(attacker, blockers) >= attacker.getKillDamage();
     }
     
+    //Predict the Power bonus of the blocker if blocking the attacker (Flanking, Bushido and other triggered abilities)
+    public static int predictPowerBonusOfBlocker(Card attacker, Card defender) {
+    	int power = 0;
+    	
+        if(attacker.getKeyword().contains("Flanking") && !defender.getKeyword().contains("Flanking"))          
+        	power -= attacker.getAmountOfKeyword("Flanking");
+        	
+        power += defender.getKeywordMagnitude("Bushido");
+        
+        ArrayList<Trigger> triggers = defender.getTriggers();
+		for(Trigger trigger : triggers)
+		{
+			HashMap<String,String> trigParams = trigger.getMapParams();
+			if (trigParams.get("Mode").equals("Blocks")) {
+				String ability = defender.getSVar(trigParams.get("Execute"));
+				AbilityFactory AF = new AbilityFactory();
+        		HashMap<String,String> abilityParams = AF.getMapParams(ability, defender, defender);
+				if (abilityParams.get("AB").equals("Pump")) 
+					if (abilityParams.containsKey("NumAtt")) {
+						power += Integer.parseInt(abilityParams.get("NumAtt"));
+				}
+			}
+		}
+    	return power;
+    }
     
+    //Predict the Toughness bonus of the blocker if blocking the attacker (Flanking, Bushido and other triggered abilities)
+    public static int predictToughnessBonusOfBlocker(Card attacker, Card defender) {
+    	int toughness = 0;
+    	
+        if(attacker.getKeyword().contains("Flanking") && !defender.getKeyword().contains("Flanking"))          
+        	toughness -= attacker.getAmountOfKeyword("Flanking");
+        	
+        toughness += defender.getKeywordMagnitude("Bushido");
+        
+        ArrayList<Trigger> triggers = defender.getTriggers();
+		for(Trigger trigger : triggers)
+		{
+			HashMap<String,String> trigParams = trigger.getMapParams();
+			if (trigParams.get("Mode").equals("Blocks")) {
+				String ability = defender.getSVar(trigParams.get("Execute"));
+				AbilityFactory AF = new AbilityFactory();
+        		HashMap<String,String> abilityParams = AF.getMapParams(ability, defender, defender);
+				if (abilityParams.get("AB").equals("Pump")) 
+					if (abilityParams.containsKey("NumDef")) {
+						toughness += Integer.parseInt(abilityParams.get("NumDef"));
+				}
+			}
+		}
+    	return toughness;
+    }
+    
+    //can the blocker destroy the attacker?
     public static boolean canDestroyAttacker(Card attacker, Card defender) {
         
         if(defender.hasStartOfKeyword("Whenever CARDNAME blocks a creature, destroy that creature at end of combat")) {
@@ -704,18 +756,19 @@ public class CombatUtil {
         if(attacker.getKeyword().contains("Indestructible") && 
         		!(defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect"))) return false;
         
-        int defBushidoMagnitude = defender.getKeywordMagnitude("Bushido");
         int attBushidoMagnitude = attacker.getKeywordMagnitude("Bushido");
         attBushidoMagnitude += attacker.getAmountOfKeyword("Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.");
         
-        int defenderDamage = defender.getNetCombatDamage() - flankingMagnitude + defBushidoMagnitude;
+        int defenderDamage = defender.getNetAttack() + predictPowerBonusOfBlocker(attacker, defender);
+        if (AllZoneUtil.isCardInPlay("Doran, the Siege Tower")) 
+        	defenderDamage = defender.getNetDefense() + predictToughnessBonusOfBlocker(attacker, defender);
         int attackerDamage = attacker.getNetCombatDamage() + attBushidoMagnitude;
         
         // consider Damage Prevention/Replacement
         defenderDamage = attacker.predictDamage(defenderDamage, defender, true);
         attackerDamage = defender.predictDamage(attackerDamage, attacker, true);
         
-        int defenderLife = defender.getKillDamage() - flankingMagnitude + defBushidoMagnitude;
+        int defenderLife = defender.getKillDamage()  + predictToughnessBonusOfBlocker(attacker, defender);
         int attackerLife = attacker.getKillDamage() + attBushidoMagnitude;
         
         if(defender.getKeyword().contains("Double Strike") ) {
@@ -753,6 +806,7 @@ public class CombatUtil {
         return false; //should never arrive here
     } //canDestroyAttacker
     
+    
     //For AI safety measures like Regeneration
     public static boolean blockerWouldBeDestroyed(Card blocker) {
     	Card attacker = AllZone.Combat.getAttackerBlockedBy(blocker);
@@ -763,7 +817,7 @@ public class CombatUtil {
     	return false;
     }
     
-    
+    //can the attacker destroy this blocker?
     public static boolean canDestroyBlocker(Card defender, Card attacker) {
     	
         int flankingMagnitude = 0;
