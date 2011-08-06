@@ -1,8 +1,8 @@
 Name:Despoil
 ManaCost:3 B
 Types:Sorcery
-Text:Destroy target land. Its controller loses 2 life.
-K:spDestroyTgt:Land:Drawback$LoseLifeTgtCtrlr/2
+Text:no text
+A:SP$Destroy | Cost$ 3 B | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ LoseLifeTgtCtrlr/2 | SpellDescription$ Destroy target land. Its controller loses 2 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/despoil.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/62.jpg

@@ -1,8 +1,8 @@
 Name:Ghostly Visit
 ManaCost:2 B
 Types:Sorcery
-Text:Destroy target nonblack creature.
-K:spDestroyTgt:Creature.nonBlack
+Text:no text
+A:SP$Destroy | Cost$ 2 B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | SpellDescription$ Destroy target nonblack creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Three_Kingdoms/ghostly_visit.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/p3k/76.jpg

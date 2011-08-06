@@ -1,8 +1,8 @@
 Name:Devour in Shadow
 ManaCost:B B
 Types:Instant
-Text:Destroy target creature. It can't be regenerated. You lose life equal to that creature's toughness.
-K:spDestroyTgt:Creature:NoRegen:Drawback$YouLoseLife/dX
+Text:no text
+A:SP$Destroy | Cost$ B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NoRegen$ True | SubAbility$ YouLoseLife/dX | SpellDescription$ Destroy target creature. It can't be regenerated. You lose life equal to that creature's toughness.
 SVar:dX:Count$TgtCardToughness
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon

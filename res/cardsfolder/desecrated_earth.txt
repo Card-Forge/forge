@@ -1,8 +1,8 @@
 Name:Desecrated Earth
 ManaCost:4 B
 Types:Sorcery
-Text:Destroy target land. Its controller discards a card.
-K:spDestroyTgt:Land:Drawback$DiscardTgtCtrlr/1
+Text:no text
+A:SP$Destroy | Cost$ 4 B | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DiscardTgtCtrlr/1 | SpellDescription$ Destroy target land. Its controller discards a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desecrated_earth.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/86.jpg

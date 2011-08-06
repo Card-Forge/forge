@@ -1,8 +1,8 @@
 Name:Drain the Well
 ManaCost:2 BG BG
 Types:Sorcery
-Text:Destroy target land. You gain 2 life.
-K:spDestroyTgt:Land:Drawback$YouGainLife/2
+Text:no text
+A:SP$Destroy | Cost$ 2 BG BG | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ YouGainLife/2 | SpellDescription$ Destroy target land. You gain 2 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drain_the_well.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/121.jpg

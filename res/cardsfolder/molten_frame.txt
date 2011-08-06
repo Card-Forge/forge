@@ -1,8 +1,8 @@
 Name:Molten Frame
 ManaCost:1 R
 Types:Instant
-Text:Destroy target artifact creature.
-K:spDestroyTgt:Creature.Artifact
+Text:no text
+A:SP$Destroy | Cost$ 1 R | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature | SpellDescription$ Destroy target artifact creature.
 K:Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molten_frame.jpg
