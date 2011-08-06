@@ -1,0 +1,9 @@
+Name:Tower of Coireall
+ManaCost:2
+Types:Artifact
+Text:no text
+K:abPumpTgtC T:0/0/CARDNAME can't be blocked by Walls.:Target creature can't be blocked by Walls this turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_of_coireall.jpg
+End
