@@ -18,6 +18,7 @@ res/cards.txt -text svneol=native#text/plain
 res/cardsfolder/Crosiss_charm.txt -text svneol=native#text/plain
 res/cardsfolder/abandoned_outpost.txt -text svneol=native#text/plain
 res/cardsfolder/abbey_gargoyles.txt -text svneol=native#text/plain
+res/cardsfolder/abjure.txt -text svneol=native#text/plain
 res/cardsfolder/abolish.txt -text svneol=native#text/plain
 res/cardsfolder/abomination.txt -text svneol=native#text/plain
 res/cardsfolder/aboshan_cephalid_emperor.txt -text svneol=native#text/plain
