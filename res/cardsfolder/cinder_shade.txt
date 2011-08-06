@@ -1,0 +1,11 @@
+Name:Cinder Shade
+ManaCost:1 B R
+Types:Creature Shade
+Text:no text
+PT:1/1
+K:abPump B:+1/+1
+K:abDamageTgtC R Sac<1/CARDNAME>:X:Cinder Shade deals damage equal to its power to target creature.
+SVar:X:Count$CardPower
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cinder_shade.jpg
+End

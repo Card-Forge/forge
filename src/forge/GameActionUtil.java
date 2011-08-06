@@ -11272,7 +11272,14 @@ public class GameActionUtil {
             boolean SourceCardinRightZone = true;
             if(!AllZone.GameAction.isCardInPlay(Source)) SourceCardinRightZone = false;
             if(!LastKnownController.equals(Source.getController())) SourceCardinRightZone = false;
-            	
+            
+            // If Bonus uses XCount, always update it
+            if (k[2].contains("X")) {
+            	CardsWithKeyword.remove(Source);
+            	InfoStorage[ANumber] = "-1";
+            	old[ANumber].remove(Source);
+            }
+            
       	    // If the Source Card is not in the right Location or the Special Conditions are no longer met - Then Remove Bonus
             if(!SourceCardinRightZone || !SpecialConditionsMet(Source, k[3])) {
         		for(int i = 0; i < list.size(); i++) {

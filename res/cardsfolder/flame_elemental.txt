@@ -1,0 +1,10 @@
+Name:Flame Elemental
+ManaCost:2 R R
+Types:Creature Elemental
+Text:no text
+PT:3/2
+K:abDamageTgtC R Sac<1/CARDNAME>:X:Flame Elemental deals damage equal to its power to target creature.
+SVar:X:Count$CardPower
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flame_elemental.jpg
+End
