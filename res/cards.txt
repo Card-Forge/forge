@@ -1,3 +1,122 @@
+Global Ruin
+4 W
+Sorcery
+Each player chooses from the lands he or she controls a land of each basic land type and sacrifices the rest.
+SVar:RemAIDeck:True
+
+High Tide
+U
+Instant
+Until end of turn, whenever a player taps an Island for mana, that player adds Blue to his or her mana pool (in addition to the mana the land produces).
+SVar:RemAIDeck:True
+
+Icy Manipulator
+4
+Artifact
+no text
+SVar:RemAIDeck:True
+
+Impulse
+1 U
+Instant
+Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library.
+SVar:RemAIDeck:True
+
+Index
+U
+Sorcery
+Look at the top five cards of your library, then put them back in any order.
+SVar:RemAIDeck:True
+
+Jandor's Saddlebags
+2
+Artifact
+no text
+SVar:RemAIDeck:True
+
+Machinate
+1 U U
+Instant
+Look at the top X cards of your library, where X is the number of artifacts you control. Put one of those cards into your hand and the rest on the bottom of your library in any order.
+SVar:RemAIDeck:True
+
+Magnify
+G
+Instant
+no text
+spAllPump:All:+1/+1:All creatures get +1/+1 until end of turn.:Magnify - Creatures get +1/+1 until EOT
+SVar:RemAIDeck:True
+
+Mind's Desire
+4 U U
+Sorcery
+Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost. (If it has X in its mana cost, X is 0.) Storm (When you cast this spell, copy it for each spell cast before it this turn.)
+Storm
+Shroud
+Indestructible
+SVar:RemAIDeck:True
+
+Momentous Fall
+2 G G
+Instant
+As an additional cost to cast Momentous Fall, sacrifice a creature. You draw cards equal to the sacrificed creature's power, then you gain life equal to its toughness.
+SVar:RemAIDeck:True
+
+Mox Diamond
+0
+Artifact
+If Mox Diamond would come into play, you may discard a land card instead. If you do, put Mox Diamond into play. If you don't, put it into its owner's graveyard.
+tap: add W
+tap: add B
+tap: add U
+tap: add R
+tap: add G
+SVar:RemAIDeck:True
+
+Natural Selection
+G
+Instant
+Look at the top 3 cards of target player's library and put them back in any order. You may have that player shuffle his or her library.
+SVar:RemAIDeck:True
+
+Nature's Cloak
+2 G
+Sorcery
+no text
+spAllPump:YouCtrl/Green:Forestwalk:Green creatures you control gain forestwalk until end of turn.:Nature's Cloak - Creatures gain forestwalk until EOT
+SVar:RemAIDeck:True
+
+Necrogenesis
+B G
+Enchantment
+no text
+SVar:RemAIDeck:True
+
+Necropotence
+B B B
+Enchantment
+Skip your draw step. If you would discard a card from your hand, remove that card from the game instead.
+SVar:RemAIDeck:True
+
+Night Soil
+G G
+Enchantment
+no text
+SVar:RemAIDeck:True
+
+Omen
+1 U
+Sorcery
+Look at the top three cards of your library, then put them back in any order. You may shuffle your library.
+Draw a card.
+SVar:RemAIDeck:True
+
+Peel from Reality
+1 U
+Instant
+Return target creature you control and target creature you don't control to their owners' hands.
+SVar:RemAIDeck:True
+
 Kulrath Knight
 3 BR BR
 Creature Elemental Knight
@@ -1348,16 +1467,6 @@ Snow Creature Wolverine Beast
 no text
 1/1
 WheneverKeyword:BecomesBlocked:Self:Play:Damage/1:InputType - CreatureORPlayer:ASAP:Yes_No:SingleTarget:Whenever Karplusan Wolverine becomes blocked, you may have it deal 1 damage to target creature or player.
-
-Necrogenesis
-B G
-Enchantment
-no text
-
-Night Soil
-G G
-Enchantment
-no text
 
 Spitting Sliver
 4 B
@@ -4625,11 +4734,6 @@ Grindstone
 Artifact
 3, Tap: Put the top two cards of target player's library into that player's graveyard. If both cards share a color, repeat this process.
 
-High Tide
-U
-Instant
-Until end of turn, whenever a player taps an Island for mana, that player adds Blue to his or her mana pool (in addition to the mana the land produces).
-
 Abyssal Persecutor
 2 B B
 Creature Demon
@@ -4650,11 +4754,6 @@ R G W
 Legendary Creature Elf Shaman
 no text
 2/3
-
-Momentous Fall
-2 G G
-Instant
-As an additional cost to cast Momentous Fall, sacrifice a creature. You draw cards equal to the sacrificed creature's power, then you gain life equal to its toughness.
 
 Hammer of Bogardan
 1 R R
@@ -4732,18 +4831,6 @@ Instant
 no text
 spAllPump:YouCtrl:+X/+X:Creatures you control get +X/+X until end of turn, where X is 1 plus the number of cards named Kjeldoran War Cry in all graveyards.:Kjeldoran War Cry - Creatures get +X/+X until EOT
 SVar:X:Count$NamedInAllYards.Kjeldoran War Cry/Plus.1
-
-Magnify
-G
-Instant
-no text
-spAllPump:All:+1/+1:All creatures get +1/+1 until end of turn.:Magnify - Creatures get +1/+1 until EOT
-
-Nature's Cloak
-2 G
-Sorcery
-no text
-spAllPump:YouCtrl/Green:Forestwalk:Green creatures you control gain forestwalk until end of turn.:Nature's Cloak - Creatures gain forestwalk until EOT
 
 Nocturnal Raid
 2 B B
@@ -5684,14 +5771,6 @@ Creature Avatar
 If an opponent has no cards in hand, Avatar of Will costs 6 less to play.
 5/6
 Flying
-
-Mind's Desire
-4 U U
-Sorcery
-Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost. (If it has X in its mana cost, X is 0.) Storm (When you cast this spell, copy it for each spell cast before it this turn.)
-Storm
-Shroud
-Indestructible
 
 Wing Shards
 1 W W
@@ -7112,11 +7191,6 @@ When CARDNAME enters the battlefield, draw a card.
 1, tap: add R
 1, tap: add G
 
-Machinate
-1 U U
-Instant
-Look at the top X cards of your library, where X is the number of artifacts you control. Put one of those cards into your hand and the rest on the bottom of your library in any order.
-
 Information Dealer
 1 U
 Creature Human Wizard
@@ -7174,23 +7248,12 @@ Creature Human Wizard
 When Sage of Epityr enters the battlefield, look at the top four cards of your library, then put them back in any order.
 1/1
 
-Omen
-1 U
-Sorcery
-Look at the top three cards of your library, then put them back in any order. You may shuffle your library.
-Draw a card.
-
 Inkfathom Divers
 3 U U
 Creature Merfolk Soldier
 When Inkfathom Divers enters the battlefield, look at the top four cards of your library, then put them back in any order.
 3/3
 Islandwalk
-
-Index
-U
-Sorcery
-Look at the top five cards of your library, then put them back in any order.
 
 Sage Owl
 1 U
@@ -8288,11 +8351,6 @@ Hurkyl's Recall
 Instant
 Return all artifacts target player owns to his or her hand.
 
-Natural Selection
-G
-Instant
-Look at the top 3 cards of target player's library and put them back in any order. You may have that player shuffle his or her library.
-
 Giant Tortoise
 1 U
 Creature Turtle
@@ -8641,11 +8699,6 @@ G G
 Creature Human
 People of the Woods's toughness is equal to the number of Forests you control.
 1/0
-
-Jandor's Saddlebags
-2
-Artifact
-no text
 
 Gaea's Avenger
 1 G G
@@ -9405,11 +9458,6 @@ Whenever Drelnoch becomes blocked, you may draw two cards.
 Psychic Drain
 X U B
 Sorcery
-no text
-
-Icy Manipulator
-4
-Artifact
 no text
 
 Reprisal
@@ -20229,16 +20277,6 @@ Creature Sliver
 All Sliver creatures have vigilance.
 3/3
 
-Mox Diamond
-0
-Artifact
-If Mox Diamond would come into play, you may discard a land card instead. If you do, put Mox Diamond into play. If you don't, put it into its owner's graveyard.
-tap: add W
-tap: add B
-tap: add U
-tap: add R
-tap: add G
-
 Gilt-Leaf Archdruid
 3 G G
 Creature Elf Druid
@@ -23398,20 +23436,10 @@ Creature Whale
 no text
 3/5
 
-Impulse
-1 U
-Instant
-Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library.
-
 Echoing Truth
 1 U
 Instant
 Return target nonland permanent and all other permanents with the same name as that permanent to their owner's hands.
-
-Peel from Reality
-1 U
-Instant
-Return target creature you control and target creature you don't control to their owners' hands.
 
 Man-o'-War
 2 U
@@ -25071,11 +25099,6 @@ W B
 Sorcery
 Target player discards two cards. You gain 3 life for each land card discarded this way.
 
-Global Ruin
-4 W
-Sorcery
-Each player chooses from the lands he or she controls a land of each basic land type and sacrifices the rest.
-
 Megrim
 2 B
 Enchantment
@@ -25115,11 +25138,6 @@ Creature Snake
 You may play Mystic Snake any time you could play an instant. When Mystic Snake comes into play, counter target spell.
 2/2
 Flash
-
-Necropotence
-B B B
-Enchantment
-Skip your draw step. If you would discard a card from your hand, remove that card from the game instead.
 
 Yawgmoth's Bargain
 4 B B
