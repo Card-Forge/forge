@@ -12564,8 +12564,8 @@ public class GameActionUtil {
                                                                       c.setBaseAttack(5);
                                                                       c.setBaseDefense(5);
                                                                   } else {
-                                                                      c.setBaseAttack(3);
-                                                                      c.setBaseDefense(3);
+                                                                      c.setBaseAttack(2);
+                                                                      c.setBaseDefense(2);
                                                                   }
                                                               }
                                                           }
