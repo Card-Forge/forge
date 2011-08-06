@@ -50,7 +50,6 @@ public class GameActionUtil {
 		upkeep_Plague_Spitter();
 		*/
 		
-		upkeep_Curse_of_Chains();
 		upkeep_Greener_Pastures();
 		upkeep_Squee();
 		upkeep_Dragonmaster_Outcast();
@@ -4756,46 +4755,6 @@ public class GameActionUtil {
 		}
 	}//upkeep_Farmstead()
 	
-	private static void upkeep_Curse_of_Chains() {
-		final String auraName = "Curse of Chains";
-        final Player player = AllZone.Phase.getPlayerTurn();
-        PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-        
-        CardList list = new CardList(playZone.getCards());
-        list = list.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return c.isCreature() && c.isEnchanted();
-            }
-        });
-        
-        if(list.size() > 0) {
-        	Ability ability;
-        	for(Card target:list) {
-        		if(target.isEnchantedBy(auraName)) {
-        			CardList auras = new CardList(target.getEnchantedBy().toArray());
-        			auras = auras.getName(auraName);
-        			for(Card aura:auras) {
-        				final Card enchantedCard = target;
-        				ability = new Ability(aura, "0") {
-        					@Override
-        					public void resolve() {
-        						enchantedCard.tap();
-        					}
-        				};
-        				if(enchantedCard.isUntapped()) {
-        					StringBuilder sb = new StringBuilder();
-        					sb.append(auraName).append(" -  tap enchanted creature.");
-        					ability.setStackDescription(sb.toString());
-        					
-        					AllZone.Stack.add(ability);
-        				}
-        			} 
-        		}
-        	}
-        }//list > 0
-    }//upkeep_Curse_of_Chains()
-	
-
     private static void upkeep_Squee() {
         final Player player = AllZone.Phase.getPlayerTurn();
         PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
