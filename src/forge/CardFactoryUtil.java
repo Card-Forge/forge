@@ -518,6 +518,36 @@ public class CardFactoryUtil {
         return target;
     }//input_sacrifice()
     
+    public static Input input_sacrificeThis(final SpellAbility spell) {
+        Input target = new Input() {
+            private static final long serialVersionUID = 2685832214519141903L;
+            
+            @Override
+            public void showMessage() {
+            	Card card = spell.getSourceCard();
+                String[] choices = {"Yes", "No"};
+                if(card.getController().equals(Constant.Player.Human)) {
+                    Object o = AllZone.Display.getChoice("Sacrifice " + card.getName() + " ?", choices);
+                    if(o.equals("Yes")) {
+                    	sacrifice(card);
+                    }
+                    else{
+                    	//undo?
+                    	stop();
+                    }
+                }
+            }
+            
+            public void sacrifice(Card card)
+            {
+            	AllZone.GameAction.sacrifice(card);
+            	stop();
+            	AllZone.Stack.add(spell);
+            }
+        };
+        return target;
+    }//input_sacrifice()
+    
     public static Input input_sacrificeType(final SpellAbility spell, final String type, final String message) {
     // This input should be setAfterManaPaid so it can add the spell to the stack
         Input target = new Input() {
@@ -2582,13 +2612,18 @@ public class CardFactoryUtil {
             }
             
             void done() {
-                if(spell instanceof Ability_Tap && spell.getManaCost().equals("0")) stopSetNext(new Input_NoCost_TapAbility(
-                        (Ability_Tap) spell));
+                if(spell instanceof Ability_Tap && spell.getManaCost().equals("0")) 
+                	stopSetNext(new Input_NoCost_TapAbility((Ability_Tap) spell));
                 else if(spell.getManaCost().equals("0") || this.isFree())//for "sacrifice this card" abilities
                 {
-                    this.setFree(false);
-                    AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
-                    stop();
+                	if (spell.getAfterPayMana() == null){
+	                    this.setFree(false);
+	                    AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
+	                    stop();
+                	}
+                	else{
+                		stopSetNext(spell.getAfterPayMana());
+                	}
                 } else stopSetNext(new Input_PayManaCost(spell));
                 
                 paid.execute();

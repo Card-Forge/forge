@@ -16,8 +16,13 @@ public class Input_NoCost_TapAbility extends Input {
         //prevents this from running multiple times, which it is for some reason
         if(ability.getSourceCard().isUntapped()) {
             ability.getSourceCard().tap();
-            AllZone.Stack.add(ability);
-            stopSetNext(new ComputerAI_StackNotEmpty());
+            if (ability.getAfterPayMana() == null)
+            {
+            	AllZone.Stack.add(ability);
+            	stopSetNext(new ComputerAI_StackNotEmpty());
+            }
+            else
+            	stopSetNext(ability.getAfterPayMana());
         }
     }
 }

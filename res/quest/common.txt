@@ -1720,3 +1720,17 @@ Glassdust Hulk
 Deepwood Wolverine
 Rabid Wolverines
 Dwarven Berserker
+Vitaspore Thallid
+Thallid Germinator
+Thallid Devourer
+Deathspore Thallid
+Marsh Lurker
+Goblin Sledder
+Atog
+Déjà Vu
+Reconstruction
+Ritual of Restoration
+Sage's Knowledge
+Erase
+Iona's Judgment
+Wipe Clean

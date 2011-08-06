@@ -951,14 +951,28 @@ public class CardFactory implements NewConstants {
                 if(Tgt[0]) tmpCost = k[0].substring(9);
                 else tmpCost = k[0].substring(6);
                 
+                final boolean sacCost[] = {false};
+                boolean sacFirstCost = false;
+                final String sacType[] = {""};
+                boolean sacThis = false;
+                
+                if(tmpCost.contains("Sac-")) {
+                	sacCost[0] = true;
+                	int sacPos = tmpCost.indexOf("Sac-");
+                	sacType[0] = tmpCost.substring(sacPos).replace("Sac-", "").trim();
+                	sacThis =  (sacType[0].equals("CARDNAME"));
+                    tmpCost = tmpCost.substring(0,sacPos-1).trim();
+                    sacFirstCost = (tmpCost.length() == 0);
+                }                
+                
                 boolean tapCost = false;
-                boolean tapOnlyCost = false;
+                boolean tapFirstCost = false;
                 
                 if(tmpCost.contains("T")) {
                     tapCost = true;
                     tmpCost = tmpCost.replace("T", "");
                     tmpCost = tmpCost.trim();
-                    if(tmpCost.length() == 0) tapOnlyCost = true;
+                    tapFirstCost = tmpCost.length() == 0;
                 }
                 final String manaCost = tmpCost.trim();
                 
@@ -1097,10 +1111,28 @@ public class CardFactory implements NewConstants {
                 }
                 
                 if(!d.equals("none")) {
-                    if(tapOnlyCost == true) spDesc[0] = "Tap: " + d;
-                    else if(tapCost == true) spDesc[0] = manaCost + ", tap: " + d;
-                    else spDesc[0] = manaCost + ": " + d;
+                    StringBuilder abCost = new StringBuilder();
+                    abCost.append(manaCost);
+                    if (tapCost){
+                    	if (tapFirstCost)
+                    		abCost.append("T");
+                    	else
+                    		abCost.append(", t");
+                    	abCost.append("ap");
+                    }
+                    if (sacCost[0]){
+                    	if (sacFirstCost)
+                    		abCost.append("S");
+                    	else
+                    		abCost.append(", s");
+                    	abCost.append("acrifice ");
+                    	if (!sacThis)
+                    		abCost.append("a ");
+                    	abCost.append(sacType[0]);
+                    }
+                    abCost.append(": ");
                     
+                    spDesc[0] = abCost + d;
                     stDesc[0] = d;
                 }
                 
@@ -1129,6 +1161,8 @@ public class CardFactory implements NewConstants {
                         
                         @Override
                         public boolean canPlayAI() {
+                        	if (sacCost[0]) return false;
+                        	
                             defense = getNumDefense();
                             keyword = Keyword[0];
                             
@@ -1192,7 +1226,8 @@ public class CardFactory implements NewConstants {
                                     return false;
                                 }
                             });
-                            // list.remove(card);      // if mana-only cost, allow self-target
+                            if (sacCost[0] && sacType[0].equals("CARDNAME"))	// if sacrifice <this>, don't self-target
+                            	list.remove(card);
                             return list;
                         }//getCreatures()
                         
@@ -1251,6 +1286,12 @@ public class CardFactory implements NewConstants {
                     
                     if(Tgt[0] == true) ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
                     else ability.setTargetCard(card);
+                    if(sacCost[0]){
+                    	if (sacType[0].equals("CARDNAME")) 
+                    		ability.setAfterPayMana(CardFactoryUtil.input_sacrificeThis(ability));
+                    	else 	
+                    		ability.setAfterPayMana(CardFactoryUtil.input_sacrificeType(ability, sacType[0], "Sacrifice a "+sacType[0]));
+                    }
                     card.addSpellAbility(ability);
                 }
                 if(tapCost) {
@@ -1278,6 +1319,7 @@ public class CardFactory implements NewConstants {
                         
                         @Override
                         public boolean canPlayAI() {
+                        	if (sacCost[0]) return false;
                             defense = getNumDefense();
                             keyword = Keyword[0];
                             
@@ -1386,8 +1428,14 @@ public class CardFactory implements NewConstants {
                     
                     if(Tgt[0] == true) ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
                     else ability.setTargetCard(card);
+                    if(sacCost[0]){
+                    	if (sacType[0].equals("CARDNAME") || sacType[0].equals(card.getName())) 
+                    		ability.setAfterPayMana(CardFactoryUtil.input_sacrificeThis(ability));
+                    	else 	
+                    		ability.setAfterPayMana(CardFactoryUtil.input_sacrificeType(ability, sacType[0], "Sacrifice a "+sacType[0]));
+                    }
                     
-                    if(!tapOnlyCost) ability.setManaCost(manaCost);
+                    if(!tapFirstCost && !sacFirstCost) ability.setManaCost(manaCost);
                     
                     card.addSpellAbility(ability);
                 }

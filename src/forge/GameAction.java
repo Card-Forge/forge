@@ -3325,14 +3325,18 @@ public class GameAction {
     		manaCost = GetSpellCostChange(sa);    		
     	}      
         if(manaCost.isPaid() && sa.getBeforePayMana() == null) {
-        	CardList HHandList = new CardList(AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human).getCards());
-        	if(HHandList.contains(sa.getSourceCard())) AllZone.Human_Hand.remove(sa.getSourceCard());
-            AllZone.Stack.add(sa);
-            if(sa.isTapAbility() && !sa.wasCancelled()) sa.getSourceCard().tap();
-            if(sa.isUntapAbility()) sa.getSourceCard().untap();
-            return;
+        	if (sa.getAfterPayMana() == null){
+	        	CardList HHandList = new CardList(AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human).getCards());
+	        	if(HHandList.contains(sa.getSourceCard())) AllZone.Human_Hand.remove(sa.getSourceCard());
+	            AllZone.Stack.add(sa);
+	            if(sa.isTapAbility() && !sa.wasCancelled()) sa.getSourceCard().tap();
+	            if(sa.isUntapAbility()) sa.getSourceCard().untap();
+	            return;
+        	}
+        	else
+        		AllZone.InputControl.setInput(sa.getAfterPayMana());
         }
-        if(sa.getBeforePayMana() == null) AllZone.InputControl.setInput(new Input_PayManaCost(sa));
+        else if(sa.getBeforePayMana() == null) AllZone.InputControl.setInput(new Input_PayManaCost(sa));
         else AllZone.InputControl.setInput(sa.getBeforePayMana());
     }
     

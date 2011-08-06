@@ -1,3 +1,122 @@
+Vitaspore Thallid
+1 G
+Creature Fungus
+At the beginning of your upkeep, put a spore counter on Vitaspore Thallid.
+1/1
+Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
+abPumpTgt 0 Sac-Saproling:Haste
+
+Thallid Germinator
+2 G
+Creature Fungus
+At the beginning of your upkeep, put a spore counter on Thallid Germinator.
+2/2
+Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
+abPumpTgt 0 Sac-Saproling:+1/+1
+
+Thallid Devourer
+1 G G
+Creature Fungus
+At the beginning of your upkeep, put a spore counter on Thallid Devourer.
+2/2
+Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
+abPump 0 Sac-Saproling:+1/+2
+
+Deathspore Thallid
+1 B
+Creature Zombie Fungus
+At the beginning of your upkeep, put a spore counter on Deathspore Thallid.
+1/1
+Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
+abPumpTgt 0 Sac-Saproling:-1/-1
+
+Plagued Rusalka
+B
+Creature Spirit
+no text
+1/1
+abPumpTgt B Sac-Creature:-1/-1
+
+Marsh Lurker
+3 B
+Creature Beast
+no text
+3/2
+abPump 0 Sac-Swamp:Fear
+
+Gruul Guildmage
+RG RG
+Creature Human Shaman
+no text
+2/2
+abPumpTgt 3 G:+2/+2
+abDamageTgtP 3 R Sac-Land:2
+
+Phyrexian Plaguelord
+3 B B
+Creature Carrier
+no text
+4/4
+abPumpTgt T Sac-CARDNAME:-4/-4
+abPumpTgt 0 Sac-Creature:-1/-1
+
+Need for Speed
+R
+Enchantment
+no text
+abPumpTgt 0 Sac-Land:Haste
+
+Goblin Sledder
+R
+Creature Goblin
+no text
+1/1
+abPumpTgt 0 Sac-Goblin:+1/+1
+
+Megatog
+4 R R
+Creature Atog
+no text
+3/4
+abPump 0 Sac-Artifact:+3/+3
+
+Thaumatog
+1 W G
+Creature Atog
+no text
+1/2
+abPump 0 Sac-Enchantment:+1/+1
+abPump 0 Sac-Land:+1/+1
+
+Lithatog
+1 R G
+Creature Atog
+no text
+1/2
+abPump 0 Sac-Artifact:+1/+1
+abPump 0 Sac-Land:+1/+1
+
+Foratog
+2 G
+Creature Atog
+no text
+1/2
+abPump G Sac-Forest:+2/+2
+
+Auratog
+1 W
+Creature Atog
+no text
+1/2
+abPump 0 Sac-Enchantment:+2/+2
+
+Atog
+1 R
+Creature Atog
+no text
+1/2
+abPump 0 Sac-Artifact:+2/+2
+
 Déjà Vu
 2 U
 Sorcery
@@ -2675,12 +2794,6 @@ Nut Collector
 Creature Human Druid
 At the beginning of your upkeep, you may put a 1/1 green Squirrel creature token onto the battlefield.
 1/1
-
-Phyrexian Plaguelord
-3 B B
-Creature Carrier
-no text
-4/4
 
 Reclaim
 G

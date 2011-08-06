@@ -1061,3 +1061,10 @@ Harbor Guardian
 Baloth Woodcrasher
 Citanul Druid
 Goblin Bombardment
+Plagued Rusalka
+Gruul Guildmage
+Thaumatog
+Lithatog
+Foratog
+Altar's Light
+Caustic Rain
