@@ -2226,7 +2226,7 @@ public class CombatUtil {
             AllZone.GameAction.drawCard(player);
         } else if(a.getName().equals("Corrupt Official") && !a.getCreatureGotBlockedThisCombat()) {
             String opp = b.getController();
-            AllZone.GameAction.discardRandom(opp);
+            AllZone.GameAction.discardRandom(opp, a.getSpellAbility()[0]);
         } else if (a.getName().equals("Robber Fly") && !a.getCreatureGotBlockedThisCombat()) {
             String opp = b.getController();
             PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opp);
@@ -2234,7 +2234,7 @@ public class CombatUtil {
             int handSize = list.size();
             
             for (int ctr = 0; ctr < handSize; ctr ++) {   // opponent discards their hand,
-                AllZone.GameAction.discardRandom(opp);
+                AllZone.GameAction.discardRandom(opp, a.getSpellAbility()[0]);
             }
             for (int ctr = 0; ctr < handSize; ctr ++) {   // then draws that many cards
                 AllZone.GameAction.drawCard(opp);;

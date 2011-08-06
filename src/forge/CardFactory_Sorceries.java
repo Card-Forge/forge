@@ -1265,7 +1265,7 @@ public class CardFactory_Sorceries {
                             choice = CardUtil.getRandom(handChoices);
                         }
                         
-                        AllZone.GameAction.discard(choice);
+                        AllZone.GameAction.discard(choice, this);
                     }
                     
 					// Opponent Loses 5 Life
@@ -2722,7 +2722,7 @@ public class CardFactory_Sorceries {
                     //technically should let the user discard one card at a time
                     //in case graveyard order matters
                     for(int i = 0; i < n; i++)
-                        AllZone.GameAction.discardRandom(player);
+                        AllZone.GameAction.discardRandom(player, this);
                     
                     for(int i = 0; i < n; i++)
                         AllZone.GameAction.drawCard(player);
@@ -2981,7 +2981,7 @@ public class CardFactory_Sorceries {
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
                     Card[] c = hand.getCards();
                     for(int i = 0; i < c.length; i++)
-                        AllZone.GameAction.discard(c[i]);
+                        AllZone.GameAction.discard(c[i], this);
                     
                     for(int i = 0; i < 7; i++)
                         AllZone.GameAction.drawCard(player);
@@ -3127,7 +3127,7 @@ public class CardFactory_Sorceries {
                     Card[] c = hand.getCards();
                     
                     for(int i = 0; i < c.length; i++)
-                        if(!c[i].isLand()) AllZone.GameAction.discard(c[i]);
+                        if(!c[i].isLand()) AllZone.GameAction.discard(c[i], this);
                 }
             };
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
@@ -3564,9 +3564,9 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
                     for(int i = 0; i < 3; i++)
-                        AllZone.GameAction.discardRandom(Constant.Player.Computer);
+                        AllZone.GameAction.discardRandom(Constant.Player.Computer, this);
                     
-                    AllZone.InputControl.setInput(CardFactoryUtil.input_discard(3));
+                    AllZone.InputControl.setInput(CardFactoryUtil.input_discard(3, this));
                 }//resolve()
             };
             card.clearSpellAbility();
@@ -4045,7 +4045,7 @@ public class CardFactory_Sorceries {
                     AllZone.Computer_Graveyard.add(c1);
                     AllZone.Computer_Hand.remove(c1);          
                     */
-                    AllZone.GameAction.discard(c1);
+                    AllZone.GameAction.discard(c1, null);
                     
                     if(list.size() == 0) return;
                     
@@ -4056,7 +4056,7 @@ public class CardFactory_Sorceries {
                     AllZone.Computer_Graveyard.add(c2);
                     AllZone.Computer_Hand.remove(c2);    
                     */
-                    AllZone.GameAction.discard(c2);
+                    AllZone.GameAction.discard(c2, null);
                     
                     if(c1.getType().contains("Land")) {
                         PlayerLife life = AllZone.GameAction.getPlayerLife(Constant.Player.Human);
@@ -4086,7 +4086,7 @@ public class CardFactory_Sorceries {
                         hand.remove(c);
                         grave.add(c);
                         */
-                        AllZone.GameAction.discard(c);
+                        AllZone.GameAction.discard(c, null);
                         
                         if(c.getType().contains("Land")) {
                             PlayerLife life = AllZone.GameAction.getPlayerLife(Constant.Player.Computer);
@@ -4103,7 +4103,7 @@ public class CardFactory_Sorceries {
                             hand.remove(c2);
                             grave.add(c2);
                             */
-                            AllZone.GameAction.discard(c2);
+                            AllZone.GameAction.discard(c2, null);
                             
                             if(c2.getType().contains("Land")) {
                                 PlayerLife life = AllZone.GameAction.getPlayerLife(Constant.Player.Computer);
@@ -6423,12 +6423,12 @@ public class CardFactory_Sorceries {
         			if (compHand.size() > humHand.size())
         			{
         				for (int i=0; i < compHand.size()-humHand.size();i++)
-        					AllZone.GameAction.discardRandom(Constant.Player.Computer);
+        					AllZone.GameAction.discardRandom(Constant.Player.Computer, this);
         			}
         			else if (humHand.size() > compHand.size())
         			{
         				int diff = humHand.size() - compHand.size();
-        				AllZone.GameAction.discard(Constant.Player.Human, diff);
+        				AllZone.GameAction.discard(Constant.Player.Human, diff, this);
         			}
         			
         			//Creatures:
@@ -6914,8 +6914,8 @@ public class CardFactory_Sorceries {
         			AllZone.GameAction.drawCards(Constant.Player.Human, 3);
         			
         			//now, each player discards 3 cards at random
-        			AllZone.GameAction.discardRandom(Constant.Player.Computer, 3);
-        			AllZone.GameAction.discardRandom(Constant.Player.Human, 3);
+        			AllZone.GameAction.discardRandom(Constant.Player.Computer, 3, this);
+        			AllZone.GameAction.discardRandom(Constant.Player.Human, 3, this);
         		}
 
         		@Override
@@ -7741,7 +7741,7 @@ public class CardFactory_Sorceries {
         			if(numCards != 0) {
         				numCards = Math.min(numCards, maxCards);
         			if(player.equals(Constant.Player.Human)) {
-        				AllZone.InputControl.setInput(CardFactoryUtil.input_discardRecall(numCards, card));
+        				AllZone.InputControl.setInput(CardFactoryUtil.input_discardRecall(numCards, card, this));
         			}
            			}
         			/*else { //computer
@@ -7798,7 +7798,7 @@ public class CardFactory_Sorceries {
                 }
                 Card[] c = hand.getCards();
                 for(int i = 0; i < c.length; i++)
-                    AllZone.GameAction.discard(c[i]);
+                    AllZone.GameAction.discard(c[i], null);
             
                 for(int i = 0; i < draw; i++)
                     AllZone.GameAction.drawCard(player);

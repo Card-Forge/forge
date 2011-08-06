@@ -833,8 +833,9 @@ public class CardFactoryUtil {
         return target;
     }
     
-    public static Input input_discardNumUnless(final int nCards, final String uType) {
-        Input target = new Input() {
+    public static Input input_discardNumUnless(final int nCards, final String uType, SpellAbility sa) {
+        final SpellAbility sp = sa;
+    	Input target = new Input() {
             private static final long serialVersionUID = 8822292413831640944L;
             
             int                       n                = 0;
@@ -855,7 +856,7 @@ public class CardFactoryUtil {
             @Override
             public void selectCard(Card card, PlayerZone zone) {
                 if(zone.is(Constant.Zone.Hand)) {
-                    AllZone.GameAction.discard(card);
+                    AllZone.GameAction.discard(card, sp);
                     n++;
                     
                     if(card.getType().contains(uType.toString())) stop();
@@ -1496,7 +1497,7 @@ public class CardFactoryUtil {
             
             @Override
             public void resolve() {
-                AllZone.GameAction.discard(sourceCard);
+                AllZone.GameAction.discard(sourceCard, this);
                 AllZone.GameAction.drawCard(sourceCard.getController());
                 sourceCard.cycle();
             }
@@ -1544,7 +1545,7 @@ public class CardFactoryUtil {
                 
 
                 if(sameType.size() == 0) {
-                	AllZone.GameAction.discard(sourceCard);
+                	AllZone.GameAction.discard(sourceCard, this);
                 	return;
                 }
                 
@@ -1553,7 +1554,7 @@ public class CardFactoryUtil {
                 if(o != null) {
                     //ability.setTargetCard((Card)o);
                     //AllZone.Stack.add(ability);
-                    AllZone.GameAction.discard(sourceCard);
+                    AllZone.GameAction.discard(sourceCard, this);
                     Card c1 = (Card) o;
                     lib.remove(c1);
                     hand.add(c1);
@@ -1618,7 +1619,7 @@ public class CardFactoryUtil {
                 if(o != null) {
                     //ability.setTargetCard((Card)o);
                     //AllZone.Stack.add(ability);
-                    AllZone.GameAction.discard(sourceCard);
+                    AllZone.GameAction.discard(sourceCard, this);
                     Card c1 = (Card) o;
                     lib.remove(c1);
                     hand.add(c1);
@@ -2385,7 +2386,7 @@ public class CardFactoryUtil {
     }
     
     public static Input input_discard(final SpellAbility spell, final int nCards) {
-        Input target = new Input() {
+    	Input target = new Input() {
             private static final long serialVersionUID = 5101772642421944050L;
             
             int                       n                = 0;
@@ -2406,7 +2407,7 @@ public class CardFactoryUtil {
             @Override
             public void selectCard(Card card, PlayerZone zone) {
                 if(zone.is(Constant.Zone.Hand)) {
-                    AllZone.GameAction.discard(card);
+                    AllZone.GameAction.discard(card, spell);
                     n++;
                     if(spell.getManaCost().equals("0")) {
                         AllZone.Stack.add(spell);
@@ -2424,12 +2425,13 @@ public class CardFactoryUtil {
         
     }
     
-    public static Input input_discard() {
-        return input_discard(1);
+    public static Input input_discard(SpellAbility sa) {
+        return input_discard(1, sa);
     }
     
-    public static Input input_discard(final int nCards) {
-        Input target = new Input() {
+    public static Input input_discard(final int nCards, SpellAbility sa) {
+        final SpellAbility sp = sa;
+    	Input target = new Input() {
             private static final long serialVersionUID = -329993322080934435L;
             
             int                       n                = 0;
@@ -2445,7 +2447,7 @@ public class CardFactoryUtil {
             @Override
             public void selectCard(Card card, PlayerZone zone) {
                 if(zone.is(Constant.Zone.Hand)) {
-                    AllZone.GameAction.discard(card);
+                    AllZone.GameAction.discard(card, sp);
                     n++;
                     
                     //in case no more cards in hand
@@ -2465,7 +2467,7 @@ public class CardFactoryUtil {
      * @param recall
      * @return
      */
-    public static Input input_discardRecall(final int numCards, final Card recall) {
+    public static Input input_discardRecall(final int numCards, final Card recall, final SpellAbility sa) {
         Input target = new Input() {
 			private static final long serialVersionUID = 1942999595292561944L;
 			int n = 0;
@@ -2481,7 +2483,7 @@ public class CardFactoryUtil {
             @Override
             public void selectCard(Card card, PlayerZone zone) {
                 if(zone.is(Constant.Zone.Hand)) {
-                    AllZone.GameAction.discard(card);
+                    AllZone.GameAction.discard(card, sa);
                     n++;
                     
                     //in case no more cards in hand
@@ -3697,7 +3699,7 @@ public class CardFactoryUtil {
     }
     
     
-    public static void doDrawBack(String DB, int nDB, String cardController, String Opp, String TgtP, Card Src, Card TgtC) {
+    public static void doDrawBack(String DB, int nDB, String cardController, String Opp, String TgtP, Card Src, Card TgtC, SpellAbility sa) {
         // Drawbacks may be any simple additional effect a spell or ability may have
         // not just the negative ones
         
@@ -3767,11 +3769,11 @@ public class CardFactoryUtil {
             if(d.length > 2) {
                 if(d[2].contains("UnlessDiscardType")) {
                     String dd[] = d[2].split("\\.");
-                    AllZone.GameAction.discardUnless(dbPlayer, X, dd[1]);
+                    AllZone.GameAction.discardUnless(dbPlayer, X, dd[1], sa);
                 }
-                if(d[2].contains("AtRandom")) AllZone.GameAction.discardRandom(dbPlayer, X);
+                if(d[2].contains("AtRandom")) AllZone.GameAction.discardRandom(dbPlayer, X, sa);
             } 
-            else AllZone.GameAction.discard(dbPlayer, X);
+            else AllZone.GameAction.discard(dbPlayer, X, sa);
         }
         
         if(d[0].contains("HandToLibrary")) AllZone.GameAction.handToLibrary(dbPlayer, X, d[2]);

@@ -1411,7 +1411,7 @@ class CardFactory_Lands {
                 @Override
                 public void selectCard(Card card, PlayerZone zone) {
                     if(zone.is(Constant.Zone.Hand)) {
-                        AllZone.GameAction.discard(card);
+                        AllZone.GameAction.discard(card, null);
                         n++;
                         showMessage();
                     }
@@ -2941,8 +2941,8 @@ class CardFactory_Lands {
                 
                 @Override
                 public void resolve() {
-                    AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
-                    AllZone.GameAction.discardRandom(Constant.Player.Computer); // wise discard should be here  
+                    AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
+                    AllZone.GameAction.discardRandom(Constant.Player.Computer, this); // wise discard should be here  
                 }
             };
             ability.setDescription("tap 1 B R: Each player discards a card. Activate this ability only any time you could cast a sorcery.");

@@ -530,7 +530,7 @@ class CardFactory_Planeswalkers {
                     
                     for(int j = 0; j < 7; j++) {
                         //will not actually let human choose which cards to discard
-                        AllZone.GameAction.discardRandom(opponent);
+                        AllZone.GameAction.discardRandom(opponent, this);
                     }
                     
                     CardList permsToSac = new CardList();
@@ -1211,8 +1211,8 @@ class CardFactory_Planeswalkers {
                     String s = getTargetPlayer();
                     setStackDescription("Liliana Vess - " + s + " discards a card");
                     
-                    if(s.equals(Constant.Player.Human)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
-                    else AllZone.GameAction.discardRandom(Constant.Player.Computer);
+                    if(s.equals(Constant.Player.Human)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
+                    else AllZone.GameAction.discardRandom(Constant.Player.Computer, this);
                 }
                 
                 @Override

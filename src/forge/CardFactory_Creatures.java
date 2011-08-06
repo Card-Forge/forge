@@ -228,8 +228,8 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     String player = getTargetPlayer();
-                    if(player.equals(Constant.Player.Human)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
-                    else AllZone.GameAction.discardRandom(Constant.Player.Computer); // wise discard should be here  
+                    if(player.equals(Constant.Player.Human)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
+                    else AllZone.GameAction.discardRandom(Constant.Player.Computer, this); // wise discard should be here  
                     
                 }
                 
@@ -349,7 +349,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(2,card);
-                    AllZone.GameAction.discard(card);
+                    AllZone.GameAction.discard(card, this);
                     AllZone.GameAction.drawCard(card.getController());
                     card.cycle();
                 };
@@ -1049,7 +1049,7 @@ public class CardFactory_Creatures {
                     CardList list = new CardList(p.getCards());
                     list = list.getName(card.getName());
                     
-                    AllZone.GameAction.discard(list.get(0));
+                    AllZone.GameAction.discard(list.get(0), this);
                 }
                 
                 @Override
@@ -1132,7 +1132,7 @@ public class CardFactory_Creatures {
                     CardList list = new CardList(hand.getCards());
                     
                     list = list.getName(card.getName());
-                    AllZone.GameAction.discard(list.get(0));
+                    AllZone.GameAction.discard(list.get(0), ability);
                     
                     AllZone.Stack.push(ability);
                     stop();
@@ -1167,7 +1167,7 @@ public class CardFactory_Creatures {
                     CardList list = new CardList(p.getCards());
                     list = list.getName(card.getName());
                     
-                    AllZone.GameAction.discard(list.get(0));
+                    AllZone.GameAction.discard(list.get(0), this);
                 }
                 
                 @Override
@@ -1201,7 +1201,7 @@ public class CardFactory_Creatures {
                     CardList list = new CardList(hand.getCards());
                     
                     list = list.getName(card.getName());
-                    AllZone.GameAction.discard(list.get(0));
+                    AllZone.GameAction.discard(list.get(0), ability);
                     
                     AllZone.Stack.push(ability);
                     stop();
@@ -1225,7 +1225,7 @@ public class CardFactory_Creatures {
                     CardList list = new CardList(p.getCards());
                     list = list.getName(card.getName());
                     
-                    AllZone.GameAction.discard(list.get(0));
+                    AllZone.GameAction.discard(list.get(0), this);
                 }
                 
                 @Override
@@ -1260,7 +1260,7 @@ public class CardFactory_Creatures {
                     CardList list = new CardList(hand.getCards());
                     
                     list = list.getName(card.getName());
-                    AllZone.GameAction.discard(list.get(0));
+                    AllZone.GameAction.discard(list.get(0), ability);
                     
                     AllZone.Stack.push(ability);
                     stop();
@@ -1500,7 +1500,7 @@ public class CardFactory_Creatures {
         else if(cardName.equals("Shu Soldier-Farmers") || cardName.equals("Staunch Defenders")
                 || cardName.equals("Spiritual Guardian") || cardName.equals("Teroh's Faithful")
                 || cardName.equals("Jedit's Dragoons") || cardName.equals("Loxodon Hierarch")
-                || cardName.equals("Lone Missionary")) {
+                || cardName.equals("Lone Missionary") || cardName.equals("Obstinate Baloth")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
@@ -2484,9 +2484,9 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     String opponent = AllZone.GameAction.getOpponent(card.getController());
-                    if(Constant.Player.Human.equals(opponent)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
+                    if(Constant.Player.Human.equals(opponent)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
                     else //computer
-                    AllZone.GameAction.discardRandom(opponent);
+                    AllZone.GameAction.discardRandom(opponent, this);
                 }//resolve()
             };//SpellAbility
             Command intoPlay = new Command() {
@@ -2681,7 +2681,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void selectCard(Card c, PlayerZone zone) {
                     if(zone.is(Constant.Zone.Hand) && !c.isCreature()) {
-                        AllZone.GameAction.discard(c);
+                        AllZone.GameAction.discard(c, null);
                         stop();
                     }
                 }
@@ -2706,7 +2706,7 @@ public class CardFactory_Creatures {
                                 return (!c.isCreature());
                             }
                         });
-                        AllZone.GameAction.discard(list.get(0));
+                        AllZone.GameAction.discard(list.get(0), this);
                     }//else
                 }//resolve()
             };//SpellAbility
@@ -2755,7 +2755,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                     if(hand.getCards().length == 0) AllZone.GameAction.sacrifice(card);
-                    else AllZone.GameAction.discardRandom(card.getController());
+                    else AllZone.GameAction.discardRandom(card.getController(), this);
                 }
             };
             Command intoPlay = new Command() {
@@ -4499,8 +4499,8 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     AllZone.GameAction.drawCard(card.getController());
                     
-                    if(card.getController().equals("Human")) AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
-                    else AllZone.GameAction.discardRandom("Computer");
+                    if(card.getController().equals("Human")) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
+                    else AllZone.GameAction.discardRandom("Computer", this);
                 }
             };
             Command intoPlay = new Command() {
@@ -5377,10 +5377,10 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     int discard = ((Integer) countZubera.execute()).intValue();
                     
-                    if(Constant.Player.Human.equals(getTargetPlayer())) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(discard));
+                    if(Constant.Player.Human.equals(getTargetPlayer())) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(discard, this));
                     else {
                         for(int i = 0; i < discard; i++)
-                            AllZone.GameAction.discardRandom(Constant.Player.Computer);
+                            AllZone.GameAction.discardRandom(Constant.Player.Computer, this);
                     }
                 }//resolve()
             };//SpellAbility
@@ -7674,10 +7674,10 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     String player = AllZone.GameAction.getOpponent(card.getController());
                     
-                    if(player.equals(Constant.Player.Human)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(2));
+                    if(player.equals(Constant.Player.Human)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(2, this));
                     else {
-                        AllZone.GameAction.discardRandom(player);
-                        AllZone.GameAction.discardRandom(player);
+                        AllZone.GameAction.discardRandom(player, this);
+                        AllZone.GameAction.discardRandom(player, this);
                     }
                 }//resolve()
                 
@@ -7724,7 +7724,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     String player = getTargetPlayer();
                     
-                    AllZone.GameAction.discardRandom(player);
+                    AllZone.GameAction.discardRandom(player, this);
                     
                 }//resolve()
                 
@@ -7995,7 +7995,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void chooseTargetAI() {
-                    AllZone.GameAction.discardRandom(Constant.Player.Computer);
+                    AllZone.GameAction.discardRandom(Constant.Player.Computer, this);
                 }
                 
                 @Override
@@ -8050,7 +8050,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void chooseTargetAI() {
-                    AllZone.GameAction.discardRandom(Constant.Player.Computer);
+                    AllZone.GameAction.discardRandom(Constant.Player.Computer, this);
                 }
                 
                 @Override
@@ -8103,7 +8103,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void chooseTargetAI() {
-                    AllZone.GameAction.discardRandom(Constant.Player.Computer);
+                    AllZone.GameAction.discardRandom(Constant.Player.Computer, this);
                 }
                 
                 @Override
@@ -8233,7 +8233,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.discardRandom(card.getController());
+                    AllZone.GameAction.discardRandom(card.getController(), this);
                     if(AllZone.GameAction.isCardInPlay(card)) {
                         card.addIntrinsicKeyword("Protection from white");
                         
@@ -9460,7 +9460,7 @@ public class CardFactory_Creatures {
                     AllZone.GameAction.getPlayerLife(card.getController()).addLife(2);
                     
                     //computer discards here, todo: should discard when ability put on stack
-                    if(card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.discardRandom(Constant.Player.Computer);
+                    if(card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.discardRandom(Constant.Player.Computer, this);
                 }
                 
                 @Override
@@ -9485,7 +9485,7 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                     card.tap();
-                    AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
+                    AllZone.InputControl.setInput(CardFactoryUtil.input_discard(ability));
                     AllZone.Stack.add(ability);
                 }
             }));
@@ -9552,7 +9552,7 @@ public class CardFactory_Creatures {
                     }
                     
                     //computer discards here, todo: should discard when ability put on stack
-                    if(card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.discardRandom(Constant.Player.Computer);
+                    if(card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.discardRandom(Constant.Player.Computer, this);
                 }
                 
                 @Override
@@ -9577,7 +9577,7 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                     card.tap();
-                    AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
+                    AllZone.InputControl.setInput(CardFactoryUtil.input_discard(ability));
                     AllZone.Stack.add(ability);
                 }
             }));
@@ -9595,7 +9595,7 @@ public class CardFactory_Creatures {
                     makeToken();
                     
                     //computer discards here, todo: should discard when ability put on stack
-                    if(card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.discardRandom(Constant.Player.Computer);
+                    if(card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.discardRandom(Constant.Player.Computer, this);
                 }
                 
                 void makeToken() {
@@ -9686,7 +9686,7 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                     card.tap();
-                    AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
+                    AllZone.InputControl.setInput(CardFactoryUtil.input_discard(ability));
                     AllZone.Stack.add(ability);
                 }
             }));
@@ -9704,7 +9704,7 @@ public class CardFactory_Creatures {
                             "Artifact", "Creature", "Sliver"}, 1, 1, new String[] {""});
                     
                     //computer discards here, todo: should discard when ability put on stack
-                    if(card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.discardRandom(Constant.Player.Computer);
+                    if(card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.discardRandom(Constant.Player.Computer, this);
                 }
                 
                 @Override
@@ -9729,7 +9729,7 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                     card.tap();
-                    AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
+                    AllZone.InputControl.setInput(CardFactoryUtil.input_discard(ability));
                     AllZone.Stack.add(ability);
                 }
             }));
@@ -9747,7 +9747,7 @@ public class CardFactory_Creatures {
                             "Flying", "CARDNAME can block only creatures with flying."});
                     
                     //computer discards here, todo: should discard when ability put on stack
-                    if(card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.discardRandom(Constant.Player.Computer);
+                    if(card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.discardRandom(Constant.Player.Computer, this);
                 }
                 
                 @Override
@@ -9772,7 +9772,7 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                     card.tap();
-                    AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
+                    AllZone.InputControl.setInput(CardFactoryUtil.input_discard(ability));
                     AllZone.Stack.add(ability);
                 }
             }));
@@ -9788,7 +9788,7 @@ public class CardFactory_Creatures {
                     makeToken();
                     
                     //computer discards here, todo: should discard when ability put on stack
-                    if(card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.discardRandom(Constant.Player.Computer);
+                    if(card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.discardRandom(Constant.Player.Computer, this);
                 }
                 
                 void makeToken() {
@@ -9870,7 +9870,7 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                     card.tap();
-                    AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
+                    AllZone.InputControl.setInput(CardFactoryUtil.input_discard(ability));
                     AllZone.Stack.add(ability);
                 }
             }));
@@ -10561,8 +10561,8 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    if(Constant.Player.Computer.equals(getTargetPlayer())) AllZone.GameAction.discardRandom(getTargetPlayer());
-                    else AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
+                    if(Constant.Player.Computer.equals(getTargetPlayer())) AllZone.GameAction.discardRandom(getTargetPlayer(), this);
+                    else AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
                 }//resolve()
             };//SpellAbility
             
@@ -11775,7 +11775,7 @@ public class CardFactory_Creatures {
                 public void selectCard(Card c, PlayerZone zone) {
                     PlayerZone Player_Hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                     if(AllZone.GameAction.isCardInZone(c, Player_Hand)) {
-                    	AllZone.GameAction.discard(c);
+                    	AllZone.GameAction.discard(c,ability);
                         AllZone.Stack.add(ability);
                         stopSetNext(new ComputerAI_StackNotEmpty());
                     }
@@ -20774,7 +20774,7 @@ public class CardFactory_Creatures {
                             }
                             AllZone.GameAction.shuffle(Constant.Player.Human);
                         }
-                        AllZone.GameAction.discard((Card) discard);
+                        AllZone.GameAction.discard((Card) discard, this);
                     }
                 }
                 

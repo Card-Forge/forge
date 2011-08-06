@@ -1666,7 +1666,7 @@ public class GameActionUtil {
 							});
 							for(int j = 0; j < discard.size(); j++) {
 								Card choice = discard.get(j);
-								AllZone.GameAction.discard(choice);
+								AllZone.GameAction.discard(choice, this);
 							}
 						} //resolve
 					}; //ability
@@ -5184,8 +5184,8 @@ public class GameActionUtil {
 				public void resolve() {
 
 					AllZone.GameAction.drawCard(player);
-					if(opponent.equals(Constant.Player.Human)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
-					else AllZone.GameAction.discardRandom(Constant.Player.Computer);
+					if(opponent.equals(Constant.Player.Human)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
+					else AllZone.GameAction.discardRandom(Constant.Player.Computer, this);
 
 				}
 			};// ability2
@@ -5431,8 +5431,8 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 
-					if(opponent.equals(Constant.Player.Human)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
-					else AllZone.GameAction.discardRandom(Constant.Player.Computer); // Should be changed to wise discard  
+					if(opponent.equals(Constant.Player.Human)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
+					else AllZone.GameAction.discardRandom(Constant.Player.Computer, this); // Should be changed to wise discard  
 
 				}
 			};// ability2
@@ -5675,7 +5675,7 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					opp[0] = AllZone.GameAction.getOpponent(crd.getController());
-					AllZone.GameAction.discardHand(opp[0]);
+					AllZone.GameAction.discardHand(opp[0], this);
 				}
 			};
 			opp[0] = AllZone.GameAction.getOpponent(c.getController());
@@ -5752,7 +5752,7 @@ public class GameActionUtil {
 				public void resolve() {
 
 					opponent[0] = AllZone.GameAction.getOpponent(player[0]);
-					AllZone.GameAction.discardRandom(opponent[0]);
+					AllZone.GameAction.discardRandom(opponent[0], this);
 				}
 			};// ability
 
@@ -5791,7 +5791,7 @@ public class GameActionUtil {
                             choice = CardUtil.getRandom(handChoices);
                         }
                         
-                        AllZone.GameAction.discard(choice);
+                        AllZone.GameAction.discard(choice, this);
                     }
 				}
 			};// ability
@@ -6471,7 +6471,7 @@ public class GameActionUtil {
 				public void resolve() {
 					//PlayerZone hand = AllZone.getZone(Constant.Zone.Hand,Constant.Player.Human); //unused
 
-					AllZone.GameAction.discardRandom(opponent);
+					AllZone.GameAction.discardRandom(opponent, this);
 
 				}
 			}; // ability
@@ -6538,10 +6538,10 @@ public class GameActionUtil {
 						Object o = AllZone.Display.getChoiceOptional("Select Card to discard",
 								cardsInHand.toArray());
 						Card c = (Card) o;
-						AllZone.GameAction.discard(c);
+						AllZone.GameAction.discard(c, this);
 					}
 
-					AllZone.GameAction.discardRandom(Constant.Player.Computer);
+					AllZone.GameAction.discardRandom(Constant.Player.Computer, this);
 
 				}
 			}; // ability
@@ -6560,7 +6560,7 @@ public class GameActionUtil {
 		list = list.getName("Sensation Gorger");
 
 		for(int i = 0; i < list.size(); i++) {
-
+			Card crd = list.get(0);
 			if(library.size() <= 0) {
 				return;
 			}
@@ -6588,11 +6588,11 @@ public class GameActionUtil {
 					|| library.get(0).getKeyword().contains("Changeling")) {
 				Card[] c = hand.getCards();
 				for(int q = 0; q < c.length; q++)
-					AllZone.GameAction.discard(c[q]);
+					AllZone.GameAction.discard(c[q], crd.getSpellAbility()[0]);
 
 				Card[] oc = oppHand.getCards();
 				for(int j = 0; j < oc.length; j++)
-					AllZone.GameAction.discard(oc[j]);
+					AllZone.GameAction.discard(oc[j], crd.getSpellAbility()[0]);
 
 				for(int z = 0; z < 4; z++) {
 					AllZone.GameAction.drawCard(Constant.Player.Computer);
@@ -8269,7 +8269,7 @@ public class GameActionUtil {
 				@Override
 				public void selectCard(Card c, PlayerZone zone) {
 					if(zone.is(Constant.Zone.Hand)) {
-						AllZone.GameAction.discard(c);
+						AllZone.GameAction.discard(c, null);
 						stop();
 					}
 				}
@@ -8291,7 +8291,7 @@ public class GameActionUtil {
 					{
 						CardList list = new CardList(AllZone.Computer_Hand.getCards());
 
-						if(list.size() != 0) AllZone.GameAction.discard(list.get(0));
+						if(list.size() != 0) AllZone.GameAction.discard(list.get(0),this);
 						else AllZone.GameAction.sacrifice(crd);
 					}//else
 				}//resolve()
@@ -8972,9 +8972,9 @@ public class GameActionUtil {
 					hondlist = hondlist.getType("Shrine");
 
 					for(int j = 0; j < hondlist.size(); j++) {
-						if(opponent.equals(Constant.Player.Human)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
+						if(opponent.equals(Constant.Player.Human)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
 						else {
-							AllZone.GameAction.discardRandom(Constant.Player.Computer);
+							AllZone.GameAction.discardRandom(Constant.Player.Computer, this);
 						}
 					}
 				}

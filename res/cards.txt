@@ -1,3 +1,21 @@
+Obstinate Baloth
+2 G G
+Creature Beast
+When Obstinate Baloth enters the battlefield, you gain 4 life.
+4/4
+If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.
+
+Wilt-Leaf Liege
+1 GW GW GW
+Creature Elf Knight
+no text
+4/4
+If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.
+StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.green!NotSelf:Other green creatures you control get +1/+1.
+StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.white!NotSelf:Other white creatures you control get +1/+1.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+
 Creakwood Liege
 2 BG BG BG
 Creature Horror

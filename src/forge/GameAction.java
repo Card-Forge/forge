@@ -125,11 +125,42 @@ public class GameAction {
     	if(!c.isToken()) lib.add(c);
     }
     
+    public void discardRandom(String player, SpellAbility sa) {
+        Card[] c = AllZone.getZone(Constant.Zone.Hand, player).getCards();
+        if(c.length != 0) discard(CardUtil.getRandom(c), sa);
+    }
+    
+    /*
     public void discardRandom(String player) {
         Card[] c = AllZone.getZone(Constant.Zone.Hand, player).getCards();
         if(c.length != 0) discard(CardUtil.getRandom(c));
     }
+    */
     
+    public void discard(Card c, SpellAbility sa)
+    {
+    	if (sa!= null)
+    	{
+    		;
+    	}
+    	
+    	AllZone.GameAction.CheckWheneverKeyword(c,"DiscardsCard",null);
+        discard_nath(c);
+        discard_megrim(c);
+        if(CardFactoryUtil.getCards("Necropotence", c.getOwner()).size() > 0){	// necro disrupts madness
+        	removeFromGame(c);
+        	return;
+        }
+        discard_madness(c);
+        if ((c.getKeyword().contains("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.") ||
+        	c.getKeyword().contains("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard."))	
+        	&& !c.getController().equals(sa.getSourceCard().getController()))
+        	discard_PutIntoPlayInstead(c);
+        else
+        	moveToGraveyard(c);
+    }
+    
+    /*
     public void discard(Card c) {
     	AllZone.GameAction.CheckWheneverKeyword(c,"DiscardsCard",null);
         discard_nath(c);
@@ -141,34 +172,70 @@ public class GameAction {
         discard_madness(c);
         moveToGraveyard(c);
     }
+    */
     
+    public void discardRandom(String player, int numDiscard, SpellAbility sa) {
+        for(int i = 0; i < numDiscard; i++) {
+            Card[] c = AllZone.getZone(Constant.Zone.Hand, player).getCards();
+            if(c.length != 0) discard(CardUtil.getRandom(c), sa);
+        }
+    }
+    
+    /*
     public void discardRandom(String player, int numDiscard) {
         for(int i = 0; i < numDiscard; i++) {
             Card[] c = AllZone.getZone(Constant.Zone.Hand, player).getCards();
             if(c.length != 0) discard(CardUtil.getRandom(c));
         }
     }
+    */
     
+    public void discard(String player, int numDiscard, SpellAbility sa) {
+        if(player.equals(Constant.Player.Human)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(numDiscard, sa));
+        else {
+            for(int i = 0; i < numDiscard; i++)
+                AI_discard(sa);
+        }
+    }
+    
+    /*
     public void discard(String player, int numDiscard) {
-        if(player.equals(Constant.Player.Human)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(numDiscard));
+        if(player.equals(Constant.Player.Human)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(numDiscard, null));
         else {
             for(int i = 0; i < numDiscard; i++)
                 AI_discard();
         }
     }
+    */
     
-    public void discardUnless(String player, int numDiscard, String uType) {
+    public void discardUnless(String player, int numDiscard, String uType, SpellAbility sa) {
         if(player.equals(Constant.Player.Human)) AllZone.InputControl.setInput(CardFactoryUtil.input_discardNumUnless(
-                numDiscard, uType));
-        else AI_discardNumUnless(numDiscard, uType);
+                numDiscard, uType, sa));
+        else AI_discardNumUnless(numDiscard, uType, sa);
     }
     
-    public void discardHand(String player) {
+    public void discardHand(String player, SpellAbility sa) {
         PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
         CardList list = new CardList(hand.getCards());
-        discardRandom(player, list.size());
+        discardRandom(player, list.size(), sa);
     }
     
+    public void AI_discardNumUnless(int numDiscard, String uType, SpellAbility sa) {
+        CardList hand = new CardList();
+        hand.addAll(AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).getCards());
+        CardList tHand = hand.getType(uType);
+        
+        if(tHand.size() > 0) {
+            CardListUtil.sortCMC(tHand);
+            tHand.reverse();
+            discard(tHand.get(0), sa);
+            return;
+        }
+        for(int i = 0; i < numDiscard; i++)
+            AI_discard(sa);
+    }
+    
+    /*
     public void AI_discardNumUnless(int numDiscard, String uType) {
         CardList hand = new CardList();
         hand.addAll(AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).getCards());
@@ -183,8 +250,9 @@ public class GameAction {
         for(int i = 0; i < numDiscard; i++)
             AI_discard();
     }
+    */
     
-    public void AI_discard() {
+    public void AI_discard(SpellAbility sa) {
         CardList hand = new CardList();
         hand.addAll(AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).getCards());
         
@@ -195,17 +263,17 @@ public class GameAction {
             if(blIP.size() > 5) {
                 CardList blIH = hand.getType("Basic");
                 if(blIH.size() > 0) {
-                    discard(blIH.get(CardUtil.getRandomIndex(blIH)));
+                    discard(blIH.get(CardUtil.getRandomIndex(blIH)), sa);
                     return;
                 }
                 
                 CardListUtil.sortAttackLowFirst(hand);
                 CardListUtil.sortNonFlyingFirst(hand);
-                discard(hand.get(0));
+                discard(hand.get(0), sa);
                 return;
             } else {
                 CardListUtil.sortCMC(hand);
-                discard(hand.get(0));
+                discard(hand.get(0), sa);
                 return;
             }
         }
@@ -381,6 +449,18 @@ public class GameAction {
         }
     }
     
+    public void discard_PutIntoPlayInstead(Card c)
+    {
+    	/*
+    	if (c.getName().equals("Dodecapod"))
+    		c.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(c, Counters.P1P1, 2));
+        */
+    	PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+    	moveTo(play, c);
+    	if (c.getName().equals("Dodecapod"))
+    		c.setCounter(Counters.P1P1, 2);
+    }
+    
     public void discard_megrim(Card c) {
         /* 
          * Whenever an opponent discards a card, Megrim deals 2 damage to that player.
@@ -528,6 +608,9 @@ public class GameAction {
         //do this twice, sometimes creatures/permanents will survive when they shouldn't
         for (int q=0;q<2;q++)
         {
+        	//int size = AllZone.StaticEffects.getStateBasedMap().keySet().size();
+        	//Object[] arr = AllZone.StaticEffects.getStateBasedMap().keySet().toArray();
+        	
 	        //card state effects like Glorious Anthem
 	        for(String effect:AllZone.StaticEffects.getStateBasedMap().keySet()) {
 	            Command com = GameActionUtil.commands.get(effect);
@@ -1554,7 +1637,8 @@ public class GameAction {
                         			public void execute() {
                         				if(Whenever_Go(F_card,F_k) == true) 
                         					if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
-      			                    	  AllZone.GameAction.discard(F_TargetPlayer[F_Target],F_Amount[0]);
+                        						//this might not work:
+                        						AllZone.GameAction.discard(F_TargetPlayer[F_Target],F_Amount[0], Ability);
       			                      }
 
     			                      }

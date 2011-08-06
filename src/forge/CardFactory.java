@@ -564,7 +564,7 @@ public class CardFactory implements NewConstants {
         				}
         				else if(ActionID.equals("Discard"))
         				{
-        					AllZone.GameAction.discard(Target, Integer.parseInt(SplitActionParams[0]));
+        					AllZone.GameAction.discard(Target, Integer.parseInt(SplitActionParams[0]), this);
         				}
         				else if(ActionID.equals("LoseLife"))
         				{
@@ -880,19 +880,19 @@ public class CardFactory implements NewConstants {
                 		//String opp = AllZone.GameAction.getOpponent(card.getController());
                 		
                 		if (!UnlessType[0].equals("none"))
-                			AllZone.GameAction.discardUnless(discardingPlayer, nCards, UnlessType[0]);
+                			AllZone.GameAction.discardUnless(discardingPlayer, nCards, UnlessType[0], this);
                 		else
-                			AllZone.GameAction.discard(discardingPlayer, nCards);
+                			AllZone.GameAction.discard(discardingPlayer, nCards, this);
                 	}
 
                 	else if (DiscardMethod.equals("AtRandom"))
                 	{
-                		AllZone.GameAction.discardRandom(discardingPlayer, nCards);
+                		AllZone.GameAction.discardRandom(discardingPlayer, nCards, this);
                 	}
 
                 	else if (DiscardMethod.equals("Hand"))
                 	{
-                		AllZone.GameAction.discardHand(discardingPlayer);
+                		AllZone.GameAction.discardHand(discardingPlayer, this);
                 	}
                 	else if (DiscardMethod.startsWith("RevealYouChoose"))
                 	{
@@ -940,7 +940,7 @@ public class CardFactory implements NewConstants {
 		                				dCs.add(dC);
 		                				AllZone.Display.getChoiceOptional("Computer has chosen", dCs.toArray());
 		                				
-			                			AllZone.GameAction.discard(dC);
+			                			AllZone.GameAction.discard(dC, this);
 		                			}
 	                			}
 	                		}
@@ -956,7 +956,7 @@ public class CardFactory implements NewConstants {
 		                				Card dC = AllZone.Display.getChoice("Choose a card to be discarded", dPChHand.toArray());
 		                				
 		                				dPChHand.remove(dC);
-		                				AllZone.GameAction.discard(dC);
+		                				AllZone.GameAction.discard(dC, this);
 	                				}
 	                			}
 	                		}
@@ -965,7 +965,7 @@ public class CardFactory implements NewConstants {
 
                 	if (!Drawback[0].equals("none"))
                 	{
-                		CardFactoryUtil.doDrawBack(Drawback[0], nCards, card.getController(), AllZone.GameAction.getOpponent(card.getController()), discardingPlayer, card, card);
+                		CardFactoryUtil.doDrawBack(Drawback[0], nCards, card.getController(), AllZone.GameAction.getOpponent(card.getController()), discardingPlayer, card, card, this);
                 	}
                 }
         	};
@@ -1228,7 +1228,7 @@ public class CardFactory implements NewConstants {
                 	AllZone.EndOfTurn.addUntil(untilEOT);
                 	
                 	if (!DrawBack[0].equals("none"))
-                		CardFactoryUtil.doDrawBack(DrawBack[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), card.getController(), card, card);
+                		CardFactoryUtil.doDrawBack(DrawBack[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), card.getController(), card, card, this);
                 } // resolve
         	}; // spAllPump
         	
@@ -1508,7 +1508,7 @@ public class CardFactory implements NewConstants {
             			AllZone.EndOfTurn.addUntil(untilEOT);
             			
             			if (!DrawBack[0].equals("none"))
-            				CardFactoryUtil.doDrawBack(DrawBack[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), card.getController(), card, card);
+            				CardFactoryUtil.doDrawBack(DrawBack[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), card.getController(), card, card, this);
             		} // resolve
             	}; // abAllPump
 
@@ -1818,7 +1818,7 @@ public class CardFactory implements NewConstants {
                             if(!DrawBack[0].equals("none")) CardFactoryUtil.doDrawBack(DrawBack[0], 0,
                                     card.getController(),
                                     AllZone.GameAction.getOpponent(card.getController()), null, card,
-                                    creature[0]);
+                                    creature[0], this);
                             
                         }//if (card is in play)
                     }//resolve()
@@ -2054,7 +2054,7 @@ public class CardFactory implements NewConstants {
                         
                         if(!DrawBack[0].equals("none")) CardFactoryUtil.doDrawBack(DrawBack[0], damage,
                                 card.getController(), AllZone.GameAction.getOpponent(card.getController()), tgtP,
-                                card, getTargetCard());
+                                card, getTargetCard(), this);
                     }// resolove
                 }; //spellAbility
                 
@@ -2284,7 +2284,7 @@ public class CardFactory implements NewConstants {
                         
                         if(!DrawBack[0].equals("none")) CardFactoryUtil.doDrawBack(DrawBack[0], damage,
                                 card.getController(), AllZone.GameAction.getOpponent(card.getController()),
-                                tgtP, card, getTargetCard());
+                                tgtP, card, getTargetCard(), this);
                     }//resolve()
                 };//Ability_Activated
                 
@@ -2406,7 +2406,7 @@ public class CardFactory implements NewConstants {
                     		AllZone.GameAction.destroy(tgtC);
                     	
                     	if (!Drawback[0].equals("none"))
-                    		CardFactoryUtil.doDrawBack(Drawback[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), tgtC.getController(), card, tgtC);
+                    		CardFactoryUtil.doDrawBack(Drawback[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), tgtC.getController(), card, tgtC, this);
                     }
                 }
             }; //SpDstryTgt
@@ -2541,7 +2541,7 @@ public class CardFactory implements NewConstants {
                         	AllZone.GameAction.destroy(c);
                         
                         if (!Drawback[0].equals("none"))
-                        	CardFactoryUtil.doDrawBack(Drawback[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), c.getController(), card, c);
+                        	CardFactoryUtil.doDrawBack(Drawback[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), c.getController(), card, c, this);
                     }
                 }
             };
@@ -2749,7 +2749,7 @@ public class CardFactory implements NewConstants {
 	                    		nDestroyed++;
 	                    }
 	                    Log.error("nDestroyed: " + nDestroyed);
-	                    CardFactoryUtil.doDrawBack(Drawback[0], nDestroyed, card.getController(), AllZone.GameAction.getOpponent(card.getController()), null, card, null);
+	                    CardFactoryUtil.doDrawBack(Drawback[0], nDestroyed, card.getController(), AllZone.GameAction.getOpponent(card.getController()), null, card, null, this);
                     }
                 }// resolve()
 
@@ -2892,7 +2892,7 @@ public class CardFactory implements NewConstants {
                     	}
                     	
                     	if (!Drawback[0].equals("none"))
-                    		CardFactoryUtil.doDrawBack(Drawback[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), tgtC.getController(), card, tgtC);
+                    		CardFactoryUtil.doDrawBack(Drawback[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), tgtC.getController(), card, tgtC, this);
                     }
                 }
             }; //SpBnceTgt
@@ -3116,7 +3116,7 @@ public class CardFactory implements NewConstants {
                         
                         if(!DrawBack[0].equals("none")) CardFactoryUtil.doDrawBack(DrawBack[0], ncards,
                                 card.getController(), AllZone.GameAction.getOpponent(card.getController()),
-                                TgtPlayer, card, null);
+                                TgtPlayer, card, null, this);
                     }
                 };
                 
@@ -3177,7 +3177,7 @@ public class CardFactory implements NewConstants {
                         
                         if(!DrawBack[0].equals("none")) CardFactoryUtil.doDrawBack(DrawBack[0], ncards,
                                 card.getController(), AllZone.GameAction.getOpponent(card.getController()),
-                                TgtPlayer, card, null);
+                                TgtPlayer, card, null, this);
                     }
                 };
                 
@@ -3276,7 +3276,7 @@ public class CardFactory implements NewConstants {
                     
                     if(!DrawBack[0].equals("none")) CardFactoryUtil.doDrawBack(DrawBack[0], ncards,
                             card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer,
-                            card, null);
+                            card, null, this);
                 }
             };
             
@@ -3418,7 +3418,7 @@ public class CardFactory implements NewConstants {
                       AllZone.GameAction.getPlayerLife(TgtPlayer).subtractLife(nlife,card);
                      
                       if (!DrawBack[0].equals("none"))
-                         CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null);
+                         CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null, this);
                    }//resolve()
                 };//SpellAbility
                
@@ -3590,7 +3590,7 @@ public class CardFactory implements NewConstants {
                           AllZone.GameAction.getPlayerLife(TgtPlayer).subtractLife(nlife,card);
                          
                           if (!DrawBack[0].equals("none"))
-                             CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null);
+                             CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null, this);
                        }//resolve()
                     };//SpellAbility
                    
@@ -3651,7 +3651,7 @@ public class CardFactory implements NewConstants {
                           AllZone.GameAction.getPlayerLife(TgtPlayer).subtractLife(nlife,card);
                          
                           if (!DrawBack[0].equals("none"))
-                             CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null);
+                             CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null, this);
                        }//resolve()
                     };//SpellAbility
                    
@@ -3780,7 +3780,7 @@ public class CardFactory implements NewConstants {
                         AllZone.GameAction.getPlayerLife(TgtPlayer).addLife(nlife);
                        
                         if (!DrawBack[0].equals("none"))
-                           CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null);
+                           CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null, this);
                      }//resolve()
                   };//SpellAbility
                  
@@ -3938,7 +3938,7 @@ public class CardFactory implements NewConstants {
                          
                           AllZone.GameAction.getPlayerLife(TgtPlayer).addLife(nlife);
                           if (!DrawBack[0].equals("none"))
-                             CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null);
+                             CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null, this);
                        }//resolve()
                     };//SpellAbility
                    
@@ -3997,7 +3997,7 @@ public class CardFactory implements NewConstants {
                           AllZone.GameAction.getPlayerLife(TgtPlayer).addLife(nlife);
                          
                           if (!DrawBack[0].equals("none"))
-                             CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null);
+                             CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null, this);
                        }//resolve()
                     };//SpellAbility
                    
@@ -4662,7 +4662,7 @@ public class CardFactory implements NewConstants {
                         
                         if(!DrawBack[0].equals("none")) CardFactoryUtil.doDrawBack(DrawBack[0], 0,
                                 card.getController(), AllZone.GameAction.getOpponent(card.getController()),
-                                creature[0].getController(), card, creature[0]);
+                                creature[0].getController(), card, creature[0], this);
                     }
                 }//resolve
             };//SpellAbility
@@ -6694,8 +6694,8 @@ public class CardFactory implements NewConstants {
                 public void resolve() {
                     String s = getTargetPlayer();
                     setStackDescription("Necrogen Spellbomb - " + s + " discards a card");
-                    if(Constant.Player.Computer.equals(getTargetPlayer())) AllZone.GameAction.discardRandom(getTargetPlayer());
-                    else AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
+                    if(Constant.Player.Computer.equals(getTargetPlayer())) AllZone.GameAction.discardRandom(getTargetPlayer(), this);
+                    else AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
                     AllZone.GameAction.sacrifice(getSourceCard());
                 }//resolve()
             };//SpellAbility
@@ -7027,7 +7027,7 @@ public class CardFactory implements NewConstants {
                             }
                             AllZone.GameAction.shuffle(Constant.Player.Human);
                         }
-                        AllZone.GameAction.discard((Card) discard);
+                        AllZone.GameAction.discard((Card) discard, this);
                     }
                 }
                 
@@ -7108,7 +7108,7 @@ public class CardFactory implements NewConstants {
                     if (toLibrary)
                     	AllZone.GameAction.moveToTopOfLibrary(card);
                     else
-                    	AllZone.GameAction.discard(card);
+                    	AllZone.GameAction.discard(card, this);
                     
                 	return true;
                 }
@@ -7118,7 +7118,7 @@ public class CardFactory implements NewConstants {
                     if (toLibrary)
                     	AllZone.GameAction.AI_handToLibrary("Top");
                     else
-                    	AllZone.GameAction.AI_discard();
+                    	AllZone.GameAction.AI_discard(this);
                     
                 	return true;
                 }
@@ -7490,7 +7490,7 @@ public class CardFactory implements NewConstants {
                 @Override
                 public void selectCard(Card c, PlayerZone zone) {
                     if(zone.is(Constant.Zone.Hand) && c.isLand()) {
-                        AllZone.GameAction.discard(c);
+                        AllZone.GameAction.discard(c, null);
                         stop();
                     } else if(c.equals(card)) {
                         AllZone.GameAction.sacrifice(card);
@@ -7512,7 +7512,7 @@ public class CardFactory implements NewConstants {
                                 return (c.isLand());
                             }
                         });
-                        AllZone.GameAction.discard(list.get(0));
+                        AllZone.GameAction.discard(list.get(0), this);
                     }//else
                 }//resolve()
             };//SpellAbility
@@ -8075,7 +8075,7 @@ public class CardFactory implements NewConstants {
                     for(Card c:list) {
                         AllZone.GameAction.sacrifice(c);
                     }
-                    AllZone.GameAction.discardRandom(card.getController(), handList.size());
+                    AllZone.GameAction.discardRandom(card.getController(), handList.size(), this);
                     
                     PlayerLife life = AllZone.GameAction.getPlayerLife(getTargetPlayer());
                     life.subtractLife(5,card);
@@ -9070,7 +9070,7 @@ public class CardFactory implements NewConstants {
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
                     Card[] c = hand.getCards();
                     for(int i = 0; i < c.length; i++)
-                        AllZone.GameAction.discard(c[i]);
+                        AllZone.GameAction.discard(c[i], this);
                     
                     // Draw a card for each creature
                     CardList creatures = AllZoneUtil.getCreaturesInPlay(player);

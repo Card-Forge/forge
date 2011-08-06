@@ -2681,8 +2681,8 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    if (Constant.Player.Computer.equals(getTargetPlayer())) AllZone.GameAction.discardRandom(getTargetPlayer());
-                    else AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
+                    if (Constant.Player.Computer.equals(getTargetPlayer())) AllZone.GameAction.discardRandom(getTargetPlayer(), this);
+                    else AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
                 }//resolve()
             };//SpellAbility
             
@@ -5326,7 +5326,7 @@ public class CardFactory_Instants {
                     for(Card c:list) {
                         AllZone.GameAction.sacrifice(c);
                     }
-                    AllZone.GameAction.discardRandom(card.getController(), handList.size());
+                    AllZone.GameAction.discardRandom(card.getController(), handList.size(), this);
                     
                     PlayerLife life = AllZone.GameAction.getPlayerLife(getTargetPlayer());
                     life.subtractLife(5,card);
