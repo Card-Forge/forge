@@ -90,7 +90,6 @@ public class StaticEffects
 		cardToEffectsList.put("Jund Hackblade", new String[] {"Jund_Hackblade"});
 		
 		cardToEffectsList.put("Kargan Dragonlord", new String[]{"Kargan_Dragonlord"});
-		cardToEffectsList.put("Kaysa", new String[] {"Kaysa"});
 		cardToEffectsList.put("Keldon Warlord", new String[] {"Keldon_Warlord"});
 		cardToEffectsList.put("Kithkin Rabble", new String[] {"Kithkin_Rabble"});
 		cardToEffectsList.put("Knight of Cliffhaven", new String[] {"Knight_of_Cliffhaven"});
@@ -115,7 +114,6 @@ public class StaticEffects
 		cardToEffectsList.put("Masumaro, First to Live", new String[] {"Masumaro_First_to_Live"});
 		cardToEffectsList.put("Matca Rioters", new String[] {"Matca_Rioters"});
 		cardToEffectsList.put("Meddling Mage", new String[] {"Meddling_Mage"});
-		cardToEffectsList.put("Meng Huo, Barbarian King", new String[] {"Meng_Huo"});
 		cardToEffectsList.put("Molimo, Maro-Sorcerer", new String[] {"Molimo_Maro_Sorcerer"});
 		cardToEffectsList.put("Mortivore", new String[] {"Mortivore"});
 		cardToEffectsList.put("Mul Daya Channelers", new String[] {"Mul_Daya_Channelers"});
@@ -163,7 +161,6 @@ public class StaticEffects
 		cardToEffectsList.put("The Tabernacle at Pendrell Vale", new String[] {"Tabernacle"});
 		cardToEffectsList.put("Thelonite Hermit", new String[] {"Thelonite_Hermit"});
 		cardToEffectsList.put("Time of Heroes", new String[] {"Time_of_Heroes"});
-		cardToEffectsList.put("Tolsimir Wolfblood", new String[] {"Tolsimir"});
 		cardToEffectsList.put("Transcendent Master", new String[]{"Transcendent_Master"});
 		
 		cardToEffectsList.put("Umbra Stalker", new String[] {"Umbra_Stalker"});

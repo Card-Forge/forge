@@ -16996,84 +16996,7 @@ public class GameActionUtil {
 		}// execute()
 	}; // Jacques
 
-	public static Command Kaysa                       = new Command() {
-		private static final long serialVersionUID   = -4252908395616478212L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Kaysa");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Creature");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(c.isGreen()) {
-						c.addSemiPermanentAttackBoost(1);
-						c.addSemiPermanentDefenseBoost(1);
-						gloriousAnthemList.add(c);
-					}
-
-
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Kaysa
-
-	public static Command Meng_Huo                    = new Command() {
-		private static final long serialVersionUID   = 786540623554314365L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Meng Huo, Barbarian King");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Creature");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(c.isGreen() && !c.getName().equals("Meng Huo, Barbarian King")) {
-						c.addSemiPermanentAttackBoost(1);
-						c.addSemiPermanentDefenseBoost(1);
-						gloriousAnthemList.add(c);
-					}
-
-
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Meng_Huo
+	
 
 	public static Command Eladamri                    = new Command() {
 		private static final long serialVersionUID   = -6406997129429105950L;
@@ -17114,57 +17037,6 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	}; // Eladamri
-
-	public static Command Tolsimir                    = new Command() {
-		private static final long serialVersionUID   = -4522657609875269555L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				if(c.isGreen()) {
-					c.addSemiPermanentAttackBoost(-1);
-					c.addSemiPermanentDefenseBoost(-1);
-				}
-				if(c.isWhite()) {
-					c.addSemiPermanentAttackBoost(-1);
-					c.addSemiPermanentDefenseBoost(-1);
-				}
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Tolsimir Wolfblood");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Creature");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(!c.getName().equals("Tolsimir Wolfblood")
-							&& !c.isFaceDown()) {
-						if(c.isGreen()) {
-							c.addSemiPermanentAttackBoost(1);
-							c.addSemiPermanentDefenseBoost(1);
-						}
-						if(c.isWhite()) {
-							c.addSemiPermanentAttackBoost(1);
-							c.addSemiPermanentDefenseBoost(1);
-						}
-						gloriousAnthemList.add(c);
-					}
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Tolsimir
-	
 
 	public static Command Honor_of_the_Pure           = new Command() {
 
@@ -17904,7 +17776,6 @@ public class GameActionUtil {
 		commands.put("Jund_Hackblade", Jund_Hackblade);
 		
 		commands.put("Kargan_Dragonlord", Kargan_Dragonlord);
-		commands.put("Kaysa", Kaysa);
 		commands.put("Keldon_Warlord", Keldon_Warlord);
 		commands.put("Kithkin_Rabble", Kithkin_Rabble);
 		commands.put("Knight_of_the_Reliquary", Knight_of_the_Reliquary);
@@ -17932,7 +17803,6 @@ public class GameActionUtil {
 		commands.put("Masumaro_First_to_Live", Masumaro_First_to_Live);
 		commands.put("Matca_Rioters", Matca_Rioters);
 		commands.put("Meddling_Mage", Meddling_Mage);
-		commands.put("Meng_Huo", Meng_Huo);
 		commands.put("Molimo_Maro_Sorcerer", Molimo_Maro_Sorcerer);
 		commands.put("Mortivore", Mortivore);
 		commands.put("Mul_Daya_Channelers", Mul_Daya_Channelers);
@@ -17981,7 +17851,6 @@ public class GameActionUtil {
 		commands.put("That_Which_Was_Taken", That_Which_Was_Taken);
 		commands.put("Thelonite_Hermit", Thelonite_Hermit);
 		commands.put("Time_of_Heroes", Time_of_Heroes);
-		commands.put("Tolsimir", Tolsimir);
 		commands.put("Transcendent_Master", Transcendent_Master);
 		
 		commands.put("Umbra_Stalker", Umbra_Stalker);
