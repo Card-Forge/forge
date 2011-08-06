@@ -2,8 +2,9 @@ Name:Divine Offering
 ManaCost:1 W
 Types:Instant
 Text:no text
-A:SP$Destroy | Cost$ 1 W | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ YouGainLife/dX | SpellDescription$ Destroy target artifact. You gain life equal to its converted mana cost.
-SVar:dX:Count$TgtCardManaCost
+A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ SVar=DBGainLife | SpellDescription$ Destroy target artifact. You gain life equal to its converted mana cost.
+SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X
+SVar:X:Targeted$CardManaCost
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_offering.jpg
