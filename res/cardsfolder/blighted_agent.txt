@@ -7,4 +7,5 @@ K:Infect
 K:Unblockable
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blighted_agent.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/29.jpg
 End

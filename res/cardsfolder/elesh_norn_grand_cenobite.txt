@@ -9,4 +9,5 @@ K:stPumpAll:Creature.YouDontCtrl:-2/-2:No Condition:Creatures your opponents con
 SVar:PlayMain1:TRUE
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elesh_norn_grand_cenobite.jpg
+SetInfo:NPH|Mythic|http://magiccards.info/scans/en/nph/9.jpg
 End

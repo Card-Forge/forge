@@ -7,4 +7,5 @@ A:AB$ ChangeZone | Cost$ 3 | Origin$ Battlefield | Destination$ Hand | SpellDesc
 K:Living Weapon
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/batterskull.jpg
+SetInfo:NPH|Mythic|http://magiccards.info/scans/en/nph/130.jpg
 End

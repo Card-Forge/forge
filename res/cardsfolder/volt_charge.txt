@@ -6,4 +6,5 @@ A:SP$DealDamage | Cost$ 2 R | Tgt$ TgtCP | NumDmg$ 3 | SubAbility$ SVar=DBProlif
 SVar:DBProliferate:DB$Proliferate
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volt_charge.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/100.jpg
 End

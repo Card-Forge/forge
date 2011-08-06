@@ -6,4 +6,5 @@ A:SP$Destroy | Cost$ 4 R | ValidTgts$ Artifact,Land | TgtPrompt$ Select target a
 SVar:DBDrain:DB$LoseLife | Defined$ TargetedController | LifeAmount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/victorious_destruction.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/99.jpg
 End

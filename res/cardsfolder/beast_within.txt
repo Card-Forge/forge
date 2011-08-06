@@ -7,4 +7,5 @@ SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beast_within.jpg
+SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/103.jpg
 End

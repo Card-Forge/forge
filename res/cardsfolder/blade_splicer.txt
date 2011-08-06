@@ -8,4 +8,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Golem | TokenTyp
 K:stPumpAll:Creature.Golem+YouCtrl:0/0/First Strike:No Condition:Golem creatures you control have first strike.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blade_splicer.jpg
+SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/4.jpg
 End

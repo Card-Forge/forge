@@ -6,4 +6,5 @@ A:SP$DealDamage | Cost$ 3 R Sac<1/Artifact,Creature> | Tgt$ TgtCP | NumDmg$ 5 | 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/artillerize.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/79.jpg
 End
