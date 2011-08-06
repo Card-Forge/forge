@@ -62,7 +62,7 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         if(cardName.equals("Lurking Informant")) {
-            Target target = new Target("Select target player", new String[] {"Player"});
+            Target target = new Target(card,"Select target player", new String[] {"Player"});
         	Ability_Cost abCost = new Ability_Cost("2 T", cardName, true);
             final SpellAbility a1 = new Ability_Activated(card, abCost, target) {
                 private static final long serialVersionUID = 1446529067071763245L;
@@ -177,7 +177,7 @@ public class CardFactory_Creatures {
         else if(cardName.equals("Kiki-Jiki, Mirror Breaker")) {
             final CardFactory cfact = cf;
             Ability_Cost abCost = new Ability_Cost("T", cardName, true);
-            Target target = new Target("Select target nonlegendary creature you control.", new String[] {"Creature.nonLegendary+YouCtrl"});
+            Target target = new Target(card,"Select target nonlegendary creature you control.", new String[] {"Creature.nonLegendary+YouCtrl"});
             final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
                 private static final long serialVersionUID = -943706942500499644L;
                 
@@ -380,7 +380,7 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Gilder Bairn")) {
         	Ability_Cost abCost = new Ability_Cost("2 GU Untap", cardName, true);
-        	Target tgt = new Target("Select target permanent.", new String[]{"Permanent"});
+        	Target tgt = new Target(card,"Select target permanent.", new String[]{"Permanent"});
             final Ability_Activated a1 = new Ability_Activated(card, abCost, tgt) {
 				private static final long serialVersionUID = -1847685865277129366L;
 
@@ -3216,7 +3216,7 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if (cardName.equals("Disciple of Kangee")) {
         	Ability_Cost abCost = new Ability_Cost("U T", cardName, true);
-            final Ability_Activated ability = new Ability_Activated(card, abCost, new Target("TgtC")) {
+            final Ability_Activated ability = new Ability_Activated(card, abCost, new Target(card,"TgtC")) {
                 private static final long serialVersionUID = -5169389637917649036L;
                 
                 @Override
@@ -3486,7 +3486,7 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Sorceress Queen") || cardName.equals("Serendib Sorcerer")) {
         	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
-        	Target target = new Target("Select target creature other than "+cardName, new String[] {"Creature.Other"});
+        	Target target = new Target(card,"Select target creature other than "+cardName, new String[] {"Creature.Other"});
             final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
                 private static final long serialVersionUID = -6853184726011448677L;
                 
@@ -3724,7 +3724,7 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Wojek Embermage")) {
         	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
-            Target tgt = new Target("TgtC");
+            Target tgt = new Target(card,"TgtC");
             final Ability_Activated ability = new Ability_Activated(card, abCost, tgt) {
                 private static final long serialVersionUID = -1208482961653326721L;
                 
@@ -3813,7 +3813,7 @@ public class CardFactory_Creatures {
             };
             
             Ability_Cost abCost = new Ability_Cost("T", cardName, true);
-            Target tgt = new Target("Target creature other than "+cardName, "Creature.Other".split(","));
+            Target tgt = new Target(card,"Target creature other than "+cardName, "Creature.Other".split(","));
             final Ability_Activated ability = new Ability_Activated(card, abCost, tgt){
                 private static final long serialVersionUID = -8454685126878522607L;
                 
@@ -3943,7 +3943,7 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Helldozer")) {
             Ability_Cost abCost = new Ability_Cost("B B B T", cardName, true);
-            Target target = new Target("Select target land.", new String[]{"Land"});
+            Target target = new Target(card,"Select target land.", new String[]{"Land"});
             final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
                 private static final long serialVersionUID = 6426884086364885861L;
                 
@@ -5064,7 +5064,7 @@ public class CardFactory_Creatures {
                     
                     for(final Card c:cl) {
                     	final Ability_Cost abCost = new Ability_Cost("W T", c.getName(), true);
-                    	final Target tgt = new Target("TgtC");
+                    	final Target tgt = new Target(card,"TgtC");
                     	final SpellAbility tokenAbility = new Ability_Activated(card, abCost, tgt){
                             private static final long serialVersionUID = -7327585136675896817L;
                             
@@ -6178,7 +6178,7 @@ public class CardFactory_Creatures {
         else if(cardName.equals("Master of the Wild Hunt")) {
         	
         	final Ability_Cost abCost = new Ability_Cost("T", cardName, true);
-        	final Target abTgt = new Target("Target a creature to Hunt", "Creature".split(","));
+        	final Target abTgt = new Target(card,"Target a creature to Hunt", "Creature".split(","));
         	final Ability_Activated ability = new Ability_Activated(card, abCost, abTgt) {
                 private static final long serialVersionUID = 35050145102566898L;
                 
@@ -6324,7 +6324,7 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Scarblade Elite")) {
         	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
-            final Ability_Activated ability = new Ability_Activated(card, abCost, new Target("TgtC")) {
+            final Ability_Activated ability = new Ability_Activated(card, abCost, new Target(card,"TgtC")) {
                 private static final long serialVersionUID = 3505019464802566898L;
                 
                 @Override
@@ -6452,7 +6452,7 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Gilt-Leaf Archdruid")) {
         	Ability_Cost abCost = new Ability_Cost("tapXType<7/Druid>", cardName, true);
-        	Target tgt = new Target("Select a player to gain lands from", "Player".split(","));
+        	Target tgt = new Target(card,"Select a player to gain lands from", "Player".split(","));
         	final SpellAbility stealLands = new Ability_Activated(card, abCost, tgt){
 				private static final long serialVersionUID = 636594487143500891L;
 
@@ -6860,7 +6860,7 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Elvish Hunter")) {
         	Ability_Cost abCost = new Ability_Cost("1 G T", cardName, true);
-            final Ability_Activated ability = new Ability_Activated(card, abCost, new Target("TgtC")) {
+            final Ability_Activated ability = new Ability_Activated(card, abCost, new Target(card,"TgtC")) {
                 private static final long serialVersionUID = -560200335562416099L;
                 
                 @Override
@@ -6979,7 +6979,7 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Molten Hydra")) {
-        	Target target = new Target("TgtCP");
+        	Target target = new Target(card,"TgtCP");
         	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
             final Ability_Activated ability2 = new Ability_Activated(card, abCost, target) {
                 private static final long serialVersionUID = 2626619319289064289L;
@@ -7794,7 +7794,7 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Thoughtcutter Agent")) {
-        	Target target = new Target("Select target player", new String[] {"Player"});
+        	Target target = new Target(card,"Select target player", new String[] {"Player"});
         	Ability_Cost abCost = new Ability_Cost("U B T", cardName, true);
             final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
                 private static final long serialVersionUID = -3880035465617987801L;
@@ -9397,7 +9397,7 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Singing Tree")) {
             final String Tgts[] = {"Creature.attacking"};
-            Target target = new Target("Select target attacking creature.", Tgts);
+            Target target = new Target(card,"Select target attacking creature.", Tgts);
           
             final Ability_Cost cost = new Ability_Cost("T", card.getName(), true);
 
@@ -9625,7 +9625,7 @@ public class CardFactory_Creatures {
         	 */
         	
         	Ability_Cost abCost = new Ability_Cost("X T", cardName, true);
-        	Target tgt = new Target("TgtCP");
+        	Target tgt = new Target(card,"TgtCP");
         	
         	final Ability_Activated ability = new Ability_Activated(card, abCost, tgt) {
 				private static final long serialVersionUID = 2755743211116192949L;
@@ -9851,7 +9851,7 @@ public class CardFactory_Creatures {
         else if(cardName.equals("Karn, Silver Golem")) {
         	final long[] timeStamp = new long[1];
         	Ability_Cost abCost = new Ability_Cost("1", cardName, true);
-        	Target target = new Target("Select target noncreature artifact", "Artifact.nonCreature".split(","));
+        	Target target = new Target(card,"Select target noncreature artifact", "Artifact.nonCreature".split(","));
             Ability_Activated ability = new Ability_Activated(card, abCost, target) {
 				private static final long serialVersionUID = -8888163768273148474L;
 
@@ -10307,7 +10307,7 @@ public class CardFactory_Creatures {
         	 * Activate this ability only during your turn.
         	 */ 
         	Ability_Cost abCost = new Ability_Cost("X T", cardName, true);
-        	Target target = new Target("Select target opponent", "Opponent".split(","));
+        	Target target = new Target(card,"Select target opponent", "Opponent".split(","));
         	Ability_Activated discard = new Ability_Activated(card, abCost, target) {
 				private static final long serialVersionUID = 4839778470534392198L;
 

@@ -679,7 +679,7 @@ class CardFactory_Planeswalkers {
 
             //ability3
         	Ability_Cost cost = new Ability_Cost("SubCounter<7/LOYALTY>", cardName, true);
-        	final SpellAbility ability3 = new Ability_Activated(card, cost, new Target("P")){
+        	final SpellAbility ability3 = new Ability_Activated(card, cost, new Target(card,"P")){
 				private static final long serialVersionUID = -1200172251117224702L;
 
 				@Override

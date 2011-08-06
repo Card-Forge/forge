@@ -10238,7 +10238,7 @@ public class GameActionUtil {
 					
 					if(!hasAbility) {
 						Ability_Cost abCost = new Ability_Cost("T", c.getName(), true);
-						Target target = new Target("TgtCP");
+						Target target = new Target(c,"TgtCP");
 						final Ability_Activated ability = new Ability_Activated(c, abCost, target)
 					    {
 					        private static final long serialVersionUID = -7560349014757367722L;

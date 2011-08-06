@@ -1523,7 +1523,7 @@ class CardFactory_Lands {
         	 */
         	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
         	final String Tgts[] = {"Creature.withFlying"};
-        	Target target = new Target("Select target creature with flying.", Tgts);
+        	Target target = new Target(card,"Select target creature with flying.", Tgts);
         	final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
         		private static final long serialVersionUID = -2090435946748184314L;
 

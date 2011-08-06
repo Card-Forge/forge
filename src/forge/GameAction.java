@@ -3222,7 +3222,7 @@ public class GameAction {
     	} // Khalni Hydra      
     	return manaCost;
     }//GetSpellCostChange
-    
+
     public void playSpellAbility(SpellAbility sa) {
     	sa.setActivatingPlayer(AllZone.HumanPlayer);
     	

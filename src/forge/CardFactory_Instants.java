@@ -1428,7 +1428,7 @@ public class CardFactory_Instants {
                 public void resolve() {
                     final Card creature = getTargetCard();
                     Ability_Cost abCost = new Ability_Cost("T", creature.getName(), true);
-                    Target tgt = new Target("Select target nonland permanent", new String[] {"Permanent.nonLand"});
+                    Target tgt = new Target(card,"Select target nonland permanent", new String[] {"Permanent.nonLand"});
                     final Ability_Activated tBanish = new Ability_Activated(creature, abCost, tgt) {
                         private static final long serialVersionUID = -1008113001678623984L;
                         

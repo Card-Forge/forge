@@ -1544,7 +1544,7 @@ class CardFactory_Auras {
         	};//addSpellAbility
         	
         	// Target AbCost and Restriction are set here to get this working as expected
-        	Target tgt = new Target("Select a creature in a graveyard", "Creature".split(","));
+        	Target tgt = new Target(card,"Select a creature in a graveyard", "Creature".split(","));
         	tgt.setZone(Constant.Zone.Graveyard);
         	animate.setTarget(tgt);
         	
@@ -1641,7 +1641,7 @@ class CardFactory_Auras {
             prevController[0] = null;
             String costString = cardName.equals("Volition Reins") ? "3 U U U" : "5 U U";
             Ability_Cost cost = new Ability_Cost(costString, cardName, false);
-            Target tgt = new Target("Select target Permanent", "Permanent".split(","));
+            Target tgt = new Target(card,"Select target Permanent", "Permanent".split(","));
             
             final SpellAbility spell = new Spell(card, cost, tgt) {
                 private static final long serialVersionUID = -7359291736123492910L;

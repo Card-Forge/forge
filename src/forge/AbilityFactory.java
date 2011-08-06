@@ -102,7 +102,7 @@ public class AbilityFactory {
 		for (int aCnt = 0; aCnt < a.length; aCnt ++)
 		    a[aCnt] = a[aCnt].trim();
 		
-		if (!(a.length > 1))
+		if (!(a.length > 0))
 			throw new RuntimeException("AbilityFactory : getAbility -- a[] too short in " + hostCard.getName());
 			
 		for (int i=0; i<a.length; i++)
@@ -159,6 +159,11 @@ public class AbilityFactory {
 			isTargeted = true;
 		}
 		
+		if(hostCard.getName().equals("Goblin Ruinblaster"))
+		{
+			System.out.println("Bug station next");
+		}
+		
 		if (isTargeted)
 		{
 			String min = mapParams.containsKey("TargetMin") ? mapParams.get("TargetMin") : "1";
@@ -167,10 +172,10 @@ public class AbilityFactory {
 			if (hasValid){
 				// TgtPrompt now optional
 				String prompt = mapParams.containsKey("TgtPrompt") ? mapParams.get("TgtPrompt") : "Select target " + mapParams.get("ValidTgts");
-				abTgt = new Target(prompt, mapParams.get("ValidTgts").split(","), min, max);
+				abTgt = new Target(hostC,prompt, mapParams.get("ValidTgts").split(","), min, max);
 			}
 			else
-				abTgt = new Target(mapParams.get("Tgt"), min, max);
+				abTgt = new Target(hostC,mapParams.get("Tgt"), min, max);
 			
 			if (mapParams.containsKey("TgtZone"))	// if Targeting something not in play, this Key should be set
 				abTgt.setZone(mapParams.get("TgtZone"));

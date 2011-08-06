@@ -217,6 +217,7 @@ public class TriggerHandler {
 		
 		HashMap<String,String> trigParams = regtrig.getMapParams();
 		final Player[] decider = new Player[1];
+		boolean isOptional = false;
 		
 		if(mode.equals(trigParams.get("Mode")))
 		{
@@ -242,18 +243,23 @@ public class TriggerHandler {
 				sa[0].setStackDescription(sa[0].toString());
 			}
 			if(trigParams.containsKey("Optional"))
-			{
-				
+			{				
 				if(trigParams.get("Optional").equals("True"))
 				{
 					decider[0] = regtrig.getHostCard().getController();
+					sa[0].getTarget().setMandatory(false);
 				}
 				else if(trigParams.get("Optional").equals("OpponentDecides"))
 				{
 					decider[0] = regtrig.getHostCard().getController().getOpponent();
+				}				
+			}
+			else
+			{
+				if(sa[0].getTarget() != null)
+				{
+					sa[0].getTarget().setMandatory(true);
 				}
-				
-				
 			}
 
 			//Wrapper ability that checks the requirements again just before resolving, for intervening if clauses.
@@ -745,6 +751,7 @@ public class TriggerHandler {
 					}
 					else
 					{
+						sa[0].canPlayAI();
 						ComputerUtil.playNoStack(sa[0]);
 					}
 				}

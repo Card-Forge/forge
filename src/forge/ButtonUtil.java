@@ -29,6 +29,14 @@ public class ButtonUtil
 	getOK().setSelectable(true);
 	getCancel().setSelectable(true);	
     }    
+    public static void disableOK()
+    {
+    getOK().setSelectable(false);
+    }    
+    public static void disableCancel()
+    {
+    	getCancel().setSelectable(false);
+    }
     
     private static MyButton getOK()  {return AllZone.Display.getButtonOK();}
     private static MyButton getCancel()  {return AllZone.Display.getButtonCancel();}

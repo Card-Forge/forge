@@ -1,4 +1,4 @@
-Name:Golem Foundry
+Name:Titan Forge
 ManaCost:3
 Types:Artifact
 Text:no text

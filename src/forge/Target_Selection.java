@@ -66,14 +66,21 @@ public class Target_Selection {
 		}
 		
 		//targets still needed
-		AllZone.InputControl.setInput(input_targetValid(ability, target.getValidTgts(), target.getVTSelection(), this, req));
+		if(target.getMandatory())
+		{
+			AllZone.InputControl.setInput(input_targetValid(ability, target.getValidTgts(), target.getVTSelection(), this, req, target.hasCandidates()));
+		}
+		else
+		{
+			AllZone.InputControl.setInput(input_targetValid(ability, target.getValidTgts(), target.getVTSelection(), this, req, false));
+		}
         return false;
 	}
 
     // these have been copied over from CardFactoryUtil as they need two extra parameters for target selection.
 	// however, due to the changes necessary for SA_Requirements this is much different than the original
     public static Input input_targetValid(final SpellAbility sa, final String[] Tgts, final String message, 
-    		final Target_Selection select, final SpellAbility_Requirements req)
+    		final Target_Selection select, final SpellAbility_Requirements req, final boolean mandatory)
     {
     	Input target = new Input() {
 			private static final long serialVersionUID = -2397096454771577476L;
@@ -103,10 +110,10 @@ public class Target_Selection {
 		            		canTargetOpponent = true;
 		            }
 	
-		            stopSetNext(input_targetSpecific(sa, choices, message, true, canTargetPlayer, canTargetOpponent, select, req));
+		            stopSetNext(input_targetSpecific(sa, choices, message, true, canTargetPlayer, canTargetOpponent, select, req,mandatory));
 				}
 				else{
-					stopSetNext(input_cardFromList(sa, choices, message, true, select, req));
+					stopSetNext(input_cardFromList(sa, choices, message, true, select, req,mandatory));
 				}
 	        }
     	};
@@ -116,7 +123,7 @@ public class Target_Selection {
 
     //CardList choices are the only cards the user can successful select
     public static Input input_targetSpecific(final SpellAbility sa, final CardList choices, final String message, 
-    		final boolean targeted, final boolean bTgtPlayer, final boolean bTgtOpponent, final Target_Selection select, final SpellAbility_Requirements req) {
+    		final boolean targeted, final boolean bTgtPlayer, final boolean bTgtOpponent, final Target_Selection select, final SpellAbility_Requirements req, final boolean mandatory) {
         Input target = new Input() {
 			private static final long serialVersionUID = -1091595663541356356L;
 
@@ -138,6 +145,11 @@ public class Target_Selection {
                 	ButtonUtil.enableOnlyCancel();
                 else
                 	ButtonUtil.enableAll();
+                
+                if(mandatory)
+                {
+                	ButtonUtil.disableCancel();
+                }
             }
             
             @Override
@@ -185,7 +197,7 @@ public class Target_Selection {
     
     
     public static Input input_cardFromList(final SpellAbility sa, final CardList choices, final String message, 
-    		final boolean targeted, final Target_Selection select, final SpellAbility_Requirements req){
+    		final boolean targeted, final Target_Selection select, final SpellAbility_Requirements req, final boolean mandatory){
     	// Send in a list of valid cards, and popup a choice box to target 
 		final Card dummy = new Card();
 		dummy.setName("[FINISH TARGETING]");

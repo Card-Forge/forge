@@ -461,7 +461,7 @@ public class CardFactory_Sorceries {
         //*************** START *********** START **************************
         else if(cardName.equals("Cruel Ultimatum")) {
         	Ability_Cost abCost = new Ability_Cost("U U B B B R R", cardName, false);
-        	Target tgt = new Target("Select target opponent", "Opponent".split(","));
+        	Target tgt = new Target(card,"Select target opponent", "Opponent".split(","));
             final SpellAbility spell = new Spell(card,abCost, tgt) {
 
 				private static final long serialVersionUID = -6598023699468746L;
@@ -4627,7 +4627,7 @@ public class CardFactory_Sorceries {
         	 * your mana pool, where X is that creature's converted mana cost.
         	 */
         	Ability_Cost cost = new Ability_Cost("U", cardName, false);
-        	Target tgt = new Target("Select an untapped creature you control", "Creature.untapped+YouCtrl".split(","));
+        	Target tgt = new Target(card,"Select an untapped creature you control", "Creature.untapped+YouCtrl".split(","));
         	final SpellAbility spell = new Spell(card, cost, tgt) {
 
 				private static final long serialVersionUID = 8883585452278041848L;
@@ -5668,7 +5668,7 @@ public class CardFactory_Sorceries {
         //*************** START *********** START **************************
         else if(cardName.equals("Choking Sands")) {
             Ability_Cost abCost = new Ability_Cost("1 B B", cardName, false);
-            Target target = new Target("Select target non-Swamp land.", new String[]{"Land.nonSwamp"});
+            Target target = new Target(card,"Select target non-Swamp land.", new String[]{"Land.nonSwamp"});
             final SpellAbility spell = new Spell(card, abCost, target) {
 				private static final long serialVersionUID = 6499378648382900112L;
 

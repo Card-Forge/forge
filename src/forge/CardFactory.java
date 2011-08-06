@@ -5106,7 +5106,7 @@ public class CardFactory implements NewConstants {
         //*************** START *********** START **************************
         else if(cardName.equals("That Which Was Taken")) {
         	Ability_Cost abCost = new Ability_Cost("4 T", cardName, true);
-        	Target target = new Target("Select target permanent other than "+cardName, new String[] {"Permanent.Other"});
+        	Target target = new Target(card,"Select target permanent other than "+cardName, new String[] {"Permanent.Other"});
             final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
                 private static final long serialVersionUID = -8996435083734446340L;
                 
@@ -5408,7 +5408,7 @@ public class CardFactory implements NewConstants {
         else if(cardName.equals("Lifespark Spellbomb")) {
         	Ability_Cost abCost = new Ability_Cost("G Sac<1/CARDNAME>", cardName, true);
         	String[] valid = {"Land"};
-        	Target abTgt = new Target("Target a land to animate", valid);
+        	Target abTgt = new Target(card,"Target a land to animate", valid);
             final Ability_Activated ability = new Ability_Activated(card, abCost, abTgt) {
                 private static final long serialVersionUID = -5744842090293912606L;
                 
@@ -5665,7 +5665,7 @@ public class CardFactory implements NewConstants {
         else if(cardName.equals("Volrath's Dungeon")) {
         	
         	Ability_Cost dungeonCost = new Ability_Cost("Discard<1/Card>", cardName, true);
-        	Target dungeonTgt = new Target("Volrath's Dungeon - Target player" , "player".split(","));
+        	Target dungeonTgt = new Target(card,"Volrath's Dungeon - Target player" , "player".split(","));
         	
             final SpellAbility dungeon = new Ability_Activated(card, dungeonCost, dungeonTgt){
 				private static final long serialVersionUID = 334033015590321821L;
@@ -5839,7 +5839,7 @@ public class CardFactory implements NewConstants {
         	final String[] Tgts = { "Creature.nonArtifact" };
         	
         	Ability_Cost abCost = new Ability_Cost("T Sac<1/CARDNAME>", cardName, true);
-        	Target abTgt = new Target("Select target nonartifact creature to Transmogrify", Tgts);
+        	Target abTgt = new Target(card,"Select target nonartifact creature to Transmogrify", Tgts);
 
         	final Ability_Activated ability = new Ability_Activated(card, abCost, abTgt){
                 private static final long serialVersionUID = -401631574059431293L;
@@ -5882,7 +5882,7 @@ public class CardFactory implements NewConstants {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Door to Nothingness")) {
-        	Target target = new Target("Select target player", new String[] {"Player"});
+        	Target target = new Target(card,"Select target player", new String[] {"Player"});
         	Ability_Cost abCost = new Ability_Cost("G G R R B B U U W W T Sac<1/CARDNAME>", cardName, true);
         	Ability_Activated ab1 = new Ability_Activated(card, abCost, target) {
                 
@@ -5945,7 +5945,7 @@ public class CardFactory implements NewConstants {
         //*************** START *********** START **************************
         else if(cardName.equals("Goblin Charbelcher")) {
         	Ability_Cost abCost = new Ability_Cost("3 T", cardName, true);
-            final Ability_Activated ability = new Ability_Activated(card, abCost, new Target("TgtCP")) {
+            final Ability_Activated ability = new Ability_Activated(card, abCost, new Target(card,"TgtCP")) {
                 private static final long serialVersionUID = -840041589720758423L;
                 
                 @Override
@@ -6241,7 +6241,7 @@ public class CardFactory implements NewConstants {
         	 */
 
         	Ability_Cost abCost = new Ability_Cost("1 T Sac<1/CARDNAME>", cardName, true);
-        	Target target = new Target("Select target player", new String[]{"Player"});
+        	Target target = new Target(card,"Select target player", new String[]{"Player"});
         	final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
         		private static final long serialVersionUID = -6711849408085138636L;
 
@@ -6306,7 +6306,7 @@ public class CardFactory implements NewConstants {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Grindstone")) {
-        	Target target = new Target("Select target player", new String[] {"Player"});
+        	Target target = new Target(card,"Select target player", new String[] {"Player"});
         	Ability_Cost abCost = new Ability_Cost("3 T", cardName, true);
         	Ability_Activated ab1 = new Ability_Activated(card, abCost, target) {
 				private static final long serialVersionUID = -6281219446216L;
@@ -6362,7 +6362,7 @@ public class CardFactory implements NewConstants {
         	 * library into his or her graveyard, where X is the number of
         	 * cards in that player's graveyard.
         	 */
-        	Target target = new Target("Select target player", new String[] {"Player"});
+        	Target target = new Target(card,"Select target player", new String[] {"Player"});
         	Ability_Cost abCost = new Ability_Cost("5 T", cardName, true);
         	Ability_Activated ab1 = new Ability_Activated(card, abCost, target) {
 				private static final long serialVersionUID = -6282104343089446216L;
@@ -6389,7 +6389,7 @@ public class CardFactory implements NewConstants {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Glasses of Urza")) {
-        	Target target = new Target("Select target player", new String[] {"Player"});
+        	Target target = new Target(card,"Select target player", new String[] {"Player"});
         	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
             final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
                 private static final long serialVersionUID = -3857979945891501990L;
@@ -6579,7 +6579,7 @@ public class CardFactory implements NewConstants {
         	/*
         	 * Tap, Sacrifice Tormod's Crypt: Exile all cards from target player's graveyard.
         	 */
-        	Target target = new Target("Select target player", new String[] {"Player"});
+        	Target target = new Target(card,"Select target player", new String[] {"Player"});
         	Ability_Cost abCost = new Ability_Cost("T Sac<1/CARDNAME>", cardName, true);
         	final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
 
@@ -6758,7 +6758,7 @@ public class CardFactory implements NewConstants {
         //*************** START *********** START **************************
         else if(cardName.equals("Barl's Cage")) {
             final String Tgts[] = {"Creature"};
-        	Target target= new Target("Select target creature.", Tgts, "1", "1");
+        	Target target= new Target(card,"Select target creature.", Tgts, "1", "1");
 
             final Ability_Cost cost = new Ability_Cost("3", card.getName(), true);
         	
@@ -7192,7 +7192,7 @@ public class CardFactory implements NewConstants {
         	 * Cursed Scroll deals 2 damage to target creature or player.
         	 */
         	Ability_Cost abCost = new Ability_Cost("3 T", cardName, true);
-        	final Ability_Activated ability = new Ability_Activated(card, abCost, new Target("TgtCP")) {
+        	final Ability_Activated ability = new Ability_Activated(card, abCost, new Target(card,"TgtCP")) {
         		private static final long serialVersionUID = 7550743617522146304L;
         		
         		@Override

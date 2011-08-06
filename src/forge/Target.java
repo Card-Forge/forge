@@ -2,7 +2,20 @@ package forge;
 
 import java.util.ArrayList;
 
-public class Target {	
+public class Target {
+	private boolean bMandatory = false;
+	private Card srcCard;
+	
+	public boolean getMandatory()
+	{
+		return bMandatory;
+	}
+	
+	public void setMandatory(boolean m)
+	{
+		bMandatory = m;
+	}
+	
 	private boolean tgtValid = false;
 	private String ValidTgts[];
 	private String vtSelection = "";
@@ -83,11 +96,11 @@ public class Target {
 		targetPlayers.clear();
 	}
 	
-	public Target(String parse){
-		this(parse, "1", "1");
+	public Target(Card src,String parse){
+		this(src,parse, "1", "1");
 	}
 	
-	public Target(String parse, String min, String max){
+	public Target(Card src,String parse, String min, String max){
 		// parse=Tgt{C}{P} - Primarily used for Pump or Damage 
 		// C = Creature   P=Player/Planeswalker
 		// CP = All three
@@ -125,11 +138,12 @@ public class Target {
 		maxTargets = max;
 	}
 	
-	public Target(String select, String[] valid){		
-		this(select, valid, "1", "1");
+	public Target(Card src, String select, String[] valid){		
+		this(src, select, valid, "1", "1");
 	}
 	
-	public Target(String select, String[] valid, String min, String max){
+	public Target(Card src, String select, String[] valid, String min, String max){
+		srcCard = src;
 		tgtValid = true;
 		vtSelection = select;
 		ValidTgts = valid;
@@ -175,4 +189,30 @@ public class Target {
 	}
 	
 	public boolean canTgtCreatureAndPlayer() { return canTgtPlayer() && canTgtCreature(); }
+	
+	public boolean hasCandidates()
+	{
+		if(canTgtPlayer())
+		{
+			return true;
+		}
+		
+		for(Card c : AllZone.getZone(tgtZone,AllZone.HumanPlayer).getCards())
+		{
+			if(c.isValidCard(ValidTgts, srcCard.getController(), srcCard))
+			{
+				return true;
+			}
+		}
+		
+		for(Card c : AllZone.getZone(tgtZone,AllZone.ComputerPlayer).getCards())
+		{
+			if(c.isValidCard(ValidTgts, srcCard.getController(), srcCard))
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
 }
