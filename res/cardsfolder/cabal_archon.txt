@@ -1,0 +1,9 @@
+Name:Cabal Archon
+ManaCost:2 B
+Types:Creature Human Cleric
+Text:no text
+PT:2/2
+K:abLoseLifeTgt B Sac<1/Cleric>:2:Drawback$YouGainLife/2:Target player loses 2 life and you gain 2 life.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_archon.jpg
+End

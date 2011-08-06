@@ -1,0 +1,9 @@
+Name:Bile Urchin
+ManaCost:B
+Types:Creature Spirit
+Text:no text
+PT:1/1
+K:abLoseLifeTgt Sac<1/CARDNAME>:1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bile_urchin.jpg
+End

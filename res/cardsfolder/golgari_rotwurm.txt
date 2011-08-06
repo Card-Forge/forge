@@ -1,0 +1,9 @@
+Name:Golgari Rotwurm
+ManaCost:3 B G
+Types:Creature Zombie Wurm
+Text:no text
+PT:5/4
+K:abLoseLifeTgt B Sac<1/Creature>:1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/golgari_rotwurm.jpg
+End

@@ -6,6 +6,7 @@ PT:7/7
 K:Flying
 K:Trample
 K:Morph:B B B B
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/liege_of_the_pit.jpg
 End
