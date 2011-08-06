@@ -17793,6 +17793,30 @@ public class CardFactory_Creatures {
         	ability.setStackDescription(cardName + " - Rearrange the top 4 cards in your library in any order.");
         	card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        if(cardName.equals("Descendant of Soramaro")) {
+        	/*
+        	 * 1U: Look at the top X cards of your library, where X is the number
+        	 * of cards in your hand, then put them back in any order.
+        	 */
+        	final SpellAbility ability = new Ability(card, "1 U") {
+        		@Override
+        		public boolean canPlayAI() {
+        			return false;
+        		}
+        		@Override
+        		public void resolve() {
+        			if(card.getController().equals(Constant.Player.Human)) {
+        				int x = AllZoneUtil.getPlayerHand(card.getController()).size();
+        				AllZoneUtil.rearrangeTopOfLibrary(card.getController(), x, false);
+        			}
+        		}   
+        	};
+        	card.addSpellAbility(ability);
+        	//ability.setDescription("4U: Look at the top four cards of your library, then put them back in any order.");
+        	ability.setStackDescription(cardName + " - Rearrange the top X cards in your library in any order.");
+        }//*************** END ************ END **************************
 
         
         // Cards with Cycling abilities

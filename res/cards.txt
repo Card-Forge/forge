@@ -1,3 +1,9 @@
+Descendant of Soramaro
+3 U
+Creature Human Wizard
+1U: Look at the top X cards of your library, where X is the number of cards in your hand, then put them back in any order.
+2/3
+
 Adventuring Gear
 1
 Artifact Equipment
