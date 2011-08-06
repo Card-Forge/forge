@@ -21,16 +21,16 @@ public class StaticEffects
 	{	
 		//value has to be an array, since certain cards have multiple commands associated with them
 		
-		cardToEffectsList.put("Adamaro, First to Desire", new String[] {"Adamaro_First_to_Desire"});
+		//cardToEffectsList.put("Adamaro, First to Desire", new String[] {"Adamaro_First_to_Desire"});
 		cardToEffectsList.put("Akroma's Memorial", new String[] {"Akromas_Memorial"});
 		//cardToEffectsList.put("Angry Mob", new String[] {"Angry_Mob"});
 		cardToEffectsList.put("Avatar",  new String[] {"Ajani_Avatar_Token"});
-		cardToEffectsList.put("Aven Trailblazer", new String[] {"Aven_Trailblazer"});
+		//cardToEffectsList.put("Aven Trailblazer", new String[] {"Aven_Trailblazer"});
 		
 		cardToEffectsList.put("Bant Sureblade", new String[] {"Bant_Sureblade"});
 		cardToEffectsList.put("Beastbreaker of Bala Ged", new String[] {"Beastbreaker_of_Bala_Ged"});
 		cardToEffectsList.put("Bloodghast", new String[] {"Bloodghast"});
-		cardToEffectsList.put("Broodstar", new String[] {"Master_of_Etherium"});
+		//cardToEffectsList.put("Broodstar", new String[] {"Master_of_Etherium"});
 		cardToEffectsList.put("Broodwarden", new String[] {"Broodwarden"});
 		
 		cardToEffectsList.put("Cantivore", new String[] {"Cantivore"});
@@ -90,7 +90,7 @@ public class StaticEffects
 		cardToEffectsList.put("Maraxus of Keld", new String[] {"Maraxus_of_Keld"});
 		cardToEffectsList.put("Maro", new String[] {"Maro"});
 		cardToEffectsList.put("Marrow-Gnawer", new String[] {"Marrow_Gnawer"});
-		cardToEffectsList.put("Master of Etherium", new String[] {"Master_of_Etherium"});
+		//cardToEffectsList.put("Master of Etherium", new String[] {"Master_of_Etherium"});
 		cardToEffectsList.put("Masumaro, First to Live", new String[] {"Masumaro_First_to_Live"});
 		cardToEffectsList.put("Matca Rioters", new String[] {"Matca_Rioters"});
 		cardToEffectsList.put("Meddling Mage", new String[] {"Meddling_Mage"});

@@ -14660,7 +14660,7 @@ public class GameActionUtil {
 		}//execute()
 	};
 
-	
+	/*
 	public static Command Master_of_Etherium          = new Command() {
 		private static final long serialVersionUID   = -5406532269375480827L;
 		
@@ -14682,6 +14682,7 @@ public class GameActionUtil {
 
 		}// execute()
 	}; // Master of Etherium + Broodstar
+	*/
 
 	public static Command Loxodon_Punisher            = new Command() {
 
@@ -15197,6 +15198,7 @@ public class GameActionUtil {
 
 	}; //Svogthos, the Restless Tomb
 
+	/*
 	public static Command Nightmare                   = new Command() {
 		private static final long serialVersionUID = 1987511205573387864L;
 
@@ -15215,8 +15217,8 @@ public class GameActionUtil {
 			CardList swamps = AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Swamp");
 			return swamps.size();
 		}
-	};
-
+	};*/
+	/*
 	public static Command Aven_Trailblazer            = new Command() {
 		private static final long serialVersionUID = 2731050781896531776L;
 
@@ -15230,7 +15232,7 @@ public class GameActionUtil {
 
 		}// execute()
 	};
-	
+	*/
 	public static Command Matca_Rioters            = new Command() {
 		private static final long serialVersionUID = 1090204321481353143L;
 
@@ -16375,11 +16377,11 @@ public class GameActionUtil {
 	static {
 		//Please add cards in alphabetical order so they are easier to find
 		
-		commands.put("Adamaro_First_to_Desire", Adamaro_First_to_Desire);
+		//commands.put("Adamaro_First_to_Desire", Adamaro_First_to_Desire);
 		commands.put("Ajani_Avatar_Token", Ajani_Avatar_Token);
 		commands.put("Akromas_Memorial", Akromas_Memorial);
 		//commands.put("Angry_Mob", Angry_Mob);
-		commands.put("Aven_Trailblazer", Aven_Trailblazer);
+		//commands.put("Aven_Trailblazer", Aven_Trailblazer);
 		
 		commands.put("Bant_Sureblade", Bant_Sureblade);
 		commands.put("Beastbreaker_of_Bala_Ged", Beastbreaker_of_Bala_Ged);
@@ -16444,7 +16446,7 @@ public class GameActionUtil {
 		commands.put("Maraxus_of_Keld", Maraxus_of_Keld);
 		commands.put("Maro", Maro);
 		commands.put("Marrow_Gnawer", Marrow_Gnawer);
-		commands.put("Master_of_Etherium", Master_of_Etherium);
+		//commands.put("Master_of_Etherium", Master_of_Etherium);
 		commands.put("Masumaro_First_to_Live", Masumaro_First_to_Live);
 		commands.put("Matca_Rioters", Matca_Rioters);
 		commands.put("Meddling_Mage", Meddling_Mage);
