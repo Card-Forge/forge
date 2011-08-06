@@ -2744,10 +2744,14 @@ public class CombatUtil {
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, attacker.getController()); 
                     
                     CardList enchantments = new CardList(library.getCards());
-                    final String turn = attacker.getController();
+                    //final String turn = attacker.getController();
                     enchantments = enchantments.filter(new CardListFilter() {                      
                         public boolean addCard(Card c) {
                         	if(attacker.hasKeyword("Protection from enchantments") || (attacker.hasKeyword("Protection from everything"))) return false;
+                        	return(c.isEnchantment() && c.getKeyword().contains("Enchant creature") 
+                        			&& !CardFactoryUtil.hasProtectionFrom(c,attacker));
+                        	
+                        	/* What a mess ???
                         	ArrayList<String> keywords = c.getKeyword();
                         	for(String keyword:keywords) {
                         		if(keyword.startsWith("Enchant creature")) {
@@ -2765,7 +2769,7 @@ public class CombatUtil {
     	                            }
                                 		} return true;
                                 		}
-                        		if(turn == "Human") {
+                        		if(turn == "Human") { 
                             		if(keyword.startsWith("Enchant Creature")) {
                         			if(keyword.endsWith("Curse")) {
                                     	String [] colors = new String[6];
@@ -2783,7 +2787,7 @@ public class CombatUtil {
                         		}
                         		}
                         	}
-                             return false;
+                             return false; */
                         }
                     });
 	                    String player = attacker.getController();
@@ -2799,7 +2803,9 @@ public class CombatUtil {
 	                           Enchantment = ((Card) check);	
 	                        }
 	                    } else {
-	                           Enchantment = CardFactoryUtil.AI_getBestEnchantment(enchantments,attacker, false);
+	                    	//enchantments = enchantments.getKeywordsContain("enPump"); Doesn't seem to work
+	                    	//enchantments = enchantments.getKeywordsDontContain("enPumpCurse");
+	                        Enchantment = CardFactoryUtil.AI_getBestEnchantment(enchantments,attacker, false);
 	                    }
 	                    if(Enchantment != null && AllZone.GameAction.isCardInPlay(attacker)){
 	                    	library.remove(Enchantment);

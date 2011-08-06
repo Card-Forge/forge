@@ -253,6 +253,15 @@ public class CardList implements Iterable<Card> {
         });
     }
     
+    //get all cards that don't have this string in their keywords
+    public CardList getKeywordsDontContain(final String keyword) {
+        return this.filter(new CardListFilter() {
+            public boolean addCard(Card c) {
+                return !c.KeywordsContain(keyword);
+            }
+        });
+    }
+    
     public CardList getTokens() {
         return this.filter(new CardListFilter() {
             public boolean addCard(Card c) {
