@@ -10,13 +10,13 @@ public class ComputerAI_General implements Computer {
     //private boolean          playLand = true;
 	//private int numberPlayLand = 1;
 	//private int numberPlayLand = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Computer);
-    private Collection<Card> playMain1Cards;
+    //private Collection<Card> playMain1Cards;
         
     @SuppressWarnings("unchecked")
     // TreeSet type safety
     public ComputerAI_General() {
         //try to reduce the number of comparisons
-        playMain1Cards = new TreeSet(getMain1PlayHand());
+        //playMain1Cards = new TreeSet(getMain1PlayHand());
     }
     
     public void main1() {
@@ -70,7 +70,7 @@ public class ComputerAI_General implements Computer {
     }//playCards()
     
 
-    private ArrayList<String> getMain1PlayHand() {
+/*    private ArrayList<String> getMain1PlayHand() {
         ArrayList<String> play = new ArrayList<String>();
         play.add("Man-o'-War");
         play.add("Fire Imp");
@@ -164,7 +164,7 @@ public class ComputerAI_General implements Computer {
         
         return play;
     }//getMain1PlayCards()
-    
+*/    
     private SpellAbility[] getMain1() {
         //Card list of all cards to consider
         CardList hand = new CardList(AllZone.Computer_Hand.getCards());
@@ -172,9 +172,12 @@ public class ComputerAI_General implements Computer {
         hand = hand.filter(new CardListFilter() {
         	// Beached As Start
             public boolean addCard(Card c) {
-                Collection<Card> play = playMain1Cards;
+                //Collection<Card> play = playMain1Cards;
+            	if (c.getSVar("PlayMain1").equals("TRUE"))
+            		return true;
+            	
                 if(c.isLand()) return false;
-                if(play.contains(c.getName()) || (c.isCreature() && c.getKeyword().contains("Haste"))) return true;
+                if(c.isCreature() && c.getKeyword().contains("Haste")) return true;
                 CardList Vengevines = new CardList();
                 Vengevines.addAll(AllZone.getZone(Constant.Zone.Graveyard, "Computer").getCards());       
                 Vengevines = Vengevines.getName("Vengevine");
