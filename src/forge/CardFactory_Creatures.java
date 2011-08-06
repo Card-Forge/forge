@@ -18459,7 +18459,7 @@ public class CardFactory_Creatures {
           }//*************** END ************ END **************************
 	       
 	     //*************** START *********** START **************************
-	      else if (cardName.equals("Lichentrope"))
+	      else if (cardName.equals("Lichenthrope"))
 	      {
 	    	  final Card newCard = new Card()
 	    	  {

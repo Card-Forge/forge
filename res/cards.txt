@@ -10,7 +10,7 @@ Creature Giant
 If a source would deal 3 or less damage to Callous Giant, prevent that damage.
 4/4
 
-Lichentrope
+Lichenthrope
 3 G G
 Creature Plant Fungus
 If damage would be dealt to Lichenthrope, put that many -1/-1 counters on it instead. At the beginning of your upkeep, remove a -1/-1 counter from Lichenthrope
