@@ -3,7 +3,8 @@ ManaCost:1 B
 Types:Creature Zombie Frog Beast
 Text:no text
 PT:3/3
-K:WheneverKeyword:EntersBattleField:Type/Creature:Play:ModifyLife/-1:ControllingPlayer_Self:ASAP:No_Condition:Initiator - Other than Self:Whenever another creature enters the battlefield, you lose 1 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever another creature enters the battlefield, you lose 1 life.
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:AntiBuffedBy:Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wretched_anurid.jpg
