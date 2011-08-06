@@ -1,12 +1,13 @@
 package forge;
 
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants.QUEST;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.Serializable;
 
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants.QUEST;
-
+@Deprecated
 public class QuestData_Prefs implements Serializable {
 	private static final long serialVersionUID = 3266336025656577905L;
 

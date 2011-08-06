@@ -1,28 +1,20 @@
 package forge;
+
+import forge.error.ErrorViewer;
+import forge.properties.NewConstants;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 import java.util.Collections;
-
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
-
-import forge.error.ErrorViewer;
-import forge.properties.NewConstants;
+import java.util.List;
+import java.util.Set;
 
 
 //presumes AllZone.QuestData is not null
@@ -30,7 +22,7 @@ import forge.properties.NewConstants;
 public class Gui_Quest extends JFrame implements NewConstants{
     private static final long serialVersionUID   = -6432089669283627896L;
     
-    private QuestData         questData;
+    private forge.quest.data.QuestData         questData;
     
     private JLabel            jLabel1            = new JLabel();
     private JLabel            difficultyLabel    = new JLabel();
@@ -100,7 +92,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         rankLabel.setText(questData.getRank());
         creditsLabel.setText("Credits: " + questData.getCredits());
         
-        if (questData.getMode().equals(QuestData.FANTASY))
+        if (questData.getMode().equals(forge.quest.data.QuestData.FANTASY))
         {
 	        int life = questData.getLife();
 	        if (life<15)
@@ -121,14 +113,16 @@ public class Gui_Quest extends JFrame implements NewConstants{
         
 
         //get deck names as Strings
-        ArrayList<String> list = questData.getDeckNames();
+        List<String> list = questData.getDeckNames();
         Collections.sort(list);
-        for(int i = 0; i < list.size(); i++)
-            deckComboBox.addItem(list.get(i));
+
+        for (String aList : list) {
+            deckComboBox.addItem(aList);
+        }
         
         if(Constant.Runtime.HumanDeck[0] != null) deckComboBox.setSelectedItem(Constant.Runtime.HumanDeck[0].getName());
         
-        if (QuestData.FANTASY.equals(questData.getMode()))
+        if (forge.quest.data.QuestData.FANTASY.equals(questData.getMode()))
         {
         	
         }
@@ -178,7 +172,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         });
         
         //if (questData.getMode().equals("Fantasy"))
-        if (QuestData.FANTASY.equals(questData.getMode()))
+        if (forge.quest.data.QuestData.FANTASY.equals(questData.getMode()))
         {
         	refreshPets();
         	
@@ -272,7 +266,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         jPanel2.add(oppOneRadio, null);
         jPanel2.add(oppTwoRadio, null);
         jPanel2.add(oppThreeRadio, null);
-        if (QuestData.FANTASY.equals(questData.getMode())) {
+        if (forge.quest.data.QuestData.FANTASY.equals(questData.getMode())) {
         	this.getContentPane().add(otherShopsButton, null);
         	this.getContentPane().add(lifeLabel,null);
         	this.getContentPane().add(questsButton, null);
@@ -316,10 +310,12 @@ public class Gui_Quest extends JFrame implements NewConstants{
     
     void refreshPets(){
     	petComboBox.removeAllItems();
-    	ArrayList<String> petList = QuestUtil.getPetNames(questData);
-    	for (int i=0;i<petList.size();i++)
-    		petComboBox.addItem(petList.get(i));
-    	
+    	Set<String> petList = questData.getPetManager().getAvailablePetNames();
+
+        for (String s : petList) {
+            petComboBox.addItem(s);
+        }
+
     	petComboBox.addItem("None");
     	petComboBox.addItem("No Plant/Pet");
     }
@@ -344,7 +340,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
             
             public void execute() {
                 //saves all deck data
-                QuestData.saveData(AllZone.QuestData);
+                AllZone.QuestData.saveData();
                 
                 new Gui_Quest();
             }
@@ -372,7 +368,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
 
 			public void execute() {
                 //saves all deck data
-                QuestData.saveData(AllZone.QuestData);
+                AllZone.QuestData.saveData();
                 
                 new Gui_Quest();
             }
@@ -413,16 +409,16 @@ public class Gui_Quest extends JFrame implements NewConstants{
         
         Constant.Runtime.Smooth[0] = smoothLandCheckBox.isSelected();
         
-        if (questData.getMode().equals(QuestData.REALISTIC))
+        if (questData.getMode().equals(forge.quest.data.QuestData.REALISTIC))
         	AllZone.GameAction.newGame(human, computer);
         else
         {
-        	Object pet = petComboBox.getSelectedItem();
-        	if (pet != null)
-        		questData.setSelectedPet(pet.toString());
+        	Object petName = petComboBox.getSelectedItem();
+        	if (petName != null)
+        		questData.getPetManager().setSelectedPet((String) petName);
         	
-        	CardList hCl = QuestUtil.getHumanPlantAndPet(questData);
-        	int hLife = QuestUtil.getLife(questData);
+        	CardList hCl = forge.quest.data.QuestUtil.getHumanPlantAndPet(questData);
+        	int hLife = questData.getLife();
             AllZone.GameAction.newGame(human, computer, hCl, new CardList(), hLife, 20, null);
         }
         
@@ -448,7 +444,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         
         Object pet = petComboBox.getSelectedItem();
     	if (pet != null)
-    		questData.setSelectedPet(pet.toString());
+    		questData.getPetManager().setSelectedPet((String) pet);
     	
     	Gui_Quest_Assignments g = new Gui_Quest_Assignments(this, human);
         g.setVisible(true);

@@ -13,6 +13,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.List;
 
 public class Gui_Quest_Assignments extends JFrame implements NewConstants{
 	
@@ -26,7 +27,7 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
     
     private ButtonGroup       buttonGroup      = new ButtonGroup();
     
-    private QuestData 		  questData;
+    private forge.quest.data.QuestData 		  questData;
     
     private Deck 			  hDeck;
     
@@ -79,11 +80,11 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
     	read = new ReadQuest_Assignment(ForgeProps.getFile(QUEST.QUESTS), questData);
     	read.run();
     	
-    	ArrayList<Quest_Assignment> questsToDisplay = new ArrayList<Quest_Assignment>();
+    	List<Quest_Assignment> questsToDisplay = new ArrayList<Quest_Assignment>();
     	
     	if (questData.getAvailableQuests()!= null && questData.getAvailableQuests().size() > 0)
     	{
-    		ArrayList<Quest_Assignment> availableQuests = read.getQuestsByIds(questData.getAvailableQuests());
+    		List<Quest_Assignment> availableQuests = read.getQuestsByIds(questData.getAvailableQuests());
         	questsToDisplay = availableQuests;
     		
     		/*
@@ -97,7 +98,7 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
     	else //generate some random quests
     	{
     		//System.out.println("null");
-    		ArrayList<Quest_Assignment> allAvailableQuests = read.getQuests();
+    		List<Quest_Assignment> allAvailableQuests = read.getQuests();
     		
     		ArrayList<Integer> availableInts = new ArrayList<Integer>();
     		
@@ -116,7 +117,7 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
     			questsToDisplay.add(qa);
     		}
     		questData.setAvailableQuests(availableInts);
-    		QuestData.saveData(questData);
+    		questData.saveData();
     	}//else
     	
     	JRadioButton radio;
@@ -262,7 +263,7 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
 	    if(Gui_Quest.newGUICheckbox.isSelected()) AllZone.Display = new GuiDisplay4();
         else AllZone.Display = new GuiDisplay3();
     	
-	    AllZone.GameAction.newGame(hDeck, computerDeck, QuestUtil.getHumanPlantAndPet(questData, selectedQuest), new CardList(), questData.getLife()+extraLife, 
+	    AllZone.GameAction.newGame(hDeck, computerDeck, forge.quest.data.QuestUtil.getHumanPlantAndPet(questData, selectedQuest), new CardList(), questData.getLife()+extraLife, 
 	    						   selectedQuest.getComputerLife(), selectedQuest);
 	    
 	    AllZone.Display.setVisible(true);
@@ -278,7 +279,7 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
     }
     
     void quitButton_actionPerformed(ActionEvent e) {
-    	//QuestData.saveData(questData);
+    	//questData.saveData();
         //new Gui_Shops();
     	questGui.setVisible(true);
     	

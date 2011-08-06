@@ -1,12 +1,12 @@
 package forge;
 
 
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
 
 
 public class AllZone implements NewConstants {
@@ -16,7 +16,7 @@ public class AllZone implements NewConstants {
 	public static final Player					HumanPlayer				= new HumanPlayer("Human");
     public static final Player					ComputerPlayer			= new AIPlayer("Computer");
     
-    public static QuestData                      QuestData          = null;
+    public static forge.quest.data.QuestData     QuestData          = null;
     public static Quest_Assignment 			     QuestAssignment    = null;
     public static final NameChanger              NameChanger        = new NameChanger();
     

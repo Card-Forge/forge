@@ -19,6 +19,8 @@ import java.util.Map.Entry;
  * 
  * @author Clemens Koza
  */
+@SuppressWarnings({"deprecation"})
+@Deprecated
 public class QuestData_State implements Serializable {
     private static final long serialVersionUID = 7007940230351051937L;
     

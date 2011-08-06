@@ -2,6 +2,8 @@ package forge;
 
 import java.util.ArrayList;
 
+@Deprecated
+@SuppressWarnings("deprecation")
 public class QuestUtil {
 	
 	public static int getLife(QuestData qd)

@@ -2,45 +2,26 @@
 package forge;
 
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Random;
+import forge.error.ErrorViewer;
+import forge.gui.game.CardDetailPanel;
+import forge.gui.game.CardPicturePanel;
+import forge.properties.NewConstants;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.MouseInputListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
-
-import forge.error.ErrorViewer;
-import forge.gui.game.CardDetailPanel;
-import forge.gui.game.CardPicturePanel;
-import forge.properties.NewConstants;
+import java.awt.Color;
+import java.awt.*;
+import java.awt.event.*;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Random;
 
 public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, NewConstants {
 
@@ -84,7 +65,7 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
     private CardPicturePanel  picture              = new CardPicturePanel(null);
     private JPanel            glassPane;
     
-    private QuestData 		  questData;
+    private forge.quest.data.QuestData 		  questData;
     @Override
     public void setTitle(String message) {
         super.setTitle(message);
@@ -281,49 +262,57 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
         }
         else //grab existing shopList
         {
-        	ArrayList<String> shopList = questData.getShopList();
+        	java.util.List<String> shopList = questData.getShopList();
         	shop = new CardList();
-        	
-        	 for(int i = 0; i < shopList.size(); i++) {
-                 Card c = AllZone.CardFactory.getCard(shopList.get(i).toString(), null);
-                 c.setRarity(pack.getRarity(c.getName()));
-                 if (map.containsKey(c.getName()))
-                 	c.setValue(map.get(c.getName()));
-                 else //card is not on pricelist
-                 {
-                 	System.out.println("Card " + c.getName() + " is not in the price list.");
-                 	if (c.getRarity().equals("Common"))
-                 		c.setValue(10);
-                 	else if (c.getRarity().equals("Uncommon"))
-                 		c.setValue(50);
-                 	else if (c.getRarity().equals("Rare"))
-                 		c.setValue(200);
-                 }
-                 
-             	 shop.add(c);
-             }
+
+            for (String aShopList : shopList) {
+                Card c = AllZone.CardFactory.getCard(aShopList, null);
+                c.setRarity(pack.getRarity(c.getName()));
+                if (map.containsKey(c.getName())) {
+                    c.setValue(map.get(c.getName()));
+                }
+                else //card is not on pricelist
+                {
+                    System.out.println("Card " + c.getName() + " is not in the price list.");
+                    if (c.getRarity().equals("Common")) {
+                        c.setValue(10);
+                    }
+                    else if (c.getRarity().equals("Uncommon")) {
+                        c.setValue(50);
+                    }
+                    else if (c.getRarity().equals("Rare")) {
+                        c.setValue(200);
+                    }
+                }
+
+                shop.add(c);
+            }
         }
         
-        ArrayList<String> list = questData.getCardpool();
+        java.util.List<String> list = questData.getCardpool();
         CardList owned = new CardList();
-        
-        for(int i = 0; i < list.size(); i++) {
-            Card c = AllZone.CardFactory.getCard(list.get(i).toString(), null);
-            
+
+        for (String aList : list) {
+            Card c = AllZone.CardFactory.getCard(aList, null);
+
             c.setRarity(pack.getRarity(c.getName()));
-            if (map.containsKey(c.getName()))
-            	c.setValue(map.get(c.getName()));
+            if (map.containsKey(c.getName())) {
+                c.setValue(map.get(c.getName()));
+            }
             else //card is not on pricelist
             {
-            	System.out.println("Card " + c.getName() + " is not in the price list.");
-            	if (c.getRarity().equals("Common"))
-            		c.setValue(10);
-            	else if (c.getRarity().equals("Uncommon"))
-            		c.setValue(50);
-            	else if (c.getRarity().equals("Rare"))
-            		c.setValue(200);
+                System.out.println("Card " + c.getName() + " is not in the price list.");
+                if (c.getRarity().equals("Common")) {
+                    c.setValue(10);
+                }
+                else if (c.getRarity().equals("Uncommon")) {
+                    c.setValue(50);
+                }
+                else if (c.getRarity().equals("Rare")) {
+                    c.setValue(200);
+                }
             }
-        	owned.add(c);
+            owned.add(c);
         }
        
         customMenu.populateShop(shop, owned);
@@ -402,7 +391,7 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
         if (multi > 0.6)
         	multi = 0.6;
         
-        if (questData.getMode().equals(QuestData.FANTASY))
+        if (questData.getMode().equals(forge.quest.data.QuestData.FANTASY))
         {
         	if (questData.getEstatesLevel()==1)
         		multi+=0.01;
@@ -443,7 +432,7 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
 //        setExtendedState(Frame.MAXIMIZED_BOTH);
     }//setupAndDisplay()
     
-    public Gui_CardShop(QuestData qd) {
+    public Gui_CardShop(forge.quest.data.QuestData qd) {
         questData = qd;
     	try {
             jbInit();
@@ -625,7 +614,7 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
             creditsLabel.setText("Total credits: " + questData.getCredits());
             
             //remove sold cards from all decks:
-            ArrayList<String> deckNames = questData.getDeckNames();
+            java.util.List<String> deckNames = questData.getDeckNames();
             for (String deckName:deckNames)
             {
             	Deck deck = questData.getDeck(deckName);
@@ -633,7 +622,7 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
             	{
             		//count occurences:
             		int cardPoolCount = 0;
-            		ArrayList<String> cpList = questData.getCards();
+            		java.util.List<String> cpList = questData.getCards();
             		while(cpList.contains(c.getName()))
             		{
             			cpList.remove(cpList.indexOf(c.getName()));

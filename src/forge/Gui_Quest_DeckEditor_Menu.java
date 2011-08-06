@@ -2,34 +2,19 @@
 package forge;
 
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import forge.error.ErrorViewer;
+import forge.gui.GuiUtils;
 
-import javax.swing.JDialog;
-import javax.swing.JFileChooser;
-import javax.swing.JList;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.ListSelectionModel;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileFilter;
-
-import forge.error.ErrorViewer;
-import forge.gui.GuiUtils;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 
 //presumes AllZone.QuestData is not null
@@ -46,7 +31,7 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
     private static File         previousDirectory = null;
     
     private Command             exitCommand;
-    private QuestData           questData;
+    private forge.quest.data.QuestData           questData;
     private Deck                currentDeck;
     
     //the class DeckDisplay is in the file "Gui_DeckEditor_Menu.java"
@@ -443,7 +428,7 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
             
             //convert ArrayList of card names (Strings), into Card objects
             cardpool = new CardList();
-            ArrayList<String> list = questData.getCardpool();
+            List<String> list = questData.getCardpool();
             
             for(int i = 0; i < list.size(); i++)
                 cardpool.add(AllZone.CardFactory.getCard(list.get(i).toString(), null));
@@ -495,7 +480,7 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
         //AI
         viewAllDecks.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent a) {
-                ArrayList<String> nameList = questData.ai_getDeckNames();
+                List<String> nameList = questData.ai_getDeckNames();
                 Collections.sort(nameList);
                 
                 Deck deck;
@@ -980,7 +965,7 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
     }
     
     //if user cancels, returns ""
-    private String getUserInput_GetDeckName(ArrayList<String> nameList) {
+    private String getUserInput_GetDeckName(List<String> nameList) {
         Object o = JOptionPane.showInputDialog(null, "", "Deck Name", JOptionPane.OK_CANCEL_OPTION);
         
         if(o == null) return "";
@@ -997,8 +982,8 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
     
 
     //if user cancels, it will return ""
-    private String getUserInput_OpenDeck(ArrayList<String> deckNameList) {
-        ArrayList<String> choices = deckNameList;
+    private String getUserInput_OpenDeck(List<String> deckNameList) {
+        List<String> choices = deckNameList;
         if(choices.size() == 0) {
             JOptionPane.showMessageDialog(null, "No decks found", "Open Deck", JOptionPane.PLAIN_MESSAGE);
             return "";
@@ -1031,11 +1016,11 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
     
     //returns CardList of Card objects,
     //argument ArrayList holds String card names
-    public static CardList covertToCardList(ArrayList<String> list) {
+    public static CardList covertToCardList(List<String> list) {
         CardList c = new CardList();
         Card card;
-        for(int i = 0; i < list.size(); i++) {
-            card = AllZone.CardFactory.getCard(list.get(i).toString(), null);
+        for (String aList : list) {
+            card = AllZone.CardFactory.getCard(aList, null);
             c.add(card);
         }
         

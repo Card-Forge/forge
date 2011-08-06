@@ -2,8 +2,8 @@ package forge.quest.gui.main;
 
 
 import forge.AllZone;
-import forge.QuestData;
 import forge.gui.GuiUtils;
+import forge.quest.data.QuestData;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -233,23 +233,23 @@ public class QuestBattle extends QuestSelectablePanel {
     public static List<QuestSelectablePanel> getBattles(){
         List<QuestSelectablePanel> opponentList = new ArrayList<QuestSelectablePanel>();
 
-        try{
         QuestData questData = AllZone.QuestData;
         String[] opponentNames = questData.getOpponents();
         for (String opponentName : opponentNames) {
-            String oppIconName = opponentName.substring(0, opponentName.length() - 1).trim() + ".jpg";
-            ImageIcon icon = GuiUtils.getIconFromFile(oppIconName);
+            try {
+                String oppIconName = opponentName.substring(0, opponentName.length() - 1).trim() + ".jpg";
+                ImageIcon icon = GuiUtils.getIconFromFile(oppIconName);
 
-            opponentList.add(new QuestBattle(opponentName,
-                    nameDeckMap.get(opponentName).difficulty,
-                    nameDeckMap.get(opponentName).description,
-                    icon));
+                opponentList.add(new QuestBattle(opponentName,
+                        nameDeckMap.get(opponentName).difficulty,
+                        nameDeckMap.get(opponentName).description,
+                        icon));
+            }
+            catch (NullPointerException e) {
+                System.out.println("Caught NPE, Fix me:" + opponentName);
+            }
         }
-        }
-        catch (NullPointerException e)
-        {
-            System.out.println("Break Here");
-        }
+
         return opponentList;
     }
 

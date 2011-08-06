@@ -6,6 +6,8 @@ import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.properties.NewConstants.LANG.Gui_WinLose.WINLOSE_TEXT;
+import forge.quest.data.QuestMatchState;
+import forge.quest.data.QuestPreferences;
 import forge.quest.gui.QuestFrame;
 import net.miginfocom.swing.MigLayout;
 
@@ -46,8 +48,8 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     public static void main(String[] args) {
         Constant.Runtime.GameType[0] = Constant.GameType.Sealed;
         
-        Constant.Runtime.WinLose.addWin();
-        Constant.Runtime.WinLose.addLose();
+        Constant.Runtime.matchState.addWin();
+        Constant.Runtime.matchState.addLose();
         
         //setup limited deck
         Deck deck = new Deck(Constant.GameType.Sealed);
@@ -114,7 +116,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     
     private void setup() {
     	AllZone.GameInfo.clearColorChanges();
-        WinLose winLose = Constant.Runtime.WinLose;
+        QuestMatchState winLose = Constant.Runtime.matchState;
         Phase.GameBegins = 0;
         //3 is the match length, 3 is the number of games
         //disable buttons if match is up, or human player won 2 or lost 2 games already
@@ -228,16 +230,16 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     	else{
     		int extraLife = 0;
     		if (AllZone.QuestAssignment != null) {
-    			QuestUtil.setupQuest(AllZone.QuestAssignment);
+    			forge.quest.data.QuestUtil.setupQuest(AllZone.QuestAssignment);
     			if (AllZone.QuestData.getGearLevel() == 2)
     				extraLife = 3;
     		}
     		//AllZone.GameAction.newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0], humanList, computerList, humanLife, computerLife);
-    		CardList humanList = QuestUtil.getHumanPlantAndPet(AllZone.QuestData, AllZone.QuestAssignment);
+    		CardList humanList = forge.quest.data.QuestUtil.getHumanPlantAndPet(AllZone.QuestData, AllZone.QuestAssignment);
     		CardList computerList = new CardList();
     		
 
-    		int humanLife = QuestUtil.getLife(AllZone.QuestData) + extraLife;
+    		int humanLife = AllZone.QuestData.getLife() + extraLife;
     		int computerLife = 20;
     		if (AllZone.QuestAssignment!=null)
     			computerLife = AllZone.QuestAssignment.getComputerLife();
@@ -250,7 +252,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     }
     
     void restartButton_actionPerformed(ActionEvent e) {
-        Constant.Runtime.WinLose.reset();
+        Constant.Runtime.matchState.reset();
         
         if (!Constant.Quest.fantasyQuest[0])
     		AllZone.GameAction.newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
@@ -258,16 +260,16 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     		int extraLife = 0;
     		//AllZone.GameAction.newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0], humanList, computerList, humanLife, computerLife);
     		if (AllZone.QuestAssignment != null) {
-    			QuestUtil.setupQuest(AllZone.QuestAssignment);
+    			forge.quest.data.QuestUtil.setupQuest(AllZone.QuestAssignment);
     			if (AllZone.QuestData.getGearLevel() == 2)
     				extraLife = 3;
     		}
     			
-    		CardList humanList = QuestUtil.getHumanPlantAndPet(AllZone.QuestData, AllZone.QuestAssignment);
+    		CardList humanList = forge.quest.data.QuestUtil.getHumanPlantAndPet(AllZone.QuestData, AllZone.QuestAssignment);
     		//CardList computerList = QuestUtil.getComputerCreatures(AllZone.QuestData, AllZone.QuestAssignment);
     		CardList computerList = new CardList();
     		
-    		int humanLife = QuestUtil.getLife(AllZone.QuestData) +extraLife;
+    		int humanLife = AllZone.QuestData.getLife() +extraLife;
     		int computerLife = 20;
     		
     		if (AllZone.QuestAssignment!=null)
@@ -280,7 +282,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         dispose();
     }
     
-    private String getWinText(long creds, WinLose winLose, QuestData q)
+    private String getWinText(long creds, QuestMatchState winLose, forge.quest.data.QuestData q)
     {
     	// todo use q.qdPrefs to write bonus credits in prefs file 
     	StringBuilder sb = new StringBuilder();
@@ -288,7 +290,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     	
     	sb.append("<html>");
     	
-    	QuestData_Prefs qdPrefs = q.qdPrefs;
+    	QuestPreferences qdPrefs = q.getQuestPreferences();
     	
     	for (String s : wins)
     	{
@@ -394,11 +396,11 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         	new Gui_NewGame();
         }
         else { //Quest
-            WinLose winLose = Constant.Runtime.WinLose;
-            QuestData quest = AllZone.QuestData;
+            QuestMatchState matchState = Constant.Runtime.matchState;
+            forge.quest.data.QuestData quest = AllZone.QuestData;
             
             boolean wonMatch = false;
-            if(winLose.getWin() == 2){
+            if(matchState.getWin() == 2){
             	quest.addWin();
             	wonMatch = true;
             }
@@ -425,8 +427,8 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             }
             
             if (wonMatch){
-            	long creds = quest.getCreditsToAdd(winLose);
-            	String s = getWinText(creds, winLose, quest);
+            	long creds = quest.getCreditsToAdd(matchState);
+            	String s = getWinText(creds, matchState, quest);
             	            	
             	String fileName = "GoldIcon.png";
             	ImageIcon icon = getIcon(fileName);
@@ -489,11 +491,11 @@ public class Gui_WinLose extends JFrame implements NewConstants {
                 JOptionPane.showMessageDialog(null, "", "You have won a random rare.", JOptionPane.INFORMATION_MESSAGE, icon);
             }
             
-            winLose.reset();
+            matchState.reset();
             
             AllZone.QuestAssignment = null;
             
-            QuestData.saveData(quest);
+            quest.saveData();
             if (AllZone.QuestData.useNewQuestUI){
                 new QuestFrame();
             }

@@ -1,13 +1,14 @@
 package forge;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.util.ArrayList;
 
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ReadQuest_Assignment implements Runnable, NewConstants {
@@ -15,7 +16,7 @@ public class ReadQuest_Assignment implements Runnable, NewConstants {
     private ArrayList<Quest_Assignment> allQuests = new ArrayList<Quest_Assignment>();
     
     private int totalWins;
-    private ArrayList<Integer> completedQuests = new ArrayList<Integer>();
+    private List<Integer> completedQuests = new ArrayList<Integer>();
     
     public static void main(String args[]) throws Exception {
         try {
@@ -40,12 +41,12 @@ public class ReadQuest_Assignment implements Runnable, NewConstants {
         }
     }
     
-    public ArrayList<Quest_Assignment> getQuests() {
+    public List<Quest_Assignment> getQuests() {
         return new ArrayList<Quest_Assignment>(allQuests);
     }
     
-    public ArrayList<Quest_Assignment> getQuestsByIds(ArrayList<Integer> availableQuestIds) {
-    	ArrayList<Quest_Assignment> quests = new ArrayList<Quest_Assignment>();
+    public List<Quest_Assignment> getQuestsByIds(List<Integer> availableQuestIds) {
+    	List<Quest_Assignment> quests = new ArrayList<Quest_Assignment>();
     	
     	for(Quest_Assignment qa:allQuests)
     	{
@@ -72,11 +73,11 @@ public class ReadQuest_Assignment implements Runnable, NewConstants {
     }
     */
     
-    public ReadQuest_Assignment(String filename, QuestData questData) {
+    public ReadQuest_Assignment(String filename, forge.quest.data.QuestData questData) {
         this(new File(filename), questData);
     }
     
-    public ReadQuest_Assignment(File file, QuestData questData) {
+    public ReadQuest_Assignment(File file, forge.quest.data.QuestData questData) {
         
     	if (questData != null) {
 	    	totalWins = questData.getWin();
@@ -171,7 +172,7 @@ public class ReadQuest_Assignment implements Runnable, NewConstants {
             
             ids.add(qa.getId());
             if (qa.getRequiredNumberWins() <= totalWins && !completedQuests.contains(qa.getId()) ) {
-            	QuestUtil.setupQuest(qa);
+            	forge.quest.data.QuestUtil.setupQuest(qa);
             	allQuests.add(qa);
             }
             

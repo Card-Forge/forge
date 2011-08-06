@@ -1,23 +1,13 @@
 
 package forge;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Random;
-
 import com.esotericsoftware.minlog.Log;
-
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+
+import java.io.*;
+import java.util.*;
 
 
 //when you create QuestData and AFTER you copy the AI decks over
@@ -27,6 +17,8 @@ import forge.properties.NewConstants;
 //static readAIQuestDeckFiles(QuestData data, ArrayList aiDeckNames)
 //OR non-static readAIQuestDeckFiles()
 //which reads the files "questDecks-easy", "questDecks-medium","questDecks-hard",
+@SuppressWarnings({"deprecation"})
+@Deprecated
 public class QuestData implements NewConstants {
 	QuestData_Prefs qdPrefs = null;
 

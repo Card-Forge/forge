@@ -13,13 +13,12 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 
 public class Gui_QuestOptions extends JFrame {
     private static final long serialVersionUID    = 2018518804206822235L;
-    
-    private QuestData         questData           = new QuestData();
-    
+
+    private forge.quest.data.QuestData questData = new forge.quest.data.QuestData();
+
     private JLabel            jLabel1             = new JLabel();
     private JButton           continueQuestButton = new JButton();
     private JPanel            jPanel1             = new JPanel();
@@ -79,7 +78,7 @@ public class Gui_QuestOptions extends JFrame {
     
     //show total number of games for each difficulty
     private void setupRadioButtonText() {
-        String[] diff = questData.getDifficutlyChoices();
+        String[] diff = questData.getDifficultyChoices();
         JRadioButton[] b = {easyRadio, mediumRadio, hardRadio, veryHardRadio};
         
         for(int i = 0; i < diff.length; i++) {
@@ -188,7 +187,7 @@ public class Gui_QuestOptions extends JFrame {
     
     void continueQuestButton_actionPerformed(ActionEvent e) {
         //set global variable
-        AllZone.QuestData = QuestData.loadData();
+        AllZone.QuestData = forge.quest.data.QuestData.loadData();
         AllZone.QuestData.setDifficultyIndex();
         dispose();
         
@@ -207,7 +206,7 @@ public class Gui_QuestOptions extends JFrame {
     void newQuestButton_actionPerformed(ActionEvent e) {
         int difficulty = 0;
 
-        String mode = fantasyRadio.isSelected() ? QuestData.FANTASY : QuestData.REALISTIC;
+        String mode = fantasyRadio.isSelected() ? forge.quest.data.QuestData.FANTASY : forge.quest.data.QuestData.REALISTIC;
         
         if(easyRadio.isSelected()) difficulty = 0;
         
@@ -234,10 +233,8 @@ public class Gui_QuestOptions extends JFrame {
         //give the user a few cards to build a deck
         questData.newGame(difficulty, mode);
         
-        copyAIDecks(questData, QuestData.loadData());
-        QuestData.saveData(questData);
+        questData.saveData();
         
-        questData.readAIQuestDeckFiles();
         
         //set global variable
         AllZone.QuestData = questData;
@@ -254,9 +251,10 @@ public class Gui_QuestOptions extends JFrame {
     }
     
     //copy AI decks from old to newData
-    void copyAIDecks(QuestData newData, QuestData old) {
-        ArrayList<String> a = old.ai_getDeckNames();
-        for(int i = 0; i < a.size(); i++)
-            newData.ai_addDeck(old.ai_getDeck(a.get(i).toString()));
+    void copyAIDecks(forge.quest.data.QuestData newData, forge.quest.data.QuestData old) {
+        java.util.List<String> oldDeckNames = old.ai_getDeckNames();
+        for (String oldDeckName : oldDeckNames) {
+            newData.ai_addDeck(old.ai_getDeck(oldDeckName));
+        }
     }
 }

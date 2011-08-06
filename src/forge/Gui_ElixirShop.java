@@ -1,21 +1,16 @@
 package forge;
 
+import forge.error.ErrorViewer;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
+
+import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-
-import forge.error.ErrorViewer;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
 
 public class Gui_ElixirShop extends JFrame implements NewConstants{
 	
@@ -36,7 +31,7 @@ public class Gui_ElixirShop extends JFrame implements NewConstants{
 	private JButton           buyPotionButton   = new JButton();
     private JButton			  quitButton 	   = new JButton();
     
-    private QuestData 		  questData 	   = AllZone.QuestData;
+    private forge.quest.data.QuestData 		  questData 	   = AllZone.QuestData;
     
     public Gui_ElixirShop(JFrame parent) {
         try {
@@ -193,7 +188,7 @@ public class Gui_ElixirShop extends JFrame implements NewConstants{
     void buyPotionButton_actionPerformed(ActionEvent e) throws Exception {
 	    	questData.subtractCredits(getPrice());
 	    	questData.addLife(1);
-	    	QuestData.saveData(questData);
+	    	questData.saveData();
 	    	jbInit();
     }
     
@@ -206,7 +201,7 @@ public class Gui_ElixirShop extends JFrame implements NewConstants{
     }
     
     void quitButton_actionPerformed(ActionEvent e) {
-    	QuestData.saveData(questData);
+    	questData.saveData();
         //new Gui_Shops();
     	shopsGUI.setVisible(true);
     	

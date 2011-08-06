@@ -1,4 +1,5 @@
 package forge;
+@Deprecated
 public class WinLose
 {
   //the way wins were achieved:

@@ -1,5 +1,24 @@
 package forge;
 
+import arcane.ui.util.ManaSymbols;
+import arcane.util.MultiplexOutputStream;
+import com.esotericsoftware.minlog.Log;
+import forge.error.ErrorViewer;
+import forge.error.ExceptionHandler;
+import forge.gui.GuiUtils;
+import forge.gui.ListChooser;
+import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.CardSizeType;
+import forge.properties.ForgePreferences.StackOffsetType;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
+import forge.properties.NewConstants.LANG.Gui_NewGame.MENU_BAR.MENU;
+import forge.properties.NewConstants.LANG.Gui_NewGame.MENU_BAR.OPTIONS;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.border.TitledBorder;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -8,59 +27,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Random;
-
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.border.TitledBorder;
-
-import net.miginfocom.swing.MigLayout;
-import arcane.ui.util.ManaSymbols;
-import arcane.util.MultiplexOutputStream;
-
-import com.esotericsoftware.minlog.Log;
-
-import forge.error.ErrorViewer;
-import forge.error.ExceptionHandler;
-import forge.gui.GuiUtils;
-import forge.gui.ListChooser;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
-import forge.properties.ForgePreferences.CardSizeType;
-import forge.properties.ForgePreferences.StackOffsetType;
-import forge.properties.NewConstants.LANG.Gui_NewGame.MENU_BAR.MENU;
-import forge.properties.NewConstants.LANG.Gui_NewGame.MENU_BAR.OPTIONS;
+import java.io.*;
+import java.util.*;
 
 
 /*CHOPPIC*/
@@ -193,7 +161,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
 
         AllZone.QuestData = null;
         allDecks = getDecks();
-        Constant.Runtime.WinLose.reset();
+        Constant.Runtime.matchState.reset();
         
         if(Constant.Runtime.width[0] == 0) Constant.Runtime.width[0] = 70;
         

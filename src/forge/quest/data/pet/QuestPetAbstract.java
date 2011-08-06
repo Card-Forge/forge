@@ -2,7 +2,7 @@ package forge.quest.data.pet;
 
 import forge.Card;
 
-public abstract class QuestPetAbstract {
+public abstract class QuestPetAbstract implements Comparable{
     int level;
     private int maxLevel;
     private String name;
@@ -54,5 +54,22 @@ public abstract class QuestPetAbstract {
 
     public void setLevel(int level){
         this.level = level;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public int compareTo(Object o) {
+        return name.compareTo(o.toString());
     }
 }

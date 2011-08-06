@@ -2,40 +2,14 @@
 package forge;
 
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Random;
+import forge.error.ErrorViewer;
+import forge.gui.game.CardDetailPanel;
+import forge.gui.game.CardPicturePanel;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
+import forge.quest.data.QuestBoosterPack;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
@@ -43,12 +17,14 @@ import javax.swing.event.MouseInputListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileFilter;
-
-import forge.error.ErrorViewer;
-import forge.gui.game.CardDetailPanel;
-import forge.gui.game.CardPicturePanel;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
+import java.awt.Color;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Random;
 
 
 public class Gui_Quest_DeckEditor extends JFrame implements CardContainer, DeckDisplay, NewConstants {
@@ -127,9 +103,9 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardContainer, DeckD
         
         Card c;
         String cardName;
-        QuestData_BoosterPack pack = new QuestData_BoosterPack();
+        QuestBoosterPack pack = new QuestBoosterPack();
         
-        ArrayList<String> addedList = AllZone.QuestData.getAddedCards();
+        java.util.List<String> addedList = AllZone.QuestData.getAddedCards();
         
 
         //update top
@@ -356,7 +332,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardContainer, DeckD
         this.setJMenuBar(customMenu);
         
 
-        QuestData questData = AllZone.QuestData;
+        forge.quest.data.QuestData questData = AllZone.QuestData;
         Deck deck = null;
         
         //open deck that the player used if QuestData has it
@@ -380,7 +356,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardContainer, DeckD
         }
         
 
-        ArrayList<String> list = AllZone.QuestData.getCardpool();
+        java.util.List<String> list = AllZone.QuestData.getCardpool();
         CardList cardpool = Gui_Quest_DeckEditor_Menu.covertToCardList(list);
         
         //remove bottom cards that are in the deck from the card pool

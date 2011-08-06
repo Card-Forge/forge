@@ -2,7 +2,6 @@ package forge.quest.gui;
 
 import forge.AllZone;
 import forge.Gui_NewGame;
-import forge.QuestData;
 import forge.gui.GuiUtils;
 import forge.quest.gui.bazaar.QuestBazaarPanel;
 import forge.quest.gui.main.QuestMainPanel;
@@ -24,7 +23,6 @@ public class QuestFrame extends JFrame {
 
     public static final String MAIN_PANEL = "Main";
     public static final String BAZAAR_PANEL = "Bazaar";
-    private static final String QUESTS_PANEL = "Quests";
 
     Map<String, QuestAbstractPanel> subPanelMap = new HashMap<String, QuestAbstractPanel>();
 
@@ -79,7 +77,7 @@ public class QuestFrame extends JFrame {
 
 
     public void returnToMainMenu() {
-        QuestData.saveData(AllZone.QuestData);
+        AllZone.QuestData.saveData();
         (new Gui_NewGame()).setVisible(true) ;
         this.dispose();
     }

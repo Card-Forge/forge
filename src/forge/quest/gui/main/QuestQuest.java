@@ -1,7 +1,6 @@
 package forge.quest.gui.main;
 
 import forge.AllZone;
-import forge.QuestData;
 import forge.Quest_Assignment;
 import forge.ReadQuest_Assignment;
 import forge.gui.GuiUtils;
@@ -46,21 +45,21 @@ public class QuestQuest extends QuestSelectablePanel {
     }
 
     private static List<Quest_Assignment> readQuests() {
-        QuestData questData = AllZone.QuestData;
+        forge.quest.data.QuestData questData = AllZone.QuestData;
         ReadQuest_Assignment read = new ReadQuest_Assignment(ForgeProps.getFile(NewConstants.QUEST.QUESTS), questData);
         read.run();
 
-        ArrayList<Quest_Assignment> questsToDisplay = new ArrayList<Quest_Assignment>();
+        List<Quest_Assignment> questsToDisplay = new ArrayList<Quest_Assignment>();
 
         if (questData.getAvailableQuests() != null && questData.getAvailableQuests().size() > 0) {
-            ArrayList<Quest_Assignment> availableQuests = read.getQuestsByIds(questData.getAvailableQuests());
+           List<Quest_Assignment> availableQuests = read.getQuestsByIds(questData.getAvailableQuests());
             questsToDisplay = availableQuests;
 
         }
         else {
-            ArrayList<Quest_Assignment> allAvailableQuests = read.getQuests();
+            List<Quest_Assignment> allAvailableQuests = read.getQuests();
 
-            ArrayList<Integer> availableInts = new ArrayList<Integer>();
+            List<Integer> availableInts = new ArrayList<Integer>();
 
             int maxQuests = questData.getWin() / 10;
             if (maxQuests > 5) {
@@ -80,7 +79,7 @@ public class QuestQuest extends QuestSelectablePanel {
                 questsToDisplay.add(qa);
             }
             questData.setAvailableQuests(availableInts);
-            QuestData.saveData(questData);
+            questData.saveData();
         }//else
         return questsToDisplay;
     }

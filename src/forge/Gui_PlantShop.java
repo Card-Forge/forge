@@ -1,21 +1,16 @@
 package forge;
 
+import forge.error.ErrorViewer;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
+
+import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-
-import forge.error.ErrorViewer;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
 
 public class Gui_PlantShop extends JFrame implements NewConstants{
 	
@@ -35,7 +30,7 @@ public class Gui_PlantShop extends JFrame implements NewConstants{
 	private JButton           buyPlantButton   = new JButton();
     private JButton			  quitButton 	   = new JButton();
     
-    private QuestData 		  questData 	   = AllZone.QuestData;
+    private forge.quest.data.QuestData 		  questData 	   = AllZone.QuestData;
     
     public Gui_PlantShop(JFrame parent) {
         try {
@@ -78,7 +73,7 @@ public class Gui_PlantShop extends JFrame implements NewConstants{
     {
     	StringBuilder sb = new StringBuilder();
     	sb.append("<html>");
-    	if (questData.getPlantLevel() == 0)
+    	if (questData.getPetManager().getPlant().getLevel() == 0)
     	{
     		sb.append("Start each of your battles with this lush, <br> verdant plant on your side.<br>");
     		sb.append("Excellent at blocking the nastiest of critters!<br><br>");
@@ -86,34 +81,34 @@ public class Gui_PlantShop extends JFrame implements NewConstants{
     		sb.append("<u><b>Next Level</b></u>: 0/2<br>");
     		sb.append("<u><b>Can learn</b></u>: Deathtouch");
     	}
-    	else if (questData.getPlantLevel() == 1)
+    	else if (questData.getPetManager().getPlant().getLevel() == 1)
     	{
     		sb.append("Improve the toughness of your plant.<br>");
     		sb.append("<u><b>Level 2</b></u>: 0/2<br>");
     		sb.append("<u><b>Next Level</b></u>: 0/3<br>");
     		sb.append("<u><b>Can learn</b></u>: Deathtouch");
     	}
-    	else if (questData.getPlantLevel() == 2)
+    	else if (questData.getPetManager().getPlant().getLevel() == 2)
     	{
     		sb.append("Improve the toughness of your plant.<br>");
     		sb.append("<u><b>Level 3</b></u>: 0/3<br>");
     		sb.append("<u><b>Next Level</b></u>: 1/3<br>");
     		sb.append("<u><b>Can learn</b></u>: Deathtouch");
     	}
-    	else if (questData.getPlantLevel() == 3)
+    	else if (questData.getPetManager().getPlant().getLevel() == 3)
     	{
     		sb.append("Improve the power of your plant.<br>");
     		sb.append("<u><b>Level 4</b></u>: 1/3<br>");
     		sb.append("<u><b>Next Level</b></u>: Deathtouch<br>");
     		sb.append("<u><b>Can learn</b></u>: Deathtouch");
     	}
-    	else if (questData.getPlantLevel() == 4)
+    	else if (questData.getPetManager().getPlant().getLevel() == 4)
     	{
     		sb.append("Grow venomous thorns on your plant.<br>");
     		sb.append("<u><b>Level 5</b></u>: Deathtouch<br>");
     		sb.append("<u><b>Next Level</b></u>: 1/4<br>");
     	}
-    	else if (questData.getPlantLevel() == 5)
+    	else if (questData.getPetManager().getPlant().getLevel() == 5)
     	{
     		sb.append("As well as gaining more toughness,<br>");
     		sb.append("your plant will have healing properties.<br>");
@@ -131,17 +126,17 @@ public class Gui_PlantShop extends JFrame implements NewConstants{
     private long getPrice()
     {
     	long l = 0;
-    	if (questData.getPlantLevel() == 0)
+    	if (questData.getPetManager().getPlant().getLevel() == 0)
     		l = 100;
-    	else if (questData.getPlantLevel() == 1)
+    	else if (questData.getPetManager().getPlant().getLevel() == 1)
     		l = 150;
-    	else if (questData.getPlantLevel() == 2)
+    	else if (questData.getPetManager().getPlant().getLevel() == 2)
     		l = 200;
-    	else if (questData.getPlantLevel() == 3)
+    	else if (questData.getPetManager().getPlant().getLevel() == 3)
     		l = 300;
-    	else if (questData.getPlantLevel() == 4)
+    	else if (questData.getPetManager().getPlant().getLevel() == 4)
     		l = 750;
-    	else if (questData.getPlantLevel() == 5)
+    	else if (questData.getPetManager().getPlant().getLevel() == 5)
     		l = 1000;
     	return l;
     }
@@ -149,7 +144,7 @@ public class Gui_PlantShop extends JFrame implements NewConstants{
     private String getButtonText()
     {
     	String s = "";
-    	if (questData.getPlantLevel() == 0)
+    	if (questData.getPetManager().getPlant().getLevel() == 0)
     		s = "Buy Plant";
     	else
     		s = "Upgrade Plant";
@@ -159,21 +154,21 @@ public class Gui_PlantShop extends JFrame implements NewConstants{
     private String getStats()
     {
     	StringBuilder sb = new StringBuilder();
-    	if (questData.getPlantLevel() == 0)
+    	if (questData.getPetManager().getPlant().getLevel() == 0)
     		sb.append("0/1");
-    	else if (questData.getPlantLevel() == 1)
+    	else if (questData.getPetManager().getPlant().getLevel() == 1)
     		sb.append("0/2");
-    	else if (questData.getPlantLevel() == 2)
+    	else if (questData.getPetManager().getPlant().getLevel() == 2)
     		sb.append("0/3");
-    	else if (questData.getPlantLevel() == 3)
+    	else if (questData.getPetManager().getPlant().getLevel() == 3)
     		sb.append("1/3");
-    	else if (questData.getPlantLevel() == 4)
+    	else if (questData.getPetManager().getPlant().getLevel() == 4)
     		sb.append("1/3");
     	else
     		sb.append("1/4");
     	
     	sb.append(" Plant Wall (current level ");
-    	sb.append(questData.getPlantLevel());
+    	sb.append(questData.getPetManager().getPlant().getLevel());
     	sb.append("/6)");
     	
     	return sb.toString();
@@ -182,17 +177,17 @@ public class Gui_PlantShop extends JFrame implements NewConstants{
     private String getImageString()
     {
     	String s = "";
-    	if (questData.getPlantLevel() == 0)
+    	if (questData.getPetManager().getPlant().getLevel() == 0)
     		s = "g_0_1_plant_wall_small.jpg";
-    	else if (questData.getPlantLevel() == 1)
+    	else if (questData.getPetManager().getPlant().getLevel() == 1)
     		s = "g_0_2_plant_wall_small.jpg";
-    	else if (questData.getPlantLevel() == 2)
+    	else if (questData.getPetManager().getPlant().getLevel() == 2)
     		s = "g_0_3_plant_wall_small.jpg";
-    	else if (questData.getPlantLevel() == 3)
+    	else if (questData.getPetManager().getPlant().getLevel() == 3)
     		s = "g_1_3_plant_wall_small.jpg";
-    	else if (questData.getPlantLevel() == 4)
+    	else if (questData.getPetManager().getPlant().getLevel() == 4)
     		s = "g_1_3_plant_wall_deathtouch_small.jpg";
-    	else if (questData.getPlantLevel() == 5)
+    	else if (questData.getPetManager().getPlant().getLevel() == 5)
     		s = "g_1_4_plant_wall_small.jpg";
     	
     	return s;
@@ -234,7 +229,7 @@ public class Gui_PlantShop extends JFrame implements NewConstants{
     	
     	
     	buyPlantButton.setEnabled(true);
-    	if (questData.getCredits() < getPrice() || questData.getPlantLevel() >= 6)
+    	if (questData.getCredits() < getPrice() || questData.getPetManager().getPlant().getLevel() >= 6)
     		buyPlantButton.setEnabled(false);
        
         quitButton.setBounds(new Rectangle(140, 297, 120, 50));
@@ -274,12 +269,12 @@ public class Gui_PlantShop extends JFrame implements NewConstants{
     
     void buyPlantButton_actionPerformed(ActionEvent e) throws Exception {
     	questData.subtractCredits(getPrice());
-    	questData.addPlantLevel();
+        questData.getPetManager().addPlantLevel();
     	jbInit();
     }
     
     void restartButton_actionPerformed(ActionEvent e) {
-        Constant.Runtime.WinLose.reset();
+        Constant.Runtime.matchState.reset();
         AllZone.GameAction.newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
         AllZone.Display.setVisible(true);
         
@@ -295,7 +290,7 @@ public class Gui_PlantShop extends JFrame implements NewConstants{
     }
     
     void quitButton_actionPerformed(ActionEvent e) {
-    	QuestData.saveData(questData);
+    	questData.saveData();
         //new Gui_Shops();
     	shopsGUI.setVisible(true);
     	

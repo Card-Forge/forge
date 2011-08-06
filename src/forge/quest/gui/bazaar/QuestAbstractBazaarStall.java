@@ -1,9 +1,9 @@
 package forge.quest.gui.bazaar;
 
 import forge.AllZone;
-import forge.QuestData;
 import forge.gui.GuiUtils;
 import forge.properties.NewConstants;
+import forge.quest.data.QuestData;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

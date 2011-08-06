@@ -9,6 +9,7 @@ import java.util.*;
 
 //balance the number of colors and creature/spells for
 //new cards that are won in quest mode
+@Deprecated
 public class QuestData_BoosterPack implements NewConstants {
 //    final private static String      comment          = "//";
     

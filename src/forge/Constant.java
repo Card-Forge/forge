@@ -2,11 +2,12 @@
 package forge;
 
 
+import forge.quest.data.QuestMatchState;
+
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import javax.swing.ImageIcon;
 
 
 public interface Constant {
@@ -17,7 +18,7 @@ public interface Constant {
         public static final Deck[]    HumanDeck    = new Deck[1];
         public static final Deck[]    ComputerDeck = new Deck[1];
         public static final String[]  GameType     = new String[1];
-        public static final WinLose   WinLose      = new WinLose();
+        public static final QuestMatchState matchState = new QuestMatchState();
         public static final boolean[] Smooth       = new boolean[1];
         public static final boolean[] Mill		   = new boolean[1];
         public static final boolean[] DevMode	   = new boolean[1];	// one for normal mode one for quest mode

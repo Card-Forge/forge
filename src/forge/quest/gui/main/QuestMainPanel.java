@@ -2,6 +2,7 @@ package forge.quest.gui.main;
 
 import forge.*;
 import forge.gui.GuiUtils;
+import forge.quest.data.QuestData;
 import forge.quest.gui.QuestAbstractPanel;
 import forge.quest.gui.QuestFrame;
 
@@ -14,17 +15,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
 import java.util.List;
 
 
-//presumes AllZone.QuestData is not null
+//presumes AllZone.QuestDataOld is not null
 
-//AllZone.QuestData should be set by Gui_QuestOptions
+//AllZone.QuestDataOld should be set by Gui_QuestOptions
 public class QuestMainPanel extends QuestAbstractPanel {
-    private QuestData questData;
+    private forge.quest.data.QuestData questData;
 
     JLabel creditsLabel = new JLabel();
     JLabel lifeLabel = new JLabel();
@@ -148,7 +147,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         cardShopButton.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
 
         JButton bazaarButton = null;
-        if (questData.getMode().equals(QuestData.FANTASY)) {
+        if (questData.getMode().equals(forge.quest.data.QuestData.FANTASY)) {
 
             bazaarButton = new JButton("Bazaar");
             bazaarButton.addActionListener(new ActionListener() {
@@ -192,7 +191,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         panel.add(Box.createVerticalGlue());
         panel.add(Box.createVerticalGlue());
 
-        if (questData.getMode().equals(QuestData.FANTASY)) {
+        if (questData.getMode().equals(forge.quest.data.QuestData.FANTASY)) {
 
             panel.add(this.lifeLabel);
             this.lifeLabel.setFont(new Font(Font.DIALOG, Font.BOLD, 14));
@@ -206,7 +205,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         GuiUtils.addGap(panel, 10);
         panel.add(cardShopButton);
 
-        if (questData.getMode().equals(QuestData.FANTASY)) {
+        if (questData.getMode().equals(forge.quest.data.QuestData.FANTASY)) {
             GuiUtils.addGap(panel);
             panel.add(bazaarButton);
         }
@@ -274,17 +273,17 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
         GuiUtils.addGap(matchPanel);
 
-        if (questData.getMode().equals(QuestData.FANTASY)) {
+        if (questData.getMode().equals(forge.quest.data.QuestData.FANTASY)) {
             JPanel petPanel = new JPanel();
             petPanel.setLayout(new BoxLayout(petPanel, BoxLayout.X_AXIS));
 
             this.petCheckBox.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent actionEvent) {
                     if (petCheckBox.isSelected()) {
-                        questData.setSelectedPet((String) petComboBox.getSelectedItem());
+                        questData.getPetManager().setSelectedPet((String) petComboBox.getSelectedItem());
                     }
                     else {
-                        questData.setSelectedPet("No Plant/Pet");
+                        questData.getPetManager().setSelectedPet(null);
                     }
 
                     petComboBox.setEnabled(petCheckBox.isSelected());
@@ -296,10 +295,10 @@ public class QuestMainPanel extends QuestAbstractPanel {
             this.petComboBox.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent actionEvent) {
                     if (petCheckBox.isSelected()) {
-                        questData.setSelectedPet((String) petComboBox.getSelectedItem());
+                        questData.getPetManager().setSelectedPet((String) petComboBox.getSelectedItem());
                     }
                     else {
-                        questData.setSelectedPet("No Plant/Pet");
+                        questData.getPetManager().setSelectedPet(null);
                     }
                 }
             });
@@ -350,7 +349,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
     }
 
     void refresh() {
-        QuestData.saveData(AllZone.QuestData);
+        AllZone.QuestData.saveData();
 
         devModeCheckBox.setSelected(Constant.Runtime.DevMode[0]);
         smoothLandCheckBox.setSelected(Constant.Runtime.Smooth[0]);
@@ -400,7 +399,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
             
             petComboBox.removeAllItems();
 
-            List<String> petList = QuestUtil.getPetNames(questData);
+            Set<String> petList = questData.getPetManager().getAvailablePetNames();
 
             if (petList.size() > 0) {
                 petComboBox.setEnabled(true);
@@ -416,13 +415,13 @@ public class QuestMainPanel extends QuestAbstractPanel {
                 petCheckBox.setEnabled(false);
             }
 
-            if (questData.getSelectedPet() == null || questData.getSelectedPet().equals("No Plant/Pet")) {
+            if (!questData.getPetManager().shouldPetBeUsed()) {
                 petCheckBox.setSelected(false);
                 petComboBox.setEnabled(false);
             }
             else {
                 petCheckBox.setSelected(true);
-                petComboBox.setSelectedItem(questData.getSelectedPet());
+                petComboBox.setSelectedItem(questData.getPetManager().getSelectedPet().getName());
             }
         }
 
@@ -462,7 +461,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
             public void execute() {
                 //saves all deck data
-                QuestData.saveData(AllZone.QuestData);
+                AllZone.QuestData.saveData();
 
                 new QuestFrame();
             }
@@ -485,7 +484,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
             public void execute() {
                 //saves all deck data
-                QuestData.saveData(AllZone.QuestData);
+                AllZone.QuestData.saveData();
 
                 new QuestFrame();
             }
@@ -549,9 +548,9 @@ public class QuestMainPanel extends QuestAbstractPanel {
         AllZone.GameAction.newGame(
                 humanDeck,
                 computer,
-                QuestUtil.getHumanPlantAndPet(questData),
+                forge.quest.data.QuestUtil.getHumanPlantAndPet(questData),
                 new CardList(),
-                QuestUtil.getLife(questData),
+                questData.getLife(),
                 20,
                 null);
     }
@@ -573,7 +572,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         AllZone.GameAction.newGame(
                 humanDeck,
                 computerDeck,
-                QuestUtil.getHumanPlantAndPet(questData, selectedQuest),
+                forge.quest.data.QuestUtil.getHumanPlantAndPet(questData, selectedQuest),
                 new CardList(),
                 questData.getLife() + extraLife,
                 selectedQuest.getComputerLife(),

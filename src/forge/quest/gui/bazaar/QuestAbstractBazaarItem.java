@@ -1,7 +1,6 @@
 package forge.quest.gui.bazaar;
 
 import forge.AllZone;
-import forge.QuestData;
 import forge.gui.GuiUtils;
 
 import javax.swing.*;
@@ -72,7 +71,7 @@ public abstract class QuestAbstractBazaarItem {
             public void actionPerformed(ActionEvent e) {
                 AllZone.QuestData.subtractCredits(price);
                 purchaseItem();
-                QuestData.saveData(AllZone.QuestData);
+                AllZone.QuestData.saveData();
                 QuestBazaarPanel.refreshLastInstance();
             }
         });

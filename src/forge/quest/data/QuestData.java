@@ -14,66 +14,60 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 
-//when you create QuestData and AFTER you copy the AI decks over
+//when you create QuestDataOld and AFTER you copy the AI decks over
 //you have to call one of these two methods below
 //see Gui_QuestOptions for more details
 
 //
-//static readAIQuestDeckFiles(QuestData data, ArrayList aiDeckNames)
+//static readAIQuestDeckFiles(QuestDataOld data, ArrayList aiDeckNames)
 //OR non-static readAIQuestDeckFiles()
 //which reads the files "questDecks-easy", "questDecks-medium","questDecks-hard",
 public class QuestData {
-    QuestPreferences qdPrefs = null;
+    QuestPreferences preferences = null;
 
     private int rankIndex;
     private int win;
     private int lost;
 
-    private List<QuestPetAbstract> pets;
-
-    private QuestPetAbstract selectedPet;
-
     private int life;
     private int estatesLevel;
     private int luckyCoinLevel;
     private int sleightOfHandLevel;
+
     private int gearLevel;
 
     private int questsPlayed;
 
     private long credits;
-
     private int diffIndex;
     private String difficulty;
+
     private String mode = "";
 
-    private transient ArrayList<String> easyAIDecks;
-    private transient ArrayList<String> mediumAIDecks;
-    private transient ArrayList<String> hardAIDecks;
+    private transient Map<String, Deck> aiDecks;
+    private transient List<String> easyAIDecks;
+    private transient List<String> mediumAIDecks;
+    private transient List<String> hardAIDecks;
 
     private Map<String, Deck> myDecks = new HashMap<String, Deck>();
-    private transient Map<String, Deck> aiDecks = new HashMap<String, Deck>();
 
     //holds String card names
-    private ArrayList<String> cardPool = new ArrayList<String>();
-    private ArrayList<String> newCardList = new ArrayList<String>();
-    private ArrayList<String> shopList = new ArrayList<String>();
+    private List<String> cardPool = new ArrayList<String>();
+    private List<String> newCardList = new ArrayList<String>();
 
-    private ArrayList<Integer> availableQuests = new ArrayList<Integer>();
-    private ArrayList<Integer> completedQuests = new ArrayList<Integer>();
+    private List<String> shopList = new ArrayList<String>();
+    private List<Integer> availableQuests = new ArrayList<Integer>();
 
-    private transient QuestBoosterPack boosterPack = new QuestBoosterPack();
+    private List<Integer> completedQuests = new ArrayList<Integer>();
+
+    private transient QuestBoosterPack boosterPack;
 
     //used by shouldAddAdditionalCards()
     private Random random = new Random();
 
-    //feel free to change this to something funnier
-    private transient String[] rankArray = {
-            "Level 0 - Confused Wizard", "Level 1 - Mana Mage", "Level 2 - Death by Megrim",
-            "Level 3 - Shattered the Competition", "Level 4 - Black Knighted", "Level 5 - Shockingly Good",
-            "Level 6 - Regressed into Timmy", "Level 7 - Loves Blue Control", "Level 8 - Immobilized by Fear",
-            "Level 9 - Lands = Friends", "Saltblasted for your talent", "Serra Angel is your girlfriend",};
 
+    //feel free to change this to something funnier
+    private transient String[] rankArray;
 
     public static final String FANTASY = "Fantasy";
     public static final String REALISTIC = "Realistic";
@@ -81,10 +75,12 @@ public class QuestData {
     //TODO: Temporary.
     public boolean useNewQuestUI = false;
 
-    public QuestData() {
-        qdPrefs = new QuestPreferences();
+    public final QuestPetManager petManager = new QuestPetManager();
 
-        for (int i = 0; i < qdPrefs.getStartingBasic(); i++) {
+    public QuestData() {
+        preferences = new QuestPreferences();
+
+        for (int i = 0; i < preferences.getStartingBasic(); i++) {
             cardPool.add("Forest");
             cardPool.add("Mountain");
             cardPool.add("Swamp");
@@ -92,7 +88,7 @@ public class QuestData {
             cardPool.add("Plains");
         }
 
-        for (int i = 0; i < qdPrefs.getStartingSnowBasic(); i++) {
+        for (int i = 0; i < preferences.getStartingSnowBasic(); i++) {
             cardPool.add("Snow-Covered Forest");
             cardPool.add("Snow-Covered Mountain");
             cardPool.add("Snow-Covered Swamp");
@@ -100,21 +96,46 @@ public class QuestData {
             cardPool.add("Snow-Covered Plains");
         }
 
-        readAIQuestDeckFiles();
-    }//QuestData
+        initTransients();
+    }
+
+    private void initTransients() {
+        aiDecks = new HashMap<String, Deck>();
+        List<String> aiDeckNames = ai_getDeckNames();
+        easyAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.EASY), aiDeckNames);
+        mediumAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.MEDIUM), aiDeckNames);
+        hardAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.HARD), aiDeckNames);
+
+        rankArray = new String[]{
+                "Level 0 - Confused Wizard",
+                "Level 1 - Mana Mage",
+                "Level 2 - Death by Megrim",
+                "Level 3 - Shattered the Competition",
+                "Level 4 - Black Knighted",
+                "Level 5 - Shockingly Good",
+                "Level 6 - Regressed into Timmy",
+                "Level 7 - Loves Blue Control",
+                "Level 8 - Immobilized by Fear",
+                "Level 9 - Lands = Friends",
+                "Saltblasted for your talent",
+                "Serra Angel is your girlfriend",};
+
+        boosterPack = new QuestBoosterPack();
+    }
+
 
     //adds cards to card pool and sets difficulty
     public void newGame(int difficulty, String m) {
         setDifficulty(difficulty);
 
         ArrayList<String> list = new ArrayList<String>();
-        list.addAll(boosterPack.getCommon(qdPrefs.getStartingCommons(difficulty)));
-        list.addAll(boosterPack.getUncommon(qdPrefs.getStartingUncommons(difficulty)));
-        list.addAll(boosterPack.getRare(qdPrefs.getStartingRares(difficulty)));
+        list.addAll(boosterPack.getCommon(preferences.getStartingCommons(difficulty)));
+        list.addAll(boosterPack.getUncommon(preferences.getStartingUncommons(difficulty)));
+        list.addAll(boosterPack.getRare(preferences.getStartingRares(difficulty)));
 
         //because cardPool already has basic land added to it
         cardPool.addAll(list);
-        credits = qdPrefs.getStartingCredits();
+        credits = preferences.getStartingCredits();
 
         mode = m;
         if (mode.equals(FANTASY)) {
@@ -125,36 +146,28 @@ public class QuestData {
         }
     }
 
-
     public String[] getOpponents() {
         int index = getDifficultyIndex();
 
-        if (getWin() < qdPrefs.getWinsForMediumAI(index)) {
+        if (getWin() < preferences.getWinsForMediumAI(index)) {
             return getOpponents(easyAIDecks);
         }
 
-        if (getWin() < qdPrefs.getWinsForHardAI(index)) {
+        if (getWin() < preferences.getWinsForHardAI(index)) {
             return getOpponents(mediumAIDecks);
         }
 
         return getOpponents(hardAIDecks);
-    }//getOpponents()
-
-
-    private void readAIQuestDeckFiles(QuestData data, ArrayList<String> aiDeckNames) {
-        data.easyAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.EASY), aiDeckNames);
-        data.mediumAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.MEDIUM), aiDeckNames);
-        data.hardAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.HARD), aiDeckNames);
     }
 
-    public String[] getOpponents(ArrayList<String> aiDeck) {
+    public String[] getOpponents(List<String> aiDeck) {
         Collections.shuffle(aiDeck);
 
         return new String[]{aiDeck.get(0).toString(), aiDeck.get(1).toString(), aiDeck.get(2).toString()};
 
-    }//getOpponents()
+    }
 
-    private static ArrayList<String> readFile(File file, ArrayList<String> aiDecks) {
+    private static List<String> readFile(File file, List<String> aiDecks) {
         ArrayList<String> list = FileUtil.readFile(file);
 
         //remove any blank lines
@@ -177,7 +190,7 @@ public class QuestData {
 
         for (int i = 0; i < list.size(); i++)
             /*if(!aiDecks.contains(list.get(i).toString())) ErrorViewer.showError(new Exception(),
-                    "QuestData : readFile() error, file %s contains the invalid ai deck name: %s", file,
+                    "QuestDataOld : readFile() error, file %s contains the invalid ai deck name: %s", file,
                     list.get(i));*/ {
             if (!aiDecks.contains(list.get(i).toString())) {
                 aiDecks.add(list.get(i).toString());
@@ -186,11 +199,8 @@ public class QuestData {
 
 
         return list;
-    }//readFile()
-
-    public void readAIQuestDeckFiles() {
-        readAIQuestDeckFiles(this, ai_getDeckNames());
     }
+
 
     static public QuestData loadData() {
         try {
@@ -213,7 +223,6 @@ public class QuestData {
                 XStream xStream = new XStream();
 
                 data = (QuestData) xStream.fromXML(zin);
-                data.readAIQuestDeckFiles(data, new ArrayList<String>());
 
                 zin.close();
             }
@@ -226,6 +235,24 @@ public class QuestData {
         }
     }
 
+    public void saveData() {
+        try {
+            File f = ForgeProps.getFile(NewConstants.QUEST.XMLDATA);
+            BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(f));
+            GZIPOutputStream zout = new GZIPOutputStream(bout);
+
+            XStream xStream = new XStream();
+            xStream.toXML(this, zout);
+
+            zout.flush();
+            zout.close();
+        } catch (Exception ex) {
+            ErrorViewer.showError(ex, "Error saving Quest Data");
+            throw new RuntimeException(ex);
+        }
+        }
+
+    @SuppressWarnings({"deprecation"})
     private static QuestData convertSaveFormat() {
         forge.QuestData oldData = forge.QuestData.loadData();
         QuestData newData = new QuestData();
@@ -233,7 +260,7 @@ public class QuestData {
 
         newData.difficulty = oldData.getDifficulty();
         newData.diffIndex = oldData.getDiffIndex();
-        newData.rankIndex = oldData.getWin()/newData.qdPrefs.getWinsForRankIncrease(newData.diffIndex);
+        newData.rankIndex = oldData.getWin() / newData.preferences.getWinsForRankIncrease(newData.diffIndex);
 
         newData.win = oldData.getWin();
         newData.lost = oldData.getLost();
@@ -259,46 +286,47 @@ public class QuestData {
         newData.availableQuests = oldData.getAvailableQuests();
         newData.completedQuests = oldData.getCompletedQuests();
 
-        newData.pets = new ArrayList<QuestPetAbstract>();
         QuestPetAbstract newPet;
 
-        if(oldData.getBirdPetLevel() > 0){
+        if (oldData.getBirdPetLevel() > 0) {
             newPet = new QuestPetBird();
             newPet.setLevel(oldData.getBirdPetLevel());
-            newData.pets.add(newPet);
+            newData.petManager.addPet(newPet);
         }
-        if(oldData.getHoundPetLevel() > 0){
+        if (oldData.getHoundPetLevel() > 0) {
             newPet = new QuestPetHound();
             newPet.setLevel(oldData.getHoundPetLevel());
-            newData.pets.add(newPet);
+            newData.petManager.addPet(newPet);
         }
-        if(oldData.getWolfPetLevel() > 0){
+        if (oldData.getWolfPetLevel() > 0) {
             newPet = new QuestPetWolf();
             newPet.setLevel(oldData.getWolfPetLevel());
-            newData.pets.add(newPet);
+            newData.petManager.addPet(newPet);
         }
-        if(oldData.getCrocPetLevel() > 0){
+        if (oldData.getCrocPetLevel() > 0) {
             newPet = new QuestPetCrocodile();
             newPet.setLevel(oldData.getCrocPetLevel());
-            newData.pets.add(newPet);
+            newData.petManager.addPet(newPet);
         }
-        if(oldData.getPlantLevel() > 0){
+        if (oldData.getPlantLevel() > 0) {
             newPet = new QuestPetPlant();
             newPet.setLevel(oldData.getPlantLevel());
-            newData.pets.add(newPet);
+            newData.petManager.getPlant().setLevel(oldData.getPlantLevel());
         }
+
+        newData.getPetManager().setSelectedPet(null);
 
         return newData;
     }
 
 
     //returns Strings of the card names
-    public ArrayList<String> getCardpool() {
+    public List<String> getCardpool() {
         //make a copy so the internal ArrrayList cannot be changed externally
         return new ArrayList<String>(cardPool);
     }
 
-    public ArrayList<String> getShopList() {
+    public List<String> getShopList() {
         if (shopList != null) {
             return new ArrayList<String>(shopList);
         }
@@ -307,12 +335,12 @@ public class QuestData {
         }
     }
 
-    public void setShopList(ArrayList<String> list) {
+    public void setShopList(List<String> list) {
         shopList = list;
     }
 
 
-    public ArrayList<Integer> getAvailableQuests() {
+    public List<Integer> getAvailableQuests() {
         if (availableQuests != null) {
             return new ArrayList<Integer>(availableQuests);
         }
@@ -321,7 +349,7 @@ public class QuestData {
         }
     }
 
-    public void setAvailableQuests(ArrayList<Integer> list) {
+    public void setAvailableQuests(List<Integer> list) {
         availableQuests = list;
     }
 
@@ -329,7 +357,7 @@ public class QuestData {
         availableQuests.clear();
     }
 
-    public ArrayList<Integer> getCompletedQuests() {
+    public List<Integer> getCompletedQuests() {
         if (completedQuests != null) {
             return new ArrayList<Integer>(completedQuests);
         }
@@ -338,7 +366,7 @@ public class QuestData {
         }
     }
 
-    public void setCompletedQuests(ArrayList<Integer> list) {
+    public void setCompletedQuests(List<Integer> list) {
         completedQuests = list;
     }
 
@@ -347,8 +375,6 @@ public class QuestData {
         shopList.clear();
     }
 
-    //rename - removeDeck, addDeck
-    //copy - addDeck
 
     public void removeDeck(String deckName) {
         myDecks.remove(deckName);
@@ -416,18 +442,18 @@ public class QuestData {
 
     //returns human player decks
     //returns ArrayList of String deck names
-    public ArrayList<String> getDeckNames() {
+    public List<String> getDeckNames() {
         return getDeckNames_String(myDecks);
-    }//getDecks()
+    }
 
     //returns AI computer decks
     //returns ArrayList of String deck names
-    public ArrayList<String> ai_getDeckNames() {
+    public List<String> ai_getDeckNames() {
         return getDeckNames_String(aiDecks);
     }
 
     //returns ArrayList of Deck String names
-    private ArrayList<String> getDeckNames_String(Map<String, Deck> map) {
+    private List<String> getDeckNames_String(Map<String, Deck> map) {
         ArrayList<String> out = new ArrayList<String>();
 
         Iterator<String> it = map.keySet().iterator();
@@ -439,16 +465,16 @@ public class QuestData {
     }
 
     //get new cards that were added to your card pool by addCards()
-    public ArrayList<String> getAddedCards() {
+    public List<String> getAddedCards() {
         return new ArrayList<String>(newCardList);
     }
 
     //adds 11 cards, to the current card pool
     //(I chose 11 cards instead of 15 in order to make things more challenging)
     public void addCards() {
-        int nCommon = qdPrefs.getNumCommon();
-        int nUncommon = qdPrefs.getNumUncommon();
-        int nRare = qdPrefs.getNumRare();
+        int nCommon = preferences.getNumCommon();
+        int nUncommon = preferences.getNumUncommon();
+        int nRare = preferences.getNumRare();
 
         ArrayList<String> newCards = new ArrayList<String>();
         newCards.addAll(boosterPack.getCommon(nCommon));
@@ -461,18 +487,6 @@ public class QuestData {
         //getAddedCards() uses newCardList
         newCardList = newCards;
 
-    }//addCards()
-
-    public ArrayList<String> getRandomRares(int n, int colorIndex) {
-        ArrayList<String> newCards = new ArrayList<String>();
-        newCards.addAll(boosterPack.getRare(n, colorIndex));
-
-        /*
-          for(String s : newCards ) {
-              Card c = AllZone.CardFactory.getCard(s, AllZone.HumanPlayer);
-              list.add(c);
-          }*/
-        return newCards;
     }
 
     public void addRandomRare(int n) {
@@ -541,49 +555,49 @@ public class QuestData {
     }
 
     public long getCreditsToAdd(QuestMatchState matchState) {
-        long creds = (long) (qdPrefs.getMatchRewardBase() + (qdPrefs.getMatchRewardTotalWins() * win));
+        long creds = (long) (preferences.getMatchRewardBase() + (preferences.getMatchRewardTotalWins() * win));
         String[] wins = matchState.getWinMethods();
         int[] winTurns = matchState.getWinTurns();
         boolean[] mulliganedToZero = matchState.getMulliganedToZero();
 
         if (matchState.getLose() == 0) {
-            creds += qdPrefs.getMatchRewardNoLosses();
+            creds += preferences.getMatchRewardNoLosses();
         }
 
         for (String s : wins) {
             if (s != null) {
                 if (s.equals("Poison Counters")) {
-                    creds += qdPrefs.getMatchRewardPoisonWinBonus();
+                    creds += preferences.getMatchRewardPoisonWinBonus();
                 }
                 else if (s.equals("Milled")) {
-                    creds += qdPrefs.getMatchRewardMilledWinBonus();
+                    creds += preferences.getMatchRewardMilledWinBonus();
                 }
                 else if (s.equals("Battle of Wits") || s.equals("Felidar Sovereign") || s.equals("Helix Pinnacle") ||
                         s.equals("Epic Struggle") || s.equals("Door to Nothingness") || s.equals("Barren Glory") ||
                         s.equals("Near-Death Experience") || s.equals("Mortal Combat") || s.equals("Test of Endurance")) {
-                    creds += qdPrefs.getMatchRewardAltWinBonus();
+                    creds += preferences.getMatchRewardAltWinBonus();
                 }
             }
         }
         for (int i : winTurns) {
             if (i == 1) {
-                creds += qdPrefs.getMatchRewardWinFirst();
+                creds += preferences.getMatchRewardWinFirst();
             }
             else if (i <= 5) {
-                creds += qdPrefs.getMatchRewardWinByFifth();
+                creds += preferences.getMatchRewardWinByFifth();
             }
             else if (i <= 10) {
-                creds += qdPrefs.getMatchRewardWinByTen();
+                creds += preferences.getMatchRewardWinByTen();
             }
             else if (i <= 15) {
-                creds += qdPrefs.getMatchRewardWinByFifteen();
+                creds += preferences.getMatchRewardWinByFifteen();
             }
         }
 
 
         for (boolean b : mulliganedToZero) {
             if (b == true) {
-                creds += qdPrefs.getMatchMullToZero();
+                creds += preferences.getMatchMullToZero();
             }
         }
 
@@ -603,7 +617,7 @@ public class QuestData {
     }
 
     //gets all of the cards that are in the cardpool
-    public ArrayList<String> getCards() {
+    public List<String> getCards() {
         //copy CardList in order to keep private variables private
         //if we just return cardPool, it could be changed externally
         return new ArrayList<String>(cardPool);
@@ -613,7 +627,7 @@ public class QuestData {
     public int getTotalNumberOfGames(int difficulty) {
         //-2 because you start a level 1, and the last level is secret
         int numberLevels = rankArray.length - 2;
-        int nMatches = qdPrefs.getWinsForRankIncrease(difficulty);
+        int nMatches = preferences.getWinsForRankIncrease(difficulty);
 
         return numberLevels * nMatches;
     }
@@ -622,10 +636,10 @@ public class QuestData {
     public void addWin() {
         win++;
 
-        if (win % qdPrefs.getWinsForRankIncrease(diffIndex) == 0) {
+        if (win % preferences.getWinsForRankIncrease(diffIndex) == 0) {
             rankIndex++;
         }
-    }//addWin()
+    }
 
     public void addLost() {
         lost++;
@@ -640,15 +654,6 @@ public class QuestData {
     }
 
     //********************FANTASY STUFF START***********************
-
-
-    public void setSelectedPet(QuestPetAbstract pet) {
-        selectedPet = pet;
-    }
-
-    public QuestPetAbstract getSelectedPet() {
-        return selectedPet;
-    }
 
     public void setLife(int n) {
         life = n;
@@ -726,6 +731,10 @@ public class QuestData {
         return mode;
     }
 
+    //should be called first, because the difficultly won't change
+    public String getDifficulty() {
+        return difficulty;
+    }
 
     public int getDifficultyIndex() {
         return diffIndex;
@@ -733,14 +742,26 @@ public class QuestData {
 
     public void setDifficulty(int i) {
         diffIndex = i;
-        difficulty = qdPrefs.getDifficulty(i);
+        difficulty = preferences.getDifficulty(i);
     }
 
+    public void setDifficultyIndex() {
+        String[] diffStr = preferences.getDifficulty();
+        for (int i = 0; i < diffStr.length; i++) {
+            if (difficulty.equals(diffStr[i])) {
+                diffIndex = i;
+            }
+        }
+    }
+
+    public String[] getDifficultyChoices() {
+        return preferences.getDifficulty();
+    }
 
     public String getRank() {
         //is rankIndex too big?
-        if (rankIndex == rankArray.length) {
-            rankIndex--;
+        if (rankIndex >= rankArray.length) {
+            rankIndex = rankArray.length - 1;
         }
 
         return rankArray[rankIndex];
@@ -748,7 +769,7 @@ public class QuestData {
 
     //add cards after a certain number of wins or losses
     public boolean shouldAddCards(boolean didWin) {
-        int n = qdPrefs.getWinsForBooster(diffIndex);
+        int n = preferences.getWinsForBooster(diffIndex);
 
         if (didWin) {
             return getWin() % n == 0;
@@ -777,26 +798,10 @@ public class QuestData {
     }
 
     public boolean hasSaveFile() {
-        return ForgeProps.getFile(NewConstants.QUEST.DATA).exists();
+        return ForgeProps.getFile(NewConstants.QUEST.DATA).exists()||
+                ForgeProps.getFile(NewConstants.QUEST.XMLDATA).exists();
     }
-
-    public void saveData() {
-        try {
-            File f = ForgeProps.getFile(NewConstants.QUEST.XMLDATA);
-            BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(f));
-            GZIPOutputStream zout = new GZIPOutputStream(bout);
-
-            XStream xStream = new XStream();
-            xStream.toXML(this, zout);
-
-            zout.flush();
-            zout.close();
-        } catch (Exception ex) {
-            ErrorViewer.showError(ex, "Error saving Quest Data");
-            throw new RuntimeException(ex);
-        }
-    }//saveData()
-
+    
     public static void main(String[] args) {
         QuestData q = new QuestData();
         for (int i = 0; i < 20; i++) {
@@ -811,5 +816,21 @@ public class QuestData {
         System.exit(1);
     }
 
+    public QuestPetManager getPetManager() {
+        return petManager;
+    }
 
+    public QuestPreferences getQuestPreferences() {
+        return preferences;
+    }
+
+    //get new cards that were added to your card pool by addCards()
+    public void addToNewList(ArrayList<String> added) {
+        newCardList.addAll(added);
+    }
+
+    public Object readResolve() {
+        initTransients();
+        return this;
+    }
 }

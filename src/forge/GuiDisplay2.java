@@ -2,30 +2,19 @@
 package forge;
 
 
-import java.awt.BorderLayout;
-import java.awt.Frame;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.util.Observable;
-import java.util.Observer;
-
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JSeparator;
-
 import forge.gui.GuiUtils;
 import forge.gui.game.CardDetailPanel;
 import forge.gui.game.CardPanel;
 import forge.gui.game.CardPicturePanel;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+
+import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Frame;
+import java.awt.event.*;
+import java.util.Observable;
+import java.util.Observer;
 
 
 public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Display, NewConstants {
@@ -109,7 +98,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
         concedeGame.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 dispose();
-                Constant.Runtime.WinLose.addLose();
+                Constant.Runtime.matchState.addLose();
                 new Gui_WinLose();
             }
         });
@@ -796,7 +785,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
     private void exitForm(java.awt.event.WindowEvent evt)//GEN-FIRST:event_exitForm
     {
         dispose();
-        Constant.Runtime.WinLose.addLose();
+        Constant.Runtime.matchState.addLose();
         new Gui_WinLose();
     }//GEN-LAST:event_exitForm
     

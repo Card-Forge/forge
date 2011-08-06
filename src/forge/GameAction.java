@@ -2,19 +2,12 @@
 package forge;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Random;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 import forge.gui.GuiUtils;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.LANG.GameAction.GAMEACTION_TEXT;
+
+import javax.swing.*;
+import java.util.*;
 
 public class GameAction {
 
@@ -418,15 +411,15 @@ public class GameAction {
     	Player computer = AllZone.ComputerPlayer;
     	Player human = AllZone.HumanPlayer;
     	
-    	int gameWon = Constant.Runtime.WinLose.getWin();
+    	int gameWon = Constant.Runtime.matchState.getWin();
     	
     	if (human.hasWon()){	// Winning Conditions can be worth more than losing conditions
     		// Human wins
     		humanWins = true;
     		if (human.getAltWin()){
-	        	Constant.Runtime.WinLose.setWinMethod(gameWon, human.getWinCondition());
+	        	Constant.Runtime.matchState.setWinMethod(gameWon, human.getWinCondition());
     		}
-	        Constant.Runtime.WinLose.addWin();
+	        Constant.Runtime.matchState.addWin();
     	}
     	
     	else if (computer.hasLost()){
@@ -434,9 +427,9 @@ public class GameAction {
     		humanWins = true;
     		
     		if (computer.getAltLose()){
-	        	Constant.Runtime.WinLose.setWinMethod(gameWon, computer.getLoseCondition());
+	        	Constant.Runtime.matchState.setWinMethod(gameWon, computer.getLoseCondition());
     		}
-	        Constant.Runtime.WinLose.addWin();
+	        Constant.Runtime.matchState.addWin();
     	}
     	
 
@@ -448,7 +441,7 @@ public class GameAction {
     		
     		// Computer wins
     		computerWins = true;
-    		Constant.Runtime.WinLose.addLose();
+    		Constant.Runtime.matchState.addLose();
     	}
     	
 		return humanWins || computerWins;
@@ -2250,7 +2243,7 @@ public class GameAction {
         AllZone.HumanPlayer.setLife(humanLife, null);
         
         if (qa != null){
-        	computer.addAll(QuestUtil.getComputerCreatures(AllZone.QuestData, AllZone.QuestAssignment).toArray());
+        	computer.addAll(forge.quest.data.QuestUtil.getComputerCreatures(AllZone.QuestData, AllZone.QuestAssignment).toArray());
         }
 
         for (Card c : human)
@@ -2418,7 +2411,7 @@ public class GameAction {
         }
      
         // Only cut/coin toss if it's the first game of the match
-        if (Constant.Runtime.WinLose.countWinLose() == 0)
+        if (Constant.Runtime.matchState.countWinLose() == 0)
         {
         	// New code to determine who goes first. Delete this if it doesn't work properly
 	        if(Start_Cut) 
@@ -2426,7 +2419,7 @@ public class GameAction {
 	        else 
 	        	seeWhoPlaysFirst_CoinToss();
         }
-        else if (Constant.Runtime.WinLose.didWinRecently())	// if player won last, AI starts
+        else if (Constant.Runtime.matchState.didWinRecently())	// if player won last, AI starts
         	computerStartsGame();
         
         for(int i = 0; i < 7; i++) {

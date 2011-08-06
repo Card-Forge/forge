@@ -1,27 +1,18 @@
 package forge.gui;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Frame;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.Collection;
-import java.util.List;
-
-import javax.swing.Box;
-import javax.swing.ImageIcon;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
 import forge.AllZone;
 import forge.Card;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.Collection;
+import java.util.List;
 
 
 
@@ -87,11 +78,11 @@ public class GuiUtils {
     public static ImageIcon getIconFromFile(String iconName) {
         File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
         File file = new File(base, iconName);
-        if (file.exists()) {
-            return new ImageIcon(file.toString());
+        if (iconName.equals("") || !file.exists()) {
+            return null;
         }
         else {
-            return null;
+            return new ImageIcon(file.toString());
         }
     }
 
