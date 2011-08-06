@@ -20807,7 +20807,7 @@ public class CardFactory_Creatures {
             
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Ezuri, Renegade Leader")) {
         	final String Tgts[] = {"Elf"};
@@ -20848,6 +20848,7 @@ public class CardFactory_Creatures {
             ability.setDescription("G: Regenerate another target Elf.");
             
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Leveler")) {
