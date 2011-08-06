@@ -448,6 +448,7 @@ public class GameAction {
         if (AllZone.Computer_PoisonCounter.getPoisonCounters() >= 10)
         {
         	int gameNumber = 0;
+        	
         	if (Constant.Runtime.WinLose.getWin() == 1)
         		gameNumber = 1;
         	Constant.Runtime.WinLose.setWinMethod(gameNumber, "Poison Counters");

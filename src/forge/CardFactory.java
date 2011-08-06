@@ -14299,10 +14299,12 @@ public class CardFactory implements NewConstants {
                 public void resolve() {
                     AllZone.GameAction.getPlayerLife(getTargetPlayer()).setLife(0);
                     
-                    int gameNumber = 0;
-                    if (Constant.Runtime.WinLose.getWin()==1)
-                    	gameNumber = 1;
-                    Constant.Runtime.WinLose.setWinMethod(gameNumber,"Door to Nothingness");
+                    if (getTargetPlayer().equals(Constant.Player.Computer)) {
+	                    int gameNumber = 0;
+	                    if (Constant.Runtime.WinLose.getWin()==1)
+	                    	gameNumber = 1;
+	                    Constant.Runtime.WinLose.setWinMethod(gameNumber,"Door to Nothingness");
+                    }
                 }
                 
                 @Override
