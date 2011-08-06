@@ -9955,6 +9955,7 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
 
+/*
         //*************** START *********** START **************************
         // TODO: use spAllPump keyword when ready
         else if(cardName.equals("Path of Anger's Flame")) {
@@ -10001,8 +10002,9 @@ public class CardFactory implements NewConstants {
             
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
+*/
         
-
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Kjeldoran War Cry")) {
             final SpellAbility spell = new Spell(card) {
@@ -10062,6 +10064,7 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+*/
         
 
         //*************** START *********** START **************************
