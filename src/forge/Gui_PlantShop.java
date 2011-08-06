@@ -111,6 +111,13 @@ public class Gui_PlantShop extends JFrame implements NewConstants{
     	{
     		sb.append("Grow venomous thorns on your plant.<br>");
     		sb.append("<u><b>Level 5</b></u>: Deathtouch<br>");
+    		sb.append("<u><b>Next Level</b></u>: 1/4<br>");
+    	}
+    	else if (questData.getPlantLevel() == 5)
+    	{
+    		sb.append("As well as gaining more toughness,<br>");
+    		sb.append("your plant will have healing properties.<br>");
+    		sb.append("<u><b>Level 6</b></u>: 1/4 and Tap, you gain 1 life.");
     	}
     	else
     	{
@@ -134,6 +141,8 @@ public class Gui_PlantShop extends JFrame implements NewConstants{
     		l = 300;
     	else if (questData.getPlantLevel() == 4)
     		l = 750;
+    	else if (questData.getPlantLevel() == 5)
+    		l = 1000;
     	return l;
     }
     
@@ -158,8 +167,14 @@ public class Gui_PlantShop extends JFrame implements NewConstants{
     		sb.append("0/3");
     	else if (questData.getPlantLevel() == 3)
     		sb.append("1/3");
+    	else if (questData.getPlantLevel() == 4)
+    		sb.append("1/3");
+    	else
+    		sb.append("1/4");
     	
-    	sb.append(" Plant Wall");
+    	sb.append(" Plant Wall (current level ");
+    	sb.append(questData.getPlantLevel());
+    	sb.append("/6)");
     	
     	return sb.toString();
     }
@@ -175,6 +190,10 @@ public class Gui_PlantShop extends JFrame implements NewConstants{
     		s = "g_0_3_plant_wall_small.jpg";
     	else if (questData.getPlantLevel() == 3)
     		s = "g_1_3_plant_wall_small.jpg";
+    	else if (questData.getPlantLevel() == 4)
+    		s = "g_1_3_plant_wall_deathtouch_small.jpg";
+    	else if (questData.getPlantLevel() == 5)
+    		s = "g_1_4_plant_wall_small.jpg";
     	
     	return s;
     }
@@ -188,7 +207,7 @@ public class Gui_PlantShop extends JFrame implements NewConstants{
         
         plantStatsLabel.setFont(new Font("sserif", Font.BOLD, 12));
         plantStatsLabel.setText(getStats());
-        plantStatsLabel.setBounds(new Rectangle(10, 65, 100, 15));
+        plantStatsLabel.setBounds(new Rectangle(10, 65, 200, 15));
         
         plantDescLabel.setFont(new Font("sserif", 0, 12));
         plantDescLabel.setText(getDesc());
@@ -215,7 +234,7 @@ public class Gui_PlantShop extends JFrame implements NewConstants{
     	
     	
     	buyPlantButton.setEnabled(true);
-    	if (questData.getCredits() < getPrice() || questData.getPlantLevel() >= 5)
+    	if (questData.getCredits() < getPrice() || questData.getPlantLevel() >= 6)
     		buyPlantButton.setEnabled(false);
        
         quitButton.setBounds(new Rectangle(140, 297, 120, 50));

@@ -92,6 +92,15 @@ public class QuestUtil {
 			keyword = "Deathtouch";
 		}
 		
+		else if (level == 6)
+		{
+			imageName = "G 1 4 Plant Wall";
+			baseDefense = 4;
+			baseAttack = 1;
+			keyword = "Deathtouch";
+		}
+		
+		
 
         Card c = new Card();
         c.setName("Plant Wall");
@@ -114,6 +123,28 @@ public class QuestUtil {
         
         c.setBaseAttack(baseAttack);
         c.setBaseDefense(baseDefense);
+        
+        if (level == 6)
+        {
+        	final Card crd = c;
+        	final Ability_Tap ability = new Ability_Tap(c) {
+				private static final long serialVersionUID = 7546242087593613719L;
+
+				@Override
+                public boolean canPlayAI() {
+                    return AllZone.Phase.getPhase().equals(Constant.Phase.Main2);
+                }
+                
+                @Override
+                public void resolve() {
+                    AllZone.GameAction.getPlayerLife(crd.getController()).addLife(1);
+                }
+            };
+            c.addSpellAbility(ability);
+        	ability.setDescription("tap: You gain 1 life.");
+            ability.setStackDescription("Plant Wall - " + c.getController() + " gains 1 life.");
+            c.setText("tap: You gain 1 life.");
+        }
         
         
         return c;

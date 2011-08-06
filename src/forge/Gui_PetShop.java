@@ -155,11 +155,12 @@ public class Gui_PetShop extends JFrame implements NewConstants{
     		sb.append("1/2");
     	else if (questData.getWolfPetLevel() == 2)
     		sb.append("2/2");
-    	else if (questData.getWolfPetLevel() == 3)
+    	else /*if (questData.getWolfPetLevel() == 3)*/
     		sb.append("2/2");
     	
-    	sb.append(" Wolf Pet");
-    	
+    	sb.append(" Wolf Pet (current level ");
+    	sb.append(questData.getWolfPetLevel());
+    	sb.append("/4)");
     	return sb.toString();
     }
     
@@ -187,7 +188,7 @@ public class Gui_PetShop extends JFrame implements NewConstants{
         
         wolfPetStatsLabel.setFont(new Font("sserif", Font.BOLD, 12));
         wolfPetStatsLabel.setText(getWolfStats());
-        wolfPetStatsLabel.setBounds(new Rectangle(10, 65, 100, 15));
+        wolfPetStatsLabel.setBounds(new Rectangle(10, 65, 200, 15));
         
         wolfPetDescLabel.setFont(new Font("sserif", 0, 12));
         wolfPetDescLabel.setText(getDesc());
@@ -208,7 +209,7 @@ public class Gui_PetShop extends JFrame implements NewConstants{
         wolfPetIconLabel.setIconTextGap(0);
         
     	buyWolfPetButton.setEnabled(true);
-    	if (questData.getCredits() < getPrice())
+    	if (questData.getCredits() < getPrice() || questData.getWolfPetLevel() >= 4)
     		buyWolfPetButton.setEnabled(false);
        
         quitButton.setBounds(new Rectangle(140, 297, 120, 50));
