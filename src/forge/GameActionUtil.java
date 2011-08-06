@@ -4902,6 +4902,7 @@ public class GameActionUtil {
 							return (c.isArtifact() || c.isLand() || c.isCreature()) && c.isUntapped();
 						}
 					});
+
 					for(int i = 0; i < num; i++) {
 						if(player.isComputer()) {
 							Card toTap = CardFactoryUtil.AI_getWorstPermanent(list, false, false, false, false);
@@ -4922,6 +4923,7 @@ public class GameActionUtil {
 						        	  if(zone.is(Constant.Zone.Battlefield, AllZone.HumanPlayer) && list.contains(card)) {
 						                card.tap();
 						                list.remove(card);
+                                        if(list.size() == 0) AllZone.InputControl.resetInput();
 						                stop();
 						             }
 						          }
