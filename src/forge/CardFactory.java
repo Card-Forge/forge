@@ -19548,8 +19548,6 @@ public class CardFactory implements NewConstants {
         					numTargets++;
         				}
         			}
-        			//DEBUG
-        			System.out.println("Fireball - numTargets = "+numTargets);
         			return numTargets;
         		}
         		
