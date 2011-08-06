@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Creature Cephalid
 Text:no text
 PT:2/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | Threshold$ True | TriggerDescription$ Threshold - As long as seven or more cards are in your graveyard, Cephalid Sage has "When Cephalid Sage enters the battlefield, draw three cards, then discard two cards."
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | Threshold$ True | TriggerDescription$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME has "When CARDNAME enters the battlefield, draw three cards, then discard two cards."
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 3 | SubAbility$ SVar=DBDiscard
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Enchantment.YouCtrl
 SVar:DBDiscard:DB$Discard | NumCards$ 2 | Mode$ TgtChoose | Defined$ You
