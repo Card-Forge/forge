@@ -124,7 +124,7 @@ public class CardFactory_Creatures {
 	          AllZone.Stack.add(ability);
 	        }
 	      };
-	      ability.setStackDescription(cardName + "enters the battlefield with four -1/-1 counters on it.");
+	      ability.setStackDescription(cardName + " enters the battlefield with four -1/-1 counters on it.");
 	      card.addComesIntoPlayCommand(intoPlay);
 	    }//*************** END ************ END **************************
 
@@ -4300,7 +4300,7 @@ public class CardFactory_Creatures {
 	      card.addComesIntoPlayCommand(intoPlay);
 	    }//*************** END ************ END **************************
 
-	  //*************** START *********** START **************************
+	    //*************** START *********** START **************************
 	    else if(cardName.equals("Karmic Guide"))
 	    {
 	      final SpellAbility ability = new Ability(card, "0")
@@ -4310,7 +4310,7 @@ public class CardFactory_Creatures {
 	          PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
 	          if(AllZone.GameAction.isCardInZone(getTargetCard(), grave))
 	          {
-	            PlayerZone play = AllZone.getZone(Constant.Zone.Hand, card.getController());
+	            PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
 	            grave.remove(getTargetCard());
 	            play.add(getTargetCard());
 	          }

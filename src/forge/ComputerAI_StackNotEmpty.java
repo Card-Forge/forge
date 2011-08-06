@@ -5,7 +5,7 @@ public class ComputerAI_StackNotEmpty extends Input
 
 	public void showMessage() 
     {
-	AllZone.Display.showMessage("Phase: " +AllZone.Phase.getPhase() +"\nComputer is thinking");    
+	AllZone.Display.showMessage("Phase: " +AllZone.Phase.getPhase() + "\nAn error may have occurred. Please send the STACK REPORT to the Forge forum.");    
 	AllZone.Computer.stackNotEmpty();
     }
 }

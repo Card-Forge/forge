@@ -1,3 +1,9 @@
+Eyeblight's Ending
+2 B
+Tribal Instant Elf
+Destroy target non-Elf creature.
+spDestroyTgt:Creature.nonElf
+
 Collective Restraint
 3 U
 Enchantment
@@ -669,11 +675,11 @@ Creature Human Rebel Scout
 no text
 1/4
 Flying
-abPump 2 W:Protection from white.
-abPump 2 W:Protection from blue.
-abPump 2 W:Protection from black.
-abPump 2 W:Protection from red.
-abPump 2 W:Protection from green.
+abPump 2 W:Protection from white
+abPump 2 W:Protection from blue
+abPump 2 W:Protection from black
+abPump 2 W:Protection from red
+abPump 2 W:Protection from green
 
 Jodah's Avenger
 5 U
