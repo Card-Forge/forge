@@ -1,0 +1,9 @@
+Name:Funeral Pyre
+ManaCost:W
+Types:Instant
+Text:no text
+A:SP$Retrieve | Cost$ W | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SubAbility$ MakeToken<>1<>Spirit<>W 1 1 Spirit<>TargetController<>W<>Creature;Spirit<>1<>1<>Flying | SpellDescription$ Exile target card from a graveyard. Its owner puts a 1/1 white Spirit creature token with flying onto the battlefield.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/funeral_pyre.jpg
+End
