@@ -299,7 +299,7 @@ class CardFactory_Planeswalkers {
                     CardList elves = new CardList(play.getCards());
                     elves = elves.getType("Elf");
                     
-                    AllZone.GameAction.getPlayerLife(card.getController()).addLife(2 * elves.size());
+                    AllZone.GameAction.gainLife(card.getController(), 2 * elves.size());
                     
                 }//resolve()
                 
@@ -1006,7 +1006,7 @@ class CardFactory_Planeswalkers {
                     turn[0] = AllZone.Phase.getTurn();
                     
 
-                    AllZone.GameAction.getPlayerLife(card2.getController()).addLife(2);
+                    AllZone.GameAction.gainLife(card2.getController(), 2);
                     Log.debug("Ajani Goldmane", "current phase: " + AllZone.Phase.getPhase());
                 }
                 
@@ -2094,8 +2094,11 @@ class CardFactory_Planeswalkers {
                             Card c = getTargetCard();
                             c.addDamage(damage, card2);
                         }
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage,card2);
-                    AllZone.GameAction.getPlayerLife(card2.getController()).addLife(3);
+                    } 
+                    else 
+                    	AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage,card2);
+                    
+                    AllZone.GameAction.gainLife(card2.getController(), 3);
                 }
                 
                 @Override
@@ -3252,7 +3255,7 @@ class CardFactory_Planeswalkers {
                     turn[0] = AllZone.Phase.getTurn();
                     
                     int life = AllZoneUtil.getCreaturesInPlay(card2.getController()).size();
-                    AllZone.GameAction.getPlayerLife(card2.getController()).addLife(life);
+                    AllZone.GameAction.gainLife(card2.getController(), life);
                     Log.debug("Elspeth Tirel", "current phase: " + AllZone.Phase.getPhase());
                 }
                 

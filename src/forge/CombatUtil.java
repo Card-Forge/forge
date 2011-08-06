@@ -1975,7 +1975,7 @@ public class CombatUtil {
                 };
                 Card top = lib.get(0);
                 if(top.getType().contains("Creature")) {
-                    AllZone.GameAction.getPlayerLife(player).addLife(top.getBaseDefense());
+                    AllZone.GameAction.gainLife(player, top.getBaseDefense());
                     AllZone.GameAction.getPlayerLife(player).subtractLife(top.getBaseAttack(),c);
                     hand.add(top);
                     lib.remove(top);
@@ -2123,7 +2123,7 @@ public class CombatUtil {
 		        		{
 		        			public void resolve()
 		        			{
-		        		        AllZone.GameAction.getPlayerLife(crd.getController()).addLife(2);
+		        		        AllZone.GameAction.gainLife(crd.getController(), 2);
 		        			}
 		        		};
 		        		ability.setStackDescription(pcs.get(i) + " - " + c.getController() + " gains 2 life.");
@@ -2367,9 +2367,9 @@ public class CombatUtil {
                 && !a.getCreatureBlockedThisCombat()) {
             a.untap();
         } else if (a.getName().equals("Deepwood Tantiv") && !a.getCreatureBlockedThisCombat()) {
-            AllZone.GameAction.getPlayerLife(a.getController()).addLife(2);
+        	AllZone.GameAction.gainLife(a.getController(), 2);
         } else if (a.getName().equals("Sacred Prey") && !a.getCreatureBlockedThisCombat()) {
-            AllZone.GameAction.getPlayerLife(a.getController()).addLife(1);
+            AllZone.GameAction.gainLife(a.getController(), 1);
         } else if (a.getName().equals("Vedalken Ghoul") && !a.getCreatureBlockedThisCombat()) {
              AllZone.GameAction.getPlayerLife(b.getController()).subtractLife(4,a);
         }

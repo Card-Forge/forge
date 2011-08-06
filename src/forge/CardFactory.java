@@ -624,7 +624,7 @@ public class CardFactory implements NewConstants {
         				}
         				else if(ActionID.equals("GainLife"))
         				{
-        					AllZone.GameAction.getPlayerLife(Target).addLife(Integer.parseInt(SplitActionParams[0]));
+        					AllZone.GameAction.gainLife(Target, Integer.parseInt(SplitActionParams[0]));
         				}
         				else
         				{
@@ -4470,7 +4470,7 @@ public class CardFactory implements NewConstants {
                         else
                            TgtPlayer = card.getController();
                        
-                        AllZone.GameAction.getPlayerLife(TgtPlayer).addLife(nlife);
+                        AllZone.GameAction.gainLife(TgtPlayer, nlife);
                        
                         if (!DrawBack[0].equals("none"))
                            CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null, this);
@@ -4629,7 +4629,7 @@ public class CardFactory implements NewConstants {
                           else
                              TgtPlayer = card.getController();
                          
-                          AllZone.GameAction.getPlayerLife(TgtPlayer).addLife(nlife);
+                          AllZone.GameAction.gainLife(TgtPlayer, nlife);
                           if (!DrawBack[0].equals("none"))
                              CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null, this);
                        }//resolve()
@@ -4687,7 +4687,7 @@ public class CardFactory implements NewConstants {
                           else
                              TgtPlayer = card.getController();
                          
-                          AllZone.GameAction.getPlayerLife(TgtPlayer).addLife(nlife);
+                          AllZone.GameAction.gainLife(TgtPlayer, nlife);
                          
                           if (!DrawBack[0].equals("none"))
                              CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null, this);
@@ -7415,7 +7415,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.getPlayerLife(card.getController()).addLife(5);
+                	AllZone.GameAction.gainLife(card.getController(), 5);
                     AllZone.GameAction.sacrifice(getSourceCard());
                 }//resolve()
             };//SpellAbility
@@ -8885,7 +8885,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.getPlayerLife(card.getController()).addLife(1);
+                	AllZone.GameAction.gainLife(card.getController(), 1);
                 }
             };//SpellAbility
             
@@ -9083,8 +9083,7 @@ public class CardFactory implements NewConstants {
                     if(AllZone.GameAction.isCardInPlay(c)) {
                         AllZone.GameAction.sacrifice(c);
                         makeToken();
-                        PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                        life.addLife(1);
+                        AllZone.GameAction.gainLife(card.getController(), 1);
                     }
                 }//resolve
                 
@@ -9199,8 +9198,7 @@ public class CardFactory implements NewConstants {
                 @Override
                 public void resolve() {
                     Card c = card;
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
-                    life.addLife(20);
+                    AllZone.GameAction.gainLife(c.getController(), 20);
                 }
             };
             
@@ -9555,7 +9553,7 @@ public class CardFactory implements NewConstants {
         			setTargetCard(target);
         		}//chooseTargetAI()
         		public void resolve() {
-        			AllZone.GameAction.getPlayerLife(card.getController()).addLife(2);
+        			AllZone.GameAction.gainLife(card.getController(), 2);
         			AllZone.GameAction.sacrifice(getTargetCard());
         		}
         	};//SpellAbility

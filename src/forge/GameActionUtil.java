@@ -173,7 +173,7 @@ public class GameActionUtil {
 					@Override
 					public void resolve() {
 						//Lifeblood controller (opponent in this case) gains 1 life
-						AllZone.GameAction.getPlayerLife(opponent).addLife(1);
+						AllZone.GameAction.gainLife(opponent, 1);
 					}
 				};//Ability
 				ability.setStackDescription(lifeblood.getName()+" - Mountain was tapped, "+opponent+" gains 1 life.");
@@ -189,7 +189,7 @@ public class GameActionUtil {
 					@Override
 					public void resolve() {
 						//Lifetap controller (opponent in this case) gains 1 life
-						AllZone.GameAction.getPlayerLife(opponent).addLife(1);
+						AllZone.GameAction.gainLife(opponent, 1);
 					}
 				};//Ability
 				ability.setStackDescription(lifetap.getName()+" - Forest was tapped, "+opponent+" gains 1 life.");
@@ -1740,8 +1740,7 @@ public class GameActionUtil {
 								else target = "Human"; // check for target of spell/abilities should be here
 							} else target = "Human"; // check for target of spell/abilities should be here
 							AllZone.GameAction.getPlayerLife(target).subtractLife(1,card);
-							PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-							life.addLife(1);
+							AllZone.GameAction.gainLife(card.getController(), 1);
 
 						} //resolve
 					}; //ability
@@ -1903,7 +1902,8 @@ public class GameActionUtil {
 								else if(!choice.equals("None")) target = "Human"; // check for target of spell/abilities should be here
 								else target = "none";
 							} else target = "Computer"; // check for target of spell/abilities should be here						
-							if(!target.equals("none")) AllZone.GameAction.getPlayerLife(target).addLife(converted);
+							if(!target.equals("none")) 
+								AllZone.GameAction.gainLife(target, converted);
 						} //resolve
 					}; //ability
 					ability2.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
@@ -2682,8 +2682,7 @@ public class GameActionUtil {
 			Ability ability2 = new Ability(card, "0") {
 				@Override
 				public void resolve() {
-					PlayerLife life = AllZone.GameAction.getPlayerLife(controller);
-					life.addLife(1);
+					AllZone.GameAction.gainLife(controller, 1);
 				}
 			}; // ability2
 
@@ -3055,6 +3054,7 @@ public class GameActionUtil {
                     
                     Ability ability2 = new Ability(card, "0") {
                         public void resolve() {
+                        	boolean bAccept = false;
                             if (card.getController().equals("Human")) {
                             	StringBuilder title = new StringBuilder();
                                 title.append("Kor Firewalker Ability");
@@ -3062,14 +3062,14 @@ public class GameActionUtil {
                                 message.append("Will you gain 1 life?");
                                 int choice = JOptionPane.showConfirmDialog(null, message.toString(), title.toString(), JOptionPane.YES_NO_OPTION);
                                 
-                                if (choice == JOptionPane.YES_OPTION) {
-                                    AllZone.GameAction.getPlayerLife(card.getController()).addLife(1);
-                                }
+                                bAccept = (choice == JOptionPane.YES_OPTION);
                             }// Human
-                            
-                            if (card.getController().equals("Computer")) {
-                                AllZone.GameAction.getPlayerLife(card.getController()).addLife(1);
-                            }// Computer
+                            else // computer always wants life
+                            	bAccept = true;
+
+                            if (bAccept)
+                            	AllZone.GameAction.gainLife(card.getController(), 1);
+
                         }// resolve()
                     };//ability2
                     
@@ -3874,8 +3874,7 @@ public class GameActionUtil {
                         if (o != null) {
                             Card c = (Card) o;
                             int power=c.getNetAttack();
-                            PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-                            life.addLife(power);
+                            AllZone.GameAction.gainLife(player, power);
                         }
                     }
                     else//computer
@@ -3885,8 +3884,7 @@ public class GameActionUtil {
                         // Card c = creats.get(0);
                         if (c != null) {
                             int power = c.getNetAttack();
-                            PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-                            life.addLife(power);
+                            AllZone.GameAction.gainLife(player, power);
                         }
                     }
                 } // resolve
@@ -4362,9 +4360,7 @@ public class GameActionUtil {
 				PlayerZone play = AllZone.getZone(Constant.Zone.Play, crd.getController());
 				CardList allies = new CardList(play.getCards());
 				allies = allies.getType("Ally");
-				PlayerLife life = AllZone.GameAction.getPlayerLife(crd.getController());
-				life.addLife(allies.size());
-
+				AllZone.GameAction.gainLife(crd.getController(), allies.size());
 			}
 		};
 
@@ -4520,9 +4516,7 @@ public class GameActionUtil {
 		Ability ability = new Ability(c, "0") {
 			@Override
 			public void resolve() {
-				String player = crd.getController();
-				PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-				life.addLife(1);
+				AllZone.GameAction.gainLife(crd.getController(), 1);
 			}
 		};
 		ability.setStackDescription("Moonlit Wake - " + c.getController() + " gains 1 life.");
@@ -4535,9 +4529,7 @@ public class GameActionUtil {
 		Ability ability = new Ability(c, "0") {
 			@Override
 			public void resolve() {
-				String player = crd.getController();
-				PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-				life.addLife(crd2.getNetDefense());
+				AllZone.GameAction.gainLife(crd.getController(), crd2.getNetDefense());
 			}
 		};
 		ability.setStackDescription("Proper Burial - " + c.getController() + " gains " + destroyed.getNetDefense()
@@ -5059,22 +5051,10 @@ public class GameActionUtil {
 	}//landfall_Eternity_Vessel
 	
 	public static void executeLifeLinkEffects(Card c) {
-		final String player = c.getController();
 		int pwr = c.getNetAttack();
 		if(CombatUtil.isDoranInPlay()) pwr = c.getNetDefense();
 
-		final int power = pwr;
-
-		Ability ability2 = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-				life.addLife(power);
-			}
-		}; // ability2
-
-		ability2.setStackDescription(c.getName() + " (Lifelink) - " + player + " gains " + power + " life.");
-		AllZone.Stack.add(ability2);
+		executeLifeLinkEffects(c, pwr);
 	}
 
 	public static void executeLifeLinkEffects(Card c, int n) {
@@ -5085,8 +5065,7 @@ public class GameActionUtil {
 		Ability ability2 = new Ability(c, "0") {
 			@Override
 			public void resolve() {
-				PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-				life.addLife(power);
+				AllZone.GameAction.gainLife(player, power);
 			}
 		}; // ability2
 
@@ -5167,7 +5146,7 @@ public class GameActionUtil {
                     }
 				}
 				
-				AllZone.GameAction.getPlayerLife(src.getController()).addLife(3);
+				AllZone.GameAction.gainLife(src.getController(), 3);
 			}
 		}; // ability
 
@@ -6070,8 +6049,7 @@ public class GameActionUtil {
 						AllZone.Display.getChoiceOptional("Top card", cl.toArray());
 					};
 					Card top = lib.get(0);
-					AllZone.GameAction.getPlayerLife(player[0]).addLife(
-							CardUtil.getConvertedManaCost(top.getManaCost()));
+					AllZone.GameAction.gainLife(player[0], CardUtil.getConvertedManaCost(top.getManaCost()));
 					hand.add(top);
 					lib.remove(top);
 
@@ -7098,7 +7076,7 @@ public class GameActionUtil {
 
 					if(creatureType.contains("Giant") || creatureType.contains("Wizard")
 							|| library.get(0).getKeyword().contains("Changeling")) {
-						AllZone.GameAction.getPlayerLife(player).addLife(4);
+						AllZone.GameAction.gainLife(player, 4);
 					}
 
 				}// resolve()
@@ -7942,12 +7920,13 @@ public class GameActionUtil {
 
 				@Override
 				public void resolve() {
-					pLife.addLife(1);
+					if (pLife.getLife() <= 10)
+						AllZone.GameAction.gainLife(player, 1);
 				}
 			};// Ability
 			ability.setStackDescription("Convalescence - " + player + " gain 1 life");
 
-			if((pLife.getLife() + i) <= 10) {
+			if(pLife.getLife() <= 10) {
 				AllZone.Stack.add(ability);
 			}
 		}// for
@@ -7956,35 +7935,29 @@ public class GameActionUtil {
 	private static void upkeep_Convalescent_Care() {
 		final String player = AllZone.Phase.getActivePlayer();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-		PlayerLife pLife = AllZone.GameAction.getPlayerLife(player);
+		final PlayerLife pLife = AllZone.GameAction.getPlayerLife(player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Convalescent Care");
 
 		for(int i = 0; i < list.size(); i++) {
-			/*
             Ability ability = new Ability(list.get(i), "0")
             {
 
             	public void resolve()
             	{
-
-            		pLife.addLife(3);
-            		AllZone.GameAction.drawCard(player);
+            		if (pLife.getLife() <= 5){
+	            		AllZone.GameAction.gainLife(player, 3);
+	            		AllZone.GameAction.drawCard(player);
+            		}
             	}
             };// Ability
             ability.setStackDescription("Convalescent Care - " + player
             		+ " gains 3 life and draws a card");
 
-            if ((pLife.getLife() + i) <= 5)
-            {
+            if (pLife.getLife() <= 5){
             	AllZone.Stack.add(ability);
             }
-			 */
-			if((pLife.getLife()) <= 5) {
-				pLife.addLife(3);
-				AllZone.GameAction.drawCard(player);
-			}
 
 		}// for
 	}// upkeep_Convalescence()
@@ -8008,7 +7981,7 @@ public class GameActionUtil {
 					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
 					int numCards = hand.getCards().length;
 					if( numCards > 4 ) {
-						AllZone.GameAction.getPlayerLife(player).addLife(numCards-4);
+						AllZone.GameAction.gainLife(player, numCards - 4);
 					}
 				}
 			};//Ability
@@ -9304,9 +9277,7 @@ public class GameActionUtil {
 					CardList hondlist = new CardList();
 					hondlist.addAll(Play.getCards());
 					hondlist = hondlist.getType("Shrine");
-					for(int j = 0; j < hondlist.size(); j++) {
-						AllZone.GameAction.getPlayerLife(player).addLife(2);
-					}
+					AllZone.GameAction.gainLife(player, 2*hondlist.size());
 				}
 			};
 			ability.setStackDescription(list.get(i) + " - " + list.get(i).getController()
@@ -13363,13 +13334,12 @@ public class GameActionUtil {
 				// Gain life for new Essence Wardens
 				n[0] += newWarden.size();
 
-				final PlayerLife life = AllZone.GameAction.getPlayerLife(wardenList.get(
-						outer).getController());
+				final String player = wardenList.get(outer).getController();
 				SpellAbility ability = new Ability(new Card(),
 						"0") {
 					@Override
 					public void resolve() {
-						life.addLife(n[0]);
+						AllZone.GameAction.gainLife(player, n[0]);
 					}
 				};
 				ability.setStackDescription(wardenList.get(outer).getName()
@@ -13443,14 +13413,14 @@ public class GameActionUtil {
 				// Gain life for new Soul Wardens
 				n[0] += newWarden.size();
 
-				final PlayerLife life = AllZone.GameAction.getPlayerLife(wardenList.get(
-						outer).getController());
+				final String player = wardenList.get(outer).getController();
+				
 				SpellAbility ability = new Ability(new Card(),
 						"0") {
 
 					@Override
 					public void resolve() {
-						life.addLife(n[0]);
+						AllZone.GameAction.gainLife(player, n[0]);
 					}
 				};
 				ability.setStackDescription(wardenList.get(outer).getName()
@@ -13524,14 +13494,13 @@ public class GameActionUtil {
 				// Gain life for new Soul's Attendants
 				n[0] += newWarden.size();
 
-				final PlayerLife life = AllZone.GameAction.getPlayerLife(wardenList.get(
-						outer).getController());
+				final String player = wardenList.get(outer).getController();
 				SpellAbility ability = new Ability(new Card(),
 						"0") {
 
 					@Override
 					public void resolve() {
-						life.addLife(n[0]);
+						AllZone.GameAction.gainLife(player, n[0]);
 					}
 				};
 				ability.setStackDescription(wardenList.get(outer).getName()
@@ -13674,13 +13643,12 @@ public class GameActionUtil {
 				}
 
 				// Ability
-				final PlayerLife life = AllZone.GameAction.getPlayerLife(player);
 				SpellAbility ability = new Ability(new Card(),
 						"0") {
 
 					@Override
 					public void resolve() {
-						life.addLife(lifeGain[0]);
+						AllZone.GameAction.gainLife(player, lifeGain[0]);
 					}
 				};
 				ability.setStackDescription(angelicChorus.get(i).getName()

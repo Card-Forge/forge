@@ -3862,8 +3862,8 @@ public class CardFactoryUtil {
         	AllZone.GameAction.addDamage(dbPlayer, Src, X);
         
 
-        if(d[0].contains("GainLife")) 
-        	AllZone.GameAction.getPlayerLife(dbPlayer).addLife(X);
+        if(d[0].contains("GainLife"))
+        	AllZone.GameAction.gainLife(dbPlayer, X);
 
         if(d[0].contains("LoseLife")) 
         	AllZone.GameAction.getPlayerLife(dbPlayer).subtractLife(X,Src);

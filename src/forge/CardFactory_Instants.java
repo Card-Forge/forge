@@ -1483,8 +1483,7 @@ public class CardFactory_Instants {
                 private static final long serialVersionUID = 7699412574052780825L;
                     
                 public void execute() {
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                    life.addLife(2);
+                	AllZone.GameAction.gainLife(card.getController(), 2);
                 }
             });
         }//*************** END ************ END **************************
@@ -1506,8 +1505,7 @@ public class CardFactory_Instants {
                         }
                     });
                     
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(getTargetPlayer());
-                    life.addLife(4 + (4 * count.size()));
+                    AllZone.GameAction.gainLife(getTargetPlayer(), 4 + (4 * count.size()));
                 }
             };
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetComputer());
@@ -2676,8 +2674,8 @@ public class CardFactory_Instants {
     					for(int i = 0; i < Sacrificed.getNetAttack(); i++) {
     						AllZone.GameAction.drawCard(card.getController());
     					}
-                        PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                        life.addLife(Sacrificed.getNetDefense());
+                        AllZone.GameAction.gainLife(card.getController(), Sacrificed.getNetDefense());
+                        
     				}
                   }
                 
@@ -4122,7 +4120,7 @@ public class CardFactory_Instants {
       				  CardList attackers = new CardList();
       				  attackers.addAll(AllZone.Combat.getAttackers());
       				  attackers.addAll(AllZone.pwCombat.getAttackers());
-      				  AllZone.GameAction.getPlayerLife(card.getController()).addLife(attackers.size());
+      				  AllZone.GameAction.gainLife(card.getController(), attackers.size());
       			  }
       		}
   			public boolean canPlayAI()
@@ -4207,7 +4205,7 @@ public class CardFactory_Instants {
 
   			  public void resolve()
       		  {
-  				  AllZone.GameAction.getPlayerLife(card.getController()).addLife(card.getXManaCostPaid() + 3);
+  				  AllZone.GameAction.gainLife(card.getController(), card.getXManaCostPaid() + 3);
       			  card.setXManaCostPaid(0);
       		  }
       		  
@@ -4741,7 +4739,7 @@ public class CardFactory_Instants {
 					}
 
 					AllZone.GameAction.getPlayerLife(tPlayer).subtractLife(X,card);
-					AllZone.GameAction.getPlayerLife(player).addLife(X);
+					AllZone.GameAction.gainLife(player, X);
 					card.setXManaCostPaid(0);
 				}
 				

@@ -283,9 +283,7 @@ class CardFactory_Equipment {
                 @Override
                 public void resolve() {
                     card.subtractCounter(Counters.CHARGE, 1);
-                    String player = card.getController();
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-                    life.addLife(2);
+                    AllZone.GameAction.gainLife(card.getController(), 2);
                 }
                 
                 @Override

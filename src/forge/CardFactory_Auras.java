@@ -215,9 +215,7 @@ class CardFactory_Auras {
                     if(AllZone.GameAction.isCardInPlay(c)) {
                         //AllZone.getZone(c).remove(c);
                         AllZone.GameAction.sacrifice(c);
-                        
-                        PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
-                        life.addLife(1);
+                        AllZone.GameAction.gainLife(c.getController(), 1);
                     }
                 }//resolve
                 

@@ -1313,9 +1313,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     int n = countArtifacts();
                     
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                    life.addLife(3 * n);
-                    
+                    AllZone.GameAction.gainLife(card.getController(), 3 * n);
                 }
                 
                 int countArtifacts() {
@@ -1346,8 +1344,8 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     Card c = card;
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
-                    life.addLife(2);
+
+                    AllZone.GameAction.gainLife(c.getController(), 2);
                 }
             };
             Command intoPlay = new Command() {
@@ -1367,9 +1365,8 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    Card c = card;
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
-                    life.addLife(5);
+					Card c = card;
+                    AllZone.GameAction.gainLife(c.getController(), 5);
                 }
             };
             Command intoPlay = new Command() {
@@ -1393,8 +1390,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     Card c = card;
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
-                    life.addLife(4);
+                    AllZone.GameAction.gainLife(c.getController(), 4);
                 }
             };
             Command intoPlay = new Command() {
@@ -1684,8 +1680,7 @@ public class CardFactory_Creatures {
                         //AllZone.getZone(c).remove(c);
                         AllZone.GameAction.sacrifice(c);
                         
-                        PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
-                        life.addLife(1);
+                        AllZone.GameAction.gainLife(c.getController(), 1);
                     }
                 }//resolve
                 
@@ -1931,8 +1926,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     Card c = card;
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
-                    life.addLife(3);
+                    AllZone.GameAction.gainLife(c.getController(), 3);
                 }
             };
             Command intoPlay = new Command() {
@@ -2299,10 +2293,9 @@ public class CardFactory_Creatures {
                     String opponent = AllZone.GameAction.getOpponent(card.getController());
                     
                     PlayerLife opp = AllZone.GameAction.getPlayerLife(opponent);
-                    PlayerLife my = AllZone.GameAction.getPlayerLife(card.getController());
                     
                     opp.subtractLife(5,card);
-                    my.addLife(5);
+                    AllZone.GameAction.gainLife(card.getController(), 5);
                 }
             };
             Command destroy = new Command() {
@@ -2462,7 +2455,7 @@ public class CardFactory_Creatures {
                     String opponent = AllZone.GameAction.getOpponent(card.getController());
                     AllZone.GameAction.getPlayerLife(opponent).subtractLife(2,card);
                     
-                    AllZone.GameAction.getPlayerLife(card.getController()).addLife(2);
+                    AllZone.GameAction.gainLife(card.getController(), 2);
                 }
             };
             Command intoPlay = new Command() {
@@ -5239,8 +5232,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     int number = ((Integer) countZubera.execute()).intValue();
                     
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(getTargetPlayer());
-                    life.addLife(number * 2);
+                    AllZone.GameAction.gainLife(getTargetPlayer(), number*2);
                 }//resolve()
             };//SpellAbility
             
@@ -8160,9 +8152,8 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                    life.addLife(3);
-                    
+                	AllZone.GameAction.gainLife(card.getController(), 3);
+
                     AllZone.GameAction.sacrifice(card);
                 }//resolve()
             };//SpellAbility
@@ -8833,8 +8824,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     String opponent = AllZone.GameAction.getOpponent(card.getController());
                     AllZone.GameAction.getPlayerLife(opponent).subtractLife(2,card);
-                    
-                    AllZone.GameAction.getPlayerLife(card.getController()).addLife(2);
+                    AllZone.GameAction.gainLife(card.getController(), 2);
                     
                     //computer discards here, todo: should discard when ability put on stack
                     if(card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.discardRandom(Constant.Player.Computer, this);
@@ -9603,43 +9593,11 @@ public class CardFactory_Creatures {
             destroy.setBeforePayMana(target);
             destroy.setBeforePayMana(CardFactoryUtil.input_targetCreature(destroy));
         }//*************** END ************ END **************************
-        
+
         
         //*************** START *********** START **************************
         else if(cardName.equals("Ghost-Lit Redeemer")) {
-            final SpellAbility ability = new Ability_Tap(card, "W") {
-                private static final long serialVersionUID = -7119153679100849498L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return AllZone.Phase.getPhase().equals(Constant.Phase.Main2);
-                }
-                
-                @Override
-                public void resolve() {
-                    Card c = card;
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
-                    life.addLife(2);
-                }
-            };//SpellAbility
-            card.addSpellAbility(ability);
-            ability.setDescription("W, tap: You gain 2 life");
-            ability.setStackDescription("Computer gains 2 life");
-            
-            final Command paid = new Command() {
-                private static final long serialVersionUID = 3649597692883194760L;
-                
-                public void execute() {
-                    Card c = card;
-                    c.tap();
-                    AllZone.Human_Play.updateObservers();//so the card will tap at the correct time
-                    
-                    ability.setStackDescription(c.getController() + " gains 2 life");
-                    AllZone.Stack.add(ability);
-                    AllZone.InputControl.resetInput();
-                }
-            };
-            ability.setBeforePayMana(new Input_PayManaCost_Ability(ability.getManaCost(), paid, Command.Blank));
+			// Does not have Channel Ability
         }//*************** END ************ END **************************
         
         
@@ -11313,11 +11271,8 @@ public class CardFactory_Creatures {
                     if(!AllZone.GameAction.isCardInPlay(c)) return;
                     
                     if(AllZone.GameAction.isCardInPlay(c)) {
-                        //AllZone.getZone(c).remove(c);
                         AllZone.GameAction.sacrifice(c);
-                        
-                        PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
-                        life.addLife(2);
+                        AllZone.GameAction.gainLife(c.getController(), 2);
                     }
                 }//resolve
                 
@@ -11670,8 +11625,7 @@ public class CardFactory_Creatures {
                         lifeGain = CardFactoryUtil.getNumberOfPermanentsByColor(color);
                     }
                     
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                    life.addLife(lifeGain);
+                    AllZone.GameAction.gainLife(card.getController(), lifeGain);
                 }
                 
                 @Override
@@ -11766,8 +11720,7 @@ public class CardFactory_Creatures {
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                    life.addLife(3);
+                    AllZone.GameAction.gainLife(card.getController(), 3);
                 }
             };
             
@@ -11790,8 +11743,7 @@ public class CardFactory_Creatures {
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                    life.addLife(1);
+                    AllZone.GameAction.gainLife(card.getController(), 1);
                 }
             };
             
@@ -11814,8 +11766,7 @@ public class CardFactory_Creatures {
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                    life.addLife(2);
+                	AllZone.GameAction.gainLife(card.getController(), 2);
                 }
             };
             
@@ -13725,8 +13676,7 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = 5588978023269625349L;
                 
                 public void execute() {
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                    life.addLife(2);
+                	AllZone.GameAction.gainLife(card.getController(), 2);
                 }
             };
             
@@ -16300,8 +16250,7 @@ public class CardFactory_Creatures {
                     SpellAbility ability = new Ability(card, "0") {
                         @Override
                         public void resolve() {
-                            String player = abilityComes.getTargetPlayer();
-                            AllZone.GameAction.getPlayerLife(player).addLife(6);
+                            AllZone.GameAction.gainLife(abilityComes.getTargetPlayer(), 6);
                             
                         }//resolve()
                     };//SpellAbility
@@ -16332,8 +16281,7 @@ public class CardFactory_Creatures {
                     int drain = list.size();
                     AllZone.GameAction.getPlayerLife(AllZone.GameAction.getOpponent(card.getController())).subtractLife(
                             drain,card);
-                    AllZone.GameAction.getPlayerLife(card.getController()).addLife(drain);
-                    
+                    AllZone.GameAction.gainLife(card.getController(), drain);               
                 }//resolve()
             };
             abilityComes.setStackDescription(card
@@ -16955,8 +16903,7 @@ public class CardFactory_Creatures {
                     final Ability ability = new Ability(card, "0") {
                         @Override
                         public void resolve() {
-                            String player = card.getController();
-                            AllZone.GameAction.getPlayerLife(player).addLife(1);
+                            AllZone.GameAction.gainLife(card.getController(), 1);
                         }
                     };
                     ability.setStackDescription(card.getName() + " - " + card.getController() + " gains 1 life.");
@@ -17304,7 +17251,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     int lifeGain = card.getCounters(Counters.AGE) * 2;
-                    AllZone.GameAction.getPlayerLife(card.getController()).addLife(lifeGain);
+                    AllZone.GameAction.gainLife(card.getController(), lifeGain);
                 }
             };
             
@@ -17612,7 +17559,7 @@ public class CardFactory_Creatures {
         	final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                	AllZone.GameAction.getPlayerLife(card.getController()).addLife(card.getMultiKickerMagnitude() * 2);
+                	AllZone.GameAction.gainLife(card.getController(), card.getMultiKickerMagnitude() * 2);
                     card.setMultiKickerMagnitude(0);
                 }
             };
@@ -18167,19 +18114,16 @@ public class CardFactory_Creatures {
 
         		@Override
         		public void resolve() {
-        			//AllZone.GameAction.drawCard(sourceCard.getController());
         			final String target = getTargetPlayer();
         			PlayerLife targetLife = AllZone.GameAction.getPlayerLife(target);
-        			final String player = card.getController();
-        			PlayerLife playerLife = AllZone.GameAction.getPlayerLife(player);
         			
         			AllZone.GameAction.sacrifice(card);
         			
         			targetLife.subtractLife(1,card);
-        			playerLife.addLife(1);        			
+        			AllZone.GameAction.gainLife(card.getController(), 1);   			
         		}
         	};
-        	//ability.setDescription("1, Sacrifice " + cardName + ": Draw a card.");
+
         	//ability.setStackDescription(cardName + " - Target player loses 1 life and controller gains 1 life.");
         	card.addSpellAbility(ability);
         	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
@@ -19341,8 +19285,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                 	if (card.getCounters(Counters.P1P1) > 0){
                 		card.subtractCounter(Counters.P1P1, 1);
-	                    PlayerLife life = AllZone.GameAction.getPlayerLife(getActivatingPlayer());
-	                    life.addLife(2);
+	                    AllZone.GameAction.gainLife(getActivatingPlayer(), 2);
                 	}
                 }//resolve
                 
@@ -19703,7 +19646,7 @@ public class CardFactory_Creatures {
         		}
 
         		public void resolve() {
-        			AllZone.GameAction.getPlayerLife(card.getController()).addLife(4);
+        			AllZone.GameAction.gainLife(card.getController(), 4);
         			AllZone.GameAction.sacrifice(getTargetCard());
         		}
         	};//SpellAbility

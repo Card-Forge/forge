@@ -1591,8 +1591,10 @@ public class GameAction {
                     				if(Whenever_Go(F_card,F_k) == true) 
                     					if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
     			          				PlayerLife life = AllZone.GameAction.getPlayerLife(F_TargetPlayer[F_Target]);
-    			        				if(F_Amount[0] > -1) life.addLife(F_Amount[0]);
-    			        				else life.subtractLife(F_Amount[0] * -1,F_card);
+    			        				if(F_Amount[0] > -1) 
+    			        					AllZone.GameAction.gainLife(F_TargetPlayer[F_Target], F_Amount[0]);
+    			        				else 
+    			        					life.subtractLife(F_Amount[0] * -1,F_card);
     			                      }
 
 			                      }
@@ -3902,6 +3904,24 @@ public class GameAction {
     	else
     		return AllZone.Computer_PoisonCounter.getPoisonCounters();
 	}
+    
+    public void gainLife(String player, int lifeGained){
+    	PlayerLife p = getPlayerLife(player); 
+    	p.addLife(lifeGained);
+    	
+    	Object[] Life_Whenever_Parameters = new Object[1];
+    	Life_Whenever_Parameters[0] = lifeGained;
+    	AllZone.GameAction.CheckWheneverKeyword(p.getPlayerCard(), "GainLife", Life_Whenever_Parameters);
+    }
+    
+    public void loseLife(String player, int lifeLost){
+    	PlayerLife p = getPlayerLife(player); 
+    	p.payLife(lifeLost);
+    	
+    	Object[] Life_Whenever_Parameters = new Object[1];
+    	Life_Whenever_Parameters[0] = lifeLost;
+    	AllZone.GameAction.CheckWheneverKeyword(p.getPlayerCard(), "LoseLife", Life_Whenever_Parameters);
+    }
     
     public void searchLibraryLand(String type, String player, String Zone1, boolean tapLand) {
     	searchLibraryTwoLand(type, player, Zone1, tapLand, "", false);

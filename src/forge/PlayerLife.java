@@ -8,16 +8,18 @@ public class PlayerLife extends MyObservable implements java.io.Serializable
 	private int life;
     private int assignedDamage;//from combat
     
-    public void setAssignedDamage(int n)   {assignedDamage = n;}
-    public int  getAssignedDamage()        {return assignedDamage;}
+    public void setPlayerCard(Card playerCard)	{	this.playerCard = playerCard; }
+	public Card getPlayerCard() 				{	return playerCard; 	}
+	public void setAssignedDamage(int n)   		{	assignedDamage = n; }
+    public int  getAssignedDamage()        		{	return assignedDamage; }
     
     public PlayerLife(String pl)
     {
     	player = pl;
     	if (player.equals(Constant.Player.Human))
-    		playerCard = AllZone.CardFactory.HumanNullCard;
+    		setPlayerCard(AllZone.CardFactory.HumanNullCard);
     	else
-    		playerCard = AllZone.CardFactory.ComputerNullCard;
+    		setPlayerCard(AllZone.CardFactory.ComputerNullCard);
     }
     
     public int getLife()
@@ -33,9 +35,6 @@ public class PlayerLife extends MyObservable implements java.io.Serializable
     public void addLife(int life2)
     {
     	life += life2;
-    	Object[] Life_Whenever_Parameters = new Object[1];
-    	Life_Whenever_Parameters[0] = life2;
-    	AllZone.GameAction.CheckWheneverKeyword(playerCard, "GainLife", Life_Whenever_Parameters);
     	this.updateObservers();
     }
     public void subtractLife(int life2, Card SourceCard)
@@ -51,7 +50,7 @@ public class PlayerLife extends MyObservable implements java.io.Serializable
     	this.updateObservers();
     }
 
-    public void payLife(int life2)
+    public void payLife(int life2)	// change this to subtractLife
     {
     	life -= life2;
     	this.updateObservers();

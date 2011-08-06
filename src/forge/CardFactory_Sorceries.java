@@ -1207,8 +1207,7 @@ public class CardFactory_Sorceries {
                         AllZone.GameAction.drawCard(card.getController());
                     }
 					// Player Gains 5 Life
-			        PlayerLife playerlife = AllZone.GameAction.getPlayerLife(card.getController());                   
-			        playerlife.addLife(5);
+                    AllZone.GameAction.gainLife(card.getController(), 5);
 			     
 				} // Resolve
 
@@ -1242,11 +1241,10 @@ public class CardFactory_Sorceries {
 
 				@Override
                 public void resolve() {
-			        PlayerLife player = AllZone.GameAction.getPlayerLife(card.getController());
                     String opponent = AllZone.GameAction.getOpponent(card.getController());
                     PlayerLife target = AllZone.GameAction.getPlayerLife(opponent);
 			        target.subtractLife(2,card);
-			        player.addLife(2);
+			        AllZone.GameAction.gainLife(card.getController(), 2);
 				}
                 
                 public boolean canPlayAI() {
@@ -1842,7 +1840,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
                     PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                    life.addLife(10);
+                    AllZone.GameAction.gainLife(card.getController(), 10);
                     
                     String opponent = AllZone.GameAction.getOpponent(card.getController());
                     PlayerLife oppLife = AllZone.GameAction.getPlayerLife(opponent);
@@ -3859,13 +3857,11 @@ public class CardFactory_Sorceries {
                     AllZone.GameAction.discard(c2, null);
                     
                     if(c1.getType().contains("Land")) {
-                        PlayerLife life = AllZone.GameAction.getPlayerLife(Constant.Player.Human);
-                        life.addLife(3);
+                    	AllZone.GameAction.gainLife(Constant.Player.Human, 3);
                     }
                     
                     if(c2.getType().contains("Land")) {
-                        PlayerLife life = AllZone.GameAction.getPlayerLife(Constant.Player.Human);
-                        life.addLife(3);
+                    	AllZone.GameAction.gainLife(Constant.Player.Human, 3);
                     }
                     
 
@@ -3889,8 +3885,7 @@ public class CardFactory_Sorceries {
                         AllZone.GameAction.discard(c, null);
                         
                         if(c.getType().contains("Land")) {
-                            PlayerLife life = AllZone.GameAction.getPlayerLife(Constant.Player.Computer);
-                            life.addLife(3);
+                        	AllZone.GameAction.gainLife(Constant.Player.Computer, 3);
                         }
                         
                         if(list.size() > 0) {
@@ -3906,8 +3901,7 @@ public class CardFactory_Sorceries {
                             AllZone.GameAction.discard(c2, null);
                             
                             if(c2.getType().contains("Land")) {
-                                PlayerLife life = AllZone.GameAction.getPlayerLife(Constant.Player.Computer);
-                                life.addLife(3);
+                            	AllZone.GameAction.gainLife(Constant.Player.Computer, 3);
                             }
                         }
                     }
@@ -5854,9 +5848,7 @@ public class CardFactory_Sorceries {
 
   			  public void resolve()
       		  {
-      		      String player = getTargetPlayer();
-      			  
-      		      AllZone.GameAction.getPlayerLife(player).addLife(card.getXManaCostPaid());
+  				  AllZone.GameAction.gainLife(getTargetPlayer(), card.getXManaCostPaid());
       		      card.setXManaCostPaid(0);
       		  }
       		  
@@ -5985,7 +5977,8 @@ public class CardFactory_Sorceries {
         		{
         			AllZone.GameAction.mill(getTargetPlayer(),card.getXManaCostPaid());
         			
-        			AllZone.GameAction.getPlayerLife(card.getController()).addLife(card.getXManaCostPaid());
+        			AllZone.GameAction.gainLife(card.getController(), card.getXManaCostPaid());
+        			
         			card.setXManaCostPaid(0);
         		}
       		  
@@ -6983,8 +6976,7 @@ public class CardFactory_Sorceries {
                                     lib.add(tgt); //add to top if lib is empty
                                 }
                             }//else
-                            PlayerLife life = AllZone.GameAction.getPlayerLife(tgt.getController());
-                            life.addLife(3);
+                            AllZone.GameAction.gainLife(tgt.getController(), 3);
                         }
                     }//if isCardInPlay() && canTarget()
                 }//resolve()

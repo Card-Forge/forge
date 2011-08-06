@@ -118,8 +118,7 @@ class CardFactory_Lands {
                 @Override
                 public void resolve() {
                     Card c = card;
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
-                    life.addLife(2);
+                    AllZone.GameAction.gainLife(c.getController(), 2);
                 }
             };
             Command intoPlay = new Command() {
@@ -486,8 +485,7 @@ class CardFactory_Lands {
                 public void resolve() {
                     Card c = card;
                     //c.tap();
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
-                    life.addLife(1);
+                    AllZone.GameAction.gainLife(c.getController(), 1);
                 }
             };
             Command intoPlay = new Command() {
@@ -3436,7 +3434,7 @@ class CardFactory_Lands {
                    
                     if(c != null) {
                         if(CardFactoryUtil.canTarget(card, c) && c.isCreature() ) {
-                        	AllZone.GameAction.getPlayerLife(c.getController()).addLife(c.getNetDefense());
+                        	AllZone.GameAction.gainLife(c.getController(), c.getNetDefense());
                            AllZone.GameAction.sacrifice(c);
                         }
                     }

@@ -149,7 +149,7 @@ public class QuestUtil {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.getPlayerLife(crd.getController()).addLife(1);
+                    AllZone.GameAction.gainLife(crd.getController(), 1);
                 }
             };
             c.addSpellAbility(ability);
