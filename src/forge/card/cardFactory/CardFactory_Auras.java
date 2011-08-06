@@ -1935,6 +1935,7 @@ class CardFactory_Auras {
             final String type = getAuraType(card);
             final boolean curse = isCurseAura(card);
             final boolean youControl = isTypeYouControl(card);
+            final boolean oppControl = isTypeOppControl(card);
             if ("" == type) {
                 Log.error("Problem in generic Aura code - type is null");
             }
@@ -1944,7 +1945,7 @@ class CardFactory_Auras {
                 @Override
                 public boolean canPlayAI() {
                     Player player;
-                    if (curse) {
+                    if (curse || oppControl) {
                         player = AllZone.HumanPlayer;
                     }
                     else {
@@ -2011,10 +2012,14 @@ class CardFactory_Auras {
                     sbTitle.append("Select target ").append(type.toLowerCase());
                     if (youControl) {
                         sbTitle.append(" you control");
+                    } else if (oppControl) {
+                        sbTitle.append(" an opponent controls");
                     }
                     CardList auraCandidates = new CardList();
                     if (youControl) {
                         auraCandidates = AllZoneUtil.getPlayerTypeInPlay(card.getController(), type);
+                    } else if (oppControl) {
+                        auraCandidates = AllZoneUtil.getPlayerTypeInPlay(card.getController().getOpponent(), type);
                     } else {
                         auraCandidates = AllZoneUtil.getTypeInPlay(type);
                     }
@@ -2598,6 +2603,17 @@ class CardFactory_Auras {
         for (String keyword:keywords) {
             if (keyword.startsWith("Enchant ")) {
                 if (keyword.endsWith("you control")) return true;
+            }
+        }
+        return false;
+    }
+    
+    //checks if the aura can only target the opponent's cards
+    private static boolean isTypeOppControl(final Card aura) {
+        ArrayList<String> keywords = aura.getKeyword();
+        for (String keyword:keywords) {
+            if (keyword.startsWith("Enchant ")) {
+                if (keyword.contains("an opponent controls")) return true;
             }
         }
         return false;
