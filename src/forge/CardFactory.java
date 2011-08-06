@@ -5702,6 +5702,36 @@ public class CardFactory implements NewConstants {
             };
             card.addComesIntoPlayCommand(intoPlay);
         }
+        
+        if(hasKeyword(card, "spMakeToken") != -1) {
+        	int n = hasKeyword(card, "spMakeToken");
+        	String parse = card.getKeyword().get(n).toString();
+            card.removeIntrinsicKeyword(parse);
+            final String[] k = parse.split("<>");
+            
+            SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -5286946184688616830L;
+
+				@Override
+            	public void resolve() {
+            		final int num = "X".equals(k[1]) ? CardFactoryUtil.xCount(card, card.getSVar("X")) : Integer.valueOf(k[1]);
+                    final String name = k[2];
+                    final String imageName = k[3];
+                    final String controller = (k[4].equals("Controller") ? card.getController() : AllZone.GameAction.getOpponent(card.getController()));
+                    final String manaCost = k[5];
+                    final String[] types = k[6].split(";");
+                    final int attack = Integer.valueOf(k[7]);
+                    final int defense = Integer.valueOf(k[8]);
+                    final String[] keywords = k[9].split(";");
+            		for(int i = 0; i < num; i ++ ){
+            			if(k[9].equals("None")) keywords[0] = "";
+                    	CardFactoryUtil.makeToken(name, imageName, controller, manaCost, types, attack, defense, keywords);
+                    }
+            	}
+            };
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//end MakeToken
         	
         //******************************************************************
         //************** Link to different CardFactories ******************* 
