@@ -51,7 +51,7 @@ public class Input_CombatDamage extends Input {
     //deals damage to player if needed
     public void damageCreatureAndPlayer() {
         Player player = AllZone.Combat.getDefendingPlayer();
-        if(player.equals("")) //this is a really bad hack, to allow raging goblin to attack on turn 1
+        if(null == player) //this is a really bad hack, to allow raging goblin to attack on turn 1
         	player = AllZone.ComputerPlayer;
         
         

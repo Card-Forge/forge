@@ -58,8 +58,8 @@ public class Input_FirstStrikeDamage extends Input {
     	AllZone.GameInfo.setResolvedFirstStrikeDamageThisCombat(true);
     	
         Player player = AllZone.Combat.getDefendingPlayer();
-        if(player.equals("")) //this is a really bad hack, to allow raging goblin to attack on turn 1
-        player = AllZone.ComputerPlayer;
+        if(null == player) //this is a really bad hack, to allow raging goblin to attack on turn 1
+        	player = AllZone.ComputerPlayer;
         
         HashMap<Card, Integer> defMap = AllZone.Combat.getDefendingFirstStrikeDamageMap();
         
