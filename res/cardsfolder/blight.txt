@@ -1,8 +1,10 @@
 Name:Blight
 ManaCost:B B
 Types:Enchantment Aura
-Text:When enchanted land becomes tapped, destroy it.
+Text:no text
 K:Enchant Land Curse
+T:Mode$ Taps | ValidCard$ Card.AttachedBy | Execute$ TrigDestroy | TriggerDescription$ When enchanted land becomes tapped, destroy it.
+SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredCard
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blight.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/6.jpg

@@ -2131,16 +2131,11 @@ public class Card extends MyObservable {
     }
     
     public void tap() {
-    	if (isUntapped())
-    	{
-    		GameActionUtil.executeTapSideEffects(this);
-    		
+    	if (isUntapped()) {
     		//Run triggers
     		HashMap<String,Object> runParams = new HashMap<String,Object>();
     		runParams.put("Card", this);
     		AllZone.TriggerHandler.runTrigger("Taps", runParams);
-
-
     	}
     	setTapped(true);
     }

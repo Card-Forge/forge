@@ -115,40 +115,6 @@ public class GameActionUtil {
     	AllZone.Stack.unfreezeStack();
 	}
 
-	public static void executeTapSideEffects(Card c) {
-		
-		AllZone.GameAction.checkWheneverKeyword(c,"BecomesTapped",null);
-		
-		//Blight can't be converted to triggers until AF_Destroy properly handles "Defined"
-		//which in turn requires lastKnownInfo to get Enchanted right, otherwise Parallax Dementia doesn't work
-		/*
-		 * Blight - When enchanted land becomes tapped, destroy it.
-		 */
-		if(c.isEnchantedBy("Blight")) {
-			ArrayList<Card> blights = c.getEnchantedBy();
-			final Card target = c;
-			for(int i = 0; i < blights.size(); i++) {
-				Card blight = blights.get(i);
-				if(blight.getName().equals("Blight")) {
-					Ability ability = new Ability(blight, "0") {
-						@Override
-						public void resolve() {
-							AllZone.GameAction.destroy(target);
-						}
-					};//Ability
-					
-					StringBuilder sb = new StringBuilder();
-					sb.append(blight.getName()).append(" - Destroy enchanted land.");
-					ability.setStackDescription(sb.toString());
-
-                    AllZone.Stack.addSimultaneousStackEntry(ability);
-
-				}
-			}
-		}//end Blight
-
-	}//end executeTapSideEffects()
-
 	public static void executePlayCardEffects(SpellAbility sa) {
 		// experimental:
 		// this method check for cards that have triggered abilities whenever a
