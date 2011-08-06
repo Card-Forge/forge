@@ -4857,7 +4857,24 @@ public class CardFactory implements NewConstants {
         if (card2 != null)
         	return postFactoryKeywords(card2);
         
-
+        //*************** START *********** START **************************
+        else if(cardName.equals("Pestilence") || cardName.equals("Pyrohemia")) {
+            SpellAbility spell = new Spell_Permanent(card) {
+                private static final long serialVersionUID = 7254358703158629514L;
+                
+                @Override
+                public boolean canPlayAI() {
+                	CardList creatures = AllZoneUtil.getCreaturesInPlay();
+                	return creatures.size() > 0;
+                }
+            };
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }
+        //*************** END ************ END *************************
+        
+        
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Bridge from Below")) {
             SpellAbility spell = new Spell_Permanent(card) {
