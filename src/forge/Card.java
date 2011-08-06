@@ -573,6 +573,12 @@ public class Card extends MyObservable {
                 }
             }
             
+            // CARDNAME can't be countered.
+            if (getKeyword().contains("CARDNAME can't be countered.") && !sb.toString().contains("CARDNAME can't be countered.")) {
+                if (sb.toString().endsWith(".") && !sb.toString().endsWith("\r\n")) sb.append("\r\n");
+                sb.append("CARDNAME can't be countered.\r\n");
+            }
+            
             // Cascade
             if (getKeyword().contains("Cascade") && !sb.toString().contains("Cascade")) {
                 if (sb.toString().endsWith(".") && !sb.toString().endsWith("\r\n")) sb.append("\r\n");
