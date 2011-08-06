@@ -1,0 +1,9 @@
+Name:Cabal Pit
+ManaCost:no cost
+Types:Land
+Text:no text
+K:paintap:1:B
+A:AB$Pump | Cost$ B T Sac<1/CARDNAME> | Tgt$TgtC | NumAtt$ -2|NumDef$-2 |Threshold$True|PrecostDesc$ Threshold - | SpellDescription$ Target creature gets -2/-2 until end of turn. Activate this ability only if seven or more cards are in your graveyard.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_pit.jpg
+End

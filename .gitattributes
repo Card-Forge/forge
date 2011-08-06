@@ -716,6 +716,7 @@ res/cardsfolder/burst_of_energy.txt -text svneol=native#text/plain
 res/cardsfolder/burst_of_speed.txt -text svneol=native#text/plain
 res/cardsfolder/cabal_archon.txt -text svneol=native#text/plain
 res/cardsfolder/cabal_coffers.txt -text svneol=native#text/plain
+res/cardsfolder/cabal_pit.txt -text svneol=native#text/plain
 res/cardsfolder/cabal_ritual.txt -text svneol=native#text/plain
 res/cardsfolder/cabal_torturer.txt -text svneol=native#text/plain
 res/cardsfolder/cackling_fiend.txt -text svneol=native#text/plain
