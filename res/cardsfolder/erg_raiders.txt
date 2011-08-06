@@ -1,0 +1,8 @@
+Name:Erg Raiders
+ManaCost:1 B
+Types:Creature Human Warrior
+Text:At the beginning of your end step, if CARDNAME didn't attack this turn, CARDNAME deals 2 damage to you unless it came under your control this turn.
+PT:2/3
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/erg_raiders.jpg
+End

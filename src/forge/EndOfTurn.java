@@ -20,9 +20,7 @@ public class EndOfTurn implements java.io.Serializable
 	  AllZone.GameAction.checkWheneverKeyword(AllZone.CardFactory.HumanNullCard,"BeginningOfEndStep",null);
 	  
     //Pyrohemia and Pestilence
-    CardList all = new CardList();
-    all.addAll(AllZone.Human_Battlefield.getCards());
-    all.addAll(AllZone.Computer_Battlefield.getCards());
+    CardList all = AllZoneUtil.getCardsInPlay();
 
     CardList creature = all.getType("Creature");
 
@@ -149,6 +147,23 @@ public class EndOfTurn implements java.io.Serializable
     		};
     		StringBuilder sb = new StringBuilder();
     		sb.append(vale.getName()).append(" changes controllers.");
+    		change.setStackDescription(sb.toString());
+    		
+    		AllZone.Stack.add(change);
+    	}
+    	if(c.getName().equals("Erg Raiders") && !c.getCreatureAttackedThisTurn() &&
+    			!(c.getTurnInZone() == AllZone.Phase.getTurn()) && AllZone.Phase.isPlayerTurn(c.getController())) {
+    		final Card raider = c;
+    		final SpellAbility change = new Ability(raider, "0") {
+    			@Override
+    			public void resolve() {
+    				if(AllZone.GameAction.isCardInPlay(raider)) {
+    					raider.getController().addDamage(2, raider);
+    				}
+    			}
+    		};
+    		StringBuilder sb = new StringBuilder();
+    		sb.append(raider.getName()).append(" deals 2 damage to controller.");
     		change.setStackDescription(sb.toString());
     		
     		AllZone.Stack.add(change);
