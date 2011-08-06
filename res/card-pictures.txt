@@ -38,6 +38,9 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+grave_defiler.jpg				http://www.wizards.com/global/images/magic/general/grave_defiler.jpg
+fallen_cleric.jpg				http://www.wizards.com/global/images/magic/general/fallen_cleric.jpg
+lord_of_the_undead.jpg			http://www.wizards.com/global/images/magic/general/lord_of_the_undead.jpg
 greater_mossdog.jpg				http://www.wizards.com/global/images/magic/general/greater_mossdog.jpg
 reanimate.jpg					http://www.wizards.com/global/images/magic/general/reanimate.jpg
 sound_the_call.jpg		http://www.wizards.com/global/images/magic/general/sound_the_call.jpg
