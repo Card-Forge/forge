@@ -696,12 +696,18 @@ public abstract class Player extends MyObservable{
     public abstract void discardUnless(int num, String uType, SpellAbility sa);
     
     public void mill(int n) {
+    	mill(n, Constant.Zone.Graveyard);
+    }
+    
+    public void mill(int n, String zone) {
     	CardList lib = AllZoneUtil.getPlayerCardsInLibrary(this);
 
     	int max = Math.min(n, lib.size());
 
+    	PlayerZone destination = AllZone.getZone(zone, this);
+    	
     	for(int i = 0; i < max; i++) {
-    		AllZone.GameAction.moveToGraveyard(lib.get(i));
+    		AllZone.GameAction.moveTo(destination, lib.get(i));
     	}
     }
     

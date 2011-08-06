@@ -5992,9 +5992,7 @@ public class GameActionUtil {
     	else if(c.getName().equals("Abyssal Specter")) opponent_Discard(c, 1);
     	else if(c.getName().equals("Hypnotic Specter")) opponent_Discard_Random(c, 1);
     	else if(c.getName().equals("Nicol Bolas")) playerCombatDamage_Nicol_Bolas(c);
-		else if(c.getName().equals("Goblin Lackey")) playerCombatDamage_Goblin_Lackey(c);
 		else if(c.getName().equals("Thieving Magpie")|| c.getName().equals("Lu Xun, Scholar General")) playerCombatDamage_Shadowmage_Infiltrator(c);
-		else if(c.getName().equals("Warren Instigator")) playerCombatDamage_Warren_Instigator(c);
 		else if(c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")) 
 			playerCombatDamage_Whirling_Dervish(c);
 		else if(AllZoneUtil.isCardInPlay("Living Artifact", player)) execute_Living_Artifact(player, damage);
@@ -6112,7 +6110,6 @@ public class GameActionUtil {
 		else if(c.getName().equals("Spawnwrithe")) playerCombatDamage_Spawnwrithe(c);
 		else if(c.getName().equals("Glint-Eye Nephilim") || c.getName().equals("Cold-Eyed Selkie")) playerCombatDamage_Glint_Eye_Nephilim(c);
 		else if(c.getName().equals("Hystrodon") && !c.isFaceDown()) playerCombatDamage_Hystrodon(c);
-		else if(c.getName().equals("Raven Guild Master") && !c.isFaceDown()) playerCombatDamage_Raven_Guild_Master(c);
 		else if(c.getName().equals("Slith Strider") || c.getName().equals("Slith Ascendant")
 				|| c.getName().equals("Slith Bloodletter") || c.getName().equals("Slith Firewalker")
 				|| c.getName().equals("Slith Predator")) playerCombatDamage_Slith(c);
@@ -6501,38 +6498,6 @@ public class GameActionUtil {
 		} // if
 	}
 
-	private static void playerCombatDamage_Raven_Guild_Master(Card c) {
-		final Player player = c.getController();
-		final Player opponent = player.getOpponent();
-
-		if(c.getNetAttack() > 0) {
-			Ability ability = new Ability(c, "0") {
-				@Override
-				public void resolve() {
-					PlayerZone lib = AllZone.getZone(Constant.Zone.Library, opponent);
-					PlayerZone exiled = AllZone.getZone(Constant.Zone.Exile, opponent);
-					CardList libList = new CardList(lib.getCards());
-
-					int max = 10;
-					if(libList.size() < 10) max = libList.size();
-
-					for(int i = 0; i < max; i++) {
-						Card c = libList.get(i);
-						lib.remove(c);
-						exiled.add(c);
-					}
-				}
-			};// ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("Raven Guild Master - ").append(opponent);
-			sb.append(" exiles the top ten cards of his or her library.");
-			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
-		}
-	}
-
 	private static void playerCombatDamage_May_draw(Card c) {
 		final Player player = c.getController();
 
@@ -6713,102 +6678,6 @@ public class GameActionUtil {
 		
 		AllZone.Stack.add(ability2);
 	}
-
-	private static void playerCombatDamage_Goblin_Lackey(Card c) {
-		if(c.getNetAttack() > 0) {
-			final Card card = c;
-			Ability ability2 = new Ability(c, "0") {
-				@Override
-				public void resolve() {
-					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-					PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-
-					CardList goblins = new CardList(hand.getCards());
-					//goblins = goblins.getType("Goblin");
-					goblins = goblins.filter(new CardListFilter() {
-
-						public boolean addCard(Card c) {
-							return (c.getType().contains("Goblin") || c.getKeyword().contains("Changeling"))
-							&& c.isPermanent();
-						}
-
-					});
-
-					if(goblins.size() > 0) {
-						if(card.getController().equals(AllZone.HumanPlayer)) {
-							Object o = GuiUtils.getChoiceOptional("Select a Goblin to put onto the battlefield",
-									goblins.toArray());
-
-							if(o != null) {
-								Card gob = (Card) o;
-								hand.remove(gob);
-								play.add(gob);
-							}
-						} else {
-							Card gob = goblins.get(0);
-							hand.remove(gob);
-							play.add(gob);
-						}
-					}
-				}
-			};
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append(c.getName()).append(" - ").append(c.getController());
-			sb.append(" puts a goblin onto the battlefield from his or her hand.");
-			ability2.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability2);
-		}
-	}
-
-	private static void playerCombatDamage_Warren_Instigator(Card c) {
-		if(c.getNetAttack() > 0) {
-			final Card card = c;
-			Ability ability2 = new Ability(c, "0") {
-				@Override
-				public void resolve() {
-					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-					PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-
-					CardList goblins = new CardList(hand.getCards());
-					//goblins = goblins.getType("Goblin");
-					goblins = goblins.filter(new CardListFilter() {
-
-						public boolean addCard(Card c) {
-							return (c.getType().contains("Goblin") || c.getKeyword().contains("Changeling"))
-							&& c.isCreature();
-						}
-
-					});
-
-					if(goblins.size() > 0) {
-						if(card.getController().equals(AllZone.HumanPlayer)) {
-							Object o = GuiUtils.getChoiceOptional("Select a Goblin to put onto the battlefield",
-									goblins.toArray());
-
-							if(o != null) {
-								Card gob = (Card) o;
-								hand.remove(gob);
-								play.add(gob);
-							}
-						} else {
-							Card gob = goblins.get(0);
-							hand.remove(gob);
-							play.add(gob);
-						}
-					}
-				}
-			};
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append(c.getName()).append(" - ").append(c.getController());
-			sb.append(" puts a goblin onto the battlefield from his or her hand.");
-			ability2.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability2);
-		}
-	}//warren instigator
 
 	private static void playerCombatDamage_Nicol_Bolas(Card c) {
 		final Player[] opp = new Player[1];

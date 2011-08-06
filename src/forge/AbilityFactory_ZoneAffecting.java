@@ -418,7 +418,11 @@ public class AbilityFactory_ZoneAffecting {
 		for(Player p : tgtPlayers)
 			sb.append(p.toString()).append(" ");
 		
-		sb.append("mills ");
+		String destination = af.getMapParams().get("Destination");
+		if (destination == null || destination.equals(Constant.Zone.Graveyard))
+			sb.append("mills ");
+		else if (destination.equals(Constant.Zone.Exile))
+			sb.append("exiles ");
 		sb.append(numCards);
 		sb.append(" card");
 		if(numCards != 1) sb.append("s");
@@ -514,9 +518,13 @@ public class AbilityFactory_ZoneAffecting {
 		else
 			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 		
+		String destination = params.get("Destination");
+		if (destination == null)
+			destination = Constant.Zone.Graveyard;
+		
 		for(Player p : tgtPlayers)
 			if (tgt == null || p.canTarget(af.getHostCard()))
-				p.mill(numCards);	
+				p.mill(numCards, destination);	
 
 		if (af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
