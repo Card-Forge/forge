@@ -90,8 +90,10 @@ public class AbilityFactory_Animate {
 		Card host = af.getHostCard();
 		Hashtable<String,String> svars = host.getSVars();
 
-		int power = AbilityFactory.calculateAmount(host, params.get("Power"), sa);
-		int toughness = AbilityFactory.calculateAmount(host, params.get("Toughness"), sa);
+		int power = -1;
+		if(params.containsKey("Power")) power = AbilityFactory.calculateAmount(host, params.get("Power"), sa);
+		int toughness = -1;
+		if(params.containsKey("Toughness")) toughness = AbilityFactory.calculateAmount(host, params.get("Toughness"), sa);
 		
 		boolean permanent = params.containsKey("Permanent") ? true : false;
 		final ArrayList<String> types = new ArrayList<String>();
@@ -128,7 +130,8 @@ public class AbilityFactory_Animate {
 		}
 		sb.append("become");
 		if(tgts.size() == 1) sb.append("s a");
-		sb.append(" ").append(power).append("/").append(toughness);
+		//if power is -1, we'll assume it's not just setting toughness
+		if(power != -1) sb.append(" ").append(power).append("/").append(toughness);
 		if(colors.size() > 0) sb.append(" ");
 		for(int i = 0; i < colors.size(); i++) {
 			sb.append(colors.get(i));
@@ -245,8 +248,10 @@ public class AbilityFactory_Animate {
 		Hashtable<String,String> svars = host.getSVars();
 
 		//AF specific params
-		int power = AbilityFactory.calculateAmount(host, params.get("Power"), sa);
-		int toughness = AbilityFactory.calculateAmount(host, params.get("Toughness"), sa);
+		int power = -1;
+		if(params.containsKey("Power")) power = AbilityFactory.calculateAmount(host, params.get("Power"), sa);
+		int toughness = -1;
+		if(params.containsKey("Toughness")) toughness = AbilityFactory.calculateAmount(host, params.get("Toughness"), sa);
 		
 		boolean permanent = params.containsKey("Permanent") ? true : false;
 		
@@ -360,8 +365,8 @@ public class AbilityFactory_Animate {
 	}
 
 	private static long doAnimate(Card c, AbilityFactory af, int power, int toughness, ArrayList<String> types, String colors, ArrayList<String> keywords) {
-		c.setBaseAttack(power);
-		c.setBaseDefense(toughness);
+		if(power != -1) c.setBaseAttack(power);
+		if(toughness != -1) c.setBaseDefense(toughness);
 
 		if(null != af && af.getMapParams().containsKey("OverwriteTypes")) c.clearAllTypes();
 		for(String r : types) {
