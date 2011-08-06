@@ -1,8 +1,8 @@
 Name:Countersquall
 ManaCost:U B
 Types:Instant
-Text:Counter target noncreature spell. It's controller loses 2 life.
-K:spCounter:Spell:Type(Non-Creature):Graveyard:CC-LoseLife(2)
+Text:no text
+A:SP$Counter | Cost$ U B | Type$ Spell | CounterValid$ Card.nonCreature|ExtraActions$CC-LoseLife(2) | SpellDescription$ Counter target noncreature spell. Its controller loses 2 life.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/countersquall.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/103.jpg

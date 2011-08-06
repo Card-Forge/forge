@@ -27,7 +27,7 @@ public class CardFactoryUtil {
      * 
      * AbilityFactory_CounterMagic has it's own version of this.
      */
-    
+    /*
     @Deprecated
     public static boolean spCounter_MatchSpellAbility(Card srcCard,SpellAbility sa,String[] splitRestrictions,String targetType)
     {
@@ -215,6 +215,7 @@ public class CardFactoryUtil {
         System.out.println("Success: " + Boolean.toString(fullResult));
 		return fullResult;
     }//spCounter_MatchSpellAbility
+    */
     
     public static Card AI_getMostExpensivePermanent(CardList list, final Card spell, boolean targeted) {
         CardList all = list;

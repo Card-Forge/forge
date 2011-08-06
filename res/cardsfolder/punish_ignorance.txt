@@ -1,8 +1,8 @@
 Name:Punish Ignorance
 ManaCost:W U U B
 Types:Instant
-Text:Counter target spell. It's controller loses 3 life and you gain 3 life.
-K:spCounter:Spell:None:Graveyard:CC-LoseLife(3) My-GainLife(3)
+Text:no text
+A:SP$Counter | Cost$W U U B | Type$Spell | Destination$Graveyard |ExtraActions$CC-LoseLife(3) My-GainLife(3) | SpellDescription$Counter target spell. Its controller loses 3 life and you gain 3 life.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/punish_ignorance.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/183.jpg

@@ -1,8 +1,8 @@
 Name:Undermine
 ManaCost:U U B
 Types:Instant
-Text:Counter target spell. It's controller loses 3 life.
-K:spCounter:Spell:None:Graveyard:CC-LoseLife(3)
+Text:no text
+A:SP$Counter | Cost$U U B | Type$Spell | ExtraActions$CC-LoseLife(3)|Destination$Graveyard | SpellDescription$Counter target spell. Its controller loses 3 life.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card23190.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/282.jpg

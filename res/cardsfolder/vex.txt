@@ -1,8 +1,8 @@
 Name:Vex
 ManaCost:2 U
 Types:Instant
-Text:Counter target spell. It's controller may draw a card.
-K:spCounter:Spell:None:Graveyard:CC-May-Draw(1)
+Text:no text
+A:SP$Counter | Cost$2 U | Type$Spell | Destination$Graveyard |ExtraActions$CC-May-Draw(1)| SpellDescription$Counter target spell. That spell's controller may draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vex.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/36.jpg

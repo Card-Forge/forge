@@ -1,8 +1,8 @@
 Name:Lay Bare
 ManaCost:2 U U
 Types:Instant
-Text:Counter target spell. Look at its controller's hand.
-K:spCounter:Spell:None:Graveyard:None:CC-RevealHand()
+Text:no text
+A:SP$Counter | Cost$2 U U | Type$Spell | Destination$Graveyard |ExtraActions$CC-RevealHand()| SpellDescription$Counter target spell. Look at its controller's hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lay_bare.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/74.jpg

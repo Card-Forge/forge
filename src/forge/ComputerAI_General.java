@@ -314,7 +314,7 @@ public class ComputerAI_General implements Computer {
     	
     	if (sas.length > 0){
     		if (topSA.getTarget() != null){
-    			ArrayList<Object> targets = topSA.getTarget().getTargets();
+    			//ArrayList<Object> targets = topSA.getTarget().getTargets();
 		    	// does it target me or something I own?
 		    	// can i protect it? can I counter it?
 		    	

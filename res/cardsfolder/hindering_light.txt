@@ -1,8 +1,9 @@
 Name:Hindering Light
 ManaCost:W U
 Types:Instant
-Text:Counter target spell that targets you or a permanent you control.\r\nDraw a card.
-K:spCounter:Spell:Targets(My,My-Land,My-Creature,My-Artifact,My-Enchantment,My-Planeswalker):Graveyard:My-Draw(1)
+Text:no text
+A:SP$Counter | Cost$ W U | Type$ Spell |SpellTarget$ Permanent.YouCtrl | SpellDescription$ Counter target spell that targets you or a permanent you control.  Draw a card.|SubAbility$SVar=DB
+SVar:DB:DB$Draw | NumCards$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hindering_light.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/173.jpg

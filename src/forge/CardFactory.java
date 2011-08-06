@@ -365,6 +365,8 @@ public class CardFactory implements NewConstants {
         	card.addComesIntoPlayCommand(sunburstCIP);
         	card.addLeavesPlayCommand(sunburstLP);
         }
+        //converted all to AbilityFactory
+        /*
         if(hasKeyword(card,"spCounter") != -1) {
     		ComputerAI_counterSpells2.KeywordedCounterspells.add(card.getName());
 
@@ -702,6 +704,8 @@ public class CardFactory implements NewConstants {
     		card.addSpellAbility(spell);
     		spell.setBeforePayMana(runtime);
     	}//spCounter
+    	*/
+    	
         // Support for using string variables to define Count$ for X or Y
         // Or just about any other String that a card object needs at any given time
 // TODO: To Be Removed 

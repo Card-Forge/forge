@@ -1,8 +1,8 @@
 Name:Dream Fracture
 ManaCost:1 U U
 Types:Instant
-Text:Counter target spell. Its controller draws a card.\r\nDraw a card.
-K:spCounter:Spell:None:Graveyard:My-Draw(1) CC-Draw(1)
+Text:no text
+A:SP$Counter | Cost$1 U U | Type$Spell | Destination$Graveyard |ExtraActions$My-Draw(1) CC-Draw(1)| SpellDescription$Counter target spell. Its controller draws a card.  Draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_fracture.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/19.jpg

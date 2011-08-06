@@ -175,7 +175,7 @@ public class AbilityFactory_CounterMagic {
 				}
 				else if(ActionID.startsWith("CC-")) {
 					ActionID = ActionID.substring(3);
-					Target = sa.getSourceCard().getController();
+					Target = tgtSA.getSourceCard().getController();
 				}
 
 				if(ActionID.startsWith("May-")) {
@@ -186,7 +186,7 @@ public class AbilityFactory_CounterMagic {
 				if(ActionID.equals("Draw")) {
 					if(isOptional) {
 						if(Target == AllZone.HumanPlayer) {
-							if(AllZone.Display.getChoice("Do you want to draw" + SplitActionParams[0] + "card(s)?","Yes","No").equals("Yes")) {
+							if(GameActionUtil.showYesNoDialog(source, "Do you want to draw " + SplitActionParams[0] + " card(s)?")) {
 								Target.drawCards(Integer.parseInt(SplitActionParams[0]));
 							}
 						}
@@ -205,12 +205,12 @@ public class AbilityFactory_CounterMagic {
 				else if(ActionID.equals("Discard")) {
 					if(isOptional) {
 						if(Target == AllZone.HumanPlayer) {
-							if(AllZone.Display.getChoice("Do you want to discard" + SplitActionParams[0] + "card(s)?","Yes","No").equals("Yes")) {
+							if(GameActionUtil.showYesNoDialog(source, "Do you want to discard " + SplitActionParams[0] + " card(s)?")) {
 								Target.discard(Integer.parseInt(SplitActionParams[0]), sa, true);
 							}
 						}
 						else {
-							//AI decisionmaking. Should take Madness cards and the like into account in the future.Right now always refuses to discard.
+							//AI decisionmaking. Should take Madness cards and the like into account in the future.  Right now always refuses to discard.
 						}
 					}
 					else {
@@ -220,7 +220,7 @@ public class AbilityFactory_CounterMagic {
 				else if(ActionID.equals("LoseLife")) {
 					if(isOptional) {
 						if(Target == AllZone.HumanPlayer) {
-							if(AllZone.Display.getChoice("Do you want to lose" + SplitActionParams[0] + "life?","Yes","No").equals("Yes")) {
+							if(GameActionUtil.showYesNoDialog(source, "Do you want to lose " + SplitActionParams[0] + " life?")) {
 								Target.loseLife(Integer.parseInt(SplitActionParams[0]), source);
 							}
 						}

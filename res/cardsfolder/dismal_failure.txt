@@ -1,8 +1,8 @@
 Name:Dismal Failure
 ManaCost:2 U U
 Types:Instant
-Text:Counter target spell. Its controller discards a card.
-K:spCounter:Spell:None:Graveyard:CC-Discard(1)
+Text:no text
+A:SP$Counter | Cost$2 U U | Type$Spell | Destination$Graveyard|ExtraActions$CC-Discard(1) | SpellDescription$Counter target spell. Its controller discards a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dismal_failure.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/39.jpg
