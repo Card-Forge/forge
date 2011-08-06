@@ -248,28 +248,12 @@ public class AbilityFactory_Token extends AbilityFactory {
 	}
 	
 	private String doStackDescription(SpellAbility sa) {
-		int finalPower,finalToughness,finalAmount;
 		
-		if(tokenPower.matches("[0-9][0-9]?")) {
-			finalPower = Integer.parseInt(tokenPower);
-		}
-		else {
-			finalPower = CardFactoryUtil.xCount(AF.getHostCard(), tokenPower);
-		}
+		int finalPower = AbilityFactory.calculateAmount(AF.getHostCard(), tokenPower, sa);
 		
-		if(tokenToughness.matches("[0-9][0-9]?")) {
-			finalToughness = Integer.parseInt(tokenToughness);
-		}
-		else {
-			finalToughness = CardFactoryUtil.xCount(AF.getHostCard(), tokenToughness);
-		}
+		int finalToughness = AbilityFactory.calculateAmount(AF.getHostCard(), tokenToughness, sa);
 		
-		if(tokenAmount.matches("[0-9][0-9]?")) {
-			finalAmount = Integer.parseInt(tokenAmount);
-		}
-		else {
-			finalAmount = CardFactoryUtil.xCount(AF.getHostCard(),tokenAmount);
-		}
+		int finalAmount = AbilityFactory.calculateAmount(AF.getHostCard(), tokenAmount, sa);
 		
 		StringBuilder sb = new StringBuilder();
 		
@@ -344,31 +328,12 @@ public class AbilityFactory_Token extends AbilityFactory {
 		else {
 			controller = AF.getHostCard().getController().getOpponent();
 		}
+
+		int finalPower = AbilityFactory.calculateAmount(AF.getHostCard(), tokenPower, sa);
 		
-		int finalPower = 0;
-		int finalToughness = 0;
-		int finalAmount = 0;
+		int finalToughness = AbilityFactory.calculateAmount(AF.getHostCard(), tokenToughness, sa);
 		
-		if(tokenPower.matches("[0-9][0-9]?")) {
-			finalPower = Integer.parseInt(tokenPower);
-		}
-		else {
-			finalPower = CardFactoryUtil.xCount(AF.getHostCard(), tokenPower);
-		}
-		
-		if(tokenToughness.matches("[0-9][0-9]?")) {
-			finalToughness = Integer.parseInt(tokenToughness);
-		}
-		else {
-			finalToughness = CardFactoryUtil.xCount(AF.getHostCard(), tokenToughness);
-		}
-		
-		if(tokenAmount.matches("[0-9][0-9]?")) {
-			finalAmount = Integer.parseInt(tokenAmount);
-		}
-		else {
-			finalAmount = CardFactoryUtil.xCount(AF.getHostCard(),tokenAmount);
-		}
+		int finalAmount = AbilityFactory.calculateAmount(AF.getHostCard(), tokenAmount, sa);
 		
 		for(int i=0;i<finalAmount;i++) {
 			CardList tokens = CardFactoryUtil.makeToken(tokenName, imageName, controller, cost, tokenTypes, finalPower, finalToughness, tokenKeywords);
