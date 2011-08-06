@@ -64,6 +64,7 @@ Ancestral Mask
 Armadillo Cloak
 Asha's Favor
 Battle Mastery
+Beastmaster's Magemark
 Boar Umbra
 Fencer's Magemark
 Fencer's Magemark
@@ -75,9 +76,10 @@ Unquestioned Authority
 [/Group]
 
 [Group MaxCnt=1 Percentage=3]
+Celestial Mantle
+Epic Proportions
 Mammoth Umbra
 Serra's Embrace
-Epic Proportions
 Winds of Rath
 [/Group]
 
