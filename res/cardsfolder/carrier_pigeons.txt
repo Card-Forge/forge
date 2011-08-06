@@ -1,0 +1,12 @@
+Name:Carrier Pigeons
+ManaCost:3 W
+Types:Creature Bird
+Text:no text
+PT:1/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When Carrier Pigeons enters the battlefield, draw a card at the beginning of the next turn's upkeep.
+SVar:TrigDraw:AB$$Draw | Cost$0 | NumCards$ 1 | NextUpkeep$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/carrier_pigeons.jpg
+End
