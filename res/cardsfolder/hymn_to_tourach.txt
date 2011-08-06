@@ -2,7 +2,7 @@ Name:Hymn to Tourach
 ManaCost:B B
 Types:Sorcery
 Text:no text
-K:spDiscardTgt:AtRandom:2:Target player discards two cards at random.:Hymn to Tourach - target player discards cards
+A:SP$Discard|Cost$B B|ValidTgts$Player|TgtPrompt$Select target player.|NumCards$2|Mode$Random|SpellDescription$Target player discards two cards at random.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/fe/en-us/card1849.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/12.jpg

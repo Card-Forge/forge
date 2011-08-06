@@ -352,6 +352,17 @@ public class AbilityFactory {
 				SA = afControl.getSpell();
 		}
 		
+		if (API.equals("Discard")){
+			if (isAb)
+				SA = AbilityFactory_ZoneAffecting.createAbilityDiscard(this);
+			else if (isSp)
+				SA = AbilityFactory_ZoneAffecting.createSpellDiscard(this);
+			//else if (isDb)
+				//SA = AbilityFactory_ZoneAffecting.createDrawbackDiscard(this);
+			if(hasSubAbility())
+				SA.setSubAbility(getSubAbility());
+		}
+		
 		// *********************************************
 		// set universal properties of the SpellAbility
         if (hasSpDesc)

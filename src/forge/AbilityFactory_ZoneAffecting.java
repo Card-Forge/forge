@@ -476,5 +476,267 @@ public class AbilityFactory_ZoneAffecting {
 					 CardFactoryUtil.doDrawBack(DrawBack, 0, source.getController(), source.getController().getOpponent(), tgtPlayers.get(0), source, null, sa);
 			}
 		}
-	}	
+	}
+	
+	//////////////////////
+	//
+	//Discard stuff
+	//
+	//////////////////////
+	
+	//NumCards - the number of cards to be discarded (may be integer or X)
+	//Opponent - set to True if "target opponent" - hopefully will be obsolete soon
+	//Mode	- the mode of discard - should match spDiscard
+	//				-Random
+	//				-TgtChoose
+	//				-RevealYouChoose - not implemented yet
+	//				-Hand
+	//ValidDiscard - a ValidCards syntax for acceptable cards to discard - not implemented yet
+	
+	//Examples:
+	//A:SP$Discard | Cost$B | Tgt$TgtP | NumCards$2 | Mode$Random | SpellDescription$<...>
+	//A:AB$Discard | Cost$U | Opponent$True | Mode$RevealYouChoose | NumCards$X | SpellDescription$<...>
+	
+	public static SpellAbility createAbilityDiscard(final AbilityFactory AF) {
+		final SpellAbility abDraw = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+			private static final long serialVersionUID = 4348585353456736817L;
+			final AbilityFactory af = AF;
+			
+			@Override
+			public String getStackDescription() {
+				// when getStackDesc is called, just build exactly what is happening
+				return discardStackDescription(af, this);
+			}
+			
+			@Override
+			public boolean canPlay() {
+				// super takes care of AdditionalCosts
+				return super.canPlay();	
+			}
+			
+			@Override
+			public boolean canPlayAI() {
+				discardTargetAI(af);
+				return discardCanPlayAI(af, this);
+			}
+			
+			@Override
+			public void resolve() {
+				discardResolve(af, this);
+			}
+			
+		};
+		return abDraw;
+	}
+
+	public static SpellAbility createSpellDiscard(final AbilityFactory AF) {
+		final SpellAbility spDraw = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+			private static final long serialVersionUID = 4348585353456736817L;
+			final AbilityFactory af = AF;
+			
+			@Override
+			public String getStackDescription() {
+				// when getStackDesc is called, just build exactly what is happening
+				return discardStackDescription(af, this);
+			}
+			
+			@Override
+			public boolean canPlay() {
+				// super takes care of AdditionalCosts
+				return super.canPlay();	
+			}
+			
+			@Override
+			public boolean canPlayAI() {
+				discardTargetAI(af);
+				return discardCanPlayAI(af, this);
+			}
+			
+			@Override
+			public void resolve() {
+				discardResolve(af, this);
+			}
+			
+		};
+		return spDraw;
+	}
+	
+	private static void discardResolve(final AbilityFactory af, final SpellAbility sa){
+		Card source = sa.getSourceCard();
+		HashMap<String,String> params = af.getMapParams();
+		
+		boolean opp = params.containsKey("Opponent");
+		String mode = params.get("Mode");
+		
+		ArrayList<Player> tgtPlayers;
+
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtPlayers = tgt.getTargetPlayers();
+		else if(opp) {
+			/*
+			 * This may need to check that the opponent can be targeted.
+			 * I think, ideally, this is handled by something like ValidTgts$Player.Opponent
+			 * actually, canTarget is checked slightly below here...
+			 */
+			tgtPlayers = new ArrayList<Player>();
+			tgtPlayers.add(sa.getActivatingPlayer().getOpponent());
+		}
+		else{
+			tgtPlayers = new ArrayList<Player>();
+			tgtPlayers.add(sa.getActivatingPlayer());
+		}
+		
+		for(Player p : tgtPlayers)
+			if (tgt == null || p.canTarget(af.getHostCard())) {	
+				if(mode.equals("Hand")) {
+					p.discardHand(sa);
+				}
+				else {
+					int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
+					if(mode.equals("Random")) {
+						p.discardRandom(numCards, sa);
+					}
+					if(mode.equals("TgtChoose")) {
+						p.discard(numCards, sa);
+					}
+
+					if(mode.equals("RevealYouChoose")) {
+						//todo - this gets more complicted
+						//probably need ValidDiscard$Artifact,Creature.Blue like syntax
+					}
+				}
+			}
+
+		if (af.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+	     	   if (abSub.getParent() == null)
+	     		  abSub.setParent(sa);
+	     	   abSub.resolve();
+	        }
+	        else{
+				String DrawBack = params.get("SubAbility");
+				if (af.hasSubAbility())
+					 CardFactoryUtil.doDrawBack(DrawBack, 0, source.getController(), source.getController().getOpponent(), source.getController(), source, null, sa);
+	        }
+		}
+	}
+	
+	private static String discardStackDescription(AbilityFactory af, SpellAbility sa){
+		HashMap<String,String> params = af.getMapParams();
+		String mode = params.get("Mode");
+		Player player;
+		if(af.getAbTgt() == null) {
+			if(params.containsKey("Opponent")) {
+				player = sa.getActivatingPlayer().getOpponent();
+			}
+			else player = sa.getActivatingPlayer(); 
+		}
+		else {
+			player = sa.getTargetPlayer();
+		}
+		StringBuilder sb = new StringBuilder();
+		
+		if (!(sa instanceof Ability_Sub))
+			sb.append(sa.getSourceCard().getName()).append(" - ");
+		else
+			sb.append(" ");
+		
+		sb.append(player.toString());
+		sb.append(" discards (");
+		if(params.get("Mode").equals("Hand")) {
+			sb.append("Hand");
+		}
+		else sb.append(af.getMapParams().get("NumCards"));
+			
+		sb.append(")");
+		
+		if(mode.equals("Random"))
+			sb.append(" at random.");
+		else sb.append(".");
+		
+		Ability_Sub abSub = sa.getSubAbility();
+        if (abSub != null){
+        	abSub.setParent(sa);
+        	sb.append(abSub.getStackDescription());
+        }
+		
+		return sb.toString();
+	}
+	
+	private static boolean discardCanPlayAI(final AbilityFactory af, SpellAbility sa){
+		// AI cannot use this properly until he can use SAs during Humans turn
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+		
+		Target tgt = af.getAbTgt();
+		Card source = sa.getSourceCard();
+		Ability_Cost abCost = af.getAbCost();
+		
+		if (abCost != null){
+			// AI currently disabled for these costs
+			if (abCost.getSacCost()){
+				return false;
+			}
+			if (abCost.getLifeCost()){
+				if (AllZone.ComputerPlayer.getLife() - abCost.getLifeAmount() < 4)
+					return false;
+			}
+			if (abCost.getDiscardCost()) 	return false;
+			
+			if (abCost.getSubCounter()) {
+				if (abCost.getCounterType().equals(Counters.P1P1)) return false; // Other counters should be used 
+			}
+			
+		}
+			/*
+		///////////////////////////////////////////////////
+		//copied from spDiscard
+		
+		int nCards = Integer.parseInt(params.get("NumCards"));;
+    	
+    	CardList humanHand = AllZoneUtil.getPlayerHand(AllZone.HumanPlayer);
+    	int numHHand = humanHand.size();
+    	
+    	if (numHHand >= nCards)
+    	{
+    		if (Tgt)
+    			setTargetPlayer(AllZone.HumanPlayer);
+    		
+    		return true;
+    	}
+    		
+    	return false;
+    	
+    	//end copied
+		
+		if (!bFlag)
+			return false;
+		*/
+		if (tgt != null){
+			ArrayList<Player> players = tgt.getTargetPlayers();
+			if (players.size() > 0 && players.get(0).equals(AllZone.HumanPlayer))
+				return true;
+		}
+		
+		Random r = new Random();
+		boolean randomReturn = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
+		
+		// some other variables here, like handsize vs. maxHandSize
+
+        Ability_Sub subAb = sa.getSubAbility();
+        if (subAb != null)
+        	randomReturn &= subAb.chkAI_Drawback();
+		return randomReturn;
+	}
+	
+	private static boolean discardTargetAI(AbilityFactory af) {
+		Target tgt = af.getAbTgt();
+		if(tgt!= null) {
+			tgt.addTarget(AllZone.HumanPlayer);
+			return true;
+		}
+		return false;
+	}// discardTargetAI()
 }
