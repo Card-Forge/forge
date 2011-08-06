@@ -14,6 +14,9 @@ public class AbilityFactory_Token extends AbilityFactory {
 	private String tokenPower;
 	private String tokenToughness;
 	private String tokenImage;
+	private String[] tokenAbilities;
+	private String[] tokenTriggers;
+	private String[] tokenSVars;
 	private boolean tokenTapped;
 	private boolean tokenAttacking;
     
@@ -66,6 +69,31 @@ public class AbilityFactory_Token extends AbilityFactory {
 		else
 		{
 			tokenAttacking = false;
+		}
+		
+		if(mapParams.containsKey("TokenAbilities"))
+		{
+			tokenAbilities = mapParams.get("TokenAbilities").split(",");
+		}
+		else
+		{
+			tokenAbilities = null;
+		}
+		if(mapParams.containsKey("TokenTriggers"))
+		{
+			tokenTriggers = mapParams.get("TokenTriggers").split(",");
+		}
+		else
+		{
+			tokenTriggers = null;
+		}
+		if(mapParams.containsKey("TokenSVars"))
+		{
+			tokenSVars = mapParams.get("TokenSVars").split(",");
+		}
+		else
+		{
+			tokenSVars = null;
 		}
 		
 		tokenAmount = numTokens;
@@ -296,6 +324,62 @@ public class AbilityFactory_Token extends AbilityFactory {
 		
 		for(int i=0;i<finalAmount;i++) {
 			CardList tokens = CardFactoryUtil.makeToken(tokenName, imageName, controller, cost, tokenTypes, finalPower, finalToughness, tokenKeywords);
+			
+			//Grant abilities
+			if(tokenAbilities != null)
+			{
+				AbilityFactory af = new AbilityFactory();
+				for(String s : tokenAbilities)
+				{
+					String actualAbility = AF.getHostCard().getSVar(s);
+					for(Card c : tokens)
+					{
+						SpellAbility grantedAbility = af.getAbility(actualAbility, c);
+						c.addSpellAbility(grantedAbility);
+					}
+				}
+			}
+			
+			//Grant triggers
+			if(tokenTriggers != null)
+			{
+				
+				for(String s : tokenTriggers)
+				{
+					String actualTrigger = AF.getHostCard().getSVar(s);
+					
+					for(final Card c : tokens)
+					{
+						//Needs to do some voodoo when the token disappears to remove the triggers at the same time.
+						Command LPCommand = new Command() {
+
+							private static final long serialVersionUID = -9007707442828928732L;
+
+							public void execute() {
+								AllZone.TriggerHandler.removeAllFromCard(c);
+							}
+							
+						};
+						c.addLeavesPlayCommand(LPCommand);
+						Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c);
+						c.addTrigger(parsedTrigger);
+						AllZone.TriggerHandler.registerTrigger(parsedTrigger);
+					}
+				}
+			}
+			
+			//Grant SVars
+			if(tokenSVars != null)
+			{
+				for(String s : tokenSVars)
+				{
+					String actualSVar = AF.getHostCard().getSVar(s);
+					for(Card c : tokens)
+					{
+						c.setSVar(s, actualSVar);
+					}
+				}
+			}
 			
 			for(Card c : tokens)
 			{

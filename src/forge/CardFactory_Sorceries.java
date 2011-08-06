@@ -3896,38 +3896,7 @@ public class CardFactory_Sorceries {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Growth Spasm")) {
-            SpellAbility spell = new Spell(card) {
 
-				private static final long serialVersionUID = 9074719023825939855L;
-
-				@Override
-                public void resolve() {
-					AllZone.GameAction.searchLibraryBasicLand(card.getController(), 
-							Constant.Zone.Battlefield, true);
-					
-					CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card.getController(), "", new String[] {
-							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {});
-        			for (Card crd:cl)
-        				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));
-				}
-                
-                public boolean canPlayAI()
-                {
-                	PlayerZone library = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer);
-                	CardList list = new CardList(library.getCards());
-                	list = list.getType("Basic");
-                	return list.size() > 0;
-                }
-            };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************        
-        
-        
         //*************** START *********** START **************************
         else if(cardName.equals("All Is Dust")) {
         	/*

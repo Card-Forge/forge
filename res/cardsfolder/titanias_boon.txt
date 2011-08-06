@@ -1,4 +1,4 @@
-Name:Titanta's Boon
+Name:Titania's Boon
 ManaCost:3 G
 Types:Sorcery
 Text:no text

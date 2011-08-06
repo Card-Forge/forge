@@ -109,7 +109,6 @@ public class GameActionUtil {
 		upkeep_Verdant_Force();
 		upkeep_Dragon_Broodmother(); //put this before bitterblossom and mycoloth, so that they will resolve FIRST
 		upkeep_Goblin_Assault();
-		upkeep_Awakening_Zone();
 		upkeep_Nut_Collector();
 		
 		// Win / Lose	
@@ -8546,35 +8545,6 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}// for
 	}// upkeep_Goblin_Assault()
-	
-	private static void upkeep_Awakening_Zone() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Awakening Zone");
-
-		Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-			final Card crd = list.get(i);
-			ability = new Ability(list.get(i), "0") {
-				@Override
-				public void resolve() {
-					CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", crd.getController(), "", new String[] {
-							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {});
-					for (Card c:cl)
-						c.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(c));
-				}// resolve()
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("Awakening Zone - ").append(player);
-			sb.append(" puts a 0/1 colorless Eldrazi Spawn creature token onto the battlefield.");
-			ability.setStackDescription(sb.toString());
-
-			AllZone.Stack.add(ability);
-		}// for
-	}// upkeep_Awakening_Zone()
 	
 	private static void upkeep_Nut_Collector() {
 		final Player player = AllZone.Phase.getPlayerTurn();
