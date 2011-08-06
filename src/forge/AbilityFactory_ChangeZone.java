@@ -257,7 +257,10 @@ public class AbilityFactory_ChangeZone {
 		 if (origin.equals("Library")){
 			 sb.append("Search your library for ").append(params.get("ChangeNum")).append(" ").append(type).append(" and ");
 			 
-			 sb.append("put that card ");
+			 if (params.get("ChangeNum").equals("1"))
+				 sb.append("put that card ");
+			 else
+				 sb.append("put those cards ");
 			 
 			 if (destination.equals("Battlefield")){
 				 sb.append("onto the battlefield");

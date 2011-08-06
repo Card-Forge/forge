@@ -11516,7 +11516,7 @@ public class CardFactory_Creatures {
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if (cardName.equals("Yavimaya Elder")) {
     	        
@@ -11531,7 +11531,8 @@ public class CardFactory_Creatures {
     	        };
     	        card.addDestroyCommand(destroy);   	    
         }//*************** END ************ END **************************
-       
+       */
+        
         //*************** START *********** START **************************
           else if(cardName.equals("Sutured Ghoul")) {
         	  final int[] numCreatures = new int[1];
