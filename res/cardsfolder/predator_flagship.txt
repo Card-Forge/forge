@@ -1,0 +1,9 @@
+Name:Predator, Flagship
+ManaCost:5
+Types:Legendary Artifact
+Text:no text
+K:abPumpTgtC 2:Flying
+K:abDestroyTgtV 5 T:Creature.withFlying:Destroy target creature with flying.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/predator_flagship.jpg
+End
