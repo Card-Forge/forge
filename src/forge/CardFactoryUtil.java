@@ -1466,7 +1466,7 @@ public class CardFactoryUtil {
                 }
                 sourceCard.getController().shuffle();
             }
-            
+
         };
         StringBuilder sbDesc = new StringBuilder();
         sbDesc.append("Transmute (").append(abCost.toString());
@@ -3414,7 +3414,7 @@ public class CardFactoryUtil {
         	return doXMath(c.getCounters(Counters.getType(sq[1])), m);
         // Count$TimesKicked
         if(sq[0].contains("TimesKicked"))
-        	return c.getMultiKickerMagnitude();
+        	return doXMath(c.getMultiKickerMagnitude(), m);
         
         //Count$IfMainPhase.<numMain>.<numNotMain> // 7/10
         if (sq[0].contains("IfMainPhase"))
