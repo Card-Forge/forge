@@ -12626,9 +12626,9 @@ public class GameActionUtil
 			// for each zone found add +1/+1 to each card
 			for (int outer = 0; outer < zone.length; outer++)
 			{
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
+				CardList creature = new CardList(zone[outer].getCards());
+				//creature.addAll(AllZone.Human_Play.getCards());
+				//creature.addAll(AllZone.Computer_Play.getCards());
 				creature = creature.getType("Merfolk");
 
 				for (int i = 0; i < creature.size(); i++)
@@ -12654,22 +12654,17 @@ public class GameActionUtil
 		private static final long serialVersionUID = -179394803961615332L;
 		int otherLords=0;
 		
-		private int countOtherLords()
+		private int countOtherSovereigns(Card c)
 		{
-			PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
-			PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
-			CardList lords = new CardList();
-			lords.addAll(hPlay.getCards());
-			lords.addAll(cPlay.getCards());
-			lords = lords.getName("Merfolk Sovereign");
-			return lords.size()-1;
-
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+			CardList sovs = new CardList(play.getCards());
+			sovs = sovs.getName("Merfolk Sovereign");
+			return sovs.size()-1;
 		}
-
+		
 		public void execute()
 		{
 
-			
 			CardList creature = new CardList();
 			creature.addAll(AllZone.Human_Play.getCards());
 			creature.addAll(AllZone.Computer_Play.getCards());
@@ -12679,7 +12674,7 @@ public class GameActionUtil
 			for (int i = 0; i < creature.size(); i++)
 			{
 				Card c = creature.get(i);
-				otherLords = countOtherLords();
+				otherLords = countOtherSovereigns(c);
 				c.setOtherAttackBoost(otherLords);
 				c.setOtherDefenseBoost(otherLords);
 			}// for inner

@@ -2423,7 +2423,7 @@ Whenever a creature with shadow is put into a graveyard from the battlefield, pu
 Shadow
 
 Eternity Snare
-4 U
+5 U
 Enchantment Aura
 Enchanted creature doesn't untap during its controller's untap step.
 When this card comes into play, draw a card.
