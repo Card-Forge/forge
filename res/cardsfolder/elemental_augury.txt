@@ -1,5 +1,5 @@
 Name:Elemental Augury
-Manacost:U B R
+ManaCost:U B R
 Types:Enchantment
 Text:no text
 A:AB$RearrangeTopOfLibrary | Cost$ 3 | ValidTgts$ Player | TgtPrompt$ Choose target player. | NumCards$ 3 | SpellDescription$ Look at the top three cards of target player's library, then put them back in any order.

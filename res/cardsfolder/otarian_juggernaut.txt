@@ -1,6 +1,6 @@
 Name:Otarian Juggernaut
 ManaCost:4
-Types:Creature Juggernaut
+Types:Artifact Creature Juggernaut
 Text:no text
 PT:2/3
 K:CARDNAME can't be blocked by Walls.
