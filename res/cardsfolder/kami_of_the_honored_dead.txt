@@ -9,4 +9,5 @@ SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
 SVar:X:Count$TriggeredDamageAmount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_the_honored_dead.jpg
+SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/12.jpg
 End

@@ -9,4 +9,5 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 2 |
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/okiba_gang_shinobi.jpg
+SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/76.jpg
 End
