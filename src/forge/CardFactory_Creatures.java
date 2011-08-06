@@ -8229,7 +8229,7 @@ public class CardFactory_Creatures {
             ability.setStackDescription("Goldmeadow Lookout - Put a 1/1 token into play");
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if (cardName.equals("Stalking Assassin")) {
             
@@ -8347,7 +8347,7 @@ public class CardFactory_Creatures {
                     
                 }//canPlayAI
             };//SpellAbility
-            */
+            *
             
             //card.addSpellAbility(tap);
             //tap.setDescription("3 U, tap: Tap target creature.");
@@ -8357,7 +8357,7 @@ public class CardFactory_Creatures {
             destroy.setBeforePayMana(target);
             destroy.setBeforePayMana(CardFactoryUtil.input_targetCreature(destroy));
         }//*************** END ************ END **************************
-
+         */
         /*
         //*************** START *********** START **************************
         else if(cardName.equals("Marrow-Gnawer")) {
