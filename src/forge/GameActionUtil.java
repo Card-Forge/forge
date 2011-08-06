@@ -14890,68 +14890,6 @@ public class GameActionUtil {
 		}// execute()
 
 	}; 
-	/*
-	public static Command Kird_Ape                    = new Command() {
-		private static final long serialVersionUID = 3448725650293971110L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = AllZoneUtil.getCardsInPlay("Kird Ape");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				if(hasForest(c)) {
-					c.setBaseAttack(2);
-					c.setBaseDefense(3);
-				} else {
-					c.setBaseAttack(1);
-					c.setBaseDefense(1);
-				}
-			}
-		}// execute()
-
-		private boolean hasForest(Card c) {
-			CardList forests = AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Forest");
-			if(forests.size() > 0) return true;
-			else return false;
-		}
-	};
-	*/
-
-	public static Command Loam_Lion                   = new Command() {
-		private static final long serialVersionUID = -6996623102170747897L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Loam Lion");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				if(hasForest(c)) {
-					c.setBaseAttack(2);
-					c.setBaseDefense(3);
-				} else {
-					c.setBaseAttack(1);
-					c.setBaseDefense(1);
-				}
-			}
-		}// execute()
-
-		private boolean hasForest(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
-
-			CardList land = new CardList();
-			land.addAll(play.getCards());
-
-			land = land.getType("Forest");
-			if(land.size() > 0) return true;
-			else return false;
-		}
-	};
 
 	public static Command Vexing_Beetle               = new Command() {
 
@@ -21150,8 +21088,6 @@ public class GameActionUtil {
 		commands.put("Gaeas_Avenger", Gaeas_Avenger);
 		commands.put("Vexing_Beetle", Vexing_Beetle);
 		commands.put("Sejiri_Merfolk", Sejiri_Merfolk);
-		//commands.put("Kird_Ape", Kird_Ape);
-		commands.put("Loam_Lion", Loam_Lion);
 		commands.put("Sedge_Troll", Sedge_Troll);
 		commands.put("Hedge_Troll", Hedge_Troll);
 		commands.put("Wild_Nacatl", Wild_Nacatl);

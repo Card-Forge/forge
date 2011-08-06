@@ -85,8 +85,6 @@ public class StaticEffects
 		cardToEffectsList.put("Serpent of the Endless Sea", new String[] {"Serpent_of_the_Endless_Sea"});
 		cardToEffectsList.put("Vexing Beetle", new String[] {"Vexing_Beetle"});
 		cardToEffectsList.put("Sejiri Merfolk", new String[] {"Sejiri_Merfolk"});
-		cardToEffectsList.put("Loam Lion", new String[] {"Loam_Lion"});
-		//cardToEffectsList.put("Kird Ape", new String[] {"Kird_Ape"});
 		cardToEffectsList.put("Sedge Troll", new String[] {"Sedge_Troll"});
 		cardToEffectsList.put("Hedge Troll", new String[] {"Hedge_Troll"});
 		cardToEffectsList.put("Wild Nacatl", new String[] {"Wild_Nacatl"});
