@@ -8807,25 +8807,6 @@ public class GameActionUtil {
 		}// execute()
 	};
 	
-	/**
-	 * stores the Command
-	 */
-	public static Command Primalcrux = new Command() {
-		private static final long serialVersionUID = -5760985115546543522L;
-
-		public void execute() {
-			// get all creatures
-			CardList cards = AllZoneUtil.getCardsInPlay("Primalcrux");
-			for(Card c:cards) {
-				Player player = c.getController();
-				int pt = CardFactoryUtil.getNumberOfManaSymbolsControlledByColor("B", player);
-				c.setBaseAttack(pt);
-				c.setBaseDefense(pt);
-			}
-		}// execute()
-	};
-
-	
 	public static Command The_Tabernacle_at_Pendrell_Vale                 = new Command() {
 		private static final long serialVersionUID   = -3233715310427996429L;
 		CardList                  gloriousAnthemList = new CardList();
@@ -10044,7 +10025,6 @@ public class GameActionUtil {
 		commands.put("Old_Man_of_the_Sea", Old_Man_of_the_Sea);
 		commands.put("Phylactery_Lich", Phylactery_Lich);
 		commands.put("Plague_Rats", Plague_Rats);
-		commands.put("Primalcrux", Primalcrux);
 		
 		commands.put("Sound_the_Call_Wolf", Sound_the_Call_Wolf);
 		commands.put("Svogthos_the_Restless_Tomb", Svogthos_the_Restless_Tomb);
