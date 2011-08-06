@@ -75,7 +75,7 @@ public class Gui_QuestOptions extends JFrame {
         //center window on the screen
         Dimension screen = this.getToolkit().getScreenSize();
         setBounds(screen.width / 4, 50, //position
-                420, 490); //size
+                420, 555); //size
         
         //if user closes this window, go back to "New Game" screen
         this.addWindowListener(new WindowAdapter() {
@@ -110,10 +110,10 @@ public class Gui_QuestOptions extends JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 25));
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel1.setText("Quest Options");
-        jLabel1.setBounds(new Rectangle(104, 0, 213, 63));
+        jLabel1.setBounds(new Rectangle(1, 0, 419, 63));
         this.setTitle("Quest Options");
         this.getContentPane().setLayout(null);
-        continueQuestButton.setBounds(new Rectangle(70, 23, 159, 35));
+        continueQuestButton.setBounds(new Rectangle(69, 28, 179, 35));
         continueQuestButton.setFont(new java.awt.Font("Dialog", 0, 18));
         continueQuestButton.setText("Continue Quest");
         continueQuestButton.addActionListener(new java.awt.event.ActionListener() {
@@ -122,10 +122,10 @@ public class Gui_QuestOptions extends JFrame {
             }
         });
         jPanel1.setBorder(titledBorder1);
-        jPanel1.setBounds(new Rectangle(67, 63, 303, 259));
+        jPanel1.setBounds(new Rectangle(20, 63, 380, 353));
         jPanel1.setLayout(null);
         
-        jPanel2.setBounds(new Rectangle(12, 27, 271, 101));
+        jPanel2.setBounds(new Rectangle(20, 27, 340, 101));
         jPanel2.setLayout(gridLayout1);
         
         gridLayout1.setColumns(2);
@@ -140,25 +140,36 @@ public class Gui_QuestOptions extends JFrame {
         
         realisticRadio.setSelected(true);
         
-        newQuestButton.setBounds(new Rectangle(78, 206, 145, 38));
-        newQuestButton.setFont(new java.awt.Font("Dialog", 0, 18));
+        newQuestButton.setBounds(new Rectangle(117, 292, 145, 38));
+        newQuestButton.setFont(new java.awt.Font("Dialog", 0, 16));
         newQuestButton.setText("New Quest");
         newQuestButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 newQuestButton_actionPerformed(e);
             }
         });
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append("New Quest will delete your current player decks, credits and win loss record. ");
+        sb.append("Continue Quest will allow you to continue a quest that you started at an earlier time.");
+        sb.append("\r\n");
+        sb.append("\r\n");
+        sb.append("Realistic is the original quest mode with a new feature, the Card Shop. ");
+        sb.append("Fantasy adds a Bazaar and you will occasionally face fantasy themed opponents that you will battle.");
+        
+        jTextArea1.setBorder(BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140)));
         jTextArea1.setEnabled(false);
-        jTextArea1.setFont(new java.awt.Font("Dialog", 0, 14));
+        jTextArea1.setFont(new java.awt.Font("Dialog", 0, 12));
         jTextArea1.setDisabledTextColor(Color.black);
         jTextArea1.setEditable(false);
-        jTextArea1.setText("Note: Starting a new quest will delete your current quest data");
+//      jTextArea1.setText("Note: Starting a new quest will delete your current quest data");
+        jTextArea1.setText(sb.toString());
         jTextArea1.setLineWrap(true);
         jTextArea1.setWrapStyleWord(true);
-        jTextArea1.setBounds(new Rectangle(13, 141, 274, 50));
+        jTextArea1.setBounds(new Rectangle(27, 145, 327, 128));
         
         jPanel3.setBorder(titledBorder2);
-        jPanel3.setBounds(new Rectangle(68, 338, 289, 86));
+        jPanel3.setBounds(new Rectangle(50, 427, 320, 86));
         jPanel3.setLayout(null);
         
         jPanel2.add(easyRadio, null);
