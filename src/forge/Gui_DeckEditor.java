@@ -18,7 +18,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
+//import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
@@ -48,8 +48,8 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay, N
     
     Gui_DeckEditor_Menu       customMenu;
     
-    private ImageIcon         upIcon               = Constant.IO.upIcon;
-    private ImageIcon         downIcon             = Constant.IO.downIcon;
+    //private ImageIcon         upIcon               = Constant.IO.upIcon;
+    //private ImageIcon         downIcon             = Constant.IO.downIcon;
     
     private TableModel        topModel;
     private TableModel        bottomModel;
@@ -432,8 +432,8 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay, N
         jScrollPane2.setBorder(titledBorder2);
         jScrollPane2.setBounds(new Rectangle(19, 458, 726, 218));
         removeButton.setBounds(new Rectangle(180, 403, 146, 49));
-        removeButton.setIcon(upIcon);
-        removeButton.setFont(new java.awt.Font("Dialog", 0, 13));
+        //removeButton.setIcon(upIcon);
+        if (!Gui_NewGame.useLAFFonts.isSelected()) removeButton.setFont(new java.awt.Font("Dialog", 0, 13));
         removeButton.setText("Remove Card");
         removeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -446,8 +446,8 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay, N
                 addButton_actionPerformed(e);
             }
         });
-        addButton.setIcon(downIcon);
-        addButton.setFont(new java.awt.Font("Dialog", 0, 13));
+        //addButton.setIcon(downIcon);
+        if (!Gui_NewGame.useLAFFonts.isSelected()) addButton.setFont(new java.awt.Font("Dialog", 0, 13));
         addButton.setBounds(new Rectangle(23, 403, 146, 49));
         
         analysisButton.setText("Deck Analysis");
@@ -456,7 +456,7 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay, N
             	analysisButton_actionPerformed(e);
             }
         });
-        analysisButton.setFont(new java.awt.Font("Dialog", 0, 13));
+        if (!Gui_NewGame.useLAFFonts.isSelected()) analysisButton.setFont(new java.awt.Font("Dialog", 0, 13));
         analysisButton.setBounds(new Rectangle(578, 426, 166, 25));    
         
         changePictureButton.setText("Change picture...");
@@ -465,7 +465,7 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay, N
             	changePictureButton_actionPerformed(e);
             }
         });
-        changePictureButton.setFont(new java.awt.Font("Dialog", 0, 10));
+        if (!Gui_NewGame.useLAFFonts.isSelected()) changePictureButton.setFont(new java.awt.Font("Dialog", 0, 10));
         changePictureButton.setBounds(new Rectangle(765, 349, 118, 20));
         
         removePictureButton.setText("Remove picture...");
@@ -474,7 +474,7 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay, N
             	removePictureButton_actionPerformed(e);
             }
         });
-        removePictureButton.setFont(new java.awt.Font("Dialog", 0, 10));
+        if (!Gui_NewGame.useLAFFonts.isSelected()) removePictureButton.setFont(new java.awt.Font("Dialog", 0, 10));
         removePictureButton.setBounds(new Rectangle(885, 349, 118, 20));
         
         /**
@@ -482,7 +482,7 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay, N
          */
         Font f = new Font("Tahoma", Font.PLAIN, 10);
         landCheckBox.setBounds(340, 400, 48, 20);
-        landCheckBox.setFont(f);
+        if (!Gui_NewGame.useLAFFonts.isSelected()) landCheckBox.setFont(f);
         landCheckBox.setOpaque(false);
         landCheckBox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
@@ -490,7 +490,7 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay, N
             }
         });
         creatureCheckBox.setBounds(385, 400, 65, 20);
-        creatureCheckBox.setFont(f);
+        if (!Gui_NewGame.useLAFFonts.isSelected()) creatureCheckBox.setFont(f);
         creatureCheckBox.setOpaque(false);
         creatureCheckBox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
@@ -498,7 +498,7 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay, N
             }
         });
         sorceryCheckBox.setBounds(447, 400, 62, 20);
-        sorceryCheckBox.setFont(f);
+        if (!Gui_NewGame.useLAFFonts.isSelected()) sorceryCheckBox.setFont(f);
         sorceryCheckBox.setOpaque(false);
         sorceryCheckBox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
@@ -506,7 +506,7 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay, N
             }
         });
         instantCheckBox.setBounds(505, 400, 60, 20);
-        instantCheckBox.setFont(f);
+        if (!Gui_NewGame.useLAFFonts.isSelected()) instantCheckBox.setFont(f);
         instantCheckBox.setOpaque(false);
         instantCheckBox.addItemListener(new ItemListener() {
             
@@ -515,7 +515,7 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay, N
             }
         });
         planeswalkerCheckBox.setBounds(558, 400, 85, 20);
-        planeswalkerCheckBox.setFont(f);
+        if (!Gui_NewGame.useLAFFonts.isSelected()) planeswalkerCheckBox.setFont(f);
         planeswalkerCheckBox.setOpaque(false);
         planeswalkerCheckBox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
@@ -523,7 +523,7 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay, N
             }
         });
         artifactCheckBox.setBounds(638, 400, 58, 20);
-        artifactCheckBox.setFont(f);
+        if (!Gui_NewGame.useLAFFonts.isSelected()) artifactCheckBox.setFont(f);
         artifactCheckBox.setOpaque(false);
         artifactCheckBox.addItemListener(new ItemListener() {
             
@@ -532,7 +532,7 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay, N
             }
         });
         enchantmentCheckBox.setBounds(692, 400, 80, 20);
-        enchantmentCheckBox.setFont(f);
+        if (!Gui_NewGame.useLAFFonts.isSelected()) enchantmentCheckBox.setFont(f);
         enchantmentCheckBox.setOpaque(false);
         enchantmentCheckBox.addItemListener(new ItemListener() {
             
@@ -603,7 +603,7 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay, N
         picturePanel.setBounds(new Rectangle(765, 372, 239, 338));
         picturePanel.setLayout(borderLayout1);
         picturePanel.addMouseListener(new CustomListener());
-        statsLabel.setFont(new java.awt.Font("Dialog", 0, 14));
+        if (!Gui_NewGame.useLAFFonts.isSelected()) statsLabel.setFont(new java.awt.Font("Dialog", 0, 14));
         statsLabel.setText("Total - 0, Creatures - 0 Land - 0");
         statsLabel.setBounds(new Rectangle(19, 672, 720, 31));
         //Do not lower statsLabel any lower, we want this to be visible at 1024 x 768 screen size
@@ -612,24 +612,24 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay, N
         jScrollPane3.setBounds(new Rectangle(6, 168, 225, 143));
         jPanel3.setBounds(new Rectangle(7, 21, 224, 141));
         jPanel3.setLayout(gridLayout1);
-        cdLabel4.setFont(new java.awt.Font("Dialog", 0, 14));
+        if (!Gui_NewGame.useLAFFonts.isSelected()) cdLabel4.setFont(new java.awt.Font("Dialog", 0, 14));
         cdLabel4.setHorizontalAlignment(SwingConstants.LEFT);
-        cdLabel1.setFont(new java.awt.Font("Dialog", 0, 14));
+        if (!Gui_NewGame.useLAFFonts.isSelected()) cdLabel1.setFont(new java.awt.Font("Dialog", 0, 14));
         cdLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-        cdLabel2.setFont(new java.awt.Font("Dialog", 0, 14));
+        if (!Gui_NewGame.useLAFFonts.isSelected()) cdLabel2.setFont(new java.awt.Font("Dialog", 0, 14));
         cdLabel2.setHorizontalAlignment(SwingConstants.CENTER);
-        cdLabel3.setFont(new java.awt.Font("Dialog", 0, 14));
+        if (!Gui_NewGame.useLAFFonts.isSelected()) cdLabel3.setFont(new java.awt.Font("Dialog", 0, 14));
         cdLabel3.setHorizontalAlignment(SwingConstants.CENTER);
         gridLayout1.setColumns(1);
         gridLayout1.setRows(0);
-        cdLabel5.setFont(new java.awt.Font("Dialog", 0, 14));
+        if (!Gui_NewGame.useLAFFonts.isSelected())cdLabel5.setFont(new java.awt.Font("Dialog", 0, 14));
         cdLabel5.setHorizontalAlignment(SwingConstants.LEFT);
-        cdTextArea.setFont(new java.awt.Font("Dialog", 0, 12));
+        if (!Gui_NewGame.useLAFFonts.isSelected()) cdTextArea.setFont(new java.awt.Font("Dialog", 0, 12));
         cdTextArea.setLineWrap(true);
         cdTextArea.setWrapStyleWord(true);
         statsLabel2.setBounds(new Rectangle(19, 365, 720, 31));
         statsLabel2.setText("Total - 0, Creatures - 0 Land - 0");
-        statsLabel2.setFont(new java.awt.Font("Dialog", 0, 14));
+        if (!Gui_NewGame.useLAFFonts.isSelected()) statsLabel2.setFont(new java.awt.Font("Dialog", 0, 14));
         jLabel1.setText("Click on the column name (like name or color) to sort the cards");
         jLabel1.setBounds(new Rectangle(20, 1, 400, 19));
         this.getContentPane().add(cardDetailPanel, null);

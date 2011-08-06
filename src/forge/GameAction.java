@@ -1346,7 +1346,7 @@ private int getDifferentLand(CardList list, String land)
 	  CardList list = new CardList();
 	  
 	  Iterator<Card> iter = map.keySet().iterator();
-	  while(iter.hasNext()) {
+	  while(iter.hasNext()) {		  
 			Card source = iter.next();
 			list.add(source);
 			int damage = map.get(source);

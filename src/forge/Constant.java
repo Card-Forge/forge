@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 
 
 public interface Constant {
-    public static final String ProgramName = "MTG Forge - 10/2009 - http://mtgrares.blogspot.com";
+    public static final String ProgramName = "Forge - 10/2009 - http://mtgrares.blogspot.com";
     
     //used to pass information between the GUI screens
     public interface Runtime {

@@ -73,9 +73,13 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     
     private GuiInput          inputControl;
     
-    Font                      statFont         = new Font("MS Sans Serif", Font.PLAIN, 12);
-    Font                      lifeFont         = new Font("MS Sans Serif", Font.PLAIN, 40);
-    Font                      checkboxFont     = new Font("MS Sans Serif", Font.PLAIN, 9);
+    //Font                      statFont         = new Font("MS Sans Serif", Font.PLAIN, 12);
+    //Font                      lifeFont         = new Font("MS Sans Serif", Font.PLAIN, 40);
+    //Font                      checkboxFont     = new Font("MS Sans Serif", Font.PLAIN, 9);
+    
+    Font                      statFont         = new Font("Dialog", Font.PLAIN, 12);
+    Font                      lifeFont         = new Font("Dialog", Font.PLAIN, 40);
+    Font                      checkboxFont     = new Font("Dialog", Font.PLAIN, 9);
     
     /*
     public Color c1 = new Color(112,112,112);
@@ -84,7 +88,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     */
     
     private String current_picture = "";
-    private int count = 0;
+    //private int count = 0;
 
     public static Color       c1               = new Color(204, 204, 204);
     public static Color       c2               = new Color(204, 204, 204);
@@ -556,7 +560,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     		return;
     		
         //picture
-    	System.out.println("UPDATING PICTURE!!! #:" + count++);
+    	//System.out.println("UPDATING PICTURE!!! #:" + count++);
     	current_picture = c.getImageName();
         picturePanel.removeAll();
         JPanel pic = GuiDisplayUtil.getPicture(c);
@@ -773,7 +777,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     private void initComponents() {
         //Preparing the Frame
         setTitle(ForgeProps.getLocalized(LANG.PROGRAM_NAME));
-        setFont(new Font("Times New Roman", 0, 16));
+        if (!Gui_NewGame.useLAFFonts.isSelected()) setFont(new Font("Times New Roman", 0, 16));
         getContentPane().setLayout(new BorderLayout());
         addWindowListener(new WindowAdapter() {
             @Override
@@ -828,6 +832,10 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         getContentPane().add(pane);
         
         //adding the individual parts
+        
+        if (!Gui_NewGame.useLAFFonts.isSelected()) 
+        	initFonts(pane);
+        
         initMsgYesNo(pane);
         initOpp(pane);
         initStackCombat(pane);
@@ -836,10 +844,44 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         initCardPicture(pane);
     }
     
+    private void initFonts(JPanel pane)
+    {
+    	messageArea.setFont(getFont());
+    	
+    	oppLifeLabel.setFont(lifeFont);
+    	
+    	oppPCLabel.setFont(statFont);
+    	oppLibraryLabel.setFont(statFont);
+    	
+    	oppHandValue.setFont(statFont);
+    	oppLibraryValue.setFont(statFont);
+    	oppRemovedValue.setFont(statFont);
+    	oppGraveValue.setFont(statFont);
+    	
+    	playerLifeLabel.setFont(lifeFont);
+    	playerPCLabel.setFont(statFont);
+    	
+    	playerHandValue.setFont(statFont);
+    	playerLibraryValue.setFont(statFont);
+    	playerRemovedValue.setFont(statFont);
+    	playerGraveValue.setFont(statFont);
+    	playerFBValue.setFont(statFont);
+    	
+    	combatArea.setFont(getFont());
+    	
+    	cdLabel1.setFont(getFont());
+    	cdLabel2.setFont(getFont());
+    	cdLabel3.setFont(getFont());
+    	cdLabel4.setFont(getFont());
+    	cdLabel5.setFont(getFont());
+    	cdLabel6.setFont(getFont());
+    	
+    	cdArea.setFont(getFont());
+    }
+    
     private void initMsgYesNo(JPanel pane) {
 //        messageArea.setBorder(BorderFactory.createEtchedBorder());
         messageArea.setEditable(false);
-        messageArea.setFont(getFont());
         messageArea.setLineWrap(true);
         messageArea.setWrapStyleWord(true);
         
@@ -896,26 +938,20 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     }
     
     private void initOpp(JPanel pane) {
-        oppLifeLabel.setFont(lifeFont);
         //oppLifeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
-        oppPCLabel.setFont(statFont);
         //oppPCLabel.setHorizontalAlignment(SwingConstants.TOP);
         oppPCLabel.setForeground(c3);
         
-        JLabel oppLibraryLabel = new JLabel(ForgeProps.getLocalized(COMPUTER_LIBRARY.TITLE),
-                SwingConstants.TRAILING);
-        oppLibraryLabel.setFont(statFont);
-        
         JLabel oppHandLabel = new JLabel(ForgeProps.getLocalized(COMPUTER_HAND.TITLE), SwingConstants.TRAILING);
-        oppHandLabel.setFont(statFont);
+        if(!Gui_NewGame.useLAFFonts.isSelected()) oppHandLabel.setFont(statFont);
         
         //JLabel oppGraveLabel = new JLabel("Grave:", SwingConstants.TRAILING);
         JButton oppGraveButton = new JButton(COMPUTER_GRAVEYARD_ACTION);
         oppGraveButton.setText((String) COMPUTER_GRAVEYARD_ACTION.getValue("buttonText"));
         oppGraveButton.setMargin(new Insets(0, 0, 0, 0));
         oppGraveButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        oppGraveButton.setFont(statFont);
+        if(!Gui_NewGame.useLAFFonts.isSelected()) oppGraveButton.setFont(statFont); 
         
 
         JPanel gravePanel = new JPanel(new BorderLayout());
@@ -925,19 +961,12 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         oppRemovedButton.setText((String) COMPUTER_REMOVED_ACTION.getValue("buttonText"));
         oppRemovedButton.setMargin(new Insets(0, 0, 0, 0));
         //removedButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        oppRemovedButton.setFont(statFont);
+        if(!Gui_NewGame.useLAFFonts.isSelected()) oppRemovedButton.setFont(statFont);
         
 
-        oppHandValue.setFont(statFont);
         oppHandValue.setHorizontalAlignment(SwingConstants.LEADING);
-        
-        oppLibraryValue.setFont(statFont);
         oppLibraryValue.setHorizontalAlignment(SwingConstants.LEADING);
-        
-        oppGraveValue.setFont(statFont);
         oppGraveValue.setHorizontalAlignment(SwingConstants.LEADING);
-        
-        oppRemovedValue.setFont(statFont);
         oppRemovedValue.setHorizontalAlignment(SwingConstants.LEADING);
         
         JPanel oppNumbersPanel = new JPanel(new GridLayout(0, 2, 3, 1));
@@ -968,7 +997,6 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         pane.add(new ExternalPanel(stackPane), "stack");
         
         combatArea.setEditable(false);
-        combatArea.setFont(getFont());
         combatArea.setLineWrap(true);
         combatArea.setWrapStyleWord(true);
         combatArea.setBackground(c1);
@@ -981,33 +1009,31 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     }
     
     private void initPlayer(JPanel pane) {
-        int fontSize = 12;
-        playerLifeLabel.setFont(lifeFont);
+        //int fontSize = 12;
         playerLifeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
-        playerPCLabel.setFont(statFont);
         playerPCLabel.setForeground(c3);
         
         JLabel playerLibraryLabel = new JLabel(ForgeProps.getLocalized(HUMAN_LIBRARY.TITLE),
                 SwingConstants.TRAILING);
-        playerLibraryLabel.setFont(statFont);
+        if(!Gui_NewGame.useLAFFonts.isSelected()) playerLibraryLabel.setFont(statFont);
         
         JLabel playerHandLabel = new JLabel(ForgeProps.getLocalized(HUMAN_HAND.TITLE), SwingConstants.TRAILING);
-        playerHandLabel.setFont(statFont);
+        if(!Gui_NewGame.useLAFFonts.isSelected()) playerHandLabel.setFont(statFont);
         
         //JLabel playerGraveLabel = new JLabel("Grave:", SwingConstants.TRAILING);
         JButton playerGraveButton = new JButton(HUMAN_GRAVEYARD_ACTION);
         playerGraveButton.setText((String) HUMAN_GRAVEYARD_ACTION.getValue("buttonText"));
         playerGraveButton.setMargin(new Insets(0, 0, 0, 0));
-        playerGraveButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        playerGraveButton.setFont(statFont);
+        playerGraveButton.setHorizontalAlignment(SwingConstants.TRAILING); 
+        if(!Gui_NewGame.useLAFFonts.isSelected()) playerGraveButton.setFont(statFont);
         
 
         JButton playerFlashBackButton = new JButton(HUMAN_FLASHBACK_ACTION);
         playerFlashBackButton.setText((String) HUMAN_FLASHBACK_ACTION.getValue("buttonText"));
         playerFlashBackButton.setMargin(new Insets(0, 0, 0, 0));
         playerFlashBackButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        playerFlashBackButton.setFont(statFont);
+        if(!Gui_NewGame.useLAFFonts.isSelected()) playerFlashBackButton.setFont(statFont);
         
 
         JPanel gravePanel = new JPanel(new BorderLayout());
@@ -1020,22 +1046,14 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         playerRemovedButton.setText((String) HUMAN_REMOVED_ACTION.getValue("buttonText"));
         playerRemovedButton.setMargin(new Insets(0, 0, 0, 0));
         //removedButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        playerRemovedButton.setFont(statFont);
-        
+        if(!Gui_NewGame.useLAFFonts.isSelected()) playerRemovedButton.setFont(statFont);
 
-        playerHandValue.setFont(statFont);
         playerHandValue.setHorizontalAlignment(SwingConstants.LEADING);
-        
-        playerLibraryValue.setFont(statFont);
         playerLibraryValue.setHorizontalAlignment(SwingConstants.LEADING);
-        
-        playerGraveValue.setFont(statFont);
         playerGraveValue.setHorizontalAlignment(SwingConstants.LEADING);
+        playerFBValue.setHorizontalAlignment(SwingConstants.LEADING);
         
-        playerFBValue.setFont(statFont);
-        playerGraveValue.setHorizontalAlignment(SwingConstants.LEADING);
-        
-        playerRemovedValue.setFont(new Font("MS Sans Serif", 0, fontSize));
+        //playerRemovedValue.setFont(new Font("MS Sans Serif", 0, fontSize));
         playerRemovedValue.setHorizontalAlignment(SwingConstants.LEADING);
         
         JPanel playerNumbersPanel = new JPanel(new GridLayout(0, 2, 5, 1));
@@ -1076,25 +1094,25 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     }
     
     private void initCardPicture(JPanel pane) {
-        cdLabel1.setFont(getFont());
+        //cdLabel1.setFont(getFont());
         cdLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         cdLabel1.setText("jLabel3");
         
-        cdLabel2.setFont(getFont());
+        //cdLabel2.setFont(getFont());
         cdLabel2.setHorizontalAlignment(SwingConstants.CENTER);
         cdLabel2.setText("jLabel4");
         
-        cdLabel3.setFont(getFont());
+        //cdLabel3.setFont(getFont());
         cdLabel3.setHorizontalAlignment(SwingConstants.CENTER);
 //~        cdLabel3.setText("jLabel5");
         
-        cdLabel4.setFont(getFont());
+        //cdLabel4.setFont(getFont());
 //~        cdLabel4.setText("jLabel6");
         
-        cdLabel5.setFont(getFont());
+        //cdLabel5.setFont(getFont());
 //~        cdLabel5.setText("jLabel7");
         
-        cdLabel6.setFont(getFont());
+        //cdLabel6.setFont(getFont());
 //~        cdLabel6.setText("jLabel8");
         
         JPanel cdLabels = new JPanel(new GridLayout(6, 0, 0, 5));
@@ -1109,7 +1127,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         //StyledEditorKit se = new StyledEditorKit();
         
         //cdArea.setEditorKit(new StyledEditorKit());
-        cdArea.setFont(getFont());
+        //cdArea.setFont(getFont());
         cdArea.setLineWrap(true);
         cdArea.setWrapStyleWord(true);
         
@@ -1182,6 +1200,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     JLabel                          cdLabel4            = new JLabel();
     JLabel                          cdLabel5            = new JLabel();
     JLabel                          cdLabel6            = new JLabel();
+    JLabel 							oppLibraryLabel 	= new JLabel(ForgeProps.getLocalized(COMPUTER_LIBRARY.TITLE), SwingConstants.TRAILING);
     JLabel                          oppHandValue        = new JLabel();
     JLabel                          oppLibraryValue     = new JLabel();
     JLabel                          oppGraveValue       = new JLabel();

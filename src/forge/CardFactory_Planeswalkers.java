@@ -2164,9 +2164,20 @@ class CardFactory_Planeswalkers {
 		           }
 		           else
 		             AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
-		           	 AllZone.GameAction.getPlayerLife(card2.getController()).addLife(3);
-		           
+		           	 AllZone.GameAction.getPlayerLife(card2.getController()).addLife(3);  
 		         }
+		         
+		         public boolean canPlay()
+		         {
+		          return  AllZone.getZone(card2).is(Constant.Zone.Play) &&
+		          		  card2.getCounters(Counters.LOYALTY) >= 2 &&
+		                  turn[0] != AllZone.Phase.getTurn() &&
+		                  AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
+		                  !AllZone.Phase.getPhase().equals("End of Turn") &&
+		                  (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+		                  && AllZone.Stack.size() == 0;
+		          }//canPlay()
+		         
 		       };//ability2
 
 		       Input target = new Input()

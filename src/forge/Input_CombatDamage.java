@@ -234,6 +234,15 @@ private void playerDamage(PlayerLife p)
   		while(iter.hasNext()) {
   			Card crd = iter.next();
       		//AllZone.GameAction.addDamage(c, crd , assignedDamageMap.get(crd));
+  			 /*
+  			 for (String effect : AllZone.StateBasedEffects.getStateBasedMap().keySet() ) {
+ 				Command com = GameActionUtil.commands.get(effect);
+ 				com.execute();
+ 			}
+ 		    
+ 		    GameActionUtil.executeCardStateEffects();
+ 		    */
+  			
   			damageMap.put(crd, assignedDamageMap.get(crd));
   		}
   		AllZone.GameAction.addDamage(c, damageMap);

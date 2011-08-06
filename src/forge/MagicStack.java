@@ -30,7 +30,7 @@ public class MagicStack extends MyObservable
     	//attempt to counter human spell
     	if (sp.getSourceCard().getController().equals(Constant.Player.Human) &&
     		CardFactoryUtil.isCounterable(sp.getSourceCard()) )
-    		ComputerAI_counterSpells.counter_Spell(sp);
+    		ComputerAI_counterSpells2.counter_Spell(sp);
     	
     	//put code for Standstill here
     	GameActionUtil.executePlayCardEffects(sp);

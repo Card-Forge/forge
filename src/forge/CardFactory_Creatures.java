@@ -5329,7 +5329,7 @@ public class CardFactory_Creatures {
 	          c.addType("Wolf");
 	          c.setBaseAttack(2);
 	          c.setBaseDefense(2);
-
+	          
 	          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
 	          play.add(c);
 	        }//makeToken()

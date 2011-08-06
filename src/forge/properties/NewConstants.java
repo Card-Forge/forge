@@ -259,6 +259,7 @@ public interface NewConstants {
                 
                 public static interface OPTIONS {
                     public static final String TITLE = "%s/NewGame/options/title";
+                    public static final String FONT = "%s/NewGame/options/font";
                     
                     public static interface GENERATE {
                         public static final String TITLE            = "%s/NewGame/options/generate/title";

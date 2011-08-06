@@ -14,6 +14,8 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -37,6 +39,13 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
+
+//import com.nilo.plaf.nimrod.NimRODLookAndFeel;
+
+//import net.sourceforge.napkinlaf.NapkinLookAndFeel;
+//import net.sourceforge.napkinlaf.NapkinTheme;
+
+//import org.jvnet.substance.SubstanceLookAndFeel;
 
 import forge.error.ErrorViewer;
 import forge.error.ExceptionHandler;
@@ -87,6 +96,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                                                                  ForgeProps.getLocalized(MENU_BAR.OPTIONS.GENERATE.REMOVE_SMALL));
     public static JCheckBoxMenuItem removeArtifacts      = new JCheckBoxMenuItem(
                                                                  ForgeProps.getLocalized(MENU_BAR.OPTIONS.GENERATE.REMOVE_ARTIFACTS));
+    public static JCheckBoxMenuItem useLAFFonts			= new JCheckBoxMenuItem(ForgeProps.getLocalized(MENU_BAR.OPTIONS.FONT));
     
     private JButton                 questButton          = new JButton();
     
@@ -99,6 +109,8 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     
     public static void main(String[] args) {
         ExceptionHandler.registerErrorHandling();
+        
+        
         try {
             Object[] o = UIManager.getInstalledLookAndFeels();
             if(o.length > 3) {
@@ -116,7 +128,6 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         } catch(Exception ex) {
             ErrorViewer.showError(ex);
         }
-        
 
         try {
             //deck migration - this is a little hard to read, because i can't just plainly reference a class in the
@@ -131,8 +142,27 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             Constant.Runtime.GameType[0] = Constant.GameType.Constructed;
             AllZone.Computer = new ComputerAI_Input(new ComputerAI_General());
             
-            new Gui_NewGame();
-            
+            /*
+            JFrame.setDefaultLookAndFeelDecorated(true);
+            SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        try {
+                            UIManager.setLookAndFeel("org.jvnet.substance.skin.ChallengerDeepSkin");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                       
+            SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        new Gui_NewGame();
+                    }
+            });
+            */
+           
+           new Gui_NewGame();
+           
         } catch(Exception ex) {
             ErrorViewer.showError(ex);
         }
@@ -191,12 +221,16 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         for(Action a:actions)
             menu.add(a);
         
+        //useLAFFonts.setSelected(false);
+        
         // new stuff
         JMenu generatedDeck = new JMenu(ForgeProps.getLocalized(MENU_BAR.OPTIONS.GENERATE.TITLE));
         generatedDeck.add(removeSmallCreatures);
         generatedDeck.add(removeArtifacts);
         JMenu optionsMenu = new JMenu(ForgeProps.getLocalized(OPTIONS.TITLE));
         optionsMenu.add(generatedDeck);
+        
+        optionsMenu.add(useLAFFonts);
         
         JMenuBar bar = new JMenuBar();
         bar.add(menu);
@@ -613,14 +647,61 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         
         public void actionPerformed(ActionEvent e) {
             LookAndFeelInfo[] info = UIManager.getInstalledLookAndFeels();
-            String[] keys = new String[info.length];
-            for(int i = 0; i < info.length; i++)
-                keys[i] = info[i].getName();
+            HashMap<String, String> LAFMap = new HashMap<String, String>();
+            for (int i=0; i < info.length; i++)
+            	LAFMap.put(info[i].getName(), info[i].getClassName());          
+            
+            //NapkinLookAndFeel napkin = new NapkinLookAndFeel();
+            //NimRODLookAndFeel nrLAF = new NimRODLookAndFeel();
+                        
+            //add Substance LAFs:
+            LAFMap.put("Autumn", "org.jvnet.substance.skin.SubstanceAutumnLookAndFeel");
+            LAFMap.put("Business", "org.jvnet.substance.skin.SubstanceBusinessLookAndFeel");
+            LAFMap.put("Business Black Steel", "org.jvnet.substance.skin.SubstanceBusinessBlackSteelLookAndFeel");
+            LAFMap.put("Business Blue Steel", "org.jvnet.substance.skin.SubstanceBusinessBlueSteelLookAndFeel");
+            LAFMap.put("Challenger Deep", "org.jvnet.substance.skin.SubstanceChallengerDeepLookAndFeel");
+            LAFMap.put("Creme", "org.jvnet.substance.skin.SubstanceCremeLookAndFeel");
+            LAFMap.put("Creme Coffee", "org.jvnet.substance.skin.SubstanceCremeCoffeeLookAndFeel");
+            LAFMap.put("Dust", "org.jvnet.substance.skin.SubstanceDustLookAndFeel");
+            LAFMap.put("Dust Coffee", "org.jvnet.substance.skin.SubstanceDustCoffeeLookAndFeel");
+            LAFMap.put("Emerald Dusk", "org.jvnet.substance.skin.SubstanceEmeraldDuskLookAndFeel");
+            LAFMap.put("Gemini", "org.jvnet.substance.api.skin.SubstanceGeminiLookAndFeel");
+            LAFMap.put("Graphite Aqua", "org.jvnet.substance.api.skin.SubstanceGraphiteAquaLookAndFeel");
+            LAFMap.put("Moderate", "org.jvnet.substance.skin.SubstanceModerateLookAndFeel");
+            LAFMap.put("Magellan", "org.jvnet.substance.skin.SubstanceMagellanLookAndFeel");
+            LAFMap.put("Magma", "org.jvnet.substance.skin.SubstanceMagmaLookAndFeel");
+            LAFMap.put("Mist Aqua", "org.jvnet.substance.skin.SubstanceMistAquaLookAndFeel");
+            LAFMap.put("Mist Silver", "org.jvnet.substance.skin.SubstanceMistSilverLookAndFeel");
+            LAFMap.put("Napkin", "net.sourceforge.napkinlaf.NapkinLookAndFeel");
+            LAFMap.put("Nebula", "org.jvnet.substance.skin.SubstanceNebulaLookAndFeel");
+            LAFMap.put("Nebula Brick Wall", "org.jvnet.substance.skin.SubstanceNebulaBrickWallLookAndFeel");
+            LAFMap.put("NimROD", "com.nilo.plaf.nimrod.NimRODLookAndFeel");
+            LAFMap.put("Office Blue 2007", "org.jvnet.substance.skin.SubstanceOfficeBlue2007LookAndFeel");
+            LAFMap.put("Office Silver 2007", "org.jvnet.substance.skin.SubstanceOfficeSilver2007LookAndFeel");
+            //LAFMap.put("Oyoaha", "com.oyoaha.swing.plaf.oyoaha.OyoahaLookAndFeel");
+            LAFMap.put("Raven", "org.jvnet.substance.skin.SubstanceRavenLookAndFeel");
+            LAFMap.put("Raven Graphite", "org.jvnet.substance.skin.SubstanceRavenGraphiteLookAndFeel");
+            LAFMap.put("Raven Graphite Glass", "org.jvnet.substance.skin.SubstanceRavenGraphiteGlassLookAndFeel");
+            LAFMap.put("Sahara", "org.jvnet.substance.skin.SubstanceSaharaLookAndFeel");
+            LAFMap.put("Twilight", "org.jvnet.substance.skin.SubstanceTwilightLookAndFeel");
+            
+            String[] keys = new String[LAFMap.size()];
+            int count = 0;
+            Iterator<String> iter = LAFMap.keySet().iterator();
+      	  	while(iter.hasNext()) {
+      	  		String s = iter.next();	
+      	  		keys[count++] = s;
+      	  	}
+      	  	Arrays.sort(keys);
+      	  	                        
             ListChooser<String> ch = new ListChooser<String>("Choose one", 0, 1, keys);
             if(ch.show()) try {
+            	String name = ch.getSelectedValue();
                 int index = ch.getSelectedIndex();
                 if(index == -1) return;
-                UIManager.setLookAndFeel(info[index].getClassName());
+                //UIManager.setLookAndFeel(info[index].getClassName());
+                UIManager.setLookAndFeel(LAFMap.get(name));
+                
                 SwingUtilities.updateComponentTreeUI(c);
             } catch(Exception ex) {
                 ErrorViewer.showError(ex);
@@ -695,6 +776,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         }
     }
     
+    
     public static class AboutAction extends AbstractAction {
         
         private static final long serialVersionUID = 5492173304463396871L;
@@ -705,8 +787,11 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         
         public void actionPerformed(ActionEvent e) {
             JTextArea area = new JTextArea(8, 25);
-            Font f = new Font(area.getFont().getName(), Font.PLAIN, 13);
-            area.setFont(f);
+            
+            if (useLAFFonts.isSelected()) {
+	            Font f = new Font(area.getFont().getName(), Font.PLAIN, 13);
+	            area.setFont(f);
+            }
             
             area.setText("I enjoyed programming this project.  I'm glad other people also enjoy my program.  MTG Forge has turned out to be very successful.\n\nmtgrares@yahoo.com\nhttp://mtgrares.blogspot.com\n\nWritten by: Forge");
             
