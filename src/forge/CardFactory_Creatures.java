@@ -5855,45 +5855,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Lich Lord of Unx")) {
-            final Ability ability2 = new Ability(card, "U U B B") {
-                @Override
-                public boolean canPlayAI() {
-                    setTargetPlayer(AllZone.HumanPlayer);
-                    return countZombies() >= 3;
-                }
-                
-                @Override
-                public void resolve() {
-                    if(getTargetPlayer() != null) {
-                        PlayerZone lib = AllZone.getZone(Constant.Zone.Library, getTargetPlayer());
-                        for(int i = 0; i < countZombies(); i++) {
-                            //probably should be updated to AllZone.GameAction.mill(getTargetPlayer(),1);
-                        	if(lib.size() > 0) {
-                            	AllZone.GameAction.moveToGraveyard(lib.get(0));
-                            }
-                            getTargetPlayer().loseLife(1, card);
-                        }
-                    }
-                }//end resolve
-                
-                public int countZombies() {
-                    return AllZoneUtil.getPlayerTypeInPlay(card.getController(), "Zombie").size();
-                }
-                
-            };
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append("U U B B: Target player loses X life and puts the top X cards of his or her library ");
-            sb.append("into his or her graveyard, where X is the number of Zombies you control.");
-            ability2.setDescription(sb.toString());
-            
-            ability2.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability2));
-            card.addSpellAbility(ability2);         
-        }//*************** END ************ END **************************
-        
-                
+                        
         //*************** START *********** START **************************
         else if(cardName.equals("Covetous Dragon")) {
             SpellAbility spell = new Spell_Permanent(card) {
