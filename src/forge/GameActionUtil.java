@@ -3129,7 +3129,6 @@ public class GameActionUtil {
 		else if(c.getName().equals("Scalpelexis")) playerCombatDamage_Scalpelexis(c);
 		else if(c.getName().equals("Augury Adept")) playerCombatDamage_Augury_Adept(c);
 		else if(c.getName().equals("Spawnwrithe")) playerCombatDamage_Spawnwrithe(c);
-		else if(c.getName().equals("Glint-Eye Nephilim") || c.getName().equals("Cold-Eyed Selkie")) playerCombatDamage_Glint_Eye_Nephilim(c);
 		else if(c.getName().equals("Rootwater Thief")) playerCombatDamage_Rootwater_Thief(c);
 		else if(c.getName().equals("Treva, the Renewer")) playerCombatDamage_Treva(c);
 		else if(c.getName().equals("Rith, the Awakener")) playerCombatDamage_Rith(c);
@@ -3409,28 +3408,6 @@ public class GameActionUtil {
 			
 			AllZone.Stack.add(ability);
 		}
-	}
-
-	private static void playerCombatDamage_Glint_Eye_Nephilim(Card c) {
-		final Player player = c.getController();
-		final int power = c.getNetAttack();
-
-		if(power > 0) {
-			Ability ability2 = new Ability(c, "0") {
-				@Override
-				public void resolve() {
-					player.drawCards(power);
-				}
-			};// ability2
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append(c.getName()).append(" - ").append(player);
-			sb.append(" draws ").append(power).append(" card(s).");
-			ability2.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability2);
-		} // if
-
 	}
 
 	private static void playerCombatDamage_Spawnwrithe(Card c) {
