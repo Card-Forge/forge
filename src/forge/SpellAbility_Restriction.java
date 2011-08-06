@@ -84,15 +84,20 @@ public class SpellAbility_Restriction {
 	
 	final private int THRESHOLD = 7;
 	
+	private String sIsPresent = null;
+	public void setIsPresent(String present){
+		sIsPresent = present;
+	}
 	
+	private String presentCompare = "GE1";	// Default Compare to Greater or Equal to 1
+	public void setPresentCompare(String compare){
+		presentCompare = compare;
+	}
 	
 	/*
 	 * Restrictions of the future
-		boolean bHasMetalcraft = false;
 		int levelMin = 0;
 		int levelMax = 0;
-		youControl
-		oppControl
 	*/
 	
 	SpellAbility_Restriction(){	}
@@ -141,7 +146,19 @@ public class SpellAbility_Restriction {
 		
 		if (bNeedsThreshold){
 			// Threshold
-			if (AllZone.getZone(Constant.Zone.Hand, activator).size() < THRESHOLD)
+			if (AllZone.getZone(Constant.Zone.Graveyard, activator).size() < THRESHOLD)
+				return false;
+		}
+		
+		if (sIsPresent != null){
+			CardList list = AllZoneUtil.getCardsInPlay();
+			
+			list = list.getValidCards(sIsPresent.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+			
+			int right = Integer.parseInt(presentCompare.substring(2));
+			int left = list.size();
+			
+			if (!Card.compare(left, presentCompare, right))
 				return false;
 		}
 			

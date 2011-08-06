@@ -286,6 +286,12 @@ public class AbilityFactory {
         if (mapParams.containsKey("Threshold"))
         	SA.getRestrictions().setThreshold(true);
         
+        if (mapParams.containsKey("IsPresent")){
+        	SA.getRestrictions().setIsPresent(mapParams.get("IsPresent"));
+        	if (mapParams.containsKey("PresentCompare"))
+        		SA.getRestrictions().setPresentCompare(mapParams.get("PresentCompare"));
+        }
+        
         return SA;
 	}
 	
