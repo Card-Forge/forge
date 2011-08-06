@@ -10850,11 +10850,6 @@ public class GameActionUtil {
 		private static final long serialVersionUID = -220650457326100804L;
 
 		public void execute() {
-			// get all creatures
-			/*CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Heedless One"); */
 			CardList list = AllZoneUtil.getCardsInPlay("Heedless One");
 
 			for(int i = 0; i < list.size(); i++) {
@@ -10862,14 +10857,9 @@ public class GameActionUtil {
 				c.setBaseAttack(countElves(c));
 				c.setBaseDefense(countElves(c));
 			}
-
 		}// execute()
 
 		private int countElves(Card c) {
-			/*PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
-			CardList elves = new CardList(play.getCards());
-			elves = elves.getType("Elf");
-			return elves.size();*/
 			return AllZoneUtil.getTypeInPlay("Elf").size();
 		}
 	}; 
@@ -11074,7 +11064,6 @@ public class GameActionUtil {
 					c.setBaseDefense(1);
 				}
 			}
-
 		}// execute()
 
 		private boolean hasThreeLevels(Card c) {
