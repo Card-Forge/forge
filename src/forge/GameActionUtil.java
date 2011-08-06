@@ -2417,7 +2417,6 @@ public class GameActionUtil {
 
 	public static void executeDestroyCardEffects(Card c, Card destroyed) {
 		if(destroyed.isCreature()) executeDestroyCreatureCardEffects(c, destroyed);
-		if(destroyed.isLand()) executeDestroyLandCardEffects(c, destroyed);
 		if(destroyed.isEnchantment()) executeDestroyEnchantmentCardEffects(c, destroyed);
 	}
 	
@@ -2470,8 +2469,7 @@ public class GameActionUtil {
         if(c.getName().equals("Goblin Sharpshooter")) destroyCreature_Goblin_Sharpshooter(c, destroyed);
         */
     	
-        if (c.getName().equals("Dingus Staff")) destroyCreature_Dingus_Staff(c, destroyed);
-        else if (c.getName().equals("Prowess of the Fair") 
+        if (c.getName().equals("Prowess of the Fair") 
                 && destroyed.isType("Elf")
                 && !destroyed.isToken() 
                 && !c.equals(destroyed)
@@ -2495,36 +2493,6 @@ public class GameActionUtil {
         if(AllZone.GameAction.isCardInPlay(c) && c.isTapped()) c.untap();
     }
     */
-
-	private static void destroyCreature_Dingus_Staff(Card c, Card destroyed) {
-		final Card crd = destroyed;
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				Player player = crd.getController();
-				player.loseLife(2,crd);
-			}
-		};
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("Dingus Staff - Deals 2 damage to ").append(destroyed.getController()).append(".");
-		ability.setStackDescription(sb.toString());
-		
-		AllZone.Stack.add(ability);
-	}
-	
-	/*
-	private static void destroyCreature_Dauthi_Ghoul(Card c, Card destroyed) {
-		final Card crd = c;
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				if(AllZone.GameAction.isCardInPlay(crd)) crd.addCounter(Counters.P1P1, 1);
-			}
-		};
-		if(AllZone.GameAction.isCardInPlay(c)) ability.setStackDescription("Dauthi Ghoul - gets a +1/+1 counter.");
-		AllZone.Stack.add(ability);
-	}*/
 
 	private static void destroyCreature_Prowess_of_the_Fair(Card c, Card destroyed) {
         final Card crd = c;
@@ -2624,33 +2592,6 @@ public class GameActionUtil {
 	}
 
 	//***CREATURES END HERE***
-
-	//***LANDS START HERE***
-
-	public static void executeDestroyLandCardEffects(Card c, Card destroyed) {
-		if(c.getName().equals("Dingus Egg")) destroyLand_Dingus_Egg(c, destroyed);
-	}
-
-	//***
-
-	private static void destroyLand_Dingus_Egg(Card c, Card destroyed) {
-		final Card crd = destroyed;
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				Player player = crd.getController();
-				player.addDamage(2, crd);
-			}
-		};
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("Dingus Egg - Deals 2 damage to ").append(destroyed.getController()).append(".");
-		ability.setStackDescription(sb.toString());
-		
-		AllZone.Stack.add(ability);
-	}
-
-	//***LANDS END HERE***
 
 	//***ENCHANTMENTS START HERE***
 
