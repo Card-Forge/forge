@@ -9973,7 +9973,7 @@ public class CardFactory_Creatures {
         	card.addSpellAbility(discard);
         }//*************** END ************ END **************************
         
-        
+        /* Converteded to AF Trigger
         //*************** START *********** START **************************
         else if(cardName.equals("Accursed Centaur") || cardName.equals("Commander Greven il-Vec") ||
         		cardName.equals("Kjeldoran Dead") || cardName.equals("Spined Fluke") ||
@@ -10021,7 +10021,7 @@ public class CardFactory_Creatures {
 
         	card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Denizen of the Deep")) {
