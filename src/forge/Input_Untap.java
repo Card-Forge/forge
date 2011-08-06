@@ -153,20 +153,20 @@ public class Input_Untap extends Input {
     			
     		}
     	}
-    	if( AllZoneUtil.isCardInPlay("Damping Field") ) {
-    		if( AllZone.Phase.getActivePlayer().equals(AllZone.ComputerPlayer) ) {
+    	if( AllZoneUtil.isCardInPlay("Damping Field") || AllZoneUtil.isCardInPlay("Imi Statue")) {
+    		if( AllZone.Phase.getActivePlayer().isComputer() ) {
     			CardList artList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
     			artList = artList.filter(AllZoneUtil.artifacts);
     			artList = artList.filter(AllZoneUtil.tapped);
     			if( artList.size() > 0 ) {
-    				artList.get(0).untap();
+    				CardFactoryUtil.AI_getBestArtifact(artList).untap();
     			}
     		}
     		else {
     			Input target = new Input() {
 					private static final long serialVersionUID = 5555427219659889707L;
 					public void showMessage() {
-    					AllZone.Display.showMessage("Damping Field - Select one artifact to untap");
+    					AllZone.Display.showMessage("Select one tapped artifact to untap");
     					ButtonUtil.enableOnlyCancel();
     				}
     				public void selectButtonCancel() {stop();}
