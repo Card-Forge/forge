@@ -1568,6 +1568,7 @@ private int getDifferentLand(CardList list, String land)
 			ability2.setStackDescription(source.getName() + " - gets a +1/+1 counter");
 			AllZone.Stack.add(ability2);
 	  }
+      
 	  if (source.getKeyword().contains("Deathtouch"))
 	  {
 		  AllZone.GameAction.destroy(card);
@@ -1617,6 +1618,16 @@ private int getDifferentLand(CardList list, String land)
 	  System.out.println("Adding " + damageToAdd + " damage to " + card.getName());
 	  if (isCardInPlay(card))
 		  card.addDamage(damageToAdd, source);
+	  
+	  if (source.getKeyword().contains("Lifelink"))
+	   	   GameActionUtil.executeLifeLinkEffects(source, damageToAdd);
+	  
+	  CardList cl = CardFactoryUtil.getAurasEnchanting(source, "Guilty Conscience");
+	   for (Card c : cl)
+	   {
+		   GameActionUtil.executeGuiltyConscienceEffects(source, c, damageToAdd);
+	   }
+
   }
   
   /*
@@ -1671,6 +1682,20 @@ private int getDifferentLand(CardList list, String land)
      getPlayerLife(player).subtractLife(damage);
   }
 
+  public void addDamage(String player, Card source, int damage)
+  {
+      getPlayerLife(player).subtractLife(damage);
+      
+	  if (source.getKeyword().contains("Lifelink"))
+     	 GameActionUtil.executeLifeLinkEffects(source, damage);
+
+      CardList cl = CardFactoryUtil.getAurasEnchanting(source, "Guilty Conscience");
+      for (Card c : cl)
+      {
+    	  GameActionUtil.executeGuiltyConscienceEffects(source, c, damage);
+      }
+
+  }
 
   public static void main(String[] args)
   {
