@@ -1,0 +1,9 @@
+Name:Orcish Veteran
+ManaCost:2 R
+Types:Creature Orc
+Text:no text
+PT:2/2
+K:CARDNAME can't block white creatures with power 2 or greater.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_veteran.jpg
+End

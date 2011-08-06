@@ -240,6 +240,10 @@ public class CombatUtil {
         
         if(!attacker.getKeyword().contains("Shadow") && blocker.getKeyword().contains("Shadow")) return false;
 
+        if(blocker.hasKeyword("CARDNAME can't block white creatures with power 2 or greater.")) {
+        	if(attacker.isWhite() && attacker.getNetAttack() >= 2) return false;
+        }
+        
         // CARDNAME can't block creatures with power ...
         int powerLimit[] = {0};
         int keywordPosition = 0;
