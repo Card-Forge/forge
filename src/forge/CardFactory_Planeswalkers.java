@@ -2705,7 +2705,7 @@ class CardFactory_Planeswalkers {
 	          turn[0] = AllZone.Phase.getTurn();
 
 	          for (int i=0;i<5;i++)
-	        	  CardFactoryUtil.makeToken("Dragon", "R 4 4 Dragon", card2, "W", new String[]{"Creature", "Dragon"}, 4, 4, new String[] {"Flying"}); 
+	        	  CardFactoryUtil.makeToken("Dragon", "R 4 4 Dragon", card2, "R", new String[]{"Creature", "Dragon"}, 4, 4, new String[] {"Flying"}); 
 	        }
 	        public boolean canPlay()
 	        {

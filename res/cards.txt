@@ -1,3 +1,76 @@
+Abyssal Hunter
+3 B
+Creature Human Assassin
+no text
+1/1
+abDamageTgtC B T:X:Drawback$TapTgt:Tap target creature. Abyssal Hunter deals damage equal to Abyssal Hunter's power to that creature.:Abyssal Hunter - tap creature and deal damage to it.
+SVar:X:Count$CardPower
+
+Brothers of Fire
+1 R R
+Creature Human Shaman
+no text
+2/2
+abDamageTgtCP 1 R R:1:Drawback$DamageYou/1:Brothers of Fire deals 1 damage to target creature or player and 1 damage to you.:Brothers of Fire - deal damage to creature or player and you.
+
+Fireslinger
+1 R
+Creature Human Wizard
+no text
+1/1
+abDamageTgtCP T:1:Drawback$DamageYou/1:Fireslinger deals 1 damage to target creature or player and 1 damage to you.:Fireslinger - deal damage to creature or player and you.
+
+Granger Guildmage
+G
+Creature Human Wizard
+no text
+1/1
+abPumpTgt W T:First Strike
+abDamageTgtCP R T:1:Drawback$DamageYou/1:Granger Guildmage deals 1 damage to target creature or player and 1 damage to you.:Granger Guildmage - damage creature or player and you.
+
+Psionic Entity
+4 U
+Creature Illusion
+no text
+2/2
+abDamageTgtCP T:2:Drawback$DamageSelf/3:Psionic Entity deals 2 damage to target creature or player and 3 damage to itself.:Psionic Entity - deal damage to creature or player and itself.
+
+Rakdos Ickspitter
+1 B R
+Creature Thrull
+no text
+1/1
+abDamageTgtC T:1:Drawback$LoseLifeTgtCtrlr/1:Rakdos Ickspitter deals 1 damage to target creature and that creature's controller loses 1 life.:Rakdos Ickspitter - deal damage to creature and its controller loses life.
+
+Reckless Embermage
+3 R
+Creature Human Wizard
+no text
+2/2
+abDamageTgtCP 1 R:1:Drawback$DamageSelf/1:Reckless Embermage deals 1 damage to target creature or player and 1 damage to itself.:Reckless Embermage - deal damage to creature or player and itself.
+
+Spikeshot Goblin
+2 R
+Creature Goblin Shaman
+no text
+1/2
+abDamageTgtCP R T:X:Spikeshot Goblin deals damage equal to its power to target creature or player.:Spikeshot Goblin - deal X damage to creature or player.
+
+Stun Sniper
+W R
+Creature Human Archer
+no text
+1/1
+abDamageTgtC 1 T:1:Drawback$TapTgt:Stun Sniper deals 1 damage to target creature. Tap that creature.:Stun Sniper - deals 1 damage to target creature. Tap that creature.
+
+Sunflare Shaman
+1 R
+Creature Elemental Shaman
+no text
+2/1
+abDamageTgtCP 1 R T:X:Drawback$DamageSelf/X:Sunflare Shaman deals X damage to target creature or player and X damage to itself, where X is the number of Elemental cards in your graveyard.:Sunflare Shaman - deals X damage to creature or player and X damage to itself.
+SVar:X:Count$TypeInYourYard.Elemental
+
 Flamewave Invoker
 2 R
 Creature Goblin Mutant
