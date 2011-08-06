@@ -405,6 +405,8 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Dr No 3  		hard   	The Rack, Balance, Propaganda, discard spells");
         sb.append("\r\n");
+        sb.append("Electro 3  		hard   	Resonantg's Stormfront deck with mods, Arashi, the Sky Asunder + Ball Lightning");
+        sb.append("\r\n");
         sb.append("Fat Albert 1   		easy   	Winter Orb, Keldon Warlord, mana Elves/Slivers + several 4/4 creatures");
         sb.append("\r\n");
         sb.append("Fat Albert 2   		medium   	Winter Orb, Keldon Warlord, mana Elves/Slivers + several 5/5 creatures");
