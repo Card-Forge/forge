@@ -170,10 +170,26 @@ public class ComputerAI_General implements Computer {
         CardList hand = new CardList(AllZone.Computer_Hand.getCards());
         
         hand = hand.filter(new CardListFilter() {
+        	// Beached As Start
             public boolean addCard(Card c) {
                 Collection<Card> play = playMain1Cards;
                 if(c.isLand()) return false;
                 if(play.contains(c.getName()) || (c.isCreature() && c.getKeyword().contains("Haste"))) return true;
+                CardList Vengevines = new CardList();
+                Vengevines.addAll(AllZone.getZone(Constant.Zone.Graveyard, "Computer").getCards());       
+                Vengevines = Vengevines.getName("Vengevine");
+                if(Vengevines.size() > 0) {
+                CardList Creatures = new CardList();  
+                CardList Creatures2 = new CardList();       
+                Creatures.addAll(AllZone.getZone(Constant.Zone.Hand, "Computer").getCards());
+        		for(int i = 0; i < Creatures.size(); i++) {
+        			if(Creatures.get(i).getType().contains("Creature") && CardUtil.getConvertedManaCost(Creatures.get(i).getManaCost()) <= 3) {
+        				Creatures2.add(Creatures.get(i));
+        			}
+        		}
+                if(Creatures2.size() + Phase.ComputerCreatureSpellCount > 1 && c.getType().contains("Creature") && CardUtil.getConvertedManaCost(c.getManaCost()) <= 3) return true;	
+                } // AI Improvement for Vengevine
+            	// Beached As End
                 	return false;
             }
         });
