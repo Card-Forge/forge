@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Enchantment Aura
 Text:Enchanted creature gets +2/+2 and has flying.\r\nWhenever a creature dealt damage by enchanted creature this turn is put into a graveyard, put a +1/+1 counter on that creature.
 K:Enchant creature
-K:enPump:+2/+2/Flying & Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.
+K:enPump:+2/+2/Flying & HIDDEN Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampiric_embrace.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/164.jpg

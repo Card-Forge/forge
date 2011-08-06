@@ -2455,6 +2455,8 @@ public class Card extends MyObservable {
              else if (Property.startsWith("dealtDamageToYouThisTurn")){
             	 if(!(dealtDmgToHumanThisTurn && getController().isPlayer(AllZone.ComputerPlayer))
             			 && !(dealtDmgToComputerThisTurn && getController().isPlayer(AllZone.HumanPlayer))) return false;}
+             else if (Property.startsWith("wasDealtDamageThisTurn")){
+            	 if((getReceivedDamageFromThisTurn().keySet()).isEmpty())return false;}
              
              else if (Property.startsWith("enchanted"))
              	{ if(!isEnchanted()) return false;}
