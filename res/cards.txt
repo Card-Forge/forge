@@ -4967,8 +4967,9 @@ Eternity Snare
 5 U
 Enchantment Aura
 Enchanted creature doesn't untap during its controller's untap step.
-When this card comes into play, draw a card.
 Enchant creature
+enPumpCurse:This card doesn't untap during your untap step.
+When this card comes into play, draw a card.
 
 Elvish Hunter
 1 G
@@ -5210,9 +5211,10 @@ Enchant creature
 Despondency
 1 B
 Enchantment Aura
-Enchanted creature gets -2/+0.
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
+Enchanted creature gets -2/-0.
 Enchant creature
+enPumpCurse:-2/-0
+When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 
 Snow-Covered Forest
 no cost
@@ -5288,15 +5290,17 @@ Tiger Claws
 2 G
 Enchantment Aura
 Enchanted creature gets +1/+1 and has trample.
-Enchant creature
 Flash
+Enchant creature
+enPump:+1/+1/Trample
 
 Mageta's Boon
 1 W
 Enchantment Aura
 Enchanted creature gets +1/+2.
-Enchant creature
 Flash
+Enchant creature
+enPump:+1/+2
 
 Buoyancy
 1 U
@@ -5311,6 +5315,7 @@ Feast of the Unicorn
 Enchantment Aura
 Enchanted creature gets +4/+0.
 Enchant creature
+enPump:+4/+0
 
 Vigilance
 W
@@ -5323,6 +5328,7 @@ W
 Enchantment Aura
 Enchanted creature has protection from black and from red.
 Enchant creature
+enPump:Protection from black & Protection from red
 
 Benalish Heralds
 3 W
@@ -5336,6 +5342,7 @@ U R
 Enchantment Aura
 Enchanted creature gets +2/+0 and has flying.
 Enchant creature
+enPump:+2/+0/Flying
 
 Benalish Trapper
 1 W
@@ -5351,8 +5358,9 @@ no text
 Maniacal Rage
 1 R
 Enchantment Aura
-Enchanted creature gets +2/+2 and this creature cannot block.
+Enchanted creature gets +2/+2 and can't block.
 Enchant creature
+enPump:+2/+2/This creature cannot block
 
 Scavenged Weaponry
 2 B
@@ -5367,12 +5375,14 @@ W
 Enchantment Aura
 Enchanted creature has protection from green and from blue.
 Enchant creature
+enPump:Protection from green & Protection from blue
 
 Reflexes
 R
 Enchantment Aura
 Enchanted creature has first strike.
 Enchant creature
+enPump:First Strike
 
 Dakmor Ghoul
 2 B B
@@ -5799,20 +5809,23 @@ Cessation
 2 W
 Enchantment Aura
 Enchanted creature can't attack.
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 Enchant creature
+enPumpCurse:This creature can't attack
+When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 
 Pacifism
 1 W
 Enchantment Aura
 Enchanted creature can't attack or block.
 Enchant creature
+enPumpCurse:This creature can't attack or block
 
 Bound in Silence
 2 W
 Tribal Enchantment Rebel Aura
 Enchanted creature can't attack or block.
 Enchant creature
+enPumpCurse:This creature can't attack or block
 
 Barrenton Cragtreads
 2 WU WU
@@ -6504,9 +6517,10 @@ no text
 AEther Web
 1 G
 Enchantment Aura
-Enchanted creature gets +1/+1, has reach, and can block creatures with shadow as though they didn't have shadow. 
-Enchant creature
+Enchanted creature gets +1/+1, has reach, and can block creatures with shadow as though they didn't have shadow.
 Flash
+Enchant creature
+enPump:+1/+1/Reach & This creature can block creatures with shadow as though they didn't have shadow.
 
 Emeria Angel
 2 W W
@@ -6769,6 +6783,7 @@ Serra's Embrace
 Enchantment Aura
 Enchanted creature gets +2/+2 and has flying and vigilance.
 Enchant creature
+enPump:+2/+2/Flying & Vigilance
 
 Flight
 U
@@ -6799,8 +6814,9 @@ Sluggishness
 1 R
 Enchantment Aura
 Enchanted creature can't block.
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 Enchant creature
+enPumpCurse:This creature cannot block
+When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 
 Aspect of Mongoose
 1 G
@@ -6836,8 +6852,9 @@ Brilliant Halo
 1 W
 Enchantment Aura
 Enchanted creature gets +1/+2.
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 Enchant creature
+enPump:+1/+2
+When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 
 Rancor
 G
@@ -6883,6 +6900,7 @@ Armadillo Cloak
 Enchantment Aura
 Enchanted creature gets +2/+2 and has trample and lifelink.
 Enchant creature
+enPump:+2/+2/Trample & Lifelink
 
 Dryad Sophisticate
 1 G
@@ -8243,6 +8261,7 @@ B
 Enchantment Aura
 Enchanted creature gets -2/-1.
 Enchant creature
+enPumpCurse:-2/-1
 
 Unholy Strength
 B
