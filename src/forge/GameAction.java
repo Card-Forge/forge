@@ -1882,7 +1882,7 @@ public class GameAction {
                          }
                          }
                          Mana = Mana.trim();
-                         if(Mana.isEmpty() || Mana.equals("0")) {
+                         if(Mana.length() == 0 || Mana.equals("0")) {
                          	if(sa.isSpell()) Mana = "0";
                          	else {
                          		Mana = "1";
@@ -1923,7 +1923,7 @@ public class GameAction {
  	        }
          } // Khalni Hydra      
          return manaCost;
-    }
+    }//GetSpellCostChange
     public void playSpellAbility(SpellAbility sa) {
     	ManaCost manaCost = new ManaCost(sa.getManaCost());
     	if(sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {

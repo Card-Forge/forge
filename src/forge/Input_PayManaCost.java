@@ -23,12 +23,7 @@ public class Input_PayManaCost extends Input {
         originalCard = sa.getSourceCard();
             
         spell = sa;
-        
-        if (sa.getSourceCard().getName().equals("Rhys the Redeemed")) {
-        	System.out.println("Rhys!");
-        	
-        }
-        
+
         if(Phase.GameBegins == 1)  {
         	if(sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
                 if(spell.getAfterPayMana() != null) stopSetNext(spell.getAfterPayMana());
