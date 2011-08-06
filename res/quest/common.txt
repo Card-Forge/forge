@@ -865,6 +865,7 @@ Regress
 Rejuvenate
 Remote Isle
 Remove Soul
+Rendclaw Trow
 Renewed Faith
 Repentant Blacksmith
 Reprisal

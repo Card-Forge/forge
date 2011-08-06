@@ -5181,7 +5181,7 @@ Loxodon Mystic
 3 W W
 Creature Elephant Cleric
 no text
-1/1
+3/3
 
 Giant Strength
 R R

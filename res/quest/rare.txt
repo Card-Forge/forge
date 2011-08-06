@@ -484,7 +484,6 @@ Pulse of the Tangle
 Punish Ignorance
 Purify
 Pygmy Allosaurus
-Pyroclasm
 Quietus Spike
 Quirion Dryad
 Radiant, Archangel
@@ -504,7 +503,6 @@ Raven Guild Master
 Reach of Branches
 Reckless Embermage
 Reki, the History of Kamigawa
-Rendclaw Trow
 Retribution of the Meek
 Reya Dawnbringer
 Rhys the Redeemed

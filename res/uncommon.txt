@@ -490,6 +490,7 @@ Puppeteer
 Purge
 Putrefy
 Pyre Charger
+Pyroclasm
 Pyrohemia
 Quagmire Lamprey
 Rabid Wombat
