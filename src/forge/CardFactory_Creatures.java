@@ -12936,7 +12936,7 @@ public class CardFactory_Creatures {
                     return (true);
                 }
             };
-            ability.setDescription("2, T: Put a +1/+1 counter on Energizer.");
+            ability.setDescription("2, tap: Put a +1/+1 counter on Energizer.");
             ability.setStackDescription("Put a +1/+1 counter on target Energizer.");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
@@ -14099,7 +14099,7 @@ public class CardFactory_Creatures {
                 }//makeToken()
             };//SpellAbility
             card.addSpellAbility(a1);
-            a1.setDescription("R, T: Put a 3/1 red Elemental creature token with haste into play.");
+            a1.setDescription("R, tap: Put a 3/1 red Elemental creature token with haste into play.");
             a1.setStackDescription("Put a 3/1 red Elemental creature token with haste into play.");
             
             a1.setBeforePayMana(new Input_PayManaCost(a1));
@@ -14134,7 +14134,7 @@ public class CardFactory_Creatures {
                 }//makeToken()
             };//SpellAbility
             card.addSpellAbility(a1);
-            a1.setDescription("T: Put a legendary 2/2 green and white Wolf creature token named Voja into play.");
+            a1.setDescription("tap: Put a legendary 2/2 green and white Wolf creature token named Voja into play.");
             a1.setStackDescription("Put a 2/2 white green Legendary Wolf creature token named Voja into play.");
         }//*************** END ************ END **************************
         
@@ -14694,7 +14694,7 @@ public class CardFactory_Creatures {
                 
             };//SpellAbility
             card.addSpellAbility(a1);
-            a1.setDescription("T: Put an 8/8 Beast creature token into play that's red, green, and white.");
+            a1.setDescription("tap: Put an 8/8 Beast creature token into play that's red, green, and white.");
             a1.setStackDescription("Put an 8/8 Beast creature token into play that's red, green, and white.");
             
             //a1.setBeforePayMana(new Input_PayManaCost(a1));
