@@ -80,6 +80,8 @@ public class Card extends MyObservable {
     
     private int                          X                                 = 0;
     
+    private int 					     multiKickerMagnitude			   = 0;
+    
     private String                       owner                             = "";
     private String                       controller                        = "";
     private String                       name                              = "";
@@ -1137,6 +1139,21 @@ public class Card extends MyObservable {
     
     public int getUpkeepDamage() {
         return upkeepDamage;
+    }
+    
+    public void addMultiKickerMagnitude(int n)
+    {
+    	multiKickerMagnitude += n;
+    }
+    
+    public void setMultiKickerMagnitude(int n) 
+    {
+    	multiKickerMagnitude = n;
+    }
+    
+    public int getMultiKickerMagnitude()
+    {
+    	return multiKickerMagnitude;
     }
     
     //public int getAttack(){return attack;}

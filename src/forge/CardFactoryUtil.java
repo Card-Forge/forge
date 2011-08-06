@@ -1994,6 +1994,45 @@ public class CardFactoryUtil {
         return count;
     }
     
+    public static String sumManaCost(String manacost1, String manacost2)
+    {
+    	String tokenized1[] = manacost1.split("\\s");
+    	String tokenized2[] = manacost2.split("\\s");
+    	
+    	StringBuilder sb = new StringBuilder();
+    	
+    	int totalNumberCost = 0;
+    	if (Character.isDigit(tokenized1[0].charAt(0)) && Character.isDigit(tokenized2[0].charAt(0)))
+    	{
+    		int cost1 = Integer.parseInt(tokenized1[0]);
+    		int cost2 = Integer.parseInt(tokenized2[0]);
+    		totalNumberCost = cost1 + cost2;
+    	}
+    	else if (Character.isDigit(tokenized1[0].charAt(0)))
+    		totalNumberCost = Integer.parseInt(tokenized1[0]);
+    	else if (Character.isDigit(tokenized2[0].charAt(0)))
+    	    totalNumberCost = Integer.parseInt(tokenized2[0]);
+    	
+    	if (totalNumberCost != 0) {
+    		sb.append(totalNumberCost);
+    	}
+    	
+    	for (int i=1;i<tokenized1.length;i++)
+    	{
+    		sb.append(" ");
+    		sb.append(tokenized1[i]);
+    	}
+    	
+    	for (int i=1;i<tokenized2.length;i++)
+    	{
+    		sb.append(" ");
+    		sb.append(tokenized2[i]);
+    	}
+    	
+    	//TODO: resort mana symbol order?
+    	return sb.toString().trim();
+    }
+    
     public static String multiplyManaCost(String manacost, int multiplier) {
         if(multiplier == 0) return "";
         if(multiplier == 1) return manacost;

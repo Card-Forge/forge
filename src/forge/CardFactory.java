@@ -215,6 +215,20 @@ public class CardFactory implements NewConstants {
             }
         }
         
+        if (hasKeyword(card, "Multikicker") != -1)
+        {
+        	int n = hasKeyword(card, "Multikicker");
+        	if (n!= -1)
+        	{
+        		String parse = card.getKeyword().get(n).toString();
+        		String k[] = parse.split("kicker ");
+        	
+        		SpellAbility sa = card.getSpellAbility()[0];
+        		sa.setIsMultiKicker(true);
+        		sa.setMultiKickerManaCost(k[1]);
+        	}
+        }
+        
         /*  //Creatures with simple, self-targeted mana-activated keyword adding abilities
             //-1 means not found
             while(hasKeyword(card, "KPump") != -1)

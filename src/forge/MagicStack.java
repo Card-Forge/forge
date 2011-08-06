@@ -11,10 +11,43 @@ public class MagicStack extends MyObservable
 	  this.updateObservers();
   }
 
-   public void add(SpellAbility sp)
+  public void add(SpellAbility sp)
   {
 	  if(sp instanceof Ability_Mana || sp instanceof Ability_Triggered)//TODO make working triggered abilities!
-		  sp.resolve(); else push(sp);
+		  sp.resolve(); 
+	  else {
+		  if (sp.isMultiKicker())
+		  {   
+			  final SpellAbility sa = sp;
+			  final Ability ability = new Ability(sp.getSourceCard(), sp.getMultiKickerManaCost())
+			  {
+				  public void resolve()
+				  {
+					  this.getSourceCard().addMultiKickerMagnitude(1);
+					  //System.out.println("MultiKicker has been paid (currently multi-kicked " + this.getSourceCard().getName() + " " + this.getSourceCard().getMultiKickerMagnitude()+ " times)");
+				  }
+			  };
+			  
+			  final Command paidCommand = new Command() {
+				    private static final long serialVersionUID = -6037161763374971106L;
+					public void execute() {
+	                    ability.resolve();
+	                    AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Multikicker for " + sa.getSourceCard() + "\r\n",
+		                        ability.getManaCost(), this, Command.Blank));
+	                }
+	          };
+			  
+			  if(sp.getSourceCard().getController().equals(Constant.Player.Human)) {
+	                AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Multikicker for " + sp.getSourceCard() + "\r\n",
+	                        ability.getManaCost(), paidCommand, Command.Blank));
+	            } 
+			    else //computer
+	            {
+	                while(ComputerUtil.canPayCost(ability)) ComputerUtil.playNoStack(ability);
+	            }
+		  }
+		  push(sp);
+	  }
   }
   public int size()
   {

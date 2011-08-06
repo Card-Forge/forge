@@ -17075,7 +17075,6 @@ public class CardFactory_Creatures {
                 }
             };
             
-
             Command commandComes = new Command() {
                 private static final long serialVersionUID = -2622859088591798773L;
                 
@@ -17226,6 +17225,31 @@ public class CardFactory_Creatures {
             });
             card.addSpellAbility(ab);
             
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Gnarlid Pack") || cardName.equals("Apex Hawks") || cardName.equals("Enclave Elite"))
+        {
+        	final Ability ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    card.addCounter(Counters.P1P1, card.getMultiKickerMagnitude());
+                    card.setMultiKickerMagnitude(0);
+                }
+            };
+            StringBuilder sb = new StringBuilder();
+            sb.append(cardName);
+            sb.append(" enters the battlefield with a +1/+1 counter on it for each time it was kicked.");
+            ability.setStackDescription(sb.toString());
+            
+            final Command comesIntoPlay = new Command() {
+				private static final long serialVersionUID = 4245563898487609274L;
+
+				public void execute() {
+                    AllZone.Stack.add(ability);
+                }
+            };
+            card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
         
         // Cards with Cycling abilities
