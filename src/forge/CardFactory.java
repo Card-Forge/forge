@@ -4431,12 +4431,12 @@ public class CardFactory implements NewConstants {
                      if (Tgt[0] == true)
                      {
                         spDesc[0] = "Target player gains " + NumLife[0] + " life.";
-                        stDesc[0] =  cardName + " - target player gains life";
+                        stDesc[0] =  cardName + " - target player gains " + NumLife[0] + " life";
                      }
                      else
                      {
                         spDesc[0] = "You gain " + NumLife[0] + " life.";
-                        stDesc[0] = cardName + " - you gain life";
+                        stDesc[0] = cardName + " - you gain " + NumLife[0] + " life";
                      }
                   }
 
