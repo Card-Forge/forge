@@ -4506,44 +4506,6 @@ public class CardFactory_Creatures {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Thoughtcutter Agent")) {
-        	Target target = new Target(card,"Select target player", new String[] {"Player"});
-        	Cost abCost = new Cost("U B T", cardName, true);
-            final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
-                private static final long serialVersionUID = -3880035465617987801L;
-                
-                @Override
-                public void resolve() {
-                	Player player = getTargetPlayer();
-                    CardList hand = AllZoneUtil.getPlayerHand(player);
-                    player.loseLife(1, card);
-                    if(player.equals(AllZone.ComputerPlayer)) {
-                        GuiUtils.getChoice("Look", hand.toArray());
-                    }
-                    
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    //computer should play ability if this creature doesn't attack
-                    Combat c = ComputerUtil.getAttackers();
-                    CardList list = new CardList(c.getAttackers());
-                    
-                    //could this creature attack?, if attacks, do not use ability
-                    return (!list.contains(card));
-                }
-            };//SpellAbility
-            ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            card.addSpellAbility(ability);
-            ability.setDescription(abCost+"Target player loses 1 life and reveals his or her hand.");
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" - target player loses 1 life.");
-            ability.setStackDescription(sb.toString());
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Singe-Mind Ogre")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
