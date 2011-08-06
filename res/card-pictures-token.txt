@@ -40,3 +40,4 @@
 [T]w_4_4_elemental.jpg		http://www.mtgmintcard.com/images/products/286/MAGIC-THE-GATHERING-TOKEN-ELEMENTAL-TOKEN-LORC130.jpg
 [T]c_0_1_eldrazi_spawn.jpg			http://www.mtgmintcard.com/images/products/50/MAGIC-THE-GATHERING-EKDRAZI-SPAWN-1A-ROET001A.jpg
 [T]r_4_4_hellion.jpg			http://www.mtgmintcard.com/images/products/304/MAGIC-THE-GATHERING-HELLION-TOKEN-ROET003.jpg
+[T]w_4_4_mirror_sigil_sergeant.jpg http://www.wizards.com/global/images/magic/general/mirror_sigil_sergeant.jpg
