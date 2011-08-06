@@ -9091,7 +9091,10 @@ public class GameActionUtil {
 							"Creature", "Faerie", "Rogue"}, 1, 1, new String[] {"Flying"});
 				}// resolve()
 			};// Ability
-			ability.setStackDescription("Bitterblossom - " +player+" loses 1 life and puts a 1/1 token into play.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Bitterblossom - ").append(player).append(" loses 1 life and puts a 1/1 token into play.");
+			ability.setStackDescription(sb.toString());
 
 			AllZone.Stack.add(ability);
 		}// for
@@ -9114,8 +9117,11 @@ public class GameActionUtil {
 							"Creature", "Goblin"}, 1, 1, new String[] {"Haste"});
 				}// resolve()
 			};// Ability
-			ability.setStackDescription("Goblin Assault - " + player +
-			" puts a 1/1 red Goblin creature token with haste onto the battlefield.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Goblin Assault - ").append(player);
+			sb.append(" puts a 1/1 red Goblin creature token with haste onto the battlefield.");
+			ability.setStackDescription(sb.toString());
 
 			AllZone.Stack.add(ability);
 		}// for
@@ -9140,8 +9146,11 @@ public class GameActionUtil {
 						c.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(c));
 				}// resolve()
 			};// Ability
-			ability.setStackDescription("Awakening Zone - " + player +
-			" puts a 0/1 colorless Eldrazi Spawn creature token onto the battlefield.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Awakening Zone - ").append(player);
+			sb.append(" puts a 0/1 colorless Eldrazi Spawn creature token onto the battlefield.");
+			ability.setStackDescription(sb.toString());
 
 			AllZone.Stack.add(ability);
 		}// for
@@ -9164,8 +9173,11 @@ public class GameActionUtil {
 							"Creature", "Squirrel"}, 1, 1, new String[] {""});
 				}// resolve()
 			};// Ability
-			ability.setStackDescription("Nut Collector - " + player +
-			" puts a 1/1 green Squirrel creature token onto the battlefield.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Nut Collector - ").append(player);
+			sb.append(" puts a 1/1 green Squirrel creature token onto the battlefield.");
+			ability.setStackDescription(sb.toString());
 
 			AllZone.Stack.add(ability);
 		}// for
@@ -9221,7 +9233,11 @@ public class GameActionUtil {
 					}//else
 				}//resolve()
 			};//Ability
-			ability.setStackDescription(crd + " - sacrifice Masticore unless you discard a card.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(crd).append(" - sacrifice Masticore unless you discard a card.");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}// for
 	}//upkeep_Masticore
@@ -9263,8 +9279,12 @@ public class GameActionUtil {
 						AllZone.GameAction.sacrifice(creats.get(0));
 					}
 				}
-			};
-			ability.setStackDescription("Eldrazi Monument - " + player + " sacrifices a creature.");
+			};// ability
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Eldrazi Monument - ").append(player).append(" sacrifices a creature.");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}
 
@@ -9289,11 +9309,15 @@ public class GameActionUtil {
 					//AllZone.GameAction.addDamage(player, Source, 1);
 					player.addDamage(1, Source);
 				}
-			};
-			ability.setStackDescription(blaze.get(i) + " - has a blaze counter and deals 1 damage to" + player + ".");
+			};// ability
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(blaze.get(i)).append(" - has a blaze counter and deals 1 damage to ");
+			sb.append(player).append(".");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}
-
 	}
 	
 	private static void upkeep_Mycoloth() {
@@ -9323,8 +9347,11 @@ public class GameActionUtil {
 					CardFactoryUtil.makeTokenSaproling(card.getController());
 				}
 			};// Ability
-			ability.setStackDescription("Mycoloth - " + player
-					+ " puts a 1/1 green Saproling into play for each +1/+1 counter on Mycoloth.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Mycoloth - ").append(player);
+			sb.append(" puts a 1/1 green Saproling into play for each +1/+1 counter on Mycoloth.");
+			ability.setStackDescription(sb.toString());
 
 			AllZone.Stack.add(ability);
 		}// for
@@ -9472,8 +9499,11 @@ public class GameActionUtil {
 							AllZone.Stack.add(devour);
 						}
 					};
-
-					devour.setStackDescription(c.getName() + " - gets 2 +1/+1 counter(s) per devoured creature.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(c.getName()).append(" - gets 2 +1/+1 counter(s) per devoured creature.");
+					devour.setStackDescription(sb.toString());
+					
 					devour.setDescription("Devour 2");
 					c.addSpellAbility(devour);
 					c.addComesIntoPlayCommand(intoPlay);
@@ -9519,8 +9549,11 @@ public class GameActionUtil {
 					}
 				}// resolve()
 			};// Ability
-			ability.setStackDescription("Bringer of the Green Dawn - " + player
-					+ " puts a 3/3 Green Beast token creature into play.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Bringer of the Green Dawn - ").append(player);
+			sb.append(" puts a 3/3 Green Beast token creature into play.");
+			ability.setStackDescription(sb.toString());
 
 			AllZone.Stack.add(ability);
 		}// for
@@ -9593,9 +9626,11 @@ public class GameActionUtil {
 
 					}// resolve()
 				};// Ability
-				ability.setStackDescription("Bringer of the White Dawn - " + player
-						+ " returns an artifact to play.");
-
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append("Bringer of the White Dawn - ").append(player);
+				sb.append(" returns an artifact to play.");
+				ability.setStackDescription(sb.toString());
 
 				AllZone.Stack.add(ability);
 			}// for
@@ -9620,7 +9655,10 @@ public class GameActionUtil {
 					player.addDamage(1, crd);
 				}
 			};// Ability
-			ability.setStackDescription("Serendib Efreet - deals 1 damage to " + player);
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Serendib Efreet - deals 1 damage to ").append(player);
+			ability.setStackDescription(sb.toString());
 
 			AllZone.Stack.add(ability);
 		}// for
