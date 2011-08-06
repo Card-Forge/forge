@@ -170,10 +170,12 @@ def addSets(card):
 		if len(setNum) > 4:
 			# Setnum not available here for most recent set. Switch to the .jpg used on page
 			jpgIndex = html.find('.jpg')
-			splitData = html[html.rfind('en/', 0, jpgIndex):jpgIndex].split('/')
-		
-			setAbbr = splitData[1]
-			setNum = splitData[2]
+			data = html[html.rfind('scans/en/', 0, jpgIndex):jpgIndex]
+
+			# data = scans/en/[set]/[num]
+			splitData = data.split('/')
+			setAbbr = splitData[2]
+			setNum = splitData[3]
 		
 		image = 'http://magiccards.info/scans/en/' + setAbbr + '/' + setNum + '.jpg'
 		
