@@ -1031,6 +1031,7 @@ public class GameAction {
                         for(int z = 0; z < SpellController.length - 1; z++) {
                         	if(SpellController[z + 1].equals("Controller") && (c.getController()).equals(card.getController())) Nullified = false;  
                         	if(SpellController[z + 1].equals("Opponent") && (c.getController()).equals(getOpponent(card.getController()))) Nullified = false;
+                        	if(SpellController[z + 1].equals("Any")) Nullified = false;
                         }
                         if(Nullified == true) k[4] = "Null";   
                         }
