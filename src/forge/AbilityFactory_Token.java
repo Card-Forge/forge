@@ -195,8 +195,15 @@ public class AbilityFactory_Token extends AbilityFactory {
 		
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append(AF.getHostCard().getName());
-		sb.append(" - Put ").append(finalAmount).append(" ").append(finalPower).append("/").append(finalToughness).append(" ").append(tokenName).append(" tokens onto the battlefield");
+		if (sa instanceof Ability_Sub)
+			sb.append(" ");
+		else
+			sb.append(AF.getHostCard().getName()).append(" - ");
+		
+		sb.append("Put (").append(finalAmount).append(") ").append(finalPower).append("/").append(finalToughness);
+		sb.append(" ").append(tokenName).append(" token");
+		if(finalAmount != 1) sb.append("s");
+		sb.append(" onto the battlefield");
 		
 		if(tokenOwner.equals("Opponent")) {
 			sb.append(" under your opponent's control.");
