@@ -238,6 +238,7 @@ public class AbilityFactory {
 		}
 		
 		// Fetch, Retrieve and Bounce should be converted ChangeZone 
+		/*
 		if (API.equals("Fetch")){
 			if (isAb)
 				SA = AbilityFactory_Fetch.createAbilityFetch(this);
@@ -259,6 +260,7 @@ public class AbilityFactory {
 				SA = AbilityFactory_Bounce.createSpellBounce(this);
 			hostCard.setSVar("PlayMain1", "TRUE");
 		}
+		*/
 		// Convert above abilities to gain Drawback
 		
 		if (API.equals("Pump"))

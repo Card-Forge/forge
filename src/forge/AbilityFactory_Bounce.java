@@ -1,12 +1,8 @@
 package forge;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
-
 public class AbilityFactory_Bounce {
 	// An AbilityFactory subclass for bouncing and exiling permanents
-	
+	/*
 	public static SpellAbility createAbilityBounce(final AbilityFactory AF){
 
 		final SpellAbility abBounce = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
@@ -277,4 +273,5 @@ public class AbilityFactory_Bounce {
 			}
 		}
      }
+     */
 }

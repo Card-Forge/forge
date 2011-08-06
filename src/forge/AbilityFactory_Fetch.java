@@ -1,12 +1,8 @@
 package forge;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
-
 public class AbilityFactory_Fetch {
 	// An AbilityFactory subclass for Fetching Cards from Places
-	
+	/*
 	//Destination$Battlefield|Valid$Basic|FetchNum$2|UpTo$True|[Tgt$TgtP]
 	// Fetch from the library
 	public static SpellAbility createAbilityFetch(final AbilityFactory AF){
@@ -688,4 +684,5 @@ public class AbilityFactory_Fetch {
 			}
 		}
     }//if
+    */
 }
