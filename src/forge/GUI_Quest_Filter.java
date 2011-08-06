@@ -74,8 +74,7 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
     private void initGUI() {
         try {
             
-            AnchorLayout thisLayout = new AnchorLayout();
-            getContentPane().setLayout(thisLayout);
+            getContentPane().setLayout(new AnchorLayout());
             {
                 NameText = new JTextField();
                 getContentPane().add(
@@ -111,7 +110,6 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
             }
             {
                 jLabel1 = new JLabel();
-                //AnchorLayout jLabel1Layout = new AnchorLayout();
                 getContentPane().add(
                         jLabel1,
                         new AnchorConstraint(4, 313, 153, 41, AnchorConstraint.ANCHOR_REL,
@@ -165,9 +163,8 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
     private JPanel getJPanel1() {
         if(jPanel1 == null) {
             jPanel1 = new JPanel();
-            AnchorLayout jPanel1Layout = new AnchorLayout();
             jPanel1.setPreferredSize(new java.awt.Dimension(121, 183));
-            jPanel1.setLayout(jPanel1Layout);
+            jPanel1.setLayout(new AnchorLayout());
             jPanel1.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
             jPanel1.setBackground(new java.awt.Color(192, 192, 192));
             jPanel1.add(getJCheckBoxBlack(), new AnchorConstraint(134, 985, 240, 79, AnchorConstraint.ANCHOR_REL,
@@ -206,7 +203,6 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
     private JSeparator getJSeparator1() {
         if(jSeparator1 == null) {
             jSeparator1 = new JSeparator();
-            //AnchorLayout jSeparator1Layout = new AnchorLayout();
             jSeparator1.setPreferredSize(new java.awt.Dimension(117, 6));
             jSeparator1.setLayout(null);
         }
@@ -216,7 +212,6 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
     private JCheckBox getJCheckBoxBlue() {
         if(jCheckBoxBlue == null) {
             jCheckBoxBlue = new JCheckBox();
-            //AnchorLayout jCheckBoxBlueLayout = new AnchorLayout();
             jCheckBoxBlue.setLayout(null);
             jCheckBoxBlue.setText("Blue");
             jCheckBoxBlue.setPreferredSize(new java.awt.Dimension(109, 14));
@@ -238,7 +233,6 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
     private JCheckBox getJCheckBoxGreen() {
         if(jCheckBoxGreen == null) {
             jCheckBoxGreen = new JCheckBox();
-            //AnchorLayout jCheckBoxGreenLayout = new AnchorLayout();
             jCheckBoxGreen.setLayout(null);
             jCheckBoxGreen.setText("Green");
             jCheckBoxGreen.setPreferredSize(new java.awt.Dimension(109, 12));
@@ -260,7 +254,6 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
     private JCheckBox getJCheckBoxRed() {
         if(jCheckBoxRed == null) {
             jCheckBoxRed = new JCheckBox();
-            //AnchorLayout jCheckBoxRedLayout = new AnchorLayout();
             jCheckBoxRed.setLayout(null);
             jCheckBoxRed.setText("Red");
             jCheckBoxRed.setPreferredSize(new java.awt.Dimension(109, 14));
@@ -282,7 +275,6 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
     private JCheckBox getJCheckBoxWhite() {
         if(jCheckBoxWhite == null) {
             jCheckBoxWhite = new JCheckBox();
-            //AnchorLayout jCheckBoxWhiteLayout = new AnchorLayout();
             jCheckBoxWhite.setLayout(null);
             jCheckBoxWhite.setText("White");
             jCheckBoxWhite.setPreferredSize(new java.awt.Dimension(109, 13));
@@ -304,7 +296,6 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
     private JCheckBox getJCheckBoxColorless() {
         if(jCheckBoxColorless == null) {
             jCheckBoxColorless = new JCheckBox();
-            //AnchorLayout jCheckBoxColorlessLayout = new AnchorLayout();
             jCheckBoxColorless.setLayout(null);
             jCheckBoxColorless.setText("Colorless");
             jCheckBoxColorless.setPreferredSize(new java.awt.Dimension(80, 15));
@@ -326,7 +317,6 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
     private JButton getJButtonOk() {
         if(jButtonOk == null) {
             jButtonOk = new JButton();
-            //AnchorLayout jButtonOkLayout = new AnchorLayout();
             jButtonOk.setLayout(null);
             jButtonOk.setText("OK");
             jButtonOk.setPreferredSize(new java.awt.Dimension(100, 25));
@@ -338,7 +328,6 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
     private JCheckBox getJCheckBoxBlack() {
         if(jCheckBoxBlack == null) {
             jCheckBoxBlack = new JCheckBox();
-            //AnchorLayout jCheckBoxBlackLayout = new AnchorLayout();
             jCheckBoxBlack.setLayout(null);
             jCheckBoxBlack.setText("Black");
             jCheckBoxBlack.setPreferredSize(new java.awt.Dimension(97, 20));
@@ -360,9 +349,8 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
     private JPanel getJPanel2() {
         if(jPanel2 == null) {
             jPanel2 = new JPanel();
-            AnchorLayout jPanel2Layout = new AnchorLayout();
             jPanel2.setPreferredSize(new java.awt.Dimension(121, 183));
-            jPanel2.setLayout(jPanel2Layout);
+            jPanel2.setLayout(new AnchorLayout());
             jPanel2.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
             jPanel2.setBackground(new java.awt.Color(192, 192, 192));
             jPanel2.add(getJSeparator2(), new AnchorConstraint(112, 987, 166, 20, AnchorConstraint.ANCHOR_REL,
@@ -416,7 +404,6 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
     private JSeparator getJSeparator2() {
         if(jSeparator2 == null) {
             jSeparator2 = new JSeparator();
-            //AnchorLayout jSeparator2Layout = new AnchorLayout();
             jSeparator2.setPreferredSize(new java.awt.Dimension(116, 10));
             jSeparator2.setLayout(null);
         }

@@ -171,7 +171,6 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 	private JSeparator getJSeparator1() {
 		if(jSeparator1 == null) {
 			jSeparator1 = new JSeparator();
-			//AnchorLayout jSeparator1Layout = new AnchorLayout();
 			jSeparator1.setPreferredSize(new java.awt.Dimension(117, 6));
 			jSeparator1.setLayout(null);
 			jSeparator1.setBounds(1, 20, 136, 5);
@@ -224,7 +223,6 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 	private JLabel getJLabel5() {
 		if(jLabelRed == null) {
 			jLabelRed = new JLabel();
-	//		AnchorLayout jLabel5Layout = new AnchorLayout();
 			jLabelRed.setText("Red:");
 			jLabelRed.setLayout(null);
 			jLabelRed.setBounds(10, 94, 127, 14);
@@ -235,7 +233,6 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 	private JLabel getJLabel6() {
 		if(jLabelWhite == null) {
 			jLabelWhite = new JLabel();
-	//		AnchorLayout jLabel6Layout = new AnchorLayout();
 			jLabelWhite.setText("White:");
 			jLabelWhite.setLayout(null);
 			jLabelWhite.setBounds(10, 116, 127, 13);
@@ -246,7 +243,6 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 	private JLabel getJLabel7() {
 		if(jLabelMultiColor == null) {
 			jLabelMultiColor = new JLabel();
-	//		AnchorLayout jLabel7Layout = new AnchorLayout();
 			jLabelMultiColor.setText("Multicolor:");
 			jLabelMultiColor.setLayout(null);
 			jLabelMultiColor.setBounds(10, 138, 127, 12);
@@ -257,7 +253,6 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 	private JLabel getJLabel8() {
 		if(jLabelColorless == null) {
 			jLabelColorless = new JLabel();
-	//		AnchorLayout jLabel8Layout = new AnchorLayout();
 			jLabelColorless.setText("Colorless:");
 			jLabelColorless.setLayout(null);
 			jLabelColorless.setBounds(10, 160, 128, 11);
@@ -278,7 +273,6 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 	private JLabel getJLabel1xx() {
 		if(jLabelTotal == null) {
 			jLabelTotal = new JLabel();
-	//		AnchorLayout jLabel1Layout = new AnchorLayout();
 			jLabelTotal.setText("Information about deck:");
 			jLabelTotal.setLayout(null);
 			jLabelTotal.setBounds(5, 0, 454, 35);

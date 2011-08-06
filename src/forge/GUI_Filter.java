@@ -312,7 +312,6 @@ public class GUI_Filter extends javax.swing.JDialog {
     private JButton getJButtonOk() {
         if(jButtonOk == null) {
             jButtonOk = new JButton();
-            //AnchorLayout jButtonOkLayout = new AnchorLayout();
             jButtonOk.setLayout(null);
             jButtonOk.setText("OK");
             jButtonOk.setPreferredSize(new java.awt.Dimension(100, 25));
@@ -324,7 +323,6 @@ public class GUI_Filter extends javax.swing.JDialog {
     private JCheckBox getJCheckBoxBlack() {
         if(jCheckBoxBlack == null) {
             jCheckBoxBlack = new JCheckBox();
-            //AnchorLayout jCheckBoxBlackLayout = new AnchorLayout();
             jCheckBoxBlack.setLayout(null);
             jCheckBoxBlack.setText("Black");
             jCheckBoxBlack.setPreferredSize(new java.awt.Dimension(97, 20));
@@ -402,7 +400,6 @@ public class GUI_Filter extends javax.swing.JDialog {
     private JSeparator getJSeparator2() {
         if(jSeparator2 == null) {
             jSeparator2 = new JSeparator();
-            //AnchorLayout jSeparator2Layout = new AnchorLayout();
             jSeparator2.setPreferredSize(new java.awt.Dimension(116, 10));
             jSeparator2.setLayout(null);
         }

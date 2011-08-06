@@ -34,7 +34,7 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
-import org.jdesktop.swingx.MultiSplitPane;
+import org.jdesktop.swingx.JXMultiSplitPane;
 import org.jdesktop.swingx.MultiSplitLayout.Node;
 
 import forge.error.ErrorViewer;
@@ -110,7 +110,7 @@ public class Gui_DeckEditorNew extends JFrame implements CardContainer, NewConst
     private JCheckBox        artifactCheckBox     = new JCheckBox("Artifact", true);
     private JCheckBox        enchantmentCheckBox  = new JCheckBox("Enchant", true);
     
-    private MultiSplitPane   pane;
+    private JXMultiSplitPane   pane;
     
     private CardPoolModel    topModel;
     private CardPoolModel    bottomModel;
@@ -160,7 +160,7 @@ public class Gui_DeckEditorNew extends JFrame implements CardContainer, NewConst
         //making the multi split pane
         Node model;
         File f = ForgeProps.getFile(LAYOUT);
-        pane = new MultiSplitPane();
+        pane = new JXMultiSplitPane();
         try {
             XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(f)));
             model = (Node) decoder.readObject();

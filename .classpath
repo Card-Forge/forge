@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="res/lib/java-image-scaling-0.8.4.jar"/>
 	<classpathentry kind="lib" path="res/lib/google-collections-1.0.jar"/>
 	<classpathentry kind="lib" path="res/lib/miglayout-3.7.3.1-swing.jar"/>
+	<classpathentry kind="lib" path="res/lib/jl1.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

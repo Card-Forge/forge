@@ -58,7 +58,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import org.jdesktop.swingx.MultiSplitPane;
+import org.jdesktop.swingx.JXMultiSplitPane;
 import org.jdesktop.swingx.MultiSplitLayout.Node;
 
 import forge.error.ErrorViewer;
@@ -1006,7 +1006,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
     public static JCheckBoxMenuItem eotCheckboxForMenu       = new JCheckBoxMenuItem("Stop at End of Turn", true);
     public static JCheckBoxMenuItem playsoundCheckboxForMenu = new JCheckBoxMenuItem("Play Sound", false);
     
-    MultiSplitPane                  pane                     = new MultiSplitPane();
+    JXMultiSplitPane                  pane                     = new JXMultiSplitPane();
     JButton                         cancelButton             = new JButton();
     JButton                         okButton                 = new JButton();
     JTextArea                       messageArea              = new JTextArea(1, 10);
