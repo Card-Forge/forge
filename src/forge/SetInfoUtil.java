@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class SetInfoUtil {
 	
 	private static String[][] sets = {
+		{"MBP", "MBP", "Media Insert Promo"},
 		{"A", "LEA", "Limited Edition Alpha"},
 		{"B", "LEB", "Limited Edition Beta"},
 		{"U", "2ED", "Unlimited"},
