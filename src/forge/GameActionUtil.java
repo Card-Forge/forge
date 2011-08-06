@@ -35,7 +35,6 @@ public class GameActionUtil {
 		upkeep_Lord_of_the_Pit();
 		upkeep_Drop_of_Honey();
 		upkeep_Planar_Collapse();
-		upkeep_Genesis();
 		upkeep_Demonic_Hordes();
 		upkeep_Phyrexian_Arena();
 		upkeep_Fallen_Empires_Storage_Lands();
@@ -2616,108 +2615,6 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}//end for
 	}// upkeep_Drop_of_Honey()
-	
-	/**
-	 * runs the upkeep for Genesis
-	 */
-	private static void upkeep_Genesis() {
-		/*
-		 * At the beginning of your upkeep, if Genesis is in your graveyard,
-		 * you may pay 2G. If you do, return target creature card from your 
-		 * graveyard to your hand.
-		 */
-		
-		// The ordering is a bit off, it should be: trigger, add ability, resolve, pay mana, if paid, return creature.
-		
-		final Player player = AllZone.Phase.getPlayerTurn();
-		final CardList grave = AllZoneUtil.getPlayerGraveyard(player, "Genesis");
-
-		for(int i = 0; i < grave.size(); i++) {
-			final Card c = grave.get(i);
-
-			final Ability ability = new Ability(c, "2 G") {
-				CardListFilter creatureFilter = new CardListFilter() {
-					public boolean addCard(Card c) {
-						return c.isCreature();
-					}
-				};
-				@Override
-				public void resolve() {
-					// should check if Genesis is still there
-					if(player.equals(AllZone.HumanPlayer) && grave.size() > 0) {
-							CardList creatures = AllZoneUtil.getPlayerGraveyard(player);
-							creatures = creatures.filter(creatureFilter);
-							Object creatureChoice = GuiUtils.getChoice("Creature to move to hand", creatures.toArray());
-							Card creatureCard = (Card) creatureChoice;
-;
-	                        AllZone.GameAction.moveToHand(creatureCard);
-						//}//end choice="Yes"
-					}
-					else{ //computer resolve
-						CardList compCreatures = AllZoneUtil.getPlayerGraveyard(player);
-						compCreatures = compCreatures.filter(creatureFilter);
-						Card target = CardFactoryUtil.AI_getBestCreature(compCreatures);
-						AllZone.GameAction.moveToHand(target);
-					}
-				}
-			};
-
-			final Command paidCommand = new Command() {
-				private static final long serialVersionUID = -5102763277280782548L;
-
-				public void execute() {
-					/*
-					StringBuilder sb = new StringBuilder();
-					sb.append(c.getName()).append(" - return 1 creature from your graveyard to your hand");
-					ability.setStackDescription(sb.toString());
-
-					AllZone.Stack.add(ability);
-					*/
-					
-					// Resolve through the Command, since it shouldn't hit the stack again. 
-					// Not a great solution, but not terrible
-					ability.resolve();
-				}
-			};
-
-            //AllZone.Stack.add(ability);
-            if (c.getController().equals(AllZone.HumanPlayer)) {
-                String question = "Use Genesis to return target creature card from your graveyard to your hand?";
-                
-                if (GameActionUtil.showYesNoDialog(c, question)) {
-                    Ability pay = new Ability(c, "0"){
-                        public void resolve() {
-                            if (AllZone.getZone(c).is(Constant.Zone.Graveyard)){
-                                StringBuilder cost = new StringBuilder();
-                                cost.append("Pay cost for ").append(c).append("\r\n");
-                                GameActionUtil.payManaDuringAbilityResolve(cost.toString(), ability.getManaCost(), 
-                                        paidCommand, Command.Blank);
-                            }
-                            else {
-                                System.out.println("Genesis no longer in graveyard");
-                            }
-                        }
-                    };
-                    pay.setStackDescription("Genesis - Upkeep Ability");
-                    
-                    AllZone.Stack.add(pay);
-                }
-            } else //computer
-            {
-                if (ComputerUtil.canPayCost(ability)) {
-                    ComputerUtil.payManaCost(ability);
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(c.getName()).append(" - return 1 creature from your graveyard to your hand");
-                    ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
-                }
-            }
-        }
-    }//upkeep_Genesis
-	
-	
-    //upkeep_Demonic_Hordes
 	
 	private static void upkeep_Demonic_Hordes() {
 		
