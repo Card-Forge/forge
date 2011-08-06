@@ -296,6 +296,7 @@ public class QuestUtil {
 		qa.clearCompy();
 		
 		int id = qa.getId();
+		
 		if (id == 1) //White Dungeon
 		{
 			CardList humanList = new CardList();
@@ -309,28 +310,34 @@ public class QuestUtil {
 			
 			qa.setCardRewardList(pack.getRare(3, 6));
 		}
+		
 		else if (id == 2) //Blue Dungeon
 		{
 			qa.setCardRewardList(pack.getRare(3, 3));
 		}
+		
 		else if (id == 3) //Black Dungeon
 		{
 			qa.setCardRewardList(pack.getRare(3, 2));
 		}
+		
 		else if (id == 4) //Red Dungeon
 		{
 			qa.setCardRewardList(pack.getRare(3, 5));
 		}
+		
 		else if (id == 5) //Green Dungeon
 		{
 			qa.setCardRewardList(pack.getRare(3, 4));
 		}
+		
 		else if (id == 6) //Colorless Dungeon
 		{
 			for (int i=0;i<2;i++)
 				qa.addCompy("Ornithopter");
 			qa.setCardRewardList(pack.getRare(3, 1));
 		}
+		
 		else if (id == 7) //Gold Dungeon
 		{
 			CardList humanList = new CardList();
@@ -340,6 +347,7 @@ public class QuestUtil {
 			qa.setHuman(humanList);
 			qa.setCardRewardList(pack.getRare(3, 0));			
 		}
+		
 		else if (id == 8)
 		{
 			CardList humanList = new CardList();
@@ -352,6 +360,7 @@ public class QuestUtil {
 			qa.setHuman(humanList);
 			qa.setCardRewardList(pack.getRare(3));			
 		}
+		
 		else if (id == 9)
 		{
 			CardList humanList = new CardList();
@@ -365,6 +374,7 @@ public class QuestUtil {
 			
 			qa.setCardRewardList(pack.getRare(4, 4));			
 		}
+		
 		else if (id == 10)
 		{
 			CardList humanList = new CardList();
@@ -387,6 +397,7 @@ public class QuestUtil {
 			
 			qa.setCardRewardList(pack.getRare(4, 2));	
 		}
+		
 		else if (id == 11)  // The King's Contest
 		{
 			CardList humanList = new CardList();
@@ -399,6 +410,7 @@ public class QuestUtil {
 			
 			qa.setCardRewardList(pack.getRare(3));
 		}
+		
 		else if (id == 12)  // Barroom Brawl
 		{
 			CardList humanList = new CardList();
@@ -416,6 +428,7 @@ public class QuestUtil {
 			
 			qa.setCardRewardList(pack.getRare(4));
 		}
+		
 		else if (id == 13)  // The Court Jester
 		{
 			CardList humanList = new CardList();
@@ -428,83 +441,110 @@ public class QuestUtil {
 			
 			qa.setCardRewardList(pack.getRare(4, 0));
 		}
+		
 		else if (id == 14)  // Ancient Battlefield
 		{
 			CardList humanList = new CardList();
-			String cardsInPlay[] = {"Glasses of Urza", "Blight Sickle"};
+			String humanSetupCards[] = {"Glasses of Urza", "Blight Sickle"};
 			
 			for (int i = 0; i < 2; i ++)
 			{
-				Card c = AllZone.CardFactory.getCard(cardsInPlay[i], Constant.Player.Human);
+				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], Constant.Player.Human);
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);
 			
-			qa.addCompy("Bad Moon");
-			qa.addCompy("Wall of Brambles");
+			// qa.addCompy("Bad Moon");
+			// qa.addCompy("Wall of Brambles");
+			
+            String compySetupCards[] = {"Bad Moon", "Wall of Brambles"};
+            
+            for (int i = 0; i < 2; i ++)
+            {
+                qa.addCompy(compySetupCards[i]);
+            }
 			
 			qa.setCardRewardList(pack.getRare(4));
 		}
+		
 		else if (id == 15)  // Don't Play With Matches
 		{
 			CardList humanList = new CardList();
-			String cardsInPlay[] = {"Mudbutton Torchrunner", "Scuzzback Scrapper"};
+			String humanSetupCards[] = {"Mudbutton Torchrunner", "Scuzzback Scrapper"};
 			
 			for (int i = 0; i < 2; i ++)
 			{
-				Card c = AllZone.CardFactory.getCard(cardsInPlay[i], Constant.Player.Human);
+				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], Constant.Player.Human);
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);
 			
-			qa.addCompy("Heedless One");
-			qa.addCompy("Norwood Archers");
-			qa.addCompy("Wildslayer Elves");
+			// qa.addCompy("Heedless One");
+			// qa.addCompy("Norwood Archers");
+			// qa.addCompy("Wildslayer Elves");
+			
+			String compySetupCards[] = {"Heedless One", "Norwood Archers", "Wildslayer Elves"};
+            
+            for (int i = 0; i < 3; i ++)
+            {
+                qa.addCompy(compySetupCards[i]);
+            }
 			
 			qa.setCardRewardList(pack.getRare(4, 5));
 		}
+		
 		else if (id == 16)  // Mines of Kazum Durl
 		{
 			CardList humanList = new CardList();
-			String cardsInPlay[] = {"Dwarven Demolition Team", "Dwarven Pony", "Dwarven Trader"};
+			String humanSetupCards[] = {"Dwarven Demolition Team", "Dwarven Pony", "Dwarven Trader"};
 			
 			for (int i = 0; i < 3; i ++)
 			{
-				Card c = AllZone.CardFactory.getCard(cardsInPlay[i], Constant.Player.Human);
+				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], Constant.Player.Human);
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);
 			
-			qa.addCompy("Wall of Earth");
-			qa.addCompy("Wall of Air");
-			qa.addCompy("Wall of Ice");
-			qa.addCompy("Wall of Light");
-			qa.addCompy("Carrion Wall");
-			qa.addCompy("Steel Wall");
+			// qa.addCompy("Wall of Earth");
+			// qa.addCompy("Wall of Air");
+			// qa.addCompy("Wall of Ice");
+			// qa.addCompy("Wall of Light");
+			// qa.addCompy("Carrion Wall");
+			// qa.addCompy("Steel Wall");
+			
+			String compySetupCards[] = 
+				{"Wall of Earth", "Wall of Air", "Wall of Ice", "Wall of Light", "Carrion Wall" ,"Steel Wall"};
+            
+            for (int i = 0; i < 6; i ++)
+            {
+                qa.addCompy(compySetupCards[i]);
+            }
 			
 			qa.setCardRewardList(pack.getRare(4, 4));
 		}
+		
 		else if (id == 17)  // House Party
 		{
 			CardList humanList = new CardList();
-			String cardsInPlay[] = {"Hopping Automaton", "Honden of Life's Web", "Forbidden Orchard"};
+			String humanSetupCards[] = {"Hopping Automaton", "Honden of Life's Web", "Forbidden Orchard"};
 			
 			for (int i = 0; i < 3; i ++)
 			{
-				Card c = AllZone.CardFactory.getCard(cardsInPlay[i], Constant.Player.Human);
+				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], Constant.Player.Human);
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);
 			
-			String compyCards[] = {"Honden of Infinite Rage", "Mikokoro, Center of the Sea", "Tidehollow Strix"};
+			String compySetupCards[] = {"Honden of Infinite Rage", "Mikokoro, Center of the Sea", "Tidehollow Strix"};
 			
 			for (int i = 0; i < 3; i ++)
 			{
-				qa.addCompy(compyCards[i]);
+				qa.addCompy(compySetupCards[i]);
 			}
 			
 			qa.setCardRewardList(pack.getRare(4, 1));
 		}
+		
 		else if (id == 18)  // Crows in the Field
 		{
 			CardList humanList = new CardList();
@@ -526,6 +566,7 @@ public class QuestUtil {
 			
 			qa.setCardRewardList(pack.getRare(5));
 		}
+		
 		else if (id == 19)  // The Desert Caravan
 		{
 			CardList humanList = new CardList();
