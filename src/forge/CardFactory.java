@@ -19838,6 +19838,8 @@ public class CardFactory implements NewConstants {
         c.setType(sim.getType());
         c.setText(sim.getSpellText());
         c.setManaCost(sim.getManaCost());
+        //for Color refactor
+        //c.setBaseColors(sim.getBaseColors());
         
         return c;
     }// copyStats()

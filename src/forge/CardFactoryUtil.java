@@ -3527,6 +3527,8 @@ public class CardFactoryUtil {
     
     //do card1 and card2 share any colors?
     public static boolean sharesColorWith(Card card1, Card card2) {
+    	//slapshot5 - not sure why this needs getOnlyColors vs. getColors()
+    	//Color refactor
         ArrayList<String> card1Colors = CardUtil.getOnlyColors(card1);
         ArrayList<String> card2Colors = CardUtil.getOnlyColors(card2);
         

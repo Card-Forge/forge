@@ -76,7 +76,14 @@ public class ReadCard implements Runnable, NewConstants {
             
 
             s = readLine();
-            if(!s.equals("no cost")) c.setManaCost(s);
+            if(!s.equals("no cost")) {
+            	c.setManaCost(s);
+            	//c.setBaseColors(c.getColorsBasedOnManaCost());
+            }
+            else {
+            	//c.setBaseColors(new ArrayList<Color>());
+            }
+            //c.setColors(c.getBaseColors());
             
             s = readLine();
             addTypes(c, s);

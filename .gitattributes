@@ -240,6 +240,7 @@ src/forge/CardListFilter.java svneol=native#text/plain
 src/forge/CardListUtil.java svneol=native#text/plain
 src/forge/CardShopTableModel.java -text svneol=native#text/plain
 src/forge/CardUtil.java svneol=native#text/plain
+src/forge/Color.java -text svneol=native#text/plain
 src/forge/Combat.java svneol=native#text/plain
 src/forge/CombatPlaneswalker.java svneol=native#text/plain
 src/forge/CombatUtil.java svneol=native#text/plain

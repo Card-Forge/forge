@@ -5,9 +5,14 @@ package forge;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Set;
+import java.util.StringTokenizer;
 import java.util.Map.Entry;
+
+import forge.error.ErrorViewer;
 
 
 public class Card extends MyObservable {
@@ -79,6 +84,10 @@ public class Card extends MyObservable {
     
     private int                          otherAttackBoost                  = 0;
     private int                          otherDefenseBoost                 = 0;
+    
+    //updates for Colorness refactor
+    private ArrayList<Color> baseColors = new ArrayList<Color>();
+    private ArrayList<Color> currentColors = new ArrayList<Color>();
     
     private int                          randomPicture                     = 0;
     
@@ -968,6 +977,261 @@ public class Card extends MyObservable {
         controller = player;
         this.updateObservers();
     }
+    
+    //=======================================================================
+    //Color refactor begin
+    
+    public ArrayList<Color> setBaseColors(ArrayList<Color> colors) {
+    	baseColors.clear();
+    	for(Color color:colors) {
+    		baseColors.add(color);
+    	}
+    	return baseColors;
+    }
+    
+    public ArrayList<Color> getBaseColors() {
+    	return baseColors;
+    }
+    
+    public ArrayList<Color> addColor(Color color) {
+    	if(!currentColors.contains(color)) {
+    		currentColors.add(color);
+    	}
+    	return currentColors;
+    }
+    
+    //maybe this should return the new currentColor list?
+    public boolean removeColor(Color color) {
+    	if(currentColors.contains(color)) {
+    		currentColors.remove(color);
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
+    }
+    
+    public ArrayList<Color> setColors(Color... colors) {
+    	for(Color color:colors) {
+    		addColor(color);
+    	}
+    	return currentColors;
+    }
+    
+    public ArrayList<Color> setColors(ArrayList<Color> colors) {
+    	Color[] colorArray = new Color[colors.size()];
+    	return setColors(colors.toArray(colorArray));
+    }
+    
+    public ArrayList<Color> getColorsNew() {
+    	return currentColors;
+    }
+    
+    public boolean isBlack() {
+    	return currentColors.contains(Color.BLACK);
+    }
+    
+    public boolean isBlue() {
+    	return currentColors.contains(Color.BLUE);
+    }
+    
+    public boolean isGreen() {
+    	return currentColors.contains(Color.GREEN);
+    }
+    
+    public boolean isRed() {
+    	return currentColors.contains(Color.RED);
+    }
+    
+    public boolean isWhite() {
+    	return currentColors.contains(Color.WHITE);
+    }
+    
+    public boolean isColorless() {
+    	return currentColors.isEmpty();
+    }
+    
+    ///////////from CardUtil.java
+    /* ***Warning*** - the following functions are being refactored to be
+     * properties of the card.  If you make changes here, please add them to
+     * the corresponding function in Card.java (from CardUtil.java
+    */
+    //returns something like Constant.Color.Green or something
+   /* public static String getColor(Card c) {
+    	
+        String manaCost = c.getManaCost();
+        
+        if(-1 != manaCost.indexOf("G")) return Constant.Color.Green;
+        else if(-1 != manaCost.indexOf("W")) return Constant.Color.White;
+        else if(-1 != manaCost.indexOf("B")) return Constant.Color.Black;
+        else if(-1 != manaCost.indexOf("U")) return Constant.Color.Blue;
+        else if(-1 != manaCost.indexOf("R")) return Constant.Color.Red;
+        else return Constant.Color.Colorless; 
+    	return null;
+    } */
+    
+    /* ***Warning*** - the following functions are being refactored to be
+     * properties of the card.  If you make changes here, please add them to
+     * the corresponding function in Card.java (from CardUtil.java
+    */
+    /**
+     * gets a list of all of the colors that this card is based on the mana cost in cards.txt
+     * 
+     * @return an ArrayList with the enumerated colors
+     */
+    public ArrayList<Color> getColorsBasedOnManaCost() {
+        String m = this.getManaCost();
+        Set<Color> colors = new HashSet<Color>();
+        
+        for(int i = 0; i < m.length(); i++) {
+            switch(m.charAt(i)) {
+                case ' ':
+                break;
+                case 'G':
+                    colors.add(Color.GREEN);
+                break;
+                case 'W':
+                    colors.add(Color.WHITE);
+                break;
+                case 'B':
+                    colors.add(Color.BLACK);
+                break;
+                case 'U':
+                    colors.add(Color.BLUE);
+                break;
+                case 'R':
+                    colors.add(Color.RED);
+                break;
+            }
+        }
+        return new ArrayList<Color>(colors);
+        /*
+        for(String kw : this.getKeyword())
+        	if(kw.startsWith(this.getName()+" is ")) {
+        		for(Color color : Color.values())
+        			if(kw.endsWith(color.getName()+"."))
+        				colors.add(color);
+        		if(kw.endsWith("is Colorless.")) {
+        			colors.clear();
+        		}
+        	}
+        //if(colors.isEmpty()) colors.add(Constant.Color.Colorless);
+         */
+    }//getColorsBasedOnManaCost
+    
+    /* ***Warning*** - the following functions are being refactored to be
+     * properties of the card.  If you make changes here, please add them to
+     * the corresponding function in Card.java  (from CardUtil.java
+    */
+    /*
+     * public static ArrayList<String> getOnlyColors(Card c) {
+     
+        String m = c.getManaCost();
+        Set<String> colors = new HashSet<String>();
+        
+        for(int i = 0; i < m.length(); i++) {
+            switch(m.charAt(i)) {
+                case ' ':
+                break;
+                case 'G':
+                    colors.add(Constant.Color.Green);
+                break;
+                case 'W':
+                    colors.add(Constant.Color.White);
+                break;
+                case 'B':
+                    colors.add(Constant.Color.Black);
+                break;
+                case 'U':
+                    colors.add(Constant.Color.Blue);
+                break;
+                case 'R':
+                    colors.add(Constant.Color.Red);
+                break;
+            }
+        }
+        for(String kw : c.getKeyword())
+        	if(kw.startsWith(c.getName()+" is "))
+        		for(String color : Constant.Color.Colors)
+        			if(kw.endsWith(color+"."))
+        				colors.add(color); 
+        return new ArrayList<String>(colors);
+    }
+    */
+    /////////////end from CardUtil.java
+    
+    //Color refactor End
+    //=======================================================================
+    
+    //=======================================================================
+    //mana cost refactor
+    
+    
+
+    
+    /* ***Warning*** - the following functions are being refactored to be
+     * properties of the card.  If you make changes here, please add them to
+     * the corresponding function in Card.java (from CardUtil.java
+    */
+    /*
+    //probably should put this somewhere else, but not sure where
+    static public int getConvertedManaCost(SpellAbility sa) {
+        return getConvertedManaCost(sa.getManaCost());
+    }*/
+    
+    /* ***Warning*** - the following functions are being refactored to be
+     * properties of the card.  If you make changes here, please add them to
+     * the corresponding function in Card.java (from CardUtil.java
+    */
+    /*
+    public int getConvertedManaCost() {
+    	if (this.isToken() && !this.isCopiedToken())
+    		return 0;
+    	return getConvertedManaCost(this.getManaCost());
+    } */
+    
+    /* ***Warning*** - the following functions are being refactored to be
+     * properties of the card.  If you make changes here, please add them to
+     * the corresponding function in Card.java (from CardUtil.java
+    */
+    public int getConvertedManaCost() {
+        //see if the mana cost is all colorless, like "2", "0", or "12"
+        
+        if(manaCost.equals("")) return 0;
+        
+        while (manaCost.startsWith("X"))
+        	manaCost = manaCost.substring(2);
+        
+        if(!manaCost.matches(".*[A-Z]+.*")) {
+            try {
+                return Integer.parseInt(manaCost);
+            } catch(NumberFormatException ex) {
+                ErrorViewer.showError(ex);
+            }
+        }
+        
+        //see if mana cost is colored and colorless like "2 B" or "1 U U"
+        StringTokenizer tok = new StringTokenizer(manaCost);
+        int cost = 0;
+        try {
+            //get the int from the mana cost like "1 U", get the 1
+            cost = Integer.parseInt(tok.nextToken());
+            //count colored mana cost
+            cost += tok.countTokens();
+            return cost;
+        }
+        //catches in case the cost has no colorless mana requirements like "U U"
+        catch(NumberFormatException ex) {}
+        
+        //the mana cost is all colored mana like "U" or "B B B"
+        tok = new StringTokenizer(manaCost);
+        return tok.countTokens();
+    }
+
+    //end warning for moving to Card.java
+    
+    //end mana cost refactor
+    //=======================================================================
     
     public ArrayList<Card> getEquippedBy() {
         return equippedBy;

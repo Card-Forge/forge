@@ -69,7 +69,7 @@ public class CardUtil {
             a.add(c[i]);
         return a;
     }
-    
+
     //returns "G", longColor is Constant.Color.Green and the like
     public static String getShortColor(String longColor) {
         Map<String, String> map = new HashMap<String, String>();
@@ -85,7 +85,10 @@ public class CardUtil {
         return (String) o;
     }
     
-    
+    /* ***Warning*** - the following functions are being refactored to be
+     * properties of the card.  If you make changes here, please add them to
+     * the corresponding function in Card.java
+    */
     //returns something like Constant.Color.Green or something
     public static String getColor(Card c) {
         String manaCost = c.getManaCost();
@@ -98,6 +101,10 @@ public class CardUtil {
         else return Constant.Color.Colorless;
     }
     
+    /* ***Warning*** - the following functions are being refactored to be
+     * properties of the card.  If you make changes here, please add them to
+     * the corresponding function in Card.java
+    */
     public static ArrayList<String> getColors(Card c) {
         String m = c.getManaCost();
         Set<String> colors = new HashSet<String>();
@@ -135,6 +142,10 @@ public class CardUtil {
         return new ArrayList<String>(colors);
     }
     
+    /* ***Warning*** - the following functions are being refactored to be
+     * properties of the card.  If you make changes here, please add them to
+     * the corresponding function in Card.java
+    */
     public static ArrayList<String> getOnlyColors(Card c) {
         String m = c.getManaCost();
         Set<String> colors = new HashSet<String>();
@@ -168,26 +179,19 @@ public class CardUtil {
         return new ArrayList<String>(colors);
     }
     
-    
-    public static boolean hasCardName(String cardName, ArrayList<Card> list) {
-        Card c;
-        boolean b = false;
-        
-        for(int i = 0; i < list.size(); i++) {
-            c = list.get(i);
-            if(c.getName().equals(cardName)) {
-                b = true;
-                break;
-            }
-        }
-        return b;
-    }//hasCardName()
-    
+    /* ***Warning*** - the following functions are being refactored to be
+     * properties of the card.  If you make changes here, please add them to
+     * the corresponding function in Card.java
+    */
     //probably should put this somewhere else, but not sure where
     static public int getConvertedManaCost(SpellAbility sa) {
         return getConvertedManaCost(sa.getManaCost());
     }
     
+    /* ***Warning*** - the following functions are being refactored to be
+     * properties of the card.  If you make changes here, please add them to
+     * the corresponding function in Card.java
+    */
     static public int getConvertedManaCost(Card c)
     {
     	if (c.isToken() && !c.isCopiedToken())
@@ -195,6 +199,10 @@ public class CardUtil {
     	return getConvertedManaCost(c.getManaCost());
     }
     
+    /* ***Warning*** - the following functions are being refactored to be
+     * properties of the card.  If you make changes here, please add them to
+     * the corresponding function in Card.java
+    */
     static public int getConvertedManaCost(String manaCost) {
         //see if the mana cost is all colorless, like "2", "0", or "12"
         
@@ -229,6 +237,22 @@ public class CardUtil {
         return tok.countTokens();
     }
 
+    //end warning for moving to Card.java
+    
+    public static boolean hasCardName(String cardName, ArrayList<Card> list) {
+        Card c;
+        boolean b = false;
+        
+        for(int i = 0; i < list.size(); i++) {
+            c = list.get(i);
+            if(c.getName().equals(cardName)) {
+                b = true;
+                break;
+            }
+        }
+        return b;
+    }//hasCardName()
+    
     static public String addManaCosts(String mc1, String mc2)
     {
        String tMC = "";
