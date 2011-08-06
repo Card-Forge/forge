@@ -3664,7 +3664,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Karmic Guide")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -3727,7 +3727,7 @@ public class CardFactory_Creatures {
                 }
             });
         }//*************** END ************ END **************************
-        
+        */
         /*
         //*************** START *********** START **************************
         else if(cardName.equals("Gravedigger") || cardName.equals("Cadaver Imp") || cardName.equals("Mnemonic Wall") || cardName.equals("Corpse Cur")) {

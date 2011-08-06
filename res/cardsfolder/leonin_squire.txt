@@ -1,0 +1,9 @@
+Name:Leonin Squire
+ManaCost:1 W
+Types:Creature Cat Soldier
+Text:When Leonin Squire enters the battlefield, return target artifact card with converted mana cost 1 or less from your graveyard to your hand.
+PT:2/2
+K:etbReturnTgt:1:Artifact.cmcLE1:Hand
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_squire.jpg
+End

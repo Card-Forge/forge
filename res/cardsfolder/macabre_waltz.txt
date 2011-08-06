@@ -6,7 +6,3 @@ K:spReturnTgt:2/UpTo:Creature:Hand:Drawback$YouDiscard/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/macabre_waltz.jpg
 End
-
-
-
-K:spDestroyTgt:Creature.cmcLE3:NoRegen

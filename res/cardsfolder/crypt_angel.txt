@@ -1,0 +1,11 @@
+Name:Crypt Angel
+ManaCost:4 B
+Types:Creature Angel
+Text:When Crypt Angel enters the battlefield, return target blue or red creature card from your graveyard to your hand.
+PT:3/3
+K:Flying
+K:Protection from white
+K:etbReturnTgt:1:Creature.Blue,Creature.Red:Hand
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_angel.jpg
+End

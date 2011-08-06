@@ -1,0 +1,9 @@
+Name:Izzet Chronarch
+ManaCost:3 U R
+Types:Creature Human Wizard
+Text:When Izzet Chronarch enters the battlefield, return target instant or sorcery card from your graveyard to your hand.
+PT:2/2
+K:etbReturnTgt:1:Instant,Sorcery:Hand
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/izzet_chronarch.jpg
+End
