@@ -2450,6 +2450,11 @@ public class CardFactory implements NewConstants {
         	card.removeIntrinsicKeyword(parse);
         	
         	String k[] = parse.split(":");
+        	
+        	final boolean May[] = {false};
+        	if (k[0].contains("May"))
+        		May[0] = true;
+        	
         	String Targets = k[1];
         	final String Tgts[] = Targets.split(",");
         	
@@ -2461,22 +2466,34 @@ public class CardFactory implements NewConstants {
             final String Selec = "Select target " + tmpDesc + " to destroy.";
         	
         	final boolean NoRegen[] = {false};
+        	final String Drawback[] = {"none"};
         	if (k.length > 2)
         	{
         		if (k[2].equals("NoRegen"))
-        			NoRegen[0] = true;
+				{
+					NoRegen[0] = true;
+					if (k.length > 3)
+						Drawback[0] = k[3];
+				}
+        		else
+        			Drawback[0] = k[2];
         	}
         	
-        	final boolean May[] = {false};
-        	if (parse.contains("May"))
-        		May[0] = true;
+        	if (!Drawback[0].equals("none"))
+        	{
+        		String kk[] = Drawback[0].split("\\$");
+                Drawback[0] = kk[1];
+        	}
         	
         	final boolean Evoke[] = {false};
         	if (card.getSVar("Evoke").length() > 0)
         		Evoke[0] = true;
         	
+        	card.setSVar("PlayMain1", "TRUE");
         	card.clearSpellAbility();
         	
+        	// over-rides the default Spell_Permanent 
+        	// enables the AI to play the card when appropriate 
         	SpellAbility spETBDestroyTgt = new Spell_Permanent(card)
         	{
                 private static final long serialVersionUID = -1148528222969323318L;
@@ -2506,7 +2523,8 @@ public class CardFactory implements NewConstants {
         	};
         	card.addSpellAbility(spETBDestroyTgt);
         	
-            final SpellAbility saDestroyTgt = new Ability(card, "0") 
+            // performs the destruction
+        	final SpellAbility saDestroyTgt = new Ability(card, "0") 
             {
                 @Override
                 public void resolve() 
@@ -2521,12 +2539,17 @@ public class CardFactory implements NewConstants {
                         	AllZone.getZone(c).remove(c);
                         else
                         	AllZone.GameAction.destroy(c);
+                        
+                        if (!Drawback[0].equals("none"))
+                        	CardFactoryUtil.doDrawBack(Drawback[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), c.getController(), card, c);
                     }
                 }
             };
             saDestroyTgt.setStackDescription(card.getName() + " - destroy target " + Selec + ".");
             
-            Command etbDestroyTgt = new Command() 
+            // when the card enters the battlefield, enable the human to target 
+            // or the AI decides on a target
+            Command etbDestroyTgt = new Command()
             {
                 private static final long serialVersionUID = 9072052875006010497L;
                 
@@ -2605,7 +2628,7 @@ public class CardFactory implements NewConstants {
             };
             card.addComesIntoPlayCommand(etbDestroyTgt);
             
-            
+            // handle SVar:Evoke:{cost}
             if (Evoke[0] == true)
             {
             	String EvCost = card.getSVar("Evoke");
