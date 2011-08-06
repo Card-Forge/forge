@@ -117,5 +117,5 @@ just_fate.jpg	http://mtgpics.chutography.com/P2/Just%20Fate.full.jpg
 justice.jpg	http://mtgpics.chutography.com/5E/Justice.full.jpg
 juvenile_gloomwidow.jpg	http://mtgpics.chutography.com/SHM/Juvenile%20Gloomwidow.full.jpg
 juxtapose.jpg	http://mtgpics.chutography.com/LG/Juxtapose.full.jpg
-juzam_djinn.jpg	http://mtgpics.chutography.com/OV/Juzam%20Djinn.full.jpg
+juzam_djinn.jpg	http://mtgpics.chutography.com/AN/Juzam%20Djinn.full.jpg
 jwar_isle_refuge.jpg	http://pics.slightlymagic.net/ZEN/Jwar%20Isle%20Refuge.full.jpg

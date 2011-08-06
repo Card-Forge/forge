@@ -114,7 +114,7 @@ sarcatog.jpg	http://mtgpics.chutography.com/OD/Sarcatog.full.jpg
 sarcomancy.jpg	http://mtgpics.chutography.com/TE/Sarcomancy.full.jpg
 sarcomite_myr.jpg	http://mtgpics.chutography.com/FUT/Sarcomite%20Myr.full.jpg
 sarkhan_vol.jpg	http://mtgpics.chutography.com/ALA/Sarkhan%20Vol.full.jpg
-sarpadian_empires_vol._vii.jpg	http://mtgpics.chutography.com/TSP/Sarpadian%20Empires,%20Vol.%20VII.full.jpg
+sarpadian_empires_vol_vii.jpg	http://mtgpics.chutography.com/TSP/Sarpadian%20Empires,%20Vol.%20VII.full.jpg
 sasaya_orochi_ascendant.jpg	http://mtgpics.chutography.com/SOK/Sasaya,%20Orochi%20Ascendant.full.jpg
 saute.jpg	http://mtgpics.chutography.com/UNH/Saute.full.jpg
 savaen_elves.jpg	http://mtgpics.chutography.com/DK/Savaen%20Elves.full.jpg

@@ -8,7 +8,7 @@ dakmor_plague.jpg	http://mtgpics.chutography.com/ST/Dakmor%20Plague.full.jpg
 dakmor_salvage.jpg	http://mtgpics.chutography.com/FUT/Dakmor%20Salvage.full.jpg
 dakmor_scorpion.jpg	http://mtgpics.chutography.com/ST/Dakmor%20Scorpion.full.jpg
 dakmor_sorceress.jpg	http://mtgpics.chutography.com/ST/Dakmor%20Sorceress.full.jpg
-damnation.jpg	http://mtgpics.chutography.com/REW/Damnation.full.jpg
+damnation.jpg	http://mtgpics.chutography.com/PLC/Damnation.full.jpg
 dampen_thought.jpg	http://mtgpics.chutography.com/CHK/Dampen%20Thought.full.jpg
 damping_engine.jpg	http://mtgpics.chutography.com/UL/Damping%20Engine.full.jpg
 damping_field.jpg	http://mtgpics.chutography.com/AQ/Damping%20Field.full.jpg

@@ -219,7 +219,7 @@ bitterblossom.jpg	http://mtgpics.chutography.com/MOR/Bitterblossom.full.jpg
 bituminous_blast.jpg	http://mtgpics.chutography.com/ARB/Bituminous%20Blast.full.jpg
 black_carriage.jpg	http://mtgpics.chutography.com/HL/Black%20Carriage.full.jpg
 black_knight.jpg	http://mtgpics.chutography.com/M10/Black%20Knight.full.jpg
-black_lotus.jpg	http://mtgpics.chutography.com/OV/Black%20Lotus.full.jpg
+black_lotus.jpg	http://mtgpics.chutography.com/U/Black%20Lotus.full.jpg
 black_mana_battery.jpg	http://mtgpics.chutography.com/LG/Black%20Mana%20Battery.full.jpg
 black_market.jpg	http://mtgpics.chutography.com/MM/Black%20Market.full.jpg
 black_poplar_shaman.jpg	http://mtgpics.chutography.com/LRW/Black%20Poplar%20Shaman.full.jpg

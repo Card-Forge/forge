@@ -425,6 +425,7 @@ wrath_of_marit_lage.jpg	http://mtgpics.chutography.com/8E/Wrath%20of%20Marit%20L
 wreak_havoc.jpg	http://mtgpics.chutography.com/GP/Wreak%20Havoc.full.jpg
 wrecking_ball.jpg	http://mtgpics.chutography.com/DIS/Wrecking%20Ball.full.jpg
 wrench_mind.jpg	http://mtgpics.chutography.com/MR/Wrench%20Mind.full.jpg
+wrens_run_packmaster.jpg	http://mtgpics.chutography.com/LRW/Wren's%20Run%20Packmaster.full.jpg
 wrens_run_vanquisher.jpg	http://mtgpics.chutography.com/LRW/Wren's%20Run%20Vanquisher.full.jpg
 wretched_anurid.jpg	http://mtgpics.chutography.com/ON/Wretched%20Anurid.full.jpg
 wretched_banquet.jpg	http://mtgpics.chutography.com/CFX/Wretched%20Banquet.full.jpg
