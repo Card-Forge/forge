@@ -157,6 +157,14 @@ public class CardList implements Iterable<Card> {
     	});
     }
     
+    public CardList getOwner(final Player player) {
+    	return this.filter(new CardListFilter() {
+    		public boolean addCard(Card c) {
+    			return c.getOwner().isPlayer(player);
+    		}
+    	});
+    }
+    
   //cardType is like "Land" or "Goblin", returns a new CardList that is a subset of current CardList
     public CardList getType(final String cardType) {
     	return this.filter(new CardListFilter() {

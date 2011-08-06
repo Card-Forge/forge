@@ -6735,43 +6735,6 @@ public class CardFactory implements NewConstants {
    		*/
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Feldon's Cane")) {
-        	/*
-        	 * Tap, Exile Feldon's Cane: Shuffle your graveyard into your library.
-        	 */
-        	Ability_Cost abCost = new Ability_Cost("T Exile<1/CARDNAME>", cardName, true);
-        	final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
-				private static final long serialVersionUID = -1299603105585632846L;
-
-				@Override
-        		public void resolve() {
-        			final Player player = card.getController();
-        			CardList grave = AllZoneUtil.getPlayerGraveyard(player);
-        			
-        			for(Card c:grave) {
-        				AllZone.GameAction.moveToLibrary(c);
-        			}
-
-        			player.shuffle();
-        		}
-
-        		@Override
-        		public boolean canPlayAI() {
-        			CardList lib = AllZoneUtil.getPlayerCardsInLibrary(AllZone.ComputerPlayer);
-        			return lib.size() < 5;
-        		}
-
-        	};//SpellAbility
-        	
-        	StringBuilder sb = new StringBuilder();
-        	sb.append(cardName).append(" - Player shuffles grave into library.");
-        	ability.setStackDescription(sb.toString());
-        	ability.setDescription(abCost+"Shuffle your graveyard into your library.");
-        	card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Elixir of Immortality")) {
         	/*
         	 * 2, Tap: You gain 5 life. Shuffle Elixir of Immortality and your graveyard into your library.

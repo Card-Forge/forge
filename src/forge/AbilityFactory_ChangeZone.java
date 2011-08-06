@@ -179,7 +179,7 @@ public class AbilityFactory_ChangeZone {
 			}
 			if (abCost.getDiscardCost()) 	return false;
 			
-			if (abCost.getSubCounter()) 	return true; // only card that uses it is Fertilid
+			if (abCost.getSubCounter()) 	; // SubCounter is fine
 			
 		}
 		
@@ -890,5 +890,227 @@ public class AbilityFactory_ChangeZone {
 		return AbilityFactory.getDefinedCards(sa.getSourceCard(), defined, sa).get(0);
 	}
 
+	// *************************************************************************************
+	// ************************** ChangeZoneAll ********************************************
+	// ************ All is non-targeted and should occur similarly to Hidden ***************
+	// ******* Instead of choosing X of type on resolution, all on type go *****************
+	// *************************************************************************************
+	public static SpellAbility createAbilityChangeZoneAll(final AbilityFactory AF){
+		final SpellAbility abChangeZone = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+			private static final long serialVersionUID = 3728332812890211671L;
+
+			public boolean canPlayAI(){
+				return changeZoneAllCanPlayAI(AF, this);
+			}
+
+			@Override
+			public void resolve() {
+				changeZoneAllResolve(AF, this);
+			}
+			
+			@Override
+			public String getStackDescription(){
+				return changeZoneAllDescription(AF, this);
+			}
+		
+		};
+		setMiscellaneous(AF, abChangeZone);
+		return abChangeZone;
+	}
 	
+	public static SpellAbility createSpellChangeZoneAll(final AbilityFactory AF){
+		final SpellAbility spChangeZone = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+			private static final long serialVersionUID = 3270484211099902059L;
+
+			public boolean canPlayAI(){
+				return changeZoneAllCanPlayAI(AF, this);
+			}
+			
+			@Override
+			public void resolve() {
+				changeZoneAllResolve(AF, this);
+			}
+			
+			@Override
+			public String getStackDescription(){
+				return changeZoneAllDescription(AF, this);
+			}
+		};
+		setMiscellaneous(AF, spChangeZone);
+		return spChangeZone;
+	}
+	
+	public static SpellAbility createDrawbackChangeZoneAll(final AbilityFactory AF){
+		final SpellAbility dbChangeZone = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()) {
+			private static final long serialVersionUID = 3270484211099902059L;
+
+			@Override
+			public void resolve() {
+				changeZoneAllResolve(AF, this);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return changeZoneAllPlayDrawbackAI(AF, this);
+			}
+			
+			@Override
+			public String getStackDescription(){
+				return changeZoneAllDescription(AF, this);
+			}
+		};
+		setMiscellaneous(AF, dbChangeZone);
+		return dbChangeZone;
+	}
+	
+
+	private static boolean changeZoneAllCanPlayAI(AbilityFactory af, SpellAbility sa){
+		// Change Zone All, can be any type moving from one zone to another
+		Ability_Cost abCost = af.getAbCost();
+		Card source = af.getHostCard();
+		HashMap<String,String> params = af.getMapParams();
+        //String destination = params.get("Destination");
+        String origin = params.get("Origin");
+		
+		if (abCost != null){
+			// AI currently disabled for these costs
+			if (abCost.getSacCost()){
+				// Sac is ok in general, but should add some decision making based off what we Sacrifice and what we might get
+			}
+			if (abCost.getLifeCost()){
+				if (AllZone.ComputerPlayer.getLife() - abCost.getLifeAmount() < 4)
+					return false;
+			}
+			if (abCost.getDiscardCost()) 	return false;
+			
+			if (abCost.getSubCounter())
+				;	// subcounter is fine
+			
+		}
+		
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+		
+		Random r = new Random();
+		// prevent run-away activations - first time will always return true
+		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
+
+		// todo: targeting with ChangeZoneAll
+		// really two types of targeting. 
+		// Target Player has all their types change zones
+		// or target permanent and do something relative to that permanent
+		// ex. "Return all Auras attached to target"
+		// ex. "Return all blocking/blocked by target creature" 
+		
+		CardList humanType = AllZoneUtil.getCardsInZone(origin, AllZone.HumanPlayer);
+		humanType = filterListByType(humanType, params, "ChangeType", sa);
+		CardList computerType = AllZoneUtil.getCardsInZone(origin, AllZone.ComputerPlayer);
+		computerType = filterListByType(computerType, params, "ChangeType", sa);
+
+		// todo: improve restrictions on when the AI would want to use this
+		// spBounceAll has some AI we can compare to. 
+		if (origin.equals("Hand")){
+
+		}
+		else if (origin.equals("Library")){
+
+		}
+		else if (origin.equals("Battlefield")){
+			// this statement is assuming the AI is trying to use this spell offensively
+			// if the AI is using it defensively, then something else needs to occur
+			if (computerType.size()+1 > humanType.size())
+				return false;
+			
+			if (humanType.size() <= 1) // unless that 1 thing is going to kill me soon? 
+				return false;
+			
+			// Don't cast during main1?
+			if (AllZone.Phase.is(Constant.Phase.Main1, AllZone.ComputerPlayer))
+				return false;
+		}
+		else if (origin.equals("Graveyard")){
+
+		}
+		else if (origin.equals("Exile")){
+
+		}
+		else if (origin.equals("Stack")){
+			// time stop can do something like this:
+			// Origin$ Stack | Destination$ Exile | SubAbility$ DBSkip
+			// DBSKipToPhase | DB$SkipToPhase | Phase$ Cleanup
+			// otherwise, this situation doesn't exist
+			return false;
+		}
+		
+		else if (origin.equals("Sideboard")){
+			// This situation doesn't exist
+			return false;
+		}
+		
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			chance &= subAb.chkAI_Drawback();
+		
+		return ((r.nextFloat() < .8) && chance);
+	}
+	
+	private static boolean changeZoneAllPlayDrawbackAI(AbilityFactory af, SpellAbility sa){
+		// if putting cards from hand to library and parent is drawing cards
+		// make sure this will actually do something:
+		
+		
+		return true;
+	}
+	
+	private static String changeZoneAllDescription(AbilityFactory af, SpellAbility sa){
+		// TODO: build Stack Description will need expansion as more cards are added
+		 StringBuilder sb = new StringBuilder();
+		 Card host = af.getHostCard();
+		 
+		 if (!(sa instanceof Ability_Sub))
+			 sb.append(host.getName()).append(" -");
+		 
+		 sb.append(" ");
+		 
+		 String[] desc = sa.getDescription().split(":");
+		 
+		 if (desc.length > 1)
+			 sb.append(desc[1]);
+		 else
+			 sb.append(desc[0]);
+		 
+		 Ability_Sub abSub = sa.getSubAbility();
+		 if (abSub != null) {
+		 	sb.append(abSub.getStackDescription());
+		 }
+		 
+		 return sb.toString();
+	}
+	
+	private static void changeZoneAllResolve(AbilityFactory af, SpellAbility sa){
+		HashMap<String,String> params = af.getMapParams();
+        String destination = params.get("Destination");
+        String origin = params.get("Origin");
+		CardList cards = AllZoneUtil.getCardsInZone(origin);
+		cards = filterListByType(cards, params, "ChangeType", sa);
+		
+		// I don't know if library position is necessary. It's here if it is, just in case
+		int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
+		for(Card c : cards){
+			if (params.containsKey("GainControl"))
+				AllZone.GameAction.moveToPlay(c, sa.getActivatingPlayer());
+			else
+				AllZone.GameAction.moveTo(destination, c, libraryPos);
+		}
+		
+		// if Shuffle parameter exists, and any amount of cards were owned by that player, then shuffle that library
+		if (params.containsKey("Shuffle")){
+			if (cards.getOwner(AllZone.HumanPlayer).size() > 0)
+				AllZone.HumanPlayer.shuffle();
+			if (cards.getOwner(AllZone.ComputerPlayer).size() > 0)
+				AllZone.ComputerPlayer.shuffle();
+		}
+	}
+	
+
 }

@@ -17,13 +17,7 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants.LANG.GameAction.GAMEACTION_TEXT;
 
 public class GameAction {
-    //  private StaticEffects staticEffects = new StaticEffects();
-	
-	//private CardList          humanList;
-    //private CardList          computerList;
-    
-    //private boolean           fantasyQuest     = false;
-    
+
     public void resetActivationsPerTurn(){
     	CardList all = AllZoneUtil.getCardsInGame();
     	
@@ -42,6 +36,8 @@ public class GameAction {
     	String prevZone = "";
         PlayerZone p = AllZone.getZone(c);
 
+        Card lastKnownInfo = c;
+        
         if(p != null){
         	if (p.is(Constant.Zone.Battlefield) && c.isCreature())
                 AllZone.Combat.removeFromCombat(c);
@@ -52,19 +48,19 @@ public class GameAction {
         	// things that were just created will not have zones!
         	//System.out.println(c.getName() + " " + zone.getZoneName());
         }
-        Card moving = c;
+
         // Don't add the Token, unless it's moving to the battlefield
         if (!c.isToken() || zone.is(Constant.Zone.Battlefield)){
 	     // If a nontoken card is moving from the Battlefield, to non-Battlefield zone copy it
 	        if (p != null && p.is(Constant.Zone.Battlefield) && !zone.is(Constant.Zone.Battlefield))
-	        	moving = AllZone.CardFactory.copyCard(c);         
+	        	c = AllZone.CardFactory.copyCard(c);
 	
-	        moving.setUnearthed(c.isUnearthed());	// this might be unnecessary
-	        if (c.wasSuspendCast())			// these probably can be moved back to SubtractCounters
-	        	moving = addSuspendTriggers(moving);
+	        c.setUnearthed(lastKnownInfo.isUnearthed());	// this might be unnecessary
+	        if (lastKnownInfo.wasSuspendCast())			// these probably can be moved back to SubtractCounters
+	        	c = addSuspendTriggers(c);
 
         	// todo: if zone is battlefied and prevZone is battlefield, temporarily disable enters battlefield triggers
-        	zone.add(moving);
+        	zone.add(c);
         }
         
         if (zone.is(Constant.Zone.Battlefield) && c.isAura()){
@@ -73,14 +69,24 @@ public class GameAction {
         
         //Run triggers        
         HashMap<String,Object> runParams = new HashMap<String,Object>();
-        // Should the MovedCard be the LKI, aka the original card that came in, not the card that's leaving?
-        runParams.put("Card", c);
-        //runParams.put("MovedCard",moving);
+
+        runParams.put("Card", lastKnownInfo);
         runParams.put("Origin", prevZone);
         runParams.put("Destination", zone.getZoneName());
         AllZone.TriggerHandler.runTrigger("ChangesZone", runParams);
 
-        return moving;
+        return c;
+    }
+    
+    public Card getLastKnownInformation(Card card){
+    	// record last known information before moving zones
+    	Card lastKnown = AllZone.CardFactory.copyCard(card);
+    	
+    	for(Card attach : card.getAttachedCards())
+    		lastKnown.attachCard(attach);
+    	lastKnown.setExtrinsicKeyword(card.getExtrinsicKeyword());
+
+    	return lastKnown;
     }
     
     public void changeController(CardList list, Player oldController, Player newController){
@@ -112,7 +118,6 @@ public class GameAction {
     	return moveTo(stack, c);
     }
     
-    //card can be anywhere like in Hand or in Play
     public Card moveToGraveyard(Card c) {
     	
     	final PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getOwner());
@@ -229,6 +234,7 @@ public class GameAction {
     }
     
     public Card moveToPlay(Card c, Player p) {
+    	// move to a specific player's Battlefield
         PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, p);
         return moveTo(play, c);
     }
@@ -261,6 +267,30 @@ public class GameAction {
         return c;
     }
 
+    public Card exile(Card c) {
+    	if(AllZone.GameAction.isCardExiled(c)) return c;
+
+    	PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, c.getOwner());
+
+    	return AllZone.GameAction.moveTo(removed, c);
+    }
+    
+    public Card moveTo(String name, Card c, int libPosition){
+    	// Call specific functions to set PlayerZone, then move onto moveTo
+    	if (name.equals(Constant.Zone.Hand))
+    		return moveToHand(c);
+    	else if (name.equals(Constant.Zone.Library))
+    		return moveToLibrary(c, libPosition);
+    	else if (name.equals(Constant.Zone.Battlefield))
+    		return moveToPlay(c);
+    	else if (name.equals(Constant.Zone.Graveyard))
+    		return moveToGraveyard(c);
+    	else if (name.equals(Constant.Zone.Exile))
+    		return exile(c);
+    	else //if (name.equals(Constant.Zone.Stack))
+    		return moveToStack(c);
+    }
+    
     public boolean AI_discardNumType(int numDiscard, String[] uTypes, SpellAbility sa) {
         CardList hand = new CardList();
         hand.addAll(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
@@ -2024,8 +2054,11 @@ public class GameAction {
         }
         //tokens don't go into the graveyard
         //TODO: must change this if any cards have effects that trigger "when creatures go to the graveyard"
-        
         //resets the card, untaps the card, removes anything "extra", resets attack and defense
+        
+        
+        
+        
         Card newCard = moveToGraveyard(c);
         
         // Destroy needs to be called with Last Known Information
@@ -2065,18 +2098,18 @@ public class GameAction {
         	AllZone.Stack.add(persistAb);
         }
         
-        if(newCard.getKeyword().contains(
+        if(c.getKeyword().contains(
                 "When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.")) {
             PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, newCard.getOwner());
             moveTo(hand, newCard);
         }
 
-        else if(newCard.getName().equals("Nissa's Chosen")) {
+        else if(c.getName().equals("Nissa's Chosen")) {
             PlayerZone library = AllZone.getZone(Constant.Zone.Library, newCard.getOwner());
             moveTo(library, newCard);
         }
 
-        else if(newCard.getName().equals("Guan Yu, Sainted Warrior")) {
+        else if(c.getName().equals("Guan Yu, Sainted Warrior")) {
             PlayerZone library = AllZone.getZone(Constant.Zone.Library, newCard.getOwner());
             newCard = moveTo(library, newCard);
             owner.shuffle();
@@ -2154,19 +2187,7 @@ public class GameAction {
         this.sacrificeDestroy(c);
         return true;
     }
-    
-    /**
-     * exile a card
-     * @param c the card to be exiled
-     */
-    public void exile(Card c) {
-    	if(AllZone.GameAction.isCardExiled(c)) return;
 
-    	PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, c.getOwner());
-
-    	AllZone.GameAction.moveTo(removed, c);
-    }
-    
     //is this card a permanent that is in play?
     public boolean isCardInPlay(Card c) {
         return PlayerZoneUtil.isCardInZone(AllZone.Computer_Battlefield, c)

@@ -242,6 +242,15 @@ public class AbilityFactory {
 				SA = AbilityFactory_ChangeZone.createDrawbackChangeZone(this);
 		}
 		
+		if (API.equals("ChangeZoneAll")){
+			if (isAb)
+				SA = AbilityFactory_ChangeZone.createAbilityChangeZoneAll(this);
+			else if (isSp)
+				SA = AbilityFactory_ChangeZone.createSpellChangeZoneAll(this);
+			else if (isDb)
+				SA = AbilityFactory_ChangeZone.createDrawbackChangeZoneAll(this);
+		}
+		
 		// Fetch, Retrieve and Bounce should be converted ChangeZone 
 		/*
 		if (API.equals("Fetch")){
