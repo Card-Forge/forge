@@ -1397,6 +1397,7 @@ public class CardFactoryUtil {
         return cycle;
     }//ability_typecycle()
     
+    
     public static SpellAbility ability_transmute(final Card sourceCard, final String transmuteCost) {
         final SpellAbility transmute = new Ability_Hand(sourceCard, transmuteCost) {
             private static final long serialVersionUID = -4960704261761785512L;
@@ -1784,6 +1785,22 @@ public class CardFactoryUtil {
     	//((ReflectedManaInfo)theAbility.choices_made[0]).colorOrType = new String(colorOrType);
     	//((ReflectedManaInfo)theAbility.choices_made[0]).who = new String(who);
     } // End getReflectedManaAbility
+    
+    public static Ability getForbiddenOrchardAbility(final Card card, String player)
+    {
+    	final String opp = player;
+    	final Ability ability = new Ability(card,"0")
+    	{
+    		public void resolve()
+    		{
+    			makeToken("Spirit", "C 1 1 Spirit", opp, "C", new String[] {
+                        "Creature", "Spirit"}, 1, 1, new String[] {""});
+    		}
+    	};
+    	ability.setStackDescription(card + " - put a 1/1 colorless Spirit creature token onto the battlefield under target opponent's control.");
+    	
+    	return ability;
+    }
     
     public static SpellAbility enPumpCurse_Enchant(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords, 
     		final String[] spellDescription, final String[] stackDescription) {

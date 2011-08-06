@@ -277,6 +277,12 @@ public class GenerateConstructedDeck
     remove.add("Viridian Acolyte");
     remove.add("Worn Powerstone");
     remove.add("Mana Vault");
+    remove.add("Tooth of Ramos");
+    remove.add("Skull of Ramos");
+    remove.add("Horn of Ramos");
+    remove.add("Heart of Ramos");
+    remove.add("Eye of Ramos");
+    remove.add("Forbidden Orchard");
    
     
     final ArrayList<Card> goodLand = new ArrayList<Card>();

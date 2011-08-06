@@ -93,6 +93,20 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
         
         setDescription(sb.toString());
         */
+        
+        if (sourceCard.getName().equals("Forbidden Orchard"))
+        {
+        	final Card crd = sourceCard;
+        	runcommands.add(new Command() {
+				private static final long serialVersionUID = 1365329719980281985L;
+
+				public void execute()
+        		{
+        			//currently only human can use this card:
+        			AllZone.Stack.add(CardFactoryUtil.getForbiddenOrchardAbility(crd, Constant.Player.Computer));
+        		}
+        	});
+        }
 
         if(isBasic())//lowers memory usage drastically
         {
