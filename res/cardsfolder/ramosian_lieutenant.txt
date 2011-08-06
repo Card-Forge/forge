@@ -4,6 +4,7 @@ Types:Creature Human Rebel
 Text:no text
 PT:1/2
 K:SearchRebel:4
+SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ramosian_lieutenant.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/37.jpg

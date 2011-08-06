@@ -4,6 +4,7 @@ Types:Creature Horror Mercenary
 Text:no text
 PT:2/2
 K:SearchMerc:2
+SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_brute.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/120.jpg

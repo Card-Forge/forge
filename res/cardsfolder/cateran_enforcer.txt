@@ -5,6 +5,7 @@ Text:no text
 PT:4/3
 K:Fear
 K:SearchMerc:4
+SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_enforcer.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/121.jpg

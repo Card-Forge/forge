@@ -5,6 +5,7 @@ Text:no text
 PT:2/1
 K:Fear
 K:SearchMerc:2
+SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rathi_intimidator.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/69.jpg
