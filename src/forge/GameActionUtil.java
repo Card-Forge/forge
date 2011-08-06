@@ -3599,7 +3599,9 @@ public class GameActionUtil {
 		 * Lord of the Pit. If you can't, Lord of the Pit deals 7 damage to you.
 		 */
 		final String player = AllZone.Phase.getActivePlayer();
-		final CardList cards = AllZoneUtil.getPlayerCardsInPlay(player, "Lord of the Pit");
+		CardList lords = AllZoneUtil.getPlayerCardsInPlay(player, "Lord of the Pit");
+		lords.add(AllZoneUtil.getPlayerCardsInPlay(player, "Liege of the Pit"));
+		final CardList cards = lords;
 		
 		for(int i = 0; i < cards.size(); i++) {
 			final Card c = cards.get(i);
