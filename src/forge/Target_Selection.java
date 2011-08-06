@@ -104,7 +104,7 @@ public class Target_Selection {
 		            stopSetNext(input_targetSpecific(sa, choices, message, true, canTargetPlayer, canTargetOpponent, select, req));
 				}
 				else{
-					AllZone.InputControl.setInput(input_cardFromList(sa, choices, message, true, select, req));
+					stopSetNext(input_cardFromList(sa, choices, message, true, select, req));
 				}
 	        }
     	};

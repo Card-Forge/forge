@@ -34,29 +34,39 @@ public class GameAction {
     }
 
     public Card moveTo(PlayerZone zone, Card c) {
+    	// Ideally move to should never be called without a prevZone
     	// Remove card from Current Zone, if it has one
     	String prevZone = "";
         PlayerZone p = AllZone.getZone(c);
-        if(p != null)
-        {
+        if(p != null){
         	prevZone = p.getZoneName();
         	p.remove(c);
         }
-        
-        //create new Card, which resets stats and anything that might have changed during play
-        Card moving = c.isToken() ? c : AllZone.CardFactory.copyCard(c);
-
-        moving.setUnearthed(c.isUnearthed());
-        if (c.wasSuspendCast()){
-        	moving = addSuspendTriggers(moving);
+        else{
+        	//System.out.println(c.getName() + " " + zone.getZoneName());
         }
         
-        //boolean dontTrigger = p != null && p.is(Constant.Zone.Battlefield) && zone.is(Constant.Zone.Battlefield);
-        
+        Card moving;
+        if (!c.isToken() && p != null && p.is(Constant.Zone.Battlefield) && !zone.is(Constant.Zone.Battlefield)){
+        	// If a nontoken card is moving from the Battlefield, to non-Battlefield zone copy it
+        	moving = AllZone.CardFactory.copyCard(c); 
+        }
+        else{
+        	moving = c;
+        }
+
+        moving.setUnearthed(c.isUnearthed());	// this might be unnecessary
+        if (c.wasSuspendCast()){				// these probably can be moved back to SubtractCounters
+        	moving = addSuspendTriggers(moving);
+        }
+
+        // todo: if zone is battlefied and prevZone is battlefield, temporarily disable enters battlefield triggers
         zone.add(moving);
         
         //Run triggers        
         HashMap<String,Object> runParams = new HashMap<String,Object>();
+        // Should the MovedCard be the LKI, aka the original card that came in, not the card that's leaving?
+        // runParams.put("MovedCard", c);
         runParams.put("MovedCard",moving);
         runParams.put("Origin", prevZone);
         runParams.put("Destination", zone.getZoneName());

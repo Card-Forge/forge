@@ -63,7 +63,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
     
     
     
-    if (c.isUnearthed() && (is("Graveyard") || is("Hand")))
+    if (c.isUnearthed() && (is("Graveyard") || is("Hand") || is("Library")))
     {
     	PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, c.getOwner());
     	removed.add(c);

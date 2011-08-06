@@ -1595,7 +1595,6 @@ class CardFactory_Auras {
                     }
                     
                     // Everything worked out perfectly.
-                    if(card.getName().equals("Animate Dead")) animated.addSemiPermanentAttackBoost(-1);
         		}
         	};//Ability
 
@@ -1616,7 +1615,6 @@ class CardFactory_Auras {
                     PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     
                     if(AllZone.GameAction.isCardInZone(c, play)) {
-                        if(card.getName().equals("Animate Dead")) c.addSemiPermanentAttackBoost(+1);
                         AllZone.GameAction.sacrifice(c);
                     }
         		}
