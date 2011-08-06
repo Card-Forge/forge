@@ -1,4 +1,7 @@
+
 package forge;
+
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -23,20 +26,20 @@ import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
-interface DeckDisplay
-{
-  public void updateDisplay(CardList top, CardList bottom);
 
-  //top shows available card pool
-  //if constructed, top shows all cards
-  //if sealed, top shows 5 booster packs
-  //if draft, top shows cards that were chosen
-  public CardList getTop();
-
-  //bottom shows cards that the user has chosen for his library
-  public CardList getBottom();
-
-  public void setTitle(String message);
+interface DeckDisplay {
+    public void updateDisplay(CardList top, CardList bottom);
+    
+    //top shows available card pool
+    //if constructed, top shows all cards
+    //if sealed, top shows 5 booster packs
+    //if draft, top shows cards that were chosen
+    public CardList getTop();
+    
+    //bottom shows cards that the user has chosen for his library
+    public CardList getBottom();
+    
+    public void setTitle(String message);
 }
 
 public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
@@ -326,7 +329,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         Object check = null;
         
         try {
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
+            ObjectInputStream in = new _ObjectInputStream(new FileInputStream(file));
             check = in.readObject();
             
             in.close();

@@ -1,4 +1,7 @@
+
 package forge;
+
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -36,7 +39,7 @@ public class IO {
     // Map has unchecked cast
     private void readMap() {
         try {
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
+            ObjectInputStream in = new _ObjectInputStream(new FileInputStream(file));
             map = (Map<String, Serializable>) in.readObject();
             in.close();
         } catch(Exception ex) {

@@ -1,4 +1,7 @@
+
 package forge;
+
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -63,7 +66,7 @@ public class NewIO {
     
     private ObjectInputStream getReader() {
         try {
-            return new ObjectInputStream(new FileInputStream(file));
+            return new _ObjectInputStream(new FileInputStream(file));
         } catch(IOException ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("IO : getReader() - error - " + ex);

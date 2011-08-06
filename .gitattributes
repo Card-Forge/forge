@@ -198,6 +198,7 @@ src/forge/Time.java svneol=native#text/plain
 src/forge/UndoCommand.java svneol=native#text/plain
 src/forge/Wait.java svneol=native#text/plain
 src/forge/WinLose.java svneol=native#text/plain
+src/forge/_ObjectInputStream.java svneol=native#text/plain
 src/forge/error/ErrorViewer.java svneol=native#text/plain
 src/forge/error/ExceptionHandler.java -text svneol=native#text/plain
 src/forge/gui/ForgeAction.java svneol=native#text/plain

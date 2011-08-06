@@ -195,7 +195,7 @@ public class QuestData implements NewConstants {
     static public QuestData loadData() {
         try {
             //read file "questData"
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream(ForgeProps.getFile(QUEST.DATA)));
+            ObjectInputStream in = new _ObjectInputStream(new FileInputStream(ForgeProps.getFile(QUEST.DATA)));
             Object o = in.readObject();
             in.close();
             

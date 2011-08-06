@@ -1,7 +1,5 @@
+
 package forge;
-
-
-
 
 
 import java.io.File;
@@ -39,7 +37,7 @@ public class DeckIO {
         //DeckIO io = new DeckIO("booster-decks");
 //    io.writeBoosterDeck(deck);
 //    io.close();
-
+        
 //    io.deleteBoosterDeck("0");
 //    System.out.println(io.getBoosterDecks().keySet().size());
 //    io.close();
@@ -168,7 +166,7 @@ public class DeckIO {
 //~
             if(!file.exists()) return;
             
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
+            ObjectInputStream in = new _ObjectInputStream(new FileInputStream(file));
             
             deckList = (ArrayList<Deck>) in.readObject();
             boosterMap = (Map<String, Deck[]>) in.readObject();
@@ -183,9 +181,9 @@ public class DeckIO {
     private void writeFile() {
         try {
 //~
-      if(file == null) {
-        return;
-      }
+            if(file == null) {
+                return;
+            }
 //~
             if(!file.exists()) file.createNewFile();
             
