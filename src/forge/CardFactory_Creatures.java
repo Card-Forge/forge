@@ -10798,6 +10798,61 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
+        else if(cardName.equals("Undead Gladiator")) {
+            final Ability ability = new Ability(card, "1 B") {
+                
+    			private static final long serialVersionUID = -56339412048009L;
+
+
+    			@Override
+                public void resolve() {
+                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                    
+                    grave.remove(card);
+                    hand.add(card);
+                  }
+                
+                
+                @Override
+                public boolean canPlay() {
+                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    String activePlayer = AllZone.Phase.getActivePlayer();
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                    
+                    return AllZone.GameAction.isCardInZone(card, grave) && card.getController().equals(activePlayer) && hand.size() > 0;                   
+                }
+                
+            };
+            Input target = new Input() {
+                
+                private static final long serialVersionUID = 42466124531655L;
+                
+                @Override
+                public void showMessage() {
+                    AllZone.Display.showMessage("Select a card to discard: ");
+                    ButtonUtil.enableOnlyCancel();
+                }
+                
+                @Override
+                public void selectCard(Card c, PlayerZone zone) {
+                    PlayerZone Player_Hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                    if(AllZone.GameAction.isCardInZone(c, Player_Hand)) {
+                    	AllZone.GameAction.discard(c);
+                        AllZone.Stack.add(ability);
+                        stopSetNext(new ComputerAI_StackNotEmpty());
+                    }
+                }//selectCard()
+            };//Input
+            card.addSpellAbility(ability);
+            ability.setFlashBackAbility(true);
+            card.setUnearth(true);
+            ability.setDescription("1 B, Discard a card: Return Undead Gladiator from your graveyard to your hand. Activate this ability only during your upkeep.");
+            ability.setStackDescription(card.getName() + "returns from the graveyard to hand");
+            ability.setAfterPayMana(target);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
         else if(cardName.equals("Niv-Mizzet, the Firemind")) {
             final Ability_Tap ability = new Ability_Tap(card) {
                 private static final long serialVersionUID = 8670005059055071206L;

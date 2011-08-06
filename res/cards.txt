@@ -1,3 +1,10 @@
+Undead Gladiator
+1 B B
+Creature Zombie Barbarian
+no text
+3/1
+Cycling:1 B
+
 Martial Coup
 X W W
 Sorcery
