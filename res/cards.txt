@@ -1,3 +1,8 @@
+Time of Heroes
+1 W
+Enchantment
+Each creature you control with a level counter on it gets +2/+2.
+
 Lifetap
 U U
 Enchantment

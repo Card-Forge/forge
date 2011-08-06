@@ -125,6 +125,7 @@ public class StaticEffects
 		cardToEffectsList.put("Tethered Griffin", new String[] {"Tethered_Griffin"});
 		cardToEffectsList.put("Shared Triumph", new String[] {"Shared_Triumph"});
 		cardToEffectsList.put("Crucible of Fire", new String[] {"Crucible_of_Fire"});
+		cardToEffectsList.put("Time of Heroes", new String[] {"Time_of_Heroes"});
 		cardToEffectsList.put("Glorious Anthem", new String[] {"Glorious_Anthem"});
 		cardToEffectsList.put("Gaea's Anthem", new String[] {"Gaeas_Anthem"});
 		cardToEffectsList.put("Bad Moon", new String[] {"Bad_Moon"});

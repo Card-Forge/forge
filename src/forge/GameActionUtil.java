@@ -15130,6 +15130,47 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	}; // Crucible of Fire
+	
+	public static Command Time_of_Heroes        = new Command() {
+		
+		CardList                  gloriousAnthemList = new CardList();
+
+		public void execute() {
+			CardList list = gloriousAnthemList;
+			Card c;
+			// reset all cards in list - aka "old" cards
+			for(int i = 0; i < list.size(); i++) {
+				c = list.get(i);
+				c.addSemiPermanentAttackBoost(-2);
+				c.addSemiPermanentDefenseBoost(-2);
+			}
+
+			// add +1/+1 to cards
+			list.clear();
+			PlayerZone[] zone = getZone("Time of Heroes");
+
+			// for each zone found add +1/+1 to each card
+			for(int outer = 0; outer < zone.length; outer++) {
+				CardList creature = new CardList(
+						zone[outer].getCards());
+				creature = creature.filter(new CardListFilter()
+				{
+					public boolean addCard(Card crd)
+					{
+						return crd.getCounters(Counters.LEVEL) > 0;
+					}
+				});
+
+				for(int i = 0; i < creature.size(); i++) {
+					c = creature.get(i);
+					c.addSemiPermanentAttackBoost(2);
+					c.addSemiPermanentDefenseBoost(2);
+
+					gloriousAnthemList.add(c);
+				}// for inner
+			}// for outer
+		}// execute()
+	}; // Time of Heroes
 
 	public static Command Glorious_Anthem             = new Command() {
 		private static final long serialVersionUID   = 3686349742274071761L;
@@ -16281,6 +16322,7 @@ public class GameActionUtil {
 
 		commands.put("Shared_Triumph", Shared_Triumph);
 		commands.put("Crucible_of_Fire", Crucible_of_Fire);
+		commands.put("Time_of_Heroes", Time_of_Heroes);
 		commands.put("Glorious_Anthem", Glorious_Anthem);
 		commands.put("Gaeas_Anthem", Gaeas_Anthem);
 		commands.put("Bad_Moon", Bad_Moon);
