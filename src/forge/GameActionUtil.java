@@ -77,6 +77,7 @@ public class GameActionUtil {
 		upkeep_Anowon();
 		upkeep_Cunning_Lethemancer();
 		upkeep_Shapeshifter();
+		upkeep_Vesuvan_Doppelganger_Keyword();
 		
 		upkeep_Ink_Dissolver();
 		upkeep_Kithkin_Zephyrnaut();
@@ -10118,6 +10119,88 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}//foreach(Card)
 	}//upkeep_Shapeshifter
+	
+	private static void upkeep_Vesuvan_Doppelganger_Keyword() {
+		final Player player = AllZone.Phase.getPlayerTurn();
+		final String keyword = "At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color. If you do, this creature gains this ability.";
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
+		list = list.filter(AllZoneUtil.getKeywordFilter(keyword));
+
+		for(final Card c:list) {
+			final SpellAbility ability = new Ability(c, "0") {
+				@Override
+				public void resolve() {
+					final Card[] newTarget = new Card[1];
+					newTarget[0] = null;
+					
+					final Ability switchTargets = new Ability(c, "0") {
+						public void resolve() {
+							if(newTarget[0] != null) {
+								/*
+								 * 1. need to select new card - DONE
+								 * 1a. need to create the newly copied card with pic and setinfo
+								 * 2. need to add the leaves play command
+								 * 3. need to transfer the keyword
+								 * 4. need to update the clone origin of new card and old card
+								 * 5. remove clone leaves play commands from old
+								 * 5a. remove old from play
+								 * 6. add new to play
+								 */
+								
+								Card newCopy = AllZone.CardFactory.getCard(newTarget[0].getName(), player);
+								newCopy.setCurSetCode(newTarget[0].getCurSetCode());
+								newCopy.setImageFilename(newTarget[0].getImageFilename());
+
+								//need to add the leaves play command (2)
+								newCopy.addLeavesPlayCommand(c.getCloneLeavesPlayCommand());
+								c.removeTrigger(c.getCloneLeavesPlayCommand(), ZCTrigger.LEAVEFIELD);
+								newCopy.setCloneLeavesPlayCommand(c.getCloneLeavesPlayCommand());
+
+								newCopy.addExtrinsicKeyword(keyword);
+								newCopy.setCloneOrigin(c.getCloneOrigin());
+								newCopy.getCloneOrigin().setCurrentlyCloningCard(newCopy);
+								c.setCloneOrigin(null);
+
+								//5
+								PlayerZone play = AllZone.getZone(c);
+								play.remove(c);
+
+								play.add(newCopy);
+							}
+						}
+					};
+					
+					AllZone.InputControl.setInput(new Input() {
+						private static final long serialVersionUID = 5662272658873063221L;
+
+						@Override
+						public void showMessage() {
+							AllZone.Display.showMessage(c.getName()+" - Select new target creature.  (Click Cancel to remain as is.)");
+							ButtonUtil.enableOnlyCancel();
+						}
+						
+						@Override
+						public void selectButtonCancel() { stop(); }
+						
+						@Override
+						public void selectCard(Card selectedCard, PlayerZone z) {
+							if(z.is(Constant.Zone.Battlefield) && selectedCard.isCreature()
+									&& CardFactoryUtil.canTarget(c, selectedCard)) {
+								newTarget[0] = selectedCard;
+								StringBuilder sb = new StringBuilder();
+			                    sb.append(c.getCloneOrigin()).append(" - switching to copy "+selectedCard.getName()+".");
+			                    switchTargets.setStackDescription(sb.toString());
+								AllZone.Stack.add(switchTargets);
+								stop();
+							}
+						}
+					});
+				}
+			};
+			ability.setStackDescription(c.getName()+" - you may have this creature become a copy of target creature.");
+			AllZone.Stack.add(ability);
+		}//foreach(Card)
+	}//upkeep_Vesuvan_Doppelganger_Keyword
 	
 	private static void upkeep_Tangle_Wire() {
 		final Player player = AllZone.Phase.getPlayerTurn();

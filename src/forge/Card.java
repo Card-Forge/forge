@@ -139,7 +139,9 @@ public class Card extends MyObservable {
     private String                       namedCard                         = "";
     private String						 topCardName					   = "";
     private String						 reflectableMana				   = "";
-    private String						cloneOrigin							= "";
+    private Card						cloneOrigin							= null;
+    private Card						currentlyCloningCard				= null;
+    private Command						cloneLeavesPlayCommand				= null;
     private ArrayList<Card>				gainControlTargets					= new ArrayList<Card>();	
     private ArrayList<Command>			gainControlReleaseCommands			= new ArrayList<Command>();;
     
@@ -311,12 +313,28 @@ public class Card extends MyObservable {
     	return sirenAttackOrDestroy;
     }
     
-    public String getCloneOrigin() {
+    public Card getCloneOrigin() {
     	return cloneOrigin;
     }
     
-    public void setCloneOrigin(String name) {
+    public void setCloneOrigin(Card name) {
     	cloneOrigin = name;
+    }
+    
+    public Command getCloneLeavesPlayCommand() {
+    	return cloneLeavesPlayCommand;
+    }
+    
+    public void setCloneLeavesPlayCommand(Command com) {
+    	cloneLeavesPlayCommand = com;
+    }
+    
+    public Card getCurrentlyCloningCard() {
+    	return currentlyCloningCard;
+    }
+    
+    public void setCurrentlyCloningCard(Card c) {
+    	currentlyCloningCard = c;
     }
     
     public boolean getSacrificeAtEOT() {
@@ -1306,6 +1324,10 @@ public class Card extends MyObservable {
     public void executeTrigger(ZCTrigger type) {
         for(Ability_Triggered t:zcTriggers)
             if(t.trigger.equals(type) && t.isBasic()) AllZone.Stack.add(t);
+    }
+    
+    public void clearTriggers() {
+    	zcTriggers.clear();
     }
     
     public void addComesIntoPlayCommand(Command c) {
