@@ -3131,7 +3131,7 @@ public class CardFactory_Creatures {
 	        }
 	        public void selectCard(Card c, PlayerZone zone)
 	        {
-	          if(zone.is(Constant.Zone.Hand) && c.isCreature())
+	          if(zone.is(Constant.Zone.Hand) && !c.isCreature())
 	          {
 	            AllZone.GameAction.discard(c);
 	            stop();
