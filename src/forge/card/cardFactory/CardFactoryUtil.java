@@ -3020,6 +3020,9 @@ public class CardFactoryUtil {
     }
     
     public static boolean isTargetStillValid(SpellAbility ability, Card target) {
+    	
+		if (AllZone.getZone(target) == null) return false; // for tokens that disappeared
+    	
     	Card source = ability.getSourceCard();
     	Target tgt = ability.getTarget();
     	if (tgt != null){
@@ -3028,7 +3031,7 @@ public class CardFactoryUtil {
     			return false;
     		
     		// Check if the target is in the zone it needs to be in to be targeted
-    		if (AllZone.getZone(target) == null || !AllZone.getZone(target).is(tgt.getZone()))
+    		if (!AllZone.getZone(target).is(tgt.getZone()))
     			return false;
     	}
     	else{
