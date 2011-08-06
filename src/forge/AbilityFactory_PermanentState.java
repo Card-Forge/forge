@@ -31,7 +31,7 @@ public class AbilityFactory_PermanentState {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				return untapCanPlayAI(af,this);
+				return untapTrigger(af,this, mandatory);
 			}
 			
 		};
@@ -86,7 +86,7 @@ public class AbilityFactory_PermanentState {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				return untapPlayDrawbackAI(af, this);
+				return untapTrigger(af, this, mandatory);
 			}
 			
 		};
@@ -384,7 +384,7 @@ public class AbilityFactory_PermanentState {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				return tapCanPlayAI(af,this);
+				return tapTrigger(af, this, mandatory);
 			}
 			
 		};
@@ -439,7 +439,7 @@ public class AbilityFactory_PermanentState {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				return tapPlayDrawbackAI(af, this);
+				return tapTrigger(af, this, mandatory);
 			}
 			
 		};
