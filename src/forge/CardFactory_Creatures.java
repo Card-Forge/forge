@@ -2352,7 +2352,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END ***************************
         
-
+        /* Converteded to AF Trigger
         //*************** START *********** START **************************
         else if(cardName.equals("Vodalian Merchant")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -2377,7 +2377,7 @@ public class CardFactory_Creatures {
             };
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Whirlpool Rider")) {
