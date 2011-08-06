@@ -9,7 +9,6 @@ A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of your upkeep, you may exile a card from your hand. If you do, untap CARDNAME.
-#Perhaps the exile here should be an ability, then sub_ability instead of a cost?
 SVar:TrigUntap:AB$Untap | Cost$ ExileFromHand<1/Card> | Defined$ Self
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
