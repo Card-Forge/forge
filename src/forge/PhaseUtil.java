@@ -317,4 +317,16 @@ public class PhaseUtil {
 			|| phase.equals(Constant.Phase.Draw) || phase.equals(Constant.Phase.Main1)
 			|| phase.equals(Constant.Phase.Combat_Begin);
 	}
+	
+	public static boolean isBeforeCombatDamage() {
+		String phase = AllZone.Phase.getPhase();
+		return phase.equals(Constant.Phase.Untap) || phase.equals(Constant.Phase.Upkeep)
+			|| phase.equals(Constant.Phase.Draw) || phase.equals(Constant.Phase.Main1)
+			|| phase.equals(Constant.Phase.Combat_Begin)
+			|| phase.equals(Constant.Phase.Combat_Declare_Attackers)
+			|| phase.equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility)
+			|| phase.equals(Constant.Phase.Combat_Declare_Blockers)
+			|| phase.equals(Constant.Phase.Combat_Declare_Blockers_InstantAbility)
+			|| phase.equals(Constant.Phase.Combat_FirstStrikeDamage);
+	}
 }

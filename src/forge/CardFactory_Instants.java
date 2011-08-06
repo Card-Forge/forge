@@ -4837,6 +4837,60 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Berserk")) {
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -4271469206538681785L;
+
+				@Override
+                public boolean canPlayAI() {
+                	//computer doesn't use x spells very effectively
+                    return false;
+                }//canPlayAI()
+                
+                @Override
+                public void resolve() {
+                	final Card[] target = new Card[1];
+                	target[0] = getTargetCard();
+                	final int x = target[0].getNetAttack();
+                    final Command untilEOT = new Command() {
+						private static final long serialVersionUID = -3673524041113224182L;
+
+						public void execute() {
+                            if(AllZone.GameAction.isCardInPlay(target[0])) {
+                                target[0].addTempAttackBoost(-x);
+                                target[0].removeExtrinsicKeyword("Trample");
+                                target[0].removeExtrinsicKeyword("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.");
+                            }
+                        }
+                    };
+                    
+                    
+                    if(AllZone.GameAction.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, target[0])) {
+                        target[0].addTempAttackBoost(x);
+                        target[0].addExtrinsicKeyword("Trample");
+                        target[0].addExtrinsicKeyword("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.");
+                        
+                        AllZone.EndOfTurn.addUntil(untilEOT);
+                    } else {
+
+                    }
+                }//resolve()
+                
+                @Override
+                public boolean canPlay() {
+                	CardList creatures = AllZoneUtil.getCreaturesInPlay();
+                	return PhaseUtil.isBeforeCombatDamage() && creatures.size() > 0;
+                }
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            
+            card.setSVar("PlayMain1", "TRUE");
+            
+            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+        }//*************** END ************ END **************************
+        
     	return card;
     }//getCard
 }

@@ -4391,6 +4391,7 @@ public class GameActionUtil {
 			Card c = list.get(i);
 			if(c.getCreatureAttackedThisCombat()) c.setCreatureAttackedThisCombat(false);
 			if(c.getCreatureBlockedThisCombat()) c.setCreatureBlockedThisCombat(false);
+			//do not reset setCreatureAttackedThisTurn(), this appears to be combat specific
 
 			if(c.getCreatureGotBlockedThisCombat()) c.setCreatureGotBlockedThisCombat(false);
 

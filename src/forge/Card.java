@@ -53,6 +53,7 @@ public class Card extends MyObservable {
     private boolean 					 copiedSpell					   = false; 
     private boolean 					 SpellwithChoices				   = false; 
     private boolean 					 SpellCopyingCard				   = false; 
+    private boolean						creatureAttackedThisTurn			= false;
     private boolean                      creatureAttackedThisCombat        = false;
     private boolean                      creatureBlockedThisCombat         = false;
     private boolean                      creatureGotBlockedThisCombat      = false;
@@ -207,10 +208,21 @@ public class Card extends MyObservable {
     //used to see if an attacking creature with a triggering attack ability triggered this phase:
     public void setCreatureAttackedThisCombat(boolean b) {
         creatureAttackedThisCombat = b;
+        if(true == b) {
+        	setCreatureAttackedThisTurn(true);
+        }
     }
     
     public boolean getCreatureAttackedThisCombat() {
         return creatureAttackedThisCombat;
+    }
+    
+    public void setCreatureAttackedThisTurn(boolean b) {
+        creatureAttackedThisTurn = b;
+    }
+    
+    public boolean getCreatureAttackedThisTurn() {
+        return creatureAttackedThisTurn;
     }
     
     public void setCreatureBlockedThisCombat(boolean b) {

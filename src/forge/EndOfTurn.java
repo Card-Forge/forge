@@ -104,6 +104,26 @@ public class EndOfTurn implements java.io.Serializable
     		
     		AllZone.Stack.add(destroy);
     	}
+    	//Berserk is using this, so don't check isFaceDown()
+    	if(c.getKeyword().contains("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.")) {
+    		if(c.getCreatureAttackedThisTurn()) {
+    		final Card card = c;
+    		final SpellAbility sac = new Ability(card, "0") {
+    			@Override
+    			public void resolve() {
+    				if(AllZone.GameAction.isCardInPlay(card)) AllZone.GameAction.sacrifice(card);
+    			}
+    		};
+    		StringBuilder sb = new StringBuilder();
+    		sb.append("Sacrifice ").append(card);
+    		sac.setStackDescription(sb.toString());
+    		
+    		AllZone.Stack.add(sac);
+    		}
+    		else {
+    			c.removeExtrinsicKeyword("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.");
+    		}
+    	}
     	if( c.getKeyword().contains("An opponent gains control of CARDNAME at the beginning of the next end step.")) {
     		final Card vale = c;
     		final SpellAbility change = new Ability(vale, "0") {
@@ -133,8 +153,10 @@ public class EndOfTurn implements java.io.Serializable
     		
     		AllZone.Stack.add(change);
     	}
+    	if(c.getCreatureAttackedThisTurn()) c.setCreatureAttackedThisTurn(false);
     }
     execute(at);
+    
   }//executeAt()
 
 
