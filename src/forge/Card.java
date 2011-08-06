@@ -2853,7 +2853,7 @@ public class Card extends MyObservable {
         System.out.println("Adding " + damageToAdd + " damage to " + getName());
         Log.debug("Adding " + damageToAdd + " damage to " + getName());
         
-        GameActionUtil.executeDamageDealingEffects(source, this, damageToAdd);
+        GameActionUtil.executeDamageDealingEffects(source, damageToAdd);
         
         if(this.isPlaneswalker()) {
         	this.subtractCounter(Counters.LOYALTY, damageToAdd);
