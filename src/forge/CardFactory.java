@@ -7697,8 +7697,9 @@ public class CardFactory implements NewConstants {
                 	for(int j=0;j<=num[0];j++) {
                 		choices[j] = ""+j;
                 	}
-                    String answer = (String)(AllZone.Display.getChoiceOptional(
+                    String answer = (String)(AllZone.Display.getChoice(
                             "Charge counters to remove", choices));
+                    
                     num[0] = Integer.parseInt(answer);
                     AllZone.Stack.add(addMana);
                     stop();
