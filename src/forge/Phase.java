@@ -100,6 +100,57 @@ public class Phase extends MyObservable
     
     AllZone.ManaPool.clear();
     
+    //time vault:
+    if ((is(Constant.Phase.Cleanup, Constant.Player.Human) && humanExtraTurns >= 0 ) || 
+        	(is(Constant.Phase.Cleanup, Constant.Player.Computer) && computerExtraTurns >= 0 ) )
+    {
+    	String player = getActivePlayer();
+    	String opponent = AllZone.GameAction.getOpponent(player);
+    	CardList list = CardFactoryUtil.getCards("Time Vault", opponent);
+    	list = list.filter(new CardListFilter()
+    	{
+    		public boolean addCard(Card c)
+    		{
+    			return c.isTapped();
+    		}
+    	});
+    	
+    	for (int i=0;i<list.size();i++)
+    	{
+    		final Card crd = list.get(i);
+    		
+    		/*
+    		Ability ability = new Ability(list.get(i), "0")
+    		{
+    			public void resolve()
+    			{
+    				String controller = crd.getController();
+    				if (controller.equals(Constant.Player.Human))
+    					humanExtraTurns--;
+    				else
+    					computerExtraTurns--;
+    				
+    				crd.untap();
+    			}
+    		};
+    		ability.setStackDescription(crd + " - skip this turn instead, untap Time Vault.");
+    		*/
+    		
+    		if (player.equals(Constant.Player.Computer))
+    		{
+    			String[] choices = { "Yes", "No" };  
+    			Object q = null;
+    			q = AllZone.Display.getChoiceOptional("Untap " + crd + "?", choices);
+    			if (q.equals("Yes")) {
+    				//AllZone.Stack.add(ability);
+    				humanExtraTurns--;
+    				crd.untap();
+    			}
+    			
+    		}
+    	}
+    }
+    
     //if (getPhase().equals(Constant.Phase.Cleanup) && extraTurns > 0)
     if ((is(Constant.Phase.Cleanup, Constant.Player.Human) && humanExtraTurns > 0 ) || 
     	(is(Constant.Phase.Cleanup, Constant.Player.Computer) && computerExtraTurns > 0 ) )
@@ -115,7 +166,6 @@ public class Phase extends MyObservable
     	
     	AllZone.GameAction.setLastPlayerToDraw(opponent);
     	setPhase(Constant.Phase.Untap, player);
-    	
     }
     else if ((is(Constant.Phase.Cleanup, Constant.Player.Computer) && humanExtraTurns < 0 ) || 
         	(is(Constant.Phase.Cleanup, Constant.Player.Human) && computerExtraTurns < 0 ) )

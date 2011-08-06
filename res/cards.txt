@@ -1,3 +1,10 @@
+Time Vault
+2
+Artifact
+If you would begin your turn while Time Vault is tapped, you may skip that turn instead. If you do, untap Time Vault.
+This card doesn't untap during your untap step.
+Comes into play tapped.
+
 Mana Tithe
 W
 Instant

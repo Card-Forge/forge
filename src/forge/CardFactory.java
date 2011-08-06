@@ -16964,6 +16964,23 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     }//*************** END ************ END **************************
 	
 	//*************** START *********** START **************************
+    else if (cardName.equals("Time Vault"))
+	{
+    	final Ability_Tap ability = new Ability_Tap(card)
+    	{
+			private static final long serialVersionUID = 5784473766585071504L;
+
+			public void resolve() {
+				//System.out.println("Turn: " + AllZone.Phase.getTurn());
+				AllZone.Phase.addExtraTurn(card.getController());
+			}
+    	};
+    	card.addSpellAbility(ability);
+    	ability.setStackDescription(card +" - take an extra turn after this one.");
+    	ability.setDescription("Tap: Take an extra turn after this one.");
+    }//*************** END ************ END **************************
+	
+	//*************** START *********** START **************************
 	  if (cardName.equals("Celestial Purge"))
 	    {
 	    	final Spell spell = new Spell(card)

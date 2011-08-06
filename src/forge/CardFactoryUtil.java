@@ -3025,6 +3025,13 @@ public class CardFactoryUtil
 	  return count;
   }
   
+  public static CardList getCards(String cardName, String player)
+  {
+	  CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, player).getCards());
+	  list = list.getName(cardName);
+	  return list;
+  }
+  
   public static CardList getFastbonds(String player)
   {  
 	  CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, player).getCards());
