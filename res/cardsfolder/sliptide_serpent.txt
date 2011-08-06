@@ -3,6 +3,8 @@ ManaCost:4 U U
 Types:Creature  Serpent
 Text:no text
 PT:4/4
+A:AB$Bounce|Cost$3 U|Destination$Hand|SpellDescription$Return CARDNAME to its owner's hand.
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sliptide_serpent.jpg
 End

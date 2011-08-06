@@ -9930,6 +9930,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Arcanis the Omnipotent")) {
             final Ability_Tap ability = new Ability_Tap(card) {
@@ -9976,6 +9977,7 @@ public class CardFactory_Creatures {
             ability2.setStackDescription(sb2.toString());
             ability2.setDescription("2 U U: Return Arcanis the Omnipotent to its owner's hand.");
         }//*************** END ************ END ************************** 
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Blinking Spirit")) {
@@ -10030,7 +10032,7 @@ public class CardFactory_Creatures {
             ability.setStackDescription(sb.toString());
             ability.setDescription("Pay 2 life: return Selenia, Dark Angel to its owner's hand.");
         }//*************** END ************ END ************************** 
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Horde of Notions")) {
@@ -15825,6 +15827,7 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
      
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Sliptide Serpent")) {
             final SpellAbility a1 = new Ability(card, "3 U") {
@@ -15836,10 +15839,10 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getOwner());
-                    /*
-                    AllZone.getZone(card).remove(card);
-                    hand.add(card);
-                    */
+                    
+                    //AllZone.getZone(card).remove(card);
+                    //hand.add(card);
+                    
                     if(card.isToken()) AllZone.getZone(card).remove(card);
                     else AllZone.GameAction.moveTo(hand, card);
                     
@@ -15867,10 +15870,10 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getOwner());
-                    /*
-                    AllZone.getZone(card).remove(card);
-                    hand.add(card);
-                    */
+                    
+                    //AllZone.getZone(card).remove(card);
+                    //hand.add(card);
+                    
                     if(card.isToken()) AllZone.getZone(card).remove(card);
                     else AllZone.GameAction.moveTo(hand, card);
                     
@@ -15886,6 +15889,7 @@ public class CardFactory_Creatures {
             
             a1.setDescription("1 U: Return Fleeting Image to its owner's hand.");
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Windreaver")) {

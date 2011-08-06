@@ -245,6 +245,7 @@ public class AbilityFactory {
 			if (isSp){
 				SA = AbilityFactory_Bounce.createSpellBounce(this);
 			}
+			hostCard.setSVar("PlayMain1", "TRUE");
 		}
 		
 		if (API.equals("Untap")){
