@@ -37,6 +37,7 @@ public enum Counters {
     P1P0("+1/+0"),
     QUEST(),
     SPORE(),
+    STORAGE(),
     TIME(),
     TOWER("tower"),
     VERSE(),
