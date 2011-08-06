@@ -130,7 +130,6 @@ public abstract class Player extends MyObservable{
 		}
 		
 		if(lifeGain > 0) {
-			//Lich
 			if(AllZoneUtil.isCardInPlay("Lich", this)) {
 				//draw cards instead of gain life
 				drawCards(lifeGain);
@@ -145,13 +144,13 @@ public abstract class Player extends MyObservable{
 				Object[] Life_Whenever_Parameters = new Object[1];
 				Life_Whenever_Parameters[0] = lifeGain;
 				AllZone.GameAction.checkWheneverKeyword(getPlayerCard(), "GainLife", Life_Whenever_Parameters);
+				
+				//Run triggers
+				HashMap<String,Object> runParams = new HashMap<String,Object>();
+				runParams.put("Player", this);
+				runParams.put("LifeAmount", lifeGain);
+				AllZone.TriggerHandler.runTrigger("LifeGained", runParams);
 			}
-			
-			//Run triggers
-			HashMap<String,Object> runParams = new HashMap<String,Object>();
-			runParams.put("Player", this);
-			runParams.put("LifeAmount", lifeGain);
-			AllZone.TriggerHandler.runTrigger("LifeGained", runParams);
 		}
 		else System.out.println("Player - trying to gain negative or 0 life");
 
@@ -162,7 +161,7 @@ public abstract class Player extends MyObservable{
 	
 	public boolean canGainLife() {
 		if(AllZoneUtil.isCardInPlay("Sulfuric Vortex") || AllZoneUtil.isCardInPlay("Leyline of Punishment") || 
-				AllZoneUtil.isCardInPlay("Platinum Emperion",this)) return false;
+				AllZoneUtil.isCardInPlay("Platinum Emperion", this)) return false;
 		return true;
 	}
 	
@@ -199,14 +198,6 @@ public abstract class Player extends MyObservable{
 		life -= toSub;
 		this.updateObservers();
 	}
-	
-	//this shouldn't be needed
-	/*
-	private void payLife(final int cost) {
-		life -= cost;
-		this.updateObservers();
-	}
-	*/
 	
 	public boolean canPayLife(int lifePayment) {
 		if(life < lifePayment) return false;
