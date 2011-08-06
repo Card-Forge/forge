@@ -2697,14 +2697,16 @@ public class CardFactory implements NewConstants {
                     human = human.getNotKeyword("Indestructible");
                     int humanvalue = CardListUtil.sumCMC(human);
                     humanvalue += human.size();
-                    humanvalue += human.getType("Land").size();        // X = total converted mana cost + number of permanents + number of lands  (Human)
+                    humanvalue += CardListUtil.sumAttack(human.getTokens()); 
+                    humanvalue += human.getType("Land").size();        // X = total converted mana cost + number of permanents + number of lands + total power of tokens (Human)
                     if (AllZone.Computer_Life.getLife() < 7) { humanvalue += CardListUtil.sumAttack(human); } // in Low Life Emergency X = X + total power of human creatures
 
                     computer = computer.getValidCards(Tgts);
                     computer = computer.getNotKeyword("Indestructible");
                     int computervalue = CardListUtil.sumCMC(computer);
                     computervalue += computer.size();
-                    computervalue += computer.getType("Land").size();  // Y = total converted mana cost + number of permanents + number of lands (Computer)
+                    computervalue += CardListUtil.sumAttack(computer.getTokens()); 
+                    computervalue += computer.getType("Land").size();  // Y = total converted mana cost + number of permanents + number of lands + total power of tokens (Computer)
                     
                     // the computer will play the spell if Y < X - 3
                     return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
@@ -2953,14 +2955,17 @@ public class CardFactory implements NewConstants {
                     human = human.getValidCards(Tgts);
                     int humanvalue = CardListUtil.sumCMC(human);
                     humanvalue += human.getType("Land").size();
-                    humanvalue += CardListUtil.sumAttack(human.getTokens()); 
-                    humanvalue += CardListUtil.sumDefense(human.getTokens());        // X = total converted mana cost + number of lands + total power+toughness of tokens (Human)
+                    humanvalue += CardListUtil.sumAttack(human.getTokens());        // X = total converted mana cost + number of lands c (Human)
+                    if(!Destination.equals("Hand")) humanvalue += human.size();     // if the Destination is not Hand card advantage counts
+                    if(Destination.equals("Hand")) humanvalue += CardListUtil.sumDefense(human.getTokens());  // if the Destination is Hand tokens are more important
                     if (AllZone.Computer_Life.getLife() < 7) { humanvalue += CardListUtil.sumAttack(human); } // in Low Life Emergency X = X + total power of human creatures
+
                     computer = computer.getValidCards(Tgts);
                     int computervalue = CardListUtil.sumCMC(computer);
                     computervalue += computer.getType("Land").size();
-                    computervalue += CardListUtil.sumAttack(computer.getTokens()); 
-                    computervalue += CardListUtil.sumDefense(computer.getTokens());  // Y = total converted mana cost + number of lands + total power+toughness of tokens (Computer)
+                    computervalue += CardListUtil.sumAttack(computer.getTokens());    // Y = total converted mana cost + number of lands + total power of tokens (Computer)
+                    if(!Destination.equals("Hand")) computervalue += computer.size(); // if the Destination is not Hand card advantage counts
+                    if(Destination.equals("Hand")) computervalue += CardListUtil.sumDefense(computer.getTokens()); // if the Destination is Hand tokens are more important
                     
                     // the computer will play the spell if Y < X - 2
                     return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
