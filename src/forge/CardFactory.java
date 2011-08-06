@@ -2631,8 +2631,6 @@ public class CardFactory implements NewConstants {
 
             }; //SpDstryAll
             
-            
-            card.setSVar("PlayMain1", "TRUE");
             card.addSpellAbility(spDstryAll);            
 
         }//spDestroyAll

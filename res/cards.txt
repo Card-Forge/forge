@@ -1,3 +1,30 @@
+Anarchy
+2 R R
+Sorcery
+Destroy all white permanents.
+spDestroyAll:Permanent.White
+SVar:RemAIDeck:True
+
+Ruination
+3 R
+Sorcery
+Destroy all nonbasic lands.
+spDestroyAll:Land.nonBasic
+
+Tivadar's Crusade
+1 W W
+Sorcery
+Destroy all Goblins.
+spDestroyAll:Goblin
+SVar:RemAIDeck:True
+
+Tsunami
+3 G
+Sorcery
+Destroy all Islands.
+spDestroyAll:Island
+SVar:RemAIDeck:True
+
 Kami of the Crescent Moon
 U U
 Legendary Creature Spirit
@@ -50,12 +77,6 @@ Tranquil Domain
 Instant
 Destroy all non-Aura enchantments.
 spDestroyAll:Enchantment.nonAura
-
-Tsunami
-3 G
-Sorcery
-Destroy all Islands.
-spDestroyAll:Island
 
 Assassinate
 2 B
