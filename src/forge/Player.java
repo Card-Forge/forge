@@ -165,7 +165,7 @@ public abstract class Player extends MyObservable{
 	public boolean payLife(int lifePayment, Card source) {
     	
 		//rule 118.8
-    	if (lifePayment <= life){
+    	if (life >= lifePayment){
     		return loseLife(lifePayment, source);
     	}
     	
