@@ -214,7 +214,7 @@ public class Target {
 		
 		for(Card c : AllZone.getZone(tgtZone,AllZone.HumanPlayer).getCards())
 		{
-			if(c.isValidCard(ValidTgts, srcCard.getController(), srcCard))
+			if(c.isValidCard(ValidTgts, srcCard.getController(), srcCard) && CardFactoryUtil.canTarget(srcCard, c))
 			{
 				return true;
 			}
@@ -222,7 +222,7 @@ public class Target {
 		
 		for(Card c : AllZone.getZone(tgtZone,AllZone.ComputerPlayer).getCards())
 		{
-			if(c.isValidCard(ValidTgts, srcCard.getController(), srcCard))
+			if(c.isValidCard(ValidTgts, srcCard.getController(), srcCard) && CardFactoryUtil.canTarget(srcCard, c))
 			{
 				return true;
 			}
