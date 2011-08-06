@@ -10,5 +10,5 @@ SVar:X:Count$CardPower
 SVar:Y:Targeted$CardPower
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tahngarth_talruum_hero.jpg
-SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/74.jpg
+SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/74.jpg|2
 End
