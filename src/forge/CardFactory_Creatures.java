@@ -1035,13 +1035,7 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    PlayerZone hPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-                    PlayerZone cPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    CardList creatures = new CardList();
-                    
-                    creatures.addAll(hPlay.getCards());
-                    creatures.addAll(cPlay.getCards());
-                    creatures = creatures.getType("Creature");
+                    CardList creatures = AllZoneUtil.getCreaturesInPlay();
                     
                     for(int i = 0; i < creatures.size(); i++) {
                         Card crd = creatures.get(i);
@@ -1072,13 +1066,7 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    PlayerZone hPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-                    PlayerZone cPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    CardList creatures = new CardList();
-                    
-                    creatures.addAll(hPlay.getCards());
-                    creatures.addAll(cPlay.getCards());
-                    creatures = creatures.getType("Creature");
+                    CardList creatures = AllZoneUtil.getCreaturesInPlay();
                     
                     for(int i = 0; i < creatures.size(); i++) {
                         Card crd = creatures.get(i);
@@ -1134,14 +1122,12 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                 	
-      				CardList all = new CardList();
-                      all.addAll(AllZone.Human_Battlefield.getCards());
-                      all.addAll(AllZone.Computer_Battlefield.getCards());
+      				CardList all = AllZoneUtil.getCreaturesInPlay();
                       all = all.filter(new CardListFilter()
                       {
                       	public boolean addCard(Card c)
                       	{
-                      		return c.isCreature() && !c.getKeyword().contains("Flying") &&
+                      		return !c.getKeyword().contains("Flying") &&
                       			   CardFactoryUtil.canDamage(card, c);
                       	}
                       });
@@ -1170,28 +1156,26 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Cloudthresher")) {
             final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
+            	@Override
+            	public void resolve() {
 
-      				CardList all = new CardList();
-                      all.addAll(AllZone.Human_Battlefield.getCards());
-                      all.addAll(AllZone.Computer_Battlefield.getCards());
-                      all = all.filter(new CardListFilter()
-                      {
-                      	public boolean addCard(Card c)
-                      	{
-                      		return c.isCreature() && c.getKeyword().contains("Flying") &&
-                      			   CardFactoryUtil.canDamage(card, c);
-                      	}
-                      });
-                      
-                      for(int i = 0; i < all.size(); i++)
-                          	all.get(i).addDamage(2, card);
-                      
-                      AllZone.HumanPlayer.addDamage(2, card);
-                      AllZone.ComputerPlayer.addDamage(2, card);
+            		CardList all = AllZoneUtil.getCreaturesInPlay();
+            		all = all.filter(new CardListFilter()
+            		{
+            			public boolean addCard(Card c)
+            			{
+            				return c.getKeyword().contains("Flying") &&
+            				CardFactoryUtil.canDamage(card, c);
+            			}
+            		});
 
-                }
+            		for(int i = 0; i < all.size(); i++)
+            			all.get(i).addDamage(2, card);
+
+            		AllZone.HumanPlayer.addDamage(2, card);
+            		AllZone.ComputerPlayer.addDamage(2, card);
+
+            	}
             };
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = 9072052875006010410L;
@@ -1256,9 +1240,7 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    PlayerZone zone = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    CardList list = new CardList(zone.getCards());
-                    list = list.getType("Creature");
+                    CardList list = AllZoneUtil.getCreaturesInPlay(card.getController());
                     Card c;
                     
                     for(int i = 0; i < list.size(); i++) {
@@ -1295,24 +1277,6 @@ public class CardFactory_Creatures {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Sengir Autocrat")) {
-            /*
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    for(int i = 0; i < 3; i++)
-                        CardFactoryUtil.makeToken("Serf", "B 0 1 Serf", card, "B", new String[] {
-                                "Creature", "Serf"}, 0, 1, new String[] {""});
-                }
-            };//SpellAbility
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = -2966662310531173458L;
-                
-                public void execute() {
-                    ability.setStackDescription(card.getName() + " - " + card.getController()
-                            + " puts three 0/1 tokens into play");
-                    AllZone.Stack.add(ability);
-                }
-            };*/
             Command leavesPlay = new Command() {
                 private static final long serialVersionUID = 7242867764317580066L;
                 
@@ -1322,7 +1286,6 @@ public class CardFactory_Creatures {
                         AllZone.GameAction.exile(serf);
                 }//execute
             };//Command
-           // card.addComesIntoPlayCommand(intoPlay);
             card.addLeavesPlayCommand(leavesPlay);
         }//*************** END ************ END **************************
         
@@ -1903,9 +1866,6 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     Player opponent = card.getController().getOpponent();
                     opponent.discard(this);
-                    //if(AllZone.HumanPlayer.equals(opponent)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
-                    //else //computer
-                    //AllZone.GameAction.discardRandom(opponent, this);
                 }//resolve()
             };//SpellAbility
             
@@ -2389,9 +2349,7 @@ public class CardFactory_Creatures {
             	
                 @Override
                 public void resolve() {
-                    CardList list = new CardList();
-                    list.addAll(AllZone.Human_Battlefield.getCards());
-                    list.addAll(AllZone.Computer_Battlefield.getCards());
+                    CardList list = AllZoneUtil.getCardsInPlay();
                     
                     for(int i = 0; i < list.size(); i++)
                         if(!list.get(i).getType().contains("Land")) {
@@ -2418,10 +2376,7 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    CardList list = new CardList();
-                    list.addAll(AllZone.Human_Battlefield.getCards());
-                    list.addAll(AllZone.Computer_Battlefield.getCards());
-                    list = list.getType("Creature");
+                    CardList list = AllZoneUtil.getCreaturesInPlay();
                     for(int i = 0; i < list.size(); i++)
                         if(!list.get(i).getKeyword().contains("Flying")
                                 && CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(5, card);
@@ -2962,10 +2917,7 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                     //check to see if any other creatures in play
-                    CardList list = new CardList();
-                    list.addAll(AllZone.Human_Battlefield.getCards());
-                    list.addAll(AllZone.Computer_Battlefield.getCards());
-                    list = list.getType("Creature");
+                    CardList list = AllZoneUtil.getCreaturesInPlay();
                     
                     //check to see if any cards in hand
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
@@ -3671,9 +3623,6 @@ public class CardFactory_Creatures {
                 public void resolve() {
                 	card.getController().drawCard();
                 	card.getController().discard(this);
-                    
-                    //if(card.getController().equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
-                    //else AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
                 }
             };//SpellAbility
             
@@ -3806,12 +3755,6 @@ public class CardFactory_Creatures {
                     if(getTargetCard() == null || getTargetCard() == card) AllZone.GameAction.sacrifice(card);
                     
                     else if(AllZone.GameAction.isCardInPlay(getTargetCard())) {
-                        /*
-                        PlayerZone play = AllZone.getZone(getTargetCard());
-                        PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, getTargetCard().getController());
-                        play.remove(getTargetCard());
-                        removed.add(getTargetCard());
-                        */
                         AllZone.GameAction.exile(getTargetCard());
                     }
                 }//resolve()
@@ -3939,12 +3882,6 @@ public class CardFactory_Creatures {
                     if(getTargetCard() == null || getTargetCard() == card) AllZone.GameAction.sacrifice(card);
                     
                     else if(AllZone.GameAction.isCardInPlay(getTargetCard())) {
-                        /*
-                        PlayerZone play = AllZone.getZone(getTargetCard());
-                        PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, getTargetCard().getController());
-                        play.remove(getTargetCard());
-                        removed.add(getTargetCard());
-                        */
                         AllZone.GameAction.exile(getTargetCard());
                     }
                 }//resolve()
@@ -4071,12 +4008,6 @@ public class CardFactory_Creatures {
                     if(getTargetCard() == null || getTargetCard() == card) AllZone.GameAction.sacrifice(card);
                     
                     else if(AllZone.GameAction.isCardInPlay(getTargetCard())) {
-                        /*
-                        PlayerZone play = AllZone.getZone(getTargetCard());
-                        PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, getTargetCard().getController());
-                        play.remove(getTargetCard());
-                        removed.add(getTargetCard());
-                        */
                         AllZone.GameAction.exile(getTargetCard());
                     }
                 }//resolve()
@@ -4239,12 +4170,6 @@ public class CardFactory_Creatures {
                     if(getTargetCard() == null || getTargetCard() == card) AllZone.GameAction.sacrifice(card);
                     
                     else if(AllZone.GameAction.isCardInPlay(getTargetCard())) {
-                        /*
-                        PlayerZone play = AllZone.getZone(getTargetCard());
-                        PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, getTargetCard().getController());
-                        play.remove(getTargetCard());
-                        removed.add(getTargetCard());
-                        */
                         AllZone.GameAction.exile(getTargetCard());
                     }
                 }//resolve()
@@ -4375,12 +4300,6 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        /*
-                        PlayerZone play = AllZone.getZone(getTargetCard());
-                        PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, getTargetCard().getController());
-                        play.remove(getTargetCard());
-                        removed.add(getTargetCard());
-                        */
                         AllZone.GameAction.exile(getTargetCard());
                     }
                 }//resolve()
