@@ -2556,24 +2556,6 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
                 
-        //*************** START *********** START **************************
-        else if(cardName.equals("Bestial Menace")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 523613120207836692L;
-                
-                @Override
-                public void resolve() {
-                    CardFactoryUtil.makeToken("Snake", "G 1 1 Snake", card.getController(), "G",
-                            new String[] {"Creature", "Snake"}, 1, 1, new String[] {""});
-                    CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", card.getController(), "G", new String[] {"Creature", "Wolf"},
-                            2, 2, new String[] {""});
-                    CardFactoryUtil.makeToken("Elephant", "G 3 3 Elephant", card.getController(), "G", new String[] {
-                            "Creature", "Elephant"}, 3, 3, new String[] {""});
-                }//resolve()
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
         
         
         //********************Start********Start***********************
