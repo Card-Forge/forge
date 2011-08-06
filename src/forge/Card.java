@@ -2875,6 +2875,13 @@ public class Card extends MyObservable {
     	
     	restDamage = staticDamagePrevention(restDamage, source, isCombat);
     	
+    	if(restDamage == 0) return 0;
+    	
+    	if (this.hasKeyword("If damage would be dealt to CARDNAME, prevent that damage. Remove a +1/+1 counter from CARDNAME.")) {
+    		restDamage = 0;
+    		this.subtractCounter(Counters.P1P1, 1);
+    	}
+    	
     	if(restDamage >= preventNextDamage) {
     		restDamage = restDamage - preventNextDamage;
     		preventNextDamage = 0;
