@@ -140,7 +140,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Genghis Khan 1", "easy", "WRG deck with mana ramp, Armageddon and Llanowar Behemoth");
         addToDeckList("Genghis Khan 2", "medium", "WG deck with mana ramp, Armageddon and Llanowar Behemoth");
         addToDeckList("Genghis Khan 3", "hard", "WRG deck with mana ramp, Armageddon, Llanowar Behemoth and Elspeth, Knight-Errant");
-        addToDeckList("George of the Jungle 1", "easy", "WR deck with Belligerent Hatchling, Battlegate Mimic and Ajani Vengeant");
+        addToDeckList("George of the Jungle 1", "easy", "WR deck with Belligerent Hatchling and Battlegate Mimic");
         addToDeckList("George of the Jungle 2", "medium", "WR deck with Belligerent Hatchling, Battlegate Mimic and Ajani Vengeant");
         addToDeckList("George of the Jungle 3", "hard", "WR deck with Belligerent Hatchling, Battlegate Mimic and Ajani Vengeant");
 //        addToDeckList("Ghost Rider 3", "hard", "W Aggressive Life deck");
