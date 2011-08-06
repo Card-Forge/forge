@@ -1,0 +1,8 @@
+Name:Leveler
+ManaCost:5
+Types:Artifact Creature Juggernaut
+Text:When Leveler enters the battlefield, exile all cards from your library.
+PT:10/10
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/leveler.jpg
+End
