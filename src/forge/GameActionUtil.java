@@ -138,8 +138,6 @@ public class GameActionUtil {
 		upkeep_Copper_Tablet();
 		upkeep_Sulfuric_Vortex();
 		upkeep_Power_Surge();
-		upkeep_Storm_World();
-		upkeep_Black_Vise();
 		upkeep_Ebony_Owl_Netsuke();
 		upkeep_Ivory_Tower();		
 		
@@ -7676,62 +7674,7 @@ public class GameActionUtil {
 		}//for
 	}//upkeep_Sheltered_Valley()
 
-		private static void upkeep_Storm_World() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-
-		CardList storms = AllZoneUtil.getCardsInPlay("Storm World");
-
-		for(Card storm:storms) {
-			final Card source = storm;
-			Ability ability = new Ability(source, "0") {
-				@Override
-				public void resolve() {
-					int damage = 4 - AllZone.getZone(Constant.Zone.Hand, player).size();
-					player.addDamage(damage, source);
-				}
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append(storm).append(" - deals X damage to ").append(player);
-			sb.append(", where X is 4 minus the number of cards in his or her hand.");
-			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
-		}
-	}// upkeep_Storm_World
-
-	private static void upkeep_Black_Vise() {
-		// Vise should always trigger, just in case the draw cards while Ability is on the stack
-		final Player player = AllZone.Phase.getPlayerTurn();
-
-		CardList vises = AllZoneUtil.getPlayerCardsInPlay(player.getOpponent(), "Black Vise");
-
-		// Each vise triggers
-		for(Card vise:vises) {
-			final Card src = vise;
-			Ability ability = new Ability(src, "0") {
-				@Override
-				public void resolve() {
-					// determine how much damage to deal the current player
-					int playerHandSize = AllZone.getZone(Constant.Zone.Hand, player).size();
-
-					if(playerHandSize <= 4) {
-						return;
-					}
-				
-					// determine how much damage to deal the current player
-					player.addDamage(playerHandSize - 4, src);
-				}
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("Black Vise deals X damage to ").append(player);
-			sb.append(", where X is the number of cards in his or her hand minus 4.");
-			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
-		}
-	}// upkeep_Black_Vise
+		
 	
 	private static void upkeep_Ebony_Owl_Netsuke() {
 		/*
