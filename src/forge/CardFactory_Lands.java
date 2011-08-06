@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 class CardFactory_Lands {
 
-    public static Card getCard(final Card card, String cardName, Player owner) {
+    public static Card getCard(final Card card, final String cardName, Player owner) {
         
 //	    computer plays 2 land of these type instead of just 1 per turn
         
@@ -2923,10 +2923,61 @@ class CardFactory_Lands {
             card.addSpellAbility(ability1);
             card.addSpellAbility(ability2);      
         }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Lotus Vale")) {
+        	/*
+        	 * If Lotus Vale would enter the battlefield, sacrifice two untapped
+        	 * lands instead. If you do, put Lotus Vale onto the battlefield.
+        	 * If you don't, put it into its owner's graveyard.
+        	 */
+        	final Command comesIntoPlay = new Command() {
+				private static final long serialVersionUID = -194247993330560188L;
+				
+				final Player player = card.getController();
+        		public void execute() {
+        			if(player.isHuman()) {
+        				final int[] paid = {0};
+
+        				Input target = new Input() {
+							private static final long serialVersionUID = -7835834281866473546L;
+							public void showMessage() {
+        						AllZone.Display.showMessage(cardName+" - Select an untapped land to sacrifice");
+        						ButtonUtil.enableOnlyCancel();
+        					}
+        					public void selectButtonCancel() {
+        						AllZone.GameAction.sacrifice(card);
+        						stop();
+        					}
+        					public void selectCard(Card c, PlayerZone zone) {
+        						if(c.isLand() && zone.is(Constant.Zone.Play) && c.isUntapped()) {
+        							AllZone.GameAction.sacrifice(c);
+        							if(paid[0] < 1) {
+        								paid[0]++;
+        								AllZone.Display.showMessage(cardName+" - Select an untapped land to sacrifice");
+        							}
+        							else stop();
+        						}
+        					}//selectCard()
+        				};//Input
+        				if ((AllZoneUtil.getPlayerLandsInPlay(AllZone.HumanPlayer).filter(AllZoneUtil.untapped).size() < 2)) {
+        					AllZone.GameAction.sacrifice(card);
+        					return;
+        				}
+        				else AllZone.InputControl.setInput(target);
+        			}
+        			else {
+        				//compy can't play this card because it has no mana pool
+        			}
+        		}
+        	};
+
+        	card.addComesIntoPlayCommand(comesIntoPlay);
+        }//*************** END ************ END **************************
 
 
         //*************** START *********** START **************************
-        if(cardName.equals("Kjeldoran Outpost")) {
+        else if(cardName.equals("Kjeldoran Outpost")) {
            final Command comesIntoPlay = new Command() {
               private static final long serialVersionUID = 6175830918425915833L;
               final Player player = card.getController();
