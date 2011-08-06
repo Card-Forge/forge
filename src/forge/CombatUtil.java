@@ -907,8 +907,8 @@ public class CombatUtil {
         if(attacker.getKeyword().contains("Indestructible") && 
         		!(defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect"))) return false;
         
-        int attBushidoMagnitude = attacker.getKeywordMagnitude("Bushido");
-        attBushidoMagnitude += attacker.getAmountOfKeyword("Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.");
+        //unused
+        //int attBushidoMagnitude = attacker.getKeywordMagnitude("Bushido");
         
         int defenderDamage = defender.getNetAttack() + predictPowerBonusOfBlocker(attacker, defender);
         int attackerDamage = attacker.getNetAttack() + predictPowerBonusOfAttacker(attacker, defender);
@@ -997,9 +997,8 @@ public class CombatUtil {
     			return true;
         }
         
-        int attBushidoMagnitude = attacker.getKeywordMagnitude("Bushido");
-        attBushidoMagnitude += attacker.getAmountOfKeyword(
-        		"Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.");
+        //unused
+        //int attBushidoMagnitude = attacker.getKeywordMagnitude("Bushido");
         
         int defenderDamage = defender.getNetAttack() + predictPowerBonusOfBlocker(attacker, defender);
         int attackerDamage = attacker.getNetAttack() + predictPowerBonusOfAttacker(attacker, defender);
@@ -1973,42 +1972,6 @@ public class CombatUtil {
     	
             for(Ability ab:CardFactoryUtil.getBushidoEffects(a))
                 AllZone.Stack.add(ab);
-            
-            
-            
-        	if(a.getKeyword().contains(
-        			"Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.")) {
-        		Ability ability = new Ability(a, "0") {
-	        		@Override
-	    			public void resolve() {
-	    				final Command untilEOT = new Command() {
-	    					private static final long serialVersionUID = -5476584542164560128L;
-	
-	    					public void execute() {
-	    						if(AllZone.GameAction.isCardInPlay(a)) {
-	    							a.addTempAttackBoost(-blockers);
-	    							a.addTempDefenseBoost(-blockers);
-	    						}
-	    					}
-	    				};//Command
-	
-	    				if(AllZone.GameAction.isCardInPlay(a)) {
-	    					a.addTempAttackBoost(blockers);
-	    					a.addTempDefenseBoost(blockers);
-	
-	    					AllZone.EndOfTurn.addUntil(untilEOT);
-	    				}
-	    			}//resolve
-	    		};
-	        			
-		    	StringBuilder sb = new StringBuilder();
-		        sb.append(a.getName()+" - gains +1/+1 for each blocker");
-		        ability.setStackDescription(sb.toString());
-	        	int amount = a.getAmountOfKeyword("Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.");
-		        
-		        for(int i=0 ; i < amount ; i++)
-		        	AllZone.Stack.add(ability);
-        	}
         	
         	//Rampage
         	ArrayList<String> keywords = a.getKeyword();

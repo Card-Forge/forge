@@ -255,22 +255,22 @@ public class ComputerUtil_Block2
 	  
 	  attackersLeft = new CardList(currentAttackers.toArray()); 
 	  
-	 //Reinforce blockers blocking attackers with trample if life is still in danger
+	  //Reinforce blockers blocking attackers with trample if life is still in danger
 	  if (CombatUtil.lifeInDanger(combat)) {
 		  tramplingAttackers = attackers.getKeyword("Trample");
 		  tramplingAttackers = tramplingAttackers.getKeywordsDontContain("Rampage"); 	//Don't make it worse
-		  tramplingAttackers = tramplingAttackers.
-		  	getKeywordsDontContain("Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.");
-		  
+		  //TODO - should check here for a "rampage-like" trigger that replaced the keyword:
+		  // "Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it."
+
 		  for(Card attacker : tramplingAttackers) {
 			  chumpBlockers = getPossibleBlockers(attacker, blockersLeft, combat);
 			  for(Card blocker : chumpBlockers) {
-			  	  //Add an additional blocker if the current blockers are not enough and the new one would suck some of the damage
-			  	  if(CombatUtil.getAttack(attacker) > CombatUtil.totalShieldDamage(attacker,combat.getBlockers(attacker)) 
-			  			&& CombatUtil.shieldDamage(attacker, blocker) > 0 && CombatUtil.canBlock(attacker,blocker, combat)
-			  			&& CombatUtil.lifeInDanger(combat)) {
-			  		  combat.addBlocker(attacker, blocker);
-			  		  blockersLeft.remove(blocker);
+				  //Add an additional blocker if the current blockers are not enough and the new one would suck some of the damage
+				  if(CombatUtil.getAttack(attacker) > CombatUtil.totalShieldDamage(attacker,combat.getBlockers(attacker)) 
+						  && CombatUtil.shieldDamage(attacker, blocker) > 0 && CombatUtil.canBlock(attacker,blocker, combat)
+						  && CombatUtil.lifeInDanger(combat)) {
+					  combat.addBlocker(attacker, blocker);
+					  blockersLeft.remove(blocker);
 				  }
 			  }
 		  }
@@ -279,24 +279,24 @@ public class ComputerUtil_Block2
 	  //Support blockers not destroying the attacker with more blockers to try to kill the attacker
 	  if (blockedButUnkilled.size() > 0) {
 		  CardList targetAttackers = blockedButUnkilled.getKeywordsDontContain("Rampage"); 	//Don't make it worse
-		  targetAttackers = targetAttackers.
-		  	getKeywordsDontContain("Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.");
-		  
+		  //TODO - should check here for a "rampage-like" trigger that replaced the keyword:
+		  // "Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it."
+
 		  for(Card attacker : targetAttackers) {
 			  blockers = getPossibleBlockers(attacker, blockersLeft, combat);
-			  
+
 			  //Try to use safe blockers first
 			  safeBlockers = getSafeBlockers(attacker, blockers);
 			  for(Card blocker : safeBlockers) {
-			  	  //Add an additional blocker if the current blockers are not enough and the new one would deal additional damage
-			  	  if(attacker.getKillDamage() > CombatUtil.totalDamageOfBlockers(attacker,combat.getBlockers(attacker)) 
-			  			  && CombatUtil.dealsDamageAsBlocker(attacker, blocker) > 0 && CombatUtil.canBlock(attacker,blocker, combat)) {
-			  		  combat.addBlocker(attacker, blocker);
-			  		  blockersLeft.remove(blocker);
-			  	  }
-			  	  blockers.remove(blocker); //Don't check them again next
+				  //Add an additional blocker if the current blockers are not enough and the new one would deal additional damage
+				  if(attacker.getKillDamage() > CombatUtil.totalDamageOfBlockers(attacker,combat.getBlockers(attacker)) 
+						  && CombatUtil.dealsDamageAsBlocker(attacker, blocker) > 0 && CombatUtil.canBlock(attacker,blocker, combat)) {
+					  combat.addBlocker(attacker, blocker);
+					  blockersLeft.remove(blocker);
+				  }
+				  blockers.remove(blocker); //Don't check them again next
 			  }
-			  
+
 			  //Try to add blockers that could be destroyed, but are worth less than the attacker
 			  //Don't use blockers without First Strike or Double Strike if attacker has it
 			  if (attacker.hasKeyword("First Strike") || attacker.hasKeyword("Double Strike")) {
@@ -304,17 +304,17 @@ public class ComputerUtil_Block2
 				  safeBlockers.addAll(blockers.getKeyword("Double Strike").toArray());
 			  }
 			  else safeBlockers = new CardList(blockers.toArray());
-			  
+
 			  for(Card blocker : safeBlockers) {
-			  	  //Add an additional blocker if the current blockers are not enough and the new one would deal the remaining damage
+				  //Add an additional blocker if the current blockers are not enough and the new one would deal the remaining damage
 				  int currentDamage = CombatUtil.totalDamageOfBlockers(attacker,combat.getBlockers(attacker));
 				  int additionalDamage = CombatUtil.dealsDamageAsBlocker(attacker, blocker);
-			  	  if(attacker.getKillDamage() > currentDamage 
-			  			  && !(attacker.getKillDamage() > currentDamage + additionalDamage)
-			  			  && CardFactoryUtil.evaluateCreature(blocker) + diff < CardFactoryUtil.evaluateCreature(attacker)
-			  			  && CombatUtil.canBlock(attacker,blocker,combat)) {
-			  		  combat.addBlocker(attacker, blocker);
-			  		  blockersLeft.remove(blocker);
+				  if(attacker.getKillDamage() > currentDamage 
+						  && !(attacker.getKillDamage() > currentDamage + additionalDamage)
+						  && CardFactoryUtil.evaluateCreature(blocker) + diff < CardFactoryUtil.evaluateCreature(attacker)
+						  && CombatUtil.canBlock(attacker,blocker,combat)) {
+					  combat.addBlocker(attacker, blocker);
+					  blockersLeft.remove(blocker);
 				  }
 			  }
 		  }
