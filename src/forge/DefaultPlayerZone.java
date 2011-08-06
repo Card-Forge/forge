@@ -40,7 +40,8 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
        	PlayerZone lib = AllZone.getZone(Constant.Zone.Library, c.getOwner());
        	PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getOwner());
        	lib.add(c);
-       	lib.add(grave);
+       	for(Card gc : grave.getCards())
+       		lib.add(gc);
        	grave.reset();
        	AllZone.GameAction.shuffle(c.getOwner());
        	return;
