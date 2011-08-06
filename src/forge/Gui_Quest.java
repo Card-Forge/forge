@@ -42,26 +42,28 @@ public class Gui_Quest extends JFrame implements NewConstants{
     private JLabel            difficultyLabel    = new JLabel();
     private JLabel            winLostLabel       = new JLabel();
     private JLabel            rankLabel          = new JLabel();
-    private JLabel			  creditsLabel	     = new JLabel();
-    private JLabel			  lifeLabel			 = new JLabel();
+    private JLabel            creditsLabel       = new JLabel();
+    private JLabel            lifeLabel          = new JLabel();
     @SuppressWarnings("unused")
     // border1
     private Border            border1;
     private TitledBorder      titledBorder1;
-    private JButton			  infoButton		 = new JButton();
+    private TitledBorder      titledBorder2;
+    private JButton           infoButton         = new JButton();
     private JButton 		  otherShopsButton   = new JButton();
     private JButton 		  cardShopButton	 = new JButton();
     private JButton           deckEditorButton   = new JButton();
     private JPanel            jPanel2            = new JPanel();
+    private JPanel            jPanel3            = new JPanel();
     private JButton           playGameButton     = new JButton();
-    private JButton 		  questsButton		 = new JButton();
+    private JButton           questsButton       = new JButton();
     
     private JRadioButton      oppTwoRadio        = new JRadioButton();
     private JRadioButton      oppOneRadio        = new JRadioButton();
     private JRadioButton      oppThreeRadio      = new JRadioButton();
     private JLabel            jLabel5            = new JLabel();
     private JComboBox         deckComboBox       = new JComboBox();
-    private JComboBox		  petComboBox		 = new JComboBox();
+    private JComboBox         petComboBox        = new JComboBox();
     private ButtonGroup       oppGroup           = new ButtonGroup();
     private static JCheckBox  smoothLandCheckBox = new JCheckBox("", true);
     private static JCheckBox  resizeCheckbox     = new JCheckBox("", true);
@@ -141,6 +143,8 @@ public class Gui_Quest extends JFrame implements NewConstants{
         border1 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
         titledBorder1 = new TitledBorder(BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140)),
                 "Choices");
+        titledBorder2 = new TitledBorder(BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140)),
+        		"Settings");
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 25));
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel1.setText("Quest Mode");
@@ -168,7 +172,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         
         
         infoButton.setBounds(new Rectangle(338, 235, 142, 28));
-        infoButton.setFont(new java.awt.Font("Dialog", 0, 14));
+        infoButton.setFont(new java.awt.Font("Dialog", 0, 13));
         infoButton.setText("Opponent Notes");
         infoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -189,7 +193,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
             lifeLabel.setHorizontalTextPosition(SwingConstants.CENTER);
             
         	otherShopsButton.setBounds(new Rectangle(338, 290, 142, 38));
-        	otherShopsButton.setFont(new java.awt.Font("Dialog", 0, 18));
+        	otherShopsButton.setFont(new java.awt.Font("Dialog", 0, 16));
         	otherShopsButton.setText("Bazaar");
         	otherShopsButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -209,7 +213,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         }
         
         cardShopButton.setBounds(new Rectangle(338, 334, 142, 38));
-        cardShopButton.setFont(new java.awt.Font("Dialog", 0, 18));
+        cardShopButton.setFont(new java.awt.Font("Dialog", 0, 16));
         cardShopButton.setText("Card Shop");
         cardShopButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -218,7 +222,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         });
         
         deckEditorButton.setBounds(new Rectangle(338, 378, 142, 38));
-        deckEditorButton.setFont(new java.awt.Font("Dialog", 0, 18));
+        deckEditorButton.setFont(new java.awt.Font("Dialog", 0, 16));
         deckEditorButton.setText("Deck Editor");
         deckEditorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -228,6 +232,9 @@ public class Gui_Quest extends JFrame implements NewConstants{
         jPanel2.setBorder(titledBorder1);
         jPanel2.setBounds(new Rectangle(20, 223, 300, 198));
         jPanel2.setLayout(null);
+        jPanel3.setBorder(titledBorder2);
+        jPanel3.setBounds(new Rectangle(20, 433, 300, 142));
+        jPanel3.setLayout(null);
         playGameButton.setBounds(new Rectangle(338, 538, 142, 37));
         playGameButton.setFont(new java.awt.Font("Dialog", 0, 18));
         playGameButton.setText("Play Game");
@@ -239,23 +246,23 @@ public class Gui_Quest extends JFrame implements NewConstants{
         
         
         oppTwoRadio.setText("Bob");
-        oppTwoRadio.setBounds(new Rectangle(15, 65, 250, 35));
+        oppTwoRadio.setBounds(new Rectangle(20, 65, 250, 35));
         oppOneRadio.setSelected(true);
         oppOneRadio.setText("Sam");
-        oppOneRadio.setBounds(new Rectangle(15, 30, 250, 35));
+        oppOneRadio.setBounds(new Rectangle(20, 30, 250, 35));
         oppThreeRadio.setText("Generated Deck");
-        oppThreeRadio.setBounds(new Rectangle(15, 100, 250, 35));
+        oppThreeRadio.setBounds(new Rectangle(20, 100, 250, 35));
         jLabel5.setText("Your Deck:");
-        jLabel5.setBounds(new Rectangle(15, 151, 125, 29));
+        jLabel5.setBounds(new Rectangle(20, 151, 125, 29));
         deckComboBox.setBounds(new Rectangle(98, 152, 185, 29));
         petComboBox.setBounds(new Rectangle(338, 437, 142, 38));
         smoothLandCheckBox.setText("Stack AI land");
-        smoothLandCheckBox.setBounds(new Rectangle(80, 490, 153, 21));
+        smoothLandCheckBox.setBounds(new Rectangle(65, 62, 153, 21));
         //smoothLandCheckBox.setSelected(true);
         resizeCheckbox.setText("Resizable Game Area");
-        resizeCheckbox.setBounds(new Rectangle(80, 449, 165, 24));
+        resizeCheckbox.setBounds(new Rectangle(65, 28, 165, 24));
         millLoseCheckBox.setText("Milling = Loss Condition");
-        millLoseCheckBox.setBounds(new Rectangle(80, 529, 190, 25));
+        millLoseCheckBox.setBounds(new Rectangle(65, 94, 190, 25));
         
         //resizeCheckbox.setSelected(true);
         this.getContentPane().add(rankLabel, null);
@@ -286,10 +293,11 @@ public class Gui_Quest extends JFrame implements NewConstants{
         this.getContentPane().add(cardShopButton, null);
         this.getContentPane().add(deckEditorButton, null);
         this.getContentPane().add(playGameButton, null);
-        this.getContentPane().add(smoothLandCheckBox, null);
-        this.getContentPane().add(resizeCheckbox, null);
-        this.getContentPane().add(millLoseCheckBox, null);
+        jPanel3.add(smoothLandCheckBox, null);
+        jPanel3.add(resizeCheckbox, null);
+        jPanel3.add(millLoseCheckBox, null);
         this.getContentPane().add(jPanel2, null);
+        this.getContentPane().add(jPanel3, null);
         oppGroup.add(oppOneRadio);
         oppGroup.add(oppTwoRadio);
         oppGroup.add(oppThreeRadio);
