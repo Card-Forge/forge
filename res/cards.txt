@@ -1,3 +1,8 @@
+Halcyon Glaze
+1 U U
+Enchantment
+Whenever you play a creature spell, Halcyon Glaze becomes a 4/4 Illusion creature with flying until end of turn.  It's still an enchantment.
+
 Underworld Dreams
 B B B
 Enchantment
