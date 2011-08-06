@@ -4121,8 +4121,10 @@ public class GameActionUtil {
                 CardList cl = CardFactoryUtil.makeToken("Spawnwrithe", "", crd, "2 G", new String[] {
                         "Creature", "Elemental"}, 2, 2, new String[] {"Trample"});
                 
-                for(Card c:cl)
+                for(Card c:cl) {
                     c.setText("Whenever Spawnwrithe deals combat damage to a player, put a token into play that's a copy of Spawnwrithe.");
+                    c.setCopiedToken(true);
+                }
             }
         };// ability2
         
