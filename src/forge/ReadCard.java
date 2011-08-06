@@ -118,8 +118,9 @@ public class ReadCard implements Runnable, NewConstants {
             	else if (s.startsWith("Text:"))
             	{
             		String t = s.substring(5);
-            		if (!t.equals("no text"));
-            			c.setText(t);
+            		// if (!t.equals("no text"));
+            		if (t.equals("no text")) t = ("");
+            		c.setText(t);
             	}
             	
             	else if (s.startsWith("PT:"))
