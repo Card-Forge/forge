@@ -6841,7 +6841,10 @@ public class CardFactory implements NewConstants {
                 }//resolve()
             };//SpellAbility
             ability.setDescription("R: Pyrohemia deals 1 damage to each creature and each player.");
-            ability.setStackDescription(card + " deals 1 damage to each creature and each player.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" deals 1 damage to each creature and each player.");
+            ability.setStackDescription(sb.toString());
             
             card.clearSpellAbility();
             card.addSpellAbility(new Spell_Permanent(card) {
@@ -6897,7 +6900,10 @@ public class CardFactory implements NewConstants {
                 }//resolve()
             };//SpellAbility
             ability.setDescription("B: Pestilence deals 1 damage to each creature and each player.");
-            ability.setStackDescription(card + " deals 1 damage to each creature and each player.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" deals 1 damage to each creature and each player.");
+            ability.setStackDescription(sb.toString());
             
             card.clearSpellAbility();
             card.addSpellAbility(new Spell_Permanent(card) {
@@ -7038,8 +7044,11 @@ public class CardFactory implements NewConstants {
                 private static final long serialVersionUID = 5634360316643996274L;
                 
                 public void execute() {
-                    ability.setStackDescription("When " + card.getName()
-                            + " comes into play, choose a creature type.");
+                	
+                	StringBuilder sb = new StringBuilder();
+                	sb.append("When ").append(card.getName()).append(" comes into play, choose a creature type.");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
@@ -7110,9 +7119,11 @@ public class CardFactory implements NewConstants {
                         }
                         
                     };
-//    			a1.setDescription("3, Tap: Put a 1/1 creature token of the chosen color and type onto the battlefield.");
-                    a1.setStackDescription(card.getName() + " - " + card.getController() + " puts a 1/1" + t
-                            + " token into play");
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(card.getName()).append(" - ").append(card.getController());
+                    sb.append(" puts a 1/1 ").append(t).append(" token into play");
+                    a1.setStackDescription(sb.toString());
+                    
                     card.addSpellAbility(a1);
                 }
             };//ability
@@ -7465,7 +7476,10 @@ public class CardFactory implements NewConstants {
                             }
                         }//resolve()
                     };//SpellAbility
-                    ability.setStackDescription(card.getName() + " - returning creature to play");
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(card.getName()).append(" - returning creature to play");
+                    ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }//execute()
             };//Command
@@ -7614,8 +7628,11 @@ public class CardFactory implements NewConstants {
                             && c.getType().contains(card.getChosenType())) {
                         card.tap();
                         
-                        ability.setTargetCard(c);//since setTargetCard() changes stack description
-                        ability.setStackDescription("Put into play " + c);
+                        ability.setTargetCard(c);//since setTargetCard() changes stack 
+                        
+                        StringBuilder sb = new StringBuilder();
+                        sb.append("Put into play ").append(c);
+                        ability.setStackDescription(sb.toString());
                         
                         AllZone.InputControl.setInput(new Input_PayManaCost_Ability(ability.getManaCost(), paid,
                                 unpaid));
@@ -7731,9 +7748,15 @@ public class CardFactory implements NewConstants {
         		}
         	};
             card.addSpellAbility(ability);
-            ability.setStackDescription(cardName
-                    + " puts X 3/3 green Beast creature tokens onto the battlefield");
-            ability.setDescription("G, Sacrifice Midsummer Revel: Put X 3/3 green Beast creature tokens onto the battlefield, where X is the number of verse counters on Midsummer Revel.");
+
+            StringBuilder sbStack = new StringBuilder();
+            sbStack.append(cardName).append(" puts X 3/3 green Beast creature tokens onto the battlefield");
+            ability.setStackDescription(sbStack.toString());
+            
+            StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("G, Sacrifice Midsummer Revel: Put X 3/3 green Beast creature tokens onto ");
+            sbDesc.append("the battlefield, where X is the number of verse counters on Midsummer Revel.");
+            ability.setDescription(sbDesc.toString());
         }//*************** END ************ END **************************
              
         
@@ -7793,8 +7816,12 @@ public class CardFactory implements NewConstants {
             };
             
             necrogen.setDescription("2: Exile target creature card in a graveyard. Put a 1/1 green Saproling creature token into play.");
-            necrogen.setStackDescription(card.getController()
-                    + " exiles target creature card in a graveyard. Puts a 1/1 green Saproling creature token into play.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getController());
+            sb.append(" exiles target creature card in a graveyard. Puts a 1/1 green Saproling creature token into play.");
+            necrogen.setStackDescription(sb.toString());
+            
             necrogen.setAfterPayMana(necroTarget);
             card.addSpellAbility(necrogen);
         }//*************** END ************ END **************************
@@ -7879,8 +7906,11 @@ public class CardFactory implements NewConstants {
             };
             
             nightSoil.setDescription("1, Exile target creature card in a graveyard: Put a 1/1 green Saproling creature token into play.");
-            nightSoil.setStackDescription(card.getController()
-                    + " put a 1/1 green Saproling creature token into play.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getController()).append(" put a 1/1 green Saproling creature token into play.");
+            nightSoil.setStackDescription(sb.toString());
+            
             nightSoil.setAfterPayMana(soilTarget);
             card.addSpellAbility(nightSoil);
         }//*************** END ************ END **************************
