@@ -630,10 +630,6 @@ public class GameAction {
         }
     }//destroyLegendaryCreatures()
     
-    public boolean PlayerHasThreshold(Player player) {
-    	return AllZoneUtil.getPlayerGraveyard(player).size() >= 7;
-    }
-    
     //ArrayList search is all Card objects, returns ArrayList of Cards
     public ArrayList<Card> getCardsNamed(ArrayList<Card> search, String name) {
         ArrayList<Card> a = new ArrayList<Card>();
@@ -676,7 +672,6 @@ public class GameAction {
                 Input in = CardFactoryUtil.input_sacrificePermanent(choices, "Select a creature to sacrifice.");
                 AllZone.InputControl.setInput(in);
             } else {
-                //Card c = CardFactoryUtil.AI_getCheapestPermanent(choices, sa.getSourceCard(), false);
                 CardListUtil.sortDefense(choices);
                 choices.reverse();
                 CardListUtil.sortAttackLowFirst(choices);
