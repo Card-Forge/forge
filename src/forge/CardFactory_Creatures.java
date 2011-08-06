@@ -13321,6 +13321,73 @@ public class CardFactory_Creatures {
             copy.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Quicksilver Gargantuan")) {
+        	final CardFactory cfact = cf;
+        	final Card[] copyTarget = new Card[1];
+        	final Card[] cloned = new Card[1];
+        	
+        	final SpellAbility copyBack = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    Card orig = cfact.getCard(cloned[0].getCloneOrigin(), card.getController());
+                    PlayerZone dest = AllZone.getZone(cloned[0]);
+                    AllZone.GameAction.moveTo(dest, orig);
+                    dest.remove(cloned[0]);
+                }
+            };//SpellAbility
+        	
+        	final Command leaves = new Command() {
+				private static final long serialVersionUID = 8591474793502538215L;
+
+				public void execute() {
+					StringBuilder sb = new StringBuilder();
+                    sb.append(card.getName()).append(" - reverting "+cloned[0].getName()+" to "+card.getName()+".");
+                    copyBack.setStackDescription(sb.toString());
+                    
+                    AllZone.Stack.add(copyBack);
+                    
+                }
+            };
+        	
+        	final SpellAbility copy = new Spell(card) {
+				private static final long serialVersionUID = 4396978456522751312L;
+
+				@Override
+                public void resolve() {
+                    cloned[0] = cfact.getCard(copyTarget[0].getName(), card.getController());
+                    cloned[0].setCloneOrigin(card.getName());
+                    cloned[0].addLeavesPlayCommand(leaves);
+                    cloned[0].setBaseDefense(7);
+                    cloned[0].setBaseAttack(7);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
+                    play.add(cloned[0]);
+                }
+            };//SpellAbility
+            
+            Input runtime = new Input() {
+				private static final long serialVersionUID = 7625038074569687330L;
+
+				@Override
+            	public void showMessage() {
+            		AllZone.Display.showMessage(cardName+" - Select a creature on the battlefield");
+            	}
+            	
+            	@Override
+            	public void selectCard(Card c, PlayerZone z) {
+            		if( z.is(Constant.Zone.Battlefield) && c.isCreature()) {
+            			copyTarget[0] = c;
+            			stopSetNext(new Input_PayManaCost(copy));
+            		}
+            	}
+            };
+            card.clearSpellAbility();
+            card.addSpellAbility(copy);
+            copy.setStackDescription(cardName+" - enters the battlefield as a copy of selected card.");
+            copy.setBeforePayMana(runtime);
+        }//*************** END ************ END **************************
+        
+        
                
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
         {
