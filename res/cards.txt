@@ -1,3 +1,9 @@
+Filigree Sages
+3 U
+Artifact Creature Vedalken Wizard
+2U: Untap target artifact
+2/3
+
 Spire Owl
 1 U
 Creature Bird

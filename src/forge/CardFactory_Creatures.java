@@ -17695,6 +17695,49 @@ public class CardFactory_Creatures {
         	card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        if(cardName.equals("Filigree Sages")) {
+        	/*
+        	 * 2U: Untap target artifact.
+        	 */
+        	final SpellAbility ability = new Ability(card, "2 U") {
+        		@Override
+        		public boolean canPlayAI() {
+        			CardList list = getArtifactList(Constant.Player.Computer);
+        			return list.size() >= 1;
+        		}
+        		@Override
+        		public void chooseTargetAI() {
+        			CardList list = getArtifactList(Constant.Player.Computer);
+    				if(list.size() > 0) {
+    					setTargetCard(CardFactoryUtil.AI_getBestArtifact(list));
+    				}
+        		}
+        		
+        		private CardList getArtifactList(final String player) {
+        			CardList list = new CardList();
+    				list.addAll(AllZone.Computer_Play.getCards());
+    				list = list.filter(new CardListFilter() {
+    					public boolean addCard(Card c) {
+    						return c.isArtifact() && c.isTapped() && CardFactoryUtil.canTarget(card, c) && CardUtil.getConvertedManaCost(c.getManaCost()) > 5;
+    					}
+    				});
+    				return list;
+        		}
+        		@Override
+        		public void resolve() {
+        			Card c = getTargetCard();
+        			if( c.isTapped()) {
+        				c.untap();
+        			}
+        		}   
+        	};
+        	card.addSpellAbility(ability);
+        	ability.setStackDescription(cardName + " - Untap Target Artifact");
+        	ability.setBeforePayMana(CardFactoryUtil.input_targetType(ability, "Artifact"));
+        }//*************** END ************ END ************************** 
+
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(shouldCycle(card) != -1) {
