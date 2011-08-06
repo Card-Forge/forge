@@ -418,6 +418,12 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("King Edward 3		hard	Elementals, 5 color deck with Tribal Flames featuring Horde of Notions");
         sb.append("\r\n");
+        sb.append("King Kong 1		easy	Squirrel tokens, changelings and Deranged Hermit + curse type auras");
+        sb.append("\r\n");
+        sb.append("King Kong 2		medium	Squirrel tokens, changelings and Deranged Hermit + curse type auras");
+        sb.append("\r\n");
+        sb.append("King Kong 3		hard	Squirrel tokens, changelings and Deranged Hermit + threat removal");
+        sb.append("\r\n");
         sb.append("Kojak 1		easy	Some Islandwalk creatures GU + filler");
         sb.append("\r\n");
         sb.append("Kojak 2		medium	Some Islandwalk creatures GU + filler");
