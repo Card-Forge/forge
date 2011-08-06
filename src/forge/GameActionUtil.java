@@ -11658,6 +11658,33 @@ public class GameActionUtil {
 			}//if
 		}// execute()
 	};
+	
+	/**
+	 * stores the Command
+	 */
+	public static Command Angry_Mob = new Command() {
+		private static final long serialVersionUID = 4129359648989610278L;
+
+		public void execute() {
+			String player = AllZone.Phase.getActivePlayer();
+			
+			// get all creatures
+			CardList mobs = AllZoneUtil.getCardsInPlay("Angry Mob");
+			for(int i = 0; i < mobs.size(); i++) {
+				Card c = mobs.get(i);
+				if(player.equals(c.getController())) {
+					String opp = AllZone.GameAction.getOpponent(player);
+					int boost = AllZoneUtil.getPlayerTypeInPlay(opp, "Swamp").size();
+					c.setBaseAttack(2+boost);
+					c.setBaseDefense(2+boost);
+				}
+				else {
+				c.setBaseAttack(2);
+				c.setBaseDefense(2);
+				}
+			}
+		}// execute()
+	};
 
 	public static Command Absolute_Grace              = new Command() {
 		private static final long serialVersionUID   = -6904191523315339355L;
@@ -20785,6 +20812,7 @@ public class GameActionUtil {
 		commands.put("Heedless_One", Heedless_One);
 		commands.put("Omnath", Omnath);
 		commands.put("Arena_of_the_Ancients", Arena_of_the_Ancients);
+		commands.put("Angry_Mob", Angry_Mob);
 		
 		//System.out.println("size of commands: " + commands.size());
 

@@ -230,6 +230,7 @@ public class StaticEffects
 		cardToEffectsList.put("Heedless One", new String[] {"Heedless_One"});
 		cardToEffectsList.put("Omnath, Locus of Mana", new String[] {"Omnath"});
 		cardToEffectsList.put("Arena of the Ancients", new String[] {"Arena_of_the_Ancients"});
+		cardToEffectsList.put("Angry Mob", new String[] {"Angry_Mob"});
 	}
 	
 	public HashMap<String, String[]> getCardToEffectsList()
