@@ -515,7 +515,7 @@ public class Cost_Payment {
     		if (cost.getExileFromHandThis())
     			exileFromHandCard.add(card);
     		else
-    			exileFromHandCard = ComputerUtil.chooseExileType(cost.getExileFromHandType(), card, ability.getTargetCard(), cost.getExileFromHandAmount());
+    			exileFromHandCard = ComputerUtil.chooseExileFromHandType(cost.getExileFromHandType(), card, ability.getTargetCard(), cost.getExileFromHandAmount());
     		
 	    	if (exileFromHandCard.size() != cost.getExileFromHandAmount()){
 	    		System.out.println("Couldn't find a valid card to exile for: "+card.getName());

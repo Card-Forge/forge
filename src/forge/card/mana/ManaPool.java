@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardUtil;
@@ -126,6 +127,7 @@ public class ManaPool extends Card {
     	for(Mana m : manaList){
     		addManaToPool(floatingMana, m);
     	}
+    	AllZone.GameAction.checkStateEffects();
     }
     
     public static ArrayList<Mana> convertStringToMana(String manaStr, Card card){
