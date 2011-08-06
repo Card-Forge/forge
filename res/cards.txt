@@ -1,3 +1,108 @@
+Mind's Desire
+U
+Sorcery
+Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost. (If it has X in its mana cost, X is 0.) Storm (When you cast this spell, copy it for each spell cast before it this turn.)
+Storm
+Shroud
+Indestructible
+
+Wing Shards
+1 W W
+Instant
+Target player sacrifices an attacking creature. Storm (When you cast this spell, copy it for each spell cast before it this turn.)
+Storm
+
+Volcanic Awakening
+4 R R
+Sorcery
+Destroy target land. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
+Storm
+
+Tendrils of Agony
+2 B B
+Sorcery
+Target player loses 2 life and you gain 2 life. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
+Storm
+
+Temporal Fissure
+4 U
+Sorcery
+Return target permanent to its owner's hand. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
+Storm
+
+Sprouting Vines
+2 G
+Instant
+Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library. Storm (When you cast this spell, copy it for each spell cast before it this turn.)
+Storm
+
+Scattershot 
+2 R
+Instant
+Scattershot deals 1 damage to target creature. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
+Storm
+
+Reaping the Graves  
+2 B
+Instant
+Return target creature card from your graveyard to your hand. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
+Storm
+
+Storm Entity
+1 R
+Creature Elemental
+Storm Entity comes into play with a +1/+1 counter on it for each other spell played this turn. 
+1/1
+Haste 
+
+Grapeshot
+1 R
+Sorcery
+Grapeshot deals 1 damage to target creature or player. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
+Storm
+
+Astral Steel
+2 W
+Instant
+Target creature gets +1/+2 until end of turn. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
+Storm
+
+Haze of Rage
+1 R
+Sorcery
+no text
+Storm
+
+Ignite Memories
+4 R
+Sorcery
+Target player reveals a card at random from his or her hand. Ignite Memories deals damage to that player equal to that card's converted mana cost. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
+Storm
+
+Hunting Pack
+5 G G
+Instant
+Put a 4/4 green Beast creature token onto the battlefield. Storm (When you play this spell, copy it for each spell played before it this turn.)
+Storm
+
+Dragonstorm
+8 R
+Sorcery
+Search your library for a Dragon permanent card and put it onto the battlefield. Then shuffle your library. Storm (When you cast this spell, copy it for each spell cast before it this turn.)
+Storm
+
+Brain Freeze
+1 U
+Instant
+Target player puts the top three cards of his or her library into his or her graveyard. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
+Storm
+
+Empty the Warrens
+3 R
+Sorcery
+Put two 1/1 red Goblin creature tokens into play. Storm (When you play this spell, copy it for each spell played before it this turn.)
+Storm
+
 Avatar of Woe
 6 B B
 Creature Avatar
@@ -17848,11 +17953,6 @@ no cost
 Land
 Faerie Conclave comes into play tapped.
 tap: add U
-
-Empty the Warrens
-3 R
-Sorcery
-Put two 1/1 red Goblin creature tokens into play. Storm (When you play this spell, copy it for each spell played before it this turn.)
 
 Feudkiller's Verdict
 4 W W

@@ -6729,39 +6729,807 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
-
+       
         //*************** START *********** START **************************
         else if(cardName.equals("Empty the Warrens")) {
             SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 1439643889038241969L;
-                
+                @Override                           
+                public boolean canPlayAI() {
+                    return AllZone.Phase.getPhase().equals(Constant.Phase.Main2);
+                }
                 @Override
                 public void resolve() {
-                    int stormCount = 0;
-                    
-                    //get storm count
-                    CardList list = new CardList();
-                    list.addAll(AllZone.Human_Graveyard.getCards());
-                    list.addAll(AllZone.Computer_Graveyard.getCards());
-                    
-                    list.addAll(AllZone.Human_Play.getCards());
-                    list.addAll(AllZone.Computer_Play.getCards());
-                    
-                    for(int i = 0; i < list.size(); i++)
-                        if(list.get(i).getTurnInZone() == AllZone.Phase.getTurn()) stormCount++;
-                    
-                    for(int i = 0; i < 2 * stormCount; i++)
-                        CardFactoryUtil.makeToken("Goblin", "R 1 1 Goblin", card, "R", new String[] {
-                                "Creature", "Goblin"}, 1, 1, new String[] {""});
-                    
+                    CardFactoryUtil.makeToken("Goblin", "R 1 1 Goblin", card, "R", new String[] {
+                            "Creature", "Goblin"}, 1, 1, new String[] {""}); 
+                    CardFactoryUtil.makeToken("Goblin", "R 1 1 Goblin", card, "R", new String[] {
+                            "Creature", "Goblin"}, 1, 1, new String[] {""});                                     
                 }//resolve()
             };
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Hunting Pack")) {
+            SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = 143904782338241969L;
+                @Override                           
+                public boolean canPlayAI() {
+                    return AllZone.Phase.getPhase().equals(Constant.Phase.Main2);
+                }
+                @Override
+                public void resolve() {
+                    CardFactoryUtil.makeToken("Beast", "G 4 4 Beast", card, "G", new String[] {
+                            "Creature", "Beast"}, 4, 4, new String[] {""});                                    
+                }//resolve()
+            };
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Haze of Rage")) {
+            final Card crd = card;
+            final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = -73841582690849205L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    return getAttacker() == true && AllZone.Phase.getPhase().equals(Constant.Phase.Main1);
+                }
+                
+                public boolean getAttacker() {
+					String Computer = AllZone.Phase.getActivePlayer();
+					PlayerZone ComputerPlayZone = AllZone.getZone(Constant.Zone.Play, Computer);
+			        CardList ComputerCreatureList = new CardList(ComputerPlayZone.getCards());
+			        ComputerCreatureList = ComputerCreatureList.getType("Creature");
+			        ComputerCreatureList = ComputerCreatureList.filter(new CardListFilter() {
+						public boolean addCard(Card c) {
+							return c.getNetAttack() >= 2 && CardFactoryUtil.canTarget(card, getTargetCard());
+						}
+					});
+                    return (ComputerCreatureList.size() != 0);
+                }//getAttacker()
+                
+                @Override
+                public void resolve() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    CardList start = new CardList(play.getCards());
+                    final CardList list = start.getType("Creature");
+                    
+                    for(int i = 0; i < list.size(); i++) {
+                        list.get(i).addTempAttackBoost(1);
+                    }
+                    
+                    play.updateObservers();
+                    
+                    Command untilEOT = new Command() {
+                        private static final long serialVersionUID = -28032591440730370L;
+                        
+                        public void execute() {
+                            for(int i = 0; i < list.size(); i++)
+                                if(AllZone.GameAction.isCardInPlay(list.get(i))) {
+                                    list.get(i).addTempAttackBoost(-1);
+                                }
+                        }
+                    };
+                    AllZone.EndOfTurn.addUntil(untilEOT);
+                }//resolve()
+               
+            };//SpellAbility
+            final SpellAbility Card_Buyback = new Spell(card) {
+                private static final long serialVersionUID = 3898017438147188882L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    return getAttacker() != null;
+                }
+                
+                public Card getAttacker() {
+                    //target creature that is going to attack
+                    Combat c = ComputerUtil.getAttackers();
+                    Card[] att = c.getAttackers();
+                    if(att.length != 0) return att[0];
+                    else return null;
+                }//getAttacker()
+                
 
+                @Override
+                public void resolve() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    CardList start = new CardList(play.getCards());
+                    final CardList list = start.getType("Creature");
+                    
+                    for(int i = 0; i < list.size(); i++) {
+                        list.get(i).addTempAttackBoost(1);
+                    }
+                    
+                    play.updateObservers();
+                    Command untilEOT = new Command() {
+                        private static final long serialVersionUID = -28032591440730370L;
+                        
+                        public void execute() {
+                            for(int i = 0; i < list.size(); i++)
+                                if(AllZone.GameAction.isCardInPlay(list.get(i))) {
+                                    list.get(i).addTempAttackBoost(-1);
+                                }
+                        }
+                    };
+                    AllZone.EndOfTurn.addUntil(untilEOT);
+                }//resolve()
+            };//SpellAbility
+            Card_Buyback.setManaCost("3 R");
+            Card_Buyback.setAdditionalManaCost("2");
+            
+            spell.setDescription("Creatures you control get +1/+0 until end of turn. Storm (When you cast this spell, copy it for each spell cast before it this turn.)");
+            Card_Buyback.setDescription("Buyback 2 - Pay 3 R, put this card into your hand as it resolves.");
+            spell.setStackDescription(crd + " - Creatures you control get +1/+0 until end of turn.");            
+            Card_Buyback.setStackDescription(crd + " - Creatures you control get +1/+0 until end of turn.");           
+            Card_Buyback.setIsBuyBackAbility(true);
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            card.addSpellAbility(Card_Buyback);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Astral Steel")) {
+           final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = 141478784123241969L;
+                
+                @Override                
+                public boolean canPlay() {
+                	String player = AllZone.Phase.getActivePlayer();
+            		String opponent = AllZone.GameAction.getOpponent(player);
+                    PlayerZone PlayerPlayZone = AllZone.getZone(Constant.Zone.Play, player);
+            		PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Play, opponent);                  
+                    CardList start = new CardList(PlayerPlayZone.getCards());
+                    CardList start2 = new CardList(opponentPlayZone.getCards());
+                    final CardList list = start.getType("Creature");
+                    final CardList list2 = start2.getType("Creature");
+                    return (list.size() + list2.size() > 0);
+                }
+                
+                public boolean canPlayAI() {
+                    return getAttacker() != null && AllZone.Phase.getPhase().equals(Constant.Phase.Main1);
+                }
+                
+                
+                @Override
+                public void chooseTargetAI() {
+                    setTargetCard(getAttacker());
+                }
+                
+                public Card getAttacker() {
+					String Computer = AllZone.Phase.getActivePlayer();
+					PlayerZone ComputerPlayZone = AllZone.getZone(Constant.Zone.Play, Computer);
+			        CardList ComputerCreatureList = new CardList(ComputerPlayZone.getCards());
+			        ComputerCreatureList = ComputerCreatureList.getType("Creature");
+			        ComputerCreatureList = ComputerCreatureList.filter(new CardListFilter() {
+						public boolean addCard(Card c) {
+							return c.getNetAttack() >= 2 && CardFactoryUtil.canTarget(card, getTargetCard());
+						}
+					});
+                    if(ComputerCreatureList.size() != 0){
+                        Card[] Target = new Card[ComputerCreatureList.size()];
+            			for(int i = 0; i < ComputerCreatureList.size(); i++) {
+            				Card crd = ComputerCreatureList.get(i);
+            				Target[i] = crd;
+            			}
+    			        Random randomGenerator = new Random();
+  			          int randomInt = randomGenerator.nextInt(ComputerCreatureList.size());
+                    	return Target[randomInt];
+                    }
+                    else return null;
+                }//getAttacker()              
+                
+                @Override
+                public void resolve() {
+                    final Card c = getTargetCard();
+                        c.addTempAttackBoost(1);
+                        c.addTempDefenseBoost(2);
+                    
+                    c.updateObservers();
+                    
+                    Command untilEOT = new Command() {
+                        private static final long serialVersionUID = -28032591440730370L;
+                        
+                        public void execute() {
+                            c.addTempAttackBoost(-1);
+                            c.addTempDefenseBoost(-2);
+                        }
+                    };
+                    AllZone.EndOfTurn.addUntil(untilEOT);
+                }//resolve()
+            };
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Grapeshot")) {
+           final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = 74155521291969L;
+                
+                @Override                           
+                public boolean canPlayAI() {
+                    return AllZone.Phase.getPhase().equals(Constant.Phase.Main2);
+                }      
+                @Override
+                public void resolve() {
+                    String player = card.getController();
+                    
+                    if(player == "Human"){
+                    if(getTargetCard() != null) {
+                        if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                                && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(1,card);
+                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1);
+                    } else AllZone.GameAction.getPlayerLife(AllZone.GameAction.getOpponent(card.getController())).subtractLife(1);
+            };
+           };
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        	spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true, false));
+        }//*************** END ************ END ************************** 
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Scattershot")) {
+           final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = 74777841291969L;
+                
+                @Override                           
+                public boolean canPlayAI() {
+                    return false;
+                }      
+                @Override
+                public void resolve() {
+
+                    if(getTargetCard() != null) {
+                        if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                                && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(1,card);
+                    }
+                    };
+           };
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        	spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+        }//*************** END ************ END ************************** 
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Ignite Memories")) {
+            SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = 143904782338241969L;
+                @Override                           
+                public boolean canPlayAI() {
+                    return AllZone.Phase.getPhase().equals(Constant.Phase.Main2);
+                }                  
+                @Override
+                public void resolve() {
+                    Card choice = null;
+                    String opponent = AllZone.GameAction.getOpponent(card.getController());
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opponent);
+                    Card[] handChoices = hand.getCards();
+                    if (handChoices.length > 0)
+                    {
+                        choice = CardUtil.getRandom(handChoices);
+                        handChoices[0] = choice;
+                        for(int i = 1; i < handChoices.length; i++) {
+                            handChoices[i] = null;
+                        }
+                        AllZone.Display.getChoice("Random card", handChoices);
+                        AllZone.GameAction.getPlayerLife(opponent).subtractLife(
+                                CardUtil.getConvertedManaCost(choice.getManaCost()));
+                    }                                   
+                }//resolve()
+            };
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END ************************** 
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Reaping the Graves")) {
+            final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = -57014445262924814L;
+                
+                @Override
+                public void resolve() {
+                    Card c = getTargetCard();
+                    PlayerZone grave = AllZone.getZone(c);
+                    
+                    if(AllZone.GameAction.isCardInZone(c, grave)) {
+                        PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getController());
+                        AllZone.GameAction.moveTo(hand, c);
+                    }
+                }//resolve()
+                
+                @Override
+                public boolean canPlay() {
+                    return super.canPlay() && getCreatures().length != 0;
+                }
+                
+                public Card[] getCreatures() {
+                    CardList creature = new CardList();
+                    PlayerZone zone = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    creature.addAll(zone.getCards());
+                    creature = creature.getType("Creature");
+                    return creature.toArray();
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    Card c[] = getCreatures();
+                    Card biggest = c[0];
+                    for(int i = 0; i < c.length; i++)
+                        if(biggest.getNetAttack() < c[i].getNetAttack()) biggest = c[i];
+                    
+                    setTargetCard(biggest);
+                }
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            
+            Input target = new Input() {
+                private static final long serialVersionUID = -3717723884199321767L;
+                
+                @Override
+                public void showMessage() {
+                    Object check = AllZone.Display.getChoiceOptional("Select creature", getCreatures());
+                    if(check != null) {
+                        spell.setTargetCard((Card) check);
+                        stopSetNext(new Input_PayManaCost(spell));
+                    } else stop();
+                }//showMessage()
+                
+                public Card[] getCreatures() {
+                    CardList creature = new CardList();
+                    PlayerZone zone = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    creature.addAll(zone.getCards());
+                    creature = creature.getType("Creature");
+                    return creature.toArray();
+                }
+            };//Input
+            spell.setBeforePayMana(target);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Sprouting Vines")) {
+            SpellAbility spell = new Spell(card) {
+
+				private static final long serialVersionUID = -65984152637468746L;
+
+				@Override
+                public void resolve() {
+					AllZone.GameAction.searchLibraryBasicLand(card.getController(), 
+							Constant.Zone.Hand, false);
+				}
+                
+                public boolean canPlayAI()
+                {
+                	PlayerZone library = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
+                	CardList list = new CardList(library.getCards());
+                	list = list.getType("Basic");
+                	return list.size() > Phase.StormCount;
+                }
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END ************************** 
+        //*************** START *********** START **************************
+        else if(cardName.equals("Tendrils of Agony")) {
+            SpellAbility spell = new Spell(card) {
+
+				private static final long serialVersionUID = -6598023699468746L;
+
+				@Override
+                public void resolve() {
+			        PlayerLife player = AllZone.GameAction.getPlayerLife(card.getController());
+                    String opponent = AllZone.GameAction.getOpponent(card.getController());
+                    PlayerLife target = AllZone.GameAction.getPlayerLife(opponent);
+			        target.subtractLife(2);
+			        player.addLife(2);
+				}
+                
+                public boolean canPlayAI() {
+                return 1 < Phase.StormCount;
+        }
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        //*************** START *********** START **************************
+        else if(cardName.equals("Volcanic Awakening")) {
+            SpellAbility spell = new Spell(card) {
+
+				private static final long serialVersionUID = -650147710658746L;
+
+				@Override
+                public void resolve() {
+                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                        AllZone.GameAction.destroy(getTargetCard());
+				}
+				}
+                @Override
+                public void chooseTargetAI() {
+                    //target basic land that Human only has 1 or 2 in play
+                    CardList land = new CardList(AllZone.Human_Play.getCards());
+                    land = land.getType("Land");
+                    
+                    Card target = null;
+                    
+                    String[] name = {"Forest", "Swamp", "Plains", "Mountain", "Island"};
+                    for(int i = 0; i < name.length; i++)
+                        if(land.getName(name[i]).size() == 1) {
+                            target = land.getName(name[i]).get(0);
+                            break;
+                        }
+                    
+                    //see if there are only 2 lands of the same type
+                    if(target == null) {
+                        for(int i = 0; i < name.length; i++)
+                            if(land.getName(name[i]).size() == 2) {
+                                target = land.getName(name[i]).get(0);
+                                break;
+                            }
+                    }//if
+                    if(target == null) {
+                        land.shuffle();
+                        target = land.get(0);
+                    }
+                    setTargetCard(target);
+                }//chooseTargetAI()
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList land = new CardList(AllZone.Human_Play.getCards());
+                    land = land.getType("Land");
+                    return land.size() != 0;
+                }
+            };//SpellAbility
+            spell.setBeforePayMana(CardFactoryUtil.input_targetType(spell, "Land"));
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Wing Shards")) {
+            final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = 4780150265170723L;
+                
+                @Override                
+                public boolean canPlay() {
+                    return (AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility) || (AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Blockers_InstantAbility)));
+                }
+                @Override
+                public void resolve() {
+                	Card attack[] = AllZone.Combat.getAttackers(); 
+                	Card target = null;
+                    String player = card.getController();
+                    if(player != "Human"){
+                        Object check = AllZone.Display.getChoiceOptional("Select creature", attack);
+                        if(check != null) {
+                           target = ((Card) check);
+                        } 
+                    } else {
+                        CardList Targets = new CardList();
+                        String TPlayer = AllZone.GameAction.getOpponent(card.getController());
+    					PlayerZone TZone = AllZone.getZone(Constant.Zone.Play, TPlayer);
+                        for(int i = 0; i < attack.length; i++) {
+            				Card crd = attack[i];			                                
+                                if(AllZone.GameAction.isCardInZone(attack[i], TZone)) Targets.add(crd);
+                        }
+                        CardListUtil.sortAttack(Targets);
+                        if(Targets.size() != 0) target = (Targets.get(Targets.size() - 1));
+                        }
+
+                    if(target != null) AllZone.GameAction.sacrifice(target);                
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                	Card attack[] = AllZone.Combat.getAttackers();
+                    CardList Targets = new CardList();
+                    for(int i = 0; i < attack.length; i++) {
+        				Card crd = attack[i];
+                        Targets.add(crd);
+                    }
+                    return (Targets.size() > 0 && AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility)) ;
+                }
+            };
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Mind's Desire"))
+        {
+      	  final Ability freeCast = new Ability(card, "0")
+            {
+  			private static final long serialVersionUID = 4455819149429678456L;
+
+  			@Override
+  			public void resolve() {
+            	Card target = null;
+            	Card c = null;
+                String player = card.getController();
+                if(player == "Human"){
+                    Object check = AllZone.Display.getChoiceOptional("Select Card to play for free", getSourceCard().getAttachedCards());
+                    if(check != null) {
+                       target = ((Card) check);
+                    }
+                    if(target != null) c = copyCard(target); 
+                }				
+  					if(c != null) {
+  					if((c.isLand()) == true) {
+  	   					if(AllZone.GameInfo.getHumanCanPlayNumberOfLands() > 0) {
+    					PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+		                play.add(c);
+  						card.unattachCard(c);
+  	   					} else {
+				    		String[] choices = {"Ok"};
+				    		@SuppressWarnings("unused")
+							Object q = null;
+				    		q = AllZone.Display.getChoiceOptional("You can't play any more lands this turn", choices);
+  	   					}
+  					} else {
+  						AllZone.GameAction.playCardNoCost(c);
+  						card.unattachCard(c);
+  					}
+  				}
+  				}
+ 
+  			public boolean canPlayAI() {
+            	return false;
+  			}
+  			
+            };
+            freeCast.setStackDescription("Mind's Desire - play card without paying its mana cost.");
+            
+            
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+        					String player = AllZone.Phase.getActivePlayer();
+        					if(player == "Human") AllZone.GameAction.shuffle(card.getController());
+    			        PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+    			        CardList libList = new CardList(lib.getCards());
+    			        Card c = null;
+    			        if(libList.size() > 0) {
+    			        	c = libList.get(0);
+    			        }
+    	                if(c != null) {
+        			        PlayerZone RFG = AllZone.getZone(Constant.Zone.Removed_From_Play, player);
+                            AllZone.GameAction.moveTo(RFG, c);
+                            card.attachCard(c);  
+    	                }
+
+                            final Card Minds = card;  
+        	            	AllZone.GameAction.exile(Minds);                          
+                            Command untilEOT = new Command() {
+                                private static final long serialVersionUID = -28032591440730370L;
+                                
+                                public void execute() {
+                                	String player = AllZone.Phase.getActivePlayer();
+                					PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+                			        	play.remove(Minds);
+                                        }
+                            };
+                            AllZone.EndOfTurn.addUntil(untilEOT);
+                }//resolve()
+            };//SpellAbility
+            Command intoPlay = new Command() {
+                private static final long serialVersionUID = 920148510259054021L;
+                
+                public void execute() {
+                    ability.setStackDescription(card.getController() + " - Shuffle your library. Then exile the top card of your library.");
+                    AllZone.Stack.add(ability);
+                }
+                
+            };
+            SpellAbility spell = new Spell_Permanent(card) {
+                private static final long serialVersionUID = -2940969025405788931L;
+                
+                @Override
+                public boolean canPlayAI() {
+                	return false;
+                }
+            };
+            card.addComesIntoPlayCommand(intoPlay);
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            card.addSpellAbility(freeCast);
+        }
+        //*************** END ************ END **************************   
+        //*************** START *********** START **************************
+        else if(cardName.equals("Temporal Fissure")) {
+            final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = 5383879224433456795L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
+                    return 3 < AllZone.Phase.getTurn() && 0 < human.size();
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    String player = card.getController();
+                	CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
+            		CardList human2 = CardFactoryUtil.AI_getHumanArtifact(card, true);
+                	CardList human3 = CardFactoryUtil.AI_getHumanEnchantment(card, true);
+                	CardList human4 = CardFactoryUtil.getLandsInPlay(player);
+                	if(human != null) setTargetCard(CardFactoryUtil.AI_getBestCreature(human));
+                	else if(human2 != null) setTargetCard(CardFactoryUtil.AI_getBestArtifact(human));
+                	else if(human3 != null) setTargetCard(CardFactoryUtil.AI_getBestEnchantment(human,card, true));
+                	else if(human4 != null) setTargetCard(CardFactoryUtil.AI_getBestLand(human4));
+                }
+                
+                @Override
+                public void resolve() {
+                    if(getTargetCard() != null) {
+                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                        if(getTargetCard().isToken()) AllZone.getZone(getTargetCard()).remove(getTargetCard());
+                        else {
+                            PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, getTargetCard().getOwner());
+    	                    String player = card.getController();
+        					PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+    			        	play.remove(getTargetCard());
+                            AllZone.GameAction.moveTo(hand, getTargetCard());
+                        }
+                        //System.out.println("target card has a converted manacost of: " +CardUtil.getConvertedManaCost(targetManaCost));
+                    }//if
+                    }
+                }//resolve()
+            };//SpellAbility
+            Input target = new Input() {
+                private static final long serialVersionUID = 7717499561403038165L;
+                
+                @Override
+                public void showMessage() {
+                    AllZone.Display.showMessage("Select target permanent for " + spell.getSourceCard());
+                    ButtonUtil.enableOnlyCancel();
+                }
+                
+                @Override
+                public void selectButtonCancel() {
+                    stop();
+                }
+                
+                @Override
+                public void selectCard(Card c, PlayerZone zone) {
+                    if(!CardFactoryUtil.canTarget(spell, c)) {
+                        AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
+                    } else if(zone.is(Constant.Zone.Play)) {
+                        spell.setTargetCard(c);
+                        if (this.isFree()) {
+                        	this.setFree(false);
+                        	AllZone.Stack.add(spell);
+                            stop();                  
+                        }
+                        else
+                        	stopSetNext(new Input_PayManaCost(spell));
+                    }
+                }
+            };//Input
+            
+            spell.setBeforePayMana(target);
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        //*************** START *********** START **************************
+        if(cardName.equals("Brain Freeze")) {
+            final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = 4247050159744693L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    String player = getTargetPlayer();
+                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+                    CardList libList = new CardList(lib.getCards());
+                    return (libList.size() > 0 && ((AllZone.Phase.getPhase().equals(Constant.Phase.Main2)) || Phase.StormCount*3 >= libList.size()));
+                }
+                
+                @Override
+                public void resolve() {
+                    String player = getTargetPlayer();
+                    
+                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+                    CardList libList = new CardList(lib.getCards());
+                    
+                    int max = 3;
+                    if(libList.size() < max) max = libList.size();
+                    
+                    for(int i = 0; i < max; i++) {
+                        Card c = libList.get(i);
+                        lib.remove(c);
+                        grave.add(c);
+                    }
+                }
+            };//SpellAbility
+            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************    
+        //*************** START *********** START **************************
+        else if(cardName.equals("Dragonstorm")) {
+            SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 52740159316058876L;
+
+				@Override
+                public boolean canPlayAI() {
+                    CardList list = AllZoneUtil.getPlayerCardsInLibrary(Constant.Player.Computer);
+                    CardList dragons = new CardList();
+                    
+                    for(int i = 0; i < list.size(); i++) {
+                        if(list.get(i).getType().contains("Dragon")
+                                || list.get(i).getKeyword().contains("Changeling")) {
+                            dragons.add(list.get(i));
+                        }
+                    }
+                    return (0 < dragons.size() && (AllZone.Phase.getPhase().equals(Constant.Phase.Main2)));
+                }
+                
+                @Override
+                public void resolve() {
+                    String player = card.getController();
+                    if(player == "Human"){
+                        CardList list = AllZoneUtil.getPlayerCardsInLibrary(Constant.Player.Human);
+                        CardList dragons = new CardList();
+                        
+                        for(int i = 0; i < list.size(); i++) {
+                            if(list.get(i).getType().contains("Dragon")
+                                    || list.get(i).getKeyword().contains("Changeling")) {
+                                dragons.add(list.get(i));
+                            }
+                        }
+                        
+                        if(dragons.size() != 0) {
+                            Object o = AllZone.Display.getChoiceOptional("Select an Dragon to put onto the battlefield", dragons.toArray());
+                            
+                            AllZone.GameAction.shuffle(card.getController());
+                            if(o != null) {
+                                //put card in hand
+                                AllZone.Human_Library.remove(o);
+                                AllZone.Human_Play.add((Card) o);
+                            }
+                        }//if
+                    	
+                    } else {
+                        CardList list = AllZoneUtil.getPlayerCardsInLibrary(Constant.Player.Computer);
+                        CardList dragons = new CardList();
+                        
+                        for(int i = 0; i < list.size(); i++) {
+                            if(list.get(i).getType().contains("Dragon")
+                                    || list.get(i).getKeyword().contains("Changeling")) {
+                                dragons.add(list.get(i));
+                            }
+                        }
+                                            
+                        if(dragons.size() != 0) {
+                            CardListUtil.sortAttack(dragons);
+                            Card c = dragons.get(0);
+                            AllZone.GameAction.shuffle(card.getController());
+                            //move to hand
+                            AllZone.Computer_Library.remove(c);
+                            AllZone.Computer_Play.add(c);
+                            
+                            CardList l = new CardList();
+                            l.add(c);
+                            AllZone.Display.getChoiceOptional("Computer picked:", l.toArray());
+                        }                    	
+                    }
+                    
+                }
+            };
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Feudkiller's Verdict")) {
             SpellAbility spell = new Spell(card) {

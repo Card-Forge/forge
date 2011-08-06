@@ -17937,6 +17937,33 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
+        if(cardName.equals("Storm Entity")) {
+        	final SpellAbility intoPlay = new Ability(card, "0") {
+        		@Override
+        		public boolean canPlayAI() {
+    			CardList human = AllZoneUtil.getCreaturesInPlay(Constant.Player.Human);
+                CardListUtil.sortAttack(human);
+        		 return (human.get(0).getNetAttack() < Phase.StormCount && Phase.StormCount > 1);
+        		}
+        		@Override
+        		public void resolve() {
+                    for(int i = 0; i < Phase.StormCount - 1; i++) {
+                    card.addCounter(Counters.P1P1, 1);
+        		}  
+        		}
+        	};
+        	Command comesIntoPlay = new Command() {
+				private static final long serialVersionUID = -3734151854295L;
+
+				public void execute() {
+        			AllZone.Stack.add(intoPlay);
+        		}
+        	};
+        	intoPlay.setStackDescription(cardName + " - comes into play with a +1/+1 counter on it for each other spell played this turn. ");
+        	card.addComesIntoPlayCommand(comesIntoPlay);
+        }//*************** END ************ END ************************** 
+        
+        //*************** START *********** START **************************
         if(cardName.equals("Filigree Sages")) {
         	/*
         	 * 2U: Untap target artifact.
