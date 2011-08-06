@@ -4922,6 +4922,7 @@ public class GameActionUtil {
 
 		if(c.getName().equals("Marsh Viper")) playerCombatDamage_PoisonCounter(c, 2);
 		else if(c.getName().equals("Hypnotic Specter")) playerCombatDamage_Hypnotic_Specter(c);
+		else if(c.getName().equals("Abyssal Specter")) playerCombatDamage_Abyssal_Specter(c);
 		else if(c.getName().equals("Dimir Cutpurse")) playerCombatDamage_Dimir_Cutpurse(c);
 		else if(c.getName().equals("Ghastlord of Fugue")) playerCombatDamage_Ghastlord_of_Fugue(c);
 		else if(c.getName().equals("Garza Zol, Plague Queen")) playerCombatDamage_May_draw(c);
@@ -5566,6 +5567,46 @@ public class GameActionUtil {
 		}
 	}
 
+	private static void playerCombatDamage_Abyssal_Specter(Card c) {
+		final String[] player = new String[1];
+		player[0] = c.getController();
+		final String[] opponent = new String[1];
+
+		if(c.getNetAttack() > 0) {
+			Ability ability = new Ability(c, "0") {
+				@Override
+				public void resolve() {
+                    PlayerZone Ohand = AllZone.getZone(Constant.Zone.Hand, AllZone.GameAction.getOpponent(player[0]));
+                    Card h[] = Ohand.getCards();
+                    Card[] handChoices = Ohand.getCards();
+                    int Handsize = 1;
+                    if(h.length <= 1) Handsize = h.length;
+                    String opponent = AllZone.GameAction.getOpponent(player[0]);
+                    Card choice = null; 
+
+                    for(int i = 0; i < Handsize; i++) {
+                            AllZone.Display.showMessage("Select a card to discard ");
+                            ButtonUtil.enableOnlyCancel();
+                        handChoices = Ohand.getCards();
+                        //human chooses
+                        if(opponent.equals(Constant.Player.Human)) {
+                            choice = AllZone.Display.getChoice("Choose", handChoices);
+                        } else//computer chooses
+                        {
+                            choice = CardUtil.getRandom(handChoices);
+                        }
+                        
+                        AllZone.GameAction.discard(choice);
+                    }
+				}
+			};// ability
+
+			opponent[0] = AllZone.GameAction.getOpponent(player[0]);
+			ability.setStackDescription("Abyssal Specter - " + opponent[0] + " discards a card");
+			AllZone.Stack.add(ability);
+		}
+	}
+	
 	@SuppressWarnings("unused")
 	// upkeep_CheckEmptyDeck_Lose
 	private static void upkeep_CheckEmptyDeck_Lose() {

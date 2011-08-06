@@ -1,3 +1,10 @@
+Abyssal Specter
+2 B B
+Creature Specter
+Whenever Abyssal Specter deals damage to a player, that player discards a card.
+2/3
+Flying
+
 Reiterate
 1 R R
 Instant
