@@ -963,19 +963,20 @@ public class CardFactoryUtil {
     
 
     public static SpellAbility ability_Untap(final Card sourceCard, String cost) {
-        final SpellAbility a1 = new Ability(sourceCard, cost) {
+    	Ability_Cost abCost = new Ability_Cost(cost, sourceCard.getName(), true);
+        final SpellAbility a1 = new Ability_Activated(sourceCard, abCost, null) {
+			private static final long serialVersionUID = -8604400186962948654L;
+            
             @Override
-            public boolean canPlay() {
-                return sourceCard.isTapped() && super.canPlay();
+            public boolean canPlayAI() {
+                return sourceCard.isTapped() && super.canPlayAI();
             }
             
             @Override
             public void resolve() {
                 sourceCard.untap();
             }
-        };//SpellAbility
-        //sourceCard.addSpellAbility(a1);
-        
+        };//SpellAbility        
         StringBuilder sbDesc = new StringBuilder();
         sbDesc.append(cost).append(": Untap ").append(sourceCard.getName()).append(".");
         a1.setDescription(sbDesc.toString());
@@ -984,7 +985,6 @@ public class CardFactoryUtil {
         sbStack.append("Untap ").append(sourceCard.getName());
         a1.setStackDescription(sbStack.toString());
         
-        a1.setBeforePayMana(new Input_PayManaCost(a1));
         return a1;
     }
     
@@ -1020,15 +1020,12 @@ public class CardFactoryUtil {
             @Override
             public boolean canPlay() {
                 PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, sourceCard.getController());
-                String phase = AllZone.Phase.getPhase();
-                Player activePlayer = AllZone.Phase.getActivePlayer();
                 
                 ArrayList<Card> spellsOnStack = AllZone.Stack.getSourceCards();
                 Card sourceCard = this.getSourceCard();
                 
                 return AllZone.GameAction.isCardInZone(sourceCard, grave) && !spellsOnStack.contains(sourceCard)
-                        && (sourceCard.isInstant() || (phase.equals(Constant.Phase.Main1) || phase.equals(Constant.Phase.Main2))
-                                && sourceCard.getController().equals(activePlayer) && AllZone.Stack.size() == 0);
+                        && (sourceCard.isInstant() || Phase.canCastSorcery(sourceCard.getController()));
                 
             }
             
@@ -1100,12 +1097,9 @@ public class CardFactoryUtil {
             @Override
             public boolean canPlay() {
                 PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, sourceCard.getController());
-                String phase = AllZone.Phase.getPhase();
-                Player activePlayer = AllZone.Phase.getActivePlayer();
                 
                 return AllZone.GameAction.isCardInZone(sourceCard, grave)
-                        && ((phase.equals(Constant.Phase.Main1) || phase.equals(Constant.Phase.Main2))
-                                && sourceCard.getController().equals(activePlayer) && AllZone.Stack.size() == 0);
+                        && Phase.canCastSorcery(sourceCard.getController());
                 
             }
             
@@ -1189,9 +1183,7 @@ public class CardFactoryUtil {
             
             @Override
             public boolean canPlay() {
-                return AllZone.Phase.getActivePlayer().equals(sourceCard.getController())
-                        && (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) || AllZone.Phase.getPhase().equals(
-                                Constant.Phase.Main2)) && !AllZone.Phase.getPhase().equals("End of Turn")
+                return Phase.canCastSorcery(sourceCard.getController())
                         && !AllZone.GameAction.isCardInPlay(sourceCard);
             }
             
@@ -1694,9 +1686,8 @@ public class CardFactoryUtil {
             @Override
             public boolean canPlay() {
                 return AllZone.getZone(sourceCard).is(Constant.Zone.Play) 
-                        && AllZone.Phase.getActivePlayer().equals(sourceCard.getController()) 
                         && !sourceCard.isCreature() 
-                        && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+                        && Phase.canCastSorcery(sourceCard.getController());
             }
             
             @Override
@@ -1840,12 +1831,13 @@ public class CardFactoryUtil {
 			 */
             @Override
             public boolean canPlay() {
-                return (sourceCard.getKeyword().contains("Flash") && (AllZone.GameAction.isCardInZone(sourceCard, AllZone.Human_Hand) || 
-                        AllZone.GameAction.isCardInZone(sourceCard, AllZone.Computer_Hand)) 
-                            || 
-                       (! sourceCard.getKeyword().contains("Flash") && (sourceCard.getController().equals(AllZone.Phase.getActivePlayer()) &&
-                       (AllZone.GameAction.isCardInZone(sourceCard, AllZone.Human_Hand) || AllZone.GameAction.isCardInZone(sourceCard, AllZone.Computer_Hand)) && 
-                       (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) || AllZone.Phase.getPhase().equals(Constant.Phase.Main2)))));
+				if (!AllZone.getZone(sourceCard).is(Constant.Zone.Hand))
+					return false;
+				
+				if (Phase.canCastSorcery(sourceCard.getController()))
+					return true;
+				
+                return sourceCard.getKeyword().contains("Flash");
             }// CanPlay (for auras with Flash)
 			
             public boolean canPlayAI() {
@@ -2042,15 +2034,16 @@ public class CardFactoryUtil {
 			 *  for flash, which is not working through the keyword for some reason
 			 *  if not flash then limit to main 1 and 2 on controller's turn and card in hand
 			 */
-			@Override
+            @Override
             public boolean canPlay() {
-                return (sourceCard.getKeyword().contains("Flash") && (AllZone.GameAction.isCardInZone(sourceCard, AllZone.Human_Hand) || 
-                        AllZone.GameAction.isCardInZone(sourceCard, AllZone.Computer_Hand))
-                            || 
-                       (! sourceCard.getKeyword().contains("Flash") && (sourceCard.getController().equals(AllZone.Phase.getActivePlayer()) &&
-                       (AllZone.GameAction.isCardInZone(sourceCard, AllZone.Human_Hand) || AllZone.GameAction.isCardInZone(sourceCard, AllZone.Computer_Hand)) && 
-                       (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) || AllZone.Phase.getPhase().equals(Constant.Phase.Main2)))));
-            }
+				if (!AllZone.getZone(sourceCard).is(Constant.Zone.Hand))
+					return false;
+				
+				if (Phase.canCastSorcery(sourceCard.getController()))
+					return true;
+				
+                return sourceCard.getKeyword().contains("Flash");
+            }// CanPlay (for auras with Flash)
 			
             public boolean canPlayAI() {
                 CardList list = new CardList(AllZone.Human_Play.getCards());    // Target human creature
@@ -3030,8 +3023,7 @@ public class CardFactoryUtil {
     
     //is it the computer's main phase before attacking?
     public static boolean AI_isMainPhase() {
-        return AllZone.Phase.getPhase().equals(Constant.Phase.Main1)
-                && AllZone.Phase.getActivePlayer().equals(AllZone.ComputerPlayer);
+    	return AllZone.Phase.is(Constant.Phase.Main1, AllZone.ComputerPlayer);
     }
     
     public static CommandArgs AI_targetComputer() {
@@ -3618,7 +3610,7 @@ public class CardFactoryUtil {
         	String cPhase = AllZone.Phase.getPhase();
         	if ((cPhase.equals(Constant.Phase.Main1) ||
         		 cPhase.equals(Constant.Phase.Main2)) && 
-        		 AllZone.Phase.getActivePlayer().equals(cardController))
+        		 AllZone.Phase.getPlayerTurn().equals(cardController))
         		return doXMath(Integer.parseInt(sq[1]), m);
         	else
         		return doXMath(Integer.parseInt(sq[2]), m); // not Main Phase

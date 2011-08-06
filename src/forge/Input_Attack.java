@@ -28,6 +28,9 @@ public class Input_Attack extends Input {
     
     @Override
     public void selectButtonOK() {
+    	if (AllZone.Combat.getAttackers().length > 0)
+    		AllZone.Phase.setCombat(true);
+    	
         Card check = getPlaneswalker();
         if(check == null) {
             

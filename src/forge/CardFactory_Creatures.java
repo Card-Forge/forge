@@ -6063,87 +6063,6 @@ public class CardFactory_Creatures {
         */
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Arashi, the Sky Asunder")) {
-
-            final SpellAbility ability = new Ability_Tap(card, "0") {
-                private static final long serialVersionUID = 7698358771800336470L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return getCreature().size() != 0;
-                }
-                
-                @Override
-                public void chooseTargetAI() {
- 
-                        CardList list = getCreature();
-                        list.shuffle();
-                        setTargetCard(list.get(0));
-
-                }//chooseTargetAI()
-                
-                CardList getCreature() {
-
-                	final int total = AllZoneUtil.getPlayerLandsInPlay(AllZone.ComputerPlayer).size();
-                    //toughness of 1
-                    CardList list = CardFactoryUtil.AI_getHumanCreature(total, card, true);
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                        	//get AI's spare lands
-                            return (c.isCreature() && c.getKeyword().contains("Flying") &&
-                       			   CardFactoryUtil.canDamage(card, c) && total >= c.getKillDamage());
-                        }
-                    });
-                    return list;
-                }//getCreature()
-                
-                @Override
-                public void resolve() {
-                	String manaCost = this.getXManaCost();
-                	int damage = 0;
-                	if (!manaCost.equals("")) {
-      				damage = Integer.parseInt(manaCost);
-                	}
-                    if(getTargetCard() != null) {
-                        if(AllZone.GameAction.isCardInPlay(getTargetCard()) 
-                        		&& getTargetCard().getKeyword().contains("Flying") 
-                                && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(damage,
-                                card);
-                    }
-                }//resolve()
-            };//SpellAbility
-            
-            ability.setBeforePayMana(new Input()
-            {
-            	private static final long serialVersionUID = 4378224586732L;
-
-            	public void showMessage()
-            	{
-            		String s = JOptionPane.showInputDialog("What would you like X to be?");
-            		try {
-            			Integer.parseInt(s);
-            			ability.setXManaCost(s);
-            			stopSetNext(new Input_PayManaCost(ability));
-            		}
-            		catch(NumberFormatException e) {
-            			AllZone.Display.showMessage("\"" + s + "\" is not a number.");
-            			showMessage();
-            		}
-            	}
-            });
-        	  
-        	StringBuilder sb = new StringBuilder();
-        	sb.append(card.getName()).append(" deals X damage to target creature with flying.");
-        	ability.setStackDescription(sb.toString());
-          	  
-            card.addSpellAbility(ability);
-            ability.setDescription("X G, T: Arashi the Sky Asunder deals X damage to target creature with flying.");
-            
-            ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Mirror Entity"))
         {
       	  final Ability ability = new Ability(card, "0")
@@ -7433,7 +7352,7 @@ public class CardFactory_Creatures {
                     setStackDescription(sb.toString());
                     
                     String phase = AllZone.Phase.getPhase();
-                    Player activePlayer = AllZone.Phase.getActivePlayer();
+                    Player activePlayer = AllZone.Phase.getPlayerTurn();
                     
                     return super.canPlay() && phase.equals(Constant.Phase.Main1)
                             && card.getController().equals(activePlayer);
@@ -7481,7 +7400,7 @@ public class CardFactory_Creatures {
                 	sb.append(card.getName()).append(" - ").append(getTargetPlayer()).append(" discards a card at random.");
                 	setStackDescription(sb.toString());
                     
-                    Player activePlayer = AllZone.Phase.getActivePlayer();
+                    Player activePlayer = AllZone.Phase.getPlayerTurn();
                     
                     return super.canPlay() && card.getController().equals(activePlayer);
                 }
@@ -9644,7 +9563,7 @@ public class CardFactory_Creatures {
                                 Combat attackers = ComputerUtil.getAttackers();
                                 CardList list = new CardList(attackers.getAttackers());
                             	
-                                return (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && AllZone.Phase.getActivePlayer().equals(card.getController()) && 
+                                return (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && AllZone.Phase.getPlayerTurn().equals(card.getController()) && 
                                 		human.size() > 0 && (assassins.size() > 0 || !list.contains(card)));
                                 
                             }//canPlayAI
@@ -11447,9 +11366,7 @@ public class CardFactory_Creatures {
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                     
-                    return AllZone.GameAction.isCardInZone(card, grave) 
-                    		&& AllZone.GameAction.isPlayerTurn(card.getController()) 
-                    		&& hand.size() > 0;                   
+                    return AllZone.GameAction.isCardInZone(card, grave) && AllZone.Phase.isPlayerTurn(card.getController()) && hand.size() > 0;                   
                 }
             };//Ability
             
@@ -11484,7 +11401,7 @@ public class CardFactory_Creatures {
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                     
-                    return AllZone.GameAction.isCardInZone(card, grave) && AllZone.GameAction.isPlayerTurn(card.getController()) && hand.size() > 0;                   
+                    return AllZone.GameAction.isCardInZone(card, grave) && AllZone.Phase.isPlayerTurn(card.getController()) && hand.size() > 0;                   
                 }
             };//Ability
             
@@ -16970,7 +16887,7 @@ public class CardFactory_Creatures {
                     
                     return super.canPlay() && list.size() > 0
                             && AllZone.Phase.getPhase().equals(Constant.Phase.Main1)
-                            && AllZone.Phase.getActivePlayer().equals(card.getController());
+                            && AllZone.Phase.getPlayerTurn().equals(card.getController());
                 }
                 
                 @Override
@@ -17045,7 +16962,7 @@ public class CardFactory_Creatures {
                     
                     return super.canPlay() && list.size() > 0
                             && AllZone.Phase.getPhase().equals(Constant.Phase.Main1)
-                            && AllZone.Phase.getActivePlayer().equals(card.getController());
+                            && AllZone.Phase.getPlayerTurn().equals(card.getController());
                 }
                 
                 @Override
@@ -18134,7 +18051,7 @@ public class CardFactory_Creatures {
                         card.addTempDefenseBoost(3);
                         AllZone.EndOfTurn.addUntil(untilEOT);
                         
-                        AllZone.Phase.subtractExtraTurn(card.getController());
+                        AllZone.Phase.skipTurn(card.getController());
                     }
                 }
                 
@@ -18299,7 +18216,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlay() {
-                    return super.canPlay() && AllZone.Phase.getActivePlayer().equals(card.getController())
+                    return super.canPlay() && AllZone.Phase.getPlayerTurn().equals(card.getController())
                             && !AllZone.Phase.getPhase().equals("End of Turn")
                             && !AllZone.GameAction.isCardInPlay(card);
                 }
@@ -18358,7 +18275,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlay() {
-                    return super.canPlay() && AllZone.Phase.getActivePlayer().equals(card.getController())
+                    return super.canPlay() && AllZone.Phase.getPlayerTurn().equals(card.getController())
                             && !AllZone.Phase.getPhase().equals("End of Turn")
                             && !AllZone.GameAction.isCardInPlay(card);
                 }
@@ -21345,11 +21262,7 @@ public class CardFactory_Creatures {
                 	public boolean canPlay()
                 	{
                 		//only as sorcery
-                		return AllZone.getZone(card).is(Constant.Zone.Play)                        
-                        	&& AllZone.Phase.getActivePlayer().equals(card.getController())
-                        	&& !AllZone.Phase.getPhase().equals("End of Turn")
-                        	&& (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                "Main2")) && AllZone.Stack.size() == 0 && super.canPlay();
+                		return AllZone.getZone(card).is(Constant.Zone.Play) && Phase.canCastSorcery(card.getController());
                 	}
                 	
                 	public boolean canPlayAI()

@@ -27,6 +27,10 @@ public class ComputerAI_Rats2 implements Computer
     	AllZone.Phase.setNeedToNextPhase(true);
     }
     
+	public void begin_combat() {
+		AllZone.Phase.setNeedToNextPhase(true);
+	}
+    
     public void declare_blockers()
     {
 	if(random.nextBoolean() || AllZone.ComputerPlayer.getLife() < 10)
@@ -49,7 +53,7 @@ public class ComputerAI_Rats2 implements Computer
     AllZone.Phase.setNeedToNextPhase(true);
     }//declare_blockers()
     
-    public void declare_attackers_before()
+    public void declare_attackers_after()
     {
     	 AllZone.Phase.setNeedToNextPhase(true);
     }

@@ -10,13 +10,13 @@ import javax.swing.JOptionPane;
 
 public class GameActionUtil {
 	public static void executeUpkeepEffects() {
+		AllZone.Stack.freezeStack();
 		upkeep_removeDealtDamageToOppThisTurn();
 		upkeep_UpkeepCost(); //sacrifice unless upkeep cost is paid
 		upkeep_DestroyUpkeepCost(); //destroy unless upkeep cost is paid
 		upkeep_DamageUpkeepCost(); //deal damage unless upkeep cost is paid
 		upkeep_CumulativeUpkeepCost(); //sacrifice unless cumulative upkeep cost is paid
 		upkeep_Echo();
-		upkeep_Suspend();
 		upkeep_TabernacleUpkeepCost();
 		upkeep_MagusTabernacleUpkeepCost();
 		// upkeep_CheckEmptyDeck_Lose(); //still a little buggy
@@ -102,7 +102,7 @@ public class GameActionUtil {
 		upkeep_Nut_Collector();
 		
 		// Win / Lose	
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		PlayerZone OpplayZone = AllZone.getZone(Constant.Zone.Play, player.getOpponent());
 		CardList Platinumlist = new CardList(OpplayZone.getCards());
@@ -131,6 +131,7 @@ public class GameActionUtil {
 		upkeep_Oath_of_Ghouls();
 		upkeep_Mycoloth();
 		upkeep_Spore_Counters();
+		upkeep_Suspend();
 		upkeep_Vanishing();
 		upkeep_Fading();
 		upkeep_Benthic_Djinn();
@@ -145,14 +146,17 @@ public class GameActionUtil {
 		upkeep_The_Rack();
 		upkeep_Storm_World();
 		upkeep_BlackVise(); 
-		upkeep_Ivory_Tower();
-
-		upkeep_AI_Aluren(); // experimental, just have the AI dump his small
-		// creats in play when aluren is there
+		upkeep_Ivory_Tower();		
+		
+		upkeep_AI_Aluren(); 
+		// experimental, AI abuse aluren
+		
+		AllZone.Stack.unfreezeStack();
 	}
 
 	public static void executeDrawStepEffects() {
-		final Player player = AllZone.GameAction.getPlayerTurn();
+		AllZone.Stack.freezeStack();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		draw_Teferi_Puzzle_Box(player);
 		draw_Howling_Mine(player);
 		draw_Spiteful_Visions(player);
@@ -160,12 +164,13 @@ public class GameActionUtil {
 		draw_Font_of_Mythos(player);
 		draw_Overbeing_of_Myth(player);
 		draw_Mana_Vault(player);
+		AllZone.Stack.unfreezeStack();
 	}
 
 	public static void executeTapSideEffects(Card c) {
 		
 		AllZone.GameAction.CheckWheneverKeyword(c,"BecomesTapped",null);
-		final Player activePlayer = AllZone.Phase.getActivePlayer();
+		final Player activePlayer = AllZone.Phase.getPlayerTurn();
 
 		/* cards with Tap side effects can be listed here, just like in
 		 * the CardFactory classes
@@ -1484,8 +1489,8 @@ public class GameActionUtil {
 			Ability ability2 = new Ability(c, "0") {
 				@Override
 				public void resolve() {
-					PlayerZone Grave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.Phase.getActivePlayer());
-					PlayerZone Play = AllZone.getZone(Constant.Zone.Play, AllZone.Phase.getActivePlayer());
+					PlayerZone Grave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.Phase.getPlayerTurn());
+					PlayerZone Play = AllZone.getZone(Constant.Zone.Play, AllZone.Phase.getPlayerTurn());
 					CardList evildead = new CardList();
 					evildead.addAll(Grave.getCards());
 					evildead = evildead.filter(new CardListFilter() {
@@ -3089,9 +3094,19 @@ public class GameActionUtil {
 
 	//UPKEEP CARDS:
 
+	public static void payManaDuringAbilityResolve(String message, String manaCost, Command paid, Command unpaid){
+		// temporarily disable the Resolve flag, so the user can payMana for the resolving Ability
+		boolean bResolving = AllZone.InputControl.getResolving();
+		AllZone.InputControl.setResolving(false);
+		AllZone.InputControl.setInput(new Input_PayManaCost_Ability(message, manaCost, paid, unpaid));
+		AllZone.InputControl.setResolving(bResolving);
+	}
+	
+	
 	private static void upkeep_removeDealtDamageToOppThisTurn() {
+		// todo: this should happen in the cleanup phase
 		// resets the status of attacked/blocked this turn
-		Player player = AllZone.Phase.getActivePlayer();
+		Player player = AllZone.Phase.getPlayerTurn();
 		Player opp = player.getOpponent();
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, opp);
 
@@ -3107,7 +3122,7 @@ public class GameActionUtil {
 	}
 
 	public static void upkeep_TabernacleUpkeepCost() {
-		Player player = AllZone.Phase.getActivePlayer();
+		Player player = AllZone.Phase.getPlayerTurn();
 
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
 		CardList list = new CardList();
@@ -3132,13 +3147,14 @@ public class GameActionUtil {
 		for(int i = 0; i < list.size(); i++) {
 			final Card c = list.get(i);
 
-			final Ability destroyAbility = new Ability(c, c.getTabernacleUpkeepCost()) {
-				@Override
-				public void resolve() {
+			final Command paidCommand = new Command() {
+				private static final long serialVersionUID = -1832975152887536245L;
+
+				public void execute() {
 					;
 				}
 			};
-
+			
 			final Command unpaidCommand = new Command() {
 
 				private static final long serialVersionUID = -8737736216222268696L;
@@ -3147,20 +3163,22 @@ public class GameActionUtil {
 					AllZone.GameAction.destroy(c);
 				}
 			};
-
-			final Command paidCommand = new Command() {
-				private static final long serialVersionUID = -1832975152887536245L;
-
-				public void execute() {
-					;
+			
+			// TODO convert to triggered ability when they are no longer Commands
+			final StringBuilder sb = new StringBuilder();
+			sb.append("Tabernacle Upkeep for ").append(c).append("\n");
+			final Ability destroyAbility = new Ability(c, c.getTabernacleUpkeepCost()) {
+				@Override
+				public void resolve() {
+					payManaDuringAbilityResolve(sb.toString(), c.getTabernacleUpkeepCost(), paidCommand, unpaidCommand);
 				}
 			};
+			destroyAbility.setStackDescription(sb.toString());
 
-			//AllZone.Stack.add(sacAbility);
 			if(c.getController().equals(AllZone.HumanPlayer)) {
-				AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Tabernacle Upkeep for " + c + "\r\n",
-						destroyAbility.getManaCost(), paidCommand, unpaidCommand));
-			} else //computer
+				AllZone.Stack.add(destroyAbility);
+			} 
+			else //computer
 			{
 				if(ComputerUtil.canPayCost(destroyAbility)) ComputerUtil.playNoStack(destroyAbility);
 				else AllZone.GameAction.destroy(c);
@@ -3169,7 +3187,7 @@ public class GameActionUtil {
 	}//TabernacleUpkeepCost
 
 	private static void upkeep_MagusTabernacleUpkeepCost() {
-		Player player = AllZone.Phase.getActivePlayer();
+		Player player = AllZone.Phase.getPlayerTurn();
 
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
 		CardList list = new CardList();
@@ -3194,13 +3212,6 @@ public class GameActionUtil {
 		for(int i = 0; i < list.size(); i++) {
 			final Card c = list.get(i);
 
-			final Ability sacrificeAbility = new Ability(c, c.getMagusTabernacleUpkeepCost()) {
-				@Override
-				public void resolve() {
-					;
-				}
-			};
-
 			final Command unpaidCommand = new Command() {
 				private static final long serialVersionUID = 660060621665783254L;
 
@@ -3216,21 +3227,29 @@ public class GameActionUtil {
 					;
 				}
 			};
-
-			//AllZone.Stack.add(sacAbility);
+			
+			final StringBuilder sb = new StringBuilder();
+			sb.append("Magus of the Tabernacle Upkeep for ").append(c).append("\n");
+			final Ability upkeepAbility = new Ability(c, c.getTabernacleUpkeepCost()) {
+				@Override
+				public void resolve() {
+					payManaDuringAbilityResolve(sb.toString(), c.getTabernacleUpkeepCost(), paidCommand, unpaidCommand);
+				}
+			};
+			upkeepAbility.setStackDescription(sb.toString());
 			if(c.getController().equals(AllZone.HumanPlayer)) {
-				AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Magus of the Tabernacle Upkeep for "
-						+ c + "\r\n", sacrificeAbility.getManaCost(), paidCommand, unpaidCommand));
-			} else //computer
+				AllZone.Stack.add(upkeepAbility);
+			} 
+			else //computer
 			{
-				if(ComputerUtil.canPayCost(sacrificeAbility)) ComputerUtil.playNoStack(sacrificeAbility);
+				if(ComputerUtil.canPayCost(upkeepAbility)) ComputerUtil.playNoStack(upkeepAbility);
 				else AllZone.GameAction.sacrifice(c);
 			}
 		}
 	}//MagusTabernacleUpkeepCost
 
 	public static void upkeep_CumulativeUpkeepCost() {
-		Player player = AllZone.Phase.getActivePlayer();
+		Player player = AllZone.Phase.getPlayerTurn();
 
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
 		CardList list = new CardList();
@@ -3257,13 +3276,6 @@ public class GameActionUtil {
 		for(int i = 0; i < list.size(); i++) {
 			final Card c = list.get(i);
 
-			final Ability sacAbility = new Ability(c, c.getUpkeepCost()) {
-				@Override
-				public void resolve() {
-					;
-				}
-			};
-
 			final Command unpaidCommand = new Command() {
 
 				private static final long serialVersionUID = -8737736216222268696L;
@@ -3280,26 +3292,34 @@ public class GameActionUtil {
 					;
 				}
 			};
-
-			//AllZone.Stack.add(sacAbility);
+			
+			final StringBuilder sb = new StringBuilder();
+			sb.append("Upkeep for ").append(c).append("\n");
+			final Ability upkeepAbility = new Ability(c, c.getUpkeepCost()) {
+				@Override
+				public void resolve() {
+					payManaDuringAbilityResolve(sb.toString(), c.getUpkeepCost(), paidCommand, unpaidCommand);
+				}
+			};
+			upkeepAbility.setStackDescription(sb.toString());
 			if(c.getController().equals(AllZone.HumanPlayer)) {
-				AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Upkeep for " + c + "\r\n",
-						sacAbility.getManaCost(), paidCommand, unpaidCommand));
-			} else //computer
+				AllZone.Stack.add(upkeepAbility);
+			} 
+			else //computer
 			{
-				if(ComputerUtil.canPayCost(sacAbility)) ComputerUtil.playNoStack(sacAbility);
+				if(ComputerUtil.canPayCost(upkeepAbility)) ComputerUtil.playNoStack(upkeepAbility);
 				else AllZone.GameAction.sacrifice(c);
 			}
 		}
 	}//upkeepCost
 
 	private static void upkeep_Echo() {
-		Player player = AllZone.Phase.getActivePlayer();
+		Player player = AllZone.Phase.getPlayerTurn();
 
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
 		CardList list = new CardList();
 		list.addAll(play.getCards());
-		//list = list.getType("Creature");
+
 		list = list.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
 				return c.getKeyword().contains("(Echo unpaid)");
@@ -3310,13 +3330,14 @@ public class GameActionUtil {
 			final Card c = list.get(i);
 			if(c.getIntrinsicKeyword().contains("(Echo unpaid)")) {
 
-				final Ability sacAbility = new Ability(c, c.getEchoCost()) {
-					@Override
-					public void resolve() {
+				final Command paidCommand = new Command() {
+					private static final long serialVersionUID = 4549981408026393913L;
+
+					public void execute() {
 						System.out.println("Echo cost for " + c + " was paid.");
 					}
 				};
-
+				
 				final Command unpaidCommand = new Command() {
 					private static final long serialVersionUID = -7354791599039157375L;
 
@@ -3324,23 +3345,27 @@ public class GameActionUtil {
 						AllZone.GameAction.sacrifice(c);
 					}
 				};
-
-				final Command paidCommand = new Command() {
-					private static final long serialVersionUID = 4549981408026393913L;
-
-					public void execute() {
-						;
+				
+				final StringBuilder sb = new StringBuilder();
+				sb.append("Echo for ").append(c).append("\n");
+				
+				final Ability sacAbility = new Ability(c, c.getEchoCost()) {
+					@Override
+					public void resolve() {
+						payManaDuringAbilityResolve(sb.toString(), c.getEchoCost(), paidCommand, unpaidCommand);
 					}
 				};
+				sacAbility.setStackDescription(sb.toString());
 
-				//AllZone.Stack.add(sacAbility);
 				if(c.getController().equals(AllZone.HumanPlayer)) {
-					AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Echo for " + c + "\r\n",
-							sacAbility.getManaCost(), paidCommand, unpaidCommand));
-				} else //computer
+					AllZone.Stack.add(sacAbility);
+				} 
+				else //computer
 				{
-					if(ComputerUtil.canPayCost(sacAbility)) ComputerUtil.playNoStack(sacAbility);
-					else AllZone.GameAction.sacrifice(c);
+					if(ComputerUtil.canPayCost(sacAbility)) 
+						ComputerUtil.playNoStack(sacAbility);
+					else 
+						AllZone.GameAction.sacrifice(c);
 				}
 
 				c.removeIntrinsicKeyword("(Echo unpaid)");
@@ -3348,29 +3373,8 @@ public class GameActionUtil {
 		}
 	}//echo
 
-	public static void upkeep_Suspend() {
-		Player player = AllZone.Phase.getActivePlayer();
-
-		PlayerZone exile = AllZone.getZone(Constant.Zone.Removed_From_Play, player);
-		CardList list = new CardList();
-		list.addAll(exile.getCards());
-		//list = list.getType("Creature");
-		list = list.filter(new CardListFilter() {
-			public boolean addCard(Card c) {
-				return c.hasSuspend();
-			}
-		});
-
-		if (list.size() == 0) return;
-		
-		for(final Card c : list){
-			int counters = c.getCounters(Counters.TIME);
-			if (counters > 0) c.subtractCounter(Counters.TIME, 1);
-		}
-	}//suspend	
-
 	private static void upkeep_UpkeepCost() {
-		Player player = AllZone.Phase.getActivePlayer();
+		Player player = AllZone.Phase.getPlayerTurn();
 
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
 		CardList list = new CardList();
@@ -3394,13 +3398,6 @@ public class GameActionUtil {
 		for(int i = 0; i < list.size(); i++) {
 			final Card c = list.get(i);
 
-			final Ability sacAbility = new Ability(c, c.getUpkeepCost()) {
-				@Override
-				public void resolve() {
-					;
-				}
-			};
-
 			final Command unpaidCommand = new Command() {
 
 				private static final long serialVersionUID = -6483405139208343935L;
@@ -3417,21 +3414,29 @@ public class GameActionUtil {
 					;
 				}
 			};
-
-			//AllZone.Stack.add(sacAbility);
+			
+			final StringBuilder sb = new StringBuilder();
+			sb.append("Upkeep for ").append(c).append("\n");
+			final Ability upkeepAbility = new Ability(c, c.getUpkeepCost()) {
+				@Override
+				public void resolve() {
+					payManaDuringAbilityResolve(sb.toString(), c.getUpkeepCost(), paidCommand, unpaidCommand);
+				}
+			};
+			upkeepAbility.setStackDescription(sb.toString());
 			if(c.getController().equals(AllZone.HumanPlayer)) {
-				AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Upkeep for " + c + "\r\n",
-						sacAbility.getManaCost(), paidCommand, unpaidCommand));
-			} else //computer
+				AllZone.Stack.add(upkeepAbility);
+			} 
+			else //computer
 			{
-				if(ComputerUtil.canPayCost(sacAbility)) ComputerUtil.playNoStack(sacAbility);
+				if(ComputerUtil.canPayCost(upkeepAbility)) ComputerUtil.playNoStack(upkeepAbility);
 				else AllZone.GameAction.sacrifice(c);
 			}
 		}
 	}//upkeepCost
 
 	private static void upkeep_DestroyUpkeepCost() {
-		Player player = AllZone.Phase.getActivePlayer();
+		Player player = AllZone.Phase.getPlayerTurn();
 
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
 		CardList list = new CardList();
@@ -3454,13 +3459,6 @@ public class GameActionUtil {
 		for(int i = 0; i < list.size(); i++) {
 			final Card c = list.get(i);
 
-			final Ability sacAbility = new Ability(c, c.getUpkeepCost()) {
-				@Override
-				public void resolve() {
-					;
-				}
-			};
-
 			final Command unpaidCommand = new Command() {
 				private static final long serialVersionUID = 8942537892273123542L;
 
@@ -3481,14 +3479,22 @@ public class GameActionUtil {
 					;
 				}
 			};
-
-			//AllZone.Stack.add(sacAbility);
+			
+			final StringBuilder sb = new StringBuilder();
+			sb.append("Upkeep for ").append(c).append("\n");
+			final Ability upkeepAbility = new Ability(c, c.getUpkeepCost()) {
+				@Override
+				public void resolve() {
+					payManaDuringAbilityResolve(sb.toString(), c.getUpkeepCost(), paidCommand, unpaidCommand);
+				}
+			};
+			upkeepAbility.setStackDescription(sb.toString());
 			if(c.getController().equals(AllZone.HumanPlayer)) {
-				AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Upkeep for " + c + "\r\n",
-						sacAbility.getManaCost(), paidCommand, unpaidCommand));
-			} else //computer
+				AllZone.Stack.add(upkeepAbility);
+			} 
+			else //computer
 			{
-				if(ComputerUtil.canPayCost(sacAbility)) ComputerUtil.playNoStack(sacAbility);
+				if(ComputerUtil.canPayCost(upkeepAbility)) ComputerUtil.playNoStack(upkeepAbility);
 				else AllZone.GameAction.destroy(c);
 			}
 		}
@@ -3496,7 +3502,7 @@ public class GameActionUtil {
 
 
 	private static void upkeep_DamageUpkeepCost() {
-		Player player = AllZone.Phase.getActivePlayer();
+		Player player = AllZone.Phase.getPlayerTurn();
 
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
 		CardList list = new CardList();
@@ -3527,20 +3533,11 @@ public class GameActionUtil {
 		for(int i = 0; i < list.size(); i++) {
 			final Card c = list.get(i);
 
-			final Ability sacAbility = new Ability(c, c.getUpkeepCost()) {
-				@Override
-				public void resolve() {
-					;
-				}
-			};
-
 			final Command unpaidCommand = new Command() {
 				private static final long serialVersionUID = 8942537892273123542L;
 
 				public void execute() {
-					//AllZone.GameAction.sacrifice(c);
 					Player player = c.getController();
-					//AllZone.GameAction.addDamage(player, c, c.getUpkeepDamage());
 					player.addDamage(c.getUpkeepDamage(), c);
 				}
 			};
@@ -3552,14 +3549,22 @@ public class GameActionUtil {
 					;
 				}
 			};
-
-			//AllZone.Stack.add(sacAbility);
+			
+			final StringBuilder sb = new StringBuilder();
+			sb.append("Upkeep for ").append(c).append("\n");
+			final Ability upkeepAbility = new Ability(c, c.getUpkeepCost()) {
+				@Override
+				public void resolve() {
+					payManaDuringAbilityResolve(sb.toString(), c.getUpkeepCost(), paidCommand, unpaidCommand);
+				}
+			};
+			upkeepAbility.setStackDescription(sb.toString());
 			if(c.getController().equals(AllZone.HumanPlayer)) {
-				AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Upkeep for " + c + "\r\n",
-						sacAbility.getManaCost(), paidCommand, unpaidCommand));
-			} else //computer
+				AllZone.Stack.add(upkeepAbility);
+			} 
+			else //computer
 			{
-				if(ComputerUtil.canPayCost(sacAbility)) ComputerUtil.playNoStack(sacAbility);
+				if(ComputerUtil.canPayCost(upkeepAbility)) ComputerUtil.playNoStack(upkeepAbility);
 				else AllZone.GameAction.sacrifice(c);
 			}
 		}
@@ -3571,7 +3576,7 @@ public class GameActionUtil {
 		 * nonartifact creature that player controls of his or her
 		 * choice. It can't be regenerated.
 		 */
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		final CardList the = AllZoneUtil.getCardsInPlay("The Abyss");
 		final CardList magus = AllZoneUtil.getCardsInPlay("Magus of the Abyss");
 		
@@ -3641,7 +3646,7 @@ public class GameActionUtil {
 		 * nonartifact creature that player controls of his or her
 		 * choice. It can't be regenerated.
 		 */
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		final CardList defilers = AllZoneUtil.getCardsInPlay("Defiler of Souls");
 		
 		for(Card c:defilers) {
@@ -3695,7 +3700,7 @@ public class GameActionUtil {
 		 * At the beginning of your upkeep, you may sacrifice an artifact. If
 		 * you don't, tap Yawgmoth Demon and it deals 2 damage to you.
 		 */
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		final CardList cards = AllZoneUtil.getPlayerCardsInPlay(player, "Yawgmoth Demon");
 
 		for(int i = 0; i < cards.size(); i++) {
@@ -3758,7 +3763,7 @@ public class GameActionUtil {
 		 * At the beginning of your upkeep, sacrifice a creature other than
 		 * Lord of the Pit. If you can't, Lord of the Pit deals 7 damage to you.
 		 */
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList lords = AllZoneUtil.getPlayerCardsInPlay(player, "Lord of the Pit");
 		lords.add(AllZoneUtil.getPlayerCardsInPlay(player, "Liege of the Pit"));
 		final CardList cards = lords;
@@ -3821,7 +3826,7 @@ public class GameActionUtil {
 		 * 
 		 * When there are no creatures on the battlefield, sacrifice Drop of Honey.
 		 */
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList drops = AllZoneUtil.getPlayerCardsInPlay(player, "Drop of Honey");
 		drops.add(AllZoneUtil.getPlayerCardsInPlay(player, "Porphyry Nodes"));
 		final CardList cards = drops;
@@ -3898,7 +3903,7 @@ public class GameActionUtil {
 		 * you may pay 2G. If you do, return target creature card from your 
 		 * graveyard to your hand.
 		 */
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		final CardList grave = AllZoneUtil.getPlayerGraveyard(player, "Genesis");
 
 		for(int i = 0; i < grave.size(); i++) {
@@ -3959,8 +3964,8 @@ public class GameActionUtil {
 				String[] choices = {"Yes", "No"};
 				Object choice = AllZone.Display.getChoice("Use Genesis?", choices);
 				if(choice.equals("Yes")) {
-				AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Pay cost for " + c + "\r\n",
-						ability.getManaCost(), paidCommand, unpaidCommand));
+					GameActionUtil.payManaDuringAbilityResolve("Pay cost for " + c + "\r\n", ability.getManaCost(), 
+							paidCommand, unpaidCommand);
 				}
 			} else //computer
 			{
@@ -3982,7 +3987,7 @@ public class GameActionUtil {
 
     public static void endOfTurn_Wall_Of_Reverence()
     {
-        final Player player = AllZone.Phase.getActivePlayer();
+        final Player player = AllZone.Phase.getPlayerTurn();
         final PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
         CardList list = new CardList(playZone.getCards());
         list = list.getName("Wall of Reverence");
@@ -4038,7 +4043,7 @@ public class GameActionUtil {
 	
 	public static void endOfTurn_Predatory_Advantage()
 	{
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player.getOpponent());
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Predatory Advantage");
@@ -4052,7 +4057,7 @@ public class GameActionUtil {
 	
 	public static void endOfTurn_Lighthouse_Chronologist() 
 	{
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		final Player opponent = player.getOpponent();
 		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, opponent);
 		CardList list = new CardList(playZone.getCards());
@@ -4087,7 +4092,7 @@ public class GameActionUtil {
 	
 	public static void endOfTurn_Thran_Quarry() 
 	{
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		final Player opponent = player.getOpponent();
 		controlNoTypeSacrifice("Thran Quarry", "Creature", player);
 		controlNoTypeSacrifice("Thran Quarry", "Creature", opponent);
@@ -4095,7 +4100,7 @@ public class GameActionUtil {
 	
 	public static void endOfTurn_Glimmervoid() 
 	{ 		
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		final Player opponent = player.getOpponent();
 		controlNoTypeSacrifice("Glimmervoid", "Artifact", player);
 		controlNoTypeSacrifice("Glimmervoid", "Artifact", opponent);
@@ -4121,7 +4126,7 @@ public class GameActionUtil {
 
 	public static void endOfTurn_Krovikan_Horror()
 	{
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		final Player opponent = player.getOpponent();
 		horrorReturn(player);
 		horrorReturn(opponent);
@@ -4148,7 +4153,7 @@ public class GameActionUtil {
 
 	public static void removeAttackedBlockedThisTurn() {
 		// resets the status of attacked/blocked this turn
-		Player player = AllZone.Phase.getActivePlayer();
+		Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList();
@@ -4948,7 +4953,8 @@ public class GameActionUtil {
 		}
 
 		else if(c.getController().equals(AllZone.ComputerPlayer)) {
-			ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+			//ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+			ability.setTargetPlayer(AllZone.HumanPlayer);
 			AllZone.Stack.add(ability);
 
 		}
@@ -6245,7 +6251,7 @@ public class GameActionUtil {
 	@SuppressWarnings("unused")
 	// upkeep_CheckEmptyDeck_Lose
 	private static void upkeep_CheckEmptyDeck_Lose() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone libraryZone = AllZone.getZone(Constant.Zone.Library, player);
 
 		System.out.println("libraryZone.size: " + libraryZone.size() + " phase: " + AllZone.Phase.getPhase()
@@ -6284,7 +6290,7 @@ public class GameActionUtil {
 	}
 
 	private static void upkeep_Land_Tax() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -6382,7 +6388,7 @@ public class GameActionUtil {
 	
 	private static void upkeep_Mana_Vault() {
 		//this card is filtered out for the computer, so we will only worry about Human here
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		if(player.equals(AllZone.HumanPlayer)) {  //in case stupid computer takes control
 			CardList vaults = AllZoneUtil.getPlayerCardsInPlay(player, "Mana Vault");
 			for(Card vault:vaults) {
@@ -6416,7 +6422,7 @@ public class GameActionUtil {
 	
 	private static void upkeep_Feedback() {
 		final String auraName = "Feedback";
-        final Player player = AllZone.Phase.getActivePlayer();
+        final Player player = AllZone.Phase.getPlayerTurn();
         PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
         
         CardList list = new CardList(playZone.getCards());
@@ -6454,7 +6460,7 @@ public class GameActionUtil {
 	
 	private static void upkeep_Warp_Artifact() {
 		final String auraName = "Warp Artifact";
-        final Player player = AllZone.Phase.getActivePlayer();
+        final Player player = AllZone.Phase.getPlayerTurn();
         PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
         
         CardList list = new CardList(playZone.getCards());
@@ -6492,7 +6498,7 @@ public class GameActionUtil {
 	
 	private static void upkeep_Soul_Bleed() {
 		final String auraName = "Soul Bleed";
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -6526,7 +6532,7 @@ public class GameActionUtil {
 	
 	private static void upkeep_Wanderlust() {
 		final String auraName = "Wanderlust";
-        final Player player = AllZone.Phase.getActivePlayer();
+        final Player player = AllZone.Phase.getPlayerTurn();
         PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
         
         CardList list = new CardList(playZone.getCards());
@@ -6564,7 +6570,7 @@ public class GameActionUtil {
 	
 	private static void upkeep_Curse_of_Chains() {
 		final String auraName = "Curse of Chains";
-        final Player player = AllZone.Phase.getActivePlayer();
+        final Player player = AllZone.Phase.getPlayerTurn();
         PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
         
         CardList list = new CardList(playZone.getCards());
@@ -6603,7 +6609,7 @@ public class GameActionUtil {
 	
 	private static void upkeep_Festering_Wound_Counter() {
 		final String auraName = "Festering Wound";
-        final Player player = AllZone.Phase.getActivePlayer();
+        final Player player = AllZone.Phase.getPlayerTurn();
         PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
         
         CardList list = new CardList(playZone.getCards());
@@ -6633,7 +6639,7 @@ public class GameActionUtil {
 	
 	private static void upkeep_Festering_Wound_Damage() {
 		final String auraName = "Festering Wound";
-        final Player player = AllZone.Phase.getActivePlayer();
+        final Player player = AllZone.Phase.getPlayerTurn();
         PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
         
         CardList list = new CardList(playZone.getCards());
@@ -6672,7 +6678,7 @@ public class GameActionUtil {
     }//upkeep_Festering_Wound_Damage()
 
 	private static void upkeep_Squee() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
 
 		CardList list = new CardList(graveyard.getCards());
@@ -6708,14 +6714,14 @@ public class GameActionUtil {
 
 			};// Ability
 			ability.setStackDescription("Squee gets returned from graveyard to hand.");
-			AllZone.Stack.add(ability);
+			AllZone.Stack.push(ability);
 		} // if creatures > 0
 
 	}
 
 	/*
 	private static void upkeep_AEther_Vial() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -6757,7 +6763,7 @@ public class GameActionUtil {
 	*/
 
 	private static void upkeep_Dragonmaster_Outcast() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -6790,7 +6796,7 @@ public class GameActionUtil {
 	 * onto the battlefield for each Equipment attached to Kemba, Kha Regent.
 	 */
 	private static void upkeep_Kemba_Kha_Regent() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Kemba, Kha Regent");
 		
 		for(Card src:list) {
@@ -6812,7 +6818,7 @@ public class GameActionUtil {
 	};
 
 	private static void upkeep_Scute_Mob() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -6841,7 +6847,7 @@ public class GameActionUtil {
 
 
 	private static void upkeep_Sporesower_Thallid() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -6871,7 +6877,7 @@ public class GameActionUtil {
 	}
 
 	private static void upkeep_Lichenthrope() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -6905,7 +6911,7 @@ public class GameActionUtil {
 
 
 	private static void upkeep_Heartmender() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -6943,7 +6949,7 @@ public class GameActionUtil {
 	}//heartmender
 
 	private static void upkeep_Ratcatcher() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
 
@@ -6992,7 +6998,7 @@ public class GameActionUtil {
 	}
 
 	private static void upkeep_Nath() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		final Player opponent = player.getOpponent();
 
 		PlayerZone zone1 = AllZone.getZone(Constant.Zone.Play, player);
@@ -7019,7 +7025,7 @@ public class GameActionUtil {
 	}
 
 	private static void upkeep_Anowon() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Anowon, the Ruin Sage");
 
 		if(list.size() > 0) {
@@ -7053,7 +7059,7 @@ public class GameActionUtil {
 	}
 
 	private static void upkeep_Cunning_Lethemancer() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 
 		PlayerZone zone1 = AllZone.getZone(Constant.Zone.Play, player);
 
@@ -7087,7 +7093,7 @@ public class GameActionUtil {
 	}
 
 	private static void upkeep_Sensation_Gorger() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		final Player opponent = player.getOpponent();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
@@ -7138,7 +7144,7 @@ public class GameActionUtil {
 	}// upkeep_Sensation_Gorger() 
 
 	private static void upkeep_Winnower_Patrol() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
 
@@ -7209,7 +7215,7 @@ public class GameActionUtil {
 	}// upkeep_Winnower_Patrol()
 
 	private static void upkeep_Nightshade_Schemers() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		final Player opponent = player.getOpponent();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
@@ -7260,7 +7266,7 @@ public class GameActionUtil {
 	}// upkeep_Nightshade_Schemers()
 
 	private static void upkeep_Wandering_Graybeard() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
 
@@ -7312,7 +7318,7 @@ public class GameActionUtil {
 	}// upkeep_Wandering_Graybeard()
 
 	private static void upkeep_Wolf_Skull_Shaman() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
 
@@ -7364,7 +7370,7 @@ public class GameActionUtil {
 	}// upkeep_Wolf_Skull_Shaman()
 
 	private static void upkeep_Benthic_Djinn() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -7386,7 +7392,7 @@ public class GameActionUtil {
 	}// upkeep_Benthic_Djinn()   
 	
     private static void upkeep_Leaf_Crowned_Elder() {
-        final Player player = AllZone.Phase.getActivePlayer();
+        final Player player = AllZone.Phase.getPlayerTurn();
         PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
         PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
 
@@ -7464,7 +7470,7 @@ public class GameActionUtil {
 	
 	
     private static void upkeep_Ink_Dissolver() {
-        final Player player = AllZone.Phase.getActivePlayer();
+        final Player player = AllZone.Phase.getPlayerTurn();
         final Player opponent = player.getOpponent();
         PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
         PlayerZone playerLibrary = AllZone.getZone(Constant.Zone.Library, player);
@@ -7529,7 +7535,7 @@ public class GameActionUtil {
 
 
 	private static void upkeep_Dark_Confidant() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
 
@@ -7572,7 +7578,7 @@ public class GameActionUtil {
 	}// upkeep_Dark_Confidant()
 
 	private static void upkeep_Debtors_Knell() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
 		PlayerZone oppGrave = AllZone.getZone(Constant.Zone.Graveyard, player.getOpponent());
@@ -7629,7 +7635,7 @@ public class GameActionUtil {
 	}
 
 	private static void upkeep_Emeria() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
 
@@ -7678,7 +7684,7 @@ public class GameActionUtil {
 	}
 
 	private static void upkeep_Oversold_Cemetery() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList cemeteryList = AllZoneUtil.getPlayerCardsInPlay(player, "Oversold Cemetery");
 		if (cemeteryList.isEmpty())
 			return;
@@ -7719,7 +7725,7 @@ public class GameActionUtil {
 	}//Oversold Cemetery
 
 	private static void upkeep_Reya() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
 
@@ -7762,7 +7768,7 @@ public class GameActionUtil {
 	} // reya
 
 	private static void upkeep_Wort() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
 
@@ -7809,7 +7815,7 @@ public class GameActionUtil {
 	} // Wort
 
 	private static void upkeep_Nether_Spirit() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		final PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
 		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
@@ -7846,7 +7852,7 @@ public class GameActionUtil {
 	}//nether spirit
 
 	private static void upkeep_Spore_Counters() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -7866,9 +7872,30 @@ public class GameActionUtil {
 		}
 	}
 
+	public static void upkeep_Suspend() {
+		Player player = AllZone.Phase.getPlayerTurn();
+
+		PlayerZone exile = AllZone.getZone(Constant.Zone.Removed_From_Play, player);
+		CardList list = new CardList();
+		list.addAll(exile.getCards());
+		//list = list.getType("Creature");
+		list = list.filter(new CardListFilter() {
+			public boolean addCard(Card c) {
+				return c.hasSuspend();
+			}
+		});
+
+		if (list.size() == 0) return;
+		
+		for(final Card c : list){
+			int counters = c.getCounters(Counters.TIME);
+			if (counters > 0) c.subtractCounter(Counters.TIME, 1);
+		}
+	}//suspend	
+	
 	private static void upkeep_Vanishing() {
 
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		CardList list = new CardList(playZone.getCards());
 		list = list.filter(new CardListFilter() {
@@ -7898,7 +7925,7 @@ public class GameActionUtil {
 	
 	private static void upkeep_Fading() {
 
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		CardList list = new CardList(playZone.getCards());
 		list = list.filter(new CardListFilter() {
@@ -7931,7 +7958,7 @@ public class GameActionUtil {
 	}
 
 	private static void upkeep_Defense_of_the_Heart() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		final Player opponent = player.getOpponent();
 
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
@@ -8027,7 +8054,7 @@ public class GameActionUtil {
 		if (oathList.isEmpty())
 			return;
 		
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 
 		if (AllZoneUtil.compareTypeAmountInPlay(player, "Creature") < 0){
 			for(int i = 0; i < oathList.size(); i++) {
@@ -8094,7 +8121,7 @@ public class GameActionUtil {
 		if (oathList.isEmpty())
 			return;
 		
-		final Player player = AllZone.Phase.getActivePlayer();	
+		final Player player = AllZone.Phase.getPlayerTurn();	
 		
 		if (AllZoneUtil.compareTypeAmountInGraveyard(player, "Creature") > 0)
 		{
@@ -8137,7 +8164,7 @@ public class GameActionUtil {
 	}//Oath of Ghouls
 	
 	private static void upkeep_Ancient_Runes() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		
 		CardList ancient_runes = AllZoneUtil.getCardsInPlay("Ancient Runes");
 		
@@ -8171,7 +8198,7 @@ public class GameActionUtil {
 	}// upkeep_Ancient_Runes()
 	
 	private static void upkeep_Karma() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList karmas = AllZoneUtil.getCardsInPlay("Karma");
 		CardList swamps = AllZoneUtil.getPlayerTypeInPlay(player, "Swamp");
 		
@@ -8204,7 +8231,7 @@ public class GameActionUtil {
 	}// upkeep_Karma()
 	
 	private static void upkeep_Convalescence() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		//final PlayerLife pLife = AllZone.GameAction.getPlayerLife(player);
 
@@ -8233,7 +8260,7 @@ public class GameActionUtil {
 	}// upkeep_Convalescence()
 
 	private static void upkeep_Convalescent_Care() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -8265,7 +8292,7 @@ public class GameActionUtil {
 	}// upkeep_Convalescence()
 
 	private static void upkeep_Ivory_Tower() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList hand = AllZoneUtil.getPlayerHand(player);
 		
 		if(hand.size() <= 4) {
@@ -8295,7 +8322,7 @@ public class GameActionUtil {
 	}//upkeep_Ivory Tower()
 	
 	private static void upkeep_Vensers_Journal() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		final CardList hand = AllZoneUtil.getPlayerHand(player);
 		
 		if(0 == hand.size()) {
@@ -8325,7 +8352,7 @@ public class GameActionUtil {
 	//so, we'll put The Rack next to Black Vise
 	private static void upkeep_The_Rack() {
 		// sanity check. If a player has >= 3 cards The Rack does nothing.
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		final int playerHandSize = AllZone.getZone(Constant.Zone.Hand, player).size();
 
 		if(playerHandSize >= 3) {
@@ -8368,7 +8395,7 @@ public class GameActionUtil {
 	
 	private static void upkeep_Storm_World() {
 		// sanity check. If a player has >= 3 cards The Rack does nothing.
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		final int playerHandSize = AllZoneUtil.getPlayerHand(player).size();
 
 		if(playerHandSize >= 4) {
@@ -8405,7 +8432,7 @@ public class GameActionUtil {
 	// at the end.
 	private static void upkeep_BlackVise() {
 		// sanity check. If a player has <= 4 cards black vise does nothing.
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		final int playerHandSize = AllZone.getZone(Constant.Zone.Hand, player).size();
 
 		if(playerHandSize <= 4) {
@@ -8446,7 +8473,7 @@ public class GameActionUtil {
 		 * At the beginning of each player's upkeep, Copper Tablet deals 1
 		 * damage to that player.
 		 */
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList list = AllZoneUtil.getCardsInPlay("Copper Tablet");
 
 		Ability ability;
@@ -8472,7 +8499,7 @@ public class GameActionUtil {
 		 * At the beginning of each player's upkeep, Sulfuric Vortex deals 2
 		 * damage to that player.
 		 */
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList list = AllZoneUtil.getCardsInPlay("Sulfuric Vortex");
 
 		Ability ability;
@@ -8499,7 +8526,7 @@ public class GameActionUtil {
 		 * damage to that player, where X is the number of untapped
 		 * lands he or she controlled at the beginning of this turn.
 		 */
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList list = AllZoneUtil.getCardsInPlay("Power Surge");
 		final int damage = player.getNumPowerSurgeLands();
 
@@ -8523,7 +8550,7 @@ public class GameActionUtil {
 	}// upkeep_Power_Surge()
 
 	private static void upkeep_Klass() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList elf = new CardList(playZone.getCards());
@@ -8550,7 +8577,7 @@ public class GameActionUtil {
 	}// upkeep_Klass
 
 	private static void upkeep_Felidar_Sovereign() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		//PlayerLife plife = AllZone.GameAction.getPlayerLife(player);
@@ -8585,7 +8612,7 @@ public class GameActionUtil {
 	}// upkeep_Felidar_Sovereign
 
 	private static void upkeep_Battle_of_Wits() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		PlayerZone libraryZone = AllZone.getZone(Constant.Zone.Library, player);
 
@@ -8620,7 +8647,7 @@ public class GameActionUtil {
 	}// upkeep_Battle_of_Wits
 	
 	private static void upkeep_Mortal_Combat() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Mortal Combat");
 		CardList grave = AllZoneUtil.getPlayerGraveyard(player);
@@ -8653,7 +8680,7 @@ public class GameActionUtil {
 	}// upkeep_Mortal Combat
 
 	private static void upkeep_Epic_Struggle() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -8688,7 +8715,7 @@ public class GameActionUtil {
 	}// upkeep_Epic_Struggle
 
 	private static void upkeep_Helix_Pinnacle() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -8723,7 +8750,7 @@ public class GameActionUtil {
 		/*
 		 * At the beginning of your upkeep, if you have exactly 1 life, you win the game.
 		 */
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		//PlayerLife life = AllZone.GameAction.getPlayerLife(player);
 		
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Near-Death Experience");
@@ -8759,7 +8786,7 @@ public class GameActionUtil {
 		/*
 		 * At the beginning of your upkeep, if you have exactly 50 or more life, you win the game.
 		 */
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Test of Endurance");
 		
@@ -8791,7 +8818,7 @@ public class GameActionUtil {
 
 
 	private static void upkeep_Barren_Glory() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		PlayerZone handZone = AllZone.getZone(Constant.Zone.Hand, player);
 
@@ -8831,7 +8858,7 @@ public class GameActionUtil {
 	}// upkeep_Barren_Glory
 
 	private static void upkeep_Sleeper_Agent() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -8854,7 +8881,7 @@ public class GameActionUtil {
 	}
 
 	private static void upkeep_Cursed_Land() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -8892,7 +8919,7 @@ public class GameActionUtil {
 	}//cursed land
 
 	private static void upkeep_Pillory_of_the_Sleepless() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -8930,7 +8957,7 @@ public class GameActionUtil {
 
 
 	private static void upkeep_Greener_Pastures() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		PlayerZone oppPlayZone = AllZone.getZone(Constant.Zone.Play, player.getOpponent());
 
@@ -8972,7 +8999,7 @@ public class GameActionUtil {
 	}// upkeep_Greener_Pastures()
 
 	private static void upkeep_Bitterblossom() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -8999,7 +9026,7 @@ public class GameActionUtil {
 	}// upkeep_Bitterblossom()
 
 	private static void upkeep_Goblin_Assault() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -9026,7 +9053,7 @@ public class GameActionUtil {
 	}// upkeep_Goblin_Assault()
 	
 	private static void upkeep_Awakening_Zone() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -9055,7 +9082,7 @@ public class GameActionUtil {
 	}// upkeep_Awakening_Zone()
 	
 	private static void upkeep_Nut_Collector() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -9082,7 +9109,7 @@ public class GameActionUtil {
 	}// upkeep_Nut_Collector()
 
 	private static void upkeep_Masticore() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -9142,7 +9169,7 @@ public class GameActionUtil {
 
 
 	private static void upkeep_Eldrazi_Monument() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -9189,7 +9216,7 @@ public class GameActionUtil {
 	}//upkeep_Eldrazi_Monument
 
 	private static void upkeep_Blaze_Counters() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList blaze = new CardList(playZone.getCards());
@@ -9219,7 +9246,7 @@ public class GameActionUtil {
 	}
 	
 	private static void upkeep_Mycoloth() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		final int[] number = new int[1];
 
@@ -9256,7 +9283,7 @@ public class GameActionUtil {
 	}// upkeep_Mycoloth()
 	
 	private static void upkeep_Verdant_Force() {
-		//final Player player = AllZone.Phase.getActivePlayer();
+		//final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
 		PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
 
@@ -9332,7 +9359,7 @@ public class GameActionUtil {
 
 						@Override
 						public boolean canPlay() {
-							return AllZone.Phase.getActivePlayer().equals(card.getController())
+							return AllZone.Phase.getPlayerTurn().equals(card.getController())
 							&& card.isFaceDown() && !AllZone.Phase.getPhase().equals("End of Turn")
 							&& AllZone.GameAction.isCardInPlay(card);
 						}
@@ -9412,7 +9439,7 @@ public class GameActionUtil {
 	}// upkeep_Dragon_Broodmother()
 
 	private static void upkeep_Bringer_of_the_Green_Dawn() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -9452,7 +9479,7 @@ public class GameActionUtil {
 	}// upkeep_Bringer_of_the_Green_Dawn()
 
 	private static void upkeep_Bringer_of_the_Blue_Dawn() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -9464,7 +9491,7 @@ public class GameActionUtil {
 	}// upkeep_Bringer_of_the_Blue_Dawn()
 
 	private static void upkeep_Bringer_of_the_White_Dawn() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
 
@@ -9531,7 +9558,7 @@ public class GameActionUtil {
 
 
 	private static void upkeep_Serendib_Efreet() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -9556,7 +9583,7 @@ public class GameActionUtil {
 	}// upkeep_Serendib_Efreet()
 
 	private static void upkeep_Nettletooth_Djinn() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -9579,24 +9606,6 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}// for
 	}// upkeep_Nettletooth_Djinn()
-
-	static boolean draw_ShouldSkipDraw(Player player){
-    	if(AllZone.Phase.getTurn() == 1){
-            return true;
-    	}
-    	// Any card that says Skip your draw phase
-    	// todo: this would be better off as a keyword SkipPhase:Draw
-        CardList cards = new CardList();
-        
-        cards.addAll(AllZone.getZone(Constant.Zone.Play, player).getCards());
-        boolean skipDraw = false;
-        for(Card c : cards){
-        	if (c.getName().equals("Necropotence") || c.getName().equals("Yawgmoth's Bargain"))
-        		skipDraw = true;
-        }
-        
-        return (AllZone.Phase.getPhase().equals(Constant.Phase.Draw) && skipDraw);
-	}
 	
 	private static void draw_Howling_Mine(Player player) {
 		CardList list = AllZoneUtil.getCardsInPlay("Howling Mine");
@@ -9692,7 +9701,7 @@ public class GameActionUtil {
 	}
 	
 	private static void upkeep_Carnophage() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList();
@@ -9716,7 +9725,7 @@ public class GameActionUtil {
 	}// upkeep_Carnophage
 
 	private static void upkeep_Sangrophage() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList();
@@ -9740,7 +9749,7 @@ public class GameActionUtil {
 	}// upkeep_Carnophage
 
 	private static void upkeep_Phyrexian_Arena() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList();
@@ -9758,7 +9767,7 @@ public class GameActionUtil {
 	}// upkeep_Phyrexian_Arena
 	
 	private static void upkeep_Fallen_Empires_Storage_Lands() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 
 		CardList all = AllZoneUtil.getPlayerCardsInPlay(player, "Bottomless Vault");
 		all.add(AllZoneUtil.getPlayerCardsInPlay(player, "Dwarven Hold"));
@@ -9772,7 +9781,7 @@ public class GameActionUtil {
 	}// upkeep_Phyrexian_Arena
 
 	private static void upkeep_Master_of_the_Wild_Hunt() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList();
@@ -9787,7 +9796,7 @@ public class GameActionUtil {
 	}// upkeep_Master_of_the_Wild_Hunt
 	
 	private static void upkeep_Honden_of_Seeing_Winds() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList();
@@ -9806,7 +9815,7 @@ public class GameActionUtil {
 	}// upkeep_Honden_of_Seeing_Winds
 
 	private static void upkeep_Honden_of_Cleansing_Fire() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList();
@@ -9837,7 +9846,7 @@ public class GameActionUtil {
 	}// upkeep_Honden_of_Cleansing_Fire
 
 	private static void upkeep_Honden_of_Nights_Reach() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		final Player opponent = player.getOpponent();
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
 
@@ -9876,7 +9885,7 @@ public class GameActionUtil {
 	// upkeep_Honden_of_Nights_Reach()
 
 	private static void upkeep_Honden_of_Infinite_Rage() {
-		final Player controller = AllZone.Phase.getActivePlayer();
+		final Player controller = AllZone.Phase.getPlayerTurn();
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
 
 		CardList list = new CardList();
@@ -9960,7 +9969,7 @@ public class GameActionUtil {
 
 
 	private static void upkeep_Honden_of_Lifes_Web() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList();
@@ -9994,7 +10003,7 @@ public class GameActionUtil {
 	}// upkeep_Honden_of_Lifes_Web
 
 	private static void upkeep_Seizan_Perverter_of_Truth() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 
 		// get all creatures
 		CardList list = AllZoneUtil.getCardsInPlay("Seizan, Perverter of Truth");
@@ -10020,7 +10029,7 @@ public class GameActionUtil {
 	}// upkeep_Seizan_Perverter_of_Truth()
 
 	private static void upkeep_Moroii() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Moroii");
 		for(int i = 0; i < list.size(); i++) {
 			final Card F_card = list.get(i);
@@ -10029,7 +10038,7 @@ public class GameActionUtil {
 	}// upkeep_Moroii
 
 	private static void upkeep_Vampire_Lacerator() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList();
@@ -10050,7 +10059,7 @@ public class GameActionUtil {
 	}// upkeep_Vampire_Lacerator
 
 	private static void upkeep_Grinning_Demon() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Grinning Demon");
 
 		Ability ability;
@@ -10074,7 +10083,7 @@ public class GameActionUtil {
 	}// upkeep_Grinning_Demon()
 
 	private static void upkeep_Juzam_Djinn() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Juzam Djinn");
 
 		Ability ability;
@@ -10096,7 +10105,7 @@ public class GameActionUtil {
 	}// upkeep_Juzam_Djinn()
 
 	private static void upkeep_Fledgling_Djinn() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -10121,7 +10130,7 @@ public class GameActionUtil {
 	}// upkeep_Fledgling_Djinn()
 	
 	private static void upkeep_Creakwood_Liege() {
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -10162,7 +10171,7 @@ public class GameActionUtil {
 	
 	private static void upkeep_Murkfiend_Liege()
 	{
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		final Player opp = player.getOpponent();
 		
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(opp);
@@ -10202,7 +10211,7 @@ public class GameActionUtil {
 	
 	private static void upkeep_Seedborn_Muse()
 	{
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		final Player opp = player.getOpponent();
 		
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(opp);
@@ -10242,7 +10251,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Mirror_Sigil_Sergeant()
 	{
-		final Player player = AllZone.Phase.getActivePlayer();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
 
 		list = list.getName("Mirror-Sigil Sergeant");
@@ -12330,7 +12339,7 @@ public class GameActionUtil {
 		private static final long serialVersionUID = 4129359648989610278L;
 
 		public void execute() {
-			Player player = AllZone.Phase.getActivePlayer();
+			Player player = AllZone.Phase.getPlayerTurn();
 			
 			// get all creatures
 			CardList mobs = AllZoneUtil.getCardsInPlay("Angry Mob");
@@ -13560,65 +13569,6 @@ public class GameActionUtil {
 			}// for
 		}// execute
 	}; // Windwright Mage
-
-	/*
-	// Reach of Branches
-	public static Command Reach_of_Branches           = new Command() {
-		private static final long serialVersionUID = 9191592685635589492L;
-
-		CardList                  oldForest        = new CardList();
-
-		public void execute() {
-			// count card "Reach of Branches" in graveyard
-			final Player player = AllZone.Phase.getActivePlayer();
-			final PlayerZone grave = AllZone.getZone(
-					Constant.Zone.Graveyard, player);
-			CardList tempList = new CardList(grave.getCards());
-			final CardList nCard = tempList.getName("Reach of Branches");
-
-			// get all Forest that player has
-			final PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, player);
-			CardList newForest = new CardList(play.getCards());
-			newForest = newForest.getType("Forest");
-
-			// if "Reach of Branches" is in graveyard and played a Forest
-			if(0 < nCard.size()
-					&& newForest(oldForest, newForest)) {
-				SpellAbility ability = new Ability(new Card(),
-						"0") {
-					@Override
-					public void resolve() {
-						// return all Reach of Branches to hand
-						PlayerZone hand = AllZone.getZone(
-								Constant.Zone.Hand, player);
-						for(int i = 0; i < nCard.size(); i++) {
-							grave.remove(nCard.get(i));
-							hand.add(nCard.get(i));
-						}
-					}// resolve()
-				};// SpellAbility
-				ability.setStackDescription("Reach of Branches - return card to "
-						+ player + "'s hand");
-				AllZone.Stack.add(ability);
-			}// if
-
-			// potential problem: if a Forest is bounced to your hand
-			// "Reach Branches"
-			// won't trigger when you play that Forest
-			oldForest.addAll(newForest.toArray());
-		}// execute
-
-		// check if newList has anything that oldList doesn't have
-		boolean newForest(CardList oldList, CardList newList) {
-			// check if a Forest came into play under your control
-			for(int i = 0; i < newList.size(); i++)
-				if(!oldList.contains(newList.get(i))) return true;
-
-			return false;
-		}// newForest()
-	}; // Reach of Branches
-	*/
 	
 	// Reach of Branches
 	public static Command Sosukes_Summons= new Command() {
@@ -13627,7 +13577,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// count card "Reach of Branches" in graveyard
-			final Player player = AllZone.Phase.getActivePlayer();
+			final Player player = AllZone.Phase.getPlayerTurn();
 			final CardList nCard = AllZoneUtil.getPlayerGraveyard(player, "Sosuke's Summons");
 
 			// get all Snakes that player has
@@ -13760,8 +13710,7 @@ public class GameActionUtil {
 				if(old.contains(current.get(outer))) continue;
 
 				final CardList test = all.getName("Baru, Fist of Krosa");
-				SpellAbility ability = new Ability(new Card(),
-						"0") {
+				SpellAbility ability = new Ability(new Card(), "0") {
 					@Override
 					public void resolve() {
 						Card c = test.get(0);
@@ -13804,254 +13753,7 @@ public class GameActionUtil {
 			old = current;
 		}// execute()
 	}; // Baru
-	
-	/*
-	public static Command Essence_Warden              = new Command() {
-		private static final long serialVersionUID = 6515549135916060107L;
 
-		// Hold old creatures
-		CardList                  old              = new CardList();      // Hold old Essence Wardens
-		CardList                  essence          = new CardList();
-
-		public void execute() {
-			// get all creatures
-			CardList current = new CardList();
-			current.addAll(AllZone.Human_Play.getCards());
-			current.addAll(AllZone.Computer_Play.getCards());
-
-			final ArrayList<String> list = CardFactoryUtil.getCreatureLandNames();
-
-			current = current.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.isCreature()
-					&& !list.contains(c.getName());
-				}
-			});
-
-
-			// Holds Essence Warden's in play
-			CardList wardenList = current.getName("Essence Warden");
-
-			// Holds Essence Warden's that are new to play
-			CardList newWarden = new CardList();
-
-			// Go through the list of Essence Warden's in play
-			for(int i = 0; i < wardenList.size(); i++) {
-				Card c = wardenList.get(i);
-
-				// Check to see which Essence Warden's in play are new
-				if(!essence.contains(c)) {
-					newWarden.add(c);
-					wardenList.remove(c);
-					i -= 1; // Must do as a card was just removed
-				}
-
-				current.remove(c);
-			}
-
-			for(int outer = 0; outer < wardenList.size(); outer++) {
-				// Gain life for new creatures in play - excluding any new
-				// Essence Wardens
-				final int[] n = new int[1];
-				for(int i = 0; i < current.size(); i++) {
-					if(!old.contains(current.getCard(i))) {
-						n[0]++;
-					}
-				}
-
-				// Gain life for new Essence Wardens
-				n[0] += newWarden.size();
-
-				final Player player = wardenList.get(outer).getController();
-				SpellAbility ability = new Ability(new Card(),
-						"0") {
-					@Override
-					public void resolve() {
-						//AllZone.GameAction.gainLife(player, n[0]);
-						player.gainLife(n[0]);
-					}
-				};
-				ability.setStackDescription(wardenList.get(outer).getName()
-						+ " - "
-						+ wardenList.get(outer).getController()
-						+ " gains " + n[0] + " life");
-
-				if(n[0] != 0) {
-					AllZone.Stack.push(ability);
-				}
-			}// outer for
-
-			essence = wardenList;
-			essence.addAll(newWarden.toArray());
-			old = current;
-		}// execute()
-	}; // essence warden
-	
-	public static Command Soul_Warden                 = new Command() {
-		private static final long serialVersionUID = 5099736949744748496L;
-
-		// Hold old creatures
-		CardList                  old              = new CardList();      // Hold old Soul Wardens
-		CardList                  soul             = new CardList();
-
-		public void execute() {
-			// get all creatures
-			CardList current = new CardList();
-			current.addAll(AllZone.Human_Play.getCards());
-			current.addAll(AllZone.Computer_Play.getCards());
-			//current = current.getType("Creature");
-
-			final ArrayList<String> list = CardFactoryUtil.getCreatureLandNames();
-
-			current = current.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.isCreature()
-					&& !list.contains(c.getName());
-				}
-			});
-
-			// Holds Soul Warden's in play
-			CardList wardenList = current.getName("Soul Warden");
-
-			// Holds Soul Warden's that are new to play
-			CardList newWarden = new CardList();
-
-			// Go through the list of Soul Warden's in play
-			for(int i = 0; i < wardenList.size(); i++) {
-				Card c = wardenList.get(i);
-
-				// Check to see which Soul Warden's in play are new
-				if(!soul.contains(c)) {
-					newWarden.add(c);
-					wardenList.remove(c);
-					i -= 1; // Must do as a card was just removed
-				}
-
-				current.remove(c);
-			}
-
-			for(int outer = 0; outer < wardenList.size(); outer++) {
-				// Gain life for new creatures in play - excluding any new Soul
-				// Wardens
-				final int[] n = new int[1];
-				for(int i = 0; i < current.size(); i++) {
-					if(!old.contains(current.getCard(i))) {
-						n[0]++;
-					}
-				}
-
-				// Gain life for new Soul Wardens
-				n[0] += newWarden.size();
-
-				final Player player = wardenList.get(outer).getController();
-				
-				SpellAbility ability = new Ability(new Card(),
-						"0") {
-
-					@Override
-					public void resolve() {
-						//AllZone.GameAction.gainLife(player, n[0]);
-						player.gainLife(n[0]);
-					}
-				};
-				ability.setStackDescription(wardenList.get(outer).getName()
-						+ " - "
-						+ wardenList.get(outer).getController()
-						+ " gains " + n[0] + " life");
-
-				if(n[0] != 0) {
-					AllZone.Stack.push(ability);
-				}
-			}// outer for
-
-			soul = wardenList;
-			soul.addAll(newWarden.toArray());
-			old = current;
-		}// execute()
-	}; // soul warden
-	
-	public static Command Souls_Attendant                 = new Command() {
-		private static final long serialVersionUID = -472504539729742971L;
-		// Hold old creatures
-		CardList                  old              = new CardList();      // Hold old Soul Wardens
-		CardList                  soul             = new CardList();
-
-		public void execute() {
-			// get all creatures
-			CardList current = new CardList();
-			current.addAll(AllZone.Human_Play.getCards());
-			current.addAll(AllZone.Computer_Play.getCards());
-			//current = current.getType("Creature");
-
-			final ArrayList<String> list = CardFactoryUtil.getCreatureLandNames();
-
-			current = current.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.isCreature()
-					&& !list.contains(c.getName());
-				}
-			});
-
-			// Holds Soul Warden's in play
-			CardList wardenList = current.getName("Soul's Attendant");
-
-			// Holds Soul Warden's that are new to play
-			CardList newWarden = new CardList();
-
-			// Go through the list of Soul Warden's in play
-			for(int i = 0; i < wardenList.size(); i++) {
-				Card c = wardenList.get(i);
-
-				// Check to see which Soul Warden's in play are new
-				if(!soul.contains(c)) {
-					newWarden.add(c);
-					wardenList.remove(c);
-					i -= 1; // Must do as a card was just removed
-				}
-
-				current.remove(c);
-			}
-
-			for(int outer = 0; outer < wardenList.size(); outer++) {
-				// Gain life for new creatures in play - excluding any new Soul
-				// Wardens
-				final int[] n = new int[1];
-				for(int i = 0; i < current.size(); i++) {
-					if(!old.contains(current.getCard(i))) {
-						n[0]++;
-					}
-				}
-
-				// Gain life for new Soul's Attendants
-				n[0] += newWarden.size();
-
-				final Player player = wardenList.get(outer).getController();
-				SpellAbility ability = new Ability(new Card(),
-						"0") {
-
-					@Override
-					public void resolve() {
-						//AllZone.GameAction.gainLife(player, n[0]);
-						player.gainLife(n[0]);
-					}
-				};
-				ability.setStackDescription(wardenList.get(outer).getName()
-						+ " - "
-						+ wardenList.get(outer).getController()
-						+ " gains " + n[0] + " life");
-
-				if(n[0] != 0) {
-					AllZone.Stack.push(ability);
-				}
-			}// outer for
-
-			soul = wardenList;
-			soul.addAll(newWarden.toArray());
-			old = current;
-		}// execute()
-	}; // soul's Attendant
-	*/
-	
 	public static Command Wirewood_Hivemaster         = new Command() {
 		private static final long serialVersionUID = -6440532066018273862L;
 
@@ -14133,70 +13835,6 @@ public class GameActionUtil {
 			old = current;
 		}// execute()
 	}; // Wirewood_Hivemaster
-
-	/*
-	public static Command Angelic_Chorus              = new Command() {
-		private static final long serialVersionUID = 296710856999966577L;
-
-		CardList                  old              = new CardList();
-
-		public void execute() {
-			// Set up current player
-			final Player player = AllZone.Phase.getActivePlayer();
-			PlayerZone playZone = AllZone.getZone(
-					Constant.Zone.Play, player);
-
-			// List of all cards
-			CardList playerCards = new CardList(
-					playZone.getCards());
-
-			// List of Angelic Chorus
-			CardList angelicChorus = playerCards.getName("Angelic Chorus");
-
-			// List of player creature cards
-			playerCards = playerCards.getType("Creature");
-
-			// Holds new cards
-			CardList newCards = new CardList();
-
-			for(int i = 0; i < angelicChorus.size(); i++) {
-				final int[] lifeGain = new int[1];
-				for(int j = 0; j < playerCards.size(); j++) {
-					Card c = playerCards.get(j);
-					if(!old.contains(c)) {
-						lifeGain[0] += c.getNetDefense();
-						if(!newCards.contains(c)) {
-							newCards.add(c);
-						}
-					}
-				}
-
-				// Ability
-				SpellAbility ability = new Ability(new Card(),
-						"0") {
-
-					@Override
-					public void resolve() {
-						//AllZone.GameAction.gainLife(player, lifeGain[0]);
-						player.gainLife(lifeGain[0]);
-					}
-				};
-				ability.setStackDescription(angelicChorus.get(i).getName()
-						+ " - "
-						+ angelicChorus.get(i).getController()
-						+ " gains " + lifeGain[0] + " life");
-
-				// Only run if something new to add
-				if(lifeGain[0] != 0) {
-					AllZone.Stack.push(ability);
-				}
-			}// outer for
-
-			// Add new cards to old list
-			old.addAll(newCards.toArray());
-		}// execute()
-	};
-	*/
 	
 	public static Command Lighthouse_Chronologist  = new Command() {
 		

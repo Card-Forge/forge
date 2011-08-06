@@ -1,10 +1,6 @@
 
 package forge;
 
-
-//import javax.swing.*; //unused
-
-
 public class Input_Mulligan extends Input {
     private static final long serialVersionUID = -8112954303001155622L;
     
@@ -89,6 +85,7 @@ public class Input_Mulligan extends Input {
         AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer),AllZone.GameAction.ComputerCut);
         }
         AllZone.GameAction.checkStateEffects();
+        Phase.GameBegins = 1;
         stop();
     }
 }

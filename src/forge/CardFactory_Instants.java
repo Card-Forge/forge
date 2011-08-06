@@ -921,7 +921,7 @@ public class CardFactory_Instants {
                 
                 @Override                
                 public boolean canPlay() {
-                	Player player = AllZone.Phase.getActivePlayer();
+                	Player player = AllZone.Phase.getPlayerTurn();
                 	Player opponent = player.getOpponent();
                     PlayerZone PlayerPlayZone = AllZone.getZone(Constant.Zone.Play, player);
             		PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Play, opponent);                  
@@ -943,7 +943,7 @@ public class CardFactory_Instants {
                 }
                 
                 public Card getAttacker() {
-                	Player Computer = AllZone.Phase.getActivePlayer();
+                	Player Computer = AllZone.Phase.getPlayerTurn();
 					PlayerZone ComputerPlayZone = AllZone.getZone(Constant.Zone.Play, Computer);
 			        CardList ComputerCreatureList = new CardList(ComputerPlayZone.getCards());
 			        ComputerCreatureList = ComputerCreatureList.getType("Creature");
@@ -1758,9 +1758,9 @@ public class CardFactory_Instants {
                         }
                     };
                     
-                    if(card.getController().equals(AllZone.ComputerPlayer)) {
-                        AllZone.InputControl.setInput(new Input_PayManaCost_Ability(card + "\r\n",
-                                ability.getManaCost(), Command.Blank, unpaidCommand));
+                    if(AllZone.Stack.peek().getActivatingPlayer().isHuman()) {
+                    	GameActionUtil.payManaDuringAbilityResolve(card + "\r\n", ability.getManaCost(), 
+                    			Command.Blank, unpaidCommand);
                     } else {
                         if(ComputerUtil.canPayCost(ability)) ComputerUtil.playNoStack(ability);
                         else {
@@ -1779,7 +1779,7 @@ public class CardFactory_Instants {
                     SpellAbility sa = AllZone.Stack.peek();
                     
                     //is spell?, did opponent play it?, is this a creature spell?
-                    return sa.isSpell() && opponent.equals(sa.getSourceCard().getController())
+                    return sa.isSpell() //&& opponent.equals(sa.getSourceCard().getController())
                             && !sa.getSourceCard().getType().contains("Creature")
                             && CardFactoryUtil.isCounterable(sa.getSourceCard());
                 }//canPlay()
@@ -1819,13 +1819,13 @@ public class CardFactory_Instants {
                         }
                     };
                     
-                    if(card.getController().equals(AllZone.ComputerPlayer)) {
-                        AllZone.InputControl.setInput(new Input_PayManaCost_Ability(card + "\r\n",
-                                ability.getManaCost(), Command.Blank, unpaidCommand));
+                    if(AllZone.Stack.peek().getActivatingPlayer().isHuman()) {
+                    	GameActionUtil.payManaDuringAbilityResolve(card + "\r\n", ability.getManaCost(), 
+                    			Command.Blank, unpaidCommand);
                     } else {
                         if(ComputerUtil.canPayCost(ability)) ComputerUtil.playNoStack(ability);
                         else {
-                            SpellAbility sa = AllZone.Stack.pop();
+                        	SpellAbility sa = AllZone.Stack.pop();
                             AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
                         }
                     }
@@ -1840,7 +1840,7 @@ public class CardFactory_Instants {
                     Player opponent = card.getController().getOpponent();
                     SpellAbility sa = AllZone.Stack.peek();
                     
-                    return sa.isSpell() && opponent.equals(sa.getSourceCard().getController())
+                    return sa.isSpell() //&& opponent.equals(sa.getSourceCard().getController())
                             && CardFactoryUtil.isCounterable(sa.getSourceCard());
                 }
             };
@@ -4643,7 +4643,7 @@ public class CardFactory_Instants {
 
                 @Override
                 public void resolve() {
-                	Player player = AllZone.Phase.getActivePlayer();
+                	Player player = AllZone.Phase.getPlayerTurn();
                     PlayerZone PlayerHand = AllZone.getZone(Constant.Zone.Hand, player);
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
                     CardList libList = new CardList(lib.getCards());
@@ -4830,7 +4830,7 @@ public class CardFactory_Instants {
                 public boolean canPlay() {
 					//can only cast during compy's turn before attackers are declared
 					//Main1 phase won't work because this happens too soon I think
-					return AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Before_Declare_Attackers_InstantAbility);
+					return AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Begin);
                 }//canPlay
 				
 				@Override
@@ -4899,7 +4899,7 @@ public class CardFactory_Instants {
 				@Override
                 public boolean canPlay() {
 					Player opponent = card.getController().getOpponent();
-					return Phase.canPlayAfterUpkeep() && AllZone.GameAction.isPlayerTurn(opponent);
+					return Phase.canPlayAfterUpkeep() && AllZone.Phase.isPlayerTurn(opponent);
 				}//canPlay
 				
 				@Override

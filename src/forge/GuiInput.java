@@ -16,7 +16,7 @@ public class GuiInput extends MyObservable implements Observer {
     }
     
     public void update(Observable observable, Object obj) {
-        Input tmp = AllZone.InputControl.getInput();
+        Input tmp = AllZone.InputControl.updateInput();
         if(tmp != null) {
             setInput(tmp);
         }
@@ -28,7 +28,6 @@ public class GuiInput extends MyObservable implements Observer {
     }
     
     public void showMessage() {
-        //if (input instanceof Input_PayManaCost)
         input.showMessage();
     }
     

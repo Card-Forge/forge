@@ -1782,13 +1782,14 @@ class CardFactory_Auras {
 				// if not flash then limit to main 1 and 2 on controller's turn and card in hand
 				@Override
 	            public boolean canPlay() {
-	                return (card.getKeyword().contains("Flash") && (AllZone.GameAction.isCardInZone(card, AllZone.Human_Hand) || 
-	                        AllZone.GameAction.isCardInZone(card, AllZone.Computer_Hand))
-	                            || 
-	                       (! card.getKeyword().contains("Flash") && (card.getController().equals(AllZone.Phase.getActivePlayer()) &&
-	                       (AllZone.GameAction.isCardInZone(card, AllZone.Human_Hand) || AllZone.GameAction.isCardInZone(card, AllZone.Computer_Hand)) && 
-	                       (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) || AllZone.Phase.getPhase().equals(Constant.Phase.Main2)))));
-	            }
+					if (!AllZone.getZone(card).equals(Constant.Zone.Hand))
+						return false;
+					
+					if (Phase.canCastSorcery(getSourceCard().getController()))
+						return true;
+					
+	                return card.getKeyword().contains("Flash");
+				}
 
                 @Override
                 public boolean canPlayAI() {

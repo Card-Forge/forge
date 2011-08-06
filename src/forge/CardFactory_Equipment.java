@@ -42,8 +42,7 @@ class CardFactory_Equipment {
                 @Override
                 public boolean canPlay() {
                     return AllZone.getZone(card).is(Constant.Zone.Play)
-                            && AllZone.Phase.getActivePlayer().equals(card.getController())
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+                            && Phase.canCastSorcery(card.getController());
                 }
                 
                 @Override
@@ -143,7 +142,7 @@ class CardFactory_Equipment {
                 @Override
                 public boolean canPlay() {
                     return AllZone.getZone(card).is(Constant.Zone.Play)
-                            && AllZone.Phase.getActivePlayer().equals(card.getController())
+                            && AllZone.Phase.getPlayerTurn().equals(card.getController())
                             && !AllZone.Phase.getPhase().equals("End of Turn")
                             && !AllZone.Phase.getPhase().equals(
                                     Constant.Phase.Combat_Declare_Blockers_InstantAbility);
@@ -250,8 +249,7 @@ class CardFactory_Equipment {
                 @Override
                 public boolean canPlay() {
                     return AllZone.getZone(card).is(Constant.Zone.Play)
-                            && AllZone.Phase.getActivePlayer().equals(card.getController())
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+                            && Phase.canCastSorcery(getSourceCard().getController());
                 }
                 
                 @Override
@@ -323,8 +321,7 @@ class CardFactory_Equipment {
         		@Override
         		public boolean canPlay() {
         			return AllZone.getZone(card).is(Constant.Zone.Play)
-        					&& AllZone.Phase.getActivePlayer().equals(card.getController())
-        					&& (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+        					&& Phase.canCastSorcery(card.getController());
         		}
 
         		//not changed
@@ -426,8 +423,7 @@ class CardFactory_Equipment {
                 @Override
                 public boolean canPlay() {
                     return AllZone.getZone(card).is(Constant.Zone.Play)
-                            && AllZone.Phase.getActivePlayer().equals(card.getController())
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+                            && Phase.canCastSorcery(getSourceCard().getController());
                 }
                 
                 @Override
@@ -512,8 +508,7 @@ class CardFactory_Equipment {
                 @Override
                 public boolean canPlay() {
                     return AllZone.getZone(card).is(Constant.Zone.Play)
-                            && AllZone.Phase.getActivePlayer().equals(card.getController())
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+                            && Phase.canCastSorcery(getSourceCard().getController());
                 }
                 
                 @Override
@@ -612,8 +607,7 @@ class CardFactory_Equipment {
                 @Override
                 public boolean canPlay() {
                     return AllZone.getZone(card).is(Constant.Zone.Play)
-                            && AllZone.Phase.getActivePlayer().equals(card.getController())
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+                            && Phase.canCastSorcery(getSourceCard().getController());
                 }
                 
                 @Override
@@ -714,7 +708,7 @@ class CardFactory_Equipment {
                 @Override
                 public boolean canPlay() {
                     return AllZone.getZone(card).is(Constant.Zone.Play)
-                            && AllZone.Phase.getActivePlayer().equals(card.getController())
+                            && AllZone.Phase.getPlayerTurn().equals(card.getController())
                             && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
                 }
                 

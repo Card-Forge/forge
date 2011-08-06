@@ -791,68 +791,61 @@ public class CombatUtil {
     }
     
     public static boolean checkPropagandaEffects(Card c) {
-        if(CardFactoryUtil.getPropagandaCost(c).equals("0")) return true;
+    	String cost = CardFactoryUtil.getPropagandaCost(c);
+        if(cost.equals("0")) 
+        	return true;
         
         final Card crd = c;
         final boolean[] canAttack = new boolean[1];
         canAttack[0] = false;
-        //if (AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Attackers))
-        if( /*AllZone.Phase.getPhase().equals("Declare Blockers") || */
-        AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility)) {
-            if (!c.getCheckedPropagandaThisTurn())
-            {
-	            String cost = CardFactoryUtil.getPropagandaCost(c);
-	            if(!cost.equals("0")) {
-	                final Ability ability = new Ability(c, cost) {
-	                    @Override
-	                    public void resolve() {
-	                        canAttack[0] = true;
-	                    }
-	                };
-	                
-	                final Command unpaidCommand = new Command() {
-	                    
-	                    private static final long serialVersionUID = -6483405139208343935L;
-	                    
-	                    public void execute() {
-	                        canAttack[0] = false;
-	                        AllZone.Combat.removeFromCombat(crd);
-	                        crd.untap();
-	                    }
-	                };
-	                
-	                final Command paidCommand = new Command() {
-	                    private static final long serialVersionUID = -8303368287601871955L;
-	                    
-	                    public void execute() {
-	                        canAttack[0] = true;
-	                    }
-	                };
-	                
-	                if(c.getController().isHuman()) {
-	                    AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Propaganda " + c + "\r\n",
-	                            ability.getManaCost(), paidCommand, unpaidCommand));
-	                } else //computer
-	                {
-	                    if(ComputerUtil.canPayCost(ability)) ComputerUtil.playNoStack(ability);
-	                    else {
-	                        canAttack[0] = false;
-	                        AllZone.Combat.removeFromCombat(crd);
-	                        crd.untap();
-	                    }
-	                }
-	            }
-	        }
-            c.setCheckedPropagandaThisTurn(true);
+
+        if( AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Attackers)) {
+            if(!cost.equals("0")) {
+                final Ability ability = new Ability(c, cost) {
+                    @Override
+                    public void resolve() {
+                        canAttack[0] = true;
+                    }
+                };
+                
+                final Command unpaidCommand = new Command() {
+                    
+                    private static final long serialVersionUID = -6483405139208343935L;
+                    
+                    public void execute() {
+                        canAttack[0] = false;
+                        AllZone.Combat.removeFromCombat(crd);
+                        crd.untap();
+                    }
+                };
+                
+                final Command paidCommand = new Command() {
+                    private static final long serialVersionUID = -8303368287601871955L;
+                    
+                    public void execute() {
+                        canAttack[0] = true;
+                    }
+                };
+                
+                if(c.getController().isHuman()) {
+                    AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Propaganda " + c + "\r\n",
+                            ability.getManaCost(), paidCommand, unpaidCommand));
+                } else //computer
+                {
+                    if(ComputerUtil.canPayCost(ability)) ComputerUtil.playNoStack(ability);
+                    else {
+                        canAttack[0] = false;
+                        AllZone.Combat.removeFromCombat(crd);
+                        crd.untap();
+                    }
+                }
+            }
         }
         return canAttack[0];
     }
     
     public static void checkDeclareAttackers(Card c) //this method checks triggered effects of attacking creatures, right before defending player declares blockers
     {
-        //human does not have an "attackers_instantAbility" phase during his turn (yet), so triggers will happen at the beginning of declare blockers
-        if( /*AllZone.Phase.getPhase().equals("Declare Blockers") ||*/
-        AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility)) {
         	AllZone.GameAction.CheckWheneverKeyword(c,"Attacks",null);
         	//Annihilator:
         	if (!c.getCreatureAttackedThisCombat())
@@ -1984,8 +1977,6 @@ public class CombatUtil {
             }
 
             c.setCreatureAttackedThisCombat(true);
-            
-        }//if Phase = declare attackers
     }//checkDeclareAttackers
     
     public static void checkUnblockedAttackers(Card c) {
@@ -2026,9 +2017,6 @@ public class CombatUtil {
     
     static void checkDeclareBlockers(CardList cl) {
     	//System.out.println("Phase during checkDeclareBlockers: " + AllZone.Phase.getPhase());
-        if(AllZone.Phase.getPhase().equals(Constant.Phase.Combat_After_Declare_Blockers) ||
-           AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Blockers_InstantAbility) ) {
-            
         	for (Card c:cl)
         	{
         		AllZone.GameAction.CheckWheneverKeyword(c,"Blocks",null);
@@ -2074,31 +2062,7 @@ public class CombatUtil {
 	            if(c.getName().equals("Jedit Ojanen of Efrava") && !c.getCreatureBlockedThisCombat()) {
 	            	CardFactoryUtil.makeToken("Cat Warrior", "G 2 2 Cat Warrior", c.getController(), "G", new String[] {"Creature", "Cat", "Warrior"},
 	            			2, 2, new String[] {"Forestwalk"});
-	            	/*
-	            	}
-	                Card card = new Card();
 	                
-	                card.setOwner(c.getController());
-	                card.setController(c.getController());
-	                
-	                card.setName("Cat Warrior");
-	                card.setImageName("G 2 2 Cat Warrior");
-	                card.setManaCost("G");
-	                card.setToken(true);
-	                card.addIntrinsicKeyword("Forestwalk");
-	                
-	                card.addType("Creature");
-	                card.addType("Cat");
-	                card.addType("Warrior");
-	                card.setBaseAttack(2);
-	                card.setBaseDefense(2);
-	                
-	                PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
-	                play.add(card);
-	                
-	                //(anger) :
-	                GameActionUtil.executeCardStateEffects();
-	                */
 	            }//Jedit
 	            else if(c.getName().equals("Shield Sphere") && !c.getCreatureBlockedThisCombat()) {
 	                c.addCounter(Counters.P0M1, 1);
@@ -2111,7 +2075,6 @@ public class CombatUtil {
 	            c.setCreatureBlockedThisCombat(true);
         	}//for
             
-        }//if Phase == after declare blockers
     }//checkDeclareBlockers
     
     public static void checkBlockedAttackers(Card a, Card b) {
@@ -2504,7 +2467,7 @@ public class CombatUtil {
 			for (int ix = 0; ix < AllZoneUtil.getPlayerCardsInPlay(phasingPlayer, "Finest Hour").size(); ix++) {
 				Ability fhAddCombat = new Ability(c, "0") {
 					public void resolve() {
-						AllZone.Phase.addExtraCombat(crd.getController());				
+						AllZone.Phase.addExtraCombat();				
 					}
 				};
 				

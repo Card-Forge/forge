@@ -44,7 +44,7 @@ class CardFactory_Lands {
                 
                 @Override
                 public boolean canPlayAI() {
-                    if(!(AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && AllZone.Phase.getActivePlayer().equals(
+                    if(!(AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && AllZone.Phase.getPlayerTurn().equals(
                             AllZone.ComputerPlayer))) return false;
                     inPlay.clear();
                     inPlay.addAll(AllZone.Computer_Play.getCards());
@@ -2428,7 +2428,7 @@ class CardFactory_Lands {
                 
                 @Override
                 public boolean canPlayAI() {
-                    if(!(AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && AllZone.Phase.getActivePlayer().equals(
+                    if(!(AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && AllZone.Phase.getPlayerTurn().equals(
                             AllZone.ComputerPlayer))) return false;
                     inPlay.clear();
                     inPlay.addAll(AllZone.Computer_Play.getCards());
@@ -2812,8 +2812,7 @@ class CardFactory_Lands {
                 
                 @Override
                 public boolean canPlay() {
-                    if(((AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && AllZone.Phase.getActivePlayer() == card.getController()) || (AllZone.Phase.getPhase().equals(
-                            Constant.Phase.Main1) && AllZone.Phase.getActivePlayer() == card.getController()))
+                    if(Phase.canCastSorcery(getSourceCard().getController())
                             && AllZone.GameAction.isCardInPlay(card)) return true;
                     else return false;
                 }

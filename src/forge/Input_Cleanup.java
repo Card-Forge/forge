@@ -89,6 +89,11 @@ public class Input_Cleanup extends Input {
     
     @Override
     public void showMessage() {
+    	if (AllZone.Phase.getPlayerTurn().isComputer()){
+    		AI_CleanupDiscard();
+    		return;
+    	}
+    	
         ButtonUtil.disableAll();
         int n = AllZone.Human_Hand.getCards().length;
         
@@ -98,15 +103,12 @@ public class Input_Cleanup extends Input {
         sb.append(" cards, you currently have ").append(n).append(" cards in your hand - select a card to discard");
         AllZone.Display.showMessage(sb.toString());
         
-        // AllZone.Display.showMessage("Cleanup Phase: You can only have a maximum of 7 cards, you currently have "
-        //         + n + " cards in your hand - select a card to discard");
         
         //goes to the next phase
         // if(n <= 7) {
         if(n <= MaxHandSize || MaxHandSize == -1) {
             CombatUtil.removeAllDamage();
             
-            //AllZone.Phase.nextPhase();
             //for debugging: System.out.println("need to nextPhase(Input_Cleanup.showMessage(), n<=7) = true");
             AllZone.Phase.setNeedToNextPhase(true);
         }
@@ -119,12 +121,27 @@ public class Input_Cleanup extends Input {
             showMessage();
             //We need a nextPhase here or else it will never get the needToNextPhase from showMessage() (because there isn't a nextPhsae() in the stack).
             Log.debug("There better not be a nextPhase() on the stack!");
-            if(AllZone.Phase != null) {
-                if(AllZone.Phase.isNeedToNextPhase()) {
+            if(AllZone.Phase != null && AllZone.Phase.isNeedToNextPhase()) {
+            	// does this ever happen?
                     AllZone.Phase.setNeedToNextPhase(false);
                     AllZone.Phase.nextPhase();
-                }
             }
         }
     }//selectCard()
+    
+    
+    public void AI_CleanupDiscard(){
+    	int size = AllZone.Computer_Hand.getCards().length;
+    	
+    	if (MaxHandSize != -1){
+    		int numDiscards = size - MaxHandSize; 
+    		//for(int i = 0; i < numDiscards; i++){
+    			AllZone.ComputerPlayer.discard(numDiscards, null);
+    			//AllZone.GameAction.AI_discard(null);
+    		//}
+    	}
+        CombatUtil.removeAllDamage();
+        
+        AllZone.Phase.setNeedToNextPhase(true);
+    }
 }

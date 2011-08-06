@@ -1,5 +1,7 @@
 package forge;
 
+import java.util.ArrayList;
+
 public class SpellAbility_Restriction {
 	// A class for handling SpellAbility Restrictions. These restrictions include: 
 	// Zone, Phase, OwnTurn, Speed (instant/sorcery), Amount per Turn, Player, 
@@ -48,8 +50,8 @@ public class SpellAbility_Restriction {
 		return bPlayerTurn;
 	}
 	
-	int activationLimit = -1;
-	int numberTurnActivations = 0;
+	private int activationLimit = -1;
+	private int numberTurnActivations = 0;
 	
 	public void setActivationLimit(int limit){
 		activationLimit = limit;
@@ -63,17 +65,21 @@ public class SpellAbility_Restriction {
 		numberTurnActivations = 0;
 	}
 	
+	private ArrayList<String> activatePhases = new ArrayList<String>();
+	
+	public void setActivatePhases(String phases){
+		for(String s : phases.split(","))
+			activatePhases.add(s);
+	}
+	
 	/*
 	 * Restrictions of the future
-
-	ArrayList<String> activatePhases = new ArrayList<String>();
-
-	boolean bHasThreshold = false;
-	boolean bHasMetalcraft = false;
-	int levelMin = 0;
-	int levelMax = 0;
-	youControl
-	oppControl
+		boolean bHasThreshold = false;
+		boolean bHasMetalcraft = false;
+		int levelMin = 0;
+		int levelMax = 0;
+		youControl
+		oppControl
 	*/
 	
 	SpellAbility_Restriction(){	}
@@ -91,7 +97,7 @@ public class SpellAbility_Restriction {
 		if (bSorcerySpeed && !Phase.canCastSorcery(activater))
 			return false;
 		
-		if (bPlayerTurn && !AllZone.GameAction.isPlayerTurn(activater))
+		if (bPlayerTurn && !AllZone.Phase.isPlayerTurn(activater))
 			return false;
 		
 		if (!bAnyPlayer && !activater.equals(c.getController()))
@@ -99,6 +105,20 @@ public class SpellAbility_Restriction {
 		
 		if (activationLimit != -1 && numberTurnActivations >= activationLimit)
 			return false;
+		
+		if (activatePhases.size() > 0){
+			boolean isPhase = false;
+			String currPhase = AllZone.Phase.getPhase();
+			for(String s : activatePhases){
+				if (s.equals(currPhase)){
+					isPhase = true;
+					break;
+				}
+			}
+			
+			if (!isPhase)
+				return false;
+		}
 			
 		return true;
 	}

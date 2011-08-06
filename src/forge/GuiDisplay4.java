@@ -770,8 +770,8 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
             public void actionPerformed(ActionEvent evt) {
                 okButtonActionPerformed(evt);
                
-                if(AllZone.Phase.isNeedToNextPhase() == true) {
-                    //for debugging: System.out.println("There better be no nextPhase in the stack.");
+                if(AllZone.Phase.isNeedToNextPhase()) {
+                    // moves to next turn
                     AllZone.Phase.setNeedToNextPhase(false);
                     AllZone.Phase.nextPhase();
                 }

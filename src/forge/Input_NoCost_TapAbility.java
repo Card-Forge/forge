@@ -3,6 +3,7 @@ package forge;
 
 
 public class Input_NoCost_TapAbility extends Input {
+	// anything that uses this should be converted to Ability_Cost
     private static final long serialVersionUID = 5382228961284472286L;
     
     private final Ability_Tap ability;
@@ -19,7 +20,6 @@ public class Input_NoCost_TapAbility extends Input {
             if (ability.getAfterPayMana() == null)
             {
             	AllZone.Stack.add(ability);
-            	stopSetNext(new ComputerAI_StackNotEmpty());
             }
             else
             	stopSetNext(ability.getAfterPayMana());

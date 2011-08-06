@@ -564,8 +564,7 @@ public class CardFactory_Sorceries {
                     PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
                     
                     return library.getCards().length != 0
-                            && AllZone.Phase.getActivePlayer().equals(card.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn") && super.canPlay();
+                            && Phase.canCastSorcery(card.getController()) && super.canPlay();
                 }
                 
                 @Override
@@ -1403,7 +1402,7 @@ public class CardFactory_Sorceries {
                 private static final long serialVersionUID = 920148510259054021L;
                 
                 public void execute() {
-					Player player = AllZone.Phase.getActivePlayer();
+					Player player = AllZone.Phase.getPlayerTurn();
 					PlayerZone Play = AllZone.getZone(Constant.Zone.Play, player);
 					Card Minds_D = card;
 					if(player.isHuman()) card.getController().shuffle();
@@ -1430,7 +1429,7 @@ public class CardFactory_Sorceries {
                                     private static final long serialVersionUID = -28032591440730370L;
                                     
                                     public void execute() {
-                                    	Player player = AllZone.Phase.getActivePlayer();
+                                    	Player player = AllZone.Phase.getPlayerTurn();
                     					PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
                     			        	play.remove(Minds);
                                             }
@@ -2110,12 +2109,9 @@ public class CardFactory_Sorceries {
                 @Override
                 public boolean canPlay() {
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    String phase = AllZone.Phase.getPhase();
-                    Player activePlayer = AllZone.Phase.getActivePlayer();
                     
                     return AllZone.GameAction.isCardInZone(card, grave)
-                            && ((phase.equals(Constant.Phase.Main1) || phase.equals(Constant.Phase.Main2))
-                                    && card.getController().equals(activePlayer) && AllZone.Stack.size() == 0);
+                            && Phase.canCastSorcery(card.getController());
                 }
                 
                 @Override
@@ -2265,12 +2261,9 @@ public class CardFactory_Sorceries {
                 @Override
                 public boolean canPlay() {
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    String phase = AllZone.Phase.getPhase();
-                    Player activePlayer = AllZone.Phase.getActivePlayer();
                     
                     return AllZone.GameAction.isCardInZone(card, grave) 
-                                    && ((phase.equals(Constant.Phase.Main1) || phase.equals(Constant.Phase.Main2)) 
-                                    && card.getController().equals(activePlayer) && AllZone.Stack.size() == 0);
+                                    && Phase.canCastSorcery(card.getController());
                 }
                 
                 @Override
@@ -2891,8 +2884,6 @@ public class CardFactory_Sorceries {
                     Player player = card.getController();
                     if(player.equals(AllZone.HumanPlayer)) humanResolve();
                     else computerResolve();
-                    
-                    AllZone.GameAction.checkStateEffects();
                 }
                 
                 public void humanResolve() {
@@ -4074,7 +4065,7 @@ public class CardFactory_Sorceries {
                 public boolean canPlay() {
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
                     
-                    return AllZone.GameAction.isCardInZone(card, grave) && AllZone.GameAction.isPlayerTurn(card.getController());                   
+                    return AllZone.GameAction.isCardInZone(card, grave) && AllZone.Phase.isPlayerTurn(card.getController());                   
                 }
                 
             };
@@ -4158,12 +4149,9 @@ public class CardFactory_Sorceries {
                 @Override
                 public boolean canPlay() {
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    String phase = AllZone.Phase.getPhase();
-                    Player activePlayer = AllZone.Phase.getActivePlayer();
                     
                     return AllZone.GameAction.isCardInZone(card, grave)
-                            && ((phase.equals(Constant.Phase.Main1) || phase.equals(Constant.Phase.Main2))
-                                    && card.getController().equals(activePlayer) && AllZone.Stack.size() == 0);
+                            && Phase.canCastSorcery(card.getController());
                 }
                 
                 @Override

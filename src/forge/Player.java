@@ -14,6 +14,8 @@ public abstract class Player extends MyObservable{
 	protected int assignedDamage;
 	protected int numPowerSurgeLands;
 	
+	protected boolean bFirstTurn;
+	
 	protected Card lastDrawnCard;
 	
 	public Player(String myName) {
@@ -26,6 +28,15 @@ public abstract class Player extends MyObservable{
 		poisonCounters = myPoisonCounters;
 		assignedDamage = 0;
 		lastDrawnCard = null;
+		bFirstTurn = true;
+	}
+	
+	public void reset(){
+		life = 20;
+		poisonCounters = 0;
+		assignedDamage = 0;
+		lastDrawnCard = null;
+		bFirstTurn = true;
 	}
 	
 	public String getName() {
@@ -472,6 +483,9 @@ public abstract class Player extends MyObservable{
     	return old;
     }
 	
+    public boolean isFirstTurn() { return bFirstTurn; }
+    public void setFirstTurn(boolean b) { bFirstTurn = b; }
+    
 	////////////////////////////////
 	//
 	// generic Object overrides

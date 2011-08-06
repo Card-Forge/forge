@@ -887,4 +887,10 @@ public class GuiDisplayUtil implements NewConstants {
         p.invalidate();
         p.repaint();
     }
+    
+    static void updateGUI() {
+        AllZone.Computer_Play.updateObservers();
+        AllZone.Human_Play.updateObservers();
+        AllZone.Human_Hand.updateObservers();
+    }
 }

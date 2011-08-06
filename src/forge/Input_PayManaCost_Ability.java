@@ -1,9 +1,6 @@
 
 package forge;
 
-
-//import java.util.*;
-
 //if cost is paid, Command.execute() is called
 public class Input_PayManaCost_Ability extends Input {
     private static final long serialVersionUID = 3836655722696348713L;
@@ -11,13 +8,9 @@ public class Input_PayManaCost_Ability extends Input {
     private String            originalManaCost;
     private String            message          = "";
     private ManaCost          manaCost;
-    //private ArrayList<Card> tappedLand = new ArrayList<Card>();
-    
+
     private Command           paidCommand;
     private Command           unpaidCommand;
-    @SuppressWarnings("unused")
-    // isPaid
-    private boolean           isPaid;
     
     //only used for X costs:
     private boolean 		  showOnlyOKButton = false;
@@ -65,25 +58,18 @@ public class Input_PayManaCost_Ability extends Input {
     
     @Override
     public void selectCard(Card card, PlayerZone zone) {
-        //tappedLand.add(card);
-        
         //only tap card if the mana is needed
         manaCost = Input_PayManaCostUtil.tapCard(card, manaCost);
         showMessage();
         
         if(manaCost.isPaid()) {
             resetManaCost();
-            //(was) VERY IMPORTANT, otherwise land can be "magical" untapped
-            //tappedLand.clear();
             AllZone.ManaPool.clearPay(false);
             
-            //Command MUST BE AFTER, for Urborg Syphon-Mage - tap, mana, discard ability
-            //does it really have to be after?
             paidCommand.execute();
-            stopSetNext(new ComputerAI_StackNotEmpty());
-            //paidCommand.execute();
+            
+            AllZone.InputControl.resetInput();
         }
-        
     }
     
     @Override
@@ -91,7 +77,7 @@ public class Input_PayManaCost_Ability extends Input {
         resetManaCost();
         AllZone.ManaPool.unpaid();
         unpaidCommand.execute();
-        stop();
+        AllZone.InputControl.resetInput();
     }
     
     @Override
@@ -99,7 +85,7 @@ public class Input_PayManaCost_Ability extends Input {
     	if (showOnlyOKButton)
     	{
     		unpaidCommand.execute();
-            stop();
+    		AllZone.InputControl.resetInput();
     	}
     }
     

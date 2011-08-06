@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.LANG.GameAction.GAMEACTION_TEXT;
 
-
 public class GameAction {
     //  private StaticEffects staticEffects = new StaticEffects();
 	
@@ -141,15 +140,15 @@ public class GameAction {
         	return;
         }
         discard_madness(c);
-        if ((c.getKeyword().contains("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.") ||
-        	c.getKeyword().contains("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard."))	
-        	&& !c.getController().equals(sa.getSourceCard().getController()))
-        	discard_PutIntoPlayInstead(c);
-        else if (c.getKeyword().contains("If a spell or ability an opponent controls causes you to discard CARDNAME, return it to your hand."))
-        		;
-        else
-        	moveToGraveyard(c);
-    }
+	        if ((c.getKeyword().contains("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.") ||
+	        	c.getKeyword().contains("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard."))	
+	        	&& !c.getController().equals(sa.getSourceCard().getController()))
+	        	discard_PutIntoPlayInstead(c);
+	        else if (c.getKeyword().contains("If a spell or ability an opponent controls causes you to discard CARDNAME, return it to your hand."))
+	        		;
+	    	else
+	        	moveToGraveyard(c);
+    	}
     */
     
     @Deprecated
@@ -455,10 +454,10 @@ public class GameAction {
     }
     
     public void checkStateEffects() {
-//    System.out.println("checking !!!");
-//    RuntimeException run = new RuntimeException();
-//    run.printStackTrace();
-        
+    	// sol(10/29) added for Phase updates, state effects shouldn't be checked during Spell Resolution
+    	if (AllZone.InputControl.getResolving()) 
+    		return;
+    	
         JFrame frame = (JFrame) AllZone.Display;
         if(!frame.isDisplayable()) return;
         
@@ -735,6 +734,7 @@ public class GameAction {
     // Whenever Keyword
     public void CheckWheneverKeyword(Card Triggering_Card,String Event, Object[] Custom_Parameters) {
     	checkStateEffects();
+    	
         PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
         PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
         PlayerZone Hgrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.HumanPlayer);
@@ -943,10 +943,10 @@ public class GameAction {
                         if(Nullified == true) k[4] = "Null";
                  	}
                   	if(Special_Condition[y].contains("ControllerUpkeep")) {
-                        if(!isPlayerTurn(card.getController())) k[4] = "Null";	
+                        if(!AllZone.Phase.isPlayerTurn(card.getController())) k[4] = "Null";	
                  	}
                   	if(Special_Condition[y].contains("ControllerEndStep")) {
-                        if(!isPlayerTurn(card.getController())) k[4] = "Null";	
+                        if(!AllZone.Phase.isPlayerTurn(card.getController())) k[4] = "Null";	
                  	}
                   	if(Special_Condition[y].contains("MoreCardsInHand")) {
                         if(((AllZone.getZone(Constant.Zone.Hand, card.getController())).getCards()).length 
@@ -1978,13 +1978,17 @@ public class GameAction {
             S_Amount = PayAmountParse.split("/")[1];
 		
         if(Source.getController().equals(AllZone.HumanPlayer)) {
-            AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Activate " + Source.getName() + "'s ability: " + "\r\n",
-                    S_Amount, new Command() {
+        	final Command paid = new Command() {
             	private static final long serialVersionUID = 151367344511590317L;
 
-			public void execute() {
-				Proper_Resolve.execute();
-            } }, Command.Blank));
+    			public void execute() {
+    				Proper_Resolve.execute();
+                }
+        	};
+        	StringBuilder sb = new StringBuilder();
+        	sb.append("Activate ").append(Source.getName()).append("'s ability: \n");
+
+        	GameActionUtil.payManaDuringAbilityResolve(sb.toString(), S_Amount, paid, Command.Blank);
         } else {
             if(ComputerUtil.canPayCost(S_Amount)) {
             	ComputerUtil.payManaCost(ability);
@@ -2286,19 +2290,6 @@ public class GameAction {
     	removed.add(c);
     }
     
-    private Player  playerTurn = AllZone.HumanPlayer;
-    public boolean isPlayerTurn(Player player) {
-        return playerTurn.isPlayer(player);
-    }
-    
-    public void setPlayerTurn(Player s) {
-    	playerTurn = s;
-    }
-    
-    public Player getPlayerTurn() {
-    	return playerTurn;
-    }
-    
     /*
      * target player draws a certain number of cards
      * 
@@ -2455,16 +2446,10 @@ public class GameAction {
     	AllZone.ComputerPlayer.setLife(computerLife, null);
         AllZone.HumanPlayer.setLife(humanLife, null);
         
-        if (qa != null)
-        {
-        	//human.addAll(qa.getHuman().toArray());
-        	//computer.addAll(qa.getCompy().toArray());
-        	
+        if (qa != null){
         	computer.addAll(QuestUtil.getComputerCreatures(AllZone.QuestData, AllZone.QuestAssignment).toArray());
         }
 
-        //Constant.Quest.computerList[0] = computer;
-        
         for (Card c : human)
         {
         	AllZone.Human_Play.add(c);
@@ -2493,17 +2478,11 @@ public class GameAction {
         AllZone.GameInfo.setHumanMulliganedToZero(false);
         AllZone.GameInfo.setComputerStartedThisGame(false);
         
-        AllZone.HumanPlayer.setPoisonCounters(0);
-        AllZone.ComputerPlayer.setPoisonCounters(0);
-        
-        AllZone.ComputerPlayer.setLife(20, null);
-        AllZone.HumanPlayer.setLife(20, null);
-        
-        AllZone.HumanPlayer.setAssignedDamage(0);
-        AllZone.ComputerPlayer.setAssignedDamage(0);
-        
-        AllZone.Stack.reset();
+        AllZone.HumanPlayer.reset();
+        AllZone.ComputerPlayer.reset();
+
         AllZone.Phase.reset();
+        AllZone.Stack.reset();
         AllZone.Combat.reset();
         AllZone.Display.showCombat("");
         
@@ -2607,11 +2586,10 @@ public class GameAction {
 
         ManaPool mp = AllZone.ManaPool;
         AllZone.Human_Play.add(mp);
-        
-        AllZone.Stack.reset();//this works, it clears the stack of Upkeep effects like Bitterblossom
-        	AllZone.InputControl.setInput(new Input_Mulligan());
+        //ButtonUtil.reset();
+
+        AllZone.InputControl.setInput(new Input_Mulligan());
         Phase.GameBegins = 1;
-        ButtonUtil.reset();
     }//newGame()
     
     //this is where the computer cheats
@@ -2853,7 +2831,7 @@ public class GameAction {
     
     public void computerStartsGame()
     {
-    	AllZone.Phase.setPhase(Constant.Phase.Untap, AllZone.ComputerPlayer);
+    	AllZone.Phase.setPlayerTurn(AllZone.ComputerPlayer);
     	AllZone.GameInfo.setComputerStartedThisGame(true);
     }
     
@@ -2871,7 +2849,7 @@ public class GameAction {
         return false;
     }//isAttached(Card c)
     
-    public void playCard(Card c) {
+    public boolean playCard(Card c) {
         HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
         SpellAbility[] abilities = canPlaySpellAbility(c.getSpellAbility());
         ArrayList<String> choices = new ArrayList<String>();
@@ -2882,6 +2860,7 @@ public class GameAction {
         for(SpellAbility sa:abilities) {
         	// for uncastables like lotus bloom, check if manaCost is blank
             if(sa.canPlay() && (!sa.isSpell() || !sa.getManaCost().equals(""))) {
+            	sa.setActivatingPlayer(c.getController());
                 choices.add(sa.toString());
                 map.put(sa.toString(), sa);
             }
@@ -2889,23 +2868,26 @@ public class GameAction {
         
         String choice;
         if (choices.size() == 0) 
-        	return;
+        	return false;
         else if (choices.size() == 1)
         	choice = choices.get(0);
         else
         	choice = (String) AllZone.Display.getChoiceOptional("Choose", choices.toArray());
         
         if (choice == null)
-        	return;
+        	return false;
         
         if(choice.equals("Play land")){
         	playLand(c, AllZone.Human_Hand);
-        	return;
+        	return true;
         }
         
         SpellAbility ability = map.get(choice);
-        if(ability != null)
+        if(ability != null){
             playSpellAbility(ability);
+            return true;
+        }
+		return false;
     }
     
     static public void playLand(Card land, PlayerZone zone)
@@ -2964,15 +2946,6 @@ public class GameAction {
         	}else {
         		AllZone.Stack.add(sa, x);
         	}
-            /*
-            if (sa.getAfterPayMana() != null)
-            	AllZone.InputControl.setInput(sa.getAfterPayMana());
-            else
-            {
-                AllZone.Stack.add(sa);
-                AllZone.InputControl.setInput(new ComputerAI_StackNotEmpty());
-        } 
-            */
         } else {
         	sa.setManaCost("0"); // Beached As
         	if (sa.isKickerAbility()) {
@@ -2995,7 +2968,7 @@ public class GameAction {
         
          if(spell.isSpell() == true) {
          if(originalCard.getName().equals("Avatar of Woe")){
- 			Player player = AllZone.Phase.getActivePlayer();
+ 			Player player = AllZone.Phase.getPlayerTurn();
  			Player opponent = player.getOpponent();
  	        PlayerZone PlayerGraveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
  	        CardList PlayerCreatureList = new CardList(PlayerGraveyard.getCards());
@@ -3007,7 +2980,7 @@ public class GameAction {
              manaCost = new ManaCost("B B");           	
  	        } // Avatar of Woe
          } else if(originalCard.getName().equals("Avatar of Will")) {
- 			Player player = AllZone.Phase.getActivePlayer();
+ 			Player player = AllZone.Phase.getPlayerTurn();
  			Player opponent = player.getOpponent();
  	        PlayerZone OpponentHand = AllZone.getZone(Constant.Zone.Hand, opponent); 
  	        CardList OpponentHandList = new CardList(OpponentHand.getCards());	        
@@ -3015,7 +2988,7 @@ public class GameAction {
              manaCost = new ManaCost("U U");           	
  	        } // Avatar of Will
          } else if(originalCard.getName().equals("Avatar of Fury")) {
- 			Player player = AllZone.Phase.getActivePlayer();
+ 			Player player = AllZone.Phase.getPlayerTurn();
  			Player opponent = player.getOpponent();
  	        PlayerZone OpponentPlay = AllZone.getZone(Constant.Zone.Play, opponent); 
  	        CardList OpponentLand = new CardList(OpponentPlay.getCards());	   
@@ -3024,7 +2997,7 @@ public class GameAction {
              manaCost = new ManaCost("R R");           	
  	        } // Avatar of Fury
          } else if(originalCard.getName().equals("Avatar of Might")) {
- 			Player player = AllZone.Phase.getActivePlayer();
+ 			Player player = AllZone.Phase.getPlayerTurn();
  			Player opponent = player.getOpponent();
  	        PlayerZone PlayerPlay = AllZone.getZone(Constant.Zone.Play, player); 
  	        CardList PlayerCreature = new CardList(PlayerPlay.getCards());	   
@@ -3128,7 +3101,7 @@ public class GameAction {
                  		if(originalCard.isType(k[6])) k[3] = "0";             		
                  	}
                  	if(k[7].contains("OpponentTurn")) {
-                 		if(isPlayerTurn(originalCard.getController())) k[3] = "0";             		
+                 		if(AllZone.Phase.isPlayerTurn(originalCard.getController())) k[3] = "0";             		
                  	}
                  	if(k[7].contains("Affinity")) {
                           String spilt = k[7];                
@@ -3271,7 +3244,7 @@ public class GameAction {
                          		if(originalCard.isType(k[6])) k[3] = "0";             		
                          	}
                          	if(k[7].contains("OpponentTurn")) {
-                         		if(isPlayerTurn(originalCard.getController())) k[3] = "0";             		
+                         		if(AllZone.Phase.isPlayerTurn(originalCard.getController())) k[3] = "0";             		
                          	}
                          	if(k[7].contains("Affinity")) {
       	                            String spilt = k[7];                
@@ -3360,7 +3333,7 @@ public class GameAction {
                     }
          }
          if(originalCard.getName().equals("Khalni Hydra") && spell.isSpell() == true) {
- 			Player player = AllZone.Phase.getActivePlayer();
+ 			Player player = AllZone.Phase.getPlayerTurn();
  	        PlayerZone PlayerPlay = AllZone.getZone(Constant.Zone.Play, player); 
  	        CardList PlayerCreature = new CardList(PlayerPlay.getCards());	   
  	        PlayerCreature = PlayerCreature.getType("Creature");

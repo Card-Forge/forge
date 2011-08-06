@@ -454,31 +454,7 @@ public class ComputerUtil
       throw new RuntimeException("ComputerUtil : payManaCost() cost was not paid for " + sa.getSourceCard().getName());
   }//payManaCost()
   
-  
-
-  //get the color that the land could produce
-  //Swamps produce Black
-  /*    unused
-  public static String getColor(Card land)
-  {
-    Map<String,String> map = new HashMap<String,String>();
-    map.put("tap: add B", Constant.Color.Black);
-    map.put("tap: add W", Constant.Color.White);
-    map.put("tap: add G", Constant.Color.Green);
-    map.put("tap: add R", Constant.Color.Red);
-    map.put("tap: add U", Constant.Color.Blue);
-    map.put("tap: add 1", Constant.Color.Colorless);
-
-    //this fails on Vine Trellis and probably 9th Pain Lands
-    try{
-      Object o = land.getKeyword().get(0);
-      return map.get(o).toString();
-    }catch(Exception ex)//I hope this fixes "the problem" that I can't re-create
-    {
-      return Constant.Color.Colorless;
-    }
-  }
-  */
+ 
   public static ArrayList<String> getColors(Card land)
   {
 		ArrayList<String> colors = new ArrayList<String>();
@@ -504,26 +480,6 @@ public class ComputerUtil
 	return colors;		
 	  
   }
-/*
-  //only works with mono-colored spells
-  static public void payManaCost(int convertedCost)
-  {
-    CardList land = getAvailableMana();
-    //converted colered mana requirements into colorless
-    ManaCost cost = new ManaCost("" +convertedCost);
-    Card c;
-    for(int i = 0; i < land.size(); i++)
-    {
-      if(cost.isPaid())
-        break;
-
-      land.get(i).tap();
-      cost.subtractMana(Constant.Color.Red);
-    }//for
-    if(! cost.isPaid())
-      throw new RuntimeException("ComputerUtil : payManaCost() cost was not paid");
-  }//payManaCost()
-*/
 
   static public CardList getAvailableMana()
   {
@@ -556,7 +512,6 @@ public class ComputerUtil
     {
     	sortedMana.add(mana.get(j));
     }
-    
     
     return sortedMana;
     
@@ -598,6 +553,65 @@ public class ComputerUtil
 	    CardFactoryUtil.playLandEffects(land);
 	    AllZone.GameInfo.incrementComputerPlayedLands();
   }
+  
+  static public void playEOT(){
+	  // TODO: Called from End of Turn of Player. 
+	  // Play any abilities of a renewable resource (tapping, mana)
+	  boolean bPass = true;
+	  
+	  if (bPass)
+		  passPriority();
+  }
+  
+  static public void playBeginHumanCombat(){
+	  // TODO: Called from Begin Combat of Player. 
+	  // should tap creatures we don't want to attack, or other sneaky things like that
+	  boolean bPass = true;
+	  
+	  if (bPass)
+		  passPriority();
+  }
+  
+  static public void playBeginAICombat(){
+	  // TODO: Called from Begin Combat of Computer. 
+	  // should tap creatures we don't want to attack, or other sneaky things like that
+	  boolean bPass = true;
+	  
+	  if (bPass)
+		  passPriority();
+  }
+  
+  static public void playDeclareAttacks(){
+	  // TODO: Called from Declare Attackers (Abilities)
+	  boolean bPass = true;
+	  
+	  if (bPass)
+		  passPriority();
+  }
+  
+  static public void playDeclareBlockers(){
+	  // TODO: Called from Declare Blockers (Abilities)
+	  boolean bPass = true;
+	  
+	  if (bPass)
+		  passPriority();
+  }
+  
+  static public void playRespondToStack(){
+	  // TODO: Called from Declare Blockers (Abilities)
+	  boolean bPass = true;
+	  
+	  if (bPass)
+		  passPriority();
+  }
+  
+  static public void passPriority(){
+	  // if it's the computers turn and the player should get priority. 
+	  if (AllZone.Phase.getPlayerTurn().isComputer()){
+		  // Let the human player have access to pass the turn
+	  }
+  }
+  
   
   static public Card chooseSacrificeType(String type, Card activate, Card target){
       PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);

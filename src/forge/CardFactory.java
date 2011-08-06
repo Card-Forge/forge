@@ -5173,8 +5173,7 @@ public class CardFactory implements NewConstants {
                     
                     @Override
                     public boolean canPlay() {
-                        return AllZone.Phase.getActivePlayer().equals(card.getController()) && card.isFaceDown()
-                                && !AllZone.Phase.getPhase().equals("End of Turn")
+                        return AllZone.Phase.getPlayerTurn().equals(card.getController()) && card.isFaceDown()
                                 && AllZone.GameAction.isCardInPlay(card);
                     }
                     
@@ -6353,6 +6352,22 @@ public class CardFactory implements NewConstants {
 
 				@Override
         		public boolean canPlayAI() {
+					if (abCost != null){
+						// AI currently disabled for these costs
+						if (abCost.getSacCost()){
+							return false;
+						}
+						if (abCost.getLifeCost()){
+								return false;
+						}
+						if (abCost.getDiscardCost()) 	return false;
+						
+						if (abCost.getSubCounter()) 	return false;
+						
+						if (abCost.getReturnCost())		return false;
+					}
+					
+					
         			if (!ComputerUtil.canPayCost(this))
         				return false;
 
@@ -8060,8 +8075,7 @@ public class CardFactory implements NewConstants {
                     
                     return card.getCounters(Counters.HOOFPRINT) >= 4
                             && AllZone.getZone(card).is(Constant.Zone.Play)
-                            && AllZone.Phase.getActivePlayer().equals(card.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn");
+                            && AllZone.Phase.getPlayerTurn().equals(card.getController());
                 }//canPlay()
                 
                 @Override
@@ -10434,7 +10448,7 @@ public class CardFactory implements NewConstants {
 
       			@Override
       			public void resolve() {
-      				final Player player = AllZone.Phase.getActivePlayer();
+      				final Player player = AllZone.Phase.getPlayerTurn();
       				String choice = "";
       				String choices[] = {"heads","tails"};
       				boolean flip = MyRandom.percentTrue(50);
@@ -11657,7 +11671,7 @@ public class CardFactory implements NewConstants {
 
         		@Override
         		public void resolve() {
-        			final Player player = AllZone.Phase.getActivePlayer();
+        			final Player player = AllZone.Phase.getPlayerTurn();
         			String choice = "";
         			String choices[] = {"heads","tails"};
         			boolean flip = MyRandom.percentTrue(50);
@@ -11832,7 +11846,7 @@ public class CardFactory implements NewConstants {
 
 				@Override
 				public boolean canPlay() {
-					return AllZone.GameAction.isPlayerTurn(card.getController()) && super.canPlay();
+					return AllZone.Phase.isPlayerTurn(card.getController()) && super.canPlay();
 				}
 
         		@Override

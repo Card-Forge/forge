@@ -1,11 +1,7 @@
 package forge;
 
+// todo: should we move the cost for this to the bottom of CostPayment? The similar names might be confusing.
 
-//import java.util.*;
-
-//pays the cost of a card played from the player's hand
-//the card is removed from the players hand if the cost is paid
-//CANNOT be used for ABILITIES
 public class Input_PayCostMana extends Input {
     private static final long  serialVersionUID = 3467312982164195091L;
     

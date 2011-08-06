@@ -52,6 +52,8 @@ public class Input_Block_Planeswalker extends Input {
     
     @Override
     public void selectButtonOK() {
+       	if (AllZone.Combat.getAttackers().length > 0)
+    		AllZone.Phase.setCombat(true);
         ButtonUtil.reset();
         
         //AllZone.Phase.nextPhase();

@@ -76,10 +76,7 @@ class CardFactory_Planeswalkers {
                     return 0 < card2.getCounters(Counters.LOYALTY)
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                     
 
                 }//canPlay()
@@ -161,10 +158,7 @@ class CardFactory_Planeswalkers {
                     return 8 <= card2.getCounters(Counters.LOYALTY)
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
                 
                 @Override
@@ -220,10 +214,7 @@ class CardFactory_Planeswalkers {
                     return 0 < card2.getCounters(Counters.LOYALTY)
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
             };//SpellAbility ability1
             
@@ -320,10 +311,7 @@ class CardFactory_Planeswalkers {
                     return 0 < card2.getCounters(Counters.LOYALTY)
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                     
                 }//canPlay()
             };//SpellAbility ability2
@@ -392,10 +380,7 @@ class CardFactory_Planeswalkers {
                     return 7 <= card2.getCounters(Counters.LOYALTY)
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
                 
                 @Override
@@ -477,10 +462,7 @@ class CardFactory_Planeswalkers {
                     return 0 < card2.getCounters(Counters.LOYALTY)
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
             };//SpellAbility ability1
             
@@ -610,10 +592,7 @@ class CardFactory_Planeswalkers {
                     return 9 <= card2.getCounters(Counters.LOYALTY)
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
                 
                 @Override
@@ -709,10 +688,7 @@ class CardFactory_Planeswalkers {
                     return 2 < card2.getCounters(Counters.LOYALTY)
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                     
                 }//canPlay()
             };//SpellAbility ability2
@@ -766,10 +742,7 @@ class CardFactory_Planeswalkers {
                     return 0 < card2.getCounters(Counters.LOYALTY)
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
                 
                 @Override
@@ -927,10 +900,7 @@ class CardFactory_Planeswalkers {
                     return 0 < card2.getCounters(Counters.LOYALTY)
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                     
                 }//canPlay()
             };//SpellAbility ability2
@@ -969,10 +939,7 @@ class CardFactory_Planeswalkers {
                     return 6 <= card2.getCounters(Counters.LOYALTY)
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
                 
                 @Override
@@ -1023,10 +990,7 @@ class CardFactory_Planeswalkers {
                     return 0 < card2.getCounters(Counters.LOYALTY)
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
             };//SpellAbility ability1
             
@@ -1144,10 +1108,7 @@ class CardFactory_Planeswalkers {
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && 1 < library.size()
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
             };//SpellAbility ability2
             
@@ -1200,10 +1161,7 @@ class CardFactory_Planeswalkers {
                     return 8 <= card2.getCounters(Counters.LOYALTY)
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
                 
                 @Override
@@ -1260,10 +1218,7 @@ class CardFactory_Planeswalkers {
                     return 0 < card2.getCounters(Counters.LOYALTY)
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
             };//SpellAbility ability1
             
@@ -1360,10 +1315,7 @@ class CardFactory_Planeswalkers {
                     
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }
                 
                 @Override
@@ -1437,10 +1389,7 @@ class CardFactory_Planeswalkers {
                     
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }
                 
                 @Override
@@ -1528,10 +1477,7 @@ class CardFactory_Planeswalkers {
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
                             && 7 < card2.getCounters(Counters.LOYALTY)
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }
                 
                 @Override
@@ -1641,10 +1587,7 @@ class CardFactory_Planeswalkers {
                 public boolean canPlay() {
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
             };
             final Input targetLand = new Input() {
@@ -1707,10 +1650,7 @@ class CardFactory_Planeswalkers {
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
                             && 0 < card2.getCounters(Counters.LOYALTY)
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
                 
                 @Override
@@ -1794,10 +1734,7 @@ class CardFactory_Planeswalkers {
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
                             && 3 < card2.getCounters(Counters.LOYALTY)
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
                 
                 @Override
@@ -1805,7 +1742,7 @@ class CardFactory_Planeswalkers {
                     CardList c = new CardList(AllZone.Computer_Play.getCards());
                     c = c.getType("Creature");
                     return c.size() >= 4 && AllZone.Phase.getPhase().equals(Constant.Phase.Main1)
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController());
+                            && AllZone.Phase.getPlayerTurn().equals(card2.getController());
                 }
             };//SpellAbility ability3
             Input runtime3 = new Input() {
@@ -1885,10 +1822,7 @@ class CardFactory_Planeswalkers {
                 public boolean canPlay() {
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
             };
             
@@ -1921,10 +1855,7 @@ class CardFactory_Planeswalkers {
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
                             && card2.getCounters(Counters.LOYALTY) >= 1
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
             };
             ability2.setDescription("-1: Target player draws a card.");
@@ -1952,10 +1883,7 @@ class CardFactory_Planeswalkers {
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
                             && card2.getCounters(Counters.LOYALTY) >= 10
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
             };
             ability3.setDescription("-10: Target player puts the top twenty cards of his or her library into his or her graveyard.");
@@ -2033,10 +1961,7 @@ class CardFactory_Planeswalkers {
                     return 0 < card2.getCounters(Counters.LOYALTY)
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
                 
                 
@@ -2126,10 +2051,7 @@ class CardFactory_Planeswalkers {
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
                             && card2.getCounters(Counters.LOYALTY) >= 2
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
                 
             };//ability2
@@ -2206,10 +2128,7 @@ class CardFactory_Planeswalkers {
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
                             && card2.getCounters(Counters.LOYALTY) >= 7
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
             };
             ability3.setDescription("-7: Destroy all lands target player controls.");
@@ -2275,10 +2194,7 @@ class CardFactory_Planeswalkers {
                 public boolean canPlay() {
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
             };
             final Input targetArtifact = new Input() {
@@ -2374,10 +2290,7 @@ class CardFactory_Planeswalkers {
                     
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }
                 
                 @Override
@@ -2491,10 +2404,7 @@ class CardFactory_Planeswalkers {
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
                             && card2.getCounters(Counters.LOYALTY) >= 5
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
                 
                 @Override
@@ -2590,10 +2500,7 @@ class CardFactory_Planeswalkers {
                 public boolean canPlay() {
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
                 
                 @Override
@@ -2702,10 +2609,7 @@ class CardFactory_Planeswalkers {
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
                             && card2.getCounters(Counters.LOYALTY) >= 2
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }
             };//SpellAbility
             ability2.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability2));
@@ -2729,10 +2633,7 @@ class CardFactory_Planeswalkers {
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
                             && card2.getCounters(Counters.LOYALTY) >= 6
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
                 
                 @Override
@@ -2832,10 +2733,7 @@ class CardFactory_Planeswalkers {
                 public boolean canPlay() {
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
             };
             ability1.setDescription("+2: Look at the top card of target player's library. You may put that card on the bottom of that player's library.");
@@ -2890,10 +2788,7 @@ class CardFactory_Planeswalkers {
                 public boolean canPlay() {
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
             };
             ability2.setDescription("0: Draw three cards, then put two cards from your hand on top of your library in any order.");
@@ -2923,10 +2818,7 @@ class CardFactory_Planeswalkers {
                     return card2.getCounters(Counters.LOYALTY) >= 1
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }
             };
             ability3.setDescription("-1: Return target creature to its owner's hand.");
@@ -2973,10 +2865,7 @@ class CardFactory_Planeswalkers {
                     return card2.getCounters(Counters.LOYALTY) >= 12
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }
             };
             ability4.setDescription("-12: Exile all cards from target player's library, then that player shuffles his or her hand into his or her library.");
@@ -3058,15 +2947,9 @@ class CardFactory_Planeswalkers {
                 public boolean canPlay() {
                 	//looks like standard Planeswalker stuff...
                 	//maybe should check if library is empty, or 1 card?
-                	final Player player = card.getController();
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0 && lib.size() != 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
             };
             ability1.setDescription("0: Reveal the top card of your library and put it into your hand. Sarkhan the Mad deals damage to himself equal to that card's converted mana cost.");
@@ -3125,10 +3008,7 @@ class CardFactory_Planeswalkers {
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
                             && card2.getCounters(Counters.LOYALTY) >= 2
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
             };
             ability2.setDescription("-2: Target creature's controller sacrifices it, then that player puts a 5/5 red Dragon creature token with flying onto the battlefield.");
@@ -3181,10 +3061,7 @@ class CardFactory_Planeswalkers {
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
                             && card2.getCounters(Counters.LOYALTY) >= 4
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
             };
             ability3.setDescription("-4: Each Dragon creature you control deals damage equal to its power to target player.");
@@ -3269,10 +3146,7 @@ class CardFactory_Planeswalkers {
                     return  card2.getCounters(Counters.LOYALTY) >= 5
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
             };
             
@@ -3316,10 +3190,7 @@ class CardFactory_Planeswalkers {
                     return 0 < card2.getCounters(Counters.LOYALTY)
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
             };//SpellAbility ability1
             
@@ -3362,10 +3233,7 @@ class CardFactory_Planeswalkers {
                     return  card2.getCounters(Counters.LOYALTY) >= 2
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
             };//SpellAbility ability2
             
@@ -3467,10 +3335,7 @@ class CardFactory_Planeswalkers {
                     return 0 < card2.getCounters(Counters.LOYALTY)
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                     
                 }//canPlay()
             };//SpellAbility ability2
@@ -3508,10 +3373,7 @@ class CardFactory_Planeswalkers {
                     return 5 <= card2.getCounters(Counters.LOYALTY)
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
                 
                 @Override
@@ -3621,10 +3483,7 @@ class CardFactory_Planeswalkers {
                     return 0 < card2.getCounters(Counters.LOYALTY)
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
             };//SpellAbility ability1
             
@@ -3764,10 +3623,7 @@ class CardFactory_Planeswalkers {
                     return 0 < card2.getCounters(Counters.LOYALTY)
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
                 
             };//SpellAbility ability1
@@ -3829,10 +3685,7 @@ class CardFactory_Planeswalkers {
                     return AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
                             && card2.getCounters(Counters.LOYALTY) >= 1
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
                 
                 @Override
@@ -3898,10 +3751,7 @@ class CardFactory_Planeswalkers {
                     return 8 <= card2.getCounters(Counters.LOYALTY)
                             && AllZone.getZone(card2).is(Constant.Zone.Play)
                             && turn[0] != AllZone.Phase.getTurn()
-                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2")) && AllZone.Stack.size() == 0;
+                            && Phase.canCastSorcery(card2.getController());
                 }//canPlay()
                 
                 @Override
