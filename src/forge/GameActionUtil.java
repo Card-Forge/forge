@@ -4170,28 +4170,29 @@ public class GameActionUtil {
 					} //end resolve()
 			}; //end noPay ability
 			
-			if(c.getController().equals(AllZone.HumanPlayer)) {
-				String[] choices = {"Yes", "No"};
-				Object choice = AllZone.Display.getChoice("Pay Demonic Hordes upkeep cost?", choices);
-				if(choice.equals("Yes")) {
-					final Ability pay = new Ability(c, "0") {
-						private static final long serialVersionUID = 4820011440853920644L;
-						public void resolve() {
-							if (AllZone.getZone(c).is(Constant.Zone.Battlefield)) {
-								GameActionUtil.payManaDuringAbilityResolve("Pay cost for " + c + "\r\n", noPay.getManaCost(), Command.Blank, Command.Blank);
-							}
-						} //end resolve()
-					}; //end pay ability
-					pay.setStackDescription("Demonic Hordes - Upkeep Cost");
-					AllZone.Stack.add(pay);
-				} //end choice
-				else {
-					StringBuilder sb = new StringBuilder();
-					sb.append(c.getName()).append(" - is tapped and you must sacrifice a land of opponent's choice");
-					noPay.setStackDescription(sb.toString());
-					AllZone.Stack.add(noPay);
-				}
-			} //end human
+            if (c.getController().equals(AllZone.HumanPlayer)) {
+                String question = "Pay Demonic Hordes upkeep cost?";
+                if (GameActionUtil.showYesNoDialog(c, question)) {
+                    final Ability pay = new Ability(c, "0") {
+                        private static final long serialVersionUID = 4820011440853920644L;
+                        public void resolve() {
+                            if (AllZone.getZone(c).is(Constant.Zone.Battlefield)) {
+                                StringBuilder cost = new StringBuilder();
+                                cost.append("Pay cost for ").append(c).append("\r\n");
+                                GameActionUtil.payManaDuringAbilityResolve(cost.toString(), noPay.getManaCost(), Command.Blank, Command.Blank);
+                            }
+                        } //end resolve()
+                    }; //end pay ability
+                    pay.setStackDescription("Demonic Hordes - Upkeep Cost");
+                    AllZone.Stack.add(pay);
+                } //end choice
+                else {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(c.getName()).append(" - is tapped and you must sacrifice a land of opponent's choice");
+                    noPay.setStackDescription(sb.toString());
+                    AllZone.Stack.add(noPay);
+                }
+            } //end human
 			else { //computer
 				if((c.getController().equals(AllZone.ComputerPlayer) && (ComputerUtil.canPayCost(noPay)))) {
 					final Ability computerPay = new Ability(c, "0") {
