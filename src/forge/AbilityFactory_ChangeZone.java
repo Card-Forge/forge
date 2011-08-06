@@ -371,7 +371,7 @@ public class AbilityFactory_ChangeZone {
 		
 		CardList fetchList = AllZoneUtil.getCardsInZone(origin, player);
         if (origin.equals("Library"))	// Look at whole library before moving onto choosing a card
-        	GuiUtils.getChoice(af.getHostCard().getName() + " - Looking at " + origin, fetchList.toArray());
+        	GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Looking at " + origin, fetchList.toArray());
 		
 		fetchList = filterListByType(fetchList, params, "ChangeType", sa);
 
