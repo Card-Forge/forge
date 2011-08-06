@@ -7647,7 +7647,7 @@ public class CardFactory implements NewConstants {
         }
         //*************** END ************ END **************************
 
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Quicksilver Amulet")) {
             final SpellAbility ability = new Ability_Tap(card, "4") {
@@ -7709,7 +7709,7 @@ public class CardFactory implements NewConstants {
             });
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Chalice of the Void")) {
