@@ -1,3 +1,93 @@
+Vithian Stinger
+2 R
+Creature Human Shaman
+no text
+0/1
+abDamageTgtCP T:1
+Unearth:1 R
+
+Viscera Dragger
+3 B
+Creature Zombie Ogre Warrior
+no text
+3/3
+Cycling:2
+Unearth:1 B
+
+Undead Leotau
+5 B
+Creature Zombie Cat
+no text
+3/4
+abPump R:+1/-1
+Unearth:2 B
+
+Shambling Remains
+1 B R
+Creature Zombie Horror
+no text
+4/3
+This creature cannot block
+Unearth:B R
+
+Sedraxis Specter
+U B R
+Creature
+Whenever Sedraxis Specter deals combat damage to a player, that player discards a card.
+2/2
+Flying
+Unearth:1 B
+
+Kathari Screecher
+2 U
+Creature Bird Soldier
+no text
+2/2
+Flying
+Unearth:2 U
+
+Hell's Thunder
+1 R R
+Creature Elemental
+no text
+4/4
+Flying
+Haste
+At the beginning of the end step, sacrifice CARDNAME.
+Unearth:4 R
+
+Fire-Field Ogre
+1 U B R
+Creature Ogre Mutant
+no text
+4/2
+First Strike
+Unearth:1 U B R
+
+Etherium Abomination
+3 U B
+Artifact Creature Horror
+no text
+4/3
+Unearth:1 U B
+
+Dregscape Zombie
+1 B
+Creature Zombie
+no text
+2/1
+Unearth:B
+
+Hellspark Elemental
+1 R
+Creature Elemental
+no text
+3/1
+Trample
+Haste
+At the beginning of the end step, sacrifice CARDNAME.
+Unearth:1 R
+
 Borderland Ranger
 2 G
 Creature Human Scout

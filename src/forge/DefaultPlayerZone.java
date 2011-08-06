@@ -33,6 +33,16 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
     	AllZone.GameAction.shuffle(c.getOwner());
     	return;
     }
+    
+    if (c.isUnearthed() && (is("Graveyard") || is("Hand")))
+    {
+    	PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, c.getOwner());
+    	removed.add(c);
+    	c.setUnearthed(false);
+    	return;
+    }
+    	
+    
     c.addObserver(this);
 
     c.setTurnInZone(AllZone.Phase.getTurn());

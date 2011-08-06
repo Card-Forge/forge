@@ -651,6 +651,74 @@ public class CardFactoryUtil {
         
     }//ability_Flashback()
     
+    public static Ability ability_Unearth(final Card sourceCard, String manaCost) {
+
+        final Ability unearth = new Ability(sourceCard, manaCost) {
+            
+			private static final long serialVersionUID = -5633945565395478009L;
+
+
+			@Override
+            public void resolve() {
+                PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, sourceCard.getController());
+                //PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, sourceCard.getController());
+                PlayerZone play = AllZone.getZone(Constant.Zone.Play, sourceCard.getController());
+                
+                grave.remove(sourceCard);
+                play.add(sourceCard);
+                
+                sourceCard.addIntrinsicKeyword("At the beginning of the end step, sacrifice CARDNAME.");
+                sourceCard.addIntrinsicKeyword("Haste");
+                sourceCard.setUnearthed(true);
+                /*
+                final Command entersPlay = new Command()
+                {
+                	public void execute()
+                	{
+                		sourceCard.setUnearthed(true);
+                	}
+                };
+                sourceCard.addComesIntoPlayCommand(entersPlay);
+                
+                
+                final Command leavesPlay = new Command()
+                {
+					private static final long serialVersionUID = -8640915882354670864L;
+
+					public void execute()
+                	{
+                		AllZone.GameAction.removeUnearth(sourceCard);
+                	}
+                };
+                sourceCard.addLeavesPlayCommand(leavesPlay);
+                */
+                
+            }
+            
+            
+            @Override
+            public boolean canPlay() {
+                PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, sourceCard.getController());
+                String phase = AllZone.Phase.getPhase();
+                String activePlayer = AllZone.Phase.getActivePlayer();
+                
+                return AllZone.GameAction.isCardInZone(sourceCard, grave)
+                        && ((phase.equals(Constant.Phase.Main1) || phase.equals(Constant.Phase.Main2))
+                                && sourceCard.getController().equals(activePlayer) && AllZone.Stack.size() == 0);
+                
+            }
+            
+        };
+        
+        unearth.setFlashBackAbility(true);
+        //unearth.setManaCost(manaCost);
+        unearth.setDescription("Unearth: " + manaCost);
+        unearth.setStackDescription("Unearth: " + sourceCard.getName());
+        
+        return unearth;
+        
+    }//ability_Unearth()
+    
     public static SpellAbility ability_Spore_Saproling(final Card sourceCard) {
         final SpellAbility ability = new Ability(sourceCard, "0") {
             @Override
@@ -2649,13 +2717,23 @@ public class CardFactoryUtil {
     }
     */
 
-
     public static CardList getFlashbackCards(String player) {
         PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
         CardList cl = new CardList(grave.getCards());
         cl = cl.filter(new CardListFilter() {
             public boolean addCard(Card c) {
                 return c.hasFlashback();
+            }
+        });
+        return cl;
+    }
+
+    public static CardList getFlashbackUnearthCards(String player) {
+        PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+        CardList cl = new CardList(grave.getCards());
+        cl = cl.filter(new CardListFilter() {
+            public boolean addCard(Card c) {
+                return c.hasFlashback() || c.hasUnearth();
             }
         });
         return cl;

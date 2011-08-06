@@ -63,8 +63,16 @@ public class GameAction {
         //used by Input_Instant
         if(p != null) p.remove(c);
         
+        //hack: do not reset unearthed
+        boolean unearthed = false;
+        if (c.isUnearthed())
+        	unearthed = true;
+        
         //create new Card, which resets stats and anything that might have changed during play
         if(!c.isToken()) c = AllZone.CardFactory.copyCard(c);
+        
+        if (unearthed)
+        	c.setUnearthed(true);
         
         zone.add(c);
         return c;
@@ -749,6 +757,12 @@ public class GameAction {
         zone.remove(c);
         if(!c.isToken()) removed.add(c);
         
+    }
+    
+    public void removeUnearth(Card c)
+    {
+    	PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, c.getOwner());
+    	removed.add(c);
     }
     
     

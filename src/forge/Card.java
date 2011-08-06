@@ -57,6 +57,8 @@ public class Card extends MyObservable {
     private boolean                      doubleStrike                      = false;
     
     private boolean                      flashback                         = false;
+    private boolean 					 unearth						   = false;
+    private boolean 					 unearthed;
     
     private int                          exaltedMagnitude                  = 0;
     
@@ -1514,6 +1516,24 @@ public class Card extends MyObservable {
     
     public void setFlashback(boolean b) {
         flashback = b;
+    }
+    
+    public boolean hasUnearth() {
+        return unearth;
+    }
+    
+    public void setUnearth(boolean b) {
+        unearth = b;
+    }
+    
+    public boolean isUnearthed()
+    {
+    	return unearthed;
+    }
+    
+    public void setUnearthed(boolean b)
+    {
+    	unearthed = b;
     }
     
     public void setKicked(boolean b) {

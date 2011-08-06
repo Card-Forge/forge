@@ -108,7 +108,7 @@ public class ComputerUtil
     }
   }//play()
 
-  //gets Spell's of cards in hand and Abilities of cards in play
+  //gets Spells of cards in hand and Abilities of cards in play
   //checks to see
   //1. if canPlay() returns true, 2. can pay for mana
   static public SpellAbility[] getSpellAbility()
@@ -116,7 +116,7 @@ public class ComputerUtil
     CardList all = new CardList();
     all.addAll(AllZone.Computer_Play.getCards());
     all.addAll(AllZone.Computer_Hand.getCards());
-    all.addAll(CardFactoryUtil.getFlashbackCards(Constant.Player.Computer).toArray());
+    all.addAll(CardFactoryUtil.getFlashbackUnearthCards(Constant.Player.Computer).toArray());
     
     all = all.filter(new CardListFilter()
     {

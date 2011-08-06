@@ -2763,6 +2763,20 @@ public class CardFactory implements NewConstants {
             }
         }//flashback
         
+        if(hasKeyword(card, "Unearth") != -1) {
+            int n = hasKeyword(card, "Unearth");
+            if(n != -1) {
+                String parse = card.getKeyword().get(n).toString();
+                //card.removeIntrinsicKeyword(parse);
+                
+                String k[] = parse.split(":");
+                
+                final String manacost = k[1];
+                
+                card.addSpellAbility(CardFactoryUtil.ability_Unearth(card, manacost));
+                card.setUnearth(true);
+            }
+        }//unearth
 
         if(hasKeyword(card, "Devour") != -1) {
             int n = hasKeyword(card, "Devour");
