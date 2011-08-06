@@ -5507,7 +5507,7 @@ public class CardFactory_Creatures {
             
         }//*************** END ************ END **************************
         
-        
+        /* Converteded to AF Trigger
         //*************** START *********** START **************************
         else if(cardName.equals("Aven Riftwatcher")) {
             Command gain2Life = new Command() {
@@ -5521,7 +5521,7 @@ public class CardFactory_Creatures {
             card.addLeavesPlayCommand(gain2Life);
             card.addComesIntoPlayCommand(gain2Life);
         }//*************** END ************ END **************************
-
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Gilt-Leaf Archdruid")) {
