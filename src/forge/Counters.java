@@ -24,6 +24,7 @@ public enum Counters {
     HOOFPRINT(),
     ICE(),
     INFECTION(),
+    JAVELIN(),
     KI(),
     LEVEL(),
     LOYALTY(),
