@@ -1523,10 +1523,16 @@ class CardFactory_Auras {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Take Possession") || cardName.equals("Volition Reins")) {	
+        else if(cardName.equals("Take Possession") || cardName.equals("Volition Reins") || cardName.equals("Confiscate")) {
             final Player[] prevController = new Player[1];
             prevController[0] = null;
-            String costString = cardName.equals("Volition Reins") ? "3 U U U" : "5 U U";
+            String costString = "0";
+            if(cardName.equals("Volition Reins"))
+                costString = "3 U U U";
+            else if(cardName.equals("Take Possession"))
+                costString = "5 U U";
+            else if(cardName.equals("Confiscate"))
+                costString = "4 U U";
             Ability_Cost cost = new Ability_Cost(costString, cardName, false);
             Target tgt = new Target(card,"Select target Permanent", "Permanent".split(","));
             

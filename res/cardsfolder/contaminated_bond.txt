@@ -1,0 +1,12 @@
+Name:Contaminated Bond
+ManaCost:1 B
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+K:enPump:+0/+0
+T:Mode$ Attacks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever enchanted creature attacks or blocks, its controller loses 3 life.
+T:Mode$ Blocks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigLoseLife | Secondary$ True | TriggerDescription$ Whenever enchanted creature attacks or blocks, its controller loses 3 life.
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredController | LifeAmount$ 3
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/contaminated_bond.jpg
+End
