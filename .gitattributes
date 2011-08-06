@@ -5655,6 +5655,7 @@ res/cardsfolder/shield_of_the_oversoul.txt -text svneol=native#text/plain
 res/cardsfolder/shield_sphere.txt -text svneol=native#text/plain
 res/cardsfolder/shield_wall.txt -text svneol=native#text/plain
 res/cardsfolder/shielding_plax.txt -text svneol=native#text/plain
+res/cardsfolder/shifting_sliver.txt svneol=native#text/plain
 res/cardsfolder/shifting_wall.txt -text svneol=native#text/plain
 res/cardsfolder/shimmer_myr.txt -text svneol=native#text/plain
 res/cardsfolder/shimmering_barrier.txt -text svneol=native#text/plain
