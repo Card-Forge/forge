@@ -210,25 +210,28 @@ public class AbilityFactory_Pump {
     }
 
     private CardList getPumpCreatures() {
+    	
+        final boolean kHaste = Keywords.contains("Haste");
+        final boolean kSize = Keywords.size() > 0;
+        String KWpump[] = {"none"};
+        if (!Keywords.get(0).equals("none"))
+        	KWpump = Keywords.toArray(new String[Keywords.size()]);
+        final String KWs[] = KWpump;
+    	
         CardList list = new CardList(AllZone.Computer_Play.getCards());
         list = list.getType("Creature");
         list = list.filter(new CardListFilter() {
             public boolean addCard(Card c) {
                 boolean hSick = c.hasSickness();
-                boolean kHaste = Keywords.contains("Haste");
                 boolean cTgt = CardFactoryUtil.canTarget(hostCard, c);
             	
                 if(hSick && kHaste) 
                     return cTgt;
                     
                 boolean cAtt = CardFactoryUtil.AI_doesCreatureAttack(c);
-                boolean kSize = Keywords.size() > 0;
-                String KWs[] = {"none"};
-                if (!Keywords.get(0).equals("none"))
-                	KWs = Keywords.toArray(new String[Keywords.size()]);
-                
                 boolean hKW = c.hasAnyKeyword(KWs);
-                return (cAtt && cTgt && (kSize && !hKW) && !(!hSick && kHaste));
+                
+                return (cAtt && cTgt && (kSize && !hKW) && !(!hSick && kHaste)); //Don't add duplicate keywords
                     
                 //return false;
             }
@@ -245,7 +248,8 @@ public class AbilityFactory_Pump {
             public boolean addCard(Card c) { 
                     	return CardFactoryUtil.canTarget(hostCard, c) && c.isCreature(); 
                 }
-        });        
+        });
+        
     	if (defense < 0 && !list.isEmpty()) { // with spells that give -X/-X, compi will try to destroy a creature
     		list = list.filter(new CardListFilter() {
                 public boolean addCard(Card c) {
@@ -254,6 +258,22 @@ public class AbilityFactory_Pump {
                 }
         	}); // leaves all creatures that will be destroyed
     	} // -X/-X end
+    	else if (!list.isEmpty()) {
+            String KWpump[] = {"none"};
+            if (!Keywords.get(0).equals("none"))
+            	KWpump = Keywords.toArray(new String[Keywords.size()]);
+            final String KWs[] = KWpump;
+            final boolean addsKeywords = Keywords.size() > 0;
+            
+            if (addsKeywords) {
+            	list = list.filter(new CardListFilter() {
+            		public boolean addCard(Card c) {
+            			return c.hasAnyKeyword(KWs);    // don't add duplicate negative keywords
+            		}
+            	});
+            }
+    	}
+    	
     	
     	return list;
     }
