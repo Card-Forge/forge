@@ -9,6 +9,5 @@ SVar:DBExile:DB$ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cyclical_evolution.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/125.jpg
 End
-
-

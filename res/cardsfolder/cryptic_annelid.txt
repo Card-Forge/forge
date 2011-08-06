@@ -10,5 +10,5 @@ SVar:DBScry3:DB$Scry | ScryNum$ 3
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptic_annelid.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/34.jpg
 End
-

@@ -10,4 +10,5 @@ A:AB$ Mana | Cost$ T Sac<1/Forest> | Produced$ G G G | SpellDescription$ Add G G
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_lumberjack.jpg
+SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/96.jpg
 End

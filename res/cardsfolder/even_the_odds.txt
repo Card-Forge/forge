@@ -6,4 +6,5 @@ A:SP$ Token | Cost$ 2 W | IsPresent$ Creature.YouCtrl | PresentCompare$ LTX | To
 SVar:X:Count$Valid Creature.YouDontCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/even_the_odds.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/6.jpg
 End
