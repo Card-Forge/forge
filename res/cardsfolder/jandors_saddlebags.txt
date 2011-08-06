@@ -2,7 +2,8 @@ Name:Jandor's Saddlebags
 ManaCost:2
 Types:Artifact
 Text:no text
-K:abUntapTgt 3 T:Creature:Untap target creature.
+#K:abUntapTgt 3 T:Creature:Untap target creature.
+A:AB$Untap|Cost$3 T|Tgt$TgtC|SpellDescription$Untap target creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jandors_saddlebags.jpg
