@@ -190,8 +190,6 @@ public class GameActionUtil {
 		playCard_Gelectrode(c);
 		playCard_Standstill(c);
 		playCard_Sigil_of_the_Empty_Throne(c);
-		playCard_Merrow_Levitator(c);
-		//playCard_Kor_Firewalker(c);
 		playCard_Curse_of_Wizardry(c);
 		playCard_Venser_Emblem(c);
 		playCard_Presence_of_the_Master(c);
@@ -1308,72 +1306,6 @@ public class GameActionUtil {
 			} // for
 		}// if isEnchantment()
 	}
-
-	public static void playCard_Merrow_Levitator(Card c) {
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
-
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Merrow Levitator");
-
-		if(c.isBlue()) {
-			for(int i = 0; i < list.size(); i++) {
-				final Card card = list.get(i);
-
-				Ability ability2 = new Ability(card, "0") {
-					@Override
-					public void resolve() {
-						if(card.isTapped()) card.untap();
-					}
-				}; // ability2
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(card.getName()).append(" - ").append(" untaps");
-				ability2.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability2);
-
-			} // for
-		}// if is blue spell
-	}//merrow levitator
-
-	
-	/*
-    public static void playCard_Kor_Firewalker(Card c) {
-
-        CardList list = AllZoneUtil.getCardsInPlay("Kor Firewalker");
-
-        if (list.size() > 0) {
-            if (c.isRed()) {
-                for (int i=0;i<list.size();i++) {
-                    final Card card = list.get(i);
-                    final Player controller = card.getController();
-                    
-                    Ability ability2 = new Ability(card, "0") {
-                        public void resolve() {
-                            
-                            if (controller.isHuman()) {
-                                String question = "Will you gain 1 life?";
-                                if (showYesNoDialog(card, question)) {
-                                    controller.gainLife(1, card);
-                                }
-                            }// controller isComputer()
-                            else controller.gainLife(1, card);
-                            
-                        }// resolve()
-                    };//ability2
-                    
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName()).append(" - ").append(c.getController()).append(" played a Red spell, ");
-                    sb.append(controller).append(" may gain 1 life.");
-                    ability2.setStackDescription(sb.toString());
-                    AllZone.Stack.add(ability2);
-                }//for
-            }//if c.isRed
-        }//if list
-    }//Kor Firewalker*/
 	
 	public static void playCard_Curse_of_Wizardry(final Card c) {
 		CardList list = AllZoneUtil.getCardsInPlay("Curse of Wizardry");
