@@ -613,7 +613,7 @@ public class CombatUtil {
     				return true;
     	}
     	
-    	return totalDamageOfBlockers(attacker, blockers) < attacker.getKillDamage();
+    	return totalDamageOfBlockers(attacker, blockers) >= attacker.getKillDamage();
     }
     
     
