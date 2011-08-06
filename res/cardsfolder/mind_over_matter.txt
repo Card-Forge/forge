@@ -1,0 +1,9 @@
+Name:Mind Over Matter
+ManaCost:2 U U U U
+Types:Enchantment
+Text:no text
+K:abTapTgt Discard<1/Any>:Artifact,Creature,Land:Tap target artifact, creature, or land.
+K:abUntapTgt Discard<1/Any>:Artifact,Creature,Land:Untap target artifact, creature, or land.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_over_matter.jpg
+End
