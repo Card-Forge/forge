@@ -2362,39 +2362,7 @@ public class CardFactory implements NewConstants {
 
         	ab1.setDescription(abCost+"Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of cards in that player's graveyard.");
         	card.addSpellAbility(ab1);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Glasses of Urza")) {
-        	Target target = new Target(card,"Select target player", new String[] {"Player"});
-        	Cost abCost = new Cost("T", cardName, true);
-            final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
-                private static final long serialVersionUID = -3857979945891501990L;
-
-                @Override
-                public void resolve() {
-                    final Player player = getTargetPlayer();
-                    CardList hand = AllZoneUtil.getPlayerHand(player);
-                    if (hand.size() > 0) {
-                        GuiUtils.getChoice("Target player's hand", hand.toArray());
-                    } else {
-                    	StringBuilder sb = new StringBuilder();
-                        sb.append(getTargetPlayer()).append("'s hand is empty!");
-                        javax.swing.JOptionPane.showMessageDialog(null, sb.toString(), "Target player's hand", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                }//resolve()
-
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-
-            };//SpellAbility
-
-            ability.setDescription(abCost+"Look at target player's hand.");
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************        
+        }//*************** END ************ END **************************       
         
 
         //*************** START *********** START **************************
