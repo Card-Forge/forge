@@ -1165,16 +1165,15 @@ public class CardFactoryUtil {
             }
             
         };
-        /*
-        String lifecost = "";
-        if(loss != 0) lifecost = ", pay " + lifeloss + " life";
-        
-        flashback.setManaCost(manaCost);*/
+
         flashback.payCosts = fbCost;
         
+        String costString = fbCost.toString().replace(":", ".");
+        
         StringBuilder sbDesc = new StringBuilder();
-        sbDesc.append("Flashback: ").append(cost.toString());//.append(lifecost);
+        sbDesc.append("Flashback: ").append(costString);
         flashback.setDescription(sbDesc.toString());
+        // possibly add Flashback into here?
         
         StringBuilder sbStack = new StringBuilder();
         sbStack.append("Flashback: ").append(sourceCard.getName());
