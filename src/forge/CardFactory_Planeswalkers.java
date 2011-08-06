@@ -1598,7 +1598,7 @@ class CardFactory_Planeswalkers {
 							public void execute() {
                                  if(AllZone.GameAction.isCardExiled(c)) {
                                      PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getOwner());
-                                	 AllZone.GameAction.moveTo(play, c);
+                                	 AllZone.GameAction.moveTo(play, AllZoneUtil.getCardState(c));
                                  }
                              }//execute()
                          };//Command
