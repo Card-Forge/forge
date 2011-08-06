@@ -374,43 +374,33 @@ public class GameActionUtil {
 	public static void playCard_Vengevine(Card c) {
 		if (c.isCreature() == true && (Phase.PlayerCreatureSpellCount == 2 || Phase.ComputerCreatureSpellCount == 2))
 		{
-		final Player controller = c.getController();
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-		CardList list = AllZoneUtil.getPlayerGraveyard(controller);
-		list = list.getName("Vengevine");
-		if(list.size() > 0) {
+			final Player controller = c.getController();
+			final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
+			CardList list = AllZoneUtil.getPlayerGraveyard(controller);
+			list = list.getName("Vengevine");
+			if(list.size() > 0) {
 				for(int i = 0; i < list.size(); i++) {
 					final Card card = list.get(i);
 					Ability ability = new Ability(card, "0") {
 						@Override
 						public void resolve() {
-				        	if(controller.isHuman()){
-					        	Object[] possibleValues = {"Yes", "No"};
-					        	Object q = JOptionPane.showOptionDialog(null, "Return Vengevine from the graveyard?", "Vengevine Ability", 
-					        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-					        			null, possibleValues, possibleValues[0]);
-			                      if(q.equals(0)) {
-				                    if(AllZoneUtil.isCardInPlayerGraveyard(controller, card)) {
-				                        AllZone.GameAction.moveTo(play, card);
-				                    }
-					    		}
-				        	} else {
-			                    if(AllZoneUtil.isCardInPlayerGraveyard(controller, card)) {
-			                        AllZone.GameAction.moveTo(play, card);
-			                    }
-				        	}
+							if(controller.isComputer() || GameActionUtil.showYesNoDialog(card, "Return Vengevine from the graveyard?")){
+								if(AllZoneUtil.isCardInPlayerGraveyard(controller, card)) {
+									AllZone.GameAction.moveTo(play, card);
+								}
+							}
 						}
 					}; // ability
-					
+
 					StringBuilder sb = new StringBuilder();
-					sb.append(card.getName()).append(" - ").append("Whenever you cast a spell, if it's the second creature ");
+					sb.append(card).append(" - ").append("Whenever you cast a spell, if it's the second creature ");
 					sb.append("spell you cast this turn, you may return Vengevine from your graveyard to the battlefield.");
 					ability.setStackDescription(sb.toString());
 
-                    AllZone.Stack.addSimultaneousStackEntry(ability);
+					AllZone.Stack.addSimultaneousStackEntry(ability);
 
-				}//if
-			}
+				}
+			}//if
 		}
 	}//playCard_Vengevine()
 	

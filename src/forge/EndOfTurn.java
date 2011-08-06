@@ -88,11 +88,11 @@ public class EndOfTurn implements java.io.Serializable
     		final SpellAbility sac = new Ability(card, "0") {
     			@Override
     			public void resolve() {
-    				if(AllZoneUtil.isCardInPlay(card)) AllZone.GameAction.sacrifice(card);
+    				if(AllZoneUtil.isCardInPlay(card)) AllZone.GameAction.destroy(card);
     			}
     		};
     		StringBuilder sb = new StringBuilder();
-    		sb.append("Sacrifice ").append(card);
+    		sb.append("Destroy ").append(card);
     		sac.setStackDescription(sb.toString());
 
             AllZone.Stack.addSimultaneousStackEntry(sac);
@@ -133,7 +133,7 @@ public class EndOfTurn implements java.io.Serializable
     			}
     		};
     		StringBuilder sb = new StringBuilder();
-    		sb.append(raider.getName()).append(" deals 2 damage to controller.");
+    		sb.append(raider).append(" deals 2 damage to controller.");
     		change.setStackDescription(sb.toString());
 
             AllZone.Stack.addSimultaneousStackEntry(change);
