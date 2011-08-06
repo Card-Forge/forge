@@ -1,0 +1,11 @@
+Name:Ceremonial Guard
+ManaCost:2 R
+Types:Creature Human Soldier
+Text:no text
+PT:3/4
+T:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | IsPresent$ Card.attacking+Self,Card.blocking+Self | Execute$ TrigSacrifice | TriggerDescription$ When CARDNAME attacks or blocks, sacrifice it at end of combat.
+SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0 | Defined$ Self
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ceremonial_guard.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/182.jpg
+End

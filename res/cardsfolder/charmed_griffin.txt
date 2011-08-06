@@ -1,0 +1,12 @@
+Name:Charmed Griffin
+ManaCost:3 W
+Types:Creature Griffin
+Text:no text
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, each other player may put an artifact or enchantment card onto the battlefield from his or her hand.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Artifact,Enchantment | Defined$ Opponent | ChangeNum$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/charmed_griffin.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/7.jpg
+End
