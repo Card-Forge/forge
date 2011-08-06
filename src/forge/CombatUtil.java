@@ -172,7 +172,7 @@ public class CombatUtil {
                     && !blocker.getKeyword().contains("Reach")) return false;
         }
         
-        if(attacker.getKeyword().contains("This creature can't be blocked except by creatures with flying")
+        if(attacker.getKeyword().contains("CARDNAME can't be blocked except by creatures with flying.")
                 && !blocker.getKeyword().contains("Flying")) return false;
         
 

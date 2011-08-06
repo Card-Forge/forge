@@ -1,3 +1,32 @@
+Silhana Ledgewalker
+1 G
+Creature Elf Rogue
+no text
+1/1
+CARDNAME can't be blocked except by creatures with flying.
+This card can't be the target of spells or abilities your opponents control.
+
+Treetop Bracers
+1 G
+Enchantment Aura
+Enchanted creature gets +1/+1 and can't be blocked except by creatures with flying.
+Enchant creature
+enPump:+1/+1/CARDNAME can't be blocked except by creatures with flying.
+
+Treetop Rangers
+2 G
+Creature Elf
+no text
+2/2
+CARDNAME can't be blocked except by creatures with flying.
+
+Treetop Scout
+G
+Creature Elf Scout
+no text
+1/1
+CARDNAME can't be blocked except by creatures with flying.
+
 Broodwarden
 3 G G
 Creature Eldrazi Drone
@@ -7010,35 +7039,6 @@ Barren Glory
 4 W W
 Enchantment
 At the beginning of your upkeep, if you control no permanents other than Barren Glory and have no cards in hand, you win the game.
-
-Treetop Scout
-G
-Creature Elf Scout
-no text
-1/1
-This creature can't be blocked except by creatures with flying
-
-Treetop Rangers
-2 G
-Creature Elf
-no text
-2/2
-This creature can't be blocked except by creatures with flying
-
-Treetop Bracers
-1 G
-Enchantment Aura
-Enchanted creature gets +1/+1 and can't be blocked except by creatures with flying.
-Enchant creature
-enPump:+1/+1/This creature can't be blocked except by creatures with flying
-
-Silhana Ledgewalker
-1 G
-Creature Elf Rogue
-no text
-1/1
-This creature can't be blocked except by creatures with flying
-This card can't be the target of spells or abilities your opponents control.
 
 Auramancer
 2 W

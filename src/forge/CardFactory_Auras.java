@@ -3783,7 +3783,7 @@ class CardFactory_Auras {
                         Card crd = card.getEnchanting().get(0);
                         crd.addSemiPermanentAttackBoost(1);
                         crd.addSemiPermanentDefenseBoost(1);
-                        crd.addExtrinsicKeyword("This creature can't be blocked except by creatures with flying");
+                        crd.addExtrinsicKeyword("CARDNAME can't be blocked except by creatures with flying.");
                         
                     }
                 }//execute()
@@ -3798,7 +3798,7 @@ class CardFactory_Auras {
                         Card crd = card.getEnchanting().get(0);
                         crd.addSemiPermanentAttackBoost(-1);
                         crd.addSemiPermanentDefenseBoost(-1);
-                        crd.removeExtrinsicKeyword("This creature can't be blocked except by creatures with flying");
+                        crd.removeExtrinsicKeyword("CARDNAME can't be blocked except by creatures with flying.");
                         
                     }
                     
