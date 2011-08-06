@@ -1593,8 +1593,7 @@ public class CardFactory implements NewConstants {
         	}
         }
         
-        // We only have 1 card left out of the approximately 450+ ab/spPump cards to convert over to AbilityFactory.
-        // Umezawa's Jitte has an ability that will require some changes to AF_Pump.
+        /* Cards converted to AB$Pump
         while(hasKeyword(card, "abPump") != -1) {
             int n = hasKeyword(card, "abPump");
             if(n != -1) {
@@ -1934,6 +1933,7 @@ public class CardFactory implements NewConstants {
                 card.addSpellAbility(ability);
             }
         }//while
+        */
         
 
         if(hasKeyword(card, "Untap") != -1) {
@@ -5417,7 +5417,7 @@ public class CardFactory implements NewConstants {
             });//ComesIntoPlayCommand
         } // if etbCounter
         
-        
+        /* Cards converted to SP$Pump
         // Generic target creature pump
         if(hasKeyword(card, "spPumpTgt") != -1) {
             int n = hasKeyword(card, "spPumpTgt");
@@ -5704,6 +5704,7 @@ public class CardFactory implements NewConstants {
             }
 
         }// spPumpTgt
+        */
         
 
         while(shouldManaAbility(card) != -1) {
