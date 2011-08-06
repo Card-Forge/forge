@@ -86,6 +86,8 @@ public class GameActionUtil {
 		upkeep_Bringer_of_the_White_Dawn();
 		upkeep_Murkfiend_Liege();
 		upkeep_Mirror_Sigil_Sergeant();
+		upkeep_Luminous_Angel();
+		upkeep_Verdant_Force();
 		upkeep_Dragon_Broodmother(); //put this before bitterblossom and mycoloth, so that they will resolve FIRST
 		upkeep_Bitterblossom();
 		upkeep_Goblin_Assault();
@@ -123,6 +125,7 @@ public class GameActionUtil {
 		upkeep_Spore_Counters();
 		upkeep_Vanishing();
 		upkeep_Fading();
+		upkeep_Benthic_Djinn();
 		upkeep_Masticore();
 		upkeep_Eldrazi_Monument();
 		upkeep_Blaze_Counters();
@@ -6916,7 +6919,29 @@ public class GameActionUtil {
 		}// for
 	}// upkeep_Wolf_Skull_Shaman()
 
+	private static void upkeep_Benthic_Djinn() {
+		final String player = AllZone.Phase.getActivePlayer();
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
+		CardList list = new CardList(playZone.getCards());
+		list = list.getName("Benthic Djinn");
+
+		Ability ability;
+		for(int i = 0; i < list.size(); i++) {
+
+			final Card crd = list.get(i);
+			ability = new Ability(list.get(i), "0") {
+				@Override
+				public void resolve() {
+                    PlayerLife life = AllZone.GameAction.getPlayerLife(crd.getController());
+                    life.subtractLife(2,crd);    
+				}// resolve()
+			};// Ability
+
+			AllZone.Stack.add(ability);
+		}// for
+	}// upkeep_Benthic_Djinn()   
+	
     private static void upkeep_Leaf_Crowned_Elder() {
         final String player = AllZone.Phase.getActivePlayer();
         PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
@@ -8589,7 +8614,7 @@ public class GameActionUtil {
 		}
 
 	}
-
+	
 	private static void upkeep_Mycoloth() {
 		final String player = AllZone.Phase.getActivePlayer();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
@@ -8623,7 +8648,93 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}// for
 	}// upkeep_Mycoloth()
+	
+	
+	private static void upkeep_Luminous_Angel() {
+		final String player = AllZone.Phase.getActivePlayer();
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
+		CardList list = new CardList(playZone.getCards());
+		list = list.getName("Luminous Angel");
+
+		Ability ability;
+		for(int i = 0; i < list.size(); i++) {
+			final Card card = list.get(i);
+			ability = new Ability(card, "0") {
+				@Override
+				public void resolve() {
+					int multiplier = 1;
+					int doublingSeasons = CardFactoryUtil.getCards("Doubling Season", card.getController()).size();
+					if(doublingSeasons > 0) multiplier = (int) Math.pow(2, doublingSeasons);
+					for(int i = 0; i < multiplier; i++)
+						makeToken();
+
+				}// resolve()
+
+				public void makeToken() {
+
+					final Card c = new Card();
+
+					c.setOwner(card.getController());
+					c.setController(card.getController());
+
+					c.setName("Spirit");
+					c.setImageName("W 1 1 Spirit");
+					c.setManaCost("W");
+					c.setToken(true);
+
+					c.addType("Creature");
+					c.addType("Spirit");
+
+					c.addIntrinsicKeyword("Flying");
+
+					c.setBaseAttack(1);
+					c.setBaseDefense(1);
+					
+					PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+					play.add(c);
+
+				}
+			};// Ability
+			ability.setStackDescription("Luminous Angel - put a 1/1 white Spirit token into play.");
+
+			AllZone.Stack.add(ability);
+		}// for
+	}// upkeep_Luminous_Angel()
+
+	private static void upkeep_Verdant_Force() {
+		//final String player = AllZone.Phase.getActivePlayer();
+		PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+		PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+
+		CardList list = new CardList(hPlay.getCards());
+		list.addAll(cPlay.getCards());
+		list = list.getName("Verdant Force");
+
+		Ability ability;
+		for(int i = 0; i < list.size(); i++) {
+			final Card card = list.get(i);
+			ability = new Ability(card, "0") {
+				@Override
+				public void resolve() {
+					int multiplier = 1;
+					int doublingSeasons = CardFactoryUtil.getCards("Doubling Season", card.getController()).size();
+					if(doublingSeasons > 0) multiplier = (int) Math.pow(2, doublingSeasons);
+					for(int i = 0; i < multiplier; i++)
+						makeToken();
+
+				}// resolve()
+
+				public void makeToken() {
+					CardFactoryUtil.makeTokenSaproling(card.getController());
+				}
+			};// Ability
+			ability.setStackDescription("Verdant Force - put a 1/1 green Saproling token into play.");
+
+			AllZone.Stack.add(ability);
+		}// for
+	}// upkeep_Verdant_Force()
+	
 	private static void upkeep_Dragon_Broodmother() {
 		//final String player = AllZone.Phase.getActivePlayer();
 		PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
