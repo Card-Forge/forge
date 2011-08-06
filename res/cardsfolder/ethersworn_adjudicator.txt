@@ -4,7 +4,7 @@ Types:Artifact Creature Vedalken Knight
 Text:no text
 PT:4/4
 K:Flying
-K:Untap:2 U
+A:AB$Untap | Cost$ 2 U | SpellDescription$ Untap CARDNAME.
 A:AB$Destroy | Cost$ 1 W B T | ValidTgts$ Creature,Enchantment | TgtPrompt$ Select target creature or enchantment | SpellDescription$ Destroy target creature or enchantment.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ethersworn_adjudicator.jpg

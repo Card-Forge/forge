@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact
 Text:no text
 K:CARDNAME doesn't untap during your untap step.
-K:Untap:3
+A:AB$Untap | Cost$ 3 | SpellDescription$ Untap CARDNAME.
 K:tap: add 3
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

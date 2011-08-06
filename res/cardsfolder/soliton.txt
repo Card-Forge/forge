@@ -3,7 +3,7 @@ ManaCost:5
 Types:Artifact Creature Construct
 Text:no text
 PT:3/4
-K:Untap:U
+A:AB$Untap | Cost$ U | SpellDescription$ Untap CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soliton.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/204.jpg
