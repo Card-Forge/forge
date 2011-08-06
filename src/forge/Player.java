@@ -23,7 +23,7 @@ public abstract class Player extends MyObservable{
 	
 	protected Card lastDrawnCard;
 	protected int numDrawnThisTurn = 0;
-	protected int slowtripCount = 0;
+	protected CardList slowtripList = new CardList();
 	
 	public Player(String myName) {
 		this(myName, 20, 0);
@@ -51,7 +51,7 @@ public abstract class Player extends MyObservable{
 		assignedDamage = 0;
 		lastDrawnCard = null;
 		numDrawnThisTurn = 0;
-		slowtripCount = 0;
+		slowtripList = new CardList();
 		bFirstTurn = true;
 		altWin = false;
 		altLose = false;
@@ -531,16 +531,16 @@ public abstract class Player extends MyObservable{
     	return old;
     }
     
-    public int getSlowtripCount() {
-    	return slowtripCount;
+    public CardList getSlowtripList() {
+    	return slowtripList;
     }
     
-    public void setSlowtripCount(int count) {
-    	slowtripCount = count;
+    public void clearSlowtripList() {
+    	slowtripList.clear();
     }
     
-    public void addSlowtripCount(int count) {
-    	slowtripCount += count;
+    public void addSlowtripList(Card card) {
+    	slowtripList.add(card);
     }
 	
     public boolean isFirstTurn() { return bFirstTurn; }

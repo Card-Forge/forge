@@ -3376,13 +3376,27 @@ public class GameActionUtil {
 	}//echo
 
 	private static void upkeep_Slowtrips() {  // Draw a card at the beginning of the next turn's upkeep.
-		Player player = AllZone.Phase.getPlayerTurn();
+		final Player player = AllZone.Phase.getPlayerTurn();
 		
-		int cards = player.getSlowtripCount();
-		player.drawCards(cards);
-		player.setSlowtripCount(0);
+		CardList list = player.getSlowtripList();
 		
+		for (int i = 0; i < list.size(); i++) {
+			Card card = list.get(i);
+			card.removeIntrinsicKeyword("Draw a card at the beginning of the next turn's upkeep."); //otherwise another slowtrip gets added
+			
+			final Ability slowtrip = new Ability(card, "0") {
+				@Override
+				public void resolve() {
+					player.drawCard();
+				}
+			};
+			slowtrip.setStackDescription(card.getName() + " - Draw a card");
+			AllZone.Stack.add(slowtrip);
+			
+		}
+		player.clearSlowtripList();
 	}
+	
 	
 	private static void upkeep_UpkeepCost() {
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.Phase.getPlayerTurn());
