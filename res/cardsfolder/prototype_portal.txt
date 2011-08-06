@@ -9,4 +9,5 @@ SVar:X:Imprinted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prototype_portal.jpg
+SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/195.jpg
 End
