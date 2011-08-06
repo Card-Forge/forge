@@ -14983,14 +14983,29 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Time Stretch") || cardName.equals("Time Warp")) {
+        else if(cardName.equals("Time Stretch")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = -76579316599195788L;
                 
                 @Override
                 public void resolve() {
                     AllZone.Phase.addExtraTurn(getTargetPlayer());
-                    if(cardName.equals("Time Stretch")) ;
+                    AllZone.Phase.addExtraTurn(getTargetPlayer());
+                }
+            };
+            card.clearSpellAbility();
+            spell.setChooseTargetAI(CardFactoryUtil.AI_targetComputer());
+            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
+      //*************** START *********** START **************************
+        else if(cardName.equals("Time Warp")) {
+            final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = -76579316599195788L;
+                
+                @Override
+                public void resolve() {
                     AllZone.Phase.addExtraTurn(getTargetPlayer());
                 }
             };
