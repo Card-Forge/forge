@@ -12,8 +12,13 @@ public class Spell_Permanent extends Spell {
         
         setManaCost(sourceCard.getManaCost());
         
-        if(sourceCard.isCreature()) setStackDescription(sourceCard.getName() + " - Creature "
-                + sourceCard.getNetAttack() + " / " + sourceCard.getNetDefense());
+        if(sourceCard.isCreature()) {
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(sourceCard.getName()).append(" - Creature ").append(sourceCard.getNetAttack());
+        	sb.append(" / ").append(sourceCard.getNetDefense());
+        	setStackDescription(sb.toString());
+        }
         else setStackDescription(sourceCard.getName());
         
         setDescription(getStackDescription());
