@@ -7,5 +7,4 @@ T:Mode$ SpellCast | ValidCard$ Spirit.YouCtrl,Arcane.YouCtrl | TriggerZones$ Bat
 SVar:TrigLand:AB$ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | Tapped$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loam_dweller.jpg
-
 End
