@@ -5226,6 +5226,7 @@ res/cardsfolder/regenerate.txt -text svneol=native#text/plain
 res/cardsfolder/regeneration.txt -text svneol=native#text/plain
 res/cardsfolder/regress.txt -text svneol=native#text/plain
 res/cardsfolder/regrowth.txt -text svneol=native#text/plain
+res/cardsfolder/reign_of_chaos.txt -text svneol=native#text/plain
 res/cardsfolder/reinforcements.txt -text svneol=native#text/plain
 res/cardsfolder/reiterate.txt -text svneol=native#text/plain
 res/cardsfolder/reito_lantern.txt svneol=native#text/plain
