@@ -36,7 +36,7 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Atomic Robo 2", "medium", " Artifact Singleton ");
 //        addToDeckList("Atomic Robo 3", "hard", "Artifact Standard Constructed");
         
-        addToDeckList("Bamm Bamm Rubble 1", "easy", "WUBRG Domain deck");
+        addToDeckList("Bamm Bamm Rubble 1", "easy", "WBURG Domain deck");
         addToDeckList("Barney Rubble 1", "easy", "WU Sovereigns of Lost Alara deck with walls and auras");
         addToDeckList("Barney Rubble 2", "medium", "WU Sovereigns of Lost Alara deck with walls and auras");
         addToDeckList("Barney Rubble 3", "hard", "WU Sovereigns of Lost Alara deck with walls and auras");
@@ -294,10 +294,10 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Swamp Thing 2", "medium", "GB");
 //        addToDeckList("Swamp Thing 3", "hard", "GB");
         
-        addToDeckList("Tarzan 1", "easy", "Jungle creatures + pump spells");
-        addToDeckList("Tarzan 2", "medium", "Tarzan with Silverback Ape + pump spells");
-        addToDeckList("Terminator 3", "hard", "Master of Etherium + Control Magic and Memnarch + many artifacts");
-        addToDeckList("The Great Gazoo 3", "hard", "Sun Lotion deck, red damage all spells and pro from red creatures");
+        addToDeckList("Tarzan 1", "easy", "WG deck, jungle creatures, pump spells");
+        addToDeckList("Tarzan 2", "medium", "WG deck, Silverback Ape, jungle creatures, pump spells");
+        addToDeckList("Terminator 3", "hard", "U deck, Master of Etherium, Control Magic, Memnarch, many artifacts");
+        addToDeckList("The Great Gazoo 3", "hard", "WR deck, red damage all spells and pro from red creatures");
 //        addToDeckList("Thing 2", "medium", "GW Elves");
 //        addToDeckList("Thing 3", "hard", "G Garruk Elves");
 //        addToDeckList("Thor 1", "easy", "WR Singleton");
@@ -305,12 +305,12 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Thor 3", "hard", "WR Constructed");
 //        addToDeckList("Thugs 2", "medium", "GW Elves");
 //        addToDeckList("Thugs 3", "hard", "GW Strength in Numbers");
-        addToDeckList("Totoro 2", "medium", "UBG deck with spirits and arcane spells");
-        addToDeckList("Treebeard 1", "easy", "Treefolk creatures, a lumberjack's dream. Bosk Banneret, Dauntless Dourbark, Leaf-Crowned Elder");
-        addToDeckList("Treebeard 2", "medium", "Treefolk creatures. Bosk Banneret, Dauntless Dourbark, Timber Protector, Leaf-Crowned Elder, Doran");
-        addToDeckList("Treebeard 3", "hard", "Treefolk creatures. Bosk Banneret, Dauntless Dourbark, Timber Protector, Leaf-Crowned Elder, Doran");
+        addToDeckList("Totoro 2", "medium", "BUG deck, spirits and arcane spells");
+        addToDeckList("Treebeard 1", "easy", "G Treefolk deck, a lumberjack's dream. Bosk Banneret, Dauntless Dourbark, Leaf-Crowned Elder");
+        addToDeckList("Treebeard 2", "medium", "WBG Treefolk deck, Bosk Banneret, Dauntless Dourbark, Timber Protector, Leaf-Crowned Elder, Doran");
+        addToDeckList("Treebeard 3", "hard", "WBG Treefolk deck. Bosk Banneret, Dauntless Dourbark, Timber Protector, Leaf-Crowned Elder, Doran");
         
-        addToDeckList("Uncle Owen 3", "hard", "Creature removal/control with Liliana Vess");
+        addToDeckList("Uncle Owen 3", "hard", "WBU deck, creature removal and control with Liliana Vess");
         
 //        addToDeckList("Vampire 2", "medium", "Vampire Singleton");
 //        addToDeckList("Vampire 3", "hard", "Vampire Constructed");
@@ -319,13 +319,13 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("White Knight 1", "easy", "W Common Knights");
 //        addToDeckList("White Knight 2", "medium", "Singleton Knights");
 //        addToDeckList("White Knight 3", "hard", "Knights Standard");
-        addToDeckList("Wilma Flintstone 1", "easy", "BG Noxious Hatchling, Woodlurker Mimic");
-        addToDeckList("Wilma Flintstone 2", "medium", "BG Noxious Hatchling, Woodlurker Mimic");
-        addToDeckList("Wilma Flintstone 3", "hard", "BG Noxious Hatchling, Woodlurker Mimic");
-        addToDeckList("Wolverine 3", "hard", "Nightmare + Korlash, Heir to Blackblade + Kodama's Reach");
-        addToDeckList("Wyatt Earp 1", "easy", "Mono white deck, Crovax, Ascendant Hero + Crusade + small to medium sized creatures.");
-        addToDeckList("Wyatt Earp 2", "medium", "Mono white deck, Crovax, Ascendant Hero + Crusade + small to medium sized creatures.");
-        addToDeckList("Wyatt Earp 3", "hard", "Mono white deck, Crovax, Ascendant Hero + Honor of the Pure + small to medium sized creatures.");
+        addToDeckList("Wilma Flintstone 1", "easy", "BG deck, Noxious Hatchling, Woodlurker Mimic");
+        addToDeckList("Wilma Flintstone 2", "medium", "BG deck, Noxious Hatchling, Woodlurker Mimic");
+        addToDeckList("Wilma Flintstone 3", "hard", "BG deck, Noxious Hatchling, Woodlurker Mimic");
+        addToDeckList("Wolverine 3", "hard", "BG deck, Nightmare, Korlash, Heir to Blackblade, Kodama's Reach");
+        addToDeckList("Wyatt Earp 1", "easy", "Mono W deck, Crovax, Ascendant Hero, Crusade, small to medium sized creatures.");
+        addToDeckList("Wyatt Earp 2", "medium", "Mono W deck, Crovax, Ascendant Hero, Crusade, small to medium sized creatures.");
+        addToDeckList("Wyatt Earp 3", "hard", "Mono W deck, Crovax, Ascendant Hero, Honor of the Pure, small to medium sized creatures.");
         
 //        addToDeckList("Xavier 2", "medium", "UR Twitch");
     }
