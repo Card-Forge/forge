@@ -1,7 +1,7 @@
 Name:Cloudthresher
 ManaCost:2 G G G G
 Types:Creature Elemental
-Text:When Cloudthresher comes into play, it deals 2 damage to each creature with flying and each player.
+Text:When Cloudthresher enters the battlefield, it deals 2 damage to each creature with flying and each player.
 PT:7/7
 K:Flash
 K:Reach

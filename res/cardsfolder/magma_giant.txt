@@ -1,7 +1,7 @@
 Name:Magma Giant
 ManaCost:5 R R
 Types:Creature Giant
-Text:When Magma Giant comes into play, it deals 2 damage to each creature and each player.
+Text:When Magma Giant enters the battlefield, it deals 2 damage to each creature and each player.
 PT:5/5
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_giant.jpg

@@ -1,0 +1,8 @@
+Name:Blinking Spirit
+ManaCost:3 W
+Types:Creature Spirit	
+Text:none.
+PT:2/2
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blinking_spirit.jpg
+End

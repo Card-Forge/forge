@@ -1,0 +1,8 @@
+Name:Mindless Automaton
+ManaCost:4
+Types:Artifact Creature Construct
+Text:Mindless Automaton comes into play with two +1/+1 counters. 1,Discard a card: put a +1/+1 counter on Mindless Automaton. Remove two +1/+1 counters: draw a card. 
+PT:0/0
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mindless_automaton.jpg
+End

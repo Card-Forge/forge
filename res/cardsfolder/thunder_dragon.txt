@@ -1,7 +1,7 @@
 Name:Thunder Dragon
 ManaCost:5 R R
 Types:Creature Dragon
-Text:When Thunder Dragon comes into play, it deals 3 damage to each creature without flying.
+Text:When Thunder Dragon enters the battlefield, it deals 3 damage to each creature without flying.
 PT:5/5
 K:Flying
 SVar:Rarity:Rare

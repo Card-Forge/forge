@@ -1,0 +1,10 @@
+Name:Beast of Burden
+ManaCost:6
+Types:Artifact Creature Golem
+Text:no text
+PT:0/1
+K:StaticEffect:Play:Self:SetPT/Type.Creature/Type.Creature:All Permanents:Beast of Burden's power and toughness are each equal to the number of creatures on the battlefield.
+SVar:BuffedBy:Creature
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/beast_of_burden.jpg
+End
