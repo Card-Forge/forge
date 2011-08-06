@@ -105,9 +105,6 @@ public class GameActionUtil {
 		upkeep_Cursed_Land();
 		upkeep_Pillory_of_the_Sleepless();
 		upkeep_Creakwood_Liege();
-		upkeep_Bringer_of_the_Green_Dawn();
-		upkeep_Bringer_of_the_Blue_Dawn();
-		upkeep_Bringer_of_the_White_Dawn();
 		upkeep_Mirror_Sigil_Sergeant();
 		upkeep_Verdant_Force();
 		upkeep_Dragon_Broodmother(); //put this before bitterblossom and mycoloth, so that they will resolve FIRST
@@ -10296,125 +10293,6 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}// for
 	}// upkeep_Dragon_Broodmother()
-
-    private static void upkeep_Bringer_of_the_Green_Dawn() {
-        final Player player = AllZone.Phase.getPlayerTurn();
-        PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-        CardList list = new CardList(playZone.getCards());
-        list = list.getName("Bringer of the Green Dawn");
-
-        Ability ability;
-        for (int i = 0; i < list.size(); i++) {
-            final Card crd = list.get(i);
-            ability = new Ability(list.get(i), "0") {
-                @Override
-                public void resolve() {
-                    
-                    if (player.equals(AllZone.HumanPlayer)) {
-                        String question = "Place a 3/3 green Beast creature token onto the battlefield?";
-
-                        if (GameActionUtil.showYesNoDialog(crd, question)) {
-                            makeBeastToken();
-                        }
-                    } // player is computer
-                    else {
-                        makeBeastToken();
-                    }
-                }// resolve()
-                
-                private void makeBeastToken() {
-                    CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", crd.getController(), "G", 
-                            new String[] {"Creature", "Beast"}, 3, 3, new String[] {""});
-                }
-            };// Ability
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append("Bringer of the Green Dawn - ").append(player);
-            sb.append(" may place a 3/3 Green Beast token creature onto the battlefield.");
-            ability.setStackDescription(sb.toString());
-
-            AllZone.Stack.add(ability);
-        }// for
-    }// upkeep_Bringer_of_the_Green_Dawn()
-
-	private static void upkeep_Bringer_of_the_Blue_Dawn() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Bringer of the Blue Dawn");
-
-		for(int i = 0; i < list.size(); i++) {
-			player.mayDrawCards(2);
-		}// for
-	}// upkeep_Bringer_of_the_Blue_Dawn()
-
-    private static void upkeep_Bringer_of_the_White_Dawn() {
-        final Player player = AllZone.Phase.getPlayerTurn();
-        PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-        PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-
-        CardList list = new CardList(playZone.getCards());
-        list = list.getName("Bringer of the White Dawn");
-
-        CardList artifacts = new CardList(graveyard.getCards());
-        artifacts = artifacts.getType("Artifact");
-
-        if (artifacts.size() > 0 && list.size() > 0) {
-            Ability ability;
-            for (int i = 0; i < list.size(); i++) {
-                final Card crd = list.get(i);
-                ability = new Ability(crd, "0") {
-                    @Override
-                    public void resolve() {
-                        
-                        if (player.equals(AllZone.HumanPlayer)) {
-                            String question = "Return target artifact card from your graveyard to the battlefield?";
-                            
-                            if (GameActionUtil.showYesNoDialog(crd, question)) {
-                            
-                                PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-                                PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-                                CardList arts = new CardList(graveyard.getCards());
-                                arts = arts.getType("Artifact");
-                                String title = "Choose an artifact";
-                                Object o = GuiUtils.getChoiceOptional(title, arts.toArray());
-                                
-                                if (o != null) {
-                                    Card card = (Card) o;
-                                    graveyard.remove(card);
-                                    playZone.add(card);
-                                }
-                            }
-                        }
-                         // player is computer
-                        else {
-                            PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-                            PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-                            CardList arts = new CardList(graveyard.getCards());
-                            arts = arts.getType("Artifact");
-                            arts.shuffle();
-
-                            Card card = arts.get(0);
-                            graveyard.remove(card);
-                            playZone.add(card);
-                        }
-                    }// resolve()
-                };// Ability
-                
-                StringBuilder sb = new StringBuilder();
-                sb.append("Bringer of the White Dawn - ").append(player);
-                sb.append(" may return target artifact card from the graveyard to the battlefield.");
-                ability.setStackDescription(sb.toString());
-
-                AllZone.Stack.add(ability);
-            }// for
-        }//if
-    }// upkeep_Bringer_of_the_White_Dawn()
-
 
 	private static void upkeep_Serendib_Efreet() {
 		final Player player = AllZone.Phase.getPlayerTurn();
