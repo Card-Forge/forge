@@ -296,7 +296,7 @@ import java.util.*;
     	for (Card defender:defenders) {
     		if(CombatUtil.canBlock(attacker, defender)) {
     			if(CombatUtil.canDestroyAttacker(attacker, defender)) canBeKilled = true;
-    			if(!CombatUtil.canDestroyBlocker(attacker, defender)) canKillAll = false;
+    			if(!CombatUtil.canDestroyBlocker(defender, attacker)) canKillAll = false;
     		}
     	}
     return (canKillAll || !canBeKilled); // A creature should attack if it can't be killed or can kill any blocker
