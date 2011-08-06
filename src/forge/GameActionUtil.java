@@ -2492,8 +2492,7 @@ public class GameActionUtil {
 	//***CREATURES END HERE***
 
 	public static void executeLandfallEffects(Card c) {
-		if(c.getName().equals("Ob Nixilis, the Fallen")) landfall_Ob_Nixilis(c);
-		else if(c.getName().equals("Lotus Cobra")) landfall_Lotus_Cobra(c);
+		if(c.getName().equals("Lotus Cobra")) landfall_Lotus_Cobra(c);
 		else if(c.getName().equals("Avenger of Zendikar")) landfall_Avenger_of_Zendikar(c);
 		else if(c.getName().equals("Eternity Vessel")) landfall_Eternity_Vessel(c);
 	}
@@ -2621,26 +2620,6 @@ public class GameActionUtil {
 
 		if(q == null || q.equals("No")) return false;
 		else return true;
-	}
-
-	private static void landfall_Ob_Nixilis(Card c) {
-		final Card crd = c;
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				crd.getController().getOpponent().loseLife(3, crd);
-				crd.addCounter(Counters.P1P1, 3);
-			}
-		};
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("Landfall: ").append(c.getController().getOpponent());
-		sb.append(" loses 3 life and ").append(c.getName()).append(" gets three +1/+1 counters.");
-		ability.setStackDescription(sb.toString());
-
-		if(c.getController().equals(AllZone.HumanPlayer)) {
-			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
-		} else if(c.getController().equals(AllZone.ComputerPlayer)) AllZone.Stack.add(ability);
 	}
 
 	private static void landfall_Lotus_Cobra(final Card c) {
