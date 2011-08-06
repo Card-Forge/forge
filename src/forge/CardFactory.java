@@ -10354,17 +10354,7 @@ public class CardFactory implements NewConstants {
         	 * 2: Jade Statue becomes a 3/6 Golem artifact creature until
         	 * end of combat. Activate this ability only during combat.
         	 */
-            
-            final Command untilEOC = new Command() {
-				private static final long serialVersionUID = -8432597117196682284L;
-
-				public void execute() {
-                    Card c = card;
-                    String[] types = { "Creature", "Golem" };
-                    String[] keywords = {  };
-                    CardFactoryUtil.revertManland(c, types, keywords, "4");
-                }
-            };
+        	final long[] timeStamp = new long[1];
             
             final SpellAbility a1 = new Ability(card, "2") {
                 @Override
@@ -10382,8 +10372,19 @@ public class CardFactory implements NewConstants {
                     Card c = card;
                     String[] types = { "Creature", "Golem" };
                     String[] keywords = {  };
-                    CardFactoryUtil.activateManland(c, 3, 6, types, keywords, "4");
+                    timeStamp[0] = CardFactoryUtil.activateManland(c, 3, 6, types, keywords, "4");
 
+                    final Command untilEOC = new Command() {
+        				private static final long serialVersionUID = -8432597117196682284L;
+        				long stamp = timeStamp[0];
+        				public void execute() {
+                            Card c = card;
+                            String[] types = { "Creature", "Golem" };
+                            String[] keywords = {  };
+                            CardFactoryUtil.revertManland(c, types, keywords, "4", stamp);
+                        }
+                    };
+                    
                     AllZone.EndOfCombat.addUntil(untilEOC);
                 }
             };//SpellAbility

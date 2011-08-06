@@ -4516,7 +4516,7 @@ public class CardFactoryUtil {
     }
     
     
-    public static void revertManland(Card c, String[] removeTypes, String[] removeKeywords, String cost) {
+    public static void revertManland(Card c, String[] removeTypes, String[] removeKeywords, String cost, long timeStamp) {
         c.setBaseAttack(0);
         c.setBaseDefense(0);
         for(String r : removeTypes)
@@ -4525,11 +4525,12 @@ public class CardFactoryUtil {
         for(String k : removeKeywords)
         	c.removeIntrinsicKeyword(k);
         
-        c.setManaCost(cost);
+        //c.setManaCost(cost);
+        c.removeColor(cost, c, false, timeStamp);
         c.unEquipAllCards();
     }
     
-    public static void activateManland(Card c, int attack, int defense, String[] addTypes, String[] addKeywords, String cost) {
+    public static long activateManland(Card c, int attack, int defense, String[] addTypes, String[] addKeywords, String cost) {
         c.setBaseAttack(attack);
         c.setBaseDefense(defense);
         
@@ -4546,7 +4547,9 @@ public class CardFactoryUtil {
         		c.addIntrinsicKeyword(k);	
         }
         
-        c.setManaCost(cost);
+        //c.setManaCost(cost);
+        long timestamp = c.addColor(cost, c, false, true);
+        return timestamp;
     }
     
     public static boolean canHumanPlayLand(){

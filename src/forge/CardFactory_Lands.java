@@ -505,6 +505,7 @@ class CardFactory_Lands {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Faerie Conclave")) {
+        	final long[] timeStamp = new long[1];
             card.addComesIntoPlayCommand(new Command() {
                 private static final long serialVersionUID = 2792041290726604698L;
                 
@@ -512,17 +513,6 @@ class CardFactory_Lands {
                     card.tap();
                 }
             });
-            
-            final Command eot1 = new Command() {
-                private static final long serialVersionUID = 5106629534549783845L;
-                
-                public void execute() {
-                    Card c = card;
-                    String[] types = { "Creature", "Faerie" };
-                    String[] keywords = { "Flying" };
-                    CardFactoryUtil.revertManland(c, types, keywords, "");
-                }
-            };
             
             final SpellAbility a1 = new Ability(card, "1 U") {
                 @Override
@@ -535,8 +525,20 @@ class CardFactory_Lands {
                     Card c = card;
                     String[] types = { "Creature", "Faerie" };
                     String[] keywords = { "Flying" };
-                    CardFactoryUtil.activateManland(c, 2, 1, types, keywords, "U");
+                    timeStamp[0] = CardFactoryUtil.activateManland(c, 2, 1, types, keywords, "U");
 
+                    final Command eot1 = new Command() {
+                        private static final long serialVersionUID = 5106629534549783845L;
+                        
+                        public void execute() {
+                        	long stamp = timeStamp[0];
+                            Card c = card;
+                            String[] types = { "Creature", "Faerie" };
+                            String[] keywords = { "Flying" };
+                            CardFactoryUtil.revertManland(c, types, keywords, "U", stamp);
+                        }
+                    };
+                    
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
             };//SpellAbility
@@ -561,6 +563,7 @@ class CardFactory_Lands {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Forbidding Watchtower")) {
+        	final long[] timeStamp = new long[1];
             card.addComesIntoPlayCommand(new Command() {
                 private static final long serialVersionUID = 5212793782060828409L;
                 
@@ -568,18 +571,6 @@ class CardFactory_Lands {
                     card.tap();
                 }
             });
-            
-            final Command eot1 = new Command() {
-                private static final long serialVersionUID = 8806880921707550181L;
-                
-                public void execute() {
-                    Card c = card;
-                    String[] types = { "Creature", "Soldier" };
-                    String[] keywords = {  };
-
-                    CardFactoryUtil.revertManland(c, types, keywords, "");
-                }
-            };
             
             final SpellAbility a1 = new Ability(card, "1 W") {
                 @Override
@@ -592,8 +583,20 @@ class CardFactory_Lands {
                     Card c = card;
                     String[] types = { "Creature", "Soldier" };
                     String[] keywords = {  };
-                    CardFactoryUtil.activateManland(c, 1, 5, types, keywords, "W");
+                    timeStamp[0] = CardFactoryUtil.activateManland(c, 1, 5, types, keywords, "W");
 
+                    final Command eot1 = new Command() {
+                        private static final long serialVersionUID = 8806880921707550181L;
+                        long stamp = timeStamp[0];
+                        public void execute() {
+                            Card c = card;
+                            String[] types = { "Creature", "Soldier" };
+                            String[] keywords = {  };
+
+                            CardFactoryUtil.revertManland(c, types, keywords, "W", stamp);
+                        }
+                    };
+                    
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
             };//SpellAbility
@@ -617,6 +620,7 @@ class CardFactory_Lands {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Treetop Village")) {
+        	final long[] timeStamp = new long[1];
             card.addComesIntoPlayCommand(new Command() {
                 private static final long serialVersionUID = -2246560994818997231L;
                 
@@ -624,18 +628,6 @@ class CardFactory_Lands {
                     card.tap();
                 }
             });
-            
-            final Command eot1 = new Command() {
-                private static final long serialVersionUID = -8535770979347971863L;
-                
-                public void execute() {
-                    Card c = card;
-                    
-                    String[] removeTypes = { "Creature", "Ape" };
-                    String[] removeKeywords = { "Trample" };
-                    CardFactoryUtil.revertManland(c, removeTypes, removeKeywords, "");
-                }
-            };
             
             final SpellAbility a1 = new Ability(card, "1 G") {
                 @Override
@@ -646,17 +638,22 @@ class CardFactory_Lands {
                 @Override
                 public void resolve() {
                     Card c = card;
+                    String[] types = { "Creature", "Ape" };
+                    String[] keywords = { "Trample" };
+                    timeStamp[0] = CardFactoryUtil.activateManland(c, 3, 3, types, keywords, "G");
+
+                    final Command eot1 = new Command() {
+                        private static final long serialVersionUID = -8535770979347971863L;
+                        long stamp = timeStamp[0];
+                        public void execute() {
+                            Card c = card;
+                            
+                            String[] removeTypes = { "Creature", "Ape" };
+                            String[] removeKeywords = { "Trample" };
+                            CardFactoryUtil.revertManland(c, removeTypes, removeKeywords, "G", stamp);
+                        }
+                    };
                     
-                    c.setBaseAttack(3);
-                    c.setBaseDefense(3);
-                    
-                    //to prevent like duplication like "Creature Creature"
-                    if(!c.getIntrinsicKeyword().contains("Trample")) {
-                        c.addType("Creature");
-                        c.addType("Ape");
-                        c.addIntrinsicKeyword("Trample");
-                        c.setManaCost("G");
-                    }
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
             };//SpellAbility
@@ -679,17 +676,8 @@ class CardFactory_Lands {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Blinkmoth Nexus")) {
+        	final long[] timeStamp = new long[1];
             final SpellAbility a1 = new Ability(card, "1") {
-                final Command eot1 = new Command() {
-                	private static final long serialVersionUID = 3564161001279001235L;
-				    
-                	public void execute() {
-                		Card c = card;
-                		String[] types = { "Artifact", "Creature", "Blinkmoth" };
-                		String[] keywords = { "Flying" };
-                		CardFactoryUtil.revertManland(c, types, keywords, "");
-                	}
-                };
                 
                 @Override
                 public boolean canPlayAI() {
@@ -701,7 +689,18 @@ class CardFactory_Lands {
                     Card c = card;
                     String[] types = { "Artifact", "Creature", "Blinkmoth" };
                     String[] keywords = { "Flying" };
-                    CardFactoryUtil.activateManland(c, 1, 1, types, keywords, "");
+                    timeStamp[0] = CardFactoryUtil.activateManland(c, 1, 1, types, keywords, "");
+                    
+                    final Command eot1 = new Command() {
+                    	private static final long serialVersionUID = 3564161001279001235L;
+                    	long stamp = timeStamp[0];
+                    	public void execute() {
+                    		Card c = card;
+                    		String[] types = { "Artifact", "Creature", "Blinkmoth" };
+                    		String[] keywords = { "Flying" };
+                    		CardFactoryUtil.revertManland(c, types, keywords, "", stamp);
+                    	}
+                    };
                     
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
@@ -846,17 +845,7 @@ class CardFactory_Lands {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Mishra's Factory")) {
-            final Command eot1 = new Command() {
-                private static final long serialVersionUID = -956566640027406078L;
-                
-                public void execute() {
-                    Card c = card;
-                    
-                    String[] types = { "Artifact", "Creature", "Assembly-Worker" };
-                    String[] keywords = { };
-                    CardFactoryUtil.revertManland(c, types, keywords, "");
-                }
-            };
+        	final long[] timeStamp = new long[1];
             
             final SpellAbility a1 = new Ability(card, "1") {
                 @Override
@@ -872,8 +861,20 @@ class CardFactory_Lands {
                     Card c = card;
                     String[] types = { "Artifact", "Creature", "Assembly-Worker" };
                     String[] keywords = { };
-                    CardFactoryUtil.activateManland(c, 2, 2, types, keywords, "");
+                    timeStamp[0] = CardFactoryUtil.activateManland(c, 2, 2, types, keywords, "");
 
+                    final Command eot1 = new Command() {
+                        private static final long serialVersionUID = -956566640027406078L;
+                        long stamp = timeStamp[0];
+                        public void execute() {
+                            Card c = card;
+                            
+                            String[] types = { "Artifact", "Creature", "Assembly-Worker" };
+                            String[] keywords = { };
+                            CardFactoryUtil.revertManland(c, types, keywords, "", stamp);
+                        }
+                    };
+                    
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
             };//SpellAbility
@@ -2256,18 +2257,7 @@ class CardFactory_Lands {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Mutavault")) {
-            final Command eot1 = new Command() {
-                private static final long serialVersionUID = 5106629534549783845L;
-                
-                public void execute() {
-                    Card c = card;
-
-                    String[] types = { "Creature" };
-                    String[] keywords = { "Changeling" };
-                    CardFactoryUtil.revertManland(c, types, keywords, "");
-
-                }
-            };
+        	final long[] timeStamp = new long[1];
             
             final SpellAbility a1 = new Ability(card, "1") {
                 @Override
@@ -2280,8 +2270,21 @@ class CardFactory_Lands {
                     Card c = card;
                     String[] types = { "Creature" };
                     String[] keywords = { "Changeling" };
-                    CardFactoryUtil.activateManland(c, 2, 2, types, keywords, "");
+                    timeStamp[0] = CardFactoryUtil.activateManland(c, 2, 2, types, keywords, "");
 
+                    final Command eot1 = new Command() {
+                        private static final long serialVersionUID = 5106629534549783845L;
+                        long stamp = timeStamp[0];
+                        public void execute() {
+                            Card c = card;
+
+                            String[] types = { "Creature" };
+                            String[] keywords = { "Changeling" };
+                            CardFactoryUtil.revertManland(c, types, keywords, "", stamp);
+
+                        }
+                    };
+                    
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
             };//SpellAbility
@@ -2306,6 +2309,7 @@ class CardFactory_Lands {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Spawning Pool")) {
+        	final long[] timeStamp = new long[1];
             
             final Command untilEOT = new Command() {
                 private static final long serialVersionUID = -451839437837081897L;
@@ -2333,18 +2337,6 @@ class CardFactory_Lands {
             
             a2.setBeforePayMana(new Input_PayManaCost(a2));
             
-            final Command eot1 = new Command() {
-                private static final long serialVersionUID = -8535770979347971863L;
-                
-                public void execute() {
-                    Card c = card;
-                    String[] types = { "Creature", "Skeleton" };
-                    String[] keywords = {  };
-                    CardFactoryUtil.revertManland(c, types, keywords, "");
-                    c.removeSpellAbility(a2);
-                }
-            };
-            
             final SpellAbility a1 = new Ability(card, "1 B") {
                 @Override
                 public boolean canPlayAI() {
@@ -2356,7 +2348,7 @@ class CardFactory_Lands {
                     Card c = card;
                     String[] types = { "Creature", "Skeleton" };
                     String[] keywords = {  };
-                    CardFactoryUtil.activateManland(c, 1, 1, types, keywords, "B");
+                    timeStamp[0] = CardFactoryUtil.activateManland(c, 1, 1, types, keywords, "B");
                     
                     // Don't stack Regen ability
                     boolean hasRegen = false;
@@ -2368,6 +2360,18 @@ class CardFactory_Lands {
                     if(!hasRegen) {
                         card.addSpellAbility(a2);
                     }
+                    
+                    final Command eot1 = new Command() {
+                        private static final long serialVersionUID = -8535770979347971863L;
+                        long stamp = timeStamp[0];
+                        public void execute() {
+                            Card c = card;
+                            String[] types = { "Creature", "Skeleton" };
+                            String[] keywords = {  };
+                            CardFactoryUtil.revertManland(c, types, keywords, "B", stamp);
+                            c.removeSpellAbility(a2);
+                        }
+                    };
 
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
@@ -2942,17 +2946,7 @@ class CardFactory_Lands {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Svogthos, the Restless Tomb")) {
-            final Command eot1 = new Command() {
-                private static final long serialVersionUID = -8535770979347971863L;
-                
-                public void execute() {
-                    Card c = card;
-                    String[] types = { "Creature", "Zombie", "Plant" };
-                    String[] keywords = {  };
-
-                    CardFactoryUtil.revertManland(c, types, keywords, "");
-                }
-            };
+        	final long[] timeStamp = new long[1];
             
             final SpellAbility a1 = new Ability(card, "3 B G") {
                 @Override
@@ -2974,8 +2968,20 @@ class CardFactory_Lands {
                     String[] types = { "Creature", "Zombie", "Plant" };
                     String[] keywords = {  };
 
-                    CardFactoryUtil.activateManland(c, 1, 1, types, keywords, "B G");
+                    timeStamp[0] = CardFactoryUtil.activateManland(c, 1, 1, types, keywords, "B G");
 
+                    final Command eot1 = new Command() {
+                        private static final long serialVersionUID = -8535770979347971863L;
+                        long stamp = timeStamp[0];
+                        public void execute() {
+                            Card c = card;
+                            String[] types = { "Creature", "Zombie", "Plant" };
+                            String[] keywords = {  };
+
+                            CardFactoryUtil.revertManland(c, types, keywords, "B G", stamp);
+                        }
+                    };
+                    
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
             };//SpellAbility
@@ -2990,17 +2996,7 @@ class CardFactory_Lands {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Ghitu Encampment")) {
-            final Command eot1 = new Command() {
-                private static final long serialVersionUID = -8535770979347971863L;
-                
-                public void execute() {
-                    Card c = card;
-                    String[] types = { "Creature", "Warrior" };
-                    String[] keywords = { "First Strike" };
-
-                    CardFactoryUtil.revertManland(c, types, keywords, "");
-                }
-            };
+        	final long[] timeStamp = new long[1];
             
             final SpellAbility a1 = new Ability(card, "1 R") {
                 @Override
@@ -3013,8 +3009,21 @@ class CardFactory_Lands {
                     Card c = card;
                     String[] types = { "Creature", "Warrior" };
                     String[] keywords = { "First Strike" };
-                    CardFactoryUtil.activateManland(c, 2, 1, types, keywords, "R");
+                    timeStamp[0] = CardFactoryUtil.activateManland(c, 2, 1, types, keywords, "R");
 
+                    final Command eot1 = new Command() {
+                        private static final long serialVersionUID = -8535770979347971863L;
+                        
+                        public void execute() {
+                        	long stamp = timeStamp[0];
+                            Card c = card;
+                            String[] types = { "Creature", "Warrior" };
+                            String[] keywords = { "First Strike" };
+
+                            CardFactoryUtil.revertManland(c, types, keywords, "R", stamp);
+                        }
+                    };
+                    
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
             };//SpellAbility
@@ -3090,16 +3099,7 @@ class CardFactory_Lands {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Celestial Colonnade")) {
-            final Command eot1 = new Command() {
-                private static final long serialVersionUID = 7377356496869217420L;
-                
-                public void execute() {
-                    Card c = card;
-                    String[] types = { "Creature", "Elemental" };
-                    String[] keywords = { "Vigilance", "Flying" };
-                    CardFactoryUtil.revertManland(c, types, keywords, "");
-                }
-            };
+        	final long[] timeStamp = new long[1];
             
             final SpellAbility a1 = new Ability(card, "3 W U") {
                 @Override
@@ -3113,7 +3113,18 @@ class CardFactory_Lands {
                     
                     String[] types = { "Creature", "Elemental" };
                     String[] keywords = { "Vigilance", "Flying" };
-                    CardFactoryUtil.activateManland(c, 4, 4, types, keywords, "W U");
+                    timeStamp[0] = CardFactoryUtil.activateManland(c, 4, 4, types, keywords, "W U");
+                    
+                    final Command eot1 = new Command() {
+                        private static final long serialVersionUID = 7377356496869217420L;
+                        long stamp = timeStamp[0];
+                        public void execute() {
+                            Card c = card;
+                            String[] types = { "Creature", "Elemental" };
+                            String[] keywords = { "Vigilance", "Flying" };
+                            CardFactoryUtil.revertManland(c, types, keywords, "W U", stamp);
+                        }
+                    };
                     
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
@@ -3128,6 +3139,7 @@ class CardFactory_Lands {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Lavaclaw Reaches")) {
+        	final long[] timeStamp = new long[1];
             final SpellAbility X_ability = new Ability(card, "0") {
                 @Override
                 public boolean canPlayAI() {
@@ -3180,18 +3192,6 @@ class CardFactory_Lands {
         	  			 }
         		 }
         	  });
-  
-              final Command eot1 = new Command() {
-                  private static final long serialVersionUID = -132950142223575L;
-                  
-                  public void execute() {
-                      Card c = card;
-                      String[] types = { "Creature", "Elemental" };
-                      String[] keywords = {  };
-                      CardFactoryUtil.revertManland(c, types, keywords, "");
-                      c.removeSpellAbility(X_ability);
-                  }
-              };
               
             final SpellAbility a1 = new Ability(card, "1 B R") {
                 @Override
@@ -3204,13 +3204,25 @@ class CardFactory_Lands {
 	                Card c = card;
 	                String[] types = { "Creature", "Elemental" };
 	                String[] keywords = {  };
-	                CardFactoryUtil.activateManland(c, 2, 2, types, keywords, "B R");
+	                timeStamp[0] = CardFactoryUtil.activateManland(c, 2, 2, types, keywords, "B R");
                     
 					card.removeSpellAbility(X_ability);
 					X_ability.setDescription("X: This creature gets +X/+0 until end of turn.");
 					X_ability.setStackDescription("X: This creature gets +X/+0 until end of turn.");
 					card.addSpellAbility(X_ability);
                     
+		              final Command eot1 = new Command() {
+		                  private static final long serialVersionUID = -132950142223575L;
+		                  long stamp = timeStamp[0];
+		                  public void execute() {
+		                      Card c = card;
+		                      String[] types = { "Creature", "Elemental" };
+		                      String[] keywords = {  };
+		                      CardFactoryUtil.revertManland(c, types, keywords, "B R", stamp);
+		                      c.removeSpellAbility(X_ability);
+		                  }
+		              };
+					
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
 
@@ -3234,16 +3246,7 @@ class CardFactory_Lands {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Stirring Wildwood")) {
-            final Command eot1 = new Command() {
-                private static final long serialVersionUID = -1329533520874994575L;
-                
-                public void execute() {
-                    Card c = card;
-                    String[] types = { "Creature", "Elemental" };
-                    String[] keywords = { "Reach" };
-                    CardFactoryUtil.revertManland(c, types, keywords, "");
-                }
-            };
+        	final long[] timeStamp = new long[1];
             
             final SpellAbility a1 = new Ability(card, "1 G W") {
                 @Override
@@ -3257,7 +3260,18 @@ class CardFactory_Lands {
                     String[] types = { "Creature", "Elemental" };
                     String[] keywords = { "Reach" };
                     
-                    CardFactoryUtil.activateManland(c, 3, 4, types, keywords, "G W");
+                    timeStamp[0] = CardFactoryUtil.activateManland(c, 3, 4, types, keywords, "G W");
+                    
+                    final Command eot1 = new Command() {
+                        private static final long serialVersionUID = -1329533520874994575L;
+                        long stamp = timeStamp[0];
+                        public void execute() {
+                            Card c = card;
+                            String[] types = { "Creature", "Elemental" };
+                            String[] keywords = { "Reach" };
+                            CardFactoryUtil.revertManland(c, types, keywords, "G W", stamp);
+                        }
+                    };
                     
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
@@ -3273,16 +3287,7 @@ class CardFactory_Lands {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Creeping Tar Pit")) {
-            final Command eot1 = new Command() {
-                private static final long serialVersionUID = -6004932967127014386L;
-                
-                public void execute() {
-                    Card c = card;
-                    String[] types = { "Creature", "Elemental" };
-                    String[] keywords = { "Unblockable" };
-                    CardFactoryUtil.revertManland(c, types, keywords, "");	
-                }
-            };
+        	final long[] timeStamp = new long[1];
             
             final SpellAbility a1 = new Ability(card, "1 U B") {
                 @Override
@@ -3295,7 +3300,18 @@ class CardFactory_Lands {
                     Card c = card;
                     String[] types = { "Creature", "Elemental" };
                     String[] keywords = { "Unblockable" };
-                    CardFactoryUtil.activateManland(c, 3, 2, types, keywords, "U B");
+                    timeStamp[0] = CardFactoryUtil.activateManland(c, 3, 2, types, keywords, "U B");
+                    
+                    final Command eot1 = new Command() {
+                        private static final long serialVersionUID = -6004932967127014386L;
+                        long stamp = timeStamp[0];
+                        public void execute() {
+                            Card c = card;
+                            String[] types = { "Creature", "Elemental" };
+                            String[] keywords = { "Unblockable" };
+                            CardFactoryUtil.revertManland(c, types, keywords, "U B", stamp);	
+                        }
+                    };
                     
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
@@ -3311,17 +3327,7 @@ class CardFactory_Lands {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Raging Ravine")) {
-            final Command eot1 = new Command() {
-                private static final long serialVersionUID = -2632172918887247003L;
-                
-                public void execute() {
-                    Card c = card;
-                    
-                    String[] types = { "Creature", "Elemental"};
-                    String[] keywords = { "Whenever this creature attacks, put a +1/+1 counter on it." };
-                    CardFactoryUtil.revertManland(c, types, keywords, "");
-                }
-            };
+        	final long[] timeStamp = new long[1];
             
             final SpellAbility a1 = new Ability(card, "2 R G") {
                 @Override
@@ -3335,10 +3341,22 @@ class CardFactory_Lands {
                     String[] types = { "Creature", "Elemental"};
                     String[] keywords = { };
                     
-                    CardFactoryUtil.activateManland(c, 3, 3, types, keywords, "R G");
+                    timeStamp[0] = CardFactoryUtil.activateManland(c, 3, 3, types, keywords, "R G");
                     
                     // this keyword stacks, so we can't put it through the activate
                     c.addIntrinsicKeyword("Whenever this creature attacks, put a +1/+1 counter on it.");
+                    
+                    final Command eot1 = new Command() {
+                        private static final long serialVersionUID = -2632172918887247003L;
+                        long stamp = timeStamp[0];
+                        public void execute() {
+                            Card c = card;
+                            
+                            String[] types = { "Creature", "Elemental"};
+                            String[] keywords = { "Whenever this creature attacks, put a +1/+1 counter on it." };
+                            CardFactoryUtil.revertManland(c, types, keywords, "R G", stamp);
+                        }
+                    };
                     
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
@@ -3353,17 +3371,7 @@ class CardFactory_Lands {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Dread Statuary")) {
-            final Command eot1 = new Command() {
-                private static final long serialVersionUID = -2632172918887247003L;
-                
-                public void execute() {
-                    Card c = card;
-                    
-                    String[] types = { "Artifact", "Creature", "Golem"};
-                    String[] keywords = {  };
-                    CardFactoryUtil.revertManland(c, types, keywords, "");
-                }
-            };
+        	final long[] timeStamp = new long[1];
             
             final SpellAbility a1 = new Ability(card, "4") {
                 @Override
@@ -3377,7 +3385,19 @@ class CardFactory_Lands {
                     String[] types = { "Artifact", "Creature", "Golem"};
                     String[] keywords = { };
                     
-                    CardFactoryUtil.activateManland(c, 4, 2, types, keywords, "");
+                    timeStamp[0] = CardFactoryUtil.activateManland(c, 4, 2, types, keywords, "");
+                    
+                    final Command eot1 = new Command() {
+                        private static final long serialVersionUID = -2632172918887247003L;
+                        long stamp = timeStamp[0];
+                        public void execute() {
+                            Card c = card;
+                            
+                            String[] types = { "Artifact", "Creature", "Golem"};
+                            String[] keywords = {  };
+                            CardFactoryUtil.revertManland(c, types, keywords, "", stamp);
+                        }
+                    };
                     
                     AllZone.EndOfTurn.addUntil(eot1);
                 }

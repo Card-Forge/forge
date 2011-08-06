@@ -5665,11 +5665,11 @@ public class CardFactory_Creatures {
             
                         final Command EOT = new Command() {
                             private static final long serialVersionUID = -1899153704584793548L;
-                            
+                            long stamp = timestamp;
                             public void execute() {
                                 if (AllZone.GameAction.isCardInPlay(creature[0])) {
                                     creature[0].removeExtrinsicKeyword("Flying");
-                                    creature[0].removeColor("U", card, false, timestamp);
+                                    creature[0].removeColor("U", card, false, stamp);
                                 }
                             }
                         };
@@ -7406,19 +7406,6 @@ public class CardFactory_Creatures {
         	
         	final String[] color = new String[1];
         	final long[] timeStamp = new long[1];
-        	
-            //sacrifice ability - targets itself - until EOT
-            final Command untilEOT = new Command() {
-                private static final long serialVersionUID = -5563743272875711445L;
-                
-                public void execute() {
-                    card.addTempAttackBoost(-1);
-                    card.addTempDefenseBoost(-1);
-                    String s = CardUtil.getShortColor(color[0]);
-                    card.removeColor(s, card, false, timeStamp[0]);
-                    card.setChosenColor("");
-                }
-            };
             
             //mana tap ability
             final Ability ability = new Ability(card, "0") {
@@ -7468,6 +7455,21 @@ public class CardFactory_Creatures {
                         }
                         String s = CardUtil.getShortColor(color[0]);
                         timeStamp[0] = card.addColor(s, card, false, true);
+                        
+                        //sacrifice ability - targets itself - until EOT
+                        final Command untilEOT = new Command() {
+                            private static final long serialVersionUID = -5563743272875711445L;
+                            long stamp = timeStamp[0];
+                            String s = CardUtil.getShortColor(color[0]);
+                            
+                            public void execute() {
+                                card.addTempAttackBoost(-1);
+                                card.addTempDefenseBoost(-1);
+                                card.removeColor(s, card, false, stamp);
+                                card.setChosenColor("");
+                            }
+                        };
+                        
                         AllZone.EndOfTurn.addUntil(untilEOT);
                     }
                 }//resolve()
@@ -7495,17 +7497,6 @@ public class CardFactory_Creatures {
         	
         	final String[] color = new String[1];
         	final long[] timeStamp = new long[1];
-        	
-            //until EOT
-            final Command untilEOT = new Command() {
-                private static final long serialVersionUID = -7093762180313802891L;
-                
-                public void execute() {
-                    String s = CardUtil.getShortColor(color[0]);
-                    card.removeColor(s, card, false, timeStamp[0]);
-                    card.setChosenColor("");
-                }
-            };
             
             //color change ability
             final Ability ability = new Ability(card, "G") {
@@ -7526,6 +7517,18 @@ public class CardFactory_Creatures {
                             card.setChosenColor(color[0]);
                             String s = CardUtil.getShortColor(color[0]);
                             timeStamp[0] = card.addColor(s, card, false, true);
+                            
+                            //until EOT
+                            final Command untilEOT = new Command() {
+                                private static final long serialVersionUID = -7093762180313802891L;
+                                long stamp = timeStamp[0];
+                                String s = CardUtil.getShortColor(color[0]);
+                                public void execute() {
+                                    card.removeColor(s, card, false, stamp);
+                                    card.setChosenColor("");
+                                }
+                            };
+                            
                             AllZone.EndOfTurn.addUntil(untilEOT);
                         }
                     }
