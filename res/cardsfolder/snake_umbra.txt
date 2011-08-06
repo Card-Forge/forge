@@ -1,0 +1,11 @@
+Name:Snake Umbra
+ManaCost:2 G
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+K:enPump:+1/+1
+K:WheneverKeyword:DealsDamage/Opponent:Enchanted_Creature:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever enchanted creature deals damage to an opponent, you may draw a card.
+K:Totem armor
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/curiosity.jpg
+End
