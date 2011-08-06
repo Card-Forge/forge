@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 import com.esotericsoftware.minlog.Log;
-import forge.error.ErrorViewer;
 
 
 public class Card extends MyObservable {
@@ -2789,6 +2788,10 @@ public class Card extends MyObservable {
         }
         
         if(source.getKeyword().contains("Lifelink") && CardFactoryUtil.canDamage(source, this)) GameActionUtil.executeLifeLinkEffects(source, damageToAdd);
+        
+        if(isEnchantedBy("Mortal Wound")) {
+        	AllZone.GameAction.destroy(this);
+        }
         
         CardList cl = CardFactoryUtil.getAurasEnchanting(source, "Guilty Conscience");
         for(Card c:cl) {
