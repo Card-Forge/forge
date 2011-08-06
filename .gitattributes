@@ -3842,6 +3842,7 @@ res/cardsfolder/moggcatcher.txt -text svneol=native#text/plain
 res/cardsfolder/mold_adder.txt -text svneol=native#text/plain
 res/cardsfolder/mold_shambler.txt svneol=native#text/plain
 res/cardsfolder/molder_beast.txt -text svneol=native#text/plain
+res/cardsfolder/molder_slug.txt -text svneol=native#text/plain
 res/cardsfolder/moldervine_cloak.txt -text svneol=native#text/plain
 res/cardsfolder/molimo_maro_sorcerer.txt -text svneol=native#text/plain
 res/cardsfolder/molten_frame.txt -text svneol=native#text/plain
