@@ -1,3 +1,83 @@
+Azorius Chancery
+no cost
+Land
+no text
+Azorius Chancery enters the battlefield tapped.
+When Azorius Chancery enters the battlefield, return a land you control to its owner's hand.
+Tap: add WU
+
+Boros Garrison
+no cost
+Land
+no text
+Boros Garrison enters the battlefield tapped.
+When Boros Garrison enters the battlefield, return a land you control to its owner's hand.
+Tap: add RW
+
+Dimir Aqueduct
+no cost
+Land
+no text
+Dimir Aqueduct enters the battlefield tapped.
+When Dimir Aqueduct enters the battlefield, return a land you control to its owner's hand.
+Tap: add UB
+
+Golgari Rot Farm
+no cost
+Land
+no text
+Golgari Rot Farm enters the battlefield tapped.
+When Golgari Rot Farm enters the battlefield, return a land you control to its owner's hand.
+Tap: add BG
+
+Gruul Turf
+no cost
+Land
+no text
+Gruul Turf enters the battlefield tapped.
+When Gruul Turf enters the battlefield, return a land you control to its owner's hand.
+Tap: add RG
+
+Izzet Boilerworks
+no cost
+Land
+no text
+Izzet Boilerworks enters the battlefield tapped.
+When Izzet Boilerworks enters the battlefield, return a land you control to its owner's hand.
+Tap: add UR
+
+Orzhov Basilica
+no cost
+Land
+no text
+Orzhov Basilica enters the battlefield tapped.
+When Orzhov Basilica enters the battlefield, return a land you control to its owner's hand.
+Tap: add WB
+
+Rakdos Carnarium
+no cost
+Land
+no text
+Rakdos Carnarium enters the battlefield tapped.
+When Rakdos Carnarium enters the battlefield, return a land you control to its owner's hand.
+Tap: add BR
+
+Selesnya Sanctuary
+no cost
+Land
+no text
+Selesnya Sanctuary enters the battlefield tapped.
+When Selesnya Sanctuary enters the battlefield, return a land you control to its owner's hand.
+Tap: add GW
+
+Simic Growth Chamber
+no cost
+Land
+no text
+Simic Growth Chamber enters the battlefield tapped.
+When Simic Growth Chamber enters the battlefield, return a land you control to its owner's hand.
+Tap: add GU
+
 Viridian Joiner
 2 G
 Creature Elf Druid

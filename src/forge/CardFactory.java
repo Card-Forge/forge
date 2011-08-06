@@ -190,7 +190,12 @@ public class CardFactory implements NewConstants {
         
         //look for "Comes into play tapped." in the "no text" line
         //of card.txt and add the appropriate code to make that happen
-        if(card.getKeyword().contains("Comes into play tapped.")) {
+        while(card.getKeyword().contains("Comes into play tapped."))
+        {
+        	card.removeIntrinsicKeyword("Comes into play tapped.");
+        	card.addIntrinsicKeyword("CARDNAME enters the battlefield tapped.");
+        }
+        if(card.getKeyword().contains("CARDNAME enters the battlefield tapped.")) {
             card.addComesIntoPlayCommand(new Command() {
                 private static final long serialVersionUID = 203335252453049234L;
                 
@@ -212,6 +217,45 @@ public class CardFactory implements NewConstants {
                 
                 if(k.length > 2) card.SetSVar(k[1], k[2]);
             }
+        }
+        
+        if (hasKeyword(card, "When CARDNAME enters the battlefield, return a land you control to its owner's hand.") != -1)
+        {
+        	int n = hasKeyword(card, "When CARDNAME enters the battlefield, return a land you control to its owner's hand.");
+        	if (n!= -1)
+        	{
+        		final SpellAbility ability = new Ability(card, "0") {
+                    @Override
+                    public void resolve() {
+                    	if(getSourceCard().getController().equals(Constant.Player.Computer))
+                    		setTargetCard(card);//CardFactoryUtil.getRandomCard(new CardList(AllZone.Computer_Play.getCards()).getType("Land")));
+                        Card c = getTargetCard();
+                        PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getOwner());
+                        
+                        if(AllZone.GameAction.isCardInPlay(c)) {
+                            AllZone.getZone(c).remove(c);
+                            
+                            if(!c.isToken()) {
+                                Card newCard = AllZone.CardFactory.getCard(c.getName(), c.getOwner());
+                                hand.add(newCard);
+                            }
+                        }
+                    }
+                };
+                Command intoPlay = new Command() {
+                    private static final long serialVersionUID = 2045940121508110423L;
+                    
+                    public void execute() {
+                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                        CardList choice = new CardList(play.getCards()).getType("Land");
+                        AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, choice,
+                                "Select a land you control.", false, false));
+                        ButtonUtil.disableAll();
+                        
+                    }//execute()
+                };//Command
+                card.addComesIntoPlayCommand(intoPlay);
+        	}
         }
         
         if (hasKeyword(card, "Multikicker") != -1)
