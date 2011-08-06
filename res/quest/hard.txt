@@ -1,13 +1,8 @@
 Abraham Lincoln 3
 Albert Einstein 3
-Aquaman 3
-Ash 3
-Atomic Robo 3
 Barney Rubble 3
 Bart Simpson 3
 Batman 3
-Bear 3
-Beast 3
 Bela Lugosi 3
 Betty Rubble 3
 Blackbeard 3
@@ -16,97 +11,62 @@ Boris Karloff 3
 Boromir 3
 Buffy 3
 C3PO 3
-Cable 3
-Captain America 3
-Colbert 3
-Colossus 3
 Comic Book Guy 3
-Conan 3
 Crocodile Dundee 3
 Cyclops 3
 Da Vinci 3
 Darrin Stephens 3
 Darth Vader 3
 Data 3
-Deadpool 3
-Dick Grayson 3
 Dino 3
 Doc Holiday 3
 Doran 3
-Dr Doom 3
-Dr Fate 3
 Dr No 3
 Electro 3
-En Sabah Nur 3
 Endora 3
 Fat Albert 3
-Fin Fang Foom 3
 Fred Flintstone 3
 Frodo 3
 Galahad 3
-Gambit 3
 Genghis Khan 3
 George of the Jungle 3
-Ghost Rider 3
-Goblin King 3
-Goblin Recruit 3
 Gold Finger 3
 Grampa Simpson 3
-Green Arrow 3
 Green Lantern 3
-Gunslinger 3
 Han Solo 3
 Harry Potter 3
 Hellboy 3
 Higgins 3
 Homer Simpson 3
-Hulk 3
 Iceman 3
 Indiana Jones 3
 Jabba the Hut 3
-Jack 3
 Jack Sparrow 3
 James Bond 3
 James T Kirk 3
-Jason Todd 3
 Joe Kidd 3
-Jon Stewart 3
-Kang 3
 King Arthur 3
 King Edward 3
 King Kong 3
 Kojak 3
-Krypto 3
-Lex 3
-Link 3
 Lisa Simpson 3
-Lucifer 3
 Luke Skywalker 3
 Maggie Simpson 3
 Magneto 3
 Magnum 3
 Marge Simpson 3
-Michael 3
 Morpheus 3
 Mr Slate 3
-Namor 3
 Napoleon 3
 Ned Flanders 3
 Neo 3
 Newton 3
-Odin 3
-Owlman 3
 Pebbles Flintstone 3
-Phoenix 3
 Picard 3
 Pinky and the Brain 3
-Predator 3
 Professor X 3
 R2-D2 3
 Radiant 3
-Ras Al Ghul 3
-Raven 3
-Robin 3
 Rocky 3
 Rogue 3
 Samantha Stephens 3
@@ -114,22 +74,13 @@ Scooby Doo 3
 Saruman 3
 Seabiscuit 3
 Secret Squirrel 3
-Sentinel 3
 Sherlock Holmes 3
 Silver Surfer 3
-Starfire 3
 Storm 3
-Superboy 3
-Swamp Thing 3
 Terminator 3
 The Great Gazoo 3
-Thing 3
-Thor 3
-Thugs 3
 Treebeard 3
 Uncle Owen 3
-Vampire 3
-White Knight 3
 Wilma Flintstone 3
 Wolverine 3
 Wyatt Earp 3
