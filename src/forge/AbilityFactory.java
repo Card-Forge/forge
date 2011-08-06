@@ -435,10 +435,10 @@ public class AbilityFactory {
         return abSub;
 	}
 	
-	public static int calculateAmount(Card card, String counterNum, SpellAbility ability){
-		if (counterNum.matches("X"))
+	public static int calculateAmount(Card card, String amount, SpellAbility ability){
+		if (amount.matches("X"))
 		{
-			String calcX[] = card.getSVar(counterNum).split("\\$");
+			String calcX[] = card.getSVar(amount).split("\\$");
 			if (calcX.length == 1 || calcX[1].equals("none"))
 				return 0;
 			
@@ -454,7 +454,7 @@ public class AbilityFactory {
 				return 0;
 		}
 
-		return Integer.parseInt(counterNum);
+		return Integer.parseInt(amount);
 	}
 }
 
