@@ -1,3 +1,35 @@
+Regress
+2 U
+Instant
+Return target permanent to its owner's hand.
+spBounceTgt:Permanent:Hand
+
+Repulse
+2 U
+Instant
+Return target creature to its owner's hand.
+spBounceTgt:Creature:Hand
+Draw a card.
+
+Temporal Fissure
+4 U
+Sorcery
+Return target permanent to its owner's hand. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
+spBounceTgt:Permanent:Hand
+Storm
+
+Temporal Spring
+1 G U
+Sorcery
+Put target permanent on top of its owner's library.
+spBounceTgt:Permanent:TopofLibrary
+
+Unsummon
+U
+Instant
+Return target creature to its owner's hand.
+spBounceTgt:Creature:Hand
+
 Boomerang
 U U
 Instant
@@ -5255,12 +5287,6 @@ Tendrils of Agony
 2 B B
 Sorcery
 Target player loses 2 life and you gain 2 life. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
-Storm
-
-Temporal Fissure
-4 U
-Sorcery
-Return target permanent to its owner's hand. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
 Storm
 
 Sprouting Vines
@@ -13226,11 +13252,6 @@ Legendary Creature Human Monk
 You may play two additional lands on each of your turns.
 1/2
 
-Temporal Spring
-1 G U
-Sorcery
-Put target permanent on top of its owner's library.
-
 Eviscerator
 3 B B
 Creature Horror
@@ -16229,11 +16250,6 @@ Nyxathid
 Creature Elemental
 As Nyxathid comes into play, choose an opponent. Nyxathid gets -1/-1 for each card in the chosen player's hand.
 7/7
-
-Unsummon
-U
-Instant
-Return target creature to its owner's hand.
 
 Lorescale Coatl
 1 G U
@@ -23178,12 +23194,6 @@ Impulse
 Instant
 Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library.
 
-Repulse
-2 U
-Instant
-Return target creature to its owner's hand.
-Draw a card.
-
 Echoing Truth
 1 U
 Instant
@@ -23807,11 +23817,6 @@ Counterspell
 U U
 Instant
 no text
-
-Regress
-2 U
-Instant
-Return target permanent to its owner's hand.
 
 Opt
 U

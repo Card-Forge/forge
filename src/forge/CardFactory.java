@@ -2190,15 +2190,7 @@ public class CardFactory implements NewConstants {
                 	if (AllZone.Phase.getTurn() <= 3) return false;
                 	
                     CardList results = new CardList();
-                    CardList choices = getTargets();
-                    
-                    choices = choices.filter(new CardListFilter(){
-                    	public boolean addCard(Card c)
-                    	{
-                    		return CardFactoryUtil.canTarget(card, c);
-                    	}
-                    });
-                    
+                    CardList choices = getTargets();                    
                     
                     if(choices.size() > 0) {
                         for(int i = 0; i < Tgts.length; i++) {
@@ -8660,7 +8652,8 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+
+/* Converted to keyword        
         //*************** START *********** START **************************
         else if(cardName.equals("Temporal Fissure")) {
             final SpellAbility spell = new Spell(card) {
@@ -8738,6 +8731,7 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+*/
         //*************** START *********** START **************************
         if(cardName.equals("Brain Freeze")) {
             final SpellAbility spell = new Spell(card) {
@@ -10450,6 +10444,17 @@ public class CardFactory implements NewConstants {
                         AllZone.GameAction.drawCard(card.getController());
                     }
                 }//resolve()
+
+                @Override
+                public boolean canPlayAI() {
+                    CardList human = new CardList(AllZone.Human_Play.getCards());
+                    
+                    human = human.getType("Creature");
+                    human = human.getNotKeyword("Indestructible");                    
+                    
+                    // the computer will at least destroy 1 creature
+                    return !human.isEmpty();
+                }
             };//SpellAbility
             card.clearSpellAbility();
             card.addSpellAbility(spell);
@@ -10860,7 +10865,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-
+/* Converted to keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Regress")) {
             SpellAbility spell = new Spell(card) {
@@ -10901,7 +10906,7 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+*/        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Echoing Truth")) {
@@ -10993,7 +10998,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-
+/* Converted to keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Repulse")) {
             final SpellAbility spell = new Spell(card) {
@@ -11134,7 +11139,7 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+*/        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Impulse")) {
@@ -13358,7 +13363,8 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+
+/* Converted to keyword        
         //*************** START *********** START **************************
         else if(cardName.equals("Temporal Spring")) {
             final SpellAbility spell = new Spell(card) {
@@ -13426,7 +13432,6 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         
-/* Converted to keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Boomerang") || cardName.equals("Eye of Nowhere") || cardName.equals("Rescind") || cardName.equals("Surging AEther") || cardName.equals("Deny Reality")) {
             final SpellAbility spell = new Spell(card) {
