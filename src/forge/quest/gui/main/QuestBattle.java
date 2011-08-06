@@ -242,7 +242,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Pinky and the Brain 3", "hard", "Royal Assassin, WoG + Damnation, Liliana Vess, Beacon of Unrest");
 //        addToDeckList("Predator 2", "medium", "GW Purity Ramp");
 //        addToDeckList("Predator 3", "hard", "GU Beastmaster Ascension");
-        addToDeckList("Professor X 3", "hard", "Master of Etherium + Vedalken Archmage and many artifacts");
+        addToDeckList("Professor X 3", "hard", "WUB Esper Artifacts");
         
         addToDeckList("R2-D2 3", "hard", "Black Vise, bounce (Boomerang) spells, Howling Mine");
         addToDeckList("Radagast 2", "medium ", "Muraganda Petroglyphs, green vanilla creatures and a few tokens");
