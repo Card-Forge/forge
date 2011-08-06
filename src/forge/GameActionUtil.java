@@ -9832,7 +9832,7 @@ public class GameActionUtil {
 						                if(zone.is(Constant.Zone.Hand) && true == card.getDrawnThisTurn()) {
 						                    /////////////////////////////////////////
 						                	if (GameActionUtil.showYesNoDialog(source, cardQuestion)) {
-						                		player.payLife(4);
+						                		player.payLife(4, source);
 						                		//card stays in hand
 						                	}
 						                	else {

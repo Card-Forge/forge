@@ -149,10 +149,13 @@ public abstract class Player extends MyObservable{
 		this.updateObservers();
 	}
 	
-	public void payLife(final int cost) {
+	//this shouldn't be needed
+	/*
+	private void payLife(final int cost) {
 		life -= cost;
 		this.updateObservers();
 	}
+	*/
 	
 	public boolean payLife(int lifePayment, Card source) {
     	

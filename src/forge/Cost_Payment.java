@@ -242,7 +242,7 @@ public class Cost_Payment {
         			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
         			null, possibleValues, possibleValues[0]);
             if(choice.equals(0)) {
-            	  AllZone.HumanPlayer.payLife(cost.getLifeAmount());
+            	  AllZone.HumanPlayer.payLife(cost.getLifeAmount(), null);
             	  payLife = true;
             }
 			else{
@@ -353,7 +353,7 @@ public class Cost_Payment {
         
         // refund life
         if (cost.getLifeCost() && payLife){
-        	card.getController().payLife(cost.getLifeAmount()*-1);
+        	card.getController().payLife(cost.getLifeAmount()*-1, null);
         }
         
         // can't really undiscard things
@@ -461,7 +461,7 @@ public class Cost_Payment {
     		card.subtractCounter(cost.getCounterType(), cost.getCounterNum());
     	
     	if (cost.getLifeCost())
-    		AllZone.ComputerPlayer.payLife(cost.getLifeAmount());
+    		AllZone.ComputerPlayer.payLife(cost.getLifeAmount(), null);
     	
     	if (cost.getDiscardCost()){
     		String discType = cost.getDiscardType();
