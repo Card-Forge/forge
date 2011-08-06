@@ -17133,23 +17133,18 @@ public class CardFactory implements NewConstants {
                 if(AllZone.GameAction.isCardInPlay(getTargetCard())
                         && CardFactoryUtil.canTarget(card, getTargetCard())) {
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    Card Copy = copyCard(getTargetCard());
-                    CardList all = AllZone.CardFactory.getAllCards();
-                    CardList tokens = new CardList(play.getCards());
-                    tokens = tokens.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isToken();
-                        }
-                    });
-                    all.add(tokens);
-                    int Unumber = 0;
-                    for(int i = 0; i < all.size(); i++) {
-                    if(all.get(i).getUniqueNumber() > Unumber) Unumber = all.get(i).getUniqueNumber();	
-                    }
-                    Copy.setUniqueNumber(Unumber + 1);
+                    CardList DoublingSeasons = new CardList(play.getCards());
+                    DoublingSeasons = DoublingSeasons.getName("Doubling Season");
+                    PlayerZone_ComesIntoPlay.SimultaneousEntry = true;      
+                    double Count = DoublingSeasons.size();
+                    Count = Math.pow(2,Count);
+                    for(int i = 0; i < Count; i++) {
+                    	if(i + 1== Count) PlayerZone_ComesIntoPlay.SimultaneousEntry = false;                 
+                    Card Copy = copyCardintoNew(getTargetCard());
                     Copy.setToken(true);
                     Copy.setController(card.getController());
                     play.add(Copy);
+                    }
                 }             
                 }//resolve()
             };
@@ -17204,35 +17199,23 @@ public class CardFactory implements NewConstants {
                 }
                 @Override
                 public void resolve() {
-                	PlayerZone_ComesIntoPlay.SimultaneousEntry = true;
-                    card.setKicked(true);
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                	card.setKicked(true);
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                    for(int x = 0; x < 5; x++) {
-                    	if(x == 4) PlayerZone_ComesIntoPlay.SimultaneousEntry = false;
-                            Card Copy = copyCard(getTargetCard());
-                            CardList all = AllZone.CardFactory.getAllCards();
-                            CardList tokens = new CardList(play.getCards());
-                            tokens = tokens.filter(new CardListFilter() {
-                                public boolean addCard(Card c) {
-                                    return c.isToken();
-                                }
-                            });
-                            all.add(tokens);
-                            int Unumber = 0;
-                            for(int i = 0; i < all.size(); i++) {
-                            if(all.get(i).getUniqueNumber() > Unumber) Unumber = all.get(i).getUniqueNumber();	
-                            }
-                            Copy.setUniqueNumber(Unumber + 4);
-                            Copy.setToken(true);
-                            Copy.setController(card.getController());
-                            play.add(Copy); 
-                            AllZone.Display.showMessage("Hack for Legendaries going to the graveyard :)");
-                    }//for
-                    
-                    }
-             
+                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                        CardList DoublingSeasons = new CardList(play.getCards());
+                        DoublingSeasons = DoublingSeasons.getName("Doubling Season");
+                        PlayerZone_ComesIntoPlay.SimultaneousEntry = true;      
+                        double Count = DoublingSeasons.size();
+                        Count = 5 * Math.pow(2,Count);
+                        for(int i = 0; i < Count; i++) {
+                        	if(i + 1== Count) PlayerZone_ComesIntoPlay.SimultaneousEntry = false;                 
+                        Card Copy = copyCardintoNew(getTargetCard());
+                        Copy.setToken(true);
+                        Copy.setController(card.getController());
+                        play.add(Copy);
+                        }
+                    }            
                 }//resolve()
             };
             kicker.setKickerAbility(true);

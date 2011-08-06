@@ -1,3 +1,8 @@
+Rite of Replication
+2 U U
+Sorcery
+no text
+
 Abyssal Specter
 2 B B
 Creature Specter
@@ -908,11 +913,6 @@ no text
 5/5
 Flying
 TypeCycling:Plains:2
-
-Rite of Replication
-2 U U
-Sorcery
-no text
 
 Eternity Vessel
 6
