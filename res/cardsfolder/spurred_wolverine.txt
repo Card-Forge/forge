@@ -1,0 +1,10 @@
+Name:Spurred Wolverine
+ManaCost:4 R
+Types:Creature Wolverine Beast
+Text:no text
+PT:3/2
+K:abPumpTgtC tapXType<2/Beast>:First Strike
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spurred_wolverine.jpg
+End
