@@ -9,4 +9,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.YouDon
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blind_zealot.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/52.jpg
 End

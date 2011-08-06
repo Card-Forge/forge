@@ -153,7 +153,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Grampa Simpson 3", "hard", "WRG Double Strike deck with equipments and auras");
 //        addToDeckList("Green Arrow 2", "medium", "G Anti-Air deck");
 //        addToDeckList("Green Arrow 3", "hard", "G Angry Large Monsters deck");
-        addToDeckList("Green Lantern 3", "hard", "UBR Nicol Bolas, Planeswalker deck with threat removal and several creatures");
+        addToDeckList("Green Lantern 3", "hard", "UBR Deathtouch deck with auras and several equipments");
 //        addToDeckList("Gunslinger 3", "hard", "WBRG Cascade deck");
         
         addToDeckList("Han Solo 3", "hard", "WG enchantments deck with Sigil of the Empty Throne");
