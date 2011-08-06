@@ -1,0 +1,9 @@
+Name:Steal Strength
+ManaCost:1 B
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | SubAbility$ SVar=DBPumpCurse | SpellDescription$ Target creature gets +1/+1 until end of turn. Another target creature gets -1/-1 until end of turn.
+SVar:DBPumpCurse:DB$Pump | ValidTgts$ Creature | IsCurse$ True | TgtPrompt$ Select another creature | NumAtt$ -1 | NumDef$ -1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/steal_strength.jpg
+End
