@@ -18521,9 +18521,7 @@ public class CardFactory implements NewConstants {
 				public void resolve() {
 					final String player = card.getController();
 					AllZone.GameAction.sacrifice(card);
-					AllZone.GameAction.drawCard(player);
-					AllZone.GameAction.drawCard(player);
-					AllZone.GameAction.drawCard(player);
+					AllZone.GameAction.drawCards(player, 3);
 				}
         	};
         	ability.setDescription("3, tap: Sacrifice Dreamstone Hedron: Draw 3 cards.");
