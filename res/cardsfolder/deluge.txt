@@ -1,0 +1,8 @@
+Name:Deluge
+ManaCost:2 U
+Types:Instant
+Text:no text
+A:SP$TapAll|Cost$2 U|ValidCards$Creature.withoutFlying|SpellDescription$Tap all creatures without flying.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deluge.jpg
+End
