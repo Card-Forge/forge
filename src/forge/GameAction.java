@@ -2369,7 +2369,7 @@ public class GameAction {
                 if (card.getSVar("RemAIDeck").equals("True"))
                 	RAICards.add(card.getName());
                 //get card picture so that it is in the image cache
-//        ImageCache.getImage(card);
+                // ImageCache.getImage(card);
             }
             
             if (RAICards.size() > 0)
@@ -2473,21 +2473,6 @@ public class GameAction {
         return library.toArray();
     }//smoothComputerManaCurve()
     
-    /*
-    @SuppressWarnings("unused")
-    // getComputerLand
-    private CardList getComputerLand(CardList in) {
-        CardList land;
-        land = in.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return c.isLand();
-            }
-        });
-        
-        return land;
-    }//getComputerLand()
-    */
-    
     //non-basic lands are removed, because the computer doesn't seem to
     //effectively used them very well
     public CardList threadLand(CardList in) {
@@ -2570,7 +2555,7 @@ public class GameAction {
     	int Flip = MyRandom.random.nextInt(2);
     	String Human_Flip = " ";
     	String Computer_Flip = " ";
-  //  	JOptionPane.showMessageDialog(null, q, "", JOptionPane.INFORMATION_MESSAGE);
+    	// JOptionPane.showMessageDialog(null, q, "", JOptionPane.INFORMATION_MESSAGE);
     	if(q.equals(0)) {
     		Human_Flip = ForgeProps.getLocalized(GAMEACTION_TEXT.HEADS);
     		Computer_Flip = ForgeProps.getLocalized(GAMEACTION_TEXT.TAILS);
@@ -3314,33 +3299,6 @@ public class GameAction {
         list.toArray(array);
         return array;
     }//canPlaySpellAbility()
-    
-    public void skullClamp_destroy(Card c) {
-        CardList equipment = new CardList();
-        equipment.addAll(c.getEquippedBy().toArray());
-        equipment = equipment.getName("Skullclamp");
-        
-        if(equipment.size() == 0) return;
-        
-        final Card crd = c;
-        for(int i = 0; i < equipment.size(); i++) {
-        	final Card skullclamp = equipment.get(i);
-        	final Ability draw = new Ability(crd, "0") {
-        		@Override
-        		public void resolve() {
-        			Player player = skullclamp.getController();
-        			player.drawCards(2);
-        		}
-        	};//Ability
-        	
-        	StringBuilder sb = new StringBuilder();
-        	sb.append("Skullclamp - ").append(skullclamp.getController());
-        	sb.append(" draws 2 cards (").append(c.getName()).append(").");
-        	draw.setStackDescription(sb.toString());
-        	
-        	AllZone.Stack.add(draw);
-        }
-    }
 
     public void searchLibraryBasicLand(Player player, String Zone1, boolean tapLand) {
     	searchLibraryTwoLand("Basic", player, Zone1, tapLand, "", false);
