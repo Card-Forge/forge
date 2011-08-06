@@ -4404,6 +4404,7 @@ res/cardsfolder/riptide_crab.txt -text svneol=native#text/plain
 res/cardsfolder/riptide_director.txt -text svneol=native#text/plain
 res/cardsfolder/riptide_laboratory.txt -text svneol=native#text/plain
 res/cardsfolder/riptide_pilferer.txt -text svneol=native#text/plain
+res/cardsfolder/riptide_survivor.txt svneol=native#text/plain
 res/cardsfolder/rishadan_airship.txt -text svneol=native#text/plain
 res/cardsfolder/rishadan_pawnshop.txt -text svneol=native#text/plain
 res/cardsfolder/rishadan_port.txt -text svneol=native#text/plain
