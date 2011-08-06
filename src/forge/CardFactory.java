@@ -204,6 +204,38 @@ public class CardFactory implements NewConstants {
                 }
             });
         }//if "Comes into play tapped."
+        if (hasKeyword(card, "CARDNAME enters the battlefield tapped unless you control a ") != -1)
+        {
+        	int n = hasKeyword(card, "CARDNAME enters the battlefield tapped unless you control a ");
+        	String parse = card.getKeyword().get(n).toString();
+        	
+        	final String types[] = parse.substring(60, parse.length() - 1).split(" or a ");
+        	
+        	card.addComesIntoPlayCommand(new Command()
+        	{
+        		private static final long serialVersionUID = 403635232455049834L;
+        		
+        		public void execute()
+        		{
+        			PlayerZone pzICtrl = AllZone.getZone(Constant.Zone.Play, card.getOwner());
+        			CardList clICtrl = new CardList(pzICtrl.getCards());
+        			
+        			boolean fnd = false;
+        			
+        			for (int i = 0; i < clICtrl.size(); i++)
+        			{
+        				Card c = clICtrl.get(i);
+        				for (int j = 0; j < types.length; j++)
+        					if (c.getType().contains(types[j]))
+        						fnd = true;
+        			}
+        			
+        			if (!fnd)
+        				card.tap();
+        		}
+        	});
+        }
+
         
         // Support for using string variables to define Count$ for X or Y
         // Or just about any other String that a card object needs at any given time
