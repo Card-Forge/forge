@@ -795,8 +795,13 @@ public class AbilityFactory {
 			cards.addAll(parent.getTarget().getTargetCards());
 		}
 		
-		else if (defined.startsWith("Triggered"))
-			c = AllZoneUtil.getCardState((Card)sa.getSourceCard().getTriggeringObject(defined.substring(9)));
+		else if (defined.startsWith("Triggered")){
+            Object crd = sa.getSourceCard().getTriggeringObject(defined.substring(9));
+            if(crd instanceof Card)
+            {
+                c = AllZoneUtil.getCardState((Card)crd);
+            }
+        }
 		
 		else if (defined.equals("Remembered")){
 			for(Card rem : hostCard.getRemembered()){
@@ -850,30 +855,38 @@ public class AbilityFactory {
 			}
 		}
         else if (defined.startsWith("Triggered")){
+            Object o = null;
             if (defined.endsWith("Controller")){
                 String triggeringType = defined.substring(9);
                 triggeringType = triggeringType.substring(0,triggeringType.length()-10);
-                Card c = (Card)sa.getSourceCard().getTriggeringObject(triggeringType);
-				Player p = c.getController();
-				if (!players.contains(p))
-					players.add(p);
+                Object c = sa.getSourceCard().getTriggeringObject(triggeringType);
+                if(c instanceof Card)
+                {
+                    o = ((Card)c).getController();
+                }
             }
             else if (defined.endsWith("Owner")){
                 String triggeringType = defined.substring(9);
                 triggeringType = triggeringType.substring(0,triggeringType.length()-5);
-                Card c = (Card)sa.getSourceCard().getTriggeringObject(triggeringType);
-                Player p = c.getOwner();
-			    if (!players.contains(p))
-				    players.add(p);
+                Object c = (Card)sa.getSourceCard().getTriggeringObject(triggeringType);
+                if(c instanceof Card)
+                {
+                    o = ((Card)c).getOwner();
+                }
 		    }
             else {
                 String triggeringType = defined.substring(9);
-                Player p = (Player)sa.getSourceCard().getTriggeringObject(triggeringType);
-                if(!players.contains(p))
-                    players.add(p);
+                o = sa.getSourceCard().getTriggeringObject(triggeringType);
             }
-
-
+            if(o != null)
+            {
+                if(o instanceof Player)
+                {
+                    Player p = (Player)o;
+                    if (!players.contains(p))
+                        players.add(p);
+                }
+            }
         }
 		else if (defined.equals("EnchantedController")){
 			Player p = card.getEnchantingCard().getController();
