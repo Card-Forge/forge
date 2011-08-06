@@ -349,7 +349,8 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     				sb.append("Won by turn 15!");
     				turnCredits += qdPrefs.getMatchRewardWinByFifteen();
     			}
-        		sb.append(" Bonus: <b>+").append(turnCredits).append(" credits</b>.<br>");
+        		if (turnCredits > 0)
+        			sb.append(" Bonus: <b>+").append(turnCredits).append(" credits</b>.<br>");
     		}
     	}
     	
