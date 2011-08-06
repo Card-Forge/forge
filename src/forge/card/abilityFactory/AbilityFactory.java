@@ -657,6 +657,15 @@ public class AbilityFactory {
 			hostCard.setCopiesSpells(true);
 		}
 		
+		if(API.equals("FlipACoin")) {
+            if(isAb)
+                SA = AbilityFactory_Clash.getAbilityFlip(this);
+            else if(isSp)
+                SA = AbilityFactory_Clash.getSpellFlip(this);
+            else if(isDb)
+                SA = AbilityFactory_Clash.getDrawbackFlip(this);
+        }
+		
 		if (SA == null)
 			throw new RuntimeException("AbilityFactory : SpellAbility was not created for "+hostCard.getName()+". Looking for API: "+API);
 

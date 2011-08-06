@@ -114,7 +114,7 @@ public class AbilityFactory_Copy {
 		StringBuilder sb = new StringBuilder();
 
 		if (!(sa instanceof Ability_Sub))
-			sb.append(sa.getSourceCard().getName()).append(" - ");
+			sb.append(sa.getSourceCard()).append(" - ");
 		else
 			sb.append(" ");
 
