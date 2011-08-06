@@ -1,7 +1,7 @@
 Name:Elvish Champion
 ManaCost:1 G G
 Types:Creature Elf
-Text:Other Elf creatures get +1/+1 and have forestwalk.
+Text:no text
 PT:2/2
 K:stPumpAll:Creature.Elf+Other:1/1/Forestwalk:No Condition:Other Merfolk creatures get +1/+1 and have forestwalk.
 SVar:PlayMain1:TRUE

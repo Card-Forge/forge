@@ -1,7 +1,7 @@
 Name:Elvish Archdruid
 ManaCost:1 G G
 Types:Creature Elf Druid
-Text:Other Elf creatures you control get +1/+1.
+Text:no text
 PT:2/2
 K:tap: add G to your mana pool for each Elf you control.
 K:stPumpAll:Creature.Elfk+Other+YouCtrl:1/1:No Condition:Other Elf creatures you control get +1/+1.

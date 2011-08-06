@@ -107,7 +107,6 @@ public class StaticEffects
 		cardToEffectsList.put("Lord of the Undead", new String[] {"Lord_of_the_Undead_Pump", "Lord_of_the_Undead_Other"});
 		cardToEffectsList.put("Cemetery Reaper", new String[] {"Cemetery_Reaper_Pump", "Cemetery_Reaper_Other"});
 		cardToEffectsList.put("Veteran Swordsmith", new String[] {"Veteran_Swordsmith_Pump", "Veteran_Swordsmith_Other"});
-		cardToEffectsList.put("Death Baron", new String[] {"Death_Baron_Pump","Death_Baron_Other"});
 		cardToEffectsList.put("Scion of Oona", new String[] {"Scion_of_Oona_Pump", "Scion_of_Oona_Other"});
 		cardToEffectsList.put("Covetous Dragon", new String[] {"Covetous_Dragon"});
 		cardToEffectsList.put("Phylactery Lich", new String[]{"Phylactery_Lich"});
