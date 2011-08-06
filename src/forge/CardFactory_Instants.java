@@ -82,7 +82,88 @@ public class CardFactory_Instants {
               
           }//*************** END ************ END ************************** 
           */
-    
+      //*************** START *********** START **************************
+        else if(cardName.equals("Galvanic Blast")) {
+        	SpellAbility spell = new Spell(card) {
+        		/**
+				 * 
+				 */
+				private static final long serialVersionUID = 5792350922880305361L;
+
+				@Override
+        		public void resolve() {
+        			int damageToDo = 2;
+        			CardList artifacts = new CardList(AllZone.getZone(Constant.Zone.Play,card.getController()).getCards());
+
+        			artifacts.filter(new CardListFilter() {
+        				public boolean addCard(Card c) {
+        					return c.getType().contains("Artifact");
+        				}
+        			});
+        			
+        			if(artifacts.size() > 3) {
+        				damageToDo = 4;
+        			}
+        		
+        			Card c = getTargetCard();
+        			if(c != null)
+        			{
+        				c.addDamage(damageToDo,card);
+        			}
+        			else
+        			{
+        				getTargetPlayer().addDamage(damageToDo,card);
+        			}
+        		}
+
+        		public boolean canPlay() {
+        			return true;//super.canPlay();
+        		}
+
+        		public boolean canPlayAI() {
+        			final Integer[] damageToDo = new Integer[1];
+        			damageToDo[0] = 2;
+        			CardList artifacts = new CardList(AllZone.getZone(Constant.Zone.Play,AllZone.ComputerPlayer).getCards());
+        			CardList possibleTargets = new CardList(AllZone.getZone(Constant.Zone.Play,AllZone.HumanPlayer).getCards());
+
+        			artifacts.filter(new CardListFilter() {
+        				public boolean addCard(Card c) {
+        					return c.getType().contains("Artifact");
+        				}
+        			});
+
+        			if(artifacts.size() > 3) {
+        				damageToDo[0] = 4;
+        			}
+
+        			possibleTargets.filter(new CardListFilter() {
+        					public boolean addCard(Card c) {
+        						if(!c.isCreature())
+        						{
+        							return false;
+        						}
+        						
+        						return c.getNetDefense() <= damageToDo[0];
+        					}
+        				});
+        			if(possibleTargets.size() > 0) {
+        				setTargetCard(possibleTargets.get(0));
+        				return true;
+        			}
+        			else
+        			{
+        				setTargetPlayer(AllZone.HumanPlayer);
+        				return true;
+        			}
+        		}
+        	};
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+
+        	spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell,Command.Blank,true,false));
+        	
+        }//*************** END ************ END ************************** 
+
         //*************** START *********** START **************************
         else if (cardName.equals("Brave the Elements")) {
         	/**

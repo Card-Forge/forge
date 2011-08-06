@@ -1,0 +1,7 @@
+#Uses Card-specific code!
+Name:Galvanic Blast
+ManaCost:R
+Types:Instant
+Text:Galvanic Blast deals 2 damage to target creature or player.\r\nMetalcraft — Galvanic Blast deals 4 damage to that creature or player instead if you control three or more artifacts.
+SVar:Rarity:Common
+End
