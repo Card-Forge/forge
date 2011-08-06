@@ -1,0 +1,7 @@
+Name:Bramblesnap
+ManaCost:1 G
+Types:Creature Elemental
+Text:no text
+PT:1/1
+A:AB$Pump|Cost$tapXType<1/Creature>|NumAtt$+1|NumDef$+1|SpellDescription$Bramblesnap gets +1/+1 until end of turn.
+End
