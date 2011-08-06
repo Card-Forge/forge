@@ -767,6 +767,8 @@ class CardFactory_Equipment {
             
         } //*************** END ************ END **************************
         
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Blight Sickle")) {
             final Ability equip = new Ability(card, "2") {
@@ -875,6 +877,8 @@ class CardFactory_Equipment {
             card.addUnEquipCommand(onUnEquip);
             
         } //*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Spidersilk Net")) {

@@ -7404,7 +7404,8 @@ abPumpTgt T:Haste
 Blight Sickle
 2
 Artifact Equipment
-Equipped creature gets +1/+0 and has Wither.
+Equipped creature gets +1/+0 and has wither.
+VanillaEquipment:1:0:2:Wither:none:none
 
 Priest of Titania
 1 G

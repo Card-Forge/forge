@@ -1330,9 +1330,15 @@ public class CardFactoryUtil {
             public void execute() {
                 if(sourceCard.isEquipping()) {
                     Card crd = sourceCard.getEquipping().get(0);
-                    if(!(Ab1 == "none")) crd.removeExtrinsicKeyword(Ab1);
-                    if(!(Ab2 == "none")) crd.removeExtrinsicKeyword(Ab2);
-                    if(!(Ab3 == "none")) crd.removeExtrinsicKeyword(Ab3);
+                    
+                    //if(!(Ab1 == "none")) crd.removeExtrinsicKeyword(Ab1);
+                    //if(!(Ab2 == "none")) crd.removeExtrinsicKeyword(Ab2);
+                    //if(!(Ab3 == "none")) crd.removeExtrinsicKeyword(Ab3);
+                    
+                    crd.removeExtrinsicKeyword(Ab1);	//no longer a need to test for a keyword named "none"
+                    crd.removeExtrinsicKeyword(Ab2);
+                    crd.removeExtrinsicKeyword(Ab3);
+                    
                     crd.addSemiPermanentAttackBoost(-1 * Power);
                     crd.addSemiPermanentDefenseBoost(-1 * Tough);
                     
