@@ -22,7 +22,6 @@ public class StaticEffects
 		//value has to be an array, since certain cards have multiple commands associated with them
 		
 		//cardToEffectsList.put("Adamaro, First to Desire", new String[] {"Adamaro_First_to_Desire"});
-		cardToEffectsList.put("Akroma's Memorial", new String[] {"Akromas_Memorial"});
 		//cardToEffectsList.put("Angry Mob", new String[] {"Angry_Mob"});
 		cardToEffectsList.put("Avatar",  new String[] {"Ajani_Avatar_Token"});
 		//cardToEffectsList.put("Aven Trailblazer", new String[] {"Aven_Trailblazer"});

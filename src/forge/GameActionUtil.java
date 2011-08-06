@@ -11861,87 +11861,6 @@ public class GameActionUtil {
 		}
 	};
 	
-    public static Command Akromas_Memorial                = new Command() {
-        
-        private static final long serialVersionUID   = -670715429635395830L;
-        CardList              gloriousAnthemList = new CardList();
-    	Player[]              Akroma_Memorial_Controller = new Player[10]; // Shouldn't have more than 2 in play since its legendary, let alone 10.
-        public void execute() {
-            String keyword1 = "Flying";
-            String keyword2 = "First Strike";
-            String keyword3 = "Vigilance";
-            String keyword4 = "Trample";
-            String keyword5 = "Haste";
-            String keyword6 = "Protection from black";
-            String keyword7 = "Protection from red";
-            CardList list = gloriousAnthemList;
-            Card c;
-            
-			CardList Akroma_List = AllZoneUtil.getCardsInPlay("Akroma's Memorial");
-			CardList Akroma_Zone = new CardList();
-        	for(int i = 0; i < Akroma_List.size(); i++) {
-        		Akroma_Zone.clear();
-				Akroma_Zone.addAll(AllZone.getZone(Constant.Zone.Battlefield, Akroma_List.get(i).getController()).getCards());	
-        	}
-        	CardList List_Copy = new CardList();
-        	List_Copy.add(list);
-            for(int i = 0; i < List_Copy.size(); i++) {
-                c = List_Copy.get(i);                 
-                if(!Akroma_Zone.contains(c)) {
-                	c.removeExtrinsicKeyword(keyword1);
-                    c.removeExtrinsicKeyword(keyword2);
-                    c.removeExtrinsicKeyword(keyword3);
-                    c.removeExtrinsicKeyword(keyword4);
-                    c.removeExtrinsicKeyword(keyword5);
-                    c.removeExtrinsicKeyword(keyword6);
-                    c.removeExtrinsicKeyword(keyword7);
-                    list.remove(c);
-                }
-            }
-
-            PlayerZone[] zone = getZone("Akroma's Memorial");
-			if(AllZoneUtil.isCardInPlay("Akroma's Memorial")) {
-			CardList ControllerCheck = AllZoneUtil.getCardsInPlay("Akroma's Memorial");
-			for(int i = 0; i < ControllerCheck.size(); i++) Akroma_Memorial_Controller[i] = ControllerCheck.get(i).getController();
-            for(int outer = 0; outer < zone.length; outer++) {
-                CardList creature = new CardList(
-                        zone[outer].getCards());
-                creature = creature.getType("Creature");
-            	
-                for(int i = 0; i < creature.size(); i++) {
-                    c = creature.get(i);
-                    if(!list.contains(c)) {
-                    gloriousAnthemList.add(c);
-                    
-                    if(!c.getIntrinsicKeyword().contains(keyword1)) {
-                        c.addExtrinsicKeyword(keyword1);  
-                    }
-                    if(!c.getIntrinsicKeyword().contains(keyword2)) {
-                        c.addExtrinsicKeyword(keyword2);
-                    }
-                    if(!c.getIntrinsicKeyword().contains(keyword3)) {
-                        c.addExtrinsicKeyword(keyword3);
-                    }
-                    if(!c.getIntrinsicKeyword().contains(keyword4)) {
-                        c.addExtrinsicKeyword(keyword4);
-                    }
-                    if(!c.getIntrinsicKeyword().contains(keyword5)) {
-                        c.addExtrinsicKeyword(keyword5);
-                    }
-                    if(!c.getIntrinsicKeyword().contains(keyword6)) {
-                        c.addExtrinsicKeyword(keyword6);
-                    }
-                    if(!c.getIntrinsicKeyword().contains(keyword7)) {
-                        c.addExtrinsicKeyword(keyword7);
-                    }
-                    }
-                }// for inner
-            }// for outer
-			} 
-        }// execute()
-    };
-    
-	
 	public static Command StaticEffectKeyword  		= new Command() {
 		/** StaticEffectKeyword
 		 * Syntax:[ k[0] StaticEffect : k[1] Where the Card must be : k[2] Which Cards the Bonus Affects : 
@@ -12634,6 +12553,81 @@ public class GameActionUtil {
       		
 			return Cards_inZone;
 		}
+	};
+	
+
+	public static Command stSetPT = new Command() {
+		/*
+		 * Syntax: K:stSetPT:<power>:<toughness>:condition:altPower:altToughness:SpellDescription
+		 */
+		private static final long serialVersionUID = -8019071015309088017L;
+
+		public void execute() {
+			//gather cards in all zones based on rule 112.6a
+			CardList Cards_WithKeyword = AllZoneUtil.getCardsInGame();
+			Cards_WithKeyword = Cards_WithKeyword.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					if(c.getKeyword().toString().contains("stSetPT")) return true;
+					return false;
+				}
+			});
+
+			// For each card found, find the keywords which are the stSetPT Keywords
+			for(int i = 0; i < Cards_WithKeyword.size() ; i++) {
+				Card card = Cards_WithKeyword.get(i);
+				ArrayList<String> a = card.getKeyword();
+				for(int x = 0; x < a.size(); x++) {
+					if(a.get(x).toString().startsWith("stSetPT")) {
+						String parse = card.getKeyword().get(x).toString();
+						boolean altCondition = false;
+						String k[] = parse.split(":");
+						if(k.length < 2) {
+							
+						}
+						else {
+							//TODO - add some checking here...?
+							int power = k[1].matches("[0-9][0-9]?") ? Integer.parseInt(k[1]) : CardFactoryUtil.xCount(card,k[1]);
+							int toughness = k[2].matches("[0-9][0-9]?") ? Integer.parseInt(k[2]) : CardFactoryUtil.xCount(card,k[2]);
+							int altPower = 0;
+							int altToughness = 0;
+							if(k.length > 3) {
+								String condition = k[3];
+								if(condition.equals("isAttacking")
+										&& card.isAttacking()) {
+									altCondition = true;
+								}
+								else if(condition.equals("isYourTurn")
+										&& AllZone.Phase.isPlayerTurn(card.getController())) {
+									altCondition = true;
+								}
+							}
+							if(k.length > 4) {
+								altPower = k[4].matches("[0-9][0-9]?") ? Integer.parseInt(k[4]) : CardFactoryUtil.xCount(card,k[4]);
+							}
+							if(k.length > 5) {
+								altToughness = k[5].matches("[0-9][0-9]?") ? Integer.parseInt(k[5]) : CardFactoryUtil.xCount(card,k[5]);
+							}
+							if(altCondition) {
+								//System.out.println("In alt condition");
+								//System.out.println("Setting power for ("+card.getName()+") to: "+altPower);
+								//System.out.println("Setting toughness for ("+card.getName()+") to: "+altToughness);
+								card.setBaseAttack(altPower);
+								card.setBaseDefense(altToughness);
+							}
+							else {
+								//use the base power/toughness to calculate
+								//System.out.println("Setting power for ("+card.getName()+") to: "+power);
+								//System.out.println("Setting toughness for ("+card.getName()+") to: "+toughness);
+								card.setBaseAttack(power);
+								card.setBaseDefense(toughness);
+							}
+						}
+						
+					}
+				}
+			}
+		}// execute()
+
 	};
 	
 	
@@ -16207,7 +16201,6 @@ public class GameActionUtil {
 		
 		//commands.put("Adamaro_First_to_Desire", Adamaro_First_to_Desire);
 		commands.put("Ajani_Avatar_Token", Ajani_Avatar_Token);
-		commands.put("Akromas_Memorial", Akromas_Memorial);
 		//commands.put("Angry_Mob", Angry_Mob);
 		//commands.put("Aven_Trailblazer", Aven_Trailblazer);
 		
@@ -16325,79 +16318,5 @@ public class GameActionUtil {
 		
 		///The commands above are in alphabetical order by cardname.
 	}
-	
-	public static Command stSetPT = new Command() {
-		/*
-		 * Syntax: K:stSetPT:<power>:<toughness>:condition:altPower:altToughness:SpellDescription
-		 */
-		private static final long serialVersionUID = -8019071015309088017L;
-
-		public void execute() {
-			//gather cards in all zones based on rule 112.6a
-			CardList Cards_WithKeyword = AllZoneUtil.getCardsInGame();
-			Cards_WithKeyword = Cards_WithKeyword.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					if(c.getKeyword().toString().contains("stSetPT")) return true;
-					return false;
-				}
-			});
-
-			// For each card found, find the keywords which are the stSetPT Keywords
-			for(int i = 0; i < Cards_WithKeyword.size() ; i++) {
-				Card card = Cards_WithKeyword.get(i);
-				ArrayList<String> a = card.getKeyword();
-				for(int x = 0; x < a.size(); x++) {
-					if(a.get(x).toString().startsWith("stSetPT")) {
-						String parse = card.getKeyword().get(x).toString();
-						boolean altCondition = false;
-						String k[] = parse.split(":");
-						if(k.length < 2) {
-							
-						}
-						else {
-							//TODO - add some checking here...?
-							int power = k[1].matches("[0-9][0-9]?") ? Integer.parseInt(k[1]) : CardFactoryUtil.xCount(card,k[1]);
-							int toughness = k[2].matches("[0-9][0-9]?") ? Integer.parseInt(k[2]) : CardFactoryUtil.xCount(card,k[2]);
-							int altPower = 0;
-							int altToughness = 0;
-							if(k.length > 3) {
-								String condition = k[3];
-								if(condition.equals("isAttacking")
-										&& card.isAttacking()) {
-									altCondition = true;
-								}
-								else if(condition.equals("isYourTurn")
-										&& AllZone.Phase.isPlayerTurn(card.getController())) {
-									altCondition = true;
-								}
-							}
-							if(k.length > 4) {
-								altPower = k[4].matches("[0-9][0-9]?") ? Integer.parseInt(k[4]) : CardFactoryUtil.xCount(card,k[4]);
-							}
-							if(k.length > 5) {
-								altToughness = k[5].matches("[0-9][0-9]?") ? Integer.parseInt(k[5]) : CardFactoryUtil.xCount(card,k[5]);
-							}
-							if(altCondition) {
-								//System.out.println("In alt condition");
-								//System.out.println("Setting power for ("+card.getName()+") to: "+altPower);
-								//System.out.println("Setting toughness for ("+card.getName()+") to: "+altToughness);
-								card.setBaseAttack(altPower);
-								card.setBaseDefense(altToughness);
-							}
-							else {
-								//use the base power/toughness to calculate
-								//System.out.println("Setting power for ("+card.getName()+") to: "+power);
-								//System.out.println("Setting toughness for ("+card.getName()+") to: "+toughness);
-								card.setBaseAttack(power);
-								card.setBaseDefense(toughness);
-							}
-						}
-						
-					}
-				}
-			}
-		}// execute()
-
-	};
 
 }
