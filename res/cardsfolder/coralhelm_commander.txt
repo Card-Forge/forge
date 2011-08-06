@@ -1,10 +1,11 @@
 Name:Coralhelm Commander
 ManaCost:U U
 Types:Creature Merfolk Soldier
-Text:LEVEL 2-3 \r\n 3/3 Flying \r\n \r\nLEVEL 4+ \r\n4/4 Flying, Other Merfolk creatures you control get +1/+1.
+Text:no text
 PT:2/2
-K:stPumpSelf:Creature.countersGE2LEVEL:1/1/Flying:no Condition:no text.
-K:stPumpAll:Creature.Merfolk+YouCtrl:1/1:isPresent Creature.countersGE4LEVEL+Self:no text.
+K:stSetPT:2:2:LevelGE2:3:3:LevelGE4:4:4:LEVEL 2-3 3/3 Flying LEVEL 4+ 4/4 Flying, Other Merfolk creatures you control get +1/+1.
+K:stPumpSelf:Creature.countersGE2LEVEL:0/0/Flying:no Condition:no text.
+K:stPumpAll:Creature.Merfolk+YouCtrl+Other:1/1:isPresent Creature.countersGE4LEVEL+Self:no text.
 K:Level up:1
 K:maxLevel:4
 SVar:Rarity:Rare

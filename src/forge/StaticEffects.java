@@ -90,7 +90,7 @@ public class StaticEffects
 		cardToEffectsList.put("Muraganda Petroglyphs", new String[] {"Muraganda_Petroglyphs"});
 		
 		//cardToEffectsList.put("Nightmare", new String[] {"Nightmare"});
-		cardToEffectsList.put("Nirkana Cutthroat", new String[] {"Nirkana_Cutthroat"});
+		//cardToEffectsList.put("Nirkana Cutthroat", new String[] {"Nirkana_Cutthroat"});
 		//cardToEffectsList.put("Nut Collector", new String[] {"Nut_Collector"});
 		cardToEffectsList.put("Nyxathid", new String[] {"Nyxathid"});
 		

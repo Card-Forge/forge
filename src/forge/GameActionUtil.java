@@ -13462,7 +13462,7 @@ public class GameActionUtil {
 	 * Level up 2 B
 	 * LEVEL 1-2 4/3 Deathtouch
 	 * LEVEL 3+ 5/4 First strike, deathtouch
-	 */
+	 *
 	public static Command Nirkana_Cutthroat  = new Command() {
 		private static final long serialVersionUID = 3804539422363462063L;
 
@@ -13494,7 +13494,7 @@ public class GameActionUtil {
 			}
 		}
 	};
-	
+	*/
 	/*
 	 * Level up 4
 	 * LEVEL 1-2 3/3
@@ -16066,7 +16066,7 @@ public class GameActionUtil {
 		commands.put("Muraganda_Petroglyphs", Muraganda_Petroglyphs);
 		
 		//commands.put("Nightmare", Nightmare);
-		commands.put("Nirkana_Cutthroat", Nirkana_Cutthroat);
+		//commands.put("Nirkana_Cutthroat", Nirkana_Cutthroat);
 		//commands.put("Nut_Collector", Nut_Collector);
 		commands.put("Nyxathid", Nyxathid);
 		
