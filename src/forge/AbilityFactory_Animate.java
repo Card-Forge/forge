@@ -271,6 +271,10 @@ public class AbilityFactory_Animate {
 		//abilities to add to the animated being
 		ArrayList<String> abilities = new ArrayList<String>();
 		if(params.containsKey("Abilities")) abilities.addAll(Arrays.asList(params.get("Abilities").split(",")));
+		
+		//triggers to add to the animated being
+		ArrayList<String> triggers = new ArrayList<String>();
+		if(params.containsKey("Triggers")) triggers.addAll(Arrays.asList(params.get("Triggers").split(",")));
 
 		Target tgt = af.getAbTgt();
 		ArrayList<Card> tgts;
@@ -284,27 +288,41 @@ public class AbilityFactory_Animate {
 			final ArrayList<String> originalTypes = c.getType();
 			
 			final long timestamp = doAnimate(c, power, toughness, types, finalDesc, keywords);
+			
+			//give abilities
 			final ArrayList<SpellAbility> actualAbilities= new ArrayList<SpellAbility>();
 			if(abilities.size() > 0){
 				for(String s : abilities) {
+					System.out.println("Adding ab "+s+" to: "+c);
 					String actualAbility = host.getSVar(s);
 					SpellAbility grantedAbility = af.getAbility(actualAbility, c);
 					actualAbilities.add(grantedAbility);
 					c.addSpellAbility(grantedAbility);
 				}
 			}
+			
+			//Grant triggers
+			final ArrayList<Trigger> actualTriggers = new ArrayList<Trigger>();
+			if(triggers.size() > 0) {
+				for(String s : triggers) {
+					String actualTrigger = host.getSVar(s);
+						Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c);
+						actualTriggers.add(c.addTrigger(parsedTrigger));
+						AllZone.TriggerHandler.registerTrigger(parsedTrigger);
+				}
+			}
 
-			final Command unactivate = new Command() {
+			final Command unanimate = new Command() {
 				private static final long serialVersionUID = -5861759814760561373L;
 
 				public void execute() {
-					doUnanimate(c, originalTypes, finalDesc, keywords, actualAbilities, timestamp);
+					doUnanimate(c, originalTypes, finalDesc, keywords, actualAbilities, actualTriggers, timestamp);
 				}
 			};
 
 			if(!permanent) {
-				if(params.containsKey("UntilEndOfCombat")) AllZone.EndOfCombat.addUntil(unactivate);
-				else AllZone.EndOfTurn.addUntil(unactivate);
+				if(params.containsKey("UntilEndOfCombat")) AllZone.EndOfCombat.addUntil(unanimate);
+				else AllZone.EndOfTurn.addUntil(unanimate);
 			}
 		}
 
@@ -338,7 +356,7 @@ public class AbilityFactory_Animate {
 		return timestamp;
 	}
 
-	private static void doUnanimate(Card c, ArrayList<String> originalTypes, String colorDesc, ArrayList<String> originalKeywords, ArrayList<SpellAbility> actualAbilities, long timestamp) {
+	private static void doUnanimate(Card c, ArrayList<String> originalTypes, String colorDesc, ArrayList<String> originalKeywords, ArrayList<SpellAbility> actualAbilities, ArrayList<Trigger> actualTriggers, long timestamp) {
 		c.setBaseAttack(0);
 		c.setBaseDefense(0);
 
@@ -356,6 +374,11 @@ public class AbilityFactory_Animate {
 		
 		for(SpellAbility sa : actualAbilities) {
 			c.removeSpellAbility(sa);
+		}
+		
+		for(Trigger t : actualTriggers) {
+			AllZone.TriggerHandler.removeRegisteredTrigger(t);
+			c.removeTrigger(t);
 		}
 
 		//any other unanimate cleanup

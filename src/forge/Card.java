@@ -195,11 +195,16 @@ public class Card extends MyObservable {
     	rememberedCards.clear();
     }
     
-    public void addTrigger(Trigger t)
+    public Trigger addTrigger(Trigger t)
     {
     	Trigger newtrig = t.getCopy();
     	newtrig.setHostCard(this);
     	triggers.add(newtrig);
+    	return newtrig;
+    }
+    
+    public void removeTrigger(Trigger t) {
+    	triggers.remove(t);
     }
     
     public ArrayList<Trigger> getTriggers()
@@ -1014,7 +1019,7 @@ public class Card extends MyObservable {
             // Add Keywords
             ArrayList<String> kw = getKeyword();
             
-         // Triggered abilities
+            // Triggered abilities
             for(Trigger trig : triggers)
             {
             	if(!trig.isSecondary())
