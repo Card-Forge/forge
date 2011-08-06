@@ -276,7 +276,9 @@ public class QuestData_BoosterPack implements NewConstants {
         else if(uncommonCreature.contains(cardName) || uncommonSpell.contains(cardName)) return "Uncommon";
         else if(rareCreature.contains(cardName) || rareSpell.contains(cardName)) return "Rare";
         else if(cardName.equals("Forest") || cardName.equals("Plains") || cardName.equals("Island")
-                || cardName.equals("Swamp") || cardName.equals("Mountain")) return "Land";
+             || cardName.equals("Swamp") || cardName.equals("Mountain")
+             || cardName.equals("Snow-Covered Forest") || cardName.equals("Snow-Covered Plains") || cardName.equals("Snow-Covered Island")
+             || cardName.equals("Snow-Covered Swamp") || cardName.equals("Snow-Covered Mountain")) return "Land";
         else return "error";
     }
 }

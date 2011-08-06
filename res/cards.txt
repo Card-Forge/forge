@@ -1,3 +1,85 @@
+Arctic Wolves
+3 G G
+Creature Wolf
+no text
+4/5
+Cumulative upkeep:2
+When this card comes into play, draw a card.
+
+Arnjlot's Ascent
+1 U U
+Enchantment
+no text
+Cumulative upkeep:U
+abPumpTgt 1:Flying:Target creature gains flying until end of turn.
+
+Firestorm Hellkite
+4 U R
+Creature Dragon
+no text
+6/6
+Flying
+Trample
+Cumulative upkeep:U R
+
+Flamecore Elemental
+2 R R
+Creature Elemental
+no text
+5/4
+Echo:2 R R
+
+Illusionary Forces
+3 U
+Creature Illusion
+no text
+4/4
+Flying
+Cumulative upkeep:U
+
+Illusionary Wall
+4 U
+Creature Illusion Wall
+no text
+7/4
+Defender
+Flying
+First Strike
+Cumulative upkeep:U
+
+Phobian Phantasm
+1 B B
+Creature Illusion
+no text
+3/3
+Flying
+Fear
+Cumulative upkeep:B
+
+Soldevi Simulacrum
+4
+Artifact Creature Soldier
+no text
+2/4
+Cumulative upkeep:1
+abPump 1:+1/+0
+
+Uktabi Efreet
+2 G G
+Creature Efreet
+no text
+5/4
+Cumulative upkeep:G
+
+Yavimaya Ants
+2 G G
+Creature Insect
+no text
+5/1
+Trample
+Haste
+Cumulative upkeep:G G
+
 Magus of the Tabernacle
 3 W
 Creature Human Wizard

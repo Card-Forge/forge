@@ -95,12 +95,17 @@ public class QuestData implements NewConstants {
     */
 
     public QuestData() {
-        for(int i = 0; i < 40; i++) {
+        for(int i = 0; i < 20; i++) {
             cardPool.add("Forest");
             cardPool.add("Mountain");
             cardPool.add("Swamp");
             cardPool.add("Island");
             cardPool.add("Plains");
+            cardPool.add("Snow-Covered Forest");
+            cardPool.add("Snow-Covered Mountain");
+            cardPool.add("Snow-Covered Swamp");
+            cardPool.add("Snow-Covered Island");
+            cardPool.add("Snow-Covered Plains");
         }//for
     }//QuestData
     

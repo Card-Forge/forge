@@ -79,6 +79,11 @@ public class ReadBoosterPack implements NewConstants {
         land.add("Mountain");
         land.add("Island");
         land.add("Terramorphic Expanse");
+        land.add("Snow-Covered Forest");
+        land.add("Snow-Covered Plains");
+        land.add("Snow-Covered Swamp");
+        land.add("Snow-Covered Mountain");
+        land.add("Snow-Covered Island");
         if(land.contains(cardName)) return "Land";
         
         return "error";
