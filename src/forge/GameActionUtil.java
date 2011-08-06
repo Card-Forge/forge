@@ -482,7 +482,6 @@ public class GameActionUtil {
 		playCard_Thief_of_Hope(c);
 		playCard_Infernal_Kirin(c);
 		playCard_Cloudhoof_Kirin(c);
-		playCard_Thistledown_Duo(c);
 		playCard_Battlegate_Mimic(c);
 		playCard_Nightsky_Mimic(c);
 		playCard_Riverfall_Mimic(c);
@@ -501,11 +500,9 @@ public class GameActionUtil {
 		playCard_Sigil_of_the_Empty_Throne(c);
 		playCard_Merrow_Levitator(c);
 		//playCard_Enchantress_Draw(c);
-		//playCard_Mold_Adder(c);
 		playCard_Fable_of_Wolf_and_Owl(c);
 		playCard_Kor_Firewalker(c);
 		playCard_Curse_of_Wizardry(c);
-		playCard_Hand_of_the_Praetors(c);
 		playCard_Venser_Emblem(c);
 		playCard_Presence_of_the_Master(c);
 		
@@ -809,49 +806,6 @@ public class GameActionUtil {
 		}
 	}
 	
-	public static void playCard_Hand_of_the_Praetors(Card c)
-	{
-		if (!c.getKeyword().contains("Infect"))
-			return;
-		
-		final Player controller = c.getController();
-
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Hand of the Praetors");
-		
-		for (int i=0;i<list.size();i++)
-		{
-			final Card card = list.get(i);
-			final Ability ability = new Ability(card, "0")
-			{
-				public void resolve()
-				{
-					if (getTargetPlayer().equals(AllZone.HumanPlayer))
-						AllZone.HumanPlayer.addPoisonCounters(1);
-					else
-						AllZone.ComputerPlayer.addPoisonCounters(1);
-				}
-				
-				public void chooseTargetAI()
-				{
-					setTargetPlayer(AllZone.HumanPlayer);
-				}
-			};
-			
-			ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
-			if (controller.equals(AllZone.HumanPlayer))
-				AllZone.GameAction.playSpellAbility(ability);
-			else {
-				ability.chooseTargetAI();
-				AllZone.Stack.add(ability);
-			}
-		}
-	}
-	
 	public static void playCard_Venser_Emblem(Card c)
 	{
 		final Player controller = c.getController();
@@ -965,84 +919,6 @@ public class GameActionUtil {
 			}					
 		}//if
 	} // Chalice_of_the_Void 
-
-	public static void playCard_Thistledown_Duo(Card c) {
-		final Player controller = c.getController();
-
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Thistledown Duo");
-
-		if(list.size() > 0) {
-			if(c.isWhite()) {
-				for(int i = 0; i < list.size(); i++) {
-					final Card card = list.get(i);
-					final Command untilEOT = new Command() {
-						private static final long serialVersionUID = -4569751606008597903L;
-
-						public void execute() {
-							if(AllZone.GameAction.isCardInPlay(card)) {
-								card.addTempAttackBoost(-1);
-								card.addTempDefenseBoost(-1);
-							}
-						}
-					};
-
-					Ability ability2 = new Ability(card, "0") {
-						@Override
-						public void resolve() {
-							card.addTempAttackBoost(1);
-							card.addTempDefenseBoost(1);
-							AllZone.EndOfTurn.addUntil(untilEOT);
-						}
-					}; // ability2
-					
-					StringBuilder sb = new StringBuilder();
-					sb.append(card.getName()).append(" - ").append(c.getController());
-					sb.append(" played a white spell, Thistledown Duo gets +1/+1 until end of turn.");
-					ability2.setStackDescription(sb.toString());
-					
-					AllZone.Stack.add(ability2);
-				}
-			}//if
-		}
-
-		if(c.isBlue()) {
-			for(int i = 0; i < list.size(); i++) {
-				final Card card = list.get(i);
-				final Command untilEOT = new Command() {
-					private static final long serialVersionUID = -4569751606008597903L;
-
-					public void execute() {
-						if(AllZone.GameAction.isCardInPlay(card)) {
-							card.removeIntrinsicKeyword("Flying");
-
-						}
-					}
-				};
-
-				Ability ability2 = new Ability(card, "0") {
-					@Override
-					public void resolve() {
-						if(!card.getIntrinsicKeyword().contains("Flying")) card.addIntrinsicKeyword("Flying");
-						AllZone.EndOfTurn.addUntil(untilEOT);
-					}
-				}; // ability2
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(card.getName()).append(" - ").append(c.getController());
-				sb.append(" played a blue spell, Thistledown Duo gains flying until end of turn.");
-				ability2.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability2);
-			}
-		}//if
-
-
-	}//Thistledown Duo
 
 	public static void playCard_Demigod_of_Revenge(final Card c) {
 		// not enough boom stick references in this block of code
