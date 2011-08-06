@@ -564,11 +564,6 @@ public class Card extends MyObservable {
             String s = getSpellText();
             StringBuilder sb = new StringBuilder();
             
-            // Changeling - we want this to appear above the spellText
-            if (getKeyword().contains("Changeling")) {
-                sb.append("Changeling\r\n\r\n");
-            }
-            
             // Give spellText line breaks for easier reading
             sb.append(s.replaceAll("\\\\r\\\\n", "\r\n"));
             
@@ -580,23 +575,32 @@ public class Card extends MyObservable {
                 sb.append("\r\n");
             }
             
+            // Add SpellAbilities
             SpellAbility[] sa = getSpellAbility();
-            for(int i = 0; i < sa.length; i++)
+            for (int i = 0; i < sa.length; i++) {
                 sb.append(sa[i].toString() + "\r\n");
+            }
             
-            // Ripple + Dredge + Madness
+            // Add Keywords
             ArrayList<String> kw = getKeyword();
+            
+            // Ripple + Dredge + Madness + CARDNAME is {color}.
             for (int i = 0; i < kw.size(); i++) {
-                if ((kw.get(i).toString().startsWith("Ripple") && !sb.toString().contains("Ripple")) 
-                        || (kw.get(i).toString().startsWith("Dredge") && !sb.toString().contains("Dredge")) 
-                        || (kw.get(i).toString().startsWith("Madness") && !sb.toString().contains("Madness"))){
-                    if (sb.toString().endsWith(".") && !sb.toString().endsWith("\r\n")) sb.append("\r\n");
-                    // sb.append(kw.get(i).toString()).append("\r\n");
-                    if (kw.get(i).contains(":")) {
-                        String k[] = kw.get(i).split(":");
-                        sb.append(k[0]).append(" ").append(k[1]).append("\r\n");
-                    } else sb.append(kw.get(i)).append("\r\n");
-                    
+                if ((kw.get(i).startsWith("Ripple") && !sb.toString().contains("Ripple")) 
+                        || (kw.get(i).startsWith("Dredge") && !sb.toString().contains("Dredge")) 
+                        || (kw.get(i).startsWith("Madness") && !sb.toString().contains("Madness")) 
+                        || (kw.get(i).startsWith("CARDNAME is ") && !sb.toString().contains("CARDNAME is "))) {
+                    sb.append(kw.get(i).replace(":", " ")).append("\r\n");
+                }
+            }
+            
+            // Draw a card. + Changeling + CARDNAME can't be countered. + Cascade
+            for (int i = 0; i < kw.size(); i++) {
+                if ((kw.get(i).contains("Draw a card.") && !sb.toString().contains("Draw a card.")) 
+                        || (kw.get(i).contains("Changeling") && !sb.toString().contains("Changeling")) 
+                        || (kw.get(i).contains("CARDNAME can't be countered.") && !sb.toString().contains("CARDNAME can't be countered.")) 
+                        || (kw.get(i).contains("Cascade") && !sb.toString().contains("Cascade"))) {
+                    sb.append(kw.get(i)).append("\r\n");
                 }
             }
             
@@ -610,24 +614,6 @@ public class Card extends MyObservable {
                     sb.append(" You may choose new targets for the copies.");
                 }
                 sb.append(")\r\n");
-            }
-            
-            // CARDNAME can't be countered.
-            if (getKeyword().contains("CARDNAME can't be countered.") && !sb.toString().contains("CARDNAME can't be countered.")) {
-                if (sb.toString().endsWith(".") && !sb.toString().endsWith("\r\n")) sb.append("\r\n");
-                sb.append("CARDNAME can't be countered.\r\n");
-            }
-            
-            // Cascade
-            if (getKeyword().contains("Cascade") && !sb.toString().contains("Cascade")) {
-                if (sb.toString().endsWith(".") && !sb.toString().endsWith("\r\n")) sb.append("\r\n");
-                sb.append("Cascade\r\n");
-            }
-
-            // Cantrip -> Draw a card.
-            if (getKeyword().contains("Draw a card.") && !sb.toString().contains("Draw a card.")) {
-                if (sb.toString().endsWith(".") && !sb.toString().endsWith("\r\n")) sb.append("\r\n");
-                sb.append("Draw a card.\r\n");
             }
             
             // Scry
