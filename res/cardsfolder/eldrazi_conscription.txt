@@ -1,6 +1,6 @@
 Name:Eldrazi Conscription
 ManaCost:8
-Types:Enchantment Aura
+Types:Tribal Enchantment Eldrazi Aura
 Text:Enchanted creature gets +10/+10 and has trample and annihilator 2.
 K:Enchant creature
 K:enPump:+10/+10/Trample & Annihilator 2
