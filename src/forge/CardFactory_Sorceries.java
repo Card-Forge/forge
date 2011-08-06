@@ -7350,6 +7350,37 @@ public class CardFactory_Sorceries {
             spell.setDescription(abCost+"Destroy target non-Swamp land. If that land was nonbasic, Choking Sands deals 2 damage to the land's controller.");
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Rite of Flame")) {
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 1168990016361927544L;
+
+				@Override
+                public void resolve() {
+                    AllZone.ManaPool.addManaToFloating("R R", card);
+                    int num = AllZoneUtil.getCardsInGraveyard(card.getName()).size();
+                    for(int i = 0; i < num; i++) {
+                    	AllZone.ManaPool.addManaToFloating("R", card);
+                    }
+                }
+               
+                @Override
+                public boolean canPlayAI() {
+                	//Compy has no mana pool
+                    return false;
+                }
+            };
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(cardName).append(" - Add R R to your mana pool, then add R to your mana pool for each card named "+cardName+" in each graveyard.");
+            spell.setStackDescription(sb.toString());
+            
+            spell.setDescription("Add R R to your mana pool, then add R to your mana pool for each card named "+cardName+" in each graveyard.");
+           
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
     	return card;
     }//getCard
 }
