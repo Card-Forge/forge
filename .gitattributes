@@ -4641,6 +4641,7 @@ res/cardsfolder/souldrinker.txt -text svneol=native#text/plain
 res/cardsfolder/souls_attendant.txt -text svneol=native#text/plain
 res/cardsfolder/soulscour.txt -text svneol=native#text/plain
 res/cardsfolder/soulsurge_elemental.txt -text svneol=native#text/plain
+res/cardsfolder/soulsworn_jury.txt -text svneol=native#text/plain
 res/cardsfolder/soultether_golem.txt -text svneol=native#text/plain
 res/cardsfolder/sound_the_call.txt -text svneol=native#text/plain
 res/cardsfolder/southern_elephant.txt -text svneol=native#text/plain
