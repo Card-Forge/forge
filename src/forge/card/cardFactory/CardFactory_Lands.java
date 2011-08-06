@@ -24,64 +24,17 @@ import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Mana;
 import forge.card.spellability.Cost;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 
 class CardFactory_Lands {
 
     public static Card getCard(final Card card, final String cardName, Player owner) {
-        
-    	//computer plays 2 land of these type instead of just 1 per turn
-        
-
-        //*************** START *********** START **************************
-        if(cardName.equals("Oran-Rief, the Vastwood")) {
-            card.clearSpellKeepManaAbility();
-            
-            final CardListFilter targets = new CardListFilter() {
-                
-                public boolean addCard(Card c) {
-                    return AllZone.GameAction.isCardInPlay(c) && c.isCreature()
-                            && c.getTurnInZone() == AllZone.Phase.getTurn()
-                            && c.isGreen();
-                }
-                
-            };
-            Cost abCost = new Cost("T", card.getName(), true);
-            final SpellAbility ability = new Ability_Activated(card, abCost, null){                
-                private static final long serialVersionUID = 1416258136308898492L;
-                
-                CardList                  inPlay           = new CardList();
-                
-                @Override
-                public boolean canPlayAI() {
-                    if(!(AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && AllZone.Phase.getPlayerTurn().equals(
-                            AllZone.ComputerPlayer))) return false;
-                    inPlay.clear();
-                    inPlay.addAll(AllZone.Computer_Battlefield.getCards());
-                    return (inPlay.filter(targets).size() > 1) && super.canPlayAI();
-                }
-                
-                @Override
-                public void resolve() {
-                    inPlay.clear();
-                    inPlay.addAll(AllZone.Human_Battlefield.getCards());
-                    inPlay.addAll(AllZone.Computer_Battlefield.getCards());
-                    for(Card targ:inPlay.filter(targets))
-                        targ.addCounter(Counters.P1P1, 1);
-                }
-            };
-            ability.setDescription(abCost+"Put a +1/+1 counter on each green creature that entered the battlefield this turn.");
-            ability.setStackDescription("Put a +1/+1 counter on each green creature that entered the battlefield this turn.");
-            card.addSpellAbility(ability);
-        }
-        //*************** END ************ END **************************        
 
 
         //*************** START *********** START **************************
         //Ravinca Dual Lands
-        else if (  cardName.equals("Blood Crypt")    || cardName.equals("Breeding Pool") 
+        if ( cardName.equals("Blood Crypt")    		|| cardName.equals("Breeding Pool") 
                 || cardName.equals("Godless Shrine") || cardName.equals("Hallowed Fountain") 
                 || cardName.equals("Overgrown Tomb") || cardName.equals("Sacred Foundry") 
                 || cardName.equals("Steam Vents")    || cardName.equals("Stomping Ground") 
