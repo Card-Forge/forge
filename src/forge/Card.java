@@ -2671,7 +2671,6 @@ public class Card extends MyObservable {
         if(damage < 0) damage = 0;
         
         int assignedDamage = damage;
-        addReceivedDamageFromThisTurn(sourceCard, damage);
         
         if(!CardFactoryUtil.canDamage(sourceCard, this)) assignedDamage = 0;
 
@@ -2838,6 +2837,8 @@ public class Card extends MyObservable {
         
         System.out.println("Adding " + damageToAdd + " damage to " + getName());
         Log.debug("Adding " + damageToAdd + " damage to " + getName());
+        
+        addReceivedDamageFromThisTurn(source, damageToAdd);
         
         GameActionUtil.executeDamageDealingEffects(source, damageToAdd);
         
