@@ -15859,7 +15859,6 @@ public class GameActionUtil {
 		private static final long serialVersionUID = -5650088477640877743L;
 
 		public void execute() {
-			// get all creatures
 			CardList list = AllZoneUtil.getCardsInPlay("Yavimaya Enchantress");
 
 			for(int i = 0; i < list.size(); i++) {
@@ -15870,16 +15869,7 @@ public class GameActionUtil {
 		}// execute()
 
 		private int countEnchantments() {
-			PlayerZone cplay = AllZone.getZone(
-					Constant.Zone.Play, AllZone.ComputerPlayer);
-			PlayerZone hplay = AllZone.getZone(
-					Constant.Zone.Play, AllZone.HumanPlayer);
-
-			CardList ench = new CardList();
-			ench.addAll(hplay.getCards());
-			ench.addAll(cplay.getCards());
-
-			ench = ench.getType("Enchantment");
+			CardList ench = AllZoneUtil.getTypeInPlay("Enchantment");
 			return ench.size();
 		}
 	};
@@ -17491,7 +17481,6 @@ public class GameActionUtil {
 		private static final long serialVersionUID = -7746134566580289667L;
 
 		public void execute() {
-			// get all creatures
 			CardList list = AllZoneUtil.getCardsInPlay("Loxodon Punisher");
 
 			for(int i = 0; i < list.size(); i++) {
@@ -17515,13 +17504,11 @@ public class GameActionUtil {
         private static final long serialVersionUID = -9039509574117844271L;
 
 		public void execute() {
-			// get all creatures
 			CardList list = AllZoneUtil.getCardsInPlay("Goblin Gaveleer");
 			
 			for (int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
 				c.setBaseAttack(1 + countEquipment(c) * 2);
-				// c.setBaseDefense(c.getBaseAttack());
 			}
 			
 		}// execute()
@@ -17539,7 +17526,6 @@ public class GameActionUtil {
 		private static final long serialVersionUID = -7746134566580289667L;
 
 		public void execute() {
-			// get all creatures
 			CardList list = AllZoneUtil.getCardsInPlay("Rabid Wombat");
 
 			for(int i = 0; i < list.size(); i++) {
@@ -17561,7 +17547,6 @@ public class GameActionUtil {
 		private static final long serialVersionUID = 8168928048322850517L;
 
 		public void execute() {
-			// get all creatures
 			CardList list = AllZoneUtil.getCardsInPlay("Uril, the Miststalker");
 
 			if(list.size() > 0) {
@@ -17644,29 +17629,20 @@ public class GameActionUtil {
 		private static final long serialVersionUID = 6686690505949642328L;
 
 		public void execute() {
-			// get all creatures
 			CardList list = AllZoneUtil.getCardsInPlay("Faerie Swarm");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
-				c.setBaseAttack(countWhitePermanents(c));
+				c.setBaseAttack(countBluePermanents(c));
 				c.setBaseDefense(c.getBaseAttack());
 			}
 
 		}// execute()
 
-		private int countWhitePermanents(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
-			CardList whitePermanents = new CardList(
-					play.getCards());
-			whitePermanents = whitePermanents.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.isBlue();
-				}
-
-			});
-			return whitePermanents.size();
+		private int countBluePermanents(Card c) {
+			CardList blue = AllZoneUtil.getPlayerCardsInPlay(c.getController());
+			blue = blue.filter(AllZoneUtil.blue);
+			return blue.size();
 		}
 	}; // Faerie Swarm
 
@@ -17674,7 +17650,6 @@ public class GameActionUtil {
 		private static final long serialVersionUID = 6686690505949642328L;
 
 		public void execute() {
-			// get all creatures
 			CardList list = AllZoneUtil.getCardsInPlay("Drove of Elves");
 
 			for(int i = 0; i < list.size(); i++) {
@@ -17705,11 +17680,7 @@ public class GameActionUtil {
 		private static final long serialVersionUID = -8778902687347191964L;
 
 		public void execute() {
-			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Multani, Maro-Sorcerer");
+			CardList list = AllZoneUtil.getCardsInPlay("Multani, Maro-Sorcerer");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -17735,7 +17706,6 @@ public class GameActionUtil {
 		private static final long serialVersionUID = -8778902687347191964L;
 
 		public void execute() {
-			// get all creatures
 			CardList list = AllZoneUtil.getCardsInPlay("Molimo, Maro-Sorcerer");
 
 			for(int i = 0; i < list.size(); i++) {
@@ -17859,7 +17829,6 @@ public class GameActionUtil {
 		private static final long serialVersionUID = -8778912687347191965L;
 
 		public void execute() {
-			// get all creatures
 			CardList list = AllZoneUtil.getCardsInPlay("Adamaro, First to Desire");
 
 			for(int i = 0; i < list.size(); i++) {
@@ -17896,7 +17865,6 @@ public class GameActionUtil {
 		private static final long serialVersionUID = -2250795040532050455L;
 
 		public void execute() {
-			// get all creatures
 			CardList list = AllZoneUtil.getCardsInPlay("Overbeing of Myth");
 
 			for(int i = 0; i < list.size(); i++) {
@@ -17933,7 +17901,6 @@ public class GameActionUtil {
 		private static final long serialVersionUID = -8778902687347191964L;
 
 		public void execute() {
-			// get all creatures
 			CardList list = AllZoneUtil.getCardsInPlay("Guul Draz Specter");
 
 			for(int i = 0; i < list.size(); i++) {
@@ -17975,10 +17942,7 @@ public class GameActionUtil {
 		private static final long serialVersionUID = 4614281706799537283L;
 
 		public void execute() {
-			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
+			CardList list = AllZoneUtil.getCardsInPlay();
 			list = list.filter(new CardListFilter(){
 				public boolean addCard(Card c)
 				{
@@ -18207,7 +18171,6 @@ public class GameActionUtil {
 		private static final long serialVersionUID = 1987511205573387864L;
 
 		public void execute() {
-			// get all creatures
 			CardList list = AllZoneUtil.getCardsInPlay("Nightmare");
 
 			for(int i = 0; i < list.size(); i++) {
@@ -18219,10 +18182,7 @@ public class GameActionUtil {
 		}// execute()
 
 		private int countSwamps(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
-			CardList swamps = new CardList(play.getCards());
-			swamps = swamps.getType("Swamp");
+			CardList swamps = AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Swamp");
 			return swamps.size();
 		}
 	};
@@ -18231,7 +18191,6 @@ public class GameActionUtil {
 		private static final long serialVersionUID = 2731050781896531776L;
 
 		public void execute() {
-			// get all creatures
 			CardList list = AllZoneUtil.getCardsInPlay("Aven Trailblazer");
 
 			for(int i = 0; i < list.size(); i++) {
@@ -18263,7 +18222,6 @@ public class GameActionUtil {
 		private static final long serialVersionUID = 1090204321481353143L;
 
 		public void execute() {
-			// get all creatures
 			CardList list = AllZoneUtil.getCardsInPlay("Matca Rioters");
 
 			for(int i = 0; i < list.size(); i++) {
@@ -18275,12 +18233,9 @@ public class GameActionUtil {
 		}// execute()
 
 		int countLandTypes(Card card) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, card.getController());
-			CardList land = new CardList(play.getCards());
+			CardList land = AllZoneUtil.getPlayerCardsInPlay(card.getController());
 
-			String basic[] = {
-					"Forest", "Plains", "Mountain", "Island", "Swamp" };
+			String basic[] = {"Forest", "Plains", "Mountain", "Island", "Swamp" };
 			int count = 0;
 
 			for(int i = 0; i < basic.length; i++) {
@@ -18295,7 +18250,6 @@ public class GameActionUtil {
 		private static final long serialVersionUID = -8778900687347191964L;
 
 		public void execute() {
-			// get all creatures
 			CardList list = AllZoneUtil.getCardsInPlay("Rakdos Pit Dragon");
 
 			for(int i = 0; i < list.size(); i++) {
@@ -18551,9 +18505,7 @@ public class GameActionUtil {
 			}
 			old.clear();
 
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
+			CardList list = AllZoneUtil.getCardsInPlay();
 
 			CardList creatures = list.getType("Creature");
 
@@ -18645,61 +18597,6 @@ public class GameActionUtil {
 			}// for
 		}// execute()
 	}; // Giant_Tortoise
-
-	public static Command Radiant_Archangel           = new Command() {
-		private static final long serialVersionUID = -7086544305058527889L;
-
-		CardList                  old              = new CardList();
-		int                       pump             = 0;
-
-		public void execute() {
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < old.size(); i++) {
-				c = old.get(i);
-				c.addSemiPermanentAttackBoost(-pump);
-				c.addSemiPermanentDefenseBoost(-pump);
-			}
-
-			old.clear();
-
-			// get all cards names Radiant, Archangel
-			CardList angel = getAngel();
-			pump = countFlying();
-
-			for(int i = 0; i < angel.size(); i++) {
-				c = angel.get(i);
-				c.addSemiPermanentAttackBoost(pump);
-				c.addSemiPermanentDefenseBoost(pump);
-			}
-			old = angel;
-		}// execute()
-
-		CardList getAngel() {
-			CardList angel = new CardList();
-			angel.addAll(AllZone.Human_Play.getCards());
-			angel.addAll(AllZone.Computer_Play.getCards());
-			angel = angel.getName("Radiant, Archangel");
-			return angel;
-		}// getAngel()
-
-		int countFlying() {
-			// count number of creatures with flying
-			CardList flying = new CardList();
-			flying.addAll(AllZone.Human_Play.getCards());
-			flying.addAll(AllZone.Computer_Play.getCards());
-			flying = flying.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.isCreature()
-					&& c.getKeyword().contains("Flying")
-					&& !c.getName().equals(
-							"Radiant, Archangel");
-				}
-			});
-			return flying.size();
-		}
-	}; // Radiant, Archangel
-
 	
 	public static Command Kongming					 = new Command() {
 
@@ -20533,7 +20430,6 @@ public class GameActionUtil {
 		commands.put("Tolsimir", Tolsimir);
 
 		commands.put("Kongming", Kongming);
-		commands.put("Radiant_Archangel", Radiant_Archangel);
 		
 		commands.put("Giant_Tortoise", Giant_Tortoise);
 
