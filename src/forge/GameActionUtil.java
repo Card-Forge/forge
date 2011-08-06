@@ -179,7 +179,11 @@ public class GameActionUtil {
 					player.addDamage(1, crd);
 				}
 			};// Ability
-			ability.setStackDescription("City of Brass deals 1 damage to " + player);
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("City of Brass deals 1 damage to ").append(player);
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}//end City of Brass
 		
@@ -195,7 +199,11 @@ public class GameActionUtil {
 						opponent.gainLife(1);
 					}
 				};//Ability
-				ability.setStackDescription(lifeblood.getName()+" - Mountain was tapped, "+opponent+" gains 1 life.");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(lifeblood.getName()).append(" - Mountain was tapped, ").append(opponent).append(" gains 1 life.");
+				ability.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability);
 			}//for
 		}
@@ -212,7 +220,11 @@ public class GameActionUtil {
 						opponent.gainLife(1);
 					}
 				};//Ability
-				ability.setStackDescription(lifetap.getName()+" - Forest was tapped, "+opponent+" gains 1 life.");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(lifetap.getName()).append(" - Forest was tapped, ").append(opponent).append(" gains 1 life.");
+				ability.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability);
 			}//for
 		}
@@ -231,7 +243,11 @@ public class GameActionUtil {
 							AllZone.GameAction.destroy(target);
 						}
 					};//Ability
-					ability.setStackDescription(blight.getName()+" - Destroy enchanted land.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(blight.getName()).append(" - Destroy enchanted land.");
+					ability.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability);
 				}
 			}
@@ -255,7 +271,11 @@ public class GameActionUtil {
 								AllZone.ComputerPlayer.addPoisonCounters(1);
 						}
 					};//Ability
-					ability.setStackDescription(aura.getName()+" - "+target.getController()+" gets a poison counter.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(aura.getName()).append(" - ").append(target.getController()).append(" gets a poison counter.");
+					ability.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability);
 				}
 			}
@@ -277,7 +297,11 @@ public class GameActionUtil {
 							activePlayer.addDamage(2, source);
 						}
 					};//Ability
-					ability.setStackDescription(card.getName()+" - deals 2 damage to "+activePlayer);
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - deals 2 damage to ").append(activePlayer);
+					ability.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability);
 				}
 			}
@@ -299,7 +323,11 @@ public class GameActionUtil {
 							activePlayer.addDamage(2, source);
 						}
 					};//Ability
-					ability.setStackDescription(card.getName()+" - deals 2 damage to "+activePlayer);
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - deals 2 damage to ").append(activePlayer);
+					ability.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability);
 				}
 			}
@@ -319,7 +347,11 @@ public class GameActionUtil {
 							enchantedCard.addCounter(Counters.P0M2, 1);
 						}
 					};//Ability
-					ability.setStackDescription(card.getName()+" - enchanted creature gets a -0/-2 counter.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - enchanted creature gets a -0/-2 counter.");
+					ability.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability);
 				}
 			}
