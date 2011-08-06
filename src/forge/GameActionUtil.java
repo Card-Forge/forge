@@ -11759,7 +11759,7 @@ public class GameActionUtil {
       			CardsinPlay.addAll(AllZone.Human_Play.getCards());
       			CardsinPlay.addAll(AllZone.Computer_Play.getCards());
       			String Conditions[] = Requirements.split(",");
-      			CardsinPlay = CardsinPlay.getValidCards(Conditions, SourceCard.getController());
+      			CardsinPlay = CardsinPlay.getValidCards(Conditions, SourceCard.getController(), SourceCard);
 	      		if (CardsinPlay.isEmpty()) return false;
   	      	}
   	      	if(SpecialConditions.contains("isNotPresent")) { // is no card of a certain type/color present?
@@ -11768,7 +11768,7 @@ public class GameActionUtil {
       			CardsinPlay.addAll(AllZone.Human_Play.getCards());
       			CardsinPlay.addAll(AllZone.Computer_Play.getCards());
       			String Conditions[] = Requirements.split(",");
-      			CardsinPlay = CardsinPlay.getValidCards(Conditions, SourceCard.getController());
+      			CardsinPlay = CardsinPlay.getValidCards(Conditions, SourceCard.getController(), SourceCard);
 	      		if (!CardsinPlay.isEmpty()) return false;
   	      	}
   	      	if(SpecialConditions.contains("isEquipped")) {

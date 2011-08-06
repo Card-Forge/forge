@@ -1,0 +1,9 @@
+Name:Court Homunculus
+ManaCost:W
+Types:Artifact Creature Homunculus
+Text:no text
+PT:1/1
+K:stPumpSelf:Creature:1/1:isPresent Artifact.Other+YouCtrl:Court Homunculus gets +1/+1 as long as you control another artifact.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/court_homunculus.jpg
+End

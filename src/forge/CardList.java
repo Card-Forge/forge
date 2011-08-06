@@ -180,32 +180,6 @@ public class CardList implements Iterable<Card> {
     	});
     }
     
-    /*
-    public CardList getType(String cardType) {
-        CardList c = new CardList();
-        Card card;
-        
-        cardType = toMixedCase(cardType);
-        
-        for(int i = 0; i < size(); i++) {
-            card = getCard(i);
-            if(card.getType().contains(cardType)
-                    || ((card.isCreature() || (card.isTribal() && !cardType.equals("Creature")))
-                            && !cardType.equals("Legendary") && !cardType.equals("Planeswalker")
-                            && !cardType.equals("Basic") && !cardType.equals("Enchantment")
-                            && !cardType.equals("Land") && !cardType.equals("Sorcery")
-                            && !cardType.equals("Instant") && !cardType.equals("Artifact")
-                            && !cardType.equals("Snow") && !cardType.equals("Arcane")
-                            && !cardType.equals("Equipment") && !cardType.equals("Aura")
-                            && !cardType.equals("Plains") && !cardType.equals("Mountain")
-                            && !cardType.equals("Island") && !cardType.equals("Forest")
-                            && !cardType.equals("Swamp") && card.getKeyword().contains("Changeling"))) //changelings, see Lorwyn FAQ
-            c.add(getCard(i));
-        }
-        return c;
-    }//getType()
-    */
-    
     public CardList getTapState(String TappedOrUntapped)
     {
     	CardList cl = new CardList();
@@ -331,6 +305,23 @@ public class CardList implements Iterable<Card> {
     		}
     	});
     }
+    
+    
+    public CardList getValidCards(final String Restrictions[], final Player Controller, final Card source) {
+        return this.filter(new CardListFilter() {
+            public boolean addCard(Card c) {
+                return c.isValidCard(Restrictions, Controller, source);
+            }
+        });
+    } 
+    
+    public CardList getValidCards(final String Restrictions[], final Card source) {
+        return this.filter(new CardListFilter() {
+            public boolean addCard(Card c) {
+                return c.isValidCard(Restrictions, source);
+            }
+        });
+    } 
     
     public CardList getValidCards(final String Restrictions[], final Player Controller) {
         return this.filter(new CardListFilter() {
