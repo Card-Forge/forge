@@ -408,7 +408,21 @@ public class TriggerHandler {
 				@Override
 				public String getStackDescription()
 				{
-					return regtrig.toString();
+					StringBuilder sb = new StringBuilder(regtrig.toString());
+					if(getTarget() != null)
+					{
+						sb.append("(Targeting ");
+						for(Object o : getTarget().getTargets())
+						{
+							sb.append(o.toString());
+							sb.append(", ");
+						}
+						
+						sb.setLength(sb.length()-2);
+						sb.append(")");
+					}
+					
+					return sb.toString();
 				}
 				
 				@Override
