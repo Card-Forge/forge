@@ -774,32 +774,33 @@ public class ComputerUtil
   static public boolean chooseLandsToPlay()
   {
 	  Player computer = AllZone.ComputerPlayer;
-		ArrayList<Card> landList = PlayerZoneUtil.getCardType(AllZone.Computer_Hand, "Land");
-		
-		if (AllZoneUtil.getPlayerCardsInPlay(computer, "Crucible of Worlds").size() > 0)
-		{
-			CardList lands = AllZoneUtil.getPlayerTypeInGraveyard(computer, "Land");
-			for (Card crd : lands)
-				landList.add(crd);
-		}
+	  CardList landList = AllZoneUtil.getPlayerHand(computer);
+	  landList = landList.filter(AllZoneUtil.lands);
 
-		while(!landList.isEmpty() && computer.canPlayLand()){
-			// play as many lands as you can
-		    int ix = 0;
-		    while (landList.get(ix).isReflectedLand() && (ix+1 < landList.size())) {
-		    	// Skip through reflected lands. Choose last if they are all reflected.
-		    	ix++;
-		    }
+	  if (AllZoneUtil.getPlayerCardsInPlay(computer, "Crucible of Worlds").size() > 0)
+	  {
+		  CardList lands = AllZoneUtil.getPlayerTypeInGraveyard(computer, "Land");
+		  for (Card crd : lands)
+			  landList.add(crd);
+	  }
 
-	    	Card land = landList.get(ix);
-		    landList.remove(ix);
-		    computer.playLand(land);
-		    
-		    AllZone.GameAction.checkStateEffects();
-		    if (AllZone.Stack.size() != 0)
-		    	return false;
-		}
-		return true;
+	  while(!landList.isEmpty() && computer.canPlayLand()){
+		  // play as many lands as you can
+		  int ix = 0;
+		  while (landList.get(ix).isReflectedLand() && (ix+1 < landList.size())) {
+			  // Skip through reflected lands. Choose last if they are all reflected.
+			  ix++;
+		  }
+
+		  Card land = landList.get(ix);
+		  landList.remove(ix);
+		  computer.playLand(land);
+
+		  AllZone.GameAction.checkStateEffects();
+		  if (AllZone.Stack.size() != 0)
+			  return false;
+	  }
+	  return true;
   }
   
   static public Card getCardPreference(Card activate, String pref, CardList typeList){

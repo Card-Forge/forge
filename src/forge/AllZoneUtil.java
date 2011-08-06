@@ -214,7 +214,7 @@ public class AllZoneUtil {
 	 */
 	
 	public static boolean isCardInPlayerGraveyard(Player player, Card card) {
-		return PlayerZoneUtil.isCardInZone(AllZone.getZone(Constant.Zone.Graveyard, player), card);
+		return isCardInZone(AllZone.getZone(Constant.Zone.Graveyard, player), card);
 	}
 	
 	//////// HAND
@@ -242,11 +242,24 @@ public class AllZoneUtil {
 	 * @return true if the card is present in this player's hand; false otherwise
 	 */
 	public static boolean isCardInPlayerHand(Player player, Card card) {
-		return PlayerZoneUtil.isCardInZone(AllZone.getZone(Constant.Zone.Hand, player), card);
+		return isCardInZone(AllZone.getZone(Constant.Zone.Hand, player), card);
 	}
 	
 	public static boolean isCardInPlayerLibrary(Player player, Card card) {
-		return PlayerZoneUtil.isCardInZone(AllZone.getZone(Constant.Zone.Library, player), card);
+		return isCardInZone(AllZone.getZone(Constant.Zone.Library, player), card);
+	}
+	
+	public static boolean isCardInZone(PlayerZone pz, Card card) {
+		if(card == null)
+			return false;
+
+		Card c[] = pz.getCards();
+
+		for(int i = 0; i < c.length; i++)
+			if(c[i].equals(card))
+				return true;
+
+		return false;
 	}
 	
 	////////////// EXILE
@@ -338,8 +351,7 @@ public class AllZoneUtil {
 	///Check if a certain card is in play
 	
 	public static boolean isCardInPlay(Card card) {
-		return PlayerZoneUtil.isCardInZone(AllZone.Computer_Battlefield, card)
-        	|| PlayerZoneUtil.isCardInZone(AllZone.Human_Battlefield, card);
+		return getCardsInPlay().contains(card);
 	}
 	
 	/**
@@ -615,6 +627,15 @@ public class AllZoneUtil {
 	public static CardListFilter enchantments = new CardListFilter() {
 		public boolean addCard(Card c) {
 			return c.isEnchantment();
+		}
+	};
+	
+	/**
+	 * a CardListFilter to get all equipment
+	 */
+	public static CardListFilter equipment = new CardListFilter() {
+		public boolean addCard(Card c) {
+			return c.isEquipment();
 		}
 	};
 	

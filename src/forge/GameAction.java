@@ -507,8 +507,7 @@ public class GameAction {
 	        GameActionUtil.stPump.execute();
 	        
 	        //System.out.println("checking state effects");
-	        ArrayList<Card> creature = PlayerZoneUtil.getCardType(AllZone.Computer_Battlefield, "Creature");
-	        creature.addAll(PlayerZoneUtil.getCardType(AllZone.Human_Battlefield, "Creature"));
+	        CardList creature = AllZoneUtil.getCreaturesInPlay();
 	        
 	        Card c;
 	        Iterator<Card> it = creature.iterator();
@@ -538,8 +537,8 @@ public class GameAction {
 	        }//while it.hasNext()
 	        
 	
-	        ArrayList<Card> enchantments = PlayerZoneUtil.getCardType(AllZone.Computer_Battlefield, "Enchantment");
-	        enchantments.addAll(PlayerZoneUtil.getCardType(AllZone.Human_Battlefield, "Enchantment"));
+	        CardList enchantments = AllZoneUtil.getCardsInPlay();
+	        enchantments = enchantments.filter(AllZoneUtil.enchantments);
 	        
 	        Iterator<Card> iterate = enchantments.iterator();
 	        while(iterate.hasNext()) {
@@ -563,8 +562,8 @@ public class GameAction {
 	        }//while iterate.hasNext()
 	        
 	        //Make sure all equipment stops equipping previously equipped creatures that have left play.
-	        ArrayList<Card> equip = PlayerZoneUtil.getCardType(AllZone.Computer_Battlefield, "Equipment");
-	        equip.addAll(PlayerZoneUtil.getCardType(AllZone.Human_Battlefield, "Equipment"));
+	        CardList equip = AllZoneUtil.getCardsInPlay();
+	        equip = equip.filter(AllZoneUtil.equipment);
 	        
 	        Iterator<Card> iter = equip.iterator();
 	        while(iter.hasNext()) {
@@ -2176,18 +2175,17 @@ public class GameAction {
 
     //is this card a permanent that is in play?
     public boolean isCardInPlay(Card c) {
-        return PlayerZoneUtil.isCardInZone(AllZone.Computer_Battlefield, c)
-                || PlayerZoneUtil.isCardInZone(AllZone.Human_Battlefield, c);
+        return AllZoneUtil.isCardInPlay(c);
     }
     
     public boolean isCardInGrave(Card c) {
-        return PlayerZoneUtil.isCardInZone(AllZone.Computer_Graveyard, c)
-                || PlayerZoneUtil.isCardInZone(AllZone.Human_Graveyard, c);
+        return AllZoneUtil.isCardInZone(AllZone.Computer_Graveyard, c)
+                || AllZoneUtil.isCardInZone(AllZone.Human_Graveyard, c);
     }
     
     public boolean isCardExiled(Card c) {
-        return PlayerZoneUtil.isCardInZone(AllZone.Computer_Exile, c)
-                || PlayerZoneUtil.isCardInZone(AllZone.Human_Exile, c);
+        return AllZoneUtil.isCardInZone(AllZone.Computer_Exile, c)
+                || AllZoneUtil.isCardInZone(AllZone.Human_Exile, c);
     }
     
     /**
@@ -2213,11 +2211,9 @@ public class GameAction {
     
     //removes all damage from player's creatures
     public void removeDamage(Player player) {
-        PlayerZone p = AllZone.getZone(Constant.Zone.Battlefield, player);
-        ArrayList<Card> a = PlayerZoneUtil.getCardType(p, "Creature");
-        Card c[] = CardUtil.toCard(a);
-        for(int i = 0; i < c.length; i++)
-            c[i].setDamage(0);
+        CardList list = AllZoneUtil.getCreaturesInPlay(player);
+        for(Card c:list)
+            c.setDamage(0);
     }
     
     //for Quest fantasy mode
