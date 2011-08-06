@@ -1,21 +1,21 @@
 package forge;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+//import java.io.BufferedReader;
+//import java.io.File;
+//import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-import forge.error.ErrorViewer;
-import forge.properties.ForgeProps;
+//import forge.error.ErrorViewer;
+//import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
 //balance the number of colors and creature/spells for
 //new cards that are won in quest mode
 public class QuestData_BoosterPack implements NewConstants {
-    final private static String      comment          = "//";
+//    final private static String      comment          = "//";
     
     private ArrayList<String> commonCreature   = new ArrayList<String>();
     private ArrayList<String> commonSpell      = new ArrayList<String>();
@@ -282,7 +282,7 @@ public class QuestData_BoosterPack implements NewConstants {
         return out;
     }
     
-    @SuppressWarnings("unchecked")
+/*    @SuppressWarnings("unchecked")
     private void setup(File file, ArrayList creatureList, ArrayList spellList) {
         ArrayList all = readFile(file);
         
@@ -322,7 +322,7 @@ public class QuestData_BoosterPack implements NewConstants {
         
         return cardList;
     }//readFile()
-    
+*/    
     public String getRarity(String cardName) {
         if(commonCreature.contains(cardName) || commonSpell.contains(cardName)) return "Common";
         else if(uncommonCreature.contains(cardName) || uncommonSpell.contains(cardName)) return "Uncommon";
