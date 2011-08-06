@@ -14,8 +14,11 @@ public class TableSorter implements Comparator<Card>, NewConstants
   private CardList all;
 
   //used by compare()
+  @SuppressWarnings("rawtypes")
   private Comparable aCom = null;
+  @SuppressWarnings("rawtypes")
   private Comparable bCom = null;
+  
   //used if in_column is 7, new cards first - the order is based on cards.txt
   //static because this should only be read once
   //static to try to reduce file io operations

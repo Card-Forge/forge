@@ -26,9 +26,9 @@ public class Preferences {
         props = prefs.props;
     }
     
-    @SuppressWarnings({"unchecked"})
     public synchronized Enumeration<String> keys() {
-        Set<String> keysEnum = (Set) props.keySet();
+    	@SuppressWarnings({"unchecked", "rawtypes"})
+    	Set<String> keysEnum = (Set) props.keySet();
         Vector<String> keyList = new Vector<String>();
         keyList.addAll(keysEnum);
         Collections.sort(keyList);
