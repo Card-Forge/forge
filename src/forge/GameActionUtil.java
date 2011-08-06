@@ -9978,7 +9978,7 @@ public class GameActionUtil {
 				}
 				else if ( lcs >=1 && lcs < 4 )  //levels 1-3
 				{
-					c.setBaseAttack(3);
+					c.setBaseAttack(2);
 					c.setBaseDefense(6);
 					c.addNonStackingIntrinsicKeyword("Vigilance");
 				}

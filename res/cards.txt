@@ -23,7 +23,7 @@ maxLevel:4
 Ikiral Outrider
 1 W
 Creature Human Soldier
-LEVEL 1-3 3/6 LEVEL 4+ 3/10 First Strike
+LEVEL 1-3 2/6 Vigilance LEVEL 4+ 3/10 Vigilance
 1/2
 Level up:4
 maxLevel:4
