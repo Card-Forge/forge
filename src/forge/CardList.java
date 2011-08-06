@@ -198,6 +198,8 @@ public class CardList implements Iterable<Card>
                     //TODO: enchanting
                     //TODO: token
                     //TODO: counters
+                    else if(exR[j].startsWith("named"))//by name
+                       r = r && (c.getName().equals(exR[j].substring(6)));
                     else
                        if (exR[j].startsWith("non"))   // ... Other Card types
                           r = r && (! c.getType().contains(exR[j].substring(3)));

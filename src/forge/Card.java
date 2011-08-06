@@ -80,9 +80,10 @@ public class Card extends MyObservable
   private String manaCost = "";
   private String chosenType = "";
 
-  private ArrayList<Command> comesIntoPlayCommandList = new ArrayList<Command>();
+  public ArrayList<Ability_Triggered> zcTriggers = new ArrayList<Ability_Triggered>();
+  /*private ArrayList<Command> comesIntoPlayCommandList = new ArrayList<Command>();
   private ArrayList<Command> destroyCommandList       = new ArrayList<Command>();
-  private ArrayList<Command> leavesPlayCommandList	  = new ArrayList<Command>();
+  private ArrayList<Command> leavesPlayCommandList	  = new ArrayList<Command>();*/
   private ArrayList<Command> turnFaceUpCommandList    = new ArrayList<Command>();
   private ArrayList<Command> equipCommandList 		  = new ArrayList<Command>();
   private ArrayList<Command> unEquipCommandList 	  = new ArrayList<Command>();
@@ -390,12 +391,17 @@ public class Card extends MyObservable
   public void setIsFaceDown(boolean b) { faceDown = b;}
   public boolean isFaceDown() { return faceDown; }
   
-  public void addComesIntoPlayCommand(Command c) {comesIntoPlayCommandList.add(c);}
-  public void removeComesIntoPlayCommand(Command c) { comesIntoPlayCommandList.remove(c);}
-  public void comesIntoPlay() {
-	 for (Command var : comesIntoPlayCommandList)
-		 var.execute();
-  }
+  public void addTrigger(Command c, ZCTrigger type){zcTriggers.add(new Ability_Triggered(this, c, type));}
+  public void removeTrigger(Command c, ZCTrigger type){zcTriggers.remove(new Ability_Triggered(this, c, type));}
+  public void executeTrigger(ZCTrigger type) {
+		 for (Ability_Triggered t : zcTriggers)
+			 if(t.trigger.equals(type) && t.isBasic())
+				AllZone.Stack.add(t);
+	  }
+  
+  public void addComesIntoPlayCommand(Command c) {addTrigger(c, ZCTrigger.ENTERFIELD);}
+  public void removeComesIntoPlayCommand(Command c) {removeTrigger(c, ZCTrigger.ENTERFIELD);}
+  public void comesIntoPlay() {executeTrigger(ZCTrigger.ENTERFIELD);}
   
   public void addTurnFaceUpCommand(Command c) { turnFaceUpCommandList.add(c); }
   public void removeTurnFaceUpCommand(Command c) { turnFaceUpCommandList.remove(c); }
@@ -404,20 +410,13 @@ public class Card extends MyObservable
 			 var.execute();
   }
   
-  public void addDestroyCommand(Command c)    {destroyCommandList.add(c);}
-  public void removeDestroyCommand(Command c) {destroyCommandList.remove(c); }
-  public void destroy()				
-  {
-	  for (Command var : destroyCommandList)
-		 var.execute();
-  }
+  public void addDestroyCommand(Command c) {addTrigger(c, ZCTrigger.DESTROY);}
+  public void removeDestroyCommand(Command c) {removeTrigger(c, ZCTrigger.DESTROY);}
+  public void destroy() {executeTrigger(ZCTrigger.DESTROY);}
   
-  public void addLeavesPlayCommand(Command c)  { leavesPlayCommandList.add(c);}
-  public void removeLeavesPlayCommand(Command c) { leavesPlayCommandList.remove(c); }
-  public void leavesPlay() {
-	  for (Command var : leavesPlayCommandList)
-			 var.execute();
-  }
+  public void addLeavesPlayCommand(Command c) {addTrigger(c, ZCTrigger.LEAVEFIELD);}
+  public void removeLeavesPlayCommand(Command c) {removeTrigger(c, ZCTrigger.LEAVEFIELD);}
+  public void leavesPlay() {executeTrigger(ZCTrigger.LEAVEFIELD);}
   
   public void addEquipCommand(Command c) {equipCommandList.add(c); }
   public void removeEquipCommand(Command c) { equipCommandList.remove(c); }
