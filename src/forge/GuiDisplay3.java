@@ -500,11 +500,13 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
         
         if (AllZone.QuestData != null) {
         	File base = ForgeProps.getFile(IMAGE_ICON);
-        	File file = new File(base, Constant.Quest.oppIconName[0]);
-        	ImageIcon icon = new ImageIcon(file.toString());
-        	
-        	oppIconLabel.setIcon(icon);
-        	
+        	String iconName = "";
+        	if (Constant.Quest.oppIconName[0] != null) {
+        		iconName = Constant.Quest.oppIconName[0];
+	        	File file = new File(base, iconName);
+	        	ImageIcon icon = new ImageIcon(file.toString());
+	        	oppIconLabel.setIcon(icon);
+        	}
         }
         
         oppPCLabel.setText("Poison Counters: " + AllZone.Computer_PoisonCounter.getPoisonCounters());
