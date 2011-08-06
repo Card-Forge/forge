@@ -225,6 +225,7 @@ public class AIPlayer extends Player{
 	}
 	
 	public void sacrificePermanent(String prompt, CardList choices) {
+		//TODO - this could probably use better AI
 		CardListUtil.sortDefense(choices);
         choices.reverse();
         CardListUtil.sortAttackLowFirst(choices);
