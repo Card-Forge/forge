@@ -4853,7 +4853,6 @@ public class GameActionUtil {
 			playerCombatDamage_PoisonCounter(c, 1);
     
     	if(c.getName().equals("Marsh Viper")) playerCombatDamage_PoisonCounter(c, 2);
-    	else if(c.getName().equals("Abyssal Specter")) opponent_Discard(c, 1);
     	else if(c.getName().equals("Nicol Bolas")) playerCombatDamage_Nicol_Bolas(c);
 		else if(c.getName().equals("Thieving Magpie")|| c.getName().equals("Lu Xun, Scholar General")) playerCombatDamage_Shadowmage_Infiltrator(c);
 		else if(c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")) 
