@@ -2507,11 +2507,12 @@ class CardFactory_Lands {
 				
 				@Override
 				public boolean canPlay() {
+					boolean found = false;
 					CardList perms = AllZoneUtil.getPlayerCardsInPlay(card.getController());
 					for(Card c:perms) {
-						if(c.isBlack() || c.isBlue() || c.isGreen() || c.isRed() || c.isWhite()) return true;
+						if(c.isBlack() || c.isBlue() || c.isGreen() || c.isRed() || c.isWhite()) found = true;
 					}
-					return false;
+					return found && super.canPlay();
 				}
         	};
         	
