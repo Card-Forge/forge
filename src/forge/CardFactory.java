@@ -16867,7 +16867,7 @@ public class CardFactory implements NewConstants {
 				return false;
 			}
     	  };
-    	  if (card.getName().equals("Lull")) {
+    	  if (card.getName().equals("Lull") || card.getName().equals("Angelsong")) {
     		  spell.setDescription("Prevent all combat damage that would be dealt this turn.");
     		  spell.setStackDescription(card.getName() + " - Prevent all combat damage that would be dealt this turn.");
     	  }
