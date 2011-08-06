@@ -341,6 +341,25 @@ public class CombatUtil {
         if (c.getCounters(Counters.BRIBERY) > 0 && isCardInPlay("Gwafa Hazid, Profiteer"))
         	return false;
         
+        if (isCardInPlay("Ensnaring Bridge")) {
+        	int limit = 0;
+        	CardList Human = new CardList();
+        	Human.addAll(AllZone.Human_Play.getCards());
+        	if (Human.getName("Ensnaring Bridge").size() > 0) {
+        		CardList Hand = new CardList();
+        		Hand.addAll(AllZone.getZone(Constant.Zone.Hand, "Human").getCards());
+        		limit = Hand.size();
+        	}
+        	CardList Compi = new CardList();
+        	Compi.addAll(AllZone.Computer_Play.getCards());
+        	if (Compi.getName("Ensnaring Bridge").size() > 0) {
+        		CardList Hand = new CardList();
+        		Hand.addAll(AllZone.getZone(Constant.Zone.Hand, "Computer").getCards());
+        		if (Hand.size() > limit) limit = Hand.size();
+        	}
+        	if (c.getNetAttack() > limit) return false;
+        }
+        
         if (isCardInPlay("Kulrath Knight"))
         {
         	CardList all = new CardList();
