@@ -2717,6 +2717,7 @@ class CardFactory_Planeswalkers {
 	          if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card2, getTargetCard()) )
 	          {
 	        	card2.subtractCounter(Counters.LOYALTY, 2);
+	        	turn[0] = AllZone.Phase.getTurn();
 	        	  
 	            orig[0]       = AllZone.getZone(getTargetCard());
 	            controllerEOT[0] = getTargetCard().getController();
@@ -2817,7 +2818,7 @@ class CardFactory_Planeswalkers {
 	      ability3.setStackDescription(card2.getName() +" - Put five 4/4 red Dragon creature tokens with flying onto the battlefield.");
 	      ability3.setDescription("-6: Put five 4/4 red Dragon creature tokens with flying onto the battlefield.");
 	      card2.addSpellAbility(ability3);
-	      //end ability 2
+	      //end ability 3
 	      
 	      return card2;
 	    }//*************** END ************ END **************************

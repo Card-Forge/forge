@@ -3072,6 +3072,17 @@ public class CardFactory_Creatures {
 	        }
 	      };
 	      card.addComesIntoPlayCommand(intoPlay);
+	      
+	      card.clearSpellAbility();
+	      card.addSpellAbility(new Spell_Permanent(card)
+	      {
+	    	    private static final long serialVersionUID = 7053381164164384390L;
+
+				public boolean canPlayAI()
+		        {
+		          return 8 <= AllZone.Computer_Life.getLife();
+		        }
+	      });
 	    }//*************** END ************ END **************************
 
 
@@ -10050,7 +10061,6 @@ public class CardFactory_Creatures {
 	      else if(cardName.equals("Sparkspitter"))
 	      {
 	    	
-	    	  
 	        final Ability_Tap ability = new Ability_Tap(card, "R")
 	        {
 	  		private static final long serialVersionUID = -6381252527344512333L;
@@ -12025,7 +12035,7 @@ public class CardFactory_Creatures {
     			landInLib  = landInLib.getType("Land");
     			landInPlay = landInPlay.getType("Land");
     			
-    			if (landInLib.size() > 0 && landInPlay.size() > 0)
+    			if (landInLib.size() > 0 && landInPlay.size() > 0 && (AllZone.Phase.getPhase().equals("Main2") || card.getNetAttack() < 5) )
     				return true;
     			else
     				return false;
@@ -16822,16 +16832,18 @@ public class CardFactory_Creatures {
   	        {
 			  private static final long serialVersionUID = -4663016921034366082L;
 
-			  public boolean canPlayAI() {return getMerfolk().size() != 0;}
-
-  	          public void chooseTargetAI()
-  	          {
-  	            AllZone.GameAction.sacrifice(card);
-
-  	            CardList merfolk = getMerfolk();
-  	            merfolk.shuffle();
-  	            setTargetCard(merfolk.get(0));
-  	          }
+			  public boolean canPlayAI() 
+			  {
+				  //return getMerfolk().size() != 0; 
+				  if (getMerfolk().size() > 0)
+				  {
+					  CardList merfolk = getMerfolk();
+					  merfolk.shuffle();
+					  setTargetCard(merfolk.get(0));
+					  return true;
+				  }
+				  return false;
+			  }
 
   	          CardList getMerfolk()
   	          {

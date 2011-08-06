@@ -8908,7 +8908,6 @@ public class CardFactory implements NewConstants {
             }
           }
             
-
           //"Destroy target nonbasic land",
           if(userChoice.contains(cardChoice[2]))
             AllZone.GameAction.destroy(m_land[0]);

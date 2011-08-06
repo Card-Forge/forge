@@ -39,14 +39,6 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
-
-//import com.nilo.plaf.nimrod.NimRODLookAndFeel;
-
-//import net.sourceforge.napkinlaf.NapkinLookAndFeel;
-//import net.sourceforge.napkinlaf.NapkinTheme;
-
-//import org.jvnet.substance.SubstanceLookAndFeel;
-
 import forge.error.ErrorViewer;
 import forge.error.ExceptionHandler;
 import forge.gui.ListChooser;
