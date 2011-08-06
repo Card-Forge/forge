@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Creature Wizard Avatar
 Text:no text
 PT:*/*
-K:stSetPT:Count$Valid Illusion:Count$Valid Wizard:Nameless One's power and toughness are each equal to the number of Wizards on the battlefield.
+K:stSetPT:Count$Valid Wizard:Count$Valid Wizard:Nameless One's power and toughness are each equal to the number of Wizards on the battlefield.
 K:Morph:2 U
 SVar:BuffedBy:Wizard
 SVar:Rarity:Uncommon
