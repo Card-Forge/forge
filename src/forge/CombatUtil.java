@@ -1731,40 +1731,6 @@ public class CombatUtil {
                 } //if (creatures.size() > 0) 
             }//Preeminent Captain
             
-            else if(c.getName().equals("Novablast Wurm") && !c.getCreatureAttackedThisCombat()) {
-                final Card Novablast_Wurm = c;
-                CardList all = new CardList();
-                all.addAll(AllZone.Human_Battlefield.getCards());
-                all.addAll(AllZone.Computer_Battlefield.getCards());
-                CardList wurms = new CardList();
-                wurms.addAll(AllZone.Combat.getAttackers());
-                wurms = wurms.filter(new CardListFilter()
-                {
-                	public boolean addCard(Card c)
-                	{
-                		return c.getName().equals("Novablast Wurm");
-                	}
-                });  
-                if(wurms.size() > 1) {
-                for(int i = 0; i < all.size(); i++) {
-                    Card Card_Destroy = all.get(i);
-                    if(Card_Destroy.isCreature()) AllZone.GameAction.destroy(Card_Destroy);
-                }  
-                } else {          	
-                all = all.filter(new CardListFilter()
-                {
-                	public boolean addCard(Card check)
-                	{
-                		return !(check == Novablast_Wurm);
-                	}
-                });               
-                for(int i = 0; i < all.size(); i++) {
-                    Card Card_Destroy = all.get(i);
-                    if(Card_Destroy.isCreature()) AllZone.GameAction.destroy(Card_Destroy);
-                } 
-                }
-            }//Novablast Wurm
-            
             else if(c.getName().equals("Lorthos, the Tidemaker") && !c.getCreatureAttackedThisCombat()) {
             	final Card[] Targets = new Card[8];
             	final int[] index = new int[1];
@@ -1901,19 +1867,6 @@ public class CombatUtil {
                 AllZone.Stack.add(ability);
                 
             }//Goblin Guide
-            
-            else if(c.getName().equals("Pulse Tracker") && !c.getCreatureAttackedThisCombat()) {
-                final Player opp = c.getController().getOpponent();
-                final Card F_card = c;
-                Ability ability = new Ability(c, "0") {
-                    @Override
-                    public void resolve() {
-                        opp.loseLife(1, F_card);
-                    }
-                };
-                ability.setStackDescription("Pulse Tracker - Whenever Pulse Tracker attacks, each opponent loses 1 life.");
-                AllZone.Stack.add(ability);
-            }//Pulse Tracker
 
             c.setCreatureAttackedThisCombat(true);
     }//checkDeclareAttackers
