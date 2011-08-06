@@ -1,0 +1,72 @@
+BasicLandPercentage=14
+
+[Group MaxCnt=4 Percentage=21]
+Plateau
+Sacred Foundry
+Jungle Shrine
+Arid Mesa
+[/Group]
+
+[Group MaxCnt=4 Percentage=14]
+Auriok Champion
+Disciple of Law
+Kor Firewalker
+Kor Firewalker
+Repentant Blacksmith
+Silver Knight
+Soltari Priest
+[/Group]
+
+[Group MaxCnt=4 Percentage=11]
+Defender of Law
+Mystic Crusader
+Paladin en-Vec
+Thermal Glider
+Tivadar of Thorn
+[/Group]
+
+[Group MaxCnt=4 Percentage=7]
+Abbey Gargoyles
+Beasts of Bogardan
+Subterranean Spirit
+Sphere of Law
+Sphere of Law
+Sphere of Law
+[/Group]
+
+[Group MaxCnt=1 Percentage=2]
+Akroma, Angel of Wrath
+Ivory Guardians
+[/Group]
+
+[Group MaxCnt=4 Percentage=12]
+Pyroclasm
+Pyroclasm
+Pyroclasm
+Rain of Embers
+Seismic Shudder
+Tremor
+Volcanic Spray
+[/Group]
+
+[Group MaxCnt=4 Percentage=15]
+AEther Flash
+AEther Flash
+Chain Reaction
+Chain Reaction
+Desert Sandstorm
+Flamebreak
+Flamebreak
+Pyrohemia
+Steam Blast
+Sulfurous Blast
+Volcanic Fallout
+[/Group]
+
+[Group MaxCnt=1 Percentage=2]
+Fire Tempest
+Inferno
+Ryusei, the Falling Star
+[/Group]
+
+End

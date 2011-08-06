@@ -5908,6 +5908,7 @@ res/quest/quests.txt -text svneol=native#text/plain
 res/quest/rare.txt -text svneol=native#text/plain
 res/quest/themes/Anti[!!-~]Black[!!-~]WB.thm -text
 res/quest/themes/Anti[!!-~]Black[!!-~]WG.thm -text
+res/quest/themes/Anti[!!-~]Red[!!-~]WR.thm -text
 res/quest/themes/Arcane[!!-~]Spirits[!!-~]UBG.thm -text
 res/quest/themes/Artifacts[!!-~]Colorless.thm -text
 res/quest/themes/Auras[!!-~]WRG.thm -text
