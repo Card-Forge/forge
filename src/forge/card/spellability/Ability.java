@@ -39,15 +39,7 @@ abstract public class Ability extends SpellAbility {
 				return c.getSVar("PithingTarget").equals(sourceCardName);
 			}
 		});
-		
-    	if(getSourceCard().isCreature() == true) {
-    		CardList Silence = AllZoneUtil.getPlayerCardsInPlay(getSourceCard().getController().getOpponent());
-			Silence = Silence.getName("Linvala, Keeper of Silence");
-
-        	return AllZone.GameAction.isCardInPlay(getSourceCard()) && !getSourceCard().isFaceDown() && getSourceCard().getName().equals("Spreading Seas") == false && Silence.size() == 0 && Pithing.size() == 0; // For Spreading Seas
-    	}
-    	
-		
+    		
     	return AllZone.GameAction.isCardInPlay(getSourceCard()) && !getSourceCard().isFaceDown() && getSourceCard().getName().equals("Spreading Seas") == false && Pithing.size() == 0;
     	// return false;
     }
