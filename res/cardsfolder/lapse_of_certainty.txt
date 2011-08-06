@@ -2,7 +2,7 @@ Name:Lapse of Certainty
 ManaCost:2 W
 Types:Instant
 Text:no text
-A:SP$Counter | Cost$ 2 W | Type$ Spell | Destination$ TopDeck | SpellDescription$ Counter target spell. If that spell is countered this way, put it on top of its owner's library instead of into that player's graveyard.
+A:SP$Counter | Cost$ 2 W | Type$ Spell | Destination$ TopOfLibrary | SpellDescription$ Counter target spell. If that spell is countered this way, put it on top of its owner's library instead of into that player's graveyard.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lapse_of_certainty.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/9.jpg

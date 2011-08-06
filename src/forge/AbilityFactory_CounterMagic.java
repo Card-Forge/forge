@@ -253,16 +253,16 @@ public class AbilityFactory_CounterMagic {
 		else if(destination.equals("Exile")) {
 			AllZone.GameAction.exile(tgtSA.getSourceCard());
 		}
-		else if(destination.equals("TopDeck")) {
+		else if(destination.equals("TopOfLibrary")) {
 			AllZone.GameAction.moveToTopOfLibrary(tgtSA.getSourceCard());
 		}
 		else if(destination.equals("Hand")) {
 			AllZone.GameAction.moveToHand(tgtSA.getSourceCard());
 		}
-		else if(destination.equals("BottomDeck")) {
+		else if(destination.equals("BottomOfLibrary")) {
 			AllZone.GameAction.moveToBottomOfLibrary(tgtSA.getSourceCard());
 		}
-		else if(destination.equals("Shuffle")) {
+		else if(destination.equals("ShuffleIntoLibrary")) {
 			AllZone.GameAction.moveToBottomOfLibrary(tgtSA.getSourceCard());
 			tgtSA.getSourceCard().getController().shuffle();
 		}
