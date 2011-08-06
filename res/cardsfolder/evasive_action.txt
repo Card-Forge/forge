@@ -5,5 +5,5 @@ Text:no text
 A:SP$Counter | Cost$ 1 U | Type$ Spell | UnlessCost$ X | SpellDescription$ Domain — Counter target spell unless its controller pays 1 for each basic land type among lands you control.
 SVar:X:Count$Domain
 SVar:Rarity:Uncommon
-SVar:Picture:SVar:Picture:http://www.wizards.com/global/images/magic/general/evassive_action.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/evassive_action.jpg
 End

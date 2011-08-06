@@ -6,5 +6,5 @@ A:SP$Counter | Cost$ 2 U | Type$ Spell | UnlessCost$ X | SpellDescription$ Count
 K:Madness:U
 SVar:X:Count$InYourYard
 SVar:Rarity:Uncommon
-SVar:Picture:SVar:Picture:http://www.wizards.com/global/images/magic/general/circular_logic.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/circular_logic.jpg
 End

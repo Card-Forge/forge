@@ -7,5 +7,5 @@ K:Multikicker 1 U
 SVar:DBDraw:DB$Draw | NumCards$ X
 SVar:X:Count$TimesKicked
 SVar:Rarity:Uncommon
-SVar:Picture:SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_contortion.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_contortion.jpg
 End

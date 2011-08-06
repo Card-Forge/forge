@@ -6,5 +6,5 @@ A:SP$Counter | Cost$ X W U | Type$ Spell | UnlessCost$ X | SubAbility$SVar=DBGai
 SVar:DBGainLife:DB$GainLife | LifeAmount$ X
 SVar:X:Count$xPaid
 SVar:Rarity:
-SVar:Picture:SVar:Picture:http://www.wizards.com/global/images/magic/general/overrule.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/overrule.jpg
 End
