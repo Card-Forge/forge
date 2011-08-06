@@ -153,7 +153,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         JMenuItem type = new JMenuItem("Type");
         JMenuItem stats = new JMenuItem("Power/Toughness");
         JMenuItem rarity = new JMenuItem("Rarity");
-        JMenuItem newFirst = new JMenuItem("Newer Cards First");
+        JMenuItem newFirst = new JMenuItem("Most recently added");
         
         JMenu menu = new JMenu("Sort By");
         menu.add(name);

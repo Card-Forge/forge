@@ -873,7 +873,7 @@ public class GameAction {
         else if(Constant.Runtime.Mill[0]) {
             PlayerLife life = AllZone.GameAction.getPlayerLife(player);
             
-            if (player.equals(Constant.Player.Human)) {
+            if (player.equals(Constant.Player.Computer)) {
 	            int gameNumber = 0;
 	            if (Constant.Runtime.WinLose.getWin()==1)
 	            	gameNumber = 1;
