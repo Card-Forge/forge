@@ -10110,6 +10110,39 @@ public class GameActionUtil {
 		}
 	};
 	
+	public static Command Beastbreaker_of_Bala_Ged  = new Command() {
+		private static final long serialVersionUID = -8692202913296782937L;
+
+		public void execute()
+		{
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Beastbreaker of Bala Ged");
+
+			for (Card c:list)
+			{
+				int lcs = c.getCounters(Counters.LEVEL);
+				if ( lcs < 1)
+				{
+					c.setBaseAttack(2);
+					c.setBaseDefense(2);
+				}
+				else if ( lcs >=1 && lcs < 4 )  //levels 1-3
+				{
+					c.setBaseAttack(4);
+					c.setBaseDefense(4);
+				}
+				else
+				{
+					c.setBaseAttack(6);
+					c.setBaseDefense(6);
+					c.addNonStackingIntrinsicKeyword("Trample");
+				}
+			}
+		}
+	};
+	
 	public static Command Student_of_Warfare 		  = new Command() {
 		private static final long serialVersionUID = 2627513737024865169L;
 
@@ -15527,6 +15560,7 @@ public class GameActionUtil {
 		commands.put("Caravan_Escort", Caravan_Escort);
 		commands.put("Ikiral_Outrider", Ikiral_Outrider);
 		commands.put("Knight_of_Cliffhaven", Knight_of_Cliffhaven);
+		commands.put("Beastbreaker_of_Bala_Ged", Beastbreaker_of_Bala_Ged);
 		commands.put("Soulsurge_Elemental", Soulsurge_Elemental);
 		
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
