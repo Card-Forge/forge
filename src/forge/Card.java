@@ -2045,9 +2045,22 @@ public class Card extends MyObservable {
 		return false;
 	}
 
+    private String toMixedCase(String s)
+    {
+    	String fc = "";
+    	String lcs = "";
+    	
+    	fc = s.substring(0,1).toUpperCase();
+    	lcs = s.substring(1).toLowerCase();
+    	
+    	return fc + lcs;
+    }	
+	
     //usable to check for changelings
     public boolean isType(String cardType) {
-        if (type.contains(cardType)
+    	cardType = toMixedCase(cardType);
+    	
+    	if (type.contains(cardType)
                     || ((isCreature() || (isTribal() && !cardType.equals("Creature")))
                             && !cardType.equals("Legendary") && !cardType.equals("Planeswalker")
                             && !cardType.equals("Basic") && !cardType.equals("Enchantment")

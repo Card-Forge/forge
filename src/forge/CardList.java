@@ -149,10 +149,24 @@ public class CardList implements Iterable<Card> {
         return c;
     }
     
+    private String toMixedCase(String s)
+    {
+    	String fc = "";
+    	String lcs = "";
+    	
+    	fc = s.substring(0,1).toUpperCase();
+    	lcs = s.substring(1).toLowerCase();
+    	
+    	return fc + lcs;
+    }
+    
     //cardType is like "Land" or "Goblin", returns a new CardList that is a subset of current CardList
     public CardList getType(String cardType) {
         CardList c = new CardList();
         Card card;
+        
+        cardType = toMixedCase(cardType);
+        
         for(int i = 0; i < size(); i++) {
             card = getCard(i);
             if(card.getType().contains(cardType)
