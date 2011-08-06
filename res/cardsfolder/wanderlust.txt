@@ -1,8 +1,10 @@
 Name:Wanderlust
 ManaCost:2 G
 Types:Enchantment Aura
-Text:At the beginning of the upkeep of enchanted creature's controller, Wanderlust deals 1 damage to that player.
+Text:no text
 K:Enchant Creature Curse
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, CARDNAME deals 1 damage to that player.
+SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ EnchantedController | NumDmg$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wanderlust.jpg
 SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/135.jpg

@@ -47,7 +47,6 @@ public class GameActionUtil {
 		upkeep_Tangle_Wire();
 		upkeep_Dance_of_the_Dead();
 		upkeep_Mana_Crypt();
-		upkeep_Feedback();
 		upkeep_Farmstead();
 		upkeep_Unstable_Mutation();
 		
@@ -55,7 +54,6 @@ public class GameActionUtil {
 		upkeep_Plague_Spitter();
 		*/
 		
-		upkeep_Wanderlust();
 		upkeep_Curse_of_Chains();
 		upkeep_Festering_Wound_Counter();
 		upkeep_Festering_Wound_Damage();
@@ -4827,44 +4825,6 @@ public class GameActionUtil {
 		}
 	}//upkeep_Mana_Crypt
 	
-	private static void upkeep_Feedback() {
-		final String auraName = "Feedback";
-        final Player player = AllZone.Phase.getPlayerTurn();
-        PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-        
-        CardList list = new CardList(playZone.getCards());
-        list = list.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return c.isEnchantment() && c.isEnchanted();
-            }
-        });
-        
-        if(list.size() > 0) {
-        	Ability ability;
-        	for(Card target:list) {
-        		if(target.isEnchantedBy(auraName)) {
-        			CardList auras = new CardList(target.getEnchantedBy().toArray());
-        			auras = auras.getName(auraName);
-        			for(Card aura:auras) {
-        				final Card source = aura;
-        				ability = new Ability(aura, "0") {
-        					@Override
-        					public void resolve() {
-        						player.addDamage(1, source);
-        					}
-        				};
-        				
-        				StringBuilder sb = new StringBuilder();
-        				sb.append(auraName).append(" -  deals 1 damage to ").append(player);
-        				ability.setStackDescription(sb.toString());
-        				
-                        AllZone.Stack.add(ability);
-        			} 
-        		}
-        	}
-        }//list > 0
-    }//upkeep_Feedback()
-	
 	private static void upkeep_Unstable_Mutation() {
 		final String auraName = "Unstable Mutation";
         final Player player = AllZone.Phase.getPlayerTurn();
@@ -4946,44 +4906,6 @@ public class GameActionUtil {
 			}
 		}
 	}//upkeep_Farmstead()
-	
-	private static void upkeep_Wanderlust() {
-		final String auraName = "Wanderlust";
-        final Player player = AllZone.Phase.getPlayerTurn();
-        PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-        
-        CardList list = new CardList(playZone.getCards());
-        list = list.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return c.isCreature() && c.isEnchanted();
-            }
-        });
-        
-        if(list.size() > 0) {
-        	Ability ability;
-        	for(Card target:list) {
-        		if(target.isEnchantedBy(auraName)) {
-        			CardList auras = new CardList(target.getEnchantedBy().toArray());
-        			auras = auras.getName(auraName);
-        			for(Card aura:auras) {
-        				final Card source = aura;
-        				ability = new Ability(aura, "0") {
-        					@Override
-        					public void resolve() {
-        						player.addDamage(1, source);
-        					}
-        				};
-        				
-        				StringBuilder sb = new StringBuilder();
-        				sb.append(auraName).append(" -  deals 1 damage to ").append(player);
-        				ability.setStackDescription(sb.toString());
-        				
-                        AllZone.Stack.add(ability);
-        			} 
-        		}
-        	}
-        }//list > 0
-    }//upkeep_Wanderlust()
 	
 	private static void upkeep_Curse_of_Chains() {
 		final String auraName = "Curse of Chains";
