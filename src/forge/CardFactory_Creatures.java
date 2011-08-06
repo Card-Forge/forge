@@ -9358,6 +9358,7 @@ public class CardFactory_Creatures {
 	  				Card c = new Card();
 
 	  				c.setName("Stangg Twin");
+	  				c.setImageName("RG 3 4 Stangg Twin");
 	  				
 	  				c.setOwner(card.getController());
 	  				c.setController(card.getController());
@@ -13699,6 +13700,7 @@ public class CardFactory_Creatures {
 	          Card c = new Card();
 
 	          c.setName("Voja");
+	          c.setImageName("GW 2 2 Voja");
 
 	          c.setOwner(card.getController());
 	          c.setController(card.getController());

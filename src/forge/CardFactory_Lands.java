@@ -934,6 +934,7 @@ class CardFactory_Lands {
 	   	             c.setController(card.getController());
 	   	
 	   	             c.setName("Marit Lage");
+	   	             c.setName("C 20 20 Marit Lage");
 	   	             c.setManaCost("B");
 	   	             c.setToken(true);
 	   	

@@ -113,7 +113,7 @@ public class GameActionUtil
 		{
 			final String drawer = AllZone.GameAction.getOpponent(c
 					.getController());
-			final Card card = list.get(0);
+			final Card card = list.get(i);
 
 			Ability ability2 = new Ability(card, "0")
 			{

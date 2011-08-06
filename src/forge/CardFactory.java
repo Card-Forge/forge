@@ -16954,8 +16954,6 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 	    	    	PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
 	                life.addLife(1);
     			}
-    	    	
-    	    	
     		}//resolve
     		
     		public void makeToken()
@@ -16971,6 +16969,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     	          c.setManaCost("U");
     	          c.setToken(true);
     	         
+    	          c.addType("Artifact");
     	          c.addType("Creature");
     	          c.addType("Thopter");
     	          c.setBaseAttack(1);
@@ -17090,6 +17089,8 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     	card.clearSpellAbility();
     	card.addSpellAbility(spell);
     }//*************** END ************ END **************************
+	
+	//*************** START *********** START **************************
 	  if (cardName.equals("Celestial Purge"))
 	    {
 	    	final Spell spell = new Spell(card)
