@@ -3,6 +3,7 @@ ManaCost:1 G
 Types:Enchantment
 Text:As Steely Resolve comes into play, choose a creature type.\r\nCreatures of the chosen type have shroud.
 SVar:Rarity:Rare
+SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steely_resolve.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/286.jpg
 End
