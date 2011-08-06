@@ -7389,58 +7389,6 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}// for
 	}// upkeep_Nightshade_Schemers()
-
-	private static void upkeep_Wandering_Graybeard() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-		PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Wandering Graybeard");
-
-		Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-			final Card source = list.get(i);
-			if(library.size() <= 0) {
-				return;
-			}
-			// System.out.println("top of deck: " + library.get(i).getName());
-			String creatureType = source.getType().toString();
-			String cardName = source.getName();
-
-			ability = new Ability(source, "0") {
-				@Override
-				public void resolve() {
-					PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
-
-					String creatureType = source.getType().toString();
-
-
-					if(creatureType.contains("Giant") || creatureType.contains("Wizard")
-							|| library.get(0).getKeyword().contains("Changeling")) {
-						player.gainLife(4, source);
-					}
-
-				}// resolve()
-			};// Ability
-			if(creatureType.contains("Giant") || creatureType.contains("Wizard")) {
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append("Wandering Graybeard - ").append(player).append(" reveals: ");
-				sb.append(cardName).append(", and gains 4 life.");
-				ability.setStackDescription(sb.toString());
-			}
-			else {
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append("Wandering Graybeard - ").append(player);
-				sb.append(" reveals top card: ").append(cardName).append(".");
-				ability.setStackDescription(sb.toString());
-			}
-
-			AllZone.Stack.add(ability);
-		}// for
-	}// upkeep_Wandering_Graybeard()
 	
 	private static void upkeep_Benthic_Djinn() {
 		final Player player = AllZone.Phase.getPlayerTurn();
@@ -7621,6 +7569,72 @@ public class GameActionUtil {
             AllZone.Stack.add(ability);
         }// for
     }// upkeep_Leaf_Crowned_Elder()
+    
+    
+    private static void upkeep_Wandering_Graybeard() {
+        final Player player = AllZone.Phase.getPlayerTurn();
+        CardList kinship = AllZoneUtil.getPlayerCardsInPlay(player, "Wandering Graybeard");
+        
+        if (kinship.size() == 0)
+            return;
+        
+        final String[] shareTypes = { "Giant", "Wizard" };
+        final Card[] prevCardShown = { null };
+        final Card peek[] = { null };
+        
+        for (final Card k : kinship) {
+            Ability ability = new Ability(k, "0") {    // change to triggered abilities when ready
+                @Override
+                public void resolve() {
+                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+                    if (library.size() <= 0)
+                        return;
+                    
+                    peek[0] = library.get(0);
+                    boolean wantGainLife = false;
+                    
+                    // We assume that both players will want to peek, ask if they want to reveal.
+                    // We do not want to slow down the pace of the game by asking too many questions.
+                    // Dialogs outside of the Ability appear at the previous end of turn phase !!!
+                    
+                    if (peek[0].isValidCard(shareTypes)) {
+                        if (player.isHuman()) {
+                            StringBuilder question = new StringBuilder();
+                            question.append("Your top card is ").append(peek[0].getName());
+                            question.append(". Reveal card and gain 4 life?");
+                            if (showYesNoDialog(k, question.toString())) {
+                                wantGainLife = true;
+                            }
+                        }
+                        // player isComputer()
+                        else {
+                            String title = "Computer reveals";
+                            revealTopCard(title);
+                            wantGainLife = true;
+                        }
+                    } else if (player.isHuman()) {
+                        String title = "Your top card is";
+                        revealTopCard(title);
+                    }
+                    if (wantGainLife)
+                        player.gainLife(4, k);
+                }// resolve()
+                
+                private void revealTopCard(String title) {
+                    if (peek[0] != prevCardShown[0]) {
+                        AllZone.Display.getChoice(title, peek[0]);
+                        prevCardShown[0] = peek[0];
+                    }
+                }// revealTopCard()
+            };// ability
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Wandering Graybeard - ").append(player);
+            sb.append(" triggers Kinship");
+            ability.setStackDescription(sb.toString());
+            AllZone.Stack.add(ability);
+        }// for
+    }// upkeep_Wandering_Graybeard()
     
     
     private static void upkeep_Wolf_Skull_Shaman() {
