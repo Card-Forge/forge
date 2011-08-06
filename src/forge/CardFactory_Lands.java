@@ -3447,7 +3447,7 @@ class CardFactory_Lands {
         	extraTurn.setStackDescription(sb.toString());
         	card.addSpellAbility(extraTurn);
         }//*************** END ************ END **************************
-        
+        /*
         //*************** START ********** START *************************
         else if(cardName.equals("Elephant Graveyard")) {
         	final String Tgts[] = {"Creature.Elephant"};
@@ -3490,6 +3490,7 @@ class CardFactory_Lands {
         	ability.setDescription("tap: Regenerate target Elephant.");
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
+        */
         
         //*************** START ************ START **************************
         else if(cardName.equals("Bottomless Vault") || cardName.equals("Dwarven Hold")
