@@ -1753,7 +1753,9 @@ public class CombatUtil {
     }
     
     static void checkDeclareBlockers(CardList cl) {
-        if(AllZone.Phase.getPhase().equals(Constant.Phase.Combat_After_Declare_Blockers)) {
+    	//System.out.println("Phase during checkDeclareBlockers: " + AllZone.Phase.getPhase());
+        if(AllZone.Phase.getPhase().equals(Constant.Phase.Combat_After_Declare_Blockers) ||
+           AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Blockers_InstantAbility) ) {
             
         	for (Card c:cl)
         	{
