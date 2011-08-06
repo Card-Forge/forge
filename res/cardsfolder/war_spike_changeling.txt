@@ -4,7 +4,7 @@ Types:Creature Shapeshifter
 Text:no text
 PT:3/3
 K:Changeling
-K:abPump R:First Strike
+A:AB$Pump | Cost$ R | KW$ First Strike | SpellDescription$  War-Spike Changeling gains first strike until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/war_spike_changeling.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/112.jpg

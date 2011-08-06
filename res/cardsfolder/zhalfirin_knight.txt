@@ -4,7 +4,7 @@ Types:Creature Human Knight
 Text:no text
 PT:2/2
 K:Flanking
-K:abPump W W:First Strike
+A:AB$Pump | Cost$ W W | KW$ First Strike | SpellDescription$ Zhalfirin Knight gains first strike until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zhalfirin_knight.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/254.jpg

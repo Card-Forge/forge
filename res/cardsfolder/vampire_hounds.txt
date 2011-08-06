@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Vampire Hound
 Text:no text
 PT:2/2
-K:abPump Discard<1/Creature>:+2/+2:Vampire Hounds gets +2/+2 until end of turn.
+A:AB$Pump | Cost$ Discard<1/Creature> | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Vampire Hounds gets +2/+2 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_hounds.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/77.jpg

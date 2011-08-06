@@ -4,7 +4,7 @@ Types:Creature Fungus
 Text:At the beginning of your upkeep, put a spore counter on Thallid Devourer.
 PT:2/2
 K:Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
-K:abPump Sac<1/Saproling>:+1/+2
+A:AB$Pump | Cost$ Sac<1/Saproling> | NumAtt$ +1 | NumDef$ +2 | SpellDescription$ Thallid Devourer gets +1/+2 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thallid_devourer.jpg
 SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/91.jpg

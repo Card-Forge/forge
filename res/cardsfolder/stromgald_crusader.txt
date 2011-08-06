@@ -4,8 +4,8 @@ Types:Creature Zombie Knight
 Text:no text
 PT:2/1
 K:Protection from white
-K:abPump B:Flying
-K:abPump B B:+1/+0
+A:AB$Pump | Cost$ B | KW$ Flying | SpellDescription$ Stromgald Crusader gains flying until end of turn.
+A:AB$Pump | Cost$ B B | NumAtt$ +1 | SpellDescription$ Stromgald Crusader gets +1/+0 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stromgald_crusader.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/71.jpg

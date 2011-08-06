@@ -4,7 +4,7 @@ Types:Creature Wall
 Text:no text
 PT:0/5
 K:Defender
-K:abPump R:+1/+0
+A:AB$Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ Wall of Fire gets +1/+0 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_fire.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/183.jpg

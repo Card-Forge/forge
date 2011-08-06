@@ -3,7 +3,7 @@ ManaCost:UR
 Types:Creature Goblin
 Text:no text
 PT:1/1
-K:abPump UR:Flying
+A:AB$Pump | Cost$ UR | KW$ Flying | SpellDescription$ Stream Hopper gains flying until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stream_hopper.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/113.jpg

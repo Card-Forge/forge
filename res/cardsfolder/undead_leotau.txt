@@ -3,7 +3,7 @@ ManaCost:5 B
 Types:Creature Zombie Cat
 Text:no text
 PT:3/4
-K:abPump R:+1/-1
+A:AB$Pump | Cost$ R | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ Undead Leotau gets +1/-1 until end of turn.
 K:Unearth:2 B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_leotau.jpg

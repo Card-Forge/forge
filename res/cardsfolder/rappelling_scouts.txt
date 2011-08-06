@@ -4,11 +4,11 @@ Types:Creature Human Rebel Scout
 Text:no text
 PT:1/4
 K:Flying
-K:abPump 2 W:Protection from white
-K:abPump 2 W:Protection from blue
-K:abPump 2 W:Protection from black
-K:abPump 2 W:Protection from red
-K:abPump 2 W:Protection from green
+A:AB$Pump | Cost$ 2 W | KW$ Protection from white | SpellDescription$ Rappelling Scouts gains protection from white until end of turn.
+A:AB$Pump | Cost$ 2 W | KW$ Protection from blue | SpellDescription$ Rappelling Scouts gains protection from blue until end of turn.
+A:AB$Pump | Cost$ 2 W | KW$ Protection from black | SpellDescription$ Rappelling Scouts gains protection from black until end of turn.
+A:AB$Pump | Cost$ 2 W | KW$ Protection from red | SpellDescription$ Rappelling Scouts gains protection from red until end of turn.
+A:AB$Pump | Cost$ 2 W | KW$ Protection from green | SpellDescription$ Rappelling Scouts gains protection from green until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rappelling_scouts.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/41.jpg

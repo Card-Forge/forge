@@ -4,7 +4,7 @@ Types:Artifact Creature Wall
 Text:no text
 PT:0/6
 K:Defender
-K:abPump G:0/0/Reach
+A:AB$Pump | Cost$ G | KW$ Reach | SpellDescription$ Wall of Tanglecord gains reach until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_tanglecord.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/222.jpg

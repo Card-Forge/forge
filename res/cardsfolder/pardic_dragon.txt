@@ -5,7 +5,7 @@ Text:no text
 PT:4/4
 K:Flying
 K:Suspend:2:R R
-K:abPump R:+1/+0
+A:AB$Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ Pardic Dragon gets +1/+0 until end of turn.
 K:WheneverKeyword:CastSpell/Opponent:No_Initiator:Exiled:CustomCounter.TIME/1:Self:ASAP:Opponent_Yes_No:Suspended:Whenever an opponent casts a spell, if Pardic Dragon is suspended, that player may put a time counter on Pardic Dragon.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pardic_dragon.jpg

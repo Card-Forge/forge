@@ -6,7 +6,7 @@ PT:2/2
 K:First Strike
 K:CARDNAME can't attack unless defending player controls an Island.
 K:When you control no Islands, sacrifice CARDNAME.
-K:abPump U:Flying
+A:AB$Pump | Cost$ U | KW$ Flying | SpellDescription$ Vodalian Knights gains flying until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vodalian_knights.jpg
 SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/58.jpg

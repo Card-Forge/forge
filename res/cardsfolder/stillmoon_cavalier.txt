@@ -5,9 +5,9 @@ Text:no text
 PT:2/1
 K:Protection from white
 K:Protection from black
-K:abPump WB:Flying
-K:abPump WB:First Strike
-K:abPump WB WB:+1/+0
+A:AB$Pump | Cost$ WB | KW$ Flying | SpellDescription$ Stillmoon Cavalier gains flying until end of turn.
+A:AB$Pump | Cost$ WB | KW$ First Strike | SpellDescription$ Stillmoon Cavalier gains first strike until end of turn.
+A:AB$Pump | Cost$ WB WB | NumAtt$ +1 | SpellDescription$ Stillmoon Cavalier gets +1/+0 until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stillmoon_cavalier.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/95.jpg

@@ -4,7 +4,7 @@ Types:Creature Wall
 Text:no text
 PT:0/2
 K:Defender
-K:abPump PayLife<1>:+1/+1:Wall of Blood gets +1/+1 until end of turn.
+A:AB$Pump | Cost$ PayLife<1> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Wall of Blood gets +1/+1 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_blood.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/82.jpg

@@ -3,7 +3,7 @@ ManaCost:4 G
 Types:Creature Kavu
 Text:no text
 PT:4/4
-K:abPump R:Haste
+A:AB$Pump | Cost$ R | KW$ Haste | SpellDescription$ Serpentine Kavu gains haste until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serpentine_kavu.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/211.jpg

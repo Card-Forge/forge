@@ -4,7 +4,7 @@ Types:Creature Spirit Minion
 Text:no text
 PT:3/1
 K:CARDNAME can't block.
-K:abPump U:Prevent all combat damage that would be dealt to and dealt by CARDNAME.
+A:AB$Pump | Cost$ U | KW$ Prevent all combat damage that would be dealt to and dealt by CARDNAME. | SpellDescription$ Prevent all combat damage that would be dealt to and dealt by Urborg Phantom this turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_phantom.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/132.jpg

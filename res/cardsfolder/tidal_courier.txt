@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Creature Merfolk
 Text:When Tidal Courier enters the battlefield, reveal the top four cards of your library. Put all Merfolk cards revealed this way into your hand and the rest on the bottom of your library.
 PT:1/2
-K:abPump 3 U:Flying
+A:AB$Pump | Cost$ 3 U | KW$ Flying | SpellDescription$ Tidal Courier gains flying until end of turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidal_courier.jpg

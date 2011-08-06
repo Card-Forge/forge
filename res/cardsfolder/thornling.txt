@@ -3,11 +3,11 @@ ManaCost:3 G G
 Types:Creature Elemental Shapeshifter
 Text:no text
 PT:4/4
-K:abPump G:Haste
-K:abPump G:Trample
-K:abPump G:Indestructible
-K:abPump 1:+1/-1
-K:abPump 1:-1/+1
+A:AB$Pump | Cost$ G | KW$ Haste | SpellDescription$ Thornling gains haste until end of turn.
+A:AB$Pump | Cost$ G | KW$ Trample | SpellDescription$ Thornling gains trample until end of turn.
+A:AB$Pump | Cost$ G | KW$ Indestructible | SpellDescription$ Thornling is indestructible this turn.
+A:AB$Pump | Cost$ 1 | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ Thornling gets +1/-1 until end of turn.
+A:AB$Pump | Cost$ 1 | NumAtt$ -1 | NumDef$ +1 | SpellDescription$ Thornling gets -1/+1 until end of turn.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thornling.jpg
 SetInfo:CFX|Mythic|http://magiccards.info/scans/en/cfx/95.jpg

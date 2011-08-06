@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Salamander
 Text:no text
 PT:1/1
-K:abPump R:+1/+0/At the beginning of the end step, sacrifice CARDNAME.
+A:AB$Pump | Cost$ R | NumAtt$ +1 | NumDef$ +1 | KW$ At the beginning of the end step, sacrifice CARDNAME. | SpellDescription$ Pyric Salamander gets +1/+0 until end of turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyric_salamander.jpg

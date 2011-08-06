@@ -3,8 +3,8 @@ ManaCost:3 G G
 Types:Creature Treefolk
 Text:no text
 PT:4/4
-K:abPump G G:Forestwalk:Drawback$DamageYou/2:Wormwood Dryad gains forestwalk until end of turn and deals 2 damage to you.
-K:abPump B B:Swampwalk:Drawback$DamageYou/2:Wormwood Dryad gains swampwalk until end of turn and deals 2 damage to you.
+A:AB$Pump | Cost$ G G | KW$ Forestwalk | SubAbility$ DamageYou/2 | SpellDescription$ Wormwood Treefolk gains forestwalk until end of turn and deals 2 damage to you.
+A:AB$Pump | Cost$ B B | KW$ Swampwalk | SubAbility$ DamageYou/2 | SpellDescription$ Wormwood Treefolk gains swampwalk until end of turn and deals 2 damage to you.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wormwood_treefolk.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/55.jpg

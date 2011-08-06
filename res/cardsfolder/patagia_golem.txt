@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact Creature Golem
 Text:no text
 PT:2/3
-K:abPump 3:Flying
+A:AB$Pump | Cost$ 3 | KW$ Flying | SpellDescription$ Patagia Golem gains flying until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/patagia_golem.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/308.jpg

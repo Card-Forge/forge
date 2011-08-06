@@ -4,7 +4,7 @@ Types:Creature Dragon
 Text:no text
 PT:4/4
 K:Flying
-K:abPump 1 W:+0/+1
+A:AB$Pump | Cost$ 1 W | NumDef$ +1 | SpellDescription$ Pearl Dragon gets +0/+1 until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pearl_dragon.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/34.jpg

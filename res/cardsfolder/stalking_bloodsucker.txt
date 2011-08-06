@@ -4,7 +4,7 @@ Types:Creature Vampire
 Text:no text
 PT:4/4
 K:Flying
-K:abPump 1 B Discard<1/Any>:+2/+2
+A:AB$Pump | Cost$ 1 B Discard<1/Any> | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Stalking Bloodsucker gets +2/+2 until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stalking_bloodsucker.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/163.jpg

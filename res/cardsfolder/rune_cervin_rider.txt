@@ -4,7 +4,7 @@ Types:Creature Elf Knight
 Text:no text
 PT:2/2
 K:Flying
-K:abPump GW GW:+1/+1
+A:AB$Pump | Cost$ GW GW | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Rune-Cervin Rider gets +1/+1 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rune_cervin_rider.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/20.jpg

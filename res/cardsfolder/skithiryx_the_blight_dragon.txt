@@ -6,7 +6,7 @@ PT:4/4
 K:Flying
 K:Infect
 A:AB$Regenerate | Cost$ B B | SpellDescription$ Regenerate CARDNAME.
-K:abPump B:Haste
+A:AB$Pump | Cost$ B | KW$ Haste | SpellDescription$ Skithiryx, the Blight Dragon gains haste until end of turn.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skithiryx_the_blight_dragon.jpg
 SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/79.jpg

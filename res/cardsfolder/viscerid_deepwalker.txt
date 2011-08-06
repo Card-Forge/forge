@@ -4,7 +4,7 @@ Types:Creature Homarid Warrior
 Text:no text
 PT:2/3
 K:Suspend:4:U
-K:abPump U:+1/+0
+A:AB$Pump | Cost$ U | NumAtt$ +1 | SpellDescription$ Viscerid Deepwalker gets +1/+0 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viscerid_deepwalker.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/91.jpg

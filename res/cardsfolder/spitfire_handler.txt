@@ -4,7 +4,7 @@ Types:Creature Goblin
 Text:no text
 PT:1/1
 K:CARDNAME can't block creatures with power greater than CARDNAME's power.
-K:abPump R:+1/+0
+A:AB$Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ Spitfire Handler gets +1/+0 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spitfire_handler.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/236.jpg

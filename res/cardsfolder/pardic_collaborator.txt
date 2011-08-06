@@ -4,7 +4,7 @@ Types:Creature Human Barbarian
 Text:no text
 PT:2/2
 K:First Strike
-K:abPump B:+1/+1
+A:AB$Pump | Cost$ B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Pardic Collaborator gets +1/+1 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pardic_collaborator.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/106.jpg

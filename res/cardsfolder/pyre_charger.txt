@@ -4,7 +4,7 @@ Types:Creature Elemental Warrior
 Text:no text
 PT:1/1
 K:Haste
-K:abPump R:+1/+0
+A:AB$Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ Pyre Charger gets +1/+0 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyre_charger.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/103.jpg

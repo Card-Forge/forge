@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Beast
 Text:no text
 PT:1/2
-K:abPump R:+1/+0
+A:AB$Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ Ridgeline Rager gets +1/+0 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ridgeline_rager.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/215.jpg

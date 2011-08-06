@@ -4,7 +4,7 @@ Types:Creature Soltari Knight
 Text:no text
 PT:2/1
 K:Shadow
-K:abPump 1 W:+1/+0
+A:AB$Pump | Cost$ 1 W | NumAtt$ +1 | SpellDescription$ Soltari Crusader gets +1/+0 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_crusader.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/253.jpg
