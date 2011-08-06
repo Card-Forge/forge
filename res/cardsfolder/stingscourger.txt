@@ -1,0 +1,10 @@
+Name:Stingscourger
+ManaCost:1 R
+Types:Creature Goblin Warrior
+Text:When CARDNAME enters the battlefield, return target creature an opponent controls to its owner's hand.
+PT:2/2
+K:etbBounceTgt:Creature.YouDontCtrl:Hand
+K:Echo:3 R
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stingscourger.jpg
+End
