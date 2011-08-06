@@ -1,3 +1,56 @@
+Iizuka the Ruthless
+3 R R
+Legendary Creature Human Samurai
+no text
+3/3
+Bushido 2
+abAllPump T Sac-Samurai:YouCtrl/Samurai:Double Strike:Samurai creatures you control gain double strike until end of turn.:Iizuka the Ruthless - Samurai creatures you control gain double strike until EOT
+
+Mogg Raider
+R
+Creature Goblin
+no text
+1/1
+abPumpTgt 0 Sac-Goblin:+1/+1
+
+Thunderscape Master
+2 R R
+Creature Human Wizard
+no text
+2/2
+abLoseLifeTgt B B T:2:Drawback$YouGainLife/2:Target player loses 2 life and you gain 2 life.
+abAllPump G G T:YouCtrl:+2/+2:Creatures you control get +2/+2 until end of turn.:Thunderscape Master - creatures get +2/+2 until EOT.
+
+Pyric Salamander
+1 R
+Creature Salamander
+no text
+1/1
+abPump R:+1/+0/At the beginning of the end step, sacrifice CARDNAME.
+SVar:RemAIDeck:True
+
+Shattering Pulse
+1 R
+Instant
+Destroy target artifact.
+spDestroyTgt:Artifact
+SVar:Buyback:3
+
+Barbarian Lunatic
+2 R
+Creature Human Barbarian
+no text
+2/1
+abDamageTgtC 2 R Sac-CARDNAME:2
+
+Emblem of the Warmind
+1 R
+Enchantment Aura
+no text
+Enchant creature
+enPump:+0/+0
+StaticEffect:Play:Permanents you Control:Keyword/Haste:Type.Creature:Creatures you control have haste.
+
 Bituminous Blast
 3 B R
 Instant
