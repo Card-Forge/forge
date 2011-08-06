@@ -26,7 +26,7 @@ public class QuestItemZeppelin extends QuestItemAbstract{
 
     @Override
     public int getPrice() {
-        return 2000;
+        return 5000;
     }
 
     @Override
