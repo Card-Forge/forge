@@ -153,9 +153,8 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
 		} catch (Exception e) {
 			Log.error("Error loading preferences");
 		}
-        
-		SwingUtilities.invokeLater(new Runnable() {
-			
+		
+		SwingUtilities.invokeLater(new Runnable() {		
 			public void run() {
 		        try {
 		        	if(preferences.laf.equals(""))
@@ -167,7 +166,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
 		        }
 			}
 		});
-        
+		
         try {
             //deck migration - this is a little hard to read, because i can't just plainly reference a class in the
             //default package
@@ -179,16 +178,19 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         }
         try {
             Constant.Runtime.GameType[0] = Constant.GameType.Constructed;
-            AllZone.Computer = new ComputerAI_Input(new ComputerAI_General());
-
-            new Gui_NewGame();
-            
+            SwingUtilities.invokeLater(new Runnable() {   			
+    			public void run() {
+    				AllZone.Computer = new ComputerAI_Input(new ComputerAI_General());
+    				new Gui_NewGame();
+    			}
+    		});
         } catch(Exception ex) {
             ErrorViewer.showError(ex);
         }
     }
     
     public Gui_NewGame() {
+
         AllZone.QuestData = null;
         allDecks = getDecks();
         Constant.Runtime.WinLose.reset();
@@ -236,6 +238,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         
         ManaSymbols.loadImages();
         Log.WARN(); //set logging level to warn
+    	SwingUtilities.updateComponentTreeUI(this);
     }// init()
     
     private void setupMenu() {
