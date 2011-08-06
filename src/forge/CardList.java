@@ -270,6 +270,7 @@ public class CardList implements Iterable<Card> {
             }
             retList.addAll(tmpList.toArray());
         }
+        if(retList.containsName("Mana Pool")) retList.remove("Mana Pool");
         return retList;
     }//getValidCards
     
