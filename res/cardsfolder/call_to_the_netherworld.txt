@@ -2,7 +2,7 @@ Name:Call to the Netherworld
 ManaCost:B
 Types:Sorcery
 Text:no text
-A:SP$Retrieve | Cost$ B | Destination$ Hand | TgtPrompt$ Choose target black creature card in your graveyard | ValidTgts$ Creature.Black | SpellDescription$ Return target black creature card from your graveyard to your hand.
+A:SP$Retrieve | Cost$ B | Destination$ Hand | TgtPrompt$ Choose target black creature card in your graveyard | ValidTgts$ Creature.Black+YouCtrl | SpellDescription$ Return target black creature card from your graveyard to your hand.
 K:Madness:0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/call_to_the_netherworld.jpg
