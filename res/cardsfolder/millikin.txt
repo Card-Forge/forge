@@ -1,0 +1,10 @@
+Name:Millikin
+ManaCost:2
+Types:Artifact Creature Construct
+Text:no text
+PT:0/1
+A:AB$Mill | Cost$ T | NumCards$ 1 | Defined$ You | SubAbility$ SVar=DBMana | SpellDescription$ Put the top card of your library into your graveyard: Add 1 to your mana pool.
+SVar:DBMana:DB$Mana | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/millikin.jpg
+End
