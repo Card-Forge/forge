@@ -2681,12 +2681,6 @@ public class GameActionUtil {
 	//***ENCHANTMENTS END HERE***
 
 	public static void executeLandfallEffects(Card c) {
-		
-		ArrayList<String> kws = c.getKeyword();
-		for (String kw : kws){
-			if (kw.equals("Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn."))
-			landfall_Generic_P2P2_UntilEOT(c);
-		}
 		if(c.getName().equals("Emeria Angel")) landfall_Emeria_Angel(c);
 		else if(c.getName().equals("Ob Nixilis, the Fallen")) landfall_Ob_Nixilis(c);
 		else if(c.getName().equals("Lotus Cobra")) landfall_Lotus_Cobra(c);
@@ -2818,38 +2812,6 @@ public class GameActionUtil {
 		if(q == null || q.equals("No")) return false;
 		else return true;
 	}
-
-	private static void landfall_Generic_P2P2_UntilEOT(Card c)
-	{
-		final Card crd = c;
-		Ability ability = new Ability(c, "0")
-		{
-			@Override
-			public void resolve()
-			{
-				final Command untilEOT = new Command() {
-					private static final long serialVersionUID = 8919719388859986796L;
-
-					public void execute() {
-						if(AllZone.GameAction.isCardInPlay(crd)) {
-							crd.addTempAttackBoost(-2);
-							crd.addTempDefenseBoost(-2);
-						}
-					}
-				};
-				crd.addTempAttackBoost(2);
-				crd.addTempDefenseBoost(2);
-
-				AllZone.EndOfTurn.addUntil(untilEOT);
-			}
-		};
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append(c).append(" - Landfall: gets +2/+2 until EOT.");
-		ability.setStackDescription(sb.toString());
-		AllZone.Stack.add(ability);
-	}
-
 
 	private static void landfall_Emeria_Angel(Card c) {
 		final Card crd = c;
