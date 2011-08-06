@@ -1,3 +1,10 @@
+Dream Fracture
+1 U U
+Instant
+Counter target spell. Its controller draws a card. Draw a card.
+spCounter:Spell:None:Graveyard:My-Draw(1) Opp-Draw(1)
+SVar:Rarity:Uncommon
+
 Absorb
 W U U
 Instant
@@ -102,12 +109,6 @@ Counter target spell. If that spell is countered this way, exile it instead of p
 spCounter:Spell:None:Exile:None
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dissipate.jpg
-
-Dream Fracture
-1 U U
-Counter target spell. Its controller draws a card. Draw a card.
-spCounter:Spell:None:Graveyard:My-Draw(1) Opp-Draw(1)
-SVar:Rarity:Uncommon
 
 Envelop
 U
