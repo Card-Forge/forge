@@ -39,10 +39,10 @@ with open(pathToMtgData) as mtgdata :
                 if hasFetchedSets :
                         if not hasFetchedCardName :
                                 tmpName = line
-                                tmpName = tmpName.replace('\n','')
+                                tmpName = tmpName.rstrip()
                                 hasFetchedCardName = True
                         if line == "\n" :
-                                mtgDataCards[tmpName] = prevline.replace('\n', '')
+                                mtgDataCards[tmpName] = prevline.rstrip()
                                 hasFetchedCardName = False
 
                 prevline = line
@@ -56,7 +56,7 @@ for file in forgeFolderFiles :
         with open(sys.path[0] + os.sep + "cardsfolder" + os.sep + file) as currentForgeCard :
                 tmpname = currentForgeCard.readline()
                 tmpname = tmpname[5:].replace("AE","Ae")
-                tmpname = tmpname.replace('\r\n', '')
+                tmpname = tmpname.rstrip()
                 forgeCards.append(tmpname)
 
                 
