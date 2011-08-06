@@ -1,3 +1,10 @@
+Soulsurge Elemental
+3 R
+Creature Elemental
+Soulsurge Elemental's power is equal to the number of creatures you control.
+1/1
+First Strike
+
 Hellion Eruption
 5 R
 Sorcery

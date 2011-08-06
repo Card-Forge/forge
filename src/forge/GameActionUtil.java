@@ -15242,6 +15242,36 @@ public class GameActionUtil {
 			return creatures.size();
 		}
 	};
+	
+	public static Command Soulsurge_Elemental                   = new Command() {
+		private static final long serialVersionUID = 8607200838396348507L;
+
+		public void execute() {
+			// get all creatures
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Soulsurge Elemental");
+
+			for(int i = 0; i < list.size(); i++) {
+				Card c = list.get(i);
+				c.setBaseAttack(countCreatures(c));
+				c.setBaseDefense(1);
+			}
+
+		}// execute()
+
+		private int countCreatures(Card c) {
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+			CardList creatures = new CardList(play.getCards());
+			creatures = creatures.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					return c.isCreature();
+				}
+			});
+			return creatures.size();
+		}
+	};
 
 
 	// returns all PlayerZones that has at least 1 Glorious Anthem
@@ -15308,6 +15338,7 @@ public class GameActionUtil {
 		commands.put("Transcendent_Master", Transcendent_Master);
 		commands.put("Lighthouse_Chronologist", Lighthouse_Chronologist);
 		commands.put("Skywatcher_Adept", Skywatcher_Adept);
+		commands.put("Soulsurge_Elemental", Soulsurge_Elemental);
 		
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
 		commands.put("People_of_the_Woods", People_of_the_Woods);
