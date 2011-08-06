@@ -7279,6 +7279,32 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+      
+        //*************** START *********** START **************************
+        else if(cardName.equals("Beacon of Tomorrows")) {
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 6705046075033727413L;
+
+				@Override
+                public void resolve() {
+                    Player p = getTargetPlayer();
+                    AllZone.Phase.addExtraTurn(p);
+                    done();
+                }//resolve()
+                
+                void done() {
+                    //shuffle card back into the library
+                    AllZone.GameAction.moveToLibrary(card);
+                    card.getController().shuffle();
+                }
+            };
+            spell.setChooseTargetAI(CardFactoryUtil.AI_targetComputer());
+            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
     	return card;
     }//getCard
 }

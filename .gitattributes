@@ -442,6 +442,7 @@ res/cardsfolder/bazaar_of_baghdad.txt -text svneol=native#text/plain
 res/cardsfolder/bazaar_of_wonders.txt -text svneol=native#text/plain
 res/cardsfolder/beacon_of_creation.txt -text svneol=native#text/plain
 res/cardsfolder/beacon_of_destruction.txt -text svneol=native#text/plain
+res/cardsfolder/beacon_of_tomorrows.txt -text svneol=native#text/plain
 res/cardsfolder/beacon_of_unrest.txt -text svneol=native#text/plain
 res/cardsfolder/bear_cub.txt -text svneol=native#text/plain
 res/cardsfolder/beast_attack.txt -text svneol=native#text/plain

@@ -1,0 +1,7 @@
+Name:Beacon of Tomorrows
+ManaCost:6 U U
+Types:Sorcery
+Text:Target player takes an extra turn after this one. Shuffle CARDNAME into its owner's library.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/beacon_of_tomorrows.jpg
+End
