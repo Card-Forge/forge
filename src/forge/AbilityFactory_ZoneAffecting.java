@@ -493,6 +493,8 @@ public class AbilityFactory_ZoneAffecting {
 	//				-Hand
 	//DiscardValid - a ValidCards syntax for acceptable cards to discard
 	//UnlessType - a ValidCards expression for "discard x unless you discard a ..."
+	//TODO - possibly add an option for EachPlayer$True - Each player discards a card (Rix Maadi, Slivers, 
+	//			Delirium Skeins, Strong Arm Tactics, Wheel of Fortune, Wheel of Fate
 	
 	//Examples:
 	//A:SP$Discard | Cost$B | Tgt$TgtP | NumCards$2 | Mode$Random | SpellDescription$<...>
