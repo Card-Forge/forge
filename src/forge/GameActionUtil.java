@@ -2437,13 +2437,13 @@ public class GameActionUtil {
 				AllZone.Stack.add(ability);
 			}
 		}
-		if (playerPerms.getName("Dissipation Field").size() > 0)  {  
+		/*if (playerPerms.getName("Dissipation Field").size() > 0)  {  
 			CardList disFields = playerPerms.getName("Dissipation Field");
 			for (int i=0;i<disFields.size();i++) {
 				Card crd = disFields.get(i);
 				playerDamage_Dissipation_Field(c, crd);
 			}
-		}
+		}*/
 		if (playerPerms.getName("Farsight Mask").size() > 0)    		
 		{
 			final Card c1 = c;
@@ -2627,7 +2627,7 @@ public class GameActionUtil {
 		opponent.addPoisonCounters(n);
 	}
 	
-	private static void playerDamage_Dissipation_Field(final Card c, final Card crd)
+	/*private static void playerDamage_Dissipation_Field(final Card c, final Card crd)
 	{
 		final Player owner = c.getOwner();
 		
@@ -2646,7 +2646,7 @@ public class GameActionUtil {
 		ability.setStackDescription(sb.toString());
 		
 		AllZone.Stack.add(ability);
-	}
+	}*/
 	
 	private static void playerDamage_Farsight_Mask(final Player player, final Card c, final Card crd)
 	{

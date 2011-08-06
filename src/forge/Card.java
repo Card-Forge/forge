@@ -3193,7 +3193,7 @@ public class Card extends MyObservable {
 				restDamage += restDamage;
 		}
     	
-    	if( AllZoneUtil.isCardInPlay("Gratuitous Violence", source.getController()) && isCreature()) {
+    	if( AllZoneUtil.isCardInPlay("Gratuitous Violence", source.getController()) && source.isCreature() && isCreature()) {
 			int amount = AllZoneUtil.getPlayerCardsInPlay(source.getController(), "Gratuitous Violence").size();
 			for (int i = 0; i < amount;i++)
 				restDamage += restDamage;
