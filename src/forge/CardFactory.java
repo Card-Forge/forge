@@ -2191,10 +2191,10 @@ public class CardFactory implements NewConstants {
                    {
                 	   	int ndam = getNumDam();
                 	   	
-                    	if (DmgPlayer[0] && AllZone.Human_Life.getLife() <= ndam && AllZone.Computer_Life.getLife() > ndam) 
-                    		return true;											// The AI will kill the human if possible
                     	if (DmgPlayer[0] && AllZone.Computer_Life.getLife() <= ndam) 
                     		return false;       									// The AI will not kill itself
+                    	if (DmgPlayer[0] && AllZone.Human_Life.getLife() <= ndam && AllZone.Computer_Life.getLife() > ndam) 
+                    		return true;											// The AI will kill the human if possible
                     	
                 	   	CardList human = new CardList(AllZone.Human_Play.getCards());
                 	   	CardList computer = new CardList(AllZone.Computer_Play.getCards());
@@ -5013,7 +5013,7 @@ public class CardFactory implements NewConstants {
                     int defense = getNumDefense();
                     
                     String curPhase = AllZone.Phase.getPhase();
-                    if(curPhase.equals(Constant.Phase.Main2))
+                    if(curPhase.equals(Constant.Phase.Main2) && !(curse[0] && NumDefense[0] < 0))
                     	return false;
                     
             		boolean goodt = false;
@@ -5027,7 +5027,11 @@ public class CardFactory implements NewConstants {
                                 }
                         });        
                     	if (NumDefense[0] < 0 && !list.isEmpty()) { // with spells that give -X/-X, compi will try to destroy a creature
-                    		list = CardListUtil.filterToughness(list, - getNumDefense());
+                    		list = list.filter(new CardListFilter() {
+                                public boolean addCard(Card c) {
+                                    return (c.getKillDamage() <= -NumDefense[0]);
+                                }
+                        	}); // leaves all creatures that will be destroyed
                     	} // -X/-X end
                     	if (!list.isEmpty()) {
                     		t = CardFactoryUtil.AI_getBestCreature(list);
