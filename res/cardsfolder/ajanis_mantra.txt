@@ -2,7 +2,7 @@ Name:Ajani's Mantra
 ManaCost:1 W
 Types:Enchantment
 Text:no text
-T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigGainLife | Optional$ True | TriggerDescription$ At the beginning of your upkeep, you may gain 1 life.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | Optional$ True | TriggerDescription$ At the beginning of your upkeep, you may gain 1 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ajanis_mantra.jpg
