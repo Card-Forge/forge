@@ -565,7 +565,7 @@ TypeCycling:Basic:1 R
 Absorb Vis
 6 B
 Sorcery
-Target player loses 4 life and you gain 4 life.
+no text
 spLoseLifeGainLife:4
 TypeCycling:Basic:1 B
 
@@ -3590,8 +3590,8 @@ This creature cannot block
 Vampiric Touch
 2 B
 Sorcery
-Vampiric Touch deals 2 damage to target opponent and you gain 2 life.
-spLoseLifeGainLife:2
+no text
+spLoseLifeGainLife:2:Vampiric Touch deals 2 damage to target opponent and you gain 2 life.
 
 Wings of Hope
 W U
@@ -4070,14 +4070,14 @@ Landfall
 Kiss of Death
 4 B B
 Sorcery
-Kiss of Death deals 4 damage to target opponent. You gain 4 life.
-spLoseLifeGainLife:4
+no text
+spLoseLifeGainLife:4:Kiss of Death deals 4 damage to target opponent. You gain 4 life.
 
 Stolen Grain
 4 B B
 Sorcery
-Stolen Grain deals 5 damage to target opponent. You gain 5 life.
-spLoseLifeGainLife:5
+no text
+spLoseLifeGainLife:5:Stolen Grain deals 5 damage to target opponent. You gain 5 life.
 
 Privileged Position
 2 GW GW GW
@@ -4135,20 +4135,20 @@ Creatures you control have horsemanship.
 Last Caress
 2 B
 Sorcery
-Target player loses 1 life and you gain 1 life. Draw a card.
+Draw a card.
 spLoseLifeGainLife:1
 Cantrip
 
 Morsel Theft
 2 B B
 Tribal Sorcery Rogue
-Target player loses 3 life and you gain 3 life. (NOTE: "Prowl" is not implemented.)
+(NOTE: "Prowl" is not implemented.)
 spLoseLifeGainLife:3
 
 Soul Feast
 3 B B
 Sorcery
-Target player loses 4 life and you gain 4 life.
+no text
 spLoseLifeGainLife:4
 
 Shu Grain Caravan
