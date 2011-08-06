@@ -1695,6 +1695,7 @@ res/cardsfolder/ertai_the_corrupted.txt -text svneol=native#text/plain
 res/cardsfolder/ertai_wizard_adept.txt -text svneol=native#text/plain
 res/cardsfolder/ertais_trickery.txt -text svneol=native#text/plain
 res/cardsfolder/escape_artist.txt -text svneol=native#text/plain
+res/cardsfolder/escape_routes.txt -text svneol=native#text/plain
 res/cardsfolder/esper_charm.txt -text svneol=native#text/plain
 res/cardsfolder/esper_cormorants.txt -text svneol=native#text/plain
 res/cardsfolder/esper_panorama.txt -text svneol=native#text/plain
