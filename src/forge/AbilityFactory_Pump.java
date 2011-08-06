@@ -295,6 +295,8 @@ public class AbilityFactory_Pump {
         else
         	list = getPumpCreatures();
 		
+        list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+        
         if (list.isEmpty())
         	return false;
         
