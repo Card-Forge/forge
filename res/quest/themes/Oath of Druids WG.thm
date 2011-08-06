@@ -46,6 +46,7 @@ Winter's Grasp
 [/Group]
 
 [Group MaxCnt=3 Percentage=7]
+Captured Sunlight
 Heroes' Reunion
 Nourish
 Soothing Balm
@@ -54,6 +55,7 @@ Whitesun's Passage
 
 [Group MaxCnt=1 Percentage=6]
 Akroma, Angel of Wrath
+Angel of Despair
 Blazing Archon
 Bogardan Hellkite
 Darksteel Colossus
@@ -61,12 +63,11 @@ Emrakul, the Aeons Torn
 Hellkite Overlord
 Inkwell Leviathan
 Iona, Shield of Emeria
+Platinum Angel
 Progenitus
 Sphinx of the Steel Wind
 Ulamog, the Infinite Gyre
 Woodfall Primus
-Platinum Angel
-Angel of Despair
 [/Group]
 
 End
