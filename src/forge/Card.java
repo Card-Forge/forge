@@ -929,7 +929,6 @@ public class Card extends MyObservable {
     public String getNonAbilityText() {
         StringBuilder sb = new StringBuilder();
         ArrayList<String> keyword = getHiddenExtrinsicKeyword();
-        if(name.equals("Gigadrowse")) System.out.println("Keywords for nonability text for "+this.getName()+": "+keyword);
         
         sb.append(keywordsToText(keyword));
         
@@ -938,7 +937,6 @@ public class Card extends MyObservable {
     
     // convert a keyword list to the String that should be displayed ingame
     public String keywordsToText(ArrayList<String> keyword) {
-    	if(name.equals("Gigadrowse")) System.out.println("Keywords for "+this.getName()+": "+keyword);
         StringBuilder sb = new StringBuilder();
         StringBuilder sbLong = new StringBuilder();
         StringBuilder sbMana = new StringBuilder();
