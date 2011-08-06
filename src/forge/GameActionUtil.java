@@ -49,6 +49,7 @@ public class GameActionUtil {
 		upkeep_Curse_of_Chains();
 		upkeep_Festering_Wound_Counter();
 		upkeep_Festering_Wound_Damage();
+		upkeep_Kemba_Kha_Regent();
 		upkeep_Greener_Pastures();
 		upkeep_Wort();
 		upkeep_Squee();
@@ -3088,7 +3089,7 @@ public class GameActionUtil {
 
 	//UPKEEP CARDS:
 
-	public static void upkeep_removeDealtDamageToOppThisTurn() {
+	private static void upkeep_removeDealtDamageToOppThisTurn() {
 		// resets the status of attacked/blocked this turn
 		Player player = AllZone.Phase.getActivePlayer();
 		Player opp = player.getOpponent();
@@ -3167,7 +3168,7 @@ public class GameActionUtil {
 		}
 	}//TabernacleUpkeepCost
 
-	public static void upkeep_MagusTabernacleUpkeepCost() {
+	private static void upkeep_MagusTabernacleUpkeepCost() {
 		Player player = AllZone.Phase.getActivePlayer();
 
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
@@ -3292,7 +3293,7 @@ public class GameActionUtil {
 		}
 	}//upkeepCost
 
-	public static void upkeep_Echo() {
+	private static void upkeep_Echo() {
 		Player player = AllZone.Phase.getActivePlayer();
 
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
@@ -3368,7 +3369,7 @@ public class GameActionUtil {
 		}
 	}//suspend	
 
-	public static void upkeep_UpkeepCost() {
+	private static void upkeep_UpkeepCost() {
 		Player player = AllZone.Phase.getActivePlayer();
 
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
@@ -3429,7 +3430,7 @@ public class GameActionUtil {
 		}
 	}//upkeepCost
 
-	public static void upkeep_DestroyUpkeepCost() {
+	private static void upkeep_DestroyUpkeepCost() {
 		Player player = AllZone.Phase.getActivePlayer();
 
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
@@ -3494,7 +3495,7 @@ public class GameActionUtil {
 	}//upkeepCost
 
 
-	public static void upkeep_DamageUpkeepCost() {
+	private static void upkeep_DamageUpkeepCost() {
 		Player player = AllZone.Phase.getActivePlayer();
 
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
@@ -3891,7 +3892,7 @@ public class GameActionUtil {
 	/**
 	 * runs the upkeep for Genesis
 	 */
-	public static void upkeep_Genesis() {
+	private static void upkeep_Genesis() {
 		/*
 		 * At the beginning of your upkeep, if Genesis is in your graveyard,
 		 * you may pay 2G. If you do, return target creature card from your 
@@ -6783,6 +6784,32 @@ public class GameActionUtil {
 			} // for
 		} // if creatures > 0
 	};
+	
+	/*
+	 * At the beginning of your upkeep, put a 2/2 white Cat creature token
+	 * onto the battlefield for each Equipment attached to Kemba, Kha Regent.
+	 */
+	private static void upkeep_Kemba_Kha_Regent() {
+		final Player player = AllZone.Phase.getActivePlayer();
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Kemba, Kha Regent");
+		
+		for(Card src:list) {
+			final Card regent = src;
+			final int equipNum = regent.getEquippedBy().size();
+			Ability ability = new Ability(regent, "0") {
+				@Override
+				public void resolve() {
+					for(int i = 0; i < equipNum; i++) {
+						CardFactoryUtil.makeToken("Cat", "W 2 2 Cat", regent.getController(), "W",
+								new String[] {"Creature", "Cat"}, 2, 2, new String[] {});
+					}
+				}
+
+			};// Ability
+			ability.setStackDescription(regent.getName()+" - put "+equipNum+" 2/2 white Cat creature token(s) onto the battlefield.");
+			if(equipNum > 0) AllZone.Stack.add(ability);
+		}
+	};
 
 	private static void upkeep_Scute_Mob() {
 		final Player player = AllZone.Phase.getActivePlayer();
@@ -8237,7 +8264,7 @@ public class GameActionUtil {
 		}// for
 	}// upkeep_Convalescence()
 
-	public static void upkeep_Ivory_Tower() {
+	private static void upkeep_Ivory_Tower() {
 		final Player player = AllZone.Phase.getActivePlayer();
 		CardList hand = AllZoneUtil.getPlayerHand(player);
 		
@@ -8267,7 +8294,7 @@ public class GameActionUtil {
 		}//for
 	}//upkeep_Ivory Tower()
 	
-	public static void upkeep_Vensers_Journal() {
+	private static void upkeep_Vensers_Journal() {
 		final Player player = AllZone.Phase.getActivePlayer();
 		final CardList hand = AllZoneUtil.getPlayerHand(player);
 		

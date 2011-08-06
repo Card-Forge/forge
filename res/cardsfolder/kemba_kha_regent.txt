@@ -1,0 +1,8 @@
+Name:Kemba, Kha Regent
+ManaCost:1 W W
+Types:Legendary Creature Cat Cleric
+Text:At the beginning of your upkeep, put a 2/2 white Cat creature token onto the battlefield for each Equipment attached to Kemba, Kha Regent.
+PT:2/4
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kemba_kha_regent.jpg
+End
