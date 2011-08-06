@@ -291,7 +291,10 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
         				sourceCard.getController().addDamage(1, manabarb);
         			}
         		};
-        		ability.setStackDescription(manabarb.getName()+" - deal 1 damage to "+sourceCard.getController());
+        		StringBuilder sb = new StringBuilder();
+        		sb.append(manabarb.getName()).append(" - deal 1 damage to ").append(sourceCard.getController());
+        		ability.setStackDescription(sb.toString());
+        		
         		AllZone.Stack.add(ability);
         	}
         }
