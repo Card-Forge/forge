@@ -1,3 +1,12 @@
+Lightning Serpent
+X R
+Creature Elemental Serpent
+Lightning Serpent enters the battlefield with X +1/+0 counters on it.
+2/1
+Trample
+Haste
+At the beginning of the end step, sacrifice CARDNAME.
+
 Ivy Elemental
 X G
 Creature Elemental

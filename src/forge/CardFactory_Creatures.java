@@ -14701,7 +14701,7 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Shifting Wall") || cardName.equals("Maga, Traitor to Mortals")
-        		|| cardName.equals("Krakilin") || cardName.equals("Ivy Elemental")) { 
+        		|| cardName.equals("Krakilin") || cardName.equals("Ivy Elemental") || cardName.equals("Lightning Serpent")) { 
         	
         	if(!card.getName().equals("Krakilin")) {
             SpellAbility spell = new Spell_Permanent(card) {
@@ -14731,7 +14731,8 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                 	int XCounters = card.getXManaCostPaid();
-                	card.addCounter(Counters.P1P1, XCounters);
+                	if(card.getName().equals("Lightning Serpent")) card.addCounter(Counters.P1P0, XCounters);
+                	else card.addCounter(Counters.P1P1, XCounters);
                 	if(card.getName().equals("Maga, Traitor to Mortals")) {
                         ability.setStackDescription(ability.getTargetPlayer() + " - loses life equal to the number of +1/+1 counters on " + card.getName());
                         if(card.getController() == Constant.Player.Human) AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(ability));

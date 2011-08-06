@@ -1233,7 +1233,7 @@ public class Card extends MyObservable {
     public int getNetAttack() {
         int total = getBaseAttack();
         total += getTempAttackBoost() + getSemiPermanentAttackBoost() + getOtherAttackBoost()
-                + getCounters(Counters.P1P1) - getCounters(Counters.M1M1);
+                + getCounters(Counters.P1P1) + getCounters(Counters.P1P0) - getCounters(Counters.M1M1);
         return total;
     }
     
