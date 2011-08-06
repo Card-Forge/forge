@@ -17179,7 +17179,6 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
         
-
         //*************** START *********** START **************************
         else if(cardName.equals("Stoneforge Mystic")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -17285,7 +17284,7 @@ public class CardFactory_Creatures {
                 }
             });
             card.addSpellAbility(ab);
-            
+            ab.setDescription("1 W, tap: You may put an Equipment card from your hand onto the battlefield.");
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
