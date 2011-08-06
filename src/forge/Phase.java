@@ -598,8 +598,8 @@ public class Phase extends MyObservable
 
 	public static boolean canCastSorcery(Player player)
 	{
-		return ((AllZone.Phase.getPhase().equals(Constant.Phase.Main2) || (AllZone.Phase.getPhase().equals(Constant.Phase.Main1)) 
-				&& AllZone.Phase.isPlayerTurn(player)) && AllZone.Stack.size() == 0);
+		return AllZone.Phase.isPlayerTurn(player) && (AllZone.Phase.getPhase().equals(Constant.Phase.Main2) || 
+			AllZone.Phase.getPhase().equals(Constant.Phase.Main1)) && AllZone.Stack.size() == 0;
 	}
 	
 	public static boolean canPlayDuringCombat() {
