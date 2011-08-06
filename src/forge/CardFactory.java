@@ -3114,11 +3114,13 @@ public class CardFactory implements NewConstants {
                     human = human.getValidCards(Tgts);
                     int humanvalue = CardListUtil.sumCMC(human);
                     humanvalue += human.getType("Land").size();
-                    humanvalue += human.getTokens().size() * 3;          // X = total converted mana cost + number of lands + 3 * number of tokens (Human)
+                    humanvalue += CardListUtil.sumAttack(human.getTokens()); 
+                    humanvalue += CardListUtil.sumDefense(human.getTokens());        // X = total converted mana cost + number of lands + total power+toughness of tokens (Human)
                     computer = computer.getValidCards(Tgts);
                     int computervalue = CardListUtil.sumCMC(computer);
                     computervalue += computer.getType("Land").size();
-                    computervalue += computer.getTokens().size() * 3;    // Y = total converted mana cost + number of lands + 3 * number of tokens (Computer)
+                    computervalue += CardListUtil.sumAttack(computer.getTokens()); 
+                    computervalue += CardListUtil.sumDefense(computer.getTokens());  // Y = total converted mana cost + number of lands + total power+toughness of tokens (Computer)
                     
                     // the computer will play the spell if Y < X - 2
                     return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 

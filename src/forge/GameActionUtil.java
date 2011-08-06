@@ -10325,7 +10325,7 @@ public class GameActionUtil {
 		      			if(Specific[i].contains("NonType.")) {
 		      				Cards_inZone = Cards_inZone.filter(new CardListFilter() {
                                 public boolean addCard(Card c) {
-                                    if(!c.getType().contains(Specific[Restriction_Count[0]].replaceFirst("NonType.", ""))) return true;
+                                    if(!c.isType(Specific[Restriction_Count[0]].replaceFirst("NonType.", ""))) return true;
                                     return false;
                                 }
                     		});
@@ -10550,7 +10550,7 @@ public class GameActionUtil {
 					CardList Cards_inZone = AffectedCards(SourceCard, CardsinZoneDetails);
       				Cards_inZone = Cards_inZone.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            if(c.getType().contains(Details[Count[0] + 1].replaceFirst("Type.", ""))) return true;
+                            if(c.isType(Details[Count[0] + 1].replaceFirst("Type.", ""))) return true;
                             return false;
 			}
       				});
@@ -10560,7 +10560,7 @@ public class GameActionUtil {
 					CardList Cards_inZone = AffectedCards(SourceCard, CardsinZoneDetails);
       				Cards_inZone = Cards_inZone.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            if(!c.getType().contains(Details[Count[0] + 1].replaceFirst("NonType.", ""))) return true;
+                            if(!c.isType(Details[Count[0] + 1].replaceFirst("NonType.", ""))) return true;
                             return false;
 			}
       				});
