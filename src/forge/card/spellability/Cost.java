@@ -104,6 +104,11 @@ public class Cost {
 	public int getXMana() { return manaXCost; }
 	public void setXMana(int xCost) { manaXCost = xCost; }
 	
+	public boolean isOnlyManaCost() {
+		return !sacCost && !exileCost && !exileFromHandCost && !exileFromGraveCost && !tapCost && !tapXTypeCost &&
+			!untapCost && !subtractCounterCost && !addCounterCost && !lifeCost && !discardCost && !returnCost;
+	}
+	
 	public String getTotalMana() { 
 		StringBuilder sb = new StringBuilder();
 		for(int i = 0; i < manaXCost; i++)

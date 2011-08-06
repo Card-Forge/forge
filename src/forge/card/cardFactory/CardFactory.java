@@ -4016,14 +4016,14 @@ public class CardFactory implements NewConstants {
                 card.removeIntrinsicKeyword(parse);
                 
                 String k[] = parse.split(":");
-                final String manacost = k[1];
+                final Cost cost = new Cost(k[1], cardName, true);
                 
                 int attack = card.getBaseAttack();
                 int defense = card.getBaseDefense();
                 
                 String orgManaCost = card.getManaCost();
                 
-                card.addSpellAbility(CardFactoryUtil.ability_Morph_Up(card, manacost, orgManaCost, attack, defense));
+                card.addSpellAbility(CardFactoryUtil.ability_Morph_Up(card, cost, orgManaCost, attack, defense));
                 card.addSpellAbility(CardFactoryUtil.ability_Morph_Down(card));
             }
         }//Morph

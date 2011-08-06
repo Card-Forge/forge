@@ -1036,16 +1036,16 @@ public class CardFactoryUtil {
         return morph_down;
     }
     
-    public static Ability ability_Morph_Up(final Card sourceCard, String cost, String orgManaCost, int a, int d) {
+    public static Ability_Activated ability_Morph_Up(final Card sourceCard, Cost cost, String orgManaCost, int a, int d) {
         //final String player = sourceCard.getController();
         //final String manaCost = cost;
         final int attack = a;
         final int defense = d;
         final String origManaCost = orgManaCost;
-        final Ability morph_up = new Ability(sourceCard, cost) {
-            private static final long serialVersionUID = -7892773658629724785L;
-            
-            @Override
+        final Ability_Activated morph_up = new Ability_Activated(sourceCard, cost, null) {
+			private static final long serialVersionUID = -3663857013937085953L;
+
+			@Override
             public void resolve() {
                 //PlayerZone hand = AllZone.getZone(Constant.Zone.Hand ,player);
                 //PlayerZone play = AllZone.getZone(Constant.Zone.Play ,player);
@@ -1070,10 +1070,14 @@ public class CardFactoryUtil {
             
         };//morph_up
         
-        morph_up.setManaCost(cost);
+        //morph_up.setManaCost(cost);
+        String costDesc = cost.toString();
+        //get rid of the ": " at the end
+        costDesc = costDesc.substring(0, costDesc.length() - 2);
         StringBuilder sb = new StringBuilder();
-        sb.append("Morph ").append(cost);
-        sb.append(" (Turn this face up any time for its morph cost.)");
+        sb.append("Morph");
+        if(!cost.isOnlyManaCost()) sb.append(" -");
+        sb.append(" ").append(costDesc).append(" (Turn this face up any time for its morph cost.)");
         morph_up.setDescription(sb.toString());
         
         StringBuilder sbStack = new StringBuilder();
@@ -1636,28 +1640,15 @@ public class CardFactoryUtil {
                 return list;
             }//getCreature()
         };//equip ability
-        /*
-        Input runtime = new Input() {
-            private static final long serialVersionUID = -6785656229070523470L;
-            
-            @Override
-            public void showMessage() {
-                //get all creatures you control
-                CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
-                
-                stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip",
-                        true, false));
-            }
-        };//Input
-        */
-        //equip.setBeforePayMana(runtime);
         
         String costDesc = abCost.toString();
         //get rid of the ": " at the end
         costDesc = costDesc.substring(0, costDesc.length() - 2);
         
         StringBuilder sbDesc = new StringBuilder();
-        sbDesc.append("Equip - ").append(costDesc);
+        sbDesc.append("Equip");
+        if(!abCost.isOnlyManaCost()) sbDesc.append(" -");
+        sbDesc.append(" ").append(costDesc);
         equip.setDescription(sbDesc.toString());
         
         return equip;
