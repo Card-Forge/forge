@@ -5195,6 +5195,7 @@ Whispersilk Cloak
 3
 Artifact Equipment
 Equipped creature is unblockable. Equipped creature has shroud.
+VanillaEquipment:0:0:2:Unblockable:Shroud:none
 
 Hero's Resolve
 1 W
@@ -5741,6 +5742,7 @@ Trusty Machete
 1
 Artifact Equipment
 Equipped creature gets +2/+1.
+VanillaEquipment:2:1:2:none:none:none
 
 Oversold Cemetery
 1 B
