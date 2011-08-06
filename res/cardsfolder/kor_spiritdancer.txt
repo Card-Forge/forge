@@ -1,8 +1,10 @@
 Name:Kor Spiritdancer
 ManaCost:1 W
 Types:Creature Kor Wizard
-Text:Kor Spiritdancer gets +2/+2 for each Aura attached to it.
+Text:no text
 PT:0/2
+K:stPumpSelf:Creature:X/X:no Condition:CARDNAME gets +2/+2 for each Aura attached to it.
+SVar:X:Count$Valid Aura.Attached/Times.2
 SVar:EnchantMe:Multiple
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_spiritdancer.jpg

@@ -24,7 +24,6 @@ public class StaticEffects
 		cardToEffectsList.put("Adamaro, First to Desire", new String[] {"Adamaro_First_to_Desire"});
 		cardToEffectsList.put("Akroma's Memorial", new String[] {"Akromas_Memorial"});
 		cardToEffectsList.put("Angry Mob", new String[] {"Angry_Mob"});
-		cardToEffectsList.put("Aura Gnarlid", new String[] {"Aura_Gnarlid"} );
 		cardToEffectsList.put("Avatar",  new String[] {"Ajani_Avatar_Token"});
 		cardToEffectsList.put("Aven Trailblazer", new String[] {"Aven_Trailblazer"});
 		
@@ -83,7 +82,6 @@ public class StaticEffects
 		cardToEffectsList.put("Keldon Warlord", new String[] {"Keldon_Warlord"});
 		cardToEffectsList.put("Kithkin Rabble", new String[] {"Kithkin_Rabble"});
 		cardToEffectsList.put("Knight of Cliffhaven", new String[] {"Knight_of_Cliffhaven"});
-		cardToEffectsList.put("Kor Spiritdancer", new String[] {"Kor_Spiritdancer"});
 		cardToEffectsList.put("Korlash, Heir to Blackblade", new String[] {"Korlash_Heir_to_Blackblade"});
 		
 		cardToEffectsList.put("Leyline of Singularity", new String[] {"Leyline_of_Singularity"});
@@ -123,7 +121,6 @@ public class StaticEffects
 		cardToEffectsList.put("Plague Rats", new String[] {"Plague_Rats"});
 		cardToEffectsList.put("Primalcrux",new String[] {"Primalcrux"});
 		
-		cardToEffectsList.put("Rabid Wombat", new String[] {"Rabid_Wombat"});
 		cardToEffectsList.put("Rakdos Pit Dragon", new String[] {"Rakdos_Pit_Dragon"});
 		cardToEffectsList.put("Relentless Rats", new String[] {"Relentless_Rats_Other"});
 		cardToEffectsList.put("Rolling Stones", new String[] {"Rolling_Stones"});

@@ -14395,50 +14395,6 @@ public class GameActionUtil {
 
 	};
 	
-	public static Command Aura_Gnarlid       = new Command() {
-		private static final long serialVersionUID = 7072465568184131512L;
-
-		public void execute() {
-              // get all creatures
-              CardList list = AllZoneUtil.getCardsInPlay("Aura Gnarlid");
-              
-              for(int i = 0; i < list.size(); i++) {
-                  Card c = list.get(i);
-                  c.setBaseAttack(2 + countAuras());
-                  c.setBaseDefense(2 + countAuras());
-              }
-          }// execute()
-          
-          private int countAuras() {
-              CardList auras = AllZoneUtil.getCardsInPlay();
-              auras = auras.getType("Aura");
-              return auras.size();
-          }
-      };
-      
-      /*
-       * Kor Spiritdancer gets +2/+2 for each Aura attached to it.
-       */
-      public static Command Kor_Spiritdancer = new Command() {
-    	  private static final long serialVersionUID = -216941322236352450L;
-
-    	  public void execute() {
-    		  // get all creatures
-    		  CardList list = AllZoneUtil.getCardsInPlay("Kor Spiritdancer");
-
-    		  for(Card c:list) {
-    			  c.setBaseAttack(0 + 2*countAuras(c));
-    			  c.setBaseDefense(2 + 2*countAuras(c));
-    		  }
-    	  }// execute()
-
-    	  private int countAuras(final Card c) {
-    		  ArrayList<Card> auras = c.getEnchantedBy();
-    		  return auras.size();
-    	  }
-      };//Kor Spiritdancer
-
-	
 	public static Command Relentless_Rats_Other       = new Command() {
 		private static final long serialVersionUID = -7731719556755491679L;
 
@@ -14826,29 +14782,6 @@ public class GameActionUtil {
 			return equipment.size();
 		}
 	};// Goblin_Gaveleer
-	
-
-	public static Command Rabid_Wombat                = new Command() {
-
-		private static final long serialVersionUID = -7746134566580289667L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Rabid Wombat");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseAttack(countAuras(c) * 2);
-				c.setBaseDefense(c.getBaseAttack() + 1);
-			}
-
-		}// execute()
-
-		private int countAuras(Card c) {
-			CardList auras = new CardList(
-					c.getEnchantedBy().toArray());
-			return auras.size();
-		}
-	};
 
 	public static Command Uril                        = new Command() {
 		private static final long serialVersionUID = 8168928048322850517L;
@@ -16958,7 +16891,6 @@ public class GameActionUtil {
 		commands.put("Ajani_Avatar_Token", Ajani_Avatar_Token);
 		commands.put("Akromas_Memorial", Akromas_Memorial);
 		commands.put("Angry_Mob", Angry_Mob);
-		commands.put("Aura_Gnarlid", Aura_Gnarlid);
 		commands.put("Aven_Trailblazer", Aven_Trailblazer);
 		
 		commands.put("Bant_Sureblade", Bant_Sureblade);
@@ -17016,7 +16948,6 @@ public class GameActionUtil {
 		commands.put("Keldon_Warlord", Keldon_Warlord);
 		commands.put("Kithkin_Rabble", Kithkin_Rabble);
 		commands.put("Knight_of_Cliffhaven", Knight_of_Cliffhaven);
-		commands.put("Kor_Spiritdancer", Kor_Spiritdancer);
 		commands.put("Korlash_Heir_to_Blackblade", Korlash_Heir_to_Blackblade);
 		commands.put("Koth_Emblem", Koth_Emblem);
 		
@@ -17057,7 +16988,6 @@ public class GameActionUtil {
 		commands.put("Plague_Rats", Plague_Rats);
 		commands.put("Primalcrux", Primalcrux);
 		
-		commands.put("Rabid_Wombat", Rabid_Wombat);
 		commands.put("Rakdos_Pit_Dragon", Rakdos_Pit_Dragon);
 		commands.put("Relentless_Rats_Other", Relentless_Rats_Other);
 		commands.put("Rolling_Stones", Rolling_Stones);
