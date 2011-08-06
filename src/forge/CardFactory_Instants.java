@@ -4285,49 +4285,32 @@ public class CardFactory_Instants {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Burst Lightning")) {
+        	/*
+        	 * Kicker 4 (You may pay an additional 4 as you cast this spell.)
+        	 * Burst Lightning deals 2 damage to target creature or player. If 
+        	 * Burst Lightning was kicked, it deals 4 damage to that creature 
+        	 * or player instead.
+        	 */
             final SpellAbility spell = new Spell(card) {
-                
 				private static final long serialVersionUID = -5191461039745723331L;
 				int                       damage           = 2;
-                Card                      check;
-                
-                @Override
-                public boolean canPlayAI() {
-                    PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
-                    CardList hand = new CardList(compHand.getCards());
-                    
-
-                    if(AllZone.Human_Life.getLife() <= damage) return AllZone.GameAction.isCardInZone(card,
-                            compHand);
-                    
-                    if(hand.size() >= 8) return true && AllZone.GameAction.isCardInZone(card, compHand);
-                    
-                    check = getFlying();
-                    return check != null && AllZone.GameAction.isCardInZone(card, compHand);
-                }
                 
                 @Override
                 public void chooseTargetAI() {
-                    if(AllZone.Human_Life.getLife() <= damage) {
+                    
+                    CardList creatures = AllZoneUtil.getCreaturesInPlay(Constant.Player.Human);
+                    creatures = creatures.filter(new CardListFilter() {
+                    	public boolean addCard(Card c) {
+                    		return c.getNetAttack() <= damage && !c.getKeyword().contains("Indestructible");
+                    	}
+                    });
+                    if(AllZone.Human_Life.getLife() <= damage || 0 == creatures.size()) {
                         setTargetPlayer(Constant.Player.Human);
                         return;
                     }
-                    
-                    Card c = getFlying();
-                    if((c == null) || (!check.equals(c))) throw new RuntimeException(card
-                            + " error in chooseTargetAI() - Card c is " + c + ",  Card check is " + check);
-                    
+                    Card c = CardFactoryUtil.AI_getBestCreature(creatures);
                     setTargetCard(c);
                 }//chooseTargetAI()
-                
-                //uses "damage" variable
-                Card getFlying() {
-                    CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
-                    for(int i = 0; i < flying.size(); i++)
-                        if(flying.get(i).getNetDefense() <= damage) return flying.get(i);
-                    
-                    return null;
-                }
                 
                 @Override
                 public void resolve() {
@@ -4341,44 +4324,28 @@ public class CardFactory_Instants {
                 }
             };//SpellAbility
             
-            spell.setDescription("Burst Lightning deals 2 damage to target creature or player. If Burst Lightning was kicked, it deals 4 damage to that creature or player instead.");
+            spell.setDescription(cardName+" - deal 2 damage to target creature or player. If Burst Lightning was kicked, it deals 4 damage to that creature or player instead.");
             
             final SpellAbility kicker = new Spell(card) {
-
 				private static final long serialVersionUID = 7608486082373416819L;
 				int                       damage           = 4;
-                Card                      check;
-                
-                @Override
-                public boolean canPlayAI() {
-                    if(AllZone.Human_Life.getLife() <= damage) return true;
-                    
-                    check = getFlying();
-                    return check != null;
-                }
                 
                 @Override
                 public void chooseTargetAI() {
-                    if(AllZone.Human_Life.getLife() <= damage) {
+                	
+                    CardList creatures = AllZoneUtil.getCreaturesInPlay(Constant.Player.Human);
+                    creatures = creatures.filter(new CardListFilter() {
+                    	public boolean addCard(Card c) {
+                    		return c.getNetAttack() <= damage && !c.getKeyword().contains("Indestructible");
+                    	}
+                    });
+                    if(AllZone.Human_Life.getLife() <= damage || 0 == creatures.size()) {
                         setTargetPlayer(Constant.Player.Human);
                         return;
                     }
-                    
-                    Card c = getFlying();
-                    if((c == null) || (!check.equals(c))) throw new RuntimeException(card
-                            + " error in chooseTargetAI() - Card c is " + c + ",  Card check is " + check);
-                    
+                    Card c = CardFactoryUtil.AI_getBestCreature(creatures);
                     setTargetCard(c);
                 }//chooseTargetAI()
-                
-                //uses "damage" variable
-                Card getFlying() {
-                    CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
-                    for(int i = 0; i < flying.size(); i++)
-                        if(flying.get(i).getNetDefense() <= damage) return flying.get(i);
-                    
-                    return null;
-                }
                 
                 @Override
                 public void resolve() {
@@ -4393,7 +4360,7 @@ public class CardFactory_Instants {
                     
                     card.setKicked(true);
                 }
-            };//flashback
+            };//kicker
             kicker.setManaCost("R 4");
             kicker.setAdditionalManaCost("4");
             kicker.setKickerAbility(true);
