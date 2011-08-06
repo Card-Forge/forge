@@ -68,6 +68,9 @@ public class Phase extends MyObservable
     }
     
     public void setPriority(Player p) {
+        if(AllZone.Stack != null)
+            AllZone.Stack.chooseOrderOfSimultaneousStackEntryAll();
+
     	pFirstPriority = p;
     	pPlayerPriority = p;
     }

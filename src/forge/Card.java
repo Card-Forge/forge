@@ -1424,7 +1424,7 @@ public class Card extends MyObservable {
     
     public void executeTrigger(ZCTrigger type) {
         for(Ability_Triggered t:zcTriggers)
-            if(t.trigger.equals(type) && t.isBasic()) AllZone.Stack.addSimultaneousStackEntry(t);
+            if(t.trigger.equals(type) && t.isBasic()) t.execute();//AllZone.Stack.addSimultaneousStackEntry(t);
     }
     
     public void clearTriggers() {
