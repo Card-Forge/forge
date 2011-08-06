@@ -17,7 +17,7 @@ public class CombatUtil {
         
         if(attacker == null || blocker == null) return false;
         
-        if(CardFactoryUtil.hasProtectionFrom(attacker,blocker)) return false;
+        if(CardFactoryUtil.hasProtectionFrom(blocker,attacker)) return false;
         
         //rare case:
         if(blocker.getKeyword().contains("Shadow")

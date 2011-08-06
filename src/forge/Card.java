@@ -801,7 +801,10 @@ public class Card extends MyObservable {
                     sbLong.append(k[5]).append("\r\n");
                 } else if (keyword.get(i).toString().contains("stPump")) {
                     String k[] = keyword.get(i).split(":");
-                    sbLong.append(k[4]).append("\r\n");
+                    if (!k[4].contains("no text")) sbLong.append(k[4]).append("\r\n");
+                } else if (keyword.get(i).toString().contains("Protection:")) {
+                    String k[] = keyword.get(i).split(":");
+                    sbLong.append(k[2]).append("\r\n");
                 } else if (keyword.get(i).endsWith(".")) {
                     sbLong.append(keyword.get(i).toString()).append("\r\n");
                 } else if (keyword.get(i).contains("At the beginning of your upkeep, ") 
@@ -2336,9 +2339,17 @@ public class Card extends MyObservable {
                     else if (exR[j].contains("MultiColor")) // ... Card is multicolored
                     {
                     	if (exR[j].startsWith("non"))
-                    		r = r && (CardUtil.getColors(this).size() == 1);
+                    		r = r && (CardUtil.getColors(this).size() <= 1);
                     	else 
                     		r = r && (CardUtil.getColors(this).size() > 1);
+                    }
+        			
+                    else if (exR[j].contains("MonoColor")) // ... Card is monocolored
+                    {
+                    	if (exR[j].startsWith("non"))
+                    		r = r && (CardUtil.getColors(this).size() > 1 || isColorless());
+                    	else 
+                    		r = r && CardUtil.getColors(this).size() == 1 && !isColorless();
                     }
                     
                     else if (exR[j].contains("with")) // ... Card keywords
@@ -2469,6 +2480,10 @@ public class Card extends MyObservable {
 	
 	public boolean isWhite() {
 		return CardUtil.getColors(this).contains(Constant.Color.White);
+	}
+	
+	public boolean isColorless() {
+		return CardUtil.getColors(this).contains(Constant.Color.Colorless);
 	}
 	
 	public boolean isAttacking() {

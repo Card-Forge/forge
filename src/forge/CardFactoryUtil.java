@@ -3423,8 +3423,7 @@ public class CardFactoryUtil {
                 
                 if(kw.equals("Protection from creatures") && card.isCreature()) return true;
                 
-                if(kw.equals("Protection from artifacts") && card.isArtifact() && 
-                		!card.getName().contains("Artifact Ward")) return true;
+                if(kw.equals("Protection from artifacts") && card.isArtifact()) return true;
                 
                 if(kw.equals("Protection from enchantments") && card.getType().contains("Enchantment") && 
                 		!card.getName().contains("Tattoo Ward")) return true;
@@ -3434,14 +3433,16 @@ public class CardFactoryUtil {
                 if(kw.equals("Protection from colored spells") && (card.isInstant() || card.isSorcery() || card.isAura() ) &&
                         isColored(card)) return true;
                 
-                if(kw.equals("Protection from Dragons")
-                        && (card.getType().contains("Dragon") || card.getKeyword().contains("Changeling"))) return true;
-                if(kw.equals("Protection from Demons")
-                        && (card.getType().contains("Demon") || card.getKeyword().contains("Changeling"))) return true;
-                if(kw.equals("Protection from Goblins")
-                        && (card.getType().contains("Goblin") || card.getKeyword().contains("Changeling"))) return true;
-                if(kw.equals("Protection from Clerics")
-                        && (card.getType().contains("Cleric") || card.getKeyword().contains("Changeling"))) return false;
+                if(kw.equals("Protection from Dragons") && card.isType("Dragon")) return true;
+                if(kw.equals("Protection from Demons") && card.isType("Demon")) return true;
+                if(kw.equals("Protection from Goblins") && card.isType("Goblin")) return true;
+                if(kw.equals("Protection from Clerics") && card.isType("Cleric")) return true;
+
+                if(kw.startsWith("Protection:")) { //uses isValidCard
+                	String characteristic = kw.split(":")[1];
+                	String characteristics[] = characteristic.split(",");
+                	if(card.isValidCard(characteristics)) return true;
+                }
                 
             }
         }
