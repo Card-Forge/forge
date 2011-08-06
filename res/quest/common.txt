@@ -6,6 +6,7 @@ Accelerate
 Accumulated Knowledge
 Acolyte of Xathrid
 Acorn Harvest
+Acridian
 Advance Scout
 Advanced Hoverguard
 Aesthir Glider
@@ -44,6 +45,7 @@ Argothian Swine
 Armadillo Cloak
 Armored Pegasus
 Armorer Guildmage
+Arnjlot's Ascent
 Ascending Aven
 Asha's Favor
 Ashcoat Bear
@@ -115,6 +117,7 @@ Bonesplitter Sliver
 Boomerang
 Border Guard
 Border Patrol
+Boreal Centaur
 Boreal Druid
 Boreal Griffin
 Boros Recruit
@@ -130,6 +133,7 @@ Briarberry Cohort
 Brilliant Halo
 Brute Force
 Buoyancy
+Burning Fields
 Burning Shield Askari
 Burst of Speed
 Cackling Flames
@@ -147,6 +151,7 @@ Capsize
 Caravan Hurda
 Careful Study
 Carnivorous Plant
+Carnophage
 Cartographer
 Castle Raptors
 Cat Warriors
@@ -268,6 +273,7 @@ Dream Cache
 Dream Stalker
 Dreg Reaver
 Drift of Phantasms
+Drifter il-Dal
 Drifting Meadow
 Dripping-Tongue Zubera
 Dromad Purebred
@@ -342,6 +348,8 @@ Fists of the Anvil
 Fit of Rage
 Flame Burst
 Flame Jet
+Flame Rift
+Flamecore Elemental
 Flamekin Brawler
 Fledgling Djinn
 Flight
@@ -405,6 +413,7 @@ Goblin Hero
 Goblin Matron
 Goblin Mountaineer
 Goblin Outlander
+Goblin Patrol
 Goblin Piker
 Goblin Raider
 Goblin Rimerunner
@@ -412,6 +421,7 @@ Goblin Sky Raider
 Goblin Skycutter
 Goblin Spelunkers
 Goblin Striker
+Goblin War Buggy
 Goblin War Paint
 Goblin War Strike
 Gold Myr
@@ -438,6 +448,7 @@ Gruul Signet
 Guardians of Akrasa
 Guided Strike
 Guilty Conscience
+Gush
 Halberdier
 Hand of Death
 Harvest Gwyllion
@@ -447,6 +458,7 @@ Heart Sliver
 Heartwood Dryad
 Helionaut
 Hematite Golem
+Henchfiend of Ukor
 Hero's Resolve
 Highland Berserker
 Highland Giant
@@ -469,6 +481,7 @@ Hulking Goblin
 Hulking Ogre
 Humble Budoka
 Hundroog
+Hungry Mist
 Hurloon Minotaur
 Hush
 Hyalopterous Lemure
@@ -476,6 +489,8 @@ Hymn to Tourach
 Icatian Scout
 Ichor Slick
 Igneous Pouncer
+Illusionary Forces
+Illusionary Wall
 Immaculate Magistrate
 Imperial Edict
 Imperious Perfect
@@ -514,13 +529,16 @@ Keen-Eyed Archers
 Keeneye Aven
 Keeper of Kookus
 Keepers of the Faith
+Keldon Vandals
 Kelinore Bat
 Kindle
 Kindled Fury
 Kird Ape
+Kitsune Loreweaver
 Kjeldoran Outrider
 Kjeldoran War Cry
 Knight Errant
+Knight of the Skyward Eye
 Kobolds of Kher Keep
 Kodama's Reach
 Kor Cartographer
@@ -605,6 +623,7 @@ Misshapen Fiend
 Mist Leopard
 Moaning Spirit
 Mob Justice
+Mogg War Marshal
 Molten Frame
 Molten Rain
 Molten Ravager
@@ -629,6 +648,7 @@ Muck Rats
 Mudbrawler Cohort
 Mudbutton Torchrunner
 Mulldrifter
+Multani's Acolyte
 Muscle Sliver
 Nacatl Outlander
 Nacatl Savage
@@ -715,6 +735,7 @@ Pillarfield Ox
 Pillory of the Sleepless
 Pincher Beetles
 Pit Imp
+Pit Scorpion
 Plague Beetle
 Plated Rootwalla
 Plated Sliver
@@ -722,6 +743,7 @@ Plated Spider
 Plated Wurm
 Plover Knights
 Polluted Mire
+Pouncing Jaguar
 Predator's Strike
 Preemptive Strike
 Prickly Boggart
@@ -814,6 +836,7 @@ Sakura-Tribe Elder
 Sanctum Plowbeast
 Sandbar Merfolk
 Sandstone Warrior
+Sangrophage
 Scaled Wurm
 Scare Tactics
 Scarwood Goblins
@@ -886,6 +909,7 @@ Silkenfist Fighter
 Silver Myr
 Silverback Ape
 Silvercoat Lion
+Simian Grunts
 Simic Ragworm
 Simic Signet
 Sinew Sliver
@@ -967,6 +991,7 @@ Sunbeam Spellbomb
 Sunlance
 Suntail Hawk
 Suq'Ata Lancer
+Swamp Mosquito
 Symbiotic Elf
 Synchronous Sliver
 Talas Air Ship
@@ -1038,6 +1063,8 @@ Tuktuk Grunts
 Tundra Wolves
 Twisted Abomination
 Tyrranax
+Uktabi Drake
+Uktabi Efreet
 Umara Raptor
 Uncontrollable Anger
 Unholy Strength
@@ -1071,6 +1098,7 @@ Veteran Cavalier
 Veteran Swordsmith
 Viashino Fangtail
 Viashino Grappler
+Viashino Outrider
 Viashino Slasher
 Viashino Spearhunter
 Viashino Warrior
@@ -1104,6 +1132,7 @@ Wall of Heat
 Wall of Ice
 Wall of Spears
 Wall of Wood
+Wandering Goblins
 Wandering Ones
 Wandering Stream
 War Mammoth
@@ -1145,6 +1174,7 @@ Willow Dryad
 Willow Elf
 Willow Faerie
 Wind Drake
+Winding Wurm
 Windseeker Centaur
 Windwright Mage
 Winged Coatl
@@ -1160,6 +1190,7 @@ Woodland Changeling
 Woodland Druid
 Woodlurker Mimic
 Words of Wisdom
+Wormwood Dryad
 Wrap in Vigor
 Wrecking Ball
 Wu Elite Cavalry

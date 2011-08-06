@@ -535,6 +535,7 @@ Fire-Belly Changeling
 Creature Shapeshifter
 Play this ability no more than twice each turn.
 1/1
+Changeling
 abPump R:+1/+0
 
 Kitsune Loreweaver

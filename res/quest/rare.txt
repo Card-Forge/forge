@@ -24,6 +24,7 @@ Archangel
 Archivist
 Archon of Justice
 Argothian Enchantress
+Arid Mesa
 Armageddon
 Armored Guardian
 Ashes to Ashes
@@ -57,11 +58,13 @@ Blinkmoth Nexus
 Blistering Firecat
 Blizzard Elemental
 Blood Crypt
+Bloodstained Mire
 Blurred Mongoose
 Boris Devilboon
 Bounteous Kirin
 Breeding Pool
 Bribery
+Bridge from Below
 Brimstone Dragon
 Bringer of the Blue Dawn
 Bringer of the Green Dawn
@@ -87,7 +90,10 @@ Chameleon Colossus
 Chandra Nalaar
 Char
 Child of Alara
+Child of Gaea
 Cho-Manno, Revolutionary
+Chronatog
+Citanul Centaurs
 Cleanse
 Cloud Dragon
 Cloudhoof Kirin
@@ -101,6 +107,7 @@ Conspiracy
 Convalescence
 Convalescent Care
 Corrupt Official
+Cosmic Horror
 Cover of Darkness
 Covetous Dragon
 Cranial Extraction
@@ -125,6 +132,7 @@ Day of Judgment
 Debtors' Knell
 Defense of the Heart
 Demigod of Revenge
+Deranged Hermit
 Devastation
 Devout Lightcaster
 Dimir Cutpurse
@@ -132,12 +140,14 @@ Dingus Egg
 Divinity of Pride
 Djinn of the Lamp
 Do or Die
+Donate
 Door to Nothingness
 Doran, the Siege Tower
 Dovescape
 Dragon Broodmother
 Dragon Engine
 Dragon Roost
+Drifting Djinn
 Dwarven Pony
 Earthcraft
 El-Hajjaj
@@ -159,6 +169,7 @@ Energizer
 Entomb
 Epic Proportions
 Essence Sliver
+Eternal Flame
 Ethersworn Adjudicator
 Evacuation
 Eviscerator
@@ -176,14 +187,17 @@ Field Marshal
 Figure of Destiny
 Filigree Angel
 Fire-Lit Thicket
+Firestorm Hellkite
 Flagstones of Trokair
 Flamebreak
 Fleeting Image
 Flooded Grove
+Flooded Strand
 Flowstone Mauler
 Flowstone Overseer
 Flowstone Wyvern
 Font of Mythos
+Force of Nature
 Force of Savagery
 Forced Fruition
 Gaddock Teeg
@@ -204,6 +218,8 @@ Glorious Anthem
 Goblin Charbelcher
 Goblin Chieftain
 Goblin King
+Goblin Marshal
+Goblin Piledriver
 Goblin Sharpshooter
 Goblin Trenches
 Godless Shrine
@@ -229,6 +245,7 @@ Heartmender
 Hell-Bent Raider
 Helldozer
 Hellkite Overlord
+Herald of Serra
 Hero's Demise
 Hex
 Hidetsugu's Second Rite
@@ -244,6 +261,7 @@ Hunted Troll
 Hystrodon
 Identity Crisis
 Ifh-Biff Efreet
+Illusions of Grandeur
 Imperial Hellkite
 Imperial Seal
 Incendiary Command
@@ -265,11 +283,13 @@ Jeska, Warrior Adept
 Jhovall Queen
 Joiner Adept
 Jokulhaups
+Jovial Evil
 Jugan, the Rising Star
 Juzam Djinn
 Kaervek's Spite
 Kalonian Behemoth
 Kamahl, Pit Fighter
+Karmic Guide
 Kaysa
 Kazuul Warlord
 Keiga, the Tide Star
@@ -284,6 +304,7 @@ Kobold Overlord
 Kodama of the North Tree
 Kokusho, the Evening Star
 Korlash, Heir to Blackblade
+Krosan Cloudscraper
 Krosan Colossus
 Lady Zhurong, Warrior Queen
 Laquatus's Champion
@@ -294,6 +315,7 @@ Lhurgoyf
 Lich Lord of Unx
 Lichenthrope
 Lightning Angel
+Lightning Dragon
 Liliana Vess
 Liu Bei, Lord of Shu
 Livonya Silone
@@ -301,6 +323,7 @@ Lord of Atlantis
 Lord of Extinction
 Lotus Cobra
 Lotus Guardian
+Loxodon Gatekeeper
 Loxodon Hierarch
 Loxodon Punisher
 Lu Bu, Master-at-Arms
@@ -314,11 +337,13 @@ Magus of the Coffers
 Magus of the Disk
 Magus of the Library
 Magus of the Moat
+Magus of the Tabernacle
 Mahamoti Djinn
 Marble Titan
 March of Souls
 Maro
 Marrow-Gnawer
+Marsh Flats
 Mass Calcify
 Mass Hysteria
 Master Transmuter
@@ -337,6 +362,7 @@ Might of Oaks
 Mikokoro, Center of the Sea
 Mirri the Cursed
 Mirri, Cat Warrior
+Misty Rainforest
 Moat
 Mobilization
 Molimo, Maro-Sorcerer
@@ -365,6 +391,7 @@ Nemata, Grove Guardian
 Nemesis of Reason
 Nether Spirit
 Nevinyrral's Disk
+Nicol Bolas
 Nicol Bolas, Planeswalker
 Night of Souls' Betrayal
 Nightmare
@@ -388,6 +415,7 @@ Oversoul of Dusk
 Overwhelming Forces
 Paladin en-Vec
 Pale Bears
+Palladia-Mors
 Pardic Dragon
 Pearl Dragon
 Penumbra Wurm
@@ -395,6 +423,7 @@ Phantom Nishoba
 Phantom Warrior
 Phyrexian Arena
 Phytohydra
+Pianna, Nomad Captain
 Pirate Ship
 Pixie Queen
 Plague Wind
@@ -402,6 +431,7 @@ Planar Cleansing
 Plateau
 Plated Slagwurm
 Political Trickery
+Polluted Delta
 Predator Dragon
 Preeminent Captain
 Primal Clay
@@ -424,6 +454,7 @@ Rakka Mar
 Ramosian Sky Marshal
 Rampaging Baloths
 Ranger of Eos
+Rappelling Scouts
 Ratcatcher
 Rathi Assassin
 Ravages of War
@@ -453,6 +484,7 @@ Sarkhan Vol
 Sarpadian Empires, Vol. VII
 Savannah
 Savannah Lions
+Scalding Tarn
 Scalpelexis
 Scarblade Elite
 Scepter of Insight
@@ -467,6 +499,7 @@ Sengir Vampire
 Sensation Gorger
 Serendib Efreet
 Serendib Sorcerer
+Serpent Generator
 Serra Angel
 Serra Avatar
 Serra Avenger
@@ -499,6 +532,7 @@ Sorceress Queen
 Soulscour
 Sower of Temptation
 Spawnwrithe
+Spectral Force
 Spectral Lynx
 Sphinx of Jwar Isle
 Sphinx of the Steel Wind
@@ -507,6 +541,7 @@ Spiritual Guardian
 Squee, Goblin Nabob
 Staff of Domination
 Stangg
+Stasis
 Steam Vents
 Steely Resolve
 Stillmoon Cavalier
@@ -539,6 +574,7 @@ Tetsuo Umezawa
 Tezzeret the Seeker
 That Which Was Taken
 The Hive
+The Tabernacle at Pendrell Vale
 The Unspeakable
 Thelonite Hermit
 Thornling
@@ -573,12 +609,15 @@ Undermine
 Undying Beast
 Uril, the Miststalker
 Ursapine
+Urza's Blueprints
 Utopia Tree
+Vaevictis Asmadi
 Vampiric Tutor
 Vedalken Archmage
 Veldrane of Sengir
 Vendilion Clique
 Vengeful Firebrand
+Verdant Catacombs
 Verduran Enchantress
 Vexing Beetle
 Viashivan Dragon
@@ -599,9 +638,12 @@ Weathered Wayfarer
 Weatherseed Treefolk
 Wheel of Fortune
 Will-o'-the-Wisp
+Windswept Heath
 Wit's End
 Witch-Maw Nephilim
 Wooded Bastion
+Wooded Foothills
+Wormwood Treefolk
 Wort, Boggart Auntie
 Wrath of God
 Wren's Run Packmaster

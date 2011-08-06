@@ -8,6 +8,7 @@ Act of Treason
 Adarkar Sentinel
 Air Elemental
 Akoum Refuge
+Albino Troll
 Alert Shu Infantry
 Allied Strategies
 Ambition's Cost
@@ -25,6 +26,7 @@ Arcane Sanctum
 Arcbound Lancer
 Arcbound Slith
 Arctic Flats
+Arctic Wolves
 Armored Galleon
 Armored Griffin
 Arrogant Vampire
@@ -32,6 +34,8 @@ Ashen Monstrosity
 Ashenmoor Gouger
 Aspect of Mongoose
 Assembly-Worker
+Auriok Bladewarden
+Avalanche Riders
 Aven Smokeweaver
 Aysen Abbey
 Azure Drake
@@ -39,6 +43,7 @@ Balshan Collaborator
 Bant Battlemage
 Barbarian General
 Barktooth Warbeard
+Basalt Gargoyle
 Basalt Monolith
 Battle Mastery
 Battlefield Percher
@@ -115,6 +120,7 @@ Corrupt Eunuchs
 Council of Advisors
 Counterbalance
 Counterspell
+Cradle Guard
 Crazed Skirge
 Creeping Mold
 Crenellated Wall
@@ -122,6 +128,7 @@ Crib Swap
 Crowd of Cinders
 Crude Rampart
 Crumbling Necropolis
+Crypt Cobra
 Crystalline Sliver
 Cudgel Troll
 Cursed Land
@@ -169,6 +176,7 @@ Elvish Harbinger
 Engineered Plague
 Enlightened Tutor
 Enormous Baloth
+Ensnare
 Eron the Relentless
 Eternal Witness
 Ethereal Usher
@@ -182,12 +190,14 @@ Fanatical Fever
 Fecundity
 Feedback Bolt
 Femeref Archers
+Feral Animist
 Feral Lightning
 Fighting Drake
 Fire Bowman
 Fire Diamond
 Fire Drake
 Fire Imp
+Fire-Belly Changeling
 Firefly
 Firescreamer
 Fireshrieker
@@ -205,8 +215,10 @@ Flowstone Hellion
 Flowstone Thopter
 Flying Carpet
 Forbidding Watchtower
+Force of Will
 Forked-Branch Garami
 Frost Marsh
+Frozen AEther
 Furnace Whelp
 Fury Sliver
 Fusion Elemental
@@ -298,15 +310,18 @@ Jedit Ojanen
 Jerrard of the Closed Fist
 Jhessian Infiltrator
 Jhovall Rider
+Jodah's Avenger
 Juggernaut
 Jund Battlemage
 Jungle Barrier
 Jungle Shrine
 Jungle Troll
+Junun Efreet
 Jwar Isle Refuge
 Kami of Lunacy
 Kami of Old Stone
 Kami of the Palace Fields
+Kami of the Tended Garden
 Karakas
 Karoo Meerkat
 Karplusan Strider
@@ -318,6 +333,7 @@ Kemuri-Onna
 Killer Bees
 Killer Whale
 King Cheetah
+Kismet
 Kiss of Death
 Kitchen Finks
 Kithkin Harbinger
@@ -413,6 +429,7 @@ Perish
 Pestilence
 Phantom Centaur
 Phantom Monster
+Phobian Phantasm
 Phyrexian Gargantua
 Phyrexian Hulk
 Phyrexian Ironfoot
@@ -421,10 +438,12 @@ Pillage
 Plasma Elemental
 Plumeveil
 Pongify
+Power Armor
 Primal Boost
 Primeval Shambler
 Primoc Escapee
 Princess Lucrezia
+Prowess of the Fair
 Psionic Blast
 Psychotrope Thallid
 Puppeteer
@@ -434,6 +453,7 @@ Pyre Charger
 Pyrohemia
 Quagmire Lamprey
 Rabid Wombat
+Radiant's Dragoons
 Rain of Tears
 Ramirez DePietro
 Ramosian Captain
@@ -477,9 +497,11 @@ School of the Unseen
 Scragnoth
 Screeching Harpy
 Sea Spirit
+Searing Flesh
 Seascape Aerialist
 Seashell Cameo
 Seaside Citadel
+Seedcradle Witch
 Segovian Leviathan
 Sejiri Refuge
 Sengir Autocrat
@@ -491,6 +513,7 @@ Shatterstorm
 Shepherd of the Lost
 Shimmering Barrier
 Shivan Oasis
+Shivan Raptor
 Shriekmaw
 Shu Elite Companions
 Shu General
@@ -517,6 +540,7 @@ Slith Strider
 Sliversmith
 Smother
 Sol Ring
+Soldevi Simulacrum
 Soltari Crusader
 Soltari Monk
 Soltari Priest
@@ -526,6 +550,7 @@ Soulcatcher
 Spark Elemental
 Sparkspitter
 Spawning Pool
+Spectral Bears
 Spectral Procession
 Spectral Searchlight
 Spell Snare
@@ -546,6 +571,7 @@ Stern Judge
 Stolen Grain
 Stonecloaker
 Storm Shaman
+Stormcloud Djinn
 Stratozeppelid
 Stream of Acid
 Street Wraith
@@ -555,6 +581,7 @@ Sturdy Hatchling
 Sunastian Falconer
 Sunder from Within
 Sunhome, Fortress of the Legion
+Suq'Ata Assassin
 Svogthos, the Restless Tomb
 Sword of the Meek
 Swords to Plowshares
@@ -564,6 +591,7 @@ Talonrend
 Tangle Spider
 Taoist Hermit
 Tattermunge Maniac
+Tectonic Fiend
 Tempest Drake
 Tempest of Light
 The Lady of the Mountain
@@ -574,11 +602,13 @@ Thopter Foundry
 Thoughtcutter Agent
 Thousand-legged Kami
 Thran Dynamo
+Thran War Machine
 Threaten
 Thunder Spirit
 Thunder Wall
 Thunder-Thrash Elder
 Thundering Giant
+Thwart
 Tidings
 Tigereye Cameo
 Tinker
@@ -618,6 +648,7 @@ Vedalken Plotter
 Verdigris
 Viashino Slaughtermaster
 Vicious Kavu
+Viridian Lorebearers
 Viridian Shaman
 Virtue's Ruin
 Vithian Renegades
@@ -631,6 +662,7 @@ Voice of Truth
 Volcanic Fallout
 Voltaic Key
 Voracious Hatchling
+Vug Lizard
 Vulshok Battlegear
 Wall of Air
 Wall of Blossoms
@@ -679,6 +711,7 @@ Woolly Thoctar
 Worldly Tutor
 Worn Powerstone
 Wreak Havoc
+Yavimaya Ants
 Yavimaya Enchantress
 Yavimaya Gnats
 Zebra Unicorn
