@@ -12692,8 +12692,7 @@ public class GameActionUtil {
 			}
 		}// execute()
 
-	};
-	
+	};//stSetPT
 	
 	public static Command Coat_of_Arms                 = new Command() {
 		private static final long serialVersionUID   = 583505612126735693L;
@@ -12704,9 +12703,9 @@ public class GameActionUtil {
 			CardList list = gloriousAnthemList;
 			// reset all cards in list - aka "old" cards
 			for(int i2 = 0; i2 < list.size(); i2++) {
-					list.get(i2).addSemiPermanentAttackBoost(-1);
-					list.get(i2).addSemiPermanentDefenseBoost(-1);
-				}
+				list.get(i2).addSemiPermanentAttackBoost(-1);
+				list.get(i2).addSemiPermanentDefenseBoost(-1);
+			}
 			// add +1/+1 to cards
 			list.clear();
 			PlayerZone[] zone = getZone("Coat of Arms");
@@ -12723,28 +12722,28 @@ public class GameActionUtil {
 					Type.addAll(AllZone.Human_Battlefield.getCards());
 					Type.addAll(AllZone.Computer_Battlefield.getCards());
 					Type = Type.filter(new CardListFilter() {
-	                    public boolean addCard(Card card) {
-	                        return !card.equals(crd) && card.isCreature() && !crd.getName().equals("Mana Pool");
-	                    }
-	                });
+						public boolean addCard(Card card) {
+							return !card.equals(crd) && card.isCreature() && !crd.getName().equals("Mana Pool");
+						}
+					});
 					CardList Already_Added = new CardList();
 					for(int x = 0; x < Type.size(); x++) {
 						Already_Added.clear();
 						for(int x2 = 0; x2 < Type.get(x).getType().size(); x2++) {
 							if(!Already_Added.contains(Type.get(x))) {
-						if(!Type.get(x).getType().get(x2).equals("Creature") && !Type.get(x).getType().get(x2).equals("Legendary") 
-								&& !Type.get(x).getType().get(x2).equals("Artifact") ) {	
-						if(crd.getType().contains(Type.get(x).getType().get(x2)) || crd.getKeyword().contains("Changeling")
-								 || Type.get(x).getKeyword().contains("Changeling")) {					
-						Already_Added.add(Type.get(x));
-						crd.addSemiPermanentAttackBoost(1);
-						crd.addSemiPermanentDefenseBoost(1);
-						gloriousAnthemList.add(crd);
+								if(!Type.get(x).getType().get(x2).equals("Creature") && !Type.get(x).getType().get(x2).equals("Legendary") 
+										&& !Type.get(x).getType().get(x2).equals("Artifact") ) {	
+									if(crd.getType().contains(Type.get(x).getType().get(x2)) || crd.getKeyword().contains("Changeling")
+											|| Type.get(x).getKeyword().contains("Changeling")) {					
+										Already_Added.add(Type.get(x));
+										crd.addSemiPermanentAttackBoost(1);
+										crd.addSemiPermanentDefenseBoost(1);
+										gloriousAnthemList.add(crd);
+									}
+								}
+							}
 						}
-						}
-						}
-						}
-				}
+					}
 				}// for inner
 			}// for outer
 		}// execute
@@ -12805,35 +12804,6 @@ public class GameActionUtil {
     				}
     				Leyline_of_Singularity_Tokens.clear();
 				}
-		}// execute()
-	};
-    
-	
-	/**
-	 * stores the Command
-	 */
-	
-	public static Command Angry_Mob = new Command() {
-		private static final long serialVersionUID = 4129359648989610278L;
-
-		public void execute() {
-			Player player = AllZone.Phase.getPlayerTurn();
-			
-			// get all creatures
-			CardList mobs = AllZoneUtil.getCardsInPlay("Angry Mob");
-			for(int i = 0; i < mobs.size(); i++) {
-				Card c = mobs.get(i);
-				if(player.equals(c.getController())) {
-					Player opp = player.getOpponent();
-					int boost = AllZoneUtil.getPlayerTypeInPlay(opp, "Swamp").size();
-					c.setBaseAttack(2+boost);
-					c.setBaseDefense(2+boost);
-				}
-				else {
-				c.setBaseAttack(2);
-				c.setBaseDefense(2);
-				}
-			}
 		}// execute()
 	};
 	
@@ -12947,23 +12917,6 @@ public class GameActionUtil {
 			}
 		}// execute()
 	};
-	
-	/*
-	public static Command Serra_Avatar                = new Command() {
-		private static final long serialVersionUID = -7560281839252561370L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Serra Avatar");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card card = list.get(i);
-				int n = card.getController().getLife();
-				card.setBaseAttack(n);
-				card.setBaseDefense(n);
-			}// for
-		}// execute
-	}; // Serra Avatar
-	*/
 
 	public static Command Ajani_Avatar_Token          = new Command() {
 		private static final long serialVersionUID = 3027329837165436727L;
@@ -12984,7 +12937,7 @@ public class GameActionUtil {
 				card.setBaseDefense(n);
 			}// for
 		}// execute
-	}; // Serra Avatar
+	}; // Ajani Avatar
 
 	public static Command Windwright_Mage             = new Command() {
 		private static final long serialVersionUID = 7208941897570511298L;
@@ -13206,654 +13159,6 @@ public class GameActionUtil {
 			old = current;
 		}// execute()
 	}; // Wirewood_Hivemaster
-	/*
-	public static Command Lighthouse_Chronologist  = new Command() {
-		
-		private static final long serialVersionUID = 2627513737024865169L;
-
-		public void execute()
-		{
-			CardList list = AllZoneUtil.getCardsInPlay("Lighthouse Chronologist");
-			
-			for (Card c:list)
-			{
-				int lcs = c.getCounters(Counters.LEVEL);
-				if ( lcs < 4)
-				{
-					c.setBaseAttack(1);
-					c.setBaseDefense(3);
-				}
-				else if ( lcs >=4 && lcs < 7 )
-				{
-					c.setBaseAttack(2);
-					c.setBaseDefense(4);
-				}
-				else
-				{
-					c.setBaseAttack(3);
-					c.setBaseDefense(5);
-				}
-			}
-		}
-	};
-	*/
-	/*
-	public static Command Skywatcher_Adept  = new Command() {
-		private static final long serialVersionUID = -7568530551652446195L;
-
-		public void execute()
-		{
-			CardList list = AllZoneUtil.getCardsInPlay("Skywatcher Adept");
-
-			for (Card c:list)
-			{
-				int lcs = c.getCounters(Counters.LEVEL);
-				if ( lcs < 1)
-				{
-					c.setBaseAttack(1);
-					c.setBaseDefense(1);
-					c.removeIntrinsicKeyword("Flying");
-				}
-				else if ( lcs >=1 && lcs < 3 )
-				{
-					c.setBaseAttack(2);
-					c.setBaseDefense(2);
-					c.addNonStackingIntrinsicKeyword("Flying");
-				}
-				else
-				{
-					c.setBaseAttack(4);
-					c.setBaseDefense(2);
-					c.addNonStackingIntrinsicKeyword("Flying");
-				}
-			}
-		}
-	};
-	*/
-	/*
-	public static Command Caravan_Escort  = new Command() {
-		private static final long serialVersionUID = -6996623102170747897L;
-
-		public void execute()
-		{
-			CardList list = AllZoneUtil.getCardsInPlay("Caravan Escort");
-
-			for (Card c:list)
-			{
-				int lcs = c.getCounters(Counters.LEVEL);
-				if ( lcs < 1)
-				{
-					c.setBaseAttack(1);
-					c.setBaseDefense(1);
-				}
-				else if ( lcs >=1 && lcs < 5 )
-				{
-					c.setBaseAttack(2);
-					c.setBaseDefense(2);
-				}
-				else
-				{
-					c.setBaseAttack(5);
-					c.setBaseDefense(5);
-					c.addNonStackingIntrinsicKeyword("First Strike");
-				}
-			}
-		}
-	};
-	*/
-	/*
-	public static Command Ikiral_Outrider  = new Command() {
-		private static final long serialVersionUID = 7835884582225439851L;
-
-		public void execute()
-		{
-			CardList list = AllZoneUtil.getCardsInPlay("Ikiral Outrider");
-
-			for (Card c:list)
-			{
-				int lcs = c.getCounters(Counters.LEVEL);
-				if ( lcs < 1)
-				{
-					c.setBaseAttack(1);
-					c.setBaseDefense(2);
-				}
-				else if ( lcs >=1 && lcs < 4 )  //levels 1-3
-				{
-					c.setBaseAttack(2);
-					c.setBaseDefense(6);
-					c.addNonStackingIntrinsicKeyword("Vigilance");
-				}
-				else
-				{
-					c.setBaseAttack(3);
-					c.setBaseDefense(10);
-					c.addNonStackingIntrinsicKeyword("Vigilance");
-				}
-			}
-		}
-	};
-	
-	public static Command Knight_of_Cliffhaven  = new Command() {
-		private static final long serialVersionUID = 3624165284236103054L;
-
-		public void execute()
-		{
-			CardList list = AllZoneUtil.getCardsInPlay("Knight of Cliffhaven");
-
-			for (Card c:list)
-			{
-				int lcs = c.getCounters(Counters.LEVEL);
-				if ( lcs < 1)
-				{
-					c.setBaseAttack(2);
-					c.setBaseDefense(2);
-				}
-				else if ( lcs >=1 && lcs < 4 )  //levels 1-3
-				{
-					c.setBaseAttack(2);
-					c.setBaseDefense(3);
-					c.addNonStackingIntrinsicKeyword("Flying");
-				}
-				else
-				{
-					c.setBaseAttack(4);
-					c.setBaseDefense(4);
-					c.addNonStackingIntrinsicKeyword("Flying");
-					c.addNonStackingIntrinsicKeyword("Vigilance");
-				}
-			}
-		}
-	};
-	*/
-	/*
-	public static Command Beastbreaker_of_Bala_Ged  = new Command() {
-		private static final long serialVersionUID = -8692202913296782937L;
-
-		public void execute()
-		{
-			CardList list = AllZoneUtil.getCardsInPlay("Beastbreaker of Bala Ged");
-
-			for (Card c:list)
-			{
-				int lcs = c.getCounters(Counters.LEVEL);
-				if ( lcs < 1)
-				{
-					c.setBaseAttack(2);
-					c.setBaseDefense(2);
-				}
-				else if ( lcs >=1 && lcs < 4 )  //levels 1-3
-				{
-					c.setBaseAttack(4);
-					c.setBaseDefense(4);
-				}
-				else
-				{
-					c.setBaseAttack(6);
-					c.setBaseDefense(6);
-					c.addNonStackingIntrinsicKeyword("Trample");
-				}
-			}
-		}
-	};
-	*/
-	/*
-	public static Command Hada_Spy_Patrol  = new Command() {
-		private static final long serialVersionUID = 2343715852240209999L;
-
-		public void execute()
-		{
-			CardList list = AllZoneUtil.getCardsInPlay("Hada Spy Patrol");
-
-			for (Card c:list)
-			{
-				int lcs = c.getCounters(Counters.LEVEL);
-				if ( lcs < 1)
-				{
-					c.setBaseAttack(1);
-					c.setBaseDefense(1);
-				}
-				else if ( lcs >=1 && lcs < 3 )  //levels 1-2
-				{
-					c.setBaseAttack(2);
-					c.setBaseDefense(2);
-					c.addNonStackingIntrinsicKeyword("Unblockable");
-				}
-				else
-				{
-					c.setBaseAttack(3);
-					c.setBaseDefense(3);
-					c.addNonStackingIntrinsicKeyword("Unblockable");
-					c.addNonStackingIntrinsicKeyword("Shroud");
-				}
-			}
-		}
-	};
-	*/
-	/*
-	public static Command Halimar_Wavewatch  = new Command() {
-		private static final long serialVersionUID = 117755207922239944L;
-
-		public void execute()
-		{
-			CardList list = AllZoneUtil.getCardsInPlay("Halimar Wavewatch");
-
-			for (Card c:list)
-			{
-				int lcs = c.getCounters(Counters.LEVEL);
-				if ( lcs < 1)
-				{
-					c.setBaseAttack(0);
-					c.setBaseDefense(3);
-				}
-				else if ( lcs >=1 && lcs < 5 )  //levels 1-4
-				{
-					c.setBaseAttack(0);
-					c.setBaseDefense(6);
-				}
-				else
-				{
-					c.setBaseAttack(6);
-					c.setBaseDefense(6);
-					c.addNonStackingIntrinsicKeyword("Islandwalk");
-				}
-			}
-		}
-	};
-	*/
-	
-	/*
-	 * Level up 2 B
-	 * LEVEL 1-2 4/3 Deathtouch
-	 * LEVEL 3+ 5/4 First strike, deathtouch
-	 *
-	public static Command Nirkana_Cutthroat  = new Command() {
-		private static final long serialVersionUID = 3804539422363462063L;
-
-		public void execute()
-		{
-			CardList list = AllZoneUtil.getCardsInPlay("Nirkana Cutthroat");
-
-			for (Card c:list)
-			{
-				int lcs = c.getCounters(Counters.LEVEL);
-				if ( lcs < 1)
-				{
-					c.setBaseAttack(3);
-					c.setBaseDefense(2);
-				}
-				else if ( lcs >=1 && lcs < 3 )  //levels 1-2
-				{
-					c.setBaseAttack(4);
-					c.setBaseDefense(3);
-					c.addNonStackingIntrinsicKeyword("Deathtouch");
-				}
-				else
-				{
-					c.setBaseAttack(5);
-					c.setBaseDefense(4);
-					c.addNonStackingIntrinsicKeyword("Deathtouch");
-					c.addNonStackingIntrinsicKeyword("First Strike");
-				}
-			}
-		}
-	};
-	*/
-	/*
-	 * Level up 4
-	 * LEVEL 1-2 3/3
-	 * LEVEL 3+ 5/5 CARDNAME can't be blocked except by black creatures.
-	 *
-	public static Command Zulaport_Enforcer  = new Command() {
-		private static final long serialVersionUID = -679141054963080569L;
-
-		public void execute(){
-			CardList list = AllZoneUtil.getCardsInPlay("Zulaport Enforcer");
-
-			for (Card c:list) {
-				int lcs = c.getCounters(Counters.LEVEL);
-				if ( lcs < 1) {
-					c.setBaseAttack(1);
-					c.setBaseDefense(1);
-				}
-				else if ( lcs >=1 && lcs < 3 ) {  //levels 1-2
-					c.setBaseAttack(3);
-					c.setBaseDefense(3);
-				}
-				else {
-					c.setBaseAttack(5);
-					c.setBaseDefense(5);
-					c.addNonStackingIntrinsicKeyword("CARDNAME can't be blocked except by black creatures.");
-				}
-			}
-		}
-	};
-	*/
-	/*
-	public static Command Student_of_Warfare 		  = new Command() {
-		private static final long serialVersionUID = 2627513737024865169L;
-
-		public void execute()
-		{
-			CardList list = AllZoneUtil.getCardsInPlay("Student of Warfare");
-			
-			for (Card c:list)
-			{
-				int lcs = c.getCounters(Counters.LEVEL);
-				if ( lcs < 2)
-				{
-					c.setBaseDefense(1);
-					c.setBaseAttack(1);
-					c.removeIntrinsicKeyword("First Strike");
-					c.removeIntrinsicKeyword("Double Strike");
-				}
-				else if ( lcs >=2 && lcs < 7 )
-				{
-					c.setBaseDefense(3);
-					c.setBaseAttack(3);
-					c.addNonStackingIntrinsicKeyword("First Strike");
-				}
-				else
-				{
-					c.setBaseDefense(4);
-					c.setBaseAttack(4);
-					c.removeIntrinsicKeyword("First Strike");
-					c.addNonStackingIntrinsicKeyword("Double Strike");
-				}
-			}
-		}
-	};
-	*/
-	/*
-	public static Command Transcendent_Master		  = new Command() {
-		private static final long serialVersionUID = -7568530551652446195L;
-
-		public void execute()
-		{
-			CardList list = AllZoneUtil.getCardsInPlay("Transcendent Master");
-			
-			for (Card c:list)
-			{
-				int lcs = c.getCounters(Counters.LEVEL);
-				if ( lcs < 6)
-				{
-					c.setBaseDefense(3);
-					c.setBaseAttack(3);
-					c.removeIntrinsicKeyword("Lifelink");
-					c.removeIntrinsicKeyword("Indestructible");
-				}
-				else if ( lcs >=6)
-				{
-					c.setBaseDefense(6);
-					c.setBaseAttack(6);
-					c.addNonStackingIntrinsicKeyword("Lifelink");
-				
-					if (lcs >=12) {
-						c.setBaseDefense(9);
-						c.setBaseAttack(9);
-						c.addNonStackingIntrinsicKeyword("Indestructible");
-					}
-				}
-			}
-		}
-	};
-	*/
-	/*
-	public static Command Kargan_Dragonlord		  = new Command() {
-		private static final long serialVersionUID = -1956268937191206962L;
-
-		public void execute()
-		{
-			CardList list = AllZoneUtil.getCardsInPlay("Kargan Dragonlord");
-			
-			for (Card c:list)
-			{
-				int lcs = c.getCounters(Counters.LEVEL);
-				
-				if ( lcs < 4)
-				{
-					c.setBaseAttack(2);
-					c.setBaseDefense(2);
-					c.removeIntrinsicKeyword("Trample");
-					c.removeIntrinsicKeyword("Flying");
-				}
-				else if ( lcs >=4 && lcs < 8 )
-				{
-					c.setBaseAttack(4);
-					c.setBaseDefense(4);
-					c.addNonStackingIntrinsicKeyword("Flying");
-					c.removeIntrinsicKeyword("Trample");
-				}
-				else
-				{
-					c.setBaseAttack(8);
-					c.setBaseDefense(8);
-					c.addNonStackingIntrinsicKeyword("Flying");
-					c.addNonStackingIntrinsicKeyword("Trample");
-				}
-			}
-		}
-	};
-	*/
-	/*
-	public static Command Dakkon_Blackblade                      = new Command() {
-
-		private static final long serialVersionUID = 6863244333398587274L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Dakkon Blackblade");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseAttack(countLands(c));
-				c.setBaseDefense(c.getBaseAttack());
-			}
-		}// execute()
-
-		private int countLands(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
-			CardList lands = new CardList(play.getCards());
-			lands = lands.getType("Land");
-			return lands.size();
-		}
-	};
-	*/
-	/*
-	public static Command Korlash_Heir_to_Blackblade = new Command() {
-		private static final long serialVersionUID = 1791221644995716398L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Korlash, Heir to Blackblade");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseAttack(countSwamps(c));
-				c.setBaseDefense(c.getBaseAttack());
-			}
-		}// execute()
-
-		private int countSwamps(Card c) {
-			CardList swamps = AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Swamp");
-			return swamps.size();
-		}
-	};
-	*/
-	/*
-	public static Command Dauntless_Dourbark          = new Command() {
-
-		private static final long serialVersionUID = -8843070116088984774L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Dauntless Dourbark");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-
-				PlayerZone pz = AllZone.getZone(c);
-				CardList cl = new CardList(pz.getCards());
-				cl = cl.getName("Dauntless Dourbark");
-				int dourbarksControlled = cl.size();
-
-				if(hasTreefolk(c) || dourbarksControlled > 1) {
-					//may be problematic, should be fine though
-					c.setIntrinsicKeyword(new ArrayList<String>());
-					c.addIntrinsicKeyword("Trample");
-				} else {
-					c.removeIntrinsicKeyword("Trample");
-				}
-
-				c.setBaseAttack(countTreeForests(c));
-				c.setBaseDefense(c.getBaseAttack());
-			}
-		}// execute()
-
-		private boolean hasTreefolk(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
-
-			CardList tree = new CardList();
-			tree.addAll(play.getCards());
-
-			tree = tree.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return (c.getKeyword().contains("Changeling") || c.getType().contains("Treefolk"))
-							&& !c.getName().equals("Dauntless Dourbark");
-				}
-			});
-			if(tree.size() > 0) return true;
-			else return false;
-		}
-
-		private int countTreeForests(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
-			CardList list = new CardList(play.getCards());
-			list = list.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.getType().contains("Treefolk")
-						|| c.getKeyword().contains("Changeling")
-						|| c.getType().contains("Forest");
-				}
-			});
-
-			return list.size();
-		}
-	};
-	*/
-	/*
-	public static Command Guul_Draz_Vampire           = new Command() {
-		private static final long serialVersionUID = -4252257530318024113L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Guul Draz Vampire");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				if(oppLess10Life(c)) {
-					if(!c.getIntrinsicKeyword().contains(
-							"Intimidate")) c.addIntrinsicKeyword("Intimidate");
-					c.setBaseAttack(3);
-					c.setBaseDefense(2);
-				} else {
-					c.removeIntrinsicKeyword("Haste");
-					c.setBaseAttack(1);
-					c.setBaseDefense(1);
-				}
-			}
-		}// execute()
-
-		//does opponent have 10 or less life?
-		private boolean oppLess10Life(Card c) {
-			Player opp = c.getController().getOpponent();
-			return opp.getLife() <= 10;
-		}
-	};
-	*/
-	/*
-	public static Command Ruthless_Cullblade          = new Command() {
-		private static final long serialVersionUID = 2627513737024865169L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Ruthless Cullblade");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				if(oppLess10Life(c)) {
-					c.setBaseAttack(4);
-					c.setBaseDefense(2);
-				} else {
-					c.setBaseAttack(2);
-					c.setBaseDefense(1);
-				}
-			}
-		}// execute()
-
-		//does opponent have 10 or less life?
-		private boolean oppLess10Life(Card c) {
-			Player opp = c.getController().getOpponent();
-			return opp.getLife() <= 10;
-		}
-	};
-	*/
-	/*
-	public static Command Bloodghast                  = new Command() {
-		private static final long serialVersionUID = -4252257530318024113L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Bloodghast");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				if(oppLess10Life(c) == true && !c.getIntrinsicKeyword().contains("Haste")) c.addIntrinsicKeyword("Haste");
-				else c.removeIntrinsicKeyword("Haste");
-			}
-		}// execute()
-
-		//does opponent have 10 or less life?
-		private boolean oppLess10Life(Card c) {
-			Player opp = c.getController().getOpponent();
-			return opp.getLife() <= 10;
-		}
-	};
-	*/
-	/*
-	public static Command Gaeas_Avenger                   = new Command() {
-		private static final long serialVersionUID = 1987511098173387864L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = AllZoneUtil.getCardsInPlay("Gaea's Avenger");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseAttack(countOppArtifacts(c)+1);
-				c.setBaseDefense(c.getBaseAttack());
-			}
-
-		}// execute()
-
-		private int countOppArtifacts(Card c) {
-			CardList artifacts = AllZoneUtil.getPlayerCardsInPlay(c.getController().getOpponent());
-			artifacts = artifacts.filter(AllZoneUtil.artifacts);
-			return artifacts.size();
-		}
-	};
-	*/
-	/*
-	public static Command People_of_the_Woods                   = new Command() {
-		private static final long serialVersionUID = 1987554325573387864L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("People of the Woods");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseAttack(1);
-				c.setBaseDefense(AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Forest").size());
-			}
-		}// execute()
-	};
-	*/
 	
 	public static Command Maraxus_of_Keld = new Command() {
 		private static final long serialVersionUID = 7128144927031872127L;
@@ -13901,40 +13206,6 @@ public class GameActionUtil {
 			}
 		}
 	};//Old Man of the Sea
-	
-	/*
-	public static Command Serpent_of_the_Endless_Sea = new Command() {
-		private static final long serialVersionUID = 8263339065128877297L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Serpent of the Endless Sea");
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				int pt = AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Island").size();
-				c.setBaseAttack(pt);
-				c.setBaseDefense(pt);
-			}
-		}// execute()
-	};*/
-	/*
-	public static Command Heedless_One = new Command() {
-		private static final long serialVersionUID = -220650457326100804L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Heedless One");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseAttack(countElves(c));
-				c.setBaseDefense(countElves(c));
-			}
-		}// execute()
-
-		private int countElves(Card c) {
-			return AllZoneUtil.getTypeInPlay("Elf").size();
-		}
-	}; 
-	*/
 	
 	public static Command Homarid = new Command() {
 		private static final long serialVersionUID = 7156319758035295773L;
@@ -14163,7 +13434,7 @@ public class GameActionUtil {
 			});
 			return artifacts.size();
 		}
-	};
+	};//Phylactery_Lich
 	
 	public static Command topCardReveal_Update      = new Command() {
 
@@ -14186,7 +13457,7 @@ public class GameActionUtil {
 			}
 
 		}//execute()
-	};
+	};//topCardReveal_Update
 
 	public static Command Sacrifice_NoIslands         = new Command() {
 
@@ -14221,7 +13492,7 @@ public class GameActionUtil {
 			return islands.size();
 		}
 
-	};
+	};//Sacrifice_NoIslands
 	
 	public static Command Sacrifice_NoForests = new Command() {
 		private static final long serialVersionUID = -5310856079162962126L;
@@ -14243,7 +13514,7 @@ public class GameActionUtil {
 			}
 
 		}//execute()
-	};
+	};//Sacrifice_NoForests
 	
 	public static Command Sacrifice_NoArtifacts = new Command() {
 		private static final long serialVersionUID = -2546650213674544590L;
@@ -14260,20 +13531,14 @@ public class GameActionUtil {
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
-				artifacts = countArtifacts(c);
+				artifacts = AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Artifact").size();
 				if(artifacts == 0) {
 					AllZone.GameAction.sacrifice(c);
 				}
 			}
 
 		}//execute()
-
-		private int countArtifacts(Card c) {
-			CardList artifacts = AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Artifact");
-			return artifacts.size();
-		}
-
-	};
+	};//Sacrifice_NoArtifacts
 	
 	private static Command Sacrifice_NoEnchantments = new Command() {
 		private static final long serialVersionUID = -8280843743243927861L;
@@ -14290,20 +13555,14 @@ public class GameActionUtil {
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
-				enchs = countEnchs(c);
+				enchs = AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Enchantment").size();
 				if(enchs == 0) {
 					AllZone.GameAction.sacrifice(c);
 				}
 			}
 
 		}//execute()
-
-		private int countEnchs(Card c) {
-			CardList enchs = AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Artifact");
-			return enchs.size();
-		}
-
-	};
+	};//Sacrifice_NoEnchantments
 	
 	public static Command Sacrifice_NoLands = new Command() {
 		private static final long serialVersionUID = 2768929064034728027L;
@@ -14325,7 +13584,7 @@ public class GameActionUtil {
 			}
 
 		}//execute()
-	};
+	};//Sacrifice_NoLands
 	
 	public static Command Sacrifice_NoCreatures = new Command() {
 		private static final long serialVersionUID = -177976088524215734L;
@@ -14347,7 +13606,7 @@ public class GameActionUtil {
 			}
 
 		}//execute()
-	};
+	};//Sacrifice_NoCreatures
 	
 	private static Command Sacrifice_NoOtherCreatures = new Command() {
 		private static final long serialVersionUID = 6941452572773927921L;
@@ -14368,346 +13627,7 @@ public class GameActionUtil {
 			}
 
 		}//execute()
-	};
-
-	/*
-	public static Command Master_of_Etherium          = new Command() {
-		private static final long serialVersionUID   = -5406532269375480827L;
-		
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay();
-			list = list.filter(new CardListFilter() {
-                public boolean addCard(Card c) {
-                    return c.getName().equals("Master of Etherium") || c.getName().equals("Broodstar");
-                }
-            });
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				CardList arts = AllZoneUtil.getPlayerCardsInPlay(c.getController());
-				arts = arts.filter(AllZoneUtil.artifacts);
-				c.setBaseAttack(arts.size());
-				c.setBaseDefense(c.getBaseAttack());
-			}
-
-		}// execute()
-	}; // Master of Etherium + Broodstar
-	*/
-
-	public static Command Loxodon_Punisher            = new Command() {
-
-		private static final long serialVersionUID = -7746134566580289667L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Loxodon Punisher");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseAttack(2 + countEquipment(c) * 2);
-				c.setBaseDefense(c.getBaseAttack());
-			}
-
-		}// execute()
-
-		private int countEquipment(Card c) {
-			CardList equipment = new CardList(
-					c.getEquippedBy().toArray());
-			return equipment.size();
-		}
-	};
-	
-	/*
-	public static Command Kithkin_Rabble              = new Command() {
-		private static final long serialVersionUID = 6686690505949642328L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = AllZoneUtil.getCardsInPlay("Kithkin Rabble");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				CardList white = AllZoneUtil.getPlayerCardsInPlay(c.getController());
-				white = white.filter(AllZoneUtil.white);
-				c.setBaseAttack(white.size());
-				c.setBaseDefense(c.getBaseAttack());
-			}
-
-		}// execute()
-	};
-	*/
-	/*
-	public static Command Crowd_of_Cinders            = new Command() {
-		private static final long serialVersionUID = 6686690505949642328L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = AllZoneUtil.getCardsInPlay("Crowd of Cinders");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				CardList black = AllZoneUtil.getPlayerCardsInPlay(c.getController());
-				black = black.filter(AllZoneUtil.black);
-				c.setBaseAttack(black.size());
-				c.setBaseDefense(c.getBaseAttack());
-			}
-
-		}// execute()
-	}; // Crowd of Cinders
-	*/
-	/*
-	public static Command Faerie_Swarm                = new Command() {
-		private static final long serialVersionUID = 6686690505949642328L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Faerie Swarm");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseAttack(countBluePermanents(c));
-				c.setBaseDefense(c.getBaseAttack());
-			}
-
-		}// execute()
-
-		private int countBluePermanents(Card c) {
-			CardList blue = AllZoneUtil.getPlayerCardsInPlay(c.getController());
-			blue = blue.filter(AllZoneUtil.blue);
-			return blue.size();
-		}
-	}; // Faerie Swarm
-	*/
-	/*
-	public static Command Drove_of_Elves              = new Command() {
-		private static final long serialVersionUID = 6686690505949642328L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Drove of Elves");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				CardList green = AllZoneUtil.getPlayerCardsInPlay(c.getController());
-				green = green.filter(AllZoneUtil.green);
-				c.setBaseAttack(green.size());
-				c.setBaseDefense(green.size());
-			}
-
-		}// execute()
-	}; // Drove of Elves
-	*/
-	/*
-	public static Command Multani_Maro_Sorcerer       = new Command() {
-		private static final long serialVersionUID = -8778902687347191964L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Multani, Maro-Sorcerer");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseAttack(countHands());
-				c.setBaseDefense(c.getBaseAttack());
-			}
-		}
-
-		private int countHands() {
-			PlayerZone compHand = AllZone.getZone(
-					Constant.Zone.Hand, AllZone.ComputerPlayer);
-			PlayerZone humHand = AllZone.getZone(
-					Constant.Zone.Hand, AllZone.HumanPlayer);
-			CardList list = new CardList();
-			list.addAll(compHand.getCards());
-			list.addAll(humHand.getCards());
-			return list.size();
-		}
-
-	}; //Multani, Maro-Sorcerer
-	*/
-	/*
-	public static Command Molimo_Maro_Sorcerer        = new Command() {
-		private static final long serialVersionUID = -8778902687347191964L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Molimo, Maro-Sorcerer");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseAttack(AllZoneUtil.getPlayerLandsInPlay(c.getController()).size());
-				c.setBaseDefense(c.getBaseAttack());
-
-			}
-		}
-
-	}; //Molimo, Maro-Sorcerer
-	*/
-	/*
-	public static Command Maro                        = new Command() {
-		private static final long serialVersionUID = -8778902687347191964L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Maro");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseAttack(AllZoneUtil.getPlayerHand(c.getController()).size());
-				c.setBaseDefense(c.getBaseAttack());
-			}
-		}
-	}; //Maro
-	*/
-	/*
-	public static Command Masumaro_First_to_Live                       = new Command() {
-		private static final long serialVersionUID = -8778922687347191964L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = AllZoneUtil.getCardsInPlay("Masumaro, First to Live");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				int k = 0;
-				if(c.getController().equals(
-						AllZone.HumanPlayer)) {
-					k = countHand_Human();
-				} else k = countHand_Computer();
-				c.setBaseAttack(2*k);
-				c.setBaseDefense(2*k);
-			}
-		}
-
-		private int countHand_Human() {
-			PlayerZone Play = AllZone.getZone(
-					Constant.Zone.Hand, AllZone.HumanPlayer);
-			CardList list = new CardList();
-			list.addAll(Play.getCards());
-			return list.size();
-		}
-
-		private int countHand_Computer() {
-			PlayerZone Play = AllZone.getZone(
-					Constant.Zone.Hand, AllZone.ComputerPlayer);
-			CardList list = new CardList();
-			list.addAll(Play.getCards());
-			return list.size();
-		}
-
-	}; //Masumaro, first to live
-	*/
-	/*
-	public static Command Adamaro_First_to_Desire                       = new Command() {
-		private static final long serialVersionUID = -8778912687347191965L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Adamaro, First to Desire");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				int k = 0;
-				if(c.getController().equals(
-						AllZone.HumanPlayer)) {
-					k = countHand_Computer();
-				} else k = countHand_Human();
-				c.setBaseAttack(k);
-				c.setBaseDefense(k);
-			}
-		}
-
-		private int countHand_Human() {
-			PlayerZone Play = AllZone.getZone(
-					Constant.Zone.Hand, AllZone.HumanPlayer);
-			CardList list = new CardList();
-			list.addAll(Play.getCards());
-			return list.size();
-		}
-
-		private int countHand_Computer() {
-			PlayerZone Play = AllZone.getZone(
-					Constant.Zone.Hand, AllZone.ComputerPlayer);
-			CardList list = new CardList();
-			list.addAll(Play.getCards());
-			return list.size();
-		}
-
-	}; //Adamaro, first to desire
-	*/
-
-	/*
-	public static Command Overbeing_of_Myth           = new Command() {
-		private static final long serialVersionUID = -2250795040532050455L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Overbeing of Myth");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				int k = 0;
-				if(c.getController().equals(
-						AllZone.HumanPlayer)) {
-					k = countHand_Human();
-				} else k = countHand_Computer();
-				c.setBaseAttack(k);
-				c.setBaseDefense(k);
-			}
-		}
-
-		private int countHand_Human() {
-			PlayerZone Play = AllZone.getZone(
-					Constant.Zone.Hand, AllZone.HumanPlayer);
-			CardList list = new CardList();
-			list.addAll(Play.getCards());
-			return list.size();
-		}
-
-		private int countHand_Computer() {
-			PlayerZone Play = AllZone.getZone(
-					Constant.Zone.Hand, AllZone.ComputerPlayer);
-			CardList list = new CardList();
-			list.addAll(Play.getCards());
-			return list.size();
-		}
-
-	}; //overbeing of myth
-	*/
-	/*
-	public static Command Guul_Draz_Specter           = new Command() {
-		private static final long serialVersionUID = -8778902687347191964L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Guul Draz Specter");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				int k = 0;
-				if(c.getController().equals(
-						AllZone.ComputerPlayer)) {
-					k = countHand_Human();
-				} else k = countHand_Computer();
-				if(k == 0) {
-					c.setBaseAttack(5);
-					c.setBaseDefense(5);
-				} else {
-					c.setBaseAttack(2);
-					c.setBaseDefense(2);
-				}
-			}
-		}
-
-		private int countHand_Human() {
-			PlayerZone Play = AllZone.getZone(
-					Constant.Zone.Hand, AllZone.HumanPlayer);
-			CardList list = new CardList();
-			list.addAll(Play.getCards());
-			return list.size();
-		}
-
-		private int countHand_Computer() {
-			PlayerZone Play = AllZone.getZone(
-					Constant.Zone.Hand, AllZone.ComputerPlayer);
-			CardList list = new CardList();
-			list.addAll(Play.getCards());
-			return list.size();
-		}
-
-	}; //Guul Draz Specter
-	*/
+	}; //Sacrifice_NoOtherCreatures
 
 	public static Command Sound_the_Call_Wolf      = new Command() {
 		private static final long serialVersionUID = 4614281706799537283L;
@@ -14735,105 +13655,11 @@ public class GameActionUtil {
 		}
 
 	}; //Sound_the_Call_Wolf
-	/*
-	public static Command Mortivore                   = new Command() {
-		private static final long serialVersionUID = -8778902687347191964L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Mortivore");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseAttack(countCreatures());
-				c.setBaseDefense(c.getBaseAttack());
-			}
-		}
-
-		private int countCreatures() {
-			CardList list = AllZoneUtil.getCardsInGraveyard();
-			list = list.filter(AllZoneUtil.creatures);
-			return list.size();
-		}
-
-	}; //Mortivore
-	*/
-	/*
-	public static Command Cognivore                   = new Command() {
-		private static final long serialVersionUID = -8778902687347191964L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Cognivore");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseAttack(countCreatures());
-				c.setBaseDefense(c.getBaseAttack());
-			}
-		}
-
-		private int countCreatures() {
-			CardList list = AllZoneUtil.getCardsInGraveyard();
-			list = list.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.isInstant();
-				}
-			});
-			return list.size();
-		}
-
-	}; //Cognivore
-	*/
-	/*
-	public static Command Cantivore                   = new Command() {
-		private static final long serialVersionUID = -8778902687347191964L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = AllZoneUtil.getCardsInPlay("Cantivore");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseAttack(countCreatures());
-				c.setBaseDefense(c.getBaseAttack());
-			}
-		}
-
-		private int countCreatures() {
-			CardList list = AllZoneUtil.getCardsInGraveyard();
-			list = list.filter(AllZoneUtil.enchantments);
-			return list.size();
-		}
-
-	}; //Cantivore
-	*/
-
-	public static Command Lhurgoyf                    = new Command() {
-		private static final long serialVersionUID = -8778902687347191964L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = AllZoneUtil.getCardsInPlay("Lhurgoyf");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseAttack(countCreatures());
-				c.setBaseDefense(c.getBaseAttack() + 1);
-			}
-		}
-
-		private int countCreatures() {
-			CardList list = AllZoneUtil.getCardsInGraveyard();
-			list = list.filter(AllZoneUtil.creatures);
-			return list.size();
-		}
-
-	}; //Lhurgoyf
 
 	public static Command Svogthos_the_Restless_Tomb  = new Command() {
 		private static final long serialVersionUID = -8778902687347191964L;
 
 		public void execute() {
-			// get all creatures
 			CardList list = AllZoneUtil.getCardsInPlay("Svogthos, the Restless Tomb");
 
 			for(int i = 0; i < list.size(); i++) {
@@ -14878,57 +13704,6 @@ public class GameActionUtil {
 
 	}; //Svogthos, the Restless Tomb
 
-	/*
-	public static Command Nightmare                   = new Command() {
-		private static final long serialVersionUID = 1987511205573387864L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Nightmare");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseAttack(countSwamps(c));
-				c.setBaseDefense(c.getBaseAttack());
-			}
-
-		}// execute()
-
-		private int countSwamps(Card c) {
-			CardList swamps = AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Swamp");
-			return swamps.size();
-		}
-	};*/
-	/*
-	public static Command Aven_Trailblazer            = new Command() {
-		private static final long serialVersionUID = 2731050781896531776L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Aven Trailblazer");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseDefense(CardFactoryUtil.countBasicLandTypes(c.getController()));
-			}
-
-		}// execute()
-	};
-	*/
-	/*
-	public static Command Matca_Rioters            = new Command() {
-		private static final long serialVersionUID = 1090204321481353143L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Matca Rioters");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseDefense(CardFactoryUtil.countBasicLandTypes(c.getController()));
-				c.setBaseAttack(c.getBaseDefense());
-			}
-
-		}// execute()
-	};
-	*/
 	public static Command Nyxathid                    = new Command() {
 
 		private static final long serialVersionUID = -8778900687347191964L;
@@ -14957,81 +13732,6 @@ public class GameActionUtil {
 
 	}; //Nyxathid
 
-	/*
-	public static Command Lord_of_Extinction          = new Command() {
-		private static final long serialVersionUID = -8778900687347191964L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = AllZoneUtil.getCardsInPlay("Lord of Extinction");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				CardList graves = AllZoneUtil.getCardsInGraveyard();
-				c.setBaseAttack(graves.size());
-				c.setBaseDefense(c.getBaseAttack());
-			}
-		}
-	}; //Lord of Extinction
-	*/
-	/*
-	public static Command Terravore                   = new Command() {
-		private static final long serialVersionUID = -7848248012651247059L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = AllZoneUtil.getCardsInPlay("Terravore");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseAttack(countLands());
-				c.setBaseDefense(c.getBaseAttack());
-			}
-		}
-
-		private int countLands() {
-			CardList list = AllZoneUtil.getCardsInGraveyard();
-
-			list = list.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.isLand();
-				}
-			});
-
-			return list.size();
-		}
-
-	}; //terravore
-	*/
-	/*
-	public static Command Magnivore                   = new Command() {
-
-		private static final long serialVersionUID = 6569701555927133445L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = AllZoneUtil.getCardsInPlay("Magnivore");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseAttack(countSorcs());
-				c.setBaseDefense(c.getBaseAttack());
-			}
-		}
-
-		private int countSorcs() {
-			CardList list = AllZoneUtil.getCardsInGraveyard();
-			list = list.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.isSorcery();
-				}
-			});
-
-			return list.size();
-		}
-
-	}; //magnivore
-	*/
 	public static Command Tarmogoyf                   = new Command() {
 		private static final long serialVersionUID = 5895665460018262987L;
 
@@ -15297,7 +13997,7 @@ public class GameActionUtil {
 					List_Copy.get(i).removeExtrinsicKeyword("Haste");
 					old.remove(c);
 				}
-		}
+			}
 		}
 
 		void addHaste(CardList list) {
@@ -15654,48 +14354,7 @@ public class GameActionUtil {
 		}
 	}; // Brawn
 **/
-	
-	/*
-	public static Command Eldrazi_Monument            = new Command() {
 
-		private static final long serialVersionUID   = -3591110487441151195L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword("Flying");
-				c.removeExtrinsicKeyword("Indestructible");
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Eldrazi Monument");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Creature");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addExtrinsicKeyword("Flying");
-					c.addExtrinsicKeyword("Indestructible");
-					c.addSemiPermanentAttackBoost(1);
-					c.addSemiPermanentDefenseBoost(1);
-					gloriousAnthemList.add(c);
-
-
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Eldrazi_Monument
-	*/
 
 	public static Command Muraganda_Petroglyphs       = new Command() {
 		private static final long serialVersionUID   = -6715848091817213517L;
@@ -15728,54 +14387,10 @@ public class GameActionUtil {
 						gloriousAnthemList.add(c);
 					}
 
-
 				}// for inner
 			}// for outer
 		}// execute()
 	}; // Muraganda_Petroglyphs
-	/*
-	public static Command Nut_Collector = new Command()
-	{
-		private static final long serialVersionUID = 4873843480453112825L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-2);
-				c.addSemiPermanentDefenseBoost(-2);
-			}
-			
-			// add +2/+2 to vanilla cards
-			list.clear();
-			PlayerZone[] zone = getZone("Nut Collector");
-			
-			
-			// for each zone found add +2/+2 to each vanilla card
-			for(int outer = 0; outer < zone.length; outer++) {
-				PlayerZone z = zone[outer];
-				Player player = z.getPlayer();
-				
-				if (player.hasThreshold())
-				{
-					CardList creature = AllZoneUtil.getTypeInPlay("Squirrel");
-					
-					for(int i = 0; i < creature.size(); i++) {
-						c = creature.get(i);
-						c.addSemiPermanentAttackBoost(2);
-						c.addSemiPermanentDefenseBoost(2);
-	
-						gloriousAnthemList.add(c);
-					}// for inner
-				}//if Threshold
-			}// for outer
-			
-		}//execute
-	}; //nut_collector
-	*/
 	
 	public static Command Meddling_Mage               = new Command() {
 		private static final long serialVersionUID   = 738264163993370439L;
@@ -15891,14 +14506,8 @@ public class GameActionUtil {
 			}
 
 			list.clear();
-
-			PlayerZone cplay = AllZone.Computer_Battlefield;
-			PlayerZone hplay = AllZone.Human_Battlefield;
-
-			CardList cl = new CardList();
-			cl.addAll(cplay.getCards());
-			cl.addAll(hplay.getCards());
-			cl = cl.getName("Iona, Shield of Emeria");
+			
+			CardList cl = AllZoneUtil.getCardsInPlay("Iona, Shield of Emeria");
 
 			for(int i = 0; i < cl.size(); i++) {
 				final Card crd = cl.get(i);
@@ -15906,10 +14515,8 @@ public class GameActionUtil {
 				Player opp = controller.getOpponent();
 
 				CardList spells = new CardList();
-				PlayerZone grave = AllZone.getZone(
-						Constant.Zone.Graveyard, opp);
-				PlayerZone hand = AllZone.getZone(
-						Constant.Zone.Hand, opp);
+				PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, opp);
+				PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opp);
 
 				spells.addAll(grave.getCards());
 				spells.addAll(hand.getCards());
@@ -15931,54 +14538,7 @@ public class GameActionUtil {
 				}// for inner
 			}// for outer
 		}// execute()
-	}; //
-
-	/*
-	public static Command Keldon_Warlord                   = new Command() {
-		private static final long serialVersionUID = 3804539422363462063L;
-		
-		 *
-		 * Keldon Warlord's power and toughness are each equal to the number
-		 * of non-Wall creatures you control.
-		 *
-		public void execute() {
-			// get all creatures
-			CardList list = AllZoneUtil.getCardsInPlay("Keldon Warlord");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseAttack(countCreatures(c));
-				c.setBaseDefense(c.getNetAttack());
-			}
-
-		}// execute()
-
-		private int countCreatures(Card c) {
-			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
-			CardList creatures = new CardList(play.getCards());
-			creatures = creatures.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.isCreature() && !c.isWall();
-				}
-			});
-			return creatures.size();
-		}
-	};*/
-	/*
-	public static Command Soulsurge_Elemental                   = new Command() {
-		private static final long serialVersionUID = 8607200838396348507L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Soulsurge Elemental");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseAttack(AllZoneUtil.getCreaturesInPlay(c.getController()).size());
-				c.setBaseDefense(1);
-			}
-		}// execute()
-	};
-	*/
+	}; //end Iona, Shield of Emeria
 	
 	// returns all PlayerZones that has at least 1 Glorious Anthem
 	// if Computer has 2 Glorious Anthems, AllZone.Computer_Play will be
@@ -16001,111 +14561,42 @@ public class GameActionUtil {
 	static {
 		//Please add cards in alphabetical order so they are easier to find
 		
-		//commands.put("Adamaro_First_to_Desire", Adamaro_First_to_Desire);
 		commands.put("Ajani_Avatar_Token", Ajani_Avatar_Token);
-		//commands.put("Angry_Mob", Angry_Mob);
-		//commands.put("Aven_Trailblazer", Aven_Trailblazer);
-		
-		//commands.put("Beastbreaker_of_Bala_Ged", Beastbreaker_of_Bala_Ged);
-		//commands.put("Bloodghast", Bloodghast);
-		
-		//commands.put("Cantivore", Cantivore);
-		//commands.put("Caravan_Escort", Caravan_Escort);
-		commands.put("Coat_of_Arms", Coat_of_Arms);	
-		//commands.put("Cognivore", Cognivore);
+		commands.put("Coat_of_Arms", Coat_of_Arms);
 		commands.put("Conspiracy", Conspiracy);
-		//commands.put("Crowd_of_Cinders", Crowd_of_Cinders);
-		
-		//commands.put("Dakkon_Blackblade", Dakkon_Blackblade);
-		//commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
-		//commands.put("Drove_of_Elves", Drove_of_Elves);
-		
-		//commands.put("Eldrazi_Monument", Eldrazi_Monument);
 		commands.put("Elspeth_Emblem", Elspeth_Emblem);
 		
-		//commands.put("Faerie_Swarm", Faerie_Swarm);
-		
 		commands.put("Gaddock_Teeg", Gaddock_Teeg);
-		//commands.put("Gaeas_Avenger", Gaeas_Avenger);
 		commands.put("Gemhide_Sliver", Gemhide_Sliver);
-		//commands.put("Goblin_Assault", Goblin_Assault);
-		//commands.put("Guul_Draz_Specter", Guul_Draz_Specter);
-		//commands.put("Guul_Draz_Vampire", Guul_Draz_Vampire);
-		
-		//commands.put("Hada_Spy_Patrol", Hada_Spy_Patrol);
-		//commands.put("Halimar_Wavewatch", Halimar_Wavewatch);
-		//commands.put("Heedless_One", Heedless_One);
 		commands.put("Homarid", Homarid);
-		
-		//commands.put("Ikiral_Outrider", Ikiral_Outrider);
 		commands.put("Iona_Shield_of_Emeria", Iona_Shield_of_Emeria);
 		
 		commands.put("Joiner_Adept", Joiner_Adept);
-		
-		//commands.put("Kargan_Dragonlord", Kargan_Dragonlord);
-		//commands.put("Keldon_Warlord", Keldon_Warlord);
-		//commands.put("Kithkin_Rabble", Kithkin_Rabble);
-		//commands.put("Knight_of_Cliffhaven", Knight_of_Cliffhaven);
-		//commands.put("Korlash_Heir_to_Blackblade", Korlash_Heir_to_Blackblade);
 		commands.put("Koth_Emblem", Koth_Emblem);
-		
 		commands.put("Leyline_of_Singularity", Leyline_of_Singularity);
-		commands.put("Lhurgoyf", Lhurgoyf);
-		//commands.put("Lighthouse_Chronologist", Lighthouse_Chronologist);
 		commands.put("Liu_Bei", Liu_Bei);
-		//commands.put("Lord_of_Extinction", Lord_of_Extinction);
-		commands.put("Loxodon_Punisher", Loxodon_Punisher);
 		
-		//commands.put("Magnivore", Magnivore);
 		commands.put("Magus_of_the_Tabernacle", Magus_of_the_Tabernacle);
 		commands.put("Maraxus_of_Keld", Maraxus_of_Keld);
-		//commands.put("Maro", Maro);
-		//commands.put("Master_of_Etherium", Master_of_Etherium);
-		//commands.put("Masumaro_First_to_Live", Masumaro_First_to_Live);
-		//commands.put("Matca_Rioters", Matca_Rioters);
 		commands.put("Meddling_Mage", Meddling_Mage);
-		//commands.put("Molimo_Maro_Sorcerer", Molimo_Maro_Sorcerer);
-		//commands.put("Mortivore", Mortivore);
 		commands.put("Mul_Daya_Channelers", Mul_Daya_Channelers);
-		//commands.put("Multani_Maro_Sorcerer", Multani_Maro_Sorcerer);
 		commands.put("Muraganda_Petroglyphs", Muraganda_Petroglyphs);
 		
-		//commands.put("Nightmare", Nightmare);
-		//commands.put("Nirkana_Cutthroat", Nirkana_Cutthroat);
-		//commands.put("Nut_Collector", Nut_Collector);
 		commands.put("Nyxathid", Nyxathid);
-		
 		commands.put("Old_Man_of_the_Sea", Old_Man_of_the_Sea);
 		commands.put("Omnath", Omnath);
-		//commands.put("Overbeing_of_Myth", Overbeing_of_Myth);
-		
-		//commands.put("People_of_the_Woods", People_of_the_Woods);
 		commands.put("Phylactery_Lich", Phylactery_Lich);
 		commands.put("Plague_Rats", Plague_Rats);
 		commands.put("Primalcrux", Primalcrux);
 		
-		//commands.put("Ruthless_Cullblade", Ruthless_Cullblade);
-		
-		//commands.put("Serpent_of_the_Endless_Sea", Serpent_of_the_Endless_Sea);
-		//commands.put("Serra_Avatar", Serra_Avatar);
-		//commands.put("Skywatcher_Adept", Skywatcher_Adept);
-		//commands.put("Soulsurge_Elemental", Soulsurge_Elemental);
 		commands.put("Sound_the_Call_Wolf", Sound_the_Call_Wolf);
-		//commands.put("Student_of_Warfare", Student_of_Warfare);
 		commands.put("Svogthos_the_Restless_Tomb", Svogthos_the_Restless_Tomb);
-		
 		commands.put("The_Tabernacle_at_Pendrell_Vale", The_Tabernacle_at_Pendrell_Vale);
 		commands.put("Tarmogoyf", Tarmogoyf);
-		//commands.put("Terravore", Terravore);
-		//commands.put("Transcendent_Master", Transcendent_Master);
 		
 		commands.put("Umbra_Stalker", Umbra_Stalker);
-		
 		commands.put("Vexing_Beetle", Vexing_Beetle);
-		
 		commands.put("Windwright_Mage", Windwright_Mage);
-		
-		//commands.put("Zulaport_Enforcer", Zulaport_Enforcer);
 		
 		///The commands above are in alphabetical order by cardname.
 	}

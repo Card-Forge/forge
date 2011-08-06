@@ -26,14 +26,12 @@ public class StaticEffects
 		cardToEffectsList.put("Conspiracy", new String[] {"Conspiracy"});
 		cardToEffectsList.put("Gaddock Teeg", new String[] {"Gaddock_Teeg"});
 		cardToEffectsList.put("Gemhide Sliver", new String[] {"Gemhide_Sliver"});
+		
 		cardToEffectsList.put("Homarid", new String[] {"Homarid"});
 		cardToEffectsList.put("Iona, Shield of Emeria", new String[] {"Iona_Shield_of_Emeria"});
-		
 		cardToEffectsList.put("Joiner Adept", new String[] {"Joiner_Adept"});
 		cardToEffectsList.put("Leyline of Singularity", new String[] {"Leyline_of_Singularity"});
-		cardToEffectsList.put("Lhurgoyf", new String[] {"Lhurgoyf"});
 		cardToEffectsList.put("Liu Bei, Lord of Shu", new String[] {"Liu_Bei"});
-		cardToEffectsList.put("Loxodon Punisher", new String[] {"Loxodon_Punisher"});
 		
 		cardToEffectsList.put("Magus of the Tabernacle", new String[] {"Magus_of_the_Tabernacle"});
 		cardToEffectsList.put("Maraxus of Keld", new String[] {"Maraxus_of_Keld"});
