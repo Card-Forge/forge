@@ -3891,3 +3891,14 @@ fists_of_ironwood.jpg		http://www.wizards.com/global/images/magic/general/fists_
 lys_alana_huntmaster.jpg		http://www.wizards.com/global/images/magic/general/lys_alana_huntmaster.jpg
 infested_roothold.jpg		http://www.wizards.com/global/images/magic/general/infested_roothold.jpg
 quicksilver_amulet.jpg		http://www.wizards.com/global/images/magic/general/quicksilver_amulet.jpg
+aerie_mystics.jpg		http://www.wizards.com/global/images/magic/general/aerie_mystics.jpg
+frostwind_invoker.jpg		http://www.wizards.com/global/images/magic/general/frostwind_invoker.jpg
+gerrards_battle_cry.jpg		http://www.wizards.com/global/images/magic/general/gerrards_battle_cry.jpg
+goblin_soothsayer.jpg		http://www.wizards.com/global/images/magic/general/goblin_soothsayer.jpg
+lavafume_invoker.jpg		http://www.wizards.com/global/images/magic/general/lavafume_invoker.jpg
+goblin_lookout.jpg		http://www.wizards.com/global/images/magic/general/goblin_lookout.jpg
+ghost_tactician.jpg		http://www.wizards.com/global/images/magic/general/ghost_tactician.jpg
+leonin_sun_standard.jpg		http://www.wizards.com/global/images/magic/general/leonin_sun_standard.jpg
+diamond_faerie.jpg		http://www.wizards.com/global/images/magic/general/diamond_faerie.jpg
+skyshaper.jpg		http://www.wizards.com/global/images/magic/general/skyshaper.jpg
+stampede_driver.jpg		http://www.wizards.com/global/images/magic/general/stampede_driver.jpg

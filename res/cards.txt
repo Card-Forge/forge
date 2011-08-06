@@ -1,3 +1,80 @@
+Aerie Mystics
+4 W
+Creature Bird Wizard
+no text
+3/3
+Flying
+abAllPump 1 G U:YouCtrl:Shroud:Creatures you control gain shroud until end of turn.:Aerie Mystics - creatures gain shroud until EOT
+
+Diamond Faerie
+2 G W U
+Snow Creature Faerie
+no text
+3/3
+Flying
+abAllPump 1 S:YouCtrl/Snow:+1/+1:Snow creatures you control get +1/+1 until end of turn.:Diamond Faerie - creatures get +1/+1 until EOT.
+
+Frostwind Invoker
+4 U
+Creature Merfolk Wizard
+no text
+3/3
+Flying
+abAllPump 8:YouCtrl:Flying:Creatures you control gain flying until end of turn.:Frostwind Invoker - creatures gain flying until EOT
+
+Gerrard's Battle Cry
+W
+Enchantment
+no text
+abAllPump 2 W:YouCtrl:+1/+1:Creatures you control get +1/+1 until end of turn.:Gerrard's Battle Cry - creatures get +1/+1 until EOT
+
+Ghost Tactician
+4 W
+Creature Spirit Spellshaper
+no text
+2/5
+abAllPump W T:YouCtrl:+1/+0:Drawback$YouDiscard/1:Creatures you control get +1/+0 until end of turn.:Ghost Tactician - creatures get +1/+0 until EOT
+
+Goblin Lookout
+1 R
+Creature Goblin
+no text
+1/2
+abAllPump T Sac-Goblin:All/Goblin:+2/+0:Goblin creatures get +2/+0 until end of turn.:Goblin Lookout - Goblin creatures get +2/+0 until EOT
+
+Goblin Soothsayer
+R
+Creature Goblin Shaman
+no text
+1/1
+abAllPump R T Sac-Goblin:All/Red:+1/+1:Red creatures get +1/+1 until end of turn.:Goblin Soothsayer - Red creatures get +1/+1 until EOT
+
+Lavafume Invoker
+2 R
+Creature Goblin Shaman
+no text
+2/2
+abAllPump 8:YouCtrl:+3/+0:Creatures you control get +3/+0 until end of turn.:Lavafume Invoker - creatures get +3/+0 until EOT
+
+Leonin Sun Standard
+2
+Artifact
+no text
+abAllPump 1 W:YouCtrl:+1/+1:Creatures you control get +1/+1 until end of turn.:Leonin Sun Standard - creatures get +1/+1 until EOT
+
+Skyshaper
+2
+Artifact
+no text
+abAllPump Sac-CARDNAME:YouCtrl:Flying:Creatures you control gain flying until end of turn.:Skyshaper - Creatures gain flying until EOT
+
+Stampede Driver
+G
+Creature Human Spellshaper
+no text
+1/1
+abAllPump 1 G T:YouCtrl:+1/+1/Trample:Drawback$Discard/1:Creatures you control get +1/+1 and gain trample until end of turn.:Stampede Driver - creatures get +1/+1 and gain trample until EOT
+
 Nantuko Elder
 2 G
 Creature Insect Druid
