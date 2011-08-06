@@ -2529,23 +2529,8 @@ public class Card extends MyObservable {
     public int getDamage() {
         return damage;
     }
-    /*
-    public void addAssignedDamage(int n, Card source) {
-        Log.debug(this + " - was assigned " + n + " damage, by " + source);
-        if(!assignedDamageHashMap.containsKey(source)) assignedDamageHashMap.put(source, n);
-        else {
-            assignedDamageHashMap.put(source, assignedDamageHashMap.get(source) + n);
-        }
-    }
-    */
     
-    public void addAssignedDamage(int damage, Card sourceCard) {
-    	System.out.println("addAssignedDamage");
-    	System.out.println("Card: "+this.getName());
-    	System.out.println("Damage: "+damage);
-    	System.out.println("Source: "+sourceCard.getName());
-    	System.out.println("canDamage: "+CardFactoryUtil.canDamage(sourceCard, this));
-    	
+    public void addAssignedDamage(int damage, Card sourceCard) {    	
         if(damage < 0) damage = 0;
         
         int assignedDamage = damage;
@@ -2638,8 +2623,6 @@ public class Card extends MyObservable {
     		reduce = reduce || getKeyword().contains("Prevent all combat damage that would be dealt to CARDNAME.");
     		reduce = reduce || source.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.");
     		reduce = reduce || source.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME.");
-    		reduce = reduce || (source.getKeyword().contains("Wither") && this.isCreature());
-    		reduce = reduce || (source.getKeyword().contains("Infect") && this.isCreature());
     	}
     	reduce = reduce || getKeyword().contains("Prevent all damage that would be dealt to CARDNAME.");
     	reduce = reduce || getKeyword().contains("Prevent all damage that would be dealt to or dealt by CARDNAME.");
@@ -2662,6 +2645,11 @@ public class Card extends MyObservable {
         
         if(this.isPlaneswalker()) {
         	this.subtractCounter(Counters.LOYALTY, damageToAdd);
+        }
+        
+        if((source.getKeyword().contains("Wither") || source.getKeyword().contains("Infect")) && this.isCreature()) {
+        	this.addCounterFromNonEffect(Counters.M1M1, damageToAdd);
+        	damageToAdd = 0;
         }
         
         if(source.getName().equals("Spiritmonger")) {
