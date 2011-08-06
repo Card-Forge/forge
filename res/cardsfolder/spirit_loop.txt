@@ -1,0 +1,11 @@
+Name:Spirit Loop
+ManaCost:1 W
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+K:enPump:+0/+0
+K:Whenever enchanted creature deals damage, you gain that much life.
+K:When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_loop.jpg
+End
