@@ -36,7 +36,6 @@ public class GameActionUtil {
 		upkeep_Drop_of_Honey();
 		upkeep_Planar_Collapse();
 		upkeep_Demonic_Hordes();
-		upkeep_Phyrexian_Arena();
 		upkeep_Fallen_Empires_Storage_Lands();
 		upkeep_Carnophage();
 		upkeep_Sangrophage();
@@ -54,7 +53,6 @@ public class GameActionUtil {
 		upkeep_Curse_of_Chains();
 		upkeep_Greener_Pastures();
 		upkeep_Squee();
-		//upkeep_Sporesower_Thallid();
 		upkeep_Dragonmaster_Outcast();
 		upkeep_Scute_Mob();
 		upkeep_Lichenthrope();
@@ -4897,37 +4895,6 @@ public class GameActionUtil {
 		} // if creatures > 0
 	}//Scute Mob
 
-	/*
-	private static void upkeep_Sporesower_Thallid() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Sporesower Thallid");
-
-		if(list.size() > 0) {
-			for(int i = 0; i < list.size(); i++) {
-
-				Ability ability = new Ability(list.get(i), "0") {
-					@Override
-					public void resolve() {
-						PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-						CardList fungi = new CardList(play.getCards());
-						fungi = fungi.getType("Fungus");
-
-						for(int j = 0; j < fungi.size(); j++) {
-							Card c = fungi.get(j);
-							c.addCounter(Counters.SPORE, 1);
-						}
-					}
-				};// Ability
-				ability.setStackDescription("Sporesower - put a spore counter on each fungus you control.");
-				AllZone.Stack.add(ability);
-			} // for
-		} // if creatures > 0
-	}*/
-
 	private static void upkeep_Lichenthrope() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
@@ -4959,7 +4926,7 @@ public class GameActionUtil {
 				AllZone.Stack.add(ability);
 			} // for
 		} // if creatures > 0
-	}//Lichenthrope
+	}//upkeep_Lichenthrope
 
 
 	private static void upkeep_Heartmender() {
@@ -4998,7 +4965,7 @@ public class GameActionUtil {
 				AllZone.Stack.add(ability);
 			} // for
 		} // if creatures > 0
-	}//heartmender
+	}//upkeep_Heartmender
 
 	private static void upkeep_Nath() {
 		final Player player = AllZone.Phase.getPlayerTurn();
@@ -7609,24 +7576,6 @@ public class GameActionUtil {
 			else c.tap();
 		}
 	}// upkeep_Carnophage
-
-	private static void upkeep_Phyrexian_Arena() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Phyrexian Arena");
-
-		for(int i = 0; i < list.size(); i++) {
-			final Card F_card = list.get(i);
-			player.drawCard();
-			player.loseLife(1, F_card);
-
-			AllZone.GameAction.checkStateEffects();
-		}
-	}// upkeep_Phyrexian_Arena
 	
 	private static void upkeep_Fallen_Empires_Storage_Lands() {
 		final Player player = AllZone.Phase.getPlayerTurn();
@@ -7640,7 +7589,7 @@ public class GameActionUtil {
 		for(Card land:all) {
 			if(land.isTapped()) land.addCounter(Counters.STORAGE, 1);
 		}
-	}// upkeep_Phyrexian_Arena
+	} //upkeep_Fallen_Empires_Storage_Lands
 	
 	
 	private static void upkeep_Seizan_Perverter_of_Truth() {
