@@ -15588,6 +15588,42 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Hammer of Bogardan")) {
+            final Ability ability2 = new Ability(card, "2 R R R") {
+                
+    			private static final long serialVersionUID = -5633123448009L;
+
+    			@Override
+                public void resolve() {
+           //         PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+           //         grave.remove(card);          
+                   card.addReplaceMoveToGraveyardCommand(new Command() {
+                       private static final long serialVersionUID = -25594893330418L;
+                       
+                       public void execute() {
+                           PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                           AllZone.GameAction.moveTo(hand, card);
+                       }
+                   });
+    			}
+                
+                
+                @Override
+                public boolean canPlay() {
+                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    
+                    return AllZone.GameAction.isCardInZone(card, grave) && AllZone.GameAction.getLastPlayerToDraw() == card.getController();                   
+                }
+                
+            };
+            card.addSpellAbility(ability2);
+            ability2.setFlashBackAbility(true);
+            card.setUnearth(true);
+            ability2.setDescription("2 R R R: Return Hammer of Bogardan from your graveyard to your hand. Activate this ability only during your upkeep.");
+            ability2.setStackDescription(card.getName() + " returns from the graveyard to hand");
+        }//*************** END ************ END **************************
+        
         //*************** START ************ START **************************
         else if(cardName.equals("Gemstone Array")) {
             final Ability store = new Ability(card, "2") {

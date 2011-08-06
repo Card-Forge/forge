@@ -1,3 +1,9 @@
+Hammer of Bogardan
+1 R R
+Sorcery
+no text 
+spDamageTgtCP:3
+
 Doomsday
 B B B
 Sorcery
