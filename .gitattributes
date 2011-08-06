@@ -2153,6 +2153,7 @@ res/cardsfolder/fertilid.txt -text svneol=native#text/plain
 res/cardsfolder/fervent_charge.txt -text svneol=native#text/plain
 res/cardsfolder/fervent_denial.txt -text svneol=native#text/plain
 res/cardsfolder/fervor.txt -text svneol=native#text/plain
+res/cardsfolder/festercreep.txt -text svneol=native#text/plain
 res/cardsfolder/festering_evil.txt -text svneol=native#text/plain
 res/cardsfolder/festering_goblin.txt svneol=native#text/plain
 res/cardsfolder/festering_march.txt svneol=native#text/plain
