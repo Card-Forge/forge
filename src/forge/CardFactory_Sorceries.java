@@ -7830,6 +7830,52 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Death Cloud")) {
+        	/*
+        	 * Each player loses X life, then discards X cards,
+        	 * then sacrifices X creatures, then sacrifices X lands.
+        	 */
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -544591650750401074L;
+
+				@Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+                
+                @Override
+                public void resolve() {
+                	Player player = card.getController();
+                	Player opp = player.getOpponent();
+                	
+                	int x = card.getXManaCostPaid();
+                	
+                	opp.loseLife(x, card);
+                	player.loseLife(x, card);
+                	
+                	opp.discard(x, this);
+                	player.discard(x, this);
+                	
+                	for(int i = 0; i < x; i++) opp.sacrificeCreature();
+                	for(int i = 0; i < x; i++) player.sacrificeCreature();
+                	
+                	for(int i = 0; i < x; i++) {
+                		CardList lands = AllZoneUtil.getPlayerLandsInPlay(opp);
+                		opp.sacrificePermanent("Select a land to sacrifice", lands);
+                	}
+                	
+                	for(int i = 0; i < x; i++) {
+                		CardList lands = AllZoneUtil.getPlayerLandsInPlay(player);
+                		player.sacrificePermanent("Select a land to sacrifice", lands);
+                	}
+                }//resolve()
+            };//SpellAbility
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
     	return card;
     }//getCard
 }

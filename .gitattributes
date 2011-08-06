@@ -1049,6 +1049,7 @@ res/cardsfolder/deadly_grub.txt -text svneol=native#text/plain
 res/cardsfolder/deadly_insect.txt -text svneol=native#text/plain
 res/cardsfolder/deadly_recluse.txt -text svneol=native#text/plain
 res/cardsfolder/death_baron.txt -text svneol=native#text/plain
+res/cardsfolder/death_cloud.txt -text svneol=native#text/plain
 res/cardsfolder/death_cultist.txt -text svneol=native#text/plain
 res/cardsfolder/death_grasp.txt -text svneol=native#text/plain
 res/cardsfolder/death_mutation.txt -text svneol=native#text/plain
