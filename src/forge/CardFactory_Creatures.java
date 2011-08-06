@@ -20411,6 +20411,8 @@ public class CardFactory_Creatures {
       //*************** START *********** START **************************
         else if(cardName.equals("Temporal Adept")) {
         	final Ability_Tap ability = new Ability_Tap(card, "U U U") {
+				private static final long serialVersionUID = 6775250144167556206L;
+
 				@Override
         		public void resolve() {
         			Card target = getTargetCard();
