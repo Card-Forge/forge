@@ -1,0 +1,12 @@
+Name:Altar Golem
+ManaCost:7
+Types:Artifact Creature Golem
+Text:no text
+PT:0/1
+K:Trample
+K:CARDNAME doesn't untap during your untap step.
+K:StaticEffect:Play:Self:SetPT/Type.Creature/Type.Creature:All Permanents:Altar Golem's power and toughness are each equal to the number of creatures on the battlefield.
+K:SVar:BuffedBy:Creature
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/altar_golem.jpg
+End

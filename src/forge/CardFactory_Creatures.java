@@ -21418,8 +21418,26 @@ public class CardFactory_Creatures {
         	ability.setStackDescription(card +" - Put a 1/1 green Saproling creature token onto the battlefield.");
         	
         	card.addSpellAbility(ability);
-	    }
-	    //*************** END ************ END **************************
+	    }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Altar Golem"))
+        {
+        	Ability untap = new Ability(card,"0")
+        	{
+	        	public void resolve()
+	        	{
+	        		card.untap();
+	        	}
+        	};
+        	final Ability_Cost cost = new Ability_Cost("tapXType<5/Creature>", card.getName(), true);
+            untap.setPayCosts(cost);
+        	
+            untap.setDescription("Tap five untapped creatures you control: Untap Altar Golem.");
+        	untap.setStackDescription(card +" untaps.");
+        	
+        	card.addSpellAbility(untap);
+    	}//*************** END ************ END **************************
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
