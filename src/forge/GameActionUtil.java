@@ -17240,42 +17240,6 @@ public class GameActionUtil {
 		}// execute()
 	}; // Time of Heroes
 
-	public static Command Glorious_Anthem             = new Command() {
-		private static final long serialVersionUID   = 3686349742274071761L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Glorious Anthem");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Creature");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addSemiPermanentAttackBoost(1);
-					c.addSemiPermanentDefenseBoost(1);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Glorious Anthem
-
 	public static Command Gaeas_Anthem                = new Command() {
 		private static final long serialVersionUID   = -7379505886788323042L;
 
@@ -18240,7 +18204,6 @@ public class GameActionUtil {
 		commands.put("Gaeas_Avenger", Gaeas_Avenger);
 		commands.put("Gemhide_Sliver", Gemhide_Sliver);
 		commands.put("Giant_Tortoise", Giant_Tortoise);
-		commands.put("Glorious_Anthem", Glorious_Anthem);
 		commands.put("Goblin_Assault", Goblin_Assault);
 		commands.put("Goblin_Gaveleer", Goblin_Gaveleer);
 		commands.put("Goblin_Warchief", Goblin_Warchief);
