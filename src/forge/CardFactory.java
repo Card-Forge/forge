@@ -16805,6 +16805,30 @@ public class CardFactory implements NewConstants {
             }
         }//Vanishing
         
+        if(hasKeyword(card, "Echo") != -1) {
+            int n = hasKeyword(card, "Echo");
+            if(n != -1) {
+                String parse = card.getKeyword().get(n).toString();
+                //card.removeIntrinsicKeyword(parse);
+                
+                String k[] = parse.split(":");
+                final String manacost = k[1];
+                
+                card.setEchoCost(manacost);
+                
+                final Command intoPlay = new Command() {
+
+					private static final long serialVersionUID = -7913835645603984242L;
+
+					public void execute() {
+                        card.addIntrinsicKeyword("(Echo unpaid)");
+                    }
+                };
+                card.addComesIntoPlayCommand(intoPlay);
+                
+            }
+        }//echo
+        
         if (card.getManaCost().contains("X"))
         {
         	SpellAbility sa = card.getSpellAbility()[0];
@@ -16814,7 +16838,7 @@ public class CardFactory implements NewConstants {
         		sa.setXManaCost("2");
         	else if (card.getManaCost().startsWith("X"))
         		sa.setXManaCost("1");
-        }
+        }//X
         
         return card;
     }//getCard2
