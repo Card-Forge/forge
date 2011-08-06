@@ -151,7 +151,7 @@ public class AbilityFactory_PermanentState {
 			@Override
 			public String getStackDescription(){
 			// when getStackDesc is called, just build exactly what is happening
-				 StringBuilder sb = new StringBuilder("Untap ");
+				 StringBuilder sb = new StringBuilder("Tap ");
 				 String name = af.getHostCard().getName();
 				 Card tgt = getTargetCard();
 				 if (tgt != null)

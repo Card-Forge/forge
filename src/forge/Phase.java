@@ -292,9 +292,6 @@ public class Phase extends MyObservable
         
         GameActionUtil.executeCardStateEffects();
         
-        Input_Cleanup.calcMaxHandSize();
-        Computer_Cleanup.calcMaxHandSize();
-        
         needToNextPhase = false;
 
         // If the Stack isn't empty why is nextPhase being called?

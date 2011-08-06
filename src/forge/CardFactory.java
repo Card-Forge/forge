@@ -12211,34 +12211,13 @@ public class CardFactory implements NewConstants {
                private static final long serialVersionUID = 98743547743456L;
                
                public void execute() {
-                 card.setSVar("HSStamp","" + Input_Cleanup.GetHandSizeStamp());
-                  if(card.getController() == AllZone.HumanPlayer) {
-                     //System.out.println("Human played me! Mode(" + Mode + ") Amount(" + Amount + ") Target(" + Target + ")" );
-                     if(Target.equals("Self")) {
-                        Input_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
-                     }
-                     else if(Target.equals("Opponent")) {
-                        Computer_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
-                     }
-                     else if(Target.equals("All")) {
-                        Computer_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
-                        Input_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
-                     }
-                  }
-                  else
-                  {
-                     //System.out.println("Compy played me! Mode(" + Mode + ") Amount(" + Amount + ") Target(" + Target + ")" );
-                     if(Target.equals("Self")) {
-                        Computer_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
-                     }
-                     else if(Target.equals("Opponent")) {
-                        Input_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
-                     }
-                     else if(Target.equals("All")) {
-                        Computer_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
-                        Input_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
-                     }
-                  }
+                 card.setSVar("HSStamp","" + Player.getHandSizeStamp());
+                 if(Target.equals("Self") || Target.equals("All")) {
+                	 card.getController().addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
+                 }
+                 if(Target.equals("Opponent") || Target.equals("All")) {
+                     card.getController().getOpponent().addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
+                 }
                }
             };
            
@@ -12246,31 +12225,12 @@ public class CardFactory implements NewConstants {
                private static final long serialVersionUID = -6843545358873L;
                
                public void execute() {
-                  if(card.getController() == AllZone.HumanPlayer) {
-                     if(Target.equals("Self")) {
-                        Input_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                     }
-                     else if(Target.equals("Opponent")) {
-                        Computer_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                     }
-                     else if(Target.equals("All")) {
-                        Computer_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                        Input_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                     }
-                  }
-                  else
-                  {
-                     if(Target.equals("Self")) {
-                        Computer_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                     }
-                     else if(Target.equals("Opponent")) {
-                        Input_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                     }
-                     else if(Target.equals("All")) {
-                        Computer_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                        Input_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                     }
-                  }
+            	   if(Target.equals("Self") || Target.equals("All")) {
+                  	 card.getController().removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
+                   }
+                   if(Target.equals("Opponent") || Target.equals("All")) {
+                       card.getController().getOpponent().removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
+                   }
                }
             };
            
@@ -12280,16 +12240,16 @@ public class CardFactory implements NewConstants {
                public void execute() {
                   Log.debug("HandSize", "Control changed: " + card.getController());
                   if(card.getController().equals(AllZone.HumanPlayer)) {
-                     Input_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                     Computer_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
+                	 AllZone.HumanPlayer.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
+                	 AllZone.ComputerPlayer.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
                      
-                     Computer_Cleanup.sortHandSizeOperations();
+                     AllZone.ComputerPlayer.sortHandSizeOperations();
                   }
                   else if(card.getController().equals(AllZone.ComputerPlayer)) {
-                     Computer_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
-                     Input_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
+                	 AllZone.ComputerPlayer.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
+                     AllZone.HumanPlayer.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
                      
-                     Input_Cleanup.sortHandSizeOperations();
+                     AllZone.HumanPlayer.sortHandSizeOperations();
                   }
                }
             };

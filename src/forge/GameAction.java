@@ -2359,8 +2359,8 @@ public class GameAction {
         AllZone.StaticEffects.reset();
         StaticEffectKeywordReset = true;
         
-        Computer_Cleanup.clearHandSizeOperations();
-        Input_Cleanup.clearHandSizeOperations();
+        AllZone.HumanPlayer.clearHandSizeOperations();
+        AllZone.ComputerPlayer.clearHandSizeOperations();
         
 
         {//re-number cards just so their unique numbers are low, just for user friendliness

@@ -41,6 +41,8 @@ public abstract class Player extends MyObservable{
 		altLose = false;
 		winCondition = "";
 		loseCondition = "";
+		
+		handSizeOperations = new ArrayList<HandSizeOp>();
 	}
 	
 	public void reset(){
@@ -637,6 +639,76 @@ public abstract class Player extends MyObservable{
     	return list.size() >= 3;
     }
     
+    private ArrayList<HandSizeOp> handSizeOperations;
+
+    public int getMaxHandSize() {
+        
+        int ret = 7;
+        for(int i=0;i<handSizeOperations.size();i++)
+        {
+           if(handSizeOperations.get(i).Mode.equals("="))
+           {
+              ret = handSizeOperations.get(i).Amount;
+           }
+           else if(handSizeOperations.get(i).Mode.equals("+") && ret >= 0)
+           {
+              ret = ret + handSizeOperations.get(i).Amount;
+           }
+           else if(handSizeOperations.get(i).Mode.equals("-") && ret >= 0)
+           {
+              ret = ret - handSizeOperations.get(i).Amount;
+              if(ret < 0) {
+                 ret = 0;
+              }
+           }
+        }
+        return ret;
+     }
+
+    public void sortHandSizeOperations() {
+        if(handSizeOperations.size() < 2) {
+           return;
+        }
+        
+        int changes = 1;
+
+        while(changes > 0) {
+           changes = 0;
+           for(int i=1;i<handSizeOperations.size();i++) {
+        	   if(handSizeOperations.get(i).hsTimeStamp < handSizeOperations.get(i-1).hsTimeStamp) {
+        		   HandSizeOp tmp = handSizeOperations.get(i);
+        		   handSizeOperations.set(i, handSizeOperations.get(i-1));
+        		   handSizeOperations.set(i-1, tmp);
+        		   changes++;
+        	   }
+            }
+        }
+     }
+    
+    public void addHandSizeOperation(HandSizeOp theNew)
+    {
+       handSizeOperations.add(theNew);
+    }
+    public void removeHandSizeOperation(int timestamp)
+    {
+       for(int i=0;i<handSizeOperations.size();i++)
+       {
+          if(handSizeOperations.get(i).hsTimeStamp == timestamp)
+          {
+             handSizeOperations.remove(i);
+             break;
+          }
+       }
+    }
+    public void clearHandSizeOperations() {
+    	handSizeOperations.clear();
+    }
+    
+    private static int NextHandSizeStamp = 0;
+    
+    public static int getHandSizeStamp() {
+       return NextHandSizeStamp++;
+    }
 	////////////////////////////////
 	//
 	// generic Object overrides
