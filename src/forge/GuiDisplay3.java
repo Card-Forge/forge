@@ -326,17 +326,26 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
                 if(o instanceof CardPanel) {
                     CardPanel cardPanel = (CardPanel) o;
                     
+                    if(cardPanel.getCard().isUntapped()){
+                    	MP3Player mp3 = new MP3Player ("tap.mp3");
+                    	mp3.play();
+                    }
+                    
                     if(cardPanel.getCard().isTapped()
                             && (inputControl.input instanceof Input_PayManaCost || inputControl.input instanceof Input_PayManaCost_Ability)) {
-                        while(cardPanel.connectedCard != null) {
+                    	
+                    	while(cardPanel.connectedCard != null) {
                             cardPanel = cardPanel.connectedCard;
+                            
                             if(cardPanel.getCard().isUntapped()) {
+                            	
                                 break;
                             }
                         }
                     }
                     
                     inputControl.selectCard(cardPanel.getCard(), AllZone.Human_Play);
+                    
                 }
             }
         });
@@ -371,8 +380,8 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
             @Override
             public void mousePressed(MouseEvent e) {
                 Object o = playerHandPanel.getComponentAt(e.getPoint());
-                if(o instanceof CardPanel) {
-                    CardPanel cardPanel = (CardPanel) o;
+                if(o instanceof CardPanel) {                	
+                    CardPanel cardPanel = (CardPanel) o; 
                     inputControl.selectCard(cardPanel.getCard(), AllZone.Human_Hand);
                     okButton.requestFocusInWindow();
                 }

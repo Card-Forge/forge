@@ -62,6 +62,7 @@ public interface NewConstants {
     
     public static final String IMAGE_BASE    = "image/base";
     public static final String IMAGE_TOKEN   = "image/token";
+    public static final String SOUND_BASE = "sound/base";
     
     /**
      * properties for regular game

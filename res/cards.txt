@@ -14,12 +14,12 @@ no text
 Trample
 At the beginning of your upkeep, Force of Nature deals 8 damage to you unless you pay:G G G G
 
-Krosan Cloudshaper
+Krosan Cloudscraper
 7 G G G
 Creature Beast Mutant
 no text
 13/13
-At the beginning of your upkeep, sacrifice Krosan Cloudshaper unless you pay:G G
+At the beginning of your upkeep, sacrifice Krosan Cloudscraper unless you pay:G G
 Morph:7 G G
 
 Kami of the Tended Garden
