@@ -2436,6 +2436,7 @@ class CardFactory_Auras {
                  *  I borrowed this code from Control Magic aura code
                  */
                 final SpellAbility spell = new Spell(card) {
+					private static final long serialVersionUID = 8833656440594179515L;
 
 					@Override
                     public boolean canPlayAI() {
@@ -2470,6 +2471,7 @@ class CardFactory_Auras {
                 card.addSpellAbility(spell);
                 
                 Command onEnchant = new Command() {
+					private static final long serialVersionUID = -2519887209491512000L;
 
 					public void execute() {
                         if(card.isEnchanting()) {
@@ -2499,6 +2501,7 @@ class CardFactory_Auras {
                 };//Command
                 
                 Command onUnEnchant = new Command() {
+					private static final long serialVersionUID = 3426441132121179288L;
 
 					public void execute() {
                         if(card.isEnchanting()) {
@@ -2533,6 +2536,7 @@ class CardFactory_Auras {
                 };//Command
                 
                 Command onLeavesPlay = new Command() {
+					private static final long serialVersionUID = -639204333673364477L;
 
 					public void execute() {
                         if(card.isEnchanting()) {
@@ -2543,8 +2547,9 @@ class CardFactory_Auras {
                 };//Command
                 
                 Input runtime = new Input() {
+					private static final long serialVersionUID = -5692242772569986155L;
 
-                    @Override
+					@Override
                     public void showMessage() {
                         CardList perms = AllZoneUtil.getCardsInPlay();
                         perms = perms.filter(new CardListFilter() {
