@@ -5893,6 +5893,7 @@ res/cardsfolder/sovereigns_of_lost_alara.txt -text svneol=native#text/plain
 res/cardsfolder/sower_of_temptation.txt -text svneol=native#text/plain
 res/cardsfolder/spark_elemental.txt -text svneol=native#text/plain
 res/cardsfolder/spark_spray.txt -text svneol=native#text/plain
+res/cardsfolder/sparkcaster.txt -text svneol=native#text/plain
 res/cardsfolder/sparkmage_apprentice.txt -text svneol=native#text/plain
 res/cardsfolder/sparksmith.txt -text svneol=native#text/plain
 res/cardsfolder/sparkspitter.txt -text svneol=native#text/plain
