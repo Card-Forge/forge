@@ -1637,6 +1637,16 @@ public class CombatUtil {
             a.untap();
         }
         
+        if (a.getName().equals("Deepwood Tantiv") && !a.getCreatureBlockedThisTurn()) {
+        	AllZone.GameAction.getPlayerLife(a.getController()).addLife(2);
+        } else if (a.getName().equals("Sacred Prey") && !a.getCreatureBlockedThisTurn()) {
+        	AllZone.GameAction.getPlayerLife(a.getController()).addLife(1);
+        }
+
+        if (a.getName().equals("Vedalken Ghoul") && !a.getCreatureBlockedThisTurn()) {
+        	AllZone.GameAction.subLife(b.getController(), 4);
+        }
+        
         if(b.getName().equals("Frostweb Spider") && (a.getKeyword().contains("Flying"))) {
             final Card spider = b;
             

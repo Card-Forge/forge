@@ -1,3 +1,21 @@
+Deepwood Tantiv
+4 G
+Creature Beast
+Whenever Deepwood Tantiv becomes blocked, you gain 2 life.
+2/4
+
+Sacred Prey
+G
+Creature Horse
+Whenever Sacred Prey becomes blocked, you gain 1 life.
+1/1
+
+Vedalken Ghoul
+U B
+Creature Vedalken Zombie
+Whenever Vedalken Ghoul becomes blocked, defending player loses 4 life.
+1/1
+
 Brave the Elements
 W
 Instant
