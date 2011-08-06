@@ -17354,7 +17354,7 @@ public class CardFactory implements NewConstants {
         
         
       //*************** START *********** START **************************
-      else if (cardName.equals("Starstorm"))
+      else if (cardName.equals("Starstorm") || cardName.equals("Savage Twister"))
       {
     	  final SpellAbility spell = new Spell(card)
     	  {
@@ -17398,8 +17398,8 @@ public class CardFactory implements NewConstants {
 			    return humanAll.size() > (compAll.size() + 2);
 			}
     	  };
-    	  spell.setDescription("Starstorm deals X damage to each creature.");
-    	  spell.setStackDescription("Starstorm - deals X damage to each creature.");
+    	  spell.setDescription(cardName + " deals X damage to each creature.");
+    	  spell.setStackDescription(cardName + " - deals X damage to each creature.");
     	  
     	  card.clearSpellAbility();
     	  card.addSpellAbility(spell);
