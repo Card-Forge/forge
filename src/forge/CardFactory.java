@@ -5435,6 +5435,7 @@ public class CardFactory implements NewConstants {
           // AllZone.GameAction.drawCard(card.getController());
         }
       };
+      spell.setStackDescription(card.getName() + " - " + card.getController() + " gains 3 life.");
       card.clearSpellAbility();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
@@ -6962,7 +6963,7 @@ public class CardFactory implements NewConstants {
       String desc = "You gain 6 life.";
       
       if (cardName.equals("Renewed Faith"))
-    	   desc = desc + "\r\n\r\nWhen you cycle Renewed Faith, you may gain 2 life.\r\n";
+    	   desc = desc + "\r\nWhen you cycle Renewed Faith, you may gain 2 life.";
       
       spell.setDescription(desc);
 
@@ -12840,7 +12841,7 @@ public class CardFactory implements NewConstants {
         }//resolve()
       };//SpellAbility
       ability.setStackDescription("You gain 5 life");
-      ability.setDescription("W, Sacrifice Sunbeam Spellbomb: You gain 5 life.");
+      ability.setStackDescription(card.getName() + " - " + card.getController() + " gains 5 life.");
       card.addSpellAbility(ability);
     } //*************** END ************ END **************************
     
@@ -14978,7 +14979,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
       };//SpellAbility
       card.addSpellAbility(ability);
       ability.setDescription("tap: You gain 1 life.");
-      ability.setStackDescription("Braidwood Cup -"+card.getController() + " gains 1 life.");
+      ability.setStackDescription("Braidwood Cup - "+card.getController() + " gains 1 life.");
       ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
     }//*************** END ************ END **************************
     

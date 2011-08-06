@@ -1,3 +1,10 @@
+Rofellos, Llanowar Emissary
+G G
+Legendary Creature Elf Druid
+no text
+2/1
+tap: add G to your mana pool for each Forest you control.
+
 Basilisk Collar
 1
 Artifact Equipment
