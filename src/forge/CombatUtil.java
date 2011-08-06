@@ -335,7 +335,8 @@ public class CombatUtil {
         
         if(c.isTapped() || c.hasSickness() || c.getKeyword().contains("Defender") || moatPrevented
                 || oppControlsBlazingArchon(c) || c.getKeyword().contains("CARDNAME can't attack.")
-                || c.getKeyword().contains("CARDNAME can't attack or block.")) return false;
+                || c.getKeyword().contains("CARDNAME can't attack or block.")
+                || (oppControlsReverence(c) && c.getNetAttack() < 3)) return false;
         
         if (c.getCounters(Counters.BRIBERY) > 0 && isCardInPlay("Gwafa Hazid, Profiteer"))
         	return false;
@@ -840,6 +841,17 @@ public class CombatUtil {
         list.addAll(AllZone.getZone(Constant.Zone.Play, opp).getCards());
         
         list = list.getName("Blazing Archon");
+        if(list.size() > 0) return true;
+        else return false;
+    }
+    
+    public static boolean oppControlsReverence(Card c) {
+        String opp = AllZone.GameAction.getOpponent(c.getController());
+        
+        CardList list = new CardList();
+        list.addAll(AllZone.getZone(Constant.Zone.Play, opp).getCards());
+        
+        list = list.getName("Reverence");
         if(list.size() > 0) return true;
         else return false;
     }

@@ -1,0 +1,7 @@
+Name:Reverence
+ManaCost:2 W W
+Types:Enchantment
+Text:Creatures with power 2 or less can't attack you.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/reverence.jpg
+End
