@@ -3573,6 +3573,7 @@ res/cardsfolder/kyren_sniper.txt -text svneol=native#text/plain
 res/cardsfolder/lab_rats.txt -text svneol=native#text/plain
 res/cardsfolder/laccolith_grunt.txt svneol=native#text/plain
 res/cardsfolder/laccolith_titan.txt svneol=native#text/plain
+res/cardsfolder/laccolith_whelp.txt -text svneol=native#text/plain
 res/cardsfolder/lace_with_moonglove.txt -text svneol=native#text/plain
 res/cardsfolder/lady_caleria.txt -text svneol=native#text/plain
 res/cardsfolder/lady_evangela.txt -text svneol=native#text/plain
