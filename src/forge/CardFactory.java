@@ -4124,13 +4124,17 @@ public class CardFactory implements NewConstants {
                 void discardDraw7(String player) {
                     // Discard hand into graveyard
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-                    Card[] c = hand.getCards();
-                    for(int i = 0; i < c.length; i++)
-                        AllZone.GameAction.discard(c[i]);
-                    
-                    // Move graveyard into library
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
                     PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+                    Card[] c = hand.getCards();
+                    for(int i = 0; i < c.length; i++) {
+                        //AllZone.GameAction.discard(c[i]);
+                    	hand.remove(c[i]);
+                    	library.add(c[i], 0);
+                    }
+                    
+                    // Move graveyard into library
+                   
                     Card[] g = grave.getCards();
                     for(int i = 0; i < g.length; i++) {
                         grave.remove(g[i]);

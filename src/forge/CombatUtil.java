@@ -302,6 +302,31 @@ public class CombatUtil {
         return true;
     }//canAttack()
     
+    public static int getTotalFirstStrikeAttackPower(Card attacker, String player)
+    {
+    	final Card att = attacker;
+    	int i = 0;
+    	
+    	CardList list = AllZoneUtil.getCreaturesInPlay(player);
+    	list = list.filter(new CardListFilter()
+    	{
+    		public boolean addCard(Card c)
+    		{
+    			return c.isUntapped() && canBlock(att, c) && (c.hasFirstStrike() || c.hasDoubleStrike() ) ;
+    		}
+    	});
+    	
+    	for (Card c:list)
+    	{
+    		if (!isDoranInPlay())
+    			i+= c.getNetAttack();
+    		else
+    			i+= c.getNetDefense();
+    	}
+    	return i;
+    }
+    
+    
     public static boolean canDestroyAttacker(Card attacker, Card defender) {
         
         if(attacker.getName().equals("Sylvan Basilisk")) return false;

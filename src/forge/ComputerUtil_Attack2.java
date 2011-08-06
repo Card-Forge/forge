@@ -228,20 +228,25 @@ import java.util.*;
              for(; i < attackers.size(); i++)
              {
 
-        bigAtt = getBiggestAttack(attackers.get(i));
-        bigDef = getBiggestDefense(attackers.get(i));
+            	 bigAtt = getBiggestAttack(attackers.get(i));
+            	 bigDef = getBiggestDefense(attackers.get(i));
         
-        /*
-        System.out.println("bigDef: " + bigDef.getName());
-        System.out.println("attackers.get(i): " + attackers.get(i).getName());
-        if (CombatUtil.canDestroyBlocker(bigDef, attackers.get(i)))
-        	System.out.println(attackers.get(i).getName() + " can destroy blocker " +bigDef.getName());
-         */
-
+		        /*
+		        System.out.println("bigDef: " + bigDef.getName());
+		        System.out.println("attackers.get(i): " + attackers.get(i).getName());
+		        if (CombatUtil.canDestroyBlocker(bigDef, attackers.get(i)))
+		        	System.out.println(attackers.get(i).getName() + " can destroy blocker " +bigDef.getName());
+		         */
+            	 
+            	 int totalFirstStrikeAttackPower = 0;
+            	 if (!attackers.get(i).hasFirstStrike() && !attackers.get(i).hasDoubleStrike())
+            		 totalFirstStrikeAttackPower = CombatUtil.getTotalFirstStrikeAttackPower(attackers.get(i), Constant.Player.Human);
+        
                 //if attacker can destroy biggest blocker or
                 //biggest blocker cannot destroy attacker
-                if(CombatUtil.canDestroyBlocker(bigDef, attackers.get(i)) ||
-                      (! CombatUtil.canDestroyAttacker(attackers.get(i), bigAtt))){
+                if ( (CombatUtil.canDestroyBlocker(bigDef, attackers.get(i)) ||
+                   (! CombatUtil.canDestroyAttacker(attackers.get(i), bigAtt))) &&
+                      totalFirstStrikeAttackPower < attackers.get(i).getNetDefense() ){
                    combat.addAttacker(attackers.get(i));
                 }
                 else if(attackers.get(i).getSacrificeAtEOT()){
@@ -263,8 +268,6 @@ import java.util.*;
 
     return AllZone.CardFactory.getCard("Birds of Paradise", "");
   }
-
-
 
   //returns 1/1 Card if no blockers found
   public Card getBiggestDefense(Card attack)

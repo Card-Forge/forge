@@ -7923,7 +7923,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    if(card.getOwner().equals(Constant.Player.Human)) humanResolve();
+                    if(card.getController().equals(Constant.Player.Human)) humanResolve();
                     else computerResolve();
                 }
                 
