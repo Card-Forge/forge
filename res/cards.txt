@@ -1,3 +1,21 @@
+Encroach
+B
+Sorcery
+no text
+spDiscardTgt:RevealYouChoose/Land.nonBasic:1:Target player reveals his or her hand. You choose a nonbasic land card from it. That player discards that card.:Encroach - player reveals hand and discards a card
+
+Psychic Spear
+B
+Sorcery
+no text
+spDiscardTgt:RevealYouChoose/Creature.Spirit,Instant.Arcane,Sorcery.Arcane:1:Target player reveals his or her hand. You choose a Spirit or Arcane card from it. That player discards that card.:Psychic Spear - player reveals hand and discards a card
+
+Shattered Dreams
+B
+Sorcery
+no text
+spDiscardOpp:RevealYouChoose/Artifact:1:Target opponent reveals his or her hand. You choose an artifact card from it. That player discards that card.:Shattered Dreams - opponent reveal hand and discards a card
+
 Geth's Grimoire
 4
 Artifact
