@@ -3102,6 +3102,8 @@ public class GameActionUtil {
 
 			c.resetReceivedDamageFromThisTurn();
 		}
+		
+		AllZone.GameInfo.setAssignedFirstStrikeDamageThisCombat(false);
 	}
 
 
@@ -6468,7 +6470,7 @@ public class GameActionUtil {
 	private static void upkeep_Oath_of_Druids() {
 	      final String player = AllZone.Phase.getActivePlayer();
 	      String opponent = AllZone.GameAction.getOpponent(player);
-	        PlayerZone PlayerPlayZone = AllZone.getZone(Constant.Zone.Play, player);
+	      PlayerZone PlayerPlayZone = AllZone.getZone(Constant.Zone.Play, player);
 	      PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Play, opponent);
 	      CardList Oath = new CardList(PlayerPlayZone.getCards());
 	      Oath = Oath.getName("Oath of Druids");

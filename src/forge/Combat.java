@@ -220,7 +220,7 @@ public class Combat
       //also assigns player damage by setPlayerDamage()
       public void setAssignedFirstStrikeDamage()
       {
-       setDefendingFirstStrikeDamage();
+        setDefendingFirstStrikeDamage();
        
         CardList block;
         CardList attacking = new CardList(getAttackers());
@@ -289,7 +289,7 @@ public class Combat
 		                 int damageDealt = attacking.get(i).getNetAttack();
 		                   if (CombatUtil.isDoranInPlay())
 		                      damageDealt = attacking.get(i).getNetDefense();
-		                  AllZone.Display.assignDamage(attacking.get(i),block, damageDealt);
+		                  AllZone.Display.assignDamage(attacking.get(i), block, damageDealt);
 		                  
 		                   /*
 		                  for (Card b : block)

@@ -18,8 +18,40 @@ public class Input_Block_Instant extends Input {
     
     @Override
     public void selectButtonOK() {
-        AllZone.Combat.setAssignedFirstStrikeDamage();
-        AllZone.pwCombat.setAssignedFirstStrikeDamage();
+    	
+    	CardList list = new CardList();
+        list.addAll(AllZone.Combat.getAllBlockers().toArray());
+        list.addAll(AllZone.pwCombat.getAllBlockers().toArray());
+        list = list.filter(new CardListFilter(){
+        	public boolean addCard(Card c)
+        	{
+        		return !c.getCreatureBlockedThisCombat();
+        	}
+        });
+        
+        CardList attList = new CardList();
+        attList.addAll(AllZone.Combat.getAttackers());
+        
+        CardList pwAttList = new CardList();
+        pwAttList.addAll(AllZone.pwCombat.getAttackers());
+
+        CombatUtil.checkDeclareBlockers(list);
+        
+        for (Card a:attList){
+        	CardList blockList = AllZone.Combat.getBlockers(a);
+        	for (Card b:blockList)
+        		CombatUtil.checkBlockedAttackers(a, b);
+        }
+        
+        for (Card a:pwAttList){
+        	CardList blockList = AllZone.pwCombat.getBlockers(a);
+        	for (Card b:blockList)
+        		CombatUtil.checkBlockedAttackers(a, b);
+        }
+    	
+    	
+        //AllZone.Combat.setAssignedFirstStrikeDamage();
+        //AllZone.pwCombat.setAssignedFirstStrikeDamage();
         
 
         //AllZone.Phase.nextPhase();

@@ -114,6 +114,13 @@ public class InputControl extends MyObservable implements java.io.Serializable {
                 if(!skipPhase()) return new Input_Block_Instant();
                 else {
                     
+                	/*
+                	CardList list = new CardList();
+                    list.add(AllZone.Combat.getAllBlockers());
+                    list.add(AllZone.pwCombat.getAllBlockers());
+                	*/
+                    
+                	
                     //AllZone.Phase.nextPhase();
                     //for debugging: System.out.println("need to nextPhase(InputControl,phase.equals(Combat_Declare_Blockers_InstantAbility) = true");
                     AllZone.Phase.setNeedToNextPhase(true);
@@ -121,7 +128,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
                     return null;
                 }
             }
-            /*
+            
             else if (phase.equals(Constant.Phase.Combat_After_Declare_Blockers))
             {
                     CardList list = new CardList();
@@ -132,10 +139,12 @@ public class InputControl extends MyObservable implements java.io.Serializable {
                     attList.addAll(AllZone.Combat.getAttackers());
                     attList.addAll(AllZone.pwCombat.getAttackers());
 
+                    CombatUtil.checkDeclareBlockers(list);
                     
+                    /*
                     for(Card c:list)
                         CombatUtil.checkDeclareBlockers(c);
-                    
+                        */
                     
                     for (Card a:attList){
                     	CardList blockList = AllZone.Combat.getBlockers(a);
@@ -145,7 +154,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
                 
             		AllZone.Phase.setNeedToNextPhase(true);
             }
-            */
+            
             
             else if(phase.equals(Constant.Phase.Combat_FirstStrikeDamage)) {
                 if(!skipPhase()) return new Input_FirstStrikeDamage();

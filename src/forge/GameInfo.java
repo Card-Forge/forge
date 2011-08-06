@@ -11,6 +11,8 @@ public class GameInfo {
 	private boolean humanMulliganedToZero;
 	
 	private boolean preventCombatDamageThisTurn;
+	private boolean assignedFirstStrikeDamageThisCombat;
+	
 
 	public void setComputerCanPlayNumberOfLands(int n) {
 		computerCanPlayNumberOfLands = n;
@@ -86,6 +88,14 @@ public class GameInfo {
 
 	public boolean isPreventCombatDamageThisTurn() {
 		return preventCombatDamageThisTurn;
+	}
+	
+	public void setAssignedFirstStrikeDamageThisCombat(boolean b) {
+		assignedFirstStrikeDamageThisCombat = b;
+	}
+
+	public boolean getAssignedFirstStrikeDamageThisCombat() {
+		return assignedFirstStrikeDamageThisCombat;
 	}
 
 	

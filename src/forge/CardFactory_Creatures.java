@@ -3590,7 +3590,7 @@ public class CardFactory_Creatures {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Gravedigger")) {
+        else if(cardName.equals("Gravedigger") || cardName.equals("Cadaver Imp")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {

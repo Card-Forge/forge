@@ -11,7 +11,7 @@ public class ComputerAI_General implements Computer {
 	//private int numberPlayLand = 1;
 	//private int numberPlayLand = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Computer);
     private Collection<Card> playMain1Cards;
-    
+        
     @SuppressWarnings("unchecked")
     // TreeSet type safety
     public ComputerAI_General() {
@@ -292,7 +292,8 @@ public class ComputerAI_General implements Computer {
     }
     
     public void after_declare_blockers()    {
-            CardList list = new CardList();
+            /*
+    		CardList list = new CardList();
             list.addAll(AllZone.Combat.getAllBlockers().toArray());
             list.addAll(AllZone.pwCombat.getAllBlockers().toArray());
             list = list.filter(new CardListFilter(){
@@ -321,8 +322,15 @@ public class ComputerAI_General implements Computer {
             	for (Card b:blockList)
             		CombatUtil.checkBlockedAttackers(a, b);
             }
-        
-        
+        	*/
+            
+    		if (!AllZone.GameInfo.getAssignedFirstStrikeDamageThisCombat()) {
+    			AllZone.Combat.setAssignedFirstStrikeDamage();
+    			AllZone.pwCombat.setAssignedFirstStrikeDamage();
+    			
+    			AllZone.GameInfo.setAssignedFirstStrikeDamageThisCombat(true);
+    		}
+            
     		AllZone.Phase.setNeedToNextPhase(true);
     }
     

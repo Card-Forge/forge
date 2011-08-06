@@ -316,13 +316,31 @@ public class CombatUtil {
     		}
     	});
     	
+    	int flankingMagnitude = 0;
+    	if(attacker.getKeyword().contains("Flanking")) {
+            
+            String kw = "";
+            ArrayList<String> lst = attacker.getKeyword();
+            
+            for(int j = 0; j < lst.size(); j++) {
+                kw = lst.get(j);
+                if(kw.equals("Flanking")) flankingMagnitude++;
+            }
+    	}
+    	
+    	
     	for (Card c:list)
     	{
+    		int flankingOffset = 0;
+    		if (!c.getKeyword().contains("Flanking"))
+    			flankingOffset = flankingMagnitude;
+    			
     		if (!isDoranInPlay())
-    			i+= c.getNetAttack();
+    			i+= c.getNetAttack() - flankingOffset;
     		else
-    			i+= c.getNetDefense();
+    			i+= c.getNetDefense() - flankingOffset;
     	}
+    	
     	return i;
     }
     
@@ -1841,6 +1859,7 @@ public class CombatUtil {
                         blocker.addTempDefenseBoost(-mag);
                         
                         AllZone.EndOfTurn.addUntil(untilEOT);
+                        System.out.println("Flanking!");
                     }
                 }//resolve
                 
@@ -1849,6 +1868,8 @@ public class CombatUtil {
             
             ability2.setStackDescription(b.getName() + " - gets -" + mag + "/-" + mag + " until EOT.");
             AllZone.Stack.add(ability2);
+            System.out.println("Adding Flanking!");
+            //AllZone.GameAction.checkStateEffects();
             
         }//flanking
         if((a.getName().equals("Chambered Nautilus") || a.getName().equals("Slith Strider"))

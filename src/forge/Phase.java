@@ -51,6 +51,7 @@ public class Phase extends MyObservable
             {Constant.Player.Computer, Constant.Phase.Combat_Declare_Blockers_InstantAbility},
             {Constant.Player.Human, Constant.Phase.Combat_Declare_Blockers_InstantAbility},
             {Constant.Player.Computer, Constant.Phase.Combat_After_Declare_Blockers},
+            /*{Constant.Player.Human, Constant.Phase.Combat_After_Declare_Blockers},*/
             {Constant.Player.Human, Constant.Phase.Combat_FirstStrikeDamage}, //TODO: need to allow computer to have priority (play instants and abilities).
             {Constant.Player.Human, Constant.Phase.Combat_Damage},
             {Constant.Player.Human, Constant.Phase.End_Of_Combat},
@@ -83,6 +84,7 @@ public class Phase extends MyObservable
     
     public void nextPhase() {
         
+    	System.out.println("Current Phase:" + AllZone.Phase.getPhase());
         //System.out.println("current active Player: " + getActivePlayer());  
         //experimental, add executeCardStateEffects() here:
         for(String effect:AllZone.StaticEffects.getStateBasedMap().keySet()) {
@@ -96,7 +98,7 @@ public class Phase extends MyObservable
         needToNextPhase = false;
         
 
-        if(getPhase().equals(Constant.Phase.Combat_Damage)) {
+        if(getPhase().equals(Constant.Phase.Combat_Damage) || getPhase().equals(Constant.Phase.Combat_FirstStrikeDamage)) {
             if(AllZone.Stack.size() != 0) {
                 return;
             }
@@ -322,6 +324,8 @@ public class Phase extends MyObservable
             if(c.getCreatureBlockedThisCombat()) c.setCreatureBlockedThisCombat(false);
             
             if(c.getCreatureGotBlockedThisCombat()) c.setCreatureGotBlockedThisCombat(false);
+            
+            AllZone.GameInfo.setAssignedFirstStrikeDamageThisCombat(false);
         }
     }
 
