@@ -80,13 +80,14 @@ public abstract class Player extends MyObservable{
 		}
 		else System.out.println("Player - trying to gain negative or 0 life");
 		
-		/*
 		Object[] Life_Whenever_Parameters = new Object[1];
     	Life_Whenever_Parameters[0] = toGain;
-    	AllZone.GameAction.CheckWheneverKeyword(p.getPlayerCard(), "GainLife", Life_Whenever_Parameters);
-		*/
+    	AllZone.GameAction.CheckWheneverKeyword(getPlayerCard(), "GainLife", Life_Whenever_Parameters);
+
 		return newLifeSet;
 	}
+	
+	protected abstract Card getPlayerCard();
 	
 	public boolean canGainLife() {
 		if(AllZoneUtil.isCardInPlay("Sulfuric Vortex")) return false;

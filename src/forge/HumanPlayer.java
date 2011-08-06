@@ -28,6 +28,10 @@ public class HumanPlayer extends Player{
 		return p1.getName().equals(this.name);
 	}
 	
+	protected Card getPlayerCard() {
+		return AllZone.CardFactory.HumanNullCard;
+	}
+	
 	///////////////
 	///
 	/// End transition methods

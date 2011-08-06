@@ -30,6 +30,10 @@ public class AIPlayer extends Player{
 		return p1.getName().equals(this.name);
 	}
 	
+	protected Card getPlayerCard() {
+		return AllZone.CardFactory.ComputerNullCard;
+	}
+	
 	///////////////
 	///
 	/// End transition methods
