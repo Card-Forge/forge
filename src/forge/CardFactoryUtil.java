@@ -4189,11 +4189,17 @@ public class CardFactoryUtil {
     }
     
     public static boolean canHumanPlayLand(){
-    	return (AllZone.GameInfo.humanNumberLandPlaysLeft() > 0 || CardFactoryUtil.getCards("Fastbond", "Human").size() > 0);
+    	// LandsToPlay Left or Fastbond in play, Human's turn, Stack is Empty, In Main Phase
+    	return (AllZone.GameInfo.humanNumberLandPlaysLeft() > 0 || CardFactoryUtil.getCards("Fastbond", "Human").size() > 0) &&
+    		AllZone.GameAction.getLastPlayerToDraw().equals("Human") && (AllZone.Stack.size() == 0) &&
+    		(AllZone.Phase.getPhase().equals(Constant.Phase.Main1) || AllZone.Phase.getPhase().equals(Constant.Phase.Main2));
     }
     
     public static boolean canComputerPlayLand(){
-    	return (AllZone.GameInfo.computerNumberLandPlaysLeft() > 0 || CardFactoryUtil.getCards("Fastbond", "Computer").size() > 0);
+    	// LandsToPlay Left or Fastbond in play, Computer's turn, Stack is Empty, In Main Phase
+    	return (AllZone.GameInfo.computerNumberLandPlaysLeft() > 0 || CardFactoryUtil.getCards("Fastbond", "Computer").size() > 0) &&
+			AllZone.GameAction.getLastPlayerToDraw().equals("Computer") && (AllZone.Stack.size() == 0) &&
+			(AllZone.Phase.getPhase().equals(Constant.Phase.Main1) || AllZone.Phase.getPhase().equals(Constant.Phase.Main2));
     }
     
     public static void playLandEffects(Card c){

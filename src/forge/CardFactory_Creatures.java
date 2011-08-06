@@ -2738,8 +2738,7 @@ public class CardFactory_Creatures {
                         if(card.getController() == Constant.Player.Human) canPlayLand = CardFactoryUtil.canHumanPlayLand();
                         else canPlayLand = CardFactoryUtil.canComputerPlayLand();
                         
-                    return (AllZone.GameAction.isCardInZone(card, play) && library.get(0).getType().contains("Land") && canPlayLand) 
-                    && (AllZone.Stack.size() == 0) && AllZone.GameAction.getLastPlayerToDraw().equals(card.getController());
+                    return (AllZone.GameAction.isCardInZone(card, play) && library.get(0).getType().contains("Land") && canPlayLand);
                 }
             }; 
             ability.setStackDescription(card.getController() + " - plays land from top of library.");           

@@ -2235,9 +2235,8 @@ public class GameAction {
             
             ArrayList<String> choices = new ArrayList<String>();
             
-            if(AllZone.Stack.size() == 0 && CardFactoryUtil.canHumanPlayLand()
-                    && (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) || AllZone.Phase.getPhase().equals(
-                            Constant.Phase.Main2))) choices.add("Play land");
+            if(CardFactoryUtil.canHumanPlayLand()) 
+            	choices.add("Play land");
             
             for(SpellAbility sa:sas) {
                 if(sa.canPlay()) {
