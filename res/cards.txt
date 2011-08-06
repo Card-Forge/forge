@@ -1,3 +1,57 @@
+Goblin Ringleader
+3 R
+Creature Goblin
+When Goblin Ringleader comes into play, reveal the top four cards of your library. Put all Goblin cards revealed this way into your hand and the rest on the bottom of your library.
+2/2
+Haste
+SVar:RemAIDeck:True
+
+Legacy Weapon
+7
+Legendary Artifact
+no text
+When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
+SVar:RemAIDeck:True
+
+Nova Chaser
+3 R
+Creature Elemental
+Champion an Elemental
+10/2
+Trample
+SVar:RemAIDeck:True
+
+Supreme Exemplar
+6 U
+Creature Elemental
+Champion an Elemental
+10/10
+Flying
+SVar:RemAIDeck:True
+
+Sylvan Messenger
+3 G
+Creature Elf
+When Sylvan Messenger comes into play, reveal the top four cards of your library. Put all Elf cards revealed this way into your hand and the rest on the bottom of your library.
+2/2
+Trample
+SVar:RemAIDeck:True
+
+Tromp the Domains
+5 G
+Sorcery
+no text
+spAllPump:YouCtrl:+X/+X/Trample:Domain - Until end of turn, creatures you control gain trample and get +1/+1 for each basic land type among lands you control.:Tromp the Domains - Creatures get +X/+X and gain trample until EOT
+SVar:X:Count$Domain
+SVar:RemAIDeck:True
+
+Wren's Run Packmaster
+3 G
+Creature Elf Warrior
+Champion an Elf. Each Wolf you control has deathtouch.
+5/5
+SVar:RemAIDeck:True
+
 Aluren
 2 G G
 Enchantment
@@ -4641,13 +4695,6 @@ Instant
 no text
 spAllPump:YouCtrl:Shroud:Creatures you control gain shroud until end of turn.:Tortoise Formation - Creatures gain shroud until EOT
 
-Tromp the Domains
-5 G
-Sorcery
-no text
-spAllPump:YouCtrl:+X/+X/Trample:Domain - Until end of turn, creatures you control gain trample and get +1/+1 for each basic land type among lands you control.:Tromp the Domains - Creatures get +X/+X and gain trample until EOT
-SVar:X:Count$Domain
-
 Valorous Charge
 1 W W
 Sorcery
@@ -5782,12 +5829,6 @@ Sorcery
 Wreak Havoc can't be countered by spells or abilities. Destroy target artifact or land.
 spDestroyTgt:Artifact,Land
 CARDNAME can't be countered.
-
-Legacy Weapon
-7
-Legendary Artifact
-no text
-When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
 
 Progenitus
 W W U U B B R R G G
@@ -16366,12 +16407,6 @@ Legendary Land
 no text
 tap: add 1
 
-Wren's Run Packmaster
-3 G
-Creature Elf Warrior
-Champion an Elf. Each Wolf you control has deathtouch.
-5/5
-
 Changeling Berserker
 3 R
 Creature Shapeshifter
@@ -16452,20 +16487,6 @@ Call of the Herd
 2 G
 Sorcery
 no text
-
-Nova Chaser
-3 R
-Creature Elemental
-Champion an Elemental
-10/2
-Trample
-
-Supreme Exemplar
-6 U
-Creature Elemental
-Champion an Elemental
-10/10
-Flying
 
 Pestermite
 2 U
@@ -23293,13 +23314,6 @@ no text
 abGainLife T:X:You gain 1 life for each Elf on the battlefield.:Wellwisher - you gain life
 SVar:X:Count$TypeOnBattlefield.Elf
 
-Sylvan Messenger
-3 G
-Creature Elf
-When Sylvan Messenger comes into play, reveal the top four cards of your library. Put all Elf cards revealed this way into your hand and the rest on the bottom of your library.
-2/2
-Trample
-
 Symbiotic Elf
 3 G
 Creature Elf
@@ -23777,13 +23791,6 @@ Wojek Embermage
 Creature Human Wizard
 no text
 1/2
-
-Goblin Ringleader
-3 R
-Creature Goblin
-When Goblin Ringleader comes into play, reveal the top four cards of your library. Put all Goblin cards revealed this way into your hand and the rest on the bottom of your library.
-2/2
-Haste
 
 Jackal Pup
 R
