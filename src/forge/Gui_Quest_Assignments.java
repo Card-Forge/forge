@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
@@ -54,7 +55,15 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
         
         setup();
 
-        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); 
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.addWindowListener(new WindowAdapter()
+		{
+			@Override
+			public void windowClosed(WindowEvent e)
+			{
+				Gui_Quest_Assignments.this.this_windowClosing(e);
+			}
+		});
         
         setSize(1024, 768);
         this.setResizable(false);
@@ -293,11 +302,10 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
     	questGui.setVisible(true);
     	
         dispose();
-       
     }
     
     void this_windowClosing(WindowEvent e) {
-        quitButton_actionPerformed(null);
+		questGui.setVisible(true);
     }
     
 }
