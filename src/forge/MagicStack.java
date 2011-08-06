@@ -77,7 +77,7 @@ public class MagicStack extends MyObservable
          
 	  return manaCost;
   }
-  
+  boolean ActualEffectTriggered = false; // WheneverKeyword Test
   public void add(SpellAbility sp)
   {
 	  // if activating player slips through the cracks, assign activating Player to the controller here
@@ -85,7 +85,30 @@ public class MagicStack extends MyObservable
 			sp.setActivatingPlayer(sp.getSourceCard().getController());
 			//System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
 	  }
-	  
+	  // WheneverKeyword Test
+		  ActualEffectTriggered = false;
+		  if(sp.getSourceCard().getKeyword().toString().contains("WheneverKeyword")) {
+		        ArrayList<String> a = sp.getSourceCard().getKeyword();
+			        int WheneverKeywords = 0;
+			        int WheneverKeyword_Number[] = new int[a.size()];
+			        for(int x = 0; x < a.size(); x++)
+			            if(a.get(x).toString().startsWith("WheneverKeyword")) {
+			            	WheneverKeyword_Number[WheneverKeywords] = x;
+			            	WheneverKeywords = WheneverKeywords + 1;
+			            }
+			        for(int CKeywords = 0; CKeywords < WheneverKeywords; CKeywords++) {
+	             String parse = sp.getSourceCard().getKeyword().get(WheneverKeyword_Number[CKeywords]).toString();                
+	             String k[] = parse.split(":");
+	             if(k[1].equals("ActualSpell") && ActualEffectTriggered == false) {
+	            	 AllZone.GameAction.CheckWheneverKeyword(sp.getSourceCard(),"ActualSpell",null);
+	            	 sp.getSourceCard().removeIntrinsicKeyword(parse);
+	            	 ActualEffectTriggered = true;
+	             }
+			        }
+		  
+		  }
+		 if(ActualEffectTriggered == false) {
+		  //  // WheneverKeyword Test: Added one } at end
 	  if(sp instanceof Ability_Mana || sp instanceof Ability_Triggered)//TODO make working triggered abilities!
 		  sp.resolve(); 
 	  else {
@@ -226,6 +249,7 @@ public class MagicStack extends MyObservable
 		  }
 		  
 	  }
+  }
   }
   public int size()
   {

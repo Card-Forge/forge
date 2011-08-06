@@ -915,13 +915,28 @@ public class GameAction {
                         String StackDescription = F_card + " - ";                    
                         final int[] Effects_Count = new int[1];   
                         
-                   		final Ability ability = new Ability(card, ManaCost) {
+                   		final Ability Ability = new Ability(card, ManaCost) {
                 			@Override
                 			public void resolve() {
                 				for(int Commands = 0; Commands < Command_Effects.length; Commands++) Whenever_ManaPaid(F_card, F_k, Command_Effects[Commands], this);
                 			}
                 		};
                         
+                   		final Spell Spell = new Spell(card) {
+							private static final long serialVersionUID = -4909393989689642952L;
+
+							@Override
+                			public void resolve() {
+                				for(int Commands = 0; Commands < Command_Effects.length; Commands++) Whenever_ManaPaid(F_card, F_k, Command_Effects[Commands], this);
+                			}
+                		};
+
+                		SpellAbility[] SpellAbility = new SpellAbility[1];
+                		if(k[1].equals("ActualSpell")) SpellAbility[0] = Spell;
+                		else SpellAbility[0] = Ability;
+                		
+                		final SpellAbility F_SpellAbility = SpellAbility[0];
+                		
                 		if(k[7].contains("Choice_Instant") && k[4] != "Null") {
                 	    	if(card.getController().equals("Human")) {
                 	        	Object[] possibleValues = {"Yes", "No"};
@@ -984,19 +999,19 @@ public class GameAction {
                                public void execute() {
                                	MultiTarget_Cancelled = false;
                                    for(int i = 0; i < F_Multiple_Targets; i++) {
-                                  	 AllZone.InputControl.setInput(CardFactoryUtil.input_MultitargetCreatureOrPlayer(ability , i , F_Amount[0]*F_Multiple_Targets,new Command() {
+                                  	 AllZone.InputControl.setInput(CardFactoryUtil.input_MultitargetCreatureOrPlayer(F_SpellAbility , i , F_Amount[0]*F_Multiple_Targets,new Command() {
                                   	
                                         private static final long serialVersionUID = -328305150127775L;
                                         
                                         public void execute() {
-                                       	 Targets_Multi[index[0]] = ability.getTargetPlayer(); 
-                                       	 if(Targets_Multi[index[0]] == null) Targets_Multi[index[0]] = ability.getTargetCard();
+                                       	 Targets_Multi[index[0]] = F_SpellAbility.getTargetPlayer(); 
+                                       	 if(Targets_Multi[index[0]] == null) Targets_Multi[index[0]] = F_SpellAbility.getTargetCard();
                                             index[0]++;  
                                             if(F_Multiple_Targets == 1) AllZone.Stack.updateObservers();
                                        	 }
                                     }));
                                    } 
-                               	AllZone.Stack.add(ability);
+                               	AllZone.Stack.add(F_SpellAbility);
                                }
                            };
                            
@@ -1007,7 +1022,7 @@ public class GameAction {
                    		            String WhichInput = F_k[5].split("/")[1]; 
                    		            if(WhichInput.equals("Creature")) 
                    		            	if(F_card.getController().equals(Constant.Player.Human))
-                   		            		AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreature(ability, GetTargetsCommand));
+                   		            		AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreature(F_SpellAbility, GetTargetsCommand));
                    		            	else {
                    		            		CardList PossibleTargets = new CardList();	
                    		            		PossibleTargets.addAll(AllZone.Human_Play.getCards());
@@ -1022,7 +1037,7 @@ public class GameAction {
                                         		});
                    		            			if(PossibleTargets.size() > 0) {
                    		            			Targets_Multi[index[0]] = CardFactoryUtil.AI_getBestCreature(PossibleTargets,F_card);
-                   		            			AllZone.Stack.add(ability);              		            			 
+                   		            			AllZone.Stack.add(F_SpellAbility);              		            			 
                    		            			}
                    		            			index[0]++;
                    		            		} else {
@@ -1034,7 +1049,7 @@ public class GameAction {
                                         		});
                    		            			if(PossibleTargets.size() > 0) {
                        		            		Targets_Multi[index[0]] = CardFactoryUtil.AI_getBestCreature(PossibleTargets,F_card);
-                       		            		AllZone.Stack.add(ability);              		            			 
+                       		            		AllZone.Stack.add(F_SpellAbility);              		            			 
                        		            		}
                        		            		index[0]++; 
                    		            		}
@@ -1042,16 +1057,16 @@ public class GameAction {
                    		            	}
                    		            if(WhichInput.equals("Player")) 
                    		            	if(F_card.getController().equals(Constant.Player.Human))
-                   		            		AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(ability, GetTargetsCommand));
+                   		            		AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(F_SpellAbility, GetTargetsCommand));
                    		            	else {
                    		            		if(Whenever_AI_GoodEffect(F_k)) {
                    		            			Targets_Multi[index[0]] = Constant.Player.Computer;
-                   		            			if(Targets_Multi[index[0]] != null) AllZone.Stack.add(ability);
+                   		            			if(Targets_Multi[index[0]] != null) AllZone.Stack.add(F_SpellAbility);
                    		            			index[0]++; 
                    		            		}
                    		            		 else {
                    		            			 Targets_Multi[index[0]] = Constant.Player.Human;
-                   		            		     if(Targets_Multi[index[0]] != null) AllZone.Stack.add(ability);
+                   		            		     if(Targets_Multi[index[0]] != null) AllZone.Stack.add(F_SpellAbility);
                    		            			 index[0]++; 
                    		            		 }
                            		      		
@@ -1106,7 +1121,7 @@ public class GameAction {
                    		      		Restriction_Count[0]++;
                    		      		}
                    		            	if(F_card.getController().equals(Constant.Player.Human))
-                   		            		AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, Cards_inPlay, "Select a Valid Card", GetTargetsCommand, true, true));
+                   		            		AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(F_SpellAbility, Cards_inPlay, "Select a Valid Card", GetTargetsCommand, true, true));
                    		            	else {
                    		            		if(Whenever_AI_GoodEffect(F_k)) {
                    		            			Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
@@ -1117,7 +1132,7 @@ public class GameAction {
                                         		});
                 		            			if(Cards_inPlay.size() > 0) {
                            		            		Targets_Multi[index[0]] = CardFactoryUtil.AI_getBestCreature(Cards_inPlay,F_card);
-                           		            		AllZone.Stack.add(ability);              		            			 
+                           		            		AllZone.Stack.add(F_SpellAbility);              		            			 
                            		            		}
                            		            		index[0]++; 
                    		            		} else {
@@ -1129,13 +1144,14 @@ public class GameAction {
                                         		});
                   		            			if(Cards_inPlay.size() > 0) {
                            		            		Targets_Multi[index[0]] = CardFactoryUtil.AI_getBestCreature(Cards_inPlay,F_card);
-                           		            		AllZone.Stack.add(ability);              		            			 
+                           		            		AllZone.Stack.add(F_SpellAbility);              		            			 
                            		            		}
                            		            		index[0]++;                  		            			
                    		            		}
                            		      		
                    		            	}
                    		            }	
+                   		            
                    		         AllZone.Stack.updateObservers();
                                }
                                
@@ -1144,8 +1160,8 @@ public class GameAction {
                                         private static final long serialVersionUID = -328305150127775L;
                                         
                                         public void execute() {
-                                       	 Targets_Multi[index[0]] = ability.getTargetPlayer(); 
-                                       	 if(Targets_Multi[index[0]] == null) Targets_Multi[index[0]] = ability.getTargetCard();
+                                       	 Targets_Multi[index[0]] = F_SpellAbility.getTargetPlayer(); 
+                                       	 if(Targets_Multi[index[0]] == null) Targets_Multi[index[0]] = F_SpellAbility.getTargetCard();
                                        	if(F_k[8].contains("AttachTarget")) F_card.attachCard((Card) Targets_Multi[index[0]]);
                                             index[0]++;  
                                             if(F_Multiple_Targets == 1) AllZone.Stack.updateObservers();                                       
@@ -1624,10 +1640,10 @@ public class GameAction {
                 		if(Effects_Count[0] != Effects) StackDescription = StackDescription + " and ";
                 		else StackDescription = StackDescription + ".";
                 		 }  // For     
-                    		ability.setStackDescription(StackDescription);
+                    		F_SpellAbility.setStackDescription(StackDescription);
                     		for(int Check = 0; Check < Command_Effects.length; Check++)
                     			if(!Command_Effects[Check].equals(Command.Blank)) {
-                    				Whenever_Input(F_card,F_k,CommandExecute[0],ability);
+                    				Whenever_Input(F_card,F_k,CommandExecute[0],F_SpellAbility);
                     				break;
                     			}
  		        }
@@ -1726,7 +1742,7 @@ public class GameAction {
         if(Keyword_Details[7].contains("Choice_Instant-SearchLibrary")) {
     	    	if(Source.getController().equals("Human")) {
     	        	Object[] possibleValues = {"Yes", "No"};
-    	        	Object q = JOptionPane.showOptionDialog(null, "Search Libraries?",Source.getName() + " Ability", 
+    	        	Object q = JOptionPane.showOptionDialog(null, "Search Libraries?",Source.getName() + " F_SpellAbility", 
     	        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
     	        			null, possibleValues, possibleValues[0]);
     	              if(q.equals(1)) {
@@ -1919,7 +1935,7 @@ public class GameAction {
 		}
 	
 	public void Whenever_Input(Card Source, String[] Keyword_Details, Command paidCommand, final SpellAbility ability) {
-		if(!Keyword_Details[1].equals("AsLongAsCardIsInPlay")) {
+		if(!Keyword_Details[8].contains("ActualEffect")) {
 		String Zones = Keyword_Details[3];
         PlayerZone[] Required_Zone = new PlayerZone[1];
         	if(Zones.equals("Hand")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Hand, Source.getController());
@@ -1942,7 +1958,7 @@ public class GameAction {
     				else AllZone.Stack.add(ability);
     			}
 		}
-	}
+	} else paidCommand.execute();
 	}
     // Whenever Keyword
 	

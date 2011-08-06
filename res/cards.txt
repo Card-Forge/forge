@@ -1,3 +1,9 @@
+Doom Blade
+1 B
+Instant
+no text
+WheneverKeyword:ActualSpell:Self:Any:Destroy/1:NormalInput/Specific/NonColor.black/Type.Creature:ASAP:No_Condition:No Special Condition:Destroy target nonblack creature.
+
 Gemstone Mine
 no cost
 Land
@@ -13130,12 +13136,6 @@ Purge
 Instant
 Destroy target artifact creature or black creature. It can't be regenerated.
 spDestroyTgt:Creature.Artifact,Creature.Black:NoRegen
-
-Doom Blade
-1 B
-Instant
-Destroy target nonblack creature.
-spDestroyTgt:Creature.nonBlack
 
 Annihilate
 3 B B
