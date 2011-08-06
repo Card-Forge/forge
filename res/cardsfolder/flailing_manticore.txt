@@ -1,0 +1,13 @@
+Name:Flailing Manticore
+ManaCost:3 R
+Types:Creature Manticore
+Text:no text
+PT:3/3
+K:Flying
+K:First Strike
+A:AB$Pump | Cost$ 1 | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Flailing Manticore gets +1/+1 until end of turn.
+A:AB$Pump | Cost$ 1 | NumAtt$ -1 | NumDef$ -1 | SpellDescription$ Flailing Manticore gets -1/-1 until end of turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flailing_manticore.jog
+SetInfo:MM|Rare|http://magiccards.info/scans/en/mm/187.jpg
+End
