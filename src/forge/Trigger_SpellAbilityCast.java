@@ -2,20 +2,48 @@ package forge;
 
 import java.util.HashMap;
 
-public class Trigger_SpellCast extends Trigger {
+public class Trigger_SpellAbilityCast extends Trigger {
 
-	public Trigger_SpellCast(HashMap<String, String> params, Card host) {
+	public Trigger_SpellAbilityCast(HashMap<String, String> params, Card host) {
 		super(params, host);
 	}
 
 	@Override
 	public boolean performTest(HashMap<String, Object> runParams) 
 	{
-		Card cast = ((Spell)runParams.get("CastSA")).getSourceCard();
-		
-		if(mapParams.containsKey("ValidPlayer"))
+		SpellAbility SA = (SpellAbility)runParams.get("CastSA");
+		Card cast = SA.getSourceCard();
+
+		if(mapParams.get("Mode").equals("SpellCast"))
 		{
-			if(!matchesValid(cast.getController(),mapParams.get("ValidPlayer").split(","),hostCard))
+			if(!SA.isSpell())
+			{
+				return false;
+			}
+		}
+		else if(mapParams.get("Mode").equals("AbilityCast"))
+		{
+			if(!SA.isAbility())
+			{
+				return false;
+			}
+		}
+		else if(mapParams.get("Mode").equals("SpellAbilityCast"))
+		{
+			//Empty block for readability.
+		}
+		
+		if(mapParams.containsKey("ValidControllingPlayer"))
+		{
+			if(!matchesValid(cast.getController(),mapParams.get("ValidControllingPlayer").split(","),hostCard))
+			{
+				return false;
+			}
+		}
+		
+		if(mapParams.containsKey("ValidActivatingPlayer"))
+		{
+			if(!matchesValid(SA.getActivatingPlayer(),mapParams.get("ValidActivatingPlayer").split(","),hostCard))
 			{
 				return false;
 			}
@@ -73,6 +101,6 @@ public class Trigger_SpellCast extends Trigger {
 
 	@Override
 	public Trigger getCopy() {
-		return new Trigger_SpellCast(mapParams,hostCard);
+		return new Trigger_SpellAbilityCast(mapParams,hostCard);
 	}
 }

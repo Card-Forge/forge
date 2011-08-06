@@ -13,7 +13,11 @@ public class TriggerHandler {
 		Trigger ret = null;
 		
 		String mode = mapParams.get("Mode");
-		if(mode.equals("AttackerBlocked"))
+		if(mode.equals("AbilityCast"))
+		{
+			ret = new Trigger_SpellAbilityCast(mapParams,host);
+		}
+		else if(mode.equals("AttackerBlocked"))
 		{
 			ret = new Trigger_AttackerBlocked(mapParams,host);
 		}
@@ -57,9 +61,13 @@ public class TriggerHandler {
 		{
 			ret = new Trigger_Sacrificed(mapParams,host);
 		}
+		else if(mode.equals("SpellAbilityCast"))
+		{
+			ret = new Trigger_SpellAbilityCast(mapParams,host);
+		}
 		else if(mode.equals("SpellCast"))
 		{
-			ret = new Trigger_SpellCast(mapParams,host);
+			ret = new Trigger_SpellAbilityCast(mapParams,host);
 		}
 		else if(mode.equals("Taps"))
 		{
