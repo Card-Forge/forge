@@ -3,7 +3,7 @@ ManaCost:B
 Types:Enchantment
 Text:no text
 K:stPumpAll:Creature.White:-1/-1:No Condition:White creatures get -1/-1.
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_of_night.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/24.jpg

@@ -3,7 +3,7 @@ ManaCost:B B
 Types:Enchantment
 Text:no text
 A:AB$Counter | Cost$ B B | Type$ Spell | CounterValid$ Card.Green | SpellDescription$ Counter target green spell.
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathgrip.jpg
 SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/9.jpg

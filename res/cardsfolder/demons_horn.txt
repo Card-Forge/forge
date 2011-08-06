@@ -4,7 +4,7 @@ Types:Artifact
 Text:no text
 T:Mode$ SpellCast | ValidCard$ Card.Black | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ Whenever a player casts a black spell, you may gain 1 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demons_horn.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/204.jpg
