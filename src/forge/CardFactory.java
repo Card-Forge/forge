@@ -10411,6 +10411,17 @@ public class CardFactory implements NewConstants {
                         if(c.isCreature()) AllZone.GameAction.destroyNoRegeneration(c);
                     }
                 }//resolve()
+
+                @Override
+                public boolean canPlayAI() {
+                    CardList human = new CardList(AllZone.Human_Play.getCards());
+                    
+                    human = human.getType("Creature");
+                    human = human.getNotKeyword("Indestructible");                    
+                    
+                    // the computer will at least destroy 1 creature
+                    return !human.isEmpty();
+                }
             };//SpellAbility
             card.clearSpellAbility();
             card.addSpellAbility(spell);
@@ -13543,31 +13554,52 @@ public class CardFactory implements NewConstants {
             SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 2169815434022673011L;
                 
+                CardListFilter filter = new CardListFilter() {
+        			public boolean addCard(Card c) {
+        				return c.isCreature() && CardUtil.getConvertedManaCost(c) <= 3;
+        			}
+        		};
+
                 @Override
-                public void resolve() {
-                    CardList all = new CardList();
-                    all.addAll(AllZone.Human_Play.getCards());
-                    all.addAll(AllZone.Computer_Play.getCards());
-                    
-                    for(int i = 0; i < all.size(); i++) {
-                        Card c = all.get(i);
-                        int convertedManaCost = CardUtil.getConvertedManaCost(c.getManaCost());
-                        if(c.isCreature() && (convertedManaCost <= 3)) AllZone.GameAction.destroy(c);
+        		public void resolve() {
+        			CardList all = new CardList();
+        			all.add(getHumanCreatures());
+        			all.add(getComputerCreatures());
+
+        			for(int i = 0; i < all.size(); i++) {
+        				Card c = all.get(i);
+        				AllZone.GameAction.destroy(c);
                     }
                 }//resolve()
                 
-                @Override
-                public boolean canPlayAI() {
-                    CardList human = new CardList(AllZone.Human_Play.getCards());
-                    CardList computer = new CardList(AllZone.Computer_Play.getCards());
-                    
-                    human = human.getType("Creature");
-                    computer = computer.getType("Creature");
-                    
-                    //the computer will at least destroy 2 more human creatures
-                    return computer.size() < human.size() - 1
-                            || (AllZone.Computer_Life.getLife() < 7 && !human.isEmpty());
-                }
+                CardListFilter filter = new CardListFilter() {
+        			public boolean addCard(Card c) {
+        				return c.isCreature() && CardUtil.getConvertedManaCost(c) <= 3;
+        			}
+        		};
+
+        		private CardList getHumanCreatures() {
+        			CardList human = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Human);
+        			return human.filter(filter);
+        		}
+
+        		private CardList getComputerCreatures() {
+        			CardList comp = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+        			return comp.filter(filter);
+        		}
+
+        		@Override
+        		public boolean canPlayAI() {
+        			CardList human = getHumanCreatures();
+        			human = human.getNotKeyword("Indestructible");
+        			CardList computer = getComputerCreatures();
+        			computer = computer.getNotKeyword("Indestructible");
+
+        			// the computer will at least destroy 2 more human creatures
+        			return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
+        			(computer.size() < human.size() - 1
+        					|| (AllZone.Computer_Life.getLife() < 7 && !human.isEmpty()));
+        		}
             };//SpellAbility
             card.clearSpellAbility();
             card.addSpellAbility(spell);
@@ -13602,13 +13634,22 @@ public class CardFactory implements NewConstants {
                     CardList computer = new CardList(AllZone.Computer_Play.getCards());
                     
                     human = human.getType("Creature");
+                    human = human.getNotKeyword("Indestructible");
                     computer = computer.getType("Creature");
+                    computer = computer.getNotKeyword("Indestructible");
                     
                     human = human.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.getNetAttack() >= 4;
                         }
                     });
+
+                    computer = computer.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.getNetAttack() >= 4;
+                        }
+                    });
+
                     
                     //the computer will at least destroy 2 more human creatures
                     return computer.size() < human.size() - 1
@@ -13678,7 +13719,9 @@ public class CardFactory implements NewConstants {
                     CardList comp = new CardList(AllZone.Computer_Play.getCards());
                     
                     hum = hum.getType("Creature");
+                    hum = hum.getNotKeyword("Indestructible");
                     comp = comp.getType("Creature");
+                    comp = comp.getNotKeyword("Indestructible");
                     
                     CardList human = new CardList();
                     CardList computer = new CardList();
@@ -21405,7 +21448,9 @@ public class CardFactory implements NewConstants {
         		@Override
         		public boolean canPlayAI() {
         			CardList human = getHumanCreatures();
+        			human = human.getNotKeyword("Indestructible");
         			CardList computer = getComputerCreatures();
+        			computer = computer.getNotKeyword("Indestructible");
 
         			// the computer will at least destroy 2 more human creatures
         			return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
@@ -21996,7 +22041,11 @@ public class CardFactory implements NewConstants {
         		@Override
         		public boolean canPlayAI() {
         			CardList human = AllZoneUtil.getCreaturesInPlay(Constant.Player.Human);
+        			human = human.filter(AllZoneUtil.tapped);
+        			human = human.getNotKeyword("Indestructible");
         			CardList computer = AllZoneUtil.getCreaturesInPlay(Constant.Player.Computer);
+        			computer = computer.filter(AllZoneUtil.tapped);
+        			computer = computer.getNotKeyword("Indestructible");
 
         			// the computer will at least destroy 2 more human creatures
         			return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
@@ -22029,8 +22078,10 @@ public class CardFactory implements NewConstants {
         		public boolean canPlayAI() {
         			CardList human = AllZoneUtil.getCreaturesInPlay(Constant.Player.Human);
         			human = human.filter(powerSix);
+        			human = human.getNotKeyword("Indestructible");
         			CardList computer = AllZoneUtil.getCreaturesInPlay(Constant.Player.Computer);
         			computer = computer.filter(powerSix);
+        			computer = computer.getNotKeyword("Indestructible");
         			
         			// the computer will at least destroy 2 more human creatures
         			return  (AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 

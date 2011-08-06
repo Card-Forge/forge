@@ -640,8 +640,13 @@ public class GameAction {
         ArrayList<Card> a = PlayerZoneUtil.getCardType(AllZone.Human_Play, "Legendary");
         a.addAll(PlayerZoneUtil.getCardType(AllZone.Computer_Play, "Legendary"));               
 
+        CardList Mirror_Gallery = new CardList();                   // Mirror Gallery suppresses the Legend rule
+        Mirror_Gallery.addAll(AllZone.Human_Play.getCards());
+        Mirror_Gallery.addAll(AllZone.Computer_Play.getCards());
+        Mirror_Gallery = Mirror_Gallery.getName("Mirror Gallery");
+
         
-        while(!a.isEmpty() && !isCardInPlay("Mirror Gallery")) {         // Mirror Gallery suppresses the Legend rule
+        while(!a.isEmpty() && Mirror_Gallery.isEmpty()) {
             ArrayList<Card> b = getCardsNamed(a, (a.get(0)).getName());
             a.remove(0);
             if(1 < b.size()) {
