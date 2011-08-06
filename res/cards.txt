@@ -1,3 +1,30 @@
+No Mercy
+2 B B
+Enchantment
+Whenever a creature deals damage to you, destroy it.
+SVar:Rarity:Rare
+
+Farsight Mask
+5
+Artifact
+Whenever a source an opponent controls deals damage to you, if Farsight Mask is untapped, you may draw a card.
+SVar:Rarity:Uncommon
+
+Dread
+3 B B B
+Creature Elemental Incarnation
+Whenever a creature deals damage to you, destroy it.
+6/6
+Fear
+When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library.
+SVar:Rarity:Rare
+
+Dissipation Field
+2 U U
+Enchantment
+Whenever a permanent deals damage to you, return it to its owner's hand.
+SVar:Rarity:Rare
+
 Long-Term Plans
 2 U
 Instant

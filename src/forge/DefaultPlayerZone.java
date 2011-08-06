@@ -33,6 +33,20 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
     	AllZone.GameAction.shuffle(c.getOwner());
     	return;
     }
+    //slight difference from above I guess, the card gets put into the grave first, then shuffled into library.
+    //key is that this would trigger abilities that trigger on cards hitting the graveyard
+    else if (is("Graveyard") && c.getKeyword().contains("When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library."))
+    {
+    	PlayerZone lib = AllZone.getZone(Constant.Zone.Library, c.getOwner());
+       	PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getOwner());
+       	
+       	grave.add(c);
+       	grave.remove(c);
+       	lib.add(c);
+       	AllZone.GameAction.shuffle(c.getOwner());
+       	return;
+    }
+    	
     
     if (is("Graveyard")
         	&& c.getKeyword().contains("When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and its owner shuffles his or her graveyard into his or her library."))
@@ -46,6 +60,8 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
        	AllZone.GameAction.shuffle(c.getOwner());
        	return;
     }
+    
+    
     
     if (c.isUnearthed() && (is("Graveyard") || is("Hand")))
     {

@@ -5043,10 +5043,44 @@ public class GameActionUtil {
     }
 
     //not restricted to just combat damage:
-    public static void executePlayerDamageEffects(Card c, int damage, boolean isCombatDamage)
+    public static void executePlayerDamageEffects(String player, Card c, int damage, boolean isCombatDamage)
     {
     	if (damage > 0)
     	{
+    		CardList playerPerms = AllZoneUtil.getPlayerCardsInPlay(player);
+    		if (playerPerms.getName("Dissipation Field").size() > 0)  {  
+    			CardList disFields = playerPerms.getName("Dissipation Field");
+    			for (int i=0;i<disFields.size();i++) {
+    				Card crd = disFields.get(i);
+    				playerDamage_Dissipation_Field(c, crd);
+    			}
+    		}
+    		if (c.isCreature() && (playerPerms.getName("Dread").size() > 0 || playerPerms.getName("No Mercy").size() > 0))
+    		{
+    			CardList l = playerPerms.filter(new CardListFilter()
+    			{
+    				public boolean addCard(Card crd)
+    				{
+    					return crd.getName().equals("Dread") || crd.getName().equals("No Mercy");
+    				}
+    			});
+    			for (Card crd:l)
+    				playerDamage_No_Mercy(c, crd);
+    		}
+    		if (playerPerms.getName("Farsight Mask").size() > 0)    		
+    		{
+    			final Card c1 = c;
+    			CardList l = playerPerms.filter(new CardListFilter()
+    			{
+    				public boolean addCard(Card crd)
+    				{
+    					return crd.getName().equals("Farsight Mask") && crd.isUntapped() && !c1.getController().equals(crd.getController());
+    				}
+    			});
+    			for (Card crd:l)
+    				playerDamage_Farsight_Mask(player, c, crd);
+    		}
+    		
 	    	if(c.getKeyword().contains("Whenever this creature deals damage to a player, that player gets a poison counter."))
 				playerCombatDamage_PoisonCounter(c, 1);
 	    
@@ -5221,7 +5255,6 @@ public class GameActionUtil {
 			Ability ability2 = new Ability(c, "0") {
 				@Override
 				public void resolve() {
-
 					AllZone.GameAction.drawCard(player);
 					if(opponent.equals(Constant.Player.Human)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
 					else AllZone.GameAction.discardRandom(Constant.Player.Computer, this);
@@ -5233,6 +5266,63 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability2);
 		}
 
+	}
+	
+	private static void playerDamage_Dissipation_Field(final Card c, final Card crd)
+	{
+		final String owner = c.getOwner();
+		
+		Ability ability = new Ability(crd,"0")
+		{
+			public void resolve() {
+				if (AllZone.GameAction.isCardInPlay(c)) {
+					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, owner);
+					AllZone.GameAction.moveTo(hand, c);
+				}
+			}	
+		};
+		ability.setStackDescription("Dissipation Field - returns " +c + " back to owner's hand.");
+		AllZone.Stack.add(ability);
+	}
+	
+	private static void playerDamage_No_Mercy(final Card c, final Card crd)
+	{		
+		Ability ability = new Ability(crd,"0")
+		{
+			public void resolve() {
+				if (AllZone.GameAction.isCardInPlay(c))
+				{
+					AllZone.GameAction.destroy(c);
+				}
+			}	
+		};
+		ability.setStackDescription(crd + " - destroys " +c + ".");
+		AllZone.Stack.add(ability);
+	}
+	
+	private static void playerDamage_Farsight_Mask(final String player, final Card c, final Card crd)
+	{
+		
+		Ability ability = new Ability(crd,"0")
+		{
+			public void resolve()
+			{
+				if (crd.isUntapped())
+				{
+					if (player.equals(Constant.Player.Human))
+					{
+						String[] choices = {"Yes", "No"};
+						Object choice = AllZone.Display.getChoice("Draw a card?", choices);
+						if(choice.equals("Yes")) 
+							AllZone.GameAction.drawCard(player);
+					}
+					else
+						AllZone.GameAction.drawCard(player);
+				}
+			}
+		};
+		ability.setStackDescription("Farsight Mask - You may draw a card.");
+		AllZone.Stack.add(ability);
 	}
 
 	private static void playerCombatDamage_Ghastlord_of_Fugue(Card c) {
