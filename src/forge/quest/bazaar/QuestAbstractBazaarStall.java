@@ -11,7 +11,8 @@ import java.awt.*;
 import java.io.File;
 
 public abstract class QuestAbstractBazaarStall extends JPanel implements NewConstants{
-    String stallName;
+	private static final long serialVersionUID = -4147745071116906043L;
+	String stallName;
     String fluff;
     ImageIcon icon;
 

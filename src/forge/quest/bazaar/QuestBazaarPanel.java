@@ -12,8 +12,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class QuestBazaarPanel extends JPanel{
-
-    QuestMainFrame mainFrame;
+	private static final long serialVersionUID = 1418913010051869222L;
+	
+	QuestMainFrame mainFrame;
     static List<QuestAbstractBazaarStall> stallList = new ArrayList<QuestAbstractBazaarStall>();
 
     JPanel buttonPanel = new JPanel(new BorderLayout());

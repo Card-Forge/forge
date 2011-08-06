@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestAlchemistStall extends QuestAbstractBazaarStall {
+	private static final long serialVersionUID = 4168443923065232858L;
 
-    protected QuestAlchemistStall() {
+
+	protected QuestAlchemistStall() {
         super("Alchemist",
                 "BottlesIconSmall.png",
                 "The walls of this alchemist's stall are covered with shelves with potions, oils, powders, poultices and elixirs, each meticulously labeled.");

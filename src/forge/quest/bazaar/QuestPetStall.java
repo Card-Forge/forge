@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestPetStall extends QuestAbstractBazaarStall {
-
-    public QuestPetStall() {
+	private static final long serialVersionUID = -599280030410495964L;
+	
+	public QuestPetStall() {
         super("Pet Shop", "FoxIconSmall.png", "This large stall echoes with a multitude of animal noises.");
 
     }

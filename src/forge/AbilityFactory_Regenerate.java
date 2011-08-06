@@ -109,10 +109,10 @@ public class AbilityFactory_Regenerate {
 	}
 
 	private static boolean doCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-		final HashMap<String,String> params = af.getMapParams();
+		//final HashMap<String,String> params = af.getMapParams();
 		final Card hostCard = af.getHostCard();
 		boolean chance = false;
-		ArrayList<Card> tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+		//ArrayList<Card> tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
 		
 		// if there is no target and host card isn't in play, don't activate
 		if (af.getAbTgt() == null && !AllZone.GameAction.isCardInPlay(hostCard)) 

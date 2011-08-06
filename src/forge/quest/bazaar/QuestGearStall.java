@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestGearStall extends QuestAbstractBazaarStall{
-    
-    public QuestGearStall() {
+	private static final long serialVersionUID = -3809151981859475562L;
+
+	public QuestGearStall() {
         super("Adventuring Gear","GearIconSmall.png","This adventurer's market has a tool for every need ... or so the plaque on the wall claims.");
     }
 

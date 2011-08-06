@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestBookStall extends QuestAbstractBazaarStall{
-    
-    public QuestBookStall() {
+	private static final long serialVersionUID = -2045024031362910371L;
+
+	public QuestBookStall() {
         super("Bookstore", "BookIconSmall.png", "Tomes of different sizes are stacked in man-high towers.");
     }
     

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestNurseryStall extends QuestAbstractBazaarStall{
+	private static final long serialVersionUID = 9217496944324343390L;
 
-    
-    public QuestNurseryStall() {
+	public QuestNurseryStall() {
         super("Nursery", "LeafIconSmall.png", "The smells of the one hundred and one different plants forms a unique fragrance.");
     }
 

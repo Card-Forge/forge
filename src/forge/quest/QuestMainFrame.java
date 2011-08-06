@@ -7,7 +7,9 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class QuestMainFrame extends JFrame {
-    JPanel visiblePanel;
+	private static final long serialVersionUID = -2832625381531838412L;
+	
+	JPanel visiblePanel;
     CardLayout questLayout;
 
     public static final String MAIN_PANEL = "Main";
