@@ -398,7 +398,7 @@ public class AbilityFactory_PermanentState {
 				return false;
 		}
 		else{
-			CardList tapList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+			CardList tapList = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
 			tapList = tapList.filter(AllZoneUtil.untapped);
 			tapList = tapList.getValidCards(tgt.getValidTgts(), source.getController(), source);
 			// filter out enchantments and planeswalkers, their tapped state doesn't matter.
