@@ -325,9 +325,11 @@ public class ManaPool extends Card {
                 continue;
             }
             used.add(mability);
-            for(String c:getManaParts(mability)) {
-                if(c.equals("")) continue; // some sort of glitch
-                m = subtractOne(m, c);
+            if(null != getManaParts(mability)) {
+            	for(String c:getManaParts(mability)) {
+            		if(c.equals("")) continue; // some sort of glitch
+            		m = subtractOne(m, c);
+            	}
             }
         }
         return m;
