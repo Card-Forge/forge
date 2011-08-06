@@ -36,6 +36,7 @@ public class GameAction {
     	String prevName = "";
         PlayerZone prev = AllZone.getZone(c);
 
+        //Card lastKnownInfo = getLastKnownInformation(c);
         Card lastKnownInfo = c;
         
         if(prev != null){
@@ -86,11 +87,16 @@ public class GameAction {
     }
     
     public Card getLastKnownInformation(Card card){
+    	// this may be necessary at some point, but I'm not certain
     	// record last known information before moving zones
     	Card lastKnown = AllZone.CardFactory.copyCard(card);
     	
-    	for(Card attach : card.getAttachedCards())
-    		lastKnown.attachCard(attach);
+    	for(Card eq : card.getEquippedBy())
+    		eq.equipCard(lastKnown);
+    	
+    	for(Card en : card.getEnchantedBy())
+    		en.enchantCard(lastKnown);
+    	
     	lastKnown.setExtrinsicKeyword(card.getExtrinsicKeyword());
 
     	return lastKnown;

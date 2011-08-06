@@ -706,7 +706,7 @@ public class AbilityFactory {
 		}
 		
 		else if (defined.equals("Triggered"))
-			c = sa.getTriggeringCard();
+			c = AllZoneUtil.getCardState(sa.getTriggeringCard());
 		
 		else if (defined.equals("Remembered")){
 			for(Card rem : hostCard.getRemembered()){

@@ -369,10 +369,12 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         
 
         if(leavesTrigger) {
-        	AllZone.GameAction.checkWheneverKeyword(c,"LeavesBattleField",null);
+			// Commented out because whenever keyword checks the state, which should NOT happen right now
+        	// And nothing uses this whenever keyword anymore
+			//AllZone.GameAction.checkWheneverKeyword(c,"LeavesBattleField",null);
         	c.leavesPlay();
         }
-        
+
         if(AllZone.StaticEffects.getCardToEffectsList().containsKey(c.getName())) {
             String[] effects = AllZone.StaticEffects.getCardToEffectsList().get(c.getName());
             String tempEffect = "";
@@ -384,11 +386,11 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             }
             
         }
+
         for(String effect:AllZone.StaticEffects.getStateBasedMap().keySet()) {
             Command com = GameActionUtil.commands.get(effect);
             com.execute();
         }
-        
     }
     
     public void setTrigger(boolean b) {
