@@ -6497,6 +6497,8 @@ public class GameActionUtil {
                     c.addType("Creature");
                     c.addType("Dragon");
                     
+                    c.addIntrinsicKeyword("Flying");
+                    
                     c.setBaseAttack(1);
                     c.setBaseDefense(1);
                     
