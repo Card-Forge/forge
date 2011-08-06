@@ -721,7 +721,10 @@ public class MagicStack extends MyObservable {
 		
 		while(true){
 			Target tgt = fizzSA.getTarget();
-			if (firstTarget && (tgt != null || fizzSA.getTargetCard() != null || fizzSA.getTargetPlayer() != null)){
+			if (tgt != null && tgt.getMinTargets(source, fizzSA) == 0 && tgt.getNumTargeted() == 0){
+				// Don't assume fizzled for minTargets == 0 and nothing is targeted
+			}
+			else if (firstTarget && (tgt != null || fizzSA.getTargetCard() != null || fizzSA.getTargetPlayer() != null)){
 				// If there is at least 1 target, fizzle switches because ALL targets need to be invalid
 				fizzle = true;
 				firstTarget = false;	
