@@ -1,10 +1,10 @@
 Name:Vampiric Spirit
 ManaCost:2 B B
 Types:Creature Spirit
-Text:no text
+Text:When CARDNAME enters the battlefield, you lose 4 life.
 PT:4/3
 K:Flying
-K:WheneverKeyword:EntersBattleField:Self:Play:ModifyLife/-4:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Vampiric Spirit enters the battlefield, you lose 4 life.
+K:etbLoseLife:4
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampiric_spirit.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/170.jpg

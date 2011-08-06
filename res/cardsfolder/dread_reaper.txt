@@ -1,10 +1,10 @@
 Name:Dread Reaper
 ManaCost:3 B B B
 Types:Creature Horror
-Text:no text
+Text:When CARDNAME enters the battlefield, you lose 5 life.
 PT:6/5
 K:Flying
-K:WheneverKeyword:EntersBattleField:Self:Play:ModifyLife/-5:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Dread Reaper enters the battlefield, you lose 5 life.
+K:etbLoseLife:5
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_reaper.jpg
 SetInfo:S99|Rare|http://magiccards.info/scans/en/st/76.jpg

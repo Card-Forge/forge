@@ -4,6 +4,7 @@ Types:Creature Imp
 Text:When CARDNAME enters the battlefield, you lose 2 life.
 PT:2/2
 K:Flying
+K:etbLoseLife:2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/st/en-us/card5158.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/9.jpg

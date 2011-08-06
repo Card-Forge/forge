@@ -1,0 +1,10 @@
+Name:Necrogen Scudder
+ManaCost:2 B
+Types:Creature Horror
+Text:When CARDNAME enters the battlefield, you lose 2 life.
+PT:3/3
+K:Flying
+K:etbLoseLife:3
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/necrogen_scudder.jpg
+End
