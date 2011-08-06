@@ -238,11 +238,13 @@ public abstract class Player extends MyObservable{
         	addPoisonCounters(damageToDo);
         }
         else {
+        	//Worship does not reduce the damage dealt but changes the effect of the damage
         	if(PlayerUtil.worshipFlag(this) && life <= damageToDo) {
-        		damageToDo = Math.min(damageToDo, life - 1);
+        		loseLife(Math.min(damageToDo, life - 1), source);
         	}
-        	//rule 118.2. Damage dealt to a player normally causes that player to lose that much life.
-        	loseLife(damageToDo, source);
+        	else
+        		//rule 118.2. Damage dealt to a player normally causes that player to lose that much life.
+        		loseLife(damageToDo, source);
         }
         if ( damageToDo > 0 ) {
 	        GameActionUtil.executeDamageDealingEffects(source, damageToDo);
