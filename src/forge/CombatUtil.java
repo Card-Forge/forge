@@ -1580,6 +1580,40 @@ public class CombatUtil {
                 
             }//Nemesis of Reason
             
+            else if(c.getName().equals("Novablast Wurm") && !c.getCreatureAttackedThisCombat()) {
+                final Card Novablast_Wurm = c;
+                CardList all = new CardList();
+                all.addAll(AllZone.Human_Play.getCards());
+                all.addAll(AllZone.Computer_Play.getCards());
+                CardList wurms = new CardList();
+                wurms.addAll(AllZone.Combat.getAttackers());
+                wurms = wurms.filter(new CardListFilter()
+                {
+                	public boolean addCard(Card c)
+                	{
+                		return c.getName().equals("Novablast Wurm");
+                	}
+                });  
+                if(wurms.size() > 1) {
+                for(int i = 0; i < all.size(); i++) {
+                    Card Card_Destroy = all.get(i);
+                    if(Card_Destroy.isCreature()) AllZone.GameAction.destroy(Card_Destroy);
+                }  
+                } else {          	
+                all = all.filter(new CardListFilter()
+                {
+                	public boolean addCard(Card check)
+                	{
+                		return !(check == Novablast_Wurm);
+                	}
+                });               
+                for(int i = 0; i < all.size(); i++) {
+                    Card Card_Destroy = all.get(i);
+                    if(Card_Destroy.isCreature()) AllZone.GameAction.destroy(Card_Destroy);
+                } 
+                }
+            }//Novablast Wurm
+            
             else if(c.getName().equals("Sapling of Colfenor") && !c.getCreatureAttackedThisCombat()) {
                 String player = c.getController();
                 

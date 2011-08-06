@@ -1,3 +1,9 @@
+Novablast Wurm
+3 G G W W
+Creature Wurm
+Whenever Novablast Wurm attacks, destroy all other creatures.
+7/7
+
 Hammerhead Shark
 1 U
 Creature Fish
