@@ -4708,6 +4708,9 @@ public class CardFactoryUtil {
         }
         
         //c.setManaCost(cost);
+        if (cost.equals(""))
+        	cost = "0";
+        
         long timestamp = c.addColor(cost, c, false, true);
         return timestamp;
     }

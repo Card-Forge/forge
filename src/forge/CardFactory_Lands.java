@@ -689,7 +689,7 @@ class CardFactory_Lands {
                     Card c = card;
                     String[] types = { "Artifact", "Creature", "Blinkmoth" };
                     String[] keywords = { "Flying" };
-                    timeStamp[0] = CardFactoryUtil.activateManland(c, 1, 1, types, keywords, "");
+                    timeStamp[0] = CardFactoryUtil.activateManland(c, 1, 1, types, keywords, "0");
                     
                     final Command eot1 = new Command() {
                     	private static final long serialVersionUID = 3564161001279001235L;
@@ -861,7 +861,7 @@ class CardFactory_Lands {
                     Card c = card;
                     String[] types = { "Artifact", "Creature", "Assembly-Worker" };
                     String[] keywords = { };
-                    timeStamp[0] = CardFactoryUtil.activateManland(c, 2, 2, types, keywords, "");
+                    timeStamp[0] = CardFactoryUtil.activateManland(c, 2, 2, types, keywords, "0");
 
                     final Command eot1 = new Command() {
                         private static final long serialVersionUID = -956566640027406078L;
@@ -2138,7 +2138,7 @@ class CardFactory_Lands {
                     Card c = card;
                     String[] types = { "Creature" };
                     String[] keywords = { "Changeling" };
-                    timeStamp[0] = CardFactoryUtil.activateManland(c, 2, 2, types, keywords, "");
+                    timeStamp[0] = CardFactoryUtil.activateManland(c, 2, 2, types, keywords, "0");
 
                     final Command eot1 = new Command() {
                         private static final long serialVersionUID = 5106629534549783845L;
@@ -2927,7 +2927,7 @@ class CardFactory_Lands {
                     String[] types = { "Artifact", "Creature", "Elemental" };
                     String[] keywords = {  };
                     
-                    CardFactoryUtil.activateManland(c, 3, 3, types, keywords, "");
+                    CardFactoryUtil.activateManland(c, 3, 3, types, keywords, "0");
                 }
             };//SpellAbility
             
@@ -3257,7 +3257,7 @@ class CardFactory_Lands {
                     String[] types = { "Artifact", "Creature", "Golem"};
                     String[] keywords = { };
                     
-                    timeStamp[0] = CardFactoryUtil.activateManland(c, 4, 2, types, keywords, "");
+                    timeStamp[0] = CardFactoryUtil.activateManland(c, 4, 2, types, keywords, "0");
                     
                     final Command eot1 = new Command() {
                         private static final long serialVersionUID = -2632172918887247003L;
