@@ -4225,7 +4225,7 @@ public class CardFactory_Creatures {
             card.addDestroyCommand(leavesPlay);
         }//*************** END ************ END **************************
         
-
+        /* Converteded to AF Trigger
         //*************** START *********** START **************************
         else if(cardName.equals("Sower of Temptation")) {
             final Card movedCreature[] = new Card[1];
@@ -4356,7 +4356,7 @@ public class CardFactory_Creatures {
                 }
             });
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Painter's Servant")) {
