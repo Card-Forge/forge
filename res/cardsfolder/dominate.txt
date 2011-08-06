@@ -7,4 +7,5 @@ SVar:X:Targeted$CardManaCost
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dominate.jpg
+SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/31.jpg
 End

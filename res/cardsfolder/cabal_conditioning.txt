@@ -7,4 +7,5 @@ SVar:X:Count$MaxCMCYouCtrl
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_conditioning.jpg
+SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/56.jpg
 End

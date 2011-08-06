@@ -9,4 +9,5 @@ T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Player | Combat
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact.YouDontCtrl | TgtPrompt$ Select target artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/latullas_orders.jpg
+SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/96.jpg
 End

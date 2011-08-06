@@ -8,4 +8,5 @@ SVar:DBUntap:DB$Untap | ValidTgts$ Creature | TgtPrompt$ Select target creature 
 SVar:DBPump2:DB$Pump | Defined$ Targeted | NumAtt$ +1 | NumDef$ +1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hope_and_glory.jpg
+SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/9.jpg
 End
