@@ -556,11 +556,6 @@ public class Card extends MyObservable {
             StringBuilder sb = new StringBuilder();
             sb.append(s);
             
-            // Storm
-            if (sb.toString().contains(" Storm (When")) {
-                sb.insert(sb.indexOf("Storm (When"), "\r\n");
-            }
-            
             // NOTE:
             if (sb.toString().contains(" (NOTE: ")) {
                 sb.insert(sb.indexOf("(NOTE: "), "\r\n");
@@ -593,6 +588,9 @@ public class Card extends MyObservable {
             
             // Storm
             if (getKeyword().contains("Storm") && !sb.toString().contains("Storm (When you ")) {
+            	if (sb.toString().endsWith("\r\n\r\n")) {
+            		sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n")+3);
+            	}
                 sb.append("Storm (When you cast this spell, copy it for each spell cast before it this turn.");
                 if (sb.toString().contains("Target") || sb.toString().contains("target")) {
                     sb.append(" You may choose new targets for the copies.");

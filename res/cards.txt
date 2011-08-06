@@ -1,3 +1,138 @@
+Astral Steel
+2 W
+Instant
+Target creature gets +1/+2 until end of turn.
+Storm
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/astral_steel.jpg
+
+Brain Freeze
+1 U
+Instant
+Target player puts the top three cards of his or her library into his or her graveyard.
+Storm
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brain_freeze.jpg
+
+Dragonstorm
+8 R
+Sorcery
+Search your library for a Dragon permanent card and put it onto the battlefield. Then shuffle your library.
+Storm
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonstorm.jpg
+
+Empty the Warrens
+3 R
+Sorcery
+Put two 1/1 red Goblin creature tokens into play.
+Storm
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/empty_the_warrens.jpg
+
+Grapeshot
+1 R
+Sorcery
+Grapeshot deals 1 damage to target creature or player.
+Storm
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grapeshot.jpg
+
+Haze of Rage
+1 R
+Sorcery
+no text
+spAllPump:YouCtrl:+1/+0:Creatures you control get +1/+0 until end of turn.:Haze of Rage - Creatures get +1/+0 until EOT
+SVar:Buyback:2
+Storm
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/haze_of_rage.jpg
+
+Hunting Pack
+5 G G
+Instant
+Put a 4/4 green Beast creature token onto the battlefield.
+Storm
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_pack.jpg
+
+Ignite Memories
+4 R
+Sorcery
+Target player reveals a card at random from his or her hand. Ignite Memories deals damage to that player equal to that card's converted mana cost.
+Storm
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ignite_memories.jpg
+
+Mind's Desire
+4 U U
+Sorcery
+Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost. (If it has X in its mana cost, X is 0.)
+Storm
+Shroud
+Indestructible
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/minds_desire.jpg
+
+Reaping the Graves
+2 B
+Instant
+Return target creature card from your graveyard to your hand.
+Storm
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reaping_the_graves.jpg
+
+Scattershot
+2 R
+Instant
+Scattershot deals 1 damage to target creature.
+Storm
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scattershot.jpg
+
+Sprouting Vines
+2 G
+Instant
+Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library.
+Storm
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sprouting_vines.jpg
+
+Temporal Fissure
+4 U
+Sorcery
+Return target permanent to its owner's hand.
+spBounceTgt:Permanent:Hand
+Storm
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_fissure.jpg
+
+Tendrils of Agony
+2 B B
+Sorcery
+Target player loses 2 life and you gain 2 life.
+Storm
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tendrils_of_agony.jpg
+
+Volcanic Awakening
+4 R R
+Sorcery
+Destroy target land.
+Storm
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_awakening.jpg
+
+Wing Shards
+1 W W
+Instant
+Target player sacrifices an attacking creature.
+Storm
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wing_shards.jpg
+
 Memnite
 0
 Artifact Creature Construct
@@ -2406,14 +2541,6 @@ CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/assert_authority.jpg
 
-Astral Steel
-2 W
-Instant
-Target creature gets +1/+2 until end of turn. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
-Storm
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/astral_steel.jpg
-
 Atog
 1 R
 Creature Atog
@@ -4429,14 +4556,6 @@ no text
 abGainLife T:1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/braidwood_cup.jpg
-
-Brain Freeze
-1 U
-Instant
-Target player puts the top three cards of his or her library into his or her graveyard. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
-Storm
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brain_freeze.jpg
 
 Brainbite
 2 U B
@@ -8606,14 +8725,6 @@ Protection from Dragons
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonstalker.jpg
 
-Dragonstorm
-8 R
-Sorcery
-Search your library for a Dragon permanent card and put it onto the battlefield. Then shuffle your library. Storm (When you cast this spell, copy it for each spell cast before it this turn.)
-Storm
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonstorm.jpg
-
 Drain the Well
 2 BG BG
 Sorcery
@@ -9569,14 +9680,6 @@ no text
 abDrawCards 5 T:2:Drawback$YouDiscard/1:Draw two cards, then discard a card.:Emmessi Tome - draw cards and discard a card
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emmessi_tome.jpg
-
-Empty the Warrens
-3 R
-Sorcery
-Put two 1/1 red Goblin creature tokens into play. Storm (When you play this spell, copy it for each spell played before it this turn.)
-Storm
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/empty_the_warrens.jpg
 
 Emrakul, the Aeons Torn
 15
@@ -13288,14 +13391,6 @@ abDamageTgtCP R T:1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/granite_shard.jpg
 
-Grapeshot
-1 R
-Sorcery
-Grapeshot deals 1 damage to target creature or player. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
-Storm
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grapeshot.jpg
-
 Grappler Spider
 1 G
 Creature Spider
@@ -14144,16 +14239,6 @@ Flying
 Shroud
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hawkeater_moth.jpg
-
-Haze of Rage
-1 R
-Sorcery
-no text
-spAllPump:YouCtrl:+1/+0:Creatures you control get +1/+0 until end of turn.:Haze of Rage - Creatures get +1/+0 until EOT
-SVar:Buyback:2
-Storm
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/haze_of_rage.jpg
 
 Hazerider Drake
 2 W U
@@ -15060,14 +15145,6 @@ When Hunted Troll comes into play, put four 1/1 blue Faerie creature tokens with
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card89079.jpg
 
-Hunting Pack
-5 G G
-Instant
-Put a 4/4 green Beast creature token onto the battlefield. Storm (When you play this spell, copy it for each spell played before it this turn.)
-Storm
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_pack.jpg
-
 Hurkyl's Recall
 1 U
 Instant
@@ -15212,14 +15289,6 @@ TypeCycling:Swamp:2
 TypeCycling:Mountain:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/igneous_pouncer.jpg
-
-Ignite Memories
-4 R
-Sorcery
-Target player reveals a card at random from his or her hand. Ignite Memories deals damage to that player equal to that card's converted mana cost. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
-Storm
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ignite_memories.jpg
 
 Ihsan's Shade
 3 B B B
@@ -19771,17 +19840,6 @@ SVar:X:Count$xPaid
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_twist.jpg
 
-Mind's Desire
-4 U U
-Sorcery
-Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost. (If it has X in its mana cost, X is 0.) Storm (When you cast this spell, copy it for each spell cast before it this turn.)
-Storm
-Shroud
-Indestructible
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/minds_desire.jpg
-
 Mind's Eye
 5
 Artifact
@@ -24232,14 +24290,6 @@ Put target creature card from a graveyard onto the battlefield under your contro
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reanimate.jpg
 
-Reaping the Graves
-2 B
-Instant
-Return target creature card from your graveyard to your hand. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
-Storm
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reaping_the_graves.jpg
-
 Rebuff the Wicked
 W
 Instant
@@ -25984,15 +26034,6 @@ no text
 2/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83247.jpg
-
-Scattershot
-2 R
-Instant
-Scattershot deals 1 damage to target creature. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
-Storm
-SVar:RemAIDeck:True
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scattershot.jpg
 
 Scavenged Weaponry
 2 B
@@ -29045,14 +29086,6 @@ When Sprouting Thrinax is put into a graveyard from play, put three 1/1 green Sa
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sprouting_thrinax.jpg
 
-Sprouting Vines
-2 G
-Instant
-Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library. Storm (When you cast this spell, copy it for each spell cast before it this turn.)
-Storm
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sprouting_vines.jpg
-
 Squadron Hawk
 1 W
 Creature Hawk
@@ -30863,15 +30896,6 @@ spBounceTgt:Creature,Land:TopofLibrary
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_eddy.jpg
 
-Temporal Fissure
-4 U
-Sorcery
-Return target permanent to its owner's hand. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
-spBounceTgt:Permanent:Hand
-Storm
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_fissure.jpg
-
 Temporal Manipulation
 3 U U
 Sorcery
@@ -30894,14 +30918,6 @@ CARDNAME enters the battlefield with one charge counter on it.
 tap: add 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tendo_ice_bridge.jpg
-
-Tendrils of Agony
-2 B B
-Sorcery
-Target player loses 2 life and you gain 2 life. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
-Storm
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tendrils_of_agony.jpg
 
 Tendrils of Corruption
 3 B
@@ -33969,14 +33985,6 @@ spCounter:SpellOrAbility:None:Graveyard:None
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voidslime.jpg
 
-Volcanic Awakening
-4 R R
-Sorcery
-Destroy target land. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
-Storm
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_awakening.jpg
-
 Volcanic Dragon
 4 R R
 Creature Dragon
@@ -35311,14 +35319,6 @@ Windwright Mage has flying as long as an artifact card is in your graveyard.
 Lifelink
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windwright_mage.jpg
-
-Wing Shards
-1 W W
-Instant
-Target player sacrifices an attacking creature. Storm (When you cast this spell, copy it for each spell cast before it this turn.)
-Storm
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wing_shards.jpg
 
 Wing Snare
 2 G
