@@ -5108,6 +5108,7 @@ res/quest/quest.properties svneol=native#text/plain
 res/quest/questData -text svneol=unset#unset
 res/quest/quests.txt -text svneol=native#text/plain
 res/quest/rare.txt -text svneol=native#text/plain
+res/quest/themes/Dermageddon[!!-~]WG.thm -text
 res/quest/themes/Domain.thm -text
 res/quest/themes/Goblins[!!-~]BR.thm -text
 res/quest/themes/Goblins[!!-~]R.thm -text
