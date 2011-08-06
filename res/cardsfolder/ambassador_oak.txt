@@ -1,7 +1,7 @@
 Name:Ambassador Oak
 ManaCost:3 G
 Types:Creature Treefolk Warrior
-Text:When Ambassador Oak comes into play, put a 1/1 green Elf Warrior creature token into play.
+Text:When Ambassador Oak enters the battlefield, put a 1/1 green Elf Warrior creature token onto the battlefield.
 PT:3/3
 K:etbMakeToken<>1<>Elf Warrior<>G 1 1 Elf Warrior<>Controller<>G<>Creature;Elf;Warrior<>1<>1<>None<>Put a 1/1 green Elf Warrior creature token onto the battlefield.
 SVar:Rarity:Common

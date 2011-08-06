@@ -1,0 +1,10 @@
+Name:Cloudgoat Ranger
+ManaCost:3 W W
+Types:Creature Giant Warrior
+Text:When Cloudgoat Ranger enters the battlefield, put three 1/1 white Kithkin Soldier creature tokens onto the battlefield.
+PT:3/3
+K:etbMakeToken<>3<>Kithkin Soldier<>W 1 1 Kithkin Soldier<>Controller<>W<>Creature;Kithkin;Soldier<>1<>1<>None<>Put three 1/1 white Kithkin Soldier creature tokens onto the battlefield.
+A:AB$Pump | Cost$ tapXType<3/Kithkin> | NumAtt$ +2 | KW$ Flying | SpellDescription$ CARDNAME gets +2/+0 and gains flying until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudgoat_ranger.jpg
+End
