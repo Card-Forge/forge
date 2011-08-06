@@ -2489,34 +2489,7 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************          
         
 
-        //*************** START *********** START **************************
-        else if(cardName.equals("Identity Crisis")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 42470566751344693L;
-                
-                @Override
-                public boolean canPlayAI() {
-                	CardList exiling = AllZoneUtil.getPlayerHand(AllZone.HumanPlayer);
-                    return exiling.size() > 1;
-                }
-                
-                @Override
-                public void resolve() {
-                    Player player = getTargetPlayer();
-                    
-                    CardList exiling = AllZoneUtil.getPlayerHand(player);
-                    exiling.add(AllZoneUtil.getPlayerGraveyard(player));
-                    
-                    for(Card c : exiling)
-                    	AllZone.GameAction.exile(c);
-                }
-            };//SpellAbility
-            spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
+       
                 
         //*************** START *********** START **************************
         else if(cardName.equals("Donate")) {
