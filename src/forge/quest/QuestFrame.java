@@ -6,7 +6,6 @@ import forge.QuestData;
 import forge.gui.GuiUtils;
 import forge.quest.bazaar.QuestBazaarPanel;
 import forge.quest.main.QuestMainPanel;
-import forge.quest.quests.QuestQuestsPanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -45,9 +44,6 @@ public class QuestFrame extends JFrame {
         visiblePanel.add(newPanel, BAZAAR_PANEL);
         subPanelMap.put(BAZAAR_PANEL, newPanel);
 
-        newPanel = new QuestQuestsPanel(this);
-        visiblePanel.add(newPanel, QUESTS_PANEL);
-        subPanelMap.put(QUESTS_PANEL, newPanel);
 
 
         this.getContentPane().setLayout(new BorderLayout());
@@ -80,12 +76,6 @@ public class QuestFrame extends JFrame {
         showPane(BAZAAR_PANEL);
     }
 
-    public void showQuestsPane(forge.Deck deck){
-        QuestQuestsPanel questsPanel = (QuestQuestsPanel) subPanelMap.get(QUESTS_PANEL);
-        questsPanel.setDeck(deck);
-        
-        showPane(QUESTS_PANEL);
-    }
 
 
     public void returnToMainMenu() {

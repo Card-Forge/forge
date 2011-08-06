@@ -6,37 +6,19 @@ import forge.QuestData;
 import forge.gui.GuiUtils;
 
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
-public class QuestOpponent extends JPanel{
+public class QuestBattle extends QuestSelectablePanel {
 
     static TreeMap<String, DeckInfo> nameDeckMap = new TreeMap<String, DeckInfo>();
+
+    String deckName;
 
     static {
         buildDeckList();
     }
-
-
-    ImageIcon icon;
-    String name;
-    String description;
-    String difficulty;
-
-    private Color backgroundColor;
-
-    public boolean isSelected() {
-        return selected;
-    }
-
-    private boolean selected;
 
     private static void buildDeckList() {
         //TODO: Build this list dynamically from the deck files.
@@ -236,7 +218,6 @@ public class QuestOpponent extends JPanel{
         }
     }
 
-
     private static class DeckInfo {
         String name;
         String difficulty;
@@ -249,96 +230,37 @@ public class QuestOpponent extends JPanel{
         }
     }
 
-    public static List<QuestOpponent> getOpponents(){
-        List<QuestOpponent> opponentList = new ArrayList<QuestOpponent>();
+    public static List<QuestSelectablePanel> getBattles(){
+        List<QuestSelectablePanel> opponentList = new ArrayList<QuestSelectablePanel>();
 
+        try{
         QuestData questData = AllZone.QuestData;
-        String[] oponentNames = questData.getOpponents();
-        for (String opponentName : oponentNames) {
+        String[] opponentNames = questData.getOpponents();
+        for (String opponentName : opponentNames) {
             String oppIconName = opponentName.substring(0, opponentName.length() - 1).trim() + ".jpg";
             ImageIcon icon = GuiUtils.getIconFromFile(oppIconName);
 
-            opponentList.add(new QuestOpponent(opponentName,
+            opponentList.add(new QuestBattle(opponentName,
                     nameDeckMap.get(opponentName).difficulty,
                     nameDeckMap.get(opponentName).description,
                     icon));
         }
-
+        }
+        catch (NullPointerException e)
+        {
+            System.out.println("Break Here");
+        }
         return opponentList;
     }
 
-    private QuestOpponent(String name, String difficulty, String description, ImageIcon icon) {
-        this.name = name;
-        this.difficulty = difficulty;
-        this.description = description;
-        this.icon = icon;
+    private QuestBattle(String name, String difficulty, String description, ImageIcon icon) {
+        super(name.substring(0, name.length()-2), difficulty, description, icon);
 
-        this.setLayout(new BorderLayout(5,5));
-
-
-        JLabel iconLabel;
-
-        if(icon == null){
-            iconLabel = new JLabel(GuiUtils.getEmptyIcon(40,40));
-        }
-        else{
-            iconLabel = new JLabel(GuiUtils.getResizedIcon(icon,40,40));
-        }
-
-        iconLabel.setBorder(new LineBorder(Color.BLACK));
-        iconLabel.setAlignmentY(TOP_ALIGNMENT);
-
-        JPanel iconPanel = new JPanel(new BorderLayout());
-        iconPanel.setOpaque(false);
-        iconPanel.add(iconLabel, BorderLayout.NORTH);
-        this.add(iconPanel, BorderLayout.WEST);
-
-        JPanel centerPanel = new JPanel();
-        centerPanel.setOpaque(false);
-        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
-        this.add(centerPanel,BorderLayout.CENTER);
-
-        JPanel centerTopPanel = new JPanel();
-        centerTopPanel.setOpaque(false);
-        centerTopPanel.setAlignmentX(LEFT_ALIGNMENT);
-        centerTopPanel.setLayout(new BoxLayout(centerTopPanel, BoxLayout.X_AXIS));
-
-        JLabel nameLabel = new JLabel(this.name.substring(0, this.name.length()-2));
-        GuiUtils.setFontSize(nameLabel, 20);
-        nameLabel.setAlignmentY(BOTTOM_ALIGNMENT);
-        centerTopPanel.add(nameLabel);
-
-        GuiUtils.addExpandingHorizontalSpace(centerTopPanel);
-
-        JLabel difficultyLabel = new JLabel(this.difficulty);
-        difficultyLabel.setAlignmentY(BOTTOM_ALIGNMENT);
-        centerTopPanel.add(difficultyLabel);
-        centerPanel.add(centerTopPanel);
-
-        GuiUtils.addGap(centerPanel);
-
-        JLabel descriptionLabel = new JLabel(description);
-        descriptionLabel.setAlignmentX(LEFT_ALIGNMENT);
-        centerPanel.add(descriptionLabel);
-
-        this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 80));
-        this.setBorder(new CompoundBorder(new LineBorder(Color.BLACK),new EmptyBorder(5,5,5,5)));
-        this.backgroundColor = getBackground();
-    }
-
-    public void setSelected(boolean selected){
-        if(selected){
-            this.setBackground(backgroundColor.darker());
-        }
-        else{
-            this.setBackground(backgroundColor);
-        }
-
-        this.selected = selected;
+        this.deckName = name;
     }
 
     @Override
     public String getName() {
-        return name;
+        return deckName;
     }
 }
