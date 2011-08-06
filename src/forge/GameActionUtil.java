@@ -2633,8 +2633,9 @@ public class GameActionUtil {
                     @Override
                     public void resolve() {
                         Player controller = card.getController();
-                        int compLibSize = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer).size();
-                        int compHandSize = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).size();
+                        int computerLibrarySize = AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.ComputerPlayer).size();
+                        int computerHandSize = AllZoneUtil.getCardsInZone(Constant.Zone.Hand, AllZone.ComputerPlayer).size();
+                        int computerMaxHandSize = AllZone.ComputerPlayer.getMaxHandSize();
                         
                         Boolean mayDrawNotMust = (card.getName().equals("Verduran Enchantress") 
                                 || card.getName().equals("Mesa Enchantress")
@@ -2648,7 +2649,7 @@ public class GameActionUtil {
                                     controller.drawCard();
                                 }
                             }// controller isComputer() and may draw
-                            else if (compLibSize >= 5 && compHandSize < 7) {
+                            else if (computerLibrarySize >= 5 && computerHandSize < computerMaxHandSize) {
                                 controller.drawCard();
                         }
                         // Must draw, not may draw

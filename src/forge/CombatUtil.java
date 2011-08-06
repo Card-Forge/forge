@@ -2267,8 +2267,9 @@ public class CombatUtil {
             int numCards = 3;
             if (a.getName().equals("Drelnoch")) numCards = 2;
             if (a.getName().equals("Chambered Nautilus")) numCards = 1;
-            int compLibSize = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer).size();
-            int compHandSize = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).size();
+            int computerHandSize = AllZoneUtil.getCardsInZone(Constant.Zone.Hand, AllZone.ComputerPlayer).size();
+            int computerLibrarySize = AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.ComputerPlayer).size();
+            int computerMaxHandSize = AllZone.ComputerPlayer.getMaxHandSize();
             
             if (player.isHuman()) {
                 StringBuilder question = new StringBuilder();
@@ -2277,8 +2278,8 @@ public class CombatUtil {
                     player.drawCards(numCards);
                 }
             }// player isComputer()
-            else if (compLibSize >= (2 * numCards) 
-                        && compHandSize <= (7 - numCards)) {
+            else if (computerLibrarySize >= (2 * numCards) 
+                        && computerHandSize <= (computerMaxHandSize - numCards)) {
                 player.drawCards(numCards);
             }
         }// if Saprazzan Heir or Drelnoch or Chambered Nautilus was blocked
