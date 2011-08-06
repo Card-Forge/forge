@@ -4,7 +4,7 @@ Types:Snow Creature Griffin
 Text:no text
 PT:3/2
 K:Flying
-K:abPump S:First Strike
+A:AB$Pump | Cost$ S | KW$ First Strike | SpellDescription$ Boreal Griffin gains first strike until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boreal_griffin.jpg
 SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/2.jpg

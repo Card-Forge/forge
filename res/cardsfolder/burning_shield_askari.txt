@@ -4,7 +4,7 @@ Types:Creature Human Knight
 Text:no text
 PT:2/2
 K:Flanking
-K:abPump R R:First Strike
+A:AB$Pump | Cost$ R R | KW$ First Strike | SpellDescription$ Burning Shield Askari gains first strike until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burning_shield_askari.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/162.jpg

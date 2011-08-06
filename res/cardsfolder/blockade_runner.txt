@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Creature Merfolk
 Text:no text
 PT:2/2
-K:abPump U:Unblockable
+A:AB$Pump | Cost$ U | KW$ Unblockable | SpellDescription$ Blockade Runner is unblockable this turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blockade_runner.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/60.jpg
