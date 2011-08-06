@@ -90,7 +90,7 @@ public class GameActionUtil {
 		upkeep_Felidar_Sovereign();
 
 		// upkeep_Convalescence();
-		upkeep_Convalescent_Care();
+		// upkeep_Convalescent_Care();
 		upkeep_Ancient_Runes();
 		upkeep_Karma();
 		upkeep_Oath_of_Druids();
@@ -4437,6 +4437,7 @@ public class GameActionUtil {
 	}// upkeep_Convalescence()
 	*/
 
+	/* Converted to trigger and AF
 	private static void upkeep_Convalescent_Care() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
@@ -4468,6 +4469,7 @@ public class GameActionUtil {
 
 		}// for
 	}// upkeep_Convalescence_Care()
+	*/
 	
 	private static void upkeep_Dega_Sanctuary() {
 		final Player player = AllZone.Phase.getPlayerTurn();
