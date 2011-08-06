@@ -1,3 +1,8 @@
+Darksteel Forge
+9
+Artifact
+Artifacts you control are indestructible.
+
 Agility
 1 R
 Enchantment Aura
@@ -5873,16 +5878,14 @@ Diplomatic Immunity
 1 U
 Enchantment Aura
 Enchanted creature has shroud.
-Enchant creature
-enPump:Shroud
 Shroud
+Enchant creature
 
 Robe of Mirrors
 U
 Enchantment Aura
 Enchanted creature has shroud.
 Enchant creature
-enPump:Shroud
 
 Fear
 B B
@@ -6276,9 +6279,8 @@ Aspect of Mongoose
 1 G
 Enchantment Aura
 Enchanted creature has shroud.
-Enchant creature
-enPump:Shroud
 When this card is put into a graveyard from the battlefield, return this card to its owner's hand
+Enchant creature
 
 Launch
 1 U

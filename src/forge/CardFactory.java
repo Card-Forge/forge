@@ -10891,6 +10891,7 @@ public class CardFactory implements NewConstants {
         //*************** START *********** START **************************
         else if(cardName.equals("Global Ruin")) {
             final CardList target = new CardList();
+            final CardList saveList = new CardList();
             //need to use arrays so we can declare them final and still set the values in the input and runtime classes. This is a hack.
             final int[] index = new int[1];
             final int[] countBase = new int[1];
@@ -10930,7 +10931,8 @@ public class CardFactory implements NewConstants {
                     
                     //when this spell resolves all basic lands which were not selected are sacrificed.
                     for(int i = 0; i < target.size(); i++)
-                        if(AllZone.GameAction.isCardInPlay(target.get(i))) AllZone.GameAction.sacrifice(target.get(i));
+                        if(AllZone.GameAction.isCardInPlay(target.get(i)) && !saveList.contains(target.get(i))) 
+                        	AllZone.GameAction.sacrifice(target.get(i));
                 }//resolve()
             };//SpellAbility
             
@@ -10966,12 +10968,22 @@ public class CardFactory implements NewConstants {
                 public void selectCard(Card c, PlayerZone zone) {
                     if(c.isLand() && zone.is(Constant.Zone.Play)
                             && c.getController().equals(Constant.Player.Human)
-                            && c.getName().equals(humanBasic.get(count))) {
+                            /*&& c.getName().equals(humanBasic.get(count))*/
+                            && c.getType().contains(humanBasic.get(count)) 
+                            /*&& !saveList.contains(c) */) {
                         //get all other basic[count] lands human player controls and add them to target
                         PlayerZone humanPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
                         CardList land = new CardList(humanPlay.getCards());
                         CardList cl = land.getType(humanBasic.get(count));
+                        cl = cl.filter(new CardListFilter()
+                        {
+                        	public boolean addCard(Card crd)
+                        	{
+                        		return !saveList.contains(crd);
+                        	}
+                        });
                         cl.remove(c);
+                        saveList.add(c);
                         target.addAll(cl.toArray());
                         
                         index[0]++;

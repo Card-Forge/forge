@@ -7739,6 +7739,42 @@ public class GameActionUtil {
                                                               }// for outer
                                                           }// execute()
                                                       };
+                                                      
+    public static Command Darksteel_Forge 			  = new Command() {
+													    	
+															private static final long serialVersionUID = 7212793187625704417L;
+															CardList                  gloriousAnthemList = new CardList();
+													        
+													        public void execute() {
+													            String keyword = "Indesctructible";
+													            
+													            CardList list = gloriousAnthemList;
+													            Card c;
+													            // reset all cards in list - aka "old" cards
+													            for(int i = 0; i < list.size(); i++) {
+													                c = list.get(i);
+													                c.removeExtrinsicKeyword(keyword);
+													            }
+													            
+													            list.clear();
+													            PlayerZone[] zone = getZone("Darksteel Forge");
+													            
+													            for(int outer = 0; outer < zone.length; outer++) {
+													                CardList arts = new CardList(
+													                        zone[outer].getCards());
+													                arts = arts.getType("Artifact");
+													                
+													                for(int i = 0; i < arts.size(); i++) {
+													                    c = arts.get(i);
+													                    if(!c.getKeyword().contains(keyword)) {
+													                        c.addExtrinsicKeyword(keyword);
+													                        gloriousAnthemList.add(c);
+													                    }
+													                }// for inner
+													            }// for outer
+													        }// execute()
+    	
+    };
     
     public static Command Levitation                  = new Command() {
                                                           
@@ -14686,6 +14722,7 @@ public class GameActionUtil {
         commands.put("Castle", Castle);
         commands.put("Castle_Raptors", Castle_Raptors);
         
+        commands.put("Darksteel_Forge", Darksteel_Forge);
         commands.put("Levitation", Levitation);
         commands.put("Knighthood", Knighthood);
         commands.put("Absolute_Law", Absolute_Law);

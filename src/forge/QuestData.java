@@ -362,6 +362,16 @@ public class QuestData implements NewConstants {
         
     }//addCards()
     
+    public void addRandomRare(int n)
+    {
+    	ArrayList<String> newCards = new ArrayList<String>();
+        newCards.addAll(boosterPack.getRare(n));
+        
+        cardPool.addAll(newCards);
+        newCardList.addAll(newCards);
+    }
+    
+    
     public String addRandomRare() {
 
         ArrayList<String> newCards = new ArrayList<String>();

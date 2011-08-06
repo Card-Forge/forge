@@ -131,6 +131,7 @@ public class StaticEffects
 		cardToEffectsList.put("Radiant, Archangel", new String[] {"Radiant_Archangel"});
 		cardToEffectsList.put("Castle", new String[] {"Castle"});
 		cardToEffectsList.put("Castle Raptors", new String[] {"Castle_Raptors"});
+		cardToEffectsList.put("Darksteel Forge", new String[] {"Darksteel_Forge"} );
 		cardToEffectsList.put("Levitation", new String[] {"Levitation"});
 		cardToEffectsList.put("Knighthood", new String[] {"Knighthood"});
 		cardToEffectsList.put("Absolute Law", new String[] {"Absolute_Law"});
