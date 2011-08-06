@@ -3544,10 +3544,23 @@ class CardFactory_Planeswalkers {
                 		}
                 	});
                 	
+                	CardList mountains = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+                	mountains = mountains.filter(new CardListFilter()
+                	{
+                		public boolean addCard(Card crd)
+                		{
+                			return crd.getType().contains("Mountain") && CardFactoryUtil.canTarget(card2, crd);
+                		}
+                	});
+                	CardListUtil.sortByTapped(mountains);
+                	
+                	if (mountains.size() == 0)
+                		return false;
                 	
                     if(ability3.canPlay() && ability3.canPlayAI() && list.size() == 0) {
                         return false;
                     } else {
+                    	setTargetCard(mountains.get(0));
                         return true;
                     }
                 }
