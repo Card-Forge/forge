@@ -5926,6 +5926,7 @@ res/cardsfolder/spell_syphon.txt -text svneol=native#text/plain
 res/cardsfolder/spellbane_centaur.txt -text svneol=native#text/plain
 res/cardsfolder/spellbook.txt -text svneol=native#text/plain
 res/cardsfolder/spellbreaker_behemoth.txt svneol=native#text/plain
+res/cardsfolder/spellgorger_barbarian.txt -text svneol=native#text/plain
 res/cardsfolder/spellshock.txt -text svneol=native#text/plain
 res/cardsfolder/sphere_of_duty.txt -text svneol=native#text/plain
 res/cardsfolder/sphere_of_grace.txt -text svneol=native#text/plain
