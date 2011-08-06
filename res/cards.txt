@@ -1,3 +1,9 @@
+Lifelink
+W
+Enchantment Aura
+Enchanted creature has lifelink.
+Enchant creature
+
 Sovereigns of Lost Alara
 4 W U
 Creature Spirit
@@ -3453,13 +3459,6 @@ Enchantment Aura
 Enchanted creature has swampwalk.
 Enchant creature
 enPump:Swampwalk
-
-Lifelink
-W
-Enchantment Aura
-Enchanted creature has lifelink.
-Enchant creature
-enPump:Lifelink
 
 Oakenform
 2 G

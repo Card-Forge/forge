@@ -1143,6 +1143,119 @@ class CardFactory_Auras {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
+        //******************************************************************
+        // This card can't be converted to keyword, problem with Lifelink  *
+        //*************** START *********** START **************************
+        else if(cardName.equals("Lifelink")) {
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 8493277543267009695L;
+
+				@Override
+                public boolean canPlayAI() {
+                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    list = list.getType("Creature");
+                    
+                    if (list.isEmpty()) return false;
+                    
+                    //else (is there a Rabid Wombat or a Uril, the Miststalker to target?)
+                    
+                    CardList auraMagnetList = new CardList(AllZone.Computer_Play.getCards());
+                    auraMagnetList = auraMagnetList.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                    	    return c.isCreature() && (c.getName().equals("Rabid Wombat") || c.getName().equals("Uril, the Miststalker"));
+                    	}
+                    });
+                    if (! auraMagnetList.isEmpty()) {    // AI has a special target creature(s) to enchant
+                        auraMagnetList.shuffle();
+                        for (int i = 0; i < auraMagnetList.size(); i++) {
+                            if (CardFactoryUtil.canTarget(card, auraMagnetList.get(i))) {
+                                setTargetCard(auraMagnetList.get(i));    // Target only Rabid Wombat or Uril, the Miststalker
+                    	        return true;
+                    	    }
+                    	}
+                    }
+                    
+                    /*
+                     *  else target another creature
+                     *  Do not enchant card with Defender or Lifelink or enchant card already enchanted
+                     */
+                    CardListUtil.sortAttack(list);
+                    CardListUtil.sortFlying(list);
+                    
+                    for (int i = 0; i < list.size(); i++) {
+                        if (CardFactoryUtil.canTarget(card, list.get(i))
+                                && !list.get(i).getKeyword().contains("Lifelink")  && 
+                                !list.get(i).getKeyword().contains("Defender") && !list.get(i).isEnchanted()) {
+                            setTargetCard(list.get(i));
+                            return true;
+                        }
+                    }
+                  
+                    return false;
+                }//canPlayAI()
+                
+                @Override
+                public void resolve() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    play.add(card);
+                    
+                    Card c = getTargetCard();
+                    
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                        card.enchantCard(c);
+                        System.out.println("Enchanted: " + getTargetCard());
+                    }
+                }//resolve()
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            
+            Command onEnchant = new Command() {
+                
+				private static final long serialVersionUID = -9156474672737153867L;
+
+				public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        crd.addExtrinsicKeyword("Lifelink");
+                    }
+                }//execute()
+            };//Command
+            
+
+            Command onUnEnchant = new Command() {
+                
+				private static final long serialVersionUID = 3855541943505550043L;
+
+				public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        
+                        crd.removeExtrinsicKeyword("Lifelink");
+                    }
+                    
+                }//execute()
+            };//Command
+            
+            Command onLeavesPlay = new Command() {
+                
+				private static final long serialVersionUID = 927099787099002012L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        card.unEnchantCard(crd);
+                    }
+                }//execute()
+            };//Command
+            
+            card.addEnchantCommand(onEnchant);
+            card.addUnEnchantCommand(onUnEnchant);
+            card.addLeavesPlayCommand(onLeavesPlay);
+            
+            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+        }//*************** END ************ END **************************
+        
         //*************** START *********** START **************************
         else if (cardName.equals("Entangling Vines") || cardName.equals("Glimmerdust Nap") || 
         		 cardName.equals("Melancholy") || cardName.equals("Mystic Restraints") || 
