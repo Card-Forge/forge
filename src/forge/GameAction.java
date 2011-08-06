@@ -33,16 +33,16 @@ public class GameAction {
     public Card moveTo(PlayerZone zone, Card c) {
     	// Ideally move to should never be called without a prevZone
     	// Remove card from Current Zone, if it has one
-    	String prevZone = "";
-        PlayerZone p = AllZone.getZone(c);
+    	String prevName = "";
+        PlayerZone prev = AllZone.getZone(c);
 
         Card lastKnownInfo = c;
         
-        if(p != null){
-        	if (p.is(Constant.Zone.Battlefield) && c.isCreature())
+        if(prev != null){
+        	if (prev.is(Constant.Zone.Battlefield) && c.isCreature())
                 AllZone.Combat.removeFromCombat(c);
-        	prevZone = p.getZoneName();
-        	p.remove(c);
+        	prevName = prev.getZoneName();
+        	prev.remove(c);
         }
         else{
         	// things that were just created will not have zones!
@@ -52,7 +52,7 @@ public class GameAction {
         // Don't add the Token, unless it's moving to the battlefield
         if (!c.isToken() || zone.is(Constant.Zone.Battlefield)){
 	     // If a nontoken card is moving from the Battlefield, to non-Battlefield zone copy it
-	        if (p != null && p.is(Constant.Zone.Battlefield) && !zone.is(Constant.Zone.Battlefield))
+	        if (prev != null && prev.is(Constant.Zone.Battlefield) && !zone.is(Constant.Zone.Battlefield))
 	        	c = AllZone.CardFactory.copyCard(c);
 	
 	        c.setUnearthed(lastKnownInfo.isUnearthed());	// this might be unnecessary
@@ -67,18 +67,18 @@ public class GameAction {
         	// todo: add attachment code here
         }
         
-        if (!zone.is(Constant.Zone.Battlefield))
-        {
+        // copyCard above seems to already clearRemembered, commenting out for now
+        //if (!zone.is(Constant.Zone.Battlefield))
+        //{
         	//Other characteristics should be cleared here also.
-        	c.setTapped(false);
-        	c.clearRemembered();
-        }	
+        //	c.clearRemembered();
+        //}	
         
         //Run triggers        
         HashMap<String,Object> runParams = new HashMap<String,Object>();
 
         runParams.put("Card", lastKnownInfo);
-        runParams.put("Origin", prevZone);
+        runParams.put("Origin", prevName);
         runParams.put("Destination", zone.getZoneName());
         AllZone.TriggerHandler.runTrigger("ChangesZone", runParams);
 

@@ -657,7 +657,7 @@ public class AbilityFactory {
 				}
 				else if (calcX[0].startsWith("Remembered")) {
 					list = new CardList();
-					list.add(card.getRemembered().get(0));
+					list.add(AllZoneUtil.getCardState(card.getRemembered().get(0)));
 				}
 				else
 					return 0;
@@ -699,8 +699,13 @@ public class AbilityFactory {
 		else if (defined.equals("Triggered"))
 			c = sa.getTriggeringCard();
 		
-		else if (defined.equals("Remembered"))
-			cards.addAll(hostCard.getRemembered());
+		else if (defined.equals("Remembered")){
+			for(Card rem : hostCard.getRemembered()){
+				// Get current state of each remembered card
+				cards.add(AllZoneUtil.getCardState(rem));
+			}
+		}
+			
 		
 		if (c != null)
 			cards.add(c);

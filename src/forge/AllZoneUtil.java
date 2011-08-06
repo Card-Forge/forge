@@ -412,6 +412,17 @@ public class AllZoneUtil {
 		return cards;
 	}
 	
+	public static Card getCardState(Card card){
+		CardList zone = getCardsInZone(AllZone.getZone(card).getZoneName());
+		
+		for(Card c : zone){
+			if (card.equals(c))
+				return c;
+		}
+		
+		return card;
+	}
+	
 	
 	public static CardList getCardsInZone(String zone){	
         return getCardsInZone(zone, null);
