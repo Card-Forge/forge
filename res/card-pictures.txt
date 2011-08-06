@@ -3902,3 +3902,7 @@ leonin_sun_standard.jpg		http://www.wizards.com/global/images/magic/general/leon
 diamond_faerie.jpg		http://www.wizards.com/global/images/magic/general/diamond_faerie.jpg
 skyshaper.jpg		http://www.wizards.com/global/images/magic/general/skyshaper.jpg
 stampede_driver.jpg		http://www.wizards.com/global/images/magic/general/stampede_driver.jpg
+wildfire.jpg		http://www.wizards.com/global/images/magic/general/wildfire.jpg
+destructive_force.jpg		http://www.wizards.com/global/images/magic/general/destructive_force.jpg
+lady_caleria.jpg		http://www.wizards.com/global/images/magic/general/lady_caleria.jpg
+tor_wauki.jpg		http://www.wizards.com/global/images/magic/general/tor_wauki.jpg

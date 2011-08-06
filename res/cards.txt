@@ -1,3 +1,15 @@
+Lady Caleria
+3 G G W W
+Legendary Creature Human Archer
+no text
+3/6
+
+Tor Wauki
+2 B B R
+Legendary Creature Human Archer
+no text
+3/3
+
 Wildfire
 4 R R
 Sorcery
