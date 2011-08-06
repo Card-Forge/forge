@@ -1,5 +1,8 @@
+
 package forge;
 
+
+import java.util.ArrayList;
 
 public class StaticEffect {
 	private Card			 	source				  			= new Card();
@@ -7,6 +10,8 @@ public class StaticEffect {
     private CardList            affectedCards                	= new CardList();
 	private int			 		xValue				  			= 0;
 	private int					yValue							= 0;
+	
+	private ArrayList<String>	types							= new ArrayList<String>();
 
     
     public void setSource(Card card) {
@@ -47,5 +52,21 @@ public class StaticEffect {
     
     public int getYValue() {
         return yValue;
+    }
+    
+    public void addType(String s) {
+    	types.add(s);
+    }
+    
+    public ArrayList<String> getTypes() {
+    	return types;
+    }
+    
+    public void removeType(String type) {
+    	types.remove(type);
+    }
+    
+    public void clearTypes() {
+    	types.clear();
     }
 }

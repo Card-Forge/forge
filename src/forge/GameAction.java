@@ -503,6 +503,7 @@ public class GameAction {
 	        }
 	        
 	        GameActionUtil.executeCardStateEffects();
+	        GameActionUtil.stAnimate.execute();
 	        GameActionUtil.stSetPT.execute();
 	        GameActionUtil.stPump.execute();
 	        

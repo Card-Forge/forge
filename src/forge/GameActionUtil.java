@@ -3,6 +3,7 @@ package forge;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.swing.JOptionPane;
@@ -5828,6 +5829,10 @@ public class GameActionUtil {
 							}
 							for(String type : types) affectedCard.addType(type);
 						}
+						else if(keyword.startsWith("Keyword=")) {
+							String sVar = source.getSVar(keyword.split("Keyword=")[1]);
+							affectedCard.addExtrinsicKeyword(sVar);
+						}
 						else affectedCard.addExtrinsicKeyword(keyword);
 					}
 				}
@@ -5887,6 +5892,10 @@ public class GameActionUtil {
 							types[0] = source.getChosenType();
 						}
 						for(String type : types) affectedCard.removeType(type);
+					}
+					else if(keyword.startsWith("Keyword=")) {
+						String sVar = source.getSVar(keyword.split("Keyword=")[1]);
+						affectedCard.removeExtrinsicKeyword(sVar);
 					}
 					affectedCard.removeExtrinsicKeyword(keyword);
 				}
@@ -7517,5 +7526,206 @@ public class GameActionUtil {
 		
 		///The commands above are in alphabetical order by cardname.
 	}
+	
+	public static Command stAnimate = new Command() {
+		/** stAnimate
+		 * Syntax:[ k[0] stAnimate[All][Self][Enchanted] : k[1] AnimateValid : 
+		 * 			k[2] P/T/Keyword : k[3] extra types : k[4] extra colors : k[5] Special Conditions : k[6] Description
+		 * 
+		 * extra colors k[4] - not implemented yet
+		 */
+		
+		private static final long serialVersionUID = -1404133561787349004L;
+		
+		// storage stores the source card and the cards it gave its bonus to, to know what to remove
+		private ArrayList<StaticEffect> storage = new ArrayList<StaticEffect>();
+		
+		public void execute() {
+			
+			// remove all static effects
+			for (int i = 0; i < storage.size(); i++) {
+	    		removeStaticEffect(storage.get(i));
+	    	}
+			
+			//clear the list
+			storage = new ArrayList<StaticEffect>();
+			
+			//Gather Cards on the Battlefield with the stPump Keyword
+			CardList cards = AllZoneUtil.getCardsInPlay();
+			cards.getKeywordsContain("stAnimate");
+			
+			// check each card
+			for (int i = 0; i < cards.size(); i++) {
+	    		Card cardWithKeyword = cards.get(i);
+	            ArrayList<String> keywords = cardWithKeyword.getKeyword();
+	            
+	            // check each keyword of the card
+	            for (int j = 0; j < keywords.size(); j++) {
+	            	String keyword = keywords.get(j);
+	            	
+	            	if(keyword.startsWith("stAnimate")) {
+	            		StaticEffect se = new StaticEffect(); 	//create a new StaticEffect
+	            		se.setSource(cardWithKeyword);
+	            		se.setKeywordNumber(j);
 
-}
+	            		
+	            		//get the affected cards
+						String k[] = keyword.split(":", 7);    
+						
+						if(areSpecialConditionsMet(cardWithKeyword, k[5])) { //special oonditions are isPresent, isValid
+						
+							final String affected = k[1];			
+							final String specific[] = affected.split(",");
+							CardList affectedCards = getAffectedCards(cardWithKeyword, k); // options are All, Self, Enchanted etc.
+							affectedCards = affectedCards.getValidCards(specific, cardWithKeyword.getController(), cardWithKeyword);
+							se.setAffectedCards(affectedCards);
+							
+							String[] pt = k[2].split("/");
+							
+							int x = 0;
+		            		if (pt[0].contains("X") || pt[1].contains("X")) 
+		                 		x = CardFactoryUtil.xCount(cardWithKeyword, cardWithKeyword.getSVar("X").split("\\$")[1]);
+		                 	se.setXValue(x);
+		                 	
+		                 	int y = 0;
+		            		if (pt[1].contains("Y")) 
+		                 		y = CardFactoryUtil.xCount(cardWithKeyword, cardWithKeyword.getSVar("Y").split("\\$")[1]);
+		                 	se.setYValue(y);
+		                 	
+		                 	ArrayList<String> types = new ArrayList<String>();
+		                 	if(!k[3].equalsIgnoreCase("no types")) {
+		                 		types.addAll(Arrays.asList(k[3].split(",")));
+		                 	}
+		            		
+							addStaticEffects(se, cardWithKeyword, affectedCards, k[2], types); //give the boni to the affected cards
+
+							storage.add(se); // store the information
+						}
+	            	}
+	            }
+	    	}
+		}// execute()
+		
+		private void addStaticEffects(StaticEffect se, Card source, CardList affectedCards, String details, ArrayList<String> types) {
+			
+			String[] keyword = details.split("/", 3);
+			String powerStr = keyword[0];
+			String toughStr = keyword[1];
+			
+			for(int i = 0; i < affectedCards.size(); i++) {
+				Card affectedCard = affectedCards.get(i);
+				//copied from stSetPT power/toughness
+				int power = powerStr.matches("[0-9][0-9]?") ? Integer.parseInt(powerStr) : CardFactoryUtil.xCount(affectedCard, powerStr);
+				int toughness = toughStr.matches("[0-9][0-9]?") ? Integer.parseInt(toughStr) : CardFactoryUtil.xCount(affectedCard, toughStr);
+				affectedCard.setBaseAttack(power);
+				affectedCard.setBaseDefense(toughness);
+				for(String type : types) {
+					if(!affectedCard.isType(type)) {
+						affectedCard.addType(type);
+					}
+					else {
+						se.removeType(type);
+					}
+				}
+				if(keyword.length > 2) {
+					String keywords[] = keyword[2].split(" & ");
+					for(int j = 0; j < keywords.length; j++) {
+						String kw = keywords[j];
+						/*if(kw.startsWith("SVar=")) {
+							String sVar = source.getSVar(kw.split("SVar=")[1]);
+							if (sVar.startsWith("AB")) { // grant the ability
+								AbilityFactory AF = new AbilityFactory();
+								SpellAbility sa = AF.getAbility(sVar, affectedCard);
+								sa.setType("Temporary");
+			        		
+								affectedCard.addSpellAbility(sa);
+							}
+							else { // Copy this SVar
+								affectedCard.setSVar(kw.split("SVar=")[1], sVar);								
+							}
+						}
+						
+						else */ affectedCard.addExtrinsicKeyword(kw);
+					}
+				}
+			}//end for
+		}
+		
+		void removeStaticEffect(StaticEffect se) {
+			Card source = se.getSource();
+			CardList affected = se.getAffectedCards();
+			int num = se.getKeywordNumber();
+			ArrayList<String> types = se.getTypes();
+            String parse = source.getKeyword().get(num).toString();                
+            String k[] = parse.split(":");
+			for(int i = 0; i < affected.size(); i++) {
+				removeStaticEffect(se, source, affected.get(i), k, types);
+			}
+			se.clearTypes();
+		}
+		
+		private void removeStaticEffect(StaticEffect se, Card source, Card affectedCard, String[] details, ArrayList<String> types) {
+			
+			for(String type : types) {
+				affectedCard.removeType(type);
+			}
+			String[] kw = details[2].split("/", 3);
+			if (kw.length > 2) {
+				String kws[] = kw[2].split(" & ");
+				for(int j = 0; j < kws.length; j++) {
+					String keyword = kws[j];
+					/*
+					if(keyword.startsWith("SVar=")) {
+						String sVar = source.getSVar(keyword.split("SVar=")[1]);
+						if (sVar.startsWith("AB")) { // remove granted abilities
+							SpellAbility[] spellAbility = affectedCard.getSpellAbility();
+							for(SpellAbility s : spellAbility) {
+								if (s.getType().equals("Temporary")) {
+									affectedCard.removeSpellAbility(s);
+								}
+							}
+						}
+					}
+					else */ affectedCard.removeExtrinsicKeyword(keyword);
+				}
+			}
+		}//end removeStaticEffects
+		
+		// Special Conditions
+		private boolean areSpecialConditionsMet(Card source, String conditions) {
+			if(conditions.contains("isPresent")) { // is a card of a certain type/color present?
+				String req = conditions.replaceAll("isPresent ", "");
+				String[] reqs = req.split(",");
+				CardList cards = AllZoneUtil.getCardsInPlay();
+				cards = cards.getValidCards(reqs, source.getController(), source);
+				if(cards.isEmpty()) return false;
+			}
+			if(conditions.contains("isValid")) { // does this card meet the valid description?
+				String req = conditions.replaceAll("isValid ", "");
+				if(!source.isValid(req, source.getController(), source)) return false;
+			}
+			return true;
+		}//end areSpecialConditionsMet()
+		
+		private CardList getAffectedCards(Card source, String[] details) {
+			// [Self], [All], [Enchanted]
+			CardList affected = new CardList();
+			String range = details[0].replaceFirst("stAnimate", "");
+			
+			if(range.equals("Self")) {
+				affected.add(source);
+			}
+			else if(range.equals("All")) {
+      			affected.add(AllZoneUtil.getCardsInPlay());
+      		}
+			else if(range.equals("Enchanted")) {
+      			if(source.getEnchanting().size() > 0) {
+      				affected.addAll(source.getEnchanting().toArray());
+      			}
+	      	}
+      		
+			return affected;
+		}//end getAffectedCards()
+	};
+
+}//end class GameActionUtil
