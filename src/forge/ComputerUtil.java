@@ -430,6 +430,10 @@ public class ComputerUtil
             	}
             }
             
+            if(sourceLand.getName().equals("Rainbow Vale")) {
+            	sourceLand.addExtrinsicKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.");
+            }
+            
             //System.out.println("just subtracted " + colors.get(j) + ", cost is now: " + cost.toString());
 
          }

@@ -295,6 +295,10 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
         		AllZone.Stack.add(ability);
         	}
         }
+        
+        if(sourceCard.getName().equals("Rainbow Vale")) {
+        	sourceCard.addExtrinsicKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.");
+        }
 
         if(!runcommands.isEmpty()) for(Command c:runcommands)
             c.execute();

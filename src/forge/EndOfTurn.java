@@ -95,6 +95,32 @@ public class EndOfTurn implements java.io.Serializable
     		destroy.setStackDescription("Destroy " + card);
     		AllZone.Stack.add(destroy);
     	}
+    	if( c.getKeyword().contains("An opponent gains control of CARDNAME at the beginning of the next end step.")) {
+    		final Card vale = c;
+    		final SpellAbility change = new Ability(vale, "0") {
+    			@Override
+    			public void resolve() {
+    				if(AllZone.GameAction.isCardInPlay(vale)) {
+    					((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+                        
+                        vale.setController(vale.getController().getOpponent());
+                        
+                        PlayerZone from = AllZone.getZone(vale);
+                        from.remove(vale);
+                        
+                        PlayerZone to = AllZone.getZone(Constant.Zone.Play, vale.getController());
+                        to.add(vale);
+                        
+                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+                        vale.removeExtrinsicKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.");
+    				}
+    			}
+    		};
+    		change.setStackDescription(vale.getName()+" changes controllers.");
+    		AllZone.Stack.add(change);
+    	}
     }
     execute(at);
   }//executeAt()
