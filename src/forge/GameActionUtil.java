@@ -15063,63 +15063,15 @@ public class GameActionUtil {
 
 	}; //Liu_Bei
 
-	/*
-	public static Command Nimble_Mongoose             = new Command() {
-		private static final long serialVersionUID = -8155356899650795833L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Nimble Mongoose");
-
-			if(list.size() > 0) {
-				//Card crd = list.get(0); //unused
-
-				for(int i = 0; i < list.size(); i++) {
-
-					Card c = list.get(i);
-					if(hasThreshold(c)) {
-						c.setBaseAttack(3);
-						c.setBaseDefense(3);
-					} else {
-						c.setBaseAttack(1);
-						c.setBaseDefense(1);
-					}
-
-				}
-			}
-		}// execute()
-
-		private boolean hasThreshold(Card c) {
-			PlayerZone grave = AllZone.getZone(
-					Constant.Zone.Graveyard, c.getController());
-
-			CardList gy = new CardList();
-			gy.addAll(grave.getCards());
-
-			if(gy.size() >= 7) return true;
-			else return false;
-		}
-
-	}; //Nimble_Mongoose
-	*/
-	
 	public static Command Mystic_Enforcer             = new Command() {
 
 		private static final long serialVersionUID = 4569052031336290843L;
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Mystic Enforcer");
+			CardList list = AllZoneUtil.getCardsInPlay("Mystic Enforcer");
 
 			if(list.size() > 0) {
-				//Card crd = list.get(0); //unused
-
 				for(int i = 0; i < list.size(); i++) {
 
 					Card c = list.get(i);
@@ -15158,14 +15110,9 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Bant Sureblade");
+			CardList list = AllZoneUtil.getCardsInPlay("Bant Sureblade");
 
 			if(list.size() > 0) {
-				//Card crd = list.get(0); //unused
-
 				for(int i = 0; i < list.size(); i++) {
 
 					Card c = list.get(i);
@@ -15193,14 +15140,9 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Esper Stormblade");
+			CardList list = AllZoneUtil.getCardsInPlay("Esper Stormblade");
 
 			if(list.size() > 0) {
-				//Card crd = list.get(0); //unused
-
 				for(int i = 0; i < list.size(); i++) {
 
 					Card c = list.get(i);
@@ -15228,14 +15170,9 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Grixis Grimblade");
+			CardList list = AllZoneUtil.getCardsInPlay("Grixis Grimblade");
 
 			if(list.size() > 0) {
-				//Card crd = list.get(0); //unused
-
 				for(int i = 0; i < list.size(); i++) {
 
 					Card c = list.get(i);
@@ -15263,14 +15200,9 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Jund Hackblade");
+			CardList list = AllZoneUtil.getCardsInPlay("Jund Hackblade");
 
 			if(list.size() > 0) {
-				//Card crd = list.get(0); //unused
-
 				for(int i = 0; i < list.size(); i++) {
 
 					Card c = list.get(i);
@@ -15297,14 +15229,9 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Naya Hushblade");
+			CardList list = AllZoneUtil.getCardsInPlay("Naya Hushblade");
 
 			if(list.size() > 0) {
-				//Card crd = list.get(0); //unused
-
 				for(int i = 0; i < list.size(); i++) {
 
 					Card c = list.get(i);
@@ -15332,14 +15259,9 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Ballynock Cohort");
+			CardList list = AllZoneUtil.getCardsInPlay("Ballynock Cohort");
 
 			if(list.size() > 0) {
-				//Card crd = list.get(0); //unused
-
 				for(int i = 0; i < list.size(); i++) {
 
 					Card c = list.get(i);
@@ -15366,14 +15288,9 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Ashenmoor Cohort");
+			CardList list = AllZoneUtil.getCardsInPlay("Ashenmoor Cohort");
 
 			if(list.size() > 0) {
-				//Card crd = list.get(0); //unused
-
 				for(int i = 0; i < list.size(); i++) {
 
 					Card c = list.get(i);
@@ -15400,14 +15317,9 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Briarberry Cohort");
+			CardList list = AllZoneUtil.getCardsInPlay("Briarberry Cohort");
 
 			if(list.size() > 0) {
-				//Card crd = list.get(0); //unused
-
 				for(int i = 0; i < list.size(); i++) {
 
 					Card c = list.get(i);
@@ -15434,14 +15346,9 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Crabapple Cohort");
+			CardList list = AllZoneUtil.getCardsInPlay("Crabapple Cohort");
 
 			if(list.size() > 0) {
-				//Card crd = list.get(0); //unused
-
 				for(int i = 0; i < list.size(); i++) {
 
 					Card c = list.get(i);
@@ -15468,14 +15375,9 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Mudbrawler Cohort");
+			CardList list = AllZoneUtil.getCardsInPlay("Mudbrawler Cohort");
 
 			if(list.size() > 0) {
-				//Card crd = list.get(0); //unused
-
 				for(int i = 0; i < list.size(); i++) {
 
 					Card c = list.get(i);
@@ -15503,10 +15405,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Werebear");
+			CardList list = AllZoneUtil.getCardsInPlay("Werebear");
 
 			if(list.size() > 0) {
 				//Card crd = list.get(0); //unused
@@ -15544,14 +15443,9 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Divinity of Pride");
+			CardList list = AllZoneUtil.getCardsInPlay("Divinity of Pride");
 
 			if(list.size() > 0) {
-				//Card crd = list.get(0); //unused
-
 				for(int i = 0; i < list.size(); i++) {
 
 					Card c = list.get(i);
@@ -15581,14 +15475,9 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Serra Ascendant");
+			CardList list = AllZoneUtil.getCardsInPlay("Serra Ascendant");
 
 			if(list.size() > 0) {
-				//Card crd = list.get(0); //unused
-
 				for(int i = 0; i < list.size(); i++) {
 
 					Card c = list.get(i);
@@ -15663,10 +15552,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Yavimaya Enchantress");
+			CardList list = AllZoneUtil.getCardsInPlay("Yavimaya Enchantress");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -15695,10 +15581,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Knight of the Reliquary");
+			CardList list = AllZoneUtil.getCardsInPlay("Knight of the Reliquary");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -15737,11 +15620,7 @@ public class GameActionUtil {
 
 		public void execute() {
 
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
-
-			creature = creature.getName("Relentless Rats");
+			CardList creature =AllZoneUtil.getCardsInPlay("Relentless Rats");
 
 			for(int i = 0; i < creature.size(); i++) {
 				Card c = creature.get(i);
@@ -15780,11 +15659,7 @@ public class GameActionUtil {
 
 		public void execute() {
 
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
-
-			creature = creature.getName("Squirrel Mob");
+			CardList creature = AllZoneUtil.getCardsInPlay("Squirrel Mob");
 
 			for(int i = 0; i < creature.size(); i++) {
 				Card c = creature.get(i);
@@ -15970,11 +15845,7 @@ public class GameActionUtil {
 		public void execute() {
 
 
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
-
-			creature = creature.getName("Elvish Archdruid");
+			CardList creature = AllZoneUtil.getCardsInPlay("Elvish Archdruid");
 
 			for(int i = 0; i < creature.size(); i++) {
 				Card c = creature.get(i);
@@ -16046,11 +15917,7 @@ public class GameActionUtil {
 		public void execute() {
 
 
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
-
-			creature = creature.getName("Knight Exemplar");
+			CardList creature = AllZoneUtil.getCardsInPlay("Knight Exemplar");
 
 			for(int i = 0; i < creature.size(); i++) {
 				Card c = creature.get(i);
@@ -16129,11 +15996,7 @@ public class GameActionUtil {
 
 		public void execute() {
 
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
-
-			creature = creature.getName("Wizened Cenn");
+			CardList creature = AllZoneUtil.getCardsInPlay("Wizened Cenn");
 
 			for(int i = 0; i < creature.size(); i++) {
 				Card c = creature.get(i);
@@ -16214,11 +16077,7 @@ public class GameActionUtil {
 
         public void execute() {
 
-            CardList creature = new CardList();
-            creature.addAll(AllZone.Human_Play.getCards());
-            creature.addAll(AllZone.Computer_Play.getCards());
-
-            creature = creature.getName("Lord of the Undead");
+            CardList creature = AllZoneUtil.getCardsInPlay("Lord of the Undead");
 
             for(int i = 0; i < creature.size(); i++) {
                 Card c = creature.get(i);
@@ -16293,11 +16152,7 @@ public class GameActionUtil {
 
 		public void execute() {
 
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
-
-			creature = creature.getName("Cemetery Reaper");
+			CardList creature = AllZoneUtil.getCardsInPlay("Cemetery Reaper");
 
 			for(int i = 0; i < creature.size(); i++) {
 				Card c = creature.get(i);
@@ -16376,11 +16231,7 @@ public class GameActionUtil {
 
 		public void execute() {
 
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
-
-			creature = creature.getName("Captain of the Watch");
+			CardList creature = AllZoneUtil.getCardsInPlay("Captain of the Watch");
 
 			for(int i = 0; i < creature.size(); i++) {
 				Card c = creature.get(i);
@@ -16456,11 +16307,7 @@ public class GameActionUtil {
 
 		public void execute() {
 
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
-
-			creature = creature.getName("Veteran Swordsmith");
+			CardList creature = AllZoneUtil.getCardsInPlay("Veteran Swordsmith");
 
 			for(int i = 0; i < creature.size(); i++) {
 				Card c = creature.get(i);
@@ -16534,11 +16381,7 @@ public class GameActionUtil {
 
 		public void execute() {
 
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
-
-			creature = creature.getName("Veteran Armorsmith");
+			CardList creature = AllZoneUtil.getCardsInPlay("Veteran Armorsmith");
 
 			for(int i = 0; i < creature.size(); i++) {
 				Card c = creature.get(i);
@@ -16616,11 +16459,7 @@ public class GameActionUtil {
 		public void execute() {
 
 
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
-
-			creature = creature.getName("Elvish Champion");
+			CardList creature = AllZoneUtil.getCardsInPlay("Elvish Champion");
 
 			for(int i = 0; i < creature.size(); i++) {
 				Card c = creature.get(i);
@@ -16699,14 +16538,7 @@ public class GameActionUtil {
 		int                       otherLords       = 0;
 
 		private int countOtherLords() {
-			PlayerZone hPlay = AllZone.getZone(
-					Constant.Zone.Play, AllZone.HumanPlayer);
-			PlayerZone cPlay = AllZone.getZone(
-					Constant.Zone.Play, AllZone.ComputerPlayer);
-			CardList lords = new CardList();
-			lords.addAll(hPlay.getCards());
-			lords.addAll(cPlay.getCards());
-			lords = lords.getName("Timber Protector");
+			CardList lords = AllZoneUtil.getCardsInPlay("Timber Protector");
 			return lords.size() - 1;
 
 		}
@@ -16714,11 +16546,7 @@ public class GameActionUtil {
 		public void execute() {
 
 
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
-
-			creature = creature.getName("Timber Protector");
+			CardList creature = AllZoneUtil.getCardsInPlay("Timber Protector");
 
 			for(int i = 0; i < creature.size(); i++) {
 				Card c = creature.get(i);
@@ -16789,14 +16617,7 @@ public class GameActionUtil {
 		int                       otherLords       = 0;
 
 		private int countOtherLords() {
-			PlayerZone hPlay = AllZone.getZone(
-					Constant.Zone.Play, AllZone.HumanPlayer);
-			PlayerZone cPlay = AllZone.getZone(
-					Constant.Zone.Play, AllZone.ComputerPlayer);
-			CardList lords = new CardList();
-			lords.addAll(hPlay.getCards());
-			lords.addAll(cPlay.getCards());
-			lords = lords.getName("Goblin Chieftain");
+			CardList lords = AllZoneUtil.getCardsInPlay("Goblin Chieftain");
 			return lords.size() - 1;
 
 		}
@@ -16804,11 +16625,7 @@ public class GameActionUtil {
 		public void execute() {
 
 
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
-
-			creature = creature.getName("Goblin Chieftain");
+			CardList creature = AllZoneUtil.getCardsInPlay("Goblin Chieftain");
 
 			for(int i = 0; i < creature.size(); i++) {
 				Card c = creature.get(i);
@@ -16848,10 +16665,7 @@ public class GameActionUtil {
 
 			// for each zone found add +1/+1 to each card
 			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Goblin");
+				CardList creature = AllZoneUtil.getTypeInPlay("Goblin");
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
@@ -16876,14 +16690,7 @@ public class GameActionUtil {
 		int                       otherLords       = 0;
 
 		private int countOtherLords() {
-			PlayerZone hPlay = AllZone.getZone(
-					Constant.Zone.Play, AllZone.HumanPlayer);
-			PlayerZone cPlay = AllZone.getZone(
-					Constant.Zone.Play, AllZone.ComputerPlayer);
-			CardList lords = new CardList();
-			lords.addAll(hPlay.getCards());
-			lords.addAll(cPlay.getCards());
-			lords = lords.getName("Goblin King");
+			CardList lords = AllZoneUtil.getCardsInPlay("Goblin King");
 			return lords.size() - 1;
 
 		}
@@ -16971,11 +16778,7 @@ public class GameActionUtil {
 
 		public void execute() {
 
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
-
-			creature = creature.getName("Merfolk Sovereign");
+			CardList creature = AllZoneUtil.getCardsInPlay("Merfolk Sovereign");
 
 			for(int i = 0; i < creature.size(); i++) {
 				Card c = creature.get(i);
@@ -17052,11 +16855,7 @@ public class GameActionUtil {
 		public void execute() {
 
 
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
-
-			creature = creature.getName("Lord of Atlantis");
+			CardList creature = AllZoneUtil.getCardsInPlay("Lord of Atlantis");
 
 			for(int i = 0; i < creature.size(); i++) {
 				Card c = creature.get(i);
@@ -17125,14 +16924,7 @@ public class GameActionUtil {
 		int                       otherMarshals    = 0;
 
 		private int countOtherMarshals() {
-			PlayerZone hPlay = AllZone.getZone(
-					Constant.Zone.Play, AllZone.HumanPlayer);
-			PlayerZone cPlay = AllZone.getZone(
-					Constant.Zone.Play, AllZone.ComputerPlayer);
-			CardList marshals = new CardList();
-			marshals.addAll(hPlay.getCards());
-			marshals.addAll(cPlay.getCards());
-			marshals = marshals.getName("Field Marshal");
+			CardList marshals = AllZoneUtil.getCardsInPlay("Field Marshal");
 			return marshals.size() - 1;
 
 		}
@@ -17140,11 +16932,7 @@ public class GameActionUtil {
 		public void execute() {
 
 
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
-
-			creature = creature.getName("Field Marshal");
+			CardList creature = AllZoneUtil.getCardsInPlay("Field Marshal");
 
 			for(int i = 0; i < creature.size(); i++) {
 				Card c = creature.get(i);
@@ -17226,11 +17014,7 @@ public class GameActionUtil {
 
 		public void execute() {
 
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
-
-			creature = creature.getName("Death Baron");
+			CardList creature = AllZoneUtil.getCardsInPlay("Death Baron");
 
 			for(int i = 0; i < creature.size(); i++) {
 				Card c = creature.get(i);
@@ -17268,9 +17052,7 @@ public class GameActionUtil {
 
 			// for each zone found add +1/+1 to each card
 			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
+				CardList creature = AllZoneUtil.getCardsInPlay();
 				creature = creature.filter(new CardListFilter()
 				{
 					public boolean addCard(Card crd)
@@ -17398,11 +17180,7 @@ public class GameActionUtil {
 
 		public void execute() {
 
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
-
-			creature = creature.getName("Aven Brigadier");
+			CardList creature = AllZoneUtil.getCardsInPlay("Aven Brigadier");
 
 			for(int i = 0; i < creature.size(); i++) {
 				Card c = creature.get(i);
@@ -17477,11 +17255,7 @@ public class GameActionUtil {
 		public void execute() {
 
 
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
-
-			creature = creature.getName("Scion of Oona");
+			CardList creature = AllZoneUtil.getCardsInPlay("Scion of Oona");
 
 			for(int i = 0; i < creature.size(); i++) {
 				Card c = creature.get(i);
@@ -17896,10 +17670,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Loxodon Punisher");
+			CardList list = AllZoneUtil.getCardsInPlay("Loxodon Punisher");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -17923,10 +17694,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Goblin Gaveleer");
+			CardList list = AllZoneUtil.getCardsInPlay("Goblin Gaveleer");
 			
 			for (int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -17950,10 +17718,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Rabid Wombat");
+			CardList list = AllZoneUtil.getCardsInPlay("Rabid Wombat");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -17975,10 +17740,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Uril, the Miststalker");
+			CardList list = AllZoneUtil.getCardsInPlay("Uril, the Miststalker");
 
 			if(list.size() > 0) {
 				Card c = list.get(0);
@@ -18001,10 +17763,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Kithkin Rabble");
+			CardList list = AllZoneUtil.getCardsInPlay("Kithkin Rabble");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -18034,10 +17793,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Crowd of Cinders");
+			CardList list = AllZoneUtil.getCardsInPlay("Crowd of Cinders");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -18067,10 +17823,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Faerie Swarm");
+			CardList list = AllZoneUtil.getCardsInPlay("Faerie Swarm");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -18100,10 +17853,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Drove of Elves");
+			CardList list = AllZoneUtil.getCardsInPlay("Drove of Elves");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -18164,10 +17914,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Molimo, Maro-Sorcerer");
+			CardList list = AllZoneUtil.getCardsInPlay("Molimo, Maro-Sorcerer");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -18216,10 +17963,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Maro");
+			CardList list = AllZoneUtil.getCardsInPlay("Maro");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -18256,10 +18000,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Masumaro, First to Live");
+			CardList list = AllZoneUtil.getCardsInPlay("Masumaro, First to Live");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -18297,10 +18038,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Adamaro, First to Desire");
+			CardList list = AllZoneUtil.getCardsInPlay("Adamaro, First to Desire");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -18337,10 +18075,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Overbeing of Myth");
+			CardList list = AllZoneUtil.getCardsInPlay("Overbeing of Myth");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -18377,10 +18112,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Guul Draz Specter");
+			CardList list = AllZoneUtil.getCardsInPlay("Guul Draz Specter");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -18453,10 +18185,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Mortivore");
+			CardList list = AllZoneUtil.getCardsInPlay("Mortivore");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -18490,10 +18219,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Cognivore");
+			CardList list = AllZoneUtil.getCardsInPlay("Cognivore");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -18527,10 +18253,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Cantivore");
+			CardList list = AllZoneUtil.getCardsInPlay("Cantivore");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -18564,10 +18287,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Lhurgoyf");
+			CardList list = AllZoneUtil.getCardsInPlay("Lhurgoyf");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -18601,10 +18321,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Svogthos, the Restless Tomb");
+			CardList list = AllZoneUtil.getCardsInPlay("Svogthos, the Restless Tomb");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -18653,10 +18370,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Death's Shadow");
+			CardList list = AllZoneUtil.getCardsInPlay("Death's Shadow");
 
 			for(Card c:list) {
 				int n = 13 - c.getController().getLife();
@@ -18672,10 +18386,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Nightmare");
+			CardList list = AllZoneUtil.getCardsInPlay("Nightmare");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -18699,10 +18410,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Aven Trailblazer");
+			CardList list = AllZoneUtil.getCardsInPlay("Aven Trailblazer");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -18734,10 +18442,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Matca Rioters");
+			CardList list = AllZoneUtil.getCardsInPlay("Matca Rioters");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -18769,10 +18474,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Rakdos Pit Dragon");
+			CardList list = AllZoneUtil.getCardsInPlay("Rakdos Pit Dragon");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -18803,10 +18505,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Nyxathid");
+			CardList list = AllZoneUtil.getCardsInPlay("Nyxathid");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -18834,10 +18533,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Lord of Extinction");
+			CardList list = AllZoneUtil.getCardsInPlay("Lord of Extinction");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -18868,10 +18564,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Terravore");
+			CardList list = AllZoneUtil.getCardsInPlay("Terravore");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -18908,10 +18601,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Magnivore");
+			CardList list = AllZoneUtil.getCardsInPlay("Magnivore");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -18947,10 +18637,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Tarmogoyf");
+			CardList list = AllZoneUtil.getCardsInPlay("Tarmogoyf");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -20190,10 +19877,7 @@ public class GameActionUtil {
 			// for each zone found add +1/+1 to each black card
 			for(int outer = 0; outer < zone.length; outer++) {
 				// CardList creature = new CardList(zone[outer].getCards());
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Creature");
+				CardList creature = AllZoneUtil.getCreaturesInPlay();
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
@@ -20232,10 +19916,7 @@ public class GameActionUtil {
 			// for each zone found add +1/+1 to each white card
 			for(int outer = 0; outer < zone.length; outer++) {
 				// CardList creature = new CardList(zone[outer].getCards());
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Creature");
+				CardList creature = AllZoneUtil.getCreaturesInPlay();
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
@@ -20305,16 +19986,8 @@ public class GameActionUtil {
 
 			// add +1/+1 to cards
 			list.clear();
-
-			PlayerZone hplay = AllZone.getZone(
-					Constant.Zone.Play, AllZone.HumanPlayer);
-			PlayerZone cplay = AllZone.getZone(
-					Constant.Zone.Play, AllZone.ComputerPlayer);
-
-			CardList cl = new CardList();
-			cl.addAll(hplay.getCards());
-			cl.addAll(cplay.getCards());
-			cl = cl.getName("Beastmaster Ascension");
+			
+			CardList cl = AllZoneUtil.getCardsInPlay("Beastmaster Ascension");
 
 			for(int i = 0; i < cl.size(); i++) {
 				Player player = cl.get(i).getController();
@@ -20693,13 +20366,7 @@ public class GameActionUtil {
 
 			list.clear();
 
-			PlayerZone cplay = AllZone.Computer_Play;
-			PlayerZone hplay = AllZone.Human_Play;
-
-			CardList cl = new CardList();
-			cl.addAll(cplay.getCards());
-			cl.addAll(hplay.getCards());
-			cl = cl.getName("Meddling Mage");
+			CardList cl = AllZoneUtil.getCardsInPlay("Meddling Mage");
 
 			for(int i = 0; i < cl.size(); i++) {
 				final Card crd = cl.get(i);
