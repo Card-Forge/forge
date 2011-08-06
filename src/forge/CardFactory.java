@@ -1483,6 +1483,7 @@ public class CardFactory implements NewConstants {
           final boolean TgtCreature[] = {false};
           final boolean TgtPlayer[] = {false};
           final boolean TgtCP[] = {false};
+          final boolean TgtOpp[] = {false};
          
           if (k[0].contains("CP"))
              TgtCP[0] = true;
@@ -1490,6 +1491,8 @@ public class CardFactory implements NewConstants {
              TgtPlayer[0] = true;
           else if (k[0].contains("C"))
              TgtCreature[0] = true;
+          else if (k[0].contains("Opp"))
+        	 TgtOpp[0] = true;
          
           // how much damage
         final int NumDmg[] = {-1};
@@ -1625,10 +1628,10 @@ public class CardFactory implements NewConstants {
                    }
                 }
                
-                if (TgtPlayer[0] == true)
+                if (TgtPlayer[0] == true || TgtOpp[0] == true)
                 {
                    setTargetPlayer(Constant.Player.Human);
-                   return true; //shouldTgtP();
+                   return true; 
                 }
                
                 if (TgtCreature[0] == true)
@@ -1637,7 +1640,7 @@ public class CardFactory implements NewConstants {
                    if (c != null)
                    {
                       setTargetCard(c);
-                      return c != null;
+                      return true;
                    }
                 }
                
@@ -1648,6 +1651,9 @@ public class CardFactory implements NewConstants {
              {
                 damage = getNumDamage();
                 String tgtP = new String();
+                
+                if (TgtOpp[0] == true)
+                	setTargetPlayer(AllZone.GameAction.getOpponent(card.getController()));
                
                 if(getTargetCard() != null)
                 {
