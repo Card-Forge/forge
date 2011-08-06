@@ -1,5 +1,7 @@
 package forge;
 
+import java.util.ArrayList;
+
 public class GameInfo {
 	private int computerMaxPlayNumberOfLands = 1;
 	private int humanMaxPlayNumberOfLands = 1;
@@ -15,6 +17,8 @@ public class GameInfo {
 	private boolean preventCombatDamageThisTurn;
 	private boolean assignedFirstStrikeDamageThisCombat;
 	private boolean resolvedFirstStrikeDamageThisCombat;
+	
+	private ArrayList<Card_Color> globalColorChanges = new ArrayList<Card_Color>();
 
 	public void setComputerMaxPlayNumberOfLands(int n) {
 		computerMaxPlayNumberOfLands = n;
@@ -136,6 +140,31 @@ public class GameInfo {
 		return computerStartedThisGame;
 	}
 
+	public long addColorChanges(String s, Card c, boolean addToColors, boolean bIncrease) {
+    	if (bIncrease)
+    		Card_Color.increaseTimestamp();
+    	globalColorChanges.add(new Card_Color(new ManaCost(s), c, addToColors));
+    	return Card_Color.getTimestamp();
+	}
+
+	public void removeColorChanges(String s, Card c, boolean addTo, long timestamp) {
+		Card_Color removeCol = null;
+    	for(Card_Color cc : globalColorChanges)
+    		if (cc.equals(s, c, addTo, timestamp))
+    			removeCol = cc;
+    	
+    	if (removeCol != null)
+    		globalColorChanges.remove(removeCol);
+	}
+	
+	public void clearColorChanges() {	
+		// clear the global color changes at end of each game
+		globalColorChanges.clear();
+	}
+		
+	public ArrayList<Card_Color> getColorChanges() {
+		return globalColorChanges;
+	}
 	
 	
 }

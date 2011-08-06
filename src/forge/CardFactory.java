@@ -10781,6 +10781,21 @@ public class CardFactory implements NewConstants {
     }//getCard2
     
     public Card postFactoryKeywords(Card card){
+		card.addColor(card.getManaCost());
+    	int cardnameSpot = hasKeyword(card, "CARDNAME is ");
+    	if (cardnameSpot != -1){
+			String color = "1";
+    		while(cardnameSpot != -1){
+	            if(cardnameSpot != -1) {
+	                String parse = card.getKeyword().get(cardnameSpot).toString();
+	                card.removeIntrinsicKeyword(parse);
+	                color += " " + Input_PayManaCostUtil.getShortColorString(parse.replace("CARDNAME is ","").replace(".", ""));
+	                cardnameSpot = hasKeyword(card, "CARDNAME is ");
+	            }
+    		}
+            card.addColor(color);
+    	}
+
     	// this function should handle any keywords that need to be added after a spell goes through the factory
         if(hasKeyword(card, "Fading") != -1) {
             int n = hasKeyword(card, "Fading");

@@ -39,7 +39,7 @@ public class Card extends MyObservable {
     private ArrayList<String>            Targets_for_Choices               = new ArrayList<String>();
     private ArrayList<SpellAbility>      spellAbility                      = new ArrayList<SpellAbility>();
     private ArrayList<Ability_Mana>      manaAbility                       = new ArrayList<Ability_Mana>();
-    
+    private ArrayList<Card_Color>		 cardColor						   = new ArrayList<Card_Color>();
     
     private HashMap<Card, Integer>       receivedDamageFromThisTurn        = new HashMap<Card, Integer>();
     private HashMap<Card, Integer>       assignedDamageHashMap             = new HashMap<Card, Integer>();
@@ -485,6 +485,83 @@ public class Card extends MyObservable {
     
     public String getManaCost() {
         return manaCost;
+    }
+    
+    public void addColor(String s){
+    	if (s.equals(""))
+    		s = "0";
+    	cardColor.add(new Card_Color(new ManaCost(s), this, false));
+    }
+    
+    public long addColor(String s, Card c, boolean addToColors, boolean bIncrease){
+    	if (bIncrease)
+    		Card_Color.increaseTimestamp();
+    	cardColor.add(new Card_Color(new ManaCost(s), c, addToColors));
+    	return Card_Color.getTimestamp();
+    }
+    
+    public void removeColor(String s, Card c, boolean addTo, long timestamp){
+    	Card_Color removeCol = null;
+    	for(Card_Color cc : cardColor)
+    		if (cc.equals(s, c, addTo, timestamp))
+    			removeCol = cc;
+    	
+    	if (removeCol != null)
+    		cardColor.remove(removeCol);
+    }
+    
+    public Card_Color getColor(){
+    	if (this.isImmutable()){
+    		return new Card_Color(this);
+    	}
+    	Card_Color colors = null;
+    	ArrayList<Card_Color> globalChanges = AllZone.GameInfo.getColorChanges();
+    	colors = determineColor(globalChanges);
+    	colors.fixColorless();
+    	return colors;
+    }
+    
+    Card_Color determineColor(ArrayList<Card_Color> globalChanges){
+    	Card_Color colors = new Card_Color(this);
+    	int i = cardColor.size() - 1;
+    	int j = globalChanges.size() - 1;
+    	// if both have changes, see which one is most recent
+    	while(i >= 0 && j >= 0){
+    		Card_Color cc = null;
+    		if (cardColor.get(i).getStamp() > globalChanges.get(j).getStamp()){
+    			// Card has a more recent color stamp
+    			cc = cardColor.get(i);
+    			i--;
+    		}
+    		else{
+    			// Global effect has a more recent color stamp
+    			cc = globalChanges.get(j);
+    			j--;
+    		}
+
+			for (String s : cc.toStringArray())
+				colors.addToCardColor(s);
+    		if (!cc.getAdditional())
+    			return colors;
+    	}
+    	while(i >= 0){
+    		Card_Color cc = cardColor.get(i);
+    		i--;
+			for(String s : cc.toStringArray())
+				colors.addToCardColor(s);
+    		if (!cc.getAdditional())
+    			return colors;
+    	}
+    	while(j >= 0){
+    		Card_Color cc = globalChanges.get(j);
+    		j--;
+			for(String s : cc.toStringArray())
+				colors.addToCardColor(s);
+    		if (!cc.getAdditional())
+    			return colors;
+    	}
+    	
+    	return colors;
     }
     
     public int getCMC()

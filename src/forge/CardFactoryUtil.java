@@ -1070,8 +1070,6 @@ public class CardFactoryUtil {
             }
         };
         ability.setDescription("Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.");
-//      ability.setDescription("Remove three spore counters from " + sourceCard.getName()
-//              + ": Put a 1/1 green Saproling creature token onto the battlefield.");
         ability.setStackDescription(sourceCard.getName()
                 + " - put a 1/1 green Saproling creature token onto the battlefield.");
         return ability;
@@ -3719,7 +3717,7 @@ public class CardFactoryUtil {
         if(sq[0].contains("White")) {
             someCards = someCards.filter(new CardListFilter() {
                 public boolean addCard(Card c) {
-                    return CardUtil.getColor(c) == Constant.Color.White;
+                    return CardUtil.isColor(c, Constant.Color.White);
                 }
             });
         }
@@ -3727,7 +3725,7 @@ public class CardFactoryUtil {
         if(sq[0].contains("Blue")) {
             someCards = someCards.filter(new CardListFilter() {
                 public boolean addCard(Card c) {
-                    return CardUtil.getColor(c) == Constant.Color.Blue;
+                    return CardUtil.isColor(c, Constant.Color.Blue);
                 }
             });
         }
@@ -3735,7 +3733,7 @@ public class CardFactoryUtil {
         if(sq[0].contains("Black")) {
             someCards = someCards.filter(new CardListFilter() {
                 public boolean addCard(Card c) {
-                    return CardUtil.getColor(c) == Constant.Color.Black;
+                    return CardUtil.isColor(c, Constant.Color.Black);
                 }
             });
         }
@@ -3743,7 +3741,7 @@ public class CardFactoryUtil {
         if(sq[0].contains("Red")) {
             someCards = someCards.filter(new CardListFilter() {
                 public boolean addCard(Card c) {
-                    return CardUtil.getColor(c) == Constant.Color.Red;
+                    return CardUtil.isColor(c, Constant.Color.Red);
                 }
             });
         }
@@ -3751,7 +3749,7 @@ public class CardFactoryUtil {
         if(sq[0].contains("Green")) {
             someCards = someCards.filter(new CardListFilter() {
                 public boolean addCard(Card c) {
-                    return CardUtil.getColor(c) == Constant.Color.Green;
+                    return CardUtil.isColor(c, Constant.Color.Green);
                 }
             });
         }
@@ -4228,7 +4226,8 @@ public class CardFactoryUtil {
         //c.setController(source.getController());
         //c.setOwner(source.getOwner());
         
-        c.setManaCost(manaCost);
+        c.setManaCost(manaCost);	// todo: most tokens mana cost is 0, this needs to be fixed
+        c.addColor(manaCost);
         c.setToken(true);
         
         for(String t:types)
@@ -4266,7 +4265,9 @@ public class CardFactoryUtil {
         //c.setController(controller);
         //c.setOwner(controller);
         
+        // todo: most tokens mana cost is 0, this needs to be fixed
         c.setManaCost(manaCost);
+        c.addColor(manaCost);
         c.setToken(true);
         
         for(String t:types)

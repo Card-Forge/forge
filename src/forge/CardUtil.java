@@ -85,60 +85,13 @@ public class CardUtil {
         return (String) o;
     }
     
-    
-    //returns something like Constant.Color.Green or something
-    public static String getColor(Card c) {
-        String manaCost = c.getManaCost();
-        
-        if(-1 != manaCost.indexOf("G")) return Constant.Color.Green;
-        else if(-1 != manaCost.indexOf("W")) return Constant.Color.White;
-        else if(-1 != manaCost.indexOf("B")) return Constant.Color.Black;
-        else if(-1 != manaCost.indexOf("U")) return Constant.Color.Blue;
-        else if(-1 != manaCost.indexOf("R")) return Constant.Color.Red;
-        else return Constant.Color.Colorless;
+    public static boolean isColor(Card c, String col) {
+    	ArrayList<String> list = getColors(c);
+    	return list.contains(col);
     }
     
     public static ArrayList<String> getColors(Card c) {
-        String m = c.getManaCost();
-        Set<String> colors = new HashSet<String>();
-        
-        for(int i = 0; i < m.length(); i++) {
-            switch(m.charAt(i)) {
-                case ' ':
-                break;
-                case 'G':
-                    colors.add(Constant.Color.Green);
-                break;
-                case 'W':
-                    colors.add(Constant.Color.White);
-                break;
-                case 'B':
-                    colors.add(Constant.Color.Black);
-                break;
-                case 'U':
-                    colors.add(Constant.Color.Blue);
-                break;
-                case 'R':
-                    colors.add(Constant.Color.Red);
-                break;
-            }
-        }
-        for(String kw : c.getKeyword())
-        	if(kw.startsWith(c.getName()+" is ") || kw.startsWith("CARDNAME is "))
-        		for(String color : Constant.Color.Colors)
-        			if(kw.endsWith(color+"."))
-        				colors.add(color);
-        if(colors.contains(Constant.Color.Colorless))
-        	colors.clear();
-        // Painter's
-		CardList list = AllZoneUtil.getCardsInPlay("Painter's Servant");
-		if(list.size() > 0){
-			for(int i = 0; i < list.size(); i++) colors.add(list.get(i).getChosenColor());	
-		}
-        //Painter's
-        if(colors.isEmpty()) colors.add(Constant.Color.Colorless);
-        
-        return new ArrayList<String>(colors);
+    	return c.getColor().toStringArray();
     }
     
     public static ArrayList<String> getOnlyColors(Card c) {

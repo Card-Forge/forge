@@ -6001,46 +6001,24 @@ public class CardFactory_Creatures {
                     if (AllZone.GameAction.isCardInPlay(getTargetCard()) && 
                     		CardFactoryUtil.canTarget(card, getTargetCard())) {
                         final Card[] creature = new Card[1];
+                        final long timestamp;
                         
                         creature[0] = getTargetCard();
-                        final String origManaCost = creature[0].getManaCost();
-                        final String tgtName = creature[0].getName();
-                        final String[] creatureIsColor = {
-                                tgtName + " is black.", tgtName + " is blue.", tgtName + " is green.",
-                                tgtName + " is red.", tgtName + " is white.", tgtName + " is colorless."};
-                        final boolean[] colorFlag = {false, false, false, false, false, false};
-                        
-                        for(int i = 0; i < 6; i++) {
-                            if (creature[0].getIntrinsicKeyword().contains(creatureIsColor[i])) {
-                                colorFlag[i] = true;
-                            }
-                        }
-                        
+                        creature[0].addExtrinsicKeyword("Flying");
+                        timestamp = creature[0].addColor("U", card, false, true);
+            
                         final Command EOT = new Command() {
                             private static final long serialVersionUID = -1899153704584793548L;
                             
                             public void execute() {
                                 if (AllZone.GameAction.isCardInPlay(creature[0])) {
                                     creature[0].removeExtrinsicKeyword("Flying");
-                                    creature[0].removeIntrinsicKeyword("CARDNAME is blue.");
-                                    creature[0].setManaCost(origManaCost);
-                                    for (int i = 0; i < 6; i++) {
-                                        if (colorFlag[i]) {
-                                            creature[0].addIntrinsicKeyword(creatureIsColor[i]);
-                                        }
-                                    }
+                                    creature[0].removeColor("U", card, false, timestamp);
                                 }
                             }
                         };
-                        creature[0].setManaCost(Integer.toString(CardUtil.getConvertedManaCost(origManaCost)));
-                        for (int i = 0; i < 6; i++) {
-                            if (colorFlag[i]) {
-                                creature[0].removeIntrinsicKeyword(creatureIsColor[i]);
-                            }
-                        }
-                        creature[0].addExtrinsicKeyword("Flying");
-                        creature[0].addIntrinsicKeyword("CARDNAME is blue.");
                         AllZone.EndOfTurn.addUntil(EOT);
+
                     }//if (card is in play)
                 }//resolve()
             };//SpellAbility
@@ -8190,6 +8168,10 @@ public class CardFactory_Creatures {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Wild Mongrel")) {
+        	
+        	final String[] color = new String[1];
+        	final long[] timeStamp = new long[1];
+        	
             //sacrifice ability - targets itself - until EOT
             final Command untilEOT = new Command() {
                 private static final long serialVersionUID = -5563743272875711445L;
@@ -8197,6 +8179,9 @@ public class CardFactory_Creatures {
                 public void execute() {
                     card.addTempAttackBoost(-1);
                     card.addTempDefenseBoost(-1);
+                    String s = CardUtil.getShortColor(color[0]);
+                    card.removeColor(s, card, false, timeStamp[0]);
+                    card.setChosenColor("");
                 }
             };
             
@@ -8218,7 +8203,36 @@ public class CardFactory_Creatures {
                     if(AllZone.GameAction.isCardInPlay(card)) {
                         card.addTempAttackBoost(1);
                         card.addTempDefenseBoost(1);
-                        
+                        if(card.getController().equals(Constant.Player.Human)) {
+                            String[] colors = Constant.Color.onlyColors;
+                            
+                            Object o = AllZone.Display.getChoice("Choose color", colors);
+                            color[0] = (String) o;
+                            card.setChosenColor(color[0]);
+                        } else { 
+                        	// wild mongrel will choose a color that appears the most, but that might not be right way to choose
+                        	PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
+                            PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
+                            CardList list = new CardList();
+                            list.addAll(lib.getCards());
+                            list.addAll(hand.getCards());
+                            list.addAll(AllZone.Computer_Play.getCards());
+                            
+                            color[0] = Constant.Color.White;
+                            int max = list.getKeywordsContain(color[0]).size();
+                            
+                            String[] colors = { Constant.Color.Blue, Constant.Color.Black, Constant.Color.Red, Constant.Color.Green };
+                            for(String c : colors){
+    	                        int cmp = list.getKeywordsContain(c).size();
+    	                        if (cmp > max){
+    	                        	max = cmp;
+    	                        	color[0] = c;
+    	                        }
+                            }
+                            card.setChosenColor(color[0]);
+                        }
+                        String s = CardUtil.getShortColor(color[0]);
+                        timeStamp[0] = card.addColor(s, card, false, true);
                         AllZone.EndOfTurn.addUntil(untilEOT);
                     }
                 }//resolve()
@@ -8231,13 +8245,11 @@ public class CardFactory_Creatures {
                 @Override
                 public void showMessage() {
                     ability.setStackDescription(card + " gets +1/+1 until EOT.");
-                    //stopSetNext(CardFactoryUtil.input_sacrifice(ability, choice, "Select a card to discard."));
                     stopSetNext(CardFactoryUtil.input_discard(ability, 1));
-                    //AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
                 }
             };
-            ability.setStackDescription(card + " gets +1/+1 until end of turn.");
-            ability.setDescription("Discard a card: Wild Mongrel gets +1/+1 until end of turn.");
+            ability.setStackDescription(card + " gets +1/+1 and becomes the color of your choiceuntil end of turn.");
+            ability.setDescription("Discard a card: Wild Mongrel gets +1/+1 and becomes the color of your choice until end of turn.");
             card.addSpellAbility(ability);
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
@@ -8988,65 +9000,72 @@ public class CardFactory_Creatures {
     
         //*************** START *********** START **************************
         else if(cardName.equals("Painter's Servant")) {
-                final Ability ability = new Ability(card, "0") {
-                    @Override
-                    public void resolve() {
-                        if(card.getController().equals(Constant.Player.Human)) {
-                            
-                            String color = "";
-                            // String[] colors = Constant.Color.Colors;
-                            // colors[colors.length - 1] = null;
-                            String[] colors = Constant.Color.onlyColors;
-                            
-                            Object o = AllZone.Display.getChoice("Choose color", colors);
-                            color = (String) o;
-                            card.setChosenColor(color);
-                        } else { 
-                        	// AI chooses the color that appears in the keywords of the most cards in its deck, hand and on battlefield
-                        	PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
-                            PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
-                            CardList list = new CardList();
-                            list.addAll(lib.getCards());
-                            list.addAll(hand.getCards());
-                            list.addAll(AllZone.Computer_Play.getCards());
-                            
-                            int white = list.getKeywordsContain("white").size();
-                            int blue = list.getKeywordsContain("blue").size();
-                            int black = list.getKeywordsContain("black").size();
-                            int red = list.getKeywordsContain("red").size();
-                            int green = list.getKeywordsContain("green").size();
-                            
-                            String maxColor = "white";
-                            int maxamount = white;
-                            if (maxamount < blue) {
-                            	maxamount = blue;
-                            	maxColor = "blue";
-                            }
-                            if (maxamount < black) {
-                            	maxamount = black;
-                            	maxColor = "black";
-                            }
-                            if (maxamount < red) {
-                            	maxamount = red;
-                            	maxColor = "red";
-                            }
-                            if (maxamount < green) {
-                            	maxamount = green;
-                            	maxColor = "green";
-                            }
-                            card.setChosenColor(maxColor);
+        	final long[] timeStamp = new long[1];
+        	final String[] color = new String[1];
+            final Ability ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    if(card.getController().equals(Constant.Player.Human)) {
+                        String[] colors = Constant.Color.onlyColors;
+                        
+                        Object o = AllZone.Display.getChoice("Choose color", colors);
+                        color[0] = (String) o;
+                        card.setChosenColor(color[0]);
+                    } else { 
+                    	// AI chooses the color that appears in the keywords of the most cards in its deck, hand and on battlefield
+                    	PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
+                        PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
+                        CardList list = new CardList();
+                        list.addAll(lib.getCards());
+                        list.addAll(hand.getCards());
+                        list.addAll(AllZone.Computer_Play.getCards());
+                        
+                        color[0] = Constant.Color.White;
+                        int max =  list.getKeywordsContain(color[0]).size();
+                        
+                        String[] colors = { Constant.Color.Blue, Constant.Color.Black, Constant.Color.Red, Constant.Color.Green };
+                        for(String c : colors){
+	                        int cmp = list.getKeywordsContain(c).size();
+	                        if (cmp > max){
+	                        	max = cmp;
+	                        	color[0] = c;
+	                        }
                         }
+                        card.setChosenColor(color[0]);
                     }
-                };
-                Command comesIntoPlay = new Command() {
-                    private static final long serialVersionUID = 333134223161L;
                     
-                    public void execute() {
-                        AllZone.Stack.add(ability);
-                    }
-                };//Command
-                ability.setStackDescription("As Painter's Servant enters the battlefield, choose a color.");
-                card.addComesIntoPlayCommand(comesIntoPlay);
+                    String s = CardUtil.getShortColor(color[0]);
+                    timeStamp[0] = AllZone.GameInfo.addColorChanges(s, card, true, true);
+                }
+            };
+            
+            Command comesIntoPlay = new Command() {
+                private static final long serialVersionUID = 333134223161L;
+                
+                public void execute() {
+                    AllZone.Stack.add(ability);
+                }
+            };//Command
+
+            final Ability unpaint = new Ability(card, "0") {
+            	public void resolve(){
+            		String s = CardUtil.getShortColor(color[0]);
+            		AllZone.GameInfo.removeColorChanges(s, card, true, timeStamp[0]);
+            	}
+            };
+            
+            Command leavesBattlefield = new Command() {
+				private static final long serialVersionUID = 2559212590399132459L;
+
+				public void execute(){
+            		AllZone.Stack.add(unpaint);
+            	}
+            };
+ 
+            ability.setStackDescription("As Painter's Servant enters the battlefield, choose a color.");
+            unpaint.setStackDescription("Painter's Servant left the battlefield, resetting colors.");
+            card.addComesIntoPlayCommand(comesIntoPlay);
+            card.addLeavesPlayCommand(leavesBattlefield);
         }//*************** END ************ END **************************
 
         //*************** START *********** START **************************

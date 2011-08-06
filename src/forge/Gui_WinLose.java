@@ -121,6 +121,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     }
     
     private void setup() {
+    	AllZone.GameInfo.clearColorChanges();
         WinLose winLose = Constant.Runtime.WinLose;
         Phase.GameBegins = 0;
         //3 is the match length, 3 is the number of games
