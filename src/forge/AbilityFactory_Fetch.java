@@ -512,12 +512,12 @@ public class AbilityFactory_Fetch {
 				return false;
 			
 			
-			while(tgt.getNumTargeted() < tgt.getMaxTargets()){ 
+			while(tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)){ 
 				// AI Targeting 
 				Card choice;
 				
 				if (list.size() == 0){
-					if (tgt.getNumTargeted() < tgt.getMinTargets() || tgt.getNumTargeted() == 0){
+					if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
 						tgt.resetTargets();
 						return false;
 					}
@@ -537,7 +537,7 @@ public class AbilityFactory_Fetch {
 	        		choice = list.get(0);
 	        	}
 				if (choice == null){	// can't find anything left
-					if (tgt.getNumTargeted() < tgt.getMinTargets() || tgt.getNumTargeted() == 0){
+					if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
 						tgt.resetTargets();
 						return false;
 					}

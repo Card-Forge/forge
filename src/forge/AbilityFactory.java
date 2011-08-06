@@ -151,8 +151,8 @@ public class AbilityFactory {
 		
 		if (isTargeted)
 		{
-			int min = mapParams.containsKey("TargetMin") ? Integer.parseInt(mapParams.get("TargetMin")) : 1;
-			int max = mapParams.containsKey("TargetMax") ? Integer.parseInt(mapParams.get("TargetMax")) : 1;
+			String min = mapParams.containsKey("TargetMin") ? mapParams.get("TargetMin") : "1";
+			String max = mapParams.containsKey("TargetMax") ? mapParams.get("TargetMax") : "1";
 			
 			if (hasValid){
 				// TgtPrompt now optional

@@ -95,11 +95,11 @@ public class AbilityFactory_PermanentState {
 			if (untapList.size() == 0)
 				return false;
 			
-			while(tgt.getNumTargeted() < tgt.getMaxTargets()){ 
+			while(tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)){ 
 				Card choice = null;
 				
 				if (untapList.size() == 0){
-					if (tgt.getNumTargeted() < tgt.getMinTargets() || tgt.getNumTargeted() == 0){
+					if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
 						tgt.resetTargets();
 						return false;
 					}
@@ -115,7 +115,7 @@ public class AbilityFactory_PermanentState {
 	        		choice = CardFactoryUtil.AI_getMostExpensivePermanent(untapList, af.getHostCard(), false);
 				
 				if (choice == null){	// can't find anything left
-					if (tgt.getNumTargeted() < tgt.getMinTargets() || tgt.getNumTargeted() == 0){
+					if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
 						tgt.resetTargets();
 						return false;
 					}
@@ -143,7 +143,7 @@ public class AbilityFactory_PermanentState {
 			tgtCards = tgt.getTargetCards();
 		else{
 			tgtCards = new ArrayList<Card>();
-			tgtCards.add(card);
+			tgtCards.add(card);	
 		}
 
 		for(Card tgtC : tgtCards){
@@ -152,10 +152,10 @@ public class AbilityFactory_PermanentState {
 		}
 
 		Card c = tgtCards.get(0);
-		
-		String DrawBack = params.get("SubAbility");
-		if (af.hasSubAbility())
-			 CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, c, sa);
+
+				String DrawBack = params.get("SubAbility");
+				if (af.hasSubAbility())
+					 CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, c, sa);
 
 	}
 	
@@ -251,11 +251,11 @@ public class AbilityFactory_PermanentState {
 			if (tapList.size() == 0)
 				return false;
 			
-			while(tgt.getNumTargeted() < tgt.getMaxTargets()){ 
+			while(tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)){ 
 				Card choice = null;
 				
 				if (tapList.size() == 0){
-					if (tgt.getNumTargeted() < tgt.getMinTargets() || tgt.getNumTargeted() == 0){
+					if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
 						tgt.resetTargets();
 						return false;
 					}
@@ -271,7 +271,7 @@ public class AbilityFactory_PermanentState {
 	        		choice = CardFactoryUtil.AI_getMostExpensivePermanent(tapList, af.getHostCard(), false);
 				
 				if (choice == null){	// can't find anything left
-					if (tgt.getNumTargeted() < tgt.getMinTargets() || tgt.getNumTargeted() == 0){
+					if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
 						tgt.resetTargets();
 						return false;
 					}

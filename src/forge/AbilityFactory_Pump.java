@@ -296,12 +296,12 @@ public class AbilityFactory_Pump {
         if (list.isEmpty())
         	return false;
         
-		while(tgt.getNumTargeted() < tgt.getMaxTargets()){ 
+		while(tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)){ 
 			Card t = null;
 			boolean goodt = false;
 			
 			if (list.isEmpty()){
-				if (tgt.getNumTargeted() < tgt.getMinTargets() || tgt.getNumTargeted() == 0){
+				if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
 					tgt.resetTargets();
 					return false;
 				}
@@ -329,7 +329,7 @@ public class AbilityFactory_Pump {
 	        }
 	        
 			if (list.isEmpty()){
-				if (tgt.getNumTargeted() < tgt.getMinTargets() || tgt.getNumTargeted() == 0){
+				if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
 					tgt.resetTargets();
 					return false;
 				}

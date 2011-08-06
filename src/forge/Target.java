@@ -11,13 +11,13 @@ public class Target {
 	public String[] getValidTgts() { return ValidTgts; }
 	public String getVTSelection() { return vtSelection; }
 	
-	private int minTargets = 1;
-	public int getMinTargets() { return minTargets; }
-	private int maxTargets = 1;
-	public int getMaxTargets() { return maxTargets; }
+	private String minTargets;
+	private String maxTargets;
+	public int getMinTargets(Card c, SpellAbility sa)  	{ return AbilityFactory.calculateAmount(c, minTargets, sa); } 
+	public int getMaxTargets(Card c, SpellAbility sa)  	{ return AbilityFactory.calculateAmount(c, maxTargets, sa); } 
 	
-	public boolean isMaxTargetsChosen() { return maxTargets == numTargeted; }
-	public boolean isMinTargetsChosen() { return minTargets <= numTargeted; }
+	public boolean isMaxTargetsChosen(Card c, SpellAbility sa) 	{ return getMaxTargets(c, sa) == numTargeted; }
+	public boolean isMinTargetsChosen(Card c, SpellAbility sa) 	{ return getMinTargets(c, sa) <= numTargeted; }
 	
 	private String tgtZone = Constant.Zone.Play;
 	public void setZone(String tZone) { tgtZone = tZone; }
@@ -84,10 +84,10 @@ public class Target {
 	}
 	
 	public Target(String parse){
-		this(parse, 1, 1);
+		this(parse, "1", "1");
 	}
 	
-	public Target(String parse, int min, int max){
+	public Target(String parse, String min, String max){
 		// parse=Tgt{C}{P} - Primarily used for Pump or Damage 
 		// C = Creature   P=Player/Planeswalker
 		// CP = All three
@@ -126,10 +126,10 @@ public class Target {
 	}
 	
 	public Target(String select, String[] valid){		
-		this(select, valid, 1, 1);
+		this(select, valid, "1", "1");
 	}
 	
-	public Target(String select, String[] valid, int min, int max){
+	public Target(String select, String[] valid, String min, String max){
 		tgtValid = true;
 		vtSelection = select;
 		ValidTgts = valid;

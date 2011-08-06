@@ -251,9 +251,9 @@ public class AbilityFactory_Counters {
 		 if (abTgt != null){
 			 abTgt.resetTargets();
 			 // target loop
-			while(abTgt.getNumTargeted() < abTgt.getMaxTargets()){ 
+			while(abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)){ 
 				if (list.size() == 0){
-					if (abTgt.getNumTargeted() < abTgt.getMinTargets() || abTgt.getNumTargeted() == 0){
+					if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa) || abTgt.getNumTargeted() == 0){
 						abTgt.resetTargets();
 						return false;
 					}
@@ -295,7 +295,7 @@ public class AbilityFactory_Counters {
 				 }
 				 
 				if (choice == null){	// can't find anything left
-					if (abTgt.getNumTargeted() < abTgt.getMinTargets() || abTgt.getNumTargeted() == 0){
+					if (abTgt.getNumTargeted() < abTgt.getMinTargets(sa.getSourceCard(), sa) || abTgt.getNumTargeted() == 0){
 						abTgt.resetTargets();
 						return false;
 					}

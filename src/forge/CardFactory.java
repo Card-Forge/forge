@@ -11146,7 +11146,7 @@ public class CardFactory implements NewConstants {
         //*************** START *********** START **************************
         else if(cardName.equals("Barl's Cage")) {
             final String Tgts[] = {"Creature"};
-        	Target target= new Target("Select target creature.", Tgts, 1, 1);
+        	Target target= new Target("Select target creature.", Tgts, "1", "1");
 
             final Ability_Cost cost = new Ability_Cost("3", card.getName(), true);
         	

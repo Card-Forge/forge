@@ -288,7 +288,7 @@ import java.util.Random;
 		tgt.resetTargets();
 
 		// target loop
-		while (tgt.getNumTargeted() < tgt.getMaxTargets()) {
+		while (tgt.getNumTargeted() < tgt.getMaxTargets(saMe.getSourceCard(), saMe)) {
 			// TODO: Consider targeting the planeswalker
 			if (tgt.canTgtCreatureAndPlayer()) {
 
@@ -317,7 +317,7 @@ import java.util.Random;
 				}
 			}
 			// fell through all the choices, no targets left?
-			if (tgt.getNumTargeted() < tgt.getMinTargets()
+			if (tgt.getNumTargeted() < tgt.getMinTargets(saMe.getSourceCard(), saMe)
 					|| tgt.getNumTargeted() == 0) {
 				tgt.resetTargets();
 				return false;

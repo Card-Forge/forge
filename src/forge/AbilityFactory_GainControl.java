@@ -135,11 +135,11 @@ public class AbilityFactory_GainControl {
         if (list.isEmpty())
         	return false;
         
-		while(tgt.getNumTargeted() < tgt.getMaxTargets()){ 
+		while(tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)){ 
 			Card t = null;
 			
 			if (list.isEmpty()){
-				if (tgt.getNumTargeted() < tgt.getMinTargets() || tgt.getNumTargeted() == 0){
+				if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
 					tgt.resetTargets();
 					return false;
 				}

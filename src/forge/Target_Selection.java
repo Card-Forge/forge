@@ -42,12 +42,12 @@ public class Target_Selection {
 	
 	public boolean chooseTargets(){
 		// if not enough targets chosen, reset and cancel Ability
-		if (bCancel || (bDoneTarget && !target.isMinTargetsChosen())){
+		if (bCancel || (bDoneTarget && !target.isMinTargetsChosen(card, ability))){
 			bCancel = true;
 			req.finishedTargeting();
 			return false;
 		}
-		else if (!doesTarget() || bDoneTarget && target.isMinTargetsChosen() || target.isMaxTargetsChosen()){
+		else if (!doesTarget() || bDoneTarget && target.isMinTargetsChosen(card, ability) || target.isMaxTargetsChosen(card, ability)){
 			Ability_Sub abSub = ability.getSubAbility();
 			
 			if (abSub == null){
@@ -109,7 +109,7 @@ public class Target_Selection {
     }//input_targetValid
 
     //CardList choices are the only cards the user can successful select
-    public static Input input_targetSpecific(final SpellAbility spell, final CardList choices, final String message, 
+    public static Input input_targetSpecific(final SpellAbility sa, final CardList choices, final String message, 
     		final boolean targeted, final boolean bTgtPlayer, final Target_Selection select, final SpellAbility_Requirements req) {
         Input target = new Input() {
 			private static final long serialVersionUID = -1091595663541356356L;
@@ -128,7 +128,7 @@ public class Target_Selection {
                 
                 Target t = select.getTgt();
                 // If reached Minimum targets, enable OK button
-                if (t.getMinTargets() > t.getNumTargeted())
+                if (t.getMinTargets(sa.getSourceCard(), sa) > t.getNumTargeted())
                 	ButtonUtil.enableOnlyCancel();
                 else
                 	ButtonUtil.enableAll();
@@ -149,7 +149,7 @@ public class Target_Selection {
             
             @Override
             public void selectCard(Card card, PlayerZone zone) {
-                if(targeted && !CardFactoryUtil.canTarget(spell, card)) {
+                if(targeted && !CardFactoryUtil.canTarget(sa, card)) {
                     AllZone.Display.showMessage("Cannot target this card (Shroud? Protection? Restrictions?).");
                 } 
                 else if(choices.contains(card)) {
@@ -160,7 +160,7 @@ public class Target_Selection {
             
             @Override
             public void selectPlayer(Player player) {
-            	if (bTgtPlayer && player.canTarget(spell.getSourceCard())){
+            	if (bTgtPlayer && player.canTarget(sa.getSourceCard())){
             		select.getTgt().addTarget(player);
 	                done();
             	}
@@ -176,7 +176,7 @@ public class Target_Selection {
     }//input_targetSpecific()
     
     
-    public static Input input_cardFromList(final SpellAbility spell, final CardList choices, final String message, 
+    public static Input input_cardFromList(final SpellAbility sa, final CardList choices, final String message, 
     		final boolean targeted, final Target_Selection select, final SpellAbility_Requirements req){
     	// Send in a list of valid cards, and popup a choice box to target 
 	    Input target = new Input() {
