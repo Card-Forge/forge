@@ -723,7 +723,6 @@ public class CombatUtil
 						private static final long serialVersionUID = -6483405139208343935L;
 
 						public void execute() {
-			  				//AllZone.GameAction.sacrifice(c);
 							canAttack[0] = false;
 							AllZone.Combat.removeFromCombat(crd);
 							crd.untap();
@@ -745,8 +744,11 @@ public class CombatUtil
 				  	{
 				  		if (ComputerUtil.canPayCost(ability))
 				  			ComputerUtil.playNoStack(ability);
-				  		else
+				  		else {
 				  			canAttack[0] = false;
+				  			AllZone.Combat.removeFromCombat(crd);
+							crd.untap();
+				  		}
 				  	}	
 			  }
 		  }

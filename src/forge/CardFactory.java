@@ -9478,6 +9478,141 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
 
 
+  //*************** START *********** START **************************
+    else if(cardName.equals("Mana Leak") || cardName.equals("Convolute") || cardName.equals("Daze") || cardName.equals("Force Spike") || 
+    		cardName.equals("Rune Boggle") || cardName.equals("Spell Snip"))
+    {
+      SpellAbility spell = new Spell(card)
+      {
+		private static final long serialVersionUID = 6139754377230333678L;
+		public void resolve()
+        {
+		  String manaCost = "1";
+		  if (cardName.equals("Mana Leak"))
+			  manaCost = "3";
+		  else if (cardName.equals("Convolute"))
+			  manaCost = "4";
+	      Ability ability = new Ability(card, manaCost){
+	    	  public void resolve()
+	    	  {
+	    		  ;
+	    	  }
+	      };
+	      
+	      final Command unpaidCommand = new Command()
+	      {
+			private static final long serialVersionUID = 8094833091127334678L;
+
+			public void execute()
+	    	{
+				  SpellAbility sa = AllZone.Stack.pop();
+		          AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
+	    	}
+	      };
+	      
+	      if (card.getController().equals(Constant.Player.Computer))
+	      {
+	    	  AllZone.InputControl.setInput(new Input_PayManaCost_Ability(card +"\r\n", ability.getManaCost(), Command.Blank, unpaidCommand));
+	      }
+	      else
+	      {
+	    	  if (ComputerUtil.canPayCost(ability))
+		  			ComputerUtil.playNoStack(ability);
+		  		else 
+		  		{
+		  			SpellAbility sa = AllZone.Stack.pop();
+	          		AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
+		  		}
+	      }
+
+        }
+        public boolean canPlay()
+        {
+          if(AllZone.Stack.size() == 0)
+            return false;
+
+          //see if spell is on stack and that opponent played it
+          String opponent = AllZone.GameAction.getOpponent(card.getController());
+          SpellAbility sa = AllZone.Stack.peek();
+
+          return sa.isSpell() && opponent.equals(sa.getSourceCard().getController()) 
+          		 && CardFactoryUtil.isCounterable(sa.getSourceCard());
+        }
+      };
+      card.clearSpellAbility();
+      card.addSpellAbility(spell);
+      
+      if (cardName.equals("Daze"))
+      {
+    	  spell.setDescription("Counter target spell unless its controller pays 1.");
+    	  spell.setStackDescription(card.getName() + " - Counter target spell unless its controller pays 1.");
+    	  final SpellAbility bounce = new Spell(card)
+    	  {
+			private static final long serialVersionUID = -8310299673731730438L;
+
+			public void resolve()
+    		{
+				 SpellAbility sa = AllZone.Stack.pop();
+    	         AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
+    		}
+			public boolean canPlay()
+			{
+				if(AllZone.Stack.size() == 0)
+    	            return false;
+
+    	          //see if spell is on stack and that opponent played it
+    	        String opponent = AllZone.GameAction.getOpponent(card.getController());
+    	        SpellAbility sa = AllZone.Stack.peek();
+
+				PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+				CardList list = new CardList(play.getCards());
+				list = list.getType("Island");
+				return sa.isSpell() && opponent.equals(sa.getSourceCard().getController()) 
+					   && CardFactoryUtil.isCounterable(sa.getSourceCard()) && list.size() >= 1;
+			}
+			
+			public boolean canPlayAI()
+			{
+				return false;
+			}
+			
+    	  };
+    	  bounce.setDescription("You may return an Island you control to their owner's hand rather than pay Daze's mana cost.");
+    	  bounce.setStackDescription(card.getName() + " - Counter target spell unless its controller pays 1.");
+    	  bounce.setManaCost("0");
+    	  
+    	  final Input bounceIslands = new Input()
+	      {
+			private static final long serialVersionUID = 7624182730685889456L;
+			int stop = 1;
+	        int count = 0;
+
+	        public void showMessage()
+	        {
+	          AllZone.Display.showMessage("Select an Island");
+	          ButtonUtil.disableAll();
+	        }
+	        public void selectButtonCancel() {stop();}
+	        public void selectCard(Card c, PlayerZone zone)
+	        {
+	          if(c.getType().contains("Island") && zone.is(Constant.Zone.Play))
+	          {
+	            AllZone.GameAction.moveToHand(c);
+	        	  
+	            count++;
+	            if(count == stop) {
+	            	AllZone.Stack.add(bounce);
+	            	stop();
+	            }
+	          }
+	        }//selectCard()
+	      };
+	      
+	      bounce.setBeforePayMana(bounceIslands);
+	      card.addSpellAbility(bounce);
+      }//if Daze
+    }//*************** END ************ END **************************
+    
 
     //*************** START *********** START **************************
     else if(cardName.equals("Remand"))

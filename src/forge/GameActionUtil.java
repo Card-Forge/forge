@@ -12655,9 +12655,9 @@ public class GameActionUtil
 			// for each zone found add +1/+1 to each card
 			for (int outer = 0; outer < zone.length; outer++)
 			{
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
+				CardList creature = new CardList(zone[outer].getCards());
+				//creature.addAll(AllZone.Human_Play.getCards());
+				//creature.addAll(AllZone.Computer_Play.getCards());
 				creature = creature.getType("Goblin");
 
 				for (int i = 0; i < creature.size(); i++)

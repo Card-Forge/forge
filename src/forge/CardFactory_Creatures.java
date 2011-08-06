@@ -10264,7 +10264,7 @@ public class CardFactory_Creatures {
 	            c.setName("Cloud Sprite");
 	            c.setImageName("U 1 1 Cloud Sprite");
 	            c.addIntrinsicKeyword("Flying");
-	            c.addIntrinsicKeyword("This creature can block only creatures with flying");
+	            c.addIntrinsicKeyword("This creature can block only creatures with flying.");
 
 	            play.add(c);
 	          }//makeToken()
@@ -17188,7 +17188,7 @@ public class CardFactory_Creatures {
 	    }//*************** END ************ END **************************
 	      
 	    //*************** START *********** START **************************
-	    else if(cardName.equals("Merfolk Harbinger"))
+	    else if(cardName.equals("Merrow Harbinger"))
 	    {
 	      final SpellAbility ability = new Ability(card, "0")
 	      {

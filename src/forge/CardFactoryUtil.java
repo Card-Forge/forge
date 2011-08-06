@@ -3032,6 +3032,20 @@ public class CardFactoryUtil
 	  return list;
   }
   
+  public static int countBasicLandTypes(String player)
+  {
+	  String basic[] = {"Forest", "Plains", "Mountain", "Island", "Swamp"};
+	  PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+	  CardList list = new CardList(play.getCards());
+	  int count = 0;
+	  
+	  for(int i = 0; i < basic.length; i++)
+          if (! list.getType(basic[i]).isEmpty())
+             count++;
+	  
+	  return count;
+  }
+  
   //total cost to pay for an attacker c, cards like Propaganda, Ghostly Prison, Collective Restraint, ...
   public static String getPropagandaCost(Card c)
   {
@@ -3048,11 +3062,34 @@ public class CardFactoryUtil
 	  });
 	  int cost = list.size() * 2;
 	  
+	  list = new CardList(play.getCards());
+	  list = list.getName("Collective Restraint");
+	  
+	  int domain = countBasicLandTypes(AllZone.GameAction.getOpponent(c.getController()));
+	  
+	  cost += domain * list.size();
+	  
 	  s = Integer.toString(cost);
 	  
 	  return s;
   }
   
+  public static int getUsableManaSources(String player)
+  {
+	  PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+	  CardList list = new CardList(play.getCards());
+	  list = list.filter(new CardListFilter()
+	  {
+		  public boolean addCard(Card c)
+		  {
+			  for (Ability_Mana am : c.getBasicMana())
+		        	if (am.canPlay()) return true;
+		      return false;
+		  }
+	  });
+	  
+	  return list.size();
+  }
   
   //do card1 and card2 share any colors?
   public static boolean sharesColorWith(Card card1, Card card2)
