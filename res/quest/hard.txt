@@ -1,6 +1,8 @@
 Abraham Lincoln
 Albert Einstein 3
+Bart Simpson 3
 Batman
+Bela Lugosi
 Blackbeard
 Boba Fett
 Buffy 3
@@ -13,8 +15,10 @@ Darth Vador
 Data
 Doc Holiday 3
 Dr No
+Fat Albert 3
 Frodo 3
 Genghis Khan 3
+Gold Finger
 Green Lantern
 Han Solo
 Harry Potter
@@ -26,8 +30,10 @@ James Bond 3
 James T Kirk
 King Edward 3
 Kojak 3
+Lisa Simpson
 Luke Skywalker
 Magneto
+Marge Simpson
 Morpheus
 Napoleon
 Neo
@@ -38,6 +44,7 @@ Professor X
 R2-D2
 Rocky 3
 Rogue
+Scooby Doo
 Seabiscuit 3
 Sherlock Holmes 3
 Silver Surfer
