@@ -20755,11 +20755,11 @@ public class CardFactory_Creatures {
         	 * player, and half X damage, rounded up, to you.
         	 */
         	
-        	//Ability_Cost abCost = new Ability_Cost("X 0 T", cardName, true);
-        	//Target tgt = new Target("TgtCP");
+        	Ability_Cost abCost = new Ability_Cost("X T", cardName, true);
+        	Target tgt = new Target("TgtCP");
         	
-        	final Ability_Tap ability = new Ability_Tap(card, "X 0") {
-        	//final Ability_Activated ability = new Ability_Activated(card, abCost, tgt) {
+        	//final Ability_Tap ability = new Ability_Tap(card, "X") {
+        	final Ability_Activated ability = new Ability_Activated(card, abCost, tgt) {
 				private static final long serialVersionUID = 2755743211116192949L;
 
 				@Override
@@ -20782,12 +20782,12 @@ public class CardFactory_Creatures {
         		
         	};//SpellAbility
         	
-        	ability.setIsXCost(true);
-        	ability.setXManaCost("1");
+        	//ability.setIsXCost(true);
+        	//ability.setXManaCost("1");
         	ability.setDescription("X, tap: "+"Banshee deals half X damage, rounded down, to target creature or player, and half X damage, rounded up, to you.");
         	ability.setStackDescription(card.getName()+" - Banshee deals half X damage, rounded down, to target creature or player, and half X damage, rounded up, to you.");
         	card.addSpellAbility(ability);
-        	ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
+        	//ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
         }//*************** END ************ END **************************
                
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
