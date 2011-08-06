@@ -1,3 +1,31 @@
+Emrakul, the Aeons Torn
+15
+Legendary Creature Eldrazi
+When you cast Emrakul, take an extra turn after this one.
+15/15
+CARDNAME can't be countered.
+Flying
+Protection from colored spells
+Annihilator 6
+When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and its owner shuffles his or her graveyard into his or her library.
+
+Kozilek, Butcher of Truth
+10
+Legendary Creature Eldrazi
+When you cast Kozilek, Butcher of Truth, draw four cards.
+12/12
+Annihilator 4
+When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and its owner shuffles his or her graveyard into his or her library.
+
+Ulamog, the Infinite Gyre
+11
+Legendary Creature Eldrazi
+When you cast Ulamog, the Infinite Gyre, destroy target permanent.
+10/10
+Indestructible
+Annihilator 4
+When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and its owner shuffles his or her graveyard into his or her library.
+
 Dauntless Escort
 1 W G
 Creature Rhino Soldier
@@ -237,17 +265,6 @@ no text
 CARDNAME can't be countered.
 Shroud
 
-Emrakul, the Aeons Torn
-15
-Legendary Creature Eldrazi
-When you cast Emrakul, take an extra turn after this one.
-15/15
-CARDNAME can't be countered.
-Flying
-Protection from colored spells
-Annihilator 6
-When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and its owner shuffles his or her graveyard into his or her library.
-
 Great Sable Stag
 1 G G
 Creature Elk
@@ -314,14 +331,6 @@ Trample
 Indestructible
 When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
 
-Kozilek, Butcher of Truth
-10
-Legendary Creature Eldrazi
-When you cast Kozilek, Butcher of Truth, draw four cards.
-12/12
-Annihilator 4
-When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and its owner shuffles his or her graveyard into his or her library.
-
 Legacy Weapon
 7
 Legendary Artifact
@@ -342,15 +351,6 @@ Creature Avatar
 Serra Avatar's power and toughness are each equal to your life total. If Serra Avatar is destroyed, shuffle it into its owner's library instead.
 1/1
 When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
-
-Ulamog, the Infinite Gyre
-11
-Legendary Creature Eldrazi
-When you cast Ulamog, the Infinite Gyre, destroy target permanent.
-10/10
-Indestructible
-Annihilator 4
-When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and its owner shuffles his or her graveyard into his or her library.
 
 Mnemonic Wall
 4 U
