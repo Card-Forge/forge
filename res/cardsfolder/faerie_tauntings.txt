@@ -6,4 +6,5 @@ T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_tauntings.jpg
+SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/112.jpg
 End

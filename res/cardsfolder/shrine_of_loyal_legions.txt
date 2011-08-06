@@ -9,4 +9,5 @@ A:AB$ Token | Cost$ 3 T Sac<1/CARDNAME> | TokenAmount$ X | TokenName$ Myr | Toke
 SVar:X:Count$CardCounters.CHARGE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrine_of_loyal_legions.jpg
+SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/155.jpg
 End

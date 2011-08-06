@@ -8,4 +8,5 @@ T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$
 SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreamspoiler_witches.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/108.jpg
 End

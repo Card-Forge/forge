@@ -10,4 +10,5 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select 
 SVar:X:Count$CardPower
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mortis_dogs.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/66.jpg
 End

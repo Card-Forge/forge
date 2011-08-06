@@ -6,4 +6,5 @@ K:stPumpAll:Land:0/0/Types=Swamp:No Condition:Each land is a Swamp in addition t
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blanket_of_night.jpg
+SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/2.jpg
 End

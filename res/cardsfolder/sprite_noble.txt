@@ -9,4 +9,5 @@ A:AB$PumpAll | Cost$ T | ValidCards$ Creature.withFlying+Other+YouCtrl | NumAtt$
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sprite_noble.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/81.jpg
 End

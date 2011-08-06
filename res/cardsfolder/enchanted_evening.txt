@@ -6,4 +6,5 @@ K:stPumpAll:Permanent:0/0/Types=Enchantment:No Condition:All permanents are ench
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enchanted_evening.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/140.jpg
 End
