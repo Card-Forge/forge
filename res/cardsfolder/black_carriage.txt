@@ -1,0 +1,10 @@
+Name:Black Carriage
+ManaCost:3 B B
+Types:Creature Horse
+Text:no text
+K:Trample
+K:CARDNAME doesn't untap during your untap step.
+A:AB$Untap|Cost$ Sac<1/Creature>|ActivatingPhases$Upkeep|SpellDescription$Untap CARDNAME. Activate this ability only during your upkeep.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/black_carriage.jpg
+End
