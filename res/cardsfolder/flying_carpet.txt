@@ -2,7 +2,7 @@ Name:Flying Carpet
 ManaCost:4
 Types:Artifact
 Text:no text
-K:abPumpTgtC 2 T:Flying
+A:AB$Pump | Cost$ 2 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flying_carpet.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/301.jpg

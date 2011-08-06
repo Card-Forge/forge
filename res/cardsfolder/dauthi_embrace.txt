@@ -2,7 +2,7 @@ Name:Dauthi Embrace
 ManaCost:2 B
 Types:Enchantment
 Text:no text
-K:abPumpTgtC B B:Shadow
+A:AB$Pump | Cost$ B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Shadow | SpellDescription$ Target creature gains shadow until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_embrace.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/14.jpg
