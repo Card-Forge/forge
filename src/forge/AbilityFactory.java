@@ -831,16 +831,6 @@ public class AbilityFactory {
 		    }
 
         }
-		else if (defined.equals("TriggeredController")){
-				Player p = sa.getTriggeringCard().getController();
-				if (!players.contains(p))
-					players.add(p);
-		}
-		else if (defined.equals("TriggeredOwner")){
-			Player p = sa.getTriggeringCard().getOwner();
-			if (!players.contains(p))
-				players.add(p);
-		}
 		else if (defined.equals("EnchantedController")){
 			Player p = card.getEnchantingCard().getController();
 			if (!players.contains(p))
