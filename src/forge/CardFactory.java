@@ -8470,7 +8470,14 @@ public class CardFactory implements NewConstants {
                 public void selectCard(Card card, PlayerZone zone) {
                     if(!card.isLand() && zone.is(Constant.Zone.Play) && CardFactoryUtil.canTarget(spell, card)) {
                         spell.setTargetCard(card);
-                        stopSetNext(new Input_PayManaCost(spell));
+                        if (this.isFree())
+                        {
+                        	this.setFree(false);
+                            AllZone.Stack.add(spell);
+                            stop();
+                        }
+                        else
+                        	stopSetNext(new Input_PayManaCost(spell));
                     }
                 }
             };//Input
@@ -8533,7 +8540,15 @@ public class CardFactory implements NewConstants {
 
                     else if(card.isCreature() && zone.is(Constant.Zone.Play)) {
                         spell.setTargetCard(card);
-                        stopSetNext(new Input_PayManaCost(spell));
+                        
+                        if(this.isFree()) 
+                        {
+                        	this.setFree(false);
+                        	AllZone.Stack.add(spell);
+                        	stop();
+                    	} 
+                        else
+                        	stopSetNext(new Input_PayManaCost(spell));
                     }
                 }
             };//Input
@@ -8595,7 +8610,14 @@ public class CardFactory implements NewConstants {
 
                     else if(card.isCreature() && zone.is(Constant.Zone.Play)) {
                         spell.setTargetCard(card);
-                        stopSetNext(new Input_PayManaCost(spell));
+                        if(this.isFree()) 
+                        {
+                        	this.setFree(false);
+                        	AllZone.Stack.add(spell);
+                        	stop();
+                    	} 
+                        else
+                        	stopSetNext(new Input_PayManaCost(spell));
                     }
                 }
             };//Input
@@ -9564,7 +9586,14 @@ public class CardFactory implements NewConstants {
                     if(card.isCreature() && zone.is(Constant.Zone.Play)
                             && CardUtil.getConvertedManaCost(card.getManaCost()) <= 3) {
                         spell.setTargetCard(card);
-                        stopSetNext(new Input_PayManaCost(spell));
+                        if(this.isFree()) 
+                        {
+                        	this.setFree(false);
+                        	AllZone.Stack.add(spell);
+                        	stop();
+                    	} 
+                        else
+                        	stopSetNext(new Input_PayManaCost(spell));
                     }
                 }
             };//Input
@@ -9695,8 +9724,15 @@ public class CardFactory implements NewConstants {
                         AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
                     }
                     if(card.isCreature() && zone.is(Constant.Zone.Play) && card.getNetDefense() <= 3) {
-                        spell.setTargetCard(card);
-                        stopSetNext(new Input_PayManaCost(spell));
+                    	spell.setTargetCard(card);
+                    	if(this.isFree()) 
+                        {
+                        	this.setFree(false);
+                        	AllZone.Stack.add(spell);
+                        	stop();
+                    	} 
+                    	else 
+                    		stopSetNext(new Input_PayManaCost(spell));
                     }
                 }
             };//Input
@@ -9771,7 +9807,14 @@ public class CardFactory implements NewConstants {
                         AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
                     } else if(card.isCreature() && zone.is(Constant.Zone.Play)) {
                         spell.setTargetCard(card);
-                        stopSetNext(new Input_PayManaCost(spell));
+                        if(this.isFree()) 
+                        {
+                        	this.setFree(false);
+                        	AllZone.Stack.add(spell);
+                        	stop();
+                    	} 
+                        else
+                        	stopSetNext(new Input_PayManaCost(spell));
                     }
                 }
             };//Input
@@ -9890,8 +9933,14 @@ public class CardFactory implements NewConstants {
                     else {
                         spell.setStackDescription("Return " + o + " to its owner's hand");
                         spell.setTargetCard((Card) o);
-                        
-                        stopSetNext(new Input_PayManaCost(spell));
+                        if(this.isFree()) 
+                        {
+                        	this.setFree(false);
+                        	AllZone.Stack.add(spell);
+                        	stop();
+                    	} 
+                        else
+                        	stopSetNext(new Input_PayManaCost(spell));
                     }
                 }//showMessage()
             };
@@ -10709,7 +10758,14 @@ public class CardFactory implements NewConstants {
                         AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
                     } else if(zone.is(Constant.Zone.Play)) {
                         spell.setTargetCard(c);
-                        stopSetNext(new Input_PayManaCost(spell));
+                        if(this.isFree()) 
+                        {
+                        	this.setFree(false);
+                        	AllZone.Stack.add(spell);
+                        	stop();
+                    	} 
+                        else
+                        	stopSetNext(new Input_PayManaCost(spell));
                     }
                 }
             };//Input
@@ -14521,7 +14577,14 @@ public class CardFactory implements NewConstants {
                             && (CardUtil.getColors(crd).contains(Constant.Color.Black) || CardUtil.getColors(crd).contains(
                                     Constant.Color.Red))) {
                         spell.setTargetCard(crd);
-                        stopSetNext(new Input_PayManaCost(spell));
+                        if(this.isFree()) 
+                        {
+                        	this.setFree(false);
+                        	AllZone.Stack.add(spell);
+                        	stop();
+                    	} 
+                        else
+                        	stopSetNext(new Input_PayManaCost(spell));
                     }
                 }
             };//Input
@@ -16558,7 +16621,14 @@ public class CardFactory implements NewConstants {
              public void selectCard(Card c, PlayerZone zone) {
                 if(zone.is(Constant.Zone.Play) && c.isCreature() && (c.getNetAttack() > 3)) {
                    spell.setTargetCard(c);
-                   stopSetNext(new Input_PayManaCost(spell));
+                   if(this.isFree()) 
+                   {
+                	   this.setFree(false);
+                	   AllZone.Stack.add(spell);
+                   	   stop();
+               	   }
+                   else
+                	   stopSetNext(new Input_PayManaCost(spell));
                 }
              }
           };//input

@@ -1782,6 +1782,94 @@ class CardFactory_Auras {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Giant Strength")) {
+            final SpellAbility spell = new Spell(card) {
+  
+				private static final long serialVersionUID = -5737672424075567628L;
+
+				@Override
+                public boolean canPlayAI() {
+                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    list = list.getType("Creature");
+                    
+                    if(list.isEmpty()) return false;
+                    
+                    //else
+                    CardListUtil.sortAttack(list);
+                    CardListUtil.sortFlying(list);
+                    
+                    for(int i = 0; i < list.size(); i++) {
+                        if(CardFactoryUtil.canTarget(card, list.get(i))) {
+                            setTargetCard(list.get(i));
+                            return true;
+                        }
+                    }
+                    return false;
+                }//canPlayAI()
+                
+                @Override
+                public void resolve() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    play.add(card);
+                    
+                    Card c = getTargetCard();
+                    
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                        card.enchantCard(c);
+                    }
+                }//resolve()
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            
+            Command onEnchant = new Command() {
+
+				private static final long serialVersionUID = -5842396926996677438L;
+
+				public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        crd.addSemiPermanentAttackBoost(2);
+                        crd.addSemiPermanentDefenseBoost(2);
+                    }
+                }//execute()
+            };//Command
+            
+
+            Command onUnEnchant = new Command() {
+
+				private static final long serialVersionUID = -1936034468811893757L;
+
+				public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        crd.addSemiPermanentAttackBoost(-2);
+                        crd.addSemiPermanentDefenseBoost(-2);
+                    }
+                    
+                }//execute()
+            };//Command
+            
+            Command onLeavesPlay = new Command() {
+
+				private static final long serialVersionUID = -2519887209491512000L;
+
+				public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        card.unEnchantCard(crd);
+                    }
+                }
+            };
+            
+            card.addEnchantCommand(onEnchant);
+            card.addUnEnchantCommand(onUnEnchant);
+            card.addLeavesPlayCommand(onLeavesPlay);
+            
+            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+        }//*************** END ************ END **************************
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Paralyzing Grasp")) {
             final SpellAbility spell = new Spell(card) {
