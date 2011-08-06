@@ -4,6 +4,8 @@ Types:Legendary Creature Moonfolk Wizard
 Text:no text
 PT:2/4
 K:Flying
+K:abMakeToken 1 Return<1/Land><>1<>Illusion<>U 1 1 Illusion<>Controller<>U<>Creature;Illusion<>1<>1<>Flying<>Put a 1/1 blue Illusion creature token with flying onto the battlefield.
 SVar:Rarity:Rare
+SVar:RemAIDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card75268.jpg
 End

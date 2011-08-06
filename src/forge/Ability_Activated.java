@@ -25,7 +25,7 @@ abstract public class Ability_Activated extends SpellAbility implements java.io.
 			if (Silence.size() != 0)
 				return false;
         }
-        return AllZone.GameAction.isCardInPlay(c);
+        return Cost_Payment.canPayAdditionalCosts(payCosts, this) && AllZone.GameAction.isCardInPlay(c);
         //TODO: make sure you can't play the Computer's activated abilities
     }
 }

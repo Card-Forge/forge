@@ -8461,70 +8461,7 @@ public class CardFactory_Creatures {
             ability1.setBeforePayMana(CardFactoryUtil.input_targetType(ability1, "All"));
             ability2.setBeforePayMana(CardFactoryUtil.input_targetType(ability2, "Artifact"));
         }//*************** END ************ END **************************
-        
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Meloku the Clouded Mirror")) {
-            final SpellAbility ability = new Ability(card, "1") {
-                @Override
-                public void resolve() {
-                    CardFactoryUtil.makeToken("Illusion", "U 1 1 Illusion", card, "U", new String[] {
-                            "Creature", "Illusion"}, 1, 1, new String[] {"Flying"});
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    
-                    CardList land = new CardList(play.getCards());
-                    land = land.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.getType().contains("Land");
-                        }
-                    });
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    
-                    if (card.getController().equals(Constant.Player.Human))
-                    {
-	                    if(!land.isEmpty()) {
-	                        Object o = AllZone.Display.getChoiceOptional("Select target Land", land.toArray());
-	                        Card l = (Card) o;
-	                        AllZone.GameAction.moveTo(hand, l);
-	                    }
-                    }
-                    else
-                    {
-                    	land.shuffle();
-                    	Card crd = land.get(0);
-                    	if (crd!=null)
-                    		AllZone.GameAction.moveTo(hand, crd);
-                    }
-                    
-                }//resolve()
-                
-                @Override
-                public boolean canPlay() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    
-                    CardList land = new CardList(play.getCards());
-                    land = land.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.getType().contains("Land");
-                        }
-                    });
-                    return land.size() > 0 && super.canPlay();
-                }
-                public boolean canPlayAI()
-                {
-                	 PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
-                     
-                     CardList land = new CardList(play.getCards());
-                     land = land.getType("Land");
-                     return land.size() > 5;
-                }
-            };//SpellAbility
-            card.addSpellAbility(ability);
-            ability.setDescription("1, Return a land you control to its owner's hand: Put a 1/1 blue Illusion creature token with flying into play.");
-            ability.setStackDescription("Put 1/1 token with flying into play");
-            ability.setBeforePayMana(new Input_PayManaCost(ability));
-        }//*************** END ************ END **************************
-        
+       
         
         //*************** START *********** START **************************
         else if(cardName.equals("Hammerfist Giant")) {

@@ -1,0 +1,9 @@
+Name:Attunement
+ManaCost:2 U
+Types:Enchantment
+Text:no text
+K:abDrawCards Return<1/CARDNAME>:3:Drawback$YouDiscard/4:Draw three cards, then discard four cards.:Attunement - Draw three cards, then discard four cards.
+SVar:Rarity:Rare
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/attunement.jpg
+End

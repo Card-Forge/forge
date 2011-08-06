@@ -48,6 +48,15 @@ public class Ability_Cost {
 	private String discardType = "";
 	public String getDiscardType() { return discardType; }
 	
+	private boolean returnCost = false;	// Return something to owner's hand
+	public boolean getReturnCost() { return returnCost; }
+	private String returnType = "";	// <type> or CARDNAME
+	public String getReturnType() { return returnType; }
+	private boolean returnThis = false;
+	public boolean getReturnThis() { return returnThis; }
+	private int returnAmount = 0;
+	public int getReturnAmount() { return returnAmount; }
+	
 	public boolean hasNoManaCost() { return manaCost.equals("") || manaCost.equals("0"); };
 	private String manaCost = "";
 	public String getMana() { return manaCost; }
@@ -106,7 +115,6 @@ public class Ability_Cost {
         
         String sacStr = "Sac<";
         if(parse.contains(sacStr)) {
-        	// todo(sol): add Support for sacrificing more than 1 of a type
         	// todo: maybe separate SacThis from SacType? not sure if any card would use both
         	sacCost = true;
         	String[] splitStr = abCostParse(parse, sacStr, 2);
@@ -115,6 +123,17 @@ public class Ability_Cost {
         	sacAmount = Integer.parseInt(splitStr[0]);
         	sacType = splitStr[1];
         	sacThis = (sacType.equals("CARDNAME"));
+        }
+        
+        String returnStr = "Return<";
+        if(parse.contains(returnStr)) {
+        	returnCost = true;
+        	String[] splitStr = abCostParse(parse, returnStr, 2);
+        	parse = abUpdateParse(parse, returnStr);
+        	
+        	returnAmount = Integer.parseInt(splitStr[0]);
+        	returnType = splitStr[1];
+        	returnThis = (returnType.equals("CARDNAME"));
         }
         
         if (parse.contains("Untap")){
@@ -220,7 +239,15 @@ public class Ability_Cost {
 			first = false;
 		}
 		
-		cost.append(sacString(first));
+		if (sacCost){
+			cost.append(sacString(first));
+			first = false;
+		}
+		
+		if (returnCost){
+			cost.append(returnString(first));
+			first = false;
+		}
 		
 		cost.append(".");
 		return cost.toString();
@@ -316,7 +343,15 @@ public class Ability_Cost {
 			first = false;
 		}
 		
-		cost.append(sacString(first));
+		if (sacCost){
+			cost.append(sacString(first));
+			first = false;
+		}
+		
+		if (returnCost){
+			cost.append(returnString(first));
+			first = false;
+		}
 		
 		cost.append(": ");
 		return cost.toString();
@@ -325,29 +360,53 @@ public class Ability_Cost {
 	public String sacString(boolean first)
 	{
 		StringBuilder cost = new StringBuilder();
-		if (sacCost){
-			if (first){
-				if (isAbility)
-					cost.append("Sacrifice ");
-				else
-					cost.append("sacrifice ");
-			}
-			else{
-				if (isAbility)
-					cost.append(", sacrifice ");
-				else
-					cost.append(" and sacrifice ");
-			}
-			
-			if (sacType.equals("CARDNAME"))
-				cost.append(name);
-			else{
-				cost.append(sacAmount).append(" ");
-				cost.append(sacType);
-				if (sacAmount > 1)
-					cost.append("s");
-			}
+		if (first){
+			if (isAbility)
+				cost.append("Sacrifice ");
+			else
+				cost.append("sacrifice ");
 		}
+		else{
+			cost.append(", sacrifice ");
+		}
+		
+		if (sacType.equals("CARDNAME"))
+			cost.append(name);
+		else{
+			cost.append(sacAmount).append(" ");
+			cost.append(sacType);
+			if (sacAmount > 1)
+				cost.append("s");
+		}
+		return cost.toString();
+	}
+
+	public String returnString(boolean first)
+	{
+		StringBuilder cost = new StringBuilder();
+		if (first){
+			if (isAbility)
+				cost.append("Return ");
+			else
+				cost.append("return ");
+		}
+		else{
+			cost.append(", return ");
+		}
+		String pronoun = "its";
+		if (returnType.equals("CARDNAME"))
+			cost.append(name);
+		else{
+			cost.append(returnAmount).append(" ");
+			cost.append(returnType);
+			
+			if (returnAmount > 1){
+				cost.append("s");
+				pronoun = "their";
+			}
+			cost.append(" you control");
+		}
+		cost.append(" to ").append(pronoun).append(" owner's hand");
 		return cost.toString();
 	}
 }

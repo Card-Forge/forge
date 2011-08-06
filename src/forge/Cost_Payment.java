@@ -26,6 +26,7 @@ public class Cost_Payment {
 	private boolean payLife;
 	private boolean payDiscard;
 	private boolean payTapXType;
+	private boolean payReturn;
 	
 	private boolean bCancel = false;
 	
@@ -39,6 +40,7 @@ public class Cost_Payment {
 	public void setPayDiscard(boolean bSac){	payDiscard = bSac;	}
 	public void setPaySac(boolean bSac){	paySac = bSac;	}
 	public void setPayTapXType(boolean bTapX) { payTapXType = bTapX; }
+	public void setPayReturn(boolean bReturn){	payReturn = bReturn; }
 	
 	final private Input changeInput = new Input() {
 		private static final long serialVersionUID = -5750122411788688459L; };
@@ -55,9 +57,13 @@ public class Cost_Payment {
 		payLife = !cost.getLifeCost();
 		payDiscard = !cost.getDiscardCost();
 		payTapXType = !cost.getTapXTypeCost();
+		payReturn = !cost.getReturnCost();
 	}
     
 	public static boolean canPayAdditionalCosts(Ability_Cost cost, SpellAbility ability){
+		if (cost == null)
+			return true;
+		
 		final Card card = ability.getSourceCard();
     	if (cost.getTap() && (card.isTapped() || card.isSick()))
     		return false;
@@ -125,10 +131,23 @@ public class Cost_Payment {
 			    CardList typeList = new CardList(play.getCards());
 			    
 			    typeList = typeList.getValidCards(cost.getSacType().split(",")); 
-				if (typeList.size() == 0)
+				if (typeList.size() < cost.getSacAmount())
 					return false;
 			}
-			else if (cost.getSacThis() && !AllZone.GameAction.isCardInPlay(card))
+			else if (!AllZone.GameAction.isCardInPlay(card))
+				return false;
+		}
+		
+		if (cost.getReturnCost()){
+			if (!cost.getReturnThis()){
+			    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+			    CardList typeList = new CardList(play.getCards());
+			    
+			    typeList = typeList.getValidCards(cost.getReturnType().split(",")); 
+				if (typeList.size() < cost.getReturnAmount())
+					return false;
+			}
+			else if (!AllZone.GameAction.isCardInPlay(card))
 				return false;
 		}
     	
@@ -239,13 +258,21 @@ public class Cost_Payment {
     			changeInput.stopSetNext(sacrificeType(ability, cost.getSacType(), this));
     		return false;
     	}
+		
+		if (!payReturn && cost.getReturnCost()){					// return stuff here
+    		if (cost.getReturnThis())
+    			changeInput.stopSetNext(returnThis(ability, this));
+    		else
+    			changeInput.stopSetNext(returnType(ability, cost.getReturnType(), this));
+    		return false;
+    	}
 
 		req.finishPaying();
 		return true;
 	}
 
 	public boolean isAllPaid(){
-		return (payTap && payUntap && payMana && paySubCounter && paySac && payLife && payDiscard && payTapXType);
+		return (payTap && payUntap && payMana && paySubCounter && paySac && payLife && payDiscard && payTapXType && payReturn);
 	}
 	
 	public void cancelPayment(){
@@ -285,12 +312,15 @@ public class Cost_Payment {
         // can't really undiscard things
         
 		// can't really unsacrifice things
+        
+        // can't really unreturn things
 	}
     
     public void payComputerCosts(){
     	// make sure ComputerUtil.canPayAdditionalCosts() is updated when updating new Costs
     	ArrayList<Card> sacCard = new ArrayList<Card>();
     	ArrayList<Card> tapXCard = new ArrayList<Card>();
+    	ArrayList<Card> returnCard = new ArrayList<Card>();
     	ability.setActivatingPlayer(Constant.Player.Computer);
     	
     	// double check if something can be sacrificed here. Real check is in ComputerUtil.canPayAdditionalCosts()
@@ -304,6 +334,20 @@ public class Cost_Payment {
     		
 	    	if (sacCard.size() != cost.getSacAmount()){
 	    		System.out.println("Couldn't find a valid card to sacrifice for: "+card.getName());
+	    		return;
+	    	}
+    	}
+    	
+    	if (cost.getReturnCost()){
+    		if (cost.getReturnThis())
+    			returnCard.add(card);
+    		else{
+    			for(int i = 0; i < cost.getReturnAmount(); i++)
+    				returnCard.add(ComputerUtil.chooseReturnType(cost.getReturnType(), card, ability.getTargetCard()));
+    		}
+    		
+	    	if (returnCard.size() != cost.getReturnAmount()){
+	    		System.out.println("Couldn't find a valid card to return for: "+card.getName());
 	    		return;
 	    	}
     	}
@@ -371,6 +415,11 @@ public class Cost_Payment {
 		if (cost.getSacCost()){
 			for(Card c : sacCard)
 				AllZone.GameAction.sacrifice(c);
+		}
+		
+		if (cost.getReturnCost()){
+			for(Card c : returnCard)
+				AllZone.GameAction.moveToHand(c);
 		}
 
         AllZone.Stack.add(ability);
@@ -581,4 +630,96 @@ public class Cost_Payment {
         };
         return target;
     }//input_tapXCost() 
+    
+    public static Input returnThis(final SpellAbility spell, final Cost_Payment payment) {
+        Input target = new Input() {
+            private static final long serialVersionUID = 2685832214519141903L;
+            
+            @Override
+            public void showMessage() {
+            	Card card = spell.getSourceCard();
+                if(card.getController().equals(Constant.Player.Human) && AllZone.GameAction.isCardInPlay(card)) {
+        			StringBuilder sb = new StringBuilder();
+        			sb.append(card.getName());
+        			sb.append(" - Return to Hand?");
+        			Object[] possibleValues = {"Yes", "No"};
+                	Object choice = JOptionPane.showOptionDialog(null, sb.toString(), card.getName() + " - Cost",  
+                			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                			null, possibleValues, possibleValues[0]);
+                    if(choice.equals(0)) {
+                    	payment.setPayReturn(true);
+                    	AllZone.GameAction.moveToHand(card);
+                    	stop();
+                    	payment.payCost();
+                    }
+                    else{
+                    	payment.setCancel(true);
+                    	stop();
+                    	payment.payCost();
+                    }
+                }
+            }
+        };
+        return target;
+    }//input_sacrifice()
+    
+    public static Input returnType(final SpellAbility spell, final String type, final Cost_Payment payment){
+        Input target = new Input() {
+            private static final long serialVersionUID = 2685832214519141903L;
+            private CardList typeList;
+            private int nReturns = 0;
+            private int nNeeded = payment.getCost().getReturnAmount();
+            
+            @Override
+            public void showMessage() {
+            	StringBuilder msg = new StringBuilder("Return ");
+            	int nLeft = nNeeded - nReturns;
+            	msg.append(nLeft).append(" ");
+            	msg.append(type);
+            	if (nLeft > 1){
+            		msg.append("s");
+            	}
+            	
+                PlayerZone play = AllZone.getZone(Constant.Zone.Play, spell.getSourceCard().getController());
+                typeList = new CardList(play.getCards());
+                typeList = typeList.getValidCards(type.split(","));
+                AllZone.Display.showMessage(msg.toString());
+                ButtonUtil.enableOnlyCancel();
+            }
+            
+            @Override
+            public void selectButtonCancel() {
+            	cancel();
+            }
+            
+            @Override
+            public void selectCard(Card card, PlayerZone zone) {
+                if(typeList.contains(card)) {
+                	nReturns++;
+                	AllZone.GameAction.moveToHand(card);
+                	typeList.remove(card);
+                    //in case nothing else to return
+                    if(nReturns == nNeeded) 
+                    	done();
+                    else if (typeList.size() == 0)	// this really shouldn't happen
+                    	cancel();
+                    else
+                    	showMessage();
+                }
+            }
+            
+            public void done(){
+            	payment.setPayReturn(true);
+            	stop();
+            	payment.payCost();
+            }
+            
+            public void cancel(){
+            	payment.setCancel(true);
+            	stop();
+            	payment.payCost();
+            }
+        };
+        return target;
+    }//sacrificeType()  
 }

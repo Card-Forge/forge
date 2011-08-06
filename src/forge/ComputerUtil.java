@@ -299,6 +299,23 @@ public class ComputerUtil
 				return false;
 		}
 		
+		if (cost.getReturnCost()){
+			  // if there's a return in the cost, just because we can Pay it doesn't mean we want to. 
+			if (!cost.getReturnThis()){
+			    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+			    CardList typeList = new CardList(play.getCards());
+			    typeList = typeList.getValidCards(cost.getReturnType().split(","));
+			    Card target = sa.getTargetCard();
+				if (target != null && target.getController().equals(Constant.Player.Computer)) // don't bounce the card we're pumping
+					  typeList.remove(target);
+				
+				if (cost.getReturnAmount() > typeList.size())
+					return false;
+			}
+			else if (!AllZone.GameAction.isCardInPlay(card))
+				return false;
+		}
+		
 		return true;
   }
   
@@ -561,6 +578,20 @@ public class ComputerUtil
 	  
       CardListUtil.sortAttackLowFirst(typeList);
 	  return typeList.get(index);
+  }
+  
+  static public Card chooseReturnType(String type, Card activate, Card target){
+      PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+      CardList typeList = new CardList(play.getCards());
+      typeList = typeList.getValidCards(type.split(","));
+	  if (target != null && target.getController().equals(Constant.Player.Computer) && typeList.contains(target)) // don't bounce the card we're pumping
+		  typeList.remove(target);
+	  
+	  if (typeList.size() == 0)
+		  return null;
+	  
+      CardListUtil.sortAttackLowFirst(typeList);
+	  return typeList.get(0);
   }
 
   static public CardList getPossibleAttackers()
