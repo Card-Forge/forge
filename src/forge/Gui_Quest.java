@@ -575,6 +575,12 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Uncle Owen 3		hard	Creature removal/control with Liliana Vess");
         sb.append("\r\n");
+        sb.append("Wilma Flintstone 1	easy	Noxious Hatchling, Woodlurker Mimic, Liliana Vess + a few BG spells");
+        sb.append("\r\n");
+        sb.append("Wilma Flintstone 2	medium	Noxious Hatchling, Woodlurker Mimic, Liliana Vess + some BG spells");
+        sb.append("\r\n");
+        sb.append("Wilma Flintstone 3	hard	Noxious Hatchling, Woodlurker Mimic, Liliana Vess + many BG spells");
+        sb.append("\r\n");
         sb.append("Wolverine 3		hard	Nightmare + Korlash, Heir to Blackblade + Kodama's Reach");
         sb.append("\r\n");
         sb.append("Wyatt Earp 1		easy	Some Plainswalk creatures + filler");
