@@ -672,72 +672,88 @@ public class CardFactory_Creatures {
                             && getTargetCard().getController().equals(card.getController())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                         
-                        Card copy;
-                        if(!getTargetCard().isToken()) {
-                            //CardFactory cf = new CardFactory("cards.txt");
-                            
-
-                            //copy creature and put it into play
-                            //copy = getCard(getTargetCard(), getTargetCard().getName(), card.getController());
-                            copy = cfact.getCard(getTargetCard().getName(), getTargetCard().getOwner());
-                            
-                            //when copying something stolen:
-                            copy.setController(getTargetCard().getController());
-                            
-                            copy.setToken(true);
-                            copy.setCopiedToken(true);
-                            
-                            if(getTargetCard().isFaceDown()) {
-                                copy.setIsFaceDown(true);
-                                copy.setManaCost("");
-                                copy.setBaseAttack(2);
-                                copy.setBaseDefense(2);
-                                copy.setIntrinsicKeyword(new ArrayList<String>()); //remove all keywords
-                                copy.setType(new ArrayList<String>()); //remove all types
-                                copy.addType("Creature");
-                                copy.clearSpellAbility(); //disallow "morph_up"
-                            }
-                            copy.addIntrinsicKeyword("Haste");
-                        } else //isToken()
-                        {
-                            Card c = getTargetCard();
-                            
-                            copy = new Card();
-                            
-                            copy.setName(c.getName());
-                            copy.setImageName(c.getImageName());
-                            
-                            copy.setOwner(c.getController());
-                            copy.setController(c.getController());
-                            
-                            copy.setManaCost(c.getManaCost());
-                            copy.setToken(true);
-                            
-                            copy.setType(c.getType());
-                            
-                            copy.setBaseAttack(c.getBaseAttack());
-                            copy.setBaseDefense(c.getBaseDefense());
-                            copy.addIntrinsicKeyword("Haste");
-                        }
-                        
-                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                        play.add(copy);
+                    	 int multiplier = 1;
+                         int doublingSeasons = CardFactoryUtil.getCards("Doubling Season", card.getController()).size();
+                         if(doublingSeasons > 0) multiplier = (int) Math.pow(2, doublingSeasons);
+                         Card[] crds = new Card[multiplier];
+                         
+                         for (int i=0;i<multiplier;i++)
+                         {
+	                         
+	                                             	
+	                        Card copy;
+	                        if(!getTargetCard().isToken()) {
+	                            //CardFactory cf = new CardFactory("cards.txt");
+	                            
+	
+	                            //copy creature and put it into play
+	                            //copy = getCard(getTargetCard(), getTargetCard().getName(), card.getController());
+	                            copy = cfact.getCard(getTargetCard().getName(), getTargetCard().getOwner());
+	                            
+	                            //when copying something stolen:
+	                            copy.setController(getTargetCard().getController());
+	                            
+	                            copy.setToken(true);
+	                            copy.setCopiedToken(true);
+	                            
+	                            if(getTargetCard().isFaceDown()) {
+	                                copy.setIsFaceDown(true);
+	                                copy.setManaCost("");
+	                                copy.setBaseAttack(2);
+	                                copy.setBaseDefense(2);
+	                                copy.setIntrinsicKeyword(new ArrayList<String>()); //remove all keywords
+	                                copy.setType(new ArrayList<String>()); //remove all types
+	                                copy.addType("Creature");
+	                                copy.clearSpellAbility(); //disallow "morph_up"
+	                            }
+	                            copy.addIntrinsicKeyword("Haste");
+	                        } else //isToken()
+	                        {
+	                            Card c = getTargetCard();
+	                            
+	                            copy = new Card();
+	                            
+	                            copy.setName(c.getName());
+	                            copy.setImageName(c.getImageName());
+	                            
+	                            copy.setOwner(c.getController());
+	                            copy.setController(c.getController());
+	                            
+	                            copy.setManaCost(c.getManaCost());
+	                            copy.setToken(true);
+	                            
+	                            copy.setType(c.getType());
+	                            
+	                            copy.setBaseAttack(c.getBaseAttack());
+	                            copy.setBaseDefense(c.getBaseDefense());
+	                            copy.addIntrinsicKeyword("Haste");
+	                        }
+	                        
+	                        
+	                        
+	                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+	                        play.add(copy);
+	                        crds[i] = copy;
+                    	}
                         
 
                         //have to do this since getTargetCard() might change
                         //if Kiki-Jiki somehow gets untapped again
-                        final Card[] target = new Card[1];
-                        target[0] = copy;
-                        Command atEOT = new Command() {
-                            private static final long serialVersionUID = 7803915905490565557L;
-                            
-                            public void execute() {
-                                //technically your opponent could steal the token
-                                //and the token shouldn't be sacrificed
-                                if(AllZone.GameAction.isCardInPlay(target[0])) AllZone.GameAction.sacrifice(target[0]); //maybe do a setSacrificeAtEOT, but probably not.
-                            }
-                        };//Command
-                        AllZone.EndOfTurn.addAt(atEOT);
+                        final Card[] target = new Card[multiplier];
+                        for (int i=0;i<multiplier;i++) {
+                        	final int index = i;
+	                        target[i] = crds[i];
+	                        Command atEOT = new Command() {
+	                            private static final long serialVersionUID = 7803915905490565557L;
+	                            
+	                            public void execute() {
+	                                //technically your opponent could steal the token
+	                                //and the token shouldn't be sacrificed
+	                                if(AllZone.GameAction.isCardInPlay(target[index])) AllZone.GameAction.sacrifice(target[index]); //maybe do a setSacrificeAtEOT, but probably not.
+	                            }
+	                        };//Command
+	                        AllZone.EndOfTurn.addAt(atEOT);
+                        }
                     }//is card in play?
                 }//resolve()
             };//SpellAbility
