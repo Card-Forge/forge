@@ -8,11 +8,15 @@ import java.awt.Container;
 // import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
 //import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -24,6 +28,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
@@ -34,6 +39,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
@@ -86,6 +92,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
     private JLabel            statsLabel2          = new JLabel();
     private JLabel            jLabel1              = new JLabel();
     
+    /*
     public JCheckBox          whiteCheckBox        = new JCheckBox("W", true);
     public JCheckBox          blueCheckBox         = new JCheckBox("U", true);
     public JCheckBox          blackCheckBox        = new JCheckBox("B", true);
@@ -99,11 +106,28 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
     public JCheckBox          instantCheckBox      = new JCheckBox("Instant", true);
     public JCheckBox          planeswalkerCheckBox = new JCheckBox("Planeswalker", true);
     public JCheckBox          artifactCheckBox     = new JCheckBox("Artifact", true);
-    public JCheckBox          enchantmentCheckBox  = new JCheckBox("Enchant", true);
+    public JCheckBox          enchantmentCheckBox  = new JCheckBox("Enchantment", true);
+    */
+
+    public JCheckBox          whiteCheckBox        = new FilterCheckBox("white", "White");
+    public JCheckBox          blueCheckBox         = new FilterCheckBox("blue", "Blue");
+    public JCheckBox          blackCheckBox        = new FilterCheckBox("black", "Black");
+    public JCheckBox          redCheckBox          = new FilterCheckBox("red", "Red");
+    public JCheckBox          greenCheckBox        = new FilterCheckBox("green", "Green");
+    public JCheckBox          colorlessCheckBox    = new FilterCheckBox("colorless", "Colorless");
+
+    public JCheckBox          landCheckBox         = new FilterCheckBox("land", "Land");
+    public JCheckBox          creatureCheckBox     = new FilterCheckBox("creature", "Creature");
+    public JCheckBox          sorceryCheckBox      = new FilterCheckBox("sorcery", "Sorcery");
+    public JCheckBox          instantCheckBox      = new FilterCheckBox("instant", "Instant");
+    public JCheckBox          planeswalkerCheckBox = new FilterCheckBox("planeswalker", "Planeswalker");
+    public JCheckBox          artifactCheckBox     = new FilterCheckBox("artifact", "Artifact");
+    public JCheckBox          enchantmentCheckBox  = new FilterCheckBox("enchant", "Enchantment");
+
     
     /*CHOPPIC*/
     private JButton           filterButton         = new JButton();
-    public JTextField	      searchTextField	   = new JTextField();
+    private JTextField	      searchTextField	   = new JTextField();
     /*CHOPPIC*/
     
     private CardList          top;
@@ -527,13 +551,13 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         jScrollPane2.setBorder(titledBorder2);
         //removeButton.setIcon(upIcon);
         if(!Gui_NewGame.useLAFFonts.isSelected()) removeButton.setFont(new java.awt.Font("Dialog", 0, 13));
-        removeButton.setText("Remove Card");
+        removeButton.setText("Remove from Deck");
         removeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 removeButton_actionPerformed(e);
             }
         });
-        addButton.setText("Add Card");
+        addButton.setText("Add to Deck");
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 addButton_actionPerformed(e);
@@ -549,7 +573,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
             	filterButton_actionPerformed(e);
             }
         });
-        if(!Gui_NewGame.useLAFFonts.isSelected()) analysisButton.setFont(new java.awt.Font("Dialog", 0, 13));
+        if(!Gui_NewGame.useLAFFonts.isSelected()) filterButton.setFont(new java.awt.Font("Dialog", 0, 13));
         /*CHOPPIC*/
         
         analysisButton.setText("Deck Analysis");
@@ -582,26 +606,19 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         Font f = new Font("Tahoma", Font.PLAIN, 10);
         if(!Gui_NewGame.useLAFFonts.isSelected()) landCheckBox.setFont(f);
         landCheckBox.setOpaque(false);
-        landCheckBox.setToolTipText("Land");
         if(!Gui_NewGame.useLAFFonts.isSelected()) creatureCheckBox.setFont(f);
         creatureCheckBox.setOpaque(false);
-        creatureCheckBox.setToolTipText("Creature");
         if(!Gui_NewGame.useLAFFonts.isSelected()) sorceryCheckBox.setFont(f);
         sorceryCheckBox.setOpaque(false);
-        sorceryCheckBox.setToolTipText("Sorcery");
         if(!Gui_NewGame.useLAFFonts.isSelected()) instantCheckBox.setFont(f);
         instantCheckBox.setOpaque(false);
-        instantCheckBox.setToolTipText("Instant");
         if(!Gui_NewGame.useLAFFonts.isSelected()) planeswalkerCheckBox.setFont(f);
         planeswalkerCheckBox.setOpaque(false);
-        planeswalkerCheckBox.setToolTipText("Planeswalker");
         if(!Gui_NewGame.useLAFFonts.isSelected()) artifactCheckBox.setFont(f);
         artifactCheckBox.setOpaque(false);
-        artifactCheckBox.setToolTipText("Artifact");
         if(!Gui_NewGame.useLAFFonts.isSelected()) enchantmentCheckBox.setFont(f);
         enchantmentCheckBox.setOpaque(false);
-        enchantmentCheckBox.setToolTipText("Enchantment");
-        
+
         /**
          * Color filtering
          */
@@ -623,48 +640,47 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         gridLayout1.setRows(0);
         statsLabel2.setText("Total - 0, Creatures - 0 Land - 0");
         if(!Gui_NewGame.useLAFFonts.isSelected()) statsLabel2.setFont(new java.awt.Font("Dialog", 0, 14));
-        jLabel1.setText("Click on the column name (like name or color) to sort the cards");
+        /* jLabel1.setText("Click on the column name (like name or color) to sort the cards"); */
         
         pictureViewPanel.setCardPanel(picture);
-        
+     
         this.getContentPane().setLayout(new MigLayout("fill"));
-        
-        this.getContentPane().add(jLabel1, "span 3, wrap");
-        
-        this.getContentPane().add(jScrollPane1, "span 2 2, pushy, grow");
-        /*this.getContentPane().add(detail, "w 239, h 323, grow, flowy, wrap");*/
-        this.getContentPane().add(detail, "align 50% 50%, w 239, h 323, flowy, wrap");
-        this.getContentPane().add(changePictureButton, "align 50% 0%,split 2, flowx");
-        this.getContentPane().add(removePictureButton, "align 50% 0%, wrap");
-        
-        this.getContentPane().add(statsLabel2, "span 2");
-        this.getContentPane().add(pictureViewPanel, "wmin 239, hmin 323, grow, span 1 4, wrap");
-        
-        this.getContentPane().add(addButton, "align 50% 50%, w 100, h 49, sg button, span 1 2, split 2");
-        this.getContentPane().add(removeButton, "w 100, h 49, sg button");
-        
-        this.getContentPane().add(landCheckBox, ", egx checkbox, split 7");
+                
+        this.getContentPane().add(landCheckBox, "cell 0 0, egx checkbox, split 16");
         this.getContentPane().add(creatureCheckBox, "");
         this.getContentPane().add(sorceryCheckBox, "");
         this.getContentPane().add(instantCheckBox, "");
         this.getContentPane().add(planeswalkerCheckBox, "");
         this.getContentPane().add(artifactCheckBox, "");
-        this.getContentPane().add(enchantmentCheckBox, "wrap");
+        this.getContentPane().add(enchantmentCheckBox, "");
         
-        this.getContentPane().add(whiteCheckBox, "split 9");
+        this.getContentPane().add(whiteCheckBox, "");
         this.getContentPane().add(blueCheckBox, "");
         this.getContentPane().add(blackCheckBox, "");
         this.getContentPane().add(redCheckBox, "");
         this.getContentPane().add(greenCheckBox, "");
         this.getContentPane().add(colorlessCheckBox, "");
-        /*CHOPPIC*/
-        this.getContentPane().add(searchTextField, "wmin 100");
-        this.getContentPane().add(filterButton, "");
-        /*CHOPPIC*/
-        this.getContentPane().add(analysisButton, "wmin 166, hmin 25, wrap");       
+
+        jLabel1.setText("with Name includes");
+        this.getContentPane().add(jLabel1, "");
+        this.getContentPane().add(searchTextField, "wmin 120");
+        this.getContentPane().add(filterButton, "wmin 100, hmin 25");
         
-        this.getContentPane().add(jScrollPane2, "span 2, grow, wrap");
-        this.getContentPane().add(statsLabel, "span 2");
+        this.getContentPane().add(jScrollPane1, "cell 0 1 1 2, pushy, grow");
+        /*this.getContentPane().add(detail, "w 239, h 323, grow, flowy, wrap");*/
+        this.getContentPane().add(detail, "align 50% 50%, wmin 239, hmin 323, cell 1 0 1 2, flowy");
+        this.getContentPane().add(changePictureButton, "align 50% 0%, cell 1 2, split 2, flowx");
+        this.getContentPane().add(removePictureButton, "align 50% 0%, wrap");
+        
+        this.getContentPane().add(statsLabel2, "cell 0 3");
+        this.getContentPane().add(pictureViewPanel, "wmin 239, hmin 323, grow, cell 1 3 1 4");
+        
+        this.getContentPane().add(addButton, "w 100, h 49, sg button, cell 0 4, split 3");
+        this.getContentPane().add(removeButton, "w 100, h 49, sg button");
+        this.getContentPane().add(analysisButton, "w 100, h 49, wrap");   
+        
+        this.getContentPane().add(jScrollPane2, "cell 0 5, grow");
+        this.getContentPane().add(statsLabel, "cell 0 6");
 
         jScrollPane2.getViewport().add(bottomTable, null);
         jScrollPane1.getViewport().add(topTable, null);
@@ -879,6 +895,38 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         topModel.resort();
         bottomModel.resort();
     }////refreshGui()
+    
+    /*CHOPPIC*/
+    /* Custom check box class for filter icons */
+    private class FilterCheckBox extends JCheckBox {
+		private static final long serialVersionUID = -8099263807219520120L;
+		
+		private String imagePath = "res/images/deckeditor/";
+    	private String iconYes;
+    	private String iconNo;
+    	private FilterCheckBox cb;
+
+    	FilterCheckBox(String filterName, String toolTip){
+    		super("",true);
+    		cb = this;
+    		iconYes = imagePath + "filter_" + filterName + "_y.png";
+    		iconNo = imagePath + "filter_" + filterName + "_n.png";
+    		this.setIcon(new ImageIcon(iconYes));
+    		this.setToolTipText(toolTip);
+    		this.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
+                    if(cb.isSelected()){
+                    	cb.setIcon(new ImageIcon(iconYes));
+                    }
+                    else {
+                    	cb.setIcon(new ImageIcon(iconNo));
+                    }
+                  }
+            });
+    	}
+    }
+    
+    /*CHOPPIC*/
     
     public class CustomListener extends MouseAdapter {
 //        TODO reenable
