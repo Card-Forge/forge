@@ -39,6 +39,9 @@ public class StateBasedEffects
 		cardToEffectsList.put("Terravore", new String[] {"Terravore"});
 		cardToEffectsList.put("Magnivore", new String[] {"Magnivore"});
 		cardToEffectsList.put("Tarmogoyf", new String[] {"Tarmogoyf"});
+		cardToEffectsList.put("Multani, Maro-Sorcerer", new String[] {"Multani_Maro_Sorcerer"});
+		cardToEffectsList.put("Molimo, Maro-Sorcerer", new String[] {"Molimo_Maro_Sorcerer"});
+		cardToEffectsList.put("Maro", new String[] {"Maro"});
 		cardToEffectsList.put("Dakkon Blackblade", new String[] {"Dakkon"});
 		cardToEffectsList.put("Korlash, Heir to Blackblade", new String[] {"Korlash"});
 		cardToEffectsList.put("Dauntless Dourbark", new String[] {"Dauntless_Dourbark"});

@@ -11319,6 +11319,127 @@ public class GameActionUtil
 		}
 	};
 	
+	public static Command Multani_Maro_Sorcerer = new Command()
+	   {
+	      private static final long serialVersionUID = -8778902687347191964L;
+	      public void execute()
+	      {
+	         // get all creatures
+	         CardList list = new CardList();
+	         list.addAll(AllZone.Human_Play.getCards());
+	         list.addAll(AllZone.Computer_Play.getCards());
+	         list = list.getName("Multani, Maro-Sorcerer");
+
+	         for (int i = 0; i < list.size(); i++)
+	         {
+	            Card c = list.get(i);
+	            c.setBaseAttack(countHands());
+	            c.setBaseDefense(c.getBaseAttack());
+	         }
+	      }
+	      private int countHands()
+	      {
+	         PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
+	         PlayerZone humHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human);
+	         CardList list = new CardList();
+	         list.addAll(compHand.getCards());
+	         list.addAll(humHand.getCards());
+	         return list.size();
+	      }
+	         
+	   };//Multani, Maro-Sorcerer
+	   
+	   public static Command Molimo_Maro_Sorcerer = new Command()
+	   {
+	      private static final long serialVersionUID = -8778902687347191964L;
+	      public void execute()
+	      {
+	         // get all creatures
+	         CardList list = new CardList();
+	         list.addAll(AllZone.Human_Play.getCards());
+	         list.addAll(AllZone.Computer_Play.getCards());
+	         list = list.getName("Molimo, Maro-Sorcerer");
+
+	         for (int i = 0; i < list.size(); i++)
+	         {
+	            Card c = list.get(i);
+	            int k = 0;
+	            if (c.getController().equals(Constant.Player.Human)) 
+	            	{k = countLands_Human ();}
+	             else  k = countLands_Computer();
+	            c.setBaseAttack(k);
+	            c.setBaseDefense(k);
+	                       
+	         }
+	      }   
+	         private int countLands_Human()
+	         {
+	            PlayerZone Play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+	            CardList list = new CardList();
+	            list.addAll(Play.getCards());
+	            list = list.filter(new CardListFilter(){
+	               public boolean addCard(Card c) {
+	                  return c.isLand();
+	               }
+	            });
+	            return list.size();
+	         }
+	         private int countLands_Computer()
+	         {
+	            PlayerZone Play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+	            CardList list = new CardList();
+	            list.addAll(Play.getCards());
+	            list = list.filter(new CardListFilter(){
+	               public boolean addCard(Card c) {
+	                  return c.isLand();
+	               }
+	            });
+	            return list.size();
+	         }
+	      
+	      
+	         
+	   };//Molimo, Maro-Sorcerer
+	   
+	   public static Command Maro = new Command()
+	   {
+	      private static final long serialVersionUID = -8778902687347191964L;
+	      public void execute()
+	      {
+	         // get all creatures
+	         CardList list = new CardList();
+	         list.addAll(AllZone.Human_Play.getCards());
+	         list.addAll(AllZone.Computer_Play.getCards());
+	         list = list.getName("Maro");
+
+	         for (int i = 0; i < list.size(); i++)
+	         {
+	            Card c = list.get(i);
+	            int k = 0;
+	            if (c.getController().equals(Constant.Player.Human)) 
+	            	{k = countHand_Human ();}
+	             else  k = countHand_Computer();
+	            c.setBaseAttack(k);
+	            c.setBaseDefense(k);
+	                       
+	         }
+	      }   
+	         private int countHand_Human()
+	         {
+	            PlayerZone Play = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human);
+	            CardList list = new CardList();
+	            list.addAll(Play.getCards());
+	            return list.size();
+	         }
+	         private int countHand_Computer()
+	         {
+	            PlayerZone Play = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
+	            CardList list = new CardList();
+	            list.addAll(Play.getCards());
+	            return list.size();
+	         }	     
+	               
+	   };//Maro
 
 	public static Command Lhurgoyf = new Command()
    {
