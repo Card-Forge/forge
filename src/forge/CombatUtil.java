@@ -235,6 +235,9 @@ public class CombatUtil {
         if (attacker.getKeyword().contains("CARDNAME can't be blocked except by Walls and/or creatures with flying.") && 
         		!(blocker.getType().contains("Wall") || blocker.getKeyword().contains("Flying"))) return false;
         
+        if (blocker.getCounters(Counters.BRIBERY) > 0 && isCardInPlay("Gwafa Hazid, Profiteer"))
+        	return false;
+        
         return true;
     }//canBlock()
     
@@ -300,6 +303,9 @@ public class CombatUtil {
         if(c.isTapped() || c.hasSickness() || c.getKeyword().contains("Defender") || moatPrevented
                 || oppControlsBlazingArchon(c) || c.getKeyword().contains("CARDNAME can't attack.")
                 || c.getKeyword().contains("CARDNAME can't attack or block.")) return false;
+        
+        if (c.getCounters(Counters.BRIBERY) > 0 && isCardInPlay("Gwafa Hazid, Profiteer"))
+        	return false;
         
         //if Card has Haste, Card.hasSickness() will return false
         return true;
@@ -760,6 +766,15 @@ public class CombatUtil {
         list = list.getName("Blazing Archon");
         if(list.size() > 0) return true;
         else return false;
+    }
+    
+    public static boolean isCardInPlay(String card)
+    {
+    	CardList all = new CardList();
+    	all.addAll(AllZone.Human_Play.getCards());
+    	all.addAll(AllZone.Computer_Play.getCards());
+    	
+    	return all.containsName(card);
     }
     
     public static boolean isPeaceKeeperInPlay() {
