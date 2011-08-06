@@ -1,6 +1,6 @@
 Name:Tectonic Instability
 ManaCost:2 R
-Types:Enchentment
+Types:Enchantment
 Text:Whenever a land enters the battlefield, tap all lands its controller controls.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tectonic_instability.jpg

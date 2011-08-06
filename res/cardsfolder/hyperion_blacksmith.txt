@@ -2,6 +2,7 @@ Name:Hyperion Blacksmith
 ManaCost:1 R R
 Types:Creature Human Artificer
 Text:no text
+PT:2/2
 K:abTapTgt T:Artifact+YouDontCtrl:Tap target artifact you don't control.
 K:abUntapTgt T:Artifact+YouDontCtrl:Untap target artifact you don't control.
 SVar:RemAIDeck:True
