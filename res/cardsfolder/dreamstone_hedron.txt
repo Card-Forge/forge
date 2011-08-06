@@ -3,6 +3,7 @@ ManaCost:6
 Types:Artifact
 Text:no text
 K:tap: add 3
+A:AB$Draw | Cost$ 3 T Sac<1/CARDNAME> | NumCards$ 3 | SpellDescription$ Draw three cards.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreamstone_hedron.jpg
