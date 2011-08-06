@@ -8984,7 +8984,7 @@ public class CardFactory_Creatures {
                     return list;
                 }//getCreature()
             };//SpellAbility
-            
+            /*
             //**** start of ability2
             final SpellAbility ability2 = new Ability(card, "3 U") {
                 @Override
@@ -9043,14 +9043,15 @@ public class CardFactory_Creatures {
                     return list;
                 }
             };//SpellAbility
+            */
             card.addSpellAbility(ability1);
-            card.addSpellAbility(ability2);
+            //card.addSpellAbility(ability2);
             
             ability1.setDescription("1 U U: Target permanent becomes an artifact in addition to its other types. (This effect doesn't end at end of turn.)");
-            ability2.setDescription("3 U: Gain control of target artifact. (This effect doesn't end at end of turn.)");
+            //ability2.setDescription("3 U: Gain control of target artifact. (This effect doesn't end at end of turn.)");
             
             ability1.setBeforePayMana(CardFactoryUtil.input_targetType(ability1, "All"));
-            ability2.setBeforePayMana(CardFactoryUtil.input_targetType(ability2, "Artifact"));
+            //ability2.setBeforePayMana(CardFactoryUtil.input_targetType(ability2, "Artifact"));
         }//*************** END ************ END **************************
         
         
