@@ -1,8 +1,9 @@
 Name:Winged Sliver
 ManaCost:1 U
 Types:Creature Sliver
-Text:All Sliver creatures have flying.
+Text:no text
 PT:1/1
+K:stPumpAll:Creature.Sliver:0/0/Flying:No Condition:All Sliver creatures have flying.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/winged_sliver.jpg

@@ -11564,45 +11564,6 @@ public class GameActionUtil {
 		}// execute()
 	}; // Muscles_Sliver
 	
-	/*
-	public static Command Battering_Sliver            = new Command() {
-		private static final long serialVersionUID   = -2214824705109236342L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Trample";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Battering Sliver");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Sliver");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addExtrinsicKeyword(keyword);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Blade Sliver
-	*/
-	
 	public static Command Marrow_Gnawer               = new Command() {
 		private static final long serialVersionUID   = -2500490393763095527L;
 
@@ -11885,43 +11846,6 @@ public class GameActionUtil {
 					c = creature.get(i);
 					c.addSemiPermanentAttackBoost(pumpAttack);
 					c.addSemiPermanentDefenseBoost(pumpDefense);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Muscles_Sliver
-
-	public static Command Winged_Sliver               = new Command() {
-		private static final long serialVersionUID   = -1840399835079335499L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Flying";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Winged Sliver");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Sliver");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addExtrinsicKeyword(keyword);
 
 					gloriousAnthemList.add(c);
 				}// for inner
@@ -13205,41 +13129,6 @@ public class GameActionUtil {
 	};
 
 	/**
-	 * stores the Command to execute the "Legends don't untap during your untap step"
-	 */
-	/* keyworded
-	public static Command Arena_of_the_Ancients = new Command() {
-		private static final long serialVersionUID = -3233715310427996429L;
-		
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "CARDNAME doesn't untap during your untap step.";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-			list.clear();
-
-			if(AllZoneUtil.isCardInPlay("Arena of the Ancients")) {
-				CardList legends = AllZoneUtil.getTypeInPlay("Legendary");
-				legends = legends.filter(AllZoneUtil.creatures);
-				for(int i = 0; i < legends.size(); i++) {
-					c = legends.get(i);
-					if(!c.getKeyword().contains(keyword)) {
-						c.addExtrinsicKeyword(keyword);
-						gloriousAnthemList.add(c);
-					}
-				}//for
-			}//if
-		}// execute()
-	};
-	*/
-	/**
 	 * stores the Command
 	 */
 	
@@ -13946,71 +13835,6 @@ public class GameActionUtil {
 		}// execute()
 	};
 
-
-	public static Command Fury_Sliver                 = new Command() {
-		private static final long serialVersionUID   = -2379786355503597363L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Double Strike";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Fury Sliver");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addExtrinsicKeyword(keyword);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	};
-
-	public static Command Talon_Sliver                 = new Command() {
-
-		private static final long serialVersionUID = -7392607614574103064L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "First Strike";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Talon Sliver");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addExtrinsicKeyword(keyword);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	};    
-
 	public static Command Crystalline_Sliver          = new Command() {
 
 		private static final long serialVersionUID   = 6089293045852070662L;
@@ -14139,38 +13963,7 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	};
-
-	public static Command Synchronous_Sliver          = new Command() {
-		private static final long serialVersionUID   = 4336346186741907749L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Vigilance";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Synchronous Sliver");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addExtrinsicKeyword(keyword);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	};
+	
 
 	public static Command Bonesplitter_Sliver         = new Command() {
 		private static final long serialVersionUID   = -3463429634177142721L;
@@ -17254,308 +17047,11 @@ public class GameActionUtil {
 
 	}; //Timber_Protector_Other
 	*/
-	/*
-	public static Command Goblin_Chieftain_Pump       = new Command() {
-
-		private static final long serialVersionUID   = 395882142255572162L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-
-			CardList cList = gloriousAnthemList;
-			Card c;
-
-			for(int i = 0; i < cList.size(); i++) {
-				c = cList.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-				c.removeExtrinsicKeyword("Haste");
-			}
-			cList.clear();
-			PlayerZone[] zone = getZone("Goblin Chieftain");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				//creature.addAll(AllZone.Human_Play.getCards());
-				//creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Goblin");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(c.isCreature()
-							&& !c.getName().equals(
-									"Goblin Chieftain")) {
-						c.addSemiPermanentAttackBoost(1);
-						c.addSemiPermanentDefenseBoost(1);
-						c.addExtrinsicKeyword("Haste");
-						gloriousAnthemList.add(c);
-					}
-
-				} // for
-			} // for
-
-		}// execute()
-
-	}; //Goblin_Chieftain_Pump
-
-	public static Command Goblin_Chieftain_Other      = new Command() {
-
-		private static final long serialVersionUID = -3107498901233064819L;
-		int                       otherLords       = 0;
-
-		private int countOtherLords() {
-			CardList lords = AllZoneUtil.getCardsInPlay("Goblin Chieftain");
-			return lords.size() - 1;
-
-		}
-
-		public void execute() {
-
-
-			CardList creature = AllZoneUtil.getCardsInPlay("Goblin Chieftain");
-
-			for(int i = 0; i < creature.size(); i++) {
-				Card c = creature.get(i);
-				otherLords = countOtherLords();
-				c.setOtherAttackBoost(otherLords);
-				c.setOtherDefenseBoost(otherLords);
-				if(!c.getOtherExtrinsicKeyword().contains("Haste")
-						&& otherLords > 0) c.addOtherExtrinsicKeyword("Haste");
-				else if (c.getOtherExtrinsicKeyword().contains("Haste") && otherLords == 0 )
-					c.removeOtherExtrinsicKeyword("Haste");
-
-
-			}// for inner
-		}// execute()
-
-	}; //Goblin_Chieftain_Other
-	*/
-	/*
-	public static Command Goblin_King_Pump            = new Command() {
-
-		private static final long serialVersionUID   = -2128898623878576243L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-
-			CardList cList = gloriousAnthemList;
-			Card c;
-
-			for(int i = 0; i < cList.size(); i++) {
-				c = cList.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-				c.removeExtrinsicKeyword("Mountainwalk");
-			}
-			cList.clear();
-			PlayerZone[] zone = getZone("Goblin King");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = AllZoneUtil.getTypeInPlay("Goblin");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(c.isCreature()
-							&& !c.getName().equals("Goblin King")) {
-						c.addSemiPermanentAttackBoost(1);
-						c.addSemiPermanentDefenseBoost(1);
-						c.addExtrinsicKeyword("Mountainwalk");
-						gloriousAnthemList.add(c);
-					}
-
-				} // for
-			} // for
-
-		}// execute()
-
-	}; //Goblin_King_Pump
-
-	public static Command Goblin_King_Other           = new Command() {
-
-		private static final long serialVersionUID = -8294068492084097409L;
-		int                       otherLords       = 0;
-
-		private int countOtherLords() {
-			CardList lords = AllZoneUtil.getCardsInPlay("Goblin King");
-			return lords.size() - 1;
-
-		}
-
-		public void execute() {
-
-
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
-
-			creature = creature.getName("Goblin King");
-
-			for(int i = 0; i < creature.size(); i++) {
-				Card c = creature.get(i);
-				otherLords = countOtherLords();
-				c.setOtherAttackBoost(otherLords);
-				c.setOtherDefenseBoost(otherLords);
-				if(!c.getOtherExtrinsicKeyword().contains(
-						"Mountainwalk")
-						&& otherLords > 0) c.addOtherExtrinsicKeyword("Mountainwalk");
-				else if (c.getOtherExtrinsicKeyword().contains("Mountainwalk") && otherLords == 0 )
-					c.removeOtherExtrinsicKeyword("Mountainwalk");
-
-
-			}// for inner
-		}// execute()
-
-	}; //Goblin_King_Other
-	*/
-	/*
-	public static Command Merfolk_Sovereign_Pump      = new Command() {
-
-		private static final long serialVersionUID   = -8250416279767429585L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-
-			CardList cList = gloriousAnthemList;
-			Card c;
-
-			for(int i = 0; i < cList.size(); i++) {
-				c = cList.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-			}
-			cList.clear();
-			PlayerZone[] zone = getZone("Merfolk Sovereign");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				//creature.addAll(AllZone.Human_Play.getCards());
-				//creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Merfolk");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(c.isCreature()
-							&& !c.getName().equals(
-									"Merfolk Sovereign")) {
-						c.addSemiPermanentAttackBoost(1);
-						c.addSemiPermanentDefenseBoost(1);
-						gloriousAnthemList.add(c);
-					}
-
-				} // for
-			} // for
-
-		}// execute()
-
-	}; //Merfolk_Sovereign_Pump 
-
-	public static Command Merfolk_Sovereign_Other     = new Command() {
-		private static final long serialVersionUID = -179394803961615332L;
-		int                       otherLords       = 0;
-
-		private int countOtherSovereigns(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
-			CardList sovs = new CardList(play.getCards());
-			sovs = sovs.getName("Merfolk Sovereign");
-			return sovs.size() - 1;
-		}
-
-		public void execute() {
-
-			CardList creature = AllZoneUtil.getCardsInPlay("Merfolk Sovereign");
-
-			for(int i = 0; i < creature.size(); i++) {
-				Card c = creature.get(i);
-				otherLords = countOtherSovereigns(c);
-				c.setOtherAttackBoost(otherLords);
-				c.setOtherDefenseBoost(otherLords);
-			}// for inner
-		}// execute()
-
-	}; //Merfolk_Sovereign_Other
-	*/
 	
-	/*
-	public static Command Field_Marshal_Pump          = new Command() {
-		private static final long serialVersionUID   = -2429608928111507712L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-
-			CardList cList = gloriousAnthemList;
-			Card c;
-
-			for(int i = 0; i < cList.size(); i++) {
-				c = cList.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-				c.removeExtrinsicKeyword("First Strike");
-			}
-			cList.clear();
-			PlayerZone[] zone = getZone("Field Marshal");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Soldier");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(c.isCreature()
-							&& !c.getName().equals(
-									"Field Marshal")) {
-						c.addSemiPermanentAttackBoost(1);
-						c.addSemiPermanentDefenseBoost(1);
-						c.addExtrinsicKeyword("First Strike");
-						gloriousAnthemList.add(c);
-					}
-
-				} // for
-			} // for
-
-		}// execute()
-
-	}; //Field Marshal Pump
-
-	public static Command Field_Marshal_Other         = new Command() {
-		private static final long serialVersionUID = 8252431904723630691L;
-
-		int                       otherMarshals    = 0;
-
-		private int countOtherMarshals() {
-			CardList marshals = AllZoneUtil.getCardsInPlay("Field Marshal");
-			return marshals.size() - 1;
-
-		}
-
-		public void execute() {
-
-
-			CardList creature = AllZoneUtil.getCardsInPlay("Field Marshal");
-
-			for(int i = 0; i < creature.size(); i++) {
-				Card c = creature.get(i);
-				otherMarshals = countOtherMarshals();
-				c.setOtherAttackBoost(otherMarshals);
-				c.setOtherDefenseBoost(otherMarshals);
-				if(!c.getExtrinsicKeyword().contains(
-						"First Strike")
-						&& otherMarshals > 0) c.addExtrinsicKeyword("First Strike");
-
-			}// for inner
-		}// execute()
-
-	}; //Field Marshal Other
-	*/
+	
+	
+	
+	
 	
 	public static Command Death_Baron_Pump = new Command() {
 
@@ -21486,10 +20982,6 @@ public class GameActionUtil {
 		commands.put("Might_Sliver", Might_Sliver);
 		commands.put("Watcher_Sliver", Watcher_Sliver);
 
-		commands.put("Winged_Sliver", Winged_Sliver);
-		commands.put("Synchronous_Sliver", Synchronous_Sliver);
-		commands.put("Fury_Sliver", Fury_Sliver);
-		commands.put("Talon_Sliver", Talon_Sliver);
 		commands.put("Plated_Sliver", Plated_Sliver);
 		commands.put("Crystalline_Sliver", Crystalline_Sliver);
 		commands.put("Virulent_Sliver", Virulent_Sliver);
@@ -21503,7 +20995,6 @@ public class GameActionUtil {
 		commands.put("Gemhide_Sliver", Gemhide_Sliver);
 
 		commands.put("Blade_Sliver", Blade_Sliver);
-		//commands.put("Battering_Sliver", Battering_Sliver);
 
 		commands.put("Marrow_Gnawer", Marrow_Gnawer);
 
@@ -21516,7 +21007,6 @@ public class GameActionUtil {
 		commands.put("Keldon_Warlord", Keldon_Warlord);
 		commands.put("Heedless_One", Heedless_One);
 		commands.put("Omnath", Omnath);
-		//commands.put("Arena_of_the_Ancients", Arena_of_the_Ancients);
 		commands.put("Angry_Mob", Angry_Mob);
 		commands.put("Maraxus_of_Keld", Maraxus_of_Keld);
 		commands.put("Umbra_Stalker", Umbra_Stalker);

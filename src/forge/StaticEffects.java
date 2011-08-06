@@ -194,15 +194,12 @@ public class StaticEffects
 		//cardToEffectsList.put("Kobold Overlord", new String[] {"Kobold_Overlord"});
 		cardToEffectsList.put("Kinsbaile Cavalier", new String[] {"Kinsbaile_Cavalier"});
 		cardToEffectsList.put("Wren's Run Packmaster", new String[] {"Wrens_Run_Packmaster"});
+		
 		cardToEffectsList.put("Sliver Legion", new String[] {"Sliver_Legion"});
 		cardToEffectsList.put("Muscle Sliver", new String[] {"Muscle_Sliver"});
 		cardToEffectsList.put("Bonesplitter Sliver", new String[] {"Bonesplitter_Sliver"});
 		cardToEffectsList.put("Might Sliver", new String[] {"Might_Sliver"});
 		cardToEffectsList.put("Watcher Sliver", new String[] {"Watcher_Sliver"});
-		cardToEffectsList.put("Winged Sliver", new String[] {"Winged_Sliver"});
-		cardToEffectsList.put("Synchronous Sliver", new String[] {"Synchronous_Sliver"});
-		cardToEffectsList.put("Fury Sliver", new String[] {"Fury_Sliver"});
-		cardToEffectsList.put("Talon Sliver", new String[] {"Talon_Sliver"});
 		cardToEffectsList.put("Plated Sliver", new String[] {"Plated_Sliver"});
 		cardToEffectsList.put("Virulent Sliver", new String[] {"Virulent_Sliver"});
 		cardToEffectsList.put("Sidewinder Sliver", new String[] {"Sidewinder_Sliver"});
@@ -214,7 +211,7 @@ public class StaticEffects
 		cardToEffectsList.put("Reflex Sliver", new String[] {"Reflex_Sliver"});
 		cardToEffectsList.put("Gemhide Sliver", new String[] {"Gemhide_Sliver"});
 		cardToEffectsList.put("Blade Sliver", new String[] {"Blade_Sliver"});
-		//cardToEffectsList.put("Battering Sliver", new String[] {"Battering_Sliver"});
+		
 		cardToEffectsList.put("Marrow-Gnawer", new String[] {"Marrow_Gnawer"});
 		cardToEffectsList.put("Mul Daya Channelers", new String[] {"Mul_Daya_Channelers"});
 		cardToEffectsList.put("Joiner Adept", new String[] {"Joiner_Adept"});
@@ -225,7 +222,6 @@ public class StaticEffects
 		cardToEffectsList.put("Keldon Warlord", new String[] {"Keldon_Warlord"});
 		cardToEffectsList.put("Heedless One", new String[] {"Heedless_One"});
 		cardToEffectsList.put("Omnath, Locus of Mana", new String[] {"Omnath"});
-		//cardToEffectsList.put("Arena of the Ancients", new String[] {"Arena_of_the_Ancients"});
 		cardToEffectsList.put("Angry Mob", new String[] {"Angry_Mob"});
 		cardToEffectsList.put("Maraxus of Keld", new String[] {"Maraxus_of_Keld"});
 		cardToEffectsList.put("Umbra Stalker", new String[] {"Umbra_Stalker"});

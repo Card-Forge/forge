@@ -1,8 +1,9 @@
 Name:Fury Sliver
 ManaCost:5 R
 Types:Creature Sliver
-Text:All Sliver creatures have double strike.
+Text:no text
 PT:3/3
+K:stPumpAll:Creature.Sliver:0/0/Double Strike:No Condition:All Sliver creatures have double strike.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fury_sliver.jpg

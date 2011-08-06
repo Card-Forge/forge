@@ -3,6 +3,7 @@ ManaCost:1 W
 Types:Creature Sliver
 Text:All sliver creatures have first strike.
 PT:1/1
+K:stPumpAll:Creature.Sliver:0/0/First Strike:No Condition:All Sliver creatures have first strike.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talon_sliver.jpg
