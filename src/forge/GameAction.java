@@ -142,7 +142,7 @@ public class GameAction {
     	AllZone.GameAction.CheckWheneverKeyword(c,"DiscardsCard",null);
         discard_nath(c);
         discard_megrim(c);
-        if(CardFactoryUtil.getCards("Necropotence", c.getOwner()).size() > 0){	// necro disrupts madness
+        if(AllZoneUtil.getPlayerCardsInPlay(c.getOwner(), "Necropotence").size() > 0){	// necro disrupts madness
         	exile(c);
         	return;
         }
