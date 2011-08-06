@@ -2,7 +2,7 @@ Name:Howling Fury
 ManaCost:2 B
 Types:Sorcery
 Text:no text
-K:spPumpTgt:+4/+0
+A:SP$Pump | Cost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +4 | SpellDescription$ Target creature gets +4/+0 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/howling_fury.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/82.jpg
