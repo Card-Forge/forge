@@ -1861,6 +1861,20 @@ class CardFactory_Auras {
             spell.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
+      
+        //*************** START *********** START **************************
+        else if(CardFactory.hasKeyword(card, "enchant") != -1) {
+            	int n = CardFactory.hasKeyword(card, "enchant");
+            	if (n!= -1) {
+            		String parse = card.getKeyword().get(n).toString();
+            		String k[] = parse.split(":");
+            	
+            		SpellAbility sa = card.getSpellAbility()[0];
+            		sa.setIsMultiKicker(true);
+            		sa.setMultiKickerManaCost(k[1]);
+            	}
+        }
+        
         
         ///////////////////////////////////////////////////////////////////
         ////
@@ -1909,7 +1923,7 @@ class CardFactory_Auras {
                     if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);                  
         		}//resolve()
         	};//SpellAbility
-        	card.clearSpellAbility();
+        	card.clearFirstSpellAbility();
         	card.addSpellAbility(spell);
         	card.addLeavesPlayCommand(standardUnenchant);
 
