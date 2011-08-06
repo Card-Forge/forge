@@ -171,6 +171,8 @@ public class AbilityFactory_Fetch {
 		// Fetching should occur fairly often as it helps cast more spells, and have access to more mana
 		Ability_Cost abCost = af.getAbCost();
 		Card source = af.getHostCard();
+		HashMap<String,String> params = af.getMapParams();
+        String destination = params.get("Destination");
 		
 		if (abCost != null){
 			// AI currently disabled for these costs
@@ -183,7 +185,7 @@ public class AbilityFactory_Fetch {
 			}
 			if (abCost.getDiscardCost()) 	return false;
 			
-			if (abCost.getSubCounter()) 	return false;
+			if (abCost.getSubCounter()) 	return true; // only card that uses it is Fertilid
 			
 		}
 		
@@ -394,6 +396,8 @@ public class AbilityFactory_Fetch {
 		// Retrieve either this card, or target Cards in Graveyard
 		Ability_Cost abCost = af.getAbCost();
 		Card source = af.getHostCard();
+		HashMap<String,String> params = af.getMapParams();
+        String destination = params.get("Destination");
 		
 		if (abCost != null){
 			// AI currently disabled for these costs
@@ -420,8 +424,6 @@ public class AbilityFactory_Fetch {
 		Target tgt = af.getAbTgt();
 		if(tgt != null) {
 			// AI Targeting 
-			HashMap<String,String> params = af.getMapParams();
-	        String destination = params.get("Destination");
 			CardList list = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
 			list = list.getValidCards(tgt.getValidTgts(), AllZone.ComputerPlayer);
 			Card c = new Card();

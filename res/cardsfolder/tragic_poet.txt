@@ -1,0 +1,10 @@
+Name:Tragic Poet
+ManaCost:U
+Types:Creature Human
+Text:no text
+PT:1/1
+A:AB$Retrieve|Cost$T Sac<1/CARDNAME>|TgtPrompt$Choose target enchantment card in your graveyard|ValidTgts$Enchantment|Destination$Hand|SpellDescription$Return target enchantment card from your graveyard to your hand.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tragic_poet.jpg
+End
