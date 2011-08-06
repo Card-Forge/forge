@@ -1,0 +1,6 @@
+Name:Unearthly Blizzard
+ManaCost:2 R
+Types:Sorcery Arcane
+Text:no text
+A:SP$Pump|Cost$2 R|ValidTgts$Creature|TargetMin$1|TargetMax$3|KW$CARDNAME can't block.|TgtPrompt$Select target creature.|SpellDescription$Up to three target creatures can't block this turn.
+End
