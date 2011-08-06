@@ -376,7 +376,7 @@ public class CardFactoryUtil {
         Card biggest = null;
         
         //if flying creature is small, get biggest non-flying creature
-        if(all.size() != 0 && (biggest == null || biggest.getNetAttack() < 3)) {
+        if(all.size() != 0) {
             biggest = all.get(0);
             
             for(int i = 0; i < all.size(); i++)

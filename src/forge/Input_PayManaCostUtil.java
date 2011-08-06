@@ -111,7 +111,7 @@ public class Input_PayManaCostUtil
 		         			manaCost = AllZone.ManaPool.subtractMana(manaCost, chosen);
 		         		} 
 		         		else {
-		         			if(manaCost.toString().trim() != "") {
+		         			if(!manaCost.toString().trim().equals("")) {
 			         			if(manaCost.toString().contains("B"))  {
 			         				manaCost.payMana("B");
 			         				if(AllZone.ManaPool.isEmpty()) {
@@ -152,7 +152,7 @@ public class Input_PayManaCostUtil
 	         			manaCost = AllZone.ManaPool.subtractMana(manaCost, chosen);
 	         		} else { 
 	         			
-	         			if(manaCost.toString().trim() != "") {
+	         			if(!manaCost.toString().trim().equals("")) {
 	         			if(manaCost.toString().contains("U"))  {
 	         				manaCost.payMana("U");
 	         				if(AllZone.ManaPool.isEmpty()) {

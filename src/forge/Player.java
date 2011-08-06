@@ -391,8 +391,10 @@ public abstract class Player extends MyObservable{
 	
 	@Override
 	public boolean equals(Object o) {
-		Player p1 = (Player)o;
-		return p1.getName().equals(name);
+		if(o instanceof Player){
+			Player p1 = (Player)o;
+			return p1.getName().equals(name);
+		} else return false;
 	}
 	
 	@Override

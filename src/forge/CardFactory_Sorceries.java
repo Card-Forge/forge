@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Vector;
+import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 import com.esotericsoftware.minlog.Log;
@@ -7325,12 +7326,12 @@ public class CardFactory_Sorceries {
                         }
                         String maxKey = "";
                         int maxCount = -1;
-                        for(String type:countInGraveyard.keySet())
+                        for(Entry<String, Integer> entry:countInGraveyard.entrySet())
                         {
-                            if(countInGraveyard.get(type) > maxCount)
+                            if(entry.getValue() > maxCount)
                             {
-                                maxKey = type;
-                                maxCount = countInGraveyard.get(type);
+                                maxKey = entry.getKey();
+                                maxCount = entry.getValue();
                             }
                         }
                         if(!maxKey.equals("")) input[1] = maxKey;
