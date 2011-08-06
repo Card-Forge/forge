@@ -2722,7 +2722,9 @@ public class CardFactory implements NewConstants {
          }//spDestroyTgt
         */
         
+        
         // Generic destroy target ___ activated ability
+        /* Converted cards to AF_AB$Destroy
         if (hasKeyword(card, "abDestroyTgtV") != -1)
         {
         	int n = hasKeyword(card, "abDestroyTgtV");
@@ -2860,7 +2862,8 @@ public class CardFactory implements NewConstants {
         	
         	card.addSpellAbility(AbDstryTgt);
         	card.setSVar("PlayMain1", "TRUE");
-        }
+        }// abDestroyTgt
+        */
 
         
         // Generic enters the battlefield destroy target
