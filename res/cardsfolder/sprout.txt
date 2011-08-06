@@ -1,7 +1,8 @@
 Name:Sprout
 ManaCost:G
 Types:Instant
-Text:no text
+Text:Put a 1/1 green Saproling creature token onto the battlefield.
+K:spMakeToken<>1<>Saproling<>G 1 1 Saproling<>Controller<>G<>Creature;Saproling<>1<>1<>None
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sprout.jpg
 End
