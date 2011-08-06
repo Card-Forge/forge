@@ -253,6 +253,13 @@ public interface NewConstants {
                 public static final String BUTTON = "%s/Display/concede/button";
                 public static final String MENU   = "%s/Display/concede/menu";
             }
+            
+            public static final String MANAGEN = "%s/Display/managen";
+            
+            public static interface MANAGEN {
+                public static final String BUTTON = "%s/Display/managen/button";
+                public static final String MENU   = "%s/Display/managen/menu";
+            }
         }
         
         public static interface Gui_DownloadPictures {

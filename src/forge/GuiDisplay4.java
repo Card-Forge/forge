@@ -200,8 +200,15 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
             Action viewAIHand = new ZoneAction(AllZone.Computer_Hand, COMPUTER_HAND.BASE);
             Action viewAILibrary = new ZoneAction(AllZone.Computer_Library, COMPUTER_LIBRARY.BASE);
             Action viewHumanLibrary = new ZoneAction(AllZone.Human_Library, HUMAN_LIBRARY.BASE);
+            ForgeAction generateMana = new ForgeAction(MANAGEN) {
+				private static final long serialVersionUID = 7171104690016706405L;
 
-            Object[] objDev = { canLoseByDecking, viewAIHand, viewAILibrary, viewHumanLibrary };
+				public void actionPerformed(ActionEvent arg0) {
+					GuiDisplayUtil.devModeGenerateMana();
+				}
+			};
+
+            Object[] objDev = { GuiDisplay4.canLoseByDecking, viewAIHand, viewAILibrary, viewHumanLibrary, generateMana };
 	        for(Object o:objDev) {
 	        	if(o instanceof ForgeAction) 
 	        		devMenu.add(((ForgeAction) o).setupButton(new JMenuItem()));

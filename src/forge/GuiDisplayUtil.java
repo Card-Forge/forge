@@ -123,6 +123,17 @@ public class GuiDisplayUtil implements NewConstants {
         } else return BorderFactory.createLineBorder(Color.gray, 2);
     }
     
+    public static void devModeGenerateMana(){
+    	Card dummy = new Card();
+    	dummy.setOwner(AllZone.HumanPlayer);
+    	dummy.setController(AllZone.HumanPlayer);
+    	Ability_Mana abMana = new Ability_Mana(dummy, "0", "W U B G R", 10) {
+			private static final long serialVersionUID = -2164401486331182356L;
+
+		};
+		abMana.produceMana();
+    }
+    
     public static String formatCardType(Card card) {
         ArrayList<String> list = card.getType();
         StringBuilder sb = new StringBuilder();
