@@ -5962,7 +5962,7 @@ public class CardFactory_Creatures {
             ability.setStackDescription(sbStack.toString());
         }//*************** END ************ END ************************** 
 
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Vedalken Mastermind")) {
             //mana tap ability
@@ -5999,7 +5999,7 @@ public class CardFactory_Creatures {
             ability.setDescription("U, tap: Return target permanent you control to its owner's hand.");
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Helldozer")) {
@@ -6064,125 +6064,8 @@ public class CardFactory_Creatures {
             ability.setDescription("BBB, tap: Destroy target land. If that land is nonbasic, untap Helldozer.");
             ability.setBeforePayMana(CardFactoryUtil.input_targetType(ability, "Land"));
         }//*************** END ************ END **************************
-        
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Cao Cao, Lord of Wei")) {
-            //mana tap ability
-            final Ability_Tap ability = new Ability_Tap(card, "0") {
-                private static final long serialVersionUID = 6760838700101179614L;
-                
-                @Override
-                public void chooseTargetAI() {
-                    card.tap();
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    int hand = AllZone.Human_Hand.getCards().length;
-                    if((!CardFactoryUtil.AI_doesCreatureAttack(card)) && hand != 0) return true;
-                    
-                    return 2 <= hand;
-                }
-                
-                @Override
-                public void resolve() {
-                    Player player = card.getController().getOpponent();
-                    player.discard(2, this);
-                    
-                    //if(player.equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(2, this));
-                    //else {
-                     //   AllZone.GameAction.discardRandom(player, this);
-                      //  AllZone.GameAction.discardRandom(player, this);
-                    //}
-                }//resolve()
-                
-                @Override
-                public boolean canPlay() {
-                    Player opp = card.getController().getOpponent();
-                    
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName()).append(" - ").append(opp).append(" discards 2 cards");
-                    setStackDescription(sb.toString());
-                    
-                    String phase = AllZone.Phase.getPhase();
-                    Player activePlayer = AllZone.Phase.getPlayerTurn();
-                    
-                    return super.canPlay() && phase.equals(Constant.Phase.Main1)
-                            && card.getController().equals(activePlayer);
-                }
-            };//SpellAbility
-            
-            ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            ability.setDescription("tap: Target opponent discards two cards. Play this ability only during your turn, before the combat phase.");
-            ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
-            
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-        */
-        
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Gwendlyn Di Corci")) {
-            //mana tap ability
-            final Ability_Tap ability = new Ability_Tap(card, "0") {
-                
-                private static final long serialVersionUID = -4211234606012596777L;
-                
-                @Override
-                public void chooseTargetAI() {
-                    setTargetPlayer(AllZone.HumanPlayer);
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    int hand = AllZone.Human_Hand.getCards().length;
-                    return hand > 0;
-                }
-                
-                @Override
-                public void resolve() {
-                    Player player = getTargetPlayer();
-                    
-                    player.discardRandom(this);
-                    
-                }//resolve()
-                
-                @Override
-                public boolean canPlay() {
-                	
-                	StringBuilder sb = new StringBuilder();
-                	sb.append(card.getName()).append(" - ").append(getTargetPlayer()).append(" discards a card at random.");
-                	setStackDescription(sb.toString());
-                    
-                    Player activePlayer = AllZone.Phase.getPlayerTurn();
-                    
-                    return super.canPlay() && card.getController().equals(activePlayer);
-                }
-            };//SpellAbility
-            
-            Input input = new Input() {
-                private static final long serialVersionUID = 3312693459353844120L;
-                
-                @Override
-                public void showMessage() {
-                    //prevents this from running multiple times, which it is for some reason
-                    if(ability.getSourceCard().isUntapped()) {
-                        ability.getSourceCard().tap();
-                        stopSetNext(CardFactoryUtil.input_targetPlayer(ability));
-                    }
-                }
-            };
-            
-            ability.setDescription("Tap: Target player discards a card at random. Activate this ability only during your turn.");
-            ability.setBeforePayMana(input);
-            //ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
-            
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-        */
                
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Wayward Soul")) {
             //mana ability
@@ -6230,6 +6113,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
+        */
         
 
         //*************** START *********** START **************************
