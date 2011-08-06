@@ -4862,6 +4862,78 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Righteousness")) {
+            /*
+             * Target blocking creature gets +7/+7 until end of turn.
+             */
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 1767183461782940041L;
+
+				@Override
+                public boolean canPlayAI() {
+                    return getBlocker() != null;
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    setTargetCard(getBlocker());
+                }
+                
+                public Card getBlocker() {
+                    //target creature that is going to attack
+                    Combat blockers = ComputerUtil.getBlockers();
+                    CardList list = blockers.getAllBlockers();
+                    list.shuffle();
+                    if(list.size() != 0) return list.get(0);
+                    else return null;
+                }//getAttacker()
+                
+                @Override
+                public void resolve() {
+                	final Command eot2 = new Command() {
+                        private static final long serialVersionUID = 6180724472470740160L;
+                        
+                        public void execute() {
+                            Card c = getTargetCard();
+                            if(AllZone.GameAction.isCardInPlay(c)) {
+                                c.addTempAttackBoost(-7);
+                                c.addTempAttackBoost(-7);
+                            }
+                        }
+                    };
+                    Card c = getTargetCard();
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                        c.addTempAttackBoost(7);
+                        c.addTempDefenseBoost(7);
+                        
+                        AllZone.EndOfTurn.addUntil(eot2);
+                    }
+                    
+                }//resolve()
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+
+            
+            Input runtime = new Input() {
+                private static final long serialVersionUID = 8320178628066517937L;
+
+                @Override
+                public void showMessage() {
+                    CardList creatures = AllZoneUtil.getCreaturesInPlay();
+                    creatures = creatures.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return CardFactoryUtil.canTarget(card, c) && c.isBlocking();
+                        }
+                    });
+                    
+                    stopSetNext(CardFactoryUtil.input_targetSpecific(spell, creatures, "Select target blocking creature", true, false));
+                }
+            };//Input target
+            spell.setBeforePayMana(runtime);
+        }//*************** END ************ END **************************
+        
     	return card;
     }//getCard
 }

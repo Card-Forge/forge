@@ -1,0 +1,8 @@
+Name:Righteousness
+ManaCost:W
+Types:Instant
+Text:Target blocking creature gets +7/+7 until end of turn.
+#This can be converted to keyword spPumpTgt when/if it accepts Creature.blocking
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/righteousness.jpg
+End
