@@ -283,6 +283,13 @@ public class Ability_Cost {
 				returnCost || lifeCost) && hasNoXManaCost() && hasNoManaCost();
 	}
 	
+
+	public boolean isReusuableResource() {
+		return !(sacCost || exileCost || exileFromHandCost || tapXTypeCost || discardCost ||
+				returnCost || lifeCost);
+		// todo: add/sub counter? Maybe check if it's we're adding a positive counter, or removing a negative counter
+	}
+	
 	public String toString()
 	{
 		if (isAbility)
@@ -638,5 +645,4 @@ public class Ability_Cost {
 		
 		return sb.toString();
 	}
-
 }

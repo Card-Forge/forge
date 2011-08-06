@@ -90,18 +90,13 @@ public abstract class SpellAbility {
     //all Spell's and Abilities must override this method
     abstract public void resolve();
     
-    /*
-      public boolean canPlayAI()
-      {
-        return true;
-      }
-      public void chooseTargetAI()
-      {
-
-      }
-    */
     public boolean canPlayAI() {
         return true;
+    }
+    
+	// This should be overridden by ALL AFs
+    public boolean doTrigger(boolean mandatory){
+    	return false;
     }
     
     public void chooseTargetAI() {

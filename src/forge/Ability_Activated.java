@@ -45,9 +45,4 @@ abstract public class Ability_Activated extends SpellAbility implements java.io.
         
         return Cost_Payment.canPayAdditionalCosts(payCosts, this);
     }
-    
-	// This should be overridden by ALL AFs
-    public boolean doTrigger(boolean mandatory){
-    	return false;
-    }
 }

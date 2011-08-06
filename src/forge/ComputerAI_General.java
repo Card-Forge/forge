@@ -247,19 +247,13 @@ public class ComputerAI_General implements Computer {
     	if (AllZone.Stack.size() == 0){
     		sas = getOtherPhases();
     		
-    		if (sas.length > 0){
-    		// do things dependent on the phase, 
-    		
-    		// if beginCombat tap best attackers etc
-    		
-    		// if declareBlockers pump my guys to kill his guys or save my guys or regen my guys
-    		
-    		// if end of Human's turn, feel free to use tap/mana abilities that will untap next turn
-    		
-    		// if you don't or can't play anything
+    		boolean pass = (sas.length == 0);
+    		if (!pass){		// Each AF should check the phase individually
+    	        pass = ComputerUtil.playCards(sas);
     		}
-    		
-    		AllZone.Phase.passPriority();	
+    			
+    		if (pass)
+    			AllZone.Phase.passPriority();	
     		return;
     	}
     	
@@ -275,7 +269,9 @@ public class ComputerAI_General implements Computer {
     	sas = getOtherPhases();
     	
     	if (sas.length > 0){
-    		if (topSA.getTarget() != null){
+    		// each AF should check the Stack/Phase on it's own
+
+
     			//ArrayList<Object> targets = topSA.getTarget().getTargets();
 		    	// does it target me or something I own?
 		    	// can i protect it? can I counter it?
@@ -283,10 +279,6 @@ public class ComputerAI_General implements Computer {
 		    	// if i can't save it, can I activate an ability on that card in response? sacrifice etc?
 		    	
 		    	// does it target his stuff? can I kill it in response?
-	    	}
-    		else{
-    			// no target, figure out what type of spell it is and react according
-    		}
     	}
     	// if this hasn't been covered above, just PassPriority()
     	AllZone.Phase.passPriority();

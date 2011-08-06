@@ -221,7 +221,7 @@ public class TriggerHandler {
 		
 		HashMap<String,String> trigParams = regtrig.getMapParams();
 		final Player[] decider = new Player[1];
-		boolean isOptional = false;
+		final boolean isOptional = false;
 		
 		if(mode.equals(trigParams.get("Mode")))
 		{
@@ -759,7 +759,8 @@ public class TriggerHandler {
 					}
 					else
 					{
-						sa[0].canPlayAI();
+						final boolean mandatory = sa[0].getTarget().getMandatory();
+						sa[0].doTrigger(mandatory);
 						ComputerUtil.playNoStack(sa[0]);
 					}
 				}

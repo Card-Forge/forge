@@ -246,8 +246,8 @@ public class AbilityFactory_DealDamage {
 					restDamage = c.predictDamage(d,AF.getHostCard(),false);
 				else restDamage = pl.staticReplaceDamage(restDamage, AF.getHostCard(), false);
 				// will include creatures already dealt damage
-				return c.getKillDamage() <= restDamage && c.getShield() > 0 &&
-				!c.getKeyword().contains("Indestructible") && !(c.getSVar("SacMe").length() > 0);
+				return c.getKillDamage() <= restDamage && c.getShield() == 0 &&
+					!c.getKeyword().contains("Indestructible") && !(c.getSVar("SacMe").length() > 0);
 			}
 		});
 
@@ -258,6 +258,9 @@ public class AbilityFactory_DealDamage {
 			return targetCard;
 		}
 
+		if (!mandatory)
+			return null;
+		
 		if(hPlay.size() > 0) {
 			if (pl.isHuman())
 				targetCard = CardFactoryUtil.AI_getBestCreature(hPlay);
@@ -303,7 +306,13 @@ public class AbilityFactory_DealDamage {
 				
 				// When giving priority to targeting Creatures for mandatory triggers
 				// feel free to add the Human after we run out of good targets
-				if (mandatory && tgt.addTarget(AllZone.HumanPlayer))
+				
+				// todo: add check here if card is about to die from something on the stack
+				// or from taking combat damage
+				boolean freePing = mandatory || (saMe.getPayCosts().isReusuableResource() && 
+						AllZone.Phase.is(Constant.Phase.End_Of_Turn, AllZone.HumanPlayer));
+
+				if (freePing && tgt.addTarget(AllZone.HumanPlayer))
 					continue;
 			}
 

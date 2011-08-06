@@ -1928,11 +1928,6 @@ public class CardFactory_Sorceries {
                 private static final long serialVersionUID = -7652317332073733242L;
                 
                 @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
                 public void resolve() {
                     Player player = card.getController();
                     if(player.equals(AllZone.HumanPlayer)) humanResolve();
