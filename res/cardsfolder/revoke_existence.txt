@@ -1,0 +1,8 @@
+Name:Revoke Existence
+ManaCost:1 W
+Types:Sorcery
+Text:Exile target artifact or enchantment.
+K:spBounceTgt:Artifact,Enchantment:Exile
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/revoke_existence.jpg
+End
