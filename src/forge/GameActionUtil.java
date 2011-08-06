@@ -11060,12 +11060,7 @@ public class GameActionUtil {
 		private static final long serialVersionUID = 8076177362922156784L;
 
 		public void execute() {
-			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Champion's Drake");
-
+			CardList list = AllZoneUtil.getCardsInPlay("Champion's Drake");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -11081,18 +11076,13 @@ public class GameActionUtil {
 		}// execute()
 
 		private boolean hasThreeLevels(Card c) {
-			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
-
-			CardList levels = new CardList();
-			levels.addAll(play.getCards());
-
+			CardList levels = AllZoneUtil.getPlayerCardsInPlay(c.getController());
 			levels = levels.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
 					return c.isCreature() && c.getCounters(Counters.LEVEL) >= 3;
 				}
 			});
-			if(levels.size() > 0) return true;
-			else return false;
+			return levels.size() > 0;
 		}
 	};
 
