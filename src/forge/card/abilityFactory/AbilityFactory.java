@@ -594,6 +594,15 @@ public class AbilityFactory {
 				SA = AbilityFactory_EndGameCondition.createDrawbackLosesGame(this);
 		}
 		
+		if (API.equals("RevealHand")){
+			if (isAb)
+				SA = AbilityFactory_ZoneAffecting.createAbilityRevealHand(this);
+			else if (isSp)
+				SA = AbilityFactory_ZoneAffecting.createSpellRevealHand(this);
+			else if (isDb)
+				SA = AbilityFactory_ZoneAffecting.createDrawbackRevealHand(this);
+		}
+		
 		if (SA == null)
 			throw new RuntimeException("AbilityFactory : SpellAbility was not created for "+hostCard.getName()+". Looking for API: "+API);
 

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
@@ -691,8 +693,6 @@ public class AbilityFactory_ZoneAffecting {
 	//				-Hand
 	//DiscardValid - a ValidCards syntax for acceptable cards to discard
 	//UnlessType - a ValidCards expression for "discard x unless you discard a ..."
-	//TODO - possibly add an option for EachPlayer$True - Each player discards a card (Rix Maadi, Slivers, 
-	//			Delirium Skeins, Strong Arm Tactics, Wheel of Fortune, Wheel of Fate
 	
 	//Examples:
 	//A:SP$Discard | Cost$B | Tgt$TgtP | NumCards$2 | Mode$Random | SpellDescription$<...>
@@ -1454,4 +1454,250 @@ public class AbilityFactory_ZoneAffecting {
 		}
 		
 	}
-}
+	
+	//**********************************************************************
+	//******************************* RevealHand ***************************
+	//**********************************************************************
+
+	public static SpellAbility createAbilityRevealHand(final AbilityFactory af) {
+		final SpellAbility abRevealHand = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+			private static final long serialVersionUID = 2785654059206102004L;
+
+			@Override
+			public String getStackDescription() {
+				return revealHandStackDescription(af, this);
+			}
+
+			@Override
+			public boolean canPlayAI() {
+				return revealHandCanPlayAI(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				revealHandResolve(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return revealHandTrigger(af, this, mandatory);
+			}
+
+		};
+		return abRevealHand;
+	}
+
+	public static SpellAbility createSpellRevealHand(final AbilityFactory af) {
+		final SpellAbility spRevealHand = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+			private static final long serialVersionUID = -668943560971904791L;
+
+			@Override
+			public String getStackDescription() {
+				return revealHandStackDescription(af, this);
+			}
+
+			@Override
+			public boolean canPlayAI() {
+				return revealHandCanPlayAI(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				revealHandResolve(af, this);
+			}
+
+		};
+		return spRevealHand;
+	}
+
+	public static SpellAbility createDrawbackRevealHand(final AbilityFactory af) {
+		final SpellAbility dbRevealHand = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+			private static final long serialVersionUID = -6079668770576878801L;
+
+			@Override
+			public String getStackDescription(){
+				// when getStackDesc is called, just build exactly what is happening
+				return revealHandStackDescription(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				revealHandResolve(af, this);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return revealHandTargetAI(af, this, false, false);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return revealHandTrigger(af, this, mandatory);
+			}
+
+		};
+		return dbRevealHand;
+	}
+
+	private static String revealHandStackDescription(AbilityFactory af, SpellAbility sa){
+		StringBuilder sb = new StringBuilder();
+
+		if (!(sa instanceof Ability_Sub))
+			sb.append(sa.getSourceCard().getName()).append(" - ");
+		else
+			sb.append(" ");
+
+		ArrayList<Player> tgtPlayers;
+
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtPlayers = tgt.getTargetPlayers();
+		else
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+
+		sb.append(sa.getActivatingPlayer()).append(" looks at ");
+
+		if (tgtPlayers.size() > 0){
+			for(Player p : tgtPlayers)
+				sb.append(p.toString()).append("'s ");
+		}
+		else {
+			sb.append("Error - no target players for RevealHand. ");
+		}
+		sb.append("hand.");
+
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null){
+			sb.append(abSub.getStackDescription());
+		}
+
+		return sb.toString();
+	}
+
+	private static boolean revealHandCanPlayAI(final AbilityFactory af, SpellAbility sa){
+		// AI cannot use this properly until he can use SAs during Humans turn
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+
+		Card source = sa.getSourceCard();
+		Cost abCost = af.getAbCost();
+
+		if (abCost != null){
+			// AI currently disabled for these costs
+			if (abCost.getSacCost()){
+				return false;
+			}
+			if (abCost.getLifeCost()){
+				if (AllZone.ComputerPlayer.getLife() - abCost.getLifeAmount() < 4)
+					return false;
+			}
+			if (abCost.getDiscardCost()) 	return false;
+
+			if (abCost.getSubCounter()) {
+				if (abCost.getCounterType().equals(Counters.P1P1)) return false; // Other counters should be used 
+			}
+
+		}
+
+		boolean bFlag = revealHandTargetAI(af, sa, true, false);
+
+		if (!bFlag)
+			return false;
+
+		Random r = MyRandom.random;
+		boolean randomReturn = r.nextFloat() <= Math.pow(.667, source.getAbilityUsed()+1);
+
+		if (AbilityFactory.playReusable(sa))
+			randomReturn = true;
+
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			randomReturn &= subAb.chkAI_Drawback();
+		return randomReturn;
+	}
+
+	private static boolean revealHandTargetAI(AbilityFactory af, SpellAbility sa, boolean primarySA, boolean mandatory) {
+		Target tgt = af.getAbTgt();
+		Card source = sa.getSourceCard();
+
+		int humanHandSize = AllZoneUtil.getPlayerHand(AllZone.HumanPlayer).size();
+
+		if (tgt != null) {
+			// ability is targeted
+			tgt.resetTargets();
+
+			boolean canTgtHuman = AllZone.HumanPlayer.canTarget(source);
+
+			if (!canTgtHuman || humanHandSize == 0)
+				return false;
+			else
+				tgt.addTarget(AllZone.HumanPlayer);
+		}
+		else {
+			//if it's just defined, no big deal
+		}
+
+		return true;
+	}// revealHandTargetAI()
+
+	private static boolean revealHandTrigger(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		if (!ComputerUtil.canPayCost(sa))	// If there is a cost payment
+			return false;
+
+		if (!revealHandTargetAI(af, sa, false, mandatory))
+			return false;
+
+		// check SubAbilities DoTrigger?
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null) {
+			return abSub.doTrigger(mandatory);
+		}
+
+		return true;
+	}
+    
+    private static void revealHandResolve(final AbilityFactory af, final SpellAbility sa){
+    	HashMap<String,String> params = af.getMapParams();
+    	Card source = sa.getSourceCard();
+
+    	ArrayList<Player> tgtPlayers;
+
+    	Target tgt = af.getAbTgt();
+    	if (tgt != null)
+    		tgtPlayers = tgt.getTargetPlayers();
+    	else
+    		tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+
+    	for(Player p : tgtPlayers) {
+    		if (tgt == null || p.canTarget(af.getHostCard())){
+    			CardList hand = AllZoneUtil.getPlayerHand(p);
+    			if(sa.getActivatingPlayer().isHuman()) {
+    				if (hand.size() > 0) {
+    					GuiUtils.getChoice(p+"'s hand", hand.toArray());
+    				} else {
+    					StringBuilder sb = new StringBuilder();
+    					sb.append(p).append("'s hand is empty!");
+    					javax.swing.JOptionPane.showMessageDialog(null, sb.toString(), p+"'s hand", JOptionPane.INFORMATION_MESSAGE);
+    				}
+    			}
+    			else {
+    				//reveal to Computer (when computer can keep track of seen cards...)
+    			}
+
+    		}
+    	}
+
+    	if (af.hasSubAbility()){
+    		Ability_Sub abSub = sa.getSubAbility();
+    		if (abSub != null){
+    			abSub.resolve();
+    		}
+    		else{
+    			String DrawBack = params.get("SubAbility");
+    			if (af.hasSubAbility())
+    				CardFactoryUtil.doDrawBack(DrawBack, 0, source.getController(), source.getController().getOpponent(), tgtPlayers.get(0), source, null, sa);
+    		}
+    	}
+    }
+	
+}//end class AbilityFactory_ZoneAffecting
