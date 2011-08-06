@@ -1262,6 +1262,7 @@ res/cardsfolder/dark_privilege.txt svneol=native#text/plain
 res/cardsfolder/dark_ritual.txt -text svneol=native#text/plain
 res/cardsfolder/dark_withering.txt -text svneol=native#text/plain
 res/cardsfolder/darkblast.txt -text svneol=native#text/plain
+res/cardsfolder/darkheart_sliver.txt -text svneol=native#text/plain
 res/cardsfolder/darkling_stalker.txt -text svneol=native#text/plain
 res/cardsfolder/darklit_gargoyle.txt -text svneol=native#text/plain
 res/cardsfolder/darkness.txt -text svneol=native#text/plain
