@@ -624,6 +624,7 @@ Hedron Rover
 Helionaut
 Hematite Golem
 Henchfiend of Ukor
+Herd Gnarr
 Hero's Resolve
 High Tide
 Highland Berserker
@@ -1585,6 +1586,7 @@ Winnower Patrol
 Wirewood Elf
 Wirewood Guardian
 Wirewood Pride
+Wirewood Savage
 Wistful Thinking
 Wolverine Pack
 Wood Elves
@@ -1603,6 +1605,7 @@ Wu Warship
 Wyluli Wolf
 Yavimaya Ancients
 Yavimaya Barbarian
+Yavimaya Elder
 Yavimaya Scion
 Yavimaya Wurm
 Yellow Scarves Cavalry

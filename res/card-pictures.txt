@@ -38,6 +38,11 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+yavimaya_elder.jpg		http://www.wizards.com/global/images/magic/general/yavimaya_elder.jpg
+vinelasher_kudzu.jpg			http://www.wizards.com/global/images/magic/general/vinelasher_kudzu.jpg
+algae_gharial.jpg		http://www.wizards.com/global/images/magic/general/algae_gharial.jpg	
+herd_gnarr.jpg			http://www.wizards.com/global/images/magic/general/herd_gnarr.jpg
+wirewood_savage.jpg		http://www.wizards.com/global/images/magic/general/wirewood_savage.jpg
 scavenger_drake.jpg		http://www.wizards.com/global/images/magic/general/scavenger_drake.jpg
 glaze_fiend.jpg			http://www.wizards.com/global/images/magic/general/glaze_fiend.jpg
 lilianas_specter.jpg		http://www.wizards.com/global/images/magic/general/lilianas_specter.jpg	

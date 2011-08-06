@@ -1,3 +1,32 @@
+Vinelasher Kudzu
+1 G
+Creature Plant
+no text
+1/1
+WheneverKeyword:EntersBattleField:Type/Land:Play:+1+1 Counters/1:Self:ASAP:No_Condition:Initiator - OwnedByController:Whenever a land enters the battlefield under your control, put a +1/+1 counter on Vinelasher Kudzu.
+
+Algae Gharial
+3 G
+Creature Crocodile
+no text
+1/1
+Shroud
+WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - Other than Self:Whenever another creature is put into a graveyard from the battlefield, you may put a +1/+1 counter on Algae Gharial.
+
+Herd Gnarr
+2 G
+Creature Beast
+no text
+2/2
+WheneverKeyword:EntersBattleField:Type/Creature:Play:StatsPumpEOT/2/2:Self:ASAP:No_Condition:Initiator - OwnedByController!Initiator - Other than Self:Whenever another creature enters the battlefield under your control, Herd Gnarr gets +2/+2 until end of turn.
+
+Wirewood Savage
+2 G
+Creature Elf
+no text
+2/2
+WheneverKeyword:EntersBattleField:Type/Beast:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever a Beast enters the battlefield, you may draw a card.
+
 Yavimaya Elder
 1 G G
 Creature Human Druid
