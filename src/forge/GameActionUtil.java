@@ -4888,6 +4888,9 @@ public class GameActionUtil
 		Essence_Warden.execute();
 		Soul_Warden.execute();
 		Wirewood_Hivemaster.execute();
+		
+		Sacrifice_NoIslands.execute();
+		
 		//Angelic_Chorus.execute();
 		
 		/*
@@ -8792,6 +8795,99 @@ public class GameActionUtil
 		
 	};//Elvish_Champion_Other
 	
+	public static Command Goblin_Chieftain_Pump = new Command()
+	{
+
+		private static final long serialVersionUID = 395882142255572162L;
+		CardList gloriousAnthemList = new CardList();
+
+		public void execute()
+		{
+
+			CardList cList = gloriousAnthemList;
+			Card c;
+
+			for (int i = 0; i < cList.size(); i++)
+			{
+				c = cList.get(i);
+				c.addSemiPermanentAttackBoost(-1);
+				c.addSemiPermanentDefenseBoost(-1);
+				c.removeExtrinsicKeyword("Haste");
+			}
+			cList.clear();
+			PlayerZone[] zone = getZone("Goblin Chieftain");
+
+			// for each zone found add +1/+1 to each card
+			for (int outer = 0; outer < zone.length; outer++)
+			{
+				CardList creature = new CardList();
+				creature.addAll(AllZone.Human_Play.getCards());
+				creature.addAll(AllZone.Computer_Play.getCards());
+				creature = creature.getType("Goblin");
+
+				for (int i = 0; i < creature.size(); i++)
+				{
+					c = creature.get(i);
+					if (c.isCreature()
+							&& !c.getName().equals("Goblin Chieftain"))
+					{
+						c.addSemiPermanentAttackBoost(1);
+						c.addSemiPermanentDefenseBoost(1);
+						c.addExtrinsicKeyword("Haste");
+						gloriousAnthemList.add(c);
+					}
+
+				} // for
+			} // for
+
+		}// execute()
+
+	};//Goblin_Chieftain_Pump
+	
+	public static Command Goblin_Chieftain_Other = new Command()
+	{
+
+		private static final long serialVersionUID = -3107498901233064819L;
+		int otherLords=0;
+		
+		private int countOtherLords()
+		{
+			PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+			PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+			CardList lords = new CardList();
+			lords.addAll(hPlay.getCards());
+			lords.addAll(cPlay.getCards());
+			lords = lords.getName("Goblin Chieftain");
+			return lords.size()-1;
+
+		}
+
+		public void execute()
+		{
+
+			
+			CardList creature = new CardList();
+			creature.addAll(AllZone.Human_Play.getCards());
+			creature.addAll(AllZone.Computer_Play.getCards());
+			
+			creature = creature.getName("Goblin Chieftain");
+
+			for (int i = 0; i < creature.size(); i++)
+			{
+				Card c = creature.get(i);
+				otherLords = countOtherLords();
+				c.setOtherAttackBoost(otherLords);
+				c.setOtherDefenseBoost(otherLords);
+				if (!c.getExtrinsicKeyword().contains("Haste") && otherLords > 0)
+					c.addExtrinsicKeyword("Haste");
+				//else if (c.getExtrinsicKeyword().contains("Mountainwalk") && otherLords == 0 )
+					
+
+			}// for inner
+		}// execute()
+		
+	};//Goblin_Chieftain_Other
+	
 	
 	public static Command Goblin_King_Pump = new Command()
 	{
@@ -8886,6 +8982,90 @@ public class GameActionUtil
 		
 	};//Goblin_King_Other
 	
+	public static Command Merfolk_Sovereign_Pump = new Command()
+	{
+
+		private static final long serialVersionUID = -8250416279767429585L;
+		CardList gloriousAnthemList = new CardList();
+
+		public void execute()
+		{
+
+			CardList cList = gloriousAnthemList;
+			Card c;
+
+			for (int i = 0; i < cList.size(); i++)
+			{
+				c = cList.get(i);
+				c.addSemiPermanentAttackBoost(-1);
+				c.addSemiPermanentDefenseBoost(-1);
+			}
+			cList.clear();
+			PlayerZone[] zone = getZone("Merfolk Sovereign");
+
+			// for each zone found add +1/+1 to each card
+			for (int outer = 0; outer < zone.length; outer++)
+			{
+				CardList creature = new CardList();
+				creature.addAll(AllZone.Human_Play.getCards());
+				creature.addAll(AllZone.Computer_Play.getCards());
+				creature = creature.getType("Merfolk");
+
+				for (int i = 0; i < creature.size(); i++)
+				{
+					c = creature.get(i);
+					if (c.isCreature()
+							&& !c.getName().equals("Merfolk Sovereign"))
+					{
+						c.addSemiPermanentAttackBoost(1);
+						c.addSemiPermanentDefenseBoost(1);
+						gloriousAnthemList.add(c);
+					}
+
+				} // for
+			} // for
+
+		}// execute()
+
+	};//Merfolk_Sovereign_Pump 
+	
+	public static Command Merfolk_Sovereign_Other = new Command()
+	{
+		private static final long serialVersionUID = -179394803961615332L;
+		int otherLords=0;
+		
+		private int countOtherLords()
+		{
+			PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+			PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+			CardList lords = new CardList();
+			lords.addAll(hPlay.getCards());
+			lords.addAll(cPlay.getCards());
+			lords = lords.getName("Merfolk Sovereign");
+			return lords.size()-1;
+
+		}
+
+		public void execute()
+		{
+
+			
+			CardList creature = new CardList();
+			creature.addAll(AllZone.Human_Play.getCards());
+			creature.addAll(AllZone.Computer_Play.getCards());
+			
+			creature = creature.getName("Merfolk Sovereign");
+
+			for (int i = 0; i < creature.size(); i++)
+			{
+				Card c = creature.get(i);
+				otherLords = countOtherLords();
+				c.setOtherAttackBoost(otherLords);
+				c.setOtherDefenseBoost(otherLords);
+			}// for inner
+		}// execute()
+		
+	};//Merfolk_Sovereign_Other
 	
 	public static Command Lord_of_Atlantis_Pump = new Command()
 	{
@@ -9373,6 +9553,46 @@ public class GameActionUtil
 		}
 
 		
+	};
+	
+	public static Command Sacrifice_NoIslands = new Command()
+	{
+		
+		private static final long serialVersionUID = 8064452222949253952L;
+		int islands = 0;
+		public void execute()
+		{
+			CardList creature = new CardList();
+			creature.addAll(AllZone.Human_Play.getCards());
+			creature.addAll(AllZone.Computer_Play.getCards());
+			
+			creature = creature.filter(new CardListFilter()
+			{
+				public boolean addCard(Card c) {
+					return c.getKeyword().contains("When you control no Islands, sacrifice this creature");
+				}
+			});
+			
+			for (int i = 0; i < creature.size(); i++)
+			{
+				Card c = creature.get(i);
+				islands = countIslands(c);
+				if (islands == 0)
+				{
+					AllZone.GameAction.sacrifice(c);
+				}
+			}
+				
+		}//execute()
+		
+		private int countIslands(Card c)
+		{
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+			CardList islands = new CardList(play.getCards());
+			islands = islands.getType("Island");
+			return islands.size();
+		}
+
 	};
 	
 	public static Command Zuberi = new Command()
@@ -11344,8 +11564,12 @@ public class GameActionUtil
 		commands.put("Elvish_Champion_Other", Elvish_Champion_Other);
 		commands.put("Wizened_Cenn_Pump", Wizened_Cenn_Pump);
 		commands.put("Wizened_Cenn_Other", Wizened_Cenn_Other);
+		commands.put("Merfolk_Sovereign_Pump", Merfolk_Sovereign_Pump);
+		commands.put("Merfolk_Sovereign_Other", Merfolk_Sovereign_Other);
 		commands.put("Lord_of_Atlantis_Pump", Lord_of_Atlantis_Pump);
 		commands.put("Lord_of_Atlantis_Other", Lord_of_Atlantis_Other);
+		commands.put("Goblin_Chieftain_Pump", Goblin_Chieftain_Pump);
+		commands.put("Goblin_Chieftain_Other", Goblin_Chieftain_Other);
 		commands.put("Goblin_King_Pump", Goblin_King_Pump);
 		commands.put("Goblin_King_Other", Goblin_King_Other);
 		commands.put("Field_Marshal_Pump", Field_Marshal_Pump);

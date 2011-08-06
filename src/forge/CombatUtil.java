@@ -158,6 +158,12 @@ public class CombatUtil
     		!CardUtil.getColors(blocker).contains(Constant.Color.Red))
     		return false;
     }
+    
+    if (attacker.getName().equals("Manta Ray"))
+    {
+    	if (!CardUtil.getColors(blocker).contains(Constant.Color.Blue))
+    		return false;
+    }
     /*
     if(attacker.getKeyword().contains("Flying"))
       return blocker.getKeyword().contains("Flying") ||
@@ -196,6 +202,18 @@ public class CombatUtil
 			moatPrevented = true;
 		}
 	}
+	
+	PlayerZone play = AllZone.getZone(Constant.Zone.Play,AllZone.GameAction.getOpponent(c.getController()));
+	CardList list = new CardList(play.getCards());
+	CardList temp = new CardList();
+	
+	if (c.getKeyword().contains("This creature can't attack unless defending player controls an Island"))
+	{
+		temp = list.getType("Island");
+		if (temp.isEmpty())
+			return false;
+	}
+	
     if(c.isTapped() || c.hasSickness() || c.getKeyword().contains("Defender") || moatPrevented || oppControlsBlazingArchon(c)
       || c.getKeyword().contains("This creature can't attack") || c.getKeyword().contains("This creature can't attack or block") )
       return false;

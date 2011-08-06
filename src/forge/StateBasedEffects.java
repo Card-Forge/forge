@@ -65,7 +65,9 @@ public class StateBasedEffects
 		cardToEffectsList.put("Privileged Position", new String[] {"Privileged_Position", "Privileged_Position_Other"});
 		cardToEffectsList.put("Elvish Archdruid", new String[] {"Elvish_Archdruid_Pump", "Elvish_Archdruid_Other"});
 		cardToEffectsList.put("Wizened Cenn", new String[] {"Wizened_Cenn_Pump", "Wizened_Cenn_Other"});
+		cardToEffectsList.put("Goblin Chieftain", new String[] {"Goblin_Chieftain_Pump", "Goblin_Chieftain_Other"});
 		cardToEffectsList.put("Goblin King", new String[] {"Goblin_King_Pump", "Goblin_King_Other"});
+		cardToEffectsList.put("Merfolk Sovereign", new String[] {"Merfolk_Sovereign_Pump", "Merfolk_Sovereign_Other"});
 		cardToEffectsList.put("Lord of Atlantis", new String[] {"Lord_of_Atlantis_Pump","Lord_of_Atlantis_Other"});
 		cardToEffectsList.put("Elvish Champion", new String[] {"Elvish_Champion_Pump","Elvish_Champion_Other"});
 		cardToEffectsList.put("Field Marshal", new String[] {"Field_Marshal_Pump", "Field_Marshal_Other"});
@@ -185,7 +187,7 @@ public class StateBasedEffects
 		for (int i=0;i<cards.size();i++)
 		{
 			Card c = cards.get(i);
-			if (cardToEffectsList.containsKey(c.getName()))
+			if (cardToEffectsList.containsKey(c.getName()) )
 			{
 				String[] effects = getCardToEffectsList().get(c.getName());
 				for (String effect : effects) {

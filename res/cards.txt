@@ -1,3 +1,155 @@
+Sea Monster
+4 U U
+Creature Serpent
+no text
+6/6
+This creature can't attack unless defending player controls an Island
+
+Red Cliffs Armada
+4 U
+Creature Human Soldier
+no text
+5/4
+This creature can't attack unless defending player controls an Island
+
+Manta Ray
+1 U U
+Creature Fish
+Manta Ray can't be blocked except by blue creatures.
+3/3
+This creature can't attack unless defending player controls an Island
+When you control no Islands, sacrifice this creature
+
+Ethereal Whiskergill
+3 U
+Creature Elemental
+no text
+4/3
+This creature can't attack unless defending player controls an Island
+Flying
+
+Armored Galleon
+4 U
+Creature Human Pirate
+no text
+5/4
+This creature can't attack unless defending player controls an Island
+
+Deep-Sea Serpent
+4 U U
+Creature Serpent
+no text
+5/5
+This creature can't attack unless defending player controls an Island
+
+Sea Serpent
+5 U
+Creature Serpent
+no text
+5/5
+This creature can't attack unless defending player controls an Island
+When you control no Islands, sacrifice this creature
+
+Slipstream Eel
+5 U U
+Creature Fish Beast
+no text
+6/6
+This creature can't attack unless defending player controls an Island
+Cycling:1 U
+
+Slipstream Serpent
+7 U
+Creature Serpent
+no text
+6/6
+Morph:5 U
+This creature can't attack unless defending player controls an Island
+When you control no Islands, sacrifice this creature
+
+Steam Frigate
+2 U
+Creature Human Pirate
+no text
+3/3
+This creature can't attack unless defending player controls an Island
+
+Wu Warship
+2 U
+Creature Human Soldier
+no text
+3/3
+This creature can't attack unless defending player controls an Island
+
+Goblin Chieftain
+1 R R
+Creature Goblin
+Haste Other Goblin creatures you control get +1/+1 and have haste.
+2/2
+
+Dwarven Pony
+R
+Creature Horse
+no text
+1/1
+
+Fleeting Image
+2 U
+Creature Illusion
+no text
+2/1
+Flying
+
+Dandan
+U U
+Creature Fish
+no text
+4/1
+This creature can't attack unless defending player controls an Island
+When you control no Islands, sacrifice this creature
+
+Pirate Ship
+4 U
+Creature Human Pirate
+no text
+4/3
+This creature can't attack unless defending player controls an Island
+When you control no Islands, sacrifice this creature
+
+Zhou You, Chief Commander
+5 U U
+Legendary Creature Human Soldier
+no text
+8/8
+This creature can't attack unless defending player controls an Island
+
+Vodalian Knights
+1 U U
+Creature Merfolk Knight
+no text
+2/2
+This creature can't attack unless defending player controls an Island
+When you control no Islands, sacrifice this creature
+KPump U:Flying
+
+Serendib Sorcerer
+1 U U
+Creature Human Wizard
+no text
+1/1
+
+Merfolk Sovereign
+1 U U
+Creature Merfolk
+Other Merfolk creatures you control get +1/+1.
+2/2
+
+Acolyte of Xathrid
+B
+Creature Human Cleric
+no text
+0/1
+
 Barren Glory
 4 W W
 Enchantment
@@ -10636,12 +10788,6 @@ Coral Merfolk
 Creature Merfolk
 no text
 2/1
-
-Dandan
-U U
-Creature Fish
-no text
-4/1
 
 Djinn of the Lamp
 5 U U

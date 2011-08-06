@@ -6036,7 +6036,7 @@ public class CardFactory_Creatures {
 
 
 	  //*************** START *********** START **************************
-	    else if(cardName.equals("Sorceress Queen"))
+	    else if(cardName.equals("Sorceress Queen") || cardName.equals("Serendib Sorcerer"))
 	    {
 	      final Ability_Tap ability = new Ability_Tap(card)
 	      {
@@ -6100,7 +6100,7 @@ public class CardFactory_Creatures {
 	        }//resolve()
 	      };//SpellAbility
 	      card.addSpellAbility(ability);
-	      ability.setDescription("tap: Target creature other than Sorceress Queen becomes 0/2 until end of turn.");
+	      ability.setDescription("tap: Target creature other than "+cardName +" becomes 0/2 until end of turn.");
 	      //this ability can target "this card" when it shouldn't be able to
 	      ability.setBeforePayMana(CardFactoryUtil.input_targetCreature_NoCost_TapAbility_NoTargetSelf(ability));
 	    }//*************** END ************ END **************************
@@ -6154,7 +6154,7 @@ public class CardFactory_Creatures {
 
 
 	    //*************** START *********** START **************************
-	    else if(cardName.equals("Mawcor"))
+	    else if(cardName.equals("Mawcor") || cardName.equals("Pirate Ship"))
 	    {
 	      final Ability_Tap ability = new Ability_Tap(card)
 	      {
@@ -6180,7 +6180,7 @@ public class CardFactory_Creatures {
 	        }//resolve()
 	      };//SpellAbility
 	      card.addSpellAbility(ability);
-	      ability.setDescription("tap: Mawcor deals 1 damage to target creature or player.");
+	      ability.setDescription("tap: "+ cardName +" deals 1 damage to target creature or player.");
 
 	      ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true));
 	    }//*************** END ************ END **************************
@@ -15850,7 +15850,241 @@ public class CardFactory_Creatures {
 		      };//Command
 		      card.addComesIntoPlayCommand(intoPlay);
 		    }//*************** END ************ END **************************
+	      
+	        //*************** START *********** START **************************
+            else if(cardName.equals("Acolyte of Xathrid"))
+            {
+               final SpellAbility ability = new Ability_Tap(card, "1 B")
+               {
+	               private static final long serialVersionUID = -560200331236516099L;
+	               public void resolve()
+	               {
+	                  String opponent = AllZone.GameAction.getOpponent(card.getController());
+	                  AllZone.GameAction.getPlayerLife(opponent).subtractLife(1);
+	               }
+	               public boolean canPlayAI()
+	               {
+	                  //computer should play ability if this creature doesn't attack
+	                  Combat c = ComputerUtil.getAttackers();
+	                  CardList list = new CardList(c.getAttackers());
+	
+	                  //could this creature attack?, if attacks, do not use ability
+	                  if (!list.contains(card)) {
+	                	  setTargetPlayer(Constant.Player.Human);
+	                	  return true;
+	                  }
+	                  return false;
+	               }
+              };//SpellAbility
+              card.addSpellAbility(ability);
+              ability.setDescription("1 B, tap: Target player loses 1 life.");
+              ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
+            }//*************** END ************ END **************************
+	      
+	      
+	    //*************** START *********** START **************************
+  	      else if(cardName.equals("Merfolk Sovereign"))
+  	      {
+  	        final Ability_Tap ability = new Ability_Tap(card, "0")
+  	        {
+			  private static final long serialVersionUID = -4663016921034366082L;
 
+			  public boolean canPlayAI() {return getMerfolk().size() != 0;}
+
+  	          public void chooseTargetAI()
+  	          {
+  	            AllZone.GameAction.sacrifice(card);
+
+  	            CardList merfolk = getMerfolk();
+  	            merfolk.shuffle();
+  	            setTargetCard(merfolk.get(0));
+  	          }
+
+  	          CardList getMerfolk()
+  	          {
+  	        	PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+  	            CardList merfolk = new CardList(play.getCards());
+  	            merfolk = merfolk.filter(new CardListFilter()
+  	            {
+  	              public boolean addCard(Card c)
+  	              {
+  	                return c.isCreature() && c.getType().contains("Merfolk") && CardFactoryUtil.AI_doesCreatureAttack(c) && 
+  	                !c.equals(card) && !c.getKeyword().contains("Unblockable");
+  	              }
+  	            });
+  	            return merfolk;
+  	          }//getFlying()
+
+  	          public void resolve()
+  	          {
+  	            if(AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(card, getTargetCard()) )
+  	            {
+  	              getTargetCard().addExtrinsicKeyword("Unblockable");
+  	            }
+
+  	            @SuppressWarnings("unused") // target
+  	  		    final Card[] target = {getTargetCard()};
+  	            AllZone.EndOfTurn.addUntil(new Command()
+  	            {
+				  private static final long serialVersionUID = -1884018112259809603L;
+
+				  public void execute()
+  	              {
+  	                if(AllZone.GameAction.isCardInPlay(getTargetCard()))
+  	                  getTargetCard().removeExtrinsicKeyword("Unblockable");
+  	              }
+  	            });
+  	          }//resolve()
+  	        };//SpellAbility
+
+  	        Input runtime = new Input()
+  	        {
+
+  	          private static final long serialVersionUID = 4512556936796509819L;
+
+			  public void showMessage()
+  	          {
+  	            CardList list = new CardList();
+  	            list.addAll(AllZone.Human_Play.getCards());
+  	            list.addAll(AllZone.Computer_Play.getCards());
+  	            list = list.filter(new CardListFilter()
+  	            {
+  	              public boolean addCard(Card c)
+  	              {
+  	                return c.isCreature() && c.getType().contains("Merfolk") && CardFactoryUtil.canTarget(card, c);
+  	              }
+  	            });
+
+  	            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list, "Select target Merfolk creature", Command.Blank,true));
+  	          }//showMessage()
+  	        };//Input
+
+  	        card.addSpellAbility(ability);
+  	        ability.setDescription("Tap: Target Merfolk creature is unblockable this turn.");
+  	        ability.setBeforePayMana(runtime);
+  	      }//*************** END ************ END **************************
+	      
+	      
+	    //*************** START *********** START **************************
+  	      else if(cardName.equals("Dwarven Pony"))
+  	      {
+  	        final Ability_Tap ability = new Ability_Tap(card, "1 R")
+  	        {
+			  private static final long serialVersionUID = 2626619319289064288L;
+
+			  public boolean canPlayAI() {return getDwarves().size() != 0;}
+
+  	          public void chooseTargetAI()
+  	          {
+  	            AllZone.GameAction.sacrifice(card);
+
+  	            CardList dwarves = getDwarves();
+  	            dwarves.shuffle();
+  	            setTargetCard(dwarves.get(0));
+  	          }
+
+  	          CardList getDwarves()
+  	          {
+  	        	PlayerZone hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+  	        	CardList mountains = new CardList(hplay.getCards());
+  	        	mountains = mountains.getType("Mountain");
+  	        	if (mountains.size() == 0)
+  	        		return mountains;
+  	        	
+  	        	
+  	        	PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+  	            CardList dwarves = new CardList(play.getCards());
+  	            dwarves = dwarves.filter(new CardListFilter()
+  	            {
+  	              public boolean addCard(Card c)
+  	              {
+  	                return c.isCreature() && c.getType().contains("Dwarf") && CardFactoryUtil.AI_doesCreatureAttack(c) && 
+  	                !c.equals(card) && !c.getKeyword().contains("Mountainwalk");
+  	              }
+  	            });
+  	            return dwarves;
+  	          }//getFlying()
+
+  	          public void resolve()
+  	          {
+  	            if(AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(card, getTargetCard()) )
+  	            {
+  	              getTargetCard().addExtrinsicKeyword("Mountainwalk");
+  	            }
+
+  	            @SuppressWarnings("unused") // target
+  	  		    final Card[] target = {getTargetCard()};
+  	            AllZone.EndOfTurn.addUntil(new Command()
+  	            {
+
+  	            	private static final long serialVersionUID = -6845643843049229106L;
+
+					public void execute()
+	  	              {
+	  	                if(AllZone.GameAction.isCardInPlay(getTargetCard()))
+	  	                  getTargetCard().removeExtrinsicKeyword("Mountainwalk");
+	  	              }
+  	            });
+  	          }//resolve()
+  	        };//SpellAbility
+
+  	        Input runtime = new Input()
+  	        {
+
+				private static final long serialVersionUID = -2962059144349469134L;
+
+				public void showMessage()
+	  	          {
+	  	            CardList list = new CardList();
+	  	            list.addAll(AllZone.Human_Play.getCards());
+	  	            list.addAll(AllZone.Computer_Play.getCards());
+	  	            list = list.filter(new CardListFilter()
+	  	            {
+	  	              public boolean addCard(Card c)
+	  	              {
+	  	                return c.isCreature() && c.getType().contains("Dwarf") && CardFactoryUtil.canTarget(card, c);
+	  	              }
+	  	            });
+	
+	  	            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list, "Select target Dwarf creature", Command.Blank,true));
+	  	          }//showMessage()
+	  	        };//Input
+
+  	        card.addSpellAbility(ability);
+  	        ability.setDescription("1 R, Tap: Target Dwarf creature gains mountainwalk until end of turn.");
+  	        ability.setBeforePayMana(runtime);
+  	      }//*************** END ************ END **************************
+	      
+	    //*************** START *********** START **************************
+  	    else if(cardName.equals("Fleeting Image"))
+  	    {
+  	    	final SpellAbility a1 = new Ability(card,"1 U")
+  	        {
+  	    	  public boolean canPlayAI()
+  	    	  {
+  	    		  return false;
+  	    	  }
+  	      	  public void resolve()
+  	            {
+  	      		  PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getOwner());
+  	      		  /*
+  	      		  AllZone.getZone(card).remove(card);
+  	      		  hand.add(card);
+  	      		  */
+  	      		  if (card.isToken())
+  	    			  AllZone.getZone(card).remove(card);
+  	    		  else
+  	    			  AllZone.GameAction.moveTo(hand, card);
+  	      		  
+  	            }
+  	        };//a1
+  	        
+  	        //card.clearSpellAbility();
+  	        card.addSpellAbility(a1);
+  	        a1.setStackDescription(card.getController() + " returns Fleeting Image back to its owner's hand.");
+  	        a1.setDescription("1 U: Return Fleeting Image to its owner's hand.");
+  	    
+  	   }//*************** END ************ END **************************
 
 	      	    
 	      // Cards with Cycling abilities

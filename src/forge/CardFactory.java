@@ -13577,8 +13577,11 @@ public class CardFactory implements NewConstants {
           public boolean canPlayAI()
           {
              CardList list = new CardList(AllZone.Computer_Play.getCards());
-             setTargetCard(CardFactoryUtil.AI_getBestCreature(list));
-             return (getTargetCard() != null);
+             if (list.size() > 0) {
+	             setTargetCard(CardFactoryUtil.AI_getBestCreature(list));
+	             return (getTargetCard() != null);
+             }
+             return false;
           }
        };
        ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
