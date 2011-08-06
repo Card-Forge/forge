@@ -61,12 +61,14 @@ public class AbilityFactory_Token extends AbilityFactory {
 		tokenAmount = numTokens;
 		tokenName = mapParams.get("TokenName");
 		tokenTypes = mapParams.get("TokenTypes").split(",");
-		tokenOwner = mapParams.get("TokenOwner");
 		tokenColors = mapParams.get("TokenColors").split(",");
 		tokenPower = numPower;
 		tokenToughness = numToughness;
 		tokenKeywords = keywords;
 		tokenImage = image;
+		if(mapParams.containsKey("TokenOwner"))
+			tokenOwner = mapParams.get("TokenOwner");
+		else tokenOwner = "Controller";
 		
 		if(AF.hasSubAbility())
         {
