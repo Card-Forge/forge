@@ -18997,6 +18997,112 @@ public class CardFactory implements NewConstants {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+
+        //*************** START *********** START **************************
+        else if(cardName.equals("Explosive Revelation")) {
+        	/*
+        	 * Choose target creature or player. Reveal cards from the top of
+        	 * your library until you reveal a nonland card. Explosive Revelation
+        	 * deals damage equal to that card's converted mana cost to that
+        	 * creature or player. Put the nonland card into your hand and the
+        	 * rest on the bottom of your library in any order.
+        	 */
+        	final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -3234630801871872940L;
+				
+				int damage = 3;
+                Card check;
+                
+                @Override
+                public boolean canPlayAI() {
+                    if(AllZone.Human_Life.getLife() <= damage) return true;
+                    
+                    check = getFlying();
+                    return check != null;
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    if(AllZone.Human_Life.getLife() <= damage) {
+                        setTargetPlayer(Constant.Player.Human);
+                        return;
+                    }
+                    
+                    Card c = getFlying();
+                    if((c == null) || (!check.equals(c))) throw new RuntimeException(card
+                            + " error in chooseTargetAI() - Card c is " + c + ",  Card check is " + check);
+                    
+                    setTargetCard(c);
+                }//chooseTargetAI()
+                
+                //uses "damage" variable
+                Card getFlying() {
+                    CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
+                    for(int i = 0; i < flying.size(); i++)
+                        if(flying.get(i).getNetDefense() <= damage) return flying.get(i);
+                    
+                    return null;
+                }
+                
+                @Override
+                public void resolve() {
+                	
+                    int damage = getDamage();
+                    
+                    if(getTargetCard() != null) {
+                        if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                                && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                            javax.swing.JOptionPane.showMessageDialog(null, cardName+" causes " + damage
+                                    + " to " + getTargetCard());
+                            
+                            Card c = getTargetCard();
+                            c.addDamage(damage, card);
+                        }
+                    } else {
+                        javax.swing.JOptionPane.showMessageDialog(null, cardName+" causes " + damage
+                                + " to " + getTargetPlayer());
+                        AllZone.GameAction.addDamage(getTargetPlayer(), damage, card);
+                    }
+                    //System.out.println("Library after: "+AllZoneUtil.getPlayerCardsInLibrary(card.getController()));
+                }
+                
+                int getDamage() {
+                	/*
+                	 * Reveal cards from the top of
+                	 * your library until you reveal a nonland card.
+                	 */
+                    CardList lib = AllZoneUtil.getPlayerCardsInLibrary(card.getController());
+                    System.out.println("Library before: "+lib);
+                    CardList revealed = new CardList();
+                    if( lib.size() > 0 ) {
+                    	int index = 0;
+                    	Card top;
+                    	do {
+                    		top = lib.get(index);
+                    		//System.out.println("Got from top of library:"+top);
+                    		index+= 1;
+                    		revealed.add(top);
+                    	} while( index < lib.size() && top.isLand() );
+                    	//Display the revealed cards
+                    	AllZone.Display.getChoice("Revealed cards:", revealed.toArray());
+                    	//non-land card into hand
+                    	AllZone.GameAction.moveToHand(revealed.get(revealed.size()-1));
+                    	//put the rest of the cards on the bottom of library
+                    	for(int j = 0; j < revealed.size()-1; j++ ) {
+                    		AllZone.GameAction.moveToBottomOfLibrary(revealed.get(j));
+                    	}
+                    	//return the damage
+                    	
+                    	//System.out.println("Explosive Revelation does "+CardUtil.getConvertedManaCost(top)+" from: "+top);
+                    	return CardUtil.getConvertedManaCost(top);
+                    }
+                    return 0;
+                }
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true, false));
+        }//*************** END ************ END **************************
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

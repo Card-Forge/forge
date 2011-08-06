@@ -102,6 +102,18 @@ public class GameAction {
         library.add(c, 0);
     }
     
+    /**
+     * moves a card from whichever Zone it's in to the bottom of its owner's library
+     * 
+     * @param c the card to move
+     */
+    public void moveToBottomOfLibrary(Card c) {
+    	PlayerZone p = AllZone.getZone(c);
+    	PlayerZone lib = AllZone.getZone(Constant.Zone.Library, c.getOwner());
+    	if( p != null ) p.remove(c);
+    	if(!c.isToken()) lib.add(c);
+    }
+    
     public void discardRandom(String player) {
         Card[] c = AllZone.getZone(Constant.Zone.Hand, player).getCards();
         if(c.length != 0) discard(CardUtil.getRandom(c));
