@@ -481,6 +481,12 @@ public class AllZoneUtil {
 		}
 	};
 	
+	public static CardListFilter nonlands = new CardListFilter() {
+		public boolean addCard(Card c) {
+			return c.isLand();
+		}
+	};
+	
 	/**
 	 * get a CardListFilter to filter in only cards that can be targeted
 	 * 

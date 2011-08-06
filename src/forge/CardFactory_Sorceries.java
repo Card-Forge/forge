@@ -8109,6 +8109,52 @@ public class CardFactory_Sorceries {
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        if(cardName.equals("Winds of Change")) {
+        	/*
+        	 * Each player shuffles the cards from his or her hand into
+        	 * his or her library, then draws that many cards.
+        	 */
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 1137557863607126794L;
+
+				@Override
+                public void resolve() {
+                    discardDrawX(Constant.Player.Human);
+                    discardDrawX(Constant.Player.Computer);
+                }//resolve()
+                
+                void discardDrawX(String player) {
+                	int handSize = 0;
+                    // Discard hand into library
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+                    handSize = hand.size();
+                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+                    Card[] c = hand.getCards();
+                    for(int i = 0; i < c.length; i++) {
+                    	hand.remove(c[i]);
+                    	library.add(c[i], 0);
+                    }
+                    
+                    // Shuffle library
+                    AllZone.GameAction.shuffle(player);
+                    
+                    AllZone.GameAction.drawCards(player, handSize);
+                }
+                
+                // Simple, If computer has two or less playable cards remaining in hand play Winds of Change
+                @Override
+                public boolean canPlayAI() {
+                	CardList c = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+                	c = c.filter(AllZoneUtil.nonlands);
+                    return 2 >= c.size();
+                }
+                
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
             int n = hasKeyword(card, "Cycling");
