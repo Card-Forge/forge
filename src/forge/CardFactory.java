@@ -4597,10 +4597,6 @@ public class CardFactory implements NewConstants {
             abDraw.setDescription(spDesc[0]);
             abDraw.setStackDescription(stDesc[0]);
             
-            if (abTgt != null)
-            	abDraw.setTarget(abTgt);
-            abDraw.setPayCosts(abCost);
-            
             card.addSpellAbility(abDraw);
         }
         
@@ -7279,7 +7275,7 @@ public class CardFactory implements NewConstants {
             final String[] input = new String[1];
             final Player player = card.getController();
             
-            final SpellAbility ability = new Ability(card, "0") {
+            final SpellAbility ability = new Ability_Static(card, "0") {
                 @Override
                 public void resolve() {
                     if(player.equals(AllZone.HumanPlayer)) {
@@ -10233,8 +10229,8 @@ public class CardFactory implements NewConstants {
                         return arts.get(0);
                     } else return null;
                 }
-                
-                
+
+
                 @Override
                 public boolean canPlayAI() {
                     String phase = AllZone.Phase.getPhase();
@@ -10246,8 +10242,8 @@ public class CardFactory implements NewConstants {
                     Card c = getTargetCard();
                     if(AllZone.GameAction.isCardInPlay(c)) {
                         AllZone.GameAction.sacrifice(c);
-                        makeToken();
-                        card.getController().gainLife(1, card);
+                    makeToken();
+                    card.getController().gainLife(1, card);
                     }
                 }//resolve
                 
