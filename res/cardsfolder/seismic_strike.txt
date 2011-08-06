@@ -2,7 +2,7 @@ Name:Seismic Strike
 ManaCost:2 R
 Types:Instant
 Text:no text
-K:spDamageTgtC:X:Seismic Strike deals damage to target creature equal to the number of Mountains you control.
+A:SP$DealDamage | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ Seismic Strike deals damage to target creature equal to the number of Mountains you control.
 SVar:X:Count$TypeYouCtrl.Mountain
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seismic_strike.jpg

@@ -2,7 +2,7 @@ Name:Vampiric Feast
 ManaCost:5 B B
 Types:Sorcery
 Text:no text
-K:spDamageTgtCP:4:Drawback$GainLifeYou/4:Vampiric Feast deals 4 damage to target creature or player and you gain 4 life.
+A:SP$DealDamage | Cost$ 5 B B | Tgt$ TgtCP | NumDmg$ 4 | SubAbility$ GainLifeYou/4 | SpellDescription$ Vampiric Feast deals 4 damage to target creature or player and you gain 4 life.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4243.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/37.jpg

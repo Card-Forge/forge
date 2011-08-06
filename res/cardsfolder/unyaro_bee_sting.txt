@@ -2,7 +2,7 @@ Name:Unyaro Bee Sting
 ManaCost:3 G
 Types:Sorcery
 Text:no text
-K:spDamageTgtCP:2
+A:SP$DealDamage | Cost$ 3 G | Tgt$ TgtCP | NumDmg$ 2 | SpellDescription$ Unyaro Bee Sting deals 2 damage to target creature or player.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unyaro_bee_sting.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/148.jpg

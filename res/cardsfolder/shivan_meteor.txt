@@ -2,7 +2,7 @@ Name:Shivan Meteor
 ManaCost:3 R R
 Types:Sorcery
 Text:no text
-K:spDamageTgtC:13:Shivan Meteor deals 13 damage to target creature.
+A:SP$DealDamage | Cost$ 3 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 13 | SpellDescription$ Shivan Meteor deals 13 damage to target creature.
 K:Suspend:2:1 R R
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_meteor.jpg

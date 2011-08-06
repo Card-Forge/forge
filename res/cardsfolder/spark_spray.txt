@@ -2,7 +2,7 @@ Name:Spark Spray
 ManaCost:R
 Types:Instant
 Text:no text
-K:spDamageTgtCP:1:Spark Spray deals 1 damage to target creature or player.:Spark Spray - deals 1 damage
+A:SP$DealDamage | Cost$ R | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ Spark Spray deals 1 damage to target creature or player.
 K:Cycling:R
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/scg/en-us/card44484.jpg
