@@ -325,7 +325,7 @@ public class ComputerUtil_Attack2 {
     		}
     	}
     	// A creature should attack if it can't be killed
-    	if (CombatUtil.totalDamageOfBlockers(attacker, blockers) < attacker.getKillDamage()) return true; 
+    	if (CombatUtil.totalDamageOfBlockers(attacker, blockers) < attacker.getKillDamage() && !canBeKilledByOne) return true; 
     	
     	return (canKillAll && !canBeKilledByOne); // A creature should attack if it can't be killed or can kill any blocker
     }  
