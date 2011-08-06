@@ -318,7 +318,7 @@ public class GuiDisplayUtil implements NewConstants {
         else
         	loc = IMAGE_TOKEN;
         
-        String fileString = path + "\\" +ForgeProps.getFile(loc)+"\\" +filename;
+        String fileString = path + File.separator + ForgeProps.getFile(loc) + File.separator + filename;
         //System.out.println(fileString);
         File file = new File(fileString);
         
@@ -349,7 +349,7 @@ public class GuiDisplayUtil implements NewConstants {
         else
         	loc = IMAGE_TOKEN;
         
-        String fileString = ForgeProps.getFile(loc)+"\\" +filename;
+        String fileString = ForgeProps.getFile(loc) + File.separator + filename;
     	
         try {
 			BufferedInputStream is = new BufferedInputStream(new FileInputStream(fileString));
