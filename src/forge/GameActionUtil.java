@@ -83,6 +83,11 @@ public class GameActionUtil
 		// card gets played
 		// (called in MagicStack.java)
 		Card c = sa.getSourceCard();
+		playCard_Battlegate_Mimic(c);
+		playCard_Nightsky_Mimic(c);
+		playCard_Riverfall_Mimic(c);
+		playCard_Shorecrasher_Mimic(c);
+		playCard_Woodlurker_Mimic(c);
 		playCard_Dovescape(c);
 		playCard_Belligerent_Hatchling(c);
 		playCard_Voracious_Hatchling(c);
@@ -103,7 +108,280 @@ public class GameActionUtil
 		playCard_Mold_Adder(c);
 		playCard_Fable_of_Wolf_and_Owl(c);
 	}
+	public static void playCard_Shorecrasher_Mimic(Card c)
+	{
+		final String controller = c.getController();
+			
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+				controller);
+		
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Shorecrasher Mimic");
+
+		if (list.size() > 0){
+			if (CardUtil.getColors(c).contains(Constant.Color.Blue) && CardUtil.getColors(c).contains(Constant.Color.Green))
+			{
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);
+						final Command untilEOT = new Command()
+					      {
+							private static final long serialVersionUID = -4569751606008597903L;
+
+							public void execute()
+					        {
+					          if(AllZone.GameAction.isCardInPlay(card))
+					          {
+								card.setBaseAttack(2);
+								card.setBaseDefense(1);
+								card.removeIntrinsicKeyword("Trample");
+
+					          }
+					        }
+					      };
+			
+						Ability ability2 = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+								card.setBaseAttack(5);
+								card.setBaseDefense(3);
+								if (!card.getIntrinsicKeyword().contains("Trample"))
+									card.addIntrinsicKeyword("Trample"); 
+								AllZone.EndOfTurn.addUntil(untilEOT);
+							}
+							}; // ability2
+			
+						ability2.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played a a spell that’s both green and blue, it becomes 5/3 and gains trample until end of turn.");
+						AllZone.Stack.add(ability2);
+					}
+				}//if
+			}					
+
+	}//Shorecrasher Mimic
 	
+	public static void playCard_Battlegate_Mimic(Card c)
+	{
+		final String controller = c.getController();
+			
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+				controller);
+		
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Battlegate Mimic");
+
+		if (list.size() > 0){
+			if (CardUtil.getColors(c).contains(Constant.Color.Red) && CardUtil.getColors(c).contains(Constant.Color.White))
+			{
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);
+						final Command untilEOT = new Command()
+					      {
+							private static final long serialVersionUID = -4569751606008597903L;
+
+							public void execute()
+					        {
+					          if(AllZone.GameAction.isCardInPlay(card))
+					          {
+								card.setBaseAttack(2);
+								card.setBaseDefense(1);
+								card.removeIntrinsicKeyword("First Strike");
+
+					          }
+					        }
+					      };
+			
+						Ability ability2 = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+								card.setBaseAttack(4);
+								card.setBaseDefense(2);
+								if (!card.getIntrinsicKeyword().contains("First Strike"))
+									card.addIntrinsicKeyword("First Strike"); 
+								AllZone.EndOfTurn.addUntil(untilEOT);
+							}
+							}; // ability2
+			
+						ability2.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played a a spell that’s both red and white, it becomes 4/2 and gains first strike until end of turn.");
+						AllZone.Stack.add(ability2);
+					}
+				}//if
+			}					
+
+	}//Battlegate Mimic
+	
+	public static void playCard_Nightsky_Mimic(Card c)
+	{
+		final String controller = c.getController();
+			
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+				controller);
+		
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Nightsky Mimic");
+
+		if (list.size() > 0){
+			if (CardUtil.getColors(c).contains(Constant.Color.Black) && CardUtil.getColors(c).contains(Constant.Color.White))
+			{
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);
+						final Command untilEOT = new Command()
+					      {
+							private static final long serialVersionUID = -4569751606008597903L;
+
+							public void execute()
+					        {
+					          if(AllZone.GameAction.isCardInPlay(card))
+					          {
+								card.setBaseAttack(2);
+								card.setBaseDefense(1);
+								card.removeIntrinsicKeyword("Flying");
+
+					          }
+					        }
+					      };
+			
+						Ability ability2 = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+								card.setBaseAttack(4);
+								card.setBaseDefense(4);
+								if (!card.getIntrinsicKeyword().contains("Flying"))
+									card.addIntrinsicKeyword("Flying"); 
+								AllZone.EndOfTurn.addUntil(untilEOT);
+							}
+							}; // ability2
+			
+						ability2.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played a a spell that’s both black and white, it becomes 4/4 and gains flying until end of turn.");
+						AllZone.Stack.add(ability2);
+					}
+				}//if
+			}					
+
+	}//Nightsky Mimic
+	
+	public static void playCard_Riverfall_Mimic(Card c)
+	{
+		final String controller = c.getController();
+			
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+				controller);
+		
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Riverfall Mimic");
+
+		if (list.size() > 0){
+			if (CardUtil.getColors(c).contains(Constant.Color.Blue) && CardUtil.getColors(c).contains(Constant.Color.Red))
+			{
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);
+						final Command untilEOT = new Command()
+					      {
+							private static final long serialVersionUID = -4569751606008597903L;
+
+							public void execute()
+					        {
+					          if(AllZone.GameAction.isCardInPlay(card))
+					          {
+								card.setBaseAttack(2);
+								card.setBaseDefense(1);
+								card.removeIntrinsicKeyword("Unblockable");
+
+					          }
+					        }
+					      };
+			
+						Ability ability2 = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+								card.setBaseAttack(3);
+								card.setBaseDefense(3);
+								if (!card.getIntrinsicKeyword().contains("Unblockable"))
+									card.addIntrinsicKeyword("Unblockable"); 
+								AllZone.EndOfTurn.addUntil(untilEOT);
+							}
+							}; // ability2
+			
+						ability2.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played a a spell that’s both red and blue, it becomes 3/3 and is unblockable until end of turn.");
+						AllZone.Stack.add(ability2);
+					}
+				}//if
+			}					
+
+	}//Riverfall Mimic
+	
+	public static void playCard_Woodlurker_Mimic(Card c)
+	{
+		final String controller = c.getController();
+			
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+				controller);
+		
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Woodlurker Mimic");
+
+		if (list.size() > 0){
+			if (CardUtil.getColors(c).contains(Constant.Color.Black) && CardUtil.getColors(c).contains(Constant.Color.Green))
+			{
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);
+						final Command untilEOT = new Command()
+					      {
+							private static final long serialVersionUID = -4569751606008597903L;
+
+							public void execute()
+					        {
+					          if(AllZone.GameAction.isCardInPlay(card))
+					          {
+								card.setBaseAttack(2);
+								card.setBaseDefense(1);
+								card.removeIntrinsicKeyword("Wither");
+
+					          }
+					        }
+					      };
+			
+						Ability ability2 = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+								card.setBaseAttack(4);
+								card.setBaseDefense(5);
+								if (!card.getIntrinsicKeyword().contains("Wither"))
+									card.addIntrinsicKeyword("Wither"); 
+								AllZone.EndOfTurn.addUntil(untilEOT);
+							}
+							}; // ability2
+			
+						ability2.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played a a spell that’s both green and black, it becomes 4/5 and gains wither until end of turn.");
+						AllZone.Stack.add(ability2);
+					}
+				}//if
+			}					
+
+	}//Woodlurker Mimic
 	public static void playCard_Dovescape(Card c)
 	   {
 	      PlayerZone hplay = AllZone.getZone(Constant.Zone.Play,

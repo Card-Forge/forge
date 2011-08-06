@@ -18,6 +18,11 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+shorecrasher_mimic.jpg      http://www.wizards.com/global/images/magic/general/Shorecrasher_Mimic.jpg
+woodlurker_mimic.jpg        http://www.wizards.com/global/images/magic/general/Woodlurker_Mimic.jpg
+battlegate_mimic.jpg        http://www.wizards.com/global/images/magic/general/Battlegate_Mimic.jpg
+nightsky_mimic.jpg          http://www.wizards.com/global/images/magic/general/Nightsky_Mimic.jpg
+riverfall_mimic.jpg         http://www.wizards.com/global/images/magic/general/Riverfall_Mimic.jpg
 sapling_of_colfenor.jpg     http://www.wizards.com/global/images/magic/general/Sapling_of_Colfenor.jpg
 dovescape.jpg               http://www.wizards.com/global/images/magic/general/dovescape.jpg
 lurking_informant.jpg       http://www.wizards.com/global/images/magic/general/lurking_informant.jpg
