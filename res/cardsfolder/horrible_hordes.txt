@@ -1,0 +1,9 @@
+Name:Horrible Hordes
+ManaCost:3
+Types:Artifact Creature Spirit
+Text:no text
+PT:2/2
+K:Rampage 1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/horrible_hordes.jpg
+End

@@ -1,0 +1,10 @@
+Name:Hystrodon
+ManaCost:4 G
+Types:Creature Beast
+Text:Whenever Hystrodon deals combat damage to a player, you may draw a card.
+PT:3/4
+K:Trample
+K:Morph:1 G G
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hystrodon.jpg
+End

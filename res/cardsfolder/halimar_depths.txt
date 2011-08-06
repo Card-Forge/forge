@@ -1,0 +1,9 @@
+Name:Halimar Depths
+ManaCost:no cost
+Types:Land
+Text:When Halimar Depths enters the battlefield, look at the top three cards of your library, then put them back in any order.
+K:Comes into play tapped.
+K:tap: add U
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/halimar_depths.jpg
+End

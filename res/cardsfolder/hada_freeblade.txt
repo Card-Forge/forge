@@ -1,0 +1,9 @@
+Name:Hada Freeblade
+ManaCost:W
+Types:Creature Human Soldier Ally
+Text:Whenever Hada Freeblade or another Ally enters the battlefield under your control, you may put a +1/+1 counter on Hada Freeblade.
+PT:0/1
+K:SVar:BuffedBy:Ally
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hada_freeblade.jpg
+End

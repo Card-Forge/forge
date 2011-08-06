@@ -1,0 +1,8 @@
+Name:Howling Fury
+ManaCost:2 B
+Types:Sorcery
+Text:no text
+K:spPumpTgt:+4/+0
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/howling_fury.jpg
+End

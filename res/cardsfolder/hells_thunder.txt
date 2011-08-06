@@ -1,0 +1,12 @@
+Name:Hell's Thunder
+ManaCost:1 R R
+Types:Creature Elemental
+Text:no text
+PT:4/4
+K:Flying
+K:Haste
+K:At the beginning of the end step, sacrifice CARDNAME.
+K:Unearth:4 R
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hells_thunder.jpg
+End

@@ -1,0 +1,10 @@
+Name:Hand of Honor
+ManaCost:W W
+Types:Creature Human Samurai
+Text:no text
+PT:2/2
+K:Protection from black
+K:Bushido 1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.magickartenmarkt.de/img/cards/Saviors_of_Kamigawa/hand_of_honor.jpg
+End

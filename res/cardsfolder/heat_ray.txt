@@ -1,0 +1,9 @@
+Name:Heat Ray
+ManaCost:X R
+Types:Instant
+Text:no text
+K:spDamageTgtC:X:Heat Ray deals X damage to target creature.
+K:SVar:X:Count$xPaid
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/heat_ray.jpg
+End

@@ -1,0 +1,9 @@
+Name:Henge Guardian
+ManaCost:5
+Types:Artifact Creature Dragon Wurm
+Text:no text
+PT:3/4
+K:abPump 2:Trample
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/henge_guardian.jpg
+End

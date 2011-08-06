@@ -1,0 +1,8 @@
+Name:Hoodwink
+ManaCost:1 U
+Types:Instant
+Text:Return target artifact, enchantment, or land to its owner's hand.
+K:spBounceTgt:Artifact,Enchantment,Land:Hand
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hoodwink.jpg
+End

@@ -1,0 +1,8 @@
+Name:Harmonize
+ManaCost:2 G G
+Types:Sorcery
+Text:no text
+K:spDrawCards:3:Draw three cards.:Harmonize - draw 3 cards.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122362.jpg
+End

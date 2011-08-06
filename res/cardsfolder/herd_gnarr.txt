@@ -1,0 +1,10 @@
+Name:Herd Gnarr
+ManaCost:2 G
+Types:Creature Beast
+Text:no text
+PT:2/2
+K:WheneverKeyword:EntersBattleField:Type/Creature:Play:StatsPumpEOT/2/2:Self:ASAP:No_Condition:Initiator - OwnedByController!Initiator - Other than Self:Whenever another creature enters the battlefield under your control, Herd Gnarr gets +2/+2 until end of turn.
+K:SVar:BuffedBy:Creature
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/herd_gnarr.jpg
+End

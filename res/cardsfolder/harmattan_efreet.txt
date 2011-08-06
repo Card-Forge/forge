@@ -1,0 +1,10 @@
+Name:Harmattan Efreet
+ManaCost:2 U U
+Types:Creature Efreet
+Text:no text
+PT:2/2
+K:Flying
+K:abPumpTgtC 1 U U:Flying
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/harmattan_efreet.jpg
+End

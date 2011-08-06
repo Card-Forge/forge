@@ -1,0 +1,9 @@
+Name:Hero's Resolve
+ManaCost:1 W
+Types:Enchantment Aura
+Text:Enchanted creature gets +1/+5.
+K:Enchant creature
+K:enPump:+1/+5
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/heros_resolve.jpg
+End

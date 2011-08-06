@@ -1,0 +1,8 @@
+Name:Hallowed Burial
+ManaCost:3 W W
+Types:Sorcery
+Text:Put all creatures on the bottom of their owners' libraries.
+K:spBounceAll:Creature:BottomofLibrary
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hallowed_burial.jpg
+End

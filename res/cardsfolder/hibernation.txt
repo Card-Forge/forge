@@ -1,0 +1,9 @@
+Name:Hibernation
+ManaCost:2 U
+Types:Instant
+Text:Return all green permanents to their owners' hands.
+K:spBounceAll:Permanent.Green:Hand
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hibernation.jpg
+End

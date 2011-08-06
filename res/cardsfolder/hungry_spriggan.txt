@@ -1,0 +1,10 @@
+Name:Hungry Spriggan
+ManaCost:2 G
+Types:Creature Goblin Warrior
+Text:no text
+PT:1/1
+K:Trample
+K:WheneverKeyword:Attacks:Self:Play:StatsPumpEOT/3/3:Self:ASAP:No_Condition:No Special Condition:Whenever Hungry Spriggan attacks, it gets +3/+3 until end of turn.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hungry_spriggan.jpg
+End

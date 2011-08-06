@@ -1,0 +1,7 @@
+Name:Honden of Night's Reach
+ManaCost:3 B
+Types:Legendary Enchantment Shrine
+Text:At the beginning of your upkeep, target opponent discards a card for each Shrine you control.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/honden_of_nights_reach.jpg
+End

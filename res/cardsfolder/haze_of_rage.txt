@@ -1,0 +1,10 @@
+Name:Haze of Rage
+ManaCost:1 R
+Types:Sorcery
+Text:no text
+K:spAllPump:YouCtrl:+1/+0:Creatures you control get +1/+0 until end of turn.:Haze of Rage - Creatures get +1/+0 until EOT
+K:SVar:Buyback:2
+K:Storm
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/haze_of_rage.jpg
+End

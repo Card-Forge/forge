@@ -1,0 +1,7 @@
+Name:Hedron Matrix
+ManaCost:4
+Types:Artifact Equipment
+Text:Equipped creature gets +X/+X, where X is its converted mana cost.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hedron_matrix.jpg
+End

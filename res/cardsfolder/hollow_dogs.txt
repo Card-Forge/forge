@@ -1,0 +1,8 @@
+Name:Hollow Dogs
+ManaCost:4 B
+Types:Creature Zombie Hound
+Text:Whenever Hollow Dogs attacks, it gets +2/+0 until end of turn.
+PT:3/3
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hollow_dogs.jpg
+End

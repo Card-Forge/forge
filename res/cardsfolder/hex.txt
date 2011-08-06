@@ -1,0 +1,7 @@
+Name:Hex
+ManaCost:4 B B
+Types:Sorcery
+Text:Destroy six target creatures.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card89059.jpg
+End

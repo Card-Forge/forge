@@ -1,0 +1,11 @@
+Name:Havenwood Battleground
+ManaCost:no cost
+Types:Land
+Text:no text
+K:tap: add G
+K:tap, Sacrifice CARDNAME: Add G G to your mana pool.
+K:Comes into play tapped.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/havenwood_battleground.jpg
+End

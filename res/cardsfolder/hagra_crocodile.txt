@@ -1,0 +1,11 @@
+Name:Hagra Crocodile
+ManaCost:3 B
+Types:Creature Crocodile
+Text:no text
+PT:3/1
+K:CARDNAME can't block.
+K:Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
+K:SVar:BuffedBy:Land
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hagra_crocodile.jpg
+End

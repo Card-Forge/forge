@@ -1,0 +1,8 @@
+Name:Heroes' Reunion
+ManaCost:W G
+Types:Instant
+Text:no text
+K:spGainLifeTgt:7
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/heroes_reunion.jpg
+End

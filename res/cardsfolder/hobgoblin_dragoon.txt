@@ -1,0 +1,10 @@
+Name:Hobgoblin Dragoon
+ManaCost:2 RW
+Types:Creature Goblin Knight
+Text:no text
+PT:1/2
+K:Flying
+K:First Strike
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hobgoblin_dragoon.jpg
+End

@@ -1,0 +1,8 @@
+Name:Hermit Druid
+ManaCost:1 G
+Types:Creature Human Druid
+Text:G, tap: Reveal cards from the top of your library until you reveal a basic land card. Put that card into your hand and all other cards revealed this way into your graveyard.
+PT:1/1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hermit_druid.jpg
+End

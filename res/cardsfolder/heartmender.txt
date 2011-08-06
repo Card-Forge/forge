@@ -1,0 +1,9 @@
+Name:Heartmender
+ManaCost:2 GW GW
+Types:Creature Elemental
+Text:At the beginning of your upkeep, remove a -1/-1 counter from each creature you control.
+PT:2/2
+K:Persist
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/heartmender.jpg
+End

@@ -1,0 +1,10 @@
+Name:Halo Hunter
+ManaCost:2 B B B
+Types:Creature Demon
+Text:When Halo Hunter enters the battlefield, destroy target Angel.
+PT:6/3
+K:Intimidate
+K:etbDestroyTgt:Angel
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/halo_hunter.jpg
+End

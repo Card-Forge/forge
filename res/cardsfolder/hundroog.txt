@@ -1,0 +1,9 @@
+Name:Hundroog
+ManaCost:6 G
+Types:Creature Beast
+Text:no text
+PT:4/7
+K:Cycling:3
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hundroog.jpg
+End

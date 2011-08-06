@@ -1,0 +1,7 @@
+Name:Hellion Eruption
+ManaCost:5 R
+Types:Sorcery
+Text:Sacrifice all creatures you control, then put that many 4/4 red Hellion creature tokens onto the battlefield.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hellion_eruption.jpg
+End

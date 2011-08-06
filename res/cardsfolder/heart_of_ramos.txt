@@ -1,0 +1,10 @@
+Name:Heart of Ramos
+ManaCost:3
+Types:Artifact
+Text:no text
+K:tap: add R
+K:Sacrifice CARDNAME: Add R to your mana pool.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_of_ramos.jpg
+End

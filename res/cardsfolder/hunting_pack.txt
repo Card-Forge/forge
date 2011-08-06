@@ -1,0 +1,8 @@
+Name:Hunting Pack
+ManaCost:5 G G
+Types:Instant
+Text:Put a 4/4 green Beast creature token onto the battlefield.
+K:Storm
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_pack.jpg
+End

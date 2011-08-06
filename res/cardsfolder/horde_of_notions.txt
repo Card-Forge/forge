@@ -1,0 +1,11 @@
+Name:Horde of Notions
+ManaCost:W U B R G
+Types:Legendary Creature Elemental
+Text:no text
+PT:5/5
+K:Vigilance
+K:Trample
+K:Haste
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/horde_of_notions.jpg
+End

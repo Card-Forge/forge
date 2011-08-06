@@ -1,0 +1,7 @@
+Name:Haunting Echoes
+ManaCost:3 B B
+Types:Sorcery
+Text:Remove all cards in target player's graveyard other than basic land cards from the game. Search that player's library for all cards with the same name as cards removed this way, and remove them from the game. Then that player shuffles his or her library.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/haunting_echoes.jpg
+End

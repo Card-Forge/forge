@@ -1,0 +1,8 @@
+Name:Hatching Plans
+ManaCost:1 U
+Types:Enchantment
+Text:When Hatching Plans is put into a graveyard from play, draw three cards.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hatching_plans.jpg
+End

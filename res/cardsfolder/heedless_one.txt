@@ -1,0 +1,9 @@
+Name:Heedless One
+ManaCost:3 G
+Types:Creature Elf Avatar
+Text:Heedless One's power and toughness are each equal to the number of Elves on the battlefield.
+PT:1/1
+K:Trample
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/heedless_one.jpg
+End

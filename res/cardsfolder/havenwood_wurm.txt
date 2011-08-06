@@ -1,0 +1,10 @@
+Name:Havenwood Wurm
+ManaCost:6 G
+Types:Creature Wurm
+Text:no text
+PT:5/6
+K:Flash
+K:Trample
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/havenwood_wurm.jpg
+End

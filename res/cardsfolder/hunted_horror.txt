@@ -1,0 +1,9 @@
+Name:Hunted Horror
+ManaCost:B B
+Types:Creature Horror
+Text:When Hunted Horror enters the battlefield, put two 3/3 green Centaur creature tokens with protection from black onto the battlefield under target opponent's control.
+PT:7/7
+K:Trample
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hunted_horror.jpg
+End

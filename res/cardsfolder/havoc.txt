@@ -1,0 +1,9 @@
+Name:Havoc
+ManaCost:1 R
+Types:Enchantment
+Text:no text
+K:WheneverKeyword:CastSpell/Opponent:Color/white:Play:ModifyLife/-2:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever an opponent casts a white spell, he or she loses 2 life.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/havoc.jpg
+End

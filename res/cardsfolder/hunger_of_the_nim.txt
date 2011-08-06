@@ -1,0 +1,9 @@
+Name:Hunger of the Nim
+ManaCost:1 B
+Types:Sorcery
+Text:no text
+K:spPumpTgt:+X/+0:Target creature gets +1/+0 for each artifact you control.:Hunger of the Nim - Target creature gets +X/+0
+K:SVar:X:Count$TypeYouCtrl.Artifact
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hunger_of_the_nim.jpg
+End

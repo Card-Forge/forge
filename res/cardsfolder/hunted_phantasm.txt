@@ -1,0 +1,9 @@
+Name:Hunted Phantasm
+ManaCost:1 U U
+Types:Creature Spirit
+Text:When Hunted Phantasm enters the battlefield, put five 1/1 red Goblin creature tokens onto the battlefield under target opponent's control.
+PT:4/6
+K:Unblockable
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hunted_phantasm.jpg
+End

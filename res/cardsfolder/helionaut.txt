@@ -1,0 +1,15 @@
+Name:Helionaut
+ManaCost:2 W
+Types:Creature Human Soldier
+Text:no text
+PT:1/2
+K:Flying
+K:1, tap: add W
+K:1, tap: add U
+K:1, tap: add B
+K:1, tap: add R
+K:1, tap: add G
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/helionaut.jpg
+End

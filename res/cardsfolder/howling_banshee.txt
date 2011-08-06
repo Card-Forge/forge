@@ -1,0 +1,10 @@
+Name:Howling Banshee
+ManaCost:2 B B
+Types:Creature Spirit
+Text:no text
+PT:3/3
+K:Flying
+K:WheneverKeyword:EntersBattleField:Self:Play:ModifyLife/-3!ModifyLife/-3:ControllingPlayer_Self!ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:When Howling Banshee enters the battlefield, each player loses 3 life.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/howling_banshee.jpg
+End

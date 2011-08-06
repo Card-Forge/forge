@@ -1,0 +1,10 @@
+Name:Hammerheim Deadeye
+ManaCost:3 R
+Types:Creature Giant Warrior
+Text:When Hammerheim Deadeye enters the battlefield, destroy target creature with flying.
+PT:3/3
+K:Echo:5 R
+K:etbDestroyTgt:Creature.withFlying
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hammerheim_deadeye.jpg
+End

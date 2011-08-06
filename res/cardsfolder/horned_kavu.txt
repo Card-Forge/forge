@@ -1,0 +1,8 @@
+Name:Horned Kavu
+ManaCost:R G
+Types:Creature Kavu
+Text:When Horned Kavu comes into play, return a red or green creature you control to its owner's hand.
+PT:3/4
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/horned_kavu.jpg
+End

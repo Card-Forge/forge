@@ -1,0 +1,9 @@
+Name:Horned Troll
+ManaCost:2 G
+Types:Creature Troll
+Text:no text
+PT:2/2
+K:RegenerateMe:G
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/horned_troll.jpg
+End

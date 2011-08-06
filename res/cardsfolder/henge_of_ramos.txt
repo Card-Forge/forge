@@ -1,0 +1,14 @@
+Name:Henge of Ramos
+ManaCost:no cost
+Types:Land
+Text:no text
+K:tap: add 1
+K:2, tap: add W
+K:2, tap: add U
+K:2, tap: add B
+K:2, tap: add R
+K:2, tap: add G
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/henge_of_ramos.jpg
+End

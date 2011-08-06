@@ -1,0 +1,7 @@
+Name:Horn of Greed
+ManaCost:3
+Types:Artifact
+Text:When a player plays a land, that player draws a card.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/horn_of_greed.jpg
+End
