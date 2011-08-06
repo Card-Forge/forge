@@ -146,6 +146,7 @@ public class GameActionUtil {
 		final String player = AllZone.GameAction.getPlayerTurn();
 		draw_Teferi_Puzzle_Box(player);
 		draw_Howling_Mine(player);
+		draw_Spiteful_Visions(player);
 		draw_Kami_Crescent_Moon(player);
 		draw_Font_of_Mythos(player);
 		draw_Overbeing_of_Myth(player);
@@ -2843,6 +2844,7 @@ public class GameActionUtil {
 		drawCardTriggered_Hoofprints_of_the_Stag(player);
 		drawCardTriggered_Lorescale_Coatl(player);
 		drawCardTriggered_Underworld_Dreams(player);
+		drawCardTriggered_Spiteful_Visions(player);
 	}
 
 	public static void drawCardTriggered_Underworld_Dreams(String player) {
@@ -2864,6 +2866,22 @@ public class GameActionUtil {
 			ability.setStackDescription(list.get(i) + " - Deals 1 damage to him or her");
 			AllZone.Stack.add(ability);
 
+		}
+	}
+	
+	private static void drawCardTriggered_Spiteful_Visions(final String player) {
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.GameAction.getOpponent(player), "Spiteful Visions");
+
+		for(int i = 0; i < list.size(); i++) {
+			final Card source = list.get(i);
+			final Ability ability = new Ability(source, "0") {
+				@Override
+				public void resolve() {
+					AllZone.GameAction.addDamage(player, source, 1);
+				}
+			};
+			ability.setStackDescription(source + " - deals 1 damage to player drawing a card.");
+			AllZone.Stack.add(ability);
 		}
 	}
 
@@ -9042,6 +9060,14 @@ public class GameActionUtil {
 			}
 		}
 	}// Howling_Mine()
+	
+	private static void draw_Spiteful_Visions(final String player) {
+		CardList list = AllZoneUtil.getCardsInPlay("Spiteful Visions");
+
+		for(int i = 0; i < list.size(); i++){
+			AllZone.GameAction.drawCard(player);
+		}
+	}// Spiteful_Visions()
 	
 	private static void draw_Kami_Crescent_Moon(String player) {
 		CardList list = new CardList();
