@@ -1,3 +1,9 @@
+Winds of Rath
+3 W W
+Sorcery
+Destroy all creatures that aren't enchanted. They can't be regenerated.
+spDestroyAll:Creature.unenchanted:NoRegen
+
 Anarchy
 2 R R
 Sorcery
