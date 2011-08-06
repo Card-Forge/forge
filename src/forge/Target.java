@@ -53,6 +53,43 @@ public class Target {
 		}
 	}
 	
+	public Target(String parse, String select, String[] valid){
+		if (parse.contains("Tgt")){
+			// Tgt{C}{P}{V}[/<MinTargets>/<MaxTargets>] min-max is optional 
+			String tgtStr = parse.replace("Tgt", "");
+			String[] tgtSplit = tgtStr.split("/");
+			
+			if (tgtSplit[0].contains("C"))	// creature
+				tgtCreature = true;
+			if (tgtSplit[0].contains("P"))	// player
+				tgtPlayer = true;	
+			if (tgtSplit[0].contains("V")) // valid
+				tgtValid = true;
+			
+			if (tgtSplit.length != 3){
+				minTargets = 1;
+				maxTargets = 1;
+			}
+			else{
+				minTargets = Integer.parseInt(tgtSplit[1]);
+				maxTargets = Integer.parseInt(tgtSplit[2]);
+			}
+			
+			if (tgtValid){
+				vtSelection = select;
+				ValidTgts = valid;
+			}
+		}
+	}
+	
+	public Target(String parse, int min, int max){
+		minTargets = min;
+		maxTargets = max;
+		
+		tgtValid = true;
+		ValidTgts = parse.split(",");
+	}
+	
 	public String targetString()
 	{
 		StringBuilder sb = new StringBuilder("target ");
