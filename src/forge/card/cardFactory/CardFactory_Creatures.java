@@ -2901,16 +2901,18 @@ public class CardFactory_Creatures {
         else if(cardName.equals("Painter's Servant")) {
         	final long[] timeStamp = new long[1];
         	final String[] color = new String[1];
-            final Ability ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
+
+            Command comesIntoPlay = new Command() {
+                private static final long serialVersionUID = 333134223161L;
+                
+                public void execute() {
                     if(card.getController().equals(AllZone.HumanPlayer)) {
                         String[] colors = Constant.Color.onlyColors;
-                        
+
                         Object o = GuiUtils.getChoice("Choose color", colors);
                         color[0] = (String) o;
                         card.setChosenColor(color[0]);
-                    } else { 
+                    } else {
                     	// AI chooses the color that appears in the keywords of the most cards in its deck, hand and on battlefield
                     	PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer);
                         PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
@@ -2918,10 +2920,10 @@ public class CardFactory_Creatures {
                         list.addAll(lib.getCards());
                         list.addAll(hand.getCards());
                         list.addAll(AllZone.Computer_Battlefield.getCards());
-                        
+
                         color[0] = Constant.Color.White;
                         int max =  list.getKeywordsContain(color[0]).size();
-                        
+
                         String[] colors = { Constant.Color.Blue, Constant.Color.Black, Constant.Color.Red, Constant.Color.Green };
                         for(String c : colors){
 	                        int cmp = list.getKeywordsContain(c).size();
@@ -2932,37 +2934,21 @@ public class CardFactory_Creatures {
                         }
                         card.setChosenColor(color[0]);
                     }
-                    
+
                     String s = CardUtil.getShortColor(color[0]);
                     timeStamp[0] = AllZone.GameInfo.addColorChanges(s, card, true, true);
                 }
-            };
-            
-            Command comesIntoPlay = new Command() {
-                private static final long serialVersionUID = 333134223161L;
-                
-                public void execute() {
-                    AllZone.Stack.add(ability);
-                }
             };//Command
 
-            final Ability unpaint = new Ability(card, "0") {
-            	public void resolve(){
-            		String s = CardUtil.getShortColor(color[0]);
-            		AllZone.GameInfo.removeColorChanges(s, card, true, timeStamp[0]);
-            	}
-            };
-            
             Command leavesBattlefield = new Command() {
 				private static final long serialVersionUID = 2559212590399132459L;
 
 				public void execute(){
-            		AllZone.Stack.add(unpaint);
+            		String s = CardUtil.getShortColor(color[0]);
+            		AllZone.GameInfo.removeColorChanges(s, card, true, timeStamp[0]);
             	}
             };
- 
-            ability.setStackDescription("As Painter's Servant enters the battlefield, choose a color.");
-            unpaint.setStackDescription("Painter's Servant left the battlefield, resetting colors.");
+
             card.addComesIntoPlayCommand(comesIntoPlay);
             card.addLeavesPlayCommand(leavesBattlefield);
         }//*************** END ************ END **************************
@@ -4755,15 +4741,16 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Iona, Shield of Emeria")) {
-            final Ability ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
+            Command comesIntoPlay = new Command() {
+                private static final long serialVersionUID = 3331342605626623161L;
+                
+                public void execute() {
                     if(card.getController().equals(AllZone.HumanPlayer)) {
-                        
+
                         String color = "";
                         String[] colors = Constant.Color.Colors;
                         colors[colors.length - 1] = null;
-                        
+
                         Object o = GuiUtils.getChoice("Choose color", colors);
                         color = (String) o;
                         card.setChosenColor(color);
@@ -4773,7 +4760,7 @@ public class CardFactory_Creatures {
                         CardList list = new CardList();
                         list.addAll(lib.getCards());
                         list.addAll(hand.getCards());
-                        
+
                         if(list.size() > 0) {
                             String color = CardFactoryUtil.getMostProminentColor(list);
                             if(!color.equals("")) card.setChosenColor(color);
@@ -4783,15 +4770,7 @@ public class CardFactory_Creatures {
                         }
                     }
                 }
-            };
-            Command comesIntoPlay = new Command() {
-                private static final long serialVersionUID = 3331342605626623161L;
-                
-                public void execute() {
-                    AllZone.Stack.add(ability);
-                }
             };//Command
-            ability.setStackDescription("As Iona, Shield of Emeria enters the battlefield, choose a color.");
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
         
