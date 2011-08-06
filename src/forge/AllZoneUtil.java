@@ -704,4 +704,10 @@ public class AllZoneUtil {
 		list.add(AllZone.ComputerPlayer);
 		return list;
 	}
+	
+	public static ArrayList<Player> getOpponents(Player p) {
+		ArrayList<Player> list = new ArrayList<Player>();
+		list.add(p.getOpponent());
+		return list;
+	}
 }

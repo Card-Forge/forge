@@ -49,6 +49,37 @@ import java.util.Random;
 
 		return abDamage;
 	}
+	
+	public SpellAbility getAbilityDamageAll(){
+
+		final SpellAbility abDamageAll = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+			private static final long serialVersionUID = -1831356710492849854L;
+			final AbilityFactory af = AF;
+		
+			@Override
+			public String getStackDescription(){
+				return damageAllStackDescription(af, this);
+			}
+			
+			@Override
+			public boolean canPlay(){
+				// super takes care of AdditionalCosts
+				return super.canPlay();	
+			}
+			
+			@Override
+			public boolean canPlayAI() {
+				return damageAllCanPlayAI(af, this);
+			}
+			
+			@Override
+			public void resolve() {
+				damageAllResolve(af, this);
+			}
+			
+		};
+		return abDamageAll;
+	}
 
 	public SpellAbility getSpell() {
 		final SpellAbility spDealDamage = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
@@ -80,6 +111,39 @@ import java.util.Random;
 
 		return spDealDamage;
 	}
+	
+	public SpellAbility getSpellDamageAll(){
+		final SpellAbility spDamageAll = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+			private static final long serialVersionUID = 8004957182752984818L;
+			final AbilityFactory af = AF;
+			final HashMap<String,String> params = af.getMapParams();
+			
+			@Override
+			public String getStackDescription(){
+				if(params.containsKey("SpellDescription"))
+					return AF.getHostCard().getName() + " - " + params.get("SpellDescription");
+				else
+					return damageAllStackDescription(af, this);
+			}
+			
+			public boolean canPlay(){
+				// super takes care of AdditionalCosts
+				return super.canPlay();	
+			}
+			
+			public boolean canPlayAI()
+			{
+				return damageAllCanPlayAI(af, this);
+			}
+			
+			@Override
+			public void resolve() {
+				damageAllResolve(af, this);
+			}
+			
+		};
+		return spDamageAll;
+	}
 
 	public SpellAbility getDrawback() {
 		final SpellAbility dbDealDamage = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()) {
@@ -104,6 +168,31 @@ import java.util.Random;
 		}; // Drawback
 
 		return dbDealDamage;
+	}
+	
+	public SpellAbility getDrawbackDamageAll(){
+		final SpellAbility dbDamageAll = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()){
+			private static final long serialVersionUID = -6169562107675964474L;
+			final AbilityFactory af = AF;
+			
+			@Override
+			public String getStackDescription(){
+				return damageAllStackDescription(af, this);
+			}
+			
+			@Override
+			public void resolve() {
+				damageAllResolve(af, this);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				//check AI life before playing this drawback?
+				return true;
+			}
+			
+		};
+		return dbDamageAll;
 	}
 
         private int getNumDamage(SpellAbility saMe) {
@@ -365,4 +454,127 @@ import java.util.Random;
     			}
     		}
         }
+        
+        private void damageAllResolve(final AbilityFactory af, final SpellAbility sa){
+    		HashMap<String,String> params = af.getMapParams();
+    		String DrawBack = params.get("SubAbility");
+    		Card card = sa.getSourceCard();
+    		
+    		int dmg = getNumDamage(sa);
+    		
+    		String valid = "";
+    		String players = "";
+    		
+    		if(params.containsKey("ValidCards")) 
+    			valid = params.get("ValidCards");
+    		if(params.containsKey("ValidPlayers"))
+    			players = params.get("ValidPlayers");
+    		
+    		CardList list = AllZoneUtil.getCardsInPlay();
+    		list = list.getValidCards(valid.split(","), card.getController(), card);
+
+    	 	for(Card c:list) c.addDamage(dmg, card);
+    	 	
+    	 	if(players.equals("All")) {
+    	 		for(Player p:AllZoneUtil.getPlayersInGame()) {
+    	 			p.addDamage(dmg, card);
+    	 		}
+    	 	}
+    	 	else if(players.equals("EachOpponent")) {
+    	 		for(Player p:AllZoneUtil.getOpponents(card.getController())) p.addDamage(dmg, card);
+    	 	}
+    	 	else if(players.equals("Self"))
+    	 		card.getController().addDamage(dmg, card);
+    	 	else {
+    	 		//anything else to go here?
+    	 	}
+    		
+    	 	if (af.hasSubAbility()){
+    	 		Ability_Sub abSub = sa.getSubAbility();
+    	 		if (abSub != null){
+    	 		   abSub.resolve();
+    	 		}
+    	 		else
+    	 			CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
+    	 	}
+         }
+        
+        private String damageAllStackDescription(final AbilityFactory af, SpellAbility sa){
+        	StringBuilder sb = new StringBuilder();
+        	String name = af.getHostCard().getName();
+        	HashMap<String,String> params = af.getMapParams();
+        	String desc = "";
+        	if(params.containsKey("ValidDescription")) 
+        		desc = params.get("ValidDescription");
+        	int dmg = getNumDamage(sa);
+
+        	sb.append(name).append(" - Deals "+dmg+" to "+desc);
+
+        	Ability_Sub abSub = sa.getSubAbility();
+        	if (abSub != null) {
+        		sb.append(abSub.getStackDescription());
+        	}
+
+        	return sb.toString();
+        }
+        
+        private boolean damageAllCanPlayAI(final AbilityFactory af, final SpellAbility sa){
+        	return false;
+        	/*
+    		// AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
+    		Random r = new Random();
+    		Ability_Cost abCost = sa.getPayCosts();
+    		final Card source = sa.getSourceCard();
+    		final HashMap<String,String> params = af.getMapParams();
+    		String Valid = "";
+    		
+    		if(params.containsKey("ValidCards")) 
+    			Valid = params.get("ValidCards");
+    		
+    		CardList humanlist = new CardList(AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer).getCards());
+    		CardList computerlist = new CardList(AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
+    		
+    		humanlist = humanlist.getValidCards(Valid.split(","), source.getController(), source);
+    		computerlist = computerlist.getValidCards(Valid.split(","), source.getController(), source);
+    		
+    		humanlist = humanlist.getNotKeyword("Indestructible");
+    		computerlist = computerlist.getNotKeyword("Indestructible");
+    		
+    		if (abCost != null){
+    			// AI currently disabled for some costs
+    			if (abCost.getSacCost()){ 
+    				//OK
+    			}
+    			if (abCost.getLifeCost()){
+    				if (AllZone.ComputerPlayer.getLife() - abCost.getLifeAmount() < 4)
+    					return false;
+    			}
+    			if (abCost.getDiscardCost()) //OK
+    			
+    			if (abCost.getSubCounter()){
+    					// OK
+    			}
+    		}
+    		
+    		if (!ComputerUtil.canPayCost(sa))
+    			return false;
+    		
+    		 // prevent run-away activations - first time will always return true
+    		 boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
+    		 
+    		 // if only creatures are affected evaluate both lists and pass only if human creatures are more valuable
+    		 if (humanlist.getNotType("Creature").size() == 0 && computerlist.getNotType("Creature").size() == 0) {
+    			 if(CardFactoryUtil.evaluateCreatureList(computerlist) + 200 >= CardFactoryUtil.evaluateCreatureList(humanlist))
+    				 return false;
+    		 } // otherwise evaluate both lists by CMC and pass only if human permanents are more valuable
+    		 else if(CardFactoryUtil.evaluatePermanentList(computerlist) + 3 >= CardFactoryUtil.evaluateCreatureList(humanlist))
+    			 return false;
+    		 
+    		 Ability_Sub subAb = sa.getSubAbility();
+    		 if (subAb != null)
+    		 	chance &= subAb.chkAI_Drawback();
+    		 
+    		 return ((r.nextFloat() < .6667) && chance);
+    		 */
+    	}
     }

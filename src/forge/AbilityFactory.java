@@ -189,6 +189,16 @@ public class AbilityFactory {
 			else if (isDb)
 				SA = dd.getDrawback();
 	      }
+	      
+	      if (API.equals("DamageAll")){
+	    	  AbilityFactory_DealDamage dd = new AbilityFactory_DealDamage(this);
+	    	  if (isAb)
+	    		  SA = dd.getAbilityDamageAll();
+	    	  else if (isSp)
+	    		  SA = dd.getSpellDamageAll();
+	    	  else if (isDb)
+	    		  SA = dd.getDrawbackDamageAll();
+	      }
 		
 		if (API.equals("PutCounter")){
 			if (isAb)
