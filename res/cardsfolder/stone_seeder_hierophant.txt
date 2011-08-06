@@ -1,0 +1,10 @@
+Name:Stone-Seeder Hierophant
+ManaCost:2 G G
+Types:Creature Human Druid
+Text:no text
+PT:1/1
+K:WheneverKeyword:EntersBattleField:Type/Land:Play:UntapPermanent:Self:ASAP:Yes_No:Initiator - OwnedByController:Landfall - Whenever a land enters the battlefield under your control, you may gain 2 life.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_seeder_hierophant.jpg
+End

@@ -1,0 +1,9 @@
+Name:Juniper Order Druid
+ManaCost:2 G
+Types:Creature Human Cleric Druid
+Text:no text
+PT:1/1
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/juniper_order_druid.jpg
+End
