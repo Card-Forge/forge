@@ -647,8 +647,8 @@ public class Combat {
                 
                 for(Entry<Card, Integer> entry : assignedDamageMap.entrySet()){
                     Card crd = entry.getKey();
-
-                    damageMap.put(crd, entry.getValue());
+                    if(CardFactoryUtil.canDamage(crd, c))
+                    	damageMap.put(crd, entry.getValue());
                 }
                 c.addCombatDamage(damageMap);
                 

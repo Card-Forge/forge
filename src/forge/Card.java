@@ -2706,9 +2706,13 @@ public class Card extends MyObservable {
 	                
 	                AllZone.Stack.add(ability2);
 	            }
+	            
+	            /*
 	            if(source.getKeyword().contains("Deathtouch") && isCreature()) {
 	                AllZone.GameAction.destroy(this);
 	            }
+	            */
+	            
 	            if(isCreature() 
 	            	&& source.hasKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.")) 
 	            {
@@ -2834,6 +2838,9 @@ public class Card extends MyObservable {
     
     public void addDamage(final int damageIn, final Card source) {
         int damageToAdd = damageIn;
+        
+        if(!CardFactoryUtil.canDamage(source, this)) return;
+        
         damageToAdd = preventDamage(damageToAdd, source, false);
         
         addDamageWithoutPrevention(damageToAdd,source);
@@ -2844,55 +2851,8 @@ public class Card extends MyObservable {
     	
         if( damageToAdd == 0 ) return;  //Rule 119.8
         
-        if(this.isPlaneswalker()) {
-        	this.subtractCounter(Counters.LOYALTY, damageToAdd);
-        }
-        
-        if((source.getKeyword().contains("Wither") || source.getKeyword().contains("Infect")) && this.isCreature()) {
-        	this.addCounterFromNonEffect(Counters.M1M1, damageToAdd);
-        	damageToAdd = 0;
-        }
-        
-        if(source.getName().equals("Spiritmonger")) {
-        	Ability ability2 = new Ability(source, "0") {
-        		@Override
-        		public void resolve() {
-        			source.addCounter(Counters.P1P1, 1);
-        		}
-        	}; // ability2
-        	
-        	StringBuilder sb2 = new StringBuilder();
-        	sb2.append(source.getName()).append(" - gets a +1/+1 counter");
-        	ability2.setStackDescription(sb2.toString());
-        	
-        	AllZone.Stack.add(ability2);
-        }
-        
-        if(this.getName().equals("Fungusaur")) {
-        	Ability ability2 = new Ability(this, "0") {
-        		@Override
-        		public void resolve() {
-        			addCounter(Counters.P1P1, 1);
-        		}
-        	}; // ability2
-        	
-        	StringBuilder sb2 = new StringBuilder();
-        	sb2.append(this.getName()).append(" - gets a +1/+1 counter");
-        	ability2.setStackDescription(sb2.toString());
-        	
-        	AllZone.Stack.add(ability2);
-        }
-        
-        if(source.getKeyword().contains("Deathtouch") && this.isCreature()) {
-            AllZone.GameAction.destroy(this);
-            //AllZone.Combat.removeFromCombat(card);
-        }
-        
         System.out.println("Adding " + damageToAdd + " damage to " + getName());
         Log.debug("Adding " + damageToAdd + " damage to " + getName());
-        if(AllZoneUtil.isCardInPlay(this) && CardFactoryUtil.canDamage(source, this)) {
-        	damage += damageToAdd;
-        }
         
         if(this.getName().equals("Stuffy Doll")) {
         	final Player opponent = this.getOwner().getOpponent();
@@ -2942,16 +2902,56 @@ public class Card extends MyObservable {
             AllZone.Stack.add(ability);
         }
         
-        if(source.getKeyword().contains("Lifelink") && CardFactoryUtil.canDamage(source, this)) GameActionUtil.executeLifeLinkEffects(source, damageToAdd);
-        
-        if(isEnchantedBy("Mortal Wound")) {
-        	AllZone.GameAction.destroy(this);
-        }
+        if(source.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(source, damageToAdd);
         
         CardList cl = CardFactoryUtil.getAurasEnchanting(source, "Guilty Conscience");
         for(Card c:cl) {
             GameActionUtil.executeGuiltyConscienceEffects(source, c, damageToAdd);
         }
+        
+        if((source.getKeyword().contains("Wither") || source.getKeyword().contains("Infect")) && this.isCreature()) {
+        	this.addCounterFromNonEffect(Counters.M1M1, damageToAdd);
+        	damageToAdd = 0;
+        }
+        
+        if(this.isPlaneswalker()) {
+        	this.subtractCounter(Counters.LOYALTY, damageToAdd);
+        } else
+            if(AllZoneUtil.isCardInPlay(this)) damage += damageToAdd;
+        
+        if(source.getName().equals("Spiritmonger")) {
+        	Ability ability2 = new Ability(source, "0") {
+        		@Override
+        		public void resolve() {
+        			source.addCounter(Counters.P1P1, 1);
+        		}
+        	}; // ability2
+        	
+        	StringBuilder sb2 = new StringBuilder();
+        	sb2.append(source.getName()).append(" - gets a +1/+1 counter");
+        	ability2.setStackDescription(sb2.toString());
+        	
+        	AllZone.Stack.add(ability2);
+        }
+        
+        if(this.getName().equals("Fungusaur")) {
+        	Ability ability2 = new Ability(this, "0") {
+        		@Override
+        		public void resolve() {
+        			addCounter(Counters.P1P1, 1);
+        		}
+        	}; // ability2
+        	
+        	StringBuilder sb2 = new StringBuilder();
+        	sb2.append(this.getName()).append(" - gets a +1/+1 counter");
+        	ability2.setStackDescription(sb2.toString());
+        	
+        	AllZone.Stack.add(ability2);
+        }
+        
+        if(isEnchantedBy("Mortal Wound")) AllZone.GameAction.destroy(this);
+        
+        if(source.getKeyword().contains("Deathtouch") && this.isCreature()) AllZone.GameAction.destroy(this);
     }
     private ArrayList<SetInfo> Sets = new ArrayList<SetInfo>();
     private String curSetCode = "";
