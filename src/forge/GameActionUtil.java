@@ -14063,6 +14063,45 @@ public class GameActionUtil {
 
 	};
 	
+	public static Command Serra_Ascendant = new Command() {
+		private static final long serialVersionUID = -3183332336954804701L;
+
+		public void execute() {
+			// get all creatures
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Serra Ascendant");
+
+			if(list.size() > 0) {
+				//Card crd = list.get(0); //unused
+
+				for(int i = 0; i < list.size(); i++) {
+
+					Card c = list.get(i);
+					if(moreThan30Life(c)) {
+						c.setBaseAttack(6);
+						c.setBaseDefense(6);
+						c.addNonStackingIntrinsicKeyword("Flying");
+					} else {
+						c.setBaseAttack(1);
+						c.setBaseDefense(1);
+						c.removeIntrinsicKeyword("Flying");
+					}
+
+				}
+			}
+		}// execute()
+
+		private boolean moreThan30Life(Card c) {
+			PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
+
+			if(life.getLife() >= 30) return true;
+			else return false;
+		}
+
+	};
+	
 	public static Command Aura_Gnarlid       = new Command() {
 		private static final long serialVersionUID = 7072465568184131512L;
 
@@ -14346,7 +14385,7 @@ public class GameActionUtil {
 
 		}// execute()
 
-	}; //Elvish_Archdruid_Pump
+	}; //Broodwarden
 
 	public static Command Elvish_Archdruid_Pump       = new Command() {
 
@@ -14423,6 +14462,86 @@ public class GameActionUtil {
 		}// execute()
 
 	}; //Elvish_Archdruid_Other
+	
+	public static Command Knight_Exemplar_Pump      = new Command() {
+
+		private static final long serialVersionUID = 6533843071289695848L;
+		CardList                  gloriousAnthemList = new CardList();
+
+		public void execute() {
+
+			CardList cList = gloriousAnthemList;
+			Card c;
+
+			for(int i = 0; i < cList.size(); i++) {
+				c = cList.get(i);
+				c.addSemiPermanentAttackBoost(-1);
+				c.addSemiPermanentDefenseBoost(-1);
+				c.removeExtrinsicKeyword("Indestructible");
+			}
+			cList.clear();
+			PlayerZone[] zone = getZone("Knight Exemplar");
+
+			// for each zone found add +1/+1 to each card
+			for(int outer = 0; outer < zone.length; outer++) {
+				CardList creature = new CardList(
+						zone[outer].getCards());
+				creature = creature.getType("Knight");
+
+				for(int i = 0; i < creature.size(); i++) {
+					c = creature.get(i);
+					if(c.isCreature()
+							&& !c.getName().equals("Knight Exemplar")) {
+						c.addSemiPermanentAttackBoost(1);
+						c.addSemiPermanentDefenseBoost(1);
+						c.addExtrinsicKeyword("Indestructible");
+						gloriousAnthemList.add(c);
+					}
+
+				} // for
+			} // for
+
+		}// execute()
+
+	}; //Knight_Exemplar_Pump
+
+
+	public static Command Knight_Exemplar_Other      = new Command() {
+
+		private static final long serialVersionUID = -427651148827852361L;
+		int                       otherKnights      = 0;
+
+		private int countOtherDruids(Card c) {
+			PlayerZone play = AllZone.getZone(
+					Constant.Zone.Play, c.getController());
+			CardList knights = new CardList(play.getCards());
+			knights = knights.getName("Knight Exemplar");
+			return knights.size() - 1;
+		}
+
+		public void execute() {
+
+
+			CardList creature = new CardList();
+			creature.addAll(AllZone.Human_Play.getCards());
+			creature.addAll(AllZone.Computer_Play.getCards());
+
+			creature = creature.getName("Knight Exemplar");
+
+			for(int i = 0; i < creature.size(); i++) {
+				Card c = creature.get(i);
+				otherKnights = countOtherDruids(c);
+				c.setOtherAttackBoost(otherKnights);
+				c.setOtherDefenseBoost(otherKnights);
+				if(!c.getOtherExtrinsicKeyword().contains("Indestructible")
+						&& otherKnights > 0) c.addOtherExtrinsicKeyword("Indestructible");
+				else if (c.getOtherExtrinsicKeyword().contains("Indestructible") && otherKnights == 0)
+					c.removeOtherExtrinsicKeyword("Indestructible");
+
+			}// for inner
+		}// execute()
+
+	}; //Knight_Exemplar_Other
 
 	public static Command Wizened_Cenn_Pump           = new Command() {
 		private static final long serialVersionUID   = 542524781150091105L;
@@ -15084,10 +15203,11 @@ public class GameActionUtil {
 				otherLords = countOtherLords();
 				c.setOtherAttackBoost(otherLords);
 				c.setOtherDefenseBoost(otherLords);
-				if(!c.getExtrinsicKeyword().contains(
+				if(!c.getOtherExtrinsicKeyword().contains(
 						"Indestructible")
-						&& otherLords > 0) c.addExtrinsicKeyword("Indestructible");
-				//else if (c.getExtrinsicKeyword().contains("Mountainwalk") && otherLords == 0 )
+						&& otherLords > 0) c.addOtherExtrinsicKeyword("Indestructible");
+				else if (c.getOtherExtrinsicKeyword().contains("Indestructible") && otherLords == 0 )
+					c.removeOtherExtrinsicKeyword("Indestructible");
 
 
 			}// for inner
@@ -15173,9 +15293,10 @@ public class GameActionUtil {
 				otherLords = countOtherLords();
 				c.setOtherAttackBoost(otherLords);
 				c.setOtherDefenseBoost(otherLords);
-				if(!c.getExtrinsicKeyword().contains("Haste")
-						&& otherLords > 0) c.addExtrinsicKeyword("Haste");
-				//else if (c.getExtrinsicKeyword().contains("Mountainwalk") && otherLords == 0 )
+				if(!c.getOtherExtrinsicKeyword().contains("Haste")
+						&& otherLords > 0) c.addOtherExtrinsicKeyword("Haste");
+				else if (c.getOtherExtrinsicKeyword().contains("Haste") && otherLords == 0 )
+					c.removeOtherExtrinsicKeyword("Haste");
 
 
 			}// for inner
@@ -15259,10 +15380,11 @@ public class GameActionUtil {
 				otherLords = countOtherLords();
 				c.setOtherAttackBoost(otherLords);
 				c.setOtherDefenseBoost(otherLords);
-				if(!c.getExtrinsicKeyword().contains(
+				if(!c.getOtherExtrinsicKeyword().contains(
 						"Mountainwalk")
-						&& otherLords > 0) c.addExtrinsicKeyword("Mountainwalk");
-				//else if (c.getExtrinsicKeyword().contains("Mountainwalk") && otherLords == 0 )
+						&& otherLords > 0) c.addOtherExtrinsicKeyword("Mountainwalk");
+				else if (c.getOtherExtrinsicKeyword().contains("Mountainwalk") && otherLords == 0 )
+					c.removeOtherExtrinsicKeyword("Mountainwalk");
 
 
 			}// for inner
@@ -15419,9 +15541,11 @@ public class GameActionUtil {
 				otherLords = countOtherLords();
 				c.setOtherAttackBoost(otherLords);
 				c.setOtherDefenseBoost(otherLords);
-				if(!c.getExtrinsicKeyword().contains(
+				if(!c.getOtherExtrinsicKeyword().contains(
 						"Islandwalk")
-						&& otherLords > 0) c.addExtrinsicKeyword("Islandwalk");
+						&& otherLords > 0) c.addOtherExtrinsicKeyword("Islandwalk");
+				else if (c.getOtherExtrinsicKeyword().contains("Islandwalk") && otherLords == 0)
+					c.removeOtherExtrinsicKeyword("Islandwalk");
 
 			}// for inner
 		}// execute()
@@ -19084,6 +19208,7 @@ public class GameActionUtil {
 		commands.put("Nimble_Mongoose", Nimble_Mongoose);
 		commands.put("Werebear", Werebear);
 		commands.put("Divinity_of_Pride", Divinity_of_Pride);
+		commands.put("Serra_Ascendant", Serra_Ascendant);
 		commands.put("Yavimaya_Enchantress", Yavimaya_Enchantress);
 		commands.put("Aura_Gnarlid", Aura_Gnarlid);
 		commands.put("Knight_of_the_Reliquary", Knight_of_the_Reliquary);
@@ -19101,6 +19226,8 @@ public class GameActionUtil {
 		commands.put("Elvish_Archdruid_Other", Elvish_Archdruid_Other);
 		commands.put("Elvish_Champion_Pump", Elvish_Champion_Pump);
 		commands.put("Elvish_Champion_Other", Elvish_Champion_Other);
+		commands.put("Knight_Exemplar_Pump", Knight_Exemplar_Pump);
+		commands.put("Knight_Exemplar_Other", Knight_Exemplar_Other);
 		commands.put("Wizened_Cenn_Pump", Wizened_Cenn_Pump);
 		commands.put("Wizened_Cenn_Other", Wizened_Cenn_Other);
 		commands.put("Lord_of_the_Undead_Pump", Lord_of_the_Undead_Pump);

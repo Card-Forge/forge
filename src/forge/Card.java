@@ -21,6 +21,7 @@ public class Card extends MyObservable {
     //private ArrayList<String> keyword = new ArrayList<String>();
     private ArrayList<String>            intrinsicKeyword                  = new ArrayList<String>();
     private ArrayList<String>            extrinsicKeyword                  = new ArrayList<String>();
+    private ArrayList<String>			 otherExtrinsicKeyword			   = new ArrayList<String>();
     private ArrayList<String>            prevIntrinsicKeyword              = new ArrayList<String>();
     private ArrayList<Card>              attached                          = new ArrayList<Card>();
     private ArrayList<Card>              equippedBy                        = new ArrayList<Card>();             //which equipment cards are equipping this card?
@@ -1475,7 +1476,9 @@ public class Card extends MyObservable {
     public ArrayList<String> getKeyword() {
         ArrayList<String> a1 = new ArrayList<String>(getIntrinsicKeyword());
         ArrayList<String> a2 = new ArrayList<String>(getExtrinsicKeyword());
+        ArrayList<String> a3 = new ArrayList<String>(getOtherExtrinsicKeyword());
         a1.addAll(a2);
+        a1.addAll(a3);
         
         for(Ability_Mana sa:getManaAbility())
             if(sa.isBasic()) a1.add((sa).orig);
@@ -1554,6 +1557,43 @@ public class Card extends MyObservable {
     
     public int getExtrinsicKeywordSize() {
         return extrinsicKeyword.size();
+    }
+    
+    public ArrayList<String> getOtherExtrinsicKeyword() {
+        return new ArrayList<String>(otherExtrinsicKeyword);
+    }
+    
+    public void setOtherExtrinsicKeyword(ArrayList<String> a) {
+        otherExtrinsicKeyword = new ArrayList<String>(a);
+        this.updateObservers();
+    }
+    
+    public void addOtherExtrinsicKeyword(String s) {
+        //if(!getKeyword().contains(s)){
+        if(s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, s) {
+
+			private static final long serialVersionUID = -3032496855034700637L;
+        });
+        else 
+        	otherExtrinsicKeyword.add((getName().trim().length()==0 ? s :s.replaceAll(getName(), "CARDNAME")));
+        //}
+    }
+    
+    public void addStackingOtherExtrinsicKeyword(String s) {
+    	if (s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, s)
+    	{
+			private static final long serialVersionUID = 7004485151675361747L;
+    	});
+    	else extrinsicKeyword.add(s);
+    }
+    
+    public void removeOtherExtrinsicKeyword(String s) {
+        otherExtrinsicKeyword.remove(s);
+        this.updateObservers();
+    }
+    
+    public int getOtherExtrinsicKeywordSize() {
+        return otherExtrinsicKeyword.size();
     }
     
     public ArrayList<String> getPrevIntrinsicKeyword() {

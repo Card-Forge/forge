@@ -2048,7 +2048,7 @@ public class CardFactory_Creatures {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Angel of Mercy") || cardName.equals("Rhox Bodyguard")) {
+        else if(cardName.equals("Angel of Mercy") || cardName.equals("Rhox Bodyguard") || cardName.equals("Tireless Missionaries")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {

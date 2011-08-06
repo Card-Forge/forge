@@ -102,6 +102,7 @@ public class StaticEffects
 		cardToEffectsList.put("Nimble Mongoose", new String[] {"Nimble_Mongoose"});
 		cardToEffectsList.put("Werebear", new String[] {"Werebear"});
 		cardToEffectsList.put("Divinity of Pride", new String[] {"Divinity_of_Pride"});
+		cardToEffectsList.put("Serra Ascendant", new String[] {"Serra_Ascendant"});
 		cardToEffectsList.put("Yavimaya Enchantress", new String[] {"Yavimaya_Enchantress"});
 		cardToEffectsList.put("Aura Gnarlid", new String[] {"Aura_Gnarlid"} );
 		cardToEffectsList.put("Knight of the Reliquary", new String[] {"Knight_of_the_Reliquary"});
@@ -115,6 +116,7 @@ public class StaticEffects
 		cardToEffectsList.put("Privileged Position", new String[] {"Privileged_Position", "Privileged_Position_Other"});
 		cardToEffectsList.put("Broodwarden", new String[] {"Broodwarden"});
 		cardToEffectsList.put("Elvish Archdruid", new String[] {"Elvish_Archdruid_Pump", "Elvish_Archdruid_Other"});
+		cardToEffectsList.put("Knight Exemplar", new String[] {"Knight_Exemplar_Pump", "Knight_Exemplar_Other"});
 		cardToEffectsList.put("Wizened Cenn", new String[] {"Wizened_Cenn_Pump", "Wizened_Cenn_Other"});
 		cardToEffectsList.put("Lord of the Undead", new String[] {"Lord_of_the_Undead_Pump", "Lord_of_the_Undead_Other"});
 		cardToEffectsList.put("Cemetery Reaper", new String[] {"Cemetery_Reaper_Pump", "Cemetery_Reaper_Other"});

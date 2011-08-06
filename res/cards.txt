@@ -1,3 +1,23 @@
+Tireless Missionaries
+4 W
+Creature Human Cleric
+When Tireless Missionaries enters the battlefield, you gain 3 life.
+2/3
+
+Serra Ascendant
+W
+Creature Human Monk
+As long as you have 30 or more life, Serra Ascendant gets +5/+5 and has flying.
+1/1
+Lifelink
+
+Knight Exemplar
+1 W W
+Creature Human Knight
+Other Knight creatures you control get +1/+1 and are indestructible.
+2/2
+First Strike
+
 Deserted Temple
 no cost
 Land
