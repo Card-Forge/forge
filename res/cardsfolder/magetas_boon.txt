@@ -7,4 +7,5 @@ K:Enchant creature
 K:enPump:+1/+2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magetas_boon.jpg
+SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/14.jpg
 End

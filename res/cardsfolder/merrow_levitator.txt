@@ -6,4 +6,5 @@ PT:2/3
 K:abPumpTgtC T:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merrow_levitator.jpg
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/26.jpg
 End

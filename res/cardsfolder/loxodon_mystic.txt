@@ -6,4 +6,6 @@ PT:3/3
 K:abTapTgt W T:Creature:Tap target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_mystic.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/7.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/26.jpg
 End

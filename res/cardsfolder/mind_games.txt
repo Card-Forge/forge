@@ -7,4 +7,5 @@ SVar:Buyback:2 U
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_games.jpg
+SetInfo:STH|Common|http://magiccards.info/scans/en/sh/38.jpg
 End

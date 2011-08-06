@@ -6,4 +6,5 @@ A:SP$Retrieve | Cost$ B | Destination$ Library | LibraryPosition$ 0 | TgtPrompt$
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/misinformation.jpg
+SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/19.jpg
 End

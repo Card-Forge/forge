@@ -5,4 +5,5 @@ Text:Maga, Traitor to Mortals enters the battlefield with X +1/+1 counters on it
 PT:0/0
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maga_traitor_to_mortals.jpg
+SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/81.jpg
 End

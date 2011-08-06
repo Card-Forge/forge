@@ -6,4 +6,5 @@ PT:2/2
 K:abDamageTgtCP T Discard<1/Random>:1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mage_il_vec.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/86.jpg
 End

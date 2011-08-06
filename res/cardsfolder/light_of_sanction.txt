@@ -5,4 +5,5 @@ Text:Prevent all damage that would be dealt to creatures you control by sources 
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/light_of_sanction.jpg
+SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/24.jpg
 End

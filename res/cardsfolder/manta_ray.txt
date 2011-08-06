@@ -7,4 +7,5 @@ K:CARDNAME can't attack unless defending player controls an Island.
 K:When you control no Islands, sacrifice CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/manta_ray.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/42.jpg
 End

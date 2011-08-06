@@ -5,4 +5,5 @@ Text:no text
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lab_rats.jpg
+SetInfo:STH|Common|http://magiccards.info/scans/en/sh/11.jpg
 End

@@ -7,4 +7,6 @@ K:Flying
 K:abDamageTgtCP T:1
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4712.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/75.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/87.jpg
 End

@@ -4,4 +4,5 @@ Types:Sorcery
 Text:Each player exiles all creature cards from his or her graveyard, then sacrifices all creatures he or she controls, then puts all cards he or she exiled this way onto the battlefield.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_death.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/36.jpg
 End

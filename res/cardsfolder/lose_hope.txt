@@ -6,4 +6,5 @@ K:spPumpTgtCurse:-1/-1
 K:Scry 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lose_hope.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/52.jpg
 End

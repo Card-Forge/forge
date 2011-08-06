@@ -8,4 +8,5 @@ K:When you control no Islands, sacrifice CARDNAME.
 K:WheneverKeyword:isUnblocked:Self:Play:ModifyLife/2:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:Whenever Merchant Ship attacks and isn't blocked, you gain 2 life.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merchant_ship.jpg
+SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/23.jpg
 End

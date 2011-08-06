@@ -6,4 +6,5 @@ PT:2/2
 K:Flash
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_snake.jpg
+SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/112.jpg
 End

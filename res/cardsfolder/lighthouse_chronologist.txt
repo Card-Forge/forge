@@ -7,4 +7,5 @@ K:Level up:U
 K:maxLevel:7
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lighthouse_chronologist.jpg
+SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/75.jpg
 End

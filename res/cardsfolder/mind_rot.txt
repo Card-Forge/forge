@@ -5,4 +5,13 @@ Text:no text
 K:spDiscardTgt:TgtChoose:2:Target player discards two cards.:Mind Rot - target player discards cards
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_rot.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/144.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/147.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po2/18.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/145.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/159.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/105.jpg
+SetInfo:P02|Common|http://magiccards.info/scans/en/po2/18.jpg
+SetInfo:S99|Common|http://magiccards.info/scans/en/st/83.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/105.jpg
 End

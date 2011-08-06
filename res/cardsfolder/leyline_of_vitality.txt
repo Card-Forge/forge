@@ -7,4 +7,5 @@ K:WheneverKeyword:EntersBattleField:Type/Creature:Play:ModifyLife/1:ControllingP
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_of_vitality.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/183.jpg
 End

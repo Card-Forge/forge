@@ -7,4 +7,5 @@ K:Cycling:2
 K:Flashback:3 W
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marshaling_cry.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/13.jpg
 End

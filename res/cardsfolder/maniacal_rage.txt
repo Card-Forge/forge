@@ -6,4 +6,7 @@ K:Enchant creature
 K:enPump:+2/+2/CARDNAME can't block.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maniacal_rage.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/87.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/155.jpg
+SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/68.jpg
 End

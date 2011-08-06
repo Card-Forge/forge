@@ -7,4 +7,5 @@ SVar:X:Sacrificed$CardToughness
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/miren_the_moaning_well.jpg
+SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/163.jpg
 End

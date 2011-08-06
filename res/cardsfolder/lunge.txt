@@ -6,4 +6,5 @@ A:SP$DealDamage | Cost$ 2 R | Tgt$ C | NumDmg$2 | SubAbility$SVar=DB1 | SpellDes
 SVar:DB1:DB$DealDamage | NumDmg$ 2 | Tgt$ P
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lunge.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/203.jpg
 End

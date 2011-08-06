@@ -6,4 +6,6 @@ PT:1/1
 K:tap: add B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leaden_myr.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/som/170.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/170.jpg
 End

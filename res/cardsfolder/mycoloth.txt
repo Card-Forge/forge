@@ -6,4 +6,5 @@ PT:4/4
 K:Devour:2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mycoloth.jpg
+SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/140.jpg
 End

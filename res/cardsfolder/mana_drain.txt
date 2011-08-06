@@ -5,4 +5,5 @@ Text:Counter target spell. At the beginning of your next main phase, add X to yo
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_drain.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/65.jpg
 End

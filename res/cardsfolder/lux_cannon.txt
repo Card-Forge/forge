@@ -6,4 +6,6 @@ A:AB$PutCounter | Cost$ T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescripti
 K:abDestroyTgtV T SubCounter<3/CHARGE>:Permanent:Destroy target permanent.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lux_cannon.jpg
+SetInfo:MRD|Mythic|http://magiccards.info/scans/en/som/173.jpg
+SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/173.jpg
 End

@@ -5,4 +5,5 @@ Text:no text
 K:spDamageTgtP:3
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card79084.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/178.jpg
 End

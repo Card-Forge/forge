@@ -6,4 +6,5 @@ PT:1/1
 K:abPump UB:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loch_korrigan.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/71.jpg
 End

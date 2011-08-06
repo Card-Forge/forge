@@ -6,4 +6,5 @@ PT:5/4
 K:StaticEffect:Play:All Permanents:Keyword/Forestwalk:Type.Creature:All creatures have forestwalk.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lumbering_satyr.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/257.jpg
 End

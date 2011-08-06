@@ -8,4 +8,10 @@ A:AB$Untap | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land. | SpellD
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ley_druid.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/114.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/170.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/140.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/251.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/113.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/114.jpg
 End

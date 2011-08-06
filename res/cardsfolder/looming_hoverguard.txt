@@ -7,4 +7,5 @@ K:Flying
 K:etbBounceTgt:Artifact:TopofLibrary
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/looming_hoverguard.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/38.jpg
 End

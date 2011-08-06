@@ -7,4 +7,5 @@ K:WheneverKeyword:EntersBattleField:Self:Play:DrawCards/1:ControllingPlayer_Self
 K:WheneverKeyword:CastSpell/Controller:Type/Creature:Graveyard:MoveFrom-Graveyard-Hand:Self:ASAP:PayMana/G G:No Special Condition:Whenever you cast a creature spell, you may pay G G. If you do, return Masked Admirers from your graveyard to your hand.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/masked_admirers.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/230.jpg
 End

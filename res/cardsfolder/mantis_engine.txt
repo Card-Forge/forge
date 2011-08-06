@@ -7,4 +7,6 @@ K:abPump 2:Flying
 K:abPump 2:First Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mantis_engine.jpg
+SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/133.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/333.jpg
 End

@@ -4,4 +4,8 @@ Types:Instant
 Text:Counter target spell unless its controller pays 3.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_leak.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/62.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/89.jpg
+SetInfo:STH|Common|http://magiccards.info/scans/en/sh/36.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/86.jpg
 End

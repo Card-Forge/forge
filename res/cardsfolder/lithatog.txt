@@ -7,4 +7,5 @@ K:abPump Sac<1/Artifact>:+1/+1
 K:abPump Sac<1/Land>:+1/+1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lithatog.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/289.jpg
 End

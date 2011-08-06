@@ -7,4 +7,5 @@ K:abDamageTgtV T:3:Creature.attacking,Creature.blocking:Lady Caleria deals 3 dam
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lady_caleria.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/279.jpg
 End

@@ -5,4 +5,5 @@ Text:no text
 K:abDamageTgtCP 2 R G Discard<2/Random>:4
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meteor_storm.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/256.jpg
 End

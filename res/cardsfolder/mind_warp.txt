@@ -7,4 +7,7 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_warp.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/39.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/143.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/36.jpg
 End

@@ -6,4 +6,5 @@ PT:1/1
 K:Echo:1 R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_war_marshal.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/170.jpg
 End

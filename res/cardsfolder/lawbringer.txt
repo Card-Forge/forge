@@ -6,4 +6,5 @@ PT:2/2
 A:AB$Bounce | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.Red | TgtPrompt$ Select target red Creature | Destination$ Exile | SpellDescription$ Exile target red creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lawbringer.jpg
+SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/10.jpg
 End

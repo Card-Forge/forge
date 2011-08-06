@@ -6,4 +6,6 @@ K:tap: add R
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/2u/en-us/card632.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/266.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/265.jpg
 End

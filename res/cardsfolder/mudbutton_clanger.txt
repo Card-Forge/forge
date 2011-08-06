@@ -6,4 +6,5 @@ PT:1/1
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mudbutton_clanger.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/95.jpg
 End

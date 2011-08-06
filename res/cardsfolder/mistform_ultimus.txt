@@ -1,9 +1,10 @@
 Name:Mistform Ultimus
-ManaCost:3 U 
+ManaCost:3 U
 Types:Creature Illusion Legend
 Text:no text
 PT:3/3
 K:Changeling
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_ultimus.jpg
+SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/47.jpg
 End

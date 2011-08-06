@@ -6,4 +6,5 @@ PT:2/3
 K:abPump 1 G:-0/-1/Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leaping_lizard.jpg
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/63.jpg
 End

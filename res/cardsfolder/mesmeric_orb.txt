@@ -6,4 +6,5 @@ Text:Whenever a permanent becomes untapped, that permanent's controller puts the
 #K:WheneverKeyword:BecomesUntapped:Type/Permanent:Play:MoveFrom-Library-Graveyard:ControllingPlayer_Self:ASAP:Yes_No:Initiator - OwnedByController:Whenever a permanent becomes untapped, that permanent's controller puts the top card of his or her library into his or her graveyard.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mesmeric_orb.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/204.jpg
 End

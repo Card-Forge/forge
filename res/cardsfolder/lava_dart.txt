@@ -6,4 +6,5 @@ A:SP$DealDamage | Cost$ R | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME 
 K:Flashback:Sac<1/Mountain>
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lava_dart.jpg
+SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/94.jpg
 End

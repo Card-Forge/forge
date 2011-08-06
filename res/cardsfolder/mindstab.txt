@@ -6,4 +6,5 @@ K:spDiscardTgt:TgtChoose:3:Target player discards three cards.:Mindstab - target
 K:Suspend:4:B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindstab.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/119.jpg
 End

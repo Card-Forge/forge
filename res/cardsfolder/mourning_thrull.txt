@@ -7,4 +7,5 @@ K:Flying
 K:Lifelink
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mourning_thrull.jpg
+SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/146.jpg
 End

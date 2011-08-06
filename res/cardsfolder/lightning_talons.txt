@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPump:+3/+0/First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_talons.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/107.jpg
 End

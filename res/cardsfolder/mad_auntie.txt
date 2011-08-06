@@ -8,4 +8,5 @@ A:AB$Regenerate | ValidTgts$ Creature.Goblin+Other | TgtPrompt$ Select another t
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mad_auntie.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/123.jpg
 End

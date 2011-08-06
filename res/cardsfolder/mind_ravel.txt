@@ -6,4 +6,6 @@ K:spDiscardTgt:TgtChoose:1:Target player discards a card.:CARDNAME - target play
 K:Draw a card at the beginning of the next turn's upkeep.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_ravel.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/38.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/35.jpg
 End

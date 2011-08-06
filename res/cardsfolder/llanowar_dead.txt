@@ -6,4 +6,5 @@ PT:2/2
 K:tap: add B
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card26759.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/109.jpg
 End

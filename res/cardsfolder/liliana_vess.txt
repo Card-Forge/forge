@@ -4,4 +4,7 @@ Types:Planeswalker - Liliana
 Text:no text
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card140212.jpg
+SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/102.jpg
+SetInfo:M10|Mythic|http://magiccards.info/scans/en/m10/102.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/121.jpg
 End

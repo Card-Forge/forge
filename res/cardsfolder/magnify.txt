@@ -6,4 +6,5 @@ K:spAllPump:All:+1/+1:All creatures get +1/+1 until end of turn.:Magnify - Creat
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/cg/en-us/card15819.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/111.jpg
 End

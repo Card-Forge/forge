@@ -5,4 +5,5 @@ Text:no text
 PT:2/3
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mayael_the_anima.jpg
+SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/179.jpg
 End

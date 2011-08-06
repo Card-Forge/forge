@@ -7,4 +7,10 @@ K:Flying
 K:Trample
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_the_pit.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/23.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/36.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/28.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/154.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/24.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/23.jpg
 End

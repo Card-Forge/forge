@@ -6,4 +6,5 @@ PT:1/4
 K:abPump W:Vigilance
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar_cavalry.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/195.jpg
 End

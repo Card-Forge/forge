@@ -5,4 +5,5 @@ Text:When Minotaur Explorer comes into play, sacrifice it unless you discard a c
 PT:3/3
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/od/en-us/card31786.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/206.jpg
 End

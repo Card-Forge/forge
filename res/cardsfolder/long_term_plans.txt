@@ -6,4 +6,5 @@ A:SP$Fetch | Cost$ 2 U | Destination$ Library | LibraryPosition$ 2 | FetchType$ 
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/long_term_plans.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/38.jpg
 End

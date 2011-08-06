@@ -5,4 +5,5 @@ Text:When Meadowboon leaves play, put a +1/+1 counter on each creature you contr
 PT:3/3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meadowboon.jpg
+SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/17.jpg
 End

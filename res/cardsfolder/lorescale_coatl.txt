@@ -5,4 +5,5 @@ Text:Whenever you draw a card, you may put a +1/+1 counter on Lorescale Coatl.
 PT:2/2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lorescale_coatl.jpg
+SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/101.jpg
 End

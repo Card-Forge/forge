@@ -6,4 +6,6 @@ PT:1/1
 A:AB$GainControl|Cost$ 1 U T|ValidTgts$Artifact.YouDontCtrl|TgtPrompt$Select target artifact opponent controls.|LoseControl$EOT|AddKWs$Haste|Untap$True|TapOnLose$True|SpellDescription$ Untap target artifact an opponent controls and gain control of it until end of turn. It gains haste until end of turn. When you lose control of the artifact, tap it.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_unseen.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/102.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/82.jpg
 End

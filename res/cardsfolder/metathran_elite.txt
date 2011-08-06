@@ -7,4 +7,5 @@ K:stPumpSelf:Creature:0/0/Unblockable:isEnchanted:Metathran Elite is unblockable
 SVar:EnchantMe:Once
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/metathran_elite.jpg
+SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/38.jpg
 End

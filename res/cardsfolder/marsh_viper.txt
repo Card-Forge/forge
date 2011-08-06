@@ -5,4 +5,7 @@ Text:Whenever Marsh Viper deals damage to an opponent, that player gets two pois
 PT:1/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marsh_viper.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/177.jpg
+SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/44.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/147.jpg
 End

@@ -11,4 +11,6 @@ K:1, tap: add G
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_prism.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/296.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/273.jpg
 End

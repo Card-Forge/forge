@@ -5,4 +5,5 @@ Text:no text
 K:spDamageTgtC:2:Drawback$YouGainLife/2:Last Kiss deals 2 damage to target creature and you gain 2 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/last_kiss.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/116.jpg
 End

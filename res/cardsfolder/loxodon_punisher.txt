@@ -6,4 +6,5 @@ PT:2/2
 SVar:EquipMe:Multiple
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_punisher.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/14.jpg
 End

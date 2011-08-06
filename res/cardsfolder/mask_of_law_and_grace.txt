@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPump:Protection from black & Protection from red
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mask_of_law_and_grace.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/11.jpg
 End

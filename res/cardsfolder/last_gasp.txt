@@ -5,4 +5,5 @@ Text:no text
 K:spPumpTgtCurse:-3/-3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/last_gasp.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/93.jpg
 End

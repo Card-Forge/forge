@@ -7,4 +7,5 @@ A:AB$Draw | Cost$ U Discard<1/Any> | NumCards $ 1 | SpellDescription$ Draw a car
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mesmeric_trance.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/83.jpg
 End

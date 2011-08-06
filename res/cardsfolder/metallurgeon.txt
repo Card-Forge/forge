@@ -6,4 +6,5 @@ PT:1/2
 A:AB$Regenerate | Cost$ W T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | SpellDescription$ Regenerate target artifact.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/metallurgeon.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/19.jpg
 End

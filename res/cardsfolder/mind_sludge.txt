@@ -6,4 +6,7 @@ K:spDiscardTgt:TgtChoose:X:Target player discards a card for each Swamp you cont
 SVar:X:Count$TypeYouCtrl.Swamp
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_sludge.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/146.jpg
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/70.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/102.jpg
 End

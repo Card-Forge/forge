@@ -6,4 +6,10 @@ PT:1/1
 K:abPump B:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/looming_shade.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/140.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/139.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/145.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/142.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/153.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/103.jpg
 End

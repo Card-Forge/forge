@@ -5,4 +5,9 @@ Text:no text
 K:spPumpTgt:+4/+4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/monstrous_growth.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/266.jpg
+SetInfo:P02|Common|http://magiccards.info/scans/en/po2/73.jpg
+SetInfo:S99|Common|http://magiccards.info/scans/en/st/132.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po2/73.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/258.jpg
 End

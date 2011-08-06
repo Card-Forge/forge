@@ -5,4 +5,8 @@ Text:no text
 K:spDamageTgtCP:4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_blast.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/200.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/185.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/193.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/200.jpg
 End

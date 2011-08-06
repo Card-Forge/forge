@@ -8,4 +8,5 @@ K:When CARDNAME becomes the target of a spell or ability, return CARDNAME to its
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirozel.jpg
+SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/41.jpg
 End

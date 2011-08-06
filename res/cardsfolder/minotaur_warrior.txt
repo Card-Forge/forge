@@ -5,4 +5,5 @@ Text:no text
 PT:2/3
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4351.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/145.jpg
 End

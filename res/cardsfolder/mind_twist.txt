@@ -6,4 +6,8 @@ K:spDiscardTgt:AtRandom:X:Target player discards X cards at random.:Mind Twist -
 SVar:X:Count$xPaid
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_twist.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/24.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/25.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/31.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/24.jpg
 End

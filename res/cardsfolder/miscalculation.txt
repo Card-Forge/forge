@@ -5,4 +5,5 @@ Text:Counter target spell unless its controller pays 2.
 K:Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/miscalculation.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/36.jpg
 End

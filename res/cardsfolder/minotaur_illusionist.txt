@@ -8,4 +8,5 @@ K:abDamageTgtC 1 R Sac<1/CARDNAME>:X:Minotaur Illusionist deals damage equal to 
 SVar:X:Count$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minotaur_illusionist.jpg
+SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/111.jpg
 End

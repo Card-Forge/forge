@@ -5,4 +5,5 @@ Text:no text
 K:spDiscardOpp:AtRandom:1:Target opponent discards a card at random.:Mind Knives - opponent discards cards
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_knives.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/23.jpg
 End

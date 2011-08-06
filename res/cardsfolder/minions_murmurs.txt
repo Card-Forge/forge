@@ -6,4 +6,5 @@ K:spDrawCards:X:Drawback$YouLoseLife/X:You draw X cards and you lose X life, whe
 SVar:X:Count$TypeYouCtrl.Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130316.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/71.jpg
 End

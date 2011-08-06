@@ -6,4 +6,5 @@ PT:3/3
 K:abDamageTgtCP T:3
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_crafter.jpg
+SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/93.jpg
 End

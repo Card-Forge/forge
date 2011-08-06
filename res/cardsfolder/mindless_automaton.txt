@@ -8,4 +8,5 @@ A:AB$PutCounter | Cost$ 1 Discard<1/Any> | CounterType$ P1P1 | CounterNum$ 1 | S
 K:abDrawCards SubCounter<2/P1P1>:1:Draw a card.:Mindless Automaton - Controller draws a card.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindless_automaton.jpg
+SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/135.jpg
 End

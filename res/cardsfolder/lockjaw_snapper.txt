@@ -6,4 +6,5 @@ PT:2/2
 K:Wither
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lockjaw_snapper.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/255.jpg
 End

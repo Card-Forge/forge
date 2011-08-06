@@ -6,4 +6,5 @@ K:spLoseLifeTgt:1:Drawback$YouGainLife/1:Target player loses 1 life and you gain
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/last_caress.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/41.jpg
 End

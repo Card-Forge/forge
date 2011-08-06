@@ -10,4 +10,5 @@ K:abPumpTgtC T:Protection from red
 K:abPumpTgtC T:Protection from white
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mother_of_runes.jpg
+SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/14.jpg
 End

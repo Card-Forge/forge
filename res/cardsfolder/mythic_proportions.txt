@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPump:+8/+8/Trample
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mythic_proportions.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/274.jpg
 End

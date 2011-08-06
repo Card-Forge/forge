@@ -6,4 +6,7 @@ K:tap: add W
 K:Comes into play tapped.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marble_diamond.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/297.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/275.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/306.jpg
 End

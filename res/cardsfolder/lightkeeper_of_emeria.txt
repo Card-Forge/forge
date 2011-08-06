@@ -7,4 +7,5 @@ K:Flying
 K:Multikicker W
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightkeeper_of_emeria.jpg
+SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/12.jpg
 End

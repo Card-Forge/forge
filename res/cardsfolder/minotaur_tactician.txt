@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:BuffedBy:Creature.White,Creature.Blue
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minotaur_tactician.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/65.jpg
 End

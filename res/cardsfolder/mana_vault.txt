@@ -7,4 +7,9 @@ K:CARDNAME doesn't untap during your untap step.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_vault.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/388.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/261.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/263.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/352.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/260.jpg
 End

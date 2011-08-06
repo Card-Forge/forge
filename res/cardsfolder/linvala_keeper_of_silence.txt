@@ -7,4 +7,5 @@ K:Flying
 SVar:PlayMain1:TRUE
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/linvala_keeper_of_silence.jpg
+SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/33.jpg
 End

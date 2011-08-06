@@ -7,4 +7,6 @@ K:stPumpAll:Creature.Merfolk+Other+YouCtrl:1/1:No Condition:Other Merfolk creatu
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_sovereign.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/65.jpg
+SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/62.jpg
 End

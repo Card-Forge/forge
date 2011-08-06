@@ -5,4 +5,11 @@ Text:Whenever a player taps a land for mana, Manabarbs deals 1 damage to that pl
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/manabarbs.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/165.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/250.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/230.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/218.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/194.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/164.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/164.jpg
 End

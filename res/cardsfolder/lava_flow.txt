@@ -5,4 +5,5 @@ Text:Destroy target creature or land.
 K:spDestroyTgt:Creature,Land
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/lava_flow.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/143.jpg
 End

@@ -6,4 +6,5 @@ K:1, tap: add R G
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mossfire_valley.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/321.jpg
 End

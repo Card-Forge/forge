@@ -6,4 +6,5 @@ A:AB$Pump | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select target a
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maze_of_ith.jpg
+SetInfo:DRK|Uncommon|http://magiccards.info/scans/en/dk/114.jpg
 End

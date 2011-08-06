@@ -5,4 +5,6 @@ Text:no text
 K:spAllPump:All:-2/-0:All creatures get -2/-0 until end of turn.:Marsh Gas - all creatures get -2/-0 until EOT.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marsh_gas.jpg
+SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/10.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/30.jpg
 End

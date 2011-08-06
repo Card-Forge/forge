@@ -7,4 +7,6 @@ K:stPumpAll:Creature.Myr+Other+YouCtrl:1/1:No Condition:Other Myr creatures you 
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_galvanizer.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/som/181.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/181.jpg
 End

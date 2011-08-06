@@ -6,4 +6,5 @@ PT:4/4
 K:Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moroii.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/216.jpg
 End

@@ -5,4 +5,9 @@ Text:Counter target spell. If that spell is countered this way, put it on top of
 K:spCounter:Spell:None:Topdeck:None
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/memory_lapse.jpg
+SetInfo:HML|Common|http://magiccards.info/scans/en/hl/40.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/103.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/81.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/74.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/88.jpg
 End

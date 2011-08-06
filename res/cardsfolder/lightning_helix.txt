@@ -5,4 +5,5 @@ Text:no text
 K:spDamageTgtCP:3:Drawback$YouGainLife/3:Lightning Helix deals 3 damage to target creature or player and you gain 3 life.:Lightning Helix - deals 3 damage and you gain 3 life.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_helix.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/213.jpg
 End

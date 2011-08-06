@@ -5,4 +5,5 @@ Text:Look at the top X cards of your library, where X is the number of artifacts
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/machinate.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/24.jpg
 End

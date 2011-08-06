@@ -6,4 +6,5 @@ PT:1/2
 K:abUntapAll T Sac<1/CARDNAME>:Forest:Untap all Forests.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar_druid.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/75.jpg
 End

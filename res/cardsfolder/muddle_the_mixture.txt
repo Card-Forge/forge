@@ -6,4 +6,5 @@ K:spCounter:Spell:Type(Instant,Sorcery):Graveyard:None
 K:Transmute:1 U U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/muddle_the_mixture.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/60.jpg
 End

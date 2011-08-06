@@ -3,7 +3,8 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:tap: add 1
-A:AB$Draw | Cost$ T | NumCards$ 1 | ActivatingCardsInHand$ 7 | SpellDescription$ Draw a card. Activate this ability only if you have exactly seven cards in hand.  
+A:AB$Draw | Cost$ T | NumCards$ 1 | ActivatingCardsInHand$ 7 | SpellDescription$ Draw a card. Activate this ability only if you have exactly seven cards in hand.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/an/en-us/card990.jpg
+SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/90.jpg
 End

@@ -7,4 +7,5 @@ K:Landfall
 SVar:RemAIDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lotus_cobra.jpg
+SetInfo:ZEN|Mythic|http://magiccards.info/scans/en/zen/168.jpg
 End

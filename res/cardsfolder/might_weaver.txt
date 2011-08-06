@@ -6,4 +6,6 @@ PT:2/1
 A:AB$Pump | Cost$ 2 | ValidTgts$ Creature.Red,Creature.White | KW$ Trample | SpellDescription$ Target red or white creature gains trample until end of turn. | TgtPrompt$ Select target red or white creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/might_weaver.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/198.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/278.jpg
 End

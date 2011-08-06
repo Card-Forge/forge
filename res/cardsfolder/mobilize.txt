@@ -5,4 +5,5 @@ Text:no text
 K:spUntapAll:Creature.YouCtrl:Untap all creatures you control.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mobilize.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/97.jpg
 End

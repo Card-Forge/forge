@@ -7,4 +7,5 @@ K:Enchant creature
 K:enPumpCurse:+3/+3/HIDDEN CARDNAME doesn't untap during your untap step.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leaden_fists.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/38.jpg
 End

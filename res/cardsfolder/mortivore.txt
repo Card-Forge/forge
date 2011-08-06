@@ -6,4 +6,7 @@ PT:1/1
 A:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mortivore.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/152.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/147.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/161.jpg
 End

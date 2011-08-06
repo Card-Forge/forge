@@ -11,4 +11,5 @@ K:stPumpSelf:Permanent:0/0/Forestwalk:isPresent Forest.YouCtrl:no text
 SVar:BuffedBy:Land
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magnigoth_treefolk.jpg
+SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/82.jpg
 End

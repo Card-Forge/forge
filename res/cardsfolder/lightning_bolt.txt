@@ -5,4 +5,9 @@ Text:no text
 A:SP$DealDamage | Cost$ R | Tgt$ TgtCP | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature or player.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/bd/en-us/card27255.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/146.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/163.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/161.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/226.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/162.jpg
 End

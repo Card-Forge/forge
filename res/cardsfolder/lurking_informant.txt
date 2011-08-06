@@ -5,4 +5,5 @@ Text:no text
 PT:1/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lurking_informant.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/249.jpg
 End

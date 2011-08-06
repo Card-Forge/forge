@@ -5,4 +5,5 @@ Text:Whenever Lorthos, the Tidemaker attacks, you may pay 8. If you do, tap up t
 PT:8/8
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lorthos_the_tidemaker.jpg
+SetInfo:ZEN|Mythic|http://magiccards.info/scans/en/zen/53.jpg
 End

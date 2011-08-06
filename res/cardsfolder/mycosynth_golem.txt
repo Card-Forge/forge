@@ -7,4 +7,5 @@ K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
 K:CostChange:Player:Less:1:Spell:All:Artifact/Creature:Affinity/Artifact/All Conditions
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mycosynth_golem.jpg
+SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/137.jpg
 End

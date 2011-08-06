@@ -8,4 +8,5 @@ K:abPumpTgtC T:+1/+1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_battlemage.jpg
+SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/5.jpg
 End

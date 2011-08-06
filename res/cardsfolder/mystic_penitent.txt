@@ -7,4 +7,5 @@ K:Vigilance
 K:stPumpSelf:Creature:1/1/Flying:Threshold:Threshold - As long as seven or more cards are in your graveyard, Mystic Penitent gets +1/+1 and has flying.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_penitent.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/34.jpg
 End

@@ -7,4 +7,5 @@ K:Vigilance
 K:abPump W:+0/+1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_stalwart.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/11.jpg
 End

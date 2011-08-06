@@ -7,4 +7,5 @@ K:enPump:+3/+3
 K:Dredge 2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moldervine_cloak.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/173.jpg
 End

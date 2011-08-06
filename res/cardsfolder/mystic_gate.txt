@@ -9,4 +9,5 @@ K:WU, tap: add U U
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_gate.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/277.jpg
 End

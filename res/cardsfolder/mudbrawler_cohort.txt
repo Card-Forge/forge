@@ -8,4 +8,5 @@ K:stPumpSelf:Creature:1/1:isPresent Creature.Red+Other+YouCtrl:CARDNAME gets +1/
 SVar:BuffedBy:Creature.Red
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mudbrawler_cohort.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/100.jpg
 End

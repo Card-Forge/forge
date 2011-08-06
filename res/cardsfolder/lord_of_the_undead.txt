@@ -6,4 +6,8 @@ PT:2/2
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_the_undead.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/141.jpg
+SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/44.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/143.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/155.jpg
 End

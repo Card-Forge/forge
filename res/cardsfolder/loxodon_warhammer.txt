@@ -5,4 +5,7 @@ Text:Equipped creature gets +3/+0 and has lifelink and trample.
 K:eqPump 3:+3/+0/Trample & Lifelink
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_warhammer.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/201.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/303.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/332.jpg
 End

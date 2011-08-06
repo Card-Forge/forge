@@ -8,4 +8,5 @@ K:WheneverKeyword:EntersBattleField:Self:Play:Damage/Power:InputType - CreatureO
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murderous_redcap.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/192.jpg
 End

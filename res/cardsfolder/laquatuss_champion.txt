@@ -6,4 +6,5 @@ PT:6/3
 A:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/laquatuss_champion.jpg
+SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/67.jpg
 End

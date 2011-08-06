@@ -4,4 +4,5 @@ Types:Instant
 Text:Target player gains 4 life, then gains 4 life for each card named Life Burst in each graveyard.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/od/en-us/card29704.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/30.jpg
 End

@@ -7,4 +7,5 @@ K:Trample
 K:abPump tapXType<1/Artifact>:+1/+1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lodestone_myr.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/200.jpg
 End

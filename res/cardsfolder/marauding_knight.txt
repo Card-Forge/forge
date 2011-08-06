@@ -9,4 +9,5 @@ SVar:X:Count$Valid Plains.YouDontCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marauding_knight.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/110.jpg
 End

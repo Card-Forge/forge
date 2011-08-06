@@ -6,4 +6,8 @@ K:Enchant creature
 K:enPump:Swampwalk
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leshracs_rite.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/35.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/141.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/31.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/144.jpg
 End

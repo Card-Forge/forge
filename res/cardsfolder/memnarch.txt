@@ -7,4 +7,5 @@ A:AB$GainControl|Cost$ 3 U|ValidTgts$Artifact|TgtPrompt$Select target artifact.|
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card51054.jpg
+SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/129.jpg
 End

@@ -5,4 +5,5 @@ Text:Equipped creature has fear.\r\nWhenever equipped creature deals combat dama
 K:eqPump 2:Fear
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mask_of_riddles.jpg
+SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/25.jpg
 End

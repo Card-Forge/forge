@@ -7,4 +7,5 @@ SVar:PlayMain1:TRUE
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_of_the_meek.jpg
+SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/10.jpg
 End

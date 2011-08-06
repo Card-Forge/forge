@@ -6,4 +6,5 @@ PT:2/4
 K:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/makindi_griffin.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/36.jpg
 End

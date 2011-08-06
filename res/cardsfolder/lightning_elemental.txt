@@ -6,4 +6,10 @@ PT:4/1
 K:Haste
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83150.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/201.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/186.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/201.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/201.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/217.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/147.jpg
 End

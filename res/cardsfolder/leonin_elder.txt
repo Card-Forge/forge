@@ -6,4 +6,5 @@ PT:1/1
 K:WheneverKeyword:EntersBattleField:Type/Artifact:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever an artifact enters the battlefield, you may gain 1 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_elder.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/10.jpg
 End

@@ -7,4 +7,5 @@ A:AB$Fetch | Cost$ T T Sac<3/Spirit> | Destination$ Battlefield | FetchType$ Per
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lifespinner.jpg
+SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/133.jpg
 End

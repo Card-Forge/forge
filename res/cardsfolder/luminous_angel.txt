@@ -7,4 +7,5 @@ K:Flying
 K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:MakeToken-Spirit-W-1-1-Flying-/1:ControllingPlayer_Self:ASAP:Yes_No:ControllerUpkeep:At the beginning of your upkeep, you may put a 1/1 white Spirit creature token with flying onto the battlefield.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/luminous_angel.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/15.jpg
 End

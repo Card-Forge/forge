@@ -6,4 +6,5 @@ PT:2/2
 K:Protection from black
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar_knight.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/254.jpg
 End

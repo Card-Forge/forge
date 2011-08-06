@@ -6,4 +6,6 @@ K:spDestroyTgt:Creature:Drawback$TgtOwnerGainLife/4
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/misfortunes_gain.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/p3k/13.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/13.jpg
 End

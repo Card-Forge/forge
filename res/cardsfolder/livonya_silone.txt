@@ -7,4 +7,5 @@ K:First Strike
 K:Legendary landwalk
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/livonya_silone.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/282.jpg
 End

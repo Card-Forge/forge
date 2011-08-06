@@ -7,4 +7,5 @@ K:Totem armor
 K:enPump:+3/+3/Vigilance
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mammoth_umbra.jpg
+SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/37.jpg
 End

@@ -5,4 +5,5 @@ Text:no text
 A:AB$Regenerate | Tgt$ TgtC | Cost$ 1 T Discard<1/Any> | SpellDescription$ Regenerate target creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/medicine_bag.jpg
+SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/133.jpg
 End

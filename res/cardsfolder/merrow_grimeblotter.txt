@@ -7,4 +7,5 @@ K:abPumpTgtC 1 UB Untap:-2/-0
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merrow_grimeblotter.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/171.jpg
 End

@@ -7,4 +7,5 @@ A:AB$GainControl|Cost$Sac<1/CARDNAME>|ValidTgts$Creature.powerLEX|TgtPrompt$Sele
 SVar:X:Count$CardCounters.TREASURE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/legacys_allure.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/71.jpg
 End

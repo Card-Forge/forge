@@ -6,4 +6,5 @@ PT:4/4
 K:WheneverKeyword:CastSpell/Controller:Type/Artifact:Play:MoveFrom-Any-Play:SearchShuffle_SameName/Library/Hand/Graveyard:ASAP:Choice_Instant-SearchLibrary:SearchType/Artifact:Whenever you cast an artifact spell, you may search your graveyard, hand, and/or library for a card with the same name as that spell and put it onto the battlefield. If you search your library this way, shuffle it.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mishra_artificer_prodigy.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/243.jpg
 End

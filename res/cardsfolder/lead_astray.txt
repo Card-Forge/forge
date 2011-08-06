@@ -6,4 +6,5 @@ A:SP$Tap | Cost$ 1 W | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target cr
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lead_astray.jpg
+SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/14.jpg
 End

@@ -7,4 +7,5 @@ K:Defender
 K:etbReturnTgt:1/MayReturn:Instant,Sorcery:Hand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mnemonic_wall.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/78.jpg
 End

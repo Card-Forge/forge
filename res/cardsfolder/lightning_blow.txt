@@ -6,4 +6,5 @@ A:SP$Pump | Cost$ 1 W | Tgt$ TgtC | KW$ First Strike | SpellDescription$ Target 
 K:Draw a card at the beginning of the next turn's upkeep.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_blow.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/266.jpg
 End

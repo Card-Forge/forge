@@ -7,4 +7,5 @@ K:When CARDNAME enters the battlefield, draw a card.
 K:Echo:G G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/multanis_acolyte.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/108.jpg
 End

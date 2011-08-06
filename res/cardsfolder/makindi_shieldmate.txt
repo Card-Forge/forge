@@ -7,4 +7,5 @@ K:Defender
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/makindi_shieldmate.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/26.jpg
 End

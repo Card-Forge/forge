@@ -5,4 +5,5 @@ Text:(NOTE: "Prowl" is not implemented.)
 K:spLoseLifeTgt:3:Drawback$YouGainLife/3:Target player loses 3 life and you gain 3 life.:Morsel Theft - target player 3 loses life and you gain 3 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morsel_theft.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/68.jpg
 End

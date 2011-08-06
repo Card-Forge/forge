@@ -7,4 +7,5 @@ K:Flying
 K:stPumpSelf:Creature:1/1/Protection from black:Threshold:Threshold - As long as seven or more cards are in your graveyard, Mystic Familiar gets +1/+1 and has protection from black.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_familiar.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/11.jpg
 End

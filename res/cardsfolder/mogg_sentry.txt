@@ -6,4 +6,7 @@ PT:1/1
 K:WheneverKeyword:CastSpell/Opponent:No_Initiator:Play:StatsPumpEOT/2/2:Self:ASAP:No_Condition:No Special Condition:Whenever an opponent casts a spell, Mogg Sentry gets +2/+2 until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_sentry.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/203.jpg
+SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/69.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/204.jpg
 End

@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/long_forgotten_gohei.jpg
+SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/261.jpg
 End

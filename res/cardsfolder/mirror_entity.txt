@@ -6,4 +6,5 @@ PT:1/1
 K:Changeling
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_entity.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/31.jpg
 End

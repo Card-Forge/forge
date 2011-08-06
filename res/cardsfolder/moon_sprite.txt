@@ -6,4 +6,6 @@ PT:1/1
 K:Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20229.jpg
+SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/133.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/100.jpg
 End

@@ -5,4 +5,5 @@ Text:Counter target spell. If that spell is countered this way, put it on top of
 K:spCounter:Spell:None:Topdeck:None
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lapse_of_certainty.jpg
+SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/9.jpg
 End

@@ -6,4 +6,5 @@ PT:1/1
 K:etbDestroyTgt:Enchantment
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/monk_realist.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/21.jpg
 End

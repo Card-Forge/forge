@@ -6,4 +6,5 @@ PT:0/3
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_moat.jpg
+SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/12.jpg
 End

@@ -7,4 +7,5 @@ K:Sacrifice CARDNAME: Add U R to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morgue_toad.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/46.jpg
 End

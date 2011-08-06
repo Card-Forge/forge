@@ -6,4 +6,5 @@ PT:0/1
 K:abDrawCards T:2:Drawback$YouDiscard/3:Draw two cards, then discard three cards.:Magus of the Bazaar - draw cards and discard cards
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_bazaar.jpg
+SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/43.jpg
 End

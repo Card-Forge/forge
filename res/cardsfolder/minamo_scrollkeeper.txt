@@ -7,4 +7,5 @@ K:HandSize + 1 Self
 K:Defender
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minamo_scrollkeeper.jpg
+SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/45.jpg
 End
