@@ -5,6 +5,7 @@ Text:no text
 PT:3/3
 K:CARDNAME can't be blocked by more than one creature.
 SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stalking_tiger.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/149.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/253.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/141.jpg

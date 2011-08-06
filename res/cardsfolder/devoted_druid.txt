@@ -7,5 +7,6 @@ K:tap: add G
 A:AB$Untap | Cost$ AddCounter<1/M1M1> | SpellDescription$ Untap CARDNAME.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/devoted_druid.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/110.jpg
 End
