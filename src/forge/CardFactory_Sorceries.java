@@ -6899,6 +6899,7 @@ public class CardFactory_Sorceries {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true, false));
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Ponder") || cardName.equals("Omen")) {
         	/* 
@@ -6925,8 +6926,7 @@ public class CardFactory_Sorceries {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
-        
+               
         
         //*************** START *********** START **************************
         else if(cardName.equals("Index")) {
@@ -7017,8 +7017,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
-  
+         
         
         //*************** START *********** START **************************
         else if(cardName.equals("Fireball")) {
@@ -7397,6 +7396,7 @@ public class CardFactory_Sorceries {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Windfall")) {
             final SpellAbility spell = new Spell(card) {
@@ -7538,9 +7538,6 @@ public class CardFactory_Sorceries {
             spell.setBeforePayMana(target);
         }//*************** END ************ END **************************
         
-        
-
-       
         
         //*************** START *********** START **************************
         if(cardName.equals("Life from the Loam")) {
@@ -8073,6 +8070,7 @@ public class CardFactory_Sorceries {
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Leeches")) {
         	/*
@@ -8113,6 +8111,7 @@ public class CardFactory_Sorceries {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }// *************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Cerebral Eruption")) {
@@ -8169,6 +8168,58 @@ public class CardFactory_Sorceries {
         	card.addSpellAbility(spell);
         }// *************** END ************ END **************************
 
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("False Mourning") || cardName.equals("Salvage")) {
+            final SpellAbility spell = new Spell(card) {
+                
+				private static final long serialVersionUID = -6183756156784063761L;
+
+				@Override
+                public void resolve() {
+                    PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    
+                    if(AllZone.GameAction.isCardInZone(getTargetCard(), graveyard)) {
+                        graveyard.remove(getTargetCard());
+                        AllZone.GameAction.moveToTopOfLibrary(getTargetCard());
+                    }
+                }//resolve()
+                
+                @Override
+                public boolean canPlay() {
+                    PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    return graveyard.getCards().length != 0 && super.canPlay();
+                }
+            };
+            Input runtime = new Input() {
+				private static final long serialVersionUID = -1438178075940689742L;
+
+				@Override
+                public void showMessage() {
+                    PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    Object o = AllZone.Display.getChoiceOptional("Select target card", graveyard.getCards());
+                    if(o == null) stop();
+                    else {
+                    	String location = "top of owner's library";
+                    	
+                        spell.setStackDescription("Return " + o + " to " + location);
+                        spell.setTargetCard((Card) o);
+                        if(this.isFree()) 
+                        {
+                        	this.setFree(false);
+                        	stop();
+                        	AllZone.Stack.add(spell);
+                    	} 
+                        else
+                        	stopSetNext(new Input_PayManaCost(spell));
+                    }
+                }//showMessage()
+            };
+            spell.setChooseTargetAI(CardFactoryUtil.AI_targetType("All", AllZone.Computer_Graveyard));
+            spell.setBeforePayMana(runtime);
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
         
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {

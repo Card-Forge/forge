@@ -1,8 +1,8 @@
-Name:Reclaim
+Name:Salvage
 ManaCost:G
-Types:Instant
+Types:Sorcery
 Text:Put target card from your graveyard on top of your library.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reclaim.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/salvage.jpg
 End

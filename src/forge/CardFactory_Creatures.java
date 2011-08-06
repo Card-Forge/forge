@@ -8254,6 +8254,55 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Spiritmonger")) {
+        	
+        	final String[] color = new String[1];
+        	final long[] timeStamp = new long[1];
+        	
+            //until EOT
+            final Command untilEOT = new Command() {
+                private static final long serialVersionUID = -7093762180313802891L;
+                
+                public void execute() {
+                    String s = CardUtil.getShortColor(color[0]);
+                    card.removeColor(s, card, false, timeStamp[0]);
+                    card.setChosenColor("");
+                }
+            };
+            
+            //color change ability
+            final Ability ability = new Ability(card, "G") {
+            	
+                @Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+                
+                @Override
+                public void resolve() {
+                    if(AllZone.GameAction.isCardInPlay(card)) {
+                        if(card.getController().equals(Constant.Player.Human)) {
+                            String[] colors = Constant.Color.onlyColors;
+                            
+                            Object o = AllZone.Display.getChoice("Choose color", colors);
+                            color[0] = (String) o;
+                            card.setChosenColor(color[0]);
+                            String s = CardUtil.getShortColor(color[0]);
+                            timeStamp[0] = card.addColor(s, card, false, true);
+                            AllZone.EndOfTurn.addUntil(untilEOT);
+                        }
+                    }
+                }//resolve()
+            };//SpellAbility
+            
+            ability.setStackDescription(card + " becomes the color of your choice until end of turn.");
+            ability.setDescription("G: Spiritmonger becomes the color of your choice until end of turn.");
+            card.addSpellAbility(ability);
+        }//*************** END ************ END **************************
+        
+        
       //*************** START *********** START **************************
         else if(cardName.equals("Psychatog")) {
             final Command untilEOT = new Command() {
