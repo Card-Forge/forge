@@ -39,7 +39,7 @@ public class QuestPetWolf extends QuestPetAbstract{
 		}
 		else if (level == 4)
 		{
-            petCard.setImageName("G 2 1 Wolf Pet Flanking");
+            petCard.setImageName("G 2 2 Wolf Pet Flanking");
             petCard.setBaseAttack(2);
             petCard.setBaseDefense(2);
             petCard.addIntrinsicKeyword("Flanking");
