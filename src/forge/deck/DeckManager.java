@@ -236,9 +236,9 @@ public class DeckManager {
         Pattern p = Pattern.compile("\\s*((\\d+)\\s+)?(.*?)\\s*");
 
         //readDeck main deck
-        while ((line = iterator.next()) != null && !line.equals("[sideboard]")) {
-            System.out.println(line);
+        while (iterator.hasNext() && !(line = iterator.next()).equals("[sideboard]")) {
             Matcher m = p.matcher(line);
+            m.matches();
             String s = m.group(2);
             int count = s == null ? 1 : parseInt(s);
 
@@ -248,8 +248,9 @@ public class DeckManager {
         }
 
         //readDeck sideboard
-        while ((line = iterator.next()) != null && line.length() != 0) {
+        while (iterator.hasNext()) {
             Matcher m = p.matcher(line);
+            m.matches();
             String s = m.group(2);
             int count = s == null ? 1 : parseInt(s);
             for (int i = 0; i < count; i++) {
