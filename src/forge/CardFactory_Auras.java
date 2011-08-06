@@ -1492,6 +1492,156 @@ class CardFactory_Auras {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Animate Dead")) {
+        	final Card[] targetC = new Card[1];
+        	// need to override what happens when this is cast.
+        	final Spell_Permanent animate = new Spell_Permanent(card) {
+				private static final long serialVersionUID = 7126615291288065344L;
+
+				public CardList getCreturesInGrave(){
+					// This includes creatures Animate Dead can't enchant once in play.
+					// The human may try to Animate them, the AI will not.
+	       			CardList cList = AllZoneUtil.getCardsInGraveyard();
+	       			cList = cList.getType("Creature");
+					return cList;
+				}
+				
+                public boolean canPlay() {
+                    return super.canPlay() && getCreturesInGrave().size() != 0;
+                }
+				
+				@Override
+        		public boolean canPlayAI() {
+					CardList cList = getCreturesInGrave();
+					// AI will only target something that will stick in play.
+        			cList = cList.filter(new CardListFilter() {
+        				public boolean addCard(Card crd) {
+        					return CardFactoryUtil.canTarget(card, crd);
+        				}
+        			});
+        			if (cList.size() == 0)
+        				return false;
+        			
+        			Card c = CardFactoryUtil.AI_getBestCreature(cList);
+        			
+        			targetC[0] = c;
+        			boolean playable = 2 < c.getNetAttack() && 2 < c.getNetDefense();
+        			return playable;
+        		}//canPlayAI
+				
+                @Override
+                public void chooseTargetAI() {
+                	setTargetCard(targetC[0]);
+                }
+        	};//addSpellAbility
+        	
+            Input target = new Input() {
+                private static final long serialVersionUID = 9027742835781889044L;
+                
+                @Override
+                public void showMessage() {
+                    Object check = AllZone.Display.getChoiceOptional("Select creature", getCreatures());
+                    if(check != null) {
+                    	animate.setTargetCard((Card) check);
+                    	targetC[0] = animate.getTargetCard();
+                        stopSetNext(new Input_PayManaCost(animate));
+                    } else stop();
+                }//showMessage()
+                
+                public Card[] getCreatures() {
+	       			CardList cList = AllZoneUtil.getCardsInGraveyard();
+        			cList = cList.getType("Creature");
+                    return cList.toArray();
+                }
+            };//Input
+            
+        	final Ability attach = new Ability(card, "0") {
+				private static final long serialVersionUID = 222308932796127795L;
+
+        		@Override
+        		public void resolve() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+         
+                    // Animate Dead got destroyed before its ability resolved
+                    if (!AllZone.GameAction.isCardInZone(card, play))	
+                    	return;
+                   
+                    Card c = targetC[0];
+                    PlayerZone grave = AllZone.getZone(c);
+
+                    if(!AllZone.GameAction.isCardInZone(c, grave)){
+                    	// Animated Creature got removed before ability resolve
+                    	AllZone.GameAction.sacrifice(card);
+                    	return;
+                    }
+                    
+                    // Bring creature into play under your control (should trigger etb Abilities)
+                    c.setController(card.getController());
+                    grave.remove(c);
+                    play.add(c);
+                    
+                    if(!CardFactoryUtil.canTarget(card, c)) {
+                    	// Animated a creature with protection or something similar
+                    	AllZone.GameAction.sacrifice(card);
+                    	return;
+                    }
+                    
+                    // Everything worked out perfectly.
+                    card.enchantCard(c);
+                    c.addSemiPermanentAttackBoost(-1);
+        		}
+        	};//Ability
+
+        	final Command attachCmd = new Command() {
+				private static final long serialVersionUID = 3595188622377350327L;
+
+				public void execute() {
+					AllZone.Stack.add(attach);
+				}
+			};
+        	
+        	final Ability detach = new Ability(card, "0") {
+
+        		@Override
+        		public void resolve() {
+                    Card c = targetC[0];
+                    
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    
+                    if(AllZone.GameAction.isCardInZone(c, play)) {
+                        c.addSemiPermanentAttackBoost(+1);
+                        AllZone.GameAction.sacrifice(c);
+                    }
+        		}
+        	};//Detach
+
+        	final Command detachCmd = new Command() {
+				private static final long serialVersionUID = 2425333033834543422L;
+
+				public void execute() {
+                    Card c = targetC[0];
+                    
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    
+                    if(AllZone.GameAction.isCardInZone(c, play))
+                    	AllZone.Stack.add(detach);
+				}
+			};
+			
+        	card.clearSpellAbility();	// clear out base abilities since we're overriding
+			
+            animate.setBeforePayMana(target);
+            card.addSpellAbility(animate);
+			
+			attach.setStackDescription("Attaching Animate Dead to animated Creature.");
+        	card.addComesIntoPlayCommand(attachCmd);
+        	detach.setStackDescription("Animate Dead left play. Sacrificing Animated Creature if still around.");
+        	card.addLeavesPlayCommand(detachCmd);
+        	card.addUnEnchantCommand(detachCmd);
+        }//*************** END ************ END **************************
+        
+        
         //**************************************************************
         // This card can't be converted to keyword, problem with Fear  *
         //*************** START *********** START **********************

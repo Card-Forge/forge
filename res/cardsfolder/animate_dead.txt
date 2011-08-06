@@ -1,7 +1,7 @@
 Name:Animate Dead
 ManaCost:1 B
-Types:Sorcery
-Text:Put target creature card from any graveyard into play under your control. That creature gets -1/-0. (NOTE: This spell is currently treated as a Sorcery rather than as an Enchantment.)
+Types:Enchantment Aura
+Text:Enchant creature card in a graveyard\r\nWhen Animate Dead enters the battlefield, if it's on the battlefield, it loses "enchant creature card in a graveyard" and gains "enchant creature put onto the battlefield with Animate Dead." Return enchanted creature card to the battlefield under your control and attach Animate Dead to it. When Animate Dead leaves the battlefield, that creature's controller sacrifices it.\r\n Enchanted creature gets -1/-0.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card3823.jpg
 End
