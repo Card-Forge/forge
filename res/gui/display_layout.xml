@@ -16,7 +16,7 @@
       <object class="java.awt.Rectangle"> 
        <int>0</int> 
        <int>0</int> 
-       <int>255</int> 
+       <int>296</int> 
        <int>827</int> 
       </object> 
      </void> 
@@ -27,7 +27,7 @@
          <object class="java.awt.Rectangle"> 
           <int>0</int> 
           <int>0</int> 
-          <int>255</int> 
+          <int>296</int> 
           <int>148</int> 
          </object> 
         </void> 
@@ -48,7 +48,7 @@
          <object class="java.awt.Rectangle"> 
           <int>0</int> 
           <int>148</int> 
-          <int>255</int> 
+          <int>296</int> 
           <int>10</int> 
          </object> 
         </void> 
@@ -63,7 +63,7 @@
          <object class="java.awt.Rectangle"> 
           <int>0</int> 
           <int>158</int> 
-          <int>255</int> 
+          <int>296</int> 
           <int>169</int> 
          </object> 
         </void> 
@@ -84,7 +84,7 @@
          <object class="java.awt.Rectangle"> 
           <int>0</int> 
           <int>327</int> 
-          <int>255</int> 
+          <int>296</int> 
           <int>10</int> 
          </object> 
         </void> 
@@ -99,7 +99,7 @@
          <object class="java.awt.Rectangle"> 
           <int>0</int> 
           <int>337</int> 
-          <int>255</int> 
+          <int>296</int> 
           <int>125</int> 
          </object> 
         </void> 
@@ -120,7 +120,7 @@
          <object class="java.awt.Rectangle"> 
           <int>0</int> 
           <int>462</int> 
-          <int>255</int> 
+          <int>296</int> 
           <int>10</int> 
          </object> 
         </void> 
@@ -135,7 +135,7 @@
          <object class="java.awt.Rectangle"> 
           <int>0</int> 
           <int>472</int> 
-          <int>255</int> 
+          <int>296</int> 
           <int>159</int> 
          </object> 
         </void> 
@@ -156,7 +156,7 @@
          <object class="java.awt.Rectangle"> 
           <int>0</int> 
           <int>631</int> 
-          <int>255</int> 
+          <int>296</int> 
           <int>10</int> 
          </object> 
         </void> 
@@ -171,7 +171,7 @@
          <object class="java.awt.Rectangle"> 
           <int>0</int> 
           <int>641</int> 
-          <int>255</int> 
+          <int>296</int> 
           <int>186</int> 
          </object> 
         </void> 
@@ -202,7 +202,7 @@
     <object class="org.jdesktop.swingx.MultiSplitLayout$Divider"> 
      <void property="bounds"> 
       <object class="java.awt.Rectangle"> 
-       <int>255</int> 
+       <int>296</int> 
        <int>0</int> 
        <int>10</int> 
        <int>827</int> 
@@ -217,9 +217,9 @@
     <object id="MultiSplitLayout$Split2" class="org.jdesktop.swingx.MultiSplitLayout$Split"> 
      <void property="bounds"> 
       <object class="java.awt.Rectangle"> 
-       <int>265</int> 
+       <int>306</int> 
        <int>0</int> 
-       <int>830</int> 
+       <int>789</int> 
        <int>827</int> 
       </object> 
      </void> 
@@ -228,9 +228,9 @@
        <object class="org.jdesktop.swingx.MultiSplitLayout$Leaf"> 
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
-          <int>265</int> 
+          <int>306</int> 
           <int>0</int> 
-          <int>830</int> 
+          <int>789</int> 
           <int>148</int> 
          </object> 
         </void> 
@@ -249,9 +249,9 @@
        <object class="org.jdesktop.swingx.MultiSplitLayout$Divider"> 
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
-          <int>265</int> 
+          <int>306</int> 
           <int>148</int> 
-          <int>830</int> 
+          <int>789</int> 
           <int>10</int> 
          </object> 
         </void> 
@@ -264,9 +264,9 @@
        <object class="org.jdesktop.swingx.MultiSplitLayout$Leaf"> 
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
-          <int>265</int> 
+          <int>306</int> 
           <int>158</int> 
-          <int>830</int> 
+          <int>789</int> 
           <int>145</int> 
          </object> 
         </void> 
@@ -285,9 +285,9 @@
        <object class="org.jdesktop.swingx.MultiSplitLayout$Divider"> 
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
-          <int>265</int> 
+          <int>306</int> 
           <int>303</int> 
-          <int>830</int> 
+          <int>789</int> 
           <int>10</int> 
          </object> 
         </void> 
@@ -300,10 +300,10 @@
        <object class="org.jdesktop.swingx.MultiSplitLayout$Leaf"> 
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
-          <int>265</int> 
+          <int>306</int> 
           <int>313</int> 
-          <int>830</int> 
-          <int>189</int> 
+          <int>789</int> 
+          <int>201</int> 
          </object> 
         </void> 
         <void property="name"> 
@@ -321,9 +321,9 @@
        <object class="org.jdesktop.swingx.MultiSplitLayout$Divider"> 
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
-          <int>265</int> 
-          <int>502</int> 
-          <int>830</int> 
+          <int>306</int> 
+          <int>514</int> 
+          <int>789</int> 
           <int>10</int> 
          </object> 
         </void> 
@@ -336,10 +336,10 @@
        <object class="org.jdesktop.swingx.MultiSplitLayout$Leaf"> 
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
-          <int>265</int> 
-          <int>512</int> 
-          <int>830</int> 
-          <int>145</int> 
+          <int>306</int> 
+          <int>524</int> 
+          <int>789</int> 
+          <int>148</int> 
          </object> 
         </void> 
         <void property="name"> 
@@ -357,9 +357,9 @@
        <object class="org.jdesktop.swingx.MultiSplitLayout$Divider"> 
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
-          <int>265</int> 
-          <int>657</int> 
-          <int>830</int> 
+          <int>306</int> 
+          <int>672</int> 
+          <int>789</int> 
           <int>10</int> 
          </object> 
         </void> 
@@ -372,10 +372,10 @@
        <object class="org.jdesktop.swingx.MultiSplitLayout$Leaf"> 
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
-          <int>265</int> 
-          <int>667</int> 
-          <int>830</int> 
-          <int>160</int> 
+          <int>306</int> 
+          <int>682</int> 
+          <int>789</int> 
+          <int>145</int> 
          </object> 
         </void> 
         <void property="name"> 
