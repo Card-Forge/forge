@@ -4,7 +4,7 @@ Types:Artifact Creature Construct
 Text:no text
 PT:0/0
 K:etbCounter:P1P1:2
-A:AB$PutCounter|Cost$1 Discard<1/Any>|CounterType$P1P1|CounterNum$1|SpellDescription$Put a +1/+1 counter on Mindless Automaton.
+A:AB$PutCounter | Cost$ 1 Discard<1/Any> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on Mindless Automaton.
 K:abDrawCards SubCounter<2/P1P1>:1:Draw a card.:Mindless Automaton - Controller draws a card.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindless_automaton.jpg

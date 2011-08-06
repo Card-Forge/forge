@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact
 Text:no text
 K:etbCounter:CHARGE:3
-A:AB$PutCounter|Cost$R R T|CounterType$CHARGE|CounterNum$1|SpellDescription$Put a charge counter on CARDNAME.
+A:AB$PutCounter | Cost$ R R T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
 K:abPumpTgtC 2 T SubCounter<1/CHARGE>:+3/+0
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

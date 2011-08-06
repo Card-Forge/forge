@@ -2,7 +2,7 @@ Name:Fungal Bloom
 ManaCost:G G
 Types:Enchantment
 Text:no text
-A:AB$PutCounter|Cost$G G|ValidTgts$Fungus|TgtPrompt$Select target Fungus|CounterType$SPORE|CounterNum$1|SpellDescription$Put a spore counter on target Fungus.
+A:AB$PutCounter | Cost$ G G | ValidTgts$ Fungus | TgtPrompt$ Select target Fungus | CounterType$ SPORE | CounterNum$ 1 | SpellDescription$ Put a spore counter on target Fungus.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fungal_bloom.jpg

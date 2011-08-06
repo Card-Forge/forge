@@ -2,7 +2,7 @@ Name:Forge Armor
 ManaCost:4 R
 Types:Instant
 Text:no text
-A:SP$PutCounter|Cost$4 R Sac<1/Artifact>|CounterType$P1P1|Tgt$TgtC|CounterNum$X|SpellDescription$Put X +1/+1 counters on target creature, where X is the sacrificed artifact's converted mana cost.
+A:SP$PutCounter | Cost$ 4 R Sac<1/Artifact> | CounterType$ P1P1 | Tgt$ TgtC | CounterNum$ X | SpellDescription$ Put X +1/+1 counters on target creature, where X is the sacrificed artifact's converted mana cost.
 SVar:X:Sacrificed$CardManaCost
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

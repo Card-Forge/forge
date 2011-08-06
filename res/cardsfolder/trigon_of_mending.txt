@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact
 Text:no text
 K:etbCounter:CHARGE:3
-A:AB$PutCounter|Cost$W W T|CounterType$CHARGE|CounterNum$1|SpellDescription$Put a charge counter on CARDNAME.
+A:AB$PutCounter | Cost$ W W T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
 K:abGainLife 2 T SubCounter<1/CHARGE>:3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trigon_of_mending.jpg

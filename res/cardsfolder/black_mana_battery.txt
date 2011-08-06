@@ -2,7 +2,7 @@ Name:Black Mana Battery
 ManaCost:4
 Types:Artifact
 Text:no text
-A:AB$PutCounter|Cost$2 T|CounterType$CHARGE|CounterNum$1|SpellDescription$Put a charge counter on CARDNAME.
+A:AB$PutCounter | Cost$ 2 T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/black_mana_battery.jpg
 End

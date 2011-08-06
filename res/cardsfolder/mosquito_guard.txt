@@ -3,7 +3,7 @@ ManaCost:W
 Types:Creature Kithkin Soldier
 Text:no text
 K:First Strike
-A:AB$PutCounter|Cost$1 W Discard<1/CARDNAME>|Tgt$TgtC|CounterType$P1P1|ActivatingZone$Hand|CounterNum$1|SpellDescription$Put a +1/+1 counter on target creature.
+A:AB$PutCounter | Cost$ 1 W Discard<1/CARDNAME> | Tgt$ TgtC | CounterType$ P1P1 | ActivatingZone$ Hand | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
 PT:1/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mosquito_guard.jpg
