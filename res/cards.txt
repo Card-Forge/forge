@@ -1,3 +1,11 @@
+Mycosynth Golem
+11
+Artifact Creature Golem
+Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.) Artifact creature spells you cast have affinity for artifacts. (They cost 1 less to cast for each artifact you control.)
+4/5
+CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+CostChange:Player:Less:1:Spell:All:Artifact/Creature:Affinity/Artifact/All Conditions
+
 Frogmite
 4
 Artifact Creature Frog

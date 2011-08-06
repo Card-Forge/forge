@@ -1646,16 +1646,41 @@ public class GameAction {
                    		}
                    		}
                  	}
+	                   	if(k[7].contains("All Conditions")) { // Only Works for Color and Type
+  	                   		for(int string_no = 5; string_no < 7; string_no++) {
+  	                            String spilt = k[string_no];                
+  	                            String color_spilt[] = spilt.split("/");  
+  	                            for(int cs_num = 0; cs_num < color_spilt.length; cs_num++) {
+  	                            	k[string_no] = color_spilt[cs_num];
+  	                            	if(string_no == 5) {
+  	                            		if(CardUtil.getColors(sa.getSourceCard()).contains(k[5]) || k[5].equals("All"))  {  	                            			
+  	                            	} else {
+  	                            		k[5] = "Nullified";
+  	                            		break;
+  	                            	}
+  	                            	}
+  	                            	if(string_no == 6) {
+  	                            		if(sa.getSourceCard().getType().contains(k[6])  || k[6].equals("All"))  {  	                            			
+  	                            	} else {
+  	                            		k[6] = "Nullified";
+  	                            		break;
+  	                            	}
+  	                            	}
+  	                   		}
+  	                   		}
+  	                            if(!k[5].equals("Nullified")) k[5] = "All";
+  	                            if(!k[6].equals("Nullified")) k[6] = "All";
+  	                 	} 
                  if((k[1].equals("Player") && card.getController().equals(sa.getSourceCard().getController()) 
                  		|| (k[1].equals("Opponent") && card.getController().equals(AllZone.GameAction.getOpponent(sa.getSourceCard().getController()))) || k[1].equals("All"))
                         && ((k[4].equals("Spell") && sa.isSpell() == true) || (k[4].equals("Ability") && sa.isAbility() == true) 
                         || (k[4].equals("Self") && originalCard.equals(card)) || k[4].equals("All"))
                  		&& ((CardUtil.getColors(sa.getSourceCard()).contains(k[5])) || k[5].equals("All")) 
                  		&& ((sa.getSourceCard().getType().contains(k[6])) || k[6].equals("All"))) {     
-                  	if(k[7].equals("CardIsTapped")) {
+                  	if(k[7].contains("CardIsTapped")) {
                  		if(card.isTapped() == false) k[3] = "0";             		
                  	}
-                 	if(k[7].equals("TargetInPlay")) {
+                 	if(k[7].contains("TargetInPlay")) {
                  		if(!Player_Play.contains(sa.getSourceCard())) k[3] = "0";             		
                  	}
                  	if(k[7].contains("Affinity")) {
@@ -1728,16 +1753,41 @@ public class GameAction {
       	                   		}
       	                   		}
       	                 	}
+      	                   	if(k[7].contains("All Conditions")) { // Only Works for Color and Type
+      	                   		for(int string_no = 5; string_no < 7; string_no++) {
+      	                            String spilt = k[string_no];                
+      	                            String color_spilt[] = spilt.split("/");  
+      	                            for(int cs_num = 0; cs_num < color_spilt.length; cs_num++) {
+      	                            	k[string_no] = color_spilt[cs_num];
+      	                            	if(string_no == 5) {
+      	                            		if(CardUtil.getColors(sa.getSourceCard()).contains(k[5]) || k[5].equals("All"))  {  	                            			
+      	                            	} else {
+      	                            		k[5] = "Nullified";
+      	                            		break;
+      	                            	}
+      	                            	}
+      	                            	if(string_no == 6) {
+      	                            		if(sa.getSourceCard().getType().contains(k[6])  || k[6].equals("All"))  {  	                            			
+      	                            	} else {
+      	                            		k[6] = "Nullified";
+      	                            		break;
+      	                            	}
+      	                            	}
+      	                   		}
+      	                   		}
+      	                            if(!k[5].equals("Nullified")) k[5] = "All";
+      	                            if(!k[6].equals("Nullified")) k[6] = "All";
+      	                 	}                 
                          if((k[1].equals("Player") && card.getController().equals(sa.getSourceCard().getController()) 
                          		|| (k[1].equals("Opponent") && card.getController().equals(AllZone.GameAction.getOpponent(sa.getSourceCard().getController()))) || k[1].equals("All"))
                          		&& ((k[4].equals("Spell") && sa.isSpell() == true) || (k[4].equals("Ability") && sa.isAbility() == true) 
                          		|| (k[4].equals("Self") && originalCard.equals(card)) || k[4].equals("All"))
                          		&& ((CardUtil.getColors(sa.getSourceCard()).contains(k[5])) || k[5].equals("All")) 
                          		&& ((sa.getSourceCard().getType().contains(k[6])) || k[6].equals("All"))) { 
-                         	if(k[7].equals("CardIsTapped")) {
+                         	if(k[7].contains("CardIsTapped")) {
                          		if(card.isTapped() == false) k[3] = "0";             		
                          	}
-                         	if(k[7].equals("TargetInPlay")) {
+                         	if(k[7].contains("TargetInPlay")) {
                          		if(!Player_Play.contains(sa.getSourceCard())) k[3] = "0";             		
                          	}
                          	if(k[7].contains("Affinity")) {
@@ -1825,7 +1875,6 @@ public class GameAction {
          } // Khalni Hydra      
          return manaCost;
     } 
-    
     public void playSpellAbility(SpellAbility sa) {
     	ManaCost manaCost = GetSpellCostChange(sa);    
         if(manaCost.isPaid() /**sa.getManaCost().equals("0")**/ && sa.getBeforePayMana() == null) {
