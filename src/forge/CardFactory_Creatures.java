@@ -2688,58 +2688,7 @@ public class CardFactory_Creatures {
             };
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-        
 
-        //*************** START *********** START **************************
-        else if(cardName.equals("Goblin Ringleader")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    PlayerZone libraryZone = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    
-                    //get top 4 cards of the library
-                    CardList top = new CardList();
-                    Card[] library = libraryZone.getCards();
-                    for(int i = 0; i < 4 && i < library.length; i++)
-                        top.add(library[i]);
-                    
-                    //put top 4 cards on bottom of library
-                    for(int i = 0; i < top.size(); i++) {
-                        libraryZone.remove(top.get(i));
-                        libraryZone.add(top.get(i));
-                    }
-                    
-                    CardList goblin = top.getType("Goblin");
-                    
-                    for(int i = 0; i < goblin.size(); i++)
-                        AllZone.GameAction.moveTo(hand, goblin.get(i));
-                    
-                    if (card.getController().equals(Constant.Player.Computer))
-                    {
-                    	StringBuilder sb = new StringBuilder();
-                    	sb.append("<html><b>");
-                    	for (Card c:top) {
-                    		sb.append(c.getName());
-                    		sb.append("<br>");
-                    	}
-                    	sb.append("</b></html>");
-                    	JOptionPane.showMessageDialog(null, sb.toString(), "Computer reveals:", JOptionPane.INFORMATION_MESSAGE); 
-                    }
-                }//resolve()
-            };//SpellAbility
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = -7538870520237796620L;
-                
-                public void execute() {
-                    AllZone.Stack.add(ability);
-                }
-            };
-            ability.setStackDescription("Goblin Ringleader - reveal the top four cards of your library. Put all Goblin cards revealed this way into your hand and the rest on the bottom of your library.");
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Skirk Prospector")) {
             final Ability_Mana ability = new Ability_Mana(card, "Sacrifice a Goblin: Add R") {
@@ -2789,7 +2738,34 @@ public class CardFactory_Creatures {
 
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Sylvan Messenger")) {
+        else if(cardName.equals("Sylvan Messenger") 
+        		|| cardName.equals("Enlistment Officer") 
+        		|| cardName.equals("Tidal Courier")
+        		|| cardName.equals("Goblin Ringleader")
+        		|| cardName.equals("Grave Defiler")) {
+        	
+        	final String[] typeToGet = {""};
+            if(card.getName().equals("Sylvan Messenger"))
+            {
+            	typeToGet[0] = "Elf";
+            }
+            else if(card.getName().equals("Enlistment Officer"))
+            {
+            	typeToGet[0] = "Soldier";
+            }
+            else if(card.getName().equals("Tidal Courier"))
+            {
+            	typeToGet[0] = "Merfolk";
+            }
+            else if(card.getName().equals("Grave Defiler"))
+            {
+            	typeToGet[0] = "Zombie";
+            }
+            else if(card.getName().equals("Goblin Ringleader"))
+            {
+            	typeToGet[0] = "Goblin";
+            }
+        	
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
@@ -2808,10 +2784,10 @@ public class CardFactory_Creatures {
                         libraryZone.add(top.get(i));
                     }
                     
-                    CardList elf = top.getType("Elf");
+                    CardList typeLimitedTop = top.getType(typeToGet[0]);
                     
-                    for(int i = 0; i < elf.size(); i++)
-                        AllZone.GameAction.moveTo(hand, elf.get(i));
+                    for(int i = 0; i < typeLimitedTop.size(); i++)
+                        AllZone.GameAction.moveTo(hand, typeLimitedTop.get(i));
                     
                     if (card.getController().equals(Constant.Player.Computer))
                     {
@@ -2833,7 +2809,7 @@ public class CardFactory_Creatures {
                     AllZone.Stack.add(ability);
                 }
             };
-            ability.setStackDescription("Sylvan Messenger - reveal the top four cards of your library. Put all Elf cards revealed this way into your hand and the rest on the bottom of your library.");
+            ability.setStackDescription(cardName + " - reveal the top four cards of your library. Put all " + typeToGet[0] + " cards revealed this way into your hand and the rest on the bottom of your library.");
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
@@ -18753,45 +18729,6 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
 
         }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Grave Defiler")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    PlayerZone libraryZone = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    
-                    //get top 4 cards of the library
-                    CardList top = new CardList();
-                    Card[] library = libraryZone.getCards();
-                    for(int i = 0; i < 4 && i < library.length; i++)
-                        top.add(library[i]);
-                    
-                    //put top 4 cards on bottom of library
-                    for(int i = 0; i < top.size(); i++) {
-                        libraryZone.remove(top.get(i));
-                        libraryZone.add(top.get(i));
-                    }
-                    
-                    CardList zombies = top.getType("Zombie");
-                    
-                    for(int i = 0; i < zombies.size(); i++)
-                        AllZone.GameAction.moveTo(hand, zombies.get(i));
-                }//resolve()
-            };//SpellAbility
-            Command intoPlay = new Command() {
-				private static final long serialVersionUID = -8899812490387286816L;
-
-				public void execute() {
-                    AllZone.Stack.add(ability);
-                }
-            };
-            ability.setStackDescription("When Grave Defiler enters the battlefield, reveal the top four cards of your library. Put all Zombie cards revealed this way into your hand and the rest on the bottom of your library.");
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if (cardName.equals("Kargan Dragonlord"))
