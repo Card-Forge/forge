@@ -1,8 +1,9 @@
 Name:Plated Sliver
 ManaCost:W
 Types:Creature Sliver
-Text:All Sliver creatures get +0/+1.
+Text:no text
 PT:1/1
+K:stPumpAll:Creature.Sliver:0/1:no Condition:All Sliver creatures get +0/+1.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plated_sliver.jpg

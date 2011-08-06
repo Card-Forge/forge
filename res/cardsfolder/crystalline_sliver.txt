@@ -1,8 +1,9 @@
 Name:Crystalline Sliver
 ManaCost:W U
 Types:Creature Sliver
-Text:All slivers have shroud.
+Text:no text
 PT:2/2
+K:stPumpAll:Creature.Sliver:0/0/Shroud:no Condition:All Slivers have shroud.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystalline_sliver.jpg

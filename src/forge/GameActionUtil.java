@@ -5671,7 +5671,7 @@ public class GameActionUtil {
 
 			for (int i=0;i<keywords.size();i++)
 			{
-				if (keywords.get(i).contains("Poisonous"))
+				if (keywords.get(i).startsWith("Poisonous"))
 					AllZone.Stack.add(ability);
 			}
 		}
@@ -13789,39 +13789,7 @@ public class GameActionUtil {
 		}// execute()
 	};
 
-	public static Command Crystalline_Sliver          = new Command() {
-
-		private static final long serialVersionUID   = 6089293045852070662L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Shroud";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Crystalline Sliver");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addExtrinsicKeyword(keyword);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	};
-
+	
 	public static Command Sidewinder_Sliver           = new Command() {
 
 		private static final long serialVersionUID   = 4336346186741907749L;
@@ -13855,37 +13823,7 @@ public class GameActionUtil {
 		}// execute()
 	};
 
-	public static Command Virulent_Sliver           = new Command() {
-		private static final long serialVersionUID = 2755343097020369210L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Poisonous 1";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Virulent Sliver");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addStackingExtrinsicKeyword(keyword);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	};
-
+	
 	public static Command Essence_Sliver              = new Command() {
 		private static final long serialVersionUID   = 6089293045852070662L;
 
@@ -13918,78 +13856,9 @@ public class GameActionUtil {
 		}// execute()
 	};
 
-	public static Command Plated_Sliver               = new Command() {
-		private static final long serialVersionUID   = 7670935990022098909L;
+	
 
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			int pumpAttack = 0;
-			int pumpDefense = 1;
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-pumpAttack);
-				c.addSemiPermanentDefenseBoost(-pumpDefense);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Plated Sliver");
-
-			// for each zone found add +0/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addSemiPermanentAttackBoost(pumpAttack);
-					c.addSemiPermanentDefenseBoost(pumpDefense);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Watcher_Sliver
-
-	public static Command Watcher_Sliver              = new Command() {
-		private static final long serialVersionUID   = -3148897786330400205L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			int pumpAttack = 0;
-			int pumpDefense = 2;
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-pumpAttack);
-				c.addSemiPermanentDefenseBoost(-pumpDefense);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Watcher Sliver");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addSemiPermanentAttackBoost(pumpAttack);
-					c.addSemiPermanentDefenseBoost(pumpDefense);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Watcher_Sliver
+	
 	
 	public static Command Sliver_Legion               = new Command() {
 		private static final long serialVersionUID   = -4564640511791858445L;
@@ -20346,11 +20215,6 @@ public class GameActionUtil {
 		////////////////////
 
 		commands.put("Sliver_Legion", Sliver_Legion);
-		
-		commands.put("Watcher_Sliver", Watcher_Sliver);
-		commands.put("Plated_Sliver", Plated_Sliver);
-		commands.put("Crystalline_Sliver", Crystalline_Sliver);
-		commands.put("Virulent_Sliver", Virulent_Sliver);
 		
 		commands.put("Sidewinder_Sliver", Sidewinder_Sliver);
 		commands.put("Essence_Sliver", Essence_Sliver);

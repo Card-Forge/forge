@@ -1,8 +1,9 @@
 Name:Watcher Sliver
 ManaCost:3 W
 Types:Creature Sliver
-Text:All Sliver creatures get +0/+2.
+Text:no text
 PT:2/2
+K:stPumpAll:Creature.Sliver:0/2:no Condition:All Sliver creatures get +0/+2.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/watcher_sliver.jpg

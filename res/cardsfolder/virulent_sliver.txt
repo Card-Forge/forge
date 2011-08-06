@@ -1,8 +1,10 @@
 Name:Virulent Sliver
 ManaCost:G
 Types:Creature Sliver
-Text:All Sliver creatures have poisonous 1.
+Text:no text
+#All Sliver creatures have poisonous 1.
 PT:1/1
+K:stPumpAll:Creature.Sliver:0/0/Poisonous 1:no Condition:All Sliver creatures have poisonous 1.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/virulent_sliver.jpg
