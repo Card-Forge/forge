@@ -7555,76 +7555,80 @@ public class GameActionUtil {
             AllZone.Stack.add(ability);
         }// for
     }// upkeep_Leaf_Crowned_Elder()
-	
-	
-    private static void upkeep_Ink_Dissolver() {
-        final Player player = AllZone.Phase.getPlayerTurn();
-        final Player opponent = player.getOpponent();
-        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-        PlayerZone playerLibrary = AllZone.getZone(Constant.Zone.Library, player);
-
-        CardList list = new CardList(playZone.getCards());
-        list = list.getName("Ink Dissolver");
-        
-        Ability ability;
-        for (int i = 0; i < list.size(); i++) {
-            if (playerLibrary.size() <= 0) return;
-            
-            String creatureType = playerLibrary.get(0).getType().toString();
-            String topCardName = playerLibrary.get(0).getName();
-
-            ability = new Ability(list.get(i), "0") {
-                @Override
-                public void resolve() {
-                    
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
-                    String creatureType = library.get(0).getType().toString();
-
-                    if (creatureType.contains("Merfolk") 
-                            || creatureType.contains("Wizard")
-                            || library.get(0).getKeyword().contains("Changeling")) {
-                        
-                        if (player.equals(AllZone.HumanPlayer)) {
-                            
-                            String title = "Ink Dissolver - Ability";
-                            Object message = "Opponent puts the top three cards of his or her library into his or her graveyard?";
-                            
-                            int choice = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION);
-                            
-                            if (choice == JOptionPane.YES_OPTION) {
-                                opponent.mill(3);
-                            }
-                        } else {
-                            opponent.mill(3);
-                        }
-                    }
-                }//resolve()
-            };// Ability
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append("Ink Dissolver - ").append(player);
-            
-            if (creatureType.contains("Merfolk") 
-                    || creatureType.contains("Wizard") 
-                    || playerLibrary.get(0).getKeyword().contains("Changeling")) {
-                
-                sb.append(" reveals: ").append(topCardName);
-                sb.append(", and opponent puts the top three cards of his or her library into his or her graveyard.");
-                
-            } else {
-                
-                sb.append(" reveals top card: ").append(topCardName).append(".");
-                
-            }
-            ability.setStackDescription(sb.toString());
-            AllZone.Stack.add(ability);
-        }// for
-    }// upkeep_Ink_Dissolver()
     
     
     /////////////////////////
     // Start of Kinship cards
     /////////////////////////
+    
+    
+    private static void upkeep_Ink_Dissolver() {
+        final Player player = AllZone.Phase.getPlayerTurn();
+        final Player opponent = player.getOpponent();
+        CardList kinship = AllZoneUtil.getPlayerCardsInPlay(player, "Ink Dissolver");
+        
+        if (kinship.size() == 0)
+            return;
+        
+        final String[] shareTypes = { "Merfolk", "Wizard" };
+        final Card[] prevCardShown = { null };
+        final Card peek[] = { null };
+        
+        for (final Card k : kinship) {
+            Ability ability = new Ability(k, "0") {    // change to triggered abilities when ready
+                @Override
+                public void resolve() {
+                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+                    if (library.size() <= 0)
+                        return;
+                    
+                    peek[0] = library.get(0);
+                    boolean wantToMillOpponent = false;
+                    
+                    // We assume that both players will want to peek, ask if they want to reveal.
+                    // We do not want to slow down the pace of the game by asking too many questions.
+                    // Dialogs outside of the Ability appear at the previous end of turn phase !!!
+                    
+                    if (peek[0].isValidCard(shareTypes)) {
+                        if (player.isHuman()) {
+                            StringBuilder question = new StringBuilder();
+                            question.append("Your top card is ").append(peek[0].getName());
+                            question.append(". Reveal card and opponent puts the top 3 ");
+                            question.append("cards of his library into his graveyard?");
+                            if (showYesNoDialog(k, question.toString())) {
+                                wantToMillOpponent = true;
+                            }
+                        }
+                        // player isComputer()
+                        else {
+                            String title = "Computer reveals";
+                            revealTopCard(title);
+                            wantToMillOpponent = true;
+                        }
+                    } else if (player.isHuman()) {
+                        String title = "Your top card is";
+                        revealTopCard(title);
+                    }
+                    
+                    if (wantToMillOpponent)
+                        opponent.mill(3);
+                }// resolve()
+                
+                private void revealTopCard(String title) {
+                    if (peek[0] != prevCardShown[0]) {
+                        AllZone.Display.getChoice(title, peek[0]);
+                        prevCardShown[0] = peek[0];
+                    }
+                }// revealTopCard()
+            };// ability
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Ink Dissolver - ").append(player);
+            sb.append(" triggers Kinship");
+            ability.setStackDescription(sb.toString());
+            AllZone.Stack.add(ability);
+        }// for
+    }// upkeep_Ink_Dissolver()
     
     
     private static void upkeep_Wolf_Skull_Shaman() {
