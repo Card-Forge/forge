@@ -408,6 +408,7 @@ public class CardFactoryUtil {
     
     //This selection rates tokens higher
     public static Card AI_getBestCreatureToBounce(CardList list) {
+    	int tokenBonus = 40;
         CardList all = list;
         all = all.getType("Creature");
         Card biggest = null;         //returns null if list.size() == 0
@@ -419,9 +420,9 @@ public class CardFactoryUtil {
             
             for(int i = 0; i < all.size(); i++) {
             	biggestvalue = evaluateCreature(biggest);
-            	if (biggest.isToken()) biggestvalue += 100; 	// raise the value of tokens
+            	if (biggest.isToken()) biggestvalue += tokenBonus; 	// raise the value of tokens
             	newvalue = evaluateCreature(all.get(i));
-            	if (all.get(i).isToken()) newvalue += 100;		// raise the value of tokens
+            	if (all.get(i).isToken()) newvalue += tokenBonus;		// raise the value of tokens
                 if(biggestvalue < newvalue) biggest = all.get(i);
             }
         }
