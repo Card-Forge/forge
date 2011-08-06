@@ -1,8 +1,9 @@
 Name:Veteran Armorsmith
 ManaCost:W W
 Types:Creature Human Soldier
-Text:Other Soldier creatures you control get +0/+1.
+Text:no text
 PT:2/3
+K:stPumpAll:Creature.Soldier+Other+YouCtrl:0/1:No Condition:Other soldier creatures you control get +0/+1.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_armorsmith.jpg

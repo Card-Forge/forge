@@ -16542,6 +16542,8 @@ public class GameActionUtil {
 		}// execute()
 
 	}; //Veteran Swordsmith Other
+	
+	/*
 
 	public static Command Veteran_Armorsmith_Pump     = new Command() {
 		private static final long serialVersionUID   = 542524781150091105L;
@@ -16615,7 +16617,8 @@ public class GameActionUtil {
 			}// for inner
 		}// execute()
 
-	}; //Veteran Armorsmith Other	
+	}; //Veteran Armorsmith Other
+	*/
 
 	public static Command Elvish_Champion_Pump        = new Command() {
 
@@ -19103,6 +19106,7 @@ public class GameActionUtil {
 		}
 	}; // Radiant, Archangel
 
+	/*
 	public static Command Veteran_Armorer             = new Command() {
 		private static final long serialVersionUID = 6081997041540911467L;
 
@@ -19135,6 +19139,7 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	}; // Veteran_Armorer
+	*/
 
 	public static Command Kongming					 = new Command() {
 
@@ -20957,8 +20962,8 @@ public class GameActionUtil {
 		commands.put("Captain_of_the_Watch_Other", Captain_of_the_Watch_Other);
 		commands.put("Veteran_Swordsmith_Pump", Veteran_Swordsmith_Pump);
 		commands.put("Veteran_Swordsmith_Other", Veteran_Swordsmith_Other);
-		commands.put("Veteran_Armorsmith_Pump", Veteran_Armorsmith_Pump);
-		commands.put("Veteran_Armorsmith_Other", Veteran_Armorsmith_Other);
+		//commands.put("Veteran_Armorsmith_Pump", Veteran_Armorsmith_Pump);
+		//commands.put("Veteran_Armorsmith_Other", Veteran_Armorsmith_Other);
 		commands.put("Merfolk_Sovereign_Pump", Merfolk_Sovereign_Pump);
 		commands.put("Merfolk_Sovereign_Other", Merfolk_Sovereign_Other);
 		//commands.put("Lord_of_Atlantis_Pump", Lord_of_Atlantis_Pump);
@@ -21012,7 +21017,7 @@ public class GameActionUtil {
 		commands.put("Imperious_Perfect", Imperious_Perfect);
 		commands.put("Mad_Auntie", Mad_Auntie);
 
-		commands.put("Veteran_Armorer", Veteran_Armorer);
+		//commands.put("Veteran_Armorer", Veteran_Armorer);
 		commands.put("Kongming", Kongming);
 		commands.put("Radiant_Archangel", Radiant_Archangel);
 		commands.put("Castle", Castle);

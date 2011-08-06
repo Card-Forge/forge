@@ -120,7 +120,7 @@ public class StaticEffects
 		cardToEffectsList.put("Lord of the Undead", new String[] {"Lord_of_the_Undead_Pump", "Lord_of_the_Undead_Other"});
 		cardToEffectsList.put("Cemetery Reaper", new String[] {"Cemetery_Reaper_Pump", "Cemetery_Reaper_Other"});
 		cardToEffectsList.put("Captain of the Watch", new String[] {"Captain_of_the_Watch_Pump", "Captain_of_the_Watch_Other"});
-		cardToEffectsList.put("Veteran Armorsmith", new String[] {"Veteran_Armorsmith_Pump", "Veteran_Armorsmith_Other"});
+		//cardToEffectsList.put("Veteran Armorsmith", new String[] {"Veteran_Armorsmith_Pump", "Veteran_Armorsmith_Other"});
 		cardToEffectsList.put("Veteran Swordsmith", new String[] {"Veteran_Swordsmith_Pump", "Veteran_Swordsmith_Other"});
 		cardToEffectsList.put("Timber Protector", new String[] {"Timber_Protector_Pump", "Timber_Protector_Other"});
 		cardToEffectsList.put("Goblin Chieftain", new String[] {"Goblin_Chieftain_Pump", "Goblin_Chieftain_Other"});
@@ -161,7 +161,7 @@ public class StaticEffects
 		cardToEffectsList.put("Tolsimir Wolfblood", new String[] {"Tolsimir"});
 		cardToEffectsList.put("Imperious Perfect", new String[] {"Imperious_Perfect"});
 		cardToEffectsList.put("Mad Auntie", new String[] {"Mad_Auntie"});
-		cardToEffectsList.put("Veteran Armorer", new String[] {"Veteran_Armorer"});
+		//cardToEffectsList.put("Veteran Armorer", new String[] {"Veteran_Armorer"});
 		cardToEffectsList.put("Kongming, \"Sleeping Dragon\"", new String[] {"Kongming"});
 		cardToEffectsList.put("Radiant, Archangel", new String[] {"Radiant_Archangel"});
 		cardToEffectsList.put("Castle", new String[] {"Castle"});
