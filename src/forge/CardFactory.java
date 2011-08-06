@@ -7501,7 +7501,7 @@ public class CardFactory implements NewConstants {
             };//Input -- target
             
             ability.setBeforePayMana(target);
-            ability.setDescription("4, tap: Tap a divinity counter on target permanent other than That Which Was Taken.");
+            ability.setDescription("4, tap: Put a divinity counter on target permanent other than That Which Was Taken.");
             
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************

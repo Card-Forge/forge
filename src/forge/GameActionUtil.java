@@ -13640,7 +13640,7 @@ public class GameActionUtil {
 		CardList                  gloriousAnthemList = new CardList();
 
 		public void execute() {
-			String keyword = "Indestructible";
+			String keyword = "HIDDEN Indestructible";
 
 			CardList list = gloriousAnthemList;
 			Card c;
