@@ -7434,84 +7434,6 @@ public class GameActionUtil {
 		}// for
 	}// upkeep_Benthic_Djinn()   
 	
-    private static void upkeep_Leaf_Crowned_Elder() {
-        final Player player = AllZone.Phase.getPlayerTurn();
-        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-        PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
-
-        CardList list = new CardList(playZone.getCards());
-        list = list.getName("Leaf-Crowned Elder");
-
-        Ability ability;
-        for (int i = 0; i < list.size(); i++) {
-            if (library.size() <= 0) return;
-
-            String creatureType = library.get(0).getType().toString();
-            String cardName = library.get(0).getName();
-
-            ability = new Ability(list.get(i), "0") {
-                @Override
-                public void resolve() {
-                    
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
-                    String creatureType = library.get(0).getType().toString();
-
-                    if (creatureType.contains("Treefolk") 
-                            || creatureType.contains("Shaman")
-                            || library.get(0).getKeyword().contains("Changeling")) {
-                        
-                        if (player.equals(AllZone.HumanPlayer)) {
-                            
-                            String title = "Leaf-Crowned Elder - Ability";
-                            StringBuilder message = new StringBuilder();
-                            message.append("Play ").append(library.get(0).getName()).append(" without paying its mana cost?");
-                            
-                            int choice = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION);
-                            
-                            if (choice == JOptionPane.YES_OPTION) {
-                                
-                                Card c = library.get(0);
-                                AllZone.GameAction.playCardNoCost(c);
-                                library.remove(c);
-                            }
-                        } else {
-                            
-                            Card c = library.get(0);
-                            ArrayList<SpellAbility> choices = c.getBasicSpells();
-
-                            for(SpellAbility sa:choices) {
-                                if(sa.canPlayAI()) {
-                                    ComputerUtil.playStackFree(sa);
-                                    break;
-                                }
-                            }
-                            library.remove(c);
-                            //play.add(c);
-                        }
-                    }
-                }// resolve()
-            };// Ability
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append("Leaf-Crowned Elder - ").append(player);
-            
-            if (creatureType.contains("Treefolk") 
-                    || creatureType.contains("Shaman") 
-                    || library.get(0).getKeyword().contains("Changeling")) {
-                
-                sb.append(" reveals: ").append(cardName);
-                sb.append(", and may play that card without paying its mana cost.");
-                
-            } else {
-                
-                sb.append(" reveals top card: ").append(cardName).append(".");
-            }
-            ability.setStackDescription(sb.toString());
-            AllZone.Stack.add(ability);
-        }// for
-    }// upkeep_Leaf_Crowned_Elder()
-    
-    
     /////////////////////////
     // Start of Kinship cards
     /////////////////////////
@@ -7584,6 +7506,91 @@ public class GameActionUtil {
             AllZone.Stack.add(ability);
         }// for
     }// upkeep_Ink_Dissolver()
+    
+    
+    private static void upkeep_Leaf_Crowned_Elder() {
+        final Player player = AllZone.Phase.getPlayerTurn();
+        CardList kinship = AllZoneUtil.getPlayerCardsInPlay(player, "Leaf-Crowned Elder");
+        
+        if (kinship.size() == 0)
+            return;
+        
+        final String[] shareTypes = { "Treefolk", "Shaman" };
+        final Card[] prevCardShown = { null };
+        final Card peek[] = { null };
+        
+        for (final Card k : kinship) {
+            Ability ability = new Ability(k, "0") {    // change to triggered abilities when ready
+                @Override
+                public void resolve() {
+                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+                    if (library.size() <= 0)
+                        return;
+                    
+                    peek[0] = library.get(0);
+                    boolean wantToPlayCard = false;
+                    
+                    // We assume that both players will want to peek, ask if they want to reveal.
+                    // We do not want to slow down the pace of the game by asking too many questions.
+                    // Dialogs outside of the Ability appear at the previous end of turn phase !!!
+                    
+                    if (peek[0].isValidCard(shareTypes)) {
+                        if (player.isHuman()) {
+                            StringBuilder question = new StringBuilder();
+                            question.append("Your top card is ").append(peek[0].getName());
+                            question.append(". Reveal and play this card without paying its mana cost?");
+                            if (showYesNoDialog(k, question.toString())) {
+                                wantToPlayCard = true;
+                            }
+                        }
+                        // player isComputer()
+                        else {
+                            String title = "Computer reveals";
+                            revealTopCard(title);
+                            wantToPlayCard = true;
+                        }
+                    } else if (player.isHuman()) {
+                        String title = "Your top card is";
+                        revealTopCard(title);
+                    }
+                    
+                    if (wantToPlayCard) {
+                        if (player.isHuman()) {
+                            Card c = library.get(0);
+                            AllZone.GameAction.playCardNoCost(c);
+                            library.remove(c);
+                        }
+                        // player isComputer()
+                        else {
+                            Card c = library.get(0);
+                            ArrayList<SpellAbility> choices = c.getBasicSpells();
+                            
+                            for (SpellAbility sa:choices) {
+                                if (sa.canPlayAI()) {
+                                    ComputerUtil.playStackFree(sa);
+                                    break;
+                                }
+                            }
+                            library.remove(c);
+                        }
+                    }// wantToPlayCard
+                }// resolve()
+                
+                private void revealTopCard(String title) {
+                    if (peek[0] != prevCardShown[0]) {
+                        AllZone.Display.getChoice(title, peek[0]);
+                        prevCardShown[0] = peek[0];
+                    }
+                }// revealTopCard()
+            };// ability
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Leaf-Crowned Elder - ").append(player);
+            sb.append(" triggers Kinship");
+            ability.setStackDescription(sb.toString());
+            AllZone.Stack.add(ability);
+        }// for
+    }// upkeep_Leaf_Crowned_Elder()
     
     
     private static void upkeep_Wolf_Skull_Shaman() {
