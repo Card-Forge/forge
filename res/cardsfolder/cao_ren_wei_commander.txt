@@ -3,6 +3,10 @@ ManaCost:2 B B
 Types:Legendary Creature Human Soldier Warrior
 Text:When CARDNAME enters the battlefield, you lose 3 life.
 PT:3/3
+# 
+# NOTE: Do not convert to triggers because of this line:
+#       card.getSpellPermanent().setLoseLifeAmount(num);
+# 
 K:etbLoseLife:3
 K:Horsemanship
 SVar:Rarity:Rare

@@ -4,6 +4,10 @@ Types:Creature Imp
 Text:When CARDNAME enters the battlefield, you lose 2 life.
 PT:2/2
 K:Flying
+# 
+# NOTE: Do not convert to triggers because of this line:
+#       card.getSpellPermanent().setLoseLifeAmount(num);
+# 
 K:etbLoseLife:2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/st/en-us/card5158.jpg

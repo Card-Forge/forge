@@ -4,6 +4,10 @@ Types:Creature Horror
 Text:When CARDNAME enters the battlefield, you lose 5 life.
 PT:6/5
 K:Flying
+# 
+# NOTE: Do not convert to triggers because of this line:
+#       card.getSpellPermanent().setLoseLifeAmount(num);
+# 
 K:etbLoseLife:5
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_reaper.jpg
