@@ -3,6 +3,7 @@ ManaCost:no cost
 Types:Legendary Land
 Text:no text
 K:tap: add G
+A:AB$Pump | Cost$ T | NumAtt$ +1 | NumDef$ +2 | ValidTgts$ Creature.powerEQ1+Creature.toughnessEQ1 | TgtPrompt$ Target 1/1 Creature | SpellDescription$ Target 1/1 creature gets +1/+2 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pendelhaven.jpg
 End

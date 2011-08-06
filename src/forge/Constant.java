@@ -66,7 +66,6 @@ public interface Constant {
         public static final String Combat_Declare_Attackers                       = "Declare Attackers";
         public static final String Combat_Declare_Attackers_InstantAbility        = "Declare Attackers - Play Instants and Abilities";
         public static final String Combat_Declare_Blockers                        = "Declare Blockers";
-        public static final String Combat_After_Declare_Blockers				  = "After Declare Blockers Phase";
         public static final String Combat_Declare_Blockers_InstantAbility         = "Declare Blockers - Play Instants and Abilities";
         public static final String Combat_Damage                                  = "Combat Damage";
         public static final String Combat_FirstStrikeDamage                       = "First Strike Damage";

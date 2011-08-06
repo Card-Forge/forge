@@ -1,0 +1,11 @@
+Name:Aurochs
+ManaCost:3 G
+Types:Creature Aurochs
+Text:no text
+PT:2/3
+K:Trample
+K:stPumpSelf:Creature:X/0:Creature.attacking+Self:Whenever Aurochs attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.
+SVar:X:Count$Valid Creature.attacking+YouCtrl+Other
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aurochs.jpg
+End
