@@ -16859,7 +16859,7 @@ public class CardFactory_Creatures {
             final Ability ability = new Ability(card, "1") {
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(card)) {
+                    if(AllZone.GameAction.isCardInPlay(card) && CardFactoryUtil.canTarget(card, getTargetCard())) {
                         AllZone.GameAction.sacrifice(card);
                         
                         Card c = getTargetCard();
@@ -16887,7 +16887,8 @@ public class CardFactory_Creatures {
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isArtifact() || c.isEnchantment()
-                                    && CardUtil.getConvertedManaCost(c.getManaCost()) >= 4;
+                                    && CardUtil.getConvertedManaCost(c.getManaCost()) >= 4 
+                                    && CardFactoryUtil.canTarget(card, c) && !c.getKeyword().contains("Indestructible");
                         }
                     });
                     
