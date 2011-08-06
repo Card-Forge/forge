@@ -1,0 +1,10 @@
+Name:Merieke Ri Berit
+ManaCost:W U B
+Types:Legendary Creature Human
+Text:no text
+PT:1/1
+K:CARDNAME doesn't untap during your untap step.
+A:AB$GainControl|Cost$T|Tgt$TgtC|LoseControl$LeavesPlay,LoseControl|DestroyTgt$LeavesPlay,LoseControl,Untap|NoRegen$True|SpellDescription$Gain control of target creature for as long as you control CARDNAME. When CARDNAME leaves the battlefield or becomes untapped, destroy that creature. It can't be regenerated.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/merieke_ri_berit.jpg
+End

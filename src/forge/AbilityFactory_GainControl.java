@@ -4,16 +4,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-//AB:GainControl|ValidTgts$Creature|TgtPrompt$Select target legendary creature|LoseControl$[Untap],[PowerGT],[LoseControl]|UntilEOT$True|SpellDescription$Gain control of target xxxxxxx
+//AB:GainControl|ValidTgts$Creature|TgtPrompt$Select target legendary creature|LoseControl$Untap,LoseControl|UntilEOT$True|SpellDescription$Gain control of target xxxxxxx
 
 //GainControl specific params:
 //	LoseControl - the lose control conditions (as a comma separated list)
 //			-Untap - source card becomes untapped
 //			-LoseControl - you lose control of source card
+//			-LeavesPlay - source card leaves the battlefield
 //			-PowerGT - (not implemented yet for Old Man of the Sea)
 //	AddKWs	- Keywords to add to the controlled card (as a "&"-separated list; like Haste, Sacrifice CARDNAME at EOT, any standard keyword)
 //  OppChoice - set to True if opponent chooses creature (for Preacher) - not implemented yet
 //	Untap	- set to True if target card should untap when control is taken
+//	DestroyTgt - actions upon which the tgt should be destroyed.  same list as LoseControl
+//	NoRegen - set if destroyed creature can't be regenerated.  used only with DestroyTgt
 
 public class AbilityFactory_GainControl {
 	
@@ -23,6 +26,8 @@ public class AbilityFactory_GainControl {
 	private HashMap<String,String> params = null;
 	private Card hostCard = null;
 	private ArrayList<String> lose = null;
+	private ArrayList<String> destroyOn = null;
+	private boolean bNoRegen = false;
 	private boolean bUntap = false;
 	private boolean bTapOnLose = false;
 	private ArrayList<String> kws = null;
@@ -42,6 +47,12 @@ public class AbilityFactory_GainControl {
 		}
 		if(params.containsKey("AddKWs")) {
 			kws = new ArrayList<String>(Arrays.asList(params.get("AddKWs").split(" & ")));
+		}
+		if (params.containsKey("DestroyTgt")) {
+			destroyOn = new ArrayList<String>(Arrays.asList(params.get("DestroyTgt").split(",")));
+		}
+		if(params.containsKey("NoRegen")) {
+			bNoRegen = true;
 		}
 	}
 	
@@ -208,11 +219,23 @@ public class AbilityFactory_GainControl {
 	            if(lose.contains("Untap")) {
 	            	hostCard.addUntapCommand(getLoseControlCommand(j));
 	            }
-	            if(lose.contains("ChangeController")) {
+	            if(lose.contains("LoseControl")) {
 	            	hostCard.addChangeControllerCommand(getLoseControlCommand(j));
 	            }
 	            if(lose.contains("EOT")) {
 	            	AllZone.EndOfTurn.addAt(getLoseControlCommand(j));
+	            }
+            }
+            
+            if (destroyOn != null){
+	            if(destroyOn.contains("LeavesPlay")) {
+	            	hostCard.addLeavesPlayCommand(getDestroyCommand(j));
+	            }
+	            if(destroyOn.contains("Untap")) {
+	            	hostCard.addUntapCommand(getDestroyCommand(j));
+	            }
+	            if(destroyOn.contains("LoseControl")) {
+	            	hostCard.addChangeControllerCommand(getDestroyCommand(j));
 	            }
             }
         
@@ -228,6 +251,35 @@ public class AbilityFactory_GainControl {
                 first.getController(), hostCard, first, sa);
                 */
         
+    }
+    
+    private Command getDestroyCommand(final int i) {
+    	final Command destroy = new Command() {
+			private static final long serialVersionUID = 878543373519872418L;
+
+			public void execute() {
+				final Card c = movedCards[i];
+				Ability ability = new Ability(hostCard, "0") {
+					public void resolve() {
+						
+		    			if(bNoRegen) {
+		    				AllZone.GameAction.destroyNoRegeneration(c);
+		    			}
+		    			else {
+		    				AllZone.GameAction.destroy(c);
+		    			}
+					}
+				};
+				StringBuilder sb = new StringBuilder();
+            	sb.append(hostCard).append(" - destroy ").append(c.getName()).append(".");
+            	if(bNoRegen) sb.append("  It can't be regenerated.");
+            	ability.setStackDescription(sb.toString());
+                
+                AllZone.Stack.add(ability);
+    		}
+			
+    	};
+    	return destroy;
     }
     
     private Command getLoseControlCommand(final int i) {
