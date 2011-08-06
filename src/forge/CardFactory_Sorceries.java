@@ -2500,7 +2500,7 @@ public class CardFactory_Sorceries {
                 			
                 			Copy.setToken(true);
                 			Copy.setController(card.getController());
-                			AllZone.GameAction.moveToPlay(Copy);
+                			AllZone.GameAction.moveToPlay(Copy, card.getController());
                 		}
                 	}             
                 }//resolve()
