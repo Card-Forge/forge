@@ -110,20 +110,21 @@ class CardFactory_Auras {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
             
-            final SpellAbility produceCaribou = new Ability_Tap(spell.getTargetCard(), "W W") {
+            Ability_Cost abCost = new Ability_Cost("W W T", spell.getTargetCard() != null ? spell.getTargetCard().getName(): "", true);
+            //final SpellAbility produceCaribou = new Ability_Tap(spell.getTargetCard(), "W W") {
+            final Ability_Activated produceCaribou = new Ability_Activated(spell.getTargetCard(), abCost, null) {
                 
                 private static final long serialVersionUID = 1358032097310954750L;
                 
                 @Override
                 public void resolve() {
-                    //makeToken();
                 	CardFactoryUtil.makeToken("Caribou", "W 0 1 Caribou", spell.getTargetCard().getController(), "W", new String[] {
                         "Creature", "Caribou"}, 0, 1, new String[] {""});
                 }
             };//SpellAbility
             
             produceCaribou.setType("Extrinsic"); // Required for Spreading Seas
-            produceCaribou.setDescription("W W, Tap: Put a 0/1 white Caribou creature token onto the battlefield.");
+            produceCaribou.setDescription(abCost+"Put a 0/1 white Caribou creature token onto the battlefield.");
             produceCaribou.setStackDescription("Put a 0/1 white Caribou creature token onto the battlefield.");
             
             Command onEnchant = new Command() {
@@ -133,7 +134,6 @@ class CardFactory_Auras {
                 public void execute() {
                     if(card.isEnchanting()) {
                         Card crd = card.getEnchanting().get(0);
-                        //crd.clearSpellAbility();
                         crd.addSpellAbility(produceCaribou);
                         
                     }
@@ -185,7 +185,6 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    //get all saprolings:
                     Card c = getTargetCard();
                     if(c == null) return;
                     
@@ -236,6 +235,7 @@ class CardFactory_Auras {
             sb.append(card.getController()).append(" gains 1 life.");
             a2.setStackDescription(sb.toString());
             a2.setBeforePayMana(runtime);
+            
 
             card.addEnchantCommand(onEnchant);
             card.addUnEnchantCommand(onUnEnchant);
@@ -247,14 +247,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void showMessage() {
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-                    CardList land = new CardList();
-                    land.addAll(hum.getCards());
-                    land = land.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isLand();
-                        }
-                    });
+                    CardList land = AllZoneUtil.getPlayerLandsInPlay(AllZone.HumanPlayer);
                     
                     stopSetNext(CardFactoryUtil.input_targetSpecific(spell, land,
                             "Select target land you control", true, false));
