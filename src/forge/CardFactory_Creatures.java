@@ -6120,103 +6120,6 @@ public class CardFactory_Creatures {
         }// *************** END ************ END **************************
         
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Glint-Eye Nephilim")) {
-        	//TODO: update to Ability_Cost
-            final Command untilEOT = new Command() {
-                private static final long serialVersionUID = 5790680475821014099L;
-                
-                public void execute() {
-                    card.addTempAttackBoost(-1);
-                    card.addTempDefenseBoost(-1);
-                }
-            };
-            
-            final Ability ability = new Ability(card, "1") {
-                @Override
-                public boolean canPlayAI() {
-                    Card[] hand = AllZone.Computer_Hand.getCards();
-                    return CardFactoryUtil.AI_doesCreatureAttack(card) && (hand.length != 0);
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    AllZone.ComputerPlayer.discardRandom(this);
-                }
-                
-                @Override
-                public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(card)) {
-                        card.addTempAttackBoost(1);
-                        card.addTempDefenseBoost(1);
-                        
-                        AllZone.EndOfTurn.addUntil(untilEOT);
-                    }
-                }//resolve()
-            };//SpellAbility
-
-            Input runtime = new Input() {
-                private static final long serialVersionUID = -4302110760957471033L;
-                
-                @Override
-                public void showMessage() {
-                	StringBuilder sb = new StringBuilder();
-                	sb.append(card).append(" gets +1/+1 until EOT.");
-                	ability.setStackDescription(sb.toString());
-                    
-                    //stopSetNext(CardFactoryUtil.input_sacrifice(ability, choice, "Select a card to discard."));
-                    stopSetNext(CardFactoryUtil.input_discard(ability, 1));
-                }
-            };
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" gets +1/+1 until end of turn.");
-            ability.setStackDescription(sb.toString());
-            
-            ability.setDescription("1, Discard a card: Glint-Eye Nephilim gets +1/+1 until end of turn.");
-            card.addSpellAbility(ability);
-            ability.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
-        
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Amugaba")) {
-            
-            final Ability ability = new Ability(card, "2 U") {
-                @Override
-                public boolean canPlayAI() {
-                   return false;
-                }
-
-                @Override
-                public void resolve() {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getOwner());
-                    
-                    card.untap();
-                    AllZone.getZone(card).remove(card);
-                    if(!card.isToken()) hand.add(card);
-                }//resolve()
-            };//SpellAbility
-
-            Input runtime = new Input() {
-                private static final long serialVersionUID = -4302210760957471033L;
-                
-                @Override
-                public void showMessage() {
-                    stopSetNext(CardFactoryUtil.input_discard(ability, 1));
-                    
-                }
-            };
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" gets returned to owner's hand");
-            ability.setStackDescription(sb.toString());
-            
-            ability.setDescription("2U, Discard a card: Return Amugaba to owner's hand.");
-            card.addSpellAbility(ability);
-            ability.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
-        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Subterranean Spirit")) {
@@ -6228,14 +6131,12 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                 	
-      				CardList all = new CardList();
-                    all.addAll(AllZone.Human_Battlefield.getCards());
-                    all.addAll(AllZone.Computer_Battlefield.getCards());
+      				CardList all = AllZoneUtil.getCreaturesInPlay();
                     all = all.filter(new CardListFilter()
                     {
                     	public boolean addCard(Card c)
                     	{
-                    		return c.isCreature() && !c.getKeyword().contains("Flying") &&
+                    		return !c.getKeyword().contains("Flying") &&
                     			   CardFactoryUtil.canDamage(card, c);
                     	}
                     });
@@ -6262,14 +6163,12 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                 	
-      				CardList all = new CardList();
-                    all.addAll(AllZone.Human_Battlefield.getCards());
-                    all.addAll(AllZone.Computer_Battlefield.getCards());
+      				CardList all = AllZoneUtil.getCreaturesInPlay();
                     all = all.filter(new CardListFilter()
                     {
                     	public boolean addCard(Card c)
                     	{
-                    		return c.isCreature() && !c.getKeyword().contains("Flying") &&
+                    		return !c.getKeyword().contains("Flying") &&
                     			   CardFactoryUtil.canDamage(card, c);
                     	}
                     });
@@ -6296,14 +6195,12 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                 	
-      				CardList all = new CardList();
-                    all.addAll(AllZone.Human_Battlefield.getCards());
-                    all.addAll(AllZone.Computer_Battlefield.getCards());
+      				CardList all = AllZoneUtil.getCreaturesInPlay();
                     all = all.filter(new CardListFilter()
                     {
                     	public boolean addCard(Card c)
                     	{
-                    		return c.isCreature() && !c.getKeyword().contains("Flying") &&
+                    		return !c.getKeyword().contains("Flying") &&
                     			   CardFactoryUtil.canDamage(card, c);
                     	}
                     });
@@ -6326,14 +6223,12 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                 	
-      				CardList all = new CardList();
-                    all.addAll(AllZone.Human_Battlefield.getCards());
-                    all.addAll(AllZone.Computer_Battlefield.getCards());
+      				CardList all = AllZoneUtil.getCreaturesInPlay();
                     all = all.filter(new CardListFilter()
                     {
                     	public boolean addCard(Card c)
                     	{
-                    		return c.isCreature() && c.getKeyword().contains("Flying") &&
+                    		return c.getKeyword().contains("Flying") &&
                     			   !c.equals(card) && CardFactoryUtil.canDamage(card, c);
                     	}
                     });
@@ -6350,46 +6245,6 @@ public class CardFactory_Creatures {
             
             a2.setDescription("5 R: Scourge of Kher Ridges deals 6 damage to each creature with flying.");
             card.addSpellAbility(a2);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Ephemeron")) {
-            
-            final Ability ability = new Ability(card, "0") {
-                @Override
-                public boolean canPlayAI() {
-                   return false;
-                }
-
-                @Override
-                public void resolve() {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getOwner());
-                    
-                    card.untap();
-                    AllZone.getZone(card).remove(card);
-                    if(!card.isToken()) hand.add(card);
-                }//resolve()
-            };//SpellAbility
-            
-
-            Input runtime = new Input() {
-                private static final long serialVersionUID = -4312210760957471033L;
-                
-                @Override
-                public void showMessage() {
-                    stopSetNext(CardFactoryUtil.input_discard(ability, 1));
-                    
-                }
-            };
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" gets returned to owner's hand");
-            ability.setStackDescription(sb.toString());
-            
-            ability.setDescription("Discard a card: Return Ephemeron to owner's hand.");
-            card.addSpellAbility(ability);
-            ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
         
@@ -6809,168 +6664,8 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Hell-Bent Raider")) {
-            final Command untilEOT = new Command() {
-                
-                private static final long serialVersionUID = -2693050198371979012L;
-                
-                public void execute() {
-                    card.removeIntrinsicKeyword("Protection from white");
-                }
-            };
-            
-            //mana tap ability
-            final Ability ability = new Ability(card, "0") {
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    card.getController().discardRandom(this);
-                    if(AllZone.GameAction.isCardInPlay(card)) {
-                        card.addIntrinsicKeyword("Protection from white");
-                        
-                        AllZone.EndOfTurn.addUntil(untilEOT);
-                    }
-                }//resolve()
-            };//SpellAbility
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" gets Protection from white until end of turn.");
-            ability.setStackDescription(sb.toString());
-            
-            ability.setDescription("Discard a card at random: Hell-Bent Raider gets protection from white until end of turn.");
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
         
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Whiptongue Frog")) {
-            //mana ability - targets itself - until EOT
-            final Command untilEOT = new Command() {
-                private static final long serialVersionUID = -2693050198371979012L;
-                
-                public void execute() {
-                    card.removeIntrinsicKeyword("Flying");
-                }
-            };
-            
-            //mana tap ability
-            final Ability ability = new Ability(card, "U") {
-                @Override
-                public boolean canPlayAI() {
-                    return (!card.hasSickness()) && (!card.getKeyword().contains("Flying"))
-                            && (AllZone.Phase.getPhase().equals(Constant.Phase.Main1));
-                }
-                
-                @Override
-                public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(card)) {
-                        card.addIntrinsicKeyword("Flying");
-                        AllZone.EndOfTurn.addUntil(untilEOT);
-                    }
-                }//resolve()
-            };//SpellAbility
-            
-            Input runtime = new Input() {
-                private static final long serialVersionUID = 1268037036474796569L;
-                
-                @Override
-                public void showMessage() {
-                	StringBuilder sb = new StringBuilder();
-                	sb.append(card).append(" gains flying until EOT.");
-                	ability.setStackDescription(sb.toString());
-                    
-                    stopSetNext(new Input_PayManaCost(ability));
-                }
-            };
-            ability.setStackDescription("Whiptongue Frog gains flying until EOT.");
-            ability.setDescription("U: Whiptongue Frog gains flying until end of turn.");
-            card.addSpellAbility(ability);
-            ability.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
         
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Sarcomite Myr")) {
-            //mana ability - targets itself - until EOT
-            final Command untilEOT = new Command() {
-                private static final long serialVersionUID = -1726670429352834671L;
-                
-                public void execute() {
-                    card.removeIntrinsicKeyword("Flying");
-                }
-            };
-            
-            //mana tap ability
-            final Ability ability = new Ability(card, "2") {
-                @Override
-                public boolean canPlayAI() {
-                    return (!card.hasSickness()) && (!card.getKeyword().contains("Flying"))
-                            && (AllZone.Phase.getPhase().equals(Constant.Phase.Main1));
-                }
-                
-                @Override
-                public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(card)) {
-                        card.addIntrinsicKeyword("Flying");
-                        AllZone.EndOfTurn.addUntil(untilEOT);
-                    }
-                }//resolve()
-            };//SpellAbility
-            
-            Input runtime = new Input() {
-                private static final long serialVersionUID = -685958984421033465L;
-                
-                @Override
-                public void showMessage() {
-                	StringBuilder sb = new StringBuilder();
-                	sb.append(card).append(" gains flying until EOT.");
-                	ability.setStackDescription(sb.toString());
-                    
-                    stopSetNext(new Input_PayManaCost(ability));
-                }
-            };
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" - gains flying until EOT.");
-            ability.setStackDescription(sb.toString());
-            
-            ability.setDescription("2: Sarcomite Myr gains flying until end of turn.");
-            card.addSpellAbility(ability);
-            ability.setBeforePayMana(runtime);
-            
-            //ability 2
-            final Ability ability2 = new Ability(card, "2") {
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                	card.getController().drawCard();
-                }//resolve()
-            };//SpellAbility
-            
-            card.addSpellAbility(ability2);
-            ability2.setDescription("2, Sacrifice Sarcomite Myr: Draw a card.");
-            ability2.setStackDescription("Sarcomite Myr - draw a card");
-            ability2.setBeforePayMana(new Input_PayManaCost_Ability(ability2.getManaCost(), new Command() {
-                private static final long serialVersionUID = -4357239016463815380L;
-                
-                public void execute() {
-                    AllZone.GameAction.sacrifice(card);
-                    AllZone.Stack.add(ability2);
-                }
-            }));
-            
-        }//*************** END ************ END **************************
-                        
-
         //*************** START *********** START **************************
         else if(cardName.equals("Turtleshell Changeling")) {
             //mana ability - targets itself - until EOT
@@ -7231,54 +6926,6 @@ public class CardFactory_Creatures {
             });
         }//*************** END ************ END **************************
         
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Frostling")) {
-            final Ability ability = new Ability(card, "0") {
-                @Override
-                public boolean canPlayAI() {
-                    return getCreature().size() != 0;
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    CardList list = getCreature();
-                    list.shuffle();
-                    setTargetCard(list.get(0));
-                    
-                    AllZone.GameAction.sacrifice(card);
-                }
-                
-                CardList getCreature() {
-                    //toughness of 1
-                    CardList list = CardFactoryUtil.AI_getHumanCreature(1, card, true);
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            //only get 1/1 flyers or 2/1 creatures
-                            return (2 <= c.getNetAttack()) || c.getKeyword().contains("Flying");
-                        }
-                    });
-                    return list;
-                }//getCreature()
-                
-                @Override
-                public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(1, card);
-                }//resolve()
-            };//SpellAbility
-            
-            card.addSpellAbility(ability);
-            ability.setDescription("Sacrifice Frostling: Frostling deals 1 damage to target creature.");
-            ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability, new Command() {
-                private static final long serialVersionUID = 3482118508536148313L;
-                
-                public void execute() {
-                    AllZone.GameAction.sacrifice(card);
-                }
-            }));
-        }//*************** END ************ END **************************
-        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Painter's Servant")) {
@@ -7432,12 +7079,10 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void showMessage() {
-                    CardList list = new CardList();
-                    list.addAll(AllZone.Human_Battlefield.getCards());
-                    list.addAll(AllZone.Computer_Battlefield.getCards());
+                    CardList list = AllZoneUtil.getCreaturesInPlay();
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.isCreature() && c.getKeyword().contains("Flying")
+                            return c.getKeyword().contains("Flying")
                                     && CardFactoryUtil.canTarget(card, c);
                         }
                     });
