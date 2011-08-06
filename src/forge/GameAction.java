@@ -34,6 +34,8 @@ public class GameAction {
         }
     }
 
+    // todo(sol) Combine all of these move tos
+    
     public Card moveTo(PlayerZone zone, Card c) {
     	// Ideally move to should never be called without a prevZone
     	// Remove card from Current Zone, if it has one
@@ -182,10 +184,9 @@ public class GameAction {
 		return c;
     }
     
-    public void moveToHand(Card c) {
+    public Card moveToHand(Card c) {
         PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getOwner());
-        if(c.isToken()) AllZone.getZone(c).remove(c);
-        else moveTo(hand, c);
+        return moveTo(hand, c);
     }
     
     public Card moveToPlay(Card c) {
@@ -193,25 +194,31 @@ public class GameAction {
         return moveTo(play, c);
     }
     
-    public void moveToBottomOfLibrary(Card c) {
-    	moveToLibrary(c, -1);
+    public Card moveToBottomOfLibrary(Card c) {
+    	return moveToLibrary(c, -1);
     }
 
-    public void moveToLibrary(Card c) {
-    	moveToLibrary(c, 0);
+    public Card moveToLibrary(Card c) {
+    	return moveToLibrary(c, 0);
     }
     
-    public void moveToLibrary(Card c, int libPosition){
+    public Card moveToLibrary(Card c, int libPosition){
         PlayerZone p = AllZone.getZone(c);
         PlayerZone library = AllZone.getZone(Constant.Zone.Library, c.getOwner());
         
         if(p != null) p.remove(c);
-        if(!c.isToken()) c = AllZone.CardFactory.copyCard(c);
+        
+        if (c.isToken())
+        	return c;
+        
+        // todo is this copy necessary?
+        c = AllZone.CardFactory.copyCard(c);
         
         if (libPosition == -1)
         	libPosition = library.getCards().length;
         
         library.add(c, libPosition);
+        return c;
     }
 
     public boolean AI_discardNumType(int numDiscard, String[] uTypes, SpellAbility sa) {
@@ -1967,9 +1974,7 @@ public class GameAction {
 	
    public void sacrificeDestroy(Card c) {
         if(!isCardInPlay(c)) return;
-        
-        PlayerZone play = AllZone.getZone(c);
-        
+
         Player owner = c.getOwner();
         if (!(owner.isComputer() || owner.isHuman()))
         		throw new RuntimeException("GameAction : destroy() invalid card.getOwner() - " + c + " " + owner);
@@ -1985,12 +1990,10 @@ public class GameAction {
         //TODO: must change this if any cards have effects that trigger "when creatures go to the graveyard"
         
         //resets the card, untaps the card, removes anything "extra", resets attack and defense
-        if(!c.isToken()) 
-        	c = moveToGraveyard(c);
-        else play.remove(c);
-
-        c.destroy();
+        Card newCard = moveToGraveyard(c);
         
+        // Destroy needs to be called with Last Known Information
+        c.destroy();
         
         //destroy card effects:
         CardList list = AllZoneUtil.getCardsInPlay();
@@ -2014,7 +2017,7 @@ public class GameAction {
             GameActionUtil.executeGrvDestroyCardEffects(bridge.get(i), c);
         
         if(persist) {
-        	final Card persistCard = c;
+        	final Card persistCard = newCard;
         	Ability persistAb = new Ability(persistCard, "0"){
 
 				@Override
@@ -2026,24 +2029,24 @@ public class GameAction {
 					}
 				}
         	};
-        	persistAb.setStackDescription(c.getName() + " - Returning from Persist");
+        	persistAb.setStackDescription(newCard.getName() + " - Returning from Persist");
         	AllZone.Stack.add(persistAb);
         }
         
-        if(c.getKeyword().contains(
+        if(newCard.getKeyword().contains(
                 "When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.")) {
-            PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getOwner());
-            moveTo(hand, c);
+            PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, newCard.getOwner());
+            moveTo(hand, newCard);
         }
 
-        else if(c.getName().equals("Nissa's Chosen")) {
-            PlayerZone library = AllZone.getZone(Constant.Zone.Library, c.getOwner());
-            moveTo(library, c);
+        else if(newCard.getName().equals("Nissa's Chosen")) {
+            PlayerZone library = AllZone.getZone(Constant.Zone.Library, newCard.getOwner());
+            moveTo(library, newCard);
         }
 
-        else if(c.getName().equals("Guan Yu, Sainted Warrior")) {
-            PlayerZone library = AllZone.getZone(Constant.Zone.Library, c.getOwner());
-            c = moveTo(library, c);
+        else if(newCard.getName().equals("Guan Yu, Sainted Warrior")) {
+            PlayerZone library = AllZone.getZone(Constant.Zone.Library, newCard.getOwner());
+            newCard = moveTo(library, newCard);
             owner.shuffle();
         }
     }//sacrificeDestroy()
@@ -2056,6 +2059,7 @@ public class GameAction {
             c.subtractShield();
             c.setDamage(0);
             c.tap();
+            AllZone.Combat.removeFromCombat(c);
             return false;
         }
         
@@ -3353,10 +3357,7 @@ public class GameAction {
             list.remove(c);
             if (tapFirstLand)
             	c.tap();
-
-            library.remove(c);
-            firstZone.add(c);
-            
+            moveTo(firstZone, c);   
         }//if
         if ((list.size() == 0) || onlyOneLand) return;
         //branch 3
@@ -3368,9 +3369,7 @@ public class GameAction {
             list.remove(c);
             if (tapSecondLand)
             	c.tap();
-            
-            library.remove(c);
-            secondZone.add(c);
+            moveTo(secondZone, c); 
         }
     }
     

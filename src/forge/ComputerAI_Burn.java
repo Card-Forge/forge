@@ -2,6 +2,7 @@ package forge;
 
 
 //import java.util.*;
+/*
 import javax.swing.SwingUtilities;
 
 import forge.error.ErrorViewer;
@@ -142,3 +143,4 @@ public class ComputerAI_Burn implements Computer {
         AllZone.InputControl.updateObservers();
     }
 }
+*/

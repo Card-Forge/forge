@@ -650,7 +650,6 @@ public class CardFactoryUtil {
             @Override
             public void selectCard(Card card, PlayerZone zone) {
                 if(choices.contains(card)) {
-                    AllZone.getZone(card).remove(card);
                     AllZone.GameAction.moveToGraveyard(card);
                     Paid.execute();
                     stop();
@@ -765,11 +764,12 @@ public class CardFactoryUtil {
             @Override
             public void selectCard(Card card, PlayerZone zone) {
                 if(zone.is(Constant.Zone.Hand)) {
-                    AllZone.Human_Hand.remove(card);
-                    
-                    if(TopOrBottom.equals("top")) AllZone.Human_Library.add(card, 0);
-                    else if(TopOrBottom.equals("bottom")) AllZone.Human_Library.add(card);
-                    
+                	int position = 0;
+                	if (TopOrBottom.equalsIgnoreCase("bottom"))
+                		position = -1;
+                	
+                	AllZone.GameAction.moveToLibrary(card, position);
+
                     n++;
                     if(n == num) stop();
                     

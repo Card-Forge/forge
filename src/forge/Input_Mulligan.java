@@ -1,8 +1,6 @@
 
 package forge;
 
-import forge.gui.GuiUtils;
-
 public class Input_Mulligan extends Input {
     private static final long serialVersionUID = -8112954303001155622L;
     
@@ -34,8 +32,6 @@ public class Input_Mulligan extends Input {
         
         AllZone.GameInfo.addHumanNumberOfTimesMulliganed(1);
         
-        //System.out.println("Mulliganed this turn:" + AllZone.GameInfo.getHumanNumberOfTimesMulliganed());
-        
         if(AllZone.QuestData != null)
         {
         	if (AllZone.QuestData.getSleightOfHandLevel() >= 1 && AllZone.GameInfo.getHumanNumberOfTimesMulliganed() == 1)
@@ -51,26 +47,19 @@ public class Input_Mulligan extends Input {
     }//selectButtonOK()
     
     void end() {
-    	
-        CardList CHandList = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
-        PlayerZone CPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-        PlayerZone CHand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
-        
     	//Computer mulligan
-        Card[] hand = AllZone.Computer_Hand.getCards();
-        CardList handCards = new CardList(hand);
-        Card dummy = handCards.get(0);
+        CardList CHandList = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
+
+        Card dummy = CHandList.get(0);
         //Computer mulligans if there are no cards with converted mana cost of 0 in its hand
-        if(handCards.getValidCards("Card.cmcEQ0",AllZone.ComputerPlayer,dummy).size() == 0) {
-	        for(int i = 0; i < hand.length; i++) {
-	            AllZone.Computer_Library.add(hand[i]);
-	            AllZone.Computer_Hand.remove(hand[i]);
-	        }
+        if(CHandList.getValidCards("Card.cmcEQ0",AllZone.ComputerPlayer,dummy).size() == 0) {
+        	for(Card c : CHandList)
+        		AllZone.GameAction.moveToLibrary(c);
 	        
 	        for(int i = 0; i < 100; i++)
 	            AllZone.ComputerPlayer.shuffle();
 	        	        
-	        int newHand = hand.length - 1;
+	        int newHand = CHandList.size() - 1;
 	        for(int i = 0; i < newHand; i++)
 	            AllZone.ComputerPlayer.drawCard();
         }
@@ -87,16 +76,15 @@ public class Input_Mulligan extends Input {
         }
 
         //Computer Leylines
-        for(int i = 0; i < CHandList.size() ; i++) {
-        	if(CHandList.get(i).getName().startsWith("Leyline") && !(CHandList.get(i).getName().startsWith("Leyline of Singularity")
+        for(Card c : CHandList){
+        	if(c.getName().startsWith("Leyline") && !(c.getName().startsWith("Leyline of Singularity")
         			&& AllZoneUtil.getCardsInPlay("Leyline of Singularity").size() > 0)) {
-        		CPlay.add(CHandList.get(i));
-        		CHand.remove(CHandList.get(i));
+        		AllZone.GameAction.moveToPlay(c);
         		AllZone.GameAction.checkStateEffects();
         	}
 
         }
-        if(AllZone.GameAction.Start_Cut == true && !(HHandList.contains(AllZone.GameAction.HumanCut) 
+        if(AllZone.GameAction.Start_Cut && !(HHandList.contains(AllZone.GameAction.HumanCut) 
         		|| CHandList.contains(AllZone.GameAction.ComputerCut)))  {
         	AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer),AllZone.GameAction.HumanCut);
         	AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer),AllZone.GameAction.ComputerCut);

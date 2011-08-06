@@ -3,11 +3,7 @@ import java.util.ArrayList;
 
 public class PlayerZoneUtil
 {	
-  public static boolean containsCardType(PlayerZone zone, String cardType)
-  {
-    return (getCardType(zone, cardType).size() > 0);
-  }
-  
+	//todo(sol) this whole class is pretty useless 
   public static ArrayList<Card> getCardType(PlayerZone zone, String cardType)
   {
     Card c;
@@ -47,22 +43,6 @@ public class PlayerZoneUtil
 
     return false;
   }
-  static public ArrayList<Card> getCardsNamed(PlayerZone pz, final String name)
-  {
-    ArrayList<Card> sameName = new ArrayList<Card>();
-    String s;
-    for(int i = 0; i < pz.size(); i++)
-    {
-      s = pz.get(i).getName();
-      if(s.equals(name))
-        sameName.add(pz.get(i));
-    }
-    return sameName;
-  }
-  static public void moveToTop(PlayerZone pz, Card card)
-  {
-    pz.remove(card);
-    pz.add(card, 0);
-  }
+
 }
 
