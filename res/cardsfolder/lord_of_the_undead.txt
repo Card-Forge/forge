@@ -4,6 +4,7 @@ Types:Creature Zombie
 Text:no text
 PT:2/2
 K:stPumpAll:Creature.Zombie+Other:1/1:No Condition:Other Zombie creatures get +1/+1.
+A:AB$ChangeZone | Cost$ 1 B T | TgtPrompt$ Choose target Zombie card in your graveyard | ValidTgts$ Zombie.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target Zombie card from your graveyard to your hand.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_the_undead.jpg

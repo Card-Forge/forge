@@ -14175,7 +14175,7 @@ public class CardFactory_Creatures {
         	ability.setBeforePayMana(CardFactoryUtil.input_targetPermanent(ability));
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START ************************
         else if(cardName.equals("Lord of the Undead")) {
             final Ability_Tap ability = new Ability_Tap(card, "1 B") {
@@ -14233,7 +14233,7 @@ public class CardFactory_Creatures {
             
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if (cardName.equals("Kargan Dragonlord"))

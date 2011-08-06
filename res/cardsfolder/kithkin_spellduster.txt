@@ -1,0 +1,11 @@
+Name:Kithkin Spellduster
+ManaCost:4 W
+Types:Creature Kithkin Wizard
+Text:no text
+PT:2/3
+K:Flying
+K:Persist
+A:AB$Destroy | Cost$ 1 W Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kithkin_spellduster.jpg
+End
