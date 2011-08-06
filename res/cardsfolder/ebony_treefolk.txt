@@ -1,0 +1,9 @@
+Name:Ebony Treefolk
+ManaCost:1 B G
+Types:Creature Treefolk
+Text:no text
+PT:3/3
+K:abPump B G:+1/+1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ebony_treefolk.jpg
+End

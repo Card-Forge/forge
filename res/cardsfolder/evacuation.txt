@@ -1,0 +1,8 @@
+Name:Evacuation
+ManaCost:3 U U
+Types:Instant
+Text:Return all creatures to their owners' hands.
+K:spBounceAll:Creature:Hand
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/evacuation.jpg
+End

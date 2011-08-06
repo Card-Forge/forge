@@ -1,0 +1,7 @@
+Name:Exploration
+ManaCost:G
+Types:Enchantment
+Text:You may play an additional land each of your turns.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/exploration.jpg
+End

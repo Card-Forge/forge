@@ -1,0 +1,9 @@
+Name:Elvish Farmer
+ManaCost:1 G
+Types:Creature Elf
+Text:At the beginning of your upkeep, put a spore counter on Elvish Farmer.
+PT:0/2
+K:Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_farmer.jpg
+End

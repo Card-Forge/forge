@@ -1,0 +1,8 @@
+Name:Entangling Vines
+ManaCost:3 G
+Types:Enchantment Aura
+Text:Enchanted creature doesn't untap during its controller's untap step.
+K:Enchant tapped creature
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/entangling_vines.jpg
+End

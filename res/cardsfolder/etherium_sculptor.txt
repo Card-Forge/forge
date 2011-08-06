@@ -1,0 +1,9 @@
+Name:Etherium Sculptor
+ManaCost:1 U
+Types:Artifact Creature Vedalken Artificer
+Text:Artifact spells you cast cost 1 less to cast.
+PT:1/2
+K:CostChange:Player:Less:1:Spell:All:Artifact:NoSpecial
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/etherium_sculptor.jpg
+End

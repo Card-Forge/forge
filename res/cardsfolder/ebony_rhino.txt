@@ -1,0 +1,9 @@
+Name:Ebony Rhino
+ManaCost:7
+Types:Artifact Creature Rhino
+Text:no text
+PT:4/5
+K:Trample
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/hm/en-us/card2905.jpg
+End

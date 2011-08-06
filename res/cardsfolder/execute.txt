@@ -1,0 +1,9 @@
+Name:Execute
+ManaCost:2 B
+Types:Instant
+Text:Destroy target white creature. It can't be regenerated.
+K:spDestroyTgt:Creature.White:NoRegen
+K:Draw a card.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/execute.jpg
+End

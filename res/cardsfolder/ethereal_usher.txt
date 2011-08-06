@@ -1,0 +1,10 @@
+Name:Ethereal Usher
+ManaCost:5 U
+Types:Creature Spirit
+Text:no text
+PT:2/3
+K:abPumpTgtC U T:Unblockable
+K:Transmute:1 U U
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ethereal_usher.jpg
+End

@@ -1,0 +1,9 @@
+Name:Elvish Champion
+ManaCost:1 G G
+Types:Creature Elf
+Text:Other Elf creatures get +1/+1 and have forestwalk.
+PT:2/2
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_champion.jpg
+End

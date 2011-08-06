@@ -1,0 +1,9 @@
+Name:Elvish Archers
+ManaCost:1 G
+Types:Creature Elf Archer
+Text:no text
+PT:2/1
+K:First Strike
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_archers.jpg
+End

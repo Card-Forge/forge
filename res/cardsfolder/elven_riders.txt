@@ -1,0 +1,9 @@
+Name:Elven Riders
+ManaCost:3 G G
+Types:Creature Elf
+Text:no text
+PT:3/3
+K:CARDNAME can't be blocked except by Walls and/or creatures with flying.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/elven_riders.jpg
+End

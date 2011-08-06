@@ -1,0 +1,9 @@
+Name:Elite Cat Warrior
+ManaCost:2 G
+Types:Creature Cat Warrior
+Text:no text
+PT:2/3
+K:Forestwalk
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4293.jpg
+End

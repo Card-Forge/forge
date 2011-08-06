@@ -1,0 +1,8 @@
+Name:Energizer
+ManaCost:4
+Types:Artifact Creature Juggernaut
+Text:no text
+PT:2/2
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/energizer.jpg
+End

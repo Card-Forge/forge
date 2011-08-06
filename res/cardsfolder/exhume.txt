@@ -1,0 +1,7 @@
+Name:Exhume
+ManaCost:1 B
+Types:Sorcery
+Text:Each player puts a creature card from his or her graveyard onto the battlefield.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/exhume.jpg
+End

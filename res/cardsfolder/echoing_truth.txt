@@ -1,0 +1,7 @@
+Name:Echoing Truth
+ManaCost:1 U
+Types:Instant
+Text:Return target nonland permanent and all other permanents with the same name as that permanent to their owner's hands.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card46162.jpg
+End

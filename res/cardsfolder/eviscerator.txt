@@ -1,0 +1,9 @@
+Name:Eviscerator
+ManaCost:3 B B
+Types:Creature Horror
+Text:When Eviscerator enters the battlefield, you lose 5 life.
+PT:5/5
+K:Protection from white
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/eviscerator.jpg
+End

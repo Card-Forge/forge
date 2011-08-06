@@ -1,0 +1,8 @@
+Name:Exclude
+ManaCost:2 U
+Types:Instant
+Text:Counter target creature spell. Draw a card.
+K:spCounter:Spell:Type(Creature):Graveyard:My-Draw(1)
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/exclude.jpg
+End

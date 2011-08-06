@@ -1,0 +1,9 @@
+Name:Eldrazi Conscription
+ManaCost:8
+Types:Enchantment Aura
+Text:Enchanted creature gets +10/+10 and has trample and annihilator 2.
+K:Enchant creature
+K:enPump:+10/+10/Trample & Annihilator 2
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/eldrazi_conscription.jpg
+End

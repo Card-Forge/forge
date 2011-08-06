@@ -1,0 +1,9 @@
+Name:Enlisted Wurm
+ManaCost:4 G W
+Types:Creature Wurm
+Text:no text
+PT:5/5
+K:Cascade
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/enlisted_wurm.jpg
+End

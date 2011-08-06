@@ -1,0 +1,13 @@
+Name:Elvish Harbinger
+ManaCost:2 G
+Types:Creature Elf Druid
+Text:When Elvish Harbinger enters the battlefield, you may search your library for an Elf card, reveal it, then shuffle your library and put that card on top of it.
+PT:1/2
+K:tap: add W
+K:tap: add B
+K:tap: add U
+K:tap: add R
+K:tap: add G
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_harbinger.jpg
+End

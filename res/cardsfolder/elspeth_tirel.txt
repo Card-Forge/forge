@@ -1,0 +1,7 @@
+Name:Elspeth Tirel
+ManaCost:3 W W
+Types:Planeswalker - Elspeth
+Text:no text
+K:SVar:Rarity:Mythic
+K:SVar:Picture:http://serv1.tcgimages.eu/img/cards/Scars_of_Mirrodin/elspeth_tirel.jpg
+End

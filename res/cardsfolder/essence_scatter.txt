@@ -1,0 +1,8 @@
+Name:Essence Scatter
+ManaCost:1 U
+Types:Instant
+Text:Counter target creature spell.
+K:spCounter:Spell:Type(Creature):Graveyard:None
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_scatter.jpg
+End

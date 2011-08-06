@@ -1,0 +1,10 @@
+Name:Emerald Dragonfly
+ManaCost:1 G
+Types:Creature Insect
+Text:no text
+PT:1/1
+K:Flying
+K:abPump G G:First Strike
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/emerald_dragonfly.jpg
+End

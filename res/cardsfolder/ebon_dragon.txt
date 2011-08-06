@@ -1,0 +1,10 @@
+Name:Ebon Dragon
+ManaCost:5 B B
+Types:Creature Dragon
+Text:no text
+PT:5/4
+K:Flying
+K:WheneverKeyword:EntersBattleField:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:Yes_No:No Special Condition:When Ebon Dragon enters the battlefield, you may have target opponent discard a card.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ebon_dragon.jpg
+End

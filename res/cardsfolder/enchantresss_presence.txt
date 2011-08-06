@@ -1,0 +1,8 @@
+Name:Enchantress's Presence
+ManaCost:2 G
+Types:Enchantment
+Text:Whenever you play an enchantment spell, draw a card.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/enchantresss_presence.jpg
+End

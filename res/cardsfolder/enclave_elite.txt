@@ -1,0 +1,10 @@
+Name:Enclave Elite
+ManaCost:2 U
+Types:Creature Merfolk Soldier
+Text:Enclave Elite enters the battlefield with a +1/+1 counter on it for each time it was kicked.
+PT:2/2
+K:Islandwalk
+K:Multikicker 1 U
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/enclave_elite.jpg
+End

@@ -1,0 +1,8 @@
+Name:Enormous Baloth
+ManaCost:6 G
+Types:Creature Beast
+Text:no text
+PT:7/7
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/lgn/en-us/card44500.jpg
+End

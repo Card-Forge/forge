@@ -1,0 +1,10 @@
+Name:Eternity Snare
+ManaCost:5 U
+Types:Enchantment Aura
+Text:Enchanted creature doesn't untap during its controller's untap step.
+K:Enchant creature
+K:enPumpCurse:CARDNAME doesn't untap during your untap step.
+K:When CARDNAME enters the battlefield, draw a card.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/eternity_snare.jpg
+End

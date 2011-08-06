@@ -1,0 +1,7 @@
+Name:Engineered Plague
+ManaCost:2 B
+Types:Enchantment
+Text:As Engineered Plague comes into play, choose a creature type.\r\nAll creatures of the chosen type get -1/-1.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/engineered_plague.jpg
+End

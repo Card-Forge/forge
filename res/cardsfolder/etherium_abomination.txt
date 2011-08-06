@@ -1,0 +1,9 @@
+Name:Etherium Abomination
+ManaCost:3 U B
+Types:Artifact Creature Horror
+Text:no text
+PT:4/3
+K:Unearth:1 U B
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/etherium_abomination.jpg
+End

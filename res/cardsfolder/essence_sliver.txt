@@ -1,0 +1,9 @@
+Name:Essence Sliver
+ManaCost:3 W
+Types:Creature Sliver
+Text:All Slivers have lifelink.
+PT:3/3
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_sliver.jpg
+End

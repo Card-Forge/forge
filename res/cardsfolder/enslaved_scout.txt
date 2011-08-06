@@ -1,0 +1,9 @@
+Name:Enslaved Scout
+ManaCost:2 R
+Types:Creature Goblin Scout
+Text:no text
+PT:2/2
+K:abPump 2:Mountainwalk
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/enslaved_scout.jpg
+End

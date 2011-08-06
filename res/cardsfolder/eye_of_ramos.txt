@@ -1,0 +1,10 @@
+Name:Eye of Ramos
+ManaCost:3
+Types:Artifact
+Text:no text
+K:tap: add U
+K:Sacrifice CARDNAME: Add U to your mana pool.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/eye_of_ramos.jpg
+End

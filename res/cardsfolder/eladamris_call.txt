@@ -1,0 +1,7 @@
+Name:Eladamri's Call
+ManaCost:G W
+Types:Instant
+Text:Search your library for a creature card, reveal that card, and put it into your hand. Then shuffle your library.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/eladamris_call.jpg
+End

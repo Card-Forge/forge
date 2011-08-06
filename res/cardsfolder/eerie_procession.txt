@@ -1,0 +1,9 @@
+Name:Eerie Procession
+ManaCost:2 U
+Types:Sorcery
+Text:Search your library for an Arcane card, reveal that card, and put it into your hand. Then shuffle your library.
+K:spTutor:Arcane:Hand
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/eerie_procession.jpg
+End

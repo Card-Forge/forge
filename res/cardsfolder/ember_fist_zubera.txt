@@ -1,0 +1,8 @@
+Name:Ember-Fist Zubera
+ManaCost:1 R
+Types:Creature Zubera Spirit
+Text:When Ember-Fist Zubera is put into a graveyard from play, it deals damage to target creature or player equal to the number of Zubera put into all graveyards from play this turn.
+PT:1/2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80508.jpg
+End

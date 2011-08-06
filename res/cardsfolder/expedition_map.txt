@@ -1,0 +1,7 @@
+Name:Expedition Map
+ManaCost:1
+Types:Artifact
+Text:no text
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/expedition_map.jpg
+End

@@ -1,0 +1,10 @@
+Name:Eternal Dragon
+ManaCost:5 W W
+Types:Creature Dragon Spirit
+Text:no text
+PT:5/5
+K:Flying
+K:TypeCycling:Plains:2
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/eternal_dragon.jpg
+End
