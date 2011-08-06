@@ -11390,11 +11390,11 @@ public class GameActionUtil {
 		boolean SpecialConditionsMet(Card SourceCard, String SpecialConditions) {
   	      	
   	      	if(SpecialConditions.contains("CardsInHandMore")) {
-  	      			CardList SpecialConditionsCardList = new CardList();
-	      			SpecialConditionsCardList.clear();
-	      			String Condition = SpecialConditions.split("/")[1];
-	      			SpecialConditionsCardList.addAll(AllZone.getZone(Constant.Zone.Hand, SourceCard.getController()).getCards());
-	      			if(SpecialConditionsCardList.size() < Integer.valueOf(Condition)) return false;
+  	      		CardList SpecialConditionsCardList = new CardList();
+	      		SpecialConditionsCardList.clear();
+	      		String Condition = SpecialConditions.split("/")[1];
+	      		SpecialConditionsCardList.addAll(AllZone.getZone(Constant.Zone.Hand, SourceCard.getController()).getCards());
+	      		if(SpecialConditionsCardList.size() < Integer.valueOf(Condition)) return false;
   	      	}
   	      	if(SpecialConditions.contains("LibraryLE")) {
   	      		CardList Library = new CardList();
@@ -11412,8 +11412,8 @@ public class GameActionUtil {
 	      		if (Handcards.size() > 0) return false;
 	      	}
   	      	if(SpecialConditions.contains("Metalcraft")) {
-    			CardList CardsinPlay = new CardList();
-      			CardsinPlay.addAll(AllZone.Human_Play.getCards());
+  	      		PlayerZone play = AllZone.getZone(Constant.Zone.Play, SourceCard.getController());
+  	      		CardList CardsinPlay = new CardList(play.getCards());
       			CardsinPlay = CardsinPlay.getType("Artifact");
 	      		if (CardsinPlay.size() < 3) return false;
 	      	}
