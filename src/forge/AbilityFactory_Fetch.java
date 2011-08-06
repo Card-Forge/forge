@@ -420,14 +420,23 @@ public class AbilityFactory_Fetch {
 		Target tgt = af.getAbTgt();
 		if(tgt != null) {
 			// AI Targeting 
+			HashMap<String,String> params = af.getMapParams();
+	        String destination = params.get("Destination");
 			CardList list = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
 			list = list.getValidCards(tgt.getValidTgts(), AllZone.ComputerPlayer);
+			Card c = new Card();
 			
 			if (list.size() == 0)
 				return false;
 			
 			list.shuffle();
-			sa.setTargetCard(list.get(0));
+			if (list.getNotType("Creature").size() == 0 && destination.equals("Battlefield"))
+        		c = CardFactoryUtil.AI_getBestCreature(list); //if only creatures take the best
+        	else if (destination.equals("Battlefield"))
+        		c = CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false);
+        	else
+        		c = list.get(0);
+			sa.setTargetCard(c);
 			// todo: the AI actually needs a "smart" way to choose before we add any Retrieve cards that tgt.
 			// reuse some code from spReturn here
 		}
