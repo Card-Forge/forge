@@ -174,9 +174,8 @@ public class Cost_Payment {
 		
 		if (!paySubCounter && cost.getSubCounter()){	// pay counters here. 
 			Counters c = cost.getCounterType();
-			int countersLeft = card.getCounters(c) - cost.getCounterNum();
-			if (countersLeft >= 0){
-				card.setCounter(c, countersLeft);
+			if (card.getCounters(c) >= cost.getCounterNum()){
+				card.subtractCounter(c, cost.getCounterNum());
 				paySubCounter = true;
 			}
 			else{
@@ -273,7 +272,7 @@ public class Cost_Payment {
         if (cost.getSubCounter() && paySubCounter){
 			Counters c = cost.getCounterType();
 			int countersLeft = card.getCounters(c) + cost.getCounterNum();
-			card.setCounter(c, countersLeft);
+			card.setCounter(c, countersLeft, true);
         }
         
         // refund life
@@ -321,14 +320,9 @@ public class Cost_Payment {
     	}
     	
     	// double check if counters available? Real check is in ComputerUtil.canPayAdditionalCosts()
-    	int countersLeft = 0;
-    	if (cost.getSubCounter()){
-			Counters c = cost.getCounterType();
-			countersLeft = card.getCounters(c) - cost.getCounterNum();
-			if (countersLeft < 0){
-	    		System.out.println("Not enough " + c.getName() + " on "+card.getName());
-	    		return;
-			}
+    	if (cost.getCounterNum() > card.getCounters(cost.getCounterType())){
+    		System.out.println("Not enough " + cost.getCounterType() + " on " + card.getName());
+    		return;
     	}
     	
     	if (cost.getTap())
@@ -346,7 +340,7 @@ public class Cost_Payment {
 		}
     	
     	if (cost.getSubCounter())
-    		card.setCounter(cost.getCounterType(), countersLeft);
+    		card.subtractCounter(cost.getCounterType(), cost.getCounterNum());
     	
     	if (cost.getLifeCost())
     		AllZone.GameAction.getPlayerLife(card.getController()).payLife(cost.getLifeAmount());

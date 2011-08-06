@@ -428,10 +428,16 @@ public class Card extends MyObservable {
     	return counters.size() > 0;
     }
     
-    public void setCounter(Counters counterName, int n) {
-        if(getCounters(counterName) > 0)
-        	addCounter(counterName, n-getCounters(counterName));
-        else subtractCounter(counterName, getCounters(counterName) - n);
+    public void setCounter(Counters counterName, int n, boolean bSetValue) {
+    	if (bSetValue)	// sometimes you just need to set the value without being affected by DoublingSeason
+    		counters.put(counterName, Integer.valueOf(n));
+    	else{
+    		int num = getCounters(counterName);
+    		if(num < n)	// if counters on card is less than the setting value, addCounters
+	        	addCounter(counterName, n - num);
+	        else
+	        	subtractCounter(counterName, num - n);
+	    }
         this.updateObservers();
     }
     

@@ -11072,7 +11072,7 @@ public class CardFactory_Creatures {
                 public void execute() {
                     
                     if(firstTime) {
-                        card.setCounter(Counters.SPORE, 0);
+                        card.setCounter(Counters.SPORE, 0, false);
                     }
                     firstTime = false;
                 }
@@ -11163,7 +11163,7 @@ public class CardFactory_Creatures {
                 public void execute() {
                     
                     if(firstTime) {
-                        card.setCounter(Counters.SPORE, 0);
+                        card.setCounter(Counters.SPORE, 0, false);
                     }
                     firstTime = false;
                 }
@@ -11261,7 +11261,7 @@ public class CardFactory_Creatures {
                 public void execute() {
                     
                     if(firstTime) {
-                        card.setCounter(Counters.SPORE, 0);
+                        card.setCounter(Counters.SPORE, 0, false);
                     }
                     firstTime = false;
                 }
@@ -18723,7 +18723,7 @@ public class CardFactory_Creatures {
         			final Card c = getTargetCard();
         			for(Counters counter:Counters.values()) {
         				if(c.getCounters(counter) > 0) {
-        					c.setCounter(counter, 0);
+        					c.setCounter(counter, 0, false);
         				}
         			}
         			AllZone.GameAction.sacrifice(card);

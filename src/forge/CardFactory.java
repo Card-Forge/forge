@@ -7059,7 +7059,7 @@ public class CardFactory implements NewConstants {
                 public void execute() {
                     
                     if(firstTime) {
-                        card.setCounter(Counters.HOOFPRINT, 0);
+                        card.setCounter(Counters.HOOFPRINT, 0, false);
                     }
                     firstTime = false;
                 }

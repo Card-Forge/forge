@@ -496,7 +496,7 @@ public class GameAction {
     	hand.remove(c);
     	play.add(c);
     	if (c.getName().equals("Dodecapod"))
-    		c.setCounter(Counters.P1P1, 2);
+    		c.setCounter(Counters.P1P1, 2, false);
     }
     
     public void discard_megrim(Card c) {
@@ -2803,7 +2803,7 @@ public class GameAction {
             AllZone.Computer_Library.setCards(c);
         } else {
             AllZone.Computer_Library.setCards(AllZone.Computer_Library.getCards());
-            this.shuffle(Constant.Player.Computer);
+            	this.shuffle(Constant.Player.Computer);
         }
      
         // Only cut/coin toss if it's the first game of the match
@@ -2827,7 +2827,7 @@ public class GameAction {
         AllZone.Human_Play.add(mp);
         
         AllZone.Stack.reset();//this works, it clears the stack of Upkeep effects like Bitterblossom
-        AllZone.InputControl.setInput(new Input_Mulligan());
+        	AllZone.InputControl.setInput(new Input_Mulligan());
         Phase.GameBegins = 1;
         ButtonUtil.reset();
     }//newGame()
