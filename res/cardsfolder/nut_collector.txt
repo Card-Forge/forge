@@ -1,7 +1,7 @@
 Name:Nut Collector
 ManaCost:5 G
 Types:Creature Human Druid
-Text:At the beginning of your upkeep, you may put a 1/1 green Squirrel creature token onto the battlefield.
+Text:At the beginning of your upkeep, you may put a 1/1 green Squirrel creature token onto the battlefield.\r\nThreshold - Squirrel creatures get +2/+2 as long as seven or more cards are in your graveyard.
 PT:1/1
 K:SVar:Rarity:Rare
 K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nut_collector.jpg
