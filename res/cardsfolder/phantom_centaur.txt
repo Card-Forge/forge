@@ -1,9 +1,11 @@
 Name:Phantom Centaur
 ManaCost:2 G G
 Types:Creature Centaur Spirit
-Text:Phantom Centaur enters the battlefield with three +1/+1 counters on it.\r\nIf damage would be dealt to Phantom Centaur, prevent that damage. Remove a +1/+1 counter from Phantom Centaur.
+Text:no text
 PT:2/0
 K:Protection from black
+K:etbCounter:P1P1:3
+K:If damage would be dealt to CARDNAME, prevent that damage. Remove a +1/+1 counter from CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_centaur.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/127.jpg

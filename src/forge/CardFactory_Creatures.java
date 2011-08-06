@@ -11252,7 +11252,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Phantom Nishoba")) {
             final Card newCard = new Card() {
@@ -11335,7 +11335,7 @@ public class CardFactory_Creatures {
             
             return newCard;
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Chainer, Dementia Master")) {
