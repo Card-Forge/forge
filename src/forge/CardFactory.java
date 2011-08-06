@@ -17290,6 +17290,66 @@ public class CardFactory implements NewConstants {
     		  card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "2 G", "0"));
       }//*************** END ************ END **************************
       
+      //*************** START *********** START **************************
+      else if (cardName.equals("Borrowing the East Wind"))
+      {
+    	  final SpellAbility spell = new Spell(card)
+    	  {
+			private static final long serialVersionUID = 3317055866601782361L;
+			public void resolve()
+    		{
+				int damage = card.getXManaCostPaid();
+				CardList all = new CardList();
+                all.addAll(AllZone.Human_Play.getCards());
+                all.addAll(AllZone.Computer_Play.getCards());
+                all = all.filter(new CardListFilter()
+                {
+                	public boolean addCard(Card c)
+                	{
+                		return c.isCreature() && c.getKeyword().contains("Horsemanship") &&
+                			   CardFactoryUtil.canDamage(card, c);
+                	}
+                });
+                
+                for(int i = 0; i < all.size(); i++)
+                    	all.get(i).addDamage(card.getXManaCostPaid(), card);
+                
+                AllZone.GameAction.addDamage(Constant.Player.Human, damage);
+                AllZone.GameAction.addDamage(Constant.Player.Computer, damage);
+                
+    			card.setXManaCostPaid(0);
+    		}
+			public boolean canPlayAI()
+			{
+				final int maxX = ComputerUtil.getAvailableMana().size() - CardUtil.getConvertedManaCost(card);
+				
+				if (AllZone.Human_Life.getLife() <= maxX)
+					return true;
+				
+				CardListFilter filter = new CardListFilter(){
+					public boolean addCard(Card c)
+					{
+						return c.isCreature() && c.getKeyword().contains("Horsemanship") &&
+							   CardFactoryUtil.canDamage(card, c) && maxX >= (c.getNetDefense() + c.getDamage());
+					}
+				};
+				
+				CardList human = new CardList(AllZone.Human_Play.getCards());
+			    human = human.filter(filter);
+			    
+			    CardList comp = new CardList(AllZone.Computer_Play.getCards());
+			    comp = comp.filter(filter);
+			    
+			    return human.size() > (comp.size() + 2) && AllZone.Computer_Life.getLife() > maxX + 3;
+			}
+    	  };
+    	  spell.setDescription("Borrowing the East Wind deals X damage to each creature with horsemanship and each player.");
+    	  spell.setStackDescription("Borrowing the East Wind - deals X damage to each creature with horsemanship and each player.");
+    	  
+    	  card.clearSpellAbility();
+    	  card.addSpellAbility(spell);
+      } 
+      //*************** END ************ END **************************
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

@@ -38,6 +38,14 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+borrowing_the_east_wind.jpg		http://serv3.tcgimages.eu/img/cards/Portal_Three_Kingdoms/borrowing_the_east_wind.jpg
+angelsong.jpg		http://www.wizards.com/global/images/magic/general/angelsong.jpg
+lull.jpg		http://www.wizards.com/global/images/magic/general/lull.jpg
+holy_day.jpg		http://www.wizards.com/global/images/magic/general/holy_day.jpg
+moments_peace.jpg		http://www.wizards.com/global/images/magic/general/moments_peace.jpg
+darkness.jpg		http://www.wizards.com/global/images/magic/general/darkness.jpg
+respite.jpg		http://www.wizards.com/global/images/magic/general/respite.jpg
+fog.jpg		http://www.wizards.com/global/images/magic/general/fog.jpg
 howl_of_the_night_pack.jpg		http://www.wizards.com/global/images/magic/general/howl_of_the_night_pack.jpg
 wall_of_reverence.jpg http://www.wizards.com/global/images/magic/general/wall_of_reverence.jpg
 beacon_of_creation.jpg		http://www.wizards.com/global/images/magic/general/beacon_of_creation.jpg
