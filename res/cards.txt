@@ -5155,7 +5155,7 @@ Double Strike
 Sarpadian Empires, Vol. VII
 3
 Artifact
-As Sarpadian Empires, Vol. VII enters the battlefield, choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.
+no text
 
 Airborne Aid
 3 U

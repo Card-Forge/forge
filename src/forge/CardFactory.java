@@ -3841,7 +3841,8 @@ public class CardFactory implements NewConstants {
     	
     }//*************** END ************ END **************************
     
-  //*************** START *********** START **************************
+
+    //*************** START *********** START **************************
     else if(cardName.equals("Sarpadian Empires, Vol. VII"))
     {
     	
@@ -3937,7 +3938,7 @@ public class CardFactory implements NewConstants {
 					}
 					
     			};
-    			a1.setDescription("3, Tap: Put a 1/1 creature token of the chosen color and type onto the battlefield.");
+//    			a1.setDescription("3, Tap: Put a 1/1 creature token of the chosen color and type onto the battlefield.");
     			a1.setStackDescription(card.getName() + " - " +  card.getController() + " puts a 1/1" + t + " token into play");
     			card.addSpellAbility(a1);
     		}
@@ -3952,10 +3953,12 @@ public class CardFactory implements NewConstants {
 	            AllZone.Stack.add(ability);
 	          }
         };
+        card.setText("As Sarpadian Empires, Vol. VII enters the battlefield, choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.\r\n" + 
+        		     "3, Tap: Put a 1/1 creature token of the chosen color and type onto the battlefield.\r\n" + 
+        		      card.getText());	// In the slight chance that there may be a need to add a note to this card.
         card.addComesIntoPlayCommand(intoPlay);
     	
-    }//*************** END ************ END **************************
-    		
+    }//*************** END ************ END **************************		
 
  
 
