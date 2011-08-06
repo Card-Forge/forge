@@ -574,6 +574,7 @@ Obsianus Golem
 Ogre Taskmaster
 Ogre's Cleaver
 Opportunity
+Orchard Warden 
 Orcish Artillery
 Orcish Cannoneers
 Order of the White Shield
@@ -849,6 +850,7 @@ Tinker
 Tobias Andrion
 Tolaria West
 Torsten Von Ursus
+Totem Speaker
 Tower Gargoyle
 Towering Baloth
 Trailblazer's Boots

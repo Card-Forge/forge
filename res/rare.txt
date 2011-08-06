@@ -455,6 +455,7 @@ Lich Lord of Unx
 Lichenthrope
 Life from the Loam
 Lifeblood
+Lifegift
 Lighthouse Chronologist
 Lightning Angel
 Lightning Dragon
@@ -713,6 +714,7 @@ Sea Gate Loremaster
 Searing Wind
 Sedge Troll
 Sedraxis Specter
+Seer's Sundial
 Seizan, Perverter of Truth
 Sek'Kuar, Deathkeeper
 Sengir Vampire

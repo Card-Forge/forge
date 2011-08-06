@@ -1,3 +1,36 @@
+Totem Speaker
+4 G
+Creature Elf Druid
+no text
+3/3
+WheneverKeyword:EntersBattleField:Type/Beast:Play:ModifyLife/3:ControllingPlayer_Self:ASAP:Yes_No:Initiator - OwnedByController:Whenever a Beast enters the battlefield, you may gain 3 life.
+
+Grazing Gladehart
+2 G
+Creature Antelope
+no text
+2/2
+WheneverKeyword:EntersBattleField:Type/Land:Play:ModifyLife/2:ControllingPlayer_Self:ASAP:Yes_No:Initiator - OwnedByController:Landfall - Whenever a land enters the battlefield under your control, you may gain 2 life.
+
+Seer's Sundial
+4
+Artifact
+no text
+WheneverKeyword:EntersBattleField:Type/Land:Play:DrawCards/1:ControllingPlayer_Self:ASAP:PayMana/2:Initiator - OwnedByController:Landfall - Whenever a land enters the battlefield under your control, you may pay {2}. If you do, draw a card.
+
+Lifegift
+2 G
+Enchantment
+no text
+WheneverKeyword:EntersBattleField:Type/Land:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever a land enters the battlefield, you may gain 1 life.
+
+Orchard Warden 
+4 G G
+Creature Treefolk Shaman
+no text
+4/6
+WheneverKeyword:EntersBattleField:Type/Treefolk:Play:ModifyLife/Toughness:ControllingPlayer_Self:ASAP:Yes_No:Initiator - OwnedByController!Initiator - Other than Self:Whenever another Treefolk creature enters the battlefield under your control, you may gain life equal to that creature's toughness.
+
 Dread Reaper
 3 B B B
 Creature Horror
