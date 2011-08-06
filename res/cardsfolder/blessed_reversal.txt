@@ -2,7 +2,7 @@ Name:Blessed Reversal
 ManaCost:1 W
 Types:Instant
 Text:no text
-A:SP$GainLife|Cost$1 W|LifeAmount$X|SpellDescription$You gain 3 life for each creature attacking you.
+A:SP$GainLife | Cost$ 1 W | LifeAmount$ X | SpellDescription$ You gain 3 life for each creature attacking you.
 SVar:X:Count$Valid Creature.attacking+YouDontCtrl/Times.3
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

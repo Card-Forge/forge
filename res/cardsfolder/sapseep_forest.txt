@@ -4,7 +4,7 @@ Types:Land Forest
 Text:no text
 K:CARDNAME enters the battlefield tapped.
 K:tap: add G
-A:AB$GainLife|Cost$G T|LifeAmount$1|SorcerySpeed$True|IsPresent$Permanent.Green+YouCtrl|PresentCompare$GE2|SpellDescription$You gain 1 life. Activate this ability only if you control two or more green permanents.
+A:AB$GainLife | Cost$ G T | LifeAmount$ 1 | SorcerySpeed$ True | IsPresent$ Permanent.Green+YouCtrl | PresentCompare$ GE2 | SpellDescription$ You gain 1 life. Activate this ability only if you control two or more green permanents.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sapseep_forest.jpg
 End
