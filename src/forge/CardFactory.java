@@ -2774,6 +2774,68 @@ public class CardFactory implements NewConstants {
 
         }//spBounceTgt
 
+        // Generic bounce all card
+        if(hasKeyword(card, "spBounceAll") != -1) {
+            int n = hasKeyword(card, "spBounceAll");
+            
+            String parse = card.getKeyword().get(n).toString();
+            card.removeIntrinsicKeyword(parse);
+            
+            String k[] = parse.split(":");
+            String Targets = k[1]; // Artifact, Creature, Enchantment, Land, Permanent, White, Blue, Black, Red, Green, Colorless, MultiColor
+            // non-Artifact, non-Creature, non-Enchantment, non-Land, non-Permanent,
+            //non-White, non-Blue, non-Black, non-Red, non-Green, non-Colorless, non-MultiColor
+            final String Tgts[] = Targets.split(",");
+            
+            final String Destination = k[2];
+            
+            card.clearSpellAbility();
+            
+            final SpellAbility spBnceAll = new Spell(card) {
+                private static final long serialVersionUID = 897326872601L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList human = new CardList(AllZone.Human_Play.getCards());
+                    CardList computer = new CardList(AllZone.Computer_Play.getCards());
+                    
+                    human = human.getValidCards(Tgts);
+                    computer = computer.getValidCards(Tgts);
+                    
+                    // the computer will at least bounce 2 more human permanents
+                    return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
+                    		(computer.size() < human.size() - 1);
+                }
+
+                @Override
+                public void resolve() {
+                    CardList all = new CardList();
+                    all.addAll(AllZone.Human_Play.getCards());
+                    all.addAll(AllZone.Computer_Play.getCards());
+                    all = all.getValidCards(Tgts);
+                    
+                    for(int i = 0; i < all.size(); i++) {
+                        Card c = all.get(i);
+                        	if(c.isToken()) AllZone.getZone(c).remove(c);
+                        	else {  if(Destination.equals("TopofLibrary")) AllZone.GameAction.moveToTopOfLibrary(c);
+					else if(Destination.equals("ShuffleIntoLibrary")) {
+							AllZone.GameAction.moveToTopOfLibrary(c);
+							AllZone.GameAction.shuffle(c.getOwner());
+					}
+					else if(Destination.equals("Exile")) AllZone.GameAction.removeFromGame(c); 
+					else if(Destination.equals("Hand")) {
+                            			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getOwner());
+                           	 		AllZone.GameAction.moveTo(hand, c);
+					}
+				}
+                    }
+                }// resolve()
+
+            }; //SpBnceAll
+            
+            card.addSpellAbility(spBnceAll);            
+
+        }//spBounceAll
 
         while(hasKeyword(card, "abDrawCards") != -1) {
             int n = hasKeyword(card, "abDrawCards");

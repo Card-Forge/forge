@@ -1,3 +1,28 @@
+Hibernation
+2 U
+Instant
+Return all green permanents to their owners' hands.
+spBounceAll:Permanent.Green:Hand
+SVar:RemAIDeck:True
+
+Inundate
+3 U U U
+Sorcery
+Return all nonblue creatures to their owners' hands.
+spBounceAll:Permanent.nonBlue:Hand
+
+Reduce to Dreams
+3 U U
+Sorcery
+Return all artifacts and enchantments to their owners' hands.
+spBounceAll:Artifact,Enchantment:Hand
+
+Sunder
+3 U U
+Sorcery
+Return all lands to their owners' hands.
+spBounceAll:Land:Hand
+
 Winds of Rath
 3 W W
 Sorcery
