@@ -4653,7 +4653,13 @@ public class CardFactory implements NewConstants {
 
            final int amountHurt = Integer.parseInt(splitkeyword[1]);
            final String manaGenerated = splitkeyword[2];
-           final Ability_Mana addMana = new Ability_Mana(card, "tap: add " + manaGenerated + " to your mana pool.CARDNAME deals " + amountHurt + " damage to you.") {
+           StringBuilder sb = new StringBuilder();
+           sb.append("tap: add ").append(manaGenerated).append(" to your mana pool. CARDNAME deals ").append(amountHurt).append(" damage to you.");
+           final String abilityDescriptionString = sb.toString();
+           
+           // final Ability_Mana addMana = new Ability_Mana(card, "tap: add " + manaGenerated + " to your mana pool. CARDNAME deals " + amountHurt + " damage to you.") {
+           
+           final Ability_Mana addMana = new Ability_Mana(card, abilityDescriptionString) {
                  private static final long serialVersionUID = -259088242789L;
                  
                  @Override
