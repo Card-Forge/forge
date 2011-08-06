@@ -1961,7 +1961,7 @@ public class CardFactory implements NewConstants {
                         if(hand.size() >= 7) // anti-discard-at-EOT
                         	return true;
                         
-                        if(AllZone.Human_Life.getLife() < (10 - damage)) // if damage from this spell would drop the human to less than 10 life
+                        if(AllZone.Human_Life.getLife() < (10 + damage)) // if damage from this spell would drop the human to less than 10 life
                         	return true;
                         
                         return false;
@@ -2202,7 +2202,11 @@ public class CardFactory implements NewConstants {
                     	human = human.getValidCards(Tgts);
                         human = human.canBeDamagedBy(card);
                     	human = human.getNotKeyword("Indestructible");
-                    	human = CardListUtil.filterToughness(human, ndam); // leaves all creatures that will be destroyed
+                    	human = human.filter(new CardListFilter() {
+                            public boolean addCard(Card c) {
+                                return (c.getKillDamage() <= getNumDam());
+                            }
+                    	}); // leaves all creatures that will be destroyed
                         int humanvalue = CardListUtil.sumCMC(human);
                         humanvalue += human.size();
                         humanvalue += CardListUtil.sumAttack(human.getTokens());
@@ -2213,7 +2217,11 @@ public class CardFactory implements NewConstants {
                     	computer = computer.getValidCards(Tgts);
                     	computer = computer.canBeDamagedBy(card);
                     	computer = computer.getNotKeyword("Indestructible");
-                    	computer = CardListUtil.filterToughness(computer, ndam); // leaves all creatures that will be destroyed
+                    	computer = computer.filter(new CardListFilter() {
+                            public boolean addCard(Card c) {
+                                return (c.getKillDamage() <= getNumDam());
+                            }
+                    	}); // leaves all creatures that will be destroyed
                         int computervalue = CardListUtil.sumCMC(computer);
                         computervalue += computer.size();
                         computervalue += CardListUtil.sumAttack(computer.getTokens()); 
