@@ -3,7 +3,6 @@ ManaCost:G W
 Types:Creature Elf Shaman
 Text:no text
 PT:1/2
-#K:abMakeToken 1 T tapXType<1/Creature><>1<>Saproling<>G 1 1 Saproling<>Controller<>G<>Creature;Saproling<>1<>1<>None<>put a 1/1 green Saproling creature token onto the battlefield.
 A:AB$Token | Cost$ 1 T tapXType<1/Creature> | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ Controller | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selesnya_evangel.jpg

@@ -3,7 +3,6 @@ ManaCost:GW GW
 Types:Creature Elf Wizard
 Text:no text
 PT:2/2
-#K:abMakeToken 3 G<>1<>Saproling<>G 1 1 Saproling<>Controller<>G<>Creature;Saproling<>1<>1<>None<>Put a 1/1 green Saproling creature token onto the battlefield.
 A:AB$Token | Cost$ 3 G | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ Controller | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield.
 K:abAllPump 3 W:YouCtrl:+1/+1:Creatures you control get +1/+1 until end of turn.:Selesnya Guildmage - creatures get +1/+1 until EOT.
 SVar:Rarity:Uncommon
