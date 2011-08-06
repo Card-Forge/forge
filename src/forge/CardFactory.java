@@ -1629,6 +1629,14 @@ public class CardFactory implements NewConstants {
                     CardList results = new CardList();
                     CardList choices = getTargets();
                     
+                    choices = choices.filter(new CardListFilter(){
+                    	public boolean addCard(Card c)
+                    	{
+                    		return !c.getKeyword().contains("Indestructible");
+                    	}
+                    });
+                    
+                    
                     if(choices.size() > 0) {
                         for(int i = 0; i < Tgts.length; i++) {
                             if(Tgts[i].equals("Artifact")) {
@@ -6805,7 +6813,27 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public boolean canPlayAI() {
-                    return AllZone.Computer_Life.getLife() > 3;
+                    if (AllZone.Computer_Life.getLife() <= 3)
+                    	return false;
+                    
+                    if (AllZone.Human_Life.getLife() <= 3)
+                    	return true;
+                    
+                    CardListFilter filter = new CardListFilter(){
+                    	public boolean addCard(Card c)
+                    	{
+                    		return c.isCreature() && CardFactoryUtil.canDamage(card, c) && (c.getNetDefense() - c.getDamage())< 4;
+                    	}
+                    };
+                    
+                    CardList humCreats = new CardList(AllZone.Human_Play.getCards());
+                    humCreats = humCreats.filter(filter);
+                    
+                    CardList compCreats = new CardList(AllZone.Computer_Play.getCards());
+                    compCreats = compCreats.filter(filter);
+                    
+                    return humCreats.size() > compCreats.size();
+                    
                 }
                 
                 @Override
