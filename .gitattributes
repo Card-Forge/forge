@@ -4535,6 +4535,7 @@ res/cardsfolder/path_to_exile.txt -text svneol=native#text/plain
 res/cardsfolder/patriarchs_bidding.txt -text svneol=native#text/plain
 res/cardsfolder/patrol_signaler.txt -text svneol=native#text/plain
 res/cardsfolder/patron_wizard.txt -text svneol=native#text/plain
+res/cardsfolder/pattern_of_rebirth.txt -text svneol=native#text/plain
 res/cardsfolder/paupers_cage.txt svneol=native#text/plain
 res/cardsfolder/pavel_maliki.txt -text svneol=native#text/plain
 res/cardsfolder/pawn_of_ulamog.txt -text svneol=native#text/plain
