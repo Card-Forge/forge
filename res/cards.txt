@@ -1,3 +1,86 @@
+Seashell Cameo
+3
+Artifact
+no text
+tap: add W
+tap: add U
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seashell_cameo.jpg
+
+Seaside Citadel
+no cost
+Land
+no text
+Comes into play tapped.
+tap: add W
+tap: add U
+tap: add G
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seaside_citadel.jpg
+
+Skyshroud Forest
+no cost
+Land
+no text
+tap: add 1
+paintap:1:U
+paintap:1:G
+Comes into play tapped.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_forest.jpg
+
+Spectral Searchlight
+3
+Artifact
+(NOTE: "Tap Choose a player. That player adds one mana of any color he or she chooses to his or her mana pool." not implemented.)
+tap: add W
+tap: add U
+tap: add B
+tap: add R
+tap: add G
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_searchlight.jpg
+
+Stirring Wildwood
+no cost
+Land
+no text
+tap: add W
+tap: add G
+Comes into play tapped.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stirring_wildwood.jpg
+
+Sunpetal Grove
+no cost
+Land
+no text
+CARDNAME enters the battlefield tapped unless you control a Forest or a Plains.
+tap: add W
+tap: add G
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sunpetal_grove.jpg
+
+Talisman of Unity
+2
+Artifact
+no text
+tap: add 1
+paintap:1:W
+paintap:1:G
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/talisman_of_unity.jpg
+
+Temple Garden
+no cost
+Land Forest Plains
+As Temple Garden comes into play, you may pay 2 life. If you don't, Temple Garden comes into play tapped instead.
+tap: add W
+tap: add G
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card89093.jpg
+
 Obelisk of Esper
 3
 Artifact
@@ -26038,26 +26121,6 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seascape_aerialist.jpg
 
-Seashell Cameo
-3
-Artifact
-no text
-tap: add U
-tap: add W
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/seashell_cameo.jpg
-
-Seaside Citadel
-no cost
-Land
-no text
-Comes into play tapped.
-tap: add G
-tap: add W
-tap: add U
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/seaside_citadel.jpg
-
 Seasoned Marshal
 2 W W
 Creature Human Knight
@@ -27571,18 +27634,6 @@ Vigilance
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/st/en-us/card5224.jpg
 
-Skyshroud Forest
-no cost
-Land
-no text
-tap: add 1
-paintap:1:G
-paintap:1:U
-Comes into play tapped.
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_forest.jpg
-
 Skyshroud Sentinel
 2 G
 Creature Elf
@@ -28385,18 +28436,6 @@ Put three 1/1 white Spirit creature tokens with flying into play.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_procession.jpg
 
-Spectral Searchlight
-3
-Artifact
-(NOTE: "Tap Choose a player. That player adds one mana of any color he or she chooses to his or her mana pool." not implemented.)
-tap: add B
-tap: add G
-tap: add R
-tap: add U
-tap: add W
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_searchlight.jpg
-
 Spell Pierce
 U
 Instant
@@ -29192,16 +29231,6 @@ CostChange:Player:Less:2:Spell:All:Giant:NoSpecial
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stinkdrinker_daredevil.jpg
 
-Stirring Wildwood
-no cost
-Land
-no text
-tap: add G
-tap: add W
-Comes into play tapped.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stirring_wildwood.jpg
-
 Stitch Together
 B B
 Sorcery
@@ -29830,16 +29859,6 @@ Sunlance deals 3 damage to target nonwhite creature.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122355.jpg
 
-Sunpetal Grove
-no cost
-Land
-no text
-CARDNAME enters the battlefield tapped unless you control a Forest or a Plains.
-tap: add G
-tap: add W
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sunpetal_grove.jpg
-
 Sunrise Sovereign
 5 R
 Creature Giant Warrior
@@ -30312,16 +30331,6 @@ paintap:1:U
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talisman_of_progress.jpg
 
-Talisman of Unity
-2
-Artifact
-no text
-tap: add 1
-paintap:1:G
-paintap:1:W
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/talisman_of_unity.jpg
-
 Talon Sliver
 1 W
 Creature Sliver
@@ -30622,15 +30631,6 @@ no text
 abDrawCards T:1:Drawback$OppDraw/1:Each player draws a card.:Temple Bell - each player draws a card
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temple_bell.jpg
-
-Temple Garden
-no cost
-Land Forest Plains
-As Temple Garden comes into play, you may pay 2 life. If you don't, Temple Garden comes into play tapped instead.
-tap: add G
-tap: add W
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card89093.jpg
 
 Temporal Eddy
 2 U U
