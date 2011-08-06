@@ -1,0 +1,10 @@
+Name:Obelisk of Jund
+ManaCost:3
+Types:Artifact
+Text:no text
+K:tap: add B
+K:tap: add R
+K:tap: add G
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_jund.jpg
+End

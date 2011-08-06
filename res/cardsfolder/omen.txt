@@ -1,0 +1,9 @@
+Name:Omen
+ManaCost:1 U
+Types:Sorcery
+Text:Look at the top three cards of your library, then put them back in any order. You may shuffle your library.
+K:Draw a card.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/omen.jpg
+End

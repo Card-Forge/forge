@@ -1,0 +1,9 @@
+Name:Oran-Rief, the Vastwood
+ManaCost:no cost
+Types:Land
+Text:no text
+K:tap: add G
+K:Comes into play tapped.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/oran_rief_the_vastwood.jpg
+End

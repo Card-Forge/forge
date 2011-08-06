@@ -1,0 +1,9 @@
+Name:Order of the Golden Cricket
+ManaCost:1 W
+Types:Creature Kithkin Knight
+Text:no text
+PT:2/2
+K:WheneverKeyword:Attacks:Self:Play:KeywordPumpEOT/Flying:Self:ASAP:PayMana/W:No Special Condition:Whenever Order of the Golden Cricket attacks, you may pay W. If you do, it gains flying until end of turn.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_the_golden_cricket.jpg
+End

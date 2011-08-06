@@ -1,0 +1,10 @@
+Name:Oakgnarl Warrior
+ManaCost:5 G G
+Types:Creature Treefolk Warrior
+Text:no text
+PT:5/7
+K:Vigilance
+K:Trample
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card139494.jpg
+End

@@ -1,0 +1,9 @@
+Name:Obsessive Search
+ManaCost:U
+Types:Instant
+Text:no text
+K:spDrawCards:1:Draw a card.:Obsessive Search - draw a card.
+K:Madness:U
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/obsessive_search.jpg
+End

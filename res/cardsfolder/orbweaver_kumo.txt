@@ -1,0 +1,12 @@
+Name:Orbweaver Kumo
+ManaCost:4 G G
+Types:Creature Spirit
+Text:no text
+PT:3/4
+K:Reach
+K:WheneverKeyword:CastSpell/Controller:Type/Arcane:Play:KeywordPumpEOT/Forestwalk:Self:ASAP:No_Condition:No Special Condition:Whenever you cast a Arcane spell, Orbweaver Kumo gains forestwalk until end of turn.
+K:WheneverKeyword:CastSpell/Controller:Type/Spirit:Play:KeywordPumpEOT/Forestwalk:Self:ASAP:No_Condition:No Special Condition:Whenever you cast a Spiritspell, Orbweaver Kumo gains forestwalk until end of turn.
+K:SVar:BuffedBy:Arcane,Spirit
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/orbweaver_kumo.jpg
+End

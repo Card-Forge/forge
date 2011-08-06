@@ -1,0 +1,9 @@
+Name:Ogre Sentry
+ManaCost:1 R
+Types:Creature Ogre Warrior
+Text:no text
+PT:3/3
+K:Defender
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_sentry.jpg
+End

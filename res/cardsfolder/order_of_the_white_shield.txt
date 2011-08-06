@@ -1,0 +1,11 @@
+Name:Order of the White Shield
+ManaCost:W W
+Types:Creature Human Knight
+Text:no text
+PT:2/1
+K:Protection from black
+K:abPump W:First Strike
+K:abPump W W:+1/+0
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_the_white_shield.jpg
+End

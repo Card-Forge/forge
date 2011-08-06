@@ -1,0 +1,11 @@
+Name:Ophidian Eye
+ManaCost:2 U
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+K:Flash
+K:enPump:+0/+0
+K:WheneverKeyword:DealsDamage/Opponent:Enchanted_Creature:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever enchanted creature deals damage to an opponent, you may draw a card.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ophidian_eye.jpg
+End

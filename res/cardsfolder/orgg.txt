@@ -1,0 +1,11 @@
+Name:Orgg
+ManaCost:3 R R
+Types:Creature Orgg
+Text:no text
+PT:6/6
+K:Trample
+K:CARDNAME can't attack if defending player controls an untapped creature with power 3 or greater.
+K:CARDNAME can't block creatures with power 3 or greater.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/orgg.jpg
+End

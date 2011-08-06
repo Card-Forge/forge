@@ -1,0 +1,9 @@
+Name:Ogre Gatecrasher
+ManaCost:3 R
+Types:Creature Ogre Rogue
+Text:When Ogre Gatecrasher enters the battlefield, destroy target creature with defender.
+PT:3/3
+K:etbDestroyTgt:Creature.withDefender
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_gatecrasher.jpg
+End

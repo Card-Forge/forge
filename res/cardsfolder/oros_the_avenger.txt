@@ -1,0 +1,9 @@
+Name:Oros, the Avenger
+ManaCost:3 W B R
+Types:Legendary Creature Dragon
+Text:Whenever Oros, the Avenger deals combat damage to a player, you may pay 2 W. If you do, Oros deals 3 damage to each nonwhite creature.
+PT:6/6
+K:Flying
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/oros_the_avenger.jpg
+End

@@ -1,0 +1,8 @@
+Name:Onulet
+ManaCost:3
+Types:Artifact Creature Construct
+Text:When Onulet is put into a graveyard from play, you gain 2 life.
+PT:2/2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/onulet.jpg
+End

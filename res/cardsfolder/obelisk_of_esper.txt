@@ -1,0 +1,10 @@
+Name:Obelisk of Esper
+ManaCost:3
+Types:Artifact
+Text:no text
+K:tap: add W
+K:tap: add U
+K:tap: add B
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_esper.jpg
+End

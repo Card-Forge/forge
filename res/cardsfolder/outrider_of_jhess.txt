@@ -1,0 +1,9 @@
+Name:Outrider of Jhess
+ManaCost:3 U
+Types:Creature Human Knight
+Text:no text
+PT:2/2
+K:Exalted
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/outrider_of_jhess.jpg
+End

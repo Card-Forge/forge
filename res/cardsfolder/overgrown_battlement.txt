@@ -1,0 +1,10 @@
+Name:Overgrown Battlement
+ManaCost:1 G
+Types:Creature Wall
+Text:no text
+PT:0/4
+K:Defender
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/overgrown_battlement.jpg
+End

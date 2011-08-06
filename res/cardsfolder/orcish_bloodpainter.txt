@@ -1,0 +1,9 @@
+Name:Orcish Bloodpainter
+ManaCost:2 R
+Types:Creature Orc Shaman
+Text:no text
+PT:2/1
+K:abDamageTgtCP T Sac-Creature:2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_bloodpainter.jpg
+End

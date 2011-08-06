@@ -1,0 +1,11 @@
+Name:Order of the Ebon Hand
+ManaCost:B B
+Types:Creature Cleric Knight
+Text:no text
+PT:2/1
+K:Protection from white
+K:abPump B:First Strike
+K:abPump B B:+1/+0
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_the_ebon_hand.jpg
+End

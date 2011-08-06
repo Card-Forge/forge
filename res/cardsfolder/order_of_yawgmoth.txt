@@ -1,0 +1,10 @@
+Name:Order of Yawgmoth
+ManaCost:2 B B
+Types:Creature Zombie Knight
+Text:no text
+PT:2/2
+K:Fear
+K:WheneverKeyword:DealsDamage/Opponent:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever Order of Yawgmoth deals damage to a player, that player discards a card.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_yawgmoth.jpg
+End

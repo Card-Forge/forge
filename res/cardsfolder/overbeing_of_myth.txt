@@ -1,0 +1,8 @@
+Name:Overbeing of Myth
+ManaCost:GU GU GU GU GU
+Types:Creature Spirit Avatar
+Text:Overbeing of Myth's power and toughness are each equal to the number of cards in your hand.\r\nAt the beginning of your draw step, draw an additional card.
+PT:1/1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/overbeing_of_myth.jpg
+End

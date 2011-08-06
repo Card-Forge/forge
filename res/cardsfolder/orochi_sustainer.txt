@@ -1,0 +1,9 @@
+Name:Orochi Sustainer
+ManaCost:1 G
+Types:Creature Snake Shaman
+Text:no text
+PT:1/2
+K:tap: add G
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card75403.jpg
+End

@@ -1,0 +1,9 @@
+Name:Old Man of the Sea
+ManaCost:1 U U
+Types:Creature Djinn
+Text:tap: Gain control of target creature with power less than or equal to Old Man of the Sea's power for as long as Old Man of the Sea remains tapped and that creature's power remains less than or equal to Old Man of the Sea's power.
+PT:2/3
+K:You may choose not to untap CARDNAME during your untap step.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/old_man_of_the_sea.jpg
+End
