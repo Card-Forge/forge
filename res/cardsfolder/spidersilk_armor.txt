@@ -1,7 +1,8 @@
 Name:Spidersilk Armor
 ManaCost:2 G
 Types:Enchantment
-Text:Creatures you control get +0/+1 and have reach.
+Text:no text
+K:stPumpAll:Creature.YouCtrl:0/1/Reach:No Condition:Creatures you control get +0/+1 and have reach. (They can block creatures with flying.)
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spidersilk_armor.jpg

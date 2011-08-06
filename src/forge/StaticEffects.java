@@ -29,7 +29,6 @@ public class StaticEffects
 		
 		cardToEffectsList.put("Bant Sureblade", new String[] {"Bant_Sureblade"});
 		cardToEffectsList.put("Beastbreaker of Bala Ged", new String[] {"Beastbreaker_of_Bala_Ged"});
-		cardToEffectsList.put("Beastmaster Ascension", new String[] {"Beastmaster_Ascension"});
 		cardToEffectsList.put("Bloodghast", new String[] {"Bloodghast"});
 		cardToEffectsList.put("Broodstar", new String[] {"Master_of_Etherium"});
 		cardToEffectsList.put("Broodwarden", new String[] {"Broodwarden"});
@@ -124,7 +123,6 @@ public class StaticEffects
 		cardToEffectsList.put("Serra Avatar", new String[] {"Serra_Avatar"});
 		cardToEffectsList.put("Skywatcher Adept", new String[] {"Skywatcher_Adept"});
 		cardToEffectsList.put("Soulsurge Elemental", new String[] {"Soulsurge_Elemental"});
-		cardToEffectsList.put("Spidersilk Armor", new String[] {"Spidersilk_Armor"});
 		cardToEffectsList.put("Student of Warfare", new String[]{"Student_of_Warfare"});
 		cardToEffectsList.put("Svogthos, the Restless Tomb", new String[] {"Svogthos_the_Restless_Tomb"});
 		

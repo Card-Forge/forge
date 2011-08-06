@@ -12374,6 +12374,10 @@ public class GameActionUtil {
   	      	if(SpecialConditions.contains("isUntapped")) {
 	      		if (!SourceCard.isUntapped()) return false;
 	      	}
+  	      	if(SpecialConditions.contains("isValid")) { // does this card meet the valid description?
+  	      		String Requirements = SpecialConditions.replaceAll("isValid ", "");
+  	      		if (!SourceCard.isValid(Requirements, SourceCard.getController(), SourceCard)) return false;
+  	      	}
   	      	return true;
 			
 		}
@@ -15891,84 +15895,7 @@ public class GameActionUtil {
 		}// execute()
 	}; // Time of Heroes
 
-	public static Command Beastmaster_Ascension       = new Command() {
-
-		private static final long serialVersionUID   = -3455855754974451348L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-5);
-				c.addSemiPermanentDefenseBoost(-5);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			
-			CardList cl = AllZoneUtil.getCardsInPlay("Beastmaster Ascension");
-
-			for(int i = 0; i < cl.size(); i++) {
-				Player player = cl.get(i).getController();
-				PlayerZone play = AllZone.getZone(
-						Constant.Zone.Play, player);
-
-				CardList creature = new CardList(play.getCards());
-				creature = creature.getType("Creature");
-
-				for(int j = 0; j < creature.size(); j++) {
-					if(cl.get(i).getCounters(Counters.QUEST) >= 7) {
-						c = creature.get(j);
-						c.addSemiPermanentAttackBoost(5);
-						c.addSemiPermanentDefenseBoost(5);
-						gloriousAnthemList.add(c);
-					}
-
-
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Beastmaster Ascension
-
-	public static Command Spidersilk_Armor            = new Command() {
-
-		private static final long serialVersionUID   = -1151510755451414602L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword("Reach");
-				c.addSemiPermanentDefenseBoost(-1);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Spidersilk Armor");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Creature");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addExtrinsicKeyword("Reach");
-					c.addSemiPermanentDefenseBoost(1);
-					gloriousAnthemList.add(c);
-
-
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Spidersilk Armor
-
+	
 	/*
 	public static Command Eldrazi_Monument            = new Command() {
 
@@ -16339,7 +16266,6 @@ public class GameActionUtil {
 		
 		commands.put("Bant_Sureblade", Bant_Sureblade);
 		commands.put("Beastbreaker_of_Bala_Ged", Beastbreaker_of_Bala_Ged);
-		commands.put("Beastmaster_Ascension", Beastmaster_Ascension);
 		commands.put("Bloodghast", Bloodghast);
 		commands.put("Broodwarden", Broodwarden);
 		
@@ -16435,7 +16361,6 @@ public class GameActionUtil {
 		commands.put("Skywatcher_Adept", Skywatcher_Adept);
 		commands.put("Soulsurge_Elemental", Soulsurge_Elemental);
 		commands.put("Sound_the_Call_Wolf", Sound_the_Call_Wolf);
-		commands.put("Spidersilk_Armor", Spidersilk_Armor);
 		commands.put("Student_of_Warfare", Student_of_Warfare);
 		commands.put("Svogthos_the_Restless_Tomb", Svogthos_the_Restless_Tomb);
 		
