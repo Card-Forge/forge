@@ -774,6 +774,8 @@ public abstract class Player extends MyObservable{
 			CardFactoryUtil.playLandEffects(land);
 			numLandsPlayed++;
     	}
+    	
+    	AllZone.Stack.unfreezeStack();
     }
     
     public boolean canPlayLand(){
