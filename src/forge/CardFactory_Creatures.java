@@ -13502,6 +13502,27 @@ public class CardFactory_Creatures {
         	card.addSpellAbility(mana);
         }//*************** END ************ END **************************
         
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Eater of Days")) {
+        	final Ability ability = new Ability(card, "") {
+        		@Override
+        		public void resolve() {
+        			AllZone.Phase.addExtraTurn(card.getController().getOpponent());
+        			AllZone.Phase.addExtraTurn(card.getController().getOpponent());
+        		}
+        	};
+        	ability.setStackDescription(cardName+" - "+card.getController()+" skips his or her next two turns.");
+        	Command intoPlay = new Command() {
+				private static final long serialVersionUID = 2021250034977097040L;
+
+				public void execute() {
+        			AllZone.Stack.add(ability);
+        		}
+        	};
+        	card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
                
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
         {
