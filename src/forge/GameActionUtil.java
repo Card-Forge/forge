@@ -16949,6 +16949,42 @@ public class GameActionUtil {
 			return count;
 		}
 	};
+	
+	public static Command Matca_Rioters            = new Command() {
+		
+		private static final long serialVersionUID = 1090204321481353143L;
+
+		public void execute() {
+			// get all creatures
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Matca Rioters");
+
+			for(int i = 0; i < list.size(); i++) {
+				Card c = list.get(i);
+				c.setBaseDefense(countLandTypes(c));
+				c.setBaseAttack(c.getBaseDefense());
+			}
+
+		}// execute()
+
+		int countLandTypes(Card card) {
+			PlayerZone play = AllZone.getZone(
+					Constant.Zone.Play, card.getController());
+			CardList land = new CardList(play.getCards());
+
+			String basic[] = {
+					"Forest", "Plains", "Mountain", "Island", "Swamp" };
+			int count = 0;
+
+			for(int i = 0; i < basic.length; i++) {
+				CardList c = land.getType(basic[i]);
+				if(!c.isEmpty()) count++;
+			}
+			return count;
+		}
+	};
 
 	public static Command Rakdos_Pit_Dragon           = new Command() {
 		private static final long serialVersionUID = -8778900687347191964L;
@@ -19181,6 +19217,7 @@ public class GameActionUtil {
 		commands.put("Deaths_Shadow", Deaths_Shadow);
 		commands.put("Nightmare", Nightmare);
 		commands.put("Aven_Trailblazer", Aven_Trailblazer);
+		commands.put("Matca_Rioters", Matca_Rioters);
 		commands.put("Rakdos_Pit_Dragon", Rakdos_Pit_Dragon);
 		commands.put("Nyxathid", Nyxathid);
 		commands.put("Lord_of_Extinction", Lord_of_Extinction);

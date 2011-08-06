@@ -1,3 +1,16 @@
+Matca Rioters
+2 G
+Creature Human Warrior
+Domain - Matca Rioters's power and toughness are each equal to the number of basic land types among lands you control.
+0/0
+
+Aven Trailblazer
+2 W
+Creature Bird Soldier
+Domain - Aven Trailblazer's toughness is equal to the number of basic land types among lands you control.
+2/1
+Flying
+
 Psychatog
 1 U B
 Creature Atog
@@ -15682,13 +15695,6 @@ Shu Soldier-Farmers
 Creature Human Soldier
 When Shu Soldier-Farmers comes into play, you gain 4 life.
 2/4
-
-Aven Trailblazer
-2 W
-Creature Bird Soldier
-Aven Trailblazer's toughness is equal to the number of basic land types among lands you control.
-2/1
-Flying
 
 Aven Brigadier
 3 W W W
