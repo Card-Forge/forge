@@ -9918,6 +9918,69 @@ public class CardFactory implements NewConstants {
         	card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END ************************** 
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Recurring Nightmare")) {
+        	/*
+        	 * Sacrifice a creature, Return Recurring Nightmare to its owner's
+        	 * hand: Return target creature card from your graveyard to the
+        	 * battlefield. Activate this ability only any time you could cast
+        	 * a sorcery.
+        	 */
+        	final Ability ability = new Ability(card, "0") {
+        		
+        		@Override
+        		public boolean canPlayAI() {
+        			return false;
+        		}
+        		
+        		@Override
+        		public boolean canPlay() {
+        			return super.canPlay() && Phase.canCastSorcery(card.getController());
+        		}
+
+        		@Override
+        		public void resolve() {
+        			if(AllZone.GameAction.isCardInPlay(getTargetCard())) {
+        				//choose a card from graveyard
+        				String player = card.getController();
+        				CardList grave = AllZoneUtil.getPlayerGraveyard(player);
+        				grave = grave.filter(AllZoneUtil.creatures);
+        				final String title = "Select creature";
+        				Object o = AllZone.Display.getChoiceOptional(title, grave.toArray());
+        				if(null != o) {
+        					Card toReturn = (Card) o;
+        					PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+        					AllZone.GameAction.moveTo(play, toReturn);
+        				}
+        				//sacrifice the creature (target card)
+        				AllZone.GameAction.sacrifice(getTargetCard());
+        				//return Recurring Nightmare to player's hand
+        				AllZone.GameAction.moveToHand(card);
+        			}
+        		}
+
+        	};//Ability
+
+        	Input target = new Input() {
+				private static final long serialVersionUID = 8486351837945158454L;
+				public void showMessage() {
+        			AllZone.Display.showMessage("Select target creature to sacrifice");
+        			ButtonUtil.enableOnlyCancel();
+        		}
+        		public void selectButtonCancel() {stop();}
+        		public void selectCard(Card c, PlayerZone zone) {
+        			if(c.isCreature() && zone.is(Constant.Zone.Play, Constant.Player.Human)) {
+        				ability.setTargetCard(c);
+        				AllZone.Stack.add(ability);
+        				stop();
+        			}
+        		}//selectCard()
+        	};//Input
+
+        	card.addSpellAbility(ability);
+        	ability.setBeforePayMana(target);
+        }//*************** END ************ END **************************
+        
 
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
