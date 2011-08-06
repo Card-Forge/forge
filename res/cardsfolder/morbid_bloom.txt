@@ -2,10 +2,10 @@ Name:Morbid Bloom
 ManaCost:4 B G
 Types:Sorcery
 Text:no text
-A:SP$ChangeZone | Cost$ 4 B G | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | SpellDescription$ Exile target creature card from a graveyard, then put X 1/1 green Saproling creature tokens onto the battlefield, where X is the exiled card's toughness. | SubAbility$ MakeToken<>X<>Saproling<>G 1 1 Saproling<>Controller<>G<>Creature;Saproling<>1<>1<>None
+A:SP$ ChangeZone | Cost$ 4 B G | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | SubAbility$ SVar=TrigToken | SpellDescription$ Exile target creature card from a graveyard, then put X 1/1 green Saproling creature tokens onto the battlefield, where X is the exiled card's toughness.
 #SVar:DBToken:DB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
-SVar:X:Count$CardToughness
-SVar:Picture:http://www.wizards.com/global/images/magic/general/morbid_bloom.jpg
+SVar:X:Targeted$CardManaCost
 SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/morbid_bloom.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/94.jpg
 End
