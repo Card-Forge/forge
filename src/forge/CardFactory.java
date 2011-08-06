@@ -21438,27 +21438,33 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
-        //*************** START *********** START **************************
+      //*************** START *********** START **************************
         else if(cardName.equals("Glasses of Urza")) {
-        	final Ability_Tap ability = new Ability_Tap(card, "0") {
-        		private static final long serialVersionUID = -3857979945891501990L;
+            final Ability_Tap ability = new Ability_Tap(card, "0") {
+                private static final long serialVersionUID = -3857979945891501990L;
 
-        		@Override
-        		public void resolve() {
-        			final String player = getTargetPlayer();
-        			CardList hand = AllZoneUtil.getPlayerHand(player);
-        			AllZone.Display.getChoice("Target player's hand", hand.toArray());
-        		}
+                @Override
+                public void resolve() {
+                    final String player = getTargetPlayer();
+                    CardList hand = AllZoneUtil.getPlayerHand(player);
+                    if (hand.size() > 0) {
+                        AllZone.Display.getChoice("Target player's hand", hand.toArray());
+                    } else {
+                        StringBuffer sb = new StringBuffer();
+                        sb.append(getTargetPlayer()).append("'s hand is empty!");
+                        javax.swing.JOptionPane.showMessageDialog(null, sb.toString(), "Target player's hand", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }//resolve()
 
-        		@Override
-        		public boolean canPlayAI() {
-        			return false;
-        		}
+                @Override
+                public boolean canPlayAI() {
+                    return false;
+                }
 
-        	};//SpellAbility
+            };//SpellAbility
 
-        	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
-        	card.addSpellAbility(ability);
+            ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
+            card.addSpellAbility(ability);
         }//*************** END ************ END **************************
 
         //*************** START *********** START **************************
