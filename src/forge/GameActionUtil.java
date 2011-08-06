@@ -6067,6 +6067,7 @@ public class GameActionUtil {
 		else if(c.getName().equals("Doomsday Specter")) opponent_Discard_Card_You_Choose(c);
 		else if(c.getName().equals("The Unspeakable")) may_Return_Graveyard_to_Hand(c, "Arcane".split(","));
 		else if(c.getName().equals("Woebearer")) may_Return_Graveyard_to_Hand(c, "Creature".split(","));
+		else if(c.isEnchantedBy("Necromantic Thirst")) may_Return_Graveyard_to_Hand(c, "Creature".split(","));
 		
 		//Unused variable
 		//c.setDealtCombatDmgToOppThisTurn(true); 

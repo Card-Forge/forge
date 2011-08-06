@@ -1,7 +1,7 @@
 Name:The Unspeakable
 ManaCost:6 U U U
 Types:Legendary Creature Spirit
-Text:no text
+Text:Whenever CARDNAME deals combat damage to a player, you may return target Arcane card from your graveyard to your hand.
 PT:6/7
 K:Flying
 K:Trample
