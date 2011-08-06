@@ -741,7 +741,7 @@ public class CardFactory implements NewConstants {
         }
         
         
-        
+        /*
         //Creatures with self-regenerate abilities
         //-1 means keyword "RegenerateMe" not found
         while(hasKeyword(card, "RegenerateMe") != -1) {
@@ -825,6 +825,7 @@ public class CardFactory implements NewConstants {
                 a1.setBeforePayMana(new Input_PayManaCost(a1));
             } //if (should RegenerateMe)
         } //while - card has more RegenerateMe - Jungle Troll has two Regenerate keywords
+        */
         
         if (hasKeyword(card, "spDiscard") != -1)
         {
