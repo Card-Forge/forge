@@ -5756,17 +5756,32 @@ public class GameActionUtil {
 							
 							String[] pt = k[2].split("/");
 							
+							Card cardWithXValue;
+							String xString = cardWithKeyword.getSVar("X").split("$")[0];
+							Card cardWithYValue;
+							String yString = cardWithKeyword.getSVar("Y").split("$")[0];
+							
+							if(xString.startsWith("Imprinted") && !cardWithKeyword.getImprinted().isEmpty()) {
+								cardWithXValue = cardWithKeyword.getImprinted().get(0);
+							}
+							else cardWithXValue = cardWithKeyword;
+
+							if(yString.startsWith("Imprinted") && !cardWithKeyword.getImprinted().isEmpty()) {
+								cardWithYValue = cardWithKeyword.getImprinted().get(0);
+							}
+							else cardWithYValue = cardWithKeyword;
+							
 							int x = 0;
 		            		if (pt[0].contains("X") || pt[1].contains("X")) 
-		                 		x = CardFactoryUtil.xCount(cardWithKeyword, cardWithKeyword.getSVar("X").split("\\$")[1]);
+		                 		x = CardFactoryUtil.xCount(cardWithXValue, cardWithKeyword.getSVar("X").split("\\$")[1]);
 		                 	se.setXValue(x);
 		                 	
 		                 	int y = 0;
 		            		if (pt[1].contains("Y")) 
-		                 		y = CardFactoryUtil.xCount(cardWithKeyword, cardWithKeyword.getSVar("Y").split("\\$")[1]);
+		                 		y = CardFactoryUtil.xCount(cardWithYValue, cardWithKeyword.getSVar("Y").split("\\$")[1]);
 		                 	se.setYValue(y);
 		            		
-							addStaticEffects(cardWithKeyword,affectedCards,k[2],x, y); //give the boni to the affected cards
+							addStaticEffects(cardWithKeyword, affectedCards, k[2], x, y); //give the boni to the affected cards
 
 							storage.add(se); // store the information
 						}
@@ -5924,6 +5939,9 @@ public class GameActionUtil {
 	      	}
   	      	if(SpecialConditions.contains("Threshold")) {
   	      		if (!SourceCard.getController().hasThreshold()) return false;
+  	      	}
+  	      	if(SpecialConditions.contains("Imprint")) {
+  	      		if(SourceCard.getImprinted().isEmpty()) return false;
   	      	}
   	      	if(SpecialConditions.contains("Hellbent")) {
   	      		CardList Handcards = new CardList();
