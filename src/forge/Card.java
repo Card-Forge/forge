@@ -566,7 +566,7 @@ public class Card extends MyObservable {
 
             // Madness
             ArrayList<String> kw2 = getKeyword();
-            for (int i = 0; i < kw.size(); i++) {
+            for (int i = 0; i < kw2.size(); i++) {
                 if (kw2.get(i).toString().startsWith("Madness") && !sb.toString().contains("Madness")) {
                     if (sb.toString().endsWith(".") && !sb.toString().endsWith("\r\n")) sb.append("\r\n");
                     sb.append(kw2.get(i).toString()).append("\r\n");
