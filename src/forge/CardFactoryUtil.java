@@ -1567,11 +1567,31 @@ public class CardFactoryUtil {
                 
                 if (list.isEmpty()) return false;
                 
-                 // If extrinsicKeywords contains "This creature can't attack" or "This creature can't attack or block"
+                //else we may need to filter the list and remove inappropriate targets
+                
+                // If extrinsicKeywords contains "This creature can't attack" or "This creature can't attack or block"
                 //     then remove creatures with Defender from the list
                 
+                final ArrayList<String> extKeywords = new ArrayList<String>(Arrays.asList(extrinsicKeywords));
+                
+                if (extKeywords.contains("This creature can't attack") || extKeywords.contains("This creature can't attack or block")) {
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                        	return c.isCreature() && !c.getKeyword().contains("Defender");
+                        }
+                    });
+                }
+                
                 // If extrinsicKeywords contains "This card doesn't untap during your untap step."
-                //     then remove creatures with Vigilence from the list
+                //     then remove creatures with Vigilance from the list
+                
+                if (extKeywords.contains("This card doesn't untap during your untap step.")) {
+                	list = list.filter(new CardListFilter() {
+                	    public boolean addCard(Card c) {
+                	    	return c.isCreature() && !c.getKeyword().contains("Vigilance");
+                	    }
+                	});
+                }
                                 
                 //else (if aura is keyword only)
                 
