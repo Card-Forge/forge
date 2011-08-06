@@ -904,6 +904,22 @@ public class GameAction {
         library.setCards(c);
     }//shuffle
     
+    /**
+     * prompts Human to see if a target player's library should be shuffled.  This should
+     * only be called when the choice is made by the Human (target can be either), then
+     * shuffles that player's library if appropriate
+     * 
+     * @param player the player's library we want to shuffle
+     */
+    public void promptForShuffle(final String player) {
+    	String[] choices = new String[] {"Yes", "No"};
+		Object o = AllZone.Display.getChoice("Shuffle "+player+"'s library?", choices);
+		String myChoice = (String) o;
+		if(myChoice.equals("Yes")) {
+			AllZone.GameAction.shuffle(player);
+		}
+    }
+    
     public boolean isCardInZone(Card card, PlayerZone p) {
         ArrayList<Card> list = new ArrayList<Card>(Arrays.asList(p.getCards()));
         return list.contains(card);
