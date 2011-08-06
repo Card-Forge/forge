@@ -801,7 +801,8 @@ public class CardFactory implements NewConstants {
         		if (kk[1].startsWith("UnlessDiscardType"))
         		{
         			String jk[] = kk[1].split("\\.");
-        			UnlessType[0] = jk[1]; 
+        			UnlessType[0] = jk[1];
+        			NumCards[0] = Integer.parseInt(kk[0]);
         		}
         	}
         	else if (k[2].matches("X"))
