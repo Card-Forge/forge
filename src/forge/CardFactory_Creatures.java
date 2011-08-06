@@ -9591,41 +9591,6 @@ public class CardFactory_Creatures {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Stern Judge")) {
-        	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
-            final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
-                private static final long serialVersionUID = 3059547795996737707L;
-                
-                @Override
-                public void resolve() {
-                    AllZone.HumanPlayer.loseLife(countSwamps(AllZone.HumanPlayer),card);
-                    AllZone.ComputerPlayer.loseLife(countSwamps(AllZone.ComputerPlayer),card);
-                }
-                
-                int countSwamps(Player player) {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-                    CardList swamps = new CardList(play.getCards());
-                    swamps = swamps.getType("Swamp");
-                    return swamps.size();
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    int computer = countSwamps(AllZone.ComputerPlayer);
-                    int human = countSwamps(AllZone.HumanPlayer);
-                    
-                    if((computer >= AllZone.ComputerPlayer.getLife()) || (human == 0)) return false;
-                    
-                    return computer <= human;
-                }
-            };//SpellAbility
-            card.addSpellAbility(ability);
-            ability.setDescription("tap: Each player loses 1 life for each Swamp he or she controls.");
-            ability.setStackDescription("Stern Judge - Each player loses 1 life for each Swamp he or she controls");
-        }//*************** END ************ END **************************
-  
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Elvish Hunter")) {
         	Ability_Cost abCost = new Ability_Cost("1 G T", cardName, true);
             final Ability_Activated ability = new Ability_Activated(card, abCost, new Target("TgtC")) {
