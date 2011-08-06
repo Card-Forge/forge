@@ -2878,7 +2878,9 @@ class CardFactory_Lands {
                     AllZone.EndOfTurn.addUntil(untilEOT);
                 }//resolve()
             };//SpellAbility 
-                
+            
+            X_ability.setType("Extrinsic"); // Required for Spreading Seas
+            
           	  X_ability.setBeforePayMana(new Input()
         	  {
         		private static final long serialVersionUID = 437814522686732L;

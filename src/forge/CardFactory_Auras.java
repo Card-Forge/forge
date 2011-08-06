@@ -147,6 +147,7 @@ class CardFactory_Auras {
                 }//makeToken()
             };//SpellAbility
             
+            produceCaribou.setType("Extrinsic"); // Required for Spreading Seas
             produceCaribou.setDescription("W W, Tap: Put a 0/1 white Caribou creature token onto the battlefield.");
             produceCaribou.setStackDescription("Put a 0/1 white Caribou creature token onto the battlefield.");
             
@@ -378,6 +379,7 @@ class CardFactory_Auras {
                 }//makeToken()
             };//SpellAbility
             
+            produceDrakes.setType("Extrinsic"); // Required for Spreading Seas
             produceDrakes.setDescription("G U, Tap: Put a 2/2 green and blue Drake creature token with flying onto the battlefield.");
             produceDrakes.setStackDescription("Put a 2/2 green and blue Drake creature token with flying onto the battlefield.");
             
@@ -534,6 +536,7 @@ class CardFactory_Auras {
                 }//makeToken()
             };//SpellAbility
             
+            produceSquirrels.setType("Extrinsic"); // Required for Spreading Seas
             produceSquirrels.setDescription("Tap: Put a 1/1 green Squirrel creature token into play.");
             produceSquirrels.setStackDescription("Put a 1/1 green Squirrel creature token into play.");
             
@@ -618,12 +621,7 @@ class CardFactory_Auras {
                 public boolean canPlayAI() {
                     CardList list = new CardList(AllZone.Human_Play.getCards());
                     list = list.getType("Land");
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return !c.getType().contains("Island");
-                        }
-                    });
-                
+                    
                     if(list.isEmpty()) return false;
                     
                     setTargetCard(list.get(0));
@@ -651,7 +649,13 @@ class CardFactory_Auras {
                 
                 public void execute() {
                     if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
+                    	Card crd = card.getEnchanting().get(0);
+                        ArrayList<Card> Seas = crd.getEnchantedBy();
+                        int Count = 0;
+                        for(int i = 0; i < Seas.size(); i++) {
+                        if(Seas.get(i).getName().equals("Spreading Seas")) Count = Count + 1;	
+                        }
+                        if(Count == 1) {                      
                         crd.removeType("Swamp");
                         crd.removeType("Forest");
                         crd.removeType("Island");
@@ -661,12 +665,24 @@ class CardFactory_Auras {
                         crd.addType("Island");
                     	SpellAbility[] Abilities = crd.getSpellAbility();
                     	for(int i = 0; i < Abilities.length; i++) {
-                    		card.addSpellAbility(Abilities[i]);
-                        	}
-                        crd.clearSpellAbility();
+                    		if(Abilities[i].isIntrinsic()) {
+                    			card.addSpellAbility(Abilities[i]);
+                    			crd.removeSpellAbility(Abilities[i]);
+                    		}
+                    	}
                         crd.addSpellAbility(new Ability_Mana(card, "tap: add U") {
                             private static final long serialVersionUID = 787103012484588884L;
                         });
+                        } else {
+                        	Card Other_Seas = null;
+                        	for(int i = 0; i < Seas.size(); i++) {
+                        		if(Seas.get(i) != card) Other_Seas = Seas.get(i);
+                        	}
+                        	SpellAbility[] Abilities = Other_Seas.getSpellAbility();
+                        	for(int i = 0; i < Abilities.length; i++) {
+                        			card.addSpellAbility(Abilities[i]);
+                        	}	
+                        }
                     }
                 }//execute()
             };//Command
@@ -689,7 +705,10 @@ class CardFactory_Auras {
                             crd.removeType("Basic");
                             crd.removeType("Snow");
                             crd.removeType("Legendary");
-                            crd.clearSpellAbility();
+                            SpellAbility[] Card_Abilities = crd.getSpellAbility();
+                            for(int i = 0; i < Card_Abilities.length; i++) {
+                            	if(Card_Abilities[i].isIntrinsic()) crd.removeSpellAbility(Card_Abilities[i]);	
+                            	}
                         	Card c = AllZone.CardFactory.copyCard(crd);                       	
                         	ArrayList<String> Types = c.getType();
                         	SpellAbility[] Abilities = card.getSpellAbility();
@@ -699,10 +718,7 @@ class CardFactory_Auras {
                         	for(int i = 0; i < Abilities.length; i++) {
                             	crd.addSpellAbility(Abilities[i]);	
                             	}
-
-
-                        	// Restoring the card gives it the abilities from the copied card. This card is not in play and has no counters and thus the Dark Depths Error
-                        }   
+                        	}   
                     }
                     
                 }//execute()
