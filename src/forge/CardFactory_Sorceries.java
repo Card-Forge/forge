@@ -8446,6 +8446,61 @@ public class CardFactory_Sorceries {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }// *************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Cerebral Eruption")) {
+        	/*
+        	 * Target opponent reveals the top card of his or her library.
+        	 * Cerebral Eruption deals damage equal to the revealed card's
+        	 * converted mana cost to that player and each creature he or
+        	 * she controls. If a land card is revealed this way, return
+        	 * Cerebral Eruption to its owner's hand.
+        	 */
+        	SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -1365692178841929046L;
+
+				@Override
+				public void resolve() {
+					String player = card.getController();
+					String opponent = AllZone.GameAction.getOpponent(player);
+					CardList lib = AllZoneUtil.getPlayerCardsInLibrary(opponent);
+					if(lib.size() > 0) {
+						final Card topCard = lib.get(0);
+						int damage = CardUtil.getConvertedManaCost(topCard);
+						
+						AllZone.Display.getChoiceOptional(card+" - Revealed card", new Card[] {topCard});
+
+						//deal damage to player
+						AllZone.GameAction.addDamage(opponent, card, damage);
+
+						//deal damage to all opponent's creatures
+						CardList creatures = AllZoneUtil.getCreaturesInPlay(opponent);
+						for(Card creature:creatures) {
+							AllZone.GameAction.addDamage(creature, card, damage);
+						}
+
+						card.addReplaceMoveToGraveyardCommand(new Command() {
+							private static final long serialVersionUID = -5912663572746146726L;
+
+							public void execute() {
+								if(null != topCard && topCard.isLand()) {
+									AllZone.GameAction.moveToHand(card);
+								}
+								else AllZone.GameAction.moveToGraveyard(card);
+							}
+						});
+					}
+				}// resolve()
+				
+				@Override
+				public boolean canPlayAI() {
+					return AllZoneUtil.getPlayerCardsInLibrary(Constant.Player.Human).size() > 0;
+				}
+				
+        	};// SpellAbility
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }// *************** END ************ END **************************
 
 /* Converted to keyword        
         //*************** START *********** START **************************
