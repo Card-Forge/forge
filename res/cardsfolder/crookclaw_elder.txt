@@ -5,7 +5,7 @@ Text:no text
 PT:3/2
 K:Flying
 A:AB$Draw | Cost$ tapXType<2/Bird> | NumCards$ 1 | SpellDescription$ Draw a card.
-K:abPumpTgtC tapXType<2/Wizard>:Flying
+A:AB$Pump | Cost$ tapXType<2/Wizard> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crookclaw_elder.jpg
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/34.jpg
