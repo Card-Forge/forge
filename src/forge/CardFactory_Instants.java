@@ -31,58 +31,8 @@ public class CardFactory_Instants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        /*
-        //*************** START ********** START *************************
-        else if(cardName.equals("Regenerate") /*|| cardName.equals("Death Ward")*)
-          {
-          	card.clearSpellAbility();
-          	final Card[] tgt = new Card[1];
-          	final Command untilEOT = new Command() {
-                  private static final long serialVersionUID = -7619842476705984912L;
-                  
-                  public void execute() {
-                      tgt[0].setShield(0);                    
-                  }
-              };
-              
-          	SpellAbility spell = new Spell(card) {
-                  private static final long serialVersionUID = 6139754377230333678L;
-                  
-                  @Override
-                  public void resolve() {
-                  	tgt[0] = this.getTargetCard();
-                  	
-                  	tgt[0].addShield();
-                  	AllZone.EndOfTurn.addUntil(untilEOT);
-                  }
-                  
-                  @Override
-                  public boolean canPlayAI()
-                  {
-                  	return false;
-                  }
-                  
-                  @Override
-                  public boolean canPlay() {
-                      CardList creats = new CardList(AllZone.getZone(Constant.Zone.Play,card.getController()).getCards());
-                      
-                      creats.filter(new CardListFilter() {
-                      	public boolean addCard(Card c)
-                      	{
-                      		return c.getType().contains("Creature");
-                      	}
-                      });
-                      
-                      return creats.size() != 0;
-                  }
-              };
-              spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-              
-              card.addSpellAbility(spell);            
-              
-          }//*************** END ************ END ************************** 
-          */
-         //*************** START *********** START **************************
+        
+        //*************** START *********** START **************************
         else if (cardName.equals("Brave the Elements")) {
         	/**
         	 *  This card now works slightly better than it did before the spAllPump 
@@ -383,7 +333,7 @@ public class CardFactory_Instants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("About Face") || cardName.equals("Inside Out") || cardName.equals("Transmutation") || cardName.equals("Twisted Image")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = -5744842090293911111L;
@@ -2372,8 +2322,8 @@ public class CardFactory_Instants {
         
         
         //*************** START *********** START **************************
-        else if (cardName.equals("Funeral Charm")) {
-            
+        else if (cardName.equals("Funeral Charm") || cardName.equals("Piracy Charm")) {
+        	final String walk = cardName.equals("Funeral Charm") ? "Swampwalk" : "Islandwalk";
             //discard
             final SpellAbility spell_one = new Spell(card) {
                 private static final long serialVersionUID = 8273875515630095127L;
@@ -2428,7 +2378,7 @@ public class CardFactory_Instants {
             spell_two.setDescription("Target creature gets +2/-1 until end of turn.");
             spell_two.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell_two));
             
-            //creature gets swampwalk
+            //creature gets swampwalk/Islandwalk
             final SpellAbility spell_three = new Spell(card) {
                 private static final long serialVersionUID = -8455677074284271852L;
 
@@ -2441,15 +2391,15 @@ public class CardFactory_Instants {
                 public void resolve() {
                     final Card c = getTargetCard();
                     
-                    if (AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c) && !c.getKeyword().contains("Swampwalk")) {
-                        c.addExtrinsicKeyword("Swampwalk");
+                    if (AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c) && !c.getKeyword().contains(walk)) {
+                        c.addExtrinsicKeyword(walk);
                         
                         Command until = new Command() {
                             private static final long serialVersionUID = 1452395016805444249L;
 
                             public void execute() {
                                 if (AllZone.GameAction.isCardInPlay(c)) {
-                                    c.removeExtrinsicKeyword("Swampwalk");
+                                    c.removeExtrinsicKeyword(walk);
                                 }
                             }
                         };//Command
@@ -2457,7 +2407,7 @@ public class CardFactory_Instants {
                     }//if card in play?
                 }//resolve()
             };//SpellAbility
-            spell_three.setDescription("Target creature gains swampwalk until end of turn.");
+            spell_three.setDescription("Target creature gains "+walk+" until end of turn.");
             spell_three.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell_three));
             
             card.clearSpellAbility();
