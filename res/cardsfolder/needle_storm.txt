@@ -1,7 +1,8 @@
 Name:Needle Storm
 ManaCost:2 G
 Types:Sorcery
-Text:Needle Storm deals 4 damage to each creature with flying.
+Text:no text
+K:spDamageAll:Creature.withFlying:4:Needle Storm deals 4 damage to each creature with flying.
 K:SVar:Rarity:Uncommon
 K:SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4311.jpg
 End

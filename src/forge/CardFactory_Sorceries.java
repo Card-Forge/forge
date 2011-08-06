@@ -530,7 +530,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-
+        /* converted to keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Tremor")) {
             SpellAbility spell = new Spell(card) {
@@ -574,6 +574,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        */
         
       //*************** START *********** START **************************
         else if(cardName.equals("Demonic Tutor") || cardName.equals("Diabolic Tutor")
@@ -1966,7 +1967,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-
+/* Converted to keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Pyroclasm")) {
             SpellAbility spell = new Spell(card) {
@@ -2002,7 +2003,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+      */  
 
         //*************** START *********** START **************************
         else if(cardName.equals("Flamebreak")) {
@@ -3210,7 +3211,7 @@ public class CardFactory_Sorceries {
         
 
 
-
+        /* converted to keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Needle Storm")) {
             SpellAbility spell = new Spell(card) {
@@ -3242,7 +3243,7 @@ public class CardFactory_Sorceries {
             
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
-        
+        */
         
         
 
