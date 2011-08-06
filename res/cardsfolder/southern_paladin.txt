@@ -1,0 +1,9 @@
+Name:Southern Paladin
+ManaCost:2 W W
+Types:Creature Human Knight
+Text:no text
+PT:3/3
+K:abDestroyTgtV W W T:Permanent.Red:Destroy target red permanent.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/southern_paladin.jpg
+End

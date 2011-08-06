@@ -1,0 +1,9 @@
+Name:Army Ants
+ManaCost:1 B R
+Types:Creature Insect
+Text:no text
+PT:1/1
+K:abDestroyTgtV 0 T Sac<1/Land>:Land:Destroy target land.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/army_ants.jpg
+End
