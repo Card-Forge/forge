@@ -1,7 +1,7 @@
 Name:Mageta's Boon
 ManaCost:1 W
 Types:Enchantment Aura
-Text:Enchanted creature gets +1/+2.
+Text:no text
 K:Flash
 K:Enchant creature
 K:enPump:+1/+2

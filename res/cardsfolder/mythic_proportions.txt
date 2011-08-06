@@ -1,7 +1,7 @@
 Name:Mythic Proportions
 ManaCost:4 G G G
 Types:Enchantment Aura
-Text:Enchanted creature gets +8/+8 and has trample.
+Text:no text
 K:Enchant creature
 K:enPump:+8/+8/Trample
 SVar:Rarity:Rare

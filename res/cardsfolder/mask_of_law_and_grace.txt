@@ -1,7 +1,7 @@
 Name:Mask of Law and Grace
 ManaCost:W
 Types:Enchantment Aura
-Text:Enchanted creature has protection from black and from red.
+Text:no text
 K:Enchant creature
 K:enPump:Protection from black & Protection from red
 SVar:Rarity:Common

@@ -1,7 +1,7 @@
 Name:Mourning
 ManaCost:1 B
 Types:Enchantment Aura
-Text:Enchanted creature gets -2/-0
+Text:no text
 K:Enchant creature
 K:enPumpCurse:-2/-0
 A:AB$ChangeZone | Cost$ B | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.

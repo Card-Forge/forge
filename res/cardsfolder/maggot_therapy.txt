@@ -1,7 +1,7 @@
 Name:Maggot Therapy
 ManaCost:2 B
 Types:Enchantment Aura
-Text:Enchanted creature gets +2/-2.
+Text:no text
 K:Flash
 K:Enchant creature
 K:enPump:+2/-2
