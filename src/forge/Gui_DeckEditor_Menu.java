@@ -895,23 +895,31 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         CardList top = new CardList();
         for (int i = 0; i < deck.countSideboard(); i++) {
             String cardName = deck.getSideboard(i);
+            String setCode = "";
             if (cardName.contains("|")) {
                 String s[] = cardName.split("\\|", 2);
                 cardName = s[0];
+                setCode = s[1];
             }
 
-            top.add(AllZone.CardFactory.getCard(cardName, AllZone.HumanPlayer));
+            Card c = AllZone.CardFactory.getCard(cardName, AllZone.HumanPlayer);
+            c.setCurSetCode(setCode);
+            top.add(c);
         }
 
         CardList bottom = new CardList();
         for (int i = 0; i < deck.countMain(); i++) {
             String cardName = deck.getMain(i);
+            String setCode = "";
             if (cardName.contains("|")) {
                 String s[] = cardName.split("\\|", 2);
                 cardName = s[0];
+                setCode = s[1];
             }
 
-            bottom.add(AllZone.CardFactory.getCard(cardName, AllZone.HumanPlayer));
+            Card c = AllZone.CardFactory.getCard(cardName, AllZone.HumanPlayer);
+            c.setCurSetCode(setCode);
+            bottom.add(c);
         }
 
         deckDisplay.updateDisplay(top, bottom);
