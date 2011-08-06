@@ -2368,7 +2368,7 @@ public class GameAction {
                 String setCode = "";
                 if (cardName.contains("|"))
                 {
-                	String s[] = cardName.split("\\|");
+                	String s[] = cardName.split("\\|",2);
                 	cardName = s[0];
                 	setCode = s[1];
                 }
