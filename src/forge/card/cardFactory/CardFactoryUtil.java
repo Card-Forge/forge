@@ -3514,6 +3514,8 @@ public class CardFactoryUtil {
         	int num = c.getCounters(Counters.getType(sq[1]));
         	return doXMath(num, m);
         }
+        if(sq[0].contains("NumBlockingMe"))
+        	return doXMath(AllZone.Combat.getBlockers(c).size(), m);
         
         //Count$IfMainPhase.<numMain>.<numNotMain> // 7/10
         if (sq[0].contains("IfMainPhase"))
