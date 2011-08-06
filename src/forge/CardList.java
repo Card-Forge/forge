@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Random;
 
 import forge.card.cardFactory.CardFactoryUtil;
 
@@ -329,6 +330,8 @@ public class CardList implements Iterable<Card> {
     }
     
     public void shuffle() {
+    	// reseed Random each time we want to Shuffle
+    	MyRandom.random = new Random();
         Collections.shuffle(list, MyRandom.random);
         Collections.shuffle(list, MyRandom.random);
         Collections.shuffle(list, MyRandom.random);
