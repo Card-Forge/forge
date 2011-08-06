@@ -56,73 +56,9 @@ public class CardFactory_Creatures {
     
 
     public static Card getCard(final Card card, String cardName, Player owner, CardFactory cf) {
-
         
         //*************** START *********** START **************************
-        if(cardName.equals("Stone Giant")) {
-        	final ArrayList<Card> Tgt = new ArrayList<Card>();
-        	
-        	final Command untilEOT = new Command() {
-
-				private static final long serialVersionUID = -6829468812598100958L;
-
-				//@Override
-        		public void execute() {
-        			for(Card c : Tgt)
-        			{
-        				AllZone.GameAction.destroy(c);
-        			}
-        			Tgt.clear();
-        		}
-        	};
-        	
-        	final SpellAbility ability = new Ability_Tap(card) {
-
-				private static final long serialVersionUID = -807485081546883513L;
-
-				public void resolve() {
-					getTargetCard().addOtherExtrinsicKeyword("Flying");
-					Tgt.add(getTargetCard());
-					AllZone.EndOfTurn.addAt(untilEOT);
-        		}
-        		
-        		public boolean canPlay() {
-        			CardList creats = new CardList(AllZone.getZone(Constant.Zone.Battlefield,card.getController()).getCards());
-        			
-        			creats = creats.filter(new CardListFilter() {
-        				public boolean addCard(Card c) {
-        					return c.getType().contains("Creature") && c.getNetDefense() < card.getNetAttack();
-        				}
-        			});
-        			
-        			return creats.size() > 0 && !card.isTapped() && !card.isSick();        			
-        		}
-        	};
-        	
-        	Input runtime = new Input() {
-
-				private static final long serialVersionUID = 2101131021036402902L;
-
-				@Override
-        		public void showMessage() {
-					CardList valids = new CardList(AllZone.getZone(Constant.Zone.Battlefield,card.getController()).getCards());
-        			valids = valids.filter(new CardListFilter() {
-        				public boolean addCard(Card c) {
-        					return c.getNetDefense() < card.getNetAttack(); 
-        				}
-        			});
-        			
-        			stopSetNext(CardFactoryUtil.input_targetSpecific(ability,valids,"Select target creature you control with toughness less than Stone Giant's power.",true,false));
-        		}
-        	};
-        	ability.setBeforePayMana(runtime);
-        	ability.setDescription("Tap: Target creature you control with toughness less than Stone Giant's power gains flying until end of turn. Destroy that creature at the beginning of the next end step.");
-        	
-        	card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Lurking Informant")) {
+        if(cardName.equals("Lurking Informant")) {
             Target target = new Target("Select target player", new String[] {"Player"});
         	Ability_Cost abCost = new Ability_Cost("2 T", cardName, true);
             final SpellAbility a1 = new Ability_Activated(card, abCost, target) {

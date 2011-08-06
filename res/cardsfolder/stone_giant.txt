@@ -3,6 +3,8 @@ ManaCost:2 R R
 Types:Creature Giant
 Text:no text
 PT:3/4
+A:AB$Pump|Cost$T|ValidTgts$Creature.YouCtrl+powerLTX|TgtPrompt$Select target creature you control with power less than Stone Giant's.|KW$Flying & At the beginning of the end step, destroy CARDNAME. |SpellDescription$Target creature you control with toughness less than CARDNAME's power gains flying until end of turn. Destroy that creature at the beginning of the next end step.
+SVar:X:Count$CardPower
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_giant.jpg
