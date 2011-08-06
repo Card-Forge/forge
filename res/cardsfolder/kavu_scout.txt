@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Kavu Scout
 Text:Domain - Kavu Scout gets +1/+0 for each basic land type among lands you control.
 PT:0/2
-K:stPumpEnchanted:Creature:X/0:no Condition:no text
+K:stPumpSelf:Creature:X/0:no Condition:no text
 SVar:X:Count$Domain
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_scout.jpg
