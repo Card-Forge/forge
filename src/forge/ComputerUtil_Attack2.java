@@ -501,12 +501,14 @@ public class ComputerUtil_Attack2 {
         // context that will be relevant to the attackers decision according to the selected strategy
     	for (Card defender:defenders) {
     		if(CombatUtil.canBlock(attacker, defender)){ //, combat )) {
-    			System.out.println(defender.getName() + " Can block " + attacker.getName());
                 canBeBlocked = true;
     			if(CombatUtil.canDestroyAttacker(attacker, defender)) {
-    				System.out.println(defender.getName() + " can destroy " + attacker.getName());
     				canBeKilledByOne = true;  // there is a single creature on the battlefield that can kill the creature
     				killingBlockers.add(defender);
+                    // see if the defending creature is of higher or lower value. We don't want to attack only to lose value
+                    if(CardFactoryUtil.evaluateCreature(defender) < CardFactoryUtil.evaluateCreature(attacker)){
+                    	isWorthLessThanAllKillers = false;
+                    } 
     			}
                 // see if this attacking creature can destroy this defender, if not record that it can't kill everything
     			if(!CombatUtil.canDestroyBlocker(defender, attacker)){
@@ -514,8 +516,6 @@ public class ComputerUtil_Attack2 {
                     // high power, so check for walls that can kill but ignore others
                     if(!(defender.isWall() && defender.getNetCombatDamage() <= 0)){
                     	canKillAllDangerous = false; // there is a dangerous creature that can survive an attack from this creature
-                        // see if the defending creature is of higher or lower value. We don't want to attack only to lose value
-                        if(CardFactoryUtil.evaluateCreature(defender) < CardFactoryUtil.evaluateCreature(attacker)){isWorthLessThanAllKillers = false;}
                     }
                 } else {
                     canKillOne = true; // there is at least one opposition creature on the battlefield the creature can kill
@@ -547,9 +547,9 @@ public class ComputerUtil_Attack2 {
                     System.out.println(attacker.getName() + " = attacking expecting to kill creature or cause damage, or is unblockable");
                     return true;
                 }
-            case 2: // attack expecting to attract even a group block or
+            case 2: // attack expecting to attract even a group block or destroying single blockers and surviving
                 if(((canKillAllDangerous && !canBeKilledByOne) || !canBeBlocked) && canCauseDamage){
-                    System.out.println(attacker.getName() + " = attacking expecting to survive");
+                    System.out.println(attacker.getName() + " = attacking expecting to survive or attract group block");
                     return true;
                 }
         }
