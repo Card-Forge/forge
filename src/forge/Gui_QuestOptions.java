@@ -155,7 +155,7 @@ public class Gui_QuestOptions extends JFrame {
         sb.append("\r\n");
         sb.append("\r\n");
         sb.append("Realistic is the original quest mode with a new feature, the Card Shop. ");
-        sb.append("Fantasy adds a Bazaar and you will occasionally face fantasy themed opponents that you will battle.");
+        sb.append("Fantasy adds a Bazaar and the occasional fantasy themed opponent for you to battle.");
         
         jTextArea1.setBorder(BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140)));
         jTextArea1.setEnabled(false);
