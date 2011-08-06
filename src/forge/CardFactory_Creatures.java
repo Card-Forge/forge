@@ -1853,6 +1853,7 @@ public class CardFactory_Creatures {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Sengir Autocrat")) {
+            /*
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
@@ -1869,21 +1870,17 @@ public class CardFactory_Creatures {
                             + " puts three 0/1 tokens into play");
                     AllZone.Stack.add(ability);
                 }
-            };
+            };*/
             Command leavesPlay = new Command() {
                 private static final long serialVersionUID = 7242867764317580066L;
                 
                 public void execute() {
-                    CardList all = new CardList();
-                    all.addAll(AllZone.Human_Play.getCards());
-                    all.addAll(AllZone.Computer_Play.getCards());
-                    
-                    all = all.getType("Serf");
-                    for(int i = 0; i < all.size(); i++)
-                        AllZone.GameAction.destroy(all.get(i));
+                    CardList all = AllZoneUtil.getTypeInPlay("Serf");
+                    for(Card serf:all)
+                        AllZone.GameAction.exile(serf);
                 }//execute
             };//Command
-            card.addComesIntoPlayCommand(intoPlay);
+           // card.addComesIntoPlayCommand(intoPlay);
             card.addLeavesPlayCommand(leavesPlay);
         }//*************** END ************ END **************************
         
@@ -3577,7 +3574,7 @@ public class CardFactory_Creatures {
             
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Ant Queen")) {
             final SpellAbility ability = new Ability(card, "1 G") {
@@ -3593,7 +3590,7 @@ public class CardFactory_Creatures {
             
 
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Eternal Witness")) {
