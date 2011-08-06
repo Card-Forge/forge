@@ -4224,7 +4224,7 @@ public class CardFactory implements NewConstants {
             
             String p[] = parse.split(":");
             final Counters counter = Counters.valueOf(p[1]);
-            final int numCounters = Integer.parseInt(p[2]);
+            final String numCounters = p[2];
               
             StringBuilder sb = new StringBuilder(card.getSpellText());
             if (sb.length() != 0)
@@ -4236,7 +4236,7 @@ public class CardFactory implements NewConstants {
             sb.append(" ");
             sb.append(counter.getName());
             sb.append(" counter");
-            if(1 != numCounters) sb.append("s"); 
+            if("1" != numCounters) sb.append("s"); 
             sb.append(" on it.");
             
             card.setText(sb.toString());
@@ -4245,7 +4245,14 @@ public class CardFactory implements NewConstants {
                 private static final long serialVersionUID = -2292898970576123040L;
 
                 public void execute() {
-                    card.addCounter(counter, numCounters);
+                	int toAdd = -1;
+                	if(numCounters.equals("X")) { 
+                		toAdd = CardFactoryUtil.xCount(card, card.getSVar("X"));
+                	}
+                	else {
+                		toAdd = Integer.parseInt(numCounters);
+                	}
+                    card.addCounter(counter, toAdd);
                 }
             });//ComesIntoPlayCommand
         } // if etbCounter
@@ -5279,7 +5286,7 @@ public class CardFactory implements NewConstants {
 
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Chalice of the Void") || cardName.equals("Chimeric Mass")) {
+        else if(cardName.equals("Chalice of the Void")/* || cardName.equals("Chimeric Mass")*/) {
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = -7679939432259603542L;
                 
