@@ -6,7 +6,7 @@ K:Enchant creature
 K:enPump:0/0
 K:stPumpEnchanted:Creature:X/X:no Condition:no text
 SVar:X:Count$Valid Enchantment.Other/Times.2
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:BuffedBy:Enchantment
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancestral_mask.jpg

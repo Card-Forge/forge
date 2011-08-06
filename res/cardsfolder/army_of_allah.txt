@@ -4,7 +4,6 @@ Types:Instant
 Text:no text
 A:SP$PumpAll | Cost$ 1 W W | ValidCards$ Creature.attacking | NumAtt$ +2 | SpellDescription$ Attacking creatures get +2/+0 until end of turn
 SVar:Rarity:Common
-SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/army_of_allah.jpg
 SetInfo:ARN|Common|http://magiccards.info/scans/en/an/56.jpg|2
 End

@@ -4,7 +4,7 @@ Types:Enchantment
 Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever a creature enters the battlefield, CARDNAME deals 2 damage to it. 
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCard | NumDmg$ 2
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_flash.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/88.jpg
