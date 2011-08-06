@@ -839,7 +839,7 @@ public class CardFactoryUtil {
         
         unearth.setFlashBackAbility(true);
         //unearth.setManaCost(manaCost);
-        unearth.setDescription("Unearth: " + manaCost);
+        //unearth.setDescription("Unearth: " + manaCost);
         unearth.setStackDescription("Unearth: " + sourceCard.getName());
         
         return unearth;
