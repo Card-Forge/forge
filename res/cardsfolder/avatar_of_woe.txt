@@ -1,7 +1,7 @@
 Name:Avatar of Woe
 ManaCost:6 B B
 Types:Creature Avatar
-Text:If there are ten or more creature cards total in all graveyards, Avatar of Woe costs 6 less to play.
+Text:If there are ten or more creature cards total in all graveyards, CARDNAME costs 6 less to cast.
 PT:6/5
 K:Fear
 A:AB$Destroy | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NoRegen$ True | SpellDescription$ Destroy target creature. It can't be regenerated.

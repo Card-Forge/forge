@@ -1,7 +1,7 @@
 Name:Avatar of Will
 ManaCost:6 U U
 Types:Creature Avatar
-Text:If an opponent has no cards in hand, Avatar of Will costs 6 less to play.
+Text:If an opponent has no cards in hand, CARDNAME costs 6 less to cast.
 PT:5/6
 K:Flying
 SVar:Rarity:Rare

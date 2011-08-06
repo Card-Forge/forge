@@ -2,7 +2,7 @@ Name:AEther Flash
 ManaCost:2 R R
 Types:Enchantment
 Text:Whenever a creature enters the battlefield, AEther Flash deals 2 damage to it.
-#WheneverKeyword was dealing damage to player
+#WheneverKeyword was dealing damage to the player
 #K:WheneverKeyword:EntersBattleField:Type/Creature:Play:Damage/2:Initiating_Card:ASAP:No_Condition:No Special Condition:Whenever a creature enters the battlefield, AEther Flash deals 2 damage to it.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
