@@ -323,6 +323,9 @@ public class AllZoneUtil {
 		}
 	}
 	
+	/**
+	 * a CardListFilter to get all cards that are tapped
+	 */
 	public static CardListFilter tapped = new CardListFilter() {
 		public boolean addCard(Card c) {
 			return c.isTapped();
