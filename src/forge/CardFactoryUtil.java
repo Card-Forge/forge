@@ -3945,16 +3945,19 @@ public class CardFactoryUtil {
             final int defense = Integer.valueOf(k[8]);
             final String[] keywords = k[9].split(";");
             
-            String controller = controllerString.equals("Controller") ? cardController : Opp;
-			if(keywords[0].equals("None")) keywords[0] = "";
+            String controller = "";
+            if(controllerString.equals("Controller")) controller = cardController;
+            else if(controllerString.equals("Opponent")) controller = Opp;
+            else if(controllerString.equals("TargetController"))controller = TgtC.getController();
+			
+            if(keywords[0].equals("None")) keywords[0] = "";
 			
 			int num = xString ? CardFactoryUtil.xCount(TgtC, numString) : Integer.valueOf(numString);
             for(int i = 0; i < num; i ++ ){
             	CardFactoryUtil.makeToken(name, imageName, controller, manaCost, types, attack, defense, keywords);
             }
         }//end MakeToken drawback
-        
-        
+            
         if(d[0].contains("ReturnFromYard")) // placeholder for effect
         X = X + 0;
         
