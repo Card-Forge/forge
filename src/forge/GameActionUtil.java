@@ -6393,33 +6393,40 @@ public class GameActionUtil {
 	private static void upkeep_Mana_Vault() {
 		//this card is filtered out for the computer, so we will only worry about Human here
 		final Player player = AllZone.Phase.getPlayerTurn();
-		if(player.equals(AllZone.HumanPlayer)) {  //in case stupid computer takes control
-			CardList vaults = AllZoneUtil.getPlayerCardsInPlay(player, "Mana Vault");
-			for(Card vault:vaults) {
-				if(vault.isTapped()) {
-					final Card thisVault = vault;
-					final String[] choices = {"Yes", "No"};
-					Object o = AllZone.Display.getChoice("Untap Mana Vault?", choices);
-					String choice = (String) o;
-					if(choice.equals("Yes")) {
-						//prompt for pay mana cost, then untap
-						final SpellAbility untap = new Ability(thisVault, "4") {
-							@Override
-							public void resolve() {
-								thisVault.untap();
-							}
-						};//Ability
-						thisVault.addSpellAbility(untap);
-						
-						StringBuilder sb = new StringBuilder();
-						sb.append("Untap ").append(thisVault);
-						untap.setStackDescription(sb.toString());
-						
-						untap.setBeforePayMana(new Input_PayManaCost(untap));
-						//AllZone.Stack.add(untap);
-						AllZone.GameAction.playSpellAbility(untap);
+		
+		if(!player.equals(AllZone.HumanPlayer)) return; // AI doesn't try to untap
+		
+		CardList vaults = AllZoneUtil.getPlayerCardsInPlay(player, "Mana Vault");
+		for(Card vault:vaults) {
+			if(vault.isTapped()) {
+				final Card thisVault = vault;
+				
+				Ability vaultChoice = new Ability(thisVault, "0"){
+				
+					@Override
+					public void resolve(){
+						final String[] choices = {"Yes", "No"};
+						Object o = AllZone.Display.getChoice("Untap Mana Vault?", choices);
+						String choice = (String) o;
+						if(choice.equals("Yes")) {
+							//prompt for pay mana cost, then untap
+							final SpellAbility untap = new Ability(thisVault, "4") {
+								@Override
+								public void resolve() {
+									thisVault.untap();
+								}
+							};//Ability
+							
+							StringBuilder sb = new StringBuilder();
+							sb.append("Untap ").append(thisVault);
+							untap.setStackDescription(sb.toString());
+							
+							AllZone.GameAction.playSpellAbility(untap);
+						}
 					}
-				}
+				};
+				vaultChoice.setStackDescription("Mana Vault - Untap during Upkeep?");
+				AllZone.Stack.add(vaultChoice);
 			}
 		}
 	}

@@ -43,6 +43,6 @@ public class Input_PassPriority extends Input implements java.io.Serializable {
     @Override
     public void selectCard(Card card, PlayerZone zone) {
     	if (AllZone.GameAction.playCard(card))
-    		AllZone.Phase.setPriorityPlayer(AllZone.HumanPlayer);
+    		AllZone.Phase.setPriority(AllZone.HumanPlayer);
     }//selectCard()
 }

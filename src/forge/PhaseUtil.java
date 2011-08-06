@@ -78,8 +78,7 @@ public class PhaseUtil {
     	{
     		public boolean addCard(Card c)
     		{
-    			if( (isWinterOrbInEffect() && c.isLand()) ||
-    					(isMunghaWurmInEffect()[0] && c.isLand())) return false;
+    			if(canOnlyUntapOneLand() && c.isLand()) return false;
     			return true;
     		}
     	});
@@ -128,8 +127,8 @@ public class PhaseUtil {
     		}
     		else c.removeExtrinsicKeyword("This card doesn't untap during your next untap step.");    		
     	}
-    	if( isWinterOrbInEffect() || isMunghaWurmInEffect()[0] || isMunghaWurmInEffect()[1]) {
-    		if( AllZone.Phase.getPlayerTurn().equals(AllZone.ComputerPlayer) || isMunghaWurmInEffect()[1] ) {
+    	if( canOnlyUntapOneLand()) {
+    		if( AllZone.Phase.getPlayerTurn().equals(AllZone.ComputerPlayer)) {
     			//search for lands the computer has and only untap 1
     			CardList landList = AllZoneUtil.getPlayerLandsInPlay(AllZone.ComputerPlayer);
     			landList = landList.filter(AllZoneUtil.tapped);
@@ -138,7 +137,6 @@ public class PhaseUtil {
     			}
     		}
     		else {
-    				
     			Input target = new Input() {
     				private static final long serialVersionUID = 6653677835629939465L;
     				public void showMessage() {
@@ -158,7 +156,6 @@ public class PhaseUtil {
     			if( landList.size() > 0 ) {
     				AllZone.InputControl.setInput(target);
     			}
-    			
     		}
     	}
     	if( AllZoneUtil.isCardInPlay("Damping Field") || AllZoneUtil.isCardInPlay("Imi Statue")) {
@@ -227,46 +224,21 @@ public class PhaseUtil {
     	}
     }//end doUntap
 
-    private static boolean isWinterOrbInEffect() {
-    	
-    	CardList all = AllZoneUtil.getCardsInPlay("Winter Orb");
-    	CardList all2 = AllZoneUtil.getCardsInPlay("Hokori, Dust Drinker");
-
-    	//if multiple Winter Orbs, check that at least 1 of them is untapped
-    	for( int i = 0; i < all.size(); i++ ) {
-    		if( all.get(i).isUntapped() ) {
+    private static boolean canOnlyUntapOneLand() {
+    	CardList orbs = AllZoneUtil.getCardsInPlay("Winter Orb");
+    	for(Card c : orbs){
+        	//if any Winter Orb is untapped, effect is on
+    		if (c.isUntapped())
     			return true;
-    		}
     	}
-    	
-    	if (all2.size() > 0){
+
+    	if (AllZoneUtil.getCardsInPlay("Hokori, Dust Drinker").size() > 0)
     		return true;
-    	}
+    	
+    	if (AllZoneUtil.getPlayerCardsInPlay(AllZone.Phase.getPlayerTurn(), "Mungha Wurm").size() > 0)
+    		return true;
     	
     	return false;
-    }
-    
-    private static boolean[] isMunghaWurmInEffect() {
-    	
-    	CardList all = AllZoneUtil.getCardsInPlay("Mungha Wurm");
-    	
-    	boolean[] HumanAI = new boolean[]{false,false};
-    	
-    	int i = 0;
-    	
-    	while (i < all.size()) {
-    		Card c = all.get(i);
-    		if (c.getController().equals(AllZone.HumanPlayer)) {
-    			HumanAI[0] = true;
-    		} 
-    		
-    		else if (c.getController().equals(AllZone.ComputerPlayer)) {
-    			HumanAI[1] = true;
-    		}
-    		i++;
-    	}
-    	
-    	return HumanAI;
     }
     
     private static ArrayList<String> getAnZerrinRuinsTypes() {
