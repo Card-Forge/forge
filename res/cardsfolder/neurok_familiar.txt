@@ -8,4 +8,5 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Artifact | DestinationZone2$ Graveyard
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neurok_familiar.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/43.jpg
 End

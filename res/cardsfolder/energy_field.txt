@@ -7,4 +7,5 @@ SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/energy_field.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/73.jpg
 End
