@@ -1,0 +1,11 @@
+Name:Viashino Sandscout
+ManaCost:1 R
+Types:Creature Viashino Scout
+Text:no text
+PT:2/1
+K:Haste
+K:WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:ControllerEndStep:At the beginning of the end step, return Viashino Sandscout to its owner's hand. (Return it only if it's on the battlefield.)
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_sandscout.jpg
+End

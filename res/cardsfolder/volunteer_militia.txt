@@ -1,0 +1,8 @@
+Name:Volunteer Militia
+ManaCost:W
+Types:Creature Human Soldier
+Text:no text
+PT:1/2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10483.jpg
+End

@@ -1,0 +1,8 @@
+Name:Vicious Kavu
+ManaCost:1 B R
+Types:Creature Kavu
+Text:Whenever Vicious Kavu attacks, it gets +2/+0 until end of turn.
+PT:2/2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vicious_kavu.jpg
+End

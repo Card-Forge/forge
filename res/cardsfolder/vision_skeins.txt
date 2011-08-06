@@ -1,0 +1,8 @@
+Name:Vision Skeins
+ManaCost:1 U
+Types:Instant
+Text:no text
+K:spDrawCards:2:Drawback$OppDraw/2:Each player draws two cards.:Both players draws 2 cards.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vision_skeins.jpg
+End

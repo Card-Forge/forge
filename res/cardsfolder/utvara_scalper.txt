@@ -1,0 +1,10 @@
+Name:Utvara Scalper
+ManaCost:1 R
+Types:Creature Goblin Scout
+Text:no text
+PT:1/2
+K:Flying
+K:CARDNAME attacks each turn if able.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/utvara_scalper.jpg
+End

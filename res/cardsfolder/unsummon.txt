@@ -1,0 +1,8 @@
+Name:Unsummon
+ManaCost:U
+Types:Instant
+Text:Return target creature to its owner's hand.
+K:spBounceTgt:Creature:Hand
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/unsummon.jpg
+End

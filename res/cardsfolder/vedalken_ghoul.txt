@@ -1,0 +1,8 @@
+Name:Vedalken Ghoul
+ManaCost:U B
+Types:Creature Vedalken Zombie
+Text:Whenever Vedalken Ghoul becomes blocked, defending player loses 4 life.
+PT:1/1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_ghoul.jpg
+End

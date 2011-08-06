@@ -1,0 +1,8 @@
+Name:Urborg Syphon-Mage
+ManaCost:2 B
+Types:Creature Human Spellshaper
+Text:no text
+PT:2/2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card108798.jpg
+End

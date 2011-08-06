@@ -1,0 +1,9 @@
+Name:Ursapine
+ManaCost:3 G G
+Types:Creature Beast
+Text:no text
+PT:3/3
+K:abPumpTgtC G:+1/+1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ursapine.jpg
+End

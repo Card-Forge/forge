@@ -1,0 +1,10 @@
+Name:Voracious Hatchling
+ManaCost:3 WB
+Types:Creature Elemental
+Text:Voracious Hatchling enters the battlefield with four -1/-1 counters on it.\r\nWhenever you cast a white spell, remove a -1/-1 counter from Voracious Hatchling.\r\nWhenever you cast a black spell, remove a -1/-1 counter from Voracious Hatchling.
+PT:6/6
+K:Lifelink
+K:SVar:BuffedBy:Spell.White,Spell.Black
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/Voracious_Hatchling.jpg
+End

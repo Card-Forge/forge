@@ -1,0 +1,9 @@
+Name:Volcanic Strength
+ManaCost:1 R
+Types:Enchantment Aura
+Text:Enchanted creature gets +2/+2 and has mountainwalk.
+K:Enchant creature
+K:enPump:+2/+2/Mountainwalk
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_strength.jpg
+End

@@ -1,0 +1,10 @@
+Name:Undead Warchief
+ManaCost:2 B B
+Types:Creature Zombie
+Text:Zombie spells you cast cost 1 less to cast.\r\nZombie creatures you control get +2/+1.
+PT:1/1
+K:CostChange:Player:Less:1:Spell:All:Zombie:NoSpecial
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_warchief.jpg
+End

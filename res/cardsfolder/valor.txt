@@ -1,0 +1,9 @@
+Name:Valor
+ManaCost:3 W
+Types:Creature Incarnation
+Text:As long as Valor is in your graveyard and you control a Plains, creatures you control have First Strike.
+PT:2/2
+K:First Strike
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/jud/en-us/card33719.jpg
+End

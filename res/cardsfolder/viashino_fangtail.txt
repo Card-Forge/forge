@@ -1,0 +1,9 @@
+Name:Viashino Fangtail
+ManaCost:2 R R
+Types:Creature Viashino Warrior
+Text:no text
+PT:3/3
+K:abDamageTgtCP T:1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_fangtail.jpg
+End

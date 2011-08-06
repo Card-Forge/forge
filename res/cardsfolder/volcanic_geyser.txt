@@ -1,0 +1,9 @@
+Name:Volcanic Geyser
+ManaCost:X R R
+Types:Instant
+Text:no text
+K:spDamageTgtCP:X:Volcanic Geyser deals X damage to target creature or player.
+K:SVar:X:Count$xPaid
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_geyser.jpg
+End

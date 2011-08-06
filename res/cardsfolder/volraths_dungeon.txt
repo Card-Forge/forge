@@ -1,0 +1,7 @@
+Name:Volrath's Dungeon
+ManaCost:2 B B
+Types:Enchantment
+Text:no text
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/volraths_dungeon.jpg
+End

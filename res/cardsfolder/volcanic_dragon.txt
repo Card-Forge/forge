@@ -1,0 +1,10 @@
+Name:Volcanic Dragon
+ManaCost:4 R R
+Types:Creature Dragon
+Text:no text
+PT:4/4
+K:Flying
+K:Haste
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card21020.jpg
+End

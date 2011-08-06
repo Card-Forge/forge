@@ -1,0 +1,9 @@
+Name:Vedalken Heretic
+ManaCost:U G
+Types:Creature Vedalken Rogue
+Text:no text
+PT:1/1
+K:WheneverKeyword:DealsDamage/Opponent:Self:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever Vedalken Heretic deals damage to an opponent, you may draw a card.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_heretic.jpg
+End

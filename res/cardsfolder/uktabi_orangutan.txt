@@ -1,0 +1,9 @@
+Name:Uktabi Orangutan
+ManaCost:2 G
+Types:Creature Ape
+Text:When Uktabi Orangutan enters the battlefield, destroy target artifact.
+PT:2/2
+K:etbDestroyTgt:Artifact
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/uktabi_orangutan.jpg
+End

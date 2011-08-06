@@ -1,0 +1,10 @@
+Name:Undead Leotau
+ManaCost:5 B
+Types:Creature Zombie Cat
+Text:no text
+PT:3/4
+K:abPump R:+1/-1
+K:Unearth:2 B
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_leotau.jpg
+End

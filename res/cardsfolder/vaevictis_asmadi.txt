@@ -1,0 +1,13 @@
+Name:Vaevictis Asmadi
+ManaCost:2 B B R R G G
+Types:Legendary Creature Elder Dragon
+Text:no text
+PT:7/7
+K:Flying
+K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay:B R G
+K:abPump B:+1/+0
+K:abPump R:+1/+0
+K:abPump G:+1/+0
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vaevictis_asmadi.jpg
+End

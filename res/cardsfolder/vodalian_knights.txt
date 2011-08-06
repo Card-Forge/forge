@@ -1,0 +1,12 @@
+Name:Vodalian Knights
+ManaCost:1 U U
+Types:Creature Merfolk Knight
+Text:no text
+PT:2/2
+K:First Strike
+K:CARDNAME can't attack unless defending player controls an Island.
+K:When you control no Islands, sacrifice CARDNAME.
+K:abPump U:Flying
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vodalian_knights.jpg
+End

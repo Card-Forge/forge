@@ -1,0 +1,8 @@
+Name:Vedalken Mastermind
+ManaCost:U U
+Types:Creature Vedalken Wizard
+Text:no text
+PT:1/2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card50834.jpg
+End

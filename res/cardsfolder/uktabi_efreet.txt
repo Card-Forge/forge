@@ -1,0 +1,9 @@
+Name:Uktabi Efreet
+ManaCost:2 G G
+Types:Creature Efreet
+Text:no text
+PT:5/4
+K:Cumulative upkeep:G
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/uktabi_efreet.jpg
+End

@@ -1,0 +1,11 @@
+Name:Ulamog, the Infinite Gyre
+ManaCost:11
+Types:Legendary Creature Eldrazi
+Text:When you cast Ulamog, the Infinite Gyre, destroy target permanent.
+PT:10/10
+K:Indestructible
+K:Annihilator 4
+K:When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and its owner shuffles his or her graveyard into his or her library.
+K:SVar:Rarity:Mythic
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ulamog_the_infinite_gyre.jpg
+End

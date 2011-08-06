@@ -1,0 +1,9 @@
+Name:Veldrane of Sengir
+ManaCost:5 B B
+Types:Legendary Creature Human Rogue
+Text:no text
+PT:5/5
+K:abPump 1 B B:-3/-0/Forestwalk
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/veldrane_of_sengir.jpg
+End

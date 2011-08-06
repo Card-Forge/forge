@@ -1,0 +1,9 @@
+Name:Visara the Dreadful
+ManaCost:3 B B B
+Types:Legendary Creature Gorgon
+Text:no text
+PT:5/5
+K:Flying
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39863.jpg
+End

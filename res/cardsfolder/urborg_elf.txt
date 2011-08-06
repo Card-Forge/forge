@@ -1,0 +1,11 @@
+Name:Urborg Elf
+ManaCost:1 G
+Types:Creature Elf Druid
+Text:no text
+PT:1/1
+K:tap: add U
+K:tap: add B
+K:tap: add G
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card26717.jpg
+End

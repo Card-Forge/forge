@@ -1,0 +1,10 @@
+Name:Vine Trellis
+ManaCost:1 G
+Types:Creature Wall
+Text:no text
+PT:0/4
+K:Defender
+K:tap: add G
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card19624.jpg
+End

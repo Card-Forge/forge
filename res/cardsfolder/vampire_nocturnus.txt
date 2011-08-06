@@ -1,0 +1,10 @@
+Name:Vampire Nocturnus
+ManaCost:1 B B B
+Types:Creature Vampire
+Text:As long as the top card of your library is black, Vampire Nocturnus and other Vampire creatures you control get +2/+1 and have flying.
+PT:3/3
+K:Play with the top card of your library revealed.
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Mythic
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_nocturnus.jpg
+End

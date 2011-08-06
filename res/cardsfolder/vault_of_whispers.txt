@@ -1,0 +1,8 @@
+Name:Vault of Whispers
+ManaCost:no cost
+Types:Artifact Land
+Text:(Vault of Whispers isn't a spell.)
+K:tap: add B
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vault_of_whispers.jpg
+End

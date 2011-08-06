@@ -1,0 +1,9 @@
+Name:Unhinge
+ManaCost:2 B
+Types:Sorcery
+Text:no text
+K:spDiscardTgt:TgtChoose:1:Target player discards a card.:Unhinge - target player discards a card
+K:Draw a card.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/unhinge.jpg
+End

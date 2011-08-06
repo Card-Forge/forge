@@ -1,0 +1,9 @@
+Name:Veteran Armorer
+ManaCost:1 W
+Types:Creature Human Soldier
+Text:All creatures you control get +0/+1.
+PT:2/1
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87950.jpg
+End

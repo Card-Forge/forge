@@ -1,0 +1,9 @@
+Name:Volcanic Island
+ManaCost:no cost
+Types:Land Mountain Island
+Text:no text
+K:tap: add U
+K:tap: add R
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_island.jpg
+End

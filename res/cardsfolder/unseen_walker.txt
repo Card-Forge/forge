@@ -1,0 +1,10 @@
+Name:Unseen Walker
+ManaCost:1 G
+Types:Creature Dryad
+Text:no text
+PT:1/1
+K:Forestwalk
+K:abPumpTgtC 1 G G:Forestwalk
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/unseen_walker.jpg
+End

@@ -1,0 +1,8 @@
+Name:Voidslime
+ManaCost:G U U
+Types:Instant
+Text:Counter target spell, activated ability, or triggered ability.
+K:spCounter:SpellOrAbility:None:Graveyard:None
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/voidslime.jpg
+End

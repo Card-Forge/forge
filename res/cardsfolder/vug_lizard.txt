@@ -1,0 +1,10 @@
+Name:Vug Lizard
+ManaCost:1 R R
+Types:Creature Lizard
+Text:no text
+PT:3/4
+K:Mountainwalk
+K:Echo:1 R R
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vug_lizard.jpg
+End

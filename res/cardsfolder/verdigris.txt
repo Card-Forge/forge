@@ -1,0 +1,8 @@
+Name:Verdigris
+ManaCost:2 G
+Types:Instant
+Text:Destroy target artifact.
+K:spDestroyTgt:Artifact
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/verdigris.jpg
+End

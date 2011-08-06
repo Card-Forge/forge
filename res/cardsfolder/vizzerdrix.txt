@@ -1,0 +1,8 @@
+Name:Vizzerdrix
+ManaCost:6 U
+Types:Creature Rabbit Beast
+Text:no text
+PT:6/6
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card94911.jpg
+End

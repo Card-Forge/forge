@@ -1,0 +1,9 @@
+Name:Vexing Beetle
+ManaCost:4 G
+Types:Creature Insect
+Text:Vexing Beetle gets +3/+3 as long as no opponent controls a creature.
+PT:3/3
+K:CARDNAME can't be countered.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vexing_beetle.jpg
+End

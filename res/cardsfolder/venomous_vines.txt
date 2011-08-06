@@ -1,0 +1,8 @@
+Name:Venomous Vines
+ManaCost:2 G G
+Types:Sorcery
+Text:Destroy target enchanted permanent.
+K:spDestroyTgt:Permanent.enchanted
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/venomous_vines.jpg
+End

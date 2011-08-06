@@ -1,0 +1,9 @@
+Name:Uthden Troll
+ManaCost:2 R
+Types:Creature Troll
+Text:no text
+PT:2/2
+K:RegenerateMe:R
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/uthden_troll.jpg
+End

@@ -1,0 +1,8 @@
+Name:Urza's Factory
+ManaCost:no cost
+Types:Land Urza's
+Text:no text
+K:tap: add 1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_factory.jpg
+End

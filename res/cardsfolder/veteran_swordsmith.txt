@@ -1,0 +1,9 @@
+Name:Veteran Swordsmith
+ManaCost:2 W
+Types:Creature Human Soldier
+Text:Other Soldier creatures you control get +1/+0.
+PT:3/2
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_swordsmith.jpg
+End

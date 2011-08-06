@@ -1,0 +1,10 @@
+Name:Vendilion Clique
+ManaCost:1 U U
+Types:Legendary Creature Faerie Wizard
+Text:When Vendilion Clique enters the battlefield, look at target player's hand. You may choose a nonland card from it. If you do, that player reveals the chosen card, puts it on the bottom of his or her library, then draws a card.
+PT:3/1
+K:Flying
+K:Flash
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vendilion_clique.jpg
+End

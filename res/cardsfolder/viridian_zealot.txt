@@ -1,0 +1,8 @@
+Name:Viridian Zealot
+ManaCost:G G
+Types:Creature Elf Warrior
+Text:no text
+PT:2/1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_zealot.jpg
+End

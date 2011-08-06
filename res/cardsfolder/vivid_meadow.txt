@@ -1,0 +1,8 @@
+Name:Vivid Meadow
+ManaCost:no cost
+Types:Land
+Text:CARDNAME enters the battlefield tapped with two charge counters on it.
+K:tap: add W
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vivid_meadow.jpg
+End

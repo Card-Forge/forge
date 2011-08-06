@@ -1,0 +1,9 @@
+Name:Volcanic Submersion
+ManaCost:4 R
+Types:Sorcery
+Text:Destroy target artifact or land.
+K:spDestroyTgt:Artifact,Land
+K:Cycling:2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_submersion.jpg
+End

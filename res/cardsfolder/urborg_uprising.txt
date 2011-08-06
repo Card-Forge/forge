@@ -1,0 +1,9 @@
+Name:Urborg Uprising
+ManaCost:4 B
+Types:Sorcery
+Text:no text
+K:spRaiseDead:2/Some
+K:Draw a card.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_uprising.jpg
+End

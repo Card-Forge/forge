@@ -1,0 +1,10 @@
+Name:Uncontrollable Anger
+ManaCost:2 R R
+Types:Enchantment Aura
+Text:Enchanted creature gets +2/+2 and attacks each turn if able.
+K:Enchant creature
+K:enPump:+2/+2/CARDNAME attacks each turn if able.
+K:Flash
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/uncontrollable_anger.jpg
+End

@@ -1,0 +1,8 @@
+Name:Valorous Charge
+ManaCost:1 W W
+Types:Sorcery
+Text:no text
+K:spAllPump:All/White:+2/+0:White creatures get +2/+0 until end of turn.:Valorous Charge - Creatures get +2/+0 until EOT
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4402.jpg
+End

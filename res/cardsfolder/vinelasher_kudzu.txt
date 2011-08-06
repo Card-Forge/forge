@@ -1,0 +1,10 @@
+Name:Vinelasher Kudzu
+ManaCost:1 G
+Types:Creature Plant
+Text:no text
+PT:1/1
+K:WheneverKeyword:EntersBattleField:Type/Land:Play:+1+1 Counters/1:Self:ASAP:No_Condition:Initiator - OwnedByController:Whenever a land enters the battlefield under your control, put a +1/+1 counter on Vinelasher Kudzu.
+K:SVar:BuffedBy:Land
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vinelasher_kudzu.jpg
+End

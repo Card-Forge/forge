@@ -1,0 +1,9 @@
+Name:Viashino Slasher
+ManaCost:1 R
+Types:Creature Viashino Warrior
+Text:no text
+PT:1/2
+K:abPump R:+1/-1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_slasher.jpg
+End

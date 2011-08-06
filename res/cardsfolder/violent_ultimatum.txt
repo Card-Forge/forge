@@ -1,0 +1,7 @@
+Name:Violent Ultimatum
+ManaCost:B B R R R G G
+Types:Sorcery
+Text:Destroy three target permanents.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/violent_ultimatum.jpg
+End

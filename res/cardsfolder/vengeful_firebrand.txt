@@ -1,0 +1,9 @@
+Name:Vengeful Firebrand
+ManaCost:3 R
+Types:Creature Elemental Warrior
+Text:(NOTE: "Vengeful Firebrand has haste as long as a Warrior card is in your graveyard." not implemented.)
+PT:5/2
+K:abPump R:+1/+0
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/vengeful_firebrand.jpg
+End

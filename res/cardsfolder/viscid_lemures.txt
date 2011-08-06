@@ -1,0 +1,9 @@
+Name:Viscid Lemures
+ManaCost:4 B
+Types:Creature Spirit
+Text:no text
+PT:4/3
+K:abPump 0:-1/-0/Swampwalk
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/viscid_lemures.jpg
+End

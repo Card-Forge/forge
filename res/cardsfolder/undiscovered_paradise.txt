@@ -1,0 +1,12 @@
+Name:Undiscovered Paradise
+ManaCost:no cost
+Types:Land
+Text:Whenever you tap CARDNAME for mana, return it to it's owner's hand during the controller's next untap phase.
+K:tap: add W
+K:tap: add U
+K:tap: add B
+K:tap: add R
+K:tap: add G
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/undiscovered_paradise.jpg
+End

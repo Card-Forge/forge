@@ -1,0 +1,10 @@
+Name:Viridian Lorebearers
+ManaCost:3 G
+Types:Creature Elf Shaman
+Text:no text
+PT:3/3
+K:abPumpTgtC 3 G T:+X/+X:Target creature gets +X/+X until end of turn, where X is the number of artifacts your opponents control.
+K:SVar:X:Count$TypeOppCtrl.Artifact
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_lorebearers.jpg
+End
