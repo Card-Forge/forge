@@ -1,0 +1,10 @@
+Name:Salvage Slasher
+ManaCost:1 B
+Types:Artifact Creature Human Rogue
+Text:no text
+PT:1/1
+K:stPumpSelf:Creature:X/0:no Condition:Salvage Slasher gets +1/+0 for each artifact card in your graveyard.
+SVar:X:Count$TypeInYourYard.Artifact
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/salvage_slasher.jpg
+End
