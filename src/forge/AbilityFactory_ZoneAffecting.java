@@ -52,6 +52,22 @@ public class AbilityFactory_ZoneAffecting {
 			
 			final AbilityFactory af = AF;
 			
+			@Override
+			public String getStackDescription(){
+				// when getStackDesc is called, just build exactly what is happening
+				Player player = af.getAbTgt() == null ? getActivatingPlayer() : getTargetPlayer(); 
+				StringBuilder sb = new StringBuilder();
+				
+				sb.append(getSourceCard().getName());
+				sb.append(" - ");
+				sb.append(player.toString());
+				sb.append(" draws (");
+				sb.append(af.getMapParams().get("NumCards"));
+				sb.append(")");
+				
+				return sb.toString();
+			}
+			
 			public boolean canPlay(){
 				// super takes care of AdditionalCosts
 				return super.canPlay();	
