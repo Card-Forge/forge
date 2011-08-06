@@ -2115,9 +2115,12 @@ public class GameActionUtil {
 						}
 
 					}; // ability2
-
-					ability2.setStackDescription(card.getName() + " - " + c.getController()
-							+ " played a red spell, remove a -1/-1 counter from Belligerent Hatchling.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - ").append(c.getController());
+					sb.append(" played a red spell, remove a -1/-1 counter from Belligerent Hatchling.");
+					ability2.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability2);
 				}
 			}//if
@@ -2134,9 +2137,12 @@ public class GameActionUtil {
 					}
 
 				}; // ability
-
-				ability.setStackDescription(card.getName() + " - " + c.getController()
-						+ " played a white spell, remove a -1/-1 counter from Belligerent Hatchling.");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - ").append(c.getController());
+				sb.append(" played a white spell, remove a -1/-1 counter from Belligerent Hatchling.");
+				ability.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability);
 			}
 		}//if
@@ -2166,9 +2172,12 @@ public class GameActionUtil {
 						}
 
 					}; // ability2
-
-					ability2.setStackDescription(card.getName() + " - " + c.getController()
-							+ " played a black spell, remove a -1/-1 counter from Noxious Hatchling.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - ").append(c.getController());
+					sb.append(" played a black spell, remove a -1/-1 counter from Noxious Hatchling.");
+					ability2.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability2);
 				}
 			}//if
@@ -2185,9 +2194,12 @@ public class GameActionUtil {
 					}
 
 				}; // ability
-
-				ability.setStackDescription(card.getName() + " - " + c.getController()
-						+ " played a green spell, remove a -1/-1 counter from Noxious Hatchling.");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - ").append(c.getController());
+				sb.append(" played a green spell, remove a -1/-1 counter from Noxious Hatchling.");
+				ability.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability);
 			}
 		}//if
@@ -2217,9 +2229,12 @@ public class GameActionUtil {
 						}
 
 					}; // ability2
-
-					ability2.setStackDescription(card.getName() + " - " + c.getController()
-							+ " played a blue spell, remove a -1/-1 counter from Sturdy Hatchling.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - ").append(c.getController());
+					sb.append(" played a blue spell, remove a -1/-1 counter from Sturdy Hatchling.");
+					ability2.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability2);
 				}
 			}//if
@@ -2236,9 +2251,12 @@ public class GameActionUtil {
 					}
 
 				}; // ability
-
-				ability.setStackDescription(card.getName() + " - " + c.getController()
-						+ " played a green spell, remove a -1/-1 counter from Sturdy Hatchling.");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - ").append(c.getController());
+				sb.append(" played a green spell, remove a -1/-1 counter from Sturdy Hatchling.");
+				ability.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability);
 			}
 		}//if
@@ -2268,9 +2286,12 @@ public class GameActionUtil {
 						}
 
 					}; // ability2
-
-					ability2.setStackDescription(card.getName() + " - " + c.getController()
-							+ " played a black spell, remove a -1/-1 counter from Voracious Hatchling.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - ").append(c.getController());
+					sb.append(" played a black spell, remove a -1/-1 counter from Voracious Hatchling.");
+					ability2.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability2);
 				}
 			}//if
@@ -2287,9 +2308,12 @@ public class GameActionUtil {
 					}
 
 				}; // ability
-
-				ability.setStackDescription(card.getName() + " - " + c.getController()
-						+ " played a white spell, remove a -1/-1 counter from Voracious Hatchling.");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - ").append(c.getController());
+				sb.append(" played a white spell, remove a -1/-1 counter from Voracious Hatchling.");
+				ability.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability);
 			}
 		}//if
@@ -2330,9 +2354,12 @@ public class GameActionUtil {
 					}
 
 				}; // ability2
-
-				ability2.setStackDescription(card.getName() + " - " + c.getController()
-						+ " played a spell, you may put two +1/+1 counters on Witch-Maw Nephilim.");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - ").append(c.getController());
+				sb.append(" played a spell, you may put two +1/+1 counters on Witch-Maw Nephilim.");
+				ability2.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability2);
 			}
 		}
@@ -2370,9 +2397,12 @@ public class GameActionUtil {
 					}
 
 				}; // ability2
-
-				ability2.setStackDescription(card.getName() + " - " + c.getController()
-						+ " played an instant or sorcery spell, you may untap Gelectrode.");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - ").append(c.getController());
+				sb.append(" played an instant or sorcery spell, you may untap Gelectrode.");
+				ability2.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability2);
 			}
 		}
@@ -2401,7 +2431,8 @@ public class GameActionUtil {
                             title.append("Cinder Pyromancer Ability");
                             StringBuilder message = new StringBuilder();
                             message.append("Will you untap your Cinder Pyromancer?");
-                            int choice = JOptionPane.showConfirmDialog(null, message.toString(), title.toString(), JOptionPane.YES_NO_OPTION);
+                            int choice = JOptionPane.showConfirmDialog(
+                            		null, message.toString(), title.toString(), JOptionPane.YES_NO_OPTION);
                             
                             if (choice == JOptionPane.YES_OPTION) {
                                 card.untap();
@@ -2415,7 +2446,8 @@ public class GameActionUtil {
                 };// ability2
                 
                 StringBuilder sb = new StringBuilder();
-                sb.append(card.getName()).append(" - ").append(c.getController()).append(" played a red spell, you may untap Cinder Pyromancer.");
+                sb.append(card.getName()).append(" - ").append(c.getController());
+                sb.append(" played a red spell, you may untap Cinder Pyromancer.");
                 ability2.setStackDescription(sb.toString());
                 AllZone.Stack.add(ability2);
             }
@@ -2444,8 +2476,12 @@ public class GameActionUtil {
 				}
 			}; // ability2
 			if(!(card.getController().equals(c.getController()))) {
-				ability2.setStackDescription(card.getName() + " - " + c.getController() + " played a spell, "
-						+ drawer + " draws seven cards.");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - ").append(c.getController());
+				sb.append(" played a spell, ").append(drawer).append(" draws seven cards.");
+				ability2.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability2);
 			}
 		}
@@ -2475,9 +2511,12 @@ public class GameActionUtil {
 					drawer.drawCards(3);
 				}
 			}; // ability2
-
-			ability2.setStackDescription(card.getName() + " - " + c.getController() + " played a spell, " + drawer
-					+ " draws three cards.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(card.getName()).append(" - ").append(c.getController());
+			sb.append(" played a spell, ").append(drawer).append(" draws three cards.");
+			ability2.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability2);
 
 		}
@@ -2521,10 +2560,13 @@ public class GameActionUtil {
 				}
 			}; // ability2
 			if(!(card.getController().equals(c.getController()))) {
-				ability2.setStackDescription(card.getName() + " - " + c.getController() + " played a spell, "
-						+ drawer + " puts the top two cards of his or her library into his or her graveyard.");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - ").append(c.getController()).append(" played a spell, ");
+				sb.append(drawer).append(" puts the top two cards of his or her library into his or her graveyard.");
+				ability2.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability2);
-
 			}
 		}
 	}
@@ -2550,9 +2592,12 @@ public class GameActionUtil {
 					controller.gainLife(1);
 				}
 			}; // ability2
-
-			ability2.setStackDescription(card.getName() + " - " + c.getController() + " played a black spell, "
-					+ card.getController() + " gains 1 life.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(card.getName()).append(" - ").append(c.getController());
+			sb.append(" played a black spell, ").append(card.getController()).append(" gains 1 life.");
+			ability2.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability2);
 		}
 
@@ -2610,13 +2655,14 @@ public class GameActionUtil {
                 
                 StringBuilder sb = new StringBuilder();
                 sb.append(card.getName()).append(" - ").append(c.getController()).append(" plays an enchantment spell and ");
-                if (card.getName().equals("Verduran Enchantress") || card.getName().equals("Mesa Enchantress")
+                
+                if (card.getName().equals("Verduran Enchantress") 
+                		|| card.getName().equals("Mesa Enchantress")
                 		|| card.getName().equals("Kor Spiritdancer")) {
                     sb.append("may draw a card.");
                 } else {
                     sb.append("draws a card.");
                 }
-                
                 ability2.setStackDescription(sb.toString());
                 AllZone.Stack.add(ability2);
             }// for
@@ -2642,9 +2688,12 @@ public class GameActionUtil {
 						card.getController().drawCard();
 					}
 				}; // ability2
-
-				ability2.setStackDescription(card.getName() + " - " + c.getController()
-						+ " plays a Druid spell and draws a card");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - ").append(c.getController());
+				sb.append(" plays a Druid spell and draws a card");
+				ability2.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability2);
 
 			} // for
@@ -2669,9 +2718,12 @@ public class GameActionUtil {
 						card.getController().drawCard();
 					}
 				}; // ability2
-
-				ability2.setStackDescription(card.getName() + " - " + c.getController()
-						+ " plays a Legendary spell and draws a card");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - ").append(c.getController());
+				sb.append(" plays a Legendary spell and draws a card");
+				ability2.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability2);
 
 			} // for
