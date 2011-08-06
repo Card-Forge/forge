@@ -6714,7 +6714,7 @@ public class CardFactory implements NewConstants {
 
         	SpUntapTgt.setBeforePayMana(InGetTarget);
 
-        	//SpUntapTgt.setDescription(spDesc[0]);
+        	SpUntapTgt.setDescription(spDesc[0]);
         	card.addSpellAbility(SpUntapTgt);
         	card.setSVar("PlayMain1", "TRUE");
         }//End spUntapTgt
