@@ -4921,6 +4921,7 @@ res/cardsfolder/water_wurm.txt -text svneol=native#text/plain
 res/cardsfolder/waterfront_bouncer.txt -text svneol=native#text/plain
 res/cardsfolder/watery_grave.txt -text svneol=native#text/plain
 res/cardsfolder/waveskimmer_aven.txt -text svneol=native#text/plain
+res/cardsfolder/wayfaring_giant.txt -text svneol=native#text/plain
 res/cardsfolder/waylay.txt -text svneol=native#text/plain
 res/cardsfolder/wayward_soul.txt -text svneol=native#text/plain
 res/cardsfolder/weakness.txt -text svneol=native#text/plain
@@ -5482,6 +5483,7 @@ res/quest/themes/Flying[!!-~]W.thm -text
 res/quest/themes/Flying[!!-~]WR.thm -text
 res/quest/themes/Flying[!!-~]WU.thm -text
 res/quest/themes/Giants[!!-~]R.thm -text
+res/quest/themes/Giants[!!-~]WR.thm -text
 res/quest/themes/Goblins[!!-~]BR.thm -text
 res/quest/themes/Goblins[!!-~]R.thm -text
 res/quest/themes/Indestructibility[!!-~]WB.thm -text
