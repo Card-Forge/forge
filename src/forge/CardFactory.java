@@ -21366,6 +21366,65 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
+        else if (cardName.equals("Haunting Misery"))
+        {
+        	final SpellAbility spell = new Spell(card){
+				private static final long serialVersionUID = 6867051257656060195L;
+
+				@Override
+				public void resolve() {
+					String player = card.getController();
+					String tPlayer = getTargetPlayer();
+					PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+					CardList graveList = new CardList(grave.getCards());
+					
+					graveList = graveList.getType("Creature");
+					
+					int size = graveList.size();
+					int damage = 0;
+					
+					if( player.equals(Constant.Player.Human)) {
+						for(int i = 0; i < size; i++) {
+							Object o = AllZone.Display.getChoice("Remove from game", graveList.toArray());
+							if(o == null) break;
+							damage++;	// tally up how many cards removed
+							Card c_1 = (Card) o;
+							graveList.remove(c_1); //remove from the display list
+							AllZone.GameAction.removeFromGame(c_1);
+						}
+					}
+					else { //Computer
+						// it would be nice if the computer chose vanilla creatures over 
+						for(int j = 0; j < size; j++) {
+							AllZone.GameAction.removeFromGame(graveList.get(j));
+						}
+					}
+					AllZone.GameAction.addDamage(tPlayer, card, damage);
+				}
+				
+				@Override
+        		public void chooseTargetAI() {
+        			setTargetPlayer(Constant.Player.Human);
+        		}//chooseTargetAI()
+				
+				@Override
+        		public boolean canPlayAI() {
+        			String player = getTargetPlayer();
+        			PlayerZone grave = AllZone.getZone(Constant.Zone.Library, player);
+        			CardList graveList = new CardList(grave.getCards());
+        			graveList = graveList.getType("Creature");
+        			int humanLife = AllZone.Human_Life.getLife();
+
+        			return (graveList.size() > 5 || graveList.size() > humanLife);
+        		}
+        	};
+        	
+        	spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
         else if (cardName.equals("Perish the Thought")) {
         	final SpellAbility spell = new Spell(card){
         		private static final long serialVersionUID = -3317966427398220444L;
