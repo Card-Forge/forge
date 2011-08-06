@@ -5,8 +5,55 @@ class CardFactory_Lands {
 	
 //	    computer plays 2 land of these type instead of just 1 per turn
 
-	    //*************** START *********** START **************************
-	    //Ravinca Duel Lands
+	    
+		//*************** START *********** START **************************
+		if(cardName.equals("Oran-Rief, the Vastwood"))
+		{
+			card.clearSpellKeepManaAbility();
+			
+			final CardListFilter targets = new CardListFilter()
+			{
+
+				public boolean addCard(Card c) {
+					return AllZone.GameAction.isCardInPlay(c) && c.isCreature()
+						&& c.getTurnInZone() == AllZone.Phase.getTurn()
+						&& CardUtil.getColors(c).contains(Constant.Color.Green);
+				}
+				
+			};
+			Ability_Tap ability = new Ability_Tap(card)
+			{
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1416258136308898492L;
+
+				CardList inPlay = new CardList();
+				public boolean canPlayAI()
+				{
+					if(!(AllZone.Phase.getPhase().equals(Constant.Phase.Main1)
+					  && AllZone.Phase.getActivePlayer().equals(Constant.Player.Computer)))
+						return false;
+					inPlay.clear();
+					inPlay.addAll(AllZone.Computer_Play.getCards());
+					return (inPlay.filter(targets).size() > 1);
+				}
+				public void resolve() {
+					inPlay.clear();
+					inPlay.addAll(AllZone.Human_Play.getCards());
+					inPlay.addAll(AllZone.Computer_Play.getCards());
+					for(Card targ : inPlay.filter(targets))
+						targ.addCounter(Counters.P1P1, 1);
+				}
+			};
+			ability.setDescription("tap: Put a +1/+1 counter on each green creature that entered the battlefield this turn.");
+			ability.setStackDescription("Put a +1/+1 counter on each green creature that entered the battlefield this turn.");
+			card.addSpellAbility(ability);
+		}
+		//*************** END ************ END **************************
+	    
+		//*************** START *********** START **************************
+		//Ravinca Dual Lands
 	    if(cardName.equals("Blood Crypt") || cardName.equals("Breeding Pool") || cardName.equals("Godless Shrine") || cardName.equals("Hallowed Fountain") || cardName.equals("Overgrown Tomb") || cardName.equals("Sacred Foundry") || cardName.equals("Steam Vents") || cardName.equals("Stomping Ground") || cardName.equals("Temple Garden") || cardName.equals("Watery Grave"))
 	    {
 	      //if this isn't done, computer plays more than 1 copy

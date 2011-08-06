@@ -278,7 +278,7 @@ public class Card extends MyObservable
       //presumes the first SpellAbility added to this card, is the "main" spell
       //skip the first SpellAbility for creatures, since it says "Summon this creature"
       //looks bad on the Gui card detail
-      if(isPermanent() && i != 0 && !(manaAbility.contains(sa[i]) && ((Ability_Mana) sa[i]).isBasic()))//prevent mana ability duplication
+      if(isPermanent() && (isLand() || i != 0) && !(manaAbility.contains(sa[i]) && ((Ability_Mana) sa[i]).isBasic()))//prevent mana ability duplication
         s += sa[i].toString() +"\r\n";
     }
 

@@ -123,6 +123,13 @@ public class CardUtil {
                 break;
             }
         }
+        for(String kw : c.getKeyword())
+        	if(kw.startsWith(c.getName()+" is "))
+        		for(String color : Constant.Color.Colors)
+        			if(kw.endsWith(color+"."))
+        				colors.add(color);
+        if(colors.contains(Constant.Color.Colorless))
+        	colors.clear();
         if(colors.isEmpty()) colors.add(Constant.Color.Colorless);
         
         return new ArrayList<String>(colors);

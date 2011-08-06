@@ -1,3 +1,21 @@
+Transguild Courier
+4
+Artifact Creature Golem
+no text
+3/3
+Transguild courier is white.
+Transguild courier is blue.
+Transguild courier is black.
+Transguild courier is red.
+Transguild courier is green.
+
+Oran-Rief, the Vastwood
+no cost
+Land
+no text
+tap: add G
+Comes into play tapped.
+
 Sek'Kuar, Deathkeeper 
 2 B R G
 Legendary Creature Orc Shaman
@@ -6402,8 +6420,9 @@ spDamageCP:3
 Ghostfire
 2 R
 Instant
-Ghostfire is colorless. (NOTE: This card is currently treated as red.) 
+no text
 spDamageCP:3
+Ghostfire is colorless.
 
 Lightning Blast
 3 R
@@ -11497,6 +11516,7 @@ Land Creature Forest Dryad
 no text
 1/1
 tap: add G
+Dryad Arbor is green.
 
 Sliversmith
 2
@@ -14167,14 +14187,16 @@ tap: add G
 Crimson Kobolds
 0
 Creature Kobold
-Crimson Kobolds is red. (NOTE: This card is currently treated as colorless.)
+no text
 0/1
+Crimson Kobolds is red.
 
 Crookshank Kobolds
 0
 Creature Kobold
-Crookshank Kobolds is red. (NOTE: This card is currently treated as colorless.)
+no text
 0/1
+Crookshank Kobolds is red.
 
 Cylian Elf
 1 G
@@ -14277,8 +14299,9 @@ Reach
 Kobolds of Kher Keep
 0
 Creature Kobold
-Kobolds of Kher Keep is red. (NOTE: This card is currently treated as colorless.)
+no text
 0/1
+Kobolds of Kher Keep is red.
 
 Leaden Myr
 2
