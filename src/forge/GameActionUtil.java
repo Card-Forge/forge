@@ -152,6 +152,22 @@ public class GameActionUtil {
 				AllZone.Stack.add(ability);
 			}//for
 		}
+		
+		if(c.getType().contains("Forest")) {
+			final String opponent = AllZone.GameAction.getOpponent(c.getController());
+			final CardList lifetaps = AllZoneUtil.getPlayerCardsInPlay(opponent, "Lifetap");
+			for(Card lifetap:lifetaps) {
+				Ability ability = new Ability(lifetap, "0") {
+					@Override
+					public void resolve() {
+						//Lifetap controller (opponent in this case) gains 1 life
+						AllZone.GameAction.addLife(opponent, 1);
+					}
+				};//Ability
+				ability.setStackDescription(lifetap.getName()+" - Forest was tapped, "+opponent+" gains 1 life.");
+				AllZone.Stack.add(ability);
+			}//for
+		}
 
 	}//end executeTapSideEffects()
 
