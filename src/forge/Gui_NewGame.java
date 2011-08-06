@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
@@ -91,6 +92,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     
     private Action                  LOOK_AND_FEEL_ACTION = new LookAndFeelAction(this);
     private Action                  DOWNLOAD_ACTION      = new DownloadAction();
+    private Action                  DOWNLOAD_ACTION_LQ      = new DownloadActionLQ();
     private Action                  CARD_SIZES_ACTION    = new CardSizesAction();
     private Action                  ABOUT_ACTION         = new AboutAction();
     
@@ -182,7 +184,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     
     private void setupMenu() {
         Action[] actions = {
-                LOOK_AND_FEEL_ACTION, DOWNLOAD_ACTION, CARD_SIZES_ACTION, ErrorViewer.ALL_THREADS_ACTION,
+                LOOK_AND_FEEL_ACTION, DOWNLOAD_ACTION,DOWNLOAD_ACTION_LQ, CARD_SIZES_ACTION, ErrorViewer.ALL_THREADS_ACTION,
                 ABOUT_ACTION};
         JMenu menu = new JMenu(ForgeProps.getLocalized(MENU.TITLE));
         for(Action a:actions)
@@ -634,9 +636,26 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         }
         
         public void actionPerformed(ActionEvent e) {
+        	
             Gui_DownloadPictures.startDownload(null);
         }
     }
+    
+ public static class DownloadActionLQ extends AbstractAction {
+   
+	private static final long serialVersionUID = -6234380664413874813L;
+
+		public DownloadActionLQ() {
+            super(ForgeProps.getLocalized(MENU_BAR.MENU.DOWNLOADLQ));
+        }
+        
+        public void actionPerformed(ActionEvent e) {
+        	
+            Gui_DownloadPictures_LQ.startDownload(null);
+        }
+    }
+    
+    
     
     public static class CardSizesAction extends AbstractAction {
         

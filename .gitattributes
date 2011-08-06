@@ -141,6 +141,7 @@ src/forge/Gui_DeckEditor.java -text svneol=native#text/plain
 src/forge/Gui_DeckEditorNew.java -text svneol=native#text/plain
 src/forge/Gui_DeckEditor_Menu.java svneol=native#text/plain
 src/forge/Gui_DownloadPictures.java svneol=native#text/plain
+src/forge/Gui_DownloadPictures_LQ.java -text svneol=native#text/plain
 src/forge/Gui_MultipleBlockers.java svneol=native#text/plain
 src/forge/Gui_NewGame.java svneol=native#text/plain
 src/forge/Gui_Quest.java svneol=native#text/plain
