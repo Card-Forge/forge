@@ -4019,6 +4019,7 @@ public class CardFactory implements NewConstants {
             
         }//while shouldModular
         
+
         int spike = hasKeyword(card, "Spike");
         if(spike != -1) {
             String parse = card.getKeyword().get(spike).toString();
@@ -4032,47 +4033,68 @@ public class CardFactory implements NewConstants {
                     + " (This enters the battlefield with "
                     + m
                     + " +1/+1 counters on it.)");
+            
             card.addComesIntoPlayCommand(new Command() {
-				private static final long serialVersionUID = -2292898970576123040L;
+                private static final long serialVersionUID = -2292898970576123040L;
 
-				public void execute() {
+                public void execute() {
                     card.addCounter(Counters.P1P1, m);
                 }
-            });
+            });//ComesIntoPlayCommand
             
             final SpellAbility ability = new Ability(card, "2") {
-                @Override
-                public void resolve() {
-	                if(card.getController().equals(Constant.Player.Computer)) {
-	                    CardList choices = new CardList(AllZone.Computer_Play.getCards()).filter(new CardListFilter() {
-	                        public boolean addCard(Card c) {
-	                            return c.isCreature();
-	                        }
-	                    });
-	                    if(choices.size() != 0) CardFactoryUtil.AI_getBestCreature(choices).addCounter(
-	                            Counters.P1P1, 1);
-	                } else {
-	                	Card c = getTargetCard();
-	                	c.addCounter(Counters.P1P1, 1);
-	                } 
-                }//resolve()
                 
                 @Override
                 public boolean canPlay() {
-                	// stack peek is needed to prevent Spike Feeder from trying to double activate
+                    // stack peek is needed to prevent Spike Feeder from trying to double activate
                     SpellAbility sa;
-                    for(int i = 0; i < AllZone.Stack.size(); i++) {
+                    for (int i = 0; i < AllZone.Stack.size(); i++) {
                         sa = AllZone.Stack.peek(i);
-                        if(sa.getSourceCard().equals(card)) return false;
+                        if (sa.getSourceCard().equals(card)) return false;
                     }
-                	return (card.getCounters(Counters.P1P1) > 0);
-                }
+                    return (card.getCounters(Counters.P1P1) > 0);
+                }//canPlay()
                 
-            };
+                @Override
+                public boolean canPlayAI() {
+                    return getCreature().size() != 0 
+                            && card.getCounters(Counters.P1P1) > 0 
+                            && !CardFactoryUtil.AI_doesCreatureAttack(card);
+                }//canPlayAI()
+                
+                @Override
+                public void chooseTargetAI() {
+                    Card best = CardFactoryUtil.AI_getBestCreature(getCreature());
+                    setTargetCard(best);
+                    card.subtractCounter(Counters.P1P1, 1);
+                }//chooseTargetAI()
+                
+                CardList getCreature() {
+                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isCreature() 
+                                    && CardFactoryUtil.canTarget(card, c) 
+                                    && c.getNetAttack() > card.getNetAttack()
+                                    && c != card;
+                        }
+                    });
+                    return list;
+                }//getCreature()
+                
+                @Override
+                public void resolve() {
+                    if (AllZone.GameAction.isCardInPlay(getTargetCard())
+                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                        getTargetCard().addCounter(Counters.P1P1, 1);
+                    }
+                }//resolve()
+            };//SpellAbility
+            
             Input target = new Input() {
-				private static final long serialVersionUID = 903928778649052032L;
+                private static final long serialVersionUID = 903928778649052032L;
 
-				@Override
+                @Override
                 public void showMessage() {
                     AllZone.Display.showMessage("Select target creature for " + card.getName());
                     ButtonUtil.enableOnlyCancel();
@@ -4085,24 +4107,26 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void selectCard(Card target, PlayerZone zone) {
-                	// Choose a legal target, then sacrifice a creature
-                    if(!CardFactoryUtil.canTarget(ability, target)) {
+                    // Choose a legal target, then remove a counter
+                    if (!CardFactoryUtil.canTarget(ability, target)) {
                         AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-                    } else if(target.isCreature() && zone.is(Constant.Zone.Play)) {
-                    	card.subtractCounter(Counters.P1P1, 1);
-                    	ability.setTargetCard(target);
+                    } else if (target.isCreature() && zone.is(Constant.Zone.Play)) {
+                        card.subtractCounter(Counters.P1P1, 1);
+                        ability.setTargetCard(target);
                         AllZone.Stack.add(ability);
                         AllZone.GameAction.checkStateEffects();
                         stop();
                     }
-                }
-            };//Input
+                }//selectCard()
+            };//Input()
             
             ability.setAfterPayMana(target);
-            ability.setStackDescription("Put a +1/+1 counter from " + card + " on target creature.");
+            StringBuffer sb = new StringBuffer();
+            sb.append("Put a +1/+1 counter from ").append(card.getName()).append(" on target creature.");
+            ability.setStackDescription(sb.toString());
             ability.setDescription("2, Remove a +1/+1 counter: Add a +1/+1 counter to target creature");
             card.addSpellAbility(ability);
-        } // if Spike 
+        } // if Spike
         
         
         if(hasKeyword(card, "1, Sacrifice CARDNAME: Draw a card.") != -1) {
