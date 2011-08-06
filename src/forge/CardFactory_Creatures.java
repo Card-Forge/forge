@@ -3,6 +3,7 @@ package forge;
 
 
 import java.util.ArrayList;
+import java.util.Stack;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -5428,6 +5429,64 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Jhoira of the Ghitu")) {
+            final Stack<Card> chosen= new Stack<Card>();
+            final SpellAbility ability = new Ability(card, "2") {
+                private static final long serialVersionUID = 4414609319033894302L;
+                @Override
+                public boolean canPlay() {
+                    CardList possible = new CardList(AllZone.getZone(Constant.Zone.Hand, card.getController()).getCards());
+                    possible.filter(new CardListFilter(){
+                    	public boolean addCard(Card c){
+                    		return !c.isLand();
+                    	}                    	
+                    });
+                    return !possible.isEmpty() && super.canPlay();
+                }
+                
+                /*@Override
+                public void chooseTargetAI() {
+                    CardList targets = new CardList(AllZone.Computer_Hand.getCards());
+                	CardListUtil.sortCMC(targets);
+                    Card c = targets.get(0);
+                    AllZone.GameAction.removeFromGame(c);
+                	chosen.push(c);
+                }*/
+                public boolean canPlayAI(){return false;}
+                
+                @Override
+                public void resolve() {
+                    Card c = chosen.pop();
+                    c.addCounter(Counters.TIME, 4);
+                    c.setSuspend(true);
+                }
+            };
+            
+            ability.setAfterPayMana(new Input() {
+                private static final long serialVersionUID = -1647181037510967127L;
+                
+                @Override
+                public void showMessage()
+                {
+                	ButtonUtil.disableAll();
+                    AllZone.Display.showMessage("Exile a nonland card from your hand.");
+                }
+                
+                @Override
+                public void selectCard(Card c, PlayerZone zone)
+                {
+                	if(zone.is(Constant.Zone.Hand) && !c.isLand())
+                	{
+                		AllZone.GameAction.removeFromGame(c);
+                		chosen.push(c);
+                		AllZone.Stack.add(ability);
+                        stopSetNext(new ComputerAI_StackNotEmpty());
+                	}
+                }
+            });
+            card.addSpellAbility(ability);
+        }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
         else if(cardName.equals("Mindwrack Liege")) {

@@ -1907,6 +1907,7 @@ res/cardsfolder/jet_medallion.txt -text svneol=native#text/plain
 res/cardsfolder/jhessian_infiltrator.txt -text svneol=native#text/plain
 res/cardsfolder/jhessian_lookout.txt -text svneol=native#text/plain
 res/cardsfolder/jhessian_zombies.txt -text svneol=native#text/plain
+res/cardsfolder/jhoira_of_the_ghitu.txt svneol=native#text/plain
 res/cardsfolder/jhovall_queen.txt -text svneol=native#text/plain
 res/cardsfolder/jhovall_rider.txt -text svneol=native#text/plain
 res/cardsfolder/jodahs_avenger.txt -text svneol=native#text/plain
