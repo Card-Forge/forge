@@ -1,0 +1,11 @@
+Name:Oboro Breezecaller
+ManaCost:1 U
+Types:Creature Moonfolk Wizard
+Text:no text
+PT:1/1
+K:Flying
+K:abUntapTgt 2 Return<1/Land>:Land:Untap target land.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/oboro_breezecaller.jpg
+End
