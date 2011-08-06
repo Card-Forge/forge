@@ -2564,6 +2564,7 @@ res/cardsfolder/forest_bear.txt -text svneol=native#text/plain
 res/cardsfolder/forethought_amulet.txt -text svneol=native#text/plain
 res/cardsfolder/forfend.txt svneol=native#text/plain
 res/cardsfolder/forge_armor.txt -text svneol=native#text/plain
+res/cardsfolder/forgotten_ancient.txt -text svneol=native#text/plain
 res/cardsfolder/forgotten_cave.txt -text svneol=native#text/plain
 res/cardsfolder/forgotten_harvest.txt svneol=native#text/plain
 res/cardsfolder/fork.txt -text svneol=native#text/plain
