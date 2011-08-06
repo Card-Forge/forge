@@ -967,10 +967,7 @@ public class Card extends MyObservable {
             		&& 
             		!keyword.get(i).toString().contains("CantBeBlockedBy"))
             	{
-                if (keyword.get(i).toString().contains("WheneverKeyword")) {
-                    String k[] = keyword.get(i).split(":");
-                    sbLong.append(k[9]).append("\r\n");
-                } else if (keyword.get(i).toString().contains("StaticEffect")) {
+                if (keyword.get(i).toString().contains("StaticEffect")) {
                     String k[] = keyword.get(i).split(":");
                     sbLong.append(k[5]).append("\r\n");
                 } else if (keyword.get(i).toString().contains("stPump")) {

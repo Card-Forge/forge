@@ -34,8 +34,6 @@ public class GameActionUtil {
 		upkeep_MagusTabernacleUpkeepCost();
 		// upkeep_CheckEmptyDeck_Lose(); //still a little buggy
 		
-		AllZone.GameAction.checkWheneverKeyword(AllZone.CardFactory.HumanNullCard, "BeginningOfUpkeep", null);
-		
 		upkeep_The_Abyss();
 		upkeep_All_Hallows_Eve();
 		upkeep_Mana_Vortex();
@@ -137,8 +135,6 @@ public class GameActionUtil {
 		playCard_Curse_of_Wizardry(c);
 		playCard_Venser_Emblem(c);
 		playCard_Presence_of_the_Master(c);
-		
-		AllZone.GameAction.checkWheneverKeyword(c,"CastSpell",null);
 
 	}
 	
@@ -2372,13 +2368,6 @@ public class GameActionUtil {
     {
     	if (damage <= 0) return;
     	
-    	Object[] DealsDamage_Whenever_Parameters = new Object[3];
-    	DealsDamage_Whenever_Parameters[2] = c;
-    	DealsDamage_Whenever_Parameters[0] = player;
-    	AllZone.GameAction.checkWheneverKeyword(c, "DealsDamage/Player", DealsDamage_Whenever_Parameters);
-    	if(!c.getController().equals(player))
-    		AllZone.GameAction.checkWheneverKeyword(c, "DealsDamage/Opponent", DealsDamage_Whenever_Parameters);
-    	
 		CardList playerPerms = AllZoneUtil.getPlayerCardsInPlay(player);
 		
 		/*
@@ -2471,12 +2460,6 @@ public class GameActionUtil {
 	public static void executeCombatDamageToPlayerEffects(final Player player, final Card c, final int damage) {
 		
 		if (damage <= 0) return;
-		
-		// Whenever Keyword
-    	Object[] DealsDamage_Whenever_Parameters = new Object[3];
-    	DealsDamage_Whenever_Parameters[0] = c.getController().getOpponent();
-    	DealsDamage_Whenever_Parameters[2] = c;
-    	AllZone.GameAction.checkWheneverKeyword(c, "DealsCombatDamage/Opponent", DealsDamage_Whenever_Parameters);
     	
     	if(c.isCreature() && AllZoneUtil.isCardInPlay("Contested War Zone", player)) {
     		CardList zones = AllZoneUtil.getPlayerCardsInPlay(player, "Contested War Zone");

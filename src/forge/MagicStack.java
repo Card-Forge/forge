@@ -22,14 +22,14 @@ import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCost_Ability;
 
 public class MagicStack extends MyObservable {
-    private ArrayList<SpellAbility> simultaneousStackEntryList = new ArrayList<SpellAbility>();
+	private ArrayList<SpellAbility> simultaneousStackEntryList = new ArrayList<SpellAbility>();
 
 	private ArrayList<SpellAbility> stack = new ArrayList<SpellAbility>();
 	private ArrayList<SpellAbility> frozenStack = new ArrayList<SpellAbility>();
 	private boolean frozen = false;
-    private boolean bResolving = false;
-    private boolean splitSecondOnStack = false;
-    
+	private boolean bResolving = false;
+	private boolean splitSecondOnStack = false;
+
 	public boolean isFrozen() {
 		return frozen;
 	}
@@ -45,11 +45,11 @@ public class MagicStack extends MyObservable {
 		frozenStack.clear();
 		this.updateObservers();
 	}
-	
+
 	public boolean isSplitSecondOnStack() {
 		return splitSecondOnStack;
 	}
-	
+
 	public void setSplitSecondOnStack() {
 		for(SpellAbility sa:stack) {
 			if(sa.getSourceCard().hasKeyword("Split second")) {
@@ -73,7 +73,7 @@ public class MagicStack extends MyObservable {
 		// triggered abilities should go on the frozen stack
 		if (!ability.isTrigger())
 			frozen = false;
-		
+
 		this.add(ability);
 
 		// if the ability is a spell, but not a copied spell and its not already on the stack zone, move there
@@ -104,15 +104,15 @@ public class MagicStack extends MyObservable {
 		frozen = false;
 		frozenStack.clear();
 	}
-	
-    public void setResolving(boolean b) { bResolving = b; }
-    public boolean getResolving() { return bResolving; }
+
+	public void setResolving(boolean b) { bResolving = b; }
+	public boolean getResolving() { return bResolving; }
 
 	public void add(SpellAbility sp, boolean useX) {
 		if (!useX)
 			this.add(sp);
 		else {
-			
+
 			// TODO make working triggered abilities!
 			if (sp instanceof Ability_Mana || sp instanceof Ability_Triggered)
 				sp.resolve();
@@ -129,20 +129,20 @@ public class MagicStack extends MyObservable {
 		String[] Numbers = new String[Max];
 		for (int no = 0; no < Max; no++)
 			Numbers[no] = String.valueOf(no);
-		
+
 		ManaCost manaCost = new ManaCost(sa.getManaCost());
 		String Mana = manaCost.toString();
-		
+
 		int MultiKickerPaid = AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid;
-		
+
 		String Number_ManaCost = " ";
-		
+
 		if (Mana.toString().length() == 1)
 			Number_ManaCost = Mana.toString().substring(0, 1);
-		
+
 		else if (Mana.toString().length() == 0)
 			Number_ManaCost = "0"; // Should Never Occur
-		
+
 		else
 			Number_ManaCost = Mana.toString().substring(0, 2);
 		Number_ManaCost = Number_ManaCost.trim();
@@ -170,11 +170,11 @@ public class MagicStack extends MyObservable {
 
 		for (int Colored_Cut = 0; Colored_Cut < Color_cut.length(); Colored_Cut++) {
 			if ("WUGRB".contains(Color_cut.substring(Colored_Cut, Colored_Cut + 1))) {
-				
+
 				if (!Mana.equals(Mana.replaceFirst((Color_cut.substring(Colored_Cut, Colored_Cut + 1)), ""))) {
 					Mana = Mana.replaceFirst(Color_cut.substring(Colored_Cut, Colored_Cut + 1), "");
 					AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid_Colored = AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid_Colored
-							.replaceFirst(Color_cut.substring(Colored_Cut, Colored_Cut + 1), "");
+					.replaceFirst(Color_cut.substring(Colored_Cut, Colored_Cut + 1), "");
 					Mana = Mana.trim();
 					if (Mana.equals(""))
 						Mana = "0";
@@ -185,7 +185,7 @@ public class MagicStack extends MyObservable {
 
 		return manaCost;
 	}
-	
+
 	//TODO - this may be able to use a straight copy of MultiKicker cost change
 	public ManaCost getReplicateSpellCostChange(SpellAbility sa) {
 		ManaCost manaCost = new ManaCost(sa.getManaCost());
@@ -211,302 +211,273 @@ public class MagicStack extends MyObservable {
 			sp.setActivatingPlayer(sp.getSourceCard().getController());
 			System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
 		}
-		
+
 		if (AllZone.Phase.is(Constant.Phase.Cleanup)){	// If something triggers during Cleanup, need to repeat
 			AllZone.Phase.repeatPhase();
 		}
-		
+
 		// TODO: triggered abilities need to be fixed 
 		if (!(sp instanceof Ability_Triggered || sp instanceof Ability_Static))	
 			AllZone.Phase.setPriority(sp.getActivatingPlayer());	// when something is added we need to setPriority
-				
-		// WheneverKeyword Test
-		boolean ActualEffectTriggered = false;
-		if (sp.getSourceCard().getKeyword().toString().contains("WheneverKeyword")) {
-			ArrayList<String> a = sp.getSourceCard().getKeyword();
-			int WheneverKeywords = 0;
-			int WheneverKeyword_Number[] = new int[a.size()];
-			
-			for (int x = 0; x < a.size(); x++)
-				if (a.get(x).toString().startsWith("WheneverKeyword")) {
-					WheneverKeyword_Number[WheneverKeywords] = x;
-					WheneverKeywords = WheneverKeywords + 1;
-				}
 
-			for (int CKeywords = 0; CKeywords < WheneverKeywords; CKeywords++) {
-				String parse = sp.getSourceCard().getKeyword().get(
-						WheneverKeyword_Number[CKeywords]).toString();
-				String k[] = parse.split(":");
-				if (k[1].equals("ActualSpell")
-						&& ActualEffectTriggered == false) {
-					AllZone.GameAction.checkWheneverKeyword(sp.getSourceCard(),"ActualSpell", null);
-					sp.getSourceCard().removeIntrinsicKeyword(parse);
-					ActualEffectTriggered = true;
-				}
+		if (sp instanceof Ability_Triggered || sp instanceof Ability_Static)
+			// TODO make working triggered ability
+			sp.resolve();
+		else {
+			if (sp.isKickerAbility()) {
+				sp.getSourceCard().setKicked(true);
+				SpellAbility[] sa = sp.getSourceCard().getSpellAbility();
+				int AbilityNumber = 0;
+
+				for (int i = 0; i < sa.length; i++)
+					if (sa[i] == sp)
+						AbilityNumber = i;
+
+				sp.getSourceCard().setAbilityUsed(AbilityNumber);
+			}
+			if (sp.getSourceCard().isCopiedSpell())
+				push(sp);
+
+			else if (!sp.isMultiKicker() && !sp.isReplicate() && !sp.isXCost()) {
+				push(sp);
 			}
 
-		}
-		if (!ActualEffectTriggered) {
-			// // WheneverKeyword Test: Added one } at end
-			if (sp instanceof Ability_Triggered || sp instanceof Ability_Static)
-				// TODO make working triggered ability
-				sp.resolve();
-			else {
-				if (sp.isKickerAbility()) {
-					sp.getSourceCard().setKicked(true);
-					SpellAbility[] sa = sp.getSourceCard().getSpellAbility();
-					int AbilityNumber = 0;
-					
-					for (int i = 0; i < sa.length; i++)
-						if (sa[i] == sp)
-							AbilityNumber = i;
-					
-					sp.getSourceCard().setAbilityUsed(AbilityNumber);
-				}
-				if (sp.getSourceCard().isCopiedSpell())
-					push(sp);
-				
-				else if (!sp.isMultiKicker() && !sp.isReplicate() && !sp.isXCost()) {
-					push(sp);
-				}
-				
-				else if (sp.getPayCosts() != null && ! sp.isReplicate()){
-					push(sp);
-				}
-				
-				else if (sp.isXCost()) {
-					// TODO: convert any X costs to use abCost so it happens earlier
-					final SpellAbility sa = sp;
-					final Ability ability = new Ability(sp.getSourceCard(), sa.getXManaCost()) {
-						public void resolve() {
-							Card crd = this.getSourceCard();
-							crd.addXManaCostPaid(1);
-						}
-					};
+			else if (sp.getPayCosts() != null && ! sp.isReplicate()){
+				push(sp);
+			}
 
-					final Command unpaidCommand = new Command() {
-						private static final long serialVersionUID = -3342222770086269767L;
+			else if (sp.isXCost()) {
+				// TODO: convert any X costs to use abCost so it happens earlier
+				final SpellAbility sa = sp;
+				final Ability ability = new Ability(sp.getSourceCard(), sa.getXManaCost()) {
+					public void resolve() {
+						Card crd = this.getSourceCard();
+						crd.addXManaCostPaid(1);
+					}
+				};
 
-						public void execute() {
-							push(sa);
-						}
-					};
+				final Command unpaidCommand = new Command() {
+					private static final long serialVersionUID = -3342222770086269767L;
 
-					final Command paidCommand = new Command() {
-						private static final long serialVersionUID = -2224875229611007788L;
-
-						public void execute() {
-							ability.resolve();
-							Card crd = sa.getSourceCard();
-							AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Pay X cost for " + crd.getName()
-											 + " (X=" + crd.getXManaCostPaid() + ")\r\n", 
-													ability.getManaCost(), this, unpaidCommand, true));
-						}
-					};
-					
-					Card crd = sa.getSourceCard();
-					if (sp.getSourceCard().getController().isHuman()) {
-						AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Pay X cost for " +
-										sp.getSourceCard().getName() + " (X=" + crd.getXManaCostPaid() + ")\r\n", 
-												ability.getManaCost(), paidCommand, unpaidCommand, true));
-					} 
-					
-					else // computer
-					{
-						int neededDamage = CardFactoryUtil.getNeededXDamage(sa);
-
-						while (ComputerUtil.canPayCost(ability) && neededDamage != sa.getSourceCard().getXManaCostPaid()) {
-							ComputerUtil.playNoStack(ability);
-						}
+					public void execute() {
 						push(sa);
 					}
+				};
+
+				final Command paidCommand = new Command() {
+					private static final long serialVersionUID = -2224875229611007788L;
+
+					public void execute() {
+						ability.resolve();
+						Card crd = sa.getSourceCard();
+						AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Pay X cost for " + crd.getName()
+								+ " (X=" + crd.getXManaCostPaid() + ")\r\n", 
+								ability.getManaCost(), this, unpaidCommand, true));
+					}
+				};
+
+				Card crd = sa.getSourceCard();
+				if (sp.getSourceCard().getController().isHuman()) {
+					AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Pay X cost for " +
+							sp.getSourceCard().getName() + " (X=" + crd.getXManaCostPaid() + ")\r\n", 
+							ability.getManaCost(), paidCommand, unpaidCommand, true));
 				} 
-				
-				else if (sp.isMultiKicker()){
-					// TODO: convert multikicker support in abCost so this doesn't happen here
-					// both X and multi is not supported yet
-				
-					final SpellAbility sa = sp;
-					final Ability ability = new Ability(sp.getSourceCard(), sp.getMultiKickerManaCost()) {
-						public void resolve() {
-							this.getSourceCard().addMultiKickerMagnitude(1);
-						}
-					};
 
-					final Command unpaidCommand = new Command() {
-						private static final long serialVersionUID = -3342222770086269767L;
+				else // computer
+				{
+					int neededDamage = CardFactoryUtil.getNeededXDamage(sa);
 
-						public void execute() {
-							push(sa);
-						}
-					};
+					while (ComputerUtil.canPayCost(ability) && neededDamage != sa.getSourceCard().getXManaCostPaid()) {
+						ComputerUtil.playNoStack(ability);
+					}
+					push(sa);
+				}
+			} 
 
-					final Command paidCommand = new Command() {
-						private static final long serialVersionUID = -6037161763374971106L;
+			else if (sp.isMultiKicker()){
+				// TODO: convert multikicker support in abCost so this doesn't happen here
+				// both X and multi is not supported yet
 
-						public void execute() {
-							ability.resolve();
-							ManaCost manaCost = getMultiKickerSpellCostChange(ability);
-							if (manaCost.isPaid()) {
-								this.execute();
-							} else {
-								if (AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid == 0
-										&& AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid_Colored.equals("")) {
-									
-									AllZone.InputControl.setInput(new Input_PayManaCost_Ability(
-											"Multikicker for "+ sa.getSourceCard() + "\r\n"
-											+ "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n", 
-											manaCost.toString(), this, unpaidCommand));
-								} 
-								
-								else {
-									AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Multikicker for "
-											+ sa.getSourceCard() + "\r\n" + "Mana in Reserve: "
-											+ ((AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid != 0) ? 
-											AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid : "")
-											+ AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid_Colored + "\r\n"
-											+ "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n", 
-									manaCost.toString(), this, unpaidCommand));
-								}
-							}
-						}
-					};
+				final SpellAbility sa = sp;
+				final Ability ability = new Ability(sp.getSourceCard(), sp.getMultiKickerManaCost()) {
+					public void resolve() {
+						this.getSourceCard().addMultiKickerMagnitude(1);
+					}
+				};
 
-					if (sp.getSourceCard().getController().equals(
-							AllZone.HumanPlayer)) {
+				final Command unpaidCommand = new Command() {
+					private static final long serialVersionUID = -3342222770086269767L;
+
+					public void execute() {
+						push(sa);
+					}
+				};
+
+				final Command paidCommand = new Command() {
+					private static final long serialVersionUID = -6037161763374971106L;
+
+					public void execute() {
+						ability.resolve();
 						ManaCost manaCost = getMultiKickerSpellCostChange(ability);
-
 						if (manaCost.isPaid()) {
-							paidCommand.execute();
+							this.execute();
 						} else {
 							if (AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid == 0
 									&& AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid_Colored.equals("")) {
+
+								AllZone.InputControl.setInput(new Input_PayManaCost_Ability(
+										"Multikicker for "+ sa.getSourceCard() + "\r\n"
+										+ "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n", 
+										manaCost.toString(), this, unpaidCommand));
+							} 
+
+							else {
 								AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Multikicker for "
+										+ sa.getSourceCard() + "\r\n" + "Mana in Reserve: "
+										+ ((AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid != 0) ? 
+												AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid : "")
+												+ AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid_Colored + "\r\n"
+												+ "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n", 
+												manaCost.toString(), this, unpaidCommand));
+							}
+						}
+					}
+				};
+
+				if (sp.getSourceCard().getController().equals(
+						AllZone.HumanPlayer)) {
+					ManaCost manaCost = getMultiKickerSpellCostChange(ability);
+
+					if (manaCost.isPaid()) {
+						paidCommand.execute();
+					} else {
+						if (AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid == 0
+								&& AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid_Colored.equals("")) {
+							AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Multikicker for "
 									+ sa.getSourceCard() + "\r\n" + "Times Kicked: " 
 									+ sa.getSourceCard().getMultiKickerMagnitude() + "\r\n", 
-								manaCost.toString(), paidCommand, unpaidCommand));
-							} else {
-								AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Multikicker for "
+									manaCost.toString(), paidCommand, unpaidCommand));
+						} else {
+							AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Multikicker for "
 									+ sa.getSourceCard() + "\r\n" + "Mana in Reserve: " + 
 									((AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid != 0) ? 
 											AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid: "")
-									+ AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid_Colored
-									+ "\r\n" + "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n", 
-									manaCost.toString(), paidCommand, unpaidCommand));
-							}
+											+ AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid_Colored
+											+ "\r\n" + "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n", 
+											manaCost.toString(), paidCommand, unpaidCommand));
 						}
-					} 
-					
-					else // computer
-					{
-						while (ComputerUtil.canPayCost(ability))
-							ComputerUtil.playNoStack(ability);
-						push(sa);
 					}
+				} 
+
+				else // computer
+				{
+					while (ComputerUtil.canPayCost(ability))
+						ComputerUtil.playNoStack(ability);
+					push(sa);
 				}
-				
-				else if (sp.isReplicate()){
-					// TODO: convert multikicker/replicate support in abCost so this doesn't happen here
-					// X and multi and replicate are not supported yet
-				
-					final SpellAbility sa = sp;
-					final Ability ability = new Ability(sp.getSourceCard(), sp.getReplicateManaCost()) {
-						public void resolve() {
-							this.getSourceCard().addReplicateMagnitude(1);
+			}
+
+			else if (sp.isReplicate()){
+				// TODO: convert multikicker/replicate support in abCost so this doesn't happen here
+				// X and multi and replicate are not supported yet
+
+				final SpellAbility sa = sp;
+				final Ability ability = new Ability(sp.getSourceCard(), sp.getReplicateManaCost()) {
+					public void resolve() {
+						this.getSourceCard().addReplicateMagnitude(1);
+					}
+				};
+
+				final Command unpaidCommand = new Command() {
+					private static final long serialVersionUID = -3180458633098297855L;
+
+					public void execute() {
+						push(sa);
+						for(int i = 0; i < sp.getSourceCard().getReplicateMagnitude(); i++) {
+							AllZone.CardFactory.copySpellontoStack(sp.getSourceCard(), sp.getSourceCard(), false);
 						}
-					};
+					}
+				};
 
-					final Command unpaidCommand = new Command() {
-						private static final long serialVersionUID = -3180458633098297855L;
+				final Command paidCommand = new Command() {
+					private static final long serialVersionUID = 132624005072267304L;
 
-						public void execute() {
-							push(sa);
-							for(int i = 0; i < sp.getSourceCard().getReplicateMagnitude(); i++) {
-								AllZone.CardFactory.copySpellontoStack(sp.getSourceCard(), sp.getSourceCard(), false);
-							}
-						}
-					};
-
-					final Command paidCommand = new Command() {
-						private static final long serialVersionUID = 132624005072267304L;
-
-						public void execute() {
-							ability.resolve();
-							ManaCost manaCost = getReplicateSpellCostChange(ability);
-							if (manaCost.isPaid()) {
-								this.execute();
-							} else {
-								/*
+					public void execute() {
+						ability.resolve();
+						ManaCost manaCost = getReplicateSpellCostChange(ability);
+						if (manaCost.isPaid()) {
+							this.execute();
+						} else {
+							/*
 								if (AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid == 0
 										&& AllZone.GameAction.CostCutting_GetMultiMickerManaCostPaid_Colored.equals("")) {
-									
+
 									AllZone.InputControl.setInput(new Input_PayManaCost_Ability(
 											"Replicate for "+ sa.getSourceCard() + "\r\n"
 											+ "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n", 
 											manaCost.toString(), this, unpaidCommand));
 								} 
-								
+
 								else {*/
-									AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Replicate for "
-											+ sa.getSourceCard() + "\r\n" 
-											+ "Times Replicated: " + sa.getSourceCard().getReplicateMagnitude() + "\r\n", 
+							AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Replicate for "
+									+ sa.getSourceCard() + "\r\n" 
+									+ "Times Replicated: " + sa.getSourceCard().getReplicateMagnitude() + "\r\n", 
 									manaCost.toString(), this, unpaidCommand));
-								//}
-							}
+							//}
 						}
-					};
-
-					if (sp.getSourceCard().getController().equals(
-							AllZone.HumanPlayer)) {
-						ManaCost manaCost = getMultiKickerSpellCostChange(ability);
-
-						if (manaCost.isPaid()) {
-							paidCommand.execute();
-						} else {
-								AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Replicate for "
-									+ sa.getSourceCard() + "\r\n" + 
-									"Times Replicated: " + sa.getSourceCard().getReplicateMagnitude() + "\r\n", 
-									manaCost.toString(), paidCommand, unpaidCommand));
-						}
-					} 
-					
-					else // computer
-					{
-						while (ComputerUtil.canPayCost(ability))
-							ComputerUtil.playNoStack(ability);
-						push(sa);
 					}
-				}
+				};
 
+				if (sp.getSourceCard().getController().equals(
+						AllZone.HumanPlayer)) {
+					ManaCost manaCost = getMultiKickerSpellCostChange(ability);
+
+					if (manaCost.isPaid()) {
+						paidCommand.execute();
+					} else {
+						AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Replicate for "
+								+ sa.getSourceCard() + "\r\n" + 
+								"Times Replicated: " + sa.getSourceCard().getReplicateMagnitude() + "\r\n", 
+								manaCost.toString(), paidCommand, unpaidCommand));
+					}
+				} 
+
+				else // computer
+				{
+					while (ComputerUtil.canPayCost(ability))
+						ComputerUtil.playNoStack(ability);
+					push(sa);
+				}
 			}
 
-            if(!sp.getSourceCard().isCopiedSpell()) //Copied spells aren't cast per se so triggers shouldn't run for them.
-            {
-                //Run trigger
-                HashMap<String,Object> runParams = new HashMap<String,Object>();
-                runParams.put("Cost", sp.getPayCosts());
-                runParams.put("CastSA", sp);
-                AllZone.TriggerHandler.runTrigger("SpellAbilityCast", runParams);
-
-                if(sp.isSpell())
-                {
-                	runParams.put("Cost", sp.getPayCosts());
-                    AllZone.TriggerHandler.runTrigger("SpellCast", runParams);
-                }
-                if(sp.isAbility())
-                {
-                	runParams.put("Cost", sp.getPayCosts());
-                    AllZone.TriggerHandler.runTrigger("AbilityCast", runParams);
-                }
-                if(sp.isCycling())
-                {
-                    runParams.clear();
-                    runParams.put("Card", sp.getSourceCard());
-                    AllZone.TriggerHandler.runTrigger("Cycled", runParams);
-                }
-            }
 		}
-		
+
+		if(!sp.getSourceCard().isCopiedSpell()) //Copied spells aren't cast per se so triggers shouldn't run for them.
+		{
+			//Run trigger
+			HashMap<String,Object> runParams = new HashMap<String,Object>();
+			runParams.put("Cost", sp.getPayCosts());
+			runParams.put("CastSA", sp);
+			AllZone.TriggerHandler.runTrigger("SpellAbilityCast", runParams);
+
+			if(sp.isSpell())
+			{
+				runParams.put("Cost", sp.getPayCosts());
+				AllZone.TriggerHandler.runTrigger("SpellCast", runParams);
+			}
+			if(sp.isAbility())
+			{
+				runParams.put("Cost", sp.getPayCosts());
+				AllZone.TriggerHandler.runTrigger("AbilityCast", runParams);
+			}
+			if(sp.isCycling())
+			{
+				runParams.clear();
+				runParams.put("Card", sp.getSourceCard());
+				AllZone.TriggerHandler.runTrigger("Cycled", runParams);
+			}
+		}
+
 		if(sp instanceof Spell_Permanent && sp.getSourceCard().getName().equals("Mana Vortex")) {
 			final SpellAbility counter = new Ability(sp.getSourceCard(), "0") {
 				@Override
@@ -552,13 +523,13 @@ public class MagicStack extends MyObservable {
 							}
 						}
 					}
-					
+
 				}//resolve()
 			};//SpellAbility
 			counter.setStackDescription(sp.getSourceCard().getName()+" - counter Mana Vortex unless you sacrifice a land.");
 			add(counter);
 		}
-		
+
 		/*
 		 * Whenever a player casts a spell, counter it if a card with the same name
 		 * is in a graveyard or a nontoken permanent with the same name is on the battlefield.
@@ -569,11 +540,11 @@ public class MagicStack extends MyObservable {
 			all = all.filter(AllZoneUtil.nonToken);
 			CardList graves = AllZoneUtil.getCardsInGraveyard();
 			all.add(graves);
-			
+
 			for(Card c:all) {
 				if(sp.getSourceCard().getName().equals(c.getName())) found = true;
 			}
-			
+
 			if(found) {			
 				CardList bazaars = AllZoneUtil.getCardsInPlay("Bazaar of Wonders");  //should only be 1...
 				for(final Card bazaar:bazaars) {
@@ -588,12 +559,12 @@ public class MagicStack extends MyObservable {
 				}
 			}
 		}
-		
+
 		//Lurking Predators
 		if(sp.isSpell()) {
 			Player player = sp.getSourceCard().getController();
 			CardList lurkingPredators = AllZoneUtil.getPlayerCardsInPlay(player, "Lurking Predators");
-			
+
 			for(int i=0;i<lurkingPredators.size();i++)
 			{
 				StringBuilder revealMsg = new StringBuilder("");
@@ -655,16 +626,16 @@ public class MagicStack extends MyObservable {
 						GameActionUtil.showInfoDialg(revealMsg.toString());
 						AllZone.GameAction.moveToPlay(revealed);
 					}
-					
+
 				}
 			}
 		}
-		
+
 		if (sp.getTargetCard() != null)
 			CardFactoryUtil.checkTargetingEffects(sp, sp.getTargetCard());
 
-        if(simultaneousStackEntryList.size() > 0)
-            AllZone.Phase.passPriority();
+		if(simultaneousStackEntryList.size() > 0)
+			AllZone.Phase.passPriority();
 	}
 
 	public int size() {
@@ -677,15 +648,15 @@ public class MagicStack extends MyObservable {
 			sp.setActivatingPlayer(sp.getSourceCard().getController());
 			System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
 		}
-		
+
 		stack.add(0, sp);
 		setSplitSecondOnStack();
 
 		this.updateObservers();
-		
+
 		if (sp.isSpell() && !sp.getSourceCard().isCopiedSpell()) {
 			Phase.increaseSpellCount(sp);
-		
+
 			// attempt to counter human spell 
 
 			GameActionUtil.executePlayCardEffects(sp);
@@ -697,15 +668,15 @@ public class MagicStack extends MyObservable {
 		GuiDisplayUtil.updateGUI();
 		this.freezeStack();	// freeze the stack while we're in the middle of resolving
 		setResolving(true);
-		
+
 		SpellAbility sa = AllZone.Stack.pop();
-		
+
 		AllZone.Phase.resetPriority();	// ActivePlayer gains priority first after Resolve
 		Card source = sa.getSourceCard();
 		boolean fizzle = hasFizzled(sa, source);
 		Command buyback = null;
-		
-		
+
+
 		if (!fizzle) {
 			final Card crd = source;
 			if (sa.isBuyBackAbility()) {
@@ -746,7 +717,7 @@ public class MagicStack extends MyObservable {
 
 		else if (fizzle && sa.isSpell())
 			AllZone.GameAction.moveToGraveyard(source);
-		
+
 		else if (sa.isAbility())
 		{}	// don't send to graveyard if the spell is using an ability
 
@@ -768,7 +739,7 @@ public class MagicStack extends MyObservable {
 		sa.resetOnceResolved();
 
 		AllZone.GameAction.checkStateEffects();
-		
+
 		AllZone.Phase.setNeedToNextPhase(false);
 
 		if (AllZone.Phase.inCombat()) 
@@ -776,15 +747,15 @@ public class MagicStack extends MyObservable {
 
 		GuiDisplayUtil.updateGUI();
 	}
-	
+
 	public boolean hasFizzled(SpellAbility sa, Card source){
 		// By default this has not fizzled
 		boolean fizzle = false;
-		
+
 		boolean firstTarget = true;
 
 		SpellAbility fizzSA = sa;
-		
+
 		while(true){
 			Target tgt = fizzSA.getTarget();
 			if (tgt != null && tgt.getMinTargets(source, fizzSA) == 0 && tgt.getNumTargeted() == 0){
@@ -795,7 +766,7 @@ public class MagicStack extends MyObservable {
 				fizzle = true;
 				firstTarget = false;	
 			}
-			
+
 			if (tgt != null){
 				// With multi-targets, as long as one target is still legal, we'll try to go through as much as possible
 				ArrayList<Object> tgts = tgt.getTargets();
@@ -822,16 +793,16 @@ public class MagicStack extends MyObservable {
 			else if (fizzSA.getTargetPlayer() != null) {
 				fizzle &= !fizzSA.getTargetPlayer().canTarget(source);
 			}
-			
+
 			if (fizzSA.getSubAbility() != null)
 				fizzSA = fizzSA.getSubAbility();
 			else
 				break;
 		}
-	
+
 		return fizzle;
 	}
-	
+
 
 	public SpellAbility pop() {
 		SpellAbility sp = (SpellAbility) stack.remove(0);
@@ -848,7 +819,7 @@ public class MagicStack extends MyObservable {
 	public SpellAbility peek() {
 		return peek(0);
 	}
-	
+
 	public void remove(SpellAbility sa) {
 		stack.remove(sa);
 		frozenStack.remove(sa);
@@ -869,84 +840,84 @@ public class MagicStack extends MyObservable {
 	}
 
 	public boolean hasSimultaneousStackEntries()
-    {
-        return simultaneousStackEntryList.size() > 0;
-    }
+	{
+		return simultaneousStackEntryList.size() > 0;
+	}
 
-    public void addSimultaneousStackEntry(SpellAbility sa)
-    {
-        simultaneousStackEntryList.add(sa);
-    }
+	public void addSimultaneousStackEntry(SpellAbility sa)
+	{
+		simultaneousStackEntryList.add(sa);
+	}
 
-    public void chooseOrderOfSimultaneousStackEntryAll()
-    {
-        chooseOrderOfSimultaneousStackEntry(AllZone.Phase.getPlayerTurn());
-        chooseOrderOfSimultaneousStackEntry(AllZone.Phase.getPlayerTurn().getOpponent());
-    }
+	public void chooseOrderOfSimultaneousStackEntryAll()
+	{
+		chooseOrderOfSimultaneousStackEntry(AllZone.Phase.getPlayerTurn());
+		chooseOrderOfSimultaneousStackEntry(AllZone.Phase.getPlayerTurn().getOpponent());
+	}
 
-    public void chooseOrderOfSimultaneousStackEntry(Player activePlayer)
-    {
-        if(simultaneousStackEntryList.size() == 0)
-            return;
+	public void chooseOrderOfSimultaneousStackEntry(Player activePlayer)
+	{
+		if(simultaneousStackEntryList.size() == 0)
+			return;
 
-        ArrayList<SpellAbility> activePlayerSAs = new ArrayList<SpellAbility>();
-        for(int i=0;i<simultaneousStackEntryList.size();i++)
-        {
-            if(simultaneousStackEntryList.get(i).getActivatingPlayer() == null)
-            {
-                if(simultaneousStackEntryList.get(i).getSourceCard().getController().equals(activePlayer))
-                {
-                    activePlayerSAs.add(simultaneousStackEntryList.get(i));
-                    simultaneousStackEntryList.remove(i);
-                    i--;
-                }
-            }
-            else
-            {
-                if(simultaneousStackEntryList.get(i).getActivatingPlayer().equals(activePlayer))
-                {
-                    activePlayerSAs.add(simultaneousStackEntryList.get(i));
-                    simultaneousStackEntryList.remove(i);
-                    i--;
-                }
-            }
-        }
-        if(activePlayerSAs.size() == 0)
-            return;
+		ArrayList<SpellAbility> activePlayerSAs = new ArrayList<SpellAbility>();
+		for(int i=0;i<simultaneousStackEntryList.size();i++)
+		{
+			if(simultaneousStackEntryList.get(i).getActivatingPlayer() == null)
+			{
+				if(simultaneousStackEntryList.get(i).getSourceCard().getController().equals(activePlayer))
+				{
+					activePlayerSAs.add(simultaneousStackEntryList.get(i));
+					simultaneousStackEntryList.remove(i);
+					i--;
+				}
+			}
+			else
+			{
+				if(simultaneousStackEntryList.get(i).getActivatingPlayer().equals(activePlayer))
+				{
+					activePlayerSAs.add(simultaneousStackEntryList.get(i));
+					simultaneousStackEntryList.remove(i);
+					i--;
+				}
+			}
+		}
+		if(activePlayerSAs.size() == 0)
+			return;
 
-        if(activePlayer.isComputer())
-        {
-            for(SpellAbility sa : activePlayerSAs)
-            {
-                sa.doTrigger(sa.isMandatory());
+		if(activePlayer.isComputer())
+		{
+			for(SpellAbility sa : activePlayerSAs)
+			{
+				sa.doTrigger(sa.isMandatory());
 				ComputerUtil.playStack(sa);
-            }
-        }
-        else
-        {
-            while(activePlayerSAs.size() > 1)
-            {
-               SpellAbility next = (SpellAbility) GuiUtils.getChoice("Choose which spell or ability to put on the stack next.", activePlayerSAs.toArray());
-               activePlayerSAs.remove(next);
+			}
+		}
+		else
+		{
+			while(activePlayerSAs.size() > 1)
+			{
+				SpellAbility next = (SpellAbility) GuiUtils.getChoice("Choose which spell or ability to put on the stack next.", activePlayerSAs.toArray());
+				activePlayerSAs.remove(next);
 
-                if(next.isTrigger())
-                {
-                    System.out.println("Stack order: AllZone.GameAction.playSpellAbility(next)");
-                    AllZone.GameAction.playSpellAbility(next);
-                }
-                else
-                {
-                    System.out.println("Stack order: AllZone.Stack.add(next)");
-                    add(next);
-                }
-            }
+				if(next.isTrigger())
+				{
+					System.out.println("Stack order: AllZone.GameAction.playSpellAbility(next)");
+					AllZone.GameAction.playSpellAbility(next);
+				}
+				else
+				{
+					System.out.println("Stack order: AllZone.Stack.add(next)");
+					add(next);
+				}
+			}
 
-            if(activePlayerSAs.get(0).isTrigger())
-                AllZone.GameAction.playSpellAbility(activePlayerSAs.get(0));
-            else
-            	add(activePlayerSAs.get(0));
-            //AllZone.GameAction.playSpellAbility(activePlayerSAs.get(0));
-        }
-    }
+			if(activePlayerSAs.get(0).isTrigger())
+				AllZone.GameAction.playSpellAbility(activePlayerSAs.get(0));
+			else
+				add(activePlayerSAs.get(0));
+			//AllZone.GameAction.playSpellAbility(activePlayerSAs.get(0));
+		}
+	}
 
 }

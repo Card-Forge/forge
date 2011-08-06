@@ -142,11 +142,6 @@ public abstract class Player extends MyObservable{
 				newLifeSet = true;
 				this.updateObservers();
 				
-				// Whenever Keyword
-				Object[] Life_Whenever_Parameters = new Object[1];
-				Life_Whenever_Parameters[0] = lifeGain;
-				AllZone.GameAction.checkWheneverKeyword(getPlayerCard(), "GainLife", Life_Whenever_Parameters);
-				
 				//Run triggers
 				HashMap<String,Object> runParams = new HashMap<String,Object>();
 				runParams.put("Player", this);
@@ -553,10 +548,6 @@ public abstract class Player extends MyObservable{
 			setLastDrawnCard(c);
 			c.setDrawnThisTurn(true);
 			numDrawnThisTurn++;
-
-			Object[] DrawCard_Whenever_Parameters = new Object[1];
-	    	DrawCard_Whenever_Parameters[0] = this;
-			AllZone.GameAction.checkWheneverKeyword(AllZone.CardFactory.HumanNullCard,"DrawCard",DrawCard_Whenever_Parameters);
 			
 			//Run triggers
 			HashMap<String,Object> runParams = new HashMap<String,Object>();
@@ -626,8 +617,6 @@ public abstract class Player extends MyObservable{
     	if (sa!= null){
     		sa.addDiscardedCost(c);
     	}
-    	
-    	AllZone.GameAction.checkWheneverKeyword(c,"DiscardsCard",null);
     	
     	/*
     	 * When a spell or ability an opponent controls causes you

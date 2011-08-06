@@ -1323,8 +1323,6 @@ public class CombatUtil {
     
     public static void checkDeclareAttackers(Card c) //this method checks triggered effects of attacking creatures, right before defending player declares blockers
     {
-        	AllZone.GameAction.checkWheneverKeyword(c,"Attacks",null);
-        	
         	//Run triggers
         	HashMap<String,Object> runParams = new HashMap<String,Object>();
         	runParams.put("Attacker", c);
@@ -1692,36 +1690,10 @@ public class CombatUtil {
     
     public static void checkUnblockedAttackers(Card c) {
     	
-    	AllZone.GameAction.checkWheneverKeyword(c,"isUnblocked",null);
-    	
     	//Run triggers
     	HashMap<String,Object> runParams = new HashMap<String,Object>();
     	runParams.put("Card", c);
     	AllZone.TriggerHandler.runTrigger("AttackerUnblocked", runParams);
-    	
-    	/* converted to AF + trigger
-        if(c.getName().equals("Guiltfeeder")) {
-            final Player player = c.getController();
-            final Player opponent = player.getOpponent();
-            final Card F_card = c;
-            Ability ability2 = new Ability(c, "0") {
-                @Override
-                public void resolve() {
-                    
-                    PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, opponent);
-                    CardList cardsInGrave = new CardList(graveyard.getCards());
-                    opponent.loseLife(cardsInGrave.size(),F_card);
-                    
-                }
-            };// ability2
-            
-            StringBuilder sb2 = new StringBuilder();
-            sb2.append(c.getName()).append(" - ").append(opponent).append(" loses life equal to cards in graveyard.");
-            ability2.setStackDescription(sb2.toString());
-            
-            AllZone.Stack.add(ability2);
-        }
-        */
     }
     
     public static void checkDeclareBlockers(CardList cl) {

@@ -642,33 +642,6 @@ public class CardFactoryUtil {
         };
         return target;
     }//input_destroyNoRegeneration()
-   
-    public static Input Wheneverinput_sacrifice(final SpellAbility spell, final CardList choices, final String message, final Command Paid) {
-        Input target = new Input() {
-            private static final long serialVersionUID = 2685832214519141903L;
-            
-            @Override
-            public void showMessage() {
-                AllZone.Display.showMessage(message);
-                ButtonUtil.enableOnlyCancel();
-            }
-            
-            @Override
-            public void selectButtonCancel() {
-                stop();
-            }
-            
-            @Override
-            public void selectCard(Card card, PlayerZone zone) {
-                if(choices.contains(card)) {
-                    AllZone.GameAction.moveToGraveyard(card);
-                    Paid.execute();
-                    stop();
-                }
-            }
-        };
-        return target;
-    }//Wheneverinput_sacrifice()
 
     //this one is used for Phyrexian War Beast:
     public static Input input_sacrificePermanent(final SpellAbility spell, final CardList choices, final String message) {
@@ -2499,45 +2472,6 @@ public class CardFactoryUtil {
         return target;
     }//input_MasteroftheWildHunt_input_targetCreature()
     
-    public static Input input_MultitargetCreatureOrPlayer(final SpellAbility spell, final int i, final int i_max,final Command paid) {
-        Input target = new Input() {
-        	
-            private static final long serialVersionUID = -1779224307654698954L;
-            
-            @Override
-            public void showMessage() {
-            	if(GameAction.isMultiTargetCancelled() == true) stop();
-            	if(i == 0) AllZone.Display.showMessage("Select target creature or player: " + (i_max) + " more damage to deal");
-            	else AllZone.Display.showMessage("Select target creature or player: " + (i) + " more damage to deal");
-            }
-            
-            @Override
-            public void selectButtonCancel() {
-            	GameAction.setMultiTargetCancelled(true);
-                stop();
-            }
-            
-            @Override
-            public void selectCard(Card card, PlayerZone zone) {
-                if((card.isCreature() || card.isPlaneswalker()) && zone.is(Constant.Zone.Battlefield)
-                        && (canTarget(spell, card))) {
-                    spell.setTargetCard(card);
-                    paid.execute();
-                    stop();  
-                }
-            }//selectCard()
-            
-            @Override
-            public void selectPlayer(Player player) {
-                spell.setTargetPlayer(player);
-                paid.execute();
-                stop();  
-            }
-
-        };
-        return target;
-    }//input_MultitargetCreatureOrPlayer()
-    
     public static Input Lorthos_input_targetPermanent(final SpellAbility spell, final CardList choices, final int i, final Command paid) {
         Input target = new Input() {
         	
@@ -2616,8 +2550,6 @@ public class CardFactoryUtil {
             
             @Override
             public void selectPlayer(Player player) {
-            	 // Swapped the next two lines of code around, helps the WheneverKeyword work properly but not sure 
-            	 // if it causes other cards to malfunction
                 spell.setTargetPlayer(player);
                 command.execute();
                 if(spell.getManaCost().equals("0") || this.isFree()) {
@@ -4496,26 +4428,6 @@ public class CardFactoryUtil {
 
 	        }
         }
-		
-		/*
-		CardList greedy = AllZoneUtil.getCardsInPlay("Horn of Greed");
-		if (!greedy.isEmpty()){
-			for(final Card g : greedy){
-	            SpellAbility ability = new Ability(g, "0") {
-	                @Override
-	                public void resolve() {
-	                	player.drawCard();
-	                }
-	            };
-	            StringBuilder sb = new StringBuilder();
-	            sb.append("Horn of Greed - ").append(player).append(" draws a card.");
-	            ability.setStackDescription(sb.toString());
-	            
-	            AllZone.Stack.add(ability);
-			}
-		}*/
-		
-		AllZone.GameAction.checkWheneverKeyword(c, "PlayLand", null);
     }
     
     

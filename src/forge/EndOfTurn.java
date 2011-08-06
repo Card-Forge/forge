@@ -6,189 +6,187 @@ import forge.card.spellability.SpellAbility;
 //handles "until end of turn" and "at end of turn" commands from cards
 public class EndOfTurn implements java.io.Serializable
 {
-  private static final long serialVersionUID = -3656715295379727275L;
+	private static final long serialVersionUID = -3656715295379727275L;
 
-  private CommandList at = new CommandList();
-  private CommandList until = new CommandList();
-  private CommandList last = new CommandList();
+	private CommandList at = new CommandList();
+	private CommandList until = new CommandList();
+	private CommandList last = new CommandList();
 
-  public void addAt(Command c)    {at.add(c);}
-  public void addUntil(Command c) {until.add(c);}
-  public void addLast(Command c) {last.add(c);}
+	public void addAt(Command c)    {at.add(c);}
+	public void addUntil(Command c) {until.add(c);}
+	public void addLast(Command c) {last.add(c);}
 
-  public void executeAt()
-  {
-	  AllZone.GameAction.checkWheneverKeyword(AllZone.CardFactory.HumanNullCard,"BeginningOfEndStep",null);
+	public void executeAt() {
 
-    //Pyrohemia and Pestilence
-    CardList all = AllZoneUtil.getCardsInPlay();
+		//Pyrohemia and Pestilence
+		CardList all = AllZoneUtil.getCardsInPlay();
 
-    GameActionUtil.endOfTurn_Predatory_Advantage();
-    GameActionUtil.endOfTurn_Wall_Of_Reverence();
-    GameActionUtil.endOfTurn_Lighthouse_Chronologist();
-    GameActionUtil.endOfTurn_Krovikan_Horror();
-    
-    GameActionUtil.removeAttackedBlockedThisTurn();
-    AllZone.GameInfo.setPreventCombatDamageThisTurn(false);
-    
-    AllZone.StaticEffects.rePopulateStateBasedList();
+		GameActionUtil.endOfTurn_Predatory_Advantage();
+		GameActionUtil.endOfTurn_Wall_Of_Reverence();
+		GameActionUtil.endOfTurn_Lighthouse_Chronologist();
+		GameActionUtil.endOfTurn_Krovikan_Horror();
 
-    for(Card c : all) {
-    	if(!c.isFaceDown()
-    			&& c.getKeyword().contains("At the beginning of the end step, sacrifice CARDNAME."))
-    	{
-    		final Card card = c;
-    		final SpellAbility sac = new Ability(card, "0") {
-    			@Override
-    			public void resolve() {
-    				if(AllZoneUtil.isCardInPlay(card)) AllZone.GameAction.sacrifice(card);
-    			}
-    		};
-    		StringBuilder sb = new StringBuilder();
-    		sb.append("Sacrifice ").append(card);
-    		sac.setStackDescription(sb.toString());
+		GameActionUtil.removeAttackedBlockedThisTurn();
+		AllZone.GameInfo.setPreventCombatDamageThisTurn(false);
 
-            AllZone.Stack.addSimultaneousStackEntry(sac);
+		AllZone.StaticEffects.rePopulateStateBasedList();
 
-    	}
-    	if(!c.isFaceDown() && c.getKeyword().contains("At the beginning of the end step, exile CARDNAME.")) {
-    		final Card card = c;
-    		final SpellAbility exile = new Ability(card, "0") {
-    			@Override
-    			public void resolve() {
-    				if(AllZoneUtil.isCardInPlay(card)) AllZone.GameAction.exile(card);
-    			}
-    		};
-    		StringBuilder sb = new StringBuilder();
-    		sb.append("Exile ").append(card);
-    		exile.setStackDescription(sb.toString());
+		for(Card c : all) {
+			if(!c.isFaceDown()
+					&& c.getKeyword().contains("At the beginning of the end step, sacrifice CARDNAME."))
+			{
+				final Card card = c;
+				final SpellAbility sac = new Ability(card, "0") {
+					@Override
+					public void resolve() {
+						if(AllZoneUtil.isCardInPlay(card)) AllZone.GameAction.sacrifice(card);
+					}
+				};
+				StringBuilder sb = new StringBuilder();
+				sb.append("Sacrifice ").append(card);
+				sac.setStackDescription(sb.toString());
 
-            AllZone.Stack.addSimultaneousStackEntry(exile);
+				AllZone.Stack.addSimultaneousStackEntry(sac);
 
-    	}
-    	if(!c.isFaceDown() && c.getKeyword().contains("At the beginning of the end step, destroy CARDNAME.")) {
-    		final Card card = c;
-    		final SpellAbility destroy = new Ability(card, "0") {
-    			@Override
-    			public void resolve() {
-    				if(AllZoneUtil.isCardInPlay(card)) AllZone.GameAction.destroy(card);
-    			}
-    		};
-    		StringBuilder sb = new StringBuilder();
-    		sb.append("Destroy ").append(card);
-    		destroy.setStackDescription(sb.toString());
+			}
+			if(!c.isFaceDown() && c.getKeyword().contains("At the beginning of the end step, exile CARDNAME.")) {
+				final Card card = c;
+				final SpellAbility exile = new Ability(card, "0") {
+					@Override
+					public void resolve() {
+						if(AllZoneUtil.isCardInPlay(card)) AllZone.GameAction.exile(card);
+					}
+				};
+				StringBuilder sb = new StringBuilder();
+				sb.append("Exile ").append(card);
+				exile.setStackDescription(sb.toString());
 
-            AllZone.Stack.addSimultaneousStackEntry(destroy);
+				AllZone.Stack.addSimultaneousStackEntry(exile);
 
-    	}
-    	//Berserk is using this, so don't check isFaceDown()
-    	if(c.getKeyword().contains("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.")) {
-    		if(c.getCreatureAttackedThisTurn()) {
-    		final Card card = c;
-    		final SpellAbility sac = new Ability(card, "0") {
-    			@Override
-    			public void resolve() {
-    				if(AllZoneUtil.isCardInPlay(card)) AllZone.GameAction.destroy(card);
-    			}
-    		};
-    		StringBuilder sb = new StringBuilder();
-    		sb.append("Destroy ").append(card);
-    		sac.setStackDescription(sb.toString());
+			}
+			if(!c.isFaceDown() && c.getKeyword().contains("At the beginning of the end step, destroy CARDNAME.")) {
+				final Card card = c;
+				final SpellAbility destroy = new Ability(card, "0") {
+					@Override
+					public void resolve() {
+						if(AllZoneUtil.isCardInPlay(card)) AllZone.GameAction.destroy(card);
+					}
+				};
+				StringBuilder sb = new StringBuilder();
+				sb.append("Destroy ").append(card);
+				destroy.setStackDescription(sb.toString());
 
-            AllZone.Stack.addSimultaneousStackEntry(sac);
+				AllZone.Stack.addSimultaneousStackEntry(destroy);
 
-    		}
-    		else {
-    			c.removeExtrinsicKeyword("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.");
-    		}
-    	}
-    	if( c.getKeyword().contains("An opponent gains control of CARDNAME at the beginning of the next end step.")) {
-    		final Card vale = c;
-    		final SpellAbility change = new Ability(vale, "0") {
-    			@Override
-    			public void resolve() {
-    				if(AllZoneUtil.isCardInPlay(vale)) {
-    					AllZone.GameAction.changeController(new CardList(vale), vale.getController(), vale.getController().getOpponent());
+			}
+			//Berserk is using this, so don't check isFaceDown()
+			if(c.getKeyword().contains("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.")) {
+				if(c.getCreatureAttackedThisTurn()) {
+					final Card card = c;
+					final SpellAbility sac = new Ability(card, "0") {
+						@Override
+						public void resolve() {
+							if(AllZoneUtil.isCardInPlay(card)) AllZone.GameAction.destroy(card);
+						}
+					};
+					StringBuilder sb = new StringBuilder();
+					sb.append("Destroy ").append(card);
+					sac.setStackDescription(sb.toString());
 
-                        vale.removeExtrinsicKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.");
-    				}
-    			}
-    		};
-    		StringBuilder sb = new StringBuilder();
-    		sb.append(vale.getName()).append(" changes controllers.");
-    		change.setStackDescription(sb.toString());
+					AllZone.Stack.addSimultaneousStackEntry(sac);
 
-            AllZone.Stack.addSimultaneousStackEntry(change);
+				}
+				else {
+					c.removeExtrinsicKeyword("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.");
+				}
+			}
+			if( c.getKeyword().contains("An opponent gains control of CARDNAME at the beginning of the next end step.")) {
+				final Card vale = c;
+				final SpellAbility change = new Ability(vale, "0") {
+					@Override
+					public void resolve() {
+						if(AllZoneUtil.isCardInPlay(vale)) {
+							AllZone.GameAction.changeController(new CardList(vale), vale.getController(), vale.getController().getOpponent());
 
-    	}
-    	if(c.getName().equals("Erg Raiders") && !c.getCreatureAttackedThisTurn() &&
-    			!c.isSick() && AllZone.Phase.isPlayerTurn(c.getController())) {
-    		final Card raider = c;
-    		final SpellAbility change = new Ability(raider, "0") {
-    			@Override
-    			public void resolve() {
-    				if(AllZoneUtil.isCardInPlay(raider)) {
-    					raider.getController().addDamage(2, raider);
-    				}
-    			}
-    		};
-    		StringBuilder sb = new StringBuilder();
-    		sb.append(raider).append(" deals 2 damage to controller.");
-    		change.setStackDescription(sb.toString());
+							vale.removeExtrinsicKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.");
+						}
+					}
+				};
+				StringBuilder sb = new StringBuilder();
+				sb.append(vale.getName()).append(" changes controllers.");
+				change.setStackDescription(sb.toString());
 
-            AllZone.Stack.addSimultaneousStackEntry(change);
+				AllZone.Stack.addSimultaneousStackEntry(change);
 
-    	}
-    	if(c.hasKeyword("At the beginning of your end step, sacrifice this creature unless it attacked this turn.")
-    			&& !c.getCreatureAttackedThisTurn()
-    			/* && !(c.getTurnInZone() == AllZone.Phase.getTurn())*/
-    			&& AllZone.Phase.isPlayerTurn(c.getController())) {
-    		final Card source = c;
-    		final SpellAbility change = new Ability(source, "0") {
-    			@Override
-    			public void resolve() {
-    				if(AllZoneUtil.isCardInPlay(source)) {
-    					AllZone.GameAction.sacrifice(source);
-    				}
-    			}
-    		};
-    		StringBuilder sb = new StringBuilder();
-    		sb.append(source.getName()).append(" - sacrifice ").append(source.getName()).append(".");
-    		change.setStackDescription(sb.toString());
+			}
+			if(c.getName().equals("Erg Raiders") && !c.getCreatureAttackedThisTurn() &&
+					!c.isSick() && AllZone.Phase.isPlayerTurn(c.getController())) {
+				final Card raider = c;
+				final SpellAbility change = new Ability(raider, "0") {
+					@Override
+					public void resolve() {
+						if(AllZoneUtil.isCardInPlay(raider)) {
+							raider.getController().addDamage(2, raider);
+						}
+					}
+				};
+				StringBuilder sb = new StringBuilder();
+				sb.append(raider).append(" deals 2 damage to controller.");
+				change.setStackDescription(sb.toString());
 
-            AllZone.Stack.addSimultaneousStackEntry(change);
+				AllZone.Stack.addSimultaneousStackEntry(change);
 
-    	}
-    	
-    }
+			}
+			if(c.hasKeyword("At the beginning of your end step, sacrifice this creature unless it attacked this turn.")
+					&& !c.getCreatureAttackedThisTurn()
+					/* && !(c.getTurnInZone() == AllZone.Phase.getTurn())*/
+					&& AllZone.Phase.isPlayerTurn(c.getController())) {
+				final Card source = c;
+				final SpellAbility change = new Ability(source, "0") {
+					@Override
+					public void resolve() {
+						if(AllZoneUtil.isCardInPlay(source)) {
+							AllZone.GameAction.sacrifice(source);
+						}
+					}
+				};
+				StringBuilder sb = new StringBuilder();
+				sb.append(source.getName()).append(" - sacrifice ").append(source.getName()).append(".");
+				change.setStackDescription(sb.toString());
+
+				AllZone.Stack.addSimultaneousStackEntry(change);
+
+			}
+
+		}
 
 
-    execute(at);
+		execute(at);
 
 
 
-    CardList all2 = AllZoneUtil.getCardsInPlay();
-    for(Card c:all2) {
-    	if(c.getCreatureAttackedThisTurn()) c.setCreatureAttackedThisTurn(false);
-    }
-        
-  }//executeAt()
+		CardList all2 = AllZoneUtil.getCardsInPlay();
+		for(Card c:all2) {
+			if(c.getCreatureAttackedThisTurn()) c.setCreatureAttackedThisTurn(false);
+		}
+
+	}//executeAt()
 
 
-  public void executeUntil() {
-	  execute(until);
-	  execute(last);
-  }
+	public void executeUntil() {
+		execute(until);
+		execute(last);
+	}
 
-    public int sizeAt() {return at.size();}
-    public int sizeUntil() {return until.size();}
-    public int sizeLast() { return last.size();}
+	public int sizeAt() {return at.size();}
+	public int sizeUntil() {return until.size();}
+	public int sizeLast() { return last.size();}
 
-  private void execute(CommandList c)
-  {
-    int length = c.size();
+	private void execute(CommandList c)
+	{
+		int length = c.size();
 
-    for(int i = 0; i < length; i++)
-      c.remove(0).execute();
-  }
+		for(int i = 0; i < length; i++)
+			c.remove(0).execute();
+	}
 }

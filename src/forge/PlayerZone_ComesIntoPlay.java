@@ -67,8 +67,6 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             c.setSickness(true);// summoning sickness
             c.comesIntoPlay();
             
-            AllZone.GameAction.checkWheneverKeyword(c,"EntersBattleField",null);
-            
             if(c.isLand()) {
                 CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController());
                 
@@ -240,9 +238,6 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         
 
         if(leavesTrigger) {
-			// Commented out because whenever keyword checks the state, which should NOT happen right now
-        	// And nothing uses this whenever keyword anymore
-			//AllZone.GameAction.checkWheneverKeyword(c,"LeavesBattleField",null);
         	c.leavesPlay();
         }
 

@@ -397,7 +397,6 @@ public class PhaseUtil {
         // Then run other Attacker bonuses
         //check for exalted:
         if (list.size() == 1){
-        	AllZone.GameAction.checkWheneverKeyword(list.get(0), "Attack - Alone", null);
             Player attackingPlayer = AllZone.Combat.getAttackingPlayer();
             
             CardList exalted = AllZoneUtil.getPlayerCardsInPlay(attackingPlayer);
