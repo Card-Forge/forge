@@ -622,7 +622,7 @@ public class AbilityFactory_Fetch {
 	        		tgtC.setController(sa.getActivatingPlayer());
 	    	}
 	    	else if (destination.equals("Exile")){
-	    		AllZone.getZone(Constant.Zone.Removed_From_Play, player).add(tgtC);
+	    		AllZone.getZone(Constant.Zone.Removed_From_Play, tgtC.getOwner()).add(tgtC);
 	    	}
 		}
 		String DrawBack = af.getMapParams().get("SubAbility");
