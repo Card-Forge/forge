@@ -3,8 +3,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.StringTokenizer;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
@@ -15,6 +19,7 @@ public class ReadCard implements Runnable, NewConstants {
     private BufferedReader  in;
     private String fileList[]; 
     private ArrayList<Card> allCards = new ArrayList<Card>();
+    private static File zipFile;
     
     public static void main(String args[]) throws Exception {
         try {
@@ -55,8 +60,10 @@ public class ReadCard implements Runnable, NewConstants {
         if (!file.isDirectory())
         	throw new RuntimeException("ReadCard : constructor error -- not a direcotry -- "
         			+ file.getAbsolutePath());
+        zipFile = new File(file, CARDSFOLDER+".zip");
         
-        fileList = file.list();
+        if(!zipFile.exists())
+        	fileList = file.list();
         //makes the checked exception, into an unchecked runtime exception
         //try {
         //    in = new BufferedReader(new FileReader(file));
@@ -72,125 +79,55 @@ public class ReadCard implements Runnable, NewConstants {
     	ArrayList<String> cardNames = new ArrayList<String>();
     	File fl = null;
     	
-    	for (int i=0; i<fileList.length; i++)
-    	{
-    		if (!fileList[i].endsWith(".txt"))
-    			continue;
-    		
-            try {
-            	fl = new File("res/cardsfolder/" + fileList[i]);
-                in = new BufferedReader(new FileReader(fl));
-            } catch(Exception ex) {
-                ErrorViewer.showError(ex, "File \"%s\" exception", fl.getAbsolutePath());
-                throw new RuntimeException("ReadCard : run error -- file exception -- filename is "
-                        + fl.getPath());
-            }
-            
-            c = new Card();
-            
-            String s = readLine();
-            while (!s.equals("End"))
-            {
-            	if (s.startsWith("#"))
-            	{
-            		//no need to do anything, this indicates a comment line
-            	}
-            	
-            	else if (s.startsWith("Name:"))
-            	{
-            		String t = s.substring(5);
-            		//System.out.println(s);
-            		if (cardNames.contains(t))
-            		{
-                        System.out.println("ReadCard:run() error - duplicate card name: " + t);
-                        throw new RuntimeException("ReadCard:run() error - duplicate card name: " + t);
-            		}
-            		else
-            			c.setName(t);
-            	}
-            	
-            	else if (s.startsWith("ManaCost:"))
-            	{
-            		String t = s.substring(9);
-            		//System.out.println(s);
-            		if (!t.equals("no cost"))
-            			c.setManaCost(t);
-            	}
-            	
-            	else if (s.startsWith("Types:"))
-            		addTypes(c, s.substring(6));
-            	
-            	else if (s.startsWith("Text:"))
-            	{
-            		String t = s.substring(5);
-            		// if (!t.equals("no text"));
-            		if (t.equals("no text")) t = ("");
-            		c.setText(t);
-            	}
-            	
-            	else if (s.startsWith("PT:"))
-            	{
-            		String t = s.substring(3);
-            		String pt[] = t.split("/");
-            		int att = pt[0].contains("*") ? 0 : Integer.parseInt(pt[0]);
-            		int def = pt[1].contains("*") ? 0 : Integer.parseInt(pt[1]);
-            		c.setBaseAttackString(pt[0]);
-            		c.setBaseDefenseString(pt[1]);
-            		c.setBaseAttack(att);
-            		c.setBaseDefense(def);
-            	}
-            	
-            	else if (s.startsWith("Loyalty:"))
-            	{
-            		String splitStr[] = s.split(":");
-            		int loyal = Integer.parseInt(splitStr[1]);
-            		c.setBaseLoyalty(loyal);
-            	}
-            	
-            	else if (s.startsWith("K:"))
-            	{
-            		String t = s.substring(2);
-            		c.addIntrinsicKeyword(t);
-            	}
-            	
-            	else if (s.startsWith("SVar:"))
-            	{
-            		String t[] = s.split(":", 3);
-            		c.setSVar(t[1], t[2]);
-            	}
-            	
-            	else if (s.startsWith("A:"))
-            	{
-            		String t = s.substring(2);
-            		c.addIntrinsicAbility(t);
-            	}
-            	
-            	else if (s.startsWith("T:"))
-            	{
-            		String t = s.substring(2);
-            		c.addTrigger(TriggerHandler.parseTrigger(t, c));
-            	}
-            	
-            	else if (s.startsWith("SetInfo:"))
-            	{
-            		String t = s.substring(8);
-            		c.addSet(new SetInfo(t));
-            	}
-            	
-            	s = readLine();
-            } // while !End
-
-            cardNames.add(c.getName());
-            allCards.add(c);
-           
-            try {
-				in.close();
-			} catch (IOException ex) {
-                ErrorViewer.showError(ex, "File \"%s\" exception", fl.getAbsolutePath());
-                throw new RuntimeException("ReadCard : run error -- file exception -- filename is "
-                        + fl.getPath());
-			}
-    	}
+        if(zipFile.exists()){
+        	try {
+	        	ZipFile zip = new ZipFile(zipFile);
+	        	ZipEntry entry;
+	        	Enumeration<? extends ZipEntry> e = zip.entries();
+	        	while(e.hasMoreElements()) {
+	        		entry = (ZipEntry) e.nextElement();
+	        		if(!entry.getName().endsWith(".txt"))
+	        			continue;
+	        		in = new BufferedReader(new InputStreamReader(zip.getInputStream(entry)));
+	        		c = new Card();
+	        		loadCard(c, cardNames);
+	                cardNames.add(c.getName());
+	                allCards.add(c);
+	                in.close();
+	        	}
+        	} catch (Exception e) {
+        		
+        	}
+        	
+        } else {     
+	    	for (int i=0; i<fileList.length; i++)
+	    	{
+	    		if (!fileList[i].endsWith(".txt"))
+	    			continue;
+	    		
+	            try {
+	            	fl = new File("res/cardsfolder/" + fileList[i]);
+	                in = new BufferedReader(new FileReader(fl));
+	            } catch(Exception ex) {
+	                ErrorViewer.showError(ex, "File \"%s\" exception", fl.getAbsolutePath());
+	                throw new RuntimeException("ReadCard : run error -- file exception -- filename is "
+	                        + fl.getPath());
+	            }
+	
+	            c = new Card();
+	            loadCard(c, cardNames);
+	            cardNames.add(c.getName());
+	            allCards.add(c);
+	           
+	            try {
+					in.close();
+				} catch (IOException ex) {
+	                ErrorViewer.showError(ex, "File \"%s\" exception", fl.getAbsolutePath());
+	                throw new RuntimeException("ReadCard : run error -- file exception -- filename is "
+	                        + fl.getPath());
+				}
+	    	}
+        }
     	
     }//run()
     
@@ -211,4 +148,98 @@ public class ReadCard implements Runnable, NewConstants {
             throw new RuntimeException("ReadCard : readLine(Card) error");
         }
     }//readLine(Card)
+    
+    private void loadCard(Card c, ArrayList<String> cardNames) {        
+        String s = readLine();
+        while (!s.equals("End"))
+        {
+        	if (s.startsWith("#"))
+        	{
+        		//no need to do anything, this indicates a comment line
+        	}
+        	
+        	else if (s.startsWith("Name:"))
+        	{
+        		String t = s.substring(5);
+        		//System.out.println(s);
+        		if (cardNames.contains(t))
+        		{
+                    System.out.println("ReadCard:run() error - duplicate card name: " + t);
+                    throw new RuntimeException("ReadCard:run() error - duplicate card name: " + t);
+        		}
+        		else
+        			c.setName(t);
+        	}
+        	
+        	else if (s.startsWith("ManaCost:"))
+        	{
+        		String t = s.substring(9);
+        		//System.out.println(s);
+        		if (!t.equals("no cost"))
+        			c.setManaCost(t);
+        	}
+        	
+        	else if (s.startsWith("Types:"))
+        		addTypes(c, s.substring(6));
+        	
+        	else if (s.startsWith("Text:"))
+        	{
+        		String t = s.substring(5);
+        		// if (!t.equals("no text"));
+        		if (t.equals("no text")) t = ("");
+        		c.setText(t);
+        	}
+        	
+        	else if (s.startsWith("PT:"))
+        	{
+        		String t = s.substring(3);
+        		String pt[] = t.split("/");
+        		int att = pt[0].contains("*") ? 0 : Integer.parseInt(pt[0]);
+        		int def = pt[1].contains("*") ? 0 : Integer.parseInt(pt[1]);
+        		c.setBaseAttackString(pt[0]);
+        		c.setBaseDefenseString(pt[1]);
+        		c.setBaseAttack(att);
+        		c.setBaseDefense(def);
+        	}
+        	
+        	else if (s.startsWith("Loyalty:"))
+        	{
+        		String splitStr[] = s.split(":");
+        		int loyal = Integer.parseInt(splitStr[1]);
+        		c.setBaseLoyalty(loyal);
+        	}
+        	
+        	else if (s.startsWith("K:"))
+        	{
+        		String t = s.substring(2);
+        		c.addIntrinsicKeyword(t);
+        	}
+        	
+        	else if (s.startsWith("SVar:"))
+        	{
+        		String t[] = s.split(":", 3);
+        		c.setSVar(t[1], t[2]);
+        	}
+        	
+        	else if (s.startsWith("A:"))
+        	{
+        		String t = s.substring(2);
+        		c.addIntrinsicAbility(t);
+        	}
+        	
+        	else if (s.startsWith("T:"))
+        	{
+        		String t = s.substring(2);
+        		c.addTrigger(TriggerHandler.parseTrigger(t, c));
+        	}
+        	
+        	else if (s.startsWith("SetInfo:"))
+        	{
+        		String t = s.substring(8);
+        		c.addSet(new SetInfo(t));
+        	}
+        	
+        	s = readLine();
+        } // while !End
+    }
 }
