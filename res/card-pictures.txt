@@ -38,6 +38,12 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+deathgreeter.jpg		http://www.wizards.com/global/images/magic/general/deathgreeter.jpg
+disciple_of_the_vault.jpg		http://www.wizards.com/global/images/magic/general/disciple_of_the_vault.jpg	
+inheritance.jpg			http://www.wizards.com/global/images/magic/general/inheritance.jpg
+nether_traitor.jpg				http://www.wizards.com/global/images/magic/general/nether_traitor.jpg
+soul_net.jpg			http://www.wizards.com/global/images/magic/general/soul_net.jpg
+fledgling_griffin.jpg			http://www.wizards.com/global/images/magic/general/fledgling_griffin.jpg
 delusions_of_mediocrity.jpg		http://www.wizards.com/global/images/magic/general/delusions_of_mediocrity.jpg
 worldslayer.jpg					http://www.wizards.com/global/images/magic/general/worldslayer.jpg	
 angelic_benediction.jpg			http://www.wizards.com/global/images/magic/general/angelic_benediction.jpg

@@ -406,6 +406,7 @@ Imperiosaur
 Implode
 Improvised Armor
 Infest
+Inheritance
 Inkfathom Infiltrator
 Inner-Chamber Guard
 Inspirit
@@ -715,6 +716,7 @@ Soltari Crusader
 Soltari Monk
 Soltari Priest
 Soul Feast
+Soul Net
 Soul Warden
 Soulbound Guardians
 Soulcatcher

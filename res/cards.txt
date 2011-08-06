@@ -1,3 +1,38 @@
+Deathgreeter
+B
+Creature Human Shaman
+no text
+1/1
+WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:No_Condition:Initiator - Other than Self:Whenever another creature is put into a graveyard from the battlefield, you gain 1 life.
+
+Disciple of the Vault
+B
+Creature Human Cleric
+no text
+1/1
+WheneverKeyword:PermanentIntoGraveyard:Type/Artifact:Play:ModifyLife/-1:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever an artifact is put into a graveyard from the battlefield, you may have target opponent lose 1 life.
+
+Inheritance
+W
+Enchantment
+no text
+WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:DrawCards/1:ControllingPlayer_Self:ASAP:PayMana/3:No Special Condition:Whenever a creature is put into a graveyard from the battlefield, you may pay 3. If you do, draw a card.
+
+Nether Traitor
+B B
+Legendary Creature Spirit
+no text
+1/1
+Haste
+Shadow
+WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Graveyard:MoveFrom-Graveyard-Play:Self:ASAP:PayMana/B:Initiator - Other than Self:Whenever another creature is put into your graveyard from the battlefield, you may pay B. If you do, return Nether Traitor from your graveyard to the battlefield.
+
+Soul Net
+1
+Artifact  
+no text
+WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:PayMana/1:No Special Condition:Whenever a creature is put into a graveyard from the battlefield, you may pay 1. If you do, you gain 1 life.
+
 Delusions of Mediocrity
 3 U
 Enchantment

@@ -303,6 +303,7 @@ Deadly Recluse
 Death Cultist
 Death Speakers
 Death's Duet
+Deathgreeter
 Deep Analysis
 Deeptread Merrow
 Defender of Chaos
@@ -329,6 +330,7 @@ Disciple of Grace
 Disciple of Kangee
 Disciple of Law
 Disciple of Malice
+Disciple of the Vault
 Disenchant
 Disentomb
 Disorient
