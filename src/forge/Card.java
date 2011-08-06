@@ -870,12 +870,13 @@ public class Card extends MyObservable {
             // Add Keywords
             ArrayList<String> kw = getKeyword();
             
-            // Ripple + Dredge + Madness + CARDNAME is {color}.
+            // Ripple + Dredge + Madness + CARDNAME is {color} + Recover.
             for (int i = 0; i < kw.size(); i++) {
                 if ((kw.get(i).startsWith("Ripple") && !sb.toString().contains("Ripple")) 
                         || (kw.get(i).startsWith("Dredge") && !sb.toString().contains("Dredge")) 
                         || (kw.get(i).startsWith("Madness") && !sb.toString().contains("Madness")) 
-                        || (kw.get(i).startsWith("CARDNAME is ") && !sb.toString().contains("CARDNAME is "))) {
+                        || (kw.get(i).startsWith("CARDNAME is ") && !sb.toString().contains("CARDNAME is "))
+                        || (kw.get(i).startsWith("Recover") && !sb.toString().contains("Recover"))) {
                     sb.append(kw.get(i).replace(":", " ")).append("\r\n");
                 }
             }
@@ -914,6 +915,7 @@ public class Card extends MyObservable {
                     sb.append(" (To scry X, look at the top X cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)\r\n");
                 }
             }
+            
             
             while (sb.toString().endsWith("\r\n")) {
                 sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n")+3);

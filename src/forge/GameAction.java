@@ -62,6 +62,71 @@ public class GameAction {
     		//must put card in OWNER's graveyard not controller's
     		PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getOwner());
     		moveTo(grave, c);
+    		
+    		//Recover keyword
+    		if(c.isType("Creature"))
+    		{
+    			for(final Card recoverable : grave.getCards())
+    		    {
+    		    	if(recoverable.hasStartOfKeyword("Recover"))
+    		    	{
+    		    		SpellAbility abRecover = new Ability(recoverable,"0")
+    					{
+    		    			@Override
+    						public void resolve()
+    						{
+    							AllZone.GameAction.moveToHand(recoverable);
+    						}
+    									
+    						@Override
+    						public String getStackDescription()
+    						{
+    							StringBuilder SD = new StringBuilder(recoverable.getName());
+    							SD.append(" - Recover.");
+    										
+    							return SD.toString();
+    						}
+    					};
+    								
+    		    		String recoverCost = recoverable.getKeyword().get(recoverable.getKeywordPosition("Recover")).split(":")[1];
+    		    		Ability_Cost abCost = new Ability_Cost(recoverCost,recoverable.getName(),false);
+    		    		abRecover.setPayCosts(abCost);
+    		    					
+    		    		StringBuilder question = new StringBuilder("Recover ");
+    		    		question.append(recoverable.getName());
+    		    		question.append("(");
+    		    		question.append(recoverable.getUniqueNumber());
+    		    		question.append(")");
+    		    		question.append("?");
+    		    					
+    		    		boolean shouldRecoverForAI = false;
+    		    		boolean shouldRecoverForHuman = false;
+    		    					
+    		    		if(c.getOwner().equals(AllZone.HumanPlayer))
+    		    		{
+    		    			shouldRecoverForHuman = GameActionUtil.showYesNoDialog(recoverable, question.toString());
+    		    		}
+    		    		else if(c.getOwner().equals(AllZone.ComputerPlayer))
+    		    		{
+    		    			shouldRecoverForAI = ComputerUtil.canPayCost(abRecover);
+    		    		}
+    		    					
+    		    		if(shouldRecoverForHuman)
+    		    		{    						
+    		    			AllZone.GameAction.playSpellAbility(abRecover);
+    		    		}
+    		    		else if(shouldRecoverForAI)
+    		    		{
+    		    			ComputerUtil.playStack(abRecover);
+    		    		}
+
+    		    		if(!grave.hasChanged()) //If the controller declined Recovery or didn't pay the cost, exile the recoverable
+    		    		{
+    		    			AllZone.GameAction.exile(recoverable);
+    		    		}
+    		    	}
+    		    }
+    		}
     	}
     }
     

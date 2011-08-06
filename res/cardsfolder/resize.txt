@@ -1,0 +1,10 @@
+Name:Resize
+ManaCost:1 G
+Types:Instant
+Text:no text
+A:SP$Pump | Cost$ 1 G | Tgt$ TgtC | NumAtt$ 3 | NumDef$ 3 | SpellDescription$ Target creature gets +3/+3 until end of turn.
+K:Recover:1 G
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/resize.jpg
+SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/117.jpg
+End

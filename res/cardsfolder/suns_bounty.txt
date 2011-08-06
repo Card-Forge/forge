@@ -1,0 +1,10 @@
+Name:Sun's Bounty
+ManaCost:1 W
+Types:Instant
+Text:no text
+A:SP$GainLife | Cost$ 1 W | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
+K:Recover:1 W
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/suns_bounty.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/18.jpg
+End

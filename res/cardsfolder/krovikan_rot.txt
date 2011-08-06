@@ -1,0 +1,10 @@
+Name:Krovikan Rot
+ManaCost:2 B
+Types:Instant
+Text:no text
+A:SP$Destroy | Cost$ 2 B | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less. | SpellDescription$ Destroy target creature with power 2 or less.
+K:Recover:1 B B
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/krovikan_rot.jpg
+SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/63.jpg
+End
