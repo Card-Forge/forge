@@ -1088,7 +1088,7 @@ public class Card extends MyObservable {
         
         //Remembered cards
         if(rememberedCards.size() > 0)
-	        sb.append("Remembered: \r\n");
+	        sb.append("\r\nRemembered: \r\n");
         for(Card c : rememberedCards)
         {
         	sb.append(c.getName() + "(");
