@@ -6,6 +6,7 @@ A:SP$ChangeZoneAll | Cost$ 2 U |  ChangeType$ Card | Origin$ Hand | Destination$
 SVar:DBChangeAll:DB$ChangeZoneAll | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | SubAbility$ SVar=DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 7 | Defined$ Each | SubAbility$ SVar=DBChange | SpellDescription$ , then draws seven cards.
 SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Graveyard | SpellDescription$ CARDNAME goes into a new graveyard.
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timetwister.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/85.jpg
