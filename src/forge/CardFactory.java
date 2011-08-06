@@ -4598,6 +4598,8 @@ public class CardFactory implements NewConstants {
                                 c.setController(c.getOwner());
                                 
                                 PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getOwner());
+                                PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, c.getOwner());
+                                removed.remove(c);
                                 play.add(c);
                             }
                         }//resolve()

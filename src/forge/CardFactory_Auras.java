@@ -2875,6 +2875,8 @@ class CardFactory_Auras {
                             PlayerZone from = AllZone.getZone(crd);
                             from.remove(crd);
                             
+                            AllZone.Combat.removeFromCombat(crd);
+                            
                             String opp = AllZone.GameAction.getOpponent(crd.getController());
                             crd.setController(opp);
                             
