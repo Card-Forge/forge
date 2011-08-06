@@ -14053,6 +14053,45 @@ public class CardFactory_Creatures {
         	card.addSpellAbility(ability); 
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Sea Gate Oracle")) {
+        	final Ability ability = new Ability(card, "") {
+        		@Override
+        		public void resolve() {
+        			if(card.getController().isHuman()) {
+        				PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
+        				int maxCards = lib.size();
+        				maxCards = Math.min(maxCards, 2);
+        				if(maxCards == 0) return;
+        				CardList topCards =   new CardList();
+        				//show top n cards:
+        				for(int j = 0; j < maxCards; j++ ) {
+        					topCards.add(lib.get(j));
+        				}
+        				Object o = AllZone.Display.getChoice("Put one card in your hand", topCards.toArray());
+    					if(o != null) {
+    						Card c_1 = (Card) o;
+    						topCards.remove(c_1);
+    						AllZone.GameAction.moveToHand(c_1);
+    					}
+    					for(Card c:topCards) {
+    						AllZone.GameAction.moveToBottomOfLibrary(c);
+    					}
+        			}
+        		}
+        	};
+        	ability.setStackDescription(cardName+" - Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.");
+        	Command intoPlay = new Command() {
+				private static final long serialVersionUID = -4300804642226899861L;
+
+				public void execute() {
+        			AllZone.Stack.add(ability);
+        		}
+        	};
+
+        	card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
                
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
         {

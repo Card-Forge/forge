@@ -1,0 +1,9 @@
+Name:Sea Gate Oracle
+ManaCost:2 U
+Types:Creature Human Wizard
+Text:When CARDNAME enters the battlefield, look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.
+PT:1/3
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_gate_oracle.jpg
+End

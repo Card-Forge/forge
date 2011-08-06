@@ -4137,6 +4137,7 @@ res/cardsfolder/scuzzback_marauders.txt -text svneol=native#text/plain
 res/cardsfolder/scuzzback_scrapper.txt -text svneol=native#text/plain
 res/cardsfolder/sea_eagle.txt -text svneol=native#text/plain
 res/cardsfolder/sea_gate_loremaster.txt -text svneol=native#text/plain
+res/cardsfolder/sea_gate_oracle.txt -text svneol=native#text/plain
 res/cardsfolder/sea_monster.txt -text svneol=native#text/plain
 res/cardsfolder/sea_scryer.txt -text svneol=native#text/plain
 res/cardsfolder/sea_serpent.txt -text svneol=native#text/plain
