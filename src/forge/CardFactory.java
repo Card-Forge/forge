@@ -4853,7 +4853,9 @@ public class CardFactory implements NewConstants {
             card.addComesIntoPlayCommand(intoPlay);
         }
         
-
+        
+        /*  All cards using etbMakeToken converted to use AF + Triggers.
+        
         if(hasKeyword(card, "etbMakeToken") != -1) {
         	int n = hasKeyword(card, "etbMakeToken");
         	String parse = card.getKeyword().get(n).toString();
@@ -4904,6 +4906,7 @@ public class CardFactory implements NewConstants {
             };
             card.addComesIntoPlayCommand(cip);
         }//end etbMakeToken
+        */
         
         //**************************************************
         // AbilityFactory cards
