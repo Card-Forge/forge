@@ -15,6 +15,7 @@ Affa Guard Hound
 Agent of Masks
 Air Elemental
 Ajani's Pridemate
+Akki Raider
 Akoum Refuge
 Alaborn Zealot
 Albino Troll
@@ -156,6 +157,7 @@ Cinder Storm
 City of Brass
 Cleanfall
 Clear
+Close Quarters
 Cloud Djinn
 Cloudseeder
 Coastal Tower
@@ -556,6 +558,7 @@ Moroii
 Mortify
 Moss Diamond
 Mother of Runes
+Murderous Redcap
 Mycologist
 Mystical Tutor
 Nantuko Elder
@@ -595,6 +598,7 @@ Path to Exile
 Patrol Signaler
 Pavel Maliki
 Peach Garden Oath
+Pelakka Wurm
 Pendelhaven
 Penumbra Kavu
 People of the Woods
@@ -678,6 +682,7 @@ Roar of the Wurm
 Robber Fly
 Roc Egg
 Rockslide Ambush
+Rockslide Elemental
 Rod of Ruin
 Rootbreaker Wurm
 Ruins of Trokair

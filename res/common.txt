@@ -547,6 +547,7 @@ Glory Seeker
 Gnarled Mass
 Gnarlid Pack
 Gnat Miser
+Goblin Arsonist
 Goblin Brigand
 Goblin Bully
 Goblin Cavaliers
@@ -555,6 +556,7 @@ Goblin Deathraiders
 Goblin Grenade
 Goblin Hero
 Goblin Matron
+Goblin Medics
 Goblin Mountaineer
 Goblin Outlander
 Goblin Patrol
@@ -716,6 +718,7 @@ Kaleidostone
 Kami of Ancient Law
 Kami of Empty Graves
 Kami of the Hunt
+Karplusan Wolverine
 Kathari Screecher
 Kavu Climber
 Kavu Glider

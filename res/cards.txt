@@ -1,3 +1,38 @@
+Close Quarters
+2 R R
+Enchantment
+no text
+WheneverKeyword:BecomesBlocked:No_Initiator:Play:Damage/1:InputType - CreatureORPlayer:ASAP:No_Condition:Initiator - OwnedByController!SingleTarget:Whenever a creature you control becomes blocked, Close Quarters deals 1 damage to target creature or player.
+
+Goblin Arsonist
+R
+Creature Goblin Shaman
+no text
+1/1
+WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:Damage/1:InputType - CreatureORPlayer:ASAP:No_Condition:SingleTarget:When Goblin Arsonist is put into a graveyard from the battlefield, you may have it deal 1 damage to target creature or player.
+
+Murderous Redcap
+2 BR BR
+Creature Goblin Assassin
+no text
+2/2
+Persist
+WheneverKeyword:EntersBattleField:Self:Play:Damage/Power:InputType - CreatureORPlayer:ASAP:No_Condition:SingleTarget:When Murderous Redcap enters the battlefield, it deals damage equal to its power to target creature or player.
+
+Goblin Medics
+2 R
+Creature Goblin Shaman
+no text
+1/1
+WheneverKeyword:BecomesTapped:Self:Play:Damage/1:InputType - CreatureORPlayer:ASAP:No_Condition:SingleTarget:Whenever Goblin Medics becomes tapped, it deals 1 damage to target creature or player.
+
+Karplusan Wolverine
+R
+Creature Human Mercenary
+no text
+1/1
+WheneverKeyword:BecomesBlocked:Self:Play:Damage/1:InputType - CreatureORPlayer:ASAP:Yes_No:SingleTarget:Whenever Karplusan Wolverine becomes blocked, you may have it deal 1 damage to target creature or player.
+
 Akki Raider
 1 R
 Creature Goblin Warrior
@@ -26,7 +61,7 @@ Aether Flash
 2 R R
 Enchantment
 no text
-WheneverKeyword:EntersBattleField:Type/Creature:Play:Damage/2:Initiating_Card:ASAP:No_Condition:No Special Condition:Whenever a creature enters the battlefield, Æther Flash deals 2 damage to it.
+WheneverKeyword:EntersBattleField:Type/Creature:Play:Damage/2:Initiating_Card:ASAP:No_Condition:No Special Condition:Whenever a creature enters the battlefield, Aether Flash deals 2 damage to it.
 
 Nettle Sentinel
 G
@@ -716,14 +751,14 @@ Ajani's Pridemate
 Creature Cat Soldier
 no text
 2/2
-WheneverKeyword:GainLife:No_Initiator:Play:+1+1 Counters/1:Self:ASAP:Yes_No:No Special Condition:Whenever you gain life, you may put a +1/+1 counter on Ajani's Pridemate.
+WheneverKeyword:GainLife:Controller:Play:+1+1 Counters/1:Self:ASAP:Yes_No:No Special Condition:Whenever you gain life, you may put a +1/+1 counter on Ajani's Pridemate.
 
 Ageless Entity
 3 G G
 Creature Elemental
 no text
 4/4
-WheneverKeyword:GainLife:No_Initiator:Play:+1+1 Counters/Life_Gained:Self:ASAP:No_Condition:No Special Condition:Whenever you gain life, put that many +1/+1 counters on Ageless Entity.
+WheneverKeyword:GainLife:Controller:Play:+1+1 Counters/Life_Gained:Self:ASAP:No_Condition:No Special Condition:Whenever you gain life, put that many +1/+1 counters on Ageless Entity.
 
 Inferno Titan
 4 R R
