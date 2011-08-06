@@ -15,6 +15,14 @@ public class CardFactory_Creatures {
 		return -1;
 	}
 	
+	public static int shouldTransmute(Card c) {
+		ArrayList<String> a = c.getKeyword();
+		for (int i = 0; i < a.size(); i++)
+			if (a.get(i).toString().startsWith("Transmute"))
+				return i;
+
+		return -1;
+	}
 
 	public static Card getCard(final Card card, String cardName, String owner, CardFactory cf)
 	{
@@ -18213,7 +18221,22 @@ public class CardFactory_Creatures {
 	          card.addSpellAbility(CardFactoryUtil.ability_cycle(card, manacost));
 	        }
 	      }//Cycling
-	    
+
+	      if (shouldTransmute(card) != -1)
+	      {
+	        int n = shouldTransmute(card);
+	        if (n != -1)
+	        {
+	          String parse = card.getKeyword().get(n).toString();
+	          card.removeIntrinsicKeyword(parse);
+	
+	          String k[] = parse.split(":");
+	          final String manacost = k[1];
+	
+	          card.addSpellAbility(CardFactoryUtil.ability_transmute(card, manacost));
+	        }
+	      }//Transmute
+	      
 		 return card;
 	}
 }

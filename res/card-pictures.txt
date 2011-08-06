@@ -18,6 +18,9 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+drift_of_phantasms.jpg      http://www.wizards.com/global/images/magic/general/drift_of_phantasms.jpg
+dimir_infiltrator.jpg       http://www.wizards.com/global/images/magic/general/dimir_infiltrator.jpg
+tolaria_west.jpg            http://www.wizards.com/global/images/magic/general/tolaria_west.jpg
 dromad_purebred.jpg			http://www.wizards.com/global/images/magic/general/dromad_purebred.jpg
 swans_of_bryn_argoll.jpg	http://www.wizards.com/global/images/magic/general/swans_of_bryn_argoll.jpg
 earthbind.jpg		http://www.wizards.com/global/images/magic/general/earthbind.jpg

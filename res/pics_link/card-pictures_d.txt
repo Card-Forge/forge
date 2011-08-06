@@ -315,7 +315,7 @@ dimir_cutpurse.jpg	http://mtgpics.chutography.com/RAV/Dimir%20Cutpurse.full.jpg
 dimir_doppelganger.jpg	http://mtgpics.chutography.com/RAV/Dimir%20Doppelganger.full.jpg
 dimir_guildmage.jpg	http://mtgpics.chutography.com/REL/Dimir%20Guildmage.full.jpg
 dimir_house_guard.jpg	http://mtgpics.chutography.com/RAV/Dimir%20House%20Guard.full.jpg
-dimir_infiltrator.jpg	http://mtgpics.chutography.com/RAV/Dimir%20infiltrator.full.jpg
+dimir_infiltrator.jpg	http://mtgpics.chutography.com/RAV/Dimir%20Infiltrator.full.jpg
 dimir_machinations.jpg	http://mtgpics.chutography.com/RAV/Dimir%20Machinations.full.jpg
 dimir_signet.jpg	http://mtgpics.chutography.com/RAV/Dimir%20Signet.full.jpg
 din_of_the_fireherd.jpg	http://mtgpics.chutography.com/SHM/Din%20of%20the%20Fireherd.full.jpg

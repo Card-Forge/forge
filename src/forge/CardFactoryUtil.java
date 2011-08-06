@@ -1191,6 +1191,64 @@ public class CardFactoryUtil
     return cycle;
   }//ability_cycle()
 
+  public static SpellAbility ability_transmute(final Card sourceCard, final String transmuteCost)
+  {
+    final SpellAbility transmute = new Ability_Hand(sourceCard, transmuteCost)
+    {
+	  private static final long serialVersionUID = -4960704261761785512L;
+
+	  public boolean canPlayAI() {return false;}
+	  public boolean canPlay()
+	  {
+	  if ((AllZone.Phase.getPhase().equals(Constant.Phase.Main2)&& AllZone.Phase.getActivePlayer() == sourceCard.getController() && super.canPlay()) || (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && AllZone.Phase.getActivePlayer() == sourceCard.getController() && super.canPlay()) )
+		  return true;
+	  else  
+          return false;
+	  }
+	  
+
+      public void resolve()
+      {
+    	  PlayerZone lib = AllZone.getZone(Constant.Zone.Library, sourceCard.getController());
+          PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, sourceCard.getController());
+                 
+    	  
+          CardList cards = new CardList(lib.getCards());
+          CardList sameCost = new CardList();
+          
+          for (int i=0;i<cards.size();i++)
+          {
+        	  if( CardUtil.getConvertedManaCost(cards.get(i).getManaCost()) == CardUtil.getConvertedManaCost(sourceCard.getManaCost()) )  
+        	  {
+        		  sameCost.add(cards.get(i));
+        	  }
+          }
+
+          
+          if(sameCost.size() == 0)
+            return;
+
+          
+            Object o = AllZone.Display.getChoiceOptional("Select a card", sameCost.toArray());
+            if(o != null)
+            {
+              //ability.setTargetCard((Card)o);
+              //AllZone.Stack.add(ability);
+              AllZone.GameAction.discard(sourceCard);
+              Card c1 = (Card)o;
+              lib.remove(c1);
+              hand.add(c1);
+                         
+                           
+            }
+            AllZone.GameAction.shuffle(sourceCard.getController());
+          }
+      
+    };
+    transmute.setDescription("Transmute "  +transmuteCost +" (" +transmuteCost +", Discard this card: Search your library for a card with the same converted mana cost as the discarded card, reveal that card, and put it into your hand. Then shuffle your library. Play this ability only any time you could play a sorcery.)");
+    transmute.setStackDescription(sourceCard +" Transmute: Search your library for a card with the same converted mana cost.");
+    return transmute;
+  }//ability_transmute()
 
   //CardList choices are the only cards the user can successful select
   public static Input input_targetSpecific(final SpellAbility spell, final CardList choices, final String message, final boolean targeted)

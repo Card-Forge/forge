@@ -17714,6 +17714,20 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
       }
     }//Cycling
 
+    if (hasKeyword(card, "Transmute") != -1)
+    {
+      int n = hasKeyword(card, "Transmute");
+      if (n != -1)
+      {
+        String parse = card.getKeyword().get(n).toString();
+        card.removeIntrinsicKeyword(parse);
+
+        String k[] = parse.split(":");
+        final String manacost = k[1];
+
+        card.addSpellAbility(CardFactoryUtil.ability_transmute(card, manacost));
+      }
+    }//transmute
 
     return card;
   }//getCard2
