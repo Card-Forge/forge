@@ -1831,6 +1831,26 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
+        else if(cardName.equals("Lava Hounds")) {
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(4,card);
+                }
+            };
+            Command intoPlay = new Command() {
+                private static final long serialVersionUID = 9072152875006010499L;
+                
+                public void execute() {
+                    ability.setStackDescription(card.getName() + " deals 4 damage to controller.");
+                    AllZone.Stack.add(ability);
+                }
+            };
+            card.addComesIntoPlayCommand(intoPlay);
+            
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
         else if(cardName.equals("Thunder Dragon")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
@@ -2467,6 +2487,34 @@ public class CardFactory_Creatures {
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Mongrel Pack")) {
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    makeToken();
+                    makeToken();
+                    makeToken();
+                    makeToken();
+                }
+                
+                void makeToken() {
+                    CardFactoryUtil.makeToken("Hound", "G 1 1 Hound", card, "G", new String[] {
+                            "Creature", "Hound"}, 1, 1, new String[] {""});
+                }//makeToken()
+            };//SpellAbility
+            
+            Command destroy = new Command() {
+                private static final long serialVersionUID = -7121390569051656127L;
+                
+                public void execute() {
+                    ability.setStackDescription("Mongrel Pack - " + card.getController()
+                            + " puts four 1/1 tokens into play ");
+                    AllZone.Stack.add(ability);
+                }
+            };
+            card.addDestroyCommand(destroy);
+        }//*************** END ************ END **************************
 
         //*************** START *********** START **************************
         else if(cardName.equals("Chittering Rats")) {
@@ -4414,6 +4462,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Nova Chaser") || cardName.equals("Supreme Exemplar")) {
@@ -4542,6 +4591,133 @@ public class CardFactory_Creatures {
             });
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Lightning Crafter")) {
+            final CommandReturn getCreature = new CommandReturn() {
+                public Object execute() {
+                    //get all creatures
+                    CardList list = new CardList();
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    list.addAll(play.getCards());
+                    
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.getType().contains("Goblin") || 
+                            c.getKeyword().contains("Shaman") || c.getKeyword().contains("Changeling");
+                        }
+                    });
+                    
+                    return list;
+                }
+            };//CommandReturn
+            
+            final SpellAbility abilityComes = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    if(getTargetCard() == null || getTargetCard() == card) AllZone.GameAction.sacrifice(card);
+                    
+                    else if(AllZone.GameAction.isCardInPlay(getTargetCard())) {
+                        /*
+                        PlayerZone play = AllZone.getZone(getTargetCard());
+                        PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, getTargetCard().getController());
+                        play.remove(getTargetCard());
+                        removed.add(getTargetCard());
+                        */
+                        AllZone.GameAction.removeFromGame(getTargetCard());
+                    }
+                }//resolve()
+            };
+            
+            final Input inputComes = new Input() {
+                private static final long serialVersionUID = -6066115143834426784L;
+                
+                @Override
+                public void showMessage() {
+                    CardList choice = (CardList) getCreature.execute();
+                    
+                    stopSetNext(CardFactoryUtil.input_targetChampionSac(card, abilityComes, choice,
+                            "Select Goblin or Shaman to remove from the game", false, false));
+                    ButtonUtil.disableAll();
+                }
+                
+            };
+            Command commandComes = new Command() {
+                private static final long serialVersionUID = -3498068347359658023L;
+                
+                public void execute() {
+                    CardList creature = (CardList) getCreature.execute();
+                    String s = card.getController();
+                    if(creature.size() == 0) {
+                        AllZone.GameAction.sacrifice(card);
+                        return;
+                    } else if(s.equals(Constant.Player.Human)) AllZone.InputControl.setInput(inputComes);
+                    else //computer
+                    {
+                        Card target;
+                        //must target computer creature
+                        CardList computer = new CardList(AllZone.Computer_Play.getCards());
+                        computer = computer.getType("Goblin");
+                        computer.remove(card);
+                        
+                        computer.shuffle();
+                        if(computer.size() != 0) {
+                            target = computer.get(0);
+                            abilityComes.setTargetCard(target);
+                            AllZone.Stack.add(abilityComes);
+                        }
+                        else
+                        	AllZone.GameAction.sacrifice(card);
+                    }//else
+                }//execute()
+            };//CommandComes
+            Command commandLeavesPlay = new Command() {
+                private static final long serialVersionUID = 4236503599117025393L;
+                
+                public void execute() {
+                    //System.out.println(abilityComes.getTargetCard().getName());
+                    Object o = abilityComes.getTargetCard();
+                    
+                    if(o == null || ((Card) o).isToken() || !AllZone.GameAction.isCardRemovedFromGame((Card) o)) return;
+                    
+                    SpellAbility ability = new Ability(card, "0") {
+                        @Override
+                        public void resolve() {
+                            //copy card to reset card attributes like attack and defense
+                            Card c = abilityComes.getTargetCard();
+                            if(!c.isToken()) {
+                                c = AllZone.CardFactory.copyCard(c);
+                                c.setController(c.getOwner());
+                                
+                                PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getOwner());
+                                PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, c.getOwner());
+                                removed.remove(c);
+                                play.add(c);
+                                
+                            }
+                        }//resolve()
+                    };//SpellAbility
+                    ability.setStackDescription(card.getName() + " - returning creature to play");
+                    AllZone.Stack.add(ability);
+                }//execute()
+            };//Command
+            
+            card.addComesIntoPlayCommand(commandComes);
+            card.addLeavesPlayCommand(commandLeavesPlay);
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(new Spell_Permanent(card) {
+                private static final long serialVersionUID = -62128538115338896L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    Object o = getCreature.execute();
+                    if(o == null) return false;
+                    
+                    CardList cl = (CardList) getCreature.execute();
+                    return (o != null) && cl.size() > 0 && AllZone.getZone(getSourceCard()).is(Constant.Zone.Hand);
+                }
+            });
+        }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
         else if(cardName.equals("Wren's Run Packmaster")) {
@@ -5672,6 +5848,85 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
         }//*************** END ************ END **************************
         */
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Arashi the Sky Asunder")) {
+
+            final SpellAbility ability = new Ability_Tap(card, "0") {
+                private static final long serialVersionUID = 7698358771800336470L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    return getCreature().size() != 0;
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+ 
+                        CardList list = getCreature();
+                        list.shuffle();
+                        setTargetCard(list.get(0));
+
+                }//chooseTargetAI()
+                
+                CardList getCreature() {
+
+                	final int total = CardFactoryUtil.getLandsInPlay(Constant.Player.Computer).size();
+                    //toughness of 1
+                    CardList list = CardFactoryUtil.AI_getHumanCreature(total, card, true);
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                        	//get AI's spare lands
+                            return (c.isCreature() && c.getKeyword().contains("Flying") &&
+                       			   CardFactoryUtil.canDamage(card, c) && total >= c.getKillDamage());
+                        }
+                    });
+                    return list;
+                }//getCreature()
+                
+                @Override
+                public void resolve() {
+                	String manaCost = this.getXManaCost();
+                	int damage = 0;
+                	if (!manaCost.equals("")) {
+      				damage = Integer.parseInt(manaCost);
+                	}
+                    if(getTargetCard() != null) {
+                        if(AllZone.GameAction.isCardInPlay(getTargetCard()) 
+                        		&& getTargetCard().getKeyword().contains("Flying") 
+                                && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(damage,
+                                card);
+                    }
+                }//resolve()
+                
+            };//SpellAbility
+        	  ability.setBeforePayMana(new Input()
+          	  {
+          		private static final long serialVersionUID = 4378224586732L;
+
+      			public void showMessage()
+          		 {
+          			 String s = JOptionPane.showInputDialog("What would you like X to be?");
+          	  		 try {
+          	  			     Integer.parseInt(s);
+          	  				 ability.setXManaCost(s);
+          	  				 stopSetNext(new Input_PayManaCost(ability));
+          	  			 }
+          	  			 catch(NumberFormatException e){
+          	  				 AllZone.Display.showMessage("\"" + s + "\" is not a number.");
+          	  				 showMessage();
+          	  			 }
+          		 }
+          	  }); 	 
+              
+          	  ability.setStackDescription(card.getName() + "deals X damage to target creature with flying.");
+          	  
+            card.addSpellAbility(ability);
+            ability.setDescription("X G, T: Arashi the Sky Asunder deals X damage to target creature with flying.");
+            
+            ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
+        }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Mirror Entity"))
@@ -7220,10 +7475,6 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Killer Whale")) {
             final Ability ability = new Ability(card, "U") {
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
                 
                 @Override
                 public void resolve() {
@@ -7367,6 +7618,167 @@ public class CardFactory_Creatures {
             };
             ability.setStackDescription(card + " gets returned to owner's hand");
             ability.setDescription("2U, Discard a card: Return Amugaba to owner's hand.");
+            card.addSpellAbility(ability);
+            ability.setBeforePayMana(runtime);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Subterranean Spirit")) {
+            
+            final SpellAbility ability = new Ability_Tap(card, "0") {
+            	
+                private static final long serialVersionUID = 7698358771810336470L;
+
+                @Override
+                public void resolve() {
+                	
+      				CardList all = new CardList();
+                    all.addAll(AllZone.Human_Play.getCards());
+                    all.addAll(AllZone.Computer_Play.getCards());
+                    all = all.filter(new CardListFilter()
+                    {
+                    	public boolean addCard(Card c)
+                    	{
+                    		return c.isCreature() && !c.getKeyword().contains("Flying") &&
+                    			   CardFactoryUtil.canDamage(card, c);
+                    	}
+                    });
+                    
+                    for(int i = 0; i < all.size(); i++)
+                        	all.get(i).addDamage(1, card);
+ 
+                }//resolve()
+            };//SpellAbility
+            
+            ability.setStackDescription(card + " deals 1 damage to each creature without flying.");
+            ability.setDescription("T: Subterranean Spirit deals 1 damage to each creature without flying.");
+            card.addSpellAbility(ability);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Ashen Firebeast")) {
+            
+            final Ability ability = new Ability(card, "1 R") {
+            	
+                @Override
+                public void resolve() {
+                	
+      				CardList all = new CardList();
+                    all.addAll(AllZone.Human_Play.getCards());
+                    all.addAll(AllZone.Computer_Play.getCards());
+                    all = all.filter(new CardListFilter()
+                    {
+                    	public boolean addCard(Card c)
+                    	{
+                    		return c.isCreature() && !c.getKeyword().contains("Flying") &&
+                    			   CardFactoryUtil.canDamage(card, c);
+                    	}
+                    });
+                    
+                    for(int i = 0; i < all.size(); i++)
+                        	all.get(i).addDamage(1, card);
+
+                }//resolve()
+            };//SpellAbility
+            
+            ability.setStackDescription(card + " deals 1 damage to each creature without flying.");
+            ability.setDescription("1 R: Ashen Firebeast deals 1 damage to each creature without flying.");
+            card.addSpellAbility(ability);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Scourge of Kher Ridges")) {
+            
+            final Ability ability = new Ability(card, "1 R") {
+            	
+                @Override
+                public void resolve() {
+                	
+      				CardList all = new CardList();
+                    all.addAll(AllZone.Human_Play.getCards());
+                    all.addAll(AllZone.Computer_Play.getCards());
+                    all = all.filter(new CardListFilter()
+                    {
+                    	public boolean addCard(Card c)
+                    	{
+                    		return c.isCreature() && !c.getKeyword().contains("Flying") &&
+                    			   CardFactoryUtil.canDamage(card, c);
+                    	}
+                    });
+                    
+                    for(int i = 0; i < all.size(); i++)
+                        	all.get(i).addDamage(2, card);
+
+                }//resolve()
+            };//SpellAbility
+            
+            ability.setStackDescription(card + " deals 2 damage to each creature without flying.");
+            ability.setDescription("1 R: Scourge of Kher Ridges deals 2 damage to each creature without flying.");
+            card.addSpellAbility(ability);
+            
+            final Ability a2 = new Ability(card, "5 R") {
+            	
+                @Override
+                public void resolve() {
+                	
+      				CardList all = new CardList();
+                    all.addAll(AllZone.Human_Play.getCards());
+                    all.addAll(AllZone.Computer_Play.getCards());
+                    all = all.filter(new CardListFilter()
+                    {
+                    	public boolean addCard(Card c)
+                    	{
+                    		return c.isCreature() && c.getKeyword().contains("Flying") &&
+                    			   !c.equals(card) && CardFactoryUtil.canDamage(card, c);
+                    	}
+                    });
+                    
+                    for(int i = 0; i < all.size(); i++)
+                        	all.get(i).addDamage(6, card);
+
+                }//resolve()
+            };//SpellAbility
+            
+            a2.setStackDescription(card + " deals 6 damage to each other creature with flying.");
+            a2.setDescription("1 R: Scourge of Kher Ridges deals 6 damage to each creature with flying.");
+            card.addSpellAbility(a2);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Thalakos Drifters")) {
+            
+            final Ability ability = new Ability(card, "0") {
+            	
+                @Override
+                public void resolve() {
+                    final Command untilEOT = new Command() {
+                        private static final long serialVersionUID = -8494294720368174013L;
+                        
+                        public void execute() {
+                            card.removeIntrinsicKeyword("Shadow");
+                        }
+                    };
+                    
+                    if(AllZone.GameAction.isCardInPlay(card)) {
+                        card.addIntrinsicKeyword("Shadow");
+                        AllZone.EndOfTurn.addUntil(untilEOT);
+                    }
+                }//resolve()
+                
+            };//SpellAbility
+            
+
+            Input runtime = new Input() {
+                private static final long serialVersionUID = -4302220760957471033L;
+                
+                @Override
+                public void showMessage() {
+                    stopSetNext(CardFactoryUtil.input_discard(ability, 1));
+                    
+                }
+            };
+            ability.setStackDescription(card + " gains shadow until EOT.");
+            ability.setDescription("Discard a card: Thalakos Drifters gain shadow until EOT.");
             card.addSpellAbility(ability);
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
@@ -15780,7 +16192,34 @@ public class CardFactory_Creatures {
             ability.setDescription("1 R, Tap: Target Dwarf creature gains mountainwalk until end of turn.");
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
-        
+     
+        //*************** START *********** START **************************
+        else if(cardName.equals("Sliptide Serpent")) {
+            final SpellAbility a1 = new Ability(card, "3 U") {
+                @Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+                
+                @Override
+                public void resolve() {
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getOwner());
+                    /*
+                    AllZone.getZone(card).remove(card);
+                    hand.add(card);
+                    */
+                    if(card.isToken()) AllZone.getZone(card).remove(card);
+                    else AllZone.GameAction.moveTo(hand, card);
+                    
+                }
+            };//a1
+            
+            //card.clearSpellAbility();
+            card.addSpellAbility(a1);
+            a1.setStackDescription(card.getController() + " returns Sliptide Serpent back to its owner's hand.");
+            a1.setDescription("3 U: Return Sliptide Serpent to its owner's hand.");
+            
+        }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
         else if(cardName.equals("Fleeting Image")) {
@@ -15807,6 +16246,69 @@ public class CardFactory_Creatures {
             card.addSpellAbility(a1);
             a1.setStackDescription(card.getController() + " returns Fleeting Image back to its owner's hand.");
             a1.setDescription("1 U: Return Fleeting Image to its owner's hand.");
+            
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Windreaver")) {
+            final SpellAbility a1 = new Ability(card, "U") {
+                @Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+                
+                @Override
+                public void resolve() {
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getOwner());
+                    /*
+                    AllZone.getZone(card).remove(card);
+                    hand.add(card);
+                    */
+                    if(card.isToken()) AllZone.getZone(card).remove(card);
+                    else AllZone.GameAction.moveTo(hand, card);
+                    
+                }
+            };//a1
+            
+            //card.clearSpellAbility();
+            card.addSpellAbility(a1);
+            a1.setStackDescription(card.getController() + " returns Windreaver back to its owner's hand.");
+            a1.setDescription("U: return Windreaver to its owner's hand.");
+            
+            final SpellAbility a2 = new Ability(card, "U") {
+                
+                @Override
+                public void resolve() {
+
+                	
+                    final Command EOT = new Command() {
+                        private static final long serialVersionUID = 6437163765161964445L;
+                        
+                        public void execute() {
+                      	  
+                            int power = card.getNetAttack();
+                            int tough = card.getNetDefense();
+                            card.addTempAttackBoost(tough - power);
+                            card.addTempDefenseBoost(power - tough);
+                            
+                      	  }
+                        
+                        };
+
+                        if(AllZone.GameAction.isCardInPlay(card)) {
+                            int power = card.getNetAttack();
+                            int tough = card.getNetDefense();
+                            card.addTempAttackBoost(tough - power);
+                            card.addTempDefenseBoost(power - tough);
+                            AllZone.EndOfTurn.addUntil(EOT);
+                        }
+                	
+                }
+            };//a2
+
+            card.addSpellAbility(a2);
+            a2.setStackDescription(card.getController() + " switches Windreaver's power and toughness until EOT.");
+            a2.setDescription("U: Switch Windreaver's power and toughness until end of turn. ");
             
         }//*************** END ************ END **************************
         
@@ -19491,6 +19993,66 @@ public class CardFactory_Creatures {
         }
         //*************** END ************ END **************************
         
+        else if(cardName.equals("Thrashing Wumpus")) {
+            final SpellAbility ability = new Ability(card, "B") {
+            	
+                @Override
+                public boolean canPlayAI() {
+                    CardList human = new CardList(AllZone.Human_Play.getCards());
+                    CardList computer = new CardList(AllZone.Computer_Play.getCards());
+                    
+                    human = human.getType("Creature");
+                    computer = computer.getType("Creature");
+                    
+                    return AllZone.Computer_Life.getLife() > 2 
+                    			&& !(human.size() == 0 
+                    			&& 0 < computer.size()) 
+                    			&& card.getKillDamage() > 1;
+                }
+                
+                @Override
+                public void resolve() {
+                    //get all creatures
+                    CardList list = new CardList();
+                    list.addAll(AllZone.Human_Play.getCards());
+                    list.addAll(AllZone.Computer_Play.getCards());
+                    list = list.getType("Creature");
+                    
+                    for(int i = 0; i < list.size(); i++) {
+                        if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);
+                    }
+                    
+                    //AllZone.Human_Life.subtractLife(1,card);
+                    //AllZone.Computer_Life.subtractLife(1,card);
+                    AllZone.GameAction.addDamage(Constant.Player.Human, card, 1);
+                    AllZone.GameAction.addDamage(Constant.Player.Computer, card, 1);
+                }//resolve()
+            };//SpellAbility
+            ability.setDescription("B: Thrashing Wumpus deals 1 damage to each creature and each player.");
+            ability.setStackDescription(card + " deals 1 damage to each creature and each player.");
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(new Spell_Permanent(card) {
+				private static final long serialVersionUID = -9008807568695047980L;
+
+				@Override
+                public boolean canPlayAI() {
+                    //get all creatures
+                    CardList list = new CardList();
+                    list.addAll(AllZone.Human_Play.getCards());
+                    list.addAll(AllZone.Computer_Play.getCards());
+                    list = list.getType("Creature");
+                    
+                    return 0 < list.size();
+                }
+            });
+            
+            card.addSpellAbility(ability);
+            
+            card.setSVar("PlayMain1", "TRUE");
+        }
+        //*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Ifh-Biff Efreet")) {
@@ -20170,8 +20732,8 @@ public class CardFactory_Creatures {
         	};
         	ability.setStackDescription(cardName + " - tap all other creatures.");
         	card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        
+        }//*************** END ************ END *************************
+       
         //*************** START *********** START **************************
         else if(cardName.equals("Nameless Race")) {
         	/*

@@ -5147,6 +5147,7 @@ public class GameActionUtil {
 	    
 	    	if(c.getName().equals("Marsh Viper")) playerCombatDamage_PoisonCounter(c, 2);
 	    	else if(c.getName().equals("Abyssal Specter")) playerCombatDamage_Abyssal_Specter(c);
+	    	else if(c.getName().equals("Silent Specter")) playerCombatDamage_Silent_Specter(c);
 	    	else if(c.getName().equals("Nicol Bolas")) playerCombatDamage_Nicol_Bolas(c);
 			else if(c.getName().equals("Goblin Lackey")) playerCombatDamage_Goblin_Lackey(c);
 			else if(c.getName().equals("Thieving Magpie")|| c.getName().equals("Lu Xun, Scholar General")) playerCombatDamage_Shadowmage_Infiltrator(c);
@@ -5956,6 +5957,54 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}
 	}
+	
+	private static void playerCombatDamage_Silent_Specter(Card c) {
+		final String[] player = new String[1];
+		player[0] = c.getController();
+		final String[] opponent = new String[1];
+
+		if(c.getNetAttack() > 0) {
+			Ability ability = new Ability(c, "0") {
+				@Override
+				public void resolve() {
+                    PlayerZone Ohand = AllZone.getZone(Constant.Zone.Hand, AllZone.GameAction.getOpponent(player[0]));
+                    Card h[] = Ohand.getCards();
+                    Card[] handChoices = Ohand.getCards();
+                    int Handsize = 1;
+                    if(h.length <= 1) Handsize = h.length;
+                    String opponent = AllZone.GameAction.getOpponent(player[0]);
+                    Card choice = null; 
+
+                    int j=0;
+                    
+                    while (j<2) {
+
+                    for(int i = 0; i < Handsize; i++) {
+                            AllZone.Display.showMessage("Select two cards to discard ");
+                            ButtonUtil.enableOnlyCancel();
+                        handChoices = Ohand.getCards();
+                        //human chooses
+                        if(opponent.equals(Constant.Player.Human)) {
+                            choice = AllZone.Display.getChoice("Choose", handChoices);
+                        } else//computer chooses
+                        {
+                            choice = CardUtil.getRandom(handChoices);
+                        }
+                        
+                        AllZone.GameAction.discard(choice, this);
+                    }
+                    
+                    j++;
+                    
+                    }
+				}
+			};// ability
+			opponent[0] = AllZone.GameAction.getOpponent(player[0]);
+			ability.setStackDescription("Silent Specter - " + opponent[0] + " discards two cards");
+			AllZone.Stack.add(ability);
+		}
+	}
+	
 
 	private static void playerCombatDamage_Abyssal_Specter(Card c) {
 		final String[] player = new String[1];
