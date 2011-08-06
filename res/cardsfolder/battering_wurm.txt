@@ -1,0 +1,11 @@
+Name:Battering Wurm
+ManaCost:6 G
+Types:Creature Wurm
+Text:no text
+PT:4/3
+K:Bloodthirst 1
+K:Creatures with power less than CARDNAME's power can't block it.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/battering_wurm.jpg
+SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/79.jpg
+End
