@@ -1,3 +1,10 @@
+Dawnglare Invoker
+2 W
+Creature Kor Wizard
+8: Tap all creatures target player controls.
+2/1
+Flying
+
 Serpent of the Endless Sea
 4 U
 Creature Serpent

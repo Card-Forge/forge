@@ -17842,6 +17842,34 @@ public class CardFactory_Creatures {
         	ability.setStackDescription(cardName + " - Rearrange the top X cards in your library in any order.");
         }//*************** END ************ END **************************
 
+        //*************** START *********** START **************************
+        if(cardName.equals("Dawnglare Invoker")) {
+        	/*
+        	 * 8: Tap all creatures target player controls.
+        	 */
+        	final SpellAbility ability = new Ability(card, "8") {
+        		@Override
+        		public boolean canPlayAI() {
+        			CardList human = AllZoneUtil.getCreaturesInPlay(Constant.Player.Human);
+        			human = human.filter(AllZoneUtil.tapped);
+        			return human.size() > 0 && AllZone.Phase.getPhase().equals("Main1");
+        		}
+        		@Override
+        		public void resolve() {
+        			final String player = getTargetPlayer();
+        			CardList creatures = AllZoneUtil.getCreaturesInPlay(player);
+        			for(Card c:creatures) {
+        				if( c.isUntapped() ) {
+        					c.tap();
+        				}
+        			}
+        		}   
+        	};
+        	card.addSpellAbility(ability);
+        	ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+        	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
+        	//ability.setStackDescription(cardName + " - Rearrange the top X cards in your library in any order.");
+        }//*************** END ************ END **************************
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

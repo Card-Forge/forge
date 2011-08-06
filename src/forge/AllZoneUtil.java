@@ -322,4 +322,10 @@ public class AllZoneUtil {
 			AllZone.GameAction.shuffle(player);
 		}
 	}
+	
+	public static CardListFilter tapped = new CardListFilter() {
+		public boolean addCard(Card c) {
+			return c.isTapped();
+		}
+	};
 }
