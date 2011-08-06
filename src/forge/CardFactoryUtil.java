@@ -1662,9 +1662,7 @@ public class CardFactoryUtil {
             @Override
             public void showMessage() {
                 //get all creatures you control
-                CardList list = new CardList();
-                list.addAll(AllZone.Human_Battlefield.getCards());
-                list = list.getType("Creature");
+                CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
                 
                 stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip",
                         true, false));
@@ -2183,9 +2181,7 @@ public class CardFactoryUtil {
         
         @Override
         public void showMessage() {
-            CardList allCards = new CardList();
-            allCards.addAll(AllZone.Human_Battlefield.getCards());
-            allCards.addAll(AllZone.Computer_Battlefield.getCards());
+            CardList allCards = AllZoneUtil.getCardsInPlay();
             
             CardList choices = allCards.getValidCards(Tgts,sa.getActivatingPlayer(),sa.getSourceCard());
             boolean free = false;
@@ -2280,9 +2276,7 @@ public class CardFactoryUtil {
 			@Override
 	        public void showMessage() {
 	            //get all creatures you control
-	            CardList list = new CardList();
-	            list.addAll(AllZone.Human_Battlefield.getCards());
-	            list = list.getType("Creature");
+	            CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
 	            
 	            stopSetNext(input_targetSpecific(equip, list,
 	                    "Select target creature to equip", true, false));
@@ -2911,9 +2905,7 @@ public class CardFactoryUtil {
     }//targetInPlay()
     
     public static int getNumberOfPermanentsByColor(String color) {
-        CardList cards = new CardList();
-        cards.addAll(AllZone.Human_Battlefield.getCards());
-        cards.addAll(AllZone.Computer_Battlefield.getCards());
+        CardList cards = AllZoneUtil.getCardsInPlay();
         
         CardList coloredPerms = new CardList();
         
