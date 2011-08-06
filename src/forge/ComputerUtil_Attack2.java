@@ -74,7 +74,8 @@ public class ComputerUtil_Attack2 {
 		
 		ArrayList<Trigger> registeredTriggers = AllZone.TriggerHandler.getRegisteredTriggers();
 		for(Trigger trigger : registeredTriggers)
-			if (CombatUtil.combatTriggerWillTrigger(attacker,null,trigger, combat)) return true;
+			if (CombatUtil.combatTriggerWillTrigger(attacker,null,trigger, combat) 
+					&& trigger.getHostCard().getController().equals(AllZone.ComputerPlayer)) return true;
 		
 		return false;
     }
@@ -87,7 +88,7 @@ public class ComputerUtil_Attack2 {
         public boolean addCard(Card c) { return CombatUtil.canAttack(c); }
       });
       return list;
-    }//getUntappedCreatures()
+    }//getPossibleAttackers()
 	
       public CardList getPossibleBlockers(CardList blockers, CardList attackers)
       {
@@ -188,6 +189,20 @@ public class ComputerUtil_Attack2 {
 
        private boolean doAssault()
        {
+    	   //Beastmaster Ascension
+    	   if(AllZoneUtil.isCardInPlay("Beastmaster Ascension", AllZone.ComputerPlayer) && attackers.size() > 3) {
+    		   CardList beastions = AllZoneUtil.getCardsInZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).
+    		   		getName("Beastmaster Ascension");
+    		   int minCreatures = 7;
+    		   for(Card beastion:beastions) {
+    			   int counters = beastion.getCounters(Counters.QUEST);
+    			   minCreatures = Math.min(minCreatures, 7 - counters);
+    		   }
+    		   minCreatures = Math.max(minCreatures, 2);
+    		   if (attackers.size() >= minCreatures)
+    			   return true;
+    	   }
+    	   
           //I think this is right but the assault code may still be a little off
           CardListUtil.sortAttackLowFirst(attackers);
 
