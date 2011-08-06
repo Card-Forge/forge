@@ -723,36 +723,49 @@ public class MagicStack extends MyObservable {
 	}
 	
 	public boolean hasFizzled(SpellAbility sa, Card source){
+		// By default this has not fizzled
 		boolean fizzle = false;
+		
+		boolean firstTarget = true;
 
-		Target tgt = sa.getTarget();
-		if (tgt != null){
-			fizzle = true;
-			// With multi-targets, as long as one target is still legal, we'll try to go through as much as possible
-			ArrayList<Object> tgts = tgt.getTargets();
-			for(Object o : tgts){
-				if (o instanceof Player){
-					Player p = (Player)o;
-					fizzle &= !(p.canTarget(sa.getTargetCard()));
-				}
-				if (o instanceof Card){
-					Card card = (Card)o;
-					fizzle &= !(CardFactoryUtil.isTargetStillValid(sa, card));
+		SpellAbility fizzSA = sa;
+		
+		while(true){
+			Target tgt = fizzSA.getTarget();
+			if (firstTarget && (tgt != null || fizzSA.getTargetCard() != null || fizzSA.getTargetPlayer() != null)){
+				// If there is at least 1 target, fizzle switches because ALL targets need to be invalid
+				fizzle = true;
+				firstTarget = false;	
+			}
+			
+			if (tgt != null){
+				// With multi-targets, as long as one target is still legal, we'll try to go through as much as possible
+				ArrayList<Object> tgts = tgt.getTargets();
+				for(Object o : tgts){
+					if (o instanceof Player){
+						Player p = (Player)o;
+						fizzle &= !(p.canTarget(fizzSA.getTargetCard()));
+					}
+					if (o instanceof Card){
+						Card card = (Card)o;
+						fizzle &= !(CardFactoryUtil.isTargetStillValid(fizzSA, card));
+					}
 				}
 			}
+			else if (fizzSA.getTargetCard() != null) {
+				// Fizzling will only work for Abilities that use the Target class,
+				// since the info isn't available otherwise
+				fizzle &= !CardFactoryUtil.isTargetStillValid(fizzSA, fizzSA.getTargetCard());
+			} 
+			else if (fizzSA.getTargetPlayer() != null) {
+				fizzle &= !fizzSA.getTargetPlayer().canTarget(source);
+			}
+			
+			if (fizzSA.getSubAbility() != null)
+				fizzSA = fizzSA.getSubAbility();
+			else
+				break;
 		}
-		else if (sa.getTargetCard() != null) {
-			// Fizzling will only work for Abilities that use the Target class,
-			// since the info isn't available otherwise
-			fizzle = !CardFactoryUtil.isTargetStillValid(sa, sa.getTargetCard());
-		} 
-		else if (sa.getTargetPlayer() != null) {
-			fizzle = !sa.getTargetPlayer().canTarget(source);
-		}
-		
-		Ability_Sub abSub = sa.getSubAbility();
-		if (abSub != null)
-			fizzle &= hasFizzled(abSub, source);
 	
 		return fizzle;
 	}
