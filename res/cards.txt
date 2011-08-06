@@ -1,3 +1,20 @@
+Reach of Branches
+4 G
+Tribal Instant Treefolk
+Put a 2/5 green Treefolk Shaman creature token into play.\r\nWhenever a Forest comes into play under your control, you may return Reach of Branches from your graveyard to your hand.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reach_of_branches.jpg
+
+Relentless Rats
+1 B B
+Creature Rat
+Relentless Rats gets +1/+1 for each other creature in play named Relentless Rats.\r\nA deck can have any number of cards named Relentless Rats.
+2/2
+SVar:RemAIDeck:True
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73573.jpg
+
 Eerie Procession
 2 U
 Sorcery
@@ -24305,13 +24322,6 @@ Fear
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83418.jpg
 
-Reach of Branches
-4 G
-Tribal Instant Treefolk
-Put a 2/5 green Treefolk Shaman creature token into play. Whenever a Forest comes into play under your control, you may return Reach of Branches from your graveyard to your hand.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reach_of_branches.jpg
-
 Reanimate
 B
 Sorcery
@@ -24557,16 +24567,6 @@ Whenever you play a legendary spell, draw a card.
 1/2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reki_the_history_of_kamigawa.jpg
-
-Relentless Rats
-1 B B
-Creature Rat
-Relentless Rats gets +1/+1 for each other creature in play named Relentless Rats. A deck can have any number of cards named Relentless Rats.
-2/2
-SVar:RemAIDeck:True
-SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
-SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73573.jpg
 
 Reliquary Tower
 no cost
