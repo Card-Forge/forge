@@ -874,11 +874,16 @@ public class AbilityFactory {
 		}
 		else if (defined.equals("TargetedController")){
 			ArrayList<Card> list = getDefinedCards(card, "Targeted", sa);
+			ArrayList<SpellAbility> sas = getDefinedSpellAbilities(card, "Targeted", sa);
 
 			for(Card c : list){
 				Player p = c.getController();
 				if (!players.contains(p))
 					players.add(p);
+			}
+			for(SpellAbility s : sas) {
+				Player p = s.getSourceCard().getController();
+				if(!players.contains(p)) players.add(p);
 			}
 		}
 		else if (defined.equals("TargetedOwner")){
@@ -956,8 +961,21 @@ public class AbilityFactory {
 	
 	public static ArrayList<SpellAbility> getDefinedSpellAbilities(Card card, String def, SpellAbility sa){
 		ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
+		String defined = (def == null) ? "Self" : def;	// default to Self
 		
-		// TODO: Define SpellAbilities
+		SpellAbility s = null; 
+		
+		//TODO - this probably needs to be fleshed out a bit, but the basics work
+		if (defined.equals("Self")) {
+			s = sa;
+		}
+		else if(defined.equals("Targeted")) {
+			SpellAbility parent = findParentsTargetedSpellAbility(sa);
+			sas.addAll(parent.getTarget().getTargetSAs());
+		}
+		
+		if (s != null)
+			sas.add(s);
 		
 		return sas;
 	}
@@ -989,6 +1007,18 @@ public class AbilityFactory {
 				return parent;
 			parent = ((Ability_Sub)parent).getParent();
 		}while(parent.getTarget() == null || parent.getTarget().getTargetCards().size() == 0);
+		
+		return parent;
+	}
+	
+	private static SpellAbility findParentsTargetedSpellAbility(SpellAbility sa){
+		SpellAbility parent = sa;
+		
+		do{
+			if (!(parent instanceof Ability_Sub))
+				return parent;
+			parent = ((Ability_Sub)parent).getParent();
+		}while(parent.getTarget() == null || parent.getTarget().getTargetSAs().size() == 0);
 		
 		return parent;
 	}
