@@ -15,6 +15,8 @@ abstract public class Ability_Activated extends SpellAbility implements java.io.
     
     @Override
     public boolean canPlay() {
+    	if(AllZone.Stack.isSplitSecondOnStack()) return false;
+    	
         Card c = getSourceCard();
         if (c.isFaceDown() && isIntrinsic())	// Intrinsic abilities can't be activated by face down cards
         	return false;

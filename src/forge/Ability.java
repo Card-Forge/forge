@@ -22,7 +22,9 @@ abstract public class Ability extends SpellAbility {
     
     @Override
     public boolean canPlay() {
-//      if(getSourceCard().isCreature() && (!getSourceCard().hasSickness()))
+    	if(AllZone.Stack.isSplitSecondOnStack()) return false;
+    	
+    	// if(getSourceCard().isCreature() && (!getSourceCard().hasSickness()))
     	CardList Pithing = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
 		Pithing.add(AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer));
 		Pithing = Pithing.getName("Pithing Needle");
@@ -41,6 +43,6 @@ abstract public class Ability extends SpellAbility {
     	
 		
     	return AllZone.GameAction.isCardInPlay(getSourceCard()) && !getSourceCard().isFaceDown() && getSourceCard().getName().equals("Spreading Seas") == false && Pithing.size() == 0;
-//      return false;
+    	// return false;
     }
 }

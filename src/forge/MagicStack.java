@@ -9,6 +9,7 @@ public class MagicStack extends MyObservable {
 	private ArrayList<SpellAbility> frozenStack = new ArrayList<SpellAbility>();
 	private boolean frozen = false;
     private boolean bResolving = false;
+    private boolean splitSecondOnStack = false;
 
 	private Object StormCount;
 	private Object PlayerSpellCount;
@@ -19,8 +20,23 @@ public class MagicStack extends MyObservable {
 	public void reset() {
 		stack.clear();
 		frozen = false;
+		splitSecondOnStack = false;
 		frozenStack.clear();
 		this.updateObservers();
+	}
+	
+	public boolean isSplitSecondOnStack() {
+		return splitSecondOnStack;
+	}
+	
+	public void setSplitSecondOnStack() {
+		for(SpellAbility sa:stack) {
+			if(sa.getSourceCard().hasKeyword("Split second")) {
+				splitSecondOnStack = true;
+				return;
+			}
+		}
+		splitSecondOnStack = false;
 	}
 
 	public void freezeStack() {
@@ -545,6 +561,7 @@ public class MagicStack extends MyObservable {
 		}
 		
 		stack.add(0, sp);
+		setSplitSecondOnStack();
 
 		this.updateObservers();
 		
@@ -704,6 +721,7 @@ public class MagicStack extends MyObservable {
 	public SpellAbility pop() {
 		SpellAbility sp = (SpellAbility) stack.remove(0);
 		this.updateObservers();
+		setSplitSecondOnStack();
 		return sp;
 	}
 

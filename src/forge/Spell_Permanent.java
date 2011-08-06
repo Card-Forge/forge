@@ -143,6 +143,8 @@ public class Spell_Permanent extends Spell {
     
     @Override
     public boolean canPlay() {
+    	if(AllZone.Stack.isSplitSecondOnStack()) return false;
+    	
     	Card perm = getSourceCard();
     	Player turn = AllZone.Phase.getPlayerTurn();
     	
