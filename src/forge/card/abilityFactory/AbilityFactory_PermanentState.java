@@ -133,7 +133,7 @@ public class AbilityFactory_PermanentState {
 		Iterator<Card> it = tgtCards.iterator();
 		while(it.hasNext()) {
 			sb.append(it.next());
-			if(it.hasNext()) sb.append(" ");
+			if(it.hasNext()) sb.append(", ");
 		}
 		
 		sb.append(".");
@@ -491,7 +491,7 @@ public class AbilityFactory_PermanentState {
 		Iterator<Card> it = tgtCards.iterator();
 		while(it.hasNext()) {
 			sb.append(it.next());
-			if(it.hasNext()) sb.append(" ");
+			if(it.hasNext()) sb.append(", ");
 		}
 		
 		sb.append(".");
@@ -1205,7 +1205,7 @@ public class AbilityFactory_PermanentState {
 		Iterator<Card> it = tgtCards.iterator();
 		while(it.hasNext()) {
 			sb.append(it.next());
-			if(it.hasNext()) sb.append(" ");
+			if(it.hasNext()) sb.append(", ");
 		}
 		
 		sb.append(".");
