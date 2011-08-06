@@ -317,6 +317,11 @@ public class TriggerHandler {
 				}
 				
 				@Override
+			    public boolean doTrigger(boolean mandatory){
+					return sa[0].doTrigger(mandatory);
+			    }
+				
+				@Override
 				public AbilityFactory getAbilityFactory()
 				{
 					return sa[0].getAbilityFactory();
