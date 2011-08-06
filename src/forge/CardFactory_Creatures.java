@@ -5345,8 +5345,10 @@ public class CardFactory_Creatures {
         	final String[] color = new String[1];
         	final long[] timeStamp = new long[1];
             
+        	final Ability_Cost abCost = new Ability_Cost("Discard<1/Card>", cardName, true);
+        	
             //mana tap ability
-            final Ability ability = new Ability(card, "0") {
+            final SpellAbility ability = new Ability_Activated(card, abCost, null) {
                 @Override
                 public boolean canPlayAI() {
                     Card[] hand = AllZone.Computer_Hand.getCards();
@@ -5412,27 +5414,13 @@ public class CardFactory_Creatures {
                     }
                 }//resolve()
             };//SpellAbility
-            
-            Input runtime = new Input() {
-                private static final long serialVersionUID = -4209163355325441624L;
-                
-                @Override
-                public void showMessage() {
-                	
-                	StringBuilder sb = new StringBuilder();
-                	sb.append(card).append(" gets +1/+1 until EOT.");
-                	ability.setStackDescription(sb.toString());
-                    
-                    stopSetNext(CardFactoryUtil.input_discard(ability, 1));
-                }
-            };
+
             StringBuilder sb = new StringBuilder();
             sb.append(card).append(" gets +1/+1 and becomes the color of your choice until end of turn.");
             ability.setStackDescription(sb.toString());
             
             ability.setDescription("Discard a card: Wild Mongrel gets +1/+1 and becomes the color of your choice until end of turn.");
             card.addSpellAbility(ability);
-            ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
         
