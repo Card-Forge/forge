@@ -2880,6 +2880,8 @@ public class CardFactory_Creatures {
             };
             card.addComesIntoPlayCommand(intoPlay);
             
+            card.setSVar("PlayMain1", "TRUE");
+            
             card.clearSpellAbility();
             card.addSpellAbility(new Spell_Permanent(card) {
                 private static final long serialVersionUID = 5741146386242415357L;
@@ -2992,6 +2994,8 @@ public class CardFactory_Creatures {
             };
             card.addComesIntoPlayCommand(intoPlay);
             
+            card.setSVar("PlayMain1", "TRUE");
+            
             card.clearSpellAbility();
             card.addSpellAbility(new Spell_Permanent(card) {
                 private static final long serialVersionUID = -7508374608705757486L;
@@ -3089,6 +3093,8 @@ public class CardFactory_Creatures {
                 }//execute()
             };
             card.addComesIntoPlayCommand(intoPlay);
+            
+            card.setSVar("PlayMain1", "TRUE");
             
             card.clearSpellAbility();
             card.addSpellAbility(new Spell_Permanent(card) {
@@ -3191,6 +3197,8 @@ public class CardFactory_Creatures {
                 }//execute()
             };
             card.addComesIntoPlayCommand(intoPlay);
+            
+            card.setSVar("PlayMain1", "TRUE");
             
             card.clearSpellAbility();
             card.addSpellAbility(new Spell_Permanent(card) {
@@ -3337,6 +3345,8 @@ public class CardFactory_Creatures {
             };//Command
             card.addComesIntoPlayCommand(intoPlay);
             
+            card.setSVar("PlayMain1", "TRUE");
+            
             card.clearSpellAbility();
             card.addSpellAbility(new Spell_Permanent(card) {
                 private static final long serialVersionUID = 1731831041621831246L;
@@ -3390,6 +3400,8 @@ public class CardFactory_Creatures {
                 }//execute()
             };//Command
             card.addComesIntoPlayCommand(intoPlay);
+            
+            card.setSVar("PlayMain1", "TRUE");
             
             card.clearSpellAbility();
             card.addSpellAbility(new Spell_Permanent(card) {
@@ -3452,6 +3464,8 @@ public class CardFactory_Creatures {
                 }//execute()
             };//Command
             card.addComesIntoPlayCommand(intoPlay);
+            
+            card.setSVar("PlayMain1", "TRUE");
             
             card.clearSpellAbility();
             card.addSpellAbility(new Spell_Permanent(card) {
@@ -4749,6 +4763,8 @@ public class CardFactory_Creatures {
             
             card.addComesIntoPlayCommand(commandComes);
             card.addLeavesPlayCommand(commandLeavesPlay);
+            
+            card.setSVar("PlayMain1", "TRUE");
             
             card.clearSpellAbility();
             card.addSpellAbility(new Spell_Permanent(card) {
@@ -7566,6 +7582,9 @@ public class CardFactory_Creatures {
                 }//execute()
             };//CommandComes
             card.addComesIntoPlayCommand(commandCIP);
+            
+            card.setSVar("PlayMain1", "TRUE");
+            
             card.addLeavesPlayCommand(new Command() {
                 private static final long serialVersionUID = 6737424952039552060L;
                 
@@ -10806,6 +10825,8 @@ public class CardFactory_Creatures {
                 };
                 card.addComesIntoPlayCommand(intoPlay);
                
+                card.setSVar("PlayMain1", "TRUE");
+                
                 card.clearSpellAbility();
                 card.addSpellAbility(new Spell_Permanent(card) {
                     private static final long serialVersionUID = 7153795935713327863L;
