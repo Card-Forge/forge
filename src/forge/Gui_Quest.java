@@ -527,6 +527,8 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Morpheus 3		hard	Elves with Overrun, Gaea's Anthem, Imperious Perfect and other pumps");
         sb.append("\r\n");
+        sb.append("Mr Slate 3		hard	Corwin72's Don't Go in the Water deck with mods, Merfolk and Merfolk pumps");
+        sb.append("\r\n");
         sb.append("Napoleon 3		hard	Walls, Rolling Stones and Doran, the Siege Tower");
         sb.append("\r\n");
         sb.append("Ned Flanders 1		easy	Sloth's reanimator deck, a few large creatures and some spells");
