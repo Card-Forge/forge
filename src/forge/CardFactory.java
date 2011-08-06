@@ -17091,6 +17091,166 @@ public class CardFactory implements NewConstants {
       } 
       //*************** END ************ END **************************
         
+        
+      //*************** START *********** START **************************
+      else if(cardName.equals("Echoing Courage"))
+      {
+        final SpellAbility spell = new Spell(card)
+        {
+		  private static final long serialVersionUID = -8649611733196156346L;
+
+    	  public boolean canPlayAI()
+          {
+            CardList c = getCreature();
+            if(c.isEmpty())
+              return false;
+            else
+            {
+              setTargetCard(c.get(0));
+              return true;
+            }
+          }//canPlayAI()
+          CardList getCreature()
+          {
+            CardList out = new CardList();
+            CardList list = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
+            list.shuffle();
+
+            for(int i = 0; i < list.size(); i++)
+              if((list.get(i).getNetAttack() >= 2) && (list.get(i).getNetDefense() <= 2))
+                out.add(list.get(i));
+
+            //in case human player only has a few creatures in play, target anything
+            if(out.isEmpty() &&
+                0 < CardFactoryUtil.AI_getHumanCreature(2, card, true).size() &&
+               3 > CardFactoryUtil.AI_getHumanCreature(card, true).size())
+            {
+              out.addAll(CardFactoryUtil.AI_getHumanCreature(2, card, true).toArray());
+              CardListUtil.sortFlying(out);
+            }
+            return out;
+          }//getCreature()
+
+
+          public void resolve()
+          {
+            if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
+            {
+              final Card c = getTargetCard();
+             
+              c.addTempAttackBoost(2);
+               c.addTempDefenseBoost(2);
+
+               AllZone.EndOfTurn.addUntil(new Command()
+               {
+              private static final long serialVersionUID = 1327455269456577020L;
+
+              public void execute()
+                  {
+                     c.addTempAttackBoost(-2);
+                     c.addTempDefenseBoost(-2);
+                  }
+               });
+
+              //get all creatures
+              CardList list = new CardList();
+              list.addAll(AllZone.Human_Play.getCards());
+              list.addAll(AllZone.Computer_Play.getCards());
+
+              list = list.getName(getTargetCard().getName());
+              list.remove(getTargetCard());
+               
+              if (!getTargetCard().isFaceDown())
+                 for(int i = 0; i < list.size(); i++)
+                 {
+                    final Card crd = list.get(i);
+                    
+                    crd.addTempAttackBoost(2);
+                    crd.addTempDefenseBoost(2);
+                    
+                    AllZone.EndOfTurn.addUntil(new Command()
+                      {
+                    private static final long serialVersionUID = 5151337777143949221L;
+
+                    public void execute()
+                         {
+                            crd.addTempAttackBoost(-2);
+                            crd.addTempDefenseBoost(-2);
+                         }
+                      });
+                    //list.get(i).addDamage(2);
+                 }
+                  
+            }//in play?
+          }//resolve()
+        };//SpellAbility
+        card.clearSpellAbility();
+        card.addSpellAbility(spell);
+
+        spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+      }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+      else if (cardName.equals("Beacon of Creation"))
+      {
+         SpellAbility spell = new Spell(card)
+         {
+			private static final long serialVersionUID = -2510951665205047650L;
+
+    		public void resolve()
+            {
+             PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+              CardList land = new CardList(play.getCards());
+              land = land.getType("Forest");
+              makeToken();
+                for(int i = 1; i < land.size(); i++)
+                     makeToken();
+            
+              // shuffle back into library
+            PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
+            library.add(card);
+            AllZone.GameAction.shuffle(card.getController());
+            
+            }//resolve()
+          
+          public void makeToken()
+          {
+             CardFactoryUtil.makeToken("Insect", "G 1 1 Insect", card, "G", new String[]{"Creature", "Insect"}, 1, 1, new String[] {""});
+          }
+          };
+          card.clearSpellAbility();
+          card.addSpellAbility(spell);
+       }//*************** END ************ END **************************
+        
+        
+      //*************** START *********** START **************************
+      else if (cardName.equals("Howl of the Night Pack"))
+      {
+         SpellAbility spell = new Spell(card)
+         {
+          
+		  private static final long serialVersionUID = -3413999403234892711L;
+
+		  public void resolve()
+          {
+              PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+              CardList land = new CardList(play.getCards());
+              land = land.getType("Forest");
+              makeToken();
+              for(int i = 1; i < land.size(); i++)
+            	  makeToken();
+            }//resolve()
+          
+          public void makeToken()
+          {
+             CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", card, "G", new String[]{"Creature", "Wolf"}, 2, 2, new String[] {""});
+          }
+          };
+          card.clearSpellAbility();
+          card.addSpellAbility(spell);
+       }//*************** END ************ END **************************
+
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {

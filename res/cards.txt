@@ -1,3 +1,18 @@
+Howl of the Night Pack
+6 G
+Sorcery
+Put a 2/2 green Wolf creature token onto the battlefield for each Forest you control.
+
+Beacon of Creation
+3 G
+Sorcery
+Put a 1/1 green Insect creature token onto the battlefield for each Forest you control. Shuffle Beacon of Creation into its owner's library.
+
+Echoing Courage
+1 G
+Instant
+Target creature and all other creatures with the same name as that creature get +2/+2 until end of turn.
+
 Brush With Death
 2 B
 Sorcery
