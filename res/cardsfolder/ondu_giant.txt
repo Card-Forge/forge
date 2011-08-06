@@ -1,0 +1,8 @@
+Name:Ondu Giant
+ManaCost:3 G
+Types:Creature Giant Druid
+Text:When Ondu Giant enters the battlefield, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library.
+PT:2/4
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ondu_giant.jpg
+End

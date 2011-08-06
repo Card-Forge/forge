@@ -1,0 +1,8 @@
+Name:Quirion Trailblazer
+ManaCost:3 G
+Types:Creature Elf Scout
+Text:When Quirion Trailblazer enters the battlefield, you may search your library for a basic land card and put that card onto the battlefield tapped. If you do, shuffle your library.
+PT:1/2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/quirion_trailblazer.jpg
+End

@@ -1,0 +1,9 @@
+Name:Yavimaya Granger
+ManaCost:2 G
+Types:Creature Elf
+Text:When Yavimaya Granger enters the battlefield, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library.
+PT:2/2
+K:Echo:2 G
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_granger.jpg
+End

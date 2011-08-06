@@ -11598,7 +11598,8 @@ public class CardFactory_Creatures {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Solemn Simulacrum")) {
+        else if(cardName.equals("Solemn Simulacrum") || cardName.equals("Yavimaya Granger")
+        		|| cardName.equals("Ondu Giant") || cardName.equals("Quirion Trailblazer")) {
             
             final Ability ability = new Ability(card, "0") {
                 @Override
@@ -11661,7 +11662,7 @@ public class CardFactory_Creatures {
                 }
             };
             
-            card.addDestroyCommand(draw);
+            if(cardName.equals("Solemn Simulacrum")) card.addDestroyCommand(draw);
             card.addComesIntoPlayCommand(fetchBasicLand);
             
         }//*************** END ************ END **************************
@@ -17440,7 +17441,7 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Borderland Ranger") || cardName.equals("Sylvan Ranger")
-        		|| cardName.equals("Civic Wayfinder")) {
+        		|| cardName.equals("Civic Wayfinder") || cardName.equals("Pilgrim's Eye")) {
             
             final Ability ability = new Ability(card, "0") {
                 @Override
