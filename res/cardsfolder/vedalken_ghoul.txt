@@ -5,4 +5,5 @@ Text:Whenever Vedalken Ghoul becomes blocked, defending player loses 4 life.
 PT:1/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_ghoul.jpg
+SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/32.jpg
 End

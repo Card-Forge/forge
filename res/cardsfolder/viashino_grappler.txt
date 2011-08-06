@@ -6,4 +6,5 @@ PT:3/1
 K:abPump G:Trample
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_grappler.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/179.jpg
 End

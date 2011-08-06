@@ -5,4 +5,5 @@ Text:Enchanted creature has vigilance.
 K:Enchant creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vigilance.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/49.jpg
 End

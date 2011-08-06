@@ -6,4 +6,5 @@ K:spDiscardTgt:TgtChoose:1:Target player discards a card.:Unhinge - target playe
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unhinge.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/87.jpg
 End

@@ -6,4 +6,5 @@ K:CARDNAME can't be countered.
 K:spDamageAll:Player,Creature:2:Volcanic Fallout deals 2 damage to each creature and each player.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_fallout.jpg
+SetInfo:CON|Uncommon|http://magiccards.info/scans/en/cfx/74.jpg
 End

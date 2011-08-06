@@ -5,4 +5,5 @@ Text:Counter target spell. Its controller draws a card.
 K:spCounter:Spell:None:Graveyard:CC-May-Draw(1)
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vex.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/36.jpg
 End

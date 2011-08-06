@@ -5,4 +5,6 @@ Text:no text
 K:spDamageTgtC:2:Drawback$GainLifeYou/2:Vicious Hunger deals 2 damage to target creature and you gain 2 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vicious_hunger.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/171.jpg
+SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/74.jpg
 End

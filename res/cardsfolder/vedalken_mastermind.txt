@@ -5,4 +5,6 @@ Text:no text
 PT:1/2
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card50834.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/40.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/123.jpg
 End

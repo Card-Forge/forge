@@ -8,4 +8,5 @@ K:abDamageTgtP 1 R T:X:Vent Sentinel deals damage to target player equal to the 
 SVar:X:Count$Valid Creature.withDefender+YouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vent_sentinel.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/171.jpg
 End

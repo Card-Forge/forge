@@ -7,4 +7,5 @@ K:abPumpTgtC 3 G T:+X/+X:Target creature gets +X/+X until end of turn, where X i
 SVar:X:Count$TypeOppCtrl.Artifact
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_lorebearers.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/99.jpg
 End

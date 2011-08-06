@@ -5,4 +5,12 @@ Text:no text
 A:SP$Fetch | Cost$ 2 G | Destination$ Battlefield | FetchType$ Land.Basic | FetchNum$ 1 | SpellDescription$ Search your library for a basic land card and put that card onto the battlefield. Then shuffle your library.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/untamed_wilds.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/124.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/163.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/279.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po2/89.jpg
+SetInfo:P02|Uncommon|http://magiccards.info/scans/en/po2/89.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/263.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/197.jpg
+SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/148.jpg
 End

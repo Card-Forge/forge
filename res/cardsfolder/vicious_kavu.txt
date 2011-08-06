@@ -5,4 +5,5 @@ Text:Whenever Vicious Kavu attacks, it gets +2/+0 until end of turn.
 PT:2/2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vicious_kavu.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/284.jpg
 End

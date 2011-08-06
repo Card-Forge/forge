@@ -7,4 +7,5 @@ K:Flying
 K:abPump 1 R:First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volcano_imp.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/56.jpg
 End

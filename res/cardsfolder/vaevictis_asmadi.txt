@@ -10,4 +10,5 @@ K:abPump R:+1/+0
 K:abPump G:+1/+0
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vaevictis_asmadi.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/309.jpg
 End

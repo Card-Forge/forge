@@ -7,4 +7,5 @@ A:AB$GainControl|Cost$2 T|ValidTgts$Creature.powerLEX|TgtPrompt$Select target cr
 SVar:X:Count$TypeYouCtrl.Island
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_shackles.jpg
+SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/164.jpg
 End

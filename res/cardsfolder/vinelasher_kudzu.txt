@@ -7,4 +7,5 @@ K:WheneverKeyword:EntersBattleField:Type/Land:Play:+1+1 Counters/1:Self:ASAP:No_
 SVar:BuffedBy:Land
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vinelasher_kudzu.jpg
+SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/189.jpg
 End

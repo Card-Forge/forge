@@ -5,4 +5,5 @@ Text:CARDNAME enters the battlefield tapped with two charge counters on it.
 K:tap: add U
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vivid_creek.jpg
+SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/276.jpg
 End

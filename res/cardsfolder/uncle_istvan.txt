@@ -6,4 +6,6 @@ PT:1/3
 K:PreventAllDamageBy Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uncle_istvan.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/16.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/49.jpg
 End

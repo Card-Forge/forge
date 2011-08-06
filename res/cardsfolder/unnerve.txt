@@ -5,4 +5,5 @@ Text:no text
 K:spDiscardOpp:OppChoose:2:Each opponent discards two cards.:Unnerve - opponent discards cards
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unnerve.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/162.jpg
 End

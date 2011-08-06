@@ -7,4 +7,5 @@ A:AB$Retrieve | Cost$ 1 B T | TgtPrompt$ Choose target creature card in your gra
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volraths_stronghold.jpg
+SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/137.jpg
 End

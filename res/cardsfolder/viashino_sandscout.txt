@@ -8,4 +8,6 @@ K:WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MoveFrom-Play-Hand:Self:A
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_sandscout.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/96.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/246.jpg
 End

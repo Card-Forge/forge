@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPump:+2/+2/Mountainwalk
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_strength.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/158.jpg
 End

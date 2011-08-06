@@ -6,4 +6,5 @@ PT:1/1
 A:AB$Regenerate | Cost$ 2 G | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/votary_of_the_conclave.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/35.jpg
 End

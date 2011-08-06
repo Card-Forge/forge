@@ -7,4 +7,5 @@ K:Flying
 K:CARDNAME attacks each turn if able.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/utvara_scalper.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/76.jpg
 End

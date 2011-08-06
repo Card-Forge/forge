@@ -5,4 +5,5 @@ Text:no text
 K:spDamageTgtOpp:2:Drawback$YouGainLife/2:Vampiric Touch deals 2 damage to target opponent and you gain 2 life.:Vampiric Touch - deals 2 damage and you gain 2 life.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4244.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/38.jpg
 End

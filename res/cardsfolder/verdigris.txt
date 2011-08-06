@@ -5,4 +5,5 @@ Text:Destroy target artifact.
 K:spDestroyTgt:Artifact
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/verdigris.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/158.jpg
 End

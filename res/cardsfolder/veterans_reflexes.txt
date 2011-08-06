@@ -5,4 +5,5 @@ Text:no text
 K:spPumpTgt:+1/+1:Drawback$UntapTgt:Target creature gets +1/+1 until end of turn. Untap that creature.:Veteran's Reflexes - target gets +1/+1; untap target.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veterans_reflexes.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/23.jpg
 End

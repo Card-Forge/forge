@@ -7,4 +7,5 @@ K:StaticEffect:Play:All Permanents:PTBonus/-1/-1:Color.black!NotSelf:Other black
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_shambler.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/133.jpg
 End

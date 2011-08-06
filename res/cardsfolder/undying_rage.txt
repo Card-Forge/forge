@@ -7,4 +7,5 @@ K:enPump:+2/+2/HIDDEN CARDNAME can't block.
 K:When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undying_rage.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/184.jpg
 End

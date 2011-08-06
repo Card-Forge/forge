@@ -6,4 +6,5 @@ PT:4/3
 K:Echo:2 R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_outrider.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/223.jpg
 End

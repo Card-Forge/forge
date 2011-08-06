@@ -6,4 +6,5 @@ K:Valakut, the Molten Pinnacle enters the battlefield tapped.
 K:tap: add R
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/valakut_the_molten_pinnacle.jpg
+SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/228.jpg
 End

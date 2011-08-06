@@ -5,4 +5,8 @@ Text:no text
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_mine.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/328.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/447.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/327.jpg
+SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/75.jpg
 End

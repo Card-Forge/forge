@@ -7,4 +7,5 @@ K:WheneverKeyword:EntersBattleField:Type/Artifact:Play:StatsPumpEOT/4/4:Self:ASA
 SVar:BuffedBy:Artifact
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vermiculos.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/80.jpg
 End

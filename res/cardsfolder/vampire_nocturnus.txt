@@ -7,4 +7,5 @@ K:Play with the top card of your library revealed.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_nocturnus.jpg
+SetInfo:M10|Mythic|http://magiccards.info/scans/en/m10/118.jpg
 End

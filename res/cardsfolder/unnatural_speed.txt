@@ -5,4 +5,5 @@ Text:no text
 K:spPumpTgt:Haste
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unnatural_speed.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/197.jpg
 End

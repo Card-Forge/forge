@@ -6,4 +6,5 @@ A:AB$Pump | Cost$ 1 W | ValidTgts$ Creature.notattacking+notblocking | TgtPrompt
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unlikely_alliance.jpg
+SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/153.jpg
 End

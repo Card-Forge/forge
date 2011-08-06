@@ -7,4 +7,5 @@ K:enPump:Protection from creatures
 K:When CARDNAME enters the battlefield, draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unquestioned_authority.jpg
+SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/31.jpg
 End

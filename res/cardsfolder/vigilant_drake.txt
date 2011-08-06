@@ -7,4 +7,6 @@ K:Flying
 K:Untap:2 U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vigilant_drake.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/46.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/109.jpg
 End

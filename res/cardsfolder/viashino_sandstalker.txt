@@ -8,4 +8,7 @@ K:WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MoveFrom-Play-Hand:Self:A
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_sandstalker.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/230.jpg
+SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/100.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/225.jpg
 End

@@ -7,4 +7,5 @@ A:AB$Pump | Cost$ 0 | KW$ CARDNAME can't be blocked except by Walls. & HIDDEN At
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/varchilds_crusader.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/120.jpg
 End

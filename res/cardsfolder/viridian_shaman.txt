@@ -6,4 +6,7 @@ PT:2/2
 K:etbDestroyTgt:Artifact
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_shaman.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/139.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/280.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/308.jpg
 End

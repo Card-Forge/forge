@@ -7,4 +7,5 @@ K:Annihilator 2
 K:CARDNAME attacks each turn if able.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ulamogs_crusher.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/13.jpg
 End

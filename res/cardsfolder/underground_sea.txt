@@ -6,4 +6,7 @@ K:tap: add U
 K:tap: add B
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/underground_sea.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/301.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/305.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/301.jpg
 End

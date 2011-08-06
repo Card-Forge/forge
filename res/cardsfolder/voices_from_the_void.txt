@@ -5,4 +5,5 @@ Text:no text
 K:spDiscardTgt:TgtChoose:X:Domain - Target player discards a card for each basic land type among lands you control.:Voices from the Void - target player discards cards
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voices_from_the_void.jpg
+SetInfo:CON|Uncommon|http://magiccards.info/scans/en/cfx/55.jpg
 End

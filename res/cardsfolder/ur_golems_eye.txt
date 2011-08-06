@@ -6,4 +6,6 @@ K:tap: add 2
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ur_golems_eye.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/155.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/314.jpg
 End

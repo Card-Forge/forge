@@ -8,4 +8,5 @@ K:WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MoveFrom-Play-Hand:Self:A
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_cutthroat.jpg
+SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/94.jpg
 End

@@ -7,4 +7,5 @@ K:Suspend:4:U
 K:abPump U:+1/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viscerid_deepwalker.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/91.jpg
 End

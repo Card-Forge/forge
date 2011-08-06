@@ -6,4 +6,5 @@ K:spDestroyAll:Creature.White
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/virtues_ruin.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/39.jpg
 End

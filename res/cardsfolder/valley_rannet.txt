@@ -7,4 +7,5 @@ K:TypeCycling:Forest:2
 K:TypeCycling:Mountain:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/valley_rannet.jpg
+SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/61.jpg
 End

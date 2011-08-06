@@ -6,4 +6,5 @@ PT:2/2
 K:Protection from black
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/valeron_outlander.jpg
+SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/130.jpg
 End

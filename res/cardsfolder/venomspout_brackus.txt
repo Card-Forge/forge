@@ -8,4 +8,5 @@ K:Morph:3 G G
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/venomspout_brackus.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/295.jpg
 End

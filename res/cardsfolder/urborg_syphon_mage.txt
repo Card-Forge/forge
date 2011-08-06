@@ -5,4 +5,5 @@ Text:no text
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card108798.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/139.jpg
 End

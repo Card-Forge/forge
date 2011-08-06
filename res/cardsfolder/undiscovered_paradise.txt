@@ -9,4 +9,5 @@ K:tap: add R
 K:tap: add G
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undiscovered_paradise.jpg
+SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/167.jpg
 End

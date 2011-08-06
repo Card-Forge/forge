@@ -8,4 +8,5 @@ A:AB$Bounce | Cost$ 1 U | Destination$Hand | SpellDescription$Return CARDNAME to
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viscerid_armor.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/60.jpg
 End

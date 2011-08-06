@@ -7,4 +7,5 @@ K:Reach
 K:Soulshift:4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/venerable_kumo.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/248.jpg
 End

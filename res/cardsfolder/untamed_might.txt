@@ -6,4 +6,6 @@ K:spPumpTgt:+X/+X:Target creature gets +X/+X until end of turn.
 SVar:X:Count$xPaid
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/untamed_might.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/som/131.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/131.jpg
 End

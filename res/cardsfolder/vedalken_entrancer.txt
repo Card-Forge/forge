@@ -6,4 +6,5 @@ A:AB$Mill | Cost$ U T | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a pl
 PT:1/4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_entrancer.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/74.jpg
 End

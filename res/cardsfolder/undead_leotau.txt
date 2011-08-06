@@ -7,4 +7,5 @@ K:abPump R:+1/-1
 K:Unearth:2 B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_leotau.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/90.jpg
 End

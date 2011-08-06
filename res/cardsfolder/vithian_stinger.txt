@@ -7,4 +7,5 @@ K:abDamageTgtCP T:1
 K:Unearth:1 R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vithian_stinger.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/120.jpg
 End

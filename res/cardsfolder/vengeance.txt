@@ -5,4 +5,10 @@ Text:Destroy target tapped creature.
 K:spDestroyTgt:Creature.tapped
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vengeance.jpg
+SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/28.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/54.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/p3k/28.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9eb/2.jpg
+SetInfo:P02|Uncommon|http://magiccards.info/scans/en/po2/147.jpg
+SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/29.jpg
 End

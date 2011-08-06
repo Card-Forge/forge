@@ -7,4 +7,6 @@ SVar:dX:Count$TgtCardToughness
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vendetta.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/170.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/130.jpg
 End

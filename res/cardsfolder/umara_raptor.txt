@@ -7,4 +7,5 @@ K:Flying
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/umara_raptor.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/75.jpg
 End

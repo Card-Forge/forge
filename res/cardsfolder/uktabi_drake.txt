@@ -8,4 +8,5 @@ K:Haste
 K:Echo:1 G G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uktabi_drake.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/141.jpg
 End

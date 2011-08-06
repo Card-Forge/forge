@@ -9,4 +9,5 @@ K:When you control no Islands, sacrifice CARDNAME.
 K:abPump U:Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vodalian_knights.jpg
+SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/58.jpg
 End

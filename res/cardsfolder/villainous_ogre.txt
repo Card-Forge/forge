@@ -6,4 +6,5 @@ PT:3/2
 K:CARDNAME can't block.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80520.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/148.jpg
 End

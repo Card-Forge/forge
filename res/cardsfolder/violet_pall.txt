@@ -5,4 +5,5 @@ Text:Destroy target nonblack creature. Put a 1/1 black Faerie Rogue creature tok
 K:spDestroyTgt:Creature.nonBlack:Drawback$MakeToken<>1<>Faerie Rogue<>B 1 1 Faerie Rogue<>Controller<>B<>Creature;Faerie;Rogue<>1<>1<>Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/violet_pall.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/81.jpg
 End

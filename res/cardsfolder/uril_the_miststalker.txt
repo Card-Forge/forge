@@ -7,4 +7,5 @@ K:CARDNAME can't be the target of spells or abilities your opponents control.
 SVar:EnchantMe:Multiple
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uril_the_miststalker.jpg
+SetInfo:ARB|Mythic|http://magiccards.info/scans/en/arb/124.jpg
 End

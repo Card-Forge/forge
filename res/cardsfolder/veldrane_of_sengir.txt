@@ -6,4 +6,5 @@ PT:5/5
 K:abPump 1 B B:-3/-0/Forestwalk
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veldrane_of_sengir.jpg
+SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/25.jpg
 End

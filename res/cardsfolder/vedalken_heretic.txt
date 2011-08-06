@@ -6,4 +6,5 @@ PT:1/1
 K:WheneverKeyword:DealsDamage/Opponent:Self:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever Vedalken Heretic deals damage to an opponent, you may draw a card.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_heretic.jpg
+SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/104.jpg
 End

@@ -7,4 +7,5 @@ K:Flying
 K:abDestroyTgtV T:Creature:NoRegen:Destroy target creature. It can't be regenerated.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39863.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/179.jpg
 End

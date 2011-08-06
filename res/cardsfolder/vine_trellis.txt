@@ -7,4 +7,6 @@ K:Defender
 K:tap: add G
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card19624.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/287.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/285.jpg
 End

@@ -8,4 +8,5 @@ K:TypeCycling:Wizard:3
 K:etbBounceTgt:Sliver:Hand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_aethermage.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/61.jpg
 End

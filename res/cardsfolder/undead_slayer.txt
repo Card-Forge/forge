@@ -6,4 +6,5 @@ PT:2/2
 A:AB$Bounce | Cost$ W T | ValidTgts$ Creature.Skeleton,Creature.Vampire,Creature.Zombie | Destination$ Exile | TgtPrompt$ Select target Skeleton, Vampire or Zombie creature. | SpellDescription$ Exile target Skeleton, Vampire or Zombie.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_slayer.jpg
+SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/37.jpg
 End

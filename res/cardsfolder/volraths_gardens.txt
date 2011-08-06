@@ -6,4 +6,5 @@ A:AB$GainLife | Cost$ 2 tapXType<1/Creature> | LifeAmount$ 2 | SorcerySpeed$ Tru
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volraths_gardens.jpg
+SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/74.jpg
 End

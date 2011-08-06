@@ -5,4 +5,8 @@ Text:no text
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_tower.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/330.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/449.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/329.jpg
+SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/83.jpg
 End

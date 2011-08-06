@@ -6,4 +6,5 @@ PT:5/4
 K:Cumulative upkeep:G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uktabi_efreet.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/85.jpg
 End

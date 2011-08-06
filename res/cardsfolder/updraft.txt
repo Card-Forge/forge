@@ -6,4 +6,6 @@ A:SP$Pump | Cost$ 1 U | Tgt$ TgtC | KW$ Flying | SpellDescription$ Target creatu
 K:Draw a card at the beginning of the next turn's upkeep.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/updraft.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/133.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/105.jpg
 End
