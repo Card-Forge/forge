@@ -55,4 +55,9 @@ public class Mana_PartSnow extends Mana_Part {
 		return (isPaid ? "" : "S");
 	}
 
+	@Override
+	public int getConvertedManaCost() {
+		return 1;
+	}
+
 }

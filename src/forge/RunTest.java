@@ -57,8 +57,10 @@ public class RunTest
 	    
 	    manaCost = new ManaCost("2 W W G G B B U U R R");
 	    check("31", ! manaCost.isPaid());
-	    //manaCost.subtractMana(Constant.Color.White, 2);
-	    //check("32", ! manaCost.isPaid());
+	    manaCost.payMana(Constant.Color.White);
+	    check("32", ! manaCost.isPaid());
+	    manaCost.payMana(Constant.Color.White);
+	    check("32.1", ! manaCost.isPaid());
 	    manaCost.payMana(Constant.Color.Black);
 	    check("33", ! manaCost.isPaid());
 	    manaCost.payMana(Constant.Color.Black);
@@ -299,6 +301,7 @@ public class RunTest
 	    check("124", CardUtil.getConvertedManaCost("R R") == 2);
 	    check("125", CardUtil.getConvertedManaCost("R R R") == 3);
 	    check("126", CardUtil.getConvertedManaCost("1") == 1);
+	    check("127", CardUtil.getConvertedManaCost("2/R 2/G 2/W 2/B 2/U") == 10);
 	}
     }//test()
     static void check(String message, boolean ok)

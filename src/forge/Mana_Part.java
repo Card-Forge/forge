@@ -22,6 +22,8 @@ public abstract class Mana_Part {
     
     abstract public boolean isEasierToPay(Mana_Part mp);
     
+    abstract public int getConvertedManaCost();
+    
     public static void checkSingleMana(String m) {
         if(m.length() != 1) throw new RuntimeException(
                 "Mana_Part : checkMana() error, argument mana is not of length 1, mana - " + m);

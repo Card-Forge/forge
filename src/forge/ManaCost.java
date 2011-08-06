@@ -140,6 +140,14 @@ public class ManaCost {
         return sb.toString().trim();
     }
     
+	public int getConvertedManaCost(){
+		int cmc = 0;
+		for(Object s : manaPart){
+			cmc += ((Mana_Part)s).getConvertedManaCost();
+		}
+		return cmc;
+	}
+
     private ArrayList<Object> split(String cost) {
         ArrayList<Object> list = new ArrayList<Object>();
         

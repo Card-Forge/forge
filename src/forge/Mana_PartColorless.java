@@ -79,4 +79,9 @@ public class Mana_PartColorless extends Mana_Part {
     public boolean isPaid() {
         return manaNeeded == 0;
     }
+
+	@Override
+	public int getConvertedManaCost() {
+		return manaNeeded;
+	}
 }

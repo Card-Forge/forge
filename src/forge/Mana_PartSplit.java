@@ -105,4 +105,10 @@ public class Mana_PartSplit extends Mana_Part {
         
         return manaPart.isPaid();
     }
+
+	@Override
+	public int getConvertedManaCost() {
+		// grab the colorless portion of the split cost (usually 2, but possibly more later)
+		return Integer.parseInt(originalCost.substring(0, 1));
+	}
 }

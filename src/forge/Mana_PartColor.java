@@ -82,4 +82,9 @@ public class Mana_PartColor extends Mana_Part {
     public boolean isPaid() {
         return manaCost.length() == 0;
     }
+
+	@Override
+	public int getConvertedManaCost() {
+		return 1;
+	}
 }

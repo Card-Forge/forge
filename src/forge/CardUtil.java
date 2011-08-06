@@ -197,43 +197,16 @@ public class CardUtil {
     
     static public int getConvertedManaCost(Card c)
     {
-    	if (c.isToken() && !c.isCopiedToken())
-    		return 0;
-    	return getConvertedManaCost(c.getManaCost());
+		if (c.isToken() && !c.isCopiedToken())
+			return 0;
+		return getConvertedManaCost(c.getManaCost());
     }
     
     static public int getConvertedManaCost(String manaCost) {
-        //see if the mana cost is all colorless, like "2", "0", or "12"
-        
-        if(manaCost.equals("")) return 0;
-        
-        while (manaCost.startsWith("X"))
-        	manaCost = manaCost.substring(2);
-        
-        if(!manaCost.matches(".*[A-Z]+.*")) {
-            try {
-                return Integer.parseInt(manaCost);
-            } catch(NumberFormatException ex) {
-                ErrorViewer.showError(ex);
-            }
-        }
-        
-        //see if mana cost is colored and colorless like "2 B" or "1 U U"
-        StringTokenizer tok = new StringTokenizer(manaCost);
-        int cost = 0;
-        try {
-            //get the int from the mana cost like "1 U", get the 1
-            cost = Integer.parseInt(tok.nextToken());
-            //count colored mana cost
-            cost += tok.countTokens();
-            return cost;
-        }
-        //catches in case the cost has no colorless mana requirements like "U U"
-        catch(NumberFormatException ex) {}
-        
-        //the mana cost is all colored mana like "U" or "B B B"
-        tok = new StringTokenizer(manaCost);
-        return tok.countTokens();
+		if(manaCost.equals("")) return 0;
+		
+		ManaCost cost = new ManaCost(manaCost);
+		return cost.getConvertedManaCost();
     }
 
     static public String addManaCosts(String mc1, String mc2)
