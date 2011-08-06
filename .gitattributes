@@ -5227,6 +5227,7 @@ res/cardsfolder/power_matrix.txt -text svneol=native#text/plain
 res/cardsfolder/power_of_fire.txt -text svneol=native#text/plain
 res/cardsfolder/power_sink.txt -text svneol=native#text/plain
 res/cardsfolder/power_surge.txt -text svneol=native#text/plain
+res/cardsfolder/powerstone_minefield.txt -text svneol=native#text/plain
 res/cardsfolder/pradesh_gypsies.txt -text svneol=native#text/plain
 res/cardsfolder/praetors_counsel.txt svneol=native#text/plain
 res/cardsfolder/predator_dragon.txt -text svneol=native#text/plain
