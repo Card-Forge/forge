@@ -1152,6 +1152,8 @@ public class CardFactoryUtil {
                 //card.setName("Morph");
                 sourceCard.setIsFaceDown(true);
                 sourceCard.setManaCost("");
+                sourceCard.setColor(new ArrayList<Card_Color>()); //remove all colors
+                sourceCard.addColor("0");
                 sourceCard.setBaseAttack(2);
                 sourceCard.setBaseDefense(2);
                 sourceCard.comesIntoPlay();
@@ -1197,6 +1199,7 @@ public class CardFactoryUtil {
                 //card.setName("Morph");
                 sourceCard.setIsFaceDown(false);
                 sourceCard.setManaCost(origManaCost);
+                sourceCard.addColor(origManaCost);
                 sourceCard.setBaseAttack(attack);
                 sourceCard.setBaseDefense(defense);
                 sourceCard.setIntrinsicKeyword(sourceCard.getPrevIntrinsicKeyword());

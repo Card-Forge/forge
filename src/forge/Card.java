@@ -535,6 +535,12 @@ public class Card extends MyObservable {
     	return colors;
     }
     
+    
+    public void setColor(ArrayList<Card_Color> colors){
+    	cardColor = colors;
+    }
+    
+    
     Card_Color determineColor(ArrayList<Card_Color> globalChanges){
     	Card_Color colors = new Card_Color(this);
     	int i = cardColor.size() - 1;
