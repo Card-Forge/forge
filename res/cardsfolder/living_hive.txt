@@ -4,7 +4,7 @@ Types:Creature Elemental Insect
 Text:no text
 PT:6/6
 K:Trample
-T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigToken | ValidTarget$ Player | TriggerZones$ Battlefield | TriggerDescription$ Whenever Living Hive deals combat damage to a player, put that many 1/1 green Insect creature tokens onto the battlefield.
+T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigToken | ValidTarget$ Player | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put that many 1/1 green Insect creature tokens onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Insect | TokenTypes$ Creature,Insect | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 SVar:X:Count$TriggeredDamageAmount
 SVar:Rarity:Rare
