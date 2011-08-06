@@ -2230,19 +2230,16 @@ public class CombatUtil {
             player.drawCard();
         } else if(a.getName().equals("Corrupt Official") && !a.getCreatureGotBlockedThisCombat()) {
             Player opp = b.getController();
-            AllZone.GameAction.discardRandom(opp, a.getSpellAbility()[0]);
+            opp.discardRandom(a.getSpellAbility()[0]);
         } else if (a.getName().equals("Robber Fly") && !a.getCreatureGotBlockedThisCombat()) {
-            Player opp = b.getController();
-            PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opp);
-            CardList list = new CardList(hand.getCards());
-            int handSize = list.size();
-            
-            for (int ctr = 0; ctr < handSize; ctr ++) {   // opponent discards their hand,
-                AllZone.GameAction.discardRandom(opp, a.getSpellAbility()[0]);
-            }
-            for (int ctr = 0; ctr < handSize; ctr ++) {   // then draws that many cards
-                opp.drawCard();;
-            }
+        	Player opp = b.getController();
+        	PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opp);
+        	CardList list = new CardList(hand.getCards());
+        	int handSize = list.size();
+
+        	// opponent discards their hand,
+        	opp.discardRandom(handSize, a.getSpellAbility()[0]);
+        	opp.drawCards(handSize);
         } else if(a.getName().equals("Sylvan Basilisk")) {
             AllZone.GameAction.destroy(b);
             System.out.println("destroyed blocker " + b.getName());

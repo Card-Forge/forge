@@ -8438,8 +8438,9 @@ public class CardFactory implements NewConstants {
                     sb.append("Necrogen Spellbomb - ").append(s).append(" discards a card");
                     setStackDescription(sb.toString());
                     
-                    if(AllZone.ComputerPlayer.equals(getTargetPlayer())) AllZone.GameAction.discardRandom(getTargetPlayer(), this);
-                    else AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
+                    getTargetPlayer().discard(this);
+                    //if(AllZone.ComputerPlayer.equals(getTargetPlayer())) AllZone.GameAction.discardRandom(getTargetPlayer(), this);
+                    //else AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
                 }//resolve()
             };//SpellAbility
             ability.setDescription("B, Sacrifice Necrogen Spellbomb: Target player discards a card.");
@@ -11624,7 +11625,7 @@ public class CardFactory implements NewConstants {
 				private static final long serialVersionUID = 7825072388166910728L;
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.discardRandom(card.getController(), this);
+                    card.getController().discardRandom(this);
                     card.getController().drawCards(2);
                 }
             };
