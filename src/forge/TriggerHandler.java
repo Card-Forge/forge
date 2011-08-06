@@ -7,7 +7,9 @@ public class TriggerHandler {
 
 	private ArrayList<Trigger> registeredTriggers = new ArrayList<Trigger>();
 	private ArrayList<String> suppressedModes = new ArrayList<String>();
-	
+
+    private ArrayList<Trigger> delayedTriggers = new ArrayList<Trigger>();
+
 	public void suppressMode(String mode)
 	{
 		suppressedModes.add(mode);
@@ -195,6 +197,18 @@ public class TriggerHandler {
 				runSingleTrigger(regtrig,mode,runParams);
 			}
 		}
+        for(int i=0;i<delayedTriggers.size();i++)
+        {
+            Trigger deltrig = delayedTriggers.get(i);
+            if(deltrig.getHostCard().getController().equals(AllZone.Phase.getPlayerTurn()))
+            {
+                if(runSingleTrigger(deltrig,mode,runParams))
+                {
+                    delayedTriggers.remove(i);
+                    i--;
+                }
+            }
+        }
 		
 		//NAP
 		for(Trigger regtrig : registeredTriggers)
@@ -204,26 +218,41 @@ public class TriggerHandler {
 				runSingleTrigger(regtrig,mode,runParams);
 			}
 		}
+        for(int i=0;i<delayedTriggers.size();i++)
+        {
+            Trigger deltrig = delayedTriggers.get(i);
+            if(deltrig.getHostCard().getController().equals(AllZone.Phase.getPlayerTurn().getOpponent()))
+            {
+                if(runSingleTrigger(deltrig,mode,runParams))
+                {
+                    delayedTriggers.remove(i);
+                    i--;
+                }
+            }
+        }
+
 	}
-	
-	private void runSingleTrigger(final Trigger regtrig, final String mode, final HashMap<String,Object> runParams)
+
+    //Checks if the conditions are right for a single trigger to go off, and runs it if so.
+    //Return true if the trigger went off, false otherwise.
+	private boolean runSingleTrigger(final Trigger regtrig, final String mode, final HashMap<String,Object> runParams)
 	{
 		if(!regtrig.zonesCheck())
 		{
-			return;
+			return false;
 		}
         if(!regtrig.phasesCheck())
         {
-            return;
+            return false;
         }
 		if(!regtrig.requirementsCheck())
 		{
-			return;
+			return false;
 		}
 		
 		if(regtrig.getHostCard().isFaceDown())
 		{
-			return;
+			return false;
 		}
 		
 		HashMap<String,String> trigParams = regtrig.getMapParams();
@@ -234,7 +263,7 @@ public class TriggerHandler {
 		{
 			if(!regtrig.performTest(runParams))
 			{
-				return;
+				return false;
 			}				
 			
 			// Any trigger should cause the phase not to skip
@@ -255,7 +284,19 @@ public class TriggerHandler {
 			sa[0] = regtrig.getOverridingAbility();
 			if(sa[0] == null)
 			{
-				sa[0] = AF.getAbility(host.getSVar(trigParams.get("Execute")), host, regtrig.getTriggeringCard(runParams));
+                if(!trigParams.containsKey("Execute"))
+                {
+                    sa[0] = new Ability(regtrig.getHostCard(),"0") {
+                        @Override
+                        public void resolve()
+                        {
+                        }
+                    };
+                }
+                else
+                {
+				    sa[0] = AF.getAbility(host.getSVar(trigParams.get("Execute")), host, regtrig.getTriggeringCard(runParams));
+                }
 			}
 
 			sa[0].setActivatingPlayer(host.getController());
@@ -820,6 +861,14 @@ public class TriggerHandler {
 						//sa[0].doTrigger(isMandatory);
 						ComputerUtil.playNoStack(sa[0]);
 					}
+
+                    //Add eventual delayed trigger.
+                    if(regtrig.getMapParams().containsKey("DelayedTrigger"))
+                    {
+                        String SVarName = regtrig.getMapParams().get("DelayedTrigger");
+                        Trigger deltrig = parseTrigger(regtrig.getHostCard().getSVar(SVarName),regtrig.getHostCard());
+                        delayedTriggers.add(deltrig);
+                    }
 				}
 			};
 			wrapperAbility.setTrigger(true);
@@ -833,6 +882,10 @@ public class TriggerHandler {
 				wrapperAbility.doTrigger(isMandatory);
 				ComputerUtil.playStack(wrapperAbility);
 			}
+
+            return true;
 		}
+
+        return false;
 	}
 }
