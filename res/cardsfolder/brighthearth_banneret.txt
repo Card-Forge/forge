@@ -1,0 +1,10 @@
+Name:Brighthearth Banneret
+ManaCost:1 R
+Types:Creature Elemental Warrior
+Text:Elemental spells and Warrior spells you cast cost {1} less to cast.
+PT:1/1
+K:CostChange:Player:Less:1:Spell:All:Elemental/Warrior:OnlyOneBonus
+A:AB$PutCounter|Cost$1 R Discard<1/CARDNAME>|Tgt$TgtC|CounterType$P1P1|ActivatingZone$Hand|CounterNum$1|SpellDescription$Put a +1/+1 counter on target creature.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brighthearth_banneret.jpg
+End
