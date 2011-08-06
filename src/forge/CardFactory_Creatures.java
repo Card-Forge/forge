@@ -751,7 +751,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Sliver Overlord")) {
             //final String player = card.getController();
@@ -908,6 +908,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
             card.addSpellAbility(ability2);
         }//*************** END ************ END **************************
+        */
         
         /*
         //*************** START *********** START **************************

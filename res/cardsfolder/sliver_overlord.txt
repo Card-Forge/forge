@@ -3,6 +3,8 @@ ManaCost:W U B R G
 Types:Legendary Creature Sliver Mutant
 Text:no text
 PT:7/7
+A:AB$Fetch|Cost$3|Destination$Hand|FetchType$Sliver|FetchNum$1|SpellDescription$Search your library for a Sliver card, reveal that card, and put it into your hand. Then shuffle your library.
+A:AB$GainControl|Cost$3|ValidTgts$Creature.Sliver|TgtPrompt$Select target Sliver.|SpellDescription$Gain control of target Sliver. (This effect lasts indefinitely.)
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sliver_overlord.jpg
