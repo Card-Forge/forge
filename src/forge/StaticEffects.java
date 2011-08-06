@@ -132,7 +132,6 @@ public class StaticEffects
 		cardToEffectsList.put("Serpent of the Endless Sea", new String[] {"Serpent_of_the_Endless_Sea"});
 		cardToEffectsList.put("Serra Ascendant", new String[] {"Serra_Ascendant"});
 		cardToEffectsList.put("Serra Avatar", new String[] {"Serra_Avatar"});
-		cardToEffectsList.put("Shared Triumph", new String[] {"Shared_Triumph"});
 		cardToEffectsList.put("Skywatcher Adept", new String[] {"Skywatcher_Adept"});
 		cardToEffectsList.put("Soulsurge Elemental", new String[] {"Soulsurge_Elemental"});
 		cardToEffectsList.put("Spidersilk Armor", new String[] {"Spidersilk_Armor"});

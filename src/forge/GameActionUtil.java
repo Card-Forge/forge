@@ -16542,53 +16542,6 @@ public class GameActionUtil {
 		}// execute()
 	}; // Eldrazi_Monument
 
-
-	public static Command Shared_Triumph              = new Command() {
-		private static final long serialVersionUID   = -6427402366896716659L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-			}
-
-			list.clear();
-			CardList cards = new CardList();
-			cards.addAll(AllZone.Human_Play.getCards());
-			cards.addAll(AllZone.Computer_Play.getCards());
-			cards = cards.getName("Shared Triumph");
-
-			for(int outer = 0; outer < cards.size(); outer++) {
-				Card card = cards.get(outer);
-
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType(card.getChosenType());
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(c.getType().contains(card.getChosenType())
-							|| c.getKeyword().contains("Changeling")) {
-						c.addSemiPermanentAttackBoost(1);
-						c.addSemiPermanentDefenseBoost(1);
-						gloriousAnthemList.add(c);
-					}
-
-
-				}// for inner
-			}// for outer
-		}// execute()
-	}; //Shared Triumph
-
-
 	public static Command Thelonite_Hermit            = new Command() {
 		private static final long serialVersionUID   = 1876182498187900500L;
 
@@ -17113,7 +17066,6 @@ public class GameActionUtil {
 		commands.put("Serpent_of_the_Endless_Sea", Serpent_of_the_Endless_Sea);
 		commands.put("Serra_Ascendant", Serra_Ascendant);
 		commands.put("Serra_Avatar", Serra_Avatar);
-		commands.put("Shared_Triumph", Shared_Triumph);
 		commands.put("Skywatcher_Adept", Skywatcher_Adept);
 		commands.put("Soulsurge_Elemental", Soulsurge_Elemental);
 		commands.put("Sound_the_Call_Wolf", Sound_the_Call_Wolf);

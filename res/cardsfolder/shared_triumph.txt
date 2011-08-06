@@ -1,7 +1,8 @@
 Name:Shared Triumph
 ManaCost:1 W
 Types:Enchantment
-Text:As Shared Triumph comes into play, choose a creature type. Creatures of the chosen type get +1/+1.
+Text:As Shared Triumph comes into play, choose a creature type.
+K:stPumpAll:Creature.ChosenType:1/1:No Condition:Creatures of the chosen type get +1/+1.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shared_triumph.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/53.jpg
