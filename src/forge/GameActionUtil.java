@@ -4030,35 +4030,33 @@ public class GameActionUtil {
 
 	private static void upkeep_Dark_Confidant() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-		PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
 
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Dark Confidant");
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
+		list = list.filter(new CardListFilter() {
+			public boolean addCard(Card c) {
+				return c.getName().equals("Dark Confidant") || c.getName().equals("Dark Tutelage");
+			}
+		});
 
 		Ability ability;
 		for(int i = 0; i < list.size(); i++) {
-			if(library.size() <= 0) {
+			if(AllZoneUtil.getPlayerCardsInLibrary(player).size() <= 0) {
 				return;
 			}
-			// System.out.println("top of deck: " + library.get(i).getName());
-			final int convertedManaCost = CardUtil.getConvertedManaCost(library.get(i).getManaCost());
-			String cardName = library.get(i).getName();
+			
 			final Card F_card = list.get(i);
-			ability = new Ability(list.get(i), "0") {
+			ability = new Ability(F_card, "0") {
 				@Override
 				public void resolve() {
-					// todo: this is bad, the card that is revealed could be different than the one we get 
 					PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
-					player.loseLife(convertedManaCost, F_card);
-
-					AllZone.GameAction.moveToHand(library.get(0));
+					Card toMove = library.get(0);
+					AllZone.GameAction.moveToHand(toMove);
+					player.loseLife(toMove.getCMC(), F_card);
 				}// resolve()
 			};// Ability
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("Dark Confidant - ").append(player).append(" loses ").append(convertedManaCost);
-			sb.append(" life and draws top card (").append(cardName).append(").");
+			sb.append(F_card).append(" - ").append("At the beginning of your upkeep, reveal the top card of your library and put that card into your hand. You lose life equal to its converted mana cost.");
 			ability.setStackDescription(sb.toString());
 
             AllZone.Stack.addSimultaneousStackEntry(ability);

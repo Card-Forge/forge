@@ -1574,6 +1574,7 @@ res/cardsfolder/dark_offering.txt -text svneol=native#text/plain
 res/cardsfolder/dark_privilege.txt svneol=native#text/plain
 res/cardsfolder/dark_ritual.txt -text svneol=native#text/plain
 res/cardsfolder/dark_triumph.txt -text svneol=native#text/plain
+res/cardsfolder/dark_tutelage.txt -text svneol=native#text/plain
 res/cardsfolder/dark_withering.txt -text svneol=native#text/plain
 res/cardsfolder/darkblast.txt -text svneol=native#text/plain
 res/cardsfolder/darkheart_sliver.txt svneol=native#text/plain
