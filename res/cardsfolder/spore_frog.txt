@@ -4,6 +4,7 @@ Types:Creature Frog
 Text:no text
 PT:1/1
 A:AB$Fog | Cost$ Sac<1/CARDNAME> | SpellDescription$ Prevent all combat damage that would be dealt this turn.
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spore_frog.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/126.jpg
