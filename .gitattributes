@@ -4350,6 +4350,7 @@ res/cardsfolder/quest_for_renewal.txt -text svneol=native#text/plain
 res/cardsfolder/quest_for_the_gemblades.txt svneol=native#text/plain
 res/cardsfolder/quest_for_the_goblin_lord.txt svneol=native#text/plain
 res/cardsfolder/quest_for_the_gravelord.txt svneol=native#text/plain
+res/cardsfolder/quest_for_the_nihil_stone.txt -text svneol=native#text/plain
 res/cardsfolder/quick_sliver.txt -text svneol=native#text/plain
 res/cardsfolder/quicksand.txt -text svneol=native#text/plain
 res/cardsfolder/quicksilver_amulet.txt -text svneol=native#text/plain
