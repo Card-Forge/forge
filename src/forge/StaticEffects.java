@@ -71,7 +71,6 @@ public class StaticEffects
 		cardToEffectsList.put("Iona, Shield of Emeria", new String[] {"Iona_Shield_of_Emeria"});
 		
 		cardToEffectsList.put("Joiner Adept", new String[] {"Joiner_Adept"});
-		cardToEffectsList.put("Jund Hackblade", new String[] {"Jund_Hackblade"});
 		
 		cardToEffectsList.put("Kargan Dragonlord", new String[]{"Kargan_Dragonlord"});
 		cardToEffectsList.put("Keldon Warlord", new String[] {"Keldon_Warlord"});

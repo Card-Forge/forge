@@ -14138,36 +14138,6 @@ public class GameActionUtil {
 
 	}; //Grixis_Grimblade
 
-	public static Command Jund_Hackblade              = new Command() {
-
-		private static final long serialVersionUID = -4386978825641506610L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = AllZoneUtil.getCardsInPlay("Jund Hackblade");
-
-			if(list.size() > 0) {
-				for(int i = 0; i < list.size(); i++) {
-
-					Card c = list.get(i);
-					if(CardFactoryUtil.controlsAnotherMulticoloredPermanent(c)) {
-						c.setBaseAttack(3);
-						c.setBaseDefense(2);
-						if(!c.getIntrinsicKeyword().contains(
-								"Haste")) c.addIntrinsicKeyword("Haste");
-					} else {
-						c.setBaseAttack(2);
-						c.setBaseDefense(1);
-						if(c.getIntrinsicKeyword().contains(
-								"Haste")) c.removeIntrinsicKeyword("Haste");
-					}
-
-				}
-			}
-		}// execute()
-
-	}; //Jund_Hackblade
-	
 	public static Command Plague_Rats = new Command() {
 		private static final long serialVersionUID = 2333292591304646698L;
 
@@ -16228,7 +16198,6 @@ public class GameActionUtil {
 		commands.put("Iona_Shield_of_Emeria", Iona_Shield_of_Emeria);
 		
 		commands.put("Joiner_Adept", Joiner_Adept);
-		commands.put("Jund_Hackblade", Jund_Hackblade);
 		
 		commands.put("Kargan_Dragonlord", Kargan_Dragonlord);
 		commands.put("Keldon_Warlord", Keldon_Warlord);
