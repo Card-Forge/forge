@@ -665,7 +665,7 @@ public class MagicStack extends MyObservable {
 
 		// If Spell and still on the Stack then let it goto the graveyard or replace its own movement
 		else if ((source.isInstant() || source.isSorcery()) && 
-				AllZone.getZone(source).equals(Constant.Zone.Stack)){
+				AllZone.getZone(source).is(Constant.Zone.Stack)){
 			if (source.getReplaceMoveToGraveyard().size() == 0)
 				AllZone.GameAction.moveToGraveyard(source);
 			else
