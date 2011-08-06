@@ -1445,7 +1445,7 @@ public class CombatUtil {
     }
     
     static void checkDeclareBlockers(Card c) {
-        if(AllZone.Phase.getPhase().equals("Declare Blockers")) {
+        if(AllZone.Phase.getPhase().equals(Constant.Phase.Combat_After_Declare_Blockers)) {
             
             if(c.getName().equals("Jedit Ojanen of Efrava") && !c.getCreatureBlockedThisTurn()) {
                 Card card = new Card();

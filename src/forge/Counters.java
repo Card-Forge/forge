@@ -24,7 +24,7 @@ public enum Counters {
     LOYALTY(),
     M1M1("-1/-1"),
     MANA(),
-    P0M1("+0/+1"),
+    P0M1("+0/-1"),
     P1P1("+1/+1"),
     QUEST(),
     SPORE(),
