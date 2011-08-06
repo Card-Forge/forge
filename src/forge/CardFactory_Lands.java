@@ -645,39 +645,6 @@ class CardFactory_Lands {
 	            a2[0].setDescription("tap: Target Assembly-Worker gets +1/+1 until end of turn.");
 
 
-	            @SuppressWarnings("unused") // target unused
-	            final Input target = new Input()
-	            {
-	             private static final long serialVersionUID = 8913477363141356082L;
-	            
-	             public void showMessage()
-	              {
-	                ButtonUtil.enableOnlyCancel();
-	                AllZone.Display.showMessage("Select Assembly-Worker to get +1/+1");
-	              }
-	              public void selectCard(Card c, PlayerZone zone)
-	              {
-	               if(!CardFactoryUtil.canTarget(card, c)){
-	                     AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-	               }
-	               else if(c.isCreature() && c.getType().contains("Assembly-Worker"))
-	               {
-	                  card.tap();
-	                  AllZone.Human_Play.updateObservers();
-
-	                  a2[0].setTargetCard(c);//since setTargetCard() changes stack description
-	                  a2[0].setStackDescription(c +" gets +1/+1 until EOT");
-
-	                  AllZone.InputControl.resetInput();
-	                  AllZone.Stack.add(a2[0]);
-	                }
-	              }//selectCard()
-	              public void selectButtonCancel()
-	              {
-	                card.untap();
-	                stop();
-	              }
-	            };//Input target
 	            a2[0].setBeforePayMana(CardFactoryUtil.input_targetType(a2[0], "Assembly-Worker"));
 	         
 	       }//*************** END ************ END **************************

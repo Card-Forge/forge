@@ -147,7 +147,7 @@ public class GameActionUtil
 	public static void playCard_Cascade(Card c)
 	{
 
-		if (c.getKeyword().contains("Cascade") || c.getName().equals("Bituminous Blast"))
+		if (c.getKeyword().contains("Cascade") || c.getName().equals("Bituminous Blast")) //keyword gets cleared for Bitumonous Blast
 		{
 			final String controller = c.getController();
 			final PlayerZone lib = AllZone.getZone(Constant.Zone.Library, controller);
@@ -181,8 +181,7 @@ public class GameActionUtil
 					AllZone.Display.getChoiceOptional("Revealed cards:", revealed.toArray());
 					
 					if (cascadedCard != null && !cascadedCard.isUnCastable()) {
-						revealed.remove(cascadedCard);
-						
+
 						if (cascadedCard.getController().equals(Constant.Player.Human))
 						{
 							String[] choices = { "Yes", "No" };
@@ -191,8 +190,10 @@ public class GameActionUtil
 
 							q = AllZone.Display.getChoiceOptional("Cast " + cascadedCard.getName() + "?", choices);
 							if (q != null) { 
-								if (q.equals("Yes"))
+								if (q.equals("Yes")) { 
 									AllZone.GameAction.playCardNoCost(cascadedCard);
+									revealed.remove(cascadedCard);
+								}
 							}
 						}
 						else
@@ -204,6 +205,7 @@ public class GameActionUtil
 						    	if (sa.canPlayAI())
 						    	{
 						    		ComputerUtil.playStackFree(sa);
+						    		revealed.remove(cascadedCard);
 						    		break;
 						    	}
 						    }

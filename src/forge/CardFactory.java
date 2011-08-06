@@ -6216,6 +6216,7 @@ public class CardFactory implements NewConstants {
         }//resolve()
       };//SpellAbility
       spell_two.setManaCost("4 U U");
+      spell_two.setAdditionalManaCost("3");
 
       spell_one.setDescription("Return target permanent to its owner's hand.");
       spell_two.setDescription("Buyback 3 - Pay 4 U U, put this card into your hand as it resolves.");
@@ -6297,6 +6298,7 @@ public class CardFactory implements NewConstants {
         }
       };//SpellAbility
       spell_two.setManaCost("5 U");
+      spell_two.setAdditionalManaCost("5");
 
       spell_one.setDescription("Draw a card.");
       spell_one.setStackDescription(cardName + " - " +card.getController() + " draws a card.");
@@ -6414,6 +6416,7 @@ public class CardFactory implements NewConstants {
         }//resolve()
       };//SpellAbility
       spell_two.setManaCost("4 G");
+      spell_two.setManaCost("4");
 
       spell_one.setDescription("Target creature gets +2/+2 until end of turn.");
       spell_two.setDescription("Buyback 4 - Pay 4G, put this card into your hand as it resolves.");
@@ -6494,6 +6497,7 @@ public class CardFactory implements NewConstants {
 
       spell_one.setManaCost("B");
       spell_two.setManaCost("4 B");
+      spell_two.setAdditionalManaCost("4");
 
       spell_one.setDescription("Put a 1/1 black Rat token into play.");
       spell_two.setDescription("Buyback 4 - Pay 4B, put this card into your hand as it resolves.");
@@ -6565,6 +6569,7 @@ public class CardFactory implements NewConstants {
 
       spell_one.setManaCost("1 G");
       spell_two.setManaCost("4 G");
+      spell_two.setAdditionalManaCost("3");
 
       spell_one.setDescription("Put a 1/1 green Saproling token into play.");
       spell_two.setDescription("Buyback 3 - Pay 4G, put this card into your hand as it resolves.");
@@ -15609,7 +15614,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     //*************** START *********** START **************************
     else if (cardName.equals("Black Lotus"))
     {
-       final SpellAbility ability = new Ability_Tap(card)
+       final Ability_Tap ability = new Ability_Tap(card, "0")
        {
          private static final long serialVersionUID = 8394047173115959008L;
 
@@ -15646,12 +15651,26 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
                     for (int i = 0; i < 3; i++)
                     	mp.addExtrinsicKeyword("ManaPool:"+ color);
                    
-                    AllZone.GameAction.sacrifice(card);
+                    //AllZone.GameAction.sacrifice(card);
              }
           }
        };
        ability.setDescription("tap, Sacrifice Black Lotus: Add three mana of any one color to your mana pool.");
        ability.setStackDescription("Adds 3 mana of any one color to your mana pool");
+       
+       
+       Input sac = new Input()
+       {
+			private static final long serialVersionUID = -4503945947115838818L;
+			public void showMessage()
+		    {
+		       AllZone.GameAction.sacrifice(card);
+		       ability.resolve();
+		       stop();
+		    }
+       };//Input
+       ability.setBeforePayMana(sac);
+       
        card.addSpellAbility(ability);
     }//*************** END ************ END **************************
     
@@ -16421,6 +16440,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
       };
       
       kicker.setManaCost("8 W W W");
+      kicker.setAdditionalManaCost("6");
       kicker.setDescription("Kicker 6: If Conqueror's Pledge was kicked, put twelve of those tokens onto the battlefield instead.");
       kicker.setStackDescription(card.getName() + " - " + card.getController() + " puts twelve 1/1 white Kor Soldier creature tokens onto the battlefield.");
       
@@ -16813,7 +16833,8 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
       	    		c = meek.get(0); 
       	    	else
       	    		c = getArtifact();
-      	    	setTargetCard(c);
+      	    	if (c != null)
+      	    		setTargetCard(c);
 
             }
             public Card getArtifact()
@@ -16827,7 +16848,8 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     	    	{
     	    		public boolean addCard(Card c)
     	    		{
-    	    			return c.isArtifact() && !c.isToken() && (CardUtil.getConvertedManaCost(c.getManaCost()) <= 1 || c.getName().equals("Sword of the Meek"));
+    	    			return c.isArtifact() && !c.isToken() && (CardUtil.getConvertedManaCost(c.getManaCost()) <= 1 && !c.equals(card)
+    	    				   || c.getName().equals("Sword of the Meek"));
     	    		}
     	    	});
     	    	
@@ -16837,13 +16859,13 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     	    	}
     	    	else
     	    		return null;
-            }//getAttacker()
+            }
     		
     		
     		public boolean canPlayAI()
     		{
     		   String phase = AllZone.Phase.getPhase();
-         	   return phase.equals(Constant.Phase.Main2);
+         	   return phase.equals(Constant.Phase.Main2) && getArtifact() != null;
     		}
     		
     		public void resolve()

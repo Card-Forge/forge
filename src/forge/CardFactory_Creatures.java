@@ -19497,6 +19497,7 @@ public class CardFactory_Creatures {
 		  			
 		  		};
 		  		kicker.setManaCost("B B B");
+		  		kicker.setAdditionalManaCost("B");
 		  		kicker.setDescription("Kicker B");
 		  		kicker.setStackDescription(card.getName() + " - Creature 2/2 (Kicked)");
 		  		card.addSpellAbility(kicker);

@@ -1341,6 +1341,13 @@ private int getDifferentLand(CardList list, String land)
 	    //SpellAbility[] choices = (SpellAbility[]) c.getSpells().toArray();
 	    ArrayList<SpellAbility> choices = c.getBasicSpells();
 	    SpellAbility sa;
+	    
+	    //TODO: add Buyback, Kicker, ... , spells here
+	    ArrayList<SpellAbility> additional = c.getAdditionalCostSpells();
+	    for (SpellAbility s : additional)
+	    {
+	    	
+	    }
 	/*
 	 System.out.println(choices.length);
 	 for(int i = 0; i < choices.length; i++)

@@ -436,6 +436,19 @@ public class Card extends MyObservable
     }
     return res;
   }
+  
+  public ArrayList<SpellAbility> getAdditionalCostSpells()
+  {
+	  ArrayList<SpellAbility> s  = new ArrayList<SpellAbility>(spellAbility);  
+	  ArrayList<SpellAbility> res = new ArrayList<SpellAbility>();
+	    
+	  for (SpellAbility sa : s)
+	  {
+	  	if (sa.isSpell() && !sa.getAdditionalManaCost().equals("") )
+	  		res.add(sa);
+	  }
+	  return res;
+  }
 
 
   //shield = regeneration

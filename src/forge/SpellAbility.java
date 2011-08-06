@@ -14,6 +14,7 @@ public abstract class SpellAbility
   private String targetPlayer       = "";
   private String stackDescription = "";
   private String manaCost          = "";
+  private String additionalManaCost= "";
   
   private String type = "Intrinsic"; //set to Intrinsic by default
 
@@ -81,6 +82,9 @@ public void execute(Object o) {}};
 
   public String getManaCost()                {return manaCost;}
   public void   setManaCost(String cost) {manaCost = cost;}
+  
+  public String getAdditionalManaCost()  {return additionalManaCost;}
+  public void   setAdditionalManaCost(String cost) { additionalManaCost = cost; }
 
   public boolean isSpell()        {return spell; }
   public boolean isAbility()     {return ! isSpell(); }
