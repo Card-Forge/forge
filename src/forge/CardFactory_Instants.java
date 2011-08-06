@@ -4948,6 +4948,31 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        if(cardName.equals("Brightstone Ritual")) {
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 7081747227572709229L;
+                @Override
+                public boolean canPlayAI() {
+                	//Compy doesn't have a mana pool, so can't play this spell
+                    return false;
+                }
+                
+                @Override
+                public void resolve() {
+                	CardList goblins = AllZoneUtil.getTypeInPlay("Goblin");
+                	StringBuilder mana = new StringBuilder();
+                	for(int i = 0; i < goblins.size(); i++) {
+                		mana.append("R ");
+                	}
+                	Card mp = AllZone.ManaPool;
+                	mp.addExtrinsicKeyword("ManaPool:"+mana.toString());
+                }
+            };
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
     	return card;
     }//getCard
 }
