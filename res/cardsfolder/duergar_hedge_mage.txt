@@ -8,6 +8,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDestroyA:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact
 SVar:TrigDestroyE:AB$Destroy | Cost$ 0 | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment
 SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/duergar_hedge-mage.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/duergar_hedge_mage.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/137.jpg
 End
