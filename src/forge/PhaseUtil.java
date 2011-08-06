@@ -140,11 +140,22 @@ public class PhaseUtil {
     		}
     	}
     	
+    	//opponent untapping during your untap phase
+    	if(AllZoneUtil.isCardInPlay("Murkfiend Liege", player.getOpponent())) {
+    		CardList opp = AllZoneUtil.getPlayerCardsInPlay(player.getOpponent());
+    		opp = opp.filter(new CardListFilter() {
+    			public boolean addCard(Card c) {
+    				return c.isBlue() || c.isGreen();
+    			}
+    		});
+    		for(Card oppCard:opp) oppCard.untap();
+    	}
     	if(AllZoneUtil.isCardInPlay("Seedborn Muse", player.getOpponent())) {
     		CardList opp = AllZoneUtil.getPlayerCardsInPlay(player.getOpponent());
     		for(Card oppCard:opp) oppCard.untap();
     		
     	}
+    	//end opponent untapping during your untap phase
     	
     	if( canOnlyUntapOneLand()) {
     		if( AllZone.Phase.getPlayerTurn().equals(AllZone.ComputerPlayer)) {
