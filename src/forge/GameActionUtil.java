@@ -134,7 +134,6 @@ public class GameActionUtil {
 		upkeep_Convalescent_Care();
 		upkeep_Ancient_Runes();
 		upkeep_Karma();
-		upkeep_Defense_of_the_Heart();
 		upkeep_Oath_of_Druids();
 		upkeep_Oath_of_Ghouls();
 		upkeep_Mycoloth();
@@ -4141,27 +4140,15 @@ public class GameActionUtil {
 						PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
 						CardList playerLand = AllZoneUtil.getPlayerLandsInPlay(player);
 						
-						if((c.getController().equals(AllZone.ComputerPlayer)) && (playerLand.size() > 0)) {
-							AllZone.InputControl.setInput(CardFactoryUtil.input_sacrificePermanent(playerLand, c.getName()+" - Select a land to sacrifice."));
-							play.remove(playerLand);
-							graveyard.add(playerLand);
-							c.tap();
+						c.tap();
+						if (c.getController().isComputer()){
+							if (playerLand.size() > 0)
+								AllZone.InputControl.setInput(CardFactoryUtil.input_sacrificePermanent(playerLand, c.getName()+" - Select a land to sacrifice."));
 						}
 						else {
-							if((c.getController().equals(AllZone.ComputerPlayer)) && (playerLand.size() == 0)) {
-								c.tap();
-							}
-						}
-						if((c.getController().equals(AllZone.HumanPlayer)) && (playerLand.size() > 0)) {
 								Card target = CardFactoryUtil.AI_getBestLand(playerLand);
-								play.remove(target);
-								graveyard.add(target);
-								c.tap();
-							}
-						else {
-							if((c.getController().equals(AllZone.HumanPlayer)) && (playerLand.size() == 0)) {
-								c.tap();
-							}
+								
+								AllZone.GameAction.sacrifice(target);
 						}
 					} //end resolve()
 			}; //end noPay ability
@@ -8822,98 +8809,6 @@ public class GameActionUtil {
 			}
 		}
 	}
-
-	private static void upkeep_Defense_of_the_Heart() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		final Player opponent = player.getOpponent();
-
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		// check if opponent has 3 or more creatures in play
-		PlayerZone opponentZone = AllZone.getZone(Constant.Zone.Battlefield, opponent);
-		CardList opponentList = new CardList(opponentZone.getCards());
-		opponentList = opponentList.getType("Creature");
-
-		/*
-        for (int i = 0; i < opponentList.size(); i++)
-        {
-        	Card tmpCard = opponentList.get(i);
-        	System.out.println("opponent has: " + tmpCard);
-        }
-		 */
-
-		if(3 > opponentList.size()) return;
-
-		// opponent has more than 3 creatures in play, so check if Defense of
-		// the Heart is in play and sacrifice it for the effect.
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Defense of the Heart");
-
-		if(0 < list.size()) {
-			// loop through the number of Defense of the Heart's that player
-			// controls. They could control 1, 2, 3, or 4 of them.
-			for(int i = 0; i < list.size(); i++) {
-				final Card card = list.get(i);
-				Ability ability = new Ability(list.get(0), "0") {
-					@Override
-					public void resolve() {
-						PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-						PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-
-						// sacrifice Defense of the Heart
-						AllZone.GameAction.sacrifice(card);
-						// search library for a creature, put it onto the battlefield
-						Card creature1 = getCreatureFromLibrary();
-						if(creature1 != null) {
-							library.remove(creature1);
-							play.add(creature1);
-						}
-
-						// search library for a second creature, put it into
-						// play
-						Card creature2 = getCreatureFromLibrary();
-						if(creature2 != null) {
-							// if we got this far the effect was good
-							library.remove(creature2);
-							play.add(creature2);
-						}
-
-						card.getController().shuffle();
-
-					}
-
-					public Card getCreatureFromLibrary() {
-						PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-
-						CardList creatureList = new CardList(library.getCards());
-						creatureList = creatureList.getType("Creature");
-
-						if(AllZone.ComputerPlayer.equals(card.getController())) {
-							return CardFactoryUtil.AI_getBestCreature(creatureList);
-						} else {
-							Object o = GuiUtils.getChoiceOptional("Choose a creature card",
-									creatureList.toArray());
-							if(o != null) {
-								Card creature = (Card) o;
-								return creature;
-							} else {
-								return null;
-							}
-						}
-					}// getCreatureFromLibrary
-				};// Ability
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append("Defense of the Heart - ").append(player);
-				sb.append(" sacrifices Defense of the Heart to search their library for up to two ");
-				sb.append("creature cards and put those creatures onto the battlefield. Then shuffle's their library.");
-				ability.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability);
-				card.addSpellAbility(ability);
-			}
-		}// if
-	}// upkeep_Defense of the Heart
 	
     private static void upkeep_Oath_of_Druids() {
         CardList oathList = AllZoneUtil.getCardsInPlay("Oath of Druids");

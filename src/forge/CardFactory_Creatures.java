@@ -2520,14 +2520,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getOwner());
-                    /*
-                    AllZone.getZone(card).remove(card);
-                    hand.add(card);
-                    */
-                    if(card.isToken()) AllZone.getZone(card).remove(card);
-                    else AllZone.GameAction.moveTo(hand, card);
-                    
+                    AllZone.GameAction.moveToHand(card);
                 }
             };//a1
             
@@ -2786,12 +2779,8 @@ public class CardFactory_Creatures {
                             if(!c.isToken()) {
                                 c = AllZone.CardFactory.copyCard(c);
                                 c.setController(c.getOwner());
-                                
-                                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getOwner());
-                                PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, c.getOwner());
-                                removed.remove(c);
-                                play.add(c);
-                                
+
+                                AllZone.GameAction.moveToPlay(c);
                             }
                         }//resolve()
                     };//SpellAbility
@@ -2912,11 +2901,7 @@ public class CardFactory_Creatures {
                                 c = AllZone.CardFactory.copyCard(c);
                                 c.setController(c.getOwner());
                                 
-                                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getOwner());
-                                PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, c.getOwner());
-                                removed.remove(c);
-                                play.add(c);
-                                
+                                AllZone.GameAction.moveToPlay(c);
                             }
                         }//resolve()
                     };//SpellAbility
@@ -7393,9 +7378,8 @@ public class CardFactory_Creatures {
                                         nonLandList.toArray());
                                 if(o != null) {
                                     Card c = (Card) o;
-                                    hand.remove(c);
-                                    lib.add(c); //put on bottom
-                                    
+                                	AllZone.GameAction.moveToBottomOfLibrary(c);
+
                                     player.drawCard();
                                 }
                             }
@@ -7403,8 +7387,7 @@ public class CardFactory_Creatures {
                         {
                             if(AllZone.Phase.getTurn() >= 12 && nonLandList.size() > 0) {
                                 Card c = CardFactoryUtil.AI_getMostExpensivePermanent(nonLandList, card, false);
-                                hand.remove(c);
-                                lib.add(c);
+                                AllZone.GameAction.moveToBottomOfLibrary(c);
                                 AllZone.HumanPlayer.drawCard();
                             }
                         }
@@ -7709,23 +7692,17 @@ public class CardFactory_Creatures {
                             Object o = GuiUtils.getChoice("Pick creature: ", creatures.toArray());
                             if(o != null) {
                                 Card c = (Card) o;
-                                PlayerZone zone = AllZone.getZone(c);
-                                zone.remove(c);
-                                play.add(c);
-                                c.untap();
+                                c.setController(card.getController());
                                 c.addExtrinsicKeyword(c.getName() + " is black.");
                                 c.addType("Nightmare");
-                                c.setController(card.getController());
+                                AllZone.GameAction.moveToPlay(c, card.getController());
                             }
                         } else {
                             Card c = CardFactoryUtil.AI_getBestCreature(creatures);
-                            PlayerZone zone = AllZone.getZone(c);
-                            zone.remove(c);
-                            play.add(c);
-                            c.untap();
+                            c.setController(card.getController());
                             c.addExtrinsicKeyword(c.getName() + " is black.");
                             c.addType("Nightmare");
-                            c.setController(card.getController());
+                            AllZone.GameAction.moveToPlay(c, card.getController());
                         }
                     }
                 }
@@ -8347,7 +8324,7 @@ public class CardFactory_Creatures {
                     card.setKicked(true);
                     hand.remove(card);
                     play.add(card);
-                    //card.comesIntoPlay(); //do i need this?
+
                 }
                 
                 @Override
@@ -9391,8 +9368,7 @@ public class CardFactory_Creatures {
         			if (AllZone.GameAction.isCardInZone(getTargetCard(), lib)) {
         				Card c = getTargetCard();
         				card.getController().shuffle();
-        				lib.remove(c);
-        				hand.add(c);
+        				AllZone.GameAction.moveToHand(c);
         			}
         		}//resolve()
         	};//spell ability

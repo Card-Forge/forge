@@ -93,19 +93,25 @@ public class AbilityFactory_Sacrifice {
 			tgts = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
 		
 		String valid = af.getMapParams().get("SacValid");
+		if (valid == null)
+			valid = "Self";
+		
 		String num = af.getMapParams().get("Amount");
 		num = (num == null) ? "1" : num;
 		int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), num, sa);
 		
-		for(Player p : tgts)
-			sb.append(p.getName()).append(" ");
-		
-		String msg = af.getMapParams().get("SacMessage");
-		if (msg == null)
-			msg = valid;
-		
-		sb.append("Sacrifices ").append(amount).append(" ").append(msg).append(".");
-		
+		if (valid.equals("Self"))
+			sb.append("Sacrifice ").append(sa.getSourceCard().toString());
+		else{
+			for(Player p : tgts)
+				sb.append(p.getName()).append(" ");
+			
+			String msg = af.getMapParams().get("SacMessage");
+			if (msg == null)
+				msg = valid;
+			
+			sb.append("Sacrifices ").append(amount).append(" ").append(msg).append(".");
+		}
 		Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null)
         	sb.append(abSub.getStackDescription());
@@ -214,18 +220,27 @@ public class AbilityFactory_Sacrifice {
 			tgts = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 		
 		String valid = params.get("SacValid");
+		if (valid == null)
+			valid = "Self";
 		
 		String msg = params.get("SacMessage");
 		if (msg == null)
 			msg = valid;
 		
 		msg = "Sacrifice a " + msg;
-		
-		for(Player p : tgts){
-			if (p.isComputer())
-				sacrificeAI(p, amount, valid, sa);
-			else
-				sacrificeHuman(p, amount, valid, sa, msg);
+
+		if (valid.equals("Self")){
+			if (AllZone.getZone(sa.getSourceCard()).is(Constant.Zone.Battlefield))
+				AllZone.GameAction.sacrifice(sa.getSourceCard());
+		}
+		else{
+			for(Player p : tgts){
+	
+				if (p.isComputer())
+					sacrificeAI(p, amount, valid, sa);
+				else
+					sacrificeHuman(p, amount, valid, sa, msg);
+			}
 		}
 		
 		if (af.hasSubAbility()){

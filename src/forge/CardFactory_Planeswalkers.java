@@ -516,8 +516,10 @@ class CardFactory_Planeswalkers {
                     Card c = null;
                     for(int i = 0; i < list.size(); i++) {
                         //this is a rough hack, but no one will ever see this code anyways, lol ;+)
+                    	// I hate you so much
                         c = list.get(i);
                         c.setController(card.getController());
+                        
                         
                         grave = AllZone.getZone(c);
                         if(grave != null) grave.remove(c);
