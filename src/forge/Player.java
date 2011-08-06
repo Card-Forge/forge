@@ -142,7 +142,7 @@ public abstract class Player extends MyObservable{
         	damageToDo = 0;
 		
 		if( source.getKeyword().contains("Infect") ) {
-        	addPoisonCounters(damage);
+        	addPoisonCounters(damageToDo);
         }
         else {
         	if(PlayerUtil.worshipFlag(this) && life <= damageToDo) {
@@ -151,7 +151,7 @@ public abstract class Player extends MyObservable{
         	subtractLife(damageToDo, source);
         }
         	
-        if(source.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(source, damage);
+        if(source.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(source, damageToDo);
         
         CardList cl = CardFactoryUtil.getAurasEnchanting(source, "Guilty Conscience");
         for(Card c:cl) {
