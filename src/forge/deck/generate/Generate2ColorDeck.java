@@ -114,7 +114,7 @@ public class Generate2ColorDeck
 		// remove cards that generated decks don't like
 		AllCards = AllCards.filter(new CardListFilter(){
 			public boolean addCard(Card c){
-				return (!c.getSVar("RemAIDeck").equals("True"));
+				return !(c.getSVar("RemAIDeck").equals("True") || c.getSVar("RemRandomDeck").equals("True"));
 			}
 		});
 		

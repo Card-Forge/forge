@@ -384,7 +384,8 @@ public class GenerateConstructedMultiColorDeck
 	    	  
 	        return CardUtil.getColors(c).size() <= 3 &&
 	               !c.isLand()                       && //no land
-	               c.getSVar("RemAIDeck").equals("True")    || //OR very important
+	               !c.getSVar("RemRandomDeck").equals("True") &&
+	               !c.getSVar("RemAIDeck").equals("True")    || //OR very important
 	               goodLand.contains(c.getName());
 	      }
 	    });
@@ -398,7 +399,8 @@ public class GenerateConstructedMultiColorDeck
 	      {  
 	        return CardUtil.getColors(c).size() >= 2 && //only get multicolored cards
 	               !c.isLand()                       && //no land
-	               c.getSVar("RemAIDeck").equals("True")     || //OR very important
+	               !c.getSVar("RemRandomDeck").equals("True") &&
+	               !c.getSVar("RemAIDeck").equals("True")     || //OR very important
 	               goodLand.contains(c.getName());
 	      }
 	    });

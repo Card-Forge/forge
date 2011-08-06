@@ -62,10 +62,12 @@ public class GenerateConstructedDeck
       list.add(land);
     }
   }//addLand()
+  
   private CardList getCards()
   {
     return filterBadCards(AllZone.CardFactory.getAllCards());
   }//getCards()
+  
   private CardList get2ColorDeck()
   {
     CardList deck = get2Colors(getCards());
@@ -79,6 +81,7 @@ public class GenerateConstructedDeck
 
     return out;
   }
+  
   private CardList get2Colors(CardList in)
   {
     int a;
@@ -146,6 +149,7 @@ public class GenerateConstructedDeck
       	}
         return CardUtil.getColors(c).size() <= 2 && //only dual colored gold cards
                !c.isLand()                       && //no land
+               !c.getSVar("RemRandomDeck").equals("True") &&
                !c.getSVar("RemAIDeck").equals("True")     || //OR very important
                goodLand.contains(c.getName());
       }
@@ -153,6 +157,7 @@ public class GenerateConstructedDeck
 
     return out;
   }//filterBadCards()
+  
   public static void main(String[] args)
   {
     GenerateConstructedDeck g = new GenerateConstructedDeck();
