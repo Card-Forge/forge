@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Instant
 Text:Put two 1/1 white Soldier creature tokens into play.
 #K:spMakeToken<>2<>Soldier<>W 1 1 Soldier<>Controller<>W<>Creature;Soldier<>1<>1<>None
-A:SP$Token|Cost$1 W|TokenAmount$2|TokenName$Soldier|TokenTypes$Creature,Soldier|TokenOwner$Controller|TokenColors$White|TokenPower$1|TokenToughness$1
+A:SP$Token | Cost$ 1 W | TokenAmount$ 2 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ Controller | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card48103.jpg
 End

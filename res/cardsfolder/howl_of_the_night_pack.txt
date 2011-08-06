@@ -3,7 +3,7 @@ ManaCost:6 G
 Types:Sorcery
 Text:Put a 2/2 green Wolf creature token onto the battlefield for each Forest you control.
 #K:spMakeToken<>X<>Wolf<>G 2 2 Wolf<>Controller<>G<>Creature;Wolf<>2<>2<>None
-A:SP$Token|Cost$6 G|TokenAmount$X|TokenName$Wolf|TokenTypes$Creature,Wolf|TokenOwner$Controller|TokenColors$Green|TokenPower$2|TokenToughness$2
+A:SP$Token | Cost$ 6 G | TokenAmount$ X | TokenName$ Wolf | TokenTypes$ Creature,Wolf | TokenOwner$ Controller | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2
 SVar:X:Count$TypeYouCtrl.Forest
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/howl_of_the_night_pack.jpg

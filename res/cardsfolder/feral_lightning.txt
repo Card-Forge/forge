@@ -3,7 +3,7 @@ ManaCost:3 R R R
 Types:Sorcery
 Text:Put three 3/1 red Elemental creature tokens with haste into play. Remove them from the game at end of turn.
 #K:spMakeToken<>3<>Elemental<>R 3 1 Elemental<>Controller<>R<>Creature;Elemental<>3<>1<>Haste;At the beginning of the end step, exile CARDNAME.
-A:SP$Token|Cost$3 R R R|TokenAmount$3|TokenName$Elemental|TokenTypes$Creature,Elemental|TokenOwner$Controller|TokenColors$Red|TokenPower$3|TokenToughness$1|TokenKeywords$Haste<>At the beginning of the end step, exile CARDNAME.
+A:SP$Token | Cost$ 3 R R R | TokenAmount$ 3 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ Controller | TokenColors$ Red | TokenPower$ 3 | TokenToughness$ 1 | TokenKeywords$ Haste<>At the beginning of the end step, exile CARDNAME.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card84373.jpg

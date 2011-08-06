@@ -3,7 +3,7 @@ ManaCost:3 R R
 Types:Sorcery
 Text:Put three 1/1 red Goblin Scout creature tokens with mountainwalk onto the battlefield.
 #K:spMakeToken<>3<>Goblin Scout<>R 1 1 Goblin Scout<>Controller<>R<>Creature;Goblin;Scout<>1<>1<>Mountainwalk
-A:SP$Token|Cost$3 R R|TokenAmount$3|TokenName$Goblin Scout|TokenTypes$Creature,Goblin,Scout|TokenOwner$Controller|TokenColors$Green|TokenPower$1|TokenToughness$1|TokenKeywords$Mountainwalk
+A:SP$Token | Cost$ 3 R R | TokenAmount$ 3 | TokenName$ Goblin Scout | TokenTypes$ Creature,Goblin,Scout | TokenOwner$ Controller | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Mountainwalk
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_scouts.jpg
 End

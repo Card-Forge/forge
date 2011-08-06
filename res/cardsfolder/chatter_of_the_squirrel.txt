@@ -3,7 +3,7 @@ ManaCost:G
 Types:Sorcery
 Text:Put a 1/1 green Squirrel creature token onto the battlefield.
 #K:spMakeToken<>1<>Squirrel<>G 1 1 Squirrel<>Controller<>G<>Creature;Squirrel<>1<>1<>None
-A:SP$Token|Cost$G|TokenAmount$1|TokenName$Squirrel|TokenColors$Green|TokenTypes$Creature,Squirrel|TokenOwner$Controller|TokenPower$1|TokenToughness$1
+A:SP$Token | Cost$ G | TokenAmount$ 1 | TokenName$ Squirrel | TokenColors$ Green | TokenTypes$ Creature,Squirrel | TokenOwner$ Controller | TokenPower$ 1 | TokenToughness$ 1
 K:Flashback:1 G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chatter_of_the_squirrel.jpg

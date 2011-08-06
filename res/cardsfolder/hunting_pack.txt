@@ -3,7 +3,7 @@ ManaCost:5 G G
 Types:Instant
 Text:Put a 4/4 green Beast creature token onto the battlefield.
 #K:spMakeToken<>1<>Beast<>G 4 4 Beast<>Controller<>G<>Creature;Beast<>4<>4<>None
-A:SP$Token|Cost$5 G G|TokenAmount$1|TokenName$Beast|TokenTypes$Creature,Beast|TokenOwner$Controller|TokenColors$Green|TokenPower$4|TokenToughness$4
+A:SP$Token | Cost$ 5 G G | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ Controller | TokenColors$ Green | TokenPower$ 4 | TokenToughness$ 4
 K:Storm
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_pack.jpg

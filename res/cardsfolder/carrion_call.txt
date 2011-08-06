@@ -3,7 +3,7 @@ ManaCost:3 G
 Types:Instant
 Text:Put two 1/1 green Insect creature tokens with infect onto the battlefield.
 #K:spMakeToken<>2<>Insect<>G 1 1 Insect<>Controller<>G<>Creature;Insect<>1<>1<>Infect
-A:SP$Token|Cost$3 G|TokenImage$G 1 1 Insect Infect|TokenAmount$2|TokenName$Insect|TokenTypes$Creature,Insect|TokenOwner$Controller|TokenColors$Green|TokenPower$1|TokenToughness$1|TokenKeywords$Infect
+A:SP$Token | Cost$ 3 G | TokenImage$ G 1 1 Insect Infect | TokenAmount$ 2 | TokenName$ Insect | TokenTypes$ Creature,Insect | TokenOwner$ Controller | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Infect
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carrion_call.jpg
 End

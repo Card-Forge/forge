@@ -3,7 +3,7 @@ ManaCost:3 G
 Types:Sorcery
 Text:Put a 1/1 green Saproling creature token onto the battlefield for each card in your hand.
 #K:spMakeToken<>X<>Saproling<>G 1 1 Saproling<>Controller<>G<>Creature;Saproling<>1<>1<>None
-A:SP$Token|Cost$3 G|TokenAmount$X|TokenName$Saproling|TokenTypes$Creature,Saproling|TokenOwner$Controller|TokenColors$Green|TokenPower$1|TokenToughness$1
+A:SP$Token | Cost$ 3 G | TokenAmount$ X | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ Controller | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 SVar:X:Count$InYourHand
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spontaneous_generation.jpg

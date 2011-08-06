@@ -3,7 +3,7 @@ ManaCost:3 G
 Types:Sorcery
 Text:Put two 1/1 green Squirrel creature tokens onto the battlefield.
 #K:spMakeToken<>2<>Squirrel<>G 1 1 Squirrel<>Controller<>G<>Creature;Squirrel<>1<>1<>None
-A:SP$Token|Cost$3 G|TokenAmount$2|TokenName$Squirrel|TokenTypes$Creature,Squirrel|TokenOwner$Controller|TokenColors$Green|TokenPower$1|TokenToughness$1
+A:SP$Token | Cost$ 3 G | TokenAmount$ 2 | TokenName$ Squirrel | TokenTypes$ Creature,Squirrel | TokenOwner$ Controller | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 K:Flashback:1 G PayLife<3>
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acorn_harvest.jpg
