@@ -3732,27 +3732,20 @@ public class CardFactory implements NewConstants {
             card.removeIntrinsicKeyword(parse);
             
             String k[] = parse.split(":");
+    		String tmp = k[0].replace("abDrawCards", "");
+    		
+    		String[] tmpCost = tmp.split(" ", 2);
             
-            final boolean Tgt[] = {false};
-            Tgt[0] = k[0].contains("Tgt");
-            
-            String tmpCost = "";
-            
-            if(Tgt[0]) tmpCost = k[0].substring(14);
-            
-            else tmpCost = k[0].substring(11);
-            
-            boolean tapCost = false;
-            boolean tapOnlyCost = false;
-            
-            if(tmpCost.contains("T")) {
-                tapCost = true;
-                tmpCost = tmpCost.replace("T", "");
-                tmpCost = tmpCost.trim();
-                if(tmpCost.length() == 0) tapOnlyCost = true;
-            }
-            
-            final String manaCost = tmpCost;
+    		final Target abTgt;
+    		if (tmpCost[0].equals(""))
+    			abTgt = null;
+    		else{
+    			abTgt = new Target(tmpCost[0]);
+    			abTgt.setValidTgts("player".split(","));
+    			abTgt.setVTSelection("Target a player to draw cards");
+    		}
+    		
+       		final Ability_Cost abCost = new Ability_Cost(tmpCost[1], card.getName(), true);
             
             final int NumCards[] = {-1};
             final String NumCardsX[] = {"none"};
@@ -3780,139 +3773,85 @@ public class CardFactory implements NewConstants {
                     if(k.length > 3) stDesc[0] = k[3];
                 }
             }
-            if(tapOnlyCost == true) spDesc[0] = "Tap: " + spDesc[0];
-            else if(tapCost == true) spDesc[0] = manaCost + ", tap: " + spDesc[0];
-            else spDesc[0] = manaCost + ": " + spDesc[0];
-            
 
-            if(!tapCost) {
-                final SpellAbility abDraw = new Ability_Activated(card, manaCost) {
-                    private static final long serialVersionUID = -206739246009089196L;
-                    
-                    private int               ncards;
-                    
-                    public int getNumCards() {
-                        if(NumCards[0] != -1) return NumCards[0];
-                        
-                        if(!NumCardsX[0].equals("none")) return CardFactoryUtil.xCount(card, NumCardsX[0]);
-                        
-                        return 0;
-                    }
-                    
-                    @Override
-                    public boolean canPlayAI() {
-                        ncards = getNumCards();
-                        int h = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).size();
-                        int hl = AllZone.getZone(Constant.Zone.Library, Constant.Player.Human).size();
-                        int cl = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer).size();
-                        
-                        Random r = new Random();
-                        
-                        // prevent run-away activations - first time will always return true
-                        boolean rr = false;
-                        if(r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed())) rr = true;
-                        
-
-                        if(((hl - ncards) < 2) && Tgt[0]) // attempt to deck the human
-                        {
-                            setTargetPlayer(Constant.Player.Human);
-                            return true && rr;
-                        }
-                        
-                        if(((h + ncards) <= 7) && !((cl - ncards) < 1) && (r.nextInt(10) > 4)) {
-                            setTargetPlayer(Constant.Player.Computer);
-                            return true && rr;
-                        }
-                        
-                        return false;
-                    }
-                    
-                    @Override
-                    public void resolve() {
-                        ncards = getNumCards();
-                        
-                        String TgtPlayer = card.getController();
-                        if(Tgt[0]) TgtPlayer = getTargetPlayer();
-                        
-                        for(int i = 0; i < ncards; i++)
-                            AllZone.GameAction.drawCard(TgtPlayer);
-                        
-                        if(!DrawBack[0].equals("none")) CardFactoryUtil.doDrawBack(DrawBack[0], ncards,
-                                card.getController(), AllZone.GameAction.getOpponent(card.getController()),
-                                TgtPlayer, card, null, this);
-                    }
-                };
-                
-                abDraw.setDescription(spDesc[0]);
-                abDraw.setStackDescription(stDesc[0]);
-                
-                if(Tgt[0] == true) abDraw.setBeforePayMana(CardFactoryUtil.input_targetPlayer(abDraw));
-                
-                card.addSpellAbility(abDraw);
-            }//!tapCost
+            spDesc[0] = abCost.toString() + spDesc[0];
             
-            if(tapCost) {
-                final SpellAbility abDraw = new Ability_Tap(card) {
-                    private static final long serialVersionUID = -2149577241283487990L;
+            final SpellAbility abDraw = new Ability_Activated(card, abCost.getMana()) {
+                private static final long serialVersionUID = -206739246009089196L;
+                
+                private int               ncards;
+                
+                public int getNumCards() {
+                    if(NumCards[0] != -1) return NumCards[0];
                     
-                    private int               ncards;
+                    if(!NumCardsX[0].equals("none")) return CardFactoryUtil.xCount(card, NumCardsX[0]);
                     
-                    public int getNumCards() {
-                        if(NumCards[0] != -1) return NumCards[0];
-                        
-                        if(!NumCardsX[0].equals("none")) return CardFactoryUtil.xCount(card, NumCardsX[0]);
-                        
-                        return 0;
+                    return 0;
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                    ncards = getNumCards();
+                    int handSize = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).size();
+                    int hl = AllZone.getZone(Constant.Zone.Library, Constant.Player.Human).size();
+                    int cl = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer).size();
+                	
+                	if (abCost.getSacCost() && handSize > 2) 	return false;	
+                	if (abCost.getSubCounter() && handSize > 3) return false;
+                	if (abCost.getLifeCost() && handSize > 2)	return false;
+                	
+                	if (!ComputerUtil.canPayCost(this))			return false;
+                    
+                    Random r = new Random();
+                    
+                    // prevent run-away activations - first time will always return true
+                    boolean rr = false;
+                    if(r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed())) rr = true;
+                    
+
+                    if(((hl - ncards) < 2) && abTgt != null) // attempt to deck the human
+                    {
+                        setTargetPlayer(Constant.Player.Human);
+                        return true && rr;
                     }
                     
-                    @Override
-                    public boolean canPlayAI() {
-                        ncards = getNumCards();
-                        int h = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).size();
-                        int hl = AllZone.getZone(Constant.Zone.Library, Constant.Player.Human).size();
-                        int cl = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer).size();
-                        
-                        Random r = new Random();
-                        
-                        if(((hl - ncards) < 2) && Tgt[0]) // attempt to deck the human if possible
-                        {
-                            setTargetPlayer(Constant.Player.Human);
-                            return true;
-                        }
-                        
-                        if(((h + ncards) <= 7) && !((cl - ncards) < 1) && (r.nextInt(10) > 4)) {
-                            setTargetPlayer(Constant.Player.Computer);
-                            return true;
-                        }
-                        
-                        return false;
+                    if(((handSize + ncards) <= 7) && !((cl - ncards) < 1) && (r.nextInt(10) > 4)) {
+                        setTargetPlayer(Constant.Player.Computer);
+                        return true && rr;
                     }
                     
-                    @Override
-                    public void resolve() {
-                        ncards = getNumCards();
-                        
-                        String TgtPlayer = card.getController();
-                        if(Tgt[0]) TgtPlayer = getTargetPlayer();
-                        
-                        for(int i = 0; i < ncards; i++)
-                            AllZone.GameAction.drawCard(TgtPlayer);
-                        
-                        if(!DrawBack[0].equals("none")) CardFactoryUtil.doDrawBack(DrawBack[0], ncards,
-                                card.getController(), AllZone.GameAction.getOpponent(card.getController()),
-                                TgtPlayer, card, null, this);
-                    }
-                };
+                    return false;
+                }
                 
-                abDraw.setDescription(spDesc[0]);
-                abDraw.setStackDescription(stDesc[0]);
+                @Override
+				public boolean canPlay(){
+                	Cost_Payment pay = new Cost_Payment(abCost, this);
+                    return (pay.canPayAdditionalCosts() && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+				}
                 
-                if(!tapOnlyCost) abDraw.setManaCost(manaCost);
-                
-                if(Tgt[0] == true) abDraw.setBeforePayMana(CardFactoryUtil.input_targetPlayer(abDraw));
-                
-                card.addSpellAbility(abDraw);
-            }//tapCost
+                @Override
+                public void resolve() {
+                    ncards = getNumCards();
+                    
+                    String TgtPlayer = (abTgt == null) ? card.getController() : getTargetPlayer();
+                    
+                    for(int i = 0; i < ncards; i++)
+                        AllZone.GameAction.drawCard(TgtPlayer);
+                    
+                    if(!DrawBack[0].equals("none")) CardFactoryUtil.doDrawBack(DrawBack[0], ncards,
+                            card.getController(), AllZone.GameAction.getOpponent(card.getController()),
+                            TgtPlayer, card, null, this);
+                }
+            };
+            
+            abDraw.setDescription(spDesc[0]);
+            abDraw.setStackDescription(stDesc[0]);
+            
+            if (abTgt != null)
+            	abDraw.setTarget(abTgt);
+            abDraw.setPayCosts(abCost);
+            
+            card.addSpellAbility(abDraw);
         }
         
         if(hasKeyword(card, "spDrawCards") != -1) {
