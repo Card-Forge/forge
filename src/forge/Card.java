@@ -2592,7 +2592,11 @@ public class Card extends MyObservable {
         
         if(!CardFactoryUtil.canDamage(sourceCard, this)) assignedDamage = 0;
 
-        addAssignedDamage(assignedDamage, sourceCard);
+        Log.debug(this + " - was assigned " + assignedDamage + " damage, by " + sourceCard);
+        if(!assignedDamageHashMap.containsKey(sourceCard)) assignedDamageHashMap.put(sourceCard, assignedDamage);
+        else {
+            assignedDamageHashMap.put(sourceCard, assignedDamageHashMap.get(sourceCard) + assignedDamage);
+        }
         
         Log.debug("***");
         /*
