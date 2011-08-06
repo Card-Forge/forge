@@ -13845,7 +13845,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(gain2Life);
         }//*************** END ************ END **************************
 
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Wydwen, the Biting Gale")) {
             final SpellAbility a1 = new Ability(card, "U B PayLife<1>") {
@@ -13858,10 +13858,10 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getOwner());
-                    /*
+                    
                     AllZone.getZone(card).remove(card);
                     hand.add(card);
-                    */
+                    
                     if(card.isToken()) AllZone.getZone(card).remove(card);
                     else AllZone.GameAction.moveTo(hand, card);
                 }
@@ -13875,7 +13875,7 @@ public class CardFactory_Creatures {
             
             a1.setDescription("U B, Pay 1 life: Return Wydwen, the Biting Gale to its owner's hand.");
         }//*************** END ************ END **************************
-        
+        */
         
       //*************** START *********** START **************************
         else if(cardName.equals("Tradewind Rider")) {

@@ -23,22 +23,30 @@ public class AbilityFactory_Bounce {
 
 				 StringBuilder sb = new StringBuilder();
 				 String name = af.getHostCard().getName();
+				 String targetname = "";
+				 
+				
+				 Card tgt = getTargetCard();
+				 if (tgt != null)
+					 targetname = tgt.getName();
+				 else
+					 targetname = name;
 				 
 				 if(destination.equals("Hand"))
-					 sb.append(name).append(" - Return ").append(getTargetCard().getName()).append(" to its owners hand.");
+					 sb.append(name).append(" - Return ").append(targetname).append(" to its owners hand.");
 				 
 				 if(destination.equals("TopofLibrary"))
-					 sb.append(name).append(" - Put ").append(getTargetCard().getName()).append(" on top of its owner's library.");
+					 sb.append(name).append(" - Put ").append(targetname).append(" on top of its owner's library.");
 				 
 				 if(destination.equals("BottomofLibrary"))
-					 sb.append(name).append(" - Put ").append(getTargetCard().getName()).append(" on the bottom of its owner's library.");
+					 sb.append(name).append(" - Put ").append(targetname).append(" on the bottom of its owner's library.");
 				 
 				 if(destination.equals("ShuffleIntoLibrary"))
-					 sb.append(name).append(" - Shuffle ").append(getTargetCard().getName()).append(" into its owner's library.");
+					 sb.append(name).append(" - Shuffle ").append(targetname).append(" into its owner's library.");
 				 
 				 if(destination.equals("Exile"))
-					 sb.append(name).append(" - Exile ").append(getTargetCard().getName());
-
+					 sb.append(name).append(" - Exile ").append(targetname);
+				
 				 return sb.toString();
 			}
 			
@@ -202,7 +210,7 @@ public class AbilityFactory_Bounce {
 	public static void bounceResolve(final AbilityFactory af, final SpellAbility sa, final String Destination){
 		HashMap<String,String> params = af.getMapParams();
 		String DrawBack = params.get("SubAbility");
-		Card card = af.getHostCard();
+		Card card = sa.getSourceCard();
 		
 		ArrayList<Card> tgtCards;
 
