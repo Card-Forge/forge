@@ -1,3 +1,10 @@
+Landbind Ritual
+3 W W
+Sorcery
+no text
+spGainLife:X:You gain 2 life for each Plains you control.:Landbind Ritual - player gains X life
+SVar:X:Count$TypeYouCtrl.Plains/Times.2
+
 Epic Struggle
 2 G G
 Enchantment
@@ -1031,13 +1038,6 @@ Kiss of the Amesha
 Sorcery
 no text
 spGainLifeTgt:7:Drawback$TgtDrawCards/2:Target player gains 7 life and draws two cards.:Kiss of the Amesha - target player gains 7 life and draws 2 cards
-
-Landbind Ritual
-3 W W
-Sorcery
-no text
-spGainLife:X:You gain 2 life for each Plains you control.:Landbind Ritual - player gains X life
-SVar:X:Count$TypeYouCtrl.Plains
 
 Natural Spring
 3 G G
