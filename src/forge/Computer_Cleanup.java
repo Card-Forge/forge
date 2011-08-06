@@ -10,6 +10,10 @@ public class Computer_Cleanup extends Input {
 	
     private static LinkedList<HandSizeOp> handSizeOperations = new LinkedList<HandSizeOp>();
     private static int MaxHandSize = 7;
+    
+    public static void clearHandSizeOperations() {
+        handSizeOperations.clear();
+    }
 
     public static void sortHandSizeOperations() {
        if(handSizeOperations.size() < 2) {

@@ -1550,6 +1550,9 @@ public class GameAction {
         
         AllZone.StaticEffects.reset();
         
+        Computer_Cleanup.clearHandSizeOperations();
+        Input_Cleanup.clearHandSizeOperations();
+        
 
         {//re-number cards just so their unique numbers are low, just for user friendliness
             CardFactory c = AllZone.CardFactory;
