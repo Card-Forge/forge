@@ -7,6 +7,7 @@ build/forge.jardesc -text
 build/forge.xml svneol=native#text/xml
 build/manifest.forge -text
 /delete-me.txt svneol=native#text/plain
+/forge.preferences -text
 /forge.properties svneol=native#text/plain
 res/AllTokens.txt -text svneol=native#text/plain
 res/booster-decks -text svneol=unset#unset
