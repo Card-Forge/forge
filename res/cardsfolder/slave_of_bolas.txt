@@ -2,7 +2,7 @@ Name:Slave of Bolas
 ManaCost:3 UR B
 Types:Sorcery
 Text:no text
-A:SP$GainControl|Cost$3 UR B|Tgt$TgtC|LoseControl$EOT|Untap$True|AddKWs$Haste & At the beginning of the end step, sacrifice CARDNAME.  |SpellDescription$Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
+A:SP$GainControl|Cost$3 UR B|Tgt$TgtC|Untap$True|AddKWs$Haste & At the beginning of the end step, sacrifice CARDNAME.  |SpellDescription$Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slave_of_bolas.jpg
