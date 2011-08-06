@@ -3,6 +3,7 @@ ManaCost:1
 Types:Artifact
 Text:no text
 A:AB$Pump | Cost$ 2 T | KW$ Vigilance | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsPresent$ Land.Snow+YouDontCtrl | ActivatingPhases$ BeginCombat->EndCombat | SpellDescription$ Target creature gains vigilance until end of turn. Activate this ability only during combat and only if defending player controls a snow land.
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcums_sleigh.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/284.jpg

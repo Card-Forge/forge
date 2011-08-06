@@ -1568,6 +1568,7 @@ res/cardsfolder/explore.txt -text svneol=native#text/plain
 res/cardsfolder/explosive_revelation.txt -text svneol=native#text/plain
 res/cardsfolder/expunge.txt -text svneol=native#text/plain
 res/cardsfolder/extinguish.txt -text svneol=native#text/plain
+res/cardsfolder/extract.txt -text svneol=native#text/plain
 res/cardsfolder/extruder.txt -text svneol=native#text/plain
 res/cardsfolder/eye_of_nowhere.txt -text svneol=native#text/plain
 res/cardsfolder/eye_of_ramos.txt -text svneol=native#text/plain
