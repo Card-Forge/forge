@@ -1,26 +1,14 @@
-/**
- * FontConstants.java
- * 
- * Created on 10.02.2011
- */
-
-package forge.quest.gui;
-
+package forge.gui;
 
 import java.awt.Font;
 
-
 /**
- * <p>
- * The class FontConstants.
- * </p>
- * 
- * @version V0.0 10.02.2011
- * @author Clemens Koza
+ * A replacement FontConstants to allow backward-compatibility with JRE 1.5
  */
-public class FontConstants {
+
+public class ForgeFontConstants {
     public static final String DIALOG, DIALOG_INPUT, MONOSPACED, SANS_SERIF, SERIF;
-    
+
     static {
         String dialog = "Dialog";
         String dialogInput = "DialogInput";
@@ -33,8 +21,9 @@ public class FontConstants {
             monospaced = Font.MONOSPACED;
             sansSerif = Font.SANS_SERIF;
             serif = Font.SERIF;
-        } catch(NoSuchFieldError ex) {}
-        
+        } catch (NoSuchFieldError ignored) {
+        }
+
         DIALOG = dialog;
         DIALOG_INPUT = dialogInput;
         MONOSPACED = monospaced;

@@ -2,11 +2,11 @@ package forge.quest.gui.main;
 
 
 import forge.*;
+import forge.gui.ForgeFontConstants;
 import forge.gui.GuiUtils;
 import forge.quest.data.QuestBattleManager;
 import forge.quest.data.QuestData;
 import forge.quest.data.item.QuestItemZeppelin;
-import forge.quest.gui.FontConstants;
 import forge.quest.gui.QuestAbstractPanel;
 import forge.quest.gui.QuestFrame;
 
@@ -91,7 +91,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         JPanel northPanel = new JPanel();
         JLabel modeLabel;
         JLabel difficultyLabel;//Create labels at the top
-        titleLabel.setFont(new Font(FontConstants.DIALOG, Font.PLAIN, 28));
+        titleLabel.setFont(new Font(ForgeFontConstants.DIALOG, Font.PLAIN, 28));
         titleLabel.setAlignmentX(LEFT_ALIGNMENT);
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
         northPanel.add(titleLabel);
@@ -139,7 +139,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
             }
         });
         eastComponents.add(cardShopButton);
-        cardShopButton.setFont(new Font(FontConstants.SANS_SERIF, Font.PLAIN, 20));
+        cardShopButton.setFont(new Font(ForgeFontConstants.SANS_SERIF, Font.PLAIN, 20));
 
         JButton bazaarButton = null;
         if (questData.getMode().equals(forge.quest.data.QuestData.FANTASY)) {
@@ -151,7 +151,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
                 }
             });
             eastComponents.add(bazaarButton);
-            bazaarButton.setFont(new Font(FontConstants.SANS_SERIF, Font.PLAIN, 20));
+            bazaarButton.setFont(new Font(ForgeFontConstants.SANS_SERIF, Font.PLAIN, 20));
         }
 
 
@@ -161,7 +161,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
             }
         });
         eastComponents.add(questButton);
-        questButton.setFont(new Font(FontConstants.SANS_SERIF, Font.BOLD, 18));
+        questButton.setFont(new Font(ForgeFontConstants.SANS_SERIF, Font.BOLD, 18));
         questButton.setPreferredSize(new Dimension(0, 60));
 
 
@@ -171,7 +171,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
             }
         });
 
-        playButton.setFont(new Font(FontConstants.DIALOG, Font.BOLD, 28));
+        playButton.setFont(new Font(ForgeFontConstants.DIALOG, Font.BOLD, 28));
         playButton.setPreferredSize(new Dimension(0, 100));
 
 
@@ -188,14 +188,14 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
         if (questData.getMode().equals(forge.quest.data.QuestData.FANTASY)) {
             panel.add(this.lifeLabel);
-            this.lifeLabel.setFont(new Font(FontConstants.DIALOG, Font.BOLD, 14));
+            this.lifeLabel.setFont(new Font(ForgeFontConstants.DIALOG, Font.BOLD, 14));
             this.lifeLabel.setIcon(GuiUtils.getResizedIcon(GuiUtils.getIconFromFile("Life.png"), 30, 30));
         }
 
         GuiUtils.addGap(panel);
         panel.add(this.creditsLabel);
         this.creditsLabel.setIcon(GuiUtils.getResizedIcon(GuiUtils.getIconFromFile("CoinStack.png"), 30, 30));
-        this.creditsLabel.setFont(new Font(FontConstants.DIALOG, Font.BOLD, 14));
+        this.creditsLabel.setFont(new Font(ForgeFontConstants.DIALOG, Font.BOLD, 14));
         GuiUtils.addGap(panel, 10);
         panel.add(cardShopButton);
 
@@ -207,7 +207,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         panel.add(Box.createVerticalGlue());
 
         panel.add(questButton);
-        this.nextQuestLabel.setFont(new Font(FontConstants.DIALOG, Font.PLAIN, 11));
+        this.nextQuestLabel.setFont(new Font(ForgeFontConstants.DIALOG, Font.PLAIN, 11));
         panel.add(nextQuestLabel);
         GuiUtils.addGap(panel);
 
