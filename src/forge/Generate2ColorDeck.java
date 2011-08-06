@@ -26,18 +26,18 @@ public class Generate2ColorDeck
 		CardCounts = new HashMap<String, Integer>();
 		
 		ClrMap = new HashMap<String,String>();
-		ClrMap.put("White", "W");
-		ClrMap.put("Blue", "U");
-		ClrMap.put("Black", "B");
-		ClrMap.put("Red", "R");
-		ClrMap.put("Green", "G");
+		ClrMap.put("white", "W");
+		ClrMap.put("blue", "U");
+		ClrMap.put("black", "B");
+		ClrMap.put("red", "R");
+		ClrMap.put("green", "G");
 		
 		notColors = new ArrayList<String>();
-		notColors.add("White");
-		notColors.add("Blue");
-		notColors.add("Black");
-		notColors.add("Red");
-		notColors.add("Green");
+		notColors.add("white");
+		notColors.add("blue");
+		notColors.add("black");
+		notColors.add("red");
+		notColors.add("green");
 		
 		DualLands = new ArrayList<DLnd>();
 		DualLands.add(new DLnd("Tundra", "WU"));
@@ -115,8 +115,8 @@ public class Generate2ColorDeck
 		});
 		
 		// reduce to cards that match the colors
-		CardList CL1 = AllCards.getColor(ClrMap.get(color1));
-		CardList CL2 = AllCards.getColor(ClrMap.get(color2));
+		CardList CL1 = AllCards.getColor(color1);
+		CardList CL2 = AllCards.getColor(color2);
 		
 		// remove multicolor cards that don't match the colors
 		CardListFilter clrF = new CardListFilter(){

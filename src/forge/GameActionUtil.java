@@ -9559,7 +9559,7 @@ public class GameActionUtil {
 			ability = new Ability(card, "0") {
 				public void resolve() {
 					CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
-					CardList blueList = list.getColor("U");
+					CardList blueList = list.getColor(Constant.Color.Blue);
 					if (!blueList.isEmpty()) {
 						CardFactoryUtil.makeToken("Mirror-Sigil Sergeant","W 4 4 Mirror Sigil Sergeant", card.getController(), "5 W",
 								new String[]{"Creature","Rhino","Soldier"}, 4, 4, new String[]{"Trample",

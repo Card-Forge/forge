@@ -713,11 +713,11 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     	
     	ArrayList<String> colors = new ArrayList<String>();
     	colors.add("Random");
-    	colors.add("White");
-    	colors.add("Blue");
-    	colors.add("Black");
-    	colors.add("Red");
-    	colors.add("Green");
+    	colors.add("white");
+    	colors.add("blue");
+    	colors.add("black");
+    	colors.add("red");
+    	colors.add("green");
     	
     	Object c1 = null, c2 = null;
     	if (p.equals("H"))
@@ -758,11 +758,11 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     	
     	ArrayList<String> colors = new ArrayList<String>();
     	colors.add("Random");
-    	colors.add("White");
-    	colors.add("Blue");
-    	colors.add("Black");
-    	colors.add("Red");
-    	colors.add("Green");
+    	colors.add("white");
+    	colors.add("blue");
+    	colors.add("black");
+    	colors.add("red");
+    	colors.add("green");
     	
     	Object c1 = null, c2 = null, c3 = null;
     	if (p.equals("H"))

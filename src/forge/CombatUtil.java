@@ -374,7 +374,7 @@ public class CombatUtil {
         }
         
         if(c.getKeyword().contains("CARDNAME can't attack unless defending player controls a blue permanent.")) {
-            temp = list.getColor("Blue");
+            temp = list.getColor(Constant.Color.Blue);
             if(temp.isEmpty()) return false;
         }
     	
