@@ -237,7 +237,7 @@ public class Card extends MyObservable {
     
     
     public boolean getSacrificeAtEOT() {
-        return sacrificeAtEOT || getKeyword().contains("At the beggining of the end step, sacrifice CARDNAME.");
+        return sacrificeAtEOT || getKeyword().contains("At the beginning of the end step, sacrifice CARDNAME.");
     }
     
     public void setSacrificeAtEOT(boolean sacrificeAtEOT) {

@@ -53,7 +53,7 @@ public class EndOfTurn implements java.io.Serializable
     */
     for(Card c : all)
       if(!c.isFaceDown()
-    	&& c.getKeyword().contains("At the beggining of the end step, sacrifice CARDNAME."))
+    	&& c.getKeyword().contains("At the beginning of the end step, sacrifice CARDNAME."))
       {
     	  final Card card = c;
     	  final SpellAbility sac = new Ability(card, "0") {

@@ -8917,7 +8917,7 @@ public class CardFactory_Creatures {
                         };
                         c.addComesIntoPlayCommand(intoPlay);
                         c.setSacrificeAtEOT(true);*/
-                        c.addIntrinsicKeyword("At the beggining of the end step, sacrifice Spark Elemental.");
+                        c.addIntrinsicKeyword("At the beginning of the end step, sacrifice CARDNAME.");
                         
                         play.add(c);
                     }

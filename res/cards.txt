@@ -10444,7 +10444,7 @@ At end of turn, sacrifice Blistering Firecat.
 Morph:R R
 Trample
 Haste
-At the beggining of the end step, sacrifice Blistering Firecat.
+At the beginning of the end step, sacrifice CARDNAME.
 
 Lava Spike
 R
@@ -15351,7 +15351,7 @@ no text
 3/1
 Trample
 Haste
-At the beggining of the end step, sacrifice Spark Elemental.
+At the beginning of the end step, sacrifice CARDNAME.
 
 Reckless Wurm
 3 R R
@@ -15677,7 +15677,7 @@ no text
 6/1
 Haste
 Trample
-At the beggining of the end step, sacrifice Ball Lighting.
+At the beginning of the end step, sacrifice CARDNAME.
 
 Groundbreaker
 G G G
@@ -15686,7 +15686,7 @@ no text
 6/1
 Haste
 Trample
-At the beggining of the end step, sacrifice Groundbreaker.
+At the beginning of the end step, sacrifice CARDNAME.
 
 Giant Dustwasp
 3 G G
