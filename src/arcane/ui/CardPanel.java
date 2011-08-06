@@ -206,7 +206,7 @@ public class CardPanel extends JPanel implements CardContainer{
 				if (AllZone.ManaPool != null) {
 					String s = AllZone.ManaPool.getManaList();
 					if (!s.equals("|||||||||||")) {
-						System.out.println("ManaList: " + s);
+						//System.out.println("ManaList: " + s);
 						
 						String mList[] = s.split("\\|", 12);
 						
