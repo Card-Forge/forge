@@ -1,3 +1,11 @@
+Dakmor Salvage
+no cost
+Land
+no text
+Comes into play tapped.
+tap: add B
+Dredge 2
+
 Greater Mossdog
 3 G
 Creature Plant Hound
