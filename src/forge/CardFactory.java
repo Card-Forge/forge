@@ -3636,6 +3636,7 @@ public class CardFactory implements NewConstants {
         }// spReturnTgt
         */
         
+        
         /**
          *  Generic return target card(s) from graveyard to Hand, Battlefield or Top of Library.
          *  This version handles abilities that activate when card enters the battlefield.
@@ -3643,6 +3644,8 @@ public class CardFactory implements NewConstants {
          *  
          *  Buyback and X Count/Costs are not yet implemented.
          */
+        // All cards using etbReturnTgt converted to use AF + Triggers.
+        /*
         while (hasKeyword(card, "etbReturnTgt") != -1) {
             int n = hasKeyword(card, "etbReturnTgt");
             
@@ -3847,6 +3850,8 @@ public class CardFactory implements NewConstants {
                 etbRtrnTgt.setDescription(desc);
             }
         }// etbReturnTgt
+        */
+        
         
         /* all cards converted to SP$Fetch
         // Generic Tutor cards
