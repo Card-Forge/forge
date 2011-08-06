@@ -1,3 +1,13 @@
+Wildfire
+4 R R
+Sorcery
+Each player sacrifices four lands. Wildfire deals 4 damage to each creature.
+
+Destructive Force
+5 R R
+Sorcery
+Each player sacrifices five lands. Destructive Force deals 5 damage to each creature.
+
 Spike Weaver
 2 G G
 Creature Spike
