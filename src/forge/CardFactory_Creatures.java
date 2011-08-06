@@ -9246,8 +9246,8 @@ public class CardFactory_Creatures {
 	        card.addSpellAbility(ability1);
 	        card.addSpellAbility(ability2);
 
-	        ability1.setDescription("1UU: Target permanent becomes an artifact in addition to its other types.(This effect doesn't end at end of turn.)");
-	        ability2.setDescription("3U: Gain control of target artifact.(This effect doesn't end at end of turn.)");
+	        ability1.setDescription("1 U U: Target permanent becomes an artifact in addition to its other types. (This effect doesn't end at end of turn.)");
+	        ability2.setDescription("3 U: Gain control of target artifact. (This effect doesn't end at end of turn.)");
 
 	        ability1.setBeforePayMana(CardFactoryUtil.input_targetType(ability1, "All"));
 	        ability2.setBeforePayMana(CardFactoryUtil.input_targetType(ability2, "Artifact"));

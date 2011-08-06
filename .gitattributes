@@ -2,7 +2,6 @@
 /.classpath -text
 /.project -text
 .settings/org.eclipse.jdt.core.prefs -text
-/2009-10-12-00.txt -text svneol=native#text/plain
 /delete-me.txt svneol=native#text/plain
 /forge.properties svneol=native#text/plain
 res/AllTokens.txt -text svneol=native#text/plain
