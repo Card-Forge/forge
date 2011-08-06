@@ -2,6 +2,6 @@ Name:Elephant Ambush
 ManaCost:2 G G
 Types:Instant
 Text:no text
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/elephant_ambush.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/elephant_ambush.jpg
 End

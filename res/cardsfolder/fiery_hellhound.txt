@@ -4,6 +4,6 @@ Types:Creature Elemental Hound
 Text:no text
 PT:2/2
 K:abPump R:+1/+0
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_hellhound.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_hellhound.jpg
 End

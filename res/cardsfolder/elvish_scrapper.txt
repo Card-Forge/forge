@@ -4,6 +4,6 @@ Types:Creature Elf
 Text:no text
 PT:1/1
 K:abDestroyTgtV G T Sac<1/CARDNAME>:Artifact:Destroy target artifact.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_scrapper.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_scrapper.jpg
 End

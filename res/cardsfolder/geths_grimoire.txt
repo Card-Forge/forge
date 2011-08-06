@@ -3,6 +3,6 @@ ManaCost:4
 Types:Artifact
 Text:no text
 K:WheneverKeyword:DiscardsCard:ControllingPlayer_Opponent:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever an opponent discards a card, you may draw a card.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/geths_grimoire.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/geths_grimoire.jpg
 End

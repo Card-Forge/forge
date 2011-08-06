@@ -4,6 +4,6 @@ Types:Sorcery
 Text:no text
 K:spDiscardTgt:TgtChoose:2:Target player discards two cards.:Fill with Fright - target player discards cards
 K:Scry 2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fill_with_fright.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fill_with_fright.jpg
 End

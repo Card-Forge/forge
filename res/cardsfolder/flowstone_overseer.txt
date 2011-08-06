@@ -4,6 +4,6 @@ Types:Creature Beast
 Text:no text
 PT:4/4
 K:abPumpTgtC R R:+1/-1
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_overseer.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_overseer.jpg
 End

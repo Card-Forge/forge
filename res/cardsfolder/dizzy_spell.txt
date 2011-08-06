@@ -4,7 +4,7 @@ Types:Instant
 Text:no text
 K:spPumpTgtCurse:-3/-0
 K:Transmute:1 U U
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dizzy_spell.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dizzy_spell.jpg
 End

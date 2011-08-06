@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Enchantment
 Text:no text
 K:WheneverKeyword:CastSpell/Controller:Type/Creature:Play:Damage/1:NormalInput/Player:ASAP:No_Condition:No Special Condition:Whenever you cast a creature spell, Furious Assault deals 1 damage to target player.
-K:SVar:BuffedBy:Creature
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/furious_assault.jpg
+SVar:BuffedBy:Creature
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/furious_assault.jpg
 End

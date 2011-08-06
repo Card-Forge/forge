@@ -4,6 +4,6 @@ Types:Instant
 Text:Destroy target nonartifact, nonblack creature. It can't be regenerated.
 K:spDestroyTgt:Creature.nonBlack+nonArtifact:NoRegen
 K:Cycling:2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/expunge.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/expunge.jpg
 End

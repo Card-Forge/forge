@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Sorcery
 Text:no text
 K:spDiscardOpp:OppChoose:2:Target opponent discards two cards.:Deception - opponent discards cards
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/deception.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deception.jpg
 End

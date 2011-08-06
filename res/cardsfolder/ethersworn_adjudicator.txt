@@ -6,6 +6,6 @@ PT:4/4
 K:Flying
 K:Untap:2 U
 K:abDestroyTgtV 1 W B T:Creature,Enchantment:Destroy target creature or enchantment.
-K:SVar:Rarity:Mythic
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ethersworn_adjudicator.jpg
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ethersworn_adjudicator.jpg
 End

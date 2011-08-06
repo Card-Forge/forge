@@ -4,7 +4,7 @@ Types:Enchantment
 Text:Nonland permanents don't untap during their controllers' untap steps.
 K:Permanents don't untap during their controllers' untap steps:Permanent.nonLand
 K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:ModifyLife/-2:ControllingPlayer_Self:ASAP:No_Condition:ControllerUpkeep:At the beginning of your upkeep, you lose 2 life.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/embargo.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/embargo.jpg
 End

@@ -4,7 +4,7 @@ Types:Creature Griffin
 Text:no text
 PT:2/2
 K:WheneverKeyword:EntersBattleField:Type/Land:Play:KeywordPumpEOT/Flying:Self:ASAP:No_Condition:Initiator - OwnedByController:Landfall - Whenever a land enters the battlefield under your control, Fledgling Griffin gains flying until end of turn.
-K:SVar:BuffedBy:Land
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fledgling_griffin.jpg
+SVar:BuffedBy:Land
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fledgling_griffin.jpg
 End

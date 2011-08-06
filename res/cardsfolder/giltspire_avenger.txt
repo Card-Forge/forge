@@ -4,6 +4,6 @@ Types:Creature Human Soldier
 Text:no text
 PT:2/2
 K:Exalted
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/giltspire_avenger.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/giltspire_avenger.jpg
 End

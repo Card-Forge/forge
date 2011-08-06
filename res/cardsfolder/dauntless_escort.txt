@@ -3,6 +3,6 @@ ManaCost:1 W G
 Types:Creature Rhino Soldier
 Text:Sacrifice Dauntless Escort: Creatures you control are indestructible this turn.
 PT:3/3
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dauntless_escort.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dauntless_escort.jpg
 End

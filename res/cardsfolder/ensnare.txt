@@ -2,7 +2,7 @@ Name:Ensnare
 ManaCost:3 U
 Types:Instant
 Text:no text
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ensnare.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ensnare.jpg
 End

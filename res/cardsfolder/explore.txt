@@ -3,6 +3,6 @@ ManaCost:1 G
 Types:Sorcery
 Text:You may play an additional land this turn.
 K:Draw a card.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/explore.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/explore.jpg
 End

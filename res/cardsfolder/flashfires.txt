@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Sorcery
 Text:Destroy all Plains.
 K:spDestroyAll:Plains
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/flashfires.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flashfires.jpg
 End

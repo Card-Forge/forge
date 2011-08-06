@@ -7,6 +7,6 @@ K:tap: add U
 K:tap: add B
 K:tap: add R
 K:tap: add G
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidden_orchard.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidden_orchard.jpg
 End

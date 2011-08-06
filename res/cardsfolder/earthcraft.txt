@@ -2,7 +2,7 @@ Name:Earthcraft
 ManaCost:1 G
 Types:Enchantment
 Text:no text
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/earthcraft.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/earthcraft.jpg
 End

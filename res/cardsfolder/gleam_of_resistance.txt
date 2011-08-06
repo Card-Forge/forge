@@ -4,7 +4,7 @@ Types:Instant
 Text:no text
 K:spAllPump:YouCtrl:+1/+2:Drawback$UntapAllTypeYouCtrl.Creature:Creatures you control get +1/+2 until end of turn. Untap those creatures.:Gleam of Resistance - Creatures get +1/+2 until EOT; untap those creatures
 K:TypeCycling:Basic:1 W
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gleam_of_resistance.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gleam_of_resistance.jpg
 End

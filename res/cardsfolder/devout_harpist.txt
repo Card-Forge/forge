@@ -4,6 +4,6 @@ Types:Creature Human
 Text:no text
 PT:1/1
 K:abDestroyTgtV T:Aura.enchanting:Destroy target Aura attached to a creature.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/devout_harpist.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/devout_harpist.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Dauthi Minion
 Text:no text
 PT:1/1
 K:abDestroyTgtV 1 B T:Creature.withShadow:Destroy target creature with shadow.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_cutthroat.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_cutthroat.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Zombie
 Text:no text
 PT:1/1
 K:abPump 1 U R:+3/+0/Flying
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dreadwing.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dreadwing.jpg
 End

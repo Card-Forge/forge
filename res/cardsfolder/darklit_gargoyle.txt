@@ -5,6 +5,6 @@ Text:no text
 PT:1/2
 K:Flying
 K:abPump B:+2/-1
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/darklit_gargoyle.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/darklit_gargoyle.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Kavu
 Text:no text
 PT:2/2
 K:abPump R:+1/+0
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/firescreamer.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/firescreamer.jpg
 End

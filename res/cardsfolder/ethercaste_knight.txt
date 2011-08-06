@@ -4,6 +4,6 @@ Types:Artifact Creature Human Knight
 Text:no text
 PT:1/3
 K:Exalted
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ethercaste_knight.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ethercaste_knight.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Merfolk Soldier
 Text:no text
 PT:3/3
 K:Persist
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gravelgill_axeshark.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gravelgill_axeshark.jpg
 End

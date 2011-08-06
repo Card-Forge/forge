@@ -4,6 +4,6 @@ Types:Creature Horror
 Text:Whenever Guiltfeeder attacks and isn't blocked, defending player loses 1 life for each card in his or her graveyard.
 PT:0/4
 K:Fear
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/guiltfeeder.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/guiltfeeder.jpg
 End

@@ -2,6 +2,6 @@ Name:Gerrard's Verdict
 ManaCost:W B
 Types:Sorcery
 Text:Target player discards two cards. You gain 3 life for each land card discarded this way.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gerrards_verdict.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gerrards_verdict.jpg
 End

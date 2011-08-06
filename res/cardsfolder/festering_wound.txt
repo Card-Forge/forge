@@ -3,6 +3,6 @@ ManaCost:1 B
 Types:Enchantment Aura
 Text:At the beginning of your upkeep, you may put an infection counter on Festering Wound.\r\nAt the beginning of the upkeep of enchanted creature's controller, Festering Wound deals X damage to that player, where X is the number of infection counters on Festering Wound.
 K:Enchant Creature Curse
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/festering_wound.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/festering_wound.jpg
 End

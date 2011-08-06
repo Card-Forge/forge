@@ -4,6 +4,6 @@ Types:Creature Goblin
 Text:When Goblin Settler enters the battlefield, destroy target land.
 PT:1/1
 K:etbDestroyTgt:Land
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://serv2.tcgimages.eu/img/cards/Starter_1999/goblin_settler.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://serv2.tcgimages.eu/img/cards/Starter_1999/goblin_settler.jpg
 End

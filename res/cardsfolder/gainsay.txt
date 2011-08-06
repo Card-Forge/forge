@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Instant
 Text:Counter target blue spell.
 K:spCounter:Spell:Color(blue):Graveyard:None
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gainsay.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gainsay.jpg
 End

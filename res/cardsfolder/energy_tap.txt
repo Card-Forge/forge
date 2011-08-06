@@ -2,7 +2,7 @@ Name:Energy Tap
 ManaCost:U
 Types:Sorcery
 Text:Tap target untapped creature you control. If you do, add X Colorless to your mana pool, where X is that creature's converted mana cost.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/energy_tap.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/energy_tap.jpg
 End

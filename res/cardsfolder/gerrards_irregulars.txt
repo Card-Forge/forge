@@ -5,6 +5,6 @@ Text:no text
 PT:4/2
 K:Haste
 K:Trample
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card19842.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card19842.jpg
 End

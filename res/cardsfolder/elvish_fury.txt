@@ -2,7 +2,7 @@ Name:Elvish Fury
 ManaCost:G
 Types:Instant
 Text:no text
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4760.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4760.jpg
 End

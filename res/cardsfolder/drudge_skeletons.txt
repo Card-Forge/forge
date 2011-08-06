@@ -4,6 +4,6 @@ Types:Creature Skeleton
 Text:no text
 PT:1/1
 K:RegenerateMe:B
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83061.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83061.jpg
 End

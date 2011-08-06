@@ -4,6 +4,6 @@ Types:Creature Incarnation
 Text:As long as Filth is in your graveyard and you control a Swamp, creatures you control have swampwalk.
 PT:2/2
 K:Swampwalk
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/filth.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/filth.jpg
 End

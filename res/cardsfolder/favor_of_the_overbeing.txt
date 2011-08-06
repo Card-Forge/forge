@@ -6,7 +6,7 @@ K:Enchant creature
 K:enPump:+0/+0
 K:StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Vigilance:Color.green:As long as enchanted creature is green, it gets +1/+1 and has vigilance.
 K:StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Flying:Color.blue:As long as enchanted creature is blue, it gets +1/+1 and has flying.
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/favor_of_the_overbeing.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/favor_of_the_overbeing.jpg
 End

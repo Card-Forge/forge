@@ -2,7 +2,7 @@ Name:Glorious Anthem
 ManaCost:1 W W
 Types:Enchantment
 Text:Creatures you control get +1/+1.
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83106.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83106.jpg
 End

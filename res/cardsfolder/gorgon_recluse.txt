@@ -6,6 +6,6 @@ PT:2/4
 K:Whenever CARDNAME blocks a creature, destroy that creature at end of combat:Creature.nonBlack
 K:Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat:Creature.nonBlack
 K:Madness:B B
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gorgon_recluse.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gorgon_recluse.jpg
 End

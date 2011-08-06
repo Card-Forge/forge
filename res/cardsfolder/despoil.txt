@@ -3,6 +3,6 @@ ManaCost:3 B
 Types:Sorcery
 Text:Destroy target land. Its controller loses 2 life.
 K:spDestroyTgt:Land:Drawback$LoseLifeTgtCtrlr/2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/despoil.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/despoil.jpg
 End

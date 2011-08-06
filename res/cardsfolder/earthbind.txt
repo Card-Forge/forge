@@ -3,6 +3,6 @@ ManaCost:R
 Types:Enchantment Aura
 Text:When Earthbind enters the battlefield, if enchanted creature has flying, Earthbind deals 2 damage to that creature and enchanted creature loses flying.
 K:Enchant creature
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/earthbind.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/earthbind.jpg
 End

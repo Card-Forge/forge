@@ -3,6 +3,6 @@ ManaCost:3 R
 Types:Sorcery
 Text:Put two 1/1 red Goblin creature tokens into play.
 K:Storm
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/empty_the_warrens.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/empty_the_warrens.jpg
 End

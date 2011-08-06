@@ -2,6 +2,6 @@ Name:Demonic Tutor
 ManaCost:1 B
 Types:Sorcery
 Text:Search your library for a card and put that card into your hand. Then shuffle your library.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/3e/en-us/card1155.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/3e/en-us/card1155.jpg
 End

@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Creature Nightmare Horror
 Text:When Faceless Butcher comes into play, remove target creature other than Faceless Butcher from the game.\r\nWhen Faceless Butcher is destroyed, return the removed card to play under its owner's control.
 PT:2/3
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108840.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108840.jpg
 End

@@ -5,7 +5,7 @@ Text:no text
 PT:0/1
 K:Flying
 K:WheneverKeyword:EntersBattleField:Type/Artifact:Play:StatsPumpEOT/2/2:Self:ASAP:No_Condition:Initiator - OwnedByController!Initiator - Other than Self:Whenever another artifact enters the battlefield under your control, Glaze Fiend gets +2/+2 until end of turn.
-K:SVar:BuffedBy:Artifact
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/glaze_fiend.jpg
+SVar:BuffedBy:Artifact
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/glaze_fiend.jpg
 End

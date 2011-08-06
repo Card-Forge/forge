@@ -3,7 +3,7 @@ ManaCost:G G
 Types:Legendary Creature Elf Warrior
 Text:Other Elf creatures have forestwalk.\r\nOther Elves have shroud.
 PT:2/2
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/eladamri_lord_of_leaves.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/eladamri_lord_of_leaves.jpg
 End

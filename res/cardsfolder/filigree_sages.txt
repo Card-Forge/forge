@@ -3,6 +3,6 @@ ManaCost:3 U
 Types:Artifact Creature Vedalken Wizard
 Text:2U: Untap target artifact
 PT:2/3
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/filigree_sages.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/filigree_sages.jpg
 End

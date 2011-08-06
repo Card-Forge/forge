@@ -5,6 +5,6 @@ Text:no text
 PT:3/3
 K:Flying
 K:abAllPump 8:YouCtrl:Flying:Creatures you control gain flying until end of turn.:Frostwind Invoker - creatures gain flying until EOT
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/frostwind_invoker.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/frostwind_invoker.jpg
 End

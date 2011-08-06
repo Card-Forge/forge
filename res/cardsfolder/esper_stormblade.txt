@@ -3,7 +3,7 @@ ManaCost:WB U
 Types:Artifact Creature Vedalken Wizard
 Text:As long as you control another multicolored permanent, Esper Stormblade gets +1/+1 and has flying.
 PT:2/1
-K:SVar:BuffedBy:Permanent.MultiColor
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/esper_stormblade.jpg
+SVar:BuffedBy:Permanent.MultiColor
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/esper_stormblade.jpg
 End

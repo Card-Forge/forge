@@ -4,6 +4,6 @@ Types:Creature Human Druid
 Text:no text
 PT:1/2
 K:Whenever an enchantment is put into a graveyard from the battlefield, draw a card.
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/femeref_enchantress.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/femeref_enchantress.jpg
 End

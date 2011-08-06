@@ -5,6 +5,6 @@ Text:Goblin spells and Rogue spells you cast cost 1 less to cast.
 PT:1/1
 K:Haste
 K:CostChange:Player:Less:1:Spell:All:Goblin/Rogue:OnlyOneBonus
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/frogtosser_banneret.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/frogtosser_banneret.jpg
 End

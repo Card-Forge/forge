@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Tribal Instant Elf
 Text:Destroy target non-Elf creature.
 K:spDestroyTgt:Creature.nonElf
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/eyeblights_ending.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/eyeblights_ending.jpg
 End

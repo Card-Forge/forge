@@ -3,8 +3,8 @@ ManaCost:1 G
 Types:Enchantment
 Text:no text
 K:StaticEffect:Play:All Permanents:Keyword/CARDNAME can block only creatures with flying.:Type.Creature!with.Flying:Creatures with flying can block only creatures with flying.
-K:SVar:PlayMain1:TRUE
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dense_canopy.jpg
+SVar:PlayMain1:TRUE
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dense_canopy.jpg
 End

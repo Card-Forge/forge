@@ -3,6 +3,6 @@ ManaCost:G
 Types:Creature Elf Shaman
 Text:Whenever another creature comes into play, you gain 1 life.
 PT:1/1
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122428.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122428.jpg
 End

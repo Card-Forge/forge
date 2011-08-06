@@ -4,7 +4,7 @@ Types:Creature Faerie
 Text:Faerie Swarm's power and toughness are each equal to the number of blue permanents you control.
 PT:1/1
 K:Flying
-K:SVar:BuffedBy:Permanent.Blue
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_swarm.jpg
+SVar:BuffedBy:Permanent.Blue
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_swarm.jpg
 End

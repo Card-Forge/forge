@@ -5,6 +5,6 @@ Text:no text
 PT:6/4
 K:Trample
 K:WheneverKeyword:DealsDamage/Opponent:Self:Play:DrawCards/1!DiscardCards/1:ControllingPlayer_Self!ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever Fungal Shambler deals damage to an opponent, you draw a card and that opponent discards a card.
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fungal_shambler.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fungal_shambler.jpg
 End

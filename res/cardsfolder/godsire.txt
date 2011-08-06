@@ -4,6 +4,6 @@ Types:Creature Beast
 Text:no text
 PT:8/8
 K:Vigilance
-K:SVar:Rarity:Mythic
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/godsire.jpg
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/godsire.jpg
 End

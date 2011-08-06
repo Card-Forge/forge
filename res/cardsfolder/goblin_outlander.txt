@@ -4,6 +4,6 @@ Types:Creature Goblin Scout
 Text:no text
 PT:2/2
 K:Protection from white
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_outlander.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_outlander.jpg
 End

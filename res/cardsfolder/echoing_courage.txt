@@ -2,6 +2,6 @@ Name:Echoing Courage
 ManaCost:1 G
 Types:Instant
 Text:Target creature and all other creatures with the same name as that creature get +2/+2 until end of turn.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/echoing_courage.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/echoing_courage.jpg
 End

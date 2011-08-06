@@ -2,6 +2,6 @@ Name:Goblin Grenade
 ManaCost:R
 Types:Sorcery
 Text:As an additional cost to cast Goblin Grenade, sacrifice a Goblin.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_grenade.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_grenade.jpg
 End

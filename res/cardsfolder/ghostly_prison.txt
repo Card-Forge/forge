@@ -2,6 +2,6 @@ Name:Ghostly Prison
 ManaCost:2 W
 Types:Enchantment
 Text:Creatures can't attack you unless their controller pays 2 for each creature he or she controls that's attacking you.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostly_prison.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostly_prison.jpg
 End

@@ -5,6 +5,6 @@ Text:Landfall - Whenever a land enters the battlefield under your control, you m
 PT:3/3
 K:Flying
 K:Landfall
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/emeria_angel.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/emeria_angel.jpg
 End

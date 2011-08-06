@@ -2,6 +2,6 @@ Name:Donate
 ManaCost:2 U
 Types:Sorcery
 Text:Target player gains control of target permanent you control.
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/donate.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/donate.jpg
 End

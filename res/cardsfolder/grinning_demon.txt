@@ -4,6 +4,6 @@ Types:Creature Demon
 Text:At the beginning of your upkeep, you lose 2 life.
 PT:6/6
 K:Morph:2 B B
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/grinning_demon.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grinning_demon.jpg
 End

@@ -7,7 +7,7 @@ K:tap: add U U U
 K:tap: add B B B
 K:tap: add R R R
 K:tap: add G G G
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gilded_lotus.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gilded_lotus.jpg
 End

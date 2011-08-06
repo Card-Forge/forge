@@ -3,7 +3,7 @@ ManaCost:5 U
 Types:Sorcery
 Text:no text
 K:spDrawCards:X:Draw a card for each Island you control.:Flow of Ideas - draw cards.
-K:SVar:X:Count$TypeYouCtrl.Island
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/flow_of_ideas.jpg
+SVar:X:Count$TypeYouCtrl.Island
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flow_of_ideas.jpg
 End

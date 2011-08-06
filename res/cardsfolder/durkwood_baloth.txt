@@ -4,6 +4,6 @@ Types:Creature Beast
 Text:no text
 PT:5/5
 K:Suspend:5:G
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/durkwood_baloth.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/durkwood_baloth.jpg
 End

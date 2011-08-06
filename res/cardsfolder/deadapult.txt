@@ -3,6 +3,6 @@ ManaCost:2 R
 Types:Enchantment
 Text:no text
 K:abDamageTgtCP R Sac<1/Zombie>:2
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/deadapult.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deadapult.jpg
 End

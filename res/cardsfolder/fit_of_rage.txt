@@ -3,6 +3,6 @@ ManaCost:1 R
 Types:Sorcery
 Text:no text
 K:spPumpTgt:+3/+3/First Strike
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fit_of_rage.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fit_of_rage.jpg
 End

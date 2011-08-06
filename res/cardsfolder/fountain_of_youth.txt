@@ -3,6 +3,6 @@ ManaCost:0
 Types:Artifact
 Text:no text
 K:abGainLife 2 T:1
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fountain_of_youth.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fountain_of_youth.jpg
 End

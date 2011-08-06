@@ -3,6 +3,6 @@ ManaCost:4 G
 Types:Creature Boar
 Text:no text
 PT:4/4
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card3972.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card3972.jpg
 End

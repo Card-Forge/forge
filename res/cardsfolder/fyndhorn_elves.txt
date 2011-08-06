@@ -4,6 +4,6 @@ Types:Creature Elf Druid
 Text:no text
 PT:1/1
 K:tap: add G
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/ia/en-us/card2568.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/ia/en-us/card2568.jpg
 End

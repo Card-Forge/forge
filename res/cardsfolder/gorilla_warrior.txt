@@ -3,6 +3,6 @@ ManaCost:2 G
 Types:Creature Ape Warrior
 Text:no text
 PT:3/2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5683.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5683.jpg
 End

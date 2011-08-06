@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Sorcery
 Text:no text
 K:spDamageAll:Creature.White,Creature.Blue:1:Evaporate deals 1 damage to each creature that's white or blue.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/evaporate.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/evaporate.jpg
 End

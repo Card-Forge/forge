@@ -3,6 +3,6 @@ ManaCost:1 G
 Types:Creature Elf Shaman
 Text:no text
 PT:2/2
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fauna_shaman.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fauna_shaman.jpg
 End

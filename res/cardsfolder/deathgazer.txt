@@ -5,6 +5,6 @@ Text:Whenever Deathgazer blocks or becomes blocked by a nonblack creature, destr
 PT:2/2
 K:Whenever CARDNAME blocks a creature, destroy that creature at end of combat:Creature.nonBlack
 K:Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat:Creature.nonBlack
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/deathgazer.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deathgazer.jpg
 End

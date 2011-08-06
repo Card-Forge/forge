@@ -3,6 +3,6 @@ ManaCost:W
 Types:Enchantment Aura
 Text:Whenever enchanted creature deals damage, Guilty Conscience deals that much damage to that creature.
 K:Enchant creature
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/guilty_conscience.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/guilty_conscience.jpg
 End

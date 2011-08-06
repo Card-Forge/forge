@@ -9,6 +9,6 @@ K:paintap:1:B
 K:paintap:1:R
 K:paintap:1:G
 K:Comes into play tapped.
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/grand_coliseum.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grand_coliseum.jpg
 End

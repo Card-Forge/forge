@@ -6,7 +6,7 @@ K:Enchant creature
 K:Flash
 K:enPump:+0/+0
 K:StaticEffect:Play:Permanents you Control:PTBonus/1/1:Type.Creature!enchanted:Creatures you control that are enchanted get +1/+1.
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/guardians_magemark.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/guardians_magemark.jpg
 End

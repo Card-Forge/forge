@@ -3,6 +3,6 @@ ManaCost:3 U
 Types:Creature Human Wizard
 Text:1U: Look at the top X cards of your library, where X is the number of cards in your hand, then put them back in any order.
 PT:2/3
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/descendant_of_soramaro.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/descendant_of_soramaro.jpg
 End

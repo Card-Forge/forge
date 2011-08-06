@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Instant
 Text:no text
 K:spPumpTgtCurse:-7/-0
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/disorient.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/disorient.jpg
 End

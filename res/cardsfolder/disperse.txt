@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Instant
 Text:Return target nonland permanent to its owner's hand.
 K:spBounceTgt:Permanent.nonLand:Hand
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/disperse.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/disperse.jpg
 End

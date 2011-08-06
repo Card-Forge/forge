@@ -5,6 +5,6 @@ Text:no text
 PT:1/1
 K:Haste
 K:abPump R:+1/+0
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/st/en-us/card5160.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/st/en-us/card5160.jpg
 End

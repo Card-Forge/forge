@@ -2,6 +2,6 @@ Name:Gemstone Mine
 ManaCost:no cost
 Types:Land
 Text:CARDNAME enters the battlefield with three mining counters on it.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gemstone_mine.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gemstone_mine.jpg
 End

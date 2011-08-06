@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Land
 Text:Forbidding Watchtower comes into play tapped.
 K:tap: add W
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidding_watchtower.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidding_watchtower.jpg
 End

@@ -5,6 +5,6 @@ Text:Enchanted creature has reach.
 K:Enchant creature
 K:enPump:Reach
 K:When CARDNAME enters the battlefield, draw a card.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/frog_tongue.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/frog_tongue.jpg
 End

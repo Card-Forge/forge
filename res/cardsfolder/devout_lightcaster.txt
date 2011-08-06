@@ -4,6 +4,6 @@ Types:Creature Kor Cleric
 Text:When Devout Lightcaster enters the battlefield, exile target black permanent.
 PT:2/2
 K:Protection from black
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/devout_lightcaster.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/devout_lightcaster.jpg
 End

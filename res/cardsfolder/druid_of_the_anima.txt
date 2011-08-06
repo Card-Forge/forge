@@ -6,6 +6,6 @@ PT:1/1
 K:tap: add W
 K:tap: add R
 K:tap: add G
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/druid_of_the_anima.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/druid_of_the_anima.jpg
 End

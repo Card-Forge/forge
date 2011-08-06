@@ -3,7 +3,7 @@ ManaCost:0
 Types:Artifact
 Text:Everflowing Chalice enters the battlefield with a charge counter on it for each time it was kicked.
 K:Multikicker 2
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/everflowing_chalice.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/everflowing_chalice.jpg
 End

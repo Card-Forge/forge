@@ -4,6 +4,6 @@ Types:Creature Imp
 Text:When Foul Imp comes into play, you lose 2 life.
 PT:2/2
 K:Flying
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/st/en-us/card5158.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/st/en-us/card5158.jpg
 End

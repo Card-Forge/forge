@@ -4,7 +4,7 @@ Types:Enchantment
 Text:no text
 K:StaticEffect:Play:Permanents you Control:Keyword/Shroud:Type.Enchantment!NotSelf:Other enchantments you control have shroud.
 K:StaticEffect:Play:Permanents you Control:Keyword/Shroud:Type.Creature!enchanted:Enchanted creatures you control have shroud.
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_auramancy.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_auramancy.jpg
 End

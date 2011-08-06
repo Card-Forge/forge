@@ -2,6 +2,6 @@ Name:Flame Rift
 ManaCost:1 R
 Types:Sorcery
 Text:Flame Rift deals 4 damage to each player.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/flame_rift.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flame_rift.jpg
 End

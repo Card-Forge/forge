@@ -2,6 +2,6 @@ Name:Diabolic Edict
 ManaCost:1 B
 Types:Instant
 Text:Target player sacrifices a creature.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/diabolic_edict.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/diabolic_edict.jpg
 End

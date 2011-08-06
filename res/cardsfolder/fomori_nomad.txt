@@ -3,6 +3,6 @@ ManaCost:4 R
 Types:Creature Nomad Giant
 Text:no text
 PT:4/4
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card126149.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card126149.jpg
 End

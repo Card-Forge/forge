@@ -4,6 +4,6 @@ Types:Creature Rat Shaman
 Text:no text
 PT:2/2
 K:StaticEffect:Play:Self:PTBonus/2/1!Keyword/Fear:CardsInHandMore/7:As long as you have seven or more cards in hand, Deathmask Nezumi gets +2/+1 and has fear.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/deathmask_nezumi.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deathmask_nezumi.jpg
 End

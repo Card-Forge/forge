@@ -4,6 +4,6 @@ Types:Snow Creature Spider
 Text:Whenever Frostweb Spider blocks a creature with flying, put a +1/+1 counter on Frostweb Spider at end of combat.
 PT:1/3
 K:Reach
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121197.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121197.jpg
 End

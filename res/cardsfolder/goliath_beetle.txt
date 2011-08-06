@@ -4,6 +4,6 @@ Types:Creature Insect
 Text:no text
 PT:3/1
 K:Trample
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/cg/en-us/card15223.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/cg/en-us/card15223.jpg
 End

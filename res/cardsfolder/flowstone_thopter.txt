@@ -4,6 +4,6 @@ Types:Artifact Creature Thopter
 Text:no text
 PT:4/4
 K:abPump 1:+1/-1/Flying
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_thopter.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_thopter.jpg
 End

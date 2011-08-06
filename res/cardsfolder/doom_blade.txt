@@ -3,6 +3,6 @@ ManaCost:1 B
 Types:Instant
 Text:Destroy target nonblack creature.
 K:spDestroyTgt:Creature.nonBlack
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/doom_blade.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/doom_blade.jpg
 End

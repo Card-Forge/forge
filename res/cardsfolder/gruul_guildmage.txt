@@ -5,6 +5,6 @@ Text:no text
 PT:2/2
 K:abPumpTgtC 3 G:+2/+2
 K:abDamageTgtP 3 R Sac<1/Land>:2
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_guildmage.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_guildmage.jpg
 End

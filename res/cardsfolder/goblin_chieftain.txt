@@ -4,8 +4,8 @@ Types:Creature Goblin
 Text:Other Goblin creatures you control get +1/+1 and have haste.
 PT:2/2
 K:Haste
-K:SVar:PlayMain1:TRUE
-K:SVar:BuffedBy:Goblin
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_chieftain.jpg
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Goblin
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_chieftain.jpg
 End

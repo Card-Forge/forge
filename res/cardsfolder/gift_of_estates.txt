@@ -2,6 +2,6 @@ Name:Gift of Estates
 ManaCost:1 W
 Types:Sorcery
 Text:If an opponent controls more lands than you, search your library for up to three Plains cards and put them into your hand.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84504.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84504.jpg
 End

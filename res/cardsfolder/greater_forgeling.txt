@@ -3,6 +3,6 @@ ManaCost:3 R R
 Types:Creature Elemental
 Text:no text
 PT:3/4
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87934.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87934.jpg
 End

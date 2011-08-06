@@ -5,6 +5,6 @@ Text:no text
 PT:3/3
 K:Flying
 K:abAllPump 1 S:YouCtrl/Snow:+1/+1:Snow creatures you control get +1/+1 until end of turn.:Diamond Faerie - creatures get +1/+1 until EOT.
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/diamond_faerie.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/diamond_faerie.jpg
 End

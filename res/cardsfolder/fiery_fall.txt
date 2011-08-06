@@ -4,6 +4,6 @@ Types:Instant
 Text:no text
 K:spDamageTgtC:5
 K:TypeCycling:Basic:1 R
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_fall.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_fall.jpg
 End

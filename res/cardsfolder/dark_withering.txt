@@ -4,6 +4,6 @@ Types:Instant
 Text:Destroy target nonblack creature.
 K:spDestroyTgt:Creature.nonBlack
 K:Madness:B
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_withering.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_withering.jpg
 End

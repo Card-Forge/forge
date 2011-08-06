@@ -3,6 +3,6 @@ ManaCost:5 R
 Types:Creature Beast
 Text:When Foretusk Firebeast comes into play, it deals 4 damage to target player.
 PT:2/2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/jud/en-us/card34917.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/jud/en-us/card34917.jpg
 End

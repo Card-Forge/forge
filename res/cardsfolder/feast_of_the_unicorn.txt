@@ -4,6 +4,6 @@ Types:Enchantment Aura
 Text:Enchanted creature gets +4/+0.
 K:Enchant creature
 K:enPump:+4/+0
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/feast_of_the_unicorn.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/feast_of_the_unicorn.jpg
 End

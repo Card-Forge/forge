@@ -3,6 +3,6 @@ ManaCost:3 B B
 Types:Sorcery Arcane
 Text:no text
 K:spAllPump:YouCtrl:+1/+0/Fear:Creatures you control get +1/+0 and gain fear until end of turn.:Dance of Shadows - Creatures get +1/+0 and gain fear until EOT
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card79094.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card79094.jpg
 End

@@ -4,8 +4,8 @@ Types:Creature Goblin
 Text:Goblin spells you cast cost 1 less to cast.\r\nGoblin creatures you control have haste.
 PT:2/2
 K:CostChange:Player:Less:1:Spell:All:Goblin:NoSpecial
-K:SVar:PlayMain1:TRUE
-K:SVar:BuffedBy:Goblin
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_warchief.jpg
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Goblin
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_warchief.jpg
 End

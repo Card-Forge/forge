@@ -5,6 +5,6 @@ Text:Cleric spells you cast cost W B less to cast. This effect reduces only the 
 PT:2/2
 K:CostChange:Player:Less:W:Spell:All:Cleric:NoSpecial
 K:CostChange:Player:Less:B:Spell:All:Cleric:NoSpecial
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/edgewalker.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/edgewalker.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Human Cleric
 Text:no text
 PT:1/1
 K:abDestroyTgtV 2 B T Sac<1/Goblin>:Land:Destroy target land.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/earthblighter.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/earthblighter.jpg
 End

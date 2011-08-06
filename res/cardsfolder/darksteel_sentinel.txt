@@ -6,5 +6,5 @@ PT:3/3
 K:Vigilance
 K:Indestructible
 K:Flash
-K:SVar:Rarity:Uncommon
+SVar:Rarity:Uncommon
 End

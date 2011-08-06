@@ -4,6 +4,6 @@ Types:Artifact
 Text:no text
 K:tap: add R
 K:Comes into play tapped.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_diamond.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_diamond.jpg
 End

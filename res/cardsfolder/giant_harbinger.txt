@@ -3,6 +3,6 @@ ManaCost:4 R
 Types:Creature Giant
 Text:When Giant Harbinger enters the battlefield, you may search your library for a Giant card, reveal it, then shuffle your library and put that card on top of it.
 PT:3/4
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_harbinger.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_harbinger.jpg
 End

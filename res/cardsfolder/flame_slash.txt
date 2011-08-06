@@ -3,6 +3,6 @@ ManaCost:R
 Types:Sorcery
 Text:no text
 K:spDamageTgtC:4:Flame Slash deals 4 damage to target creature.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/flame_slash.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flame_slash.jpg
 End

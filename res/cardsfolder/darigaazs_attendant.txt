@@ -4,7 +4,7 @@ Types:Artifact Creature Golem
 Text:no text
 PT:3/3
 K:1, Sacrifice CARDNAME: Add B R G to your mana pool.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/darigaazs_attendant.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/darigaazs_attendant.jpg
 End

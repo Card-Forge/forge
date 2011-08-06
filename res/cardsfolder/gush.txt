@@ -2,6 +2,6 @@ Name:Gush
 ManaCost:4 U
 Types:Instant
 Text:no text
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gush.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gush.jpg
 End

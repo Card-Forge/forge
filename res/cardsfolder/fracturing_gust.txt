@@ -3,6 +3,6 @@ ManaCost:2 GW GW GW
 Types:Instant
 Text:Destroy all artifacts and enchantments. You gain 2 life for each permanent destroyed this way.
 K:spDestroyAll:Artifact,Enchantment:Drawback$GainLifeYou/X.Times.2
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fracturing_gust.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fracturing_gust.jpg
 End

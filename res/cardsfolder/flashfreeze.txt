@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Instant
 Text:Counter target red or green spell.
 K:spCounter:Spell:Color(red,green):Graveyard:None
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/flashfreeze.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flashfreeze.jpg
 End

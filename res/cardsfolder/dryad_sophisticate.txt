@@ -4,6 +4,6 @@ Types:Creature Dryad
 Text:no text
 PT:2/1
 K:Nonbasic landwalk
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dryad_sophisticate.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dryad_sophisticate.jpg
 End

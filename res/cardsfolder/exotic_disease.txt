@@ -3,7 +3,7 @@ ManaCost:4 B
 Types:Sorcery
 Text:no text
 K:spLoseLifeTgt:X:Drawback$YouGainLife/X:Domain - Target player loses X life and you gain X life, where X is the number of basic land types among lands you control.
-K:SVar:X:Count$Domain
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/exotic_disease.jpg
+SVar:X:Count$Domain
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/exotic_disease.jpg
 End

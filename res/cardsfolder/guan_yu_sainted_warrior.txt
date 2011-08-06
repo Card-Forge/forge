@@ -4,6 +4,6 @@ Types:Legendary Creature Human Soldier Warrior
 Text:When Guan Yu, Sainted Warrior is put into your graveyard from the battlefield, you may shuffle Guan Yu into your library.
 PT:3/5
 K:Horsemanship
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/guan_yu_sainted_warrior.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/guan_yu_sainted_warrior.jpg
 End

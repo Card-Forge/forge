@@ -3,6 +3,6 @@ ManaCost:4 W W
 Types:Sorcery
 Text:Exile all creatures.
 K:spBounceAll:Creature:Exile
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/final_judgment.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/final_judgment.jpg
 End

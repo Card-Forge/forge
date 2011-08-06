@@ -5,7 +5,7 @@ Text:When Faultgrinder enters the battlefield, destroy target land.
 PT:4/4
 K:Trample
 K:etbDestroyTgt:Land
-K:SVar:Evoke:4 R
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/faultgrinder.jpg
+SVar:Evoke:4 R
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/faultgrinder.jpg
 End

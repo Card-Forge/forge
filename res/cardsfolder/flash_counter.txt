@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Instant
 Text:Counter target instant spell.
 K:spCounter:Spell:Type(Instant):Graveyard:None
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/flash_counter.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flash_counter.jpg
 End

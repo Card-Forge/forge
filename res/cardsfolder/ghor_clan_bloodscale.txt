@@ -5,6 +5,6 @@ Text:Play this ability only once each turn.
 PT:2/1
 K:First Strike
 K:abPump 3 G:+2/+2
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ghor_clan_bloodscale.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ghor_clan_bloodscale.jpg
 End

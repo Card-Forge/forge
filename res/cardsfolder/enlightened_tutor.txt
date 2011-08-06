@@ -3,7 +3,7 @@ ManaCost:W
 Types:Instant
 Text:Search your library for an artifact or enchantment card and reveal that card. Shuffle your library, then put the card on top of it.
 K:spTutor:Artifact,Enchantment:TopOfLibrary
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/enlightened_tutor.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/enlightened_tutor.jpg
 End

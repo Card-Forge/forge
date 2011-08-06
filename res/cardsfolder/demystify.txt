@@ -3,6 +3,6 @@ ManaCost:W
 Types:Instant
 Text:Destroy target enchantment.
 K:spDestroyTgt:Enchantment
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/demystify.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/demystify.jpg
 End

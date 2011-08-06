@@ -4,6 +4,6 @@ Types:Creature Human Wizard Mutant
 Text:no text
 PT:3/3
 K:abPump 7 U:+3/+3/Flying
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/glintwing_invoker.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/glintwing_invoker.jpg
 End

@@ -3,6 +3,6 @@ ManaCost:4 G
 Types:Creature Beast
 Text:Whenever Deepwood Tantiv becomes blocked, you gain 2 life.
 PT:2/4
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/deepwood_tantiv.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deepwood_tantiv.jpg
 End

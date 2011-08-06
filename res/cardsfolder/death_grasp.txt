@@ -3,7 +3,7 @@ ManaCost:X W B
 Types:Sorcery
 Text:no text
 K:spDamageTgtCP:X:Drawback$YouGainLife/X:Death Grasp deals X damage to target creature or player. You gain X life.
-K:SVar:X:Count$xPaid
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/death_grasp.jpg
+SVar:X:Count$xPaid
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/death_grasp.jpg
 End

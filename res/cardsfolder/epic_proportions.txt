@@ -5,6 +5,6 @@ Text:Enchanted creature gets +5/+5 and has trample.
 K:Flash
 K:Enchant creature
 K:enPump:+5/+5/Trample
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/epic_proportions.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/epic_proportions.jpg
 End

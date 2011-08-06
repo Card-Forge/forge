@@ -6,6 +6,6 @@ PT:2/2
 K:Flying
 K:Morph:U U
 K:abDamageTgtCP T:1
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fledgling_mawcor.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fledgling_mawcor.jpg
 End

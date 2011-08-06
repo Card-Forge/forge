@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Legendary Land
 Text:Colorless Eldrazi spells you cast cost 2 less to cast.
 K:CostChange:Player:Less:2:Spell:colorless:Eldrazi:NoSpecial
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Mythic
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/eye_of_ugin.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/eye_of_ugin.jpg
 End

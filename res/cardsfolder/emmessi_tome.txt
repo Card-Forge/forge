@@ -3,6 +3,6 @@ ManaCost:4
 Types:Artifact
 Text:no text
 K:abDrawCards 5 T:2:Drawback$YouDiscard/1:Draw two cards, then discard a card.:Emmessi Tome - draw cards and discard a card
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/emmessi_tome.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/emmessi_tome.jpg
 End

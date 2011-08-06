@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Creature Illusion
 Text:When Dream Stalker comes into play, return a permanent you control to its owner's hand.
 PT:1/5
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_stalker.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_stalker.jpg
 End

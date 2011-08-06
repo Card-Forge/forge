@@ -3,6 +3,6 @@ ManaCost:2 U
 Types:Sorcery
 Text:Put target creature on top of its owner's library.
 K:spBounceTgt:Creature:TopofLibrary
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/forced_retreat.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/forced_retreat.jpg
 End

@@ -6,7 +6,7 @@ K:tap: add 1
 K:RG, tap: add R R
 K:RG, tap: add R G
 K:RG, tap: add G G
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_lit_thicket.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_lit_thicket.jpg
 End

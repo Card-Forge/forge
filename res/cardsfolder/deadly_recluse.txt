@@ -5,6 +5,6 @@ Text:no text
 PT:1/2
 K:Reach
 K:Deathtouch
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/deadly_recluse.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deadly_recluse.jpg
 End

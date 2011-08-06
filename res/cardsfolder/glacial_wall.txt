@@ -4,6 +4,6 @@ Types:Creature Wall
 Text:no text
 PT:0/7
 K:Defender
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card3912.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card3912.jpg
 End

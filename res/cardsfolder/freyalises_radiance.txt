@@ -4,7 +4,7 @@ Types:Enchantment
 Text:Snow permanents don't untap during their controllers' untap steps.
 K:Permanents don't untap during their controllers' untap steps:Snow
 K:Cumulative upkeep:2
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/freyalises_radiance.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/freyalises_radiance.jpg
 End

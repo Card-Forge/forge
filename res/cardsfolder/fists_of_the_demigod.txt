@@ -6,7 +6,7 @@ K:Enchant creature
 K:enPump:+0/+0
 K:StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Wither:Color.black:As long as enchanted creature is black, it gets +1/+1 and has wither. (It deals damage to creatures in the form of -1/-1 counters.)
 K:StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/First Strike:Color.red:As long as enchanted creature is red, it gets +1/+1 and has first strike.
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fists_of_the_demigod.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fists_of_the_demigod.jpg
 End

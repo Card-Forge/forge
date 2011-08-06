@@ -4,6 +4,6 @@ Types:Enchantment Aura
 Text:Enchanted creature has forestwalk.
 K:Enchant creature
 K:enPump:Forestwalk
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dryads_favor.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dryads_favor.jpg
 End

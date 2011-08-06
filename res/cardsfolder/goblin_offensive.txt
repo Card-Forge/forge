@@ -2,6 +2,6 @@ Name:Goblin Offensive
 ManaCost:X 1 R R
 Types:Sorcery
 Text:no text
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_offensive.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_offensive.jpg
 End

@@ -5,6 +5,6 @@ Text:no text
 PT:6/5
 K:Flying
 K:WheneverKeyword:EntersBattleField:Self:Play:ModifyLife/-5:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Dread Reaper enters the battlefield, you lose 5 life.
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_reaper.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_reaper.jpg
 End

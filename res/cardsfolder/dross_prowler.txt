@@ -4,6 +4,6 @@ Types:Creature Zombie
 Text:no text
 PT:2/1
 K:Fear
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card48570.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card48570.jpg
 End

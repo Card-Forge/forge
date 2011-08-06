@@ -3,6 +3,6 @@ ManaCost:1 W
 Types:Instant
 Text:Destroy target artifact or enchantment.
 K:spDestroyTgt:Artifact,Enchantment
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/disenchant.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/disenchant.jpg
 End

@@ -2,8 +2,8 @@ Name:Fervor
 ManaCost:2 R
 Types:Enchantment
 Text:Creatures you control have haste.
-K:SVar:BuffedBy:Creature
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fervor.jpg
+SVar:BuffedBy:Creature
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fervor.jpg
 End

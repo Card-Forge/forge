@@ -6,6 +6,6 @@ PT:3/3
 K:Flying
 K:Protection from black
 K:Suspend:3:1 W
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/duskrider_peregrine.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/duskrider_peregrine.jpg
 End

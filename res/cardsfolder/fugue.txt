@@ -3,6 +3,6 @@ ManaCost:3 B B
 Types:Sorcery
 Text:no text
 K:spDiscardTgt:TgtChoose:3:Target player discards three cards.:Fugue - target player discards cards
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fugue.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fugue.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Beast
 Text:no text
 PT:4/4
 K:Trample
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card46115.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card46115.jpg
 End

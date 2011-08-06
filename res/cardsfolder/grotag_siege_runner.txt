@@ -4,6 +4,6 @@ Types:Creature Goblin Rogue
 Text:no text
 PT:2/1
 K:abDestroyTgtV R Sac<1/CARDNAME>:Creature.withDefender:Drawback$DamageTgtCtrlr/2:Destroy target creature with defender. Grotag Siege-Runner deals 2 damage to that creature's controller.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/grotag_siege_runner.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grotag_siege_runner.jpg
 End

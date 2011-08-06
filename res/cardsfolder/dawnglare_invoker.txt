@@ -4,6 +4,6 @@ Types:Creature Kor Wizard
 Text:8: Tap all creatures target player controls.
 PT:2/1
 K:Flying
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dawnglare_invoker.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dawnglare_invoker.jpg
 End

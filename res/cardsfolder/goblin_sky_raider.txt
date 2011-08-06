@@ -4,6 +4,6 @@ Types:Creature Goblin Warrior
 Text:no text
 PT:1/2
 K:Flying
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83305.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83305.jpg
 End

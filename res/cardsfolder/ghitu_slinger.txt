@@ -5,6 +5,6 @@ Text:no text
 PT:2/2
 K:WheneverKeyword:EntersBattleField:Self:Play:Damage/2:InputType - CreatureORPlayer:ASAP:No_Condition:SingleTarget:When Ghitu Slinger enters the battlefield, it deals 2 damage to target creature or player.
 K:Echo:2 R
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ghitu_slinger.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ghitu_slinger.jpg
 End

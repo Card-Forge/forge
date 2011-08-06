@@ -5,6 +5,6 @@ Text:no text
 PT:0/1
 K:Exalted
 K:abDrawCards U T:1:Drawback$YouDiscard/1:Draw a card, then discard a card.:Frontline Sage - draw a card then discard a card
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/frontline_sage.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/frontline_sage.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Dauthi Minion
 Text:no text
 PT:3/1
 K:Shadow
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_marauder.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_marauder.jpg
 End

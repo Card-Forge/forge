@@ -3,6 +3,6 @@ ManaCost:U
 Types:Instant
 Text:Counter target sorcery spell.
 K:spCounter:Spell:Type(Sorcery):Graveyard:None
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/envelop.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/envelop.jpg
 End

@@ -3,6 +3,6 @@ ManaCost:4 G
 Types:Sorcery
 Text:no text
 K:spDamageAll:Creature.withFlying:5:Gale Force deals 5 damage to each creature with flying.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gale_force.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gale_force.jpg
 End

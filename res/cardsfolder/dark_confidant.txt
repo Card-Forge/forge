@@ -3,6 +3,6 @@ ManaCost:1 B
 Types:Creature Human Wizard
 Text:At the beginning of your upkeep, reveal the top card of your library and put that card into your hand. You lose life equal to its converted mana cost.
 PT:2/1
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_confidant.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_confidant.jpg
 End

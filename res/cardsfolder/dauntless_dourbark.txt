@@ -3,6 +3,6 @@ ManaCost:3 G
 Types:Creature Treefolk Warrior
 Text:Dauntless Dourbark's power and toughness are each equal to the number of Forests you control plus the number of Treefolk you control.\r\nDauntless Dourbark has trample as long as you control another Treefolk.
 PT:1/1
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dauntless_dourbark.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dauntless_dourbark.jpg
 End

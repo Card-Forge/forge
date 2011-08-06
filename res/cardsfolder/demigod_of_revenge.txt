@@ -5,6 +5,6 @@ Text:When you cast Demigod of Revenge, return all cards named Demigod of Revenge
 PT:5/4
 K:Flying
 K:Haste
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/demigod_of_revenge.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/demigod_of_revenge.jpg
 End

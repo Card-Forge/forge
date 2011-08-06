@@ -3,6 +3,6 @@ ManaCost:B
 Types:Creature Human Wizard
 Text:Sacrifice Death Cultist: Target player loses 1 life and you gain 1 life.
 PT:1/1
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/death_cultist.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/death_cultist.jpg
 End

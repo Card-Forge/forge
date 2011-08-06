@@ -4,6 +4,6 @@ Types:Artifact Creature Angel
 Text:When Filigree Angel enters the battlefield, you gain 3 life for each artifact you control.
 PT:4/4
 K:Flying
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/filigree_angel.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/filigree_angel.jpg
 End

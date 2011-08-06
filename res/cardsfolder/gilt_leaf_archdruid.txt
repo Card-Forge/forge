@@ -3,6 +3,6 @@ ManaCost:3 G G
 Types:Creature Elf Druid
 Text:Whenever you play a Druid spell, you may draw a card.\r\nTap seven untapped Druids you control: Gain control of all lands target player controls.
 PT:3/3
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gilt_leaf_archdruid.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gilt_leaf_archdruid.jpg
 End

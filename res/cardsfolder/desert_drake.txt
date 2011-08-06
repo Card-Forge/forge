@@ -4,6 +4,6 @@ Types:Creature Drake
 Text:no text
 PT:2/2
 K:Flying
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4333.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4333.jpg
 End

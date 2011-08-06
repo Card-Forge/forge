@@ -5,6 +5,6 @@ Text:no text
 PT:4/5
 K:tap: add G G G
 K:TypeCycling:Forest:2
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_aberration.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_aberration.jpg
 End

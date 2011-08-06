@@ -3,6 +3,6 @@ ManaCost:G
 Types:Instant
 Text:no text
 K:spPumpTgt:+3/+3
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_growth.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_growth.jpg
 End

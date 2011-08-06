@@ -3,7 +3,7 @@ ManaCost:4 R
 Types:Instant
 Text:no text
 K:spDamageTgtP:X:Feedback Bolt deals damage to target player equal to the number of artifacts you control.:Feedback Bolt - deals damage to target player equal to the number of artifacts you control.
-K:SVar:X:Count$TypeYouCtrl.Artifact
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/feedback_bolt.jpg
+SVar:X:Count$TypeYouCtrl.Artifact
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/feedback_bolt.jpg
 End
