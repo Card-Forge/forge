@@ -11762,6 +11762,25 @@ public class GameActionUtil {
 			}
 		}// execute()
 	};
+	
+	/**
+	 * stores the Command
+	 */
+	public static Command Umbra_Stalker = new Command() {
+		private static final long serialVersionUID = -3500747003228938898L;
+
+		public void execute() {
+			// get all creatures
+			CardList cards = AllZoneUtil.getCardsInPlay("Umbra Stalker");
+			for(Card c:cards) {
+				String player = c.getController();
+				CardList grave = AllZoneUtil.getPlayerGraveyard(player);
+				int pt = CardFactoryUtil.getNumberOfManaSymbolsByColor("B", grave);
+				c.setBaseAttack(pt);
+				c.setBaseDefense(pt);
+			}
+		}// execute()
+	};
 
 	public static Command Absolute_Grace              = new Command() {
 		private static final long serialVersionUID   = -6904191523315339355L;
@@ -20812,6 +20831,7 @@ public class GameActionUtil {
 		commands.put("Arena_of_the_Ancients", Arena_of_the_Ancients);
 		commands.put("Angry_Mob", Angry_Mob);
 		commands.put("Maraxus_of_Keld", Maraxus_of_Keld);
+		commands.put("Umbra_Stalker", Umbra_Stalker);
 		
 		//System.out.println("size of commands: " + commands.size());
 
