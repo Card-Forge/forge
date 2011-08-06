@@ -4,6 +4,7 @@ winsForBooster=1,1,2,2
 winsForRankIncrease=3,4,5,6
 winsForMediumAI=10,9,8,7
 winsForHardAI=20,18,16,14
+winsForVeryHardAI=40,36,32,28
 # When starting a quest this is how much of each type you'll start with. Plus your starting Credits.
 startingBasicLand=20
 startingSnowBasicLand=20

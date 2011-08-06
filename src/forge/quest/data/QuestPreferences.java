@@ -20,6 +20,7 @@ public class QuestPreferences implements Serializable {
 	private int[] winsForRankIncrease = { 1, 2, 3, 4 };
 	private int[] winsForMediumAI = { 6, 6, 11, 11 };
 	private int[] winsForHardAI = { 9, 9, 21, 21 };
+	private int[] winsForVeryHardAI = { 29, 29, 31, 31 };
 	
 	// Default starting land for a quest
 	private int startingBasicLand = 20;
@@ -146,6 +147,10 @@ public class QuestPreferences implements Serializable {
 	
 	public int getWinsForHardAI(int index){
 		return winsForHardAI[index];
+	}
+	
+	public int getWinsForVeryHardAI(int index){
+		return winsForVeryHardAI[index];
 	}
 	
 	public int getStartingBasic(){

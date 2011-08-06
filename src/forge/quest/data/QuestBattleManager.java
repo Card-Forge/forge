@@ -13,13 +13,14 @@ public class QuestBattleManager {
     private static transient List<String> easyAIDecks;
     private static transient List<String> mediumAIDecks;
     private static transient List<String> hardAIDecks;
+    private static transient List<String> veryHardAIDecks;
 
    static {
         List<String> aiDeckNames = getAIDeckNames();
         easyAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.EASY), aiDeckNames);
         mediumAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.MEDIUM), aiDeckNames);
         hardAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.HARD), aiDeckNames);
-
+        veryHardAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.VERYHARD), aiDeckNames);
     }
 
 
@@ -64,7 +65,7 @@ public class QuestBattleManager {
         int index = AllZone.QuestData.getDifficultyIndex();
 
         if (AllZone.QuestData.getWin() < AllZone.QuestData.getPreferences().getWinsForMediumAI(index)) {
-            return new String[]{getOpponent(easyAIDecks,0),getOpponent(easyAIDecks,1),getOpponent(easyAIDecks,2)};
+            return new String[]{getOpponent(easyAIDecks,0),getOpponent(easyAIDecks,1),getOpponent(veryHardAIDecks,2)};
         }
         
         if (AllZone.QuestData.getWin() == AllZone.QuestData.getPreferences().getWinsForMediumAI(index)) {
@@ -75,8 +76,12 @@ public class QuestBattleManager {
             return new String[]{getOpponent(mediumAIDecks,0),getOpponent(mediumAIDecks,1),getOpponent(mediumAIDecks,2)};
         }
         
-        if (AllZone.QuestData.getWin() == AllZone.QuestData.getPreferences().getWinsForMediumAI(index)) {
+        if (AllZone.QuestData.getWin() == AllZone.QuestData.getPreferences().getWinsForHardAI(index)) {
             return new String[]{getOpponent(mediumAIDecks,0),getOpponent(hardAIDecks,1),getOpponent(hardAIDecks,2)};
+        }
+        
+        if (AllZone.QuestData.getWin() >= AllZone.QuestData.getPreferences().getWinsForVeryHardAI(index)) {
+            return new String[]{getOpponent(hardAIDecks,0),getOpponent(hardAIDecks,1),getOpponent(veryHardAIDecks,2)};
         }
 
         return new String[]{getOpponent(hardAIDecks,0),getOpponent(hardAIDecks,1),getOpponent(hardAIDecks,2)};
@@ -98,7 +103,7 @@ public class QuestBattleManager {
 
         if (list.size() < 3) {
             ErrorViewer.showError(new Exception(),
-                    "QuestData : readFile() error, file %s is too short, it must contain at least 3 ai decks names",
+                    "QuestData : readFile() error, file %s is too short, it must contain at least 3 ai deck names",
                     file);
         }
 

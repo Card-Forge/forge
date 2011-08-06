@@ -542,7 +542,7 @@ public class QuestData {
         if (inventory.getItemLevel("Lucky Coin") == 1) {
             chance = 0.65f;
         }
-
+        
         float r = MyRandom.random.nextFloat();
 
         if (didWin) {

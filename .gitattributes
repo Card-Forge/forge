@@ -7943,6 +7943,7 @@ res/quest/decks/Boba[!!-~]Fett[!!-~]3.dck -text
 res/quest/decks/Boris[!!-~]Karloff[!!-~]3.dck -text
 res/quest/decks/Boromir[!!-~]2.dck -text
 res/quest/decks/Boromir[!!-~]3.dck -text
+res/quest/decks/Boromir[!!-~]4.dck -text
 res/quest/decks/Buffy[!!-~]1.dck -text
 res/quest/decks/Buffy[!!-~]2.dck -text
 res/quest/decks/Buffy[!!-~]3.dck -text
@@ -7962,6 +7963,7 @@ res/quest/decks/Da[!!-~]Vinci[!!-~]3.dck -text
 res/quest/decks/Darrin[!!-~]Stephens[!!-~]1.dck -text
 res/quest/decks/Darrin[!!-~]Stephens[!!-~]2.dck -text
 res/quest/decks/Darrin[!!-~]Stephens[!!-~]3.dck -text
+res/quest/decks/Darrin[!!-~]Stephens[!!-~]4.dck -text
 res/quest/decks/Darth[!!-~]Vader[!!-~]3.dck -text
 res/quest/decks/Data[!!-~]3.dck -text
 res/quest/decks/Dino[!!-~]2.dck -text
@@ -8051,6 +8053,7 @@ res/quest/decks/Napoleon[!!-~]3.dck -text
 res/quest/decks/Ned[!!-~]Flanders[!!-~]1.dck -text
 res/quest/decks/Ned[!!-~]Flanders[!!-~]2.dck -text
 res/quest/decks/Ned[!!-~]Flanders[!!-~]3.dck -text
+res/quest/decks/Ned[!!-~]Flanders[!!-~]4.dck -text
 res/quest/decks/Neo[!!-~]3.dck -text
 res/quest/decks/Newton[!!-~]3.dck -text
 res/quest/decks/Pebbles[!!-~]Flintstone[!!-~]2.dck -text
@@ -8068,6 +8071,7 @@ res/quest/decks/Rogue[!!-~]3.dck -text
 res/quest/decks/Samantha[!!-~]Stephens[!!-~]1.dck -text
 res/quest/decks/Samantha[!!-~]Stephens[!!-~]2.dck -text
 res/quest/decks/Samantha[!!-~]Stephens[!!-~]3.dck -text
+res/quest/decks/Samantha[!!-~]Stephens[!!-~]4.dck -text
 res/quest/decks/Saruman[!!-~]2.dck -text
 res/quest/decks/Saruman[!!-~]3.dck -text
 res/quest/decks/Sauron[!!-~]2.dck -text
@@ -8131,7 +8135,7 @@ res/quest/hard.txt -text svneol=native#text/plain
 res/quest/medium.txt -text svneol=native#text/plain
 res/quest/price.txt -text svneol=native#text/plain
 res/quest/quest.preferences -text
-res/quest/quest.properties svneol=native#text/plain
+res/quest/quest.properties -text svneol=native#text/plain
 res/quest/quests.txt -text svneol=native#text/plain
 res/quest/themes/-1[!!-~]-1[!!-~]Counters[!!-~]BG.thm -text
 res/quest/themes/Anti[!!-~]Black[!!-~]WB.thm -text
@@ -8201,6 +8205,7 @@ res/quest/themes/Vigilance[!!-~]Meekstone[!!-~]W.thm -text
 res/quest/themes/White.thm -text
 res/quest/themes/Wolves[!!-~]WG.thm -text
 res/quest/themes/Zombies[!!-~]B.thm -text
+res/quest/veryhard.txt -text svneol=native#text/plain
 res/reprintSetInfo.py -text svneol=native#text/x-python
 res/setInfoScript.py -text svneol=native#text/x-python
 res/sound/tap.mp3 -text svneol=unset#audio/mpeg

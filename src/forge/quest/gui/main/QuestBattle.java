@@ -55,8 +55,9 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Blackbeard 3", "hard", "W Soldiers deck with Preeminent Captain, Captain of the Watch and Daru Warchief");
         addToDeckList("Boba Fett 3", "hard", "WRG Dragons deck with Chandra Nalaar, Crucible of Fire and Dragon Roost");
         addToDeckList("Boris Karloff 3", "hard", "WR Boros Aggro deck with Kors, levelers and threat removal");
-        addToDeckList("Boromir 2", "medium", "WUBRG Elvish Piper deck with Quicksilver Amulet and huge creatures");
-        addToDeckList("Boromir 3", "hard", "WUBRG Elvish Piper deck with Quicksilver Amulet and huge creatures");
+        addToDeckList("Boromir 2", "medium", "G Elvish Piper deck with Quicksilver Amulet and huge creatures");
+        addToDeckList("Boromir 3", "hard", "G Elvish Piper deck with Quicksilver Amulet and huge creatures");
+        addToDeckList("Boromir 4", "very hard", "UG Show and Tell deck with huge creatures");
 //        addToDeckList("Brood 2", "medium", "W Battlecry deck");
         addToDeckList("Buffy 1", "easy", "BRG Vampires deck with wither and Sorceress Queen");
         addToDeckList("Buffy 2", "medium", "BRG Vampires deck with wither and Sorceress Queen");
@@ -89,6 +90,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Darrin Stephens 1", "easy", "U Affinity deck with Affinity for artifacts and Modular cards");
         addToDeckList("Darrin Stephens 2", "medium", "U Affinity deck with Affinity for artifacts and Modular cards");
         addToDeckList("Darrin Stephens 3", "hard", "U Affinity deck with Affinity for artifacts and Modular cards");
+        addToDeckList("Darrin Stephens 4", "very hard", "U Affinity deck");
         addToDeckList("Darth Vader 3", "hard", "WU Battle of Wits style alternate win type deck with WoG");
         addToDeckList("Data 3", "hard", "B deck with Korlash, Heir to Blackblade and Liliana Vess");
 //        addToDeckList("Deadpool 2", "medium", "BR Singleton");
@@ -231,6 +233,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Ned Flanders 1", "easy", "B reanimator deck with a few large creatures and some spells");
         addToDeckList("Ned Flanders 2", "medium", "B reanimator deck with a few large creatures and some spells");
         addToDeckList("Ned Flanders 3", "hard", "B reanimator deck with a few large creatures and some spells");
+        addToDeckList("Ned Flanders 4", "very hard", "B reanimator deck with a few large creatures and some spells");
         addToDeckList("Neo 3", "hard", "RG deck with Groundbreaker and other attack once then sacrifice at EoT creatures");
         addToDeckList("Newton 3", "hard", "WB Relentless Rats deck with Thrumming Stone, Vindicate and Swords to Plowshares");
         
@@ -267,6 +270,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Samantha Stephens 1", "easy", "WU Painter's Servant anti-red deck");
         addToDeckList("Samantha Stephens 2", "medium", "WU Painter's Servant anti-red deck");
         addToDeckList("Samantha Stephens 3", "hard", "WU Painter's Servant anti-red deck with Grindstone combo");
+        addToDeckList("Samantha Stephens 4", "very hard", "WU Painter's Servant - Grindstone combo");
         addToDeckList("Saruman 2", "medium", "UBR discard deck with Megrim, Liliana's Caress and Burning Inquiry ");
         addToDeckList("Saruman 3", "hard", "UBR discard deck with Megrim, Liliana's Caress and Burning Inquiry ");
         addToDeckList("Sauron 2", "medium", "UB Black Vise deck with Underworld Dreams, lots of card draw for both players");
