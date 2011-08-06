@@ -453,4 +453,10 @@ public class AllZoneUtil {
 			return !c.isEnchanted();
 		}
 	};	
+	
+	public static CardListFilter nonToken = new CardListFilter() {
+		public boolean addCard(Card c) {
+			return !c.isToken();
+		}
+	};
 }

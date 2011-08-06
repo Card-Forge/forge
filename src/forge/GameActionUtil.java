@@ -9708,6 +9708,7 @@ public class GameActionUtil {
 	
 		Baru.execute();
 		Reach_of_Branches.execute();
+		Sosukes_Summons.execute();
 
 		Essence_Warden.execute();
 		Soul_Warden.execute();
@@ -13122,6 +13123,54 @@ public class GameActionUtil {
 			return false;
 		}// newForest()
 	}; // Reach of Branches
+	
+	// Reach of Branches
+	public static Command Sosukes_Summons= new Command() {
+		CardList oldSnakes = new CardList();
+
+		public void execute() {
+			// count card "Reach of Branches" in graveyard
+			final String player = AllZone.Phase.getActivePlayer();
+			final CardList nCard = AllZoneUtil.getPlayerGraveyard(player, "Sosuke's Summons");
+
+			// get all Snakes that player has
+			CardList newSnakes = AllZoneUtil.getPlayerTypeInPlay(player, "Snake");
+			newSnakes = newSnakes.filter(AllZoneUtil.nonToken);
+
+			// if "Sosuke's Summons" is in graveyard and played a Forest
+			if(0 < nCard.size()	&& newSnake(oldSnakes, newSnakes)) {
+				SpellAbility ability = new Ability( new Card(), "0" ) {
+					@Override
+					public void resolve() {
+						// return all Reach of Branches to hand
+						PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+						PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+						for(int i = 0; i < nCard.size(); i++) {
+							grave.remove(nCard.get(i));
+							hand.add(nCard.get(i));
+						}
+					}// resolve()
+				};// SpellAbility
+				ability.setStackDescription("Sosuke's Summons - return card to "
+						+ player + "'s hand");
+				AllZone.Stack.add(ability);
+			}// if
+
+			// potential problem: if a Forest is bounced to your hand
+			// "Reach Branches"
+			// won't trigger when you play that Forest
+			oldSnakes.addAll(newSnakes.toArray());
+		}// execute
+
+		// check if newList has anything that oldList doesn't have
+		boolean newSnake(CardList oldList, CardList newList) {
+			// check if a Snake came into play under your control
+			for(int i = 0; i < newList.size(); i++)
+				if(!oldList.contains(newList.get(i))) return true;
+
+			return false;
+		}// newSnake()
+	}; // Sosukes Summons
 
 	public static Command Mad_Auntie                  = new Command() {
 		private static final long serialVersionUID   = 7969640438477308299L;
