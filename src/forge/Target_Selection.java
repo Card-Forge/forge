@@ -208,7 +208,7 @@ public class Target_Selection {
 	        public void showMessage() {
 				String zone = select.getTgt().getZone();
 				
-				CardList choices = AllZoneUtil.getCardsInZone(zone).getValidCards(Tgts, sa.getSourceCard().getController());
+				CardList choices = AllZoneUtil.getCardsInZone(zone).getValidCards(Tgts, sa.getSourceCard().getController(), sa.getSourceCard());
 
 				if (zone.equals(Constant.Zone.Play)){
 		            boolean canTargetPlayer = false;
