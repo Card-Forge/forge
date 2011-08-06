@@ -72,6 +72,7 @@ public enum Counters {
     P2P2("+2/+2"),
     QUEST(),
     SCREAM(),
+    SHELL(),
     SLEIGHT(),
     SOOT(),
     SPORE(),
