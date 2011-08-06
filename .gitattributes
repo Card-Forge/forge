@@ -1760,6 +1760,7 @@ res/cardsfolder/expendable_troops.txt -text svneol=native#text/plain
 res/cardsfolder/exploration.txt -text svneol=native#text/plain
 res/cardsfolder/explore.txt -text svneol=native#text/plain
 res/cardsfolder/explosive_revelation.txt -text svneol=native#text/plain
+res/cardsfolder/explosive_vegetation.txt -text svneol=native#text/plain
 res/cardsfolder/expunge.txt -text svneol=native#text/plain
 res/cardsfolder/exsanguinate.txt svneol=native#text/plain
 res/cardsfolder/extinguish.txt -text svneol=native#text/plain
