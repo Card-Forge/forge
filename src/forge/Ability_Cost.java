@@ -1,6 +1,8 @@
 package forge;
 
 public class Ability_Cost {
+	private boolean isAbility = true;
+	
 	private boolean sacCost = false;
 	public boolean getSacCost() { return sacCost; }
 	private String sacType = "";	// <type> or CARDNAME
@@ -11,8 +13,9 @@ public class Ability_Cost {
 	private boolean tapCost = false;
 	public boolean getTap() { return tapCost; } 
 	
-	// future expansion of Ability_Cost class: untap
-	// private boolean untapCost = false;	
+	// future expansion of Ability_Cost class: tap untapped type
+	private boolean untapCost = false;
+	public boolean getUntap() { return untapCost; } 
 	
 	private boolean subtractCounterCost = false;
 	public boolean getSubCounter() { return subtractCounterCost; }
@@ -32,11 +35,13 @@ public class Ability_Cost {
 	public boolean hasNoManaCost() { return manaCost.equals("") || manaCost.equals("0"); };
 	private String manaCost = "";
 	public String getMana() { return manaCost; }
+	public void setMana(String sCost) { manaCost = sCost; }
 	
 	private String name;
 	
-	public Ability_Cost(String parse, String cardName)
+	public Ability_Cost(String parse, String cardName, boolean bAbility)
 	{
+		isAbility = bAbility;
 		// when adding new costs for cost string, place them here
 		name = cardName;
 		
@@ -71,19 +76,27 @@ public class Ability_Cost {
         }
         
         if(parse.contains("Sac-")) {
+        	// todo(sol): change from Sac- to Sac<X, type>, also use IsValidCard with type
         	sacCost = true;
         	int sacPos = parse.indexOf("Sac-");
+        	// sacType needs to be an Array for IsValidCard
         	sacType = parse.substring(sacPos).replace("Sac-", "").trim();
         	sacThis =  (sacType.equals("CARDNAME"));
         	if (sacPos > 0)
         		parse = parse.substring(0,sacPos-1).trim();
         }                
 
+        if (parse.contains("Untap")){
+        	untapCost = true;
+            parse = parse.replace("Untap", "").trim();
+        }
+        
         if(parse.contains("T")) {
             tapCost = true;
             parse = parse.replace("T", "");
             parse = parse.trim();
         }
+        
         manaCost = parse.trim();
         if (manaCost.equals(""))
         	manaCost = "0";
@@ -91,23 +104,75 @@ public class Ability_Cost {
 	
 	public String toString()
 	{
-		StringBuilder cost = new StringBuilder();
-		boolean caps = true;
+		if (isAbility)
+			return abilityToString();
+		else
+			return spellToString();
+	}
+	
+	private String spellToString() {
+		StringBuilder cost = new StringBuilder("As an additional cost to play ");
+		cost.append(name);
+		cost.append(", ");
+		boolean first = true;
+
 		if (!(manaCost.equals("0") || manaCost.equals(""))){
+			// never a normal additional mana cost for spells
 			cost.append(manaCost);
-			caps = false;
 		}
 		
-		if (tapCost){
-			if (caps)
-				cost.append("Tap");
-			else
-				cost.append(", tap");
-			caps = false;
+		if (tapCost){	
+			// tap cost for spells will not be in this form.
 		}
 		
 		if (subtractCounterCost){
-			if (caps)
+			// subtractCounter for spells will not be in this form
+
+		}
+		
+		if (lifeCost){
+			if (first)
+				cost.append("pay ");
+			else
+				cost.append("and pay ");
+			cost.append(lifeAmount);
+			cost.append(" Life");
+
+			first = false;
+		}
+		
+		cost.append(sacString(first));
+		
+		cost.append(".");
+		return cost.toString();
+	}
+
+	private String abilityToString() {
+		StringBuilder cost = new StringBuilder();
+		boolean first = true;
+		if (!(manaCost.equals("0") || manaCost.equals(""))){
+			cost.append(manaCost);
+			first = false;
+		}
+		
+		if (tapCost){
+			if (first)
+				cost.append("Tap");
+			else
+				cost.append(", tap");
+			first = false;
+		}
+		
+		if (untapCost){
+			if (first)
+				cost.append("Untap");
+			else
+				cost.append(", untap");
+			first = false;
+		}
+		
+		if (subtractCounterCost){
+			if (first)
 				cost.append("Remove ");
 			else
 				cost.append(", remove ");
@@ -119,36 +184,46 @@ public class Ability_Cost {
 			cost.append(" counter");
 			if (counterAmount != 1)
 				cost.append("s");
-			cost.append(" from CARDNAME");
+			cost.append(" from ");
+			cost.append(name);
 
-			caps = false;
+			first = false;
 		}
 		
 		if (lifeCost){
-			if (caps)
+			if (first)
 				cost.append("Pay ");
 			else
 				cost.append(", Pay ");
 			cost.append(lifeAmount);
 			cost.append(" Life");
 
-			caps = false;
+			first = false;
 		}
 		
-		cost.append(sacString(caps));
+		
+		cost.append(sacString(first));
 		
 		cost.append(": ");
 		return cost.toString();
 	}
-	
-	public String sacString(boolean caps)
+
+	public String sacString(boolean first)
 	{
 		StringBuilder cost = new StringBuilder();
 		if (sacCost){
-			if (caps)
-				cost.append("Sacrifice ");
-			else
-				cost.append(", Sacrifice ");
+			if (first){
+				if (isAbility)
+					cost.append("Sacrifice ");
+				else
+					cost.append("sacrifice ");
+			}
+			else{
+				if (isAbility)
+					cost.append(", sacrifice ");
+				else
+					cost.append(" and sacrifice ");
+			}
 			
 			if (sacType.equals("CARDNAME"))
 				cost.append(name);

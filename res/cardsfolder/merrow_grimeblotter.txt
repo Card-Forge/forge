@@ -1,0 +1,8 @@
+Name:Merrow Grimeblotter
+ManaCost:3 UB
+Types:Creature Merfolk Wizard
+PT:2/2
+K:abPumpTgtC 1 UB Untap:-2/-0
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://magiccards.info/scans/en/shm/171.jpg
+End

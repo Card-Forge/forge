@@ -17,6 +17,7 @@ public class Cost_Payment {
 	public boolean isCanceled() { return bCancel; }
 	
 	private boolean payTap = false;
+	private boolean payUntap = false; 
 	private boolean payMana = false;
 	private boolean paySubCounter = false;
 	private boolean paySac = false;
@@ -45,6 +46,9 @@ public class Cost_Payment {
     	if (cost.getTap() && (card.isTapped() || card.isSick()))
     		return false;
     	
+    	if (cost.getUntap() && (card.isUntapped() || card.isSick()))
+    		return false;
+    	
     	int countersLeft = 0;
     	if (cost.getSubCounter()){
 			Counters c = cost.getCounterType();
@@ -64,6 +68,9 @@ public class Cost_Payment {
 			if (!cost.getSacThis()){
 			    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
 			    CardList typeList = new CardList(play.getCards());
+			    
+			    // todo(sol) switch this in
+			    //typeList = typeList.getValidCards(cost.getSacType()); 
 			    typeList = typeList.getType(cost.getSacType());
 				if (typeList.size() == 0)
 					return false;
@@ -90,7 +97,14 @@ public class Cost_Payment {
 				return false;
 		}
 
-		// insert untap here
+		if (!payUntap && cost.getUntap()){
+			if (card.isTapped()){
+				card.untap();
+				payUntap = true;
+			}
+			else
+				return false;
+		}
 		
 		if (!payMana && !cost.hasNoManaCost()){		// pay mana here
 			changeInput.stopSetNext(new Input_PayCostMana(this));
@@ -146,7 +160,7 @@ public class Cost_Payment {
 	}
 
 	public boolean isAllPaid(){
-		return (payTap && payMana && paySubCounter && paySac && payLife);
+		return (payTap && payUntap && payMana && paySubCounter && paySac && payLife);
 	}
 	
 	public void cancelPayment(){
@@ -154,6 +168,10 @@ public class Cost_Payment {
 		if (cost.getTap() && payTap){
 			// untap if tapped
 			card.untap();
+		}
+		if (cost.getUntap() && payUntap){
+			// tap if untapped
+			card.tap();
 		}
 		// refund mana
         AllZone.ManaPool.unpaid();
@@ -203,6 +221,9 @@ public class Cost_Payment {
     	
     	if (cost.getTap())
     		card.tap();
+
+    	if (cost.getUntap())
+    		card.untap();
     	
     	if (!cost.hasNoManaCost())
     		ComputerUtil.payManaCost(ability);

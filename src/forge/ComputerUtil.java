@@ -228,6 +228,9 @@ public class ComputerUtil
 
     	if (cost.getTap() && (card.isTapped() || card.isSick()))
     		return false;
+    	
+    	if (cost.getUntap() && (card.isUntapped() || card.isSick()))
+    		return false;
 		
 		if (cost.getSubCounter()){
 			Counters c = cost.getCounterType();

@@ -1270,7 +1270,7 @@ public class CardFactory implements NewConstants {
         		String tmpCost[] =  k[0].replace("abAllPump", "").split(" ", 2);
         		
         		final Target abTgt = new Target(tmpCost[0]);
-        		final Ability_Cost abCost = new Ability_Cost(tmpCost[1], card.getName());        		
+        		final Ability_Cost abCost = new Ability_Cost(tmpCost[1], card.getName(), true);        		
         		
         		final String Scope[] = k[1].split("/");
         		
@@ -1536,7 +1536,7 @@ public class CardFactory implements NewConstants {
         		String[] tmpCost = tmp.split(" ", 2);
         		
         		final Target abTgt = new Target(tmpCost[0]);        			
-        		final Ability_Cost abCost = new Ability_Cost(tmpCost[1], card.getName());
+        		final Ability_Cost abCost = new Ability_Cost(tmpCost[1], card.getName(), true);
                 
                 final int NumAttack[] = {-1138};
                 final String AttackX[] = {"none"};
@@ -2284,7 +2284,7 @@ public class CardFactory implements NewConstants {
         		String tmpCost[] =  k[0].replace("abDamage", "").split(" ", 2);
         		
         		final Target abTgt = new Target(tmpCost[0]);
-        		final Ability_Cost abCost = new Ability_Cost(tmpCost[1], card.getName());    
+        		final Ability_Cost abCost = new Ability_Cost(tmpCost[1], card.getName(), true);    
                 
                 final int NumDmg[] = {-1};
                 final String NumDmgX[] = {"none"};
@@ -5463,45 +5463,25 @@ public class CardFactory implements NewConstants {
         	
         //******************************************************************
         //************** Link to different CardFactories ******************* 
+        Card card2 = null;
         if(card.getType().contains("Creature")) {
-            Card card2 = new Card();
             card2 = CardFactory_Creatures.getCard(card, cardName, owner, this);
-            
-            return card2;
         } else if(card.getType().contains("Aura")) {
-            Card card2 = new Card();
             card2 = CardFactory_Auras.getCard(card, cardName, owner);
-            
-            return card2;
         } else if(card.getType().contains("Equipment")) {
-            Card card2 = new Card();
             card2 = CardFactory_Equipment.getCard(card, cardName, owner);
-            
-            return card2;
         } else if(card.getType().contains("Planeswalker")) {
-            Card card2 = new Card();
             card2 = CardFactory_Planeswalkers.getCard(card, cardName, owner);
-            
-            return card2;
         } else if(card.getType().contains("Land")) {
-            Card card2 = new Card();
             card2 = CardFactory_Lands.getCard(card, cardName, owner);
-            
-            return card2;
         } else if (card.getType().contains("Instant")) {
-        	Card card2 = new Card();
         	card2 = CardFactory_Instants.getCard(card, cardName, owner);
-        	
-        	return card2;
-        }
-        else if (card.getType().contains("Sorcery")) {
-        	Card card2 = new Card();
+        } else if (card.getType().contains("Sorcery")) {
         	card2 = CardFactory_Sorceries.getCard(card, cardName, owner);
-        	
-        	return card2;
         }
         
-        
+        if (card2 != null)
+        	return postFactoryKeywords(card2);
         
         //*************** START *********** START **************************
         else if(cardName.equals("Pyrohemia")) {
@@ -10386,8 +10366,37 @@ public class CardFactory implements NewConstants {
         		sa.setXManaCost("1");
         }//X
 
-        return card;
+        return postFactoryKeywords(card);
     }//getCard2
+    
+    public Card postFactoryKeywords(Card card){
+    	// this function should handle any keywords that need to be added after a spell goes through the factory
+    	
+        // Spell has Additional Cost. Reuse Ability_Cost
+        if (hasKeyword(card, "ACost") != -1){
+        	int n = hasKeyword(card, "ACost");
+        	String parse = card.getKeyword().get(n).toString();
+        	card.removeIntrinsicKeyword(parse);
+        	
+        	String k[] = parse.split(":");
+        	
+        	Ability_Cost cost = new Ability_Cost(k[1], card.getName(), false);
+        	
+        	StringBuilder sb = new StringBuilder(cost.toString());
+        	sb.append("\n");
+        	sb.append(card.getText());
+        	card.setText(sb.toString());
+        	
+        	// loop through each of the cards spells and add abCost to it
+        	ArrayList<SpellAbility> spells = card.getSpells();
+        	for(SpellAbility sa : spells){
+        		if (sa instanceof Spell){
+        			sa.setPayCosts(cost);
+        		}
+        	}
+        }
+        return card;
+    }
     
     // copies stats like attack, defense, etc..
     public static Card copyStats(Object o) {
