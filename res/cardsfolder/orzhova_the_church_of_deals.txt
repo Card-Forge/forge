@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:tap: add 1
-K:abLoseLifeTgt 3 W B T:1:Drawback$YouGainLife/1:Target player loses 1 life and you gain 1 life.
+A:AB$LoseLife | Cost$ 3 W B T | ValidTgts$ Player | TgtPrompt$ Select a player to lose 1 life | LifeAmount$ 1 | SubAbility$ YouGainLife/1 | SpellDescription$ Target player loses 1 life and you gain 1 life.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orzhova_the_church_of_deals.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/162.jpg

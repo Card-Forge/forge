@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Creature Human Rebel Cleric
 Text:no text
 PT:1/1
-K:abLoseLifeTgt T:1
+A:AB$LoseLife | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select a player to lose 1 life | LifeAmount$ 1 | SpellDescription$ Target player loses 1 life.
 K:SearchRebel:4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blightspeaker.jpg

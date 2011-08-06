@@ -8,7 +8,7 @@ A:AB$Pump | Cost$ W W T | ValidTgts$ Creature | TgtPrompt$ Select target creatur
 A:AB$Pump | Cost$ W W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Protection from black | SpellDescription$ Target creature gains protection from black until end of turn.
 A:AB$Pump | Cost$ W W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Protection from red | SpellDescription$ Target creature gains protection from red until end of turn.
 A:AB$Pump | Cost$ W W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Protection from green | SpellDescription$ Target creature gains protection from green until end of turn.
-K:abLoseLifeTgt B B T:2:Drawback$YouGainLife/2:Target player loses 2 life and you gain 2 life.
+A:AB$LoseLife | Cost$ B B T | ValidTgts$ Player | TgtPrompt$ Select a player to lose 2 life | LifeAmount$ 2 | SubAbility$ YouGainLife/2 | SpellDescription$ Target player loses 2 life and you gain 2 life.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormscape_master.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/76.jpg
