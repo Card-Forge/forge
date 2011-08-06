@@ -562,7 +562,7 @@ public class AllZoneUtil {
 	 */
 	public static CardListFilter enchantments = new CardListFilter() {
 		public boolean addCard(Card c) {
-			return c.isCreature();
+			return c.isEnchantment();
 		}
 	};
 	
