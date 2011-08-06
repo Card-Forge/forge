@@ -4523,6 +4523,7 @@ public class CardFactory implements NewConstants {
         
         ////////////////////////////////////////////////////////////////
         
+        /* Cards converted to Trigger + AF
         if (card.getKeyword().contains("When CARDNAME enters the battlefield, draw a card.")) {
             
             final SpellAbility ability = new Ability(card, "0") {
@@ -4548,6 +4549,7 @@ public class CardFactory implements NewConstants {
             };
             card.addComesIntoPlayCommand(intoPlay);
         }//end if
+        */
         
         if (card.getKeyword().contains("When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library."))
         {
