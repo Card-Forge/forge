@@ -1,7 +1,5 @@
 package forge;
 
-import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 
 import forge.gui.GuiUtils;

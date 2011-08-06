@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import javax.swing.JOptionPane;
 
@@ -4222,6 +4221,7 @@ public class CardFactory implements NewConstants {
         	final int count = Integer.parseInt(card.getKeyword().get(bloodthirst).split(" ")[1]);
         	
         	card.addComesIntoPlayCommand(new Command() {
+				private static final long serialVersionUID = -1849308549161972508L;
 
 				public void execute() {
 					if(card.getController().getOpponent().getAssignedDamage() > 0)

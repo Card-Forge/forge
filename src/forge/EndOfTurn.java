@@ -1,9 +1,5 @@
 package forge;
 
-import java.util.HashMap;
-
-//import java.util.*;
-
 //handles "until end of turn" and "at end of turn" commands from cards
 public class EndOfTurn implements java.io.Serializable
 {

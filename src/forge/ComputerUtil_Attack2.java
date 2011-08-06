@@ -1,8 +1,6 @@
 package forge;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.Random;
 
 //doesHumanAttackAndWin() uses the global variable AllZone.ComputerPlayer

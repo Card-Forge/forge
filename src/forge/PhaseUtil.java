@@ -1,7 +1,6 @@
 package forge;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class PhaseUtil {
 	// ******* UNTAP PHASE *****
