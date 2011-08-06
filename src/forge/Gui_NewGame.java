@@ -143,7 +143,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         	millLoseCheckBox.setSelected(preferences.millingLossCondition);
         	cardOverlay.setSelected(preferences.cardOverlay);
         	CardStackOffsetAction.set(preferences.stackOffset);
-        	CardStackAction.set(preferences.maxStackSize);
+        	CardStackAction.setVal(preferences.maxStackSize);
         	CardSizesAction.set(preferences.cardSize);
 		} catch (Exception e) {
 			Log.error("Error loading preferences");
@@ -820,8 +820,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             if(ch.show()) try {
                 int index = ch.getSelectedIndex();
                 if(index == -1) return;
-                Constant.Runtime.width[0] = widths[index];
-                Constant.Runtime.height[0] = heights[index];
+                set(index);
             } catch(Exception ex) {
                 ErrorViewer.showError(ex);
             }
@@ -871,6 +870,11 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         public static void set(int index) {
         	preferences.maxStackSize = values[index];
         	Constant.Runtime.stackSize[0] = values[index];
+        }
+        
+        public static void setVal(int val) {
+        	preferences.maxStackSize = val;
+        	Constant.Runtime.stackSize[0] = val;
         }
     }
     
