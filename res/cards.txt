@@ -1,3 +1,10 @@
+Crypt of Agadeem
+no cost
+Land
+no text
+Comes into play tapped.
+tap: add B
+
 Traumatic Visions
 3 U U
 Instant

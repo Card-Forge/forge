@@ -2663,6 +2663,49 @@ class CardFactory_Lands {
             card.addSpellAbility(ability);
          }
          //*************** END ************ END **************************
+ 
+	     //*************** START *********** START **************************
+	       if (cardName.equals("Crypt of Agadeem"))
+	       {
+	          final SpellAbility ability = new Ability_Tap(card, "2")
+	          {
+				private static final long serialVersionUID = -3561865824450791583L;
+				public void resolve()
+	             {
+	                /*CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+	                list = list.getName("Mana Pool");*/
+	                Card mp = AllZone.ManaPool;//list.getCard(0);
+	                
+	                PlayerZone Grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+	                CardList evildead = new CardList();
+	                evildead.addAll(Grave.getCards());
+	                evildead = evildead.filter(new CardListFilter(){
+	                    public boolean addCard(Card c) {
+	                       return (c.isCreature() && CardUtil.getColors(c).contains(Constant.Color.Black));
+	                    }
+	                 });
+	                
+	                
+	                for(int i=0;i<evildead.size();i++)
+	                {
+	               	 mp.addExtrinsicKeyword("ManaPool:B");
+	                }
+	             }
+	             public boolean canPlayAI()
+	             {
+	                return false;
+	             }
+	          };
+	          
+	          ability.setDescription("2, tap: Add B to your mana pool for each for each black creature card in your graveyard.");
+	          ability.setStackDescription(cardName + " adds B to your mana pool for each black creature card in your graveyard.");
+	          //card.clearSpellAbility();
+	          //card.setText(card.getText() +  ability.toString());
+	          card.addSpellAbility(ability);
+
+	          return card;
+	       }//*************** END ************ END **************************
+
          
 		return card;
 	}
