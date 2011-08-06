@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact
 Text:no text
 A:AB$DealDamage | Cost$ T Sac<1/Creature> | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZone$ Battlefield | Optional$ True | Execute$ TrigUntap | TriggerDescription$ Whenever a creature enters the battlefield, you may untap CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZones$ Battlefield | Optional$ True | Execute$ TrigUntap | TriggerDescription$ Whenever a creature enters the battlefield, you may untap CARDNAME.
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

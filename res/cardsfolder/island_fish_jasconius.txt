@@ -6,7 +6,7 @@ PT:6/8
 K:CARDNAME can't attack unless defending player controls an Island.
 K:CARDNAME doesn't untap during your untap step.
 K:When you control no Islands, sacrifice CARDNAME.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZone$ Battlefield | Optional$ True | Execute$ TrigUntap | TriggerDescription$ At the beginning of your upkeep, you may pay U U U. If you do, untap CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Optional$ True | Execute$ TrigUntap | TriggerDescription$ At the beginning of your upkeep, you may pay U U U. If you do, untap CARDNAME.
 SVar:TrigUntap:AB$Untap | Cost$ U U U | Defined$ Self
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/island_fish_jasconius.jpg
