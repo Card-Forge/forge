@@ -1,0 +1,15 @@
+Name:Blessing of the Nephilim
+ManaCost:W
+Types:Enchantment Aura
+Text:Enchanted creature gets +1/+1 for each of its colors.
+K:Enchant creature
+K:enPump:+0/+0
+K:stPumpEnchanted:Creature.White:1/1:No Condition:no text
+K:stPumpEnchanted:Creature.Blue:1/1:No Condition:no text
+K:stPumpEnchanted:Creature.Black:1/1:No Condition:no text
+K:stPumpEnchanted:Creature.Red:1/1:No Condition:no text
+K:stPumpEnchanted:Creature.Green:1/1:No Condition:no text
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blessing_of_the_nephilim.jpg
+End

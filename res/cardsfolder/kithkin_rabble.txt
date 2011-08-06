@@ -4,6 +4,7 @@ Types:Creature Kithkin
 Text:Kithkin Rabble's power and toughness are each equal to the number of white permanents you control.
 PT:1/1
 K:Vigilance
+SVar:BuffedBy:Permanent.White
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kithkin_rabble.jpg
 End

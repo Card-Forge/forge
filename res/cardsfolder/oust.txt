@@ -2,6 +2,7 @@ Name:Oust
 ManaCost:W
 Types:Sorcery
 Text:Put target creature into its owner's library second from the top. Its controller gains 3 life.
+SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oust.jpg
 End

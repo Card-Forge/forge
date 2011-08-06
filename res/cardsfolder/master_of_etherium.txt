@@ -4,6 +4,7 @@ Types:Artifact Creature Vedalken Wizard
 Text:Master of Etherium's power and toughness are each equal to the number of artifacts you control.\r\nOther artifact creatures you control get +1/+1.
 PT:1/1
 SVar:PlayMain1:TRUE
+SVar:BuffedBy:Artifact
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_etherium.jpg
 End

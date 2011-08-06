@@ -5,6 +5,7 @@ Text:no text
 PT:2/2
 K:Persist
 K:WheneverKeyword:EntersBattleField:Self:Play:Damage/Power:InputType - CreatureORPlayer:ASAP:No_Condition:SingleTarget:When Murderous Redcap enters the battlefield, it deals damage equal to its power to target creature or player.
+SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murderous_redcap.jpg
 End

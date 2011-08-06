@@ -4,6 +4,7 @@ Types:Creature Elf
 Text:Drove of Elves's power and toughness are each equal to the number of green permanents you control.
 PT:1/1
 K:CARDNAME can't be the target of spells or abilities your opponents control.
+SVar:BuffedBy:Permanent.Green
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drove_of_elves.jpg
 End

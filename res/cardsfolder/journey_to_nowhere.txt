@@ -2,6 +2,7 @@ Name:Journey to Nowhere
 ManaCost:1 W
 Types:Enchantment
 Text:When Journey to Nowhere enters the battlefield, exile target creature.\r\nWhen Journey to Nowhere leaves the battlefield, return the exiled card to the battlefield under its owner's control.
+SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/journey_to_nowhere.jpg
 End

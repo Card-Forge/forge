@@ -1,0 +1,9 @@
+Name:Might Weaver
+ManaCost:1 G
+Types:Creature Human Wizard
+Text:no text
+PT:2/1
+A:AB$Pump|Cost$2|ValidTgts$Creature.Red,Creature.White|KW$Trample|SpellDescription$Target red or white creature gains trample until end of turn.|TgtPrompt$Select target red or white creature.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/might_weaver.jpg
+End
