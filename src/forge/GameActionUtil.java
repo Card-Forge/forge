@@ -15262,22 +15262,6 @@ public class GameActionUtil {
 
 	}; //Svogthos, the Restless Tomb
 
-	public static Command Deaths_Shadow               = new Command() {
-		private static final long serialVersionUID = 6025078590277639849L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = AllZoneUtil.getCardsInPlay("Death's Shadow");
-
-			for(Card c:list) {
-				int n = 13 - c.getController().getLife();
-				c.setBaseAttack(n);
-				c.setBaseDefense(n);
-			}
-
-		}// execute()
-	};
-
 	public static Command Nightmare                   = new Command() {
 		private static final long serialVersionUID = 1987511205573387864L;
 
@@ -16782,7 +16766,6 @@ public class GameActionUtil {
 		
 		commands.put("Dakkon", Dakkon);
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
-		commands.put("Deaths_Shadow", Deaths_Shadow);
 		commands.put("Deranged_Hermit", Deranged_Hermit);
 		commands.put("Drove_of_Elves", Drove_of_Elves);
 		

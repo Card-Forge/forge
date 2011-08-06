@@ -46,7 +46,6 @@ public class StaticEffects
 		
 		cardToEffectsList.put("Dakkon Blackblade", new String[] {"Dakkon"});
 		cardToEffectsList.put("Dauntless Dourbark", new String[] {"Dauntless_Dourbark"});
-		cardToEffectsList.put("Death's Shadow", new String[] {"Deaths_Shadow"});
 		cardToEffectsList.put("Deranged Hermit", new String[] {"Deranged_Hermit"});
 		cardToEffectsList.put("Drove of Elves", new String[] {"Drove_of_Elves"});
 		
