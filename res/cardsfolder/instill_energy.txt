@@ -4,7 +4,7 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant creature
 K:enPump:0/0
-A:AB$Untap | Cost$ 0 | PlayerTurn$True | ActivationLimit$ 1 | Defined$ Enchanted | SpellDescription$ Untap enchanted creature. Activate this ability only during your turn and only once each turn.
+A:AB$ Untap | Cost$ 0 | PlayerTurn$ True | ActivationLimit$ 1 | Defined$ Enchanted | SpellDescription$ Untap enchanted creature. Activate this ability only during your turn and only once each turn.
 SVar:PlayMain1:True
 #AI can't use this effectively right now
 SVar:RemAIDeck:True
