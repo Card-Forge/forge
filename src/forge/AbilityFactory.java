@@ -473,6 +473,8 @@ public class AbilityFactory {
 		
         if (hasSpDesc)
         {
+        	if(isDb)
+        		throw new RuntimeException("AbilityFactory : getAbility -- SpellDescription on Drawback in " + hostCard.getName());
         	StringBuilder sb = new StringBuilder();
         	
         	if (mapParams.containsKey("PrecostDesc"))
