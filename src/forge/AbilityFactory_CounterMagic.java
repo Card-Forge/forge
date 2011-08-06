@@ -362,7 +362,7 @@ public class AbilityFactory_CounterMagic {
 			else if(ActionID.equals("GainLife")) {
 				if(isOptional) {
 					if(Target == AllZone.HumanPlayer) {
-						if(AllZone.Display.getChoice("Do you want to gain" + SplitActionParams[0] + "life?","Yes","No").equals("Yes")) {
+						if(GameActionUtil.showYesNoDialog(srcSA.getSourceCard(), "Do you want to gain" + SplitActionParams[0] + "life?")) {
 							Target.gainLife(Integer.parseInt(SplitActionParams[0]), srcSA.getSourceCard());
 						}
 					}
@@ -379,7 +379,7 @@ public class AbilityFactory_CounterMagic {
 				if(isOptional) {
 					System.out.println(Target);
 					if(Target == AllZone.HumanPlayer) {
-						if(AllZone.Display.getChoice("Do you want to reveal your hand?","Yes","No").equals("Yes")) {
+						if(GameActionUtil.showYesNoDialog(srcSA.getSourceCard(), "Do you want to reveal your hand?")) {
 							//Does nothing now, of course, but sometime in the future the AI may be able to remember cards revealed and prioritize discard spells accordingly.
 						}
 					}
@@ -401,7 +401,7 @@ public class AbilityFactory_CounterMagic {
 			else if(ActionID.equals("RearrangeTopOfLibrary")) {
 				if(isOptional) {
 					if(Target == AllZone.HumanPlayer) {
-						if(AllZone.Display.getChoice("Do you want to rearrange the top " + SplitActionParams[0] + " cards of your library?","Yes","No").equals("Yes")) {
+						if(GameActionUtil.showYesNoDialog(srcSA.getSourceCard(), "Do you want to rearrange the top " + SplitActionParams[0] + " cards of your library?")) {
 							AllZoneUtil.rearrangeTopOfLibrary(Target, Integer.parseInt(SplitActionParams[0]), false);
 						}
 					}

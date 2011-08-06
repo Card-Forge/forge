@@ -338,19 +338,15 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                     @Override
                     public void resolve() {
                         if(crd.getController().equals(AllZone.HumanPlayer)) {
-                            String[] choices = {"Yes", "No"};
-                            
-                            Object q = null;
-                            
-                            q = AllZone.Display.getChoiceOptional("Attach " + crd + " to " + creat + "?", choices);
-                            if(q == null || q.equals("No")) ;
-                            else if(AllZone.GameAction.isCardInZone(crd, graveZone)
-                                    && AllZone.GameAction.isCardInPlay(creat) && creat.isCreature()
-                                    && creat.getNetAttack() == 1 && creat.getNetDefense() == 1) {
-                                graveZone.remove(crd);
-                                playZone.add(crd);
-                                
-                                crd.equipCard(creat);
+                            if(GameActionUtil.showYesNoDialog(crd, "Attach " + crd + " to " + creat + "?")) {
+                            	if(AllZone.GameAction.isCardInZone(crd, graveZone)
+                                        && AllZone.GameAction.isCardInPlay(creat) && creat.isCreature()
+                                        && creat.getNetAttack() == 1 && creat.getNetDefense() == 1) {
+                                    graveZone.remove(crd);
+                                    playZone.add(crd);
+                                    
+                                    crd.equipCard(creat);
+                                }
                             }
                             
                         } else //computer

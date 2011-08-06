@@ -385,13 +385,10 @@ public class Phase extends MyObservable
             final Card crd = vaults.get(0);
 
             if(turn.equals(AllZone.HumanPlayer)) {
-                String[] choices = {"Yes", "No"};
-                Object q = null;
-                q = AllZone.Display.getChoiceOptional("Untap " + crd + "?", choices);
-                if("Yes".equals(q)) {
-                    crd.untap();
-                    turn = extraTurns.isEmpty() ?  turn.getOpponent() : extraTurns.pop();
-                }
+            	if(GameActionUtil.showYesNoDialog(crd, "Untap " + crd + "?")) {
+            		crd.untap();
+            		turn = extraTurns.isEmpty() ?  turn.getOpponent() : extraTurns.pop();
+            	}
             }
             else{
             	// TODO: Should AI skip his turn for time vault?
