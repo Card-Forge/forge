@@ -82,7 +82,6 @@ class CardFactory_Equipment {
                 }//getCreature()
             };//equip ability
             
-
             Command onEquip = new Command() {
                 private static final long serialVersionUID = -1783065127683640831L;
                 
@@ -95,7 +94,6 @@ class CardFactory_Equipment {
                 }//execute()
             };//Command
             
-
             Command onUnEquip = new Command() {
                 
                 private static final long serialVersionUID = -754739553859502626L;
@@ -180,7 +178,9 @@ class CardFactory_Equipment {
                 
                 @Override
                 public boolean canPlay() {
-                    return (getSourceCard().isTapped() && !getSourceCard().hasSickness() && super.canPlay());
+                    return (getSourceCard().isTapped() 
+                    		&& !getSourceCard().hasSickness() 
+                    		&& super.canPlay());
                 }
             };//equiped creature's ability
             untapboost.makeUntapAbility();
@@ -191,8 +191,14 @@ class CardFactory_Equipment {
                 public void execute() {
                     if(card.isEquipping()) {
                         Card crd = card.getEquipping().get(0);
-                        untapboost.setDescription("3, Untap: " + crd + " gets +2/+2 until end of turn");
-                        untapboost.setStackDescription(crd + " - +2/+2 until EOT");
+                        
+                        StringBuilder sbDesc = new StringBuilder();
+                        sbDesc.append("3, Untap: ").append(crd).append(" gets +2/+2 until end of turn");
+                        untapboost.setDescription(sbDesc.toString());
+                        
+                        StringBuilder sbStack = new StringBuilder();
+                        sbStack.append(crd).append(" - +2/+2 until EOT");
+                        untapboost.setStackDescription(sbStack.toString());
                         
                         crd.addSpellAbility(untapboost);
                     }
@@ -359,7 +365,6 @@ class CardFactory_Equipment {
         		}//getCreature()
         	};//equip ability
 
-
         	Command onEquip = new Command() {
 				private static final long serialVersionUID = -5356474407155702171L;
 
@@ -372,7 +377,6 @@ class CardFactory_Equipment {
         			}
         		}//execute()
         	};//Command
-
 
         	Command onUnEquip = new Command() {
 				private static final long serialVersionUID = 5196262972986079207L;
@@ -452,7 +456,6 @@ class CardFactory_Equipment {
                 	return list;
                 }//getCreature()
             };// equip ability
-
             
             Command onEquip = new Command() {
 				private static final long serialVersionUID = -5278473287541239581L;
@@ -562,7 +565,6 @@ class CardFactory_Equipment {
                 }//execute()
             };//Command
             
-
             Command onUnEquip = new Command() {
                 
                 private static final long serialVersionUID = -754739553859502626L;
@@ -575,7 +577,6 @@ class CardFactory_Equipment {
                         crd.removeExtrinsicKeyword("Protection from red");
                         crd.removeExtrinsicKeyword("Protection from blue");
                     }
-                    
                 }//execute()
             };//Command
             
@@ -767,7 +768,6 @@ class CardFactory_Equipment {
                 }//execute()
             };//Command
             
-
             Command onUnEquip = new Command() {
                 
 				private static final long serialVersionUID = 6204739827947031589L;
@@ -780,7 +780,6 @@ class CardFactory_Equipment {
                         crd.removeExtrinsicKeyword("Protection from green");
                         crd.removeExtrinsicKeyword("Protection from blue");
                     }
-                    
                 }//execute()
             };//Command
             
