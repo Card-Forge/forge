@@ -1,3 +1,51 @@
+Blasting Station
+3
+Artifact
+no text
+abDamageTgtCP T Sac-Creature:1
+WheneverKeyword:EntersBattleField:Type/Creature:Play:UntapPermanent:Self:ASAP:Yes_No:No Special Condition:Whenever a creature enters the battlefield, you may untap Blasting Station.
+
+Blood Rites
+3 R R
+Enchantment
+no text
+abDamageTgtCP 1 R Sac-Creature:2
+
+Keldon Necropolis
+no cost
+Legendary Land
+no text
+tap: add 1
+abDamageTgtCP 4 R T Sac-Creature:2
+
+Orcish Bloodpainter
+2 R
+Creature Orc Shaman
+no text
+2/1
+abDamageTgtCP T Sac-Creature:2
+
+Orcish Mechanics
+2 R
+Creature Orc
+no text
+1/1
+abDamageTgtCP T Sac-Artifact:2
+
+Scorched Rusalka
+R
+Creature Spirit
+no text
+1/1
+abDamageTgtP R Sac-Creature:1
+
+Tar Pitcher
+3 R
+Creature Goblin Shaman
+no text
+2/2
+abDamageTgtCP T Sac-Goblin:2
+
 Vitaspore Thallid
 1 G
 Creature Fungus
