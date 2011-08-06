@@ -388,7 +388,7 @@ public class CardList implements Iterable<Card> {
     	return this.filter(new CardListFilter() {
             public boolean addCard(Card c) {
             	return (c.isCreature() && (c.getSVar("EquipMe").equals("Multiple") 
-        	    		|| (c.getSVar("EquipMe").equals("Once") && !c.isEnchanted())));
+        	    		|| (c.getSVar("EquipMe").equals("Once") && !c.isEquipped())));
             }
         });
     }
