@@ -6,7 +6,7 @@ T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigSac | T
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | SacValid$ Creature.nonZombie | Defined$ TriggeredPlayer
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Creature | PresentCompare$ EQ0 | Execute$ TrigSacSelf | TriggerDescription$ At the beginning of the end step, if no creatures are on the battlefield, sacrifice CARDNAME.
 SVar:TrigSacSelf:AB$Sacrifice | Cost$ 0 | Defined$ Self
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/call_to_the_grave.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/58.jpg
