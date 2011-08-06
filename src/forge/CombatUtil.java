@@ -455,11 +455,24 @@ public class CombatUtil {
             temp = list.getType("Swamp");
             if(temp.isEmpty()) return false;
         }
+        if(c.getKeyword().contains("CARDNAME can't attack unless defending player controls a Mountain.")) {
+            temp = list.getType("Montain");
+            if(temp.isEmpty()) return false;
+        }
+        if(c.getKeyword().contains("CARDNAME can't attack unless defending player controls a snow land.")) {
+            temp = list.filter(new CardListFilter() {
+            	public boolean addCard(Card c) {
+            		return c.isLand() && c.isType("Snow");
+            	}
+            });
+            if(temp.isEmpty()) return false;
+        }
         
         if(c.getKeyword().contains("CARDNAME can't attack unless defending player controls a blue permanent.")) {
             temp = list.getColor(Constant.Color.Blue);
             if(temp.isEmpty()) return false;
         }
+        
     	
         if(c.getName().equals("Harbor Serpent")) {
         	CardList allislands = AllZoneUtil.getTypeInPlay("Island");
