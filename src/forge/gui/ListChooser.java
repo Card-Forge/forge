@@ -119,7 +119,6 @@ public class ListChooser<T> {
         this.maxChoices = maxChoices;
         this.list = unmodifiableList(list);
         jList = new JList(new ChooserListModel());
-        jList.getSelectionModel().addListSelectionListener(null);
         ok = new CloseAction(OK_OPTION, "OK");
         ok.setEnabled(minChoices == 0);
         cancel = new CloseAction(CANCEL_OPTION, "Cancel");
@@ -132,6 +131,10 @@ public class ListChooser<T> {
                 null, options, options[0]);
         jList.getSelectionModel().addListSelectionListener(new SelListener());
         jList.addMouseListener(new DblListener());
+    }
+    
+    public List<T> getChoices() {
+        return list;
     }
     
     /**
@@ -158,19 +161,6 @@ public class ListChooser<T> {
             if(value != OK_OPTION) jList.clearSelection();
             //can't stop closing by ESC, so repeat if cancelled
         } while(minChoices != 0 && value != OK_OPTION);
-        /* an assertion checks if some condition is true. if not, an AssertionError is thrown, signaling an
-         * error in the program's logic
-         * by default, assertions are disabled at runtime, meaning the boolean expression is not evaluated.
-         * that is why you should NEVER do critical operations in the assert statement.
-         * instead of
-         * 
-         * assert showConfirmDialog(...) == OK_OPTION;
-         * 
-         * write
-         * 
-         * int value = showConfirmDialog(...);
-         * assert value == OK_OPTION;
-         */
         //this assert checks if we really don't return on a cancel if input is mandatory
         assert minChoices == 0 || value == OK_OPTION;
         called = true;

@@ -9,6 +9,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Vector;
@@ -2877,7 +2878,6 @@ public class CardFactory implements NewConstants {
                     public void execute() {
                         
                         PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                        CardList creatsToSac = new CardList();
                         CardList creats = new CardList(play.getCards());
                         creats = creats.filter(new CardListFilter() {
                             public boolean addCard(Card c) {
@@ -2888,23 +2888,12 @@ public class CardFactory implements NewConstants {
                         //System.out.println("Creats size: " + creats.size());
                         
                         if(card.getController().equals(Constant.Player.Human)) {
-                            Object o = null;
-                            int creatsSize = creats.size();
+                            List<Card> selection = AllZone.Display.getChoices("Select creature to sacrifice",
+                                    creats.toArray());
                             
-                            for(int k = 0; k < creatsSize; k++) {
-                                o = AllZone.Display.getChoiceOptional("Select creature to sacrifice",
-                                        creats.toArray());
-                                
-                                if(o == null) break;
-                                
-                                Card c = (Card) o;
-                                creatsToSac.add(c);
-                                creats.remove(c);
-                            }
-                            
-                            numCreatures[0] = creatsToSac.size();
-                            for(int m = 0; m < creatsToSac.size(); m++) {
-                                AllZone.GameAction.sacrifice(creatsToSac.get(m));
+                            numCreatures[0] = selection.size();
+                            for(int m = 0; m < selection.size(); m++) {
+                                AllZone.GameAction.sacrifice(selection.get(m));
                             }
                             
                         }//human

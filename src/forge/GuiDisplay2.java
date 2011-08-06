@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -198,34 +199,42 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
     }
     
     //returned Object could be null
-    public <T> T getChoiceOptional(String message, T[] choices) {
-        ListChooser<T> c = new ListChooser<T>(message, 0, 1, choices);
-        final JList list = c.getJList();
-        if(choices[0] instanceof Card) {
-            list.addListSelectionListener(new ListSelectionListener() {
-                public void valueChanged(ListSelectionEvent ev) {
-                    if(list.getSelectedValue() instanceof Card) setCard((Card) list.getSelectedValue());
-                }
-            });
-        }
-        if(!c.show()) return null;
-        
-        return c.getSelectedValue();
+    public <T> T getChoiceOptional(String message, T... choices) {
+        if(choices == null || choices.length == 0) return null;
+        List<T> choice = getChoices(message, 0, 1, choices);
+        return choice.isEmpty()? null:choice.get(0);
     }//getChoiceOptional()
     
     // returned Object will never be null
-    public <T> T getChoice(String message, T[] choices) {
-        ListChooser<T> c = new ListChooser<T>(message, 1, choices);
+    public <T> T getChoice(String message, T... choices) {
+        List<T> choice = getChoices(message, 1, 1, choices);
+        assert choice.size() == 1;
+        return choice.get(0);
+    }//getChoice()
+    
+    // returned Object will never be null
+    public <T> List<T> getChoicesOptional(String message, T... choices) {
+        return getChoices(message, 0, choices.length, choices);
+    }//getChoice()
+    
+    // returned Object will never be null
+    public <T> List<T> getChoices(String message, T... choices) {
+        return getChoices(message, 1, choices.length, choices);
+    }//getChoice()
+    
+    // returned Object will never be null
+    public <T> List<T> getChoices(String message, int min, int max, T... choices) {
+        ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
         final JList list = c.getJList();
-        if(choices[0] instanceof Card) {
-            list.addListSelectionListener(new ListSelectionListener() {
-                public void valueChanged(ListSelectionEvent ev) {
-                    if(list.getSelectedValue() instanceof Card) setCard((Card) list.getSelectedValue());
+        list.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent ev) {
+                if(list.getSelectedValue() instanceof Card) {
+                    setCard((Card) list.getSelectedValue());
                 }
-            });
-        }
+            }
+        });
         c.show();
-        return c.getSelectedValue();
+        return c.getSelectedValues();
     }//getChoice()
     
     private void addListeners() {

@@ -72,11 +72,10 @@ public class ImageCache implements NewConstants {
                         if(key.endsWith(TOKEN)) {
                             key = key.substring(0, key.length() - TOKEN.length());
                             path = ForgeProps.getFile(IMAGE_TOKEN);
-                            System.out.println("path + key: "+ path + " " + key);
                         } else path = ForgeProps.getFile(IMAGE_BASE);
                         File file = new File(path, key + ".jpg");
                         if(!file.exists()) {
-                            System.out.println("File not found, no image created");
+                            System.out.println("File not found, no image created: " + file);
                             return null;
                         }
                         BufferedImage image = ImageUtil.getImage(file);
@@ -164,8 +163,9 @@ public class ImageCache implements NewConstants {
     private static String getKey(Card card) {
         String key = card.getImageName();
         if(card.isBasicLand() && card.getRandomPicture() != 0) key += card.getRandomPicture();
+        key = GuiDisplayUtil.cleanString(key);
         if(card.isToken()) key += TOKEN;
-        return GuiDisplayUtil.cleanString(key);
+        return key;
     }
     
     /**
@@ -180,18 +180,18 @@ public class ImageCache implements NewConstants {
         if(srcWidth == tgtWidth && srcHeight == tgtHeight) return original;
         
 
-        /*AffineTransform at = new AffineTransform();
-        at.scale((double) tgtWidth / srcWidth, (double) tgtHeight / srcHeight);
-//        at.translate(srcHeight, 0);
-//        at.rotate(PI / 2);
-        double scale = min((double) tgtWidth / srcWidth, (double) tgtHeight / srcHeight);
-        
-        BufferedImage image = new BufferedImage(tgtWidth, tgtHeight, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = (Graphics2D) image.getGraphics();
-        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-        g2d.drawImage(scale < 0.5? ImageUtil.getBlurredImage(original, 6, 1.0f):original, at, null);
-        g2d.dispose();*/
-        ResampleOp  resampleOp = new ResampleOp (tgtWidth, tgtHeight); //defaults to Lanczos3
+//        AffineTransform at = new AffineTransform();
+//        at.scale((double) tgtWidth / srcWidth, (double) tgtHeight / srcHeight);
+////        at.translate(srcHeight, 0);
+////        at.rotate(PI / 2);
+//        double scale = min((double) tgtWidth / srcWidth, (double) tgtHeight / srcHeight);
+//        
+//        BufferedImage image = new BufferedImage(tgtWidth, tgtHeight, BufferedImage.TYPE_INT_ARGB);
+//        Graphics2D g2d = (Graphics2D) image.getGraphics();
+//        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+//        g2d.drawImage(scale < 0.5? ImageUtil.getBlurredImage(original, 6, 1.0f):original, at, null);
+//        g2d.dispose();
+        ResampleOp resampleOp = new ResampleOp(tgtWidth, tgtHeight); //defaults to Lanczos3
         BufferedImage image = resampleOp.filter(original, null);
         return image;
     }
@@ -205,19 +205,19 @@ public class ImageCache implements NewConstants {
         int tgtWidth = Constant.Runtime.width[0];
         int tgtHeight = Constant.Runtime.height[0];
         
-        /*AffineTransform at = new AffineTransform();
-        at.scale((double) tgtWidth / srcWidth, (double) tgtHeight / srcHeight);
-        at.translate(srcHeight, 0);
-        at.rotate(Math.PI / 2);
-        
-        double scale = min((double) tgtWidth / srcWidth, (double) tgtHeight / srcHeight);
-        
-        BufferedImage image = new BufferedImage(tgtHeight, tgtWidth, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = (Graphics2D) image.getGraphics();
-        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-        g2d.drawImage(scale < 0.5? ImageUtil.getBlurredImage(original, 6, 1.0f):original, at, null);
-        g2d.dispose();*/
-        ResampleOp  resampleOp = new ResampleOp (tgtWidth, tgtHeight); //defaults to Lanczos3
+//        AffineTransform at = new AffineTransform();
+//        at.scale((double) tgtWidth / srcWidth, (double) tgtHeight / srcHeight);
+//        at.translate(srcHeight, 0);
+//        at.rotate(Math.PI / 2);
+//        
+//        double scale = min((double) tgtWidth / srcWidth, (double) tgtHeight / srcHeight);
+//        
+//        BufferedImage image = new BufferedImage(tgtHeight, tgtWidth, BufferedImage.TYPE_INT_ARGB);
+//        Graphics2D g2d = (Graphics2D) image.getGraphics();
+//        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+//        g2d.drawImage(scale < 0.5? ImageUtil.getBlurredImage(original, 6, 1.0f):original, at, null);
+//        g2d.dispose();
+        ResampleOp resampleOp = new ResampleOp(tgtWidth, tgtHeight); //defaults to Lanczos3
         BufferedImage image = resampleOp.filter(original, null);
         return image;
     }
@@ -228,16 +228,17 @@ public class ImageCache implements NewConstants {
     private static BufferedImage getFullSizeImage(BufferedImage original, double scale) {
         if(scale == 1) return original;
         
-        /*AffineTransform at = new AffineTransform();
-        at.scale(scale, scale);
-        
-        BufferedImage image = new BufferedImage((int) (original.getWidth() * scale),
-                (int) (original.getHeight() * scale), BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = (Graphics2D) image.getGraphics();
-        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-        g2d.drawImage(scale < 0.5? ImageUtil.getBlurredImage(original, 6, 1.0f):original, at, null);
-        g2d.dispose();*/
-        ResampleOp  resampleOp = new ResampleOp ((int) (original.getWidth() * scale), (int) (original.getHeight() * scale)); //defaults to Lanczos3
+//        AffineTransform at = new AffineTransform();
+//        at.scale(scale, scale);
+//        
+//        BufferedImage image = new BufferedImage((int) (original.getWidth() * scale),
+//                (int) (original.getHeight() * scale), BufferedImage.TYPE_INT_ARGB);
+//        Graphics2D g2d = (Graphics2D) image.getGraphics();
+//        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+//        g2d.drawImage(scale < 0.5? ImageUtil.getBlurredImage(original, 6, 1.0f):original, at, null);
+//        g2d.dispose();
+        ResampleOp resampleOp = new ResampleOp((int) (original.getWidth() * scale),
+                (int) (original.getHeight() * scale)); //defaults to Lanczos3
         BufferedImage image = resampleOp.filter(original, null);
         return image;
     }

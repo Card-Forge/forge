@@ -113,10 +113,11 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         StringBuilder area = new StringBuilder();
         
         //Token
-        if(card.isToken()) area.append("Token\n");
+        if(card.isToken()) area.append("Token");
         
         if(!faceDown) {
             //card text
+            if(area.length() != 0) area.append("\n");
             area.append(card.getText());
         }
         
@@ -124,14 +125,15 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         Counters[] counters = Counters.values();
         for(Counters counter:counters) {
             if(card.getCounters(counter) != 0) {
+                if(area.length() != 0) area.append("\n");
                 area.append(counter.getName() + " counters: ");
                 area.append(card.getCounters(counter));
-                area.append("\n");
             }
         }
         
         //chosen type
         if(card.getChosenType() != "") {
+            if(area.length() != 0) area.append("\n");
             area.append("(chosen type: ");
             area.append(card.getChosenType());
             area.append(")");
@@ -139,6 +141,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         
         //chosen color
         if(card.getChosenColor() != "") {
+            if(area.length() != 0) area.append("\n");
             area.append("(chosen color: ");
             area.append(card.getChosenColor());
             area.append(")");
@@ -146,6 +149,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         
         //named card
         if(card.getNamedCard() != "") {
+            if(area.length() != 0) area.append("\n");
             area.append("(named card: ");
             area.append(card.getNamedCard());
             area.append(")");
@@ -153,6 +157,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         
         //equipping
         if(card.getEquipping().size() > 0) {
+            if(area.length() != 0) area.append("\n");
             area.append("=Equipping ");
             area.append(card.getEquipping().get(0));
             area.append("=");
@@ -160,6 +165,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         
         //equipped by
         if(card.getEquippedBy().size() > 0) {
+            if(area.length() != 0) area.append("\n");
             area.append("=Equipped by ");
             for(Iterator<Card> it = card.getEquippedBy().iterator(); it.hasNext();) {
                 area.append(it.next());
@@ -170,6 +176,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         
         //enchanting
         if(card.getEnchanting().size() > 0) {
+            if(area.length() != 0) area.append("\n");
             area.append("*Enchanting ");
             area.append(card.getEnchanting().get(0));
             area.append("*");
@@ -186,7 +193,10 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         }
         
         //uncastable
-        if(card.isUnCastable()) area.append("This card can't be cast.");
+        if(card.isUnCastable()) {
+            if(area.length() != 0) area.append("\n");
+            area.append("This card can't be cast.");
+        }
         
         cdArea.setText(area.toString());
     }
