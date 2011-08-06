@@ -6857,7 +6857,7 @@ public class CardFactory implements NewConstants {
       		};//SpellAbility
 
       		card.addSpellAbility(ability);
-      		ability.setDescription("1, Sacrifice Bottle of Suleiman: Flip a coin. Win: Put 5/5 Djinn in play. Lose: Does 5 damage to you.");
+      		ability.setDescription(abCost+"Flip a coin. If you lose the flip, Bottle of Suleiman deals 5 damage to you. If you win the flip, put a 5/5 colorless Djinn artifact creature token with flying onto the battlefield.");
       		ability.setStackDescription("Bottle of Suleiman - flip a coin");
       	}//*************** END ************ END **************************
         
@@ -7278,7 +7278,7 @@ public class CardFactory implements NewConstants {
 				public void execute() {
 					
 					StringBuilder sb = new StringBuilder();
-					sb.append("When ").append(card.getName()).append(" comes into play, tap all Legendary creatures.");
+					sb.append("When ").append(card.getName()).append(" enters the battlefield, tap all Legendary creatures.");
 					ability.setStackDescription(sb.toString());
         			
         			AllZone.Stack.add(ability);
@@ -7331,16 +7331,12 @@ public class CardFactory implements NewConstants {
 
         	final CommandReturn getPerm = new CommandReturn() {
         		public Object execute() {
-        			//get all creatures
-        			CardList tempList = new CardList();
-        			tempList.addAll(AllZone.Human_Battlefield.getCards());
-        			tempList.addAll(AllZone.Computer_Battlefield.getCards());
+        			CardList tempList = AllZoneUtil.getCreaturesInPlay();
 
         			CardList list = new CardList();
 
         			for(int i = 0; i < tempList.size(); i++) {
-        				if(tempList.get(i).isPermanent() && tempList.get(i).isCreature()
-        						&& CardFactoryUtil.canTarget(card, tempList.get(i))) list.add(tempList.get(i));
+        				if(CardFactoryUtil.canTarget(card, tempList.get(i))) list.add(tempList.get(i));
         			}//for
 
         			//remove "this card"
@@ -7370,7 +7366,7 @@ public class CardFactory implements NewConstants {
         			CardList choice = (CardList) getPerm.execute();
 
         			stopSetNext(CardFactoryUtil.input_targetSpecific(abilityComes, choice,
-        					"Select target creature to remove from the game", true, false));
+        					"Select target creature to exile", true, false));
         			ButtonUtil.disableAll();//to disable the Cancel button
         		}//showMessage
         	};//inputComes
@@ -7543,6 +7539,7 @@ public class CardFactory implements NewConstants {
         	sb.append(cardName).append(" - Exchange life totals with target opponent.");
         	ability.setStackDescription(sb.toString());
         	
+        	ability.setDescription(abCost+"Exchange life totals with target opponent. Activate this ability only during your upkeep.");
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
@@ -7808,23 +7805,6 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(mana);
         }//*************** END ************ END **************************
         
-        //*************** START ************ START **************************
-        else if(cardName.equals("Ring of Renewal")) {
-        	Ability_Cost abCost = new Ability_Cost("5 T", cardName, true);
-            final Ability_Activated draw = new Ability_Activated(card, abCost, null) {
-				private static final long serialVersionUID = 7825072388166910728L;
-                @Override
-                public void resolve() {
-                    card.getController().discardRandom(this);
-                    card.getController().drawCards(2);
-                }
-            };
-            StringBuilder sb = new StringBuilder();
-            sb.append(cardName).append(" - discard 1 at random, then draw 2 cards.");
-            draw.setStackDescription(sb.toString());
-            
-            card.addSpellAbility(draw);
-        }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
         else if(cardName.equals("Sorcerer's Strongbox")) {
@@ -7838,24 +7818,12 @@ public class CardFactory implements NewConstants {
 
         		@Override
         		public void resolve() {
-        			final Player player = AllZone.Phase.getPlayerTurn();
-        			String choice = "";
-        			String choices[] = {"heads","tails"};
-        			boolean flip = MyRandom.percentTrue(50);
-        			if(card.getController().equals(AllZone.HumanPlayer)) {
-        				choice = (String) AllZone.Display.getChoice("Choose one", choices);
+        			if( GameActionUtil.flipACoin(card.getController(), card)) {
+        				AllZone.GameAction.sacrifice(card);
+        				card.getController().drawCards(3);
         			}
         			else {
-        				choice = choices[MyRandom.random.nextInt(2)];
-        			}
-
-        			if( (flip == true && choice.equals("heads")) ||   (flip == false && choice.equals("tails"))) {
-        				JOptionPane.showMessageDialog(null, card.getName()+" - Win! - "+player+" draws 3 cards.", card.getName(), JOptionPane.PLAIN_MESSAGE);
-        				AllZone.GameAction.sacrifice(card);
-        				player.drawCards(3);
-        			}
-        			else{
-        				JOptionPane.showMessageDialog(null, card.getName()+" - Lose.", card.getName(), JOptionPane.PLAIN_MESSAGE);
+        				//do nothing
         			}
         		}
         	};//SpellAbility
@@ -7910,7 +7878,7 @@ public class CardFactory implements NewConstants {
         	 * each player.
         	 */
         	Ability_Cost abCost = new Ability_Cost("1 T Sac<1/CARDNAME>", cardName, true);
-        	final Ability_Activated spell = new Ability_Activated(card, abCost, null) {
+        	final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
         		private static final long serialVersionUID = 7550743617522146304L;
         		
         		@Override
@@ -7948,9 +7916,11 @@ public class CardFactory implements NewConstants {
 
         	StringBuilder sbStack = new StringBuilder();
         	sbStack.append(card).append(" - deals X damage to each creature and each player.");
-        	spell.setStackDescription(sbStack.toString());
+        	ability.setStackDescription(sbStack.toString());
+        	
+        	ability.setDescription(abCost+cardName+" deals damage equal to the number of time counters on it to each creature and each player.");
 
-        	card.addSpellAbility(spell);
+        	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
