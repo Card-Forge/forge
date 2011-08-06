@@ -16,6 +16,14 @@ import javax.swing.JOptionPane;
 
 public class GameAction {
     //  private StaticEffects staticEffects = new StaticEffects();
+	
+	//private CardList          humanList;
+    //private CardList          computerList;
+    
+    //private int               humanLife;
+    //private int               computerLife;
+    
+    //private boolean           fantasyQuest     = false;
     
     //returns null if playes does not have a Planeswalker
     public Card getPlaneswalker(String player) {
@@ -416,7 +424,11 @@ public class GameAction {
         
         if(stop) {
             frame.dispose();
-            new Gui_WinLose();
+            if (!Constant.Quest.fantasyQuest[0])
+            	new Gui_WinLose();
+            else
+            	new Gui_WinLose(Constant.Quest.humanList[0], Constant.Quest.computerList[0],
+            			Constant.Quest.humanLife[0], Constant.Quest.computerLife[0]);
             return;
         }
         destroyPlaneswalkers();
@@ -458,7 +470,11 @@ public class GameAction {
         
         if(stop) {
             frame.dispose();
-            new Gui_WinLose();
+            if (!Constant.Quest.fantasyQuest[0])
+            	new Gui_WinLose();
+            else
+            	new Gui_WinLose(Constant.Quest.humanList[0], Constant.Quest.computerList[0],
+            			Constant.Quest.humanLife[0], Constant.Quest.computerLife[0]);
             return;
         }
         //do this twice, sometimes creatures/permanents will survive when they shouldn't
@@ -943,27 +959,42 @@ public class GameAction {
     }
     
     //for Quest fantasy mode
-    public void newGame(Deck humanDeck, Deck computerDeck, CardList human, CardList computer, int humanLife, int computerLife)
+    public void newGame(Deck humanDeck, Deck computerDeck, CardList human, CardList computer, int humanLife, int computerLife, Quest_Assignment qa)
     {
     	this.newGame(humanDeck, computerDeck);
     	
-    	 AllZone.Computer_Life.setLife(computerLife);
-         AllZone.Human_Life.setLife(humanLife);
+    	AllZone.Computer_Life.setLife(computerLife);
+        AllZone.Human_Life.setLife(humanLife);
+        
+        if (qa != null)
+        {
+        	//human.addAll(qa.getHuman().toArray());
+        	//computer.addAll(qa.getCompy().toArray());
+        	
+        	computer.addAll(QuestUtil.getComputerCreatures(AllZone.QuestData, AllZone.QuestAssignment).toArray());
+        }
+
+        //Constant.Quest.computerList[0] = computer;
+        
+        for (Card c : human)
+        {
+        	AllZone.Human_Play.add(c);
+        	c.setSickness(true);
+        }
          
-         for (Card c : human)
-         {
-        	 AllZone.Human_Play.add(c);
-         }
-         
-         for (Card c: computer)
-         {
-        	 AllZone.Computer_Play.add(c);
-         }
+        for (Card c: computer)
+        {
+        	AllZone.Computer_Play.add(c);
+        	c.setSickness(true);
+        }
+        Constant.Quest.fantasyQuest[0] = true;
     }
+    
     
     public void newGame(Deck humanDeck, Deck computerDeck) {
 //    AllZone.Computer = new ComputerAI_Input(new ComputerAI_General());
-        
+        Constant.Quest.fantasyQuest[0] = false;
+    	
         lastPlayerToDraw = Constant.Player.Human;
         
         AllZone.GameInfo.setComputerCanPlayNumberOfLands(1);
@@ -1266,6 +1297,8 @@ public class GameAction {
             String[] ch = new String[choices.size()];
             for(int i = 0; i < choices.size(); i++) {
                 ch[i] = choices.get(i);
+                if (ch[i].contains("CARDNAME"))
+                	ch[i] = ch[i].replace("CARDNAME", c.getName());
             }
             String choice = AllZone.Display.getChoiceOptional("Choose", ch);
             
@@ -1289,7 +1322,9 @@ public class GameAction {
             */
             if(choices.length == 0) return;
             else if(choices.length == 1) sa = choices[0];
-            else sa = AllZone.Display.getChoiceOptional("Choose", choices);
+            else { 
+            	sa = AllZone.Display.getChoiceOptional("Choose", choices);
+            }
             
             if(sa == null) return;
             

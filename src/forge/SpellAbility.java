@@ -247,6 +247,8 @@ public abstract class SpellAbility {
     
     @Override
     public String toString() {
+    	if (description.contains("CARDNAME"))
+    		description = description.replace("CARDNAME", this.getSourceCard().getName());
         return description;
     }
     

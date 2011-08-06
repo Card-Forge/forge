@@ -34,6 +34,27 @@ res/pics/BookIcon.png -text svneol=unset#image/png
 res/pics/BoxIcon.png -text svneol=unset#image/png
 res/pics/GoldIcon.png -text svneol=unset#image/png
 res/pics/HeartIcon.png -text svneol=unset#image/png
+res/pics/icons/BookIcon.png -text svneol=unset#image/png
+res/pics/icons/BottlesIconSmall.png -text svneol=unset#image/png
+res/pics/icons/BoxIcon.png -text svneol=unset#image/png
+res/pics/icons/BoxIconSmall.png -text svneol=unset#image/png
+res/pics/icons/CoinIconSmall.jpg -text svneol=unset#image/jpeg
+res/pics/icons/ElixirIcon.png -text svneol=unset#image/png
+res/pics/icons/FoxIconSmall.png -text svneol=unset#image/png
+res/pics/icons/GoldIcon.png -text svneol=unset#image/png
+res/pics/icons/GoldIconLarge.png -text svneol=unset#image/png
+res/pics/icons/GoldIconSmall.png -text svneol=unset#image/png
+res/pics/icons/HeartIcon.png -text svneol=unset#image/png
+res/pics/icons/LeafIconSmall.png -text svneol=unset#image/png
+res/pics/icons/MapIcon.png -text svneol=unset#image/png
+res/pics/icons/g_0_1_plant_wall_small.jpg -text svneol=unset#image/jpeg
+res/pics/icons/g_0_2_plant_wall_small.jpg -text svneol=unset#image/jpeg
+res/pics/icons/g_0_3_plant_wall_small.jpg -text svneol=unset#image/jpeg
+res/pics/icons/g_1_1_wolf_pet_small.jpg -text svneol=unset#image/jpeg
+res/pics/icons/g_1_2_wolf_pet_small.jpg -text svneol=unset#image/jpeg
+res/pics/icons/g_2_2_wolf_pet_flanking_small.jpg -text svneol=unset#image/jpeg
+res/pics/icons/g_2_2_wolf_pet_small.jpg -text svneol=unset#image/jpeg
+res/pics/icons/notesIcon.png -text svneol=unset#image/png
 res/pics_link/card-pictures_a.txt -text svneol=native#text/plain
 res/pics_link/card-pictures_b.txt -text svneol=native#text/plain
 res/pics_link/card-pictures_c.txt -text svneol=native#text/plain
@@ -64,12 +85,118 @@ res/pics_link/card-pictures_y.txt -text svneol=native#text/plain
 res/pics_link/card-pictures_z.txt -text svneol=native#text/plain
 res/quest/all-prices.txt -text svneol=native#text/plain
 res/quest/common.txt -text svneol=native#text/plain
+res/quest/decks/Abraham[!!-~]Lincoln.dck -text
+res/quest/decks/Albert[!!-~]Einstein[!!-~]2.dck -text
+res/quest/decks/Albert[!!-~]Einstein[!!-~]3.dck -text
+res/quest/decks/Bart[!!-~]Simpson[!!-~]1.dck -text
+res/quest/decks/Bart[!!-~]Simpson[!!-~]2.dck -text
+res/quest/decks/Bart[!!-~]Simpson[!!-~]3.dck -text
+res/quest/decks/Batman.dck -text
+res/quest/decks/Bela[!!-~]Lugosi.dck -text
+res/quest/decks/Blackbeard.dck -text
+res/quest/decks/Boba[!!-~]Fett.dck -text
+res/quest/decks/Buffy[!!-~]1.dck -text
+res/quest/decks/Buffy[!!-~]2.dck -text
+res/quest/decks/Buffy[!!-~]3.dck -text
+res/quest/decks/C3PO.dck -text
+res/quest/decks/Catwoman[!!-~]1.dck -text
+res/quest/decks/Catwoman[!!-~]2.dck -text
+res/quest/decks/Comic[!!-~]Book[!!-~]Guy.dck -text
+res/quest/decks/Crocodile[!!-~]Dundee[!!-~]1.dck -text
+res/quest/decks/Crocodile[!!-~]Dundee[!!-~]2.dck -text
+res/quest/decks/Crocodile[!!-~]Dundee[!!-~]3.dck -text
+res/quest/decks/Cyclops.dck -text
+res/quest/decks/Da[!!-~]Vinci[!!-~]1.dck -text
+res/quest/decks/Da[!!-~]Vinci[!!-~]2.dck -text
+res/quest/decks/Da[!!-~]Vinci[!!-~]3.dck -text
+res/quest/decks/Darth[!!-~]Vador.dck -text
+res/quest/decks/Data.dck -text
+res/quest/decks/Doc[!!-~]Holiday[!!-~]1.dck -text
+res/quest/decks/Doc[!!-~]Holiday[!!-~]2.dck -text
+res/quest/decks/Doc[!!-~]Holiday[!!-~]3.dck -text
+res/quest/decks/Dr[!!-~]No.dck -text
+res/quest/decks/Fat[!!-~]Albert[!!-~]1.dck -text
+res/quest/decks/Fat[!!-~]Albert[!!-~]2.dck -text
+res/quest/decks/Fat[!!-~]Albert[!!-~]3.dck -text
+res/quest/decks/Frodo[!!-~]1.dck -text
+res/quest/decks/Frodo[!!-~]2.dck -text
+res/quest/decks/Frodo[!!-~]3.dck -text
+res/quest/decks/Genghis[!!-~]Khan[!!-~]1.dck -text
+res/quest/decks/Genghis[!!-~]Khan[!!-~]2.dck -text
+res/quest/decks/Genghis[!!-~]Khan[!!-~]3.dck -text
+res/quest/decks/Gold[!!-~]Finger.dck -text
+res/quest/decks/Green[!!-~]Lantern.dck -text
+res/quest/decks/Han[!!-~]Solo.dck -text
+res/quest/decks/Harry[!!-~]Potter.dck -text
+res/quest/decks/Homer[!!-~]Simpson[!!-~]1.dck -text
+res/quest/decks/Homer[!!-~]Simpson[!!-~]2.dck -text
+res/quest/decks/Homer[!!-~]Simpson[!!-~]3.dck -text
+res/quest/decks/Iceman.dck -text
+res/quest/decks/Indiana[!!-~]Jones[!!-~]1.dck -text
+res/quest/decks/Indiana[!!-~]Jones[!!-~]2.dck -text
+res/quest/decks/Indiana[!!-~]Jones[!!-~]3.dck -text
+res/quest/decks/Jabba[!!-~]the[!!-~]Hut.dck -text
+res/quest/decks/James[!!-~]Bond[!!-~]1.dck -text
+res/quest/decks/James[!!-~]Bond[!!-~]2.dck -text
+res/quest/decks/James[!!-~]Bond[!!-~]3.dck -text
+res/quest/decks/James[!!-~]T[!!-~]Kirk.dck -text
+res/quest/decks/King[!!-~]Edward[!!-~]1.dck -text
+res/quest/decks/King[!!-~]Edward[!!-~]2.dck -text
+res/quest/decks/King[!!-~]Edward[!!-~]3.dck -text
+res/quest/decks/Kojak[!!-~]1.dck -text
+res/quest/decks/Kojak[!!-~]2.dck -text
+res/quest/decks/Kojak[!!-~]3.dck -text
+res/quest/decks/Lisa[!!-~]Simpson.dck -text
+res/quest/decks/Luke[!!-~]Skywalker.dck -text
+res/quest/decks/Magneto.dck -text
+res/quest/decks/Marge[!!-~]Simpson.dck -text
+res/quest/decks/Morpheus.dck -text
+res/quest/decks/Napoleon.dck -text
+res/quest/decks/Neo.dck -text
+res/quest/decks/Newton.dck -text
+res/quest/decks/Picard.dck -text
+res/quest/decks/Pinky[!!-~]and[!!-~]the[!!-~]Brain.dck -text
+res/quest/decks/Professor[!!-~]X.dck -text
+res/quest/decks/R2-D2.dck -text
+res/quest/decks/Rocky[!!-~]1.dck -text
+res/quest/decks/Rocky[!!-~]2.dck -text
+res/quest/decks/Rocky[!!-~]3.dck -text
+res/quest/decks/Rogue.dck -text
+res/quest/decks/Scooby[!!-~]Doo.dck -text
+res/quest/decks/Scotty.dck -text
+res/quest/decks/Seabiscuit[!!-~]1.dck -text
+res/quest/decks/Seabiscuit[!!-~]2.dck -text
+res/quest/decks/Seabiscuit[!!-~]3.dck -text
+res/quest/decks/Sherlock[!!-~]Holmes[!!-~]1.dck -text
+res/quest/decks/Sherlock[!!-~]Holmes[!!-~]2.dck -text
+res/quest/decks/Sherlock[!!-~]Holmes[!!-~]3.dck -text
+res/quest/decks/Silver[!!-~]Surfer.dck -text
+res/quest/decks/Spiderman.dck -text
+res/quest/decks/Spock.dck -text
+res/quest/decks/Storm[!!-~]1.dck -text
+res/quest/decks/Storm[!!-~]2.dck -text
+res/quest/decks/Storm[!!-~]3.dck -text
+res/quest/decks/Superman[!!-~]1.dck -text
+res/quest/decks/Superman[!!-~]2.dck -text
+res/quest/decks/Tarzan[!!-~]1.dck -text
+res/quest/decks/Tarzan[!!-~]2.dck -text
+res/quest/decks/Terminator.dck -text
+res/quest/decks/Uncle[!!-~]Owen.dck -text
+res/quest/decks/Wolverine.dck -text
+res/quest/decks/Wyatt[!!-~]Earp[!!-~]1.dck -text
+res/quest/decks/Wyatt[!!-~]Earp[!!-~]2.dck -text
+res/quest/decks/Wyatt[!!-~]Earp[!!-~]3.dck -text
+res/quest/decks/quest1.dck -text
+res/quest/decks/quest2.dck -text
+res/quest/decks/quest3.dck -text
+res/quest/decks/quest8.dck -text
 res/quest/easy.txt -text svneol=native#text/plain
 res/quest/hard.txt -text svneol=native#text/plain
 res/quest/medium.txt -text svneol=native#text/plain
 res/quest/price.txt -text svneol=native#text/plain
 res/quest/quest.properties svneol=native#text/plain
 res/quest/questData -text svneol=unset#unset
+res/quest/quests.txt -text svneol=native#text/plain
 res/quest/rare.txt -text svneol=native#text/plain
 res/quest/uncommon.txt -text svneol=native#text/plain
 res/rare.txt -text svneol=native#text/plain
@@ -172,14 +299,20 @@ src/forge/Gui_DeckEditorNew.java -text svneol=native#text/plain
 src/forge/Gui_DeckEditor_Menu.java svneol=native#text/plain
 src/forge/Gui_DownloadPictures.java svneol=native#text/plain
 src/forge/Gui_DownloadPictures_LQ.java -text svneol=native#text/plain
+src/forge/Gui_ElixirShop.java -text svneol=native#text/plain
 src/forge/Gui_MultipleBlockers.java svneol=native#text/plain
 src/forge/Gui_NewGame.java svneol=native#text/plain
+src/forge/Gui_PetShop.java -text svneol=native#text/plain
+src/forge/Gui_PlantShop.java -text svneol=native#text/plain
 src/forge/Gui_Quest.java svneol=native#text/plain
 src/forge/Gui_QuestOptions.java svneol=native#text/plain
+src/forge/Gui_Quest_Assignments.java -text svneol=native#text/plain
 src/forge/Gui_Quest_DeckEditor.java -text svneol=native#text/plain
 src/forge/Gui_Quest_DeckEditor_Menu.java -text svneol=native#text/plain
 src/forge/Gui_SealedDeck.java svneol=native#text/plain
 src/forge/Gui_SetEditor.java svneol=native#text/plain
+src/forge/Gui_Shops.java -text svneol=native#text/plain
+src/forge/Gui_Treasury.java -text svneol=native#text/plain
 src/forge/Gui_Welcome.java svneol=native#text/plain
 src/forge/Gui_WinLose.java svneol=native#text/plain
 src/forge/IO.java svneol=native#text/plain
@@ -245,10 +378,13 @@ src/forge/PrintCardPictures.java svneol=native#text/plain
 src/forge/QuestData.java svneol=native#text/plain
 src/forge/QuestData_BoosterPack.java svneol=native#text/plain
 src/forge/QuestData_State.java svneol=native#text/plain
+src/forge/QuestUtil.java -text svneol=native#text/plain
+src/forge/Quest_Assignment.java -text svneol=native#text/plain
 src/forge/ReadBoosterPack.java svneol=native#text/plain
 src/forge/ReadCard.java svneol=native#text/plain
 src/forge/ReadDraftBoosterPack.java -text svneol=native#text/plain
 src/forge/ReadPriceList.java -text svneol=native#text/plain
+src/forge/ReadQuest_Assignment.java -text svneol=native#text/plain
 src/forge/Run.java svneol=native#text/plain
 src/forge/RunTest.java svneol=native#text/plain
 src/forge/SimpleCombat.java svneol=native#text/plain

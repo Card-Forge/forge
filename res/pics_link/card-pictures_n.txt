@@ -36,7 +36,7 @@ natural_affinity.jpg	http://[server]/9E/Natural%20Affinity.full.jpg
 natural_balance.jpg	http://[server]/MI/Natural%20Balance.full.jpg
 natural_emergence.jpg	http://[server]/PS/Natural%20Emergence.full.jpg
 natural_order.jpg	http://[server]/VI/Natural%20Order.full.jpg
-natural_selection.jpg	http://[server]/U/Natural%20Selection.full.jpg
+natural_selection.jpg	http://[server]/B/Natural%20Selection.full.jpg
 natural_spring.jpg	http://[server]/10E/Natural%20Spring.full.jpg
 naturalize.jpg	http://[server]/M10/Naturalize.full.jpg
 natures_blessing.jpg	http://[server]/AL/Nature's%20Blessing.full.jpg

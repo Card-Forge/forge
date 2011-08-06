@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 
 
 public interface Constant {
-    public static final String ProgramName = "Forge - 10/2009 - http://mtgrares.blogspot.com";
+    public static final String ProgramName = "Forge - 04/2010 - http://mtgrares.blogspot.com";
     
     //used to pass information between the GUI screens
     public interface Runtime {
@@ -121,6 +121,20 @@ public interface Constant {
         public static final String Snow         = "snow";
         public static final String ManaColors[] = {White, Blue, Black, Red, Green, Colorless, Snow};
     }
+    
+    public interface Quest {
+    	public static final boolean[] fantasyQuest = new boolean[1];
+    	
+    	//public static final Quest_Assignment[] qa = new Quest_Assignment[1];
+    	
+    	public static final CardList[] humanList = new CardList[1];
+    	public static final CardList[] computerList = new CardList[1];
+        
+    	public static final int[] humanLife = new int[1];
+    	public static final int[] computerLife = new int[1];
+    }
+    
+    
 }//Constant
 
 /*

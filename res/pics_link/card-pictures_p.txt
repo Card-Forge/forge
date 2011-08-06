@@ -223,7 +223,7 @@ phyrexian_tribute.jpg	http://[server]/MI/Phyrexian%20Tribute.full.jpg
 phyrexian_tyranny.jpg	http://[server]/PS/Phyrexian%20Tyranny.full.jpg
 phyrexian_vault.jpg	http://[server]/10E/Phyrexian%20Vault.full.jpg
 phyrexian_walker.jpg	http://[server]/VI/Phyrexian%20Walker.full.jpg
-phyrexian_war_beast.jpg	http://[server]/AL/Phyrexian%20War%20Beast1.full.jpg
+phyrexian_war_beast.jpg	http://[server]/AL/Phyrexian%20War%20Beast.full.jpg
 phytohydra.jpg	http://[server]/RAV/Phytohydra.full.jpg
 pianna_nomad_captain.jpg	http://[server]/OD/Pianna,%20Nomad%20Captain.full.jpg
 piety.jpg	http://[server]/4E/Piety.full.jpg

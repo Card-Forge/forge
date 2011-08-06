@@ -53,7 +53,7 @@ public class Input_Draw extends Input {
                 }
             }//if(0 < getDredge().size())
             
-            if(drawCard) AllZone.GameAction.drawCard(Constant.Player.Human);
+            if(drawCard && AllZone.Phase.getTurn() > 1) AllZone.GameAction.drawCard(Constant.Player.Human);
             
             if(AllZone.Phase.getPhase().equals(Constant.Phase.Draw)) {
                 //Input_Main.canPlayLand = true;

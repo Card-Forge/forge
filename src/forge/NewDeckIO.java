@@ -72,6 +72,26 @@ public class NewDeckIO implements DeckIO {
         this.boosterMap.putAll(boosterMap);
     }
     
+    public NewDeckIO(File dir, boolean quest)
+    {
+    	if(dir == null) throw new IllegalArgumentException("No deck directory specified");
+        try {
+            this.dir = dir;
+            
+            if(dir.isFile()) {
+                throw new IOException("Not a directory");
+            } else {
+                dir.mkdirs();
+                if(!dir.isDirectory()) throw new IOException("Directory can't be created");
+                this.deckList = new ArrayList<Deck>();
+                readQuestFile();
+            }
+        } catch(IOException ex) {
+            ErrorViewer.showError(ex);
+            throw new RuntimeException("DeckIO : write() error, " + ex.getMessage());
+        }
+    }
+    
     public boolean isUnique(String deckName) {
         Deck d;
         for(int i = 0; i < deckList.size(); i++) {
@@ -171,6 +191,23 @@ public class NewDeckIO implements DeckIO {
     
     public void close() {
         writeFile();
+    }
+    
+    public void readQuestFile() {
+    	try {
+            deckList.clear();
+            
+            File[] files;
+            files = dir.listFiles(dck);
+            for(File file:files) {
+                BufferedReader in = new BufferedReader(new FileReader(file));
+                deckList.add(read(in));
+                in.close();
+            }
+        } catch(IOException ex) {
+            ErrorViewer.showError(ex);
+            throw new RuntimeException("DeckIO : read() error, " + ex.getMessage());
+        }
     }
     
     public void readFile() {

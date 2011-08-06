@@ -50,10 +50,18 @@ public class QuestData implements NewConstants {
     private int                   win;
     private int                   lost;
     
+    private int 				  plantLevel;
+    private int					  wolfPetLevel;
+    
+    private int 				  life;
+    private int 				  estatesLevel;
+    
+    private int					  questsPlayed;
+    
     private long				  credits;
     
     private String                difficulty;
-    
+    private String				  mode = "";
 
     private ArrayList<String>     easyAIDecks;
     private ArrayList<String>     mediumAIDecks;
@@ -66,6 +74,9 @@ public class QuestData implements NewConstants {
     private ArrayList<String>     cardPool        = new ArrayList<String>();
     private ArrayList<String>     newCardList     = new ArrayList<String>();
     private ArrayList<String> 	  shopList		  = new ArrayList<String>();
+    
+    private ArrayList<Integer>    availableQuests = new ArrayList<Integer>();
+    private ArrayList<Integer>    completedQuests = new ArrayList<Integer>();
     
     private QuestData_BoosterPack boosterPack     = new QuestData_BoosterPack();
     
@@ -114,7 +125,7 @@ public class QuestData implements NewConstants {
     
     //adds cards to card pool and sets difficulty
     @SuppressWarnings("unchecked")
-    public void newGame(String difficulty) {
+    public void newGame(String difficulty, String m) {
         setDifficulty(difficulty);
         
         int[][] totals = { {45, 20, 10}, //easy, 45 common, 20 uncommon, 10 rares
@@ -132,6 +143,12 @@ public class QuestData implements NewConstants {
         //because cardPool already has basic land added to it
         cardPool.addAll(list);
         credits = 250;
+        
+        mode = m;
+        if (mode.equals("Fantasy"))
+        	life = 15;
+        else
+        	life = 20;
     }
     
     
@@ -156,10 +173,17 @@ public class QuestData implements NewConstants {
     }//getOpponents()
     
 
-    static public void readAIQuestDeckFiles(QuestData data, ArrayList<?> aiDeckNames) {
+    static public void readAIQuestDeckFiles(QuestData data, ArrayList<String> aiDeckNames) {
         data.easyAIDecks = readFile(ForgeProps.getFile(QUEST.EASY), aiDeckNames);
         data.mediumAIDecks = readFile(ForgeProps.getFile(QUEST.MEDIUM), aiDeckNames);
         data.hardAIDecks = readFile(ForgeProps.getFile(QUEST.HARD), aiDeckNames);
+        
+    }
+    
+    public void refreshAIQuestDeckFiles(ArrayList<String> aiDeckNames) {
+        easyAIDecks = readFile(ForgeProps.getFile(QUEST.EASY), aiDeckNames);
+        mediumAIDecks = readFile(ForgeProps.getFile(QUEST.MEDIUM), aiDeckNames);
+        hardAIDecks = readFile(ForgeProps.getFile(QUEST.HARD), aiDeckNames);
         
     }
     
@@ -170,7 +194,7 @@ public class QuestData implements NewConstants {
         
     }//getOpponents()
     
-    private static ArrayList<String> readFile(File file, ArrayList<?> aiDecks) {
+    private static ArrayList<String> readFile(File file, ArrayList<String> aiDecks) {
         ArrayList<String> list = FileUtil.readFile(file);
         
         //remove any blank lines
@@ -188,9 +212,13 @@ public class QuestData implements NewConstants {
         
 
         for(int i = 0; i < list.size(); i++)
-            if(!aiDecks.contains(list.get(i).toString())) ErrorViewer.showError(new Exception(),
+            /*if(!aiDecks.contains(list.get(i).toString())) ErrorViewer.showError(new Exception(),
                     "QuestData : readFile() error, file %s contains the invalid ai deck name: %s", file,
-                    list.get(i));
+                    list.get(i));*/
+        	if (!aiDecks.contains(list.get(i).toString()))
+        	{
+        		 aiDecks.add(list.get(i).toString());
+        	}
         
 
         return list;
@@ -212,11 +240,23 @@ public class QuestData implements NewConstants {
             
             QuestData data = new QuestData();
             
+            
             data.win = state.win;
             data.lost = state.lost;
             data.credits = state.credits;
             data.rankIndex = state.rankIndex;
             data.difficulty = state.difficulty;
+            data.mode = state.mode;
+            if (data.mode == null)
+            	data.mode = "Realistic";
+            
+            data.plantLevel = state.plantLevel;
+            data.wolfPetLevel = state.wolfPetLevel;
+            data.life = state.life;
+            data.estatesLevel = state.estatesLevel;
+            data.questsPlayed = state.questsPlayed;
+            data.availableQuests = state.availableQuests;
+            data.completedQuests = state.completedQuests;
             
             data.shopList = state.shopList;
             data.cardPool = state.cardPool;
@@ -251,6 +291,37 @@ public class QuestData implements NewConstants {
     {
     	shopList = list;
     }
+    
+
+    public ArrayList<Integer> getAvailableQuests() {
+    	if (availableQuests != null)
+    		return new ArrayList<Integer>(availableQuests);
+    	else
+    		return null;
+    }
+    
+    public void setAvailableQuests(ArrayList<Integer> list)
+    {
+    	availableQuests = list;
+    }
+    
+    public void clearAvailableQuests()
+    {
+    	availableQuests.clear();
+    }
+    
+    public ArrayList<Integer> getCompletedQuests() {
+    	if (completedQuests != null)
+    		return new ArrayList<Integer>(completedQuests);
+    	else
+    		return null;
+    }
+    
+    public void setCompletedQuests(ArrayList<Integer> list)
+    {
+    	completedQuests = list;
+    }
+    
     
     public void clearShopList() {
     	shopList.clear();
@@ -303,6 +374,12 @@ public class QuestData implements NewConstants {
     //constructed because the computer can use any card
     public Deck ai_getDeck(String deckName) {
         return getDeckFromMap(aiDecks, deckName);
+    }
+    
+    public Deck ai_getDeckNewFormat(String deckName) {
+    	DeckIO deckIO = new NewDeckIO(ForgeProps.getFile(QUEST.DECKS), true);
+    	Deck aiDeck = deckIO.readDeck(deckName);
+    	return aiDeck;
     }
     
     
@@ -362,6 +439,19 @@ public class QuestData implements NewConstants {
         
     }//addCards()
     
+    public ArrayList<String> getRandomRares(int n, int colorIndex)
+    {
+    	ArrayList<String> newCards = new ArrayList<String>();
+    	newCards.addAll(boosterPack.getRare(n, colorIndex));
+    	
+    	/*
+    	for(String s : newCards ) {
+    		Card c = AllZone.CardFactory.getCard(s, Constant.Player.Human);
+    		list.add(c);
+    	}*/
+    	return newCards;
+    }
+    
     public void addRandomRare(int n)
     {
     	ArrayList<String> newCards = new ArrayList<String>();
@@ -370,8 +460,7 @@ public class QuestData implements NewConstants {
         cardPool.addAll(newCards);
         newCardList.addAll(newCards);
     }
-    
-    
+        
     public String addRandomRare() {
 
         ArrayList<String> newCards = new ArrayList<String>();
@@ -386,6 +475,11 @@ public class QuestData implements NewConstants {
     public void addCard(Card c)
     {
     	cardPool.add(c.getName());
+    }
+    
+    public void addCard(String s)
+    {
+    	cardPool.add(s);
     }
     
     public void removeCard(Card c)
@@ -439,11 +533,18 @@ public class QuestData implements NewConstants {
     		if (s != null) {
 	    		if (s.equals("Poison Counters") || s.equals("Milled") || s.equals("Battle of Wits") || 
 	    			s.equals("Felidar Sovereign") || s.equals("Helix Pinnacle") || s.equals("Epic Struggle") ||
-	    			s.equals("Door to Nothingness") || s.equals("Barren Glory")) {
+	    			s.equals("Door to Nothingness") || s.equals("Barren Glory") || s.equals("Near-Death Experience")) {
 	    			creds+=100;
 	    		}
     		}
     	}
+    	
+    	if (getEstatesLevel() == 1)
+    		creds*=1.1;
+    	else if (getEstatesLevel() == 2)
+    		creds*=1.15;
+    	else if (getEstatesLevel() == 3)
+    		creds*=1.2;
     	
     	this.addCredits(creds);
     	
@@ -501,6 +602,65 @@ public class QuestData implements NewConstants {
         return lost;
     }
     
+    //********************FANTASY STUFF START***********************
+    
+    public void addPlantLevel()
+    {
+    	plantLevel++;
+    }
+    
+    public int getPlantLevel()
+    {
+    	return plantLevel;
+    }
+    
+    public void addWolfPetLevel()
+    {
+    	wolfPetLevel++;
+    }
+    
+    public int getWolfPetLevel()
+    {
+    	return wolfPetLevel;
+    }
+    
+    public void setLife(int n)
+    {
+    	life = n;
+    }
+    
+    public int getLife()
+    {
+    	return life;
+    }
+    
+    public void addLife(int n)
+    {
+    	life+=n;
+    }
+    
+    public int getEstatesLevel()
+    {
+    	return estatesLevel;
+    }
+    
+    public void addEstatesLevel(int n)
+    {
+    	estatesLevel+=n;
+    }
+    
+    public int getQuestsPlayed()
+    {
+    	return questsPlayed;
+    }
+    
+    public void addQuestsPlayed()
+    {
+    	questsPlayed++;
+    }
+    
+  //********************FANTASY STUFF END***********************
+    
     public void addCredits(long c)
     {
     	credits+=c;
@@ -515,6 +675,12 @@ public class QuestData implements NewConstants {
     
     public long getCredits() {
     	return credits;
+    }
+    
+    public String getMode() {
+    	if (mode == null)
+    		return "";
+    	return mode;
     }
     //should be called first, because the difficultly won't change
     public String getDifficulty() {
@@ -594,14 +760,21 @@ public class QuestData implements NewConstants {
             state.lost = q.lost;
             state.credits = q.credits;
             state.difficulty = q.difficulty;
+            state.mode = q.mode;
             state.rankIndex = q.rankIndex;
+            
+            state.plantLevel = q.plantLevel;
+            state.wolfPetLevel = q.wolfPetLevel;
+            state.life = q.life;
+            state.estatesLevel = q.estatesLevel;
+            state.questsPlayed = q.questsPlayed;
+            state.availableQuests = q.availableQuests;
             
             state.cardPool = q.cardPool;
             state.shopList = q.shopList;
             state.myDecks = q.myDecks;
             state.aiDecks = q.aiDecks;
             
-
             //write object
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(ForgeProps.getFile(QUEST.DATA)));
             out.writeObject(state);

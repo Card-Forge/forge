@@ -167,6 +167,20 @@ public class QuestData_BoosterPack implements NewConstants {
         return getRandom(n, bag);
     }//getRare()
     
+    public ArrayList<String> getRare(int n, int colorIndex) {
+        ArrayList<String> bag = new ArrayList<String>();
+        String c;
+        int stop = getLoopStop(n);
+        
+        for(int i = 0; i < stop; i++) {
+            c = colors[colorIndex];
+            
+            bag.add(getColor(c, rareCreature));
+            bag.add(getColor(c, rareSpell));
+        }
+        return getRandom(n, bag);
+    }//getRare()
+    
     //returns String of the card name that matches the paramater "color"
     @SuppressWarnings("unchecked")
     private String getColor(String color, ArrayList list) {

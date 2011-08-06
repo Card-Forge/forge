@@ -41,9 +41,12 @@ public class Gui_QuestOptions extends JFrame {
     private JRadioButton      hardRadio           = new JRadioButton();
     private JRadioButton      mediumRadio         = new JRadioButton();
     private JRadioButton      veryHardRadio       = new JRadioButton();
+    private JRadioButton 	  fantasyRadio 		  = new JRadioButton();
+    private JRadioButton	  realisticRadio	  = new JRadioButton();
     private JButton           newQuestButton      = new JButton();
     private JTextArea         jTextArea1          = new JTextArea();
     private ButtonGroup       buttonGroup1        = new ButtonGroup();
+    private ButtonGroup		  buttonGroup2		  = new ButtonGroup();
     private JPanel            jPanel3             = new JPanel();
     private Border            border2;
     private TitledBorder      titledBorder2;
@@ -121,14 +124,22 @@ public class Gui_QuestOptions extends JFrame {
         jPanel1.setBorder(titledBorder1);
         jPanel1.setBounds(new Rectangle(67, 63, 303, 259));
         jPanel1.setLayout(null);
+        
         jPanel2.setBounds(new Rectangle(12, 27, 271, 101));
         jPanel2.setLayout(gridLayout1);
-        gridLayout1.setColumns(1);
+        
+        gridLayout1.setColumns(2);
         gridLayout1.setRows(4);
+        
         easyRadio.setText("Easy - 50 games");
         hardRadio.setText("Hard - 200 games");
         mediumRadio.setText("Medium - 100 games");
         veryHardRadio.setText("Very Hard - 300 games");
+        realisticRadio.setText("Realistic");
+        fantasyRadio.setText("Fantasy");
+        
+        realisticRadio.setSelected(true);
+        
         newQuestButton.setBounds(new Rectangle(78, 206, 145, 38));
         newQuestButton.setFont(new java.awt.Font("Dialog", 0, 18));
         newQuestButton.setText("New Quest");
@@ -145,13 +156,19 @@ public class Gui_QuestOptions extends JFrame {
         jTextArea1.setLineWrap(true);
         jTextArea1.setWrapStyleWord(true);
         jTextArea1.setBounds(new Rectangle(13, 141, 274, 50));
+        
         jPanel3.setBorder(titledBorder2);
         jPanel3.setBounds(new Rectangle(68, 338, 289, 86));
         jPanel3.setLayout(null);
+        
         jPanel2.add(easyRadio, null);
+        jPanel2.add(realisticRadio,null);
         jPanel2.add(mediumRadio, null);
+        jPanel2.add(fantasyRadio, null);
         jPanel2.add(hardRadio, null);
+        jPanel2.add(new JLabel(""));  // for empty cell
         jPanel2.add(veryHardRadio, null);
+        
         jPanel1.add(newQuestButton, null);
         jPanel1.add(jTextArea1, null);
         this.getContentPane().add(jPanel1, null);
@@ -163,6 +180,9 @@ public class Gui_QuestOptions extends JFrame {
         buttonGroup1.add(mediumRadio);
         buttonGroup1.add(hardRadio);
         buttonGroup1.add(veryHardRadio);
+        
+        buttonGroup2.add(realisticRadio);
+        buttonGroup2.add(fantasyRadio);
     }
     
     void continueQuestButton_actionPerformed(ActionEvent e) {
@@ -174,6 +194,11 @@ public class Gui_QuestOptions extends JFrame {
     
     void newQuestButton_actionPerformed(ActionEvent e) {
         String difficulty = "";
+
+        String mode = "Realistic";
+        
+        if (fantasyRadio.isSelected())
+        	mode = "Fantasy";
         
         if(easyRadio.isSelected()) difficulty = questData.EASY;
         
@@ -187,7 +212,7 @@ public class Gui_QuestOptions extends JFrame {
         return;
         
         //give the user a few cards to build a deck
-        questData.newGame(difficulty);
+        questData.newGame(difficulty, mode);
         
         copyAIDecks(questData, QuestData.loadData());
         QuestData.saveData(questData);

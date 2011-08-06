@@ -1,0 +1,82 @@
+1
+Dungeoncrawling (White)
+Guarded by white creatures
+Medium
+Repeatable
+25
+Three white rares
+100
+
+2
+Dungeoncrawling (Blue)
+Guarded by blue creatures.
+Medium
+Repeatable
+25
+Three blue rares
+100
+
+3
+Dungeoncrawling (Black)
+Guarded by black creatures.
+Medium
+Repeatable
+25
+Three black rares
+100
+
+4
+Dungeoncrawling (Red)
+Guarded by red creatures.
+Medium
+Repeatable
+25
+Three red rares
+100
+
+5
+Dungeoncrawling (Green)
+Guarded by green creatures.
+Medium
+Repeatable
+25
+Three green rares
+100
+
+6
+Dungeoncrawling (Colorless)
+Guarded by artifact creatures.
+Hard
+Repeatable
+35
+Three colorless rares
+150
+
+7
+Dungeoncrawling (Gold)
+Guarded by gold creatures.
+Hard
+Repeatable
+35
+Three multi-colored rares
+150
+
+8
+A Wolf in Sheep's Clothing
+The local sheep farm is under attack by a pack of wolves. Kill the wolves, save the sheep!
+Medium
+Not Repeatable
+35
+Three random rares
+200
+
+9
+Bushwhacked!
+You find yourself surrounded by carnivorous plants and poisonous vines. Cut your way out of this foresty mess and make it home safe.
+Hard
+Not Repeatable
+50
+Four green rares
+225
+
+End

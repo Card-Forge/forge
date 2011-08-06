@@ -14,6 +14,7 @@ public class AllZone implements NewConstants {
 //  public static final IO IO = new IO("all-decks");
     
     public static QuestData                      QuestData          = null;
+    public static Quest_Assignment 			     QuestAssignment    = null;
     public static final NameChanger              NameChanger        = new NameChanger();
     
     public static EndOfTurn                      EndOfTurn          = new EndOfTurn();

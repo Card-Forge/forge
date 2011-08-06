@@ -358,6 +358,16 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
     	multi = 0.20 + (0.001 *questData.getWin());
         if (multi > 0.6)
         	multi = 0.6;
+        
+        if (questData.getMode().equals("Fantasy"))
+        {
+        	if (questData.getEstatesLevel()==1)
+        		multi+=0.01;
+        	else if (questData.getEstatesLevel()==2)
+        		multi+=0.0175;
+        	else if (questData.getEstatesLevel()==3)
+        		multi+=0.025;
+        }
     	
     	addListeners();
         

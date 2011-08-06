@@ -62,7 +62,8 @@ public interface NewConstants {
     
     public static final String IMAGE_BASE    = "image/base";
     public static final String IMAGE_TOKEN   = "image/token";
-    public static final String SOUND_BASE = "sound/base";
+    public static final String IMAGE_ICON    = "image/icon";
+    public static final String SOUND_BASE    = "sound/base";
     
     /**
      * properties for regular game
@@ -90,12 +91,15 @@ public interface NewConstants {
         public static final String RARE     = "quest/rare";
         
         public static final String PRICE    = "quest/price";
+        public static final String QUESTS   = "quest/quests";
         
         public static final String EASY     = "quest/easy";
         public static final String MEDIUM   = "quest/medium";
         public static final String HARD     = "quest/hard";
         
         public static final String DATA     = "quest/data";
+        
+        public static final String DECKS    = "quest/decks-dir";
     }
     
     /**

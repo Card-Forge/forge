@@ -12,8 +12,11 @@ public class Input_Untap extends Input {
         PlayerZone p = AllZone.getZone(Constant.Zone.Play, AllZone.Phase.getActivePlayer());
         Card[] c = p.getCards();
         
-        for(int i = 0; i < c.length; i++)
-            c[i].setSickness(false);
+        if (AllZone.Phase.getTurn() != 1)
+        {
+	        for(int i = 0; i < c.length; i++)
+	            c[i].setSickness(false);
+        }
         
         //if(isMarbleTitanInPlay()) marbleUntap();
         //if(!isStasisInPlay()) doUntap();
