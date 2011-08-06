@@ -1,6 +1,6 @@
 Name:Jace, the Mind Sculptor
 ManaCost:2 U U
-Types:Planeswalker - Jace
+Types:Planeswalker Jace
 Text:no text
 Loyalty:3
 SVar:Rarity:Mythic

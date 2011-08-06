@@ -1,6 +1,6 @@
 Name:Elspeth Tirel
 ManaCost:3 W W
-Types:Planeswalker - Elspeth
+Types:Planeswalker Elspeth
 Text:no text
 Loyalty:4
 A:AB$GainLife | Cost$ AddCounter<2/LOYALTY> | LifeAmount$ XLife | Planeswalker$ True | SpellDescription$ You gain 1 life for each creature you control.

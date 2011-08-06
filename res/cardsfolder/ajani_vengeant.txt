@@ -1,6 +1,6 @@
 Name:Ajani Vengeant
 ManaCost:2 R W
-Types:Planeswalker - Ajani
+Types:Planeswalker Ajani
 Text:no text
 Loyalty:3
 SVar:Rarity:Mythic

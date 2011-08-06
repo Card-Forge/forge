@@ -1,6 +1,6 @@
 Name:Koth of the Hammer
 ManaCost:2 R R
-Types:Planeswalker - Koth
+Types:Planeswalker Koth
 Text:no text
 Loyalty:3
 SVar:PlayMain1:TRUE

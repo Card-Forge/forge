@@ -1,6 +1,6 @@
 Name:Liliana Vess
 ManaCost:3 B B
-Types:Planeswalker - Liliana
+Types:Planeswalker Liliana
 Text:no text
 Loyalty:5
 SVar:Rarity:Rare

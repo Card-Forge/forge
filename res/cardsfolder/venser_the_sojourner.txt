@@ -1,6 +1,6 @@
 Name:Venser, the Sojourner
 ManaCost:3 W U
-Types:Planeswalker - Venser
+Types:Planeswalker Venser
 Text:no text
 Loyalty:3
 SVar:Rarity:Mythic

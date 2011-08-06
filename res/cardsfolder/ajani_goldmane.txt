@@ -1,6 +1,6 @@
 Name:Ajani Goldmane
 ManaCost:2 W W
-Types:Planeswalker - Ajani
+Types:Planeswalker Ajani
 Text:no text
 Loyalty:4
 SVar:Rarity:Mythic

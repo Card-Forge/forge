@@ -1,6 +1,6 @@
 Name:Jace Beleren
 ManaCost:1 U U
-Types:Planeswalker - Jace
+Types:Planeswalker Jace
 Text:no text
 Loyalty:3
 A:AB$Draw | Cost$ AddCounter<2/LOYALTY> | Defined$ Each | Planeswalker$ True | SpellDescription$ Each player draws a card.

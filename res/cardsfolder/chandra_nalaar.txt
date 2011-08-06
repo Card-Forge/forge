@@ -1,6 +1,6 @@
 Name:Chandra Nalaar
 ManaCost:3 R R
-Types:Planeswalker - Chandra
+Types:Planeswalker Chandra
 Text:no text
 Loyalty:6
 SVar:Rarity:Mythic
