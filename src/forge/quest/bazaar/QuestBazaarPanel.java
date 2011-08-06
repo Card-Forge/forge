@@ -85,6 +85,7 @@ public class QuestBazaarPanel extends JPanel{
         }
 
         buttonList.get(0).setSelected(true);
+        this.selectedStall = buttonList.get(0);
 
         Dimension max = new Dimension((int)maxWidth,(int)maxHeight);
 
