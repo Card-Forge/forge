@@ -458,57 +458,6 @@ class CardFactory_Lands {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Mishra's Factory")) {
-        	final long[] timeStamp = new long[1];
-            
-            final SpellAbility a1 = new Ability(card, "1") {
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    Card c = card;
-                    String[] types = { "Artifact", "Creature", "Assembly-Worker" };
-                    String[] keywords = { };
-                    timeStamp[0] = CardFactoryUtil.activateManland(c, 2, 2, types, keywords, "0");
-
-                    final Command eot1 = new Command() {
-                        private static final long serialVersionUID = -956566640027406078L;
-                        long stamp = timeStamp[0];
-                        public void execute() {
-                            Card c = card;
-                            
-                            String[] types = { "Artifact", "Creature", "Assembly-Worker" };
-                            String[] keywords = { };
-                            CardFactoryUtil.revertManland(c, types, keywords, "", stamp);
-                        }
-                    };
-                    
-                    AllZone.EndOfTurn.addUntil(eot1);
-                }
-            };//SpellAbility
-            card.addSpellAbility(a1);
-            a1.setDescription("1: Mishra's Factory becomes a 2/2 Assembly-Worker artifact creature until end of turn. It's still a land.");
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" - becomes a 2/2 creature until EOT");
-            a1.setStackDescription(sb.toString());
-            
-            // is this even needed?
-            Command paid1 = new Command() {
-                private static final long serialVersionUID = -6767109002136516590L;
-                
-                public void execute() {
-                    AllZone.Stack.add(a1);
-                }
-            };
-            
-            a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Dark Depths")) {
                         
             card.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(card, Counters.ICE , 10));
@@ -898,48 +847,6 @@ class CardFactory_Lands {
                 }
             };
             a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Celestial Colonnade")) {
-        	final long[] timeStamp = new long[1];
-            
-            final SpellAbility a1 = new Ability(card, "3 W U") {
-                @Override
-                public boolean canPlayAI() {
-                    return !card.hasSickness() && super.canPlayAI();
-                }
-                
-                @Override
-                public void resolve() {
-                    Card c = card;
-                    
-                    String[] types = { "Creature", "Elemental" };
-                    String[] keywords = { "Vigilance", "Flying" };
-                    timeStamp[0] = CardFactoryUtil.activateManland(c, 4, 4, types, keywords, "W U");
-                    
-                    final Command eot1 = new Command() {
-                        private static final long serialVersionUID = 7377356496869217420L;
-                        long stamp = timeStamp[0];
-                        public void execute() {
-                            Card c = card;
-                            String[] types = { "Creature", "Elemental" };
-                            String[] keywords = { "Vigilance", "Flying" };
-                            CardFactoryUtil.revertManland(c, types, keywords, "W U", stamp);
-                        }
-                    };
-                    
-                    AllZone.EndOfTurn.addUntil(eot1);
-                }
-            };//SpellAbility
-            
-            card.clearSpellKeepManaAbility();
-            card.addSpellAbility(a1);
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" - until end of turn, Celestial Colonnade becomes a 4/4 white and blue Elemental creature with flying and vigilance.");
-            a1.setStackDescription(sb.toString());
-            a1.setDescription("3 W U: Until end of turn, Celestial Colonnade becomes a 4/4 white and blue Elemental creature with flying and vigilance. It's still a land.");
         }//*************** END ************ END **************************
         
         
