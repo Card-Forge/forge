@@ -1,9 +1,8 @@
 Name:Krovikan Horror
 ManaCost:3 B
 Types:Creature Horror Spirit
-Text:no text
+Text:At the beginning of the end step, if Krovikan Horror is in your graveyard with a creature card directly above it, you may return Krovikan Horror to your hand.
 PT:2/2
-#K:abDamageTgtCP 1 Sac<1/Creature>:1
 A:AB$DealDamage | Cost$ 1 Sac<1/Creature> | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krovikan_horror.jpg
