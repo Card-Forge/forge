@@ -410,9 +410,12 @@ public class AbilityFactory {
 		
 		if (API.equals("Regenerate")){
 			if (isAb)
-				SA = AbilityFactory_Regenerate.getAbility(this);
+				SA = AbilityFactory_Regenerate.getAbilityRegenerate(this);
 			else if (isSp)
-				SA = AbilityFactory_Regenerate.getSpell(this);
+				SA = AbilityFactory_Regenerate.getSpellRegenerate(this);
+			else if(isDb) {
+				SA = AbilityFactory_Regenerate.createDrawbackRegenerate(this);
+			}
 		}
 		
 		if (API.equals("Draw")){

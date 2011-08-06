@@ -25,19 +25,19 @@ public class AbilityFactory_Regenerate {
 	// Ex: A:SP$Regenerate | Cost$W | Tgt$TgtC | SpellDescription$Regenerate target creature.
 	// http://www.slightlymagic.net/wiki/Forge_AbilityFactory#Regenerate
 
-	public static SpellAbility getAbility(final AbilityFactory af) {
+	public static SpellAbility getAbilityRegenerate(final AbilityFactory af) {
 
 		final SpellAbility abRegenerate = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
 			private static final long serialVersionUID = -6386981911243700037L;
 
 			@Override
 			public boolean canPlayAI() {
-				return doCanPlayAI(af, this);
+				return regenerateCanPlayAI(af, this);
 			}
 
 			@Override
 			public void resolve() {
-				doResolve(af, this);
+				regenerateResolve(af, this);
 				af.getHostCard().setAbilityUsed(af.getHostCard().getAbilityUsed() + 1);
 			}
 			
@@ -56,19 +56,19 @@ public class AbilityFactory_Regenerate {
 		return abRegenerate;
 	}
 
-	public static SpellAbility getSpell(final AbilityFactory af){
+	public static SpellAbility getSpellRegenerate(final AbilityFactory af){
 
 		final SpellAbility spRegenerate = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
 			private static final long serialVersionUID = -3899905398102316582L;
 
 			@Override
 			public boolean canPlayAI() {
-				return doCanPlayAI(af, this);
+				return regenerateCanPlayAI(af, this);
 			}
 
 			@Override
 			public void resolve() {
-				doResolve(af, this);
+				regenerateResolve(af, this);
 			}
 			
 			@Override
@@ -79,6 +79,34 @@ public class AbilityFactory_Regenerate {
 		}; // Spell
 
 		return spRegenerate;
+	}
+	
+	public static SpellAbility createDrawbackRegenerate(final AbilityFactory af) {
+		final SpellAbility dbRegen = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+			private static final long serialVersionUID = -2295483806708528744L;
+
+			@Override
+			public String getStackDescription(){
+				return regenerateStackDescription(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				regenerateResolve(af, this);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return true;
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return doTriggerAI(af, this, mandatory);
+			}
+
+		};
+		return dbRegen;
 	}
 	
 	private static String regenerateStackDescription(AbilityFactory af, SpellAbility sa){
@@ -119,7 +147,7 @@ public class AbilityFactory_Regenerate {
 		return sb.toString();
 	}
 
-	private static boolean doCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+	private static boolean regenerateCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
 		final HashMap<String,String> params = af.getMapParams();
 		final Card hostCard = af.getHostCard();
 		boolean chance = false;
@@ -270,7 +298,7 @@ public class AbilityFactory_Regenerate {
 		return true;
 	}
 	
-	private static void doResolve(final AbilityFactory af, final SpellAbility sa) {
+	private static void regenerateResolve(final AbilityFactory af, final SpellAbility sa) {
 		Card hostCard = af.getHostCard();
 		final HashMap<String,String> params = af.getMapParams();
 		
@@ -296,16 +324,10 @@ public class AbilityFactory_Regenerate {
 			}
 		}
 		
-		if (af.hasSubAbility()){
+		if (af.hasSubAbility()) {
 			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
+			if(abSub != null) {
 			   abSub.resolve();
-			}
-			else{
-				Card first = tgtCards.get(0);
-	        	CardFactoryUtil.doDrawBack(params.get("SubAbility"), 0,
-	                hostCard.getController(), hostCard.getController().getOpponent(),
-	                first.getController(), hostCard, first, sa);
 			}
 		}
 	}//doResolve
