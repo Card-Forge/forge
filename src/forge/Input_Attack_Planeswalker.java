@@ -51,7 +51,7 @@ public class Input_Attack_Planeswalker extends Input
       AllZone.pwCombat.addAttacker(card);
 
       //for Castle Raptors, since it gets a bonus if untapped
-      for (String effect : AllZone.StateBasedEffects.getStateBasedMap().keySet() ) {
+      for (String effect : AllZone.StaticEffects.getStateBasedMap().keySet() ) {
 			Command com = GameActionUtil.commands.get(effect);
 			com.execute();
 	  }

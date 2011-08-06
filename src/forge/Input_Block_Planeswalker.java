@@ -11,7 +11,7 @@ public class Input_Block_Planeswalker extends Input
   public void showMessage()
   {
     //for Castle Raptors, since it gets a bonus if untapped
-	for (String effect : AllZone.StateBasedEffects.getStateBasedMap().keySet() ) {
+	for (String effect : AllZone.StaticEffects.getStateBasedMap().keySet() ) {
 		Command com = GameActionUtil.commands.get(effect);
 		com.execute();
 	}

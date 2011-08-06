@@ -452,7 +452,7 @@ public class GameAction
     }
 
     //card state effects like Glorious Anthem
-    for (String effect : AllZone.StateBasedEffects.getStateBasedMap().keySet() ) {
+    for (String effect : AllZone.StaticEffects.getStateBasedMap().keySet() ) {
 		Command com = GameActionUtil.commands.get(effect);
 		com.execute();
 	}
@@ -675,7 +675,6 @@ public class GameAction
       throw new RuntimeException("GameAction : destroy() invalid card.getOwner() - " +c +" " +c.getOwner());
 
     play.remove(c);
-    
     
     if (c.getKeyword().contains("Persist") && c.getCounters(Counters.M1M1) == 0)
     	persist = true;
@@ -976,7 +975,7 @@ public class GameAction
 
     AllZone.InputControl.resetInput();
     
-    AllZone.StateBasedEffects.reset();
+    AllZone.StaticEffects.reset();
 
     //clear Image caches, so the problem doesn't get slower and slower
     //cached images are cleared in Gui_WinLose.quitButton_actionPerformed()

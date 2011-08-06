@@ -1149,7 +1149,7 @@ public class CombatUtil
 			        	  }
 			        	  AllZone.GameAction.shuffle(c.getController());
 			        	  //we have to have cards like glorious anthem take effect immediately:
-			        	  for (String effect : AllZone.StateBasedEffects.getStateBasedMap().keySet() ) {
+			        	  for (String effect : AllZone.StaticEffects.getStateBasedMap().keySet() ) {
 			      			Command com = GameActionUtil.commands.get(effect);
 			      			com.execute();
 			      		  }

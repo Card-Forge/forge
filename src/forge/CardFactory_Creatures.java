@@ -1164,7 +1164,7 @@ public class CardFactory_Creatures {
 	            play.add(c);
 	            c.tap();
 	          }
-	          for (String effect : AllZone.StateBasedEffects.getStateBasedMap().keySet() ) {
+	          for (String effect : AllZone.StaticEffects.getStateBasedMap().keySet() ) {
 	  			Command com = GameActionUtil.commands.get(effect);
 	  			com.execute();
 	  		  }

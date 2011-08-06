@@ -173,7 +173,7 @@ public class ComputerUtil
 	      { 
 	    	//System.out.println(j + " color:" +colors.get(j));
 	        cost.subtractMana(colors.get(j));
-	        System.out.println("thinking, I just subtracted " + colors.get(j) + ", cost is now: " + cost.toString());
+	        //System.out.println("thinking, I just subtracted " + colors.get(j) + ", cost is now: " + cost.toString());
 	        once++;
 	      }
 
@@ -213,7 +213,7 @@ public class ComputerUtil
     	  {
     		  land.get(i).tap();
     		  cost.subtractMana(colors.get(j));
-    		  System.out.println("just subtracted " + colors.get(j) + ", cost is now: " + cost.toString());
+    		  //System.out.println("just subtracted " + colors.get(j) + ", cost is now: " + cost.toString());
     		  
     	  }
     	  if(cost.isPaid())

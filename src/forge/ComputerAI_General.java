@@ -23,7 +23,7 @@ public class ComputerAI_General implements Computer {
         if(AllZone.GameInfo.getComputerCanPlayNumberOfLands() > 0) {
         	AllZone.GameInfo.addComputerCanPlayNumberOfLands(-1);
             ComputerUtil.playLand();
-            for(String effect:AllZone.StateBasedEffects.getStateBasedMap().keySet()) {
+            for(String effect:AllZone.StaticEffects.getStateBasedMap().keySet()) {
                 Command com = GameActionUtil.commands.get(effect);
                 com.execute();
             }
@@ -40,7 +40,7 @@ public class ComputerAI_General implements Computer {
         	AllZone.GameInfo.addComputerCanPlayNumberOfLands(-1);
         	ComputerUtil.playLand();
         	
-        	for(String effect:AllZone.StateBasedEffects.getStateBasedMap().keySet()) {
+        	for(String effect:AllZone.StaticEffects.getStateBasedMap().keySet()) {
                 Command com = GameActionUtil.commands.get(effect);
                 com.execute();
             }

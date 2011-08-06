@@ -71,7 +71,7 @@ public class Phase extends MyObservable
 	
 	//System.out.println("current active Player: " + getActivePlayer());  
 	//experimental, add executeCardStateEffects() here:
-	for (String effect : AllZone.StateBasedEffects.getStateBasedMap().keySet() ) {
+	for (String effect : AllZone.StaticEffects.getStateBasedMap().keySet() ) {
 		Command com = GameActionUtil.commands.get(effect);
 		com.execute();
 	}

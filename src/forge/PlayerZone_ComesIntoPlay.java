@@ -139,11 +139,11 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone
 			}
 			
 		}
-		if (AllZone.StateBasedEffects.getCardToEffectsList().containsKey(c.getName()))
+		if (AllZone.StaticEffects.getCardToEffectsList().containsKey(c.getName()))
 		{
-			String[] effects = AllZone.StateBasedEffects.getCardToEffectsList().get(c.getName());
+			String[] effects = AllZone.StaticEffects.getCardToEffectsList().get(c.getName());
 			for (String effect : effects) {
-				AllZone.StateBasedEffects.addStateBasedEffect(effect);
+				AllZone.StaticEffects.addStateBasedEffect(effect);
 			}	
 		}
 		
@@ -241,19 +241,19 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone
 		if (leavesTrigger)
 			c.leavesPlay();
 		
-		if (AllZone.StateBasedEffects.getCardToEffectsList().containsKey(c.getName()))
+		if (AllZone.StaticEffects.getCardToEffectsList().containsKey(c.getName()))
 		{
-			String[] effects = AllZone.StateBasedEffects.getCardToEffectsList().get(c.getName());
+			String[] effects = AllZone.StaticEffects.getCardToEffectsList().get(c.getName());
 			String tempEffect = "";
 			for (String effect : effects) {
 				tempEffect = effect; 
-				AllZone.StateBasedEffects.removeStateBasedEffect(effect);
+				AllZone.StaticEffects.removeStateBasedEffect(effect);
 				Command comm = GameActionUtil.commands.get(tempEffect); //this is to make sure cards reset correctly
 				comm.execute();
 			}
 			
 		}
-		for (String effect : AllZone.StateBasedEffects.getStateBasedMap().keySet() ) {
+		for (String effect : AllZone.StaticEffects.getStateBasedMap().keySet() ) {
 			Command com = GameActionUtil.commands.get(effect);
 			com.execute();
 		}
