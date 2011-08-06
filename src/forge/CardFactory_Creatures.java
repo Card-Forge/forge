@@ -13268,7 +13268,7 @@ public class CardFactory_Creatures {
             a2.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Cateran Overlord")) {
             
@@ -13321,7 +13321,7 @@ public class CardFactory_Creatures {
             
             a2.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
-        
+        */
         /*
         //*************** START *********** START **************************
         else if(cardName.equals("Rakka Mar")) {

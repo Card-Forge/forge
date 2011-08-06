@@ -4,6 +4,7 @@ Types:Creature Horror Mercenary
 Text:no text
 PT:7/5
 K:SearchMerc:6
+A:AB$Regenerate|Cost$Sac<1/Creature>|SpellDescription$Regenerate CARDNAME.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_overlord.jpg
 End
