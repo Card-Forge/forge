@@ -10178,6 +10178,39 @@ public class GameActionUtil {
 		}
 	};
 	
+	public static Command Halimar_Wavewatch  = new Command() {
+		private static final long serialVersionUID = 117755207922239944L;
+
+		public void execute()
+		{
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Halimar_Wavewatch");
+
+			for (Card c:list)
+			{
+				int lcs = c.getCounters(Counters.LEVEL);
+				if ( lcs < 1)
+				{
+					c.setBaseAttack(0);
+					c.setBaseDefense(3);
+				}
+				else if ( lcs >=1 && lcs < 5 )  //levels 1-4
+				{
+					c.setBaseAttack(0);
+					c.setBaseDefense(6);
+				}
+				else
+				{
+					c.setBaseAttack(6);
+					c.setBaseDefense(6);
+					c.addNonStackingIntrinsicKeyword("Islandwalk");
+				}
+			}
+		}
+	};
+	
 	public static Command Student_of_Warfare 		  = new Command() {
 		private static final long serialVersionUID = 2627513737024865169L;
 
@@ -15597,6 +15630,7 @@ public class GameActionUtil {
 		commands.put("Knight_of_Cliffhaven", Knight_of_Cliffhaven);
 		commands.put("Beastbreaker_of_Bala_Ged", Beastbreaker_of_Bala_Ged);
 		commands.put("Hada_Spy_Patrol", Hada_Spy_Patrol);
+		commands.put("Halimar_Wavewatch", Halimar_Wavewatch);
 		commands.put("Soulsurge_Elemental", Soulsurge_Elemental);
 		
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
