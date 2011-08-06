@@ -3,7 +3,8 @@ ManaCost:3 G G
 Types:Creature Insect
 Text:no text
 PT:6/1
-A:AB$ ChangeZone | Cost$ Discard<1/Card> | Origin$ Graveyard | Destination$ Hand | ActivatingZone$ Graveyard | ActivatingPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Return CARDNAME from your graveyard to your hand. Play this ability only during your upkeep.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is in your graveyard, you may discard a card. If you do, return CARDNAME to your hand.
+SVar:TrigChange:AB$ChangeZone | Cost$ Discard<1/Card> | Origin$ Graveyard | Destination$ Hand | Defined$ Self
 K:Shroud
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
