@@ -3932,6 +3932,7 @@ public class CardFactoryUtil {
         
         if(d[0].contains("GenToken")) // placeholder for effect
         X = X + 0;
+        //TODO: update with syntax like spMakeToken
         
         if(d[0].contains("ReturnFromYard")) // placeholder for effect
         X = X + 0;
