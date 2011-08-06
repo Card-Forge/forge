@@ -115,6 +115,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 	}
                 }
                 
+                /* Converted to AF trigger
                 CardList seeds = AllZoneUtil.getCardsInPlay("Seed the Land");
                 final Card seedLand = c;
                 for(Card seed:seeds) {
@@ -133,6 +134,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 	
                 	AllZone.Stack.add(ability);
                 }
+                */
                 
                 //Tectonic Instability
                 CardList tis = AllZoneUtil.getCardsInPlay("Tectonic Instability");
