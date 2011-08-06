@@ -1,3 +1,96 @@
+Serra Aviary
+3 W
+World Enchantment
+no text
+StaticEffect:Play:All Permanents:PTBonus/1/1:Type.Creature!with.Flying:Creatures with flying get +1/+1.
+SVar:PlayMain1:TRUE
+SVar:RemAIDeck:True
+
+Cavalry Master
+2 W W
+Creature Human Knight
+no text
+3/3
+Flanking
+StaticEffect:Play:Permanents you Control:Keyword/Flanking:Type.Creature!with.Flanking!NotSelf:Other creatures you control with flanking have flanking. (Each instance of flanking triggers separately.)
+SVar:PlayMain1:TRUE
+
+Stalwart Shield-Bearers
+1 W
+Creature Human Soldier
+no text
+0/3
+Defender
+StaticEffect:Play:Permanents you Control:PTBonus/0/2:Type.Creature!with.Defender!NotSelf:Other creatures you control with defender get +0/+2..
+
+Zhao Zilong, Tiger General
+3 W W
+Legendary Creature Human Soldier Warrior
+no text
+3/3
+Horsemanship
+WheneverKeyword:Blocks:Self:Play:StatsPumpEOT/1/1:Self:ASAP:No_Condition:No Special Condition:Whenever Zhao Zilong, Tiger General blocks, it gets +1/+1 until end of turn.
+
+Reckless One
+3 R
+Creature Goblin Avatar
+no text
+1/1
+Haste
+StaticEffect:Play:Self:SetPT/Type.Goblin/Type.Goblin:All Permanents:Reckless One's power and toughness are each equal to the number of Goblins on the battlefield.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_one.jpg
+
+Viashino Cutthroat
+2 R R
+Creature Viashino
+no text
+5/3
+Haste
+WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:ControllerEndStep:At the beginning of the end step, return Viashino Cutthroat to its owner's hand.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_cutthroat.jpg
+
+Viashino Sandscout
+1 R
+Creature Viashino Scout
+no text
+2/1
+Haste
+WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:ControllerEndStep:At the beginning of the end step, return Viashino Sandscout to its owner's hand. (Return it only if it's on the battlefield.)
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_sandscout.jpg
+
+Viashino Sandstalker
+1 R R
+Creature Viashino Warrior
+no text
+4/2
+Haste
+WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:ControllerEndStep:At the beginning of the end step, return Viashino Sandstalker to its owner's hand. (Return it only if it's on the battlefield.)
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_sandstalker.jpg
+
+Gravitational Shift
+3 U U
+Enchantment
+no text
+StaticEffect:Play:All Permanents:PTBonus/2/0:Type.Creature!with.Flying:Creatures with flying get +2/+0.
+StaticEffect:Play:All Permanents:PTBonus/-2/0:Type.Creature!without.Flying:Creatures without flying get -2/-0.
+SVar:PlayMain1:TRUE
+SVar:RemAIDeck:True
+
+Mouth of Ronom
+no cost
+Snow Land
+no text
+tap: add 1
+abDamageTgtC 4 S T Sac-CARDNAME:4
+SVar:RemAIDeck:True
+
 Evacuation
 3 U U
 Instant
@@ -82,20 +175,6 @@ Destroy all creatures. They can't be regenerated.
 spDestroyAll:Creature:NoRegen
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83339.jpg
-
-Gravitational Shift
-3 U U
-Enchantment
-no text
-StaticEffect:Play:All Permanents:PTBonus/2/0:Type.Creature!with.Flying:Creatures with flying get +2/+0.
-StaticEffect:Play:All Permanents:PTBonus/-2/0:Type.Creature!without.Flying:Creatures without flying get -2/-0.
-
-Mouth of Ronom
-no cost
-Snow Land
-no text
-tap: add 1
-abDamageTgtC 4 S T Sac-CARDNAME:4
 
 Vampiric Sliver
 3 B
@@ -23341,16 +23420,6 @@ WheneverKeyword:Attack - Alone:Self:Play:StatsPumpEOT/3/0:Self:ASAP:No_Condition
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_ogre.jpg
 
-Reckless One
-3 R
-Creature Goblin Avatar
-no text
-1/1
-Haste
-StaticEffect:Play:Self:SetPT/Type.Goblin/Type.Goblin:Permanents you Control:Reckless One's power and toughness are each equal to the number of Goblins on the battlefield.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_one.jpg
-
 Reckless Scholar
 2 U
 Creature Human Wizard
@@ -32391,16 +32460,6 @@ CARDNAME can't be countered.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vexing_beetle.jpg
 
-Viashino Cutthroat
-2 R R
-Creature Viashino
-no text
-5/3
-Haste
-WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:ControllerEndStep:At the beginning of the end step, return Viashino Cutthroat to its owner's hand.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_cutthroat.jpg
-
 Viashino Fangtail
 2 R R
 Creature Viashino Warrior
@@ -32427,26 +32486,6 @@ no text
 Echo:2 R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_outrider.jpg
-
-Viashino Sandscout
-1 R
-Creature Viashino Scout
-no text
-2/1
-Haste
-WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:ControllerEndStep:At the beginning of the end step, return Viashino Sandscout to its owner's hand. (Return it only if it's on the battlefield.)
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_sandscout.jpg
-
-Viashino Sandstalker
-1 R R
-Creature Viashino Warrior
-no text
-4/2
-Haste
-WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:ControllerEndStep:At the beginning of the end step, return Viashino Sandstalker to its owner's hand. (Return it only if it's on the battlefield.)
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_sandstalker.jpg
 
 Viashino Slasher
 1 R
