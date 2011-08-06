@@ -16814,6 +16814,68 @@ public class CardFactory implements NewConstants {
       }
       //*************** END ************ END **************************
         
+        
+      //*************** START *********** START **************************
+      else if (cardName.equals("Hurricane"))
+      {
+    	  final SpellAbility spell = new Spell(card)
+    	  {
+			private static final long serialVersionUID = -2426572612808093141L;
+			public void resolve()
+    		{
+				int damage = card.getXManaCostPaid();
+				CardList all = new CardList();
+                all.addAll(AllZone.Human_Play.getCards());
+                all.addAll(AllZone.Computer_Play.getCards());
+                all = all.filter(new CardListFilter()
+                {
+                	public boolean addCard(Card c)
+                	{
+                		return c.isCreature() && c.getKeyword().contains("Flying") &&
+                			   CardFactoryUtil.canDamage(card, c);
+                	}
+                });
+                
+                for(int i = 0; i < all.size(); i++)
+                    	all.get(i).addDamage(card.getXManaCostPaid(), card);
+                
+                AllZone.GameAction.addDamage(Constant.Player.Human, damage);
+                AllZone.GameAction.addDamage(Constant.Player.Computer, damage);
+                
+    			card.setXManaCostPaid(0);
+    		}
+			public boolean canPlayAI()
+			{
+				final int maxX = ComputerUtil.getAvailableMana().size() - 1;
+				
+				if (AllZone.Human_Life.getLife() <= maxX)
+					return true;
+				
+				CardListFilter filter = new CardListFilter(){
+					public boolean addCard(Card c)
+					{
+						return c.isCreature() && c.getKeyword().contains("Flying") &&
+							   CardFactoryUtil.canDamage(card, c) && maxX >= (c.getNetDefense() + c.getDamage());
+					}
+				};
+				
+				CardList humanFliers = new CardList(AllZone.Human_Play.getCards());
+			    humanFliers = humanFliers.filter(filter);
+			    
+			    CardList compFliers = new CardList(AllZone.Computer_Play.getCards());
+			    compFliers = compFliers.filter(filter);
+			    
+			    return humanFliers.size() > (compFliers.size() + 2) && AllZone.Computer_Life.getLife() > maxX + 3;
+			}
+    	  };
+    	  spell.setDescription("Hurricane deals X damage to each creature with flying and each player.");
+    	  spell.setStackDescription(card + " - deals X damage to each creature with flying and each player.");
+    	  
+    	  card.clearSpellAbility();
+    	  card.addSpellAbility(spell);
+      } 
+      //*************** END ************ END **************************
+    
       //*************** START *********** START **************************
       else if(cardName.equals("Helix Pinnacle"))
       {
@@ -16840,10 +16902,7 @@ public class CardFactory implements NewConstants {
     	  };
     	  ability.setBeforePayMana(new Input()
     	  {
-    		 /**
-			 * 
-			 */
-			private static final long serialVersionUID = 43786418486732L;
+    		private static final long serialVersionUID = 43786418486732L;
 
 			public void showMessage()
     		 {
