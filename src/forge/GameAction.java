@@ -656,6 +656,16 @@ public class GameAction {
         }
     }//destroyLegendaryCreatures()
     
+    public boolean PlayerHasThreshold(String player)
+    {
+    	PlayerZone pYard = AllZone.getZone(Constant.Zone.Graveyard, player);
+    	
+    	if (pYard.size() >= 7)
+    		return true;
+
+    	return false;
+    }
+    
     //ArrayList search is all Card objects, returns ArrayList of Cards
     public ArrayList<Card> getCardsNamed(ArrayList<Card> search, String name) {
         ArrayList<Card> a = new ArrayList<Card>();
