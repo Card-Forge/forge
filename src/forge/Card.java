@@ -1606,4 +1606,18 @@ public class Card extends MyObservable {
 	public boolean isReflectedLand() {
 		return reflectedLand;
 	}
+	
+	public boolean hasKeyword(String keyword)
+	{
+		return getKeyword().contains(keyword);
+	}
+	
+	public boolean hasAnyKeyword(String keywords[])
+	{
+		for (int i=0; i<keywords.length; i++)
+			if (hasKeyword(keywords[i]))
+				return true;
+		
+		return false;
+	}
 }
