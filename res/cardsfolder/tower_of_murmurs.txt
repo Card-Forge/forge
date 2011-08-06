@@ -1,0 +1,7 @@
+Name:Tower of Murmurs
+ManaCost:4
+Types:Artifact
+Text:no text
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_of_murmurs.jpg
+End

@@ -9119,8 +9119,14 @@ public class CardFactory implements NewConstants {
 
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Millstone")) {
-            Ability_Tap ab1 = new Ability_Tap(card, "2") {
+        else if(cardName.equals("Millstone") || cardName.equals("Tower of Murmurs")) {
+        	final int millCards = cardName.equals("Millstone") ? 2 : 8;
+        	final String cost = cardName.equals("Millstone") ? "2" : "8";
+        	final String desc = cardName.equals("Millstone") ? 
+        			"2, tap: Target player puts the top two cards of his or her library into his or her graveyard." :
+        			"8, tap: Target player puts the top eight cards of his or her library into his or her graveyard.";
+            
+        	Ability_Tap ab1 = new Ability_Tap(card, cost) {
                 
                 private static final long serialVersionUID = 42470566751344693L;
                 
@@ -9134,12 +9140,12 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.mill(getTargetPlayer(), 2);
+                    AllZone.GameAction.mill(getTargetPlayer(), millCards);
                 }
             };
             ab1.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
             ab1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ab1));
-            ab1.setDescription("2, tap: Target player puts the top two cards of his or her library into his or her graveyard.");
+            ab1.setDescription(desc);
             card.addSpellAbility(ab1);
         }//*************** END ************ END **************************
         
