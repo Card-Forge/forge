@@ -15472,20 +15472,6 @@ U
 Sorcery
 Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.
 
-Mycologist
-1 W
-Creature Human Druid
-At the beginning of your upkeep, put a spore counter on Mycologist.
-0/2
-Remove three spore counters from this card: Put a 1/1 green Saproling creature token into play.
-
-Elvish Farmer
-1 G
-Creature Elf
-At the beginning of your upkeep, put a spore counter on Elvish Farmer.
-0/2
-Remove three spore counters from this card: Put a 1/1 green Saproling creature token into play.
-
 Vedalken Archmage
 2 U U
 Creature Vedalken Wizard
