@@ -266,6 +266,7 @@ res/cardsfolder/anarchy.txt -text svneol=native#text/plain
 res/cardsfolder/ancestors_chosen.txt svneol=native#text/plain
 res/cardsfolder/ancestors_prophet.txt -text svneol=native#text/plain
 res/cardsfolder/ancestral_mask.txt -text svneol=native#text/plain
+res/cardsfolder/ancestral_memories.txt -text svneol=native#text/plain
 res/cardsfolder/ancestral_recall.txt -text svneol=native#text/plain
 res/cardsfolder/ancestral_tribute.txt -text svneol=native#text/plain
 res/cardsfolder/ancestral_vision.txt -text svneol=native#text/plain
