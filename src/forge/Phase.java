@@ -104,6 +104,9 @@ public class Phase extends MyObservable
         
         GameActionUtil.executeCardStateEffects();
         
+        Input_Cleanup.calcMaxHandSize();
+        Computer_Cleanup.calcMaxHandSize();
+        
         //for debugging: System.out.print("this phase - " +getActivePlayer() +" " +getPhase()+", next phase - ");
         needToNextPhase = false;
         

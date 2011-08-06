@@ -1,3 +1,75 @@
+Cursed Rack
+4
+Artifact
+As Cursed Rack enters the battlefield, choose an opponent. The chosen player's maximum hand size is four.
+HandSize = 4 Opponent
+
+Gnat Miser
+B
+Creature Rat Shaman
+Each opponent's hand size is reduced by one.
+1/1
+HandSize - 1 Opponent
+
+Graceful Adept
+2 U
+Creature Human Wizard
+You have no maximum hand size.
+1/3
+HandSize = INF Self
+
+Locust Miser
+2 B B
+Creature Rat Shaman
+Each opponent's maximum hand size is reduced by two.
+2/2
+HandSize - 2 Opponent
+
+Minamo Scrollkeeper
+1 U
+Creature Human Wizard
+Your maximum hand size is increased by one.
+2/3
+HandSize + 1 Self
+Defender
+
+Reliquary Tower
+no cost
+Land
+You have no maximum hand size.
+HandSize = INF Self
+tap: add 1
+
+Spellbook
+0
+Artifact
+You have no maximum hand size.
+HandSize = INF Self
+
+Thought Devourer
+2 U U
+Creature Beast
+Your maximum hand size is reduced by four.
+4/4
+HandSize - 4 Self
+Flying
+
+Thought Eater
+1 U
+Creature Beast
+Your maximum hand size is reduced by three.
+2/2
+HandSize - 3 Self
+Flying
+
+Thought Nibbler
+U
+Creature Beast
+Your maximum hand size is reduced by two.
+1/1
+HandSize - 2 Self
+Flying
+
 Sangrophage
 B B
 Creature Zombie

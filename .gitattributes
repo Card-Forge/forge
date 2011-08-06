@@ -338,6 +338,7 @@ src/forge/Gui_Shops.java -text svneol=native#text/plain
 src/forge/Gui_Treasury.java -text svneol=native#text/plain
 src/forge/Gui_Welcome.java svneol=native#text/plain
 src/forge/Gui_WinLose.java svneol=native#text/plain
+src/forge/HandSizeOp.java -text svneol=native#text/plain
 src/forge/IO.java svneol=native#text/plain
 src/forge/ImageCache.java svneol=native#text/plain
 src/forge/ImagePreviewPanel.java -text svneol=native#text/plain

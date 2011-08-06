@@ -22773,6 +22773,115 @@ public class CardFactory implements NewConstants {
             }
         }//echo
         
+        if(hasKeyword(card,"HandSize") != -1) {
+            String toParse = card.getKeyword().get(hasKeyword(card,"HandSize"));
+            card.removeIntrinsicKeyword(toParse);
+           
+            String parts[] = toParse.split(" ");
+            final String Mode = parts[1];
+            final int Amount;
+            if(parts[2].equals("INF")) {
+               Amount = -1;
+            }
+            else {
+               Amount = Integer.parseInt(parts[2]);
+            }
+            final String Target = parts[3];
+           
+            final Command entersPlay,leavesPlay, controllerChanges;
+           
+            entersPlay = new Command() {
+               private static final long serialVersionUID = 98743547743456L;
+               
+               public void execute() {
+                 card.setSVar("HSStamp","" + Input_Cleanup.GetHandSizeStamp());
+                  if(card.getController() == Constant.Player.Human) {
+                     //System.out.println("Human played me! Mode(" + Mode + ") Amount(" + Amount + ") Target(" + Target + ")" );
+                     if(Target.equals("Self")) {
+                        Input_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
+                     }
+                     else if(Target.equals("Opponent")) {
+                        Computer_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
+                     }
+                     else if(Target.equals("All")) {
+                        Computer_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
+                        Input_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
+                     }
+                  }
+                  else
+                  {
+                     //System.out.println("Compy played me! Mode(" + Mode + ") Amount(" + Amount + ") Target(" + Target + ")" );
+                     if(Target.equals("Self")) {
+                        Computer_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
+                     }
+                     else if(Target.equals("Opponent")) {
+                        Input_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
+                     }
+                     else if(Target.equals("All")) {
+                        Computer_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
+                        Input_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
+                     }
+                  }
+               }
+            };
+           
+            leavesPlay = new Command() {
+               private static final long serialVersionUID = -6843545358873L;
+               
+               public void execute() {
+                  if(card.getController() == Constant.Player.Human) {
+                     if(Target.equals("Self")) {
+                        Input_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
+                     }
+                     else if(Target.equals("Opponent")) {
+                        Computer_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
+                     }
+                     else if(Target.equals("All")) {
+                        Computer_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
+                        Input_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
+                     }
+                  }
+                  else
+                  {
+                     if(Target.equals("Self")) {
+                        Computer_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
+                     }
+                     else if(Target.equals("Opponent")) {
+                        Input_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
+                     }
+                     else if(Target.equals("All")) {
+                        Computer_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
+                        Input_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
+                     }
+                  }
+               }
+            };
+           
+            controllerChanges = new Command() {
+               private static final long serialVersionUID = 778987998465463L;
+               
+               public void execute() {
+                  System.out.println("Control changed: " + card.getController());
+                  if(card.getController().equals(Constant.Player.Human)) {
+                     Input_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
+                     Computer_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
+                     
+                     Computer_Cleanup.sortHandSizeOperations();
+                  }
+                  else if(card.getController().equals(Constant.Player.Computer)) {
+                     Computer_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
+                     Input_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));
+                     
+                     Input_Cleanup.sortHandSizeOperations();
+                  }
+               }
+            };
+           
+            card.addComesIntoPlayCommand(entersPlay);
+            card.addLeavesPlayCommand(leavesPlay);
+            card.addChangeControllerCommand(controllerChanges);
+         } //HandSize
+        
         if (card.getManaCost().contains("X"))
         {
         	SpellAbility sa = card.getSpellAbility()[0];
