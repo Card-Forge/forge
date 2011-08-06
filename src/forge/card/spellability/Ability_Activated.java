@@ -24,7 +24,7 @@ abstract public class Ability_Activated extends SpellAbility implements java.io.
     public boolean canPlay() {
     	if(AllZone.Stack.isSplitSecondOnStack()) return false;
     	
-        Card c = getSourceCard();
+        final Card c = getSourceCard();
         if (c.isFaceDown() && isIntrinsic())	// Intrinsic abilities can't be activated by face down cards
         	return false;
         if(c.hasKeyword("CARDNAME's activated abilities can't be activated.")) return false;
@@ -33,8 +33,8 @@ abstract public class Ability_Activated extends SpellAbility implements java.io.
 		Pithing.add(AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer));
 		Pithing = Pithing.getName("Pithing Needle");
 		Pithing = Pithing.filter(new CardListFilter() {
-			public boolean addCard(Card c){
-				return c.getSVar("PithingTarget").equals(c.getName());
+			public boolean addCard(Card crd){
+				return crd.getSVar("PithingTarget").equals(c.getName());
 			}
 		});
 		
