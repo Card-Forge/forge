@@ -1,0 +1,10 @@
+Name:Kelsinko Ranger
+ManaCost:W
+Types:Creature Human
+PT:1/1
+Text:no text
+A:AB$Pump | Cost$ 1 W | TgtPrompt$ Choose target green creature | ValidTgts$ Creature.Green | KW$ First Strike | SpellDescription$ Target green creature gains first strike until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kelsinko_ranger.jpg
+End

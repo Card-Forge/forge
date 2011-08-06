@@ -1,0 +1,10 @@
+Name:Foul Familiar
+ManaCost:2 B
+Types:Creature Spirit
+Text:no text
+PT:3/1
+K:CARDNAME can't block.
+A:AB$Bounce | Cost$ B PayLife<1> | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/foul_familiar.jpg
+End

@@ -1,0 +1,10 @@
+Name:Mesmeric Trance
+ManaCost:1 U U
+Types:Enchantment
+Text:no text
+K:Cumulative upkeep:1
+A:AB$Draw | Cost$ U Discard<1/Any> | NumCards $ 1 | SpellDescription$ Draw a card.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mesmeric_trance.jpg
+End
