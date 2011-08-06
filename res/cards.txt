@@ -1,3 +1,118 @@
+Political Trickery
+2 U
+Sorcery
+Exchange control of target land you control and target land an opponent controls. (This effect lasts indefinitely.)
+SVar:RemAIDeck:True
+
+Ponder
+U
+Sorcery
+Look at the top three cards of your library, then put them back in any order. You may shuffle your library.
+Draw a card.
+SVar:RemAIDeck:True
+
+Recall
+X X U
+Sorcery
+Discard X cards, then return a card from your graveyard to your hand for each card discarded this way. Exile Recall.
+SVar:RemAIDeck:True
+
+Resuscitate
+1 G
+Instant
+Until end of turn, creatures you control gain "1: Regenerate this creature." (NOTE: This ability is not currently implemented.)
+SVar:RemAIDeck:True
+
+Scattershot 
+2 R
+Instant
+Scattershot deals 1 damage to target creature. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
+Storm
+SVar:RemAIDeck:True
+
+Sensei's Divining Top
+1
+Artifact
+no text
+SVar:RemAIDeck:True
+
+Shield Wall
+1 W
+Instant
+no text
+spAllPump:YouCtrl:+0/+2:Creatures you control get +0/+2 until end of turn.:Shield Wall - Creatures get +0/+2 until EOT
+SVar:RemAIDeck:True
+
+Solidarity
+3 W
+Instant
+no text
+spAllPump:YouCtrl:+0/+5:Creatures you control get +0/+5 until end of turn.:Solidarity - Creatures get +0/+5 until EOT
+SVar:RemAIDeck:True
+
+Standstill
+1 U
+Enchantment
+When a player plays a spell, sacrifice Standstill. If you do, each of that player's opponents draws three cards.
+SVar:RemAIDeck:True
+
+Steadfastness
+1 W
+Sorcery
+no text
+spAllPump:YouCtrl:+0/+3:Creatures you control get +0/+3 until end of turn.:Steadfastness - Creatures get +0/+3 until EOT
+SVar:RemAIDeck:True
+
+Survival of the Fittest
+1 G
+Enchantment
+no text
+SVar:RemAIDeck:True
+
+Terramorphic Expanse
+no cost
+Land
+no text
+SVar:RemAIDeck:True
+
+Thwart
+2 U U
+Instant
+no text
+SVar:RemAIDeck:True
+
+Tortoise Formation
+3 U
+Instant
+no text
+spAllPump:YouCtrl:Shroud:Creatures you control gain shroud until end of turn.:Tortoise Formation - Creatures gain shroud until EOT
+SVar:RemAIDeck:True
+
+Twiddle
+U
+Instant
+You may tap or untap target artifact, creature, or land.
+SVar:RemAIDeck:True
+
+Vedalken Plotter
+2 U
+Creature Vedalken Wizard
+When Vedalken Plotter enters the battlefield, exchange control of target land you control and target land an opponent controls.
+1/1
+SVar:RemAIDeck:True
+
+Voltaic Key
+1
+Artifact
+no text
+SVar:RemAIDeck:True
+
+Yawgmoth's Bargain
+4 B B
+Enchantment
+Skip your draw step.
+SVar:RemAIDeck:True
+
 Global Ruin
 4 W
 Sorcery
@@ -4862,30 +4977,6 @@ Instant
 no text
 spAllPump:YouCtrl:+1/+0:Creatures you control get +1/+0 until end of turn.:Scare Tactics - Creatures get +1/+0 until EOT
 
-Shield Wall
-1 W
-Instant
-no text
-spAllPump:YouCtrl:+0/+2:Creatures you control get +0/+2 until end of turn.:Shield Wall - Creatures get +0/+2 until EOT
-
-Solidarity
-3 W
-Instant
-no text
-spAllPump:YouCtrl:+0/+5:Creatures you control get +0/+5 until end of turn.:Solidarity - Creatures get +0/+5 until EOT
-
-Steadfastness
-1 W
-Sorcery
-no text
-spAllPump:YouCtrl:+0/+3:Creatures you control get +0/+3 until end of turn.:Steadfastness - Creatures get +0/+3 until EOT
-
-Tortoise Formation
-3 U
-Instant
-no text
-spAllPump:YouCtrl:Shroud:Creatures you control gain shroud until end of turn.:Tortoise Formation - Creatures gain shroud until EOT
-
 Valorous Charge
 1 W W
 Sorcery
@@ -4928,11 +5019,6 @@ Creature Shapeshifter
 no text
 1/1
 Changeling
-
-Resuscitate
-1 G
-Instant
-Until end of turn, creatures you control gain "1: Regenerate this creature." (NOTE: This ability is not currently implemented.)
 
 Lightning Serpent
 X R
@@ -5796,12 +5882,6 @@ Instant
 Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library. Storm (When you cast this spell, copy it for each spell cast before it this turn.)
 Storm
 
-Scattershot 
-2 R
-Instant
-Scattershot deals 1 damage to target creature. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
-Storm
-
 Reaping the Graves  
 2 B
 Instant
@@ -6396,11 +6476,6 @@ Artifact Creature Zombie Wizard
 no text
 2/4
 abPump W B:Fear & Vigilance
-
-Recall
-X X U
-Sorcery
-Discard X cards, then return a card from your graveyard to your hand for each card discarded this way. Exile Recall.
 
 Moldervine Cloak
 2 G
@@ -7261,12 +7336,6 @@ Creature Bird
 When Sage Owl enters the battlefield, look at the top four cards of your library, then put them back in any order.
 1/1
 Flying
-
-Ponder
-U
-Sorcery
-Look at the top three cards of your library, then put them back in any order. You may shuffle your library.
-Draw a card.
 
 Daring Leap
 1 W U
@@ -8294,11 +8363,6 @@ Storm Seeker
 3 G
 Instant
 Storm Seeker deals damage equal to the number of cards in target player's hand to that player.
-
-Twiddle
-U
-Instant
-You may tap or untap target artifact, creature, or land.
 
 Kor Duelist
 W
@@ -10891,11 +10955,6 @@ Marsh Viper
 Creature Snake
 Whenever Marsh Viper deals damage to an opponent, that player gets two poison counters.
 1/2
-
-Thwart
-2 U U
-Instant
-no text
 
 Carnophage
 B
@@ -14672,17 +14731,6 @@ no text
 spGainLife:6
 Draw a card.
 
-Vedalken Plotter
-2 U
-Creature Vedalken Wizard
-When Vedalken Plotter enters the battlefield, exchange control of target land you control and target land an opponent controls.
-1/1
-
-Political Trickery
-2 U
-Sorcery
-Exchange control of target land you control and target land an opponent controls. (This effect lasts indefinitely.)
-
 Master Transmuter
 3 U
 Artifact Creature Human Artificer
@@ -16209,11 +16257,6 @@ no text
 2/2
 abPumpTgt G T:+2/+2
 
-Voltaic Key
-1
-Artifact
-no text
-
 Akki Drillmaster
 2 R
 Creature Goblin Shaman
@@ -16417,11 +16460,6 @@ Creature Dragon
 At the beginning of each upkeep, put a 1/1 red and green Dragon creature token with flying and devour 2 into play.
 4/4
 Flying
-
-Survival of the Fittest
-1 G
-Enchantment
-no text
 
 Heartmender
 2 GW GW
@@ -20289,11 +20327,6 @@ Legendary Creature Demon
 Whenever a player plays a black spell, you gain 1 life.
 5/5
 Swampwalk
-
-Standstill
-1 U
-Enchantment
-When a player plays a spell, sacrifice Standstill. If you do, each of that player's opponents draws three cards.
 
 Stonecloaker
 2 W
@@ -24845,11 +24878,6 @@ no text
 2/2
 Flying
 
-Terramorphic Expanse
-no cost
-Land
-no text
-
 Blinkmoth Nexus
 no cost
 Land
@@ -25138,11 +25166,6 @@ Creature Snake
 You may play Mystic Snake any time you could play an instant. When Mystic Snake comes into play, counter target spell.
 2/2
 Flash
-
-Yawgmoth's Bargain
-4 B B
-Enchantment
-Skip your draw step.
 
 Ancient Silverback
 4 G G
@@ -25445,11 +25468,6 @@ no text
 0/1
 Flying
 RegenerateMe:G
-
-Sensei's Divining Top
-1
-Artifact
-no text
 
 Vindicate
 1 W B
