@@ -2032,10 +2032,10 @@ class CardFactory_Lands {
 	         a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
 	         
 	         //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
-	   	  //anyway, this does the trick:
-	   	  card.removeIntrinsicKeyword("tap: add 1");
-	   	  //card.setText(card.getText() +  "\r\n1: Mutavault becomes a 2/2 creature with all creature types until end of turn. It's still a land.");
-	   	  card.addIntrinsicKeyword("tap: add 1");
+	   	     //anyway, this does the trick:
+	   	     //card.removeIntrinsicKeyword("tap: add 1");
+	   	     //card.setText(card.getText() +  "\r\n1: Mutavault becomes a 2/2 creature with all creature types until end of turn. It's still a land.");
+	   	     //card.addIntrinsicKeyword("tap: add 1");
 
 	       }//*************** END ************ END **************************
 	       
