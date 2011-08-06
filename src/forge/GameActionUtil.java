@@ -800,6 +800,9 @@ public class GameActionUtil {
 	
 	public static void playCard_Hand_of_the_Praetors(Card c)
 	{
+		if (!c.getKeyword().contains("Infect"))
+			return;
+		
 		final String controller = c.getController();
 
 		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
@@ -812,31 +815,28 @@ public class GameActionUtil {
 		for (int i=0;i<list.size();i++)
 		{
 			final Card card = list.get(i);
-			if (card.getKeyword().contains("Infect"))
+			final Ability ability = new Ability(card, "0")
 			{
-				final Ability ability = new Ability(card, "0")
+				public void resolve()
 				{
-					public void resolve()
-					{
-						if (getTargetPlayer().equals(Constant.Player.Human))
-							AllZone.Human_PoisonCounter.addPoisonCounters(1);
-						else
-							AllZone.Computer_PoisonCounter.addPoisonCounters(1);
-					}
-					
-					public void chooseTargetAI()
-					{
-						setTargetPlayer(Constant.Player.Human);
-					}
-				};
-				
-				ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
-				if (controller.equals(Constant.Player.Human))
-					AllZone.GameAction.playSpellAbility(ability);
-				else {
-					ability.chooseTargetAI();
-					AllZone.Stack.add(ability);
+					if (getTargetPlayer().equals(Constant.Player.Human))
+						AllZone.Human_PoisonCounter.addPoisonCounters(1);
+					else
+						AllZone.Computer_PoisonCounter.addPoisonCounters(1);
 				}
+				
+				public void chooseTargetAI()
+				{
+					setTargetPlayer(Constant.Player.Human);
+				}
+			};
+			
+			ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
+			if (controller.equals(Constant.Player.Human))
+				AllZone.GameAction.playSpellAbility(ability);
+			else {
+				ability.chooseTargetAI();
+				AllZone.Stack.add(ability);
 			}
 		}
 	}
