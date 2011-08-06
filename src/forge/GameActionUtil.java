@@ -413,6 +413,7 @@ public class GameActionUtil {
 				if (controller.equals(Constant.Player.Human))
 				{
 					CardList creatures = AllZoneUtil.getPlayerGraveyard(Constant.Player.Human);
+					creatures = creatures.getType("Creature");
 					Object check = AllZone.Display.getChoiceOptional("Select creature", creatures.toArray());
 					if(check != null) {
 	                    this.setTargetCard((Card) check);
