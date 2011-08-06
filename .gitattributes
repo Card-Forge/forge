@@ -4345,6 +4345,7 @@ res/cardsfolder/quagmire_druid.txt -text svneol=native#text/plain
 res/cardsfolder/quagmire_lamprey.txt -text svneol=native#text/plain
 res/cardsfolder/quagnoth.txt -text svneol=native#text/plain
 res/cardsfolder/quest_for_ancient_secrets.txt svneol=native#text/plain
+res/cardsfolder/quest_for_renewal.txt -text svneol=native#text/plain
 res/cardsfolder/quest_for_the_gemblades.txt svneol=native#text/plain
 res/cardsfolder/quest_for_the_goblin_lord.txt svneol=native#text/plain
 res/cardsfolder/quest_for_the_gravelord.txt svneol=native#text/plain
