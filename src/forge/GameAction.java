@@ -3726,8 +3726,9 @@ public class GameAction {
             int damageToAdd = damage;
             //AllZone.GameAction.addDamage(c, crd , assignedDamageMap.get(crd));
             
-            if (source.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME."))
-            	damage = 0;
+            if (source.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")
+        			|| source.getKeyword().contains("Prevent all combat damage that would be dealt dealt by CARDNAME."))
+            	damageToAdd = 0;
             else {
 	            if((source.getKeyword().contains("Wither") || source.getKeyword().contains("Infect")) && card.isCreature()) {
 	                damageToAdd = 0;
@@ -3749,10 +3750,9 @@ public class GameAction {
 	                AllZone.GameAction.destroy(card);
 	                AllZone.Combat.removeFromCombat(card);
 	            }
-	            
-	            //totalDamage += damageToAdd;
-	            map.put(source, damageToAdd);
             }
+	        //totalDamage += damageToAdd;
+	        map.put(source, damageToAdd);
         }
         
         if(isCardInPlay(card)) {
@@ -3856,6 +3856,9 @@ public class GameAction {
     */
     public void addCombatDamage(String player, Card source, int damage)
     {
+    	if (source.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")
+    			|| source.getKeyword().contains("Prevent all combat damage that would be dealt dealt by CARDNAME."))
+        	damage = 0;
     	//addDamage(player, source, damage);
     	if (source.getKeyword().contains("Infect"))
     		addPoison(player, damage);
