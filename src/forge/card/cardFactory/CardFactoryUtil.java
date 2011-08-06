@@ -3441,6 +3441,22 @@ public class CardFactoryUtil {
             return 0;
         }
         
+        // Count$YourPoisonCounters
+        if(sq[0].contains("YourPoisonCounters")) {
+            if(cardController.isComputer()) return doXMath(AllZone.ComputerPlayer.getPoisonCounters(), m);
+            else if(cardController.isHuman()) return doXMath(AllZone.HumanPlayer.getPoisonCounters(), m);
+            
+            return 0;
+        }
+        
+        // Count$OppPoisonCounters
+        if(sq[0].contains("OppPoisonCounters")) {
+            if(oppController.isComputer()) return doXMath(AllZone.ComputerPlayer.getPoisonCounters(), m);
+            else if(oppController.isHuman()) return doXMath(AllZone.HumanPlayer.getPoisonCounters(), m);
+            
+            return 0;
+        }
+        
         // Count$HighestLifeTotal
         if(sq[0].contains("HighestLifeTotal")) {
             return Math.max(AllZone.HumanPlayer.getLife(), AllZone.ComputerPlayer.getLife());
