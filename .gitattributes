@@ -427,6 +427,7 @@ res/cardsfolder/azorius_aethermage.txt svneol=native#text/plain
 res/cardsfolder/azorius_chancery.txt -text svneol=native#text/plain
 res/cardsfolder/azorius_first_wing.txt -text svneol=native#text/plain
 res/cardsfolder/azorius_guildmage.txt svneol=native#text/plain
+res/cardsfolder/azorius_ploy.txt -text svneol=native#text/plain
 res/cardsfolder/azorius_signet.txt -text svneol=native#text/plain
 res/cardsfolder/azure_drake.txt -text svneol=native#text/plain
 res/cardsfolder/azusa_lost_but_seeking.txt -text svneol=native#text/plain
