@@ -321,12 +321,18 @@ public class Cost_Payment {
     		return false;
     	}
 
+		resetUndoList();
 		req.finishPaying();
 		return true;
 	}
 
 	public boolean isAllPaid(){
 		return (payTap && payUntap && payMana && payXMana && paySubCounter && paySac && payExile && payLife && payDiscard && payTapXType && payReturn);
+	}
+	
+	public void resetUndoList(){
+		// todo: clear other undoLists here?
+		payTapXTypeTappedList.clear();
 	}
 	
 	public void cancelPayment(){
@@ -342,12 +348,12 @@ public class Cost_Payment {
 		// refund mana
         AllZone.ManaPool.unpaid();
         
-		if (cost.getTapXTypeCost() /*&& payTapXType*/){
+		if (cost.getTapXTypeCost()){ // Can't depend on payTapXType if canceling before tapping enough
 
 			for (Card c:payTapXTypeTappedList)
 				c.untap();	
 			//needed?
-			payTapXTypeTappedList = new CardList();
+			payTapXTypeTappedList.clear();
 		}
         
         // refund counters
