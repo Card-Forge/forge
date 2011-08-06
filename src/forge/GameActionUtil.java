@@ -262,7 +262,28 @@ public class GameActionUtil {
 					AllZone.Stack.add(ability);
 				}
 			}
-		}//end Blight
+		}//end Psychic Venom
+		
+		/*
+		 * Insolence - Whenever enchanted creature becomes 
+		 * tapped, Insolence deals 2 damage to that creature's controller.
+		 */
+		if(c.isEnchantedBy("Insolence")) {
+			final ArrayList<Card> cards = c.getEnchantedBy();
+			for(Card card:cards) {
+				final Card source = card;
+				if(card.getName().equals("Insolence")) {
+					Ability ability = new Ability(card, "0") {
+						@Override
+						public void resolve() {
+							AllZone.GameAction.addDamage(activePlayer, source, 2);
+						}
+					};//Ability
+					ability.setStackDescription(card.getName()+" - deals 2 damage to "+activePlayer);
+					AllZone.Stack.add(ability);
+				}
+			}
+		}//end Insolence
 		
 		/*
 		 * Whenever enchanted creature becomes tapped, put a -0/-2 counter on it.
@@ -7555,7 +7576,7 @@ public class GameActionUtil {
 	               public void resolve() {
 	            	   //String opponent = AllZone.GameAction.getOpponent(player);
 	            	   CardList libraryList = AllZoneUtil.getPlayerCardsInLibrary(player);
-	            	   PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
+	            	   //PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
 	            	   PlayerZone battlefield = AllZone.getZone(Constant.Zone.Play, player);
 	            	   boolean oathFlag = true;
 
