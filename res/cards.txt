@@ -15621,7 +15621,7 @@ no text
 Imperiosaur
 2 G G
 Creature Lizard
-Spend only mana produced by basic lands to play Imperiosaur.
+(NOTE: "Spend only mana produced by basic lands to play Imperiosaur." is not implemented.)
 5/5
 
 Wrap in Vigor
