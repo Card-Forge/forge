@@ -2303,6 +2303,11 @@ public class GameAction {
                 
                 AllZone.Computer_Library.add(card);
                 
+                for(Trigger trig : card.getTriggers())
+                {
+                	AllZone.TriggerHandler.registerTrigger(trig);
+                }
+                
                 if (card.getSVar("RemAIDeck").equals("True"))
                 	RAICards.add(card.getName());
                 //get card picture so that it is in the image cache

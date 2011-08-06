@@ -704,6 +704,7 @@ public class TriggerHandler {
 			}
 			else
 			{
+				wrapperAbility.canPlayAI();
 				ComputerUtil.playStack(wrapperAbility);
 			}
 		}

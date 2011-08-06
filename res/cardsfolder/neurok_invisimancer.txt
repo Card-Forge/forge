@@ -1,0 +1,10 @@
+Name:Neurok Invisimancer
+ManaCost:1 U U
+Types:Creature Human Wizard
+Text:no text
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature is unblockable this turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Tgt$ TgtC | KW$ Unblockable
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/neurok_invisimancer.jpg
+End
