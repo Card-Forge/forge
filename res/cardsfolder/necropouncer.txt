@@ -6,4 +6,5 @@ K:eqPump 2:+3/+1/Haste
 K:Living Weapon
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necropouncer.jpg
+SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/147.jpg
 End
