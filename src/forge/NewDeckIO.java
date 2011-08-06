@@ -201,7 +201,11 @@ public class NewDeckIO implements DeckIO {
             throw new RuntimeException("DeckIO : read() error, " + ex.getMessage());
         }
     }
-    
+    public Deck parseDeck(File f)//cast(in case read is private for a good reason)
+    {
+    	try{return read(new BufferedReader(new FileReader(f)));}
+    	catch(Exception e){return null;}
+    }
     private Deck read(BufferedReader in) throws IOException {
         String line;
         

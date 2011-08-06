@@ -16577,6 +16577,26 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     	card.clearSpellAbility();
     	card.addSpellAbility(spell);
     }//*************** END ************ END **************************
+  //*************** START *********** START **************************
+    else if (cardName.equals("Door to Nothingness"))
+    {
+    	Ability_Tap ab1 = new Ability_Tap(card, "G G R R B B U U W W")
+    	{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 6665327569823149191L;
+			public void resolve() {
+				AllZone.GameAction.getPlayerLife(getTargetPlayer()).setLife(0);
+			}
+			public boolean canPlayAI(){return true;}
+    	};
+    	ab1.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+    	ab1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ab1));
+    	ab1.setDescription("WWUUBBRRGG, tap, sacrifice Door to Nothingness: Target player loses the game.");
+    	card.addSpellAbility(ab1);
+    }//*************** END ************ END **************************
+    
     
     // Cards with Cycling abilities
     // -1 means keyword "Cycling" not found

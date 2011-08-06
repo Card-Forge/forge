@@ -10,6 +10,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -296,10 +297,22 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         
         return filter;
     }//getFileFilter()
+    private FileFilter dckFilter = new FileFilter(){
+
+		public boolean accept(File f) {
+			return f.getName().endsWith(".dck") || f.isDirectory();
+		}
+
+		public String getDescription() {
+			return "Simple Deck File .dck";
+		}
+    	
+    };
     
     private File getImportFilename() {
         JFileChooser chooser = new JFileChooser(previousDirectory);
         
+        chooser.addChoosableFileFilter(dckFilter);
         chooser.addChoosableFileFilter(getFileFilter());
         int returnVal = chooser.showOpenDialog(null);
         
@@ -328,6 +341,27 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         File file = getImportFilename();
         
         if(file == null) return;
+        else if (file.getName().endsWith(".dck"))
+        {
+        	try {
+                FileChannel srcChannel = new FileInputStream(file).getChannel();
+                File dst =  new File(ForgeProps.getFile(NEW_DECKS).getAbsolutePath() + java.io.File.pathSeparator + (file.getName()));
+                if(!dst.createNewFile())
+                {
+                	JOptionPane.showMessageDialog(null, "Cannot import deck " + file.getName() + ", a deck currently has that name.");
+                    return;
+                }
+                FileChannel dstChannel = new FileOutputStream(dst).getChannel();
+                dstChannel.transferFrom(srcChannel, 0, srcChannel.size());
+                srcChannel.close();
+                dstChannel.close();
+                JOptionPane.showMessageDialog(null, file.getName() + "imported succesfully. Restart the deck editor to see it.");
+            } catch (Exception ex) {
+                ErrorViewer.showError(ex);
+                throw new RuntimeException("Gui_DeckEditor_Menu : importDeck() error, " + ex);
+            }
+            return;
+        }
         
         Object check = null;
         

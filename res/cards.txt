@@ -1,3 +1,9 @@
+Door to Nothingness
+5
+Artifact
+no text
+Comes into play tapped.
+
 Cruel Edict
 1 B
 Sorcery

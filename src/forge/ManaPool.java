@@ -134,6 +134,7 @@ public class ManaPool extends Card
 	}
 	int containsColor(char color)
 	{
+		sortContents();
 		if(!has.contains(color + "")) return 0;
 		int res = has.lastIndexOf(color) - has.indexOf(color) + 1;
 		if(!isSnow()) res += smp.containsColor(color);
