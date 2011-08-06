@@ -54,11 +54,11 @@ public class Gui_Quest_Deck_Info implements NewConstants {
 //        addToDeckList("Bear 3", "hard", "Token 2/2s, a lot of Token 2/2s");
 //        addToDeckList("Beast 2", "medium", "GR Furnace Celebration");
 //        addToDeckList("Beast 3", "hard", "UWB Standard Constructed");
-        addToDeckList("Bela Lugosi 3", "hard", "Rares' Vampire deck, B creatures, little to no spells");
-        addToDeckList("Betty Rubble 3", "hard", "Indicatie's Summer Bloom deck with mods, features Plant + Eldrazi Spawn tokens");
+        addToDeckList("Bela Lugosi 3", "hard", "Vampire deck, B creatures, little to no spells");
+        addToDeckList("Betty Rubble 3", "hard", "Summer Bloom deck with mods, features Plant + Eldrazi Spawn tokens");
         addToDeckList("Blackbeard 3", "hard", "W Soldiers with Preeminent Captain, Captain of the Watch and Daru Warchief");
         addToDeckList("Boba Fett 3", "hard", "Dragons, Chandra Nalaar, Crucible of Fire and Dragon Roost");
-        addToDeckList("Boris Karloff 3", "hard", "LokiUndergod's Boros Aggro (RW) deck with mods, Kors, levelers and threat removal");
+        addToDeckList("Boris Karloff 3", "hard", "Boros Aggro (RW) deck with mods, Kors, levelers and threat removal");
         addToDeckList("Boromir 2", "medium", "Elvish Piper and Quicksilver Amulet with huge creatures");
         addToDeckList("Boromir 3", "hard", "Elvish Piper and Quicksilver Amulet with huge creatures");
 //        addToDeckList("Brood 2", "medium", "W Battlecry");
@@ -87,8 +87,8 @@ public class Gui_Quest_Deck_Info implements NewConstants {
         addToDeckList("Cyclops 3", "hard", "Slivers mainly, some spells");
         
         addToDeckList("Da Vinci 1", "easy", "Mono black deck, Ashenmoor Cohort + Badmoon + some Fear");
-        addToDeckList("Da Vinci 2", "medium", "Mono black deck, Korlash, Heir to Blackblade's + Badmoon + threat removal");
-        addToDeckList("Da Vinci 3", "hard", "Mono black deck, Korlash, Heir to Blackblade's + Badmoon + threat removal");
+        addToDeckList("Da Vinci 2", "medium", "Mono black deck, Korlash, Heir to Blackblade + Badmoon + threat removal");
+        addToDeckList("Da Vinci 3", "hard", "Mono black deck, Korlash, Heir to Blackblade + Badmoon + threat removal");
 //        addToDeckList("Darkseid 2", "medium", "B Sacrifice");
         addToDeckList("Darrin Stephens 1", "easy", "U Affinity deck, Affinity for artifacts and Modular cards");
         addToDeckList("Darrin Stephens 2", "medium", "U Affinity deck, Affinity for artifacts and Modular cards");
@@ -112,7 +112,7 @@ public class Gui_Quest_Deck_Info implements NewConstants {
 //        addToDeckList("Dr Fate 3", "hard", "UB Infect");
         addToDeckList("Dr No 3", "hard", "The Rack, Balance, Propaganda, discard spells");
         
-        addToDeckList("Electro 3", "hard", "Resonantg's Stormfront deck with mods, Arashi, the Sky Asunder + Ball Lightning");
+        addToDeckList("Electro 3", "hard", "Stormfront deck with mods, Arashi, the Sky Asunder + Ball Lightning");
         addToDeckList("Elrond 2", "medium", "Aura Gnarlid, Rabid Wombat and Uril with lots of auras");
 //        addToDeckList("En Sabah Nur 2", "medium", "RUB Singleton");
 //        addToDeckList("En Sabah Nur 3", "hard", "UBR Standard Constructed");
@@ -125,15 +125,15 @@ public class Gui_Quest_Deck_Info implements NewConstants {
 //        addToDeckList("Fin Fang Foom 1", "easy", "B Artifact");
 //        addToDeckList("Fin Fang Foom 2", "medium", "G Infect");
 //        addToDeckList("Fin Fang Foom 3", "hard", "GB Infect");
-        addToDeckList("Fred Flintstone 3", "hard", "Reasontg's Predator's Garden deck with mods, featuring Lorescale Coatl");
-        addToDeckList("Frodo 1", "easy", "New, Apthaven's AI Zoo Easy, some creature removal");
-        addToDeckList("Frodo 2", "medium", "New, Apthaven's AI Zoo Medium, some creature removal + Glorious Anthem");
-        addToDeckList("Frodo 3", "hard", "New, Apthaven's AI Zoo Hard, more creature removal + Glorious Anthems");
+        addToDeckList("Fred Flintstone 3", "hard", "Predator's Garden deck with mods, featuring Lorescale Coatl");
+        addToDeckList("Frodo 1", "easy", "Zoo Easy, some creature removal");
+        addToDeckList("Frodo 2", "medium", "Zoo Medium, some creature removal + Glorious Anthem");
+        addToDeckList("Frodo 3", "hard", "Zoo Hard, more creature removal + Glorious Anthems");
         
         addToDeckList("Galadriel 2", "medium", "Amulet of Vigor, green mana ramp, time vault and Howl of the Night Pack");
-        addToDeckList("Galahad 1", "easy", "Apthaven's knight deck with Kinsbaile Cavalier and Knight Exemplar");
-        addToDeckList("Galahad 2", "medium", "Apthaven's knight deck with Kinsbaile Cavalier and Knight Exemplar");
-        addToDeckList("Galahad 3", "hard", "Apthaven's knight deck with Kinsbaile Cavalier and Knight Exemplar");
+        addToDeckList("Galahad 1", "easy", "Knight deck with Kinsbaile Cavalier and Knight Exemplar");
+        addToDeckList("Galahad 2", "medium", "Knight deck with Kinsbaile Cavalier and Knight Exemplar");
+        addToDeckList("Galahad 3", "hard", "Knight deck with Kinsbaile Cavalier and Knight Exemplar");
 //        addToDeckList("Gambit 3", "hard", "UR, Watch out for Demigod of Revenge");
         addToDeckList("Genghis Khan 1", "easy", "Mana Elves + Birds + Armageddon, Llanowar Behemoth");
         addToDeckList("Genghis Khan 2", "medium", "Mana Elves + Birds + Armageddon, Llanowar Behemoth");
@@ -147,7 +147,7 @@ public class Gui_Quest_Deck_Info implements NewConstants {
 //        addToDeckList("Goblin King 3", "hard", "G/R Extended");
 //        addToDeckList("Goblin Recruit 2", "medium", "GR Skullclamp");
 //        addToDeckList("Goblin Recruit 3", "hard", "RB Goblin Sacrifice");
-        addToDeckList("Gold Finger 3", "hard", "Rares' U control deck, various counter spells and Serra Sphinx + Memnarch");
+        addToDeckList("Gold Finger 3", "hard", "U control deck, various counter spells and Serra Sphinx + Memnarch");
         addToDeckList("Grampa Simpson 1", "easy", "WR double strike deck, various equipments and auras");
         addToDeckList("Grampa Simpson 2", "medium", "WR double strike deck, various equipments and auras");
         addToDeckList("Grampa Simpson 3", "hard", "WR double strike deck, various equipments and auras");
@@ -158,11 +158,11 @@ public class Gui_Quest_Deck_Info implements NewConstants {
         
         addToDeckList("Han Solo 3", "hard", "WG enchantments deck with Sigil of the Empty Throne");
 //        addToDeckList("Hans 2", "medium", "GRW Allies");
-        addToDeckList("Harry Potter 1", "easy", "Sloth' deck, easier version of Beached As' mill and counter spell deck");
-        addToDeckList("Harry Potter 2", "medium", "Sloth' deck, easier version of Beached As' mill and counter spell deck");
-        addToDeckList("Harry Potter 3", "hard", "Beached As' deck, various milling cards, some speed up and counter spells");
+        addToDeckList("Harry Potter 1", "easy", "Mill and counter spell deck");
+        addToDeckList("Harry Potter 2", "medium", "Mill and counter spell deck");
+        addToDeckList("Harry Potter 3", "hard", "Various milling cards, some speed up and counter spells");
         addToDeckList("Hellboy 3", "hard", "A BR direct damage deck");
-        addToDeckList("Higgins 3", "hard", "Corwin72's Grixis Control deck, lots of threat removal and some creatures");
+        addToDeckList("Higgins 3", "hard", "Grixis Control deck, lots of threat removal and some creatures");
         addToDeckList("Homer Simpson 1", "easy", "Morph + Regenerate BRU creatures, + Raise Dead");
         addToDeckList("Homer Simpson 2", "medium", "Morph + Regenerate BRU creatures, + Raise Dead");
         addToDeckList("Homer Simpson 3", "hard", "Morph + Regenerate BRU creatures, + card draw and creature buff");
@@ -180,10 +180,10 @@ public class Gui_Quest_Deck_Info implements NewConstants {
         addToDeckList("Jack Sparrow 1", "easy", "Pirate type creatures + draw cards + counter spells");
         addToDeckList("Jack Sparrow 2", "medium", "Pirate type creatures + draw cards + threat removal");
         addToDeckList("Jack Sparrow 3", "hard", "Pirate type creatures + draw cards + creature control");
-        addToDeckList("James Bond 1", "easy", "gohongohon's easy WG Agro with several Slivers");
-        addToDeckList("James Bond 2", "medium", "gohongohon's Medium WG Agro with several Slivers + Glorious Anthem");
-        addToDeckList("James Bond 3", "hard", "gohongohon's Hard WGR Agro");
-        addToDeckList("James T Kirk 3", "hard", "Rares 40 card black discard deck + Liliana Vess");
+        addToDeckList("James Bond 1", "easy", "WG Agro with several Slivers");
+        addToDeckList("James Bond 2", "medium", "WG Agro with several Slivers + Glorious Anthem");
+        addToDeckList("James Bond 3", "hard", "WGR Agro");
+        addToDeckList("James T Kirk 3", "hard", "40 card black discard deck + Liliana Vess");
 //        addToDeckList("Jason Todd 3", "hard", "GBR Sacrifice");
         addToDeckList("Joe Kidd 1", "easy", "Voracious Hatchling, Nightsky Mimic, no planeswalkers + a few WB spells");
         addToDeckList("Joe Kidd 2", "medium", "Voracious Hatchling, Nightsky Mimic, no planeswalkers + some WB spells");
@@ -223,8 +223,8 @@ public class Gui_Quest_Deck_Info implements NewConstants {
         addToDeckList("Marge Simpson 3 ", "hard", "RG deck, creates tokens which are devoured by R and RG creatures with devour");
 //        addToDeckList("Michael 3", "hard", "W Angels");
         addToDeckList("Morpheus 3", "hard", "Elves with Overrun, Gaea's Anthem, Imperious Perfect and other pumps");
-        addToDeckList("Mr Slate 2", "medium", "Corwin72's Don't Go in the Water deck with mods, Merfolk and Merfolk pumps");
-        addToDeckList("Mr Slate 3", "hard", "Corwin72's Don't Go in the Water deck with mods, Merfolk and Merfolk pumps");
+        addToDeckList("Mr Slate 2", "medium", "Don't Go in the Water deck with mods, Merfolk and Merfolk pumps");
+        addToDeckList("Mr Slate 3", "hard", "Don't Go in the Water deck with mods, Merfolk and Merfolk pumps");
 //        addToDeckList("Mummy 1", "easy", "W Life");
         
 //        addToDeckList("Namor 2", "medium", "U Control");
@@ -272,12 +272,12 @@ public class Gui_Quest_Deck_Info implements NewConstants {
         addToDeckList("Saruman 2", "medium", "Discard deck with Megrim, Liliana's Caress and Burning Inquiry ");
         addToDeckList("Saruman 3", "hard", "Discard deck with Megrim, Liliana's Caress and Burning Inquiry ");
         addToDeckList("Sauron 2", "medium", "Black Vise and Underworld Dreams with lots of card draw for both players");
-        addToDeckList("Scooby Doo 3", "hard", "Rares' Red deck, Dragonmaster Outcast, Rakdos Pit Dragon, Kamahl, Pit Fighter");
+        addToDeckList("Scooby Doo 3", "hard", "Red deck, Dragonmaster Outcast, Rakdos Pit Dragon, Kamahl, Pit Fighter");
         addToDeckList("Scotty 2", "medium", "Pestilence + Castle + Penumbra Kavu/Spider/Wurm but no pro black");
-        addToDeckList("Seabiscuit 1", "easy", "Some Fear creatures, bounce and draw card spells");
-        addToDeckList("Seabiscuit 2", "medium", "Some Fear creatures, Garza Zol, Plague Queen + draw card spells");
-        addToDeckList("Seabiscuit 3", "hard", "Some Fear creatures, Garza Zol, Plague Queen + draw card & control spells");
-        addToDeckList("Secret Squirrel 3", "hard", "Dennis' squirrel deck, Squirrel Mob + Deranged Hermit + Coat of Arms + Nut Collector");
+        addToDeckList("Seabiscuit 1", "easy", "White Metalcraft deck, Ardent Recruit, Indomitable Archangel etc");
+        addToDeckList("Seabiscuit 2", "medium", "White Metalcraft deck, Ardent Recruit, Indomitable Archangel etc");
+        addToDeckList("Seabiscuit 3", "hard", "White Metalcraft deck, Ardent Recruit, Indomitable Archangel etc");
+        addToDeckList("Secret Squirrel 3", "hard", "Squirrel deck, Squirrel Mob + Deranged Hermit + Coat of Arms + Nut Collector");
 //        addToDeckList("Sentinel 2", "medium", "WB Token");
 //        addToDeckList("Sentinel 3", "hard", "WB Token");
 //        addToDeckList("Shelob 1", "easy", "G Reach");
@@ -286,15 +286,15 @@ public class Gui_Quest_Deck_Info implements NewConstants {
         addToDeckList("Sherlock Holmes 3", "hard", "Mono green deck, Baru, Fist of Krosa + lots of great green creatures.");
         addToDeckList("Silver Surfer 3", "hard", "Green creature beat down deck with several pump spells");
         addToDeckList("Spiderman 2", "medium", "White weenies with WoG, Armageddon, Mass Calcify");
-        addToDeckList("Spock 2", "medium", "Rares elf deck with just a single copy of most of the elves");
+        addToDeckList("Spock 2", "medium", "Elf deck with just a single copy of most of the elves");
 //        addToDeckList("Starfire 2", "medium", "Incarnations");
 //        addToDeckList("Starfire 3", "hard", "Incarnations");
         addToDeckList("Storm 1", "easy", "Creatures with Lifelink + filler");
         addToDeckList("Storm 2", "medium", "Creatures with Lifelink + filler");
         addToDeckList("Storm 3", "hard", "Creatures with Lifelink + filler");
 //        addToDeckList("Superboy 3", "hard", "Artifact Red");
-        addToDeckList("Superman 1", "easy", "Vecc\'s easy Slivers deck, Raise Dead + Breath of Life");
-        addToDeckList("Superman 2", "medium", "Vecc\'s medium Slivers deck, Zombify + Tribal Flames");
+        addToDeckList("Superman 1", "easy", "Slivers deck, Raise Dead + Breath of Life");
+        addToDeckList("Superman 2", "medium", "Slivers deck, Zombify + Tribal Flames");
 //        addToDeckList("Swamp Thing 1", "easy", "GB");
 //        addToDeckList("Swamp Thing 2", "medium", "GB");
 //        addToDeckList("Swamp Thing 3", "hard", "GB");
@@ -302,7 +302,7 @@ public class Gui_Quest_Deck_Info implements NewConstants {
         addToDeckList("Tarzan 1", "easy", "Jungle creatures + pump spells");
         addToDeckList("Tarzan 2", "medium", "Tarzan with Silverback Ape + pump spells");
         addToDeckList("Terminator 3", "hard", "Master of Etherium + Control Magic and Memnarch + many artifacts");
-        addToDeckList("The Great Gazoo 3", "hard", "Sloth's Sun Lotion deck, red damage all spells and pro from red creatures");
+        addToDeckList("The Great Gazoo 3", "hard", "Sun Lotion deck, red damage all spells and pro from red creatures");
 //        addToDeckList("Thing 2", "medium", "GW Elves");
 //        addToDeckList("Thing 3", "hard", "G Garruk Elves");
 //        addToDeckList("Thor 1", "easy", "WR Singleton");
