@@ -2209,6 +2209,57 @@ public class CardFactoryUtil {
         return target;
     }//input_discard()
     
+    /**
+     * custom input method only for use in Recall
+     * 
+     * @param numCards
+     * @param recall
+     * @return
+     */
+    public static Input input_discardRecall(final int numCards, final Card recall) {
+        Input target = new Input() {
+			private static final long serialVersionUID = 1942999595292561944L;
+			int n = 0;
+            
+            @Override
+            public void showMessage() {
+            	if (AllZone.Human_Hand.getCards().length == 0) stop();
+            	
+                AllZone.Display.showMessage("Select a card to discard");
+                ButtonUtil.disableAll();
+            }
+            
+            @Override
+            public void selectCard(Card card, PlayerZone zone) {
+                if(zone.is(Constant.Zone.Hand)) {
+                    AllZone.GameAction.discard(card);
+                    n++;
+                    
+                    //in case no more cards in hand
+                    if(n == numCards || AllZone.Human_Hand.getCards().length == 0) done();
+                    else
+                    	showMessage();
+                }
+            }
+            
+            void done() {
+            	AllZone.Display.showMessage("Returning cards to hand.");
+            	AllZone.GameAction.exile(recall);
+            	CardList grave = AllZoneUtil.getPlayerGraveyard(Constant.Player.Human);
+            	for(int i = 1; i <= n; i++) {
+            		String title = "Return card from grave to hand";
+            		Object o = AllZone.Display.getChoice(title, grave.toArray());
+            		if(o == null) break;
+            		Card toHand = (Card) o;
+            		grave.remove(toHand);
+            		AllZone.GameAction.moveToHand(toHand);
+            	}
+            	stop();
+            }
+        };
+        return target;
+    }//input_discardRecall()
+    
 
     /*
     //cardType is like "Creature", "Land", "Artifact", "Goblin", "Legendary"

@@ -782,6 +782,15 @@ public class GameAction {
         
     }
     
+    /**
+     * basically an alias for removeFromGame to bring the language in the code
+     * to match the mechanics in Forge
+     * @param c
+     */
+    public void exile(Card c) {
+    	removeFromGame(c);
+    }
+    
     public void removeUnearth(Card c)
     {
     	PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, c.getOwner());

@@ -19839,6 +19839,53 @@ public class CardFactory implements NewConstants {
             spell.setBeforePayMana(target);
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Recall")) {
+        	/*
+        	 * Discard X cards, then return a card from your graveyard to your
+        	 * hand for each card discarded this way. Exile Recall.
+        	 */
+        	final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -3935814273439962834L;
+
+				@Override
+        		public boolean canPlayAI() {
+        			//for compy to play this wisely, it should check hand, and if there
+        			//are no spells that canPlayAI(), then use recall.  maybe.
+        			return false;
+        		}
+
+        		@Override
+        		public void resolve() {
+        			int numCards = card.getXManaCostPaid();
+        			final String player = card.getController();
+        			int maxCards = AllZoneUtil.getPlayerHand(player).size();
+        			numCards = Math.min(numCards, maxCards);
+        			if(player.equals(Constant.Player.Human)) {
+        				AllZone.InputControl.setInput(CardFactoryUtil.input_discardRecall(numCards, card));
+        			}
+        			/*else { //computer
+        				AllZone.GameAction.discardRandom(Constant.Player.Computer, numCards);
+        				AllZone.GameAction.removeFromGame(card);
+        				CardList grave = AllZoneUtil.getPlayerGraveyard(card.getController());
+        				for(int i = 1; i <= numCards; i ++) {
+        					Card t1 = CardFactoryUtil.AI_getBestCreature(grave);
+        					if(null != t1) {
+        						t1 = grave.get(0);
+        						grave.remove(t1);
+        						AllZone.GameAction.moveToHand(t1);
+        					}
+        				}
+        			}*/
+        		}//resolve()
+        	};//SpellAbility
+
+        	spell.setStackDescription(card.getName()+" - discard X cards and return X cards to your hand.");
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
