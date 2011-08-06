@@ -1,6 +1,7 @@
 
 package forge;
 
+import java.awt.Component;
 import java.util.ArrayList;
 
 /**
@@ -639,5 +640,12 @@ public class AllZoneUtil {
 	public static boolean hasAllUrzas(Player player) {
 		return isCardInPlay("Urza's Power Plant", player) && isCardInPlay("Urza's Mine", player)
 			&& isCardInPlay("Urza's Tower", player);
+	}
+
+	public static CardList getLandsInPlay() {
+		CardList lands = new CardList();
+		lands.add(getPlayerLandsInPlay(AllZone.HumanPlayer));
+		lands.add(getPlayerLandsInPlay(AllZone.ComputerPlayer));
+		return lands;
 	}
 }

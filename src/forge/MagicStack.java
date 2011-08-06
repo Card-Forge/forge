@@ -52,6 +52,7 @@ public class MagicStack extends MyObservable {
 		if (!useX)
 			this.add(sp);
 		else {
+			
 			// TODO make working triggered abilities!
 			if (sp instanceof Ability_Mana || sp instanceof Ability_Triggered)
 				sp.resolve();
@@ -125,7 +126,7 @@ public class MagicStack extends MyObservable {
 		return manaCost;
 	}
 
-	public void add(SpellAbility sp) {
+	public void add(final SpellAbility sp) {
 		if (sp instanceof Ability_Mana) { // Mana Abilities go straight through
 			sp.resolve();
 			return;
@@ -146,7 +147,7 @@ public class MagicStack extends MyObservable {
 		// TODO: triggered abilities need to be fixed 
 		if (!(sp instanceof Ability_Triggered || sp instanceof Ability_Static))	
 			AllZone.Phase.setPriority(sp.getActivatingPlayer());	// when something is added we need to setPriority
-		
+				
 		// WheneverKeyword Test
 		boolean ActualEffectTriggered = false;
 		if (sp.getSourceCard().getKeyword().toString().contains("WheneverKeyword")) {
@@ -329,6 +330,64 @@ public class MagicStack extends MyObservable {
 
 			}
 		}
+		
+		if(sp instanceof Spell_Permanent && sp.getSourceCard().getName().equals("Mana Vortex")) {
+			final SpellAbility counter = new Ability(sp.getSourceCard(), "0") {
+				@Override
+				public void resolve() {
+					Input in = new Input() {
+						private static final long serialVersionUID = -2042489457719935420L;
+
+						@Override
+						public void showMessage() {
+							AllZone.Display.showMessage("Mana Vortex - select a land to sacrifice");
+							ButtonUtil.enableOnlyCancel();
+						}
+
+						@Override
+						public void selectButtonCancel() {
+							AllZone.Stack.pop();
+							AllZone.GameAction.moveToGraveyard(sp.getSourceCard());
+							stop();
+						}
+
+						@Override
+						public void selectCard(Card c, PlayerZone zone) {
+							if(zone.is(Constant.Zone.Play, AllZone.HumanPlayer)) {
+								AllZone.GameAction.sacrifice(c);
+
+								//if (free)
+									//this.setFree(true);
+
+								//if(spell.getManaCost().equals("0") || this.isFree()) {
+									//this.setFree(false);
+									//AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
+									stop();
+								//} else stopSetNext(new Input_PayManaCost(spell));
+							}
+						}
+					};
+					
+					if(sp.getSourceCard().getController().isHuman()) {
+						AllZone.InputControl.setInput(in);
+					}
+					else {//Computer
+						CardList lands = AllZoneUtil.getPlayerLandsInPlay(AllZone.ComputerPlayer);
+						if(!lands.isEmpty()) {
+							AllZone.ComputerPlayer.sacrificePermanent("prompt", lands);
+						}
+						else {
+							AllZone.Stack.pop();
+							AllZone.GameAction.moveToGraveyard(sp.getSourceCard());
+						}
+					}
+					
+				}//resolve()
+			};//SpellAbility
+			counter.setStackDescription(sp.getSourceCard().getName()+" - counter Mana Vortex unless you sacrifice a land.");
+			add(counter);
+		}
+		
 		if (sp.getTargetCard() != null)
 			CardFactoryUtil.checkTargetingEffects(sp, sp.getTargetCard());
 	}

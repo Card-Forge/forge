@@ -2660,6 +2660,7 @@ res/cardsfolder/mana_prism.txt -text svneol=native#text/plain
 res/cardsfolder/mana_short.txt -text svneol=native#text/plain
 res/cardsfolder/mana_tithe.txt -text svneol=native#text/plain
 res/cardsfolder/mana_vault.txt -text svneol=native#text/plain
+res/cardsfolder/mana_vortex.txt -text svneol=native#text/plain
 res/cardsfolder/manabarbs.txt -text svneol=native#text/plain
 res/cardsfolder/manaforce_mace.txt -text svneol=native#text/plain
 res/cardsfolder/manakin.txt -text svneol=native#text/plain

@@ -25,6 +25,7 @@ public class GameActionUtil {
 		
 		upkeep_The_Abyss();
 		upkeep_All_Hallows_Eve();
+		upkeep_Mana_Vortex();
 		upkeep_Defiler_of_Souls();
 		upkeep_Yawgmoth_Demon();
 		upkeep_Lord_of_the_Pit();
@@ -3639,6 +3640,41 @@ public class GameActionUtil {
 		return creats;
 	}
 	
+	private static void upkeep_Mana_Vortex() {
+		/*
+		 * At the beginning of each player's upkeep, that player
+		 * sacrifices a land.
+		 */
+		final Player player = AllZone.Phase.getPlayerTurn();
+		final CardList vortices = AllZoneUtil.getCardsInPlay("Mana Vortex");
+		
+		for(Card c:vortices) {
+			final Card vortex = c;
+			
+			final Ability sacrificeLand = new Ability(vortex, "") {
+				@Override
+				public void resolve() {
+					CardList choices = AllZoneUtil.getPlayerLandsInPlay(player);
+					player.sacrificePermanent(vortex.getName()+" - select a land to sacrifice.", choices);
+					
+					//if no lands in play, sacrifice all "Mana Vortex"s
+					if(AllZoneUtil.getLandsInPlay().size() == 0) {
+						for(Card d:vortices) {
+							AllZone.GameAction.sacrifice(d);
+						}
+						return;
+					}
+				}//resolve
+			};//sacrificeCreature
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(vortex.getName()).append(" - "+player+" sacrifices a land.");
+			sacrificeLand.setStackDescription(sb.toString());
+			
+			AllZone.Stack.add(sacrificeLand);
+		}//end for
+	}//Mana_Vortex
+	
 	private static void upkeep_All_Hallows_Eve() {
 		/*
 		 * At the beginning of your upkeep, if All Hallow's Eve is exiled
@@ -3684,7 +3720,7 @@ public class GameActionUtil {
 				AllZone.Stack.add(hallow);
 			}
 		}//end for
-	}//The Abyss
+	}//All_Hallows_Eve
 
 	private static void upkeep_Defiler_of_Souls() {
 		/*
@@ -10406,6 +10442,7 @@ public class GameActionUtil {
 
 		Sacrifice_NoIslands.execute();
 		Sacrifice_NoForests.execute();
+		Sacrifice_NoLands.execute();
 		
 		topCardReveal_Update.execute();
 		//Angelic_Chorus.execute();
@@ -17264,6 +17301,28 @@ public class GameActionUtil {
 
 			for(Card c:creature) {
 				if(AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Forest").size() == 0) {
+					AllZone.GameAction.sacrifice(c);
+				}
+			}
+
+		}//execute()
+	};
+	
+	public static Command Sacrifice_NoLands = new Command() {
+		private static final long serialVersionUID = 2768929064034728027L;
+
+		public void execute() {
+			CardList cards = AllZoneUtil.getCardsInPlay();
+
+			cards = cards.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					return c.getKeyword().contains(
+							"When there are no lands on the battlefield, sacrifice CARDNAME.");
+				}
+			});
+
+			for(Card c:cards) {
+				if(AllZoneUtil.getLandsInPlay().size() == 0) {
 					AllZone.GameAction.sacrifice(c);
 				}
 			}

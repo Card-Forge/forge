@@ -1,0 +1,8 @@
+Name:Mana Vortex
+ManaCost:1 U U
+Types:Enchantment
+Text:When you cast Mana Vortex, counter it unless you sacrifice a land.\r\nAt the beginning of each player's upkeep, that player sacrifices a land.\r\nWhen there are no lands on the battlefield, sacrifice Mana Vortex.
+K:When there are no lands on the battlefield, sacrifice CARDNAME.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_vortex.jpg
+End
