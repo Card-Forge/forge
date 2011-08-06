@@ -60,6 +60,7 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
         if(f.exists()) canEditComputerDecks = true;
         else canEditComputerDecks = false;
         
+        
         deckDisplay = d;
         d.setTitle(deckEditorName);
         

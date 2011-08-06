@@ -3058,6 +3058,15 @@ public class CardFactoryUtil {
         return count;
     }
     
+    public static CardList getCards(String cardName)
+    {
+    	CardList list = new CardList();
+    	list.addAll(AllZone.Human_Play.getCards());
+    	list.addAll(AllZone.Computer_Play.getCards());
+    	list = list.getName(cardName);
+    	return list;
+    }
+    
     public static CardList getCards(String cardName, String player) {
         CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, player).getCards());
         list = list.getName(cardName);

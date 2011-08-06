@@ -3520,7 +3520,7 @@ Trample
 Gaddock Teeg
 G W
 Legendary Creature Kithkin Advisor
-Noncreature spells with converted mana cost 4 or greater can't be cast. (NOTE: "Noncreature spells with {X} in their mana costs can't be cast." is not implemented.)
+Noncreature spells with converted mana cost 4 or greater can't be cast. Noncreature spells with X in their mana costs can't be cast.
 2/2
 
 Iona, Shield of Emeria

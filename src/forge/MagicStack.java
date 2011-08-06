@@ -142,7 +142,6 @@ public class MagicStack extends MyObservable
     	
     	//put code for Standstill here
     	GameActionUtil.executePlayCardEffects(sp);
-    	
     }
   }
   public SpellAbility pop()

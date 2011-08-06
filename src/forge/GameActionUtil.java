@@ -5937,6 +5937,12 @@ public class GameActionUtil {
                 public void resolve() {
                     String opponent = AllZone.GameAction.getOpponent(player);
                     PlayerLife life = AllZone.GameAction.getPlayerLife(opponent);
+                    
+                    int gameNumber = 0;
+                    if (Constant.Runtime.WinLose.getWin()==1)
+                    	gameNumber = 1;
+                    Constant.Runtime.WinLose.setWinMethod(gameNumber,"Barren Glory");
+                    
                     life.setLife(0);
                 }
             };// Ability
@@ -14484,11 +14490,21 @@ public class GameActionUtil {
                                                                   spells.addAll(AllZone.Human_Hand.getCards());
                                                                   spells.addAll(AllZone.Computer_Hand.getCards());
                                                                   spells.addAll(AllZone.Computer_Graveyard.getCards());
+                                                                  
+                                                                  
                                                                   spells = spells.filter(new CardListFilter() {
                                                                       public boolean addCard(Card c) {
-                                                                          return !c.isLand()
+                                                                          
+                                                                    	  boolean isXNonCreature = false;
+                                                                    	  if (c.getSpellAbility().length > 0)
+                                                                    	  {
+                                                                    		  if (c.getSpellAbility()[0].isXCost())
+                                                                    			  isXNonCreature = true;
+                                                                    	  }
+                                                                    			  
+                                                                    	  return !c.isLand()
                                                                                   && !c.isCreature()
-                                                                                  && CardUtil.getConvertedManaCost(c.getManaCost()) >= 4;
+                                                                                  && (CardUtil.getConvertedManaCost(c.getManaCost()) >= 4 || isXNonCreature);
                                                                       }
                                                                   });
                                                                   

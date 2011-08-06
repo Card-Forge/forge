@@ -263,7 +263,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             	String fileName = quest.addRandomRare() + ".jpg";
             	ImageIcon icon = getIcon(fileName);
                 
-                JOptionPane.showMessageDialog(null, "You have won a random rare.", "", JOptionPane.INFORMATION_MESSAGE, icon);
+                JOptionPane.showMessageDialog(null, "", "You have won a random rare.", JOptionPane.INFORMATION_MESSAGE, icon);
             }
             
             winLose.reset();

@@ -36,6 +36,14 @@ abstract public class Spell extends SpellAbility implements java.io.Serializable
         if (card.isUnCastable())
         	return false;
         
+        /*
+        if (!card.isCreature() && card.getSpellAbility().length > 0)
+        {
+        	if (card.getSpellAbility()[0].isXCost() && CardFactoryUtil.getCards("Gaddock Teeg").size()>0)
+        		return false;
+        }
+        */
+        
         if(card.isInstant()) return true;
         else if((phase.equals(Constant.Phase.Main1) || phase.equals(Constant.Phase.Main2))
                 && controller.equals(activePlayer) && AllZone.Stack.size() == 0 && zone.is(Constant.Zone.Hand)) {
