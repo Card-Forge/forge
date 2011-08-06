@@ -11095,7 +11095,7 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Lifeforce")) {
         	final SpellAbility counter = new Ability(card, "G G") {
@@ -11176,6 +11176,7 @@ public class CardFactory implements NewConstants {
         	counter.setStackDescription(cardName+" - counter target green spell.");
         	card.addSpellAbility(counter);
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Pithing Needle")) {
