@@ -2620,33 +2620,13 @@ public class GameActionUtil {
 		}
 
 	}//landfall_Eternity_Vessel
-
-	public static void executeLifeLinkEffects(final Card c, int n) {
-		final Player player = c.getController();
-
-		final int power = n;
-
-		Ability ability2 = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				player.gainLife(power, c);
-			}
-		}; // ability2
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append(c.getName()).append(" (Lifelink) - ").append(player);
-		sb.append(" gains ").append(power).append(" life.");
-		ability2.setStackDescription(sb.toString());
-		
-		AllZone.Stack.add(ability2);
-	}
 	
 	//not restricted to combat damage, not restricted to dealing damage to creatures/players
 	public static void executeDamageDealingEffects(final Card source, int damage) {
 		
 		if (damage <= 0) return;
 		
-        if(source.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(source, damage);
+        if(source.getKeyword().contains("Lifelink")) source.getController().gainLife(damage, source);
         
 	}
 	
