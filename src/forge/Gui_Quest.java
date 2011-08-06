@@ -248,7 +248,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         jLabel5.setText("Your Deck:");
         jLabel5.setBounds(new Rectangle(15, 151, 125, 29));
         deckComboBox.setBounds(new Rectangle(98, 152, 185, 29));
-        petComboBox.setBounds(new Rectangle(291, 16, 142, 38));
+        petComboBox.setBounds(new Rectangle(338, 516, 142, 38));
         smoothLandCheckBox.setText("Stack AI land");
         smoothLandCheckBox.setBounds(new Rectangle(154, 455, 153, 21));
         //smoothLandCheckBox.setSelected(true);
@@ -266,7 +266,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         jPanel2.add(jLabel5, null);
         this.getContentPane().add(infoButton, null);
         jPanel2.add(deckComboBox, null);
-        jPanel2.add(petComboBox, null);
+        //jPanel2.add(petComboBox, null);
         jPanel2.add(oppOneRadio, null);
         jPanel2.add(oppTwoRadio, null);
         jPanel2.add(oppThreeRadio, null);
@@ -274,6 +274,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         	this.getContentPane().add(otherShopsButton, null);
         	this.getContentPane().add(lifeLabel,null);
         	this.getContentPane().add(questsButton, null);
+        	this.getContentPane().add(petComboBox, null);
         	
         	int questsPlayed = questData.getQuestsPlayed();
         	System.out.println("questsPlayed: " + questsPlayed);

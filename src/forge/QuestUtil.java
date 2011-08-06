@@ -228,13 +228,13 @@ public class QuestUtil {
 		}
 		else if (level == 3)
 		{
-			imageName = "G 3 1 Crocodile Pet";
+			imageName = "B 3 1 Crocodile Pet";
 			baseDefense = 1;
 			baseAttack = 3;
 		}
 		else if (level == 4)
 		{
-			imageName = "G 3 1 Crocodile Pet Swampwalk";
+			imageName = "B 3 1 Crocodile Pet Swampwalk";
 			baseDefense = 1;
 			baseAttack = 3;
 		}

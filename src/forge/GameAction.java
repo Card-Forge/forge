@@ -873,11 +873,12 @@ public class GameAction {
         else if(Constant.Runtime.Mill[0]) {
             PlayerLife life = AllZone.GameAction.getPlayerLife(player);
             
-            int gameNumber = 0;
-            if (Constant.Runtime.WinLose.getWin()==1)
-            	gameNumber = 1;
-            Constant.Runtime.WinLose.setWinMethod(gameNumber,"Milled");
-            
+            if (player.equals(Constant.Player.Human)) {
+	            int gameNumber = 0;
+	            if (Constant.Runtime.WinLose.getWin()==1)
+	            	gameNumber = 1;
+	            Constant.Runtime.WinLose.setWinMethod(gameNumber,"Milled");
+            }
             life.setLife(0);
             checkStateEffects();
         }
