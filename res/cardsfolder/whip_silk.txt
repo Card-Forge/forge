@@ -5,4 +5,6 @@ Text:Enchanted creature has reach.
 K:Enchant creature
 K:enPump:Reach
 A:AB$ChangeZone | Cost$ G | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/whip_silk.jpg
 End
