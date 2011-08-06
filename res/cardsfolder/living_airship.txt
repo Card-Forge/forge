@@ -1,0 +1,10 @@
+Name:Living Airship
+ManaCost:3 U
+Types:Creature Metathran
+Text:no text
+PT:2/3
+K:Flying
+K:RegenerateMe:2 G
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/living_airship.jpg
+End

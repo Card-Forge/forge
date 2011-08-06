@@ -1,0 +1,8 @@
+Name:Lord of Extinction
+ManaCost:3 B G
+Types:Creature Elemental
+Text:Lord of Extinction's power and toughness are each equal to the number of cards in all graveyards.
+PT:1/1
+K:SVar:Rarity:Mythic
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_extinction.jpg
+End

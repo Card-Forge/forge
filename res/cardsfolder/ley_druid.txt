@@ -1,0 +1,9 @@
+Name:Ley Druid
+ManaCost:2 G
+Types:Creature Human Druid
+Text:no text
+PT:1/1
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ley_druid.jpg
+End

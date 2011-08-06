@@ -1,0 +1,9 @@
+Name:Lu Meng, Wu General
+ManaCost:3 U U
+Types:Legendary Creature Human Soldier
+Text:no text
+PT:4/4
+K:Horsemanship
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lu_meng_wu_general.jpg
+End

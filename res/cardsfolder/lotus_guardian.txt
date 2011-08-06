@@ -1,0 +1,14 @@
+Name:Lotus Guardian
+ManaCost:7
+Types:Artifact Creature Dragon
+Text:no text
+PT:4/4
+K:Flying
+K:tap: add W
+K:tap: add U
+K:tap: add B
+K:tap: add R
+K:tap: add G
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card23233.jpg
+End

@@ -1,0 +1,8 @@
+Name:Loxodon Mystic
+ManaCost:3 W W
+Types:Creature Elephant Cleric
+Text:no text
+PT:3/3
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_mystic.jpg
+End

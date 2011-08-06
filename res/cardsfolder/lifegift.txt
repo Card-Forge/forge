@@ -1,0 +1,8 @@
+Name:Lifegift
+ManaCost:2 G
+Types:Enchantment
+Text:no text
+K:WheneverKeyword:EntersBattleField:Type/Land:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever a land enters the battlefield, you may gain 1 life.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lifegift.jpg
+End

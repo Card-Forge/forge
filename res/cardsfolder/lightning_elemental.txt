@@ -1,0 +1,9 @@
+Name:Lightning Elemental
+ManaCost:3 R
+Types:Creature Elemental
+Text:no text
+PT:4/1
+K:Haste
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83150.jpg
+End

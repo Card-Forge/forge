@@ -1,0 +1,9 @@
+Name:Locust Miser
+ManaCost:2 B B
+Types:Creature Rat Shaman
+Text:Each opponent's maximum hand size is reduced by two.
+PT:2/2
+K:HandSize - 2 Opponent
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/locust_miser.jpg
+End

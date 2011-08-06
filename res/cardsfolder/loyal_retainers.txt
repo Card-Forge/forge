@@ -1,0 +1,8 @@
+Name:Loyal Retainers
+ManaCost:2 W
+Types:Creature Human Advisor
+Text:no text
+PT:1/1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/loyal_retainers.jpg
+End

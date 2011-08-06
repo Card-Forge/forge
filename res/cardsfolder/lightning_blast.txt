@@ -1,0 +1,8 @@
+Name:Lightning Blast
+ManaCost:3 R
+Types:Instant
+Text:no text
+K:spDamageTgtCP:4
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_blast.jpg
+End

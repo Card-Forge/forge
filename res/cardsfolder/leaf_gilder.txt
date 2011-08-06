@@ -1,0 +1,9 @@
+Name:Leaf Gilder
+ManaCost:1 G
+Types:Creature Elf Druid
+Text:no text
+PT:2/1
+K:tap: add G
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card139487.jpg
+End

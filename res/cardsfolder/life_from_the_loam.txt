@@ -1,0 +1,8 @@
+Name:Life from the Loam
+ManaCost:1 G
+Types:Sorcery
+Text:Return up to three target land cards from your graveyard to your hand.
+K:Dredge 3
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/life_from_the_loam.jpg
+End

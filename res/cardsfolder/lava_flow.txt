@@ -1,0 +1,8 @@
+Name:Lava Flow
+ManaCost:3 R R
+Types:Sorcery
+Text:Destroy target creature or land.
+K:spDestroyTgt:Creature,Land
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/lava_flow.jpg
+End

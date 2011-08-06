@@ -1,0 +1,9 @@
+Name:Lockjaw Snapper
+ManaCost:4
+Types:Artifact Creature Scarecrow
+Text:When Lockjaw Snapper is put into a graveyard from play, put a -1/-1 counter on each creature with a -1/-1 counter on it.
+PT:2/2
+K:Wither
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lockjaw_snapper.jpg
+End

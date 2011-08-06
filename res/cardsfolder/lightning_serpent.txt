@@ -1,0 +1,11 @@
+Name:Lightning Serpent
+ManaCost:X R
+Types:Creature Elemental Serpent
+Text:Lightning Serpent enters the battlefield with X +1/+0 counters on it.
+PT:2/1
+K:Trample
+K:Haste
+K:At the beginning of the end step, sacrifice CARDNAME.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_serpent.jpg
+End

@@ -1,0 +1,10 @@
+Name:Longbow Archer
+ManaCost:W W
+Types:Creature Human Soldier Archer
+Text:no text
+PT:2/2
+K:First Strike
+K:Reach
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/longbow_archer.jpg
+End

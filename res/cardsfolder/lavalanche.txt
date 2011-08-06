@@ -1,0 +1,7 @@
+Name:Lavalanche
+ManaCost:X B R G
+Types:Sorcery
+Text:no text
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lavalanche.jpg
+End

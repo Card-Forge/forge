@@ -1,0 +1,9 @@
+Name:Lay Waste
+ManaCost:3 R
+Types:Sorcery
+Text:Destroy target land.
+K:spDestroyTgt:Land
+K:Cycling:2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5817.jpg
+End

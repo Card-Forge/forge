@@ -1,0 +1,8 @@
+Name:Liliana's Caress
+ManaCost:1 B
+Types:Enchantment
+Text:no text
+K:WheneverKeyword:DiscardsCard:ControllingPlayer_Opponent:Play:ModifyLife/-2:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever an opponent discards a card, that player loses 2 life.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lilianas_caress.jpg
+End

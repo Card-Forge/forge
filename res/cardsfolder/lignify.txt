@@ -1,0 +1,7 @@
+Name:Lignify
+ManaCost:1 G
+Types:Tribal Sorcery Treefolk
+Text:Target creature is a 0/4 Treefolk with no abilities. (NOTE: This spell is currently treated as a Sorcery rather than as an Enchantment Aura. This card is rather buggy.)
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lignify.jpg
+End

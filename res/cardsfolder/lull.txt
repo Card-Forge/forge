@@ -1,0 +1,9 @@
+Name:Lull
+ManaCost:1 G
+Types:Instant
+Text:no text
+K:Cycling:2
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lull.jpg
+End

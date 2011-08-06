@@ -1,0 +1,8 @@
+Name:Leonin Sun Standard
+ManaCost:2
+Types:Artifact
+Text:no text
+K:abAllPump 1 W:YouCtrl:+1/+1:Creatures you control get +1/+1 until end of turn.:Leonin Sun Standard - creatures get +1/+1 until EOT
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_sun_standard.jpg
+End

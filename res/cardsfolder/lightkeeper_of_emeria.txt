@@ -1,0 +1,10 @@
+Name:Lightkeeper of Emeria
+ManaCost:3 W
+Types:Creature Angel
+Text:When Lightkeeper of Emeria enters the battlefield, you gain 2 life for each time it was kicked.
+PT:2/4
+K:Flying
+K:Multikicker W
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lightkeeper_of_emeria.jpg
+End

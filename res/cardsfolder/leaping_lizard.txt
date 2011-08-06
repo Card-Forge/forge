@@ -1,0 +1,9 @@
+Name:Leaping Lizard
+ManaCost:1 G G
+Types:Creature Lizard
+Text:no text
+PT:2/3
+K:abPump 1 G:-0/-1/Flying
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/leaping_lizard.jpg
+End

@@ -1,0 +1,8 @@
+Name:Lava Spike
+ManaCost:R
+Types:Sorcery
+Text:no text
+K:spDamageTgtP:3
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card79084.jpg
+End

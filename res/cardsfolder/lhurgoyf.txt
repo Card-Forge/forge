@@ -1,0 +1,8 @@
+Name:Lhurgoyf
+ManaCost:2 G G
+Types:Creature Lhurgoyf
+Text:Lhurgoyf's power is equal to the number of creature cards in all graveyards and its toughness is equal to that number plus 1.
+PT:0/1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/Lhurgoyf.jpg
+End

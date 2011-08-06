@@ -1,0 +1,9 @@
+Name:Leaden Myr
+ManaCost:2
+Types:Artifact Creature Myr
+Text:no text
+PT:1/1
+K:tap: add B
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/leaden_myr.jpg
+End

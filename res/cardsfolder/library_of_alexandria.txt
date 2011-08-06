@@ -1,0 +1,8 @@
+Name:Library of Alexandria
+ManaCost:no cost
+Types:Land
+Text:no text
+K:tap: add 1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/an/en-us/card990.jpg
+End

@@ -1,0 +1,9 @@
+Name:Last Word
+ManaCost:2 U U
+Types:Instant
+Text:Counter target spell.
+K:spCounter:Spell:None:Graveyard:None
+K:CARDNAME can't be countered.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/last_word.jpg
+End

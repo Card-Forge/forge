@@ -1,0 +1,10 @@
+Name:Lu Bu, Master-at-Arms
+ManaCost:5 R
+Types:Legendary Creature Human Soldier Warrior
+Text:no text
+PT:4/3
+K:Haste
+K:Horsemanship
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lu_bu_master_at_arms.jpg
+End

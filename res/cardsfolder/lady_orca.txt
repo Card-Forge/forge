@@ -1,0 +1,8 @@
+Name:Lady Orca
+ManaCost:5 B R
+Types:Legendary Creature Demon
+Text:no text
+PT:7/4
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1667.jpg
+End

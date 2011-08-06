@@ -1,0 +1,8 @@
+Name:Lady Caleria
+ManaCost:3 G G W W
+Types:Legendary Creature Human Archer
+Text:no text
+PT:3/6
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lady_caleria.jpg
+End

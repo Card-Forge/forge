@@ -1,0 +1,9 @@
+Name:Llanowar Dead
+ManaCost:B G
+Types:Creature Zombie Elf
+Text:no text
+PT:2/2
+K:tap: add B
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card26759.jpg
+End

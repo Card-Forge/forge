@@ -1,0 +1,9 @@
+Name:Lys Alana Huntmaster
+ManaCost:2 G G
+Types:Creature Elf Warrior
+Text:no text
+PT:3/3
+K:WheneverKeyword:CastSpell/Controller:Type/Elf:Play:MakeToken-Elf Warrior-G-1-1-None-/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever you cast an Elf spell, you may put a 1/1 green Elf Warrior creature token onto the battlefield.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lys_alana_huntmaster.jpg
+End

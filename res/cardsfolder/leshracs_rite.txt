@@ -1,0 +1,9 @@
+Name:Leshrac's Rite
+ManaCost:B
+Types:Enchantment Aura
+Text:Enchanted creature has swampwalk.
+K:Enchant creature
+K:enPump:Swampwalk
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/leshracs_rite.jpg
+End

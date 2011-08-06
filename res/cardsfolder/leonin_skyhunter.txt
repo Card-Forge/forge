@@ -1,0 +1,9 @@
+Name:Leonin Skyhunter
+ManaCost:W W
+Types:Creature Cat Knight
+Text:no text
+PT:2/2
+K:Flying
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83416.jpg
+End

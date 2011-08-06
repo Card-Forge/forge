@@ -1,0 +1,6 @@
+Name:Last Gasp
+ManaCost:1 B
+Types:Instant
+Text:no text
+K:spPumpTgtCurse:-3/-3
+End

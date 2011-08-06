@@ -1,0 +1,8 @@
+Name:Loam Lion
+ManaCost:W
+Types:Creature Cat
+Text:Loam Lion gets +1/+2 as long as you control a Forest.
+PT:1/1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/loam_lion.jpg
+End

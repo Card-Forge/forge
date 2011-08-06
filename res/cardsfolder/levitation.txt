@@ -1,0 +1,8 @@
+Name:Levitation
+ManaCost:2 U U
+Types:Enchantment
+Text:Creatures you control have flying.
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/levitation.jpg
+End

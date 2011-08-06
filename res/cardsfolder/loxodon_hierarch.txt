@@ -1,0 +1,8 @@
+Name:Loxodon Hierarch
+ManaCost:2 G W
+Types:Creature Elephant Cleric
+Text:When Loxodon Hierarch comes into play, you gain 4 life.
+PT:4/4
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_hierarch.jpg
+End

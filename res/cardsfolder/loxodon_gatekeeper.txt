@@ -1,0 +1,8 @@
+Name:Loxodon Gatekeeper
+ManaCost:2 W W
+Types:Creature Elephant Soldier
+Text:Artifacts, creatures, and lands your opponents control enter the battlefield tapped.
+PT:2/3
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_gatekeeper.jpg
+End

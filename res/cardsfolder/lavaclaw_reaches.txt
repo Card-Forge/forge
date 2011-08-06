@@ -1,0 +1,9 @@
+Name:Lavaclaw Reaches
+ManaCost:no cost
+Types:Land
+Text:Comes into play tapped.
+K:tap: add B
+K:tap: add R
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lavaclaw_reaches.jpg
+End

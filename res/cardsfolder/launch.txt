@@ -1,0 +1,10 @@
+Name:Launch
+ManaCost:1 U
+Types:Enchantment Aura
+Text:Enchanted creature has flying.
+K:Enchant creature
+K:enPump:Flying
+K:When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/launch.jpg
+End

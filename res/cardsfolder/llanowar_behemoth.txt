@@ -1,0 +1,8 @@
+Name:Llanowar Behemoth
+ManaCost:3 G G
+Types:Creature Elemental
+Text:no text
+PT:4/4
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83152.jpg
+End
