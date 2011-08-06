@@ -762,6 +762,9 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
             }
         };
         setGlassPane(glassPane);
+        
+        javax.swing.JRootPane rootPane = this.getRootPane();
+        rootPane.setDefaultButton(filterButton);
     }
     
     void addButton_actionPerformed(ActionEvent e) {
