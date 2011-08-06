@@ -3676,13 +3676,20 @@ public class CardFactory implements NewConstants {
             
             final String Destination = k[3];
             
+            String desc = "";
             final String Drawback[] = {"none"};
+            
             if (k.length > 4) {
                 
                 if (k[4].contains("Drawback$")){
                     String kk[] = k[4].split("\\$");
                     Drawback[0] = kk[1];
+                } else {
+                    desc = k[4];
                 }
+            }
+            if (k.length > 5) {
+                desc = k[5];
             }
             
             card.clearSpellAbility();
@@ -3887,6 +3894,9 @@ public class CardFactory implements NewConstants {
                 }
             };// Input
             
+            if (desc.length() > 0) {
+                spRtrnTgt.setDescription(desc);
+            }
             spRtrnTgt.setBeforePayMana(target);
             card.addSpellAbility(spRtrnTgt);
             
