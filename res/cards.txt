@@ -1,3 +1,23 @@
+Stormscape Master
+2 U U
+Creature Human Wizard
+no text
+2/2
+abPumpTgt W W T:Protection from white.
+abPumpTgt W W T:Protection from blue.
+abPumpTgt W W T:Protection from black.
+abPumpTgt W W T:Protection from red.
+abPumpTgt W W T:Protection from green.
+abLoseLifeTgt B B T:2:Drawback$YouGainLife/2:Target player loses 2 life and you gain 2 life.
+
+Thunderscape Apprentice
+R
+Creature Human Wizard
+no text
+1/1
+abLoseLifeTgt B T:1
+abPumpTgt G T:+1/+1
+
 Dragonskull Summit
 no cost
 Land
