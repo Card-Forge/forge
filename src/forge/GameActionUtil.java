@@ -7658,7 +7658,6 @@ public class GameActionUtil {
 				}
 				long t = affectedCard.addColor(colors, affectedCard, true, true);
 				se.addTimestamp(affectedCard, t);
-				System.out.print("Timestamp added for "+affectedCard+"("+t+"): "+se.getTimestamp(affectedCard));
 			}//end for
 		}
 		
@@ -7701,7 +7700,6 @@ public class GameActionUtil {
 					else */ affectedCard.removeExtrinsicKeyword(keyword);
 				}
 			}
-			System.out.print("Timestamp to remove for "+affectedCard+": "+se.getTimestamp(affectedCard));
 			affectedCard.removeColor(se.getColorDesc(), affectedCard, true, se.getTimestamp(affectedCard));
 		}//end removeStaticEffects
 		
