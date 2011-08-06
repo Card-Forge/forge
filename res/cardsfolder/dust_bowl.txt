@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:tap: add 1
-K:abDestroyTgtV 3 T Sac<1/Land>:Land.nonBasic:Destroy target nonbasic land.
+A:AB$Destroy | Cost$ 3 T Sac<1/Land> | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | SpellDescription$ Destroy target nonbasic land.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dust_bowl.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/316.jpg

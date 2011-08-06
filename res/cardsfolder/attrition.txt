@@ -2,7 +2,7 @@ Name:Attrition
 ManaCost:1 B B
 Types:Enchantment
 Text:no text
-K:abDestroyTgtV B Sac<1/Creature>:Creature.nonBlack:Destroy target nonblack creature.
+A:AB$Destroy | Cost$ B Sac<1/Creature> | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | SpellDescription$ Destroy target nonblack creature.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/attrition.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/52.jpg

@@ -4,7 +4,7 @@ Types:Creature Avatar
 Text:If there are ten or more creature cards total in all graveyards, Avatar of Woe costs 6 less to play.
 PT:6/5
 K:Fear
-K:abDestroyTgtV T:Creature:NoRegen:Destroy target creature. It can't be regenerated.
+A:AB$Destroy | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NoRegen$ True | SpellDescription$ Destroy target creature. It can't be regenerated.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_woe.jpg
 SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/56.jpg

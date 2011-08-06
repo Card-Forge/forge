@@ -2,7 +2,7 @@ Name:Ark of Blight
 ManaCost:2
 Types:Artifact
 Text:no text
-K:abDestroyTgtV 3 T Sac<1/CARDNAME>:Land:Destroy target land.
+A:AB$Destroy | Cost$ 3 T Sac<1/CARDNAME> | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ark_of_blight.jpg
 SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/140.jpg

@@ -3,7 +3,7 @@ ManaCost:4 R
 Types:Legendary Creature Human Rogue
 Text:no text
 PT:3/3
-K:abDestroyTgtV R R R T:Creature.Artifact:Destroy target artifact creature.
+A:AB$Destroy | Cost$ R R R T | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature | SpellDescription$ Destroy target artifact creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chandler.jpg
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/88.jpg

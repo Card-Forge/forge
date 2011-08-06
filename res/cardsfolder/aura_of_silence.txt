@@ -3,7 +3,7 @@ ManaCost:1 W W
 Types:Enchantment
 Text:Artifact and enchantment spells your opponents cast cost 2 more to cast.
 K:CostChange:Opponent:More:2:Spell:All:Enchantment/Artifact:OnlyOneBonus
-K:abDestroyTgtV Sac<1/CARDNAME>:Enchantment,Artifact:Destroy target artifact or enchantment.
+A:AB$Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Enchantment,Artifact | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_of_silence.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/123.jpg

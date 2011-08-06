@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Creature Zombie Knight
 Text:no text
 PT:3/3
-K:abDestroyTgtV B B T:Permanent.Green:Destroy target green permanent.
+A:AB$Destroy | Cost$ B B T | ValidTgts$ Creature.Green | TgtPrompt$ Select target green creature | SpellDescription$ Destroy target green creature.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eastern_paladin.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/131.jpg

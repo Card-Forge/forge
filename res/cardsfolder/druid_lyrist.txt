@@ -3,7 +3,7 @@ ManaCost:G
 Types:Creature Human Druid
 Text:no text
 PT:1/1
-K:abDestroyTgtV G T Sac<1/CARDNAME>:Enchantment:Destroy target enchantment.
+A:AB$Destroy | Cost$ G T Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/druid_lyrist.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/238.jpg
