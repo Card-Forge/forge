@@ -24,13 +24,16 @@ public class TableSorter implements Comparator<Card>, NewConstants
   //private String column[] = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "Rarity"}; New cards first - the order is based on cards.txt
   public TableSorter(CardList in_all, int in_column, boolean in_ascending)
   {
-    all = new CardList(in_all.toArray());
-    column = in_column;
-    ascending = in_ascending;
+	  all = new CardList(in_all.toArray());
+	  column = in_column;
+	  ascending = in_ascending;
 
-    if(cardsTxt == null)
-      cardsTxt = readCardsTxt();
+	  /*
+	  if(cardsTxt == null)
+		  cardsTxt = readCardsTxt();
+		*/
   }
+  /*
   //reads the file "cards.txt"
   private HashMap<String, Integer> readCardsTxt()
   {
@@ -42,6 +45,7 @@ public class TableSorter implements Comparator<Card>, NewConstants
     
     return map;
   }
+  */
  
  
   final public int compare(Card a, Card b)
