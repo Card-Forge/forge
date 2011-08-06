@@ -3,7 +3,8 @@ ManaCost:G G
 Types:Creature Elf
 Text:no text
 PT:2/1
-K:When CARDNAME enters the battlefield, draw a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 K:Echo:G G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/multanis_acolyte.jpg
