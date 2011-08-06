@@ -160,7 +160,7 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Gunslinger 3", "hard", "WBRG Cascade deck");
         
         addToDeckList("Hagrid 2", "medium", "Mono R Giants deck");
-        addToDeckList("Han Solo 3", "hard", "WG enchantments deck with Sigil of the Empty Throne");
+        addToDeckList("Han Solo 3", "hard", "WU Enchanted Evening deck with lots of enchantment removal");
 //        addToDeckList("Hans 2", "medium", "WRG Allies deck");
         addToDeckList("Harry Potter 1", "easy", "U Mill and counter spell deck");
         addToDeckList("Harry Potter 2", "medium", "UB Mill and counter spell deck");
