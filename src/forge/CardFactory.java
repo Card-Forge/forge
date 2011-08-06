@@ -11680,12 +11680,12 @@ public class CardFactory implements NewConstants {
         	sbStack.append(card.getName()).append(" - flip a coin");
         	ability.setStackDescription(sbStack.toString());
         }//*************** END ************ END **************************
-        
+        /*
         //*************** START ********** START *************************
         else if(cardName.equals("Horror of Horrors")) {
         	/*
-        	 * Sacrifice a swamp: Regenerate target blackcreature.
-        	 */
+        	 * Sacrifice a swamp: Regenerate target black creature.
+        	 *
 
         	final String Tgts[] = {"Creature.Black"};
         	Target target = new Target("TgtV", "Select target black creature.", Tgts);
@@ -11727,6 +11727,7 @@ public class CardFactory implements NewConstants {
         	
         	card.addSpellAbility(ability); 
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if (cardName.equals("Wrath of Marit Lage")) {
