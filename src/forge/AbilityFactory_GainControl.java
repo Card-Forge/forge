@@ -3,8 +3,9 @@ package forge;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Hashtable;
 
-//AB:GainControl|ValidTgts$Creature|TgtPrompt$Select target legendary creature|LoseControl$Untap,LoseControl|UntilEOT$True|SpellDescription$Gain control of target xxxxxxx
+//AB:GainControl|ValidTgts$Creature|TgtPrompt$Select target legendary creature|LoseControl$Untap,LoseControl|SpellDescription$Gain control of target xxxxxxx
 
 //GainControl specific params:
 //	LoseControl - the lose control conditions (as a comma separated list)
@@ -127,16 +128,41 @@ public class AbilityFactory_GainControl {
 
 
     private boolean doTgtAI(SpellAbility sa) {
+        boolean hasCreature = false;
+        boolean hasArtifact = false;
+        boolean hasEnchantment = false;
+        boolean hasLand = false;
         
 		Target tgt = AF.getAbTgt();
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
 		list = list.getValidCards(tgt.getValidTgts(), hostCard.getController(), hostCard);
+		//AI won't try to grab cards that are filtered out of AI decks on purpose
+		list = list.filter(new CardListFilter() {
+			public boolean addCard(Card c) {
+				Hashtable<String, String> vars = c.getSVars();
+				return !vars.containsKey("RemAIDeck");
+			}
+		});
+		//filter in only cards human controls
+		list = list.filter(new CardListFilter() {
+			public boolean addCard(Card c) {
+				return c.getController().isHuman();
+			}
+		});
 		
         if (list.isEmpty())
         	return false;
         
+        
+        
 		while(tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)){ 
 			Card t = null;
+			for(Card c:list) {
+	        	if(c.isCreature()) hasCreature = true;
+	        	if(c.isArtifact()) hasArtifact = true;
+	        	if(c.isLand()) hasLand = true;
+	        	if(c.isEnchantment()) hasEnchantment = true;
+	        }
 			
 			if (list.isEmpty()){
 				if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
@@ -149,9 +175,19 @@ public class AbilityFactory_GainControl {
 				}
 			}
 			
-			t = CardFactoryUtil.AI_getBestCreature(list);
+			if(hasCreature) t = CardFactoryUtil.AI_getBestCreature(list);
+			else if(hasArtifact) t = CardFactoryUtil.AI_getBestArtifact(list);
+			else if(hasLand) t = CardFactoryUtil.AI_getBestLand(list);
+			else if(hasEnchantment) t = CardFactoryUtil.AI_getBestEnchantment(list, sa.getSourceCard(), true);
+			else t = CardFactoryUtil.AI_getMostExpensivePermanent(list, sa.getSourceCard(), true);
+			
 			tgt.addTarget(t);
 			list.remove(t);
+			
+			hasCreature = false;
+			hasArtifact = false;
+			hasLand = false;
+			hasEnchantment = false;
 		}
         
         return true;
