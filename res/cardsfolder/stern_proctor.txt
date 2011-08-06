@@ -1,0 +1,9 @@
+Name:Stern Proctor
+ManaCost:U U
+Types:Creature Human Wizard
+Text:When Stern Proctor enters the battlefield, return target artifact or enchantment to its owner's hand.
+PT:1/2
+K:etbBounceTgt:Artifact,Enchantment:Hand
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/Stern_Proctor.jpg
+End

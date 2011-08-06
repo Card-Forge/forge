@@ -1,0 +1,9 @@
+Name:Vedalken Dismisser
+ManaCost:5 U
+Types:Creature Vedlaken Wizard
+Text:When Vedalken Dismisser enters the battlefield, put target creature on top of its owner's library.
+PT:2/2
+K:etbBounceTgt:Creature:TopofLibrary
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_dismisser.jpg
+End

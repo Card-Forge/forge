@@ -1,0 +1,10 @@
+Name:AEthersnipe
+ManaCost:5 U
+Types:Creature Elemental
+Text:When AEthersnipe enters the battlefield, return target nonland permanent to its owner's hand.
+PT:4/4
+K:etbBounceTgt:nonLand:Hand
+SVar:Evoke:1 U U
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aethersnipe.jpg
+End

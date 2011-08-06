@@ -1,0 +1,10 @@
+Name:Hunting Drake
+ManaCost:4 U
+Types:Creature Drake
+Text:When Hunting Drake enters the battlefield, put target red or green creature on top of its owner's library.
+PT:2/2
+K:Flying
+K:etbBounceTgt:Creature.Red,Creature.Green:TopofLibrary
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_drake.jpg
+End

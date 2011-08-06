@@ -1,0 +1,10 @@
+Name:Looming Hoverguard
+ManaCost:4 U U
+Types:Creature Drone
+Text:When Looming Hoverguard enters the battlefield, put target artifact on top of its owner's library.
+PT:3/3
+K:Flying
+K:etbBounceTgt:Artifact:TopofLibrary
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/looming_hoverguard.jpg
+End

@@ -1,0 +1,9 @@
+Name:Glowing Anemone
+ManaCost:3 U
+Types:Creature Jellyfish Beast
+Text:When Glowing Anemone enters the battlefield, you may return target land to its owner's hand.
+PT:1/3
+K:etbBounceTgtMay:Land:Hand
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/glowing_anemone.jpg
+End
