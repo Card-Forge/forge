@@ -416,7 +416,7 @@ class CardFactory_Equipment {
 					String[] keywords = new String[0];
 					CardList germs = CardFactoryUtil.makeToken("Germ", "B 0 0 Germ", card.getController(), "B", types, 1, 1, keywords);
 
-                    germs.get(0).equipCard(card);
+                    card.equipCard(germs.get(0));
 
 					for(Card c : germs)
 					{
