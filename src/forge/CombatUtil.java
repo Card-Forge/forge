@@ -30,12 +30,8 @@ public class CombatUtil {
                         "CARDNAME can block creatures with shadow as though they didn't have shadow.")) return false;
         
         if(!attacker.getKeyword().contains("Shadow") && blocker.getKeyword().contains("Shadow")) return false;
-        
-//      if(attacker.getNetAttack() <= 2 && blocker.getName().equals("Sunweb")) return false;
-//      if(attacker.getNetAttack() >= 2 && blocker.getName().equals("Ironclaw Orcs")) return false;
 
         // CARDNAME can't block creatures with power ...
-
         int powerLimit[] = {0};
         int keywordPosition = 0;
         boolean hasKeyword = false;
@@ -228,7 +224,7 @@ public class CombatUtil {
             if(CardUtil.getColors(blocker).contains(Constant.Color.Green)) return false;
         }
         
-        if(/*attacker.getName().equals("Amrou Seekers")*/ attacker.getKeyword().contains("CARDNAME can't be blocked except by artifact creatures and/or white creatures.")) {
+        if(attacker.getKeyword().contains("CARDNAME can't be blocked except by artifact creatures and/or white creatures.")) {
             if(!blocker.getType().contains("Artifact")
                     && !blocker.isWhite()) return false;
         }
@@ -253,19 +249,15 @@ public class CombatUtil {
         if (attacker.getKeyword().contains("CARDNAME can't be blocked except by Walls and/or creatures with flying.") && 
         		!(blocker.isType("Wall") || blocker.getKeyword().contains("Flying"))) return false;
         
-        if (blocker.getCounters(Counters.BRIBERY) > 0 && isCardInPlay("Gwafa Hazid, Profiteer"))
+        if (blocker.getCounters(Counters.BRIBERY) > 0 && AllZoneUtil.isCardInPlay("Gwafa Hazid, Profiteer"))
         	return false;
         
-        if (isCardInPlay("Kulrath Knight"))
+        CardList kulrath = AllZoneUtil.getCardsInPlay("Kulrath Knight");
+        if (kulrath.size() > 0)
         {
-        	CardList all = new CardList();
-        	all.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
-        	all.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer). getCards());
-        	
-        	all = all.getName("Kulrath Knight");
-        	for (int i=0; i<all.size(); i++)
+        	for (int i=0; i<kulrath.size(); i++)
         	{
-        		Card cKK = all.get(i);
+        		Card cKK = kulrath.get(i);
         		Player oppKK = cKK.getController().getOpponent();
         		
         		if (blocker.getController().equals(oppKK) && blocker.hasCounters())
@@ -278,10 +270,10 @@ public class CombatUtil {
     
     public static boolean canAttack(Card c) {
         
-        if(isPeaceKeeperInPlay()) return false;
+        if(AllZoneUtil.isCardInPlay("Peacekeeper")) return false;
         
         boolean moatPrevented = false;
-        if(isMoatInPlay() || isMagusMoatInPlay()) {
+        if(AllZoneUtil.isCardInPlay("Moat") || AllZoneUtil.isCardInPlay("Magus of the Moat")) {
             if(!c.getKeyword().contains("Flying")) moatPrevented = true;
         }
         
@@ -346,14 +338,15 @@ public class CombatUtil {
         }
         
         if(c.isTapped() || c.hasSickness() || c.getKeyword().contains("Defender") || moatPrevented
-                || oppControlsBlazingArchon(c) || c.getKeyword().contains("CARDNAME can't attack.")
+                || AllZoneUtil.isCardInPlay("Blazing Archon", c.getController().getOpponent()) || c.getKeyword().contains("CARDNAME can't attack.")
                 || c.getKeyword().contains("CARDNAME can't attack or block.")
-                || (oppControlsReverence(c) && c.getNetAttack() < 3)) return false;
-        
-        if (c.getCounters(Counters.BRIBERY) > 0 && isCardInPlay("Gwafa Hazid, Profiteer"))
+                || (AllZoneUtil.isCardInPlay("Reverence", c.getController().getOpponent()) && c.getNetAttack() < 3))
         	return false;
         
-        if (isCardInPlay("Ensnaring Bridge")) {
+        if (c.getCounters(Counters.BRIBERY) > 0 && AllZoneUtil.isCardInPlay("Gwafa Hazid, Profiteer"))
+        	return false;
+        
+        if (AllZoneUtil.isCardInPlay("Ensnaring Bridge")) {
         	int limit = Integer.MAX_VALUE;
         	CardList Human = new CardList();
         	Human.addAll(AllZone.Human_Play.getCards());
@@ -372,7 +365,7 @@ public class CombatUtil {
         	if (c.getNetAttack() > limit) return false;
         }
         
-        if (isCardInPlay("Kulrath Knight"))
+        if (AllZoneUtil.isCardInPlay("Kulrath Knight"))
         {
         	CardList all = new CardList();
         	all.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
@@ -793,104 +786,8 @@ public class CombatUtil {
     	}//canDamage
     }
     
-    /*no longer needed
-    private static boolean canBlockProtection(Card attacker, Card blocker) {
-        ArrayList<String> list = attacker.getKeyword();
-        
-        String kw = "";
-        for(int i = 0; i < list.size(); i++) {
-            kw = list.get(i);
-            
-            
-            if(kw.equals("Protection from creatures") || kw.equals("Protection from everything")) return false;
-            if(kw.equals("Protection from artifacts") && blocker.isArtifact()) return false;
-            
-            if(kw.equals("Protection from Dragons")
-                    && (blocker.getType().contains("Dragon") || blocker.getKeyword().contains("Changeling"))) return false;
-            if(kw.equals("Protection from Demons")
-                    && (blocker.getType().contains("Demon") || blocker.getKeyword().contains("Changeling"))) return false;
-            if(kw.equals("Protection from Goblins")
-                    && (blocker.getType().contains("Goblin") || blocker.getKeyword().contains("Changeling"))) return false;
-            
-            //pro colors:
-            if(kw.equals("Protection from white") && blocker.isWhite()) return false;
-            if(kw.equals("Protection from blue") && blocker.isBlue()) return false;
-            if(kw.equals("Protection from black") && blocker.isBlack()) return false;
-            if(kw.equals("Protection from red") && blocker.isRed()) return false;
-            if(kw.equals("Protection from green") && blocker.isGreen()) return false;
-        }
-        return true;
-    }
-    */
-    
     public static boolean isDoranInPlay() {
-        CardList all = new CardList();
-        all.addAll(AllZone.Human_Play.getCards());
-        all.addAll(AllZone.Computer_Play.getCards());
-        
-        all = all.getName("Doran, the Siege Tower");
-        if(all.size() > 0) return true;
-        else return false;
-    }
-    
-    public static boolean oppControlsBlazingArchon(Card c) {
-        Player opp = c.getController().getOpponent();
-        
-        CardList list = new CardList();
-        list.addAll(AllZone.getZone(Constant.Zone.Play, opp).getCards());
-        
-        list = list.getName("Blazing Archon");
-        if(list.size() > 0) return true;
-        else return false;
-    }
-    
-    public static boolean oppControlsReverence(Card c) {
-        Player opp = c.getController().getOpponent();
-        
-        CardList list = new CardList();
-        list.addAll(AllZone.getZone(Constant.Zone.Play, opp).getCards());
-        
-        list = list.getName("Reverence");
-        if(list.size() > 0) return true;
-        else return false;
-    }
-    
-    public static boolean isCardInPlay(String card)
-    {
-    	CardList all = new CardList();
-    	all.addAll(AllZone.Human_Play.getCards());
-    	all.addAll(AllZone.Computer_Play.getCards());
-    	
-    	return all.containsName(card);
-    }
-    
-    public static boolean isPeaceKeeperInPlay() {
-        CardList all = new CardList();
-        all.addAll(AllZone.Human_Play.getCards());
-        all.addAll(AllZone.Computer_Play.getCards());
-        
-        all = all.getName("Peacekeeper");
-        return all.size() > 0;
-    }
-    
-    public static boolean isMoatInPlay() {
-        CardList all = new CardList();
-        all.addAll(AllZone.Human_Play.getCards());
-        all.addAll(AllZone.Computer_Play.getCards());
-        
-        all = all.getName("Moat");
-        if(all.size() > 0) return true;
-        else return false;
-    }
-    
-    public static boolean isMagusMoatInPlay() {
-        CardList all = new CardList();
-        all.addAll(AllZone.Human_Play.getCards());
-        all.addAll(AllZone.Computer_Play.getCards());
-        
-        all = all.getName("Magus of the Moat");
-        if(all.size() > 0) return true;
-        else return false;
+    	return AllZoneUtil.isCardInPlay("Doran, the Siege Tower");
     }
     
     public static boolean checkPropagandaEffects(Card c) {
@@ -1280,7 +1177,7 @@ public class CombatUtil {
                 
                 ability2.setStackDescription(c.getName() + " - attacking creatures get +1/+1 until end of turn.");
                 AllZone.Stack.add(ability2);
-            }//Goblin General
+            }//Pianna, Nomad Captain
             
             if(c.getName().equals("Zur the Enchanter") && !c.getCreatureAttackedThisCombat()) {
                 //hack, to make sure this doesn't break grabbing an oblivion ring:
@@ -1393,6 +1290,7 @@ public class CombatUtil {
                     
                 } //if (creatures.size() > 0) 
             }//Yore-Tiller Nephilim
+            
             else if(c.getName().equals("Flowstone Charger") && !c.getCreatureAttackedThisCombat()) {
                 final Card charger = c;
                 Ability ability2 = new Ability(c, "0") {
@@ -2009,7 +1907,6 @@ public class CombatUtil {
             		@Override
             		public void resolve() {
             			final Player player = source.getController();
-            			//AllZone.GameAction.addDamage(player, source, 5);
             			player.addDamage(5, source);
             		}
             	};
@@ -2105,7 +2002,6 @@ public class CombatUtil {
 		        		{
 		        			public void resolve()
 		        			{
-		        		        //AllZone.GameAction.gainLife(crd.getController(), 2);
 		        				crd.getController().gainLife(2);
 		        			}
 		        		};
@@ -2125,6 +2021,10 @@ public class CombatUtil {
 	        	}
 	        	
 	            if(c.getName().equals("Jedit Ojanen of Efrava") && !c.getCreatureBlockedThisCombat()) {
+	            	CardFactoryUtil.makeToken("Cat Warrior", "G 2 2 Cat Warrior", c.getController(), "G", new String[] {"Creature", "Cat", "Warrior"},
+	            			2, 2, new String[] {"Forestwalk"});
+	            	/*
+	            	}
 	                Card card = new Card();
 	                
 	                card.setOwner(c.getController());
@@ -2147,18 +2047,14 @@ public class CombatUtil {
 	                
 	                //(anger) :
 	                GameActionUtil.executeCardStateEffects();
+	                */
 	            }//Jedit
 	            else if(c.getName().equals("Shield Sphere") && !c.getCreatureBlockedThisCombat()) {
-	                //int toughness = c.getNetDefense();
-	                //c.setDefense(toughness-1);
 	                c.addCounter(Counters.P0M1, 1);
-	                //ability2.setStackDescription(c.getName() + " blocks and gets a 0/-1 counter.");
-	                //AllZone.Stack.add(ability2);
 	                
 	            }//Shield Sphere
 	            
 	            else if(c.getName().equals("Meglonoth") && !c.getCreatureBlockedThisCombat()) {
-	                //AllZone.GameAction.addDamage(AllZone.GameAction.getOpponent(c.getController()), c, c.getNetAttack());
 	            	c.getController().getOpponent().addDamage(c.getNetAttack(), c);
 	            }//Meglonoth
 	            c.setCreatureBlockedThisCombat(true);
@@ -2177,7 +2073,7 @@ public class CombatUtil {
                 AllZone.Stack.add(ab);
         }
         
-        ////////////////////Rampage
+        //Rampage
         //not sure why this is "not" - but I copied from Bushido...
         if(!a.getCreatureGotBlockedThisCombat()) {
         	ArrayList<String> keywords = a.getKeyword();
@@ -2194,8 +2090,7 @@ public class CombatUtil {
         			}
         		} //find
         	}
-        }
-        ////////////////////END Rampage
+        }//Rampage
         
         if(a.getKeyword().contains("Flanking") && !b.getKeyword().contains("Flanking")) {
             int flankingMagnitude = 0;
@@ -2402,114 +2297,6 @@ public class CombatUtil {
             AllZone.EndOfCombat.addAt(atEOC);
         }//Frostweb Spider
         
-        /* converted to keyword
-        else if(b.getName().equals("Abomination")
-                && (CardUtil.getColors(a).contains(Constant.Color.White) || CardUtil.getColors(a).contains(
-                        Constant.Color.Green))) {
-            final Card attacker = a;
-            final Ability ability = new Ability(b, "0") {
-                @Override
-                public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(attacker)) {
-                        AllZone.GameAction.destroy(attacker);
-                    }
-                }
-            };
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(b).append(" - destroy blocked green or white creature.");
-            ability.setStackDescription(sb.toString());
-            
-            final Command atEOC = new Command() {
-                private static final long serialVersionUID = 5854485314766349980L;
-                
-                public void execute() {
-                    AllZone.Stack.add(ability);
-                }
-            };
-            
-            AllZone.EndOfCombat.addAt(atEOC);
-        }//Abomination blocking
-        
-        if(a.getName().equals("Abomination")
-                && (CardUtil.getColors(b).contains(Constant.Color.White) || CardUtil.getColors(b).contains(
-                        Constant.Color.Green))) {
-            final Card blocker = b;
-            final Ability ability = new Ability(a, "0") {
-                @Override
-                public void resolve() {
-                    AllZone.GameAction.destroy(blocker);
-                }
-            };
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(a).append(" - destroy blocking green or white creature.");
-            ability.setStackDescription(sb.toString());
-            
-            final Command atEOC = new Command() {
-                
-                private static final long serialVersionUID = -9077416427198135373L;
-                
-                public void execute() {
-                    if(AllZone.GameAction.isCardInPlay(blocker)) AllZone.Stack.add(ability);
-                }
-            };
-            
-            AllZone.EndOfCombat.addAt(atEOC);
-        }//Abomination attacking
-        
-        else if (b.getName().equals("Gorgon Recluse") 
-                    && !CardUtil.getColors(a).contains(Constant.Color.Black)) {
-            final Card attacker = a;
-            final Ability ability = new Ability(b, "0") {
-                @Override
-                public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(attacker)) {
-                        AllZone.GameAction.destroy(attacker);
-                    }
-                }
-            };
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(b).append(" - destroy blocked nonblack creature.");
-            ability.setStackDescription(sb.toString());
-            
-            final Command atEOC = new Command() {
-                private static final long serialVersionUID = -2166473476701642189L;
-
-                public void execute() {
-                    AllZone.Stack.add(ability);
-                }
-            };
-            
-            AllZone.EndOfCombat.addAt(atEOC);
-        }//Gorgon Recluse blocking
-        
-        if (a.getName().equals("Gorgon Recluse")
-                && !CardUtil.getColors(b).contains(Constant.Color.Black)) {
-            final Card blocker = b;
-            final Ability ability = new Ability(a, "0") {
-                @Override
-                public void resolve() {
-                    AllZone.GameAction.destroy(blocker);
-                }
-            };
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(a).append(" - destroy blocking nonblack creature.");
-            ability.setStackDescription(sb.toString());
-            
-            final Command atEOC = new Command() {
-                private static final long serialVersionUID = -8606306519001580192L;
-
-                public void execute() {
-                    if (AllZone.GameAction.isCardInPlay(blocker)) AllZone.Stack.add(ability);
-                }
-            };
-            
-            AllZone.EndOfCombat.addAt(atEOC);
-        }//Gorgon Recluse attacking
-        */
         
         else if (b.getName().equals("Alaborn Zealot")) {
         	final Card blocker = b; 
@@ -2559,7 +2346,6 @@ public class CombatUtil {
         		@Override
         		public void resolve() {
         			final Player player = source.getController();
-        			//AllZone.GameAction.addDamage(player, source, 5);
         			player.addDamage(5, source);
         		}
         	};
@@ -2710,44 +2496,6 @@ public class CombatUtil {
                         	if(attacker.hasKeyword("Protection from enchantments") || (attacker.hasKeyword("Protection from everything"))) return false;
                         	return(c.isEnchantment() && c.getKeyword().contains("Enchant creature") 
                         			&& !CardFactoryUtil.hasProtectionFrom(c,attacker));
-                        	
-                        	/* What a mess ???
-                        	ArrayList<String> keywords = c.getKeyword();
-                        	for(String keyword:keywords) {
-                        		if(keyword.startsWith("Enchant creature")) {
-                                    if(c.isEnchantment())  {
-                                    	String [] colors = new String[6];
-                                    ArrayList<String> color = CardUtil.getColors(c);
-                                    if(color.contains(Constant.Color.Black)) 	colors[0] = "black";
-                                    if(color.contains(Constant.Color.Blue)) 	colors[1] = "blue";
-                                    if(color.contains(Constant.Color.Green)) 	colors[2] = "green";
-                                    if(color.contains(Constant.Color.Red))	 	colors[3] = "red";
-                                    if(color.contains(Constant.Color.White)) 	colors[4] = "white"; 
-                                    if(color.contains(Constant.Color.Colorless))colors[5] = "artifacts";                                   
-    	                            for(int i = 0; i < colors.length; i++) {
-                                    if(attacker.hasKeyword("Protection from " + colors[i]) == true) return false; 
-    	                            }
-                                		} return true;
-                                		}
-                        		if(turn == AllZone.HumanPlayer) { 
-                            		if(keyword.startsWith("Enchant Creature")) {
-                        			if(keyword.endsWith("Curse")) {
-                                    	String [] colors = new String[6];
-                                        ArrayList<String> color = CardUtil.getColors(c);
-                                        if(color.contains(Constant.Color.Black)) 	colors[0] = "black";
-                                        if(color.contains(Constant.Color.Blue)) 	colors[1] = "blue";
-                                        if(color.contains(Constant.Color.Green)) 	colors[2] = "green";
-                                        if(color.contains(Constant.Color.Red))	 	colors[3] = "red";
-                                        if(color.contains(Constant.Color.White)) 	colors[4] = "white"; 
-                                        if(color.contains(Constant.Color.Colorless))colors[5] = "artifacts";                                   
-        	                            for(int i = 0; i < colors.length; i++) {
-                                        if(attacker.hasKeyword("Protection from " + colors[i]) == true) return false; 
-        	                            }
-                                    		} return true;
-                        		}
-                        		}
-                        	}
-                             return false; */
                         }
                     });
 	                    Player player = attacker.getController();
@@ -2781,8 +2529,6 @@ public class CombatUtil {
         }
     }
     
-    
-    /////////////////////////Rampage
     /**
      * executes rampage abilities for a given card
      * 
@@ -2791,7 +2537,6 @@ public class CombatUtil {
      * @param numBlockers - the number of creatures blocking this rampaging creature
      */
     private static void executeRampageAbility(Card c, int magnitude, int numBlockers) {
-    	//TODO - possibly can get magnitude from Keyword on the Card here
     	final Card crd = c;
     	final int pump = magnitude;
     	Ability ability;
@@ -2825,6 +2570,5 @@ public class CombatUtil {
     		AllZone.Stack.add(ability);
     	}
     }
-    /////////////////////////END Rampage
     
 }//Class CombatUtil
