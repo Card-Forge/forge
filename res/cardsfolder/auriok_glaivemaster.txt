@@ -1,0 +1,9 @@
+Name:Auriok Glaivemaster
+ManaCost:W
+Types:Creature Human Soldier
+Text:no text
+PT:1/1
+K:stPumpAll:Permanent.equipped:Self:PTBonus/1/1!Keyword/First Strike::As long as Auriok Glaivemaster is equipped, it gets +1/+1 and has first strike.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_glaivemaster.jpg
+End

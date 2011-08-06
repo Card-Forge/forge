@@ -654,6 +654,7 @@ public class GameAction {
 	        
 	        GameActionUtil.executeCardStateEffects();
 	        GameActionUtil.StaticEffectKeyword.execute();
+	        GameActionUtil.stPumpAll.execute();
 	        
 	        //System.out.println("checking state effects");
 	        ArrayList<Card> creature = PlayerZoneUtil.getCardType(AllZone.Computer_Play, "Creature");

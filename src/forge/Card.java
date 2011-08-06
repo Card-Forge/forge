@@ -658,6 +658,9 @@ public class Card extends MyObservable {
                 } else if (keyword.get(i).toString().contains("StaticEffect")) {
                     String k[] = keyword.get(i).split(":");
                     sbLong.append(k[5]).append("\r\n");
+                } else if (keyword.get(i).toString().contains("stPumpAll")) {
+                    String k[] = keyword.get(i).split(":");
+                    sbLong.append(k[5]).append("\r\n");
                 } else if (keyword.get(i).endsWith(".")) {
                     sbLong.append(keyword.get(i).toString()).append("\r\n");
                 } else if (keyword.get(i).contains("At the beginning of your upkeep, ") 
@@ -2089,6 +2092,13 @@ public class Card extends MyObservable {
                     	r = r && (!isEnchanted());
                     else if (exR[j].startsWith("enchanting"))
                     	r = r && (isEnchanting());
+        			
+                    else if (exR[j].startsWith("equipped"))
+                    	r = r && (isEquipped());
+                    else if (exR[j].startsWith("unequipped"))
+                    	r = r && (!isEquipped());
+                    else if (exR[j].startsWith("equipping"))
+                    	r = r && (isEquipping());
                     
                     else if (exR[j].startsWith("token"))
                     	r = r && (isToken());
