@@ -1042,6 +1042,56 @@ public class CombatUtil
 			  
 		  }//Flowstone Charger
 		  
+		  else if(c.getName().equals("Timbermaw Larva") && !c.getCreatureAttackedThisTurn())
+		  {
+			  final Card charger = c;
+			  Ability ability2 = new Ability(c,"0")
+			  {
+				 public void resolve() 
+				 {
+					 final String player = charger.getController();
+					 PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+					 CardList list = new CardList();
+					 list.addAll(play.getCards());
+					 list = list.filter(new CardListFilter(){
+		                    public boolean addCard(Card card) {
+		                       return (card.getType().contains("Forest"));
+		                    }
+		                 });
+					final int x = list.size();
+					 
+					final Command untilEOT = new Command()
+			         {
+						private static final long serialVersionUID = -1703473800920781454L;
+
+						public void execute()
+			            {
+			              if(AllZone.GameAction.isCardInPlay(charger))
+			              {
+			                charger.addTempAttackBoost(-1*x);
+			                charger.addTempDefenseBoost(-1*x);
+			              }
+			            }
+			          };//Command
+
+			          
+			          if(AllZone.GameAction.isCardInPlay(charger))
+			          {
+			            charger.addTempAttackBoost(x);
+			            charger.addTempDefenseBoost(x);
+
+			            AllZone.EndOfTurn.addUntil(untilEOT);
+			          }
+				 }//resolve
+				 
+			  };//ability
+			  
+			  ability2.setStackDescription(c.getName() + " - +1/+1 until end of turn for each Forest" + charger.getController() +  " controls.");
+			  AllZone.Stack.add(ability2);
+			  			  
+		  }//Timbermaw Larva
+
+		  
 		  else if(c.getName().equals("Knotvine Paladin") && !c.getCreatureAttackedThisTurn())
 		  {
 			  final Card charger = c;

@@ -18,6 +18,10 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+timbermaw_larva.jpg         http://www.wizards.com/global/images/magic/general/timbermaw_larva.jpg
+ghastlord_of_fugue.jpg      http://www.wizards.com/global/images/magic/general/ghastlord_of_fugue.jpg
+quietus_spike.jpg           http://www.wizards.com/global/images/magic/general/quietus_spike.jpg
+mask_of_riddles.jpg         http://www.wizards.com/global/images/magic/general/mask_of_riddles.jpg
 slagwurm_armor.jpg          http://www.wizards.com/global/images/magic/general/slagwurm_armor.jpg
 neurok_hoversail.jpg        http://www.wizards.com/global/images/magic/general/neurok_hoversail.jpg
 vulshok_morningstar.jpg     http://www.wizards.com/global/images/magic/general/vulshok_morningstar.jpg

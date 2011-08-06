@@ -3192,8 +3192,14 @@ public class GameActionUtil
 			playerCombatDamage_Hypnotic_Specter(c);
 		else if (c.getName().equals("Dimir Cutpurse"))
 			playerCombatDamage_Dimir_Cutpurse(c);
+		else if (c.getName().equals("Ghastlord of Fugue"))
+			playerCombatDamage_Ghastlord_of_Fugue(c);
 		else if (c.getName().equals("Garza Zol, Plague Queen"))
 		     playerCombatDamage_May_draw(c);
+		else if (CardFactoryUtil.hasNumberEquipments(c, "Mask of Riddles") > 0 && c.getNetAttack()>0)
+	     { for (int k =0;  k < CardFactoryUtil.hasNumberEquipments(c, "Mask of Riddles"); k++) {playerCombatDamage_May_draw(c);}}	
+	    else if (CardFactoryUtil.hasNumberEquipments(c, "Quietus Spike") > 0 && c.getNetAttack()>0)
+         { for (int k =0;  k < CardFactoryUtil.hasNumberEquipments(c, "Quietus Spike"); k++) {playerCombatDamage_lose_halflife_up(c);}}	
 		else if (c.getName().equals("Scalpelexis"))
 		     playerCombatDamage_Scalpelexis(c);
 		else if (c.getName().equals("Blazing Specter") || c.getName().equals("Guul Draz Specter") || 
@@ -3316,6 +3322,59 @@ public class GameActionUtil
 		}
 
 	}
+	
+	private static void playerCombatDamage_Ghastlord_of_Fugue(Card c)
+	{
+		final String player = c.getController();
+		final String opponent = AllZone.GameAction.getOpponent(player);
+
+		if (c.getNetAttack() > 0)
+		{
+			Ability ability2 = new Ability(c, "0")
+			{
+				public void resolve()
+		        { 
+		          Card choice = null;
+
+		          //check for no cards in hand on resolve
+		          PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opponent);
+		          PlayerZone exiled = AllZone.getZone(Constant.Zone.Removed_From_Play, opponent);
+		          Card[] handChoices = removeLand(hand.getCards());
+
+		          if(handChoices.length == 0)
+		            return;
+
+		          //human chooses
+		          if(opponent.equals(Constant.Player.Computer))
+		          {
+		            choice = (Card) AllZone.Display.getChoice("Choose", handChoices);
+		          }
+		          else//computer chooses
+		          {
+		            choice = CardUtil.getRandom(handChoices);   // wise choice should be here
+		          }
+
+		          hand.remove(choice);
+		          exiled.add(choice);
+		        }//resolve()
+
+		        public boolean canPlayAI()
+		        {
+		          Card[] c = removeLand(AllZone.Human_Hand.getCards());
+		          return 0 < c.length;
+		        }
+
+		        Card[] removeLand(Card[] in)
+		        {
+		          return in;
+		        }//removeLand() 
+			};// ability2
+
+			ability2.setStackDescription(c.getName() + " - " + "opponent discards a card.");
+			AllZone.Stack.add(ability2);
+		}
+	}  //Ghastlord of Fugue
+
 	
 	private static void playerCombatDamage_Rootwater_Thief(Card c)
 	{
@@ -3468,11 +3527,51 @@ public class GameActionUtil
 			};// ability2
 
 			ability2.setStackDescription(c.getName() + " - " + player
-					+ " draws a card.");
+					+ " may draw a card.");
 			AllZone.Stack.add(ability2);
 		}
 
 	}
+	
+	private static void playerCombatDamage_lose_halflife_up(Card c)
+	{
+		final String player = c.getController();
+		final String opponent = AllZone.GameAction.getOpponent(player);
+
+		if (c.getNetAttack() > 0)
+		{
+			Ability ability2 = new Ability(c, "0")
+			{
+				public void resolve()
+				{
+					 int x = 0;
+					 int y = 0 ;
+					 if (player == "Human")
+					 {
+				     y=(AllZone.Computer_Life.getLife() % 2);
+					 if (!(y == 0)) y=1; else y=0 ;
+				     
+					 x = (AllZone.Computer_Life.getLife() / 2)+y;
+					 }
+					 else
+					 {
+						 y=(AllZone.Human_Life.getLife() % 2);
+						 if (!(y == 0)) y=1; else y=0 ;
+					     
+						 x = (AllZone.Human_Life.getLife() / 2)+y;
+					 }
+					 AllZone.GameAction.getPlayerLife(opponent).subtractLife(x);
+
+				}
+			};// ability2
+
+			ability2.setStackDescription(c.getName() + " - " + opponent
+					+ " loses half his or her life, rounded up.");
+			AllZone.Stack.add(ability2);
+		}
+
+	}
+
 	
 	private static void playerCombatDamage_Simple_Discard(Card c)
 	{
@@ -6732,7 +6831,7 @@ public class GameActionUtil
       for (int i = 0; i < list.size(); i++) {
        if (player == "Human" &&  AllZone.Computer_Life.getLife() > 10)   
          {AllZone.GameAction.getPlayerLife(player).subtractLife(1);}
-       else{ if (player == "Computer" &&  AllZone.Computer_Life.getLife() > 10)
+       else{ if (player == "Computer" &&  AllZone.Human_Life.getLife() > 10)
        {AllZone.GameAction.getPlayerLife(player).subtractLife(1);}}
       }
     }// upkeep_Vampire_Lacerator

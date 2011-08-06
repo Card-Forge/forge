@@ -1,3 +1,28 @@
+Timbermaw Larva
+3 G
+Creature Beast
+Whenever Timbermaw Larva attacks, it gets +1/+1 until end of turn for each Forest you control.
+2/2
+
+Ghastlord of Fugue
+UB UB UB UB UB
+Creature Spirit Avatar
+Whenever Ghastlord of Fugue deals combat damage to a player, that player reveals his or her hand. You choose a card from it. That player exiles that card.
+4/4
+Unblockable
+
+Quietus Spike
+3
+Artifact Equipment
+Equipped creature has deathtouch.  Whenever equipped creature deals combat damage to a player, that player loses half his or her life, rounded up.
+VanillaEquipment:0:0:3:Deathtouch:none:none
+
+Mask of Riddles
+U B
+Artifact Equipment
+Equipped creature has fear. (It can’t be blocked except by artifact creatures and/or black creatures.)  Whenever equipped creature deals combat damage to a player, you may draw a card. 
+VanillaEquipment:0:0:2:Fear:none:none
+
 Peregrine Mask
 1
 Artifact Equipment
