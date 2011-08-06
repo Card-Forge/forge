@@ -377,7 +377,12 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         picture.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                if(picture.getCard() != null) glassPane.setVisible(true);
+                Card c = picture.getCard();
+                if(c == null) return;
+                Image i = ImageCache.getOriginalImage(c);
+                if(i == null) return;
+                if(i.getWidth(null) < 300) return;
+                glassPane.setVisible(true);
             }
         });
     }//addListeners()

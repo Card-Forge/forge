@@ -106,10 +106,6 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardContainer, DeckD
     private CardPicturePanel  picture              = new CardPicturePanel(null);
     private JPanel            glassPane;
     
-    public static void main(String[] args) {
-
-    }
-    
     @Override
     public void setTitle(String message) {
         super.setTitle(message);
@@ -409,7 +405,12 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardContainer, DeckD
         picture.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                if(picture.getCard() != null) glassPane.setVisible(true);
+                Card c = picture.getCard();
+                if(c == null) return;
+                Image i = ImageCache.getOriginalImage(c);
+                if(i == null) return;
+                if(i.getWidth(null) < 200) return;
+                glassPane.setVisible(true);
             }
         });
     }//addListeners()
