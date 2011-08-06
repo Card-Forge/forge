@@ -56,8 +56,8 @@ class TableModel extends AbstractTableModel {
             column = table.getColumnModel().getColumn(i);
             
             if(i == 0) {
-                column.setPreferredWidth(25); //make first column small
-                column.setMaxWidth(25);
+                column.setPreferredWidth(30); //make first column small
+                column.setMaxWidth(30);
             } else if(i == 1) {
                 column.setPreferredWidth(190);
                 column.setMinWidth(190);
@@ -71,7 +71,7 @@ class TableModel extends AbstractTableModel {
                 column.setMaxWidth(58);
             } else if(i == 4) column.setPreferredWidth(130);
             else if(i == 5) {
-                column.setPreferredWidth(32);
+                column.setPreferredWidth(42);
                 column.setMaxWidth(42);
             } else if(i == 6) {
                 column.setPreferredWidth(20);
