@@ -3,6 +3,7 @@ ManaCost:4
 Types:Artifact
 Text:no text
 K:Whenever a land is put into a graveyard from the battlefield, Dingus Egg deals 2 damage to that land's controller.
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dingus_egg.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/297.jpg
