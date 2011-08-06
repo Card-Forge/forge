@@ -241,12 +241,25 @@ public class CardUtil {
        String tMC = "";
        
        Integer cl1, cl2, tCL;
-       cl1 = Integer.valueOf(mc1.replaceAll("[WUBRGSX]", "").trim());
-       cl2 = Integer.valueOf(mc2.replaceAll("[WUBRGSX]", "").trim());
+       String c1, c2;
+       
+       c1 = mc1.replaceAll("[WUBRGSX]", "").trim();
+       c2 = mc2.replaceAll("[WUBRGSX]", "").trim();
+       
+       if (c1.length() > 0)
+    	   cl1 = Integer.valueOf(c1);
+       else
+    	   cl1 = 0;
+       
+       if (c2.length() > 0)
+    	   cl2 = Integer.valueOf(c2);
+       else
+    	   cl2 = 0;
+       
        tCL = cl1 + cl2;
        
-       mc1 = mc1.replace(cl1.toString(), "").trim();
-       mc2 = mc2.replace(cl2.toString(), "").trim();
+       mc1 = mc1.replace("[12]?[0-9]", "").trim();
+       mc2 = mc2.replace("[12]?[0-9]", "").trim();
        
        tMC = tCL.toString() + " " + mc1 + " " + mc2;
        
