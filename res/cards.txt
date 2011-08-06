@@ -1,3 +1,269 @@
+Battering Sliver
+5 R
+Creature Sliver
+All Sliver creatures have trample.
+4/4
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/battering_sliver.jpg
+
+Blade Sliver
+2 R
+Creature Sliver
+All Sliver creatures get +1/+0.
+2/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blade_sliver.jpg
+
+Bonesplitter Sliver
+3 R
+Creature Sliver
+All Sliver creatures get +2/+0.
+2/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bonesplitter_sliver.jpg
+
+Crystalline Sliver
+W U
+Creature Sliver
+All slivers have shroud.
+2/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crystalline_sliver.jpg
+
+Essence Sliver
+3 W
+Creature Sliver
+All Slivers have lifelink.
+3/3
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_sliver.jpg
+
+Fury Sliver
+5 R
+Creature Sliver
+All Sliver creatures have double strike.
+3/3
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fury_sliver.jpg
+
+Gemhide Sliver
+1 G
+Creature Sliver
+All Slivers have "tap: Add one mana of any color to your mana pool."
+1/1
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gemhide_sliver.jpg
+
+Heart Sliver
+1 R
+Creature Sliver
+All Sliver creatures have haste.
+1/1
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_sliver.jpg
+
+Horned Sliver
+2 G
+Creature Sliver
+All Sliver creatures have trample.
+2/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/horned_sliver.jpg
+
+Metallic Sliver
+1
+Artifact Creature Sliver
+no text
+1/1
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4617.jpg
+
+Might Sliver
+4 G
+Creature Sliver
+All Sliver creatures get +2/+2.
+2/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/might_sliver.jpg
+
+Muscle Sliver
+1 G
+Creature Sliver
+All Sliver creatures get +1/+1.
+1/1
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/muscle_sliver.jpg
+
+Plated Sliver
+W
+Creature Sliver
+All Sliver creatures get +0/+1.
+1/1
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/plated_sliver.jpg
+
+Quick Sliver
+1 G
+Creature Sliver
+no text
+1/1
+Flash
+StaticEffect:Play:AllCards:Keyword/Flash:Type.Sliver:Any player may play Sliver cards as though they had flash.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/quick_sliver.jpg
+
+Reflex Sliver
+3 G
+Creature Sliver
+All Slivers have haste.
+2/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reflex_sliver.jpg
+
+Shadow Sliver
+2 U
+Creature Sliver
+no text
+1/1
+StaticEffect:Play:All Permanents:Keyword/Shadow:Type.Sliver:All Sliver creatures have shadow. (They can block or be blocked by only creatures with shadow.)
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shadow_sliver.jpg
+
+Sidewinder Sliver
+W
+Creature Sliver
+All slivers have flanking.
+1/1
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sidewinder_sliver.jpg
+
+Sinew Sliver
+1 W
+Creature Sliver
+All Sliver creatures get +1/+1.
+1/1
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sinew_sliver.jpg
+
+Sliver Legion
+W U B R G
+Legendary Creature Sliver
+All Sliver creatures get +1/+1 for each other Sliver in play.
+7/7
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136146.jpg
+
+Sliver Overlord
+W U B R G
+Legendary Creature Sliver Mutant
+no text
+7/7
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sliver_overlord.jpg
+
+Sliver Queen
+W U B R G
+Legendary Creature Sliver
+no text
+7/7
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sliver_queen.jpg
+
+Spinneret Sliver
+1 G
+Creature Sliver
+no text
+2/2
+StaticEffect:Play:All Permanents:Keyword/Reach:Type.Creature!Type.Sliver:All Sliver creatures have reach. (They can block creatures with flying.)
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spinneret_sliver.jpg
+
+Spitting Sliver
+4 B
+Creature Sliver
+no text
+3/3
+StaticEffect:Play:All Permanents:Keyword/First Strike:Type.Creature!Type.Sliver:All Sliver creatures have first strike.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spitting_sliver.jpg
+
+Synchronous Sliver
+4 U
+Creature Sliver
+All Sliver creatures have vigilance.
+3/3
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/synchronous_sliver.jpg
+
+Talon Sliver
+1 W
+Creature Sliver
+All sliver creatures have first strike.
+1/1
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/talon_sliver.jpg
+
+Venser's Sliver
+5
+Artifact Creature Sliver
+no text
+3/3
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card125866.jpg
+
+Virulent Sliver
+G
+Creature Sliver
+All Sliver creatures have poisonous 1.
+1/1
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/virulent_sliver.jpg
+
+Watcher Sliver
+3 W
+Creature Sliver
+All Sliver creatures get +0/+2.
+2/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/watcher_sliver.jpg
+
+Winged Sliver
+1 U
+Creature Sliver
+All Sliver creatures have flying.
+1/1
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/winged_sliver.jpg
+
 Bojuka Brigand
 1 B
 Creature Human Warrior Ally
@@ -3329,14 +3595,6 @@ Morph:1 R R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battering_craghorn.jpg
 
-Battering Sliver
-5 R
-Creature Sliver
-All Sliver creatures have trample.
-4/4
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/battering_sliver.jpg
-
 Battle Hurda
 4 W
 Creature Giant
@@ -3767,14 +4025,6 @@ no text
 3/1
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130676.jpg
-
-Blade Sliver
-2 R
-Creature Sliver
-All Sliver creatures get +1/+0.
-2/2
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blade_sliver.jpg
 
 Bladetusk Boar
 3 R
@@ -4354,14 +4604,6 @@ Equipped creature gets +2/+0.
 eqPump 1:+2/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bonesplitter.jpg
-
-Bonesplitter Sliver
-3 R
-Creature Sliver
-All Sliver creatures get +2/+0.
-2/2
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bonesplitter_sliver.jpg
 
 Boomerang
 U U
@@ -6994,14 +7236,6 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_vein.jpg
 
-Crystalline Sliver
-W U
-Creature Sliver
-All slivers have shroud.
-2/2
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crystalline_sliver.jpg
-
 Cudgel Troll
 2 G G
 Creature Troll
@@ -9596,14 +9830,6 @@ As long as you control another multicolored permanent, Esper Stormblade gets +1/
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/esper_stormblade.jpg
 
-Essence Sliver
-3 W
-Creature Sliver
-All Slivers have lifelink.
-3/3
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_sliver.jpg
-
 Essence Warden
 G
 Creature Elf Shaman
@@ -11380,14 +11606,6 @@ abPump R:+1/+0
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73578.jpg
 
-Fury Sliver
-5 R
-Creature Sliver
-All Sliver creatures have double strike.
-3/3
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fury_sliver.jpg
-
 Fusion Elemental
 W U B R G
 Creature Elemental
@@ -11543,14 +11761,6 @@ Whenever you play an instant or sorcery spell, you may untap Gelectrode.
 abDamageTgtCP T:1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gelectrode.jpg
-
-Gemhide Sliver
-1 G
-Creature Sliver
-All Slivers have "tap: Add one mana of any color to your mana pool."
-1/1
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gemhide_sliver.jpg
 
 Gemstone Array
 4
@@ -13669,14 +13879,6 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_of_ramos.jpg
 
-Heart Sliver
-1 R
-Creature Sliver
-All Sliver creatures have haste.
-1/1
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_sliver.jpg
-
 Hearthfire Hobgoblin
 RW RW RW
 Creature Goblin Soldier
@@ -14238,14 +14440,6 @@ When Horned Kavu comes into play, return a red or green creature you control to 
 3/4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horned_kavu.jpg
-
-Horned Sliver
-2 G
-Creature Sliver
-All Sliver creatures have trample.
-2/2
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/horned_sliver.jpg
 
 Horned Troll
 2 G
@@ -18789,14 +18983,6 @@ When CARDNAME enters the battlefield, draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/messenger_falcons.jpg
 
-Metallic Sliver
-1
-Artifact Creature Sliver
-no text
-1/1
-SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4617.jpg
-
 Metathran Soldier
 1 U
 Creature Metathran Soldier
@@ -18848,14 +19034,6 @@ spPumpTgt:+X/+X:Target creature gets +1/+1 until end of turn for each creature y
 SVar:X:Count$TypeYouCtrl.Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/might_of_the_masses.jpg
-
-Might Sliver
-4 G
-Creature Sliver
-All Sliver creatures get +2/+2.
-2/2
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/might_sliver.jpg
 
 Mighty Leap
 1 W
@@ -19763,14 +19941,6 @@ spPumpTgt:+X/+X:Target creature gets +X/+X until end of turn, where X is 3 plus 
 SVar:X:Count$NamedInAllYards.MuscleBurst/Plus.3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/muscle_burst.jpg
-
-Muscle Sliver
-1 G
-Creature Sliver
-All Sliver creatures get +1/+1.
-1/1
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/muscle_sliver.jpg
 
 Mutavault
 no cost
@@ -22069,14 +22239,6 @@ CARDNAME can't be the target of spells or abilities your opponents control.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plated_slagwurm.jpg
 
-Plated Sliver
-W
-Creature Sliver
-All Sliver creatures get +0/+1.
-1/1
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/plated_sliver.jpg
-
 Plated Spider
 4 G
 Creature Spider
@@ -22700,16 +22862,6 @@ Whenever Quagmire Lamprey becomes blocked by a creature, put a -1/-1 counter on 
 1/1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quagmire_lamprey.jpg
-
-Quick Sliver
-1 G
-Creature Sliver
-no text
-1/1
-Flash
-StaticEffect:Play:AllCards:Keyword/Flash:Type.Sliver:Any player may play Sliver cards as though they had flash.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/quick_sliver.jpg
 
 Quicksilver Amulet
 4
@@ -23372,14 +23524,6 @@ no text
 abAddReflectedMana:Type:You
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reflecting_pool.jpg
-
-Reflex Sliver
-3 G
-Creature Sliver
-All Slivers have haste.
-2/2
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reflex_sliver.jpg
 
 Reflexes
 R
@@ -25671,15 +25815,6 @@ Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shadow_rift.jpg
 
-Shadow Sliver
-2 U
-Creature Sliver
-no text
-1/1
-StaticEffect:Play:All Permanents:Keyword/Shadow:Type.Sliver:All Sliver creatures have shadow. (They can block or be blocked by only creatures with shadow.)
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shadow_sliver.jpg
-
 Shadowblood Ridge
 no cost
 Land
@@ -26129,14 +26264,6 @@ Wither
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sickle_ripper.jpg
 
-Sidewinder Sliver
-W
-Creature Sliver
-All slivers have flanking.
-1/1
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sidewinder_sliver.jpg
-
 Siege-Gang Commander
 3 R R
 Creature Goblin
@@ -26370,14 +26497,6 @@ Trample
 Shroud
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card111204.jpg
-
-Sinew Sliver
-1 W
-Creature Sliver
-All Sliver creatures get +1/+1.
-1/1
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sinew_sliver.jpg
 
 Singe-Mind Ogre
 2 B R
@@ -26884,30 +27003,6 @@ Whenever Slith Strider becomes blocked, draw a card. Whenever Slith Strider deal
 1/1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slith_strider.jpg
-
-Sliver Legion
-W U B R G
-Legendary Creature Sliver
-All Sliver creatures get +1/+1 for each other Sliver in play.
-7/7
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136146.jpg
-
-Sliver Overlord
-W U B R G
-Legendary Creature Sliver Mutant
-no text
-7/7
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sliver_overlord.jpg
-
-Sliver Queen
-W U B R G
-Legendary Creature Sliver
-no text
-7/7
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sliver_queen.jpg
 
 Sliversmith
 2
@@ -27605,15 +27700,6 @@ CARDNAME can't block.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card129743.jpg
 
-Spinneret Sliver
-1 G
-Creature Sliver
-no text
-2/2
-StaticEffect:Play:All Permanents:Keyword/Reach:Type.Creature!Type.Sliver:All Sliver creatures have reach. (They can block creatures with flying.)
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spinneret_sliver.jpg
-
 Spiraling Embers
 3 R
 Sorcery Arcane
@@ -27714,15 +27800,6 @@ Reach
 Morph:4 G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spitting_gourna.jpg
-
-Spitting Sliver
-4 B
-Creature Sliver
-no text
-3/3
-StaticEffect:Play:All Permanents:Keyword/First Strike:Type.Creature!Type.Sliver:All Sliver creatures have first strike.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spitting_sliver.jpg
 
 Spitting Spider
 3 G G
@@ -29085,14 +29162,6 @@ Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/symbol_of_unsummoning.jpg
 
-Synchronous Sliver
-4 U
-Creature Sliver
-All Sliver creatures have vigilance.
-3/3
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/synchronous_sliver.jpg
-
 Syphon Life
 1 B B
 Sorcery
@@ -29201,14 +29270,6 @@ paintap:1:G
 paintap:1:W
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talisman_of_unity.jpg
-
-Talon Sliver
-1 W
-Creature Sliver
-All sliver creatures have first strike.
-1/1
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/talon_sliver.jpg
 
 Talon Trooper
 1 W U
@@ -31881,14 +31942,6 @@ Haste
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vengevine.jpg
 
-Venser's Sliver
-5
-Artifact Creature Sliver
-no text
-3/3
-SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card125866.jpg
-
 Verdant Catacombs
 no cost
 Land
@@ -32226,14 +32279,6 @@ no text
 spAllPump:YouCtrl:+1/+1:Creatures you control get +1/+1 until end of turn.:Virtuous Charge - Creatures get +1/+1 until EOT
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10596.jpg
-
-Virulent Sliver
-G
-Creature Sliver
-All Sliver creatures have poisonous 1.
-1/1
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/virulent_sliver.jpg
 
 Visara the Dreadful
 3 B B B
@@ -33138,14 +33183,6 @@ tap: add 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wasteland.jpg
 
-Watcher Sliver
-3 W
-Creature Sliver
-All Sliver creatures get +0/+2.
-2/2
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/watcher_sliver.jpg
-
 Watchwolf
 W G
 Creature Wolf
@@ -33794,14 +33831,6 @@ Flying
 Deathtouch
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/winged_coatl.jpg
-
-Winged Sliver
-1 U
-Creature Sliver
-All Sliver creatures have flying.
-1/1
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/winged_sliver.jpg
 
 Wings of Aesthir
 W U
