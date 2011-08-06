@@ -10346,6 +10346,7 @@ no text
 tap: add G
 SVar:Rarity:Land
 SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
+SVar:PicCount:4
 
 Forest Bear
 1 G
@@ -14601,6 +14602,7 @@ no text
 tap: add U
 SVar:Rarity:Land
 SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73951.jpg
+SVar:PicCount:4
 
 Isochron Scepter
 2
@@ -18954,6 +18956,7 @@ no text
 tap: add R
 SVar:Rarity:Land
 SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73958.jpg
+SVar:PicCount:4
 
 Mountain Bandit
 R
@@ -21434,6 +21437,7 @@ no text
 tap: add W
 SVar:Rarity:Land
 SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73963.jpg
+SVar:PicCount:4
 
 Planar Cleansing
 3 W W W
@@ -26487,6 +26491,7 @@ no text
 tap: add G
 SVar:Rarity:Land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_forest.jpg
+SVar:PicCount:4
 
 Snow-Covered Island
 no cost
@@ -26495,6 +26500,7 @@ no text
 tap: add U
 SVar:Rarity:Land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_island.jpg
+SVar:PicCount:4
 
 Snow-Covered Mountain
 no cost
@@ -26503,6 +26509,7 @@ no text
 tap: add R
 SVar:Rarity:Land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
+SVar:PicCount:4
 
 Snow-Covered Plains
 no cost
@@ -26511,6 +26518,7 @@ no text
 tap: add W
 SVar:Rarity:Land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_plains.jpg
+SVar:PicCount:4
 
 Snow-Covered Swamp
 no cost
@@ -26519,6 +26527,7 @@ no text
 tap: add B
 SVar:Rarity:Land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_swamp.jpg
+SVar:PicCount:4
 
 Sokenzan Bruiser
 4 R
@@ -28470,6 +28479,7 @@ no text
 tap: add B
 SVar:Rarity:Land
 SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73973.jpg
+SVar:PicCount:4
 
 Swamp Mosquito
 1 B
