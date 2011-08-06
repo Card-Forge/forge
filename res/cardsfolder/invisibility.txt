@@ -3,7 +3,7 @@ ManaCost:U U
 Types:Enchantment Aura
 Text:Enchanted creature can't be blocked except by Walls.
 K:Enchant creature
-K:enPump:CARDNAME can't be blocked except by Walls.
+K:enPump:HIDDEN CARDNAME can't be blocked except by Walls.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/invisibility.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/87.jpg

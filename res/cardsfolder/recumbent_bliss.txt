@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Enchantment Aura
 Text:Enchanted creature can't attack or block.
 K:Enchant creature
-K:enPumpCurse:CARDNAME can't attack or block.
+K:enPumpCurse:HIDDEN CARDNAME can't attack or block.
 K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:Yes_No:ControllerUpkeep:At the beginning of your upkeep, you may gain 1 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recumbent_bliss.jpg

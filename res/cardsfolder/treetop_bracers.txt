@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Enchantment Aura
 Text:Enchanted creature gets +1/+1 and can't be blocked except by creatures with flying.
 K:Enchant creature
-K:enPump:+1/+1/CARDNAME can't be blocked except by creatures with flying.
+K:enPump:+1/+1/HIDDEN CARDNAME can't be blocked except by creatures with flying.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treetop_bracers.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/123.jpg

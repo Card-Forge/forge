@@ -3,8 +3,8 @@ ManaCost:W
 Types:Enchantment Aura
 Text:Enchanted creature can't attack.
 K:Enchant creature
-K:enPumpCurse:CARDNAME can't attack.
-K:stPumpEnchanted:Creature:0/0/CARDNAME can't block.:Threshold:Threshold - Enchanted creature can't block as long as seven or more cards are in your graveyard.
+K:enPumpCurse:HIDDEN CARDNAME can't attack.
+K:stPumpEnchanted:Creature:0/0/HIDDEN CARDNAME can't block.:Threshold:Threshold - Enchanted creature can't block as long as seven or more cards are in your graveyard.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kirtars_desire.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/27.jpg
