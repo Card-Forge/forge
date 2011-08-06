@@ -256,7 +256,11 @@ import java.util.*;
 		   		   CombatUtil.checkDeclareAttackers(c);
 		   	   }
 		   	   */
-               return new Input_Block();
+               //return new Input_Block();
+        	  if (AllZone.pwCombat.getAttackers().length != 0)
+        	      return new Input_Block_Planeswalker();		  
+        	  else 
+        		  return new Input_Block();
           }
           else
           {

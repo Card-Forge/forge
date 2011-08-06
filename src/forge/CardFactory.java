@@ -930,7 +930,10 @@ public class CardFactory implements NewConstants {
            if (Tgt[0] == true)
               sbD.append("Target creature gets ");
            else
-              sbD.append(cardName + " gets ");
+           {
+              sbD.append(cardName);
+              sbD.append(" gets ");
+           }
           
            if (NumAttack[0] > 0 || (NumAttack[0] == 0 && NumDefense[0] > 0)) // +0/+1
               sbD.append("+");
@@ -944,7 +947,8 @@ public class CardFactory implements NewConstants {
            else if (NumDefense[0] < 0 || (NumDefense[0] == 0 && NumAttack[0] < 0)) // -1/-0
               sbD.append("-");
           
-           sbD.append(Math.abs(NumDefense[0]) + " until end of turn.");
+           sbD.append(Math.abs(NumDefense[0]));
+           sbD.append(" until end of turn.");
         }
         if ((AttackX[0].equals("none") && NumAttack[0] == -1138) && (DefenseX[0].equals("none") && NumDefense[0] == -1138) && !Keyword[0].equals("none"))
         {
@@ -952,17 +956,21 @@ public class CardFactory implements NewConstants {
            if (Tgt[0] == true)
               sbD.append("Target creature gains ");
            else
-              sbD.append(cardName + " gains ");
+              sbD.append(cardName);
+              sbD.append(" gains ");
           
-           sbD.append(Keyword[0] + " until end of turn.");
+           sbD.append(Keyword[0]);
+           sbD.append(" until end of turn.");
         }
         if ((AttackX[0].equals("none") && !(NumAttack[0] == -1138)) && (DefenseX[0].equals("none") && !(NumDefense[0] == -1138)) && !Keyword[0].equals("none"))
         {
            // ptk boost
            if (Tgt[0] == true)
               sbD.append("Target creature gets ");
-           else
-              sbD.append(cardName + " gets ");
+           else {
+              sbD.append(cardName);
+              sbD.append(" gets ");
+           }
           
            if (NumAttack[0] > 0 || (NumAttack[0] == 0 && NumDefense[0] > 0)) // +0/+1
               sbD.append("+");
@@ -976,7 +984,10 @@ public class CardFactory implements NewConstants {
            else if (NumDefense[0] < 0 || (NumDefense[0] == 0 && NumAttack[0] < 0)) // -1/-0
               sbD.append("-");
           
-           sbD.append(Math.abs(NumDefense[0]) + " and gains " + Keyword[0] + " until end of turn.");
+           sbD.append(Math.abs(NumDefense[0]));
+           sbD.append(" and gains ");
+           sbD.append(Keyword[0]);
+           sbD.append(" until end of turn.");
         }
         //if (!sbD.toString().isEmpty())
         if (sbD.toString().trim().length()!=0)
