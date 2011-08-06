@@ -1071,6 +1071,11 @@ public class AbilityFactory {
 			SpellAbility parent = findParentsTargetedSpellAbility(sa);
 			sas.addAll(parent.getTarget().getTargetSAs());
 		}
+        else if(defined.startsWith("Triggered"))
+        {
+            String triggeringType = defined.substring(9);
+            s = (SpellAbility)sa.getSourceCard().getTriggeringObject(triggeringType);
+        }
 		
 		if (s != null)
 			sas.add(s);

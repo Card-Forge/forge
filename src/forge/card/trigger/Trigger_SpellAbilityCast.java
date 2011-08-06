@@ -162,5 +162,6 @@ public class Trigger_SpellAbilityCast extends Trigger {
 	public void setTriggeringObjects(Card c)
 	{
 		c.setTriggeringObject("Card",((SpellAbility)runParams.get("CastSA")).getSourceCard());
+        c.setTriggeringObject("SpellAbility",runParams.get("CastSA"));
 	}
 }
