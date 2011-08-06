@@ -12,6 +12,7 @@ import java.util.Random;
 import forge.AllZone;
 import forge.Card;
 import forge.CardList;
+import forge.MyRandom;
 import forge.error.ErrorViewer;
 
 public class GenerateThemeDeck
@@ -125,7 +126,7 @@ public class GenerateThemeDeck
 		String tmpDeck = "";
 
 		// begin assigning cards to the deck
-		Random r = new Random();
+		Random r = MyRandom.random;
 		
 		for (int i=0; i<Groups.size(); i++)
 		{

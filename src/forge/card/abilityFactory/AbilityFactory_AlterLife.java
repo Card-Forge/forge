@@ -9,6 +9,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.ComputerUtil;
 import forge.Counters;
+import forge.MyRandom;
 import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability_Activated;
@@ -156,7 +157,7 @@ public class AbilityFactory_AlterLife {
 	}
 	
 	public static boolean gainLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa){
-		Random r = new Random();
+		Random r = MyRandom.random;
 		HashMap<String,String> params = af.getMapParams();
 		Cost abCost = sa.getPayCosts();
 		final Card source = sa.getSourceCard();
@@ -410,7 +411,7 @@ public class AbilityFactory_AlterLife {
 	}
 	
 	public static boolean loseLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa){
-		Random r = new Random();
+		Random r = MyRandom.random;
 		Cost abCost = sa.getPayCosts();
 		final Card source = sa.getSourceCard();
 		int humanLife = AllZone.HumanPlayer.getLife();
@@ -887,7 +888,7 @@ public class AbilityFactory_AlterLife {
 	}
 
 	private static boolean setLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-		Random r = new Random();
+		Random r = MyRandom.random;
 		//Ability_Cost abCost = sa.getPayCosts();
 		final Card source = sa.getSourceCard();
 		int life = AllZone.ComputerPlayer.getLife();

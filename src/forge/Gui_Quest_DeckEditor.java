@@ -118,7 +118,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardContainer, DeckD
             if(addedList.contains(cardName)) c.setRarity("new");
             
             //String PC = c.getSVar("PicCount");
-            Random r = new Random();
+            Random r = MyRandom.random;
             //int n = 0;
             //if (!PC.equals("")) {
 	        //    if (PC.matches("[0-9][0-9]?"))
@@ -149,7 +149,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardContainer, DeckD
             c.setRarity(c.getSVar("Rarity"));
 
             //String PC = c.getSVar("PicCount");
-            Random r = new Random();
+            Random r = MyRandom.random;
             //int n = 0;
             //if (!PC.equals("")){
             //	if (PC.matches("[0-9][0-9]?"))

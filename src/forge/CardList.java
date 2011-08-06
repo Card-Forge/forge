@@ -331,7 +331,7 @@ public class CardList implements Iterable<Card> {
     
     public void shuffle() {
     	// reseed Random each time we want to Shuffle
-    	MyRandom.random = new Random();
+    	MyRandom.random = MyRandom.random;
         Collections.shuffle(list, MyRandom.random);
         Collections.shuffle(list, MyRandom.random);
         Collections.shuffle(list, MyRandom.random);

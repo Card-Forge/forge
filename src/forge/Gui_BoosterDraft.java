@@ -508,7 +508,7 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
             c.setRarity(pack.getRarity(c.getName()));
             
             //String PC = c.getSVar("PicCount");
-            Random r = new Random();
+            Random r = MyRandom.random;
             //int n = 0;
             //if (PC.matches("[0-9][0-9]?"))
             //	n = Integer.parseInt(PC);

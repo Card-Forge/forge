@@ -5632,7 +5632,7 @@ public class CardFactory_Creatures {
 	                    
 	                if((card.hasSickness() && (!card.getKeyword().contains("Haste"))) ) return false;
 	                else {
-	                	Random r = new Random();
+	                	Random r = MyRandom.random;
 	                    if(r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed())) return CardFactoryUtil.AI_doesCreatureAttack(card);
 	                }
 	                return false;

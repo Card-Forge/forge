@@ -10,6 +10,7 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.ComputerUtil;
+import forge.MyRandom;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Sub;
@@ -146,7 +147,7 @@ public class AbilityFactory_PermanentState {
 		Target tgt = af.getAbTgt();
 		Card source = sa.getSourceCard();
 		
-		Random r = new Random();
+		Random r = MyRandom.random;
 		boolean randomReturn = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed()+1);
 		
 		if (tgt == null){
@@ -499,7 +500,7 @@ public class AbilityFactory_PermanentState {
 		Target tgt = af.getAbTgt();
 		Card source = sa.getSourceCard();
 		
-		Random r = new Random();
+		Random r = MyRandom.random;
 		boolean randomReturn = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
 		
 		if (tgt == null){
@@ -987,7 +988,7 @@ public class AbilityFactory_PermanentState {
 		
 		CardList validTappables = getTapAllTargets(valid, source);
 
-		Random r = new Random();
+		Random r = MyRandom.random;
 		boolean rr = false;
 		if (r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed()))
 			rr = true;
@@ -1056,7 +1057,7 @@ public class AbilityFactory_PermanentState {
 		
 		CardList validTappables = getTapAllTargets(valid, source);
 
-		Random r = new Random();
+		Random r = MyRandom.random;
 		boolean rr = false;
 		if (r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed()))
 			rr = true;
@@ -1208,7 +1209,7 @@ public class AbilityFactory_PermanentState {
 		Target tgt = af.getAbTgt();
 		Card source = sa.getSourceCard();
 		
-		Random r = new Random();
+		Random r = MyRandom.random;
 		boolean randomReturn = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
 		
 		if (tgt == null){

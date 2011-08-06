@@ -1627,7 +1627,7 @@ public class CardFactory implements NewConstants {
                     		else if (count.equals(Counters.CHARGE)){ // 50% chance to remove +1/+1 to pump
                     			chance = .5;
                     		}
-                            Random r = new Random();
+                            Random r = MyRandom.random;
                             if(r.nextFloat() > chance)
                             	return false;
                     	}
@@ -1654,7 +1654,7 @@ public class CardFactory implements NewConstants {
                             	else if (creature.hasSickness() ^ keyword.contains("Haste"))
                                     return false;
                             	else {
-	                                Random r = new Random();
+	                                Random r = MyRandom.random;
 	                                if(r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed())) 
 	                                	return CardFactoryUtil.AI_doesCreatureAttack(creature);
 	                            }
@@ -1673,7 +1673,7 @@ public class CardFactory implements NewConstants {
                                 else list.remove(t);
                             }
                             if(goodt == true) {
-                                Random r = new Random();
+                                Random r = MyRandom.random;
                                 if(r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed())) {
                                     setTargetCard(t);
                                     return true;
@@ -2175,7 +2175,7 @@ public class CardFactory implements NewConstants {
 
                         damage = getNumDamage();
                         
-                        Random r = new Random(); // prevent run-away activations 
+                        Random r = MyRandom.random; // prevent run-away activations 
                         boolean rr = false;
                         if(r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed())) 
                         	rr = true;
@@ -2464,7 +2464,7 @@ public class CardFactory implements NewConstants {
                     	}
                     });
                     
-                    Random r = new Random();
+                    Random r = MyRandom.random;
                     boolean rr = false;
                     if (r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed()))
                     	rr = true;
@@ -2598,7 +2598,7 @@ public class CardFactory implements NewConstants {
                 @Override
                 public boolean canPlayAI()
                 {
-                    Random r = new Random();
+                    Random r = MyRandom.random;
                 	                    
                     CardList hCards = new CardList(AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer).getCards());
                     hCards = hCards.getValidCards(Tgts,card.getController(),card);
@@ -3170,7 +3170,7 @@ public class CardFactory implements NewConstants {
                 @Override
                 public boolean canPlayAI() 
                 {
-                    Random r = new Random();
+                    Random r = MyRandom.random;
                 	                    
                     CardList hCards = new CardList(AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer).getCards());
                     hCards = hCards.getValidCards(Tgts,card.getController(),card);

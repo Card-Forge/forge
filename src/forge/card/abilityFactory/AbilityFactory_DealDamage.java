@@ -13,6 +13,7 @@ import forge.CardListFilter;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Counters;
+import forge.MyRandom;
 import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability_Activated;
@@ -228,7 +229,7 @@ public class AbilityFactory_DealDamage {
 
 		if (AF.isAbility())
 		{
-			Random r = new Random(); // prevent run-away activations
+			Random r = MyRandom.random; // prevent run-away activations
 			if(r.nextFloat() <= Math.pow(.6667, AF.getHostCard().getAbilityUsed()))
 				rr = true;
 		}
@@ -681,7 +682,7 @@ public class AbilityFactory_DealDamage {
 
 	private boolean damageAllCanPlayAI(final AbilityFactory af, final SpellAbility sa){
 		// AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
-		Random r = new Random();
+		Random r = MyRandom.random;
 		Cost abCost = sa.getPayCosts();
 		final Card source = sa.getSourceCard();
 		final HashMap<String,String> params = af.getMapParams();

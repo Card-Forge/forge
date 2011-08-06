@@ -18,7 +18,7 @@ import forge.properties.NewConstants;
 
 
 public class CardUtil {
-    public final static Random r = new Random();
+    public final static Random r = MyRandom.random;
     
     
     public static int getRandomIndex(Object[] o) {

@@ -66,7 +66,7 @@ public class QuestData implements NewConstants {
     private QuestData_BoosterPack boosterPack     = new QuestData_BoosterPack();
     
     //used by shouldAddAdditionalCards()
-    private Random                random          = new Random();
+    private Random                random          = MyRandom.random;
     
     //feel free to change this to something funnier
     private String[]              rankArray       = {

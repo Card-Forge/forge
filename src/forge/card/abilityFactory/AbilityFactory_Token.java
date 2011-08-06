@@ -9,6 +9,7 @@ import forge.Card;
 import forge.CardList;
 import forge.Command;
 import forge.ComputerUtil;
+import forge.MyRandom;
 import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability_Activated;
@@ -227,7 +228,7 @@ public class AbilityFactory_Token extends AbilityFactory {
 		//	return true;
 
 		// prevent run-away activations - first time will always return true
-		Random r = new Random();
+		Random r = MyRandom.random;
 		final Card source = sa.getSourceCard();
 		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
 

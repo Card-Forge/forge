@@ -2278,7 +2278,7 @@ public class GameAction {
             Card card;
             int nextUniqueNumber = 1;
             
-            Random generator = new Random();
+            Random generator = MyRandom.random;
             
             for(int i = 0; i < humanDeck.countMain(); i++) {
                 String cardName = humanDeck.getMain(i);

@@ -11,6 +11,7 @@ import forge.CardList;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.GameActionUtil;
+import forge.MyRandom;
 import forge.Player;
 import forge.PlayerZone;
 import forge.card.cardFactory.CardFactoryUtil;
@@ -225,7 +226,7 @@ public class AbilityFactory_ChangeZone {
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
 		
-		Random r = new Random();
+		Random r = MyRandom.random;
 		// prevent run-away activations - first time will always return true
 		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
 		
@@ -729,7 +730,7 @@ public class AbilityFactory_ChangeZone {
         
 		float pct = origin.equals("Battlefield") ? .8f : .667f;
 		
-		Random r = new Random();
+		Random r = MyRandom.random;
 		
 		if (abCost != null){
 			// AI currently disabled for these costs
@@ -1284,7 +1285,7 @@ public class AbilityFactory_ChangeZone {
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
 		
-		Random r = new Random();
+		Random r = MyRandom.random;
 		// prevent run-away activations - first time will always return true
 		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
 

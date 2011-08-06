@@ -60,7 +60,7 @@ public class AIPlayer extends Player{
 	}
 	
 	public boolean dredge() {
-		Random random = new Random();
+		Random random = MyRandom.random;
 		boolean use = random.nextBoolean();
 		if(use) {
 			CardList tmp = getDredge();
@@ -144,7 +144,7 @@ public class AIPlayer extends Player{
 			else if (libPos.equalsIgnoreCase("Bottom"))
 				position = -1;
 			else{
-				Random r = new Random();
+				Random r = MyRandom.random;
 				if(r.nextBoolean()) 
 					position = 0;
 				else 
@@ -216,7 +216,7 @@ public class AIPlayer extends Player{
         num = topN.size();
         for(int i = 0; i < num; i++) // put the rest on top in random order
         {
-            Random rndm = new Random();
+            Random rndm = MyRandom.random;
             int r = rndm.nextInt(topN.size());
             Card c = topN.get(r);
             AllZone.GameAction.moveToLibrary(c);

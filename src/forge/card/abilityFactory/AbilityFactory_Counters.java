@@ -13,6 +13,7 @@ import forge.CardListFilter;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Counters;
+import forge.MyRandom;
 import forge.Player;
 import forge.PlayerZone;
 import forge.card.cardFactory.CardFactoryUtil;
@@ -164,7 +165,7 @@ public class AbilityFactory_Counters {
 	
 	public static boolean putCanPlayAI(final AbilityFactory af, final SpellAbility sa){
 		// AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
-		Random r = new Random();
+		Random r = MyRandom.random;
 		Cost abCost = sa.getPayCosts();
 		Target abTgt = sa.getTarget();
 		final Card source = sa.getSourceCard();
@@ -637,7 +638,7 @@ public class AbilityFactory_Counters {
 	
 	public static boolean removeCanPlayAI(final AbilityFactory af, final SpellAbility sa){
 		// AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
-		Random r = new Random();
+		Random r = MyRandom.random;
 		Cost abCost = sa.getPayCosts();
 		//Target abTgt = sa.getTarget();
 		final Card source = sa.getSourceCard();
@@ -1171,7 +1172,7 @@ public class AbilityFactory_Counters {
 	
 	public static boolean putAllCanPlayAI(final AbilityFactory af, final SpellAbility sa){
 		// AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
-		Random r = new Random();
+		Random r = MyRandom.random;
 		HashMap<String,String> params = af.getMapParams();
 		Cost abCost = sa.getPayCosts();
 		final Card source = sa.getSourceCard();

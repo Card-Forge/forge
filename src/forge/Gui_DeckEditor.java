@@ -184,7 +184,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
             }
             
             //String PC = c.getSVar("PicCount");
-            Random r = new Random();
+            Random r = MyRandom.random;
             //int n = 0;
             //if (!PC.equals("")) {
 	        //    if (PC.matches("[0-9][0-9]?"))
@@ -217,7 +217,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
             if(!customMenu.getGameType().equals(Constant.GameType.Constructed)) c.setRarity(pack.getRarity(c.getName()));
             
             //String PC = c.getSVar("PicCount");
-            Random r = new Random();
+            Random r = MyRandom.random;
             //int n = 0;
             //if (!PC.equals("")) {
 	        //    if (PC.matches("[0-9][0-9]?"))
@@ -339,7 +339,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
     		if (SetInfoUtil.getSetInfo_Code(c.getSets(), SC) != null) {
 				c.setCurSetCode(SC);
 				
-		    	Random r = new Random();
+		    	Random r = MyRandom.random;
 		    	int n = SetInfoUtil.getSetInfo_Code(c.getSets(), SC).PicCount;
 		    	if (n > 1)
 		    		c.setRandomPicture(r.nextInt(n-1) + 1);

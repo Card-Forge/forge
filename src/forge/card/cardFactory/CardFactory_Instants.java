@@ -1320,7 +1320,7 @@ public class CardFactory_Instants {
 						}
 					}
 					else { //Computer
-						//Random random = new Random();
+						//Random random = MyRandom.random;
 						for(int j = 0; j < X; j++) {
 							//int index = random.nextInt(X-j);
 							AllZone.GameAction.exile(graveList.get(j));

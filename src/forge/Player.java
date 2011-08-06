@@ -728,7 +728,7 @@ public abstract class Player extends MyObservable{
         
         ArrayList<Object> list = new ArrayList<Object>(Arrays.asList(c));
         //overdone but wanted to make sure it was really random
-        Random random = new Random();
+        Random random = MyRandom.random;
         Collections.shuffle(list, random);
         Collections.shuffle(list, random);
         Collections.shuffle(list, random);

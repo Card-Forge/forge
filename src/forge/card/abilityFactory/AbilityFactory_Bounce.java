@@ -123,7 +123,7 @@ public class AbilityFactory_Bounce {
 	
 	public static boolean bounceCanPlayAI(final AbilityFactory af, final SpellAbility sa, final String destination){
 		// AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
-		Random r = new Random();
+		Random r = MyRandom.random;
 		Ability_Cost abCost = sa.getPayCosts();
 		Target abTgt = sa.getTarget();
 		final Card source = sa.getSourceCard();

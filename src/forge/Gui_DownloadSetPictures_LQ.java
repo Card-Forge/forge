@@ -249,7 +249,7 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
         
         File base = ForgeProps.getFile(IMAGE_BASE);
         
-        Random r = new Random();
+        Random r = MyRandom.random;
         
         Proxy p = null;
         if(type == 0) p = Proxy.NO_PROXY;

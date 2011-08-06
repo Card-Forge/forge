@@ -22,7 +22,7 @@ public class QuestData_BoosterPack implements NewConstants {
     private ArrayList<String> rareCreature     = new ArrayList<String>();
     private ArrayList<String> rareSpell        = new ArrayList<String>();
     
-    private Random            random           = new Random();
+    private Random            random           = MyRandom.random;
     
     private String[]          colors           = {
             "gold", Constant.Color.Colorless, Constant.Color.Black, Constant.Color.Blue, Constant.Color.Green,

@@ -13,6 +13,7 @@ import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Counters;
+import forge.MyRandom;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Sub;
@@ -242,7 +243,7 @@ public class AbilityFactory_Pump {
     		else if (count.equals(Counters.CHARGE)){ // 50% chance to remove +1/+1 to pump
     			chance = .5;
     		}
-            Random r = new Random();
+            Random r = MyRandom.random;
             if(r.nextFloat() > chance)
             	return false;
     	}
@@ -318,12 +319,12 @@ public class AbilityFactory_Pump {
 	            	else if (card.hasSickness() ^ Keywords.contains("Haste"))
 	                    return false;
 	            	else if (hostCard.equals(card)){
-	                    Random r = new Random();
+	                    Random r = MyRandom.random;
 	                    if(r.nextFloat() <= Math.pow(.6667, activations)) 
 	                    	return CardFactoryUtil.AI_doesCreatureAttack(card) && !sa.getPayCosts().getTap();
 	                }
 	            	else{
-	            		Random r = new Random();
+	            		Random r = MyRandom.random;
 	                    return (r.nextFloat() <= Math.pow(.6667, activations));
 	            	}
 	            }

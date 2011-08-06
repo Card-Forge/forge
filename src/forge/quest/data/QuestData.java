@@ -141,7 +141,7 @@ public class QuestData {
      * This method should be called whenever the opponents should change.
      */
     public void randomizeOpponents() {
-        randomSeed = (new Random()).nextLong();
+        randomSeed = MyRandom.random.nextLong();
     }
 
 
@@ -543,7 +543,7 @@ public class QuestData {
             chance = 0.65f;
         }
 
-        float r = (new Random()).nextFloat();
+        float r = MyRandom.random.nextFloat();
 
         if (didWin) {
             return r <= chance;

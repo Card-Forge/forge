@@ -10,6 +10,7 @@ import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
 import forge.ComputerUtil;
+import forge.MyRandom;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Sub;
@@ -109,7 +110,7 @@ public class AbilityFactory_Destroy {
 
 	public static boolean destroyCanPlayAI(final AbilityFactory af, final SpellAbility sa){
 		// AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
-		Random r = new Random();
+		Random r = MyRandom.random;
 		Cost abCost = sa.getPayCosts();
 		Target abTgt = sa.getTarget();
 		final Card source = sa.getSourceCard();
@@ -514,7 +515,7 @@ public class AbilityFactory_Destroy {
 	
 	public static boolean destroyAllCanPlayAI(final AbilityFactory af, final SpellAbility sa, final boolean noRegen){
 		// AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
-		Random r = new Random();
+		Random r = MyRandom.random;
 		Cost abCost = sa.getPayCosts();
 		final Card source = sa.getSourceCard();
 		final HashMap<String,String> params = af.getMapParams();

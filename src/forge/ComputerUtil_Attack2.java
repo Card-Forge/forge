@@ -14,7 +14,7 @@ public class ComputerUtil_Attack2 {
     private CardList playerCreatures;
 	private int blockerLife;
 	
-	private Random random = new Random();
+	private Random random = MyRandom.random;
 	private final int randomInt = random.nextInt();
 	
 	private CardList humanList;   //holds human player creatures

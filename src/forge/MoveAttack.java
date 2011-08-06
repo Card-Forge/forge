@@ -7,7 +7,7 @@ public class MoveAttack
     private MoveAttack bestMove = null;
     private int bestScore = Integer.MIN_VALUE;    
     
-    private static Random random = new Random();
+    private static Random random = MyRandom.random;
     
     private static Card[] aCreature;
     private static Card[] bCreature;

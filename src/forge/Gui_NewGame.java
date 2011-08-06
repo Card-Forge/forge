@@ -505,7 +505,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     Deck getRandomDeck(Deck[] d) {
         //get a random number between 0 and d.length
         //int i = (int) (Math.random() * d.length);
-    	Random r = new Random();
+    	Random r = MyRandom.random;
         
         return d[r.nextInt(d.length)];
     }
@@ -699,7 +699,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     	String stDeck;
     	if (o.toString().equals("Random"))
     	{
-    		Random r = new Random();
+    		Random r = MyRandom.random;
     		stDeck = tNames.get(r.nextInt(tNames.size() - 1) + 1);
     	}
     	else
@@ -716,7 +716,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     
     private Deck generate2ColorDeck(String p)
     {
-    	Random r = new Random();
+    	Random r = MyRandom.random;
     	
     	ArrayList<String> colors = new ArrayList<String>();
     	colors.add("Random");
@@ -761,7 +761,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
 
     private Deck generate3ColorDeck(String p)
     {
-    	Random r = new Random();
+    	Random r = MyRandom.random;
     	
     	ArrayList<String> colors = new ArrayList<String>();
     	colors.add("Random");

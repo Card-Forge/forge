@@ -29,6 +29,7 @@ import forge.Constant;
 import forge.Counters;
 import forge.GameAction;
 import forge.GameActionUtil;
+import forge.MyRandom;
 import forge.Phase;
 import forge.Player;
 import forge.PlayerZone;
@@ -47,7 +48,7 @@ import forge.gui.input.Input_PayManaCost;
 
 
 public class CardFactoryUtil {
-    private static Random random = new Random();
+    private static Random random = MyRandom.random;
     
     // who uses this function?
     public final static String getPumpString(int n) {
@@ -141,7 +142,7 @@ public class CardFactoryUtil {
         if(nbLand.size() > 0) {
             //TODO: Rank non basics?
             
-            Random r = new Random();
+            Random r = MyRandom.random;
             return nbLand.get(r.nextInt(nbLand.size()));
         }
         
@@ -165,7 +166,7 @@ public class CardFactoryUtil {
             if(!BLand.get(i).isTapped()) // prefer untapped lands
             return BLand.get(i);
         
-        Random r = new Random();
+        Random r = MyRandom.random;
         return BLand.get(r.nextInt(BLand.size())); // random tapped land of least represented type
     }
     

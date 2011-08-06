@@ -3350,7 +3350,7 @@ public class Card extends MyObservable {
     	if (Sets.size() < 1)
     		return;
     	
-    	Random r = new Random();
+    	Random r = MyRandom.random;
     	SetInfo si = Sets.get(r.nextInt(Sets.size()));
     	
     	curSetCode = si.Code;

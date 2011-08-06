@@ -242,7 +242,7 @@ public class AbilityFactory_Fetch {
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
 		
-		Random r = new Random();
+		Random r = MyRandom.random;
 		// prevent run-away activations - first time will always return true
 		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
 		
@@ -530,7 +530,7 @@ public class AbilityFactory_Fetch {
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
 		
-		Random r = new Random();
+		Random r = MyRandom.random;
 		// prevent run-away activations - first time will always return true
 		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
 		

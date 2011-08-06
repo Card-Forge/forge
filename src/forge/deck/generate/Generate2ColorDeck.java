@@ -9,6 +9,7 @@ import forge.AllZone;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
+import forge.MyRandom;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 
@@ -25,7 +26,7 @@ public class Generate2ColorDeck
 	
 	public Generate2ColorDeck(String Clr1, String Clr2)
 	{				
-		r = new Random();
+		r = MyRandom.random;
 		
 		CardCounts = new HashMap<String, Integer>();
 		

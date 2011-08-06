@@ -14,6 +14,7 @@ import forge.ComputerUtil;
 import forge.Constant;
 import forge.Counters;
 import forge.GameActionUtil;
+import forge.MyRandom;
 import forge.Player;
 import forge.PlayerZone;
 import forge.card.cardFactory.CardFactoryUtil;
@@ -196,7 +197,7 @@ public class AbilityFactory_ZoneAffecting {
 		double chance = .4;	// 40 percent chance of milling with instant speed stuff
 		if (AbilityFactory.isSorcerySpeed(sa))
 			chance = .667;	// 66.7% chance for sorcery speed (since it will never activate EOT)
-		Random r = new Random();
+		Random r = MyRandom.random;
 		boolean randomReturn = r.nextFloat() <= Math.pow(chance, source.getAbilityUsed()+1);
 		
 		if (AbilityFactory.playReusable(sa))
@@ -539,7 +540,7 @@ public class AbilityFactory_ZoneAffecting {
 		if (!millTargetAI(af, sa, false))
 			return false;
 		
-		Random r = new Random();
+		Random r = MyRandom.random;
 		
 		double chance = .4;	// 40 percent chance of milling with instant speed stuff
 		if (AbilityFactory.isSorcerySpeed(sa))
@@ -1006,7 +1007,7 @@ public class AbilityFactory_ZoneAffecting {
 		double chance = .5;	// 50 percent chance of discarding with instant speed stuff
 		if (AbilityFactory.isSorcerySpeed(sa))
 			chance = .75;	// 75% chance for sorcery speed (since it will never activate EOT)
-		Random r = new Random();
+		Random r = MyRandom.random;
 		boolean randomReturn = r.nextFloat() <= Math.pow(chance, source.getAbilityUsed()+1);
 				
 		if (AbilityFactory.playReusable(sa))
@@ -1242,7 +1243,7 @@ public class AbilityFactory_ZoneAffecting {
 		double chance = .4;	// 40 percent chance of milling with instant speed stuff
 		if (AbilityFactory.isSorcerySpeed(sa))
 			chance = .667;	// 66.7% chance for sorcery speed (since it will never activate EOT)
-		Random r = new Random();
+		Random r = MyRandom.random;
 		boolean randomReturn = r.nextFloat() <= Math.pow(chance, source.getAbilityUsed()+1);
 		
 		if (AbilityFactory.playReusable(sa))
