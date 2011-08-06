@@ -7962,7 +7962,7 @@ public class CardFactory_Sorceries {
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         if(cardName.equals("Winds of Change")) {
         	/*
         	 * Each player shuffles the cards from his or her hand into
@@ -8001,6 +8001,33 @@ public class CardFactory_Sorceries {
                 	CardList c = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                 	c = c.filter(AllZoneUtil.nonlands);
                     return 2 >= c.size();
+                }
+                
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        if(cardName.equals("Nature's Resurgence")) {
+        	/*
+        	 * Each player draws a card for each creature card in his
+        	 * or her graveyard.
+        	 */
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 5736340966381828725L;
+
+				@Override
+                public void resolve() {
+                    int human = AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer).filter(AllZoneUtil.creatures).size();
+                    int comp = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer).filter(AllZoneUtil.creatures).size();
+                    AllZone.HumanPlayer.drawCards(human);
+                    AllZone.ComputerPlayer.drawCards(comp);
+                }//resolve()
+                
+                @Override
+                public boolean canPlayAI() {
+                	return AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer).filter(AllZoneUtil.creatures).size() > 1;
                 }
                 
             };//SpellAbility

@@ -2882,6 +2882,7 @@ res/cardsfolder/naturalize.txt -text svneol=native#text/plain
 res/cardsfolder/natures_claim.txt -text svneol=native#text/plain
 res/cardsfolder/natures_cloak.txt -text svneol=native#text/plain
 res/cardsfolder/natures_lore.txt -text svneol=native#text/plain
+res/cardsfolder/natures_resurgence.txt -text svneol=native#text/plain
 res/cardsfolder/natures_ruin.txt -text svneol=native#text/plain
 res/cardsfolder/natures_spiral.txt -text svneol=native#text/plain
 res/cardsfolder/naya_battlemage.txt -text svneol=native#text/plain

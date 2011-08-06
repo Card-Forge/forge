@@ -1,0 +1,7 @@
+Name:Nature's Resurgence
+ManaCost:2 G G
+Types:Sorcery
+Text:Each player draws a card for each creature card in his or her graveyard.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_resurgence.jpg
+End
