@@ -2831,99 +2831,243 @@ public class CardFactory implements NewConstants {
        card.removeIntrinsicKeyword(parse);
        
        String k[] = parse.split(":");
+       
+       final int NumAttack[] = {-1138};
+       final String AttackX[] = {"none"};
+       final int NumDefense[] = {-1138};
+       final String DefenseX[] = {"none"};
+       final String Keyword[] = {"none"};
+       
        String ptk[] = k[1].split("/");
        
-       final int attack[] = {0};
-       final int defense[] = {0};
-       final String keyword[] = {"none"};
-       
        if (ptk.length == 1)
-          keyword[0] = ptk[0];
+          Keyword[0] = ptk[0];
        
        if (ptk.length >= 2)
        {
-          attack[0] = Integer.parseInt(ptk[0].replace("+", ""));
-          defense[0] = Integer.parseInt(ptk[1].replace("+", ""));
+    	   if (ptk[0].length() <= 3)
+    		   NumAttack[0] = Integer.parseInt(ptk[0].replace("+", ""));
+    	   else
+    		   if (ptk[0].startsWith("Count$"))
+    		   {
+    			   String kk[] = ptk[0].split("\\$");
+    			   AttackX[0] = kk[1].replace("\\", "/");
+    		   }
+    	   
+    	   if (ptk[1].length() <= 3)
+    		   NumDefense[0] = Integer.parseInt(ptk[1].replace("+", ""));
+    	   else
+    		   if (ptk[1].startsWith("Count$"))
+    		   {
+    			   String kk[] = ptk[1].split("\\$");
+    			   DefenseX[0] = kk[1].replace("\\", "/");
+    		   }
        }
        
        if (ptk.length == 3)
-          keyword[0] = ptk[2];
+          Keyword[0] = ptk[2];
+       
+       final String DrawBack[] = {"none"};
+       final String spDesc[] = {"none"};
+       final String stDesc[] = {"none"};
+       //String d = new String("none");
+       StringBuilder sb = new StringBuilder();
+       
+       if ((AttackX[0].equals("none") && !(NumAttack[0] == -1138)) && (DefenseX[0].equals("none") && !(NumDefense[0] == -1138)) && Keyword[0].equals("none"))
+       {
+          // pt boost
+          sb.append("Target creature gets ");
+         
+          if (NumAttack[0] > 0 || (NumAttack[0] == 0 && NumDefense[0] > 0)) // +0/+1
+             sb.append("+");
+          else if (NumAttack[0] < 0 || (NumAttack[0] == 0 && NumDefense[0] < 0)) // -0/-1
+             sb.append("-");
+                      
+          sb.append(Math.abs(NumAttack[0]) + "/");
+         
+          if (NumDefense[0] > 0 || (NumDefense[0] == 0 && NumAttack[0] > 0)) // +1/+0
+             sb.append("+");
+          else if (NumDefense[0] < 0 || (NumDefense[0] == 0 && NumAttack[0] < 0)) // -1/-0
+             sb.append("-");
+         
+          sb.append(Math.abs(NumDefense[0]) + " until end of turn.");
+       }
+       if ((AttackX[0].equals("none") && NumAttack[0] == -1138) && (DefenseX[0].equals("none") && NumDefense[0] == -1138) && !Keyword[0].equals("none"))
+       {
+          // k boost
+          sb.append("Target creature gains " + Keyword[0] + " until end of turn.");
+       }
+       if ((AttackX[0].equals("none") && !(NumAttack[0] == -1138)) && (DefenseX[0].equals("none") && !(NumDefense[0] == -1138)) && !Keyword[0].equals("none"))
+       {
+          // ptk boost
+          sb.append("Target creature gets ");
+         
+          if (NumAttack[0] > 0 || (NumAttack[0] == 0 && NumDefense[0] > 0)) // +0/+1
+             sb.append("+");
+          else if (NumAttack[0] < 0 || (NumAttack[0] == 0 && NumDefense[0] < 0)) // -0/-1
+             sb.append("-");
+         
+          sb.append(Math.abs(NumAttack[0]) + "/");
+         
+          if (NumDefense[0] > 0 || (NumDefense[0] == 0 && NumAttack[0] > 0)) // +1/+0
+             sb.append("+");
+          else if (NumDefense[0] < 0 || (NumDefense[0] == 0 && NumAttack[0] < 0)) // -1/-0
+             sb.append("-");
+         
+          sb.append(Math.abs(NumDefense[0]));
+         
+          sb.append(" and gains " + Keyword[0] + " until end of turn.");
+       }
+
+       if (k.length > 2)
+       {
+          if (k[2].contains("Drawback$"))
+          {
+             String kk[] = k[2].split("\\$");
+             DrawBack[0] = kk[1];
+             if (k.length > 3)
+                spDesc[0] = k[3];
+             if (k.length > 4)
+            	stDesc[0] = k[4];
+          }
+          else
+          {
+             if (k.length > 2)
+                spDesc[0] = k[2];
+             if (k.length > 3)
+            	stDesc[0] = k[3];
+          }
+       }
+       else
+           if (!sb.toString().equals("none"))
+           {
+        	   spDesc[0] = sb.toString();
+        	   stDesc[0] = sb.toString();
+           }
+
 
        SpellAbility spPump = new Spell(card)
        {
           private static final long serialVersionUID = 42244224L;
           
+          private int getNumAttack()
+          {
+             if (NumAttack[0] != -1138)
+                return NumAttack[0];
+            
+             if (! AttackX[0].equals("none"))
+                return CardFactoryUtil.xCount(card, AttackX[0]);
+            
+             return 0;
+          }
+          private int getNumDefense()
+          {
+             if (NumDefense[0] != -1138)
+                return NumDefense[0];
+            
+             if (! DefenseX[0].equals("none"))
+                return CardFactoryUtil.xCount(card, DefenseX[0]);
+            
+             return 0;
+          }
+
           public boolean canPlayAI()
           {
-             Card c = getAttacker();
-             if (c != null)
+        	 int defense = getNumDefense();
+        	 
+        	 if (AllZone.Phase.getPhase().equals(Constant.Phase.Main2))
+        		 return false;
+        	 
+             CardList list = getCreatures();
+             if (!list.isEmpty())
              {
-                setTargetCard(c);
-                return true;
+            	 boolean goodt = false;
+            	 Card t = new Card();
+            	 while (goodt == false && !list.isEmpty())
+            	 {
+            		 t = CardFactoryUtil.AI_getBestCreature(list);
+            		 if ((t.getNetDefense() + defense) > 0)
+            			 goodt = true;
+            		 else
+            			 list.remove(t);
+            	 }
+            	 if (goodt == true)
+            	 {
+            		 setTargetCard(t);
+            		 return true;
+            	 }
              }
-             else
-                return false;
+             
+             return false;
           }
           
-          public Card getAttacker()
+          CardList getCreatures()
           {
-             Combat c = ComputerUtil.getAttackers();
-             
-             CardList list = new CardList(c.getAttackers());
-             CardListUtil.sortFlying(list);
-             
+             CardList list = new CardList(AllZone.Computer_Play.getCards());
              list = list.filter(new CardListFilter()
              {
-                public boolean addCard(Card c)
-                {
-                        return (CardFactoryUtil.canTarget(card, c)) &&
-                        (! c.getKeyword().contains(keyword[0])) &&
-                        (! c.hasSickness() && keyword[0].equals("Haste"));
-                }
-             });
-             
-             if (list.size() > 0)
-                return list.get(0);
-             else
-                return null;
+                 public boolean addCard(Card c)
+                 {
+                    if (c.isCreature())
+                    {
+                       if (c.hasSickness() && Keyword[0].equals("Haste"))
+                          return CardFactoryUtil.canTarget(card, c);
+                      
+                       return (CardFactoryUtil.AI_doesCreatureAttack(c)) &&
+                       (CardFactoryUtil.canTarget(card, c)) &&
+                       (!Keyword[0].equals("none") && !c.getKeyword().contains(Keyword[0])) &&
+                       (! (! c.hasSickness()) && Keyword[0].equals("Haste"));
+                    }
+                    return false;
+                 }
+              });
+             return list;
           }
           
           public void resolve()
           {
-             final Card[] target = new Card[1];
-             
-             final Command untilEOT = new Command()
+             if (AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()))
              {
-                private static final long serialVersionUID = -42244224L;
-                
-                public void execute()
-                {
-                   if (AllZone.GameAction.isCardInPlay(target[0]))
-                   {
-                      target[0].addTempAttackBoost(-attack[0]);
-                      target[0].addTempDefenseBoost(-defense[0]);
-                      
-                      if (!keyword[0].equals("none"))
-                         target[0].removeExtrinsicKeyword(keyword[0]);
-                   }
-                }
-             };
-             
-             target[0] = getTargetCard();
-             if (AllZone.GameAction.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, target[0]))
-                {
-                   target[0].addTempAttackBoost(attack[0]);
-                   target[0].addTempDefenseBoost(defense[0]);
-                   if (!keyword[0].equals("none"))
-                      target[0].addExtrinsicKeyword(keyword[0]);
-                   
-                   AllZone.EndOfTurn.addUntil(untilEOT);
-                }
-          }
-       };
+            	 final Card[] creature = new Card[1];
+            	 creature[0] = getTargetCard();
+            	 
+            	 final int a = getNumAttack();
+            	 final int d = getNumDefense();
+            	 
+            	 final Command untilEOT = new Command()
+                 {
+                    private static final long serialVersionUID = -42244224L;
+                    
+                    public void execute()
+                    {
+                       if (AllZone.GameAction.isCardInPlay(creature[0]))
+                       {
+                          creature[0].addTempAttackBoost(-1 * a);
+                          creature[0].addTempDefenseBoost(-1 * d);
+                          
+                          if (!Keyword[0].equals("none"))
+                             creature[0].removeExtrinsicKeyword(Keyword[0]);
+                       }
+                    }
+                 };
+                 
+                 creature[0].addTempAttackBoost(a);
+                 creature[0].addTempDefenseBoost(d);
+                 if (! Keyword[0].equals("none"))
+                     creature[0].addExtrinsicKeyword(Keyword[0]);
+                 
+                 AllZone.EndOfTurn.addUntil(untilEOT);
+                 
+                 if (! DrawBack[0].equals("none"))
+                	 CardFactoryUtil.doDrawBack(DrawBack[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), creature[0].getController(), card, creature[0]);
+             }
+          }//resolve
+       };//SpellAbility
        
        spPump.setBeforePayMana(CardFactoryUtil.input_targetCreature(spPump));
-       //spPump.setDescription(Desc);
+       spPump.setDescription(spDesc[0]);
+       spPump.setStackDescription(stDesc[0]);
+       
        card.clearSpellAbility();
        card.addSpellAbility(spPump);
     }
