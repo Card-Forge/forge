@@ -13,6 +13,7 @@ public class Input_Untap extends Input {
         Card[] c = p.getCards();
         
         AllZone.GameAction.setPlayerTurn(AllZone.Phase.getActivePlayer());
+        Player player = AllZone.Phase.getActivePlayer();
         
         if (AllZone.Phase.getTurn() != 1 && 
         	!(AllZone.Phase.getActivePlayer().equals(AllZone.HumanPlayer) && AllZone.Phase.getTurn() == 2) )
@@ -20,6 +21,10 @@ public class Input_Untap extends Input {
 	        for(int i = 0; i < c.length; i++)
 	            c[i].setSickness(false);
         }
+        
+        CardList lands = AllZoneUtil.getPlayerLandsInPlay(player);
+        lands = lands.filter(AllZoneUtil.untapped);
+        player.setNumPowerSurgeLands(lands.size());
         
         if(!AllZoneUtil.isCardInPlay("Stasis")) doUntap();
         

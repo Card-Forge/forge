@@ -12,6 +12,7 @@ public abstract class Player extends MyObservable{
 	protected int poisonCounters;
 	protected int life;
 	protected int assignedDamage;
+	protected int numPowerSurgeLands;
 	
 	public Player(String myName) {
 		this(myName, 20, 0);
@@ -372,6 +373,14 @@ public abstract class Player extends MyObservable{
     	CardList c = AllZoneUtil.getPlayerTypeInPlay(this, "Planeswalker");
     	if(null != c && c.size() > 0) return c.get(0);
     	else return null;
+    }
+    
+    public int getNumPowerSurgeLands() {
+    	return numPowerSurgeLands;
+    }
+    
+    public void setNumPowerSurgeLands(int n) {
+    	numPowerSurgeLands = n;
     }
 	
 	////////////////////////////////

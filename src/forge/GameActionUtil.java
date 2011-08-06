@@ -137,6 +137,7 @@ public class GameActionUtil {
 		upkeep_Dark_Confidant(); // keep this one semi-last
 
 		upkeep_Copper_Tablet();
+		upkeep_Power_Surge();
 		upkeep_The_Rack();
 		upkeep_Storm_World();
 		upkeep_BlackVise(); 
@@ -7972,6 +7973,31 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}// for
 	}// upkeep_Copper_Tablet()
+	
+	private static void upkeep_Power_Surge() {
+		/*
+		 * At the beginning of each player's upkeep, Power Surge deals X
+		 * damage to that player, where X is the number of untapped
+		 * lands he or she controlled at the beginning of this turn.
+		 */
+		final Player player = AllZone.Phase.getActivePlayer();
+		CardList list = AllZoneUtil.getCardsInPlay("Power Surge");
+		final int damage = player.getNumPowerSurgeLands();
+
+		for(Card surge:list) {
+			final Card source = surge;
+			Ability ability = new Ability(source, "0") {
+				@Override
+				public void resolve() {
+					player.addDamage(damage, source);
+				}
+			};// Ability
+			ability.setStackDescription(source+" - deals "+damage+" damage to " + player);
+			if(damage > 0) {
+				AllZone.Stack.add(ability);
+			}
+		}// for
+	}// upkeep_Power_Surge()
 
 	private static void upkeep_Klass() {
 		final Player player = AllZone.Phase.getActivePlayer();
