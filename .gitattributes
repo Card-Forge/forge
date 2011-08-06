@@ -4313,6 +4313,7 @@ res/cardsfolder/shadowfeed.txt -text svneol=native#text/plain
 res/cardsfolder/shadowmage_infiltrator.txt -text svneol=native#text/plain
 res/cardsfolder/shadowstorm.txt -text svneol=native#text/plain
 res/cardsfolder/shambling_remains.txt -text svneol=native#text/plain
+res/cardsfolder/shambling_shell.txt -text svneol=native#text/plain
 res/cardsfolder/shambling_strider.txt -text svneol=native#text/plain
 res/cardsfolder/shanodin_dryads.txt -text svneol=native#text/plain
 res/cardsfolder/shaper_guildmage.txt -text svneol=native#text/plain
