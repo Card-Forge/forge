@@ -2,7 +2,7 @@ Name:Nighthaze
 ManaCost:B
 Types:Sorcery
 Text:no text
-K:spPumpTgt:Swampwalk
+A:SP$Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Swampwalk | SpellDescription$ Target creature gains swampwalk until end of turn.
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nighthaze.jpg

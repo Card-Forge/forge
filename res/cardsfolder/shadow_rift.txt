@@ -2,7 +2,7 @@ Name:Shadow Rift
 ManaCost:U
 Types:Instant
 Text:no text
-K:spPumpTgt:Shadow
+A:SP$Pump | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Shadow | SpellDescription$ Target creature gains shadow until end of turn.
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shadow_rift.jpg

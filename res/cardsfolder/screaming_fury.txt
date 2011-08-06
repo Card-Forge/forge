@@ -2,7 +2,7 @@ Name:Screaming Fury
 ManaCost:2 R
 Types:Sorcery
 Text:no text
-K:spPumpTgt:+5/+0/Haste
+A:SP$Pump | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +5 | KW$ Haste | SpellDescription$ Target creature gets +5/+0 and gains haste until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/screaming_fury.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/78.jpg
