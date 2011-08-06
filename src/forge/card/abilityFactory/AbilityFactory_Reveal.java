@@ -231,6 +231,9 @@ public class AbilityFactory_Reveal {
 				}
 
 				if(top.size() > 0) {
+					Card dummy = new Card();
+					dummy.setName("[No valid cards]");
+					
 					//show the user the revealed cards
 					GuiUtils.getChoice("Looking at cards from library", top.toArray());
 
@@ -245,6 +248,9 @@ public class AbilityFactory_Reveal {
 							valid = top.getValidCards(changeValid.split(","), host.getController(), host);
 							for(Card c:top) {
 								if(!valid.contains(c)) rest.add(c);
+							}
+							if(valid.isEmpty()) {
+								valid.add(dummy);
 							}
 						}
 						else {
@@ -261,7 +267,7 @@ public class AbilityFactory_Reveal {
 							else {
 								chosen = GuiUtils.getChoice("Choose a card to put into "+destZone1, valid.toArray());
 							}
-							if(chosen == null) break;
+							if(chosen == null || chosen.getName().equals("[No valid cards]")) break;
 							valid.remove(chosen);
 							PlayerZone zone = AllZone.getZone(destZone1, chosen.getOwner());
 							if(zone.is("Library")) {
@@ -277,6 +283,7 @@ public class AbilityFactory_Reveal {
 
 						//dump anything not selected from valid back into the rest
 						rest.addAll(valid.toArray());
+						if(rest.contains(dummy)) rest.remove(dummy);
 
 						//now, move the rest to destZone2
 						if(destZone2.equals("Library")) {

@@ -5906,6 +5906,7 @@ res/cardsfolder/scroll_thief.txt -text svneol=native#text/plain
 res/cardsfolder/scrubland.txt -text svneol=native#text/plain
 res/cardsfolder/scryb_ranger.txt -text svneol=native#text/plain
 res/cardsfolder/scryb_sprites.txt -text svneol=native#text/plain
+res/cardsfolder/scrying_sheets.txt svneol=native#text/plain
 res/cardsfolder/scute_mob.txt -text svneol=native#text/plain
 res/cardsfolder/scuttling_death.txt svneol=native#text/plain
 res/cardsfolder/scuzzback_marauders.txt -text svneol=native#text/plain
