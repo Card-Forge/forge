@@ -4,6 +4,6 @@ Types:Creature Human
 Text:no text
 PT:1/1
 K:abDestroyTgtV T:Djinn,Efreet:Destroy target Djinn or Efreet.
-SVars:Rarity:Rare
-SVars:Picture:http://www.wizards.com/global/images/magic/general/king_suleiman.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/king_suleiman.jpg
 End
