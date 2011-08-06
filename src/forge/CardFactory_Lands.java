@@ -2557,6 +2557,7 @@ class CardFactory_Lands {
         }
         //*************** END ************ END **************************
         
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Urza's Factory")) {
             final Ability_Tap ability = new Ability_Tap(card, "7") {
@@ -2582,6 +2583,7 @@ class CardFactory_Lands {
             card.addSpellAbility(ability);
             
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Goblin Burrows")) {
@@ -3574,20 +3576,21 @@ class CardFactory_Lands {
                  }
               }
            };
-
+           /*
            final Ability_Tap ability2 = new Ability_Tap(card, "1 W") {
               private static final long serialVersionUID = 6987135326425915833L;
               public void resolve() {
                  CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier", card, "W", new String[] {"Creature", "Soldier"}, 1, 1, new String[] {""});
               }
-           };//SpellAbility
+           };//SpellAbility */
 
            card.addComesIntoPlayCommand(comesIntoPlay);
+           /*
            card.addSpellAbility(ability2);
            ability2.setDescription("1 W, tap: Put a 1/1 white soldier token in play.");
            ability2.setStackDescription("Kjeldoran Outpost - put a 1/1 white soldier token in play");
            ability2.setBeforePayMana(new Input_PayManaCost(ability2));
-
+			*/
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
