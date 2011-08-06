@@ -7,6 +7,7 @@ Academy Ruins
 Acid Rain
 Adarkar Valkyrie
 Adarkar Wastes
+Admonition Angel
 Adun Oakenshield
 Ageless Entity
 Ajani Goldmane
@@ -48,6 +49,7 @@ Armistice
 Armored Guardian
 Ashes to Ashes
 Augury Adept
+Auriok Champion
 Avatar of Fury
 Avatar of Might
 Avatar of Will
@@ -208,6 +210,7 @@ Dragon Roost
 Dragonmaster Outcast
 Dragonskull Summit
 Dragonstorm
+Dread Reaper
 Drifting Djinn
 Dross Harvester
 Drowned Catacomb
@@ -215,6 +218,7 @@ Dune-Brood Nephilim
 Dwarven Pony
 Earthcraft
 Earthquake
+Ebon Dragon
 El-Hajjaj
 Eladamri's Call
 Eladamri, Lord of Leaves
@@ -515,6 +519,7 @@ Memory Erosion
 Meng Huo, Barbarian King
 Merfolk Sovereign
 Mesa Enchantress
+Midsummer Revel
 Might of Oaks
 Mikokoro, Center of the Sea
 Mind Shatter

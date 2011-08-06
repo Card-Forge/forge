@@ -187,6 +187,7 @@ Burning Inquiry
 Burning Shield Askari
 Burst Lightning
 Burst of Speed
+Cackling Fiend
 Cackling Flames
 Cackling Imp
 Cadaver Imp
@@ -331,6 +332,7 @@ Despondency
 Devoted Hero
 Devoted Retainer
 Devouring Deep
+Devout Monk
 Diabolic Edict
 Dimir Aqueduct
 Dimir Infiltrator
@@ -759,6 +761,7 @@ Leaf Dancer
 Leaf Gilder
 Leap
 Leaping Lizard
+Leonin Elder
 Leonin Scimitar
 Life Burst
 Lifelink

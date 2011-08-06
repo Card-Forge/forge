@@ -38,7 +38,14 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
-admonition_angel.jpg	http://www.wizards.com/global/images/magic/general/admonition_angel.jpg
+dread_reaper.jpg		http://www.wizards.com/global/images/magic/general/dread_reaper.jpg
+ebon_dragon.jpg			http://www.wizards.com/global/images/magic/general/ebon_dragon.jpg
+leonin_elder.jpg		http://www.wizards.com/global/images/magic/general/leonin_elder.jpg	
+cackling_fiend.jpg			http://www.wizards.com/global/images/magic/general/cackling_fiend.jpg
+devout_monk.jpg				http://serv3.tcgimages.eu/img/cards/Starter_1999/devout_monk.jpg
+brutal_nightstalker.jpg		http://www.magickartenmarkt.de/img/cards/Portal_Second_Age/brutal_nightstalker.jpg
+auriok_champion.jpg		http://www.wizards.com/global/images/magic/general/auriok_champion.jpg
+admonition_angel.jpg		http://www.wizards.com/global/images/magic/general/admonition_angel.jpg
 midsummer_revel.jpg		http://www.wizards.com/global/images/magic/general/midsummer_revel.jpg
 abyssal_horror.jpg		http://www.wizards.com/global/images/magic/general/abyssal_horror.jpg
 deathgreeter.jpg		http://www.wizards.com/global/images/magic/general/deathgreeter.jpg

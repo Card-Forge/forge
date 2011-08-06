@@ -1,3 +1,56 @@
+Dread Reaper
+3 B B B
+Creature Horror
+no text
+6/5
+Flying
+WheneverKeyword:EntersBattleField:Self:Play:ModifyLife/-5:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Dread Reaper enters the battlefield, you lose 5 life.
+
+Ebon Dragon
+5 B B
+Creature Dragon
+no text
+5/4
+Flying
+WheneverKeyword:EntersBattleField:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:Yes_No:No Special Condition:When Ebon Dragon enters the battlefield, you may have target opponent discard a card.
+
+Leonin Elder
+W
+Creature Cat Cleric
+no text
+1/1
+WheneverKeyword:EntersBattleField:Type/Artifact:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever an artifact enters the battlefield, you may gain 1 life.
+
+Cackling Fiend
+2 B B
+Creature Zombie
+no text
+2/1
+WheneverKeyword:EntersBattleField:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:When Cackling Fiend enters the battlefield, each opponent discards a card.
+
+Devout Monk
+W
+Creature Human Monk Cleric
+no text
+1/1
+WheneverKeyword:EntersBattleField:Self:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Devout Monk enters the battlefield, you gain 1 life.
+
+Brutal Nightstalker
+3 B B
+Creature Nightstalker
+no text
+3/2
+WheneverKeyword:EntersBattleField:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:Yes_No:No Special Condition:When Brutal Nightstalker enters the battlefield, you may have target opponent discard a card.
+
+Auriok Champion
+W W
+Creature Human Cleric
+no text
+1/1
+Protection from black
+Protection from red
+WheneverKeyword:EntersBattleField:Type/Creature:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:Yes_No:Initiator - Other than Self:Whenever another creature enters the battlefield, you may gain 1 life.
+
 Admonition Angel
 3 W W W
 Creature Angel
