@@ -1,5 +1,5 @@
 Name:Herd Gnarr
-ManaCost:2 G
+ManaCost:3 G
 Types:Creature Beast
 Text:no text
 PT:2/2
