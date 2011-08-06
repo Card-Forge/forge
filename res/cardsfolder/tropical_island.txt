@@ -1,6 +1,6 @@
 Name:Tropical Island
 ManaCost:no cost
-Types:Land Island Forest
+Types:Land Forest Island
 Text:no text
 K:tap: add U
 K:tap: add G

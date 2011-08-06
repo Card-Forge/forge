@@ -1,6 +1,6 @@
 Name:Steel Leaf Paladin
 ManaCost:4 G W
-Types:Creature Knight
+Types:Creature Elf Knight
 Text:When Steel Leaf Paladin comes into play, return a green or white creature you control to its owner's hand.
 PT:4/4
 K:First Strike

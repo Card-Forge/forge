@@ -1,6 +1,6 @@
 Name:Savannah
 ManaCost:no cost
-Types:Land Plains Forest
+Types:Land Forest Plains
 Text:no text
 K:tap: add W
 K:tap: add G

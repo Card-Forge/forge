@@ -1,6 +1,6 @@
 Name:Volcanic Island
 ManaCost:no cost
-Types:Land Mountain Island
+Types:Land Island Mountain
 Text:no text
 K:tap: add U
 K:tap: add R
