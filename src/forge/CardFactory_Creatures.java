@@ -1421,7 +1421,7 @@ public class CardFactory_Creatures {
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.getType().contains("Goblin") || 
-                            c.getKeyword().contains("Shaman") || c.getKeyword().contains("Changeling");
+                            c.getType().contains("Shaman") || c.getKeyword().contains("Changeling");
                         }
                     });
                     
