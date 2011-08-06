@@ -106,6 +106,8 @@ public class UI {
 		editorPane.getDocument().putProperty("imageCache", imageCache); // Read internally by ImageView, but never written.
 		// Extend all this shit to cache images.
 		editorPane.setEditorKit(new HTMLEditorKit() {
+			private static final long serialVersionUID = -562969765076450440L;
+
 			public ViewFactory getViewFactory () {
 				return new HTMLFactory() {
 					public View create (Element elem) {
@@ -135,6 +137,8 @@ public class UI {
 	static public void setVerticalScrollingView (JScrollPane scrollPane, final Component view) {
 		final JViewport viewport = new JViewport();
 		viewport.setLayout(new ViewportLayout() {
+			private static final long serialVersionUID = -4436977380450713628L;
+
 			public void layoutContainer (Container parent) {
 				viewport.setViewPosition(new Point(0, 0));
 				Dimension viewportSize = viewport.getSize();

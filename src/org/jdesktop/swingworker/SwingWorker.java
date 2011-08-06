@@ -865,8 +865,9 @@ public abstract class SwingWorker<T, V> implements Future<T>, Runnable {
     }
     
     private class SwingWorkerPropertyChangeSupport 
-            extends PropertyChangeSupport {
-        SwingWorkerPropertyChangeSupport(Object source) {
+    		extends PropertyChangeSupport {
+		private static final long serialVersionUID = -6694014073227886163L;
+		SwingWorkerPropertyChangeSupport(Object source) {
             super(source);
         }
         @Override

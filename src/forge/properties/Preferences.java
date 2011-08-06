@@ -26,7 +26,7 @@ public class Preferences {
         props = prefs.props;
     }
     
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({"unchecked"})
     public synchronized Enumeration<String> keys() {
         Set<String> keysEnum = (Set) props.keySet();
         Vector<String> keyList = new Vector<String>();

@@ -13,16 +13,10 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import javax.swing.BorderFactory;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
@@ -36,11 +30,10 @@ import arcane.ui.ScaledImagePanel;
 import arcane.ui.ScaledImagePanel.MultipassType;
 import arcane.ui.ScaledImagePanel.ScalingType;
 import arcane.ui.util.GlowText;
-import arcane.ui.util.ImageUtil;
 import arcane.ui.util.ManaSymbols;
-import arcane.util.Util;
 
 public class CardPanel extends JPanel implements CardContainer{
+	private static final long serialVersionUID = 2361907095724263295L;
 	static public final double TAPPED_ANGLE = Math.PI / 2;
 	static public final float ASPECT_RATIO = 3.5f / 2.5f;
 
@@ -53,8 +46,6 @@ public class CardPanel extends JPanel implements CardContainer{
 	static private final float TEXT_GLOW_INTENSITY = 3f;
 	static private final float rotCenterToTopCorner = 1.0295630140987000315797369464196f;
 	static private final float rotCenterToBottomCorner = 0.7071067811865475244008443621048f;
-	static private Map<String, BufferedImage> nameToImage = new HashMap<String, BufferedImage>();
-	static private Map<String, BufferedImage> nameToBlurredImage = new HashMap<String, BufferedImage>();
 
 	public Card gameCard;
 	public CardPanel attachedToPanel;

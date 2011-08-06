@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import arcane.ui.CardPanel;
 
 public class ViewPanel extends JPanel {
+	private static final long serialVersionUID = 7016597023142963068L;
+
 	public void layout () {
 		if (getComponentCount() == 0) return;
 		CardPanel panel = (CardPanel)getComponent(0);

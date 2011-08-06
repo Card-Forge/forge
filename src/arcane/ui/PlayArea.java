@@ -16,6 +16,7 @@ import arcane.ui.util.CardPanelMouseListener;
 import forge.Card;
 
 public class PlayArea extends CardPanelContainer implements CardPanelMouseListener {
+	private static final long serialVersionUID = 8333013579724492513L;
 	static private final int GUTTER_Y = 5;
 	static private final int GUTTER_X = 5;
 	static final float EXTRA_CARD_SPACING_X = 0.04f;
@@ -283,6 +284,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 	}
 
 	private class Row extends ArrayList<Stack> {
+		private static final long serialVersionUID = 716489891951011846L;
+
 		public Row () {
 			super(16);
 		}
@@ -325,6 +328,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 	}
 
 	private class Stack extends ArrayList<CardPanel> {
+		private static final long serialVersionUID = 3863135156832080368L;
+
 		public Stack () {
 			super(8);
 		}

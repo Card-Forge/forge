@@ -198,7 +198,6 @@ public class Phase extends MyObservable
                 || (is(Constant.Phase.Cleanup, Constant.Player.Computer) && computerExtraTurns > 0)) {
             //System.out.println("CLEANUP!");
             String player = getActivePlayer();
-            String opponent = AllZone.GameAction.getOpponent(player);
             
             if(player.equals(Constant.Player.Computer)) computerExtraTurns--;
             else humanExtraTurns--;
@@ -207,7 +206,7 @@ public class Phase extends MyObservable
         } else if((is(Constant.Phase.Cleanup, Constant.Player.Computer) && humanExtraTurns < 0)
                 || (is(Constant.Phase.Cleanup, Constant.Player.Human) && computerExtraTurns < 0)) {
             String player = getActivePlayer();
-            String opp = AllZone.GameAction.getOpponent(player);
+
             if(player.equals(Constant.Player.Computer)) humanExtraTurns++;
             else computerExtraTurns++;
             

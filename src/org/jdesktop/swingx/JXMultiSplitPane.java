@@ -52,10 +52,11 @@ import org.jdesktop.swingx.painter.Painter;
  * @author Luan O'Carroll
  */
 public class JXMultiSplitPane extends JPanel {
-    private AccessibleContext accessibleContext = null;
+	private static final long serialVersionUID = 255040079203554096L;
+	private AccessibleContext accessibleContext = null;
     private boolean continuousLayout = true;
     private DividerPainter dividerPainter = new DefaultDividerPainter();
-    private Painter backgroundPainter;
+    private Painter<JXMultiSplitPane> backgroundPainter;
 
     /**
      * Creates a MultiSplitPane with it's LayoutManager set to 
@@ -269,9 +270,9 @@ public class JXMultiSplitPane extends JPanel {
      * being used, because Painters may paint transparent pixels or not
      * paint certain pixels, such as around the border insets.
      */
-    public void setBackgroundPainter(Painter p)
+    public void setBackgroundPainter(Painter<JXMultiSplitPane> p)
     {
-        Painter old = getBackgroundPainter();
+        Painter<JXMultiSplitPane> old = getBackgroundPainter();
         this.backgroundPainter = p;
         
         if (p != null) {
@@ -282,7 +283,7 @@ public class JXMultiSplitPane extends JPanel {
         repaint();
     }
     
-    public Painter getBackgroundPainter() {
+    public Painter<JXMultiSplitPane> getBackgroundPainter() {
         return backgroundPainter;
     }    
     /**
@@ -558,7 +559,9 @@ public class JXMultiSplitPane extends JPanel {
     }
     
     protected class AccessibleMultiSplitPane extends AccessibleJPanel {
-        @Override
+		private static final long serialVersionUID = 5056475597412456379L;
+
+		@Override
         public AccessibleRole getAccessibleRole() {
             return AccessibleRole.SPLIT_PANE;
         }

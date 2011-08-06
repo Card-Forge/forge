@@ -11,6 +11,8 @@ import arcane.ui.CardPanel;
 import arcane.ui.util.CardPanelMouseListener;
 
 public class HandArea extends CardArea {
+	private static final long serialVersionUID = 7488132628637407745L;
+
 	public HandArea (JScrollPane scrollPane, final Frame frame) {
 		super(scrollPane);
 

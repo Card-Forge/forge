@@ -18,6 +18,7 @@ import arcane.ui.util.Animation;
 import arcane.ui.util.CardPanelMouseListener;
 
 public class CardArea extends CardPanelContainer implements CardPanelMouseListener {
+	private static final long serialVersionUID = -5836122075999621592L;
 	static public final int GUTTER_Y = 5;
 	static public final int GUTTER_X = 5;
 	static private final float HORIZ_CARD_SPACING_X = 0.04f;

@@ -601,7 +601,8 @@ public class MultiSplitLayout implements LayoutManager
     return ((child != null) && child.isVisible() ) ? child.getPreferredSize() : new Dimension(0, 0);
   }
   
-  private Dimension minimumComponentSize(Node node) {
+  @SuppressWarnings("unused")
+private Dimension minimumComponentSize(Node node) {
     if ( layoutMode == NO_MIN_SIZE_LAYOUT )
       return new Dimension(0, 0);
 
@@ -803,7 +804,6 @@ public class MultiSplitLayout implements LayoutManager
   private void layoutShrink(Split split, Rectangle bounds) {
     Rectangle splitBounds = split.getBounds();
     ListIterator<Node> splitChildren = split.getChildren().listIterator();
-    Node lastWeightedChild = split.lastWeightedChild();
     
     if (split.isRowLayout()) {
       int totalWidth = 0;          // sum of the children's widths
@@ -1323,7 +1323,8 @@ public class MultiSplitLayout implements LayoutManager
    * incorrectly.
    */
   public static class InvalidLayoutException extends RuntimeException {
-    private final Node node;
+	private static final long serialVersionUID = -5960249230256779327L;
+	private final Node node;
     public InvalidLayoutException(String msg, Node node) {
       super(msg);
       this.node = node;
@@ -1808,7 +1809,6 @@ public class MultiSplitLayout implements LayoutManager
      * @param split the node to check
      */
     public void restoreDividers( Split split ) { 
-      boolean nextDividerVisible = false;
       ListIterator<Node> splitChildren = split.getChildren().listIterator();
       while( splitChildren.hasNext()) {
         Node splitChild = splitChildren.next();

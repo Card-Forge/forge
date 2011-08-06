@@ -19,7 +19,9 @@ import java.util.Locale;
 import javax.swing.JLabel;
 
 public class GlowText extends JLabel {
+	private static final long serialVersionUID = -2868833097364223352L;
 	private int glowSize;
+	@SuppressWarnings("unused")
 	private float glowIntensity;
 	private Color glowColor;
 	private boolean wrap;

@@ -21,6 +21,8 @@ import arcane.ui.util.UI;
  * Manages mouse events and common funcitonality for CardPanel containing components.
  */
 abstract public class CardPanelContainer extends JPanel {
+	private static final long serialVersionUID = -6400018234895548306L;
+
 	private final static int DRAG_SMUDGE = 10;
 
 	public List<CardPanel> cardPanels = new ArrayList<CardPanel>();

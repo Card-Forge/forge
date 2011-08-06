@@ -13126,6 +13126,7 @@ public class GameActionUtil {
 	
 	// Reach of Branches
 	public static Command Sosukes_Summons= new Command() {
+		private static final long serialVersionUID = -6316413742244380102L;
 		CardList oldSnakes = new CardList();
 
 		public void execute() {

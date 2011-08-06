@@ -17,7 +17,6 @@ import arcane.util.Util;
 
 abstract public class Animation {
 	static private final long TARGET_MILLIS_PER_FRAME = 30;
-	static private final float HALF_PI = (float)(Math.PI / 2);
 
 	static private Timer timer = new Timer("Animation", true);
 
