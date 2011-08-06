@@ -13025,6 +13025,65 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
+        else if(cardName.equals("Momentous Fall")) {
+            final SpellAbility spell = new Spell(card) {
+                
+    			private static final long serialVersionUID = -56339412409L;
+
+
+    			@Override
+                public void resolve() {
+    				Card Sacrificed = getTargetCard();
+    				if(Sacrificed != null) {
+    					for(int i = 0; i < Sacrificed.getNetAttack(); i++) {
+    						AllZone.GameAction.drawCard(card.getController());
+    					}
+                        PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
+                        life.addLife(Sacrificed.getNetDefense());
+    				}
+                  }
+                
+                
+                @Override
+                public boolean canPlay() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    CardList Creatures = new CardList(play.getCards());
+                    Creatures = Creatures.getType("Creature");                   
+                    return Creatures.size() > 0 && super.canPlay();                   
+                }
+                @Override
+                public boolean canPlayAI() {                  
+                    return false;                   
+                }         
+            };
+            Input target = new Input() {
+                
+                private static final long serialVersionUID = 42466124531655L;
+                
+                @Override
+                public void showMessage() {
+                    AllZone.Display.showMessage("Select a creature to sacrifice");
+                    ButtonUtil.enableOnlyCancel();
+                }
+                
+                
+                @Override
+                public void selectCard(Card c, PlayerZone zone) {
+                    PlayerZone Play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    if(AllZone.GameAction.isCardInZone(c, Play) && c.isCreature() == true) {
+                    	spell.setTargetCard(c);
+                    	AllZone.GameAction.sacrifice(c);
+                        AllZone.Stack.add(spell);
+                        stopSetNext(new ComputerAI_StackNotEmpty());
+                    }
+                }//selectCard()
+            };//Input
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);        
+            spell.setAfterPayMana(target);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
         else if(cardName.equals("Culling Sun")) {
             SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 2169815434022673011L;

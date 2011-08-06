@@ -1,3 +1,8 @@
+Momentous Fall
+2 G G
+Instant
+As an additional cost to cast Momentous Fall, sacrifice a creature. You draw cards equal to the sacrificed creature's power, then you gain life equal to its toughness.
+
 Hammer of Bogardan
 1 R R
 Sorcery
