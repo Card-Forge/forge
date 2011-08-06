@@ -1531,6 +1531,7 @@ res/cardsfolder/deathmark.txt -text svneol=native#text/plain
 res/cardsfolder/deathmark_prelate.txt -text svneol=native#text/plain
 res/cardsfolder/deathmask_nezumi.txt -text svneol=native#text/plain
 res/cardsfolder/deaths_duet.txt -text svneol=native#text/plain
+res/cardsfolder/deaths_head_buzzard.txt -text svneol=native#text/plain
 res/cardsfolder/deaths_shadow.txt -text svneol=native#text/plain
 res/cardsfolder/deathspore_thallid.txt -text svneol=native#text/plain
 res/cardsfolder/debtors_knell.txt -text svneol=native#text/plain
