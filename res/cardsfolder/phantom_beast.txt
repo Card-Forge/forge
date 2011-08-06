@@ -1,0 +1,10 @@
+Name:Phantom Beast
+ManaCost:3 U
+Types:Creature Illusion Beast
+Text:no text
+PT:4/5
+K:When CARDNAME becomes the target of a spell or ability, sacrifice it.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_beast.jpg
+End

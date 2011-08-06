@@ -1,0 +1,11 @@
+Name:Illusionary Servant
+ManaCost:1 U U
+Types:Creature Illusion
+Text:no text
+PT:3/4
+K:Flying
+K:When CARDNAME becomes the target of a spell or ability, sacrifice it.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/illusionary_servant.jpg
+End

@@ -1,0 +1,11 @@
+Name:Skulking Knight
+ManaCost:2 B
+Types:Creature Zombie Knight
+Text:no text
+PT:3/3
+K:Flanking
+K:When CARDNAME becomes the target of a spell or ability, sacrifice it.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skulking_knight.jpg
+End

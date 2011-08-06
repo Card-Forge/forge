@@ -37,8 +37,11 @@ public class MagicStack extends MyObservable
 	  {
 		  if(sp instanceof Ability_Mana || sp instanceof Ability_Triggered)//TODO make working triggered abilities!
 			  sp.resolve(); 
-		  else
+		  else {
 			  push(sp);
+			  if (sp.getTargetCard()!= null)
+		         	CardFactoryUtil.checkTargetingEffects(sp, sp.getTargetCard());
+		  }
 	  }
   }
 
@@ -179,13 +182,13 @@ public class MagicStack extends MyObservable
                     Card crd = sa.getSourceCard();
                     AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Pay X cost for " + crd.getName() + " (X=" +crd.getXManaCostPaid()+")\r\n",
 	                        ability.getManaCost(), this, unpaidCommand, true));
-			}
-          };
-          Card crd = sa.getSourceCard();
-		  if(sp.getSourceCard().getController().equals(Constant.Player.Human)) {
-                AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Pay X cost for " + sp.getSourceCard().getName() + " (X=" +crd.getXManaCostPaid()+")\r\n",
+				}
+			  };
+			  Card crd = sa.getSourceCard();
+			  if(sp.getSourceCard().getController().equals(Constant.Player.Human)) {
+				  AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Pay X cost for " + sp.getSourceCard().getName() + " (X=" +crd.getXManaCostPaid()+")\r\n",
                         ability.getManaCost(), paidCommand, unpaidCommand, true));
-          } 
+			  } 
 			  else //computer
 	          {
 				  int neededDamage = CardFactoryUtil.getNeededXDamage(sa);
@@ -273,7 +276,9 @@ public class MagicStack extends MyObservable
 		  }
 		  
 	  }
-  }
+    }
+		 if (sp.getTargetCard()!= null)
+         	CardFactoryUtil.checkTargetingEffects(sp, sp.getTargetCard());
   }
   public int size()
   {

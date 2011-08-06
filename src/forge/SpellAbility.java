@@ -307,6 +307,8 @@ public abstract class SpellAbility {
         if(!card.isFaceDown()) desc = getSourceCard().getName() + " - targeting " + card;
         else desc = getSourceCard().getName() + " - targeting Morph(" + card.getUniqueNumber() + ")";
         setStackDescription(desc);
+        
+        //System.out.println(card + " has become target of a spell or ability (" +this.getSourceCard() + ")");
     }
     
     public void setTargetPlayer(String p) {

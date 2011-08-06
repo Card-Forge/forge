@@ -4634,6 +4634,49 @@ public class CardFactoryUtil {
     	
     	return "";
     }
+    
+    //whenever CARDNAME becomes the target of a spell or ability, ... :
+    public static void checkTargetingEffects(SpellAbility sa, final Card c)
+    {
+    	
+    	//if (AllZone.GameAction.isCardInPlay(c)) 
+    	//{
+    	if (c.getKeyword().contains("When CARDNAME becomes the target of a spell or ability, return CARDNAME to its owner's hand.")) {
+    		SpellAbility ability = new Ability(c, "0")
+    		{
+    			public void resolve()
+    			{
+    				AllZone.GameAction.moveToHand(c);
+    			}
+    		};
+    		ability.setStackDescription(c + " - return CARDNAME to its owner's hand.");
+    		AllZone.Stack.add(ability);
+    	}
+    	if (c.getKeyword().contains("When CARDNAME becomes the target of a spell or ability, destroy CARDNAME.")) {
+    		
+    		SpellAbility ability = new Ability(c, "0")
+    		{
+    			public void resolve()
+    			{
+    				AllZone.GameAction.destroy(c); 	
+    			}
+    		};
+    		ability.setStackDescription(c + " - destroy CARDNAME.");
+    		AllZone.Stack.add(ability);
+    	}
+    	if (c.getKeyword().contains("When CARDNAME becomes the target of a spell or ability, sacrifice it.")) {
+    		SpellAbility ability = new Ability(c, "0")
+    		{
+    			public void resolve()
+    			{
+    				AllZone.GameAction.sacrifice(c);	
+    			}
+    		};
+    		ability.setStackDescription(c + " - sacrifice CARDNAME.");
+    		AllZone.Stack.add(ability);
+    	}
+    	//}
+    }
 
     
     public static void main(String[] args) {

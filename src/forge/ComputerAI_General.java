@@ -253,7 +253,7 @@ public class ComputerAI_General implements Computer {
             for(SpellAbility sa:c.getSpellAbility())
                 //This try/catch should fix the "computer is thinking" bug
                 try {
-                    if(sa.canPlayAI() && ComputerUtil.canPayCost(sa) && 
+                    if(ComputerUtil.canPayCost(sa) && sa.canPlayAI() && 
                     		(sa.isAnyPlayer() || sa.getSourceCard().getController().equals(Constant.Player.Computer)))
                     			spellAbility.add(sa);
                 } catch(Exception ex) {
