@@ -303,9 +303,9 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
     				String SC2 = SetInfoUtil.getSetCode2_SetCode3(c.getCurSetCode());
     				    				
     				int n = 0;
-    				if (!c.getSVar("PicCount").equals(""))
+    				if (cSetInfo.get(j).PicCount > 0)
     				{
-    					n = Integer.parseInt(c.getSVar("PicCount"));
+    					n = cSetInfo.get(j).PicCount;
 
 	    				for (int k=1; k<=n; k++)
 	    				{
@@ -321,6 +321,8 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
     				}
     				else
     				{
+    					c.setRandomPicture(0);
+    					
     					imgFN = CardUtil.buildFilename(c);
     					if (imgFN.equals("none") ||	(!imgFN.contains(SC3) && !imgFN.contains(SC2)))
 						{
@@ -351,8 +353,8 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
         mCard[] out = new mCard[CList.size()];
         CList.toArray(out);
         
-//    for(int i = 0; i < out.length; i++)
-//      System.out.println(out[i].name +" " +out[i].url);
+    for(int i = 0; i < out.length; i++)
+      System.out.println(out[i].name +" " +out[i].url);
         return out;
     }//getNeededCards()
     

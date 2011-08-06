@@ -116,6 +116,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     private Action                  LOOK_AND_FEEL_ACTION = new LookAndFeelAction(this);
     private Action                  DOWNLOAD_ACTION      = new DownloadAction();
     private Action                  DOWNLOAD_ACTION_LQ   = new DownloadActionLQ();
+    private Action					DOWNLOAD_ACTION_SETLQ = new DownloadActionSetLQ();
     private Action                  IMPORT_PICTURE       = new ImportPictureAction();
     private Action                  CARD_SIZES_ACTION    = new CardSizesAction();
     private Action					CARD_STACK_ACTION    = new CardStackAction();
@@ -237,7 +238,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     
     private void setupMenu() {
         Action[] actions = {
-                LOOK_AND_FEEL_ACTION, DNLD_PRICES_ACTION, DOWNLOAD_ACTION, DOWNLOAD_ACTION_LQ, IMPORT_PICTURE, CARD_SIZES_ACTION,
+                LOOK_AND_FEEL_ACTION, DNLD_PRICES_ACTION, DOWNLOAD_ACTION, DOWNLOAD_ACTION_LQ, DOWNLOAD_ACTION_SETLQ, IMPORT_PICTURE, CARD_SIZES_ACTION,
                 CARD_STACK_ACTION, CARD_STACK_OFFSET_ACTION, ErrorViewer.ALL_THREADS_ACTION, ABOUT_ACTION};
         JMenu menu = new JMenu(ForgeProps.getLocalized(MENU.TITLE));
         for (Action a:actions) {
@@ -1028,9 +1029,20 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         }
         
         public void actionPerformed(ActionEvent e) {
-            
             Gui_DownloadPictures_LQ.startDownload(null);
         }
+    }
+    
+    public static class DownloadActionSetLQ extends AbstractAction {
+    	private static final long serialVersionUID = 2947202546752930L;
+    	
+    	public DownloadActionSetLQ() {
+    		super(ForgeProps.getLocalized(MENU_BAR.MENU.DOWNLOADSETLQ));
+    	}
+    	
+    	public void actionPerformed(ActionEvent e) {
+    		Gui_DownloadSetPictures_LQ.startDownload(null);
+    	}
     }
     
     public static class ImportPictureAction extends AbstractAction {
