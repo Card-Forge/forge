@@ -2061,49 +2061,6 @@ public class CombatUtil {
                 ability.setStackDescription("Pulse Tracker - Whenever Pulse Tracker attacks, each opponent loses 1 life.");
                 AllZone.Stack.add(ability);
             }//Pulse Tracker
-            
-            if(c.getName().equals("Time Elemental")) {
-            	final Card source = c;
-            	final Ability damage = new Ability(c, "0") {
-            		@Override
-            		public void resolve() {
-            			final Player player = source.getController();
-            			player.addDamage(5, source);
-            		}
-            	};
-            	
-            	StringBuilder sbDam = new StringBuilder();
-            	sbDam.append(c).append(" - deals 5 damage to controller.");
-            	damage.setStackDescription(sbDam.toString());
-            	
-            	final Ability sacrifice = new Ability(c, "0") {
-            		@Override
-            		public void resolve() {
-            			AllZone.GameAction.sacrifice(source);
-            		}
-            	};
-            	
-            	StringBuilder sbSac = new StringBuilder();
-            	sbSac.append("Sacrifice ").append(c);
-            	sacrifice.setStackDescription(sbSac.toString());
-                
-                final Command atEOCdamage = new Command() {
-    				private static final long serialVersionUID = 1513673469721590317L;
-
-    				public void execute() {
-                        AllZone.Stack.add(damage);
-                    }
-                };
-                final Command atEOCsacrifice = new Command() {
-    				private static final long serialVersionUID = -510924602971034173L;
-
-    				public void execute() {
-                        if(AllZone.GameAction.isCardInPlay(source)) AllZone.Stack.add(sacrifice);
-                    }
-                };
-                AllZone.EndOfCombat.addAt(atEOCdamage);
-                AllZone.EndOfCombat.addAt(atEOCsacrifice);
-            }
 
             c.setCreatureAttackedThisCombat(true);
     }//checkDeclareAttackers
@@ -2516,49 +2473,6 @@ public class CombatUtil {
             };
             
             AllZone.EndOfCombat.addAt(atEOC);
-        }
-        
-        if(b.getName().equals("Time Elemental")) {
-        	final Card source = b;
-        	final Ability damage = new Ability(b, "0") {
-        		@Override
-        		public void resolve() {
-        			final Player player = source.getController();
-        			player.addDamage(5, source);
-        		}
-        	};
-        	
-        	StringBuilder sbDmg = new StringBuilder();
-        	sbDmg.append(b).append(" - deals 5 damage to controller.");
-        	damage.setStackDescription(sbDmg.toString());
-        	
-        	final Ability sacrifice = new Ability(b, "0") {
-        		@Override
-        		public void resolve() {
-        			AllZone.GameAction.sacrifice(source);
-        		}
-        	};
-        	
-        	StringBuilder sbSac = new StringBuilder();
-        	sbSac.append("Sacrifice ").append(b);
-        	sacrifice.setStackDescription(sbSac.toString());
-            
-            final Command atEOCdamage = new Command() {
-				private static final long serialVersionUID = -1470724468078097507L;
-
-				public void execute() {
-                    AllZone.Stack.add(damage);
-                }
-            };
-            final Command atEOCsacrifice = new Command() {
-				private static final long serialVersionUID = 7644622095917060596L;
-
-				public void execute() {
-                    if(AllZone.GameAction.isCardInPlay(source)) AllZone.Stack.add(sacrifice);
-                }
-            };
-            AllZone.EndOfCombat.addAt(atEOCdamage);
-            AllZone.EndOfCombat.addAt(atEOCsacrifice);
         }
         
         a.setCreatureGotBlockedThisCombat(true);
