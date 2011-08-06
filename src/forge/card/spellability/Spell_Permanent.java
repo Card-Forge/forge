@@ -1,6 +1,9 @@
 
 package forge.card.spellability;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.ButtonUtil;
@@ -10,8 +13,10 @@ import forge.Command;
 import forge.CommandReturn;
 import forge.Constant;
 import forge.Player;
+import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactory;
 import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.trigger.Trigger;
 import forge.gui.input.Input;
 
 
@@ -218,13 +223,56 @@ public class Spell_Permanent extends Spell {
             if( (o == null) || !(cl.size() > 0) || !AllZone.getZone(getSourceCard()).is(Constant.Zone.Hand))
             	return false;
         }
-
+ 
         if(loseLifeAmount > 0 && AllZone.ComputerPlayer.getLife() <= (loseLifeAmount+3)) {
     		return false;
     	}
         
+        if (!checkETBEffects(card, this))
+        	return false;
+        
         return super.canPlayAI();
     }//canPlayAI()
+    
+    public static boolean checkETBEffects(Card card, SpellAbility sa){
+        // Trigger play improvements
+        ArrayList<Trigger> triggers = card.getTriggers();
+        for(Trigger tr : triggers){
+        	// These triggers all care for ETB effects
+        	
+        	HashMap<String, String> params = tr.getMapParams();
+        	if (!params.get("Mode").equals("ChangesZone"))
+        		continue;
+        	
+        	if (!params.get("Destination").equals("Battlefield"))
+        		continue;
+        	
+        	if (params.containsKey("ValidCard") && !params.get("ValidCard").contains("Self"))
+        		continue;
+        	
+        	// Maybe better considerations 
+        	AbilityFactory af = new AbilityFactory();
+        	SpellAbility exSA = af.getAbility(card.getSVar(params.get("Execute")), card);
+        	exSA.setActivatingPlayer(sa.getActivatingPlayer());
+        	
+        	
+        	// Run non-mandatory trigger.
+        	// These checks only work if the Executing SpellAbility is an Ability_Sub.
+        	if (exSA instanceof Ability_Sub && !exSA.doTrigger(false)){
+        		// AI would not run this trigger if given the chance
+        		
+        		// if trigger is mandatory, return false
+        		if (params.get("OptionalDecider") == null){
+        			return false;
+        		}
+        		// else
+        		// otherwise, return false 50% of the time?
+        	}
+        }    	
+    	
+    	return true;
+    }
+    
     
     @Override
     public void resolve() {

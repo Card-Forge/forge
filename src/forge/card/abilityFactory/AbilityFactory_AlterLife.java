@@ -1,5 +1,6 @@
 package forge.card.abilityFactory;
 
+import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -477,11 +478,28 @@ public class AbilityFactory_AlterLife {
 		 
 		 Card source = sa.getSourceCard();
 		 String amountStr = af.getMapParams().get("LifeAmount");
+		 int amount = 0;
 		 if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")){
 			 // Set PayX here to maximum value.
 			 int xPay = ComputerUtil.determineLeftoverMana(sa);
 			 source.setSVar("PayX", Integer.toString(xPay));
+			 amount = xPay;
 		 }
+		 else
+			 amount = AbilityFactory.calculateAmount(source, amountStr, sa);
+		 
+		ArrayList<Player> tgtPlayers;
+		if (tgt != null)
+			tgtPlayers = tgt.getTargetPlayers();
+		else
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+		
+		
+		if (tgtPlayers.contains(AllZone.ComputerPlayer)){
+			// For cards like Foul Imp, ETB you lose life
+			if (amount + 3 > AllZone.ComputerPlayer.getLife())
+				return false;
+		}
 		 
 		// check SubAbilities DoTrigger?
 		Ability_Sub abSub = sa.getSubAbility();

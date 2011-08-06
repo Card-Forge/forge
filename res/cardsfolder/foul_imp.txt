@@ -1,14 +1,12 @@
 Name:Foul Imp
 ManaCost:B B
 Types:Creature Imp
-Text:When CARDNAME enters the battlefield, you lose 2 life.
+Text:no text
 PT:2/2
 K:Flying
-# 
-# NOTE: Do not convert to triggers because of this line:
-#       card.getSpellPermanent().setLoseLifeAmount(num);
-# 
-K:etbLoseLife:2
+# Note: The Executing Ability needs to be a Drawback for the AI to properly test it's conditions
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, you lose 2 life.
+SVar:TrigLoseLife:DB$LoseLife | Cost$ 0 | LifeAmount$ 2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/st/en-us/card5158.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/9.jpg
