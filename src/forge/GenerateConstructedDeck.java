@@ -135,7 +135,7 @@ public class GenerateConstructedDeck
       	}
         return CardUtil.getColors(c).size() <= 2 && //only dual colored gold cards
                !c.isLand()                       && //no land
-               c.getSVar("RemAIDeck").equals("True")     || //OR very important
+               !c.getSVar("RemAIDeck").equals("True")     || //OR very important
                goodLand.contains(c.getName());
       }
     });
