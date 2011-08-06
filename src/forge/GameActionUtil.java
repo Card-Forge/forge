@@ -3156,44 +3156,6 @@ public class GameActionUtil {
 			}
 		}
 	}
-	
-	/**
-	 * 
-	 * @param player
-	 * @param gain
-	 * @param source
-	 */
-	public static void executeLifeGainEffects(final Player player, final int gain, final Card source) {
-		
-		if (gain <= 0) return;
-		
-		// Whenever Keyword
-		Object[] Life_Whenever_Parameters = new Object[1];
-		Life_Whenever_Parameters[0] = gain;
-		AllZone.GameAction.checkWheneverKeyword(player.getPlayerCard(), "GainLife", Life_Whenever_Parameters);
-
-		if(AllZoneUtil.isCardInPlay("Sanguine Bond", player)) {
-			CardList bonds = AllZoneUtil.getPlayerCardsInPlay(player, "Sanguine Bond");
-			for(Card bond:bonds) {
-				target_Opponent_Lose_Life(player, gain, bond);
-			}
-		}
-
-	}//executeLifeGainEffects
-	
-	private static void target_Opponent_Lose_Life(final Player player, final int loss, final Card source) {
-		//should be triggered
-		Ability loseLife = new Ability(source, "0") {
-			public void resolve() {
-				player.getOpponent().loseLife(loss, source);
-			}
-		};
-		loseLife.setStackDescription(source+" - "+player.getOpponent()+" loses "+loss+" life.");
-		if(player.canTarget(source)) {
-			AllZone.Stack.add(loseLife);
-		}
-		
-	}
 
 	private static void playerCombatDamage_PoisonCounter(Card c, int n) {
 		final Player opponent = c.getController().getOpponent();
