@@ -500,7 +500,6 @@ public class GameActionUtil {
 		playCard_Witch_Maw_Nephilim(c);
 		playCard_Forced_Fruition(c);
 		playCard_Gelectrode(c);
-		playCard_Cinder_Pyromancer(c);
 		playCard_Standstill(c);
 		playCard_SolKanar(c);
 		playCard_Gilt_Leaf_Archdruid(c);
@@ -2107,42 +2106,6 @@ public class GameActionUtil {
             }
         }
     }// Gelectrode
-
-    public static void playCard_Cinder_Pyromancer(Card c) {
-        final Player controller = c.getController();
-
-        final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-
-        CardList list = new CardList();
-        list.addAll(play.getCards());
-        list = list.getName("Cinder Pyromancer");
-
-        if (list.size() > 0 && c.isRed()) {
-            for (int i = 0; i < list.size(); i++) {
-                final Card card = list.get(i);
-                
-                Ability ability2 = new Ability(card, "0") {
-                    @Override
-                    public void resolve() {
-                        if (controller.isHuman()) {
-                            String question = "Untap your Cinder Pyromancer?";
-                            if (showYesNoDialog(card, question)) {
-                                card.untap();
-                            }
-                        }// controller isComputer()
-                        else card.untap(); 
-                        
-                    }// resolve()
-                };// ability2
-
-                StringBuilder sb = new StringBuilder();
-                sb.append(card.getName()).append(" - ").append(c.getController());
-                sb.append(" played a red spell, you may untap Cinder Pyromancer.");
-                ability2.setStackDescription(sb.toString());
-                AllZone.Stack.add(ability2);
-            }
-        }
-    }// Cinder_Pyromancer
 
 	public static void playCard_Forced_Fruition(Card c) {
 		PlayerZone hplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
