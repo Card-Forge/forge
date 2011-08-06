@@ -1,3 +1,24 @@
+Cave Sense
+1 R
+Enchantment Aura
+Enchanted creature gets +1/+1 and has mountainwalk.
+Enchant creature
+enPump:+1/+1/Mountainwalk
+
+Divine Transformation
+2 W W
+Enchantment Aura
+Enchanted creature gets +3/+3.
+Enchant creature
+enPump:+3/+3
+
+Eternal Warrior
+R
+Enchantment Aura
+Enchanted creature has vigilance.
+Enchant creature
+enPump:Vigilance
+
 Darksteel Forge
 9
 Artifact
@@ -5892,6 +5913,7 @@ B B
 Enchantment Aura
 Enchanted creature has fear.
 Enchant creature
+enPump:Fear
 
 Battle Mastery
 2 W
@@ -6249,6 +6271,7 @@ U
 Enchantment Aura
 Enchanted creature has flying.
 Enchant creature
+enPump:Flying
 
 Sprout
 G
@@ -6286,8 +6309,9 @@ Launch
 1 U
 Enchantment Aura
 Enchanted creature has flying.
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 Enchant creature
+enPump:Flying
+When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 
 Sleeper's Guile
 1 B

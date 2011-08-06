@@ -38,6 +38,10 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+cave_sense.jpg		http://www.wizards.com/global/images/magic/general/cave_sense.jpg
+divine_transformation.jpg		http://www.wizards.com/global/images/magic/general/divine_transformation.jpg
+eternal_warrior.jpg		http://www.wizards.com/global/images/magic/general/eternal_warrior.jpg
+darksteel_forge.jpg		http://www.wizards.com/global/images/magic/general/darksteel_forge.jpg
 agility.jpg		http://www.wizards.com/global/images/magic/general/agility.jpg
 alexis_cloak.jpg		http://www.wizards.com/global/images/magic/general/alexis_cloak.jpg
 burrowing.jpg		http://www.wizards.com/global/images/magic/general/burrowing.jpg

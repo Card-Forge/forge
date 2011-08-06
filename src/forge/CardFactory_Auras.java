@@ -1356,6 +1356,8 @@ class CardFactory_Auras {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Fear")) {
             final SpellAbility spell = new Spell(card) {
@@ -1440,6 +1442,8 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Battle Mastery")) {
@@ -2536,7 +2540,8 @@ class CardFactory_Auras {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
-
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Launch") || cardName.equals("Flight")) {
             final SpellAbility spell = new Spell(card) {
@@ -2628,7 +2633,7 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-        
+*/
         
 /*
         //*************** START *********** START **************************
