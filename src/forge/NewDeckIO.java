@@ -56,14 +56,20 @@ public class NewDeckIO implements DeckIO {
             } else {
                 dir.mkdirs();
                 if(!dir.isDirectory()) throw new IOException("Directory can't be created");
-                deckList = new ArrayList<Deck>();
-                boosterMap = new HashMap<String, Deck[]>();
+                this.deckList = new ArrayList<Deck>();
+                this.boosterMap = new HashMap<String, Deck[]>();
                 readFile();
             }
         } catch(IOException ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("DeckIO : write() error, " + ex.getMessage());
         }
+    }
+    
+    public NewDeckIO(File dir, List<Deck> deckList, Map<String, Deck[]> boosterMap) {
+        this(dir);
+        this.deckList.addAll(deckList);
+        this.boosterMap.putAll(boosterMap);
     }
     
     public boolean isUnique(String deckName) {

@@ -115,7 +115,15 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         
 
         try {
-            
+            //deck migration - this is a little hard to read, because i can't just plainly reference a class in the
+            //default package
+            Class<?> deckConverterClass = Class.forName("DeckConverter");
+            //invoke public static void main(String[] args) of DeckConverter
+            deckConverterClass.getDeclaredMethod("main", String[].class).invoke(null, (Object) null);
+        } catch(Exception ex) {
+            ErrorViewer.showError(ex);
+        }
+        try {
             Constant.Runtime.GameType[0] = Constant.GameType.Constructed;
             AllZone.Computer = new ComputerAI_Input(new ComputerAI_General());
             

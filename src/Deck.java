@@ -1,12 +1,11 @@
-import java.io.Serializable;
-import java.util.ArrayList;
-
-
 /**
  * Deck.java
  * 
  * Created on 26.10.2009
  */
+
+import java.io.Serializable;
+import java.util.ArrayList;
 
 
 /**
@@ -25,7 +24,7 @@ public class Deck implements Serializable {
     private boolean           isSealed;
     private boolean           isDraft;
     */
-    
+
     private ArrayList<String> main;
     private ArrayList<String> sideboard;
     

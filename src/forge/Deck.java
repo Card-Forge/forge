@@ -21,17 +21,23 @@ public class Deck implements java.io.Serializable {
     public Deck(String gameType) {
         setDeckType(gameType);
         name = "";
+        
         main = new ArrayList<String>();
-        sideboard = new ArrayList<String>();
         mainView = unmodifiableList(main);
+        
+        sideboard = new ArrayList<String>();
         sideboardView = unmodifiableList(sideboard);
     }
     
     public Deck(String deckType, List<String> main, List<String> sideboard, String name) {
         this.deckType = deckType;
-        this.main = main;
-        this.sideboard = main;
         this.name = name;
+        
+        this.main = main;
+        mainView = unmodifiableList(main);
+        
+        this.sideboard = main;
+        sideboardView = unmodifiableList(sideboard);
     }
     
     public List<String> getMain() {
