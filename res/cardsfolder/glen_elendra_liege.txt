@@ -4,8 +4,8 @@ Types:Creature Faerie Knight
 Text:no text
 PT:2/3
 K:Flying
-K:StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.blue!NotSelf:Other blue creatures you control get +1/+1.
-K:StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.black!NotSelf:Other black creatures you control get +1/+1.
+K:stPumpAll:Creature.Blue+Other+YouCtrl:1/1:No Condition:Other blue creatures you control get +1/+1.
+K:stPumpAll:Creature.Black+Other+YouCtrl:1/1:No Condition:Other black creatures you control get +1/+1.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glen_elendra_liege.jpg

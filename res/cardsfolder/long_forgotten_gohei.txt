@@ -2,7 +2,7 @@ Name:Long-Forgotten Gohei
 ManaCost:3
 Types:Artifact
 Text:Arcane spells you cast cost 1 less to cast.
-K:StaticEffect:Play:Permanents you Control:PTBonus/1/1:Type.Creature!Type.Spirit:Spirit creatures you control get +1/+1.
+K:stPumpAll:Creature.Spirit+YouCtrl:1/1:No Condition:Spirit creatures you control get +1/+1.
 K:CostChange:Player:Less:1:Spell:All:Arcane:NoSpecial
 SVar:RemAIDeck:True
 SVar:PlayMain1:TRUE

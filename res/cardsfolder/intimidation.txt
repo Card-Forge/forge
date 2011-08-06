@@ -2,7 +2,7 @@ Name:Intimidation
 ManaCost:2 B B B
 Types:Enchantment
 Text:no text
-K:StaticEffect:Play:Permanents you Control:Keyword/Fear:Type.Creature:Creatures you control have fear. (They can't be blocked except by artifact creatures and/or black creatures.)
+K:stPumpAll:Creature.YouCtrl:0/0/Fear:No Condition:Creatures you control have fear. (They can't be blocked except by artifact creatures and/or black creatures.)
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/intimidation.jpg
