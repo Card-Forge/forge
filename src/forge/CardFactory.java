@@ -16914,7 +16914,7 @@ public class CardFactory implements NewConstants {
     		}
 			public boolean canPlayAI()
 			{
-				final int maxX = ComputerUtil.getAvailableMana().size() - 1;
+				final int maxX = ComputerUtil.getAvailableMana().size() - CardUtil.getConvertedManaCost(card);
 				
 				if (AllZone.Human_Life.getLife() <= maxX)
 					return true;
