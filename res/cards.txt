@@ -1,3 +1,9 @@
+Mind Control
+3 U U
+Enchantment Aura
+You control enchanted creature.
+Enchant creature
+
 Fabricate
 2 U
 Sorcery

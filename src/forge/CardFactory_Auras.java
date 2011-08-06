@@ -1014,7 +1014,7 @@ class CardFactory_Auras {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Control Magic")) {
+        else if(cardName.equals("Control Magic") || cardName.equals("Mind Control")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 7359753772138233155L;
                 
