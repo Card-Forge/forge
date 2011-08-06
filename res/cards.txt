@@ -1,3 +1,9 @@
+Stoneforge Mystic
+1 W
+Creature Kor Artificer
+When Stoneforge Mystic enters the battlefield, you may search your library for an Equipment card, reveal it, put it into your hand, then shuffle your library.
+1/2
+
 Dragonmaster Outcast
 R
 Creature Human Shaman

@@ -18661,6 +18661,124 @@ public class CardFactory_Creatures {
 	        	card.addComesIntoPlayCommand(comesIntoPlay);
 	        }//*************** END ************ END **************************
 	      
+	      
+	    //*************** START *********** START **************************
+		    else if(cardName.equals("Stoneforge Mystic"))
+		    {
+		      final SpellAbility ability = new Ability(card, "0")
+		      {
+		        public void resolve()
+		        {
+		          PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
+		          PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+		          if(AllZone.GameAction.isCardInZone(getTargetCard(), lib))
+		          {
+		        	Card c = getTargetCard();
+		        	AllZone.GameAction.shuffle(card.getController());
+		        	lib.remove(c);
+			        hand.add(c);	
+
+		          }
+		        }//resolve()
+		      };
+		      Command intoPlay = new Command()
+		      {
+
+				private static final long serialVersionUID = 4022442363194287539L;
+
+				public void execute()
+		        {
+		          PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
+		          CardList cards = new CardList(lib.getCards());
+		          CardList arts = new CardList();
+		          
+		          for (int i=0;i<cards.size();i++)
+		          {
+		        	  if(cards.get(i).getType().contains("Equipment") )
+		        	  {
+		        		  arts.add(cards.get(i));
+		        	  }
+		          }
+
+		          String controller = card.getController();
+
+		          if(arts.size() == 0)
+		            return;
+
+		          if(controller.equals(Constant.Player.Human))
+		          {
+		            Object o = AllZone.Display.getChoiceOptional("Select target card", arts.toArray());
+		            if(o != null)
+		            {
+		              ability.setTargetCard((Card)o);
+		              AllZone.Stack.add(ability);
+		            }
+		          }
+		          else //computer
+		          {
+		            arts.shuffle();
+		            ability.setTargetCard(arts.get(0));
+		            AllZone.Stack.add(ability);
+		          }
+
+		        }//execute()
+		      };//Command
+		      card.addComesIntoPlayCommand(intoPlay);
+		      
+		      final SpellAbility ab = new Ability_Tap(card, "1 W")
+			  {
+		    	    private static final long serialVersionUID = -4952768517408793535L;
+					public boolean canPlayAI() {return getEquipment().size() != 0;}
+			        public void chooseTargetAI()
+			        {
+			          card.tap();
+			          Card target = CardFactoryUtil.AI_getBestArtifact(getEquipment());
+			          setTargetCard(target);
+			        }
+			        CardList getEquipment()
+			        {
+			          CardList list = new CardList(AllZone.Computer_Hand.getCards());
+			          list = list.getType("Equipment");
+			          return list;
+			        }
+		    		public void resolve()
+		    		{
+		    			Card c = getTargetCard();
+		  	          	PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+		  	          	PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+
+		  	          	if(AllZone.GameAction.isCardInZone(c, hand))
+		  	          	{
+		  	          		hand.remove(c);
+		  	          		play.add(c);
+		  	          	}
+		    		}
+			    };
+			    
+			    ab.setBeforePayMana(new Input()
+			    { 
+				    
+				   private static final long serialVersionUID = -5107440034982095276L;
+
+				   public void showMessage()
+			       {
+			   		   	String controller = card.getController();
+			            CardList eq = new CardList(AllZone.getZone(Constant.Zone.Hand, controller).getCards());
+			            eq = eq.filter(new CardListFilter()
+			            {
+							public boolean addCard(Card c)
+							{
+								PlayerZone zone = AllZone.getZone(c);
+								return c.isEquipment() && zone.is(Constant.Zone.Hand);
+							}
+			            });
+			            stopSetNext(CardFactoryUtil.input_targetSpecific(ab, eq, "Select an equipment card", false, false));
+			          }
+			      });
+			      card.addSpellAbility(ab);
+		      
+		    }//*************** END ************ END **************************
+	      
 	      // Cards with Cycling abilities
 	      // -1 means keyword "Cycling" not found
 	      if (shouldCycle(card) != -1)
