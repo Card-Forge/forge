@@ -1,3 +1,9 @@
+Auramancer
+2 W
+Creature Human Wizard
+When Auramancer enters the battlefield, you may return target enchantment card from your graveyard to your hand.
+2/2
+
 Aspect of Mongoose
 1 G
 Enchantment Aura
@@ -7154,12 +7160,6 @@ Barren Glory
 4 W W
 Enchantment
 At the beginning of your upkeep, if you control no permanents other than Barren Glory and have no cards in hand, you win the game.
-
-Auramancer
-2 W
-Creature Human Wizard
-When Auramancer enters the battlefield, you may return target card from your graveyard to your hand.
-2/2
 
 Cartographer
 2 G
