@@ -768,7 +768,7 @@ public class CombatUtil {
         defenderDamage = attacker.predictDamage(defenderDamage, defender, true);
         attackerDamage = defender.predictDamage(attackerDamage, attacker, true);
         
-        int defenderLife = defender.getKillDamage()  + predictToughnessBonusOfBlocker(attacker, defender);
+        int defenderLife = defender.getKillDamage() + predictToughnessBonusOfBlocker(attacker, defender);
         int attackerLife = attacker.getKillDamage() + attBushidoMagnitude;
         
         if(defender.getKeyword().contains("Double Strike") ) {
@@ -844,19 +844,20 @@ public class CombatUtil {
     			return true;
         }
         
-        int defBushidoMagnitude = defender.getKeywordMagnitude("Bushido");
         int attBushidoMagnitude = attacker.getKeywordMagnitude("Bushido");
         attBushidoMagnitude += attacker.getAmountOfKeyword(
         		"Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.");
         
-        int defenderDamage = defender.getNetCombatDamage() - flankingMagnitude + defBushidoMagnitude;
+        int defenderDamage = defender.getNetAttack() + predictPowerBonusOfBlocker(attacker, defender);
+        if (AllZoneUtil.isCardInPlay("Doran, the Siege Tower"))
+        	defenderDamage = defender.getNetDefense() + predictToughnessBonusOfBlocker(attacker, defender);
         int attackerDamage = attacker.getNetCombatDamage() + attBushidoMagnitude;
         
         // consider Damage Prevention/Replacement
         defenderDamage = attacker.predictDamage(defenderDamage, defender, true);
         attackerDamage = defender.predictDamage(attackerDamage, attacker, true);
         
-        int defenderLife = defender.getKillDamage() - flankingMagnitude + defBushidoMagnitude;
+        int defenderLife = defender.getKillDamage() + predictToughnessBonusOfBlocker(attacker, defender);
         int attackerLife = attacker.getKillDamage() + attBushidoMagnitude;
         
         if(attacker.getKeyword().contains("Double Strike") ) {
