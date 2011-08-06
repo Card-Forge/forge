@@ -10072,7 +10072,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(gain2Life);
         }//*************** END ************ END **************************
 
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Tradewind Rider")) {
         	String select = "Select target permanent to return to owner's hand.";
@@ -10173,6 +10173,7 @@ public class CardFactory_Creatures {
             bounce.setDescription("tap, Tap two untapped creatures you control: Return target permanent to its owner's hand.");
             card.addSpellAbility(bounce);
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Gilt-Leaf Archdruid")) {

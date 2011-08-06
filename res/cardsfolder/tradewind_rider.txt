@@ -4,6 +4,7 @@ Types:Creature Spirit
 Text:no text
 PT:1/4
 K:Flying
+A:AB$Bounce | Cost$ T tapXType<2/Creature> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tradewind_rider.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/98.jpg
