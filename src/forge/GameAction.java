@@ -1010,7 +1010,7 @@ public class GameAction {
                         String DamageTakerParse = k[1];                
                         String DamageTaker[] = DamageTakerParse.split("/");
                         for(int z = 0; z < DamageTaker.length - 1; z++) {
-                        	if(DamageTaker[z + 1].equals("Opponent") && ((String)Custom_Parameters[0]).equals(card.getController().getOpponent())) Nullified = false;  
+                        	if(DamageTaker[z + 1].equals("Opponent") && Custom_Parameters[0].equals(card.getController().getOpponent())) Nullified = false;  
                         }
                         if(Nullified == true) k[4] = "Null";   
                         }
