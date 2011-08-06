@@ -36,5 +36,6 @@ abstract public class Ability_Activated extends SpellAbility implements java.io.
         }
         return AllZone.GameAction.isCardInPlay(c) && !c.isFaceDown();
         //TODO: make sure you can't play the Computer's activated abilities
+        //TODO: should summoning sickness be checked here as well?
     }
 }
