@@ -38,7 +38,7 @@ public class ComputerUtil_Attack2 {
         playerCreatures = playerCreatures.getType("Creature");
 		
 		attackers = getPossibleAttackers(possibleAttackers);
-		blockers  = getPossibleBlockers(possibleBlockers);
+		blockers  = getPossibleBlockers(possibleBlockers, attackers);
 		this.blockerLife = blockerLife;
 	}//constructor
        
@@ -52,15 +52,20 @@ public class ComputerUtil_Attack2 {
       return list;
     }//getUntappedCreatures()
 	
-      public CardList getPossibleBlockers(CardList in)
+      public CardList getPossibleBlockers(CardList blockers, CardList attackers)
       {
-        CardList list = new CardList(in.toArray());
-        list = list.filter(new CardListFilter()
-        {
-          public boolean addCard(Card c) { return c.isCreature() && CombatUtil.canBlock(c); }
-
+        CardList possibleBlockers = new CardList(blockers.toArray());
+        final CardList attackerList = new CardList(attackers.toArray());
+        possibleBlockers = possibleBlockers.filter(new CardListFilter() {
+        	public boolean addCard(Card c) {
+        		if (!c.isCreature()) return false;
+        		for (Card attacker:attackerList) {
+        		  if(CombatUtil.canBlock(attacker, c)) return true;
+        		}
+        		return false;
+        	}
         });
-        return list;
+        return possibleBlockers;
       }//getUntappedCreatures()
 
        //this checks to make sure that the computer player
@@ -72,7 +77,8 @@ public class ComputerUtil_Attack2 {
           CardListUtil.sortAttackLowFirst(attackers);
           int blockersNeeded = attackers.size();
           
-          CardList list = getPossibleBlockers(attackers);
+          //don't hold back creatures that can't block any of the human creatures
+          CardList list = getPossibleBlockers(attackers, humanList);
           
           for(int i = 0; i < list.size(); i++) {
              if(!doesHumanAttackAndWin(i)) {
