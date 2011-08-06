@@ -11450,6 +11450,7 @@ public class GameActionUtil {
 		Sacrifice_NoArtifacts.execute();
 		Sacrifice_NoLands.execute();
 		Sacrifice_NoCreatures.execute();
+		Sacrifice_NoOtherCreatures.execute();
 		
 		topCardReveal_Update.execute();
 	}// executeCardStateEffects()
@@ -12827,7 +12828,7 @@ public class GameActionUtil {
 	};
 
 	
-	public static Command Tabernacle                  = new Command() {
+	public static Command The_Tabernacle_at_Pendrell_Vale                 = new Command() {
 		private static final long serialVersionUID   = -3233715310427996429L;
 		CardList                  gloriousAnthemList = new CardList();
 
@@ -12897,34 +12898,6 @@ public class GameActionUtil {
 					gloriousAnthemList.add(c);
 				}// for inner
 			}
-		}// execute()
-	};
-
-	public static Command Emperor_Crocodile                      = new Command() {
-		private static final long serialVersionUID   = -5406532269475480827L;
-
-		@SuppressWarnings("unused")
-		// gloriousAnthemList
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			// get all cards
-
-			CardList list = AllZoneUtil.getCardsInPlay("Emperor Crocodile");
-			
-			for (int i=0;i<list.size();i++) {
-				
-				Card c = list.get(i);
-				
-			
-			//Player only has one creature in play (the crocodile) then it dies.
-			if (AllZoneUtil.getCreaturesInPlay(c.getController()).size() == 1) {
-	            AllZone.GameAction.sacrifice(c);	
-			}
-            
-			}
-			
-
 		}// execute()
 	};
 	
@@ -14310,6 +14283,26 @@ public class GameActionUtil {
 
 			for(Card c:cards) {
 				if(AllZoneUtil.getCreaturesInPlay().size() == 0) {
+					AllZone.GameAction.sacrifice(c);
+				}
+			}
+
+		}//execute()
+	};
+	
+	private static Command Sacrifice_NoOtherCreatures = new Command() {
+
+		public void execute() {
+			CardList cards = AllZoneUtil.getCardsInPlay();
+
+			cards = cards.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					return c.getKeyword().contains("When you control no other creatures, sacrifice CARDNAME.");
+				}
+			});
+
+			for(Card c:cards) {
+				if(AllZoneUtil.getCreaturesInPlay(c.getController()).size() == 1) {
 					AllZone.GameAction.sacrifice(c);
 				}
 			}
@@ -15966,7 +15959,6 @@ public class GameActionUtil {
 		
 		//commands.put("Eldrazi_Monument", Eldrazi_Monument);
 		commands.put("Elspeth_Emblem", Elspeth_Emblem);
-		commands.put("Emperor_Crocodile", Emperor_Crocodile);
 		
 		//commands.put("Faerie_Swarm", Faerie_Swarm);
 		
@@ -16039,7 +16031,7 @@ public class GameActionUtil {
 		commands.put("Student_of_Warfare", Student_of_Warfare);
 		commands.put("Svogthos_the_Restless_Tomb", Svogthos_the_Restless_Tomb);
 		
-		commands.put("Tabernacle", Tabernacle);
+		commands.put("The_Tabernacle_at_Pendrell_Vale", The_Tabernacle_at_Pendrell_Vale);
 		commands.put("Tarmogoyf", Tarmogoyf);
 		commands.put("Terravore", Terravore);
 		commands.put("Tethered_Griffin", Tethered_Griffin);

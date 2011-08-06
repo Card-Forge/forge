@@ -42,7 +42,6 @@ public class StaticEffects
 		//cardToEffectsList.put("Drove of Elves", new String[] {"Drove_of_Elves"});
 		
 		//cardToEffectsList.put("Eldrazi Monument", new String[] {"Eldrazi_Monument"});
-		cardToEffectsList.put("Emperor Crocodile", new String[] {"Emperor_Crocodile"});
 		
 		//cardToEffectsList.put("Faerie Swarm", new String[] {"Faerie_Swarm"});
 		
@@ -116,7 +115,7 @@ public class StaticEffects
 		cardToEffectsList.put("Tarmogoyf", new String[] {"Tarmogoyf"});
 		cardToEffectsList.put("Terravore", new String[] {"Terravore"});
 		cardToEffectsList.put("Tethered Griffin", new String[] {"Tethered_Griffin"});
-		cardToEffectsList.put("The Tabernacle at Pendrell Vale", new String[] {"Tabernacle"});
+		cardToEffectsList.put("The Tabernacle at Pendrell Vale", new String[] {"The_Tabernacle_at_Pendrell_Vale"});
 		cardToEffectsList.put("Transcendent Master", new String[]{"Transcendent_Master"});
 		
 		cardToEffectsList.put("Umbra Stalker", new String[] {"Umbra_Stalker"});
