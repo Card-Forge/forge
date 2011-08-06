@@ -7931,7 +7931,10 @@ public class CardFactory implements NewConstants {
             };//SpellAbility
             
             ability.setDescription("Pay 1 life: Draw a card.");
-            ability.setStackDescription(card.getName() + " - Pay 1 life: Draw a card.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - Pay 1 life: Draw a card.");
+            ability.setStackDescription(sb.toString());
 
             card.addSpellAbility(ability);
             
@@ -7995,8 +7998,11 @@ public class CardFactory implements NewConstants {
             };//SpellAbility
             
             ability.setDescription("1 life: Set aside the top card of your library face down. At the end of your turn, put that card into your hand.");
-            ability.setStackDescription(card.getName()
-                    + " - 1 life: Set aside the top card of your library face down. At the end of your turn, put that card into your hand.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName());
+            sb.append(" - 1 life: Set aside the top card of your library face down. At the end of your turn, put that card into your hand.");
+            ability.setStackDescription(sb.toString());
             
             card.addSpellAbility(ability);
             
@@ -8065,10 +8071,15 @@ public class CardFactory implements NewConstants {
                 }
             };//spellAbility
             
-            a2.setDescription("2 W, Remove four hoofprint counters from Hoofprints of the Stag: Put a 4/4 white Elemental creature token with flying into play. Play this ability only during your turn.");
-            a2.setStackDescription(card.getName()
-                    + " - put a 4/4 white Elemental creature token with flying into play.");
-            
+            StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("2 W, Remove four hoofprint counters from Hoofprints of the Stag: Put a 4/4 white Elemental ");
+            sbDesc.append("creature token with flying into play. Play this ability only during your turn.");
+            a2.setDescription(sbDesc.toString());
+
+            StringBuilder sbStack = new StringBuilder();
+            sbStack.append(card.getName()).append(" - put a 4/4 white Elemental creature token with flying into play.");
+            a2.setStackDescription(sbStack.toString());
+           
             card.addSpellAbility(a2);
             
         }//*************** END ************ END **************************
@@ -8190,7 +8201,11 @@ public class CardFactory implements NewConstants {
                 private static final long serialVersionUID = -4919203791300685078L;
                 
                 public void execute() {
-                    ability.setStackDescription(card.getName() + " - draw three cards.");
+                	
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(card.getName()).append(" - draw three cards.");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
@@ -8281,9 +8296,15 @@ public class CardFactory implements NewConstants {
                 }
             };
             
-            ability.setDescription("Tap: You may put a creature card with converted mana cost equal to the number of charge counters on AEther Vial from your hand into play.");
-            ability.setStackDescription(card.getName()
-                    + " - put creature card with converted mana cost equal to the number of charge counters into play.");
+            StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("Tap: You may put a creature card with converted mana cost equal to the ");
+            sbDesc.append("number of charge counters on AEther Vial from your hand into play.");
+            ability.setDescription(sbDesc.toString());
+            
+            StringBuilder sbStack = new StringBuilder();
+            sbStack.append(card.getName());
+            sbStack.append(" - put creature card with converted mana cost equal to the number of charge counters into play.");
+            ability.setStackDescription(sbStack.toString());
             
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
@@ -8425,7 +8446,6 @@ public class CardFactory implements NewConstants {
                     StringBuilder sb = new StringBuilder();
                     sb.append("Necrogen Spellbomb - ").append(s).append(" discards a card");
                     setStackDescription(sb.toString());
-                    // setStackDescription("Necrogen Spellbomb - " + s + " discards a card");
                     
                     if(AllZone.ComputerPlayer.equals(getTargetPlayer())) AllZone.GameAction.discardRandom(getTargetPlayer(), this);
                     else AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
@@ -8662,8 +8682,11 @@ public class CardFactory implements NewConstants {
                 }//canPlay()
             };//SpellAbility ability
             
-            ability.setStackDescription("Counterbalance - " + player
-                    + " reveals top card and counters spell if it has the same converted manacost");
+            StringBuilder sb = new StringBuilder();
+            sb.append("Counterbalance - ").append(player);
+            sb.append(" reveals top card and counters spell if it has the same converted manacost");
+            ability.setStackDescription(sb.toString());
+            
             //ability.setBeforePayMana(new Input_PayManaCost(ability));
             card.addSpellAbility(ability);
             
@@ -8823,7 +8846,10 @@ public class CardFactory implements NewConstants {
                 }
             };
             ability.setDescription("Remove three quest counters from Ior Ruin Expedition and sacrifice it: Draw two cards.");
-            ability.setStackDescription(card.getName() + " - Draw two cards.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - Draw two cards.");
+            ability.setStackDescription(sb.toString());
             
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
@@ -8854,8 +8880,14 @@ public class CardFactory implements NewConstants {
                 			Constant.Zone.Play, true, Constant.Zone.Play, true);
                 }
             };
-            ability.setDescription("Remove three quest counters from Khalni Heart Expedition and sacrifice it: search your library for two basic lands and put them onto the battlefield tapped.");
-            ability.setStackDescription(card.getName() + " - Search for land.");
+            StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("Remove three quest counters from Khalni Heart Expedition and sacrifice it: search ");
+            sbDesc.append("your library for two basic lands and put them onto the battlefield tapped.");
+            ability.setDescription(sbDesc.toString());
+
+            StringBuilder sbStack = new StringBuilder();
+            sbStack.append(card.getName()).append(" - Search for land.");
+            ability.setStackDescription(sbStack.toString());
             
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
@@ -9360,8 +9392,12 @@ public class CardFactory implements NewConstants {
                     return (getTargetCard() != null);
                 }
             };
-
-            ability.setDescription(abCost.toString() + "Put a +1/+1 counter on target nonartifact creature. That creature becomes an artifact in addition to its other types.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(abCost.toString());
+            sb.append("Put a +1/+1 counter on target nonartifact creature. That creature becomes an artifact in addition to its other types.");
+            ability.setDescription(sb.toString());
+            
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
        
@@ -9537,7 +9573,10 @@ public class CardFactory implements NewConstants {
                 }
             };
             
-            ability.setDescription("Sacrifice " + card.getName() + ": destroy target artifact or enchantment.");
+            StringBuilder sb = new StringBuilder();
+            sb.append("Sacrifice ").append(card.getName()).append(": destroy target artifact or enchantment.");
+            ability.setDescription(sb.toString());
+            
             ability.setBeforePayMana(runtime);
             card.addSpellAbility(ability);
             
@@ -9586,7 +9625,12 @@ public class CardFactory implements NewConstants {
             };//SpellAbility
             
             card.addSpellAbility(ability);
-            ability.setDescription("Sacrifice " + cardName + ": "+cardName+" deals 2 damage to target creature or player.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Sacrifice ").append(cardName).append(": ").append(cardName);
+            sb.append(" deals 2 damage to target creature or player.");
+            ability.setDescription(sb.toString());
+            
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, new Command() {
                 private static final long serialVersionUID = 4180346673509230280L;
                 
@@ -9877,12 +9921,17 @@ public class CardFactory implements NewConstants {
                     } else getTargetPlayer().addDamage(damage, card);
                 }
             };
-            ability.setDescription("3, tap: Reveal cards from the top of your library until you reveal a land card. Goblin Charbelcher deals damage equal to the number of nonland cards revealed this way to target creature or player. If the revealed land card was a Mountain, Goblin Charbelcher deals double that damage instead. Put the revealed cards on the bottom of your library in any order.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("3, tap: Reveal cards from the top of your library until you reveal a land card. Goblin Charbelcher deals damage equal ");
+            sb.append("to the number of nonland cards revealed this way to target creature or player. If the revealed land card was a Mountain, ");
+            sb.append("Goblin Charbelcher deals double that damage instead. Put the revealed cards on the bottom of your library in any order.");
+            ability.setDescription(sb.toString());
+
             ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
             card.addSpellAbility(ability);
             
-
         }//*************** END ************ END **************************
         
        
