@@ -7,4 +7,5 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$
 SVar:TrigPump:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.attacking | KW$ Trample
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fangren_pathcutter.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/87.jpg
 End

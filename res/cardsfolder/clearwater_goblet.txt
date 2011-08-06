@@ -9,4 +9,5 @@ SVar:X:Count$CardCounters.CHARGE
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clearwater_goblet.jpg
+SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/109.jpg
 End

@@ -10,4 +10,5 @@ SVar:DBGain:DB$GainLife | Defined$ You | LifeAmount$ Y
 SVar:Y:Count$CardsInYourHand
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_war_and_peace.jpg
+SetInfo:NPH|Mythic|http://magiccards.info/scans/en/nph/161.jpg
 End
