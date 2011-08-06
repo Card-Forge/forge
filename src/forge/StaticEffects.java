@@ -102,7 +102,7 @@ public class StaticEffects
 		cardToEffectsList.put("Crabapple Cohort", new String[] {"Crabapple_Cohort"});
 		cardToEffectsList.put("Mudbrawler Cohort", new String[] {"Mudbrawler_Cohort"});
 		cardToEffectsList.put("Mystic Enforcer", new String[] {"Mystic_Enforcer"});
-		cardToEffectsList.put("Nimble Mongoose", new String[] {"Nimble_Mongoose"});
+		//cardToEffectsList.put("Nimble Mongoose", new String[] {"Nimble_Mongoose"});
 		cardToEffectsList.put("Werebear", new String[] {"Werebear"});
 		cardToEffectsList.put("Divinity of Pride", new String[] {"Divinity_of_Pride"});
 		cardToEffectsList.put("Serra Ascendant", new String[] {"Serra_Ascendant"});

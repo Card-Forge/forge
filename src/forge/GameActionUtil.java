@@ -14878,6 +14878,7 @@ public class GameActionUtil {
 
 	}; //Liu_Bei
 
+	/*
 	public static Command Nimble_Mongoose             = new Command() {
 		private static final long serialVersionUID = -8155356899650795833L;
 
@@ -14918,7 +14919,8 @@ public class GameActionUtil {
 		}
 
 	}; //Nimble_Mongoose
-
+	*/
+	
 	public static Command Mystic_Enforcer             = new Command() {
 
 		private static final long serialVersionUID = 4569052031336290843L;
@@ -20731,7 +20733,7 @@ public class GameActionUtil {
 		commands.put("Briarberry_Cohort", Briarberry_Cohort);
 		commands.put("Crabapple_Cohort", Crabapple_Cohort);
 		commands.put("Mudbrawler_Cohort", Mudbrawler_Cohort);
-		commands.put("Nimble_Mongoose", Nimble_Mongoose);
+		//commands.put("Nimble_Mongoose", Nimble_Mongoose);
 		commands.put("Werebear", Werebear);
 		commands.put("Divinity_of_Pride", Divinity_of_Pride);
 		commands.put("Serra_Ascendant", Serra_Ascendant);

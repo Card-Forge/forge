@@ -3,6 +3,8 @@ ManaCost:3 G G W W
 Types:Legendary Creature Human Archer
 Text:no text
 PT:3/6
+K:abDamageTgtV T:3:Creature.attacking,Creature.blocking:Lady Caleria deals 3 damage to target attacking or blocking creature.
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lady_caleria.jpg
 End

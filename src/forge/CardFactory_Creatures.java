@@ -6370,7 +6370,7 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature_NoCost_TapAbility_NoTargetSelf(ability));
         }//*************** END ************ END **************************
         
-        
+        /* converted to keyword   
         //*************** START *********** START **************************
         else if(cardName.equals("Tetsuo Umezawa")) {
             //tap ability - no cost - target creature
@@ -6428,7 +6428,7 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(target);
         }//*************** END ************ END **************************
         
-        
+
         //*************** START *********** START **************************
         else if(cardName.equals("Tor Wauki")) {
             //tap ability - no cost - target creature
@@ -6558,7 +6558,7 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(target);
         }//*************** END ************ END **************************
         
-        
+      
         //*************** START *********** START **************************
         else if(cardName.equals("Femeref Archers")) {
             //tap ability - no cost - target creature
@@ -6621,7 +6621,7 @@ public class CardFactory_Creatures {
             
             ability.setBeforePayMana(target);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Adarkar Valkyrie")) {
