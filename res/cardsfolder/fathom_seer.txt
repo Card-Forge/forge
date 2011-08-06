@@ -1,0 +1,11 @@
+Name:Fathom Seer
+ManaCost:1 U
+Types:Creature Illusion
+Text:no text
+PT:1/2
+K:Morph:Return<2/Island>
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME is turned face up, draw two cards.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fathom_seer.jpg
+End
