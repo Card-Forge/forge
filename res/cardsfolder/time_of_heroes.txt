@@ -1,7 +1,8 @@
 Name:Time of Heroes
 ManaCost:1 W
 Types:Enchantment
-Text:Each creature you control with a level counter on it gets +2/+2.
+Text:no text
+K:stPumpAll:Creature.countersGE1LEVEL+YouCtrl:2/2:No Condition:Each creature you control with a level counter on it gets +2/+2.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/time_of_heroes.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/49.jpg

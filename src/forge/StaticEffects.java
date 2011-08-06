@@ -121,7 +121,6 @@ public class StaticEffects
 		cardToEffectsList.put("Tethered Griffin", new String[] {"Tethered_Griffin"});
 		cardToEffectsList.put("That Which Was Taken", new String[] {"That_Which_Was_Taken"});
 		cardToEffectsList.put("The Tabernacle at Pendrell Vale", new String[] {"Tabernacle"});
-		cardToEffectsList.put("Time of Heroes", new String[] {"Time_of_Heroes"});
 		cardToEffectsList.put("Transcendent Master", new String[]{"Transcendent_Master"});
 		
 		cardToEffectsList.put("Umbra Stalker", new String[] {"Umbra_Stalker"});

@@ -15767,48 +15767,6 @@ public class GameActionUtil {
 	}; // Brawn
 **/
 	
-	public static Command Time_of_Heroes        = new Command() {
-		private static final long serialVersionUID = 2490232366851007733L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-2);
-				c.addSemiPermanentDefenseBoost(-2);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Time of Heroes");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.filter(new CardListFilter()
-				{
-					public boolean addCard(Card crd)
-					{
-						return crd.getCounters(Counters.LEVEL) > 0;
-					}
-				});
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addSemiPermanentAttackBoost(2);
-					c.addSemiPermanentDefenseBoost(2);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Time of Heroes
-
-	
 	/*
 	public static Command Eldrazi_Monument            = new Command() {
 
@@ -16257,7 +16215,6 @@ public class GameActionUtil {
 		commands.put("Terravore", Terravore);
 		commands.put("Tethered_Griffin", Tethered_Griffin);
 		commands.put("That_Which_Was_Taken", That_Which_Was_Taken);
-		commands.put("Time_of_Heroes", Time_of_Heroes);
 		commands.put("Transcendent_Master", Transcendent_Master);
 		
 		commands.put("Umbra_Stalker", Umbra_Stalker);
