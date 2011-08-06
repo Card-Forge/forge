@@ -4522,20 +4522,13 @@ public class CardFactory implements NewConstants {
         
         ////////////////////////////////////////////////////////////////
         
-        if (card.getKeyword().contains("When CARDNAME enters the battlefield, draw a card.") || 
-        		card.getKeyword().contains("When CARDNAME enters the battlefield, draw two cards.")) {
+        if (card.getKeyword().contains("When CARDNAME enters the battlefield, draw a card.")) {
             
             final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                	int drawCardsNum = 1;
-                	if (card.getKeyword().contains("When CARDNAME enters the battlefield, draw two cards.")) {
-                		drawCardsNum = 2;
-                	}
-                	for (int i = 0; i < drawCardsNum; i++) {
-                        card.getController().drawCard();
-                	}//for loop
-                }//resolve()
+            	@Override
+            	public void resolve() {
+            		card.getController().drawCard();
+            	}//resolve()
             };//SpellAbility
             Command intoPlay = new Command() {
                 
@@ -4546,10 +4539,7 @@ public class CardFactory implements NewConstants {
                     sb.append(card.getName());
                     sb.append(" - ");
                     sb.append(card.getController());
-                    sb.append(" draws ");
-                    if (card.getKeyword().contains("When CARDNAME enters the battlefield, draw a card.")) {
-                    	sb.append("a card.");
-                    } else sb.append("two cards.");
+                    sb.append(" draws a card.");
                 	
                     ability.setStackDescription(sb.toString());
                     AllZone.Stack.add(ability);
