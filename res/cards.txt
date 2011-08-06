@@ -1,3 +1,20 @@
+Long-Forgotten Gohei
+3
+Artifact
+Arcane spells you cast cost 1 less to cast.
+StaticEffect:Play:Permanents you Control:PTBonus/1/1:Type.Creature!Type.Spirit:Spirit creatures you control get +1/+1.
+CostChange:Player:Less:1:Spell:All:Arcane:NoSpecial
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/long_forgotten_gohei.jpg
+
+Path of Anger's Flame
+2 R
+Instant Arcane
+no text
+spAllPump:YouCtrl:+2/+0:Creatures you control get +2/+0 until end of turn.:Path of Anger's Flame - Creatures get +2/+0 until EOT
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card74179.jpg
+
 Brass Gnat
 1
 Artifact Creature Insect
@@ -55,15 +72,6 @@ no text
 WheneverKeyword:BecomesBlocked:Self:Play:StatsPumpEOT/2/0:Self:ASAP:PayMana/R:No Special Condition:Whenever Grizzled Wolverine becomes blocked, you may pay R. If you do, Grizzled Wolverine gets +2/+0 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grizzled_wolverine.jpg
-
-Long-Forgotten Gohei
-3
-Artifact
-Arcane spells you cast cost 1 less to cast.
-CostChange:Player:Less:1:Spell:All:Arcane:NoSpecial
-StaticEffect:Play:Permanents you Control:PTBonus/1/1:Type.Creature!Type.Spirit:Spirit creatures you control get +1/+1.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/long_forgotten_gohei.jpg
 
 Merfolk Seer
 2 U
@@ -20854,14 +20862,6 @@ no text
 abPump 3:Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/patagia_golem.jpg
-
-Path of Anger's Flame
-2 R
-Instant - Arcane
-no text
-spAllPump:YouCtrl:+2/+0:Creatures you control get +2/+0 until end of turn.:Path of Anger's Flame - Creatures get +2/+0 until EOT
-SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card74179.jpg
 
 Path to Exile
 W
