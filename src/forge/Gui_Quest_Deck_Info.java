@@ -74,7 +74,7 @@ public class Gui_Quest_Deck_Info implements NewConstants {
         addToDeckList("Fat Albert 1", "easy", "Winter Orb, Keldon Warlord, mana Elves/Slivers + several 4/4 creatures");
         addToDeckList("Fat Albert 2", "medium", "Winter Orb, Keldon Warlord, mana Elves/Slivers + several 5/5 creatures");
         addToDeckList("Fat Albert 3", "hard", "Winter Orb, Keldon Warlord, mana Elves/Slivers + several 6/6 creatures");
-        addToDeckList("Fred FLintstone 3", "hard", "Reasontg's Predator's Garden deck with mods, featuring Lorescale Coatl");
+        addToDeckList("Fred Flintstone 3", "hard", "Reasontg's Predator's Garden deck with mods, featuring Lorescale Coatl");
         addToDeckList("Frodo 1", "easy", "New, Apthaven's AI Zoo Easy, some creature removal");
         addToDeckList("Frodo 2", "medium", "New, Apthaven's AI Zoo Medium, some creature removal + Glorious Anthem");
         addToDeckList("Frodo 3", "hard", "New, Apthaven's AI Zoo Hard, more creature removal + Glorious Anthems");
@@ -249,6 +249,7 @@ public class Gui_Quest_Deck_Info implements NewConstants {
     }
 
     public static String getDescription(String deckName) {
+        System.out.println("deckName = " + deckName);
         return nameDeckMap.get(deckName).description;
     }
 
