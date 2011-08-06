@@ -188,4 +188,14 @@ Five random rares
 300
 noIcon
 
+20
+Blood Oath
+A druid saves your life and the two of you take a blood oath. It is now time to fulfill your oath.
+Hard
+Not Repeatable
+50
+Five colorless rares
+300
+noIcon
+
 End

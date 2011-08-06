@@ -588,6 +588,28 @@ public class QuestUtil {
 			
 			qa.setCardRewardList(pack.getRare(5));
 		}
+		
+		else if (id == 20)  // Blood Oath
+		{
+			CardList humanList = new CardList();
+			String humanSetupCards[] = {"Counterbalance", "Hatching Plans", "Ley Druid"};
+			
+			for (int i = 0; i < 3; i ++)
+			{
+				Card c = AllZone.CardFactory.getCard(humanSetupCards[i], Constant.Player.Human);
+				humanList.add(c);
+			}
+			qa.setHuman(humanList);
+			
+			String compySetupCards[] = {"Ior Ruin Expedition", "Oversold Cemetery", "Trapjaw Kelpie"};
+			
+			for (int i = 0; i < 3; i ++)
+			{
+				qa.addCompy(compySetupCards[i]);
+			}
+			
+			qa.setCardRewardList(pack.getRare(5, 1));
+		}
 			
 	}
 	
