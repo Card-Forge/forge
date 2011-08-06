@@ -5,7 +5,6 @@ Text:no text
 A:SP$LoseLife | Cost$ 2 B | ValidTgts$ Player | TgtPrompt$ Select a player to lose 1 life | LifeAmount$ 1 | SubAbility$ SVar=DBGainLife | SpellDescription$ Target player loses 1 life and you gain 1 life.
 SVar:DBGainLife:DB$GainLife | LifeAmount$ 1 | SubAbility$ SVar=DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
-K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/last_caress.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/41.jpg
