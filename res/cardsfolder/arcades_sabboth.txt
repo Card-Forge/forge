@@ -1,0 +1,12 @@
+Name:Arcades Sabboth
+ManaCost:2 W W U U G G
+Types:Legendary Creature Elder Dragon
+Text:no text
+PT:7/7
+K:Flying
+K:stPumpAll:Creature.notattacking+untapped+YouCtrl:0/2:No Condition:Each untapped creature you control gets +0/+2 as long as it's not attacking.
+K:abPump W:+0/+1
+K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay W U G
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/arcades_sabboth.jpg
+End

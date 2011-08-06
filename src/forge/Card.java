@@ -2319,6 +2319,8 @@ public class Card extends MyObservable {
         			
                     else if (exR[j].startsWith("attacking")) r = r && isAttacking();
         			
+                    else if (exR[j].startsWith("notattacking")) r = r && !isAttacking();
+        			
                     else if (exR[j].startsWith("blocking")) r = r && isBlocking();
         			
                     //TODO: enchanting
