@@ -564,7 +564,7 @@ public class AbilityFactory_Destroy {
 		 
 		 // if only creatures are affected evaluate both lists and pass only if human creatures are more valuable
 		 if (humanlist.getNotType("Creature").size() == 0 && computerlist.getNotType("Creature").size() == 0) {
-			 if(CardFactoryUtil.evaluateCreatureList(computerlist) + 150 >= CardFactoryUtil.evaluateCreatureList(humanlist))
+			 if(CardFactoryUtil.evaluateCreatureList(computerlist) + 200 >= CardFactoryUtil.evaluateCreatureList(humanlist))
 				 return false;
 		 } // otherwise evaluate both lists by CMC and pass only if human permanents are more valuable
 		 else if(CardFactoryUtil.evaluatePermanentList(computerlist) + 3 >= CardFactoryUtil.evaluatePermanentList(humanlist))
