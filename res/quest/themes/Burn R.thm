@@ -1,0 +1,45 @@
+BasicLandPercentage=35
+
+[Group MaxCnt=4 Percentage=12]
+Sulfuric Vapors
+Fire Servant
+Leyline of Punishment
+[/Group]
+
+[Group MaxCnt=4 Percentage=7]
+Lava Spike
+[/Group]
+
+[Group MaxCnt=4 Percentage=10]
+Flame Jet
+Flame Jet
+Flame Jet
+Smash to Smithereens
+[/Group]
+
+[Group MaxCnt=4 Percentage=10]
+Sizzle
+Sizzle
+Sizzle
+Molten Rain
+[/Group]
+
+[Group MaxCnt=4 Percentage=17]
+Eternal Flame
+Melt Terrain
+Poison the Well
+Roiling Terrain
+Scorching Missile
+Scorching Missile
+[/Group]
+
+[Group MaxCnt=2 Percentage=9]
+Burning Fields
+Burning Fields
+Ignite Memories
+Lava Axe
+Lava Axe
+Searing Flesh
+[/Group]
+
+End

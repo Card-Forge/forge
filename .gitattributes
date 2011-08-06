@@ -4653,6 +4653,7 @@ res/cardsfolder/slow_motion.txt -text svneol=native#text/plain
 res/cardsfolder/sluggishness.txt -text svneol=native#text/plain
 res/cardsfolder/smallpox.txt -text svneol=native#text/plain
 res/cardsfolder/smash.txt -text svneol=native#text/plain
+res/cardsfolder/smash_to_smithereens.txt -text svneol=native#text/plain
 res/cardsfolder/smite.txt -text svneol=native#text/plain
 res/cardsfolder/smoke.txt -text svneol=native#text/plain
 res/cardsfolder/smokespew_invoker.txt -text svneol=native#text/plain
@@ -6368,6 +6369,7 @@ res/quest/themes/Artifacts[!!-~]Colorless.thm -text
 res/quest/themes/Auras[!!-~]WRG.thm -text
 res/quest/themes/Ball[!!-~]Lightning[!!-~]R.thm -text
 res/quest/themes/Black[!!-~]Vise[!!-~]UB.thm -text
+res/quest/themes/Burn[!!-~]R.thm -text
 res/quest/themes/Clerics[!!-~]WB.thm -text
 res/quest/themes/Dermageddon[!!-~]WG.thm -text
 res/quest/themes/Domain.thm -text
