@@ -2085,12 +2085,6 @@ public class GameAction {
             PlayerZone library = AllZone.getZone(Constant.Zone.Library, newCard.getOwner());
             moveTo(library, newCard);
         }
-
-        else if(c.getName().equals("Guan Yu, Sainted Warrior")) {
-            PlayerZone library = AllZone.getZone(Constant.Zone.Library, newCard.getOwner());
-            newCard = moveTo(library, newCard);
-            owner.shuffle();
-        }
     }//sacrificeDestroy()
     
     public boolean destroy(Card c) {
