@@ -435,7 +435,13 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Frodo 3		hard	New, Apthaven's AI Zoo Hard, more creature removal + Glorious Anthems");
         sb.append("\r\n");
-	sb.append("Galadriel 2		medium	Amulet of Vigor, green mana ramp, time vault and Howl of the Night Pack");
+	  sb.append("Galadriel 2		medium	Amulet of Vigor, green mana ramp, time vault and Howl of the Night Pack");
+        sb.append("\r\n");
+	  sb.append("Galahad 1		easy		apthaven's knight deck with Kinsbaile Cavalier and Knight Exemplar");
+        sb.append("\r\n");
+	  sb.append("Galahad 2		medium	apthaven's knight deck with Kinsbaile Cavalier and Knight Exemplar");
+        sb.append("\r\n");
+	  sb.append("Galahad 3		hard		apthaven's knight deck with Kinsbaile Cavalier and Knight Exemplar");
         sb.append("\r\n");
         sb.append("Genghis Khan 1	easy	Mana Elves + Birds + Armageddon, Llanowar Behemoth");
         sb.append("\r\n");
