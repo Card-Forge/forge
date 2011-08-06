@@ -3,7 +3,7 @@ ManaCost:2 G G
 Types:Instant
 Text:Put a 3/3 green Elephant creature token onto the battlefield.
 K:spMakeToken<>1<>Elephant<>G 3 3 Elephant<>Controller<>G<>Creature;Elephant<>3<>3<>None
-SVar:Flashback:6 G G/0
+K:Flashback:6 G G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elephant_ambush.jpg
 End

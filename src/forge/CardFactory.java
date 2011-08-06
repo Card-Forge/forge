@@ -5694,20 +5694,6 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
             
-            StringBuilder sb = new StringBuilder();
-            sb.append(cardName).append(" - ").append(card.getSpellText());
-            spell.setStackDescription(sb.toString());
-            
-            String fb = card.getSVar("Flashback");
-            if (!fb.equals("")) {
-                String fbCost[] = fb.split("/");
-                
-                // fbCost[0] = Flashback mana cost
-                // fbCost[1] = Flashback life cost
-                
-                card.setFlashback(true);
-                card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, fbCost[0], fbCost[1]));
-            }
         }//end MakeToken
         
         if(hasKeyword(card, "abMakeToken") != -1) {
