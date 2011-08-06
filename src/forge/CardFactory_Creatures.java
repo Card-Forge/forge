@@ -6275,6 +6275,73 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Steel Overseer")) {
+            final Ability_Tap ability = new Ability_Tap(card) {
+
+				private static final long serialVersionUID = 1822894871718751099L;
+
+				@Override
+                public void resolve() {
+                	String player = card.getController();
+                    CardList arts;
+                    if(player.equals(Constant.Player.Human)) {
+                        arts = new CardList(AllZone.Human_Play.getCards());
+                    } else {
+                        arts = new CardList(AllZone.Computer_Play.getCards());
+                    }
+                    
+                    arts = arts.filter(new CardListFilter()
+                    {
+                    	public boolean addCard(Card c)
+                    	{
+                    		return c.isCreature() && c.isArtifact();
+                    	}
+                    });
+                    
+                    for(int i = 0; i < arts.size(); i++) {
+                        Card card = arts.get(i);
+                        card.addCounter(Counters.P1P1, 1);
+                    }
+                }//resolve()
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isCreature() && c.isArtifact();
+                        }
+                    });
+                    
+                    return list.size() > 1;
+                }//canPlayAI()
+            };//SpellAbility
+            card.addSpellAbility(ability);
+            ability.setDescription("tap: Put a +1/+1 counter on each artifact creature you control.");
+            ability.setStackDescription(cardName + " - Put a +1/+1 counter on each artifact creature you control.");
+        }//*************** END ************ END **************************
+        
+        /*
+
+					String player = card2.getController();
+                    CardList creatures;
+                    if(player.equals(Constant.Player.Human)) {
+                        creatures = new CardList(AllZone.Human_Play.getCards());
+                    } else {
+                        creatures = new CardList(AllZone.Computer_Play.getCards());
+                    }
+                    
+                    creatures = creatures.getType("Creature");
+                    
+                    for(int i = 0; i < creatures.size(); i++) {
+                        Card card = creatures.get(i);
+                        card.addCounter(Counters.P1P1, 1);
+                        card.addExtrinsicKeyword("Vigilance");
+                    }
+                    
+         */
+        
 /*
         //*************** START *********** START **************************
         else if(cardName.equals("Mawcor") || cardName.equals("Pirate Ship")) {

@@ -1,3 +1,9 @@
+Steel Overseer
+2
+Artifact Creature Construct
+no text
+1/1
+
 Admonition Angel
 3 W W W
 Creature Angel
