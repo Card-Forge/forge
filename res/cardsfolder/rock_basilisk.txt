@@ -5,4 +5,6 @@ Text:Whenever Rock Basilisk blocks or becomes blocked by a non-Wall creature, de
 PT:4/5
 K:Whenever CARDNAME blocks a creature, destroy that creature at end of combat:Creature.nonWall
 K:Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat:Creature.nonWall
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rock_basilisk.jpg
 End

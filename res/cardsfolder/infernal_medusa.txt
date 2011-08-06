@@ -6,4 +6,5 @@ PT:2/4
 K:Whenever CARDNAME blocks a creature, destroy that creature at end of combat:Creature
 K:Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat:Creature.nonWall
 K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_medusa.jpg
 End
