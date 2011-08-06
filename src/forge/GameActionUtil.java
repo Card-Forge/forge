@@ -14717,6 +14717,7 @@ public class GameActionUtil {
 		}
 	}; //Maro
 	*/
+	/*
 	public static Command Masumaro_First_to_Live                       = new Command() {
 		private static final long serialVersionUID = -8778922687347191964L;
 
@@ -14753,7 +14754,7 @@ public class GameActionUtil {
 		}
 
 	}; //Masumaro, first to live
-	
+	*/
 	
 	public static Command Adamaro_First_to_Desire                       = new Command() {
 		private static final long serialVersionUID = -8778912687347191965L;
@@ -16283,7 +16284,7 @@ public class GameActionUtil {
 		commands.put("Maraxus_of_Keld", Maraxus_of_Keld);
 		//commands.put("Maro", Maro);
 		//commands.put("Master_of_Etherium", Master_of_Etherium);
-		commands.put("Masumaro_First_to_Live", Masumaro_First_to_Live);
+		//commands.put("Masumaro_First_to_Live", Masumaro_First_to_Live);
 		commands.put("Matca_Rioters", Matca_Rioters);
 		commands.put("Meddling_Mage", Meddling_Mage);
 		//commands.put("Molimo_Maro_Sorcerer", Molimo_Maro_Sorcerer);
