@@ -179,7 +179,6 @@ public class AbilityFactory {
             
 		}
 		
-		// additional API keywords here
 		if (API.equals("PutCounter")){
 			if (isAb)
 				SA = AbilityFactory_Counters.createAbilityPutCounters(this);
@@ -196,6 +195,18 @@ public class AbilityFactory {
 			}
 		}
 		
+		if (API.equals("Pump"))
+		{
+			AbilityFactory_Pump afPump = new AbilityFactory_Pump(this);
+			
+			if (isAb)
+				SA = afPump.getAbility();
+			if (isSp)
+				SA = afPump.getSpell();
+			
+			hostCard.setSVar("PlayMain1", "TRUE");
+		}
+		
 		if (API.equals("GainLife")){
 			if (isAb)
 				SA = AbilityFactory_AlterLife.createAbilityGainLife(this);
@@ -203,7 +214,7 @@ public class AbilityFactory {
 				SA = AbilityFactory_AlterLife.createSpellGainLife(this);
 			}
 		}
-		
+
 		if (API.equals("LoseLife")){
 			if (isAb)
 				SA = AbilityFactory_AlterLife.createAbilityLoseLife(this);
