@@ -153,7 +153,7 @@ public class CardFactory_Instants {
                 
                 @Override
                 public boolean canPlayAI() {
-                    return (getCreature().size() != 0) && (AllZone.Phase.getTurn() > 4);
+                    return (getCreature().size() != 0) && (AllZone.Phase.getTurn() > 3);
                 }
                 
                 @Override
@@ -169,6 +169,7 @@ public class CardFactory_Instants {
                             return (3 < c.getNetAttack());
                         }
                     });
+                    list = list.getNotKeyword("Indestructible");
                     return list;
                 }//getCreature()
                 
