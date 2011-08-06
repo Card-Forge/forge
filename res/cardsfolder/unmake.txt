@@ -2,7 +2,7 @@ Name:Unmake
 ManaCost:WB WB WB
 Types:Instant
 Text:no text
-A:SP$Bounce | Cost$ WB WB WB | ValidTgts$ Creature | TgtPrompt$ Select target creature | Destination$ Exile | SpellDescription$ Exile target creature.
+A:SP$ChangeZone | Cost$ WB WB WB | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unmake.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/96.jpg

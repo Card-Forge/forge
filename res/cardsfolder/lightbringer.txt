@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Creature Kor Rebel
 Text:no text
 PT:2/2
-A:AB$Bounce | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.Black | TgtPrompt$ Select target black Creature | Destination$ Exile | SpellDescription$ Exile target black creature.
+A:AB$ChangeZone | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.Black | TgtPrompt$ Select target black Creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target black creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightbringer.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/11.jpg

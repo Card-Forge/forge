@@ -2,7 +2,7 @@ Name:Obelisk of Undoing
 ManaCost:1
 Types:Artifact
 Text:no text
-A:AB$Bounce | Cost$ 6 T | ValidTgts$ Permanet.YouCtrl+YouOwn | TgtPrompt$ Select target permanent you both own and control | Destination$ Hand | SpellDescription$ Return target permanent you both own and control to your hand.
+A:AB$ChangeZone | Cost$ 6 T | ValidTgts$ Permanet.YouCtrl+YouOwn | TgtPrompt$ Select target permanent you both own and control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent you both own and control to your hand.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_undoing.jpg

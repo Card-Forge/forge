@@ -4,7 +4,7 @@ Types:Legendary Creature Bird Soldier
 Text:no text
 PT:2/2
 K:Flying
-A:AB$Bounce | Cost$ 1 W T Sac<1/CARDNAME> | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking Creature | Destination$ Exile | SpellDescription$ Exile target attacking creature.
+A:AB$ChangeZone | Cost$ 1 W T Sac<1/CARDNAME> | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking Creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target attacking creature.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lieutenant_kirtar.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/29.jpg

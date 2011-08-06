@@ -2,7 +2,7 @@ Name:Into Thin Air
 ManaCost:5 U
 Types:Instant
 Text:Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)\r\n
-A:SP$Bounce | Cost$ 5 U | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Destination$ Hand | SpellDescription$ Return target artifact to its owner's hand.
+A:SP$ChangeZone | Cost$ 5 U | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target artifact to its owner's hand.
 K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/into_thin_air.jpg

@@ -2,7 +2,7 @@ Name:Repulse
 ManaCost:2 U
 Types:Instant
 Text:no text
-A:SP$Bounce | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
+A:SP$ChangeZone | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card22985.jpg

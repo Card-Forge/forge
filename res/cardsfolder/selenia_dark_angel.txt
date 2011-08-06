@@ -4,7 +4,7 @@ Types:Legendary Creature Angel
 Text:no text
 PT:3/3
 K:Flying
-A:AB$Bounce | Cost$ PayLife<2> | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+A:AB$ChangeZone | Cost$ PayLife<2> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selenia_dark_angel.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/345.jpg

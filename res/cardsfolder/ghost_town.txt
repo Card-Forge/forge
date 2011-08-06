@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:tap: add 1
-A:AB$Bounce | Cost$ 0 | Destination$ Hand | OpponentTurn$ True | SpellDescription$ Return CARDNAME to its owner's hand.
+A:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | OpponentTurn$ True | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghost_town.jpg

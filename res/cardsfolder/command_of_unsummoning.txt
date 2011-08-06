@@ -2,7 +2,7 @@ Name:Command of Unsummoning
 ManaCost:2 U
 Types:Instant
 Text:no text
-A:SP$Bounce | Cost$ 2 U | TargetMin$ 1 | TargetMax$ 2 | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Destination$ Hand | OpponentTurn$True | ActivatingPhases$Declare Attackers - Play Instants and Abilities | SpellDescription$ Cast Command of Unsummoning only during the declare attackers step and only if you've been attacked this step. Return one or two target attacking creatures to their owner's hand.
+A:SP$ChangeZone | Cost$ 2 U | TargetMin$ 1 | TargetMax$ 2 | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Hand | OpponentTurn$ True | ActivatingPhases$ Declare Attackers - Play Instants and Abilities | SpellDescription$ Cast Command of Unsummoning only during the declare attackers step and only if you've been attacked this step. Return one or two target attacking creatures to their owner's hand.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 #SVar:Picture:http://www.wizards.com/global/images/magic/general/command_of_unsummoning.jpg

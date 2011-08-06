@@ -2,7 +2,7 @@ Name:Last Breath
 ManaCost:1 W
 Types:Instant
 Text:no text
-A:SP$Bounce | Cost$ 1 W | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less | Destination$ Exile | SpellDescription$ Exile target creature with power 2 or less. Its controller gains 4 life. | SubAbility$ TgtCtrlrGainLife/4
+A:SP$ChangeZone | Cost$ 1 W | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with power 2 or less. Its controller gains 4 life. | SubAbility$ TgtCtrlrGainLife/4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/last_breath.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/27.jpg

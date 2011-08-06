@@ -6,7 +6,7 @@ PT:5/5
 A:AB$Pump | Cost$ U R | KW$ Flying | SpellDescription$ Cromat gains flying until end of turn.
 A:AB$Regenerate | Cost$ B G | SpellDescription$ Regenerate CARDNAME.
 A:AB$Pump | Cost$ R W | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Cromat gets +1/+1 until end of turn.
-A:AB$Bounce | Cost$ G U | Destination$ TopOfLibrary | SpellDescription$ Put Cromat on top of its owner's library.
+A:AB$ChangeZone | Cost$ G U | Origin$ Battlefield | Destination$ TopOfLibrary | SpellDescription$ Put Cromat on top of its owner's library.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cromat.jpg
 SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/94.jpg

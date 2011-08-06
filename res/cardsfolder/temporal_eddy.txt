@@ -2,7 +2,7 @@ Name:Temporal Eddy
 ManaCost:2 U U
 Types:Sorcery
 Text:no text
-A:SP$Bounce | Cost$ 2 U U | ValidTgts$ Creature,Land | TgtPrompt$ Select target creature or land | Destination$ TopofLibrary | SpellDescription$ Put target creature or land on top of its owner's library.
+A:SP$ChangeZone | Cost$ 2 U U | ValidTgts$ Creature,Land | TgtPrompt$ Select target creature or land | Origin$ Battlefield | Destination$ TopofLibrary | SpellDescription$ Put target creature or land on top of its owner's library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_eddy.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/85.jpg

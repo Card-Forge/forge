@@ -2,7 +2,7 @@ Name:Recoil
 ManaCost:1 U B
 Types:Instant
 Text:no text
-A:SP$Bounce | Cost$ 1 U B | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand. Then that player discard a card. | SubAbility$ TgtOwnerDiscard/1
+A:SP$ChangeZone | Cost$ 1 U B | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand. Then that player discard a card. | SubAbility$ TgtOwnerDiscard/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recoil.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/264.jpg

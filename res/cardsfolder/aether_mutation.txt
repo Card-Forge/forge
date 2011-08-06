@@ -2,7 +2,7 @@ Name:AEther Mutation
 ManaCost:3 G U
 Types:Sorcery
 Text:no text
-A:SP$Bounce | Cost$ 3 G U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand. Put X 1/1 green Saproling creature tokens onto the battlefield, where X is that creature's converted mana cost. | SubAbility$ MakeToken<>X<>Saproling<>G 1 1 Saproling<>Controller<>G<>Creature;Saproling<>1<>1<>None
+A:SP$ChangeZone | Cost$ 3 G U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand. Put X 1/1 green Saproling creature tokens onto the battlefield, where X is that creature's converted mana cost. | SubAbility$ MakeToken<>X<>Saproling<>G 1 1 Saproling<>Controller<>G<>Creature;Saproling<>1<>1<>None
 #X will be the Converted Mana Cost of the target of AEther Mutation
 SVar:X:Count$CardManaCost
 SVar:Rarity:Uncommon

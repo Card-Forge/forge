@@ -3,7 +3,7 @@ ManaCost:3 W W
 Types:Creature Human Soldier
 Text:no text
 PT:3/3
-A:AB$Bounce | Cost$ tapXType<5/Soldier> | ValidTgts$ Creature | TgtPrompt$ Select target Creature | Destination$ Exile | SpellDescription$ Exile target creature.
+A:AB$ChangeZone | Cost$ tapXType<5/Soldier> | ValidTgts$ Creature | TgtPrompt$ Select target Creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/catapult_master.jpg
