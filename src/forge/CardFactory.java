@@ -17469,6 +17469,41 @@ public class CardFactory implements NewConstants {
       }
       //*************** END ************ END **************************
         
+        
+      //*************** START *********** START **************************
+      else if(cardName.equals("Goblin Offensive"))
+      {
+    	  final SpellAbility spell = new Spell(card){
+			  private static final long serialVersionUID = -8830760963758230870L;
+
+			  public void resolve()
+    		  {
+				  for (int i = 0; i < card.getXManaCostPaid(); i ++)
+				  {
+					  makeToken();
+				  }
+    			  card.setXManaCostPaid(0);
+    		  }
+			  
+			  public void makeToken()
+	          {
+	             CardFactoryUtil.makeToken("Goblin", "R 1 1 Goblin", card, "R", new String[]{"Creature", "Goblin"}, 1, 1, new String[] {""});
+	          }
+    		  
+    		  public boolean canPlayAI()
+    		  {
+    			  final int maxX = ComputerUtil.getAvailableMana().size() - 3;
+    			  return maxX > 2;
+    		  }
+    	  };
+    	  spell.setDescription("Put X 1/1 red Goblin creature tokens onto the battlefield.");
+    	  spell.setStackDescription("Goblin Offensive - put X 1/1 red Goblin creature tokens onto the battlefield.");
+    	  
+    	  card.clearSpellAbility();
+    	  card.addSpellAbility(spell);
+      }
+      //*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {

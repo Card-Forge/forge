@@ -1,3 +1,8 @@
+Goblin Offensive
+X 1 R R
+Sorcery
+no text
+
 Stream of Life
 X G
 Sorcery
