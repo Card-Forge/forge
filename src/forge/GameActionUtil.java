@@ -2681,7 +2681,15 @@ public class GameActionUtil {
 		}
 	}//damageUpkeepCost
 	
+	/**
+	 * runs the upkeep for Genesis
+	 */
 	public static void upkeep_Genesis() {
+		/*
+		 * At the beginning of your upkeep, if Genesis is in your graveyard,
+		 * you may pay 2G. If you do, return target creature card from your 
+		 * graveyard to your hand.
+		 */
 		final String player = AllZone.Phase.getActivePlayer();
 		final CardList grave = AllZoneUtil.getPlayerGraveyard(player, "Genesis");
 
@@ -6100,14 +6108,11 @@ public class GameActionUtil {
 	}// upkeep_BlackVice
 
 	private static void upkeep_Copper_Tablet() {
+		/*
+		 * At the beginning of each player's upkeep, Copper Tablet deals 1 damage to that player.
+		 */
 		final String player = AllZone.Phase.getActivePlayer();
-		PlayerZone humanPlayZone = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
-		PlayerZone compPlayZone = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
-
-		CardList list = new CardList(humanPlayZone.getCards());
-		CardList compList = new CardList(compPlayZone.getCards());
-		list.addAll(compList.toArray());
-		list = list.getName("Copper Tablet");
+		CardList list = AllZoneUtil.getCardsInPlay("Copper Tablet");
 
 		Ability ability;
 		for(int i = 0; i < list.size(); i++) {
@@ -6265,12 +6270,13 @@ public class GameActionUtil {
 	}// upkeep_Helix_Pinnacle
 
 	private static void upkeep_Near_Death_Experience() {
+		/*
+		 * At the beginning of your upkeep, if you have exactly 1 life, you win the game.
+		 */
 		final String player = AllZone.Phase.getActivePlayer();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Near-Death Experience");
+		
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Near-Death Experience");
 
 		if(0 < list.size() && life.getLife() == 1) {
 			Ability ability = new Ability(list.get(0), "0") {
