@@ -8,4 +8,5 @@ T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescri
 SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.Beast+YouCtrl | NumAtt$ +3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodstoke_howler.jpg
+SetInfo:LGN|Common|http://magiccards.info/scans/en/le/89.jpg
 End

@@ -12,4 +12,6 @@ SVar:Y:Count$InOppHand
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreamborn_muse.jpg
+SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/36.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/82.jpg
 End

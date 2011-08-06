@@ -9,4 +9,5 @@ SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Des
 SVar:DBChangeZone:DB$ChangeZone | ChangeType$ Permanent.Bird+YouCtrl,Permanent.Cleric+YouCtrl | ChangeNum$ 2 | Hidden$ True | Origin$ Hand | Destination$ Battlefield
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_gatekeeper.jpg
+SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/6.jpg
 End

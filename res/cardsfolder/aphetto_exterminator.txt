@@ -8,4 +8,5 @@ T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescripti
 SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aphetto_exterminator.jpg
+SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/59.jpg
 End
