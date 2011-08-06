@@ -5,5 +5,5 @@ Text:no text
 K:spDrawCards:1:Draw a card. Proliferate.:Steady Progress - draw a card, proliferate.
 K:Proliferate
 SVar:Rarity:Common
-SVar:Picture:http://serv2.tcgimages.eu/img/cards/Scars_of_Mirrodin/steady_progress.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/steady_progress.jpg
 End

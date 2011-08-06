@@ -8,5 +8,5 @@ K:Infect
 K:RegenerateMe:B B
 K:abPump B:Haste
 SVar:Rarity:Mythic
-SVar:Picture:http://serv4.tcgimages.eu/img/cards/Scars_of_Mirrodin/skithiryx_the_blight_dragon.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skithiryx_the_blight_dragon.jpg
 End

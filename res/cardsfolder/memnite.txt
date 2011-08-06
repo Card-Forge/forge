@@ -4,5 +4,5 @@ Types:Artifact Creature Construct
 Text:no text
 PT:1/1
 SVar:Rarity:Uncommon
-SVar:Picture:http://serv2.tcgimages.eu/img/cards/Scars_of_Mirrodin/memnite.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/memnite.jpg
 End

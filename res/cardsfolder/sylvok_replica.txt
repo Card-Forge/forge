@@ -5,5 +5,5 @@ Text:no text
 PT:1/3
 K:abDestroyTgtV G Sac<1/CARDNAME>:Artifact,Enchantment:Destroy target artifact or enchantment.
 SVar:Rarity:Common
-SVar:Picture:http://forums.mtgsalvation.com/attachment.php?attachmentid=110273&d=1283832127
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvok_replica.jpg
 End

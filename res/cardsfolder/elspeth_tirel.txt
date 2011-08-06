@@ -3,5 +3,5 @@ ManaCost:3 W W
 Types:Planeswalker - Elspeth
 Text:no text
 SVar:Rarity:Mythic
-SVar:Picture:http://serv1.tcgimages.eu/img/cards/Scars_of_Mirrodin/elspeth_tirel.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/elspeth_tirel.jpg
 End

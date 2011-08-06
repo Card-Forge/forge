@@ -5,5 +5,5 @@ Text:Equipped creature gets +2/+0.
 K:Indestructible
 K:eqPump 2:+2/+0
 SVar:Rarity:Common
-SVar:Picture:http://serv3.tcgimages.eu/img/cards/Scars_of_Mirrodin/darksteel_axe.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_axe.jpg
 End

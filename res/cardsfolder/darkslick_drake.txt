@@ -6,5 +6,5 @@ PT:2/4
 K:Flying
 K:WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:DrawCards/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Darkslick Drake is put into your graveyard from the battlefield, draw a card.
 SVar:Rarity:Uncommon
-SVar:Picture:http://forums.mtgsalvation.com/attachment.php?attachmentid=110664&d=1284537694
+SVar:Picture:http://www.wizards.com/global/images/magic/general/darkslick_drake.jpg
 End

@@ -4,5 +4,5 @@ Types:Enchantment
 Text:no text
 K:StaticEffect:Play:Permanents you Control:PTBonus/2/2:Type.Creature!Type.Artifact:Artifact creatures you control get +2/+2.
 SVar:Rarity:Rare
-SVar:Picture:http://serv4.tcgimages.eu/img/cards/Scars_of_Mirrodin/tempered_steel.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tempered_steel.jpg
 End
