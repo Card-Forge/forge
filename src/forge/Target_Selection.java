@@ -209,17 +209,21 @@ public class Target_Selection {
 	            CardList allCards = new CardList();
 	            allCards.addAll(AllZone.Human_Play.getCards());
 	            allCards.addAll(AllZone.Computer_Play.getCards());
-	            
 	            CardList choices = allCards.getValidCards(Tgts);
+	            
+	            boolean canTargetPlayer = false;
+	            for(String s : Tgts)
+	            	if (s.equals("player"))
+	            		canTargetPlayer = true;
 
-	            stopSetNext(input_targetSpecific(sa, choices, message, true, select, req));
+	            stopSetNext(input_targetSpecific(sa, choices, message, true, canTargetPlayer, select, req));
 	        }
     	};
     }//input_targetValid
 
     //CardList choices are the only cards the user can successful select
     public static Input input_targetSpecific(final SpellAbility spell, final CardList choices, final String message, 
-    		final boolean targeted, final Target_Selection select, final SpellAbility_Requirements req) {
+    		final boolean targeted, final boolean bTgtPlayer, final Target_Selection select, final SpellAbility_Requirements req) {
         Input target = new Input() {
 			private static final long serialVersionUID = -1091595663541356356L;
 
@@ -246,6 +250,14 @@ public class Target_Selection {
                     done();
                 }
             }//selectCard()
+            
+            @Override
+            public void selectPlayer(String player) {
+            	if (bTgtPlayer){	// todo: check if the player has Shroud too
+	            	spell.setTargetPlayer(player);
+	                done();
+            	}
+            }
             
             void done() {
             	select.incrementTargets();

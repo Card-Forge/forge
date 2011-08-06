@@ -7969,42 +7969,6 @@ public class CardFactory_Creatures {
             }));
         }//*************** END ************ END **************************
         
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Bottle Gnomes")) {
-            final Ability ability = new Ability(card, "0") {
-                @Override
-                public boolean canPlayAI() {
-                    return AllZone.Computer_Life.getLife() < 3;
-                    
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    SpellAbility sa;
-                    for(int i = 0; i < AllZone.Stack.size(); i++) {
-                        sa = AllZone.Stack.peek(i);
-                        if(sa.getSourceCard().equals(card)) return false;
-                    }
-                    if(AllZone.GameAction.isCardInPlay(card) && super.canPlay()) return true;
-                    else return false;
-                }
-                
-                @Override
-                public void resolve() {
-                	AllZone.GameAction.gainLife(card.getController(), 3);
-
-                    AllZone.GameAction.sacrifice(card);
-                }//resolve()
-            };//SpellAbility
-            
-            card.addSpellAbility(ability);
-            ability.setDescription("Sacrifice Bottle Gnomes: Gain 3 life.");
-            ability.setStackDescription(card.getName() + " - " + card.getController() + " gains 3 life.");
-            
-        }//*************** END ************ END **************************
-    
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Painter's Servant")) {
         	final long[] timeStamp = new long[1];
@@ -19165,44 +19129,6 @@ public class CardFactory_Creatures {
             fog.setStackDescription("Prevent all combat damage that would be dealt this turn.");
             card.addSpellAbility(fog);
         }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Spike Feeder")) {
-            final SpellAbility heal = new Ability(card, "0") {
-            	// removing of a +1/+1 should be in the activation, but it doesn't work properly right now.
-            	
-                @Override
-                public void resolve() {
-                	if (card.getCounters(Counters.P1P1) > 0){
-                		card.subtractCounter(Counters.P1P1, 1);
-	                    AllZone.GameAction.gainLife(getActivatingPlayer(), 2);
-                	}
-                }//resolve
-                
-                @Override
-                public boolean canPlay() {
-                	// stack peek is needed to prevent Spike Feeder from trying to double activate
-                    SpellAbility sa;
-                    for(int i = 0; i < AllZone.Stack.size(); i++) {
-                        sa = AllZone.Stack.peek(i);
-                        if(sa.getSourceCard().equals(card)) return false;
-                    }
-                    return card.getCounters(Counters.P1P1) > 0 && super.canPlay();
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    // when should the AI sacrifice his feeder for health?
-                	return card.getCounters(Counters.P1P1) > 0 && AllZone.Computer_Life.getLife() < 5;
-                }
-            };//SpellAbility
-
-            heal.setDescription("Remove a +1/+1 counter: Gain 2 life.");
-            heal.setStackDescription("Gain 2 life");
-            card.addSpellAbility(heal);
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if (cardName.equals("Yavimaya Elder"))

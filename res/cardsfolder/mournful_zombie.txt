@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Zombie
 Text:no text
 PT:2/1
-K:abGainLifeTgt W T:1
+K:abGainLifeTgtV W T:player:1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mournful_zombie.jpg
 End
