@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 
 import forge.DeckIO;
 import forge.NewDeckIO;
+import forge.OldDeckIO;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
