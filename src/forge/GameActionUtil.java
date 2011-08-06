@@ -27,6 +27,7 @@ public class GameActionUtil
 		upkeep_Greener_Pastures();
 		upkeep_Squee();
 		upkeep_Sporesower_Thallid();
+		upkeep_Dragonmaster_Outcast();
 		upkeep_Scute_Mob();
 		upkeep_Lichentrope();
 		upkeep_Heartmender();
@@ -5082,6 +5083,39 @@ public class GameActionUtil
 		}
 	}
 	
+	private static void upkeep_Dragonmaster_Outcast()
+	{
+		final String player = AllZone.Phase.getActivePlayer();
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+
+		CardList list = new CardList(playZone.getCards());
+		list = list.getName("Dragonmaster Outcast");
+		
+		if (list.size() > 0)
+		{
+			for (int i = 0; i < list.size(); i++)
+			{
+				CardList lands = new CardList(playZone.getCards());
+				lands = lands.getType("Land");
+				
+				if (lands.size() >= 6)
+				{
+					final Card c = list.get(i);
+					Ability ability = new Ability(list.get(i), "0")
+					{
+						public void resolve()
+						{
+							CardFactoryUtil.makeToken("Dragon", "R 5 5 Dragon", c, "R", new String[] {"Creature", "Dragon"}, 5, 5, new String[] {"Flying"} );
+						}
+	
+					};// Ability
+					ability.setStackDescription("Dragonmaster Outcast - put a 5/5 red Dragon creature token with flying onto the battlefield.");
+					AllZone.Stack.add(ability);
+				}
+			} // for
+		} // if creatures > 0
+	};
+	
 	private static void upkeep_Scute_Mob()
 	{
 		final String player = AllZone.Phase.getActivePlayer();
@@ -7768,102 +7802,6 @@ public class GameActionUtil
 		
 		Sacrifice_NoIslands.execute();
 		//Angelic_Chorus.execute();
-		
-		/*
-		Conspiracy.execute();
-		Serra_Avatar.execute();
-		Ajani_Avatar_Token.execute();
-		Windwright_Mage.execute();
-
-		Baru.execute();
-		Reach_of_Branches.execute();
-
-		Essence_Warden.execute();
-		Soul_Warden.execute();
-		Wirewood_Hivemaster.execute();
-		Angelic_Chorus.execute();
-
-		Kithkin_Rabble.execute();
-		Nightmare.execute();
-		Korlash.execute();
-
-		Kird_Ape.execute();
-		Yavimaya_Enchantress.execute();
-		Knight_of_the_Reliquary.execute();
-		Master_of_Etherium.execute();
-		Master_of_Etherium_Pump.execute();
-		Master_of_Etherium_Other.execute();
-		Relentless_Rats_Other.execute();
-		Wizened_Cenn_Pump.execute();
-		Wizened_Cenn_Other.execute();
-
-		Covetous_Dragon.execute();
-		
-		Shared_Triumph.execute();
-		Crucible_of_Fire.execute();
-		Glorious_Anthem.execute();
-		Gaeas_Anthem.execute();
-		Bad_Moon.execute();
-		Crusade.execute();
-		Muraganda_Petroglyphs.execute();
-		
-		Engineered_Plague.execute();
-		Night_of_Souls_Betrayal.execute();
-		
-		Thelonite_Hermit.execute();
-		Kaysa.execute();
-		Meng_Huo.execute();
-		Tolsimir.execute();
-		Imperious_Perfect.execute();
-		Mad_Auntie.execute();
-
-		Wonder.execute();
-		Anger.execute();
-		Valor.execute();
-		Brawn.execute();
-		
-		Veteran_Armorer.execute();
-		Radiant_Archangel.execute();
-		Castle.execute();
-		Castle_Raptors.execute();
-
-		Mobilization.execute();
-		Serras_Blessing.execute();
-		Concordant_Crossroads.execute();
-		Mass_Hysteria.execute();
-		Fervor.execute();
-
-		Rolling_Stones.execute();
-		Kobold_Overlord.execute();
-		Kinsbaile_Cavalier.execute();
-
-		Sliver_Legion.execute();
-		Muscle_Sliver.execute();
-
-		Bonesplitter_Sliver.execute();
-		Might_Sliver.execute();
-		Watcher_Sliver.execute();
-
-		Winged_Sliver.execute();
-		Synchronous_Sliver.execute();
-		Fury_Sliver.execute();
-		Plated_Sliver.execute();
-		Essence_Sliver.execute();
-		Sinew_Sliver.execute();
-		Horned_Sliver.execute();
-
-		Heart_Sliver.execute();
-		Reflex_Sliver.execute();
-		Gemhide_Sliver.execute();
-
-		Blade_Sliver.execute();
-		Battering_Sliver.execute();
-		
-		Marrow_Gnawer.execute();
-
-		Joiner_Adept.execute();
-		*/
-
 	}// executeCardStateEffects()
 	
 	public static Command Conspiracy = new Command()
@@ -14098,6 +14036,27 @@ public class GameActionUtil
          
    };//Svogthos, the Restless Tomb
 
+   public static Command Deaths_Shadow = new Command()
+   {
+		private static final long serialVersionUID = 6025078590277639849L;
+
+		public void execute()
+		{
+			// get all creatures
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Death's Shadow");
+
+			for (Card c : list)
+			{
+				int n = 13 - AllZone.GameAction.getPlayerLife(c.getController()).getLife();
+				c.setBaseAttack(n);
+				c.setBaseDefense(n);
+			}
+
+		}// execute()
+    };
 
 	public static Command Nightmare = new Command()
 	{
@@ -15941,6 +15900,7 @@ public class GameActionUtil
 		commands.put("Drove_of_Elves", Drove_of_Elves);
 		commands.put("Svogthos_the_Restless_Tomb", Svogthos_the_Restless_Tomb);
 		commands.put("Lhurgoyf", Lhurgoyf);
+		commands.put("Deaths_Shadow", Deaths_Shadow);
 		commands.put("Nightmare", Nightmare);
 		commands.put("Aven_Trailblazer", Aven_Trailblazer);
 		commands.put("Rakdos_Pit_Dragon", Rakdos_Pit_Dragon);

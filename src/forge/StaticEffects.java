@@ -31,6 +31,7 @@ public class StaticEffects
 		cardToEffectsList.put("Uril, the Miststalker", new String[] {"Uril"});
 		cardToEffectsList.put("Rabid Wombat", new String[] {"Rabid_Wombat"});
 		cardToEffectsList.put("Kithkin Rabble", new String[] {"Kithkin_Rabble"});
+		cardToEffectsList.put("Death's Shadow", new String[] {"Deaths_Shadow"});
 		cardToEffectsList.put("Nightmare", new String[] {"Nightmare"});
 		cardToEffectsList.put("Aven Trailblazer", new String[] {"Aven_Trailblazer"});
 		cardToEffectsList.put("Rakdos Pit Dragon", new String[] {"Rakdos_Pit_Dragon"});
