@@ -15056,15 +15056,7 @@ public class GameActionUtil {
 		}
 
 		private int countLands() {
-			PlayerZone compGrave = AllZone.getZone(
-					Constant.Zone.Graveyard,
-					AllZone.ComputerPlayer);
-			PlayerZone humGrave = AllZone.getZone(
-					Constant.Zone.Graveyard,
-					AllZone.HumanPlayer);
-			CardList list = new CardList();
-			list.addAll(compGrave.getCards());
-			list.addAll(humGrave.getCards());
+			CardList list = AllZoneUtil.getCardsInGraveyard();
 
 			list = list.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
@@ -15093,16 +15085,7 @@ public class GameActionUtil {
 		}
 
 		private int countSorcs() {
-			PlayerZone compGrave = AllZone.getZone(
-					Constant.Zone.Graveyard,
-					AllZone.ComputerPlayer);
-			PlayerZone humGrave = AllZone.getZone(
-					Constant.Zone.Graveyard,
-					AllZone.HumanPlayer);
-			CardList list = new CardList();
-			list.addAll(compGrave.getCards());
-			list.addAll(humGrave.getCards());
-
+			CardList list = AllZoneUtil.getCardsInGraveyard();
 			list = list.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
 					return c.isSorcery();
@@ -15130,15 +15113,7 @@ public class GameActionUtil {
 		}// execute()
 
 		private int countDiffTypes() {
-			PlayerZone compGrave = AllZone.getZone(
-					Constant.Zone.Graveyard,
-					AllZone.ComputerPlayer);
-			PlayerZone humGrave = AllZone.getZone(
-					Constant.Zone.Graveyard,
-					AllZone.HumanPlayer);
-			CardList list = new CardList();
-			list.addAll(compGrave.getCards());
-			list.addAll(humGrave.getCards());
+			CardList list = AllZoneUtil.getCardsInGraveyard();
 
 			int count = 0;
 			for(int q = 0; q < list.size(); q++) {
@@ -16271,7 +16246,7 @@ public class GameActionUtil {
 		
 		commands.put("Zulaport_Enforcer", Zulaport_Enforcer);
 		
-		///The commands above are in alphabetical order by cardname.  The cammands.put() below need to be filed above
+		///The commands above are in alphabetical order by cardname.
 	}
 
 }
