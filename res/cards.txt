@@ -1,3 +1,18 @@
+Abyssal Persecutor
+B
+Creature Demon
+You can't win the game and your opponents can't lose the game.
+6/6
+Flying
+Trample
+
+Platinum Angel
+1
+Artifact Creature Angel
+You can't lose the game and your opponents can't win the game.
+4/4
+Flying
+
 Mayael the Anima
 R G W
 Legendary Creature Elf Shaman

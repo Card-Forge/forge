@@ -77,6 +77,16 @@ public class GameActionUtil {
 		upkeep_Bitterblossom();
 		upkeep_Goblin_Assault();
 		upkeep_Awakening_Zone();
+		
+		// Win / Lose	
+		final String player = AllZone.Phase.getActivePlayer();
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone OpplayZone = AllZone.getZone(Constant.Zone.Play, AllZone.GameAction.getOpponent(player));
+		CardList Platinumlist = new CardList(OpplayZone.getCards());
+		Platinumlist = Platinumlist.getName("Platinum Angel");
+		CardList Abyssallist = new CardList(playZone.getCards());
+		Abyssallist = Abyssallist.getName("Abyssal Persecutor");
+		if(Platinumlist.size() == 0 && Abyssallist.size() == 0) {
 		upkeep_Battle_of_Wits();
 		upkeep_Epic_Struggle();
 		upkeep_Near_Death_Experience();
@@ -84,6 +94,9 @@ public class GameActionUtil {
 		upkeep_Barren_Glory();
 		upkeep_Felidar_Sovereign();
 		upkeep_Klass();
+		}
+		//Win / Lose
+		
 		upkeep_Convalescence();
 		upkeep_Convalescent_Care();
 		upkeep_Karma();

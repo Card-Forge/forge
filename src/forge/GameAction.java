@@ -405,14 +405,18 @@ public class GameAction {
         if (AllZoneUtil.isCardInPlay("Ali from Cairo", Constant.Player.Human) && AllZone.Human_Life.getLife() < 1) 
         	AllZone.Human_Life.setLife(1);
         
-        if(AllZone.Computer_Life.getLife() <= 0 || AllZone.Computer_PoisonCounter.getPoisonCounters() >= 10) {
-            Constant.Runtime.WinLose.addWin();
-            stop = true;
+		if(!AllZoneUtil.isCardInPlay("Platinum Angel", Constant.Player.Computer) && !AllZoneUtil.isCardInPlay("Abyssal Persecutor", Constant.Player.Human)) {
+	        if(AllZone.Computer_Life.getLife() <= 0 || AllZone.Computer_PoisonCounter.getPoisonCounters() >= 10) {
+	            Constant.Runtime.WinLose.addWin();
+	            stop = true;
+		}
         }
+		if(!AllZoneUtil.isCardInPlay("Platinum Angel", Constant.Player.Human) && !AllZoneUtil.isCardInPlay("Abyssal Persecutor", Constant.Player.Computer)) {
         if(AllZone.Human_Life.getLife() <= 0 || AllZone.Human_PoisonCounter.getPoisonCounters() >= 10) {
             Constant.Runtime.WinLose.addLose();
             stop = true;
         }
+		}
         
         if(stop) {
             frame.dispose();
@@ -441,11 +445,13 @@ public class GameAction {
         
         if (AllZoneUtil.isCardInPlay("Ali from Cairo", Constant.Player.Human) && AllZone.Human_Life.getLife() < 1) 
         	AllZone.Human_Life.setLife(1);
-        
+        // Win / Lose
+		if(!AllZoneUtil.isCardInPlay("Platinum Angel", Constant.Player.Computer) && !AllZoneUtil.isCardInPlay("Abyssal Persecutor", Constant.Player.Human)) {
         if(AllZone.Computer_Life.getLife() <= 0 ) {
             Constant.Runtime.WinLose.addWin();
             stop = true;
         }
+
         if (AllZone.Computer_PoisonCounter.getPoisonCounters() >= 10)
         {
         	int gameNumber = 0;
@@ -456,11 +462,13 @@ public class GameAction {
         	Constant.Runtime.WinLose.addWin();
             stop = true;
         }
+		} // Win / Lose
+		if(!AllZoneUtil.isCardInPlay("Platinum Angel", Constant.Player.Human) && !AllZoneUtil.isCardInPlay("Abyssal Persecutor", Constant.Player.Computer)) {
         if(AllZone.Human_Life.getLife() <= 0 || AllZone.Human_PoisonCounter.getPoisonCounters() >= 10) {
             Constant.Runtime.WinLose.addLose();
             stop = true;
         }
-        
+		}
         if(stop) {
             frame.dispose();
             if (!Constant.Quest.fantasyQuest[0])
@@ -897,7 +905,7 @@ public class GameAction {
         //lose:
         else if(Constant.Runtime.Mill[0]) {
             PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-            
+    		if(!AllZoneUtil.isCardInPlay("Platinum Angel", player) && !AllZoneUtil.isCardInPlay("Abyssal Persecutor", getOpponent(player))) {
             if (player.equals(Constant.Player.Computer)) {
 	            int gameNumber = 0;
 	            if (Constant.Runtime.WinLose.getWin()==1)
@@ -906,6 +914,7 @@ public class GameAction {
             }
             life.setLife(0);
             checkStateEffects();
+    		}
         }
     }
     

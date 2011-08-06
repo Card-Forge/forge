@@ -16072,8 +16072,17 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void resolve() {
+            		// Win / Lose
+            		final String player = getTargetPlayer();
+            		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+            		PlayerZone OpplayZone = AllZone.getZone(Constant.Zone.Play, AllZone.GameAction.getOpponent(player));
+            		CardList Platinumlist = new CardList(OpplayZone.getCards());
+            		Platinumlist = Platinumlist.getName("Platinum Angel");
+            		CardList Abyssallist = new CardList(playZone.getCards());
+            		Abyssallist = Abyssallist.getName("Abyssal Persecutor");
+            		if(Platinumlist.size() == 0 && Abyssallist.size() == 0) {
                     AllZone.GameAction.getPlayerLife(getTargetPlayer()).setLife(0);
-                    
+            		
                     if (getTargetPlayer().equals(Constant.Player.Computer)) {
 	                    int gameNumber = 0;
 	                    if (Constant.Runtime.WinLose.getWin()==1)
@@ -16081,6 +16090,7 @@ public class CardFactory implements NewConstants {
 	                    Constant.Runtime.WinLose.setWinMethod(gameNumber,"Door to Nothingness");
                     }
                 }
+            }
                 
                 @Override
                 public boolean canPlayAI() {
