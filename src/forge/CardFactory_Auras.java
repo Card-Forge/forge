@@ -1694,6 +1694,7 @@ class CardFactory_Auras {
         }//*************** END ************ END **************************
         
         
+/*
         // *******************************************************************
         // Why are there two different card objects for Scavenged Weaponry ???
         // *******************************************************************
@@ -1878,11 +1879,9 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-
+*/
         
-        
-        
-        
+/*
         //*************** START *********** START **************************
         if(cardName.equals("Asha's Favor")) {
             final SpellAbility spell = new Spell(card) {
@@ -1973,7 +1972,9 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
+*/
         
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Unholy Strength")) {
             final SpellAbility spell = new Spell(card) {
@@ -2062,7 +2063,9 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
+*/
         
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Uncontrollable Anger")) {
             final SpellAbility spell = new Spell(card) {
@@ -2160,7 +2163,7 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-        
+*/
         
 /*
         //*************** START *********** START **************************
