@@ -17779,12 +17779,7 @@ public class CardFactory implements NewConstants {
         		public void resolve() {
         			String player = getTargetPlayer();
         			AllZoneUtil.rearrangeTopOfLibrary(player, 3, false);
-        			String[] choices = new String[] {"Yes", "No"};
-        			Object o = AllZone.Display.getChoice("Shuffle target player's library?", choices);
-        			String myChoice = (String) o;
-        			if(myChoice.equals("Yes")) {
-        				AllZone.GameAction.shuffle(player);
-        			}
+        			AllZone.GameAction.promptForShuffle(player);
         		}
         		@Override
         		public boolean canPlayAI() {
