@@ -3811,8 +3811,8 @@ public class CardFactory_Creatures {
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
                     if(AllZone.GameAction.isCardInZone(getTargetCard(), grave)) {
                         PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                        play.add(getTargetCard());
                         grave.remove(getTargetCard());
+                        play.add(getTargetCard());
                     }
                 }//resolve()
             };
