@@ -16475,8 +16475,42 @@ public class CardFactory implements NewConstants {
                     return false;
                 }
             };
+            StringBuffer sb = new StringBuffer();
+            sb.append(card.getName()).append(" adds B B B to your mana pool");
+            spell.setStackDescription(sb.toString());
             
-            spell.setStackDescription(cardName + " adds B B B to your mana pool");
+            // spell.setStackDescription(cardName + " adds B B B to your mana pool");
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            
+            return card;
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if (cardName.equals("Pyretic Ritual")) {
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -5473428583650237774L;
+
+				@Override
+                public void resolve() {
+                    /*CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+                    list = list.getName("Mana Pool");*/
+                    Card mp = AllZone.ManaPool;//list.getCard(0);
+                    mp.addExtrinsicKeyword("ManaPool:R");
+                    mp.addExtrinsicKeyword("ManaPool:R");
+                    mp.addExtrinsicKeyword("ManaPool:R");
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+            };
+            StringBuffer sb = new StringBuffer();
+            sb.append(card.getName()).append(" adds R R R to your mana pool");
+            spell.setStackDescription(sb.toString());
+            
+            // spell.setStackDescription(cardName + " adds R R R to your mana pool");
             card.clearSpellAbility();
             card.addSpellAbility(spell);
             

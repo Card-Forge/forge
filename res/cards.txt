@@ -1,3 +1,8 @@
+Pyretic Ritual
+1 R
+Instant
+Add R R R to your mana pool.
+
 Angelic Chorus
 3 W W
 Enchantment
