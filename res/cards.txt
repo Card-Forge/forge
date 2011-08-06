@@ -1,3 +1,12 @@
+Plague Stinger
+1 B
+Creature Insect Horror
+no text
+1/1
+Flying
+SVar:Rarity:Common
+Infect
+
 Memnite
 no cost
 Artifact Creature Construct
