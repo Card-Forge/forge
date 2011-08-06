@@ -1,0 +1,11 @@
+Name:Colossus of Sardia
+ManaCost:9
+Types:Artifact Creature Golem
+Text:no text
+K:Trample
+K:CARDNAME doesn't untap during your untap step.
+A:AB$Untap|Cost$ 9|ActivatingPhases$Upkeep|PlayerTurn$True|SpellDescription$Untap CARDNAME. Activate this ability only during your upkeep.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/colossus_of_sardia.jpg
+End
