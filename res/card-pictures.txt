@@ -38,6 +38,8 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+predatory_advantage.jpg				http://www.wizards.com/global/images/magic/general/predatory_advantage.jpg
+master_of_the_wild_hunt.jpg			http://www.wizards.com/global/images/magic/general/master_of_the_wild_hunt.jpg	
 painters_servant.jpg				http://www.wizards.com/global/images/magic/general/painters_servant.jpg
 grindstone.jpg						http://www.wizards.com/global/images/magic/general/grindstone.jpg
 high_tide.jpg						http://www.wizards.com/global/images/magic/general/high_tide.jpg

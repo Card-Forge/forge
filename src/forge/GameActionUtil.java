@@ -20,6 +20,7 @@ public class GameActionUtil {
 		// upkeep_CheckEmptyDeck_Lose(); //still a little buggy
 		upkeep_Genesis();
 		upkeep_Phyrexian_Arena();
+		upkeep_Master_of_the_Wild_Hunt();
 		upkeep_Carnophage();
 		upkeep_Sangrophage();
 		upkeep_Honden_of_Cleansing_Fire();
@@ -3560,6 +3561,20 @@ public class GameActionUtil {
 			ability.setStackDescription("Wall of Reverence - "
 					+ player + " gains life equal to target creature's power.");
 			AllZone.Stack.add(ability);
+		}
+	}
+	
+	public static void endOfTurn_Predatory_Advantage()
+	{
+		final String player = AllZone.Phase.getActivePlayer();
+		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, AllZone.GameAction.getOpponent(player));
+		CardList list = new CardList(playZone.getCards());
+		list = list.getName("Predatory Advantage");
+		for (int i = 0; i < list.size(); i++) {
+		if(player == Constant.Player.Human && Phase.PlayerCreatureSpellCount == 0) 
+			CardFactoryUtil.makeToken("Lizard", "G 2 2 Lizard", list.get(i), "G", new String[] {"Creature", "Lizard"}, 2, 2, new String[] {""});
+			else if(player == Constant.Player.Computer && Phase.ComputerCreatureSpellCount == 0) 
+				CardFactoryUtil.makeToken("Lizard", "G 2 2 Lizard", list.get(i), "G", new String[] {"Creature", "Lizard"}, 2, 2, new String[] {""});
 		}
 	}
 	
@@ -8564,6 +8579,21 @@ public class GameActionUtil {
 		}
 	}// upkeep_Phyrexian_Arena
 
+	private static void upkeep_Master_of_the_Wild_Hunt() {
+		final String player = AllZone.Phase.getActivePlayer();
+		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Master of the Wild Hunt");
+
+		for(int i = 0; i < list.size(); i++) {
+		    CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", list.get(i), "G", new String[] {
+		            "Creature", "Wolf"}, 2, 2, new String[] {""});
+		}
+	}// upkeep_Master_of_the_Wild_Hunt
+	
 	private static void upkeep_Honden_of_Seeing_Winds() {
 		final String player = AllZone.Phase.getActivePlayer();
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);

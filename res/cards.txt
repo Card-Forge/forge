@@ -1,3 +1,14 @@
+Predatory Advantage
+3 R G
+Enchantment
+At the beginning of each opponent's end step, if that player didn't cast a creature spell this turn, put a 2/2 green Lizard creature token onto the battlefield.
+
+Master of the Wild Hunt
+2 G G
+Creature Human Shaman
+At the beginning of your upkeep, put a 2/2 green Wolf creature token onto the battlefield.
+3/3
+
 Painter's Servant
 2
 Artifact Creature Scarecrow

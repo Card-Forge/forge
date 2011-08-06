@@ -13406,6 +13406,143 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
+        else if(cardName.equals("Master of the Wild Hunt")) {
+            final Ability_Tap ability = new Ability_Tap(card) {
+                private static final long serialVersionUID = 35050145102566898L;
+                
+                @Override
+                public boolean canPlay() {
+                    String controller = card.getController();
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+                    
+                    CardList Wolfs = new CardList(play.getCards());
+                    Wolfs = Wolfs.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isUntapped() && (c.getType().contains("Wolf") || c.hasKeyword("Changeling")) && c.isCreature();
+                        }
+                    });
+                    if(Wolfs.size() > 0 && AllZone.GameAction.isCardInPlay(card)
+                            && CardFactoryUtil.canTarget(card, getTargetCard()) && super.canPlay()) return true;
+                    else return false;                  
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    CardList Wolfs = new CardList(play.getCards());
+                    Wolfs = Wolfs.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isUntapped() && (c.getType().contains("Wolf") || c.hasKeyword("Changeling")) && c.isCreature();
+                        }
+                    });
+                    final int TotalWolfPower = 2 * Wolfs.size();
+                   // for(int i = 0; i < Wolfs.size(); i++) TotalWolfPower = TotalWolfPower + Wolfs.get(i).getNetAttack();
+                    PlayerZone hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    CardList human = new CardList(hplay.getCards());
+                    human = human.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return CardFactoryUtil.canTarget(card, c) && !c.hasKeyword("Protection from Green") && c.isCreature() && c.getNetDefense() <= TotalWolfPower;
+                        }
+                    });
+                	return human.size() > 0;
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    CardList Wolfs = new CardList(play.getCards());
+                    Wolfs = Wolfs.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isUntapped() && (c.getType().contains("Wolf") || c.hasKeyword("Changeling")) && c.isCreature();
+                        }
+                    });
+                    final int TotalWolfPower = 2 * Wolfs.size();
+                   // for(int i = 0; i < Wolfs.size(); i++) TotalWolfPower = TotalWolfPower + Wolfs.get(i).getNetAttack();
+                    PlayerZone hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    CardList human = new CardList(hplay.getCards());
+                    human = human.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return CardFactoryUtil.canTarget(card, c) && !c.hasKeyword("Protection from Green") && c.isCreature() && c.getNetDefense() <= TotalWolfPower;
+                        }
+                    });
+                    if(human.size() > 0) {
+                    Card biggest = human.get(0);
+                    for(int i = 0; i < human.size(); i++)
+                        if(biggest.getNetAttack() < human.get(i).getNetAttack()) biggest = human.get(i);                         
+                    		setTargetCard(biggest); 
+                    }
+                }
+                @Override
+                public void resolve() {
+                    String controller = card.getController();
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+                    
+                    CardList Wolfs = new CardList(play.getCards());
+                    Wolfs = Wolfs.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isUntapped() && (c.getType().contains("Wolf") || c.hasKeyword("Changeling")) && c.isCreature();
+                        }
+                    });
+                                      
+                            final Card target = getTargetCard();                           
+                            if(AllZone.GameAction.isCardInPlay(target) && CardFactoryUtil.canTarget(card, target) && Wolfs.size() > 0) {
+                             for(int i = 0; i < Wolfs.size() ; i++) {
+                            	 Wolfs.get(i).tap();
+                            	 target.addDamage(Wolfs.get(i).getNetAttack(),Wolfs.get(i));
+                             }
+                            }
+                             if(card.getController().equals(Constant.Player.Computer)) {
+                             for(int x = 0; x < target.getNetAttack() ; x++) {
+                            	 
+                            	 AllZone.InputControl.setInput(CardFactoryUtil.MasteroftheWildHunt_input_targetCreature(this, Wolfs ,new Command() {
+                                     
+                                     private static final long serialVersionUID = -328305150127775L;
+                                     
+                                     public void execute() {
+                                    	 getTargetCard().addDamage(1,target);
+                                    	 AllZone.GameAction.checkStateEffects();
+                                     }
+                                 }));
+                            }
+                                                       
+                    }//player.equals("human")
+                    else {
+                        for(int i = 0; i < target.getNetAttack(); i++) {
+                        	CardList NewWolfs = Wolfs;
+                        NewWolfs = NewWolfs.filter(new CardListFilter() {
+                            public boolean addCard(Card c) {
+                                return CardFactoryUtil.canTarget(card, c) && AllZone.GameAction.isCardInPlay(c) && !c.hasKeyword("Protection from Green") && !c.hasKeyword("Indestructible") && c.isCreature() && c.getNetDefense() <= target.getNetAttack();
+                            }
+                        });
+                        if(NewWolfs.size() > 0) {
+                        Card biggest = NewWolfs.get(0); 
+                        for(int d = 0; d < NewWolfs.size(); d ++) if(biggest.getNetAttack() < NewWolfs.get(d).getNetAttack()) biggest = NewWolfs.get(d);                         
+                        		setTargetCard(biggest);   
+                        		getTargetCard().addDamage(1,target);
+                    } else {
+                        Wolfs = Wolfs.filter(new CardListFilter() {
+                            public boolean addCard(Card c) {
+                                return AllZone.GameAction.isCardInPlay(c);
+                            }
+                        });
+                    	if(Wolfs.size() > 0) {
+                    	Card biggest = Wolfs.get(0);
+                    	setTargetCard(biggest);
+                    	getTargetCard().addDamage(1,target);
+                    	}
+                    }
+                        }
+                    }
+                }//resolve()
+            };//SpellAbility
+            
+          
+            card.addSpellAbility(ability);
+            ability.setDescription("Tap: Tap all untapped Wolf creatures you control. Each Wolf tapped this way deals damage equal to its power to target creature. That creature deals damage equal to its power divided as its controller chooses among any number of those Wolves.");
+            ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
         else if(cardName.equals("Scarblade Elite")) {
             final Ability_Tap ability = new Ability_Tap(card) {
                 private static final long serialVersionUID = 3505019464802566898L;

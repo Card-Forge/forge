@@ -33,6 +33,7 @@ public class EndOfTurn implements java.io.Serializable
         AllZone.GameAction.sacrifice(sacrifice.get(i));
     }
     
+    GameActionUtil.endOfTurn_Predatory_Advantage();
     GameActionUtil.endOfTurn_Wall_Of_Reverence();
     GameActionUtil.endOfTurn_Lighthouse_Chronologist();
     

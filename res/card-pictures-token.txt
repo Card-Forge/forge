@@ -3,6 +3,7 @@
 [T]w_1_1_kithkin_soldier.jpg  http://www.magickartenmarkt.de/img/cards/Lorwyn/kithkin_soldier_token_white_11.jpg
 [T]g_1_1_elf_warrior.jpg     http://www.magickartenmarkt.de/img/cards/Lorwyn/elf_warrior_token_green_11.jpg
 [T]g_2_2_wolf.jpg     http://www.magickartenmarkt.de/img/cards/Zendikar/wolf_token_green_22.jpg
+[T]g_2_2_lizard.jpg     http://www.magickartenmarkt.de/img/cards/Alara_Reborn/lizard_token_green_22.jpg
 [T]w_1_1_spirit.jpg     http://www.magickartenmarkt.de/img/cards/Shadowmoor/spirit_token_white_11.jpg
 [T]w_n_n_avatar.jpg			http://www.magickartenmarkt.de/img/cards/Lorwyn/avatar_token_white_xx.jpg
 [T]w_4_4_angel.jpg				http://www.magickartenmarkt.de/img/cards/Conflux/angel_token_white_44.jpg

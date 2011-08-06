@@ -2483,6 +2483,34 @@ public class CardFactoryUtil {
         return target;
     }//input_targetCreature()
     
+    public static Input MasteroftheWildHunt_input_targetCreature(final SpellAbility spell, final CardList choices, final Command paid) {
+        Input target = new Input() {
+            private static final long serialVersionUID = -1779224307654698954L;
+            
+            @Override
+            public void showMessage() {
+            	AllZone.Display.showMessage("Select target wolf to damage for " + spell.getSourceCard());
+                ButtonUtil.enableOnlyCancel();
+            }
+            
+            @Override
+            public void selectButtonCancel() {
+                stop();
+            }
+            
+            @Override
+            public void selectCard(Card card, PlayerZone zone) {
+            	if(choices.size() == 0) stop();
+            		if(choices.contains(card)) {
+                    spell.setTargetCard(card);
+                    paid.execute();
+                        stop();                  
+                }
+            }//selectCard()
+        };
+        return target;
+    }//input_MasteroftheWildHunt_input_targetCreature()
+    
     public static Input input_targetCreature_NoCost_TapAbility_NoTargetSelf(final Ability_Tap spell) {
         Input target = new Input() {
             private static final long serialVersionUID = -6310420275914649718L;
