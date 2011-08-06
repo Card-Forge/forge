@@ -1,9 +1,9 @@
 Name:Claws of Valakut
 ManaCost:1 R R
 Types:Enchantment Aura
-Text:Enchanted creature gets +1/+0 for each Mountain you control and has first strike.
+Text:no text
 K:Enchant creature
-K:enPump:First Strike
+K:enPump:First Strike:Enchanted creature gets +1/+0 for each Mountain you control and has first strike.
 K:stPumpEnchanted:Creature:X/0:no Condition:no text
 SVar:X:Count$TypeYouCtrl.Mountain
 SVar:BuffedBy:Mountain

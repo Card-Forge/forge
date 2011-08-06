@@ -1,7 +1,7 @@
 Name:Clinging Darkness
 ManaCost:1 B
 Types:Enchantment Aura
-Text:Enchanted creature gets -4/-1.
+Text:no text
 K:Enchant creature
 K:enPumpCurse:-4/-1
 SVar:Rarity:Common
