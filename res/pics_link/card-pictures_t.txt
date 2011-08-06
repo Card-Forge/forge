@@ -399,7 +399,7 @@ titans_revenge.jpg	http://[server]/MOR/Titan's%20Revenge.full.jpg
 tithe.jpg	http://[server]/VI/Tithe.full.jpg
 tivadar_of_thorn.jpg	http://[server]/TSP/Tivadar%20of%20Thorn.full.jpg
 tivadars_crusade.jpg	http://[server]/DK/Tivadar's%20Crusade.full.jpg
-to_arms!.jpg	http://[server]/GP/To%20Arms!.full.jpg
+to_arms.jpg	http://[server]/GP/To%20Arms!.full.jpg
 tobias_andrion.jpg	http://[server]/LG/Tobias%20Andrion.full.jpg
 togglodyte.jpg	http://[server]/UNH/Togglodyte.full.jpg
 toil_to_renown.jpg	http://[server]/SHM/Toil%20to%20Renown.full.jpg
