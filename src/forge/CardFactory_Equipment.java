@@ -20,15 +20,17 @@ class CardFactory_Equipment {
     public static Card getCard(final Card card, String cardName, String owner) {
     	
         //*************** START *********** START **************************
-        if(cardName.equals("Sword of the Meek")) {
+        if (cardName.equals("Sword of the Meek")) {
             final Ability equip = new Ability(card, "2") {
+            	
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if (AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        if(card.isEquipping()) {
+                    	
+                        if (card.isEquipping()) {
                             Card crd = card.getEquipping().get(0);
-                            if(crd.equals(getTargetCard())) return;
+                            if (crd.equals(getTargetCard())) return;
                             
                             card.unEquipCard(crd);
                         }
@@ -40,13 +42,13 @@ class CardFactory_Equipment {
                 public boolean canPlay() {
                     return AllZone.getZone(card).is(Constant.Zone.Play)
                             && AllZone.Phase.getActivePlayer().equals(card.getController())
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2"));
+                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
                 }
                 
                 @Override
                 public boolean canPlayAI() {
-                    return getCreature().size() != 0 && !card.isEquipping();
+                    return getCreature().size() != 0 
+                    		&& !card.isEquipping();
                 }
                 
                 
@@ -60,23 +62,28 @@ class CardFactory_Equipment {
                     CardList list = new CardList(AllZone.Computer_Play.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.isCreature() && (!CardFactoryUtil.AI_doesCreatureAttack(c))
+                            return c.isCreature() 
+                            		&& CardFactoryUtil.AI_doesCreatureAttack(c)
                                     && CardFactoryUtil.canTarget(card, c)
                                     && (!c.getKeyword().contains("Defender"));
                         }
                     });
-                    // list.remove(card);      // if mana-only cost, allow self-target
                     
-                    // is there at least 1 Loxodon Punisher to target
+                    // Is there at least 1 Loxodon Punisher and/or Goblin Gaveleer to target
+                    CardList equipMagnetList = list;
+                    equipMagnetList = equipMagnetList.filter(new CardListFilter() {
+                    	public boolean addCard(Card c) {
+                    		return c.getName().equals("Loxodon Punisher") 
+                    				|| c.getName().equals("Goblin Gaveleer");
+                    	}
+                    });
                     
-                    CardList equipMagnetList = list.getName("Loxodon Punisher");
                     if (equipMagnetList.size() != 0) {
                         return equipMagnetList;
                     }
                     
                     return list;
                 }//getCreature()
-                
             };//equip ability
             
 
@@ -117,19 +124,20 @@ class CardFactory_Equipment {
             card.addUnEquipCommand(onUnEquip);
             
         } //*************** END ************ END **************************
-
         
-    	
+        
         //*************** START *********** START **************************
-        else if(cardName.equals("Umbral Mantle")) {
+        else if (cardName.equals("Umbral Mantle")) {
             final Ability equip = new Ability(card, "0") {
+            	
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if (AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        if(card.isEquipping()) {
+                    	
+                        if (card.isEquipping()) {
                             Card crd = card.getEquipping().get(0);
-                            if(crd.equals(getTargetCard())) return;
+                            if (crd.equals(getTargetCard())) return;
                             
                             card.unEquipCard(crd);
                         }
@@ -146,7 +154,6 @@ class CardFactory_Equipment {
                             && !AllZone.Phase.getPhase().equals(
                                     Constant.Phase.Combat_Declare_Blockers_InstantAbility);
                 }
-                
                 
                 @Override
                 public boolean canPlayAI() {
@@ -218,16 +225,19 @@ class CardFactory_Equipment {
             card.addUnEquipCommand(onUnEquip);
         } //*************** END ************ END **************************  
         
+        
         //*************** START *********** START **************************
-        else if(cardName.equals("Umezawa's Jitte")) {
+        else if (cardName.equals("Umezawa's Jitte")) {
             final Ability equip = new Ability(card, "2") {
+            	
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if (AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        if(card.isEquipping()) {
+                    	
+                        if (card.isEquipping()) {
                             Card crd = card.getEquipping().get(0);
-                            if(crd.equals(getTargetCard())) return;
+                            if (crd.equals(getTargetCard())) return;
                             
                             card.unEquipCard(crd);
                         }
@@ -239,13 +249,13 @@ class CardFactory_Equipment {
                 public boolean canPlay() {
                     return AllZone.getZone(card).is(Constant.Zone.Play)
                             && AllZone.Phase.getActivePlayer().equals(card.getController())
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2"));
+                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
                 }
                 
                 @Override
                 public boolean canPlayAI() {
-                    return getCreature().size() != 0 && !card.isEquipping();
+                    return getCreature().size() != 0 
+                    		&& !card.isEquipping();
                 }
                 
                 @Override
@@ -258,23 +268,28 @@ class CardFactory_Equipment {
                     CardList list = new CardList(AllZone.Computer_Play.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.isCreature() && (!CardFactoryUtil.AI_doesCreatureAttack(c))
+                            return c.isCreature() 
+                            		&& CardFactoryUtil.AI_doesCreatureAttack(c)
                                     && CardFactoryUtil.canTarget(card, c)
                                     && (!c.getKeyword().contains("Defender"));
                         }
                     });
-                    // list.remove(card);      // if mana-only cost, allow self-target
                     
-                    // is there at least 1 Loxodon Punisher to target
+                    // Is there at least 1 Loxodon Punisher and/or Goblin Gaveleer to target
+                    CardList equipMagnetList = list;
+                    equipMagnetList = equipMagnetList.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.getName().equals("Loxodon Punisher") 
+                                    || c.getName().equals("Goblin Gaveleer");
+                        }
+                    });
                     
-                    CardList equipMagnetList = list.getName("Loxodon Punisher");
                     if (equipMagnetList.size() != 0) {
                         return equipMagnetList;
                     }
                     
                     return list;
                 }//getCreature()
-                
             };//equip ability
 
             equip.setBeforePayMana(CardFactoryUtil.input_equipCreature(equip));
@@ -282,6 +297,7 @@ class CardFactory_Equipment {
             card.addSpellAbility(equip);
             
         } //*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         if(cardName.equals("Hedron Matrix")) {
@@ -293,11 +309,12 @@ class CardFactory_Equipment {
         		//not changed
         		@Override
         		public void resolve() {
-        			if(AllZone.GameAction.isCardInPlay(getTargetCard())
+        			if (AllZone.GameAction.isCardInPlay(getTargetCard())
         					&& CardFactoryUtil.canTarget(card, getTargetCard())) {
-        				if(card.isEquipping()) {
+        				
+        				if (card.isEquipping()) {
         					Card crd = card.getEquipping().get(0);
-        					if(crd.equals(getTargetCard())) return;
+        					if (crd.equals(getTargetCard())) return;
 
         					card.unEquipCard(crd);
         				}
@@ -309,15 +326,15 @@ class CardFactory_Equipment {
         		@Override
         		public boolean canPlay() {
         			return AllZone.getZone(card).is(Constant.Zone.Play)
-        			&& AllZone.Phase.getActivePlayer().equals(card.getController())
-        			&& (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-        			"Main2"));
+        					&& AllZone.Phase.getActivePlayer().equals(card.getController())
+        					&& (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
         		}
 
         		//not changed
         		@Override
         		public boolean canPlayAI() {
-        			return getCreature().size() != 0 && !card.isEquipping();
+        			return getCreature().size() != 0 
+        					&& !card.isEquipping();
         		}
 
         		//not changed
@@ -332,21 +349,28 @@ class CardFactory_Equipment {
         			CardList list = new CardList(AllZone.Computer_Play.getCards());
         			list = list.filter(new CardListFilter() {
         				public boolean addCard(Card c) {
-        					return c.isCreature() && (!CardFactoryUtil.AI_doesCreatureAttack(c))
-        					&& CardFactoryUtil.canTarget(card, c)
-        					&& (!c.getKeyword().contains("Defender"));
+        					return c.isCreature() 
+        							&& CardFactoryUtil.AI_doesCreatureAttack(c)
+        							&& CardFactoryUtil.canTarget(card, c)
+        							&& (!c.getKeyword().contains("Defender"));
         				}
         			});
+        			
+        			// Is there at least 1 Loxodon Punisher and/or Goblin Gaveleer to target
+                    CardList equipMagnetList = list;
+                    equipMagnetList = equipMagnetList.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.getName().equals("Loxodon Punisher") 
+                                    || c.getName().equals("Goblin Gaveleer");
+                        }
+                    });
 
-        			// is there at least 1 Loxodon Punisher to target
-        			CardList equipMagnetList = list.getName("Loxodon Punisher");
         			if (equipMagnetList.size() != 0) {
         				return equipMagnetList;
         			}
 
         			return list;
         		}//getCreature()
-
         	};//equip ability
 
 
@@ -389,16 +413,19 @@ class CardFactory_Equipment {
 
         } //*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
-        else if(cardName.equals("Adventuring Gear")) {
+        else if (cardName.equals("Adventuring Gear")) {
             final Ability equip = new Ability(card, "1") {
+            	
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if (AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        if(card.isEquipping()) {
+                    	
+                        if (card.isEquipping()) {
                             Card crd = card.getEquipping().get(0);
-                            if(crd.equals(getTargetCard())) return;
+                            if (crd.equals(getTargetCard())) return;
                             
                             card.unEquipCard(crd);
                         }
@@ -415,7 +442,8 @@ class CardFactory_Equipment {
                 
                 @Override
                 public boolean canPlayAI() {
-                    return getCreature().size() != 0 && !card.isEquipping();
+                    return getCreature().size() != 0 
+                    		&& !card.isEquipping();
                 }
                 
                 @Override
@@ -428,14 +456,15 @@ class CardFactory_Equipment {
                 	CardList list = new CardList(AllZone.Computer_Play.getCards());
                 	list = list.filter(new CardListFilter() {
                 		public boolean addCard(Card c) {
-                			return c.isCreature() && (!CardFactoryUtil.AI_doesCreatureAttack(c))
-                			&& CardFactoryUtil.canTarget(card, c)
-                			&& (!c.getKeyword().contains("Defender"));
+                			return c.isCreature() 
+                					&& CardFactoryUtil.AI_doesCreatureAttack(c)
+                					&& CardFactoryUtil.canTarget(card, c)
+                					&& (!c.getKeyword().contains("Defender"));
                 		}
                 	});
+                	
                 	return list;
                 }//getCreature()
-                
             };// equip ability
 
             
@@ -470,17 +499,20 @@ class CardFactory_Equipment {
             card.addEquipCommand(onEquip);
         	card.addUnEquipCommand(onUnEquip);
         }//*************** END ************ END **************************
-
-      //*************** START *********** START **************************
-        else if(cardName.equals("Sword of Fire and Ice")) {
+        
+        
+        //*************** START *********** START **************************
+        else if (cardName.equals("Sword of Fire and Ice")) {
             final Ability equip = new Ability(card, "2") {
+            	
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if (AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        if(card.isEquipping()) {
+                    	
+                        if (card.isEquipping()) {
                             Card crd = card.getEquipping().get(0);
-                            if(crd.equals(getTargetCard())) return;
+                            if (crd.equals(getTargetCard())) return;
                             
                             card.unEquipCard(crd);
                         }
@@ -492,13 +524,13 @@ class CardFactory_Equipment {
                 public boolean canPlay() {
                     return AllZone.getZone(card).is(Constant.Zone.Play)
                             && AllZone.Phase.getActivePlayer().equals(card.getController())
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2"));
+                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
                 }
                 
                 @Override
                 public boolean canPlayAI() {
-                    return getCreature().size() != 0 && !card.isEquipping();
+                    return getCreature().size() != 0 
+                    		&& !card.isEquipping();
                 }
                 
                 @Override
@@ -511,24 +543,28 @@ class CardFactory_Equipment {
                     CardList list = new CardList(AllZone.Computer_Play.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.isCreature() && (!CardFactoryUtil.AI_doesCreatureAttack(c))
+                            return c.isCreature() 
+                            		&& CardFactoryUtil.AI_doesCreatureAttack(c)
                                     && CardFactoryUtil.canTarget(card, c)
                                     && (!c.getKeyword().contains("Defender"));
                         }
                     });
-                    // list.remove(card);      // if mana-only cost, allow self-target
                     
-                    // is there at least 1 Loxodon Punisher to target
+                    // Is there at least 1 Loxodon Punisher and/or Goblin Gaveleer to target
+                    CardList equipMagnetList = list;
+                    equipMagnetList = equipMagnetList.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.getName().equals("Loxodon Punisher") 
+                                    || c.getName().equals("Goblin Gaveleer");
+                        }
+                    });
                     
-                    CardList equipMagnetList = list.getName("Loxodon Punisher");
                     if (equipMagnetList.size() != 0) {
                         return equipMagnetList;
                     }
                     
                     return list;
                 }//getCreature()
-                
-                
             };//equip ability
             
             Command onEquip = new Command() {
@@ -571,16 +607,19 @@ class CardFactory_Equipment {
             
         } //*************** END ************ END **************************
         
-      //*************** START *********** START **************************
-        else if(cardName.equals("Sword of Light and Shadow")) {
+        
+        //*************** START *********** START **************************
+        else if (cardName.equals("Sword of Light and Shadow")) {
             final Ability equip = new Ability(card, "2") {
+            	
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if (AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        if(card.isEquipping()) {
+                    	
+                        if (card.isEquipping()) {
                             Card crd = card.getEquipping().get(0);
-                            if(crd.equals(getTargetCard())) return;
+                            if (crd.equals(getTargetCard())) return;
                             
                             card.unEquipCard(crd);
                         }
@@ -592,13 +631,13 @@ class CardFactory_Equipment {
                 public boolean canPlay() {
                     return AllZone.getZone(card).is(Constant.Zone.Play)
                             && AllZone.Phase.getActivePlayer().equals(card.getController())
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2"));
+                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
                 }
                 
                 @Override
                 public boolean canPlayAI() {
-                    return getCreature().size() != 0 && !card.isEquipping();
+                    return getCreature().size() != 0 
+                    		&& !card.isEquipping();
                 }
                 
                 @Override
@@ -611,24 +650,28 @@ class CardFactory_Equipment {
                     CardList list = new CardList(AllZone.Computer_Play.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.isCreature() && (!CardFactoryUtil.AI_doesCreatureAttack(c))
+                            return c.isCreature() 
+                            		&& CardFactoryUtil.AI_doesCreatureAttack(c)
                                     && CardFactoryUtil.canTarget(card, c)
                                     && (!c.getKeyword().contains("Defender"));
                         }
                     });
-                    // list.remove(card);      // if mana-only cost, allow self-target
                     
-                    // is there at least 1 Loxodon Punisher to target
+                    // Is there at least 1 Loxodon Punisher and/or Goblin Gaveleer to target
+                    CardList equipMagnetList = list;
+                    equipMagnetList = equipMagnetList.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.getName().equals("Loxodon Punisher") 
+                                    || c.getName().equals("Goblin Gaveleer");
+                        }
+                    });
                     
-                    CardList equipMagnetList = list.getName("Loxodon Punisher");
                     if (equipMagnetList.size() != 0) {
                         return equipMagnetList;
                     }
                     
                     return list;
                 }//getCreature()
-                
-                
             };//equip ability
             
             Command onEquip = new Command() {
@@ -672,16 +715,18 @@ class CardFactory_Equipment {
         } //*************** END ************ END **************************
         
         
-      //*************** START *********** START **************************
-        else if(cardName.equals("Sword of Body and Mind")) {
+        //*************** START *********** START **************************
+        else if (cardName.equals("Sword of Body and Mind")) {
             final Ability equip = new Ability(card, "2") {
+            	
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if (AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        if(card.isEquipping()) {
+                    	
+                        if (card.isEquipping()) {
                             Card crd = card.getEquipping().get(0);
-                            if(crd.equals(getTargetCard())) return;
+                            if (crd.equals(getTargetCard())) return;
                             
                             card.unEquipCard(crd);
                         }
@@ -693,13 +738,13 @@ class CardFactory_Equipment {
                 public boolean canPlay() {
                     return AllZone.getZone(card).is(Constant.Zone.Play)
                             && AllZone.Phase.getActivePlayer().equals(card.getController())
-                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                    "Main2"));
+                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
                 }
                 
                 @Override
                 public boolean canPlayAI() {
-                    return getCreature().size() != 0 && !card.isEquipping();
+                    return getCreature().size() != 0 
+                    		&& !card.isEquipping();
                 }
                 
                 @Override
@@ -712,24 +757,28 @@ class CardFactory_Equipment {
                     CardList list = new CardList(AllZone.Computer_Play.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.isCreature() && (!CardFactoryUtil.AI_doesCreatureAttack(c))
+                            return c.isCreature() 
+                            		&& CardFactoryUtil.AI_doesCreatureAttack(c)
                                     && CardFactoryUtil.canTarget(card, c)
                                     && (!c.getKeyword().contains("Defender"));
                         }
                     });
-                    // list.remove(card);      // if mana-only cost, allow self-target
                     
-                    // is there at least 1 Loxodon Punisher to target
+                    // Is there at least 1 Loxodon Punisher and/or Goblin Gaveleer to target
+                    CardList equipMagnetList = list;
+                    equipMagnetList = equipMagnetList.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.getName().equals("Loxodon Punisher") 
+                                    || c.getName().equals("Goblin Gaveleer");
+                        }
+                    });
                     
-                    CardList equipMagnetList = list.getName("Loxodon Punisher");
                     if (equipMagnetList.size() != 0) {
                         return equipMagnetList;
                     }
                     
                     return list;
                 }//getCreature()
-                
-                
             };//equip ability
             
             Command onEquip = new Command() {
