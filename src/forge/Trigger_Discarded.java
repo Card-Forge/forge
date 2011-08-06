@@ -10,13 +10,6 @@ public class Trigger_Discarded extends Trigger {
 
 	@Override
 	public boolean performTest(HashMap<String, Object> runParams) {
-		if(mapParams.containsKey("ValidPlayer"))
-		{
-			if(!matchesValid(runParams.get("Player"),mapParams.get("ValidPlayer").split(","),hostCard))
-			{
-				return false;
-			}
-		}
 		if(mapParams.containsKey("ValidCard"))
 		{
 			if(!matchesValid(runParams.get("Card"),mapParams.get("ValidCard").split(","),hostCard))
