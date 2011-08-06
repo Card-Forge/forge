@@ -12340,31 +12340,28 @@ public class CardFactory_Creatures {
   //*************** START *********** START **************************
 	    else if (cardName.equals("Oros, the Avenger"))
 	    {
-	    	final String player = card.getController();
-
 		  	final Ability ability2 = new Ability(card, "2 W")
 		  	{
 		  		public void resolve()
 		  		{
-		  			if (player.equals("Human"))
-		  			{
-		  				CardList cards = new CardList();
-		  				PlayerZone hum = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
-		  				PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
-		  				cards.addAll(hum.getCards());
-		  				cards.addAll(comp.getCards());
-		  				cards = cards.getType("Creature");
-		  				
-		  				for (int i=0;i<cards.size(); i++)
-		  				{
-		  					if (!CardUtil.getColors(cards.get(i)).contains(Constant.Color.White) 
-		  						&& CardFactoryUtil.canDamage(card, cards.get(i)))
-		  					{
-		  						cards.get(i).addDamage(3, card);
-		  					}
-		  				}
-		  				
-		  			}
+		  			//if (player.equals("Human"))
+		  			//{
+	  				CardList cards = new CardList();
+	  				PlayerZone hum = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+	  				PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+	  				cards.addAll(hum.getCards());
+	  				cards.addAll(comp.getCards());
+	  				cards = cards.getType("Creature");
+	  				
+	  				for (int i=0;i<cards.size(); i++)
+	  				{
+	  					if (!CardUtil.getColors(cards.get(i)).contains(Constant.Color.White) 
+	  						&& CardFactoryUtil.canDamage(card, cards.get(i)))
+	  					{
+	  						cards.get(i).addDamage(3, card);
+	  					}
+	  				}
+		  			//}
 		  		}
 		  		public boolean canPlay()
 		  		{
@@ -12374,7 +12371,7 @@ public class CardFactory_Creatures {
 		  	};// ability2
 		  	//card.clearSpellAbility();
 		  	card.addSpellAbility(ability2);
-		  	ability2.setStackDescription(card.getName() + " - " + player + " deals 3 damage to each nonwhite creature.");
+		  	ability2.setStackDescription(card.getName() + " - deals 3 damage to each nonwhite creature.");
 		
 		  	
 	   }//*************** END ************ END **************************
@@ -12390,7 +12387,7 @@ public class CardFactory_Creatures {
 			public void resolve()
 			{
 				int lifeGain = 0;
-				if (player.equals("Human"))
+				if (card.getController().equals("Human"))
 				{
 					String choices[] = {"white", "blue" , "black" , "red" , "green"};
 					Object o = AllZone.Display.getChoiceOptional("Select Color: ", choices);
@@ -12398,8 +12395,18 @@ public class CardFactory_Creatures {
 					lifeGain = CardFactoryUtil.getNumberOfPermanentsByColor((String)o);
 					
 				}
+				else
+				{
+					PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+					PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+					CardList list = new CardList();
+					list.addAll(cPlay.getCards());
+					list.addAll(hPlay.getCards());
+					String color = CardFactoryUtil.getMostProminentColor(list);
+					lifeGain = CardFactoryUtil.getNumberOfPermanentsByColor(color);
+				}
 							
-				PlayerLife life = AllZone.GameAction.getPlayerLife(player);
+				PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
 				life.addLife(lifeGain);
 			}
 			public boolean canPlay()
@@ -12426,12 +12433,22 @@ public class CardFactory_Creatures {
 			public void resolve()
 			{
 				int numberTokens = 0;
-				if (player.equals("Human"))
+				if (card.getController().equals("Human"))
 				{
 					String choices[] = {"white", "blue" , "black" , "red" , "green"};
 					Object o = AllZone.Display.getChoiceOptional("Select Color: ", choices);
 					//System.out.println("Color:" + o);
 					numberTokens = CardFactoryUtil.getNumberOfPermanentsByColor((String)o);
+				}
+				else
+				{
+					PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+					PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+					CardList list = new CardList();
+					list.addAll(cPlay.getCards());
+					list.addAll(hPlay.getCards());
+					String color = CardFactoryUtil.getMostProminentColor(list);
+					numberTokens = CardFactoryUtil.getNumberOfPermanentsByColor(color);
 				}
 				
 				for (int i=0;i<numberTokens;i++)
