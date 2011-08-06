@@ -92,16 +92,18 @@ public class Combat
         //sum unblocked attackers' power
         for(int i = 0; i < att.size(); i++) {
           if(! isBlocked(att.get(i)) || (getBlockers(att.get(i)).size() == 0 && att.get(i).getKeyword().contains("Trample")) ){
-           int damageDealt = att.get(i).getNetAttack();
-             if (CombatUtil.isDoranInPlay())
-                damageDealt = att.get(i).getNetDefense();
-
-             //if the creature has first strike do not do damage in the normal combat phase
-             //if(att.get(i).hasSecondStrike())
-             if(!att.get(i).hasFirstStrike() || (att.get(i).hasFirstStrike() && att.get(i).hasDoubleStrike()) )
-                addDefendingDamage(damageDealt, att.get(i));
-             }
-          }
+        	    int damageDealt = att.get(i).getNetAttack();
+             	if (CombatUtil.isDoranInPlay())
+             		damageDealt = att.get(i).getNetDefense();
+             
+             	if (damageDealt > 0) { 
+	             //if the creature has first strike do not do damage in the normal combat phase
+	             //if(att.get(i).hasSecondStrike())
+	             if(!att.get(i).hasFirstStrike() || (att.get(i).hasFirstStrike() && att.get(i).hasDoubleStrike()) )
+	                addDefendingDamage(damageDealt, att.get(i));
+             	}	
+             } //! isBlocked...
+          }//for
       }
   public void setDefendingFirstStrikeDamage()
   {
@@ -114,14 +116,15 @@ public class Combat
              if (CombatUtil.isDoranInPlay())
                 damageDealt = att.get(i).getNetDefense();
              
-             //if the creature has first strike or double strike do damage in the first strike combat phase
-  
-             if(att.get(i).hasFirstStrike() || att.get(i).hasDoubleStrike()){
-            	 addDefendingFirstStrikeDamage(damageDealt, att.get(i));
+             if (damageDealt > 0) { 
+	             //if the creature has first strike or double strike do damage in the first strike combat phase
+	             if(att.get(i).hasFirstStrike() || att.get(i).hasDoubleStrike()){
+	            	 addDefendingFirstStrikeDamage(damageDealt, att.get(i));
+	             }
              }
           }
-        }
-      }
+        } //for
+  }
   public void addDefendingDamage(int n, Card source) 
   {
 	  if (!defendingDamageMap.containsKey(source))
