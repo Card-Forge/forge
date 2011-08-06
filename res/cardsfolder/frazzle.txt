@@ -2,7 +2,7 @@ Name:Frazzle
 ManaCost:3 U
 Types:Instant
 Text:no text
-A:SP$Counter | Cost$ 3 U | Type$ Spell | CounterValid$ Card.nonBlue | SpellDescription$ Counter target non-blue spell.
+A:SP$Counter | Cost$ 3 U | Type$ Spell | CounterValid$ Card.nonBlue | SpellDescription$ Counter target nonblue spell.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frazzle.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/25.jpg
