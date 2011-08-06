@@ -823,7 +823,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         	String setCode = "";
             if (cardName.contains("|"))
             {
-            	String s[] = cardName.split("\\|");
+            	String s[] = cardName.split("\\|",2);
             	cardName = s[0];
             	setCode = s[1];
             }
