@@ -1529,19 +1529,21 @@ public class CardFactory implements NewConstants {
         	 TgtOpp[0] = true;
          
           // how much damage
-        final int NumDmg[] = {-1};
+          final int NumDmg[] = {-1};
           final String NumDmgX[] = {"none"};
 
-          if (k[1].length() <= 2)      // numeric
-             NumDmg[0] = Integer.parseInt(k[1]);
-          else                     // result of some sort of function
+          if (k[1].matches("X"))
           {
-             if (k[1].startsWith("Count$"))
-             {
-                String kk[] = k[1].split("\\$");
-                NumDmgX[0] = kk[1];
-             }
+        	  String x = card.getSVar(k[1]);
+        	  if (x.startsWith("Count$"))
+        	  {
+        		  String kk[] = x.split("\\$");
+        		  NumDmgX[0] = kk[1];
+        	  }
+        	   
           }
+          else if (k[1].matches("[0-9][0-9]?"))
+        		  NumDmg[0] = Integer.parseInt(k[1]);
          
           //drawbacks and descriptions
           final String DrawBack[] = {"none"};
