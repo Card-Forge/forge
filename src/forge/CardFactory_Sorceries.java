@@ -4625,6 +4625,7 @@ public class CardFactory_Sorceries {
                     		(cardName.equals("Glimpse the Unthinkable")) ? 10 : 5);
                 }
             };//SpellAbility
+            spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
             card.clearSpellAbility();
             card.addSpellAbility(spell);
