@@ -792,6 +792,7 @@ res/cardsfolder/darksteel_colossus.txt -text svneol=native#text/plain
 res/cardsfolder/darksteel_forge.txt -text svneol=native#text/plain
 res/cardsfolder/darksteel_gargoyle.txt -text svneol=native#text/plain
 res/cardsfolder/darksteel_ingot.txt -text svneol=native#text/plain
+res/cardsfolder/darksteel_juggernaut -text
 res/cardsfolder/darksteel_sentinel.txt -text svneol=native#text/plain
 res/cardsfolder/darkwatch_elves.txt -text svneol=native#text/plain
 res/cardsfolder/darkwater_catacombs.txt -text svneol=native#text/plain

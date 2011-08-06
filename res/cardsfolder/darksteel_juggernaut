@@ -1,0 +1,11 @@
+Name:Darksteel Juggernaut
+ManaCost:5
+Types:Artifact Creature Juggernaut
+Text:no text
+PT:0/1
+K:Indestructible
+K:CARDNAME attacks each turn if able.
+K:StaticEffect:Play:Self:SetPT/Type.Artifact/Type.Artifact:Permanents you Control:Darksteel Juggernaut's power and toughness are each equal to the number of artifacts you control.
+K:SVar:BuffedBy:Artifact
+K:SVar:Rarity:Rare
+End
