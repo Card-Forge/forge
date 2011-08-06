@@ -18733,6 +18733,62 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Consume the Meek")) {
+        	/* Destroy each creature with converted mana cost 3 or less.
+        	 * They can't be regenerated.
+        	 */
+        	SpellAbility spell = new Spell(card) {
+        		private static final long serialVersionUID = 9127892501403187034L;
+
+        		@Override
+        		public void resolve() {
+        			CardList all = new CardList();
+        			all.addAll(getHumanCreatures().toArray());
+        			all.addAll(getComputerCreatures().toArray());
+
+        			for(int i = 0; i < all.size(); i++) {
+        				Card c = all.get(i);
+        				System.out.println("Consume the Meek: " + c);
+        				AllZone.GameAction.destroyNoRegeneration(c);
+        			}
+        		}// resolve()
+
+        		CardListFilter filter = new CardListFilter() {
+        			public boolean addCard(Card c) {
+        				return c.isCreature() && CardUtil.getConvertedManaCost(c) <= 3;
+        			}
+        		};
+
+        		private CardList getHumanCreatures() {
+        			CardList human = new CardList();
+        			human.addAll(AllZone.Human_Play.getCards());
+        			human = human.filter(filter);
+        			return human;
+        		}
+
+        		private CardList getComputerCreatures() {
+        			CardList comp = new CardList();
+        			comp.addAll(AllZone.Computer_Play.getCards());
+        			comp = comp.filter(filter);
+        			return comp;
+        		}
+
+        		@Override
+        		public boolean canPlayAI() {
+        			CardList human = getHumanCreatures();
+        			CardList computer = getComputerCreatures();
+
+        			// the computer will at least destroy 2 more human creatures
+        			return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
+        			(computer.size() < human.size() - 1
+        					|| (AllZone.Computer_Life.getLife() < 7 && !human.isEmpty()));
+        		}
+        	};// SpellAbility
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }// *************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
