@@ -4,7 +4,7 @@ Types:Land
 Text:no text
 K:Boros Garrison enters the battlefield tapped.
 K:When Boros Garrison enters the battlefield, return a land you control to its owner's hand.
-A:AB$Mana|Cost$T|Produced$R W|SpellDescription$Add R W to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ R W | SpellDescription$ Add R W to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_garrison.jpg
