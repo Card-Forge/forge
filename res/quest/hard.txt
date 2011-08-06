@@ -64,6 +64,7 @@ Professor X 3
 R2-D2 3
 Rocky 3
 Rogue 3
+Samantha Stephens 3
 Scooby Doo 3
 Seabiscuit 3
 Sherlock Holmes 3

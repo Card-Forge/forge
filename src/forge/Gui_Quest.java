@@ -577,6 +577,8 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Rogue 3		hard	Dragons including Tarox Bladewing, Dragon Roost, Chandra Nalaar");
         sb.append("\r\n");
+        sb.append("Samantha Stephens 3	hard	Sloth' Painter's Servant Grindstone deck, an interesting combo");
+        sb.append("\r\n");
         sb.append("Scooby Doo 3   	hard   	Rares' Red deck, Dragonmaster Outcast, Rakdos Pit Dragon, Kamahl, Pit Fighter");
         sb.append("\r\n");
         sb.append("Scotty 2		medium	Pestilence + Castle + Penumbra Kavu/Spider/Wurm but no pro black");
