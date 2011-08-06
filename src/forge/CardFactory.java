@@ -3500,7 +3500,7 @@ public class CardFactory implements NewConstants {
 
         }//spDestroyAll
 
-
+/*
         // Generic bounce target card
         if(hasKeyword(card, "spBounceTgt") != -1) {
             int n = hasKeyword(card, "spBounceTgt");
@@ -3670,6 +3670,7 @@ public class CardFactory implements NewConstants {
                card.addSpellAbility(bbBnceTgt);
             }
         }//spBounceTgt
+*/
         
         // Generic bounce when enters the battlefield
         if (hasKeyword(card, "etbBounceTgt") != -1)
