@@ -55,6 +55,11 @@ public class Spell_Permanent extends Spell {
                  }
         	}
         }
+        if(getSourceCard().getType().contains("World")) {
+        	CardList list = new CardList(AllZone.Computer_Play.getCards());
+        	list = list.getType("World");
+        	if(list.size() > 0) return false;
+        }
         
         return true;
     }//canPlayAI()
