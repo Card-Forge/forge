@@ -6,4 +6,5 @@ A:SP$Dig | Cost$ 1 U | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ChangeValid$ 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/peer_through_depths.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/78.jpg
 End
