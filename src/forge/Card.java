@@ -2797,7 +2797,7 @@ public class Card extends MyObservable {
  			
              else if (Property.startsWith("notattacking")) { if(isAttacking())  return false;}
  			
-             else if (Property.startsWith("blocking")) { if(!isBlocking())  return false;}
+             else if (Property.equals("blocking")) { if(!isBlocking())  return false;}
         
              else if (Property.startsWith("blockingSource")) { if(!isBlocking(source))  return false;}
 		
