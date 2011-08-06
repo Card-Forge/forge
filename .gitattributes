@@ -4567,6 +4567,7 @@ res/quest/easy.txt -text svneol=native#text/plain
 res/quest/hard.txt -text svneol=native#text/plain
 res/quest/medium.txt -text svneol=native#text/plain
 res/quest/price.txt -text svneol=native#text/plain
+res/quest/quest.preferences -text
 res/quest/quest.properties svneol=native#text/plain
 res/quest/questData -text svneol=unset#unset
 res/quest/quests.txt -text svneol=native#text/plain
@@ -4774,6 +4775,7 @@ src/forge/PrintCardNames.java svneol=native#text/plain
 src/forge/PrintCardPictures.java svneol=native#text/plain
 src/forge/QuestData.java svneol=native#text/plain
 src/forge/QuestData_BoosterPack.java svneol=native#text/plain
+src/forge/QuestData_Prefs.java -text svneol=native#text/plain
 src/forge/QuestData_State.java svneol=native#text/plain
 src/forge/QuestUtil.java -text svneol=native#text/plain
 src/forge/Quest_Assignment.java -text svneol=native#text/plain

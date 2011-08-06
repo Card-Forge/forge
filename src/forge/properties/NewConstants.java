@@ -99,6 +99,7 @@ public interface NewConstants {
         public static final String HARD     = "quest/hard";
         
         public static final String DATA     = "quest/data";
+        public static final String PREFS    = "quest/prefs";
         
         public static final String DECKS    = "quest/decks-dir";
     }

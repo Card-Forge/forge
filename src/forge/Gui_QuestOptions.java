@@ -96,7 +96,7 @@ public class Gui_QuestOptions extends JFrame {
         JRadioButton[] b = {easyRadio, mediumRadio, hardRadio, veryHardRadio};
         
         for(int i = 0; i < diff.length; i++) {
-            b[i].setText(diff[i] + " - " + questData.getTotalNumberOfGames(diff[i]));
+            b[i].setText(diff[i] + " - " + questData.getTotalNumberOfGames(i));
         }
         
     }//setupRadioButtonText()
@@ -204,20 +204,20 @@ public class Gui_QuestOptions extends JFrame {
     }
     
     void newQuestButton_actionPerformed(ActionEvent e) {
-        String difficulty = "";
+        int difficulty = 0;
 
         String mode = "Realistic";
         
         if (fantasyRadio.isSelected())
         	mode = "Fantasy";
         
-        if(easyRadio.isSelected()) difficulty = questData.EASY;
+        if(easyRadio.isSelected()) difficulty = 0;
         
-        else if(mediumRadio.isSelected()) difficulty = questData.MEDIUM;
+        else if(mediumRadio.isSelected()) difficulty = 1;
         
-        else if(hardRadio.isSelected()) difficulty = questData.HARD;
+        else if(hardRadio.isSelected()) difficulty = 2;
         
-        else if(veryHardRadio.isSelected()) difficulty = questData.VERY_HARD;
+        else if(veryHardRadio.isSelected()) difficulty = 3;
         
         else //user didn't select a difficulty
         return;

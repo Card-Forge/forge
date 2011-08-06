@@ -1,7 +1,6 @@
 
 package forge;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -29,25 +28,8 @@ import forge.properties.NewConstants;
 //OR non-static readAIQuestDeckFiles()
 //which reads the files "questDecks-easy", "questDecks-medium","questDecks-hard",
 public class QuestData implements NewConstants {
-    public final String           EASY            = "Easy";
-    public final String           MEDIUM          = "Medium";
-    public final String           HARD            = "Hard";
-    public final String           VERY_HARD       = "Very Hard";
-    
-    //easy, medium, hard, very hard
-    //easy gets a new booster pack after 1 wins
-    //medium gets a new booster pack after after 1 wins, etc...
-    //hard gets a new booster pack after after 2 wins, etc...
-    //very hard gets a new booster pack after after 2 wins, etc...
-    //these numbers are just guesses
-    private int[]                 addCardsArray   = {1, 1, 2, 2};
-    
-    //easy, medium, hard, very hard
-    //easy gets a new "rank" after 1 wins
-    //medium, gets a new "rank" after 2 wins
-    //these numbers are just guesses
-    private int[]                 rankChangeArray = {1, 2, 3, 4};
-    
+	QuestData_Prefs qdPrefs = null;
+
     private int                   rankIndex;
     private int                   win;
     private int                   lost;
@@ -70,7 +52,8 @@ public class QuestData implements NewConstants {
     
     private long				  credits;
     
-    private String                difficulty;
+    private int					  diffIndex;
+    private String             	  difficulty;
     private String				  mode = "";
 
     private ArrayList<String>     easyAIDecks;
@@ -99,60 +82,40 @@ public class QuestData implements NewConstants {
             "Level 3 - Shattered the Competition", "Level 4 - Black Knighted", "Level 5 - Shockingly Good",
             "Level 6 - Regressed into Timmy", "Level 7 - Loves Blue Control", "Level 8 - Immobilized by Fear",
             "Level 9 - Lands = Friends", "Saltblasted for your talent", "Serra Angel is your girlfriend",};
-    
-    /*  
-      private String[] rankArray =
-      {
-        "Level 0 - Interested Newbie"  ,
-        "Level 1 - Card Flopper"       ,
-        "Level 2 - Friday Night Winner",
-        "Level 3 - Store Champion"     ,
-        "Level 4 - Card Crusher"       ,
-        "Level 5 - PTQ Player"         ,
-        "Level 6 - PTQ Winner"         ,
-        "Level 7 - Pro Wannabe"        ,
-        "Level 8 - Pro-Tour Winner"    ,
-        "Level 9 - Better Than Jon Finkel"  ,
-        "Level 10 - World Champion - You Win",
-        "Secret Level - Magic God"
-      };
-    */
 
-    public QuestData() {
-        for(int i = 0; i < 20; i++) {
+    public QuestData(){
+    	qdPrefs = new QuestData_Prefs();		
+    	
+        for(int i = 0; i < qdPrefs.getStartingBasic(); i++) {
             cardPool.add("Forest");
             cardPool.add("Mountain");
             cardPool.add("Swamp");
             cardPool.add("Island");
             cardPool.add("Plains");
+        }
+        
+        for(int i = 0; i < qdPrefs.getStartingSnowBasic(); i++) {
             cardPool.add("Snow-Covered Forest");
             cardPool.add("Snow-Covered Mountain");
             cardPool.add("Snow-Covered Swamp");
             cardPool.add("Snow-Covered Island");
             cardPool.add("Snow-Covered Plains");
-        }//for
+        }
     }//QuestData
     
     //adds cards to card pool and sets difficulty
     @SuppressWarnings("unchecked")
-    public void newGame(String difficulty, String m) {
+    public void newGame(int difficulty, String m) {
         setDifficulty(difficulty);
         
-        int[][] totals = { {45, 20, 10}, //easy, 45 common, 20 uncommon, 10 rares
-                {40, 15, 10} //everything else
-        };
-        
-        int n = 1;
-        if(difficulty.equals(EASY)) n = 0;
-        
         ArrayList<String> list = new ArrayList<String>();
-        list.addAll(boosterPack.getCommon(totals[n][0]));
-        list.addAll(boosterPack.getUncommon(totals[n][1]));
-        list.addAll(boosterPack.getRare(totals[n][2]));
+        list.addAll(boosterPack.getCommon(qdPrefs.getStartingCommons(difficulty)));
+        list.addAll(boosterPack.getUncommon(qdPrefs.getStartingUncommons(difficulty)));
+        list.addAll(boosterPack.getRare(qdPrefs.getStartingRares(difficulty)));
         
         //because cardPool already has basic land added to it
         cardPool.addAll(list);
-        credits = 250;
+        credits = qdPrefs.getStartingBasic();
         
         mode = m;
         if (mode.equals("Fantasy"))
@@ -162,22 +125,12 @@ public class QuestData implements NewConstants {
     }
     
     
-    public String[] getOpponents() {
-        int difficulty[][] = {
-        //if getWin() is < 5 return use easyAIDecks
-                //if getWin() is < 8 return mediumAIDecks
-                //else use hardAIDecks
-                {5, 8}, //easy difficulty
-                {5, 8}, //medium difficulty
-                {10, 20},//hard difficulty
-                {10, 20},//very hard difficulty
-        };
+    public String[] getOpponents() {     
+        int index = getDiffIndex();
         
-        int index = convertDifficultyToIndex(getDifficulty());
+        if(getWin() < qdPrefs.getWinsForMediumAI(index)) return getOpponents(easyAIDecks);
         
-        if(getWin() < difficulty[index][0]) return getOpponents(easyAIDecks);
-        
-        if(getWin() < difficulty[index][1]) return getOpponents(mediumAIDecks);
+        if(getWin() < qdPrefs.getWinsForHardAI(index)) return getOpponents(mediumAIDecks);
         
         return getOpponents(hardAIDecks);
     }//getOpponents()
@@ -187,14 +140,12 @@ public class QuestData implements NewConstants {
         data.easyAIDecks = readFile(ForgeProps.getFile(QUEST.EASY), aiDeckNames);
         data.mediumAIDecks = readFile(ForgeProps.getFile(QUEST.MEDIUM), aiDeckNames);
         data.hardAIDecks = readFile(ForgeProps.getFile(QUEST.HARD), aiDeckNames);
-        
     }
     
     public void refreshAIQuestDeckFiles(ArrayList<String> aiDeckNames) {
         easyAIDecks = readFile(ForgeProps.getFile(QUEST.EASY), aiDeckNames);
         mediumAIDecks = readFile(ForgeProps.getFile(QUEST.MEDIUM), aiDeckNames);
         hardAIDecks = readFile(ForgeProps.getFile(QUEST.HARD), aiDeckNames);
-        
     }
     
     public String[] getOpponents(ArrayList<String> aiDeck) {
@@ -250,12 +201,12 @@ public class QuestData implements NewConstants {
             
             QuestData data = new QuestData();
             
-            
             data.win = state.win;
             data.lost = state.lost;
             data.credits = state.credits;
             data.rankIndex = state.rankIndex;
-            data.difficulty = state.difficulty;
+            data.difficulty = state.difficulty;           
+            
             data.mode = state.mode;
             if (data.mode == null)
             	data.mode = "Realistic";
@@ -439,9 +390,9 @@ public class QuestData implements NewConstants {
     //(I chose 11 cards instead of 15 in order to make things more challenging)
     @SuppressWarnings("unchecked")
     public void addCards() {
-        int nCommon = 7;
-        int nUncommon = 3;
-        int nRare = 1;
+        int nCommon = qdPrefs.getNumCommon();
+        int nUncommon = qdPrefs.getNumUncommon();
+        int nRare = qdPrefs.getNumRare();
         
         ArrayList<String> newCards = new ArrayList<String>();
         newCards.addAll(boosterPack.getCommon(nCommon));
@@ -539,13 +490,13 @@ public class QuestData implements NewConstants {
     
     public long getCreditsToAdd(WinLose winLose)
     {
-    	long creds = (long) (10 + (0.3 * win));
+    	long creds = (long) (qdPrefs.getMatchRewardBase() + (qdPrefs.getMatchRewardTotalWins() * win));
     	String[] wins = winLose.getWinMethods();
     	int[] winTurns = winLose.getWinTurns();
     	boolean[] mulliganedToZero = winLose.getMulliganedToZero();
     	
     	if (winLose.getLose() == 0)
-    		creds += 10;
+    		creds += qdPrefs.getMatchRewardNoLosses();
     	
     	for(String s : wins)
     	{
@@ -553,27 +504,27 @@ public class QuestData implements NewConstants {
 	    		if (s.equals("Poison Counters") || s.equals("Milled") || s.equals("Battle of Wits") || 
 	    			s.equals("Felidar Sovereign") || s.equals("Helix Pinnacle") || s.equals("Epic Struggle") ||
 	    			s.equals("Door to Nothingness") || s.equals("Barren Glory") || s.equals("Near-Death Experience")) {
-	    			creds+=100;
+	    			creds += qdPrefs.getMatchRewardAltWinBonus();
 	    		}
     		}
     	}
     	for (int i : winTurns)
     	{
     		if (i == 1)
-    			creds+=1500;
+    			creds += qdPrefs.getMatchRewardWinFirst();
 			else if (i <= 5)
-				creds+=250;
+				creds += qdPrefs.getMatchRewardWinByFifth();
 			else if (i <= 10)
-				creds+=50;
+				creds += qdPrefs.getMatchRewardWinByTen();
 			else if (i <= 15)
-				creds+=5;
+				creds += qdPrefs.getMatchRewardWinByFifteen();
     	}
     	
     	
     	for (boolean b : mulliganedToZero)
     	{
     		if (b == true)
-    			creds+=500;
+    			creds += qdPrefs.getMatchMullToZero();
     	}
     	
     	if (getEstatesLevel() == 1)
@@ -595,10 +546,10 @@ public class QuestData implements NewConstants {
     }
     
     
-    public int getTotalNumberOfGames(String difficulty) {
+    public int getTotalNumberOfGames(int difficulty) {
         //-2 because you start a level 1, and the last level is secret
         int numberLevels = rankArray.length - 2;
-        int nMatches = rankChangeArray[convertDifficultyToIndex(difficulty)];
+        int nMatches = qdPrefs.getWinsForRankIncrease(difficulty);
         
         return numberLevels * nMatches;
     }
@@ -606,26 +557,9 @@ public class QuestData implements NewConstants {
     //this changes getRank()
     public void addWin() {
         win++;
-        
-        int n = convertDifficultyToIndex();
-        
-        if(win % rankChangeArray[n] == 0) rankIndex++;
+               
+        if(win % qdPrefs.getWinsForRankIncrease(diffIndex) == 0) rankIndex++;
     }//addWin()
-    
-    private int convertDifficultyToIndex() {
-        return convertDifficultyToIndex(getDifficulty());
-    }
-    
-    private int convertDifficultyToIndex(String difficulty) {
-        String s = difficulty;
-        
-        if(s.equals(EASY)) return 0;
-        if(s.equals(MEDIUM)) return 1;
-        if(s.equals(HARD)) return 2;
-        
-        //VERY_HARD
-        return 3;
-    }//convertDifficultyToIndex()
     
     public void addLost() {
         lost++;
@@ -795,12 +729,17 @@ public class QuestData implements NewConstants {
         return difficulty;
     }
     
-    public void setDifficulty(String s) {
-        difficulty = s;
+    public int getDiffIndex() {
+        return diffIndex;
+    }
+    
+    public void setDifficulty(int i) {
+    	diffIndex = i;
+    	difficulty = qdPrefs.getDifficulty(i);
     }
     
     public String[] getDifficutlyChoices() {
-        return new String[] {EASY, MEDIUM, HARD, VERY_HARD};
+        return qdPrefs.getDifficulty();
     }
     
     public String getRank() {
@@ -812,7 +751,7 @@ public class QuestData implements NewConstants {
     
     //add cards after a certain number of wins or losses
     public boolean shouldAddCards(boolean didWin) {
-        int n = addCardsArray[convertDifficultyToIndex()];
+        int n = qdPrefs.getWinsForBooster(diffIndex);
         
         if(didWin) return getWin() % n == 0;
         else return getLost() % n == 0;
