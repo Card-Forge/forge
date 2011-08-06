@@ -40,7 +40,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
     	PlayerZone lib = AllZone.getZone(Constant.Zone.Library, c.getOwner());
        	PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getOwner());
        	
-       	grave.add(c);
+       	grave.addOnce(c);
        	grave.remove(c);
        	lib.add(c);
        	AllZone.GameAction.shuffle(c.getOwner());
@@ -78,6 +78,16 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
 
     cards.add((Card)c);
     update();
+  }
+  
+  //hack... use for adding Dread / Serra Avenger to grave
+  public void addOnce(Object o)
+  {
+	  Card c = (Card)o;
+	  c.addObserver(this);
+	  
+	  cards.add((Card)c);
+	  update();
   }
   public void update(Observable ob, Object object)
   {

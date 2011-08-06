@@ -15,6 +15,7 @@ interface IPlayerZone
   public int size();
   public void add(Object o);
   public void add(Card c, int index);
+  public void addOnce(Object o);
 
   public Card get(int index);
   public void remove(Object o);
