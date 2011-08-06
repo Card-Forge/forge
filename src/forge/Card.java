@@ -32,6 +32,7 @@ public class Card extends MyObservable {
     private ArrayList<String>            type                              = new ArrayList<String>();
     private ArrayList<String>            prevType                          = new ArrayList<String>();
     private ArrayList<String>            ChoicesMade                 	   = new ArrayList<String>();
+    private ArrayList<String>            Targets_for_Choices               = new ArrayList<String>();
     private ArrayList<SpellAbility>      spellAbility                      = new ArrayList<SpellAbility>();
     private ArrayList<Ability_Mana>      manaAbility                       = new ArrayList<Ability_Mana>();
     
@@ -731,6 +732,19 @@ public class Card extends MyObservable {
     public String getChoice(int i) {
     	return ChoicesMade.get(i);
     }
+    
+    public void setSpellChoiceTarget(String string)
+    {
+    	Targets_for_Choices.add(string);
+    }
+    
+    public ArrayList<String> getChoiceTargets() {
+    	return Targets_for_Choices;
+    }
+    public String getChoiceTarget(int i) {
+    	return Targets_for_Choices.get(i);
+    }
+    
     public void setSpellWithChoices(boolean b)
     {
     	SpellwithChoices = b;

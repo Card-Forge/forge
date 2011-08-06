@@ -183,6 +183,9 @@ public class CardFactory implements NewConstants {
 			for(int i = 0; i < in.getChoices().size(); i++) {
 				c.addSpellChoice(in.getChoice(i));
 			}
+			for(int i = 0; i < in.getChoiceTargets().size(); i++) {
+				c.setSpellChoiceTarget(in.getChoiceTarget(i));
+			}
 		}
 		}
 		for(int i = 0; i < sa.length; i++) {
@@ -10466,9 +10469,13 @@ public class CardFactory implements NewConstants {
 //          System.out.println(m_land[0]);
 //          System.out.println(m_player[0]);
                     //"Incendiary Command deals 4 damage to target player",
-                    if(userChoice.contains(cardChoice[0]) || card.getChoices().contains(cardChoice[0])) 
-                    	AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(4);
-                    
+        			for(int i = 0; i <card.getChoices().size(); i++) {
+        				if(card.getChoice(i).equals(cardChoice[0])) {
+        					setTargetPlayer(card.getChoiceTarget(0)); 
+        					AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(4);
+        				}
+        			}
+
                     //"Incendiary Command deals 2 damage to each creature",
                     if(userChoice.contains(cardChoice[1]) || card.getChoices().contains(cardChoice[1])) {
                         //get all creatures
@@ -10484,8 +10491,22 @@ public class CardFactory implements NewConstants {
                     }
                     
                     //"Destroy target nonbasic land",
-                    if(userChoice.contains(cardChoice[2]) || card.getChoices().contains(cardChoice[2])) AllZone.GameAction.destroy(getTargetCard());
-                    
+        			for(int i = 0; i <card.getChoices().size(); i++) {
+        				if(card.getChoice(i).equals(cardChoice[2])) {
+        			        PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+        			        PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+        			     //   CardList all = AllZone.CardFactory.getAllCards();
+        			        CardList all = new CardList(Hplay.getCards());
+        			        all.add(new CardList(Cplay.getCards()));
+        			        for(int i2 = 0; i2 < all.size(); i2++) {
+        			        if(String.valueOf(all.get(i2).getUniqueNumber()).equals(card.getChoiceTarget(card.getChoices().size() - 1))) {
+        			        	setTargetCard(all.get(i2));	
+            					AllZone.GameAction.destroy(getTargetCard());
+        			        }
+        			        }
+        				}
+        			}
+
                     //"Each player discards all cards in his or her hand, then draws that many cards"
                     if(userChoice.contains(cardChoice[3]) || card.getChoices().contains(cardChoice[3])) {
                         discardDraw(Constant.Player.Computer);
@@ -10550,8 +10571,10 @@ public class CardFactory implements NewConstants {
                 @Override
                 public void selectCard(Card c, PlayerZone zone) {
                     if(c.isLand() && zone.is(Constant.Zone.Play) && !c.getType().contains("Basic")) {
+                    	if(card.isCopiedSpell()) card.getChoiceTargets().remove(0);
                         m_land[0] = c;
                         spell.setTargetCard(c);
+                        card.setSpellChoiceTarget(String.valueOf(c.getUniqueNumber()));
                         setStackDescription.execute();                        
                         stopSetNext(new Input_PayManaCost(spell));
                     }//if
@@ -10574,8 +10597,10 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void selectPlayer(String player) {
+                	if(card.isCopiedSpell()) card.getChoiceTargets().remove(0);
                     m_player[0] = player;
                     spell.setTargetPlayer(player);
+                    card.setSpellChoiceTarget(player);
                     setStackDescription.execute();
                     //if user needs to target nonbasic land
                     if(userChoice.contains(cardChoice[2]) || card.getChoices().contains(cardChoice[2])) stopSetNext(targetLand);
@@ -10604,7 +10629,8 @@ public class CardFactory implements NewConstants {
                     //reset variables
                     m_player[0] = null;
                     m_land[0] = null;
-                    
+                    card.getChoices().clear();
+                    card.getChoiceTargets().clear();
                     userChoice.clear();
                     
                     ArrayList<String> display = new ArrayList<String>();
