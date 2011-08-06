@@ -188,6 +188,19 @@ public class AbilityFactory_Token extends AbilityFactory {
 		if (!ComputerUtil.canPayCost(sa))	// If there is a cost payment it's usually not mandatory
 			return false;
 
+		for(String type : tokenTypes){
+			if (type.equals("Legendary")){
+				// Don't kill AIs Legendary tokens
+				if (AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer, tokenName).size() > 0)
+					return false;
+				
+				// Kill Human's Legendary tokens
+				if (AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer, tokenName).size() > 0)
+					return true;
+			}
+		}
+		
+		
 		if (AbilityFactory.playReusable(sa))
 			return true;
 

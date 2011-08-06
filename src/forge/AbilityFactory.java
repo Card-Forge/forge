@@ -651,10 +651,10 @@ public class AbilityFactory {
 	}
 	
 	public static boolean playReusable(SpellAbility sa){
-		// TODO make sure AI has the next turn. 
 		// TODO probably also consider if winter orb or similar are out
-		return (sa.getPayCosts().isReusuableResource() && 
-				AllZone.Phase.is(Constant.Phase.End_Of_Turn, AllZone.HumanPlayer));
+
+		return (sa.getPayCosts().isReusuableResource() && AllZone.Phase.is(Constant.Phase.End_Of_Turn) 
+				&& AllZone.Phase.isNextTurn(AllZone.ComputerPlayer));
 	}
 	
 	public static boolean isSorcerySpeed(SpellAbility sa){

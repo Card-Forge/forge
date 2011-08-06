@@ -444,6 +444,18 @@ public class Phase extends MyObservable
         return turn;
     }
 
+    public Player getNextTurn(){
+    	if (extraTurns.isEmpty())
+    		return getPlayerTurn().getOpponent();
+    	
+    	return extraTurns.peek();
+    }
+    
+    public boolean isNextTurn(Player pl){
+    	Player next = getNextTurn();
+    	return (pl.equals(next));
+    }
+    
     public void addExtraTurn(Player player) {
     	// use a stack to handle extra turns, make sure the bottom of the stack restores original turn order
     	if (extraTurns.isEmpty())
