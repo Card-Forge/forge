@@ -4540,7 +4540,15 @@ public class CardFactory_Creatures {
 	          PlayerZone myPlay = AllZone.getZone(Constant.Zone.Play, card.getController());
 
 	          CardList list = new CardList(myPlay.getCards());
-	          list.remove(card);//doesn't move Sky Swallower
+	          //list.remove(card);//doesn't move Sky Swallower
+	          
+	          list = list.filter(new CardListFilter()
+	          {
+				public boolean addCard(Card c) {
+					return c.getName().equals("");
+				}
+	          });
+	          
 	          while(! list.isEmpty())
 	          {
 	        	((PlayerZone_ComesIntoPlay)AllZone.Human_Play).setTriggers(false);

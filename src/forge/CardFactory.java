@@ -16598,6 +16598,150 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     }//*************** END ************ END **************************
     
     
+  //*************** START *********** START **************************
+    else if(cardName.equals("Seal of Cleansing") || cardName.equals("Seal of Primordium") )
+    {
+      final Ability ability = new Ability(card, "0")
+      {
+        public boolean canPlayAI() {return getArtEnchantments().size() != 0;}
+
+        public void chooseTargetAI()
+        {
+          
+          CardList list = getArtEnchantments();
+          if (list.size() > 0)
+          {
+	          CardListUtil.sortCMC(list);
+	          list.reverse();
+	          setTargetCard(list.get(0));
+	          AllZone.GameAction.sacrifice(card);
+          }
+        }//chooseTargetAI()
+        CardList getArtEnchantments()
+        {
+       
+          PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+          CardList list = new CardList(play.getCards());
+          list = list.filter(new CardListFilter()
+          {
+            public boolean addCard(Card c)
+            {
+              return c.isArtifact() || c.isEnchantment();
+            }
+          });
+          return list;
+        }//getArtEnchantments()
+
+        public void resolve()
+        {
+          if(getTargetCard() != null)
+          {
+            if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
+              AllZone.GameAction.destroy(getTargetCard());
+          }
+        }//resolve()
+      };//SpellAbility
+      
+      Input runtime = new Input()
+      {
+		private static final long serialVersionUID = -1750678113925588670L;
+
+		public void showMessage()
+        {
+			card.addSpellAbility(ability);
+		    ability.setDescription("Sacrifice " +cardName +": destroy target artifact or enchantment.");
+		      
+		    PlayerZone hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+		    PlayerZone cplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+		    CardList choices = new CardList();
+		    choices.addAll(hplay.getCards());
+		    choices.addAll(cplay.getCards());
+		      
+		    choices = choices.filter(new CardListFilter()
+		    {
+		    	public boolean addCard(Card c) {
+					return c.isEnchantment() || c.isArtifact();
+		    	}
+		    });
+	          stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choices, "Destroy target artifact or enchantment", new Command()
+	          {
+	              
+	      		private static final long serialVersionUID = -4987328870651000691L;
+	
+	      		public void execute()
+	              {
+	                AllZone.GameAction.sacrifice(card);
+	              }
+	            }, true));
+        }
+      };
+      
+      ability.setDescription("Sacrifice " + card.getName() + ": destroy target artifact or enchantment.");
+      ability.setBeforePayMana(runtime);
+      card.addSpellAbility(ability);
+      
+    }//*************** END ************ END **************************
+    
+    //*************** START *********** START **************************
+    else if(cardName.equals("Seal of Fire"))
+    {
+      final Ability ability = new Ability(card, "0")
+      {
+        public boolean canPlayAI() {return getCreature().size() != 0;}
+
+        public void chooseTargetAI()
+        {
+          if(AllZone.Human_Life.getLife() < 4)
+            setTargetPlayer(Constant.Player.Human);
+          else
+          {
+            CardList list = getCreature();
+            list.shuffle();
+            setTargetCard(list.get(0));
+          }
+          AllZone.GameAction.sacrifice(card);
+        }//chooseTargetAI()
+        CardList getCreature()
+        {
+          //toughness of 1
+          CardList list = CardFactoryUtil.AI_getHumanCreature(2, card, true);
+          list = list.filter(new CardListFilter()
+          {
+            public boolean addCard(Card c)
+            {
+              //only get 1/1 flyers or 2/1 creatures
+              return (2 <= c.getNetAttack()) || c.getKeyword().contains("Flying");
+            }
+          });
+          return list;
+        }//getCreature()
+
+        public void resolve()
+        {
+          if(getTargetCard() != null)
+          {
+            if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
+              getTargetCard().addDamage(2);
+          }
+          else
+            AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(2);
+        }//resolve()
+      };//SpellAbility
+
+      card.addSpellAbility(ability);
+      ability.setDescription("Sacrifice Seal of Fire: Seal of Fire deals 2 damage to target creature or player.");
+      ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, new Command()
+      {
+		private static final long serialVersionUID = 4180346673509230280L;
+
+		public void execute()
+        {
+          AllZone.GameAction.sacrifice(card);
+        }
+      }, true));
+    }//*************** END ************ END **************************
+    
+    
     // Cards with Cycling abilities
     // -1 means keyword "Cycling" not found
     if (hasKeyword(card, "Cycling") != -1)

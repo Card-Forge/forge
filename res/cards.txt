@@ -1,3 +1,18 @@
+Seal of Fire
+R
+Enchantment
+no text
+
+Seal of Primordium
+1 G
+Enchantment
+no text
+
+Seal of Cleansing
+1 W
+Enchantment
+no text
+
 Boreal Griffin
 3 W W
 Snow Creature Griffin
