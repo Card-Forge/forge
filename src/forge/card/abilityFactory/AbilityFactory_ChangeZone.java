@@ -494,9 +494,11 @@ public class AbilityFactory_ChangeZone {
         Card card = af.getHostCard();
 		Target tgt = af.getAbTgt();
 		if (tgt != null){
-			player = tgt.getTargetPlayers().get(0);
-			if (!player.canTarget(sa.getSourceCard()))
-				return;
+			if(!tgt.getTargetPlayers().isEmpty()) {
+				player = tgt.getTargetPlayers().get(0);
+				if (!player.canTarget(sa.getSourceCard()))
+					return;
+			}
 		}
 
 		String origin = params.get("Origin");
@@ -579,9 +581,11 @@ public class AbilityFactory_ChangeZone {
 		Card card = af.getHostCard();
 		
 		if (tgt != null){
-			player = tgt.getTargetPlayers().get(0);
-			if (!player.canTarget(sa.getSourceCard()))
-				return;
+			if(!tgt.getTargetPlayers().isEmpty()) {
+				player = tgt.getTargetPlayers().get(0);
+				if (!player.canTarget(sa.getSourceCard()))
+					return;
+			}
 		}
 		
 		String origin = params.get("Origin");
