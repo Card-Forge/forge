@@ -1,6 +1,6 @@
 Name:Skeleton Ship
 ManaCost:3 U B
-Types:Creature Skeleton
+Types:Legendary Creature Skeleton
 Text:no text
 PT:0/3
 K:When you control no Islands, sacrifice CARDNAME.

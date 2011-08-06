@@ -1,6 +1,6 @@
 Name:Spirit of the Night
 ManaCost:6 B B B
-Types:Creature Demon Spirit
+Types:Legendary Creature Demon Spirit
 Text:no text
 PT:6/5
 K:Flying
