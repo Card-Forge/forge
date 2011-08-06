@@ -295,7 +295,7 @@ public class CombatUtil {
         }
         
         if(c.isTapped() || c.hasSickness() || c.getKeyword().contains("Defender") || moatPrevented
-                || oppControlsBlazingArchon(c) || c.getKeyword().contains("This creature can't attack")
+                || oppControlsBlazingArchon(c) || c.getKeyword().contains("CARDNAME can't attack.")
                 || c.getKeyword().contains("CARDNAME can't attack or block.")) return false;
         
         //if Card has Haste, Card.hasSickness() will return false

@@ -1826,12 +1826,12 @@ public class CardFactoryUtil {
                 
                 //else we may need to filter the list and remove inappropriate targets
                 
-                // If extrinsicKeywords contains "This creature can't attack" or "CARDNAME can't attack or block."
+                // If extrinsicKeywords contains "CARDNAME can't attack." or "CARDNAME can't attack or block."
                 //     then remove creatures with Defender from the list
                 
                 final ArrayList<String> extKeywords = new ArrayList<String>(Arrays.asList(extrinsicKeywords));
                 
-                if (extKeywords.contains("This creature can't attack") || extKeywords.contains("CARDNAME can't attack or block.")) {
+                if (extKeywords.contains("CARDNAME can't attack.") || extKeywords.contains("CARDNAME can't attack or block.")) {
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                         	return c.isCreature() && !c.getKeyword().contains("Defender");

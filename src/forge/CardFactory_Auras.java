@@ -1649,7 +1649,7 @@ class CardFactory_Auras {
                 public void execute() {
                     if(card.isEnchanting()) {
                         Card crd = card.getEnchanting().get(0);
-                        crd.addExtrinsicKeyword("This creature can't attack");
+                        crd.addExtrinsicKeyword("CARDNAME can't attack.");
                     }
                 }//execute()
             };//Command
@@ -1661,7 +1661,7 @@ class CardFactory_Auras {
                 public void execute() {
                     if(card.isEnchanting()) {
                         Card crd = card.getEnchanting().get(0);
-                        crd.removeExtrinsicKeyword("This creature can't attack");
+                        crd.removeExtrinsicKeyword("CARDNAME can't attack.");
                     }
                     
                 }//execute()

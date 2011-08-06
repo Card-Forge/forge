@@ -1,3 +1,18 @@
+Cagemail
+1 W
+Enchantment Aura
+Enchanted creature gets +2/+2 and can't attack.
+Enchant creature
+enPumpCurse:+2/+2/CARDNAME can't attack.
+
+Cessation
+2 W
+Enchantment Aura
+Enchanted creature can't attack.
+Enchant creature
+enPumpCurse:CARDNAME can't attack.
+When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+
 Bound in Silence
 2 W
 Tribal Enchantment Rebel Aura
@@ -188,14 +203,6 @@ Enchantment Aura
 Enchanted creature gets +1/+2.
 Enchant creature
 enPump:+1/+2
-When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
-
-Cessation
-2 W
-Enchantment Aura
-Enchanted creature can't attack.
-Enchant creature
-enPumpCurse:This creature can't attack
 When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
 
 Despondency
@@ -3085,13 +3092,6 @@ Goblin Assault
 2 R
 Enchantment
 At the beginning of your upkeep, put a 1/1 red Goblin creature token with haste onto the battlefield. Goblin creatures attack each turn if able.
-
-Cagemail
-1 W
-Enchantment Aura
-Enchanted creature gets +2/+2 and can't attack.
-Enchant creature
-enPumpCurse:+2/+2/This creature can't attack
 
 Cursed Flesh
 B
