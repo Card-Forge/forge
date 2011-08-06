@@ -4,6 +4,6 @@ Types:Creature Human Wizard
 Text:no text
 PT:1/2
 SVar:Rarity:Uncommon
-SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card88946.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wojek_embermage.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/152.jpg
 End
