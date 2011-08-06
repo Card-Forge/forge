@@ -3059,6 +3059,8 @@ public class CardFactory implements NewConstants {
         }//spBounceTgt
 */
         
+        // All cards using etbBounceTgt converted to use AF + Triggers.
+        /*
         // Generic bounce when enters the battlefield
         if (hasKeyword(card, "etbBounceTgt") != -1)
         {
@@ -3288,6 +3290,8 @@ public class CardFactory implements NewConstants {
         		card.addSpellAbility(evBounceTgt);
         	}
         } // etbBounceTgt
+        */
+        
 
         /*// Generic bounce all card
         if(hasKeyword(card, "spBounceAll") != -1) {
