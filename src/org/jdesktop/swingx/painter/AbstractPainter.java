@@ -421,7 +421,7 @@ public abstract class AbstractPainter<T> extends AbstractBean implements Painter
             doPaint(g, obj, width, height);
         }
 
-        //painting has occured, so restore the dirty bit to false
+        //painting has occurred, so restore the dirty bit to false
         setDirty(false);
     }
 } 

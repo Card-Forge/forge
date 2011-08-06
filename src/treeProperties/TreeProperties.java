@@ -200,12 +200,12 @@ public class TreeProperties implements Iterable<PropertyElement> {
     }
     
     /**
-     * If exceptions occured during construction, this method throws an IOException that combines the messages of
+     * If exceptions occurred during construction, this method throws an IOException that combines the messages of
      * those exceptions.
      */
     public void rethrow() throws IOException {
         if(exceptions.isEmpty()) return;
-        StringBuilder sb = new StringBuilder("The following exceptions occured:");
+        StringBuilder sb = new StringBuilder("The following exceptions occurred:");
         for(Exception ex:exceptions) {
             sb.append("\n");
             sb.append(ex.getMessage());

@@ -115,7 +115,7 @@ public class ForgeProps {
             //exceptions are skipped here; also the error viewer uses this, and reporting exceptions may result
             //in a more fatal error (stack overflow)
         } catch(Exception ex) {}
-        //if no property was found, or an error occured, return the default value
+        //if no property was found, or an error occurred, return the default value
         return def;
     }
 }

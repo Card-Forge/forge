@@ -32,7 +32,7 @@ import forge.properties.NewConstants;
 
 
 /**
- * The class ErrorViewer. Enables showing and saving error messages that occured in forge.
+ * The class ErrorViewer. Enables showing and saving error messages that occurred in forge.
  * 
  * @version V1.0 02.08.2009
  * @author Clemens Koza
