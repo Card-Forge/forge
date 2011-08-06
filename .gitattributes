@@ -6692,6 +6692,7 @@ res/cardsfolder/tel_jilad_wolf.txt svneol=native#text/plain
 res/cardsfolder/telekinetic_bonds.txt svneol=native#text/plain
 res/cardsfolder/telekinetic_sliver.txt -text svneol=native#text/plain
 res/cardsfolder/telethopter.txt svneol=native#text/plain
+res/cardsfolder/telimtor.txt -text svneol=native#text/plain
 res/cardsfolder/telimtors_darts.txt -text svneol=native#text/plain
 res/cardsfolder/telimtors_edict.txt -text svneol=native#text/plain
 res/cardsfolder/teller_of_tales.txt svneol=native#text/plain
