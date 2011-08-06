@@ -463,6 +463,27 @@ public class QuestUtil {
 			
 			qa.setCardRewardList(pack.getRare(4, 5));
 		}
+		else if (id == 16)  // Mines of Kazum Durl
+		{
+			CardList humanList = new CardList();
+			String cardsInPlay[] = {"Dwarven Demolition Team", "Dwarven Pony", "Dwarven Trader"};
+			
+			for (int i = 0; i < 3; i ++)
+			{
+				Card c = AllZone.CardFactory.getCard(cardsInPlay[i], Constant.Player.Human);
+				humanList.add(c);
+			}
+			qa.setHuman(humanList);
+			
+			qa.addCompy("Wall of Earth");
+			qa.addCompy("Wall of Air");
+			qa.addCompy("Wall of Ice");
+			qa.addCompy("Wall of Light");
+			qa.addCompy("Carrion Wall");
+			qa.addCompy("Steel Wall");
+			
+			qa.setCardRewardList(pack.getRare(4, 4));
+		}
 			
 	}
 	

@@ -148,4 +148,14 @@ Four red rares
 200
 noIcon
 
+16
+Mines of Kazum Durl
+While exploring a mine with a group of dwarves the mine caves in. You start to dig out and then realize that your group is not alone.
+Hard
+Not Repeatable
+50
+Four green rares
+250
+noIcon
+
 End
