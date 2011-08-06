@@ -204,6 +204,14 @@ public class AbilityFactory {
 			}
 		}
 		
+		if (API.equals("Fog")){
+			if (isAb)
+				SA = AbilityFactory_Combat.createAbilityFog(this);
+			if (isSp){
+				SA = AbilityFactory_Combat.createSpellFog(this);
+			}
+		}
+		
 		// *********************************************
 		// set universal properties of the SpellAbility
         if (hasSpDesc)

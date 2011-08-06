@@ -20146,49 +20146,6 @@ public class CardFactory_Creatures {
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
         
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Spike Weaver")) {
-            final SpellAbility fog = new Ability(card, "1") {
-                @Override
-                public void resolve() {
-                	AllZone.GameInfo.setPreventCombatDamageThisTurn(true);
-                }//resolve
-                
-                @Override
-                public boolean canPlay() {
-                    // false until AI can activate things during human combat
-                    return card.getCounters(Counters.P1P1)  > 0;
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    // false until AI can activate things outside of main phases
-                    return false;
-                }
-            };//SpellAbility
-            
-            Input runtime = new Input() {
-				private static final long serialVersionUID = -8190396950879103322L;
-				private boolean paid = false;
-				@Override
-				public void showMessage() {
-					if (!paid)
-					{
-	                	card.subtractCounter(Counters.P1P1, 1);
-	                	paid = true;
-	                	AllZone.Stack.add(fog);
-	                	stop();
-					}
-                }
-            };
-            
-            fog.setAfterPayMana(runtime);
-            fog.setDescription("1, Remove a +1/+1 counter: Prevent all combat damage that would be dealt this turn.");
-            fog.setStackDescription("Prevent all combat damage that would be dealt this turn.");
-            card.addSpellAbility(fog);
-        }//*************** END ************ END **************************
-        
         //*************** START *********** START **************************
         else if (cardName.equals("Yavimaya Elder"))
         {
