@@ -461,6 +461,14 @@ public class AbilityFactory {
 	
 	public static int calculateAmount(Card card, String amount, SpellAbility ability){
 		// amount can be anything, not just 'X' as long as sVar exists
+		
+		// If Amount is -X, strip the minus sign before looking for an SVar of that kind
+		int multiplier = 1;
+		if (amount.startsWith("-")){
+			multiplier = -1;
+			amount = amount.substring(1);
+		}
+		
 		if (!card.getSVar(amount).equals(""))
 		{
 			String calcX[] = card.getSVar(amount).split("\\$");
@@ -469,26 +477,26 @@ public class AbilityFactory {
 			
 			if (calcX[0].startsWith("Count"))
 			{
-				return CardFactoryUtil.xCount(card, calcX[1]);
+				return CardFactoryUtil.xCount(card, calcX[1]) * multiplier;
 			}
 			else if (ability != null && calcX[0].startsWith("Sacrificed"))
 			{
-				return CardFactoryUtil.handlePaid(ability.getSacrificedCost(), calcX[1]);
+				return CardFactoryUtil.handlePaid(ability.getSacrificedCost(), calcX[1]) * multiplier;
 			}
 			else if (ability != null && calcX[0].startsWith("Discarded"))
 			{
-				return CardFactoryUtil.handlePaid(ability.getDiscardedCost(), calcX[1]);
+				return CardFactoryUtil.handlePaid(ability.getDiscardedCost(), calcX[1]) * multiplier;
 			}
 			else if (ability != null && calcX[0].startsWith("Targeted"))
 			{
 				CardList list = new CardList(ability.getTarget().getTargetCards().toArray());
-				return CardFactoryUtil.handlePaid(list, calcX[1]);
+				return CardFactoryUtil.handlePaid(list, calcX[1]) * multiplier;
 			}
 			else
 				return 0;
 		}
 
-		return Integer.parseInt(amount);
+		return Integer.parseInt(amount) * multiplier;
 	}
 }
 
