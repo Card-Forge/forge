@@ -6,4 +6,5 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ 1 G | SpellDescription$ Add 1 G to your mana pool.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jungle_basin.jpg
+SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/164.jpg
 End

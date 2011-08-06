@@ -6,4 +6,5 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ 1 R | SpellDescription$ Add 1 R to your mana pool.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dormant_volcano.jpg
+SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/161.jpg
 End

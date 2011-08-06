@@ -6,4 +6,5 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ 1 B | SpellDescription$ Add 1 B to your mana pool.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/everglades.jpg
+SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/162.jpg
 End
