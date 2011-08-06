@@ -16,7 +16,11 @@ public class MagicStack extends MyObservable
 	  if(sp instanceof Ability_Mana || sp instanceof Ability_Triggered)//TODO make working triggered abilities!
 		  sp.resolve(); 
 	  else {
-		  if (sp.isMultiKicker())
+		  if (!sp.isMultiKicker())
+		  {
+			  push(sp);
+		  }
+		  else //this spell does have multikicker
 		  {   
 			  final SpellAbility sa = sp;
 			  final Ability ability = new Ability(sp.getSourceCard(), sp.getMultiKickerManaCost())
@@ -28,25 +32,33 @@ public class MagicStack extends MyObservable
 				  }
 			  };
 			  
+			  final Command unpaidCommand = new Command()
+			  {
+				  public void execute()
+				  {
+					  push(sa);
+				  }
+			  };
+			  
 			  final Command paidCommand = new Command() {
 				    private static final long serialVersionUID = -6037161763374971106L;
 					public void execute() {
 	                    ability.resolve();
 	                    AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Multikicker for " + sa.getSourceCard() + "\r\n",
-		                        ability.getManaCost(), this, Command.Blank));
+		                        ability.getManaCost(), this, unpaidCommand));
 	                }
 	          };
 			  
 			  if(sp.getSourceCard().getController().equals(Constant.Player.Human)) {
 	                AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Multikicker for " + sp.getSourceCard() + "\r\n",
-	                        ability.getManaCost(), paidCommand, Command.Blank));
+	                        ability.getManaCost(), paidCommand, unpaidCommand));
 	            } 
 			    else //computer
 	            {
 	                while(ComputerUtil.canPayCost(ability)) ComputerUtil.playNoStack(ability);
 	            }
 		  }
-		  push(sp);
+		  
 	  }
   }
   public int size()
