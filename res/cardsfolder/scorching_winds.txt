@@ -1,0 +1,9 @@
+Name:Scorching Winds
+ManaCost:R
+Types:Instant
+Text:Cast CARDNAME only during the declare attackers step and only if you've been attacked this step.\r\n
+A:SP$DamageAll | Cost$ R | NumDmg$ 1 | ValidCards$ Creature.attacking | ValidDescription$ each attacking creature. | OpponentTurn$ True | ActivatingPhases$ Declare Attackers - Play Instants and Abilities | SpellDescription$ CARDNAME deals 1 damage to each attacking creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scorching_winds.jpg
+End
