@@ -87,27 +87,6 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                     AllZone.Stack.add(ability);
             }
             
-            if(c.isCreature() && (c.getType().contains("Elf")) || c.getKeyword().contains("Changeling")) {
-            	CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController(), "Elvish Vanguard");
-                
-            	//not for the Elvish Vanguard coming onto the battlefield now
-            	list.remove(c);
-                for(final Card crd:list) {
-                	Ability ability = new Ability(crd, "0") {
-            			@Override
-            			public void resolve() {
-            				crd.addCounter(Counters.P1P1, 1);
-            			}
-            		};// Ability
-            		
-            		StringBuilder sb = new StringBuilder();
-            		sb.append(crd.getName()).append(" - gets a +1/+1 counter.");
-            		ability.setStackDescription(sb.toString());
-            		
-            		AllZone.Stack.add(ability);
-                }
-            }
-            
             if(c.isType("Scarecrow") && AllZoneUtil.isCardInPlay("Reaper King", c.getController())) {
             	CardList kings = AllZoneUtil.getCardsInPlay("Reaper King");
             	kings.remove(c);
