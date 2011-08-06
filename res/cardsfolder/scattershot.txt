@@ -1,9 +1,9 @@
 Name:Scattershot
 ManaCost:2 R
 Types:Instant
-Text:Scattershot deals 1 damage to target creature.
+Text:no text
+A:SP$DealDamage | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature.
 K:Storm
-SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scattershot.jpg
 SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/102.jpg

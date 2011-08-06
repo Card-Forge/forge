@@ -1,7 +1,8 @@
 Name:Brain Freeze
 ManaCost:1 U
 Types:Instant
-Text:Target player puts the top three cards of his or her library into his or her graveyard.
+Text:no text
+A:SP$Mill | Cost$ 1 U | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player to mill | SpellDescription$ Target player puts the top three cards of his or her library into his or her graveyard.
 K:Storm
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brain_freeze.jpg

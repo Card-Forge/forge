@@ -471,7 +471,7 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell_two);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Astral Steel")) {
            final SpellAbility spell = new Spell(card) {
@@ -562,7 +562,7 @@ public class CardFactory_Instants {
         	card.addSpellAbility(spell);
         	spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END ************************** 
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Reaping the Graves")) {
@@ -998,7 +998,7 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Brain Freeze")) {
             final SpellAbility spell = new Spell(card) {
@@ -1030,7 +1030,7 @@ public class CardFactory_Instants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-       
+       */
         
         //*************** START *********** START **************************
         else if (cardName.equals("Renewed Faith")) { 
