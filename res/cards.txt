@@ -1,3 +1,10 @@
+Brainbite
+2 U B
+Sorcery
+no text
+spDiscardOpp:RevealYouChoose:1:Target opponent reveals his or her hand. You choose a card from it. That player discards that card.:Brainbite - opponent reveals hand and dicards a card
+Draw a card.
+
 Doom Blade
 1 B
 Instant
@@ -14768,12 +14775,6 @@ Monk Realist
 Creature Human Monk Cleric
 When Monk Realist comes into play, destroy target enchantment.
 1/1
-
-Brainbite
-2 U B
-Sorcery
-Target opponent reveals his or her hand. You choose a card from it. That player discards that card.
-Draw a card.
 
 Fable of Wolf and Owl
 3 GU GU GU

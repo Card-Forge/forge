@@ -9726,6 +9726,8 @@ public class CardFactory implements NewConstants {
             spell.setBeforePayMana(new Input_PayManaCost(spell));
         }//*************** END ************ END **************************
         
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Brainbite")) {
             final SpellAbility spell = new Spell(card) {
@@ -9773,6 +9775,8 @@ public class CardFactory implements NewConstants {
             
             spell.setBeforePayMana(new Input_PayManaCost(spell));
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         if(cardName.equals("Midsummer Revel")) {   
