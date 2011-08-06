@@ -1,0 +1,9 @@
+Name:Skinwing
+ManaCost:4
+Types:Artifact Equipment
+Text:no text
+K:eqPump 6:+2/+2/Flying
+K:Living Weapon
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skinwing.jpg
+End

@@ -829,8 +829,10 @@ class CardFactory_Equipment {
                     {
                         if (ptk[i].matches("[\\+\\-][0-9]")) ptk[i] =ptk[i].replace("+", "");
                     }
+
                     Power = Integer.parseInt(ptk[0].trim());
                     Tough = Integer.parseInt(ptk[1].trim());
+
                     
                     if (ptk.length > 2)     // keywords in third cell
                         keywordsUnsplit = ptk[2];
@@ -853,6 +855,37 @@ class CardFactory_Equipment {
                 
             }
         }// eqPump (was VanillaEquipment)
+        
+        if(card.hasKeyword("Living Weapon"))
+        {
+        	card.removeIntrinsicKeyword("Living Weapon");
+        	final Ability etbAbility = new Ability(card,"0")
+        	{
+
+				@Override
+				public void resolve() {
+					String[] types = new String[] { "Creature" , "Germ" };
+					String[] keywords = new String[0];
+					CardList germs = CardFactoryUtil.makeToken("Germ", "B 0 0 Germ", card.getController(), "B", types, 1, 1, keywords);
+					
+					SpellAbility[] equipSA = card.getSpellAbility();
+					SpellAbility specSA = equipSA[equipSA.length-1];
+					specSA.setTargetCard(germs.get(0));
+					specSA.resolve();
+					for(Card c : germs)
+					{
+						c.setBaseAttack(0);
+						c.setBaseDefense(0);
+					}
+				}
+        		
+        	};
+        	
+        	final Trigger etbTrigger = TriggerHandler.parseTrigger("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigOverriding | TriggerDescription$ Living Weapon (When this Equipment enters the battlefield, put a 0/0 black Germ creature token onto the battlefield, then attach this to it.)", card);
+        	etbTrigger.setOverridingAbility(etbAbility);
+        	
+        	card.addTrigger(etbTrigger);
+        }
         
         return card;
     }
