@@ -5,6 +5,8 @@ package forge;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Rectangle;
 // import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
@@ -535,8 +537,22 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         
         //TODO use this as soon the deck editor has resizable GUI
         //Use both so that when "un"maximizing, the frame isn't tiny
+        
         setSize(1024, 740);
-        setExtendedState(Frame.MAXIMIZED_BOTH);
+        Rectangle bounds = getBounds();
+        Dimension screen = getToolkit().getScreenSize();
+        int maxWidth;
+        if (screen.width >= 1400)
+            maxWidth = 1400;
+        else
+            maxWidth = screen.width;
+        bounds.width = maxWidth;
+        bounds.height = screen.height;
+        
+        setMaximizedBounds(bounds);
+        
+        // setSize(1024, 740);
+        // setExtendedState(Frame.MAXIMIZED_BOTH);
     }//setupAndDisplay()
     
     private String getStats(CardList deck) {
