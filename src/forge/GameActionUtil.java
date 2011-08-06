@@ -7953,12 +7953,8 @@ public class GameActionUtil {
 	
 	private static void upkeep_Karma() {
 		final Player player = AllZone.Phase.getActivePlayer();
-		
 		CardList karmas = AllZoneUtil.getCardsInPlay("Karma");
-		
-		PlayerZone activePlayZone = AllZone.getZone(Constant.Zone.Play, player);
-		CardList swamps = new CardList(activePlayZone.getCards());
-		swamps = swamps.getType("Swamp");
+		CardList swamps = AllZoneUtil.getPlayerTypeInPlay(player, "Swamp");
 		
 		// determine how much damage to deal the current player
 		final int damage = swamps.size();
@@ -7972,8 +7968,7 @@ public class GameActionUtil {
 					@Override
 					public void resolve() {
 						if(damage>0){
-							//AllZone.GameAction.addDamage(player, src, 1);
-							player.addDamage(1, src);
+							player.addDamage(damage, src);
 						}
 					}
 				};// Ability
