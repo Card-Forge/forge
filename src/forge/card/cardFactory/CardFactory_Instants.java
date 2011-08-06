@@ -1112,28 +1112,6 @@ public class CardFactory_Instants {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("High Tide")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -4997834721261916L;
-                
-                @Override
-                public boolean canPlayAI() {                   
-                    return false;
-                }//canPlay()
-                
-                @Override
-                public void resolve() {
-                	Phase.getHighTides().add(this.getSourceCard());
-                }//resolve()
-            };//SpellAbility
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-
-        //*************** START *********** START **************************
         else if(cardName.equals("Tithe")) {
             SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 1504792204536793942L;

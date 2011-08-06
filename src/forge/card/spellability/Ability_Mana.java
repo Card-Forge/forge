@@ -76,28 +76,7 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
 		// this.getActivatingPlayer().ManaPool.addManaToFloating(origProduced, getSourceCard());
 		AllZone.ManaPool.addManaToFloating(produced, source);
 
-		// TODO: all of the following would be better as trigger events "tapped for mana"
-		
-		if (source.getType().contains("Swamp")){
-			// If Nirkana Revenant triggers, make mana undoable
-
-			CardList nirkanas = AllZoneUtil.getPlayerCardsInPlay(getActivatingPlayer(), "Nirkana Revenant");
-			int size = nirkanas.size();
-			for(int i = 0; i < size; i++){
-				this.undoable = false;
-				AllZone.ManaPool.addManaToFloating("B", nirkanas.get(i));
-			}
-		}
-		if (source.getType().contains("Island")){
-			// If High Tide triggers, make mana undoable
-			
-			int size = Phase.getHighTides().size();
-			for(int i = 0; i < size; i++){
-				this.undoable = false;
-				AllZone.ManaPool.addManaToFloating("U", Phase.getHighTides().get(i));
-			}
-		}
-		
+		// TODO: all of the following would be better as trigger events "tapped for mana"		
         if(source.getName().equals("Rainbow Vale")) {
         	this.undoable = false;
         	source.addExtrinsicKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.");
