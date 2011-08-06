@@ -3,7 +3,7 @@ ManaCost:4 U
 Types:Creature Surrakar
 Text:When Surrakar Banisher enters the battlefield, you may return target tapped creature to its owner's hand.
 PT:3/3
-K:etbBounceTgtMay:Creature.Tapped:Hand
+K:etbBounceTgtMay:Creature.tapped:Hand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surrakar_banisher.jpg
 End
