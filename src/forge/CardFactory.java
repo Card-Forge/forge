@@ -167,6 +167,23 @@ public class CardFactory implements NewConstants {
         }
       });
     }//if "Comes into play tapped."
+    
+    // Support for using string variables to define Count$ for X or Y
+    // Or just about any other String that a card object needs at any given time
+    while (hasKeyword(card, "SVar") != -1)
+    {
+    	int n = hasKeyword(card, "SVar");
+    	if (n != -1)
+    	{
+    		String parse = card.getKeyword().get(n).toString();
+    		card.removeIntrinsicKeyword(parse);
+    		
+    		String k[] = parse.split(":");
+    		
+    		if (k.length > 2)
+    			card.SetSVar(k[1], k[2]);
+    	}
+    }
 
   //Creatures with simple, self-targeted mana-activated keyword adding abilities
     //-1 means not found
