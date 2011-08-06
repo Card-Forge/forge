@@ -2264,6 +2264,45 @@ public class CardFactory_Instants {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        
+      
+        //*************** START *********** START **************************
+        else if(cardName.equals("Turnabout")) {
+            /*
+             * Choose artifact, creature, or land. Tap all untapped permanents of the chosen
+             * type target player controls, or untap all tapped permanents of that type that
+             * player controls.
+             */
+        	Ability_Cost abCost = new Ability_Cost("2 U U", cardName, false);
+        	Target target = new Target(card, "Select target player", "Player".split(","));
+            final SpellAbility spell = new Spell(card, abCost, target) {
+				private static final long serialVersionUID = -2175586347805121896L;
+
+				@Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+				
+                @Override
+                public void resolve() {
+                	String[] choices = new String[] {"Artifact", "Creature", "Land"};
+                	Object o = GuiUtils.getChoice("Select permanent type", choices);
+                	String cardType = (String)o;
+                	CardList list = AllZoneUtil.getPlayerTypeInPlay(getTargetPlayer(), cardType);
+                	
+                	String[] tapOrUntap = new String[] {"Tap", "Untap"};
+                	Object z = GuiUtils.getChoice("Tap or Untap?", tapOrUntap);
+                	boolean tap = (z.equals("Tap")) ? true : false;
+                	
+                	for(Card c:list) {
+                		if(tap) c.tap();
+                		else c.untap();
+                	}
+                }//resolve()
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
 
     	return card;
     }//getCard
