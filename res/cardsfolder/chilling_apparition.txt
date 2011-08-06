@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Spirit
 Text:Whenever Chilling Apparition deals combat damage to a player, that player discards a card.
 PT:1/1
-K:RegenerateMe:B
+A:AB$Regenerate|Cost$B|SpellDescription$Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chilling_apparition.jpg
 End

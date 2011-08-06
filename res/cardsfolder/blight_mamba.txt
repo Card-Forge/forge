@@ -4,7 +4,7 @@ Types:Creature Snake
 Text:no text
 PT:1/1
 K:Infect
-K:RegenerateMe:1 G
+A:AB$Regenerate|Cost$1 G|SpellDescription$Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blight_mamba.jpg
 End

@@ -4,7 +4,7 @@ Types:Creature Ape
 Text:no text
 PT:3/3
 K:Echo:1 G
-K:RegenerateMe:1 G
+A:AB$Regenerate|Cost$1 G|SpellDescription$Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/albino_troll.jpg
 End
