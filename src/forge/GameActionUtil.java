@@ -3258,11 +3258,7 @@ public class GameActionUtil {
 		//list = list.getType("Creature");
 		list = list.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
-				for(String s : c.getKeyword()){
-					if (s.contains("Suspend"))
-						return true;
-				}
-				return false;
+				return c.hasSuspend();
 			}
 		});
 

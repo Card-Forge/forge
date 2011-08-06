@@ -1583,7 +1583,7 @@ public class CardFactoryUtil {
         suspend.setDescription("Suspend " +suspendCounters + ": "+ suspendCost);
         suspend.setStackDescription(sourceCard + " suspending for " + suspendCounters + " turns.)");
         return suspend;
-    }//ability_cycle()
+    }//ability_suspend()
     
     public static SpellAbility eqPump_Equip(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords, final String Manacost) {
         final Ability equip = new Ability(sourceCard, Manacost) {

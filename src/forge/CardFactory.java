@@ -3445,7 +3445,7 @@ public class CardFactory implements NewConstants {
             if(n != -1) {
                 String parse = card.getKeyword().get(n).toString();
                 card.removeIntrinsicKeyword(parse);
-                
+                card.setSuspend(true);
                 String k[] = parse.split(":");
 
                 final int timeCounters = Integer.parseInt(k[1]);
