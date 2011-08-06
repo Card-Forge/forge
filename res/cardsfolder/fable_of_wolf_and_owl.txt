@@ -1,7 +1,7 @@
 Name:Fable of Wolf and Owl
 ManaCost:3 GU GU GU
 Types:Enchantment
-Text:Whenever you play a green spell, you may put a 2/2 green Wolf creature token into play.\r\nWhenever you play a blue spell, you may put a 1/1 blue Bird creature token with flying into play.
+Text:Whenever you cast a green spell, you may put a 2/2 green Wolf creature token onto the battlefield.\r\nWhenever you cast a blue spell, you may put a 1/1 blue Bird creature token with flying onto the battlefield.
 SVar:BuffedBy:Spell.Green,Spell.Blue
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fable_of_wolf_and_owl.jpg

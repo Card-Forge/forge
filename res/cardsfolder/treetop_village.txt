@@ -1,8 +1,9 @@
 Name:Treetop Village
 ManaCost:no cost
 Types:Land
-Text:Treetop Village comes into play tapped.
+Text:no text
 K:tap: add G
+K:CARDNAME enters the battlefield tapped.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treetop_village.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/143.jpg

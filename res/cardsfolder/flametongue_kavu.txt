@@ -1,7 +1,7 @@
 Name:Flametongue Kavu
 ManaCost:3 R
 Types:Creature Kavu
-Text:When Flametongue Kavu comes into play, it deals 4 damage to target creature.
+Text:When CARDNAME enters the battlefield, it deals 4 damage to target creature.
 PT:4/2
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/ps/en-us/card26262.jpg

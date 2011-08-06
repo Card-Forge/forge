@@ -1,7 +1,7 @@
 Name:Flagstones of Trokair
 ManaCost:no cost
 Types:Legendary Land
-Text:When Flagstones of Trokair is put into a graveyard from play, you may search your library for a Plains card and put it into play tapped. If you do, shuffle your library.
+Text:When CARDNAME is put into a graveyard from the battlefield, you may search your library for a Plains card and put it onto the battlefield tapped. If you do, shuffle your library.
 K:tap: add W
 SVar:SacMe:3
 SVar:Rarity:Rare

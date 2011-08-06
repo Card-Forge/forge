@@ -1,7 +1,7 @@
 Name:Foul Imp
 ManaCost:B B
 Types:Creature Imp
-Text:When Foul Imp comes into play, you lose 2 life.
+Text:When CARDNAME enters the battlefield, you lose 2 life.
 PT:2/2
 K:Flying
 SVar:Rarity:Common

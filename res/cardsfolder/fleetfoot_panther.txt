@@ -1,7 +1,7 @@
 Name:Fleetfoot Panther
 ManaCost:1 G W
 Types:Creature Cat
-Text:When Fleetfoot Panther comes into play, return a green or white creature you control to its owner's hand.
+Text:When CARDNAME enters the battlefield, return a green or white creature you control to its owner's hand.
 PT:3/4
 K:Flash
 SVar:Rarity:Uncommon

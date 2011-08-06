@@ -1,8 +1,9 @@
 Name:Forbidding Watchtower
 ManaCost:no cost
 Types:Land
-Text:Forbidding Watchtower comes into play tapped.
+Text:no text
 K:tap: add W
+K:CARDNAME enters the battlefield tapped.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidding_watchtower.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/140.jpg

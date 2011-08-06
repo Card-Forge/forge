@@ -1,8 +1,9 @@
 Name:Faerie Conclave
 ManaCost:no cost
 Types:Land
-Text:Faerie Conclave comes into play tapped.
+Text:no text
 K:tap: add U
+K:CARDNAME enters the battlefield tapped.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_conclave.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/139.jpg

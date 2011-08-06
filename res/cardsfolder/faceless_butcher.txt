@@ -1,7 +1,7 @@
 Name:Faceless Butcher
 ManaCost:2 B B
 Types:Creature Nightmare Horror
-Text:When Faceless Butcher comes into play, remove target creature other than Faceless Butcher from the game.\r\nWhen Faceless Butcher is destroyed, return the removed card to play under its owner's control.
+Text:When CARDNAME enters the battlefield, exile target creature other than CARDNAME.\r\nWhen CARDNAME leaves the battlefield, return the exiled card to the battlefield under its owner's control.
 PT:2/3
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common

@@ -1,7 +1,7 @@
 Name:Fire Imp
 ManaCost:2 R
 Types:Creature Imp
-Text:When Fire Imp comes into play, it deals 2 damage to target creature.
+Text:When CARDNAME enters the battlefield, it deals 2 damage to target creature.
 PT:2/1
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4337.jpg
