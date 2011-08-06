@@ -17,6 +17,7 @@ public abstract class SpellAbility {
     private String          manaCost           = "";
     private String          additionalManaCost = "";
     private String			multiKickerManaCost= "";
+    private String 			xManaCost		   = "";
     
     private String          type               = "Intrinsic";  //set to Intrinsic by default
                                                                 
@@ -29,6 +30,7 @@ public abstract class SpellAbility {
     private boolean         buyBackAbility     = false;        //false by default
     private boolean         flashBackAbility   = false;
     private boolean			multiKicker 	   = false;
+    private boolean 		xCost			   = false;
     
     private Input           beforePayMana;
     private Input           afterResolve;
@@ -115,6 +117,16 @@ public abstract class SpellAbility {
     	multiKickerManaCost = cost;
     }
     
+    public String getXManaCost()
+    {
+    	return xManaCost;
+    }
+    
+    public void setXManaCost(String cost)
+    {
+    	xManaCost = cost;
+    }
+    
     public boolean isSpell() {
         return spell;
     }
@@ -152,6 +164,15 @@ public abstract class SpellAbility {
     public boolean isMultiKicker() {
     	return multiKicker;
     }
+    
+    public void setIsXCost(boolean b) {
+    	xCost = b;
+    }
+    
+    public boolean isXCost(){
+    	return xCost;
+    }
+    
     
     public void setSourceCard(Card c) {
         sourceCard = c;

@@ -11,6 +11,8 @@ class ManaCost {
     private Mana_PayCost m;
     
     public ManaCost(String cost) {
+    	while (cost.startsWith("X"))
+    		cost = cost.substring(2);
         m = new Mana_PayCost(cost);
     }
     

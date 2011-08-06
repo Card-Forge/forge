@@ -80,6 +80,8 @@ public class Card extends MyObservable {
     
     private int                          X                                 = 0;
     
+    private int							 xManaCostPaid 					   = 0;
+    
     private int 					     multiKickerMagnitude			   = 0;
     
     private String                       owner                             = "";
@@ -150,6 +152,21 @@ public class Card extends MyObservable {
     }
     
     //***************/
+    
+    public void addXManaCostPaid(int n)
+    {
+    	xManaCostPaid += n;
+    }
+    
+    public void setXManaCostPaid(int n)
+    {
+    	xManaCostPaid = n;
+    }
+    
+    public int getXManaCostPaid()
+    {
+    	return xManaCostPaid;
+    }
     
     public void setCheckedPropagandaThisTurn(boolean b)
     {

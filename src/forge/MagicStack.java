@@ -16,11 +16,53 @@ public class MagicStack extends MyObservable
 	  if(sp instanceof Ability_Mana || sp instanceof Ability_Triggered)//TODO make working triggered abilities!
 		  sp.resolve(); 
 	  else {
-		  if (!sp.isMultiKicker())
+		  if (!sp.isMultiKicker() && !sp.isXCost())
 		  {
 			  push(sp);
 		  }
-		  else //this spell does have multikicker
+		  else if (sp.isXCost())
+		  {
+			  final SpellAbility sa = sp;
+			  final Ability ability = new Ability(sp.getSourceCard(), sa.getXManaCost())
+			  {
+				  public void resolve()
+				  {
+					  this.getSourceCard().addXManaCostPaid(1);
+				  }
+			  };
+			  
+			  final Command unpaidCommand = new Command()
+			  {
+				private static final long serialVersionUID = -3342222770086269767L;
+
+				public void execute()
+				{
+					  push(sa);
+				}
+			  };
+			  
+			  final Command paidCommand = new Command() {
+				private static final long serialVersionUID = -2224875229611007788L;
+
+				public void execute() {
+	                    ability.resolve();
+	                    Card crd = sa.getSourceCard();
+	                    AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Pay X cost for " + crd.getName() + " (X=" +crd.getXManaCostPaid()+")\r\n",
+		                        ability.getManaCost(), this, unpaidCommand));
+				}
+	          };
+			  
+			  if(sp.getSourceCard().getController().equals(Constant.Player.Human)) {
+	                AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Pay X cost for " + sp.getSourceCard().getName() + " (X=0)\r\n",
+	                        ability.getManaCost(), paidCommand, unpaidCommand));
+	          } 
+			  else //computer
+	          {
+				  while(ComputerUtil.canPayCost(ability)) ComputerUtil.playNoStack(ability);
+				  push(sa);
+	          }
+		  }
+		  else if (sp.isMultiKicker()) //both X and multi is not supported yet
 		  {   
 			  final SpellAbility sa = sp;
 			  final Ability ability = new Ability(sp.getSourceCard(), sp.getMultiKickerManaCost())
@@ -34,7 +76,9 @@ public class MagicStack extends MyObservable
 			  
 			  final Command unpaidCommand = new Command()
 			  {
-				  public void execute()
+				private static final long serialVersionUID = -3342222770086269767L;
+
+				public void execute()
 				  {
 					  push(sa);
 				  }
@@ -56,6 +100,7 @@ public class MagicStack extends MyObservable
 			    else //computer
 	            {
 	                while(ComputerUtil.canPayCost(ability)) ComputerUtil.playNoStack(ability);
+	                push(sa);
 	            }
 		  }
 		  

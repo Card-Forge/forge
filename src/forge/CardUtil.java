@@ -198,6 +198,9 @@ public class CardUtil {
         
         if(manaCost.equals("")) return 0;
         
+        while (manaCost.startsWith("X"))
+        	manaCost = manaCost.substring(2);
+        
         if(!manaCost.matches(".*[A-Z]+.*")) {
             try {
                 return Integer.parseInt(manaCost);

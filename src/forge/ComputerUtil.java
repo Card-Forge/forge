@@ -185,6 +185,37 @@ public class ComputerUtil
     }
     return false;
   }//canPayCost()
+  
+  static public boolean canPayCost(String cost)
+  {
+    if(cost.equals(("0")))
+       return true;
+
+    CardList land = getAvailableMana();
+    
+    ManaCost manacost = new ManaCost(cost);
+    ArrayList<String> colors = new ArrayList<String>();
+
+    for(int i = 0; i < land.size(); i++)
+    {
+      colors = getColors(land.get(i));
+      int once = 0;
+      
+      for(int j =0; j < colors.size(); j++)
+      {
+	      if(manacost.isNeeded(colors.get(j)) && once == 0)
+	      { 
+	        manacost.subtractMana(colors.get(j));
+	        once++;
+	      }
+
+	      if(manacost.isPaid()) {
+	    	  return true;
+	      }
+      }
+    }
+    return false;
+  }//canPayCost()
 
 
   static public void payManaCost(SpellAbility sa)

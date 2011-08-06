@@ -272,6 +272,8 @@ public class CardFactory implements NewConstants {
         	}
         }
         
+        
+        
         /*  //Creatures with simple, self-targeted mana-activated keyword adding abilities
             //-1 means not found
             while(hasKeyword(card, "KPump") != -1)
@@ -16645,6 +16647,36 @@ public class CardFactory implements NewConstants {
         
       }
       //*************** END ************ END **************************
+      
+      //*************** START *********** START **************************
+      else if (cardName.equals("Prosperity"))
+      {
+    	  final SpellAbility spell = new Spell(card)
+    	  {
+			private static final long serialVersionUID = -4885933011194027735L;
+
+			public void resolve()
+    		{
+    			  for (int i=0;i<card.getXManaCostPaid();i++)
+    			  {
+    				  AllZone.GameAction.drawCard(Constant.Player.Human);
+    				  AllZone.GameAction.drawCard(Constant.Player.Computer);
+    			  }
+    			  card.setXManaCostPaid(0);
+    		}
+			public boolean canPlayAI()
+			{
+				return AllZone.Computer_Hand.size() < 5 && ComputerUtil.canPayCost("3 U");
+			}
+    	  };
+    	  spell.setDescription("Each player draws X cards.");
+    	  spell.setStackDescription(card + " - Each player draws X cards.");
+    	  
+    	  card.clearSpellAbility();
+    	  card.addSpellAbility(spell);
+      }
+      //*************** END ************ END **************************
+      
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
@@ -16716,6 +16748,17 @@ public class CardFactory implements NewConstants {
                 card.addSpellAbility(CardFactoryUtil.vanish_desc(card, power));
             }
         }//Vanishing
+        
+        if (card.getManaCost().contains("X"))
+        {
+        	SpellAbility sa = card.getSpellAbility()[0];
+    		sa.setIsXCost(true);
+    		
+        	if (card.getManaCost().startsWith("X X"))
+        		sa.setXManaCost("2");
+        	else if (card.getManaCost().startsWith("X"))
+        		sa.setXManaCost("1");
+        }
         
         return card;
     }//getCard2
