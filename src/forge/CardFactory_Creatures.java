@@ -9312,6 +9312,68 @@ public class CardFactory_Creatures {
         	card.addTrigger(targetedTrigger);
         }//*************** END ************ END **************************
         
+      
+        //*************** START *********** START **************************
+        else if(cardName.equals("Brass Squire")) {
+        	final Card[] equipwith = new Card[1];
+        	
+        	Target t2 = new Target(card, "Select target creature you control", "Creature.YouCtrl".split(","));
+            final Ability_Sub sub = new Ability_Sub(card, t2) {
+				private static final long serialVersionUID = -8926850792424930054L;
+
+				@Override
+            	public boolean chkAI_Drawback() {
+            		return false;
+            	}
+				
+				@Override
+				public void resolve() {
+					Card equipment = equipwith[0];
+					//Card equipment = Ability_Activated.this.getTargetCard();
+					Card creature = getTargetCard();
+					if(AllZoneUtil.isCardInPlay(equipment) && AllZoneUtil.isCardInPlay(creature)) {
+						if(CardFactoryUtil.canTarget(card, equipment) && CardFactoryUtil.canTarget(card, creature)) {
+							if (equipment.isEquipping()) {
+								Card equipped = equipment.getEquipping().get(0);
+								if (!equipped.equals(creature)) {
+									equipment.unEquipCard(equipped);
+									equipment.equipCard(creature);
+								}
+							}
+							else {
+								equipment.equipCard(getTargetCard());
+							}
+						}
+					}
+				}
+            	
+            	@Override
+            	public boolean doTrigger(boolean b) {
+            		return false;
+            	}
+            };
+        	
+        	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
+        	Target t1 = new Target(card, "Select target equipment you control", "Equipment.YouCtrl".split(","));
+        	final Ability_Activated ability = new Ability_Activated(card, abCost, t1) {
+				private static final long serialVersionUID = 3818559481920103914L;
+
+				@Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+                
+                @Override
+                public void resolve() {
+                	equipwith[0] = getTargetCard();
+                	sub.resolve();
+                }
+            };
+            ability.setSubAbility(sub);
+            ability.setStackDescription(cardName+" - Attach target Equipment you control to target creature you control.");
+            card.addSpellAbility(ability);
+        }//*************** END ************ END **************************
+        
         
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
         {
