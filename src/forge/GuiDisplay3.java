@@ -154,6 +154,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
             	if(!c.isLand())
             	{
 	                SpellAbility[] sa = c.getSpellAbility();
+	                sa[1].setActivatingPlayer(AllZone.HumanPlayer);
 	                if(sa[1].canPlay() && !c.isUnCastable()) AllZone.GameAction.playSpellAbility(sa[1]);
             	}
             	else if (CardFactoryUtil.canHumanPlayLand())

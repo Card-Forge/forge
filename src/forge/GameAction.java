@@ -2739,6 +2739,7 @@ public class GameAction {
     }//isAttached(Card c)
     
     public boolean playCard(Card c) {
+    	// this can only be called by the Human
         HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
         SpellAbility[] abilities = canPlaySpellAbility(c.getSpellAbility());
         ArrayList<String> choices = new ArrayList<String>();
@@ -2748,8 +2749,8 @@ public class GameAction {
         
         for(SpellAbility sa:abilities) {
         	// for uncastables like lotus bloom, check if manaCost is blank
+        	sa.setActivatingPlayer(AllZone.HumanPlayer);
             if(sa.canPlay() && (!sa.isSpell() || !sa.getManaCost().equals(""))) {
-            	sa.setActivatingPlayer(c.getController());
                 choices.add(sa.toString());
                 map.put(sa.toString(), sa);
             }

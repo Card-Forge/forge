@@ -1237,9 +1237,8 @@ public class CardFactoryUtil {
             @Override
             public boolean canPlay() {
             	// unMorphing a card is a Special Action, and not effected by Linvala
-        		//CardList Silence = AllZoneUtil.getPlayerCardsInPlay(AllZone.GameAction.getOpponent(getSourceCard().getController()));
-        		//Silence = Silence.getName("Linvala, Keeper of Silence");
-                return sourceCard.isFaceDown() && AllZone.GameAction.isCardInPlay(sourceCard); // && Silence.size() == 0;
+            	return sourceCard.getController().equals(this.getActivatingPlayer()) && sourceCard.isFaceDown() 
+            			&& AllZone.GameAction.isCardInPlay(sourceCard);
             }
             
         };//morph_up
