@@ -260,6 +260,7 @@ public abstract class Player extends MyObservable{
         		loseLife(damageToDo, source);
         }
         if ( damageToDo > 0 ) {
+        	addAssignedDamage(damageToDo);
 	        GameActionUtil.executeDamageDealingEffects(source, damageToDo);
 	        GameActionUtil.executeDamageToPlayerEffects(this, source, damageToDo);
 	        
@@ -451,6 +452,7 @@ public abstract class Player extends MyObservable{
     }
 	
 	public void setAssignedDamage(int n)   		{	assignedDamage = n; }
+	public void addAssignedDamage(int n)		{	assignedDamage += n; }
     public int  getAssignedDamage()        		{	return assignedDamage; }
     
     public void addCombatDamage(final int damage, final Card source) {

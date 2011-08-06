@@ -930,6 +930,9 @@ public class Card extends MyObservable {
                     sbLong.append(keyword.get(i).toString()).append("\r\n");
                 } else if (keyword.get(i).toString().contains("tap: add ")) {
                     sbMana.append(keyword.get(i).toString()).append("\r\n");
+                }else if(keyword.get(i).contains("Bloodthirst")) {
+                	sbLong.append(keyword.get(i));
+                	sbLong.append(" (If an opponent was dealt damage this turn, this creature enters the battlefield with a +1/+1 counter on it.)");
                 } else {
                     if (i != 0 && sb.length() != 0) sb.append(", ");
                     sb.append(keyword.get(i).toString());

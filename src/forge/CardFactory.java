@@ -4362,6 +4362,20 @@ public class CardFactory implements NewConstants {
             });//ComesIntoPlayCommand
         } // if etbCounter
         
+        int bloodthirst = hasKeyword(card, "Bloodthirst");
+        if(bloodthirst != -1) {
+        	final int count = Integer.parseInt(card.getKeyword().get(bloodthirst).split(" ")[1]);
+        	
+        	card.addComesIntoPlayCommand(new Command() {
+
+				public void execute() {
+					if(card.getController().getOpponent().getAssignedDamage() > 0)
+						card.addCounter(Counters.P1P1, count);
+				}
+        		
+        	});
+        }//bloodthirst
+        
         /* Cards converted to SP$Pump
         // Generic target creature pump
         if(hasKeyword(card, "spPumpTgt") != -1) {
