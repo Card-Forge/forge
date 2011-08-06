@@ -1892,6 +1892,7 @@ class CardFactory_Planeswalkers {
                 public boolean canPlay() {
                 	//looks like standard Planeswalker stuff...
                     return AllZone.getZone(card).is(Constant.Zone.Battlefield)
+                    		&& turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }//canPlay()
             };
@@ -1911,6 +1912,7 @@ class CardFactory_Planeswalkers {
 
 				@Override
                 public void resolve() {
+					turn[0] = AllZone.Phase.getTurn();
 					Card target = getTargetCard();
                 	if(CardFactoryUtil.canTarget(card, target) && AllZoneUtil.isCardInPlay(target)) {
                 		if(!target.isCreature()) {
@@ -1930,7 +1932,7 @@ class CardFactory_Planeswalkers {
                 public boolean canPlay() {
                     return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && card.getCounters(Counters.LOYALTY) >= 1
-                            /* && turn[0] != AllZone.Phase.getTurn() */
+                            && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }//canPlay()
             };
@@ -1947,6 +1949,7 @@ class CardFactory_Planeswalkers {
 
 				@Override
                 public void resolve() {
+					turn[0] = AllZone.Phase.getTurn();
                 	int numArts = AllZoneUtil.getPlayerTypeInPlay(card.getController(), "Artifact").size();
                     Player p = getTargetPlayer();
                     p.loseLife(2 * numArts, card);
@@ -1962,7 +1965,7 @@ class CardFactory_Planeswalkers {
                 public boolean canPlay() {
                     return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && card.getCounters(Counters.LOYALTY) >= 4
-                            /* && turn[0] != AllZone.Phase.getTurn() */
+                            && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }//canPlay()
             };
