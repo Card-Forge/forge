@@ -2584,6 +2584,7 @@ res/cardsfolder/gerrards_verdict.txt -text svneol=native#text/plain
 res/cardsfolder/gerrards_wisdom.txt -text svneol=native#text/plain
 res/cardsfolder/geth_lord_of_the_vault.txt -text svneol=native#text/plain
 res/cardsfolder/geths_grimoire.txt -text svneol=native#text/plain
+res/cardsfolder/geths_verdict.txt -text svneol=native#text/plain
 res/cardsfolder/geyser_glider.txt -text svneol=native#text/plain
 res/cardsfolder/ghalmas_warden.txt -text svneol=native#text/plain
 res/cardsfolder/ghastlord_of_fugue.txt -text svneol=native#text/plain
