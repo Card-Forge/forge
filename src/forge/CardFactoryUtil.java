@@ -1394,13 +1394,13 @@ public class CardFactoryUtil {
         final SpellAbility enchant = new Spell(sourceCard) {
 			private static final long serialVersionUID = -8259560434384053776L;
 			
-			@Override
+            @Override
             public boolean canPlay() {
                 return (sourceCard.getKeyword().contains("Flash") && (AllZone.GameAction.isCardInZone(sourceCard, AllZone.Human_Hand) || 
                         AllZone.GameAction.isCardInZone(sourceCard, AllZone.Computer_Hand))    // for flash, which is not working through the keyword for some reason
-                            ||
-                       (! sourceCard.getKeyword().contains("Flash") &&    // if not flash then limit to main 1 and 2 on controller's turn
-                       (sourceCard.getController().equals(AllZone.Phase.getActivePlayer()) &&
+                            ||    // if not flash then limit to main 1 and 2 on controller's turn and card in hand
+                       (! sourceCard.getKeyword().contains("Flash") && (sourceCard.getController().equals(AllZone.Phase.getActivePlayer()) &&
+                       (AllZone.GameAction.isCardInZone(sourceCard, AllZone.Human_Hand) || AllZone.GameAction.isCardInZone(sourceCard, AllZone.Computer_Hand)) && 
                        (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) || AllZone.Phase.getPhase().equals(Constant.Phase.Main2)))));
             }
 			
