@@ -3844,7 +3844,7 @@ public class CardFactory_Creatures {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Man-o'-War") || cardName.equals("Sun Ce, Young Conquerer")) {
+        else if(cardName.equals("Man-o'-War") || cardName.equals("Sun Ce, Young Conquerer") || cardName.equals("AEther Adept")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
@@ -14248,6 +14248,33 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                     ability.setStackDescription("Deranged Hermit - put four green 1/1 Squirrel creature tokens onto the battlefield.");
+                    AllZone.Stack.add(ability);
+                }
+            };
+            card.addComesIntoPlayCommand(intoPlay);
+            
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Grave Titan")) {
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    for(int i = 0; i < 2; i++)
+                        makeToken();
+                }//resolve()
+                
+                void makeToken() {
+                    CardFactoryUtil.makeToken("Zombie", "B 2 2 Zombie", card, "B", new String[] {
+                            "Creature", "Zombie"}, 2, 2, new String[] {""});
+                }
+            };
+            Command intoPlay = new Command() {
+
+				private static final long serialVersionUID = 4152436387481421717L;
+
+				public void execute() {
+                    ability.setStackDescription("Grave Titan - put two black 2/2 Zombie creature tokens onto the battlefield.");
                     AllZone.Stack.add(ability);
                 }
             };

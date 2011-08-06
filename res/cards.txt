@@ -1,3 +1,16 @@
+Grave Titan
+4 B B
+Creature Giant
+Whenever Grave Titan enters the battlefield or attacks, put two 2/2 black Zombie creature tokens onto the battlefield.
+6/6
+Deathtouch
+
+AEther Adept
+1 U U
+Creature Human Wizard
+When AEther Adept enters the battlefield, return target creature to its owner's hand.
+2/2
+
 Tireless Missionaries
 4 W
 Creature Human Cleric

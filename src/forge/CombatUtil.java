@@ -1541,6 +1541,26 @@ public class CombatUtil {
                 
             }//Jedit
             
+            else if(c.getName().equals("Grave Titan") && !c.getCreatureAttackedThisCombat()) {
+                final Card grave = c;
+                Ability ability2 = new Ability(c, "0") {
+                    @Override
+                    public void resolve() {
+                    	for (int i=0;i<2;i++)
+                    		CardFactoryUtil.makeToken("Zombie", "B 2 2 Zombie", grave, "B", new String[] {
+                                "Creature", "Zombie"}, 2, 2, new String[] {""});
+                        //(anger) :
+                        //GameActionUtil.executeCardStateEffects(); 
+                    }
+                }; //Ability
+                
+
+                ability2.setStackDescription(c.getName()
+                        + " - put a 2/2 green Cat Warrior creature token with forestwalk into play.");
+                AllZone.Stack.add(ability2);
+                
+            }//Grave Titan
+            
             else if(c.getName().equals("Preeminent Captain") && !c.getCreatureAttackedThisCombat()) {
                 System.out.println("Preeminent Captain Attacks");
                 PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getController());
