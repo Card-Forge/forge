@@ -75,9 +75,9 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         	}
         	else{
         		// test this. probably should just call Input_Block and let block pass along?
-//                if(AllZone.Combat.getAttackers().length == 0) 
-//                	return new Input_Block_Planeswalker();
-//                else 
+                if(AllZone.Combat.getAttackers().length == 0) 
+                	return new Input_Block_Planeswalker();
+                else 
                 	return new Input_Block();
         	}
         }

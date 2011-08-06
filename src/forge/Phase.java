@@ -288,14 +288,15 @@ public class Phase extends MyObservable
         	CardList list = new CardList();
 	        list.addAll(AllZone.Combat.getAttackers());
 	        
-	        // Remove illegal Propaganda attacks first
+	        // Remove illegal Propaganda attacks first only for attacking the Player
 	        for(Card c:list)
 	            CombatUtil.checkPropagandaEffects(c);
 	        
+	        list.addAll(AllZone.pwCombat.getAttackers());
+	        
 	        // Then run other Attacker bonuses
 	        //check for exalted:
-	        if ((AllZone.Combat.getDeclaredAttackers() + AllZone.pwCombat.getDeclaredAttackers() == 1)) {
-	        	
+	        if (list.size() == 1){
 	        	AllZone.GameAction.CheckWheneverKeyword(list.get(0), "Attack - Alone", null);
 	            Player attackingPlayer = AllZone.Combat.getAttackingPlayer();
 	            PlayerZone play = AllZone.getZone(Constant.Zone.Play, attackingPlayer);
