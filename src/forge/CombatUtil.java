@@ -2144,7 +2144,6 @@ public class CombatUtil {
                 }//resolve
                 
             };//ability
-            b.setCreatureAttackedThisCombat(true);
             
             StringBuilder sb2 = new StringBuilder();
             sb2.append(b.getName()).append(" - gets -").append(mag).append("/-").append(mag).append(" until EOT.");

@@ -108,7 +108,7 @@ public class SpellAbility_Restriction {
 		
 		Player activator = sa.getActivatingPlayer();
 		if (activator == null){
-			c.getController();
+			activator = c.getController();
 			System.out.println(c.getName() + " Did not have activater set in SpellAbility_Restriction.canPlay()");
 		}
 		

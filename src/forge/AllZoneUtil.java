@@ -344,6 +344,49 @@ public class AllZoneUtil {
 		return cards;
 	}
 	
+	
+	public static CardList getCardsInZone(String zone){	
+        return getCardsInZone(zone, null);
+	}
+	
+	public static CardList getCardsInZone(String zone, Player player){	
+        CardList all = new CardList();
+
+		if (zone.equals(Constant.Zone.Graveyard)){
+			if (player == null || player.isHuman())
+				all.addAll(AllZone.Human_Graveyard.getCards());
+			if (player == null || player.isComputer())
+				all.addAll(AllZone.Computer_Graveyard.getCards());
+		}
+		else if (zone.equals(Constant.Zone.Hand)){
+			if (player == null || player.isHuman())
+				all.addAll(AllZone.Human_Hand.getCards());
+			if (player == null || player.isComputer())
+				all.addAll(AllZone.Computer_Hand.getCards());
+		}
+		else if (zone.equals(Constant.Zone.Play)){
+			if (player == null || player.isHuman())
+				all.addAll(AllZone.Human_Play.getCards());
+			if (player == null || player.isComputer())
+				all.addAll(AllZone.Computer_Play.getCards());
+		}
+		else if (zone.equals(Constant.Zone.Removed_From_Play)){
+			if (player == null || player.isHuman())
+				all.addAll(AllZone.Human_Removed.getCards());
+			if (player == null || player.isComputer())
+				all.addAll(AllZone.Computer_Removed.getCards());
+		}
+		else if (zone.equals(Constant.Zone.Library)){
+			if (player == null || player.isHuman())
+				all.addAll(AllZone.Human_Library.getCards());
+			if (player == null || player.isComputer())
+				all.addAll(AllZone.Computer_Library.getCards());
+		}
+		
+        return all;
+	}
+	
+	
 	//zone manipulation, maybe be better off in GameAction.java...
 	/**
 	 * use this when Human needs to rearrange the top X cards in a player's library.  You

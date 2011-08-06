@@ -3219,10 +3219,11 @@ public class CardFactoryUtil {
     		if (!AllZone.getZone(target).is(tgt.getZone()))
     			return false;
     	}
-    	
-    	// If an Aura's target is removed before it resolves, the Aura fizzles
-    	if (source.isAura() && !AllZone.getZone(target).is(Constant.Zone.Play))
-    		return false;
+    	else{
+	    	// If an Aura's target is removed before it resolves, the Aura fizzles
+	    	if (source.isAura() && !AllZone.getZone(target).is(Constant.Zone.Play))
+	    		return false;
+    	}
     	
     	// Make sure it's still targetable as well
         return canTarget(source, target);
@@ -3249,6 +3250,11 @@ public class CardFactoryUtil {
         if (target.isImmutable())
         	return false;
         
+        if (!AllZone.getZone(target).equals(Constant.Zone.Play)){
+        	// creature's not in play, can normally be targeted
+        	return true;
+        }
+        
         if (AllZoneUtil.isCardInPlay("Leonin Abunas", target.getController()) && target.isArtifact()
         		&& !spell.getController().equals(target.getController())) return false;
         
@@ -3274,34 +3280,6 @@ public class CardFactoryUtil {
                 if(kw.equals("CARDNAME can't be the target of Aura spells.")) {
                     if(spell.isAura()) return false;
                 }
-                
-                /* taken care of by hasProtectionFrom
-                if(kw.equals("Protection from white") && spell.isWhite()) return false;
-                if(kw.equals("Protection from blue") && spell.isBlue()) return false;
-                if(kw.equals("Protection from black") && spell.isBlack()) return false;
-                if(kw.equals("Protection from red") && spell.isRed()) return false;
-                if(kw.equals("Protection from green") && spell.isGreen()) return false;
-                
-                if(kw.equals("Protection from creatures") && spell.isCreature()) return false;
-                
-                if(kw.equals("Protection from artifacts") && spell.isArtifact()) return false;
-                
-                if(kw.equals("Protection from Dragons")
-                        && (spell.getType().contains("Dragon") || spell.getKeyword().contains("Changeling"))) return false;
-                if(kw.equals("Protection from Demons")
-                        && (spell.getType().contains("Demon") || spell.getKeyword().contains("Changeling"))) return false;
-                if(kw.equals("Protection from Goblins")
-                        && (spell.getType().contains("Goblin") || spell.getKeyword().contains("Changeling"))) return false;
-                if(kw.equals("Protection from Clerics")
-                        && (spell.getType().contains("Cleric") || spell.getKeyword().contains("Changeling"))) return false;
-                
-                if(kw.equals("Protection from enchantments") && spell.getType().contains("Enchantment")) return false;
-                
-                if(kw.equals("Protection from everything")) return false;
-                
-                if(kw.equals("Protection from colored spells") && (spell.isInstant() || spell.isSorcery() || spell.isAura() ) &&
-                   isColored(spell)) return false;
-                */
             }
         }
         return true;

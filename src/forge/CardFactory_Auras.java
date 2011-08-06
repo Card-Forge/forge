@@ -1534,7 +1534,7 @@ class CardFactory_Auras {
 					// AI will only target something that will stick in play.
         			cList = cList.filter(new CardListFilter() {
         				public boolean addCard(Card crd) {
-        					return CardFactoryUtil.canTarget(card, crd);
+        					return CardFactoryUtil.canTarget(card, crd) && !CardFactoryUtil.hasProtectionFrom(card, crd);
         				}
         			});
         			if (cList.size() == 0)
@@ -1542,36 +1542,28 @@ class CardFactory_Auras {
         			
         			Card c = CardFactoryUtil.AI_getBestCreature(cList);
         			
-        			targetC[0] = c;
+        			setTargetCard(c);
         			boolean playable = 2 < c.getNetAttack() && 2 < c.getNetDefense();
         			return playable;
         		}//canPlayAI
 				
-                @Override
-                public void chooseTargetAI() {
-                	setTargetCard(targetC[0]);
-                }
+				@Override
+				public void resolve(){
+					targetC[0] = getTargetCard();
+					super.resolve();
+				}
+				
         	};//addSpellAbility
         	
-            Input target = new Input() {
-                private static final long serialVersionUID = 9027742835781889044L;
-                
-                @Override
-                public void showMessage() {
-                    Object check = AllZone.Display.getChoiceOptional("Select creature", getCreatures());
-                    if(check != null) {
-                    	animate.setTargetCard((Card) check);
-                    	targetC[0] = animate.getTargetCard();
-                        stopSetNext(new Input_PayManaCost(animate));
-                    } else stop();
-                }//showMessage()
-                
-                public Card[] getCreatures() {
-	       			CardList cList = AllZoneUtil.getCardsInGraveyard();
-        			cList = cList.getType("Creature");
-                    return cList.toArray();
-                }
-            };//Input
+        	// Target AbCost and Restriction are set here to get this working as expected
+        	Target tgt = new Target("TgtV", "Select a creature in a graveyard", "Creature".split(","));
+        	tgt.setZone(Constant.Zone.Graveyard);
+        	animate.setTarget(tgt);
+        	
+        	Ability_Cost cost = new Ability_Cost("1 B", cardName, false);
+        	animate.setPayCosts(cost);
+        	
+        	animate.getRestrictions().setActivateZone(Constant.Zone.Hand);
             
         	final Ability attach = new Ability(card, "0") {
 				private static final long serialVersionUID = 222308932796127795L;
@@ -1584,29 +1576,29 @@ class CardFactory_Auras {
                     if (!AllZone.GameAction.isCardInZone(card, play))	
                     	return;
                    
-                    Card c = targetC[0];
-                    PlayerZone grave = AllZone.getZone(c);
+                    Card animated = targetC[0];
+                    PlayerZone grave = AllZone.getZone(animated);
 
-                    if(!AllZone.GameAction.isCardInZone(c, grave)){
-                    	// Animated Creature got removed before ability resolve
+                    if(!grave.is(Constant.Zone.Graveyard)){
+                    	// Animated Creature got removed before ability resolved
                     	AllZone.GameAction.sacrifice(card);
                     	return;
                     }
                     
                     // Bring creature into play under your control (should trigger etb Abilities)
-                    c.setController(card.getController());
-                    grave.remove(c);
-                    play.add(c);
+                    animated.setController(card.getController());
+                    grave.remove(animated);
+                    play.add(animated);
+                    card.enchantCard(animated);	// Attach before Targeting so detach Command will trigger
                     
-                    if(!CardFactoryUtil.canTarget(card, c)) {
-                    	// Animated a creature with protection or something similar
+                    if(CardFactoryUtil.hasProtectionFrom(card, animated)) {
+                    	// Animated a creature with protection
                     	AllZone.GameAction.sacrifice(card);
                     	return;
                     }
                     
                     // Everything worked out perfectly.
-                    card.enchantCard(c);
-                    c.addSemiPermanentAttackBoost(-1);
+                    animated.addSemiPermanentAttackBoost(-1);
         		}
         	};//Ability
 
@@ -1647,8 +1639,7 @@ class CardFactory_Auras {
 			};
 			
         	card.clearSpellAbility();	// clear out base abilities since we're overriding
-			
-            animate.setBeforePayMana(target);
+        	
             card.addSpellAbility(animate);
 			
 			attach.setStackDescription("Attaching Animate Dead to animated Creature.");

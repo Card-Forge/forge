@@ -206,17 +206,21 @@ public class Target_Selection {
 
 			@Override
 	        public void showMessage() {
-	            CardList allCards = new CardList();
-	            allCards.addAll(AllZone.Human_Play.getCards());
-	            allCards.addAll(AllZone.Computer_Play.getCards());
-	            CardList choices = allCards.getValidCards(Tgts, sa.getSourceCard().getController());
-	            
-	            boolean canTargetPlayer = false;
-	            for(String s : Tgts)
-	            	if (s.equals("player"))
-	            		canTargetPlayer = true;
+				String zone = select.getTgt().getZone();
+				
+				CardList choices = AllZoneUtil.getCardsInZone(zone).getValidCards(Tgts, sa.getSourceCard().getController());
 
-	            stopSetNext(input_targetSpecific(sa, choices, message, true, canTargetPlayer, select, req));
+				if (zone.equals(Constant.Zone.Play)){
+		            boolean canTargetPlayer = false;
+		            for(String s : Tgts)
+		            	if (s.equals("player"))
+		            		canTargetPlayer = true;
+	
+		            stopSetNext(input_targetSpecific(sa, choices, message, true, canTargetPlayer, select, req));
+				}
+				else{
+					stopSetNext(input_cardFromList(sa, choices, message, true, select, req));
+				}
 	        }
     	};
     }//input_targetValid
@@ -268,4 +272,31 @@ public class Target_Selection {
         return target;
     }//input_targetSpecific()
     
+    
+    public static Input input_cardFromList(final SpellAbility spell, final CardList choices, final String message, 
+    		final boolean targeted, final Target_Selection select, final SpellAbility_Requirements req){
+    	// Send in a list of valid cards, and popup a choice box to target 
+	    Input target = new Input() {
+	        private static final long serialVersionUID = 9027742835781889044L;
+	        
+	        @Override
+	        public void showMessage() {
+	            Object check = AllZone.Display.getChoiceOptional(message, choices.toArray());
+	            if(check != null) {
+	            	spell.setTargetCard((Card) check);
+	            	select.incrementTargets();
+	            } 
+	            else
+	            	select.setCancel(true);
+	            
+	            done();
+	        }//showMessage()
+	        
+	        public void done(){
+                stop();
+                req.finishedTargeting();
+	        }
+	    };//Input
+	    return target;
+    } 
 }
