@@ -6120,7 +6120,7 @@ public class CardFactory implements NewConstants {
         }//resolve()
       };//SpellAbility
       spell_two.setManaCost("4 G");
-      spell_two.setManaCost("4");
+      spell_two.setAdditionalManaCost("4");
 
       spell_one.setDescription("Target creature gets +2/+2 until end of turn.");
       spell_two.setDescription("Buyback 4 - Pay 4G, put this card into your hand as it resolves.");

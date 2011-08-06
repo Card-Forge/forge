@@ -838,7 +838,6 @@ class CardFactory_Lands {
 	             if(once)
 	             {
 	               once = false;
-	               String player = card.getController();
 	               
 	        	   PlayerZone compBattlezone = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
 			       PlayerZone playerBattlezone = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
