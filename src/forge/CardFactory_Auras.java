@@ -5360,18 +5360,20 @@ class CardFactory_Auras {
                 final String stDesc[] = {"none"};
                 StringBuilder sbD = new StringBuilder();
                 StringBuilder sbSD = new StringBuilder();
+                final boolean curse[] = {false};
+                
+                curse[0] = k[0].contains("Curse");
 
                 int Power = 0;
                 int Tough = 0;
                 
                 sbD.append("Enchanted creature ");
-
                 
                 String ptk[] = k[1].split("/");
                 
                 if (ptk.length == 1)     // keywords in first cell
                 {
-                	keywordsUnsplit = ptk[0];
+                    keywordsUnsplit = ptk[0];
                 }
                 
                 else    // parse the power/toughness boosts in first two cells
@@ -5397,8 +5399,8 @@ class CardFactory_Auras {
                 
                 if (keywordsUnsplit.length() > 0)    // then there is at least one extrinsic keyword to assign
                 {
-                	sbD.append("has ");
-                	
+                    sbD.append("has ");
+                    
                     String tempKwds[] = keywordsUnsplit.split("&");
                     extrinsicKeywords = new String[tempKwds.length];
                     
@@ -5423,12 +5425,18 @@ class CardFactory_Auras {
                 if (k.length > 3)    {    stDesc[0] = k[3].trim();    }    // with the keyword if they are present.
                 
                 card.clearSpellAbility();
-                card.addSpellAbility(CardFactoryUtil.enPump_Enchant(card, Power, Tough, extrinsicKeywords, spDesc, stDesc));
+                
+                if (! curse[0]) {
+                    card.addSpellAbility(CardFactoryUtil.enPump_Enchant(card, Power, Tough, extrinsicKeywords, spDesc, stDesc));
+                }
+                else {
+                    card.addSpellAbility(CardFactoryUtil.enPumpCurse_Enchant(card, Power, Tough, extrinsicKeywords, spDesc, stDesc));
+                }
                 card.addEnchantCommand(CardFactoryUtil.enPump_onEnchant(card, Power, Tough, extrinsicKeywords, spDesc, stDesc));
                 card.addUnEnchantCommand(CardFactoryUtil.enPump_unEnchant(card, Power, Tough, extrinsicKeywords, spDesc, stDesc));
                 card.addLeavesPlayCommand(CardFactoryUtil.enPump_LeavesPlay(card, Power, Tough, extrinsicKeywords, spDesc, stDesc));
             }
-        }// enPump
+        }// enPump[Curse]
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

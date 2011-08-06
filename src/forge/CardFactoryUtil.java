@@ -1429,21 +1429,23 @@ public class CardFactoryUtil {
                 	}
                 }
                 
-                //else (prune list if needed)
+                //else (if aura is keyword only)
                 
-                if (Power <= 0 && Tough <= 0) {    // This aura is keyword only
+                if (Power == 0 && Tough == 0) {    // This aura is keyword only
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c){
                             ArrayList<String> extKeywords = new ArrayList<String>(Arrays.asList(extrinsicKeywords));
                             for (String s:extKeywords) {
                                 if (!c.getKeyword().contains(s))
                                     return true;
-                                }
+                            }
                                 //no new keywords:
                                 return false;
-                            }
+                        }
                     });
                 }
+                
+              //else aura is power/toughness boost and may have keyword(s)
                 
                 CardListUtil.sortAttack(list);
                 CardListUtil.sortFlying(list);
@@ -1541,7 +1543,79 @@ public class CardFactoryUtil {
     	};//Command
     	
     	return onLeavesPlay;
-    }
+    }//enPump_LeavesPlay
+    
+    public static SpellAbility enPumpCurse_Enchant(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords, 
+    		final String[] spellDescription, final String[] stackDescription) {
+    	
+        final SpellAbility enchant = new Spell(sourceCard) {
+			private static final long serialVersionUID = -4021229901439299033L;
+
+			@Override
+            public boolean canPlay() {
+                return (sourceCard.getKeyword().contains("Flash") && (AllZone.GameAction.isCardInZone(sourceCard, AllZone.Human_Hand) || 
+                        AllZone.GameAction.isCardInZone(sourceCard, AllZone.Computer_Hand))    // for flash, which is not working through the keyword for some reason
+                            ||    // if not flash then limit to main 1 and 2 on controller's turn and card in hand
+                       (! sourceCard.getKeyword().contains("Flash") && (sourceCard.getController().equals(AllZone.Phase.getActivePlayer()) &&
+                       (AllZone.GameAction.isCardInZone(sourceCard, AllZone.Human_Hand) || AllZone.GameAction.isCardInZone(sourceCard, AllZone.Computer_Hand)) && 
+                       (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) || AllZone.Phase.getPhase().equals(Constant.Phase.Main2)))));
+            }
+			
+            public boolean canPlayAI() {
+                CardList list = new CardList(AllZone.Human_Play.getCards());    // Target human creature
+                list = list.getType("Creature");
+                
+                if (list.isEmpty()) return false;
+                                
+                //else (if aura is keyword only)
+                
+                if (Power == 0 && Tough == 0) {    // This aura is keyword only
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c){
+                            ArrayList<String> extKeywords = new ArrayList<String>(Arrays.asList(extrinsicKeywords));
+                            for (String s:extKeywords) {
+                                if (!c.getKeyword().contains(s))
+                                    return true;
+                            }
+                                //no new keywords:
+                                return false;
+                        }
+                    });
+                    
+                }
+                
+                //else aura is power/toughness boost and may have keyword(s)
+                
+                CardListUtil.sortAttack(list);
+                CardListUtil.sortFlying(list);
+                
+                for (int i = 0; i < list.size(); i++) {
+                    if (CardFactoryUtil.canTarget(sourceCard, list.get(i))) {
+                        setTargetCard(list.get(i));
+                        return true;
+                    }
+                }
+                return false;
+            }//canPlayAI()
+
+			public void resolve() {
+                PlayerZone play = AllZone.getZone(Constant.Zone.Play, sourceCard.getController());
+                play.add(sourceCard);
+                
+                Card c = getTargetCard();
+                
+                if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(sourceCard, c)) {
+                	sourceCard.enchantCard(c);
+                    //System.out.println("Enchanted: " +getTargetCard());
+                }
+            }//resolve()
+        };//enchant ability
+        enchant.setBeforePayMana(CardFactoryUtil.input_targetCreature(enchant));
+        enchant.setDescription(spellDescription[0]);
+        enchant.setStackDescription(stackDescription[0]);
+        
+		return enchant;
+    }//enPumpCurse_Enchant()
     
     public static Command entersBattleFieldWithCounters(final Card c, final Counters type, final int n) {
         Command addCounters = new Command() {
