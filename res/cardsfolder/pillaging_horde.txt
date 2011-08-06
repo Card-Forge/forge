@@ -4,6 +4,6 @@ Types:Creature Human Barbarian
 Text:When CARDNAME enters the battlefield, sacrifice it unless you discard a card at random.
 PT:5/5
 SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/od/en-us/pillaging_horde.jpg
+SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/pillaging_horde.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/147.jpg
 End
