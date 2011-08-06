@@ -150,6 +150,12 @@ public class ReadCard implements Runnable, NewConstants {
             		c.setSVar(t[1], t[2]);
             	}
             	
+            	else if (s.startsWith("A:"))
+            	{
+            		String t = s.substring(2);
+            		c.addIntrinsicAbility(t);
+            	}
+            	
             	
             	s = readLine();
             } // while !End
