@@ -1,3 +1,25 @@
+Augury Owl
+1 U
+Creature Bird
+no text
+1/1
+Flying
+Scry 3
+
+Water Servant
+2 U U
+Creature Elemental
+no text
+3/4
+abPump U:+1/-1
+abPump U:-1/+1
+
+Temple Bell
+3
+Artifact
+no text
+abDrawCards T:1:Drawback$OppDraw/1:Each player draws a card.:Temple Bell - each player draws a card
+
 Dross Harvester
 1 B B
 Creature Horror
