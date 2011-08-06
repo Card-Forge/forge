@@ -2642,7 +2642,10 @@ public class Card extends MyObservable {
     
     //the amount of damage needed to kill the creature
     public int getKillDamage() {
-        return getNetDefense() + preventNextDamage - getDamage();
+    	int killDamage = getNetDefense() + preventNextDamage - getDamage();
+        if(killDamage > preventNextDamage && getKeyword().contains("When CARDNAME is dealt damage, destroy it.")) killDamage = 1 + preventNextDamage;
+        
+        return killDamage;
     }
     
     public void setDamage(int n) {

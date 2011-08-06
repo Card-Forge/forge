@@ -650,6 +650,7 @@ public class CombatUtil {
         
         int defBushidoMagnitude = defender.getKeywordMagnitude("Bushido");
         int attBushidoMagnitude = attacker.getKeywordMagnitude("Bushido");
+        attBushidoMagnitude += attacker.getAmountOfKeyword("Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.");
         
         int defenderDamage = defender.getNetAttack() - flankingMagnitude + defBushidoMagnitude;
         int attackerDamage = attacker.getNetAttack() + attBushidoMagnitude;
@@ -668,7 +669,6 @@ public class CombatUtil {
         
         if(defender.getKeyword().contains("Double Strike") ) {
             if(defender.getKeyword().contains("Deathtouch") && defenderDamage > 0) return true;
-            if(attacker.getKeyword().contains("When CARDNAME is dealt damage, destroy it.") && defenderDamage > 0) return true;
             if(defender.getKeyword().contains("Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.") 
             		&& defenderDamage > 0) return true;
             if(defenderDamage >= attackerLife) return true;
@@ -678,7 +678,6 @@ public class CombatUtil {
             		&& !defender.getKeyword().contains("Indestructible")) {
                 if(attackerDamage >= defenderLife) return false;
                 if(attackerDamage > 0 && attacker.getKeyword().contains("Deathtouch")) return false;
-                if(defender.getKeyword().contains("When CARDNAME is dealt damage, destroy it.") && attackerDamage > 0) return false;
             } 
             if(attackerLife <= 2 * defenderDamage) return true;
         }//defender double strike
@@ -691,13 +690,11 @@ public class CombatUtil {
             	
             	if(attackerDamage > defenderLife) return false;
             	if(attackerDamage > 0 && attacker.getKeyword().contains("Deathtouch") ) return false;
-                if(defender.getKeyword().contains("When CARDNAME is dealt damage, destroy it.") && attackerDamage > 0) return false;
             }
             
             if(defender.getKeyword().contains("Deathtouch") && defenderDamage > 0) return true;
             if(defender.getKeyword().contains("Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.") 
             		&& defenderDamage > 0) return true;
-            if(attacker.getKeyword().contains("When CARDNAME is dealt damage, destroy it.") && defenderDamage > 0) return true;
                 
             return defenderDamage >= attackerLife;
             
@@ -714,7 +711,7 @@ public class CombatUtil {
         	flankingMagnitude = attacker.getAmountOfKeyword("Flanking");
         	
             if(flankingMagnitude >= defender.getNetDefense()) return true;
-            if((flankingMagnitude >= defender.getNetDefense() - defender.getDamage()) && !defender.getKeyword().contains("Indestructible")) return true;    
+            if((flankingMagnitude >= defender.getKillDamage()) && !defender.getKeyword().contains("Indestructible")) return true;    
         }//flanking
         
         if(defender.getKeyword().contains("Indestructible") && 
@@ -738,6 +735,7 @@ public class CombatUtil {
         
         int defenderDamage = defender.getNetAttack() - flankingMagnitude + defBushidoMagnitude;
         int attackerDamage = attacker.getNetAttack() + attBushidoMagnitude;
+        attBushidoMagnitude += attacker.getAmountOfKeyword("Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.");
         
         if(isDoranInPlay()) {
             defenderDamage = defender.getNetDefense() - flankingMagnitude + defBushidoMagnitude;
@@ -753,7 +751,6 @@ public class CombatUtil {
         
         if(attacker.getKeyword().contains("Double Strike") ) {
             if(attacker.getKeyword().contains("Deathtouch") && attackerDamage > 0) return true;
-            if(defender.getKeyword().contains("When CARDNAME is dealt damage, destroy it.") && attackerDamage > 0) return true;
             if(attacker.getKeyword().contains("Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.") 
             		&& attackerDamage > 0) return true;
             if(attackerDamage >= defenderLife) return true;
@@ -763,7 +760,6 @@ public class CombatUtil {
             		&& !attacker.getKeyword().contains("Indestructible")) {
                 if(defenderDamage >= attackerLife) return false;
                 if(defenderDamage > 0 && defender.getKeyword().contains("Deathtouch")) return false;
-                if(defenderDamage > 0 && attacker.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.")) return false;
             } 
             if(defenderLife <= 2 * attackerDamage) return true;
         }//attacker double strike
@@ -776,13 +772,11 @@ public class CombatUtil {
             	
             	if(defenderDamage > attackerLife) return false;
             	if(defenderDamage > 0 && defender.getKeyword().contains("Deathtouch") ) return false;
-                if(attacker.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.") && defenderDamage > 0) return true;
             }
             
             if(attacker.getKeyword().contains("Deathtouch") && attackerDamage > 0) return true;
             if(attacker.getKeyword().contains("Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.") 
             		&& attackerDamage > 0) return true;
-            if(defender.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.") && attackerDamage > 0) return true;
                 
             return attackerDamage >= defenderLife;
             
