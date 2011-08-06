@@ -1,0 +1,11 @@
+Name:Dwarven Armorer
+ManaCost:R
+Types:Creature Dwarf
+Text:no text
+PT:0/2
+A:AB$PutCounter|Cost$R T Discard<1/Any>|Tgt$TgtC|CounterType$P1P0|CounterNum$1|SpellDescription$Put a +1/+0 counter on target creature.
+A:AB$PutCounter|Cost$R T Discard<1/Any>|Tgt$TgtC|CounterType$P0P1|CounterNum$1|SpellDescription$Put a +0/+1 counter on target creature.
+SVar:Rarity:Rare
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_armorer.jpg
+End
