@@ -1,7 +1,7 @@
 Name:Serra Avatar
 ManaCost:4 W W W
 Types:Creature Avatar
-Text:When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library.
+Text:no text
 PT:*/*
 K:When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library.
 K:stSetPT:Count$InYourHand:Count$InYourHand:CARDNAME's power and toughness are each equal to your life total.
