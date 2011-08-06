@@ -4725,19 +4725,6 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Thelonite Hermit")) {
-            
-            Command turnsFaceUp = new Command() {
-                private static final long serialVersionUID = -3882798504865405413L;
-                
-                public void execute() {
-                	for(int i = 0; i < 4; i++)
-                		CardFactoryUtil.makeTokenSaproling(card.getController());
-                }//execute()
-            };//Command
-            card.addTurnFaceUpCommand(turnsFaceUp);
-        }//*************** END ************ END **************************
         
         /*
         //*************** START *********** START **************************
