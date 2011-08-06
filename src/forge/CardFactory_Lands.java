@@ -306,6 +306,129 @@ class CardFactory_Lands {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
+        else if(cardName.equals("Gemstone Mine")) {
+            final Ability_Mana mine = new Ability_Mana(card, "tap, Remove a charge counter from CARDNAME: Add one mana of any color to your mana pool.") {
+				private static final long serialVersionUID = -785117149012567841L;
+
+                @Override
+                public void undo() {
+                	card.untap();
+                    card.addCounter(Counters.MINING, 1);
+                }
+                
+                //@Override
+                public String mana() {
+                    return this.choices_made[0].toString();
+                }
+                
+                @Override
+                public boolean canPlay() {
+                    if(choices_made[0] == null) choices_made[0] = "1";
+                    return super.canPlay() && card.getCounters(Counters.MINING) > 0;
+                }
+                
+                @Override
+                public void resolve() {
+                    card.subtractCounter(Counters.MINING, 1);
+                    card.tap();
+                    if (card.getCounters(Counters.MINING) == 0) AllZone.GameAction.sacrifice(card);
+                    super.resolve();
+                }
+            };
+            
+            mine.choices_made = new String[1];
+            mine.setBeforePayMana(new Input() {
+                
+                private static final long serialVersionUID = 376497609786542558L;
+                
+                @Override
+                public void showMessage() {
+                	mine.choices_made[0] = Input_PayManaCostUtil.getShortColorString(AllZone.Display.getChoiceOptional(
+                            "Select a Color", Constant.Color.onlyColors));
+                	if (mine.choices_made[0] != null){
+                		AllZone.Stack.add(mine);
+                	}
+                    stop();
+                }
+            });
+            
+            card.addSpellAbility(mine);
+            mine.setDescription("Gemstone Mine - tap, remove a mining counter: Add one mana of any color to your mana pool");
+            mine.setStackDescription("Gemstone Mine - tap, remove a mining counter: Add one mana of any color to your mana pool");
+        	
+            Command intoPlay = new Command() {
+				private static final long serialVersionUID = -2231880032957304542L;
+
+				public void execute() {
+					card.addCounter(Counters.MINING, 3);
+                }
+            };
+            card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Vivid Crag") || cardName.equals("Vivid Creek") || cardName.equals("Vivid Grove")
+        		|| cardName.equals("Vivid Marsh") || cardName.equals("Vivid Meadow")){
+            final Ability_Mana vivid = new Ability_Mana(card, "tap, Remove a charge counter from CARDNAME: Add one mana of any color to your mana pool.") {
+				private static final long serialVersionUID = -785117149012567841L;
+
+                @Override
+                public void undo() {
+                	card.untap();
+                    card.addCounter(Counters.CHARGE, 1);
+                }
+                
+                //@Override
+                public String mana() {
+                    return this.choices_made[0].toString();
+                }
+                
+                @Override
+                public boolean canPlay() {
+                    if(choices_made[0] == null) choices_made[0] = "1";
+                    return super.canPlay() && card.getCounters(Counters.CHARGE) > 0;
+                }
+                
+                @Override
+                public void resolve() {
+                    card.subtractCounter(Counters.CHARGE, 1);
+                    card.tap();
+                    super.resolve();
+                }
+            };
+            
+            vivid.choices_made = new String[1];
+            vivid.setBeforePayMana(new Input() {
+                
+                private static final long serialVersionUID = 376497609786542558L;
+                
+                @Override
+                public void showMessage() {
+                	vivid.choices_made[0] = Input_PayManaCostUtil.getShortColorString(AllZone.Display.getChoiceOptional(
+                            "Select a Color", Constant.Color.onlyColors));
+                	if (vivid.choices_made[0] != null){
+                		AllZone.Stack.add(vivid);
+                	}
+                    stop();
+                }
+            });
+            
+            card.addSpellAbility(vivid);
+            vivid.setDescription("CARDNAME - tap, remove a charge counter: Add one mana of any color to your mana pool");
+            vivid.setStackDescription("CARDNAME - tap, remove a charge counter: Add one mana of any color to your mana pool");
+        	
+            Command intoPlay = new Command() {
+				private static final long serialVersionUID = -2231880032957304542L;
+
+				public void execute() {
+					card.addCounter(Counters.CHARGE, 2);
+					card.tap();
+                }
+            };
+            card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
         else if(cardName.equals("Graypelt Refuge") || cardName.equals("Sejiri Refuge")
                 || cardName.equals("Jwar Isle Refuge") || cardName.equals("Akoum Refuge")
                 || cardName.equals("Kazandu Refuge")) {

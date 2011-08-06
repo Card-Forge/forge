@@ -1,3 +1,38 @@
+Vivid Crag
+no cost
+Land
+no text
+tap: add R
+
+Vivid Creek
+no cost
+Land
+no text
+tap: add U
+
+Vivid Grove
+no cost
+Land
+no text
+tap: add G
+
+Vivid Marsh
+no cost
+Land
+no text
+tap: add B
+
+Vivid Meadow
+no cost
+Land
+no text
+tap: add W
+
+Gemstone Mine
+no cost
+Land
+no text
+
 Lightning Dragon
 2 R R
 Creature Dragon

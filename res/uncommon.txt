@@ -304,6 +304,7 @@ Fyndhorn Elder
 Gatekeeper of Malakir
 Gelectrode
 Gemstone Array
+Gemstone Mine
 Gerrard's Verdict
 Gerrard's Wisdom
 Ghitu Encampment
@@ -862,6 +863,11 @@ Virtue's Ruin
 Vitalizing Cascade
 Vithian Renegades
 Vitu-Ghazi, the City-Tree
+Vivid Crag
+Vivid Creek
+Vivid Grove
+Vivid Marsh
+Vivid Meadow
 Vodalian Knights
 Voice of Duty
 Voice of Grace
