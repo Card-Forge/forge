@@ -79,6 +79,7 @@ public class GameActionUtil {
 		upkeep_Sensation_Gorger();
 		upkeep_Squeaking_Pie_Grubfellows();
 		upkeep_Wandering_Graybeard();
+		upkeep_Waterspout_Weavers();
 		upkeep_Winnower_Patrol();
 		upkeep_Wolf_Skull_Shaman();
 		
@@ -7964,6 +7965,97 @@ public class GameActionUtil {
             AllZone.Stack.add(ability);
         }// for
     }// upkeep_Wandering_Graybeard()
+    
+    
+    private static void upkeep_Waterspout_Weavers() {
+        final Player player = AllZone.Phase.getPlayerTurn();
+        CardList kinship = AllZoneUtil.getPlayerCardsInPlay(player, "Waterspout Weavers");
+        
+        PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+        // Players would not choose to trigger Kinship ability if library is empty.
+        // Useful for games when the "Milling = Loss Condition" check box is unchecked.
+        
+        if (kinship.size() == 0 || library.size() <= 0)
+            return;
+        
+        final String[] shareTypes = { "Merfolk", "Wizard" };
+        final Card[] prevCardShown = { null };
+        final Card peek[] = { null };
+        
+        for (final Card k : kinship) {
+            Ability ability = new Ability(k, "0") {    // change to triggered abilities when ready
+                @Override
+                public void resolve() {
+                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+                    if (library.size() <= 0)
+                        return;
+                    
+                    peek[0] = library.get(0);
+                    boolean wantMerfolkBuff = false;
+                    
+                    // We assume that both players will want to peek, ask if they want to reveal.
+                    // We do not want to slow down the pace of the game by asking too many questions.
+                    // Dialogs outside of the Ability appear at the previous end of turn phase !!!
+                    
+                    if (peek[0].isValidCard(shareTypes)) {
+                        if (player.isHuman()) {
+                            StringBuilder question = new StringBuilder();
+                            question.append("Your top card is ").append(peek[0].getName());
+                            question.append(". Reveal card and each creature you ");
+                            question.append("control gains flying until end of turn?");
+                            if (showYesNoDialog(k, question.toString())) {
+                                wantMerfolkBuff = true;
+                            }
+                        }
+                        // player isComputer()
+                        else {
+                            String title = "Computer reveals";
+                            revealTopCard(title);
+                            wantMerfolkBuff = true;
+                        }
+                    } else if (player.isHuman()) {
+                        String title = "Your top card is";
+                        revealTopCard(title);
+                    }
+                    
+                    if (wantMerfolkBuff) {
+                        CardList creatures = AllZoneUtil.getCreaturesInPlay(player);
+                        for (int i = 0; i < creatures.size(); i ++) {
+                            if (!creatures.get(i).getKeyword().contains("Flying")) {
+                                creatures.get(i).addExtrinsicKeyword("Flying");
+                            }
+                        }
+                        final Command untilEOT = new Command() {
+                            private static final long serialVersionUID = -1978446996943583910L;
+
+                            public void execute() {
+                                CardList creatures = AllZoneUtil.getCreaturesInPlay(player);
+                                for (int i = 0; i < creatures.size(); i ++) {
+                                    if (creatures.get(i).getKeyword().contains("Flying")) {
+                                        creatures.get(i).removeExtrinsicKeyword("Flying");
+                                    }
+                                }
+                            }
+                        };
+                        AllZone.EndOfTurn.addUntil(untilEOT);
+                    }
+                }// resolve()
+                
+                private void revealTopCard(String title) {
+                    if (peek[0] != prevCardShown[0]) {
+                        AllZone.Display.getChoice(title, peek[0]);
+                        prevCardShown[0] = peek[0];
+                    }
+                }// revealTopCard()
+            };// ability
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Waterspout Weavers - ").append(player);
+            sb.append(" triggers Kinship");
+            ability.setStackDescription(sb.toString());
+            AllZone.Stack.add(ability);
+        }// for
+    }// upkeep_Waterspout_Weavers()
     
     
     private static void upkeep_Winnower_Patrol() {
