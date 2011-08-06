@@ -478,7 +478,6 @@ public class CombatUtil {
     public static int getTotalFirstStrikeBlockPower(Card attacker, Player player)
     {
     	final Card att = attacker;
-    	int i = 0;
     	
     	CardList list = AllZoneUtil.getCreaturesInPlay(player);
     	list = list.filter(new CardListFilter()
@@ -508,25 +507,26 @@ public class CombatUtil {
     }
     
     //Returns the damage unblocked attackers would deal
-    private static int sumAttack(CardList attackers)
+    private static int sumAttack(CardList attackers, Player attacked)
     {
        int sum = 0;
  	  for(int i = 0; i < attackers.size(); i++) {
  		  Card a = attackers.get(i);
- 		  if (!a.hasKeyword("Infect")) sum += getAttack(a);
+ 		  if (!a.hasKeyword("Infect")) sum += attacked.staticDamagePrevention(getAttack(a), a, true);
  	  }
 
        return sum;
     }
     
   //Returns the number of poison counters unblocked attackers would deal
-    private static int sumPoison(CardList attackers)
+    private static int sumPoison(CardList attackers, Player attacked)
     {
        int sum = 0;
  	  for(int i = 0; i < attackers.size(); i++) {
  		  Card a = attackers.get(i);
- 		  if (a.hasKeyword("Infect")) sum += getAttack(a);
- 		  if (a.hasKeyword("Poisonous")) sum += a.getKeywordMagnitude("Poisonous");
+ 		  int damage = attacked.staticDamagePrevention(getAttack(a), a, true);
+ 		  if (a.hasKeyword("Infect")) sum += damage;
+ 		  if (a.hasKeyword("Poisonous") && damage > 0) sum += a.getKeywordMagnitude("Poisonous");
  	  }
 
        return sum;
@@ -558,8 +558,8 @@ public class CombatUtil {
  			  }
  	   }
  	   
- 	   damage += sumAttack(unblocked);
- 	   poison += sumPoison(unblocked);
+ 	   damage += sumAttack(unblocked, AllZone.ComputerPlayer);
+ 	   poison += sumPoison(unblocked, AllZone.ComputerPlayer);
  	   
  	   if (combat.getPlaneswalker() == null) {
  		   if (damage + 3 > AllZone.ComputerPlayer.getLife() || poison + 2 > 10 - AllZone.ComputerPlayer.getPoisonCounters())
@@ -618,7 +618,7 @@ public class CombatUtil {
         return defenderDamage;
     }
     
-    // This calculates the amount of damage a blocker in a blockgang can take from the attacker
+    // This calculates the amount of damage a blocker in a blockgang can take from the attacker (for trampling attackers)
     public static int totalShieldDamage(Card attacker, CardList defenders) {
     
     	int defenderDefense = 0;
@@ -628,7 +628,7 @@ public class CombatUtil {
         return defenderDefense;
     }
     
-    // This calculates the amount of damage a blocker in a blockgang can take from the attacker
+    // This calculates the amount of damage a blocker in a blockgang can take from the attacker (for trampling attackers)
     public static int shieldDamage(Card attacker, Card defender) {
     	
     	if (!canDestroyBlocker(defender,attacker)) return 100;
@@ -702,8 +702,8 @@ public class CombatUtil {
         
         if(defender.getKeyword().contains("Double Strike") ) {
             if(defender.getKeyword().contains("Deathtouch") && defenderDamage > 0) return true;
-            if(defender.getKeyword().contains("Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.") 
-            		&& defenderDamage > 0) return true;
+            if(defender.hasStartOfKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature") 
+            		&& defenderDamage > 0 && !attacker.getKeyword().contains("Indestructible")) return true;
             if(defenderDamage >= attackerLife) return true;
             
             //Attacker may kill the blocker before he can deal normal (secondary) damage
@@ -784,8 +784,8 @@ public class CombatUtil {
         
         if(attacker.getKeyword().contains("Double Strike") ) {
             if(attacker.getKeyword().contains("Deathtouch") && attackerDamage > 0) return true;
-            if(attacker.getKeyword().contains("Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.") 
-            		&& attackerDamage > 0) return true;
+            if(attacker.hasStartOfKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature") 
+            		&& attackerDamage > 0 && !defender.getKeyword().contains("Indestructible")) return true;
             if(attackerDamage >= defenderLife) return true;
             
             //Attacker may kill the blocker before he can deal normal (secondary) damage

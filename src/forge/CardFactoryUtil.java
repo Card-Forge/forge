@@ -473,7 +473,7 @@ public class CardFactoryUtil {
         
         //Other good keywords
         if (c.hasKeyword("Deathtouch") && power > 0) value += 25;
-        if (c.hasKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.") 
+        if (c.hasStartOfKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature") 
         		&& power > 0) value += 24;
         value += c.getAmountOfKeyword("Exalted") * 15;
         if (c.hasKeyword("First Strike") && !c.hasKeyword("Double Strike") && power > 0) value += 15;
