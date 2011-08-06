@@ -1,0 +1,7 @@
+Name:Elixir of Immortality
+ManaCost:1
+Types:Artifact
+Text:no text
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/elixir_of_immortality.jpg
+End

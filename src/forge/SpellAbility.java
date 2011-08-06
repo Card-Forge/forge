@@ -38,6 +38,7 @@ public abstract class SpellAbility {
     private boolean 		xCost			   = false;
     private boolean         kickerAbility      = false;
     private boolean 		kothThirdAbility   = false;
+    private boolean			cycling 		   = false;
     
     private Input           beforePayMana;
     private Input           afterResolve;
@@ -195,6 +196,14 @@ public abstract class SpellAbility {
     
     public boolean isXCost(){
     	return xCost;
+    }
+    
+    public void setIsCycling(boolean b) {
+    	cycling = b;
+    }
+    
+    public boolean isCycling(){
+    	return cycling;
     }
     
     public void setSourceCard(Card c) {

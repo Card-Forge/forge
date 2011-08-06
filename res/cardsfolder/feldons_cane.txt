@@ -1,7 +1,7 @@
 Name:Feldon's Cane
 ManaCost:1
 Types:Artifact
-Text:tap, Exile Feldon's Cane: Shuffle your graveyard into your library.
+Text:no text
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feldons_cane.jpg

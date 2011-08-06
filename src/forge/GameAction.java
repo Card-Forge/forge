@@ -2886,7 +2886,8 @@ public class GameAction {
  		Cards_In_Play.add(originalCard);
  		String Mana = manaCost.toString();
  		CardList Player_Play = new CardList(AllZone.getZone(Constant.Zone.Play, sa.getSourceCard().getController()).getCards());
- 		int XBonus = 0;
+ 		CardList Player_Hand = new CardList(AllZone.getZone(Constant.Zone.Hand, sa.getSourceCard().getController()).getCards());
+        int XBonus = 0;
  		int Max = 25;
  		if(sa.isXCost() && !sa.getSourceCard().isCopiedSpell()) sa.getSourceCard().setXManaCostPaid(0);
         if(sa.isMultiKicker()) CostCutting_GetMultiMickerManaCostPaid_Colored = "";
@@ -2947,8 +2948,9 @@ public class GameAction {
   	                 	} 
                  if((k[1].equals("Player") && card.getController().equals(sa.getSourceCard().getController()) 
                  		|| (k[1].equals("Opponent") && card.getController().equals(sa.getSourceCard().getController().getOpponent())) || k[1].equals("All"))
-                        && ((k[4].equals("Spell") && sa.isSpell() == true) || (k[4].equals("Ability") && sa.isAbility() == true) 
-                        || (k[4].equals("Self") && originalCard.equals(card)) || k[4].equals("All"))
+                        && ((k[4].equals("Spell") && sa.isSpell() == true) || (k[4].equals("Ability") && sa.isAbility() == true)
+                        || (k[4].startsWith("Ability_Cycling") && sa.isCycling()) || (k[4].equals("Self") && originalCard.equals(card))
+                        || (k[4].equals("Enchanted") && originalCard.getEnchantedBy().contains(card)) || k[4].equals("All"))
                  		&& ((CardUtil.getColors(sa.getSourceCard()).contains(k[5])) || k[5].equals("All")) 
                         && ((sa.getSourceCard().isType(k[6])) 
                         || (!(sa.getSourceCard().isType(k[6])) && k[7].contains("NonType")) || k[6].equals("All"))) {      
@@ -2957,6 +2959,9 @@ public class GameAction {
                  	}
                  	if(k[7].contains("TargetInPlay")) {
                  		if(!Player_Play.contains(sa.getSourceCard())) k[3] = "0";             		
+                 	}
+                 	if(k[7].contains("TargetInHand")) {
+                 		if(!Player_Hand.contains(sa.getSourceCard())) k[3] = "0";             		
                  	}
                  	if(k[7].contains("NonType")) {
                  		if(originalCard.isType(k[6])) k[3] = "0";             		
@@ -3087,7 +3092,8 @@ public class GameAction {
                          if((k[1].equals("Player") && card.getController().equals(sa.getSourceCard().getController()) 
                          		|| (k[1].equals("Opponent") && card.getController().equals(sa.getSourceCard().getController().getOpponent())) || k[1].equals("All"))
                          		&& ((k[4].equals("Spell") && sa.isSpell() == true) || (k[4].equals("Ability") && sa.isAbility() == true) 
-                         		|| (k[4].equals("Self") && originalCard.equals(card)) || k[4].equals("All"))
+                         		|| (k[4].startsWith("Ability_Cycling") && sa.isCycling()) || (k[4].equals("Self") && originalCard.equals(card))
+                         		|| (k[4].equals("Enchanted") && originalCard.getEnchantedBy().contains(card)) || k[4].equals("All"))
                          		&& ((CardUtil.getColors(sa.getSourceCard()).contains(k[5])) || k[5].equals("All")) 
                          		/**
                                   *  Chris added a test for Changeling.
@@ -3102,6 +3108,9 @@ public class GameAction {
                          	}
                          	if(k[7].contains("TargetInPlay")) {
                          		if(!Player_Play.contains(sa.getSourceCard())) k[3] = "0";             		
+                         	}
+                         	if(k[7].contains("TargetInHand")) {
+                         		if(!Player_Hand.contains(sa.getSourceCard())) k[3] = "0";             		
                          	}
                          	if(k[7].contains("NonType")) {
                          		if(originalCard.isType(k[6])) k[3] = "0";             		
@@ -3176,7 +3185,7 @@ public class GameAction {
                          }
                          Mana = Mana.trim();
                          if(Mana.length() == 0 || Mana.equals("0")) {
-                         	if(sa.isSpell()) Mana = "0";
+                         	if(sa.isSpell() || sa.isCycling()) Mana = "0";
                          	else {
                          		Mana = "1";
                          	}

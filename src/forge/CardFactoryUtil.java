@@ -1636,8 +1636,9 @@ public class CardFactoryUtil {
                 sourceCard.cycle();
             }
         };
+        cycle.setIsCycling(true);
         StringBuilder sbDesc = new StringBuilder();
-        sbDesc.append("Cycling (").append(abCost.toString()).append(" Draw a card.)");
+        sbDesc.append("Cycling ").append(cycle.getManaCost()).append(" (").append(abCost.toString()).append(" Draw a card.)");
         cycle.setDescription(sbDesc.toString());
         
         StringBuilder sbStack = new StringBuilder();
@@ -1710,7 +1711,8 @@ public class CardFactoryUtil {
         };
         if(type.contains("Basic")) description = "basic land";
         else description = type;
-        
+
+        cycle.setIsCycling(true);
         StringBuilder sbDesc = new StringBuilder();
         sbDesc.append(description).append("cycling (").append(abCost.toString()).append(" Search your library for a ");
         sbDesc.append(description).append(" card, reveal it, and put it into your hand. Then shuffle your library.");

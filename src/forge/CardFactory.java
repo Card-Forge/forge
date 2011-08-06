@@ -6659,7 +6659,11 @@ public class CardFactory implements NewConstants {
                     list = list.getType("Creature");
                     
                     for(int i = 0; i < list.size(); i++) {
-                        if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);
+                        if(CardFactoryUtil.canDamage(card, list.get(i))){
+                        	HashMap<Card, Integer> m = new HashMap<Card, Integer>();
+                        	m.put(card, 1);
+                        	list.get(i).addDamage(m);
+                        }
                     }
                     
                     AllZone.HumanPlayer.addDamage(1, card);
@@ -10489,7 +10493,45 @@ public class CardFactory implements NewConstants {
         	StringBuilder sb = new StringBuilder();
         	sb.append(cardName).append(" - Player shuffles grave into library.");
         	ability.setStackDescription(sb.toString());
+        	ability.setDescription("tap, Exile CARDNAME: Shuffle your graveyard into your library.");
+        	card.addSpellAbility(ability);
+        }//*************** END ************ END **************************
+        
+      //*************** START *********** START **************************
+        else if(cardName.equals("Elixir of Immortality")) {
+        	/*
+        	 * 2, Tap: You gain 5 life. Shuffle Elixir of Immortality and your graveyard into your library.
+        	 */
+        	final Ability_Tap ability = new Ability_Tap(card, "2") {
+				private static final long serialVersionUID = -1299603105585632846L;
+
+				@Override
+        		public void resolve() {
+        			final Player player = card.getController();
+        			CardList grave = AllZoneUtil.getPlayerGraveyard(player);
+        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+        			AllZone.GameAction.moveToLibrary(card);
+        			
+        			for(Card c:grave) {
+        				lib.add(c);
+        			}
+        			AllZone.getZone(Constant.Zone.Graveyard, player).reset();
+        			player.shuffle();
+        			player.gainLife(5, card);
+        		}
+
+        		@Override
+        		public boolean canPlayAI() {
+        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer);
+        			return lib.size() < 5 || AllZone.ComputerPlayer.getLife() < 3;
+        		}
+
+        	};//SpellAbility
         	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(cardName).append(" - Player shuffles grave into library.");
+        	ability.setStackDescription(sb.toString());
+        	ability.setDescription("2, Tap: You gain 5 life. Shuffle Elixir of Immortality and your graveyard into your library.");
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
 

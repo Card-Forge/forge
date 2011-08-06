@@ -204,7 +204,7 @@ public class Cost_Payment {
 				return false;
 		}
 		
-		if (!payMana && !cost.hasNoManaCost()){		// pay mana here
+		if (!payMana /*&& !cost.hasNoManaCost()*/){		// pay mana here
 			changeInput.stopSetNext(new Input_PayCostMana(this));
 			return false;
 		}

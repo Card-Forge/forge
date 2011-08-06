@@ -20,8 +20,8 @@ public class Input_PayCostMana extends Input {
                 	manaCost = new ManaCost("0"); 
         	} else {
     		    String mana = payment.getCost().getMana();
-        		manaCost = AllZone.GameAction.getSpellCostChange(sa, new ManaCost(mana)); 
-        	}    	
+        		manaCost = new ManaCost(mana);//AllZone.GameAction.getSpellCostChange(sa, new ManaCost(mana)); 
+        	}    							//^ already factored into costPayment.
         }
         else
         {
@@ -69,7 +69,7 @@ public class Input_PayCostMana extends Input {
     public void showMessage() {
         ButtonUtil.enableOnlyCancel();
         AllZone.Display.showMessage("Pay Mana Cost: " + manaCost.toString());
-        if(manaCost.isPaid() && !new ManaCost(originalManaCost).isPaid()) 
+        if(manaCost.isPaid() /*&& !new ManaCost(originalManaCost).isPaid()*/) 
         	done(); 
     }
 }
