@@ -68,6 +68,7 @@ public class GameActionUtil {
 		upkeep_Dragon_Broodmother(); //put this before bitterblossom and mycoloth, so that they will resolve FIRST
 		upkeep_Bitterblossom();
 		upkeep_Goblin_Assault();
+		upkeep_Awakening_Zone();
 		upkeep_Battle_of_Wits();
 		upkeep_Epic_Struggle();
 		upkeep_Near_Death_Experience();
@@ -6530,7 +6531,33 @@ public class GameActionUtil {
 
 			AllZone.Stack.add(ability);
 		}// for
-	}// upkeep_Bitterblossom()
+	}// upkeep_Goblin_Assault()
+	
+	private static void upkeep_Awakening_Zone() {
+		final String player = AllZone.Phase.getActivePlayer();
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+
+		CardList list = new CardList(playZone.getCards());
+		list = list.getName("Awakening Zone");
+
+		Ability ability;
+		for(int i = 0; i < list.size(); i++) {
+			final Card crd = list.get(i);
+			ability = new Ability(list.get(i), "0") {
+				@Override
+				public void resolve() {
+					CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", crd, "C", new String[] {
+							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
+					for (Card c:cl)
+						c.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(c));
+				}// resolve()
+			};// Ability
+			ability.setStackDescription("Awakening Zone - " + player +
+			" puts a 0/1 colorless Eldrazi Spawn creature token onto the battlefield.");
+
+			AllZone.Stack.add(ability);
+		}// for
+	}// upkeep_Awakening_Zone()
 
 	private static void upkeep_Masticore() {
 		final String player = AllZone.Phase.getActivePlayer();
@@ -8635,7 +8662,8 @@ public class GameActionUtil {
 				}// for inner
 			}// for outer
 		}// execute()
-	}; //Goblin Assault                                                 
+	}; //Goblin Assault               
+	
 
 	public static Command Mobilization                = new Command() {
 		private static final long serialVersionUID   = 2005579284163773044L;

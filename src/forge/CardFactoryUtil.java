@@ -1813,6 +1813,16 @@ public class CardFactoryUtil {
 		return enchant;
     }//enPumpCurse_Enchant()
     
+    public static Ability_Mana getEldraziSpawnAbility(final Card c)
+    {
+    	SpellAbility mana = new Ability_Mana(c, "Sacrifice CARDNAME: Add 1 to your mana pool.") {
+			private static final long serialVersionUID = 2384540533244132975L;
+		};
+		
+		return (Ability_Mana)mana;
+    }
+    
+    
     public static Command entersBattleFieldWithCounters(final Card c, final Counters type, final int n) {
         Command addCounters = new Command() {
             private static final long serialVersionUID = 4825430555490333062L;

@@ -1,3 +1,8 @@
+Awakening Zone
+2 G
+Enchantment
+At the beginning of your upkeep, you may put a 0/1 colorless Eldrazi Spawn creature token onto the battlefield. It has "Sacrifice this creature: Add 1 to your mana pool."
+
 Chromatic Star
 1
 Artifact

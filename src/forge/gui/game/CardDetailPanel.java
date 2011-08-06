@@ -130,7 +130,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
             
             //displays keywords that have dots in them a little better:
             regex = "\\., ";
-            text = text.replaceAll(regex,"\r\n");
+            text = text.replaceAll(regex,".\r\n");
             
             area.append(text);
         }
@@ -143,6 +143,14 @@ public class CardDetailPanel extends JPanel implements CardContainer {
                 area.append(counter.getName() + " counters: ");
                 area.append(card.getCounters(counter));
             }
+        }
+        
+        //top revealed
+        if(card.getKeyword().contains("Play with the top card of your library revealed.") &&
+           !card.getTopCardName().equals(""))
+        {
+        	area.append("\r\nTop card: ");
+        	area.append(card.getTopCardName());
         }
         
         //chosen type
