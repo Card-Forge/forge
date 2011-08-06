@@ -1,14 +1,12 @@
-[BasicLand]
-Plains
-EndBasicLand
+BasicLandPercentage=34
 
-[SpecialLand]
+[Group MaxCnt=3 Percentage=10]
 Blasted Landscape
 Darksteel Citadel
 Drifting Meadow
-EndSpecialLand
+[/Group]
 
-[Core]
+[Group MaxCnt=4 Percentage=30]
 Glorious Anthem
 Isamaru, Hound of Konda
 Savannah Lions
@@ -16,9 +14,9 @@ Silvercoat Lion
 Skyhunter Prowler
 Stand Firm
 Sunlance
-EndCore
+[/Group]
 
-[Support]
+[Group MaxCnt=3 Percentage=25]
 Standing Troops
 Staunch Defenders
 Steadfast Guard
@@ -27,6 +25,6 @@ Steppe Lynx
 Swords to Plowshares
 Unmake
 Valorous Charge
-EndSupport
+[/Group]
 
 End
