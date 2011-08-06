@@ -115,7 +115,6 @@ public class TriggerHandler {
 	
 	public void registerTrigger(Trigger trig)
 	{
-		System.out.println("Registering from " + trig.getHostCard().getName());
 		registeredTriggers.add(trig);
 	}
 	
@@ -131,7 +130,6 @@ public class TriggerHandler {
 	
 	public void removeAllFromCard(Card crd)
 	{
-		System.out.println("Removing all registered triggers originating from card: " + crd.getName());
 		for(int i=0;i<registeredTriggers.size();i++)
 		{
 			if(registeredTriggers.get(i).getHostCard().equals(crd))
@@ -185,7 +183,6 @@ public class TriggerHandler {
 			}				
 			
 			//All tests passed, execute ability.
-			System.out.println("All tests succeeded.");
 			AbilityFactory AF = new AbilityFactory();
 			
 			final SpellAbility[] sa = new SpellAbility[1];
@@ -209,7 +206,6 @@ public class TriggerHandler {
 						buildQuestion.append(regtrig.getHostCard().getName()).append("(").append(regtrig.getHostCard().getUniqueNumber()).append(")?");
 						if(!GameActionUtil.showYesNoDialog(regtrig.getHostCard(), buildQuestion.toString()))
 						{
-							System.out.println("Player refused optional activation. Fail.");
 							return;
 						}
 					}
@@ -217,7 +213,6 @@ public class TriggerHandler {
 					{
 						if(!sa[0].canPlayAI())
 						{
-							System.out.println("AI refused optional activation. Fail.");
 							return;
 						}
 					}
