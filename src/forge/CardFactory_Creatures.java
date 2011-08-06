@@ -7375,28 +7375,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Sphinx of Magosi")) {
-        	/*
-        	 * 2 U: Draw a card, then put a +1/+1 counter on Sphinx of Magosi.
-        	 */
-        	final SpellAbility ability = new Ability(card, "2 U") {
-        		@Override
-        		public void resolve() {
-        			final Player player = card.getController();
-        			player.drawCards(1);
-        			card.addCounter(Counters.P1P1, 1);
-        		}   
-        	};
-        	card.addSpellAbility(ability);
-        	
-        	StringBuilder sb = new StringBuilder();
-        	sb.append(cardName).append(" - add a +1+1 counter and draw a card.");
-        	ability.setStackDescription(sb.toString());
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
+         //*************** START *********** START **************************
         else if(cardName.equals("Arc-Slogger")) {
         	/*
         	 * R, Exile the top ten cards of your library: Arc-Slogger deals
