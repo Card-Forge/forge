@@ -7102,6 +7102,146 @@ public class CardFactory implements NewConstants {
             };
             a1.setBeforePayMana(runtime);
             
+            final SpellAbility a2 = new Ability(card,"0")
+            {
+				public void resolve() {
+					CardList list = CardFactoryUtil.getCards("Squirrel Nest",Constant.Player.Human);
+					list = list.filter(new CardListFilter()
+					{
+						public boolean addCard(Card crd)
+						{
+							CardList l = new CardList(crd.getEnchanting().toArray());
+							if (l.size()>0 && l.get(0).isBasicLand() && l.get(0).isUntapped())	
+								return true;
+							else 
+								return false;
+						}
+					});
+					
+					if (list.size() == 0)
+						return;
+					
+					CardList l = new CardList(list.get(0).getEnchanting().toArray());
+					if (l.size() > 0) {
+						Card basicLand = l.get(0);
+						
+						int max = 10;
+						for (int i=0;i<max;i++)
+						{
+							basicLand.tap();
+							CardList tokens = CardFactoryUtil.makeToken("Squirrel", "G 1 1 Squirrel", basicLand, "G", new String[] {
+		                            "Creature", "Squirrel"}, 1, 1, new String[] {""});
+							if (i < (max-1))
+							{
+								tokens.get(0).tap();
+								basicLand.untap();
+							}
+							else
+							{
+								;
+							}
+						}
+					}
+				}
+				
+				public boolean canPlayAI()
+				{
+					return false;
+				}
+				
+				public boolean canPlay()
+				{
+					CardList list = CardFactoryUtil.getCards("Squirrel Nest", Constant.Player.Human);
+					list = list.filter(new CardListFilter()
+					{
+						public boolean addCard(Card crd)
+						{
+							CardList l = new CardList(crd.getEnchanting().toArray());
+							if (l.size()>0 && l.get(0).isBasicLand() && l.get(0).isUntapped())	
+								return true;
+							else 
+								return false;
+						}
+					});
+					
+					return super.canPlay() && list.size() > 0;
+				}
+            	
+            };
+            card.addSpellAbility(a2);
+            a2.setDescription("(Shortcut 10x)");
+            a2.setStackDescription(card + " - add 10 Squirrel tokens using Squirrel Nest");
+            
+            final SpellAbility a3 = new Ability(card,"0")
+            {
+				public void resolve() {
+					CardList list = CardFactoryUtil.getCards("Squirrel Nest",Constant.Player.Human);
+					list = list.filter(new CardListFilter()
+					{
+						public boolean addCard(Card crd)
+						{
+							CardList l = new CardList(crd.getEnchanting().toArray());
+							if (l.size()>0 && l.get(0).isBasicLand() && l.get(0).isUntapped())	
+								return true;
+							else 
+								return false;
+						}
+					});
+					
+					if (list.size() == 0)
+						return;
+					
+					CardList l = new CardList(list.get(0).getEnchanting().toArray());
+					if (l.size() > 0) {
+						Card basicLand = l.get(0);
+						
+						int max = 30;
+						for (int i=0;i<max;i++)
+						{
+							basicLand.tap();
+							CardList tokens = CardFactoryUtil.makeToken("Squirrel", "G 1 1 Squirrel", basicLand, "G", new String[] {
+		                            "Creature", "Squirrel"}, 1, 1, new String[] {""});
+							if (i < (max-1))
+							{
+								tokens.get(0).tap();
+								basicLand.untap();
+							}
+							else
+							{
+								;
+							}
+						}
+					}
+				}
+				
+				public boolean canPlayAI()
+				{
+					return false;
+				}
+				
+				public boolean canPlay()
+				{
+					CardList list = CardFactoryUtil.getCards("Squirrel Nest", Constant.Player.Human);
+					list = list.filter(new CardListFilter()
+					{
+						public boolean addCard(Card crd)
+						{
+							CardList l = new CardList(crd.getEnchanting().toArray());
+							if (l.size()>0 && l.get(0).isBasicLand() && l.get(0).isUntapped())	
+								return true;
+							else 
+								return false;
+						}
+					});
+					
+					return super.canPlay() && list.size() > 0;
+				}
+            	
+            };
+            card.addSpellAbility(a3);
+            a3.setDescription("(Shortcut 30x)");
+            a3.setStackDescription(card + " - add 30 Squirrel tokens using Squirrel Nest");
+            
         }//*************** END ************ END **************************
         
 
