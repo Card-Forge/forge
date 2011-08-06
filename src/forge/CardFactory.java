@@ -5791,22 +5791,18 @@ public class CardFactory implements NewConstants {
             final String[] keywords = k[9].split(";");
             final String abDesc = k[10];
             
-           	String fullCost = k[0].substring(11);
-           	String tmpCost = new String(fullCost);
-           	final boolean tapCost = tmpCost.contains("T") ? true : false;
-           	if(tmpCost.contains("T")) {
-                tmpCost = tmpCost.replace("T", "");
-                tmpCost = tmpCost.trim();
-            }
-           	
+            String fullCost = k[0].substring(11);
+            final Ability_Cost abCost = new Ability_Cost(fullCost, card.getName(), true);
+        	          	
         	final String spDesc[] = {"none"};
-        	spDesc[0] = fullCost.toString()+ " - " + abDesc;
+        	spDesc[0] = abCost.toString()+ " - " + abDesc;
         	
-        	final SpellAbility abMakeToken = new Ability_Activated(card, tmpCost) {
+        	final SpellAbility abMakeToken = new Ability_Activated(card, abCost, null) {
 				private static final long serialVersionUID = -1415539558367883075L;
+				
 				public boolean canPlayAI() {
                     if (!ComputerUtil.canPayCost(this)) return false;
-                    if(xString && CardFactoryUtil.xCount(card, numString) > 0) {
+                    if(xString && CardFactoryUtil.xCount(card, numString) == 0) {
 						return false;
 					}
 					else {
@@ -5818,17 +5814,15 @@ public class CardFactory implements NewConstants {
 	                    return rr;
 					}
         		}
-        		@Override
-                public boolean canPlay(){
-                	//Cost_Payment pay = new Cost_Payment(abCost, this);
-                    return CardFactoryUtil.canUseAbility(card) && super.canPlay();
-                }
-        		@Override
+				
+				@Override
+				public boolean canPlay(){
+					Cost_Payment pay = new Cost_Payment(abCost, this);
+					return (pay.canPayAdditionalCosts() && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+				}
+        		
+				@Override
                 public void resolve() {
-        			if(tapCost) {
-        				//TODO - should be part of paying for ability
-        				card.tap();
-        			}
         			String controller = (controllerString.equals("Controller") ? card.getController() : AllZone.GameAction.getOpponent(card.getController()));
 					if(keywords[0].equals("None")) keywords[0] = "";
 					
