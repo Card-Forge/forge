@@ -1,3 +1,13 @@
+Creakwood Liege
+2 BG BG BG
+Creature Horror
+At the beginning of your upkeep, you may put a 1/1 black and green Worm creature token onto the battlefield.
+2/2
+StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.green!NotSelf:Other green creatures you control get +1/+1.
+StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.black!NotSelf:Other black creatures you control get +1/+1.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+
 Murkfiend Liege
 2 UG UG UG
 Creature Horror

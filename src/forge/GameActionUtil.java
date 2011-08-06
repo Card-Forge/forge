@@ -75,6 +75,7 @@ public class GameActionUtil {
 		upkeep_Sleeper_Agent();
 		upkeep_Cursed_Land();
 		upkeep_Pillory_of_the_Sleepless();
+		upkeep_Creakwood_Liege();
 		upkeep_Bringer_of_the_Green_Dawn();
 		upkeep_Bringer_of_the_Blue_Dawn();
 		upkeep_Bringer_of_the_White_Dawn();
@@ -9231,6 +9232,43 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}// for
 	}// upkeep_Fledgling_Djinn()
+	
+	private static void upkeep_Creakwood_Liege() {
+		final String player = AllZone.Phase.getActivePlayer();
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+
+		CardList list = new CardList(playZone.getCards());
+		list = list.getName("Creakwood Liege");
+
+		Ability ability;
+		for(int i = 0; i < list.size(); i++) {
+			final Card crd = list.get(i);
+			ability = new Ability(list.get(i), "0") {
+				@Override
+				public void resolve() {
+					String[] choices = {"Yes", "No"};
+
+					Object q = null;
+					if(player.equals(Constant.Player.Human)) {
+						q = AllZone.Display.getChoiceOptional("Use Creakwood Liege?", choices);
+
+						if(q == null || q.equals("No")) return;
+						if(q.equals("Yes")) {
+							CardFactoryUtil.makeToken("Worm", "B G 1 1 Worm", crd, "B G", new String[] {
+									"Creature", "Worm"}, 1, 1, new String[] {""});
+						}
+					} else if(player.equals(Constant.Player.Computer)) {
+						CardFactoryUtil.makeToken("Worm", "B G 1 1 Worm", crd, "B G", new String[] {
+								"Creature", "Worm"}, 1, 1, new String[] {""});
+					}
+				}// resolve()
+			};// Ability
+			ability.setStackDescription("Creakwood Liege - " + player
+					+ " puts a 1/1 Green Black Worm creature token into play.");
+
+			AllZone.Stack.add(ability);
+		}// for
+	}// upkeep_Creakwood_Liege
 	
 	private static void upkeep_Murkfiend_Liege()
 	{
