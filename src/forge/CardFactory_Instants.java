@@ -2182,30 +2182,7 @@ public class CardFactory_Instants {
             card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "2 G G G", "0"));
             
         }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Sprout")) {
-            SpellAbility spell = new Spell(card) {
                 
-                private static final long serialVersionUID = 1299216756153970592L;
-                
-                @Override
-                public void resolve() {
-                    CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", card, "G", new String[] {
-                            "Creature", "Saproling"}, 1, 1, new String[] {""});
-                }
-            };
-            
-            spell.setDescription("Put a 1/1 green Saproling creature token into play.");
-            spell.setStackDescription(card.getController()
-                    + " put a 1/1 green Saproling creature token into play.");
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Wrap in Vigor")) {
             SpellAbility spell = new Spell(card) {
