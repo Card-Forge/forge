@@ -6302,7 +6302,7 @@ public class CardFactory implements NewConstants {
         	final String[] Tgts = { "Creature.nonArtifact" };
         	
         	Ability_Cost abCost = new Ability_Cost("T Sac<1/CARDNAME>", cardName, true);
-        	Target abTgt = new Target("Target a non-Artifact Creature to Transmogrify", Tgts);
+        	Target abTgt = new Target("Select target nonartifact creature to Transmogrify", Tgts);
 
         	final Ability_Activated ability = new Ability_Activated(card, abCost, abTgt){
                 private static final long serialVersionUID = -401631574059431293L;
