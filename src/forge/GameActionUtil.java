@@ -16,6 +16,7 @@ public class GameActionUtil {
 		upkeep_DamageUpkeepCost(); //deal damage unless upkeep cost is paid
 		upkeep_CumulativeUpkeepCost(); //sacrifice unless cumulative upkeep cost is paid
 		upkeep_Echo();
+		upkeep_Suspend();
 		upkeep_TabernacleUpkeepCost();
 		upkeep_MagusTabernacleUpkeepCost();
 		// upkeep_CheckEmptyDeck_Lose(); //still a little buggy
@@ -3248,6 +3249,50 @@ public class GameActionUtil {
 		}
 	}//echo
 
+	public static void upkeep_Suspend() {
+		String player = AllZone.Phase.getActivePlayer();
+
+		PlayerZone exile = AllZone.getZone(Constant.Zone.Removed_From_Play, player);
+		CardList list = new CardList();
+		list.addAll(exile.getCards());
+		//list = list.getType("Creature");
+		list = list.filter(new CardListFilter() {
+			public boolean addCard(Card c) {
+				for(String s : c.getKeyword()){
+					if (s.contains("Suspend"))
+						return true;
+				}
+				return false;
+			}
+		});
+
+		if (list.size() == 0) return;
+		
+		for(final Card c : list){
+			int counters = c.getCounters(Counters.TIME);
+			if (counters > 0)
+			{
+				c.setCounter(Counters.TIME, counters-1);
+				if (counters == 1){
+					c.setSuspendCast(true);
+
+			        // todo(sol): haste should wear off when player loses control. need to figure out where to add that.
+			        Command intoPlay = new Command() {
+			            private static final long serialVersionUID = -4514610171270596654L;
+			            
+			            public void execute() {
+			            	if(AllZone.GameAction.isCardInPlay(c) && c.isCreature()) 
+			                    c.addExtrinsicKeyword("Haste");
+			            }//execute()
+			        };
+					
+					c.addComesIntoPlayCommand(intoPlay);
+					AllZone.GameAction.playCardNoCost(c);
+					exile.remove(c);
+				}
+			}
+		}
+	}//suspend	
 
 	public static void upkeep_UpkeepCost() {
 		String player = AllZone.Phase.getActivePlayer();

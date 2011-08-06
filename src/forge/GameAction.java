@@ -2147,7 +2147,8 @@ public class GameAction {
         PlayerZone zone = AllZone.getZone(c); //could be hand, grave, play, ...
         PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, c.getOwner());
         
-        zone.remove(c);
+        if (zone != null)	// for suspend
+        	zone.remove(c);
         if(!c.isToken()) removed.add(c);
         
     }
@@ -2829,7 +2830,8 @@ public class GameAction {
         		choices.add("Play land");
         
         for(SpellAbility sa:abilities) {
-            if(sa.canPlay()) {
+        	// for uncastables like lotus bloom, check if manaCost is blank
+            if(sa.canPlay() && !sa.getManaCost().equals("")) {
                 choices.add(sa.toString());
                 map.put(sa.toString(), sa);
             }
@@ -2842,6 +2844,9 @@ public class GameAction {
         	choice = choices.get(0);
         else
         	choice = (String) AllZone.Display.getChoiceOptional("Choose", choices.toArray());
+        
+        if (choice == null)
+        	return;
         
         if(choice.equals("Play land")){
         	playLand(c, AllZone.Human_Hand);

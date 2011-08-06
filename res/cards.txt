@@ -1,3 +1,94 @@
+Duskrider Peregrine
+5 W
+Creature - Bird
+no text
+3/3
+Flying
+Protection from black
+Suspend:3:1 W
+
+Ancestral Vision
+no cost
+Sorcery
+(Note: Ancestral Vision currently draws 0 cards due to the combined upkeep/draw phases. Once they are seperated, this should work as expected.)
+Suspend:4:U
+spDrawCardsTgt:3:Target player draws three cards.:CARDNAME - draw 3 cards.
+
+Errant Ephemeron
+6 U
+Creature - Illusion
+no text
+4/4
+Flying
+Suspend:4:1 U
+
+Keldon Halberdier
+4 R
+Creature - Human Warrior
+no text
+4/1
+First strike
+Suspend:4:R
+
+Durkwood Baloth
+4 G G
+Creature - Beast
+no text
+5/5
+Suspend:5:G
+
+Lotus Bloom
+no cost
+Artifact
+no text
+Suspend:3:0
+tap, Sacrifice CARDNAME: Add W W W to your mana pool.
+tap, Sacrifice CARDNAME: Add U U U to your mana pool.
+tap, Sacrifice CARDNAME: Add B B B to your mana pool.
+tap, Sacrifice CARDNAME: Add R R R to your mana pool.
+tap, Sacrifice CARDNAME: Add G G G to your mana pool.
+
+Corpulent Corpse
+5 B
+Creature Zombie
+no text
+3/3
+Fear
+Suspend:5:B
+
+Shade of Trokair
+3 W
+Creature Shade
+no text
+1/2
+Suspend:3:W
+abPump W:+1/+1
+
+Giant Dustwasp
+3 G G
+Creature Insect
+No Text
+3/3
+Flying
+Suspend:4:1 G
+
+Pardic Dragon
+4 R R
+Creature Dragon
+(Note: Opponent adding time counters when playing spell not implemented. Might be able to do with Whenever keyword)
+4/4
+Flying
+Suspend:2:R R
+abPump R:+1/+0
+
+Viscerid Deepwalker
+4 U
+Creature Homarid Warrior
+no text
+2/3
+Suspend:4:U
+abPump U:+1/+0
+
 Bogardan Hellkite
 6 R R
 Creature Dragon
@@ -19303,13 +19394,6 @@ no text
 Fear
 abPump B:+1/+1
 
-Shade of Trokair
-3 W
-Creature Shade
-(NOTE: "Suspend" not implemented.)
-1/2
-abPump W:+1/+1
-
 Looming Shade
 2 B
 Creature Shade
@@ -19405,13 +19489,6 @@ no text
 3/3
 abPump B:+1/+1
 
-Viscerid Deepwalker
-4 U
-Creature Homarid Warrior
-(NOTE: "Suspend" not implemented.)
-2/3
-abPump U:+1/+0
-
 Colos Yearling
 2 R
 Creature Goat Beast
@@ -19479,14 +19556,6 @@ no text
 2/1
 Flying
 abPump W:+0/+1
-
-Pardic Dragon
-4 R R
-Creature Dragon
-(NOTE: "Suspend" not implemented.)
-4/4
-Flying
-abPump R:+1/+0
 
 Aven Flock
 4 W
@@ -21744,13 +21813,6 @@ no text
 Haste
 Trample
 At the beginning of the end step, sacrifice CARDNAME.
-
-Giant Dustwasp
-3 G G
-Creature Insect
-(NOTE: "Suspend" not implemented.)
-3/3
-Flying
 
 Brute Force
 R

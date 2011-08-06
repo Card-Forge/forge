@@ -3433,10 +3433,24 @@ public class CardFactory implements NewConstants {
                 //card.removeIntrinsicKeyword(parse);
                 
                 String k[] = parse.split(":");
-                final String manacost = k[1];
 
                 card.setMadness(true);
                 card.setMadnessCost(k[1]);
+            }
+        }//madness
+        
+        if(hasKeyword(card, "Suspend") != -1) {
+        	// Suspend:<TimeCounters>:<Cost>
+            int n = hasKeyword(card, "Suspend");
+            if(n != -1) {
+                String parse = card.getKeyword().get(n).toString();
+                card.removeIntrinsicKeyword(parse);
+                
+                String k[] = parse.split(":");
+
+                final int timeCounters = Integer.parseInt(k[1]);
+                final String cost = k[2];
+                card.addSpellAbility(CardFactoryUtil.ability_suspend(card, cost, timeCounters));
             }
         }//madness
 
@@ -5000,7 +5014,6 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Dragon Roost")) {

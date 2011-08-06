@@ -12,6 +12,7 @@ import java.util.Map.Entry;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.Constant.Zone;
 
 
 public class CardFactoryUtil {
@@ -1552,6 +1553,37 @@ public class CardFactoryUtil {
                 + " Transmute: Search your library for a card with the same converted mana cost.");
         return transmute;
     }//ability_transmute()
+    
+    public static SpellAbility ability_suspend(final Card sourceCard, final String suspendCost, final int suspendCounters) {
+        final SpellAbility suspend = new Ability_Hand(sourceCard, suspendCost) {
+			private static final long serialVersionUID = 21625903128384507L;
+
+			@Override
+			public boolean canPlay(){
+				// if not in hand can't suspend
+				if (!AllZone.GameAction.isCardInZone(sourceCard, AllZone.getZone(Zone.Hand, sourceCard.getOwner())))
+					return false;
+				
+				if (sourceCard.isInstant())
+					return true;
+				return Phase.canCastSorcery(sourceCard.getOwner());
+			}
+			
+			@Override
+            public boolean canPlayAI() {
+                return false;
+            }
+            
+            @Override
+            public void resolve() {
+            	AllZone.GameAction.removeFromGame(sourceCard);
+            	sourceCard.addCounter(Counters.TIME, suspendCounters);
+            }
+        };
+        suspend.setDescription("Suspend " +suspendCounters + ": "+ suspendCost);
+        suspend.setStackDescription(sourceCard + " suspending for " + suspendCounters + " turns.)");
+        return suspend;
+    }//ability_cycle()
     
     public static SpellAbility eqPump_Equip(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords, final String Manacost) {
         final Ability equip = new Ability(sourceCard, Manacost) {

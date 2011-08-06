@@ -38,6 +38,13 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+ancestral_vision.jpg              	http://www.wizards.com/global/images/magic/general/ancestral_vision.jpg
+duskrider_peregrine.jpg				http://www.wizards.com/global/images/magic/general/duskrider_peregrine.jpg
+errant_ephemeron.jpg              	http://www.wizards.com/global/images/magic/general/errant_ephemeron.jpg
+keldon_halberdier.jpg              	http://www.wizards.com/global/images/magic/general/keldon_halberdier.jpg
+durkwood_baloth.jpg              	http://www.wizards.com/global/images/magic/general/durkwood_baloth.jpg  
+lotus_bloom.jpg              	http://www.wizards.com/global/images/magic/general/lotus_bloom.jpg
+corpulent_corpse.jpg              	http://www.wizards.com/global/images/magic/general/corpulent_corpse.jpg 
 bogardan_hellkite.jpg              	http://www.wizards.com/global/images/magic/general/bogardan_hellkite.jpg
 sparkmage_apprentice.jpg                http://www.wizards.com/global/images/magic/general/sparkmage_apprentice.jpg
 akoum_boulderfoot.jpg			http://www.wizards.com/global/images/magic/general/akoum_boulderfoot.jpg
