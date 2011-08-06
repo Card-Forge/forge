@@ -454,6 +454,42 @@ public class CardFactoryUtil {
         return target;
     }//input_sacrifice()
     
+    public static Input input_sacrifice(final SpellAbility spell, final CardList choices, final String message, final boolean free) {
+        Input target = new Input() {
+
+			private static final long serialVersionUID = 3391527854483291332L;
+
+			@Override
+            public void showMessage() {
+                AllZone.Display.showMessage(message);
+                ButtonUtil.enableOnlyCancel();
+            }
+            
+            @Override
+            public void selectButtonCancel() {
+                stop();
+            }
+            
+            @Override
+            public void selectCard(Card card, PlayerZone zone) {
+                if(choices.contains(card)) {
+                    AllZone.getZone(card).remove(card);
+                    AllZone.GameAction.moveToGraveyard(card);
+                    
+                    if (free)
+                    	this.setFree(true);
+                    
+                    if(spell.getManaCost().equals("0") || this.isFree()) {
+                        this.setFree(false);
+                        AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
+                        stop();
+                    } else stopSetNext(new Input_PayManaCost(spell));
+                }
+            }
+        };
+        return target;
+    }//input_sacrifice()
+    
     //this one is used for Phyrexian War Beast:
     public static Input input_sacrificePermanent(final SpellAbility spell, final CardList choices, final String message) {
         Input target = new Input() {

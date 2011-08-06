@@ -17766,9 +17766,14 @@ public class CardFactory implements NewConstants {
                     String player = card.getController();
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
                     CardList choice = new CardList(play.getCards());
-                    choice = choice.getType("Land");                    
+                    choice = choice.getType("Land");   
+                    
+                    boolean free = false;
+                    if (this.isFree())
+                    	free = true;
+                    
                     if (player.equals(Constant.Player.Human)) {
-                    	stopSetNext(CardFactoryUtil.input_sacrifice(spell, choice, "Select a land to sacrifice."));
+                    	stopSetNext(CardFactoryUtil.input_sacrifice(spell, choice, "Select a land to sacrifice.", free));
                     }
                 }
             };

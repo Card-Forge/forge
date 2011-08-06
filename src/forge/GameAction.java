@@ -1692,7 +1692,7 @@ public class GameAction {
             AllZone.Computer_Library.remove(firstLand);
             
             //branch 3
-            if(!Zone2.isEmpty() && (land.size() != 0)) {
+            if(Zone2.trim().length() != 0 && (land.size() != 0)) {
                 PlayerZone secondZone = AllZone.getZone(Zone2, Constant.Player.Computer);
                 Card secondLand = land.remove(0);
                 if (tapSecondLand)
@@ -1727,7 +1727,7 @@ public class GameAction {
             firstZone.add(c);
             
         }//if
-        if ((list.size() == 0) || Zone2.isEmpty()) return;
+        if ((list.size() == 0) || Zone2.trim().length() != 0) return;
         //branch 3
         o = AllZone.Display.getChoiceOptional("Choose second land", list.toArray());
         if(o != null) {

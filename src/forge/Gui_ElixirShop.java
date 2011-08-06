@@ -98,6 +98,8 @@ public class Gui_ElixirShop extends JFrame implements NewConstants{
     		l = 250;
     	else if (questData.getLife() < 25)
     		l = 500;
+    	else 
+    		l = 750;
     		
     	return l;
     }
@@ -150,7 +152,7 @@ public class Gui_ElixirShop extends JFrame implements NewConstants{
     	//ImageIcon icon = getIcon(fileName);
     	
     	buyPotionButton.setEnabled(true);
-    	if (questData.getCredits() < getPrice())
+    	if (questData.getCredits() < getPrice() || questData.getLife() >= 30)
     		buyPotionButton.setEnabled(false);
        
         quitButton.setBounds(new Rectangle(140, 297, 120, 50));
