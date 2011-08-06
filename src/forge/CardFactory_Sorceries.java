@@ -1558,38 +1558,6 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Grizzly Fate")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 731860438110589738L;
-                
-                @Override
-                public void resolve() {
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    CardList list = new CardList(grave.getCards());
-                    makeToken();
-                    makeToken();
-                    if(list.size() >= 7) {
-                        makeToken();
-                        makeToken();
-                    }
-                }
-                
-                public void makeToken() {
-                    CardFactoryUtil.makeToken("Bear", "G 2 2 Bear", card.getController(), "G", new String[] {"Creature", "Bear"},
-                            2, 2, new String[] {""});
-                }//resolve()
-            };//SpellAbility
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card.getController()).append(" Puts 2/2 green Bear tokens onto the battlefield.");
-            spell.setStackDescription(sb.toString());
-            
-            card.setFlashback(true);
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "5 G G"));            
-        }//*************** END ************ END **************************
         
         
         //*************** START *********** START **************************

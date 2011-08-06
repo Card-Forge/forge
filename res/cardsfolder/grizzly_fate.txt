@@ -1,7 +1,9 @@
 Name:Grizzly Fate
 ManaCost:3 G G
 Types:Sorcery
-Text:Put two 2/2 green Bear creature tokens onto the battlefield.\r\nThreshold - Put four 2/2 green Bear creature tokens onto the battlefield instead if seven or more cards are in your graveyard.
+Text:no text
+A:SP$ Token | Cost$ 3 G G | TokenAmount$ 2 | TokenName$ Bear | TokenTypes$ Creature,Bear | TokenOwner$ Controller | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2 | SpellDescription$ Put two 2/2 green Bear creature tokens onto the battlefield.
+A:SP$ Token | Cost$ 3 G G | IsPresent$ Permanent | PresentZone$ Graveyard | PresentCompare$ GE7 | TokenAmount$ 4 | TokenName$ Bear | TokenTypes$ Creature,Bear | TokenOwner$ Controller | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2 | SpellDescription$ Threshold - Put four 2/2 green Bear creature tokens onto the battlefield instead if seven or more cards are in your graveyard.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grizzly_fate.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/119.jpg
