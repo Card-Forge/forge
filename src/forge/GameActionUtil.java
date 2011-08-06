@@ -12550,10 +12550,15 @@ public class GameActionUtil {
   	      		String maxnumber = SpecialConditions.split("/")[1];
 	      		if (Library.size() > Integer.valueOf(maxnumber)) return false;
 	      	}
-  	      if(SpecialConditions.contains("LifeGE")) {
-	      		int life = SourceCard.getController().getLife();
+  	      	if(SpecialConditions.contains("LifeGE")) {
+  	      		int life = SourceCard.getController().getLife();
+  	      		String maxnumber = SpecialConditions.split("/")[1];
+  	      		if (!(life >= Integer.valueOf(maxnumber))) return false;
+  	      	}
+  	      	if(SpecialConditions.contains("OppLifeLE")) {
+	      		int life = SourceCard.getController().getOpponent().getLife();
 	      		String maxnumber = SpecialConditions.split("/")[1];
-	      		if (!(life >= Integer.valueOf(maxnumber))) return false;
+	      		if (!(life <= Integer.valueOf(maxnumber))) return false;
 	      	}
   	      	if(SpecialConditions.contains("Threshold")) {
   	      		if (!SourceCard.getController().hasThreshold()) return false;
@@ -13833,7 +13838,7 @@ public class GameActionUtil {
 			return opp.getLife() <= 10;
 		}
 	};
-
+	/*
 	public static Command Ruthless_Cullblade          = new Command() {
 		private static final long serialVersionUID = 2627513737024865169L;
 
@@ -13858,6 +13863,7 @@ public class GameActionUtil {
 			return opp.getLife() <= 10;
 		}
 	};
+	*/
 
 	public static Command Bloodghast                  = new Command() {
 		private static final long serialVersionUID = -4252257530318024113L;
@@ -16310,7 +16316,7 @@ public class GameActionUtil {
 		commands.put("Plague_Rats", Plague_Rats);
 		commands.put("Primalcrux", Primalcrux);
 		
-		commands.put("Ruthless_Cullblade", Ruthless_Cullblade);
+		//commands.put("Ruthless_Cullblade", Ruthless_Cullblade);
 		
 		//commands.put("Serpent_of_the_Endless_Sea", Serpent_of_the_Endless_Sea);
 		//commands.put("Serra_Avatar", Serra_Avatar);
