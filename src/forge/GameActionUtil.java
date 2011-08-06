@@ -7456,117 +7456,6 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}// for
 	}// upkeep_Wandering_Graybeard()
-
-    private static void upkeep_Wolf_Skull_Shaman() {
-        final Player player = AllZone.Phase.getPlayerTurn();
-        
-        CardList kinship = AllZoneUtil.getPlayerCardsInPlay(player, "Wolf-Skull Shaman");
-        
-        if (kinship.size() == 0)
-        	return;
-        
-        final String[] shareTypes = { "Elf", "Shaman"};
-        final Card[] prevCardShown = { null };
-
-        for(final Card k : kinship){
-            Ability ability = new Ability(k, "0") {	// change to triggered abilities when ready
-                @Override
-                public void resolve() {
-                	PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
-                    if (library.size() <= 0) return;
-                    
-                    Card peek = library.get(0);
-                	boolean wantToken = false;
-                	
-                    // We assume that both players will want to peek, ask if they want to reveal
-                    // We do not want to slow down the pace of the game by asking too many questions.
-                    if (peek.isValidCard(shareTypes)){
-                        if (player.isHuman()) {
-                            StringBuilder question = new StringBuilder();
-                            question.append("Your top card is ").append(peek.getName());
-                            question.append(", put a 2/2 green Wolf creature token into play?");
-                            if (showYesNoDialog(k, question.toString())) {
-                                wantToken = true;
-                            }
-                        }
-                        // player isComputer()
-                        else 
-                        	wantToken = true;
-                    }
-                    if (!wantToken || player.isComputer()){
-                        if (peek != prevCardShown[0]) {
-                            String title = "Top card is ";
-                            AllZone.Display.getChoice(title, peek);
-                            prevCardShown[0] = peek;
-                        }
-                    }
-                	if (wantToken)
-                		CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", k.getController(), "G", 
-                            new String[] {"Creature", "Wolf"}, 2, 2, new String[] {""});
-                }// resolve()
-            };// ability
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append("Wolf-Skull Shaman - ").append(player);
-            sb.append(" Reveals for Kinship");
-            ability.setStackDescription(sb.toString());
-            AllZone.Stack.add(ability);
-        }// for
-    }// upkeep_Wolf_Skull_Shaman()
-	
-/*
-	private static void upkeep_Wolf_Skull_Shaman() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-		PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Wolf-Skull Shaman");
-
-		Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-			if(library.size() <= 0) {
-				return;
-			}
-			// System.out.println("top of deck: " + library.get(i).getName());
-			String creatureType = library.get(0).getType().toString();
-			String cardName = library.get(0).getName();
-
-			final Card crd = list.get(i);
-			ability = new Ability(list.get(i), "0") {
-				@Override
-				public void resolve() {
-					PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
-
-					String creatureType = library.get(0).getType().toString();
-
-					if(creatureType.contains("Elf") || creatureType.contains("Shaman")
-							|| library.get(0).getKeyword().contains("Changeling")) {
-						CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", crd.getController(), "G",
-								new String[] {"Creature", "Wolf"}, 2, 2, new String[] {""});
-					}
-
-				}// resolve()
-			};// Ability
-			if(creatureType.contains("Elf") || creatureType.contains("Shaman")) {
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append("Wolf-Skull Shaman - ").append(player).append(" reveals: ");
-				sb.append(cardName).append(", and puts 2/2 Wolf into play.");
-				ability.setStackDescription(sb.toString());
-			}
-			else {
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append("Wolf-Skull Shaman - ").append(player).append(" reveals top card: ");
-				sb.append(cardName).append(".");
-				ability.setStackDescription(sb.toString());
-			}
-
-			AllZone.Stack.add(ability);
-		}// for
-	}// upkeep_Wolf_Skull_Shaman()
-*/
 	
 	private static void upkeep_Benthic_Djinn() {
 		final Player player = AllZone.Phase.getPlayerTurn();
@@ -7731,6 +7620,84 @@ public class GameActionUtil {
             AllZone.Stack.add(ability);
         }// for
     }// upkeep_Ink_Dissolver()
+    
+    
+    /////////////////////////
+    // Start of Kinship cards
+    /////////////////////////
+    
+    
+    private static void upkeep_Wolf_Skull_Shaman() {
+        final Player player = AllZone.Phase.getPlayerTurn();
+        CardList kinship = AllZoneUtil.getPlayerCardsInPlay(player, "Wolf-Skull Shaman");
+        
+        if (kinship.size() == 0)
+            return;
+        
+        final String[] shareTypes = { "Elf", "Shaman" };
+        final Card[] prevCardShown = { null };
+        final Card peek[] = { null };
+
+        for (final Card k : kinship){
+            Ability ability = new Ability(k, "0") {    // change to triggered abilities when ready
+                @Override
+                public void resolve() {
+                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+                    if (library.size() <= 0)
+                        return;
+                    
+                    peek[0] = library.get(0);
+                    boolean wantToken = false;
+                    
+                    // We assume that both players will want to peek, ask if they want to reveal.
+                    // We do not want to slow down the pace of the game by asking too many questions.
+                    // Dialogs ouside of the Ability appear at the previous end of turn phase !!!
+                    
+                    if (peek[0].isValidCard(shareTypes)) {
+                        if (player.isHuman()) {
+                            StringBuilder question = new StringBuilder();
+                            question.append("Your top card is ").append(peek[0].getName());
+                            question.append(". Reveal card and put a 2/2 green Wolf creature token into play?");
+                            if (showYesNoDialog(k, question.toString())) {
+                                wantToken = true;
+                            }
+                        }
+                        // player isComputer()
+                        else {
+                            String title = "Computer reveals";
+                            revealTopCard(title);
+                            wantToken = true;
+                        }
+                    } else if (player.isHuman()) {
+                        String title = "Your top card is";
+                        revealTopCard(title);
+                    }
+
+                    if (wantToken)
+                        CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", k.getController(), "G", 
+                            new String[] {"Creature", "Wolf"}, 2, 2, new String[] {""});
+                }// resolve()
+
+                private void revealTopCard(String title) {
+                    if (peek[0] != prevCardShown[0]) {
+                        AllZone.Display.getChoice(title, peek[0]);
+                        prevCardShown[0] = peek[0];
+                    }
+                }// revealTopCard()
+            };// ability
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Wolf-Skull Shaman - ").append(player);
+            sb.append(" triggers Kinship");
+            ability.setStackDescription(sb.toString());
+            AllZone.Stack.add(ability);
+        }// for
+    }// upkeep_Wolf_Skull_Shaman()
+    
+    
+    ///////////////////////
+    // End of Kinship cards
+    ///////////////////////
 
 
 	private static void upkeep_Dark_Confidant() {
