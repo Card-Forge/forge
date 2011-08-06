@@ -168,6 +168,25 @@ public class EndOfTurn implements java.io.Serializable
     		
     		AllZone.Stack.add(change);
     	}
+    	if(c.hasKeyword("At the beginning of your end step, sacrifice this creature unless it attacked this turn.")
+    			&& !c.getCreatureAttackedThisTurn()
+    			/* && !(c.getTurnInZone() == AllZone.Phase.getTurn())*/
+    			&& AllZone.Phase.isPlayerTurn(c.getController())) {
+    		final Card source = c;
+    		final SpellAbility change = new Ability(source, "0") {
+    			@Override
+    			public void resolve() {
+    				if(AllZone.GameAction.isCardInPlay(source)) {
+    					AllZone.GameAction.sacrifice(source);
+    				}
+    			}
+    		};
+    		StringBuilder sb = new StringBuilder();
+    		sb.append(source.getName()).append(" - sacrifice ").append(source.getName()).append(".");
+    		change.setStackDescription(sb.toString());
+    		
+    		AllZone.Stack.add(change);
+    	}
     	if(c.getCreatureAttackedThisTurn()) c.setCreatureAttackedThisTurn(false);
     }
     execute(at);

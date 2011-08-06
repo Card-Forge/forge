@@ -1,0 +1,9 @@
+Name:Instill Furor
+ManaCost:1 R
+Types:Enchantment Aura
+Text:Enchanted creature has "At the beginning of your end step, sacrifice this creature unless it attacked this turn."
+K:Enchant creature
+K:enPumpCurse:+0/+0/At the beginning of your end step, sacrifice this creature unless it attacked this turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/instill_furor.jpg
+End
