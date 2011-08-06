@@ -1,3 +1,63 @@
+Eerie Procession
+2 U
+Sorcery
+Search your library for an Arcane card, reveal that card, and put it into your hand. Then shuffle your library.
+spTutor:Arcane:Hand
+SVar:RemAIDeck:True
+
+Idyllic Tutor
+2 W
+Sorcery
+Search your library for an enchantment card, reveal it, and put it into your hand. Then shuffle your library.
+spTutor:Enchantment:Hand
+SVar:RemAIDeck:True
+
+Lay of the Land
+G
+Sorcery
+Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library.
+spTutor:Land.Basic:Hand
+
+Merchant Scroll
+1 U
+Sorcery
+Search your library for a blue instant card, reveal that card, and put it into your hand. Then shuffle your library.
+spTutor:Instant.Blue:Hand
+SVar:RemAIDeck:True
+
+Safewright Quest
+GW
+Sorcery
+Search your library for a Forest or Plains card, reveal it, and put it into your hand. Then shuffle your library.
+spTutor:Forest,Plains:Hand
+
+Steelshaper's Gift
+W
+Sorcery
+Search your library for an Equipment card, reveal that card, and put it into your hand. Then shuffle your library.
+spTutor:Equipment:Hand
+SVar:RemAIDeck:True
+
+Sylvan Scrying
+2 G
+Sorcery
+Search your library for a land card, reveal it, and put it into your hand. Then shuffle your library.
+spTutor:Land:Hand
+SVar:RemAIDeck:True
+
+Time of Need
+1 G
+Sorcery
+Search your library for a legendary creature card, reveal it, and put it into your hand. Then shuffle your library.
+spTutor:Creature.Legendary:Hand
+SVar:RemAIDeck:True
+
+Personal Tutor 
+U
+Sorcery
+Search your library for a sorcery card and reveal that card. Shuffle your library, then put the card on top of it.
+spTutor:Sorcery:TopOfLibrary
+
 Painter's Servant
 2
 Artifact Creature Scarecrow
@@ -79,6 +139,7 @@ B
 Sorcery
 Search your library for a Mercenary card, reveal that card, and put it into your hand. Then shuffle your library.
 spTutor:Mercenary:Hand
+SVar:RemAIDeck:True
 
 Evincar's Justice
 2 B B
