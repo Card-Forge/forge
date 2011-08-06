@@ -14944,7 +14944,7 @@ public class CardFactory implements NewConstants {
                     AllZone.GameAction.sacrifice(getSourceCard());
                 }//resolve()
             };//SpellAbility
-            ability.setStackDescription("You gain 5 life");
+            ability.setDescription("W, Sacrifice Sunbeam Spellbomb: You gain 5 life.");
             ability.setStackDescription(card.getName() + " - " + card.getController() + " gains 5 life.");
             card.addSpellAbility(ability);
         } //*************** END ************ END **************************
