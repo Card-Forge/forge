@@ -3,7 +3,7 @@ ManaCost:W U B R G
 Types:Legendary Creature Illusion
 Text:no text
 PT:5/5
-K:abPump U R:Flying
+A:AB$Pump | Cost$ U R | KW$ Flying | SpellDescription$ Cromat gains flying until end of turn.
 A:AB$Regenerate | Cost$ B G | SpellDescription$ Regenerate CARDNAME.
 A:AB$Pump | Cost$ R W | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Cromat gets +1/+1 until end of turn.
 SVar:Rarity:Rare
