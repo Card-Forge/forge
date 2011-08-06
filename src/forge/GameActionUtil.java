@@ -11017,33 +11017,30 @@ public class GameActionUtil {
 	public static Command Phylactery_Lich             = new Command() {
 
 		private static final long serialVersionUID = -1606115081917467754L;
-		int                       artifacts        = 0;
 
 		public void execute() {
 			CardList creature = AllZoneUtil.getCardsInPlay("Phylactery Lich");
-
-			for(int i = 0; i < creature.size(); i++) {
+			int size = creature.size();
+			
+			for(int i = 0; i < size; i++) {
 				Card c = creature.get(i);
-				artifacts = countArtifacts(c);
-				if(artifacts == 0 && c.getFinishedEnteringBF()) {
+				if(phylacteryExists(c) && c.getFinishedEnteringBF()) {
 					AllZone.GameAction.sacrifice(c);
 				}
 			}
 
 		}//execute()
 
-		private int countArtifacts(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Battlefield, c.getController());
-			CardList artifacts = new CardList(play.getCards());
-			artifacts = artifacts.filter(new CardListFilter()
+		private boolean phylacteryExists(Card c) {
+			CardList play = AllZoneUtil.getPlayerCardsInPlay(c.getController());
+			play = play.filter(new CardListFilter()
 			{
 				public boolean addCard(Card crd)
 				{
-					return crd.isArtifact() && crd.getCounters(Counters.PHYLACTERY) > 0;
+					return crd.getCounters(Counters.PHYLACTERY) > 0;
 				}
 			});
-			return artifacts.size();
+			return play.size() > 0;
 		}
 	};//Phylactery_Lich
 	
