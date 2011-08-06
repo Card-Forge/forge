@@ -217,7 +217,17 @@ public class AbilityFactory {
 				SA = AbilityFactory_Counters.createDrawbackProliferate(this);
 		}
 
-		// do we want to merge Fetch, Retrieve and Bounce into ChangeZone?
+
+		if (API.equals("ChangeZone")){
+			if (isAb)
+				SA = AbilityFactory_ChangeZone.createAbilityChangeZone(this);
+			else if (isSp)
+				SA = AbilityFactory_ChangeZone.createSpellChangeZone(this);
+			else if (isDb)
+				SA = AbilityFactory_ChangeZone.createDrawbackChangeZone(this);
+		}
+		
+		// Fetch, Retrieve and Bounce should be converted ChangeZone 
 		if (API.equals("Fetch")){
 			if (isAb)
 				SA = AbilityFactory_Fetch.createAbilityFetch(this);
@@ -239,7 +249,7 @@ public class AbilityFactory {
 				SA = AbilityFactory_Bounce.createSpellBounce(this);
 			hostCard.setSVar("PlayMain1", "TRUE");
 		}
-		// Above to be merged? If so, merge then do SubAbility for each
+		// Convert above abilities to gain Drawback
 		
 		if (API.equals("Pump"))
 		{
@@ -607,6 +617,12 @@ public class AbilityFactory {
 		
 		players = new ArrayList<Player>();
 		if (defined.equals("Targeted")){
+			Target tgt = sa.getTarget();
+			if (tgt != null && tgt.getTargetPlayers().size() != 0){
+				players.addAll(tgt.getTargetPlayers());
+				return players;
+			}
+			
 			SpellAbility parent;
 			do{
 				parent = ((Ability_Sub)sa).getParent();
@@ -630,6 +646,12 @@ public class AbilityFactory {
 		
 		objects = new ArrayList<Object>();
 		if (defined.equals("Targeted")){
+			Target tgt = sa.getTarget();
+			if (tgt != null && tgt.getTargets().size() != 0){
+				objects.addAll(tgt.getTargets());
+				return objects;
+			}
+			
 			SpellAbility parent;
 			do{
 				parent = ((Ability_Sub)sa).getParent();

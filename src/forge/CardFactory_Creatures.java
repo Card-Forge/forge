@@ -4749,66 +4749,8 @@ public class CardFactory_Creatures {
                 }//execute()
             };
             card.addDestroyCommand(destroy);
-        }//*************** END ************ END **************************
-        
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Elvish Piper")) {
-            final SpellAbility ability = new Ability_Tap(card, "G") {
-                private static final long serialVersionUID = 4414609319033894302L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return getCreature().size() != 0;
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    card.tap();
-                    Card target = CardFactoryUtil.AI_getBestCreature(getCreature());
-                    setTargetCard(target);
-                }
-                
-                CardList getCreature() {
-                    CardList list = new CardList(AllZone.Computer_Hand.getCards());
-                    list = list.getType("Creature");
-                    return list;
-                }
-                
-                @Override
-                public void resolve() {
-                    Card c = getTargetCard();
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    
-                    if(AllZone.GameAction.isCardInZone(c, hand)) {
-                        hand.remove(c);
-                        play.add(c);
-                    }
-                }
-            };
-            
-            ability.setBeforePayMana(new Input() {
-                private static final long serialVersionUID = -1647181037510967127L;
-                
-                @Override
-                public void showMessage() {
-                	Player controller = card.getController();
-                    CardList creats = new CardList(AllZone.getZone(Constant.Zone.Hand, controller).getCards());
-                    creats = creats.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            PlayerZone zone = AllZone.getZone(c);
-                            return c.isCreature() && zone.is(Constant.Zone.Hand);
-                        }
-                        
-                    });
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(ability, creats, "Select a creature", false,
-                            false));
-                }
-            });
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-        
+        }
+        //*************** END ************ END **************************
         
       //*************** START *********** START **************************
         else if(cardName.equals("Jhoira of the Ghitu")) {

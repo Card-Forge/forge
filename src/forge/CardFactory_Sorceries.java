@@ -5700,68 +5700,7 @@ public class CardFactory_Sorceries {
             };//SpellAbility
             card.clearSpellAbility();
             card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Buried Alive")) {
-        	final SpellAbility spell = new Spell(card) {
-        		private static final long serialVersionUID = 5676345736475L;
-
-        		@Override
-        		public void resolve() {
-        			Player player = card.getController();
-        			if(player.equals(AllZone.HumanPlayer)) humanResolve();
-        			else computerResolve();
-        		}
-
-        		public void humanResolve() {
-        			for (int i=0;i<3;i++) {
-        				PlayerZone deck = AllZone.getZone(Constant.Zone.Library, card.getController());
-        				CardList list = new CardList(deck.getCards());
-        				list = list.getType("Creature");
-        				Object check = AllZone.Display.getChoiceOptional("Select a creature card", list.toArray());
-        				if(check != null) {
-        					PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-        					AllZone.GameAction.moveTo(grave, (Card) check);
-        				}
-        				AllZone.HumanPlayer.shuffle();
-        			}
-        		} // humanResolve
-        		
-        		public void computerResolve() {
-        			for (int i=0;i<3;i++) {
-        				Card[] library = AllZone.Computer_Library.getCards();
-        				CardList list = new CardList(library);
-        				list = list.getType("Creature");
-
-        				//pick best creature
-        				Card c = CardFactoryUtil.AI_getBestCreature(list);
-        				if(c == null) c = library[0];
-        				//System.out.println("computer picked - " +c);
-        				AllZone.Computer_Library.remove(c);
-        				AllZone.Computer_Graveyard.add(c);
-        			}
-        		} // computerResolve
-        		
-        		@Override
-        		public boolean canPlay() {
-        			PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-        			return library.getCards().length != 0 && super.canPlay();
-        		}
-
-        		@Override
-        		public boolean canPlayAI() {
-        			CardList creature = new CardList();
-        			creature.addAll(AllZone.Computer_Library.getCards());
-        			creature = creature.getType("Creature");
-        			return creature.size() > 2;
-        		}
-        	};//SpellAbility
-        	card.clearSpellAbility();
-        	card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
+        }//*************** END ************ END **************************        
         
         //*************** START *********** START **************************
         else if(cardName.equals("All is Dust")) {
