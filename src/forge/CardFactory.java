@@ -18052,7 +18052,6 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        
         //*************** START *********** START **************************
         else if (cardName.equals("Psychic Drain"))
         {
@@ -18067,7 +18066,16 @@ public class CardFactory implements NewConstants {
         			PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
         			CardList libList = new CardList(lib.getCards());
         			
-        			for (int i = 0; i < card.getXManaCostPaid(); i++) {
+        			int limit;
+        			
+        			if (card.getXManaCostPaid() > lib.size()) {
+        				limit = lib.size();
+        			} else {
+        				limit = card.getXManaCostPaid();
+        			}
+        			
+        			// for (int i = 0; i < card.getXManaCostPaid(); i++) {
+        			for (int i = 0; i < limit; i++) {
         				Card c = libList.get(i);
         				lib.remove(c);
         				grave.add(c);
