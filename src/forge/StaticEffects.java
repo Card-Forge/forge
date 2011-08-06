@@ -26,7 +26,7 @@ public class StaticEffects
 		cardToEffectsList.put("Avatar",  new String[] {"Ajani_Avatar_Token"});
 		//cardToEffectsList.put("Aven Trailblazer", new String[] {"Aven_Trailblazer"});
 		
-		cardToEffectsList.put("Beastbreaker of Bala Ged", new String[] {"Beastbreaker_of_Bala_Ged"});
+		//cardToEffectsList.put("Beastbreaker of Bala Ged", new String[] {"Beastbreaker_of_Bala_Ged"});
 		//cardToEffectsList.put("Bloodghast", new String[] {"Bloodghast"});
 		//cardToEffectsList.put("Broodstar", new String[] {"Master_of_Etherium"});
 		

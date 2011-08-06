@@ -13361,7 +13361,7 @@ public class GameActionUtil {
 			}
 		}
 	};
-	
+	/*
 	public static Command Beastbreaker_of_Bala_Ged  = new Command() {
 		private static final long serialVersionUID = -8692202913296782937L;
 
@@ -13391,7 +13391,7 @@ public class GameActionUtil {
 			}
 		}
 	};
-	
+	*/
 	public static Command Hada_Spy_Patrol  = new Command() {
 		private static final long serialVersionUID = 2343715852240209999L;
 
@@ -15996,7 +15996,7 @@ public class GameActionUtil {
 		//commands.put("Angry_Mob", Angry_Mob);
 		//commands.put("Aven_Trailblazer", Aven_Trailblazer);
 		
-		commands.put("Beastbreaker_of_Bala_Ged", Beastbreaker_of_Bala_Ged);
+		//commands.put("Beastbreaker_of_Bala_Ged", Beastbreaker_of_Bala_Ged);
 		//commands.put("Bloodghast", Bloodghast);
 		
 		//commands.put("Cantivore", Cantivore);
