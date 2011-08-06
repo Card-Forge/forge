@@ -196,7 +196,8 @@ public class ComputerAI_General implements Computer {
     }
     
     public void declare_blockers() {
-        CardList blockers = new CardList(AllZone.Computer_Play.getCards());
+        CardList blockers = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
+        
         Combat combat = getCombat(AllZone.pwCombat.getAttackers(), blockers);
         
         combat.setPlaneswalker(AllZone.pwCombat.getPlaneswalker());

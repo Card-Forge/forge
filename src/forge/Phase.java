@@ -206,8 +206,7 @@ public class Phase extends MyObservable
 	    }
         
         // we can skip AfterBlockers and AfterAttackers if necessary
-	    else if(phase.equals(Constant.Phase.Combat_Declare_Blockers) ||
-	    		phase.equals(Constant.Phase.Combat_Declare_Blockers_InstantAbility)){
+	    else if(phase.equals(Constant.Phase.Combat_Declare_Blockers)){
             if(inCombat()) {
 	            AllZone.Combat.verifyCreaturesInPlay();
 	            CombatUtil.showCombat();
@@ -215,6 +214,48 @@ public class Phase extends MyObservable
             else
             	AllZone.Phase.setNeedToNextPhase(true);
         }
+        
+	    else if (phase.equals(Constant.Phase.Combat_Declare_Blockers_InstantAbility)){
+	    	// After declare blockers are finished being declared mark them blocked and trigger blocking things
+            if(!inCombat()) 
+            	AllZone.Phase.setNeedToNextPhase(true);
+            else{
+	            AllZone.Combat.verifyCreaturesInPlay();
+ 	
+		    	AllZone.Stack.freezeStack();
+	        	CardList list = new CardList();
+	            list.addAll(AllZone.Combat.getAllBlockers().toArray());
+	            list.addAll(AllZone.pwCombat.getAllBlockers().toArray());
+	            list = list.filter(new CardListFilter(){
+	            	public boolean addCard(Card c)
+	            	{
+	            		return !c.getCreatureBlockedThisCombat();
+	            	}
+	            });
+	            
+	            CardList attList = new CardList();
+	            attList.addAll(AllZone.Combat.getAttackers());
+	            
+	            CardList pwAttList = new CardList();
+	            pwAttList.addAll(AllZone.pwCombat.getAttackers());
+	
+	            CombatUtil.checkDeclareBlockers(list);
+	            
+	            for (Card a:attList){
+	            	CardList blockList = AllZone.Combat.getBlockers(a);
+	            	for (Card b:blockList)
+	            		CombatUtil.checkBlockedAttackers(a, b);
+	            }
+	            
+	            for (Card a:pwAttList){
+	            	CardList blockList = AllZone.pwCombat.getBlockers(a);
+	            	for (Card b:blockList)
+	            		CombatUtil.checkBlockedAttackers(a, b);
+	            }
+	            AllZone.Stack.unfreezeStack();
+	            CombatUtil.showCombat();
+            }
+	    }
         
 	    else if (phase.equals(Constant.Phase.Combat_FirstStrikeDamage)){
 	    	if(!inCombat())
@@ -349,39 +390,8 @@ public class Phase extends MyObservable
         if (phaseOrder[phaseIndex].equals(Constant.Phase.Cleanup))
         	AllZone.Phase.setPlayerTurn(handleNextTurn());
         
-        if (is(Constant.Phase.Combat_Declare_Blockers)){
-        	// Before damage is assigned, confirm how things are blocked/blocking
-        	AllZone.Stack.unfreezeStack();
-        	
-        	CardList list = new CardList();
-            list.addAll(AllZone.Combat.getAllBlockers().toArray());
-            list.addAll(AllZone.pwCombat.getAllBlockers().toArray());
-            list = list.filter(new CardListFilter(){
-            	public boolean addCard(Card c)
-            	{
-            		return !c.getCreatureBlockedThisCombat();
-            	}
-            });
-            
-            CardList attList = new CardList();
-            attList.addAll(AllZone.Combat.getAttackers());
-            
-            CardList pwAttList = new CardList();
-            pwAttList.addAll(AllZone.pwCombat.getAttackers());
-
-            CombatUtil.checkDeclareBlockers(list);
-            
-            for (Card a:attList){
-            	CardList blockList = AllZone.Combat.getBlockers(a);
-            	for (Card b:blockList)
-            		CombatUtil.checkBlockedAttackers(a, b);
-            }
-            
-            for (Card a:pwAttList){
-            	CardList blockList = AllZone.pwCombat.getBlockers(a);
-            	for (Card b:blockList)
-            		CombatUtil.checkBlockedAttackers(a, b);
-            }
+        if (is(Constant.Phase.Combat_Declare_Blockers)){        	
+         	AllZone.Stack.unfreezeStack();
         }
         
         if (is(Constant.Phase.Combat_End) && extraCombats > 0){
