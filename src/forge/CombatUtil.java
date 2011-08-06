@@ -1334,42 +1334,6 @@ public class CombatUtil {
 	                
 	                AllZone.Stack.add(ability2);
 	            }
-	            
-	            if (c.getKeyword().contains("Whenever CARDNAME attacks alone, it gets +1/+0 until end of turn."))
-	            {
-	            	final Card charger = c;
-	            	Ability ability2 = new Ability(c, "0") {
-	            		@Override
-	            		public void resolve() {
-
-	            			final Command untilEOT = new Command() {
-	            				private static final long serialVersionUID = -6039349249335745813L;
-
-	            				public void execute() {
-	            					if(AllZone.GameAction.isCardInPlay(charger)) {
-	            						charger.addTempAttackBoost(-1);
-	            						charger.addTempDefenseBoost(0);
-	            					}
-	            				}
-	            			};//Command
-
-
-	            			if(AllZone.GameAction.isCardInPlay(charger)) {
-	            				charger.addTempAttackBoost(1);
-	            				charger.addTempDefenseBoost(0);
-
-	            				AllZone.EndOfTurn.addUntil(untilEOT);
-	            			}
-	            		}//resolve
-
-	            	};//ability
-
-	            	StringBuilder sb2 = new StringBuilder();
-	            	sb2.append(c.getName()).append(" - attacks alone and gets +1/+0 until EOT.");
-	            	ability2.setStackDescription(sb2.toString());
-
-	            	AllZone.Stack.add(ability2);
-	            }
             }
             
             if(c.getName().equals("Zur the Enchanter") && !c.getCreatureAttackedThisCombat()) {
