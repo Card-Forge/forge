@@ -16,12 +16,13 @@ public class Cost_Payment {
 	public void setCancel(boolean cancel) { bCancel = cancel; } 
 	public boolean isCanceled() { return bCancel; }
 	
-	private boolean payTap = false;
-	private boolean payUntap = false; 
-	private boolean payMana = false;
-	private boolean paySubCounter = false;
-	private boolean paySac = false;
-	private boolean payLife = false;
+	// No default values so an error will be kicked if not set properly in constructor
+	private boolean payTap;
+	private boolean payUntap; 
+	private boolean payMana;
+	private boolean paySubCounter;
+	private boolean paySac;
+	private boolean payLife;
 	
 	private boolean bCancel = false;
 
@@ -36,6 +37,7 @@ public class Cost_Payment {
 		this.ability = abil;
 		card = this.ability.getSourceCard();
 		payTap = !cost.getTap();
+		payUntap = !cost.getUntap();
 		payMana = cost.hasNoManaCost();
 		paySubCounter = !cost.getSubCounter();
 		paySac = !cost.getSacCost();
