@@ -1078,6 +1078,20 @@ public class Card extends MyObservable {
         this.updateObservers();
     }
     
+    /**
+     * checks to see if this card is enchanted by an aura with a given name
+     * 
+     * @param cardName the name of the aura
+     * @return true if this card is enchanted by an aura with the given name, false otherwise
+     */
+    public boolean isEnchantedBy(String cardName) {
+    	ArrayList<Card> allAuras = this.getEnchantedBy();
+    	for(Card aura:allAuras) {
+    		if(aura.getName().equals(cardName)) return true;
+    	}
+    	return false;
+    }
+    
     public void addEnchanting(Card c) {
         enchanting.add(c);
         this.updateObservers();

@@ -3,6 +3,7 @@ package forge;
 
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 
 class CardFactory_Auras {
@@ -40,6 +41,17 @@ class CardFactory_Auras {
     }
     
     public static Card getCard(final Card card, String cardName, String owner) {
+    	
+    	Command standardUnenchant = new Command() {
+			private static final long serialVersionUID = 3938247133551483568L;
+
+			public void execute() {
+                if(card.isEnchanting()) {
+                    Card crd = card.getEnchanting().get(0);
+                    card.unEnchantCard(crd);
+                }
+            }
+        };
     	
     	
         // *****************************************************************
@@ -1290,6 +1302,77 @@ class CardFactory_Auras {
         }//*************** END ************ END **************************
         
         
+        ///////////////////////////////////////////////////////////////////
+        ////
+        //// CAUTION: Keep this last in the if else if block for cardnames
+        ////
+        ///////////////////////////////////////////////////////////////////
+        
+        ////////////////////DRF test generic aura
+        //*************** START *********** START **************************
+        else if(isAuraType(card, "Land") || isAuraType(card, "Creature") ||
+        		isAuraType(card, "Artifact") || isAuraType(card, "Enchantment")) {
+        	
+        	System.out.println("In generic Aura code block");
+        	final String type = getAuraType(card);
+        	final boolean curse = isCurseAura(card);
+        	if("" == type) {
+        		System.out.println("Problem in generic Aura code - type is null");
+        	}
+        	final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 4191777361540717307L;
+
+				@Override
+        		public boolean canPlayAI() {
+					String player;
+					if(curse) {
+						player = Constant.Player.Human;
+					}
+					else {
+						player = Constant.Player.Computer;
+					}
+        			CardList list = AllZoneUtil.getPlayerTypeInPlay(player, type);
+
+        			if(list.isEmpty()) return false;
+        			
+        			//TODO - maybe do something intelligent here if it's not a curse, like
+        			//checking the aura magnet list
+        			setTargetCard(list.get(0));
+        			return true;
+        		}//canPlayAI()
+
+        		@Override
+        		public void resolve() {
+        			PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    play.add(card);
+                    
+                    Card c = getTargetCard();
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);                  
+        		}//resolve()
+        	};//SpellAbility
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        	card.addLeavesPlayCommand(standardUnenchant);
+
+        	Input runtime = new Input() {
+				private static final long serialVersionUID = -7100800261954421849L;
+
+				@Override
+        		public void showMessage() {
+        			CardList land = AllZoneUtil.getTypeInPlay(type);
+        			stopSetNext(CardFactoryUtil.input_targetSpecific(spell, land,
+        					"Select target "+type.toLowerCase(), true, false));
+        		}
+        	};
+        	spell.setBeforePayMana(runtime);
+        }//*************** END ************ END **************************
+        
+        ///////////////////////////////////////////////////////////////////
+        ////
+        //// CAUTION: Keep the above code block last in the if else if block
+        ////
+        ///////////////////////////////////////////////////////////////////
+        ////////////////////DRF test generic aura
         
     	// ************************************************************************
     	// The card objects below have been converted to keyword and can be deleted
@@ -6128,4 +6211,45 @@ class CardFactory_Auras {
         
         return card;
     }
+    
+    //checks if an aura is a given type based on: Enchant <type> in cards.txt
+    private static boolean isAuraType(final Card aura, final String type) {
+    	System.out.println("isAuraType - checking - "+aura.getName());
+    	ArrayList<String> keywords = aura.getKeyword();
+    	for(String keyword:keywords) {
+    		System.out.println("Got keyword: "+keyword);
+    		if(keyword.startsWith("Enchant "+type)) {
+    			System.out.println("Ending isAuraType with true");
+    			return true;
+    		}
+    	}
+    	System.out.println("Ending isAuraType with false");
+    	return false;
+    }
+    
+    //gets the type of aura based on Enchant <type> in cards.txt
+    private static String getAuraType(final Card aura) {
+    	ArrayList<String> keywords = aura.getKeyword();
+    	for(String keyword:keywords) {
+    		if(keyword.startsWith("Enchant ")) {
+    			StringTokenizer st = new StringTokenizer(keyword);
+    			st.nextToken(); //this should be "Enchant"
+    			return st.nextToken();  //should be "land", "artifact", etc
+    		}
+    	}
+    	return "";
+    }
+    
+    //checks if an aura is a curse based on Enchant <type> [Curse] in cards.txt
+    //Curse just means computer will target human's stuff with this
+    private static boolean isCurseAura(final Card aura) {
+    	ArrayList<String> keywords = aura.getKeyword();
+    	for(String keyword:keywords) {
+    		if(keyword.startsWith("Enchant ")) {
+    			if(keyword.endsWith("Curse")) return true;
+    		}
+    	}
+    	return false;
+    }
+    
 }
