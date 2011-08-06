@@ -1892,43 +1892,56 @@ class CardFactory_Equipment {
         } //*************** END ************ END **************************
 */
                
-        if(shouldEquip(card) != -1) {
+        if (shouldEquip(card) != -1) {
             int n = shouldEquip(card);
-            if(n != -1) {
+            if (n != -1) {
                 String parse = card.getKeyword().get(n).toString();
                 card.removeIntrinsicKeyword(parse);
                 
                 String k[] = parse.split(":");
-                String kk[] = k[1].split("/");
                 String tmpCost;
                 tmpCost = k[0].substring(6);
+                String keywordsUnsplit = "";
+                String extrinsicKeywords[] = {"none"};    // for equips with no keywords to add
+
+                final String manaCost = tmpCost.trim();
+                int Power = 0;
+                int Tough = 0;
                 
-                final String manacost = tmpCost.trim();
+                String ptk[] = k[1].split("/");
                 
-                for (int i = 0; i < 2; i ++)
+                if (ptk.length == 1)     // keywords in first cell
                 {
-                	if (kk[i].matches("[\\+\\-][0-9]")) kk[i] =kk[i].replace("+", "");
+                	keywordsUnsplit = ptk[0];
                 }
                 
-                final int Power = Integer.parseInt(kk[0].trim());
-                final int Tough = Integer.parseInt(kk[1].trim());
-
-                String extrinsicKeywords[] = {"none"};    // for equips with no keywords to add
-                
-                if (kk.length > 2)    // then there is at least one extrinsic keyword to assign
+                else // parse the power/toughness boosts in first two cells
                 {
-                	String kkk[] = kk[2].split("&");
-                	extrinsicKeywords = new String[kkk.length];
-                	                	
-                	for (int i = 0; i < kkk.length; i ++)
+                    for (int i = 0; i < 2; i ++)
                     {
-                		extrinsicKeywords[i] = kkk[i].trim();
+                        if (ptk[i].matches("[\\+\\-][0-9]")) ptk[i] =ptk[i].replace("+", "");
+                    }
+                    Power = Integer.parseInt(ptk[0].trim());
+                    Tough = Integer.parseInt(ptk[1].trim());
+                    
+                    if (ptk.length > 2)     // keywords in third cell
+                        keywordsUnsplit = ptk[2];
+                }
+                
+                if (keywordsUnsplit.length() > 0)    // then there is at least one extrinsic keyword to assign
+                {
+                    String tempKwds[] = keywordsUnsplit.split("&");
+                    extrinsicKeywords = new String[tempKwds.length];
+                    
+                    for (int i = 0; i < tempKwds.length; i ++)
+                    {
+                        extrinsicKeywords[i] = tempKwds[i].trim();
                     }
                 }
-                
-                card.addSpellAbility(CardFactoryUtil.eqPump_Equip(card, Power, Tough, extrinsicKeywords, manacost));
-                card.addEquipCommand(CardFactoryUtil.eqPump_onEquip(card, Power, Tough, extrinsicKeywords, manacost));
-                card.addUnEquipCommand(CardFactoryUtil.eqPump_unEquip(card, Power, Tough, extrinsicKeywords, manacost));
+
+                card.addSpellAbility(CardFactoryUtil.eqPump_Equip(card, Power, Tough, extrinsicKeywords, manaCost));
+                card.addEquipCommand(CardFactoryUtil.eqPump_onEquip(card, Power, Tough, extrinsicKeywords, manaCost));
+                card.addUnEquipCommand(CardFactoryUtil.eqPump_unEquip(card, Power, Tough, extrinsicKeywords, manaCost));
                 
             }
         }// eqPump (was VanillaEquipment)

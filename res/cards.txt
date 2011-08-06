@@ -171,7 +171,7 @@ Basilisk Collar
 1
 Artifact Equipment
 Equipped creature has deathtouch and lifelink.
-eqPump 2:+0/+0/Deathtouch & Lifelink
+eqPump 2:Deathtouch & Lifelink
 
 Behemoth Sledge
 1 G W
@@ -201,7 +201,7 @@ Fireshrieker
 3
 Artifact Equipment
 Equipped creature has double strike.
-eqPump 2:+0/+0/Double Strike
+eqPump 2:Double Strike
 
 Gorgon Flail
 2
@@ -225,7 +225,7 @@ Lightning Greaves
 2
 Artifact Equipment
 Equipped creature has haste and shroud.
-eqPump 0:+0/+0/Haste & Shroud
+eqPump 0:Haste & Shroud
 
 Loxodon Warhammer
 3
@@ -237,13 +237,13 @@ Mask of Riddles
 U B
 Artifact Equipment
 Equipped creature has fear. Whenever equipped creature deals combat damage to a player, you may draw a card. 
-eqPump 2:+0/+0/Fear
+eqPump 2:Fear
 
 Neurok Hoversail
 1
 Artifact Equipment
 Equipped creature has flying.
-eqPump 2:+0/+0/Flying
+eqPump 2:Flying
 
 No-Dachi
 2
@@ -255,13 +255,13 @@ Peregrine Mask
 1
 Artifact Equipment
 Equipped creature has defender, flying, and first strike.
-eqPump 2:+0/+0/Defender & Flying & First Strike
+eqPump 2:Defender & Flying & First Strike
 
 Quietus Spike
 3
 Artifact Equipment
 Equipped creature has deathtouch. Whenever equipped creature deals combat damage to a player, that player loses half his or her life, rounded up.
-eqPump 3:+0/+0/Deathtouch
+eqPump 3:Deathtouch
 
 Runed Stalactite
 1
@@ -297,7 +297,7 @@ Trailblazer's Boots
 2
 Artifact Equipment
 Equipped creature has nonbasic landwalk.
-eqPump 2:+0/+0/Nonbasic landwalk
+eqPump 2:Nonbasic landwalk
 
 Trusty Machete
 1
@@ -327,7 +327,7 @@ Whispersilk Cloak
 3
 Artifact Equipment
 Equipped creature is unblockable and has shroud.
-eqPump 2:+0/+0/Unblockable & Shroud
+eqPump 2:Unblockable & Shroud
 
 Bloodcurdling Scream
 X B
