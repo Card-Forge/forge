@@ -726,7 +726,7 @@ public class AbilityFactory {
 					players.add(p);
 			}
 		}
-		else if (defined.equals("TriggeringController")){
+		else if (defined.equals("TriggeredController")){
 				Player p = sa.getTriggeringCard().getController();
 				if (!players.contains(p))
 					players.add(p);
