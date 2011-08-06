@@ -1098,10 +1098,10 @@ public class GameActionUtil {
 						}
 					}; // ability2
 					
-					StringBuilder sb2 = new StringBuilder();
-					sb2.append(card.getName()).append(" - ").append(c.getController());
-					sb2.append(" played a black spell, Emberstrike Duo gets +1/+1 until end of turn.");
-					ability2.setStackDescription(sb2.toString());
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - ").append(c.getController());
+					sb.append(" played a black spell, Emberstrike Duo gets +1/+1 until end of turn.");
+					ability2.setStackDescription(sb.toString());
 					
 					AllZone.Stack.add(ability2);
 				}
@@ -1130,10 +1130,10 @@ public class GameActionUtil {
 					}
 				}; // ability2
 				
-				StringBuilder sb2 = new StringBuilder();
-				sb2.append(card.getName()).append(" - ").append(c.getController());
-				sb2.append(" played a red spell, Emberstrike Duo gains first strike until end of turn.");
-				ability2.setStackDescription(sb2.toString());
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - ").append(c.getController());
+				sb.append(" played a red spell, Emberstrike Duo gains first strike until end of turn.");
+				ability2.setStackDescription(sb.toString());
 				
 				AllZone.Stack.add(ability2);
 			}
@@ -1177,10 +1177,10 @@ public class GameActionUtil {
 						}
 					}; // ability2
 					
-					StringBuilder sb2 = new StringBuilder();
-					sb2.append(card.getName()).append(" - ").append(c.getController());
-					sb2.append(" played a blue spell, Gravelgill Duo gets +1/+1 until end of turn.");
-					ability2.setStackDescription(sb2.toString());
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - ").append(c.getController());
+					sb.append(" played a blue spell, Gravelgill Duo gets +1/+1 until end of turn.");
+					ability2.setStackDescription(sb.toString());
 					
 					AllZone.Stack.add(ability2);
 				}
@@ -1209,10 +1209,10 @@ public class GameActionUtil {
 					}
 				}; // ability2
 				
-				StringBuilder sb2 = new StringBuilder();
-				sb2.append(card.getName()).append(" - ").append(c.getController());
-				sb2.append(" played a black spell, Emberstrike Duo gains fear until end of turn.");
-				ability2.setStackDescription(sb2.toString());
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - ").append(c.getController());
+				sb.append(" played a black spell, Emberstrike Duo gains fear until end of turn.");
+				ability2.setStackDescription(sb.toString());
 				
 				AllZone.Stack.add(ability2);
 			}
@@ -1236,10 +1236,10 @@ public class GameActionUtil {
 					}
 				}; // ability2
 				
-				StringBuilder sb2 = new StringBuilder();
-				sb2.append(card.getName()).append(" - ").append(c.getController());
-				sb2.append(" played a spell with same amount of charge counters on Chalice of the Void. The spell is countered");
-				ability2.setStackDescription(sb2.toString());
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - ").append(c.getController());
+				sb.append(" played a spell with same amount of charge counters on Chalice of the Void. The spell is countered");
+				ability2.setStackDescription(sb.toString());
                 
 				int convertedManaSpell = CardUtil.getConvertedManaCost(sa.getSourceCard().getManaCost());								
 				if(sa.isSpell() == true && card.getCounters(Counters.CHARGE) == convertedManaSpell) AllZone.Stack.add(ability2);	
@@ -1281,10 +1281,10 @@ public class GameActionUtil {
 						}
 					}; // ability2
 					
-					StringBuilder sb2 = new StringBuilder();
-					sb2.append(card.getName()).append(" - ").append(c.getController());
-					sb2.append(" played a green spell, Safehold Duo gets +1/+1 until end of turn.");
-					ability2.setStackDescription(sb2.toString());
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - ").append(c.getController());
+					sb.append(" played a green spell, Safehold Duo gets +1/+1 until end of turn.");
+					ability2.setStackDescription(sb.toString());
 					
 					AllZone.Stack.add(ability2);
 				}
@@ -1313,10 +1313,10 @@ public class GameActionUtil {
 					}
 				}; // ability2
 				
-				StringBuilder sb2 = new StringBuilder();
-				sb2.append(card.getName()).append(" - ").append(c.getController());
-				sb2.append(" played a white spell, Safehold Duo gains vigilance until end of turn.");
-				ability2.setStackDescription(sb2.toString());
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - ").append(c.getController());
+				sb.append(" played a white spell, Safehold Duo gains vigilance until end of turn.");
+				ability2.setStackDescription(sb.toString());
 			    
 				AllZone.Stack.add(ability2);
 			}
@@ -1358,10 +1358,10 @@ public class GameActionUtil {
 						}
 					}; // ability2
 					
-					StringBuilder sb2 = new StringBuilder();
-					sb2.append(card.getName()).append(" - ").append(c.getController());
-					sb2.append(" played a red spell, Tattermunge Duo gets +1/+1 until end of turn.");
-					ability2.setStackDescription(sb2.toString());
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - ").append(c.getController());
+					sb.append(" played a red spell, Tattermunge Duo gets +1/+1 until end of turn.");
+					ability2.setStackDescription(sb.toString());
 					
 					AllZone.Stack.add(ability2);
 				}
@@ -1389,10 +1389,10 @@ public class GameActionUtil {
 					}
 				}; // ability2
 				
-				StringBuilder sb2 = new StringBuilder();
-				sb2.append(card.getName()).append(" - ").append(c.getController());
-				sb2.append(" played a green spell, Tattermunge Duo gains forestwalk until end of turn.");
-				ability2.setStackDescription(sb2.toString());
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - ").append(c.getController());
+				sb.append(" played a green spell, Tattermunge Duo gains forestwalk until end of turn.");
+				ability2.setStackDescription(sb.toString());
 				
 				AllZone.Stack.add(ability2);
 			}
@@ -1434,10 +1434,10 @@ public class GameActionUtil {
 						}
 					}; // ability2
 					
-					StringBuilder sb2 = new StringBuilder();
-					sb2.append(card.getName()).append(" - ").append(c.getController());
-					sb2.append(" played a white spell, Thistledown Duo gets +1/+1 until end of turn.");
-					ability2.setStackDescription(sb2.toString());
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - ").append(c.getController());
+					sb.append(" played a white spell, Thistledown Duo gets +1/+1 until end of turn.");
+					ability2.setStackDescription(sb.toString());
 					
 					AllZone.Stack.add(ability2);
 				}
@@ -1465,9 +1465,12 @@ public class GameActionUtil {
 						AllZone.EndOfTurn.addUntil(untilEOT);
 					}
 				}; // ability2
-
-				ability2.setStackDescription(card.getName() + " - " + c.getController()
-						+ " played a blue spell, Thistledown Duo gains flying until end of turn.");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - ").append(c.getController());
+				sb.append(" played a blue spell, Thistledown Duo gains flying until end of turn.");
+				ability2.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability2);
 			}
 		}//if
@@ -1497,10 +1500,13 @@ public class GameActionUtil {
 					}
 				}
 			}; // ability2
-			ability2.setStackDescription(c.getName()
-					+ " - "
-					+ c.getController()
-					+ " casts Demigod of Revenge, returns all cards named Demigod of Revenge from your graveyard to the battlefield.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(c.getName()).append(" - ").append(c.getController());
+			sb.append(" casts Demigod of Revenge, returns all cards named Demigod ");
+			sb.append("of Revenge from your graveyard to the battlefield.");
+			ability2.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability2);
 
 		}//if					
@@ -1546,11 +1552,13 @@ public class GameActionUtil {
 							AllZone.EndOfTurn.addUntil(untilEOT);
 						}
 					}; // ability2
-
-					ability2.setStackDescription(card.getName()
-							+ " - "
-							+ c.getController()
-							+ " played a creature spell Halcyon Glaze becomes a 4/4 Illusion creature with flying until end of turn.  It's still an enchantment.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - ").append(c.getController());
+					sb.append(" played a creature spell Halcyon Glaze becomes a 4/4 Illusion ");
+					sb.append("creature with flying until end of turn. It's still an enchantment.");
+					ability2.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability2);
 				}
 			}//if
@@ -1593,10 +1601,12 @@ public class GameActionUtil {
 					}; //ability
 					ability2.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
 					ability2.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability2));
-					ability2.setStackDescription(card.getName()
-							+ " - "
-							+ c.getController()
-							+ " played a Spirit or Arcane spell,  target opponent loses 1 life and you gain 1 life.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - ").append(c.getController());
+					sb.append(" played a Spirit or Arcane spell, target opponent loses 1 life and you gain 1 life.");
+					ability2.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability2);
 				}
 			}//if
@@ -1649,11 +1659,13 @@ public class GameActionUtil {
 					}; //ability
 					ability2.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
 					ability2.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability2));
-					ability2.setStackDescription(card.getName()
-							+ " - "
-							+ c.getController()
-							+ " played a Spirit or Arcane spell, target player reveals his or her hand and discards all cards with converted mana cost "
-							+ converted + ".");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - ").append(c.getController());
+					sb.append(" played a Spirit or Arcane spell, target player reveals his or her hand ");
+					sb.append("and discards all cards with converted mana cost ").append(converted).append(".");
+					ability2.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability2);
 				}
 			}//if
@@ -1708,9 +1720,13 @@ public class GameActionUtil {
 					}; //ability
 					ability2.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
 					ability2.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability2));
-					ability2.setStackDescription(card.getName() + " - " + c.getController()
-							+ " played a Spirit or Arcane spell, target player puts the top " + converted
-							+ " cards of his or her library into his or her graveyard.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - ").append(c.getController());
+					sb.append(" played a Spirit or Arcane spell, target player puts the top ");
+					sb.append(converted).append(" cards of his or her library into his or her graveyard.");
+					ability2.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability2);
 				}
 			}//if
@@ -1755,8 +1771,13 @@ public class GameActionUtil {
 					}; //ability
 					ability2.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
 					ability2.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability2));
-					ability2.setStackDescription(card.getName() + " - " + c.getController()
-							+ " played a Spirit or Arcane spell, target player may gain " + converted + " life.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - ").append(c.getController());
+					sb.append(" played a Spirit or Arcane spell, target player may gain ");
+					sb.append(converted).append(" life.");
+					ability2.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability2);
 				}
 			}//if
@@ -1801,11 +1822,13 @@ public class GameActionUtil {
 							AllZone.EndOfTurn.addUntil(untilEOT);
 						}
 					}; // ability2
-
-					ability2.setStackDescription(card.getName()
-							+ " - "
-							+ c.getController()
-							+ " played a spell that�s both green and blue, it becomes 5/3 and gains trample until end of turn.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - ").append(c.getController());
+					sb.append(" played a spell that's both green and blue, ");
+					sb.append("it becomes 5/3 and gains trample until end of turn.");
+					ability2.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability2);
 				}
 			}//if
@@ -1849,11 +1872,13 @@ public class GameActionUtil {
 							AllZone.EndOfTurn.addUntil(untilEOT);
 						}
 					}; // ability2
-
-					ability2.setStackDescription(card.getName()
-							+ " - "
-							+ c.getController()
-							+ " played a spell that�s both red and white, it becomes 4/2 and gains first strike until end of turn.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - ").append(c.getController());
+					sb.append(" played a spell that's both red and white, ");
+					sb.append("it becomes 4/2 and gains first strike until end of turn.");
+					ability2.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability2);
 				}
 			}//if
@@ -1897,11 +1922,13 @@ public class GameActionUtil {
 							AllZone.EndOfTurn.addUntil(untilEOT);
 						}
 					}; // ability2
-
-					ability2.setStackDescription(card.getName()
-							+ " - "
-							+ c.getController()
-							+ " played a spell that's both black and white, it becomes 4/4 and gains flying until end of turn.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - ").append(c.getController());
+					sb.append(" played a spell that's both black and white, ");
+					sb.append("it becomes 4/4 and gains flying until end of turn.");
+					ability2.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability2);
 				}
 			}//if
@@ -1945,11 +1972,13 @@ public class GameActionUtil {
 							AllZone.EndOfTurn.addUntil(untilEOT);
 						}
 					}; // ability2
-
-					ability2.setStackDescription(card.getName()
-							+ " - "
-							+ c.getController()
-							+ " played a spell that�s both red and blue, it becomes 3/3 and is unblockable until end of turn.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - ").append(c.getController());
+					sb.append(" played a spell that's both red and blue, ");
+					sb.append("it becomes 3/3 and is unblockable until end of turn.");
+					ability2.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability2);
 				}
 			}//if
@@ -1993,11 +2022,13 @@ public class GameActionUtil {
 							AllZone.EndOfTurn.addUntil(untilEOT);
 						}
 					}; // ability2
-
-					ability2.setStackDescription(card.getName()
-							+ " - "
-							+ c.getController()
-							+ " played a spell that�s both green and black, it becomes 4/5 and gains wither until end of turn.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - ").append(c.getController());
+					sb.append(" played a spell that's both green and black, ");
+					sb.append("it becomes 4/5 and gains wither until end of turn.");
+					ability2.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability2);
 				}
 			}//if
