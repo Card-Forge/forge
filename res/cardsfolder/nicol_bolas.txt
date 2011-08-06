@@ -7,5 +7,6 @@ K:Flying
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay U B R
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nicol_bolas.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/98.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/286.jpg
 End

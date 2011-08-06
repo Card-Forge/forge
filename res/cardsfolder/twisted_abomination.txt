@@ -8,4 +8,5 @@ K:TypeCycling:Swamp:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twisted_abomination.jpg
 SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/76.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/50.jpg
 End

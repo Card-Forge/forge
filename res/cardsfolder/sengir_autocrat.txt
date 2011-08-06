@@ -9,4 +9,5 @@ SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card106638.jpg
 SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/19.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/55.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/155.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/45.jpg
 End

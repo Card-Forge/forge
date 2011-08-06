@@ -9,5 +9,6 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evil_eye_of_orms_by_gore.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/21.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/126.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/42.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/10.jpg
 End

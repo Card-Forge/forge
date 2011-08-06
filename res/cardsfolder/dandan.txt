@@ -8,5 +8,6 @@ K:When you control no Islands, sacrifice CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card106631.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/79.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/19.jpg
 SetInfo:ARN|Common|http://magiccards.info/scans/en/an/16.jpg
 End

@@ -7,4 +7,5 @@ SVar:X:Count$Domain
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108916.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/176.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/70.jpg
 End

@@ -6,5 +6,6 @@ PT:5/5
 K:Swampwalk
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/solkanar_the_swamp_king.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/100.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/299.jpg
 End

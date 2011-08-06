@@ -5,4 +5,5 @@ Text:no text
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tormods_crypt.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/109.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/115.jpg
 End

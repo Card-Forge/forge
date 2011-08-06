@@ -8,4 +8,5 @@ A:AB$DealDamage | Cost$ T SubCounter<1/JAVELIN> | Tgt$ TgtCP | NumDmg$ 1 | Spell
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/icatian_javelineers.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/148.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/10.jpg
 End

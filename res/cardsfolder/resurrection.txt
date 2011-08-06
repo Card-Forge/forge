@@ -7,5 +7,6 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/resurrection.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/220.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/218.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/12.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/219.jpg
 End

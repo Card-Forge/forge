@@ -5,4 +5,5 @@ Text:(NOTE: Computer will only use the first ability against you.)
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108895.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/11.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/44.jpg
 End

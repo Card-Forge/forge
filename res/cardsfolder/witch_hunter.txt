@@ -7,4 +7,5 @@ A:AB$DealDamage | Cost$ T | NumDmg$ 1 | Tgt$ TgtP | SpellDescription$ CARDNAME d
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/witch_hunter.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/92.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/17.jpg
 End

@@ -111,6 +111,7 @@ def initSets():
 	
 	# Time Spiral
 	allSets['Time Spiral'] = 'TSP'
+	allSets['Time Spiral "Timeshifted"'] = 'TSB'
 	allSets['Planar Chaos'] = 'PLC'
 	allSets['Future Sight'] = 'FUT'
 	
@@ -161,12 +162,12 @@ def addSets(card):
 			rarity = rarity[0:raritySpace]	# For older cards
 		
 		# What to do with TimeShifted cards?
-		if rarity == 'Special':
+		if rarity == 'Special' and edition != 'Time Spiral "Timeshifted"':
 			continue
 			
 		# Get setAbbreviation and setNumber
 		dataIndex = block.rfind('"/',0,edIndex)
-		data = block[dataIndex+2:edIndex-2]
+		data = block[dataIndex+2:edIndex-1] # 1 instead of 2 because of Portal/Mirrodin Issue
 
 		splitData = data.split('/')
 		setAbbr = splitData[0]

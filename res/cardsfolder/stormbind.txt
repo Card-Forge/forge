@@ -5,5 +5,6 @@ Text:no text
 K:abDamageTgtCP 2 Discard<1/Random>:2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormbind.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/102.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/382.jpg
 End

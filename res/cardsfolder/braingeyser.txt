@@ -2,6 +2,8 @@ Name:Braingeyser
 ManaCost:X U U
 Types:Sorcery
 Text:no text
+A:SP$Draw | Cost$ X U U | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player to draw X cards | SpellDescription$ Target player draws X cards.
+SVar:X:Count$xPaid
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/braingeyser.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/51.jpg

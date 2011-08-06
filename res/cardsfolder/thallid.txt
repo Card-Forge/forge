@@ -7,4 +7,5 @@ K:Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thallid.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/87.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/86.jpg
 End

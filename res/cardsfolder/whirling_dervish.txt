@@ -7,6 +7,7 @@ K:Protection from black
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whirling_dervish.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/203.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/90.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/172.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/125.jpg
 End

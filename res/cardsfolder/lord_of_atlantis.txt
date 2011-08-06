@@ -9,9 +9,10 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_atlantis.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/63.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/83.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/100.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/82.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/24.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/79.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/64.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/100.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/63.jpg
 End

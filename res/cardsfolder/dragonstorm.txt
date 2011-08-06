@@ -6,4 +6,5 @@ K:Storm
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonstorm.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/90.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/60.jpg
 End

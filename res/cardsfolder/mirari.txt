@@ -6,4 +6,5 @@ K:WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Instant/Sorcery:Play:CopySp
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirari.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/303.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/112.jpg
 End

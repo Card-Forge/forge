@@ -7,4 +7,5 @@ K:abPump Sac<1/Enchantment>:+2/+2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auratog.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/218.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/2.jpg
 End

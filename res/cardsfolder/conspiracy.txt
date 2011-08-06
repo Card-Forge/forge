@@ -5,5 +5,6 @@ Text:As Conspiracy comes into play, choose a creature type.\r\nCreature cards yo
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conspiracy.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/39.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/127.jpg
 End

@@ -5,4 +5,5 @@ Text:CARDNAME enters the battlefield with three mining counters on it.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gemstone_mine.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/164.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/119.jpg
 End

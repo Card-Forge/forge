@@ -6,5 +6,6 @@ K:tap: add G
 A:AB$Pump | Cost$ T | NumAtt$ +1 | NumDef$ +2 | ValidTgts$ Creature.powerEQ1+toughnessEQ1 | TgtPrompt$ Select target 1/1 Creature | SpellDescription$ Target 1/1 creature gets +1/+2 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pendelhaven.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/120.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/250.jpg
 End

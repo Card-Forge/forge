@@ -8,4 +8,5 @@ K:abDestroyTgtV T:Creature:NoRegen:Destroy target creature. It can't be regenera
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_woe.jpg
 SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/56.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/37.jpg
 End

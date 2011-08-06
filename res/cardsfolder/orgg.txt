@@ -10,4 +10,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orgg.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/259.jpg
 SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/131.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/67.jpg
 End
