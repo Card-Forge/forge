@@ -111,6 +111,21 @@ class CardFactory_Planeswalkers {
                     card2.subtractCounter(Counters.LOYALTY, 8);
                     turn[0] = AllZone.Phase.getTurn();
                     
+                    Card emblem = new Card();
+                    //should we even name this permanent?
+                    //emblem.setName("Elspeth Emblem");
+                    emblem.addIntrinsicKeyword("Indestructible");
+                    emblem.addIntrinsicKeyword("Shroud");
+                    emblem.addIntrinsicKeyword("Artifacts, creatures, enchantments, and lands you control are indestructible.");
+                    emblem.setImmutable(true);
+                    emblem.addType("Emblem");
+                    emblem.setController(card2.getController());
+                    emblem.setOwner(card2.getOwner());
+                    
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card2.getController());
+                    play.add(emblem);
+                                        
+                    /*
                     //make all permanents in play/hand/library and graveyard	
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, card2.getController());
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card2.getController());
@@ -131,6 +146,7 @@ class CardFactory_Planeswalkers {
                         }
                         
                     }
+                    */
                     
                 }
                 

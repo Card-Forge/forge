@@ -5302,7 +5302,6 @@ public class GameActionUtil {
 	
 	private static void playerDamage_Farsight_Mask(final String player, final Card c, final Card crd)
 	{
-		
 		Ability ability = new Ability(crd,"0")
 		{
 			public void resolve()
@@ -10307,6 +10306,64 @@ public class GameActionUtil {
 					}
 				}// for inner
 			}// for outer
+		}// execute()
+
+	};
+	
+	public static Command Elspeth_Emblem 			  = new Command() {
+
+		private static final long serialVersionUID = 7414127991531889390L;
+		CardList                  gloriousAnthemList = new CardList();
+
+		public void execute() {
+			String keyword = "Indestructible";
+
+			CardList list = gloriousAnthemList;
+			Card c;
+			// reset all cards in list - aka "old" cards
+			for(int i = 0; i < list.size(); i++) {
+				c = list.get(i);
+				c.removeExtrinsicKeyword(keyword);
+			}
+
+			list.clear();
+			
+			CardList emblem = AllZoneUtil.getCardsInPlay();
+			emblem = emblem.filter(new CardListFilter()
+			{
+				public boolean addCard(Card c)
+				{
+					return c.isEmblem() && c.getKeyword().contains("Artifacts, creatures, enchantments, and lands you control are indestructible.");
+				}
+			});
+			
+			for (int i = 0; i < emblem.size(); i++)
+			{
+				CardList perms = AllZoneUtil.getPlayerCardsInPlay(emblem.get(i).getController());
+				
+				for(int j = 0; j < perms.size(); j++) {
+					c = perms.get(j);
+					if(!c.getKeyword().contains(keyword)) {
+						c.addExtrinsicKeyword(keyword);
+						gloriousAnthemList.add(c);
+					}
+				}
+			}
+			
+			/*PlayerZone[] zone = getZone("Elspeth, Knight-Errant");
+
+			for(int outer = 0; outer < zone.length; outer++) {
+				CardList perms = new CardList(zone[outer].getCards());
+
+				for(int i = 0; i < perms.size(); i++) {
+					c = perms.get(i);
+					if(!c.getKeyword().contains(keyword)) {
+						c.addExtrinsicKeyword(keyword);
+						gloriousAnthemList.add(c);
+					}
+				}// for inner
+			}// for outer
+			*/
 		}// execute()
 
 	};
@@ -20198,6 +20255,7 @@ public class GameActionUtil {
 		commands.put("Giant_Tortoise", Giant_Tortoise);
 
 		commands.put("Darksteel_Forge", Darksteel_Forge);
+		commands.put("Elspeth_Emblem", Elspeth_Emblem);
 		commands.put("Akromas_Memorial", Akromas_Memorial);
 		commands.put("Leyline_of_Singularity", Leyline_of_Singularity);
 		commands.put("Goblin_Warchief", Goblin_Warchief);	

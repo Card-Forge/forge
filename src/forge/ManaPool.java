@@ -25,6 +25,7 @@ public class ManaPool extends Card {
         setName("Mana Pool");
         addIntrinsicKeyword("Shroud");
         addIntrinsicKeyword("Indestructible");
+        setImmutable(true);
         clearPool();
         map.put(Constant.Color.White, 0);
         map.put(Constant.Color.Blue, 1);

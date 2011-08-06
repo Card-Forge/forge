@@ -3204,6 +3204,10 @@ public class CardFactoryUtil {
     public static boolean canTarget(Card spell, Card target) {
         if(target == null) return true;
         //System.out.println("Target:" + target);
+        
+        if (target.isImmutable())
+        	return false;
+        
         if(target.getKeyword() != null) {
             ArrayList<String> list = target.getKeyword();
             
@@ -3253,6 +3257,9 @@ public class CardFactoryUtil {
     //does "target" have protection from "card"?
     public static boolean hasProtectionFrom(Card card, Card target) {
         if(target == null) return false;
+        
+        if(target.isImmutable())
+        	return true;
         
         if(target.getKeyword() != null) {
             ArrayList<String> list = target.getKeyword();
@@ -4507,6 +4514,7 @@ public class CardFactoryUtil {
 		}
     }
     
+    
     public static boolean isNegativeCounter(Counters c)
     {	
     	
@@ -4524,6 +4532,17 @@ public class CardFactoryUtil {
         		c == Counters.M1M1 || c == Counters.P0M1 || c == Counters.P0M2 || c == Counters.TIME;
     }
 
+    public static String checkEmblemKeyword(Card c) 
+    {
+    	if (c.getKeyword().contains("Artifacts, creatures, enchantments, and lands you control are indestructible."))
+    		return "Elspeth_Emblem";
+    	
+    	if (c.getKeyword().contains("Whenever you cast a spell, exile target permanent."))
+    		return "Venser_Emblem";
+    	
+    	return "";
+    }
+    
     public static void main(String[] args) {
         
         CardList in = AllZone.CardFactory.getAllCards();

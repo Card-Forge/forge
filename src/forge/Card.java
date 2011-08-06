@@ -57,7 +57,7 @@ public class Card extends MyObservable {
     private boolean                      creatureGotBlockedThisCombat      = false;
     private boolean                      dealtCombatDmgToOppThisTurn       = false;
     private boolean                      dealtDmgToOppThisTurn             = false;
-    private boolean						sirenAttackOrDestroy				= false;
+    private boolean						 sirenAttackOrDestroy			   = false;
     private boolean                      exaltedBonus                      = false;
     private boolean                      faceDown                          = false;
     private boolean                      sacrificeAtEOT                    = false;
@@ -77,6 +77,9 @@ public class Card extends MyObservable {
     private boolean						 madness						   = false;
     private boolean						 suspendCast					   = false;
     private boolean						 suspend						   = false;
+    
+    //for Vanguard / Manapool / Emblems etc.
+    private boolean 					 isImmutable					   = false;
     
     private int                          exaltedMagnitude                  = 0;
     
@@ -1814,6 +1817,10 @@ public class Card extends MyObservable {
         return type.contains("Planeswalker");
     }
     
+    public boolean isEmblem() {
+    	return type.contains("Emblem");
+    }
+    
     public boolean isTribal() {
         return type.contains("Tribal");
     }
@@ -2113,4 +2120,13 @@ public class Card extends MyObservable {
         }
         return false;
     }//getValidCards
+
+	public void setImmutable(boolean isImmutable) {
+		this.isImmutable = isImmutable;
+	}
+
+	public boolean isImmutable() {
+		return isImmutable;
+	}
+
 }

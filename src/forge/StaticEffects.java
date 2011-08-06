@@ -289,6 +289,12 @@ public class StaticEffects
 					Log.debug("Added " + effect);
 				}
 			}
+			if (c.isEmblem() && !CardFactoryUtil.checkEmblemKeyword(c).equals(""))
+			{
+				String s = CardFactoryUtil.checkEmblemKeyword(c);
+				addStateBasedEffect(s);
+				Log.debug("Added " + s);
+			}
 		}
 		Log.debug("== End add state effects ==");
 		
