@@ -1,3 +1,36 @@
+Roughshod Mentor
+5 G
+Creature Giant Warrior
+no text
+5/4
+StaticEffect:Play:Permanents you Control:Keyword/Trample:Type.Creature!Color.green:Green creatures you control have trample.
+
+Primal Rage
+1 G
+Enchantment
+no text
+StaticEffect:Play:Permanents you Control:Keyword/Trample:Type.Creature:Creatures you control have trample. (If a creature you control would deal enough damage to its blockers to destroy them, you may have it deal the rest of its damage to defending player or planeswalker.)
+
+Hidden Path
+2 G G G G
+Enchantment
+no text
+StaticEffect:Play:All Permanents:Keyword/Forestwalk:Type.Creature!Color.green:Green creatures have forestwalk.
+
+Lumbering Satyr
+2 G G
+Creature Satyr Beast
+no text
+5/4
+StaticEffect:Play:All Permanents:Keyword/Forestwalk:Type.Creature:All creatures have forestwalk.
+
+Spinneret Sliver
+1 G
+Creature Sliver
+no text
+2/2
+StaticEffect:Play:All Permanents:Keyword/Reach:Type.Creature!Type.Sliver:All Sliver creatures have reach. (They can block creatures with flying.)
+
 Keldon Marauders
 1 R
 Creature Human Warrior
