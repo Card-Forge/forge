@@ -10009,8 +10009,18 @@ public class CardFactory implements NewConstants {
 
         		@Override
         		public boolean canPlayAI() {
-        			//TODO: add AI.  Should be easy enough
-        			return false;
+        			PlayerLife compy = AllZone.GameAction.getPlayerLife(Constant.Player.Computer);
+        			PlayerLife human = AllZone.GameAction.getPlayerLife(Constant.Player.Human);
+        			if(compy.getLife() < 5 && human.getLife() > 5) {
+        				return true;
+        			}
+        			else if(compy.getLife() == 1) {
+        				return true;
+        			}
+        			else if((human.getLife() - compy.getLife()) > 10) {
+        				return true;
+        			}
+        			else return false;
         		}
         	};//SpellAbility
         	
