@@ -18491,6 +18491,66 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        if (cardName.equals("Kargan Dragonlord"))
+        {
+	        final SpellAbility ability = new Ability_Activated(card, "R") {
+				private static final long serialVersionUID = -2252408767635375616L;
+
+				@Override
+	            public boolean canPlayAI() {
+	                
+	                if(AllZone.Phase.getPhase().equals(Constant.Phase.Main2)) return false;
+	                
+	                setTargetCard(card);
+	                    
+	                if((card.hasSickness() && (!card.getKeyword().contains("Haste"))) ) return false;
+	                else {
+	                	Random r = new Random();
+	                    if(r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed())) return CardFactoryUtil.AI_doesCreatureAttack(card);
+	                }
+	                return false;
+	            }
+	            
+	            @Override
+	            public boolean canPlay() {
+	                return (CardFactoryUtil.canUseAbility(card))
+	                        && (AllZone.GameAction.isCardInPlay(card)) && (!card.isFaceDown() && card.getCounters(Counters.LEVEL) >= 8);
+	            }
+	            
+	            @Override
+	            public void resolve() {
+	                if(AllZone.GameAction.isCardInPlay(getTargetCard())) {
+	                    final Card[] creature = new Card[1];
+	                    creature[0] = card;
+	                    
+	                    final Command EOT = new Command() {
+	                        
+							private static final long serialVersionUID = 3161373279207630319L;
+
+							public void execute() {
+	                            if(AllZone.GameAction.isCardInPlay(creature[0])) {
+	                                creature[0].addTempAttackBoost(-1);
+	                            }
+	                        }
+	                    };
+	                    
+	                    creature[0].addTempAttackBoost(1);
+
+	                    card.setAbilityUsed(card.getAbilityUsed() + 1);
+	                    AllZone.EndOfTurn.addUntil(EOT);
+	                }//if (card is in play)
+	            }//resolve()
+	        };//SpellAbility
+	        
+	        ability.setDescription("R: Kargan Dragonlord gets +1/+0 until end of turn. (LEVEL 8+)");
+	        //ability.setStackDescription(stDesc[0]);
+	        
+	        ability.setTargetCard(card);
+	        card.addSpellAbility(ability);
+        }
+        //*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(shouldCycle(card) != -1) {

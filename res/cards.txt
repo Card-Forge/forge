@@ -1,3 +1,11 @@
+Kargan Dragonlord
+R R
+Creature Human Warrior
+LEVEL 4-7 4/4 Flying LEVEL 8+ 8/8 Flying, Trample, R: Kargan Dragonlord gets +1/+0 until end of turn.
+2/2
+Level up:R
+maxLevel:8
+
 Expedition Map
 1
 Artifact

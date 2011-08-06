@@ -56,6 +56,7 @@ public class StaticEffects
 		cardToEffectsList.put("Dakkon Blackblade", new String[] {"Dakkon"});
 		cardToEffectsList.put("Korlash, Heir to Blackblade", new String[] {"Korlash"});
 		cardToEffectsList.put("Student of Warfare", new String[]{"Student_of_Warfare"});
+		cardToEffectsList.put("Kargan Dragonlord", new String[]{"Kargan_Dragonlord"});
 		cardToEffectsList.put("Transcendent Master", new String[]{"Transcendent_Master"});
 		cardToEffectsList.put("Lighthouse Chronologist", new String[] {"Lighthouse_Chronologist"});
 		cardToEffectsList.put("Skywatcher Adept", new String[] {"Skywatcher_Adept"});

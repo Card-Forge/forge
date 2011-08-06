@@ -11195,6 +11195,44 @@ public class GameActionUtil {
 		}
 	};
 
+	public static Command Kargan_Dragonlord		  = new Command() {
+		private static final long serialVersionUID = -1956268937191206962L;
+
+		public void execute()
+		{
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Kargan Dragonlord");
+			
+			for (Card c:list)
+			{
+				int lcs = c.getCounters(Counters.LEVEL);
+				
+				if ( lcs < 4)
+				{
+					c.setBaseAttack(2);
+					c.setBaseDefense(2);
+					c.removeIntrinsicKeyword("Trample");
+					c.removeIntrinsicKeyword("Flying");
+				}
+				else if ( lcs >=4 && lcs < 8 )
+				{
+					c.setBaseAttack(4);
+					c.setBaseDefense(4);
+					c.addNonStackingIntrinsicKeyword("Flying");
+					c.removeIntrinsicKeyword("Trample");
+				}
+				else
+				{
+					c.setBaseAttack(8);
+					c.setBaseDefense(8);
+					c.addNonStackingIntrinsicKeyword("Flying");
+					c.addNonStackingIntrinsicKeyword("Trample");
+				}
+			}
+		}
+	};
 	
 	
 	
@@ -16911,6 +16949,7 @@ public class GameActionUtil {
 		commands.put("Korlash", Korlash);
 
 		commands.put("Student_of_Warfare", Student_of_Warfare);
+		commands.put("Kargan_Dragonlord", Kargan_Dragonlord);
 		commands.put("Transcendent_Master", Transcendent_Master);
 		commands.put("Lighthouse_Chronologist", Lighthouse_Chronologist);
 		commands.put("Skywatcher_Adept", Skywatcher_Adept);
