@@ -1,7 +1,7 @@
 Name:Oblivion Ring
 ManaCost:2 W
 Types:Enchantment
-Text:When Oblivion Ring comes into play, remove another target nonland permanent from the game.\r\nWhen Oblivion Ring leaves play, return the removed card to play under its owner's control.
+Text:When CARDNAME enters the battlefield, exile another target nonland permanent.\r\nWhen CARDNAME leaves the battlefield, return the exiled card to the battlefield under its owner's control.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card139414.jpg

@@ -1,7 +1,7 @@
 Name:Mulldrifter
 ManaCost:4 U
 Types:Creature Elemental
-Text:When Mulldrifter comes into play, draw 2 cards.
+Text:When CARDNAME enters the battlefield, draw two cards.
 PT:2/2
 K:Flying
 SVar:Rarity:Common

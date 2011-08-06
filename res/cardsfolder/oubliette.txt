@@ -1,7 +1,7 @@
 Name:Oubliette
 ManaCost:1 B B
 Types:Enchantment
-Text:When Oubliette comes into play, remove target creature and all Auras attached to it from the game. Note the number and kind of counters that were on that creature. When Oubliette leaves play, return the removed card to play under its owner's control tapped with the noted number and kind of counters on it. If you do, return the removed Aura cards to play under their owner's control attached to that permanent.
+Text:When CARDNAME enters the battlefield, exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature.\r\nWhen CARDNAME leaves the battlefield, return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/med/en-us/card159135.jpg
 SetInfo:ARN|Common|http://magiccards.info/scans/en/an/11.jpg

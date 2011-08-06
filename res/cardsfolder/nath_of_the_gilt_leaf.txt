@@ -1,7 +1,7 @@
 Name:Nath of the Gilt-Leaf
 ManaCost:3 B G
 Types:Legendary Creature Elf Warrior
-Text:At the beginning of your upkeep, you may have target opponent discard a card at random.\r\nWhenever an opponent discards a card, you may put a 1/1 green Elf Warrior creature token into play.
+Text:At the beginning of your upkeep, you may have target opponent discard a card at random.\r\nWhenever an opponent discards a card, you may put a 1/1 green Elf Warrior creature token onto the battlefield.
 PT:4/4
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nath_of_the_gilt_leaf.jpg

@@ -1,7 +1,7 @@
 Name:Maggot Carrier
 ManaCost:B
 Types:Creature Zombie
-Text:When Maggot Carrier comes into play, each player loses 1 life.
+Text:When CARDNAME enters the battlefield, each player loses 1 life.
 PT:1/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maggot_carrier.jpg

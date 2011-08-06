@@ -1,7 +1,7 @@
 Name:Man-o'-War
 ManaCost:2 U
 Types:Creature Jellyfish
-Text:When Man-o'-War comes into play, return target creature to its owner's hand.
+Text:When CARDNAME enters the battlefield, return target creature to its owner's hand.
 PT:2/2
 K:etbBounceTgt:Creature:Hand
 SVar:Rarity:Common
