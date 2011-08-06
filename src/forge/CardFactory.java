@@ -2616,6 +2616,132 @@ public class CardFactory implements NewConstants {
              }
          }//spDestroyTgt
         
+        // Generic destroy target card ability
+        // can probably be adapted for tap and non-tap abilities
+        if(hasKeyword(card, "abTapDestroyTgt") != -1) {
+            int n = hasKeyword(card, "abTapDestroyTgt");
+            
+            String parse = card.getKeyword().get(n).toString();
+            card.removeIntrinsicKeyword(parse);
+            
+            String k[] = parse.split(":");
+            String Targets = k[1]; // Artifact, Creature, Enchantment, Land, Permanent, White, Blue, Black, Red, Green, Colorless, MultiColor
+            // non-Artifact, non-Creature, non-Enchantment, non-Land, non-Permanent,
+            //non-White, non-Blue, non-Black, non-Red, non-Green, non-Colorless, non-MultiColor
+            final String Tgts[] = Targets.split(",");
+            String tmpDesc = card.getText().substring(20);
+            int i = tmpDesc.indexOf(".");
+            tmpDesc = tmpDesc.substring(0, i);
+            final String Selec = "Select target " + tmpDesc + " to destroy.";
+            
+            final boolean NoRegen[] = {false};
+            final String Drawback[] = {"none"};
+            
+            if (k.length > 2)
+            {
+            	if (k[2].equals("NoRegen"))
+            		NoRegen[0] = true;
+            	
+            	else if (k[2].startsWith("Drawback$"))
+            		Drawback[0] = k[2];
+            	            	
+            	if (k.length > 3)
+            	{
+            		if (k[3].startsWith("Drawback$"))
+            			Drawback[0] = k[3];
+            	}
+            	
+            	if (!Drawback[0].equals("none"))
+            	{
+            		String kk[] = Drawback[0].split("\\$");
+                    Drawback[0] = kk[1];
+            	}
+            }
+            
+            final Ability abDstryTgt = new Ability(card, "0") {
+				private static final long serialVersionUID = -4414033187065934909L;
+
+				@Override
+                public boolean canPlayAI() {
+                    CardList results = new CardList();
+                    CardList choices = getTargets();
+                    
+                    choices = choices.filter(new CardListFilter(){
+                    	public boolean addCard(Card c)
+                    	{
+                    		return !c.getKeyword().contains("Indestructible");
+                    	}
+                    });
+                    
+                    
+                    if(choices.size() > 0) {
+                        for(int i = 0; i < Tgts.length; i++) {
+                            if(Tgts[i].startsWith("Artifact")) {
+                                if(CardFactoryUtil.AI_getBestArtifact(choices) != null) results.add(CardFactoryUtil.AI_getBestArtifact(choices));
+                            } else if(Tgts[i].startsWith("Creature")) {
+                                if(CardFactoryUtil.AI_getBestCreature(choices) != null) results.add(CardFactoryUtil.AI_getBestCreature(choices));
+                            } else if(Tgts[i].startsWith("Enchantment")) {
+                                if(CardFactoryUtil.AI_getBestEnchantment(choices, card, true) != null) results.add(CardFactoryUtil.AI_getBestEnchantment(
+                                        choices, card, true));
+                            } else if(Tgts[i].startsWith("Land")) {
+                                if(CardFactoryUtil.AI_getBestLand(choices) != null) results.add(CardFactoryUtil.AI_getBestLand(choices));
+                            } else if(Tgts[i].startsWith("Permanent")) {
+                                if(CardFactoryUtil.AI_getMostExpensivePermanent(choices, card, true) != null) results.add(CardFactoryUtil.AI_getMostExpensivePermanent(
+                                        choices, card, true));
+                            }
+                        }
+                    }
+                    
+                    if(results.size() > 0) {
+                        results.shuffle();
+                        setTargetCard(results.get(0));
+                        return true;
+                    }
+                    return false;
+                }
+                
+                CardList getTargets() {
+                    CardList tmpList = new CardList();
+                    tmpList.addAll(AllZone.Human_Play.getCards());
+                    tmpList = tmpList.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return (CardFactoryUtil.canTarget(card, c));
+                        }
+                    });
+                    
+                    return tmpList.getValidCards(Tgts);
+                }
+                
+                @Override
+                public void resolve() 
+                {
+                	card.tap();
+                	Card tgtC = getTargetCard();
+                    if(AllZone.GameAction.isCardInPlay(tgtC) && CardFactoryUtil.canTarget(card, tgtC))
+                    {
+                    	if(NoRegen[0]) 
+                    		AllZone.GameAction.destroyNoRegeneration(tgtC);
+                    	else 
+                    		AllZone.GameAction.destroy(tgtC);
+                    	
+                    	if (!Drawback[0].equals("none"))
+                    		CardFactoryUtil.doDrawBack(Drawback[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), tgtC.getController(), card, tgtC, this);
+                    }
+                }
+            }; //AbDstryTgt
+            
+            Input InGetTarget = CardFactoryUtil.input_targetValid(abDstryTgt, Tgts, Selec);
+            
+            abDstryTgt.setBeforePayMana(InGetTarget);
+            
+            abDstryTgt.setDescription(card.getSpellText());
+            card.setText("");
+            
+            card.setSVar("PlayMain1", "TRUE");
+            
+            card.addSpellAbility(abDstryTgt);
+         }//abTapDestroyTgt
+        
         // Generic enters the battlefield destroy target
         if (hasKeyword(card, "etbDestroyTgt") != -1)
         {
