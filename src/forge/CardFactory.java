@@ -9922,7 +9922,7 @@ public class CardFactory implements NewConstants {
                       CardListUtil.sortCMC(list);
                       list.reverse();
                       Card c = list.get(0);
-                      AllZone.GameAction.moveTo(AllZone.Human_Removed, c);
+                      AllZone.GameAction.moveTo(AllZone.Computer_Removed, c);
                       card.attachCard(c);
                   }//else
               }//resolve()
