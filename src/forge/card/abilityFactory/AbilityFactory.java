@@ -774,7 +774,12 @@ public class AbilityFactory {
 				if( calcX[0].startsWith("TargetedPlayer")) {
 					ArrayList<Player> players = new ArrayList<Player>();
 					SpellAbility saTargeting = (ability.getTarget() == null) ?  findParentsTargetedPlayer(ability) : ability;
-					players.addAll(saTargeting.getTarget().getTargetPlayers());
+					if(saTargeting.getTarget() != null) {
+						players.addAll(saTargeting.getTarget().getTargetPlayers());
+					}
+					else {
+						players.addAll(getDefinedPlayers(card, saTargeting.getAbilityFactory().getMapParams().get("Defined"), saTargeting));
+					}
 					return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
 				}
 				
