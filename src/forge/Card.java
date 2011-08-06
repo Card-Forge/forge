@@ -2623,6 +2623,8 @@ public class Card extends MyObservable {
     	}
     	reduce = reduce || getKeyword().contains("Prevent all damage that would be dealt to CARDNAME.");
     	reduce = reduce || getKeyword().contains("Prevent all damage that would be dealt to or dealt by CARDNAME.");
+    	reduce = reduce || source.getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME.");
+		reduce = reduce || source.getKeyword().contains("Prevent all damage that would be dealt by CARDNAME.");
     	return reduce;
     }
     

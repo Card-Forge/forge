@@ -1,9 +1,9 @@
 Name:Heart of Light
 ManaCost:2 W
 Types:Enchantment Aura
-Text:Prevent all damage that would be dealt to and dealt by enchanted creature. (Note: affects only combat damage at the moment)
+Text:Prevent all damage that would be dealt to and dealt by enchanted creature.
 K:Enchant creature
-K:enPumpCurse:HIDDEN Prevent all combat damage that would be dealt to and dealt by CARDNAME.
+K:enPumpCurse:HIDDEN Prevent all damage that would be dealt to and dealt by CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_of_light.jpg
 End

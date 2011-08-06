@@ -124,40 +124,42 @@ public abstract class Player extends MyObservable{
 	//
 	//////////////////////////
 	
-	public void addDamage(int damage, Card source) {
+	public void addDamage(final int damage, final Card source) {
+		int damageToDo = damage;
+		
+		if (source.getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME.")
+    			|| source.getKeyword().contains("Prevent all damage that would be dealt by CARDNAME."))
+        	damageToDo = 0;
+		
 		if (source.getKeyword().contains("Infect")) {
         	addPoisonCounters(damage);
         }
         else {
-        	int damageToDo = damage;
         	if(PlayerUtil.worshipFlag(this) && life <= damageToDo) {
         		damageToDo = Math.min(damageToDo, life - 1);
         	}
-        	subtractLife(damageToDo,source);
+        	subtractLife(damageToDo, source);
         }
         	
         if(source.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(source, damage);
         
         CardList cl = CardFactoryUtil.getAurasEnchanting(source, "Guilty Conscience");
         for(Card c:cl) {
-            GameActionUtil.executeGuiltyConscienceEffects(source, c, damage);
+            GameActionUtil.executeGuiltyConscienceEffects(source, c, damageToDo);
         }
         
-        GameActionUtil.executePlayerDamageEffects(this, source, damage, false);
+        GameActionUtil.executePlayerDamageEffects(this, source, damageToDo, false);
 	}
 	
 	public void setAssignedDamage(int n)   		{	assignedDamage = n; }
     public int  getAssignedDamage()        		{	return assignedDamage; }
     
-    
-    
-    
-    
-    public void addCombatDamage(int damage, final Card source) {
+    public void addCombatDamage(final int damage, final Card source) {
+    	int damageToDo = damage;
     	if (source.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")
     			|| source.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME."))
-        	damage = 0;
-        addDamage(damage, source);
+        	damageToDo = 0;
+        addDamage(damageToDo, source);
     	
     	//GameActionUtil.executePlayerDamageEffects(player, source, damage, true);
     	GameActionUtil.executePlayerCombatDamageEffects(source);
@@ -206,7 +208,6 @@ public abstract class Player extends MyObservable{
 		//TODO
 		return new CardList();
 	}
-	
 	
 	////////////////////////////////
 	//
