@@ -18,7 +18,7 @@ public class ManaSymbols {
 	static public void loadImages () {
 		String[] symbols = new String[] {"0", "1", "10", "11", "12", "15", "16", "2", "20", "2W", "2U", "2R", "2G", "2B", "3",
 				"4", "5", "6", "7", "8", "9", "B", "BG", "BR", "G", "GU", "GW", "R", "RG", "RW", "S", "T", "U", "UB",
-				"UR", "W", "WB", "WU", "X", "Y", "Z", "slash", "attack"};
+				"UR", "W", "WB", "WU", "X", "Y", "Z", "slash", "attack", "defend", "summonsick"};
 		for (String symbol : symbols)
 			manaImages.put(symbol, UI.getImageIcon("res/images/symbols-13/" + symbol + ".png").getImage());
 	}
@@ -41,6 +41,12 @@ public class ManaSymbols {
 	
 	static public void drawAttack (Graphics g, int x, int y) {
 		Image image = manaImages.get("attack");
+		g.drawImage(image, x, y, null);
+	}
+	
+
+	static public void drawSymbol (String imageName, Graphics g, int x, int y) {
+		Image image = manaImages.get(imageName);
 		g.drawImage(image, x, y, null);
 	}
 

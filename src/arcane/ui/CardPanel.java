@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
+import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardContainer;
 import forge.Counters;
@@ -180,13 +181,20 @@ public class CardPanel extends JPanel implements CardContainer{
 
 	protected void paintChildren (Graphics g) {
 		super.paintChildren(g);
-
+		
 		if (showCastingCost && !isAnimationPanel && cardWidth < 200) {
 			int width = ManaSymbols.getWidth(gameCard.getManaCost());
 			ManaSymbols.draw(g, gameCard.getManaCost(), cardXOffset + cardWidth / 2 - width / 2, cardYOffset + cardHeight / 2);
 		}
-		if (showCastingCost && !isAnimationPanel && cardWidth < 200 && getCard().isAttacking() ) 
-				ManaSymbols.drawAttack(g, cardXOffset + cardWidth / 2 - 12, cardYOffset +1);
+		
+		//int yOff = (cardHeight/4) + 2;
+		if (showCastingCost && !isAnimationPanel && getCard().isAttacking() ) 
+			ManaSymbols.drawSymbol("attack", g, cardXOffset + cardWidth / 4 - 16, cardYOffset + cardHeight - (cardHeight/8) - 16);
+		else if (showCastingCost && !isAnimationPanel && getCard().isBlocking() ) 
+			ManaSymbols.drawSymbol("defend", g, cardXOffset + cardWidth / 4 - 16, cardYOffset + cardHeight - (cardHeight/8) - 16);
+		
+		if (showCastingCost && !isAnimationPanel && getCard().isCreature() && getCard().hasSickness() && AllZoneUtil.isCardInPlay(getCard())) 
+			ManaSymbols.drawSymbol("summonsick", g, cardXOffset + cardWidth / 2 - 16, cardYOffset + cardHeight - (cardHeight/8) - 16 );
 	}
 
 	public void layout () {		
