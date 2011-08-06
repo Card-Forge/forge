@@ -848,11 +848,18 @@ public class AbilityFactory_ChangeZone {
 			Card choice = null;
 
 			if (!list.isEmpty()){
-				if (CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false).isCreature() 
-						&& (destination.equals("Battlefield") || origin.equals("Battlefield")))
-	        		choice = CardFactoryUtil.AI_getBestCreatureToBounce(list); //if a creature is most expensive take the best
-	        	else if (destination.equals("Battlefield") || origin.equals("Battlefield"))
-	        		choice = CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false);
+				Card mostExpensive = CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false);
+				if (destination.equals("Battlefield") || origin.equals("Battlefield")){
+					if (mostExpensive.isCreature()){
+						//if a creature is most expensive take the best one
+		        		if (destination.equals("Exile"))	// If Exiling things, don't give bonus to Tokens
+		        			choice = CardFactoryUtil.AI_getBestCreature(list);
+		        		else
+		        			choice = CardFactoryUtil.AI_getBestCreatureToBounce(list); 
+					}
+					else
+						choice = mostExpensive;
+				}
 	        	else{
 					// todo: AI needs more improvement to it's retrieval (reuse some code from spReturn here)
 	        		list.shuffle();
