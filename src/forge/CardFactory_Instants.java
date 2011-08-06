@@ -1988,7 +1988,7 @@ public class CardFactory_Instants {
             spell.setStackDescription("Target creature gains \"tap: Return target nonland permanent to its owner's hand.\"");
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Vampiric Tutor")) {
             SpellAbility spell = new Spell(card) {
@@ -2057,7 +2057,7 @@ public class CardFactory_Instants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Intuition")) {
