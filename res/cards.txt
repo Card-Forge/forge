@@ -1,3 +1,10 @@
+Memnite
+0
+Artifact Creature Construct
+no text
+1/1
+SVar:Rarity:Uncommon
+
 Swat
 1 B B
 Instant
@@ -110,13 +117,6 @@ no text
 Flying
 SVar:Rarity:Common
 Infect
-
-Memnite
-no cost
-Artifact Creature Construct
-no text
-1/1
-SVar:Rarity:Uncommon
 
 Darksteel Axe
 1
