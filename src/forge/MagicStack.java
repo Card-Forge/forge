@@ -83,11 +83,20 @@ public class MagicStack extends MyObservable
 	  if(sp instanceof Ability_Mana || sp instanceof Ability_Triggered)//TODO make working triggered abilities!
 		  sp.resolve(); 
 	  else {
-		  if (!sp.isMultiKicker() && !sp.isXCost())
+		  if(sp.isKickerAbility()) {
+			  sp.getSourceCard().setKicked(true);
+			  SpellAbility[] sa = sp.getSourceCard().getSpellAbility();
+			  int AbilityNumber = 0;
+			  for(int i = 0; i < sa.length; i++) 
+				  if(sa[i] == sp)  AbilityNumber = i;
+			  sp.getSourceCard().setAbilityUsed(AbilityNumber);
+		  }
+		  if(sp.getSourceCard().isCopiedSpell()) push(sp);
+		  if (!sp.isMultiKicker() && !sp.isXCost() && !sp.getSourceCard().isCopiedSpell())
 		  {
 			  push(sp);
 		  }
-		  else if (sp.isXCost())
+		  else if (sp.isXCost()  && !sp.getSourceCard().isCopiedSpell())
 		  {
 			  final SpellAbility sa = sp;
 			  final Ability ability = new Ability(sp.getSourceCard(), sa.getXManaCost())
@@ -135,7 +144,7 @@ public class MagicStack extends MyObservable
 				  push(sa);
 	          }
 		  }
-		  else if (sp.isMultiKicker()) //both X and multi is not supported yet
+		  else if (sp.isMultiKicker()  && !sp.getSourceCard().isCopiedSpell()) //both X and multi is not supported yet
 		  {   
 			  final SpellAbility sa = sp;
 			  final Ability ability = new Ability(sp.getSourceCard(), sp.getMultiKickerManaCost())

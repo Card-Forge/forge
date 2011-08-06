@@ -1,3 +1,13 @@
+Incendiary Command
+3 R R
+Sorcery
+Choose two - Incendiary Command deals 4 damage to target player; or Incendiary Command deals 2 damage to each creature; or destroy target nonbasic land; or each player discards all cards in his or her hand, then draws that many cards.
+
+Twincast
+U U
+Instant
+Copy target instant or sorcery spell. You may choose new targets for the copy.
+
 Brilliant Ultimatum
 W W U U U B B
 Sorcery
@@ -19500,11 +19510,6 @@ Creature Elf Druid
 no text
 2/1
 tap: add G
-
-Incendiary Command
-3 R R
-Sorcery
-Choose two - Incendiary Command deals 4 damage to target player; or Incendiary Command deals 2 damage to each creature; or destroy target nonbasic land; or each player discards all cards in his or her hand, then draws that many cards.
 
 Ajani Goldmane
 2 W W

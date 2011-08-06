@@ -26,7 +26,11 @@ public class Input_PayManaCost extends Input {
         
         manaCost = new ManaCost(sa.getManaCost());
         if(Phase.GameBegins == 1)  {
-        	manaCost = AllZone.GameAction.GetSpellCostChange(sa);
+        	if(sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
+        		manaCost = new ManaCost("0"); 
+        	} else {
+        		manaCost = AllZone.GameAction.GetSpellCostChange(sa);   		
+        	}    	
         }
     }
    
@@ -86,5 +90,6 @@ public class Input_PayManaCost extends Input {
         
         ButtonUtil.enableOnlyCancel();
         AllZone.Display.showMessage("Pay Mana Cost: " + manaCost.toString());
+        if(manaCost.isPaid()) done(); 
     }
 }

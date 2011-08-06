@@ -1618,7 +1618,7 @@ public class GameAction {
  		CardList Player_Play = new CardList(AllZone.getZone(Constant.Zone.Play, sa.getSourceCard().getController()).getCards());
  		int XBonus = 0;
  		int Max = 25;
-        if(sa.isXCost()) sa.getSourceCard().setXManaCostPaid(0);
+ 		if(sa.isXCost() && !sa.getSourceCard().isCopiedSpell()) sa.getSourceCard().setXManaCostPaid(0);
         if(sa.isMultiKicker()) CostCutting_GetMultiMickerManaCostPaid_Colored = "";
  		if(Mana.toString().length() == 0) Mana = "0";
  		for(int i = 0; i < Cards_In_Play.size() ; i++) {	
@@ -1894,8 +1894,13 @@ public class GameAction {
          return manaCost;
     }
     public void playSpellAbility(SpellAbility sa) {
-    	ManaCost manaCost = GetSpellCostChange(sa);    
-        if(manaCost.isPaid() /**sa.getManaCost().equals("0")**/ && sa.getBeforePayMana() == null) {
+    	ManaCost manaCost = new ManaCost(sa.getManaCost());
+    	if(sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
+    		manaCost = new ManaCost("0"); 
+    	} else {
+    		manaCost = GetSpellCostChange(sa);    		
+    	}      
+        if(manaCost.isPaid() && sa.getBeforePayMana() == null) {
         	CardList HHandList = new CardList(AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human).getCards());
         	if(HHandList.contains(sa.getSourceCard())) AllZone.Human_Hand.remove(sa.getSourceCard());
             AllZone.Stack.add(sa);

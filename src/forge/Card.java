@@ -31,8 +31,10 @@ public class Card extends MyObservable {
     private ArrayList<Card>              enchanting                        = new ArrayList<Card>();             //if this card is an Aura, what card is it enchanting?
     private ArrayList<String>            type                              = new ArrayList<String>();
     private ArrayList<String>            prevType                          = new ArrayList<String>();
+    private ArrayList<String>            ChoicesMade                 	   = new ArrayList<String>();
     private ArrayList<SpellAbility>      spellAbility                      = new ArrayList<SpellAbility>();
     private ArrayList<Ability_Mana>      manaAbility                       = new ArrayList<Ability_Mana>();
+    
     
     private HashMap<Card, Integer>       receivedDamageFromThisTurn        = new HashMap<Card, Integer>();
     private HashMap<Card, Integer>       assignedDamageHashMap             = new HashMap<Card, Integer>();
@@ -42,7 +44,9 @@ public class Card extends MyObservable {
     private boolean                      sickness                          = true;                              //summoning sickness
     private boolean                      token                             = false;
     private boolean 					 copiedToken					   = false;
-    private boolean 					 copiedSpell					   = false;
+    private boolean 					 copiedSpell					   = false; 
+    private boolean 					 SpellwithChoices				   = false; 
+    private boolean 					 SpellCopyingCard				   = false; 
     private boolean 					 checkedPropagandaThisTurn		   = false;
     private boolean                      creatureAttackedThisCombat        = false;
     private boolean                      creatureBlockedThisCombat         = false;
@@ -715,6 +719,32 @@ public class Card extends MyObservable {
     
     public boolean isCopiedSpell() {
     	return copiedSpell;
+    }
+    public void addSpellChoice(String string)
+    {
+    	ChoicesMade.add(string);
+    }
+    
+    public ArrayList<String> getChoices() {
+    	return ChoicesMade;
+    }
+    public String getChoice(int i) {
+    	return ChoicesMade.get(i);
+    }
+    public void setSpellWithChoices(boolean b)
+    {
+    	SpellwithChoices = b;
+    }
+    
+    public boolean hasChoices() {
+    	return SpellwithChoices;
+    }
+    public void setCopiesSpells(boolean b)
+    {
+    	SpellCopyingCard = b;
+    }
+    public boolean CopiesSpells() {
+	return SpellCopyingCard;
     }
     public void setExaltedBonus(boolean b) {
         exaltedBonus = b;

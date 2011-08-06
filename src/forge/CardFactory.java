@@ -32,7 +32,7 @@ public class CardFactory implements NewConstants {
     public CardFactory(String filename) {
         this(new File(filename));
     }
-    
+    public CardList CopiedList = new CardList();
     public CardFactory(File file) {
         SpellAbility spell = new SpellAbility(SpellAbility.Spell, blankCard) {
             //neither computer nor human play can play this card
@@ -140,6 +140,32 @@ public class CardFactory implements NewConstants {
         
     	Card out = getCard(in.getName(), in.getOwner());
         out.setUniqueNumber(in.getUniqueNumber());
+        return out;
+    	
+    }
+    
+    final public Card copyCardintoNew(Card in) {
+        
+    	Card out = getCard(in.getName(), in.getOwner());
+        PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+        PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+        CardList all = AllZone.CardFactory.getAllCards();
+        CardList tokens = new CardList(Hplay.getCards());
+        tokens.add(new CardList(Cplay.getCards()));
+        tokens = tokens.filter(new CardListFilter() {
+        public boolean addCard(Card c) {
+                  return c.isToken();
+                }
+            });
+        all.add(tokens);
+        all.add(CopiedList);
+        int Unumber = 0;
+        for(int i = 0; i < all.size(); i++) {
+        if(all.get(i).getUniqueNumber() > Unumber) Unumber = all.get(i).getUniqueNumber();	
+        }
+        out.setUniqueNumber(Unumber + 4); // +4 because +1 didn't work lol.
+        out.setCopiedSpell(true);
+        CopiedList.add(out);
         return out;
     	
     }
@@ -7665,6 +7691,87 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END ************************** 
         
         //*************** START *********** START **************************
+        else if(cardName.equals("Twincast")) {
+            final SpellAbility spell = new Spell(card) {
+
+				private static final long serialVersionUID = -659841515428746L;
+
+				@Override
+                public void resolve() {
+					Card c = copyCardintoNew(getTargetCard());
+					SpellAbility[] sa = c.getSpellAbility();
+					c.setController(card.getController());
+					
+					c.addXManaCostPaid(getTargetCard().getXManaCostPaid());
+					c.addMultiKickerMagnitude(getTargetCard().getMultiKickerMagnitude());
+					if(getTargetCard().isKicked()) c.setKicked(true);
+					c.setCopiedSpell(true);
+					if(c.hasChoices()) {
+						for(int i = 0; i < getTargetCard().getChoices().size(); i++) {
+							c.addSpellChoice(getTargetCard().getChoice(i));
+						}
+					}
+					for(int i = 0; i < sa.length; i++) {
+						if(getTargetCard().getAbilityUsed() == i) {
+							if(c.isKicked() && !sa[i].isKickerAbility())  {
+						} else {
+							if(getTargetCard().getSpellAbility()[i].getTargetCard() != null)
+								sa[i].setTargetCard(getTargetCard().getSpellAbility()[i].getTargetCard());
+							if(getTargetCard().getSpellAbility()[i].getTargetPlayer() != null) {
+							if(getTargetCard().getSpellAbility()[i].getTargetPlayer().equals(Constant.Player.Human)
+									|| (getTargetCard().getSpellAbility()[i].getTargetPlayer().equals(Constant.Player.Computer))) 
+								sa[i].setTargetPlayer(getTargetCard().getSpellAbility()[i].getTargetPlayer());
+							}
+							//TODO Selecting New Targets. Then Apply to storm.
+							AllZone.GameAction.playSpellAbility(sa[i]);
+						}
+						}	
+					}
+					
+				}
+                
+                public boolean canPlay()
+                {
+                	ArrayList<Card> list = AllZone.Stack.getSourceCards();
+                	CardList StackList = new CardList();
+                	for(int i = 0; i < list.size(); i++) StackList.add(list.get(i));
+
+                	StackList = StackList.filter(new CardListFilter() {
+                    	public boolean addCard(Card c) {
+                    		return c.isSorcery() || c.isInstant();
+                    	}
+                    });
+                	return StackList.size() > 0 && super.canPlay();
+                }
+            };//SpellAbility
+            Input runtime = new Input() {
+                private static final long serialVersionUID = -7823269301012427007L;
+                
+                @Override
+                public void showMessage() {
+                	ArrayList<Card> list = AllZone.Stack.getSourceCards();
+                	CardList StackList = new CardList();
+                	for(int i = 0; i < list.size(); i++) StackList.add(list.get(i));
+
+                	StackList = StackList.filter(new CardListFilter()
+                    {
+                    	public boolean addCard(Card c)
+                    	{
+                    		return c.isSorcery() || c.isInstant();
+                    	}
+                    });
+                    
+                    stopSetNext(CardFactoryUtil.input_Spell(spell, StackList, false));
+                    
+                }//showMessage()
+            };//Input
+            card.clearSpellAbility();
+            card.setCopiesSpells(true);
+            card.addSpellAbility(spell);
+            spell.setBeforePayMana(runtime);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
         else if(cardName.equals("Cruel Ultimatum")) {
             final SpellAbility spell = new Spell(card) {
 
@@ -10133,13 +10240,12 @@ public class CardFactory implements NewConstants {
 //          System.out.println(userChoice);
 //          System.out.println(m_land[0]);
 //          System.out.println(m_player[0]);
-                    
                     //"Incendiary Command deals 4 damage to target player",
-                    if(userChoice.contains(cardChoice[0])) AllZone.GameAction.getPlayerLife(m_player[0]).subtractLife(
-                            4);
+                    if(userChoice.contains(cardChoice[0]) || card.getChoices().contains(cardChoice[0])) 
+                    	AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(4);
                     
                     //"Incendiary Command deals 2 damage to each creature",
-                    if(userChoice.contains(cardChoice[1])) {
+                    if(userChoice.contains(cardChoice[1]) || card.getChoices().contains(cardChoice[1])) {
                         //get all creatures
                         CardList list = new CardList();
                         list.addAll(AllZone.Human_Play.getCards());
@@ -10153,10 +10259,10 @@ public class CardFactory implements NewConstants {
                     }
                     
                     //"Destroy target nonbasic land",
-                    if(userChoice.contains(cardChoice[2])) AllZone.GameAction.destroy(m_land[0]);
+                    if(userChoice.contains(cardChoice[2]) || card.getChoices().contains(cardChoice[2])) AllZone.GameAction.destroy(getTargetCard());
                     
                     //"Each player discards all cards in his or her hand, then draws that many cards"
-                    if(userChoice.contains(cardChoice[3])) {
+                    if(userChoice.contains(cardChoice[3]) || card.getChoices().contains(cardChoice[3])) {
                         discardDraw(Constant.Player.Computer);
                         discardDraw(Constant.Player.Human);
                     }
@@ -10187,13 +10293,13 @@ public class CardFactory implements NewConstants {
                 
                 public void execute() {
                     ArrayList<String> a = new ArrayList<String>();
-                    if(userChoice.contains(cardChoice[0])) a.add("deals 4 damage to " + m_player[0]);
+                    if(userChoice.contains(cardChoice[0]) || card.getChoices().contains(cardChoice[0])) a.add("deals 4 damage to " + m_player[0]);
                     
-                    if(userChoice.contains(cardChoice[1])) a.add("deals 2 damage to each creature");
+                    if(userChoice.contains(cardChoice[1]) || card.getChoices().contains(cardChoice[1])) a.add("deals 2 damage to each creature");
                     
-                    if(userChoice.contains(cardChoice[2])) a.add("destroy " + m_land[0]);
+                    if(userChoice.contains(cardChoice[2]) || card.getChoices().contains(cardChoice[2])) a.add("destroy " + m_land[0]);
                     
-                    if(userChoice.contains(cardChoice[3])) a.add("each player discards all cards in his or her hand, then draws that many cards");
+                    if(userChoice.contains(cardChoice[3]) || card.getChoices().contains(cardChoice[3])) a.add("each player discards all cards in his or her hand, then draws that many cards");
                     
                     String s = a.get(0) + ", " + a.get(1);
                     spell.setStackDescription(card.getName() + " - " + s);
@@ -10208,6 +10314,7 @@ public class CardFactory implements NewConstants {
                 public void showMessage() {
                     AllZone.Display.showMessage("Select target nonbasic land");
                     ButtonUtil.enableOnlyCancel();
+                    
                 }
                 
                 @Override
@@ -10219,8 +10326,8 @@ public class CardFactory implements NewConstants {
                 public void selectCard(Card c, PlayerZone zone) {
                     if(c.isLand() && zone.is(Constant.Zone.Play) && !c.getType().contains("Basic")) {
                         m_land[0] = c;
-                        setStackDescription.execute();
-                        
+                        spell.setTargetCard(c);
+                        setStackDescription.execute();                        
                         stopSetNext(new Input_PayManaCost(spell));
                     }//if
                 }//selectCard()
@@ -10243,10 +10350,10 @@ public class CardFactory implements NewConstants {
                 @Override
                 public void selectPlayer(String player) {
                     m_player[0] = player;
+                    spell.setTargetPlayer(player);
                     setStackDescription.execute();
-                    
                     //if user needs to target nonbasic land
-                    if(userChoice.contains(cardChoice[2])) stopSetNext(targetLand);
+                    if(userChoice.contains(cardChoice[2]) || card.getChoices().contains(cardChoice[2])) stopSetNext(targetLand);
                     else {
                         stopSetNext(new Input_PayManaCost(spell));
                     }
@@ -10259,6 +10366,16 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void showMessage() {
+                	if(card.isCopiedSpell()) {
+                        if(card.getChoices().contains(cardChoice[0])) stopSetNext(targetPlayer);
+                        else if(card.getChoices().contains(cardChoice[2])) stopSetNext(targetLand);
+                        else {
+                            setStackDescription.execute();
+                            
+                            stopSetNext(new Input_PayManaCost(spell));
+                        }
+                	}
+                	else {
                     //reset variables
                     m_player[0] = null;
                     m_land[0] = null;
@@ -10296,6 +10413,7 @@ public class CardFactory implements NewConstants {
                         
                         stopSetNext(new Input_PayManaCost(spell));
                     }
+                	}
                 }//showMessage()
                 
                 ArrayList<String> chooseTwo(ArrayList<String> choices) {
@@ -10304,19 +10422,20 @@ public class CardFactory implements NewConstants {
                     if(o == null) return null;
                     
                     out.add((String) o);
-                    
+                    card.addSpellChoice((String) o);
                     choices.remove(out.get(0));
                     o = AllZone.Display.getChoiceOptional("Choose Two", choices.toArray());
                     if(o == null) return null;
                     
                     out.add((String) o);
-                    
+                    card.addSpellChoice((String) o);
                     return out;
                 }//chooseTwo()
             };//Input chooseTwoInput
             
             card.clearSpellAbility();
             card.addSpellAbility(spell);
+            card.setSpellWithChoices(true);
             spell.setBeforePayMana(chooseTwoInput);
         }//*************** END ************ END **************************
         

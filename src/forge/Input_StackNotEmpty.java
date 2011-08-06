@@ -35,6 +35,14 @@ public class Input_StackNotEmpty extends Input implements java.io.Serializable {
             });
         }
         
+        // To stop Copied Spells from going into the graveyard.
+        if(sa.getSourceCard().isCopiedSpell()) {
+            c.addReplaceMoveToGraveyardCommand(new Command() {
+                private static final long serialVersionUID = -2559488318473330418L;                
+                public void execute() {
+                }
+            });
+        }
         sa.resolve();
         
         if(sa.getSourceCard().getKeyword().contains("Draw a card.")) AllZone.GameAction.drawCard(sa.getSourceCard().getController());

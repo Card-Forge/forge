@@ -361,6 +361,37 @@ public class CardFactoryUtil {
         return target;
     }//input_targetCreaturePlayer()
     
+    public static Input input_Spell(final SpellAbility spell, final CardList choices, final boolean free) {
+        Input target = new Input() {
+            private static final long serialVersionUID = 2781418414287281005L;
+            
+            @Override
+            public void showMessage() {
+                AllZone.Display.showMessage("Select target Spell: ");
+                ButtonUtil.enableOnlyCancel();
+            	Card choice = AllZone.Display.getChoice("Choose", choices.toArray());
+                spell.setTargetCard(choice);
+                done();
+            }
+            
+            @Override
+            public void selectButtonCancel() {
+                stop();
+            }
+           
+            void done() {
+                if(spell instanceof Ability_Tap && spell.getManaCost().equals("0")) stopSetNext(new Input_NoCost_TapAbility(
+                        (Ability_Tap) spell));
+                else if(spell.getManaCost().equals("0") || this.isFree()) {
+                    this.setFree(false);
+                    AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
+                    stop();
+                } else stopSetNext(new Input_PayManaCost(spell));
+            }
+        };
+        return target;
+    }//input_targetSpell()
+    
     public static Input input_targetNonCreaturePermanent(final SpellAbility spell, final Command paid) {
         Input target = new Input() {
             private static final long serialVersionUID = 8796813407167561318L;
