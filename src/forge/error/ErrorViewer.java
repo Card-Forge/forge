@@ -41,6 +41,8 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
 	private static final String nameOS = "os.name";        
 	private static final String versionOS = "os.version";        
 	private static final String architectureOS = "os.arch";
+	private static final String versionJava = "java.version";
+	private static final String vendorJava = "java.vendor";
 	
     public static final Action ALL_THREADS_ACTION = new ShowAllThreadsAction();
     
@@ -131,7 +133,8 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
         
         pw.printf(getLocalized(MESSAGE), getProperty(FORUM), getProperty(MAIL),
                 message != null? message:ex.getMessage(), getProperty(VERSION), 
-                System.getProperty(nameOS), System.getProperty(versionOS), System.getProperty(architectureOS));
+                System.getProperty(nameOS), System.getProperty(versionOS), System.getProperty(architectureOS),
+                System.getProperty(versionJava), System.getProperty(vendorJava));
         ex.printStackTrace(pw);
     }
     
@@ -142,7 +145,8 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
         System.err.println(message);
         
         pw.printf(getLocalized(MESSAGE), getProperty(FORUM), getProperty(MAIL), message, getProperty(VERSION),
-        		  System.getProperty(nameOS), System.getProperty(versionOS), System.getProperty(architectureOS));
+        		  System.getProperty(nameOS), System.getProperty(versionOS), System.getProperty(architectureOS),
+        		  System.getProperty(versionJava), System.getProperty(vendorJava));
         Map<Thread, StackTraceElement[]> traces = Thread.getAllStackTraces();
         for(Entry<Thread, StackTraceElement[]> e:traces.entrySet()) {
             pw.println();
