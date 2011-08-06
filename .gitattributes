@@ -5844,6 +5844,7 @@ src/forge/AbilityFactory.java -text svneol=native#text/plain
 src/forge/AbilityFactory_AlterLife.java -text svneol=native#text/plain
 src/forge/AbilityFactory_Bounce.java -text svneol=native#text/plain
 src/forge/AbilityFactory_Combat.java -text svneol=native#text/plain
+src/forge/AbilityFactory_Counter.java -text svneol=native#text/plain
 src/forge/AbilityFactory_Counters.java -text svneol=native#text/plain
 src/forge/AbilityFactory_DealDamage.java -text svneol=native#text/plain
 src/forge/AbilityFactory_Destroy.java -text svneol=native#text/plain

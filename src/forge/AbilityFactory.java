@@ -363,6 +363,16 @@ public class AbilityFactory {
 				SA.setSubAbility(getSubAbility());
 		}
 		
+		if(API.equals("Counter")){
+			AbilityFactory_Counter c = new AbilityFactory_Counter(this);
+			ComputerAI_counterSpells2.KeywordedCounterspells.add(hostC.getName());
+			
+			if(isAb)
+				SA = c.getAbilityCounter(this);
+			if(isSp)
+				SA = c.getSpellCounter(this);
+		}
+		
 		// *********************************************
 		// set universal properties of the SpellAbility
         if (hasSpDesc)
