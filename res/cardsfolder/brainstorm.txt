@@ -2,7 +2,7 @@ Name:Brainstorm
 ManaCost:U
 Types:Instant
 Text:no text
-K:spDrawCards:3:Drawback$YouHandToLibrary/2/Top:Draw three cards, then put two cards from your hand on top of your library in any order.:Brainstorm - draw 3 cards and put 2 on top of your library.
+A:SP$Draw | Cost$ U | NumCards$ 3 | SpellDescription$ Draw three cards, then put two cards from your hand on top of your library in any order. | SubAbility$ YouHandToLibrary/2/Top
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brainstorm.jpg
 End

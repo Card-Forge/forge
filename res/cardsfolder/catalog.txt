@@ -2,7 +2,7 @@ Name:Catalog
 ManaCost:2 U
 Types:Instant
 Text:no text
-K:spDrawCards:2:Drawback$YouDiscard/1:Draw two cards, then discard a card.:Catalog - Draw 2 cards, then discard 1 card.
+A:SP$Draw | Cost$ 2 U | NumCards$ 2 | SpellDescription$ Draw two cards, then discard a card. | SubAbility$ YouDiscard/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/catalog.jpg
 End

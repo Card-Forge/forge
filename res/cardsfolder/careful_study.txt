@@ -2,7 +2,7 @@ Name:Careful Study
 ManaCost:U
 Types:Sorcery
 Text:no text
-K:spDrawCards:2:Drawback$YouDiscard/2:Draw two cards, then discard two cards.:Careful Study - Draw 2 cards, then discard 2 cards.
+A:SP$Draw | Cost$ U | NumCards$ 2 | SpellDescription$ Draw two cards, then discard two cards. | SubAbility$ YouDiscard/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/careful_study.jpg
 End
