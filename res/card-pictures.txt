@@ -38,6 +38,9 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+enclave_elite.jpg		http://www.wizards.com/global/images/magic/general/enclave_elite.jpg
+apex_hawks.jpg		http://www.wizards.com/global/images/magic/general/apex_hawks.jpg
+gnarlid_pack.jpg		http://www.wizards.com/global/images/magic/general/gnarlid_pack.jpg
 exhume.jpg		http://www.wizards.com/global/images/magic/general/exhume.jpg
 living_death.jpg		http://www.wizards.com/global/images/magic/general/living_death.jpg
 exotic_disease.jpg		http://www.wizards.com/global/images/magic/general/exotic_disease.jpg

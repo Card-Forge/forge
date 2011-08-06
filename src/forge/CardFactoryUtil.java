@@ -1308,9 +1308,9 @@ public class CardFactoryUtil {
             public void execute() {
                 if(sourceCard.isEquipping()) {
                     Card crd = sourceCard.getEquipping().get(0);
-                    if(!(Ab1 == "none")) crd.addExtrinsicKeyword(Ab1);
-                    if(!(Ab2 == "none")) crd.addExtrinsicKeyword(Ab2);
-                    if(!(Ab3 == "none")) crd.addExtrinsicKeyword(Ab3);
+                    if(!(Ab1.equals ("none")) && (!crd.getKeyword().contains(Ab1))) crd.addExtrinsicKeyword(Ab1);	//fixed, "none" will not be assigned as a keyword
+                    if(!(Ab2.equals ("none")) && (!crd.getKeyword().contains(Ab2))) crd.addExtrinsicKeyword(Ab2);	//prevent Flying, Flying
+                    if(!(Ab3.equals ("none")) && (!crd.getKeyword().contains(Ab3))) crd.addExtrinsicKeyword(Ab3);
                     crd.addSemiPermanentAttackBoost(Power);
                     crd.addSemiPermanentDefenseBoost(Tough);
                 }
