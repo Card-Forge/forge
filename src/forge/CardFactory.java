@@ -2401,16 +2401,17 @@ public class CardFactory implements NewConstants {
         final int NumCards[] = {-1};
         final String NumCardsX[] = {"none"};
 
-        if (k[1].length() <= 2)
-           NumCards[0] = Integer.parseInt(k[1]);
-        else
+        if (k[1].matches("X"))
         {
-           if (k[1].startsWith("Count$"))
-           {             
-             String kk[] = k[1].split("\\$");
-              NumCardsX[0] = kk[1];
-           }
+        	String x = card.getSVar(k[1]);
+        	if (x.startsWith("Count$"))
+        	{
+        		String kk[] = x.split("\\$");
+        		NumCardsX[0] = kk[1]; 
+        	}
         }
+        else if (k[1].matches("[0-9][0-9]?"))
+           NumCards[0] = Integer.parseInt(k[1]);
        
         // drawbacks and descriptions
         final String DrawBack[] = {"none"};
