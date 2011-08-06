@@ -1,3 +1,64 @@
+Yuan Shao's Infantry
+3 R
+Creature Human Soldier
+no text
+2/2
+WheneverKeyword:Attack - Alone:Self:Play:KeywordPumpEOT/Unblockable:Self:ASAP:No_Condition:No Special Condition:Whenever Yuan Shao's Infantry attacks alone, Yuan Shao's Infantry is unblockable this combat.
+
+Stonebrow, Krosan Hero
+3 R G
+Legendary Creature Centaur Warrior
+no text
+4/4
+Trample
+WheneverKeyword:Attacks:No_Initiator:Play:StatsPumpEOT/2/2:Initiating_Card:ASAP:No_Condition:Initiator - OwnedByController!Initiator - Has Keyword/Trample:Whenever a creature you control with trample attacks, it gets +2/+2 until end of turn.
+
+Reckless Ogre
+3 R
+Creature Ogre
+no text
+3/2
+WheneverKeyword:Attack - Alone:Self:Play:StatsPumpEOT/3/0:Self:ASAP:No_Condition:No Special Condition:Whenever Reckless Ogre attacks alone, it gets +3/+0 until end of turn.
+
+Ma Chao, Western Warrior
+3 R R
+Legendary Creature Human Soldier Warrior
+no text
+3/3
+Horsemanship
+WheneverKeyword:Attack - Alone:Self:Play:KeywordPumpEOT/Unblockable:Self:ASAP:No_Condition:No Special Condition:Whenever Ma Chao, Western Warrior attacks alone, it's unblockable this combat.
+
+Hungry Spriggan
+2 G
+Creature Goblin Warrior
+no text
+1/1
+Trample
+WheneverKeyword:Attacks:Self:Play:StatsPumpEOT/3/3:Self:ASAP:No_Condition:No Special Condition:Whenever Hungry Spriggan attacks, it gets +3/+3 until end of turn.
+
+Cave People
+1 R R
+Creature Human
+no text
+1/4
+WheneverKeyword:Attacks:Self:Play:StatsPumpEOT/1/-2:Self:ASAP:No_Condition:No Special Condition:Whenever Cave People attacks, it gets +1/-2 until end of turn.
+abPumpTgt 1 R R T:Mountainwalk.
+
+Bramble Creeper
+4 G
+Creature Elemental
+no text
+0/3
+WheneverKeyword:Attacks:Self:Play:StatsPumpEOT/5/0:Self:ASAP:No_Condition:No Special Condition:Whenever Bramble Creeper attacks, it gets +5/+0 until end of turn.
+
+Petravark
+3 R
+Creature Nightmare Beast
+no text
+2/2
+WheneverKeyword:EntersBattleField:Self:Play:MoveFrom-Play-Exiled:NormalInput/Specific/Type.Land:ASAP:Yes_No:AttachTarget:When Petravark enters the battlefield, exile target land.
+WheneverKeyword:LeavesBattleField:Self:Any:MoveFrom-Exiled-Play:All/AttachedCards:ASAP:No_Condition:No Special Condition:When Petravark leaves the battlefield, return the exiled card to the battlefield under its owner's control.
+
 Sylvok Explorer
 1 G
 Creature Human Druid
