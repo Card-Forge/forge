@@ -138,8 +138,8 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Galahad 3", "hard", "WB Knight deck with Kinsbaile Cavalier and Knight Exemplar");
 //        addToDeckList("Gambit 3", "hard", "UR deck with Demigod of Revenge");
         addToDeckList("Genghis Khan 1", "easy", "WRG deck with mana ramp, Armageddon and Mungha Wurm");
-        addToDeckList("Genghis Khan 2", "medium", "WG deck with mana ramp, Armageddon and Llanowar Behemoth");
-        addToDeckList("Genghis Khan 3", "hard", "WRG deck with mana ramp, Armageddon, Llanowar Behemoth and Elspeth, Knight-Errant");
+        addToDeckList("Genghis Khan 2", "medium", "WG deck with mana ramp, Armageddon and Terravore");
+        addToDeckList("Genghis Khan 3", "hard", "WRG deck with mana ramp, Armageddon, and Terravore");
         addToDeckList("George of the Jungle 1", "easy", "WR deck with Belligerent Hatchling and Battlegate Mimic");
         addToDeckList("George of the Jungle 2", "medium", "WR deck with Belligerent Hatchling, Battlegate Mimic and Ajani Vengeant");
         addToDeckList("George of the Jungle 3", "hard", "WR deck with Belligerent Hatchling, Battlegate Mimic and Ajani Vengeant");
@@ -218,7 +218,7 @@ public class QuestBattle extends QuestSelectablePanel {
         
 //        addToDeckList("Lex 3", "hard", "Ninjas deck");
 //        addToDeckList("Link 3", "hard", "GUR Standard Constructed deck");
-        addToDeckList("Lisa Simpson 2", "medium", "WG Devour deck with tokens, Skullmulcher and Gluttonous Slime");
+        addToDeckList("Lisa Simpson 2", "medium", "WG Devour deck with tokens, Skullmulcher and Mycoloth");
 //        addToDeckList("Lucifer 2", "medium", "W Sacrifice deck");
 //        addToDeckList("Lucifer 3", "hard", "W Sacrifice deck");
         addToDeckList("Luke Skywalker 3", "hard", "WU Rebels deck with Training Grounds");
