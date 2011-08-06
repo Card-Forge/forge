@@ -6539,39 +6539,6 @@ public class CardFactory implements NewConstants {
  
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Arena of the Ancients")) {
-        	/*
-        	 * When Arena of the Ancients enters the battlefield, tap
-        	 * all legendary creatures.
-        	 */
-        	final SpellAbility ability = new Ability(card, "0") {
-        		@Override
-        		public void resolve() {
-        			CardList legends = AllZoneUtil.getTypeInPlay("Legendary");
-        			legends = legends.filter(AllZoneUtil.creatures);
-        			for(int i = 0; i < legends.size(); i++) {
-        				Card c = legends.get(i);
-        				if(c.isUntapped()) c.tap();
-        			}
-        		}
-        	};//ability
-        	Command intoPlay = new Command() {
-				private static final long serialVersionUID = 3564466123797650567L;
-
-				public void execute() {
-					
-					StringBuilder sb = new StringBuilder();
-					sb.append("When ").append(card.getName()).append(" enters the battlefield, tap all Legendary creatures.");
-					ability.setStackDescription(sb.toString());
-        			
-        			AllZone.Stack.add(ability);
-        		}
-        	};
-        	card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        
-       
-        //*************** START *********** START **************************
         else if(cardName.equals("Tormod's Crypt")) {
         	/*
         	 * Tap, Sacrifice Tormod's Crypt: Exile all cards from target player's graveyard.
@@ -6607,6 +6574,7 @@ public class CardFactory implements NewConstants {
         	ability.setDescription(abCost+"Exile all cards from target player's graveyard.");
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Mirror Universe")) {
