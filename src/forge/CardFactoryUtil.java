@@ -1116,31 +1116,6 @@ public class CardFactoryUtil {
         return morph_down;
     }
     
-    public static SpellAbility ability_Spellbomb(final Card sourceCard) {
-        final SpellAbility ability = new Ability(sourceCard, "1") {
-            @Override
-            public boolean canPlay() {
-                return AllZone.GameAction.isCardInPlay(sourceCard)
-                        && !AllZone.Stack.getSourceCards().contains(sourceCard);//in play and not already activated(Sac cost problems)
-            }
-            
-            @Override
-            public boolean canPlayAI() {
-                return (AllZone.Computer_Hand.size() < 4) && (AllZone.Computer_Library.size() > 0)
-                        && MyRandom.random.nextBoolean();
-            }
-            
-            @Override
-            public void resolve() {
-                AllZone.GameAction.drawCard(sourceCard.getController());
-                AllZone.GameAction.sacrifice(getSourceCard());
-            }
-        };
-        ability.setDescription("1, Sacrifice " + sourceCard.getName() + ": Draw a card.");
-        ability.setStackDescription(sourceCard.getName() + " - Draw a card.");
-        return ability;
-    }
-    
     public static Ability ability_Morph_Up(final Card sourceCard, String cost, String orgManaCost, int a, int d) {
         //final String player = sourceCard.getController();
         //final String manaCost = cost;

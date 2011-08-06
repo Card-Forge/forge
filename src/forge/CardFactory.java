@@ -4958,16 +4958,6 @@ public class CardFactory implements NewConstants {
         } // if etbCounter
         
         
-        if(hasKeyword(card, "1, Sacrifice CARDNAME: Draw a card.") != -1) {
-            int n = hasKeyword(card, "1, Sacrifice CARDNAME: Draw a card.");
-            if(n != -1) {
-                String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-                
-                card.addSpellAbility(CardFactoryUtil.ability_Spellbomb(card));
-            }
-        }//Spellbomb
-        
         // Generic target creature pump
         if(hasKeyword(card, "spPumpTgt") != -1) {
             int n = hasKeyword(card, "spPumpTgt");

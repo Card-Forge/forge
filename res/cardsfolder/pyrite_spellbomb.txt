@@ -2,7 +2,7 @@ Name:Pyrite Spellbomb
 ManaCost:1
 Types:Artifact
 Text:no text
-K:1, Sacrifice CARDNAME: Draw a card.
+K:abDrawCards 1 Sac<1/CARDNAME>:1:Draw a card.:Pyrite Spellbomb - Controller draws a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyrite_spellbomb.jpg
 End
