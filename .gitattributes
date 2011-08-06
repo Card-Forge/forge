@@ -5330,6 +5330,7 @@ src/forge/GameAction.java -text svneol=native#text/plain
 src/forge/GameActionUtil.java -text svneol=native#text/plain
 src/forge/GameInfo.java -text svneol=native#text/plain
 src/forge/Generate2ColorDeck.java -text svneol=native#text/plain
+src/forge/Generate3ColorDeck.java -text svneol=native#text/plain
 src/forge/GenerateConstructedDeck.java -text svneol=native#text/plain
 src/forge/GenerateConstructedMultiColorDeck.java -text svneol=native#text/plain
 src/forge/GenerateDraftDeck.java svneol=native#text/plain

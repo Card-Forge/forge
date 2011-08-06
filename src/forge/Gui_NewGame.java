@@ -609,6 +609,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         decks.add("5-Color Deck (original)");
         decks.add("Semi-Random Theme Deck");
         decks.add("2-Color Deck (new)");
+        decks.add("3-Color Deck (new)");
         
         String prompt = "Generate ";
         if (p.equals("H"))
@@ -628,6 +629,8 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         	d = generateConstructedThemeDeck();
         else if (o.toString().equals(decks.get(4)))
         	d = generate2ColorDeck(p);
+        else if (o.toString().equals(decks.get(5)))
+        	d = generate3ColorDeck(p);
         
         if (p.equals("H"))
         	Constant.Runtime.HumanDeck[0] = d;
@@ -724,7 +727,61 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     	return deck;
 
     }
-    
+
+    private Deck generate3ColorDeck(String p)
+    {
+    	Random r = new Random();
+    	
+    	ArrayList<String> colors = new ArrayList<String>();
+    	colors.add("Random");
+    	colors.add("White");
+    	colors.add("Blue");
+    	colors.add("Black");
+    	colors.add("Red");
+    	colors.add("Green");
+    	
+    	Object c1 = null, c2 = null, c3 = null;
+    	if (p.equals("H"))
+    	{
+    		c1 = AllZone.Display.getChoice("Select first color.", colors.toArray());
+    	
+    		if (c1.toString().equals("Random"))
+    			c1 = colors.get(r.nextInt(colors.size() - 1) + 1);
+    		
+    		colors.remove(c1);
+    	
+    		c2 = AllZone.Display.getChoice("Select second color.", colors.toArray());
+    		
+    		if (c2.toString().equals("Random"))
+    			c2 = colors.get(r.nextInt(colors.size() - 1) + 1);
+    		
+    		colors.remove(c2);
+    		
+    		c3 = AllZone.Display.getChoice("Select third color.", colors.toArray());
+    		if (c3.toString().equals("Random"))
+    			c3 = colors.get(r.nextInt(colors.size() - 1) + 1);
+
+    	}
+    	else if (p.equals("C"))
+    	{
+    		c1 = colors.get(r.nextInt(colors.size() - 1) + 1);
+    		colors.remove(c1);
+    		c2 = colors.get(r.nextInt(colors.size() - 1) + 1);
+    		colors.remove(c2);
+    		c3 = colors.get(r.nextInt(colors.size() - 1) + 1);
+    	}
+    	Generate3ColorDeck gen = new Generate3ColorDeck(c1.toString(), c2.toString(), c3.toString());
+    	CardList d = gen.get3ColorDeck(60);
+    	
+    	Deck deck = new Deck(Constant.GameType.Constructed);
+    	
+    	for (int i=0; i<d.size(); i++)
+    		deck.addMain(d.get(i).getName());
+    	
+    	return deck;
+
+    }
+
     void singleRadioButton_actionPerformed(ActionEvent e) {
         Constant.Runtime.GameType[0] = Constant.GameType.Constructed;
         updateDeckComboBoxes();
