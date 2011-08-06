@@ -57,6 +57,32 @@ public class Input_Mulligan extends Input {
     
     void end() {
         ButtonUtil.reset();
+        CardList HHandList = new CardList(AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human).getCards());
+        PlayerZone HPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+        PlayerZone HHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human);
+        for(int i = 0; i < HHandList.size() ; i++) {
+        	if(HHandList.get(i).getName().startsWith("Leyline")) {
+            String[] choices = {"Yes", "No"};
+            Object q = null;
+            q = AllZone.Display.getChoiceOptional("Put " + HHandList.get(i).getName() + " into play?", choices);
+            if(q == null || q.equals("No"));
+            else {
+            	HPlay.add(HHandList.get(i));
+            	HHand.remove(HHandList.get(i));
+            }
+        }
+        }
+        CardList CHandList = new CardList(AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).getCards());
+        PlayerZone CPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+        PlayerZone CHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
+        for(int i = 0; i < CHandList.size() ; i++) {
+        	if(CHandList.get(i).getName().startsWith("Leyline")) {
+            	CPlay.add(CHandList.get(i));
+            	CHand.remove(CHandList.get(i));
+        }
+    	
+    }
+        AllZone.GameAction.seeWhoPlaysFirst();
         stop();
     }
 }

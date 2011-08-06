@@ -1160,7 +1160,7 @@ public class GameAction {
             AllZone.Computer_Library.setCards(AllZone.Computer_Library.getCards());
             this.shuffle(Constant.Player.Computer);
         }
-        seeWhoPlaysFirst(); // New code to determine who goes first. Delete this if it doesn't work properly
+      //  seeWhoPlaysFirst(); // New code to determine who goes first. Delete this if it doesn't work properly
         for(int i = 0; i < 7; i++) {
             this.drawCard(Constant.Player.Computer);
             this.drawCard(Constant.Player.Human);
@@ -1334,6 +1334,8 @@ public class GameAction {
         }
         
         StringBuilder sb = new StringBuilder();
+        AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, Constant.Player.Human),HumanCut);
+        AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer),ComputerCut); 
         sb.append("Human cuts his / her deck to : " + HumanCut.getName() + " (" + HumanCut.getManaCost() + ")" + "\r\n");
         sb.append("Computer cuts it's deck to : " + ComputerCut.getName()  + " (" + ComputerCut.getManaCost() + ")" + "\r\n");
         if(CardUtil.getConvertedManaCost(ComputerCut.getManaCost()) > CardUtil.getConvertedManaCost(HumanCut.getManaCost()))
