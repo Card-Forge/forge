@@ -446,6 +446,10 @@ public class AbilityFactory {
 			{
 				return CardFactoryUtil.handlePaid(ability.getSacrificedCost(), calcX[1]);
 			}
+			else if (ability != null && calcX[0].startsWith("Discarded"))
+			{
+				return CardFactoryUtil.handlePaid(ability.getDiscardedCost(), calcX[1]);
+			}
 			else
 				return 0;
 		}

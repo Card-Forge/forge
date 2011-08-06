@@ -473,7 +473,7 @@ public abstract class Player extends MyObservable{
     
     public void doDiscard(final Card c, final SpellAbility sa) {
     	if (sa!= null){
-    		;
+    		sa.addDiscardedCost(c);
     	}
     	
     	AllZone.GameAction.checkWheneverKeyword(c,"DiscardsCard",null);

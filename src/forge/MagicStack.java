@@ -199,11 +199,16 @@ public class MagicStack extends MyObservable {
 				if (sp.getSourceCard().isCopiedSpell())
 					push(sp);
 				
-				if (!sp.isMultiKicker() && !sp.isXCost() && !sp.getSourceCard().isCopiedSpell()) {
+				else if (!sp.isMultiKicker() && !sp.isXCost()) {
 					push(sp);
-				} 
+				}
 				
-				else if (sp.isXCost() && !sp.getSourceCard().isCopiedSpell()) {
+				else if (sp.payCosts != null){
+					push(sp);
+				}
+				
+				else if (sp.isXCost()) {
+					// todo: convert any X costs to use abCost so it happens earlier
 					final SpellAbility sa = sp;
 					final Ability ability = new Ability(sp.getSourceCard(), sa.getXManaCost()) {
 						public void resolve() {
@@ -250,7 +255,8 @@ public class MagicStack extends MyObservable {
 					}
 				} 
 				
-				else if (sp.isMultiKicker() && !sp.getSourceCard().isCopiedSpell()){
+				else if (sp.isMultiKicker()){
+					// todo: convert multikicker support in abCost so this doesn't happen here
 					// both X and multi is not supported yet
 				
 					final SpellAbility sa = sp;
@@ -510,8 +516,9 @@ public class MagicStack extends MyObservable {
 
 		AllZone.InputControl.setResolving(false);
 		this.unfreezeStack(); // unfreeze the stack once we're done resolving
-		AllZone.GameAction.checkStateEffects();
 		sa.resetSacrificedCost();
+		sa.resetDiscardedCost();
+		AllZone.GameAction.checkStateEffects();
 		
 		AllZone.Phase.setNeedToNextPhase(false);
 

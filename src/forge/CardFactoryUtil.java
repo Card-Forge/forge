@@ -3967,6 +3967,15 @@ public class CardFactoryUtil {
             }
         });
         
+        //Count$IsMulticolor.<numMC>.<numNotMC>
+        if(sq[0].contains("IsMulticolor"))
+        {
+        	if(CardUtil.getColors(c).size() > 1)
+        		return doXMath(Integer.parseInt(sq[1]),m);
+        	else
+        		return doXMath(Integer.parseInt(sq[2]),m);
+        }
+        
         // 1/10 - Count$MaxCMCYouCtrl
         if(sq[0].contains("MaxCMC")) {
             int mmc = 0;

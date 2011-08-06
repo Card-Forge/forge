@@ -275,7 +275,6 @@ public class Cost_Payment {
     		}
     		else if( discType.equals("LastDrawn") ) {
     			if(handList.contains(card.getController().getLastDrawnCard())) {
-    				//AllZone.GameAction.discard(card.getController().getLastDrawnCard(), ability);
     				card.getController().discard(card.getController().getLastDrawnCard(), ability);
     				payDiscard = true;
     			}
@@ -616,7 +615,6 @@ public class Cost_Payment {
             public void selectCard(Card card, PlayerZone zone) {
                 if(zone.is(Constant.Zone.Hand) && handList.contains(card) ) {
                 	// send in CardList for Typing
-                    //AllZone.GameAction.discard(card, sp);
                 	card.getController().discard(card, sp);
                     handList.remove(card);
                     nDiscard++;

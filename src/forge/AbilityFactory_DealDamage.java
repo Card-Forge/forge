@@ -8,10 +8,8 @@ import java.util.Random;
     public class AbilityFactory_DealDamage {
         private AbilityFactory AF = null;
         
-        private int nDamage = -1;
-        
-        private String XDamage = "none";
-           
+        private String damage;
+
         private boolean TgtOpp = false;
         
         private Ability_Sub subAbAF = null;
@@ -25,15 +23,7 @@ import java.util.Random;
        {
           AF = newAF;
           
-            String tmpND = AF.getMapParams().get("NumDmg");
-            if (tmpND.length() > 0)
-            {
-               if (tmpND.matches("[xX]"))
-                  XDamage = AF.getHostCard().getSVar(tmpND.substring(1));
-               
-               else if (tmpND.matches("[0-9][0-9]?"))
-                  nDamage = Integer.parseInt(tmpND);
-            }
+           damage = AF.getMapParams().get("NumDmg");
            
           if(AF.getMapParams().containsKey("Tgt"))
              if (AF.getMapParams().get("Tgt").equals("TgtOpp"))
@@ -155,23 +145,7 @@ import java.util.Random;
 
        
         private int getNumDamage(SpellAbility saMe) {
-            if(nDamage != -1) return nDamage;
-           
-          String calcX[] = XDamage.split("\\$");
-          
-          if (calcX.length == 1 || calcX[1].equals("none"))
-             return 0;
-          
-          if (calcX[0].startsWith("Count"))
-          {
-             return CardFactoryUtil.xCount(AF.getHostCard(), calcX[1]);
-          }
-          else if (calcX[0].startsWith("Sacrificed"))
-          {
-             return CardFactoryUtil.handlePaid(saMe.getSacrificedCost(), calcX[1]);
-          }
-          
-          return 0;
+            return AbilityFactory.calculateAmount(saMe.getSourceCard(), damage, saMe);
         }
        
         private boolean shouldTgtP(int d, final boolean noPrevention) {
@@ -227,21 +201,21 @@ import java.util.Random;
 
         private boolean doCanPlayAI(SpellAbility saMe)
         {           
-        	int damage = getNumDamage(saMe);
+        	int dmg = getNumDamage(saMe);
            boolean rr = AF.isSpell();
            
            // temporarily disabled until better AI
            if (AF.getAbCost().getSacCost())    {
-               if(AllZone.HumanPlayer.getLife() - damage > 0) // only if damage from this ability would kill the human
+               if(AllZone.HumanPlayer.getLife() - dmg > 0) // only if damage from this ability would kill the human
         	   return false;
            }
            if (AF.getAbCost().getSubCounter())  {
         	   // +1/+1 counters only if damage from this ability would kill the human, otherwise ok
-        	   if(AllZone.HumanPlayer.getLife() - damage > 0 && AF.getAbCost().getCounterType().equals(Counters.P1P1))
+        	   if(AllZone.HumanPlayer.getLife() - dmg > 0 && AF.getAbCost().getCounterType().equals(Counters.P1P1))
         	   return false;
            }
            if (AF.getAbCost().getLifeCost())    {
-               if(AllZone.HumanPlayer.getLife() - damage > 0) // only if damage from this ability would kill the human
+               if(AllZone.HumanPlayer.getLife() - dmg > 0) // only if damage from this ability would kill the human
         	   return false;
            }
            
@@ -269,7 +243,7 @@ import java.util.Random;
         }
         
 	private boolean damageTargetAI(SpellAbility saMe) {
-		int damage = getNumDamage(saMe);
+		int dmg = getNumDamage(saMe);
 		Target tgt = AF.getAbTgt();
         HashMap<String,String> params = AF.getMapParams();
 		
@@ -297,12 +271,12 @@ import java.util.Random;
 			// TODO: Consider targeting the planeswalker
 			if (tgt.canTgtCreatureAndPlayer()) {
 
-				if (shouldTgtP(damage,noPrevention)) {
+				if (shouldTgtP(dmg,noPrevention)) {
 					tgt.addTarget(AllZone.HumanPlayer);
 					continue;
 				}
 
-				Card c = chooseTgtC(damage,noPrevention);
+				Card c = chooseTgtC(dmg,noPrevention);
 				if (c != null) {
 					tgt.addTarget(c);
 					continue;
@@ -315,7 +289,7 @@ import java.util.Random;
 			}
 
 			if (tgt.canTgtCreature()) {
-				Card c = chooseTgtC(damage,noPrevention);
+				Card c = chooseTgtC(dmg,noPrevention);
 				if (c != null) {
 					tgt.addTarget(c);
 					continue;
@@ -338,14 +312,14 @@ import java.util.Random;
           // when damageStackDescription is called, just build exactly what is happening
            StringBuilder sb = new StringBuilder();
            String name = af.getHostCard().getName();
-           int damage = getNumDamage(sa);
+           int dmg = getNumDamage(sa);
 
            ArrayList<Object> tgts = findTargets(sa);
            
            if (!(sa instanceof Ability_Sub))
         	   sb.append(name).append(" - ");
            
-           sb.append("Deals ").append(damage).append(" damage to ");
+           sb.append("Deals ").append(dmg).append(" damage to ");
            for(int i = 0; i < tgts.size(); i++){
         	   if (i != 0)
         		   sb.append(" ");
@@ -392,7 +366,7 @@ import java.util.Random;
         
         private void doResolve(SpellAbility saMe)
         {
-            int damage = getNumDamage(saMe);
+            int dmg = getNumDamage(saMe);
             HashMap<String,String> params = AF.getMapParams();
     		
     		boolean noPrevention = params.containsKey("NoPrevention");
@@ -410,9 +384,9 @@ import java.util.Random;
                    Card c = (Card)o;
                    if(AllZone.GameAction.isCardInPlay(c) && (!targeted || CardFactoryUtil.canTarget(AF.getHostCard(), c))) {
                 	   if (noPrevention)
-                	   		c.addDamageWithoutPrevention(damage, AF.getHostCard());
+                	   		c.addDamageWithoutPrevention(dmg, AF.getHostCard());
                 	   else
-               	   			c.addDamage(damage, AF.getHostCard());
+               	   			c.addDamage(dmg, AF.getHostCard());
                    }
                          
                }
@@ -420,9 +394,9 @@ import java.util.Random;
                   Player p = (Player) o;
                   if (!targeted || p.canTarget(AF.getHostCard())) {
                	   	if (noPrevention)
-           	   			p.addDamageWithoutPrevention(damage, AF.getHostCard());
+           	   			p.addDamageWithoutPrevention(dmg, AF.getHostCard());
                	   	else
-          	   			p.addDamage(damage, AF.getHostCard());
+          	   			p.addDamage(dmg, AF.getHostCard());
                   }
                }
             }
@@ -446,7 +420,7 @@ import java.util.Random;
                else{
                   pl = (Player)obj;
                }
-              CardFactoryUtil.doDrawBack(subAbStr, damage, AF.getHostCard().getController(),
+              CardFactoryUtil.doDrawBack(subAbStr, dmg, AF.getHostCard().getController(),
                  AF.getHostCard().getController().getOpponent(),   pl, AF.getHostCard(), c, saMe);
               
            }
