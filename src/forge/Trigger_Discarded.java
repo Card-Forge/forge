@@ -17,6 +17,14 @@ public class Trigger_Discarded extends Trigger {
 				return false;
 			}
 		}
+		
+		if(mapParams.containsKey("ValidCause"))
+		{
+			if(!matchesValid(runParams.get("Cause"),mapParams.get("ValidSource").split(","),hostCard))
+			{
+				return false;
+			}
+		}
 		return true;
 	}
 

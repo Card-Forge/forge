@@ -32,6 +32,10 @@ public class Trigger_SpellCast extends Trigger {
 		if(mapParams.containsKey("TargetsValid"))
 		{
 			Spell sp = ((Spell)runParams.get("CastSA"));
+			if(sp.getTarget() == null)
+			{
+				return false;
+			}
 			if(sp.getTarget().doesTarget())
 			{
 				boolean validTgtFound = false;
