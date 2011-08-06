@@ -8141,6 +8141,7 @@ src/forge/card/trigger/TriggerHandler.java -text svneol=native#text/plain
 src/forge/card/trigger/Trigger_AttackerBlocked.java -text svneol=native#text/plain
 src/forge/card/trigger/Trigger_AttackerUnblocked.java -text svneol=native#text/plain
 src/forge/card/trigger/Trigger_Attacks.java -text svneol=native#text/plain
+src/forge/card/trigger/Trigger_AttacksAlone.java -text svneol=native#text/plain
 src/forge/card/trigger/Trigger_Blocks.java -text svneol=native#text/plain
 src/forge/card/trigger/Trigger_ChangesZone.java -text svneol=native#text/plain
 src/forge/card/trigger/Trigger_CounterAdded.java -text svneol=native#text/plain
