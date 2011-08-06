@@ -247,7 +247,8 @@ public class TriggerHandler {
 				if(trigParams.get("Optional").equals("True"))
 				{
 					decider[0] = regtrig.getHostCard().getController();
-					sa[0].getTarget().setMandatory(false);
+					if (sa[0].getTarget() != null)
+						sa[0].getTarget().setMandatory(false);
 				}
 				else if(trigParams.get("Optional").equals("OpponentDecides"))
 				{
