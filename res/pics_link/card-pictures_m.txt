@@ -34,7 +34,7 @@ magma_giant.jpg	http://[server]/FD/Magma%20Giant.full.jpg
 magma_jet.jpg	http://[server]/FD/Magma%20Jet.full.jpg
 magma_mine.jpg	http://[server]/VI/Magma%20Mine.full.jpg
 magma_phoenix.jpg	http://[server]/M10/Magma%20Phoenix.full.jpg
-magma_rift.jpg	http://pics.slightlymagic.net/ZEN/Magma%20Rift.full.jpg
+magma_rift.jpg	http://[server]/ZEN/Magma%20Rift.full.jpg
 magma_sliver.jpg	http://[server]/LE/Magma%20Sliver.full.jpg
 magma_spray.jpg	http://[server]/ALA/Magma%20Spray.full.jpg
 magma_vein.jpg	http://[server]/OD/Magma%20Vein.full.jpg
@@ -47,7 +47,7 @@ magnetic_web.jpg	http://[server]/TE/Magnetic%20Web.full.jpg
 magnify.jpg	http://[server]/UD/Magnify.full.jpg
 magnigoth_treefolk.jpg	http://[server]/PS/Magnigoth%20Treefolk.full.jpg
 magnivore.jpg	http://[server]/9E/Magnivore.full.jpg
-magosi_the_waterveil.jpg	http://pics.slightlymagic.net/ZEN/Magosi,%20the%20Waterveil.full.jpg
+magosi_the_waterveil.jpg	http://[server]/ZEN/Magosi,%20the%20Waterveil.full.jpg
 magus_of_the_abyss.jpg	http://[server]/FUT/Magus%20of%20the%20Abyss.full.jpg
 magus_of_the_arena.jpg	http://[server]/PLC/Magus%20of%20the%20Arena.full.jpg
 magus_of_the_bazaar.jpg	http://[server]/PLC/Magus%20of%20the%20Bazaar.full.jpg
@@ -67,11 +67,11 @@ magus_of_the_vineyard.jpg	http://[server]/FUT/Magus%20of%20the%20Vineyard.full.j
 mahamoti_djinn.jpg	http://[server]/10E/Mahamoti%20Djinn.full.jpg
 major_teroh.jpg	http://[server]/TO/Major%20Teroh.full.jpg
 makeshift_mannequin.jpg	http://[server]/LRW/Makeshift%20Mannequin.full.jpg
-makindi_shieldmate.jpg	http://pics.slightlymagic.net/ZEN/Makindi%20Shieldmate.full.jpg
+makindi_shieldmate.jpg	http://[server]/ZEN/Makindi%20Shieldmate.full.jpg
 malach_of_the_dawn.jpg	http://[server]/PLC/Malach%20of%20the%20Dawn.full.jpg
 malachite_golem.jpg	http://[server]/MR/Malachite%20Golem.full.jpg
 malachite_talisman.jpg	http://[server]/IA/Malachite%20Talisman.full.jpg
-malakir_bloodwitch.jpg	http://pics.slightlymagic.net/ZEN/Malakir%20Bloodwitch.full.jpg
+malakir_bloodwitch.jpg	http://[server]/ZEN/Malakir%20Bloodwitch.full.jpg
 malevolent_awakening.jpg	http://[server]/OD/Malevolent%20Awakening.full.jpg
 malfegor.jpg	http://[server]/CFX/Malfegor.full.jpg
 malicious_advice.jpg	http://[server]/PS/Malicious%20Advice.full.jpg
@@ -143,7 +143,7 @@ marjhan.jpg	http://[server]/HL/Marjhan.full.jpg
 mark_of_asylum.jpg	http://[server]/CFX/Mark%20of%20Asylum.full.jpg
 mark_of_eviction.jpg	http://[server]/RAV/Mark%20of%20Eviction.full.jpg
 mark_of_fury.jpg	http://[server]/UD/Mark%20of%20Fury.full.jpg
-mark_of_mutiny.jpg	http://pics.slightlymagic.net/ZEN/Mark%20of%20Mutiny.full.jpg
+mark_of_mutiny.jpg	http://[server]/ZEN/Mark%20of%20Mutiny.full.jpg
 mark_of_sakiko.jpg	http://[server]/BOK/Mark%20of%20Sakiko.full.jpg
 mark_of_the_oni.jpg	http://[server]/BOK/Mark%20of%20the%20Oni.full.jpg
 marker_beetles.jpg	http://[server]/UD/Marker%20Beetles.full.jpg
@@ -151,9 +151,9 @@ maro.jpg	http://[server]/9E/Maro.full.jpg
 marrow_chomper.jpg	http://[server]/ARB/Marrow%20Chomper.full.jpg
 marrow_gnawer.jpg	http://[server]/CHK/Marrow-Gnawer.full.jpg
 marsh_boa.jpg	http://[server]/PY/Marsh%20Boa.full.jpg
-marsh_casualties.jpg	http://pics.slightlymagic.net/ZEN/Marsh%20Casualties.full.jpg
+marsh_casualties.jpg	http://[server]/ZEN/Marsh%20Casualties.full.jpg
 marsh_crocodile.jpg	http://[server]/PS/Marsh%20Crocodile.full.jpg
-marsh_flats.jpg	http://pics.slightlymagic.net/ZEN/Marsh%20Flats.full.jpg
+marsh_flats.jpg	http://[server]/ZEN/Marsh%20Flats.full.jpg
 marsh_flitter.jpg	http://[server]/LRW/Marsh%20Flitter.full.jpg
 marsh_gas.jpg	http://[server]/DK/Marsh%20Gas.full.jpg
 marsh_goblins.jpg	http://[server]/DK/Marsh%20Goblins.full.jpg
@@ -261,12 +261,12 @@ merfolk_assassin.jpg	http://[server]/DK/Merfolk%20Assassin.full.jpg
 merfolk_looter.jpg	http://[server]/M10/Merfolk%20Looter.full.jpg
 merfolk_of_the_pearl_trident.jpg	http://[server]/7E/Merfolk%20of%20the%20Pearl%20Trident.full.jpg
 merfolk_raiders.jpg	http://[server]/MI/Merfolk%20Raiders.full.jpg
-merfolk_seastalkers.jpg	http://pics.slightlymagic.net/ZEN/Merfolk%20Seastalkers.full.jpg
+merfolk_seastalkers.jpg	http://[server]/ZEN/Merfolk%20Seastalkers.full.jpg
 merfolk_seer.jpg	http://[server]/MI/Merfolk%20Seer.full.jpg
 merfolk_sovereign.jpg	http://[server]/M10/Merfolk%20Sovereign.full.jpg
 merfolk_thaumaturgist.jpg	http://[server]/PLC/Merfolk%20Thaumaturgist.full.jpg
 merfolk_traders.jpg	http://[server]/WL/Merfolk%20Traders.full.jpg
-merfolk_wayfinder.jpg	http://pics.slightlymagic.net/ZEN/Merfolk%20Wayfinder.full.jpg
+merfolk_wayfinder.jpg	http://[server]/ZEN/Merfolk%20Wayfinder.full.jpg
 merieke_ri_berit.jpg	http://[server]/IA/Merieke%20Ri%20Berit.full.jpg
 merrow_bonegnawer.jpg	http://[server]/EVE/Merrow%20Bonegnawer.full.jpg
 merrow_commerce.jpg	http://[server]/LRW/Merrow%20Commerce.full.jpg
@@ -352,11 +352,11 @@ mind_warp.jpg	http://[server]/6E/Mind%20Warp.full.jpg
 mind_whip.jpg	http://[server]/IA/Mind%20Whip.full.jpg
 mindbender_spores.jpg	http://[server]/MI/Mindbender%20Spores.full.jpg
 mindblaze.jpg	http://[server]/CHK/Mindblaze.full.jpg
-mindbreak_trap.jpg	http://pics.slightlymagic.net/ZEN/Mindbreak%20Trap.full.jpg
+mindbreak_trap.jpg	http://[server]/ZEN/Mindbreak%20Trap.full.jpg
 mindlash_sliver.jpg	http://[server]/TSP/Mindlash%20Sliver.full.jpg
 mindleech_mass.jpg	http://[server]/RAV/Mindleech%20Mass.full.jpg
 mindless_automaton.jpg	http://[server]/EX/Mindless%20Automaton.full.jpg
-mindless_null.jpg	http://pics.slightlymagic.net/ZEN/Mindless%20Null.full.jpg
+mindless_null.jpg	http://[server]/ZEN/Mindless%20Null.full.jpg
 mindlock_orb.jpg	http://[server]/ALA/Mindlock%20Orb.full.jpg
 mindmoil.jpg	http://[server]/RAV/Mindmoil.full.jpg
 minds_desire.jpg	http://[server]/SC/Mind's%20Desire.full.jpg
@@ -387,7 +387,7 @@ miracle_worker.jpg	http://[server]/DK/Miracle%20Worker.full.jpg
 miraculous_recovery.jpg	http://[server]/VI/Miraculous%20Recovery.full.jpg
 mirari.jpg	http://[server]/OD/Mirari.full.jpg
 miraris_wake.jpg	http://[server]/JU/Mirari's%20Wake.full.jpg
-mire_blight.jpg	http://pics.slightlymagic.net/ZEN/Mire%20Blight.full.jpg
+mire_blight.jpg	http://[server]/ZEN/Mire%20Blight.full.jpg
 mire_boa.jpg	http://[server]/PLC/Mire%20Boa.full.jpg
 mire_kavu.jpg	http://[server]/PS/Mire%20Kavu.full.jpg
 mire_shade.jpg	http://[server]/MI/Mire%20Shade.full.jpg
@@ -456,7 +456,7 @@ mistmoon_griffin.jpg	http://[server]/WL/Mistmoon%20Griffin.full.jpg
 mistral_charger.jpg	http://[server]/DIS/Mistral%20Charger.full.jpg
 mistveil_plains.jpg	http://[server]/SHM/Mistveil%20Plains.full.jpg
 mistvein_borderpost.jpg	http://[server]/ARB/Mistvein%20Borderpost.full.jpg
-misty_rainforest.jpg	http://pics.slightlymagic.net/ZEN/Misty%20Rainforest.full.jpg
+misty_rainforest.jpg	http://[server]/ZEN/Misty%20Rainforest.full.jpg
 mizzium_transreliquat.jpg	http://[server]/GP/Mizzium%20Transreliquat.full.jpg
 mnemonic_nexus.jpg	http://[server]/RAV/Mnemonic%20Nexus.full.jpg
 mnemonic_sliver.jpg	http://[server]/TE/Mnemonic%20Sliver.full.jpg
@@ -487,7 +487,7 @@ mogg_war_marshal.jpg	http://[server]/EVG/Mogg%20War%20Marshal.full.jpg
 moggcatcher.jpg	http://[server]/NE/Moggcatcher.full.jpg
 mold_adder.jpg	http://[server]/M10/Mold%20Adder.full.jpg
 mold_demon.jpg	http://[server]/LG/Mold%20Demon.full.jpg
-mold_shambler.jpg	http://pics.slightlymagic.net/ZEN/Mold%20Shambler.full.jpg
+mold_shambler.jpg	http://[server]/ZEN/Mold%20Shambler.full.jpg
 molder.jpg	http://[server]/TSP/Molder.full.jpg
 molder_slug.jpg	http://[server]/MR/Molder%20Slug.full.jpg
 moldervine_cloak.jpg	http://[server]/RAV/Moldervine%20Cloak.full.jpg
@@ -499,7 +499,7 @@ molten_frame.jpg	http://[server]/CFX/Molten%20Frame.full.jpg
 molten_hydra.jpg	http://[server]/UL/Molten%20Hydra.full.jpg
 molten_influence.jpg	http://[server]/OD/Molten%20Influence.full.jpg
 molten_rain.jpg	http://[server]/MR/Molten%20Rain.full.jpg
-molten_ravager.jpg	http://pics.slightlymagic.net/ZEN/Molten%20Ravager.full.jpg
+molten_ravager.jpg	http://[server]/ZEN/Molten%20Ravager.full.jpg
 molten_sentry.jpg	http://[server]/RAV/Molten%20Sentry.full.jpg
 molten_slagheap.jpg	http://[server]/TSP/Molten%20Slagheap.full.jpg
 molting_harpy.jpg	http://[server]/MM/Molting%20Harpy.full.jpg
@@ -618,7 +618,7 @@ multanis_presence.jpg	http://[server]/UL/Multani's%20Presence.full.jpg
 mundungu.jpg	http://[server]/VI/Mundungu.full.jpg
 mungha_wurm.jpg	http://[server]/PY/Mungha%20Wurm.full.jpg
 muraganda_petroglyphs.jpg	http://[server]/FUT/Muraganda%20Petroglyphs.full.jpg
-murasa_pyromancer.jpg	http://pics.slightlymagic.net/ZEN/Murasa%20Pyromancer.full.jpg
+murasa_pyromancer.jpg	http://[server]/ZEN/Murasa%20Pyromancer.full.jpg
 murderous_betrayal.jpg	http://[server]/8E/Murderous%20Betrayal.full.jpg
 murderous_redcap.jpg	http://[server]/SHM/Murderous%20Redcap.full.jpg
 murderous_spoils.jpg	http://[server]/DS/Murderous%20Spoils.full.jpg

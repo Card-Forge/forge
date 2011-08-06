@@ -11,7 +11,7 @@ oath_of_mages.jpg	http://[server]/EX/Oath%20of%20Mages.full.jpg
 oath_of_scholars.jpg	http://[server]/EX/Oath%20of%20Scholars.full.jpg
 oathkeeper_takenos_daisho.jpg	http://[server]/CHK/Oathkeeper,%20Takeno's%20Daisho.full.jpg
 oathsworn_giant.jpg	http://[server]/RAV/Oathsworn%20Giant.full.jpg
-ob_nixilis_the_fallen.jpg	http://pics.slightlymagic.net/ZEN/Ob%20Nixilis,%20the%20Fallen.full.jpg
+ob_nixilis_the_fallen.jpg	http://[server]/ZEN/Ob%20Nixilis,%20the%20Fallen.full.jpg
 obelisk_of_alara.jpg	http://[server]/CFX/Obelisk%20of%20Alara.full.jpg
 obelisk_of_bant.jpg	http://[server]/ALA/Obelisk%20of%20Bant.full.jpg
 obelisk_of_esper.jpg	http://[server]/ALA/Obelisk%20of%20Esper.full.jpg
@@ -31,7 +31,7 @@ obsessive_search.jpg	http://[server]/TO/Obsessive%20Search.full.jpg
 obsianus_golem.jpg	http://[server]/6E/Obsianus%20Golem.full.jpg
 obsidian_acolyte.jpg	http://[server]/IN/Obsidian%20Acolyte.full.jpg
 obsidian_battle_axe.jpg	http://[server]/MOR/Obsidian%20Battle-Axe.full.jpg
-obsidian_fireheart.jpg	http://pics.slightlymagic.net/ZEN/Obsidian%20Fireheart.full.jpg
+obsidian_fireheart.jpg	http://[server]/ZEN/Obsidian%20Fireheart.full.jpg
 obsidian_giant.jpg	http://[server]/P2/Obsidian%20Giant.full.jpg
 obstinate_familiar.jpg	http://[server]/OD/Obstinate%20Familiar.full.jpg
 ocular_halo.jpg	http://[server]/DIS/Ocular%20Halo.full.jpg
@@ -66,7 +66,7 @@ omen.jpg	http://[server]/PT/Omen.full.jpg
 omen_of_fire.jpg	http://[server]/AL/Omen%20of%20Fire.full.jpg
 omnibian.jpg	http://[server]/DIS/Omnibian.full.jpg
 once_more_with_feeling.jpg	http://[server]/UG/Once%20More%20with%20Feeling.full.jpg
-ondu_cleric.jpg	http://pics.slightlymagic.net/ZEN/Ondu%20Cleric.full.jpg
+ondu_cleric.jpg	http://[server]/ZEN/Ondu%20Cleric.full.jpg
 one_dozen_eyes.jpg	http://[server]/MR/One%20Dozen%20Eyes.full.jpg
 one_with_nature.jpg	http://[server]/SC/One%20with%20Nature.full.jpg
 one_with_nothing.jpg	http://[server]/SOK/One%20with%20Nothing.full.jpg
@@ -105,12 +105,12 @@ oppressive_will.jpg	http://[server]/SOK/Oppressive%20Will.full.jpg
 opt.jpg	http://[server]/IN/Opt.full.jpg
 oracle.jpg	http://[server]/VG/Oracle.full.jpg
 oracle_en_vec.jpg	http://[server]/TE/Oracle%20en-Vec.full.jpg
-oracle_of_mul_daya.jpg	http://pics.slightlymagic.net/ZEN/Oracle%20of%20Mul%20Daya.full.jpg
+oracle_of_mul_daya.jpg	http://[server]/ZEN/Oracle%20of%20Mul%20Daya.full.jpg
 oracle_of_nectars.jpg	http://[server]/SHM/Oracle%20of%20Nectars.full.jpg
 oracles_attendants.jpg	http://[server]/9E/Oracle's%20Attendants.full.jpg
-oran_rief_recluse.jpg	http://pics.slightlymagic.net/ZEN/Oran-Rief%20Recluse.full.jpg
-oran_rief_survivalist.jpg	http://pics.slightlymagic.net/ZEN/Oran-Rief%20Survivalist.full.jpg
-oran_rief_the_vastwood.jpg	http://pics.slightlymagic.net/ZEN/Oran-Rief,%20the%20Vastwood.full.jpg
+oran_rief_recluse.jpg	http://[server]/ZEN/Oran-Rief%20Recluse.full.jpg
+oran_rief_survivalist.jpg	http://[server]/ZEN/Oran-Rief%20Survivalist.full.jpg
+oran_rief_the_vastwood.jpg	http://[server]/ZEN/Oran-Rief,%20the%20Vastwood.full.jpg
 oraxid.jpg	http://[server]/NE/Oraxid.full.jpg
 orb_of_dreams.jpg	http://[server]/BOK/Orb%20of%20Dreams.full.jpg
 orbweaver_kumo.jpg	http://[server]/CHK/Orbweaver%20Kumo.full.jpg

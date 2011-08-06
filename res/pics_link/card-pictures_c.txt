@@ -37,7 +37,7 @@ call_to_glory.jpg	http://[server]/CHK/Call%20to%20Glory.full.jpg
 call_to_heel.jpg	http://[server]/ALA/Call%20to%20Heel.full.jpg
 call_to_the_grave.jpg	http://[server]/SC/Call%20to%20the%20Grave.full.jpg
 call_to_the_netherworld.jpg	http://[server]/TSP/Call%20to%20the%20Netherworld.full.jpg
-caller_of_gales.jpg	http://pics.slightlymagic.net/ZEN/Caller%20of%20Gales.full.jpg
+caller_of_gales.jpg	http://[server]/ZEN/Caller%20of%20Gales.full.jpg
 caller_of_the_claw.jpg	http://[server]/LE/Caller%20of%20the%20Claw.full.jpg
 caller_of_the_hunt.jpg	http://[server]/MM/Caller%20of%20the%20Hunt.full.jpg
 callous_deceiver.jpg	http://[server]/CHK/Callous%20Deceiver.full.jpg
@@ -82,7 +82,7 @@ captive_flame.jpg	http://[server]/SOK/Captive%20Flame.full.jpg
 capture_of_jingzhou.jpg	http://[server]/P3/Capture%20of%20Jingzhou.full.jpg
 captured_sunlight.jpg	http://[server]/ARB/Captured%20Sunlight.full.jpg
 carapace.jpg	http://[server]/5E/Carapace.full.jpg
-caravan_hurda.jpg	http://pics.slightlymagic.net/ZEN/Caravan%20Hurda.full.jpg
+caravan_hurda.jpg	http://[server]/ZEN/Caravan%20Hurda.full.jpg
 carbonize.jpg	http://[server]/SC/Carbonize.full.jpg
 cardboard_carapace.jpg	http://[server]/UG/Cardboard%20Carapace.full.jpg
 cardpecker.jpg	http://[server]/UNH/Cardpecker.full.jpg
@@ -90,7 +90,7 @@ careful_consideration.jpg	http://[server]/TSP/Careful%20Consideration.full.jpg
 careful_study.jpg	http://[server]/OD/Careful%20Study.full.jpg
 caregiver.jpg	http://[server]/RAV/Caregiver.full.jpg
 caribou_range.jpg	http://[server]/IA/Caribou%20Range.full.jpg
-carnage_altar.jpg	http://pics.slightlymagic.net/ZEN/Carnage%20Altar.full.jpg
+carnage_altar.jpg	http://[server]/ZEN/Carnage%20Altar.full.jpg
 carnassid.jpg	http://[server]/SH/Carnassid.full.jpg
 carnival_of_souls.jpg	http://[server]/UD/Carnival%20of%20Souls.full.jpg
 carnivorous_death_parrot.jpg	http://[server]/UNH/Carnivorous%20Death-Parrot.full.jpg
@@ -163,7 +163,7 @@ celestial_crusader.jpg	http://[server]/TSP/Celestial%20Crusader.full.jpg
 celestial_dawn.jpg	http://[server]/6E/Celestial%20Dawn.full.jpg
 celestial_gatekeeper.jpg	http://[server]/LE/Celestial%20Gatekeeper.full.jpg
 celestial_kirin.jpg	http://[server]/SOK/Celestial%20Kirin.full.jpg
-celestial_mantle.jpg	http://pics.slightlymagic.net/ZEN/Celestial%20Mantle.full.jpg
+celestial_mantle.jpg	http://[server]/ZEN/Celestial%20Mantle.full.jpg
 celestial_prism.jpg	http://[server]/4E/Celestial%20Prism.full.jpg
 celestial_purge.jpg	http://[server]/M10/Celestial%20Purge.full.jpg
 celestial_sword.jpg	http://[server]/IA/Celestial%20Sword.full.jpg
@@ -229,7 +229,7 @@ champion_lancer.jpg	http://[server]/ST/Champion%20Lancer.full.jpg
 champions_victory.jpg	http://[server]/P3/Champion's%20Victory.full.jpg
 chance_encounter.jpg	http://[server]/OD/Chance%20Encounter.full.jpg
 chandler.jpg	http://[server]/HL/Chandler.full.jpg
-chandra_ablaze.jpg	http://pics.slightlymagic.net/ZEN/Chandra%20Ablaze.full.jpg
+chandra_ablaze.jpg	http://[server]/ZEN/Chandra%20Ablaze.full.jpg
 chandra_nalaar.jpg	http://[server]/M10/Chandra%20Nalaar.full.jpg
 change_of_heart.jpg	http://[server]/SH/Change%20of%20Heart.full.jpg
 changeling_berserker.jpg	http://[server]/LRW/Changeling%20Berserker.full.jpg
@@ -384,7 +384,7 @@ clearwater_goblet.jpg	http://[server]/FD/Clearwater%20Goblet.full.jpg
 clergy_en_vec.jpg	http://[server]/TE/Clergy%20en-Vec.full.jpg
 clergy_of_the_holy_nimbus.jpg	http://[server]/LG/Clergy%20of%20the%20Holy%20Nimbus.full.jpg
 clickslither.jpg	http://[server]/LE/Clickslither.full.jpg
-cliff_threader.jpg	http://pics.slightlymagic.net/ZEN/Cliff%20Threader.full.jpg
+cliff_threader.jpg	http://[server]/ZEN/Cliff%20Threader.full.jpg
 cliffrunner_behemoth.jpg	http://[server]/CFX/Cliffrunner%20Behemoth.full.jpg
 clinging_darkness.jpg	http://[server]/RAV/Clinging%20Darkness.full.jpg
 cloak_and_dagger.jpg	http://[server]/MOR/Cloak%20and%20Dagger.full.jpg
@@ -448,7 +448,7 @@ coastal_tower.jpg	http://[server]/8E/Coastal%20Tower.full.jpg
 coastal_wizard.jpg	http://[server]/P2/Coastal%20Wizard.full.jpg
 coat_of_arms.jpg	http://[server]/M10/Coat%20of%20Arms.full.jpg
 cobalt_golem.jpg	http://[server]/MR/Cobalt%20Golem.full.jpg
-cobra_trap.jpg	http://pics.slightlymagic.net/ZEN/Cobra%20Trap.full.jpg
+cobra_trap.jpg	http://[server]/ZEN/Cobra%20Trap.full.jpg
 cockatrice.jpg	http://[server]/5E/Cockatrice.full.jpg
 cocoon.jpg	http://[server]/CH/Cocoon.full.jpg
 coercion.jpg	http://[server]/9E/Coercion.full.jpg
@@ -510,7 +510,7 @@ congregation_at_dawn.jpg	http://[server]/RAV/Congregation%20At%20Dawn.full.jpg
 conjurers_ban.jpg	http://[server]/GP/Conjurer's%20Ban.full.jpg
 conjurers_bauble.jpg	http://[server]/FD/Conjurer's%20Bauble.full.jpg
 conquer.jpg	http://[server]/6E/Conquer.full.jpg
-conquerors_pledge.jpg	http://pics.slightlymagic.net/ZEN/Conqueror's%20Pledge.full.jpg
+conquerors_pledge.jpg	http://[server]/ZEN/Conqueror's%20Pledge.full.jpg
 consecrate_land.jpg	http://[server]/U/Consecrate%20Land.full.jpg
 conservator.jpg	http://[server]/4E/Conservator.full.jpg
 consign_to_dream.jpg	http://[server]/SHM/Consign%20to%20Dream.full.jpg
@@ -573,7 +573,7 @@ corrupt_eunuchs.jpg	http://[server]/P3/Corrupt%20Eunuchs.full.jpg
 corrupt_official.jpg	http://[server]/MM/Corrupt%20Official.full.jpg
 corrupted_roots.jpg	http://[server]/CFX/Corrupted%20Roots.full.jpg
 corrupting_licid.jpg	http://[server]/SH/Corrupting%20Licid.full.jpg
-cosis_trickster.jpg	http://pics.slightlymagic.net/ZEN/Cosi's%20Trickster.full.jpg
+cosis_trickster.jpg	http://[server]/ZEN/Cosi's%20Trickster.full.jpg
 cosmic_horror.jpg	http://[server]/LG/Cosmic%20Horror.full.jpg
 cosmic_larva.jpg	http://[server]/FD/Cosmic%20Larva.full.jpg
 council_of_advisors.jpg	http://[server]/P3/Council%20of%20Advisors.full.jpg
@@ -697,9 +697,9 @@ crypt_angel.jpg	http://[server]/IN/Crypt%20Angel.full.jpg
 crypt_champion.jpg	http://[server]/DIS/Crypt%20Champion.full.jpg
 crypt_cobra.jpg	http://[server]/MI/Crypt%20Cobra.full.jpg
 crypt_creeper.jpg	http://[server]/OD/Crypt%20Creeper.full.jpg
-crypt_of_agadeem.jpg	http://pics.slightlymagic.net/ZEN/Crypt%20of%20Agadeem.full.jpg
+crypt_of_agadeem.jpg	http://[server]/ZEN/Crypt%20of%20Agadeem.full.jpg
 crypt_rats.jpg	http://[server]/7E/Crypt%20Rats.full.jpg
-crypt_ripper.jpg	http://pics.slightlymagic.net/ZEN/Crypt%20Ripper.full.jpg
+crypt_ripper.jpg	http://[server]/ZEN/Crypt%20Ripper.full.jpg
 crypt_sliver.jpg	http://[server]/LE/Crypt%20Sliver.full.jpg
 cryptic_annelid.jpg	http://[server]/FUT/Cryptic%20Annelid.full.jpg
 cryptic_command.jpg	http://[server]/LRW/Cryptic%20Command.full.jpg

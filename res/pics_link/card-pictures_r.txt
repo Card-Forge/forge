@@ -74,7 +74,7 @@ ramosian_rally.jpg	http://[server]/MM/Ramosian%20Rally.full.jpg
 ramosian_revivalist.jpg	http://[server]/FUT/Ramosian%20Revivalist.full.jpg
 ramosian_sergeant.jpg	http://[server]/MM/Ramosian%20Sergeant.full.jpg
 ramosian_sky_marshal.jpg	http://[server]/MM/Ramosian%20Sky%20Marshal.full.jpg
-rampaging_baloths.jpg	http://pics.slightlymagic.net/ZEN/Rampaging%20Baloths.full.jpg
+rampaging_baloths.jpg	http://[server]/ZEN/Rampaging%20Baloths.full.jpg
 rampant_elephant.jpg	http://[server]/IN/Rampant%20Elephant.full.jpg
 rampant_growth.jpg	http://[server]/M10/Rampant%20Growth.full.jpg
 rampart_crawler.jpg	http://[server]/MM/Rampart%20Crawler.full.jpg
@@ -113,7 +113,7 @@ ravenous_baboons.jpg	http://[server]/EX/Ravenous%20Baboons.full.jpg
 ravenous_baloth.jpg	http://[server]/ON/Ravenous%20Baloth.full.jpg
 ravenous_rats.jpg	http://[server]/10E/Ravenous%20Rats.full.jpg
 ravenous_skirge.jpg	http://[server]/US/Ravenous%20Skirge.full.jpg
-ravenous_trap.jpg	http://pics.slightlymagic.net/ZEN/Ravenous%20Trap.full.jpg
+ravenous_trap.jpg	http://[server]/ZEN/Ravenous%20Trap.full.jpg
 ravenous_vampire.jpg	http://[server]/MI/Ravenous%20Vampire.full.jpg
 ravens_crime.jpg	http://[server]/EVE/Raven's%20Crime.full.jpg
 ravens_run_dragoon.jpg	http://[server]/SHM/Raven's%20Run%20Dragoon.full.jpg
@@ -171,7 +171,7 @@ reckless_charge.jpg	http://[server]/OD/Reckless%20Charge.full.jpg
 reckless_embermage.jpg	http://[server]/7E/Reckless%20Embermage.full.jpg
 reckless_ogre.jpg	http://[server]/EX/Reckless%20Ogre.full.jpg
 reckless_one.jpg	http://[server]/ON/Reckless%20One.full.jpg
-reckless_scholar.jpg	http://pics.slightlymagic.net/ZEN/Reckless%20Scholar.full.jpg
+reckless_scholar.jpg	http://[server]/ZEN/Reckless%20Scholar.full.jpg
 reckless_spite.jpg	http://[server]/IN/Reckless%20Spite.full.jpg
 reckless_wurm.jpg	http://[server]/PLC/Reckless%20Wurm.full.jpg
 reclaim.jpg	http://[server]/9E/Reclaim.full.jpg
@@ -234,7 +234,7 @@ relentless_rats.jpg	http://[server]/M10/Relentless%20Rats.full.jpg
 relic_bane.jpg	http://[server]/MR/Relic%20Bane.full.jpg
 relic_barrier.jpg	http://[server]/LG/Relic%20Barrier.full.jpg
 relic_bind.jpg	http://[server]/LG/Relic%20Bind.full.jpg
-relic_crush.jpg	http://pics.slightlymagic.net/ZEN/Relic%20Crush.full.jpg
+relic_crush.jpg	http://[server]/ZEN/Relic%20Crush.full.jpg
 relic_of_progenitus.jpg	http://[server]/ALA/Relic%20of%20Progenitus.full.jpg
 relic_ward.jpg	http://[server]/VI/Relic%20Ward.full.jpg
 reliquary_monk.jpg	http://[server]/UD/Reliquary%20Monk.full.jpg
@@ -426,7 +426,7 @@ risky_move.jpg	http://[server]/ON/Risky%20Move.full.jpg
 rite_of_consumption.jpg	http://[server]/SHM/Rite%20of%20Consumption.full.jpg
 rite_of_flame.jpg	http://[server]/CS/Rite%20of%20Flame.full.jpg
 rite_of_passage.jpg	http://[server]/FD/Rite%20of%20Passage.full.jpg
-rite_of_replication.jpg	http://pics.slightlymagic.net/ZEN/Rite%20of%20Replication.full.jpg
+rite_of_replication.jpg	http://[server]/ZEN/Rite%20of%20Replication.full.jpg
 rites_of_flourishing.jpg	http://[server]/FUT/Rites%20of%20Flourishing.full.jpg
 rites_of_initiation.jpg	http://[server]/OD/Rites%20of%20Initiation.full.jpg
 rites_of_refusal.jpg	http://[server]/OD/Rites%20of%20Refusal.full.jpg
@@ -484,7 +484,7 @@ rogue_elephant.jpg	http://[server]/WL/Rogue%20Elephant.full.jpg
 rogue_kavu.jpg	http://[server]/IN/Rogue%20Kavu.full.jpg
 rogue_skycaptain.jpg	http://[server]/AL/Rogue%20Skycaptain.full.jpg
 rohgahh_of_kher_keep.jpg	http://[server]/LG/Rohgahh%20of%20Kher%20Keep.full.jpg
-roil_elemental.jpg	http://pics.slightlymagic.net/ZEN/Roil%20Elemental.full.jpg
+roil_elemental.jpg	http://[server]/ZEN/Roil%20Elemental.full.jpg
 roiling_horror.jpg	http://[server]/PLC/Roiling%20Horror.full.jpg
 rolling_earthquake.jpg	http://[server]/P3/Rolling%20Earthquake.full.jpg
 rolling_spoil.jpg	http://[server]/RAV/Rolling%20Spoil.full.jpg
@@ -546,7 +546,7 @@ rude_awakening.jpg	http://[server]/FD/Rude%20Awakening.full.jpg
 rugged_prairie.jpg	http://[server]/EVE/Rugged%20Prairie.full.jpg
 ruham_djinn.jpg	http://[server]/IN/Ruham%20Djinn.full.jpg
 ruination.jpg	http://[server]/SH/Ruination.full.jpg
-ruinous_minotaur.jpg	http://pics.slightlymagic.net/ZEN/Ruinous%20Minotaur.full.jpg
+ruinous_minotaur.jpg	http://[server]/ZEN/Ruinous%20Minotaur.full.jpg
 ruins_of_trokair.jpg	http://[server]/6E/Ruins%20of%20Trokair.full.jpg
 rukh_egg.jpg	http://[server]/9E/Rukh%20Egg.full.jpg
 rule_of_law.jpg	http://[server]/10E/Rule%20of%20Law.full.jpg
@@ -569,7 +569,7 @@ runeclaw_bear.jpg	http://[server]/M10/Runeclaw%20Bear.full.jpg
 runed_arch.jpg	http://[server]/IA/Runed%20Arch.full.jpg
 runed_halo.jpg	http://[server]/SHM/Runed%20Halo.full.jpg
 runed_stalactite.jpg	http://[server]/LRW/Runed%20Stalactite.full.jpg
-runeflare_trap.jpg	http://pics.slightlymagic.net/ZEN/Runeflare%20Trap.full.jpg
+runeflare_trap.jpg	http://[server]/ZEN/Runeflare%20Trap.full.jpg
 runes_of_the_deus.jpg	http://[server]/SHM/Runes%20of%20the%20Deus.full.jpg
 runesword.jpg	http://[server]/CH/Runesword.full.jpg
 rupture.jpg	http://[server]/NE/Rupture.full.jpg

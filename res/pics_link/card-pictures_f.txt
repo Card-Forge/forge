@@ -84,7 +84,7 @@ favor_of_the_mighty.jpg	http://[server]/LRW/Favor%20of%20the%20Mighty.full.jpg
 favor_of_the_overbeing.jpg	http://[server]/EVE/Favor%20of%20the%20Overbeing.full.jpg
 favorable_destiny.jpg	http://[server]/MI/Favorable%20Destiny.full.jpg
 fear.jpg	http://[server]/10E/Fear.full.jpg
-feast_of_blood.jpg	http://pics.slightlymagic.net/ZEN/Feast%20of%20Blood.full.jpg
+feast_of_blood.jpg	http://[server]/ZEN/Feast%20of%20Blood.full.jpg
 feast_of_flesh.jpg	http://[server]/CS/Feast%20of%20Flesh.full.jpg
 feast_of_the_unicorn.jpg	http://[server]/AT/Feast%20of%20the%20Unicorn.full.jpg
 feast_of_worms.jpg	http://[server]/CHK/Feast%20of%20Worms.full.jpg
@@ -96,7 +96,7 @@ feedback_bolt.jpg	http://[server]/FD/Feedback%20Bolt.full.jpg
 feeding_frenzy.jpg	http://[server]/ON/Feeding%20Frenzy.full.jpg
 feint.jpg	http://[server]/LG/Feint.full.jpg
 feldons_cane.jpg	http://[server]/AQ/Feldon's%20Cane.full.jpg
-felidar_sovereign.jpg	http://pics.slightlymagic.net/ZEN/Felidar%20Sovereign.full.jpg
+felidar_sovereign.jpg	http://[server]/ZEN/Felidar%20Sovereign.full.jpg
 fellwar_stone.jpg	http://[server]/9E/Fellwar%20Stone.full.jpg
 femeref_archers.jpg	http://[server]/10E/Femeref%20Archers.full.jpg
 femeref_enchantress.jpg	http://[server]/VI/Femeref%20Enchantress.full.jpg
@@ -449,7 +449,7 @@ frightshroud_courier.jpg	http://[server]/ON/Frightshroud%20Courier.full.jpg
 frog_tongue.jpg	http://[server]/TE/Frog%20Tongue.full.jpg
 frogmite.jpg	http://[server]/MR/Frogmite.full.jpg
 frogtosser_banneret.jpg	http://[server]/MOR/Frogtosser%20Banneret.full.jpg
-frontier_guide.jpg	http://pics.slightlymagic.net/ZEN/Frontier%20Guide.full.jpg
+frontier_guide.jpg	http://[server]/ZEN/Frontier%20Guide.full.jpg
 frontline_sage.jpg	http://[server]/CFX/Frontline%20Sage.full.jpg
 frontline_strategist.jpg	http://[server]/SC/Frontline%20Strategist.full.jpg
 frost_giant.jpg	http://[server]/LG/Frost%20Giant.full.jpg

@@ -37,7 +37,7 @@ gaseous_form.jpg	http://[server]/6E/Gaseous%20Form.full.jpg
 gate_hound.jpg	http://[server]/RAV/Gate%20Hound.full.jpg
 gate_to_phyrexia.jpg	http://[server]/AQ/Gate%20to%20Phyrexia.full.jpg
 gate_to_the_aether.jpg	http://[server]/MR/Gate%20to%20the%20AEther.full.jpg
-gatekeeper_of_malakir.jpg	http://pics.slightlymagic.net/ZEN/Gatekeeper%20of%20Malakir.full.jpg
+gatekeeper_of_malakir.jpg	http://[server]/ZEN/Gatekeeper%20of%20Malakir.full.jpg
 gathan_raiders.jpg	http://[server]/FUT/Gathan%20Raiders.full.jpg
 gather_courage.jpg	http://[server]/RAV/Gather%20Courage.full.jpg
 gather_specimens.jpg	http://[server]/ALA/Gather%20Specimens.full.jpg
@@ -83,7 +83,7 @@ gerrards_wisdom.jpg	http://[server]/7E/Gerrard's%20Wisdom.full.jpg
 gerrymandering.jpg	http://[server]/UG/Gerrymandering.full.jpg
 get_a_life.jpg	http://[server]/UG/Get%20a%20Life.full.jpg
 geths_grimoire.jpg	http://[server]/DS/Geth's%20Grimoire.full.jpg
-geyser_glider.jpg	http://pics.slightlymagic.net/ZEN/Geyser%20Glider.full.jpg
+geyser_glider.jpg	http://[server]/ZEN/Geyser%20Glider.full.jpg
 ghastlord_of_fugue.jpg	http://[server]/SHM/Ghastlord%20of%20Fugue.full.jpg
 ghastly_demise.jpg	http://[server]/OD/Ghastly%20Demise.full.jpg
 ghastly_discovery.jpg	http://[server]/SHM/Ghastly%20Discovery.full.jpg
@@ -135,7 +135,7 @@ giant_harbinger.jpg	http://[server]/LRW/Giant%20Harbinger.full.jpg
 giant_mantis.jpg	http://[server]/MI/Giant%20Mantis.full.jpg
 giant_octopus.jpg	http://[server]/9E/Giant%20Octopus.full.jpg
 giant_oyster.jpg	http://[server]/HL/Giant%20Oyster.full.jpg
-giant_scorpion.jpg	http://pics.slightlymagic.net/ZEN/Giant%20Scorpion.full.jpg
+giant_scorpion.jpg	http://[server]/ZEN/Giant%20Scorpion.full.jpg
 giant_shark.jpg	http://[server]/DK/Giant%20Shark.full.jpg
 giant_slug.jpg	http://[server]/LG/Giant%20Slug.full.jpg
 giant_solifuge.jpg	http://[server]/GP/Giant%20Solifuge.full.jpg
@@ -157,7 +157,7 @@ gift_of_the_gargantuan.jpg	http://[server]/ALA/Gift%20of%20the%20Gargantuan.full
 gift_of_the_woods.jpg	http://[server]/AL/Gift%20of%20the%20Woods1.full.jpg
 gifts_ungiven.jpg	http://[server]/CHK/Gifts%20Ungiven.full.jpg
 gigadrowse.jpg	http://[server]/GP/Gigadrowse.full.jpg
-gigantiform.jpg	http://pics.slightlymagic.net/ZEN/Gigantiform.full.jpg
+gigantiform.jpg	http://[server]/ZEN/Gigantiform.full.jpg
 gigapede.jpg	http://[server]/ON/Gigapede.full.jpg
 gilded_drake.jpg	http://[server]/US/Gilded%20Drake.full.jpg
 gilded_light.jpg	http://[server]/SC/Gilded%20Light.full.jpg
@@ -251,7 +251,7 @@ goblin_brawler.jpg	http://[server]/FD/Goblin%20Brawler.full.jpg
 goblin_brigand.jpg	http://[server]/9E/Goblin%20Brigand.full.jpg
 goblin_bully.jpg	http://[server]/PT/Goblin%20Bully.full.jpg
 goblin_burrows.jpg	http://[server]/ON/Goblin%20Burrows.full.jpg
-goblin_bushwhacker.jpg	http://pics.slightlymagic.net/ZEN/Goblin%20Bushwhacker.full.jpg
+goblin_bushwhacker.jpg	http://[server]/ZEN/Goblin%20Bushwhacker.full.jpg
 goblin_cadets.jpg	http://[server]/US/Goblin%20Cadets.full.jpg
 goblin_cannon.jpg	http://[server]/FD/Goblin%20Cannon.full.jpg
 goblin_cavaliers.jpg	http://[server]/ST/Goblin%20Cavaliers.full.jpg
@@ -283,7 +283,7 @@ goblin_goon.jpg	http://[server]/LE/Goblin%20Goon.full.jpg
 goblin_grappler.jpg	http://[server]/LE/Goblin%20Grappler.full.jpg
 goblin_grenade.jpg	http://[server]/AT/Goblin%20Grenade.full.jpg
 goblin_grenadiers.jpg	http://[server]/WL/Goblin%20Grenadiers.full.jpg
-goblin_guide.jpg	http://pics.slightlymagic.net/ZEN/Goblin%20Guide.full.jpg
+goblin_guide.jpg	http://[server]/ZEN/Goblin%20Guide.full.jpg
 goblin_hero.jpg	http://[server]/6E/Goblin%20Hero.full.jpg
 goblin_king.jpg	http://[server]/10E/Goblin%20King.full.jpg
 goblin_kites.jpg	http://[server]/FE/Goblin%20Kites.full.jpg
@@ -314,14 +314,14 @@ goblin_replica.jpg	http://[server]/MR/Goblin%20Replica.full.jpg
 goblin_rimerunner.jpg	http://[server]/CS/Goblin%20Rimerunner.full.jpg
 goblin_ringleader.jpg	http://[server]/AP/Goblin%20Ringleader.full.jpg
 goblin_rock_sled.jpg	http://[server]/DK/Goblin%20Rock%20Sled.full.jpg
-goblin_ruinblaster.jpg	http://pics.slightlymagic.net/ZEN/Goblin%20Ruinblaster.full.jpg
+goblin_ruinblaster.jpg	http://[server]/ZEN/Goblin%20Ruinblaster.full.jpg
 goblin_s.w.a.t._team.jpg	http://[server]/UNH/Goblin%20S.W.A.T.%20Team.full.jpg
 goblin_sappers.jpg	http://[server]/IA/Goblin%20Sappers.full.jpg
 goblin_scouts.jpg	http://[server]/MI/Goblin%20Scouts.full.jpg
 goblin_secret_agent.jpg	http://[server]/UNH/Goblin%20Secret%20Agent.full.jpg
 goblin_settler.jpg	http://[server]/ST/Goblin%20Settler.full.jpg
 goblin_sharpshooter.jpg	http://[server]/ON/Goblin%20Sharpshooter.full.jpg
-goblin_shortcutter.jpg	http://pics.slightlymagic.net/ZEN/Goblin%20Shortcutter.full.jpg
+goblin_shortcutter.jpg	http://[server]/ZEN/Goblin%20Shortcutter.full.jpg
 goblin_shrine.jpg	http://[server]/CH/Goblin%20Shrine.full.jpg
 goblin_ski_patrol.jpg	http://[server]/IA/Goblin%20Ski%20Patrol.full.jpg
 goblin_sky_raider.jpg	http://[server]/10E/Goblin%20Sky%20Raider.full.jpg
@@ -342,7 +342,7 @@ goblin_vandal.jpg	http://[server]/AT/Goblin%20Vandal.full.jpg
 goblin_war_buggy.jpg	http://[server]/US/Goblin%20War%20Buggy.full.jpg
 goblin_war_cry.jpg	http://[server]/P2/Goblin%20War%20Cry.full.jpg
 goblin_war_drums.jpg	http://[server]/7E/Goblin%20War%20Drums.full.jpg
-goblin_war_paint.jpg	http://pics.slightlymagic.net/ZEN/Goblin%20War%20Paint.full.jpg
+goblin_war_paint.jpg	http://[server]/ZEN/Goblin%20War%20Paint.full.jpg
 goblin_war_strike.jpg	http://[server]/SC/Goblin%20War%20Strike.full.jpg
 goblin_war_wagon.jpg	http://[server]/MR/Goblin%20War%20Wagon.full.jpg
 goblin_warchief.jpg	http://[server]/SC/Goblin%20Warchief.full.jpg
@@ -379,7 +379,7 @@ golgari_thug.jpg	http://[server]/RAV/Golgari%20Thug.full.jpg
 golgothian_sylex.jpg	http://[server]/AQ/Golgothian%20Sylex.full.jpg
 goliath_beetle.jpg	http://[server]/UD/Goliath%20Beetle.full.jpg
 goliath_spider.jpg	http://[server]/RAV/Goliath%20Spider.full.jpg
-gomazoa.jpg	http://pics.slightlymagic.net/ZEN/Gomazoa.full.jpg
+gomazoa.jpg	http://[server]/ZEN/Gomazoa.full.jpg
 goretusk_firebeast.jpg	http://[server]/JU/Goretusk%20Firebeast.full.jpg
 gorger_wurm.jpg	http://[server]/ARB/Gorger%20Wurm.full.jpg
 gorgon_flail.jpg	http://[server]/M10/Gorgon%20Flail.full.jpg
@@ -415,7 +415,7 @@ granulate.jpg	http://[server]/FD/Granulate.full.jpg
 grapeshot.jpg	http://[server]/TSP/Grapeshot.full.jpg
 grapeshot_catapult.jpg	http://[server]/7E/Grapeshot%20Catapult.full.jpg
 graphic_violence.jpg	http://[server]/UNH/Graphic%20Violence.full.jpg
-grappling_hook.jpg	http://pics.slightlymagic.net/ZEN/Grappling%20Hook.full.jpg
+grappling_hook.jpg	http://[server]/ZEN/Grappling%20Hook.full.jpg
 grassland_crusader.jpg	http://[server]/ON/Grassland%20Crusader.full.jpg
 grasslands.jpg	http://[server]/MI/Grasslands.full.jpg
 gratuitous_violence.jpg	http://[server]/ON/Gratuitous%20Violence.full.jpg
@@ -442,9 +442,9 @@ gravestorm.jpg	http://[server]/OD/Gravestorm.full.jpg
 gravity_sphere.jpg	http://[server]/LG/Gravity%20Sphere.full.jpg
 graxiplon.jpg	http://[server]/ON/Graxiplon.full.jpg
 gray_ogre.jpg	http://[server]/4E/Gray%20Ogre.full.jpg
-graypelt_refuge.jpg	http://pics.slightlymagic.net/ZEN/Graypelt%20Refuge.full.jpg
+graypelt_refuge.jpg	http://[server]/ZEN/Graypelt%20Refuge.full.jpg
 grayscaled_gharial.jpg	http://[server]/RAV/Grayscaled%20Gharial.full.jpg
-grazing_gladehart.jpg	http://pics.slightlymagic.net/ZEN/Grazing%20Gladehart.full.jpg
+grazing_gladehart.jpg	http://[server]/ZEN/Grazing%20Gladehart.full.jpg
 grazing_kelpie.jpg	http://[server]/EVE/Grazing%20Kelpie.full.jpg
 great_defender.jpg	http://[server]/LG/Great%20Defender.full.jpg
 great_furnace.jpg	http://[server]/MR/Great%20Furnace.full.jpg
@@ -470,7 +470,7 @@ green_scarab.jpg	http://[server]/IA/Green%20Scarab.full.jpg
 green_ward.jpg	http://[server]/4E/Green%20Ward.full.jpg
 greener_pastures.jpg	http://[server]/US/Greener%20Pastures.full.jpg
 greenseeker.jpg	http://[server]/TSP/Greenseeker.full.jpg
-greenweaver_druid.jpg	http://pics.slightlymagic.net/ZEN/Greenweaver%20Druid.full.jpg
+greenweaver_druid.jpg	http://[server]/ZEN/Greenweaver%20Druid.full.jpg
 greven_il_vec.jpg	http://[server]/VG/Greven%20il-Vec.full.jpg
 grid_monitor.jpg	http://[server]/MR/Grid%20Monitor.full.jpg
 grief_tyrant.jpg	http://[server]/SHM/Grief%20Tyrant.full.jpg
@@ -478,7 +478,7 @@ griffin_canyon.jpg	http://[server]/VI/Griffin%20Canyon.full.jpg
 griffin_guide.jpg	http://[server]/TSP/Griffin%20Guide.full.jpg
 griffin_sentinel.jpg	http://[server]/M10/Griffin%20Sentinel.full.jpg
 grifters_blade.jpg	http://[server]/RAV/Grifter's%20Blade.full.jpg
-grim_discovery.jpg	http://pics.slightlymagic.net/ZEN/Grim%20Discovery.full.jpg
+grim_discovery.jpg	http://[server]/ZEN/Grim%20Discovery.full.jpg
 grim_feast.jpg	http://[server]/MI/Grim%20Feast.full.jpg
 grim_harvest.jpg	http://[server]/CS/Grim%20Harvest.full.jpg
 grim_lavamancer.jpg	http://[server]/TO/Grim%20Lavamancer.full.jpg
@@ -561,8 +561,8 @@ gustrider_exuberant.jpg	http://[server]/ALA/Gustrider%20Exuberant.full.jpg
 gutless_ghoul.jpg	http://[server]/CS/Gutless%20Ghoul.full.jpg
 guttural_response.jpg	http://[server]/SHM/Guttural%20Response.full.jpg
 gutwrencher_oni.jpg	http://[server]/CHK/Gutwrencher%20Oni.full.jpg
-guul_draz_specter.jpg	http://pics.slightlymagic.net/ZEN/Guul%20Draz%20Specter.full.jpg
-guul_draz_vampire.jpg	http://pics.slightlymagic.net/ZEN/Guul%20Draz%20Vampire.full.jpg
+guul_draz_specter.jpg	http://[server]/ZEN/Guul%20Draz%20Specter.full.jpg
+guul_draz_vampire.jpg	http://[server]/ZEN/Guul%20Draz%20Vampire.full.jpg
 gwafa_hazid_profiteer.jpg	http://[server]/CFX/Gwafa%20Hazid,%20Profiteer.full.jpg
 gwendlyn_di_corci.jpg	http://[server]/LG/Gwendlyn%20Di%20Corci.full.jpg
 gwyllion_hedge_mage.jpg	http://[server]/EVE/Gwyllion%20Hedge-Mage.full.jpg

@@ -3758,9 +3758,6 @@ public class GameActionUtil
 		AllZone.Stack.add(ability);
 	}
 	
-	
-	
-	
 	//***ENCHANTMENTS END HERE***
 	
 	public static void executeLandfallEffects(Card c)
@@ -3777,6 +3774,8 @@ public class GameActionUtil
 			landfall_Lotus_Cobra(c);
 		else if (c.getName().equals("Hedron Crab"))
 			landfall_Hedron_Crab(c);
+		else if (c.getName().equals("Bloodghast"))
+			landfall_Bloodghast(c);
 	}
 	
 	private static boolean showLandfallDialog(Card c)
@@ -3998,6 +3997,40 @@ public class GameActionUtil
 	         
 	      }
 	   }//landfall_Hedron_Crab
+	
+	private static void landfall_Bloodghast(Card c)
+	{
+		PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getController());
+		if (!AllZone.GameAction.isCardInZone(c, grave))
+			return;
+		
+		final Card crd = c;
+		Ability ability = new Ability(c, "0")
+		{
+			public void resolve()
+			{
+				PlayerZone play = AllZone.getZone(Constant.Zone.Play, crd.getController());
+				PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, crd.getController());
+				
+				if (AllZone.GameAction.isCardInZone(crd, grave))
+				{
+					grave.remove(crd);
+					play.add(crd);
+				}
+			}
+		};
+		
+		ability.setStackDescription(c + " - return Bloodghast from your graveyard to the battlefield.");
+		
+		if (c.getController().equals(Constant.Player.Human)) {
+				if (showLandfallDialog(c))
+					AllZone.Stack.add(ability);
+		}
+		else if (c.getController().equals(Constant.Player.Computer)) {
+	    	  AllZone.Stack.add(ability);     
+	    }
+			
+	}//landfall_Bloodghast
 
 	public static void executeLifeLinkEffects(Card c)
 	{
@@ -10926,6 +10959,35 @@ public class GameActionUtil
 		}
 	};
 	
+	public static Command Bloodghast = new Command()
+	{
+		private static final long serialVersionUID = -4252257530318024113L;
+
+		public void execute()
+		{
+			// get all creatures
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Bloodghast");
+
+			for (int i = 0; i < list.size(); i++)
+			{
+				Card c = list.get(i);
+				if (oppLess10Life(c) && !c.getIntrinsicKeyword().contains("Haste"))
+					c.addIntrinsicKeyword("Haste");
+				else
+					c.removeIntrinsicKeyword("Haste");
+			}
+		}// execute()
+
+		//does opponent have 10 or less life?
+		private boolean oppLess10Life(Card c)
+		{
+			String opp = AllZone.GameAction.getOpponent(c.getController());
+			return AllZone.GameAction.getPlayerLife(opp).getLife() <= 10;
+		}
+	};
 	
 	public static Command Kird_Ape = new Command()
 	{
@@ -16155,6 +16217,7 @@ public class GameActionUtil
 		commands.put("Wild_Nacatl", Wild_Nacatl);
 		commands.put("Liu_Bei", Liu_Bei);
 		commands.put("Mystic_Enforcer", Mystic_Enforcer);
+		commands.put("Bloodghast", Bloodghast);
 		commands.put("Bant_Sureblade", Bant_Sureblade);
 		commands.put("Esper_Stormblade", Esper_Stormblade);
 		commands.put("Grixis_Grimblade", Grixis_Grimblade);

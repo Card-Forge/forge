@@ -1,7 +1,7 @@
 vacuumelt.jpg	http://[server]/GP/Vacuumelt.full.jpg
 vaevictis_asmadi.jpg	http://[server]/LG/Vaevictis%20Asmadi.full.jpg
 vagrant_plowbeasts.jpg	http://[server]/CFX/Vagrant%20Plowbeasts.full.jpg
-valakut_the_molten_pinnacle.jpg	http://pics.slightlymagic.net/ZEN/Valakut,%20the%20Molten%20Pinnacle.full.jpg
+valakut_the_molten_pinnacle.jpg	http://[server]/ZEN/Valakut,%20the%20Molten%20Pinnacle.full.jpg
 valeron_outlander.jpg	http://[server]/CFX/Valeron%20Outlander.full.jpg
 valiant_guard.jpg	http://[server]/CFX/Valiant%20Guard.full.jpg
 valley_rannet.jpg	http://[server]/ARB/Valley%20Rannet.full.jpg
@@ -11,12 +11,12 @@ valor_made_real.jpg	http://[server]/DIS/Valor%20Made%20Real.full.jpg
 valorous_charge.jpg	http://[server]/PT/Valorous%20Charge.full.jpg
 vampire_aristocrat.jpg	http://[server]/M10/Vampire%20Aristocrat.full.jpg
 vampire_bats.jpg	http://[server]/10E/Vampire%20Bats.full.jpg
-vampire_hexmage.jpg	http://pics.slightlymagic.net/ZEN/Vampire%20Hexmage.full.jpg
+vampire_hexmage.jpg	http://[server]/ZEN/Vampire%20Hexmage.full.jpg
 vampire_hounds.jpg	http://[server]/EX/Vampire%20Hounds.full.jpg
-vampire_lacerator.jpg	http://pics.slightlymagic.net/ZEN/Vampire%20Lacerator.full.jpg
-vampire_nighthawk.jpg	http://pics.slightlymagic.net/ZEN/Vampire%20Nighthawk.full.jpg
+vampire_lacerator.jpg	http://[server]/ZEN/Vampire%20Lacerator.full.jpg
+vampire_nighthawk.jpg	http://[server]/ZEN/Vampire%20Nighthawk.full.jpg
 vampire_nocturnus.jpg	http://[server]/M10/Vampire%20Nocturnus.full.jpg
-vampires_bite.jpg	http://pics.slightlymagic.net/ZEN/Vampire's%20Bite.full.jpg
+vampires_bite.jpg	http://[server]/ZEN/Vampire's%20Bite.full.jpg
 vampiric_dragon.jpg	http://[server]/OD/Vampiric%20Dragon.full.jpg
 vampiric_embrace.jpg	http://[server]/US/Vampiric%20Embrace.full.jpg
 vampiric_feast.jpg	http://[server]/PT/Vampiric%20Feast.full.jpg
@@ -33,7 +33,7 @@ vaporous_djinn.jpg	http://[server]/MI/Vaporous%20Djinn.full.jpg
 varchilds_crusader.jpg	http://[server]/AL/Varchild's%20Crusader1.full.jpg
 varchilds_war_riders.jpg	http://[server]/AL/Varchild's%20War-Riders.full.jpg
 vassals_duty.jpg	http://[server]/CHK/Vassal's%20Duty.full.jpg
-vastwood_gorger.jpg	http://pics.slightlymagic.net/ZEN/Vastwood%20Gorger.full.jpg
+vastwood_gorger.jpg	http://[server]/ZEN/Vastwood%20Gorger.full.jpg
 vault_of_whispers.jpg	http://[server]/MR/Vault%20of%20Whispers.full.jpg
 vebulid.jpg	http://[server]/US/Vebulid.full.jpg
 vec_townships.jpg	http://[server]/TE/Vec%20Townships.full.jpg
@@ -85,7 +85,7 @@ venser_shaper_savant.jpg	http://[server]/FUT/Venser,%20Shaper%20Savant.full.jpg
 vensers_diffusion.jpg	http://[server]/FUT/Venser's%20Diffusion.full.jpg
 vensers_sliver.jpg	http://[server]/TSP/Venser's%20Sliver.full.jpg
 ventifact_bottle.jpg	http://[server]/MI/Ventifact%20Bottle.full.jpg
-verdant_catacombs.jpg	http://pics.slightlymagic.net/ZEN/Verdant%20Catacombs.full.jpg
+verdant_catacombs.jpg	http://[server]/ZEN/Verdant%20Catacombs.full.jpg
 verdant_eidolon.jpg	http://[server]/DIS/Verdant%20Eidolon.full.jpg
 verdant_embrace.jpg	http://[server]/TSP/Verdant%20Embrace.full.jpg
 verdant_field.jpg	http://[server]/PY/Verdant%20Field.full.jpg
@@ -169,7 +169,7 @@ vine_dryad.jpg	http://[server]/MM/Vine%20Dryad.full.jpg
 vine_kami.jpg	http://[server]/CHK/Vine%20Kami.full.jpg
 vine_trellis.jpg	http://[server]/8E/Vine%20Trellis.full.jpg
 vinelasher_kudzu.jpg	http://[server]/RAV/Vinelasher%20Kudzu.full.jpg
-vines_of_vastwood.jpg	http://pics.slightlymagic.net/ZEN/Vines%20of%20Vastwood.full.jpg
+vines_of_vastwood.jpg	http://[server]/ZEN/Vines%20of%20Vastwood.full.jpg
 vintara_elephant.jpg	http://[server]/PY/Vintara%20Elephant.full.jpg
 vintara_snapper.jpg	http://[server]/PY/Vintara%20Snapper.full.jpg
 violent_eruption.jpg	http://[server]/TO/Violent%20Eruption.full.jpg

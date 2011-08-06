@@ -18317,7 +18317,7 @@ public class CardFactory_Creatures {
 			      {
 			        public void resolve()
 			        {
-			        	  AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(6);
+			        	AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(6);
 			        }//resolve()
 			      };
 
@@ -18371,6 +18371,43 @@ public class CardFactory_Creatures {
 
 			      card.addComesIntoPlayCommand(commandComes);
 			      card.addLeavesPlayCommand(commandLeavesPlay);
+		    	  
+		      }//*************** END ************ END **************************
+	       
+	       //*************** START *********** START **************************
+		      else if (cardName.equals("Malakir Bloodwitch"))
+		      {
+		    	  final SpellAbility abilityComes = new Ability(card, "0")
+			      {
+			        public void resolve()
+			        {
+			        	PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+			        	CardList list = new CardList(play.getCards());
+			        	list = list.filter(new CardListFilter(){
+			        		public boolean addCard(Card c)
+			        		{
+			        			return c.getType().contains("Vampire") || c.getKeyword().contains("Changeling");
+			        		}
+			        	});
+			        	int drain = list.size(); 
+			        	AllZone.GameAction.getPlayerLife(AllZone.GameAction.getOpponent(card.getController())).subtractLife(drain);
+			        	AllZone.GameAction.getPlayerLife(card.getController()).addLife(drain);
+			        	
+			        }//resolve()
+			      };
+			      abilityComes.setStackDescription(card + " - Opponent loses life equal to the number of Vampires you control. You gain life equal to the life lost this way.");
+
+			      Command commandComes = new Command()
+			      {
+					private static final long serialVersionUID = 6375360999823102355L;
+
+					public void execute()
+			        {
+			            AllZone.Stack.add(abilityComes);
+			        }//execute()
+			      };//CommandComes
+
+			      card.addComesIntoPlayCommand(commandComes);
 		    	  
 		      }//*************** END ************ END **************************
 	       

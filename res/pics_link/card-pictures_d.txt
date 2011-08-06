@@ -99,7 +99,7 @@ dawnray_archer.jpg	http://[server]/ALA/Dawnray%20Archer.full.jpg
 dawns_reflection.jpg	http://[server]/FD/Dawn's%20Reflection.full.jpg
 dawnstrider.jpg	http://[server]/MM/Dawnstrider.full.jpg
 day_of_destiny.jpg	http://[server]/BOK/Day%20of%20Destiny.full.jpg
-day_of_judgment.jpg	http://pics.slightlymagic.net/ZEN/Day%20of%20Judgment.full.jpg
+day_of_judgment.jpg	http://[server]/ZEN/Day%20of%20Judgment.full.jpg
 day_of_the_dragons.jpg	http://[server]/SC/Day%20of%20the%20Dragons.full.jpg
 daybreak_coronet.jpg	http://[server]/FUT/Daybreak%20Coronet.full.jpg
 daze.jpg	http://[server]/NE/Daze.full.jpg
@@ -251,7 +251,7 @@ dermoplasm.jpg	http://[server]/LE/Dermoplasm.full.jpg
 descendant_of_kiyomaro.jpg	http://[server]/SOK/Descendant%20of%20Kiyomaro.full.jpg
 descendant_of_masumaro.jpg	http://[server]/SOK/Descendant%20of%20Masumaro.full.jpg
 descendant_of_soramaro.jpg	http://[server]/SOK/Descendant%20of%20Soramaro.full.jpg
-desecrated_earth.jpg	http://pics.slightlymagic.net/ZEN/Desecrated%20Earth.full.jpg
+desecrated_earth.jpg	http://[server]/ZEN/Desecrated%20Earth.full.jpg
 desecration_elemental.jpg	http://[server]/FD/Desecration%20Elemental.full.jpg
 desecrator_hag.jpg	http://[server]/EVE/Desecrator%20Hag.full.jpg
 desert.jpg	http://[server]/AN/Desert.full.jpg
@@ -291,7 +291,7 @@ devouring_light.jpg	http://[server]/RAV/Devouring%20Light.full.jpg
 devouring_rage.jpg	http://[server]/CHK/Devouring%20Rage.full.jpg
 devouring_strossus.jpg	http://[server]/IN/Devouring%20Strossus.full.jpg
 devout_harpist.jpg	http://[server]/UL/Devout%20Harpist.full.jpg
-devout_lightcaster.jpg	http://pics.slightlymagic.net/ZEN/Devout%20Lightcaster.full.jpg
+devout_lightcaster.jpg	http://[server]/ZEN/Devout%20Lightcaster.full.jpg
 devout_monk.jpg	http://[server]/ST/Devout%20Monk.full.jpg
 devout_witness.jpg	http://[server]/MM/Devout%20Witness.full.jpg
 dewdrop_spy.jpg	http://[server]/MOR/Dewdrop%20Spy.full.jpg
@@ -346,7 +346,7 @@ disembowel.jpg	http://[server]/RAV/Disembowel.full.jpg
 disempower.jpg	http://[server]/MI/Disempower.full.jpg
 disenchant.jpg	http://[server]/7E/Disenchant.full.jpg
 disentomb.jpg	http://[server]/M10/Disentomb.full.jpg
-disfigure.jpg	http://pics.slightlymagic.net/ZEN/Disfigure.full.jpg
+disfigure.jpg	http://[server]/ZEN/Disfigure.full.jpg
 disharmony.jpg	http://[server]/LG/Disharmony.full.jpg
 disintegrate.jpg	http://[server]/5E/Disintegrate.full.jpg
 dismal_failure.jpg	http://[server]/PLC/Dismal%20Failure.full.jpg

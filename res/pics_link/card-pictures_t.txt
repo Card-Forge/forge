@@ -15,7 +15,7 @@ tainted_specter.jpg	http://[server]/MI/Tainted%20Specter.full.jpg
 tainted_well.jpg	http://[server]/IN/Tainted%20Well.full.jpg
 tainted_wood.jpg	http://[server]/TO/Tainted%20Wood.full.jpg
 taj_nar_swordsmith.jpg	http://[server]/MR/Taj-Nar%20Swordsmith.full.jpg
-tajuru_archer.jpg	http://pics.slightlymagic.net/ZEN/Tajuru%20Archer.full.jpg
+tajuru_archer.jpg	http://[server]/ZEN/Tajuru%20Archer.full.jpg
 takara.jpg	http://[server]/VG/Takara.full.jpg
 take_possession.jpg	http://[server]/FUT/Take%20Possession.full.jpg
 takeno_samurai_general.jpg	http://[server]/CHK/Takeno,%20Samurai%20General.full.jpg
@@ -52,7 +52,7 @@ tangle_spider.jpg	http://[server]/10E/Tangle%20Spider.full.jpg
 tangle_wire.jpg	http://[server]/NE/Tangle%20Wire.full.jpg
 tanglebloom.jpg	http://[server]/9E/Tanglebloom.full.jpg
 tangleroot.jpg	http://[server]/MR/Tangleroot.full.jpg
-tanglesap.jpg	http://pics.slightlymagic.net/ZEN/Tanglesap.full.jpg
+tanglesap.jpg	http://[server]/ZEN/Tanglesap.full.jpg
 tanglewalker.jpg	http://[server]/DS/Tanglewalker.full.jpg
 taniwha.jpg	http://[server]/MI/Taniwha.full.jpg
 taoist_hermit.jpg	http://[server]/P3/Taoist%20Hermit.full.jpg
@@ -92,7 +92,7 @@ tectonic_break.jpg	http://[server]/MM/Tectonic%20Break.full.jpg
 tectonic_fiend.jpg	http://[server]/TSP/Tectonic%20Fiend.full.jpg
 tectonic_instability.jpg	http://[server]/IN/Tectonic%20Instability.full.jpg
 teekas_dragon.jpg	http://[server]/MI/Teeka's%20Dragon.full.jpg
-teetering_peaks.jpg	http://pics.slightlymagic.net/ZEN/Teetering%20Peaks.full.jpg
+teetering_peaks.jpg	http://[server]/ZEN/Teetering%20Peaks.full.jpg
 teferi_mage_of_zhalfir.jpg	http://[server]/TSP/Teferi,%20Mage%20of%20Zhalfir.full.jpg
 teferis_care.jpg	http://[server]/IN/Teferi's%20Care.full.jpg
 teferis_curse.jpg	http://[server]/MI/Teferi's%20Curse.full.jpg
@@ -132,7 +132,7 @@ temper.jpg	http://[server]/SH/Temper.full.jpg
 tempest_drake.jpg	http://[server]/VI/Tempest%20Drake.full.jpg
 tempest_efreet.jpg	http://[server]/4E/Tempest%20Efreet.full.jpg
 tempest_of_light.jpg	http://[server]/M10/Tempest%20of%20Light.full.jpg
-tempest_owl.jpg	http://pics.slightlymagic.net/ZEN/Tempest%20Owl.full.jpg
+tempest_owl.jpg	http://[server]/ZEN/Tempest%20Owl.full.jpg
 temple_acolyte.jpg	http://[server]/P2/Temple%20Acolyte.full.jpg
 temple_elder.jpg	http://[server]/P2/Temple%20Elder.full.jpg
 temple_garden.jpg	http://[server]/RAV/Temple%20Garden.full.jpg
@@ -166,13 +166,13 @@ terminal_moraine.jpg	http://[server]/PS/Terminal%20Moraine.full.jpg
 terminate.jpg	http://[server]/PS/Terminate.full.jpg
 terohs_faithful.jpg	http://[server]/TO/Teroh's%20Faithful.full.jpg
 terohs_vanguard.jpg	http://[server]/TO/Teroh's%20Vanguard.full.jpg
-terra_stomper.jpg	http://pics.slightlymagic.net/ZEN/Terra%20Stomper.full.jpg
+terra_stomper.jpg	http://[server]/ZEN/Terra%20Stomper.full.jpg
 terraformer.jpg	http://[server]/RAV/Terraformer.full.jpg
 terrain_generator.jpg	http://[server]/NE/Terrain%20Generator.full.jpg
 terramorphic_expanse.jpg	http://[server]/M10/Terramorphic%20Expanse.full.jpg
 terrarion.jpg	http://[server]/RAV/Terrarion.full.jpg
 terravore.jpg	http://[server]/OD/Terravore.full.jpg
-territorial_baloth.jpg	http://pics.slightlymagic.net/ZEN/Territorial%20Baloth.full.jpg
+territorial_baloth.jpg	http://[server]/ZEN/Territorial%20Baloth.full.jpg
 territorial_dispute.jpg	http://[server]/MM/Territorial%20Dispute.full.jpg
 terror.jpg	http://[server]/10E/Terror.full.jpg
 test_of_endurance.jpg	http://[server]/JU/Test%20of%20Endurance.full.jpg
@@ -360,7 +360,7 @@ timber_wolves.jpg	http://[server]/4E/Timber%20Wolves.full.jpg
 timberland_ruins.jpg	http://[server]/OD/Timberland%20Ruins.full.jpg
 timberline_ridge.jpg	http://[server]/IA/Timberline%20Ridge.full.jpg
 timbermare.jpg	http://[server]/PLC/Timbermare.full.jpg
-timbermaw_larva.jpg	http://pics.slightlymagic.net/ZEN/Timbermaw%20Larva.full.jpg
+timbermaw_larva.jpg	http://[server]/ZEN/Timbermaw%20Larva.full.jpg
 timberwatch_elf.jpg	http://[server]/LE/Timberwatch%20Elf.full.jpg
 time_and_tide.jpg	http://[server]/VI/Time%20and%20Tide.full.jpg
 time_bomb.jpg	http://[server]/5E/Time%20Bomb.full.jpg
@@ -431,7 +431,7 @@ topsy_turvy.jpg	http://[server]/UNH/Topsy%20Turvy.full.jpg
 tor_giant.jpg	http://[server]/IA/Tor%20Giant.full.jpg
 tor_wauki.jpg	http://[server]/LG/Tor%20Wauki.full.jpg
 torch_drake.jpg	http://[server]/GP/Torch%20Drake.full.jpg
-torch_slinger.jpg	http://pics.slightlymagic.net/ZEN/Torch%20Slinger.full.jpg
+torch_slinger.jpg	http://[server]/ZEN/Torch%20Slinger.full.jpg
 torch_song.jpg	http://[server]/US/Torch%20Song.full.jpg
 torchling.jpg	http://[server]/PLC/Torchling.full.jpg
 torii_watchward.jpg	http://[server]/SOK/Torii%20Watchward.full.jpg
@@ -487,7 +487,7 @@ trade_secrets.jpg	http://[server]/ON/Trade%20Secrets.full.jpg
 tradewind_rider.jpg	http://[server]/TE/Tradewind%20Rider.full.jpg
 tragic_poet.jpg	http://[server]/UL/Tragic%20Poet.full.jpg
 trailblazer.jpg	http://[server]/IA/Trailblazer.full.jpg
-trailblazers_boots.jpg	http://pics.slightlymagic.net/ZEN/Trailblazer's%20Boots.full.jpg
+trailblazers_boots.jpg	http://[server]/ZEN/Trailblazer's%20Boots.full.jpg
 train_of_thought.jpg	http://[server]/GP/Train%20of%20Thought.full.jpg
 trained_armodon.jpg	http://[server]/9E/Trained%20Armodon.full.jpg
 trained_cheetah.jpg	http://[server]/P3/Trained%20Cheetah.full.jpg
@@ -510,9 +510,9 @@ transmutation.jpg	http://[server]/LG/Transmutation.full.jpg
 transmute_artifact.jpg	http://[server]/AQ/Transmute%20Artifact.full.jpg
 trap_digger.jpg	http://[server]/SC/Trap%20Digger.full.jpg
 trap_runner.jpg	http://[server]/MM/Trap%20Runner.full.jpg
-trapfinders_trick.jpg	http://pics.slightlymagic.net/ZEN/Trapfinder's%20Trick.full.jpg
+trapfinders_trick.jpg	http://[server]/ZEN/Trapfinder's%20Trick.full.jpg
 trapjaw_kelpie.jpg	http://[server]/EVE/Trapjaw%20Kelpie.full.jpg
-trapmakers_snare.jpg	http://pics.slightlymagic.net/ZEN/Trapmaker's%20Snare.full.jpg
+trapmakers_snare.jpg	http://[server]/ZEN/Trapmaker's%20Snare.full.jpg
 traproot_kami.jpg	http://[server]/BOK/Traproot%20Kami.full.jpg
 trash_for_treasure.jpg	http://[server]/MR/Trash%20for%20Treasure.full.jpg
 traumatic_visions.jpg	http://[server]/CFX/Traumatic%20Visions.full.jpg
@@ -582,7 +582,7 @@ true_believer.jpg	http://[server]/10E/True%20Believer.full.jpg
 trumpet_blast.jpg	http://[server]/M10/Trumpet%20Blast.full.jpg
 trumpeting_armodon.jpg	http://[server]/TE/Trumpeting%20Armodon.full.jpg
 trusted_advisor.jpg	http://[server]/SOK/Trusted%20Advisor.full.jpg
-trusty_machete.jpg	http://pics.slightlymagic.net/ZEN/Trusty%20Machete.full.jpg
+trusty_machete.jpg	http://[server]/ZEN/Trusty%20Machete.full.jpg
 truth_or_tale.jpg	http://[server]/TSP/Truth%20or%20Tale.full.jpg
 trygon_predator.jpg	http://[server]/DIS/Trygon%20Predator.full.jpg
 tsabo_tavoc.jpg	http://[server]/IN/Tsabo%20Tavoc.full.jpg
@@ -592,7 +592,7 @@ tsabos_web.jpg	http://[server]/IN/Tsabo's%20Web.full.jpg
 tsunami.jpg	http://[server]/5E/Tsunami.full.jpg
 tukatongue_thallid.jpg	http://[server]/CFX/Tukatongue%20Thallid.full.jpg
 tuknir_deathlock.jpg	http://[server]/LG/Tuknir%20Deathlock.full.jpg
-tuktuk_grunts.jpg	http://pics.slightlymagic.net/ZEN/Tuktuk%20Grunts.full.jpg
+tuktuk_grunts.jpg	http://[server]/ZEN/Tuktuk%20Grunts.full.jpg
 tundra.jpg	http://[server]/U/Tundra.full.jpg
 tundra_kavu.jpg	http://[server]/AP/Tundra%20Kavu.full.jpg
 tundra_wolves.jpg	http://[server]/10E/Tundra%20Wolves.full.jpg
@@ -605,9 +605,9 @@ turn_the_tables.jpg	http://[server]/DS/Turn%20the%20Tables.full.jpg
 turn_to_dust.jpg	http://[server]/MR/Turn%20to%20Dust.full.jpg
 turn_to_mist.jpg	http://[server]/SHM/Turn%20to%20Mist.full.jpg
 turnabout.jpg	http://[server]/US/Turnabout.full.jpg
-turntimber_basilisk.jpg	http://pics.slightlymagic.net/ZEN/Turntimber%20Basilisk.full.jpg
-turntimber_grove.jpg	http://pics.slightlymagic.net/ZEN/Turntimber%20Grove.full.jpg
-turntimber_ranger.jpg	http://pics.slightlymagic.net/ZEN/Turntimber%20Ranger.full.jpg
+turntimber_basilisk.jpg	http://[server]/ZEN/Turntimber%20Basilisk.full.jpg
+turntimber_grove.jpg	http://[server]/ZEN/Turntimber%20Grove.full.jpg
+turntimber_ranger.jpg	http://[server]/ZEN/Turntimber%20Ranger.full.jpg
 turtleshell_changeling.jpg	http://[server]/LRW/Turtleshell%20Changeling.full.jpg
 twiddle.jpg	http://[server]/8E/Twiddle.full.jpg
 twigwalker.jpg	http://[server]/OD/Twigwalker.full.jpg

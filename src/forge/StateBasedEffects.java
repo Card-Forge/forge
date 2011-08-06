@@ -61,6 +61,7 @@ public class StateBasedEffects
 		cardToEffectsList.put("Hedge Troll", new String[] {"Hedge_Troll"});
 		cardToEffectsList.put("Wild Nacatl", new String[] {"Wild_Nacatl"});
 		cardToEffectsList.put("Liu Bei, Lord of Shu", new String[] {"Liu_Bei"});
+		cardToEffectsList.put("Bloodghast", new String[] {"Bloodghast"});
 		cardToEffectsList.put("Bant Sureblade", new String[] {"Bant_Sureblade"});
 		cardToEffectsList.put("Esper Stormblade", new String[] {"Esper_Stormblade"});
 		cardToEffectsList.put("Grixis Grimblade", new String[] {"Grixis_Grimblade"});

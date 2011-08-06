@@ -71,11 +71,11 @@ jolraels_centaur.jpg	http://[server]/MI/Jolrael's%20Centaur.full.jpg
 jolraels_favor.jpg	http://[server]/PY/Jolrael's%20Favor.full.jpg
 jolt.jpg	http://[server]/MI/Jolt.full.jpg
 jolting_merfolk.jpg	http://[server]/NE/Jolting%20Merfolk.full.jpg
-joraga_bard.jpg	http://pics.slightlymagic.net/ZEN/Joraga%20Bard.full.jpg
+joraga_bard.jpg	http://[server]/ZEN/Joraga%20Bard.full.jpg
 jotun_grunt.jpg	http://[server]/CS/Jotun%20Grunt.full.jpg
 jotun_owl_keeper.jpg	http://[server]/CS/Jotun%20Owl%20Keeper.full.jpg
 journey_of_discovery.jpg	http://[server]/MR/Journey%20of%20Discovery.full.jpg
-journey_to_nowhere.jpg	http://pics.slightlymagic.net/ZEN/Journey%20to%20Nowhere.full.jpg
+journey_to_nowhere.jpg	http://[server]/ZEN/Journey%20to%20Nowhere.full.jpg
 journeyers_kite.jpg	http://[server]/CHK/Journeyer's%20Kite.full.jpg
 joven.jpg	http://[server]/HL/Joven.full.jpg
 jovens_ferrets.jpg	http://[server]/HL/Joven's%20Ferrets.full.jpg
@@ -118,4 +118,4 @@ justice.jpg	http://[server]/5E/Justice.full.jpg
 juvenile_gloomwidow.jpg	http://[server]/SHM/Juvenile%20Gloomwidow.full.jpg
 juxtapose.jpg	http://[server]/LG/Juxtapose.full.jpg
 juzam_djinn.jpg	http://[server]/AN/Juzam%20Djinn.full.jpg
-jwar_isle_refuge.jpg	http://pics.slightlymagic.net/ZEN/Jwar%20Isle%20Refuge.full.jpg
+jwar_isle_refuge.jpg	http://[server]/ZEN/Jwar%20Isle%20Refuge.full.jpg

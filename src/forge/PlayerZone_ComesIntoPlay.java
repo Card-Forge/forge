@@ -46,19 +46,34 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone
 			c.comesIntoPlay();
 			
 			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
-			
+			PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getController());
 			
 			if (c.isLand())
 			{
 				//System.out.println("A land just came into play: " + c.getName());
 				
 				CardList list = new CardList(play.getCards());
+				CardList graveList = new CardList(grave.getCards());
+				
 				list = list.filter(new CardListFilter()
 				{
 					public boolean addCard(Card c) {
 						return c.getKeyword().contains("Landfall");
 					}
 				});
+				
+				graveList = graveList.filter(new CardListFilter()
+				{
+					public boolean addCard(Card c)
+					{
+						return c.getName().equals("Bloodghast");
+					}
+				});
+				
+				for (Card crd : graveList)
+				{
+					list.add(crd);
+				}
 				
 				for (int i=0; i<list.size();i++)
 				{

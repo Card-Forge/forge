@@ -6,7 +6,7 @@ uktabi_kong.jpg	http://[server]/UNH/Uktabi%20Kong.full.jpg
 uktabi_orangutan.jpg	http://[server]/6E/Uktabi%20Orangutan.full.jpg
 uktabi_wildcats.jpg	http://[server]/7E/Uktabi%20Wildcats.full.jpg
 ulasht_the_hate_seed.jpg	http://[server]/GP/Ulasht,%20the%20Hate%20Seed.full.jpg
-umara_raptor.jpg	http://pics.slightlymagic.net/ZEN/Umara%20Raptor.full.jpg
+umara_raptor.jpg	http://[server]/ZEN/Umara%20Raptor.full.jpg
 umbilicus.jpg	http://[server]/US/Umbilicus.full.jpg
 umbra_stalker.jpg	http://[server]/EVE/Umbra%20Stalker.full.jpg
 umbral_mantle.jpg	http://[server]/SHM/Umbral%20Mantle.full.jpg
@@ -59,7 +59,7 @@ unquestioned_authority.jpg	http://[server]/JU/Unquestioned%20Authority.full.jpg
 unscythe_killer_of_kings.jpg	http://[server]/ARB/Unscythe,%20Killer%20of%20Kings.full.jpg
 unseen_walker.jpg	http://[server]/6E/Unseen%20Walker.full.jpg
 unspeakable_symbol.jpg	http://[server]/SC/Unspeakable%20Symbol.full.jpg
-unstable_footing.jpg	http://pics.slightlymagic.net/ZEN/Unstable%20Footing.full.jpg
+unstable_footing.jpg	http://[server]/ZEN/Unstable%20Footing.full.jpg
 unstable_frontier.jpg	http://[server]/CFX/Unstable%20Frontier.full.jpg
 unstable_hulk.jpg	http://[server]/LE/Unstable%20Hulk.full.jpg
 unstable_mutation.jpg	http://[server]/5E/Unstable%20Mutation.full.jpg

@@ -27,7 +27,7 @@ nantuko_tracer.jpg	http://[server]/JU/Nantuko%20Tracer.full.jpg
 nantuko_vigilante.jpg	http://[server]/LE/Nantuko%20Vigilante.full.jpg
 narcissism.jpg	http://[server]/TO/Narcissism.full.jpg
 narcomoeba.jpg	http://[server]/FUT/Narcomoeba.full.jpg
-narrow_escape.jpg	http://pics.slightlymagic.net/ZEN/Narrow%20Escape.full.jpg
+narrow_escape.jpg	http://[server]/ZEN/Narrow%20Escape.full.jpg
 narwhal.jpg	http://[server]/HL/Narwhal.full.jpg
 nath_of_the_gilt_leaf.jpg	http://[server]/LRW/Nath%20of%20the%20Gilt-Leaf.full.jpg
 naths_buffoon.jpg	http://[server]/LRW/Nath's%20Buffoon.full.jpg
@@ -83,7 +83,7 @@ need_for_speed.jpg	http://[server]/OD/Need%20for%20Speed.full.jpg
 needle_drop.jpg	http://[server]/LRW/Needle%20Drop.full.jpg
 needle_specter.jpg	http://[server]/EVE/Needle%20Specter.full.jpg
 needle_storm.jpg	http://[server]/9E/Needle%20Storm.full.jpg
-needlebite_trap.jpg	http://pics.slightlymagic.net/ZEN/Needlebite%20Trap.full.jpg
+needlebite_trap.jpg	http://[server]/ZEN/Needlebite%20Trap.full.jpg
 needlebug.jpg	http://[server]/MR/Needlebug.full.jpg
 needlepeak_spider.jpg	http://[server]/PLC/Needlepeak%20Spider.full.jpg
 needleshot_gourna.jpg	http://[server]/LE/Needleshot%20Gourna.full.jpg
@@ -161,15 +161,15 @@ nim_lasher.jpg	http://[server]/MR/Nim%20Lasher.full.jpg
 nim_replica.jpg	http://[server]/MR/Nim%20Replica.full.jpg
 nim_shambler.jpg	http://[server]/MR/Nim%20Shambler.full.jpg
 nim_shrieker.jpg	http://[server]/MR/Nim%20Shrieker.full.jpg
-nimana_sell_sword.jpg	http://pics.slightlymagic.net/ZEN/Nimana%20Sell-Sword.full.jpg
+nimana_sell_sword.jpg	http://[server]/ZEN/Nimana%20Sell-Sword.full.jpg
 nimble_mongoose.jpg	http://[server]/OD/Nimble%20Mongoose.full.jpg
 nimbus_maze.jpg	http://[server]/FUT/Nimbus%20Maze.full.jpg
-nimbus_wings.jpg	http://pics.slightlymagic.net/ZEN/Nimbus%20Wings.full.jpg
+nimbus_wings.jpg	http://[server]/ZEN/Nimbus%20Wings.full.jpg
 nine_ringed_bo.jpg	http://[server]/CHK/Nine-Ringed%20Bo.full.jpg
 ninja_of_the_deep_hours.jpg	http://[server]/BOK/Ninja%20of%20the%20Deep%20Hours.full.jpg
 nip_gwyllion.jpg	http://[server]/EVE/Nip%20Gwyllion.full.jpg
-nissa_revane.jpg	http://pics.slightlymagic.net/ZEN/Nissa%20Revane.full.jpg
-nissas_chosen.jpg	http://pics.slightlymagic.net/ZEN/Nissa's%20Chosen.full.jpg
+nissa_revane.jpg	http://[server]/ZEN/Nissa%20Revane.full.jpg
+nissas_chosen.jpg	http://[server]/ZEN/Nissa's%20Chosen.full.jpg
 niv_mizzet_the_firemind.jpg	http://[server]/GP/Niv-Mizzet,%20the%20Firemind.full.jpg
 niveous_wisps.jpg	http://[server]/SHM/Niveous%20Wisps.full.jpg
 nivix_aerie_of_the_firemind.jpg	http://[server]/GP/Nivix,%20Aerie%20of%20the%20Firemind.full.jpg
@@ -187,7 +187,7 @@ noble_purpose.jpg	http://[server]/8E/Noble%20Purpose.full.jpg
 noble_stand.jpg	http://[server]/NE/Noble%20Stand.full.jpg
 noble_steeds.jpg	http://[server]/AL/Noble%20Steeds1.full.jpg
 noble_templar.jpg	http://[server]/SC/Noble%20Templar.full.jpg
-noble_vestige.jpg	http://pics.slightlymagic.net/ZEN/Noble%20Vestige.full.jpg
+noble_vestige.jpg	http://[server]/ZEN/Noble%20Vestige.full.jpg
 nocturnal_raid.jpg	http://[server]/7E/Nocturnal%20Raid.full.jpg
 noetic_scales.jpg	http://[server]/US/Noetic%20Scales.full.jpg
 noggin_whack.jpg	http://[server]/MOR/Noggin%20Whack.full.jpg

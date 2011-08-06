@@ -23,7 +23,7 @@ land_equilibrium.jpg	http://[server]/LG/Land%20Equilibrium.full.jpg
 land_grant.jpg	http://[server]/MM/Land%20Grant.full.jpg
 land_leeches.jpg	http://[server]/DK/Land%20Leeches.full.jpg
 land_tax.jpg	http://[server]/LG/Land%20Tax.full.jpg
-landbind_ritual.jpg	http://pics.slightlymagic.net/ZEN/Landbind%20Ritual.full.jpg
+landbind_ritual.jpg	http://[server]/ZEN/Landbind%20Ritual.full.jpg
 landfill.jpg	http://[server]/UG/Landfill.full.jpg
 lands_edge.jpg	http://[server]/LG/Land's%20Edge.full.jpg
 landslide.jpg	http://[server]/UD/Landslide.full.jpg
@@ -65,7 +65,7 @@ lava_spike.jpg	http://[server]/CHK/Lava%20Spike.full.jpg
 lava_storm.jpg	http://[server]/WL/Lava%20Storm.full.jpg
 lava_tubes.jpg	http://[server]/IA/Lava%20Tubes.full.jpg
 lava_zombie.jpg	http://[server]/PS/Lava%20Zombie.full.jpg
-lavaball_trap.jpg	http://pics.slightlymagic.net/ZEN/Lavaball%20Trap.full.jpg
+lavaball_trap.jpg	http://[server]/ZEN/Lavaball%20Trap.full.jpg
 lavaborn_muse.jpg	http://[server]/10E/Lavaborn%20Muse.full.jpg
 lavacore_elemental.jpg	http://[server]/PLC/Lavacore%20Elemental.full.jpg
 lavalanche.jpg	http://[server]/ARB/Lavalanche.full.jpg
@@ -115,7 +115,7 @@ leshracs_sigil.jpg	http://[server]/IA/Leshrac's%20Sigil.full.jpg
 lesser_gargadon.jpg	http://[server]/8E/Lesser%20Gargadon.full.jpg
 lesser_werewolf.jpg	http://[server]/LG/Lesser%20Werewolf.full.jpg
 lethal_vapors.jpg	http://[server]/SC/Lethal%20Vapors.full.jpg
-lethargy_trap.jpg	http://pics.slightlymagic.net/ZEN/Lethargy%20Trap.full.jpg
+lethargy_trap.jpg	http://[server]/ZEN/Lethargy%20Trap.full.jpg
 letter_bomb.jpg	http://[server]/UNH/Letter%20Bomb.full.jpg
 leveler.jpg	http://[server]/MR/Leveler.full.jpg
 leviathan.jpg	http://[server]/5E/Leviathan.full.jpg
@@ -221,7 +221,7 @@ living_inferno.jpg	http://[server]/GP/Living%20Inferno.full.jpg
 living_lands.jpg	http://[server]/6E/Living%20Lands.full.jpg
 living_plane.jpg	http://[server]/LG/Living%20Plane.full.jpg
 living_terrain.jpg	http://[server]/8E/Living%20Terrain.full.jpg
-living_tsunami.jpg	http://pics.slightlymagic.net/ZEN/Living%20Tsunami.full.jpg
+living_tsunami.jpg	http://[server]/ZEN/Living%20Tsunami.full.jpg
 living_wall.jpg	http://[server]/U/Living%20Wall.full.jpg
 living_wish.jpg	http://[server]/JU/Living%20Wish.full.jpg
 livonya_silone.jpg	http://[server]/LG/Livonya%20Silone.full.jpg
@@ -274,7 +274,7 @@ lord_of_the_undead.jpg	http://[server]/10E/Lord%20of%20the%20Undead.full.jpg
 lord_of_tresserhorn.jpg	http://[server]/AL/Lord%20of%20Tresserhorn.full.jpg
 lore_broker.jpg	http://[server]/RAV/Lore%20Broker.full.jpg
 lorescale_coatl.jpg	http://[server]/ARB/Lorescale%20Coatl.full.jpg
-lorthos_the_tidemaker.jpg	http://pics.slightlymagic.net/ZEN/Lorthos,%20the%20Tidemaker.full.jpg
+lorthos_the_tidemaker.jpg	http://[server]/ZEN/Lorthos,%20the%20Tidemaker.full.jpg
 lose_hope.jpg	http://[server]/FD/Lose%20Hope.full.jpg
 lost_auramancers.jpg	http://[server]/FUT/Lost%20Auramancers.full.jpg
 lost_hours.jpg	http://[server]/FUT/Lost%20Hours.full.jpg
@@ -283,7 +283,7 @@ lost_order_of_jarkeld.jpg	http://[server]/IA/Lost%20Order%20of%20Jarkeld.full.jp
 lost_soul.jpg	http://[server]/6E/Lost%20Soul.full.jpg
 lotus_bloom.jpg	http://[server]/TSP/Lotus%20Bloom.full.jpg
 lotus_blossom.jpg	http://[server]/US/Lotus%20Blossom.full.jpg
-lotus_cobra.jpg	http://pics.slightlymagic.net/ZEN/Lotus%20Cobra.full.jpg
+lotus_cobra.jpg	http://[server]/ZEN/Lotus%20Cobra.full.jpg
 lotus_guardian.jpg	http://[server]/IN/Lotus%20Guardian.full.jpg
 lotus_petal.jpg	http://[server]/TE/Lotus%20Petal.full.jpg
 lotus_vale.jpg	http://[server]/WL/Lotus%20Vale.full.jpg
@@ -310,12 +310,12 @@ lu_su_wu_advisor.jpg	http://[server]/P3/Lu%20Su,%20Wu%20Advisor.full.jpg
 lu_xun_scholar_general.jpg	http://[server]/P3/Lu%20Xun,%20Scholar%20General.full.jpg
 lucent_liminid.jpg	http://[server]/FUT/Lucent%20Liminid.full.jpg
 lull.jpg	http://[server]/US/Lull.full.jpg
-lullmage_mentor.jpg	http://pics.slightlymagic.net/ZEN/Lullmage%20Mentor.full.jpg
+lullmage_mentor.jpg	http://[server]/ZEN/Lullmage%20Mentor.full.jpg
 lumbering_satyr.jpg	http://[server]/MM/Lumbering%20Satyr.full.jpg
 lumengrid_augur.jpg	http://[server]/MR/Lumengrid%20Augur.full.jpg
 lumengrid_sentinel.jpg	http://[server]/MR/Lumengrid%20Sentinel.full.jpg
 lumengrid_warden.jpg	http://[server]/10E/Lumengrid%20Warden.full.jpg
-luminarch_ascension.jpg	http://pics.slightlymagic.net/ZEN/Luminarch%20Ascension.full.jpg
+luminarch_ascension.jpg	http://[server]/ZEN/Luminarch%20Ascension.full.jpg
 luminesce.jpg	http://[server]/10E/Luminesce.full.jpg
 luminescent_rain.jpg	http://[server]/MOR/Luminescent%20Rain.full.jpg
 luminous_angel.jpg	http://[server]/MR/Luminous%20Angel.full.jpg

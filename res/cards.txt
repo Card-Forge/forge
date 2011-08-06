@@ -1,3 +1,19 @@
+Bloodghast
+B B
+Creature Vampire Spirit
+Bloodghast has haste as long as an opponent has 10 or less life. Landfall - Whenever a land enters the battlefield under your control, you may return Bloodghast from your graveyard to the battlefield.
+2/1
+This creature cannot block
+Landfall
+
+Malakir Bloodwitch
+3 B B
+Creature Vampire Shaman
+When Malakir Bloodwitch enters the battlefield, each opponent loses life equal to the number of Vampires you control. You gain life equal to the life lost this way.
+4/4
+Flying
+Protection from white
+
 Goblin Guide
 R
 Creature Goblin

@@ -49,7 +49,7 @@ parallectric_feedback.jpg	http://[server]/GP/Parallectric%20Feedback.full.jpg
 parallel_evolution.jpg	http://[server]/TO/Parallel%20Evolution.full.jpg
 parallel_thoughts.jpg	http://[server]/SC/Parallel%20Thoughts.full.jpg
 paralyze.jpg	http://[server]/5E/Paralyze.full.jpg
-paralyzing_grasp.jpg	http://pics.slightlymagic.net/ZEN/Paralyzing%20Grasp.full.jpg
+paralyzing_grasp.jpg	http://[server]/ZEN/Paralyzing%20Grasp.full.jpg
 parapet.jpg	http://[server]/VI/Parapet.full.jpg
 parapet_watchers.jpg	http://[server]/SHM/Parapet%20Watchers.full.jpg
 parasitic_bond.jpg	http://[server]/US/Parasitic%20Bond.full.jpg
@@ -236,7 +236,7 @@ pillage.jpg	http://[server]/7E/Pillage.full.jpg
 pillaging_horde.jpg	http://[server]/PT/Pillaging%20Horde.full.jpg
 pillar_of_the_paruns.jpg	http://[server]/DIS/Pillar%20of%20the%20Paruns.full.jpg
 pillar_tombs_of_aku.jpg	http://[server]/VI/Pillar%20Tombs%20of%20Aku.full.jpg
-pillarfield_ox.jpg	http://pics.slightlymagic.net/ZEN/Pillarfield%20Ox.full.jpg
+pillarfield_ox.jpg	http://[server]/ZEN/Pillarfield%20Ox.full.jpg
 pillory_of_the_sleepless.jpg	http://[server]/GP/Pillory%20of%20the%20Sleepless.full.jpg
 pincer_spider.jpg	http://[server]/IN/Pincer%20Spider.full.jpg
 pincher_beetles.jpg	http://[server]/10E/Pincher%20Beetles.full.jpg
@@ -248,7 +248,7 @@ pious_warrior.jpg	http://[server]/MM/Pious%20Warrior.full.jpg
 pipers_melody.jpg	http://[server]/OD/Piper's%20Melody.full.jpg
 piracy.jpg	http://[server]/ST/Piracy.full.jpg
 piracy_charm.jpg	http://[server]/PLC/Piracy%20Charm.full.jpg
-piranha_marsh.jpg	http://pics.slightlymagic.net/ZEN/Piranha%20Marsh.full.jpg
+piranha_marsh.jpg	http://[server]/ZEN/Piranha%20Marsh.full.jpg
 pirate_ship.jpg	http://[server]/5E/Pirate%20Ship.full.jpg
 pit_imp.jpg	http://[server]/TE/Pit%20Imp.full.jpg
 pit_keeper.jpg	http://[server]/TSP/Pit%20Keeper.full.jpg
@@ -257,7 +257,7 @@ pit_scorpion.jpg	http://[server]/5E/Pit%20Scorpion.full.jpg
 pit_spawn.jpg	http://[server]/EX/Pit%20Spawn.full.jpg
 pit_trap.jpg	http://[server]/7E/Pit%20Trap.full.jpg
 pitchstone_wall.jpg	http://[server]/TO/Pitchstone%20Wall.full.jpg
-pitfall_trap.jpg	http://pics.slightlymagic.net/ZEN/Pitfall%20Trap.full.jpg
+pitfall_trap.jpg	http://[server]/ZEN/Pitfall%20Trap.full.jpg
 pithing_needle.jpg	http://[server]/M10/Pithing%20Needle.full.jpg
 pixie_queen.jpg	http://[server]/LG/Pixie%20Queen.full.jpg
 plagiarize.jpg	http://[server]/10E/Plagiarize.full.jpg
@@ -292,7 +292,7 @@ planeswalkers_scorn.jpg	http://[server]/PS/Planeswalker's%20Scorn.full.jpg
 plant_elemental.jpg	http://[server]/PT/Plant%20Elemental.full.jpg
 plasma_elemental.jpg	http://[server]/FD/Plasma%20Elemental.full.jpg
 plateau.jpg	http://[server]/U/Plateau.full.jpg
-plated_geopede.jpg	http://pics.slightlymagic.net/ZEN/Plated%20Geopede.full.jpg
+plated_geopede.jpg	http://[server]/ZEN/Plated%20Geopede.full.jpg
 plated_pegasus.jpg	http://[server]/TSP/Plated%20Pegasus.full.jpg
 plated_rootwalla.jpg	http://[server]/EX/Plated%20Rootwalla.full.jpg
 plated_slagwurm.jpg	http://[server]/MR/Plated%20Slagwurm.full.jpg
@@ -363,7 +363,7 @@ predatory_advantage.jpg	http://[server]/ARB/Predatory%20Advantage.full.jpg
 predatory_focus.jpg	http://[server]/GP/Predatory%20Focus.full.jpg
 predatory_hunger.jpg	http://[server]/EX/Predatory%20Hunger.full.jpg
 predatory_nightstalker.jpg	http://[server]/P2/Predatory%20Nightstalker.full.jpg
-predatory_urge.jpg	http://pics.slightlymagic.net/ZEN/Predatory%20Urge.full.jpg
+predatory_urge.jpg	http://[server]/ZEN/Predatory%20Urge.full.jpg
 predict.jpg	http://[server]/OD/Predict.full.jpg
 preeminent_captain.jpg	http://[server]/MOR/Preeminent%20Captain.full.jpg
 preemptive_strike.jpg	http://[server]/P3/Preemptive%20Strike.full.jpg
@@ -381,7 +381,7 @@ pride_of_the_clouds.jpg	http://[server]/DIS/Pride%20of%20the%20Clouds.full.jpg
 priest_of_gix.jpg	http://[server]/US/Priest%20of%20Gix.full.jpg
 priest_of_titania.jpg	http://[server]/US/Priest%20of%20Titania.full.jpg
 priest_of_yawgmoth.jpg	http://[server]/AQ/Priest%20of%20Yawgmoth.full.jpg
-primal_bellow.jpg	http://pics.slightlymagic.net/ZEN/Primal%20Bellow.full.jpg
+primal_bellow.jpg	http://[server]/ZEN/Primal%20Bellow.full.jpg
 primal_beyond.jpg	http://[server]/MOR/Primal%20Beyond.full.jpg
 primal_boost.jpg	http://[server]/ON/Primal%20Boost.full.jpg
 primal_clay.jpg	http://[server]/6E/Primal%20Clay.full.jpg
@@ -492,7 +492,7 @@ punctuate.jpg	http://[server]/UNH/Punctuate.full.jpg
 puncture_blast.jpg	http://[server]/EVE/Puncture%20Blast.full.jpg
 puncture_bolt.jpg	http://[server]/SHM/Puncture%20Bolt.full.jpg
 punish_ignorance.jpg	http://[server]/ALA/Punish%20Ignorance.full.jpg
-punishing_fire.jpg	http://pics.slightlymagic.net/ZEN/Punishing%20Fire.full.jpg
+punishing_fire.jpg	http://[server]/ZEN/Punishing%20Fire.full.jpg
 puppet_conjurer.jpg	http://[server]/ALA/Puppet%20Conjurer.full.jpg
 puppet_master.jpg	http://[server]/LG/Puppet%20Master.full.jpg
 puppet_strings.jpg	http://[server]/TE/Puppet%20Strings.full.jpg
@@ -538,7 +538,7 @@ pyroclasm.jpg	http://[server]/M10/Pyroclasm.full.jpg
 pyroclast_consul.jpg	http://[server]/MOR/Pyroclast%20Consul.full.jpg
 pyrohemia.jpg	http://[server]/PLC/Pyrohemia.full.jpg
 pyrokinesis.jpg	http://[server]/AL/Pyrokinesis.full.jpg
-pyromancer_ascension.jpg	http://pics.slightlymagic.net/ZEN/Pyromancer%20Ascension.full.jpg
+pyromancer_ascension.jpg	http://[server]/ZEN/Pyromancer%20Ascension.full.jpg
 pyromancers_swath.jpg	http://[server]/FUT/Pyromancer's%20Swath.full.jpg
 pyromancy.jpg	http://[server]/UL/Pyromancy.full.jpg
 pyromania.jpg	http://[server]/TO/Pyromania.full.jpg

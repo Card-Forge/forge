@@ -106,7 +106,7 @@ warpath_ghoul.jpg	http://[server]/M10/Warpath%20Ghoul.full.jpg
 warped_devotion.jpg	http://[server]/8E/Warped%20Devotion.full.jpg
 warped_researcher.jpg	http://[server]/LE/Warped%20Researcher.full.jpg
 warping_wurm.jpg	http://[server]/MI/Warping%20Wurm.full.jpg
-warren_instigator.jpg	http://pics.slightlymagic.net/ZEN/Warren%20Instigator.full.jpg
+warren_instigator.jpg	http://[server]/ZEN/Warren%20Instigator.full.jpg
 warren_pilferers.jpg	http://[server]/LRW/Warren%20Pilferers.full.jpg
 warren_scourge_elf.jpg	http://[server]/LRW/Warren-Scourge%20Elf.full.jpg
 warren_weirding.jpg	http://[server]/MOR/Warren%20Weirding.full.jpg
@@ -177,7 +177,7 @@ weirding_shaman.jpg	http://[server]/MOR/Weirding%20Shaman.full.jpg
 welding_jar.jpg	http://[server]/MR/Welding%20Jar.full.jpg
 welkin_guide.jpg	http://[server]/ALA/Welkin%20Guide.full.jpg
 welkin_hawk.jpg	http://[server]/EX/Welkin%20Hawk.full.jpg
-welkin_tern.jpg	http://pics.slightlymagic.net/ZEN/Welkin%20Tern.full.jpg
+welkin_tern.jpg	http://[server]/ZEN/Welkin%20Tern.full.jpg
 well_laid_plans.jpg	http://[server]/IN/Well-Laid%20Plans.full.jpg
 well_of_discovery.jpg	http://[server]/PY/Well%20of%20Discovery.full.jpg
 well_of_knowledge.jpg	http://[server]/WL/Well%20of%20Knowledge.full.jpg
@@ -280,7 +280,7 @@ wind_sail.jpg	http://[server]/ST/Wind%20Sail.full.jpg
 wind_shear.jpg	http://[server]/VI/Wind%20Shear.full.jpg
 wind_spirit.jpg	http://[server]/6E/Wind%20Spirit.full.jpg
 windborn_muse.jpg	http://[server]/10E/Windborn%20Muse.full.jpg
-windborne_charge.jpg	http://pics.slightlymagic.net/ZEN/Windborne%20Charge.full.jpg
+windborne_charge.jpg	http://[server]/ZEN/Windborne%20Charge.full.jpg
 windbrisk_heights.jpg	http://[server]/LRW/Windbrisk%20Heights.full.jpg
 windbrisk_raptor.jpg	http://[server]/SHM/Windbrisk%20Raptor.full.jpg
 windfall.jpg	http://[server]/US/Windfall.full.jpg
@@ -288,7 +288,7 @@ winding_canyons.jpg	http://[server]/WL/Winding%20Canyons.full.jpg
 winding_wurm.jpg	http://[server]/US/Winding%20Wurm.full.jpg
 windreaper_falcon.jpg	http://[server]/MI/Windreaper%20Falcon.full.jpg
 windreaver.jpg	http://[server]/DIS/Windreaver.full.jpg
-windrider_eel.jpg	http://pics.slightlymagic.net/ZEN/Windrider%20Eel.full.jpg
+windrider_eel.jpg	http://[server]/ZEN/Windrider%20Eel.full.jpg
 winds_of_change.jpg	http://[server]/5E/Winds%20of%20Change.full.jpg
 winds_of_rath.jpg	http://[server]/TE/Winds%20of%20Rath.full.jpg
 windscouter.jpg	http://[server]/PY/Windscouter.full.jpg
@@ -395,7 +395,7 @@ words_of_worship.jpg	http://[server]/ON/Words%20of%20Worship.full.jpg
 workhorse.jpg	http://[server]/EX/Workhorse.full.jpg
 working_stiff.jpg	http://[server]/UNH/Working%20Stiff.full.jpg
 world_bottling_kit.jpg	http://[server]/UNH/World-Bottling%20Kit.full.jpg
-world_queller.jpg	http://pics.slightlymagic.net/ZEN/World%20Queller.full.jpg
+world_queller.jpg	http://[server]/ZEN/World%20Queller.full.jpg
 worldgorger_dragon.jpg	http://[server]/JU/Worldgorger%20Dragon.full.jpg
 worldheart_phoenix.jpg	http://[server]/CFX/Worldheart%20Phoenix.full.jpg
 worldly_counsel.jpg	http://[server]/IN/Worldly%20Counsel.full.jpg

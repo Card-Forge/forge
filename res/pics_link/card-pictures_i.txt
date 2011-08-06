@@ -127,7 +127,7 @@ infernal_tribute.jpg	http://[server]/WL/Infernal%20Tribute.full.jpg
 infernal_tutor.jpg	http://[server]/DIS/Infernal%20Tutor.full.jpg
 inferno.jpg	http://[server]/8E/Inferno.full.jpg
 inferno_elemental.jpg	http://[server]/M10/Inferno%20Elemental.full.jpg
-inferno_trap.jpg	http://pics.slightlymagic.net/ZEN/Inferno%20Trap.full.jpg
+inferno_trap.jpg	http://[server]/ZEN/Inferno%20Trap.full.jpg
 infest.jpg	http://[server]/ON/Infest.full.jpg
 infested_roothold.jpg	http://[server]/DS/Infested%20Roothold.full.jpg
 infiltrate.jpg	http://[server]/NE/Infiltrate.full.jpg
@@ -184,7 +184,7 @@ intimidation_bolt.jpg	http://[server]/ARB/Intimidation%20Bolt.full.jpg
 intimidator_initiate.jpg	http://[server]/SHM/Intimidator%20Initiate.full.jpg
 into_the_fray.jpg	http://[server]/SOK/Into%20the%20Fray.full.jpg
 into_the_north.jpg	http://[server]/CS/Into%20the%20North.full.jpg
-into_the_roil.jpg	http://pics.slightlymagic.net/ZEN/Into%20the%20Roil.full.jpg
+into_the_roil.jpg	http://[server]/ZEN/Into%20the%20Roil.full.jpg
 into_thin_air.jpg	http://[server]/FD/Into%20Thin%20Air.full.jpg
 intrepid_hero.jpg	http://[server]/8E/Intrepid%20Hero.full.jpg
 intruder_alarm.jpg	http://[server]/8E/Intruder%20Alarm.full.jpg
@@ -202,8 +202,8 @@ invoke_prejudice.jpg	http://[server]/LG/Invoke%20Prejudice.full.jpg
 invoke_the_firemind.jpg	http://[server]/GP/Invoke%20the%20Firemind.full.jpg
 invulnerability.jpg	http://[server]/TE/Invulnerability.full.jpg
 ion_storm.jpg	http://[server]/FD/Ion%20Storm.full.jpg
-iona_shield_of_emeria.jpg	http://pics.slightlymagic.net/ZEN/Iona,%20Shield%20of%20Emeria.full.jpg
-ior_ruin_expedition.jpg	http://pics.slightlymagic.net/ZEN/Ior%20Ruin%20Expedition.full.jpg
+iona_shield_of_emeria.jpg	http://[server]/ZEN/Iona,%20Shield%20of%20Emeria.full.jpg
+ior_ruin_expedition.jpg	http://[server]/ZEN/Ior%20Ruin%20Expedition.full.jpg
 ire_of_kaminari.jpg	http://[server]/BOK/Ire%20of%20Kaminari.full.jpg
 iridescent_angel.jpg	http://[server]/OD/Iridescent%20Angel.full.jpg
 iridescent_drake.jpg	http://[server]/UD/Iridescent%20Drake.full.jpg

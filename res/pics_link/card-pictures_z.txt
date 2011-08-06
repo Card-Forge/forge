@@ -6,9 +6,9 @@ zealous_guardian.jpg	http://[server]/SHM/Zealous%20Guardian.full.jpg
 zealous_inquisitor.jpg	http://[server]/9E/Zealous%20Inquisitor.full.jpg
 zealous_persecution.jpg	http://[server]/ARB/Zealous%20Persecution.full.jpg
 zebra_unicorn.jpg	http://[server]/MI/Zebra%20Unicorn.full.jpg
-zektar_shrine_expedition.jpg	http://pics.slightlymagic.net/ZEN/Zektar%20Shrine%20Expedition.full.jpg
+zektar_shrine_expedition.jpg	http://[server]/ZEN/Zektar%20Shrine%20Expedition.full.jpg
 zelyon_sword.jpg	http://[server]/FE/Zelyon%20Sword.full.jpg
-zendikar_farguide.jpg	http://pics.slightlymagic.net/ZEN/Zendikar%20Farguide.full.jpg
+zendikar_farguide.jpg	http://[server]/ZEN/Zendikar%20Farguide.full.jpg
 zephid.jpg	http://[server]/US/Zephid.full.jpg
 zephids_embrace.jpg	http://[server]/US/Zephid's%20Embrace.full.jpg
 zephyr_falcon.jpg	http://[server]/5E/Zephyr%20Falcon.full.jpg

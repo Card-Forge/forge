@@ -7,11 +7,11 @@ quagnoth.jpg	http://[server]/FUT/Quagnoth.full.jpg
 quarum_trench_gnomes.jpg	http://[server]/LG/Quarum%20Trench%20Gnomes.full.jpg
 quash.jpg	http://[server]/UD/Quash.full.jpg
 quenchable_fire.jpg	http://[server]/CFX/Quenchable%20Fire.full.jpg
-quest_for_ancient_secrets.jpg	http://pics.slightlymagic.net/ZEN/Quest%20for%20Ancient%20Secrets.full.jpg
-quest_for_pure_flame.jpg	http://pics.slightlymagic.net/ZEN/Quest%20for%20Pure%20Flame.full.jpg
-quest_for_the_gemblades.jpg	http://pics.slightlymagic.net/ZEN/Quest%20for%20the%20Gemblades.full.jpg
-quest_for_the_gravelord.jpg	http://pics.slightlymagic.net/ZEN/Quest%20for%20the%20Gravelord.full.jpg
-quest_for_the_holy_relic.jpg	http://pics.slightlymagic.net/ZEN/Quest%20for%20the%20Holy%20Relic.full.jpg
+quest_for_ancient_secrets.jpg	http://[server]/ZEN/Quest%20for%20Ancient%20Secrets.full.jpg
+quest_for_pure_flame.jpg	http://[server]/ZEN/Quest%20for%20Pure%20Flame.full.jpg
+quest_for_the_gemblades.jpg	http://[server]/ZEN/Quest%20for%20the%20Gemblades.full.jpg
+quest_for_the_gravelord.jpg	http://[server]/ZEN/Quest%20for%20the%20Gravelord.full.jpg
+quest_for_the_holy_relic.jpg	http://[server]/ZEN/Quest%20for%20the%20Holy%20Relic.full.jpg
 questing_phelddagrif.jpg	http://[server]/PS/Questing%20Phelddagrif.full.jpg
 question_elemental.jpg	http://[server]/UNH/Question%20Elemental.full.jpg
 quick_sliver.jpg	http://[server]/LE/Quick%20Sliver.full.jpg

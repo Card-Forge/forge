@@ -58,7 +58,7 @@ adun_oakenshield.jpg	http://[server]/LG/Adun%20Oakenshield.full.jpg
 advance_scout.jpg	http://[server]/TE/Advance%20Scout.full.jpg
 advanced_hoverguard.jpg	http://[server]/FD/Advanced%20Hoverguard.full.jpg
 adventurers_guildhouse.jpg	http://[server]/LG/Adventurers'%20Guildhouse.full.jpg
-adventuring_gear.jpg	http://pics.slightlymagic.net/ZEN/Adventuring%20Gear.full.jpg
+adventuring_gear.jpg	http://[server]/ZEN/Adventuring%20Gear.full.jpg
 advice_from_the_fae.jpg	http://[server]/SHM/Advice%20from%20the%20Fae.full.jpg
 aegis_of_honor.jpg	http://[server]/OD/Aegis%20of%20Honor.full.jpg
 aegis_of_the_meek.jpg	http://[server]/IA/Aegis%20of%20the%20Meek.full.jpg
@@ -73,7 +73,7 @@ aesthir_glider.jpg	http://[server]/AT/Aesthir%20Glider.full.jpg
 aether_barrier.jpg	http://[server]/NE/AEther%20Barrier.full.jpg
 aether_burst.jpg	http://[server]/OD/AEther%20Burst.full.jpg
 aether_charge.jpg	http://[server]/ON/AEther%20Charge.full.jpg
-aether_figment.jpg	http://pics.slightlymagic.net/ZEN/AEther%20Figment.full.jpg
+aether_figment.jpg	http://[server]/ZEN/AEther%20Figment.full.jpg
 aether_flash.jpg	http://[server]/7E/Aether%20Flash.full.jpg
 aether_membrane.jpg	http://[server]/PLC/AEther%20Membrane.full.jpg
 aether_mutation.jpg	http://[server]/AP/AEther%20Mutation.full.jpg
@@ -124,7 +124,7 @@ akki_raider.jpg	http://[server]/BOK/Akki%20Raider.full.jpg
 akki_rockspeaker.jpg	http://[server]/CHK/Akki%20Rockspeaker.full.jpg
 akki_underling.jpg	http://[server]/SOK/Akki%20Underling.full.jpg
 akki_underminer.jpg	http://[server]/CHK/Akki%20Underminer.full.jpg
-akoum_refuge.jpg	http://pics.slightlymagic.net/ZEN/Akoum%20Refuge.full.jpg
+akoum_refuge.jpg	http://[server]/ZEN/Akoum%20Refuge.full.jpg
 akrasan_squire.jpg	http://[server]/ALA/Akrasan%20Squire.full.jpg
 akroma_angel_of_fury.jpg	http://[server]/PLC/Akroma,%20Angel%20of%20Fury.full.jpg
 akroma_angel_of_wrath.jpg	http://[server]/TSB/Akroma,%20Angel%20of%20Wrath.full.jpg
@@ -342,9 +342,9 @@ archangel.jpg	http://[server]/VI/Archangel.full.jpg
 archdemon_of_unx.jpg	http://[server]/ALA/Archdemon%20of%20Unx.full.jpg
 archery_training.jpg	http://[server]/UD/Archery%20Training.full.jpg
 architects_of_will.jpg	http://[server]/ARB/Architects%20of%20Will.full.jpg
-archive_trap.jpg	http://pics.slightlymagic.net/ZEN/Archive%20Trap.full.jpg
+archive_trap.jpg	http://[server]/ZEN/Archive%20Trap.full.jpg
 archivist.jpg	http://[server]/9E/Archivist.full.jpg
-archmage_ascension.jpg	http://pics.slightlymagic.net/ZEN/Archmage%20Ascension.full.jpg
+archmage_ascension.jpg	http://[server]/ZEN/Archmage%20Ascension.full.jpg
 archon_of_justice.jpg	http://[server]/EVE/Archon%20of%20Justice.full.jpg
 arctic_flats.jpg	http://[server]/CS/Arctic%20Flats.full.jpg
 arctic_foxes.jpg	http://[server]/IA/Arctic%20Foxes.full.jpg
@@ -371,12 +371,12 @@ argothian_pixies.jpg	http://[server]/CH/Argothian%20Pixies.full.jpg
 argothian_swine.jpg	http://[server]/US/Argothian%20Swine.full.jpg
 argothian_treefolk.jpg	http://[server]/AQ/Argothian%20Treefolk.full.jpg
 argothian_wurm.jpg	http://[server]/US/Argothian%20Wurm.full.jpg
-arid_mesa.jpg	http://pics.slightlymagic.net/ZEN/Arid%20Mesa.full.jpg
+arid_mesa.jpg	http://[server]/ZEN/Arid%20Mesa.full.jpg
 ark_of_blight.jpg	http://[server]/SC/Ark%20of%20Blight.full.jpg
 armadillo_cloak.jpg	http://[server]/IN/Armadillo%20Cloak.full.jpg
 armageddon.jpg	http://[server]/6E/Armageddon.full.jpg
 armageddon_clock.jpg	http://[server]/AQ/Armageddon%20Clock.full.jpg
-armament_master.jpg	http://pics.slightlymagic.net/ZEN/Armament%20Master.full.jpg
+armament_master.jpg	http://[server]/ZEN/Armament%20Master.full.jpg
 armed_response.jpg	http://[server]/FD/Armed%20Response.full.jpg
 armillary_sphere.jpg	http://[server]/CFX/Armillary%20Sphere.full.jpg
 armistice.jpg	http://[server]/MM/Armistice.full.jpg
@@ -397,7 +397,7 @@ arnjlots_ascent.jpg	http://[server]/IA/Arnjlot's%20Ascent.full.jpg
 arrest.jpg	http://[server]/MR/Arrest.full.jpg
 arrogant_vampire.jpg	http://[server]/PT/Arrogant%20Vampire.full.jpg
 arrogant_wurm.jpg	http://[server]/TO/Arrogant%20Wurm.full.jpg
-arrow_volley_trap.jpg	http://pics.slightlymagic.net/ZEN/Arrow%20Volley%20Trap.full.jpg
+arrow_volley_trap.jpg	http://[server]/ZEN/Arrow%20Volley%20Trap.full.jpg
 arsenal_thresher.jpg	http://[server]/HOP/Arsenal%20Thresher.full.jpg
 artful_looter.jpg	http://[server]/UNH/Artful%20Looter.full.jpg
 artifact_blast.jpg	http://[server]/AQ/Artifact%20Blast.full.jpg

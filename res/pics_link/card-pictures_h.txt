@@ -2,8 +2,8 @@ haakon_stromgald_scourge.jpg	http://[server]/CS/Haakon,%20Stromgald%20Scourge.fu
 haazda_exonerator.jpg	http://[server]/DIS/Haazda%20Exonerator.full.jpg
 haazda_shield_mate.jpg	http://[server]/DIS/Haazda%20Shield%20Mate.full.jpg
 hag_hedge_mage.jpg	http://[server]/EVE/Hag%20Hedge-Mage.full.jpg
-hagra_crocodile.jpg	http://pics.slightlymagic.net/ZEN/Hagra%20Crocodile.full.jpg
-hagra_diabolist.jpg	http://pics.slightlymagic.net/ZEN/Hagra%20Diabolist.full.jpg
+hagra_crocodile.jpg	http://[server]/ZEN/Hagra%20Crocodile.full.jpg
+hagra_diabolist.jpg	http://[server]/ZEN/Hagra%20Diabolist.full.jpg
 hail_of_arrows.jpg	http://[server]/10E/Hail%20of%20Arrows.full.jpg
 hail_storm.jpg	http://[server]/AL/Hail%20Storm.full.jpg
 hair_strung_koto.jpg	http://[server]/CHK/Hair-Strung%20Koto.full.jpg
@@ -20,7 +20,7 @@ hallowed_fountain.jpg	http://[server]/DIS/Hallowed%20Fountain.full.jpg
 hallowed_ground.jpg	http://[server]/IA/Hallowed%20Ground.full.jpg
 hallowed_healer.jpg	http://[server]/OD/Hallowed%20Healer.full.jpg
 halls_of_mist.jpg	http://[server]/IA/Halls%20of%20Mist.full.jpg
-halo_hunter.jpg	http://pics.slightlymagic.net/ZEN/Halo%20Hunter.full.jpg
+halo_hunter.jpg	http://[server]/ZEN/Halo%20Hunter.full.jpg
 hamletback_goliath.jpg	http://[server]/LRW/Hamletback%20Goliath.full.jpg
 hammer_mage.jpg	http://[server]/MM/Hammer%20Mage.full.jpg
 hammer_of_bogardan.jpg	http://[server]/8E/Hammer%20of%20Bogardan.full.jpg
@@ -115,7 +115,7 @@ heartlash_cinder.jpg	http://[server]/EVE/Heartlash%20Cinder.full.jpg
 heartless_hidetsugu.jpg	http://[server]/BOK/Heartless%20Hidetsugu.full.jpg
 heartmender.jpg	http://[server]/SHM/Heartmender.full.jpg
 heartseeker.jpg	http://[server]/DS/Heartseeker.full.jpg
-heartstabber_mosquito.jpg	http://pics.slightlymagic.net/ZEN/Heartstabber%20Mosquito.full.jpg
+heartstabber_mosquito.jpg	http://[server]/ZEN/Heartstabber%20Mosquito.full.jpg
 heartstone.jpg	http://[server]/SH/Heartstone.full.jpg
 heartwood_dryad.jpg	http://[server]/TE/Heartwood%20Dryad.full.jpg
 heartwood_giant.jpg	http://[server]/TE/Heartwood%20Giant.full.jpg
@@ -132,8 +132,8 @@ heavy_ballista.jpg	http://[server]/7E/Heavy%20Ballista.full.jpg
 heavy_fog.jpg	http://[server]/P3/Heavy%20Fog.full.jpg
 hecatomb.jpg	http://[server]/6E/Hecatomb.full.jpg
 hedge_troll.jpg	http://[server]/REL/Hedge%20Troll.full.jpg
-hedron_crab.jpg	http://pics.slightlymagic.net/ZEN/Hedron%20Crab.full.jpg
-hedron_scrabbler.jpg	http://pics.slightlymagic.net/ZEN/Hedron%20Scrabbler.full.jpg
+hedron_crab.jpg	http://[server]/ZEN/Hedron%20Crab.full.jpg
+hedron_scrabbler.jpg	http://[server]/ZEN/Hedron%20Scrabbler.full.jpg
 heed_the_mists.jpg	http://[server]/BOK/Heed%20the%20Mists.full.jpg
 heedless_one.jpg	http://[server]/ON/Heedless%20One.full.jpg
 heidar_rimewind_master.jpg	http://[server]/CS/Heidar,%20Rimewind%20Master.full.jpg
@@ -146,9 +146,9 @@ hell_bent_raider.jpg	http://[server]/TO/Hell-Bent%20Raider.full.jpg
 hell_swarm.jpg	http://[server]/LG/Hell%20Swarm.full.jpg
 helldozer.jpg	http://[server]/RAV/Helldozer.full.jpg
 hellfire.jpg	http://[server]/LG/Hellfire.full.jpg
-hellfire_mongrel.jpg	http://pics.slightlymagic.net/ZEN/Hellfire%20Mongrel.full.jpg
+hellfire_mongrel.jpg	http://[server]/ZEN/Hellfire%20Mongrel.full.jpg
 hellhole_rats.jpg	http://[server]/DIS/Hellhole%20Rats.full.jpg
-hellkite_charger.jpg	http://pics.slightlymagic.net/ZEN/Hellkite%20Charger.full.jpg
+hellkite_charger.jpg	http://[server]/ZEN/Hellkite%20Charger.full.jpg
 hellkite_hatchling.jpg	http://[server]/CFX/Hellkite%20Hatchling.full.jpg
 hellkite_overlord.jpg	http://[server]/ALA/Hellkite%20Overlord.full.jpg
 hells_caretaker.jpg	http://[server]/9E/Hell's%20Caretaker.full.jpg
@@ -202,7 +202,7 @@ high_ground.jpg	http://[server]/10E/High%20Ground.full.jpg
 high_market.jpg	http://[server]/MM/High%20Market.full.jpg
 high_seas.jpg	http://[server]/MM/High%20Seas.full.jpg
 high_tide.jpg	http://[server]/FE/High%20Tide1.full.jpg
-highland_berserker.jpg	http://pics.slightlymagic.net/ZEN/Highland%20Berserker.full.jpg
+highland_berserker.jpg	http://[server]/ZEN/Highland%20Berserker.full.jpg
 highland_giant.jpg	http://[server]/PT/Highland%20Giant.full.jpg
 highland_weald.jpg	http://[server]/CS/Highland%20Weald.full.jpg
 highway_robber.jpg	http://[server]/10E/Highway%20Robber.full.jpg
