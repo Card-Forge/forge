@@ -1242,6 +1242,7 @@ res/cardsfolder/dragon_engine.txt -text svneol=native#text/plain
 res/cardsfolder/dragon_fodder.txt -text svneol=native#text/plain
 res/cardsfolder/dragon_roost.txt -text svneol=native#text/plain
 res/cardsfolder/dragon_tyrant.txt -text svneol=native#text/plain
+res/cardsfolder/dragon_whelp.txt -text svneol=native#text/plain
 res/cardsfolder/dragonmaster_outcast.txt -text svneol=native#text/plain
 res/cardsfolder/dragons_claw.txt -text svneol=native#text/plain
 res/cardsfolder/dragonskull_summit.txt -text svneol=native#text/plain
