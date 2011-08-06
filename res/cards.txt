@@ -7048,31 +7048,31 @@ AEther Spellbomb
 1
 Artifact
 no text
-1, Sacrifice AEther Spellbomb: Draw a card.
+1, Sacrifice CARDNAME: Draw a card.
 
 Lifespark Spellbomb
 1
 Artifact
 no text
-1, Sacrifice Lifespark Spellbomb: Draw a card.
+1, Sacrifice CARDNAME: Draw a card.
 
 Pyrite Spellbomb
 1
 Artifact
 no text
-1, Sacrifice Pyrite Spellbomb: Draw a card.
+1, Sacrifice CARDNAME: Draw a card.
 
 Necrogen Spellbomb
 1
 Artifact
 no text
-1, Sacrifice Necrogen Spellbomb: Draw a card.
+1, Sacrifice CARDNAME: Draw a card.
 
 Sunbeam Spellbomb
 1
 Artifact
 no text
-1, Sacrifice Sunbeam Spellbomb: Draw a card.
+1, Sacrifice CARDNAME: Draw a card.
 
 Wall of Blossoms
 1 G
