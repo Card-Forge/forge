@@ -1,8 +1,9 @@
 Name:Lovisa Coldeyes
 ManaCost:3 R R
 Types:Legendary Creature Human Barbarian
-Text:Warrior, Berserker, and/or other Barbarian creatures get +2/+2 and have haste.
+Text:no text
 PT:3/3
+K:stPumpAll:Creature.Warrior,Creature.Berserker,Creature.Barbarian+Other:2/2/Haste:No Condition:Warrior, Berserker, and/or other Barbarian creatures get +2/+2 and have haste.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lovisa_coldeyes.jpg

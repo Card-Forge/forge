@@ -15696,51 +15696,6 @@ public class GameActionUtil {
 
 	}; //Death Baron Other
 
-	public static Command Lovisa_Coldeyes_Pump = new Command() {
-
-		private static final long serialVersionUID = 6864062675875861848L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-
-			CardList cList = gloriousAnthemList;
-			Card c;
-
-			for(int i = 0; i < cList.size(); i++) {
-				c = cList.get(i);
-				c.addSemiPermanentAttackBoost(-2);
-				c.addSemiPermanentDefenseBoost(-2);
-				c.removeExtrinsicKeyword("Haste");
-			}
-			cList.clear();
-			PlayerZone[] zone = getZone("Lovisa Coldeyes");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = AllZoneUtil.getCardsInPlay();
-				creature = creature.filter(new CardListFilter()
-				{
-					public boolean addCard(Card crd)
-					{
-						return crd.isCreature() && ( (crd.getType().contains("Barbarian") && !crd.getName().equals("Lovisa Coldeyes"))
-							   || crd.getType().contains("Berserker") || crd.getType().contains("Warrior") || crd.getKeyword().contains("Changeling"));
-					}
-				});
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addSemiPermanentAttackBoost(2);
-					c.addSemiPermanentDefenseBoost(2);
-					c.addExtrinsicKeyword("Haste");
-					gloriousAnthemList.add(c);
-				
-				} // for
-			} // for
-
-		}// execute()
-
-	}; //Lovisa Coldeyes Pump
-	
 	
 	public static Command Scion_of_Oona_Pump          = new Command() {
 		private static final long serialVersionUID   = 8659017444482040867L;
@@ -18917,6 +18872,7 @@ public class GameActionUtil {
 		commands.put("Absolute_Law", Absolute_Law);
 		commands.put("Adamaro_First_to_Desire", Adamaro_First_to_Desire);
 		commands.put("Ajani_Avatar_Token", Ajani_Avatar_Token);
+		commands.put("Akromas_Memorial", Akromas_Memorial);
 		commands.put("Angry_Mob", Angry_Mob);
 		commands.put("Aura_Gnarlid", Aura_Gnarlid);
 		commands.put("Aven_Trailblazer", Aven_Trailblazer);
@@ -18934,19 +18890,26 @@ public class GameActionUtil {
 		commands.put("Cognivore", Cognivore);
 		commands.put("Conspiracy", Conspiracy);
 		commands.put("Cover_of_Darkness", Cover_of_Darkness);
+		commands.put("Covetous_Dragon", Covetous_Dragon);
 		commands.put("Crowd_of_Cinders", Crowd_of_Cinders);
 		
 		commands.put("Dakkon", Dakkon);
 		commands.put("Darksteel_Forge", Darksteel_Forge);
 		commands.put("Daru_Warchief", Daru_Warchief);
 		commands.put("Deaths_Shadow", Deaths_Shadow);
+		commands.put("Deranged_Hermit", Deranged_Hermit);
 		commands.put("Drove_of_Elves", Drove_of_Elves);
 		
+		
 		commands.put("Eladamri", Eladamri);
+		commands.put("Eldrazi_Monument", Eldrazi_Monument);
+		commands.put("Elspeth_Emblem", Elspeth_Emblem);
 		commands.put("Emperor_Crocodile", Emperor_Crocodile);
+		commands.put("Engineered_Plague", Engineered_Plague);
 		
 		commands.put("Faerie_Swarm", Faerie_Swarm);
 		
+		commands.put("Gaddock_Teeg", Gaddock_Teeg);
 		commands.put("Gaeas_Anthem", Gaeas_Anthem);
 		commands.put("Gemhide_Sliver", Gemhide_Sliver);
 		commands.put("Giant_Tortoise", Giant_Tortoise);
@@ -18977,6 +18940,7 @@ public class GameActionUtil {
 		
 		commands.put("Leyline_of_Singularity", Leyline_of_Singularity);
 		commands.put("Lhurgoyf", Lhurgoyf);
+		commands.put("Lighthouse_Chronologist", Lighthouse_Chronologist);
 		commands.put("Lord_of_Extinction", Lord_of_Extinction);
 		
 		commands.put("Magnivore", Magnivore);
@@ -18986,6 +18950,7 @@ public class GameActionUtil {
 		commands.put("Marrow_Gnawer", Marrow_Gnawer);
 		commands.put("Masumaro_First_to_Live", Masumaro_First_to_Live);
 		commands.put("Matca_Rioters", Matca_Rioters);
+		commands.put("Meng_Huo", Meng_Huo);
 		commands.put("Molimo_Maro_Sorcerer", Molimo_Maro_Sorcerer);
 		commands.put("Mortivore", Mortivore);
 		commands.put("Mul_Daya_Channelers", Mul_Daya_Channelers);
@@ -19022,6 +18987,7 @@ public class GameActionUtil {
 		commands.put("Terravore", Terravore);
 		commands.put("That_Which_Was_Taken", That_Which_Was_Taken);
 		commands.put("Time_of_Heroes", Time_of_Heroes);
+		commands.put("Tolsimir", Tolsimir);
 		commands.put("Transcendent_Master", Transcendent_Master);
 		
 		commands.put("Umbra_Stalker", Umbra_Stalker);
@@ -19043,7 +19009,7 @@ public class GameActionUtil {
 		
 		
 		
-		commands.put("Lighthouse_Chronologist", Lighthouse_Chronologist);
+		
 		commands.put("Caravan_Escort", Caravan_Escort);
 		commands.put("Ikiral_Outrider", Ikiral_Outrider);
 		commands.put("Knight_of_Cliffhaven", Knight_of_Cliffhaven);
@@ -19086,11 +19052,10 @@ public class GameActionUtil {
 		commands.put("Veteran_Swordsmith_Other", Veteran_Swordsmith_Other);
 		commands.put("Death_Baron_Pump", Death_Baron_Pump);
 		commands.put("Death_Baron_Other", Death_Baron_Other);
-		commands.put("Lovisa_Coldeyes_Pump", Lovisa_Coldeyes_Pump);
 		commands.put("Scion_of_Oona_Pump", Scion_of_Oona_Pump);
 		commands.put("Scion_of_Oona_Other", Scion_of_Oona_Other);
 
-		commands.put("Covetous_Dragon", Covetous_Dragon);
+		
 		commands.put("Phylactery_Lich", Phylactery_Lich);
 		commands.put("Tethered_Griffin", Tethered_Griffin);
 
@@ -19102,21 +19067,12 @@ public class GameActionUtil {
 		commands.put("Beastmaster_Ascension", Beastmaster_Ascension);
 		commands.put("Spidersilk_Armor", Spidersilk_Armor);
 		
-		commands.put("Eldrazi_Monument", Eldrazi_Monument);
 		
-
-		commands.put("Engineered_Plague", Engineered_Plague);
 
 		commands.put("Thelonite_Hermit", Thelonite_Hermit);
-		commands.put("Deranged_Hermit", Deranged_Hermit);
-
-		commands.put("Meng_Huo", Meng_Huo);
 		
-		commands.put("Tolsimir", Tolsimir);
-		
-		commands.put("Elspeth_Emblem", Elspeth_Emblem);
 		commands.put("Koth_Emblem", Koth_Emblem);
-		commands.put("Akromas_Memorial", Akromas_Memorial);
+		
 		
 		commands.put("Goblin_Warchief", Goblin_Warchief);	
 		commands.put("Undead_Warchief", Undead_Warchief);
@@ -19124,7 +19080,7 @@ public class GameActionUtil {
 		commands.put("Rolling_Stones", Rolling_Stones);
 		commands.put("Kinsbaile_Cavalier", Kinsbaile_Cavalier);
 		commands.put("Meddling_Mage", Meddling_Mage);
-		commands.put("Gaddock_Teeg", Gaddock_Teeg);
+		
 		
 		//System.out.println("size of commands: " + commands.size());
 
