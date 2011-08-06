@@ -1062,7 +1062,7 @@ public class GameAction {
                    		      		final String[] Specific = F_k[5].split("/");
                    		      		final int[] Restriction_Count = new int[1]; 
                    		      		for(int i = 0; i < Specific.length - 2;i++) {
-                   		      			if(Specific[i+2].contains("Type.")) {
+                   		      			if(Specific[i+2].contains("Type.") && !Specific[i+2].contains("NonType.")) {
                    		      			Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
                                                 public boolean addCard(Card c) {
                                                     if(c.getType().contains(Specific[Restriction_Count[0] + 2].replaceFirst("Type.", ""))) return true;
@@ -1070,14 +1070,29 @@ public class GameAction {
                                                 }
                                     		});
                    		      			}
-                   		      			if(Specific[i+2].contains("Color.")) {
+                   		      			if(Specific[i+2].contains("NonType.")) {
+                       		      			Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
+                                                    public boolean addCard(Card c) {
+                                                        if(!c.getType().contains(Specific[Restriction_Count[0] + 2].replaceFirst("NonType.", ""))) return true;
+                                                        return false;
+                                                    }
+                                        		});
+                       		      			}
+                   		      			if(Specific[i+2].contains("Color.") && !Specific[i+2].contains("NonColor.")) {
                        		      			Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
                                                     public boolean addCard(Card c) {
                                                         if(CardUtil.getColors(c).contains(Specific[Restriction_Count[0] + 2].replaceFirst("Color.", ""))) return true;
                                                         return false;
                                                     }
-                                        		});
-                       		      			
+                                        		});	
+                       		      			}
+                   		      			if(Specific[i+2].contains("NonColor.")) {
+                       		      			Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
+                                                    public boolean addCard(Card c) {
+                                                        if(!CardUtil.getColors(c).contains(Specific[Restriction_Count[0] + 2].replaceFirst("NonColor.", ""))) return true;
+                                                        return false;
+                                                    }
+                                        		});	
                        		      			}
                    		      			if(Specific[i+2].equals("NotSelf")) {
                        		      			Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {

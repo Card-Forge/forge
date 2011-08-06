@@ -82,7 +82,7 @@ public class Input_PayManaCost extends Input {
         
         if(spell.getAfterPayMana() != null) stopSetNext(spell.getAfterPayMana());
         else {
-            AllZone.Stack.add(spell);
+        	AllZone.Stack.add(spell);
             stopSetNext(new ComputerAI_StackNotEmpty());
         }
     }
@@ -103,6 +103,6 @@ public class Input_PayManaCost extends Input {
         
         ButtonUtil.enableOnlyCancel();
         AllZone.Display.showMessage("Pay Mana Cost: " + manaCost.toString());
-        if(manaCost.isPaid()) done(); 
+        if(manaCost.isPaid() && !new ManaCost(originalManaCost).isPaid()) done(); 
     }
 }
