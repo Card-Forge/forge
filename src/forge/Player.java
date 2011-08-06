@@ -307,6 +307,12 @@ public abstract class Player extends MyObservable{
     	
     	int restDamage = damage;
     	
+    	if( AllZoneUtil.isCardInPlay("Sulfuric Vapors") && source.isSpell() && source.isRed() ) {
+    		int amount = AllZoneUtil.getCardsInPlay("Sulfuric Vapors").size();
+			for (int i = 0; i < amount;i++)	
+					restDamage += 1;
+		}
+    	
     	if( AllZoneUtil.isCardInPlay("Furnace of Rath")) {
 			int amount = AllZoneUtil.getCardsInPlay("Furnace of Rath").size();
 			for (int i = 0; i < amount;i++)
@@ -342,6 +348,17 @@ public abstract class Player extends MyObservable{
 	public int replaceDamage(final int damage, Card source, boolean isCombat) {
     	
     	int restDamage = staticReplaceDamage(damage, source, isCombat);
+    	
+    	if( source.getName().equals("Szadek, Lord of Secrets") && isCombat) {
+    		source.addCounter(Counters.P1P1, restDamage);
+			for(int i = 0; i < restDamage; i++) {
+				CardList lib = AllZoneUtil.getPlayerCardsInLibrary(this);
+				if(lib.size() > 0) {
+					AllZone.GameAction.moveToGraveyard(lib.get(0));
+				}
+			}
+			return 0;
+		}
     	
     	if( AllZoneUtil.isCardInPlay("Crumbling Sanctuary")) {
 			for(int i = 0; i < restDamage; i++) {

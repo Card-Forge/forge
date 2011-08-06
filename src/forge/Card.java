@@ -2966,6 +2966,12 @@ public class Card extends MyObservable {
     	
     	int restDamage = damage;
     	
+    	if( AllZoneUtil.isCardInPlay("Sulfuric Vapors") && source.isSpell() && source.isRed() ) {
+    		int amount = AllZoneUtil.getCardsInPlay("Sulfuric Vapors").size();
+			for (int i = 0; i < amount;i++)	
+					restDamage += 1;
+		}
+    	
     	if( AllZoneUtil.isCardInPlay("Furnace of Rath") && isCreature()) {
 			int amount = AllZoneUtil.getCardsInPlay("Furnace of Rath").size();
 			for (int i = 0; i < amount;i++)
