@@ -1,3 +1,8 @@
+Lodestone Bauble
+0
+Artifact
+tap, 1: Sacrifice Lodestone Bauble: Put up to four target basic land cards from a player's graveyard on top of his or her library in any order. That player draws a card at the beginning of the next turn's upkeep.
+
 Transcendent Master
 1 W W
 Creature Human Cleric Avatar

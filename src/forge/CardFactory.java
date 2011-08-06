@@ -18186,7 +18186,103 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(ability);
         	ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Lodestone Bauble")) {
+        	/* 1, Tap, Sacrifice Lodestone Bauble: Put up to four target basic
+        	 * land cards from a player's graveyard on top of his or her library
+        	 * in any order. That player draws a card at the beginning of the next
+        	 * turn's upkeep.
+        	 */
 
+        	final Ability_Tap ability = new Ability_Tap(card, "1") {
+        		private static final long serialVersionUID = -6711849408085138636L;
+
+        		@Override
+        		public boolean canPlayAI() {
+        			return getComputerLands().size() >= 4;
+        		}
+
+        		@Override
+        		public void chooseTargetAI() {
+        			setTargetPlayer(Constant.Player.Computer);
+        		}//chooseTargetAI()
+
+        		@Override
+        		public void resolve() {
+        			final int limit = 4;   //at most, this can target 4 cards
+        			final String player = getTargetPlayer();
+        			PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+
+        			CardList lands = new CardList(grave.getCards());
+        			lands = lands.filter(basicLands);
+        			//this should probably be card.getController().equals(Constant.Player.Human) instead of player
+        			//if(player.equals(Constant.Player.Human)) {
+        			if(card.getController().equals(Constant.Player.Human)){ 
+        				//now, select up to four lands
+        				int end = -1;
+        				end = Math.min(lands.size(), limit);
+        				//TODO - maybe pop a message box here that no basic lands found (if necessary)
+        				for(int i = 1; i <= end; i++) {
+        					String Title = "Put on top of library: ";
+        					if(i == 2) Title = "Put second from top of library: ";
+        					if(i == 3) Title = "Put third from top of library: ";
+        					if(i == 4) Title = "Put fourth from top of library: ";
+        					Object o = AllZone.Display.getChoiceOptional(Title, lands.toArray());
+        					if(o == null) break;
+        					Card c_1 = (Card) o;
+        					lands.remove(c_1); //remove from the display list
+        					grave.remove(c_1); //remove from graveyard
+        					lib.add(c_1, i - 1); //add to library
+        				}
+        			}
+        			else { //Computer
+        				//based on current AI, computer should always target himself.
+        				CardList list = getComputerLands();
+        				int max = list.size();
+        				if (max > limit) max = limit;
+
+        				for(int i=0;i<max;i++) {
+        					grave.remove(list.get(i));
+        					lib.add(list.get(i), i);
+        				}
+        			}
+        			//now, sacrifice Lodestone Bauble
+        			AllZone.GameAction.sacrifice(card);
+        			/*
+        			 * TODO - this draw is at End of Turn.  It should be at the beginning of next
+        			 * upkeep when a mechanism is in place
+        			 */
+        			final Command draw = new Command() {
+        				private static final long serialVersionUID = 8293374203043368969L;
+
+        				public void execute() {
+        					AllZone.GameAction.drawCard(getTargetPlayer());
+        				}
+        			};
+        			AllZone.EndOfTurn.addAt(draw);
+        		}
+
+        		private CardList getComputerLands() {
+        			CardList list = new CardList(AllZone.Computer_Graveyard.getCards());
+        			//probably no need to sort the list...
+        			return list.filter(basicLands);
+        		}
+
+        		private CardListFilter basicLands = new CardListFilter() {
+        			public boolean addCard(Card c) {
+        				//the isBasicLand() check here may be sufficient...
+        				return c.isLand() && c.isBasicLand();
+        			}
+        		};
+
+        	};//ability
+
+        	//ability.setStackDescription("Put up to 4 basic lands from target player's graveyeard to the top of their library.  Draw a card at beginning of next upkeep.");
+        	card.addSpellAbility(ability);
+        	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
+        }//*************** END ************ END **************************
 
         
         // Cards with Cycling abilities
