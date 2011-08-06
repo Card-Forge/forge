@@ -1079,6 +1079,7 @@ public class CardFactory implements NewConstants {
     }// spDamageTgt
 
     
+/*
     //Spell damage cards  CP means Computer and Player (like shock, Lightning Bolt)
     if (hasKeyword(card, "spDamageCP")  != -1)
     {
@@ -1114,7 +1115,8 @@ public class CardFactory implements NewConstants {
           card.addSpellAbility(CardFactoryUtil.spellability_spDamageP(card, dmg));
        }
     }//SpDamageP
-    
+*/    
+
     if (hasKeyword(card, "abDamageCP") != -1)
     {
        int n = hasKeyword(card, "abDamageCP");
