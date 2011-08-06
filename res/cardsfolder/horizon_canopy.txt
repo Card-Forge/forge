@@ -1,0 +1,9 @@
+Name:Horizon Canopy
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$Draw|Cost$1 T Sac<1/CARDNAME>|NumCards$1|SpellDescription$Draw a card.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/horizon_canopy.jpg
+End

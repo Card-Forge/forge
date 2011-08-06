@@ -2279,6 +2279,42 @@ class CardFactory_Lands {
             });
         }//*************** END ************ END **************************
         
+      //*************** START ************ START **************************
+        else if(cardName.equals("Horizon Canopy")) {
+        	/*
+        	 * Tap, Pay 1 life: Add one W or G to your mana pool.
+        	 */
+        	Ability_Cost abCost = new Ability_Cost("T PayLife<1>", cardName, true);
+        	Ability_Activated mana = new Ability_Activated(card, abCost, null) {
+				private static final long serialVersionUID = -5393697921811242255L;
+
+				@Override
+        		public void resolve() {
+        			String color = "";
+        			String[] colors = new String[] {Constant.Color.White, Constant.Color.Green};
+
+        			Object o = AllZone.Display.getChoice("Choose mana color", colors);
+        			color = (String) o;
+
+        			if(color.equals("white")) color = "W";
+        			else if(color.equals("green")) color = "G";
+
+        			Card mp = AllZone.ManaPool;
+        			mp.addExtrinsicKeyword("ManaPool:" + color);
+        		}
+        	};
+        	
+        	StringBuilder sbDesc = new StringBuilder();
+        	sbDesc.append(abCost).append("Add G or W to your mana pool.");
+        	mana.setDescription(sbDesc.toString());
+        	
+        	StringBuilder sbStack = new StringBuilder();
+        	sbStack.append(cardName).append(" - add G or W to your mana pool.");
+        	mana.setStackDescription(sbStack.toString());
+        	
+        	card.addSpellAbility(mana);
+        }//*************** END ************ END **************************
+        
         return card;
     }
     
