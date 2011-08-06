@@ -367,11 +367,16 @@ public class CardFactoryUtil {
             
             @Override
             public void showMessage() {
+            	if(choices.size() == 0) stop();
+            	if(spell.getTargetCard() != null) stop();
                 AllZone.Display.showMessage("Select target Spell: ");
-                ButtonUtil.enableOnlyCancel();
-            	Card choice = AllZone.Display.getChoice("Choose", choices.toArray());
-                spell.setTargetCard(choice);
-                done();
+            	Card choice = AllZone.Display.getChoiceOptional("Choose a Spell", choices.toArray());
+                if(choice != null) {
+                	spell.setTargetCard(choice);
+                	done();
+                }
+                else stop();
+                
             }
             
             @Override
@@ -380,13 +385,14 @@ public class CardFactoryUtil {
             }
            
             void done() {
+            	choices.clear();
                 if(spell instanceof Ability_Tap && spell.getManaCost().equals("0")) stopSetNext(new Input_NoCost_TapAbility(
                         (Ability_Tap) spell));
                 else if(spell.getManaCost().equals("0") || this.isFree()) {
-                    this.setFree(false);
-                    AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
-                    stop();
-                } else stopSetNext(new Input_PayManaCost(spell));
+                	if(spell.getTargetCard() != null) AllZone.Stack.add(spell);               	
+                	stop();
+                }
+                 else stopSetNext(new Input_PayManaCost(spell));
             }
         };
         return target;
