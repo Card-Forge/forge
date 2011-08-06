@@ -57,7 +57,7 @@ public class QuestData_Prefs implements Serializable {
 			BufferedReader input = new BufferedReader(new FileReader(ForgeProps.getFile(QUEST.PREFS)));
 			String line = null;
 			while((line = input.readLine()) != null){
-				if (line.startsWith("#") || line.isEmpty())
+				if (line.startsWith("#") || line.length() == 0)
 					continue;
 				String[] split = line.split("=");
 				
