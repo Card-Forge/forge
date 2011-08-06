@@ -7,4 +7,5 @@ A:AB$ChangeZone | Cost$ 1 W | Origin$ Graveyard | Destination$ Battlefield | Tap
 SVar:SkipTurn:DB$AddTurn | Defined$ Opponent | NumTurns$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chronosavant.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/9.jpg
 End

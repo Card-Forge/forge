@@ -8,4 +8,5 @@ T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ TrigGainControl | Tr
 SVar:TrigGainControl:AB$GainControl | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thalakos_deceiver.jpg
+SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/45.jpg
 End

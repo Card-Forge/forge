@@ -6,4 +6,5 @@ T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ Opponent | Trig
 SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Creature,Gargoyle | Keywords$ Flying | OverwriteTypes$ True | Permanent$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opal_gargoyle.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/25.jpg
 End
