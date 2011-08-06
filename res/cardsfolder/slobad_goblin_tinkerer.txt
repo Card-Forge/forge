@@ -7,4 +7,5 @@ A:AB$Pump | Cost$ Sac<1/Artifact> | ValidTgts$ Artifact | TgtPrompt$ Select targ
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slobad_goblin_tinkerer.jpg
+SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/69.jpg
 End

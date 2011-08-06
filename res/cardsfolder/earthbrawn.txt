@@ -8,4 +8,5 @@ A:AB$PutCounter | Cost$ 1 G Discard<1/CARDNAME> | ValidTgts$ Creature | TgtPromp
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthbrawn.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/119.jpg
 End

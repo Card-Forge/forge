@@ -9,4 +9,5 @@ SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exil
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wormfang_turtle.jpg
+SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/60.jpg
 End

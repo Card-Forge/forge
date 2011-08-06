@@ -10,4 +10,5 @@ SVar:DelayedTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Each | Execute$ T
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Hand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quicksilver_behemoth.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/30.jpg
 End

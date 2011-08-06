@@ -7,4 +7,5 @@ SVar:X:TargetedPlayer$Valid Artifact.tapped+YouCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burden_of_greed.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/38.jpg
 End
