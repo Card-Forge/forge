@@ -207,7 +207,7 @@ public class AIPlayer extends Player{
             if(bottom) {
             	Card c = topN.get(i);
             	AllZone.GameAction.moveToBottomOfLibrary(c);
-                topN.remove(c);
+                //topN.remove(c);
             }
         }
         num = topN.size();
