@@ -14,7 +14,6 @@ res/PerSetTracking.py -text svneol=native#text/x-python
 res/booster-decks -text svneol=unset#unset
 res/card-pictures-token.txt -text svneol=native#text/plain
 res/card-pictures.txt -text svneol=native#text/plain
-res/cards.txt -text svneol=native#text/plain
 res/cardsfolder/abandoned_outpost.txt -text svneol=native#text/plain
 res/cardsfolder/abbey_gargoyles.txt -text svneol=native#text/plain
 res/cardsfolder/abjure.txt -text svneol=native#text/plain
