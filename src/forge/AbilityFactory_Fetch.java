@@ -108,6 +108,8 @@ public class AbilityFactory_Fetch {
 	                	if (params.containsKey("Tapped"))
 	                		c.tap();
 	            	}
+	            	else if (destination.equals("Exile"))	// Jester's Cap
+	            		AllZone.getZone(Constant.Zone.Removed_From_Play, player).add(c);
 
 	            }
 	            if (af.hasSubAbility())
@@ -147,6 +149,10 @@ public class AbilityFactory_Fetch {
 	        		c = CardFactoryUtil.AI_getBestCreature(library); //if only creatures take the best
 	        	else if (destination.equals("Battlefield"))
 	        		c = CardFactoryUtil.AI_getMostExpensivePermanent(library, af.getHostCard(), false);
+	        	else if (destination.equals("Exile")){
+	        		// Exiling your own stuff, if Exiling opponents stuff choose best
+	        		c = CardFactoryUtil.AI_getCheapestPermanent(library, af.getHostCard(), false);
+	        	}
 	        	else
 	        		c = library.get(0);
 

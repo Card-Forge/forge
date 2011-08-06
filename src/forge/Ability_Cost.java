@@ -334,6 +334,7 @@ public class Ability_Cost {
 			for(int i = 0; i < manaXCost; i++){
 				cost.append("X").append(" ");
 			}
+			first = false;
 		}
 		
 		if (!(manaCost.equals("0") || manaCost.equals(""))){
@@ -444,6 +445,9 @@ public class Ability_Cost {
 			cost.append(returnString(first));
 			first = false;
 		}
+		
+		if (first)	// No any costs, append 0
+			cost.append("0");
 		
 		cost.append(": ");
 		return cost.toString();
