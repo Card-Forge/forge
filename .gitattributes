@@ -5262,6 +5262,7 @@ res/cardsfolder/psychic_drain.txt -text svneol=native#text/plain
 res/cardsfolder/psychic_membrane.txt -text svneol=native#text/plain
 res/cardsfolder/psychic_purge.txt -text svneol=native#text/plain
 res/cardsfolder/psychic_spear.txt -text svneol=native#text/plain
+res/cardsfolder/psychic_surgery.txt svneol=native#text/plain
 res/cardsfolder/psychic_venom.txt -text svneol=native#text/plain
 res/cardsfolder/psychosis_crawler.txt -text svneol=native#text/plain
 res/cardsfolder/psychotic_fury.txt svneol=native#text/plain
