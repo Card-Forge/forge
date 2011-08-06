@@ -556,6 +556,19 @@ public class Card extends MyObservable {
             StringBuilder sb = new StringBuilder();
             sb.append(s);
             
+            // Storm
+            if (sb.toString().contains(" Storm (When")) {
+                sb.insert(sb.indexOf("Storm (When"), "\r\n");
+            }
+            
+            // NOTE:
+            if (sb.toString().contains(" (NOTE: ")) {
+                sb.insert(sb.indexOf("(NOTE: "), "\r\n");
+            }
+            if (sb.toString().contains("(NOTE: ") && sb.toString().endsWith(".)") && !sb.toString().endsWith("\r\n")) {
+                sb.append("\r\n");
+            }
+            
             SpellAbility[] sa = getSpellAbility();
             for(int i = 0; i < sa.length; i++)
                 sb.append(sa[i].toString() + "\r\n");
@@ -596,6 +609,7 @@ public class Card extends MyObservable {
                 sb.append("Draw a card.\r\n");
             }
             
+            // Scry
             if(!sb.toString().contains("Scry")) for(int i = 0; i < getKeyword().size(); i++) {
                 String k = getKeyword().get(i);
                 if(k.startsWith("Scry")) {
@@ -607,25 +621,29 @@ public class Card extends MyObservable {
                 }
             }
             
+            while (sb.toString().endsWith("\r\n")) {
+                sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n")+3);
+            }
+            
             return sb.toString().replaceAll("CARDNAME", getName());
         }
         
         StringBuilder sb = new StringBuilder();
         ArrayList<String> keyword = getKeyword();
         for(int i = 0; i < keyword.size(); i++) {
-        	if(!keyword.get(i).toString().contains("CostChange")) {
+            if(!keyword.get(i).toString().contains("CostChange")) {
                 if(i != 0) sb.append(", ");
-            	if(!keyword.get(i).toString().contains("WheneverKeyword") 
-            			&& !keyword.get(i).toString().contains("StaticEffect")) sb.append(keyword.get(i).toString()); 
-            	else if(keyword.get(i).toString().contains("WheneverKeyword")) {                
+                if(!keyword.get(i).toString().contains("WheneverKeyword") 
+                        && !keyword.get(i).toString().contains("StaticEffect")) sb.append(keyword.get(i).toString()); 
+                else if(keyword.get(i).toString().contains("WheneverKeyword")) {                
                      String k[] = keyword.get(i).split(":");
                      sb.append(k[9]); 
-            	} 
-            	else if(keyword.get(i).toString().contains("StaticEffect")) {                
+                } 
+                else if(keyword.get(i).toString().contains("StaticEffect")) {                
                     String k[] = keyword.get(i).split(":");
                     sb.append(k[5]); 
-           	}
-            	}
+               }
+                }
         }
         sb.append("\r\n");
         sb.append(text);
@@ -642,6 +660,14 @@ public class Card extends MyObservable {
                 sb.append(sa[i].toString());
                 sb.append("\r\n");
             }
+        }
+        
+        // NOTE:
+        if (sb.toString().contains(" (NOTE: ")) {
+            sb.insert(sb.indexOf("(NOTE: "), "\r\n");
+        }
+        if (sb.toString().contains("(NOTE: ") && sb.toString().contains(".) ")) {
+            sb.insert(sb.indexOf(".) ")+3, "\r\n");
         }
         
         return sb.toString().replaceAll("CARDNAME", getName()).trim();

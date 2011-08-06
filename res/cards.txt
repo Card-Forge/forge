@@ -1,3 +1,22 @@
+Ancestral Vision
+no cost
+Sorcery
+Ancestral Vision is blue. (NOTE: Ancestral Vision currently draws 0 cards due to the combined upkeep/draw phases. Once they are seperated, this should work as expected.)
+CARDNAME is blue.
+Suspend:4:U
+spDrawCardsTgt:3:Target player draws three cards.:CARDNAME - draw 3 cards.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ancestral_vision.jpg
+
+Volcanic Fallout
+1 R R
+Instant
+Volcanic Fallout deals 2 damage to each creature and each player.
+CARDNAME can't be countered.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_fallout.jpg
+
 Sword of Body and Mind
 3
 Artifact Equipment
@@ -1013,17 +1032,6 @@ no text
 spDrawCardsTgt:3:Target player draws three cards.:Ancestral Recall - draw 3 cards.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/2u/en-us/card692.jpg
-
-Ancestral Vision
-no cost
-Sorcery
-Ancestral Vision is blue. (Note: Ancestral Vision currently draws 0 cards due to the combined upkeep/draw phases. Once they are seperated, this should work as expected.)
-CARDNAME is blue.
-Suspend:4:U
-spDrawCardsTgt:3:Target player draws three cards.:CARDNAME - draw 3 cards.
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ancestral_vision.jpg
 
 Ancient Craving
 3 B
@@ -33564,14 +33572,6 @@ Flying
 Haste
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card21020.jpg
-
-Volcanic Fallout
-1 R R
-Instant
-Volcanic Fallout can't be countered. Volcanic Fallout deals 2 damage to each creature and each player.
-CARDNAME can't be countered.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_fallout.jpg
 
 Volcanic Geyser
 X R R
