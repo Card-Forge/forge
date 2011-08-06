@@ -81,7 +81,8 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Crocodile Dundee 1", "easy", "Mono R deck with Mudbrawler Cohort and Bloodmark Mentor");
         addToDeckList("Crocodile Dundee 2", "medium", "Mono R deck with Mudbrawler Cohort and Bloodmark Mentor");
         addToDeckList("Crocodile Dundee 3", "hard", "Mono R deck with Mudbrawler Cohort and Bloodmark Mentor");
-        addToDeckList("Cyclops 3", "hard", "WUBRG Slivers deck with a few spells");
+        addToDeckList("Cyclops 2", "medium", "WUBRG Sliver deck with four copies of almost every sliver");
+        addToDeckList("Cyclops 3", "hard", "WUBRG Sliver deck with a few spells");
         
         addToDeckList("Da Vinci 1", "easy", "Mono B deck with Ashenmoor Cohort, Badmoon and some Fear");
         addToDeckList("Da Vinci 2", "medium", "Mono B deck with Korlash, Heir to Blackblade, Badmoon and threat removal");
