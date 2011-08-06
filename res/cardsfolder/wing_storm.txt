@@ -6,7 +6,7 @@ A:SP$DealDamage | Cost$ 2 G | Defined$ Opponent | NumDmg$ XOpp | SubAbility$ SVa
 SVar:DBDealDamage:DB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ XYou
 SVar:XOpp:Count$Valid Creature.withFlying+YouDontCtrl/Times.2
 SVar:XYou:Count$Valid Creature.withFlying+YouCtrl/Times.2
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wing_storm.jpg
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/135.jpg
