@@ -1,3 +1,11 @@
+Zulaport Enforcer
+B
+Creature Human Warrior
+LEVEL 1-2 3/3 LEVEL 3+ 5/5 CARDNAME can't be blocked except by black creatures.
+1/1
+Level up:4
+maxLevel:3
+
 Melancholy
 2 B
 Enchantment Aura

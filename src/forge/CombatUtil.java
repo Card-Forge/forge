@@ -217,6 +217,10 @@ public class CombatUtil {
             if(!CardUtil.getColors(blocker).contains(Constant.Color.Blue)) return false;
         }
         
+        if(attacker.getKeyword().contains("CARDNAME can't be blocked except by black creatures.")) {
+        	if(!CardUtil.getColors(blocker).contains(Constant.Color.Black))return false; 
+        }
+        
 //      if(attacker.getName().equals("Goldmeadow Dodger")) return blocker.getNetAttack() < 4;
         
 //      if(attacker.getName().equals("Juggernaut") && blocker.getType().contains("Wall")) return false;

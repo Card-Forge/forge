@@ -10454,6 +10454,36 @@ public class GameActionUtil {
 		}
 	};
 	
+	/*
+	 * Level up 4
+	 * LEVEL 1-2 3/3
+	 * LEVEL 3+ 5/5 CARDNAME can't be blocked except by black creatures.
+	 */
+	public static Command Zulaport_Enforcer  = new Command() {
+		private static final long serialVersionUID = -679141054963080569L;
+
+		public void execute(){
+			CardList list = AllZoneUtil.getCardsInPlay("Zulaport Enforcer");
+
+			for (Card c:list) {
+				int lcs = c.getCounters(Counters.LEVEL);
+				if ( lcs < 1) {
+					c.setBaseAttack(1);
+					c.setBaseDefense(1);
+				}
+				else if ( lcs >=1 && lcs < 3 ) {  //levels 1-2
+					c.setBaseAttack(3);
+					c.setBaseDefense(3);
+				}
+				else {
+					c.setBaseAttack(5);
+					c.setBaseDefense(5);
+					c.addNonStackingIntrinsicKeyword("CARDNAME can't be blocked except by black creatures.");
+				}
+			}
+		}
+	};
+	
 	public static Command Student_of_Warfare 		  = new Command() {
 		private static final long serialVersionUID = 2627513737024865169L;
 
@@ -15990,6 +16020,7 @@ public class GameActionUtil {
 		commands.put("Hada_Spy_Patrol", Hada_Spy_Patrol);
 		commands.put("Halimar_Wavewatch", Halimar_Wavewatch);
 		commands.put("Nirkana_Cutthroat", Nirkana_Cutthroat);
+		commands.put("Zulaport_Enforcer", Zulaport_Enforcer);
 		commands.put("Soulsurge_Elemental", Soulsurge_Elemental);
 		commands.put("Champions_Drake", Champions_Drake);
 		
