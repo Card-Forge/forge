@@ -1418,6 +1418,21 @@ public class CardFactory implements NewConstants {
             }
         }//Spore Saproling
         
+        if (hasKeyword(card, "abAddReflectedMana") != -1) {
+        	int n = hasKeyword(card,"abAddReflectedMana");
+        	
+        	String parse = card.getKeyword().get(n).toString();
+            card.removeIntrinsicKeyword(parse);
+        	String[] k = parse.split(":");
+        	
+        	// Reflecting Pool, Exotic Orchard, Fellwar Stone
+        	card.setReflectedLand(true);
+        	//
+            final Ability_Mana reflectedManaAbility = CardFactoryUtil.getReflectedManaAbility(card, k[1], k[2]); 
+
+            card.addSpellAbility(reflectedManaAbility);
+        } // ReflectingPool
+        
         if(hasKeyword(card, "spDamageTgt") != -1) {
             int n = hasKeyword(card, "spDamageTgt");
             if(n != -1) {

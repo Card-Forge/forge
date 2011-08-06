@@ -1,3 +1,36 @@
+Sylvok Explorer
+1 G
+Creature Human Druid
+no text
+1/1
+abAddReflectedMana:Color:Opp
+
+Quirion Explorer
+1 G
+Creature Elf Druid Scout
+no text
+1/1
+abAddReflectedMana:Color:Opp
+
+Harvester Druid
+1 G
+Creature Human Druid
+no text
+1/1
+abAddReflectedMana:Color:You
+
+Fellwar Stone
+2
+Artifact
+no text
+abAddReflectedMana:Color:Opp
+
+Tendo Ice Bridge
+no cost
+Land
+CARDNAME enters the battlefield with one charge counter on it.
+tap: add 1
+
 Soltari Trooper
 1 W
 Creature Soltari Soldier

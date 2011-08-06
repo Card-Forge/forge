@@ -64,26 +64,9 @@ class CardFactory_Lands {
             ability.setStackDescription("Put a +1/+1 counter on each green creature that entered the battlefield this turn.");
             card.addSpellAbility(ability);
         }
-        //*************** END ************ END **************************
+        //*************** END ************ END **************************        
 
-        //*************** START *********** START **************************
-        if (hasKeyword(card, "abAddReflectedMana") != -1) {
-        	int n = hasKeyword(card,"abAddReflectedMana");
-        	
-        	String parse = card.getKeyword().get(n).toString();
-            card.removeIntrinsicKeyword(parse);
-        	String[] k = parse.split(":");
-        	
-        	// Reflecting Pool, Exotic Orchard
-        	card.setReflectedLand(true);
-        	//
-            final Ability_Mana reflectedManaAbility = CardFactoryUtil.getReflectedManaAbility(card, k[1], k[2]); 
 
-            card.addSpellAbility(reflectedManaAbility);
-        } // ReflectingPool
-        //*************** END ************ END **************************
-        
-        
         //*************** START *********** START **************************
         //Ravinca Dual Lands
         if(cardName.equals("Blood Crypt") || cardName.equals("Breeding Pool") || cardName.equals("Godless Shrine")
@@ -428,6 +411,67 @@ class CardFactory_Lands {
 				public void execute() {
 					card.addCounter(Counters.CHARGE, 2);
 					card.tap();
+                }
+            };
+            card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Tendo Ice Bridge")){
+            final Ability_Mana tendo = new Ability_Mana(card, "tap, Remove a charge counter from CARDNAME: Add one mana of any color to your mana pool.") {
+				private static final long serialVersionUID = -785117149012567841L;
+
+                @Override
+                public void undo() {
+                	card.untap();
+                    card.addCounter(Counters.CHARGE, 1);
+                }
+                
+                //@Override
+                public String mana() {
+                    return this.choices_made[0].toString();
+                }
+                
+                @Override
+                public boolean canPlay() {
+                    if(choices_made[0] == null) choices_made[0] = "1";
+                    return super.canPlay() && card.getCounters(Counters.CHARGE) > 0;
+                }
+                
+                @Override
+                public void resolve() {
+                    card.subtractCounter(Counters.CHARGE, 1);
+                    card.tap();
+                    super.resolve();
+                }
+            };
+            
+            tendo.choices_made = new String[1];
+            tendo.setBeforePayMana(new Input() {
+                
+                private static final long serialVersionUID = 376497609786542558L;
+                
+                @Override
+                public void showMessage() {
+                	tendo.choices_made[0] = Input_PayManaCostUtil.getShortColorString(AllZone.Display.getChoiceOptional(
+                            "Select a Color", Constant.Color.onlyColors));
+                	if (tendo.choices_made[0] != null){
+                		AllZone.Stack.add(tendo);
+                	}
+                    stop();
+                }
+            });
+            
+            card.setReflectableMana("WUBRG");
+            card.addSpellAbility(tendo);
+            tendo.setDescription("CARDNAME - tap, remove a charge counter: Add one mana of any color to your mana pool");
+            tendo.setStackDescription("CARDNAME - tap, remove a charge counter: Add one mana of any color to your mana pool");
+        	
+            Command intoPlay = new Command() {
+				private static final long serialVersionUID = -2231880032957304542L;
+
+				public void execute() {
+					card.addCounter(Counters.CHARGE, 1);
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
