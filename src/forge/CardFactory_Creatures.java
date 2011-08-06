@@ -15528,6 +15528,71 @@ public class CardFactory_Creatures {
         	card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Metalworker")) {
+        	final Ability_Cost abCost = new Ability_Cost("T", card.getName(), true);
+        	
+        	final SpellAbility ability = new Ability_Activated(card, abCost, null) {
+        		private static final long serialVersionUID = 6661308920885136284L;
+        		
+        		@Override
+        		public boolean canPlayAI() {
+        			//compy doesn't have a manapool
+        			return false;
+        		}//canPlayAI()
+        		
+        		@Override
+        		public void resolve() {
+        			AllZone.InputControl.setInput(new Input() {
+						private static final long serialVersionUID = 6150236529653275947L;
+        				CardList revealed = new CardList();
+
+        				@Override
+        				public void showMessage() {
+        					//in case hand is empty, don't do anything
+        					if (AllZoneUtil.getPlayerHand(card.getController()).size() == 0) stop();
+
+        					AllZone.Display.showMessage(card.getName()+" - Reveal an artifact.  Revealed "+revealed.size()+" so far.  Click OK when done.");
+        					ButtonUtil.enableOnlyOK();
+        				}
+
+        				@Override
+        				public void selectCard(Card c, PlayerZone zone) {
+        					if(zone.is(Constant.Zone.Hand) && c.isArtifact() && !revealed.contains(c)) {
+        						revealed.add(c);
+
+        						//in case no more cards in hand to reveal
+        						if(revealed.size() == AllZoneUtil.getPlayerHand(card.getController()).size()) done();
+        						else
+        							showMessage();
+        					}
+        				}
+        				
+        				@Override
+        				public void selectButtonOK() {
+        					done();
+        				}
+
+        				void done() {
+        					StringBuilder sb = new StringBuilder();
+        					for(Card reveal:revealed) sb.append(reveal.getName()+"\n");
+        					JOptionPane.showMessageDialog(null, "Revealed Cards:\n"+sb.toString(), card.getName(), JOptionPane.PLAIN_MESSAGE);
+        					//adding mana
+        					for(int i = 0; i < revealed.size(); i++) {
+        						AllZone.ManaPool.addManaToFloating("2", card);
+        					}
+        					stop();
+        				}
+        			});
+        		}//resolve()
+        	};//SpellAbility
+
+        	ability.setDescription(abCost+"Reveal any number of artifact cards in your hand. Add 2 to your mana pool for each card revealed this way.");
+        	ability.setStackDescription(cardName+" - Reveal any number of artifact cards in your hand.");
+        	card.addSpellAbility(ability); 
+        }//*************** END ************ END **************************
+        
                
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
         {
