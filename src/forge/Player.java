@@ -441,7 +441,7 @@ public abstract class Player extends MyObservable{
     	addDamageAfterPrevention(damageToDo, source);   //damage prevention is already checked
     	
     	if ( damageToDo > 0 ) {
-    		GameActionUtil.executeCombatDamageToPlayerEffects(source, damageToDo);
+    		GameActionUtil.executeCombatDamageToPlayerEffects(this, source, damageToDo);
     		GameActionUtil.executeCombatDamageEffects(source, damageToDo);
     	}
     }

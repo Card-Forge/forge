@@ -5988,7 +5988,7 @@ public class GameActionUtil {
     }
     
     //restricted to combat damage, restricted to players
-	public static void executeCombatDamageToPlayerEffects(Card c, final int damage) {
+	public static void executeCombatDamageToPlayerEffects(final Player player, Card c, final int damage) {
 		
 		if (damage <= 0) return;
 		
@@ -6099,11 +6099,28 @@ public class GameActionUtil {
 		else if(c.getName().equals("The Unspeakable")) may_Return_Graveyard_to_Hand(c, "Arcane".split(","));
 		else if(c.getName().equals("Woebearer")) may_Return_Graveyard_to_Hand(c, "Creature".split(","));
 		else if(c.isEnchantedBy("Necromantic Thirst")) may_Return_Graveyard_to_Hand(c, "Creature".split(","));
+		else if(c.isEnchantedBy("Celestial Mantle")) execute_Celestial_Mantle( c);
 		
 		//Unused variable
 		//c.setDealtCombatDmgToOppThisTurn(true); 
 
 	}//executeCombatDamageToPlayerEffects
+	
+	private static void execute_Celestial_Mantle(final Card enchanted) {
+		ArrayList<Card> auras = enchanted.getEnchantedBy();
+		for(final Card aura:auras) {
+			if(aura.getName().equals("Celestial Mantle")) {
+				Ability doubleLife = new Ability(aura, "0") {
+					public void resolve() {
+						int life = enchanted.getController().getLife();
+						enchanted.getController().setLife(life * 2, aura);
+					}
+				};
+				doubleLife.setStackDescription(aura.getName()+" - "+enchanted.getController()+" doubles his or her life total.");
+				AllZone.Stack.add(doubleLife);
+			}
+		}
+	}
 	
 	/**
 	 * 
