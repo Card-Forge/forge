@@ -176,6 +176,15 @@ public class AllZoneUtil {
 		return cards;
 	}
 	
+	// Get a Cards in All Graveyards with a certain name
+	public static CardList getCardsInGraveyard(final String cardName) {
+		CardList cards = new CardList();
+		cards.add(getPlayerGraveyard(AllZone.HumanPlayer));
+		cards.add(getPlayerGraveyard(AllZone.ComputerPlayer));
+		cards = cards.getName(cardName);
+		return cards;
+	}
+	
 	//////// HAND
 	
 	/**

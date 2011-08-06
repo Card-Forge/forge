@@ -34,28 +34,20 @@ public class GameAction {
     }
     
     public Card moveTo(PlayerZone zone, Card c) {
-        //c = getCurrentCard(c); - breaks things, seems to not be needed
-        //not 100% sure though, this might be broken
-        
-
-        //here I did a switcheroo: remove card from zone first, 
-        //THEN do copyCard, to ensure leavesPlay() effects will execute.
-        
+    	// Remove card from Current Zone, if it has one
         PlayerZone p = AllZone.getZone(c);
-        //like if a Sorcery was resolved and needs to be put in the graveyard
-        //used by Input_Instant
-        if(p != null) p.remove(c);
+        if(p != null)
+        	p.remove(c);
         
-        //hack: do not reset unearthed
-        boolean unearthed = false;
-        if (c.isUnearthed())
-        	unearthed = true;
+        // Store if this card was Unearthed to reenable flag after the Copy is created
+        boolean unearthed = c.isUnearthed();
         
         //create new Card, which resets stats and anything that might have changed during play
-        if(!c.isToken()) c = AllZone.CardFactory.copyCard(c);
+        // Todo: Debug this, Persist doesn't seem to be getting it's damage cleared away 
+        if(!c.isToken()) 
+        	c = AllZone.CardFactory.copyCard(c);
         
-        if (unearthed)
-        	c.setUnearthed(true);
+        c.setUnearthed(unearthed);
         
         zone.add(c);
         return c;
@@ -2033,9 +2025,9 @@ public class GameAction {
         boolean persist = false;
         PlayerZone play = AllZone.getZone(c);
         
-        if(c.getOwner().equals(AllZone.HumanPlayer) || c.getOwner().equals(AllZone.ComputerPlayer)) ;
-        else throw new RuntimeException("GameAction : destroy() invalid card.getOwner() - " + c + " "
-                + c.getOwner());
+        Player owner = c.getOwner();
+        if (!(owner.isComputer() || owner.isHuman()))
+        		throw new RuntimeException("GameAction : destroy() invalid card.getOwner() - " + c + " " + owner);
         
         
         if(c.getKeyword().contains("Persist") && c.getCounters(Counters.M1M1) == 0) persist = true;
@@ -2056,13 +2048,7 @@ public class GameAction {
         
         
         //destroy card effects:
-        PlayerZone comp = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-        PlayerZone hum = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-        PlayerZone grv_comp = AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer);
-        PlayerZone grv_hum = AllZone.getZone(Constant.Zone.Graveyard, AllZone.HumanPlayer);
-        CardList list = new CardList();
-        list.addAll(comp.getCards());
-        list.addAll(hum.getCards());
+        CardList list = AllZoneUtil.getCardsInPlay();
         list = list.filter(new CardListFilter() {
             public boolean addCard(Card c) {
                 ArrayList<String> keywords = c.getKeyword();
@@ -2073,31 +2059,22 @@ public class GameAction {
                 return false;
             }
         });
-        CardList grv = new CardList();
-        grv.addAll(grv_comp.getCards());
-        grv.addAll(grv_hum.getCards());
-        grv = grv.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                if(c.getName().contains("Bridge from Below")) return true;
-                return false;
-            }
-        });
+        
+        CardList bridge = AllZoneUtil.getCardsInGraveyard("Bridge from Below");
         
         checkWheneverKeyword(c, "PermanentIntoGraveyard",null);
         for(int i = 0; i < list.size(); i++)
             GameActionUtil.executeDestroyCardEffects(list.get(i), c);
-        for(int i = 0; i < grv.size(); i++)
-            GameActionUtil.executeGrvDestroyCardEffects(grv.get(i), c);
+        for(int i = 0; i < bridge.size(); i++)
+            GameActionUtil.executeGrvDestroyCardEffects(bridge.get(i), c);
         
         if(persist) {
         	PlayerZone ownerPlay = AllZone.getZone(Constant.Zone.Play, c.getOwner());
-
-        	ownerPlay.add(c);
-        	moveTo(ownerPlay, c);
+        	
+        	c = moveTo(ownerPlay, c);
         	c.addCounter(Counters.M1M1, 1);
         }
         
-        //if (c.getName().equals("Rancor") || c.getName().equals("Brilliant Halo") || c.getName().equals("Undying Rage"))
         if(c.getKeyword().contains(
                 "When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.")) {
             PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getOwner());
@@ -2111,8 +2088,8 @@ public class GameAction {
 
         else if(c.getName().equals("Guan Yu, Sainted Warrior")) {
             PlayerZone library = AllZone.getZone(Constant.Zone.Library, c.getOwner());
-            moveTo(library, c);
-            c.getOwner().shuffle();
+            c = moveTo(library, c);
+            owner.shuffle();
         }
     }//sacrificeDestroy()
     
