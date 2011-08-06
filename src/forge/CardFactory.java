@@ -3833,7 +3833,7 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }
-//*************** END ************ END *************************
+        //*************** END ************ END *************************
         
         //*************** START *********** START **************************
         else if(cardName.equals("Nevinyrral's Disk")) {
@@ -3895,7 +3895,8 @@ public class CardFactory implements NewConstants {
                     computer = computer.getType("Creature");
                     
                     //the computer will at least destroy 2 more human creatures
-                    return computer.size() < human.size() - 1 || AllZone.Computer_Life.getLife() < 7;
+                    return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
+                    		(computer.size() < human.size() - 1 || AllZone.Computer_Life.getLife() < 7);
                 }
             };//SpellAbility
             card.addSpellAbility(ability);
@@ -7934,8 +7935,9 @@ public class CardFactory implements NewConstants {
                     computer = computer.getType("Creature");
                     
                     // the computer will at least destroy 2 more human creatures
-                    return computer.size() < human.size() - 1
-                            || (AllZone.Computer_Life.getLife() < 7 && !human.isEmpty());
+                    return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
+                    		(computer.size() < human.size() - 1
+                            || (AllZone.Computer_Life.getLife() < 7 && !human.isEmpty()));
                 }
             };// SpellAbility
             card.clearSpellAbility();
