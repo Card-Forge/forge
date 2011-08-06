@@ -2,6 +2,7 @@ Name:Dragon Blood
 ManaCost:3
 Types:Artifact
 Text:no text
+A:AB$PutCounter | Cost$ 3 T | Tgt$ TgtC | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_blood.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/163.jpg

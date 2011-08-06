@@ -3140,59 +3140,6 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         
-        //*************** START *********** START ************************
-        else if(cardName.equals("Adun Oakenshield")) {
-            final Ability_Tap ability = new Ability_Tap(card, "B R G") {
-                private static final long serialVersionUID = -7913968639880781838L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return getGraveCreatures().size() != 0;
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    CardList grave = getGraveCreatures();
-                    Card target = CardFactoryUtil.AI_getBestCreature(grave);
-                    setTargetCard(target);
-                }
-                
-                @Override
-                public void resolve() {
-                    if(card.getController().equals(AllZone.HumanPlayer)) {
-                        Card c = AllZone.Display.getChoice("Select card", getGraveCreatures().toArray());
-                        setTargetCard(c);
-                    }
-                    
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    
-                    if(AllZone.GameAction.isCardInZone(getTargetCard(), grave)) AllZone.GameAction.moveTo(hand,
-                            getTargetCard());
-                }//resolve()
-                
-                @Override
-                public boolean canPlay() {
-                    return super.canPlay() && getGraveCreatures().size() != 0 && super.canPlay();
-                }
-                
-                CardList getGraveCreatures() {
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    CardList list = new CardList(grave.getCards());
-                    list = list.getType("Creature");
-                    return list;
-                }
-            };//SpellAbility
-            ability.setDescription("B R G, Tap: Return target creature card from your graveyard to your hand.");
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(cardName).append(" - return target creature from your graveyard to your hand.");
-            ability.setStackDescription(sb.toString());
-            
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-        
-
         //*************** START *********** START **************************
         else if(cardName.equals("Penumbra Kavu")) {
             final Ability ability = new Ability(card, "0") {

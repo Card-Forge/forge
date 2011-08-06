@@ -1253,52 +1253,16 @@ class CardFactory_Lands {
         //*************** END ************ END **************************
         
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Duskmantle, House of Shadow")) {
-            card.clearSpellKeepManaAbility();
-            
-            Ability_Tap ability = new Ability_Tap(card, "U B") {
-                private static final long serialVersionUID = 42470566751344693L;
-                
-                @Override
-                public boolean canPlayAI() {
-                	Player player = getTargetPlayer();
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    CardList libList = new CardList(lib.getCards());
-                    return libList.size() > 0 && super.canPlayAI();
-                }
-                
-                @Override
-                public void resolve() {
-                    getTargetPlayer().mill(1);
-                }
-            };
-            ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
-            ability.setDescription("tap U B: Target player puts the top card of his or her library into his or her graveyard.");
-            ability.setStackDescription("Target player puts the top card of his or her library into his or her graveyard.");
-            card.addSpellAbility(ability);
-        }
-        //*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
+       //*************** START *********** START **************************
         else if(cardName.equals("Crypt of Agadeem")) {
             final SpellAbility ability = new Ability_Tap(card, "2") {
                 private static final long serialVersionUID = -3561865824450791583L;
                 
                 @Override
                 public void resolve() {
-                    /*CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
-                    list = list.getName("Mana Pool");*/
-                    Card mp = AllZone.ManaPool;//list.getCard(0);
-                    
-                    PlayerZone Grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    CardList evildead = new CardList();
-                    evildead.addAll(Grave.getCards());
-                    evildead = evildead.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return (c.isCreature() && c.isBlack());
-                        }
-                    });
+                    Card mp = AllZone.ManaPool;
+                    CardList evildead = AllZoneUtil.getPlayerTypeInGraveyard(card.getController(), "Creature");
+                    evildead = evildead.filter(AllZoneUtil.black);
                     
                     for(int i = 0; i < evildead.size(); i++) {
                         mp.addExtrinsicKeyword("ManaPool:B");
@@ -1316,52 +1280,10 @@ class CardFactory_Lands {
             sb.append(cardName).append(" adds B to your mana pool for each black creature card in your graveyard.");
             ability.setStackDescription(sb.toString());
             
-            //card.clearSpellAbility();
-            //card.setText(card.getText() +  ability.toString());
             card.addSpellAbility(ability);
-            
-            return card;
         }//*************** END ************ END **************************
         
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Rix Maadi, Dungeon Palace")) {
-            card.clearSpellKeepManaAbility();
-            
-            Ability_Tap ability = new Ability_Tap(card, "1 B R") {
-                private static final long serialVersionUID = 42470566751344693L;
-                
-                @Override
-                public boolean canPlay() {
-                    if(Phase.canCastSorcery(getSourceCard().getController())
-                            && AllZone.GameAction.isCardInPlay(card)) return true;
-                    else return false;
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    PlayerZone hand_c = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
-                    PlayerZone hand_h = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
-                    CardList hand_comp = new CardList(hand_c.getCards());
-                    CardList hand_hum = new CardList(hand_h.getCards());
-                    return ((hand_comp.size() - hand_hum.size()) > 1 && hand_hum.size() > 0) && super.canPlayAI();
-                }
-                
-                @Override
-                public void resolve() {
-                	AllZone.ComputerPlayer.discard(this);
-                	AllZone.HumanPlayer.discard(this);
-                    //AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
-                    //AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this); // wise discard should be here  
-                }
-            };
-            ability.setDescription("tap 1 B R: Each player discards a card. Activate this ability only any time you could cast a sorcery.");
-            ability.setStackDescription("Each player discards a card.");
-            card.addSpellAbility(ability);
-        }
-        //*************** END ************ END **************************        
-        
-        
+       
         //*************** START *********** START **************************
         else if(cardName.equals("Svogthos, the Restless Tomb")) {
         	final long[] timeStamp = new long[1];
