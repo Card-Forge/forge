@@ -4344,6 +4344,7 @@ public class CardFactoryUtil {
 	        }
         }
 		
+		/*
 		CardList greedy = AllZoneUtil.getCardsInPlay("Horn of Greed");
 		if (!greedy.isEmpty()){
 			for(final Card g : greedy){
@@ -4359,7 +4360,7 @@ public class CardFactoryUtil {
 	            
 	            AllZone.Stack.add(ability);
 			}
-		}
+		}*/
 		
 		AllZone.GameAction.checkWheneverKeyword(c, "PlayLand", null);
     }
