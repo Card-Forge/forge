@@ -4,6 +4,7 @@ Types:Enchantment Aura
 Text:Enchanted creature has protection from black. This effect doesn't remove Black Ward.
 K:Enchant creature
 K:enPump:Protection from black
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/black_ward.jpg
 End
