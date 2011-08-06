@@ -52,9 +52,8 @@ public class QuestData_BoosterPack implements NewConstants {
     
     //testing
     //nCommon is the number of common cards
-    @SuppressWarnings("unchecked")
-    private ArrayList<Object> getNewCards(int nCommon, int nUncommon, int nRare) {
-        ArrayList<Object> out = new ArrayList();
+    private ArrayList<String> getNewCards(int nCommon, int nUncommon, int nRare) {
+        ArrayList<String> out = new ArrayList<String>();
        
         out.addAll(getCommon(nCommon));
         out.addAll(getUncommon(nUncommon));
@@ -63,10 +62,8 @@ public class QuestData_BoosterPack implements NewConstants {
         return out;
     }//getNewCards()
     
-
     //testing
-    @SuppressWarnings("unchecked")
-    private void print(ArrayList list) {
+    private void print(ArrayList<String> list) {
         int nCreature = 0;
         int nSpell = 0;
         
@@ -156,9 +153,8 @@ public class QuestData_BoosterPack implements NewConstants {
         return stop;
     }
     
-    @SuppressWarnings("unchecked")
-    public ArrayList getCommon(int n) {
-        ArrayList bag = new ArrayList();
+    public ArrayList<String> getCommon(int n) {
+        ArrayList<String> bag = new ArrayList<String>();
         String c;
         int stop = getLoopStop(n);
         
@@ -174,9 +170,8 @@ public class QuestData_BoosterPack implements NewConstants {
     }//getCommon()
     
 
-    @SuppressWarnings("unchecked")
-    public ArrayList getUncommon(int n) {
-        ArrayList bag = new ArrayList();
+    public ArrayList<String> getUncommon(int n) {
+        ArrayList<String> bag = new ArrayList<String>();
         String c;
         int stop = getLoopStop(n);
         
@@ -219,9 +214,8 @@ public class QuestData_BoosterPack implements NewConstants {
         return getRandom(n, bag);
     }//getRare()
     
-    //returns String of the card name that matches the paramater "color"
-    @SuppressWarnings("unchecked")
-    private String getColor(String color, ArrayList list) {
+    //returns String of the card name that matches the parameter "color"
+    private String getColor(String color, ArrayList<String> list) {
         Collections.shuffle(list, random);
         
         Card c;
@@ -237,10 +231,9 @@ public class QuestData_BoosterPack implements NewConstants {
     }//getColor()
     
 
-    @SuppressWarnings("unchecked")
     private String getColor(Card c) {
         String m = c.getManaCost();
-        Set colors = new HashSet();
+        Set<String> colors = new HashSet<String>();
         
         for(int i = 0; i < m.length(); i++) {
             switch(m.charAt(i)) {

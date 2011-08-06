@@ -104,7 +104,6 @@ public class QuestData implements NewConstants {
     }//QuestData
     
     //adds cards to card pool and sets difficulty
-    @SuppressWarnings("unchecked")
     public void newGame(int difficulty, String m) {
         setDifficulty(difficulty);
         
@@ -189,7 +188,6 @@ public class QuestData implements NewConstants {
         readAIQuestDeckFiles(this, ai_getDeckNames());
     }
     
-    @SuppressWarnings("unchecked")
     static public QuestData loadData() {
         try {
             //read file "questData"
@@ -231,7 +229,7 @@ public class QuestData implements NewConstants {
             data.myDecks = state.myDecks;
             data.aiDecks = state.aiDecks;
             
-            readAIQuestDeckFiles(data, new ArrayList(data.aiDecks.keySet()));
+            readAIQuestDeckFiles(data, new ArrayList<String>(data.aiDecks.keySet()));
             
             return data;
         }//try
@@ -388,7 +386,6 @@ public class QuestData implements NewConstants {
     
     //adds 11 cards, to the current card pool
     //(I chose 11 cards instead of 15 in order to make things more challenging)
-    @SuppressWarnings("unchecked")
     public void addCards() {
         int nCommon = qdPrefs.getNumCommon();
         int nUncommon = qdPrefs.getNumUncommon();
