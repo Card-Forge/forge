@@ -23,6 +23,7 @@ public class GameActionUtil {
 		
 		AllZone.GameAction.CheckWheneverKeyword(AllZone.CardFactory.HumanNullCard, "BeginningOfUpkeep", null);
 		
+		upkeep_The_Abyss();
 		upkeep_Yawgmoth_Demon();
 		upkeep_Lord_of_the_Pit();
 		upkeep_Drop_of_Honey();
@@ -3384,6 +3385,66 @@ public class GameActionUtil {
 			}
 		}
 	}//damageUpkeepCost
+	
+	private static void upkeep_The_Abyss() {
+		/*
+		 * At the beginning of each player's upkeep, destroy target
+		 * nonartifact creature that player controls of his or her
+		 * choice. It can't be regenerated.
+		 */
+		final String player = AllZone.Phase.getActivePlayer();
+		final CardList cards = AllZoneUtil.getCardsInPlay("The Abyss");
+		
+		for(Card c:cards) {
+			final Card abyss = c;
+			
+			final Ability sacrificeCreature = new Ability(abyss, "") {
+				@Override
+				public void resolve() {
+					if(player.equals(Constant.Player.Human)) {
+						AllZone.InputControl.setInput( new Input() {
+							private static final long serialVersionUID = 4820011040853968644L;
+							public void showMessage() {
+								AllZone.Display.showMessage(abyss.getName()+" - Select one nonartifact creature to destroy");
+								ButtonUtil.disableAll();
+							}
+							public void selectCard(Card selected, PlayerZone zone) {
+								//probably need to restrict by controller also
+								if(selected.isCreature() && !selected.isArtifact() && zone.is(Constant.Zone.Play)
+										&& zone.getPlayer().equals(Constant.Player.Human)) {
+									AllZone.GameAction.destroyNoRegeneration(selected);
+									stop();
+								}
+							}//selectCard()
+						});//Input
+					}
+					else { //computer
+						CardList targets = abyss_getTargets(player);
+						CardList indestruct = targets.getKeyword("Indestructible");
+						if(indestruct.size() > 0) {
+							AllZone.GameAction.destroyNoRegeneration(indestruct.get(0));
+						}
+						else {
+							Card target = CardFactoryUtil.AI_getWorstCreature(targets);
+							if(null == target) {
+								//must be nothing valid to destroy
+							}
+							else AllZone.GameAction.destroyNoRegeneration(target);
+						}
+					}
+				}//resolve
+			};//sacrificeCreature
+			sacrificeCreature.setStackDescription(abyss.getName()+" - destroy a nonartifact creatur of your choice.");
+			if(abyss_getTargets(player).size() > 0)
+				AllZone.Stack.add(sacrificeCreature);
+		}//end for
+	}//The Abyss
+	
+	private static CardList abyss_getTargets(final String player) {
+		CardList creats = AllZoneUtil.getCreaturesInPlay(player);
+		creats = creats.filter(AllZoneUtil.nonartifacts);
+		return creats;
+	}
 
 	private static void upkeep_Yawgmoth_Demon() {
 		/*

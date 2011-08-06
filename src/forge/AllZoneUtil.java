@@ -469,6 +469,12 @@ public class AllZoneUtil {
 		}
 	};
 	
+	public static CardListFilter nonartifacts = new CardListFilter() {
+		public boolean addCard(Card c) {
+			return !c.isArtifact();
+		}
+	};
+	
 	public static CardListFilter lands = new CardListFilter() {
 		public boolean addCard(Card c) {
 			return c.isLand();
