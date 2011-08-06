@@ -919,6 +919,16 @@ public class AbilityFactory {
 			if (!players.contains(p))
 				players.add(p);
 		}
+		else if (defined.equals("AttackingPlayer")){
+			Player p = AllZone.Combat.getAttackingPlayer();
+			if (!players.contains(p))
+				players.add(p);
+		}
+		else if (defined.equals("DefendingPlayer")){
+			Player p = AllZone.Combat.getDefendingPlayer();
+			if (!players.contains(p))
+				players.add(p);
+		}
 		else{
 			if (defined.equals("You") || defined.equals("Each"))
 				players.add(sa.getActivatingPlayer());
