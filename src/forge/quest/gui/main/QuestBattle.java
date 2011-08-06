@@ -269,14 +269,15 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Professor X 3", "hard", "WUB Esper Artifacts deck with Master of Etherium and Esper Stormblade");
         
         addToDeckList("R2-D2 3", "hard", "U Black Vise deck with bounce (Boomerang) spells and Howling Mine");
-        addToDeckList("Radagast 2", "medium ", "G Muraganda Petroglyphs deck with vanilla creatures and a few tokens");
-        addToDeckList("Radiant 3", "medium ", "WUB flying creature deck with Radiant, Archangel, Gravitational Shift and Moat");
+        addToDeckList("Radagast 2", "medium", "Mono G Muraganda Petroglyphs deck with vanilla creatures and a few tokens");
+        addToDeckList("Radiant 3", "hard", "WUB flying creature deck with Radiant, Archangel, Gravitational Shift and Moat");
 //        addToDeckList("Ras Al Ghul 2", "medium", "RG Biorhythm deck");
 //        addToDeckList("Ras Al Ghul 3", "hard", "WG Eldrazi Monument deck");
 //        addToDeckList("Raven 1", "easy", "Birds deck");
 //        addToDeckList("Raven 2", "medium", "Birds deck");
 //        addToDeckList("Raven 3", "hard", " Possessed Birds deck");
 //        addToDeckList("Red Skull 2", "medium", "BR Metalcraft deck");
+        addToDeckList("Redwall 2", "medium", "Mono R Defender deck with Vent Sentinel");
 //        addToDeckList("Robin 2", "medium", "G Big Green deck");
 //        addToDeckList("Robin 3", "hard", "WG Standard deck");
         addToDeckList("Rocky 1", "easy", "WUR Pro red deck with Flamebreak, Tremor, Pyroclasm");
