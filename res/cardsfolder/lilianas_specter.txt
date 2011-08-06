@@ -4,7 +4,8 @@ Types:Creature Specter
 Text:no text
 PT:2/1
 K:Flying
-K:WheneverKeyword:EntersBattleField:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:When Liliana's Specter enters the battlefield, each opponent discards a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, each opponent discards a card.
+SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ Opponent | NumCards$ 1 | Mode$ TgtChoose
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lilianas_specter.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/104.jpg
