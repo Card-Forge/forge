@@ -448,7 +448,7 @@ public class CardFactory implements NewConstants {
         				String kk[] = xy.split("\\$");
         				DefenseX[0] = kk[1];
         				
-        				if (ptk[0].contains("-"))
+        				if (ptk[1].contains("-"))
         				{
         					if (DefenseX[0].contains("/"))
         						DefenseX[0] = DefenseX[0].replace("/", "/Negative");
@@ -539,7 +539,7 @@ public class CardFactory implements NewConstants {
 
                 public boolean canPlayAI()
                 {
-                	System.out.println("Phase - " + AllZone.Phase.getPhase());
+                	//System.out.println("Phase - " + AllZone.Phase.getPhase());
                 	String curPhase = AllZone.Phase.getPhase();
                 	if (curPhase.equals(Constant.Phase.Main2)) 
                 		return false;
