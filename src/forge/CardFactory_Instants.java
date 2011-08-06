@@ -2982,8 +2982,6 @@ public class CardFactory_Instants {
         }//*************** END ************ END **************************
         
         
-        
-
         //*************** START *********** START **************************
         else if(cardName.equals("Banishing Knack")) {
             SpellAbility spell = new Spell(card) {
@@ -3007,7 +3005,9 @@ public class CardFactory_Instants {
                         
                         @Override
                         public void resolve() {
-                            setStackDescription(creature + " - Return" + getTargetCard() + "to its owner's hand");
+                            StringBuilder sb = new StringBuilder();
+                            sb.append(creature).append(" - Return").append(getTargetCard()).append("to its owner's hand");
+                            setStackDescription(sb.toString());
                             final Card[] target = new Card[1];
                             target[0] = getTargetCard();
                             PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, target[0].getOwner());
@@ -3018,7 +3018,7 @@ public class CardFactory_Instants {
                             }
                         }//resolve()
                     };//tBanish;
-                    tBanish.setDescription("T: Return target nonland permanent to its owner's hand.");
+                    tBanish.setDescription("tap: Return target nonland permanent to its owner's hand.");
                     creature.addSpellAbility(tBanish);
                     CardList all = new CardList();
                     all.addAll(AllZone.Human_Play.getCards());
@@ -3043,10 +3043,9 @@ public class CardFactory_Instants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
             card.clearSpellAbility();
             card.addSpellAbility(spell);
-            spell.setDescription("Until end of turn, target creature gains \"T: Return target nonland permanent to its owner's hand.\"");
-            spell.setStackDescription("Target creature gains \"T: Return target nonland permanent to its owner's hand.\"");
+            spell.setDescription("Until end of turn, target creature gains \"tap: Return target nonland permanent to its owner's hand.\"");
+            spell.setStackDescription("Target creature gains \"tap: Return target nonland permanent to its owner's hand.\"");
         }//*************** END ************ END **************************
-        
         
 
         //*************** START *********** START **************************

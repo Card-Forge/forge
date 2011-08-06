@@ -6856,8 +6856,6 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************  
         
 
-       
-
         //*************** START *********** START **************************
         else if(cardName.equals("Dragon Blood")) {
             Ability_Tap ability = new Ability_Tap(card, "3") {
@@ -6882,11 +6880,14 @@ public class CardFactory implements NewConstants {
                 }
             };
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
-            ability.setDescription("3, T: Put a +1/+1 counter on target creature.");
-            ability.setStackDescription(card + ": put a +1/+1 counter on target Creature.");
+            ability.setDescription("3, tap: Put a +1/+1 counter on target creature.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(": put a +1/+1 counter on target Creature.");
+            ability.setStackDescription(sb.toString());
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
 
+        
         //*************** START *********** START **************************
         else if(cardName.equals("AEther Vial")) {
             //final int[] converted = null;
@@ -8197,7 +8198,7 @@ public class CardFactory implements NewConstants {
                 }
             };
             ability.setBeforePayMana(runtime);
-            ability.setDescription("T, Sacrifice Ashnod's Transmogrant: put a +1/+1 counter on target nonartifact creature. That creature becomes an artifact in addition to its other types.");
+            ability.setDescription("tap, Sacrifice Ashnod's Transmogrant: put a +1/+1 counter on target nonartifact creature. That creature becomes an artifact in addition to its other types.");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
        
