@@ -16,26 +16,31 @@ public class MP3Player implements NewConstants{
 
 	private Player player;
 	private InputStream is;
+	private File file;
 
 	/** Creates a new instance of MP3Player */
 	public MP3Player(String filename) {
+		File base = ForgeProps.getFile(SOUND_BASE);
+		file = new File(base, filename);
+		if(GuiDisplay3.playsoundCheckboxForMenu.isSelected()&&file.exists()){
 		try {
-			// Create an InputStream to the file
-			File base = ForgeProps.getFile(SOUND_BASE);
-			File file = new File(base, filename);
+			// Create an InputStream to the file			
 			is = new FileInputStream(file);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		}	
 	}
 
 	public void play() {
+		if(GuiDisplay3.playsoundCheckboxForMenu.isSelected()&&file.exists()){
 		try {
 			player = new Player(is);
 			PlayerThread pt = new PlayerThread();
 			pt.start();			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
 		}
 	}
 	

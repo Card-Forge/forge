@@ -167,8 +167,8 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     private void addMenu() {
         Object[] obj = {
                 HUMAN_GRAVEYARD_ACTION, HUMAN_REMOVED_ACTION, HUMAN_FLASHBACK_ACTION, COMPUTER_GRAVEYARD_ACTION,
-                COMPUTER_REMOVED_ACTION, GuiDisplay3.eotCheckboxForMenu, new JSeparator(),
-                ErrorViewer.ALL_THREADS_ACTION, new JSeparator(), CONCEDE_ACTION};
+                COMPUTER_REMOVED_ACTION, new JSeparator(), GuiDisplay3.eotCheckboxForMenu, GuiDisplay3.playsoundCheckboxForMenu, new JSeparator(),
+                ErrorViewer.ALL_THREADS_ACTION, CONCEDE_ACTION};
         
         JMenu gameMenu = new JMenu(ForgeProps.getLocalized(MENU_BAR.MENU.TITLE));
         for(Object o:obj) {
@@ -1148,9 +1148,10 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     
     public boolean stopEOT() {
         return eotCheckboxForMenu.isSelected();
-    }
+    }   
     
     public static JCheckBoxMenuItem eotCheckboxForMenu  = new JCheckBoxMenuItem("Stop at End of Turn", false);
+    public static JCheckBoxMenuItem playsoundCheckboxForMenu  = new JCheckBoxMenuItem("Play Sound", true);
     
     MultiSplitPane                  pane                = new MultiSplitPane();
     JButton                         cancelButton        = new JButton();
