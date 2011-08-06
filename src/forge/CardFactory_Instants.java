@@ -1573,6 +1573,7 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
+                	card.getController().drawCards(1);
                     CardList count = new CardList();
                     count.addAll(AllZone.Human_Graveyard.getCards());
                     count.addAll(AllZone.Computer_Graveyard.getCards());
