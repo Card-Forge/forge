@@ -1,3 +1,40 @@
+Thalakos Seer
+U U
+Creature Thalakos Wizard
+no text
+1/1
+Shadow
+WheneverKeyword:LeavesBattleField:Self:Any:DrawCards/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Thalakos Seer leaves the battlefield, draw a card.
+
+Shivan Meteor
+3 R R
+Sorcery
+no text
+spDamageTgtC:13:Shivan Meteor deals 13 damage to target creature.
+Suspend:2:1 R R
+
+Rift Bolt
+2 R
+Sorcery
+no text
+spDamageTgtCP:3
+Suspend:1:R
+
+Plunder
+4 R
+Sorcery
+Destroy target artifact or land.
+spDestroyTgt:Artifact,Land
+Suspend:4:1 R
+
+Infiltrator il-Kor
+4 U
+Creature Kor Rogue
+no text
+3/1
+Shadow
+Suspend:2:1 U
+
 Ancestral Vision
 no cost
 Sorcery
@@ -65,7 +102,7 @@ StaticEffect:Play:AllCards:Keyword/Flash:Type.Sliver:Any player may play Sliver 
 
 Keldon Halberdier
 4 R
-Creature - Human Warrior
+Creature Human Warrior
 no text
 4/1
 First Strike
@@ -73,7 +110,7 @@ Suspend:4:R
 
 Duskrider Peregrine
 5 W
-Creature - Bird
+Creature Bird
 no text
 3/3
 Flying
@@ -82,7 +119,7 @@ Suspend:3:1 W
 
 Errant Ephemeron
 6 U
-Creature - Illusion
+Creature Illusion
 no text
 4/4
 Flying
@@ -90,7 +127,7 @@ Suspend:4:1 U
 
 Durkwood Baloth
 4 G G
-Creature - Beast
+Creature Beast
 no text
 5/5
 Suspend:5:G

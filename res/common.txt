@@ -21,6 +21,7 @@ Air Bladder
 Airborne Aid
 Ajani's Mantra
 Akki Drillmaster
+Akki Underling
 Akrasan Squire
 Alaborn Grenadier
 Alaborn Musketeer
@@ -106,6 +107,7 @@ Barony Vampire
 Barren Moor
 Barrenton Cragtreads
 Basal Thrull
+Basking Rootwalla
 Battering Craghorn
 Battering Sliver
 Battle Hurda
@@ -274,6 +276,7 @@ Convolute
 Copper Myr
 Coral Eel
 Coral Merfolk
+Corpulent Corpse
 Corrupt
 Counsel of the Soratami
 Courier Hawk
@@ -388,6 +391,7 @@ Druid of the Anima
 Dryad's Favor
 Dungeon Shade
 Duress
+Durkwood Baloth
 Durkwood Boars
 Dusk Imp
 Duskrider Falcon
@@ -423,6 +427,7 @@ Energy Tap
 Enfeeblement
 Enslaved Scout
 Entangling Vines
+Errant Ephemeron
 Erratic Explosion
 Esper Cormorants
 Esper Stormblade
@@ -528,6 +533,7 @@ Gemhide Sliver
 Geothermal Crevice
 Gerrard's Command
 Gerrard's Irregulars
+Ghitu Slinger
 Ghost Warden
 Ghostfire
 Ghostly Visit
@@ -686,6 +692,7 @@ Index
 Indomitable Will
 Infectious Horror
 Infiltrate
+Infiltrator il-Kor
 Information Dealer
 Inkfathom Divers
 Inner Calm, Outer Strength
@@ -737,6 +744,7 @@ Keen-Eyed Archers
 Keeneye Aven
 Keeper of Kookus
 Keepers of the Faith
+Keldon Halberdier
 Keldon Vandals
 Kelinore Bat
 Khalni Garden
@@ -1024,6 +1032,7 @@ Plated Sliver
 Plated Spider
 Plated Wurm
 Plover Knights
+Plunder
 Polluted Mire
 Ponder
 Pouncing Jaguar
@@ -1051,6 +1060,7 @@ Pyrite Spellbomb
 Python
 Qasali Pridemage
 Quag Vampires
+Quick Sliver
 Quiet Purity
 Quirion Explorer
 Raging Bull
@@ -1114,6 +1124,7 @@ Ribbons of the Reikai
 Ridge Rannet
 Ridgeline Rager
 Riding Red Hare
+Rift Bolt
 Righteous Avengers
 Rimebound Dead
 Riot Spikes
@@ -1209,6 +1220,7 @@ Sewn-Eye Drake
 Shade of Trokair
 Shadow Rider
 Shadow Rift
+Shadow Sliver
 Shambling Strider
 Shanodin Dryads
 Shaper Guildmage
@@ -1288,6 +1300,7 @@ Smoldering Crater
 Snapping Drake
 Sneaky Homunculus
 Sokenzan Bruiser
+Soldevi Steam Beast
 Solidarity
 Soltari Foot Soldier
 Soltari Trooper
@@ -1298,6 +1311,7 @@ Soul's Attendant
 Sound the Call
 Southern Elephant
 Spark Spray
+Sparkmage Apprentice
 Sparksmith
 Specter's Wail
 Spell Pierce
@@ -1404,6 +1418,7 @@ Teroh's Faithful
 Terramorphic Expanse
 Territorial Baloth
 Terror
+Thalakos Seer
 Thalakos Sentry
 Thallid
 Thallid Shell-Dweller

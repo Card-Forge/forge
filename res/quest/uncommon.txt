@@ -16,6 +16,7 @@ Agent of Masks
 Air Elemental
 Ajani's Pridemate
 Akki Raider
+Akoum Boulderfoot
 Akoum Refuge
 Alaborn Cavalier
 Alaborn Zealot
@@ -51,6 +52,7 @@ Ardent Plea
 Armored Galleon
 Armored Griffin
 Arrogant Vampire
+Arrogant Wurm
 Artisan of Kozilek
 Ashen Monstrosity
 Ashenmoor Gouger
@@ -244,6 +246,7 @@ Duergar Cave-Guard
 Dunerider Outlaw
 Duskdale Wurm
 Duskmantle, House of Shadow
+Duskrider Peregrine
 Dwarven Demolition Team
 Dwarven Ruins
 Earth Elemental
@@ -255,6 +258,7 @@ Elite Vanguard
 Elven Riders
 Elvish Aberration
 Elvish Harbinger
+Enatu Golem
 Encroach
 Engineered Plague
 Enlightened Tutor
@@ -669,6 +673,7 @@ Rathi Fiend
 Reanimate
 Rebuild
 Recall
+Reckless One
 Reckless Wurm
 Red Ward
 Regrowth
@@ -699,6 +704,7 @@ Rockslide Elemental
 Rod of Ruin
 Rootbreaker Wurm
 Ruins of Trokair
+Runed Servitor
 Sabertooth Wyvern
 Salt Marsh
 Saltblast
@@ -737,6 +743,7 @@ Shatterstorm
 Shepherd of the Lost
 Shifting Wall
 Shimmering Barrier
+Shivan Meteor
 Shivan Oasis
 Shivan Raptor
 Shrieking Specter

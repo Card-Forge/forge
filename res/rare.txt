@@ -26,6 +26,7 @@ Aluren
 Ambassador Laquatus
 Amulet of Vigor
 Ancestral Recall
+Ancestral Vision
 Ancient Craving
 Ancient Silverback
 Ancient Spider
@@ -48,6 +49,7 @@ Arid Mesa
 Armageddon
 Armistice
 Armored Guardian
+Ascendant Evincar
 Ashes to Ashes
 Augury Adept
 Auriok Champion
@@ -63,6 +65,7 @@ Azusa, Lost but Seeking
 Bad Moon
 Badlands
 Balance
+Balefire Liege
 Ball Lightning
 Baneslayer Angel
 Barren Glory
@@ -94,6 +97,7 @@ Blood Crypt
 Bloodghast
 Bloodstained Mire
 Blurred Mongoose
+Bogardan Hellkite
 Boris Devilboon
 Borrowing the East Wind
 Bottle of Suleiman
@@ -260,6 +264,7 @@ Eye of Ugin
 Fable of Wolf and Owl
 Fastbond
 Fault Line
+Fauna Shaman
 Felidar Sovereign
 Femeref Enchantress
 Feroz's Ban
@@ -476,6 +481,7 @@ Lord of Atlantis
 Lord of Extinction
 Lord of the Undead
 Lorthos, the Tidemaker
+Lotus Bloom
 Lotus Cobra
 Lotus Guardian
 Loxodon Gatekeeper
@@ -532,6 +538,7 @@ Mind Shatter
 Mind Spring
 Mind Twist
 Mind's Desire
+Mind's Eye
 Mirari
 Mirri the Cursed
 Mirri, Cat Warrior
