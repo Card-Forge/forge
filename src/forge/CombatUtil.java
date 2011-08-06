@@ -2119,8 +2119,6 @@ public class CombatUtil {
         } else if(a.getName().equals("Sylvan Basilisk")) {
             AllZone.GameAction.destroy(b);
             System.out.println("destroyed blocker " + b.getName());
-        } else if(a.getName().equals("Quagmire Lamprey")) {
-            b.addCounter(Counters.M1M1, 1);
         } else if(a.getName().equals("Elven Warhounds")) {
         	AllZone.GameAction.moveToLibrary(b);
         } else if((a.getName().equals("Silkenfist Order") || a.getName().equals("Silkenfist Fighter"))
