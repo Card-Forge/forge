@@ -91,7 +91,7 @@ class CardFactory_Lands {
                     
                     if(AllZone.ComputerPlayer.getLife() > 9) pay = MyRandom.random.nextBoolean();
                     
-                    if(pay) AllZone.ComputerPlayer.subtractLife(2,card);
+                    if(pay) AllZone.ComputerPlayer.loseLife(2, card);
                     else card.tap();
                 }
                 
@@ -100,7 +100,7 @@ class CardFactory_Lands {
                     if(2 < life) {
                         String[] choices = {"Yes", "No"};
                         Object o = AllZone.Display.getChoice("Pay 2 life?", choices);
-                        if(o.equals("Yes")) AllZone.HumanPlayer.subtractLife(2,card);
+                        if(o.equals("Yes")) AllZone.HumanPlayer.loseLife(2, card);
                         else tapCard();
                     }//if
                     else tapCard();
@@ -117,9 +117,7 @@ class CardFactory_Lands {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    Card c = card;
-                    //AllZone.GameAction.gainLife(c.getController(), 2);
-                    c.getController().gainLife(2);
+                    card.getController().gainLife(2, card);
                 }
             };
             Command intoPlay = new Command() {
@@ -490,10 +488,7 @@ class CardFactory_Lands {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    Card c = card;
-                    //c.tap();
-                    //AllZone.GameAction.gainLife(c.getController(), 1);
-                    c.getController().gainLife(1);
+                    card.getController().gainLife(1, card);
                 }
             };
             Command intoPlay = new Command() {
@@ -1294,7 +1289,7 @@ class CardFactory_Lands {
                 @Override
                 public void selectCard(Card card, PlayerZone zone) {
                     if(zone.is(Constant.Zone.Hand)) {
-                        AllZone.GameAction.discard(card, null);
+                        card.getController().discard(card, null);
                         n++;
                         showMessage();
                     }
@@ -3384,8 +3379,7 @@ class CardFactory_Lands {
                
                 @Override
                 public void resolve() {
-                    //AllZone.GameAction.gainLife(AllZone.ComputerPlayer, 1);
-                	AllZone.ComputerPlayer.gainLife(1);
+                    card.getController().getOpponent().gainLife(1, card);
                     super.resolve();
                 }
                 
@@ -3400,8 +3394,7 @@ class CardFactory_Lands {
                
                 @Override
                 public void resolve() {
-                    //AllZone.GameAction.gainLife(AllZone.ComputerPlayer, 1);
-                	AllZone.ComputerPlayer.gainLife(1);
+                    card.getController().getOpponent().gainLife(1, card);
                     super.resolve();
                 }
                 

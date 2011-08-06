@@ -88,7 +88,7 @@ public class Computer_Cleanup extends Input {
         Card[] c = AllZone.Computer_Hand.getCards();
         // while(7 < c.length) {
         while(MaxHandSize < c.length && MaxHandSize != -1) {
-            AllZone.GameAction.discard(c[r.nextInt(c.length)], null);
+        	c[r.nextInt(c.length)].getController().discard(c[r.nextInt(c.length)], null);
             c = AllZone.Computer_Hand.getCards();
         }
         

@@ -80,6 +80,86 @@ public class AIPlayer extends Player{
 		return use;
 	}
 	
+	////////////////////////////////
+	///
+	/// replaces AllZone.GameAction.discard* methods
+	///
+	////////////////////////////////
+	
+	public CardList discard(final int num, final SpellAbility sa) {
+		CardList discarded = new CardList();
+		for(int i = 0; i < num; i++) {
+			CardList hand = AllZoneUtil.getPlayerHand(this);
+
+			if(hand.size() > 0) {
+				CardList basicLandsInPlay = AllZoneUtil.getPlayerTypeInPlay(this, "Basic");
+				if(basicLandsInPlay.size() > 5) {
+					CardList basicLandsInHand = hand.getType("Basic");
+					if(basicLandsInHand.size() > 0) {
+						discarded.add(hand.get(0));
+						doDiscard(basicLandsInHand.get(CardUtil.getRandomIndex(basicLandsInHand)), sa);
+					}
+					else{
+						CardListUtil.sortAttackLowFirst(hand);
+						CardListUtil.sortNonFlyingFirst(hand);
+						discarded.add(hand.get(0));
+						doDiscard(hand.get(0), sa);
+					}
+				}
+				else {
+					CardListUtil.sortCMC(hand);
+					discarded.add(hand.get(0));
+					doDiscard(hand.get(0), sa);
+				}
+			}
+		}
+		return discarded;
+	}//end discard
+	
+	public void handToLibrary(final int numToLibrary, final String libPosIn) {
+		String libPos = libPosIn;
+		for(int i = 0; i < numToLibrary; i++) {
+            if(libPos.equals("Top") || libPos.equals("Bottom")) libPos = libPos.toLowerCase();
+            else {
+                Random r = new Random();
+                if(r.nextBoolean()) libPos = "top";
+                else libPos = "bottom";
+            }
+            CardList hand = new CardList();
+            hand.addAll(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
+            
+            CardList blIP = new CardList();
+            blIP.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards());
+            blIP = blIP.getType("Basic");
+            if(blIP.size() > 5) {
+                CardList blIH = hand.getType("Basic");
+                if(blIH.size() > 0) {
+                    Card card = blIH.get(CardUtil.getRandomIndex(blIH));
+                    AllZone.Computer_Hand.remove(card);
+                    if(libPos.equals("top")) AllZone.Computer_Library.add(card, 0);
+                    else AllZone.Computer_Library.add(card);
+                    return;
+                }
+                
+                CardListUtil.sortAttackLowFirst(hand);
+                CardListUtil.sortNonFlyingFirst(hand);
+                if(libPos.equals("top")) AllZone.Computer_Library.add(hand.get(0), 0);
+                else AllZone.Computer_Library.add(hand.get(0));
+                AllZone.Computer_Hand.remove(hand.get(0));
+                return;
+            } else {
+                CardListUtil.sortCMC(hand); 
+                if(libPos.equals("top")) AllZone.Computer_Library.add(hand.get(0), 0);
+                else AllZone.Computer_Library.add(hand.get(0));
+                AllZone.Computer_Hand.remove(hand.get(0));
+                return;
+            }
+        }
+	}
+	
+	
+	///////////////////////////
+	
 	protected void doScry(final CardList topN, final int N) {
 		int num = N;
 		for(int i = 0; i < num; i++) {

@@ -105,9 +105,13 @@ public class GameAction {
     	if(!c.isToken()) lib.add(c);
     }
     
+    @Deprecated
     public void discardRandom(Player player, SpellAbility sa) {
+    	player.discardRandom(sa);
+    	/*
         Card[] c = AllZone.getZone(Constant.Zone.Hand, player).getCards();
         if(c.length != 0) discard(CardUtil.getRandom(c), sa);
+        */
     }
     
     public void mill(Player player, int n)
@@ -121,6 +125,7 @@ public class GameAction {
         }
     }
     
+    /*
     public void discard(Card c, SpellAbility sa)
     {
     	if (sa!= null)
@@ -145,14 +150,19 @@ public class GameAction {
         else
         	moveToGraveyard(c);
     }
+    */
     
+    @Deprecated
     public void discardRandom(Player player, int numDiscard, SpellAbility sa) {
+    	player.discardRandom(numDiscard, sa);
+    	/*
         for(int i = 0; i < numDiscard; i++) {
             Card[] c = AllZone.getZone(Constant.Zone.Hand, player).getCards();
             if(c.length != 0) discard(CardUtil.getRandom(c), sa);
-        }
+        }*/
     }
     
+    /*
     public void discard(Player player, int numDiscard, SpellAbility sa) {
         if(player.isHuman()) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(numDiscard, sa));
         else {
@@ -160,18 +170,20 @@ public class GameAction {
                 AI_discard(sa);
         }
     }
+    */
     
     public void discardUnless(Player player, int numDiscard, String uType, SpellAbility sa) {
         if(player.isHuman()) AllZone.InputControl.setInput(CardFactoryUtil.input_discardNumUnless(
                 numDiscard, uType, sa));
         else AI_discardNumUnless(numDiscard, uType, sa);
     }
-    
+    /*
     public void discardHand(Player player, SpellAbility sa) {
         PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
         CardList list = new CardList(hand.getCards());
         discardRandom(player, list.size(), sa);
     }
+    */
     
     public boolean AI_discardNumType(int numDiscard, String[] uTypes, SpellAbility sa) {
         CardList hand = new CardList();
@@ -182,17 +194,18 @@ public class GameAction {
             CardListUtil.sortCMC(tHand);
             tHand.reverse();
             for(int i = 0; i < numDiscard; i++)
-            	discard(tHand.get(i), sa);
+            	tHand.get(i).getController().discard(tHand.get(i), sa);
             return true;
         }
         return false;
     }
-    
+    /*
     public void AI_discardNum(int numDiscard, SpellAbility sa) {
         for(int i = 0; i < numDiscard; i++)
             AI_discard(sa);
-    }
+    }*/
     
+    @Deprecated
     public void AI_discardNumUnless(int numDiscard, String uType, SpellAbility sa) {
         CardList hand = new CardList();
         hand.addAll(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
@@ -201,13 +214,13 @@ public class GameAction {
         if(tHand.size() > 0) {
             CardListUtil.sortCMC(tHand);
             tHand.reverse();
-            discard(tHand.get(0), sa);
+            tHand.get(0).getController().discard(tHand.get(0), sa);  //this got changed to doDiscard basically
             return;
         }
         for(int i = 0; i < numDiscard; i++)
-            AI_discard(sa);
+            AllZone.ComputerPlayer.discard(sa);
     }
-    
+    /*
     public void AI_discard(SpellAbility sa) {
         CardList hand = new CardList();
         hand.addAll(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
@@ -234,7 +247,8 @@ public class GameAction {
             }
         }
     }
-    
+    */
+    /*
     public void handToLibrary(Player player, int numToLibrary, String libPos) {
         if(player.isHuman()) {
             if(libPos.equals("Top") || libPos.equals("Bottom")) libPos = libPos.toLowerCase();
@@ -292,7 +306,7 @@ public class GameAction {
             return;
         }
     }
-    
+    */
     
     
     public void discard_nath(Card discardedCard) {
@@ -1419,9 +1433,9 @@ public class GameAction {
                     					if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
     			          				//PlayerLife life = AllZone.GameAction.getPlayerLife(F_TargetPlayer[F_Target]);
     			        				if(F_Amount[0] > -1) 
-    			        					F_TargetPlayer[F_Target].gainLife(F_Amount[0]);
+    			        					F_TargetPlayer[F_Target].gainLife(F_Amount[0], F_card);
     			        				else 
-    			        					F_TargetPlayer[F_Target].subtractLife(F_Amount[0] * -1,F_card);
+    			        					F_TargetPlayer[F_Target].loseLife(F_Amount[0] * -1,F_card);
     			                      }
 
 			                      }
@@ -1550,7 +1564,8 @@ public class GameAction {
                         				if(Whenever_Go(F_card,F_k) == true) 
                         					if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
                         						//this might not work:
-                        						AllZone.GameAction.discard(F_TargetPlayer[F_Target],F_Amount[0], Ability);
+                        						//AllZone.GameAction.discard(F_TargetPlayer[F_Target],F_Amount[0], Ability);
+                        						F_TargetPlayer[F_Target].discard(F_Amount[0], Ability);
       			                      }
 
     			                      }
@@ -2437,8 +2452,8 @@ public class GameAction {
     {
     	this.newGame(humanDeck, computerDeck);
     	
-    	AllZone.ComputerPlayer.setLife(computerLife);
-        AllZone.HumanPlayer.setLife(humanLife);
+    	AllZone.ComputerPlayer.setLife(computerLife, null);
+        AllZone.HumanPlayer.setLife(humanLife, null);
         
         if (qa != null)
         {
@@ -2481,8 +2496,8 @@ public class GameAction {
         AllZone.HumanPlayer.setPoisonCounters(0);
         AllZone.ComputerPlayer.setPoisonCounters(0);
         
-        AllZone.ComputerPlayer.setLife(20);
-        AllZone.HumanPlayer.setLife(20);
+        AllZone.ComputerPlayer.setLife(20, null);
+        AllZone.HumanPlayer.setLife(20, null);
         
         AllZone.HumanPlayer.setAssignedDamage(0);
         AllZone.ComputerPlayer.setAssignedDamage(0);

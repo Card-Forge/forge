@@ -1887,9 +1887,9 @@ public class CombatUtil {
                 Card top = lib.get(0);
                 if(top.getType().contains("Creature")) {
                     //AllZone.GameAction.gainLife(player, top.getBaseDefense());
-                	player.gainLife(top.getBaseDefense());
+                	player.gainLife(top.getBaseDefense(), c);
                     //AllZone.GameAction.getPlayerLife(player).subtractLife(top.getBaseAttack(),c);
-                	player.subtractLife(top.getBaseAttack(), c);
+                	player.loseLife(top.getBaseAttack(), c);
                     hand.add(top);
                     lib.remove(top);
                 };
@@ -1933,7 +1933,7 @@ public class CombatUtil {
                     @Override
                     public void resolve() {
                         //AllZone.GameAction.getPlayerLife(opp).subtractLife(1,F_card);
-                    	opp.subtractLife(1, F_card);
+                    	opp.loseLife(1, F_card);
                     }
                 };
                 ability.setStackDescription("Pulse Tracker - Whenever Pulse Tracker attacks, each opponent loses 1 life.");
@@ -2002,7 +2002,7 @@ public class CombatUtil {
                     
                     PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, opponent);
                     CardList cardsInGrave = new CardList(graveyard.getCards());
-                    opponent.subtractLife(cardsInGrave.size(),F_card);
+                    opponent.loseLife(cardsInGrave.size(),F_card);
                     
                 }
             };// ability2
@@ -2045,11 +2045,12 @@ public class CombatUtil {
 	        		CardList pcs = AllZoneUtil.getPlayerCardsInPlay(c.getController(), "Perimeter Captain");
 		        	for (int i = 0; i < pcs.size();i++)
 		        	{
+		        		final Card pc = pcs.get(i);
 		        		Ability ability = new Ability(pcs.get(i), "0")
 		        		{
 		        			public void resolve()
 		        			{
-		        				crd.getController().gainLife(2);
+		        				crd.getController().gainLife(2, pc);
 		        			}
 		        		};
 		        		
@@ -2294,11 +2295,11 @@ public class CombatUtil {
                 && !a.getCreatureBlockedThisCombat()) {
             a.untap();
         } else if (a.getName().equals("Deepwood Tantiv") && !a.getCreatureBlockedThisCombat()) {
-        	a.getController().gainLife(2);
+        	a.getController().gainLife(2, a);
         } else if (a.getName().equals("Sacred Prey") && !a.getCreatureBlockedThisCombat()) {
-            a.getController().gainLife(1);
+            a.getController().gainLife(1, a);
         } else if (a.getName().equals("Vedalken Ghoul") && !a.getCreatureBlockedThisCombat()) {
-             b.getController().subtractLife(4,a);
+             b.getController().loseLife(4, a);
         }
         
         else if ((a.getName().equals("Chambered Nautilus") || a.getName().equals("Saprazzan Heir") 

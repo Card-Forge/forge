@@ -262,7 +262,7 @@ public class AbilityFactory_AlterLife {
 			player = sa.getTargetPlayer();
 		
 		//AllZone.GameAction.gainLife(player, lifeAmount);
-		player.gainLife(lifeAmount);
+		player.gainLife(lifeAmount, sa.getSourceCard());
 		
 		if (af.hasSubAbility())
 			 CardFactoryUtil.doDrawBack(DrawBack, lifeAmount, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
@@ -317,7 +317,7 @@ public class AbilityFactory_AlterLife {
 		if (af.getAbTgt() != null)
 			player = sa.getTargetPlayer();
 		
-		player.loseLife(lifeAmount);
+		player.loseLife(lifeAmount, sa.getSourceCard());
 		
 		if (af.hasSubAbility())
 			 CardFactoryUtil.doDrawBack(DrawBack, lifeAmount, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);

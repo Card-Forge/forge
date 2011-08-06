@@ -44,14 +44,14 @@ public abstract class Player extends MyObservable{
 	//
 	//////////////////////////
 	
-	public boolean setLife(final int newLife) {
+	public boolean setLife(final int newLife, final Card source) {
 		boolean change = false;
 		//rule 118.5
 		if(life > newLife) {
-			change = loseLife(life - newLife);
+			change = loseLife(life - newLife, source);
 		}
 		else if(newLife > life) {
-			change = gainLife(newLife - life);
+			change = gainLife(newLife - life, source);
 		}
 		else {
 			//life == newLife
@@ -65,12 +65,12 @@ public abstract class Player extends MyObservable{
 		return life;
 	}
 	
-	public void addLife(final int toAdd) {
+	private void addLife(final int toAdd) {
 		life += toAdd;
 		this.updateObservers();
 	}
 	
-	public boolean gainLife(final int toGain) {
+	public boolean gainLife(final int toGain, final Card source) {
 		boolean newLifeSet = false;
 		if(!canGainLife()) return false;
 		if(toGain > 0) {
@@ -94,7 +94,7 @@ public abstract class Player extends MyObservable{
 		return true;
 	}
 	
-	public boolean loseLife(final int toLose) {
+	public boolean loseLife(final int toLose, final Card c) {
 		boolean newLifeSet = false;
 		if(!canLoseLife()) return false;
 		if(toLose > 0) {
@@ -110,7 +110,7 @@ public abstract class Player extends MyObservable{
 		return true;
 	}
 	
-	public void subtractLife(final int toSub, final Card c) {
+	private void subtractLife(final int toSub) {
 		life -= toSub;
 		this.updateObservers();
 	}
@@ -123,7 +123,7 @@ public abstract class Player extends MyObservable{
 	public boolean payLife(int lifePayment, Card source) {
     	
     	if (lifePayment <= life){
-    		subtractLife(lifePayment, source);
+    		subtractLife(lifePayment);
     		return true;
     	}
     	return false;
@@ -148,7 +148,8 @@ public abstract class Player extends MyObservable{
         	if(PlayerUtil.worshipFlag(this) && life <= damageToDo) {
         		damageToDo = Math.min(damageToDo, life - 1);
         	}
-        	subtractLife(damageToDo, source);
+        	//rule 118.2. Damage dealt to a player normally causes that player to lose that much life.
+        	loseLife(damageToDo, source);
         }
         	
         if(source.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(source, damageToDo);
@@ -283,7 +284,7 @@ public abstract class Player extends MyObservable{
 		//lose:
 		else if(Constant.Runtime.Mill[0]) {
 			if(!AllZoneUtil.isCardInPlay("Platinum Angel", this) && !AllZoneUtil.isCardInPlay("Abyssal Persecutor", this.getOpponent())) {
-				setLife(0);
+				setLife(0, null);
 				AllZone.GameAction.checkStateEffects();
 			}
 		}
@@ -314,6 +315,72 @@ public abstract class Player extends MyObservable{
         
         throw new RuntimeException("Input_Draw : getDredgeNumber() card doesn't have dredge - " + c.getName());
     }//getDredgeNumber()
+    
+    ////////////////////////////////
+	///
+	/// replaces AllZone.GameAction.discard* methods
+	///
+	////////////////////////////////
+    
+    public abstract CardList discard(final int num, final SpellAbility sa);
+    
+    public CardList discard(final SpellAbility sa) {
+    	return discard(1, sa);
+    }
+    
+    public void discard(Card c, SpellAbility sa) {
+    	doDiscard(c, sa);
+    }
+    
+    public void doDiscard(Card c, SpellAbility sa) {
+    	if (sa!= null){
+    		;
+    	}
+    	
+    	AllZone.GameAction.CheckWheneverKeyword(c,"DiscardsCard",null);
+    	
+        AllZone.GameAction.discard_nath(c);
+        AllZone.GameAction.discard_megrim(c);
+        
+        // necro disrupts madness
+        if(AllZoneUtil.getPlayerCardsInPlay(c.getOwner(), "Necropotence").size() > 0) {	
+        	AllZone.GameAction.exile(c);
+        	return;
+        }
+        
+        AllZone.GameAction.discard_madness(c);
+        
+        if((c.getKeyword().contains("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.")
+        		|| c.getKeyword().contains("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard."))	
+        		&& !c.getController().equals(sa.getSourceCard().getController())) {
+        	AllZone.GameAction.discard_PutIntoPlayInstead(c);
+        }
+        else if (c.getKeyword().contains("If a spell or ability an opponent controls causes you to discard CARDNAME, return it to your hand.")) {
+        	;
+        }
+        else {
+        	AllZone.GameAction.moveToGraveyard(c);
+        }
+    }//end doDiscard
+    
+    public void discardHand(SpellAbility sa) {
+        //PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+        CardList list = AllZoneUtil.getPlayerHand(this);
+        AllZone.GameAction.discardRandom(this, list.size(), sa);
+    }
+    
+    public void discardRandom(SpellAbility sa) {
+        discardRandom(1, sa);
+    }
+    
+    public void discardRandom(final int num, final SpellAbility sa) {
+    	for(int i = 0; i < num; i++) {
+    		Card[] c = AllZone.getZone(Constant.Zone.Hand, this).getCards();
+    		if(c.length != 0) doDiscard(CardUtil.getRandom(c), sa);
+    	}
+    }
+    
+    public abstract void handToLibrary(final int numToLibrary, String libPos);
     
     ////////////////////////////////
     public void shuffle() {

@@ -299,8 +299,7 @@ class CardFactory_Planeswalkers {
                     CardList elves = new CardList(play.getCards());
                     elves = elves.getType("Elf");
                     
-                    //AllZone.GameAction.gainLife(card.getController(), 2 * elves.size());
-                    card.getController().gainLife(2 * elves.size());
+                    card.getController().gainLife(2 * elves.size(), card2);
                     
                 }//resolve()
                 
@@ -1006,8 +1005,7 @@ class CardFactory_Planeswalkers {
                     turn[0] = AllZone.Phase.getTurn();
                     
 
-                    //AllZone.GameAction.gainLife(card2.getController(), 2);
-                    card2.getController().gainLife(2);
+                    card2.getController().gainLife(2, card2);
                     Log.debug("Ajani Goldmane", "current phase: " + AllZone.Phase.getPhase());
                 }
                 
@@ -2117,13 +2115,10 @@ class CardFactory_Planeswalkers {
                         }
                     } 
                     else { 
-                    	//AllZone.GameAction.addDamage(getTargetPlayer(), card2, damage);
                     	getTargetPlayer().addDamage(damage, card2);
                     }
                     
-                    
-                    //AllZone.GameAction.gainLife(card2.getController(), 3);
-                    card2.getController().gainLife(3);
+                    card2.getController().gainLife(3, card2);
                 }
                 
                 @Override
@@ -3305,8 +3300,7 @@ class CardFactory_Planeswalkers {
                     turn[0] = AllZone.Phase.getTurn();
                     
                     int life = AllZoneUtil.getCreaturesInPlay(card2.getController()).size();
-                    //AllZone.GameAction.gainLife(card2.getController(), life);
-                    card2.getController().gainLife(life);
+                    card2.getController().gainLife(life, card2);
                     Log.debug("Elspeth Tirel", "current phase: " + AllZone.Phase.getPhase());
                 }
                 

@@ -944,7 +944,7 @@ public class CardFactoryUtil {
             @Override
             public void selectCard(Card card, PlayerZone zone) {
                 if(zone.is(Constant.Zone.Hand)) {
-                    AllZone.GameAction.discard(card, sp);
+                    card.getController().discard(card, sp);
                     n++;
                     
                     if(card.getType().contains(uType.toString())) stop();
@@ -1007,7 +1007,7 @@ public class CardFactoryUtil {
                 removed.add(sourceCard);
                 
                 //AllZone.GameAction.getPlayerLife(sourceCard.getController()).subtractLife(loss,sourceCard);
-                sourceCard.getController().loseLife(loss);
+                sourceCard.getController().loseLife(loss, sourceCard);
                 
             }
             
@@ -1526,7 +1526,8 @@ public class CardFactoryUtil {
                 
 
                 if(sameType.size() == 0) {
-                	AllZone.GameAction.discard(sourceCard, this);
+                	//AllZone.GameAction.discard(sourceCard, this);
+                	sourceCard.getController().discard(sourceCard, this);
                 	return;
                 }
                 
@@ -1535,7 +1536,7 @@ public class CardFactoryUtil {
                 if(o != null) {
                     //ability.setTargetCard((Card)o);
                     //AllZone.Stack.add(ability);
-                    AllZone.GameAction.discard(sourceCard, this);
+                    sourceCard.getController().discard(sourceCard, this);
                     Card c1 = (Card) o;
                     lib.remove(c1);
                     hand.add(c1);
@@ -1606,7 +1607,7 @@ public class CardFactoryUtil {
                 if(o != null) {
                     //ability.setTargetCard((Card)o);
                     //AllZone.Stack.add(ability);
-                    AllZone.GameAction.discard(sourceCard, this);
+                    sourceCard.getController().discard(sourceCard, this);
                     Card c1 = (Card) o;
                     lib.remove(c1);
                     hand.add(c1);
@@ -2406,7 +2407,7 @@ public class CardFactoryUtil {
             @Override
             public void selectCard(Card card, PlayerZone zone) {
                 if(zone.is(Constant.Zone.Hand)) {
-                    AllZone.GameAction.discard(card, spell);
+                    card.getController().discard(card, spell);
                     n++;
                     if(spell.getManaCost().equals("0")) {
                         AllZone.Stack.add(spell);
@@ -2446,7 +2447,7 @@ public class CardFactoryUtil {
             @Override
             public void selectCard(Card card, PlayerZone zone) {
                 if(zone.is(Constant.Zone.Hand)) {
-                    AllZone.GameAction.discard(card, sp);
+                    card.getController().discard(card, sp);
                     n++;
                     
                     //in case no more cards in hand
@@ -2482,7 +2483,7 @@ public class CardFactoryUtil {
             @Override
             public void selectCard(Card card, PlayerZone zone) {
                 if(zone.is(Constant.Zone.Hand)) {
-                    AllZone.GameAction.discard(card, sa);
+                    card.getController().discard(card, sa);
                     n++;
                     
                     //in case no more cards in hand
@@ -3886,10 +3887,10 @@ public class CardFactoryUtil {
         
 
         if(d[0].contains("GainLife")) {
-        	dbPlayer.gainLife(X);
+        	dbPlayer.gainLife(X, Src);
         }
         if(d[0].contains("LoseLife"))  {
-        	dbPlayer.loseLife(X);
+        	dbPlayer.loseLife(X, Src);
         }
         	
         
@@ -3902,10 +3903,10 @@ public class CardFactoryUtil {
                 }
                 if(d[2].contains("AtRandom")) AllZone.GameAction.discardRandom(dbPlayer, X, sa);
             } 
-            else AllZone.GameAction.discard(dbPlayer, X, sa);
+            else dbPlayer.discard(X, sa); //AllZone.GameAction.discard(dbPlayer, X, sa);
         }
         
-        if(d[0].contains("HandToLibrary")) AllZone.GameAction.handToLibrary(dbPlayer, X, d[2]);
+        if(d[0].contains("HandToLibrary")) dbPlayer.handToLibrary(X, d[2]); //AllZone.GameAction.handToLibrary(dbPlayer, X, d[2]);
         
         if(d[0].contains("Draw")) for(int i = 0; i < X; i++)
             dbPlayer.drawCard();

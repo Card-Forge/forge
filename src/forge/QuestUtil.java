@@ -140,7 +140,7 @@ public class QuestUtil {
         if (level == 6)
         {
         	final Card crd = c;
-        	final Ability_Tap ability = new Ability_Tap(c) {
+        	final Ability_Tap ability = new Ability_Tap(crd) {
 				private static final long serialVersionUID = 7546242087593613719L;
 
 				@Override
@@ -150,8 +150,7 @@ public class QuestUtil {
                 
                 @Override
                 public void resolve() {
-                    //AllZone.GameAction.gainLife(crd.getController(), 1);
-                	crd.getController().gainLife(1);
+                    crd.getController().gainLife(1, crd);
                 }
             };
             c.addSpellAbility(ability);

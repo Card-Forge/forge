@@ -538,7 +538,7 @@ public class CardFactory_Sorceries {
                     //lose 3 life
                     if(cardName.equals("Grim Tutor")) {
                         Player player = AllZone.HumanPlayer;
-                        player.subtractLife(3,card);
+                        player.loseLife(3, card);
                     }
                 }
                 
@@ -555,7 +555,7 @@ public class CardFactory_Sorceries {
                     //lose 3 life
                     if(cardName.equals("Grim Tutor")) {
                         Player player = AllZone.ComputerPlayer;
-                        player.subtractLife(3,card);
+                        player.loseLife(3, card);
                     }
                 }
                 
@@ -1081,12 +1081,12 @@ public class CardFactory_Sorceries {
                             choice = CardUtil.getRandom(handChoices);
                         }
                         
-                        AllZone.GameAction.discard(choice, this);
+                        choice.getController().discard(choice, this);
                     }
                     
 					// Opponent Loses 5 Life
                     //PlayerLife target = AllZone.GameAction.getPlayerLife(opponent);
-			        opponent.subtractLife(5,card);
+			        opponent.loseLife(5,card);
 
 					// Player Returns Creature Card from Graveyard to Hand
                     if(player == AllZone.HumanPlayer) {                 	
@@ -1129,8 +1129,7 @@ public class CardFactory_Sorceries {
                     card.getController().drawCards(3);
                     
 					// Player Gains 5 Life
-                    //AllZone.GameAction.gainLife(card.getController(), 5);
-                    card.getController().gainLife(5);
+                    card.getController().gainLife(5, card);
 			     
 				} // Resolve
 
@@ -1165,10 +1164,8 @@ public class CardFactory_Sorceries {
 				@Override
                 public void resolve() {
                     Player opponent = card.getController().getOpponent();
-                    //PlayerLife target = AllZone.GameAction.getPlayerLife(opponent);
-			        opponent.subtractLife(2,card);
-			        //AllZone.GameAction.gainLife(card.getController(), 2);
-			        card.getController().gainLife(2);
+                    opponent.loseLife(2, card);
+			        card.getController().gainLife(2, card);
 				}
                 
                 public boolean canPlayAI() {
@@ -1490,11 +1487,10 @@ public class CardFactory_Sorceries {
                     for(int i = 0; i < GraveandLibrary.size(); i++) AllZone.GameAction.moveTo(RFG,GraveandLibrary.get(i));
                     //AllZone.GameAction.moveTo(RFG,card); // Not sure if Doomsday is supposed to be exiled
                     for(int i = 0; i < NewLibrary.size(); i++) AllZone.GameAction.moveTo(Library,NewLibrary.get(i));
-                	
+
                     //lose half life
-                        Player player = AllZone.HumanPlayer;
-                        //PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-                        player.subtractLife(player.getLife() / 2,card);
+                    Player player = AllZone.HumanPlayer;
+                    player.loseLife(player.getLife() / 2,card);
                 }
                         
                 @Override
@@ -1768,11 +1764,9 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
                 	Player player = card.getController();
-                    //PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                    player.gainLife(10);
+                    player.gainLife(10, card);
                     
                     Player opponent = card.getController().getOpponent();
-                    //PlayerLife oppLife = AllZone.GameAction.getPlayerLife(opponent);
                     
                     if(opponent.getLife() < player.getLife()) makeToken();
                 }//resolve()
@@ -2253,11 +2247,11 @@ public class CardFactory_Sorceries {
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) {
                             Card c = getTargetCard();
                             c.addDamage(damage, card);
-                            card.getController().gainLife(3);
+                            card.getController().gainLife(3, card);
                         }
                     } else {
                         getTargetPlayer().addDamage(damage, card);
-                        card.getController().gainLife(3);
+                        card.getController().gainLife(3, card);
                     }
                 }
             };//SpellAbility
@@ -2320,11 +2314,11 @@ public class CardFactory_Sorceries {
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) {
                             Card c = getTargetCard();
                             c.addDamage(damage, card);
-                            card.getController().gainLife(3);
+                            card.getController().gainLife(3, card);
                         }
                     } else {
                         getTargetPlayer().addDamage(damage, card);
-                        card.getController().gainLife(3);
+                        card.getController().gainLife(3, card);
                     }
                     
                     grave.remove(card);
@@ -2836,7 +2830,7 @@ public class CardFactory_Sorceries {
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
                     Card[] c = hand.getCards();
                     for(int i = 0; i < c.length; i++)
-                        AllZone.GameAction.discard(c[i], this);
+                        c[i].getController().discard(c[i], this);
                     
                     player.drawCards(7);
                 }
@@ -2981,7 +2975,7 @@ public class CardFactory_Sorceries {
                     Card[] c = hand.getCards();
                     
                     for(int i = 0; i < c.length; i++)
-                        if(!c[i].isLand()) AllZone.GameAction.discard(c[i], this);
+                        if(!c[i].isLand()) c[i].getController().discard(c[i], this);
                 }
             };
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
@@ -3743,7 +3737,7 @@ public class CardFactory_Sorceries {
                     AllZone.Computer_Graveyard.add(c1);
                     AllZone.Computer_Hand.remove(c1);          
                     */
-                    AllZone.GameAction.discard(c1, null);
+                    c1.getController().discard(c1, null);
                     
                     if(list.size() == 0) return;
                     
@@ -3754,16 +3748,14 @@ public class CardFactory_Sorceries {
                     AllZone.Computer_Graveyard.add(c2);
                     AllZone.Computer_Hand.remove(c2);    
                     */
-                    AllZone.GameAction.discard(c2, null);
+                    c2.getController().discard(c2, null);
                     
                     if(c1.getType().contains("Land")) {
-                    	//AllZone.GameAction.gainLife(AllZone.HumanPlayer, 3);
-                    	AllZone.HumanPlayer.gainLife(3);
+                    	AllZone.HumanPlayer.gainLife(3, card);
                     }
                     
                     if(c2.getType().contains("Land")) {
-                    	//AllZone.GameAction.gainLife(AllZone.HumanPlayer, 3);
-                    	AllZone.HumanPlayer.gainLife(3);
+                    	AllZone.HumanPlayer.gainLife(3, card);
                     }
                     
 
@@ -3784,11 +3776,10 @@ public class CardFactory_Sorceries {
                         hand.remove(c);
                         grave.add(c);
                         */
-                        AllZone.GameAction.discard(c, null);
+                        c.getController().discard(c, null);
                         
                         if(c.getType().contains("Land")) {
-                        	//AllZone.GameAction.gainLife(AllZone.ComputerPlayer, 3);
-                        	AllZone.ComputerPlayer.gainLife(3);
+                        	AllZone.ComputerPlayer.gainLife(3, card);
                         }
                         
                         if(list.size() > 0) {
@@ -3801,11 +3792,10 @@ public class CardFactory_Sorceries {
                             hand.remove(c2);
                             grave.add(c2);
                             */
-                            AllZone.GameAction.discard(c2, null);
+                            c2.getController().discard(c2, null);
                             
                             if(c2.getType().contains("Land")) {
-                            	///AllZone.GameAction.gainLife(AllZone.ComputerPlayer, 3);
-                            	AllZone.ComputerPlayer.gainLife(3);
+                            	AllZone.ComputerPlayer.gainLife(3, card);
                             }
                         }
                     }
@@ -3954,7 +3944,7 @@ public class CardFactory_Sorceries {
                         AllZone.Computer_Library.add(c, 0);
                         
                         //lose 2 life
-                        AllZone.ComputerPlayer.subtractLife(2,card);
+                        AllZone.ComputerPlayer.loseLife(2, card);
                     }
                 }//computerResolve()
                 
@@ -3973,7 +3963,7 @@ public class CardFactory_Sorceries {
                             library.add((Card) o, 0);
                         }
                         //lose 2 life
-                        AllZone.HumanPlayer.subtractLife(2,card);
+                        AllZone.HumanPlayer.loseLife(2, card);
                     }//if
                     
 
@@ -4000,8 +3990,7 @@ public class CardFactory_Sorceries {
                     
                     Log.debug("Invincible Hymn", "lifeGain: " + lifeGain);
                     
-                    //PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-                    player.setLife(lifeGain);
+                    player.setLife(lifeGain, card);
                     
                     Log.debug("Invincible Hymn", "life.getLife(): " + player.getLife());
                 }
@@ -5532,8 +5521,7 @@ public class CardFactory_Sorceries {
 
   			  public void resolve()
       		  {
-  				  //AllZone.GameAction.gainLife(getTargetPlayer(), card.getXManaCostPaid());
-  				  getTargetPlayer().gainLife(card.getXManaCostPaid());
+  				  getTargetPlayer().gainLife(card.getXManaCostPaid(), card);
       		      card.setXManaCostPaid(0);
       		  }
       		  
@@ -5627,8 +5615,7 @@ public class CardFactory_Sorceries {
         		{
         			AllZone.GameAction.mill(getTargetPlayer(),card.getXManaCostPaid());
         			
-        			//AllZone.GameAction.gainLife(card.getController(), card.getXManaCostPaid());
-        			card.getController().gainLife(card.getXManaCostPaid());
+        			card.getController().gainLife(card.getXManaCostPaid(), card);
         			
         			card.setXManaCostPaid(0);
         		}
@@ -5702,7 +5689,7 @@ public class CardFactory_Sorceries {
         			else if (humHand.size() > compHand.size())
         			{
         				int diff = humHand.size() - compHand.size();
-        				AllZone.GameAction.discard(AllZone.HumanPlayer, diff, this);
+        				AllZone.HumanPlayer.discard(diff, this);
         			}
         			
         			//Creatures:
@@ -6056,10 +6043,10 @@ public class CardFactory_Sorceries {
         			int humanLife = AllZone.HumanPlayer.getLife();
         			int compLife = AllZone.ComputerPlayer.getLife();
         			if( humanLife > compLife ) {
-        				AllZone.HumanPlayer.setLife(compLife);
+        				AllZone.HumanPlayer.setLife(compLife, card);
         			}
         			else if( compLife > humanLife ) {
-        				AllZone.ComputerPlayer.setLife(humanLife);
+        				AllZone.ComputerPlayer.setLife(humanLife, card);
         			}
         			else {
         				//they must be equal, so nothing to do
@@ -6623,7 +6610,7 @@ public class CardFactory_Sorceries {
                                     lib.add(tgt); //add to top if lib is empty
                                 }
                             }//else
-                            tgt.getController().gainLife(3);
+                            tgt.getController().gainLife(3, card);
                         }
                     }//if isCardInPlay() && canTarget()
                 }//resolve()
@@ -6923,7 +6910,7 @@ public class CardFactory_Sorceries {
                         AllZone.GameAction.moveTo(play, c);
                         c.setController(card.getController());
                     }
-                    c.getController().subtractLife(cmc,card);
+                    c.getController().loseLife(cmc,card);
                 }//resolve()
                 
                 @Override
@@ -7054,7 +7041,7 @@ public class CardFactory_Sorceries {
         			}
         			Card[] c = hand.getCards();
         			for(int i = 0; i < c.length; i++)
-        				AllZone.GameAction.discard(c[i], null);
+        				c[i].getController().discard(c[i], null);
 
         			player.drawCards(draw);
         		}
@@ -7869,7 +7856,7 @@ public class CardFactory_Sorceries {
                     int numIslands = AllZoneUtil.getPlayerTypeInPlay(player, "Island").size();
                     
                     //swamps
-                    opp.loseLife(2*numSwamps);
+                    opp.loseLife(2*numSwamps, card);
                     
                     //mountain
                     getTargetCard().addDamage(numMountains, card);
@@ -7879,7 +7866,7 @@ public class CardFactory_Sorceries {
                     	CardFactoryUtil.makeTokenSaproling(player);
                     
                     //plains
-                    player.gainLife(2*numPlains);
+                    player.gainLife(2*numPlains, card);
                     
                     //islands
                     int max = Math.min(numIslands, AllZoneUtil.getPlayerCardsInLibrary(player).size());

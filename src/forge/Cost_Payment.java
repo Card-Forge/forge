@@ -258,16 +258,18 @@ public class Cost_Payment {
     		int discAmount = cost.getDiscardAmount();
     		
     		if (cost.getDiscardThis()){
-    			AllZone.GameAction.discard(card, ability);
+    			//AllZone.GameAction.discard(card, ability);
+    			card.getController().discard(card, ability);
     			payDiscard = true;
     		}
     		else if (discType.equals("Hand")){
-    			AllZone.GameAction.discardHand(card.getController(), ability);
+    			card.getController().discardHand(ability);
     			payDiscard = true;
     		}
     		else if( discType.equals("LastDrawn") ) {
     			if(handList.contains(card.getController().getLastDrawnCard())) {
-    				AllZone.GameAction.discard(card.getController().getLastDrawnCard(), ability);
+    				//AllZone.GameAction.discard(card.getController().getLastDrawnCard(), ability);
+    				card.getController().discard(card.getController().getLastDrawnCard(), ability);
     				payDiscard = true;
     			}
     			
@@ -465,10 +467,12 @@ public class Cost_Payment {
     		int discAmount = cost.getDiscardAmount();
     		
     		if (cost.getDiscardThis()){
-    			AllZone.GameAction.discard(card, ability);
+    			//AllZone.GameAction.discard(card, ability);
+    			card.getController().discard(card, ability);
     		}
     		else if (discType.equals("Hand")){
-    			AllZone.GameAction.discardHand(card.getController(), ability);
+    			//AllZone.GameAction.discardHand(card.getController(), ability);
+    			card.getController().discardHand(ability);
     		}
     		else{
     			if (discType.equals("Random")){
@@ -480,7 +484,8 @@ public class Cost_Payment {
 	    				AllZone.GameAction.AI_discardNumType(discAmount, validType, ability);
 	    			}
 	    			else{
-	    				AllZone.GameAction.AI_discardNum(discAmount, ability);
+	    				//AllZone.GameAction.AI_discardNum(discAmount, ability);
+	    				AllZone.ComputerPlayer.discard(discAmount, ability);
 	    			}
     			}
     		}
@@ -535,7 +540,8 @@ public class Cost_Payment {
             public void selectCard(Card card, PlayerZone zone) {
                 if(zone.is(Constant.Zone.Hand) && handList.contains(card) ) {
                 	// send in CardList for Typing
-                    AllZone.GameAction.discard(card, sp);
+                    //AllZone.GameAction.discard(card, sp);
+                	card.getController().discard(card, sp);
                     handList.remove(card);
                     nDiscard++;
                     

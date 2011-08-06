@@ -115,7 +115,7 @@ public class Input_Cleanup extends Input {
     @Override
     public void selectCard(Card card, PlayerZone zone) {
         if(zone.is(Constant.Zone.Hand, AllZone.HumanPlayer)) {
-            AllZone.GameAction.discard(card, null);
+            card.getController().discard(card, null);
             showMessage();
             //We need a nextPhase here or else it will never get the needToNextPhase from showMessage() (because there isn't a nextPhsae() in the stack).
             Log.debug("There better not be a nextPhase() on the stack!");

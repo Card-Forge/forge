@@ -75,6 +75,25 @@ public class HumanPlayer extends Player{
 		return dredged;
 	}
 	
+	public CardList discard(final int num, final SpellAbility sa) {
+		AllZone.InputControl.setInput(CardFactoryUtil.input_discard(num, sa));
+		return new CardList();
+	}
+	
+	public void handToLibrary(final int numToLibrary, String libPos) {
+		if(libPos.equals("Top") || libPos.equals("Bottom")) libPos = libPos.toLowerCase();
+        else {
+            Object o = new Object();
+            String s = "card";
+            if(numToLibrary > 1) s += "s";
+            
+            o = AllZone.Display.getChoice("Do you want to put the " + s
+                    + " on the top or bottom of your library?", new Object[] {"top", "bottom"});
+            libPos = o.toString();
+        }
+        AllZone.InputControl.setInput(CardFactoryUtil.input_putFromHandToLibrary(libPos, numToLibrary));
+	}
+	
 	protected void doScry(final CardList topN, final int N) {
 		int num = N;
 		for(int i = 0; i < num; i++) {

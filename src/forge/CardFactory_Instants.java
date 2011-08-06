@@ -1545,8 +1545,7 @@ public class CardFactory_Instants {
                 private static final long serialVersionUID = 7699412574052780825L;
                     
                 public void execute() {
-                	//AllZone.GameAction.gainLife(card.getController(), 2);
-                	card.getController().gainLife(2);
+                	card.getController().gainLife(2, card);
                 }
             });
         }//*************** END ************ END **************************
@@ -1568,8 +1567,7 @@ public class CardFactory_Instants {
                         }
                     });
                     
-                    //AllZone.GameAction.gainLife(getTargetPlayer(), 4 + (4 * count.size()));
-                    getTargetPlayer().gainLife(4 + (4 * count.size()));
+                    getTargetPlayer().gainLife(4 + (4 * count.size()), card);
                 }
             };
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetComputer());
@@ -2674,17 +2672,15 @@ public class CardFactory_Instants {
 
 
     			@Override
-                public void resolve() {
+    			public void resolve() {
     				Card Sacrificed = getTargetCard();
     				if(Sacrificed != null) {
     					for(int i = 0; i < Sacrificed.getNetAttack(); i++) {
     						card.getController().drawCard();
     					}
-                        //AllZone.GameAction.gainLife(card.getController(), Sacrificed.getNetDefense());
-                        card.getController().gainLife( Sacrificed.getNetDefense() );
+    					card.getController().gainLife( Sacrificed.getNetDefense(), card );
     				}
-                  }
-                
+    			}
                 
                 @Override
                 public boolean canPlay() {
@@ -2869,9 +2865,7 @@ public class CardFactory_Instants {
                         AllZone.Computer_Library.add(c, 0);
                         
                         //lose 2 life
-                        Player player = AllZone.ComputerPlayer;
-                        //PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-                        player.subtractLife(2,card);
+                        AllZone.ComputerPlayer.loseLife(2,card);
                     }
                 }//computerResolve()
                 
@@ -2890,9 +2884,7 @@ public class CardFactory_Instants {
                             library.add((Card) o, 0);
                         }
                         //lose 2 life
-                        Player player = AllZone.HumanPlayer;
-                        //PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-                        player.subtractLife(2,card);
+                        AllZone.HumanPlayer.loseLife(2, card);
                     }//if
                     
 
@@ -3761,9 +3753,7 @@ public class CardFactory_Instants {
                     if(c.isBlue() && zone.is(Constant.Zone.Hand)
                             && !c.equals(card)) {
                         AllZone.GameAction.exile(c);
-                        Player player = card.getController();
-                        //AllZone.GameAction.getPlayerLife(player).subtractLife(1,card);
-                        player.subtractLife(1, card);
+                        card.getController().loseLife(1, card);
                         
                         count++;
                         if(count == stop) {
@@ -4147,8 +4137,7 @@ public class CardFactory_Instants {
       				  CardList attackers = new CardList();
       				  attackers.addAll(AllZone.Combat.getAttackers());
       				  attackers.addAll(AllZone.pwCombat.getAttackers());
-      				  //AllZone.GameAction.gainLife(card.getController(), attackers.size());
-      				  card.getController().gainLife(attackers.size());
+      				  card.getController().gainLife(attackers.size(), card);
       			  }
       		}
   			public boolean canPlayAI()
@@ -4240,8 +4229,7 @@ public class CardFactory_Instants {
 
   			  public void resolve()
       		  {
-  				  //AllZone.GameAction.gainLife(card.getController(), card.getXManaCostPaid() + 3);
-  				  card.getController().gainLife(card.getXManaCostPaid()+3);
+  				  card.getController().gainLife(card.getXManaCostPaid()+3, card);
       			  card.setXManaCostPaid(0);
       		  }
       		  
@@ -4538,8 +4526,8 @@ public class CardFactory_Instants {
 						}
 					}
 
-					tPlayer.subtractLife(X,card);
-					player.gainLife(X);
+					tPlayer.loseLife(X, card);
+					player.gainLife(X, card);
 					card.setXManaCostPaid(0);
 				}
 				
@@ -4784,7 +4772,7 @@ public class CardFactory_Instants {
                     AllZone.GameAction.discardRandom(card.getController(), handList.size(), this);
                     
                     //PlayerLife life = AllZone.GameAction.getPlayerLife(getTargetPlayer());
-                    getTargetPlayer().subtractLife(5,card);
+                    getTargetPlayer().loseLife(5, card);
                 }
             };
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
