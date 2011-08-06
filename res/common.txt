@@ -13,12 +13,14 @@ Advanced Hoverguard
 Aesthir Glider
 Agent of Stromgald
 Aggressive Urge
+Agility
 Airborne Aid
 Akki Drillmaster
 Akrasan Squire
 Alaborn Grenadier
 Alaborn Musketeer
 Alaborn Trooper
+Alexi's Cloak
 Alley Grifters
 Alpha Myr
 Ambassador Oak
@@ -29,6 +31,7 @@ Anaba Bodyguard
 Anaba Shaman
 Anarchist
 Ancient Den
+Angel's Mercy
 Angelfire Crusader
 Angelic Blessing
 Angelic Curator
@@ -113,6 +116,7 @@ Blistering Barrier
 Blistering Dieflyn
 Blockade Runner
 Bloodrock Cyclops
+Blossoming Wreath
 Bog Imp
 Bog Initiate
 Bog Raiders
@@ -132,6 +136,7 @@ Boreal Griffin
 Boros Garrison
 Boros Recruit
 Boros Signet
+Bountiful Harvest
 Brainbite
 Brainstorm
 Breach
@@ -173,6 +178,7 @@ Catalog
 Cateran Brute
 Cateran Persuader
 Cathartic Adept
+Cave Sense
 Cavern Crawler
 Cavern Harpy
 Cavern Thoctar
@@ -213,6 +219,7 @@ Colos Yearling
 Colossal Might
 Commune with Nature
 Compulsive Research
+Congregate
 Convolute
 Copper Myr
 Coral Eel
@@ -341,6 +348,7 @@ Esper Cormorants
 Esper Stormblade
 Essence Scatter
 Essence Warden
+Eternal Warrior
 Eternity Snare
 Ethercaste Knight
 Exclude
@@ -371,6 +379,7 @@ Fire Sprites
 Firebolt
 Fireslinger
 First Volley
+Fishliver Oil
 Fissure
 Fists of the Anvil
 Fit of Rage
@@ -380,6 +389,7 @@ Flame Rift
 Flamecore Elemental
 Flamekin Brawler
 Flamewave Invoker
+Flaming Sword
 Fledgling Djinn
 Flight
 Floating-Dream Zubera
@@ -398,15 +408,18 @@ Force Spike
 Forest Bear
 Forgotten Cave
 Foul Imp
+Fountain of Youth
 Foxfire Oak
 Freewind Falcon
 Fresh Volunteers
+Frog Tongue
 Frontline Sage
 Frost Ogre
 Frost Raptor
 Frostling
 Frostweb Spider
 Frozen Shade
+Fruition
 Fugitive Wizard
 Funeral Charm
 Furnace Spirit
@@ -550,6 +563,7 @@ Inner Calm, Outer Strength
 Inner-Flame Acolyte
 Innocent Blood
 Inspiration
+Invigorating Falls
 Ior Ruin Expedition
 Ire of Kaminari
 Iron Myr
@@ -565,6 +579,7 @@ Jhessian Zombies
 Join the Ranks
 Jolrael's Centaur
 Joraga Bard
+Joyous Respite
 Jukai Messenger
 Jump
 Jund Hackblade
@@ -661,6 +676,7 @@ Manakin
 Maniacal Rage
 Manta Ray
 Manta Riders
+Marble Chalice
 Marsh Boa
 Marsh Goblins
 Marsh Threader
@@ -708,6 +724,7 @@ Mothrider Samurai
 Mountain Bandit
 Mountain Goat
 Mountain Yeti
+Mournful Zombie
 Mourning Thrull
 Mtenda Herder
 Muck Rats
@@ -722,6 +739,7 @@ Nacatl Savage
 Nameless Inversion
 Nantuko Disciple
 Nantuko Husk
+Natural Spring
 Naturalize
 Naya Hushblade
 Necrogen Spellbomb
@@ -826,6 +844,7 @@ Profane Prayers
 Promised Kannushi
 Protective Bubble
 Pulse Tracker
+Putrid Leech
 Pygmy Pyrosaur
 Pygmy Razorback
 Pyrite Spellbomb
@@ -912,6 +931,7 @@ Rustrazor Butcher
 Ruthless Cullblade
 Sabretooth Tiger
 Sacred Nectar
+Sacred Prey
 Safehold Duo
 Safehold Elite
 Sakura-Tribe Elder
@@ -919,6 +939,7 @@ Sanctum Plowbeast
 Sandbar Merfolk
 Sandstone Warrior
 Sangrophage
+Savage Hunger
 Scaled Wurm
 Scare Tactics
 Scarwood Goblins
@@ -1035,6 +1056,7 @@ Sokenzan Bruiser
 Solidarity
 Soltari Foot Soldier
 Sootfeather Flock
+Soothing Balm
 Southern Elephant
 Spark Spray
 Sparksmith
@@ -1051,6 +1073,7 @@ Spire Barrage
 Spitting Earth
 Spitting Gourna
 Spotted Griffin
+Spring of Eternal Peace
 Sprout
 Sprout Swarm
 Squall Drifter
@@ -1059,6 +1082,7 @@ Squirming Mass
 Stampeding Rhino
 Stand Firm
 Standing Troops
+Starlight Invoker
 Steadfast Guard
 Steadfastness
 Steam Frigate
@@ -1088,6 +1112,7 @@ Sunlance
 Suntail Hawk
 Suq'Ata Lancer
 Swamp Mosquito
+Sylvan Bounty
 Symbiotic Elf
 Synchronous Sliver
 Talas Air Ship
@@ -1187,6 +1212,7 @@ Vault of Whispers
 Vectis Agents
 Vectis Silencers
 Vedalken Entrancer
+Vedalken Ghoul
 Vedalken Outlander
 Venerable Kumo
 Venerable Monk
@@ -1213,6 +1239,7 @@ Virulent Sliver
 Viscerid Deepwalker
 Viscid Lemures
 Vision Skeins
+Vital Surge
 Vodalian Merchant
 Vodalian Soldiers
 Vodalian Zombie

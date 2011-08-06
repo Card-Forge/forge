@@ -40,6 +40,7 @@ Ayumi, the Last Visitor
 Azusa, Lost but Seeking
 Bad Moon
 Badlands
+Balance
 Ball Lightning
 Baneslayer Angel
 Barren Glory
@@ -140,6 +141,7 @@ Damnation
 Dark Confidant
 Dark Depths
 Darksteel Colossus
+Darksteel Forge
 Darkwater Catacombs
 Dauntless Dourbark
 Day of Judgment
@@ -208,6 +210,7 @@ Feudkiller's Verdict
 Field Marshal
 Figure of Destiny
 Filigree Angel
+Finest Hour
 Fire-Lit Thicket
 Firestorm Hellkite
 Flagstones of Trokair
@@ -333,6 +336,7 @@ Kobold Overlord
 Kodama of the North Tree
 Kokusho, the Evening Star
 Konda, Lord of Eiganjo
+Kongming, "Sleeping Dragon"
 Korlash, Heir to Blackblade
 Krosan Cloudscraper
 Krosan Colossus
@@ -648,6 +652,7 @@ Tithe
 Tolarian Academy
 Tolsimir Wolfblood
 Tower of Champions
+Tower of Eons
 Tower of Fortunes
 Tower of the Magistrate
 Tradewind Rider

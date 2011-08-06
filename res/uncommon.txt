@@ -13,6 +13,7 @@ Alert Shu Infantry
 Allied Strategies
 Ambition's Cost
 Amnesia
+An-Havva Inn
 An-Havva Township
 Anaconda
 Angel of Light
@@ -44,6 +45,7 @@ Azure Drake
 Balshan Collaborator
 Bant Battlemage
 Barbarian General
+Bargain
 Barktooth Warbeard
 Basalt Gargoyle
 Basalt Monolith
@@ -83,11 +85,13 @@ Bottle Gnomes
 Bound in Silence
 Braidwood Cup
 Branchsnap Lorian
+Brave the Elements
 Brawn
 Briarhorn
 Brilliant Plan
 Bull Cerodon
 Bull Hippo
+Burrowing
 Cabal Coffers
 Calciderm
 Caller of the Claw
@@ -156,6 +160,7 @@ Dauthi Trapper
 Death's Shadow
 Deathmark
 Deep-Sea Serpent
+Deepwood Tantiv
 Demonic Tutor
 Desert Drake
 Desert Twister
@@ -166,6 +171,7 @@ Diabolic Tutor
 Dimir Guildmage
 Dingus Staff
 Dismiss
+Divine Transformation
 Dragon Blood
 Dragonstalker
 Drake-Skull Cameo
@@ -242,6 +248,7 @@ Gatekeeper of Malakir
 Gelectrode
 Gemstone Array
 Gerrard's Verdict
+Gerrard's Wisdom
 Ghitu Encampment
 Ghitu War Cry
 Ghor-Clan Bloodscale
@@ -298,6 +305,7 @@ Hedge Troll
 Hedron Crab
 Henge Guardian
 Henge of Ramos
+Heroes' Reunion
 Highland Weald
 Honden of Cleansing Fire
 Honden of Infinite Rage
@@ -320,6 +328,7 @@ Ihsan's Shade
 Imperial Recruiter
 Imperiosaur
 Implode
+Improvised Armor
 Infest
 Inkfathom Infiltrator
 Inner-Chamber Guard
@@ -364,6 +373,7 @@ Killer Whale
 King Cheetah
 Kismet
 Kiss of Death
+Kiss of the Amesha
 Kitchen Finks
 Kithkin Harbinger
 Kithkin Rabble
@@ -376,6 +386,7 @@ Knotvine Mystic
 Koskun Keep
 Lady Orca
 Land Tax
+Landbind Ritual
 Lava Flow
 Leafdrake Roost
 Leatherback Baloth
@@ -456,6 +467,7 @@ Patagia Golem
 Path to Exile
 Patrol Signaler
 Pavel Maliki
+Peach Garden Oath
 Pendelhaven
 Penumbra Kavu
 Peregrine Drake
@@ -475,6 +487,7 @@ Plasma Elemental
 Plumeveil
 Pongify
 Power Armor
+Presence of the Wise
 Primal Bellow
 Primal Boost
 Primeval Shambler
@@ -509,6 +522,7 @@ Relentless Rats
 Remand
 Reminisce
 Renegade Troops
+Renewing Dawn
 Restless Apparition
 Resurrection
 Resuscitate
@@ -522,6 +536,7 @@ Riven Turnbull
 River Bear
 Rix Maadi, Dungeon Palace
 Roar of the Wurm
+Robber Fly
 Rockslide Ambush
 Rod of Ruin
 Rootbreaker Wurm
@@ -608,6 +623,7 @@ Squirrel Nest
 Stalker Hag
 Stalking Stones
 Standstill
+Starlight
 Starlit Angel
 Staunch Defenders
 Steam Spitter
