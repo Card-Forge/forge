@@ -9,4 +9,5 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ B | ValidTgts$ Player | TgtPrompt$ Select 
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kalastria_highborn.jpg
+SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/59.jpg
 End

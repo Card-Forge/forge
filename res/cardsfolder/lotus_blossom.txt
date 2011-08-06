@@ -13,4 +13,5 @@ SVar:X:Count$CardCounters.PETAL
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lotus_blossom.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/300.jpg
 End

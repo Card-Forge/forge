@@ -7,4 +7,5 @@ SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Eldrazi Spawn | TokenTypes$ 
 SVar:ABMana:AB$Mana | Cost$ Sac<1/CARDNAME> | Produced$ 1 | Amount$ 1 | SpellDescription$ Add 1 to your mana pool.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spawning_breath.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/164.jpg
 End

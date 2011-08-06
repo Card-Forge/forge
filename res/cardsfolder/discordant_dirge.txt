@@ -8,4 +8,5 @@ A:AB$Discard | Cost$ B Sac<1/CARDNAME> | ValidTgts$ Opponent | Mode$ RevealYouCh
 SVar:X:Count$CardCounters.VERSE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/discordant_dirge.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/131.jpg
 End

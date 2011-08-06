@@ -8,4 +8,5 @@ T:Mode$ Sacrificed | ValidCard$ Permanent.nonToken | Execute$ TrigReturn | Trigg
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ Triggered
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/it_that_betrays.jpg
+SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/7.jpg
 End

@@ -7,4 +7,5 @@ A:AB$PutCounter | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creat
 SVar:DBPutCounter:DB$PutCounter | Cost$ 0 | CounterType$ M1M1 | CounterNum$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serrated_biskelion.jpg
+SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/156.jpg
 End

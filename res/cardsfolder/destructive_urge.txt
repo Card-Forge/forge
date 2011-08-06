@@ -8,5 +8,5 @@ T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Opponent | Exec
 SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0 | Defined$ Opponent | SacValid$ Land | ChangeNum$ 1 | SpellDescription$ Sacrifice a land.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/destructive_urge.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/180.jpg
 End
-

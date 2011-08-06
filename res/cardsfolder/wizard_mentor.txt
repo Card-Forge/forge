@@ -8,5 +8,5 @@ SVar:DBChangeZone:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wizard_mentor.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/112.jpg
 End
-

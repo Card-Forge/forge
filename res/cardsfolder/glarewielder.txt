@@ -12,4 +12,5 @@ SVar:PlayMain1:TRUE
 K:Haste
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glarewielder.jpg
+SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/171.jpg
 End

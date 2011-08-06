@@ -8,6 +8,5 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ QUEST
 SVar:TrigUntap:AB$UntapAll | Cost$ 0 | ValidCards$ Creature.YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quest_for_renewal.jpg
+SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/110.jpg
 End
-
-

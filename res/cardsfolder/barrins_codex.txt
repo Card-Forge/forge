@@ -8,4 +8,5 @@ A:AB$Draw | Cost$ 4 T Sac<1/CARDNAME> | NumCards$ X | SpellDescription$ Draw X c
 SVar:X:Count$CardCounters.PAGE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Barrins_Codex.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/286.jpg
 End

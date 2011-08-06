@@ -8,4 +8,5 @@ SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Hand
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://magiccards.info/scans/en/fnmp/27.jpg
+SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/35.jpg
 End
