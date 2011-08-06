@@ -1234,12 +1234,6 @@ class CardFactory_Lands {
             card.addSpellAbility(ability);
             ability.setBeforePayMana(runtime);
             
-            //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
-            //anyway, this does the trick:
-            //card.removeIntrinsicKeyword("tap: add G");
-            //card.setText(card.getSpellText() +  "\r\ntap: Return target legendary creature to its owner's hand.");
-            //card.addIntrinsicKeyword("tap: add G");
-            
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
@@ -1326,13 +1320,7 @@ class CardFactory_Lands {
             
             card.addSpellAbility(ability);
             ability.setBeforePayMana(runtime);
-            
-            //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
-            //anyway, this does the trick:
-            //card.removeIntrinsicKeyword("tap: add G");
-            //card.setText(card.getSpellText() +  "\r\ntap: Target 1/1 creature gets +1/+2 until end of turn.");
-            //card.addIntrinsicKeyword("tap: add G");
-            
+
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
@@ -1421,12 +1409,6 @@ class CardFactory_Lands {
             card.addSpellAbility(ability);
             ability.setBeforePayMana(runtime);
             
-            //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
-            //anyway, this does the trick:
-            //card.removeIntrinsicKeyword("tap: add G");
-            //card.setText(card.getSpellText() +  "\r\nG, tap: Target legendary creature gets +1/+1 until end of turn.");
-            //card.addIntrinsicKeyword("tap: add G");
-            
         }//*************** END ************ END **************************
         
 
@@ -1483,12 +1465,6 @@ class CardFactory_Lands {
             
             card.addSpellAbility(ability);
             ability.setBeforePayMana(runtime);
-            
-            //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
-            //anyway, this does the trick:
-            //card.removeIntrinsicKeyword("tap: add 1");
-            //card.setText(card.getSpellText() +  "\r\nG, tap: Untap target Elf.");
-            //card.addIntrinsicKeyword("tap: add 1");
             
         }//*************** END ************ END **************************
         
@@ -1577,13 +1553,6 @@ class CardFactory_Lands {
                     + " - put artifact card in your graveyard on top of your library.");
             
             card.addSpellAbility(ability);
-            
-            //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
-            //anyway, this does the trick:
-            //card.removeIntrinsicKeyword("tap: add 1");
-            //card.setText(card.getSpellText() +  "\r\n1 U, tap: Put target artifact card in your graveyard on top of your library.");
-            //card.addExtrinsicKeyword("tap: add 1");
-            
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
@@ -1674,11 +1643,6 @@ class CardFactory_Lands {
             
             card.addSpellAbility(ability);
             
-            //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
-            //anyway, this does the trick:
-            //card.removeIntrinsicKeyword("tap: add 1");
-            //card.setText(card.getSpellText() +  "\r\n1 B, tap: Put target creature card in your graveyard on top of your library.");
-            //card.addExtrinsicKeyword("tap: add 1");
             
         }//*************** END ************ END **************************
         
@@ -1702,12 +1666,6 @@ class CardFactory_Lands {
             ability.setStackDescription("Return " + card.getName() + " to your hand.");
             
             card.addSpellAbility(ability);
-            
-            //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
-            //anyway, this does the trick:
-            //card.removeIntrinsicKeyword("tap: add 1");
-            //card.setText(card.getSpellText() +  "\r\n1: Return Oboro, Palace in the Clouds to your hand.");
-            //card.addExtrinsicKeyword("tap: add 1");
             
         }//*************** END ************ END **************************
         
@@ -1765,12 +1723,6 @@ class CardFactory_Lands {
             
             card.addSpellAbility(ability);
             
-            //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
-            //anyway, this does the trick:
-            //card.removeIntrinsicKeyword("tap: add 1");
-            //card.setText(card.getSpellText() +  "\r\n1 R, tap: Put a 0/1 red Kobold creature token named Kobolds of Kher Keep into play.");
-            //card.addIntrinsicKeyword("tap: add 1");
-            
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
@@ -1790,12 +1742,6 @@ class CardFactory_Lands {
                     + " - Put a 1/1 green Saproling creature token named into play.");
             
             card.addSpellAbility(ability);
-            
-            //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
-            //anyway, this does the trick:
-            //card.removeIntrinsicKeyword("tap: add 1");
-            //card.setText(card.getSpellText() +  "\r\n 2 G W, tap: Put a 1/1 green Saproling creature token into play.");
-            //card.addIntrinsicKeyword("tap: add 1");
             
         }//*************** END ************ END **************************
         
@@ -1924,12 +1870,6 @@ class CardFactory_Lands {
             };
             
             a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
-            
-            //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
-            //anyway, this does the trick:
-            //card.removeIntrinsicKeyword("tap: add 1");
-            //card.setText(card.getText() +  "\r\n1: Mutavault becomes a 2/2 creature with all creature types until end of turn. It's still a land.");
-            //card.addIntrinsicKeyword("tap: add 1");
             
         }//*************** END ************ END **************************
         
@@ -2176,12 +2116,6 @@ class CardFactory_Lands {
                     + " - Put a 2/2 colorless Assembly-Worker artifact creature token onto the battlefield.");
             
             card.addSpellAbility(ability);
-            
-            //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
-            //anyway, this does the trick:
-            //card.removeIntrinsicKeyword("tap: add 1");
-            //card.setText(card.getSpellText() +  "\r\n  Put a 2/2 colorless Assembly-Worker artifact creature token onto the battlefield.");
-            //card.addIntrinsicKeyword("tap: add 1");
             
         }//*************** END ************ END **************************
         
