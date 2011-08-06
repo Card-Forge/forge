@@ -1,708 +1,3 @@
-Metathran Elite
-1 U U
-Creature Metathran Soldier
-no text
-2/3
-StaticEffect:Play:Self:Keyword/Unblockable:enchanted:Metathran Elite is unblockable as long as it's enchanted.
-
-Thran Golem
-5
-Artifact Creature Golem
-no text
-3/3
-StaticEffect:Play:Self:PTBonus/2/2!Keyword/Flying!Keyword/First Strike!Keyword/Trample:enchanted:As long as Thran Golem is enchanted, it gets +2/+2 and has flying, first strike, and trample.
-
-Stormcaller's Boon
-2 W U
-Enchantment
-no text
-abAllPump Sac-CARDNAME:YouCtrl:Flying:Creatures you control gain flying until end of turn.:Stormcaller's Boon - Creatures gain flying until EOT
-Cascade
-SVar:RemAIDeck:True
-SVar:PlayMain1:TRUE
-
-Allay
-1 W
-Instant
-Destroy target enchantment.
-spDestroyTgt:Enchantment
-SVar:Buyback:3
-SVar:PlayMain1:TRUE
-
-Guan Yu's 1,000-Li March
-4 W W
-Sorcery
-Destroy all creatures that are tapped.
-spDestroyAll:Creature.tapped
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/guan_yus_1000_li_march.jpg
-SVar:PlayMain1:TRUE
-
-Crumble
-G
-Instant
-Destroy target artifact. It can't be regenerated. That artifact's controller gains life equal to its converted mana cost.
-spDestroyTgt:Artifact:NoRegen:Drawback$GainLifeTgtCtrlr/dX
-SVar:dX:Count$TgtCardManaCost
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crumble.jpg
-
-Devour in Shadow
-B B
-Instant
-Destroy target creature. It can't be regenerated. You lose life equal to that creature's toughness.
-spDestroyTgt:Creature:NoRegen:Drawback$YouLoseLife/dX
-SVar:dX:Count$TgtCardToughness
-SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
-SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card50210.jpg
-
-Divine Offering
-1 W
-Instant
-Destroy target artifact. You gain life equal to its converted mana cost.
-spDestroyTgt:Artifact:Drawback$YouGainLife/dX
-SVar:dX:Count$TgtCardManaCost
-SVar:PlayMain1:TRUE
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_offering.jpg
-
-Dark Offering
-4 B B
-Sorcery
-Destroy target nonblack creature. You gain 3 life.
-spDestroyTgt:Creature.Nonblack:Drawback$YouGainLife/3
-SVar:PlayMain1:TRUE
-
-Desecrated Earth
-4 B
-Sorcery
-Destroy target land. Its controller discards a card.
-spDestryTgt:Land:Drawback$DiscardTgtCtrlr/1
-
-Despoil
-3 B
-Sorcery
-Destroy target land. Its controller loses 2 life.
-spDestroyTgt:Land:Drawback$LoseLifeTgtCtrlr/2
-
-Drain the Well
-2 BG BG
-Sorcery
-Destroy target land. You gain 2 life.
-spDestroyTgt:Land:Drawback$YouGainLife/2
-
-Hideous End
-1 B B
-Instant
-Destroy target nonblack creature. Its controller loses 2 life.
-spDestroyTgt:Creature.Nonblack:Drawback$LoseLifeTgtCtrlr/2
-SVar:PlayMain1:TRUE
-
-Misfortune's Gain
-3 W
-Sorcery
-Destroy target creature. Its owner gains 4 life.
-spDestroyTgt:Creature:Drawback$TgtOwnerGainLife/4
-SVar:PlayMain1:TRUE
-
-Nature's Claim
-G
-Instant
-Destroy target artifact or enchantment. Its controller gains 4 life.
-spDestroyTgt:Artifact,Enchantment:Drawback$TgtCtrlrGainLife/4
-SVar:PlayMain1:TRUE
-
-Path of Peace
-3 W
-Sorcery
-Destroy target creature. Its owner gains 4 life.
-spDestroyTgt:Creature:Drawback$GainLifeTgtOwner/4
-SVar:PlayMain1:TRUE
-
-Poison Arrow
-4 B B
-Sorcery
-Destroy target nonblack creature. You gain 3 life.
-spDestroyTgt:Creature.nonblack:Drawback$YouGainLife/3
-SVar:PlayMain1:TRUE
-
-Poison the Well
-2 BR BR
-Sorcery
-Destroy target land. Poison the well deals 2 damage to that land's controller.
-spDestroyTgt:Land:Drawback$DamgeTgtCtrlr/2
-SVar:PlayMain1:TRUE
-
-Serene Offering
-1 W
-Instant
-Destroy target enchantment. You gain life equal to its converted mana cost.
-spDestroyTgt:Enchantment:Drawback$YouGainLife/dX
-SVar:dX:Count$TgtCardManaCost
-SVar:PlayMain1:TRUE
-
-Sever Soul
-3 B B
-Sorcery
-Destroy target nonblack creature. It can't be regenerated. You gain life equal to its toughness.
-spDestroyTgt:Creature.nonblack:NoRegen:Drawback$YouGainLife/dX
-SVar:dX:Count$TgtCardToughness
-SVar:PlayMain1:TRUE
-
-Solemn Offering
-2 W
-Sorcery
-Destroy target artifact or enchantment. You gain 4 life.
-spDestroyTgt:Artifact,Enchantment:Drawback$YouGainLife/4
-SVar:PlayMain1:TRUE
-
-Terashi's Grasp
-2 W
-Sorcery Arcane
-Destroy target artifact or enchantment. You gain life equal to its converted mana cost.
-spDestroyTgt:Artifact,Enchantment:Drawback$YouGainLife/dX
-SVar:dX:Count$TgtCardManaCost
-SVar:PlayMain1:TRUE
-
-Vendetta
-B
-Instant
-Destroy target nonblack creature. It can't be regenerated. You lose life equal to that creature's toughness.
-spDestroyTgt:Creature.nonblack:NoRegen:Drawback$YouLoseLife/dX
-SVar:dX:Count$TgtCardToughness
-SVar:PlayMain1:TRUE
-
-Capsize
-1 U U
-Instant
-Return target permanent to its owner's hand.
-spBounceTgt:Permanent:Hand
-SVar:Buyback:3
-SVar:RemAIDeck:True
-SVar:PlayMain1:TRUE
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/capsize.jpg
-
-Cumber Stone
-3 U
-Artifact
-no text
-StaticEffect:Play:Permanents your Opponents Control:PTBonus/-1/0:Type.Creature:Creatures your opponents control get -1/-0.
-SVar:PlayMain1:TRUE
-
-Planar Cleansing
-3 W W W
-Sorcery
-Destroy all non-land permanents.
-spDestroyAll:Permanent.nonLand
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_cleansing.jpg
-
-Soulscour
-7 W W W
-Sorcery
-Destroy all nonartifact permanents.
-spDestroyAll:Permanent.nonArtifact
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soulscour.jpg
-
-Back to Nature
-1 G
-Instant
-Destroy all enchantments.
-spDestroyAll:Enchantment
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/back_to_nature.jpg
-
-Cleanfall
-2 W
-Sorcery Arcane
-Destroy all enchantments.
-spDestroyAll:Enchantment
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cleanfall.jpg
-
-Hush
-3 G
-Sorcery
-Destroy all enchantments.
-spDestroyAll:Enchantment
-Cycling:2
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hush.jpg
-
-Tempest of Light
-2 W
-Instant
-Destroy all enchantments.
-spDestroyAll:Enchantment
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tempest_of_light.jpg
-
-Tranquil Path
-4 G
-Sorcery
-Destroy all enchantments.
-spDestroyAll:Enchantment
-Draw a card.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_path.jpg
-
-Tranquility
-2 G 
-Sorcery
-Destroy all enchantments.
-spDestroyAll:Enchantment
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquility.jpg
-
-Tethered Griffin
-W
-Creature Griffin
-When you control no enchantments, sacrifice Tethered Griffin.
-2/3
-Flying
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tethered_griffin.jpg
-
-Akroma's Vengeance
-4 W W
-Sorcery
-Destroy all artifacts, creatures, and enchantments.
-spDestroyAll:Artifact,Creature,Enchantment
-Cycling:3
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/akromas_vengeance.jpg
-
-Devastation
-5 R R
-Sorcery
-Destroy all creatures and lands.
-spDestroyAll:Creature,Land
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/devastation.jpg
-
-Jokulhaups
-4 R R
-Sorcery
-Destroy all artifacts, creatures, and lands. They can't be regenerated.
-spDestroyAll:Artifact,Creature,Land:NoRegen
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card14653.jpg
-
-Obliterate
-6 R R
-Sorcery
-Destroy all artifacts, creatures, and lands. They can't be regenerated.
-spDestroyAll:Artifact,Creature,Land:NoRegen
-CARDNAME can't be countered.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/obliterate.jpg
-
-Purify
-3 W W
-Sorcery
-Destroy all artifacts and enchantments.
-spDestroyAll:Artifact,Enchantment
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/purify.jpg
-
-Shatterstorm
-2 R R
-Sorcery
-Destroy all artifacts. They can't be regenerated.
-spDestroyAll:Artifact:NoRegen
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shatterstorm.jpg
-
-Abyssal Persecutor
-2 B B
-Creature Demon
-You can't win the game and your opponents can't lose the game.
-6/6
-Flying
-Trample
-SVar:RemAIDeck:True
-SVar:Rarity:Mythic
-SVar:Picture:http://www.wizards.com/global/images/magic/general/abyssal_persecutor.jpg
-
-Clout of the Dominus
-UR
-Enchantment Aura
-no text
-Enchant creature
-enPump:+0/+0
-StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Shroud:Color.blue:As long as enchanted creature is blue, it gets +1/+1 and has shroud. (It can't be the target of spells or abilities.)
-StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Haste:Color.red:As long as enchanted creature is red, it gets +1/+1 and has haste.
-SVar:PlayMain1:TRUE
-
-Edge of the Divinity
-WB
-Enchantment Aura
-no text
-Enchant creature
-enPump:+0/+0
-StaticEffect:Play:Enchanted Permanent:PTBonus/1/2:Color.white:As long as enchanted creature is white, it gets +1/+2.
-StaticEffect:Play:Enchanted Permanent:PTBonus/2/1:Color.black:As long as enchanted creature is black, it gets +2/+1.
-SVar:PlayMain1:TRUE
-
-Favor of the Overbeing
-1 GU
-Enchantment Aura
-no text
-Enchant creature
-enPump:+0/+0
-StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Vigilance:Color.green:As long as enchanted creature is green, it gets +1/+1 and has vigilance.
-StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Flying:Color.blue:As long as enchanted creature is blue, it gets +1/+1 and has flying.
-SVar:PlayMain1:TRUE
-
-Runes of the Deus
-4 RG
-Enchantment Aura
-no text
-Enchant creature
-enPump:+0/+0
-StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Double Strike:Color.red:As long as enchanted creature is red, it gets +1/+1 and has double strike. (It deals both first-strike and regular combat damage.)
-StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Trample:Color.green:As long as enchanted creature is green, it gets +1/+1 and has trample.
-SVar:PlayMain1:TRUE
-
-Shield of the Oversoul
-2 GW
-Enchantment Aura
-no text
-Enchant creature
-enPump:+0/+0
-StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Indestructible:Color.green:As long as enchanted creature is green, it gets +1/+1 and is indestructible. (Lethal damage and effects that say "destroy" don't destroy it. If its toughness is 0 or less, it's still put into its owner's graveyard.)
-StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Flying:Color.white:As long as enchanted creature is white, it gets +1/+1 and has flying.
-SVar:PlayMain1:TRUE
-
-Steel of the Godhead
-2 WU
-Enchantment Aura
-no text
-Enchant creature
-enPump:+0/+0
-StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Lifelink:Color.white:As long as enchanted creature is white, it gets +1/+1 and has lifelink. (Damage dealt by the creature also causes its controller to gain that much life.)
-StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Unblockable:Color.blue:As long as enchanted creature is blue, it gets +1/+1 and is unblockable.
-SVar:PlayMain1:TRUE
-
-Greater Auramancy
-1 W
-Enchantment
-no text
-StaticEffect:Play:Permanents you Control:Keyword/Shroud:Type.Enchantment!NotSelf:Other enchantments you control have shroud.
-StaticEffect:Play:Permanents you Control:Keyword/Shroud:Type.Creature!enchanted:Enchanted creatures you control have shroud.
-SVar:PlayMain1:TRUE
-
-Guardian's Magemark
-2 W
-Enchantment Aura
-no text
-Enchant creature
-Flash
-enPump:+0/+0
-StaticEffect:Play:Permanents you Control:PTBonus/1/1:Type.Creature!enchanted:Creatures you control that are enchanted get +1/+1.
-SVar:PlayMain1:TRUE
-
-Song of Serenity
-1 G
-Enchantment
-no text
-StaticEffect:Play:All Permanents:Keyword/CARDNAME can't attack or block.:Type.Creature!enchanted:Creatures that are enchanted can't attack or block.
-SVar:RemAIDeck:True
-
-Crosswinds
-2 G
-Enchantment
-no text
-StaticEffect:Play:All Permanents:PTBonus/-2/0:Type.Creature!with.Flying:Creatures with flying get -2/-0.
-SVar:PlayMain1:TRUE
-SVar:RemAIDeck:True
-
-Fencer's Magemark
-2 R
-Enchantment Aura
-no text
-Enchant creature
-enPump:+0/+0
-StaticEffect:Play:Permanents you Control:PTBonus/1/1!Keyword/First Strike:Type.Creature!enchanted:Creatures you control that are enchanted get +1/+1 and have first strike.
-SVar:PlayMain1:TRUE
-
-Fists of the Demigod
-1 BR
-Enchantment Aura
-no text
-Enchant creature
-enPump:+0/+0
-StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Wither:Color.black:As long as enchanted creature is black, it gets +1/+1 and has wither. (It deals damage to creatures in the form of -1/-1 counters.)
-StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/First Strike:Color.red:As long as enchanted creature is red, it gets +1/+1 and has first strike.
-SVar:PlayMain1:TRUE
-
-Pyre Zombie
-1 B R
-Creature Zombie
-no text
-2/1
-abDamageTgtCP 1 R R Sac-CARDNAME:2
-WheneverKeyword:BeginningOfUpkeep:No_Initiator:Graveyard:MoveFrom-Graveyard-Hand:Self:ASAP:PayMana/1 B B:ControllerUpkeep:At the beginning of your upkeep, if Pyre Zombie is in your graveyard, you may pay {1}{B}{B}. If you do, return Pyre Zombie from your graveyard to your hand.
-
-Slinking Giant
-2 R R
-Creature Giant Rogue
-no text
-4/4
-Wither
-WheneverKeyword:Blocks:Self:Play:StatsPumpEOT/-3/0:Self:ASAP:No_Condition:No Special Condition:Whenever Slinking Giant blocks, it gets -3/-0 until end of turn.
-WheneverKeyword:BecomesBlocked:Self:Play:StatsPumpEOT/-3/0:Self:ASAP:No_Condition:No Special Condition:Whenever Slinking Giant becomes blocked, it gets -3/-0 until end of turn.
-
-Serra Aviary
-3 W
-World Enchantment
-no text
-StaticEffect:Play:All Permanents:PTBonus/1/1:Type.Creature!with.Flying:Creatures with flying get +1/+1.
-SVar:PlayMain1:TRUE
-SVar:RemAIDeck:True
-
-Cavalry Master
-2 W W
-Creature Human Knight
-no text
-3/3
-Flanking
-StaticEffect:Play:Permanents you Control:Keyword/Flanking:Type.Creature!with.Flanking!NotSelf:Other creatures you control with flanking have flanking. (Each instance of flanking triggers separately.)
-SVar:PlayMain1:TRUE
-
-Stalwart Shield-Bearers
-1 W
-Creature Human Soldier
-no text
-0/3
-Defender
-StaticEffect:Play:Permanents you Control:PTBonus/0/2:Type.Creature!with.Defender!NotSelf:Other creatures you control with defender get +0/+2..
-
-Zhao Zilong, Tiger General
-3 W W
-Legendary Creature Human Soldier Warrior
-no text
-3/3
-Horsemanship
-WheneverKeyword:Blocks:Self:Play:StatsPumpEOT/1/1:Self:ASAP:No_Condition:No Special Condition:Whenever Zhao Zilong, Tiger General blocks, it gets +1/+1 until end of turn.
-
-Reckless One
-3 R
-Creature Goblin Avatar
-no text
-1/1
-Haste
-StaticEffect:Play:Self:SetPT/Type.Goblin/Type.Goblin:All Permanents:Reckless One's power and toughness are each equal to the number of Goblins on the battlefield.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_one.jpg
-
-Viashino Cutthroat
-2 R R
-Creature Viashino
-no text
-5/3
-Haste
-WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:ControllerEndStep:At the beginning of the end step, return Viashino Cutthroat to its owner's hand.
-SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_cutthroat.jpg
-
-Viashino Sandscout
-1 R
-Creature Viashino Scout
-no text
-2/1
-Haste
-WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:ControllerEndStep:At the beginning of the end step, return Viashino Sandscout to its owner's hand. (Return it only if it's on the battlefield.)
-SVar:PlayMain1:TRUE
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_sandscout.jpg
-
-Viashino Sandstalker
-1 R R
-Creature Viashino Warrior
-no text
-4/2
-Haste
-WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:ControllerEndStep:At the beginning of the end step, return Viashino Sandstalker to its owner's hand. (Return it only if it's on the battlefield.)
-SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_sandstalker.jpg
-
-Gravitational Shift
-3 U U
-Enchantment
-no text
-StaticEffect:Play:All Permanents:PTBonus/2/0:Type.Creature!with.Flying:Creatures with flying get +2/+0.
-StaticEffect:Play:All Permanents:PTBonus/-2/0:Type.Creature!without.Flying:Creatures without flying get -2/-0.
-SVar:PlayMain1:TRUE
-SVar:RemAIDeck:True
-
-Mouth of Ronom
-no cost
-Snow Land
-no text
-tap: add 1
-abDamageTgtC 4 S T Sac-CARDNAME:4
-SVar:RemAIDeck:True
-
-Evacuation
-3 U U
-Instant
-Return all creatures to their owners' hands.
-spBounceAll:Creature:Hand
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/evacuation.jpg
-
-Rebuild
-2 U
-Instant
-Return all artifacts to their owners' hands.
-spBounceAll:Artifact:Hand
-Cycling:2
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rebuild.jpg
-
-Cleanse
-2 W W
-Sorcery
-Destroy all black creatures.
-spDestroyAll:Creature.Black
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cleanse.jpg
-
-Damnation
-2 B B
-Sorcery
-Destroy all creatures. They can't be regenerated.
-spDestroyAll:Creature:NoRegen
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122423.jpg
-
-Day of Judgment
-2 W W
-Sorcery
-Destroy all creatures.
-spDestroyAll:Creature
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/day_of_judgment.jpg
-
-Mass Calcify
-5 W W
-Sorcery
-Destroy all nonwhite creatures.
-spDestroyAll:Creature.nonWhite
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mass_calcify.jpg
-
-Nature's Ruin
-2 B
-Sorcery
-Destroy all green creatures.
-spDestroyAll:Creature.Green
-SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/natures_ruin.jpg
-
-Perish
-2 B
-Sorcery
-Destroy all green creatures. They can't be regenerated.
-spDestroyAll:Creature.Green:NoRegen
-SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/perish.jpg
-
-Virtue's Ruin
-2 B
-Sorcery
-Destroy all white creatures.
-spDestroyAll:Creature.White
-SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/virtues_ruin.jpg
-
-Wrath of God
-2 W W
-Sorcery
-Destroy all creatures. They can't be regenerated.
-spDestroyAll:Creature:NoRegen
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83339.jpg
-
-Vampiric Sliver
-3 B
-Creature Sliver
-no text
-3/3
-StaticEffect:Play:All Permanents:Keyword/Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.:Type.Sliver:All Sliver creatures have "Whenever a creature dealt damage by this creature this turn is put into a graveyard, put a +1/+1 counter on this creature."
-SVar:PlayMain1:TRUE
-
-Death of a Thousand Stings
-4 B
-Instant Arcane
-no text
-spLoseLifeTgt:1:Drawback$YouGainLife/1:Target player loses 1 life and you gain 1 life.
-WheneverKeyword:BeginningOfUpkeep:No_Initiator:Graveyard:MoveFrom-Graveyard-Hand:Self:ASAP:Yes_No:ControllerUpkeep!MoreCardsInHand:At the beginning of your upkeep, if you have more cards in hand than each opponent, you may return Death of a Thousand Stings from your graveyard to your hand.
-
-Brackwater Elemental
-2 U
-Creature Elemental
-no text
-4/4
-WheneverKeyword:Attacks:Self:Play:KeywordPumpEOT/At the beginning of the end step, sacrifice CARDNAME.:Self:ASAP:No_Condition:No Special Condition:When Brackwater Elemental attacks, sacrifice it at the beginning of the next end step.
-WheneverKeyword:Blocks:Self:Play:KeywordPumpEOT/At the beginning of the end step, sacrifice CARDNAME.:Self:ASAP:No_Condition:No Special Condition:When Brackwater Elemental blocks, sacrifice it at the beginning of the next end step.
-Unearth:2 U
-
-Acid Rain
-3 U
-Sorcery
-Destroy all Forests.
-spDestroyAll:Forest
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/acid_rain.jpg
-
-Boil
-3 R
-Instant
-Destroy all Islands.
-spDestroyAll:Island
-SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
-SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card25675.jpg
-
-Boiling Seas
-3 R
-Sorcery
-Destroy all Islands.
-spDestroyAll:Island
-SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/boiling_seas.jpg
-
-Flashfires
-3 R
-Sorcery
-Destroy all Plains.
-spDestroyAll:Plains
-SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flashfires.jpg
-
-Mana Drain
-U U
-Instant
-Counter target spell. At the beginning of your next main phase, add X to your mana pool, where X is that spell's converted mana cost
-SVar:Rarity:Rare
-SVar:RemAIDeck:True
-
 Abandoned Outpost
 no cost
 Land
@@ -804,6 +99,17 @@ WheneverKeyword:DiscardsCard:ControllingPlayer_Opponent:Play:KeywordPumpEOT/Fear
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abyssal_nocturnus.jpg
 
+Abyssal Persecutor
+2 B B
+Creature Demon
+You can't win the game and your opponents can't lose the game.
+6/6
+Flying
+Trample
+SVar:RemAIDeck:True
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/abyssal_persecutor.jpg
+
 Abyssal Specter
 2 B B
 Creature Specter
@@ -853,6 +159,15 @@ Instant
 no text
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/accumulated_knowledge.jpg
+
+Acid Rain
+3 U
+Sorcery
+Destroy all Forests.
+spDestroyAll:Forest
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/acid_rain.jpg
 
 Acidic Soil
 2 R
@@ -1294,6 +609,15 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akromas_memorial.jpg
 
+Akroma's Vengeance
+4 W W
+Sorcery
+Destroy all artifacts, creatures, and enchantments.
+spDestroyAll:Artifact,Creature,Enchantment
+Cycling:3
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/akromas_vengeance.jpg
+
 Akuta, Born of Ash
 2 B B
 Legendary Creature Spirit
@@ -1417,6 +741,16 @@ Tribal Sorcery Eldrazi
 Each player sacrifices all colored permanents he or she controls.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/all_is_dust.jpg
+
+Allay
+1 W
+Instant
+Destroy target enchantment.
+spDestroyTgt:Enchantment
+SVar:Buyback:3
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/allay.jpg
 
 Alley Grifters
 1 B B
@@ -2863,6 +2197,14 @@ You may play two additional lands on each of your turns.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azusa_lost_but_seeking.jpg
 
+Back to Nature
+1 G
+Instant
+Destroy all enchantments.
+spDestroyAll:Enchantment
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/back_to_nature.jpg
+
 Bad Moon
 1 B
 Enchantment
@@ -4201,6 +3543,24 @@ Wither
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_ram_gang.jpg
 
+Boil
+3 R
+Instant
+Destroy all Islands.
+spDestroyAll:Island
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card25675.jpg
+
+Boiling Seas
+3 R
+Sorcery
+Destroy all Islands.
+spDestroyAll:Island
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/boiling_seas.jpg
+
 Bojuka Bog
 no cost
 Land
@@ -4458,6 +3818,17 @@ spGainLife:X:You gain 1 life for each land you control.:Bountiful Harvest - play
 SVar:X:Count$TypeYouCtrl.Land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bountiful_harvest.jpg
+
+Brackwater Elemental
+2 U
+Creature Elemental
+no text
+4/4
+WheneverKeyword:Attacks:Self:Play:KeywordPumpEOT/At the beginning of the end step, sacrifice CARDNAME.:Self:ASAP:No_Condition:No Special Condition:When Brackwater Elemental attacks, sacrifice it at the beginning of the next end step.
+WheneverKeyword:Blocks:Self:Play:KeywordPumpEOT/At the beginning of the end step, sacrifice CARDNAME.:Self:ASAP:No_Condition:No Special Condition:When Brackwater Elemental blocks, sacrifice it at the beginning of the next end step.
+Unearth:2 U
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brackwater_elemental.jpg
 
 Braidwood Cup
 3
@@ -5145,6 +4516,17 @@ no text
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/capashen_unicorn.jpg
 
+Capsize
+1 U U
+Instant
+Return target permanent to its owner's hand.
+spBounceTgt:Permanent:Hand
+SVar:Buyback:3
+SVar:RemAIDeck:True
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/capsize.jpg
+
 Captain of the Watch
 4 W W
 Creature Human Soldier 
@@ -5405,6 +4787,17 @@ Exile target land.
 spBounceTgt:Land:Exile
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caustic_rain.jpg
+
+Cavalry Master
+2 W W
+Creature Human Knight
+no text
+3/3
+Flanking
+StaticEffect:Play:Permanents you Control:Keyword/Flanking:Type.Creature!with.Flanking!NotSelf:Other creatures you control with flanking have flanking. (Each instance of flanking triggers separately.)
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cavalry_master.jpg
 
 Cave People
 1 R R
@@ -6003,6 +5396,23 @@ RegenerateMe:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clay_statue.jpg
 
+Cleanfall
+2 W
+Sorcery Arcane
+Destroy all enchantments.
+spDestroyAll:Enchantment
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cleanfall.jpg
+
+Cleanse
+2 W W
+Sorcery
+Destroy all black creatures.
+spDestroyAll:Creature.Black
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cleanse.jpg
+
 Clear
 1 W
 Instant
@@ -6180,6 +5590,18 @@ no text
 Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130309.jpg
+
+Clout of the Dominus
+UR
+Enchantment Aura
+no text
+Enchant creature
+enPump:+0/+0
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Shroud:Color.blue:As long as enchanted creature is blue, it gets +1/+1 and has shroud. (It can't be the target of spells or abilities.)
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Haste:Color.red:As long as enchanted creature is red, it gets +1/+1 and has haste.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/clout_of_the_dominus.jpg
 
 Coal Golem
 5
@@ -6808,6 +6230,16 @@ spAllPump:YouCtrl:Reach:Creatures you control gain reach until end of turn.:Cros
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crossbow_ambush.jpg
 
+Crosswinds
+2 G
+Enchantment
+no text
+StaticEffect:Play:All Permanents:PTBonus/-2/0:Type.Creature!with.Flying:Creatures with flying get -2/-0.
+SVar:PlayMain1:TRUE
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crosswinds.jpg
+
 Crowd Favorites
 6 W
 Creature Human Soldier
@@ -6881,6 +6313,15 @@ Sorcery
 Target opponent sacrifices a creature, discards three cards, then loses 5 life. You return a creature card from your graveyard to your hand, draw three cards, then gain 5 life.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cruel_ultimatum.jpg
+
+Crumble
+G
+Instant
+Destroy target artifact. It can't be regenerated. That artifact's controller gains life equal to its converted mana cost.
+spDestroyTgt:Artifact:NoRegen:Drawback$GainLifeTgtCtrlr/dX
+SVar:dX:Count$TgtCardManaCost
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crumble.jpg
 
 Crumbling Necropolis
 no cost
@@ -6986,6 +6427,15 @@ Sorcery
 Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Then shuffle your library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cultivate.jpg
+
+Cumber Stone
+3 U
+Artifact
+no text
+StaticEffect:Play:Permanents your Opponents Control:PTBonus/-1/0:Type.Creature:Creatures your opponents control get -1/-0.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cumber_stone.jpg
 
 Cunning Lethemancer
 2 B
@@ -7143,6 +6593,14 @@ no text
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20383.jpg
 
+Damnation
+2 B B
+Sorcery
+Destroy all creatures. They can't be regenerated.
+spDestroyAll:Creature:NoRegen
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122423.jpg
+
 Dance of Shadows
 3 B B
 Sorcery Arcane
@@ -7219,6 +6677,14 @@ Legendary Snow Land
 Dark Depths enters the battlefield with ten ice counters on it.  When Dark Depths has no ice counters on it, sacrifice it. If you do, put an indestructible legendary 20/20 black Avatar creature token with flying named Marit Lage onto the battlefield.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_depths.jpg
+
+Dark Offering
+4 B B
+Sorcery
+Destroy target nonblack creature. You gain 3 life.
+spDestroyTgt:Creature.Nonblack:Drawback$YouGainLife/3
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
 
 Dark Ritual
 B
@@ -7445,6 +6911,14 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/day_of_destiny.jpg
 
+Day of Judgment
+2 W W
+Sorcery
+Destroy all creatures.
+spDestroyAll:Creature
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/day_of_judgment.jpg
+
 Daze
 1 U
 Instant
@@ -7505,6 +6979,15 @@ spDamageTgtCP:X:Drawback$YouGainLife/X:Death Grasp deals X damage to target crea
 SVar:X:Count$xPaid
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_grasp.jpg
+
+Death of a Thousand Stings
+4 B
+Instant Arcane
+no text
+spLoseLifeTgt:1:Drawback$YouGainLife/1:Target player loses 1 life and you gain 1 life.
+WheneverKeyword:BeginningOfUpkeep:No_Initiator:Graveyard:MoveFrom-Graveyard-Hand:Self:ASAP:Yes_No:ControllerUpkeep!MoreCardsInHand:At the beginning of your upkeep, if you have more cards in hand than each opponent, you may return Death of a Thousand Stings from your graveyard to your hand.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/death_of_a_thousand_stings.jpg
 
 Death Speakers
 W
@@ -7846,6 +7329,14 @@ Creature Human Wizard
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/descendant_of_soramaro.jpg
 
+Desecrated Earth
+4 B
+Sorcery
+Destroy target land. Its controller discards a card.
+spDestryTgt:Land:Drawback$DiscardTgtCtrlr/1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/desecrated_earth.jpg
+
 Desert Drake
 3 R
 Creature Drake
@@ -7879,6 +7370,14 @@ spAllPump:YouCtrl:+2/+0:Creatures you control get +2/+0 until end of turn.:Despe
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10512.jpg
 
+Despoil
+3 B
+Sorcery
+Destroy target land. Its controller loses 2 life.
+spDestroyTgt:Land:Drawback$LoseLifeTgtCtrlr/2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/despoil.jpg
+
 Despondency
 1 B
 Enchantment Aura
@@ -7896,6 +7395,14 @@ Each player sacrifices five lands. Destructive Force deals 5 damage to each crea
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/destructive_force.jpg
 
+Devastation
+5 R R
+Sorcery
+Destroy all creatures and lands.
+spDestroyAll:Creature,Land
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/devastation.jpg
+
 Devoted Hero
 W
 Creature Elf Soldier
@@ -7912,6 +7419,16 @@ no text
 Bushido 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devoted_retainer.jpg
+
+Devour in Shadow
+B B
+Instant
+Destroy target creature. It can't be regenerated. You lose life equal to that creature's toughness.
+spDestroyTgt:Creature:NoRegen:Drawback$YouLoseLife/dX
+SVar:dX:Count$TgtCardToughness
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card50210.jpg
 
 Devouring Deep
 2 U
@@ -8197,6 +7714,16 @@ spDrawCards:2:Draw two cards.:Divination - Draw 2 cards.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divination.jpg
 
+Divine Offering
+1 W
+Instant
+Destroy target artifact. You gain life equal to its converted mana cost.
+spDestroyTgt:Artifact:Drawback$YouGainLife/dX
+SVar:dX:Count$TgtCardManaCost
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_offering.jpg
+
 Divine Transformation
 2 W W
 Enchantment Aura
@@ -8411,6 +7938,14 @@ Search your library for a Dragon permanent card and put it onto the battlefield.
 Storm
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonstorm.jpg
+
+Drain the Well
+2 BG BG
+Sorcery
+Destroy target land. You gain 2 life.
+spDestroyTgt:Land:Drawback$YouGainLife/2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/drain_the_well.jpg
 
 Drake Hatchling
 2 U
@@ -9013,6 +8548,18 @@ Instant
 Return target nonland permanent and all other permanents with the same name as that permanent to their owner's hands.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card46162.jpg
+
+Edge of the Divinity
+WB
+Enchantment Aura
+no text
+Enchant creature
+enPump:+0/+0
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/2:Color.white:As long as enchanted creature is white, it gets +1/+2.
+StaticEffect:Play:Enchanted Permanent:PTBonus/2/1:Color.black:As long as enchanted creature is black, it gets +2/+1.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/edge_of_the_divinity.jpg
 
 Edgewalker
 1 W B 
@@ -9761,6 +9308,14 @@ Untap:2 U
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ethersworn_adjudicator.jpg
 
+Evacuation
+3 U U
+Instant
+Return all creatures to their owners' hands.
+spBounceAll:Creature:Hand
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/evacuation.jpg
+
 Everflowing Chalice
 0
 Artifact
@@ -10100,6 +9655,18 @@ no text
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fauna_shaman.jpg
 
+Favor of the Overbeing
+1 GU
+Enchantment Aura
+no text
+Enchant creature
+enPump:+0/+0
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Vigilance:Color.green:As long as enchanted creature is green, it gets +1/+1 and has vigilance.
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Flying:Color.blue:As long as enchanted creature is blue, it gets +1/+1 and has flying.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/favor_of_the_overbeing.jpg
+
 Fear
 B B
 Enchantment Aura
@@ -10213,6 +9780,17 @@ no text
 1/4
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/mi/en-us/card3494.jpg
+
+Fencer's Magemark
+2 R
+Enchantment Aura
+no text
+Enchant creature
+enPump:+0/+0
+StaticEffect:Play:Permanents you Control:PTBonus/1/1!Keyword/First Strike:Type.Creature!enchanted:Creatures you control that are enchanted get +1/+1 and have first strike.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fencers_magemark.jpg
 
 Feral Animist
 1 R G
@@ -10628,6 +10206,18 @@ spPumpTgt:+4/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fists_of_the_anvil.jpg
 
+Fists of the Demigod
+1 BR
+Enchantment Aura
+no text
+Enchant creature
+enPump:+0/+0
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Wither:Color.black:As long as enchanted creature is black, it gets +1/+1 and has wither. (It deals damage to creatures in the form of -1/-1 counters.)
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/First Strike:Color.red:As long as enchanted creature is red, it gets +1/+1 and has first strike.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fists_of_the_demigod.jpg
+
 Fit of Rage
 1 R
 Sorcery
@@ -10779,6 +10369,15 @@ Counter target instant spell.
 spCounter:Spell:Type(Instant):Graveyard:None
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flash_counter.jpg
+
+Flashfires
+3 R
+Sorcery
+Destroy all Plains.
+spDestroyAll:Plains
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flashfires.jpg
 
 Flashfreeze
 1 U
@@ -13105,6 +12704,17 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graven_cairns.jpg
 
+Gravitational Shift
+3 U U
+Enchantment
+no text
+StaticEffect:Play:All Permanents:PTBonus/2/0:Type.Creature!with.Flying:Creatures with flying get +2/+0.
+StaticEffect:Play:All Permanents:PTBonus/-2/0:Type.Creature!without.Flying:Creatures without flying get -2/-0.
+SVar:PlayMain1:TRUE
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gravitational_shift.jpg
+
 Gray Ogre
 2 R
 Creature Ogre
@@ -13168,6 +12778,16 @@ Protection from black
 CARDNAME can't be countered.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/great_sable_stag.jpg
+
+Greater Auramancy
+1 W
+Enchantment
+no text
+StaticEffect:Play:Permanents you Control:Keyword/Shroud:Type.Enchantment!NotSelf:Other enchantments you control have shroud.
+StaticEffect:Play:Permanents you Control:Keyword/Shroud:Type.Creature!enchanted:Enchanted creatures you control have shroud.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_auramancy.jpg
 
 Greater Basilisk
 3 G G
@@ -13401,6 +13021,15 @@ Horsemanship
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guan_yu_sainted_warrior.jpg
 
+Guan Yu's 1,000-Li March
+4 W W
+Sorcery
+Destroy all creatures that are tapped.
+spDestroyAll:Creature.tapped
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/guan_yus_1000_li_march.jpg
+
 Guard Duty
 W
 Enchantment Aura
@@ -13417,6 +13046,18 @@ When Guardian of Cloverdell comes into play, put three 1/1 white Kithkin Soldier
 4/5
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_of_cloverdell.jpg
+
+Guardian's Magemark
+2 W
+Enchantment Aura
+no text
+Enchant creature
+Flash
+enPump:+0/+0
+StaticEffect:Play:Permanents you Control:PTBonus/1/1:Type.Creature!enchanted:Creatures you control that are enchanted get +1/+1.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/guardians_magemark.jpg
 
 Guardians of Akrasa
 2 W
@@ -14216,6 +13857,15 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hidden_path.jpg
 
+Hideous End
+1 B B
+Instant
+Destroy target nonblack creature. Its controller loses 2 life.
+spDestroyTgt:Creature.Nonblack:Drawback$LoseLifeTgtCtrlr/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hideous_end.jpg
+
 Hidetsugu's Second Rite
 3 R
 Instant
@@ -14761,6 +14411,15 @@ Sorcery
 no text
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hurricane.jpg
+
+Hush
+3 G
+Sorcery
+Destroy all enchantments.
+spDestroyAll:Enchantment
+Cycling:2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hush.jpg
 
 Hyalopterous Lemure
 4 B
@@ -15857,6 +15516,15 @@ Lands you control have "tap: Add one mana of any color to your mana pool."
 2/1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/joiner_adept.jpg
+
+Jokulhaups
+4 R R
+Sorcery
+Destroy all artifacts, creatures, and lands. They can't be regenerated.
+spDestroyAll:Artifact,Creature,Land:NoRegen
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card14653.jpg
 
 Jolrael's Centaur
 1 G G
@@ -18593,6 +18261,14 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_cylix.jpg
 
+Mana Drain
+U U
+Instant
+Counter target spell. At the beginning of your next main phase, add X to your mana pool, where X is that spell's converted mana cost
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_drain.jpg
+
 Mana Leak
 1 U
 Instant
@@ -18854,6 +18530,14 @@ WheneverKeyword:EntersBattleField:Self:Play:DrawCards/1:ControllingPlayer_Self:A
 WheneverKeyword:CastSpell/Controller:Type/Creature:Graveyard:MoveFrom-Graveyard-Hand:Self:ASAP:PayMana/G G:No Special Condition:Whenever you cast a creature spell, you may pay G G. If you do, return Masked Admirers from your graveyard to your hand.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/masked_admirers.jpg
+
+Mass Calcify
+5 W W
+Sorcery
+Destroy all nonwhite creatures.
+spDestroyAll:Creature.nonWhite
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mass_calcify.jpg
 
 Mass Hysteria
 R
@@ -19169,6 +18853,15 @@ no text
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4617.jpg
+
+Metathran Elite
+1 U U
+Creature Metathran Soldier
+no text
+2/3
+StaticEffect:Play:Self:Keyword/Unblockable:enchanted:Metathran Elite is unblockable as long as it's enchanted.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/metathran_elite.jpg
 
 Metathran Soldier
 1 U
@@ -19495,6 +19188,15 @@ Counter target spell unless its controller pays 2.
 Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/miscalculation.jpg
+
+Misfortune's Gain
+3 W
+Sorcery
+Destroy target creature. Its owner gains 4 life.
+spDestroyTgt:Creature:Drawback$TgtOwnerGainLife/4
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/misfortunes_gain.jpg
 
 Mishra, Artificer Prodigy
 1 U B R
@@ -20005,6 +19707,16 @@ Lifelink
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mourning_thrull.jpg
 
+Mouth of Ronom
+no cost
+Snow Land
+no text
+tap: add 1
+abDamageTgtC 4 S T Sac-CARDNAME:4
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mouth_of_ronom.jpg
+
 Mox Diamond
 0
 Artifact
@@ -20393,6 +20105,15 @@ spDestroyTgt:Artifact,Enchantment
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/naturalize.jpg
 
+Nature's Claim
+G
+Instant
+Destroy target artifact or enchantment. Its controller gains 4 life.
+spDestroyTgt:Artifact,Enchantment:Drawback$TgtCtrlrGainLife/4
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_claim.jpg
+
 Nature's Cloak
 2 G
 Sorcery
@@ -20408,6 +20129,15 @@ Sorcery
 no text
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_lore.jpg
+
+Nature's Ruin
+2 B
+Sorcery
+Destroy all green creatures.
+spDestroyAll:Creature.Green
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/natures_ruin.jpg
 
 Naya Battlemage
 2 G
@@ -21118,6 +20848,15 @@ tap: add R
 tap: add W
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_naya.jpg
+
+Obliterate
+6 R R
+Sorcery
+Destroy all artifacts, creatures, and lands. They can't be regenerated.
+spDestroyAll:Artifact,Creature,Land:NoRegen
+CARDNAME can't be countered.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/obliterate.jpg
 
 Oblivion Ring
 2 W
@@ -21866,6 +21605,15 @@ spAllPump:YouCtrl:+2/+0:Creatures you control get +2/+0 until end of turn.:Path 
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card74179.jpg
 
+Path of Peace
+3 W
+Sorcery
+Destroy target creature. Its owner gains 4 life.
+spDestroyTgt:Creature:Drawback$GainLifeTgtOwner/4
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/path_of_peace.jpg
+
 Path to Exile
 W
 Instant
@@ -22049,6 +21797,15 @@ Whenever a creature you control with defender blocks, you may gain 2 life.
 Defender
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/perimeter_captain.jpg
+
+Perish
+2 B
+Sorcery
+Destroy all green creatures. They can't be regenerated.
+spDestroyAll:Creature.Green:NoRegen
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/perish.jpg
 
 Perish the Thought
 2 B
@@ -22460,6 +22217,14 @@ SVar:PicCount:4
 SVar:Rarity:Land
 SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73963.jpg
 
+Planar Cleansing
+3 W W W
+Sorcery
+Destroy all non-land permanents.
+spDestroyAll:Permanent.nonLand
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_cleansing.jpg
+
 Planar Gate
 6
 Artifact
@@ -22595,6 +22360,24 @@ spDestroyTgt:Artifact,Land
 Suspend:4:1 R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plunder.jpg
+
+Poison Arrow
+4 B B
+Sorcery
+Destroy target nonblack creature. You gain 3 life.
+spDestroyTgt:Creature.nonblack:Drawback$YouGainLife/3
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/poison_arrow.jpg
+
+Poison the Well
+2 BR BR
+Sorcery
+Destroy target land. Poison the well deals 2 damage to that land's controller.
+spDestroyTgt:Land:Drawback$DamgeTgtCtrlr/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/poison_the_well.jpg
 
 Political Trickery
 2 U
@@ -23055,6 +22838,14 @@ spDestroyTgt:Creature.Artifact,Creature.Black:NoRegen
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/purge.jpg
 
+Purify
+3 W W
+Sorcery
+Destroy all artifacts and enchantments.
+spDestroyAll:Artifact,Enchantment
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/purify.jpg
+
 Putrefy
 1 B G
 Instant
@@ -23108,6 +22899,16 @@ Haste
 abPump R:+1/+0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyre_charger.jpg
+
+Pyre Zombie
+1 B R
+Creature Zombie
+no text
+2/1
+abDamageTgtCP 1 R R Sac-CARDNAME:2
+WheneverKeyword:BeginningOfUpkeep:No_Initiator:Graveyard:MoveFrom-Graveyard-Hand:Self:ASAP:PayMana/1 B B:ControllerUpkeep:At the beginning of your upkeep, if Pyre Zombie is in your graveyard, you may pay {1}{B}{B}. If you do, return Pyre Zombie from your graveyard to your hand.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pyre_zombie.jpg
 
 Pyretic Ritual
 1 R
@@ -23744,6 +23545,15 @@ spCounter:Spell:Targets(My-Creature,My-Land,My-Enchantment,My-Artifact,My-Planes
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rebuff_the_wicked.jpg
 
+Rebuild
+2 U
+Instant
+Return all artifacts to their owners' hands.
+spBounceAll:Artifact:Hand
+Cycling:2
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rebuild.jpg
+
 Recall
 X X U
 Sorcery
@@ -23769,6 +23579,16 @@ no text
 WheneverKeyword:Attack - Alone:Self:Play:StatsPumpEOT/3/0:Self:ASAP:No_Condition:No Special Condition:Whenever Reckless Ogre attacks alone, it gets +3/+0 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_ogre.jpg
+
+Reckless One
+3 R
+Creature Goblin Avatar
+no text
+1/1
+Haste
+StaticEffect:Play:Self:SetPT/Type.Goblin/Type.Goblin:All Permanents:Reckless One's power and toughness are each equal to the number of Goblins on the battlefield.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_one.jpg
 
 Reckless Scholar
 2 U
@@ -24940,6 +24760,18 @@ eqPump 2:+1/+1/Changeling
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runed_stalactite.jpg
 
+Runes of the Deus
+4 RG
+Enchantment Aura
+no text
+Enchant creature
+enPump:+0/+0
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Double Strike:Color.red:As long as enchanted creature is red, it gets +1/+1 and has double strike. (It deals both first-strike and regular combat damage.)
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Trample:Color.green:As long as enchanted creature is green, it gets +1/+1 and has trample.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/runes_of_the_deus.jpg
+
 Rushwood Dryad
 1 G
 Creature Dryad
@@ -26068,6 +25900,16 @@ spDestroyAll:Aura
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serene_heart.jpg
 
+Serene Offering
+1 W
+Instant
+Destroy target enchantment. You gain life equal to its converted mana cost.
+spDestroyTgt:Enchantment:Drawback$YouGainLife/dX
+SVar:dX:Count$TgtCardManaCost
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/serene_offering.jpg
+
 Serpent Generator
 6
 Artifact
@@ -26139,6 +25981,16 @@ Vigilance
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card113519.jpg
 
+Serra Aviary
+3 W
+World Enchantment
+no text
+StaticEffect:Play:All Permanents:PTBonus/1/1:Type.Creature!with.Flying:Creatures with flying get +1/+1.
+SVar:PlayMain1:TRUE
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_aviary.jpg
+
 Serra Sphinx
 3 U U
 Creature Sphinx
@@ -26192,6 +26044,16 @@ spDrawCards:1:Draw a card.:Serum Visions - draw a card.
 Scry 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serum_visions.jpg
+
+Sever Soul
+3 B B
+Sorcery
+Destroy target nonblack creature. It can't be regenerated. You gain life equal to its toughness.
+spDestroyTgt:Creature.nonblack:NoRegen:Drawback$YouGainLife/dX
+SVar:dX:Count$TgtCardToughness
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sever_soul.jpg
 
 Severed Legion
 1 B B
@@ -26346,6 +26208,14 @@ no text
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shatterskull_giant.jpg
 
+Shatterstorm
+2 R R
+Sorcery
+Destroy all artifacts. They can't be regenerated.
+spDestroyAll:Artifact:NoRegen
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shatterstorm.jpg
+
 Shepherd of the Lost
 4 W
 Creature Angel
@@ -26374,6 +26244,18 @@ Enchant creature
 enPump:Protection from green & Protection from blue
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_of_duty_and_reason.jpg
+
+Shield of the Oversoul
+2 GW
+Enchantment Aura
+no text
+Enchant creature
+enPump:+0/+0
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Indestructible:Color.green:As long as enchanted creature is green, it gets +1/+1 and is indestructible. (Lethal damage and effects that say "destroy" don't destroy it. If its toughness is 0 or less, it's still put into its owner's graveyard.)
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Flying:Color.white:As long as enchanted creature is white, it gets +1/+1 and has flying.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_of_the_oversoul.jpg
 
 Shield Sphere
 0
@@ -27384,6 +27266,17 @@ Look at the top two cards of your library. Put one of them into your hand and th
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sleight_of_hand.jpg
 
+Slinking Giant
+2 R R
+Creature Giant Rogue
+no text
+4/4
+Wither
+WheneverKeyword:Blocks:Self:Play:StatsPumpEOT/-3/0:Self:ASAP:No_Condition:No Special Condition:Whenever Slinking Giant blocks, it gets -3/-0 until end of turn.
+WheneverKeyword:BecomesBlocked:Self:Play:StatsPumpEOT/-3/0:Self:ASAP:No_Condition:No Special Condition:Whenever Slinking Giant becomes blocked, it gets -3/-0 until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/slinking_giant.jpg
+
 Slinking Serpent
 2 U B
 Creature Serpent
@@ -27669,6 +27562,15 @@ RegenerateMe:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_steam_beast.jpg
 
+Solemn Offering
+2 W
+Sorcery
+Destroy target artifact or enchantment. You gain 4 life.
+spDestroyTgt:Artifact,Enchantment:Drawback$YouGainLife/4
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/solemn_offering.jpg
+
 Solemn Simulacrum
 4
 Artifact Creature Golem
@@ -27781,6 +27683,15 @@ WheneverKeyword:EntersBattleField:Self:Play:TapPermanent:NormalInput/Creature:AS
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/somnomancer.jpg
 
+Song of Serenity
+1 G
+Enchantment
+no text
+StaticEffect:Play:All Permanents:Keyword/CARDNAME can't attack or block.:Type.Creature!enchanted:Creatures that are enchanted can't attack or block.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/song_of_serenity.jpg
+
 Sootfeather Flock
 4 B
 Creature Bird
@@ -27858,6 +27769,14 @@ Whenever another creature comes into play, you gain 1 life.
 1/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/souls_attendant.jpg
+
+Soulscour
+7 W W W
+Sorcery
+Destroy all nonartifact permanents.
+spDestroyAll:Permanent.nonArtifact
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soulscour.jpg
 
 Soulsurge Elemental
 3 R
@@ -28542,6 +28461,16 @@ tap: add 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stalking_stones.jpg
 
+Stalwart Shield-Bearers
+1 W
+Creature Human Soldier
+no text
+0/3
+Defender
+StaticEffect:Play:Permanents you Control:PTBonus/0/2:Type.Creature!with.Defender!NotSelf:Other creatures you control with defender get +0/+2..
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stalwart_shield_bearers.jpg
+
 Stampede Driver
 G
 Creature Human Spellshaper
@@ -28700,6 +28629,18 @@ When Steel Leaf Paladin comes into play, return a green or white creature you co
 First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steel_leaf_paladin.jpg
+
+Steel of the Godhead
+2 WU
+Enchantment Aura
+no text
+Enchant creature
+enPump:+0/+0
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Lifelink:Color.white:As long as enchanted creature is white, it gets +1/+1 and has lifelink. (Damage dealt by the creature also causes its controller to gain that much life.)
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Unblockable:Color.blue:As long as enchanted creature is blue, it gets +1/+1 and is unblockable.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/steel_of_the_godhead.jpg
 
 Steel Overseer
 2
@@ -29003,6 +28944,17 @@ Flying
 abDamageTgtC T:2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_spirit.jpg
+
+Stormcaller's Boon
+2 W U
+Enchantment
+no text
+abAllPump Sac-CARDNAME:YouCtrl:Flying:Creatures you control gain flying until end of turn.:Stormcaller's Boon - Creatures gain flying until EOT
+Cascade
+SVar:RemAIDeck:True
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stormcallers_boon.jpg
 
 Stormcloud Djinn
 4 U
@@ -30167,6 +30119,14 @@ Vigilance
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/vi/en-us/card3746.jpg
 
+Tempest of Light
+2 W
+Instant
+Destroy all enchantments.
+spDestroyAll:Enchantment
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tempest_of_light.jpg
+
 Temple Acolyte
 1 W
 Creature Human Cleric
@@ -30250,6 +30210,16 @@ SVar:X:Count$TypeYouCtrl.Swamp
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card106632.jpg
 
+Terashi's Grasp
+2 W
+Sorcery Arcane
+Destroy target artifact or enchantment. You gain life equal to its converted mana cost.
+spDestroyTgt:Artifact,Enchantment:Drawback$YouGainLife/dX
+SVar:dX:Count$TgtCardManaCost
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/terashis_grasp.jpg
+
 Terminate
 B R
 Instant
@@ -30318,6 +30288,16 @@ Destroy target nonartifact, nonblack creature. It can't be regenerated.
 spDestroyTgt:Creature.nonArtifact+nonBlack:NoRegen
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terror.jpg
+
+Tethered Griffin
+W
+Creature Griffin
+When you control no enchantments, sacrifice Tethered Griffin.
+2/3
+Flying
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tethered_griffin.jpg
 
 Tetsuo Umezawa
 R B U
@@ -30731,6 +30711,15 @@ tap: add 3
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_dynamo.jpg
+
+Thran Golem
+5
+Artifact Creature Golem
+no text
+3/3
+StaticEffect:Play:Self:PTBonus/2/2!Keyword/Flying!Keyword/First Strike!Keyword/Trample:enchanted:As long as Thran Golem is enchanted, it gets +2/+2 and has flying, first strike, and trample.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_golem.jpg
 
 Thran Quarry
 no cost
@@ -31442,6 +31431,15 @@ spDestroyAll:Enchantment.nonAura
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_domain.jpg
 
+Tranquil Path
+4 G
+Sorcery
+Destroy all enchantments.
+spDestroyAll:Enchantment
+Draw a card.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_path.jpg
+
 Tranquil Thicket
 no cost
 Land
@@ -31451,6 +31449,14 @@ tap: add G
 Cycling:G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_thicket.jpg
+
+Tranquility
+2 G 
+Sorcery
+Destroy all enchantments.
+spDestroyAll:Enchantment
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquility.jpg
 
 Transcendent Master
 1 W W
@@ -32471,6 +32477,16 @@ spDamageTgtCP:4:Drawback$GainLifeYou/4:Vampiric Feast deals 4 damage to target c
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4243.jpg
 
+Vampiric Sliver
+3 B
+Creature Sliver
+no text
+3/3
+StaticEffect:Play:All Permanents:Keyword/Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.:Type.Sliver:All Sliver creatures have "Whenever a creature dealt damage by this creature this turn is put into a graveyard, put a +1/+1 counter on this creature."
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vampiric_sliver.jpg
+
 Vampiric Spirit
 2 B B
 Creature Spirit
@@ -32598,6 +32614,16 @@ no text
 abPump 1 B B:-3/-0/Forestwalk
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veldrane_of_sengir.jpg
+
+Vendetta
+B
+Instant
+Destroy target nonblack creature. It can't be regenerated. You lose life equal to that creature's toughness.
+spDestroyTgt:Creature.nonblack:NoRegen:Drawback$YouLoseLife/dX
+SVar:dX:Count$TgtCardToughness
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vendetta.jpg
 
 Vendilion Clique
 1 U U
@@ -32765,6 +32791,17 @@ CARDNAME can't be countered.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vexing_beetle.jpg
 
+Viashino Cutthroat
+2 R R
+Creature Viashino
+no text
+5/3
+Haste
+WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:ControllerEndStep:At the beginning of the end step, return Viashino Cutthroat to its owner's hand.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_cutthroat.jpg
+
 Viashino Fangtail
 2 R R
 Creature Viashino Warrior
@@ -32791,6 +32828,28 @@ no text
 Echo:2 R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_outrider.jpg
+
+Viashino Sandscout
+1 R
+Creature Viashino Scout
+no text
+2/1
+Haste
+WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:ControllerEndStep:At the beginning of the end step, return Viashino Sandscout to its owner's hand. (Return it only if it's on the battlefield.)
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_sandscout.jpg
+
+Viashino Sandstalker
+1 R R
+Creature Viashino Warrior
+no text
+4/2
+Haste
+WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:ControllerEndStep:At the beginning of the end step, return Viashino Sandstalker to its owner's hand. (Return it only if it's on the battlefield.)
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_sandstalker.jpg
 
 Viashino Slasher
 1 R
@@ -32972,6 +33031,15 @@ no text
 2/1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_zealot.jpg
+
+Virtue's Ruin
+2 B
+Sorcery
+Destroy all white creatures.
+spDestroyAll:Creature.White
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/virtues_ruin.jpg
 
 Virtuous Charge
 2 W
@@ -34940,6 +35008,14 @@ Regenerate each creature you control.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130331.jpg
 
+Wrath of God
+2 W W
+Sorcery
+Destroy all creatures. They can't be regenerated.
+spDestroyAll:Creature:NoRegen
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83339.jpg
+
 Wreak Havoc
 2 R G
 Sorcery
@@ -35387,6 +35463,16 @@ no text
 WheneverKeyword:DealsDamage/Opponent:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever Zhang Liao, Hero of Hefei deals damage to an opponent, that opponent discards a card.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zhang_liao_hero_of_hefei.jpg
+
+Zhao Zilong, Tiger General
+3 W W
+Legendary Creature Human Soldier Warrior
+no text
+3/3
+Horsemanship
+WheneverKeyword:Blocks:Self:Play:StatsPumpEOT/1/1:Self:ASAP:No_Condition:No Special Condition:Whenever Zhao Zilong, Tiger General blocks, it gets +1/+1 until end of turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/zhao_zilong_tiger_general.jpg
 
 Zhou Yu, Chief Commander
 5 U U
