@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Creature Merfolk Spellshaper
 Text:no text
 PT:1/1
-A:AB$Bounce|Cost$U T Discard<1/Any>|ValidTgts$Creature|TgtPrompt$Select target Creature|Destination$Hand|SpellDescription$Return target creature to its owner's hand.
+A:AB$Bounce | Cost$ U T Discard<1/Any> | ValidTgts$ Creature | TgtPrompt$ Select target Creature | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/waterfront_bouncer.jpg

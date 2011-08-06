@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Legendary Land
 Text:no text
 K:tap: add W
-A:AB$Bounce|Cost$T|ValidTgts$Creature.Legendary|TgtPrompt$Select target legendary creature|Destination$Hand|SpellDescription$Return target legendary creature to its owner's hand.
+A:AB$Bounce | Cost$ T | ValidTgts$ Creature.Legendary | TgtPrompt$ Select target legendary creature | Destination$ Hand | SpellDescription$ Return target legendary creature to its owner's hand.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karakas.jpg
 End

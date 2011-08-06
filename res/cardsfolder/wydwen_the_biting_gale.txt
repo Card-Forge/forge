@@ -5,7 +5,7 @@ Text:no text
 PT:3/3
 K:Flying
 K:Flash
-A:AB$Bounce|Cost$U B PayLife<1>|Destination$Hand|SpellDescription$Return Wydwen, the Biting Gale to its owner's hand.
+A:AB$Bounce | Cost$ U B PayLife<1> | Destination$ Hand | SpellDescription$ Return Wydwen, the Biting Gale to its owner's hand.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wydwen_the_biting_gale.jpg
 End
