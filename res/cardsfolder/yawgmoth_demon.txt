@@ -4,7 +4,7 @@ Types:Creature Demon
 Text:At the beginning of your upkeep, you may sacrifice an artifact. If you don't, tap Yawgmoth Demon and it deals 2 damage to you.
 PT:6/6
 K:Flying
-K:First strike
+K:First Strike
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yawgmoth_demon.jpg
