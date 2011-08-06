@@ -59,7 +59,7 @@ class CardFactory_Lands {
 
         //*************** START *********** START **************************
         //Ravinca Dual Lands
-        if(cardName.equals("Blood Crypt") || cardName.equals("Breeding Pool") || cardName.equals("Godless Shrine")
+        else if(cardName.equals("Blood Crypt") || cardName.equals("Breeding Pool") || cardName.equals("Godless Shrine")
                 || cardName.equals("Hallowed Fountain") || cardName.equals("Overgrown Tomb")
                 || cardName.equals("Sacred Foundry") || cardName.equals("Steam Vents")
                 || cardName.equals("Stomping Ground") || cardName.equals("Temple Garden")
@@ -1976,7 +1976,7 @@ class CardFactory_Lands {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        if(cardName.equals("Novijen, Heart of Progress")) {
+        else if(cardName.equals("Novijen, Heart of Progress")) {
             card.clearSpellKeepManaAbility();
             
             final CardListFilter targets = new CardListFilter() {
@@ -2271,7 +2271,7 @@ class CardFactory_Lands {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        if(cardName.equals("Duskmantle, House of Shadow")) {
+        else if(cardName.equals("Duskmantle, House of Shadow")) {
             card.clearSpellKeepManaAbility();
             
             Ability_Tap ability = new Ability_Tap(card, "U B") {
@@ -2298,7 +2298,7 @@ class CardFactory_Lands {
         //*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        if(cardName.equals("Crypt of Agadeem")) {
+        else if(cardName.equals("Crypt of Agadeem")) {
             final SpellAbility ability = new Ability_Tap(card, "2") {
                 private static final long serialVersionUID = -3561865824450791583L;
                 
@@ -2342,7 +2342,7 @@ class CardFactory_Lands {
         
 
         //*************** START *********** START **************************
-        if(cardName.equals("Rix Maadi, Dungeon Palace")) {
+        else if(cardName.equals("Rix Maadi, Dungeon Palace")) {
             card.clearSpellKeepManaAbility();
             
             Ability_Tap ability = new Ability_Tap(card, "1 B R") {
@@ -2377,7 +2377,6 @@ class CardFactory_Lands {
             card.addSpellAbility(ability);
         }
         //*************** END ************ END **************************        
-        
         
         
         //*************** START *********** START **************************
@@ -3026,7 +3025,9 @@ class CardFactory_Lands {
 
            card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
-        if(cardName.equals("Scorched Ruins")) {
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Scorched Ruins")) {
             final Command comesIntoPlay = new Command() {
                private static final long serialVersionUID = 6175830918425915833L;
                final Player player = card.getController();
@@ -3053,8 +3054,6 @@ class CardFactory_Lands {
                      }
                   }
                   else { //this is the human resolution
-                     //this works with correct input
-                     //really, what I want is Cancel to sacrifice Kjeldoran Outpost
                      final int[] paid = {0};
                      if ((new CardList(AllZone.Human_Play.getCards())
                      .getType("Land").getTapState("Untapped").size() < 2))
@@ -3180,7 +3179,7 @@ class CardFactory_Lands {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        if(cardName.equals("Magosi, the Waterveil")) {
+        else if(cardName.equals("Magosi, the Waterveil")) {
         	/*
         	 * Magosi, the Waterveil enters the battlefield tapped.
         	 * Tap: Add Blue to your mana pool.
