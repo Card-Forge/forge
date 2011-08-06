@@ -1,0 +1,10 @@
+Name:Ronom Hulk
+ManaCost:4 G
+Types:Creature Beast
+Text:no text
+PT:5/6
+K:Protection:Snow:Protection from snow
+K:Cumulative upkeep:1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ronom_hulk.jpg
+End

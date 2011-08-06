@@ -1,0 +1,10 @@
+Name:Riptide Biologist
+ManaCost:1 U
+Types:Creature Human Wizard
+Text:no text
+PT:1/2
+K:Protection:Beast:Protection from Beasts
+K:Morph:2 U
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide_biologist.jpg
+End
