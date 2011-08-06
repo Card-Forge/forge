@@ -38,6 +38,9 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+power_matrix.jpg		http://www.wizards.com/global/images/magic/general/power_matrix.jpg
+scornful_aether_lich.jpg		http://www.wizards.com/global/images/magic/general/scornful_aether_lich.jpg
+coffin_queen.jpg		http://www.wizards.com/global/images/magic/general/coffin_queen.jpg
 recall.jpg						http://www.wizards.com/global/images/magic/general/recall.jpg
 moldervine_cloak.jpg			http://www.wizards.com/global/images/magic/general/moldervine_cloak.jpg
 dakmor_salvage.jpg				http://www.wizards.com/global/images/magic/general/dakmor_salvage.jpg
