@@ -579,6 +579,8 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Samantha Stephens 3	hard	Sloth' Painter's Servant Grindstone deck, an interesting combo");
         sb.append("\r\n");
+	  sb.append("Saruman 3		hard	Sloth' Discard deck with Megrim, Liliana's Caress and Burning Inquiry ");
+        sb.append("\r\n");
         sb.append("Scooby Doo 3   	hard   	Rares' Red deck, Dragonmaster Outcast, Rakdos Pit Dragon, Kamahl, Pit Fighter");
         sb.append("\r\n");
         sb.append("Scotty 2		medium	Pestilence + Castle + Penumbra Kavu/Spider/Wurm but no pro black");

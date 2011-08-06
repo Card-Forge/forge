@@ -253,6 +253,7 @@ res/quest/decks/Rocky[!!-~]2.dck -text
 res/quest/decks/Rocky[!!-~]3.dck -text
 res/quest/decks/Rogue[!!-~]3.dck -text
 res/quest/decks/Samantha[!!-~]Stephens[!!-~]3.dck -text
+res/quest/decks/Saruman[!!-~]3.dck -text
 res/quest/decks/Scooby[!!-~]Doo[!!-~]3.dck -text
 res/quest/decks/Scotty[!!-~]2.dck -text
 res/quest/decks/Seabiscuit[!!-~]1.dck -text
@@ -433,7 +434,7 @@ src/forge/Gui_MultipleBlockers.java svneol=native#text/plain
 src/forge/Gui_NewGame.java svneol=native#text/plain
 src/forge/Gui_PetShop.java -text svneol=native#text/plain
 src/forge/Gui_PlantShop.java -text svneol=native#text/plain
-src/forge/Gui_Quest.java svneol=native#text/plain
+src/forge/Gui_Quest.java -text svneol=native#text/plain
 src/forge/Gui_QuestOptions.java svneol=native#text/plain
 src/forge/Gui_Quest_Assignments.java -text svneol=native#text/plain
 src/forge/Gui_Quest_DeckEditor.java -text svneol=native#text/plain
