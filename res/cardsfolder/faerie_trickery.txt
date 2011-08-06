@@ -2,7 +2,7 @@ Name:Faerie Trickery
 ManaCost:1 U U
 Types:Tribal Instant Faerie
 Text:no text
-A:SP$Counter | Cost$ 1 U U | CounterValid$ nonFaerie | Destination$ Exile | SpellDescription$ Counter target non-Faerie spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard. 
+A:SP$Counter | Cost$ 1 U U | Type$Spell |CounterValid$ Card.nonFaerie | Destination$ Exile | SpellDescription$ Counter target non-Faerie spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard. 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_trickery.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/62.jpg
