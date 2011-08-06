@@ -1,0 +1,11 @@
+Name:Arcbound Wanderer
+ManaCost:6
+Types:Artifact Creature
+Text:no text
+PT:0/0
+K:Modular 0
+K:Sunburst
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_wanderer.jpg
+End

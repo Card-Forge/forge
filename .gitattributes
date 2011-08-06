@@ -228,6 +228,7 @@ res/cardsfolder/arcbound_ravager.txt -text svneol=native#text/plain
 res/cardsfolder/arcbound_reclaimer.txt -text svneol=native#text/plain
 res/cardsfolder/arcbound_slith.txt -text svneol=native#text/plain
 res/cardsfolder/arcbound_stinger.txt -text svneol=native#text/plain
+res/cardsfolder/arcbound_wanderer.txt -text svneol=native#text/plain
 res/cardsfolder/arcbound_worker.txt -text svneol=native#text/plain
 res/cardsfolder/archaeological_dig.txt -text svneol=native#text/plain
 res/cardsfolder/archangel.txt -text svneol=native#text/plain
