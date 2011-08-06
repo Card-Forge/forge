@@ -3571,6 +3571,21 @@ public class CardFactoryUtil {
         l = s.split("/"); // separate the specification from any math
         final String m[] = {"none"};
         if(l.length > 1) m[0] = l[1];
+        
+        // count valid cards on the battlefield
+        if(l[0].contains("Valid")) {
+        	final String restrictions = l[0].replace("Valid ", "");
+        	final String rest[] = restrictions.split(",");
+        	CardList cardsonbattlefield = new CardList();
+        	cardsonbattlefield.addAll(myField.getCards());
+        	cardsonbattlefield.addAll(opField.getCards());
+        	cardsonbattlefield = cardsonbattlefield.getValidCards(rest, c.getController());
+        	
+        	n = cardsonbattlefield.size();
+            
+            return doXMath(n, m);
+        }
+        
         final String[] sq;
         sq = l[0].split("\\.");
         
@@ -3721,6 +3736,7 @@ public class CardFactoryUtil {
         }
         
         // filter lists based on the specified quality
+        
         
         // "Clerics you control" - Count$TypeYouCtrl.Cleric
         if(sq[0].contains("Type")) {

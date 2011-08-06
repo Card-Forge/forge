@@ -1,0 +1,10 @@
+Name:Dogpile
+ManaCost:3 R
+Types:Instant
+Text:no text
+K:spDamageTgtCP:X:Dogpile deals damage to target creature or player equal to the number of attacking creatures you control.
+SVar:X:Count$Valid Creature.attacking+YouCtrl
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dogpile.jpg
+End
