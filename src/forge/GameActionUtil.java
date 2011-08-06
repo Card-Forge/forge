@@ -10538,8 +10538,8 @@ public class GameActionUtil {
 				}
 				else
 				{
-					c.setBaseAttack(4);
-					c.setBaseDefense(4);
+					c.setBaseAttack(3);
+					c.setBaseDefense(3);
 					c.addNonStackingIntrinsicKeyword("Unblockable");
 					c.addNonStackingIntrinsicKeyword("Shroud");
 				}
@@ -15132,7 +15132,7 @@ public class GameActionUtil {
 	}; // Crucible of Fire
 	
 	public static Command Time_of_Heroes        = new Command() {
-		
+		private static final long serialVersionUID = 2490232366851007733L;
 		CardList                  gloriousAnthemList = new CardList();
 
 		public void execute() {
