@@ -6580,7 +6580,7 @@ Destroy all enchantments.
 Spiritmonger
 3 B G
 Creature Beast
-Whenever Spiritmonger deals damage to a creature, put a +1/+1 counter on Spiritmonger.
+Whenever Spiritmonger deals damage to a creature, put a +1/+1 counter on Spiritmonger. (NOTE: "G: Spiritmonger becomes the color of your choice until end of turn." not implemented.)
 6/6
 RegenerateMe:B
 
@@ -9487,7 +9487,7 @@ PTPump B:+1/+1
 Shade of Trokair
 3 W
 Creature Shade
-suspend not implemented
+(NOTE: "Suspend" not implemented.)
 1/2
 PTPump W:+1/+1
 
@@ -9597,7 +9597,7 @@ PTPump B:+1/+1
 Viscerid Deepwalker
 4 U
 Creature Homarid Warrior
-no text
+(NOTE: "Suspend" not implemented.)
 2/3
 PTPump U:+1/+0
 
@@ -9628,7 +9628,7 @@ PTPump W:+0/+1
 Vengeful Firebrand
 3 R
 Creature Elemental Warrior
-no text
+(NOTE: "Vengeful Firebrand has haste as long as a Warrior card is in your graveyard." not implemented.)
 5/2
 PTPump R:+1/+0
 
@@ -9672,7 +9672,7 @@ PTPump W:+0/+1
 Pardic Dragon
 4 R R
 Creature Dragon
-no text
+(NOTE: "Suspend" not implemented.)
 4/4
 Flying
 PTPump R:+1/+0
@@ -11932,7 +11932,7 @@ Haste
 Reckless Wurm
 3 R R
 Creature Wurm
-no text
+(NOTE: "Madness" not implemented.)
 4/4
 Trample
 
@@ -11982,7 +11982,7 @@ Trample
 The Unspeakable
 6 U U U
 Legendary Creature Spirit
-no text
+(NOTE: "Whenever The Unspeakable deals combat damage to a player, you may return target Arcane card from your graveyard to your hand." not implemented.)
 6/7
 Flying
 Trample
@@ -12053,7 +12053,7 @@ Tendrils of Corruption deals X damage to target creature and you gain X life, wh
 Ichor Slick
 2 B
 Sorcery
-no text
+(NOTE: "Madness" is not implemented.)
 
 Lucent Liminid
 3 W W
@@ -12148,7 +12148,7 @@ no text
 Take Possession
 5 U U
 Sorcery
-Gain control of target permanent.
+Gain control of target permanent. (NOTE: "Split second" not implemented.  This spell is currently treated as a Sorcery rather than as an Enchantment.)
 
 Cloudseeder
 1 U
@@ -12193,7 +12193,7 @@ Indestructible
 Animate Dead
 1 B
 Sorcery
-Put target creature card from any graveyard into play under your control.  That creature gets -1/-0.
+Put target creature card from any graveyard into play under your control.  That creature gets -1/-0. (NOTE: This spell is currently treated as a Sorcery rather than as an Enchantment.)
 
 Ashes to Ashes
 1 B B
@@ -12355,7 +12355,7 @@ If an opponent controls more lands than you, search your library for up to three
 Ifh-Biff Efreet
 2 G G
 Creature Efreet
-no text
+(NOTE: "G: Ifh-Biff Efreet deals 1 damage to each creature with flying and each player. Any player may activate this ability." not implemented.)
 3/3
 Flying
 
@@ -12429,7 +12429,7 @@ tap: add G
 Karplusan Strider
 3 G
 Creature Yeti
-no text
+(NOTE: "Karplusan Strider can't be the target of blue or black spells." not implemented.)
 3/4
 
 Psionic Blast
@@ -12548,7 +12548,7 @@ Flying
 Villainous Ogre
 2 B
 Creature Ogre Warrior
-no text
+(NOTE: "As long as you control a Demon, Villainous Ogre has B: Regenerate Villainous Ogre." not implemented.)
 3/2
 This creature cannot block
 
@@ -12688,13 +12688,13 @@ When Sengir Autocrat comes into play, put three 0/1 black Serf creature tokens i
 Kemuri-Onna
 4 B
 Creature Spirit
-When Kemuri-Onna comes into play, target player discards a card.
+When Kemuri-Onna comes into play, target player discards a card. (NOTE: "Whenever you cast a Spirit or Arcane spell, you may return Kemuri-Onna to its owner's hand." not implemented.)
 3/3
 
 Infernal Kirin
 2 B B
 Legendary Creature Kirin Spirit
-no text
+(NOTE: "Whenever you cast a Spirit or Arcane spell, target player reveals his or her hand and discards all cards with that spell's converted mana cost." not implemented.)
 3/3
 Flying
 
@@ -12715,7 +12715,7 @@ Vigilance
 Torii Watchward
 4 W
 Creature Spirit
-no text
+(NOTE: "Soulshift" not implemented.)
 3/3
 Vigilance
 
@@ -13027,7 +13027,7 @@ no text
 Wild Mongrel
 1 G
 Creature Hound
-no text
+(NOTE: " and becomes color of your choice." not implemented.)
 2/2
 
 Timberwatch Elf
@@ -13058,7 +13058,7 @@ no text
 Frostweb Spider
 2 G
 Snow Creature Spider
-no text
+(NOTE: "Whenever Frostweb Spider blocks a creature with flying, put a +1/+1 counter on Frostweb Spider at end of combat." not implemented.)
 1/3
 This creature can block as though it had flying.
 
@@ -13317,7 +13317,7 @@ Flying
 Disciple of Kangee
 2 W
 Creature Wizard
-no text
+(NOTE: " and becomes blue until end of turn." not implemented)
 2/2
 
 Swords to Plowshares
@@ -13343,7 +13343,7 @@ Target player discards his or her hand.
 Ghost-Lit Redeemer
 W
 Creature Spirit
-no text
+(NOTE: "Channel" not implemented.)
 1/1
 
 Diving Griffin
