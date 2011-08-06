@@ -2693,25 +2693,6 @@ public class GameActionUtil {
 		
         if(source.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(source, damage);
         
-        if(source.getKeyword().contains("Whenever CARDNAME deals damage, you gain that much life.")) {
-			final int life = damage;
-			final Player player = source.getController();
-			
-	    	Ability ability = new Ability(source, "0") {
-	    		@Override
-	    		public void resolve() {
-	    			player.gainLife(life, source);
-	    		}
-	    	};
-	    	StringBuilder sb = new StringBuilder();
-	        sb.append(source.getName()+" - ").append(player).append(" gains ").append(life).append(" life");
-	        ability.setStackDescription(sb.toString());
-        	int amount = source.getAmountOfKeyword("Whenever CARDNAME deals damage, you gain that much life.");
-	        
-	        for(int i=0 ; i < amount ; i++)
-	        	AllZone.Stack.add(ability);
-        }
-        
         CardList enchantments = new CardList(source.getEnchantedBy().toArray());
         
         for(Card enchantment: enchantments) {

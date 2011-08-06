@@ -291,7 +291,6 @@ public class CardFactoryUtil {
         value += c.getAmountOfKeyword("Exalted") * 15;
         if (c.hasKeyword("First Strike") && !c.hasKeyword("Double Strike") && power > 0) value += 15;
         if (c.hasKeyword("Lifelink")) value += power * 10;
-        value += c.getAmountOfKeyword("Whenever CARDNAME deals damage, you gain that much life.") * power * 10;
         if (c.hasKeyword("Trample")) value += power * 3;
         if (c.hasKeyword("Vigilance")) value += power * 5 + toughness * 5;
         if (c.hasKeyword("Wither")) value += power * 10;
