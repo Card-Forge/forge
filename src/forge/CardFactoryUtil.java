@@ -3,6 +3,7 @@ package forge;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -1428,11 +1429,20 @@ public class CardFactoryUtil {
                 	}
                 }
                 
-                //else (prune list if needed?) and set target creature
+                //else (prune list if needed)
                 
                 if (Power <= 0 && Tough <= 0) {    // This aura is keyword only
-                	// Need code to remove creatures from the list if 
-                	// the aura does not provide new keyword abilities.
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c){
+                            ArrayList<String> extKeywords = new ArrayList<String>(Arrays.asList(extrinsicKeywords));
+                            for (String s:extKeywords) {
+                                if (!c.getKeyword().contains(s))
+                                    return true;
+                                }
+                                //no new keywords:
+                                return false;
+                            }
+                    });
                 }
                 
                 CardListUtil.sortAttack(list);
