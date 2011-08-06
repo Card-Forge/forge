@@ -17173,8 +17173,11 @@ public class CardFactory_Creatures {
                             
                         }//resolve()
                     };//SpellAbility
-                    ability.setStackDescription("Laquatus's Champion - " + abilityComes.getTargetPlayer()
-                            + " regains 6 life.");
+                    
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("Laquatus's Champion - ").append(abilityComes.getTargetPlayer()).append(" regains 6 life.");
+                    ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }//execute()
             };//Command
@@ -17202,8 +17205,11 @@ public class CardFactory_Creatures {
                     card.getController().gainLife(drain);               
                 }//resolve()
             };
-            abilityComes.setStackDescription(card
-                    + " - Opponent loses life equal to the number of Vampires you control. You gain life equal to the life lost this way.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" - Opponent loses life equal to the number of Vampires you control. ");
+            sb.append("You gain life equal to the life lost this way.");
+            abilityComes.setStackDescription(sb.toString());
             
             Command commandComes = new Command() {
                 private static final long serialVersionUID = 6375360999823102355L;
@@ -17214,7 +17220,6 @@ public class CardFactory_Creatures {
             };//CommandComes
             
             card.addComesIntoPlayCommand(commandComes);
-            
         }//*************** END ************ END **************************
         
         
@@ -17386,12 +17391,16 @@ public class CardFactory_Creatures {
                     }
                 }
             };
+            
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = 1832932499373431651L;
                 
                 public void execute() {
-                    ability.setStackDescription(card.getController()
-                            + " searches his library for a Forest card to put that card into play.");
+                	
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(card.getController()).append(" searches his library for a Forest card to put that card into play.");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
@@ -17741,11 +17750,18 @@ public class CardFactory_Creatures {
                     creatures = creatures.getType("Creature");
                     return creatures.size() > 0 && super.canPlay();
                 }
-                
             };
-            ability.setDescription("B B B, Pay 3 life: Put target creature card from a graveyard onto the battlefield under your control. That creature is black and is a Nightmare in addition to its other creature types.");
-            ability.setStackDescription(card
-                    + "Put target creature card from a graveyard onto the battlefield under your control. That creature is black and is a Nightmare in addition to its other creature types.");
+            
+            StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("B B B, Pay 3 life: Put target creature card from a graveyard onto the battlefield under your control. ");
+            sbDesc.append("That creature is black and is a Nightmare in addition to its other creature types.");
+            ability.setDescription(sbDesc.toString());
+            
+            StringBuilder sbStack = new StringBuilder();
+            sbStack.append(card).append("Put target creature card from a graveyard onto the battlefield under your control. ");
+            sbStack.append("That creature is black and is a Nightmare in addition to its other creature types.");
+            ability.setStackDescription(sbStack.toString());
+            
             card.addSpellAbility(ability);
             
             final Command leavesPlay = new Command() {
@@ -17764,7 +17780,6 @@ public class CardFactory_Creatures {
                         AllZone.GameAction.exile(c);
                     }
                 }
-                
             };
             
             card.addLeavesPlayCommand(leavesPlay);
@@ -17784,8 +17799,12 @@ public class CardFactory_Creatures {
                                 player.drawCard();
                         }
                     };
-                    ability.setStackDescription("Swans of Bryn Argoll - " + source.getController() + " draws " + n
-                            + " cards.");
+                    
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("Swans of Bryn Argoll - ").append(source.getController());
+                    sb.append(" draws ").append(n).append(" cards.");
+                    ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
@@ -17825,7 +17844,11 @@ public class CardFactory_Creatures {
                         	card.getController().gainLife(1);
                         }
                     };
-                    ability.setStackDescription(card.getName() + " - " + card.getController() + " gains 1 life.");
+                    
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(card.getName()).append(" - ").append(card.getController()).append(" gains 1 life.");
+                    ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                     
                     for(Entry<Card, Integer> entry : m.entrySet()) {
@@ -17884,7 +17907,10 @@ public class CardFactory_Creatures {
             };//SpellAbility
             card.addSpellAbility(ability);
             ability.setDescription("U B, tap: Target player loses 1 life and reveals his or her hand.");
-            ability.setStackDescription(card.getName() + " - Opponent loses 1 life.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - Opponent loses 1 life.");
+            ability.setStackDescription(sb.toString());
         }//*************** END ************ END **************************
         
         
@@ -17914,7 +17940,8 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = -4833144157620224716L;
                 
                 public void execute() {
-                    ability.setStackDescription("Singe-Mind Ogre - target player reveals a card at random from his or her hand, then loses life equal to that card's converted mana cost.");
+                    ability.setStackDescription("Singe-Mind Ogre - target player reveals a card at random from " +
+                    		"his or her hand, then loses life equal to that card's converted mana cost.");
                     AllZone.Stack.add(ability);
                 }
             };
@@ -18056,8 +18083,12 @@ public class CardFactory_Creatures {
                     return false;
                 }
             };
-            ability.setStackDescription(card.getName() + " gets +3/+3 until end of turn, " + card.getController()
-                    + " skips his/her next turn.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" gets +3/+3 until end of turn, ");
+            sb.append(card.getController()).append(" skips his/her next turn.");
+            ability.setStackDescription(sb.toString());
+            
             ability.setDescription("0: Chronatog gets +3/+3 until end of turn. You skip your next turn. Activate this ability only once each turn.");
             
             card.addSpellAbility(ability);
@@ -18115,7 +18146,8 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = 304026662487997331L;
                 
                 public void execute() {
-                    ability2.setStackDescription("When Kinsbaile Borderguard is put into a graveyard from play, put a 1/1 white Kithkin Soldier creature token into play for each counter on it.");
+                    ability2.setStackDescription("When Kinsbaile Borderguard is put into a graveyard from play, put a 1/1 white " +
+                    		"Kithkin Soldier creature token into play for each counter on it.");
                     AllZone.Stack.add(ability2);
                 }
             };
@@ -18154,8 +18186,10 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = 6389028698247230474L;
                 
                 public void execute() {
-                    ability.setStackDescription(card.getName()
-                            + " - put -1/-1 counter on each creature that has a -1/-1 counter on it.");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(card.getName()).append(" - put -1/-1 counter on each creature that has a -1/-1 counter on it.");
+                	ability.setStackDescription(sb.toString());
+                	
                     AllZone.Stack.add(ability);
                 }
             };//command
@@ -18177,7 +18211,10 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = 1863551466234257411L;
                 
                 public void execute() {
-                    ability.setStackDescription(card.getName() + " - gain 2 life for each age counter on it.");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(card.getName()).append(" - gain 2 life for each age counter on it.");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };//command
@@ -18212,7 +18249,10 @@ public class CardFactory_Creatures {
             kicker.setManaCost("3 G G");
             kicker.setAdditionalManaCost("2 G");
             kicker.setDescription("Kicker 2 G");
-            kicker.setStackDescription(card.getName() + " - Creature 5/5 (Kicked)");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - Creature 5/5 (Kicked)");
+            kicker.setStackDescription(sb.toString());
             
             card.addSpellAbility(kicker);
             
@@ -18277,7 +18317,10 @@ public class CardFactory_Creatures {
             kicker.setManaCost("B B B");
             kicker.setAdditionalManaCost("B");
             kicker.setDescription("Kicker B");
-            kicker.setStackDescription(card.getName() + " - Creature 2/2 (Kicked)");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - Creature 2/2 (Kicked)");
+            kicker.setStackDescription(sb.toString());
             
             card.addSpellAbility(kicker);
             
@@ -18634,8 +18677,6 @@ public class CardFactory_Creatures {
 					StringBuilder sb = new StringBuilder();
 					sb.append(card.getName()).append(" - search library for a basic land card and put it into your hand.");
 					ability.setStackDescription(sb.toString());
-                    // ability.setStackDescription(card.getName()
-                    //         + " - search library for a basic land card and put it into your hand.");
                     AllZone.Stack.add(ability);
                 }
             };
@@ -18664,7 +18705,10 @@ public class CardFactory_Creatures {
                 }
             };//Ability
             ability.setDescription("tap: Put a 3/3 green Elephant creature token onto the battlefield.(LEVEL 2-5)");
-            ability.setStackDescription(card + " - Put a 3/3 green Elephant creature token onto the battlefield.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" - Put a 3/3 green Elephant creature token onto the battlefield.");
+            ability.setStackDescription(sb.toString());
             
             final Ability_Tap ability2 = new Ability_Tap(card, "0") {
 
@@ -18683,7 +18727,10 @@ public class CardFactory_Creatures {
                 }
             };//Ability
             ability2.setDescription("tap: Put two 3/3 green Elephant creature tokens onto the battlefield.(LEVEL 6+)");
-            ability2.setStackDescription(card + " - Put two 3/3 green Elephant creature tokens onto the battlefield.");
+            
+            StringBuilder sb2 = new StringBuilder();
+            sb2.append(card).append(" - Put two 3/3 green Elephant creature tokens onto the battlefield.");
+            ability2.setStackDescription(sb2.toString());
             
             card.addSpellAbility(ability);
             card.addSpellAbility(ability2);
@@ -18719,15 +18766,17 @@ public class CardFactory_Creatures {
 				private static final long serialVersionUID = 1919112942772054206L;
 
 				public void execute() {
-        			ability.setStackDescription(card.getName()
-        					+ " - Add 2 Level counters to each creature you control with Level up.");
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - Add 2 Level counters to each creature you control with Level up.");
+					ability.setStackDescription(sb.toString());
+        			
         			AllZone.Stack.add(ability);
         		}
         	};
         	card.addComesIntoPlayCommand(addLevelCounters);
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Ichor Rats")) {
 
         	final Ability ability = new Ability(card, "0") {
@@ -18743,7 +18792,10 @@ public class CardFactory_Creatures {
 				private static final long serialVersionUID = 454918862752568246L;
 
 				public void execute() {
-        			ability.setStackDescription(card + " - Each player gets a poison counter.");
+					StringBuilder sb = new StringBuilder();
+					sb.append(card).append(" - Each player gets a poison counter.");
+					ability.setStackDescription(sb.toString());
+        			
         			AllZone.Stack.add(ability);
         		}
         	};
@@ -18765,8 +18817,10 @@ public class CardFactory_Creatures {
 				private static final long serialVersionUID = -2301867871037110012L;
 
 				public void execute() {
-                    ability.setStackDescription(card.getController()
-                            + " puts a 5/5 Legendary Artifact Goblin Golem creature onto the battlefield.");
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getController()).append(" puts a 5/5 Legendary Artifact Goblin Golem creature onto the battlefield.");
+					ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
@@ -18813,7 +18867,10 @@ public class CardFactory_Creatures {
 				private static final long serialVersionUID = -2495216861720523362L;
 
 				public void execute() {
-					ability.setStackDescription(card.getName()+" - return up to 2 creatures with power < 2 from graveyard to play.");
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - return up to 2 creatures with power < 2 from graveyard to play.");
+					ability.setStackDescription(sb.toString());
+					
         			AllZone.Stack.add(ability);
         		}//execute()
         	};
@@ -18861,7 +18918,11 @@ public class CardFactory_Creatures {
 
               public void execute() {
             	 Player player = card.getController();
-                 ability.setStackDescription(card.getName() + " - does 1 damage to "+player +" and sacrifice one land.");
+            	 
+            	 StringBuilder sb = new StringBuilder();
+            	 sb.append(card.getName()).append(" - does 1 damage to ").append(player).append(" and sacrifice one land.");
+            	 ability.setStackDescription(sb.toString());
+                 
                  //AllZone.Stack.add(ability);
                  //probably want to check that there are lands in play
                  
@@ -18942,7 +19003,11 @@ public class CardFactory_Creatures {
         					AllZone.EndOfTurn.addUntil(eot);
         				}
         			};//SpellAbility
-        			ability.setStackDescription(card.getName()+" - chosen type gets +2/+2 and Trample until EOT");
+        			
+        			StringBuilder sb = new StringBuilder();
+        			sb.append(card.getName()).append(" - chosen type gets +2/+2 and Trample until EOT");
+        			ability.setStackDescription(sb.toString());
+        			
         			AllZone.Stack.add(ability);
         		}//execute
         	};//command
