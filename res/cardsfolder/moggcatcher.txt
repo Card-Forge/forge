@@ -1,0 +1,10 @@
+Name:Moggcatcher
+ManaCost:2 R R
+Types:Creature Human Mercenary
+Text:no text
+PT:2/2
+A:AB$Fetch|Cost$3 T|Destination$Battlefield|FetchType$Permanent.Goblin|FetchNum$1|SpellDescription$Search your library for a Goblin permanent card and put it onto the battlefield. Then shuffle your library.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/moggcatcher.jpg
+End

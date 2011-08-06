@@ -1,0 +1,10 @@
+Name:Seahunter
+ManaCost:2 U U
+Types:Creature Human Mercenary
+Text:no text
+PT:2/2
+A:AB$Fetch|Cost$3 T|Destination$Battlefield|FetchType$Permanent.Merfolk|FetchNum$1|SpellDescription$Search your library for a Merfolk permanent card and put it onto the battlefield. Then shuffle your library.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seahunter.jpg
+End

@@ -1,0 +1,10 @@
+Name:Kuldotha Forgemaster
+ManaCost:5
+Types:Artifact Creature Construct
+Text:no text
+PT:3/5
+A:AB$Fetch|Cost$T T Sac<3/Artifact>|Destination$Battlefield|FetchType$Artifact|FetchNum$1|SpellDescription$Search your library for an artifact card and put it onto the battlefield. Then shuffle your library.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kuldotha_forgemaster.jpg
+End
