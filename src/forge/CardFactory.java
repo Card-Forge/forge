@@ -19646,6 +19646,47 @@ public class CardFactory implements NewConstants {
         	spell.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Energy Tap")) {
+        	/*
+        	 * Tap target untapped creature you control. If you do, add X to
+        	 * your mana pool, where X is that creature's converted mana cost.
+        	 */
+        	final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 8883585452278041848L;
+
+				@Override
+        		public void resolve() {
+        			Card target = getTargetCard();
+        			if(null != target && target.isUntapped()) {
+        				int cost = CardUtil.getConvertedManaCost(target);
+        				Card mp = AllZone.ManaPool;
+        				mp.addExtrinsicKeyword("ManaPool:"+cost);
+        				target.tap();
+        			}
+        		}
+
+        		@Override
+        		public boolean canPlayAI() {
+        			return false;
+        		}
+        	};
+        	Input runtime = new Input() {
+				private static final long serialVersionUID = -757364902159389697L;
+
+				@Override
+                public void showMessage() {
+                    CardList choices = AllZoneUtil.getCreaturesInPlay(card.getController());
+                	choices = choices.filter(AllZoneUtil.untapped);
+                    stopSetNext(CardFactoryUtil.input_targetSpecific(spell, choices,
+                    		"Select target tapped creature", true, false));
+                }//showMessage()
+            };//Input
+        	spell.setBeforePayMana(runtime);
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {

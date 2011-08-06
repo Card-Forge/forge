@@ -352,4 +352,13 @@ public class AllZoneUtil {
 			return c.isTapped();
 		}
 	};
+	
+	/**
+	 * a CardListFilter to get all cards that are untapped
+	 */
+	public static CardListFilter untapped = new CardListFilter() {
+		public boolean addCard(Card c) {
+			return c.isUntapped();
+		}
+	};
 }
