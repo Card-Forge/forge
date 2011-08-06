@@ -7652,6 +7652,7 @@ res/cardsfolder/workhorse.txt -text svneol=native#text/plain
 res/cardsfolder/worldly_tutor.txt -text svneol=native#text/plain
 res/cardsfolder/worldslayer.txt -text svneol=native#text/plain
 res/cardsfolder/worm_harvest.txt svneol=native#text/plain
+res/cardsfolder/wormfang_drake.txt -text svneol=native#text/plain
 res/cardsfolder/wormfang_manta.txt svneol=native#text/plain
 res/cardsfolder/wormfang_newt.txt svneol=native#text/plain
 res/cardsfolder/wormfang_turtle.txt svneol=native#text/plain
