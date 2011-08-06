@@ -331,6 +331,7 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Thor 3", "hard", "WR Constructed deck");
 //        addToDeckList("Thugs 2", "medium", "WG Elves deck");
 //        addToDeckList("Thugs 3", "hard", "WG Strength in Numbers deck");
+        addToDeckList("Tom Bombadil 3", "hard", "Mono G deck with Garruk's Packleader, Garruk Wildspeaker and Garruk's Companion");
         addToDeckList("Totoro 2", "medium", "UBG deck with spirits and arcane spells");
         addToDeckList("Treebeard 1", "easy", "G Treefolk deck with Bosk Banneret, Dauntless Dourbark and Leaf-Crowned Elder");
         addToDeckList("Treebeard 2", "medium", "WBG Treefolk deck with Bosk Banneret, Dauntless Dourbark, Timber Protector, Leaf-Crowned Elder and Doran");
