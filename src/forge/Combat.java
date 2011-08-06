@@ -535,7 +535,7 @@ public class Combat {
 				damageNeeded = blocker.getEnoughDamageToKill(damage, attacker, true);
 				
 				if (damageNeeded > damage) 
-					damageNeeded = blocker.getLethalDamage();
+					damageNeeded = Math.min(blocker.getLethalDamage(),damage);
 				else
 					damageNeeded = Math.max(blocker.getLethalDamage(),damageNeeded);
 				
