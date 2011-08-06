@@ -1,3 +1,23 @@
+Ancestral Vision
+no cost
+Sorcery
+Ancestral Vision is blue. (NOTE: Ancestral Vision currently draws 0 cards due to the combined upkeep/draw phases. Once they are seperated, this should work as expected.)
+CARDNAME is blue.
+Suspend:4:U
+spDrawCardsTgt:3:Target player draws three cards.:CARDNAME - draw 3 cards.
+SVar:RemAIDeck:True
+SVar:Rarity:None
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ancestral_vision.jpg
+
+Resuscitate
+1 G
+Instant
+Until end of turn, creatures you control gain "1: Regenerate this creature." (NOTE: This ability is not currently implemented.)
+SVar:RemAIDeck:True
+SVar:PlayMain1:TRUE
+SVar:Rarity:None
+SVar:Picture:http://www.wizards.com/global/images/magic/general/resuscitate.jpg
+
 Abandoned Outpost
 no cost
 Land
@@ -964,17 +984,6 @@ no text
 spDrawCardsTgt:3:Target player draws three cards.:Ancestral Recall - draw 3 cards.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/2u/en-us/card692.jpg
-
-Ancestral Vision
-no cost
-Sorcery
-Ancestral Vision is blue. (NOTE: Ancestral Vision currently draws 0 cards due to the combined upkeep/draw phases. Once they are seperated, this should work as expected.)
-CARDNAME is blue.
-Suspend:4:U
-spDrawCardsTgt:3:Target player draws three cards.:CARDNAME - draw 3 cards.
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ancestral_vision.jpg
 
 Ancient Craving
 3 B
@@ -24473,15 +24482,6 @@ Sorcery
 Return target creature card from your graveyard to play.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/resurrection.jpg
-
-Resuscitate
-1 G
-Instant
-Until end of turn, creatures you control gain "1: Regenerate this creature." (NOTE: This ability is not currently implemented.)
-SVar:RemAIDeck:True
-SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/resuscitate.jpg
 
 Retribution of the Meek
 2 W
