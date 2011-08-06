@@ -130,248 +130,6 @@ public class CardFactory implements NewConstants {
     	return -1;
     }
     
-/*    //self-targeted power and/or toughness pumping abilities
-    //-1 means "PTPump" is not found
-    //any other int means that "PTPump" was found in the Card keyword
-    private final int shouldPTPumpCard(Card c)
-    {
-      ArrayList<String> a = c.getKeyword();
-      for(int i = 0; i < a.size(); i++)
-        if(a.get(i).toString().startsWith("PTPump"))
-          return i;
-
-      return -1;
-    }
-    //same thing, for "KPump" - self-targeted keyword adding abilities
-    private final int shouldKPumpCard(Card c)
-    {
-      ArrayList<String> a = c.getKeyword();
-      for (int i = 0; i < a.size(); i++)
-        if(a.get(i).toString().startsWith("KPump"))
-          return i;
-
-      return -1;
-    }
-    //same thing, for "PTKPump" - self-targeted power and/or toughness pumping
-    //plus keyword adding abilities
-    private final int shouldPTKPumpCard(Card c)
-    {
-      ArrayList<String> a = c.getKeyword();
-      for (int i = 0; i < a.size(); i++)
-        if(a.get(i).toString().startsWith("PTKPump"))
-          return i;
-
-      return -1;
-    }
-    
-    //"TgtKPump" - targeted keyword adding abilities
-    private final int shouldTgtKPumpCard(Card c)
-    {
-      ArrayList<String> a = c.getKeyword();
-      for (int i = 0; i < a.size(); i++)
-        if(a.get(i).toString().startsWith("TgtKPump"))
-          return i;
-
-      return -1;
-    }
-
-	// Check for self-regenerate ability
-	private final int shouldRegenerateMe(Card c) {
-		ArrayList<String> a = c.getKeyword();
-		for (int i = 0; i < a.size(); i++)
-			if (a.get(i).toString().startsWith("RegenerateMe"))
-				return i;
-
-		return -1;
-	}
-
-	// Check for Cycling ability
-	private final int shouldCycle(Card c) {
-		ArrayList<String> a = c.getKeyword();
-		for (int i = 0; i < a.size(); i++)
-			if (a.get(i).toString().startsWith("Cycling"))
-				return i;
-
-		return -1;
-	}
-	
-	private final int shouldSporeSaproling(Card c) {
-		ArrayList<String> a = c.getKeyword();
-		for (int i = 0; i < a.size(); i++)
-			if (a.get(i).toString().startsWith("Remove three spore counters"))
-				return i;
-		
-		return -1;
-	}
-	
-    private final int shouldSpDamageTgt(Card c) {
-         ArrayList<String> a = c.getKeyword();
-         for (int i = 0; i < a.size(); i++)
-         {
-            if (a.get(i).toString().startsWith("spDamageTgt"))
-               return i;
-         }
-         return -1;
-    }
-	
-	private final int shouldSpDamageCP(Card c) {
-	      ArrayList<String> a = c.getKeyword();
-	      for (int i = 0; i < a.size(); i++)
-	      {
-	         if (a.get(i).toString().startsWith("spDamageCP"))
-	            return i;
-	      }
-	      return -1;
-	}
-	
-	private final int shouldSpDamageP(Card c) {
-	      ArrayList<String> a = c.getKeyword();
-	      for (int i = 0; i < a.size(); i++)
-	      {
-	         if (a.get(i).toString().startsWith("spDamageP"))
-	            return i;
-	      }
-	      return -1;
-	}
-	
-	private final int shouldRebelSearch(Card c) {
-		ArrayList<String> a = c.getKeyword();
-		for (int i = 0; i < a.size(); i++)
-			if (a.get(i).toString().startsWith("SearchRebel"))
-				return i;
-		return -1;
-	}
-	
-	private final int shouldMercSearch(Card c) {
-		ArrayList<String> a = c.getKeyword();
-		for (int i = 0; i < a.size(); i++)
-			if (a.get(i).toString().startsWith("SearchMerc"))
-				return i;
-		return -1;	
-	}
-	
-	private final int shouldMorph(Card c) {
-		ArrayList<String> a = c.getKeyword();
-		for (int i = 0; i < a.size(); i++)
-			if (a.get(i).toString().startsWith("Morph"))
-				return i;
-
-		return -1;
-	}
-
-	private final int shouldDevour(Card c) {
-		ArrayList<String> a = c.getKeyword();
-		for (int i = 0; i < a.size(); i++)
-			if (a.get(i).toString().startsWith("Devour"))
-				return i;
-
-		return -1;
-	}
-	
-    private final int shouldSpellbomb(Card c) {
-        ArrayList<String> a = c.getKeyword();
-        for (int i = 0; i < a.size(); i++)
-           if (a.get(i).toString().startsWith("1, Sacrifice"))//
-              if(a.get(i).equals("1, Sacrifice "+c.getName()+": Draw a card."))
-            	  return i;
-        return -1;
-     }
-    
-    private final int shouldModular(Card c) {
-        ArrayList<String> a = c.getKeyword();
-        for (int i = 0; i < a.size(); i++)
-        {
-           if (a.get(i).toString().startsWith("Modular"))
-              return i;
-        }
-        return -1;
-  }
-	
-	private final int shouldUntap(Card c) {
-		ArrayList<String> a = c.getKeyword();
-		for (int i = 0; i < a.size(); i++)
-			if (a.get(i).toString().startsWith("Untap"))
-				return i;
-		
-		return -1;
-	}	
-	
-	private final int shouldFlashback(Card c) {
-		ArrayList<String> a = c.getKeyword();
-		for (int i = 0; i < a.size(); i++)
-			if (a.get(i).toString().startsWith("Flashback"))
-				return i;
-		
-		return -1;
-	}
-	
-	private final int shouldAbDamageCP(Card c) {
-	      ArrayList<String> a = c.getKeyword();
-	      for (int i = 0; i < a.size(); i++)
-	      {
-	         if (a.get(i).toString().startsWith("abDamageCP"))
-	            return i;
-	      }
-	      return -1;
-	}
-	
-	private final int shouldAbTgtPTPumpCard(Card c)
-    {
-       ArrayList<String> a = c.getKeyword();
-       for (int i = 0; i < a.size(); i++)
-          if (a.get(i).toString().startsWith("abTgtPTPump"))
-             return i;
-       
-       return -1;
-    }
-	
-	private final int shouldSpPumpTgt(Card c){
-       ArrayList<String> a = c.getKeyword();
-       for (int i = 0; i < a.size(); i++)
-          if (a.get(i).toString().startsWith("spPumpTgt"))
-             return i;
-       
-       return -1;
-   }
-	
-	private final int shouldSpDestroyTgt(Card c){
-	       ArrayList<String> a = c.getKeyword();
-	       for (int i = 0; i < a.size(); i++)
-	          if (a.get(i).toString().startsWith("spDestroyTgt:"))
-	             return i;
-	       
-	       return -1;
-	}
-	
-	private final int shouldSpDrawCards(Card c){
-	       ArrayList<String> a = c.getKeyword();
-	       for (int i = 0; i < a.size(); i++)
-	          if (a.get(i).toString().startsWith("spDrawCards"))
-	             return i;
-	       
-	       return -1;
-	}
-	
-   // spLoseLifeGainLife
-   private final int shouldSpLoseLifeGainLife(Card c){
-          ArrayList<String> a = c.getKeyword();
-          for (int i = 0; i < a.size(); i++)
-             if (a.get(i).toString().startsWith("spLoseLifeGainLife"))
-                return i;
-          
-          return -1;
-   }
-   
-   // spRaiseDead
-   private final int shouldSpRaiseDead(Card c){
-       ArrayList<String> a = c.getKeyword();
-       for (int i = 0; i < a.size(); i++)
-          if (a.get(i).toString().startsWith("spRaiseDead"))
-             return i;
-       
-       return -1;
-   }
-*/    
     private final int shouldManaAbility(Card c){
         ArrayList<String> a = c.getIntrinsicKeyword();
         for (int i = 0; i < a.size(); i++)
@@ -2412,30 +2170,7 @@ public class CardFactory implements NewConstants {
        
        if (ptk.length == 3)
           keyword[0] = ptk[2];
-       
-/*        String Desc = new String();
-        Desc = "Target creature ";
-        if (attack[0] != 0 || defense[0] != 0)
-        {
-           Desc = Desc + "gets ";
-           if (attack[0] > 0)
-              Desc = Desc + "+" + attack[0];
-           else
-              Desc = Desc + attack[0];
-           Desc = Desc + "/";
-           if (defense[0] > 0)
-              Desc = Desc + "+" + defense[0];
-           else
-              Desc = Desc + defense[0];
-           
-           if (! keyword[0].equals("none"))
-              Desc = Desc + " and ";
-        }
-        if (! keyword[0].equals("none"))
-           Desc = Desc + "gains " + keyword;
-       
-        Desc = Desc + " until end of turn.";
-*/       
+
        SpellAbility spPump = new Spell(card)
        {
           private static final long serialVersionUID = 42244224L;
@@ -3365,152 +3100,7 @@ public class CardFactory implements NewConstants {
       a1.setBeforePayMana(new Input_PayManaCost(a1));
     }//*************** END ************ END **************************
     
-    
-  /*
-  //*************** START *********** START **************************
-    else if(cardName.equals("Exploration"))
-    {
-    	final int turn[] = new int[1];
-    	turn[0] = -1;
-    	
-    	final Ability ability = new Ability(card, "0")
-    	{
-    		public boolean canPlay()
-    		{
-    			SpellAbility sa;
-    	    	for (int i=0; i<AllZone.Stack.size(); i++)
-    	    	{
-    	    	     sa = AllZone.Stack.peek(i);
-    	    	     if (sa.getSourceCard().equals(card))
-    	    	          return false;
-    	    	}
-    			
-    			String player = card.getController();
-    			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-    			CardList lands = new CardList(hand.getCards());
-    			lands = lands.getType("Land");
-    			
-    			return lands.size() > 0 &&
-    				(AllZone.Phase.getPhase().equals(Constant.Phase.Main2) || AllZone.Phase.getPhase().equals(Constant.Phase.Main1))
-    				&& AllZone.GameAction.isCardInPlay(card) && turn[0] != AllZone.Phase.getTurn();
-    		}
-    		public void resolve()
-    		{
-    			turn[0] = AllZone.Phase.getTurn();
-    			String player = card.getController();
-    			
-    			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-    			PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-    			
-    			
-    			CardList lands = new CardList(hand.getCards());
-    			lands = lands.getType("Land");
-    			
-    			if (lands.size() > 0)
-    			{
-    				if (player.equals(Constant.Player.Human))
-    				{
-		    			Object o = AllZone.Display.getChoiceOptional("Select land to play", lands.toArray());
-		    			if (o!=null)
-		    			{
-		    				Card c = (Card)o;
-		    				hand.remove(c);
-		    				play.add(c);
-		    			}
-    				}
-    				else
-    				{
-    					Card c = lands.get(0);
-    					hand.remove(c);
-    					play.add(c);
-    				}
-    			}
-    		}
-    	};
-    	
-    	card.addSpellAbility(ability);
-    	ability.setDescription("You may play an additional land each of your turns.");
-        ability.setStackDescription(card.getName() + " - " + card.getController() + " plays an additional land.");
-    }//*************** END ************ END **************************
-    
-
-  //*************** START *********** START **************************
-    else if(cardName.equals("Fastbond"))
-    {
-    	final Ability ability = new Ability(card, "0")
-    	{
-    		public boolean canPlayAI()
-    		{
-    			if(AllZone.GameAction.getPlayerLife(Constant.Player.Computer).getLife() > 4)
-    				return true;
-    			else
-    				return false;
-    		}
-    		public boolean canPlay()
-    		{
-    			SpellAbility sa;
-    	    	for (int i=0; i<AllZone.Stack.size(); i++)
-    	    	{
-    	    	     sa = AllZone.Stack.peek(i);
-    	    	     if (sa.getSourceCard().equals(card))
-    	    	          return false;
-    	    	}
-    			
-    			String player = card.getController();
-    			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-    			CardList lands = new CardList(hand.getCards());
-    			lands = lands.getType("Land");
-    			
-    			return !Input_Main.canPlayLand && lands.size() > 0 &&
-    				(AllZone.Phase.getPhase().equals(Constant.Phase.Main2) || AllZone.Phase.getPhase().equals(Constant.Phase.Main1))
-    				&& AllZone.GameAction.isCardInPlay(card);
-    		}
-    		public void resolve()
-    		{
-    			String player = card.getController();
-
-    			
-    			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-    			PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-    			
-    			CardList fastbonds = new CardList(play.getCards());
-    			fastbonds = fastbonds.getName("Fastbond"); //do this, because if there are more in play, fastbond will deal more damage per land
-    			
-    			AllZone.GameAction.getPlayerLife(player).subtractLife(fastbonds.size());
-    			
-    			CardList lands = new CardList(hand.getCards());
-    			lands = lands.getType("Land");
-    			
-    			if (lands.size() > 0)
-    			{
-    				if (player.equals(Constant.Player.Human))
-    				{
-		    			Object o = AllZone.Display.getChoiceOptional("Select land to play", lands.toArray());
-		    			if (o!=null)
-		    			{
-		    				Card c = (Card)o;
-		    				hand.remove(c);
-		    				play.add(c);
-		    			}
-    				}
-    				else
-    				{
-    					Card c = lands.get(0);
-    					hand.remove(c);
-    					play.add(c);
-    					
-    				}
-    			}
-    		}
-    	};
-    	
-    	card.addSpellAbility(ability);
-    	ability.setDescription("You may play as many lands as you choose on your turn. Whenever you play a land other than the first land of the turn, Fastbond deals 1 damage to you.");
-        ability.setStackDescription(card.getName() + " - deals damage to " + card.getController() + ", plays another land.");
-    }//*************** END ************ END **************************
-    		
-    */
-
+  
     
   //*************** START *********** START **************************
     else if(cardName.equals("Conspiracy") || cardName.equals("Cover of Darkness") || cardName.equals("Door of Destinies") ||
@@ -3883,57 +3473,6 @@ public class CardFactory implements NewConstants {
       ability.setStackDescription("Centaur Glade - Put a 3/3 token into play.");
       card.addSpellAbility(ability);
     }//*************** END ************ END **************************
-
-
-
-    /*
-    //*************** START *********** START **************************
-    if(cardName.equals("Raise Dead") || cardName.equals("Disentomb") || cardName.equals("Return to Battle") ||
-       cardName.equals("Recover"))
-    {
-      final SpellAbility spell = new Spell(card)
-      {
-		private static final long serialVersionUID = -5822375745105110975L;
-		public boolean canPlayAI() {return getGraveCreatures().size() != 0;}
-
-        public void chooseTargetAI()
-        {
-          CardList grave = getGraveCreatures();
-          Card target = CardFactoryUtil.AI_getBestCreature(grave);
-          setTargetCard(target);
-        }
-
-        public void resolve()
-        {
-          if(card.getController().equals(Constant.Player.Human))
-          {
-            Card c = (Card) AllZone.Display.getChoice("Select card", getGraveCreatures().toArray());
-            setTargetCard(c);
-          }
-
-          PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-          PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-
-          if(AllZone.GameAction.isCardInZone(getTargetCard(), grave))
-             AllZone.GameAction.moveTo(hand, getTargetCard());
-        }//resolve()
-        public boolean canPlay()
-        {
-          return getGraveCreatures().size() != 0;
-        }
-        CardList getGraveCreatures()
-        {
-          PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-          CardList list = new CardList(grave.getCards());
-          list = list.getType("Creature");
-          return list;
-        }
-      };//SpellAbility
-      card.clearSpellAbility();
-      card.addSpellAbility(spell);
-    }//*************** END ************ END **************************
-
-	*/
 
 
     //*************** START *********** START **************************
@@ -8079,17 +7618,18 @@ public class CardFactory implements NewConstants {
         
         public boolean canPlayAI()
         {
-          if(AllZone.Human_Life.getLife() <= damage)
-            return true;
-          
           PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
           CardList hand = new CardList(compHand.getCards());
+          
+            
+          if(AllZone.Human_Life.getLife() <= damage)
+            return AllZone.GameAction.isCardInZone(card, compHand);
                
           if (hand.size() >= 8)
-            return true;
+            return true && AllZone.GameAction.isCardInZone(card, compHand);
 
           check = getFlying();
-          return check != null;
+          return check != null && AllZone.GameAction.isCardInZone(card, compHand);
         }
         public void chooseTargetAI()
         {
@@ -11232,7 +10772,8 @@ public class CardFactory implements NewConstants {
           else
           {
             setTargetCard(c.get(0));
-            return true;
+            PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
+            return AllZone.GameAction.isCardInZone(card, hand);
           }
         }//canPlayAI()
 
@@ -13583,6 +13124,7 @@ public class CardFactory implements NewConstants {
           public boolean canPlayAI()
           {
              CardList list = new CardList(AllZone.Computer_Play.getCards());
+             list = list.getType("Creature");
              if (list.size() > 0) {
 	             setTargetCard(CardFactoryUtil.AI_getBestCreature(list));
 	             return (getTargetCard() != null);
@@ -17169,6 +16711,16 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 					}
 				}//while
 				AllZone.Display.getChoiceOptional("Revealed cards:", revealed.toArray());
+				
+				if(getTargetCard() != null)
+		          {
+		            if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()))
+		            {
+		            	getTargetCard().addDamage(damage);
+		            }
+		          }
+		          else
+		            AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
 			}
 		};
 		ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
@@ -17462,7 +17014,54 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
 
+	/*
+	//*************** START *********** START **************************
+    else if (cardName.equals("Time Walk"))
+	{
+    	final SpellAbility spell = new Spell(card)
+    	{
+			private static final long serialVersionUID = 8634822208146060381L;
+
+			public void resolve() {
+				final Command atEOT = new Command()
+		          {
+
+					private static final long serialVersionUID = -8380743460207665203L;
+
+					public void execute()
+		            {
+						AllZone.Phase.setPhase(Constant.Phase.Untap, card.getController());
+						int turn = AllZone.Phase.getTurn();		
+						//System.out.println("Turn: " +turn);
+						AllZone.Phase.setTurn(++turn);
+		              
+		            }
+		          };
+		          String opponent = AllZone.GameAction.getOpponent(AllZone.Phase.getActivePlayer());
+		          AllZone.GameAction.setLastPlayerToDraw(opponent);
+		          AllZone.EndOfTurn.addLast(atEOT);
+			}
+    	};
+    	card.clearSpellAbility();
+    	card.addSpellAbility(spell);
+    }//*************** END ************ END **************************
+	*/
 	
+	//*************** START *********** START **************************
+    else if (cardName.equals("Time Walk") || cardName.equals("Temporal Manipulation") || cardName.equals("Capture of Jingzhou"))
+	{
+    	final SpellAbility spell = new Spell(card)
+    	{
+			private static final long serialVersionUID = 35300742940184315L;
+
+			public void resolve() {
+				System.out.println("Turn: " + AllZone.Phase.getTurn());
+				AllZone.Phase.addExtraTurn();
+			}
+    	};
+    	card.clearSpellAbility();
+    	card.addSpellAbility(spell);
+    }//*************** END ************ END **************************
     
     // Cards with Cycling abilities
     // -1 means keyword "Cycling" not found

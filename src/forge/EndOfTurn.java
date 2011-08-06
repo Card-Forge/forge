@@ -8,9 +8,11 @@ public class EndOfTurn implements java.io.Serializable
 
   private CommandList at = new CommandList();
   private CommandList until = new CommandList();
+  private CommandList last = new CommandList();
 
   public void addAt(Command c)    {at.add(c);}
   public void addUntil(Command c) {until.add(c);}
+  public void addLast(Command c) {last.add(c);}
 
   public void executeAt()
   {
@@ -49,10 +51,14 @@ public class EndOfTurn implements java.io.Serializable
   }//executeAt()
 
 
-  public void executeUntil() {execute(until);}
+  public void executeUntil() {
+	  execute(until);
+	  execute(last);
+  }
 
     public int sizeAt() {return at.size();}
     public int sizeUntil() {return until.size();}
+    public int sizeLast() { return last.size();}
 
   private void execute(CommandList c)
   {
@@ -60,7 +66,5 @@ public class EndOfTurn implements java.io.Serializable
 
     for(int i = 0; i < length; i++)
       c.remove(0).execute();
-
-
   }
 }

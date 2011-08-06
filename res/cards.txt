@@ -1,3 +1,23 @@
+Ajani Vengeant
+2 R W
+Planeswalker - Ajani
+no text
+
+Temporal Manipulation
+3 U U
+Sorcery
+Take an extra turn after this one.
+
+Capture of Jingzhou
+3 U U
+Sorcery
+Take an extra turn after this one.
+
+Time Walk
+1 U
+Sorcery
+Take an extra turn after this one.
+
 Jace Beleren
 1 U U
 Planeswalker - Jace

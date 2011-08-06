@@ -679,6 +679,9 @@ private Card getCurrentCard(int ID)
   private boolean shouldDraw = true;
   private String lastPlayerToDraw = Constant.Player.Human;
   
+  public String getLastPlayerToDraw() { return lastPlayerToDraw; }
+  public void setLastPlayerToDraw(String s) { lastPlayerToDraw = s; }
+  
   public void drawCard(String player)
   {
     //TODO: show that milled player looses

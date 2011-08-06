@@ -5,7 +5,9 @@ public class Phase extends MyObservable
 {
   private int phaseIndex;
   private int turn;
-
+  
+  private int extraTurns;
+  
   private String phases[][] =
   {
     //human's turn
@@ -52,6 +54,7 @@ public class Phase extends MyObservable
   {
     turn = 1;
     phaseIndex = 0;
+    extraTurns = 0;
     this.updateObservers();
   }
   public void setPhase(String phase, String player)
@@ -81,9 +84,6 @@ public class Phase extends MyObservable
     	}
     }
     
-    if(getPhase().equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility))
-    	System.out.println("HELLO");
-    
     //empty manapool:
     //CardList cl = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
     //cl = cl.getName("Mana Pool");
@@ -96,12 +96,31 @@ public class Phase extends MyObservable
     
     AllZone.ManaPool.clear();
     
-    phaseIndex++;
-    if(phases.length <= phaseIndex)
-      phaseIndex = 0;
+    if (getPhase().equals(Constant.Phase.Cleanup) && extraTurns > 0)
+    {
+    	//System.out.println("CLEANUP!");
+    	String player = getActivePlayer();
+    	String opponent = AllZone.GameAction.getOpponent(player);
+    	
+    	AllZone.GameAction.setLastPlayerToDraw(opponent);
+    	setPhase(Constant.Phase.Untap, player);
+    	
+    }
+    else
+    {
+	    phaseIndex++;
+	    if(phases.length <= phaseIndex)
+	        phaseIndex = 0;
+    }
+     
 
-    if(getPhase().equals(Constant.Phase.Untap))
+    if(getPhase().equals(Constant.Phase.Untap)) {
       turn++;
+      if (extraTurns > 0)
+    	  extraTurns--;
+      else if(extraTurns < 0)
+    	  extraTurns++;
+    }
     
     //for debugging: System.out.println(getPhase());
     
@@ -144,6 +163,22 @@ public class Phase extends MyObservable
   {
     turn = in_turn;
   }
+  
+  public void addExtraTurn()
+  {
+	  extraTurns++;
+  }
+  
+  public int getExtraTurns()
+  {
+	  return extraTurns;
+  }
+  
+  public void setExtraTurns(int i)
+  {
+	  extraTurns = i;
+  }
+  
   public static void main(String args[])
   {
     Phase phase = new Phase();

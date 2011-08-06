@@ -75,12 +75,13 @@ class CardFactory_Planeswalkers {
 	          @SuppressWarnings("unused") // library
 			   PlayerZone library = AllZone.getZone(Constant.Zone.Library, card2.getController());
 	
-	          return 0 < card2.getCounters(Counters.LOYALTY) &&
+	          return 	  0 < card2.getCounters(Counters.LOYALTY) &&
 	                      AllZone.getZone(card2).is(Constant.Zone.Play) &&
 	                      turn[0] != AllZone.Phase.getTurn() &&
 	                      AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 	                      !AllZone.Phase.getPhase().equals("End of Turn") && 
-	                      (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+	                      (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2")) 
+	                      && AllZone.Stack.size() == 0 ;
 	          			
 	          
 	        }//canPlay()
@@ -145,7 +146,8 @@ class CardFactory_Planeswalkers {
 	              turn[0] != AllZone.Phase.getTurn() &&
 	              AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 	              !AllZone.Phase.getPhase().equals("End of Turn") && 
-	              (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+	              (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	              && AllZone.Stack.size() == 0;
 	        }//canPlay()
 	        public boolean canPlayAI()
 	        {
@@ -211,7 +213,8 @@ class CardFactory_Planeswalkers {
 	              turn[0] != AllZone.Phase.getTurn() &&
 	              AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 	              !AllZone.Phase.getPhase().equals("End of Turn") && 
-	              (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+	              (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	              && AllZone.Stack.size() == 0;
 	        }//canPlay()
 	      };//SpellAbility ability1
 	
@@ -317,7 +320,8 @@ class CardFactory_Planeswalkers {
 	                       turn[0] != AllZone.Phase.getTurn() &&
 	                       AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 	                       !AllZone.Phase.getPhase().equals("End of Turn") &&
-	                       (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+	                       (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	                       && AllZone.Stack.size() == 0;
 	           
 	         }//canPlay()
 	       };//SpellAbility ability2
@@ -376,7 +380,8 @@ class CardFactory_Planeswalkers {
 	               turn[0] != AllZone.Phase.getTurn() &&
 	               AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 	               !AllZone.Phase.getPhase().equals("End of Turn") &&
-	               (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+	               (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	               && AllZone.Stack.size() == 0;
 	         }//canPlay()
 	         public boolean canPlayAI()
 	         {
@@ -462,7 +467,8 @@ class CardFactory_Planeswalkers {
 	               turn[0] != AllZone.Phase.getTurn() &&
 	               AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 	               !AllZone.Phase.getPhase().equals("End of Turn") && 
-	               (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+	               (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	               && AllZone.Stack.size() == 0;
 	         }//canPlay()
 	       };//SpellAbility ability1
 	
@@ -599,7 +605,8 @@ class CardFactory_Planeswalkers {
 	               turn[0] != AllZone.Phase.getTurn() &&
 	               AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 	               !AllZone.Phase.getPhase().equals("End of Turn") &&
-	               (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+	               (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	               && AllZone.Stack.size() == 0;
 	         }//canPlay()
 	         public boolean canPlayAI()
 	         {
@@ -706,7 +713,8 @@ class CardFactory_Planeswalkers {
 	                       turn[0] != AllZone.Phase.getTurn() &&
 	                       AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 	                       !AllZone.Phase.getPhase().equals("End of Turn") &&
-	                       (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+	                       (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	                       && AllZone.Stack.size() == 0;
 	           
 	         }//canPlay()
 	       };//SpellAbility ability2
@@ -764,7 +772,8 @@ class CardFactory_Planeswalkers {
 	               turn[0] != AllZone.Phase.getTurn() &&
 	               AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 	               !AllZone.Phase.getPhase().equals("End of Turn") &&
-	               (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+	               (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	               && AllZone.Stack.size() == 0;
 	         }//canPlay()
 	         
 	         public void chooseTargetAI()
@@ -937,7 +946,8 @@ class CardFactory_Planeswalkers {
 	                      turn[0] != AllZone.Phase.getTurn() &&
 	                      AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 	                      !AllZone.Phase.getPhase().equals("End of Turn") &&
-	                      (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+	                      (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	                      && AllZone.Stack.size() == 0;
 	          
 	        }//canPlay()
 	      };//SpellAbility ability2
@@ -994,7 +1004,8 @@ class CardFactory_Planeswalkers {
 	              turn[0] != AllZone.Phase.getTurn() &&
 	              AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 	              !AllZone.Phase.getPhase().equals("End of Turn") &&
-	              (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+	              (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	              && AllZone.Stack.size() == 0;
 	        }//canPlay()
 	        public boolean canPlayAI()
 	        {
@@ -1046,7 +1057,8 @@ class CardFactory_Planeswalkers {
 	              turn[0] != AllZone.Phase.getTurn() &&
 	              AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 	              !AllZone.Phase.getPhase().equals("End of Turn") &&
-	              (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+	              (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	              && AllZone.Stack.size() == 0;
 	        }//canPlay()
 	      };//SpellAbility ability1
 	
@@ -1170,7 +1182,8 @@ class CardFactory_Planeswalkers {
 	                      turn[0] != AllZone.Phase.getTurn() &&
 	                      AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 	                      !AllZone.Phase.getPhase().equals("End of Turn") &&
-	                      (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+	                      (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	                      && AllZone.Stack.size() == 0;
 	        }//canPlay()
 	      };//SpellAbility ability2
 
@@ -1227,7 +1240,8 @@ class CardFactory_Planeswalkers {
 	              turn[0] != AllZone.Phase.getTurn() &&
 	              AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 	              !AllZone.Phase.getPhase().equals("End of Turn") &&
-	              (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+	              (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	              && AllZone.Stack.size() == 0;
 	        }//canPlay()
 	        public boolean canPlayAI()
 	        {
@@ -1288,7 +1302,8 @@ class CardFactory_Planeswalkers {
 	              turn[0] != AllZone.Phase.getTurn() &&
 	              AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 	              !AllZone.Phase.getPhase().equals("End of Turn") &&
-	              (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+	              (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	              && AllZone.Stack.size() == 0;
 	        }//canPlay()
 	      };//SpellAbility ability1
 
@@ -1393,7 +1408,8 @@ class CardFactory_Planeswalkers {
 	                 turn[0] != AllZone.Phase.getTurn() &&
 	                 AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 	                 !AllZone.Phase.getPhase().equals("End of Turn") && 
-	                 (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+	                 (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	                 && AllZone.Stack.size() == 0;
 	        }
 	        public boolean canPlayAI()
 	        {
@@ -1432,9 +1448,6 @@ class CardFactory_Planeswalkers {
 	      card2.addSpellAbility(ability1);
 	      //end ability1
 
-
-
-
 	      //ability 2
 	      final int damage2[] = new int[1];
 
@@ -1464,7 +1477,8 @@ class CardFactory_Planeswalkers {
 	                 turn[0] != AllZone.Phase.getTurn() &&
 	                 AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 	                 !AllZone.Phase.getPhase().equals("End of Turn") && 
-	                 (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+	                 (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	                 && AllZone.Stack.size() == 0;
 	        }
 	        public boolean canPlayAI()
 	        {
@@ -1557,7 +1571,8 @@ class CardFactory_Planeswalkers {
 	                 7 < card2.getCounters(Counters.LOYALTY) &&
 	          		 AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 	          		!AllZone.Phase.getPhase().equals("End of Turn") &&
-	          		(AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+	          		(AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	          		&& AllZone.Stack.size() == 0;
 	        }
 	        public boolean canPlayAI()
 	        {
@@ -1655,7 +1670,8 @@ class CardFactory_Planeswalkers {
 	                  turn[0] != AllZone.Phase.getTurn() &&
 	                  AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 	                  !AllZone.Phase.getPhase().equals("End of Turn") &&
-	                  (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+	                  (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	                  && AllZone.Stack.size() == 0;
 	        }//canPlay()
 	      };
 	      final Input targetLand = new Input()
@@ -1743,7 +1759,8 @@ class CardFactory_Planeswalkers {
 	                  0 < card2.getCounters(Counters.LOYALTY) &&
 	                  AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 	                  !AllZone.Phase.getPhase().equals("End of Turn") && 
-	                  (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+	                  (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	                  && AllZone.Stack.size() == 0;
 	        }//canPlay()
 	        public boolean canPlayAI()
 	        {
@@ -1830,7 +1847,8 @@ class CardFactory_Planeswalkers {
 	                  3 < card2.getCounters(Counters.LOYALTY) &&
 	          		  AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 	          		  !AllZone.Phase.getPhase().equals("End of Turn") &&
-	          		  (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+	          		  (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	          		  && AllZone.Stack.size() == 0;
 	        }//canPlay()
 	        public boolean canPlayAI()
 	        {
@@ -1915,7 +1933,8 @@ class CardFactory_Planeswalkers {
 		                  turn[0] != AllZone.Phase.getTurn() &&
 		                  AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 		                  !AllZone.Phase.getPhase().equals("End of Turn") &&
-		                  (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+		                  (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+		                  && AllZone.Stack.size() == 0;
 		        }//canPlay()
 		      };
 		      
@@ -1946,7 +1965,8 @@ class CardFactory_Planeswalkers {
 		                  turn[0] != AllZone.Phase.getTurn() &&
 		                  AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 		                  !AllZone.Phase.getPhase().equals("End of Turn") &&
-		                  (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+		                  (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+		                  && AllZone.Stack.size() == 0;
 		        }//canPlay()
 		      };
 		      ability2.setDescription("-1: Target player draws a card.");
@@ -1990,7 +2010,8 @@ class CardFactory_Planeswalkers {
 		                  turn[0] != AllZone.Phase.getTurn() &&
 		                  AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
 		                  !AllZone.Phase.getPhase().equals("End of Turn") &&
-		                  (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+		                  (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+		                  && AllZone.Stack.size() == 0;
 		        }//canPlay()
 		      };
 		      ability3.setDescription("-10: Target player puts the top twenty cards of his or her library into his or her graveyard.");
@@ -2002,6 +2023,231 @@ class CardFactory_Planeswalkers {
 		      
 		      return card2;
 	  	}//*************** END ************ END **************************
+	    
+	  //*************** START *********** START **************************
+	    else if (cardName.equals("Ajani Vengeant"))
+	    {
+	    
+	    	final int turn[] = new int[1];
+		      turn[0] = -1;
+
+		      final Card card2 = new Card()
+		      {
+		        public void addDamage(int n)
+		        {
+		          subtractCounter(Counters.LOYALTY,n);
+		          AllZone.GameAction.checkStateEffects();
+		        }
+		      };
+		      card2.addCounter(Counters.LOYALTY, 3);
+
+		      card2.setOwner(owner);
+		      card2.setController(owner);
+
+		      card2.setName(card.getName());
+		      card2.setType(card.getType());
+		      card2.setManaCost(card.getManaCost());
+		      card2.addSpellAbility(new Spell_Permanent(card2));
+		      
+		    //ability 1: destroy target noncreature permanent
+		       final SpellAbility ability1 = new Ability(card2, "0")
+		       {
+		         public void resolve()
+		         {
+		           card2.addCounter(Counters.LOYALTY, 1);
+		           turn[0] = AllZone.Phase.getTurn();
+		           
+		           Card c = getTargetCard();
+		           c.addExtrinsicKeyword("This card doesn't untap during your next untap step.");
+		         }
+		         public boolean canPlayAI()
+		         {
+		           return card2.getCounters(Counters.LOYALTY) < 8;
+		         }
+		         public boolean canPlay()
+		         {
+		           SpellAbility sa;
+		    	   for (int i=0; i<AllZone.Stack.size(); i++)
+		    	   {
+		    	    	     sa = AllZone.Stack.peek(i);
+		    	    	     if (sa.getSourceCard().equals(card2))
+		    	    	          return false;
+		    	   }
+		           return 0 < card2.getCounters(Counters.LOYALTY) && AllZone.getZone(card2).is(Constant.Zone.Play) &&
+		               turn[0] != AllZone.Phase.getTurn() &&
+		               AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
+		               !AllZone.Phase.getPhase().equals("End of Turn") &&
+		               (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+		               && AllZone.Stack.size() == 0;
+		         }//canPlay()
+		         
+		         public void chooseTargetAI()
+		         {
+		           Card c = getPermanent();
+		           
+		           if (getPermanent() != null)
+		        	   setTargetCard(c);
+		         }//chooseTargetAI()
+		
+		         Card getPermanent()
+		         {
+		           PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+		           int highestCost = 0;
+		           Card bestCard = null;
+		           CardList perms = new CardList(play.getCards());
+		           perms = perms.filter(new CardListFilter()
+		           {
+						public boolean addCard(Card c) {
+							return CardFactoryUtil.canTarget(card2, c) /* && c.isTapped()*/;
+						}   
+		           });
+		
+		           for(int i = 0; i < perms.size(); i++)
+		           {
+		             if(CardUtil.getConvertedManaCost(perms.get(i).getManaCost()) > highestCost && perms.get(i).isTapped())
+		             {
+		            	 highestCost = CardUtil.getConvertedManaCost(perms.get(i).getManaCost());
+		            	 bestCard = perms.get(i);
+		             }
+		           }
+		           if (bestCard == null && perms.size() > 0)
+		           {
+		        	   bestCard = perms.get(0);
+		        	   return bestCard;
+		           }
+		           
+		           return null;
+		         }
+		       };//SpellAbility ability1
+		
+		       /*
+		       ability1.setBeforePayMana(new Input()
+		       {
+				  private static final long serialVersionUID = 9167121234861249451L;
+				  
+				  int check = -1;
+		          public void showMessage()
+		          {
+		            if(check != AllZone.Phase.getTurn())
+		            {
+		              check = AllZone.Phase.getTurn();
+		              turn[0] = AllZone.Phase.getTurn();
+		              AllZone.Stack.push(ability1);
+		            }
+		            stop();
+		          }//showMessage()
+		       });
+		        */
+		       ability1.setDescription("+1: Target permanent doesn't untap during its controller's next untap step..");
+		       ability1.setBeforePayMana(CardFactoryUtil.input_targetPermanent(ability1));
+		       
+		       
+		       final Ability ability2 = new Ability(card, "0")
+		       {
+		 		 int damage = 3;
+		 		public boolean canPlayAI()
+		        {
+		 		  setTargetPlayer(Constant.Player.Human);
+		          return AllZone.Human_Life.getLife() <= damage;
+		          
+		        }
+		         public void resolve()
+		         {
+		           card2.subtractCounter(Counters.LOYALTY, 2);
+		           if(getTargetCard() != null)
+		           {
+		             if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card2, getTargetCard()))
+		             {
+		               Card c = getTargetCard();
+		               c.addDamage(damage);
+		             }
+		           }
+		           else
+		             AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
+		           	 AllZone.GameAction.getPlayerLife(card2.getController()).addLife(3);
+		           
+		         }
+		       };//ability2
+
+		       Input target = new Input()
+		       {
+				private static final long serialVersionUID = -6688689065812475609L;
+				public void showMessage()
+		         {
+		           AllZone.Display.showMessage("Select target Creature, Player or Planeswalker");
+		           ButtonUtil.enableOnlyCancel();
+		         }
+		         public void selectButtonCancel() {stop();}
+		         public void selectCard(Card card, PlayerZone zone)
+		         {
+		           if(!CardFactoryUtil.canTarget(ability2, card)){
+		           	  AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
+		           }
+		           else if((card.isCreature() || card.isPlaneswalker()) && zone.is(Constant.Zone.Play))
+		           {
+		             ability2.setTargetCard(card);
+		             stopSetNext(new Input_PayManaCost(ability2));
+		           }
+		         }//selectCard()
+		         public void selectPlayer(String player)
+		         {
+		           ability2.setTargetPlayer(player);
+		           stopSetNext(new Input_PayManaCost(ability2));
+		         }
+		       };
+		       ability2.setBeforePayMana(target);
+		       ability2.setDescription("-2: Ajani Vengeant deals 3 damage to target creature or player and you gain 3 life.");
+		       
+		       
+	       	   //ability3
+		       final SpellAbility ability3 = new Ability(card2, "0")
+		       {
+		        public void resolve()
+		        {
+		          card2.subtractCounter(Counters.LOYALTY, 7);
+
+		          turn[0] = AllZone.Phase.getTurn();
+		          String player = getTargetPlayer();
+		          
+		          PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+		          CardList land = new CardList(play.getCards());
+		          land = land.getType("Land");
+
+		          for (Card c : land)
+		          {
+		        	  AllZone.GameAction.destroy(c);
+		          }
+		          
+		        }//resolve()
+		        public boolean canPlayAI()
+		        {
+		          PlayerZone pz = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+		          CardList land = new CardList(pz.getCards());
+		          land = land.getType("Land");
+
+		          setTargetPlayer(Constant.Player.Human);
+		          return card2.getCounters(Counters.LOYALTY) >= 8 && land.size() >= 4;
+		        }
+		        public boolean canPlay()
+		        {
+		          return  AllZone.getZone(card2).is(Constant.Zone.Play) &&
+		          		  card2.getCounters(Counters.LOYALTY) >= 7 &&
+		                  turn[0] != AllZone.Phase.getTurn() &&
+		                  AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
+		                  !AllZone.Phase.getPhase().equals("End of Turn") &&
+		                  (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+		                  && AllZone.Stack.size() == 0;
+		         }//canPlay()
+		       };
+		       ability3.setDescription("-7: Destroy all lands target player controls.");
+		       ability3.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability3));
+		       
+		       card2.addSpellAbility(ability1);
+		       card2.addSpellAbility(ability2);
+		       card2.addSpellAbility(ability3);
+		      
+		       return card2;
+	    }//*************** END ************ END **************************
 	    
 	    return card;
 	}

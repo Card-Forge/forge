@@ -3074,7 +3074,7 @@ class CardFactory_Auras {
 		         if (card.isEnchanting())
 		         {
 		            Card crd = card.getEnchanting().get(0);
-		            crd.addExtrinsicKeyword("This creature can't block");
+		            crd.addExtrinsicKeyword("This creature cannot block");
 		         } 
 		      }//execute()
 		  };//Command
@@ -3090,7 +3090,7 @@ class CardFactory_Auras {
 		         if (card.isEnchanting())
 		         {
 		            Card crd = card.getEnchanting().get(0);
-		            crd.removeExtrinsicKeyword("This creature can't block");
+		            crd.removeExtrinsicKeyword("This creature cannot block");
 
 		         }
 		      
