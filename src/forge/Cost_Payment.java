@@ -26,6 +26,7 @@ public class Cost_Payment {
 	private boolean payAddCounter;
 	private boolean paySac;
 	private boolean payExile;
+	private boolean payExileFromHand;
 	private boolean payLife;
 	private boolean payDiscard;
 	private boolean payTapXType;
@@ -45,6 +46,7 @@ public class Cost_Payment {
 	public void setPayDiscard(boolean bSac){	payDiscard = bSac;	}
 	public void setPaySac(boolean bSac){	paySac = bSac;	}
 	public void setPayExile(boolean bExile) { payExile = bExile; }
+	public void setPayExileFromHand(boolean bExileFromHand) { payExileFromHand = bExileFromHand; }
 	public void setPayTapXType(boolean bTapX) { payTapXType = bTapX; }
 	public void setPayReturn(boolean bReturn){	payReturn = bReturn; }
 	
@@ -63,6 +65,7 @@ public class Cost_Payment {
 		payAddCounter = !cost.getAddCounter();
 		paySac = !cost.getSacCost();
 		payExile = !cost.getExileCost();
+		payExileFromHand = !cost.getExileFromHandCost();
 		payLife = !cost.getLifeCost();
 		payDiscard = !cost.getDiscardCost();
 		payTapXType = !cost.getTapXTypeCost();
@@ -168,6 +171,18 @@ public class Cost_Payment {
 					return false;
 			}
 			else if (!AllZone.GameAction.isCardInPlay(card))
+				return false;
+		}
+		
+		if (cost.getExileFromHandCost()){
+			if (!cost.getExileFromHandThis()){
+			    CardList typeList = AllZoneUtil.getPlayerHand(card.getController());
+			    
+			    typeList = typeList.getValidCards(cost.getExileFromHandType().split(","),ability.getActivatingPlayer() ,ability.getSourceCard()); 
+				if (typeList.size() < cost.getExileFromHandAmount())
+					return false;
+			}
+			else if (!AllZoneUtil.isCardInPlayerHand(card.getController(), card))
 				return false;
 		}
 		
@@ -335,6 +350,14 @@ public class Cost_Payment {
     		return false;
     	}
 		
+		if (!payExileFromHand && cost.getExileFromHandCost()){					// exile stuff here
+    		if (cost.getExileFromHandThis())
+    			changeInput.stopSetNext(exileFromHandThis(ability, this));
+    		else
+    			changeInput.stopSetNext(exileFromHandType(ability, cost.getExileFromHandType(), this));
+    		return false;
+    	}
+		
 		if (!payReturn && cost.getReturnCost()){					// return stuff here
     		if (cost.getReturnThis())
     			changeInput.stopSetNext(returnThis(ability, this));
@@ -351,7 +374,8 @@ public class Cost_Payment {
 	public boolean isAllPaid(){
 		// if you add a new Cost type add it here
 		return (payTap && payUntap && payMana && payXMana && paySubCounter && payAddCounter &&
-				paySac && payExile && payLife && payDiscard && payTapXType && payReturn);
+				paySac && payExile && payLife && payDiscard && payTapXType && payReturn &&
+				payExileFromHand);
 	}
 	
 	public void resetUndoList(){
@@ -400,6 +424,8 @@ public class Cost_Payment {
 		// can't really unsacrifice things
         
         //can't really unexile things
+        
+        // can't really unexile things from hand
         
         // can't really unreturn things
 	}
@@ -869,6 +895,38 @@ public class Cost_Payment {
         return target;
     }//input_exile()
     
+    public static Input exileFromHandThis(final SpellAbility spell, final Cost_Payment payment) {
+        Input target = new Input() {
+			private static final long serialVersionUID = 2651542083913697972L;
+
+			@Override
+            public void showMessage() {
+            	Card card = spell.getSourceCard();
+                if(card.getController().equals(AllZone.HumanPlayer) && AllZoneUtil.isCardInPlayerHand(card.getController(), card)) {
+        			StringBuilder sb = new StringBuilder();
+        			sb.append(card.getName());
+        			sb.append(" - Exile?");
+        			Object[] possibleValues = {"Yes", "No"};
+                	Object choice = JOptionPane.showOptionDialog(null, sb.toString(), card.getName() + " - Cost",  
+                			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                			null, possibleValues, possibleValues[0]);
+                    if(choice.equals(0)) {
+                    	payment.setPayExile(true);
+                    	AllZone.GameAction.exile(card);
+                    	stop();
+                    	payment.payCost();
+                    }
+                    else{
+                    	payment.setCancel(true);
+                    	stop();
+                    	payment.payCost();
+                    }
+                }
+            }
+        };
+        return target;
+    }//input_exile()
+    
     public static Input exileType(final SpellAbility spell, final String type, final Cost_Payment payment){
         Input target = new Input() {
 			private static final long serialVersionUID = 1403915758082824694L;
@@ -917,6 +975,67 @@ public class Cost_Payment {
             
             public void done(){
             	payment.setPayExile(true);
+            	stop();
+            	payment.payCost();
+            }
+            
+            public void cancel(){
+            	payment.setCancel(true);
+            	stop();
+            	payment.payCost();
+            }
+        };
+        return target;
+    }//exileType()
+    
+    public static Input exileFromHandType(final SpellAbility spell, final String type, final Cost_Payment payment){
+        Input target = new Input() {
+			private static final long serialVersionUID = 759041801001973859L;
+			private CardList typeList;
+            private int nExiles = 0;
+            private int nNeeded = payment.getCost().getExileFromHandAmount();
+            
+            @Override
+            public void showMessage() {
+            	StringBuilder msg = new StringBuilder("Exile ");
+            	int nLeft = nNeeded - nExiles;
+            	msg.append(nLeft).append(" ");
+            	msg.append(type);
+            	if (nLeft > 1){
+            		msg.append("s");
+            	}
+            	msg.append(" from your hand");
+            	
+                PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, spell.getSourceCard().getController());
+                typeList = new CardList(hand.getCards());
+                typeList = typeList.getValidCards(type.split(","),spell.getActivatingPlayer() ,spell.getSourceCard());
+                AllZone.Display.showMessage(msg.toString());
+                ButtonUtil.enableOnlyCancel();
+            }
+            
+            @Override
+            public void selectButtonCancel() {
+            	cancel();
+            }
+            
+            @Override
+            public void selectCard(Card card, PlayerZone zone) {
+                if(typeList.contains(card)) {
+                	nExiles++;
+                	AllZone.GameAction.exile(card);
+                	typeList.remove(card);
+                    //in case nothing else to exile
+                    if(nExiles == nNeeded) 
+                    	done();
+                    else if (typeList.size() == 0)	// this really shouldn't happen
+                    	cancel();
+                    else
+                    	showMessage();
+                }
+            }
+            
+            public void done(){
+            	payment.setPayExileFromHand(true);
             	stop();
             	payment.payCost();
             }

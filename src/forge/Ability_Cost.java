@@ -20,6 +20,15 @@ public class Ability_Cost {
 	public boolean getExileThis() { return exileThis; }
 	private int exileAmount = 0;
 	public int getExileAmount() { return exileAmount; }
+	
+	private boolean exileFromHandCost = false;
+	public boolean getExileFromHandCost() { return exileFromHandCost; }
+	private String exileFromHandType = "";	// <type> or CARDNAME
+	public String getExileFromHandType() { return exileFromHandType; }
+	private boolean exileFromHandThis = false;
+	public boolean getExileFromHandThis() { return exileFromHandThis; }
+	private int exileFromHandAmount = 0;
+	public int getExileFromHandAmount() { return exileFromHandAmount; }
     
 	private boolean tapCost = false;
 	public boolean getTap() { return tapCost; } 
@@ -180,6 +189,17 @@ public class Ability_Cost {
         	exileThis = (exileType.equals("CARDNAME"));
         }
         
+        String exileFromHandStr = "ExileFromHand<";
+        if(parse.contains(exileFromHandStr)) {
+        	exileFromHandCost = true;
+        	String[] splitStr = abCostParse(parse, exileFromHandStr, 2);
+        	parse = abUpdateParse(parse, exileFromHandStr);
+        	
+        	exileFromHandAmount = Integer.parseInt(splitStr[0]);
+        	exileFromHandType = splitStr[1];
+        	exileFromHandThis = (exileFromHandType.equals("CARDNAME"));
+        }
+        
         String returnStr = "Return<";
         if(parse.contains(returnStr)) {
         	returnCost = true;
@@ -325,6 +345,11 @@ public class Ability_Cost {
 		
 		if (exileCost){
 			cost.append(exileString(first));
+			first = false;
+		}
+		
+		if(exileFromHandCost) {
+			cost.append(exileFromHandString(first));
 			first = false;
 		}
 		
@@ -482,6 +507,11 @@ public class Ability_Cost {
 			first = false;
 		}
 		
+		if (exileFromHandCost){
+			cost.append(exileFromHandString(first));
+			first = false;
+		}
+		
 		if (returnCost){
 			cost.append(returnString(first));
 			first = false;
@@ -537,6 +567,30 @@ public class Ability_Cost {
 			cost.append(exileType);
 			if(exileAmount > 1)
 				cost.append("s");
+		}
+		return cost.toString();
+	}
+	
+	public String exileFromHandString(boolean first) {
+		StringBuilder cost = new StringBuilder();
+		if(first) {
+			if(isAbility)
+				cost.append("Exile ");
+			else
+				cost.append("exile ");
+		}
+		else {
+			cost.append(", exile ");
+		}
+		
+		if(exileType.equals("CARDNAME"))
+			cost.append(name);
+		else {
+			cost.append(exileAmount).append(" ");
+			cost.append(exileType);
+			if(exileAmount > 1)
+				cost.append("s");
+			cost.append(" from your hand");
 		}
 		return cost.toString();
 	}

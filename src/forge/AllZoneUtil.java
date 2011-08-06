@@ -272,6 +272,9 @@ public class AllZoneUtil {
 		return cards.getName(cardName);
 	}
 	
+	public static boolean isCardInPlayerHand(Player player, Card card) {
+		return PlayerZoneUtil.isCardInZone(AllZone.getZone(Constant.Zone.Hand, player), card);
+	}
 	
 	///Check if a certain card is in play
 	

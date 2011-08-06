@@ -332,6 +332,23 @@ public class ComputerUtil
 				return false;
 		}
 		
+		if (cost.getExileFromHandCost()){
+			  // if there's an exile in the cost, just because we can Pay it doesn't mean we want to. 
+			if (!cost.getExileFromHandThis()){
+			    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
+			    CardList typeList = new CardList(hand.getCards());
+			    typeList = typeList.getValidCards(cost.getExileFromHandType().split(","),sa.getActivatingPlayer() ,sa.getSourceCard());
+			    Card target = sa.getTargetCard();
+				if (target != null && target.getController().equals(AllZone.ComputerPlayer)) // don't exile the card we're pumping
+					  typeList.remove(target);
+				
+				if (cost.getExileFromHandAmount() > typeList.size())
+					return false;
+			}
+			else if (cost.getExileFromHandThis() && !AllZoneUtil.isCardInPlayerHand(card.getController(), card))
+				return false;
+		}
+		
 		if (cost.getReturnCost()){
 			  // if there's a return in the cost, just because we can Pay it doesn't mean we want to. 
 			if (!cost.getReturnThis()){
@@ -666,6 +683,20 @@ public class ComputerUtil
   static public Card chooseExileType(String type, Card activate, Card target){
 	  //logic is the same as sacrifice...
       return chooseSacrificeType(type, activate, target);
+  }
+  
+  static public Card chooseExileFromHandType(String type, Card activate, Card target){
+	  PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
+      CardList typeList = new CardList(hand.getCards());
+      typeList = typeList.getValidCards(type.split(","),activate.getController() ,activate);
+	  if (target != null && target.getController().equals(AllZone.ComputerPlayer) && typeList.contains(target)) // don't sacrifice the card we're pumping
+		  typeList.remove(target);
+	  
+	  if (typeList.size() == 0)
+		  return null;
+	  
+      CardListUtil.sortAttackLowFirst(typeList);
+	  return typeList.get(0);
   }
   
   static public Card chooseTapType(String type, Card activate, boolean tap, int index){
