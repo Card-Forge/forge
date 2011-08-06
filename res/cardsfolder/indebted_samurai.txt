@@ -4,7 +4,8 @@ Types:Creature Human Samurai
 Text:no text
 PT:2/3
 K:Bushido 1
-K:WheneverKeyword:PermanentIntoGraveyard:Type/Samurai:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - OwnedByController:Whenever a Samurai you control is put into a graveyard from the battlefield, you may put a +1/+1 counter on Indebted Samurai.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Samurai.YouCtrl | TriggerZones$ Battlefield | Optional$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever a Samurai you control is put into a graveyard from the battlefield, you may put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/indebted_samurai.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/9.jpg
