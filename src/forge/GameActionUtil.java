@@ -15542,12 +15542,16 @@ public class GameActionUtil
 			for (int i=0;i<cl.size();i++)
 			{
 				final Card crd = cl.get(i);
+				String controller = cl.get(i).getController();
+				String opp = AllZone.GameAction.getOpponent(controller);
 				
 				CardList spells = new CardList();
-				spells.addAll(AllZone.Human_Graveyard.getCards());
-				spells.addAll(AllZone.Human_Hand.getCards());
-				spells.addAll(AllZone.Computer_Hand.getCards());
-				spells.addAll(AllZone.Computer_Graveyard.getCards());
+				PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, opp);
+				PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opp);
+								
+				spells.addAll(grave.getCards());
+				spells.addAll(hand.getCards());
+
 				spells = spells.filter(new CardListFilter(){
 					public boolean addCard(Card c) {
 						return !c.isLand() && CardUtil.getColors(c).contains(crd.getChosenColor());

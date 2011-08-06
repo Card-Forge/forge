@@ -315,7 +315,7 @@ public class Combat
 		  }
 	      	
           defendingFirstStrikeDamageMap.clear();
-      	  }
+        }
            
       }//setAssignedFirstStrikeDamage()
       
