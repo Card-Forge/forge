@@ -2,10 +2,8 @@ Name:Putrefaction
 ManaCost:4 B
 Types:Enchantment
 Text:no text
-T:Mode$ SpellCast | ValidCard$ Card.Green+YouCtrl,Card.White+YouCtrl | Execute$ TrigDiscardYou | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a green or white spell, that player discards a card.
-T:Mode$ SpellCast | ValidCard$ Card.Green+YouDontCtrl,Card.White+YouDontCtrl | Execute$ TrigDiscardOpp | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever a player casts a green or white spell, that player discards a card.
-SVar:TrigDiscardYou:AB$Discard | Cost$ 0 | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
-SVar:TrigDiscardOpp:AB$Discard | Cost$ 0 | Defined$ Opponent | NumCards$ 1 | Mode$ TgtChoose
+T:Mode$ SpellCast | ValidCard$ Card.Green,Card.White | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a green or white spell, that player discards a card.
+SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1 | Mode$ TgtChoose
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/putrefaction.jpg
