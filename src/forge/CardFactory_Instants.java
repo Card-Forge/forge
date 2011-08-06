@@ -1511,7 +1511,7 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void showMessage() {
-                    AllZone.Display.showMessage("Select target non-land permanent for " + spell.getSourceCard());
+                    AllZone.Display.showMessage("Select target nonland permanent for " + spell.getSourceCard());
                     ButtonUtil.enableOnlyCancel();
                 }
                 
@@ -2011,7 +2011,7 @@ public class CardFactory_Instants {
                 }
                 
                 public void computerResolve() {
-                    //TODO: somehow select a good non-creature card for AI
+                    //TODO: somehow select a good noncreature card for AI
                     CardList creature = new CardList(AllZone.Computer_Library.getCards());
                     creature = creature.getType("Creature");
                     if(creature.size() != 0) {

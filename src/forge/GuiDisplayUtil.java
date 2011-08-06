@@ -182,11 +182,11 @@ public class GuiDisplayUtil implements NewConstants {
         	//!artifact because of Memnarch turning planeswalkers into artifacts. 
         	if (c[i].isCreature() || (c[i].isPlaneswalker() && !c[i].isArtifact()))  
         		a.add(c[i]);
-        //(non-creature, non-enchantment,non-land) artifacts
+        //(noncreature, non-enchantment,nonland) artifacts
         for(int i = 0; i < c.length; i++)
         	if (c[i].isArtifact() && !c[i].isCreature() && !c[i].isLand() && !c[i].isGlobalEnchantment() )
         		a.add(c[i]);
-        //(non-creature) enchantments
+        //(noncreature) enchantments
         for(int i = 0; i < c.length; i++)
         	if (c[i].isGlobalEnchantment() && !c[i].isCreature())
         		a.add(c[i]);

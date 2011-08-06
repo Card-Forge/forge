@@ -76,7 +76,7 @@ public class QuestData_BoosterPack implements NewConstants {
             
             colorTest.add(getColor(c));
         }//for
-        System.out.println("creatures " + nCreature + " -  non-creatures " + nSpell);
+        System.out.println("creatures " + nCreature + " -  noncreatures " + nSpell);
     }//print()
     
     //testing

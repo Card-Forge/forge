@@ -82,7 +82,7 @@ public class ReadDraftBoosterPack implements NewConstants {
         for(int i = 0; i < 3; i++)
             pack.add(getRandomCard(uncommonList));
         
-        //11 commons, 7 creature 4 non-creature
+        //11 commons, 7 creature 4 noncreature
         CardList variety;
         for(int i = 0; i < 7; i++) {
             variety = getVariety(commonCreatureList);

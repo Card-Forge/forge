@@ -36,7 +36,7 @@ public class ReadBoosterPack implements NewConstants {
     }//main()
     
     /*
-    //average creature versus non-creature
+    //average creature versus noncreature
 
     ReadBoosterPack r = new ReadBoosterPack();
     double n = 0; //total
@@ -117,7 +117,7 @@ public class ReadBoosterPack implements NewConstants {
         for(int i = 0; i < 3; i++)
             pack.add(getRandomCard(uncommonList));
         
-        //11 commons, 7 creature 4 non-creature
+        //11 commons, 7 creature 4 noncreature
         CardList variety;
         for(int i = 0; i < 7; i++) {
             variety = getVariety(commonCreatureList);

@@ -1134,9 +1134,6 @@ public class CardFactory_Creatures {
                             card.getController().getOpponent(), "B", new String[] {
                                     "Creature", "Angel"}, 3, 3, new String[] {"Flying"});
                     
-
-                    //remove this card from the graveyard and from the game
-                    
                     //fixed - error if this card is copied like with Kiki, Jiki mirror breaker
                     //null pointer exception
                     
@@ -1915,7 +1912,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void showMessage() {
-                    AllZone.Display.showMessage("Discard from your hand a non-creature card");
+                    AllZone.Display.showMessage("Select a noncreature card to discard");
                     ButtonUtil.enableOnlyCancel();
                 }
                 
@@ -1957,7 +1954,7 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                 	StringBuilder sb = new StringBuilder();
-                	sb.append(card.getController()).append(" sacrifices Drekavac unless he discards a non-creature card");
+                	sb.append(card.getController()).append(" sacrifices Drekavac unless he discards a noncreature card");
                 	ability.setStackDescription(sb.toString());
                     
                     AllZone.Stack.add(ability);
@@ -2220,7 +2217,7 @@ public class CardFactory_Creatures {
                     AllZone.Stack.add(ability);
                 }
             };
-            ability.setStackDescription("Child of Alara - Destroy all non-land permanents, they can't be regenerated");
+            ability.setStackDescription("Child of Alara - Destroy all nonland permanents, they can't be regenerated");
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
         
@@ -9582,7 +9579,7 @@ public class CardFactory_Creatures {
                         if(card.getController().equals(AllZone.HumanPlayer)) {
                             AllZone.Display.getChoiceOptional("Revealing hand", list.toArray());
                             if(nonLandList.size() > 0) {
-                                Object o = AllZone.Display.getChoiceOptional("Select target non-land card",
+                                Object o = AllZone.Display.getChoiceOptional("Select nonland card",
                                         nonLandList.toArray());
                                 if(o != null) {
                                     Card c = (Card) o;

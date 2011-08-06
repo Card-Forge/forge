@@ -56,7 +56,7 @@ public class MenuItem_HowToPlay extends JMenuItem implements NewConstants.LANG.H
         s.append("    Plains make W\r\n");
         s.append("    Islands make U\r\n");
         s.append("    Mountains make R").append(newLine);
-        s.append("4.  Each non-land card has a name and a cost.  The cost looks like this \"2GG\" A cost like that would require two Forest lands and two other lands.  The number 2 can be paid for by any land.  A cost like \"R\", would require a Mountain land.")
+        s.append("4.  Each nonland card has a name and a cost.  The cost looks like this \"2GG\" A cost like that would require two Forest lands and two other lands.  The number 2 can be paid for by any land.  A cost like \"R\", would require a Mountain land.")
         		.append(newLine);
         s.append("5.  Creature cards stay in play and can attack on the turn AFTER they are played.  A creature's attack and defense is shown like 2/4 meaning that the creature has an attack power of 2 and a defense of 4.  If this creature receives 4 damage it is put into the graveyard.")
         		.append(newLine);
@@ -111,7 +111,7 @@ public class MenuItem_HowToPlay extends JMenuItem implements NewConstants.LANG.H
         s.append("Resizable Game Area & Stack AI Land").append(newLine);
         s.append("1.  The \"Resizable Game Area\" check box should be set to on if your monitor will display more than 1024 x 768 pixels.  The window containing the Battlefield and the informational displays will fill the entire screen.")
         		.append(newLine);
-        s.append("2.  The \"Stack AI Land\" option will make the computer a more difficult opponent to beat.  The computer will draw non-land cards from it's library after it has drawn enough lands to cover the cost of it's spells.  Set the check box to on for a stronger opponent and set the check box to off for a weaker opponent.")
+        s.append("2.  The \"Stack AI Land\" option will make the computer a more difficult opponent to beat.  The computer will draw nonland cards from it's library after it has drawn enough lands to cover the cost of it's spells.  Set the check box to on for a stronger opponent and set the check box to off for a weaker opponent.")
         		.append(newLine);
         s.append("At times, you may notice that when you click the \"Start Game\" button that the match fails to begin.  In this case you should turn the \"Stack AI Land\" option to off.\r\n\r\n\r\n");
         
