@@ -5476,8 +5476,9 @@ public class GameActionUtil {
 			final Card card = list.get(i);
 			ability = new Ability(card, "0") {
 				public void resolve() {
-					CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
-					CardList blueList = list.getColor(Constant.Color.Blue);
+					// CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
+					// CardList blueList = list.getColor(Constant.Color.Blue);
+					CardList blueList = AllZoneUtil.getPlayerColorInPlay(player, Constant.Color.Blue);
 					if (!blueList.isEmpty()) {
 						CardFactoryUtil.makeToken("Mirror-Sigil Sergeant","W 4 4 Mirror Sigil Sergeant", card.getController(), "5 W",
 								new String[]{"Creature","Rhino","Soldier"}, 4, 4, new String[]{"Trample",
