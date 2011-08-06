@@ -17736,6 +17736,48 @@ public class CardFactory_Creatures {
         	ability.setStackDescription(cardName + " - Untap Target Artifact");
         	ability.setBeforePayMana(CardFactoryUtil.input_targetType(ability, "Artifact"));
         }//*************** END ************ END ************************** 
+        
+        //*************** START *********** START **************************
+        if(cardName.equals("Aven Fateshaper")) {
+        	/*
+        	 * When Aven Fateshaper enters the battlefield, look at the top four
+        	 * cards of your library, then put them back in any order.
+        	 * 4U: Look at the top four cards of your library, then put them back
+        	 * in any order.
+        	 */
+        	final SpellAbility ability = new Ability(card, "4 U") {
+        		@Override
+        		public boolean canPlayAI() {
+        			return false;
+        		}
+        		@Override
+        		public void resolve() {
+        			if(card.getController().equals(Constant.Player.Human)) {
+        				AllZoneUtil.rearrangeTopOfLibrary(card.getController(), 4, false);
+        			}
+        		}   
+        	};
+        	final SpellAbility intoPlay = new Ability(card, "0") {
+        		@Override
+        		public void resolve() {
+        			if(card.getController().equals(Constant.Player.Human)) {
+        				AllZoneUtil.rearrangeTopOfLibrary(card.getController(), 4, false);
+        			}
+        		}   
+        	};
+        	Command comesIntoPlay = new Command() {
+				private static final long serialVersionUID = -3735668300887854295L;
+
+				public void execute() {
+        			AllZone.Stack.add(intoPlay);
+        		}
+        	};
+        	card.addSpellAbility(ability);
+        	intoPlay.setStackDescription(cardName + " - Rearrange the top 4 cards in your library in any order.");
+        	ability.setDescription("4U: Look at the top four cards of your library, then put them back in any order.");
+        	ability.setStackDescription(cardName + " - Rearrange the top 4 cards in your library in any order.");
+        	card.addComesIntoPlayCommand(comesIntoPlay);
+        }//*************** END ************ END **************************
 
         
         // Cards with Cycling abilities

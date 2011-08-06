@@ -1,3 +1,10 @@
+Aven Fateshaper
+6 U
+Creature Bird Wizard
+When Aven Fateshaper enters the battlefield, look at the top four cards of your library, then put them back in any order.
+4/5
+Flying
+
 Halimar Depths
 no cost
 Land
