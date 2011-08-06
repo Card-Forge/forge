@@ -38,6 +38,14 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+eldrazi_conscription.jpg		http://www.wizards.com/global/images/magic/general/eldrazi_conscription.jpg
+brood_birthing.jpg				http://www.wizards.com/global/images/magic/general/brood_birthing.jpg
+skittering_invasion.jpg			http://www.wizards.com/global/images/magic/general/skittering_invasion.jpg
+growth_spasm.jpg				http://www.wizards.com/global/images/magic/general/growth_spasm.jpg
+nest_invader.jpg				http://www.wizards.com/global/images/magic/general/nest_invader.jpg
+kozileks_predator.jpg			http://www.wizards.com/global/images/magic/general/kozileks_predator.jpg
+emrakuls_hatcher.jpg			http://www.wizards.com/global/images/magic/general/emrakuls_hatcher.jpg
+dread_drone.jpg					http://www.wizards.com/global/images/magic/general/dread_drone.jpg
 death_cultist.jpg				http://www.wizards.com/global/images/magic/general/death_cultist.jpg
 everflowing_chalice.jpg             http://www.wizards.com/global/images/magic/general/everflowing_chalice.jpg
 consume_the_meek.jpg			http://www.wizards.com/global/images/magic/general/consume_the_meek.jpg
