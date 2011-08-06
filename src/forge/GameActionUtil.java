@@ -7301,7 +7301,11 @@ public class GameActionUtil {
         final Player opponent = player.getOpponent();
         CardList kinship = AllZoneUtil.getPlayerCardsInPlay(player, "Ink Dissolver");
         
-        if (kinship.size() == 0)
+        PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+        // Players would not choose to trigger Kinship ability if library is empty.
+        // Useful for games when the "Milling = Loss Condition" check box is unchecked.
+
+        if (kinship.size() == 0 || library.size() <= 0)
             return;
         
         final String[] shareTypes = { "Merfolk", "Wizard" };
@@ -7369,7 +7373,11 @@ public class GameActionUtil {
         final Player player = AllZone.Phase.getPlayerTurn();
         CardList kinship = AllZoneUtil.getPlayerCardsInPlay(player, "Leaf-Crowned Elder");
         
-        if (kinship.size() == 0)
+        PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+        // Players would not choose to trigger Kinship ability if library is empty.
+        // Useful for games when the "Milling = Loss Condition" check box is unchecked.
+
+        if (kinship.size() == 0 || library.size() <= 0)
             return;
         
         final String[] shareTypes = { "Treefolk", "Shaman" };
@@ -7455,7 +7463,11 @@ public class GameActionUtil {
         CardList kinship = AllZoneUtil.getPlayerCardsInPlay(player, "Nightshade Schemers");
         final Player opponent = player.getOpponent();
         
-        if (kinship.size() == 0)
+        PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+        // Players would not choose to trigger Kinship ability if library is empty.
+        // Useful for games when the "Milling = Loss Condition" check box is unchecked.
+
+        if (kinship.size() == 0 || library.size() <= 0)
             return;
         
         final String[] shareTypes = { "Faerie", "Wizard" };
@@ -7521,7 +7533,11 @@ public class GameActionUtil {
         final Player player = AllZone.Phase.getPlayerTurn();
         CardList kinship = AllZoneUtil.getPlayerCardsInPlay(player, "Wandering Graybeard");
         
-        if (kinship.size() == 0)
+        PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+        // Players would not choose to trigger Kinship ability if library is empty.
+        // Useful for games when the "Milling = Loss Condition" check box is unchecked.
+
+        if (kinship.size() == 0 || library.size() <= 0)
             return;
         
         final String[] shareTypes = { "Giant", "Wizard" };
@@ -7587,7 +7603,11 @@ public class GameActionUtil {
         final Player player = AllZone.Phase.getPlayerTurn();
         CardList kinship = AllZoneUtil.getPlayerCardsInPlay(player, "Winnower Patrol");
         
-        if (kinship.size() == 0)
+        PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+        // Players would not choose to trigger Kinship ability if library is empty.
+        // Useful for games when the "Milling = Loss Condition" check box is unchecked.
+
+        if (kinship.size() == 0 || library.size() <= 0)
             return;
         
         final String[] shareTypes = { "Elf", "Warrior" };
@@ -7653,7 +7673,11 @@ public class GameActionUtil {
         final Player player = AllZone.Phase.getPlayerTurn();
         CardList kinship = AllZoneUtil.getPlayerCardsInPlay(player, "Wolf-Skull Shaman");
         
-        if (kinship.size() == 0)
+        PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+        // Players would not choose to trigger Kinship ability if library is empty.
+        // Useful for games when the "Milling = Loss Condition" check box is unchecked.
+
+        if (kinship.size() == 0 || library.size() <= 0)
             return;
         
         final String[] shareTypes = { "Elf", "Shaman" };
