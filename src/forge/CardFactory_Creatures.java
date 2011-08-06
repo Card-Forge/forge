@@ -13638,6 +13638,81 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Necratog")) {
+            final Command untilEOT = new Command() {
+				private static final long serialVersionUID = 6743592637334556854L;
+
+				public void execute() {
+                    if(AllZone.GameAction.isCardInPlay(card)) {
+                        card.addTempAttackBoost(-2);
+                        card.addTempDefenseBoost(-2);
+                    }
+                }
+            };
+            
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+                
+                @Override 
+                public boolean canPlay() {
+                	CardList grave = AllZoneUtil.getPlayerGraveyard(card.getController());
+                	grave = grave.filter(AllZoneUtil.creatures);
+                	return super.canPlay() && grave.size() > 0;
+                }
+                
+                @Override
+                public void resolve() {
+                    if(AllZone.GameAction.isCardInPlay(card)) {
+                        card.addTempAttackBoost(2);
+                        card.addTempDefenseBoost(2);
+                        AllZone.EndOfTurn.addUntil(untilEOT);
+                    }
+                }
+            };
+            
+            Input runtime = new Input() {
+				private static final long serialVersionUID = 63327418012595048L;
+				Card topCreature = null;
+            	public void showMessage() {
+            		
+            		PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+            		for(int i = grave.size()-1; i >=0; i--) {
+            			Card c = grave.get(i);
+            			if(c.isCreature()) {
+            				topCreature = c;
+            				break;
+            			}
+            		}
+            		AllZone.Display.showMessage(card.getName()+" - Select OK to exile "+topCreature+".");
+            		ButtonUtil.enableAll();
+            	}
+            	
+            	public void selectButtonOK() {
+            		AllZone.GameAction.exile(topCreature);
+            		AllZone.Stack.add(ability);
+            		stop();
+            	}
+            	
+            	public void selectButtonCancel() {
+            		stop();
+            	}
+            };
+            
+            
+            ability.setDescription("Exile the top creature card of your graveyard: CARDNAME gets +2/+2 until end of turn.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" gets +2/+2 until end of turn.");
+            ability.setStackDescription(sb.toString());
+            ability.setBeforePayMana(runtime);
+            card.addSpellAbility(ability);
+        }//*************** END ************ END **************************
+        
+        
         //*************** START *********** START ************************** 
         else if(cardName.equals("Phyrexian Scuta")) {
         	Ability_Cost abCost = new Ability_Cost("3 B PayLife<3>", cardName, false);

@@ -1,0 +1,9 @@
+Name:Necratog
+ManaCost:1 B B
+Types:Creature Atog
+Text:no text
+PT:1/2
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/necratog.jpg
+End
