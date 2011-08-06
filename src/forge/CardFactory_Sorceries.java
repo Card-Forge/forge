@@ -8403,6 +8403,63 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Fabricate")) {
+            SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = 5274602734116058876L;
+
+                @Override
+                public boolean canPlayAI() {
+                    return 4 < AllZone.Phase.getTurn();
+                }
+                
+                @Override
+                public void resolve() {
+                    String player = card.getController();
+                    if(player.equals(Constant.Player.Human)) humanResolve();
+                    else computerResolve();
+                    
+                }
+                
+                public void computerResolve() {
+                    CardList list = AllZoneUtil.getPlayerCardsInLibrary(Constant.Player.Computer);
+                    list = list.filter(AllZoneUtil.artifacts);
+                                        
+                    if(list.size() != 0) {
+                        //comp will just grab the first one it finds
+                        Card c = list.get(0);
+                        AllZone.GameAction.shuffle(card.getController());
+                        //move to hand
+                        AllZone.Computer_Library.remove(c);
+                        AllZone.Computer_Hand.add(c);
+                        
+                        CardList l = new CardList();
+                        l.add(c);
+                        AllZone.Display.getChoiceOptional("Computer picked:", l.toArray());
+                    }
+                }//computerResolve()
+                
+                public void humanResolve() {
+                    CardList list = AllZoneUtil.getPlayerCardsInLibrary(Constant.Player.Human);
+                    list = list.filter(AllZoneUtil.artifacts);
+                    
+                    if(list.size() != 0) {
+                        Object o = AllZone.Display.getChoiceOptional("Select an artifact", list.toArray());
+                        
+                        AllZone.GameAction.shuffle(card.getController());
+                        if(o != null) {
+                            //put card in hand
+                            AllZone.Human_Library.remove(o);
+                            AllZone.Human_Hand.add((Card) o);
+                        }
+                    }//if
+                }//resolve()
+            };
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
+        
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
             int n = hasKeyword(card, "Cycling");
