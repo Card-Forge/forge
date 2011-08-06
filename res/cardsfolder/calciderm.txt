@@ -1,7 +1,8 @@
 Name:Calciderm
 ManaCost:2 W W
 Types:Creature Beast
-Text:Vanishing 4
+Text:no text
+K:Vanishing:4
 PT:5/5
 K:Shroud
 SVar:Rarity:Uncommon

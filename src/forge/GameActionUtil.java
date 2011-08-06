@@ -119,8 +119,6 @@ public class GameActionUtil {
 		upkeep_Mycoloth();
 		upkeep_Spore_Counters();
 		upkeep_Vanishing();
-		upkeep_Aven_Riftwatcher();
-		upkeep_Calciderm();
 		upkeep_Blastoderm();
 		upkeep_Masticore();
 		upkeep_Eldrazi_Monument();
@@ -7542,40 +7540,6 @@ public class GameActionUtil {
 						+ " - Vanishing - remove a time counter from it. When the last is removed, sacrifice it.)");
 				AllZone.Stack.add(ability);
 
-			}
-		}
-	}
-
-
-	private static void upkeep_Aven_Riftwatcher() {
-		// get all Aven Riftwatcher in play under the control of this player
-		final String player = AllZone.Phase.getActivePlayer();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Aven Riftwatcher");
-		if(list.size() > 0) {
-			for(int i = 0; i < list.size(); i++) {
-				Card card = list.get(i);
-				card.setCounter(Counters.TIME, card.getCounters(Counters.TIME) - 1);
-				if(card.getCounters(Counters.TIME) <= 0) {
-					AllZone.GameAction.sacrifice(card);
-				}
-			}
-		}
-	}
-
-	private static void upkeep_Calciderm() {
-		final String player = AllZone.Phase.getActivePlayer();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Calciderm");
-		if(list.size() > 0) {
-			for(int i = 0; i < list.size(); i++) {
-				Card card = list.get(i);
-				card.setCounter(Counters.TIME, card.getCounters(Counters.TIME) - 1);
-				if(card.getCounters(Counters.TIME) <= 0) {
-					AllZone.GameAction.sacrifice(card);
-				}
 			}
 		}
 	}

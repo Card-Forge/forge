@@ -10270,21 +10270,6 @@ public class CardFactory implements NewConstants {
             }
         }//Soulshift
         
-        if(hasKeyword(card, "Vanishing") != -1) {
-            int n = hasKeyword(card, "Vanishing");
-            if(n != -1) {
-                String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-                
-                String k[] = parse.split(":");
-                final int power = Integer.parseInt(k[1]);
-                
-
-                card.addComesIntoPlayCommand(CardFactoryUtil.vanishing(card, power));
-                card.addSpellAbility(CardFactoryUtil.vanish_desc(card, power));
-            }
-        }//Vanishing
-        
         if(hasKeyword(card, "Echo") != -1) {
             int n = hasKeyword(card, "Echo");
             if(n != -1) {
@@ -10434,6 +10419,20 @@ public class CardFactory implements NewConstants {
     
     public Card postFactoryKeywords(Card card){
     	// this function should handle any keywords that need to be added after a spell goes through the factory
+        if(hasKeyword(card, "Vanishing") != -1) {
+            int n = hasKeyword(card, "Vanishing");
+            if(n != -1) {
+                String parse = card.getKeyword().get(n).toString();
+                card.removeIntrinsicKeyword(parse);
+                
+                String k[] = parse.split(":");
+                final int power = Integer.parseInt(k[1]);
+                
+
+                card.addComesIntoPlayCommand(CardFactoryUtil.vanishing(card, power));
+                card.addSpellAbility(CardFactoryUtil.vanish_desc(card, power));
+            }
+        }//Vanishing
     	
         // Spell has Additional Cost. Reuse Ability_Cost
         if (hasKeyword(card, "ACost") != -1){

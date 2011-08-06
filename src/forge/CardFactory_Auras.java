@@ -17,14 +17,6 @@ class CardFactory_Auras {
         return -1;
     }
     
-    public static int shouldVanish(Card c) {
-        ArrayList<String> a = c.getKeyword();
-        for(int i = 0; i < a.size(); i++)
-            if(a.get(i).toString().startsWith("Vanishing")) return i;
-        
-        return -1;
-    }
-    
     public static int shouldEnchant(Card c) {
         ArrayList<String> a = c.getKeyword();
         for (int i = 0; i < a.size(); i++)
@@ -6656,20 +6648,6 @@ class CardFactory_Auras {
                 spell.setBeforePayMana(runtime);
             }// SpellAbility spell
         }// enControlCreature
-        
-        if(shouldVanish(card) != -1) {
-            int n = shouldVanish(card);
-            if(n != -1) {
-                String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-                
-                String k[] = parse.split(":");
-                final int power = Integer.parseInt(k[1]);
-                
-                card.addComesIntoPlayCommand(CardFactoryUtil.vanishing(card, power));
-                card.addSpellAbility(CardFactoryUtil.vanish_desc(card, power));
-            }
-        }//Vanishing
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

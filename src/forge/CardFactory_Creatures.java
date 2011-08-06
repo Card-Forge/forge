@@ -53,15 +53,7 @@ public class CardFactory_Creatures {
         return -1;
     }
     
-    public static int shouldVanish(Card c) {
-        ArrayList<String> a = c.getKeyword();
-        for(int i = 0; i < a.size(); i++)
-            if(a.get(i).toString().startsWith("Vanishing")) return i;
-        
-        return -1;
-    }
-    
-    
+
     public static Card getCard(final Card card, String cardName, String owner, CardFactory cf) {
         
         //*************** START *********** START **************************
@@ -14797,41 +14789,14 @@ public class CardFactory_Creatures {
             Command gain2Life = new Command() {
                 private static final long serialVersionUID = 5588978023269625349L;
                 
-                public boolean            firstTime        = true;
-                
                 public void execute() {
                     PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
                     life.addLife(2);
-                    
-                    //testAndSet - only needed when comes into play.
-                    if(firstTime) {
-                        card.addCounter(Counters.TIME, 3); //vanishing
-                    }
-                    firstTime = false;
                 }
             };
             
             card.addLeavesPlayCommand(gain2Life);
             card.addComesIntoPlayCommand(gain2Life);
-            
-        }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Calciderm")) {
-            Command ageCounters = new Command() {
-                private static final long serialVersionUID = 431920157968451817L;
-                public boolean            firstTime        = true;
-                
-                public void execute() {
-                    
-                    //testAndSet - only needed when comes into play.
-                    if(firstTime) {
-                        card.addCounter(Counters.TIME, 4);
-                    }
-                    firstTime = false;
-                }
-            };
-            card.addComesIntoPlayCommand(ageCounters);
             
         }//*************** END ************ END **************************
         
@@ -21519,20 +21484,6 @@ public class CardFactory_Creatures {
                 card.addDestroyCommand(CardFactoryUtil.ability_Soulshift(card, manacost));
             }
         }//Soulshift
-        
-        if(shouldVanish(card) != -1) {
-            int n = shouldVanish(card);
-            if(n != -1) {
-                String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-                
-                String k[] = parse.split(":");
-                final int power = Integer.parseInt(k[1]);
-                
-                card.addComesIntoPlayCommand(CardFactoryUtil.vanishing(card, power));
-                card.addSpellAbility(CardFactoryUtil.vanish_desc(card, power));
-            }
-        }//Vanishing
         
         if(hasKeyword(card, "Echo") != -1) {
             int n = hasKeyword(card, "Echo");
