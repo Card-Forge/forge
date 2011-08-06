@@ -1,0 +1,11 @@
+Name:Stupefying Touch
+ManaCost:1 U
+Types:Enchantment Aura
+Text:Enchanted creature's activated abilities can't be activated.
+K:Enchant Creature
+K:When CARDNAME enters the battlefield, draw a card.
+K:enPumpCurse:HIDDEN CARDNAME's activated abilities can't be activated.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stupefying_touch.jpg
+End
