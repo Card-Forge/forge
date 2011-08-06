@@ -7,7 +7,7 @@ public class Computer_Draw extends Input {
     
     @Override
     public void showMessage() {
-        AllZone.GameAction.drawCard(AllZone.ComputerPlayer);
+        AllZone.ComputerPlayer.drawCard();
         
         //AllZone.Phase.nextPhase();
         //for debugging: System.out.println("need to nextPhase(Computer_Draw.showMessage) = true");

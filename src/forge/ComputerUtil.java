@@ -68,7 +68,7 @@ public class ComputerUtil
 		  sa.setActivatingPlayer(AllZone.ComputerPlayer);
 	  
 		  if (sa.getSourceCard().getKeyword().contains("Draw a card."))
-		      	AllZone.GameAction.drawCard(sa.getSourceCard().getController());
+			  sa.getSourceCard().getController().drawCard();
 		  payManaCost(sa);
 		  
 		  AllZone.Stack.add(sa);
@@ -84,7 +84,7 @@ public class ComputerUtil
 	  
 	  
 	  if (sa.getSourceCard().getKeyword().contains("Draw a card."))
-		      	AllZone.GameAction.drawCard(sa.getSourceCard().getController());
+		  sa.getSourceCard().getController().drawCard();
 		  
 	  AllZone.Stack.add(sa);
   }
@@ -111,7 +111,7 @@ public class ComputerUtil
       sa.resolve();
 
       if (sa.getSourceCard().getKeyword().contains("Draw a card."))
-        	AllZone.GameAction.drawCard(sa.getSourceCard().getController());
+    	  sa.getSourceCard().getController().drawCard();
 
       for (int i=0; i<sa.getSourceCard().getKeyword().size(); i++)
       {

@@ -2310,7 +2310,7 @@ public class CombatUtil {
         
         if (a.getName().equals("Slith Strider") && !a.getCreatureGotBlockedThisCombat()) {
             Player player = a.getController();
-            AllZone.GameAction.drawCard(player);
+            player.drawCard();
         } else if(a.getName().equals("Corrupt Official") && !a.getCreatureGotBlockedThisCombat()) {
             Player opp = b.getController();
             AllZone.GameAction.discardRandom(opp, a.getSpellAbility()[0]);
@@ -2324,7 +2324,7 @@ public class CombatUtil {
                 AllZone.GameAction.discardRandom(opp, a.getSpellAbility()[0]);
             }
             for (int ctr = 0; ctr < handSize; ctr ++) {   // then draws that many cards
-                AllZone.GameAction.drawCard(opp);;
+                opp.drawCard();;
             }
         } else if(a.getName().equals("Sylvan Basilisk")) {
             AllZone.GameAction.destroy(b);
@@ -2369,7 +2369,7 @@ public class CombatUtil {
             if ((choice == JOptionPane.YES_OPTION && player.equals (AllZone.HumanPlayer)) 
                     || (player.equals (AllZone.ComputerPlayer) && (compLibSize >= (2 * numCards)  && compHandSize <= (7 - numCards)))) {
                 for (int i = 0; i < numCards; i++) {
-                    AllZone.GameAction.drawCard(player);
+                    player.drawCard();
                 }
             }
         }// if Saprazzan Heir or Drelnoch or Chambered Nautilus was blocked
