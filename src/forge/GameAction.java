@@ -620,17 +620,6 @@ public class GameAction {
         }
     }//destroyLegendaryCreatures()
     
-    //ArrayList search is all Card objects, returns ArrayList of Cards
-    public ArrayList<Card> getCardsNamed(ArrayList<Card> search, String name) {
-        ArrayList<Card> a = new ArrayList<Card>();
-        Card c[] = CardUtil.toCard(search);
-        
-        for(int i = 0; i < c.length; i++) {
-            if(c[i].getName().equals(name)) a.add(c[i]);
-        }
-        return a;
-    }
-    
     public void sacrifice(Card c) {
     	if(c.getName().equals("Mana Pool")) {
     		System.out.println("Trying to sacrifice mana pool...");
