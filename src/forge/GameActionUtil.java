@@ -3308,7 +3308,7 @@ public class GameActionUtil {
 
 			final Command paidCommand = Command.Blank;
 			
-			final Ability aiPaid = upkeepAIPayment(c, c.getEchoCost());
+			final Ability aiPaid = upkeepAIPayment(c, c.getUpkeepCost());
 			
 			final StringBuilder sb = new StringBuilder();
 			sb.append("Upkeep for ").append(c).append("\n");
