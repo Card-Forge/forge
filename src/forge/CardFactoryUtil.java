@@ -3676,7 +3676,7 @@ public class CardFactoryUtil {
         if(sq[0].contains("Type")) {
             someCards = someCards.filter(new CardListFilter() {
                 public boolean addCard(Card c) {
-                    if(c.getType().contains(sq[1]) || c.getKeyword().contains("Changeling")) return true;
+                    if(c.isType(sq[1])) return true;
                     
                     return false;
                 }
