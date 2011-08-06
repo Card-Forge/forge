@@ -1566,6 +1566,12 @@ public class CardFactoryUtil {
                 list = list.getType("Creature");
                 
                 if (list.isEmpty()) return false;
+                
+                 // If extrinsicKeywords contains "This creature can't attack" or "This creature can't attack or block"
+                //     then remove creatures with Defender from the list
+                
+                // If extrinsicKeywords contains "This card doesn't untap during your untap step."
+                //     then remove creatures with Vigilence from the list
                                 
                 //else (if aura is keyword only)
                 

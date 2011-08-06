@@ -606,11 +606,7 @@ class CardFactory_Auras {
         // *****************************************************************
         // Enchant creatures:   ********************************************
         // *****************************************************************
-    	
-    	// **********************************************************************************
-    	// These are the Curses, some may be candidates for conversion to keyword enPumpCurse
-    	// **********************************************************************************
-    	
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Earthbind")) {
             final SpellAbility spell = new Spell(card) {
@@ -796,95 +792,6 @@ class CardFactory_Auras {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Weakness")) {
-            final SpellAbility spell = new Spell(card) {
-                
-                private static final long serialVersionUID = 3959966663907905001L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Human_Play.getCards());
-                    list = list.getType("Creature");
-                    
-                    if(list.isEmpty()) return false;
-                    
-                    //else
-                    CardListUtil.sortAttack(list);
-                    CardListUtil.sortFlying(list);
-                    
-                    for(int i = 0; i < list.size(); i++) {
-                        if(CardFactoryUtil.canTarget(card, list.get(i))) {
-                            setTargetCard(list.get(i));
-                            return true;
-                        }
-                    }
-                    return false;
-                }//canPlayAI()
-                
-                @Override
-                public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    play.add(card);
-                    
-                    Card c = getTargetCard();
-                    
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                        card.enchantCard(c);
-                        //System.out.println("Enchanted: " +getTargetCard());
-                    }
-                }//resolve()
-            };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            Command onEnchant = new Command() {
-                
-                private static final long serialVersionUID = -2365466450520529652L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        crd.addSemiPermanentAttackBoost(-2);
-                        crd.addSemiPermanentDefenseBoost(-1);
-                    }
-                }//execute()
-            };//Command
-            
-
-            Command onUnEnchant = new Command() {
-                
-                private static final long serialVersionUID = 8144460293841806556L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        crd.addSemiPermanentAttackBoost(2);
-                        crd.addSemiPermanentDefenseBoost(1);
-                    }
-                    
-                }//execute()
-            };//Command
-            
-            Command onLeavesPlay = new Command() {
-                
-                private static final long serialVersionUID = -8235558710156197207L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        card.unEnchantCard(crd);
-                    }
-                }
-            };
-            
-            card.addEnchantCommand(onEnchant);
-            card.addUnEnchantCommand(onUnEnchant);
-            card.addLeavesPlayCommand(onLeavesPlay);
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-        }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Guilty Conscience")) {
             final SpellAbility spell = new Spell(card) {
                 
@@ -939,540 +846,6 @@ class CardFactory_Auras {
 
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Cessation")) {
-            final SpellAbility spell = new Spell(card) {
-                
-                private static final long serialVersionUID = 3681531440398159146L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Human_Play.getCards());
-                    list = list.getType("Creature");
-                    
-                    if(list.isEmpty()) return false;
-                    
-                    //else
-                    CardListUtil.sortAttack(list);
-                    CardListUtil.sortFlying(list);
-                    
-                    for(int i = 0; i < list.size(); i++) {
-                        if(CardFactoryUtil.canTarget(card, list.get(i))
-                                && !list.get(i).getKeyword().contains("Defender")) {
-                            setTargetCard(list.get(i));
-                            return true;
-                        }
-                    }
-                    return false;
-                }//canPlayAI()
-                
-                @Override
-                public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    play.add(card);
-                    
-                    Card c = getTargetCard();
-                    
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                        card.enchantCard(c);
-                        //System.out.println("Enchanted: " +getTargetCard());
-                    }
-                }//resolve()
-            };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            Command onEnchant = new Command() {
-                
-                private static final long serialVersionUID = -5544484800605477434L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        crd.addExtrinsicKeyword("This creature can't attack");
-                    }
-                }//execute()
-            };//Command
-            
-
-            Command onUnEnchant = new Command() {
-                private static final long serialVersionUID = 3621591534173743090L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        crd.removeExtrinsicKeyword("This creature can't attack");
-                    }
-                    
-                }//execute()
-            };//Command
-            
-            Command onLeavesPlay = new Command() {
-                
-                private static final long serialVersionUID = -6043933114268403555L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        card.unEnchantCard(crd);
-                    }
-                }
-            };
-            
-            card.addEnchantCommand(onEnchant);
-            card.addUnEnchantCommand(onUnEnchant);
-            card.addLeavesPlayCommand(onLeavesPlay);
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-        }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Pacifism") || cardName.equals("Bound in Silence")) {
-            final SpellAbility spell = new Spell(card) {
-                
-                private static final long serialVersionUID = -1357026258424339999L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Human_Play.getCards());
-                    list = list.getType("Creature");
-                    
-                    if(list.isEmpty()) return false;
-                    
-                    //else
-                    CardListUtil.sortAttack(list);
-                    CardListUtil.sortFlying(list);
-                    
-                    for(int i = 0; i < list.size(); i++) {
-                        if(CardFactoryUtil.canTarget(card, list.get(i))
-                                && !list.get(i).getKeyword().contains("Defender")) {
-                            setTargetCard(list.get(i));
-                            return true;
-                        }
-                    }
-                    return false;
-                }//canPlayAI()
-                
-                @Override
-                public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    play.add(card);
-                    
-                    Card c = getTargetCard();
-                    
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                        card.enchantCard(c);
-                        //System.out.println("Enchanted: " +getTargetCard());
-                    }
-                }//resolve()
-            };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            Command onEnchant = new Command() {
-                
-                private static final long serialVersionUID = -897162953903978929L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        crd.addExtrinsicKeyword("This creature can't attack or block");
-                    }
-                }//execute()
-            };//Command
-            
-
-            Command onUnEnchant = new Command() {
-                private static final long serialVersionUID = 3461412526408858199L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        crd.removeExtrinsicKeyword("This creature can't attack or block");
-                    }
-                    
-                }//execute()
-            };//Command
-            
-            Command onLeavesPlay = new Command() {
-                
-                private static final long serialVersionUID = -4922257746317147308L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        card.unEnchantCard(crd);
-                    }
-                }
-            };
-            
-            card.addEnchantCommand(onEnchant);
-            card.addUnEnchantCommand(onUnEnchant);
-            card.addLeavesPlayCommand(onLeavesPlay);
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-        }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Sluggishness")) {
-            final SpellAbility spell = new Spell(card) {
-                
-                private static final long serialVersionUID = 5184457180419402397L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Human_Play.getCards());
-                    list = list.getType("Creature");
-                    
-                    if(list.isEmpty()) return false;
-                    
-                    //else
-                    CardListUtil.sortAttack(list);
-                    CardListUtil.sortFlying(list);
-                    
-                    for(int i = 0; i < list.size(); i++) {
-                        if(CardFactoryUtil.canTarget(card, list.get(i))) {
-                            setTargetCard(list.get(i));
-                            return true;
-                        }
-                    }
-                    return false;
-                }//canPlayAI()
-                
-                @Override
-                public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    play.add(card);
-                    
-                    Card c = getTargetCard();
-                    
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                        card.enchantCard(c);
-                        System.out.println("Enchanted: " + getTargetCard());
-                    }
-                }//resolve()
-            };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            Command onEnchant = new Command() {
-                
-                private static final long serialVersionUID = -6043933114268403555L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        crd.addExtrinsicKeyword("This creature cannot block");
-                    }
-                }//execute()
-            };//Command
-            
-
-            Command onUnEnchant = new Command() {
-                
-                private static final long serialVersionUID = -1854544543762078840L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        crd.removeExtrinsicKeyword("This creature cannot block");
-                        
-                    }
-                    
-                }//execute()
-            };//Command
-            
-            Command onLeavesPlay = new Command() {
-                
-                private static final long serialVersionUID = -897162953903978929L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        card.unEnchantCard(crd);
-                    }
-                }
-            };
-            
-            card.addEnchantCommand(onEnchant);
-            card.addUnEnchantCommand(onUnEnchant);
-            card.addLeavesPlayCommand(onLeavesPlay);
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-        }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
-        if(cardName.equals("Despondency")) {
-            final SpellAbility spell = new Spell(card) {
-                
-                private static final long serialVersionUID = 1125616183900458458L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Human_Play.getCards());
-                    list = list.getType("Creature");
-                    
-                    if(list.isEmpty()) return false;
-                    
-                    //else
-                    CardListUtil.sortAttack(list);
-                    CardListUtil.sortFlying(list);
-                    
-                    for(int i = 0; i < list.size(); i++) {
-                        if(CardFactoryUtil.canTarget(card, list.get(i))) {
-                            setTargetCard(list.get(i));
-                            return true;
-                        }
-                    }
-                    return false;
-                }//canPlayAI()
-                
-                @Override
-                public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    play.add(card);
-                    
-                    Card c = getTargetCard();
-                    
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                        card.enchantCard(c);
-                        //System.out.println("Enchanted: " +getTargetCard());
-                    }
-                }//resolve()
-            };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            Command onEnchant = new Command() {
-                private static final long serialVersionUID = -8589566780713349434L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        crd.addSemiPermanentAttackBoost(-2);
-                        
-                    }
-                }//execute()
-            };//Command
-            
-
-            Command onUnEnchant = new Command() {
-                
-                private static final long serialVersionUID = -5769889616562358735L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        crd.addSemiPermanentAttackBoost(2);
-                        
-                    }
-                    
-                }//execute()
-            };//Command
-            
-            Command onLeavesPlay = new Command() {
-                
-                private static final long serialVersionUID = 9095725091375284510L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        card.unEnchantCard(crd);
-                    }
-                }
-            };
-            
-            card.addEnchantCommand(onEnchant);
-            card.addUnEnchantCommand(onUnEnchant);
-            card.addLeavesPlayCommand(onLeavesPlay);
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-        }//*************** END ************ END **************************
-
-        //*************** START *********** START **************************
-        if(cardName.equals("Eternity Snare")) {
-            final SpellAbility spell = new Spell(card) {
-                
-                private static final long serialVersionUID = -1241918879720338838L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Human_Play.getCards());
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isCreature() && !c.getKeyword().contains("Vigilance");
-                        }
-                    });
-                    
-                    if(list.isEmpty()) return false;
-                    
-                    //else
-                    CardListUtil.sortAttack(list);
-                    CardListUtil.sortFlying(list);
-                    
-                    for(int i = 0; i < list.size(); i++) {
-                        if(CardFactoryUtil.canTarget(card, list.get(i))) {
-                            setTargetCard(list.get(i));
-                            return true;
-                        }
-                    }
-                    return false;
-                }//canPlayAI()
-                
-                @Override
-                public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    play.add(card);
-                    
-                    Card c = getTargetCard();
-                    
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                        card.enchantCard(c);
-                        System.out.println("Enchanted: " + getTargetCard());
-                    }
-                }//resolve()
-            };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            Command onEnchant = new Command() {
-                
-                private static final long serialVersionUID = -5795220371369091411L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        crd.addExtrinsicKeyword("This card doesn't untap during your untap step.");
-                    }
-                }//execute()
-            };//Command
-            
-
-            Command onUnEnchant = new Command() {
-                private static final long serialVersionUID = -3856817134400315080L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        crd.removeExtrinsicKeyword("This card doesn't untap during your untap step.");
-                    }
-                    
-                }//execute()
-            };//Command
-            
-            Command onLeavesPlay = new Command() {
-                
-                private static final long serialVersionUID = 8243327573672256317L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        card.unEnchantCard(crd);
-                    }
-                }
-            };
-            
-            card.addEnchantCommand(onEnchant);
-            card.addUnEnchantCommand(onUnEnchant);
-            card.addLeavesPlayCommand(onLeavesPlay);
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-        }//*************** END ************ END **************************
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Paralyzing Grasp")) {
-            final SpellAbility spell = new Spell(card) {
-                
-                private static final long serialVersionUID = -2685360795445503449L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Human_Play.getCards());
-                    list = list.getType("Creature");
-                    
-                    if(list.isEmpty()) return false;
-                    
-                    //else
-                    CardListUtil.sortAttack(list);
-                    CardListUtil.sortFlying(list);
-                    
-                    for(int i = 0; i < list.size(); i++) {
-                        if(CardFactoryUtil.canTarget(card, list.get(i))) {
-                            setTargetCard(list.get(i));
-                            return true;
-                        }
-                    }
-                    return false;
-                }//canPlayAI()
-                
-                @Override
-                public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    play.add(card);
-                    
-                    Card c = getTargetCard();
-                    
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                        card.enchantCard(c);
-                        System.out.println("Enchanted: " + getTargetCard());
-                    }
-                }//resolve()
-            };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            Command onEnchant = new Command() {
-                
-                private static final long serialVersionUID = -380913483412563006L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        crd.addExtrinsicKeyword("This card doesn't untap during your untap step.");
-                    }
-                }//execute()
-            };//Command
-            
-
-            Command onUnEnchant = new Command() {
-                
-                private static final long serialVersionUID = 4534224467226579803L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        
-                        crd.removeExtrinsicKeyword("This card doesn't untap during your untap step.");
-                    }
-                    
-                }//execute()
-            };//Command
-            
-            Command onLeavesPlay = new Command() {
-                
-                private static final long serialVersionUID = -2513967225177113996L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        card.unEnchantCard(crd);
-                    }
-                }
-            };
-            
-            card.addEnchantCommand(onEnchant);
-            card.addUnEnchantCommand(onUnEnchant);
-            card.addLeavesPlayCommand(onLeavesPlay);
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-        }//*************** END ************ END **************************
-        
-
-        
-    	// ****************************************************************************
-    	// These are the Pumps, some may be candidates for conversion to keyword enPump
-    	// ****************************************************************************
         
         //*************** START *********** START **************************
         else if(cardName.equals("Control Magic")) {
@@ -1694,6 +1067,641 @@ class CardFactory_Auras {
         }//*************** END ************ END **************************
         
         
+        
+    	// ************************************************************************
+    	// The card objects below have been converted to keyword and can be deleted
+    	// ************************************************************************
+/*
+        //*************** START *********** START **************************
+        else if(cardName.equals("Weakness")) {
+            final SpellAbility spell = new Spell(card) {
+                
+                private static final long serialVersionUID = 3959966663907905001L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList list = new CardList(AllZone.Human_Play.getCards());
+                    list = list.getType("Creature");
+                    
+                    if(list.isEmpty()) return false;
+                    
+                    //else
+                    CardListUtil.sortAttack(list);
+                    CardListUtil.sortFlying(list);
+                    
+                    for(int i = 0; i < list.size(); i++) {
+                        if(CardFactoryUtil.canTarget(card, list.get(i))) {
+                            setTargetCard(list.get(i));
+                            return true;
+                        }
+                    }
+                    return false;
+                }//canPlayAI()
+                
+                @Override
+                public void resolve() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    play.add(card);
+                    
+                    Card c = getTargetCard();
+                    
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                        card.enchantCard(c);
+                        //System.out.println("Enchanted: " +getTargetCard());
+                    }
+                }//resolve()
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            
+            Command onEnchant = new Command() {
+                
+                private static final long serialVersionUID = -2365466450520529652L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        crd.addSemiPermanentAttackBoost(-2);
+                        crd.addSemiPermanentDefenseBoost(-1);
+                    }
+                }//execute()
+            };//Command
+            
+
+            Command onUnEnchant = new Command() {
+                
+                private static final long serialVersionUID = 8144460293841806556L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        crd.addSemiPermanentAttackBoost(2);
+                        crd.addSemiPermanentDefenseBoost(1);
+                    }
+                    
+                }//execute()
+            };//Command
+            
+            Command onLeavesPlay = new Command() {
+                
+                private static final long serialVersionUID = -8235558710156197207L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        card.unEnchantCard(crd);
+                    }
+                }
+            };
+            
+            card.addEnchantCommand(onEnchant);
+            card.addUnEnchantCommand(onUnEnchant);
+            card.addLeavesPlayCommand(onLeavesPlay);
+            
+            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+        }//*************** END ************ END **************************
+*/
+
+/*
+        //*************** START *********** START **************************
+        else if(cardName.equals("Cessation")) {
+            final SpellAbility spell = new Spell(card) {
+                
+                private static final long serialVersionUID = 3681531440398159146L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList list = new CardList(AllZone.Human_Play.getCards());
+                    list = list.getType("Creature");
+                    
+                    if(list.isEmpty()) return false;
+                    
+                    //else
+                    CardListUtil.sortAttack(list);
+                    CardListUtil.sortFlying(list);
+                    
+                    for(int i = 0; i < list.size(); i++) {
+                        if(CardFactoryUtil.canTarget(card, list.get(i))
+                                && !list.get(i).getKeyword().contains("Defender")) {
+                            setTargetCard(list.get(i));
+                            return true;
+                        }
+                    }
+                    return false;
+                }//canPlayAI()
+                
+                @Override
+                public void resolve() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    play.add(card);
+                    
+                    Card c = getTargetCard();
+                    
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                        card.enchantCard(c);
+                        //System.out.println("Enchanted: " +getTargetCard());
+                    }
+                }//resolve()
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            
+            Command onEnchant = new Command() {
+                
+                private static final long serialVersionUID = -5544484800605477434L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        crd.addExtrinsicKeyword("This creature can't attack");
+                    }
+                }//execute()
+            };//Command
+            
+
+            Command onUnEnchant = new Command() {
+                private static final long serialVersionUID = 3621591534173743090L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        crd.removeExtrinsicKeyword("This creature can't attack");
+                    }
+                    
+                }//execute()
+            };//Command
+            
+            Command onLeavesPlay = new Command() {
+                
+                private static final long serialVersionUID = -6043933114268403555L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        card.unEnchantCard(crd);
+                    }
+                }
+            };
+            
+            card.addEnchantCommand(onEnchant);
+            card.addUnEnchantCommand(onUnEnchant);
+            card.addLeavesPlayCommand(onLeavesPlay);
+            
+            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+        }//*************** END ************ END **************************
+*/
+        
+/*
+        //*************** START *********** START **************************
+        else if(cardName.equals("Pacifism") || cardName.equals("Bound in Silence")) {
+            final SpellAbility spell = new Spell(card) {
+                
+                private static final long serialVersionUID = -1357026258424339999L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList list = new CardList(AllZone.Human_Play.getCards());
+                    list = list.getType("Creature");
+                    
+                    if(list.isEmpty()) return false;
+                    
+                    //else
+                    CardListUtil.sortAttack(list);
+                    CardListUtil.sortFlying(list);
+                    
+                    for(int i = 0; i < list.size(); i++) {
+                        if(CardFactoryUtil.canTarget(card, list.get(i))
+                                && !list.get(i).getKeyword().contains("Defender")) {
+                            setTargetCard(list.get(i));
+                            return true;
+                        }
+                    }
+                    return false;
+                }//canPlayAI()
+                
+                @Override
+                public void resolve() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    play.add(card);
+                    
+                    Card c = getTargetCard();
+                    
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                        card.enchantCard(c);
+                        //System.out.println("Enchanted: " +getTargetCard());
+                    }
+                }//resolve()
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            
+            Command onEnchant = new Command() {
+                
+                private static final long serialVersionUID = -897162953903978929L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        crd.addExtrinsicKeyword("This creature can't attack or block");
+                    }
+                }//execute()
+            };//Command
+            
+
+            Command onUnEnchant = new Command() {
+                private static final long serialVersionUID = 3461412526408858199L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        crd.removeExtrinsicKeyword("This creature can't attack or block");
+                    }
+                    
+                }//execute()
+            };//Command
+            
+            Command onLeavesPlay = new Command() {
+                
+                private static final long serialVersionUID = -4922257746317147308L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        card.unEnchantCard(crd);
+                    }
+                }
+            };
+            
+            card.addEnchantCommand(onEnchant);
+            card.addUnEnchantCommand(onUnEnchant);
+            card.addLeavesPlayCommand(onLeavesPlay);
+            
+            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+        }//*************** END ************ END **************************
+*/
+        
+/*
+        //*************** START *********** START **************************
+        else if(cardName.equals("Sluggishness")) {
+            final SpellAbility spell = new Spell(card) {
+                
+                private static final long serialVersionUID = 5184457180419402397L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList list = new CardList(AllZone.Human_Play.getCards());
+                    list = list.getType("Creature");
+                    
+                    if(list.isEmpty()) return false;
+                    
+                    //else
+                    CardListUtil.sortAttack(list);
+                    CardListUtil.sortFlying(list);
+                    
+                    for(int i = 0; i < list.size(); i++) {
+                        if(CardFactoryUtil.canTarget(card, list.get(i))) {
+                            setTargetCard(list.get(i));
+                            return true;
+                        }
+                    }
+                    return false;
+                }//canPlayAI()
+                
+                @Override
+                public void resolve() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    play.add(card);
+                    
+                    Card c = getTargetCard();
+                    
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                        card.enchantCard(c);
+                        System.out.println("Enchanted: " + getTargetCard());
+                    }
+                }//resolve()
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            
+            Command onEnchant = new Command() {
+                
+                private static final long serialVersionUID = -6043933114268403555L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        crd.addExtrinsicKeyword("This creature cannot block");
+                    }
+                }//execute()
+            };//Command
+            
+
+            Command onUnEnchant = new Command() {
+                
+                private static final long serialVersionUID = -1854544543762078840L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        crd.removeExtrinsicKeyword("This creature cannot block");
+                        
+                    }
+                    
+                }//execute()
+            };//Command
+            
+            Command onLeavesPlay = new Command() {
+                
+                private static final long serialVersionUID = -897162953903978929L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        card.unEnchantCard(crd);
+                    }
+                }
+            };
+            
+            card.addEnchantCommand(onEnchant);
+            card.addUnEnchantCommand(onUnEnchant);
+            card.addLeavesPlayCommand(onLeavesPlay);
+            
+            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+        }//*************** END ************ END **************************
+*/
+        
+/*
+        //*************** START *********** START **************************
+        if(cardName.equals("Despondency")) {
+            final SpellAbility spell = new Spell(card) {
+                
+                private static final long serialVersionUID = 1125616183900458458L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList list = new CardList(AllZone.Human_Play.getCards());
+                    list = list.getType("Creature");
+                    
+                    if(list.isEmpty()) return false;
+                    
+                    //else
+                    CardListUtil.sortAttack(list);
+                    CardListUtil.sortFlying(list);
+                    
+                    for(int i = 0; i < list.size(); i++) {
+                        if(CardFactoryUtil.canTarget(card, list.get(i))) {
+                            setTargetCard(list.get(i));
+                            return true;
+                        }
+                    }
+                    return false;
+                }//canPlayAI()
+                
+                @Override
+                public void resolve() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    play.add(card);
+                    
+                    Card c = getTargetCard();
+                    
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                        card.enchantCard(c);
+                        //System.out.println("Enchanted: " +getTargetCard());
+                    }
+                }//resolve()
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            
+            Command onEnchant = new Command() {
+                private static final long serialVersionUID = -8589566780713349434L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        crd.addSemiPermanentAttackBoost(-2);
+                        
+                    }
+                }//execute()
+            };//Command
+            
+
+            Command onUnEnchant = new Command() {
+                
+                private static final long serialVersionUID = -5769889616562358735L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        crd.addSemiPermanentAttackBoost(2);
+                        
+                    }
+                    
+                }//execute()
+            };//Command
+            
+            Command onLeavesPlay = new Command() {
+                
+                private static final long serialVersionUID = 9095725091375284510L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        card.unEnchantCard(crd);
+                    }
+                }
+            };
+            
+            card.addEnchantCommand(onEnchant);
+            card.addUnEnchantCommand(onUnEnchant);
+            card.addLeavesPlayCommand(onLeavesPlay);
+            
+            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+        }//*************** END ************ END **************************
+*/
+        
+/*
+        //*************** START *********** START **************************
+        if(cardName.equals("Eternity Snare")) {
+            final SpellAbility spell = new Spell(card) {
+                
+                private static final long serialVersionUID = -1241918879720338838L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList list = new CardList(AllZone.Human_Play.getCards());
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isCreature() && !c.getKeyword().contains("Vigilance");
+                        }
+                    });
+                    
+                    if(list.isEmpty()) return false;
+                    
+                    //else
+                    CardListUtil.sortAttack(list);
+                    CardListUtil.sortFlying(list);
+                    
+                    for(int i = 0; i < list.size(); i++) {
+                        if(CardFactoryUtil.canTarget(card, list.get(i))) {
+                            setTargetCard(list.get(i));
+                            return true;
+                        }
+                    }
+                    return false;
+                }//canPlayAI()
+                
+                @Override
+                public void resolve() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    play.add(card);
+                    
+                    Card c = getTargetCard();
+                    
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                        card.enchantCard(c);
+                        System.out.println("Enchanted: " + getTargetCard());
+                    }
+                }//resolve()
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            
+            Command onEnchant = new Command() {
+                
+                private static final long serialVersionUID = -5795220371369091411L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        crd.addExtrinsicKeyword("This card doesn't untap during your untap step.");
+                    }
+                }//execute()
+            };//Command
+            
+
+            Command onUnEnchant = new Command() {
+                private static final long serialVersionUID = -3856817134400315080L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        crd.removeExtrinsicKeyword("This card doesn't untap during your untap step.");
+                    }
+                    
+                }//execute()
+            };//Command
+            
+            Command onLeavesPlay = new Command() {
+                
+                private static final long serialVersionUID = 8243327573672256317L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        card.unEnchantCard(crd);
+                    }
+                }
+            };
+            
+            card.addEnchantCommand(onEnchant);
+            card.addUnEnchantCommand(onUnEnchant);
+            card.addLeavesPlayCommand(onLeavesPlay);
+            
+            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+        }//*************** END ************ END **************************
+*/
+        
+/*
+        //*************** START *********** START **************************
+        else if(cardName.equals("Paralyzing Grasp")) {
+            final SpellAbility spell = new Spell(card) {
+                
+                private static final long serialVersionUID = -2685360795445503449L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList list = new CardList(AllZone.Human_Play.getCards());
+                    list = list.getType("Creature");
+                    
+                    if(list.isEmpty()) return false;
+                    
+                    //else
+                    CardListUtil.sortAttack(list);
+                    CardListUtil.sortFlying(list);
+                    
+                    for(int i = 0; i < list.size(); i++) {
+                        if(CardFactoryUtil.canTarget(card, list.get(i))) {
+                            setTargetCard(list.get(i));
+                            return true;
+                        }
+                    }
+                    return false;
+                }//canPlayAI()
+                
+                @Override
+                public void resolve() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    play.add(card);
+                    
+                    Card c = getTargetCard();
+                    
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                        card.enchantCard(c);
+                        System.out.println("Enchanted: " + getTargetCard());
+                    }
+                }//resolve()
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            
+            Command onEnchant = new Command() {
+                
+                private static final long serialVersionUID = -380913483412563006L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        crd.addExtrinsicKeyword("This card doesn't untap during your untap step.");
+                    }
+                }//execute()
+            };//Command
+            
+
+            Command onUnEnchant = new Command() {
+                
+                private static final long serialVersionUID = 4534224467226579803L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        
+                        crd.removeExtrinsicKeyword("This card doesn't untap during your untap step.");
+                    }
+                    
+                }//execute()
+            };//Command
+            
+            Command onLeavesPlay = new Command() {
+                
+                private static final long serialVersionUID = -2513967225177113996L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        card.unEnchantCard(crd);
+                    }
+                }
+            };
+            
+            card.addEnchantCommand(onEnchant);
+            card.addUnEnchantCommand(onUnEnchant);
+            card.addLeavesPlayCommand(onLeavesPlay);
+            
+            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+        }//*************** END ************ END **************************
+*/
+
 /*
         // *******************************************************************
         // Why are there two different card objects for Scavenged Weaponry ???
