@@ -94,6 +94,8 @@ public class CardFactory_Creatures {
             
             newCard.addSpellAbility(new Spell_Permanent(newCard));
             
+            newCard.setSVars(card.getSVars());
+            
             return newCard;
         }//*************** END ************ END **************************
         
@@ -392,6 +394,8 @@ public class CardFactory_Creatures {
             
             newCard.addSpellAbility(new Spell_Permanent(newCard));
             
+            newCard.setSVars(card.getSVars());
+            
             return newCard;
         }//*************** END ************ END **************************
         
@@ -425,6 +429,8 @@ public class CardFactory_Creatures {
             newCard.setBaseDefense(card.getBaseDefense());
             
             newCard.addSpellAbility(new Spell_Permanent(newCard));
+            
+            newCard.setSVars(card.getSVars());
             
             return newCard;
         }//*************** END ************ END **************************
@@ -497,6 +503,8 @@ public class CardFactory_Creatures {
             ///*
             newCard.addSpellAbility(new Spell_Permanent(newCard));
             newCard.addSpellAbility(ability);
+            
+            newCard.setSVars(card.getSVars());
             
             return newCard;
             //*/
@@ -17957,6 +17965,8 @@ public class CardFactory_Creatures {
             
             newCard.addComesIntoPlayCommand(comesIntoPlay);
             
+            newCard.setSVars(card.getSVars());
+            
             return newCard;
         }//*************** END ************ END **************************
 
@@ -17994,6 +18004,8 @@ public class CardFactory_Creatures {
             };//Command
             
             newCard.addComesIntoPlayCommand(comesIntoPlay);
+            
+            newCard.setSVars(card.getSVars());
             
             return newCard;
         }//*************** END ************ END **************************
@@ -18128,6 +18140,8 @@ public class CardFactory_Creatures {
             
             newCard.addSpellAbility(new Spell_Permanent(newCard));
             
+            newCard.setSVars(card.getSVars());
+            
             return newCard;
         }//*************** END ************ END **************************
         
@@ -18167,6 +18181,8 @@ public class CardFactory_Creatures {
             newCard.setBaseDefense(card.getBaseDefense());
             
             newCard.addSpellAbility(new Spell_Permanent(newCard));
+            
+            newCard.setSVars(card.getSVars());
             
             return newCard;
         }//*************** END ************ END **************************
@@ -18276,6 +18292,8 @@ public class CardFactory_Creatures {
             
             newCard.addSpellAbility(new Spell_Permanent(newCard));
             
+            newCard.setSVars(card.getSVars());
+            
             return newCard;
         }//*************** END ************ END **************************
         
@@ -18303,6 +18321,8 @@ public class CardFactory_Creatures {
             
             newCard.addSpellAbility(new Spell_Permanent(newCard));
             
+            newCard.setSVars(card.getSVars());
+            
             return newCard;
         }//*************** END ************ END **************************
         
@@ -18329,6 +18349,8 @@ public class CardFactory_Creatures {
             newCard.setBaseDefense(card.getBaseDefense());
             
             newCard.addSpellAbility(new Spell_Permanent(newCard));
+            
+            newCard.setSVars(card.getSVars());
             
             return newCard;
         }//*************** END ************ END **************************
