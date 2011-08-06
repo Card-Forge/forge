@@ -1,4 +1,4 @@
-Name:Merfolk Reejerey
+Name:Merrow Reejerey
 ManaCost:2 U
 Types:Creature Merfolk Soldier
 Text:no text
@@ -8,5 +8,5 @@ T:Mode$ SpellCast | ValidCard$ Card.Merfolk+YouCtrl | Execute$ TrigTapOrUntap | 
 SVar:TrigTapOrUntap:AB$TapOrUntap | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_reejerey.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/merrow_reejerey.jpg
 End
