@@ -11064,7 +11064,7 @@ public class CardFactory_Creatures {
                 }
                 
                 void makeToken() {
-                    CardFactoryUtil.makeToken("Saprolig", "G 1 1 Saproling", card, "G", new String[] {
+                    CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", card, "G", new String[] {
                             "Creature", "Saproling"}, 1, 1, new String[] {""});
                 }//makeToken()
                 

@@ -15,7 +15,6 @@ public class StaticEffects
 		initStateBasedEffectsList();
 	}
 	
-	
 	public void initStateBasedEffectsList()
 	{	//value has to be an array, since certain cards have multiple commands associated with them
 		cardToEffectsList.put("Conspiracy", new String[] {"Conspiracy"});

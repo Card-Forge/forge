@@ -637,25 +637,8 @@ public class CardFactoryUtil {
             public void resolve() {
                 sourceCard.subtractCounter(Counters.SPORE, 3);
                 
-                PlayerZone play = AllZone.getZone(Constant.Zone.Play, sourceCard.getController());
-                
-                //make token
-                Card c = new Card();
-                
-                c.setOwner(sourceCard.getController());
-                c.setController(sourceCard.getController());
-                
-                c.setName("Saproling");
-                c.setImageName("G 1 1 Saproling");
-                c.setManaCost("G");
-                c.setToken(true);
-                
-                c.addType("Creature");
-                c.addType("Saproling");
-                c.setBaseAttack(1);
-                c.setBaseDefense(1);
-                
-                play.add(c);
+                makeToken("Saproling", "G 1 1 Saproling", sourceCard, "G", new String[] {
+                        "Creature", "Saproling"}, 1, 1, new String[] {""});
             }
         };
         ability.setDescription("Remove three spore counters from " + sourceCard.getName()
