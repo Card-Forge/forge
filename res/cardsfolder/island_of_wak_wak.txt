@@ -3,5 +3,5 @@ ManaCost:no cost
 Types:Land
 Text:tap: The power of target creature with flying becomes 0 until end of turn.
 K:SVars:Rarity:Rare
-K:SVars:Picture:http://www.wizards.com/global/images/magic/general/island_of_wak-wak.jpg
+K:SVars:Picture:http://www.wizards.com/global/images/magic/general/island_of_wak_wak.jpg
 End

@@ -5,4 +5,5 @@ Text:no text
 K:spPumpTgtCurse:-3/-0
 K:Draw a card.
 K:SVar:RemAIDeck:True
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bewilder.jpg
 End
