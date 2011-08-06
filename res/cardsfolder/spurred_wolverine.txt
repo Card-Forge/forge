@@ -3,7 +3,7 @@ ManaCost:4 R
 Types:Creature Wolverine Beast
 Text:no text
 PT:3/2
-K:abPumpTgtC tapXType<2/Beast>:First Strike
+A:AB$Pump | Cost$ tapXType<2/Beast> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | SpellDescription$ Target creature gains first strike until end of turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spurred_wolverine.jpg

@@ -4,7 +4,7 @@ Types:Creature Faerie
 Text:no text
 PT:1/1
 K:Flying
-K:abPumpTgtC T:Flying
+A:AB$Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wind_dancer.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/104.jpg
