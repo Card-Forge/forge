@@ -1,7 +1,7 @@
 Name:Blood Crypt
 ManaCost:no cost
 Types:Land Swamp Mountain
-Text:As Blood Crypt comes into play, you may pay 2 life. If you don't, Blood Crypt comes into play tapped instead.
+Text:As CARDNAME enters the battlefield, you may pay 2 life. If you don't, CARDNAME enters the battlefield tapped.
 K:tap: add B
 K:tap: add R
 SVar:Rarity:Rare

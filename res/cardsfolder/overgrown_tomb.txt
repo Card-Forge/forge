@@ -1,7 +1,7 @@
 Name:Overgrown Tomb
 ManaCost:no cost
 Types:Land Swamp Forest
-Text:As Overgrown Tomb comes into play, you may pay 2 life. If you don't, Overgrown Tomb comes into play tapped instead.
+Text:As CARDNAME enters the battlefield, you may pay 2 life. If you don't, CARDNAME enters the battlefield tapped.
 K:tap: add B
 K:tap: add G
 SVar:Rarity:Rare

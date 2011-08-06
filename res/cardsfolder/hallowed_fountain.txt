@@ -1,7 +1,7 @@
 Name:Hallowed Fountain
 ManaCost:no cost
 Types:Land Plains Island
-Text:As Hallowed Fountain comes into play, you may pay 2 life. If you don't, Hallowed Fountain comes into play tapped instead.
+Text:As CARDNAME enters the battlefield, you may pay 2 life. If you don't, CARDNAME enters the battlefield tapped.
 K:tap: add W
 K:tap: add U
 SVar:Rarity:Rare

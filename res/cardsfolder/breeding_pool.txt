@@ -1,7 +1,7 @@
 Name:Breeding Pool
 ManaCost:no cost
 Types:Land Forest Island
-Text:As Breeding Pool into play, you may pay 2 life. If you don't, Breeding Pool comes into play tapped instead.
+Text:As CARDNAME enters the battlefield, you may pay 2 life. If you don't, CARDNAME enters the battlefield tapped.
 K:tap: add U
 K:tap: add G
 SVar:Rarity:Rare

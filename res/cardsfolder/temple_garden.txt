@@ -1,7 +1,7 @@
 Name:Temple Garden
 ManaCost:no cost
 Types:Land Forest Plains
-Text:As Temple Garden comes into play, you may pay 2 life. If you don't, Temple Garden comes into play tapped instead.
+Text:As CARDNAME enters the battlefield, you may pay 2 life. If you don't, CARDNAME enters the battlefield tapped.
 K:tap: add W
 K:tap: add G
 SVar:Rarity:Rare

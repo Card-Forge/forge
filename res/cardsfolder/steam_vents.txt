@@ -1,7 +1,7 @@
 Name:Steam Vents
 ManaCost:no cost
 Types:Land Island Mountain
-Text:As Steam Vents comes into play, you may pay 2 life. If you don't, Steam Vents comes into play tapped instead.
+Text:As CARDNAME enters the battlefield, you may pay 2 life. If you don't, CARDNAME enters the battlefield tapped.
 K:tap: add U
 K:tap: add R
 SVar:Rarity:Rare

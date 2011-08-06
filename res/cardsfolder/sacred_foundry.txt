@@ -1,7 +1,7 @@
 Name:Sacred Foundry
 ManaCost:no cost
 Types:Land Mountain Plains
-Text:As Sacred Foundry comes into play, you may pay 2 life. If you don't, Sacred Foundry comes into play tapped instead.
+Text:As CARDNAME enters the battlefield, you may pay 2 life. If you don't, CARDNAME enters the battlefield tapped.
 K:tap: add W
 K:tap: add R
 SVar:Rarity:Rare

@@ -1,7 +1,7 @@
 Name:Godless Shrine
 ManaCost:no cost
 Types:Land Plains Swamp
-Text:As Godless Shrine comes into play, you may pay 2 life. If you don't, Godless Shrine comes into play tapped instead.
+Text:As CARDNAME enters the battlefield, you may pay 2 life. If you don't, CARDNAME enters the battlefield tapped.
 K:tap: add W
 K:tap: add B
 SVar:Rarity:Rare
