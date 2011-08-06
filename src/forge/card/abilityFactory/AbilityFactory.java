@@ -635,8 +635,9 @@ public class AbilityFactory {
         else
         	SA.setDescription("");
         
-        if (!isTargeted)
-        	SA.setStackDescription(hostCard.getName());
+        // StackDescriptions are overwritten by the AF type instead of through this
+        //if (!isTargeted)
+        //	SA.setStackDescription(hostCard.getName());
         
         SA.setRestrictions(buildRestrictions(SA));
 
