@@ -1181,6 +1181,10 @@ public class Card extends MyObservable {
         nShield = 0;
     }
     
+    public boolean canBeShielded() {
+    	return !hasKeyword("CARDNAME can't be regenerated.");
+    }
+    
     //is this "Card" supposed to be a token?
     public void setToken(boolean b) {
         token = b;

@@ -63,6 +63,11 @@ public class GameAction {
     		return;
     	}
     	
+    	if(c.hasKeyword("If CARDNAME would be put into a graveyard this turn, exile it instead.")) {
+    		moveTo(AllZone.getZone(Constant.Zone.Exile, c.getOwner()), c);
+    		return;
+    	}
+    	
     	if (AllZoneUtil.isCardInPlay("Planar Void")) {
     		CardList pVoids = AllZoneUtil.getCardsInPlay("Planar Void");
     		for(int i = 0; i < pVoids.size(); i++) {
@@ -2187,7 +2192,7 @@ public class GameAction {
         if(!AllZone.GameAction.isCardInPlay(c)
                 || (c.getKeyword().contains("Indestructible") && (!c.isCreature() || c.getNetDefense() > 0))) return false;        
         
-        if(c.getShield() > 0 && !c.getKeyword().contains("CARDNAME can't be regenerated.")) {
+        if(c.canBeShielded() && c.getShield() > 0) {
             c.subtractShield();
             c.setDamage(0);
             c.tap();

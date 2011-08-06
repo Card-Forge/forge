@@ -366,40 +366,42 @@ public class AbilityFactory_Pump {
 			tgtCards = tgt.getTargetCards();
 		else
 			tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
-	     
-		if (sa instanceof Ability_Sub)
-			sb.append(" ");
-		else
-			sb.append(name).append(" - ");
 		
-		 for(Card c : tgtCards)
-			 sb.append(c.getName()).append(" ");
+		if(tgtCards.size() > 0) {
 
-	     final int atk = getNumAttack(sa);
-	     final int def = getNumDefense(sa);
-	     
-		 sb.append("gains ");
-	     if (atk != 0 || def != 0){
-	    	 if (atk >= 0)
-	    		 sb.append("+");
-	    	 sb.append(atk);
-	    	 sb.append("/");
-	    	 if (def >= 0)
-	    		 sb.append("+");
-	    	 sb.append(def);
-		     sb.append(" ");
-	     }
+			if (sa instanceof Ability_Sub)
+				sb.append(" ");
+			else
+				sb.append(name).append(" - ");
 
-		for (int i=0; i<Keywords.size(); i++)
-		{
-			if (!Keywords.get(i).equals("none"))
-				sb.append(Keywords.get(i)).append(" ");
+			for(Card c : tgtCards)
+				sb.append(c.getName()).append(" ");
+
+			final int atk = getNumAttack(sa);
+			final int def = getNumDefense(sa);
+
+			sb.append("gains ");
+			if (atk != 0 || def != 0){
+				if (atk >= 0)
+					sb.append("+");
+				sb.append(atk);
+				sb.append("/");
+				if (def >= 0)
+					sb.append("+");
+				sb.append(def);
+				sb.append(" ");
+			}
+
+			for (int i=0; i<Keywords.size(); i++)
+			{
+				if (!Keywords.get(i).equals("none"))
+					sb.append(Keywords.get(i)).append(" ");
+			}
+
+			if (!params.containsKey("Permanent"))
+				sb.append("until end of turn.");
 		}
-		 
-		if (!params.containsKey("Permanent"))
-			sb.append("until end of turn.");
-		 
-		 
+		
 		 Ability_Sub abSub = sa.getSubAbility();
 		 if (abSub != null) {
 		 	sb.append(abSub.getStackDescription());
