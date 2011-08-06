@@ -359,31 +359,6 @@ class CardFactory_Auras {
                         "Creature", "Drake"}, 2, 2, new String[] {"Flying"});
                 	//makeToken();
                 }
-                
-                /*
-                void makeToken() {
-                    Card c = new Card();
-                    Card crd = spell.getTargetCard();
-                    
-                    c.setName("Drake");
-                    c.setImageName("GU 2 2 Drake");
-                    
-                    c.setOwner(crd.getController());
-                    c.setController(crd.getController());
-                    
-                    c.setManaCost("G U");
-                    c.setToken(true);
-                    
-                    c.addType("Creature");
-                    c.addType("Drake");
-                    c.setBaseAttack(2);
-                    c.setBaseDefense(2);
-                    c.addIntrinsicKeyword("Flying");
-                    
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    play.add(c);
-                }//makeToken()
-                */
             };//SpellAbility
             
             produceDrakes.setType("Extrinsic"); // Required for Spreading Seas
@@ -521,30 +496,7 @@ class CardFactory_Auras {
                 	CardFactoryUtil.makeToken("Squirrel", "G 1 1 Squirrel", spell.getTargetCard(), "G", new String[] {
                             "Creature", "Squirrel"}, 1, 1, new String[] {""});
                 }
-                
-                /*
-                void makeToken() {
-                    Card c = new Card();
-                    Card crd = spell.getTargetCard();
-                    
-                    c.setName("Squirrel");
-                    c.setImageName("G 1 1 Squirrel");
-                    
-                    c.setOwner(crd.getController());
-                    c.setController(crd.getController());
-                    
-                    c.setManaCost("G");
-                    c.setToken(true);
-                    
-                    c.addType("Creature");
-                    c.addType("Squirrel");
-                    c.setBaseAttack(1);
-                    c.setBaseDefense(1);
-                    
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    play.add(c);
-                }//makeToken()
-                */
+            
             };//SpellAbility
             
             produceSquirrels.setType("Extrinsic"); // Required for Spreading Seas
@@ -1311,6 +1263,116 @@ class CardFactory_Auras {
                 private static final long serialVersionUID = -549155960320946886L;
                 
                 public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        card.unEnchantCard(crd);
+                    }
+                }
+            };
+            
+            card.addEnchantCommand(onEnchant);
+            card.addUnEnchantCommand(onUnEnchant);
+            card.addLeavesPlayCommand(onLeavesPlay);
+            
+            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+        }//*************** END ************ END **************************
+        
+        //************************************************************************
+        // This card can't be converted to keyword, problem with keyword parse   *
+        //*************** START *********** START ********************************
+        else if(cardName.equals("Seeker")) {
+            final SpellAbility spell = new Spell(card) {
+
+				private static final long serialVersionUID = 5952584725129324530L;
+
+				@Override
+                public boolean canPlayAI() {
+                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    list = list.getType("Creature");
+                    
+                    if (list.isEmpty()) return false;
+                    
+                    //else (is there a Rabid Wombat or a Uril, the Miststalker to target?)
+                    
+                    CardList auraMagnetList = new CardList(AllZone.Computer_Play.getCards());
+                    auraMagnetList = auraMagnetList.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                    	    return c.isCreature() && (c.getName().equals("Rabid Wombat") || c.getName().equals("Uril, the Miststalker"));
+                    	}
+                    });
+                    if (! auraMagnetList.isEmpty()) {    // AI has a special target creature(s) to enchant
+                        auraMagnetList.shuffle();
+                        for (int i = 0; i < auraMagnetList.size(); i++) {
+                            if (CardFactoryUtil.canTarget(card, auraMagnetList.get(i))) {
+                                setTargetCard(auraMagnetList.get(i));    // Target only Rabid Wombat or Uril, the Miststalker
+                    	        return true;
+                    	    }
+                    	}
+                    }
+                    //else target another creature
+                    
+                    CardListUtil.sortAttack(list);
+                    CardListUtil.sortFlying(list);
+                    
+                    for (int i = 0; i < list.size(); i++) {
+                        if (CardFactoryUtil.canTarget(card, list.get(i))
+                                && !list.get(i).getKeyword().contains("CARDNAME can't be blocked except by artifact creatures and/or white creatures.")) {
+                            setTargetCard(list.get(i));
+                            return true;
+                        }
+                    }
+                  
+                    return false;
+                }//canPlayAI()
+                
+                @Override
+                public void resolve() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    play.add(card);
+                    
+                    Card c = getTargetCard();
+                    
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                        card.enchantCard(c);
+                        Log.debug("Enchanted: " + getTargetCard());
+                    }
+                }//resolve()
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            
+            Command onEnchant = new Command() {
+
+				private static final long serialVersionUID = 2007362030422979630L;
+
+				public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        crd.addExtrinsicKeyword("CARDNAME can't be blocked except by artifact creatures and/or white creatures.");
+                    }
+                }//execute()
+            };//Command
+            
+
+            Command onUnEnchant = new Command() {
+
+				private static final long serialVersionUID = -8020540432500093584L;
+
+				public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        
+                        crd.removeExtrinsicKeyword("CARDNAME can't be blocked except by artifact creatures and/or white creatures.");
+                    }
+                    
+                }//execute()
+            };//Command
+            
+            Command onLeavesPlay = new Command() {
+
+				private static final long serialVersionUID = 3359456668229802294L;
+
+				public void execute() {
                     if(card.isEnchanting()) {
                         Card crd = card.getEnchanting().get(0);
                         card.unEnchantCard(crd);

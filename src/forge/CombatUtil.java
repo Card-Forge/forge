@@ -208,7 +208,7 @@ public class CombatUtil {
             if(CardUtil.getColors(blocker).contains(Constant.Color.Green)) return false;
         }
         
-        if(attacker.getName().equals("Amrou Seekers")) {
+        if(/*attacker.getName().equals("Amrou Seekers")*/ attacker.getKeyword().contains("CARDNAME can't be blocked except by artifact creatures and/or white creatures.")) {
             if(!blocker.getType().contains("Artifact")
                     && !CardUtil.getColors(blocker).contains(Constant.Color.White)) return false;
         }

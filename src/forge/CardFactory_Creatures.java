@@ -13378,6 +13378,32 @@ public class CardFactory_Creatures {
             });
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if (cardName.equals("Crovax, Ascendant Hero"))
+        {
+        	final SpellAbility a1 = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
+                    life.subtractLife(2,card);
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getOwner());
+                    
+                    if(card.isToken()) AllZone.getZone(card).remove(card);
+                    else AllZone.GameAction.moveTo(hand, card);
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+            };
+            card.addSpellAbility(a1);
+            a1.setDescription("Pay 2 life: Return Crovax, Ascendant Hero to its owner's hand.");
+            a1.setStackDescription(card.getController()
+                    + " pays 2 life and returns Crovax, Ascendant Hero back to owner's hand.");
+            
+        }//*************** END ************ END **************************
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Cavern Harpy")) {
             final SpellAbility a1 = new Ability(card, "0") {
@@ -13389,8 +13415,6 @@ public class CardFactory_Creatures {
                     
                     if(card.isToken()) AllZone.getZone(card).remove(card);
                     else AllZone.GameAction.moveTo(hand, card);
-                    
-
                 }
                 
                 @Override

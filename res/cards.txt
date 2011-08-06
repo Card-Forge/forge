@@ -1,3 +1,27 @@
+Crovax, Ascendant Hero
+4 W W
+Legendary Creature Human
+no text
+4/4
+StaticEffect:Play:All Permanents:PTBonus/1/1:Color.white!NotSelf:Other white creatures get +1/+1.
+StaticEffect:Play:All Permanents:PTBonus/-1/-1:NonColor.white:Nonwhite creatures get -1/-1.
+SVar:PlayMain1:TRUE
+
+Seeker
+2 W W
+Enchantment Aura
+Enchanted creature can't be blocked except by artifact creatures and/or white creatures.
+Enchant creature
+
+Amrou Seekers
+2 W
+Creature Kithkin Rebel
+no text
+2/2
+CARDNAME can't be blocked except by artifact creatures and/or white creatures.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/amrou_seekers.jpg
+
 Ancestral Vision
 no cost
 Sorcery
@@ -935,14 +959,6 @@ no text
 SearchRebel:4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/amrou_scout.jpg
-
-Amrou Seekers
-2 W
-Creature Kithkin Rebel
-Amrou Seekers can't be blocked except by artifact creatures and/or white creatures.
-2/2
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/amrou_seekers.jpg
 
 Amulet of Vigor
 1
