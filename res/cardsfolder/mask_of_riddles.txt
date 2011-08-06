@@ -1,0 +1,8 @@
+Name:Mask of Riddles
+ManaCost:U B
+Types:Artifact Equipment
+Text:Equipped creature has fear.\r\nWhenever equipped creature deals combat damage to a player, you may draw a card.
+K:eqPump 2:Fear
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mask_of_riddles.jpg
+End

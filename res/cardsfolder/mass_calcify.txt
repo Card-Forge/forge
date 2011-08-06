@@ -1,0 +1,9 @@
+Name:Mass Calcify
+ManaCost:5 W W
+Types:Sorcery
+Text:Destroy all nonwhite creatures.
+K:spDestroyAll:Creature.nonWhite
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mass_calcify.jpg
+End

@@ -1,0 +1,10 @@
+Name:Meglonoth
+ManaCost:3 R G W
+Types:Creature Beast
+Text:Whenever Meglonoth blocks a creature, Meglonoth deals damage to that creature's controller equal to Meglonoth's Power.
+PT:6/6
+K:Vigilance
+K:Trample
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/meglonoth.jpg
+End

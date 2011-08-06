@@ -1,0 +1,14 @@
+Name:Mana Prism
+ManaCost:3
+Types:Artifact
+Text:no text
+K:tap: add 1
+K:1, tap: add W
+K:1, tap: add U
+K:1, tap: add B
+K:1, tap: add R
+K:1, tap: add G
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_prism.jpg
+End

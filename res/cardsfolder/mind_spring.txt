@@ -1,0 +1,9 @@
+Name:Mind Spring
+ManaCost:X U U
+Types:Sorcery
+Text:no text
+K:spDrawCards:X:Draw X cards.:Mind Spring - Draw X cards.
+K:SVar:X:Count$xPaid
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_spring.jpg
+End

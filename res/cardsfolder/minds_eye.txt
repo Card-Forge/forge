@@ -1,0 +1,8 @@
+Name:Mind's Eye
+ManaCost:5
+Types:Artifact
+Text:no text
+K:WheneverKeyword:DrawCard:ControllingPlayer_Opponent:Play:DrawCards/1:ControllingPlayer_Self:ASAP:PayMana/1:No Special Condition:Whenever an opponent draws a card, you may pay 1. If you do, draw a card.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/minds_eye.jpg
+End

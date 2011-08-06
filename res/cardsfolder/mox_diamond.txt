@@ -1,0 +1,13 @@
+Name:Mox Diamond
+ManaCost:0
+Types:Artifact
+Text:If Mox Diamond would come into play, you may discard a land card instead. If you do, put Mox Diamond into play. If you don't, put it into its owner's graveyard.
+K:tap: add W
+K:tap: add U
+K:tap: add B
+K:tap: add R
+K:tap: add G
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mox_diamond.jpg
+End

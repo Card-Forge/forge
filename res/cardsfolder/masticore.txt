@@ -1,0 +1,10 @@
+Name:Masticore
+ManaCost:4
+Types:Artifact Creature Masticore
+Text:Choose and discard a card during your upkeep, or sacrifice Masticore.
+PT:4/4
+K:RegenerateMe:2
+K:abDamageTgtC 2:1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/masticore.jpg
+End

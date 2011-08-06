@@ -1,0 +1,8 @@
+Name:Mirari
+ManaCost:5
+Types:Legendary Artifact
+Text:no text
+K:WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Instant/Sorcery:Play:CopySpell:Initiating_Card:ASAP:PayMana/3:No Special Condition:Whenever you cast an instant or sorcery spell, you may pay 3. If you do, copy that spell. You may choose new targets for the copy.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mirari.jpg
+End

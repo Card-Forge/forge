@@ -1,0 +1,9 @@
+Name:Merrow Harbinger
+ManaCost:3 U
+Types:Creature Merfolk Wizard
+Text:When Merrow Harbinger enters the battlefield, you may search your library for a Merfolk card, reveal it, then shuffle your library and put that card on top of it.
+PT:2/3
+K:Islandwalk
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/merrow_harbinger.jpg
+End

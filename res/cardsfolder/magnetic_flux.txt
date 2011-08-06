@@ -1,0 +1,8 @@
+Name:Magnetic Flux
+ManaCost:2 U
+Types:Instant
+Text:no text
+K:spAllPump:YouCtrl/Artifact:Flying:Artifact creatures you control gain flying until end of turn.:Magnetic Flux - Creatures gain flying until EOT
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/magnetic_flux.jpg
+End

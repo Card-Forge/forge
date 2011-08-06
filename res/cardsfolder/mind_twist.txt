@@ -1,0 +1,9 @@
+Name:Mind Twist
+ManaCost:X B
+Types:Sorcery
+Text:no text
+K:spDiscardTgt:AtRandom:X:Target player discards X cards at random.:Mind Twist - target player discards cards
+K:SVar:X:Count$xPaid
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_twist.jpg
+End

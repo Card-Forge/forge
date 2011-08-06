@@ -1,0 +1,10 @@
+Name:Mountain Yeti
+ManaCost:2 R R
+Types:Creature Yeti
+Text:no text
+PT:3/3
+K:Mountainwalk
+K:Protection from white
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mountain_yeti.jpg
+End

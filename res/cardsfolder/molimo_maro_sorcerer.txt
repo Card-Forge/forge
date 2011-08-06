@@ -1,0 +1,9 @@
+Name:Molimo, Maro-Sorcerer
+ManaCost:4 G G G
+Types:Legendary Creature Elemental
+Text:Molimo, Maro-Sorcerer's power and toughness are each equal to the number of lands you control.
+PT:1/1
+K:Trample
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/molimo_maro_sorcerer.jpg
+End

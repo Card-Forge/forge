@@ -1,0 +1,8 @@
+Name:Mox Jet
+ManaCost:0
+Types:Artifact
+Text:no text
+K:tap: add B
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/2u/en-us/card630.jpg
+End

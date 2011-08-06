@@ -1,0 +1,8 @@
+Name:Might of Oaks
+ManaCost:3 G
+Types:Instant
+Text:no text
+K:spPumpTgt:+7/+7
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/gu/en-us/card8822.jpg
+End

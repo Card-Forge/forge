@@ -1,0 +1,9 @@
+Name:Magnivore
+ManaCost:2 R R
+Types:Creature Lhurgoyf
+Text:Magnivore's power and toughness are each equal to the number of sorcery cards in all graveyards.
+PT:1/1
+K:Haste
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/magnivore.jpg
+End

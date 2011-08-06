@@ -1,0 +1,8 @@
+Name:Midsummer Revel
+ManaCost:3 G G
+Types:Enchantment
+Text:no text
+K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:CustomCounter.VERSE/1:Self:ASAP:Yes_No:ControllerUpkeep:At the beginning of your upkeep, you may put a verse counter on Midsummer Revel.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/midsummer_revel.jpg
+End

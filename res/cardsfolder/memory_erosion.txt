@@ -1,0 +1,7 @@
+Name:Memory Erosion
+ManaCost:1 U U
+Types:Enchantment
+Text:Whenever an opponent casts a spell, that player puts the top two cards of his or her library into his or her graveyard.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/memory_erosion.jpg
+End

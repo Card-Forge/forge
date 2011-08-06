@@ -1,0 +1,8 @@
+Name:Matca Rioters
+ManaCost:2 G
+Types:Creature Human Warrior
+Text:Domain - Matca Rioters's power and toughness are each equal to the number of basic land types among lands you control.
+PT:1/1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/matca_rioters.jpg
+End

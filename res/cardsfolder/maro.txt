@@ -1,0 +1,8 @@
+Name:Maro
+ManaCost:2 G G
+Types:Creature Elemental
+Text:Maro's power and toughness are each equal to the number of cards in your hand.
+PT:1/1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/maro.jpg
+End

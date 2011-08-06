@@ -1,0 +1,9 @@
+Name:Magefire Wings
+ManaCost:U R
+Types:Enchantment Aura
+Text:Enchanted creature gets +2/+0 and has flying.
+K:Enchant creature
+K:enPump:+2/+0/Flying
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/magefire_wings.jpg
+End

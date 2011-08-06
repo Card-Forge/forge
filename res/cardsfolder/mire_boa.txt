@@ -1,0 +1,10 @@
+Name:Mire Boa
+ManaCost:1 G
+Types:Creature Snake
+Text:no text
+PT:2/1
+K:Swampwalk
+K:RegenerateMe:G
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mire_boa.jpg
+End

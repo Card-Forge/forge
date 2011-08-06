@@ -1,0 +1,9 @@
+Name:Meloku the Clouded Mirror
+ManaCost:4 U
+Types:Legendary Creature Moonfolk Wizard
+Text:no text
+PT:2/4
+K:Flying
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card75268.jpg
+End

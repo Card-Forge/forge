@@ -1,0 +1,9 @@
+Name:Molten Ravager
+ManaCost:2 R
+Types:Creature Elemental
+Text:no text
+PT:0/4
+K:abPump R:+1/+0
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/molten_ravager.jpg
+End

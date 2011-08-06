@@ -1,0 +1,8 @@
+Name:Merfolk of the Pearl Trident
+ManaCost:U
+Types:Creature Merfolk
+Text:no text
+PT:1/1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card10810.jpg
+End

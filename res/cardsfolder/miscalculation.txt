@@ -1,0 +1,8 @@
+Name:Miscalculation
+ManaCost:1 U
+Types:Instant
+Text:Counter target spell unless its controller pays 2.
+K:Cycling:2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/miscalculation.jpg
+End

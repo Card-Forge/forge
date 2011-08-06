@@ -1,0 +1,10 @@
+Name:Malach of the Dawn
+ManaCost:2 W W
+Types:Creature Angel
+Text:no text
+PT:2/4
+K:Flying
+K:RegenerateMe:W W W
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122481.jpg
+End

@@ -1,0 +1,9 @@
+Name:Metathran Zombie
+ManaCost:1 U
+Types:Creature Metathran Zombie
+Text:no text
+PT:1/1
+K:RegenerateMe:B
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/metathran_zombie.jpg
+End

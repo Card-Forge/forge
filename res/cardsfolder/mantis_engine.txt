@@ -1,0 +1,10 @@
+Name:Mantis Engine
+ManaCost:5
+Types:Artifact Creature Insect
+Text:no text
+PT:3/3
+K:abPump 2:Flying
+K:abPump 2:First Strike
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mantis_engine.jpg
+End

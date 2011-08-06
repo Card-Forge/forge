@@ -1,0 +1,9 @@
+Name:Mul Daya Channelers
+ManaCost:1 G G
+Types:Creature Elf Druid Shaman
+Text:As long as the top card of your library is a creature card, Mul Daya Channelers gets +3/+3.\r\nAs long as the top card of your library is a land card, Mul Daya Channelers has "tap: Add two mana of any one color to your mana pool."
+PT:2/2
+K:Play with the top card of your library revealed.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mul_daya_channelers.jpg
+End

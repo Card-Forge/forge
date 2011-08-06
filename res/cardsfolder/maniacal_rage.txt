@@ -1,0 +1,9 @@
+Name:Maniacal Rage
+ManaCost:1 R
+Types:Enchantment Aura
+Text:Enchanted creature gets +2/+2 and can't block.
+K:Enchant creature
+K:enPump:+2/+2/CARDNAME can't block.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/maniacal_rage.jpg
+End

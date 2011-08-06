@@ -1,0 +1,9 @@
+Name:Metathran Soldier
+ManaCost:1 U
+Types:Creature Metathran Soldier
+Text:no text
+PT:1/1
+K:Unblockable
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/cg/en-us/card19096.jpg
+End

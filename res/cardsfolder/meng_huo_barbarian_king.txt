@@ -1,0 +1,9 @@
+Name:Meng Huo, Barbarian King
+ManaCost:3 G G
+Types:Legendary Creature Human Barbarian Soldier
+Text:Other green creatures you control get +1/+1.
+PT:4/4
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/meng_huo_barbarian_king.jpg
+End

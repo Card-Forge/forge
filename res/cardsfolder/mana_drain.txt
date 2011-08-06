@@ -1,0 +1,8 @@
+Name:Mana Drain
+ManaCost:U U
+Types:Instant
+Text:Counter target spell. At the beginning of your next main phase, add X to your mana pool, where X is that spell's converted mana cost.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_drain.jpg
+End

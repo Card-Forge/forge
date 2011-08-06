@@ -1,0 +1,11 @@
+Name:Murkfiend Liege
+ManaCost:2 UG UG UG
+Types:Creature Horror
+Text:Untap all green and/or blue creatures you control during each other player's untap step.
+PT:4/4
+K:StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.green!NotSelf:Other green creatures you control get +1/+1.
+K:StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.blue!NotSelf:Other blue creatures you control get +1/+1.
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/murkfiend_liege.jpg
+End

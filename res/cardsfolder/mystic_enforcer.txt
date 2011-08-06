@@ -1,0 +1,9 @@
+Name:Mystic Enforcer
+ManaCost:2 G W
+Types:Creature Human Nomad Mystic
+Text:Threshold - As long as seven or more cards are in your graveyard, Mystic Enforcer gets +3/+3 and has flying.
+PT:3/3
+K:Protection from black
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_enforcer.jpg
+End

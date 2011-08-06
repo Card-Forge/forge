@@ -1,0 +1,11 @@
+Name:Mirri the Cursed
+ManaCost:2 B B
+Types:Legendary Creature Vampire Cat
+Text:Whenever Mirri the Cursed deals combat damage to a creature, put a +1/+1 counter on Mirri the Cursed.
+PT:3/2
+K:First Strike
+K:Flying
+K:Haste
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mirri_the_cursed.jpg
+End

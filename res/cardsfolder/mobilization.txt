@@ -1,0 +1,7 @@
+Name:Mobilization
+ManaCost:2 W
+Types:Enchantment
+Text:Soldier creatures have vigilance.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mobilization.jpg
+End

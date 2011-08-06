@@ -1,0 +1,8 @@
+Name:Master of the Wild Hunt
+ManaCost:2 G G
+Types:Creature Human Shaman
+Text:At the beginning of your upkeep, put a 2/2 green Wolf creature token onto the battlefield.
+PT:3/3
+K:SVar:Rarity:Mythic
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_the_wild_hunt.jpg
+End

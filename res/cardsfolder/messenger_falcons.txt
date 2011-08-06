@@ -1,0 +1,10 @@
+Name:Messenger Falcons
+ManaCost:2 GU W
+Types:Creature Bird
+Text:no text
+PT:2/2
+K:Flying
+K:When CARDNAME enters the battlefield, draw a card.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/messenger_falcons.jpg
+End

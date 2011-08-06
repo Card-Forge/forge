@@ -1,0 +1,9 @@
+Name:Mogg Sentry
+ManaCost:R
+Types:Creature Goblin Warrior
+Text:no text
+PT:1/1
+K:WheneverKeyword:CastSpell/Opponent:No_Initiator:Play:StatsPumpEOT/2/2:Self:ASAP:No_Condition:No Special Condition:Whenever an opponent casts a spell, Mogg Sentry gets +2/+2 until end of turn.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_sentry.jpg
+End

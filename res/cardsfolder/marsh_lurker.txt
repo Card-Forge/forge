@@ -1,0 +1,9 @@
+Name:Marsh Lurker
+ManaCost:3 B
+Types:Creature Beast
+Text:no text
+PT:3/2
+K:abPump 0 Sac-Swamp:Fear
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/marsh_lurker.jpg
+End

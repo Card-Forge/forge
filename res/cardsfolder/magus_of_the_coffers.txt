@@ -1,0 +1,10 @@
+Name:Magus of the Coffers
+ManaCost:4 B
+Types:Creature Human Wizard
+Text:no text
+PT:4/4
+K:2, tap: add B to your mana pool for each Swamp you control.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_coffers.jpg
+End

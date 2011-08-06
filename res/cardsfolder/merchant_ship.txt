@@ -1,0 +1,11 @@
+Name:Merchant Ship
+ManaCost:U
+Types:Creature Human
+Text:no text
+PT:0/2
+K:CARDNAME can't attack unless defending player controls an Island.
+K:When you control no Islands, sacrifice CARDNAME.
+K:WheneverKeyword:isUnblocked:Self:Play:ModifyLife/2:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:Whenever Merchant Ship attacks and isn't blocked, you gain 2 life.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/merchant_ship.jpg
+End

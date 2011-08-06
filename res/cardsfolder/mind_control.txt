@@ -1,0 +1,9 @@
+Name:Mind Control
+ManaCost:3 U U
+Types:Enchantment Aura
+Text:You control enchanted creature.
+K:Enchant creature
+K:enControlCreature
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_control.jpg
+End

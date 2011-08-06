@@ -1,0 +1,10 @@
+Name:Masked Admirers
+ManaCost:2 G G
+Types:Creature Elf Shaman
+Text:no text
+PT:3/2
+K:WheneverKeyword:EntersBattleField:Self:Play:DrawCards/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Masked Admirers enters the battlefield, draw a card.
+K:WheneverKeyword:CastSpell/Controller:Type/Creature:Graveyard:MoveFrom-Graveyard-Hand:Self:ASAP:PayMana/G G:No Special Condition:Whenever you cast a creature spell, you may pay G G. If you do, return Masked Admirers from your graveyard to your hand.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/masked_admirers.jpg
+End

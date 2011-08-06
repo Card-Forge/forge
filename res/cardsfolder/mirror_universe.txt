@@ -1,0 +1,7 @@
+Name:Mirror Universe
+ManaCost:6
+Types:Artifact
+Text:Tap, Sacrifice Mirror Universe: Exchange life totals with target opponent. Activate this ability only during your upkeep.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_universe.jpg
+End

@@ -1,0 +1,12 @@
+Name:Mystic Gate
+ManaCost:no cost
+Types:Land
+Text:no text
+K:tap: add 1
+K:WU, tap: add W W
+K:WU, tap: add W U
+K:WU, tap: add U U
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_gate.jpg
+End

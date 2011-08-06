@@ -1,0 +1,10 @@
+Name:Melancholy
+ManaCost:2 B
+Types:Enchantment Aura
+Text:Enchanted creature doesn't untap during its controller's untap step.
+K:Enchant creature
+K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay:B
+K:When CARDNAME enters the battlefield, tap enchanted creature.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/melancholy.jpg
+End

@@ -1,0 +1,9 @@
+Name:Moaning Spirit
+ManaCost:2 B
+Types:Creature Spirit
+Text:no text
+PT:2/1
+K:Flying
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6554.jpg
+End

@@ -1,0 +1,8 @@
+Name:Memnite
+ManaCost:0
+Types:Artifact Creature Construct
+Text:no text
+PT:1/1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://serv2.tcgimages.eu/img/cards/Scars_of_Mirrodin/memnite.jpg
+End

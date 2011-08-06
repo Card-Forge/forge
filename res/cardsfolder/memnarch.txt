@@ -1,0 +1,9 @@
+Name:Memnarch
+ManaCost:7
+Types:Legendary Artifact Creature Wizard
+Text:no text
+PT:4/5
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card51054.jpg
+End

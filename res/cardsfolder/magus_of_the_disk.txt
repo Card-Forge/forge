@@ -1,0 +1,9 @@
+Name:Magus of the Disk
+ManaCost:2 W W
+Types:Creature Human Wizard
+Text:no text
+PT:2/4
+K:CARDNAME enters the battlefield tapped.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card126298.jpg
+End

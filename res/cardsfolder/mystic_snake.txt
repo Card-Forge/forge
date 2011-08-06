@@ -1,0 +1,9 @@
+Name:Mystic Snake
+ManaCost:1 G U U
+Types:Creature Snake
+Text:When Mystic Snake comes into play, counter target spell.
+PT:2/2
+K:Flash
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_snake.jpg
+End

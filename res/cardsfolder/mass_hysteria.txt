@@ -1,0 +1,10 @@
+Name:Mass Hysteria
+ManaCost:R
+Types:Enchantment
+Text:All creatures have haste.
+K:SVar:RemAIDeck:True
+K:SVar:BuffedBy:Creature
+K:SVar:AntiBuffedBy:Creature
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mass_hysteria.jpg
+End

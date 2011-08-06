@@ -1,0 +1,8 @@
+Name:Marrow-Gnawer
+ManaCost:3 B B
+Types:Legendary Creature Rat Rogue
+Text:All rats have fear.
+PT:2/3
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/marrow_gnawer.jpg
+End

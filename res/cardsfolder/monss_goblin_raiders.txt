@@ -1,0 +1,8 @@
+Name:Mons's Goblin Raiders
+ManaCost:R
+Types:Creature Goblin
+Text:no text
+PT:1/1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/p4/en-us/card25491.jpg
+End

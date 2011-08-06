@@ -1,0 +1,9 @@
+Name:Mulldrifter
+ManaCost:4 U
+Types:Creature Elemental
+Text:When Mulldrifter comes into play, draw 2 cards.
+PT:2/2
+K:Flying
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mulldrifter.jpg
+End

@@ -1,0 +1,9 @@
+Name:Moorish Cavalry
+ManaCost:2 W W
+Types:Creature Human Knight
+Text:no text
+PT:3/3
+K:Trample
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108849.jpg
+End

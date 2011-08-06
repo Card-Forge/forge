@@ -1,0 +1,10 @@
+Name:Mawcor
+ManaCost:3 U U
+Types:Creature Beast
+Text:no text
+PT:3/3
+K:Flying
+K:abDamageTgtCP T:1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4712.jpg
+End

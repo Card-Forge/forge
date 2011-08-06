@@ -1,0 +1,7 @@
+Name:Maelstrom Pulse
+ManaCost:1 B G
+Types:Sorcery
+Text:Destroy target nonland permanent and all other permanents with the same name as that permanent.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/maelstrom_pulse.jpg
+End

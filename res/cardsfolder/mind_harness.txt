@@ -1,0 +1,10 @@
+Name:Mind Harness
+ManaCost:U
+Types:Enchantment Aura
+Text:You control enchanted creature.
+K:Enchant red or green creature
+K:Cumulative upkeep:1
+K:enControlCreature::Option=red or green
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_harness.jpg
+End

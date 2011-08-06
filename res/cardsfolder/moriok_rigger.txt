@@ -1,0 +1,9 @@
+Name:Moriok Rigger
+ManaCost:2 B
+Types:Creature Human Rogue Rigger
+Text:no text
+PT:2/2
+K:WheneverKeyword:PermanentIntoGraveyard:Type/Artifact:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - Other than Self:Whenever an artifact is put into a graveyard from the battlefield, you may put a +1/+1 counter on Moriok Rigger.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/moriok_rigger.jpg
+End

@@ -1,0 +1,9 @@
+Name:Merfolk Sovereign
+ManaCost:1 U U
+Types:Creature Merfolk
+Text:Other Merfolk creatures you control get +1/+1.
+PT:2/2
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_sovereign.jpg
+End

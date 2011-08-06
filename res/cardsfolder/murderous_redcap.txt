@@ -1,0 +1,10 @@
+Name:Murderous Redcap
+ManaCost:2 BR BR
+Types:Creature Goblin Assassin
+Text:no text
+PT:2/2
+K:Persist
+K:WheneverKeyword:EntersBattleField:Self:Play:Damage/Power:InputType - CreatureORPlayer:ASAP:No_Condition:SingleTarget:When Murderous Redcap enters the battlefield, it deals damage equal to its power to target creature or player.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/murderous_redcap.jpg
+End

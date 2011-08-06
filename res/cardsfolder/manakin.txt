@@ -1,0 +1,9 @@
+Name:Manakin
+ManaCost:2
+Types:Artifact Creature Construct
+Text:no text
+PT:1/1
+K:tap: add 1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/manakin.jpg
+End

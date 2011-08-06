@@ -1,0 +1,13 @@
+Name:Morphling
+ManaCost:3 U U
+Types:Creature Shapeshifter
+Text:no text
+PT:3/3
+K:Untap:U
+K:abPump U:Flying
+K:abPump U:Shroud
+K:abPump 1:+1/-1
+K:abPump 1:-1/+1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/morphling.jpg
+End

@@ -1,0 +1,7 @@
+Name:Maelstrom Nexus
+ManaCost:W U B R G
+Types:Enchantment
+Text:The first spell you cast each turn has cascade.
+K:SVar:Rarity:Mythic
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/maelstrom_nexus.jpg
+End

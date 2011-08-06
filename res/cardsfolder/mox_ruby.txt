@@ -1,0 +1,8 @@
+Name:Mox Ruby
+ManaCost:0
+Types:Artifact
+Text:no text
+K:tap: add R
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/2u/en-us/card632.jpg
+End

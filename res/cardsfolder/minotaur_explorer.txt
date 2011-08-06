@@ -1,0 +1,8 @@
+Name:Minotaur Explorer
+ManaCost:1 R
+Types:Creature Minotaur
+Text:When Minotaur Explorer comes into play, sacrifice it unless you discard a card at random.
+PT:3/3
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/od/en-us/card31786.jpg
+End

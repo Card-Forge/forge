@@ -1,0 +1,9 @@
+Name:Muddle the Mixture
+ManaCost:U U
+Types:Instant
+Text:Counter target instant or sorcery spell.
+K:spCounter:Spell:Type(Instant,Sorcery):Graveyard:None
+K:Transmute:1 U U
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/muddle_the_mixture.jpg
+End

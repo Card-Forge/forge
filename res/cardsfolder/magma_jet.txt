@@ -1,0 +1,9 @@
+Name:Magma Jet
+ManaCost:1 R
+Types:Instant
+Text:no text
+K:spDamageTgtCP:2
+K:Scry 2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_jet.jpg
+End

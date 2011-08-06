@@ -1,0 +1,7 @@
+Name:Millstone
+ManaCost:2
+Types:Artifact
+Text:no text
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/millstone.jpg
+End
