@@ -1,0 +1,10 @@
+Name:Angel of Fury
+ManaCost:4 W W
+Types:Creature Angel
+PT:3/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | Optional$ True | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ If CARDNAME is put into your graveyard from play, you may choose to shuffle CARDNAME into your library.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Library | Defined$ Self
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/angel_of_fury.jpg
+End
