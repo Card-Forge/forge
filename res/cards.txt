@@ -1,3 +1,28 @@
+Fire-Field Ogre
+1 U B R
+Creature Ogre Mutant
+no text
+4/2
+First Strike
+Unearth:U B R
+
+Implements of Sacrifice
+2
+Artifact
+no text
+1, tap, Sacrifice CARDNAME: Add W W to your mana pool.
+1, tap, Sacrifice CARDNAME: Add U U to your mana pool.
+1, tap, Sacrifice CARDNAME: Add B B to your mana pool.
+1, tap, Sacrifice CARDNAME: Add R R to your mana pool.
+1, tap, Sacrifice CARDNAME: Add G G to your mana pool.
+
+Kaleidostone
+2
+Artifact
+no text
+When CARDNAME enters the battlefield, draw a card.
+5, tap, Sacrifice CARDNAME: Add W U B R G to your mana pool.
+
 Crimson Kobolds
 0
 Creature Kobold
@@ -3787,14 +3812,6 @@ Flying
 Haste
 At the beginning of the end step, sacrifice CARDNAME.
 Unearth:4 R
-
-Fire-Field Ogre
-1 U B R
-Creature Ogre Mutant
-no text
-4/2
-First Strike
-Unearth:1 U B R
 
 Etherium Abomination
 3 U B
