@@ -1,0 +1,10 @@
+Name:Dark Maze
+ManaCost:4 U
+Types:Creature Wall
+Text:no text
+PT:4/5
+K:Defender
+A:AB$Pump | Cost$ 0 | KW$ CARDNAME can attack as though it didn't have defender. & At the beginning of the end step, exile CARDNAME. | SpellDescription$ CARDNAME can attack this turn as though it didn't have defender. Exile it at the beginning of the next end step.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_maze.jpg
+End
