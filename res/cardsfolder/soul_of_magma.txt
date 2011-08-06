@@ -4,7 +4,7 @@ Types:Creature Spirit
 Text:no text
 PT:2/2
 T:Mode$ SpellCast | ValidCard$ Card.Spirit,Card.Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, CARDNAME deals 1 damage to target creature.
-SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1
 SVar:BuffedBy:Arcane,Spirit
 SVar:RemAIDeck:True
 SVar:Rarity:Common

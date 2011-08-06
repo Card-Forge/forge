@@ -4,7 +4,6 @@ Types:Creature Elf Archer
 Text:no text
 PT:2/4
 K:stPumpAll:Creature.Archer+Other+YouCtrl:1/1:No Condition:Other Archer creatures you control get +1/+1.
-Whenever an Archer you control deals damage to a creature, that Archer deals that much damage to that creature's controller.
 T:Mode$ DamageDone | ValidSource$ Archer.YouCtrl | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever an Archer you control deals damage to a creature, that Archer deals that much damage to that creature's controller.
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredTargetController | DamageSource$ TriggeredSource | NumDmg$ X
 SVar:X:Count$TriggeredDamageAmount
