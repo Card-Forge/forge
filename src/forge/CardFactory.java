@@ -2406,35 +2406,13 @@ public class CardFactory implements NewConstants {
             }; //SpDstryTgt
             
             Input InGetTarget = CardFactoryUtil.input_targetValid(spDstryTgt, Tgts, Selec);
-            	/*new Input() {
-                private static final long serialVersionUID = -142142142142L;
-                
-                @Override
-                public void showMessage() {
-                    CardList allCards = new CardList();
-                    allCards.addAll(AllZone.Human_Play.getCards());
-                    allCards.addAll(AllZone.Computer_Play.getCards());
-                    / *allCards.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return (CardFactoryUtil.canTarget(card, c));
-                        }
-                    });* ///Input_targetSpecific already checks for this
-                    
-                    CardList choices = allCards.getValidCards(Tgts);
-                    boolean free = false;
-                    if(this.isFree()) free = true;
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(spDstryTgt, choices, Selec, true, free));
-                }
-            };*///InGetTarget
-            
-            //card.clearSpellAbility();
-            
-            card.setSVar("PlayMain1", "TRUE");
             
             spDstryTgt.setBeforePayMana(InGetTarget);
             
             spDstryTgt.setDescription(card.getSpellText());
             card.setText("");
+            
+            card.setSVar("PlayMain1", "TRUE");
             
             card.addSpellAbility(spDstryTgt);
             
@@ -2466,7 +2444,29 @@ public class CardFactory implements NewConstants {
             //non-White, non-Blue, non-Black, non-Red, non-Green, non-Colorless, non-MultiColor
             final String Tgts[] = Targets.split(",");
             
-            final boolean NoRegen = (k.length == 3);
+            final boolean NoRegen[] = {false};
+            final String Drawback[] = {"none"};
+            
+            if (k.length > 2)
+            {
+            	if (k[2].equals("NoRegen"))
+            		NoRegen[0] = true;
+            	
+            	else if (k[2].startsWith("Drawback$"))
+            		Drawback[0] = k[2];
+            	            	
+            	if (k.length > 3)
+            	{
+            		if (k[3].startsWith("Drawback$"))
+            			Drawback[0] = k[3];
+            	}
+            	
+            	if (!Drawback[0].equals("none"))
+            	{
+            		String kk[] = Drawback[0].split("\\$");
+                    Drawback[0] = kk[1];
+            	}
+            }
             
             card.clearSpellAbility();
             
@@ -2508,7 +2508,33 @@ public class CardFactory implements NewConstants {
                     
                     for(int i = 0; i < all.size(); i++) {
                         Card c = all.get(i);
-                        if(NoRegen) AllZone.GameAction.destroyNoRegeneration(c); else AllZone.GameAction.destroy(c);
+                        if(NoRegen[0])
+                        	AllZone.GameAction.destroyNoRegeneration(c);
+                        else
+                        	AllZone.GameAction.destroy(c);
+                        
+                    }
+                    
+                    if (!Drawback[0].equals("none"))
+                    {
+                    	// drawbacks for DestroyAll spells usually involve the
+                    	// number of permanents that were actually destroyed
+                    	int nDestroyed = 0;
+	                    CardList Yards = new CardList();
+	                    Yards.addAll(AllZone.Human_Graveyard.getCards());
+	                    Yards.addAll(AllZone.Computer_Graveyard.getCards());
+	                    
+	                    ArrayList<Integer> slD = new ArrayList<Integer>();
+	                    for (int i=0; i<all.size(); i++)
+	                    	slD.add(all.get(i).getUniqueNumber());
+	                    
+	                    for (int i=0; i<Yards.size(); i++)
+	                    {
+	                    	if (slD.contains(Yards.get(i).getUniqueNumber()))
+	                    		nDestroyed++;
+	                    }
+	                    Log.error("nDestroyed: " + nDestroyed);
+	                    CardFactoryUtil.doDrawBack(Drawback[0], nDestroyed, card.getController(), AllZone.GameAction.getOpponent(card.getController()), null, card, null);
                     }
                 }// resolve()
 
