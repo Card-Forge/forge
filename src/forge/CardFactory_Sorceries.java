@@ -2991,7 +2991,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
             
-            card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "1 U", "3"));
+            card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "1 U PayLife<3>"));
             card.setFlashback(true);
         }//*************** END ************ END **************************
         
@@ -3174,7 +3174,7 @@ public class CardFactory_Sorceries {
             card.setFlashback(true);
             card.clearSpellAbility();
             card.addSpellAbility(spell);
-            card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "4 G G G", "0"));
+            card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "4 G G G"));
         }//*************** END ************ END **************************
         
         
@@ -3208,7 +3208,7 @@ public class CardFactory_Sorceries {
             card.setFlashback(true);
             card.clearSpellAbility();
             card.addSpellAbility(spell);
-            card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "5 G G", "0"));
+            card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "5 G G"));
             
         }//*************** END ************ END **************************
         

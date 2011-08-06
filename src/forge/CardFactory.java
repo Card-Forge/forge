@@ -663,325 +663,6 @@ public class CardFactory implements NewConstants {
     		card.addSpellAbility(spell);
     		spell.setBeforePayMana(runtime);
     	}//spCounter
-        /*
-        if(hasKeyword(card,"spCounter") != -1) {
-        	//System.out.println("Processing spCounter for card " + card.getName());
-        	ComputerAI_counterSpells2.KeywordedCounterspells.add(card.getName());
-        	String keyword = card.getKeyword().get(hasKeyword(card,"spCounter"));
-        	if(keyword.contains("X"))
-        	{
-        		keyword = keyword.replace("X", card.getSVar("X"));
-        	}
-            card.removeIntrinsicKeyword(keyword);
-        	
-        	String[] splitkeyword = keyword.split(":");
-        	
-        	final String TargetType = splitkeyword[1];
-        	final String TargetingRestrictions = splitkeyword[2];
-        	final String Destination = splitkeyword[3];
-        	final String ExtraActions = splitkeyword[4];
-        	
-        	final String[] SplitTargetingRestrictions = TargetingRestrictions.split(" ");
-        	final String[] SplitExtraActions = ExtraActions.split(" ");
-        	
-        	SpellAbility spCounterAbility = new Spell(card)
-        	{
-        		private static final long serialVersionUID = 9763720166553L;
-        		
-        		@Override
-        		public boolean canPlayAI()
-        		{
-        			System.out.println("AI is pondering us...");
-        			return canPlay();
-        		}
-        		
-        		@Override
-        		public boolean canPlay()
-        		{
-        			if(AllZone.Stack.size() == 0)
-        			{
-        				return false;
-        			}
-        			
-        			boolean fullResult = true;
-        			SpellAbility sa = AllZone.Stack.peek();
-        			Card tgtCard = sa.getSourceCard();
-        			
-        			if(TargetType.equals("Spell"))
-        			{
-        				if(sa.isAbility())
-        				{
-        					System.out.println(card.getName() + " can only counter spells, not abilities.");
-        					return false;
-        					
-        				}
-        			}
-        			else if(TargetType.equals("Ability"))
-        			{
-        				if(sa.isSpell())
-        				{
-        					System.out.println(card.getName() + " can only counter abilities, not spells.");
-        					return false;
-        				}
-        			}
-        			else if(TargetType.equals("SpellOrAbility"))
-        			{
-        				//Do nothing. This block is only for clarity and enforcing parameters.
-        			}
-        			else
-        			{
-        				throw new IllegalArgumentException("Invalid target type for card " + card.getName());
-        			}
-        			
-        			for(int i=0;i<SplitTargetingRestrictions.length;i++)
-        			{
-        				boolean subResult = false;
-        				if(TargetingRestrictions.equals("None"))
-        				{
-        					return true;
-        				}
-        				
-        				String RestrictionID = SplitTargetingRestrictions[i].substring(0,SplitTargetingRestrictions[i].indexOf('('));
-        				String Parameters = SplitTargetingRestrictions[i].substring(SplitTargetingRestrictions[i].indexOf('(')+1);
-        				Parameters = Parameters.substring(0,Parameters.length()-1);
-        				
-        				String[] SplitParameters = Parameters.split(",");
-        				
-        				System.out.println(card.getName() + " currently checking restriction '" + RestrictionID + "'");
-        				if(RestrictionID.equals("Color"))
-        				{
-        					for(int p=0;p<SplitParameters.length;p++)
-        					{
-        						System.out.println("Parameter: " + SplitParameters[p]);
-        						if(SplitParameters[p].startsWith("Non-"))
-        						{
-        							subResult |= !CardUtil.getColors(tgtCard).contains(SplitParameters[p].substring(4).toLowerCase()); 
-        						}
-        						else
-        						{
-        							subResult |= CardUtil.getColors(tgtCard).contains(SplitParameters[p].toLowerCase());
-        						}
-        					}
-        				}
-        				else if(RestrictionID.equals("Type"))
-        				{
-        					for(int p=0;p<SplitParameters.length;p++)
-        					{
-        						System.out.println("Parameter: " + SplitParameters[p]);
-        						if(SplitParameters[p].startsWith("Non-"))
-        						{
-        							System.out.println(SplitParameters[p].substring(4));
-        							subResult |= !tgtCard.getType().contains(SplitParameters[p].substring(4));
-        						}
-        						else
-        						{
-        							subResult |= tgtCard.getType().contains(SplitParameters[p]);
-        						}
-        					}
-        				}
-        				else if(RestrictionID.equals("CMC"))
-        				{
-        					String mode = SplitParameters[0];
-        					int value = Integer.parseInt(SplitParameters[1]);
-        					System.out.println(mode);
-        					System.out.println(Integer.toString(value));
-        					
-        					if(mode.equals("<"))
-        					{
-        						subResult |= (CardUtil.getConvertedManaCost(tgtCard) < value);
-        					}
-        					else if(mode.equals(">"))
-        					{
-        						subResult |= (CardUtil.getConvertedManaCost(tgtCard) > value);
-        					}
-        					else if(mode.equals("=="))
-        					{
-        						subResult |= (CardUtil.getConvertedManaCost(tgtCard) == value);
-        					}
-        					else if(mode.equals("!="))
-        					{
-        						subResult |= (CardUtil.getConvertedManaCost(tgtCard) != value);
-        					}
-        					else if(mode.equals("<="))
-        					{
-        						subResult |= (CardUtil.getConvertedManaCost(tgtCard) <= value);
-        					}
-        					else if(mode.equals(">="))
-        					{
-        						subResult |= (CardUtil.getConvertedManaCost(tgtCard) >= value);
-        					}        					
-        					else
-        					{
-        						throw new IllegalArgumentException("spCounter: Invalid mode parameter to CMC restriction in card " + card.getName());
-        					}
-        				}
-        				else if(RestrictionID.equals("Targets"))
-        				{        		
-							if(sa.getTargetCard() == null)
-							{
-								return false;
-							}
-        					for(int p=0;p<SplitParameters.length;p++)
-        					{
-        						System.out.println("Parameter: " + SplitParameters[p]);
-        						if(SplitParameters[p].startsWith("My-")) //Targets my <type> permanent
-        						{
-        							if(sa.getTargetCard().getController() != card.getController())
-        							{
-        								return false;
-        							}
-        							if(SplitParameters[p].contains("Non-"))
-        							{
-        								subResult |= !sa.getTargetCard().getType().contains(SplitParameters[p].substring(7));
-        							}
-        							else
-        							{
-        								subResult |= (sa.getTargetCard().getType().contains(SplitParameters[p].substring(3)));
-        							}
-        						}
-        						else if(SplitParameters[p].startsWith("Opp-")) //Targets opponent's <type> permanent
-        						{
-        							if(sa.getTargetCard().getController() == card.getController())
-        							{
-        								return false;
-        							}
-        							
-        							if(SplitParameters[p].contains("Non-"))
-        							{
-        								subResult |= !(sa.getTargetCard().getType().contains(SplitParameters[p].substring(8)));
-        							}
-        							else
-        							{
-        								subResult |= (sa.getTargetCard().getType().contains(SplitParameters[p].substring(4)));
-        							}
-        						}
-        						else
-        						{
-        							if(SplitParameters[p].contains("Non-"))
-        							{
-        								subResult |= !(sa.getTargetCard().getType().contains(SplitParameters[p].substring(4)));
-        							}
-        							else
-        							{
-        								subResult |= (sa.getTargetCard().getType().contains(SplitParameters[p]));
-        							}
-        						}
-        					}
-        				}
-        				System.out.println("Sub: " + Boolean.toString(subResult));
-        				fullResult &= subResult;
-        			} //End Targeting parsing
-        			System.out.println("Success: " + Boolean.toString(fullResult));
-        			return fullResult;
-        		}
-        		
-        		@Override
-        		public void resolve()
-        		{
-        			System.out.println("Resolving " + card.getName());
-        			SpellAbility sa = AllZone.Stack.pop();
-        			
-        			System.out.println("Send countered spell to " + Destination);
-        			
-        			if(Destination.equals("None") || TargetType.contains("Ability")) //For Ability-targeting counterspells
-        			{
-        				
-        			}
-        			else if(Destination.equals("Graveyard"))
-        			{
-        				AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
-        			}
-        			else if(Destination.equals("Exile"))
-        			{
-        				AllZone.GameAction.exile(sa.getSourceCard());
-        			}
-        			else if(Destination.equals("Topdeck"))
-        			{
-        				AllZone.GameAction.moveToTopOfLibrary(sa.getSourceCard());
-        			}
-        			else if(Destination.equals("Hand"))
-        			{
-        				AllZone.GameAction.moveToHand(sa.getSourceCard());
-        			}
-        			else if(Destination.equals("BottomDeck"))
-        			{
-        				AllZone.GameAction.moveToBottomOfLibrary(sa.getSourceCard());
-        			}
-        			else if(Destination.equals("Shuffle"))
-        			{
-        				AllZone.GameAction.moveToBottomOfLibrary(sa.getSourceCard());
-        				sa.getSourceCard().getController().shuffle();
-        			}
-        			else
-        			{
-        				throw new IllegalArgumentException("spCounter: Invalid Destination argument for card " + card.getName());
-        			}
-        			
-        			for(int ea = 0;ea<SplitExtraActions.length;ea++)
-        			{
-        				
-        				if(ExtraActions.equals("None"))
-        				{
-        					break;
-        				}
-        				String ActionID = SplitExtraActions[ea].substring(0,SplitExtraActions[ea].indexOf('('));
-        				
-        				Player Target = null;
-        				
-        				String ActionParams = SplitExtraActions[ea].substring(SplitExtraActions[ea].indexOf('(')+1);
-        				ActionParams = ActionParams.substring(0,ActionParams.length()-1);
-        				
-        				String[] SplitActionParams = ActionParams.split(",");
-        				
-        				System.out.println("Extra Action: " + ActionID);
-        				System.out.println("Parameters: " + ActionParams);
-        				
-        				if(ActionID.startsWith("My-"))
-        				{
-        					ActionID = ActionID.substring(3);
-        					Target = card.getController();
-        				}
-        				else if(ActionID.startsWith("Opp-"))
-        				{
-        					ActionID = ActionID.substring(4);
-        					Target = card.getController().getOpponent();
-        				}
-        				else if(ActionID.startsWith("CC-"))
-        				{
-        					ActionID = ActionID.substring(3);
-        					Target = sa.getSourceCard().getController();
-        				}
-        				
-        				if(ActionID.equals("Draw"))
-        				{
-        					Target.drawCards(Integer.parseInt(SplitActionParams[0]));
-        				}
-        				else if(ActionID.equals("Discard"))
-        				{
-        					//AllZone.GameAction.discard(Target, Integer.parseInt(SplitActionParams[0]), this);
-        					Target.discard(Integer.parseInt(SplitActionParams[0]), this);
-        				}
-        				else if(ActionID.equals("LoseLife"))
-        				{
-        					Target.loseLife(Integer.parseInt(SplitActionParams[0]), card);
-        				}
-        				else if(ActionID.equals("GainLife"))
-        				{
-        					Target.gainLife(Integer.parseInt(SplitActionParams[0]), card);
-        				}
-        				else
-        				{
-        					throw new IllegalArgumentException("spCounter: Invalid Extra Action for card " + card.getName());
-        				}
-        			}
-        		}
-        	};
-        	
-        	card.clearSpellAbility();
-        	card.addSpellAbility(spCounterAbility);
-        } //spCounter
-        */        
-
         // Support for using string variables to define Count$ for X or Y
         // Or just about any other String that a card object needs at any given time
 // TODO: To Be Removed 
@@ -6832,28 +6513,6 @@ public class CardFactory implements NewConstants {
         	card.setSVar("PlayMain1", "TRUE");
         }//End spUntapAll keyword
         
-        if (hasKeyword(card, "Flashback") != -1) {
-            int n = hasKeyword(card, "Flashback");
-            if (n != -1) {
-                String parse = card.getKeyword().get(n).toString();
-                //card.removeIntrinsicKeyword(parse);
-                
-                final String lifeCost[] = {"0"};
-                
-                String k[] = parse.split(":");
-                String cost[] = k[1].split(",");
-                final String manaCost = cost[0];
-                
-                if (cost.length > 1) {
-                    lifeCost[0] = cost[1];
-                }
-                
-                card.setFlashback(true);
-                card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, manaCost, lifeCost[0]));
-            }
-        }//flashback
-
-        
         //**************************************************
         // AbilityFactory cards
         ArrayList<String> IA = card.getIntrinsicAbilities();
@@ -12092,6 +11751,7 @@ public class CardFactory implements NewConstants {
     	// this function should handle any keywords that need to be added after a spell goes through the factory
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
+    	
         if(hasKeyword(card, "Cycling") != -1) {
             int n = hasKeyword(card, "Cycling");
             if(n != -1) {
@@ -12118,6 +11778,19 @@ public class CardFactory implements NewConstants {
                 card.addSpellAbility(CardFactoryUtil.ability_typecycle(card, manacost, type));
             }
         }//TypeCycling
+        
+        if (hasKeyword(card, "Flashback") != -1) {
+            int n = hasKeyword(card, "Flashback");
+            if (n != -1) {
+                String parse = card.getKeyword().get(n).toString();
+                //card.removeIntrinsicKeyword(parse);
+                
+                String k[] = parse.split(":");
+                
+                card.setFlashback(true);
+                card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, k[1]));
+            }
+        }//flashback
         
         if(hasKeyword(card, "Transmute") != -1) {
             int n = hasKeyword(card, "Transmute");

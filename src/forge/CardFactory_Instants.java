@@ -4100,7 +4100,7 @@ public class CardFactory_Instants {
       		  
       	  if (cardName.equals("Moment's Peace")) {
       		  card.setFlashback(true);
-      		  card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "2 G", "0"));
+      		  card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "2 G"));
       	  }
         }//*************** END ************ END **************************
           

@@ -1130,8 +1130,8 @@ public class CardFactoryUtil {
         return a1;
     }
     
-    public static SpellAbility ability_Flashback(final Card sourceCard, String manaCost, String lifeloss) {
-        final int loss = Integer.parseInt(lifeloss);
+    public static SpellAbility ability_Flashback(final Card sourceCard, String cost) {
+    	Ability_Cost fbCost = new Ability_Cost(cost,sourceCard.getName(),true);
         final SpellAbility flashback = new Spell(sourceCard) {
             
             private static final long serialVersionUID = -4196027546564209412L;
@@ -1145,15 +1145,11 @@ public class CardFactoryUtil {
                 SpellAbility flash = sa[0];
                 flash.setFlashBackAbility(true);
                 AllZone.Stack.add(flash);
-                
-                sourceCard.getController().loseLife(loss, sourceCard);
-                
             }
             
             @Override
             public boolean canPlayAI() {
-                int life = AllZone.ComputerPlayer.getLife();
-                return (life > (loss + 2));
+                return ComputerUtil.canPayCost(this);
             }
             
             @Override
@@ -1169,14 +1165,15 @@ public class CardFactoryUtil {
             }
             
         };
-        
+        /*
         String lifecost = "";
         if(loss != 0) lifecost = ", pay " + lifeloss + " life";
         
-        flashback.setManaCost(manaCost);
+        flashback.setManaCost(manaCost);*/
+        flashback.payCosts = fbCost;
         
         StringBuilder sbDesc = new StringBuilder();
-        sbDesc.append("Flashback: ").append(manaCost).append(lifecost);
+        sbDesc.append("Flashback: ").append(cost.toString());//.append(lifecost);
         flashback.setDescription(sbDesc.toString());
         
         StringBuilder sbStack = new StringBuilder();
