@@ -6599,6 +6599,7 @@ res/cardsfolder/spitebellows.txt -text svneol=native#text/plain
 res/cardsfolder/spiteflame_witch.txt -text svneol=native#text/plain
 res/cardsfolder/spiteful_bully.txt svneol=native#text/plain
 res/cardsfolder/spiteful_visions.txt -text svneol=native#text/plain
+res/cardsfolder/spitemare.txt -text svneol=native#text/plain
 res/cardsfolder/spitfire_handler.txt -text svneol=native#text/plain
 res/cardsfolder/spitting_drake.txt -text svneol=native#text/plain
 res/cardsfolder/spitting_earth.txt -text svneol=native#text/plain
