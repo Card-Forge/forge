@@ -193,6 +193,11 @@ public class Card extends MyObservable {
     		t.setHostCard(this);
     	}
     }
+    
+    public void clearTriggersNew()
+    {
+    	triggers.clear();
+    }
                                                                                                                      
     public void setAbilityTurnUsed(int i) {
         abilityTurnUsed = i;

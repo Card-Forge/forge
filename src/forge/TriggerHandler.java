@@ -25,6 +25,10 @@ public class TriggerHandler {
 		{
 			ret = new Trigger_Attacks(mapParams,host);
 		}
+		else if(mode.equals("Blocks"))
+		{
+			ret = new Trigger_Blocks(mapParams,host);
+		}
 		else if(mode.equals("ChangesZone"))
 		{
 			ret = new Trigger_ChangesZone(mapParams,host);
@@ -215,14 +219,470 @@ public class TriggerHandler {
 					}
 				}
 			}
-			
+
+			//Wrapper ability that checks the requirements again just before resolving, for intervening if clauses.
+			//Yes, it must wrap ALL SpellAbility methods in order to handle possible corner cases.
+			//(The trigger can have a hardcoded OverridingAbility which can make use of any of the methods)
 			final Ability wrapperAbility = new Ability(regtrig.getHostCard(),"0") {
 				@Override
+				public void addDiscardedCost(Card c)
+				{
+					sa[0].addDiscardedCost(c);
+				}
+				
+				@Override 
+				public void addSacrificedCost(Card c)
+				{
+					sa[0].addSacrificedCost(c);
+				}
+				
+				@Override
+				public boolean canPlay()
+				{
+					return sa[0].canPlay();
+				}
+				
+				@Override
+				public boolean canPlayAI()
+				{
+					return sa[0].canPlayAI();
+				}
+				
+				@Override
+				public void chooseTargetAI()
+				{
+					sa[0].chooseTargetAI();
+				}
+				
+				@Override
+				public SpellAbility copy()
+				{
+					return sa[0].copy();
+				}
+				
+				@Override
+				public AbilityFactory getAbilityFactory()
+				{
+					return sa[0].getAbilityFactory();
+				}
+				
+				@Override
+				public Player getActivatingPlayer()
+				{
+					return sa[0].getActivatingPlayer();
+				}
+				
+				@Override
+				public Input getAfterPayMana()
+				{
+					return sa[0].getAfterPayMana();
+				}
+			
+				@Override
+				public Input getAfterResolve()
+				{
+					return sa[0].getAfterResolve();
+				}
+				
+				@Override
+				public Input getBeforePayMana()
+				{
+					return sa[0].getBeforePayMana();
+				}
+				
+				@Override
+				public Command getBeforePayManaAI()
+				{
+					return sa[0].getBeforePayManaAI();
+				}
+				
+				@Override
+				public Command getCancelCommand()
+				{
+					return sa[0].getCancelCommand();
+				}
+				
+				@Override
+				public CommandArgs getChooseTargetAI()
+				{
+					return sa[0].getChooseTargetAI();
+				}
+				
+				@Override
+				public String getDescription()
+				{
+					return sa[0].getDescription();
+				}
+				
+				@Override
+				public CardList getDiscardedCost()
+				{
+					return sa[0].getDiscardedCost();
+				}
+				
+				@Override
+				public String getManaCost()
+				{
+					return sa[0].getManaCost();
+				}
+				
+				@Override
+				public String getMultiKickerManaCost()
+				{
+					return sa[0].getMultiKickerManaCost();
+				}
+				
+				@Override
+				public Ability_Cost getPayCosts()
+				{
+					return sa[0].getPayCosts();
+				}
+				
+				@Override
+				public SpellAbility_Restriction getRestrictions()
+				{
+					return sa[0].getRestrictions();
+				}
+				
+				@Override
+				public CardList getSacrificedCost()
+				{
+					return sa[0].getSacrificedCost();
+				}
+				
+				@Override
+				public Card getSourceCard()
+				{
+					return sa[0].getSourceCard();
+				}
+				
+				@Override
 				public String getStackDescription()
-				{					
+				{
 					return sa[0].getStackDescription();
 				}
 				
+				@Override
+				public Ability_Sub getSubAbility()
+				{
+					return sa[0].getSubAbility();
+				}
+				
+				@Override
+				public Target getTarget()
+				{
+					return sa[0].getTarget();
+				}
+				
+				@Override
+				public Card getTargetCard()
+				{
+					return sa[0].getTargetCard();
+				}
+				
+				@Override
+				public CardList getTargetList()
+				{
+					return sa[0].getTargetList();
+				}
+				
+				@Override
+				public Player getTargetPlayer()
+				{
+					return sa[0].getTargetPlayer();
+				}
+				
+				@Override
+				public String getXManaCost()
+				{
+					return sa[0].getXManaCost();
+				}
+				
+				@Override
+				public boolean isAbility()
+				{
+					return sa[0].isAbility();
+				}
+				
+				@Override
+				public boolean isBuyBackAbility()
+				{
+					return sa[0].isBuyBackAbility();
+				}
+				
+				@Override
+				public boolean isCycling()
+				{
+					return sa[0].isCycling();
+				}
+				
+				@Override
+				public boolean isExtrinsic()
+				{
+					return sa[0].isExtrinsic();
+				}
+				
+				@Override
+				public boolean isFlashBackAbility()
+				{
+					return sa[0].isFlashBackAbility();
+				}
+				
+				@Override
+				public boolean isIntrinsic()
+				{
+					return sa[0].isIntrinsic();
+				}
+				
+				@Override
+				public boolean isKickerAbility()
+				{
+					return sa[0].isKickerAbility();
+				}
+				
+				@Override
+				public boolean isKothThirdAbility()
+				{
+					return sa[0].isKothThirdAbility();
+				}
+				
+				@Override
+				public boolean isMultiKicker()
+				{
+					return sa[0].isMultiKicker();
+				}
+				
+				@Override
+				public boolean isSpell()
+				{
+					return sa[0].isSpell();
+				}
+				
+				@Override
+				public boolean isTapAbility()
+				{
+					return sa[0].isTapAbility();
+				}
+				
+				@Override
+				public boolean isUntapAbility()
+				{
+					return sa[0].isUntapAbility();
+				}
+				
+				@Override
+				public boolean isXCost()
+				{
+					return sa[0].isXCost();
+				}
+				
+				@Override
+				public void resetDiscardedCost()
+				{
+					sa[0].resetDiscardedCost();
+				}
+				
+				@Override
+				public void resetOnceResolved()
+				{
+					sa[0].resetOnceResolved();
+				}
+				
+				@Override
+				public void resetSacrificedCost()
+				{
+					sa[0].resetSacrificedCost();
+				}
+				
+				@Override
+				public void setAbilityFactory(AbilityFactory af)
+				{
+					sa[0].setAbilityFactory(af);
+				}
+				
+				@Override
+				public void setActivatingPlayer(Player player)
+				{
+					sa[0].setActivatingPlayer(player);
+				}
+				
+				@Override
+				public void setAdditionalManaCost(String cost)
+				{
+					sa[0].setAdditionalManaCost(cost);
+				}
+				
+				@Override
+				public void setAfterPayMana(Input in)
+				{
+					sa[0].setAfterPayMana(in);
+				}
+				
+				@Override
+				public void setAfterResolve(Input in)
+				{
+					sa[0].setAfterResolve(in);
+				}
+				
+				@Override
+				public void setBeforePayMana(Input in)
+				{
+					sa[0].setBeforePayMana(in);
+				}
+				
+				@Override
+				public void setBeforePayManaAI(Command c)
+				{
+					sa[0].setBeforePayManaAI(c);
+				}
+				
+				@Override
+				public void setCancelCommand(Command cancelCommand)
+				{
+					sa[0].setCancelCommand(cancelCommand);
+				}
+				
+				@Override
+				public void setChooseTargetAI(CommandArgs c)
+				{
+					sa[0].setChooseTargetAI(c);
+				}
+				
+				@Override
+				public void setDescription(String s)
+				{
+					sa[0].setDescription(s);
+				}
+				
+				@Override
+				public void setFlashBackAbility(boolean flashBackAbility)
+				{
+					sa[0].setFlashBackAbility(flashBackAbility);
+				}
+				
+				@Override
+				public void setIsBuyBackAbility(boolean b)
+				{
+					sa[0].setIsBuyBackAbility(b);
+				}
+				
+				@Override
+				public void setIsCycling(boolean b)
+				{
+					sa[0].setIsCycling(b);
+				}
+				
+				@Override
+				public void setIsMultiKicker(boolean b)
+				{
+					sa[0].setIsMultiKicker(b);
+				}
+				
+				@Override
+				public void setIsXCost(boolean b)
+				{
+					sa[0].setIsXCost(b);
+				}
+				
+				@Override
+				public void setKickerAbility(boolean kab)
+				{
+					sa[0].setKickerAbility(kab);
+				}
+				
+				@Override
+				public void setKothThirdAbility(boolean kothThirdAbility)
+				{
+					sa[0].setKothThirdAbility(kothThirdAbility);
+				}
+				
+				@Override
+				public void setManaCost(String cost)
+				{
+					sa[0].setManaCost(cost);
+				}
+				
+				@Override
+				public void setMultiKickerManaCost(String cost)
+				{
+					sa[0].setMultiKickerManaCost(cost);
+				}
+				
+				@Override
+				public void setPayCosts(Ability_Cost abCost)
+				{
+					sa[0].setPayCosts(abCost);
+				}
+				
+				@Override
+				public void setRestrictions(SpellAbility_Restriction restrict)
+				{
+					sa[0].setRestrictions(restrict);
+				}
+				
+				@Override
+				public void setSourceCard(Card c)
+				{
+					sa[0].setSourceCard(c);
+				}
+				
+				@Override
+				public void setStackDescription(String s)
+				{
+					sa[0].setStackDescription(s);
+				}
+				
+				@Override
+				public void setSubAbility(Ability_Sub subAbility)
+				{
+					sa[0].setSubAbility(subAbility);
+				}
+				
+				@Override
+				public void setTarget(Target tgt)
+				{
+					sa[0].setTarget(tgt);
+				}
+				
+				@Override
+				public void setTargetCard(Card card)
+				{
+					sa[0].setTargetCard(card);
+				}
+				
+				@Override
+				public void setTargetList(CardList list)
+				{
+					sa[0].setTargetList(list);
+				}
+				
+				@Override
+				public void setTargetPlayer(Player p)
+				{
+					sa[0].setTargetPlayer(p);
+				}
+				
+				@Override
+				public void setType(String s)
+				{
+					sa[0].setType(s);
+				}
+				
+				@Override
+				public void setXManaCost(String cost)
+				{
+					sa[0].setXManaCost(cost);
+				}
+				
+				@Override
+				public boolean wasCancelled()
+				{
+					return sa[0].wasCancelled();
+				}
+				
+				////////////////////////////////////////
+				//THIS ONE IS ALL THAT MATTERS
+				////////////////////////////////////////
 				@Override
 				public void resolve()
 				{
