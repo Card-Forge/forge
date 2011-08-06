@@ -1,0 +1,10 @@
+Name:Lady Evangela
+ManaCost:W U B
+Types:Legendary Creature Human Cleric
+Text:no text
+PT:1/2
+K:abPumpTgtC W B T:HIDDEN Prevent all combat damage that would be dealt by CARDNAME.:Prevent all combat damage that would be dealt by target creature this turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lady_evangela.jpg
+End
