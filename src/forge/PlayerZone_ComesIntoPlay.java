@@ -112,6 +112,8 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
 		CardList meek = new CardList(grave.getCards());
 		
+		meek = meek.getName("Sword of the Meek");
+		
 		if (meek.size() > 0 && c.isCreature() && c.getNetAttack() == 1 && c.getNetDefense() == 1)
 		{
 			for (int i=0;i<meek.size();i++)

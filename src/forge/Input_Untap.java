@@ -34,13 +34,19 @@ public class Input_Untap extends Input
       if(c[i].getNetAttack() < 3)
         c[i].untap();
   }
-  private boolean isMarbleTitanInPlay()
+  private boolean isMarbleTitanInPlay() //or Meekstone
   {
     CardList all = new CardList();
     all.addAll(AllZone.Human_Play.getCards());
     all.addAll(AllZone.Computer_Play.getCards());
-
-    all = all.getName("Marble Titan");
+    
+    all = all.filter(new CardListFilter()
+    {
+		public boolean addCard(Card c) {
+			return c.getName().equals("Meekstone") || c.getName().equals("Marble Titan");
+		}	
+    });
+    
     return all.size() > 0;
   }
   private void regularUntap()

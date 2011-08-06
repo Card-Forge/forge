@@ -16333,6 +16333,258 @@ public class CardFactory_Creatures {
 	      card.addComesIntoPlayCommand(intoPlay);
 	    }//*************** END ************ END **************************
 	      
+	    //*************** START *********** START **************************
+	    else if(cardName.equals("Faerie Harbinger"))
+	    {
+	      final SpellAbility ability = new Ability(card, "0")
+	      {
+	        public void resolve()
+	        {
+	          PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
+	          if(AllZone.GameAction.isCardInZone(getTargetCard(), lib))
+	          {
+	        	Card c = getTargetCard();
+	        	AllZone.GameAction.shuffle(card.getController());
+	        	lib.remove(c);
+		        lib.add(c, 0);  	
+	        	
+
+	          }
+	        }//resolve()
+	      };
+	      Command intoPlay = new Command()
+	      {
+
+			private static final long serialVersionUID = -708639335039567945L;
+
+			public void execute()
+	        {
+	          PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
+	          CardList cards = new CardList(lib.getCards());
+	          CardList faeries = new CardList();
+	          
+	          for (int i=0;i<cards.size();i++)
+	          {
+	        	  if(cards.get(i).getType().contains("Faerie") || cards.get(i).getKeyword().contains("Changeling"))
+	        	  {
+	        		  faeries.add(cards.get(i));
+	        	  }
+	          }
+
+	          String controller = card.getController();
+
+	          if(faeries.size() == 0)
+	            return;
+
+	          if(controller.equals(Constant.Player.Human))
+	          {
+	            Object o = AllZone.Display.getChoiceOptional("Select target card", faeries.toArray());
+	            if(o != null)
+	            {
+	              ability.setTargetCard((Card)o);
+	              AllZone.Stack.add(ability);
+	            }
+	          }
+	          else //computer
+	          {
+	            faeries.shuffle();
+	            ability.setTargetCard(faeries.get(0));
+	            AllZone.Stack.add(ability);
+	          }
+
+	        }//execute()
+	      };//Command
+	      card.addComesIntoPlayCommand(intoPlay);
+	    }//*************** END ************ END **************************
+	      
+	      //*************** START *********** START **************************
+	    else if(cardName.equals("Flamekin Harbinger"))
+	    {
+	      final SpellAbility ability = new Ability(card, "0")
+	      {
+	        public void resolve()
+	        {
+	          PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
+	          if(AllZone.GameAction.isCardInZone(getTargetCard(), lib))
+	          {
+	        	Card c = getTargetCard();
+	        	AllZone.GameAction.shuffle(card.getController());
+	        	lib.remove(c);
+		        lib.add(c, 0);  	
+	          }
+	        }//resolve()
+	      };
+	      Command intoPlay = new Command()
+	      {
+			private static final long serialVersionUID = 7114265436722599216L;
+
+			public void execute()
+	        {
+	          PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
+	          CardList cards = new CardList(lib.getCards());
+	          CardList ele = new CardList();
+	          
+	          for (int i=0;i<cards.size();i++)
+	          {
+	        	  if(cards.get(i).getType().contains("Elemental") || cards.get(i).getKeyword().contains("Changeling"))
+	        	  {
+	        		  ele.add(cards.get(i));
+	        	  }
+	          }
+
+	          String controller = card.getController();
+
+	          if(ele.size() == 0)
+	            return;
+
+	          if(controller.equals(Constant.Player.Human))
+	          {
+	            Object o = AllZone.Display.getChoiceOptional("Select target card", ele.toArray());
+	            if(o != null)
+	            {
+	              ability.setTargetCard((Card)o);
+	              AllZone.Stack.add(ability);
+	            }
+	          }
+	          else //computer
+	          {
+	        	ele.shuffle();
+	            ability.setTargetCard(ele.get(0));
+	            AllZone.Stack.add(ability);
+	          }
+
+	        }//execute()
+	      };//Command
+	      card.addComesIntoPlayCommand(intoPlay);
+	    }//*************** END ************ END **************************
+	    
+	      
+	    //*************** START *********** START **************************
+	    else if(cardName.equals("Giant Harbinger"))
+	    {
+	      final SpellAbility ability = new Ability(card, "0")
+	      {
+	        public void resolve()
+	        {
+	          PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
+	          if(AllZone.GameAction.isCardInZone(getTargetCard(), lib))
+	          {
+	        	Card c = getTargetCard();
+	        	AllZone.GameAction.shuffle(card.getController());
+	        	lib.remove(c);
+		        lib.add(c, 0);  	
+	        	
+
+	          }
+	        }//resolve()
+	      };
+	      Command intoPlay = new Command()
+	      {
+			private static final long serialVersionUID = -2671592749882297551L;
+
+			public void execute()
+	        {
+	          PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
+	          CardList cards = new CardList(lib.getCards());
+	          CardList giants = new CardList();
+	          
+	          for (int i=0;i<cards.size();i++)
+	          {
+	        	  if(cards.get(i).getType().contains("Giant") || cards.get(i).getKeyword().contains("Changeling"))
+	        	  {
+	        		  giants.add(cards.get(i));
+	        	  }
+	          }
+
+	          String controller = card.getController();
+
+	          if(giants.size() == 0)
+	            return;
+
+	          if(controller.equals(Constant.Player.Human))
+	          {
+	            Object o = AllZone.Display.getChoiceOptional("Select target card", giants.toArray());
+	            if(o != null)
+	            {
+	              ability.setTargetCard((Card)o);
+	              AllZone.Stack.add(ability);
+	            }
+	          }
+	          else //computer
+	          {
+	        	  giants.shuffle();
+	            ability.setTargetCard(giants.get(0));
+	            AllZone.Stack.add(ability);
+	          }
+
+	        }//execute()
+	      };//Command
+	      card.addComesIntoPlayCommand(intoPlay);
+	    }//*************** END ************ END **************************
+	      
+	    //*************** START *********** START **************************
+	    else if (cardName.equals("Qasali Pridemage"))
+	    {
+	    	final Ability ability = new Ability(card, "1")
+	    	{
+				public void resolve() {
+					if (AllZone.GameAction.isCardInPlay(card))
+						AllZone.GameAction.sacrifice(card);
+					
+					Card c = getTargetCard();
+					AllZone.GameAction.destroy(c);				
+				}	    
+				
+				public boolean canPlayAI()
+				{
+					 PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+		    		 CardList list = new CardList();
+		    		 list.addAll(hPlay.getCards());
+		    		 
+		    		 list = list.filter(new CardListFilter()
+		    		 {
+						public boolean addCard(Card c) {
+							return c.isArtifact() || c.isEnchantment() && CardUtil.getConvertedManaCost(c.getManaCost()) >= 4;
+						}
+		    		 });
+		    		 
+		    		 if (list.size() > 0)
+		    		 {
+		    			 list.shuffle();
+		    			 setTargetCard(list.get(0));
+		    		 }
+		    		 
+		    		 return list.size() > 0;
+				}
+				
+				
+	    	};
+	    	ability.setDescription("1, Sacrifice Qasali Pridemage: Destroy target artifact or enchantment.");
+	    	ability.setBeforePayMana(new Input()
+ 	        {
+				private static final long serialVersionUID = -3565024591921095303L;
+
+				public void showMessage()
+		        {
+		    		 PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+		    		 PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+		    		 
+		    		 CardList list = new CardList();
+		    		 list.addAll(hPlay.getCards());
+		    		 list.addAll(cPlay.getCards());
+		    		 
+		    		 list = list.filter(new CardListFilter()
+		    		 {
+						public boolean addCard(Card c) {
+							return c.isArtifact() || c.isEnchantment();
+						}
+		    		 });
+		    		 
+		             stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list, "Select an Artifact or Enchantment", true));
+		           }
+		       });
+	    	card.addSpellAbility(ability);
+	    }//*************** END ************ END **************************
 	      
 	      // Cards with Cycling abilities
 	      // -1 means keyword "Cycling" not found

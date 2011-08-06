@@ -1,3 +1,35 @@
+Qasali Pridemage
+G W
+Creature Cat Wizard
+no text
+2/2
+Exalted
+
+Meekstone
+1
+Artifact
+Creatures with power 3 or greater don't untap during their controllers' untap steps.
+
+Giant Harbinger
+4 R
+Creature Giant
+When Giant Harbinger enters the battlefield, you may search your library for a Giant card, reveal it, then shuffle your library and put that card on top of it.
+3/4
+
+Flamekin Harbinger
+R
+Creature Elemental Shaman
+When Flamekin Harbinger enters the battlefield, you may search your library for an Elemental card, reveal it, then shuffle your library and put that card on top of it.
+1/1
+
+Faerie Harbinger
+3 U
+Creature Faerie Wizard
+When Faerie Harbinger enters the battlefield, you may search your library for a Faerie card, reveal it, then shuffle your library and put that card on top of it.
+2/2
+Flying
+Flash
+
 Sword of the Meek
 2
 Artifact Equipment

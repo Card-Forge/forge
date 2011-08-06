@@ -973,7 +973,13 @@ public class CardFactoryUtil
 	    	  PlayerZone lib = AllZone.getZone(Constant.Zone.Library, sourceCard.getController());
 	    	  CardList mercs = new CardList();
 	    	  CardList list = new CardList(lib.getCards());
-	    	  list = list.getType("Mercenary");
+	    	  list = list.filter(new CardListFilter()
+	    	  {
+				public boolean addCard(Card c) {
+					return (c.getType().contains("Mercenary") || c.getKeyword().contains("Changeling")) && c.isPermanent() ;
+				}  
+	    	  });
+	    	  
 	    	  
 	    	  if (list.size()==0)
 	    		  return false;
@@ -1071,7 +1077,12 @@ public class CardFactoryUtil
 	    	  
 	    	  CardList rebels = new CardList();
 	    	  CardList list = new CardList(lib.getCards());
-	    	  list = list.getType("Rebel");
+	    	  list = list.filter(new CardListFilter()
+	    	  {
+				public boolean addCard(Card c) {
+					return (c.getType().contains("Rebel") || c.getKeyword().contains("Changeling")) && c.isPermanent() ;
+				}  
+	    	  });
 	    	  
 	    	  if (list.size()==0)
 	    		  return false;
