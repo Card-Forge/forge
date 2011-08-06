@@ -55,6 +55,9 @@ public class TriggerHandler {
 		{
 			ret = new Trigger_ChangesZone(mapParams,host);
 		}
+		else if(mode.equals("CounterAdded")) {
+			ret = new Trigger_CounterAdded(mapParams,host);
+		}
 		else if(mode.equals("Cycled"))
 		{
 			ret = new Trigger_Cycled(mapParams,host);

@@ -446,6 +446,20 @@ public class Card extends MyObservable {
         } else {
             counters.put(counterName, Integer.valueOf(n));
         }
+        
+        /////////////////
+        //
+        // Not sure if we want to fire triggers on addCounterFromNonEffect
+        // I don't think so since reverting cost payments uses this.
+        
+        /*
+        //Run triggers
+        HashMap<String,Object> runParams = new HashMap<String,Object>();
+        runParams.put("Card", this);
+        runParams.put("CounterType", counterName);
+        AllZone.TriggerHandler.runTrigger("CounterAdded", runParams);
+        */
+        
         this.updateObservers();
     }
     
@@ -485,6 +499,14 @@ public class Card extends MyObservable {
         		counters.remove(p1Counter);
         	}
         }
+        
+        System.out.println("Adding a "+counterName.toString()+" counter to: "+this);
+        
+        //Run triggers
+        HashMap<String,Object> runParams = new HashMap<String,Object>();
+        runParams.put("Card", this);
+        runParams.put("CounterType", counterName);
+        AllZone.TriggerHandler.runTrigger("CounterAdded", runParams);
         
         this.updateObservers();
     }
