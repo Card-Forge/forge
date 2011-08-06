@@ -57,6 +57,19 @@ public class ManaCost {
         return res;
     }
 
+    public boolean containsPhyrexianMana()
+    {
+        for(Object o : manaPart)
+        {
+            if(o instanceof Mana_PartPhyrexian)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public boolean payPhyrexian()
     {
         ArrayList<Mana_PartPhyrexian> Phy = getUnpaidPhyrexianMana();

@@ -743,7 +743,6 @@ public class Cost_Payment {
             @Override
             public void selectPlayer(Player player)
             {
-                showMessage();
                 if(player.equals(AllZone.HumanPlayer))
                 {
                     if(manaCost.payPhyrexian())
@@ -751,9 +750,8 @@ public class Cost_Payment {
                         phyLifeToLose += 2;
                     }
 
-                    if(manaCost.isPaid()) {
-                        done();
-                    }
+                    showMessage();
+
                 }
 
             }
@@ -788,6 +786,11 @@ public class Cost_Payment {
                     msg.append(" (");
                     msg.append(phyLifeToLose);
                     msg.append(" life paid for phyrexian mana)");
+                }
+
+                if(mana.containsPhyrexianMana())
+                {
+                    msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
                 }
 
                 AllZone.Display.showMessage(msg.toString());

@@ -103,7 +103,7 @@ public class Input_PayManaCost extends Input {
     @Override
     public void selectPlayer(Player player)
     {
-        showMessage();
+
         if(player.equals(AllZone.HumanPlayer))
         {
             if(manaCost.payPhyrexian())
@@ -111,12 +111,7 @@ public class Input_PayManaCost extends Input {
                 phyLifeToLose += 2;
             }
 
-            if(manaCost.isPaid()) {
-                System.out.println("Phyrexian Mana: Pay " + phyLifeToLose);
-                resetManaCost();
-
-                done();
-            }
+            showMessage();
         }
 
     }
@@ -179,6 +174,11 @@ public class Input_PayManaCost extends Input {
             msg.append(" (");
             msg.append(phyLifeToLose);
             msg.append(" life paid for phyrexian mana)");
+        }
+
+        if(manaCost.containsPhyrexianMana())
+        {
+            msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
         }
 
         AllZone.Display.showMessage(msg.toString());
