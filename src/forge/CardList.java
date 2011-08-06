@@ -279,6 +279,15 @@ public class CardList implements Iterable<Card> {
         Collections.sort(list, c);
     }
     
+    public CardList getTargetableCards(final Card Source)
+    {
+    	return this.filter(new CardListFilter() {
+    		public boolean addCard(Card c) {
+    			return CardFactoryUtil.canTarget(Source, c);
+    		}
+    	});
+    }
+    
     public CardList getValidCards(final String Restrictions[], final String Controller) {
         return this.filter(new CardListFilter() {
             public boolean addCard(Card c) {

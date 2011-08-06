@@ -2588,13 +2588,10 @@ public class CardFactory implements NewConstants {
                 CardList getTargets() {
                     CardList tmpList = new CardList();
                     tmpList.addAll(AllZone.Human_Play.getCards());
-                    tmpList = tmpList.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return (CardFactoryUtil.canTarget(card, c));
-                        }
-                    });
+                    tmpList = tmpList.getValidCards(Tgts);
+                    tmpList = tmpList.getTargetableCards(card);
                     
-                    return tmpList.getValidCards(Tgts);
+                    return tmpList;
                 }
                 
                 @Override
@@ -2749,13 +2746,10 @@ public class CardFactory implements NewConstants {
                 CardList getTargets() {
                     CardList tmpList = new CardList();
                     tmpList.addAll(AllZone.Human_Play.getCards());
-                    tmpList = tmpList.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return (CardFactoryUtil.canTarget(card, c));
-                        }
-                    });
+                    tmpList = tmpList.getValidCards(Tgts);
+                    tmpList = tmpList.getTargetableCards(card);
                     
-                    return tmpList.getValidCards(Tgts);
+                    return tmpList;
                 }
                 
                 @Override
@@ -2854,11 +2848,13 @@ public class CardFactory implements NewConstants {
                 	                    
                     CardList hCards = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
                     hCards = hCards.getValidCards(Tgts);
+                    hCards = hCards.getTargetableCards(card);
                     if (hCards.size() > 0)
                     	return true;
                     
                     CardList cCards = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
                     cCards = cCards.getValidCards(Tgts);
+                    cCards = cCards.getTargetableCards(card);
                     if (cCards.size() == 0)
                     	return true;
                     else
@@ -2908,7 +2904,9 @@ public class CardFactory implements NewConstants {
                     CardList cCards = new CardList(AllZone.Computer_Play.getCards());
                     
                     hCards = hCards.getValidCards(Tgts);
+                    hCards = hCards.getTargetableCards(card);
                     cCards = cCards.getValidCards(Tgts);
+                    cCards = cCards.getTargetableCards(card);
                     
                     if(hCards.size() > 0 || cCards.size() > 0) 
                     {
@@ -3209,13 +3207,10 @@ public class CardFactory implements NewConstants {
                 CardList getTargets() {
                     CardList tmpList = new CardList();
                     tmpList.addAll(AllZone.Human_Play.getCards());
-                    tmpList = tmpList.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return (CardFactoryUtil.canTarget(card, c));
-                        }
-                    });
+                    tmpList = tmpList.getValidCards(Tgts);
+                    tmpList = tmpList.getTargetableCards(card);
                     
-                    return tmpList.getValidCards(Tgts);
+                    return tmpList;
                 }
                 
                @Override
@@ -3357,11 +3352,13 @@ public class CardFactory implements NewConstants {
                 	                    
                     CardList hCards = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
                     hCards = hCards.getValidCards(Tgts);
+                    hCards = hCards.getTargetableCards(card);
                     if (hCards.size() > 0)
                     	return true;
                     
                     CardList cCards = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
                     cCards = cCards.getValidCards(Tgts);
+                    cCards = cCards.getTargetableCards(card);
                     if (cCards.size() == 0)
                     	return true;
                     else
@@ -3423,7 +3420,9 @@ public class CardFactory implements NewConstants {
         			CardList cCards = new CardList(AllZone.Computer_Play.getCards());
         			
         			hCards = hCards.getValidCards(Tgts);
+        			hCards = hCards.getTargetableCards(card);
         			cCards = cCards.getValidCards(Tgts);
+        			cCards = cCards.getTargetableCards(card);
         			
         			if (hCards.size() > 0 || cCards.size() > 0)
         			{
