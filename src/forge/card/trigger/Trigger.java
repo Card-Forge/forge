@@ -195,6 +195,38 @@ public abstract class Trigger {
 			}
 		}
 		
+		if(mapParams.containsKey("LifeTotal")){
+			String player = mapParams.get("LifeTotal");
+			String lifeCompare = "GE1";
+			int life = 1;
+			
+			if(player.equals("You")) {
+				life = hostCard.getController().getLife();
+			}
+			if(player.equals("Opponent")) {
+				life = hostCard.getController().getOpponent().getLife();
+			}
+			
+			if(mapParams.containsKey("LifeAmount")) {
+				lifeCompare = mapParams.get("LifeAmount");
+			}
+			
+			
+			int right = 1;
+			String rightString = lifeCompare.substring(2);
+			if(rightString.equals("X")) {
+				right = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
+			}
+			else {
+				right = Integer.parseInt(lifeCompare.substring(2));
+			}
+			
+			if(!Card.compare(life, lifeCompare, right)) {
+				return false;
+			}
+				
+		}
+		
 		if (mapParams.containsKey("IsPresent")){
 			String sIsPresent = mapParams.get("IsPresent");
 			String presentCompare = "GE1";
