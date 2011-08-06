@@ -1,3 +1,11 @@
+Chilling Shade
+2 B
+Snow Creature Shade
+no text
+1/1
+Flying
+PTPump S:+1/+1
+
 Disentomb
 B
 Sorcery

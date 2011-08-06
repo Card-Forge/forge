@@ -168,7 +168,7 @@ public class ManaPool extends Card
 	String getColor(String s){return Input_PayManaCostUtil.getColor(s);}
 	public void addMana(Ability_Mana am)
 	{
-		(!isSnow() && am.getSourceCard().isSnow()
+		(!isSnow() && am.isSnow()
 			? smp : this).addMana(!am.Mana().contains("X") ? am.Mana() :
 				am.Mana().replaceAll("X", am.getX()+""));
 	}
@@ -290,7 +290,7 @@ public class ManaPool extends Card
 		else//redundant
 			for(Ability_Mana mability : mabilities)
 			{
-				if(mability.getSourceCard().isSnow() && !isSnow())
+				if(mability.isSnow() && !isSnow())
 				{
 					m=smp.subtractMana(m, mability);
 					continue;
@@ -310,15 +310,58 @@ public class ManaPool extends Card
 		if(Mana.trim().equals("") || manaCost.isPaid()) return manaCost;
 		if(colors.contains(Mana))//Index(Mana) > 0 )
 		{
-			  if(!manaCost.isNeeded(Mana) || //has[cIndex(Mana)]
-					  containsColor(Mana)==0) return manaCost;
-			  manaCost.subtractMana(Input_PayManaCostUtil.getColor(Mana));
-			  has.replaceFirst(Mana, "");//[cIndex(Mana)]--;
-			  paid+=Mana;//[cIndex(Mana)]++;
+			if(containsColor(Mana)==0) return manaCost;
+			if(isSnow() && manaCost.isNeeded("S")) manaCost.subtractMana("S");
+			else
+			{
+				if(!manaCost.isNeeded(Mana)) return manaCost;
+				manaCost.subtractMana(getColor(Mana));
+			}
+			has.replaceFirst(Mana, "");
+			paid+=Mana;
 		}
 		else
 		{
-			if (!Mana.contains("(") && !Mana.equals("1"))
+			if (Mana.equals("1"))
+			{
+				if (containsColor('1')>0 && manaCost.isNeeded(Constant.Color.Colorless))
+				{
+					has.replaceFirst("1", "");
+					paid+=Mana;//[0]++;
+					manaCost.subtractMana(Constant.Color.Colorless);
+					return manaCost;
+				}
+				else
+				{
+					//if (has[0]>0){manaCost=subtractOne(manaCost,"1"); cless--; continue;}
+					String chosen;
+					ArrayList<String> choices = getColors();
+					if(!Mana.equals("1"))
+					{
+						choices.clear();
+						if(containsColor(Mana.charAt(3))>0)
+							choices.add(getColor(Mana.charAt(3) + ""));
+						if(Mana.charAt(1) == '2' ? choices.isEmpty() : containsColor(Mana.charAt(1))>0)
+							choices.add(getColor(Mana.charAt(1) + ""));
+					}
+					if (isSnow() && manaCost.isNeeded("S")) choices.add(0, Constant.Color.Snow);
+					Iterator<String> it = choices.iterator();
+					while(it.hasNext())
+						if(!manaCost.isNeeded(getColor2(it.next())))
+							it.remove();
+					if(choices.size() == 0) return manaCost;
+					chosen = choices.get(0);
+					if (choices.size()> 1)
+						chosen = (String)AllZone.Display.getChoiceOptional("Choose "+ (isSnow()? "snow " : "")+"mana to pay" + Mana, choices.toArray());
+					if (chosen == null) {spendAll = false; return manaCost;}
+					if(chosen.equals(Constant.Color.Snow))
+						manaCost.subtractMana(chosen);
+					else manaCost=subtractOne(manaCost,getColor2(chosen));
+				}
+			}
+			else if (Mana.equals("S"))
+				manaCost = smp.subtractOne(manaCost, "1");
+			else
 			{
 				int cless;
 				try
@@ -336,35 +379,6 @@ public class ManaPool extends Card
 					cless--;
 					subtractOne("1");
 				}
-			}
-			else if (Mana.equals("1") && containsColor('1')>0 && manaCost.isNeeded(Constant.Color.Colorless))
-			{
-				has.replaceFirst("1", "");
-				paid+=Mana;//[0]++;
-				manaCost.subtractMana(Constant.Color.Colorless);
-				return manaCost;
-			}
-			else if (Mana.equals("(S)"))
-				manaCost = smp.subtractOne(manaCost, "1");
-			else
-			{
-				//if (has[0]>0){manaCost=subtractOne(manaCost,"1"); cless--; continue;}
-				String chosen;
-				ArrayList<String> choices = getColors();
-				if(!Mana.equals("1"))
-				{
-					choices.clear();
-					if(containsColor(Mana.charAt(3))>0)
-						choices.add(getColor(Mana.charAt(3) + ""));
-					if(Mana.charAt(1) == '2' ? choices.isEmpty() : containsColor(Mana.charAt(1))>0)
-						choices.add(getColor(Mana.charAt(1) + ""));
-				}
-				if(choices.size() == 0) return manaCost;
-				chosen = choices.get(0);
-				if (choices.size()> 1)
-					chosen = (String)AllZone.Display.getChoiceOptional("Choose mana to pay" + Mana, choices.toArray());
-				if (chosen == null) {spendAll = false; return manaCost;}
-				manaCost=subtractOne(manaCost,getColor2(chosen));
 			}
 		}
 		return manaCost;

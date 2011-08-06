@@ -16,6 +16,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     {
    this(sourceCard, "0");
     }*/
+   public boolean isSnow(){return getSourceCard().isSnow();}//override?
    public boolean isTapAbility(){return isTapAbility(orig);}
    private static boolean isTapAbility(String orig){
       String cost = orig.split(":")[0];
@@ -133,7 +134,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
          for(Command c : runcommands) c.execute();
     }
     public int getX(){return getSourceCard().getX();}//override these when not defined by card,
-   public void setX(int X){getSourceCard().setX(X);}//i.e. "T, remove X charge counters from {name}: add X+1 <color> mana to your mana pool"
+    public void setX(int X){getSourceCard().setX(X);}//i.e. "T, remove X charge counters from {name}: add X+1 <color> mana to your mana pool"
     public String Mana(){return Mana;}//override for all non-X variable mana,
     public String getController(){return getSourceCard().getController();}
    

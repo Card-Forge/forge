@@ -82,7 +82,7 @@ public class MenuItem_HowToPlay extends JMenuItem implements NewConstants.LANG.H
         s.append("2.  Multicolored Cards are slightly different than hybrid mana cards, as they require two or more different colors of mana, which may or not be in a single mana symbol.  An example would be a card like Lightning Helix which requires one red and one white mana to be played.\r\n\r\n\r\n");
         
         s.append("Game Types" + newLine);
-        s.append("1.  In Constructed Deck mode you can use any of the cards to make your deck.  To make a constructed deck, from the Deck Editor select \"New Deck ï¿½ Constructed\".  A list of all the cards will be displayed."
+        s.append("1.  In Constructed Deck mode you can use any of the cards to make your deck.  To make a constructed deck, from the Deck Editor select \"New Deck – Constructed\".  A list of all the cards will be displayed."
                 + newLine);
         s.append("2.  In Sealed Deck mode you are given 75 cards and you have to make your deck from just those cards."
                 + newLine);
@@ -106,7 +106,7 @@ public class MenuItem_HowToPlay extends JMenuItem implements NewConstants.LANG.H
                 + newLine);
         s.append("2.  The \"Random\" option will randomly select one of the constructed decks that appear in the two deck menus.  You either construct these decks in the Deck Editor or you imported a .deck file from the Deck Editor."
                 + newLine);
-        s.append("If you select the \"Random\" option and click on the \"Start Game\" button and the match fails to begin ï¿½ well, this happens if you fail to have any constructed decks saved to your all-decks2 file.  You should choose the \"Generate Deck\" option instead.\r\n\r\n\r\n");
+        s.append("If you select the \"Random\" option and click on the \"Start Game\" button and the match fails to begin … well, this happens if you fail to have any constructed decks saved to your all-decks2 file.  You should choose the \"Generate Deck\" option instead.\r\n\r\n\r\n");
         
         s.append("Resizable Game Area & Stack AI Land" + newLine);
         s.append("1.  The \"Resizable Game Area\" check box should be set to on if your monitor will display more than 1024 x 768 pixels.  The window containing the Battlefield and the informational displays will fill the entire screen."

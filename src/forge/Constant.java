@@ -108,6 +108,10 @@ public interface Constant
     {White, Blue, Black, Red, Green, Colorless};
 
     public static final String onlyColors[] = {White, Blue, Black, Red, Green};
+    
+    public static final String Snow = "snow";
+    public static final String ManaColors[] =
+    {White, Blue, Black, Red, Green, Colorless, Snow};
   }
 }//Constant
 

@@ -12,21 +12,17 @@ public class Input_PayManaCostUtil
 	ArrayList<Ability_Mana> abilities = getManaAbilities(card);
 
     String cneeded="";
-    for(String color : Constant.Color.Colors)
+    for(String color : Constant.Color.ManaColors)
     	if(manaCost.isNeeded(color))
     		cneeded+=getColor2(color);
     Iterator<Ability_Mana> it = abilities.iterator();//you can't remove unneded abilitie inside a for(am:abilities) loop :(
-    while(it.hasNext())
-    {
-    	Ability_Mana ma = it.next();
-    	if (!ma.canPlay()){ it.remove(); continue;}
-    	if (cneeded.contains("1")) break;
-    	boolean needed = false;
-    	String[] canMake = ManaPool.getManaParts(ma);    	
-    	for(String color : canMake)
-    		if(cneeded.contains(color)) needed = true;
-    	if (!needed) it.remove();
-    }
+    if (!cneeded.contains("1"))
+    	while(it.hasNext())
+    	{
+    		Ability_Mana ma = it.next();
+    		if (!ma.canPlay()){ it.remove(); continue;}
+    		if (!canMake(ma, cneeded)) it.remove();
+    	}
     if(abilities.isEmpty())
     	return manaCost;
     //String color;
@@ -48,6 +44,14 @@ public class Input_PayManaCostUtil
   public static ArrayList<Ability_Mana> getManaAbilities(Card card)
   {return card.getManaAbility();}
   //color is like "G", returns "Green"
+  public static boolean canMake(Ability_Mana am, String mana)
+  {
+	  if(mana.contains("1")) return true;
+	  if(mana.contains("S") && am.isSnow()) return true;
+	  for(String color : ManaPool.getManaParts(am))
+  		if(mana.contains(color)) return true;
+  	  return false;
+  }
   public static String getColor(String color)
   {
     Map<String, String> m = new HashMap<String, String>();
@@ -56,6 +60,7 @@ public class Input_PayManaCostUtil
     m.put("U", Constant.Color.Blue);
     m.put("B", Constant.Color.Black);
     m.put("W", Constant.Color.White);
+    m.put("S", Constant.Color.Snow);
 
     Object o = m.get(color);
 
@@ -75,6 +80,7 @@ public class Input_PayManaCostUtil
      m.put(Constant.Color.Black, "B");
      m.put(Constant.Color.White, "W");
      m.put(Constant.Color.Colorless, "1");
+     m.put(Constant.Color.Snow, "S");
       
      Object o = m.get(color);
     

@@ -76,15 +76,17 @@ public class Mana_PayCost
   {
     ArrayList<Object> list = new ArrayList<Object>();
 
-    //handles costs like "3", "G", "GW", "10"
+    //handles costs like "3", "G", "GW", "10", "S"
     if(cost.length() == 1 || cost.length() == 2)
     {
       if(Character.isDigit(cost.charAt(0)))
         list.add(new Mana_PartColorless(cost));
+      else if(cost.charAt(0) == 'S')
+    	  list.add(new Mana_PartSnow());
       else
         list.add(new Mana_PartColor(cost));
     }
-    else//handles "3 GW", "10 GW", "1 G G", "G G"
+    else//handles "3 GW", "10 GW", "1 G G", "G G", "S 1"
     {
       //all costs that have a length greater than 2 have a space
       StringTokenizer tok = new StringTokenizer(cost);
@@ -95,6 +97,14 @@ public class Mana_PayCost
       //ManaPartColorless needs to be added AFTER the colored mana
       //in order for isNeeded() and addMana() to work correctly
       Object o = list.get(0);
+      if(o instanceof Mana_PartSnow)
+      {
+        //move snow cost to the end of the list
+        list.remove(0);
+        list.add(o);
+      }
+      o = list.get(0);
+      
       if(o instanceof Mana_PartColorless)
       {
         //move colorless cost to the end of the list
@@ -115,6 +125,10 @@ public class Mana_PayCost
     else if(Character.isDigit(partCost.charAt(0)))
     {
       return new Mana_PartColorless(partCost);
+    }
+    else if(partCost.equals("S"))
+    {
+    	return new Mana_PartSnow();
     }
     else
     {

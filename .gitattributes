@@ -150,6 +150,7 @@ src/forge/ManaPool.java svneol=native#text/plain
 src/forge/Mana_Part.java svneol=native#text/plain
 src/forge/Mana_PartColor.java svneol=native#text/plain
 src/forge/Mana_PartColorless.java svneol=native#text/plain
+src/forge/Mana_PartSnow.java svneol=native#text/plain
 src/forge/Mana_PartSplit.java svneol=native#text/plain
 src/forge/Mana_PartTest.java svneol=native#text/plain
 src/forge/Mana_PayCost.java svneol=native#text/plain

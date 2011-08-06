@@ -45,8 +45,11 @@ class ManaCost
       return "R";
     if(s.equals(Constant.Color.Colorless))
       return "1";
+    if(s.equals(Constant.Color.Snow))
+    	return "S";
     else if((s.equals("G") || s.equals("U") || s.equals("W") ||
-            s.equals("B") || s.equals("R") || s.equals("1")))
+            s.equals("B") || s.equals("R") || s.equals("1") || 
+            s.equals("S")))
     	return s;
 
     throw new RuntimeException("ManaCost : getShortManaString() invalid argument - " +longManaString);
