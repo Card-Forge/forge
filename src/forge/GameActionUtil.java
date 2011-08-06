@@ -2884,18 +2884,17 @@ public class GameActionUtil {
 	}
 	
 	private static void drawCardTriggered_Spiteful_Visions(final Player player) {
-		CardList list = AllZoneUtil.getPlayerCardsInPlay(player.getOpponent(), "Spiteful Visions");
+		CardList list = AllZoneUtil.getCardsInPlay("Spiteful Visions");
 
 		for(int i = 0; i < list.size(); i++) {
 			final Card source = list.get(i);
 			final Ability ability = new Ability(source, "0") {
 				@Override
 				public void resolve() {
-					//AllZone.GameAction.addDamage(player, source, 1);
 					player.addDamage(1, source);
 				}
 			};
-			ability.setStackDescription(source + " - deals 1 damage to player drawing a card.");
+			ability.setStackDescription(source + " - deals 1 damage to "+player+".");
 			AllZone.Stack.add(ability);
 		}
 	}
