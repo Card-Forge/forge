@@ -14,7 +14,7 @@ import java.util.List;
 public class QuestBazaarPanel extends JPanel{
 
     QuestMainFrame mainFrame;
-    List<QuestAbstractBazaarStall> stallList = new ArrayList<QuestAbstractBazaarStall>();
+    static List<QuestAbstractBazaarStall> stallList = new ArrayList<QuestAbstractBazaarStall>();
 
     JPanel buttonPanel = new JPanel(new BorderLayout());
     JPanel buttonPanelMain = new JPanel();
@@ -29,6 +29,7 @@ public class QuestBazaarPanel extends JPanel{
         this.mainFrame = mainFrame;
         this.setLayout(new BorderLayout());
 
+        stallList = new ArrayList<QuestAbstractBazaarStall>();
         stallList.add(new QuestAlchemistStall());
         stallList.add(new QuestBankerStall());
         stallList.add(new QuestBookStall());
@@ -82,6 +83,8 @@ public class QuestBazaarPanel extends JPanel{
             stallPanel.add(stall, stall.getStallName());
         }
 
+        buttonList.get(0).setSelected(true);
+
         Dimension max = new Dimension((int)maxWidth,(int)maxHeight);
 
         for (JToggleButton button : buttonList){
@@ -104,9 +107,21 @@ public class QuestBazaarPanel extends JPanel{
 
         this.add(buttonPanel, BorderLayout.WEST);
         this.add(stallPanel, BorderLayout.CENTER);
+
     }
 
     private void showStall(String source) {
         stallLayout.show(stallPanel, source);
     }
+
+    /**
+     * Slightly hackish, but should work.
+     * @return The last created instance of this object, used for updates after purchases.
+     */
+    static void refreshLastInstance(){
+        for (QuestAbstractBazaarStall stall: stallList){
+            stall.updateItems();
+        }
+    }
+
 }

@@ -26,8 +26,8 @@ public class QuestMainFrame extends JFrame {
 
         this.getContentPane().setLayout(new BorderLayout());
         this.getContentPane().add(visiblePanel, BorderLayout.CENTER);
-        visiblePanel.setPreferredSize(new Dimension(1024, 768));
-        visiblePanel.setMinimumSize(new Dimension(800, 600));
+        this.setPreferredSize(new Dimension(1024, 768));
+        this.setMinimumSize(new Dimension(800, 600));
 
         questLayout.show(visiblePanel, MAIN_PANEL);
 

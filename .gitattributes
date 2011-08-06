@@ -6666,6 +6666,7 @@ src/forge/quest/Gui_Quest_Assignments.java svneol=native#text/plain
 src/forge/quest/Gui_Quest_Deck_Info.java svneol=native#text/plain
 src/forge/quest/QuestMainFrame.java svneol=native#text/plain
 src/forge/quest/QuestMainPanel.java svneol=native#text/plain
+src/forge/quest/bazaar/QuestAbstractBazaarItem.java svneol=native#text/plain
 src/forge/quest/bazaar/QuestAbstractBazaarStall.java svneol=native#text/plain
 src/forge/quest/bazaar/QuestAlchemistStall.java svneol=native#text/plain
 src/forge/quest/bazaar/QuestBankerStall.java svneol=native#text/plain
