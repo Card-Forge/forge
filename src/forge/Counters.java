@@ -60,6 +60,7 @@ public enum Counters {
     MIRE(),
     OMEN(),
     PAGE(),
+    PETAL(),
     PRESSURE(),
     PHYLACTERY,
     POLYP(),
