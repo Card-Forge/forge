@@ -1227,136 +1227,9 @@ public class CardFactoryUtil {
         return morph_up;
         
     }
-    
-    /*
-      public static SpellAbility spellability_spDamageP(final Card sourceCard, final String dmg)
-      {
-          final int damage = Integer.parseInt(dmg);
-          
-          final SpellAbility spDamageP = new Spell(sourceCard)
-          {
-    		private static final long serialVersionUID = -1263171535312610675L;
-    		
-    		@SuppressWarnings("unused")  // check
-    		Card check;
-             
-             public boolean canPlayAI()
-             {
-                     return false;
-             }
-             
-             public void chooseTargetAI()
-             {
-                  CardFactoryUtil.AI_targetHuman();
-                   return;
-             }
-             
-             public void resolve()
-             {
-                      AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
-             }
-          };
-          spDamageP.setDescription(sourceCard.getName() + " deals " + damage + " damage to target player.");
-          spDamageP.setStackDescription(sourceCard.getName() +" deals " + damage + " damage.");
-          spDamageP.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spDamageP));
-          return spDamageP;
-      }//Spellability_spDamageP
-      
-      public static SpellAbility spellability_spDamageCP(final Card sourceCard, final String dmg)
-      {
-       final int damage = Integer.parseInt(dmg); // converting string dmg -> int
-
-       final SpellAbility DamageCP =  new Spell(sourceCard)
-       {
-    	private static final long serialVersionUID = 7239608350643325111L;
-    	
-    	Card check;
-          //Shock's code here atm
-          public boolean canPlayAI()
-          {
-              if(AllZone.Human_Life.getLife() <= damage)
-                return true;
-                
-              PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
-              CardList hand = new CardList(compHand.getCards());
-                   
-               if (hand.size() >= 8)
-                return true;
-             
-              check = getFlying();
-              return check != null;
-          }
-              
-          public void chooseTargetAI()
-          {
-              if(AllZone.Human_Life.getLife() <= damage)
-              {
-                setTargetPlayer(AllZone.HumanPlayer);
-                return;
-              }
-                
-              PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
-               CardList hand = new CardList(compHand.getCards());
-                
-              if(getFlying() == null && hand.size() >= 7 ) //not 8, since it becomes 7 when getting cast
-               {
-                  setTargetPlayer(AllZone.HumanPlayer);
-                  return;
-               }
-             
-              Card c = getFlying();
-              
-              if (check == null &&  c != null)
-            	  System.out.println("Check equals null");
-              else if((c == null) || (! check.equals(c)))
-                throw new RuntimeException(sourceCard +" error in chooseTargetAI() - Card c is " +c +",  Card check is " +check);
-             
-              if (c != null)
-            	  setTargetCard(c);
-              else
-            	  setTargetPlayer(AllZone.HumanPlayer);
-          }//chooseTargetAI()
-             
-             //uses "damage" variable
-          Card getFlying()
-          {
-        	  CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", sourceCard, true);
-              for(int i = 0; i < flying.size(); i++)
-            	  if(flying.get(i).getNetDefense() <= damage){
-            		  System.out.println("getFlying() returns " + flying.get(i).getName());
-            		  return flying.get(i);
-            	  }
-              
-            System.out.println("getFlying() returned null");
-            return null;
-          }
-          public void resolve()
-          {
-                  
-              if(getTargetCard() != null)
-              {
-                if(AllZone.GameAction.isCardInPlay(getTargetCard()) && canTarget(sourceCard, getTargetCard()))
-                {
-                    Card c = getTargetCard();
-                    //c.addDamage(damage);
-                    AllZone.GameAction.addDamage(c, damage);
-                }
-              }
-              else
-                AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
-              //resolve()
-          }
-       }; //spellAbility
-       DamageCP.setDescription(sourceCard.getName() + " deals " + damage + " damage to target creature or player.");
-       DamageCP.setStackDescription(sourceCard.getName() +" deals " + damage + " damage.");
-       DamageCP.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(DamageCP, true));
-       return DamageCP;
-      }//spellability_DamageCP
-     */
 
     public static SpellAbility ability_Merc_Search(final Card sourceCard, String cost) {
         final int intCost = Integer.parseInt(cost);
-        //final String player = sourceCard.getController();
         
         final SpellAbility ability = new Ability_Tap(sourceCard, cost) {
             private static final long serialVersionUID = 4988299801575232348L;
@@ -2566,41 +2439,6 @@ public class CardFactoryUtil {
         };
         return target;
     }//input_discardRecall()
-    
-
-    /*
-    //cardType is like "Creature", "Land", "Artifact", "Goblin", "Legendary"
-    //cardType can also be "All", which will allow any permanent to be selected
-    public static Input input_targetType(final SpellAbility spell, final String cardType) {
-        Input target = new Input() {
-            private static final long serialVersionUID = 4944828318048780429L;
-            
-            @Override
-            public void showMessage() {
-                AllZone.Display.showMessage("Select target " + cardType);
-                
-                if(cardType.equals("All")) AllZone.Display.showMessage("Select target permanent");
-                
-                ButtonUtil.enableOnlyCancel();
-            }
-            
-            @Override
-            public void selectButtonCancel() {
-                stop();
-            }
-            
-            @Override
-            public void selectCard(Card card, PlayerZone zone) {
-                if(((card.getType().contains(cardType) || card.getKeyword().contains("Changeling")) || cardType.equals("All"))
-                        && zone.is(Constant.Zone.Play) && canTarget(spell, card)) {
-                    spell.setTargetCard(card);
-                    stopSetNext(new Input_PayManaCost(spell));
-                }
-            }
-        };
-        return target;
-    }//input_targetType()
-    */
     
     //****************copied from input_targetType*****************
     //cardType is like "Creature", "Land", "Artifact", "Goblin", "Legendary", ";"-delimited
@@ -4288,26 +4126,6 @@ public class CardFactoryUtil {
         return s;
     }
     
-    @Deprecated
-    public static CardList getCards(String cardName)
-    {
-    	return AllZoneUtil.getCardsInPlay(cardName);
-    	/*CardList list = new CardList();
-    	list.addAll(AllZone.Human_Play.getCards());
-    	list.addAll(AllZone.Computer_Play.getCards());
-    	list = list.getName(cardName);
-    	return list;*/
-    }
-    
-    @Deprecated
-    public static CardList getCards(String cardName, Player player) {
-    	return AllZoneUtil.getPlayerCardsInPlay(player, cardName);
-    	/*PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-        CardList list = new CardList(play.getCards());
-        list = list.getName(cardName);
-        return list;*/
-    }
-    
     public static int countBasicLandTypes(Player player) {
         String basic[] = {"Forest", "Plains", "Mountain", "Island", "Swamp"};
         PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
@@ -4664,7 +4482,7 @@ public class CardFactoryUtil {
     public static boolean canPlayerPlayLand(Player player, int landPlaysLeft){
     	// LandsToPlay Left or Fastbond in play, Computer's turn, Stack is Empty, In Main Phase
     	return (Phase.canCastSorcery(player) && (landPlaysLeft > 0 || 
-    			CardFactoryUtil.getCards("Fastbond", player).size() > 0));
+    			AllZoneUtil.getPlayerCardsInPlay(player, "Fastbond").size() > 0));
     }
     
     public static void playLandEffects(Card c){
@@ -4678,7 +4496,7 @@ public class CardFactoryUtil {
     	}
     	
 		if(extraLand) {
-			CardList fastbonds = CardFactoryUtil.getCards("Fastbond", player);
+			CardList fastbonds = AllZoneUtil.getPlayerCardsInPlay(player, "Fastbond");
 	        for(final Card f : fastbonds){
 	            SpellAbility ability = new Ability(f, "0") {
 	                @Override
@@ -4691,7 +4509,7 @@ public class CardFactoryUtil {
 	        }
         }
 		
-		CardList greedy = CardFactoryUtil.getCards("Horn of Greed");
+		CardList greedy = AllZoneUtil.getCardsInPlay("Horn of Greed");
 		if (!greedy.isEmpty()){
 			for(final Card g : greedy){
 	            SpellAbility ability = new Ability(g, "0") {
