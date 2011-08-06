@@ -4,6 +4,6 @@ Types:Creature Human Shaman
 Text:no text
 PT:2/2
 K:abPumpTgtC R T:+2/+0
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/naya_battlemage.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/naya_battlemage.jpg
 End

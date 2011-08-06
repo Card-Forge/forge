@@ -3,6 +3,6 @@ ManaCost:1 B
 Types:Sorcery
 Text:no text
 K:spDrawCards:2:Drawback$YouLoseLife/2:You draw two cards and you lose 2 life.:Night's Whisper - draw 2 cards and lose 2 life.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card51178.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card51178.jpg
 End

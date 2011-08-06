@@ -5,6 +5,6 @@ Text:no text
 PT:1/1
 K:Protection from black
 K:abPumpTgtC W:Protection from black
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/obsidian_acolyte.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/obsidian_acolyte.jpg
 End

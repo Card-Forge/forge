@@ -4,6 +4,6 @@ Types:Creature Drake
 Text:When Peregrine Drake comes into play, untap up to five lands.
 PT:2/3
 K:Flying
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5671.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5671.jpg
 End

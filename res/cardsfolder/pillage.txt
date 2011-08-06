@@ -3,6 +3,6 @@ ManaCost:1 R R
 Types:Sorcery
 Text:Destroy target artifact or land. It can't be regenerated.
 K:spDestroyTgt:Artifact,Land:NoRegen
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/pillage.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pillage.jpg
 End

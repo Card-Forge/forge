@@ -2,6 +2,6 @@ Name:Overwhelming Intellect
 ManaCost:4 U U
 Types:Instant
 Text:Counter target creature spell. Draw cards equal to that spell's converted mana cost.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/overwhelming_intellect.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/overwhelming_intellect.jpg
 End

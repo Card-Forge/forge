@@ -4,6 +4,6 @@ Types:Creature Rat Warrior
 Text:no text
 PT:1/1
 K:abDestroyTgtV Sac<1/CARDNAME>:Ninja:Destroy target Ninja.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nezumi_shadow_watcher.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nezumi_shadow_watcher.jpg
 End

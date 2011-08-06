@@ -4,6 +4,6 @@ Types:Enchantment Aura
 Text:Enchanted creature gets +8/+8 and has trample.
 K:Enchant creature
 K:enPump:+8/+8/Trample
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mythic_proportions.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mythic_proportions.jpg
 End

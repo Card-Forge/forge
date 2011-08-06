@@ -6,6 +6,6 @@ PT:3/3
 K:Flying
 K:Fear
 K:Cumulative upkeep:B
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/phobian_phantasm.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phobian_phantasm.jpg
 End

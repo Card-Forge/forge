@@ -4,6 +4,6 @@ Types:Creature Cat
 Text:no text
 PT:3/2
 K:Shroud
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mist_leopard.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mist_leopard.jpg
 End

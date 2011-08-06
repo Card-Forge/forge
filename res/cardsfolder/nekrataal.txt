@@ -5,6 +5,6 @@ Text:When Nekrataal enters the battlefield, destroy target nonartifact, nonblack
 PT:2/1
 K:First Strike
 K:etbDestroyTgt:Creature.nonArtifact+nonBlack:NoRegen
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nekrataal.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nekrataal.jpg
 End

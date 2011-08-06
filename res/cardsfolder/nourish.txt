@@ -3,6 +3,6 @@ ManaCost:G G
 Types:Instant
 Text:no text
 K:spGainLife:6
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nourish.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nourish.jpg
 End

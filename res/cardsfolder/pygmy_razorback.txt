@@ -4,6 +4,6 @@ Types:Creature Boar
 Text:no text
 PT:2/1
 K:Trample
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/pr/en-us/card24663.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/pr/en-us/card24663.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Metathran Soldier
 Text:no text
 PT:2/3
 K:StaticEffect:Play:Self:Keyword/Unblockable:enchanted:Metathran Elite is unblockable as long as it's enchanted.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/metathran_elite.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/metathran_elite.jpg
 End

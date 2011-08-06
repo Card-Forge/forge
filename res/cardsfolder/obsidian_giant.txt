@@ -3,6 +3,6 @@ ManaCost:4 R
 Types:Creature Giant
 Text:no text
 PT:4/4
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6599.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6599.jpg
 End

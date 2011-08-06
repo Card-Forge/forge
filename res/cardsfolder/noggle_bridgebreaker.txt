@@ -4,6 +4,6 @@ Types:Creature Noggle Rogue
 Text:no text
 PT:4/3
 K:When CARDNAME enters the battlefield, return a land you control to its owner's hand.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/noggle_bridgebreaker.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/noggle_bridgebreaker.jpg
 End

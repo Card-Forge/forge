@@ -3,7 +3,7 @@ ManaCost:R
 Types:Enchantment
 Text:no text
 K:WheneverKeyword:CastSpell/Controller:Type/Creature:Play:TapPermanent:NormalInput/Creature:ASAP:No_Condition:No Special Condition:Whenever you cast a creature spell, tap target creature.
-K:SVar:BuffedBy:Creature
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/onslaught.jpg
+SVar:BuffedBy:Creature
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/onslaught.jpg
 End

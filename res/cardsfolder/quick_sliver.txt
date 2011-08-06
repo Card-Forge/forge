@@ -5,7 +5,7 @@ Text:no text
 PT:1/1
 K:Flash
 K:StaticEffect:Play:AllCards:Keyword/Flash:Type.Sliver:Any player may play Sliver cards as though they had flash.
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/quick_sliver.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/quick_sliver.jpg
 End

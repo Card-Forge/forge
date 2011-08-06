@@ -5,6 +5,6 @@ Text:Whenever Meglonoth blocks a creature, Meglonoth deals damage to that creatu
 PT:6/6
 K:Vigilance
 K:Trample
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/meglonoth.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/meglonoth.jpg
 End

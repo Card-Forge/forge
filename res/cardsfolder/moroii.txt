@@ -4,6 +4,6 @@ Types:Creature Vampire
 Text:At the beginning of your upkeep, you lose 1 life.
 PT:4/4
 K:Flying
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/moroii.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/moroii.jpg
 End

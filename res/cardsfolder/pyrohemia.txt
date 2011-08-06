@@ -2,6 +2,6 @@ Name:Pyrohemia
 ManaCost:2 R R
 Types:Enchantment
 Text:At end of turn, if no creatures are in play, sacrifice Pyrohemia.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122436.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122436.jpg
 End

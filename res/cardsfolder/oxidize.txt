@@ -3,6 +3,6 @@ ManaCost:G
 Types:Instant
 Text:Destroy target artifact. It can't be regenerated.
 K:spDestroyTgt:Artifact:NoRegen
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/oxidize.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/oxidize.jpg
 End

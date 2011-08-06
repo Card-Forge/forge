@@ -3,6 +3,6 @@ ManaCost:1 R R R
 Types:Creature Elemental
 Text:no text
 PT:4/4
-K:SVar:Rarity:Mythic
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/obsidian_fireheart.jpg
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/obsidian_fireheart.jpg
 End

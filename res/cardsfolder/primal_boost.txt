@@ -3,6 +3,6 @@ ManaCost:2 G
 Types:Instant
 Text:(NOTE: "When you cycle Primal Boost, you may have target creature get +1/+1 until end of turn." not implemented.)
 K:Cycling:2 G
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card41145.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card41145.jpg
 End

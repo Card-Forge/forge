@@ -4,6 +4,6 @@ Types:Artifact Creature Golem
 Text:no text
 PT:5/3
 K:abPump 1 G:Trample
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/malachite_golem.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/malachite_golem.jpg
 End

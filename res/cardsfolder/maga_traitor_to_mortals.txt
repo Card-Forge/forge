@@ -3,6 +3,6 @@ ManaCost:X B B B
 Types:Legendary Creature Human Wizard
 Text:Maga, Traitor to Mortals enters the battlefield with X +1/+1 counters on it.\r\nWhen Maga enters the battlefield, target player loses life equal to the number of +1/+1 counters on it.
 PT:0/0
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/maga_traitor_to_mortals.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/maga_traitor_to_mortals.jpg
 End

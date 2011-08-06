@@ -4,6 +4,6 @@ Types:Creature Lizard
 Text:no text
 PT:2/2
 K:Swampwalk
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/ia/en-us/card2581.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/ia/en-us/card2581.jpg
 End

@@ -2,7 +2,7 @@ Name:Moat
 ManaCost:2 W W
 Types:Enchantment
 Text:Creatures without flying can't attack.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/moat.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/moat.jpg
 End

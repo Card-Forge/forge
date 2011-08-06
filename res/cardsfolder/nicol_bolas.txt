@@ -5,6 +5,6 @@ Text:Whenever Nicol Bolas deals damage to an opponent, that player discards his 
 PT:7/7
 K:Flying
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay:U B R
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nicol_bolas.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nicol_bolas.jpg
 End

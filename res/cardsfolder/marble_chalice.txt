@@ -3,6 +3,6 @@ ManaCost:2 W
 Types:Artifact
 Text:no text
 K:abGainLife T:1
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/marble_chalice.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/marble_chalice.jpg
 End

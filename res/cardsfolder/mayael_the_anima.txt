@@ -3,6 +3,6 @@ ManaCost:R G W
 Types:Legendary Creature Elf Shaman
 Text:no text
 PT:2/3
-K:SVar:Rarity:Mythic
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mayael_the_anima.jpg
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mayael_the_anima.jpg
 End

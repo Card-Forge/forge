@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Instant
 Text:Counter target spell. If that spell is countered this way, put it on top of its owner's library instead of into that player's graveyard.
 K:spCounter:Spell:None:Topdeck:None
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/memory_lapse.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/memory_lapse.jpg
 End

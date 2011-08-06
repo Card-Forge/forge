@@ -3,6 +3,6 @@ ManaCost:3 G
 Types:Creature Snake
 Text:Whenever Marsh Viper deals damage to an opponent, that player gets two poison counters.
 PT:1/2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/marsh_viper.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/marsh_viper.jpg
 End

@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Sorcery
 Text:Search your library for a blue instant card, reveal that card, and put it into your hand. Then shuffle your library.
 K:spTutor:Instant.Blue:Hand
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/merchant_scroll.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/merchant_scroll.jpg
 End

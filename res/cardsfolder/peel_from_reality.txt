@@ -2,7 +2,7 @@ Name:Peel from Reality
 ManaCost:1 U
 Types:Instant
 Text:Return target creature you control and target creature you don't control to their owners' hands.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87951.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87951.jpg
 End

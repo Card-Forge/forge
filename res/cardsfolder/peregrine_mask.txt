@@ -3,6 +3,6 @@ ManaCost:1
 Types:Artifact Equipment
 Text:Equipped creature has defender, flying, and first strike.
 K:eqPump 2:Defender & Flying & First Strike
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/peregrine_mask.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/peregrine_mask.jpg
 End

@@ -3,6 +3,6 @@ ManaCost:3 G
 Types:Creature Djinn
 Text:At the beginning of your upkeep, Nettletooth Djinn deals 1 damage to you.
 PT:4/4
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nettletooth_djinn.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nettletooth_djinn.jpg
 End

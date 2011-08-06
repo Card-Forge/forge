@@ -4,6 +4,6 @@ Types:Creature Insect Druid
 Text:no text
 PT:2/2
 K:abPumpTgtC G T:+2/+2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_disciple.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_disciple.jpg
 End

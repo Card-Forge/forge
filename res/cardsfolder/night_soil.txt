@@ -2,7 +2,7 @@ Name:Night Soil
 ManaCost:G G
 Types:Enchantment
 Text:no text
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/night_soil.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/night_soil.jpg
 End

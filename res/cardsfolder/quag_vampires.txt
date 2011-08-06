@@ -5,6 +5,6 @@ Text:Quag Vampires enters the battlefield with a +1/+1 counter on it for each ti
 PT:1/1
 K:Swampwalk
 K:Multikicker 1 B
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/quag_vampires.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/quag_vampires.jpg
 End

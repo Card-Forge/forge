@@ -3,6 +3,6 @@ ManaCost:2 W
 Types:Enchantment
 Text:no text
 K:Whenever a creature is put into a graveyard from the battlefield, you gain 1 life.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/moonlit_wake.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/moonlit_wake.jpg
 End

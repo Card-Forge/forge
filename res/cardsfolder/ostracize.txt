@@ -3,6 +3,6 @@ ManaCost:B
 Types:Sorcery
 Text:no text
 K:spDiscardOpp:RevealYouChoose/Creature:1:Target opponent reveals his or her hand. Choose a creature card from it. That player discards that card.:Ostracize - opponent reveals hand and discards a card
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ostracize.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ostracize.jpg
 End

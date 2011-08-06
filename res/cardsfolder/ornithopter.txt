@@ -4,7 +4,7 @@ Types:Artifact Creature Thopter
 Text:no text
 PT:0/2
 K:Flying
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card95220.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card95220.jpg
 End

@@ -3,6 +3,6 @@ ManaCost:2 R
 Types:Instant Arcane
 Text:no text
 K:spAllPump:YouCtrl:+2/+0:Creatures you control get +2/+0 until end of turn.:Path of Anger's Flame - Creatures get +2/+0 until EOT
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card74179.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card74179.jpg
 End

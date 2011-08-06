@@ -2,7 +2,7 @@ Name:Plague Wind
 ManaCost:7 B B
 Types:Sorcery
 Text:Destroy all creatures you don't control. They can't be regenerated.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83206.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83206.jpg
 End

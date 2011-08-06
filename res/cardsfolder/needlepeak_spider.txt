@@ -4,6 +4,6 @@ Types:Creature Spider
 Text:no text
 PT:4/2
 K:Reach
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122268.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122268.jpg
 End

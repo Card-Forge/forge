@@ -3,6 +3,6 @@ ManaCost:1 G
 Types:Instant
 Text:Destroy target creature with flying.
 K:spDestroyTgt:Creature.withFlying
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/plummet.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/plummet.jpg
 End

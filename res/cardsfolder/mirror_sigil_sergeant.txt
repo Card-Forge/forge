@@ -4,6 +4,6 @@ Types:Creature Rhino Soldier
 Text:At the beginning of your upkeep, if you control a blue permanent, you may put a token that's a copy of Mirror-Sigil Sergeant onto the battlefield.
 PT:4/4
 K:Trample
-K:SVar:Rarity:Mythic
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_sigil_sergeant.jpg
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_sigil_sergeant.jpg
 End

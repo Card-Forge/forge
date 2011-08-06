@@ -3,6 +3,6 @@ ManaCost:1
 Types:Artifact
 Text:no text
 K:1, Sacrifice CARDNAME: Draw a card.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/necrogen_spellbomb.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/necrogen_spellbomb.jpg
 End

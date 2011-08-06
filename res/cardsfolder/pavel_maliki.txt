@@ -4,6 +4,6 @@ Types:Legendary Creature Human
 Text:no text
 PT:5/3
 K:abPump B R:+1/+0
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/pavel_maliki.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pavel_maliki.jpg
 End

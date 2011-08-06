@@ -4,6 +4,6 @@ Types:Creature Human Monk Cleric
 Text:When Monk Realist enters the battlefield, destroy target enchantment.
 PT:1/1
 K:etbDestroyTgt:Enchantment
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/monk_realist.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/monk_realist.jpg
 End

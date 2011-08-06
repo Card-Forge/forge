@@ -4,6 +4,6 @@ Types:Creature Troll
 Text:no text
 PT:1/1
 K:RegenerateMe:1 BG
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/odious_trow.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/odious_trow.jpg
 End

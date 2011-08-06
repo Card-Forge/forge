@@ -5,6 +5,6 @@ Text:Affinity for Mountains (This spell costs 1 less to cast for each Mountain y
 PT:3/2
 K:Haste
 K:CostChange:Player:Less:1:Self:All:All:Affinity/Mountain
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/oxidda_golem.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/oxidda_golem.jpg
 End

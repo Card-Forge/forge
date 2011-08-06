@@ -4,6 +4,6 @@ Types:Creature Fungus
 Text:At the beginning of your upkeep, put a 1/1 green Saproling creature token into play for each +1/+1 counter on Mycoloth.
 PT:4/4
 K:Devour:2
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mycoloth.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mycoloth.jpg
 End

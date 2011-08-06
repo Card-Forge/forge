@@ -2,6 +2,6 @@ Name:Perish the Thought
 ManaCost:2 B
 Types:Sorcery
 Text:Target opponent reveals his or her hand. You choose a card from it. That player shuffles that card into his or her library.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/perish_the_thought.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/perish_the_thought.jpg
 End

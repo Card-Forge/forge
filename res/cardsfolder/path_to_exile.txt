@@ -2,6 +2,6 @@ Name:Path to Exile
 ManaCost:W
 Types:Instant
 Text:Exile target creature. Its controller may search his or her library for a basic land card, put that card onto the battlefield tapped, then shuffle his or her library.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/path_to_exile.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/path_to_exile.jpg
 End

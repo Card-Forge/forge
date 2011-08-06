@@ -6,6 +6,6 @@ PT:4/4
 K:Flying
 K:stPumpAll:Creature:Self:0/0/Protection from artifacts/Protection from white/Protection from blue/Protection from black/Protection from red/Protection from green:isUntapped:As long as Pristine Angel is untapped, it has protection from artifacts and from all colors.
 K:WheneverKeyword:CastSpell/Controller:Any:Play:UntapPermanent:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a spell, you may untap Pristine Angel.
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/pristine_ange.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pristine_ange.jpg
 End

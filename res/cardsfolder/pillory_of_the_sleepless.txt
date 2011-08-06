@@ -3,6 +3,6 @@ ManaCost:1 W B
 Types:Enchantment Aura
 Text:Enchanted creature can't attack or block.\r\nEnchanted creature has "At the beginning of your upkeep, you lose 1 life."
 K:Enchant creature
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/pillory_of_the_sleepless.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pillory_of_the_sleepless.jpg
 End

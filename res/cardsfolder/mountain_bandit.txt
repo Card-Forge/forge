@@ -4,6 +4,6 @@ Types:Creature Human Soldier Rogue
 Text:no text
 PT:1/1
 K:Haste
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Three_Kingdoms/mountain_bandit.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Three_Kingdoms/mountain_bandit.jpg
 End

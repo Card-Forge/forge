@@ -4,6 +4,6 @@ Types:Creature Goblin Warrior
 Text:When Mogg War Marshal enters the battlefield or is put into a graveyard from the battlefield, put a 1/1 red Goblin creature token onto the battlefield.
 PT:1/1
 K:Echo:1 R
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_war_marshal.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_war_marshal.jpg
 End

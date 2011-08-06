@@ -4,6 +4,6 @@ Types:Land Swamp Forest
 Text:As Overgrown Tomb comes into play, you may pay 2 life. If you don't, Overgrown Tomb comes into play tapped instead.
 K:tap: add B
 K:tap: add G
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card89072.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card89072.jpg
 End

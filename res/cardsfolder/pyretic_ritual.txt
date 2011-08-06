@@ -2,7 +2,7 @@ Name:Pyretic Ritual
 ManaCost:1 R
 Types:Instant
 Text:Add R R R to your mana pool.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/pyretic_ritual.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pyretic_ritual.jpg
 End

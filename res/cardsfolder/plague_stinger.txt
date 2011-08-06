@@ -5,6 +5,6 @@ Text:no text
 PT:1/1
 K:Flying
 K:Infect
-K:SVar:Rarity:Common
-K:SVar:Picture:http://serv4.tcgimages.eu/img/cards/Scars_of_Mirrodin/plague_stinger.jpg
+SVar:Rarity:Common
+SVar:Picture:http://serv4.tcgimages.eu/img/cards/Scars_of_Mirrodin/plague_stinger.jpg
 End

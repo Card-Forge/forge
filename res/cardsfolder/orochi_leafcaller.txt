@@ -7,7 +7,7 @@ K:G: add W
 K:G: add U
 K:G: add B
 K:G: add R
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/orochi_leafcaller.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/orochi_leafcaller.jpg
 End

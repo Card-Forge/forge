@@ -4,6 +4,6 @@ Types:Legendary Creature Elf Warrior
 Text:no text
 PT:4/6
 K:Rampage 1
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/marhault_elsdragon.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/marhault_elsdragon.jpg
 End

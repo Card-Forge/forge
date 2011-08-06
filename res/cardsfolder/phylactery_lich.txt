@@ -4,6 +4,6 @@ Types:Creature Zombie
 Text:As Phylactery Lich enters the battlefield, put a phylactery counter on an artifact you control.\r\nWhen you control no permanents with phylactery counters on them, sacrifice Phylactery Lich.
 PT:5/5
 K:Indestructible
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/phylactery_lich.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phylactery_lich.jpg
 End

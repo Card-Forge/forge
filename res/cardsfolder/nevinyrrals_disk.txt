@@ -3,6 +3,6 @@ ManaCost:4
 Types:Artifact
 Text:no text
 K:CARDNAME enters the battlefield tapped.
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card3803.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card3803.jpg
 End

@@ -3,8 +3,8 @@ ManaCost:1 B R G
 Types:Creature Cyclops Warrior
 Text:Creatures you control have haste.
 PT:3/4
-K:SVar:PlayMain1:TRUE
-K:SVar:BuffedBy:Creature
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/madrush_cyclops.jpg
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Creature
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/madrush_cyclops.jpg
 End

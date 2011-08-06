@@ -6,7 +6,7 @@ K:tap: add 1
 K:paintap:1:B
 K:paintap:1:G
 K:Comes into play tapped.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/pine_barrens.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pine_barrens.jpg
 End

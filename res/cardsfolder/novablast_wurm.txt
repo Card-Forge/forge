@@ -3,6 +3,6 @@ ManaCost:3 G G W W
 Types:Creature Wurm
 Text:Whenever Novablast Wurm attacks, destroy all other creatures.
 PT:7/7
-K:SVar:Rarity:Mythic
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/novablast_wurm.jpg
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/novablast_wurm.jpg
 End

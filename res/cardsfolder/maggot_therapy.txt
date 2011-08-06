@@ -5,6 +5,6 @@ Text:Enchanted creature gets +2/-2.
 K:Flash
 K:Enchant creature
 K:enPump:+2/-2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/maggot_therapy.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/maggot_therapy.jpg
 End

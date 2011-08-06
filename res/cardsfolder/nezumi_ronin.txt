@@ -4,6 +4,6 @@ Types:Creature Rat Samurai
 Text:no text
 PT:3/1
 K:Bushido 1
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nezumi_ronin.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nezumi_ronin.jpg
 End

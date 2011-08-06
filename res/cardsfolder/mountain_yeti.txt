@@ -5,6 +5,6 @@ Text:no text
 PT:3/3
 K:Mountainwalk
 K:Protection from white
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mountain_yeti.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mountain_yeti.jpg
 End

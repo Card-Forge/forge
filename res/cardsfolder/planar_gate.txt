@@ -3,6 +3,6 @@ ManaCost:6
 Types:Artifact
 Text:Creature spells you cast cost up to 2 less to cast.
 K:CostChange:Player:Less:2:Spell:All:Creature:NoSpecial
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_gate.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_gate.jpg
 End

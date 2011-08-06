@@ -4,6 +4,6 @@ Types:Creature Merfolk Assassin
 Text:no text
 PT:1/2
 K:abDestroyTgtV T:Creature.withIslandwalk:Destroy target creature with islandwalk.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_assassin.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_assassin.jpg
 End

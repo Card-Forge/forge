@@ -4,6 +4,6 @@ Types:Sorcery
 Text:Destroy target artifact or land.
 K:spDestroyTgt:Artifact,Land
 K:Suspend:4:1 R
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/plunder.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/plunder.jpg
 End

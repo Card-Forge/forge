@@ -5,6 +5,6 @@ Text:no text
 K:Piranha Marsh enters the battlefield tapped.
 K:WheneverKeyword:EntersBattleField:Self:Play:Damage/1:NormalInput/Player:ASAP:No_Condition:No Special Condition:When Piranha Marsh enters the battlefield, target player loses 1 life.
 K:tap: add B
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/piranha_marsh.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/piranha_marsh.jpg
 End

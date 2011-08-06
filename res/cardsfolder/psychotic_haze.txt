@@ -4,7 +4,7 @@ Types:Instant
 Text:no text
 K:spDamageAll:Player,Creature:1:Psychotic Haze deals 1 damage to each creature and each player.
 K:Madness:1 B
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/psychotic_haze.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/psychotic_haze.jpg
 End

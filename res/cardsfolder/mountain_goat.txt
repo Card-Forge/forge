@@ -4,6 +4,6 @@ Types:Creature Goat
 Text:no text
 PT:1/1
 K:Mountainwalk
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card16442.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card16442.jpg
 End

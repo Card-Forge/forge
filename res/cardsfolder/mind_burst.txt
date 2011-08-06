@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Sorcery
 Text:no text
 K:spDiscardTgt:TgtChoose:X:Target player discards X cards, where X is one plus the number of cards named Mind Burst in all graveyards.:Mind Burst - target player discards cards
-K:SVar:X:Count$NamedInAllYards.Mind Burst/Plus.1
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_burst.jpg
+SVar:X:Count$NamedInAllYards.Mind Burst/Plus.1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_burst.jpg
 End

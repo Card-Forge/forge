@@ -4,6 +4,6 @@ Types:Enchantment Aura
 Text:Enchanted creature has trample.
 K:Enchant creature
 K:enPump:Trample
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_frenzy.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_frenzy.jpg
 End

@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Legendary Land
 Text:no text
 K:tap: add U
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/oboro_palace_in_the_clouds.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/oboro_palace_in_the_clouds.jpg
 End

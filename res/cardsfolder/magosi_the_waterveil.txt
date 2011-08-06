@@ -4,6 +4,6 @@ Types:Land
 Text:no text
 K:tap: add U
 K:Comes into play tapped.
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/magosi_the_waterveil.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/magosi_the_waterveil.jpg
 End

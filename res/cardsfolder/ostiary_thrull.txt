@@ -3,6 +3,6 @@ ManaCost:3 B
 Types:Creature Thrull
 Text:no text
 PT:2/2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ostiary_thrull.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ostiary_thrull.jpg
 End

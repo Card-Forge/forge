@@ -3,6 +3,6 @@ ManaCost:1 U U
 Types:Instant
 Text:Counter target creature or sorcery spell.
 K:spCounter:Spell:Type(Creature,Sorcery):Graveyard:None
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_denial.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_denial.jpg
 End

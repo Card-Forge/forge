@@ -3,6 +3,6 @@ ManaCost:2 W
 Types:Enchantment
 Text:no text
 K:abPumpTgtC 1 W:First Strike
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_steeds.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_steeds.jpg
 End

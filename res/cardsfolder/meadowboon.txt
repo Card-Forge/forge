@@ -3,6 +3,6 @@ ManaCost:2 W W
 Types:Creature Elemental
 Text:When Meadowboon leaves play, put a +1/+1 counter on each creature you control.
 PT:3/3
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/meadowboon.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/meadowboon.jpg
 End

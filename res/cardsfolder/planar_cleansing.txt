@@ -3,6 +3,6 @@ ManaCost:3 W W W
 Types:Sorcery
 Text:Destroy all non-land permanents.
 K:spDestroyAll:Permanent.nonLand
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_cleansing.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_cleansing.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Beast
 Text:no text
 PT:3/2
 K:abPump Sac<1/Swamp>:Fear
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/marsh_lurker.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/marsh_lurker.jpg
 End

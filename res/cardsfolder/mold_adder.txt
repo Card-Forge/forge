@@ -3,6 +3,6 @@ ManaCost:G
 Types:Creature Fungus Snake
 Text:Whenever an opponent casts a blue or black spell, you may put a +1/+1 counter on Mold Adder.
 PT:1/1
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mold_adder.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mold_adder.jpg
 End

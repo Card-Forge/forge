@@ -3,6 +3,6 @@ ManaCost:G G
 Types:Creature Human
 Text:People of the Woods's toughness is equal to the number of Forests you control.
 PT:1/1
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/people_of_the_woods.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/people_of_the_woods.jpg
 End

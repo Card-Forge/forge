@@ -5,6 +5,6 @@ Text:Affinity for artifacts (This spell costs 1 less to cast for each artifact y
 PT:4/5
 K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
 K:CostChange:Player:Less:1:Spell:All:Artifact/Creature:Affinity/Artifact/All Conditions
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mycosynth_golem.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mycosynth_golem.jpg
 End

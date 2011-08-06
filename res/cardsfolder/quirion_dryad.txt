@@ -3,6 +3,6 @@ ManaCost:1 G
 Types:Creature Dryad
 Text:Whenever you play a white, blue, black, or red spell, put a +1/+1 counter on Quirion Dryad.
 PT:1/1
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/quirion_dryad.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/quirion_dryad.jpg
 End

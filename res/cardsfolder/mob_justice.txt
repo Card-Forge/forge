@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Sorcery
 Text:no text
 K:spDamageTgtP:X:Mob Justice deals damage to target player equal to the number of creatures you control.:Mob Justice - deals damage to player.
-K:SVar:X:Count$TypeYouCtrl.Creature
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mob_justice.jpg
+SVar:X:Count$TypeYouCtrl.Creature
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mob_justice.jpg
 End

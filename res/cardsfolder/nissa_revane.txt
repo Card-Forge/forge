@@ -2,6 +2,6 @@ Name:Nissa Revane
 ManaCost:2 G G
 Types:Planeswalker - Nissa
 Text:no text
-K:SVar:Rarity:Mythic
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nissa_revane.jpg
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nissa_revane.jpg
 End

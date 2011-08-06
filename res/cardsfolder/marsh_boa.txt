@@ -4,6 +4,6 @@ Types:Creature Snake
 Text:no text
 PT:1/1
 K:Swampwalk
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/pr/en-us/card24664.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/pr/en-us/card24664.jpg
 End

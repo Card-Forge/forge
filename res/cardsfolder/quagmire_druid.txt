@@ -4,6 +4,6 @@ Types:Creature Zombie Druid
 Text:no text
 PT:2/2
 K:abDestroyTgtV G T Sac<1/Creature>:Enchantment:Destroy target enchantment.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/quagmire_druid.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/quagmire_druid.jpg
 End

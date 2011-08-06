@@ -4,6 +4,6 @@ Types:Enchantment Aura
 Text:Enchanted creature can't attack or block.
 K:Enchant creature
 K:enPumpCurse:CARDNAME can't attack or block.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/pacifism.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pacifism.jpg
 End

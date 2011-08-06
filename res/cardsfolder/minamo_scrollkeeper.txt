@@ -5,6 +5,6 @@ Text:Your maximum hand size is increased by one.
 PT:2/3
 K:HandSize + 1 Self
 K:Defender
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/minamo_scrollkeeper.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/minamo_scrollkeeper.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Lhurgoyf
 Text:Mortivore's power and toughness are each equal to the number of creature cards in all graveyards.
 PT:1/1
 K:RegenerateMe:B
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mortivore.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mortivore.jpg
 End

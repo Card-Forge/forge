@@ -4,7 +4,7 @@ Types:Creature Elemental
 Text:Champion an Elemental
 PT:10/2
 K:Trample
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nova_chaser.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nova_chaser.jpg
 End

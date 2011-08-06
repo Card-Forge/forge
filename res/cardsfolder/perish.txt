@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Sorcery
 Text:Destroy all green creatures. They can't be regenerated.
 K:spDestroyAll:Creature.Green:NoRegen
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/perish.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/perish.jpg
 End

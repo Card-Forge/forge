@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Enchantment Aura
 Text:Whenever enchanted land becomes tapped, Psychic Venom deals 2 damage to that land's controller.
 K:Enchant Land Curse
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_venom.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_venom.jpg
 End

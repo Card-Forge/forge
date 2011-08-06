@@ -4,7 +4,7 @@ Types:Creature Goblin Warrior
 Text:Mudbrawler Cohort gets +1/+1 as long as you control another red creature.
 PT:1/1
 K:Haste
-K:SVar:BuffedBy:Creature.Red
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mudbrawler_cohort.jpg
+SVar:BuffedBy:Creature.Red
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mudbrawler_cohort.jpg
 End

@@ -4,6 +4,6 @@ Types:Enchantment Aura
 Text:Enchanted creature has protection from black and from red.
 K:Enchant creature
 K:enPump:Protection from black & Protection from red
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mask_of_law_and_grace.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mask_of_law_and_grace.jpg
 End

@@ -3,6 +3,6 @@ ManaCost:2
 Types:Artifact Creature Myr
 Text:no text
 PT:1/2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card48605.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card48605.jpg
 End

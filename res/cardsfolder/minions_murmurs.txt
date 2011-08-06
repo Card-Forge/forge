@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Sorcery
 Text:no text
 K:spDrawCards:X:Drawback$YouLoseLife/X:You draw X cards and you lose X life, where X is the number of creatures you control.:Minion's Murmurs - draw cards and lose life.
-K:SVar:X:Count$TypeYouCtrl.Creature
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130316.jpg
+SVar:X:Count$TypeYouCtrl.Creature
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130316.jpg
 End

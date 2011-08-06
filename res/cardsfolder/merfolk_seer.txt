@@ -4,6 +4,6 @@ Types:Creature Merfolk Wizard
 Text:no text
 PT:2/2
 K:WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:DrawCards/1:ControllingPlayer_Self:ASAP:PayMana/1 U:No Special Condition:When Merfolk Seer is put into a graveyard from the battlefield, you may pay 1 U. If you do, draw a card.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_seer.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_seer.jpg
 End

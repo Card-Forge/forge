@@ -2,6 +2,6 @@ Name:Molten Rain
 ManaCost:1 R R
 Types:Sorcery
 Text:Destroy target land. If that land is nonbasic, Molten Rain deals 2 damage to the land's controller.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card46000.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card46000.jpg
 End

@@ -2,7 +2,7 @@ Name:Natural Selection
 ManaCost:G
 Types:Instant
 Text:Look at the top 3 cards of target player's library and put them back in any order. You may have that player shuffle his or her library.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/natural_selection.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/natural_selection.jpg
 End

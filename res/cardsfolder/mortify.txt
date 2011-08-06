@@ -3,6 +3,6 @@ ManaCost:1 W B
 Types:Instant
 Text:Destroy target creature or enchantment.
 K:spDestroyTgt:Creature,Enchantment
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mortify.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mortify.jpg
 End

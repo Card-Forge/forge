@@ -3,7 +3,7 @@ ManaCost:G
 Types:Instant
 Text:no text
 K:spAllPump:All:+1/+1:All creatures get +1/+1 until end of turn.:Magnify - Creatures get +1/+1 until EOT
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/cg/en-us/card15819.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/cg/en-us/card15819.jpg
 End

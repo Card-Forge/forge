@@ -4,6 +4,6 @@ Types:Creature Atog
 Text:no text
 PT:3/4
 K:abPump Sac<1/Artifact>:+3/+3
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/megatog.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/megatog.jpg
 End

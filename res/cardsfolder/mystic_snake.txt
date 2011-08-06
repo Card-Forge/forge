@@ -4,6 +4,6 @@ Types:Creature Snake
 Text:When Mystic Snake comes into play, counter target spell.
 PT:2/2
 K:Flash
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_snake.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_snake.jpg
 End

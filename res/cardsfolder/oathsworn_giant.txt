@@ -5,7 +5,7 @@ Text:no text
 PT:3/4
 K:Vigilance
 K:StaticEffect:Play:Permanents you Control:PTBonus/0/2!Keyword/Vigilance:Type.Creature!NotSelf:Other creatures you control get +0/+2 and have vigilance.
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/oathsworn_giant.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/oathsworn_giant.jpg
 End

@@ -3,6 +3,6 @@ ManaCost:W U U B
 Types:Instant
 Text:Counter target spell. It's controller loses 3 life and you gain 3 life.
 K:spCounter:Spell:None:Graveyard:CC-LoseLife(3) My-GainLife(3)
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/punish_ignorance.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/punish_ignorance.jpg
 End

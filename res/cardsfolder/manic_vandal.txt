@@ -4,6 +4,6 @@ Types:Creature Human Warrior
 Text:When Manic Vandal enters the battlefield, destroy target artifact.
 PT:2/2
 K:etbDestroyTgt:Artifact
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/manic_vandal.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/manic_vandal.jpg
 End

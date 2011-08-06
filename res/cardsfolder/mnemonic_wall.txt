@@ -4,6 +4,6 @@ Types:Creature Wall
 Text:When Mnemonic Wall enters the battlefield, you may return target instant or sorcery card from your graveyard to your hand.
 PT:0/4
 K:Defender
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mnemonic_wall.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mnemonic_wall.jpg
 End

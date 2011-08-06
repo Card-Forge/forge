@@ -3,6 +3,6 @@ ManaCost:3 W W
 Types:Sorcery
 Text:Destroy all artifacts and enchantments.
 K:spDestroyAll:Artifact,Enchantment
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/purify.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/purify.jpg
 End

@@ -4,6 +4,6 @@ Types:Artifact Creature Myr
 Text:no text
 PT:2/2
 K:tap: add 2
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
 End
