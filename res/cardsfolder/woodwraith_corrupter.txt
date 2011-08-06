@@ -1,0 +1,11 @@
+Name:Woodwraith Corrupter
+ManaCost:3 B B G
+Types:Creature Elemental Horror
+Text:no text
+PT:3/6
+A:AB$ Animate | Cost$ 1 B G T | ValidTgts$ Forest | TgtPrompt$ Select target Forest | Power$ 4 | Toughness$ 4 | Types$ Creature,Elemental,Horror | Colors$ Black,Green | Permanent$ True | SpellDescription$ Target Forest becomes a 4/4 black and green Elemental Horror creature. It's still a land.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/woodwraith_corrupter.jpg
+SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/240.jpg
+End

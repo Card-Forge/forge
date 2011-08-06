@@ -83,6 +83,7 @@ public enum Counters {
     TIDE(),
     TIME(),
     TOWER("tower"),
+    TRAINING(),
     TRAP(),
     TREASURE(),
     VERSE(),

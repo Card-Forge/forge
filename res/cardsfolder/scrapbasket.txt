@@ -1,0 +1,10 @@
+Name:Scrapbasket
+ManaCost:4
+Types:Artifact Creature Scarecrow
+Text:no text
+PT:3/2
+A:AB$ Animate | Cost$ 1 | Defined$ Self | Colors$ White,Blue,Black,Red,Green | SpellDescription$ CARDNAME becomes all colors until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scrapbasket.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/262.jpg
+End
