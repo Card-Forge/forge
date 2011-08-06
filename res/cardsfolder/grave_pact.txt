@@ -1,6 +1,6 @@
 Name:Grave Pact
 ManaCost:1 B B B
-Types:Creature Enchantment
+Types:Enchantment
 Text:no text
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever a creature you control is put into a graveyard from the battlefield, each other player sacrifices a creature.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Opponent | SacValid$ Creature
