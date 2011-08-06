@@ -18,6 +18,10 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+cloudhoof_kirin.jpg         http://www.wizards.com/global/images/magic/general/cloudhoof_kirin.jpg
+bounteous_kirin.jpg         http://www.wizards.com/global/images/magic/general/bounteous_kirin.jpg
+captain_of_the_watch.jpg    http://www.wizards.com/global/images/magic/general/captain_of_the_watch.jpg
+infernal_kirin.jpg          http://www.wizards.com/global/images/magic/general/infernal_kirin.jpg
 halcyon_glaze.jpg           http://www.wizards.com/global/images/magic/general/halcyon_glaze.jpg
 callous_giant.jpg           http://www.wizards.com/global/images/magic/general/callous_giant.jpg
 underworld_dreams.jpg       http://www.wizards.com/global/images/magic/general/underworld_dreams.jpg

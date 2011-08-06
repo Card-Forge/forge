@@ -162,7 +162,58 @@ public class CardFactory_Creatures {
 	         a1.setBeforePayMana(new Input_PayManaCost(a1));
 	         a1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(a1));
 	       }//*************** END ************ END **************************
+	    
+	    //*************** START *********** START **************************
+	       else if(cardName.equals("Captain of the Watch"))
+	       {
+	          
+	          final SpellAbility comesIntoPlayAbility = new Ability(card, "0")
+	           {
+	             public void resolve()
+	             {
+	               makeToken();
+	               makeToken();
+	               makeToken();
+	             }//resolve()
+	             
+	             public void makeToken()
+	            {
+	                Card c = new Card();
 
+	                c.setName("Soldier");
+	                  c.setImageName("W 1 1 Soldier");
+
+	                  c.setOwner(card.getController());
+	                  c.setController(card.getController());
+
+	                  c.setManaCost("W");
+	                  c.setToken(true);
+	                 
+	                  c.addType("Creature");
+	                  c.addType("Soldier");
+	                  c.setBaseAttack(1);
+	                  c.setBaseDefense(1);
+
+	                  PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+	                  play.add(c);
+	              }
+
+	           }; //comesIntoPlayAbility
+	           
+	           Command intoPlay = new Command()
+	           {
+	            private static final long serialVersionUID = 8778828278589063477L;
+
+	            public void execute()
+	                {
+	                  comesIntoPlayAbility.setStackDescription(card.getName() + " - put three 1/1 white Soldier creature tokens into play.");
+	                  AllZone.Stack.add(comesIntoPlayAbility);
+	                }
+	           };
+	           
+	           card.addComesIntoPlayCommand(intoPlay);
+	}//*************** END ************ END **************************
+	    
 	    //*************** START *********** START **************************
 	    else if(cardName.equals("Dimir Guildmage"))
 	       {

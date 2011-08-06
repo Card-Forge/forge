@@ -93,6 +93,9 @@ public class GameActionUtil
 		playCard_Dovescape(c); //keep this one top
 		playCard_Demigod_of_Revenge(c);
 		playCard_Halcyon_Glaze(c);
+		playCard_Infernal_Kirin(c);
+		playCard_Cloudhoof_Kirin(c);
+		playCard_Bounteous_Kirin(c);
 		playCard_Emberstrike_Duo(c);
 		playCard_Gravelgill_Duo(c);
 		playCard_Safehold_Duo(c);
@@ -659,6 +662,193 @@ public class GameActionUtil
 			}					
 
 	}//Halcyon Glaze
+	
+	public static void playCard_Infernal_Kirin(Card c)
+	{
+		final String controller = c.getController();
+			
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+				controller);
+		
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Infernal Kirin");
+
+		if (list.size() > 0){
+			if (c.getType().contains("Spirit") || c.getType().contains("Arcane") || c.getIntrinsicKeyword().contains("Changeling"))
+			{
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);					
+						final int converted = CardUtil.getConvertedManaCost(c.getManaCost());						
+						Ability ability2 = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+						 final String target;
+						if (card.getController().contains("Human"))
+						{
+				               String[] choices =
+				               { "Opponent", "Yourself" };
+				               Object choice = AllZone.Display.getChoice(
+				                     "Choose target player", choices);
+				               if (choice.equals("Opponent"))
+				               {
+				            	   target = "Computer";    // check for target of spell/abilities should be here
+				               }// if choice yes
+				               else target = "Human";     // check for target of spell/abilities should be here
+						}
+						else target = "Human";            // check for target of spell/abilities should be here
+						PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, target);
+				        CardList fullHand = new CardList(hand.getCards()); 
+				        if (fullHand.size() > 0 && target.equals(Constant.Player.Computer))
+				        	  AllZone.Display.getChoice("Revealing hand", fullHand.toArray()); 
+				        CardList discard = new CardList(hand.getCards());
+				        discard = discard.filter(new CardListFilter()
+			          	  {
+							public boolean addCard(Card c) {
+								return CardUtil.getConvertedManaCost(c.getManaCost()) == converted;
+							}
+			          	  });
+			          	for (int j=0; j<discard.size();j++)
+			          	{	
+			          	Card choice = discard.get(j);
+			          	AllZone.GameAction.discard(choice);
+			          	}
+							} //resolve
+						};   //ability
+						ability2.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+					    ability2.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability2));
+						ability2.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played a Spirit or Arcane spell, target player reveals his or her hand and discards all cards with converted mana cost "+ converted +".");
+						AllZone.Stack.add(ability2);
+					}
+				}//if
+			}					
+
+	}//Infernal Kirin
+
+	public static void playCard_Cloudhoof_Kirin(Card c)
+	{
+		final String controller = c.getController();
+			
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+				controller);
+		
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Cloudhoof Kirin");
+
+		if (list.size() > 0){
+			if (c.getType().contains("Spirit") || c.getType().contains("Arcane") || c.getIntrinsicKeyword().contains("Changeling"))
+			{
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);					
+						final int converted = CardUtil.getConvertedManaCost(c.getManaCost());						
+						Ability ability2 = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+						 final String target;
+						if (card.getController().contains("Human"))
+						{
+				               String[] choices =
+				               { "Opponent", "Yourself", "None" };
+				               Object choice = AllZone.Display.getChoice(
+				                     "Choose target player", choices);
+				               if (choice.equals("Opponent"))
+				               {
+				            	   target = "Computer";    // check for target of spell/abilities should be here
+				               }// if choice yes
+				               else if (!choice.equals("None")) target = "Human";     // check for target of spell/abilities should be here
+				               else target="none";
+						}
+						else target = "Human";            // check for target of spell/abilities should be here						
+						if (!(target.contains("none"))) {
+						PlayerZone lib = AllZone.getZone(Constant.Zone.Library, target);
+			            PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, target);
+			            CardList libList = new CardList(lib.getCards());
+
+			             int max = converted;
+			              
+			             if (libList.size() < max)
+			                max = libList.size();
+			             
+			             for (int i=0;i<max;i++)
+			             {
+			                Card c = libList.get(i);
+			                lib.remove(c);
+			                grave.add(c);
+			             }
+						     }  //if
+							} //resolve
+						};   //ability
+						ability2.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+					    ability2.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability2));
+						ability2.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played a Spirit or Arcane spell, target player puts the top " + converted + " cards of his or her library into his or her graveyard.");
+						AllZone.Stack.add(ability2);
+					}
+				}//if
+			}					
+
+	}//Cloudhoof Kirin
+
+	public static void playCard_Bounteous_Kirin(Card c)
+	{
+		final String controller = c.getController();
+			
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+				controller);
+		
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Bounteous Kirin");
+
+		if (list.size() > 0){
+			if (c.getType().contains("Spirit") || c.getType().contains("Arcane") || c.getIntrinsicKeyword().contains("Changeling"))
+			{
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);					
+						final int converted = CardUtil.getConvertedManaCost(c.getManaCost());						
+						Ability ability2 = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+						 final String target;						 
+						if (card.getController().contains("Human"))
+						{
+				               String[] choices =
+				               { "Yourself", "Opponent", "None" };
+				               Object choice = AllZone.Display.getChoice(
+				                     "Choose target player", choices);
+				               if (choice.equals("Opponent"))
+				               {
+				            	   target = "Computer";    // check for target of spell/abilities should be here
+				               }// if choice yes
+				               else if (!choice.equals("None")) target = "Human";     // check for target of spell/abilities should be here
+				               else target="none";
+						}
+						else target = "Computer";            // check for target of spell/abilities should be here						
+						if (!target.equals("none")) AllZone.GameAction.getPlayerLife(target).addLife(converted);						
+							} //resolve
+						};   //ability
+						ability2.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+					    ability2.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability2));
+						ability2.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played a Spirit or Arcane spell, target player may gain " + converted + " life.");
+						AllZone.Stack.add(ability2);
+					}
+				}//if
+			}					
+
+	}//Bounteous Kirin
+
 	
 	public static void playCard_Shorecrasher_Mimic(Card c)
 	{
@@ -11079,6 +11269,100 @@ public class GameActionUtil
 		
 	};//Wizened Cenn Other
 	
+	public static Command Captain_of_the_Watch_Pump = new Command()
+	{
+		private static final long serialVersionUID = 542524781150091105L;
+		
+		CardList gloriousAnthemList = new CardList();
+
+		public void execute()
+		{
+
+			CardList cList = gloriousAnthemList;
+			Card c;
+
+			for (int i = 0; i < cList.size(); i++)
+			{
+				c = cList.get(i);
+				c.addSemiPermanentAttackBoost(-1);
+				c.addSemiPermanentDefenseBoost(-1);
+				c.removeIntrinsicKeyword("Vigilance");
+			}
+			cList.clear();
+			PlayerZone[] zone = getZone("Captain of the Watch");
+
+			// for each zone found add +1/+1 to each card
+			for (int outer = 0; outer < zone.length; outer++)
+			{
+				CardList creature = new CardList(zone[outer].getCards());
+				creature = creature.getType("Soldier");
+
+				for (int i = 0; i < creature.size(); i++)
+				{
+					c = creature.get(i);
+					if (c.isCreature()
+							&& !c.getName().equals("Captain of the Watch"))
+					{
+						c.addSemiPermanentAttackBoost(1);
+						c.addSemiPermanentDefenseBoost(1);
+						if(!c.getIntrinsicKeyword().contains("Vigilance"))
+			                  c.addIntrinsicKeyword("Vigilance");
+						gloriousAnthemList.add(c);
+					}
+
+				} // for
+			} // for
+
+		}// execute()
+
+	};//Captain_of_the_Watch_Pump
+	
+	public static Command Captain_of_the_Watch_Other = new Command()
+	{
+		private static final long serialVersionUID = -7242601069504800797L;
+		
+		int otherCenns=0;
+		
+		private int countOtherCenns(Card c)
+		{
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c
+					.getController());
+			CardList cenns = new CardList(play.getCards());
+			cenns = cenns.filter(new CardListFilter()
+			{
+				public boolean addCard(Card c)
+				{
+					return c.getName().equals("Captain of the Watch") && (c.getType().contains("Soldier") ||c.getKeyword().contains("Changeling"));
+				}
+			});
+			return cenns.size()-1;
+
+		}
+
+		public void execute()
+		{
+
+			CardList creature = new CardList();
+			creature.addAll(AllZone.Human_Play.getCards());
+			creature.addAll(AllZone.Computer_Play.getCards());
+			
+			creature = creature.getName("Captain of the Watch");
+
+			for (int i = 0; i < creature.size(); i++)
+			{
+				Card c = creature.get(i);
+				otherCenns = countOtherCenns(c);
+				c.setOtherAttackBoost(otherCenns);
+				c.setOtherDefenseBoost(otherCenns);
+				if(!c.getIntrinsicKeyword().contains("Vigilance"))
+	                  c.addIntrinsicKeyword("Vigilance");
+
+			}// for inner
+		}// execute()
+		
+	};//Captain of the Watch Other
+
+	
 	public static Command Elvish_Champion_Pump = new Command()
 	{
 		
@@ -14737,6 +15021,8 @@ public class GameActionUtil
 		commands.put("Elvish_Champion_Other", Elvish_Champion_Other);
 		commands.put("Wizened_Cenn_Pump", Wizened_Cenn_Pump);
 		commands.put("Wizened_Cenn_Other", Wizened_Cenn_Other);
+		commands.put("Captain_of_the_Watch_Pump", Captain_of_the_Watch_Pump);
+		commands.put("Captain_of_the_Watch_Other", Captain_of_the_Watch_Other);
 		commands.put("Merfolk_Sovereign_Pump", Merfolk_Sovereign_Pump);
 		commands.put("Merfolk_Sovereign_Other", Merfolk_Sovereign_Other);
 		commands.put("Lord_of_Atlantis_Pump", Lord_of_Atlantis_Pump);
