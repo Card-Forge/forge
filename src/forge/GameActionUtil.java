@@ -2417,7 +2417,6 @@ public class GameActionUtil {
 
 	public static void executeDestroyCardEffects(Card c, Card destroyed) {
 		if(destroyed.isCreature()) executeDestroyCreatureCardEffects(c, destroyed);
-		if(destroyed.isEnchantment()) executeDestroyEnchantmentCardEffects(c, destroyed);
 	}
 	
     public static boolean showYesNoDialog(Card c, String question) {
@@ -2546,34 +2545,6 @@ public class GameActionUtil {
 	}
 
 	//***CREATURES END HERE***
-
-	//***ENCHANTMENTS START HERE***
-
-	public static void executeDestroyEnchantmentCardEffects(Card c, Card destroyed) {
-		if(c.getName().equals("Femeref Enchantress")) destroyEnchantment_Femeref_Enchantress(c, destroyed);
-	}
-
-
-	//***
-
-	public static void destroyEnchantment_Femeref_Enchantress(Card c, Card destroyed) {
-		final Card crd = c;
-
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				crd.getController().drawCard();
-			}
-		};
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("Femeref Enchantress - ").append(c.getController()).append(" draws a card.");
-		ability.setStackDescription(sb.toString());
-
-		AllZone.Stack.add(ability);
-	}
-
-	//***ENCHANTMENTS END HERE***
 
 	public static void executeLandfallEffects(Card c) {
 		if(c.getName().equals("Emeria Angel")) landfall_Emeria_Angel(c);
