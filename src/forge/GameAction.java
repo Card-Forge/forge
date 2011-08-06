@@ -1368,7 +1368,9 @@ public class GameAction {
         	return;
         }
         Cut_Count = Cut_Count + 1;	
-
+        AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, Constant.Player.Human),AllZone.GameAction.HumanCut);
+        AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer),AllZone.GameAction.ComputerCut);
+        
         StringBuilder sb = new StringBuilder();
         sb.append("Human cut his / her deck to : " + HumanCut.getName() + " (" + HumanCut.getManaCost() + ")" + "\r\n");
         sb.append("Computer cut his / her deck to : " + ComputerCut.getName()  + " (" + ComputerCut.getManaCost() + ")" + "\r\n");

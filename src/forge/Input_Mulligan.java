@@ -83,7 +83,8 @@ public class Input_Mulligan extends Input {
         }
     	
     }
-        if(AllZone.GameAction.Start_Cut == true) {
+        if(AllZone.GameAction.Start_Cut == true && !(HHandList.contains(AllZone.GameAction.HumanCut) 
+        		|| CHandList.contains(AllZone.GameAction.ComputerCut)))  {
         AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, Constant.Player.Human),AllZone.GameAction.HumanCut);
         AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer),AllZone.GameAction.ComputerCut);
         }
