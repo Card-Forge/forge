@@ -241,7 +241,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Pebbles Flintstone 2", "medium", "WU Meekstone deck with Meekstone, Marble Titan and creatures with vigilance");
         addToDeckList("Pebbles Flintstone 3", "hard", "WU Meekstone deck with Meekstone, Marble Titan and creatures with vigilance");
 //        addToDeckList("Phoenix 3", "hard", "R Burn");
-        addToDeckList("Picard 3", "hard", "WUG Elf deck similar to Morpheus but also has flying elves");
+        addToDeckList("Picard 3", "hard", "WUG Elf deck with elf lords");
         addToDeckList("Pinky and the Brain 3", "hard", "WB Royal Assassin deck with WoG, Damnation, Liliana Vess and Beacon of Unrest");
 //        addToDeckList("Predator 2", "medium", "WG Purity Ramp deck");
 //        addToDeckList("Predator 3", "hard", "UG Beastmaster Ascension deck");
@@ -258,9 +258,9 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Red Skull 2", "medium", "BR Metalcraft deck");
 //        addToDeckList("Robin 2", "medium", "G Big Green deck");
 //        addToDeckList("Robin 3", "hard", "WG Standard deck");
-        addToDeckList("Rocky 1", "easy", "WUR Pro red deck with Flamebreak, Tremor, Pyroclasm but no Pyrohemia");
-        addToDeckList("Rocky 2", "medium", "WUR Pro red deck with Flamebreak, Tremor, Pyroclasm but no Pyrohemia");
-        addToDeckList("Rocky 3", "hard", "WUR Pro red deck with Flamebreak, Tremor, Pyroclasm but no Pyrohemia");
+        addToDeckList("Rocky 1", "easy", "WUR Pro red deck with Flamebreak, Tremor, Pyroclasm");
+        addToDeckList("Rocky 2", "medium", "WUR Pro red deck with Flamebreak, Tremor, Pyroclasm");
+        addToDeckList("Rocky 3", "hard", "WUR Pro red deck with Flamebreak, Tremor, Pyroclasm");
         addToDeckList("Rogue 3", "hard", "R Dragon deck with Tarox Bladewing, Dragon Roost and Chandra Nalaar");
         
 //        addToDeckList("Sabertooth 2", "medium", "G Smokestack deck");
@@ -313,7 +313,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Treebeard 2", "medium", "WBG Treefolk deck with Bosk Banneret, Dauntless Dourbark, Timber Protector, Leaf-Crowned Elder and Doran");
         addToDeckList("Treebeard 3", "hard", "WBG Treefolk deck with Bosk Banneret, Dauntless Dourbark, Timber Protector, Leaf-Crowned Elder and Doran");
         
-        addToDeckList("Uncle Owen 3", "hard", "WUB deck with creature removal and control and Liliana Vess");
+        addToDeckList("Uncle Owen 3", "hard", "WUB Control deck");
         
 //        addToDeckList("Vampire 2", "medium", "Vampire Singleton");
 //        addToDeckList("Vampire 3", "hard", "Vampire Constructed");
