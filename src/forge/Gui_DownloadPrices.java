@@ -259,7 +259,7 @@ public class Gui_DownloadPrices extends JFrame {
 			            		outBW.write(k + "=5\r\n");
 			            	
 			            	else if (k.equals("Snow-Covered Plains") ||
-			            		k.equals("Snow-Covered Isnald") ||
+			            		k.equals("Snow-Covered Island") ||
 			            		k.equals("Snow-Covered Swamp")  ||
 			            		k.equals("Snow-Covered Mountain") ||
 			            		k.equals("Snow-Covered Forest"))
