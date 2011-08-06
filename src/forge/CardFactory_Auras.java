@@ -621,7 +621,11 @@ class CardFactory_Auras {
                 public boolean canPlayAI() {
                     CardList list = new CardList(AllZone.Human_Play.getCards());
                     list = list.getType("Land");
-                    
+                    list = list.filter(new CardListFilter() {
+                    	public boolean addCard(Card c) {
+                    		return !c.getType().contains("Island");
+                    	}
+                    });
                     if(list.isEmpty()) return false;
                     
                     setTargetCard(list.get(0));
