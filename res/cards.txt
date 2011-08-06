@@ -1,3 +1,96 @@
+Clout of the Dominus
+UR
+Enchantment Aura
+no text
+Enchant creature
+enPump:+0/+0
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Shroud:Color.blue:As long as enchanted creature is blue, it gets +1/+1 and has shroud. (It can't be the target of spells or abilities.)
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Haste:Color.red:As long as enchanted creature is red, it gets +1/+1 and has haste.
+SVar:PlayMain1:TRUE
+
+Edge of the Divinity
+WB
+Enchantment Aura
+no text
+Enchant creature
+enPump:+0/+0
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/2:Color.white:As long as enchanted creature is white, it gets +1/+2.
+StaticEffect:Play:Enchanted Permanent:PTBonus/2/1:Color.black:As long as enchanted creature is black, it gets +2/+1.
+SVar:PlayMain1:TRUE
+
+Favor of the Overbeing
+1 GU
+Enchantment Aura
+no text
+Enchant creature
+enPump:+0/+0
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Vigilance:Color.green:As long as enchanted creature is green, it gets +1/+1 and has vigilance.
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Flying:Color.blue:As long as enchanted creature is blue, it gets +1/+1 and has flying.
+SVar:PlayMain1:TRUE
+
+Runes of the Deus
+4 RG
+Enchantment Aura
+no text
+Enchant creature
+enPump:+0/+0
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Double Strike:Color.red:As long as enchanted creature is red, it gets +1/+1 and has double strike. (It deals both first-strike and regular combat damage.)
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Trample:Color.green:As long as enchanted creature is green, it gets +1/+1 and has trample.
+SVar:PlayMain1:TRUE
+
+Shield of the Oversoul
+2 GW
+Enchantment Aura
+no text
+Enchant creature
+enPump:+0/+0
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Indestructible:Color.green:As long as enchanted creature is green, it gets +1/+1 and is indestructible. (Lethal damage and effects that say "destroy" don't destroy it. If its toughness is 0 or less, it's still put into its owner's graveyard.)
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Flying:Color.white:As long as enchanted creature is white, it gets +1/+1 and has flying.
+SVar:PlayMain1:TRUE
+
+Steel of the Godhead
+2 WU
+Enchantment Aura
+no text
+Enchant creature
+enPump:+0/+0
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Lifelink:Color.white:As long as enchanted creature is white, it gets +1/+1 and has lifelink. (Damage dealt by the creature also causes its controller to gain that much life.)
+StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Unblockable:Color.blue:As long as enchanted creature is blue, it gets +1/+1 and is unblockable.
+SVar:PlayMain1:TRUE
+
+Greater Auramancy
+1 W
+Enchantment
+no text
+StaticEffect:Play:Permanents you Control:Keyword/Shroud:Type.Enchantment!NotSelf:Other enchantments you control have shroud.
+StaticEffect:Play:Permanents you Control:Keyword/Shroud:Type.Creature!enchanted:Enchanted creatures you control have shroud.
+SVar:PlayMain1:TRUE
+
+Guardian's Magemark
+2 W
+Enchantment Aura
+no text
+Enchant creature
+Flash
+enPump:+0/+0
+StaticEffect:Play:Permanents you Control:PTBonus/1/1:Type.Creature!enchanted:Creatures you control that are enchanted get +1/+1.
+SVar:PlayMain1:TRUE
+
+Song of Serenity
+1 G
+Enchantment
+no text
+StaticEffect:Play:All Permanents:Keyword/CARDNAME can't attack or block.:Type.Creature!enchanted:Creatures that are enchanted can't attack or block.
+SVar:RemAIDeck:True
+
+Crosswinds
+2 G
+Enchantment
+no text
+StaticEffect:Play:All Permanents:PTBonus/-2/0:Type.Creature!with.Flying:Creatures with flying get -2/-0.
+SVar:PlayMain1:TRUE
+SVar:RemAIDeck:True
+
 Fencer's Magemark
 2 R
 Enchantment Aura
