@@ -3609,21 +3609,23 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					if(player.equals(AllZone.HumanPlayer)) {
-						AllZone.InputControl.setInput( new Input() {
-							private static final long serialVersionUID = 4820011040853968644L;
-							public void showMessage() {
-								AllZone.Display.showMessage(abyss.getName()+" - Select one nonartifact creature to destroy");
-								ButtonUtil.disableAll();
-							}
-							public void selectCard(Card selected, PlayerZone zone) {
-								//probably need to restrict by controller also
-								if(selected.isCreature() && !selected.isArtifact() && CardFactoryUtil.canTarget(abyss, selected)
-										&& zone.is(Constant.Zone.Play) && zone.getPlayer().equals(AllZone.HumanPlayer)) {
-									AllZone.GameAction.destroyNoRegeneration(selected);
-									stop();
+						if(abyss_getTargets(player, abyss).size() > 0) {
+							AllZone.InputControl.setInput( new Input() {
+								private static final long serialVersionUID = 4820011040853968644L;
+								public void showMessage() {
+									AllZone.Display.showMessage(abyss.getName()+" - Select one nonartifact creature to destroy");
+									ButtonUtil.disableAll();
 								}
-							}//selectCard()
-						});//Input
+								public void selectCard(Card selected, PlayerZone zone) {
+									//probably need to restrict by controller also
+									if(selected.isCreature() && !selected.isArtifact() && CardFactoryUtil.canTarget(abyss, selected)
+											&& zone.is(Constant.Zone.Play) && zone.getPlayer().equals(AllZone.HumanPlayer)) {
+										AllZone.GameAction.destroyNoRegeneration(selected);
+										stop();
+									}
+								}//selectCard()
+							});//Input
+						}
 					}
 					else { //computer
 						CardList targets = abyss_getTargets(player,abyss);
