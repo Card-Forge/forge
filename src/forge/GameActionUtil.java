@@ -148,6 +148,8 @@ public class GameActionUtil {
 		
 		if (c.getName().equals("Kozilek, Butcher of Truth"))
 			playCard_Kozilek(c);
+		else if (c.getName().equals("Ulamog, the Infinite Gyre"))
+			playCard_Ulamog(c);
 
 		playCard_Cascade(c);
 
@@ -206,6 +208,45 @@ public class GameActionUtil {
 		};
 		ability.setStackDescription("Kozilek - draw four cards.");
 		AllZone.Stack.add(ability);
+	}
+	
+	public static void playCard_Ulamog(Card c)
+	{
+		final Card ulamog = c;
+		final String controller = c.getController();
+		final Ability ability = new Ability(c, "0")
+		{
+			public void chooseTargetAI()
+			{
+				CardList list = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Human);
+				list = list.filter(new CardListFilter()
+				{
+					public boolean addCard(Card card)
+					{
+						return CardFactoryUtil.canTarget(ulamog, card);
+					}
+				});
+				
+				if (list.size()>0)
+				{
+					CardListUtil.sortCMC(list);
+					setTargetCard(list.get(0));
+				}
+			}
+			public void resolve()
+			{
+				Card crd = getTargetCard();
+				if (crd!=null)
+					AllZone.GameAction.destroy(crd);
+			}
+		};
+		ability.setBeforePayMana(CardFactoryUtil.input_targetPermanent(ability));
+		if (controller.equals(Constant.Player.Human))
+			AllZone.GameAction.playSpellAbility(ability);
+		else {
+			ability.chooseTargetAI();
+			AllZone.Stack.add(ability);
+		}
 	}
 	
 	public static void playCard_Cascade(Card c) {
