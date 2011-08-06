@@ -160,7 +160,7 @@ public class StaticEffects
 		cardToEffectsList.put("Eladamri, Lord of Leaves", new String[] {"Eladamri"});
 		cardToEffectsList.put("Tolsimir Wolfblood", new String[] {"Tolsimir"});
 		cardToEffectsList.put("Imperious Perfect", new String[] {"Imperious_Perfect"});
-		cardToEffectsList.put("Mad Auntie", new String[] {"Mad_Auntie"});
+		//cardToEffectsList.put("Mad Auntie", new String[] {"Mad_Auntie"});
 		//cardToEffectsList.put("Veteran Armorer", new String[] {"Veteran_Armorer"});
 		cardToEffectsList.put("Kongming, \"Sleeping Dragon\"", new String[] {"Kongming"});
 		cardToEffectsList.put("Radiant, Archangel", new String[] {"Radiant_Archangel"});

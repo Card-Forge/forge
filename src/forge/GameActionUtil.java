@@ -13747,7 +13747,7 @@ public class GameActionUtil {
 			return false;
 		}// newSnake()
 	}; // Sosukes Summons
-
+	/*
 	public static Command Mad_Auntie                  = new Command() {
 		private static final long serialVersionUID   = 7969640438477308299L;
 
@@ -13783,7 +13783,7 @@ public class GameActionUtil {
 			}// for outer
 		}// execute
 	}; // Mad_Auntie()
-
+	*/
 	public static Command Imperious_Perfect           = new Command() {
 		private static final long serialVersionUID   = 5835056455026735693L;
 
@@ -20631,7 +20631,7 @@ public class GameActionUtil {
 		commands.put("Eladamri", Eladamri);
 		commands.put("Tolsimir", Tolsimir);
 		commands.put("Imperious_Perfect", Imperious_Perfect);
-		commands.put("Mad_Auntie", Mad_Auntie);
+		//commands.put("Mad_Auntie", Mad_Auntie);
 
 		//commands.put("Veteran_Armorer", Veteran_Armorer);
 		commands.put("Kongming", Kongming);
