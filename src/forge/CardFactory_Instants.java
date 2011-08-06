@@ -3527,54 +3527,6 @@ public class CardFactory_Instants {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Inferno")) {
-        	SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = 4728714298882795253L;
-
-				@Override
-        		public void resolve() {
-        			int damage = 6;
-        			CardList all = AllZoneUtil.getCreaturesInPlay();
-        			for(Card c:all) {
-        				c.addDamage(damage, card);
-        			}
-        			AllZone.ComputerPlayer.addDamage(damage, card);
-        			AllZone.HumanPlayer.addDamage(damage, card);
-        		}// resolve()
-
-        		@Override
-        		public boolean canPlayAI() {
-        			CardList human = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
-        			human = human.filter(powerSix);
-        			human = human.getNotKeyword("Indestructible");
-        			CardList computer = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
-        			computer = computer.filter(powerSix);
-        			computer = computer.getNotKeyword("Indestructible");
-        			
-        			// the computer will at least destroy 2 more human creatures
-        			return  (AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
-        			(computer.size() < human.size() - 1
-        					|| (AllZone.ComputerPlayer.getLife() > 6 && !human.isEmpty())))
-        					|| AllZone.HumanPlayer.getLife() < 7;
-        		}
-        		
-        		private CardListFilter powerSix = new CardListFilter() {
-        			public boolean addCard(Card c) {
-        				return c.getNetDefense() <= 6;
-        			}
-        		};
-        	};// SpellAbility
-        	
-        	StringBuilder sb = new StringBuilder();
-        	sb.append(cardName).append(" - Deal 6 damage to all creatures and all players.");
-        	spell.setStackDescription(sb.toString());
-        	
-        	card.clearSpellAbility();
-        	card.addSpellAbility(spell);
-        }// *************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Demonic Consultation")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 1481101852928051519L;
