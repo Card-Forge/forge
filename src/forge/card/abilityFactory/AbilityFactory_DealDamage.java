@@ -205,7 +205,7 @@ public class AbilityFactory_DealDamage {
 
 		// temporarily disabled until better AI
 		if (AF.getAbCost().getSacCost())    {
-			if(AllZone.HumanPlayer.getLife() - dmg > 0) // only if damage from this ability would kill the human
+			if(AF.getHostCard().isCreature() && AllZone.HumanPlayer.getLife() - dmg > 0) // only if damage from this ability would kill the human
 				return false;
 		}
 		if (AF.getAbCost().getSubCounter())  {
