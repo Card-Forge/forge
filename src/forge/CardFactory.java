@@ -15049,7 +15049,8 @@ public class CardFactory implements NewConstants {
             
         }//*************** END ************ END **************************
         
-
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Urza's Blueprints")) {
             final SpellAbility ability = new Ability_Tap(card, "0") {
@@ -15069,6 +15070,8 @@ public class CardFactory implements NewConstants {
             ability.setDescription("tap: Draw a card.");
             ability.setStackDescription(card.getName() + " - draw a card.");
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Illusions of Grandeur")) {
