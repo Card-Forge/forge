@@ -3308,8 +3308,10 @@ public class CardFactoryUtil {
         if (target.isImmutable())
         	return false;
         
-        if (!AllZone.getZone(target).is(Constant.Zone.Play)){
-        	// creature's not in play, can normally be targeted
+        PlayerZone zone = AllZone.getZone(target);
+        // if zone is null, it means its on the stack 
+        if (zone == null || !zone.is(Constant.Zone.Play)){	
+        	// targets not in play, can normally be targeted
         	return true;
         }
         
