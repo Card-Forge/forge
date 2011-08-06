@@ -4,7 +4,6 @@ package forge;
 
 import java.util.ArrayList;
 
-
 abstract public class Ability_Mana extends SpellAbility implements java.io.Serializable {
     private ArrayList<Command> runcommands = new ArrayList<Command>();
     public String              orig;
@@ -36,16 +35,6 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     @Override
     public boolean isTapAbility() {
         return isTapAbility(orig);
-    }
-    
-    // This is a work-in-progress *coughcough HACK coughcough*
-    // This should return the list of all possible colors for the mana ability
-    // Instead, right now it only does so for reflected lands, which override 
-    // this ability. 
-    // For any other kind of land, the method asserts. If you find you need to call
-    // this method, implement it...
-    public ArrayList<String> getPossibleColors() {
-    	throw new RuntimeException("Ability_Mana : getPossibleColors() not implemented");
     }
     
     private static boolean isTapAbility(String orig) {
@@ -279,4 +268,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
         }
         return false;
     }
+
+
 }
+

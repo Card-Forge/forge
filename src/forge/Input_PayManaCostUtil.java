@@ -4,7 +4,7 @@ import java.util.*;
 public class Input_PayManaCostUtil
 {
   //all mana abilities start with this and typical look like "tap: add G"
-  //mana abilities are Strings and are retreaved by calling card.getKeyword()
+  //mana abilities are Strings and are retrieved by calling card.getKeyword()
   //taps any card that has mana ability, not just land
   public static ManaCost tapCard(Card card, ManaCost manaCost)
   {
@@ -15,7 +15,7 @@ public class Input_PayManaCostUtil
     for(String color : Constant.Color.ManaColors)
     	if(manaCost.isNeeded(color))
     		cneeded.append(getShortColorString(color));
-    Iterator<Ability_Mana> it = abilities.iterator();//you can't remove unneded abilitie inside a for(am:abilities) loop :(
+    Iterator<Ability_Mana> it = abilities.iterator();//you can't remove unneeded abilities inside a for(am:abilities) loop :(
     while(it.hasNext())
     {
     	Ability_Mana ma = it.next();
@@ -28,17 +28,39 @@ public class Input_PayManaCostUtil
     Ability_Mana chosen = abilities.get(0);
     if(1 < abilities.size())
     {
-      HashMap<String, Ability_Mana> ability = new HashMap<String, Ability_Mana>();
-      for(Ability_Mana am : abilities)
-    	  ability.put(am.toString(), am);
-      chosen = (Ability_Mana) AllZone.Display.getChoice("Choose mana ability", abilities.toArray());
+    	HashMap<String, Ability_Mana> ability = new HashMap<String, Ability_Mana>();
+    	for(Ability_Mana am : abilities)
+    		ability.put(am.toString(), am);
+    	chosen = (Ability_Mana) AllZone.Display.getChoice("Choose mana ability", abilities.toArray());
     }
-    {
-    	AllZone.GameAction.playSpellAbility(chosen);
+   {
+	   if (chosen.isReflectedMana()) {
+		   // Choose the mana color
+		   Ability_Reflected_Mana arm = (Ability_Reflected_Mana) chosen;
+		   arm.chooseManaColor();
+
+		   // Only resolve if the choice wasn't cancelled and the mana was actually needed
+		   if (arm.wasCancelled()) {
+			   return manaCost;
+		   } else {
+			   String color = chosen.mana();
+			   if (!manaCost.isNeeded(color)) {
+				   // Don't tap the card if the user chose something invalid
+				   arm.reset(); // Invalidate the choice
+				   return manaCost;
+			   }
+		   }
+		   // A valid choice was made -- resolve the ability and tap the card
+		   arm.resolve();
+		   arm.getSourceCard().tap();
+	   } else {
+		   AllZone.GameAction.playSpellAbility(chosen);
+	   }
     	manaCost = AllZone.ManaPool.subtractMana(manaCost, chosen);
     	AllZone.Human_Play.updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap (copied)
-		return manaCost;	
+    	return manaCost;	
     }
+
   }
   public static ArrayList<Ability_Mana> getManaAbilities(Card card)
   {
@@ -49,6 +71,14 @@ public class Input_PayManaCostUtil
   {
 	  if(mana.contains("1")) return true;
 	  if(mana.contains("S") && am.isSnow()) return true;
+	  if(am.isReflectedMana()) {
+		  for( String color:((Ability_Reflected_Mana)am).getPossibleColors()) {
+			  if (mana.contains(getShortColorString(color))) {
+			  return true;
+			  }
+		  }
+		  return false;
+	  }
 	  for(String color : ManaPool.getManaParts(am))
   		if(mana.contains(color)) return true;
   	  return false;

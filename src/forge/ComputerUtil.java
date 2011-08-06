@@ -284,8 +284,10 @@ public class ComputerUtil
   {
 		ArrayList<String> colors = new ArrayList<String>();
 	  	if (land.isReflectedLand()){
+	  		// Reflected lands (Exotic Orchard and Reflecting Pool) have one
+	  		// mana ability, and it has a method called 'getPossibleColors"
 	  		ArrayList<Ability_Mana> amList = land.getManaAbility();
-	  		colors = amList.get(0).getPossibleColors();
+	  		colors = ((Ability_Reflected_Mana)amList.get(0)).getPossibleColors();
 	  	} else {  		 
 	  		if (land.getKeyword().contains("tap: add B"))
 	  			colors.add(Constant.Color.Black);

@@ -1637,12 +1637,7 @@ public class CardFactoryUtil {
     	return onLeavesPlay;
     }//enPump_LeavesPlay
 
-    public static Ability_Mana getReflectedManaAbility(final Card card, String colorOrType, String who) {
-    	class ReflectedManaInfo {
-    		String colorChosen;
-    		String colorOrType;
-    		String who;
-    	};
+    public static Ability_Reflected_Mana getReflectedManaAbility(final Card card, String colorOrType, String who) {
     	
     	String whoString;
     	if (who.startsWith("Opp")) {
@@ -1652,115 +1647,13 @@ public class CardFactoryUtil {
     	
     	String abString = "tap: add to your mana pool one mana of any " + colorOrType.toLowerCase() +
     		" that a land " + whoString + " could produce.";
-    	
-    	
-    	final Ability_Mana theAbility = new Ability_Mana(card, abString) {
 
-    		private static final long serialVersionUID = 1839038296416458319L;
-    		@Override 
-    		public void undo() {
-    			card.untap(); 
-    		}
-    		
-    		@Override
-    		public String getTargetPlayer() {
-    			ReflectedManaInfo rfi = (ReflectedManaInfo) this.choices_made[0];
-    			String targetPlayer;
-    			if (rfi.who.startsWith("Opp")) {
-    				targetPlayer = AllZone.GameAction.getOpponent(card.getController());
-    			} else {
-    				targetPlayer = card.getController();
-    			}
-    			return targetPlayer;
-    		}
-
-    		@Override
-    		public void resolve() {
-    			// Only tap the card if it was not canceled
-    			ReflectedManaInfo rfi = (ReflectedManaInfo) this.choices_made[0];
-    			if (rfi.colorChosen != "0") {
-    				card.tap();
-    				super.resolve();
-    			}
-    		}
-    		@Override
-    		public String mana() {
-    			ReflectedManaInfo rfi = (ReflectedManaInfo) this.choices_made[0];
-    			return rfi.colorChosen;
-    		}
-
-    		@Override
-    		public ArrayList<String> getPossibleColors() {
-    			ReflectedManaInfo rfi = (ReflectedManaInfo) this.choices_made[0];
-    			String targetPlayer;
-    			if (rfi.who.startsWith("Opp")) {
-    				targetPlayer = AllZone.GameAction.getOpponent(card.getController());
-    			} else {
-    				targetPlayer = card.getController();
-    			}
-
-    			ArrayList<String> possibleColors = GameActionUtil.getManaProduceList(targetPlayer, rfi.colorOrType);
-    			return possibleColors;
-    		}
-    		@Override
-    		public boolean canPlay() {
-    			ArrayList<String> possibleColors = this.getPossibleColors();
-    			if (possibleColors.isEmpty()) {
-    				// Can't use these cards if there are no mana-producing lands in play
-    				return false;
-    			} else {
-    				//if(choices_made[0] == null) choices_made[0] = "0";
-    				return super.canPlay();
-    			}
-    		}
-
-    	};
-    	theAbility.undoable=true;
-    	//theAbility.choices_made = new String[1];
-    	theAbility.choices_made = new ReflectedManaInfo[1];
-    	ReflectedManaInfo rfi = new ReflectedManaInfo();
-    	rfi.colorChosen = new String("0");
-    	rfi.colorOrType = new String(colorOrType);
-    	rfi.who = new String(who);
-    	theAbility.choices_made[0] = rfi;
+    	Ability_Reflected_Mana theAbility = new Ability_Reflected_Mana(card, abString, colorOrType, who);
  
+    	return theAbility;
     	//((ReflectedManaInfo)theAbility.choices_made[0]).colorChosen = new String("0");
     	//((ReflectedManaInfo)theAbility.choices_made[0]).colorOrType = new String(colorOrType);
     	//((ReflectedManaInfo)theAbility.choices_made[0]).who = new String(who);
-    	theAbility.setReflectedMana(true);
-    	theAbility.setBeforePayMana(new Input() {
-
-    		private static final long serialVersionUID = -2106126894846529731L;
-
-    		@Override
-    		public void showMessage() {
-    			ArrayList<String> possibleColors = theAbility.getPossibleColors();
-    			if (possibleColors.isEmpty()) {
-    				// No mana available: card doesn't tap and nothing happens
-    				((ReflectedManaInfo)theAbility.choices_made[0]).colorChosen = "0";
-    			} else if (possibleColors.size() == 1)  {
-    				// Card taps for the only mana available
-    				// If there's only one choice, we're not giving the option to cancel.
-    				((ReflectedManaInfo)theAbility.choices_made[0]).colorChosen = 
-    					Input_PayManaCostUtil.getShortColorString(possibleColors.get(0));            			
-    			}
-    			else {
-    				// Choose a color of mana to produce. If cancel is chosen, no mana is produced and the 
-    				// card doesn't tap.
-    				Object o = AllZone.Display.getChoiceOptional("Select a Color of Mana to Produce", possibleColors.toArray());
-    				if (o == null) {
-    					((ReflectedManaInfo)theAbility.choices_made[0]).colorChosen = "0";
-    				} else {
-    					((ReflectedManaInfo)theAbility.choices_made[0]).colorChosen = 
-    						Input_PayManaCostUtil.getShortColorString((String) o);
-    				}
-    			}
-    			AllZone.Stack.add(theAbility);
-    			stop();
-    		}
-    	});
-
-    	return theAbility;
     } // End getReflectedManaAbility
     
     public static SpellAbility enPumpCurse_Enchant(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords, 

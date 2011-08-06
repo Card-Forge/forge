@@ -295,6 +295,11 @@ public abstract class SpellAbility {
         return flashBackAbility;
     }
     
+    // Only used by Ability_Reflected_Mana, because the user has an option to cancel the input.
+    // Most spell abilities and even most mana abilities do not need to use this.
+    public boolean wasCancelled() {
+    	return false;
+    }
     public SpellAbility copy()
     {
        SpellAbility clone = null;

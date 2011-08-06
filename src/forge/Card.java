@@ -1304,6 +1304,10 @@ public class Card extends MyObservable {
     }
     
     public void untap() {
+    	if (isTapped() && isReflectedLand()) {
+    		Ability_Reflected_Mana am = (Ability_Reflected_Mana) getManaAbility().get(0);
+    		am.reset();
+    	}
         setTapped(false);
     }
     
