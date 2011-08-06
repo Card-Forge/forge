@@ -6757,6 +6757,41 @@ public class CardFactory_Creatures {
             sb.append(cardName).append(" put a -1/-1 counter on target creature.");
             ability.setStackDescription(sb.toString());
         }//*************** END ************ END **************************
+
+        else if(cardName.equals("Awakener Druid"))
+        {
+            final long[] timeStamp = {0};
+
+            Trigger myTrig = TriggerHandler.parseTrigger("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerDescription$ When CARDNAME enters the battlefield, target Forest becomes a 4/5 green Treefolk creature for as long as CARDNAME is on the battlefield. It's still a land.",card);
+            Target myTarget = new Target(card,"Choose target forest.","Land.Forest".split(","),"1","1");
+            final SpellAbility awaken = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    if(!AllZone.getZone(card).is("Battlefield") || getTarget().getTargetCards().size() == 0)
+                        return;
+                    final Card c = getTarget().getTargetCards().get(0);
+                    String[] types = { "Creature", "Treefolk" };
+                    String[] keywords = {  };
+                    timeStamp[0] = CardFactoryUtil.activateManland(c, 4, 5, types, keywords, "G");
+
+                    final Command onleave = new Command() {
+                        private static final long serialVersionUID = -6004932214386L;
+                        long stamp = timeStamp[0];
+                        Card tgt = c;
+                        public void execute() {
+                            String[] types = { "Creature", "Elemental" };
+                            String[] keywords = { "" };
+                            CardFactoryUtil.revertManland(tgt, types, keywords, "G", stamp);
+                        }
+                    };
+                    card.addLeavesPlayCommand(onleave);
+                }
+            };//SpellAbility
+            awaken.setTarget(myTarget);
+
+            myTrig.setOverridingAbility(awaken);
+            card.addTrigger(myTrig);
+        }
         
         
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)

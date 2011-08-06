@@ -1,0 +1,9 @@
+Name:Awakener Druid
+ManaCost:2 G
+Types:Creature Human Druid
+Text:no text
+PT:1/1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/awakener_druid.jpg
+End
+#Uses card-specific code
