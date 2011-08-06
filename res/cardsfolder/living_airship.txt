@@ -4,7 +4,7 @@ Types:Creature Metathran
 Text:no text
 PT:2/3
 K:Flying
-K:RegenerateMe:2 G
+A:AB$Regenerate|Cost$2 G|SpellDescription$Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_airship.jpg
 End

@@ -4,7 +4,7 @@ Types:Artifact Creature Wall
 Text:no text
 PT:0/6
 K:Defender
-K:RegenerateMe:1
+A:AB$Regenerate|Cost$1|SpellDescription$Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_wall.jpg
 End

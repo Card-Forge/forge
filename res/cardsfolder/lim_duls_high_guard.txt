@@ -4,7 +4,7 @@ Types:Creature Skeleton
 Text:no text
 PT:2/1
 K:First Strike
-K:RegenerateMe:1 B
+A:AB$Regenerate|Cost$1 B|SpellDescription$Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lim_duls_high_guard.jpg
 End
