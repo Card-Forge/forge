@@ -3870,6 +3870,7 @@ res/cardsfolder/quagnoth.txt -text svneol=native#text/plain
 res/cardsfolder/quick_sliver.txt -text svneol=native#text/plain
 res/cardsfolder/quicksilver_amulet.txt -text svneol=native#text/plain
 res/cardsfolder/quicksilver_gargantuan.txt -text svneol=native#text/plain
+res/cardsfolder/quicksilver_wall.txt svneol=native#text/plain
 res/cardsfolder/quiet_purity.txt -text svneol=native#text/plain
 res/cardsfolder/quietus_spike.txt -text svneol=native#text/plain
 res/cardsfolder/quirion_dryad.txt -text svneol=native#text/plain
