@@ -1,0 +1,8 @@
+Name:Tainted Strike
+ManaCost:B
+Types:Instant
+Text:no text
+K:spPumpTgt:+1/+0/Infect
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tainted_strike.jpg
+End

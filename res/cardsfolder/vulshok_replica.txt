@@ -1,0 +1,9 @@
+Name:Vulshok Replica
+ManaCost:3
+Types:Artifact Creature Berserker
+Text:no text
+PT:3/1
+K:abDamageTgtP 1 R Sac<1/CARDNAME>:3
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vulshok_replica.jpg
+End
