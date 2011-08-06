@@ -262,7 +262,7 @@ public class AbilityFactory_ChangeZone {
 		 String destination = params.get("Destination");
 		 
 		 String type = params.containsKey("ChangeType") ? params.get("ChangeType") : "";
-		 int num = params.containsKey("ChangeNum") ? Integer.parseInt(params.get("ChangeNum")) : 1;
+		 int num = params.containsKey("ChangeNum") ? AbilityFactory.calculateAmount(host, params.get("ChangeNum"), sa) : 1;
 		 
 		 if (origin.equals("Library")){
 			 sb.append("Search your library for ").append(num).append(" ").append(type).append(" and ");
@@ -359,7 +359,7 @@ public class AbilityFactory_ChangeZone {
 
         PlayerZone destZone = AllZone.getZone(destination, player);
         
-        int changeNum = params.containsKey("ChangeNum") ? Integer.parseInt(params.get("ChangeNum")) : 1;
+        int changeNum = params.containsKey("ChangeNum") ? AbilityFactory.calculateAmount(card, params.get("ChangeNum"), sa) : 1;
 
         for (int i=0; i < changeNum; i++) {
             if (fetchList.size() == 0 || destination == null) 
@@ -438,7 +438,7 @@ public class AbilityFactory_ChangeZone {
 		
         CardList fetched = new CardList();
         
-        int changeNum = params.containsKey("ChangeNum") ? Integer.parseInt(params.get("ChangeNum")) : 1;
+        int changeNum = params.containsKey("ChangeNum") ? AbilityFactory.calculateAmount(card, params.get("ChangeNum"), sa) : 1;
 
         for(int i=0;i<changeNum;i++){
 	        if(fetchList.size() == 0 || destination == null)
