@@ -20054,6 +20054,63 @@ public class CardFactory implements NewConstants {
             spell.setBeforePayMana(target);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Demonic Consultation")) {
+            final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = 1481101852928051519L;
+
+                @Override
+                public void resolve() {
+                    String player = AllZone.Phase.getActivePlayer();
+                    PlayerZone PlayerHand = AllZone.getZone(Constant.Zone.Hand, player);
+                    PlayerZone RFG = AllZone.getZone(Constant.Zone.Removed_From_Play , player);
+                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+                    CardList libList = new CardList(lib.getCards());
+                    final String[] input = new String[1];
+                    input[0] = JOptionPane.showInputDialog(null, "Which card?", "Pick card", JOptionPane.QUESTION_MESSAGE);
+                    
+                    for(int i = 0; i < 7; i++) {
+                        Card c = libList.get(i);
+                        lib.remove(c);
+                        RFG.add(c);
+                    }
+
+                    int max = libList.size();
+                    int stop = 0;
+                    for(int i = 0; i < max; i++) {
+                        Card c = libList.get(i);
+                        if(c.getName().equals(input[0])) {
+                            if(stop == 0) {
+                                AllZone.GameAction.moveTo(PlayerHand, c);
+                                stop = 1;
+                            }
+                            
+                        } else if(stop == 0) {
+                            lib.remove(c);
+                            RFG.add(c);
+                        }
+                    }
+                }
+
+                @Override
+                public boolean canPlay() {
+                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
+
+                    return library.getCards().length > 6
+                        && AllZone.Phase.getActivePlayer().equals(card.getController())
+                        && !AllZone.Phase.getPhase().equals("End of Turn") && super.canPlay();
+                }
+
+                @Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+            };//SpellAbility
+            card.clearSpellAbility();
+            spell.setStackDescription("Name a card. Exile the top six cards of your library, then reveal cards from the top of your library until you reveal the named card. Put that card into your hand and exile all other cards revealed this way");
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
