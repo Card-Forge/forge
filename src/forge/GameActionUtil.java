@@ -39,7 +39,8 @@ public class GameActionUtil {
 		upkeep_Warp_Artifact();
 		upkeep_Wanderlust();
 		upkeep_Curse_of_Chains();
-		upkeep_Festering_Wound();
+		upkeep_Festering_Wound_Counter();
+		upkeep_Festering_Wound_Damage();
 		upkeep_Greener_Pastures();
 		upkeep_Wort();
 		upkeep_Squee();
@@ -6135,7 +6136,33 @@ public class GameActionUtil {
         }//list > 0
     }//upkeep_Curse_of_Chains()
 	
-	private static void upkeep_Festering_Wound() {
+	private static void upkeep_Festering_Wound_Counter() {
+		final String auraName = "Festering Wound";
+        final String player = AllZone.Phase.getActivePlayer();
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+        
+        CardList list = new CardList(playZone.getCards());
+        list = list.getName(auraName);
+        
+        if(list.size() > 0) {
+        	Ability ability2;
+        	for(Card target:list) {
+        				final Card source = list.get(0);
+        				final Card enchantedCard = target;
+        				ability2 = new Ability(source, "0") {
+        					@Override
+        					public void resolve() {
+        						//add an infection counter
+        						source.addCounter(Counters.INFECTION, 1);
+        					}
+        				};
+        				ability2.setStackDescription(auraName+" - add an infection counter to "+enchantedCard.getName());
+        				AllZone.Stack.add(ability2);
+        	}
+        }//list > 0
+	}
+	
+	private static void upkeep_Festering_Wound_Damage() {
 		final String auraName = "Festering Wound";
         final String player = AllZone.Phase.getActivePlayer();
         PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
@@ -6149,7 +6176,6 @@ public class GameActionUtil {
         
         if(list.size() > 0) {
         	Ability ability1;
-        	Ability ability2;
         	for(Card target:list) {
         		if(target.isEnchantedBy(auraName)) {
         			CardList auras = new CardList(target.getEnchantedBy().toArray());
@@ -6164,23 +6190,13 @@ public class GameActionUtil {
         						AllZone.GameAction.addDamage(enchantedCard.getController(), source, damage );
         					}
         				};
-        				ability2 = new Ability(aura, "0") {
-        					@Override
-        					public void resolve() {
-        						//add an infection counter
-        						source.addCounter(Counters.INFECTION, 1);
-        					}
-        				};
         				ability1.setStackDescription(auraName + " - deals X damage to "+target.getController());
-        				ability2.setStackDescription(auraName+" - add an infection counter to "+enchantedCard.getName());
         				AllZone.Stack.add(ability1);
-        				AllZone.Stack.add(ability2);
-        				
         			} 
         		}
         	}
         }//list > 0
-    }//upkeep_Curse_of_Chains()
+    }//upkeep_Festering_Wound_Damage()
 
 	private static void upkeep_Squee() {
 		final String player = AllZone.Phase.getActivePlayer();
