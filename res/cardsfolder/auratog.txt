@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Creature Atog
 Text:no text
 PT:1/2
-K:abPump 0 Sac-Enchantment:+2/+2
+K:abPump Sac<1/Enchantment>:+2/+2
 K:SVar:Rarity:Rare
 K:SVar:Picture:http://www.wizards.com/global/images/magic/general/auratog.jpg
 End

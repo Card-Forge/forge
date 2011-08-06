@@ -2,7 +2,7 @@ Name:Fodder Cannon
 ManaCost:4
 Types:Artifact
 Text:no text
-K:abDamageTgtC 4 T Sac-Creature:4
+K:abDamageTgtC 4 T Sac<1/Creature>:4
 K:SVar:Rarity:Uncommon
 K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fodder_cannon.jpg
 End

@@ -3,7 +3,7 @@ ManaCost:1 R G
 Types:Enchantment
 Text:no text
 K:StaticEffect:Play:Permanents you Control:Keyword/Haste:Type.Creature:Creatures you control have haste.
-K:abPumpTgtC 0 Sac-CARDNAME:+2/+2
+K:abPumpTgtC Sac<1/CARDNAME>:+2/+2
 K:SVar:Rarity:Uncommon
 K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fires_of_yavimaya.jpg
 End

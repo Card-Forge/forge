@@ -3,7 +3,7 @@ ManaCost:4 R R
 Types:Creature Atog
 Text:no text
 PT:3/4
-K:abPump 0 Sac-Artifact:+3/+3
+K:abPump Sac<1/Artifact>:+3/+3
 K:SVar:Rarity:Rare
 K:SVar:Picture:http://www.wizards.com/global/images/magic/general/megatog.jpg
 End

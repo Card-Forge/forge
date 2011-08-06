@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Goblin
 Text:no text
 PT:1/1
-K:abDamageTgtC 1 R Sac-Goblin:4
+K:abDamageTgtC 1 R Sac<1/Goblin>:4
 K:SVar:Rarity:Uncommon
 K:SVar:Picture:http://www.wizards.com/global/images/magic/general/arms_dealer.jpg
 End

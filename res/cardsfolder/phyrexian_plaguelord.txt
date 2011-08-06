@@ -3,8 +3,8 @@ ManaCost:3 B B
 Types:Creature Carrier
 Text:no text
 PT:4/4
-K:abPumpTgtC T Sac-CARDNAME:-4/-4
-K:abPumpTgtC 0 Sac-Creature:-1/-1
+K:abPumpTgtC T Sac<1/CARDNAME>:-4/-4
+K:abPumpTgtC Sac<1/Creature>:-1/-1
 K:SVar:RemAIDeck:True
 K:SVar:Rarity:Rare
 K:SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_plaguelord.jpg

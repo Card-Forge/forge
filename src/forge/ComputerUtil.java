@@ -267,14 +267,13 @@ public class ComputerUtil
 		if (cost.getSacCost()){
 			  // if there's a sacrifice in the cost, just because we can Pay it doesn't mean we want to. 
 			if (!cost.getSacThis()){
-				String type = cost.getSacType();
 			    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
 			    CardList typeList = new CardList(play.getCards());
-			    typeList = typeList.getType(type);
+			    typeList = typeList.getValidCards(cost.getSacType().split(","));
 			    Card target = sa.getTargetCard();
 				if (target != null && target.getController().equals(Constant.Player.Computer)) // don't sacrifice the card we're pumping
 					  typeList.remove(target);
-				return typeList.size() > 0;
+				return typeList.size() >= cost.getSacAmount();
 			}
 			else if (cost.getSacThis() && !AllZone.GameAction.isCardInPlay(card))
 				return false;
@@ -508,7 +507,7 @@ public class ComputerUtil
   static public Card chooseSacrificeType(String type, Card activate, Card target){
       PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
       CardList typeList = new CardList(play.getCards());
-      typeList = typeList.getType(type);
+      typeList = typeList.getValidCards(type.split(","));
 	  if (target != null && target.getController().equals(Constant.Player.Computer) && typeList.contains(target)) // don't sacrifice the card we're pumping
 		  typeList.remove(target);
 	  

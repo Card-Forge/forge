@@ -4,7 +4,7 @@ Types:Artifact Creature Gnome
 Text:no text
 PT:3/3
 K:Echo:3
-K:abDamageTgtCP 0 Sac-CARDNAME:1
+K:abDamageTgtCP Sac<1/CARDNAME>:1
 K:SVar:Rarity:Uncommon
 K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ticking_gnomes.jpg
 End

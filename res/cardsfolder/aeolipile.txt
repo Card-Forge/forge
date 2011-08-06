@@ -2,7 +2,7 @@ Name:Aeolipile
 ManaCost:2
 Types:Artifact
 Text:no text
-K:abDamageTgtCP 1 T Sac-CARDNAME:2
+K:abDamageTgtCP 1 T Sac<1/CARDNAME>:2
 K:SVar:Rarity:Common
 K:SVar:Picture:http://www.wizards.com/global/images/magic/general/aeolipile.jpg
 End

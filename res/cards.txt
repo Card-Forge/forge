@@ -577,7 +577,7 @@ Aeolipile
 2
 Artifact
 no text
-abDamageTgtCP 1 T Sac-CARDNAME:2
+abDamageTgtCP 1 T Sac<1/CARDNAME>:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aeolipile.jpg
 
@@ -707,7 +707,7 @@ Agent of Shauku
 Creature Human Mercenary
 no text
 1/1
-abPumpTgtC 1 B Sac-Land:+2/+0
+abPumpTgtC 1 B Sac<1/Land>:+2/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/agent_of_shauku.jpg
 
@@ -1899,7 +1899,7 @@ Arms Dealer
 Creature Goblin
 no text
 1/1
-abDamageTgtC 1 R Sac-Goblin:4
+abDamageTgtC 1 R Sac<1/Goblin>:4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arms_dealer.jpg
 
@@ -2116,7 +2116,7 @@ Atog
 Creature Atog
 no text
 1/2
-abPump 0 Sac-Artifact:+2/+2
+abPump 0 Sac<1/Artifact>:+2/+2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/atog.jpg
 
@@ -2179,7 +2179,7 @@ Auratog
 Creature Atog
 no text
 1/2
-abPump 0 Sac-Enchantment:+2/+2
+abPump 0 Sac<1/Enchantment>:+2/+2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auratog.jpg
 
@@ -2669,7 +2669,7 @@ Barbarian Lunatic
 Creature Human Barbarian
 no text
 2/1
-abDamageTgtC 2 R Sac-CARDNAME:2
+abDamageTgtC 2 R Sac<1/CARDNAME>:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barbarian_lunatic.jpg
 
@@ -3338,7 +3338,7 @@ Blasting Station
 3
 Artifact
 no text
-abDamageTgtCP T Sac-Creature:1
+abDamageTgtCP T Sac<1/Creature>:1
 WheneverKeyword:EntersBattleField:Type/Creature:Play:UntapPermanent:Self:ASAP:Yes_No:No Special Condition:Whenever a creature enters the battlefield, you may untap Blasting Station.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
@@ -3413,8 +3413,8 @@ Blighted Shaman
 Creature Human Cleric Shaman
 no text
 1/1
-abPumpTgtC T Sac-Land:+1/+1
-abPumpTgtC T Sac-Creature:+2/+2
+abPumpTgtC T Sac<1/Land>:+1/+1
+abPumpTgtC T Sac<1/Creature>:+2/+2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blighted_shaman.jpg
 
@@ -3558,7 +3558,7 @@ Blood Rites
 3 R R
 Enchantment
 no text
-abDamageTgtCP 1 R Sac-Creature:2
+abDamageTgtCP 1 R Sac<1/Creature>:2
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_rites.jpg
@@ -5558,7 +5558,7 @@ G
 Creature Spirit
 no text
 1/1
-abPumpTgtC 0 Sac-CARDNAME:+1/+1
+abPumpTgtC 0 Sac<1/CARDNAME>:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_thorns.jpg
 
@@ -7376,7 +7376,7 @@ Deadapult
 2 R
 Enchantment
 no text
-abDamageTgtCP R Sac-Zombie:2
+abDamageTgtCP R Sac<1/Zombie>:2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadapult.jpg
 
@@ -7465,7 +7465,7 @@ Creature Zombie Beast
 no text
 3/3
 WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - Other than Self:Whenever another creature is put into a graveyard from the battlefield, you may put a +1/+1 counter on Deathbringer Thoctar.
-abDamageTgtCP 0 SubCounter<P1P1/1>:1
+abDamageTgtCP SubCounter<1/P1P1>:1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathbringer_thoctar.jpg
 
@@ -7539,7 +7539,7 @@ Creature Zombie Fungus
 At the beginning of your upkeep, put a spore counter on Deathspore Thallid.
 1/1
 Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
-abPumpTgtC 0 Sac-Saproling:-1/-1
+abPumpTgtC 0 Sac<1/Saproling>:-1/-1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathspore_thallid.jpg
 
@@ -9210,7 +9210,7 @@ Elven Lyre
 2
 Artifact
 no text
-abPumpTgtC 1 T Sac-CARDNAME:+2/+2
+abPumpTgtC 1 T Sac<1/CARDNAME>:+2/+2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elven_lyre.jpg
 
@@ -9390,7 +9390,7 @@ R R
 Creature Goblin
 no text
 2/2
-abDamageTgtCP 1 Sac-CARDNAME:2
+abDamageTgtCP 1 Sac<1/CARDNAME>:2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ember_hauler.jpg
 
@@ -10736,7 +10736,7 @@ Fires of Yavimaya
 Enchantment
 no text
 StaticEffect:Play:Permanents you Control:Keyword/Haste:Type.Creature:Creatures you control have haste.
-abPumpTgtC 0 Sac-CARDNAME:+2/+2
+abPumpTgtC 0 Sac<1/CARDNAME>:+2/+2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fires_of_yavimaya.jpg
 
@@ -11265,7 +11265,7 @@ Fodder Cannon
 4
 Artifact
 no text
-abDamageTgtC 4 T Sac-Creature:4
+abDamageTgtC 4 T Sac<1/Creature>:4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fodder_cannon.jpg
 
@@ -11334,7 +11334,7 @@ Foratog
 Creature Atog
 no text
 1/2
-abPump G Sac-Forest:+2/+2
+abPump G Sac<1/Forest>:+2/+2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foratog.jpg
 
@@ -12608,7 +12608,7 @@ Goblin Bombardment
 1 R
 Enchantment
 no text
-abDamageTgtCP 0 Sac-Creature:1
+abDamageTgtCP 0 Sac<1/Creature>:1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_bombardment.jpg
@@ -12757,7 +12757,7 @@ Goblin Lookout
 Creature Goblin
 no text
 1/2
-abAllPump T Sac-Goblin:All/Goblin:+2/+0:Goblin creatures get +2/+0 until end of turn.:Goblin Lookout - Goblin creatures get +2/+0 until EOT
+abAllPump T Sac<1/Goblin>:All/Goblin:+2/+0:Goblin creatures get +2/+0 until end of turn.:Goblin Lookout - Goblin creatures get +2/+0 until EOT
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_lookout.jpg
 
@@ -12936,7 +12936,7 @@ R
 Creature Goblin
 no text
 1/1
-abPumpTgtC 0 Sac-Goblin:+1/+1
+abPumpTgtC 0 Sac<1/Goblin>:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_sledder.jpg
 
@@ -12945,7 +12945,7 @@ R
 Creature Goblin Shaman
 no text
 1/1
-abAllPump R T Sac-Goblin:All/Red:+1/+1:Red creatures get +1/+1 until end of turn.:Goblin Soothsayer - Red creatures get +1/+1 until EOT
+abAllPump R T Sac<1/Goblin>:All/Red:+1/+1:Red creatures get +1/+1 until end of turn.:Goblin Soothsayer - Red creatures get +1/+1 until EOT
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_soothsayer.jpg
 
@@ -13640,7 +13640,7 @@ Creature Human Shaman
 no text
 2/2
 abPumpTgtC 3 G:+2/+2
-abDamageTgtP 3 R Sac-Land:2
+abDamageTgtP 3 R Sac<1/Land>:2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_guildmage.jpg
 
@@ -15262,7 +15262,7 @@ Legendary Creature Human Samurai
 no text
 3/3
 Bushido 2
-abAllPump T Sac-Samurai:YouCtrl/Samurai:Double Strike:Samurai creatures you control gain double strike until end of turn.:Iizuka the Ruthless - Samurai creatures you control gain double strike until EOT
+abAllPump T Sac<1/Samurai>:YouCtrl/Samurai:Double Strike:Samurai creatures you control gain double strike until end of turn.:Iizuka the Ruthless - Samurai creatures you control gain double strike until EOT
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iizuka_the_ruthless.jpg
 
@@ -16879,7 +16879,7 @@ no cost
 Legendary Land
 no text
 tap: add 1
-abDamageTgtCP 4 R T Sac-Creature:2
+abDamageTgtCP 4 R T Sac<1/Creature>:2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_necropolis.jpg
 
@@ -17527,7 +17527,7 @@ Krovikan Horror
 Creature Horror Spirit
 no text
 2/2
-abDamageTgtCP 1 Sac-Creature:1
+abDamageTgtCP 1 Sac<1/Creature>:1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krovikan_horror.jpg
 
@@ -18236,8 +18236,8 @@ Lithatog
 Creature Atog
 no text
 1/2
-abPump 0 Sac-Artifact:+1/+1
-abPump 0 Sac-Land:+1/+1
+abPump 0 Sac<1/Artifact>:+1/+1
+abPump 0 Sac<1/Land>:+1/+1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lithatog.jpg
 
@@ -19246,7 +19246,7 @@ Marsh Lurker
 Creature Beast
 no text
 3/2
-abPump 0 Sac-Swamp:Fear
+abPump 0 Sac<1/Swamp>:Fear
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marsh_lurker.jpg
 
@@ -19426,7 +19426,7 @@ Megatog
 Creature Atog
 no text
 3/4
-abPump 0 Sac-Artifact:+3/+3
+abPump 0 Sac<1/Artifact>:+3/+3
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/megatog.jpg
 
@@ -20105,7 +20105,7 @@ R
 Creature Goblin
 no text
 1/1
-abPumpTgtC 0 Sac-Goblin:+1/+1
+abPumpTgtC 0 Sac<1/Goblin>:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_raider.jpg
 
@@ -20504,7 +20504,7 @@ no cost
 Snow Land
 no text
 tap: add 1
-abDamageTgtC 4 S T Sac-CARDNAME:4
+abDamageTgtC 4 S T Sac<1/CARDNAME>:4
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mouth_of_ronom.jpg
@@ -21007,7 +21007,7 @@ Need for Speed
 R
 Enchantment
 no text
-abPumpTgtC 0 Sac-Land:Haste
+abPumpTgtC 0 Sac<1/Land>:Haste
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/need_for_speed.jpg
 
@@ -22027,7 +22027,7 @@ Orcish Bloodpainter
 Creature Orc Shaman
 no text
 2/1
-abDamageTgtCP T Sac-Creature:2
+abDamageTgtCP T Sac<1/Creature>:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_bloodpainter.jpg
 
@@ -22054,7 +22054,7 @@ Orcish Mechanics
 Creature Orc
 no text
 1/1
-abDamageTgtCP T Sac-Artifact:2
+abDamageTgtCP T Sac<1/Artifact>:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_mechanics.jpg
 
@@ -22905,8 +22905,8 @@ Phyrexian Plaguelord
 Creature Carrier
 no text
 4/4
-abPumpTgtC T Sac-CARDNAME:-4/-4
-abPumpTgtC 0 Sac-Creature:-1/-1
+abPumpTgtC T Sac<1/CARDNAME>:-4/-4
+abPumpTgtC 0 Sac<1/Creature>:-1/-1
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_plaguelord.jpg
@@ -23107,7 +23107,7 @@ B
 Creature Spirit
 no text
 1/1
-abPumpTgtC B Sac-Creature:-1/-1
+abPumpTgtC B Sac<1/Creature>:-1/-1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plagued_rusalka.jpg
@@ -23830,7 +23830,7 @@ Pyre Zombie
 Creature Zombie
 no text
 2/1
-abDamageTgtCP 1 R R Sac-CARDNAME:2
+abDamageTgtCP 1 R R Sac<1/CARDNAME>:2
 WheneverKeyword:BeginningOfUpkeep:No_Initiator:Graveyard:MoveFrom-Graveyard-Hand:Self:ASAP:PayMana/1 B B:ControllerUpkeep:At the beginning of your upkeep, if Pyre Zombie is in your graveyard, you may pay 1 B B. If you do, return Pyre Zombie from your graveyard to your hand.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyre_zombie.jpg
@@ -24360,7 +24360,7 @@ no cost
 Legendary Land
 no text
 tap: add 1
-abDamageTgtCP 4 T Sac-Land:1
+abDamageTgtCP 4 T Sac<1/Land>:1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raths_edge.jpg
 
@@ -26384,7 +26384,7 @@ R
 Creature Spirit
 no text
 1/1
-abDamageTgtP R Sac-Creature:1
+abDamageTgtP R Sac<1/Creature>:1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scorched_rusalka.jpg
 
@@ -26619,7 +26619,7 @@ Seal of Strength
 G
 Enchantment
 no text
-abPumpTgtC 0 Sac-CARDNAME:+3/+3
+abPumpTgtC 0 Sac<1/CARDNAME>:+3/+3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seal_of_strength.jpg
 
@@ -26735,7 +26735,7 @@ Seething Pathblazer
 Creature Elemental Warrior
 no text
 2/2
-abPump 0 Sac-Elemental:+2/+0/First Strike
+abPump 0 Sac<1/Elemental>:+2/+0/First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seething_pathblazer.jpg
 
@@ -27258,7 +27258,7 @@ W
 Creature Human Soldier
 no text
 1/1
-abPumpTgtC 0 Sac-CARDNAME:+0/+4
+abPumpTgtC 0 Sac<1/CARDNAME>:+0/+4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_mate.jpg
 
@@ -27463,7 +27463,7 @@ Shock Troops
 Creature Human Soldier
 no text
 2/2
-abDamageTgtCP 0 Sac-CARDNAME:2
+abDamageTgtCP 0 Sac<1/CARDNAME>:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shock_troops.jpg
 
@@ -28050,7 +28050,7 @@ Skull Catapult
 4
 Artifact
 no text
-abDamageTgtCP 1 T Sac-Creature:2
+abDamageTgtCP 1 T Sac<1/Creature>:2
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skull_catapult.jpg
@@ -28173,7 +28173,7 @@ Skyshaper
 2
 Artifact
 no text
-abAllPump Sac-CARDNAME:YouCtrl:Flying:Creatures you control gain flying until end of turn.:Skyshaper - Creatures gain flying until EOT
+abAllPump Sac<1/CARDNAME>:YouCtrl:Flying:Creatures you control gain flying until end of turn.:Skyshaper - Creatures gain flying until EOT
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshaper.jpg
 
@@ -30058,7 +30058,7 @@ Stormcaller's Boon
 2 W U
 Enchantment
 no text
-abAllPump Sac-CARDNAME:YouCtrl:Flying:Creatures you control gain flying until end of turn.:Stormcaller's Boon - Creatures gain flying until EOT
+abAllPump Sac<1/CARDNAME>:YouCtrl:Flying:Creatures you control gain flying until end of turn.:Stormcaller's Boon - Creatures gain flying until EOT
 Cascade
 SVar:RemAIDeck:True
 SVar:PlayMain1:TRUE
@@ -30668,7 +30668,7 @@ Sustenance
 1 G
 Enchantment
 no text
-abPumpTgtC 1 Sac-Land:+1/+1
+abPumpTgtC 1 Sac<1/Land>:+1/+1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sustenance.jpg
@@ -31115,7 +31115,7 @@ Tar Pitcher
 Creature Goblin Shaman
 no text
 2/2
-abDamageTgtCP T Sac-Goblin:2
+abDamageTgtCP T Sac<1/Goblin>:2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tar_pitcher.jpg
 
@@ -31543,7 +31543,7 @@ Creature Fungus
 At the beginning of your upkeep, put a spore counter on Thallid Devourer.
 2/2
 Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
-abPump 0 Sac-Saproling:+1/+2
+abPump 0 Sac<1/Saproling>:+1/+2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thallid_devourer.jpg
 
@@ -31553,7 +31553,7 @@ Creature Fungus
 At the beginning of your upkeep, put a spore counter on Thallid Germinator.
 2/2
 Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
-abPumpTgtC 0 Sac-Saproling:+1/+1
+abPumpTgtC 0 Sac<1/Saproling>:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thallid_germinator.jpg
 
@@ -31580,8 +31580,8 @@ Thaumatog
 Creature Atog
 no text
 1/2
-abPump 0 Sac-Enchantment:+1/+1
-abPump 0 Sac-Land:+1/+1
+abPump 0 Sac<1/Enchantment>:+1/+1
+abPump 0 Sac<1/Land>:+1/+1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thaumatog.jpg
 
@@ -32097,7 +32097,7 @@ Artifact Creature Gnome
 no text
 3/3
 Echo:3
-abDamageTgtCP 0 Sac-CARDNAME:1
+abDamageTgtCP 0 Sac<1/CARDNAME>:1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ticking_gnomes.jpg
 
@@ -32925,7 +32925,7 @@ Artifact Creature Construct
 no text
 1/1
 etbCounter:P1P1:3
-abDamageTgtCP 0 SubCounter<P1P1/1>:1
+abDamageTgtCP SubCounter<1/P1P1>:1
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/triskelion.jpg
@@ -33432,7 +33432,7 @@ no text
 0/1
 Flying
 abPump G:+1/+1
-abDamageTgtCP 3 G Sac-CARDNAME:2
+abDamageTgtCP 3 G Sac<1/CARDNAME>:2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unyaro_bees.jpg
 
@@ -34384,7 +34384,7 @@ Creature Fungus
 At the beginning of your upkeep, put a spore counter on Vitaspore Thallid.
 1/1
 Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
-abPumpTgtC 0 Sac-Saproling:Haste
+abPumpTgtC 0 Sac<1/Saproling>:Haste
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vitaspore_thallid.jpg
 

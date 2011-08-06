@@ -2,7 +2,7 @@ Name:Stormcaller's Boon
 ManaCost:2 W U
 Types:Enchantment
 Text:no text
-K:abAllPump Sac-CARDNAME:YouCtrl:Flying:Creatures you control gain flying until end of turn.:Stormcaller's Boon - Creatures gain flying until EOT
+K:abAllPump Sac<1/CARDNAME>:YouCtrl:Flying:Creatures you control gain flying until end of turn.:Stormcaller's Boon - Creatures gain flying until EOT
 K:Cascade
 K:SVar:RemAIDeck:True
 K:SVar:PlayMain1:TRUE

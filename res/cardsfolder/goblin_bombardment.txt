@@ -2,7 +2,7 @@ Name:Goblin Bombardment
 ManaCost:1 R
 Types:Enchantment
 Text:no text
-K:abDamageTgtCP 0 Sac-Creature:1
+K:abDamageTgtCP Sac<1/Creature>:1
 K:SVar:RemAIDeck:True
 K:SVar:Rarity:Uncommon
 K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_bombardment.jpg

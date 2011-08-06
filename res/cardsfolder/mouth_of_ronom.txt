@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Snow Land
 Text:no text
 K:tap: add 1
-K:abDamageTgtC 4 S T Sac-CARDNAME:4
+K:abDamageTgtC 4 S T Sac<1/CARDNAME>:4
 K:SVar:RemAIDeck:True
 K:SVar:Rarity:Uncommon
 K:SVar:Picture:http://www.wizards.com/global/images/magic/general/mouth_of_ronom.jpg

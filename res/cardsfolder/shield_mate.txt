@@ -3,7 +3,7 @@ ManaCost:W
 Types:Creature Human Soldier
 Text:no text
 PT:1/1
-K:abPumpTgtC 0 Sac-CARDNAME:+0/+4
+K:abPumpTgtC Sac<1/CARDNAME>:+0/+4
 K:SVar:Rarity:Common
 K:SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_mate.jpg
 End

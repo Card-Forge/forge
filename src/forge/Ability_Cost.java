@@ -9,6 +9,8 @@ public class Ability_Cost {
 	public String getSacType() { return sacType; }
 	private boolean sacThis = false;
 	public boolean getSacThis() { return sacThis; }
+	private int sacAmount = 0;
+	public int getSacAmount() { return sacAmount; }
     
 	private boolean tapCost = false;
 	public boolean getTap() { return tapCost; } 
@@ -52,63 +54,50 @@ public class Ability_Cost {
 		// when adding new costs for cost string, place them here
 		name = cardName;
 		
-        if(parse.contains("SubCounter<")) {
+		String subStr = "SubCounter<";
+        if(parse.contains(subStr)) {
         	// SubCounter<NumCounters/CounterType>
         	subtractCounterCost = true;
-        	int counterPos = parse.indexOf("SubCounter<");
-        	int endPos = parse.indexOf(">", counterPos);
-        	String str = parse.substring(counterPos, endPos+1);
-        	parse = parse.replace(str, "").trim();
-        	
-        	str = str.replace("SubCounter<", "");
-        	str = str.replace(">", "");
-        	String[] strSplit = str.split("/");
+        	String[] splitStr = abCostParse(parse, subStr, 2);
+        	parse = abUpdateParse(parse, subStr);
 
-        	counterAmount = Integer.parseInt(strSplit[0]);
-        	counterType = Counters.valueOf(strSplit[1]);
+        	counterAmount = Integer.parseInt(splitStr[0]);
+        	counterType = Counters.valueOf(splitStr[1]);
         }       
 		
-        if(parse.contains("PayLife<")) {
+        String lifeStr = "PayLife<";
+        if(parse.contains(lifeStr)) {
         	// PayLife<LifeCost>
         	lifeCost = true;
-        	int lifePos = parse.indexOf("PayLife<");
-        	int endPos = parse.indexOf(">", lifePos);
-        	String str = parse.substring(lifePos, endPos+1);
-        	parse = parse.replace(str, "").trim();
+        	String[] splitStr = abCostParse(parse, lifeStr, 1);
+        	parse = abUpdateParse(parse, lifeStr);
         	
-        	str = str.replace("PayLife<", "");
-        	str = str.replace(">", "");
-        	
-        	lifeAmount = Integer.parseInt(str);
+        	lifeAmount = Integer.parseInt(splitStr[0]);
         }
         
-        if (parse.contains("Discard<")){
+        String discStr = "Discard<";
+        if (parse.contains(discStr)){
         	// Discard<NumCards/DiscardType>
         	discardCost = true;
-        	int startPos = parse.indexOf("Discard<");
-        	int endPos = parse.indexOf(">", startPos);
-        	String str = parse.substring(startPos, endPos+1);
-        	parse = parse.replace(str, "").trim();
-        	
-        	str = str.replace("Discard<", "");
-        	str = str.replace(">", "");
-        	
-        	String[] splitStr = str.split("/", 2);
+        	String[] splitStr = abCostParse(parse, discStr, 2);
+        	parse = abUpdateParse(parse, discStr);
         	
         	discardAmount = Integer.parseInt(splitStr[0]);
         	discardType = splitStr[1];
         }
         
-        if(parse.contains("Sac-")) {
-        	// todo(sol): change from Sac- to Sac<X, type>, also use IsValidCard with type
+        String sacStr = "Sac<";
+        if(parse.contains(sacStr)) {
+        	// todo(sol): add Support for sacrificing more than 1 of a type
+        	// todo: maybe separate SacThis from SacType? not sure if any card would use both
         	sacCost = true;
-        	int sacPos = parse.indexOf("Sac-");
-        	// sacType needs to be an Array for IsValidCard
-        	sacType = parse.substring(sacPos).replace("Sac-", "").trim();
-        	sacThis =  (sacType.equals("CARDNAME"));
-        	if (sacPos > 0)
-        		parse = parse.substring(0,sacPos-1).trim();
-        }                
+        	String[] splitStr = abCostParse(parse, sacStr, 2);
+        	parse = abUpdateParse(parse, sacStr);
+        	
+        	sacAmount = Integer.parseInt(splitStr[0]);
+        	sacType = splitStr[1];
+        	sacThis = (sacType.equals("CARDNAME"));
+        }     
 
         if (parse.contains("Untap")){
         	untapCost = true;
@@ -126,6 +115,24 @@ public class Ability_Cost {
         	manaCost = "0";
 	}
 	
+	String[] abCostParse(String parse, String subkey, int numParse){
+    	int startPos = parse.indexOf(subkey);
+    	int endPos = parse.indexOf(">", startPos);
+    	String str = parse.substring(startPos, endPos);
+    	
+    	str = str.replace(subkey, "");
+
+		String[] splitStr = str.split("/", numParse);
+		return splitStr;
+	}
+	
+	String abUpdateParse(String parse, String subkey){
+    	int startPos = parse.indexOf(subkey);
+    	int endPos = parse.indexOf(">", startPos);
+    	String str = parse.substring(startPos, endPos+1);
+    	return parse.replace(str, "").trim();
+	}
+	
 	public String toString()
 	{
 		if (isAbility)
@@ -133,6 +140,8 @@ public class Ability_Cost {
 		else
 			return spellToString();
 	}
+	
+	// maybe add a conversion method that turns the amounts into words 1=a(n), 2=two etc.
 	
 	private String spellToString() {
 		StringBuilder cost = new StringBuilder("As an additional cost to play ");
@@ -297,14 +306,10 @@ public class Ability_Cost {
 			if (sacType.equals("CARDNAME"))
 				cost.append(name);
 			else{
-				String part;
-				String firstLetter = sacType.substring(0, 0);
-				if (firstLetter.equalsIgnoreCase("a") || firstLetter.equalsIgnoreCase("e") || firstLetter.equalsIgnoreCase("i")
-					|| firstLetter.equalsIgnoreCase("o") || firstLetter.equalsIgnoreCase("u"))
-					part = "an";
-				part = "a";
-				cost.append(part + " ");
+				cost.append(sacAmount).append(" ");
 				cost.append(sacType);
+				if (sacAmount > 1)
+					cost.append("s");
 			}
 		}
 		return cost.toString();

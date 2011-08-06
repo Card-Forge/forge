@@ -3,7 +3,7 @@ ManaCost:G
 Types:Creature Spirit
 Text:no text
 PT:1/1
-K:abPumpTgtC 0 Sac-CARDNAME:+1/+1
+K:abPumpTgtC Sac<1/CARDNAME>:+1/+1
 K:SVar:Rarity:Common
 K:SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_thorns.jpg
 End

@@ -4,7 +4,7 @@ Types:Legendary Creature Human Samurai
 Text:no text
 PT:3/3
 K:Bushido 2
-K:abAllPump T Sac-Samurai:YouCtrl/Samurai:Double Strike:Samurai creatures you control gain double strike until end of turn.:Iizuka the Ruthless - Samurai creatures you control gain double strike until EOT
+K:abAllPump T Sac<1/Samurai>:YouCtrl/Samurai:Double Strike:Samurai creatures you control gain double strike until end of turn.:Iizuka the Ruthless - Samurai creatures you control gain double strike until EOT
 K:SVar:Rarity:Rare
 K:SVar:Picture:http://www.wizards.com/global/images/magic/general/iizuka_the_ruthless.jpg
 End

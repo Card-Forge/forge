@@ -3,7 +3,7 @@ ManaCost:R R
 Types:Creature Goblin
 Text:no text
 PT:2/2
-K:abDamageTgtCP 1 Sac-CARDNAME:2
+K:abDamageTgtCP 1 Sac<1/CARDNAME>:2
 K:SVar:Rarity:Uncommon
 K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ember_hauler.jpg
 End

@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Goblin
 Text:no text
 PT:1/2
-K:abAllPump T Sac-Goblin:All/Goblin:+2/+0:Goblin creatures get +2/+0 until end of turn.:Goblin Lookout - Goblin creatures get +2/+0 until EOT
+K:abAllPump T Sac<1/Goblin>:All/Goblin:+2/+0:Goblin creatures get +2/+0 until end of turn.:Goblin Lookout - Goblin creatures get +2/+0 until EOT
 K:SVar:Rarity:Common
 K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_lookout.jpg
 End

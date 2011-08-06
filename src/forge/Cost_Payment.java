@@ -1,5 +1,6 @@
 package forge;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class Cost_Payment {
@@ -94,9 +95,7 @@ public class Cost_Payment {
 			    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
 			    CardList typeList = new CardList(play.getCards());
 			    
-			    // todo(sol) switch this in
-			    //typeList = typeList.getValidCards(cost.getSacType()); 
-			    typeList = typeList.getType(cost.getSacType());
+			    typeList = typeList.getValidCards(cost.getSacType().split(",")); 
 				if (typeList.size() == 0)
 					return false;
 			}
@@ -199,7 +198,7 @@ public class Cost_Payment {
     		if (cost.getSacThis())
     			changeInput.stopSetNext(sacrificeThis(ability, this));
     		else
-    			changeInput.stopSetNext(sacrificeType(ability, cost.getSacType(), cost.sacString(true), this));
+    			changeInput.stopSetNext(sacrificeType(ability, cost.getSacType(), this));
     		return false;
     	}
 
@@ -244,17 +243,19 @@ public class Cost_Payment {
     
     public void payComputerCosts(){
     	// make sure ComputerUtil.canPayAdditionalCosts() is updated when updating new Costs
-    	Card sacCard = null;
+    	ArrayList<Card> sacCard = new ArrayList<Card>();
     	ability.setActivatingPlayer(Constant.Player.Computer);
     	
     	// double check if something can be sacrificed here. Real check is in ComputerUtil.canPayAdditionalCosts()
     	if (cost.getSacCost()){
     		if (cost.getSacThis())
-    			sacCard = card;
-    		else
-    			sacCard = ComputerUtil.chooseSacrificeType(cost.getSacType(), card, ability.getTargetCard());
+    			sacCard.add(card);
+    		else{
+    			for(int i = 0; i < cost.getSacAmount(); i++)
+    				sacCard.add(ComputerUtil.chooseSacrificeType(cost.getSacType(), card, ability.getTargetCard()));
+    		}
     		
-	    	if (sacCard == null){
+	    	if (sacCard.size() != cost.getSacAmount()){
 	    		System.out.println("Couldn't find a valid card to sacrifice for: "+card.getName());
 	    		return;
 	    	}
@@ -307,8 +308,10 @@ public class Cost_Payment {
     		}
     	}
     	
-		if (cost.getSacCost())
-			AllZone.GameAction.sacrifice(sacCard);
+		if (cost.getSacCost()){
+			for(Card c : sacCard)
+				AllZone.GameAction.sacrifice(c);
+		}
 
         AllZone.Stack.add(ability);
     }
@@ -401,36 +404,61 @@ public class Cost_Payment {
         return target;
     }//input_sacrifice()
     
-    public static Input sacrificeType(final SpellAbility spell, final String type, final String message, final Cost_Payment payment){
-    // This input should be setAfterManaPaid so it can add the spell to the stack
+    public static Input sacrificeType(final SpellAbility spell, final String type, final Cost_Payment payment){
         Input target = new Input() {
             private static final long serialVersionUID = 2685832214519141903L;
             private CardList typeList;
+            private int nSacrifices = 0;
+            private int nNeeded = payment.getCost().getSacAmount();
             
             @Override
             public void showMessage() {
+            	StringBuilder msg = new StringBuilder("Sacrifice ");
+            	int nLeft = nNeeded - nSacrifices;
+            	msg.append(nLeft).append(" ");
+            	msg.append(type);
+            	if (nLeft > 1){
+            		msg.append("s");
+            	}
+            	
                 PlayerZone play = AllZone.getZone(Constant.Zone.Play, spell.getSourceCard().getController());
                 typeList = new CardList(play.getCards());
-                typeList = typeList.getType(type);
-                AllZone.Display.showMessage(message);
+                typeList = typeList.getValidCards(type.split(","));
+                AllZone.Display.showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();
             }
             
             @Override
             public void selectButtonCancel() {
-            	payment.setCancel(true);
-            	stop();
-            	payment.payCost();
+            	cancel();
             }
             
             @Override
             public void selectCard(Card card, PlayerZone zone) {
                 if(typeList.contains(card)) {
-                	payment.setPaySac(true);
+                	nSacrifices++;
                 	AllZone.GameAction.sacrifice(card);
-                	stop();
-                	payment.payCost();
+                	typeList.remove(card);
+                    //in case nothing else to sacrifice
+                    if(nSacrifices == nNeeded) 
+                    	done();
+                    else if (typeList.size() == 0)	// this really shouldn't happen
+                    	cancel();
+                    else
+                    	showMessage();
                 }
+            }
+            
+            public void done(){
+            	payment.setPaySac(true);
+            	stop();
+            	payment.payCost();
+            }
+            
+            public void cancel(){
+            	payment.setCancel(true);
+            	stop();
+            	payment.payCost();
             }
         };
         return target;
