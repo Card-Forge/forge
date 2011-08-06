@@ -4353,6 +4353,7 @@ res/cardsfolder/orcish_artillery.txt -text svneol=native#text/plain
 res/cardsfolder/orcish_bloodpainter.txt -text svneol=native#text/plain
 res/cardsfolder/orcish_cannonade.txt -text svneol=native#text/plain
 res/cardsfolder/orcish_cannoneers.txt -text svneol=native#text/plain
+res/cardsfolder/orcish_captain.txt -text svneol=native#text/plain
 res/cardsfolder/orcish_healer.txt -text svneol=native#text/plain
 res/cardsfolder/orcish_lumberjack.txt svneol=native#text/plain
 res/cardsfolder/orcish_mechanics.txt -text svneol=native#text/plain

@@ -6757,6 +6757,56 @@ public class CardFactory_Creatures {
             sb.append(cardName).append(" put a -1/-1 counter on target creature.");
             ability.setStackDescription(sb.toString());
         }//*************** END ************ END **************************
+        
+      
+        //*************** START *********** START **************************
+        else if (cardName.equals("Orcish Captain")) {
+        	Ability_Cost abCost = new Ability_Cost("1", cardName, true);
+        	Target target = new Target(card, "Select target Orc creature", "Creature.Orc".split(","));
+            final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
+				private static final long serialVersionUID = 6724781940648179318L;
+
+				@Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+                
+                @Override
+                public void resolve() {
+                	final Card tgt = getTargetCard();
+                	final boolean[] win = new boolean[1];
+                    if (AllZone.GameAction.isCardInPlay(tgt) && CardFactoryUtil.canTarget(card, tgt)) {
+                    	if(GameActionUtil.flipACoin(card.getController(), card)) {
+                    		tgt.addTempAttackBoost(2);
+                    		win[0] = true;
+                    	}
+                    	else {
+                    		tgt.addTempDefenseBoost(-2);
+                    		win[0] = false;
+                    	}
+            
+                        final Command EOT = new Command() {
+							private static final long serialVersionUID = -7905540871887278236L;
+
+							public void execute() {
+                                if (AllZone.GameAction.isCardInPlay(tgt)) {
+                                    if(win[0]) {
+                                    	tgt.addTempAttackBoost(-2);
+                                    }
+                                    else {
+                                    	tgt.addTempDefenseBoost(2);
+                                    }
+                                }
+                            }
+                        };
+                        AllZone.EndOfTurn.addUntil(EOT);
+
+                    }//if (card is in play)
+                }//resolve()
+            };//SpellAbility
+            card.addSpellAbility(ability);
+            ability.setDescription(abCost+"Flip a coin. If you win the flip, target Orc creature gets +2/+0 until end of turn. If you lose the flip, it gets -0/-2 until end of turn.");
+        }//*************** END ************ END **************************
 
         else if(cardName.equals("Awakener Druid"))
         {
