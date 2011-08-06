@@ -2,7 +2,7 @@ Name:Marble Chalice
 ManaCost:2 W
 Types:Artifact
 Text:no text
-K:abGainLife T:1
+A:AB$GainLife|Cost$T|LifeAmount$1|SpellDescription$You gain 1 life.  
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marble_chalice.jpg
 End
