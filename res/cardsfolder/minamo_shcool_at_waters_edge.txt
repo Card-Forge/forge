@@ -4,6 +4,7 @@ Types:Legendary Land
 Text:no text
 K:tap: add U
 K:abUntapTgt U T:Permanent.Legendary:Untap target legendary permanent.
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minamo_school_at_waters_edge.jpg
 End
