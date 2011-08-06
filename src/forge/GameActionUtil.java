@@ -92,7 +92,6 @@ public class GameActionUtil {
 		upkeep_Karma();
 		upkeep_Oath_of_Druids();
 		upkeep_Oath_of_Ghouls();
-		upkeep_Mycoloth();
 		upkeep_Suspend();
 		upkeep_Vanishing();
 		upkeep_Fading();
@@ -5842,43 +5841,6 @@ public class GameActionUtil {
 		}
 	}
 	
-	private static void upkeep_Mycoloth() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-		final int[] number = new int[1];
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Mycoloth");
-
-
-		Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-			final Card card = list.get(i);
-			ability = new Ability(list.get(i), "0") {
-				@Override
-				public void resolve() {
-					number[0] = card.getNetPTCounters();
-
-					for(int j = 0; j < number[0]; j++) {
-						makeToken();
-					}
-
-				}// resolve()
-
-				public void makeToken() {
-					CardFactoryUtil.makeTokenSaproling(card.getController());
-				}
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("Mycoloth - ").append(player);
-			sb.append(" puts a 1/1 green Saproling onto the battlefield for each +1/+1 counter on Mycoloth.");
-			ability.setStackDescription(sb.toString());
-
-			AllZone.Stack.add(ability);
-		}// for
-	}// upkeep_Mycoloth()
-	
 	private static void upkeep_Verdant_Force() {
 		//final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone hPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
@@ -6100,7 +6062,7 @@ public class GameActionUtil {
 			};// Ability
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append(source.getName()).append(" - draw 2 extra cards.");
+			sb.append("At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.");
 			ability.setStackDescription(sb.toString());
 			
 			AllZone.Stack.add(ability);

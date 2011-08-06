@@ -3423,6 +3423,10 @@ public class CardFactoryUtil {
         // Count$TimesKicked
         if(sq[0].contains("TimesKicked"))
         	return doXMath(c.getMultiKickerMagnitude(), m);
+        if(sq[0].contains("NumCounters")) {
+        	int num = c.getCounters(Counters.getType(sq[1]));
+        	return doXMath(num, m);
+        }
         
         //Count$IfMainPhase.<numMain>.<numNotMain> // 7/10
         if (sq[0].contains("IfMainPhase"))
