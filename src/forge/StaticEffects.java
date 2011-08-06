@@ -64,7 +64,7 @@ public class StaticEffects
 		
 		cardToEffectsList.put("Kargan Dragonlord", new String[]{"Kargan_Dragonlord"});
 		//cardToEffectsList.put("Keldon Warlord", new String[] {"Keldon_Warlord"});
-		cardToEffectsList.put("Kithkin Rabble", new String[] {"Kithkin_Rabble"});
+		//cardToEffectsList.put("Kithkin Rabble", new String[] {"Kithkin_Rabble"});
 		cardToEffectsList.put("Knight of Cliffhaven", new String[] {"Knight_of_Cliffhaven"});
 		//cardToEffectsList.put("Korlash, Heir to Blackblade", new String[] {"Korlash_Heir_to_Blackblade"});
 		
@@ -81,7 +81,7 @@ public class StaticEffects
 		//cardToEffectsList.put("Maro", new String[] {"Maro"});
 		//cardToEffectsList.put("Master of Etherium", new String[] {"Master_of_Etherium"});
 		//cardToEffectsList.put("Masumaro, First to Live", new String[] {"Masumaro_First_to_Live"});
-		cardToEffectsList.put("Matca Rioters", new String[] {"Matca_Rioters"});
+		//cardToEffectsList.put("Matca Rioters", new String[] {"Matca_Rioters"});
 		cardToEffectsList.put("Meddling Mage", new String[] {"Meddling_Mage"});
 		//cardToEffectsList.put("Molimo, Maro-Sorcerer", new String[] {"Molimo_Maro_Sorcerer"});
 		cardToEffectsList.put("Mortivore", new String[] {"Mortivore"});

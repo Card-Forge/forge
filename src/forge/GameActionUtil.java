@@ -14356,7 +14356,7 @@ public class GameActionUtil {
 		}
 	};
 	
-
+	/*
 	public static Command Kithkin_Rabble              = new Command() {
 		private static final long serialVersionUID = 6686690505949642328L;
 
@@ -14374,6 +14374,7 @@ public class GameActionUtil {
 
 		}// execute()
 	};
+	*/
 	/*
 	public static Command Crowd_of_Cinders            = new Command() {
 		private static final long serialVersionUID = 6686690505949642328L;
@@ -14852,6 +14853,7 @@ public class GameActionUtil {
 		}// execute()
 	};
 	*/
+	/*
 	public static Command Matca_Rioters            = new Command() {
 		private static final long serialVersionUID = 1090204321481353143L;
 
@@ -14866,7 +14868,7 @@ public class GameActionUtil {
 
 		}// execute()
 	};
-
+	*/
 	public static Command Nyxathid                    = new Command() {
 
 		private static final long serialVersionUID = -8778900687347191964L;
@@ -15981,7 +15983,7 @@ public class GameActionUtil {
 		
 		commands.put("Kargan_Dragonlord", Kargan_Dragonlord);
 		//commands.put("Keldon_Warlord", Keldon_Warlord);
-		commands.put("Kithkin_Rabble", Kithkin_Rabble);
+		//commands.put("Kithkin_Rabble", Kithkin_Rabble);
 		commands.put("Knight_of_Cliffhaven", Knight_of_Cliffhaven);
 		//commands.put("Korlash_Heir_to_Blackblade", Korlash_Heir_to_Blackblade);
 		commands.put("Koth_Emblem", Koth_Emblem);
@@ -15999,7 +16001,7 @@ public class GameActionUtil {
 		//commands.put("Maro", Maro);
 		//commands.put("Master_of_Etherium", Master_of_Etherium);
 		//commands.put("Masumaro_First_to_Live", Masumaro_First_to_Live);
-		commands.put("Matca_Rioters", Matca_Rioters);
+		//commands.put("Matca_Rioters", Matca_Rioters);
 		commands.put("Meddling_Mage", Meddling_Mage);
 		//commands.put("Molimo_Maro_Sorcerer", Molimo_Maro_Sorcerer);
 		commands.put("Mortivore", Mortivore);
