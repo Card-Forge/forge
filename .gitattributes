@@ -4001,6 +4001,7 @@ res/cardsfolder/mogg_alarm.txt -text svneol=native#text/plain
 res/cardsfolder/mogg_fanatic.txt -text svneol=native#text/plain
 res/cardsfolder/mogg_hollows.txt -text svneol=native#text/plain
 res/cardsfolder/mogg_jailer.txt -text svneol=native#text/plain
+res/cardsfolder/mogg_maniac.txt -text svneol=native#text/plain
 res/cardsfolder/mogg_raider.txt -text svneol=native#text/plain
 res/cardsfolder/mogg_sentry.txt -text svneol=native#text/plain
 res/cardsfolder/mogg_squad.txt -text svneol=native#text/plain
