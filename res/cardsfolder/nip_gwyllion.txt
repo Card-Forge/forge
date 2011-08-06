@@ -1,0 +1,9 @@
+Name:Nip Gwyllion
+ManaCost:WB
+Types:Creature Hag
+Text:no text
+PT:1/1
+K:Lifelink
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nip_gwyllion.jpg
+End

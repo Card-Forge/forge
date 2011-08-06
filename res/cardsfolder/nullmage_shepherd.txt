@@ -1,0 +1,8 @@
+Name:Nullmage Shepherd
+ManaCost:3 G
+Types:Creature Elf Shaman
+Text:no text
+PT:2/4
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nullmage_shepherd.jpg
+End

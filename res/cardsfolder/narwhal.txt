@@ -1,0 +1,10 @@
+Name:Narwhal
+ManaCost:2 U U
+Types:Creature Whale
+Text:no text
+PT:2/2
+K:First Strike
+K:Protection from red
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/narwhal.jpg
+End

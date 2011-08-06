@@ -1,0 +1,10 @@
+Name:Nekrataal
+ManaCost:2 B B
+Types:Creature Human Assassin
+Text:When Nekrataal enters the battlefield, destroy target nonartifact, nonblack creature. That creature can't be regenerated.
+PT:2/1
+K:First Strike
+K:etbDestroyTgt:Creature.nonArtifact+nonBlack:NoRegen
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nekrataal.jpg
+End

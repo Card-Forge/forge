@@ -1,0 +1,7 @@
+Name:No Mercy
+ManaCost:2 B B
+Types:Enchantment
+Text:Whenever a creature deals damage to you, destroy it.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/no_mercy.jpg
+End

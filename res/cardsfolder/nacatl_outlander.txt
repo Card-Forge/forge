@@ -1,0 +1,9 @@
+Name:Nacatl Outlander
+ManaCost:R G
+Types:Creature Cat Scout
+Text:no text
+PT:2/2
+K:Protection from blue
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nacatl_outlander.jpg
+End

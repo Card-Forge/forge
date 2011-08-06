@@ -1,0 +1,10 @@
+Name:Needlebug
+ManaCost:4
+Types:Artifact Creature Insect
+Text:no text
+PT:2/2
+K:Flash
+K:Protection from artifacts
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/needlebug.jpg
+End

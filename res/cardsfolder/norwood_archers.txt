@@ -1,0 +1,9 @@
+Name:Norwood Archers
+ManaCost:3 G
+Types:Creature Elf Archer
+Text:no text
+PT:3/3
+K:Reach
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card21054.jpg
+End

@@ -1,0 +1,9 @@
+Name:Noble Panther
+ManaCost:1 G W
+Types:Creature Cat
+Text:no text
+PT:3/3
+K:abPump 1:First Strike
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_panther.jpg
+End

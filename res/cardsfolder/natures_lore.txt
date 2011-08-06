@@ -1,0 +1,7 @@
+Name:Nature's Lore
+ManaCost:1 G
+Types:Sorcery
+Text:no text
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_lore.jpg
+End

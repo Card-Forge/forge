@@ -1,0 +1,10 @@
+Name:Nikko-Onna
+ManaCost:2 W
+Types:Creature Spirit
+Text:When Nikko-Onna enters the battlefield, destroy target enchantment.
+PT:2/2
+K:etbDestroyTgt:Enchantment
+K:WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:MoveFrom-Play-Hand:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Spirit or Arcane spell, you may return Nikko-Onna to its owner's hand.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nikko_onna.jpg
+End

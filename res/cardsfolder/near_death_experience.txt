@@ -1,0 +1,8 @@
+Name:Near-Death Experience
+ManaCost:2 W W W
+Types:Enchantment
+Text:At the beginning of your upkeep, if you have exactly 1 life, you win the game.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/near_death_experience.jpg
+End

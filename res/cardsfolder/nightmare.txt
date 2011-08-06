@@ -1,0 +1,10 @@
+Name:Nightmare
+ManaCost:5 B
+Types:Creature Nightmare
+Text:Nightmare's power and toughness are each equal to the number of Swamps you control.
+PT:1/1
+K:Flying
+K:SVar:BuffedBy:Swamp
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83186.jpg
+End

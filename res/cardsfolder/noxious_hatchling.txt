@@ -1,0 +1,10 @@
+Name:Noxious Hatchling
+ManaCost:3 BG
+Types:Creature Elemental
+Text:Noxious Hatchling enters the battlefield with four -1/-1 counters on it.\r\nWhenever you cast a black spell, remove a -1/-1 counter from Noxious Hatchling.\r\nWhenever you cast a green spell, remove a -1/-1 counter from Noxious Hatchling.
+PT:6/6
+K:Wither
+K:SVar:BuffedBy:Spell.Black,Spell.Green
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/Noxious_Hatchling.jpg
+End

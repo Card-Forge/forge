@@ -1,0 +1,9 @@
+Name:Nimble Mongoose
+ManaCost:G
+Types:Creature Mongoose
+Text:Threshold - Nimble Mongoose gets +2/+2 as long as seven or more cards are in your graveyard.
+PT:1/1
+K:Shroud
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nimble_mongoose.jpg
+End

@@ -1,0 +1,8 @@
+Name:Nissa's Chosen
+ManaCost:G G
+Types:Creature Elf Warrior
+Text:If Nissa's Chosen would be put into a graveyard from the battlefield, put it on the bottom of its owner's library instead.
+PT:2/3
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nissas_chosen.jpg
+End

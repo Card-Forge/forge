@@ -1,0 +1,8 @@
+Name:Necrogenesis
+ManaCost:B G
+Types:Enchantment
+Text:no text
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/necrogenesis.jpg
+End

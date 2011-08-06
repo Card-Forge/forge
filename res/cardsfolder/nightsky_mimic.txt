@@ -1,0 +1,9 @@
+Name:Nightsky Mimic
+ManaCost:1 WB
+Types:Creature Shapeshifter
+Text:Whenever you cast a spell that's both white and black, Nightsky Mimic becomes 4/4 and gains flying until end of turn.
+PT:2/1
+K:SVar:BuffedBy:Spell.Black+White
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/Nightsky_Mimic.jpg
+End

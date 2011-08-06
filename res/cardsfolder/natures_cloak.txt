@@ -1,0 +1,9 @@
+Name:Nature's Cloak
+ManaCost:2 G
+Types:Sorcery
+Text:no text
+K:spAllPump:YouCtrl/Green:Forestwalk:Green creatures you control gain forestwalk until end of turn.:Nature's Cloak - Creatures gain forestwalk until EOT
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://gatherer.wizards.com/handlers/image.ashx?multiverseid=20222&type=card
+End

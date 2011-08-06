@@ -1,0 +1,9 @@
+Name:Nightsoil Kami
+ManaCost:4 G G
+Types:Creature Spirit
+Text:no text
+PT:6/4
+K:Soulshift:5
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nightsoil_kami.jpg
+End

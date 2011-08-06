@@ -1,0 +1,8 @@
+Name:Nemata, Grove Guardian
+ManaCost:4 G G
+Types:Legendary Creature Treefolk
+Text:no text
+PT:4/5
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nemata_grove_guardian.jpg
+End

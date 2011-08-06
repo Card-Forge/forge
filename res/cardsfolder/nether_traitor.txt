@@ -1,0 +1,11 @@
+Name:Nether Traitor
+ManaCost:B B
+Types:Creature Spirit
+Text:no text
+PT:1/1
+K:Haste
+K:Shadow
+K:WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Graveyard:MoveFrom-Graveyard-Play:Self:ASAP:PayMana/B:Initiator - Other than Self!Initiator - OwnedByController:Whenever another creature is put into your graveyard from the battlefield, you may pay B. If you do, return Nether Traitor from your graveyard to the battlefield.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nether_traitor.jpg
+End

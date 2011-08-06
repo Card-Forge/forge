@@ -1,0 +1,10 @@
+Name:Nirkana Cutthroat
+ManaCost:2 B
+Types:Creature Vampire Warrior
+Text:LEVEL 1-2 4/3 Deathtouch LEVEL 3+ 5/4 First strike, Deathtouch
+PT:3/2
+K:Level up:2 B
+K:maxLevel:3
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nirkana_cutthroat.jpg
+End

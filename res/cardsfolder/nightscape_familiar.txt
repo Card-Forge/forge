@@ -1,0 +1,10 @@
+Name:Nightscape Familiar
+ManaCost:1 B
+Types:Creature Zombie
+Text:Blue spells and red spells you cast cost 1 less to cast.
+PT:1/1
+K:RegenerateMe:1 B
+K:CostChange:Player:Less:1:Spell:blue/red:All:OnlyOneBonus
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nightscape_familiar.jpg
+End

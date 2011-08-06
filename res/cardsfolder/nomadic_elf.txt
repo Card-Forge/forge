@@ -1,0 +1,14 @@
+Name:Nomadic Elf
+ManaCost:1 G
+Types:Creature Elf Nomad
+Text:no text
+PT:2/2
+K:1 G: add W
+K:1 G: add U
+K:1 G: add B
+K:1 G: add R
+K:1 G: add G
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nomadic_elf.jpg
+End

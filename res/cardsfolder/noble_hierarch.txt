@@ -1,0 +1,12 @@
+Name:Noble Hierarch
+ManaCost:G
+Types:Creature Human Druid
+Text:no text
+PT:0/1
+K:tap: add W
+K:tap: add U
+K:tap: add G
+K:Exalted
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_hierarch.jpg
+End

@@ -1,0 +1,8 @@
+Name:No-Dachi
+ManaCost:2
+Types:Artifact Equipment
+Text:Equipped creature gets +2/+0 and has first strike.
+K:eqPump 3:+2/+0/First Strike
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/no_dachi.jpg
+End

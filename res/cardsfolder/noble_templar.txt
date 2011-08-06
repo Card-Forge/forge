@@ -1,0 +1,10 @@
+Name:Noble Templar
+ManaCost:5 W
+Types:Creature Human Cleric Soldier
+Text:no text
+PT:3/6
+K:Vigilance
+K:TypeCycling:Plains:2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_templar.jpg
+End

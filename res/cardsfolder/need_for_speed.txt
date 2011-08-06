@@ -1,0 +1,8 @@
+Name:Need for Speed
+ManaCost:R
+Types:Enchantment
+Text:no text
+K:abPumpTgtC 0 Sac-Land:Haste
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/need_for_speed.jpg
+End

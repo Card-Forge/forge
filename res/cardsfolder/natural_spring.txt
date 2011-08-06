@@ -1,0 +1,8 @@
+Name:Natural Spring
+ManaCost:3 G G
+Types:Sorcery
+Text:no text
+K:spGainLifeTgt:8
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/natural_spring.jpg
+End

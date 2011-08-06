@@ -1,0 +1,10 @@
+Name:Nantuko Elder
+ManaCost:2 G
+Types:Creature Insect Druid
+Text:no text
+PT:1/2
+K:tap: add 1 G
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_elder.jpg
+End

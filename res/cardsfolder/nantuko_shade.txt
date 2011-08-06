@@ -1,0 +1,9 @@
+Name:Nantuko Shade
+ManaCost:B B
+Types:Creature Insect Shade
+Text:no text
+PT:2/1
+K:abPump B:+1/+1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/tor/en-us/card35053.jpg
+End
