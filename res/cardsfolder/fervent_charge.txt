@@ -1,7 +1,7 @@
 Name:Fervent Charge
 ManaCost:1 W B R
 Types:Enchantment
-Text:
+Text:no text
 T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control attacks, it gets +2/+2 until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ TriggeredCard | NumAtt$ +2 | NumDef$ +2
 SVar:Rarity:Rare

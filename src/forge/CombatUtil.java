@@ -1594,6 +1594,7 @@ public class CombatUtil {
                 
             }//Goblin Piledriver
             
+            /*
             else if((c.getName().equals("Charging Bandits") || c.getName().equals("Wei Ambush Force")
                     || c.getName().equals("Ravenous Skirge") || c.getName().equals("Vicious Kavu")
                     || c.getName().equals("Lurking Nightstalker") || c.getName().equals("Hollow Dogs"))
@@ -1631,7 +1632,7 @@ public class CombatUtil {
                 
                 AllZone.Stack.add(ability2);
                 
-            }//+2+0 Chargers
+            }//+2+0 Chargers */
             
             else if(c.getName().equals("Spectral Bears")) {
                 Player opp = c.getController().getOpponent();
