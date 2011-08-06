@@ -618,6 +618,12 @@ public class Gui_Quest extends JFrame implements NewConstants{
         Constant.Runtime.HumanDeck[0] = human;
         Constant.Runtime.ComputerDeck[0] = computer;
         
+        String oppIconName = getOpponent();
+        oppIconName = oppIconName.substring(0, oppIconName.length()-1).trim() + ".jpg";
+        System.out.println(oppIconName);
+        
+        Constant.Quest.oppIconName[0] = oppIconName;
+        
         //smoothLandCheckBox.isSelected() - for the AI
         
         //DO NOT CHANGE THIS ORDER, GuiDisplay needs to be created before cards are added

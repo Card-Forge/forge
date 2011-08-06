@@ -37,6 +37,7 @@ import java.util.Observer;
 
 import javax.swing.Action;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JDialog;
@@ -497,6 +498,15 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
         });
         AllZone.Computer_Life.updateObservers();
         
+        if (AllZone.QuestData != null) {
+        	File base = ForgeProps.getFile(IMAGE_ICON);
+        	File file = new File(base, Constant.Quest.oppIconName[0]);
+        	ImageIcon icon = new ImageIcon(file.toString());
+        	
+        	oppIconLabel.setIcon(icon);
+        	
+        }
+        
         oppPCLabel.setText("Poison Counters: " + AllZone.Computer_PoisonCounter.getPoisonCounters());
         AllZone.Computer_PoisonCounter.addObserver(new Observer() {
             public void update(Observable a, Object b) {
@@ -854,6 +864,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
         oppPanel.setBorder(new TitledBorder(new EtchedBorder(), ForgeProps.getLocalized(COMPUTER_TITLE)));
         oppPanel.setLayout(new BorderLayout());
         oppPanel.add(oppNumbersPanel, BorderLayout.WEST);
+        oppPanel.add(oppIconLabel, BorderLayout.CENTER);
         oppPanel.add(oppLifeLabel, BorderLayout.EAST);
         oppPanel.add(oppPCLabel, BorderLayout.AFTER_LAST_LINE);
         pane.add(new ExternalPanel(oppPanel), "compy");
@@ -1017,6 +1028,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
     JPanel                          playerHandPanel          = new JPanel();
     JPanel                          cdPanel                  = new JPanel();
     JLabel                          oppLifeLabel             = new JLabel();
+    JLabel							oppIconLabel			 = new JLabel();
     JLabel                          playerLifeLabel          = new JLabel();
     JLabel                          oppPCLabel               = new JLabel();
     JLabel                          playerPCLabel            = new JLabel();
