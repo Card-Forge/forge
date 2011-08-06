@@ -1313,7 +1313,6 @@ class CardFactory_Auras {
         else if(isAuraType(card, "Land") || isAuraType(card, "Creature") ||
         		isAuraType(card, "Artifact") || isAuraType(card, "Enchantment")) {
         	
-        	System.out.println("In generic Aura code block");
         	final String type = getAuraType(card);
         	final boolean curse = isCurseAura(card);
         	if("" == type) {
@@ -6214,16 +6213,12 @@ class CardFactory_Auras {
     
     //checks if an aura is a given type based on: Enchant <type> in cards.txt
     private static boolean isAuraType(final Card aura, final String type) {
-    	System.out.println("isAuraType - checking - "+aura.getName());
     	ArrayList<String> keywords = aura.getKeyword();
     	for(String keyword:keywords) {
-    		System.out.println("Got keyword: "+keyword);
     		if(keyword.startsWith("Enchant "+type)) {
-    			System.out.println("Ending isAuraType with true");
     			return true;
     		}
     	}
-    	System.out.println("Ending isAuraType with false");
     	return false;
     }
     
