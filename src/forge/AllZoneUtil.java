@@ -550,6 +550,12 @@ public class AllZoneUtil {
 		}
 	};
 	
+	public static CardListFilter nonBasicLand = new CardListFilter() {
+		public boolean addCard(Card c) {
+			return !c.isBasicLand();
+		}
+	};
+	
 	public static CardListFilter artifacts = new CardListFilter() {
 		public boolean addCard(Card c) {
 			return c.isArtifact();
@@ -604,6 +610,12 @@ public class AllZoneUtil {
 		return filter;
 	}
 	
+	/**
+	 * get a CardListFilter to filter a CardList for a given type
+	 * 
+	 * @param type - the type to check for
+	 * @return a CardListFilter to only add cards of the given type
+	 */
 	public static CardListFilter getTypeFilter(final String type) {
 		CardListFilter filter = new CardListFilter() {
 			public boolean addCard(Card c) {
