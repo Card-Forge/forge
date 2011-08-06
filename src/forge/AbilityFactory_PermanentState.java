@@ -649,5 +649,106 @@ public class AbilityFactory_PermanentState {
 		return sb.toString();
 	}
 	
+	public static SpellAbility createAbilityTapAll(final AbilityFactory AF){
+		final SpellAbility abUntap = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+			private static final long serialVersionUID = -2095140656782946737L;
+			final AbilityFactory af = AF;
+
+			@Override
+			public String getStackDescription(){
+				return tapAllStackDescription(af, this);
+			}
+
+			public boolean canPlayAI()
+			{
+				return tapAllCanPlayAI(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				tapAllResolve(af, this);
+			}
+
+		};
+		return abUntap;
+	}
+
+	public static SpellAbility createSpellTapAll(final AbilityFactory AF){
+		final SpellAbility spUntap = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+			private static final long serialVersionUID = -62401571838950166L;
+			final AbilityFactory af = AF;
+
+			@Override
+			public String getStackDescription() {
+				return tapAllStackDescription(af, this);
+			}
+
+			public boolean canPlayAI() {
+				return tapAllCanPlayAI(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				tapAllResolve(af, this);
+			}
+
+		};
+		return spUntap;
+	}
+
+	private static void tapAllResolve(final AbilityFactory af, final SpellAbility sa) {
+		HashMap<String,String> params = af.getMapParams();
+		String DrawBack = params.get("SubAbility");
+		Card card = sa.getSourceCard();
+
+		String Valid = "";
+
+		if(params.containsKey("ValidCards")) 
+			Valid = params.get("ValidCards");
+
+		CardList list = AllZoneUtil.getCardsInPlay();
+		list = list.getValidCards(Valid.split(","), card.getController(), card);
+
+		for(int i = 0; i < list.size(); i++) list.get(i).tap();
+
+		if (af.hasSubAbility()) {
+			Ability_Sub abSub = sa.getSubAbility();
+			if(abSub != null) {
+				abSub.resolve();
+			}
+			else {
+				CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
+			}
+		}
+	}
+
+	private static boolean tapAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+		/*
+		 * All cards using this currently have SVar:RemAIDeck:True
+		 */
+		return false;
+	}
+
+	private static String tapAllStackDescription(AbilityFactory af, SpellAbility sa){
+		HashMap<String,String> params = af.getMapParams();
+		// when getStackDesc is called, just build exactly what is happening
+		StringBuilder sb = new StringBuilder();
+
+		if (sa instanceof Ability_Sub) {
+			sb.append(" ");
+			sb.append("Tap all valid cards.");
+		}
+		else {
+			sb.append(sa.getSourceCard()).append(" - ");
+			sb.append(params.get("SpellDescription"));
+		}
+
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			sb.append(subAb.getStackDescription());
+
+		return sb.toString();
+	}
+	
 	//Phasing? Something else? Who knows!
 }

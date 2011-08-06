@@ -310,6 +310,15 @@ public class AbilityFactory {
 				SA = AbilityFactory_PermanentState.createDrawbackTap(this);
 		}
 		
+		if (API.equals("TapAll")){
+			if (isAb)
+				SA = AbilityFactory_PermanentState.createAbilityTapAll(this);
+			else if (isSp)
+				SA = AbilityFactory_PermanentState.createSpellTapAll(this);
+			//else if (isDb)
+				//SA = AbilityFactory_PermanentState.createDrawbackUntapAll(this);
+		}
+		
 		if (API.equals("Regenerate")){
 			if (isAb)
 				SA = AbilityFactory_Regenerate.getAbility(this);

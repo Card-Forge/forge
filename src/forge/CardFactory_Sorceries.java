@@ -741,7 +741,7 @@ public class CardFactory_Sorceries {
             spell.setBeforePayMana(target);
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Blinding Light")) {
             SpellAbility spell = new Spell(card) {
@@ -771,6 +771,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        */
         
         
         //*************** START *********** START **************************
