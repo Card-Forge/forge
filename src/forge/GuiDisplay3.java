@@ -262,14 +262,16 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
             
         int thickness = 3;
             
-        if (s.contains("Main "))
+        if (s.contains("Main"))
         	border = BorderFactory.createLineBorder(new Color(30, 0, 255), thickness);	
         else if (s.contains("To Block"))
         	border = BorderFactory.createLineBorder(new Color(13, 179, 0), thickness);
-        else if (s.contains("Play Instants and Abilities") || s.contains("Spells or Abilities on are on the Stack") )
+        else if (s.contains("Play Instants and Abilities") || s.contains("Combat") || s.contains("Damage"))
            	border = BorderFactory.createLineBorder(new Color(255, 174, 0), thickness);
         else if (s.contains("Declare Attackers"))
            	border = BorderFactory.createLineBorder(new Color(255, 0, 0), thickness);
+        else if (s.contains("Upkeep") || s.contains("Draw") || s.contains("End of Turn"))
+        	border = BorderFactory.createLineBorder(new Color(200, 0, 170), thickness);
             
          messageArea.setBorder(border);
     }
