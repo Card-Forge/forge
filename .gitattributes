@@ -3183,6 +3183,7 @@ res/cardsfolder/plague_wind.txt -text svneol=native#text/plain
 res/cardsfolder/plagued_rusalka.txt -text svneol=native#text/plain
 res/cardsfolder/plains.txt -text svneol=native#text/plain
 res/cardsfolder/planar_cleansing.txt -text svneol=native#text/plain
+res/cardsfolder/planar_collapse.txt -text svneol=native#text/plain
 res/cardsfolder/planar_gate.txt -text svneol=native#text/plain
 res/cardsfolder/planar_portal.txt -text svneol=native#text/plain
 res/cardsfolder/planar_void.txt -text svneol=native#text/plain
