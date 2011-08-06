@@ -4261,7 +4261,8 @@ public class CardFactory implements NewConstants {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Oblivion Ring")) {
-            final CommandReturn getPerm = new CommandReturn() {
+                    	
+        	final CommandReturn getPerm = new CommandReturn() {
                 public Object execute() {
                     //get all creatures
                     CardList tempList = new CardList();
@@ -4408,8 +4409,17 @@ public class CardFactory implements NewConstants {
                     Object o = getPerm.execute();
                     if(o == null) return false;
                     
+                    CardList cList = new CardList(AllZone.Human_Play.getCards());
+            		cList = cList.filter(new CardListFilter()
+            		{
+            			public boolean addCard(Card crd)
+            			{
+            				return CardFactoryUtil.canTarget(card, crd) && crd.isPermanent() && !crd.isLand();
+            			}
+            		});
+                    
                     CardList cl = (CardList) getPerm.execute();
-                    return (o != null) && cl.size() > 0 && AllZone.getZone(getSourceCard()).is(Constant.Zone.Hand);
+                    return (o != null) && cList.size() > 0 && cl.size() > 0 && AllZone.getZone(getSourceCard()).is(Constant.Zone.Hand);
                 }
             });
             
