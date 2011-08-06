@@ -16,7 +16,6 @@ import forge.Combat;
 import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
-import forge.GameActionUtil;
 import forge.MyRandom;
 import forge.PhaseUtil;
 import forge.Player;
@@ -156,8 +155,7 @@ public class CardFactory_Instants {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList small = new CardList(AllZone.Computer_Battlefield.getCards());
-                    small = small.getType("Creature");
+                    CardList small = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
                     
                     //try to make a good attacker
                     if(0 < small.size()) {
@@ -550,8 +548,7 @@ public class CardFactory_Instants {
                         
                 @Override
                 public boolean canPlayAI() {
-                	PlayerZone Library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                	CardList cards = new CardList(Library.getCards());
+                	CardList cards = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                     return cards.size() >= 10;
                 }
             };//SpellAbility
@@ -703,9 +700,7 @@ public class CardFactory_Instants {
                             || !CardFactoryUtil.canTarget(card, getTargetCard())) return;
                     
                     //get all permanents
-                    CardList all = new CardList();
-                    all.addAll(AllZone.Human_Battlefield.getCards());
-                    all.addAll(AllZone.Computer_Battlefield.getCards());
+                    CardList all = AllZoneUtil.getCardsInPlay();
                     
                     CardList sameName = all.getName(getTargetCard().getName());
                     sameName = sameName.filter(new CardListFilter()
@@ -765,50 +760,6 @@ public class CardFactory_Instants {
             card.setSVar("PlayMain1", "TRUE");
             
             spell.setBeforePayMana(target);
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Opt")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 6002051826637535590L;
-                
-                @Override
-                public void resolve() {
-                	Player player = card.getController();
-                    if(player.isHuman()) humanResolve();
-                    else computerResolve();
-                    player.drawCard();
-                }
-                
-                public void computerResolve() {
-                    //if top card of library is a land, put it on bottom of library
-                    if(AllZone.Computer_Library.getCards().length != 0) {
-                        Card top = AllZone.Computer_Library.get(0);
-                        if(top.isLand()) 
-                        	AllZone.GameAction.moveToBottomOfLibrary(top);
-                    }
-                }//computerResolve()
-                
-                public void humanResolve() {
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    
-                    //see if any cards are in library
-                    if(library.getCards().length != 0) {
-                        Card top = library.get(0);
-                        
-                        StringBuilder sb = new StringBuilder();
-                        sb.append("Put ").append(top.getName()).append(" on the Bottom of your Library?");
-
-                        if (GameActionUtil.showYesNoDialog(top, sb.toString()))
-                            AllZone.GameAction.moveToBottomOfLibrary(top);
-                    }//if
-                }//resolve()
-            };
             
             // Do not remove SpellAbilities created by AbilityFactory or Keywords.
             card.clearFirstSpellAbility();
