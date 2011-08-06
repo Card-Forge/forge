@@ -10643,14 +10643,16 @@ public class CardFactory_Creatures {
                                 
                                 opponent.addDamage(power, card);
                                 
-                                //TODO: this may not be needed
-                                GameActionUtil.executeLifeLinkEffects(card, power);
-                                
+                                //unTODO: this may not be needed - definitely not needed (slapshot5)
+                                //GameActionUtil.executeLifeLinkEffects(card, power);
+                                /*
                                 CardList cl = CardFactoryUtil.getAurasEnchanting(card, "Guilty Conscience");
                                 for(Card crd:cl) {
                                     GameActionUtil.executeGuiltyConscienceEffects(card, crd, power);
                                 }
+                                */
                                 
+                                //TODO - this may not bee needed (or may need to be added in player.addDamage
                                 card.setDealtDmgToOppThisTurn(true);
                             }
                         }
