@@ -2340,6 +2340,7 @@ res/cardsfolder/mycologist.txt -text svneol=native#text/plain
 res/cardsfolder/mycoloth.txt -text svneol=native#text/plain
 res/cardsfolder/mycosynth_golem.txt -text svneol=native#text/plain
 res/cardsfolder/myr_enforcer.txt -text svneol=native#text/plain
+res/cardsfolder/myr_galvanizer.txt -text svneol=native#text/plain
 res/cardsfolder/mystic_denial.txt -text svneol=native#text/plain
 res/cardsfolder/mystic_enforcer.txt -text svneol=native#text/plain
 res/cardsfolder/mystic_gate.txt -text svneol=native#text/plain

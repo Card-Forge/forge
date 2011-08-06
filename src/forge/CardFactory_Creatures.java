@@ -21030,6 +21030,39 @@ public class CardFactory_Creatures {
         	ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Myr Galvanizer"))
+        {
+        	final SpellAbility ability = new Ability_Tap(card,"1")
+        	{
+				private static final long serialVersionUID = -2151219929263378286L;
+
+				public void resolve()
+        		{
+        			CardList list = AllZoneUtil.getPlayerCardsInPlay(card.getController());
+        			list = list.filter(new CardListFilter()
+        			{
+        				public boolean addCard(Card c)
+        				{
+        					return !c.equals(card) && (c.getType().contains("Myr") || c.getKeyword().contains("Changeling"));
+        				}
+        			});
+        			
+        			for (Card crd:list)
+        				if (crd.isTapped())
+        					crd.untap();
+        		}
+				public boolean canPlayAI()
+				{
+					return false;
+				}
+        	};
+        	ability.setDescription("1, tap: Untap each other Myr you control.");
+        	ability.setStackDescription(card + " - Untap each other Myr you control.");
+        	card.addSpellAbility(ability);
+        	
+        }
+      //*************** END ************ END **************************
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

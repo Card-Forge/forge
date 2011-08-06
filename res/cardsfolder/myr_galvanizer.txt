@@ -1,0 +1,8 @@
+Name:Myr Galvanizer
+ManaCost:3
+Types:Artifact Creature Myr
+Text:no text
+PT:2/2
+K:StaticEffect:Play:Permanents you Control:PTBonus/1/1:Type.Myr!NotSelf:Other Myr creatures you control get +1/+1.
+K:SVar:Rarity:Uncommon
+End
