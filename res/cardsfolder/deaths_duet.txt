@@ -1,8 +1,8 @@
 Name:Death's Duet
 ManaCost:2 B
 Types:Sorcery
-Text:Return two target creature cards from your graveyard to your hand.
-K:spReturnTgt:2:Creature:Hand
+Text:no text
+A:SP$Retrieve | Cost$ 2 B | Destination$ Hand | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return two target creature cards from your graveyard to your hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deaths_duet.jpg
 End
