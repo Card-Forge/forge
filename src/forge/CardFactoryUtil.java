@@ -2265,7 +2265,7 @@ public class CardFactoryUtil {
         desc.setDescription("Soulshift "
                 + Manacost
                 + " - When this permanent is put into a graveyard from play, you may return target Spirit card with converted mana cost "
-                + Manacost + "or less from your graveyard to your hand.");
+                + Manacost + " or less from your graveyard to your hand.");
         desc.setStackDescription(sourceCard.getName() + " - Soulshift " + Manacost);
         return desc;
     }//soul_desc()
