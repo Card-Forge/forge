@@ -3,7 +3,8 @@ ManaCost:4 G W
 Types:Legendary Creature Elf Warrior
 Text:Other green creatures you control get +1/+1.\r\nOther white creatures you control get +1/+1.
 PT:3/4
-K:abMakeToken T<>1<>Voja<>GW 2 2 Voja<>Controller<>GW<>Legendary;Creature;Wolf<>2<>2<>None<>put a legendary 2/2 green and white Wolf creature token named Voja onto the battlefield.
+#K:abMakeToken T<>1<>Voja<>GW 2 2 Voja<>Controller<>GW<>Legendary;Creature;Wolf<>2<>2<>None<>put a legendary 2/2 green and white Wolf creature token named Voja onto the battlefield.
+A:AB$Token|Cost$T|TokenAmount$1|TokenName$Voja|TokenTypes$Legendary,Creature,Wolf|TokenOwner$Controller|TokenColors$White,Green|TokenPower$2|TokenToughness$2|SpellDescription$Put a legendary 2/2 green and white Wolf creature token named Voja onto the battlefield.  
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tolsimir_wolfblood.jpg

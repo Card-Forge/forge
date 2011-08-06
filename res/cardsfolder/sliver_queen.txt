@@ -3,7 +3,8 @@ ManaCost:W U B R G
 Types:Legendary Creature Sliver
 Text:no text
 PT:7/7
-K:abMakeToken 2<>1<>Sliver<>C 1 1 Sliver<>Controller<>1<>Creature;Sliver<>1<>1<>None<>Put a 1/1 colorless Sliver creature token onto the battlefield.
+#K:abMakeToken 2<>1<>Sliver<>C 1 1 Sliver<>Controller<>1<>Creature;Sliver<>1<>1<>None<>Put a 1/1 colorless Sliver creature token onto the battlefield.
+A:AB$Token|Cost$2|TokenAmount$1|TokenName$Sliver|TokenTypes$Creature,Sliver|TokenOwner$Controller|TokenColors$Colorless|TokenPower$1|TokenToughness$1|SpellDescription$Put a 1/1 colorless Sliver creature token onto the battlefield.  
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sliver_queen.jpg

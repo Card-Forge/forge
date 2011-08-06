@@ -4,7 +4,8 @@ Types:Creature Wall
 Text:no text
 PT:0/3
 K:Defender
-K:abMakeToken U U T<>1<>Plant Wall<>U 0 1 Plant Wall<>Controller<>U<>Creature;Plant;Wall<>0<>1<>Defender<>put a 0/1 blue Plant Wall creature token with defender named Kelp onto the battlefield.
+#K:abMakeToken U U T<>1<>Plant Wall<>U 0 1 Plant Wall<>Controller<>U<>Creature;Plant;Wall<>0<>1<>Defender<>put a 0/1 blue Plant Wall creature token with defender named Kelp onto the battlefield.
+A:AB$Token|Cost$U U T|TokenAmount$1|TokenName$Plant Wall|TokenTypes$Creature,Plant Wall|TokenOwner$Controller|TokenColors$Blue|TokenPower$0|TokenToughness$1|TokenKeywords$Defender|SpellDescription$Put a 0/1 blue Plant Wall creature token with defender named Kelp onto the battlefield.  
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/hm/en-us/card2959.jpg

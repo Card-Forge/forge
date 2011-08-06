@@ -3,7 +3,8 @@ ManaCost:2 G
 Types:Creature Elf Warrior
 Text:All Elf creatures you control get +1/+1
 PT:1/1
-K:abMakeToken G T<>1<>Elf Warrior<>G 1 1 Elf Warrior<>Controller<>G<>Creature;Elf;Warrior<>1<>1<>None<>put a 1/1 green Elf Warrior creature token onto the battlefield.
+#K:abMakeToken G T<>1<>Elf Warrior<>G 1 1 Elf Warrior<>Controller<>G<>Creature;Elf;Warrior<>1<>1<>None<>put a 1/1 green Elf Warrior creature token onto the battlefield.
+A:AB$Token|Cost$G T|TokenAmount$1|TokenName$Elf Warrior|TokenTypes$Creature,Elf,Warrior|TokenOwner$Controller|TokenColors$Green|TokenPower$1|TokenToughness$1|SpellDescription$Put a 1/1 green Elf Warrior creature token onto the battlefield.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imperious_perfect.jpg

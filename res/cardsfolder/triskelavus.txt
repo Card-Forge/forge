@@ -5,7 +5,8 @@ Text:(NOTE: Triskelavites do not have sacrifice abilities yet).
 PT:1/1
 K:Flying
 K:etbCounter:P1P1:3
-K:abMakeToken 1 SubCounter<1/P1P1><>1<>Triskelavite<>1 1 Triskelavite<>Controller<>0<>Artifact;Creature;Triskelavite<>1<>1<>Flying<>Put a 1/1 colorless Triskelavite artifact creature token with flying onto the battlefield.
+#K:abMakeToken 1 SubCounter<1/P1P1><>1<>Triskelavite<>1 1 Triskelavite<>Controller<>0<>Artifact;Creature;Triskelavite<>1<>1<>Flying<>Put a 1/1 colorless Triskelavite artifact creature token with flying onto the battlefield.
+A:AB$Token|Cost$1 SubCounter<1/P1P1>|TokenAmount$1|TokenName$Triskelavite|TokenTypes$Artifact,Creature,Triskelavite|TokenOwner$Controller|TokenColors$Colorless|TokenPower$1|TokenToughness$1|TokenKeywords$Flying|SpellDescription$Put a 1/1 colorless Triskelavite artifact creature token with flying onto the battlefield.  
 K:abDamageTgtCP Sac<1/Triskelavite>:1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/triskelavus.jpg
