@@ -473,7 +473,7 @@ public class GameActionUtil {
 		playCard_Vengevine(c);
 		playCard_Demigod_of_Revenge(c);
 		playCard_Halcyon_Glaze(c);
-		playCard_Thief_of_Hope(c);
+		//playCard_Thief_of_Hope(c);
 		playCard_Infernal_Kirin(c);
 		playCard_Cloudhoof_Kirin(c);
 		playCard_Battlegate_Mimic(c);
@@ -988,7 +988,8 @@ public class GameActionUtil {
 		}
 
 	}//Halcyon Glaze
-
+	
+	/*
 	public static void playCard_Thief_of_Hope(Card c) {
 		final Player controller = c.getController();
 
@@ -1032,8 +1033,7 @@ public class GameActionUtil {
 				}
 			}//if
 		}
-
-	}//Thief of Hope
+	}//Thief of Hope*/
 
 	public static void playCard_Infernal_Kirin(Card c) {
 		final Player controller = c.getController();

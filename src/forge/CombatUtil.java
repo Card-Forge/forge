@@ -2265,9 +2265,9 @@ public class CombatUtil {
         if (a.getName().equals("Slith Strider") && !a.getCreatureGotBlockedThisCombat()) {
             Player player = a.getController();
             player.drawCard();
-        } else if(a.getName().equals("Corrupt Official") && !a.getCreatureGotBlockedThisCombat()) {
+        /*} else if(a.getName().equals("Corrupt Official") && !a.getCreatureGotBlockedThisCombat()) {
             Player opp = b.getController();
-            opp.discardRandom(a.getSpellAbility()[0]);
+            opp.discardRandom(a.getSpellAbility()[0]);*/
         } else if (a.getName().equals("Robber Fly") && !a.getCreatureGotBlockedThisCombat()) {
         	Player opp = b.getController();
         	PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opp);

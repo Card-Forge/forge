@@ -1,8 +1,10 @@
 Name:Ravenous Rats
 ManaCost:1 B
 Types:Creature Rat
-Text:When CARDNAME enters the battlefield, target opponent discards a card.
+Text:no text
 PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, target opponent discards a card.
+SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select a opponent | NumCards$ 1 | Mode$ TgtChoose
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_rats.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/158.jpg

@@ -1265,7 +1265,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);           
         }//*************** END ************ END **************************
 
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Highway Robber") || cardName.equals("Dakmor Ghoul")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -1293,7 +1293,7 @@ public class CardFactory_Creatures {
             };
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Drekavac")) {
@@ -5031,7 +5031,7 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(new Input_PayManaCost(ability));
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Ravenous Rats") || cardName.equals("Corrupt Court Official")) {
             final Ability ability = new Ability(card, "0") {
@@ -5060,10 +5060,9 @@ public class CardFactory_Creatures {
                     }//else
                 }//execute()
             };//Command
-            card.addComesIntoPlayCommand(intoPlay);
-            
+            card.addComesIntoPlayCommand(intoPlay);         
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Rhys the Redeemed")) {
