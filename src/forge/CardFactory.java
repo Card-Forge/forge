@@ -11790,6 +11790,25 @@ public class CardFactory implements NewConstants {
         	ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Bazaar of Wonders")) {
+        	/*
+        	 * When Bazaar of Wonders enters the battlefield, exile all cards from all graveyards.
+        	 */
+            Command intoPlay = new Command() {
+				private static final long serialVersionUID = 9209706681167017765L;
+
+				public void execute() {
+                	CardList hGrave = AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer);
+                	CardList cGrave = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
+                	
+                	for(Card c:hGrave) AllZone.GameAction.exile(c);
+                	for(Card c:cGrave) AllZone.GameAction.exile(c);
+                }
+            };
+            card.addComesIntoPlayCommand(intoPlay);          
+        }//*************** END ************ END **************************
+        
 
         return postFactoryKeywords(card);
     }//getCard2

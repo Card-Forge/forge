@@ -393,6 +393,36 @@ public class MagicStack extends MyObservable {
 			add(counter);
 		}
 		
+		/*
+		 * Whenever a player casts a spell, counter it if a card with the same name
+		 * is in a graveyard or a nontoken permanent with the same name is on the battlefield.
+		 */
+		if(sp.isSpell() && AllZoneUtil.isCardInPlay("Bazaar of Wonders")) {
+			boolean found = false;
+			CardList all = AllZoneUtil.getCardsInPlay();
+			all = all.filter(AllZoneUtil.nonToken);
+			CardList graves = AllZoneUtil.getCardsInGraveyard();
+			all.add(graves);
+			
+			for(Card c:all) {
+				if(sp.getSourceCard().getName().equals(c.getName())) found = true;
+			}
+			
+			if(found) {			
+				CardList bazaars = AllZoneUtil.getCardsInPlay("Bazaar of Wonders");  //should only be 1...
+				for(final Card bazaar:bazaars) {
+					final SpellAbility counter = new Ability(bazaar, "0") {
+						@Override
+						public void resolve() {
+							if(AllZone.Stack.size() > 0) AllZone.Stack.pop();
+						}//resolve()
+					};//SpellAbility
+					counter.setStackDescription(bazaar.getName()+" - counter "+sp.getSourceCard().getName()+".");
+					add(counter);
+				}
+			}
+		}
+		
 		if (sp.getTargetCard() != null)
 			CardFactoryUtil.checkTargetingEffects(sp, sp.getTargetCard());
 	}
