@@ -87,6 +87,7 @@ class CardFactory_Auras {
     	// Enchant land you control:   *************************************
         // *****************************************************************
         
+        /* Converted to generic aura and trigger + AF
         //*************** START *********** START **************************
         if(cardName.equals("Caribou Range")) {
             
@@ -95,10 +96,10 @@ class CardFactory_Auras {
                 private static final long serialVersionUID = 5394181222737344498L;
                 
                 @Override
-                /*
-                 * The computer will now place this aura on unenchanted lands, but
-                 * it will tap an enchanted land for mana to produce the token.
-                 */
+                //
+                // The computer will now place this aura on unenchanted lands, but
+                // it will tap an enchanted land for mana to produce the token.
+                //
                 
                 public boolean canPlayAI() {
 
@@ -106,8 +107,8 @@ class CardFactory_Auras {
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isLand() 
-                            		&& !c.isEnchanted() 
-                            		&& CardFactoryUtil.canTarget(card, c);
+                                    && !c.isEnchanted() 
+                                    && CardFactoryUtil.canTarget(card, c);
                         }
                     });
 
@@ -121,12 +122,12 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                	AllZone.GameAction.moveToPlay(card);
+                    AllZone.GameAction.moveToPlay(card);
                     
                     Card c = getTargetCard();
                     
                     if(AllZone.GameAction.isCardInPlay(c) 
-                    		&& CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);
+                            && CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);
                 }//resolve()
             };//SpellAbility
             spell.setType("Extrinsic");
@@ -141,7 +142,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                	CardFactoryUtil.makeToken("Caribou", "W 0 1 Caribou", spell.getTargetCard().getController(), "W", new String[] {
+                    CardFactoryUtil.makeToken("Caribou", "W 0 1 Caribou", spell.getTargetCard().getController(), "W", new String[] {
                         "Creature", "Caribou"}, 0, 1, new String[] {""});
                 }
             };//SpellAbility
@@ -214,7 +215,7 @@ class CardFactory_Auras {
                     if(!AllZone.GameAction.isCardInPlay(c)) return;
                     
                     if(AllZone.GameAction.isCardInPlay(c)) {
-                    	c.getController().gainLife(1, card);
+                        c.getController().gainLife(1, card);
                         AllZone.GameAction.sacrifice(c);
                     }
                 }//resolve
@@ -277,10 +278,11 @@ class CardFactory_Auras {
                 }
             };
             spell.setBeforePayMana(runtime2);
-        }//*************** END ************ END **************************  
+        }//*************** END ************ END **************************
+        */
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Leafdrake Roost")) {
+        if(cardName.equals("Leafdrake Roost")) {
             
             final SpellAbility spell = new Spell(card) {
                 
@@ -1923,60 +1925,81 @@ class CardFactory_Auras {
         
         ////////////////////DRF test generic aura
         //*************** START *********** START **************************
-        else if(isAuraType(card, "Land") || isAuraType(card, "Creature") ||
-        		isAuraType(card, "Artifact") || isAuraType(card, "Enchantment") ||
-        		isAuraType(card, "Wall")) {
-        	
-        	final String type = getAuraType(card);
-        	final boolean curse = isCurseAura(card);
-        	if("" == type) {
-        		Log.error("Problem in generic Aura code - type is null");
-        	}
-        	final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = 4191777361540717307L;
+        else if (isAuraType(card, "Land")    || isAuraType(card, "Creature")    ||
+                isAuraType(card, "Artifact") || isAuraType(card, "Enchantment") ||
+                isAuraType(card, "Wall")) {
+            
+            final String type = getAuraType(card);
+            final boolean curse = isCurseAura(card);
+            final boolean youControl = isTypeYouControl(card);
+            if ("" == type) {
+                Log.error("Problem in generic Aura code - type is null");
+            }
+            final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = 4191777361540717307L;
 
-				@Override
-        		public boolean canPlayAI() {
-					Player player;
-					if(curse) {
-						player = AllZone.HumanPlayer;
-					}
-					else {
-						player = AllZone.ComputerPlayer;
-					}
-        			CardList list = AllZoneUtil.getPlayerTypeInPlay(player, type);
+                @Override
+                public boolean canPlayAI() {
+                    Player player;
+                    if (curse) {
+                        player = AllZone.HumanPlayer;
+                    }
+                    else {
+                        player = AllZone.ComputerPlayer;
+                    }
+                    CardList list = AllZoneUtil.getPlayerTypeInPlay(player, type);
 
-        			if(list.isEmpty()) return false;
-        			
-        			//TODO - maybe do something intelligent here if it's not a curse, like
-        			//checking the aura magnet list
-        			setTargetCard(list.get(0));
-        			return super.canPlayAI();
-        		}//canPlayAI()
+                    if (list.isEmpty()) return false;
+                    
+                    //TODO - maybe do something intelligent here if it's not a curse, like
+                    //checking the aura magnet list
+                    
+                    // We do not want the AI to always enchant the same card.
+                    list.shuffle();
+                    
+                    setTargetCard(list.get(0));
+                    return super.canPlayAI();
+                }//canPlayAI()
 
-        		@Override
-        		public void resolve() {
-        			AllZone.GameAction.moveToPlay(card);
+                @Override
+                public void resolve() {
+                    AllZone.GameAction.moveToPlay(card);
                     
                     Card c = getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);                  
-        		}//resolve()
-        	};//SpellAbility
-        	card.clearFirstSpellAbility();
-        	card.addSpellAbility(spell);
-        	card.addLeavesPlayCommand(standardUnenchant);
+                    if (AllZone.GameAction.isCardInPlay(c) 
+                            && CardFactoryUtil.canTarget(card, c)) {
+                        card.enchantCard(c);                  
+                    }
+                }//resolve()
+            };//SpellAbility
+            card.clearFirstSpellAbility();
+            card.addSpellAbility(spell);
+            card.addLeavesPlayCommand(standardUnenchant);
 
-        	Input runtime = new Input() {
-				private static final long serialVersionUID = -7100800261954421849L;
+            Input runtime = new Input() {
+                private static final long serialVersionUID = -7100800261954421849L;
 
-				@Override
-        		public void showMessage() {
-        			CardList land = AllZoneUtil.getTypeInPlay(type);
-        			stopSetNext(CardFactoryUtil.input_targetSpecific(spell, land,
-        					"Select target "+type.toLowerCase(), true, false));
-        		}
-        	};
-        	spell.setBeforePayMana(runtime);
+                @Override
+                public void showMessage() {
+                    // We will now use a list name other than "land", ugh!
+                    // CardList land = AllZoneUtil.getTypeInPlay(type);
+                    
+                    StringBuilder sbTitle = new StringBuilder();
+                    sbTitle.append("Select target ").append(type.toLowerCase());
+                    if (youControl) {
+                        sbTitle.append(" you control");
+                    }
+                    CardList auraCandidates = new CardList();
+                    if (youControl) {
+                        auraCandidates = AllZoneUtil.getPlayerTypeInPlay(card.getController(), type);
+                    } else {
+                        auraCandidates = AllZoneUtil.getTypeInPlay(type);
+                    }
+                    stopSetNext(CardFactoryUtil.input_targetSpecific(spell, auraCandidates,
+                            sbTitle.toString(), true, false));
+                }
+            };
+            spell.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
         ///////////////////////////////////////////////////////////////////
@@ -2544,6 +2567,17 @@ class CardFactory_Auras {
     		}
     	}
     	return false;
+    }
+    
+    //checks if the aura can only target the controller's cards
+    private static boolean isTypeYouControl(final Card aura) {
+        ArrayList<String> keywords = aura.getKeyword();
+        for (String keyword:keywords) {
+            if (keyword.startsWith("Enchant ")) {
+                if (keyword.endsWith("you control")) return true;
+            }
+        }
+        return false;
     }
     
 }
