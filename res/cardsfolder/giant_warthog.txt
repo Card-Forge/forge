@@ -1,6 +1,6 @@
 Name:Giant Warthog
 ManaCost:5 G
-Types:Creature Beast
+Types:Creature Boar Beast
 Text:no text
 PT:5/5
 K:Trample
