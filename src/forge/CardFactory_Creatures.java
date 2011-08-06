@@ -10227,7 +10227,7 @@ public class CardFactory_Creatures {
                     }
                     
                     if(legends.size() != 0) {
-                        Object check = AllZone.Display.getChoiceOptional("Select Legend", legends.toArray());
+                        Object check = AllZone.Display.getChoiceOptional("Select a legendary card", legends.toArray());
                         if(check != null) {
                             PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                             AllZone.GameAction.moveTo(hand, (Card) check);
@@ -10263,9 +10263,9 @@ public class CardFactory_Creatures {
 
             };//SpellAbility
             //card.addSpellAbility(ability);
-            ability.setDescription("tap: Search your library for a Legend or legendary card, reveal that card, and put it into your hand. Then shuffle your library.");
+            ability.setDescription("tap: Search your library for a legendary card, reveal that card, and put it into your hand. Then shuffle your library.");
             ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
-            ability.setStackDescription("Captain Sisay searches for a Legend or Legendary card...");
+            ability.setStackDescription("Captain Sisay searches for a legendary card...");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
@@ -19412,7 +19412,7 @@ public class CardFactory_Creatures {
         	card.addSpellAbility(ability);
 	    }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Altar Golem"))
         {
@@ -19434,7 +19434,7 @@ public class CardFactory_Creatures {
         	
         	card.addSpellAbility(untap);
     	}//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Cerulean Sphinx")) {

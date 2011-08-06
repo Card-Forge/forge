@@ -1,6 +1,6 @@
 Name:Mistform Ultimus
 ManaCost:3 U
-Types:Creature Illusion Legend
+Types:Legendary Creature Illusion
 Text:no text
 PT:3/3
 K:Changeling
