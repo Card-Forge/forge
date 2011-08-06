@@ -1575,6 +1575,8 @@ public class CardFactory implements NewConstants {
         		
         		String[] tmpCost = tmp.split(" ", 2);
         		
+        		final boolean bPumpEquipped = (tmpCost[0].equals("Equipped"));
+        		
         		final Target abTgt = new Target(tmpCost[0]);        			
         		final Ability_Cost abCost = new Ability_Cost(tmpCost[1], card.getName(), true);
                 
@@ -1639,14 +1641,17 @@ public class CardFactory implements NewConstants {
                 String d = "none";
                 StringBuilder sbD = new StringBuilder();
                 
+                if(abTgt.doesTarget()) 
+                	sbD.append("Target creature");
+                else if (bPumpEquipped)
+                	sbD.append("Equipped creature");
+                else 
+                    sbD.append(cardName);
+                
                 if((AttackX[0].equals("none") && !(NumAttack[0] == -1138))
                         && (DefenseX[0].equals("none") && !(NumDefense[0] == -1138)) && Keyword[0].equals("none")) {
                     // pt boost
-                    if(abTgt.doesTarget()) sbD.append("Target creature gets ");
-                    else {
-                        sbD.append(cardName);
-                        sbD.append(" gets ");
-                    }
+                    sbD.append(" gets ");  
                     
                     if(NumAttack[0] > 0 || (NumAttack[0] == 0 && NumDefense[0] > 0)) // +0/+1
                     	sbD.append("+");
@@ -1666,11 +1671,7 @@ public class CardFactory implements NewConstants {
                 if((AttackX[0].equals("none") && NumAttack[0] == -1138)
                         && (DefenseX[0].equals("none") && NumDefense[0] == -1138) && !Keyword[0].equals("none")) {
                     // k boost
-                    if(abTgt.doesTarget()) sbD.append("Target creature gains ");
-                    else {
-                        sbD.append(cardName);
-                        sbD.append(" gains ");
-                    }
+                	sbD.append(" gains ");
                     
                     sbD.append(dK);
                     sbD.append(" until end of turn.");
@@ -1678,11 +1679,7 @@ public class CardFactory implements NewConstants {
                 if((AttackX[0].equals("none") && !(NumAttack[0] == -1138))
                         && (DefenseX[0].equals("none") && !(NumDefense[0] == -1138)) && !Keyword[0].equals("none")) {
                     // ptk boost
-                    if(abTgt.doesTarget()) sbD.append("Target creature gets ");
-                    else {
-                        sbD.append(cardName);
-                        sbD.append(" gets ");
-                    }
+                    sbD.append(" gets ");
                     
                     if(NumAttack[0] > 0 || (NumAttack[0] == 0 && NumDefense[0] > 0)) // +0/+1
                     sbD.append("+");
@@ -1744,8 +1741,23 @@ public class CardFactory implements NewConstants {
                     public boolean canPlayAI() {
                     	// temporarily disabled until AI is improved
                     	if (abCost.getSacCost()) return false;	
-                    	if (abCost.getSubCounter()) return false;
                     	if (abCost.getLifeCost())	 return false;
+                    	if (abCost.getSubCounter()){
+                    		// instead of never removing counters, we will have a random possibility of failure.
+                    		// all the other tests still need to pass if a counter will be removed
+                    		Counters count = abCost.getCounterType();
+                    		double chance = .66;
+                    		if (count.equals("P1P1")){	// 10% chance to remove +1/+1 to pump
+                    			chance = .1;
+                    		}
+                    		else if (count.equals("CHARGE")){ // 50% chance to remove +1/+1 to pump
+                    			chance = .5;
+                    		}
+                            Random r = new Random();
+                            if(r.nextFloat() > chance)
+                            	return false;
+                    	}
+                    	if (bPumpEquipped && card.getEquippingCard() == null) return false;
                     	
                     	if (!ComputerUtil.canPayCost(this))
                     		return false;
@@ -1756,17 +1768,21 @@ public class CardFactory implements NewConstants {
                         if(AllZone.Phase.getPhase().equals(Constant.Phase.Main2)) return false;
                         
                         if(!abTgt.doesTarget()) {
-                            setTargetCard(card);
+                        	Card creature;
+                            if (bPumpEquipped)
+                            	creature = card.getEquippingCard();
+                            else 
+                            	creature = card;
                             
-                            if((card.getNetDefense() + defense > 0) && (!card.getKeyword().contains(keyword))) {
-                            	if(card.hasSickness() && keyword.contains("Haste")) 
+                            if((creature.getNetDefense() + defense > 0) && (!creature.getKeyword().contains(keyword))) {
+                            	if(creature.hasSickness() && keyword.contains("Haste")) 
                             		return true;
-                            	else if (card.hasSickness() ^ keyword.contains("Haste"))
+                            	else if (creature.hasSickness() ^ keyword.contains("Haste"))
                                     return false;
                             	else {
 	                                Random r = new Random();
 	                                if(r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed())) 
-	                                	return CardFactoryUtil.AI_doesCreatureAttack(card);
+	                                	return CardFactoryUtil.AI_doesCreatureAttack(creature);
 	                            }
                             }
                         }
@@ -1823,12 +1839,17 @@ public class CardFactory implements NewConstants {
                     
                     @Override
                     public void resolve() {
-                        if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                                && (CardFactoryUtil.canTarget(card, getTargetCard()) || !abTgt.doesTarget() )) {
-                            final Card[] creature = new Card[1];
-                            if(abTgt.doesTarget()) creature[0] = getTargetCard();
-                            else creature[0] = card;
-                            
+                        final Card[] creature = new Card[1];
+                        if(abTgt.doesTarget()) 
+                        	creature[0] = getTargetCard();
+                        else if (bPumpEquipped)
+                        	creature[0] = card.getEquippingCard();
+                        else 
+                        	creature[0] = card;
+                    	
+                        if(creature[0] != null && AllZone.GameAction.isCardInPlay(creature[0])
+                                && (!abTgt.doesTarget() || CardFactoryUtil.canTarget(card, getTargetCard()))) {
+
                             final int a = getNumAttack();
                             final int d = getNumDefense();
                             
@@ -4606,6 +4627,11 @@ public class CardFactory implements NewConstants {
 					       return CardFactoryUtil.xCount(card, NumLifeX[0]);
 					   
 					    return 0;
+					}
+					
+					public boolean canPlay(){
+                    	Cost_Payment pay = new Cost_Payment(abCost, this);
+                        return (pay.canPayAdditionalCosts() && CardFactoryUtil.canUseAbility(card) && super.canPlay());
 					}
 					 
 					public boolean canPlayAI()

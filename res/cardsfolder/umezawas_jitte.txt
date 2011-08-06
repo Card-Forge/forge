@@ -2,6 +2,9 @@ Name:Umezawa's Jitte
 ManaCost:2
 Types:Legendary Artifact Equipment
 Text:Whenever equipped creature deals combat damage, put two charge counters on Umezawa's Jitte.
+K:abPumpEquipped SubCounter<1/CHARGE>:+2/+2
+K:abPumpTgtC SubCounter<1/CHARGE>:-1/-1
+K:abGainLife SubCounter<1/CHARGE>:2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/umezawas_jitte.jpg
 End

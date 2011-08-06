@@ -1409,6 +1409,12 @@ public class Card extends MyObservable {
         return equipping;
     }
     
+    public Card getEquippingCard() {
+        if (equipping.size() == 0)
+        	return null;
+        return equipping.get(0);
+    }
+    
     public void setEquipping(ArrayList<Card> list) {
         equipping = list;
     }
@@ -1473,6 +1479,12 @@ public class Card extends MyObservable {
     
     public ArrayList<Card> getEnchanting() {
         return enchanting;
+    }
+    
+    public Card getEnchantingCard() {
+        if (enchanting.size() == 0)
+        	return null;
+        return enchanting.get(0);
     }
     
     public void setEnchanting(ArrayList<Card> list) {
