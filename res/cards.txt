@@ -1,3 +1,18 @@
+Reckless Assault
+2 B R
+Enchantment
+no text
+abDamageTgtCP 1 PayLife<2>:1
+SVar:RemAIDeck:True
+SVars:Picture:http://www.wizards.com/global/images/magic/general/reckless_assault.jpg
+
+Disfigure
+B
+Instant
+no text
+spPumpTgtCurse:-2/-2
+SVars:Picture:http://www.wizards.com/global/images/magic/general/disfigure.jpg
+
 Recurring Nightmare
 2 B
 Enchantment
@@ -5,19 +20,6 @@ Sacrifice a creature, Return Recurring Nightmare to its owner's hand: Return tar
 SVars:RemAIDeck:True
 SVars:Rarity:Rare
 SVars:Picture:http://www.wizards.com/global/images/magic/general/recurring_nightmare.jpg
-
-Reckless Assault
-2 B R
-Enchantment
-no text
-abDamageTgtCP 1 PayLife<2>:1
-SVar:RemAIDeck:True
-
-Disfigure
-B
-Instant
-no text
-spPumpTgtCurse:-2/-2
 
 Serra Avatar
 4 W W W
