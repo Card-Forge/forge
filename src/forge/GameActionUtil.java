@@ -470,9 +470,7 @@ public class GameActionUtil {
 		// (called in MagicStack.java)
 		Card c = sa.getSourceCard();
 		
-		if (c.getName().equals("Emrakul, the Aeons Torn"))
-			playCard_Emrakul(c);
-		else if (c.getName().equals("Artisan of Kozilek"))
+		if (c.getName().equals("Artisan of Kozilek"))
 			playCard_Artisan_of_Kozilek(c);
 
 		playCard_Cascade(c);
@@ -522,24 +520,6 @@ public class GameActionUtil {
 		playCard_Presence_of_the_Master(c);
 		
 		AllZone.GameAction.checkWheneverKeyword(c,"CastSpell",null);
-	}
-	
-	public static void playCard_Emrakul(Card c)
-	{
-		final Player controller = c.getController();
-		final Ability ability = new Ability(c, "0")
-		{
-			public void resolve()
-			{
-				AllZone.Phase.addExtraTurn(controller);
-			}
-		};
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append(c).append(" - When you cast Emrakul, take an extra turn after this one.");
-		ability.setStackDescription(sb.toString());
-		
-		AllZone.Stack.add(ability);
 	}
 	
 	public static void playCard_Artisan_of_Kozilek(Card c)
