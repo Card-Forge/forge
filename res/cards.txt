@@ -1,3 +1,9 @@
+Curse of Chains
+1 WU
+Enchantment Aura
+At the beginning of each upkeep, tap enchanted creature.
+Enchant Creature Curse
+
 Psychic Venom
 1 U
 Enchantment Aura
