@@ -1,0 +1,10 @@
+Name:Cenn's Enlistment
+ManaCost:3 W
+Types:Sorcery
+Text:no text
+A:SP$Token | Cost$ 3 W | TokenImage$ W 1 1 Kithkin Soldier | TokenAmount$ 2 | TokenName$ Kithkin Soldier | TokenTypes$ Creature,Kithkin,Soldier | TokenOwner$ Controller | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put two 1/1 white Kithkin Soldier creature tokens into play.
+A:AB$Token | Cost$ 3 W Discard<1/Land> | TokenImage$ W 1 1 Kithkin Soldier | TokenAmount$ 2 | TokenName$ Kithkin Soldier | TokenTypes$ Creature,Kithkin,Soldier | TokenOwner$ Controller | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | ActivatingZone$ Graveyard | SpellDescription$ Put two 1/1 white Kithkin Soldier creature tokens into play.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://http://www.wizards.com/global/images/magic/general/cenns_enlistment.jpg
+End
