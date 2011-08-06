@@ -4,4 +4,5 @@ Types:Instant
 Text:Switch target creature's power and toughness until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/transmutation.jpg
+SVar:RemAIDeck:True
 End

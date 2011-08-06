@@ -5,4 +5,5 @@ Text:Switch target creature's power and toughness until end of turn.
 K:Draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twisted_image.jpg
+SVar:RemAIDeck:True
 End
