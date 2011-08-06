@@ -576,7 +576,7 @@ public class GameAction {
 	        
 	        GameActionUtil.executeCardStateEffects();
 	        GameActionUtil.stSetPT.execute();
-	        GameActionUtil.StaticEffectKeyword.execute();
+	        //GameActionUtil.StaticEffectKeyword.execute();
 	        GameActionUtil.stPump.execute();
 	        
 	        //System.out.println("checking state effects");
