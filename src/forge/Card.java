@@ -2035,10 +2035,7 @@ public class Card extends MyObservable {
     }
     
     public void untap() {
-    	if( isTapped() ) 
-    	{
-    		GameActionUtil.executeUntapSideEffects(this);
-    		
+    	if( isTapped() ) {
     		//Run triggers
     		HashMap<String,Object> runParams = new HashMap<String,Object>();
     		runParams.put("Card", this);

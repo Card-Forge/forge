@@ -236,49 +236,6 @@ public class GameActionUtil {
 		}//end Royal Decree
 
 	}//end executeTapSideEffects()
-	
-	public static void executeUntapSideEffects(Card c) {
-		/*
-		 * This is currently only for Hollowsage, Mesmeric Orb and Wake Thrasher
-		 */
-		
-		/*
-		 * Wake Thrasher - Whenever a permanent you control becomes untapped,
-		 * Wake Thrasher gets +1/+1 until end of turn.
-		 */
-		if(c.isPermanent()) {
-			final Player controller = c.getController();
-			final CardList thrashers = AllZoneUtil.getPlayerCardsInPlay(controller, "Wake Thrasher");
-			for(Card thrasher:thrashers) {
-				final Card crd = thrasher;
-				Ability ability = new Ability(crd, "0") {
-					@Override
-					public void resolve() {
-						crd.addTempAttackBoost(1);
-						crd.addTempDefenseBoost(1);
-						//EOT
-	                    final Command untilEOT = new Command() {
-							private static final long serialVersionUID = -8593688796458658565L;
-
-							public void execute() {
-	                            crd.addTempAttackBoost(-1);
-	                            crd.addTempDefenseBoost(-1);
-	                        }
-	                    };
-	                    AllZone.EndOfTurn.addUntil(untilEOT);
-					}
-				};//Ability
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(crd.getName()).append(" - gets +1/+1 until end of turn.  (");
-				sb.append(c).append(" was untapped.)");
-				ability.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability);
-			}//for
-		}//end Wake Thrasher
-		
-	}
 
 	public static void executePlayCardEffects(SpellAbility sa) {
 		// experimental:
