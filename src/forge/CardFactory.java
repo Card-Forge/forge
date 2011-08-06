@@ -2132,7 +2132,7 @@ public class CardFactory implements NewConstants {
                 // non-Artifact, non-Creature, non-Enchantment, non-Land, non-Permanent,
                 //non-White, non-Blue, non-Black, non-Red, non-Green, non-Colorless, non-MultiColor
                 if (Targets.startsWith("Player")) {
-                	Targets.replaceFirst("Player,", "");
+                	Targets = Targets.replaceFirst("Player,", "");
                 	DmgPlayer[0] = true;
                 }											// if Players are affected they have to be at the start
                 final String Tgts[] = Targets.split(","); 

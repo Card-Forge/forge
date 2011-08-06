@@ -9032,7 +9032,7 @@ public class GameActionUtil {
             hand.addAll(Playerhand.getCards());            
 			int Count = hand.size();
             for(int i = 0; i < list.size(); i++) {           	
-            	if(player == "Human") {            
+            	if("Human".equals(player)) {            
                     for(int e = 0; e < Count; e++) {
 	                    if(hand.size() == 0) hand.addAll(Playerhand.getCards());
 	                    handlist = hand.toArray();
