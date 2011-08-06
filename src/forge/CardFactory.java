@@ -2283,7 +2283,17 @@ public class CardFactory implements NewConstants {
         		String k[] = parse.split(":");
         		String tmpCost[] =  k[0].replace("abDamage", "").split(" ", 2);
         		
+        		int drawBack = 2;
+        		
         		final Target abTgt = new Target(tmpCost[0]);
+        		if (abTgt.canTgtValid()){
+        			int valid = drawBack;
+					// Looks like VTSelection is used for the Message box, should improve the message
+        			abTgt.setVTSelection(k[valid]);
+        			abTgt.setValidTgts(k[valid].split(","));
+        			drawBack++;
+        		}
+        		
         		final Ability_Cost abCost = new Ability_Cost(tmpCost[1], card.getName(), true);    
                 
                 final int NumDmg[] = {-1};
@@ -2303,15 +2313,15 @@ public class CardFactory implements NewConstants {
                 final String DrawBack[] = {"none"};
                 final String spDesc[] = {"none"};
                 final String stDesc[] = {"none"};
-                if(k.length > 2) {
-                    if(k[2].contains("Drawback$")) {
-                        String kk[] = k[2].split("\\$");
+                if(k.length > drawBack) {
+                    if(k[drawBack].contains("Drawback$")) {
+                        String kk[] = k[drawBack].split("\\$");
                         DrawBack[0] = kk[1];
-                        if(k.length > 3) spDesc[0] = k[3];
-                        if(k.length > 4) stDesc[0] = k[4];
+                        if(k.length > drawBack+1) spDesc[0] = k[drawBack+1];
+                        if(k.length > drawBack+2) stDesc[0] = k[drawBack+2];
                     } else {
-                        if(k.length > 2) spDesc[0] = k[2];
-                        if(k.length > 3) stDesc[0] = k[3];
+                        if(k.length > drawBack) spDesc[0] = k[drawBack];
+                        if(k.length > drawBack+1) stDesc[0] = k[drawBack+1];
                     }
                 } else {
                     StringBuilder sb = new StringBuilder();

@@ -38,6 +38,11 @@ public class Target_Selection {
 			target.resetTargets();
 	}
 	
+	public void incrementTargets(){
+		if (target != null)
+			target.incrementTargets();
+	}
+	
 	public boolean chooseTargets(){
 		// if not enough targets chosen, reset and cancel Ability
 		if (bCancel || bDoneTarget && target.getNumTargeted() < target.getMinTargets()){
@@ -46,8 +51,8 @@ public class Target_Selection {
 			return false;
 		}
 		
-		// if we haven't reached minimum targets, or we're stil less than Max targets keep choosing
-		// targetting, with forward code for multiple target abilities 
+		// if we haven't reached minimum targets, or we're still less than Max targets keep choosing
+		// targeting, with forward code for multiple target abilities 
 		if (!bDoneTarget && target.getMinTargets() > 0 && target.getNumTargeted() < target.getMaxTargets()){
 			if (target.canTgtCreature() && target.canTgtPlayer())
 				changeInput.stopSetNext(targetCreaturePlayer(ability, Command.Blank, true, this, req));
@@ -56,7 +61,7 @@ public class Target_Selection {
 	        else if(target.canTgtPlayer()) 
 	        	changeInput.stopSetNext(targetPlayer(ability, this, req));
 	        else if (target.canTgtValid())
-	        	changeInput.stopSetNext(CardFactoryUtil.input_targetValid(ability, target.getValidTgts(), target.getVTSelection()));
+	        	changeInput.stopSetNext(input_targetValid(ability, target.getValidTgts(), target.getVTSelection(), this, req));
 	        return false;
 		}
 		
@@ -108,7 +113,7 @@ public class Target_Selection {
             }
             
             void done() {
-            	select.getTgt().incrementTargets();
+            	select.incrementTargets();
                 paid.execute();
                 stop();
                 req.finishedTargeting();
@@ -143,7 +148,7 @@ public class Target_Selection {
             }//selectCard()
             
             void done() {
-            	select.getTgt().incrementTargets();
+            	select.incrementTargets();
             	stop();
             	req.finishedTargeting();
             }
@@ -183,7 +188,7 @@ public class Target_Selection {
             }
             
             void done() {
-            	select.getTgt().incrementTargets();
+            	select.incrementTargets();
                 stop();
                 req.finishedTargeting();
             }
@@ -191,5 +196,64 @@ public class Target_Selection {
         return target;
     }//targetPlayer()
     
+    // these have been copied over from CardFactoryUtil as they need two extra parameters for target selection.
+	// however, due to the changes necessary for SA_Requirements this is much different than the original
+    public static Input input_targetValid(final SpellAbility sa, final String[] Tgts, final String message, 
+    		final Target_Selection select, final SpellAbility_Requirements req)
+    {
+    	return new Input() {
+			private static final long serialVersionUID = -2397096454771577476L;
+
+			@Override
+	        public void showMessage() {
+	            CardList allCards = new CardList();
+	            allCards.addAll(AllZone.Human_Play.getCards());
+	            allCards.addAll(AllZone.Computer_Play.getCards());
+	            
+	            CardList choices = allCards.getValidCards(Tgts);
+
+	            stopSetNext(input_targetSpecific(sa, choices, message, true, select, req));
+	        }
+    	};
+    }//input_targetValid
+
+    //CardList choices are the only cards the user can successful select
+    public static Input input_targetSpecific(final SpellAbility spell, final CardList choices, final String message, 
+    		final boolean targeted, final Target_Selection select, final SpellAbility_Requirements req) {
+        Input target = new Input() {
+			private static final long serialVersionUID = -1091595663541356356L;
+
+			@Override
+            public void showMessage() {
+                AllZone.Display.showMessage(message);
+                ButtonUtil.enableOnlyCancel();
+            }
+            
+            @Override
+            public void selectButtonCancel() {
+            	select.setCancel(true);
+                stop();
+                req.finishedTargeting();
+            }
+            
+            @Override
+            public void selectCard(Card card, PlayerZone zone) {
+                if(targeted && !CardFactoryUtil.canTarget(spell, card)) {
+                    AllZone.Display.showMessage("Cannot target this card (Shroud? Protection? Restrictions?).");
+                } 
+                else if(choices.contains(card)) {
+                    spell.setTargetCard(card);
+                    done();
+                }
+            }//selectCard()
+            
+            void done() {
+            	select.incrementTargets();
+                stop();
+                req.finishedTargeting();
+            }
+        };
+        return target;
+    }//input_targetSpecific()
     
 }

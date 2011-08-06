@@ -38,9 +38,7 @@ public class Target {
 			if (tgtSplit[0].contains("C"))	// creature
 				tgtCreature = true;
 			if (tgtSplit[0].contains("P"))	// player
-				tgtPlayer = true;
-			//todo add Opponent and other permanent types
-			
+				tgtPlayer = true;	
 			if (tgtSplit[0].contains("V")) // valid
 				tgtValid = true;
 			
@@ -57,16 +55,20 @@ public class Target {
 	
 	public String targetString()
 	{
-		String tgt = "";
+		StringBuilder sb = new StringBuilder("target ");
+
 		if (tgtCreature)
-			tgt += "creature";
-		if (tgtPlayer && !tgt.equals(""))
-			tgt += " or ";
-		if (tgtPlayer)
-			tgt += "player";
+			sb.append("creature");
+		if (tgtPlayer){
+			if (tgtCreature)
+				sb.append(" or ");
+			sb.append("player");
+		}
+		if (tgtValid){
+			sb.append(vtSelection);
+		}
+		sb.append(".");
 		
-		tgt += ".";
-		
-		return "target " + tgt;
+		return sb.toString();
 	}
 }
