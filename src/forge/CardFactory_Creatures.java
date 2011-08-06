@@ -18674,13 +18674,13 @@ public class CardFactory_Creatures {
         	ability.setStackDescription(sbStack.toString());
     	}//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Rubinia Soulsinger")) {
         	/*
         	 * Tap: Gain control of target creature for as long as you
         	 * control Rubinia and Rubinia remains tapped.
-        	 */
+        	 *
         	final Card movedCreature[] = new Card[1];
             final Ability_Tap ability = new Ability_Tap(card, "0") {
 				private static final long serialVersionUID = 7018915669688488647L;
@@ -18768,7 +18768,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);            
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Vampire Hexmage")) {

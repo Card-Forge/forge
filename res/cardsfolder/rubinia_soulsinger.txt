@@ -1,9 +1,10 @@
 Name:Rubinia Soulsinger
 ManaCost:2 G W U
 Types:Legendary Creature Faerie
-Text:tap: Gain control of target creature for as long as you control Rubinia and Rubinia remains tapped.
+Text:no text
 PT:2/3
 K:You may choose not to untap CARDNAME during your untap step.
+A:AB$GainControl|Cost$T|Tgt$TgtC|LoseControl$Untap,LeavesPlay,LoseControl|SpellDescription$Gain control of target creature for as long as you control Rubinia and Rubinia remains tapped.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rubinia_soulsinger.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/296.jpg
