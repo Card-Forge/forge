@@ -7789,7 +7789,6 @@ public class CardFactory_Creatures {
                     if(!card.isToken()) hand.add(card);
                 }//resolve()
             };//SpellAbility
-            
 
             Input runtime = new Input() {
                 private static final long serialVersionUID = -4302210760957471033L;
@@ -7800,7 +7799,11 @@ public class CardFactory_Creatures {
                     
                 }
             };
-            ability.setStackDescription(card + " gets returned to owner's hand");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" gets returned to owner's hand");
+            ability.setStackDescription(sb.toString());
+            
             ability.setDescription("2U, Discard a card: Return Amugaba to owner's hand.");
             card.addSpellAbility(ability);
             ability.setBeforePayMana(runtime);
@@ -7834,7 +7837,10 @@ public class CardFactory_Creatures {
                 }//resolve()
             };//SpellAbility
             
-            ability.setStackDescription(card + " deals 1 damage to each creature without flying.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" deals 1 damage to each creature without flying.");
+            ability.setStackDescription(sb.toString());
+            
             ability.setDescription("T: Subterranean Spirit deals 1 damage to each creature without flying.");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
@@ -7865,7 +7871,10 @@ public class CardFactory_Creatures {
                 }//resolve()
             };//SpellAbility
             
-            ability.setStackDescription(card + " deals 1 damage to each creature without flying.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" deals 1 damage to each creature without flying.");
+            ability.setStackDescription(sb.toString());
+            
             ability.setDescription("1 R: Ashen Firebeast deals 1 damage to each creature without flying.");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
@@ -7896,7 +7905,10 @@ public class CardFactory_Creatures {
                 }//resolve()
             };//SpellAbility
             
-            ability.setStackDescription(card + " deals 2 damage to each creature without flying.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" deals 2 damage to each creature without flying.");
+            ability.setStackDescription(sb.toString());
+            
             ability.setDescription("1 R: Scourge of Kher Ridges deals 2 damage to each creature without flying.");
             card.addSpellAbility(ability);
             
@@ -7923,7 +7935,10 @@ public class CardFactory_Creatures {
                 }//resolve()
             };//SpellAbility
             
-            a2.setStackDescription(card + " deals 6 damage to each other creature with flying.");
+            StringBuilder sb2 = new StringBuilder();
+            sb2.append(card).append(" deals 6 damage to each other creature with flying.");
+            a2.setStackDescription(sb2.toString());
+            
             a2.setDescription("1 R: Scourge of Kher Ridges deals 6 damage to each creature with flying.");
             card.addSpellAbility(a2);
         }//*************** END ************ END **************************
@@ -7957,7 +7972,11 @@ public class CardFactory_Creatures {
                     
                 }
             };
-            ability.setStackDescription(card + " gets returned to owner's hand");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" gets returned to owner's hand");
+            ability.setStackDescription(sb.toString());
+            
             ability.setDescription("Discard a card: Return Ephemeron to owner's hand.");
             card.addSpellAbility(ability);
             ability.setBeforePayMana(runtime);
@@ -7989,7 +8008,10 @@ public class CardFactory_Creatures {
                 }
             };
             
-            ability1.setStackDescription(card + " gets a +1/+1 counter. ");
+            StringBuilder sb1 = new StringBuilder();
+            sb1.append(card).append(" gets a +1/+1 counter.");
+            ability1.setStackDescription(sb1.toString());
+            
             ability1.setDescription("2, Discard a card: put a +1/+1 counter on Flowstone Sculpture.");
             card.addSpellAbility(ability1);
             ability1.setBeforePayMana(runtime1);
@@ -8017,7 +8039,10 @@ public class CardFactory_Creatures {
                 }
             };
             
-            ability2.setStackDescription(card + " gains flying. ");
+            StringBuilder sb2 = new StringBuilder();
+            sb2.append(card).append(" gains flying.");
+            ability2.setStackDescription(sb2.toString());
+            
             ability2.setDescription("2, Discard a card: Flowstone Sculpture gains flying.");
             card.addSpellAbility(ability2);
             ability2.setBeforePayMana(runtime2);
@@ -8045,7 +8070,10 @@ public class CardFactory_Creatures {
                 }
             };
             
-            ability3.setStackDescription(card + " gains First Strike. ");
+            StringBuilder sb3 = new StringBuilder();
+            sb3.append(card).append(" gains First Strike.");
+            ability3.setStackDescription(sb3.toString());
+            
             ability3.setDescription("2, Discard a card: FlowStone Sculpture gains first strike.");
             card.addSpellAbility(ability3);
             ability3.setBeforePayMana(runtime3);
@@ -8062,7 +8090,6 @@ public class CardFactory_Creatures {
                 }//resolve()
             };//SpellAbility
             
-
             Input runtime4 = new Input() {
                 private static final long serialVersionUID = -4312210700957472033L;
                 
@@ -8073,12 +8100,13 @@ public class CardFactory_Creatures {
                 }
             };
             
-            ability4.setStackDescription(card + " gains trample. ");
+            StringBuilder sb4 = new StringBuilder();
+            sb4.append(card).append(" gains trample.");
+            ability4.setStackDescription(sb4.toString());
+            
             ability4.setDescription("2, Discard a card: Flowstone Sculpture gains trample.");
             card.addSpellAbility(ability4);
             ability4.setBeforePayMana(runtime4);
-            
-            
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
@@ -8155,17 +8183,23 @@ public class CardFactory_Creatures {
                 }//resolve()
             };//SpellAbility
             
-
             Input runtime = new Input() {
                 private static final long serialVersionUID = -4209163355325441624L;
                 
                 @Override
                 public void showMessage() {
-                    ability.setStackDescription(card + " gets +1/+1 until EOT.");
+                	
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(card).append(" gets +1/+1 until EOT.");
+                	ability.setStackDescription(sb.toString());
+                    
                     stopSetNext(CardFactoryUtil.input_discard(ability, 1));
                 }
             };
-            ability.setStackDescription(card + " gets +1/+1 and becomes the color of your choiceuntil end of turn.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" gets +1/+1 and becomes the color of your choiceuntil end of turn.");
+            ability.setStackDescription(sb.toString());
+            
             ability.setDescription("Discard a card: Wild Mongrel gets +1/+1 and becomes the color of your choice until end of turn.");
             card.addSpellAbility(ability);
             ability.setBeforePayMana(runtime);
@@ -8215,7 +8249,10 @@ public class CardFactory_Creatures {
                 }//resolve()
             };//SpellAbility
             
-            ability.setStackDescription(card + " becomes the color of your choice until end of turn.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" becomes the color of your choice until end of turn.");
+            ability.setStackDescription(sb.toString());
+            
             ability.setDescription("G: Spiritmonger becomes the color of your choice until end of turn.");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
@@ -8261,17 +8298,18 @@ public class CardFactory_Creatures {
                 }
             };//SpellAbility
             
-
             Input runtime = new Input() {
 				private static final long serialVersionUID = -1987380648014917445L;
 
 				@Override
                 public void showMessage() {
-                    ability.setStackDescription(card + " gets +1/+1 until EOT.");
+					StringBuilder sb = new StringBuilder();
+					sb.append(card).append(" gets +1/+1 until EOT.");
+					ability.setStackDescription(sb.toString());
+                    
                     stopSetNext(CardFactoryUtil.input_discard(ability, 1));
                 }
             };
-            
             
             final Ability ability2 = new Ability(card, "0") {
                 @Override
@@ -8340,11 +8378,17 @@ public class CardFactory_Creatures {
                 }
             };
             
-            ability.setStackDescription(card + " gets +1/+1 until end of turn.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" gets +1/+1 until end of turn.");
+            ability.setStackDescription(sb.toString());
+            
             ability.setDescription("Discard a card: Psychatog gets +1/+1 until end of turn.");
             ability.setBeforePayMana(runtime);
             
-            ability2.setStackDescription(card + " gets +1/+1 until end of turn.");
+            StringBuilder sb2 = new StringBuilder();
+            sb2.append(card).append(" gets +1/+1 until end of turn.");
+            ability2.setStackDescription(sb2.toString());
+            
             ability2.setDescription("Exile two cards from your graveyard: Psychatog gets +1/+1 until end of turn.");
             ability2.setBeforePayMana(runtime2);
             
@@ -8382,8 +8426,10 @@ public class CardFactory_Creatures {
                 }//resolve()
             };//SpellAbility
             
-
-            ability.setStackDescription(card + " gets Protection from white until end of turn.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" gets Protection from white until end of turn.");
+            ability.setStackDescription(sb.toString());
+            
             ability.setDescription("Discard a card at random: Hell-Bent Raider gets protection from white until end of turn.");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
@@ -8417,13 +8463,15 @@ public class CardFactory_Creatures {
                 }//resolve()
             };//SpellAbility
             
-
             Input runtime = new Input() {
                 private static final long serialVersionUID = 1268037036474796569L;
                 
                 @Override
                 public void showMessage() {
-                    ability.setStackDescription(card + " gains flying until EOT.");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(card).append(" gains flying until EOT.");
+                	ability.setStackDescription(sb.toString());
+                    
                     stopSetNext(new Input_PayManaCost(ability));
                 }
             };
@@ -8462,17 +8510,23 @@ public class CardFactory_Creatures {
                 }//resolve()
             };//SpellAbility
             
-
             Input runtime = new Input() {
                 private static final long serialVersionUID = -685958984421033465L;
                 
                 @Override
                 public void showMessage() {
-                    ability.setStackDescription(card + " gains flying until EOT.");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(card).append(" gains flying until EOT.");
+                	ability.setStackDescription(sb.toString());
+                    
                     stopSetNext(new Input_PayManaCost(ability));
                 }
             };
-            ability.setStackDescription(card + " - gains flying until EOT.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" - gains flying until EOT.");
+            ability.setStackDescription(sb.toString());
+            
             ability.setDescription("2: Sarcomite Myr gains flying until end of turn.");
             card.addSpellAbility(ability);
             ability.setBeforePayMana(runtime);
@@ -8541,8 +8595,10 @@ public class CardFactory_Creatures {
                 }//resolve()
             };//SpellAbility
             
-
-            ability.setStackDescription(card + " - switch power and toughness until EOT.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" - switch power and toughness until EOT.");
+            ability.setStackDescription(sb.toString());
+            
             ability.setDescription("1 U: Switch Turtleshell Changeling's power and toughness until end of turn.");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
@@ -9240,7 +9296,11 @@ public class CardFactory_Creatures {
                 @Override
                 public void selectCard(Card c, PlayerZone zone) {
                     if(c.isCreature() && zone.is(Constant.Zone.Play, card.getController()) && c.isUntapped()) {
-                        ability.setStackDescription(card + " gets +1/+1 until end of turn.");
+                    	
+                    	StringBuilder sb = new StringBuilder();
+                    	sb.append(card).append(" gets +1/+1 until end of turn.");
+                    	ability.setStackDescription(sb.toString());
+                        
                         c.tap();
                         AllZone.Stack.add(ability);
                         stop();
@@ -10018,9 +10078,12 @@ public class CardFactory_Creatures {
                 }//resolve
             };
             ability.setDescription("6: Return target Rebel permanent card with converted mana cost 5 or less from your graveyard to play.");
-            ability.setStackDescription(card.getName() + " - return Rebel from graveyard to play.");
-            card.addSpellAbility(ability);
             
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - return Rebel from graveyard to play.");
+            ability.setStackDescription(sb.toString());
+            
+            card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
         
@@ -10107,11 +10170,12 @@ public class CardFactory_Creatures {
             
             card.addSpellAbility(ability);
             ability.setDescription("Tap, Sacrifice a rat: Put X 1/1 black Rat creature tokens into play, where X is the number of Rats you control.");
-            ability.setStackDescription(card.getName()
-                    + " - Put X 1/1 black Rat creature tokens into play, where X is the number of Rats you control.");
-            ability.setBeforePayMana(runtime);
             
-
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - Put X 1/1 black Rat creature tokens into play, where X is the number of Rats you control.");
+            ability.setStackDescription(sb.toString());
+            
+            ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
         
@@ -10150,13 +10214,16 @@ public class CardFactory_Creatures {
             
             card.addSpellAbility(ability);
             ability.setDescription("tap: Draw three cards.");
-            ability.setStackDescription("Arcanis - " + card.getController() + " draws three cards.");
+            StringBuilder sb = new StringBuilder();
+            sb.append("Arcanis - ").append(card.getController()).append(" draws three cards.");
+            ability.setStackDescription(sb.toString());
             ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
             
             card.addSpellAbility(ability2);
-            ability2.setStackDescription(card.getController() + " returns Arcanis back to owner's hand.");
+            StringBuilder sb2 = new StringBuilder();
+            sb2.append(card.getController()).append(" returns Arcanis back to owner's hand.");
+            ability2.setStackDescription(sb2.toString());
             ability2.setDescription("2 U U: Return Arcanis the Omnipotent to its owner's hand.");
-            
         }//*************** END ************ END ************************** 
         
         //*************** START *********** START **************************
@@ -10180,9 +10247,10 @@ public class CardFactory_Creatures {
             }; 
             
             card.addSpellAbility(ability);
-            ability.setStackDescription(card.getController() + " returns Blinking Spirit back to owner's hand.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getController()).append(" returns Blinking Spirit back to owner's hand.");
+            ability.setStackDescription(sb.toString());
             ability.setDescription("0: return Blinking Spirit to its owner's hand.");
-            
         }//*************** END ************ END ************************** 
         
         //*************** START *********** START **************************
@@ -10198,19 +10266,19 @@ public class CardFactory_Creatures {
                     card.untap();
                     AllZone.getZone(card).remove(card);
                     if(!card.isToken()) hand.add(card);
-                    
                 }
                 
                 @Override
                 public boolean canPlayAI() {
                     return false;
                 }
-            }; 
+            };//SpellAbility
             
             card.addSpellAbility(ability);
-            ability.setStackDescription(card.getController() + " returns Selenia, Dark Angel back to owner's hand.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getController()).append(" returns Selenia, Dark Angel back to owner's hand.");
+            ability.setStackDescription(sb.toString());
             ability.setDescription("Pay 2 life: return Selenia, Dark Angel to its owner's hand.");
-            
         }//*************** END ************ END ************************** 
         
         
@@ -10423,13 +10491,11 @@ public class CardFactory_Creatures {
             };
             
             card.addSpellAbility(copyTokens1);
-            
             copyTokens1.setDescription("4 GW GW, tap: For each creature token you control, put a token into play that's a copy of that creature.");
-            copyTokens1.setStackDescription(card.getName()
-                    + " - For each creature token you control, put a token into play that's a copy of that creature.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - For each creature token you control, put a token into play that's a copy of that creature.");
+            copyTokens1.setStackDescription(sb.toString());
             copyTokens1.setBeforePayMana(new Input_PayManaCost(copyTokens1));
-            
-
         }//*************** END ************ END **************************
         
         
@@ -10576,13 +10642,16 @@ public class CardFactory_Creatures {
                     }
                 }//resolve()
             };//SpellAbility
+            
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = -6564365394043612388L;
                 
                 public void execute() {
                     if(AllZone.Stack.size() > 0) {
-                        ability.setStackDescription("Mystic Snake counters "
-                                + AllZone.Stack.peek().getSourceCard().getName());
+                    	StringBuilder sb = new StringBuilder();
+                    	sb.append("Mystic Snake counters ").append(AllZone.Stack.peek().getSourceCard().getName());
+                    	ability.setStackDescription(sb.toString());
+                        
                         AllZone.Stack.add(ability);
                     }
                 }
