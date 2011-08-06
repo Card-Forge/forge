@@ -2283,6 +2283,7 @@ res/cardsfolder/fleshbag_marauder.txt -text svneol=native#text/plain
 res/cardsfolder/fleshformer.txt -text svneol=native#text/plain
 res/cardsfolder/fleshgrafter.txt -text svneol=native#text/plain
 res/cardsfolder/fleshwrither.txt svneol=native#text/plain
+res/cardsfolder/flicker.txt -text svneol=native#text/plain
 res/cardsfolder/flight.txt -text svneol=native#text/plain
 res/cardsfolder/flight_of_fancy.txt -text svneol=native#text/plain
 res/cardsfolder/flight_spellbomb.txt -text svneol=native#text/plain
