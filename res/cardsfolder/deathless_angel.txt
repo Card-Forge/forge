@@ -4,7 +4,7 @@ Types:Creature Angel
 Text:no text
 PT:5/7
 K:Flying
-K:abPumpTgtC W W:Indestructible
+A:AB$Pump | Cost$ W W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Indestructible | SpellDescription$ Target creature is indestructible this turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathless_angel.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/17.jpg
