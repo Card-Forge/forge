@@ -9,5 +9,5 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ CHARG
 SVar:X:Count$TriggeredDamageAmount
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelheart_vial.jpg
+SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/215.jpg
 End
-

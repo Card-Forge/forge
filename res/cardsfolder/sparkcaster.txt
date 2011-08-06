@@ -10,4 +10,5 @@ SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtP | NumDmg$ 1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sparkcaster.jpg
+SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/126.jpg
 End

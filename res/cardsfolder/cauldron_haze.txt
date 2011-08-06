@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ 1 WB | ValidTgts$ Creature | KW$ Persist | TargetMin$ 0 | Tar
 SVar:X:Count$Valid Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cauldron_haze.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/84.jpg
 End

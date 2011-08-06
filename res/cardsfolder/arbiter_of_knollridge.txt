@@ -9,4 +9,5 @@ SVar:TrigLife:AB$SetLife | Cost$ 0 | Defined$ Each | LifeAmount$ X
 SVar:X:Count$HighestLifeTotal
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arbiter_of_knollridge.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/2.jpg
 End
