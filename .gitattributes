@@ -1805,6 +1805,7 @@ res/cardsfolder/eladamri_lord_of_leaves.txt -text svneol=native#text/plain
 res/cardsfolder/eladamris_call.txt -text svneol=native#text/plain
 res/cardsfolder/eland_umbra.txt -text svneol=native#text/plain
 res/cardsfolder/elder_druid.txt -text svneol=native#text/plain
+res/cardsfolder/elder_mastery.txt -text svneol=native#text/plain
 res/cardsfolder/eldrazi_conscription.txt -text svneol=native#text/plain
 res/cardsfolder/eldrazi_monument.txt -text svneol=native#text/plain
 res/cardsfolder/electric_eel.txt svneol=native#text/plain
