@@ -36,40 +36,55 @@ public class Input_Untap extends Input {
         AllZone.Phase.setNeedToNextPhase(true);
     }
     
+    /*    Converted to keyword
     private boolean untapLessThanPower3()
     {
     	//checks for Marble Titan or Meekstone
         return AllZoneUtil.isCardInPlay("Marble Titan") || AllZoneUtil.isCardInPlay("Meekstone");
-    }
-     
+    } */
+    
     private void doUntap()
     {
     	PlayerZone p = AllZone.getZone(Constant.Zone.Play, AllZone.Phase.getActivePlayer());
     	CardList list = new CardList(p.getCards());
-    	list = list.filter(new CardListFilter()
-    	{
-    		public boolean addCard(Card c)
-    		{
-    			if( untapLessThanPower3() && isWinterOrbInEffect() ) {
-    				return !c.isLand() && c.getNetAttack() < 3;
-    			}
-    			else if( isWinterOrbInEffect() ) {
-    				return !c.isLand();
-    			}
-    			else if (untapLessThanPower3()) {
-    				return c.getNetAttack() < 3;
-    			}
-
-    			return true;
-    		}
-    	});
-
+    	
     	for(Card c : list) {
     		if (c.getBounceAtUntap() && c.getName().contains("Undiscovered Paradise") )
     		{
     			AllZone.GameAction.moveToHand(c);
     		}
-    		else if(c.getKeyword().contains("You may choose not to untap CARDNAME during your untap step.")) {
+    	}
+    	
+    	CardList allp = new CardList();
+    	allp.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+		allp.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards()); 
+    	
+		for(Card ca : allp) {
+			if (ca.hasStartOfKeyword("Permanents don't untap during their controllers' untap steps")) {
+	        	int KeywordPosition = ca.getKeywordPosition("Permanents don't untap during their controllers' untap steps");
+	        	String parse = ca.getKeyword().get(KeywordPosition).toString();
+	    		String k[] = parse.split(":");
+	    		final String restrictions[] = k[1].split(",");
+				list = list.filter(new CardListFilter() {
+		    		public boolean addCard(Card c)
+		    		{
+		    			return !c.isValidCard(restrictions);
+		    		} // filter out cards that should not untap
+		    	});
+			}
+		} // end of Permanents don't untap during their controllers' untap steps
+		
+    	list = list.filter(new CardListFilter()
+    	{
+    		public boolean addCard(Card c)
+    		{
+    			if( isWinterOrbInEffect() && c.isLand() ) return false;
+    			return true;
+    		}
+    	});
+
+    	for(Card c : list) {
+    		if(c.getKeyword().contains("You may choose not to untap CARDNAME during your untap step.")) {
     			if(c.isTapped()) {
     				if(c.getController().equals(Constant.Player.Human)) {
     					String[] choices = {"Yes", "No"};

@@ -648,8 +648,10 @@ public class Card extends MyObservable {
             		&& 
             		!keyword.get(i).toString().contains("Whenever CARDNAME blocks a creature, destroy that creature at end of combat")
             		&& 
-            		!keyword.get(i).toString().contains("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat"))
-            {
+            		!keyword.get(i).toString().contains("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat")
+            		&& 
+            		!keyword.get(i).toString().contains("Permanents don't untap during their controllers' untap steps"))
+            	{
                 if (keyword.get(i).toString().contains("WheneverKeyword")) {
                     String k[] = keyword.get(i).split(":");
                     sbLong.append(k[9]).append("\r\n");
