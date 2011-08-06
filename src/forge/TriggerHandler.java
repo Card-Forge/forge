@@ -427,14 +427,20 @@ public class TriggerHandler {
 					StringBuilder sb = new StringBuilder(regtrig.toString());
 					if(getTarget() != null)
 					{
-						sb.append("(Targeting ");
+						sb.append(" (Targeting ");
 						for(Object o : getTarget().getTargets())
 						{
 							sb.append(o.toString());
 							sb.append(", ");
 						}
-						
-						sb.setLength(sb.length()-2);
+						if (sb.toString().endsWith(", "))
+                        {
+							sb.setLength(sb.length()-2);
+                        }
+						else
+                        {
+                            sb.append("ERROR");
+                        }
 						sb.append(")");
 					}
 					
