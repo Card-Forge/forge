@@ -1630,7 +1630,9 @@ public class GameAction {
  		        for(int CKeywords = 0; CKeywords < CostKeywords; CKeywords++) {
                  String parse = card.getKeyword().get(CostKeyword_Number[CKeywords]).toString();                
                  String k[] = parse.split(":");
-                 
+                 if(card.equals(originalCard)) {
+            		 if(!k[4].equals("Self")) k[2] = "Owned";
+             }
                  if(k[2].equals("More")) { 
                    	if(k[7].equals("OnlyOneBonus")) {  // Only Works for Color and Type
                    		for(int string_no = 5; string_no < 7; string_no++) {
@@ -1709,7 +1711,9 @@ public class GameAction {
              		        for(int CKeywords = 0; CKeywords < CostKeywords; CKeywords++) {
                              String parse = card.getKeyword().get(CostKeyword_Number[CKeywords]).toString();                
                              String k[] = parse.split(":");
-      	                 
+                             if(card.equals(originalCard)) {
+                        		 if(!k[4].equals("Self")) k[2] = "Owned";
+                         }
       	                 if(k[2].equals("Less")) {   
       	                   	if(k[7].equals("OnlyOneBonus")) { // Only Works for Color and Type
       	                   		for(int string_no = 5; string_no < 7; string_no++) {
