@@ -2,7 +2,7 @@ Name:Bone Flute
 ManaCost:3
 Types:Artifact
 Text:no text
-K:abAllPump 2 T:All:-1/0:All creatures get -1/-0 until end of turn.:Bone Flute - all creatures get -1/-0 until end of turn.
+A:AB$PumpAll|Cost$2 T|ValidCards$Creature|NumAtt$-1|SpellDescription$All creatures get -1/-0 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_flute.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/94.jpg
