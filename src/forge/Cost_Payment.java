@@ -916,7 +916,7 @@ public class Cost_Payment {
                 			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
                 			null, possibleValues, possibleValues[0]);
                     if(choice.equals(0)) {
-                    	payment.setPayExile(true);
+                    	payment.setPayExileFromHand(true);
                     	AllZone.GameAction.exile(card);
                     	stop();
                     	payment.payCost();
