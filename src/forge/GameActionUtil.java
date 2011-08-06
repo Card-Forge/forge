@@ -169,7 +169,7 @@ public class GameActionUtil {
 		draw_Font_of_Mythos(player);
 		draw_Overbeing_of_Myth(player);
 		draw_Mana_Vault(player);
-		draw_Sylvan_Library();
+		draw_Sylvan_Library(player);
 		AllZone.Stack.unfreezeStack();
 	}
 
@@ -9732,14 +9732,13 @@ public class GameActionUtil {
 		player.drawCards(list.size());
 	}// Spiteful_Visions()
 	
-	private static void draw_Sylvan_Library() {
+	private static void draw_Sylvan_Library(final Player player) {
 		/*
 		 * At the beginning of your draw step, you may draw two additional
 		 * cards. If you do, choose two cards in your hand drawn this turn.
 		 * For each of those cards, pay 4 life or put the card on top of
 		 * your library.
 		 */
-		final Player player = AllZone.Phase.getPlayerTurn();
 		final CardList cards = AllZoneUtil.getPlayerCardsInPlay(player, "Sylvan Library");
 		
 		for(final Card source:cards) {
@@ -9767,7 +9766,7 @@ public class GameActionUtil {
 						            
 						            @Override
 						            public void selectCard(Card card, PlayerZone zone) {
-						                if(zone.is(Constant.Zone.Hand)) {
+						                if(zone.is(Constant.Zone.Hand) && true == card.getDrawnThisTurn()) {
 						                    /////////////////////////////////////////
 						                	if (GameActionUtil.showYesNoDialog(source, cardQuestion)) {
 						                		player.payLife(4);

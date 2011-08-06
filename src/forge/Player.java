@@ -303,6 +303,7 @@ public abstract class Player extends MyObservable{
 			library.remove(0);
 			hand.add(c);
 			setLastDrawnCard(c);
+			c.setDrawnThisTurn(true);
 
 			GameActionUtil.executeDrawCardTriggeredEffects(this);
 		}

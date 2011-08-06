@@ -272,6 +272,10 @@ public class Phase extends MyObservable
         
 	    else if(phase.equals(Constant.Phase.Cleanup)){
 	    	AllZone.EndOfTurn.executeUntil();
+	    	CardList cHand = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
+	    	CardList hHand = AllZoneUtil.getPlayerHand(AllZone.HumanPlayer);
+	    	for(Card c:cHand) c.setDrawnThisTurn(false);
+	    	for(Card c:hHand) c.setDrawnThisTurn(false);
 	    }
         
 		resetPriority();

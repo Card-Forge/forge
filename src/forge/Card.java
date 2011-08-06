@@ -46,6 +46,7 @@ public class Card extends MyObservable {
     private HashMap<Card, Integer>       assignedDamageHashMap             = new HashMap<Card, Integer>();
     
     private boolean                      unCastable;
+    private boolean						drawnThisTurn						= false;
     private boolean                      tapped;
     private boolean                      sickness                          = true;                              //summoning sickness
     private boolean                      token                             = false;
@@ -646,6 +647,14 @@ public class Card extends MyObservable {
     
     public void setTopCardName(String s) {
         topCardName = s;
+    }
+    
+    public void setDrawnThisTurn(boolean b) {
+    	drawnThisTurn = b;
+    }
+    
+    public boolean getDrawnThisTurn() {
+    	return drawnThisTurn;
     }
     
     public String getReflectableMana() {
