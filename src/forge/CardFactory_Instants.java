@@ -1183,7 +1183,7 @@ public class CardFactory_Instants {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Twincast") || cardName.equals("Reverberate")) {
+        else if(cardName.equals("Twincast") || cardName.equals("Reverberate") || cardName.equals("Fork")) {
             final SpellAbility spell = new Spell(card) {
 
 				private static final long serialVersionUID = -659841515428746L;

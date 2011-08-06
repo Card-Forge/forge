@@ -7332,7 +7332,159 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Amugaba")) {
+            
+            final Ability ability = new Ability(card, "2 U") {
+                @Override
+                public boolean canPlayAI() {
+                   return false;
+                }
 
+                @Override
+                public void resolve() {
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getOwner());
+                    
+                    card.untap();
+                    AllZone.getZone(card).remove(card);
+                    if(!card.isToken()) hand.add(card);
+                }//resolve()
+            };//SpellAbility
+            
+
+            Input runtime = new Input() {
+                private static final long serialVersionUID = -4302210760957471033L;
+                
+                @Override
+                public void showMessage() {
+                    stopSetNext(CardFactoryUtil.input_discard(ability, 1));
+                    
+                }
+            };
+            ability.setStackDescription(card + " gets returned to owner's hand");
+            ability.setDescription("2U, Discard a card: Return Amugaba to owner's hand.");
+            card.addSpellAbility(ability);
+            ability.setBeforePayMana(runtime);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Flowstone Sculpture")) {
+            
+            final Ability ability1 = new Ability(card, "2") {
+                @Override
+                public boolean canPlayAI() {
+                   return false;
+                }
+
+                @Override
+                public void resolve() {
+                	card.addCounter(Counters.P1P1,1);
+                }//resolve()
+            };//SpellAbility
+            
+
+            Input runtime1 = new Input() {
+                private static final long serialVersionUID = -4312210760957471033L;
+                
+                @Override
+                public void showMessage() {
+                    stopSetNext(CardFactoryUtil.input_discard(ability1, 1));
+                    
+                }
+            };
+            
+            ability1.setStackDescription(card + " gets a +1/+1 counter. ");
+            ability1.setDescription("2, Discard a card: put a +1/+1 counter on Flowstone Sculpture.");
+            card.addSpellAbility(ability1);
+            ability1.setBeforePayMana(runtime1);
+            
+            final Ability ability2 = new Ability(card, "2") {
+                @Override
+                public boolean canPlayAI() {
+                   return false;
+                }
+
+                @Override
+                public void resolve() {
+                    card.addIntrinsicKeyword("Flying");
+                }//resolve()
+            };//SpellAbility
+            
+
+            Input runtime2 = new Input() {
+                private static final long serialVersionUID = -4312210745957471033L;
+                
+                @Override
+                public void showMessage() {
+                    stopSetNext(CardFactoryUtil.input_discard(ability2, 1));
+                    
+                }
+            };
+            
+            ability2.setStackDescription(card + " gains flying. ");
+            ability2.setDescription("2, Discard a card: Flowstone Sculpture gains flying.");
+            card.addSpellAbility(ability2);
+            ability2.setBeforePayMana(runtime2);
+            
+            final Ability ability3 = new Ability(card, "2") {
+                @Override
+                public boolean canPlayAI() {
+                   return false;
+                }
+
+                @Override
+                public void resolve() {
+                    card.addIntrinsicKeyword("First Strike");
+                }//resolve()
+            };//SpellAbility
+            
+
+            Input runtime3 = new Input() {
+                private static final long serialVersionUID = -4312213760957471033L;
+                
+                @Override
+                public void showMessage() {
+                    stopSetNext(CardFactoryUtil.input_discard(ability3, 1));
+                    
+                }
+            };
+            
+            ability3.setStackDescription(card + " gains First Strike. ");
+            ability3.setDescription("2, Discard a card: FlowStone Sculpture gains first strike.");
+            card.addSpellAbility(ability3);
+            ability3.setBeforePayMana(runtime3);
+            
+            final Ability ability4 = new Ability(card, "2") {
+                @Override
+                public boolean canPlayAI() {
+                   return false;
+                }
+
+                @Override
+                public void resolve() {
+                    card.addIntrinsicKeyword("Trample");
+                }//resolve()
+            };//SpellAbility
+            
+
+            Input runtime4 = new Input() {
+                private static final long serialVersionUID = -4312210700957472033L;
+                
+                @Override
+                public void showMessage() {
+                    stopSetNext(CardFactoryUtil.input_discard(ability4, 1));
+                    
+                }
+            };
+            
+            ability4.setStackDescription(card + " gains trample. ");
+            ability4.setDescription("2, Discard a card: Flowstone Sculpture gains trample.");
+            card.addSpellAbility(ability4);
+            ability4.setBeforePayMana(runtime4);
+            
+            
+        }//*************** END ************ END **************************
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Wild Mongrel")) {
         	
@@ -9659,6 +9811,60 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability2);
             ability2.setStackDescription(card.getController() + " returns Arcanis back to owner's hand.");
             ability2.setDescription("2 U U: Return Arcanis the Omnipotent to its owner's hand.");
+            
+        }//*************** END ************ END ************************** 
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Blinking Spirit")) {
+            
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getOwner());
+                    
+                    card.untap();
+                    AllZone.getZone(card).remove(card);
+                    if(!card.isToken()) hand.add(card);
+                    
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+            }; 
+            
+            card.addSpellAbility(ability);
+            ability.setStackDescription(card.getController() + " returns Blinking Spirit back to owner's hand.");
+            ability.setDescription("0: return Blinking Spirit to its owner's hand.");
+            
+        }//*************** END ************ END ************************** 
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Selenia Dark Angel")) {
+            
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getOwner());
+                    life.subtractLife(2,card);
+                    
+                    card.untap();
+                    AllZone.getZone(card).remove(card);
+                    if(!card.isToken()) hand.add(card);
+                    
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+            }; 
+            
+            card.addSpellAbility(ability);
+            ability.setStackDescription(card.getController() + " returns Selenia Dark Angel back to owner's hand.");
+            ability.setDescription("Pay 2 life: return Selenia Dark Angel to its owner's hand.");
             
         }//*************** END ************ END ************************** 
         
@@ -15025,6 +15231,100 @@ public class CardFactory_Creatures {
                 	int XCounters = card.getXManaCostPaid();
                 	if(XCounters >= 5) XCounters = 2 * XCounters;
                     card.addCounter(Counters.P1P1, XCounters);                   
+                }//execute()
+            };//Command
+            card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Workhorse")) {      
+            
+            final Ability_Mana ability = new Ability_Mana(card, "0: add 1") {
+				private static final long serialVersionUID = -6764282980691397966L;
+
+				@Override
+                public boolean canPlayAI() {
+					return false;
+                }
+               
+                @Override
+                public void resolve() {
+                	
+                    card.subtractCounter(Counters.P1P1,1);
+                	super.resolve();
+                    
+                }
+                
+                @Override
+				public String mana() {
+					return "1";
+            	}
+            };
+            ability.setStackDescription(card + " adds 1 mana to mana pool. ");
+            ability.setDescription("Remove a +1/+1 counter: add 1 to your mana pool.");
+            card.addSpellAbility(ability);
+            
+            Command intoPlay = new Command() {
+                
+                private static final long serialVersionUID = 255901529244894L;
+                
+                public void execute() {
+                    card.addCounter(Counters.P1P1, 4);                   
+                }//execute()
+            };//Command
+            card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Mindless Automaton")) {      
+            
+            final Ability ability1 = new Ability(card, "1") {
+                @Override
+                public boolean canPlayAI() {
+                   return false;
+                }
+
+                @Override
+                public void resolve() {
+                	card.addCounter(Counters.P1P1,1);
+                }//resolve()
+            };//SpellAbility
+            
+
+            Input runtime1 = new Input() {
+                private static final long serialVersionUID = -4312210760057471033L;
+                
+                @Override
+                public void showMessage() {
+                    stopSetNext(CardFactoryUtil.input_discard(ability1, 1));
+                    
+                }
+            };
+            
+            ability1.setStackDescription(card + " gets a +1/+1 counter. ");
+            ability1.setDescription("1, Discard a card: put a +1/+1 counter on Mindless Automaton.");
+            card.addSpellAbility(ability1);
+            ability1.setBeforePayMana(runtime1);
+            
+        	final SpellAbility ability2 = new Ability(card, "0") {
+        		@Override
+        		public void resolve() {
+        			final String player = card.getController();
+        			AllZone.GameAction.drawCards(player, 1);
+        			card.subtractCounter(Counters.P1P1, 2);
+        		}   
+        	};
+        	
+            ability2.setStackDescription("Remove two +1/+1 counters: Draw a card.");
+            ability2.setDescription("Remove two +1/+1 counters: Draw a card.");
+            card.addSpellAbility(ability2);
+            
+            Command intoPlay = new Command() {
+                
+                private static final long serialVersionUID = 255901520244894L;
+                
+                public void execute() {
+                    card.addCounter(Counters.P1P1, 2);                   
                 }//execute()
             };//Command
             card.addComesIntoPlayCommand(intoPlay);
