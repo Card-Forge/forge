@@ -8,4 +8,5 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ EnchantedOwner | DamageSource$ Enchanted  | NumDmg$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enslave.jpg
+SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/70.jpg
 End

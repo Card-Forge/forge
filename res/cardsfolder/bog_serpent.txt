@@ -4,7 +4,8 @@ Types:Creature Serpent
 Text:no text
 PT:5/5
 K:CARDNAME can't attack unless defending player controls a Swamp.
-K:When you control no Swamps, sacrifice CARDNAME.  
+K:When you control no Swamps, sacrifice CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_serpent.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/84.jpg
 End
