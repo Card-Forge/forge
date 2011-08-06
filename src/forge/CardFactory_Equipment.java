@@ -123,9 +123,12 @@ class CardFactory_Equipment {
         
         //*************** START *********** START **************************
         else if (cardName.equals("Umbral Mantle")) {
-            final Ability equip = new Ability(card, "0") {
-            	
-                @Override
+        	Ability_Cost abCost = new Ability_Cost("0", cardName, true);
+        	Target target = new Target(card, "Select target creature you control", "Creature.YouCtrl".split(","));
+            final Ability_Activated equip = new Ability_Activated(card, abCost, target) {
+				private static final long serialVersionUID = -6122939616068165612L;
+
+				@Override
                 public void resolve() {
                     if (AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
@@ -139,15 +142,6 @@ class CardFactory_Equipment {
                         
                         card.equipCard(getTargetCard());
                     }
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
-                            && AllZone.Phase.getPlayerTurn().equals(card.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && !AllZone.Phase.getPhase().equals(
-                                    Constant.Phase.Combat_Declare_Blockers_InstantAbility);
                 }
                 
                 @Override
@@ -220,6 +214,8 @@ class CardFactory_Equipment {
             };//Command
             
             equip.setBeforePayMana(CardFactoryUtil.input_equipCreature(equip));
+            equip.getRestrictions().setSorcerySpeed(true);
+            
             
             equip.setDescription("Equip: 0");
             card.addSpellAbility(equip);
