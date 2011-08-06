@@ -9,4 +9,6 @@ SVar:PlayMain1:TRUE
 SVar:BuffedBy:Goblin
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_chieftain.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/141.jpg
+SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/139.jpg
 End

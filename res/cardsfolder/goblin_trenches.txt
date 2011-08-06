@@ -6,4 +6,5 @@ Text:no text
 A:AB$Token | Cost$ 2 Sac<1/Land> | TokenAmount$ 2 | TokenName$ Goblin Soldier | TokenTypes$ Creature,Goblin,Soldier | TokenOwner$ Controller | TokenColors$ White,Red | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put two 1/1 red and white Goblin Soldier creature tokens onto the battlefield.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_trenches.jpg
+SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/104.jpg
 End

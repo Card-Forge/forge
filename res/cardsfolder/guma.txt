@@ -6,4 +6,5 @@ PT:2/2
 K:Protection from blue
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guma.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/197.jpg
 End

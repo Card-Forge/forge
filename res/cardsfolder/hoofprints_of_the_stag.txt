@@ -4,4 +4,5 @@ Types:Tribal Enchantment Elemental
 Text:Whenever you draw a card, you may put a hoofprint counter on Hoofprints of the Stag.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hoofprints_of_the_stag.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/21.jpg
 End

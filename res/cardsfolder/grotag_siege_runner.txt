@@ -6,4 +6,5 @@ PT:2/1
 K:abDestroyTgtV R Sac<1/CARDNAME>:Creature.withDefender:Drawback$DamageTgtCtrlr/2:Destroy target creature with defender. Grotag Siege-Runner deals 2 damage to that creature's controller.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grotag_siege_runner.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/149.jpg
 End

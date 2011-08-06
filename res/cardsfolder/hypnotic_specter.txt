@@ -6,4 +6,11 @@ PT:2/2
 K:Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hypnotic_specter.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/21.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/26.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/141.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/151.jpg
+SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/100.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/23.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/21.jpg
 End

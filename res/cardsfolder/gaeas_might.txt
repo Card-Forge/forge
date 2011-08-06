@@ -6,4 +6,5 @@ K:spPumpTgt:+X/+X:Domain - Target creature gets +1/+1 until end of turn for each
 SVar:X:Count$Domain
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaeas_might.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/81.jpg
 End

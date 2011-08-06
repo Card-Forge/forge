@@ -6,4 +6,5 @@ PT:2/2
 K:Multikicker 1 G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gnarlid_pack.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/101.jpg
 End

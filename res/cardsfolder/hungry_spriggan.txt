@@ -7,4 +7,5 @@ K:Trample
 K:WheneverKeyword:Attacks:Self:Play:StatsPumpEOT/3/3:Self:ASAP:No_Condition:No Special Condition:Whenever Hungry Spriggan attacks, it gets +3/+3 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hungry_spriggan.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/120.jpg
 End

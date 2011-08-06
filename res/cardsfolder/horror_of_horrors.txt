@@ -6,4 +6,6 @@ A:AB$Regenerate | ValidTgts$ Creature.Black | TgtPrompt$ Select target black cre
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horror_of_horrors.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/140.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/20.jpg
 End

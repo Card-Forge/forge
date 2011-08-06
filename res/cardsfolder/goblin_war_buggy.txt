@@ -7,4 +7,5 @@ K:Haste
 K:Echo:1 R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_war_buggy.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/196.jpg
 End

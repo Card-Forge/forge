@@ -6,4 +6,5 @@ PT:3/3
 K:abPump U:Shroud
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_crab.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/66.jpg
 End

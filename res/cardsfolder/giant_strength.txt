@@ -6,4 +6,9 @@ K:Enchant creature
 K:enPump:+2/+2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_strength.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/178.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/233.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/181.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/214.jpg
+SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/147.jpg
 End

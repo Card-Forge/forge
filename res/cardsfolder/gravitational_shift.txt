@@ -8,4 +8,5 @@ SVar:PlayMain1:TRUE
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravitational_shift.jpg
+SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/69.jpg
 End

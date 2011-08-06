@@ -9,4 +9,6 @@ K:BR, tap: add R R
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graven_cairns.jpg
+SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/175.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/272.jpg
 End

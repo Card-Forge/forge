@@ -7,4 +7,5 @@ K:Echo:5 R
 K:etbDestroyTgt:Creature.withFlying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hammerheim_deadeye.jpg
+SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/101.jpg
 End

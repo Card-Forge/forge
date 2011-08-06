@@ -6,4 +6,5 @@ PT:1/1
 K:abDestroyTgtV T Sac<1/CARDNAME>:Aura:Destroy target Aura.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haazda_exonerator.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/11.jpg
 End

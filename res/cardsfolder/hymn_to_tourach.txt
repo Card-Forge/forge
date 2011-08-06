@@ -5,4 +5,5 @@ Text:no text
 K:spDiscardTgt:AtRandom:2:Target player discards two cards at random.:Hymn to Tourach - target player discards cards
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/fe/en-us/card1849.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/12.jpg
 End

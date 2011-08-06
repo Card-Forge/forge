@@ -8,4 +8,5 @@ K:Vigilance
 K:Echo:2 W W
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/herald_of_serra.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/17.jpg
 End

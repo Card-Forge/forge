@@ -7,4 +7,5 @@ K:Flying
 K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:TapPermanent:NormalInput/Creature:ASAP:No_Condition:ControllerUpkeep:At the beginning of your upkeep, tap target creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harrier_griffin.jpg
+SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/9.jpg
 End

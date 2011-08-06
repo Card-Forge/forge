@@ -7,4 +7,5 @@ K:abPumpTgtC T:CARDNAME can't block.
 K:abPump S:Haste
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_rimerunner.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/83.jpg
 End

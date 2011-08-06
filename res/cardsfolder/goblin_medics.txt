@@ -6,4 +6,5 @@ PT:1/1
 K:WheneverKeyword:BecomesTapped:Self:Play:Damage/1:InputType - CreatureORPlayer:ASAP:No_Condition:SingleTarget:Whenever Goblin Medics becomes tapped, it deals 1 damage to target creature or player.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_medics.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/79.jpg
 End

@@ -6,4 +6,5 @@ K:spDestroyTgt:Creature.nonBlack:Drawback$LoseLifeTgtCtrlr/2
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hideous_end.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/98.jpg
 End

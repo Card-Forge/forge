@@ -6,4 +6,5 @@ K:Comes into play tapped.
 K:tap: add U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/halimar_depths.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/137.jpg
 End

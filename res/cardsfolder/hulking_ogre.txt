@@ -6,4 +6,6 @@ PT:3/3
 K:CARDNAME can't block.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20197.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/87.jpg
+SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/108.jpg
 End

@@ -7,4 +7,5 @@ K:abPumpTgtC 3 G:+2/+2
 K:abDamageTgtP 3 R Sac<1/Land>:2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_guildmage.jpg
+SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/144.jpg
 End

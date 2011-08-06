@@ -5,4 +5,5 @@ Text:Whenever enchanted creature deals damage, Guilty Conscience deals that much
 K:Enchant creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guilty_conscience.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/17.jpg
 End

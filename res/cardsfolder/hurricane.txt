@@ -4,4 +4,15 @@ Types:Sorcery
 Text:no text
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hurricane.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/109.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/252.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/135.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po2/69.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/137.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/270.jpg
+SetInfo:P02|Rare|http://magiccards.info/scans/en/po2/69.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/237.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/109.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/165.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/109.jpg
 End

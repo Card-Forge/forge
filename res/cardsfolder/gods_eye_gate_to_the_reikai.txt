@@ -6,4 +6,5 @@ K:tap: add 1
 SVar:SacMe:1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gods_eye_gate_to_the_reikai.jpg
+SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/164.jpg
 End

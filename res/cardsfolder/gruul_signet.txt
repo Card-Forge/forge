@@ -6,4 +6,5 @@ K:1, tap: add R G
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_signet.jpg
+SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/150.jpg
 End

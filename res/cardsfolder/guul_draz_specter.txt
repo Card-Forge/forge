@@ -6,4 +6,5 @@ PT:2/2
 K:Flying
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guul_draz_specter.jpg
+SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/92.jpg
 End

@@ -7,4 +7,5 @@ K:CostChange:All:More:1:Spell:green:Creature:NoSpecial
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/high_seas.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/83.jpg
 End

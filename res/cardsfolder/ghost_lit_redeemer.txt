@@ -7,4 +7,5 @@ A:AB$GainLife | Cost$ 1 W Discard<1/CARDNAME> | LifeAmount$ 4 | ActivatingZone$ 
 PT:1/1
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card74082.jpg
+SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/10.jpg
 End

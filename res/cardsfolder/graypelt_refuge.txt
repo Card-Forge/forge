@@ -6,4 +6,5 @@ K:tap: add W
 K:tap: add G
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graypelt_refuge.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/214.jpg
 End

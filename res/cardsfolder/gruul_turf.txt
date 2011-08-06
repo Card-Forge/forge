@@ -8,4 +8,5 @@ K:Tap: add R G
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_turf.jpg
+SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/158.jpg
 End

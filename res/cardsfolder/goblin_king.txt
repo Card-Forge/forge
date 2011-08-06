@@ -7,4 +7,14 @@ K:stPumpAll:Creature.Goblin+Other:1/1/Mountainwalk:No Condition:Other Goblin cre
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_king.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/190.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/156.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/190.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/236.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/216.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/192.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/207.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/185.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/154.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/155.jpg
 End

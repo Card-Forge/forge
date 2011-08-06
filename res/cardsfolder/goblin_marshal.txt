@@ -6,4 +6,5 @@ PT:3/3
 K:Echo:4 R R
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_marshal.jpg
+SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/85.jpg
 End

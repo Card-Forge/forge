@@ -5,4 +5,5 @@ Text:no text
 PT:3/3
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/bok/en-us/card74435.jpg
+SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/127.jpg
 End

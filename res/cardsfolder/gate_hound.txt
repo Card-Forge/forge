@@ -7,4 +7,5 @@ K:stPumpAll:Creature.YouCtrl:0/0/Vigilance:isEnchanted:Creatures you control hav
 SVar:EnchantMe:Once
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gate_hound.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/19.jpg
 End

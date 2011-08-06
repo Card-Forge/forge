@@ -5,4 +5,5 @@ Text:Counter target blue spell.
 K:spCounter:Spell:Color(blue):Graveyard:None
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gainsay.jpg
+SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/26.jpg
 End

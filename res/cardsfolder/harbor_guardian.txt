@@ -7,4 +7,5 @@ K:Reach
 K:WheneverKeyword:Attacks:Self:Play:DrawCards/1:ControllingPlayer_Opponent:ASAP:Opponent_Yes_No:No Special Condition:Whenever Harbor Guardian attacks, defending player may draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harbor_guardian.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/326.jpg
 End

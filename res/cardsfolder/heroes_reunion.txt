@@ -5,4 +5,5 @@ Text:no text
 K:spGainLifeTgt:7
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heroes_reunion.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/250.jpg
 End

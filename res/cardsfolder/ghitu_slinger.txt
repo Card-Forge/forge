@@ -7,4 +7,5 @@ K:WheneverKeyword:EntersBattleField:Self:Play:Damage/2:InputType - CreatureORPla
 K:Echo:2 R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghitu_slinger.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/77.jpg
 End

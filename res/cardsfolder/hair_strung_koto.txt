@@ -6,4 +6,5 @@ A:AB$Mill | Cost$ tapXType<1/Creature> | NumCards$ 1 | ValidTgts$ Player | TgtPr
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hair_strung_koto.jpg
+SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/252.jpg
 End

@@ -6,4 +6,5 @@ PT:2/2
 K:WheneverKeyword:EntersBattleField:Type/Land:Play:ModifyLife/2:ControllingPlayer_Self:ASAP:Yes_No:Initiator - OwnedByController:Landfall - Whenever a land enters the battlefield under your control, you may gain 2 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grazing_gladehart.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/163.jpg
 End

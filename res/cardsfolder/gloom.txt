@@ -7,4 +7,9 @@ K:CostChange:All:More:3:Ability:white:Enchantment:NoSpecial
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gloom.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/27.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/19.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/21.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/23.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/19.jpg
 End

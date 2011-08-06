@@ -7,4 +7,5 @@ A:AB$DestroyAll | Cost$ X R T Discard<1/Any> | ValidCards$ Artifact.cmcLEX | Spe
 SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hammer_mage.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/193.jpg
 End

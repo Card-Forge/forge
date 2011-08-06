@@ -4,4 +4,5 @@ Types:Artifact
 Text:When a player plays a land, that player draws a card.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horn_of_greed.jpg
+SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/129.jpg
 End

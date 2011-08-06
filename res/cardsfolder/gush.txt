@@ -4,4 +4,5 @@ Types:Instant
 Text:no text
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gush.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/82.jpg
 End

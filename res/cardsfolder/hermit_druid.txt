@@ -5,4 +5,5 @@ Text:G, tap: Reveal cards from the top of your library until you reveal a basic 
 PT:1/1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hermit_druid.jpg
+SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/58.jpg
 End

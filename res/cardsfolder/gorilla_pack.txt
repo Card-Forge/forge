@@ -7,4 +7,5 @@ K:CARDNAME can't attack unless defending player controls a Forest.
 K:When you control no Forests, sacrifice CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gorilla_pack.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/135.jpg
 End

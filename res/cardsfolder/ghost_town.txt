@@ -7,4 +7,5 @@ A:AB$Bounce | Cost$ 0 | Destination$ Hand | OpponentTurn$ True | SpellDescriptio
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghost_town.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/312.jpg
 End

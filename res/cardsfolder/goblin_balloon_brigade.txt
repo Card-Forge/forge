@@ -6,4 +6,10 @@ PT:1/1
 K:abPump R:Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84540.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/155.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/215.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/189.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/140.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/153.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/154.jpg
 End

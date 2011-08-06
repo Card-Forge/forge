@@ -8,4 +8,5 @@ K:Echo:1 B
 K:abPump BR:+1/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/henchfiend_of_ukor.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/117.jpg
 End

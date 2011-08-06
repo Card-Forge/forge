@@ -8,4 +8,5 @@ SVar:PlayMain1:TRUE
 SVar:BuffedBy:Goblin
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_warchief.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/97.jpg
 End

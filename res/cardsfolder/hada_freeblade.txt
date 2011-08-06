@@ -6,4 +6,5 @@ PT:0/1
 SVar:BuffedBy:Ally
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hada_freeblade.jpg
+SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/7.jpg
 End

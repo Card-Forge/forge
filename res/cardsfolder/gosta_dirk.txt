@@ -7,4 +7,5 @@ K:First Strike
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gosta_dirk.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/267.jpg
 End

@@ -7,4 +7,5 @@ SVar:Buyback:2
 K:Storm
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haze_of_rage.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/100.jpg
 End

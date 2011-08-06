@@ -5,4 +5,5 @@ Text:no text
 K:spDamageAll:Creature.withFlying:5:Gale Force deals 5 damage to each creature with flying.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gale_force.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/209.jpg
 End

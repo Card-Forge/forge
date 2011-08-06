@@ -5,4 +5,5 @@ Text:no text
 K:spDamageTgtCP:1:Hornet Sting deals 1 damage to target creature or player.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hornet_sting.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/181.jpg
 End

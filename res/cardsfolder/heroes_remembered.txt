@@ -6,4 +6,5 @@ K:spGainLife:20
 K:Suspend:10:W
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heroes_remembered.jpg
+SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/7.jpg
 End

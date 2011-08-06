@@ -6,4 +6,7 @@ K:spDamageTgtP:X:Goblin War Strike deals damage equal to the number of Goblins y
 SVar:X:Count$TypeYouCtrl.Goblin
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_war_strike.jpg
+SetInfo:P02|Common|http://magiccards.info/scans/en/po2/105.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/96.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po2/105.jpg
 End

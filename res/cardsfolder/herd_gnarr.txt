@@ -7,4 +7,5 @@ K:WheneverKeyword:EntersBattleField:Type/Creature:Play:StatsPumpEOT/2/2:Self:ASA
 SVar:BuffedBy:Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/herd_gnarr.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/200.jpg
 End

@@ -4,4 +4,7 @@ Types:Planeswalker - Garruk
 Text:no text
 SVar:Rarity:Mythic
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card140205.jpg
+SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/175.jpg
+SetInfo:M10|Mythic|http://magiccards.info/scans/en/m10/183.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/213.jpg
 End

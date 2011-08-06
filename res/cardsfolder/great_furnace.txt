@@ -5,4 +5,5 @@ Text:(Great Furnace isn't a spell.)
 K:tap: add R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/great_furnace.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/282.jpg
 End

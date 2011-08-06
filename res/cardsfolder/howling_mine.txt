@@ -4,4 +4,15 @@ Types:Artifact
 Text:At the beginning of each player's draw step, if Howling Mine is untapped, that player draws a card.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/howling_mine.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/303.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/249.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/300.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/377.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/343.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/298.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/325.jpg
+SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/212.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/289.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/251.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/248.jpg
 End

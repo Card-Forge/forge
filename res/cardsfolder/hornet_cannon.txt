@@ -3,7 +3,8 @@ ManaCost:4
 Types:Artifact
 Text:no text
 #K:abMakeToken 3 T<>1<>Hornet<>C 1 1 Hornet<>Controller<>1<>Artifact;Creature;Insect<>1<>1<>Flying;Haste;HIDDEN At the beginning of the end step, destroy CARDNAME.<>put a 1/1 colorless Insect artifact creature token with flying and haste named Hornet onto the battlefield. Destroy it at the beginning of the next end step.
-A:AB$Token | Cost$ 3 T | TokenAmount$ 1 | TokenName$ Hornet | TokenTypes$ Artifact,Creature,Insect | TokenOwner$ Controller | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying<>Haste<>HIDDEN At the beginning of the end step, destroy CARDNAME. | SpellDescription$ Put a 1/1 colorless Insect artifact creature token with flying and haste named Hornet onto the battlefield. Destroy it at the beginning of the next end step.  
+A:AB$Token | Cost$ 3 T | TokenAmount$ 1 | TokenName$ Hornet | TokenTypes$ Artifact,Creature,Insect | TokenOwner$ Controller | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying<>Haste<>HIDDEN At the beginning of the end step, destroy CARDNAME. | SpellDescription$ Put a 1/1 colorless Insect artifact creature token with flying and haste named Hornet onto the battlefield. Destroy it at the beginning of the next end step.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hornet_cannon.jpg
+SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/130.jpg
 End

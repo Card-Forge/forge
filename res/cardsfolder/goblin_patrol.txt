@@ -6,4 +6,5 @@ PT:2/1
 K:Echo:R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_patrol.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/193.jpg
 End

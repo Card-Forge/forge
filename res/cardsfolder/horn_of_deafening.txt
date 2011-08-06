@@ -6,4 +6,5 @@ K:abPumpTgtC 2 T:HIDDEN Prevent all combat damage that would be dealt by CARDNAM
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horn_of_deafening.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/224.jpg
 End

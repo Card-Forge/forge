@@ -6,4 +6,5 @@ PT:1/1
 K:Morph:B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/headhunter.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/156.jpg
 End

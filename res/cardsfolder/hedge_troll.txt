@@ -7,4 +7,5 @@ K:stPumpSelf:Creature:1/1:isPresent Plains.YouCtrl:CARDNAME gets +1/+1 as long a
 A:AB$Regenerate | Cost$ W | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hedge_troll.jpg
+SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/151.jpg
 End

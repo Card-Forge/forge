@@ -6,4 +6,5 @@ PT:2/2
 K:abPump 0:-1/-1/Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hopping_automaton.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/297.jpg
 End

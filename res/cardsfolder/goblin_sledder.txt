@@ -6,4 +6,5 @@ PT:1/1
 K:abPumpTgtC Sac<1/Goblin>:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_sledder.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/209.jpg
 End

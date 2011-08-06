@@ -7,4 +7,5 @@ K:Enchant creature
 K:enPump:+0/+2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gift_of_granite.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/7.jpg
 End

@@ -10,4 +10,5 @@ K:tap: add G
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glimmervoid.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/281.jpg
 End

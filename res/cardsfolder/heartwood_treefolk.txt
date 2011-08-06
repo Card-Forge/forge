@@ -6,4 +6,5 @@ PT:3/4
 K:Forestwalk
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4767.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/127.jpg
 End

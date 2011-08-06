@@ -8,4 +8,5 @@ K:CARDNAME doesn't untap during your untap step.
 K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:UntapPermanent:Self:ASAP:PayMana/4:ControllerUpkeep:At the beginning of your upkeep, you may pay 4. If you do, untap Goblin Dirigible.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_dirigible.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/177.jpg
 End

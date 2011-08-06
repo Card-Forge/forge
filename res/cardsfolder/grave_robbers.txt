@@ -6,4 +6,5 @@ PT:1/1
 A:AB$Retrieve | Cost$ B T | Destination$ Exile | TgtPrompt$ Choose target artifact card in a graveyard | ValidTgts$ Artifact | SubAbility$ YouGainLife/2 | SpellDescription$ Exile target artifact card from a graveyard. You gain 2 life.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_robbers.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/8.jpg
 End

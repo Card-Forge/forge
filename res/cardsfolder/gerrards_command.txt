@@ -5,4 +5,5 @@ Text:no text
 K:spPumpTgt:+3/+3:Drawback$UntapTgt:Untap target creature. It gets +3/+3 until end of turn.:Untap target creature. It gets +3/+3 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gerrards_command.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/109.jpg
 End

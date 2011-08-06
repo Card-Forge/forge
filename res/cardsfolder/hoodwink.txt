@@ -5,4 +5,5 @@ Text:no text
 A:SP$Bounce | Cost$ 1 U | ValidTgts$ Artifact,Enchantment,Land | TgtPrompt$ Select target artifact, enchantment, or land | Destination$ Hand | SpellDescription$ Return target artifact, enchantment, or land to its owner's hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hoodwink.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/84.jpg
 End

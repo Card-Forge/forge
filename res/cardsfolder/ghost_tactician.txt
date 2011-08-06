@@ -6,4 +6,5 @@ PT:2/5
 K:abAllPump W T:YouCtrl:+1/+0:Drawback$YouDiscard/1:Creatures you control get +1/+0 until end of turn.:Ghost Tactician - creatures get +1/+0 until EOT
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghost_tactician.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/6.jpg
 End

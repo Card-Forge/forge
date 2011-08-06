@@ -5,4 +5,8 @@ Text:When Goblin Matron comes into play, you may search your library for a Gobli
 PT:1/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_matron.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/191.jpg
+SetInfo:P02|Uncommon|http://magiccards.info/scans/en/po2/100.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po2/100.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/191.jpg
 End

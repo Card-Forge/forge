@@ -8,4 +8,5 @@ K:WheneverKeyword:EntersBattleField:Type/Artifact:Play:StatsPumpEOT/2/2:Self:ASA
 SVar:BuffedBy:Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glaze_fiend.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/77.jpg
 End

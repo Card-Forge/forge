@@ -7,4 +7,7 @@ K:abDamageTgtV T:2:Creature.attacking,Creature.blocking:Heavy Ballista deals 2 d
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heavy_ballista.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/133.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/23.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/19.jpg
 End

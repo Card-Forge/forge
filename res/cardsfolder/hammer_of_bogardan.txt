@@ -6,4 +6,7 @@ A:SP$DealDamage | Cost$ 1 R R | Tgt$ TgtCP | NumDmg$ 3 | SpellDescription$ CARDN
 A:AB$Retrieve | Cost$ 2 R R R | Destination$ Hand | ActivatingZone$ Graveyard | ActivatingPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Return Hammer of Bogardan from your graveyard to your hand. Activate this ability only during your upkeep.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hammer_of_bogardan.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/193.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/188.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/181.jpg
 End

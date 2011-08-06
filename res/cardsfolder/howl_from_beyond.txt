@@ -6,4 +6,12 @@ K:spPumpTgt:+X/+0:Target creature gets +X/+0 until end of turn.
 SVar:X:Count$xPaid
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/howl_from_beyond.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/20.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/142.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/30.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/25.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/20.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/138.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/22.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/20.jpg
 End

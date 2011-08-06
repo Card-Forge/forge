@@ -6,4 +6,5 @@ PT:3/2
 K:Trample
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/garruks_companion.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/176.jpg
 End

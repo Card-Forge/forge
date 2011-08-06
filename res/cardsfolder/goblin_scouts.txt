@@ -6,4 +6,5 @@ Text:Put three 1/1 red Goblin Scout creature tokens with mountainwalk onto the b
 A:SP$Token | Cost$ 3 R R | TokenAmount$ 3 | TokenName$ Goblin Scout | TokenTypes$ Creature,Goblin,Scout | TokenOwner$ Controller | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Mountainwalk
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_scouts.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/178.jpg
 End

@@ -8,4 +8,5 @@ SVar:BuffedBy:Spell.Blue
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glade_gnarr.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/78.jpg
 End

@@ -6,4 +6,5 @@ K:spDestroyAll:Creature.nonBlack:Drawback$DamageYou/X.Plus.3
 SVar:X:Count$TypeOnBattlefield.Creature.nonBlack
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellfire.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/18.jpg
 End

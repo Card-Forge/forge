@@ -9,4 +9,5 @@ SVar:X:Count$Valid Aura.Attached
 SVar:EnchantMe:Multiple
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gatherer_of_graces.jpg
+SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/85.jpg
 End

@@ -6,4 +6,9 @@ PT:1/1
 K:abPump W:+0/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/honor_guard.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/25.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/23.jpg
+SetInfo:STH|Common|http://magiccards.info/scans/en/sh/107.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/20.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/21.jpg
 End

@@ -5,4 +5,5 @@ Text:no text
 A:AB$PutCounter | Cost$ 4 T | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target Creature | CounterType$ M1M1 | CounterNum$ 1 | SpellDescription$ Put a -1/-1 counter on target creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gnarled_effigy.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/251.jpg
 End

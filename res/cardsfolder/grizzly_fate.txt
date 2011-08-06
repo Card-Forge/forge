@@ -4,4 +4,5 @@ Types:Sorcery
 Text:Put two 2/2 green Bear creature tokens into play.\r\nThreshold - Put four 2/2 green Bear creature tokens into play instead if seven or more cards are in your graveyard.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grizzly_fate.jpg
+SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/119.jpg
 End

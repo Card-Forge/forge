@@ -6,4 +6,5 @@ PT:1/1
 K:abAddReflectedMana:Color:You
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harvester_druid.jpg
+SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/120.jpg
 End

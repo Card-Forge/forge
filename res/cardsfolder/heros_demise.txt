@@ -5,4 +5,5 @@ Text:Destroy target legendary creature.
 K:spDestroyTgt:Creature.Legendary
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heros_demise.jpg
+SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/68.jpg
 End

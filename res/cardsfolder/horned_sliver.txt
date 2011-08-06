@@ -6,4 +6,5 @@ PT:2/2
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horned_sliver.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/128.jpg
 End

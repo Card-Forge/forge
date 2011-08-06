@@ -7,4 +7,5 @@ K:Unblockable
 K:etbMakeToken<>5<>Goblin<>R 1 1 Goblin<>COpponent<>R<>Creature;Goblin<>1<>1<>None<>put five 1/1 red Goblin creature tokens onto the battlefield under target opponent's control.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunted_phantasm.jpg
+SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/55.jpg
 End

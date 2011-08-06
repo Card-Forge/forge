@@ -5,4 +5,5 @@ Text:Whenever Glint-Eye Nephilim deals combat damage to a player, draw that many
 PT:2/2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glint_eye_nephilim.jpg
+SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/115.jpg
 End

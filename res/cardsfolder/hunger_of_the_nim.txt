@@ -6,4 +6,5 @@ K:spPumpTgt:+X/+0:Target creature gets +1/+0 for each artifact you control.:Hung
 SVar:X:Count$TypeYouCtrl.Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunger_of_the_nim.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/46.jpg
 End

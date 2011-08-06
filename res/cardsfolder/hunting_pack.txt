@@ -7,4 +7,5 @@ A:SP$Token | Cost$ 5 G G | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creat
 K:Storm
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_pack.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/121.jpg
 End

@@ -7,4 +7,5 @@ K:Protection from white
 K:Bushido 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card74063.jpg
+SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/71.jpg
 End

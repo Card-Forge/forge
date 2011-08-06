@@ -5,4 +5,5 @@ Text:Whenever you play a creature spell, Halcyon Glaze becomes a 4/4 Illusion cr
 SVar:BuffedBy:Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/halcyon_glaze.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/54.jpg
 End

@@ -7,4 +7,5 @@ K:Trample
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graypelt_hunter.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/103.jpg
 End

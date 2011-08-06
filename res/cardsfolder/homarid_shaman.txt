@@ -7,4 +7,5 @@ K:abTapTgt U:Creature.Green:Tap target green creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homarid_shaman.jpg
+SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/42.jpg
 End

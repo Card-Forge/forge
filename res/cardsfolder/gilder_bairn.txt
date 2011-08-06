@@ -5,4 +5,5 @@ Text:no text
 PT:1/3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gilder_bairn.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/152.jpg
 End

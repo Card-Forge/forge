@@ -7,4 +7,5 @@ A:AB$DealDamage | Cost$ 3 R Discard<1/CARDNAME> | Tgt$ TgtC | NumDmg$ 4 | Activa
 PT:2/1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghost_lit_raider.jpg
+SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/99.jpg
 End

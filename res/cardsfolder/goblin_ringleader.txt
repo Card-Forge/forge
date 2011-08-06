@@ -7,4 +7,5 @@ K:Haste
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card27664.jpg
+SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/62.jpg
 End

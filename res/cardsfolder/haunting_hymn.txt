@@ -6,4 +6,5 @@ K:spDiscardTgt:TgtChoose:X:Target player discards two cards. If you cast this sp
 SVar:X:Count$IfMainPhase.4.2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haunting_hymn.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/112.jpg
 End

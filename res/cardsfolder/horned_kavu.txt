@@ -5,4 +5,5 @@ Text:When Horned Kavu comes into play, return a red or green creature you contro
 PT:3/4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horned_kavu.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/110.jpg
 End

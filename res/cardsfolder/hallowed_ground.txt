@@ -6,4 +6,5 @@ A:AB$Bounce | Cost$ W W | ValidTgts$Land.nonSnow+YouCtrl | TgtPrompt$ Target non
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hallowed_ground.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/253.jpg
 End

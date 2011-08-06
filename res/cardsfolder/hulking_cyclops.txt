@@ -6,4 +6,8 @@ PT:5/5
 K:CARDNAME can't block.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/vi/en-us/card3691.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/195.jpg
+SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/84.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/189.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/139.jpg
 End

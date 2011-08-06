@@ -8,4 +8,5 @@ K:abUntapTgt T:Artifact+YouDontCtrl:Untap target artifact you don't control.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hyperion_blacksmith.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/150.jpg
 End

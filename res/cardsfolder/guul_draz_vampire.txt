@@ -5,4 +5,5 @@ Text:As long as an opponent has 10 or less life, Guul Draz Vampire gets +2/+1 an
 PT:1/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guul_draz_vampire.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/93.jpg
 End

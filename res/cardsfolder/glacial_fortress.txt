@@ -7,4 +7,6 @@ K:tap: add W
 K:tap: add U
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glacial_fortress.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/225.jpg
+SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/226.jpg
 End

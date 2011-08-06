@@ -7,4 +7,5 @@ K:CARDNAME doesn't untap during your untap step.
 K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:UntapPermanent:Self:ASAP:PayMana/2:ControllerUpkeep:At the beginning of your upkeep, you may pay 2. If you do, untap Goblin War Wagon.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_war_wagon.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/179.jpg
 End

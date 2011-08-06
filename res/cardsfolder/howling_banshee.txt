@@ -7,4 +7,6 @@ K:Flying
 K:WheneverKeyword:EntersBattleField:Self:Play:ModifyLife/-3!ModifyLife/-3:ControllingPlayer_Self!ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:When Howling Banshee enters the battlefield, each player loses 3 life.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/howling_banshee.jpg
+SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/100.jpg
+SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/99.jpg
 End

@@ -8,4 +8,5 @@ K:Haste
 K:etbMakeToken<>3<>Knight<>W 2 2 Knight<>Opponent<>W<>Creature;Knight<>2<>2<>First Strike<>put three 2/2 white Knight creature tokens with first strike into play under target opponent's control.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunted_dragon.jpg
+SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/131.jpg
 End

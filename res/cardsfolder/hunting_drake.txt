@@ -7,4 +7,5 @@ K:Flying
 K:etbBounceTgt:Creature.Red,Creature.Green:TopofLibrary
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_drake.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/27.jpg
 End

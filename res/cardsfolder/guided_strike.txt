@@ -6,4 +6,6 @@ K:spPumpTgt:+1/+0/First Strike
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guided_strike.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/132.jpg
+SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/13.jpg
 End

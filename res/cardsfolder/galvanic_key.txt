@@ -7,4 +7,5 @@ K:abUntapTgt 3 T:Artifact:Untap target artifact.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/galvanic_key.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/173.jpg
 End

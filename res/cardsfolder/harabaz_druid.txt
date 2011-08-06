@@ -12,4 +12,5 @@ SVar:RemAIDeck:True
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harabaz_druid.jpg
+SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/105.jpg
 End

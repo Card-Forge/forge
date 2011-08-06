@@ -7,4 +7,5 @@ K:Flying
 K:Soulshift:3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gibbering_kami.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/112.jpg
 End

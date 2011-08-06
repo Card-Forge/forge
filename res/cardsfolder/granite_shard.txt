@@ -6,4 +6,5 @@ K:abDamageTgtCP 3 T:1
 K:abDamageTgtCP R T:1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/granite_shard.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/182.jpg
 End

@@ -7,4 +7,6 @@ A:AB$Mill | Cost$ T | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a play
 SVar:X:Count$CardCounters.CHARGE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grindclock.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/som/163.jpg
+SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/163.jpg
 End

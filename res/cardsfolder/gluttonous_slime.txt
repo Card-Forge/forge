@@ -7,4 +7,5 @@ K:Flash
 K:Devour:1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gluttonous_slime.jpg
+SetInfo:CON|Uncommon|http://magiccards.info/scans/en/cfx/83.jpg
 End

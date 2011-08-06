@@ -5,4 +5,5 @@ Text:Counter target blue instant spell.
 K:spCounter:Spell:Type(Instant) Color(blue):Graveyard:None
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guttural_response.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/208.jpg
 End

@@ -6,4 +6,5 @@ PT:2/1
 SVar:BuffedBy:Spell.Blue,Spell.Black
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravelgill_duo.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/165.jpg
 End

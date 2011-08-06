@@ -11,4 +11,5 @@ K:paintap:1:G
 K:Comes into play tapped.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grand_coliseum.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/319.jpg
 End

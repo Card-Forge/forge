@@ -7,4 +7,5 @@ A:SP$Token | Cost$ X 1 R R | TokenAmount$ X | TokenName$ Goblin | TokenTypes$ Cr
 SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_offensive.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/192.jpg
 End

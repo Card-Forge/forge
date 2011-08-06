@@ -4,4 +4,5 @@ Types:Legendary Enchantment Shrine
 Text:At the beginning of your upkeep, you gain 2 life for each Shrine you control.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/honden_of_cleansing_fire.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/14.jpg
 End

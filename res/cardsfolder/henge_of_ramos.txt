@@ -11,4 +11,5 @@ K:2, tap: add G
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/henge_of_ramos.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/318.jpg
 End

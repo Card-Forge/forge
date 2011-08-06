@@ -5,4 +5,7 @@ Text:Whenever Goblin General attacks, Goblin creatures you control get +1/+1 unt
 PT:1/1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Second_Age/goblin_general.jpg
+SetInfo:P02|Rare|http://magiccards.info/scans/en/po2/97.jpg
+SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/101.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po2/97.jpg
 End

@@ -7,4 +7,6 @@ A:AB$Retrieve | Cost$ T | TgtPrompt$ Choose target creature card in your graveya
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hua_tuo_honored_physician.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/p3k/137.jpg
+SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/137.jpg
 End

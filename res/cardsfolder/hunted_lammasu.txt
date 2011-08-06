@@ -7,4 +7,5 @@ K:Flying
 K:etbMakeToken<>1<>Horror<>B 4 4 Horror<>Opponent<>B<>Creature;Horror<>4<>4<>None<>put a 4/4 black Horror creature token onto the battlefield under target opponent's control.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunted_lammasu.jpg
+SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/22.jpg
 End

@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPump:+2/+2/Haste
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_war_paint.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/129.jpg
 End

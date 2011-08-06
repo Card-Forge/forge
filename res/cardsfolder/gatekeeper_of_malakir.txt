@@ -5,4 +5,5 @@ Text:When Gatekeeper of Malakir enters the battlefield, if it was kicked, target
 PT:2/2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gatekeeper_of_malakir.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/89.jpg
 End

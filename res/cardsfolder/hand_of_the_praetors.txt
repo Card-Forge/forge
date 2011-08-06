@@ -7,4 +7,6 @@ K:Infect
 K:stPumpOther:Creature.withInfect+YouCtrl:1/1:No Condition:Other creatures you control with infect get +1/+1.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hand_of_the_praetors.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/som/66.jpg
+SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/66.jpg
 End

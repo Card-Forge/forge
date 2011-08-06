@@ -4,8 +4,9 @@ Types:Creature Elemental
 Text:no text
 PT:5/5
 K:Wither
-K:abDamageTgtCP 2 R Untap:X:Hateflayer deals damage equal to its power to target creature or player. 
+K:abDamageTgtCP 2 R Untap:X:Hateflayer deals damage equal to its power to target creature or player.
 SVar:X:Count$CardPower
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hateflayer.jpg
+SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/55.jpg
 End

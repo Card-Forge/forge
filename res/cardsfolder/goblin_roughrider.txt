@@ -5,4 +5,5 @@ Text:no text
 PT:3/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_roughrider.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/82.jpg
 End

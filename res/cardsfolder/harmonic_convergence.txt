@@ -5,4 +5,5 @@ Text:Put all enchantments on top of their owners' libraries.
 K:spBounceAll:Enchantment:TopofLibrary
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harmonic_convergence.jpg
+SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/103.jpg
 End

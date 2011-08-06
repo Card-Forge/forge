@@ -6,4 +6,5 @@ PT:5/4
 K:Rampage 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunding_gjornersen.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/271.jpg
 End

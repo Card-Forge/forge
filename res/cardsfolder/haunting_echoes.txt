@@ -4,4 +4,7 @@ Types:Sorcery
 Text:Remove all cards in target player's graveyard other than basic land cards from the game. Search that player's library for all cards with the same name as cards removed this way, and remove them from the game. Then that player shuffles his or her library.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haunting_echoes.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/99.jpg
+SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/98.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/142.jpg
 End

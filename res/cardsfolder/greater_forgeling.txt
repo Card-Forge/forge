@@ -5,4 +5,5 @@ Text:no text
 PT:3/4
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87934.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/129.jpg
 End

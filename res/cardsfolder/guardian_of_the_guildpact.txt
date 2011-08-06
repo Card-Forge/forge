@@ -6,4 +6,5 @@ PT:2/3
 K:Protection:Card.MonoColor:Protection from monocolored
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_of_the_guildpact.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/10.jpg
 End

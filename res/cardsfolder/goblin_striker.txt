@@ -7,4 +7,5 @@ K:First Strike
 K:Haste
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_striker.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/94.jpg
 End

@@ -6,4 +6,6 @@ K:Comes into play tapped.
 K:tap: add R
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghitu_encampment.jpg
+SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/141.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/353.jpg
 End

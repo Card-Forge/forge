@@ -5,4 +5,7 @@ Text:When Highway Robber comes into play, you gain 2 life and target opponent lo
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84505.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/139.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/138.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/150.jpg
 End

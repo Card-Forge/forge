@@ -6,4 +6,5 @@ K:spDamageTgtCP:3
 K:CARDNAME is colorless.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostfire.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/115.jpg
 End

@@ -7,4 +7,5 @@ K:Flying
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card25910.jpg
+SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/12.jpg
 End

@@ -7,4 +7,5 @@ K:Trample
 K:etbMakeToken<>2<>Centaur<>G 3 3 Centaur<>Opponent<>G<>Creature;Centaur<>3<>3<>Protection from black<>put two 3/3 green Centaur creature tokens with protection from black onto the battlefield under target opponent's control.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunted_horror.jpg
+SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/90.jpg
 End

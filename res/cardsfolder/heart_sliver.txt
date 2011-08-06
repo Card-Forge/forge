@@ -8,4 +8,5 @@ SVar:BuffedBy:Sliver
 SVar:AntiBuffedBy:Sliver
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_sliver.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/182.jpg
 End

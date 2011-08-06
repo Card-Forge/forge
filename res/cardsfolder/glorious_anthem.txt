@@ -5,4 +5,9 @@ Text:Creatures you control get +1/+1.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83106.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/20.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/15.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/17.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/16.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/17.jpg
 End

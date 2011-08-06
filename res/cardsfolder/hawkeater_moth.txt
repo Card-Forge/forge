@@ -7,4 +7,5 @@ K:Flying
 K:Shroud
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hawkeater_moth.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/259.jpg
 End

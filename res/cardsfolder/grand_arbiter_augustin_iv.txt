@@ -8,4 +8,5 @@ K:CostChange:Player:Less:1:Spell:blue:All:NoSpecial
 K:CostChange:Opponent:More:1:Spell:All:All:NoSpecial
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grand_arbiter_augustin_iv.jpg
+SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/112.jpg
 End

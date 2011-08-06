@@ -5,4 +5,6 @@ Text:As long as Giant Tortoise is untapped, it gets +0/+3.
 PT:1/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_tortoise.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/76.jpg
+SetInfo:ARN|Common|http://magiccards.info/scans/en/an/20.jpg
 End

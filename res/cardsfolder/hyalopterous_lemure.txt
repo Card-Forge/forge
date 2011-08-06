@@ -6,4 +6,5 @@ PT:4/3
 K:abPump 0:-1/-0/Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hyalopterous_lemure.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/21.jpg
 End

@@ -7,4 +7,5 @@ K:abDrawCards U T:1:Drawback$YouDiscard/1:Draw a card, then discard a card.:Grix
 K:abPumpTgtC R T:CARDNAME can't block.:Target creature can't block this turn.:Grixis Battlemage - target creature cannot block this turn
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grixis_battlemage.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/78.jpg
 End

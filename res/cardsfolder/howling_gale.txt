@@ -6,4 +6,5 @@ K:spDamageAll:Player,Creature.withFlying:1:Howling Gale deals 1 damage to each c
 K:Flashback:1 G
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/howling_gale.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/244.jpg
 End

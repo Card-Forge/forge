@@ -7,4 +7,5 @@ K:Flying
 K:abPump U:Shroud
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glimmering_angel.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/17.jpg
 End

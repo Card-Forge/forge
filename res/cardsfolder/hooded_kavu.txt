@@ -6,4 +6,5 @@ PT:2/2
 K:abPump B:Fear
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hooded_kavu.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/147.jpg
 End

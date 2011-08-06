@@ -4,4 +4,9 @@ Types:Instant
 Text:Return all artifacts target player owns to his or her hand.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hurkyls_recall.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/93.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/60.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/77.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/88.jpg
+SetInfo:ATQ|Rare|http://magiccards.info/scans/en/aq/54.jpg
 End

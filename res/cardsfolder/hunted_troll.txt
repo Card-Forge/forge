@@ -7,4 +7,5 @@ A:AB$Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
 K:etbMakeToken<>4<>Faerie<>U 1 1 Faerie<>Opponent<>U<>Creature;Faerie<>1<>1<>Flying<>put four 1/1 blue Faerie creature tokens with flying into play under target opponent's control.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card89079.jpg
+SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/170.jpg
 End

@@ -6,4 +6,5 @@ PT:1/4
 K:abPump 1 R:+2/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hematite_golem.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/185.jpg
 End
