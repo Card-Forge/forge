@@ -4,6 +4,26 @@ Instant
 Return target artifact, enchantment, or land to its owner's hand.
 spBounceTgt:Artifact,Enchantment,Land
 
+Disperse
+1 U
+Instant
+Return target nonland permanent to its owner's hand.
+spBounceTgt:Artifact,Enchantment,Creature,Planeswalker
+
+Into Thin Air
+5 U
+Instant
+Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.) Return target artifact to its owner's hand.
+spBounceTgt:Artifact
+CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+
+Symbol of Unsummoning
+2 U
+Sorcery
+Return target creature to its owner's hand.
+spBounceTgt:Creature
+Draw a card.
+
 Exiled Boggart
 1 B
 Creature Goblin Rogue

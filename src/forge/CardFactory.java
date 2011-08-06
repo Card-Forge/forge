@@ -2353,7 +2353,7 @@ public class CardFactory implements NewConstants {
             String tmpDesc = card.getText().substring(15);
             int i = tmpDesc.indexOf(".");
             tmpDesc = tmpDesc.substring(0, i);
-            final String Selec = "Select target " + tmpDesc + " to return to owners hand.";
+            final String Selec = "Select target to return to owners hand.";
                        
             card.clearSpellAbility();
             
