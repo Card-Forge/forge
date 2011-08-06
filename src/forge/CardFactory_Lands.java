@@ -5,7 +5,6 @@ package forge;
 import java.util.HashMap;
 
 import javax.swing.JOptionPane;
-import com.esotericsoftware.minlog.Log;
 
 class CardFactory_Lands {
 
@@ -1156,7 +1155,7 @@ class CardFactory_Lands {
             else ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Library of Alexandria")) {
         	final Ability_Cost abCost = new Ability_Cost("T", cardName, true);
@@ -1180,6 +1179,7 @@ class CardFactory_Lands {
             draw.setStackDescription("Library of Alexandria - draw a card.");
             card.addSpellAbility(draw);
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Dark Depths")) {
