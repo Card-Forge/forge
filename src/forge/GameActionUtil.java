@@ -3003,10 +3003,11 @@ public class GameActionUtil {
 		AllZone.GameAction.checkWheneverKeyword(AllZone.CardFactory.HumanNullCard,"DrawCard",DrawCard_Whenever_Parameters);
 		drawCardTriggered_Hoofprints_of_the_Stag(player);
 		drawCardTriggered_Lorescale_Coatl(player);
-		drawCardTriggered_Underworld_Dreams(player);
+		//drawCardTriggered_Underworld_Dreams(player);
 		drawCardTriggered_Spiteful_Visions(player);
 	}
-
+	
+	/*
 	public static void drawCardTriggered_Underworld_Dreams(Player player) {
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player.getOpponent());
 		CardList list = new CardList(playZone.getCards());
@@ -3029,7 +3030,7 @@ public class GameActionUtil {
 			
 			AllZone.Stack.add(ability);
 		}
-	}
+	}*/
 	
 	private static void drawCardTriggered_Spiteful_Visions(final Player player) {
 		CardList list = AllZoneUtil.getCardsInPlay("Spiteful Visions");
