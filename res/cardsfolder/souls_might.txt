@@ -2,7 +2,7 @@ Name:Soul's Might
 ManaCost:4 G
 Types:Sorcery
 Text:no text
-A:SP$PutCounter | Cost$ 4 G | Tgt$ TgtC | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ Put X +1/+1 counters on target creature, where X is that creature's power.
+A:SP$ PutCounter | Cost$ 4 G | Tgt$ TgtC | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ Put X +1/+1 counters on target creature, where X is that creature's power.
 SVar:X:Targeted$CardPower
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/souls_might.jpg

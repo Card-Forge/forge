@@ -3,7 +3,7 @@ ManaCost:3 R R
 Types:Sorcery
 Text:no text
 K:Suspend:3:2 R
-A:SP$DealDamage | Cost$ 3 R R | Tgt$ TgtCP | NumDmg$ 2 | SubAbility$ SVar=DBChange |  SpellDescription$ Arc Blade deals 2 damage to target creature or player. Exile Arc Blade with three time counters on it.
+A:SP$ DealDamage | Cost$ 3 R R | Tgt$ TgtCP | NumDmg$ 2 | SubAbility$ SVar=DBChange |  SpellDescription$ CARDNAME deals 2 damage to target creature or player. Exile CARDNAME with three time counters on it.
 SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Exile | SubAbility$ SVar=DBPutCounter
 SVar:DBPutCounter:DB$PutCounter | CounterType$ TIME | CounterNum$ 3
 SVar:Rarity:Uncommon

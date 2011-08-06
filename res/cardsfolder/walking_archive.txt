@@ -5,9 +5,9 @@ Text:no text
 PT:1/1
 K:etbCounter:P1P1:1
 K:Defender
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigYouDraw | TriggerDescription$ At the beginning of each player's upkeep, that player draws a card for each +1/+1 counter on Walking Archive.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigOppDraw | Secondary$ True | TriggerDescription$ At the beginning of each player's upkeep, that player draws a card for each +1/+1 counter on Walking Archive.
-A:AB$PutCounter | Cost$ 2 W U | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigYouDraw | TriggerDescription$ At the beginning of each player's upkeep, that player draws a card for each +1/+1 counter on CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigOppDraw | Secondary$ True | TriggerDescription$ At the beginning of each player's upkeep, that player draws a card for each +1/+1 counter on CARDNAME.
+A:AB$ PutCounter | Cost$ 2 W U | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 SVar:TrigYouDraw:AB$Draw | Cost$ 0 | NumCards$ X | Defined$ You
 SVar:TrigOppDraw:AB$Draw | Cost$ 0 | NumCards$ X | Defined$ Opponent
 SVar:X:Count$CardCounters.P1P1
