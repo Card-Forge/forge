@@ -5254,6 +5254,7 @@ public class CardFactory implements NewConstants {
                         card.addCounter(Counters.P1P1, m);
                     }
                 });
+                
                 final SpellAbility ability = new Ability(card, "0") {
                     @Override
                     public void resolve() {
@@ -5266,32 +5267,8 @@ public class CardFactory implements NewConstants {
                             if(choices.size() != 0) CardFactoryUtil.AI_getBestCreature(choices).addCounter(
                                     Counters.P1P1, getSourceCard().getCounters(Counters.P1P1));
                         } else {
-                            final SpellAbility ability = this;
-                            AllZone.InputControl.setInput(new Input() {
-                                
-                                private static final long serialVersionUID = 2322926875771867901L;
-                                
-                                @Override
-                                public void showMessage() {
-                                    AllZone.Display.showMessage("Select target artifact creature");
-                                    ButtonUtil.enableOnlyCancel();
-                                }
-                                
-                                @Override
-                                public void selectButtonCancel() {
-                                    stop();
-                                }
-                                
-                                @Override
-                                public void selectCard(Card card2, PlayerZone zone) {
-                                    if(card2.isCreature() && card2.isArtifact() && zone.is(Constant.Zone.Play)
-                                            && CardFactoryUtil.canTarget(ability, card)) {
-                                        card2.addCounter(Counters.P1P1, ability.getSourceCard().getCounters(
-                                                Counters.P1P1));//combining input and resolve is skirting rules and hacky at best, but non-stackability of destroyCommand Inputs turns into a major problem when the keyword is mainly used during the simultaneous destruction of combat.
-                                        stop();
-                                    }
-                                }
-                            });
+                            Card card2 = this.getTargetCard();
+                            card2.addCounter(Counters.P1P1, getSourceCard().getCounters(Counters.P1P1));
                         }//else
                     }//resolve()
                 };
@@ -5302,7 +5279,8 @@ public class CardFactory implements NewConstants {
                     public void execute() {
                         ability.setStackDescription("Put " + card.getCounters(Counters.P1P1)
                                 + " +1/+1 counter/s from " + card + " on target artifact creature.");
-                        AllZone.Stack.push(ability);
+                        // Target as Modular is Destroyed
+                        AllZone.InputControl.setInput(CardFactoryUtil.modularInput(ability, card));
                     }
                 });
                 

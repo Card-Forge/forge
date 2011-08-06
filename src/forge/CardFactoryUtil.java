@@ -2890,6 +2890,35 @@ public class CardFactoryUtil {
         return target;
     }//spReturnTgt_input_targetCards_InGraveyard()
     
+    public static Input modularInput(final SpellAbility ability, final Card card){
+	    Input modularInput = new Input() {
+	        
+	        private static final long serialVersionUID = 2322926875771867901L;
+	        
+	        @Override
+	        public void showMessage() {
+	            AllZone.Display.showMessage("Select target artifact creature");
+	            ButtonUtil.enableOnlyCancel();
+	        }
+	        
+	        @Override
+	        public void selectButtonCancel() {
+	            stop();
+	        }
+	        
+	        @Override
+	        public void selectCard(Card card2, PlayerZone zone) {
+	            if(card2.isCreature() && card2.isArtifact() && zone.is(Constant.Zone.Play)
+	                    && CardFactoryUtil.canTarget(ability, card)) {
+	            	ability.setTargetCard(card2);
+                    AllZone.Stack.add(ability);
+	                stop();
+	            }
+	        }
+	    };
+	    return modularInput;
+    }
+    
     
     public static CardList AI_getHumanCreature(final Card spell, boolean targeted) {
         CardList creature = new CardList(AllZone.Human_Play.getCards());
