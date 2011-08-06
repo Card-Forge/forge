@@ -1635,6 +1635,7 @@ public class CombatUtil {
     	runParams.put("Card", c);
     	AllZone.TriggerHandler.runTrigger("AttackerUnblocked", runParams);
     	
+    	/* converted to AF + trigger
         if(c.getName().equals("Guiltfeeder")) {
             final Player player = c.getController();
             final Player opponent = player.getOpponent();
@@ -1655,9 +1656,8 @@ public class CombatUtil {
             ability2.setStackDescription(sb2.toString());
             
             AllZone.Stack.add(ability2);
-            
         }
-        
+        */
     }
     
     public static void checkDeclareBlockers(CardList cl) {
