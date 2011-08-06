@@ -93,6 +93,11 @@ public class MagicStack extends MyObservable
   boolean ActualEffectTriggered = false; // WheneverKeyword Test
   public void add(SpellAbility sp)
   {
+	  if(sp instanceof Ability_Mana){ // Mana Abilities get resolved right away
+		  sp.resolve(); 
+		  return;
+	  }
+	  
 	  if (frozen){
 		  frozenStack.add(sp);
 		  return;
@@ -128,7 +133,7 @@ public class MagicStack extends MyObservable
 	  }
 		 if(ActualEffectTriggered == false) {
 		  //  // WheneverKeyword Test: Added one } at end
-	  if(sp instanceof Ability_Mana || sp instanceof Ability_Triggered)//TODO make working triggered abilities!
+	  if(sp instanceof Ability_Triggered)//TODO make working triggered abilities!
 		  sp.resolve(); 
 	  else {
 		  if(sp.isKickerAbility()) {
