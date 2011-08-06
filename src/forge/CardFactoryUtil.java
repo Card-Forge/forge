@@ -3250,7 +3250,7 @@ public class CardFactoryUtil {
         if (target.isImmutable())
         	return false;
         
-        if (!AllZone.getZone(target).equals(Constant.Zone.Play)){
+        if (!AllZone.getZone(target).is(Constant.Zone.Play)){
         	// creature's not in play, can normally be targeted
         	return true;
         }
