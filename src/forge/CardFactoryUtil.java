@@ -3745,7 +3745,7 @@ public class CardFactoryUtil {
         	if(cardController.hasMetalcraft())
         		return doXMath(Integer.parseInt(sq[1]),m);
         	else
-        		return doXMath(Integer.parseInt(sq[1]),m);
+        		return doXMath(Integer.parseInt(sq[2]),m);
         }
         
         if (sq[0].contains("Threshold"))
