@@ -718,8 +718,8 @@ public class Gui_Quest extends JFrame implements NewConstants{
         //smoothLandCheckBox.isSelected() - for the AI
         
         //DO NOT CHANGE THIS ORDER, GuiDisplay needs to be created before cards are added
-        if(resizeCheckbox.isSelected()) AllZone.Display = new GuiDisplay3();
-        else AllZone.Display = new GuiDisplay2();
+        if(resizeCheckbox.isSelected()) AllZone.Display = new GuiDisplay4();
+        else AllZone.Display = new GuiDisplay3();
         
         if(smoothLandCheckBox.isSelected()) Constant.Runtime.Smooth[0] = true;
         else Constant.Runtime.Smooth[0] = false;

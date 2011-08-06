@@ -39,6 +39,8 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import arcane.ui.util.ManaSymbols;
+
 import net.miginfocom.swing.MigLayout;
 
 import forge.error.ErrorViewer;
@@ -135,7 +137,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
                         try {
-                            UIManager.setLookAndFeel("org.jvnet.substance.skin.ChallengerDeepSkin");
+                            UIManager.setLookAndFeel("org.pushingpixels.substance.api.skin.ChallengerDeepSkin");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -202,6 +204,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         setupMenu();
         setVisible(true);
         
+        ManaSymbols.loadImages();
     }// init()
     
     private void setupMenu() {
@@ -349,7 +352,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         jPanel3.setBorder(titledBorder3);
         jPanel3.setLayout(new MigLayout("align center"));
         
-        newGuiCheckBox.setText("Resizable Game Area");
+        newGuiCheckBox.setText("New GUI");
         // newGuiCheckBox.setSelected(true);
         smoothLandCheckBox.setText("Stack AI land");
         // smoothLandCheckBox.setSelected(true);
@@ -516,8 +519,8 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         
         //DO NOT CHANGE THIS ORDER, GuiDisplay needs to be created before cards are added
         
-        if(newGuiCheckBox.isSelected()) AllZone.Display = new GuiDisplay3();
-        else AllZone.Display = new GuiDisplay2();
+        if(newGuiCheckBox.isSelected()) AllZone.Display = new GuiDisplay4();
+        else AllZone.Display = new GuiDisplay3();
         
         if(smoothLandCheckBox.isSelected()) Constant.Runtime.Smooth[0] = true;
         else Constant.Runtime.Smooth[0] = false;
@@ -674,35 +677,34 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             //NimRODLookAndFeel nrLAF = new NimRODLookAndFeel();
             
             //add Substance LAFs:
-            LAFMap.put("Autumn", "org.jvnet.substance.skin.SubstanceAutumnLookAndFeel");
-            LAFMap.put("Business", "org.jvnet.substance.skin.SubstanceBusinessLookAndFeel");
-            LAFMap.put("Business Black Steel", "org.jvnet.substance.skin.SubstanceBusinessBlackSteelLookAndFeel");
-            LAFMap.put("Business Blue Steel", "org.jvnet.substance.skin.SubstanceBusinessBlueSteelLookAndFeel");
-            LAFMap.put("Challenger Deep", "org.jvnet.substance.skin.SubstanceChallengerDeepLookAndFeel");
-            LAFMap.put("Creme", "org.jvnet.substance.skin.SubstanceCremeLookAndFeel");
-            LAFMap.put("Creme Coffee", "org.jvnet.substance.skin.SubstanceCremeCoffeeLookAndFeel");
-            LAFMap.put("Dust", "org.jvnet.substance.skin.SubstanceDustLookAndFeel");
-            LAFMap.put("Dust Coffee", "org.jvnet.substance.skin.SubstanceDustCoffeeLookAndFeel");
-            LAFMap.put("Emerald Dusk", "org.jvnet.substance.skin.SubstanceEmeraldDuskLookAndFeel");
-            LAFMap.put("Gemini", "org.jvnet.substance.api.skin.SubstanceGeminiLookAndFeel");
-            LAFMap.put("Graphite Aqua", "org.jvnet.substance.api.skin.SubstanceGraphiteAquaLookAndFeel");
-            LAFMap.put("Moderate", "org.jvnet.substance.skin.SubstanceModerateLookAndFeel");
-            //LAFMap.put("Magellan", "org.jvnet.substance.skin.SubstanceMagellanLookAndFeel");
-            LAFMap.put("Magma", "org.jvnet.substance.skin.SubstanceMagmaLookAndFeel");
-            LAFMap.put("Mist Aqua", "org.jvnet.substance.skin.SubstanceMistAquaLookAndFeel");
-            LAFMap.put("Mist Silver", "org.jvnet.substance.skin.SubstanceMistSilverLookAndFeel");
+            LAFMap.put("Autumn", "org.pushingpixels.substance.api.skin.SubstanceAutumnLookAndFeel");
+            LAFMap.put("Business", "org.pushingpixels.substance.api.skin.SubstanceBusinessLookAndFeel");
+            LAFMap.put("Business Black Steel", "org.pushingpixels.substance.api.skin.SubstanceBusinessBlackSteelLookAndFeel");
+            LAFMap.put("Business Blue Steel", "org.pushingpixels.substance.api.skin.SubstanceBusinessBlueSteelLookAndFeel");
+            LAFMap.put("Challenger Deep", "org.pushingpixels.substance.api.skin.SubstanceChallengerDeepLookAndFeel");
+            LAFMap.put("Creme", "org.pushingpixels.substance.api.skin.SubstanceCremeLookAndFeel");
+            LAFMap.put("Creme Coffee", "org.pushingpixels.substance.api.skin.SubstanceCremeCoffeeLookAndFeel");
+            LAFMap.put("Dust", "org.pushingpixels.substance.api.skin.SubstanceDustLookAndFeel");
+            LAFMap.put("Dust Coffee", "org.pushingpixels.substance.api.skin.SubstanceDustCoffeeLookAndFeel");
+            LAFMap.put("Emerald Dusk", "org.pushingpixels.substance.api.skin.SubstanceEmeraldDuskLookAndFeel");
+            LAFMap.put("Gemini", "org.pushingpixels.substance.api.skin.SubstanceGeminiLookAndFeel");
+            LAFMap.put("Graphite", "org.pushingpixels.substance.api.skin.SubstanceGraphiteLookAndFeel");
+            LAFMap.put("Graphite Aqua", "org.pushingpixels.substance.api.skin.SubstanceGraphiteAquaLookAndFeel");
+            LAFMap.put("Graphite Glass", "org.pushingpixels.substance.api.skin.SubstanceGraphiteGlassLookAndFeel");
+            LAFMap.put("Magellan", "org.pushingpixels.substance.api.skin.SubstanceMagellanLookAndFeel");
+            LAFMap.put("Magma", "org.pushingpixels.substance.api.skin.SubstanceMagmaLookAndFeel");
+            LAFMap.put("Mist Aqua", "org.pushingpixels.substance.api.skin.SubstanceMistAquaLookAndFeel");
+            LAFMap.put("Mist Silver", "org.pushingpixels.substance.api.skin.SubstanceMistSilverLookAndFeel");
+            LAFMap.put("Moderate", "org.pushingpixels.substance.api.skin.SubstanceModerateLookAndFeel");
             LAFMap.put("Napkin", "net.sourceforge.napkinlaf.NapkinLookAndFeel");
-            LAFMap.put("Nebula", "org.jvnet.substance.skin.SubstanceNebulaLookAndFeel");
-            LAFMap.put("Nebula Brick Wall", "org.jvnet.substance.skin.SubstanceNebulaBrickWallLookAndFeel");
+            LAFMap.put("Nebula", "org.pushingpixels.substance.api.skin.SubstanceNebulaLookAndFeel");
+            LAFMap.put("Nebula Brick Wall", "org.pushingpixels.substance.api.skin.SubstanceNebulaBrickWallLookAndFeel");
             LAFMap.put("NimROD", "com.nilo.plaf.nimrod.NimRODLookAndFeel");
-            LAFMap.put("Office Blue 2007", "org.jvnet.substance.skin.SubstanceOfficeBlue2007LookAndFeel");
-            LAFMap.put("Office Silver 2007", "org.jvnet.substance.skin.SubstanceOfficeSilver2007LookAndFeel");
-            //LAFMap.put("Oyoaha", "com.oyoaha.swing.plaf.oyoaha.OyoahaLookAndFeel");
-            LAFMap.put("Raven", "org.jvnet.substance.skin.SubstanceRavenLookAndFeel");
-            LAFMap.put("Raven Graphite", "org.jvnet.substance.skin.SubstanceRavenGraphiteLookAndFeel");
-            LAFMap.put("Raven Graphite Glass", "org.jvnet.substance.skin.SubstanceRavenGraphiteGlassLookAndFeel");
-            LAFMap.put("Sahara", "org.jvnet.substance.skin.SubstanceSaharaLookAndFeel");
-            LAFMap.put("Twilight", "org.jvnet.substance.skin.SubstanceTwilightLookAndFeel");
+            LAFMap.put("Office Blue 2007", "org.pushingpixels.substance.api.skin.SubstanceOfficeBlue2007LookAndFeel");
+            LAFMap.put("Office Silver 2007", "org.pushingpixels.substance.api.skin.SubstanceOfficeSilver2007LookAndFeel");
+            LAFMap.put("Raven", "org.pushingpixels.substance.api.skin.SubstanceRavenLookAndFeel");
+            LAFMap.put("Sahara", "org.pushingpixels.substance.api.skin.SubstanceSaharaLookAndFeel");
+            LAFMap.put("Twilight", "org.pushingpixels.substance.api.skin.SubstanceTwilightLookAndFeel");
             
             String[] keys = new String[LAFMap.size()];
             int count = 0;

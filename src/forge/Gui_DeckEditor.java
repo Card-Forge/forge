@@ -47,7 +47,8 @@ import net.miginfocom.swing.MigLayout;
 
 import forge.error.ErrorViewer;
 import forge.gui.game.CardDetailPanel;
-import forge.gui.game.CardPicturePanel;
+import arcane.ui.CardPanel;
+import arcane.ui.ViewPanel;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
@@ -106,7 +107,8 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
     private static File       previousDirectory    = null;
     
     private CardDetailPanel   detail               = new CardDetailPanel(null);
-    private CardPicturePanel  picture              = new CardPicturePanel(null);
+    private CardPanel         picture              = new CardPanel(null);
+    private ViewPanel         pictureViewPanel     = new ViewPanel();
     private JPanel            glassPane;
     
     @Override
@@ -626,6 +628,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         if(!Gui_NewGame.useLAFFonts.isSelected()) statsLabel2.setFont(new java.awt.Font("Dialog", 0, 14));
         jLabel1.setText("Click on the column name (like name or color) to sort the cards");
         
+        pictureViewPanel.setCardPanel(picture);
         
         this.getContentPane().setLayout(new MigLayout("fill"));
         
@@ -637,7 +640,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         this.getContentPane().add(removePictureButton, "align 50% 0%, wrap");
         
         this.getContentPane().add(statsLabel2, "span 2");
-        this.getContentPane().add(picture, "wmin 239, hmin 323, grow, span 1 4, wrap");
+        this.getContentPane().add(pictureViewPanel, "wmin 239, hmin 323, grow, span 1 4, wrap");
         
         this.getContentPane().add(addButton, "align 50% 50%, w 146, h 49, sg button, span 1 2, split 2");
         this.getContentPane().add(removeButton, "w 146, h 49, sg button");

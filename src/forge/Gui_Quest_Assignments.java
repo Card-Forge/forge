@@ -271,7 +271,7 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
 	    AllZone.GameAction.newGame(hDeck, computerDeck, QuestUtil.getHumanPlantAndPet(questData, selectedQuest), new CardList(), questData.getLife()+extraLife, 
 	    						   selectedQuest.getComputerLife(), selectedQuest);
 	    
-	    AllZone.Display = new GuiDisplay3();
+	    AllZone.Display = new GuiDisplay4();
 	    AllZone.Display.setVisible(true);
         dispose();
     }
