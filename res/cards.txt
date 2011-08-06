@@ -1,3 +1,11 @@
+Desecrated Earth
+4 B
+Sorcery
+Destroy target land. Its controller discards a card.
+spDestroyTgt:Land:Drawback$DiscardTgtCtrlr/1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/desecrated_earth.jpg
+
 Swords to Plowshares
 W
 Instant
@@ -7426,14 +7434,6 @@ Creature Human Wizard
 2/3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/descendant_of_soramaro.jpg
-
-Desecrated Earth
-4 B
-Sorcery
-Destroy target land. Its controller discards a card.
-spDestryTgt:Land:Drawback$DiscardTgtCtrlr/1
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/desecrated_earth.jpg
 
 Desert Drake
 3 R
