@@ -188,6 +188,9 @@ public class Gui_Quest extends JFrame implements NewConstants{
         	for (int i=0;i<petList.size();i++)
         		petComboBox.addItem(petList.get(i));
         	
+        	petComboBox.addItem("None");
+        	petComboBox.addItem("No Plant/Pet");
+        	
             lifeLabel.setBounds(new Rectangle(1, 195, 499, 15));
             lifeLabel.setHorizontalAlignment(SwingConstants.CENTER);
             lifeLabel.setHorizontalTextPosition(SwingConstants.CENTER);

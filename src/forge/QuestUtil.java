@@ -36,6 +36,9 @@ public class QuestUtil {
 		
 		if (qd.getSelectedPet() != null)
 		{
+			if (qd.getSelectedPet().equals("No Plant/Pet"))
+				return list;
+			
 			if (qd.getSelectedPet().equals("Wolf") && qd.getWolfPetLevel() > 0)
 				list.add(getWolfPetToken(qd.getWolfPetLevel()));
 			else if (qd.getSelectedPet().equals("Croc") && qd.getCrocPetLevel() > 0)
