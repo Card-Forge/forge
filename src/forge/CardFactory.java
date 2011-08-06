@@ -2751,17 +2751,18 @@ public class CardFactory implements NewConstants {
                     	// drawbacks for DestroyAll spells usually involve the
                     	// number of permanents that were actually destroyed
                     	int nDestroyed = 0;
-	                    CardList Yards = new CardList();
-	                    Yards.addAll(AllZone.Human_Graveyard.getCards());
-	                    Yards.addAll(AllZone.Computer_Graveyard.getCards());
+	                    CardList afterAll = new CardList();
+	                    afterAll.addAll(AllZone.Human_Play.getCards());
+	                    afterAll.addAll(AllZone.Computer_Play.getCards());
+	                    afterAll = afterAll.getValidCards(Tgts);
 	                    
 	                    ArrayList<Integer> slD = new ArrayList<Integer>();
-	                    for (int i=0; i<all.size(); i++)
-	                    	slD.add(all.get(i).getUniqueNumber());
+	                    for (int i=0; i<afterAll.size(); i++)
+	                    	slD.add(afterAll.get(i).getUniqueNumber());
 	                    
-	                    for (int i=0; i<Yards.size(); i++)
+	                    for (int i=0; i<all.size(); i++)
 	                    {
-	                    	if (slD.contains(Yards.get(i).getUniqueNumber()))
+	                    	if (!slD.contains(all.get(i).getUniqueNumber()))
 	                    		nDestroyed++;
 	                    }
 	                    Log.error("nDestroyed: " + nDestroyed);
