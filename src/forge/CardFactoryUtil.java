@@ -1511,6 +1511,12 @@ public class CardFactoryUtil {
             public void resolve() {
                 sourceCard.getController().drawCard();
                 sourceCard.cycle();
+                if(AllZoneUtil.isCardInPlay("Astral Slide")) {
+                	CardList astrals = AllZoneUtil.getCardsInPlay("Astral Slide");
+                	for(Card astral:astrals) {
+                		AllZone.Stack.add(ability_astralSlide(astral, astral.getController()));
+                	}
+                }
             }
         };
         cycle.setIsCycling(true);
@@ -1525,6 +1531,56 @@ public class CardFactoryUtil {
         cycle.getRestrictions().setActivateZone(Constant.Zone.Hand);
         return cycle;
     }//ability_cycle()
+    
+    private static SpellAbility ability_astralSlide(final Card slideCard, final Player player) {
+    	SpellAbility slide = new Ability(slideCard, "0") {
+    		@Override
+    		public void resolve() {
+    			if(slideCard.getController().isHuman()) {
+    				AllZone.InputControl.setInput(new Input() {
+    					private static final long serialVersionUID = 5254871727567617629L;
+
+    					@Override
+    					public void showMessage() {
+    						AllZone.Display.showMessage(slideCard+" - Select target creature.");
+    						ButtonUtil.enableOnlyCancel();
+    					}
+
+    					@Override
+    					public void selectButtonCancel() { stop(); }
+
+    					@Override
+    					public void selectCard(final Card c, PlayerZone zone) {
+    						if(zone.is(Constant.Zone.Battlefield, AllZone.HumanPlayer)
+    								&& c.isCreature() && CardFactoryUtil.canTarget(slideCard, c)) {
+    							AllZone.GameAction.exile(c);
+    							final Ability returnCreature = new Ability(slideCard, "0") {
+    								@Override
+    								public void resolve() {
+    									AllZone.GameAction.moveToPlay(c);
+    								}
+    							};
+    							returnCreature.setStackDescription(slideCard.getName()+" - returning "+c.getName()+" to the battlefield.");
+    							final Command returnCreatureCommand = new Command() {
+    								private static final long serialVersionUID = 7397727998016346810L;
+
+    								public void execute() {
+    									AllZone.Stack.add(returnCreature);
+    								}
+
+    							};
+    							AllZone.EndOfTurn.addAt(returnCreatureCommand);
+    							stop();
+    						}
+    					}
+    				});
+    			}
+    		}
+    	};
+    	slide.setStackDescription(slideCard.getName()+" - Exile a creature.");
+    	
+    	return slide;
+    }
     
     public static SpellAbility ability_typecycle(final Card sourceCard, String cycleCost, final String type) {
         String description;
@@ -1564,7 +1620,6 @@ public class CardFactoryUtil {
                 
 
                 if(sameType.size() == 0) {
-                	//AllZone.GameAction.discard(sourceCard, this);
                 	sourceCard.getController().discard(sourceCard, this);
                 	return;
                 }
@@ -1583,7 +1638,12 @@ public class CardFactoryUtil {
                 }
                 sourceCard.getController().shuffle();
                 
-
+                if(AllZoneUtil.isCardInPlay("Astral Slide")) {
+                	CardList astrals = AllZoneUtil.getCardsInPlay("Astral Slide");
+                	for(Card astral:astrals) {
+                		AllZone.Stack.add(ability_astralSlide(astral, astral.getController()));
+                	}
+                }
             }
         };
         if(type.contains("Basic")) description = "basic land";
@@ -3914,10 +3974,10 @@ public class CardFactoryUtil {
                 }
                 if(d[2].contains("AtRandom")) dbPlayer.discardRandom(X, sa);
             } 
-            else dbPlayer.discard(X, sa, false); //AllZone.GameAction.discard(dbPlayer, X, sa);
+            else dbPlayer.discard(X, sa, false);
         }
         
-        if(d[0].contains("HandToLibrary")) dbPlayer.handToLibrary(X, d[2]); //AllZone.GameAction.handToLibrary(dbPlayer, X, d[2]);
+        if(d[0].contains("HandToLibrary")) dbPlayer.handToLibrary(X, d[2]);
         
         if(d[0].contains("Draw")) for(int i = 0; i < X; i++)
             dbPlayer.drawCard();
