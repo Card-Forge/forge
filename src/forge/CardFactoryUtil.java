@@ -2784,7 +2784,7 @@ public class CardFactoryUtil
      String d[] = DB.split("/");
      int X = 0;
      if (d.length > 0)
-    	 if (d[1].matches("dX"))
+    	 if (d[1].matches("dX")) // 2/10
     	 {
     		 String dX = Src.getSVar(d[1]);
     		 if (dX.startsWith("Count$"))
@@ -2820,6 +2820,8 @@ public class CardFactoryUtil
      // 1/10
      if (d[0].contains("DamageTgtC"))
     	 AllZone.GameAction.addDamage(TgtC, Src, X);
+     else if (d[0].contains("DamageSelf"))
+    	 AllZone.GameAction.addDamage(Src, Src, X); // 2/10
      else if (d[0].contains("Damage"))
          AllZone.GameAction.addDamage(dbPlayer, X);
 
@@ -2827,8 +2829,10 @@ public class CardFactoryUtil
      if (d[0].contains("GainLife"))
         AllZone.GameAction.addLife(dbPlayer, X);
          
-     if (d[0].contains("LoseLife"))
-        AllZone.GameAction.subLife(TgtP, X);
+     if (d[0].contains("LoseLifeTgtCtrlr")) //2/10
+    	AllZone.GameAction.subLife(TgtC.getController(), X);
+     else if (d[0].contains("LoseLife"))
+        AllZone.GameAction.subLife(dbPlayer, X);
          
      if (d[0].contains("Discard"))
      {       
@@ -2854,6 +2858,9 @@ public class CardFactoryUtil
      
      if (d[0].contains("UntapTgt"))
          TgtC.untap();
+     
+     if (d[0].contains("TapTgt")) // 2/10
+    	 TgtC.tap();
     
      if (d[0].contains("GenToken")) // placeholder for effect
         X = X + 0;
