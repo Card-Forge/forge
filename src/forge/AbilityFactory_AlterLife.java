@@ -182,6 +182,9 @@ public class AbilityFactory_AlterLife {
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
 		
+		if (!AllZone.ComputerPlayer.canGainLife())
+			return false;
+		
 		// TODO handle proper calculation of X values based on Cost and what would be paid
 		//final int amount = calculateAmount(af.getHostCard(), amountStr, sa);
 		
@@ -203,7 +206,7 @@ public class AbilityFactory_AlterLife {
 	public static boolean gainLifeDoTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
 		if (!ComputerUtil.canPayCost(sa) && !mandatory)	// If there is a cost payment it's usually not mandatory
 			return false;
-
+		
 		// If the Target is gaining life, target self.
 		// if the Target is modifying how much life is gained, this needs to be handled better
 		 Target tgt = sa.getTarget();
@@ -268,12 +271,7 @@ public class AbilityFactory_AlterLife {
 				// when getStackDesc is called, just build exactly what is happening
 				return loseLifeStackDescription(af, this);
 			}
-			
-			public boolean canPlay(){
-				// super takes care of AdditionalCosts
-				return super.canPlay();	
-			}
-			
+
 			public boolean canPlayAI()
 			{
 				// if X depends on abCost, the AI needs to choose which card he would sacrifice first
@@ -305,11 +303,6 @@ public class AbilityFactory_AlterLife {
 			public String getStackDescription(){
 				// when getStackDesc is called, just build exactly what is happening
 				return loseLifeStackDescription(af, this);
-			}
-			
-			public boolean canPlay(){
-				// super takes care of AdditionalCosts
-				return super.canPlay();	
 			}
 			
 			public boolean canPlayAI()
@@ -427,6 +420,9 @@ public class AbilityFactory_AlterLife {
 		}
 		
 		if (!ComputerUtil.canPayCost(sa))
+			return false;
+		
+		if (!AllZone.HumanPlayer.canLoseLife())
 			return false;
 		
 		 // prevent run-away activations - first time will always return true

@@ -31,8 +31,7 @@ public class AbilityFactory_Combat {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return fogDoTriggerAI(af, this, mandatory);
 			}
 			
 		};
@@ -83,8 +82,7 @@ public class AbilityFactory_Combat {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return fogDoTriggerAI(af, this, mandatory);
 			}
 			
 		};

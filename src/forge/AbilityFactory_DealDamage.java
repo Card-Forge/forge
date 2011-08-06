@@ -24,11 +24,6 @@ public class AbilityFactory_DealDamage {
 			private static final long serialVersionUID = -7560349014757367722L;
 
 			@Override
-			public boolean canPlay() {
-				return super.canPlay();
-			}
-
-			@Override
 			public boolean canPlayAI() {
 				return doCanPlayAI(this);
 
@@ -68,12 +63,6 @@ public class AbilityFactory_DealDamage {
 			}
 
 			@Override
-			public boolean canPlay(){
-				// super takes care of AdditionalCosts
-				return super.canPlay();	
-			}
-
-			@Override
 			public boolean canPlayAI() {
 				return damageAllCanPlayAI(af, this);
 			}
@@ -96,11 +85,6 @@ public class AbilityFactory_DealDamage {
 	public SpellAbility getSpell() {
 		final SpellAbility spDealDamage = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
 			private static final long serialVersionUID = 7239608350643325111L;
-
-			@Override
-			public boolean canPlay() {
-				return super.canPlay();
-			}
 
 			@Override
 			public boolean canPlayAI() {
@@ -223,21 +207,29 @@ public class AbilityFactory_DealDamage {
 		return AbilityFactory.calculateAmount(saMe.getSourceCard(), damage, saMe);
 	}
 
-	private boolean shouldTgtP(int d, final boolean noPrevention) {
+	private boolean shouldTgtP(SpellAbility sa, int d, final boolean noPrevention) {
 		int restDamage = d;
-
+		Player human = AllZone.HumanPlayer;
+		Player comp = AllZone.ComputerPlayer;
+		
 		if (!noPrevention)
-			restDamage = AllZone.HumanPlayer.predictDamage(restDamage, AF.getHostCard(), false);
-		else restDamage = AllZone.HumanPlayer.staticReplaceDamage(restDamage, AF.getHostCard(), false);
+			restDamage = human.predictDamage(restDamage, AF.getHostCard(), false);
+		else restDamage = human.staticReplaceDamage(restDamage, AF.getHostCard(), false);
 
 		if (restDamage == 0) return false;
 
-		CardList hand = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
+		if (!human.canLoseLife()) return false;
+		
+		CardList hand = AllZoneUtil.getPlayerHand(comp);
 
-		if(AF.isSpell() && hand.size() > 7) // anti-discard-at-EOT
-		return true;
+		if (AF.isSpell()){
+			// If this is a spell, cast it instead of discarding
+			if ((AllZone.Phase.is(Constant.Phase.End_Of_Turn) || AllZone.Phase.is(Constant.Phase.Main2)) && 
+					AllZone.Phase.isPlayerTurn(comp) && (hand.size() > comp.getMaxHandSize()))
+				return true;
+		}
 
-		if(AllZone.HumanPlayer.getLife() - restDamage < 10) // if damage from this spell would drop the human to less than 10 life
+		if(human.getLife() - restDamage < 5) // if damage from this spell would drop the human to less than 5 life
 			return true;
 
 		return false;
@@ -292,7 +284,7 @@ public class AbilityFactory_DealDamage {
 
 		// TODO handle proper calculation of X values based on Cost
 
-		// todo: this should only happen during Players EOT or if Stuffy is going to die
+		// todo(sol): this should only happen during Players EOT or if Stuffy is going to die
 		if(AF.getHostCard().getName().equals("Stuffy Doll")) {
 			return true;
 		}
@@ -334,6 +326,8 @@ public class AbilityFactory_DealDamage {
 					Player p = (Player)o;
 					if (p.isComputer() && dmg >= p.getLife())	// Damage from this spell will kill me
 						return false;
+					if (p.isHuman() && !p.canLoseLife())
+						return false;
 				}			
 			}
 			return true;
@@ -347,7 +341,7 @@ public class AbilityFactory_DealDamage {
 			// TODO: Consider targeting the planeswalker
 			if (tgt.canTgtCreatureAndPlayer()) {
 
-				if (shouldTgtP(dmg,noPrevention)) {
+				if (shouldTgtP(saMe, dmg, noPrevention)) {
 					tgt.addTarget(AllZone.HumanPlayer);
 					continue;
 				}
