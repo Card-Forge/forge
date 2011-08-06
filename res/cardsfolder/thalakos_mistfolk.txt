@@ -8,4 +8,5 @@ K:Shadow
 A:AB$ChangeZone | Cost$ U | Defined$ Self | Origin$ Battlefield | Destination $ Library | SpellDescription$ Put CARDNAME on top of its owner's library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thalakos_mistfolk.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/93.jpg
 End

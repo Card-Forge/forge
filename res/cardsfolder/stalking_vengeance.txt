@@ -9,4 +9,5 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select 
 SVar:X:Triggered$CardPower
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stalking_vengeance.jpg
+SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/73.jpg
 End

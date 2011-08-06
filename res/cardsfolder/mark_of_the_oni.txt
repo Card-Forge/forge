@@ -9,4 +9,5 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mark_of_the_oni.jpg
+SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/73.jpg
 End

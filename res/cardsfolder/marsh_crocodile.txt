@@ -10,4 +10,5 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ Each | NumCards$ 1 | Mode$ TgtC
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marsh_crocodile.jpg
+SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/115.jpg
 End

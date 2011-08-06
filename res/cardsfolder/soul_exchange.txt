@@ -8,4 +8,5 @@ SVar:X:Exiled$Valid Thrull
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_exchange.jpg
+SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/28.jpg
 End
