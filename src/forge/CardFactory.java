@@ -7562,6 +7562,20 @@ public class CardFactory implements NewConstants {
         //*************** START *********** START **************************
         else if(cardName.equals("Mind's Desire"))
         {
+            final Spell PlayCreature = new Spell(card) {
+                private static final long serialVersionUID = 53838791023456795L;                   
+                @Override
+                public void resolve() {
+                    String player = card.getController();
+					PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+			        PlayerZone RFG = AllZone.getZone(Constant.Zone.Removed_From_Play, player);
+					Card[] Attached = card.getAttachedCards(); 
+					RFG.remove(Attached[0]);
+	                play.add(Attached[0]);
+	                card.unattachCard(Attached[0]);
+                }//resolve()
+            };//SpellAbility
+            
       	  final Ability freeCast = new Ability(card, "0")
             {
   			private static final long serialVersionUID = 4455819149429678456L;
@@ -7578,7 +7592,7 @@ public class CardFactory implements NewConstants {
                 	if(AllZone.Stack.size() > 0) {
                         CardList Config = new CardList();            		
                         for(int i = 0; i < Attached.length; i++) {	                      	
-                        if(Attached[i].isInstant() == true) Config.add(Attached[i]);	
+                        if(Attached[i].isInstant() == true || Attached[i].hasKeyword("Flash") == true) Config.add(Attached[i]);	
                 	}                       
                         for(int i = 0; i < Config.size(); i++) {
             				Card crd = Config.get(i);
@@ -7599,28 +7613,50 @@ public class CardFactory implements NewConstants {
                     if(target != null) c = copyCard(target);
                     
   					if(c != null) {
-  					if((c.isLand()) == true) {
+  					if(c.isLand() == true) {
   	   					if(AllZone.GameInfo.getHumanCanPlayNumberOfLands() > 0) {
     					PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
 		                play.add(c);
   						card.unattachCard(c);
+  		                AllZone.GameInfo.addHumanCanPlayNumberOfLands(-1);
+  		                AllZone.GameInfo.setHumanPlayedFirstLandThisTurn(true);
   	   					} else {
-				    		String[] choices = {"Ok"};
-				    		@SuppressWarnings("unused")
-							Object q = null;
-				    		q = AllZone.Display.getChoiceOptional("You can't play any more lands this turn", choices);
+  	   					JOptionPane.showMessageDialog(null, "You can't play any more lands this turn.", "", JOptionPane.INFORMATION_MESSAGE);
   	   					}
-  					} else if(c.getName().equals("Recall")) {
+  				/**	} else if(c.getName().equals("Recall")) {
   						// Fake playing the spell
   						Phase.StormCount = Phase.StormCount + 1;
   						if(c.getController() == "Human") {
   					   	    Phase.PlayerSpellCount = Phase.PlayerSpellCount + 1; 
   						} else Phase.ComputerSpellCount = Phase.ComputerSpellCount + 1;
   						card.unattachCard(c); 
-  						} else 
+  				**/		} else if(c.isPermanent() == true && c.isAura() == false) {
+  						c.removeIntrinsicKeyword("Flash"); // Stops the player from re-casting the flash spell.
+  						PlayCreature.setStackDescription(c.getName() + " - Copied from Mind's Desire");
+  	                	Card [] ReAttach = new Card[Attached.length]; 
+  	                	ReAttach[0] = c;
+  	                	int ReAttach_Count = 0;
+                        for(int i = 0; i < Attached.length; i++) {	                      	
+                        	if(Attached[i] != target) {
+                        		ReAttach_Count = ReAttach_Count + 1;
+                        		ReAttach[ReAttach_Count] = Attached[i];
+                        	}
+                    	}
+                        // Clear Attached List
+                        for(int i = 0; i < Attached.length; i++) {	                      	
+                        	card.unattachCard(Attached[i]);
+                        	}
+                        // Re-add
+                        for(int i = 0; i < ReAttach.length; i++) {	                      	
+                        	if(ReAttach[i] != null) card.attachCard(ReAttach[i]);
+                        	}	
+  						target.addSpellAbility(PlayCreature);
+  	                    AllZone.Stack.add(PlayCreature);
+  				} else {
   	  						AllZone.GameAction.playCardNoCost(c);
 	  						card.unattachCard(c); 
-  				} else JOptionPane.showMessageDialog(null, "There is no more cards available on Mind's Desire.", "", JOptionPane.INFORMATION_MESSAGE);
+  				}
+  				} else JOptionPane.showMessageDialog(null, "Player cancelled or there is no more cards available on Mind's Desire.", "", JOptionPane.INFORMATION_MESSAGE);
   				} else JOptionPane.showMessageDialog(null, "You can only play an instant at this point in time, but none are attached to Mind's Desire.", "", JOptionPane.INFORMATION_MESSAGE);
   			}
   			}
@@ -7663,6 +7699,7 @@ public class CardFactory implements NewConstants {
                             AllZone.EndOfTurn.addUntil(untilEOT);
                 }//resolve()
             };//SpellAbility
+            
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = 920148510259054021L;
                 
@@ -7685,7 +7722,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
             card.addSpellAbility(freeCast);
         }
-        //*************** END ************ END **************************   
+        //*************** END ************ END **************************  
         //*************** START *********** START **************************
         else if(cardName.equals("Temporal Fissure")) {
             final SpellAbility spell = new Spell(card) {
@@ -21067,14 +21104,16 @@ public class CardFactory implements NewConstants {
         		}
 
         		@Override
-        		public void resolve() {
+        		public void resolve() {       			
         			int numCards = card.getXManaCostPaid();
         			final String player = card.getController();
         			int maxCards = AllZoneUtil.getPlayerHand(player).size();
-        			numCards = Math.min(numCards, maxCards);
+        			if(numCards != 0) {
+        				numCards = Math.min(numCards, maxCards);
         			if(player.equals(Constant.Player.Human)) {
         				AllZone.InputControl.setInput(CardFactoryUtil.input_discardRecall(numCards, card));
         			}
+           			}
         			/*else { //computer
         				AllZone.GameAction.discardRandom(Constant.Player.Computer, numCards);
         				AllZone.GameAction.removeFromGame(card);

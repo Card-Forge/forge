@@ -1461,6 +1461,7 @@ public class GameAction {
             }
             */
         } else {
+        	sa.setManaCost("0"); // Beached As
         	if (sa.isKickerAbility()) {
         		sa.getBeforePayMana().setFree(false);
         		sa.setManaCost(sa.getAdditionalManaCost());
