@@ -1,0 +1,10 @@
+Name:Balthor the Stout
+ManaCost:1 R R
+Types:Legendary Creature Dwarf Barbarian
+Text:no text
+PT:2/2
+K:stPumpAll:Creature.Barbarian+Other:1/1:No Condition:Other Barbarian creatures get +1/+1.
+A:AB$Pump | Cost$ R | NumAtt$ +1 | NumDef$ +0 | TgtPrompt$ Choose another target Barbarian creature | ValidTgts$ Creature.Barbarian.Other | SpellDescription$ Another target Barbarian creature gets +1/+0 until end of turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/balthor_the_stout.jpg
+End

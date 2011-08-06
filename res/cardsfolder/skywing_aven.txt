@@ -1,0 +1,10 @@
+Name:Skywing Aven
+ManaCost:2 U
+Types:Creature Bird Soldier
+Text:no text
+PT:2/1
+K:Flying
+A:AB$Bounce | Cost$ Discard<1/Any> | Destination$Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skywing_aven.jpg
+End

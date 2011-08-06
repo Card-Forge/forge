@@ -1,0 +1,11 @@
+Name:Crackling Club
+ManaCost:R
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+K:enPump:+1/+0
+A:AB$DealDamage | Cost$ Sac<1/CARDNAME> | Tgt$C | NumDmg$1 | SpellDescription$Crackling Club deals 1 damage to target creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crackling_club.jpg
+End

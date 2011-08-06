@@ -1,0 +1,10 @@
+Name:Cabal Torturer
+ManaCost:1 B B
+Types:Creature Human Minion
+Text:no text
+PT:1/1
+A:AB$Pump | Cost$ B | NumAtt$ -1 | NumDef$ -1 | IsCurse$True | Tgt$ C | SpellDescription$ Target creature gets -1/-1 until end of turn.
+A:AB$Pump | Cost$ 3 B B | NumAtt$ -2 | NumDef$ -2 | IsCurse$True | Tgt$ C | Threshold$True | SpellDescription$ Target creature gets -2/-2 until end of turn. Activate this ability only if seven or more cards are in your graveyard. | PrecostDesc$Threshold - 
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_torturer.jpg
+End
