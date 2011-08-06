@@ -1,5 +1,12 @@
 package forge;
 
+import forge.error.ErrorViewer;
+import forge.gui.GuiUtils;
+import forge.quest.QuestFrame;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
@@ -7,24 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
-
-import forge.error.ErrorViewer;
-import forge.gui.GuiUtils;
-import forge.quest.QuestFrame;
 
 public class Gui_QuestOptions extends JFrame {
     private static final long serialVersionUID    = 2018518804206822235L;
@@ -34,10 +23,6 @@ public class Gui_QuestOptions extends JFrame {
     private JLabel            jLabel1             = new JLabel();
     private JButton           continueQuestButton = new JButton();
     private JPanel            jPanel1             = new JPanel();
-    @SuppressWarnings("unused")
-    // border1
-    private Border            border1;
-    private TitledBorder      titledBorder1;
     private JPanel            jPanel2             = new JPanel();
     private GridLayout        gridLayout1         = new GridLayout();
     private JRadioButton      easyRadio           = new JRadioButton();
@@ -51,11 +36,9 @@ public class Gui_QuestOptions extends JFrame {
     private ButtonGroup       buttonGroup1        = new ButtonGroup();
     private ButtonGroup		  buttonGroup2		  = new ButtonGroup();
     private JPanel            jPanel3             = new JPanel();
-    private Border            border2;
-    private TitledBorder      titledBorder2;
 
 
-    private JCheckBox useNewQuestUI = new JCheckBox("Use new Quest UI");
+    private JCheckBox useNewQuestUI = new JCheckBox("Use new Quest UI", true);
 
     public static void main(String[] args) {
         new Gui_QuestOptions();
@@ -106,11 +89,11 @@ public class Gui_QuestOptions extends JFrame {
     }//setupRadioButtonText()
     
     private void jbInit() throws Exception {
-        border1 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
-        titledBorder1 = new TitledBorder(BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140)),
+        TitledBorder titledBorder1 = new TitledBorder(BorderFactory.createEtchedBorder(Color.white,
+                new Color(148, 145, 140)),
                 "Quest Length");
-        border2 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
-        titledBorder2 = new TitledBorder(border2, "Continue");
+        Border border2 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
+        TitledBorder titledBorder2 = new TitledBorder(border2, "Continue");
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 25));
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel1.setText("Quest Options");
