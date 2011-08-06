@@ -5,7 +5,7 @@ Text:no text
 PT:0/1
 K:Flying
 A:AB$Pump | Cost$ G | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Unyaro Bees gets +1/+1 until end of turn.
-K:abDamageTgtCP 3 G Sac<1/CARDNAME>:2
+A:AB$DealDamage | Cost$ 3 G Sac<1/CARDNAME> | Tgt$ TgtCP | NumDmg$ 2 | SpellDescription$ Unyaro Bees deals 2 damage to target creature or player.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unyaro_bees.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/231.jpg

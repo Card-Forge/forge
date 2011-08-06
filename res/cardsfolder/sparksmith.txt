@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Goblin
 Text:no text
 PT:1/1
-K:abDamageTgtC T:X:Drawback$DamageYou/X:Sparksmith deals X damage to target creature and X damage to you, where X is the number of Goblins on the battlefield.:Sparksmith - deal X damage to creature and X damage to you.
+A:AB$DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DamageYou/X | SpellDescription$ Sparksmith deals X damage to target creature and X damage to you, where X is the number of Goblins on the battlefield.
 SVar:X:Count$TypeOnBattlefield.Goblin
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39476.jpg

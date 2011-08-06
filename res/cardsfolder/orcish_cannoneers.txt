@@ -3,7 +3,7 @@ ManaCost:1 R R
 Types:Creature Orc Warrior
 Text:no text
 PT:1/3
-K:abDamageTgtCP T:2:Drawback$DamageYou/3:Orcish Cannoneers deals 2 damage to target creature or player and 3 damage to you.:Orcish Cannoneers - deal damage to creature or player and you.
+A:AB$DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 2 | SubAbility$ DamageYou/3 | SpellDescription$ Orcish Cannoneers deals 2 damage to target creature or player and 3 damage to you.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_cannoneers.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/205.jpg

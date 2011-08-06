@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Creature Human Assassin
 Text:no text
 PT:1/1
-K:abDamageTgtC B T:X:Drawback$TapTgt:Tap target creature. Abyssal Hunter deals damage equal to Abyssal Hunter's power to that creature.:Abyssal Hunter - tap creature and deal damage to it.
+A:AB$DealDamage | Cost$ B T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ TapTgt | SpellDescription$ Tap target creature. Abyssal Hunter deals damage equal to Abyssal Hunter's power to that creature.
 SVar:X:Count$CardPower
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abyssal_hunter.jpg

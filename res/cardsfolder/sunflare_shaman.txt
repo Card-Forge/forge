@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Elemental Shaman
 Text:no text
 PT:2/1
-K:abDamageTgtCP 1 R T:X:Drawback$DamageSelf/X:Sunflare Shaman deals X damage to target creature or player and X damage to itself, where X is the number of Elemental cards in your graveyard.:Sunflare Shaman - deals X damage to creature or player and X damage to itself.
+A:AB$DealDamage | Cost$ 1 R T | Tgt$ TgtCP | NumDmg$ X | SubAbility$ DamageSelf/X | SpellDescription$ Sunflare Shaman deals X damage to target creature or player and X damage to itself, where X is the number of Elemental cards in your graveyard.
 SVar:X:Count$TypeInYourYard.Elemental
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunflare_shaman.jpg

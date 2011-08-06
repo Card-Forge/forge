@@ -4,7 +4,7 @@ Types:Creature Human Wizard
 Text:no text
 PT:1/1
 A:AB$Pump | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | SpellDescription$ Target creature gains first strike until end of turn.
-K:abDamageTgtCP R T:1:Drawback$DamageYou/1:Granger Guildmage deals 1 damage to target creature or player and 1 damage to you.:Granger Guildmage - damage creature or player and you.
+A:AB$DealDamage | Cost$ R T | Tgt$ TgtCP | NumDmg$ 1 | SubAbility$ DamageYou/1 | SpellDescription$ Granger Guildmage deals 1 damage to target creature or player and 1 damage to you.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/granger_guildmage.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/118.jpg
