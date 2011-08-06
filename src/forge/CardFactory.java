@@ -6980,6 +6980,124 @@ public class CardFactory implements NewConstants {
       card.clearSpellAbility();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
+    
+  //*************** START *********** START **************************
+    else if(cardName.equals("Ensnare"))
+    {
+      SpellAbility spell = new Spell(card)
+      {
+		private static final long serialVersionUID = -5170378205496330425L;
+		public void resolve()
+        {
+          CardList creats = new CardList();
+          creats.addAll(AllZone.Human_Play.getCards());
+          creats.addAll(AllZone.Computer_Play.getCards());
+          creats = creats.filter(new CardListFilter()
+          {
+            public boolean addCard(Card c)
+            {
+              return c.isCreature();
+            }
+          });
+          for(int i = 0; i < creats.size(); i++)
+        	  creats.get(i).tap();
+        }//resolve()
+        public boolean canPlayAI()
+        {
+          return false;
+        }
+      };
+      spell.setDescription("Tap all creatures.");
+      spell.setStackDescription(card.getName() + " - Tap all creatures");
+      
+      final SpellAbility bounce = new Spell(card)
+	  {
+		private static final long serialVersionUID = 6331598238749406160L;
+		public void resolve()
+		{
+			CardList creats = new CardList();
+	        creats.addAll(AllZone.Human_Play.getCards());
+	        creats.addAll(AllZone.Computer_Play.getCards());
+	        creats = creats.filter(new CardListFilter()
+	        {
+	           public boolean addCard(Card c)
+	           {
+	             return c.isCreature();
+	           }
+	        });
+	        for(int i = 0; i < creats.size(); i++)
+	          creats.get(i).tap();
+		}
+		public boolean canPlay()
+		{
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+			CardList list = new CardList(play.getCards());
+			list = list.getType("Island");
+			return list.size() >= 2;
+		}
+		public boolean canPlayAI()
+		{
+			return false;
+		}
+		
+	  };
+	  bounce.setDescription("You may return three Islands you control to their owner's hand rather than pay Ensnare's mana cost.");
+	  bounce.setStackDescription(card.getName() + " - Tap all creatures.");
+	  bounce.setManaCost("0");
+	  
+	  final Input bounceIslands = new Input()
+      {
+		private static final long serialVersionUID = -8511915834608321343L;
+		int stop = 2;
+        int count = 0;
+
+        public void showMessage()
+        {
+          AllZone.Display.showMessage("Select an Island");
+          ButtonUtil.disableAll();
+        }
+        public void selectButtonCancel() {stop();}
+        public void selectCard(Card c, PlayerZone zone)
+        {
+          if(c.getType().contains("Island") && zone.is(Constant.Zone.Play))
+          {
+            AllZone.GameAction.moveToHand(c);
+        	  
+            count++;
+            if(count == stop) {
+            	AllZone.Stack.add(bounce);
+            	stop();
+            }
+          }
+        }//selectCard()
+      };
+      
+      bounce.setBeforePayMana(bounceIslands);
+      
+      Command bounceIslandsAI = new Command()
+      {
+		private static final long serialVersionUID = 6399831162328201755L;
+
+		public void execute()
+    	  {
+    		  PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+    		  CardList list = new CardList(play.getCards());
+    		  list = list.getType("Island");
+    		  //TODO: sort by tapped
+    		  
+    		  for (int i=0;i<2;i++)
+    		  {
+    			  AllZone.GameAction.moveToHand(list.get(i));
+    		  }  
+    	  }
+      };
+	  
+      bounce.setBeforePayManaAI(bounceIslandsAI);
+      
+      card.clearSpellAbility();
+      card.addSpellAbility(bounce);
+      card.addSpellAbility(spell);
+    }//*************** END ************ END **************************
 
 
 
@@ -17541,8 +17659,10 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 			            AllZone.GameAction.moveToHand(c);
 			        	  
 			            count++;
-			            if(count == stop)
-			              stop();
+			            if(count == stop) {
+			            	AllZone.Stack.add(bounce);
+			            	stop();
+			            }
 			          }
 			        }//selectCard()
 			      };
@@ -17571,6 +17691,259 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 			      
 		    	  card.clearSpellAbility();
 		    	  card.addSpellAbility(bounce);
+		    	  card.addSpellAbility(spell);
+		      }//*************** END ************ END **************************
+		    
+		    
+		  //*************** START *********** START **************************
+		      else if(cardName.equals("Thwart"))
+		      {
+		    	  final SpellAbility spell = new Spell(card)
+		    	  {
+					private static final long serialVersionUID = 6549506712141125977L;
+					public void resolve()
+		    	        {
+		    	          SpellAbility sa = AllZone.Stack.pop();
+		    	          AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
+		    	        }
+		    	        public boolean canPlay()
+		    	        {
+		    	          if(AllZone.Stack.size() == 0)
+		    	            return false;
+
+		    	          //see if spell is on stack and that opponent played it
+		    	          String opponent = AllZone.GameAction.getOpponent(card.getController());
+		    	          SpellAbility sa = AllZone.Stack.peek();
+
+		    	          return sa.isSpell() && opponent.equals(sa.getSourceCard().getController()) 
+		    	          		 && CardFactoryUtil.isCounterable(sa.getSourceCard());
+		    	        }
+		    	        public boolean canPlayAI()
+						{
+							return false;
+						}
+		    	  };
+		    	  spell.setDescription("Counter target spell.");
+		    	  spell.setStackDescription(card.getName() + " - Counter target spell.");
+		    	  
+		    	  final SpellAbility bounce = new Spell(card)
+		    	  {
+					private static final long serialVersionUID = -8310299673731730438L;
+
+					public void resolve()
+		    		{
+						 SpellAbility sa = AllZone.Stack.pop();
+		    	         AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
+		    		}
+					public boolean canPlay()
+					{
+						if(AllZone.Stack.size() == 0)
+		    	            return false;
+
+		    	          //see if spell is on stack and that opponent played it
+		    	        String opponent = AllZone.GameAction.getOpponent(card.getController());
+		    	        SpellAbility sa = AllZone.Stack.peek();
+
+						PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+						CardList list = new CardList(play.getCards());
+						list = list.getType("Island");
+						return sa.isSpell() && opponent.equals(sa.getSourceCard().getController()) 
+							   && CardFactoryUtil.isCounterable(sa.getSourceCard()) && list.size() >= 3;
+					}
+					
+					public boolean canPlayAI()
+					{
+						return false;
+					}
+					
+		    	  };
+		    	  bounce.setDescription("You may return two Islands you control to their owner's hand rather than pay Thwart's mana cost.");
+		    	  bounce.setStackDescription(card.getName() + " - Counter target spell.");
+		    	  bounce.setManaCost("0");
+		    	  
+		    	  final Input bounceIslands = new Input()
+			      {
+					private static final long serialVersionUID = 3124427514142382129L;
+					int stop = 3;
+			        int count = 0;
+
+			        public void showMessage()
+			        {
+			          AllZone.Display.showMessage("Select an Island");
+			          ButtonUtil.disableAll();
+			        }
+			        public void selectButtonCancel() {stop();}
+			        public void selectCard(Card c, PlayerZone zone)
+			        {
+			          if(c.getType().contains("Island") && zone.is(Constant.Zone.Play))
+			          {
+			            AllZone.GameAction.moveToHand(c);
+			        	  
+			            count++;
+			            if(count == stop) {
+			            	AllZone.Stack.add(bounce);
+			            	stop();
+			            }
+			          }
+			        }//selectCard()
+			      };
+			      
+			      bounce.setBeforePayMana(bounceIslands);
+			      
+			      Command bounceIslandsAI = new Command()
+			      {
+					private static final long serialVersionUID = 8250154784542733353L;
+
+					public void execute()
+			    	  {
+			    		  PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+			    		  CardList list = new CardList(play.getCards());
+			    		  list = list.getType("Island");
+			    		  //TODO: sort by tapped
+			    		  
+			    		  for (int i=0;i<3;i++)
+			    		  {
+			    			  AllZone.GameAction.moveToHand(list.get(i));
+			    		  }  
+			    	  }
+			      };
+		    	  
+			      bounce.setBeforePayManaAI(bounceIslandsAI);
+			      
+		    	  card.clearSpellAbility();
+		    	  card.addSpellAbility(bounce);
+		    	  card.addSpellAbility(spell);
+		      }//*************** END ************ END **************************
+		    
+		    
+		    //*************** START *********** START **************************
+		      else if(cardName.equals("Force of Will"))
+		      {
+		    	  final SpellAbility spell = new Spell(card)
+		    	  {
+					private static final long serialVersionUID = 7960371805654673281L;
+					public void resolve()
+		    	        {
+		    	          SpellAbility sa = AllZone.Stack.pop();
+		    	          AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
+		    	        }
+		    	        public boolean canPlay()
+		    	        {
+		    	          if(AllZone.Stack.size() == 0)
+		    	            return false;
+
+		    	          //see if spell is on stack and that opponent played it
+		    	          String opponent = AllZone.GameAction.getOpponent(card.getController());
+		    	          SpellAbility sa = AllZone.Stack.peek();
+
+		    	          return sa.isSpell() && opponent.equals(sa.getSourceCard().getController()) 
+		    	          		 && CardFactoryUtil.isCounterable(sa.getSourceCard());
+		    	        }
+		    	        public boolean canPlayAI()
+						{
+							return false;
+						}
+		    	  };
+		    	  spell.setDescription("Counter target spell.");
+		    	  spell.setStackDescription(card.getName() + " - Counter target spell.");
+		    	  
+		    	  final SpellAbility alt = new Spell(card)
+		    	  {
+					private static final long serialVersionUID = -8643870743780757816L;
+
+					public void resolve()
+		    		{
+						 SpellAbility sa = AllZone.Stack.pop();
+		    	         AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
+		    		}
+					public boolean canPlay()
+					{
+						if(AllZone.Stack.size() == 0)
+		    	            return false;
+
+		    	          //see if spell is on stack and that opponent played it
+		    	        String opponent = AllZone.GameAction.getOpponent(card.getController());
+		    	        SpellAbility sa = AllZone.Stack.peek();
+
+						PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+						CardList list = new CardList(hand.getCards());
+						list = list.filter(new CardListFilter()
+						{
+							public boolean addCard(Card c)
+							{
+								return CardUtil.getColors(c).contains(Constant.Color.Blue) && !c.equals(card);
+							}
+						});
+						return sa.isSpell() && opponent.equals(sa.getSourceCard().getController()) 
+							   && CardFactoryUtil.isCounterable(sa.getSourceCard()) && list.size() >= 1;
+					}
+					
+					public boolean canPlayAI()
+					{
+						return false;
+					}
+					
+		    	  };
+		    	  alt.setDescription("You may pay 1 life and exile a blue card from your hand rather than pay Force of Will's mana cost.");
+		    	  alt.setStackDescription(card.getName() + " - Counter target spell.");
+		    	  alt.setManaCost("0");
+		    	  
+		    	  final Input exileBlue = new Input()
+			      {
+					private static final long serialVersionUID = 8692998689009712987L;
+					int stop = 1;
+			        int count = 0;
+
+			        public void showMessage()
+			        {
+			          AllZone.Display.showMessage("Select a blue card");
+			          ButtonUtil.disableAll();
+			        }
+			        public void selectButtonCancel() {stop();}
+			        public void selectCard(Card c, PlayerZone zone)
+			        {
+			          if(CardUtil.getColors(c).contains(Constant.Color.Blue) && zone.is(Constant.Zone.Play))
+			          {
+			            AllZone.GameAction.removeFromGame(c);
+			            String player = card.getController();
+			            AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+			        	  
+			            count++;
+			            if(count == stop) {
+			            	AllZone.Stack.add(alt);
+			            	stop();
+			            }
+			          }
+			        }//selectCard()
+			      };
+			      
+			      
+			      alt.setBeforePayMana(exileBlue);
+			      
+			      /*
+			      Command bounceIslandsAI = new Command()
+			      {
+					private static final long serialVersionUID = -8745630329512914365L;
+
+					public void execute()
+			    	  {
+			    		  PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+			    		  CardList list = new CardList(play.getCards());
+			    		  list = list.getType("Island");
+			    		  //TODO: sort by tapped
+			    		  
+			    		  for (int i=0;i<3;i++)
+			    		  {
+			    			  AllZone.GameAction.moveToHand(list.get(i));
+			    		  }  
+			    	  }
+			      };
+		    	  
+			      alt.setBeforePayManaAI(bounceIslandsAI);
+			      */
+			      
+		    	  card.clearSpellAbility();
+		    	  card.addSpellAbility(alt);
 		    	  card.addSpellAbility(spell);
 		      }//*************** END ************ END **************************
 		    
