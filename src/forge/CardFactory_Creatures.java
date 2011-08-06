@@ -10605,7 +10605,91 @@ public class CardFactory_Creatures {
             ability.setStackDescription(card.getName() + " - draw a card.");
             ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
         }//*************** END ************ END **************************
-        
+        //*************** START *********** START **************************
+        if(cardName.equals("Doomed Necromancer")) {   
+           
+            final SpellAbility ability = new Ability_Tap(card, "B") {
+            private static final long serialVersionUID = -6432831150810562390L;
+            @Override
+                public boolean canPlayAI() {
+               
+                    return getCreatures().length != 0;
+                }
+                public Card[] getCreatures() {
+                    CardList creature = new CardList();
+                    PlayerZone zone = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    creature.addAll(zone.getCards());
+                    creature = creature.getType("Creature");
+                    creature = creature.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.getNetAttack() > 4;
+                        }
+                    });                   
+                    return creature.toArray();
+                }
+                @Override
+                public void chooseTargetAI() {
+                    Card c[] = getCreatures();
+                    Card biggest = c[0];
+                    for(int i = 0; i < c.length; i++)
+                        if(biggest.getNetAttack() < c[i].getNetAttack()) biggest = c[i];
+                   
+                    setTargetCard(biggest);
+                }
+                @Override
+                public void resolve() {
+
+                    if(card.getController().equals(Constant.Player.Human)) {
+                        CardList creature = new CardList();
+                        PlayerZone zone = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                        creature.addAll(zone.getCards());
+                        creature = creature.getType("Creature");
+                        if(creature.size() != 0) {
+                    Object o = AllZone.Display.getChoice("Choose a creature from the graveyard to return to the battlefield", creature.toArray());
+                    if(o != null) {
+                        Card c = (Card) o;
+                        if(AllZone.GameAction.isCardInZone(c, zone)) {
+                            PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+                            AllZone.GameAction.moveTo(play, c);
+                            AllZone.GameAction.sacrifice(card);
+                        }
+                    }
+                        } else {   
+                            AllZone.GameAction.sacrifice(card);                          
+                        }
+                    } else {
+                        CardList creature = new CardList();
+                        PlayerZone zone = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                        creature.addAll(zone.getCards());
+                        creature = creature.getType("Creature");
+                        Card c[] = getCreatures();
+                        Card biggest = c[0];
+                        for(int i = 0; i < c.length; i++)
+                            if(biggest.getNetAttack() < c[i].getNetAttack()) biggest = c[i];
+                        if(creature.size() != 0) {
+                        if(biggest != null) {
+                            if(AllZone.GameAction.isCardInZone(biggest, zone)) {
+                                PlayerZone play = AllZone.getZone(Constant.Zone.Play, biggest.getController());
+                                AllZone.GameAction.moveTo(play, biggest);
+                                AllZone.GameAction.sacrifice(card);
+                            }
+                        }
+                    } else {
+                        AllZone.GameAction.sacrifice(card);                          
+                    }   
+                    }
+                }//resolve()   
+            };
+            card.clearSpellAbility();
+            card.addSpellAbility(ability);
+            ability.setStackDescription(cardName
+                    + " gets sacrificed to return target creature card from your graveyard to the battlefield");
+            ability.setDescription("B, Tap: Sacrifice Doomed Necromancer: Return target creature card from your graveyard to the battlefield");
+            card.addSpellAbility(new Spell_Permanent(card) {
+                private static final long serialVersionUID = -462134621235305833L;
+            }); 
+        }//*************** END ************ END **************************
+        	
         //*************** START *********** START **************************
         else if(cardName.equals("Affa Guard Hound")) {
                 final CommandReturn getCreature = new CommandReturn() {

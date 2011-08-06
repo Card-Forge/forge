@@ -38,6 +38,7 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+doomed_necromancer.jpg			http://www.wizards.com/global/images/magic/general/doomed_necromancer.jpg
 affa_guard_hound.jpg			http://www.wizards.com/global/images/magic/general/affa_guard_hound.jpg
 totem_guide_hartebeest.jpg		http://www.wizards.com/global/images/magic/general/totem_guide_hartebeest.jpg
 novablast_wurm.jpg		http://www.wizards.com/global/images/magic/general/novablast_wurm.jpg

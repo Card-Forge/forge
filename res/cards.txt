@@ -1,3 +1,9 @@
+Doomed Necromancer
+2 B
+Creature Human Cleric Mercenary
+B, Tap, Sacrifice Doomed Necromancer: Return target creature card from your graveyard to the battlefield.
+2/2
+
 Affa Guard Hound
 2 W 
 Creature Hound
