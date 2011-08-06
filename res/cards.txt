@@ -2390,7 +2390,7 @@ Peacekeeper
 Creature Human
 Creatures can't attack
 1/1
-Upkeep:1 W
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:1 W
 
 Arctic Nishoba
 5 G
