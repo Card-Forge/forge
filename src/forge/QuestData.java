@@ -345,8 +345,7 @@ public class QuestData implements NewConstants {
     
     public Deck ai_getDeckNewFormat(String deckName) {
     	DeckManager deckManager = new DeckManager(ForgeProps.getFile(QUEST.DECKS));
-    	Deck aiDeck = deckManager.readDeck(deckName);
-    	return aiDeck;
+    	return deckManager.getDeck(deckName);
     }
     
     

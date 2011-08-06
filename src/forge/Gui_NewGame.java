@@ -41,7 +41,6 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
 
     private final DeckManager deckManager = new DeckManager(ForgeProps.getFile(NEW_DECKS));
     //with the new IO, there's no reason to use different instances
-    private final DeckManager boosterDeckManager = deckManager;
     private List<Deck>         allDecks;
     private static Gui_DeckEditor   editor;
     
@@ -509,7 +508,8 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         String human = humanComboBox.getSelectedItem().toString();
         
         String computer = null;
-        if(computerComboBox.getSelectedItem() != null) computer = computerComboBox.getSelectedItem().toString();
+        if(computerComboBox.getSelectedItem() != null)
+            computer = computerComboBox.getSelectedItem().toString();
         
         if(draftRadioButton.isSelected()) {
             if(human.equals("New Draft")) {
@@ -538,7 +538,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                 return;
             } else//load old draft
             {
-                Deck[] deck = boosterDeckManager.readBoosterDeck(human);
+                Deck[] deck = deckManager.readBoosterDeck(human);
                 int index = Integer.parseInt(computer);
                 
                 Constant.Runtime.HumanDeck[0] = deck[0];
@@ -576,10 +576,11 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                 JOptionPane.showMessageDialog(null, String.format("You are using deck: %s",
                         Constant.Runtime.HumanDeck[0].getName()), "Deck Name", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                Constant.Runtime.HumanDeck[0] = deckManager.readDeck(human);
+                Constant.Runtime.HumanDeck[0] = deckManager.getDeck(human);
             }
-            
 
+
+            assert computer != null;
             boolean computerGenerate = computer.equals("Generate Deck");
 /*            boolean computerGenerateMulti3 = computer.equals("Generate 3-Color Deck");
             boolean computerGenerateMulti5 = computer.equals("Generate 5-Color Gold Deck");
@@ -603,7 +604,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                 JOptionPane.showMessageDialog(null, String.format("The computer is using deck: %s",
                         Constant.Runtime.ComputerDeck[0].getName()), "Deck Name", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                Constant.Runtime.ComputerDeck[0] = deckManager.readDeck(computer);
+                Constant.Runtime.ComputerDeck[0] = deckManager.getDeck(computer);
             }
         }// else
         
@@ -738,19 +739,20 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     	colors.add("red");
     	colors.add("green");
     	
-    	Object c1 = null, c2 = null;
-    	if (p.equals("H"))
+    	String c1;
+        String c2;
+        if (p.equals("H"))
     	{
-    		c1 = GuiUtils.getChoice("Select first color.", colors.toArray());
+    		c1 = GuiUtils.getChoice("Select first color.", colors.toArray()).toString();
     	
-    		if (c1.toString().equals("Random"))
+    		if (c1.equals("Random"))
     			c1 = colors.get(r.nextInt(colors.size() - 1) + 1);
     		
     		colors.remove(c1);
     	
-    		c2 = GuiUtils.getChoice("Select second color.", colors.toArray());
+    		c2 = GuiUtils.getChoice("Select second color.", colors.toArray()).toString();
     		
-    		if (c2.toString().equals("Random"))
+    		if (c2.equals("Random"))
     			c2 = colors.get(r.nextInt(colors.size() - 1) + 1);
     	}
     	else //if (p.equals("C"))
@@ -759,7 +761,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     		colors.remove(c1);
     		c2 = colors.get(r.nextInt(colors.size() - 1) + 1);
     	}
-    	Generate2ColorDeck gen = new Generate2ColorDeck(c1.toString(), c2.toString());
+    	Generate2ColorDeck gen = new Generate2ColorDeck(c1, c2);
     	CardList d = gen.get2ColorDeck(60);
     	
     	Deck deck = new Deck(Constant.GameType.Constructed);
@@ -783,25 +785,27 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     	colors.add("red");
     	colors.add("green");
     	
-    	Object c1 = null, c2 = null, c3 = null;
-    	if (p.equals("H"))
+    	String c1;
+        String c2;
+        String c3;
+        if (p.equals("H"))
     	{
-    		c1 = GuiUtils.getChoice("Select first color.", colors.toArray());
+    		c1 = GuiUtils.getChoice("Select first color.", colors.toArray()).toString();
     	
-    		if (c1.toString().equals("Random"))
+    		if (c1.equals("Random"))
     			c1 = colors.get(r.nextInt(colors.size() - 1) + 1);
     		
     		colors.remove(c1);
     	
-    		c2 = GuiUtils.getChoice("Select second color.", colors.toArray());
+    		c2 = GuiUtils.getChoice("Select second color.", colors.toArray()).toString();
     		
-    		if (c2.toString().equals("Random"))
+    		if (c2.equals("Random"))
     			c2 = colors.get(r.nextInt(colors.size() - 1) + 1);
     		
     		colors.remove(c2);
     		
-    		c3 = GuiUtils.getChoice("Select third color.", colors.toArray());
-    		if (c3.toString().equals("Random"))
+    		c3 = GuiUtils.getChoice("Select third color.", colors.toArray()).toString();
+    		if (c3.equals("Random"))
     			c3 = colors.get(r.nextInt(colors.size() - 1) + 1);
 
     	}
@@ -813,7 +817,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     		colors.remove(c2);
     		c3 = colors.get(r.nextInt(colors.size() - 1) + 1);
     	}
-    	Generate3ColorDeck gen = new Generate3ColorDeck(c1.toString(), c2.toString(), c3.toString());
+    	Generate3ColorDeck gen = new Generate3ColorDeck(c1, c2, c3);
     	CardList d = gen.get3ColorDeck(60);
     	
     	Deck deck = new Deck(Constant.GameType.Constructed);
@@ -848,12 +852,11 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             computerComboBox.addItem("Random");
         }
         
-        Deck d;
-        for(int i = 0; i < allDecks.size(); i++) {
-            d = allDecks.get(i);
-            if(d.getDeckType().equals(Constant.Runtime.GameType[0])) {
-                humanComboBox.addItem(d.getName());
-                computerComboBox.addItem(d.getName());
+
+        for (Deck allDeck : allDecks) {
+            if (allDeck.getDeckType().equals(Constant.Runtime.GameType[0])) {
+                humanComboBox.addItem(allDeck.getName());
+                computerComboBox.addItem(allDeck.getName());
             }
         }//for
         
@@ -869,9 +872,12 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         ArrayList<Deck> list = new ArrayList<Deck>();
         
         Deck d;
-        for(int i = 0; i < allDecks.size(); i++) {
-            d = allDecks.get(i);
-            if(d.getDeckType().equals(gameType)) list.add(d);
+        for (Deck allDeck : allDecks) {
+            d = allDeck;
+
+            if (d.getDeckType().equals(gameType)) {
+                list.add(d);
+            }
         }//for
         
         //convert ArrayList to Deck[]
@@ -887,10 +893,12 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         computerComboBox.removeAllItems();
         
         humanComboBox.addItem("New Draft");
-        Object[] key = boosterDeckManager.getBoosterDecks().keySet().toArray();
+        Object[] key = deckManager.getBoosterDecks().keySet().toArray();
         Arrays.sort(key);
-        for(int i = 0; i < key.length; i++)
-            humanComboBox.addItem(key[i]);
+
+        for (Object aKey : key) {
+            humanComboBox.addItem(aKey);
+        }
         
         for(int i = 0; i < 7; i++)
             computerComboBox.addItem("" + (i + 1));
@@ -913,8 +921,9 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         public void actionPerformed(ActionEvent e) {
             LookAndFeelInfo[] info = UIManager.getInstalledLookAndFeels();
             HashMap<String, String> LAFMap = new HashMap<String, String>();
-            for(int i = 0; i < info.length; i++)
-                LAFMap.put(info[i].getName(), info[i].getClassName());
+            for (LookAndFeelInfo anInfo : info) {
+                LAFMap.put(anInfo.getName(), anInfo.getClassName());
+            }
             
             //add Substance LAFs:
             LAFMap.put("Autumn", "org.jvnet.substance.skin.SubstanceAutumnLookAndFeel");
@@ -948,10 +957,9 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             
             String[] keys = new String[LAFMap.size()];
             int count = 0;
-            Iterator<String> iter = LAFMap.keySet().iterator();
-            while(iter.hasNext()) {
-                String s = iter.next();
-                keys[count++] = s;
+
+            for (String s1 : LAFMap.keySet()) {
+                keys[count++] = s1;
             }
             Arrays.sort(keys);
             

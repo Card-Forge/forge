@@ -51,7 +51,6 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
 
     private final DeckManager deckManager = new DeckManager(ForgeProps.getFile(NEW_DECKS));
     //with the new IO, there's no reason to use different instances
-    private final DeckManager boosterDeckManager = deckManager;
 
     private boolean isDeckSaved;
 
@@ -344,7 +343,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         currentGameType = Constant.GameType.Draft;
 
         //move all cards from deck main and sideboard to CardList
-        Deck deck = boosterDeckManager.readBoosterDeck(currentDeckName)[0];
+        Deck deck = deckManager.readBoosterDeck(currentDeckName)[0];
         setDeckData("", false);
 
         CardList top = new CardList();
@@ -637,7 +636,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         //and the other 7 are the computer's deck
         if (currentGameType.equals(Constant.GameType.Draft)) {
             //read all draft decks
-            Deck d[] = boosterDeckManager.readBoosterDeck(currentDeckName);
+            Deck d[] = deckManager.readBoosterDeck(currentDeckName);
 
             //replace your deck
             d[0] = deck;
@@ -807,7 +806,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         currentGameType = Constant.GameType.Constructed;
         newDraftItem.setEnabled(false);
 
-        Deck deck = DeckManager.readDeck(name);
+        Deck deck = deckManager.getDeck(name);
         showConstructedDeck(deck);
     }//open constructed
 
@@ -857,7 +856,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         currentGameType = Constant.GameType.Sealed;
         newDraftItem.setEnabled(false);
 
-        Deck deck = deckManager.readDeck(name);
+        Deck deck = deckManager.getDeck(name);
         showSealedDeck(deck);
     }//open sealed
 
@@ -907,7 +906,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         currentGameType = Constant.GameType.Draft;
         newDraftItem.setEnabled(true);
 
-        Deck deck = boosterDeckManager.readBoosterDeck(name)[0];
+        Deck deck = deckManager.readBoosterDeck(name)[0];
         showDraftDeck(deck);
     }//open draft
 
@@ -954,9 +953,9 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         else if (currentGameType.equals(Constant.GameType.Draft)) {
             setDeckData(currentDeckName, true);
             //write booster deck
-            Deck[] all = boosterDeckManager.readBoosterDeck(currentDeckName);
+            Deck[] all = deckManager.readBoosterDeck(currentDeckName);
             all[0] = getDeck();
-            boosterDeckManager.writeBoosterDeck(all);
+            deckManager.addBoosterDeck(all);
         }
         else//constructed or sealed
         {
@@ -978,7 +977,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         }
         else if (currentGameType.equals(Constant.GameType.Draft)) {
             //MUST copy array
-            Deck[] read = boosterDeckManager.readBoosterDeck(currentDeckName);
+            Deck[] read = deckManager.readBoosterDeck(currentDeckName);
             Deck[] all = new Deck[read.length];
 
             System.arraycopy(read, 0, all, 0, read.length);
@@ -986,7 +985,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
             setDeckData(name, true);
 
             all[0] = getDeck();
-            boosterDeckManager.writeBoosterDeck(all);
+            deckManager.addBoosterDeck(all);
         }
         else//constructed and sealed
         {
@@ -1011,7 +1010,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         }
 
         if (currentGameType.equals(Constant.GameType.Draft)) {
-            boosterDeckManager.deleteBoosterDeck(currentDeckName);
+            deckManager.deleteBoosterDeck(currentDeckName);
         }
         else {
             deckManager.deleteDeck(currentDeckName);
@@ -1030,7 +1029,6 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
 //      save();
 
         deckManager.close();
-        boosterDeckManager.close();
         exitCommand.execute();
     }//close
 
@@ -1120,7 +1118,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         //only get decks according to the Gui_NewGame screen option
         if (deckType.equals(Constant.GameType.Draft)) {
 
-            for (String s : boosterDeckManager.getBoosterDecks().keySet()) {
+            for (String s : deckManager.getBoosterDecks().keySet()) {
                 list.add(s);
             }
         }

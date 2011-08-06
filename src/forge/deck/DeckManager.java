@@ -17,16 +17,18 @@ import static java.util.Arrays.asList;
 
 //reads and write Deck objects
 public class DeckManager {
-    private static FilenameFilter DCKFileFilter = new FilenameFilter() {
-        public boolean accept(File dir, String name) {
-            return name.endsWith(".dck");
-        }
-    };
     private static FilenameFilter BDKFileFilter = new FilenameFilter() {
         public boolean accept(File dir, String name) {
             return name.endsWith(".bdk");
         }
     };
+
+    private static FilenameFilter DCKFileFilter = new FilenameFilter() {
+        public boolean accept(File dir, String name) {
+            return name.endsWith(".dck");
+        }
+    };
+
 
     private File deckDir;
     Map<String, Deck> deckMap;
@@ -70,21 +72,6 @@ public class DeckManager {
         return !boosterMap.keySet().contains(deckName);
     }
 
-    private int findDeckIndex(String deckName) {
-        int n = -1;
-        for (int i = 0; i < deckMap.size(); i++) {
-            if ((deckMap.get(i)).getName().equals(deckName)) {
-                n = i;
-            }
-        }
-
-        if (n == -1) {
-            throw new RuntimeException("DeckManager : findDeckIndex() error, deck name not found - " + deckName);
-        }
-
-        return n;
-    }
-
     public void addDeck(Deck deck) {
         if (deck.getDeckType().equals(Constant.GameType.Draft)) {
             throw new RuntimeException(
@@ -107,11 +94,11 @@ public class DeckManager {
         return boosterMap.get(deckName);
     }
 
-    public void writeBoosterDeck(Deck[] deck) {
+    public void addBoosterDeck(Deck[] deck) {
         checkBoosterDeck(deck);
 
         boosterMap.put(deck[0].toString(), deck);
-    }//writeBoosterDeck()
+    }
 
     public void deleteBoosterDeck(String deckName) {
         if (!boosterMap.containsKey(deckName)) {
@@ -127,7 +114,7 @@ public class DeckManager {
                 || (!deck[0].getDeckType().equals(Constant.GameType.Draft))) {
             throw new RuntimeException("DeckManager : checkBoosterDeck() error, invalid deck");
         }
-    }//checkBoosterDeck()
+    }
 
 
     public Collection<Deck> getDecks() {
@@ -167,12 +154,7 @@ public class DeckManager {
         }
     }
 
-
-    public static Deck readDeck(String fileName) {
-        return readDeck(new File(fileName));
-    }
-
-    public static Deck readDeck(File deckFile) {
+    private Deck readDeck(File deckFile) {
 
         List<String> lines = new LinkedList<String>();
 
@@ -342,5 +324,9 @@ public class DeckManager {
             }
         }
         return result;
+    }
+
+    public Deck getDeck(String deckName) {
+        return deckMap.get(deckName);
     }
 }

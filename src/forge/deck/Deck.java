@@ -10,7 +10,10 @@ public class Deck implements Comparable{
 
     private Map<String, String> metadata = new HashMap<String, String>();
 
-    private List<String> main, sideboard, mainView, sideboardView;
+    private List<String> main;
+    private List<String> sideboard;
+    private transient List<String> mainView;
+    private transient List<String> sideboardView;
 
     public static final String NAME = "Name";
     public static final String DECK_TYPE = "Deck Type";

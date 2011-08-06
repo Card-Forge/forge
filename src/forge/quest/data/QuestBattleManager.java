@@ -45,7 +45,7 @@ public class QuestBattleManager {
     }
 
     public static Deck getAIDeckNewFormat(String deckName) {
-        return DeckManager.readDeck(deckName);
+        return (new DeckManager(ForgeProps.getFile(NewConstants.QUEST.DECKS))).getDeck(deckName);
     }
 
     public static List<String> getAIDeckNames() {
