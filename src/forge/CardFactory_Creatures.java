@@ -14374,6 +14374,29 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
+        else if(cardName.equals("Primeval Titan")) {
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                	AllZone.GameAction.searchLibraryTwoLand("Land", card.getController(), 
+							Constant.Zone.Play, true, 
+							Constant.Zone.Play, true);
+                }//resolve()
+            };
+            Command intoPlay = new Command() {
+
+				private static final long serialVersionUID = 4991367699382641872L;
+
+				public void execute() {
+                    ability.setStackDescription("Primeval Titan - search your library for up to two land cards, put them onto the battlefield tapped, then shuffle your library.");
+                    AllZone.Stack.add(ability);
+                }
+            };
+            card.addComesIntoPlayCommand(intoPlay);
+            
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
         else if(cardName.equals("Mogg War Marshal") || cardName.equals("Goblin Marshal")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override

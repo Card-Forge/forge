@@ -1556,10 +1556,29 @@ public class CombatUtil {
                 
 
                 ability2.setStackDescription(c.getName()
-                        + " - put a 2/2 green Cat Warrior creature token with forestwalk into play.");
+                        + " - put a 2/2 black Zombie creature token into play.");
                 AllZone.Stack.add(ability2);
                 
             }//Grave Titan
+            
+            else if(c.getName().equals("Primeval Titan") && !c.getCreatureAttackedThisCombat()) {
+                final Card prim = c;
+                Ability ability2 = new Ability(c, "0") {
+                    @Override
+                    public void resolve() {
+                    	AllZone.GameAction.searchLibraryTwoLand("Land", prim.getController(), 
+    							Constant.Zone.Play, true, 
+    							Constant.Zone.Play, true);
+                        //GameActionUtil.executeCardStateEffects(); 
+                    }
+                }; //Ability
+                
+
+                ability2.setStackDescription(c.getName()
+                        + " - search your library for up to two land cards, put them onto the battlefield tapped, then shuffle your library.");
+                AllZone.Stack.add(ability2);
+                
+            }//Primeval Titan
             
             else if(c.getName().equals("Preeminent Captain") && !c.getCreatureAttackedThisCombat()) {
                 System.out.println("Preeminent Captain Attacks");
