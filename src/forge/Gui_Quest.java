@@ -367,6 +367,8 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Boris Karloff 3		hard	LokiUndergod's Boros Aggro (RW) deck with mods, Kors, levelers and threat removal");
         sb.append("\r\n");
+        sb.append("Boromir 2		medium	Elvish Piper and Quicksilver Amulet with huge creatures");
+        sb.append("\r\n");
         sb.append("Boromir 3		hard	Elvish Piper and Quicksilver Amulet with huge creatures");
         sb.append("\r\n");
         sb.append("Buffy 1		easy	Vampires and creatures with wither + Sorceress Queen");
