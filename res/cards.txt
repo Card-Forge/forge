@@ -1,3 +1,9 @@
+Khalni Heart Expedition
+1 G
+Enchantment
+Landfall - Whenever a land enters the battlefield under your control, you may put a quest counter on Khalni Heart Expedition.
+Landfall
+
 Suffer the Past
 X B
 Sorcery
