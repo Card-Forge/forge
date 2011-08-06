@@ -2227,6 +2227,7 @@ res/cardsfolder/festering_evil.txt -text svneol=native#text/plain
 res/cardsfolder/festering_goblin.txt svneol=native#text/plain
 res/cardsfolder/festering_march.txt svneol=native#text/plain
 res/cardsfolder/festering_wound.txt -text svneol=native#text/plain
+res/cardsfolder/festival.txt -text svneol=native#text/plain
 res/cardsfolder/festival_of_trokin.txt -text svneol=native#text/plain
 res/cardsfolder/fetid_heath.txt -text svneol=native#text/plain
 res/cardsfolder/fetid_horror.txt -text svneol=native#text/plain

@@ -1,0 +1,10 @@
+Name:Festival
+ManaCost:W
+Types:Instant
+Text:Cast Festival only during an opponent's upkeep.
+A:SP$ Effect | Cost$ W | Name$ Falter Effect | Keywords$ KWPump | OpponentTurn$ True | ActivatingPhases$ Upkeep | SpellDescription$ Creatures can't attack this turn.
+SVar:KWPump:stPumpAll:Creature:0/0/HIDDEN CARDNAME can't attack.:no Condition:Creatures can't attack this turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/festival.jpg
+End
