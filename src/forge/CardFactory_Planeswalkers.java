@@ -228,6 +228,8 @@ class CardFactory_Planeswalkers {
             ability3.setStackDescription("Elspeth, Knight-Errant - Make everything indestructible.");
             card2.addSpellAbility(ability3);
             
+            card2.setSVars(card.getSVars());
+            
             return card2;
         }
         //*************** END ************ END **************************
@@ -481,6 +483,8 @@ class CardFactory_Planeswalkers {
             ability3.setDescription("-7: Search your library for any number of Elf creature cards and put them onto the battlefield. Then shuffle your library.");
             ability3.setStackDescription("Nissa Revane - Search your library for any number of Elf creature cards and put them onto the battlefield. Then shuffle your library.");
             card2.addSpellAbility(ability3);
+            
+            card2.setSVars(card.getSVars());
             
             return card2;
         }
@@ -807,6 +811,8 @@ class CardFactory_Planeswalkers {
             ability3.setStackDescription("Nicol Bolas - deals 7 damage to target player. That player discards 7 cards, then sacrifices 7 permanents.");
             card2.addSpellAbility(ability3);
             
+            card2.setSVars(card.getSVars());
+            
             return card2;
         }
         //*************** END ************ END **************************
@@ -1023,6 +1029,8 @@ class CardFactory_Planeswalkers {
             ability3.setDescription("-6: Put a white Avatar creature token into play with \"This creature's power and toughness are each equal to your life total.\"");
             ability3.setStackDescription("Ajani Goldmane - Put X\\X white Avatar creature token into play.");
             card2.addSpellAbility(ability3);
+            
+            card2.setSVars(card.getSVars());
             
             return card2;
         }
@@ -1261,6 +1269,8 @@ class CardFactory_Planeswalkers {
             ability3.setDescription("-8: Put all creature cards in all graveyards into play under your control.");
             ability3.setStackDescription("Liliana Vess - Put all creature cards in all graveyards into play under your control.");
             card2.addSpellAbility(ability3);
+            
+            card2.setSVars(card.getSVars());
             
             return card2;
         }
@@ -1535,6 +1545,8 @@ class CardFactory_Planeswalkers {
             card2.addSpellAbility(ability3);
             //end ability3
             
+            card2.setSVars(card.getSVars());
+            
             return card2;
         }
         //*************** END ************ END **************************
@@ -1778,6 +1790,8 @@ class CardFactory_Planeswalkers {
             card2.addSpellAbility(ability3);
             //end ability 3
             
+            card2.setSVars(card.getSVars());
+            
             return card2;
         }//*************** END ************ END **************************
         
@@ -1915,6 +1929,8 @@ class CardFactory_Planeswalkers {
             card2.addSpellAbility(ability1);
             card2.addSpellAbility(ability2);
             card2.addSpellAbility(ability3);
+            
+            card2.setSVars(card.getSVars());
             
             return card2;
         }//*************** END ************ END **************************
@@ -2163,6 +2179,8 @@ class CardFactory_Planeswalkers {
             card2.addSpellAbility(ability1);
             card2.addSpellAbility(ability2);
             card2.addSpellAbility(ability3);
+            
+            card2.setSVars(card.getSVars());
             
             return card2;
         }//*************** END ************ END **************************
@@ -2456,6 +2474,8 @@ class CardFactory_Planeswalkers {
                     + " - Artifacts you control become 5/5 artifact creatures until end of turn.");
             card2.addSpellAbility(ability3);
             
+            card2.setSVars(card.getSVars());
+            
             return card2;
         }//*************** END ************ END **************************
         
@@ -2676,6 +2696,8 @@ class CardFactory_Planeswalkers {
             ability3.setDescription("-6: Put five 4/4 red Dragon creature tokens with flying onto the battlefield.");
             card2.addSpellAbility(ability3);
             //end ability 3
+            
+            card2.setSVars(card.getSVars());
             
             return card2;
         }//*************** END ************ END **************************    
@@ -2907,6 +2929,8 @@ class CardFactory_Planeswalkers {
             ability4.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
             card2.addSpellAbility(ability4);
             
+            card2.setSVars(card.getSVars());
+            
             return card2;
         }//*************** END ************ END **************************
 
@@ -3105,6 +3129,8 @@ class CardFactory_Planeswalkers {
             card2.addSpellAbility(ability1);
             card2.addSpellAbility(ability2);
             card2.addSpellAbility(ability3);
+            
+            card2.setSVars(card.getSVars());
             
             return card2;
         }//*************** END ************ END **************************
