@@ -4423,7 +4423,6 @@ public class GameActionUtil {
 		else if(c.getName().equals("Augury Adept")) playerCombatDamage_Augury_Adept(c);
 		else if(c.getName().equals("Spawnwrithe")) playerCombatDamage_Spawnwrithe(c);
 		else if(c.getName().equals("Glint-Eye Nephilim") || c.getName().equals("Cold-Eyed Selkie")) playerCombatDamage_Glint_Eye_Nephilim(c);
-		else if(c.getName().equals("Hystrodon") && !c.isFaceDown()) playerCombatDamage_Hystrodon(c);
 		else if(c.getName().equals("Rootwater Thief")) playerCombatDamage_Rootwater_Thief(c);
 		else if(c.getName().equals("Treva, the Renewer")) playerCombatDamage_Treva(c);
 		else if(c.getName().equals("Rith, the Awakener")) playerCombatDamage_Rith(c);
@@ -4516,54 +4515,6 @@ public class GameActionUtil {
 			AllZone.Stack.add(loseLife);
 		}
 		
-	}
-	
-	private static void may_Return_Graveyard_to_Hand(final Card source, final String[] valid) {
-		final Player player = source.getController();
-		final PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-		final boolean mayReturn = true;
-		
-		final SpellAbility returnTgt = new Ability(source, "0") {
-
-			@Override
-			public void resolve() {
-				Card target = getTargetCard();
-				if (AllZone.GameAction.isCardInZone(target, grave) && CardFactoryUtil.canTarget(source, target)) {
-					AllZone.GameAction.moveToHand(target);
-				}
-			}//resolve()
-        };// returnTgt
-        
-		
-        CardList choices = new CardList(grave.getCards());
-        choices = choices.getValidCards(valid, player, source);
-        choices = choices.filter(AllZoneUtil.getCanTargetFilter(source));
-        
-        if( choices.isEmpty() ) return;
-
-        if( player.isHuman() ) {
-        	if (grave.size() > 0) {
-        		Object o;
-        		if (mayReturn) {
-        			o = GuiUtils.getChoiceOptional("Select a card", choices.toArray());
-        		} else {
-        			o = GuiUtils.getChoice("Select a card", choices.toArray());
-        		}
-        		if (o != null) {
-        			Card c_1 = (Card) o;
-        			returnTgt.setTargetCard(c_1);
-        			AllZone.Stack.add(returnTgt);
-        		}
-        	}
-        }// if HumanPlayer
-
-        else { // ComputerPlayer
-
-        	if (choices.size() > 0) {
-        		returnTgt.setTargetCard(choices.get(0));
-        		AllZone.Stack.add(returnTgt);
-        	}
-        }// ComputerPlayer
 	}
 
 	private static void playerCombatDamage_PoisonCounter(Card c, int n) {
@@ -4819,25 +4770,6 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}
 	}
-
-    private static void playerCombatDamage_Hystrodon(final Card c) {
-        final Player player = c.getController();
-        final int power = c.getNetAttack();
-
-        if (power > 0) {
-            Ability ability2 = new Ability(c, "0") {
-                @Override
-                public void resolve() {
-                    player.mayDrawCard();
-                }//resolve()
-            };// ability2
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(c.getName()).append(" - ").append(player).append(" may draw a card.");
-            ability2.setStackDescription(sb.toString());
-            AllZone.Stack.add(ability2);
-        }// if
-    }//playerCombatDamage_Hystrodon()
 
 	private static void playerCombatDamage_Glint_Eye_Nephilim(Card c) {
 		final Player player = c.getController();
