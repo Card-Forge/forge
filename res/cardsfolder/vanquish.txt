@@ -1,0 +1,9 @@
+Name:Vanquish
+ManaCost:2 W
+Types:Instant
+Text:Destroy target blocking creature.
+K:spDestroyTgt:Creature.blocking
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vanquish.jpg
+End
