@@ -10915,6 +10915,7 @@ public class GameActionUtil {
 
 		Sacrifice_NoIslands.execute();
 		Sacrifice_NoForests.execute();
+		Sacrifice_NoSwamps.execute();
 		Sacrifice_NoArtifacts.execute();
 		Sacrifice_NoEnchantments.execute();
 		Sacrifice_NoLands.execute();
@@ -11559,6 +11560,13 @@ public class GameActionUtil {
       				Cards_inZone.addAll(AllZone.Human_Hand.getCards());
       				Cards_inZone.addAll(AllZone.Computer_Hand.getCards());
       			}
+      			//hack for Molten Disaster
+      			/*
+      			 // TODO for future use
+      			if(Keyword_Details.length >= 2 && Keyword_Details[2].contains("Split second")) {
+      				Cards_inZone.add(AllZone.Stack.getSpellCardsOnStack());
+      			}
+      			*/
       		}
       		if(Range.equals("Enchanted")) {
       			if (SourceCard.getEnchanting().size() > 0)
@@ -12418,6 +12426,28 @@ public class GameActionUtil {
 
 			for(Card c:creature) {
 				if(AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Forest").size() == 0) {
+					AllZone.GameAction.sacrifice(c);
+				}
+			}
+
+		}//execute()
+	};//Sacrifice_NoForests
+	
+	public static Command Sacrifice_NoSwamps = new Command() {
+		private static final long serialVersionUID = 1961985826678794078L;
+
+		public void execute() {
+			CardList creature = AllZoneUtil.getCardsInPlay();
+
+			creature = creature.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					return c.getKeyword().contains(
+							"When you control no Swamps, sacrifice CARDNAME.");
+				}
+			});
+
+			for(Card c:creature) {
+				if(AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Swamp").size() == 0) {
 					AllZone.GameAction.sacrifice(c);
 				}
 			}
