@@ -907,12 +907,12 @@ public class AbilityFactory_Counters {
 
 				@Override
 				public void showMessage() {
+					ButtonUtil.enableOnlyCancel();
 					AllZone.Display.showMessage("Proliferate: Choose permanents and/or players");
-					ButtonUtil.enableOnlyOK();
 				}
 
 				@Override
-				public void selectButtonOK() {
+				public void selectButtonCancel() {
 					stop();
 				}
 

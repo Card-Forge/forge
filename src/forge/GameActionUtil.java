@@ -4675,9 +4675,6 @@ public class GameActionUtil {
 			}
 		}
 		
-		if (c.getKeyword().contains("Whenever CARDNAME deals combat damage to a player, proliferate."))
-			AllZone.GameAction.proliferate(c, "0");
-		
 		if(CardFactoryUtil.hasNumberEquipments(c, "Mask of Riddles") > 0 && c.getNetAttack() > 0) {
 			for(int k = 0; k < CardFactoryUtil.hasNumberEquipments(c, "Mask of Riddles"); k++) {
 				playerCombatDamage_May_draw(c);
