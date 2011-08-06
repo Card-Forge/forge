@@ -1,0 +1,7 @@
+Name:Inferno
+ManaCost:5 R R
+Types:Instant
+Text:Inferno deals 6 damage to each creature and each player.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/inferno.jpg
+End

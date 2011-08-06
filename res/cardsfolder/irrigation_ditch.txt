@@ -1,0 +1,11 @@
+Name:Irrigation Ditch
+ManaCost:no cost
+Types:Land
+Text:no text
+K:tap: add W
+K:tap, Sacrifice CARDNAME: Add G U to your mana pool.
+K:Comes into play tapped.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/irrigation_ditch.jpg
+End

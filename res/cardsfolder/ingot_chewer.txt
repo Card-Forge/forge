@@ -1,0 +1,10 @@
+Name:Ingot Chewer
+ManaCost:4 R
+Types:Creature Elemental
+Text:When Ingot Chewer enters the battlefield, destroy target artifact.
+PT:3/3
+K:etbDestroyTgt:Artifact
+K:SVar:Evoke:R
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ingot_chewer.jpg
+End

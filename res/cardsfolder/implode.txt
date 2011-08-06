@@ -1,0 +1,9 @@
+Name:Implode
+ManaCost:4 R
+Types:Sorcery
+Text:Destroy target land.
+K:spDestroyTgt:Land
+K:Draw a card.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/implode.jpg
+End

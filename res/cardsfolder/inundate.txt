@@ -1,0 +1,8 @@
+Name:Inundate
+ManaCost:3 U U U
+Types:Sorcery
+Text:Return all nonblue creatures to their owners' hands.
+K:spBounceAll:Creature.nonBlue:Hand
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/inundate.jpg
+End

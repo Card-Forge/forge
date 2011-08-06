@@ -1,0 +1,8 @@
+Name:Ironroot Treefolk
+ManaCost:4 G
+Types:Creature Treefolk
+Text:no text
+PT:3/5
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card3988.jpg
+End

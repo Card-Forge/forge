@@ -1,0 +1,10 @@
+Name:Imperial Hellkite
+ManaCost:5 R R
+Types:Creature Dragon
+Text:When Imperial Hellkite is turned face up, you may search your library for a Dragon card, reveal it, and put it into your hand. If you do, shuffle your library.
+PT:6/6
+K:Flying
+K:Morph:6 R R
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/imperial_hellkite.jpg
+End

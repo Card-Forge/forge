@@ -1,0 +1,9 @@
+Name:Ifh-Biff Efreet
+ManaCost:2 G G
+Types:Creature Efreet
+Text:no text
+PT:3/3
+K:Flying
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/an/en-us/card947.jpg
+End

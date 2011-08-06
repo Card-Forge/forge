@@ -1,0 +1,7 @@
+Name:Ivory Tower
+ManaCost:1
+Types:Artifact
+Text:At the beginning of your upkeep, you gain X life, where X is the number of cards in your hand minus four.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ivory_tower.jpg
+End

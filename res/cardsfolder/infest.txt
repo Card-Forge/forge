@@ -1,0 +1,7 @@
+Name:Infest
+ManaCost:1 B B
+Types:Sorcery
+Text:All creatures get -2/-2 until end of turn.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card23280.jpg
+End

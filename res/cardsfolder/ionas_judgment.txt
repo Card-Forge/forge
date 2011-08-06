@@ -1,0 +1,8 @@
+Name:Iona's Judgment
+ManaCost:4 W
+Types:Sorcery
+Text:Exile target creature or enchantment.
+K:spBounceTgt:Creature,Enchantment:Exile
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ionas_judgment.jpg
+End

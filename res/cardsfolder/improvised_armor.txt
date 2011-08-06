@@ -1,0 +1,10 @@
+Name:Improvised Armor
+ManaCost:3 W
+Types:Enchantment Aura
+Text:Enchanted creature gets +2/+5.
+K:Cycling:3
+K:Enchant creature
+K:enPump:+2/+5
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/improvised_armor.jpg
+End

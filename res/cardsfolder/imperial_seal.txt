@@ -1,0 +1,7 @@
+Name:Imperial Seal
+ManaCost:B
+Types:Sorcery
+Text:Search your library for a card, then shuffle your library and put that card on top of it. You lose 2 life.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/imperial_seal.jpg
+End

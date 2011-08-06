@@ -1,0 +1,10 @@
+Name:Illusionary Forces
+ManaCost:3 U
+Types:Creature Illusion
+Text:no text
+PT:4/4
+K:Flying
+K:Cumulative upkeep:U
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/illusionary_forces.jpg
+End

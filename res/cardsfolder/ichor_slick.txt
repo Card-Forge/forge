@@ -1,0 +1,8 @@
+Name:Ichor Slick
+ManaCost:2 B
+Types:Sorcery
+Text:no text
+K:Madness:3 B
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130683.jpg
+End

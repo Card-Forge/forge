@@ -1,0 +1,9 @@
+Name:Ihsan's Shade
+ManaCost:3 B B B
+Types:Legendary Creature Shade Knight
+Text:no text
+PT:5/5
+K:Protection from white
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ihsans_shade.jpg
+End

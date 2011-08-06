@@ -1,0 +1,8 @@
+Name:Impulse
+ManaCost:1 U
+Types:Instant
+Text:Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/vi/en-us/card3641.jpg
+End

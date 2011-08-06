@@ -1,0 +1,8 @@
+Name:Irradiate
+ManaCost:3 B
+Types:Instant
+Text:no text
+K:spPumpTgtCurse:-X/-X:Target creature gets -1/-1 until end of turn for each artifact you control.
+K:SVar:X:Count$NumTypeYouCtrl.Artifact
+K:SVar:RemAIDeck:True
+End

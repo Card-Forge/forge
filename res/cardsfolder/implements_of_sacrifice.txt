@@ -1,0 +1,13 @@
+Name:Implements of Sacrifice
+ManaCost:2
+Types:Artifact
+Text:no text
+K:1, tap, Sacrifice CARDNAME: Add W W to your mana pool.
+K:1, tap, Sacrifice CARDNAME: Add U U to your mana pool.
+K:1, tap, Sacrifice CARDNAME: Add B B to your mana pool.
+K:1, tap, Sacrifice CARDNAME: Add R R to your mana pool.
+K:1, tap, Sacrifice CARDNAME: Add G G to your mana pool.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/implements_of_sacrifice.jpg
+End

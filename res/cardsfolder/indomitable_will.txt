@@ -1,0 +1,10 @@
+Name:Indomitable Will
+ManaCost:1 W
+Types:Enchantment Aura
+Text:Enchanted creature gets +1/+2.
+K:Flash
+K:Enchant creature
+K:enPump:+1/+2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/indomitable_will.jpg
+End

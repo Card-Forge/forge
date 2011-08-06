@@ -1,0 +1,9 @@
+Name:Inner-Chamber Guard
+ManaCost:1 W
+Types:Creature Human Samurai
+Text:no text
+PT:0/2
+K:Bushido 2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/inner_chamber_guard.jpg
+End

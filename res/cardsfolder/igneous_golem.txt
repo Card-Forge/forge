@@ -1,0 +1,9 @@
+Name:Igneous Golem
+ManaCost:5
+Types:Artifact Creature Golem
+Text:no text
+PT:3/4
+K:abPump 2:Trample
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/igneous_golem.jpg
+End

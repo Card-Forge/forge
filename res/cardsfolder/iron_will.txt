@@ -1,0 +1,9 @@
+Name:Iron Will
+ManaCost:W
+Types:Instant
+Text:no text
+K:spPumpTgt:+0/+4
+K:Cycling:2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/iron_will.jpg
+End

@@ -1,0 +1,8 @@
+Name:Inspirit
+ManaCost:2 W
+Types:Instant
+Text:no text
+K:spPumpTgt:+2/+4:Drawback$UntapTgt:Untap target creature. It gets +2/+4 until end of turn.:Insprit - Untap target creature. It gets +2/+4 until end of turn.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84552.jpg
+End

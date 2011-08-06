@@ -1,0 +1,10 @@
+Name:Iron-Barb Hellion
+ManaCost:5 R
+Types:Creature Hellion Beast
+Text:no text
+PT:5/4
+K:CARDNAME can't block.
+K:Haste
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card44608.jpg
+End

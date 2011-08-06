@@ -1,0 +1,14 @@
+Name:Iridescent Angel
+ManaCost:5 W U
+Types:Creature Angel
+Text:no text
+PT:4/4
+K:Flying
+K:Protection from white
+K:Protection from blue
+K:Protection from black
+K:Protection from red
+K:Protection from green
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/iridescent_angel.jpg
+End
