@@ -1,3 +1,1653 @@
+Agent of Stromgald
+R
+Creature Human Knight
+no text
+1/1
+R: add B
+SVar:RemAIDeck:True
+
+Ancient Spring
+no cost
+Land
+no text
+tap: add U
+tap, Sacrifice CARDNAME: Add W B to your mana pool.
+Comes into play tapped.
+SVar:RemAIDeck:True
+
+Ancient Tomb
+no cost
+Land
+no text
+paintap:2:2
+SVar:RemAIDeck:True
+
+Apprentice Wizard
+1 U U
+Creature Human Wizard
+no text
+0/1
+U, tap: add 3
+SVar:RemAIDeck:True
+
+Azorius Chancery
+no cost
+Land
+no text
+Azorius Chancery enters the battlefield tapped.
+When Azorius Chancery enters the battlefield, return a land you control to its owner's hand.
+Tap: add WU
+SVar:RemAIDeck:True
+
+Azorius Signet
+2
+Artifact
+no text
+1, tap: add WU
+SVar:RemAIDeck:True
+
+Basal Thrull
+B B
+Creature Thrull
+no text
+1/2
+tap, Sacrifice CARDNAME: Add B B to your mana pool.
+SVar:RemAIDeck:True
+
+Basalt Monolith
+3
+Artifact
+no text
+CARDNAME doesn't untap during your untap step.
+Untap:3
+tap: add 3
+SVar:RemAIDeck:True
+
+Black Lotus
+0
+Artifact
+no text
+tap, Sacrifice CARDNAME: Add W W W to your mana pool.
+tap, Sacrifice CARDNAME: Add U U U to your mana pool.
+tap, Sacrifice CARDNAME: Add B B B to your mana pool.
+tap, Sacrifice CARDNAME: Add R R R to your mana pool.
+tap, Sacrifice CARDNAME: Add G G G to your mana pool.
+SVar:RemAIDeck:True
+
+Blood Vassal
+2 B
+Creature Thrull
+no text
+2/2
+Sacrifice CARDNAME: Add B B to your mana pool.
+SVar:RemAIDeck:True
+
+Bog Initiate
+1 B
+Creature Human Wizard
+no text
+1/1
+1: add B
+SVar:RemAIDeck:True
+
+Boros Garrison
+no cost
+Land
+no text
+Boros Garrison enters the battlefield tapped.
+When Boros Garrison enters the battlefield, return a land you control to its owner's hand.
+Tap: add RW
+SVar:RemAIDeck:True
+
+Boros Signet
+2
+Artifact
+no text
+1, tap: add WR
+SVar:RemAIDeck:True
+
+Cabal Coffers
+no cost
+Land
+no text
+2, tap: add B to your mana pool for each Swamp you control.
+SVar:RemAIDeck:True
+
+Celestial Prism
+3
+Artifact
+no text
+2, tap: add W
+2, tap: add U
+2, tap: add B
+2, tap: add R
+2, tap: add G
+SVar:RemAIDeck:True
+
+Ceta Disciple
+U
+Creature Merfolk Wizard
+no text
+1/1
+abPumpTgt R T:+2/+0
+G, tap: add W
+G, tap: add U
+G, tap: add B
+G, tap: add R
+G, tap: add G
+SVar:RemAIDeck:True
+
+Channel the Suns
+3 G
+Sorcery
+Add W U B R G to your mana pool.
+SVar:RemAIDeck:True
+
+Chromatic Star
+1
+Artifact
+When Chromatic Star is put into a graveyard from the battlefield, draw a card.
+1, tap, Sacrifice CARDNAME: Add W to your mana pool.
+1, tap, Sacrifice CARDNAME: Add U to your mana pool.
+1, tap, Sacrifice CARDNAME: Add B to your mana pool.
+1, tap, Sacrifice CARDNAME: Add R to your mana pool.
+1, tap, Sacrifice CARDNAME: Add G to your mana pool.
+SVar:RemAIDeck:True
+
+Coal Golem
+5
+Artifact Creature Golem
+no text
+3/3
+3, Sacrifice CARDNAME: Add R R R to your mana pool.
+SVar:RemAIDeck:True
+
+Composite Golem
+6
+Artifact Creature Golem
+no text
+4/4
+Sacrifice CARDNAME: Add W U B R G to your mana pool.
+SVar:RemAIDeck:True
+
+Crosis's Attendant
+5
+Artifact Creature Golem
+no text
+3/3
+1, Sacrifice CARDNAME: Add U B R to your mana pool.
+SVar:RemAIDeck:True
+
+Crystal Vein
+no cost
+Land
+no text
+tap: add 1
+tap, Sacrifice CARDNAME: Add 2 to your mana pool.
+SVar:RemAIDeck:True
+
+Darigaaz's Attendant
+5
+Artifact Creature Golem
+no text
+3/3
+1, Sacrifice CARDNAME: Add B R G to your mana pool.
+SVar:RemAIDeck:True
+
+Dark Ritual
+B
+Instant
+Add B B B to your mana pool.
+SVar:RemAIDeck:True
+
+Dimir Aqueduct
+no cost
+Land
+no text
+Dimir Aqueduct enters the battlefield tapped.
+When Dimir Aqueduct enters the battlefield, return a land you control to its owner's hand.
+Tap: add UB
+SVar:RemAIDeck:True
+
+Dimir Signet
+2
+Artifact
+no text
+1, tap: add UB
+SVar:RemAIDeck:True
+
+Dreamstone Hedron
+6
+Artifact
+no text
+tap: add 3
+SVar:RemAIDeck:True
+
+Dromar's Attendant
+5
+Artifact Creature Golem
+no text
+3/3
+1, Sacrifice CARDNAME: Add W U B to your mana pool.
+SVar:RemAIDeck:True
+
+Dwarven Ruins
+no cost
+Land
+no text
+tap: add R
+tap, Sacrifice CARDNAME: Add R R to your mana pool.
+Comes into play tapped.
+SVar:RemAIDeck:True
+
+Ebon Stronghold
+no cost
+Land
+no text
+tap: add B
+tap, Sacrifice CARDNAME: Add B B to your mana pool.
+Comes into play tapped.
+SVar:RemAIDeck:True
+
+Elvish Archdruid
+1 G G
+Creature Elf Druid
+Other Elf creatures you control get +1/+1.
+2/2
+tap: add G to your mana pool for each Elf you control.
+SVar:RemAIDeck:True
+
+Everflowing Chalice
+0
+Artifact
+Everflowing Chalice enters the battlefield with a charge counter on it for each time it was kicked.
+Multikicker 2
+SVar:RemAIDeck:True
+
+Eye of Ramos
+3
+Artifact
+no text
+tap: add U
+Sacrifice CARDNAME: Add U to your mana pool.
+SVar:RemAIDeck:True
+
+Fire Sprites
+1 G
+Creature Faerie
+no text
+1/1
+Flying
+G, tap: add R
+SVar:RemAIDeck:True
+
+Fyndhorn Elder
+2 G
+Creature Elf Druid
+no text
+1/1
+tap: add GG
+SVar:RemAIDeck:True
+
+Gaea's Cradle
+no cost
+Legendary Land
+no text
+tap: add G to your mana pool for each Creature you control.
+SVar:RemAIDeck:True
+
+Geothermal Crevice
+no cost
+Land
+no text
+tap: add R
+tap, Sacrifice CARDNAME: Add B G to your mana pool.
+Comes into play tapped.
+SVar:RemAIDeck:True
+
+Gilded Lotus
+5
+Artifact
+no text
+tap: add WWW
+tap: add UUU
+tap: add BBB
+tap: add RRR
+tap: add GGG
+SVar:RemAIDeck:True
+
+Golgari Rot Farm
+no cost
+Land
+no text
+Golgari Rot Farm enters the battlefield tapped.
+When Golgari Rot Farm enters the battlefield, return a land you control to its owner's hand.
+Tap: add BG
+SVar:RemAIDeck:True
+
+Golgari Signet
+2
+Artifact
+no text
+1, tap: add BG
+SVar:RemAIDeck:True
+
+Greenweaver Druid
+2 G
+Creature Elf Druid
+no text
+1/1
+tap: add GG
+SVar:RemAIDeck:True
+
+Grim Monolith
+2
+Artifact
+no text
+CARDNAME doesn't untap during your untap step.
+Untap:4
+tap: add 3
+SVar:RemAIDeck:True
+
+Gruul Signet
+2
+Artifact
+no text
+1, tap: add RG
+SVar:RemAIDeck:True
+
+Gruul Turf
+no cost
+Land
+no text
+Gruul Turf enters the battlefield tapped.
+When Gruul Turf enters the battlefield, return a land you control to its owner's hand.
+Tap: add RG
+SVar:RemAIDeck:True
+
+Harabaz Druid
+1 G
+Creature Human Druid Ally
+no text
+0/1
+tap: add W to your mana pool for each Ally you control.
+tap: add B to your mana pool for each Ally you control.
+tap: add U to your mana pool for each Ally you control.
+tap: add R to your mana pool for each Ally you control.
+tap: add G to your mana pool for each Ally you control.
+SVar:RemAIDeck:True
+
+Havenwood Battleground
+no cost
+Land
+no text
+tap: add G
+tap, Sacrifice CARDNAME: Add G G to your mana pool.
+Comes into play tapped.
+SVar:RemAIDeck:True
+
+Heart of Ramos
+3
+Artifact
+no text
+tap: add R
+Sacrifice CARDNAME: Add R to your mana pool.
+SVar:RemAIDeck:True
+
+Helionaut
+2 W
+Creature Human Soldier
+no text
+1/2
+Flying
+1, tap: add W
+1, tap: add U
+1, tap: add B
+1, tap: add R
+1, tap: add G
+SVar:RemAIDeck:True
+
+Horn of Ramos
+3
+Artifact
+no text
+tap: add G
+Sacrifice CARDNAME: Add G to your mana pool.
+SVar:RemAIDeck:True
+
+Implements of Sacrifice
+2
+Artifact
+no text
+1, tap, Sacrifice CARDNAME: Add W W to your mana pool.
+1, tap, Sacrifice CARDNAME: Add U U to your mana pool.
+1, tap, Sacrifice CARDNAME: Add B B to your mana pool.
+1, tap, Sacrifice CARDNAME: Add R R to your mana pool.
+1, tap, Sacrifice CARDNAME: Add G G to your mana pool.
+SVar:RemAIDeck:True
+
+Irrigation Ditch
+no cost
+Land
+no text
+tap: add W
+tap, Sacrifice CARDNAME: Add G U to your mana pool.
+Comes into play tapped.
+SVar:RemAIDeck:True
+
+Izzet Boilerworks
+no cost
+Land
+no text
+Izzet Boilerworks enters the battlefield tapped.
+When Izzet Boilerworks enters the battlefield, return a land you control to its owner's hand.
+Tap: add UR
+SVar:RemAIDeck:True
+
+Izzet Signet
+2
+Artifact
+no text
+1, tap: add UR
+SVar:RemAIDeck:True
+
+Kaleidostone
+2
+Artifact
+no text
+When CARDNAME enters the battlefield, draw a card.
+5, tap, Sacrifice CARDNAME: Add W U B R G to your mana pool.
+SVar:RemAIDeck:True
+
+Knotvine Mystic
+W R G
+Creature Elf Druid
+no text
+2/2
+1, tap: add WRG
+SVar:RemAIDeck:True
+
+Lotus Bloom
+no cost
+Artifact
+no text
+Suspend:3:0
+tap, Sacrifice CARDNAME: Add W W W to your mana pool.
+tap, Sacrifice CARDNAME: Add U U U to your mana pool.
+tap, Sacrifice CARDNAME: Add B B B to your mana pool.
+tap, Sacrifice CARDNAME: Add R R R to your mana pool.
+tap, Sacrifice CARDNAME: Add G G G to your mana pool.
+SVar:RemAIDeck:True
+
+Lotus Cobra
+1 G
+Creature Snake
+Landfall - Whenever a land enters the battlefield under your control, you may add one mana of any color to your mana pool.
+2/1
+Landfall
+SVar:RemAIDeck:True
+
+Magus of the Coffers
+4 B
+Creature Human Wizard
+no text
+4/4
+2, tap: add B to your mana pool for each Swamp you control.
+SVar:RemAIDeck:True
+
+Mana Cylix
+1
+Artifact
+no text
+1, tap: add W
+1, tap: add U
+1, tap: add B
+1, tap: add R
+1, tap: add G
+SVar:RemAIDeck:True
+
+Mana Prism
+3
+Artifact
+no text
+tap: add 1
+1, tap: add W
+1, tap: add U
+1, tap: add B
+1, tap: add R
+1, tap: add G
+SVar:RemAIDeck:True
+
+Mana Vault
+1
+Artifact
+At the beginning of your upkeep, you may pay 4. If you do, untap Mana Vault.  At the beginning of your draw step, if Mana Vault is tapped, it deals 1 damage to you.
+tap: add 3
+CARDNAME doesn't untap during your untap step.
+SVar:RemAIDeck:True
+
+Morgue Toad
+2 B
+Creature Frog
+no text
+2/2
+Sacrifice CARDNAME: Add U R to your mana pool.
+SVar:RemAIDeck:True
+
+Nantuko Elder
+2 G
+Creature Insect Druid
+no text
+1/2
+tap: add 1G
+SVar:RemAIDeck:True
+
+Nomadic Elf
+1 G
+Creature Elf Nomad
+no text
+2/2
+1 G: add W
+1 G: add U
+1 G: add B
+1 G: add R
+1 G: add G
+SVar:RemAIDeck:True
+
+Orochi Leafcaller
+G
+Creature Snake Shaman
+no text
+1/1
+G: add W
+G: add U
+G: add B
+G: add R
+SVar:RemAIDeck:True
+
+Orzhov Basilica
+no cost
+Land
+no text
+Orzhov Basilica enters the battlefield tapped.
+When Orzhov Basilica enters the battlefield, return a land you control to its owner's hand.
+Tap: add WB
+SVar:RemAIDeck:True
+
+Orzhov Signet
+2
+Artifact
+no text
+1, tap: add WB
+SVar:RemAIDeck:True
+
+Priest of Titania
+1 G
+Creature Elf Druid
+no text
+1/1
+tap: add G to your mana pool for each Elf on the battlefield.
+SVar:RemAIDeck:True
+
+Prismatic Lens
+2
+Artifact
+no text
+tap: add 1
+1, tap: add W
+1, tap: add U
+1, tap: add B
+1, tap: add R
+1, tap: add G
+SVar:RemAIDeck:True
+
+Pyretic Ritual
+1 R
+Instant
+Add R R R to your mana pool.
+SVar:RemAIDeck:True
+
+Rakdos Carnarium
+no cost
+Land
+no text
+Rakdos Carnarium enters the battlefield tapped.
+When Rakdos Carnarium enters the battlefield, return a land you control to its owner's hand.
+Tap: add BR
+SVar:RemAIDeck:True
+
+Rakdos Signet
+2
+Artifact
+no text
+1, tap: add BR
+SVar:RemAIDeck:True
+
+Rith's Attendant
+5
+Artifact Creature Golem
+no text
+3/3
+1, Sacrifice CARDNAME: Add R G W to your mana pool.
+SVar:RemAIDeck:True
+
+Rofellos, Llanowar Emissary
+G G
+Legendary Creature Elf Druid
+no text
+2/1
+tap: add G to your mana pool for each Forest you control.
+SVar:RemAIDeck:True
+
+Ruins of Trokair
+no cost
+Land
+no text
+tap: add W
+tap, Sacrifice CARDNAME: Add W W to your mana pool.
+Comes into play tapped.
+SVar:RemAIDeck:True
+
+Sea Scryer
+1 U
+Creature Merfolk Wizard
+no text
+1/1
+tap: add 1
+1, tap: add U
+SVar:RemAIDeck:True
+
+Seething Song
+2 R
+Instant
+Add R R R R R to your mana pool.
+SVar:RemAIDeck:True
+
+Selesnya Sanctuary
+no cost
+Land
+no text
+Selesnya Sanctuary enters the battlefield tapped.
+When Selesnya Sanctuary enters the battlefield, return a land you control to its owner's hand.
+Tap: add GW
+SVar:RemAIDeck:True
+
+Selesnya Signet
+2
+Artifact
+no text
+1, tap: add WG
+SVar:RemAIDeck:True
+
+Serra's Sanctum
+no cost
+Legendary Land
+no text
+tap: add W to your mana pool for each Enchantment you control.
+SVar:RemAIDeck:True
+
+Simic Growth Chamber
+no cost
+Land
+no text
+Simic Growth Chamber enters the battlefield tapped.
+When Simic Growth Chamber enters the battlefield, return a land you control to its owner's hand.
+Tap: add GU
+SVar:RemAIDeck:True
+
+Simic Signet
+2
+Artifact
+no text
+1, tap: add UG
+SVar:RemAIDeck:True
+
+Sisay's Ring
+4
+Artifact
+no text
+tap: add 2
+SVar:RemAIDeck:True
+
+Skull of Ramos
+3
+Artifact
+no text
+tap: add B
+Sacrifice CARDNAME: Add B to your mana pool.
+SVar:RemAIDeck:True
+
+Skyshroud Elf
+1 G
+Creature Elf Druid
+no text
+1/1
+tap: add G
+1: add W
+1: add R
+SVar:RemAIDeck:True
+
+Sol Ring
+1 
+Artifact
+no text
+tap: add 2
+SVar:RemAIDeck:True
+
+Sulfur Vent
+no cost
+Land
+no text
+tap: add B
+tap, Sacrifice CARDNAME: Add U R to your mana pool.
+Comes into play tapped.
+SVar:RemAIDeck:True
+
+Sunglasses of Urza
+3
+Artifact
+You may spend white mana as though it were red mana.
+W: add R
+SVar:RemAIDeck:True
+
+Svyelunite Temple
+no cost
+Land
+no text
+tap: add U
+tap, Sacrifice CARDNAME: Add U U to your mana pool.
+Comes into play tapped.
+SVar:RemAIDeck:True
+
+Thran Dynamo
+4
+Artifact
+no text
+tap: add 3
+SVar:RemAIDeck:True
+
+Tinder Farm
+no cost
+Land
+no text
+tap: add G
+tap, Sacrifice CARDNAME: Add R W to your mana pool.
+Comes into play tapped.
+SVar:RemAIDeck:True
+
+Tolarian Academy
+no cost
+Legendary Land
+no text
+tap: add U to your mana pool for each Artifact you control.
+SVar:RemAIDeck:True
+
+Tooth of Ramos
+3
+Artifact
+no text
+tap: add W
+Sacrifice CARDNAME: Add W to your mana pool.
+SVar:RemAIDeck:True
+
+Treva's Attendant
+5
+Artifact Creature Golem
+no text
+3/3
+1, Sacrifice CARDNAME: Add G W U to your mana pool.
+SVar:RemAIDeck:True
+
+Ur-Golem's Eye
+4
+Artifact
+no text
+tap: add 2
+SVar:RemAIDeck:True
+
+Viridian Acolyte
+G
+Creature Elf Shaman
+no text
+1/1
+1, tap: add W
+1, tap: add U
+1, tap: add B
+1, tap: add R
+1, tap: add G
+SVar:RemAIDeck:True
+
+Worn Powerstone
+3
+Artifact
+no text
+Comes into play tapped.
+tap: add 2
+SVar:RemAIDeck:True
+
+Emerald Medallion
+2
+Artifact
+Green spells you cast cost 1 less to cast.
+CostChange:Player:Less:1:Spell:green:All:NoSpecial
+SVar:RemAIDeck:True
+
+Jet Medallion
+2
+Artifact
+Black spells you cast cost 1 less to cast.
+CostChange:Player:Less:1:Spell:black:All:NoSpecial
+SVar:RemAIDeck:True
+
+Pearl Medallion
+2
+Artifact
+White spells you cast cost 1 less to cast.
+CostChange:Player:Less:1:Spell:white:All:NoSpecial
+SVar:RemAIDeck:True
+
+Ruby Medallion
+2
+Artifact
+Red spells you cast cost 1 less to cast.
+CostChange:Player:Less:1:Spell:red:All:NoSpecial
+SVar:RemAIDeck:True
+
+Sapphire Medallion
+2
+Artifact
+Blue spells you cast cost 1 less to cast.
+CostChange:Player:Less:1:Spell:blue:All:NoSpecial
+SVar:RemAIDeck:True
+
+An-Havva Township
+no cost
+Land
+no text
+tap: add 1
+1, tap: add G
+2, tap: add W
+2, tap: add R
+SVar:RemAIDeck:True
+
+Aysen Abbey
+no cost
+Land
+no text
+tap: add 1
+1, tap: add W
+2, tap: add U
+2, tap: add G
+SVar:RemAIDeck:True
+
+Cascade Bluffs
+no cost
+Land
+no text
+tap: add 1
+UR, tap: add UU
+UR, tap: add UR
+UR, tap: add RR
+SVar:RemAIDeck:True
+
+Castle Sengir
+no cost
+Land
+no text
+tap: add 1
+1, tap: add B
+2, tap: add U
+2, tap: add R
+SVar:RemAIDeck:True
+
+Crystal Quarry
+no cost
+Land
+no text
+tap: add 1
+5, tap: add WUBRG
+SVar:RemAIDeck:True
+
+Darkwater Catacombs
+no cost
+Land
+no text
+1, tap: add UB
+SVar:RemAIDeck:True
+
+Fetid Heath
+no cost
+Land
+no text
+tap: add 1
+WB, tap: add WW
+WB, tap: add WB
+WB, tap: add BB
+SVar:RemAIDeck:True
+
+Fire-Lit Thicket
+no cost
+Land
+no text
+tap: add 1
+RG, tap: add RR
+RG, tap: add RG
+RG, tap: add GG
+SVar:RemAIDeck:True
+
+Flooded Grove
+no cost
+Land
+no text
+tap: add 1
+UG, tap: add UU
+UG, tap: add UG
+UG, tap: add GG
+SVar:RemAIDeck:True
+
+Graven Cairns
+no cost
+Land
+no text
+tap: add 1
+BR, tap: add BB
+BR, tap: add BR
+BR, tap: add RR
+SVar:RemAIDeck:True
+
+Henge of Ramos
+no cost
+Land
+no text
+tap: add 1
+2, tap: add W
+2, tap: add U
+2, tap: add B
+2, tap: add R
+2, tap: add G
+SVar:RemAIDeck:True
+
+Koskun Keep
+no cost
+Land
+no text
+tap: add 1
+1, tap: add R
+2, tap: add B
+2, tap: add G
+SVar:RemAIDeck:True
+
+Mossfire Valley
+no cost
+Land
+no text
+1, tap: add RG
+SVar:RemAIDeck:True
+
+Mystic Gate
+no cost
+Land
+no text
+tap: add 1
+WU, tap: add WW
+WU, tap: add WU
+WU, tap: add UU
+SVar:RemAIDeck:True
+
+Rugged Prairie
+no cost
+Land
+no text
+tap: add 1
+WR, tap: add WW
+WR, tap: add WR
+WR, tap: add RR
+SVar:RemAIDeck:True
+
+School of the Unseen
+no cost
+Land
+no text
+tap: add 1
+2, tap: add W
+2, tap: add U
+2, tap: add B
+2, tap: add R
+2, tap: add G
+SVar:RemAIDeck:True
+
+Shadowblood Ridge
+no cost
+Land
+no text
+1, tap: add BR
+SVar:RemAIDeck:True
+
+Shimmering Grotto
+no cost
+Land
+no text
+tap: add 1
+1, tap: add W
+1, tap: add U
+1, tap: add B
+1, tap: add R
+1, tap: add G
+SVar:RemAIDeck:True
+
+Skycloud Expanse
+no cost
+Land
+no text
+1, tap: add WU
+SVar:RemAIDeck:True
+
+Sungrass Prairie
+no cost
+Land
+1, tap: add WG
+SVar:RemAIDeck:True
+
+Sunken Ruins
+no cost
+Land
+no text
+tap: add 1
+UB, tap: add UU
+UB, tap: add UB
+UB, tap: add BB
+SVar:RemAIDeck:True
+
+Twilight Mire
+no cost
+Land
+no text
+tap: add 1
+BG, tap: add BB
+BG, tap: add BG
+BG, tap: add GG
+SVar:RemAIDeck:True
+
+Wizards' School
+no cost
+Land
+no text
+tap: add 1
+1, tap: add U
+2, tap: add W
+2, tap: add B
+SVar:RemAIDeck:True
+
+Wooded Bastion
+no cost
+Land
+no text
+tap: add 1
+WG, tap: add WW
+WG, tap: add WG
+WG, tap: add GG
+SVar:RemAIDeck:True
+
+Adarkar Wastes
+no cost
+Land
+no text
+tap: add 1
+paintap:1:W
+paintap:1:U
+SVar:RemAIDeck:True
+
+Battlefield Forge
+no cost
+Land
+no text
+tap: add 1
+paintap:1:W
+paintap:1:R
+SVar:RemAIDeck:True
+
+Brushland
+no cost
+Land
+no text
+tap: add 1
+paintap:1:W
+paintap:1:G
+SVar:RemAIDeck:True
+
+Caldera Lake
+no cost
+Land
+no text
+tap: add 1
+paintap:1:U
+paintap:1:R
+Comes into play tapped.
+SVar:RemAIDeck:True
+
+Caves of Koilos
+no cost
+Land
+no text
+tap: add 1
+paintap:1:W
+paintap:1:B
+SVar:RemAIDeck:True
+
+Karplusan Forest
+no cost
+Land
+no text
+tap: add 1
+paintap:1:R
+paintap:1:G
+SVar:RemAIDeck:True
+
+Llanowar Wastes
+no cost
+Land
+no text
+tap: add 1
+paintap:1:B
+paintap:1:G
+SVar:RemAIDeck:True
+
+Pine Barrens
+no cost
+Land
+no text
+tap: add 1
+paintap:1:B
+paintap:1:G
+Comes into play tapped.
+SVar:RemAIDeck:True
+
+Salt Flats
+no cost
+Land
+no text
+tap: add 1
+paintap:1:W
+paintap:1:B
+Comes into play tapped.
+SVar:RemAIDeck:True
+
+Scabland
+no cost
+Land
+no text
+tap: add 1
+paintap:1:R
+paintap:1:W
+Comes into play tapped.
+SVar:RemAIDeck:True
+
+Shivan Reef
+no cost
+Land
+no text
+tap: add 1
+paintap:1:U
+paintap:1:R
+SVar:RemAIDeck:True
+
+Skyshroud Forest
+no cost
+Land
+no text
+tap: add 1
+paintap:1:G
+paintap:1:U
+Comes into play tapped.
+SVar:RemAIDeck:True
+
+Sulfurous Springs
+no cost
+Land
+no text
+tap: add 1
+paintap:1:B
+paintap:1:R
+SVar:RemAIDeck:True
+
+Underground River
+no cost
+Land
+no text
+tap: add 1
+paintap:1:U
+paintap:1:B
+SVar:RemAIDeck:True
+
+Yavimaya Coast
+no cost
+Land
+no text
+tap: add 1
+paintap:1:U
+paintap:1:G
+SVar:RemAIDeck:True
+
+Arid Mesa
+no cost
+Land
+no text
+SVar:RemAIDeck:True
+
+Bloodstained Mire
+no cost
+Land
+no text
+SVar:RemAIDeck:True
+
+Flooded Strand
+no cost
+Land
+no text
+SVar:RemAIDeck:True
+
+Marsh Flats
+no cost
+Land
+no text
+SVar:RemAIDeck:True
+
+Misty Rainforest
+no cost
+Land
+no text
+SVar:RemAIDeck:True
+
+Polluted Delta
+no cost
+Land
+no text
+SVar:RemAIDeck:True
+
+Scalding Tarn
+no cost
+Land
+no text
+SVar:RemAIDeck:True
+
+Tectonic Edge
+no cost
+Land
+no text
+tap: add 1
+SVar:RemAIDeck:True
+
+Verdant Catacombs
+no cost
+Land
+no text
+SVar:RemAIDeck:True
+
+Windswept Heath
+no cost
+Land
+no text
+SVar:RemAIDeck:True
+
+Wooded Foothills
+no cost
+Land
+no text
+SVar:RemAIDeck:True
+
+Flowstone Surge
+1 R
+Enchantment
+no text
+StaticEffect:Play:Permanents you Control:PTBonus/1/-1:Type.Creature:Creatures you control get +1/-1.
+SVar:RemAIDeck:True
+
+Stronghold Taskmaster
+2 B B
+Creature Giant Minion
+no text
+4/3
+StaticEffect:Play:All Permanents:PTBonus/-1/-1:Color.black!NotSelf:Other black creatures get -1/-1.
+SVar:RemAIDeck:True
+
+Urborg Shambler
+2 B B
+Creature Horror
+no text
+4/3
+StaticEffect:Play:All Permanents:PTBonus/-1/-1:Color.black!NotSelf:Other black creatures get -1/-1.
+SVar:RemAIDeck:True
+
+Bereavement
+1 B
+Enchantment
+no text
+WheneverKeyword:PermanentIntoGraveyard:Type/Creature!Color/green:Play:DiscardCards/1:ControllingPlayer_Initiator:ASAP:No_Condition:No Special Condition:Whenever a green creature is put into a graveyard from the battlefield, its controller discards a card.
+SVar:RemAIDeck:True
+
+Boil
+3 R
+Instant
+Destroy all Islands.
+SVar:RemAIDeck:True
+
+Boiling Seas
+3 R
+Sorcery
+Destroy all Islands.
+SVar:RemAIDeck:True
+
+Chill
+1 U
+Enchantment
+Red spells cost 2 more to cast.
+CostChange:All:More:2:Spell:red:All:NoSpecial
+SVar:RemAIDeck:True
+
+Cleanse
+2 W W
+Sorcery
+Destroy all black creatures.
+SVar:RemAIDeck:True
+
+Dread of Night
+B
+Enchantment
+no text
+StaticEffect:Play:All Permanents:PTBonus/-1/-1:Color.white:White creatures get -1/-1.
+SVar:RemAIDeck:True
+
+Flashfires
+3 R
+Sorcery
+Destroy all Plains.
+SVar:RemAIDeck:True
+
+Gloom
+2 B
+Enchantment
+White spells cost 3 more to cast. Activated abilities of white enchantments cost 3 more to activate.
+CostChange:All:More:3:Spell:white:All:NoSpecial
+CostChange:All:More:3:Ability:white:Enchantment:NoSpecial
+SVar:RemAIDeck:True
+
+Havoc
+1 R
+Enchantment
+no text
+WheneverKeyword:CastSpell/Opponent:Color/white:Play:ModifyLife/-2:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever an opponent casts a white spell, he or she loses 2 life.
+SVar:RemAIDeck:True
+
+High Seas
+2 U
+Enchantment
+Red creature spells and green creature spells cost 1 more to cast.
+CostChange:All:More:1:Spell:red:Creature:NoSpecial
+CostChange:All:More:1:Spell:green:Creature:NoSpecial
+SVar:RemAIDeck:True
+
+Insight
+2 U
+Enchantment
+no text
+WheneverKeyword:CastSpell/Opponent:Color/green:Play:DrawCards/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:Whenever an opponent casts a green spell, you draw a card.
+SVar:RemAIDeck:True
+
+Karma
+2 W W
+Enchantment
+At the beginning of each player's upkeep, Karma deals damage to that player equal to the number of Swamps he or she controls.
+SVar:RemAIDeck:True
+
+Nature's Ruin
+2 B
+Sorcery
+Destroy all green creatures.
+SVar:RemAIDeck:True
+
+Perish
+2 B
+Sorcery
+Destroy all green creatures. They can't be regenerated.
+SVar:RemAIDeck:True
+
+Renewing Dawn
+1 W
+Sorcery
+no text
+spGainLife:X:You gain 2 life for each Mountain target opponent controls.:Renewing Dawn - player gains X life
+SVar:X:Count$TypeOppCtrl.Mountain/Times.2
+SVar:RemAIDeck:True
+
+Starlight
+1 W
+Sorcery
+no text
+spGainLife:X:You gain life for each black creature target opponent controls.:Starlight - player gains X life
+SVar:X:Count$BlackTypeOppCtrl.Creature/Times.3
+SVar:RemAIDeck:True
+
+Virtue's Ruin
+2 B
+Sorcery
+Destroy all white creatures.
+SVar:RemAIDeck:True
+
+Warmth
+1 W
+Enchantment
+no text
+WheneverKeyword:CastSpell/Opponent:Color/red:Play:ModifyLife/2:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:Whenever an opponent casts a red spell, you gain 2 life.
+SVar:RemAIDeck:True
+
+Yawgmoth's Edict
+1 B
+Enchantment
+no text
+WheneverKeyword:CastSpell/Opponent:Color/white:Play:ModifyLife/1!ModifyLife/-1:ControllingPlayer_Self!ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever an opponent casts a white spell, that player loses 1 life and you gain 1 life.
+SVar:RemAIDeck:True
+
+Aysen Highway
+3 W W W
+Enchantment
+no text
+StaticEffect:Play:All Permanents:Keyword/Plainswalk:Type.Creature!Color.white:White creatures have plainswalk.
+SVar:RemAIDeck:True
+
+Day of Destiny
+3 W
+Legendary Enchantment
+no text
+StaticEffect:Play:Permanents you Control:PTBonus/2/2:Type.Creature!Type.Legendary:Legendary creatures you control get +2/+2.
+SVar:RemAIDeck:True
+
+Fecundity
+2 G
+Enchantment
+no text
+Whenever a creature is put into a graveyard from the battlefield, that creature's controller may draw a card.
+SVar:RemAIDeck:True
+
+Feroz's Ban
+6
+Artifact
+Creature spells cost 2 more to cast.
+CostChange:All:More:2:Spell:All:Creature:NoSpecial
+SVar:RemAIDeck:True
+
+Hanna's Custody
+2 W
+Enchantment
+no text
+StaticEffect:Play:All Permanents:Keyword/Shroud:Type.Artifact:All artifacts have shroud. (They can't be the targets of spells or abilities.)
+SVar:RemAIDeck:True
+
+Helm of Awakening
+2
+Artifact
+Spells cost 1 less to cast.
+CostChange:All:Less:1:Spell:All:All:NoSpecial
+SVar:RemAIDeck:True
+
+Hidden Path
+2 G G G G
+Enchantment
+no text
+StaticEffect:Play:All Permanents:Keyword/Forestwalk:Type.Creature!Color.green:Green creatures have forestwalk.
+SVar:RemAIDeck:True
+
+Hum of the Radix
+2 G G
+Enchantment
+Each artifact spell costs 1 more to cast for each artifact its controller controls.
+CostChange:Player:More:1:Spell:All:Artifact:Affinity/Artifact
+SVar:RemAIDeck:True
+
+Leyline of Singularity
+2 U U
+Enchantment
+If Leyline of Singularity is in your opening hand, you may begin the game with it on the battlefield. All nonland permanents are legendary.
+SVar:RemAIDeck:True
+
+Mirror Gallery
+5
+Artifact
+The "legend rule" doesn't apply.
+SVar:RemAIDeck:True
+
+Night of Souls' Betrayal
+2 B B
+Legendary Enchantment
+All creatures get -1/-1.
+SVar:RemAIDeck:True
+
+Planar Void
+B
+Enchantment
+no text
+WheneverKeyword:PermanentIntoGraveyard:Any:Play:MoveFrom-Graveyard-Exiled:Initiating_Card:ASAP:No_Condition:No Special Condition:Whenever another card is put into a graveyard from anywhere, exile that card.
+SVar:RemAIDeck:True
+
+Sphere of Resistance
+2
+Artifact
+Spells cost 1 more to cast.
+CostChange:All:More:1:Spell:All:All:NoSpecial
+SVar:RemAIDeck:True
+
+Squeeze
+3 U
+Enchantment
+Sorcery spells cost 3 more to cast.
+CostChange:All:More:3:Spell:All:Sorcery:NoSpecial
+SVar:RemAIDeck:True
+
+Terra Eternal
+2 W
+Enchantment
+no text
+StaticEffect:Play:All Permanents:Keyword/Indestructible:Type.Land:All lands are indestructible.
+SVar:RemAIDeck:True
+
+Thorn of Amethyst
+2
+Artifact
+Noncreature spells cost 1 more to cast.
+CostChange:All:More:1:Spell:All:Creature:NonType
+SVar:RemAIDeck:True
+
+Barren Glory
+4 W W
+Enchantment
+At the beginning of your upkeep, if you control no permanents other than Barren Glory and have no cards in hand, you win the game.
+SVar:RemAIDeck:True
+
+Epic Struggle
+2 G G
+Enchantment
+At the beginning of your upkeep, if you control twenty or more creatures, you win the game.
+SVar:RemAIDeck:True
+
+Near-Death Experience
+2 W W W
+Enchantment
+At the beginning of your upkeep, if you have exactly 1 life, you win the game.
+SVar:RemAIDeck:True
+
+Angelsong
+1 W
+Instant
+no text
+Cycling:2
+SVar:RemAIDeck:True
+
+Darkness
+B
+Instant
+Prevent all combat damage that would be dealt this turn.
+SVar:RemAIDeck:True
+
+Fog
+G
+Instant
+Prevent all combat damage that would be dealt this turn.
+SVar:RemAIDeck:True
+
+Holy Day
+W
+Instant
+Prevent all combat damage that would be dealt this turn.
+SVar:RemAIDeck:True
+
+Lull
+1 G
+Instant
+no text
+Cycling:2
+SVar:RemAIDeck:True
+
+Moment's Peace
+1 G
+Instant
+Prevent all combat damage that would be dealt this turn.
+SVar:RemAIDeck:True
+
+Respite
+1 G
+Instant
+Prevent all combat damage that would be dealt this turn. You gain 1 life for each attacking creature.
+SVar:RemAIDeck:True
+
+Capsize
+1 U U
+Instant
+no text
+SVar:RemAIDeck:True
+
+Elvish Fury
+G
+Instant
+no text
+SVar:RemAIDeck:True
+
+Lab Rats
+B
+Sorcery
+no text
+SVar:RemAIDeck:True
+
+Sprout Swarm
+1 G
+Instant
+(NOTE: "Convoke" is not implemented.)
+SVar:RemAIDeck:True
+
+Whispers of the Muse
+U
+Instant
+no text
+SVar:RemAIDeck:True
+
 Political Trickery
 2 U
 Sorcery
@@ -839,11 +2489,6 @@ Ripple:4, Return target permanent to its owner's hand.
 Ripple:4
 spBounceTgt:Permanent:Hand
 
-Mirror Gallery
-5
-Artifact
-The "legend rule" doesn't apply.
-
 Symbiotic Beast
 4 G G
 Creature Beast
@@ -1341,18 +2986,6 @@ no text
 2/2
 WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:DiscardCards/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Exiled Boggart is put into a graveyard from the battlefield, discard a card.
 
-Planar Void
-B
-Enchantment
-no text
-WheneverKeyword:PermanentIntoGraveyard:Any:Play:MoveFrom-Graveyard-Exiled:Initiating_Card:ASAP:No_Condition:No Special Condition:Whenever another card is put into a graveyard from anywhere, exile that card.
-
-Yawgmoth's Edict
-1 B
-Enchantment
-no text
-WheneverKeyword:CastSpell/Opponent:Color/white:Play:ModifyLife/1!ModifyLife/-1:ControllingPlayer_Self!ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever an opponent casts a white spell, that player loses 1 life and you gain 1 life.
-
 Archon of Redemption
 3 W W
 Creature Archon
@@ -1370,12 +3003,6 @@ Flash
 Flying
 WheneverKeyword:CastSpell/Controller:Type/Wizard:Play:UntapPermanent:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Wizard spell, you may untap Inspired Sprite.
 abDrawCards T:1:Drawback$YouDiscard/1:Draw a card, then discard a card.:Inspired Sprite - draw a card and discard a card
-
-Terra Eternal
-2 W
-Enchantment
-no text
-StaticEffect:Play:All Permanents:Keyword/Indestructible:Type.Land:All lands are indestructible.
 
 Glassdust Hulk
 3 W U
@@ -1485,12 +3112,6 @@ no text
 2/2
 WheneverKeyword:BecomesBlocked:Self:Play:StatsPumpEOT/2/0:Self:ASAP:PayMana/R:No Special Condition:Whenever Grizzled Wolverine becomes blocked, you may pay {R}. If you do, Grizzled Wolverine gets +2/+0 until end of turn.
 
-Havoc
-1 R
-Enchantment
-no text
-WheneverKeyword:CastSpell/Opponent:Color/white:Play:ModifyLife/-2:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever an opponent casts a white spell, he or she loses 2 life.
-
 Mogg Sentry
 R
 Creature Goblin Warrior
@@ -1514,12 +3135,6 @@ no text
 StaticEffect:Play:All Permanents:Keyword/Trample:Type.Creature!Type.Kavu:Kavu creatures have trample.
 WheneverKeyword:EntersBattleField:Type/Kavu:Play:+1+1 Counters/1:Self:ASAP:No_Condition:Initiator - Other than Self:Whenever another Kavu enters the battlefield, put a +1/+1 counter on Kavu Monarch.
 
-Flowstone Surge
-1 R
-Enchantment
-no text
-StaticEffect:Play:Permanents you Control:PTBonus/1/-1:Type.Creature:Creatures you control get +1/-1.
-
 Anaba Spirit Crafter
 2 R R
 Creature Minotaur Shaman
@@ -1533,12 +3148,6 @@ Creature Lizard
 no text
 3/1
 WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:Damage/1:NormalInput/Player:ASAP:Yes_No:Initiator - Other than Self:Whenever another creature is put into a graveyard from the battlefield, you may have Hissing Iguanar deal 1 damage to target player.
-
-Insight
-2 U
-Enchantment
-no text
-WheneverKeyword:CastSpell/Opponent:Color/green:Play:DrawCards/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:Whenever an opponent casts a green spell, you draw a card.
 
 Sunken City
 U U
@@ -1570,12 +3179,6 @@ no text
 StaticEffect:Play:Permanents you Control:Keyword/Shroud:Type.Artifact:Artifacts and enchantments you control have shroud.
 StaticEffect:Play:Permanents you Control:Keyword/Shroud:Type.Enchantment:(They can't be the targets of spells or abilities.)
 
-Warmth
-1 W
-Enchantment
-no text
-WheneverKeyword:CastSpell/Opponent:Color/red:Play:ModifyLife/2:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:Whenever an opponent casts a red spell, you gain 2 life.
-
 Karplusan Wolverine
 R
 Snow Creature Wolverine Beast
@@ -1605,38 +3208,12 @@ no text
 First Strike
 StaticEffect:Play:Permanents you Control:Keyword/First Strike:Type.Creature!Type.Soldier!NotSelf:Other Soldier creatures you control have first strike.
 
-Aysen Highway
-3 W W W
-Enchantment
-no text
-StaticEffect:Play:All Permanents:Keyword/Plainswalk:Type.Creature!Color.white:White creatures have plainswalk.
-
 Akroma's Devoted
 3 W
 Creature Human Cleric
 no text
 2/4
 StaticEffect:Play:All Permanents:Keyword/Vigilance:Type.Creature!Type.Cleric:Cleric creatures have vigilance.
-
-Urborg Shambler
-2 B B
-Creature Horror
-no text
-4/3
-StaticEffect:Play:All Permanents:PTBonus/-1/-1:Color.black!NotSelf:Other black creatures get -1/-1.
-
-Stronghold Taskmaster
-2 B B
-Creature Giant Minion
-no text
-4/3
-StaticEffect:Play:All Permanents:PTBonus/-1/-1:Color.black!NotSelf:Other black creatures get -1/-1.
-
-Dread of Night
-B
-Enchantment
-no text
-StaticEffect:Play:All Permanents:PTBonus/-1/-1:Color.white:White creatures get -1/-1.
 
 Blessed Orator
 3 W
@@ -1773,12 +3350,6 @@ Enchantment
 no text
 StaticEffect:Play:Permanents you Control:Keyword/Trample:Type.Creature:Creatures you control have trample. (If a creature you control would deal enough damage to its blockers to destroy them, you may have it deal the rest of its damage to defending player or planeswalker.)
 
-Hidden Path
-2 G G G G
-Enchantment
-no text
-StaticEffect:Play:All Permanents:Keyword/Forestwalk:Type.Creature!Color.green:Green creatures have forestwalk.
-
 Lumbering Satyr
 2 G G
 Creature Satyr Beast
@@ -1860,12 +3431,6 @@ Enchantment
 no text
 WheneverKeyword:CastSpell/Controller:Type/Creature:Play:Damage/1:NormalInput/Player:ASAP:No_Condition:No Special Condition:Whenever you cast a creature spell, Furious Assault deals 1 damage to target player.
 
-Day of Destiny
-3 W
-Legendary Enchantment
-no text
-StaticEffect:Play:Permanents you Control:PTBonus/2/2:Type.Creature!Type.Legendary:Legendary creatures you control get +2/+2.
-
 Oathsworn Giant
 4 W W
 Creature Giant Soldier
@@ -1873,12 +3438,6 @@ no text
 3/4
 Vigilance
 StaticEffect:Play:Permanents you Control:PTBonus/0/2!Keyword/Vigilance:Type.Creature!NotSelf:Other creatures you control get +0/+2 and have vigilance.
-
-Hanna's Custody
-2 W
-Enchantment
-no text
-StaticEffect:Play:All Permanents:Keyword/Shroud:Type.Artifact:All artifacts have shroud. (They can't be the targets of spells or abilities.)
 
 Thistledown Liege
 1 WU WU WU
@@ -2103,17 +3662,6 @@ Creature Beast
 no text
 5/5
 Suspend:5:G
-
-Lotus Bloom
-no cost
-Artifact
-no text
-Suspend:3:0
-tap, Sacrifice CARDNAME: Add W W W to your mana pool.
-tap, Sacrifice CARDNAME: Add U U U to your mana pool.
-tap, Sacrifice CARDNAME: Add B B B to your mana pool.
-tap, Sacrifice CARDNAME: Add R R R to your mana pool.
-tap, Sacrifice CARDNAME: Add G G G to your mana pool.
 
 Corpulent Corpse
 5 B
@@ -2664,12 +4212,6 @@ no text
 1/3
 WheneverKeyword:EntersBattleField:Type/Forest:Play:StatsPumpEOT/2/2:Self:ASAP:No_Condition:Initiator - OwnedByController:Whenever a Forest enters the battlefield under your control, Battlewand Oak gets +2/+2 until end of turn.
 WheneverKeyword:CastSpell/Controller:Type/Treefolk:Play:StatsPumpEOT/2/2:Self:ASAP:No_Condition:No Special Condition:Whenever you cast a Treefolk spell, Battlewand Oak gets +2/+2 until end of turn.
-
-Ancient Tomb
-no cost
-Land
-no text
-paintap:2:2
 
 Tarnished Citadel
 no cost
@@ -3246,12 +4788,6 @@ Legendary Artifact
 no text
 WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Instant/Sorcery:Play:CopySpell:Initiating_Card:ASAP:PayMana/3:No Special Condition:Whenever you cast an instant or sorcery spell, you may pay 3. If you do, copy that spell. You may choose new targets for the copy.
 
-Bereavement
-1 B
-Enchantment
-no text
-WheneverKeyword:PermanentIntoGraveyard:Type/Creature!Color/green:Play:DiscardCards/1:ControllingPlayer_Initiator:ASAP:No_Condition:No Special Condition:Whenever a green creature is put into a graveyard from the battlefield, its controller discards a card.
-
 Blazing Specter
 2 B R
 Creature Specter
@@ -3274,11 +4810,6 @@ no text
 Enchant creature
 enPump:+0/+0
 WheneverKeyword:DealsDamage/Opponent:Enchanted_Creature:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever enchanted creature deals damage to an opponent, you may draw a card.
-
-Pyretic Ritual
-1 R
-Instant
-Add R R R to your mana pool.
 
 Angelic Chorus
 3 W W
@@ -4119,12 +5650,6 @@ Red spells and white spells you cast cost 1 less to cast.
 2/1
 CostChange:Player:Less:1:Spell:red/white:All:OnlyOneBonus
 
-Thorn of Amethyst
-2
-Artifact
-Noncreature spells cost 1 more to cast.
-CostChange:All:More:1:Spell:All:Creature:NonType
-
 Tangle Golem
 7
 Artifact Creature Golem
@@ -4169,12 +5694,6 @@ Giant spells you cast cost 2 less to cast.
 1/3
 CostChange:Player:Less:2:Spell:All:Giant:NoSpecial
 
-Squeeze
-3 U
-Enchantment
-Sorcery spells cost 3 more to cast.
-CostChange:All:More:3:Spell:All:Sorcery:NoSpecial
-
 Spire Golem
 6
 Artifact Creature Golem
@@ -4191,12 +5710,6 @@ Affinity for artifacts (This spell costs 1 less to cast for each artifact you co
 Flying
 CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
 
-Sapphire Medallion
-2
-Artifact
-Blue spells you cast cost 1 less to cast.
-CostChange:Player:Less:1:Spell:blue:All:NoSpecial
-
 Sapphire Leech
 1 U
 Creature Leech
@@ -4204,12 +5717,6 @@ Blue spells you cast cost Blue more to cast.
 2/2
 Flying
 CostChange:Player:More:U:Spell:blue:All:NoSpecial
-
-Ruby Medallion
-2
-Artifact
-Red spells you cast cost 1 less to cast.
-CostChange:Player:Less:1:Spell:red:All:NoSpecial
 
 Ruby Leech
 1 R
@@ -4240,12 +5747,6 @@ Planar Gate
 Artifact
 Creature spells you cast cost up to 2 less to cast.
 CostChange:Player:Less:2:Spell:All:Creature:NoSpecial
-
-Pearl Medallion
-2
-Artifact
-White spells you cast cost 1 less to cast.
-CostChange:Player:Less:1:Spell:white:All:NoSpecial
 
 Oxidda Golem
 6
@@ -4284,12 +5785,6 @@ Nonartifact spells cost 1 more to cast.
 5/3
 CostChange:All:More:1:Spell:All:Artifact:NonType
 
-Jet Medallion
-2
-Artifact
-Black spells you cast cost 1 less to cast.
-CostChange:Player:Less:1:Spell:black:All:NoSpecial
-
 Jade Leech
 2 G G
 Creature Leech
@@ -4304,38 +5799,12 @@ White enchantment spells and green enchantment spells cost 2 more to cast.
 2/2
 CostChange:All:More:2:Spell:white/green:Enchantment:OnlyOneBonus
 
-Hum of the Radix
-2 G G
-Enchantment
-Each artifact spell costs 1 more to cast for each artifact its controller controls.
-CostChange:Player:More:1:Spell:All:Artifact:Affinity/Artifact
-
-High Seas
-2 U
-Enchantment
-Red creature spells and green creature spells cost 1 more to cast.
-CostChange:All:More:1:Spell:red:Creature:NoSpecial
-CostChange:All:More:1:Spell:green:Creature:NoSpecial
-
-Helm of Awakening
-2
-Artifact
-Spells cost 1 less to cast.
-CostChange:All:Less:1:Spell:All:All:NoSpecial
-
 Glowrider
 2 W
 Creature Human Cleric
 Noncreature spells cost 1 more to cast.
 2/1
 CostChange:All:More:1:Spell:All:Creature:NonType
-
-Gloom
-2 B
-Enchantment
-White spells cost 3 more to cast. Activated abilities of white enchantments cost 3 more to activate.
-CostChange:All:More:3:Spell:white:All:NoSpecial
-CostChange:All:More:3:Ability:white:Enchantment:NoSpecial
 
 Frogtosser Banneret
 1 B
@@ -4344,18 +5813,6 @@ Goblin spells and Rogue spells you cast cost 1 less to cast.
 1/1
 Haste
 CostChange:Player:Less:1:Spell:All:Goblin/Rogue:OnlyOneBonus
-
-Feroz's Ban
-6
-Artifact
-Creature spells cost 2 more to cast.
-CostChange:All:More:2:Spell:All:Creature:NoSpecial
-
-Emerald Medallion
-2
-Artifact
-Green spells you cast cost 1 less to cast.
-CostChange:Player:Less:1:Spell:green:All:NoSpecial
 
 Dross Golem
 5
@@ -4423,12 +5880,6 @@ Black spells and green spells you cast cost 1 less to cast.
 First strike
 CostChange:Player:Less:1:Spell:black/green:All:OnlyOneBonus
 
-Sphere of Resistance
-2
-Artifact
-Spells cost 1 more to cast.
-CostChange:All:More:1:Spell:All:All:NoSpecial
-
 Training Grounds
 U
 Enchantment
@@ -4464,12 +5915,6 @@ Artifact Creature Vedalken Artificer
 Artifact spells you cast cost 1 less to cast.
 1/2
 CostChange:Player:Less:1:Spell:All:Artifact:NoSpecial
-
-Chill
-1 U
-Enchantment
-Red spells cost 2 more to cast.
-CostChange:All:More:2:Spell:red:All:NoSpecial
 
 Centaur Omenreader
 3 G
@@ -4513,11 +5958,6 @@ Land Mountain Island
 no text
 tap: add U
 tap: add R
-
-Leyline of Singularity
-2 U U
-Enchantment
-If Leyline of Singularity is in your opening hand, you may begin the game with it on the battlefield. All nonland permanents are legendary.
 
 Muddle the Mixture
 U U
@@ -4626,12 +6066,6 @@ Roiling Terrain
 Sorcery
 Destroy target land, then Roiling Terrain deals damage to that land's controller equal to the number of land cards in that player's graveyard.
 
-Tectonic Edge
-no cost
-Land
-no text
-tap: add 1
-
 Evolving Wilds
 no cost
 Land
@@ -4661,131 +6095,6 @@ Creature Elf Druid
 no text
 1/1
 paintap:1:B
-
-Adarkar Wastes
-no cost
-Land
-no text
-tap: add 1
-paintap:1:W
-paintap:1:U
-
-Brushland
-no cost
-Land
-no text
-tap: add 1
-paintap:1:W
-paintap:1:G
-
-Karplusan Forest
-no cost
-Land
-no text
-tap: add 1
-paintap:1:R
-paintap:1:G
-
-Sulfurous Springs
-no cost
-Land
-no text
-tap: add 1
-paintap:1:B
-paintap:1:R
-
-Underground River
-no cost
-Land
-no text
-tap: add 1
-paintap:1:U
-paintap:1:B
-
-Battlefield Forge
-no cost
-Land
-no text
-tap: add 1
-paintap:1:W
-paintap:1:R
-
-Caves of Koilos
-no cost
-Land
-no text
-tap: add 1
-paintap:1:W
-paintap:1:B
-
-Llanowar Wastes
-no cost
-Land
-no text
-tap: add 1
-paintap:1:B
-paintap:1:G
-
-Shivan Reef
-no cost
-Land
-no text
-tap: add 1
-paintap:1:U
-paintap:1:R
-
-Yavimaya Coast
-no cost
-Land
-no text
-tap: add 1
-paintap:1:U
-paintap:1:G
-
-Salt Flats
-no cost
-Land
-no text
-tap: add 1
-paintap:1:W
-paintap:1:B
-Comes into play tapped.
-
-Pine Barrens
-no cost
-Land
-no text
-tap: add 1
-paintap:1:B
-paintap:1:G
-Comes into play tapped.
-
-Skyshroud Forest
-no cost
-Land
-no text
-tap: add 1
-paintap:1:G
-paintap:1:U
-Comes into play tapped.
-
-Caldera Lake
-no cost
-Land
-no text
-tap: add 1
-paintap:1:U
-paintap:1:R
-Comes into play tapped.
-
-Scabland
-no cost
-Land
-no text
-tap: add 1
-paintap:1:R
-paintap:1:W
-Comes into play tapped.
 
 Talisman of Dominance
 2
@@ -5150,23 +6459,6 @@ no text
 4/2
 First Strike
 Unearth:U B R
-
-Implements of Sacrifice
-2
-Artifact
-no text
-1, tap, Sacrifice CARDNAME: Add W W to your mana pool.
-1, tap, Sacrifice CARDNAME: Add U U to your mana pool.
-1, tap, Sacrifice CARDNAME: Add B B to your mana pool.
-1, tap, Sacrifice CARDNAME: Add R R to your mana pool.
-1, tap, Sacrifice CARDNAME: Add G G to your mana pool.
-
-Kaleidostone
-2
-Artifact
-no text
-When CARDNAME enters the battlefield, draw a card.
-5, tap, Sacrifice CARDNAME: Add W U B R G to your mana pool.
 
 Crimson Kobolds
 0
@@ -6254,12 +7546,6 @@ tap: add U
 tap: add R
 tap: add G
 
-Angelsong
-1 W
-Instant
-no text
-Cycling:2
-
 Treetop Bracers
 1 G
 Enchantment Aura
@@ -6530,13 +7816,6 @@ Sound the Call
 2 G
 Sorcery
 Put a 1/1 green Wolf creature token onto the battlefield. It has "This creature gets +1/+1 for each card named Sound the Call in each graveyard."
-
-Mana Vault
-1
-Artifact
-At the beginning of your upkeep, you may pay 4. If you do, untap Mana Vault.  At the beginning of your draw step, if Mana Vault is tapped, it deals 1 damage to you.
-tap: add 3
-CARDNAME doesn't untap during your untap step.
 
 Dark Depths
 no cost
@@ -7451,12 +8730,6 @@ Creature Human Wizard
 Sacrifice Death Cultist: Target player loses 1 life and you gain 1 life.
 1/1
 
-Everflowing Chalice
-0
-Artifact
-Everflowing Chalice enters the battlefield with a charge counter on it for each time it was kicked.
-Multikicker 2
-
 Consume the Meek
 3 B B
 Instant
@@ -7513,16 +8786,6 @@ Awakening Zone
 Enchantment
 At the beginning of your upkeep, you may put a 0/1 colorless Eldrazi Spawn creature token onto the battlefield. It has "Sacrifice this creature: Add 1 to your mana pool."
 
-Chromatic Star
-1
-Artifact
-When Chromatic Star is put into a graveyard from the battlefield, draw a card.
-1, tap, Sacrifice CARDNAME: Add W to your mana pool.
-1, tap, Sacrifice CARDNAME: Add U to your mana pool.
-1, tap, Sacrifice CARDNAME: Add B to your mana pool.
-1, tap, Sacrifice CARDNAME: Add R to your mana pool.
-1, tap, Sacrifice CARDNAME: Add G to your mana pool.
-
 Burning Inquiry
 R
 Sorcery
@@ -7549,46 +8812,6 @@ no text
 1/1
 Play with the top card of your library revealed.
 
-Irrigation Ditch
-no cost
-Land
-no text
-tap: add W
-tap, Sacrifice CARDNAME: Add G U to your mana pool.
-Comes into play tapped.
-
-Geothermal Crevice
-no cost
-Land
-no text
-tap: add R
-tap, Sacrifice CARDNAME: Add B G to your mana pool.
-Comes into play tapped.
-
-Havenwood Battleground
-no cost
-Land
-no text
-tap: add G
-tap, Sacrifice CARDNAME: Add G G to your mana pool.
-Comes into play tapped.
-
-Ebon Stronghold
-no cost
-Land
-no text
-tap: add B
-tap, Sacrifice CARDNAME: Add B B to your mana pool.
-Comes into play tapped.
-
-Dwarven Ruins
-no cost
-Land
-no text
-tap: add R
-tap, Sacrifice CARDNAME: Add R R to your mana pool.
-Comes into play tapped.
-
 Bog Wreckage
 no cost
 Land
@@ -7601,13 +8824,6 @@ tap, Sacrifice CARDNAME: Add R to your mana pool.
 tap, Sacrifice CARDNAME: Add G to your mana pool.
 Comes into play tapped.
 
-Basal Thrull
-B B
-Creature Thrull
-no text
-1/2
-tap, Sacrifice CARDNAME: Add B B to your mana pool.
-
 Archaeological Dig
 no cost
 Land
@@ -7618,14 +8834,6 @@ tap, Sacrifice CARDNAME: Add U to your mana pool.
 tap, Sacrifice CARDNAME: Add B to your mana pool.
 tap, Sacrifice CARDNAME: Add R to your mana pool.
 tap, Sacrifice CARDNAME: Add G to your mana pool.
-
-Ancient Spring
-no cost
-Land
-no text
-tap: add U
-tap, Sacrifice CARDNAME: Add W B to your mana pool.
-Comes into play tapped.
 
 Abandoned Outpost
 no cost
@@ -7650,14 +8858,6 @@ Sacrifice CARDNAME: Add B to your mana pool.
 Sacrifice CARDNAME: Add R to your mana pool.
 Sacrifice CARDNAME: Add G to your mana pool.
 
-Tinder Farm
-no cost
-Land
-no text
-tap: add G
-tap, Sacrifice CARDNAME: Add R W to your mana pool.
-Comes into play tapped.
-
 Timberland Ruins
 no cost
 Land
@@ -7668,22 +8868,6 @@ tap, Sacrifice CARDNAME: Add U to your mana pool.
 tap, Sacrifice CARDNAME: Add B to your mana pool.
 tap, Sacrifice CARDNAME: Add R to your mana pool.
 tap, Sacrifice CARDNAME: Add G to your mana pool.
-Comes into play tapped.
-
-Svyelunite Temple
-no cost
-Land
-no text
-tap: add U
-tap, Sacrifice CARDNAME: Add U U to your mana pool.
-Comes into play tapped.
-
-Sulfur Vent
-no cost
-Land
-no text
-tap: add B
-tap, Sacrifice CARDNAME: Add U R to your mana pool.
 Comes into play tapped.
 
 Seafloor Debris
@@ -7698,14 +8882,6 @@ tap, Sacrifice CARDNAME: Add R to your mana pool.
 tap, Sacrifice CARDNAME: Add G to your mana pool.
 Comes into play tapped.
 
-Ruins of Trokair
-no cost
-Land
-no text
-tap: add W
-tap, Sacrifice CARDNAME: Add W W to your mana pool.
-Comes into play tapped.
-
 Ravaged Highlands
 no cost
 Land
@@ -7718,13 +8894,6 @@ tap, Sacrifice CARDNAME: Add R to your mana pool.
 tap, Sacrifice CARDNAME: Add G to your mana pool.
 Comes into play tapped.
 
-Morgue Toad
-2 B
-Creature Frog
-no text
-2/2
-Sacrifice CARDNAME: Add U R to your mana pool.
-
 Lotus Petal
 0
 Artifact
@@ -7734,114 +8903,6 @@ tap, Sacrifice CARDNAME: Add U to your mana pool.
 tap, Sacrifice CARDNAME: Add B to your mana pool.
 tap, Sacrifice CARDNAME: Add R to your mana pool.
 tap, Sacrifice CARDNAME: Add G to your mana pool.
-
-Black Lotus
-0
-Artifact
-no text
-tap, Sacrifice CARDNAME: Add W W W to your mana pool.
-tap, Sacrifice CARDNAME: Add U U U to your mana pool.
-tap, Sacrifice CARDNAME: Add B B B to your mana pool.
-tap, Sacrifice CARDNAME: Add R R R to your mana pool.
-tap, Sacrifice CARDNAME: Add G G G to your mana pool.
-
-Crystal Vein
-no cost
-Land
-no text
-tap: add 1
-tap, Sacrifice CARDNAME: Add 2 to your mana pool.
-
-Tooth of Ramos
-3
-Artifact
-no text
-tap: add W
-Sacrifice CARDNAME: Add W to your mana pool.
-
-Skull of Ramos
-3
-Artifact
-no text
-tap: add B
-Sacrifice CARDNAME: Add B to your mana pool.
-
-Horn of Ramos
-3
-Artifact
-no text
-tap: add G
-Sacrifice CARDNAME: Add G to your mana pool.
-
-Heart of Ramos
-3
-Artifact
-no text
-tap: add R
-Sacrifice CARDNAME: Add R to your mana pool.
-
-Eye of Ramos
-3
-Artifact
-no text
-tap: add U
-Sacrifice CARDNAME: Add U to your mana pool.
-
-Coal Golem
-5
-Artifact Creature Golem
-no text
-3/3
-3, Sacrifice CARDNAME: Add R R R to your mana pool.
-
-Treva's Attendant
-5
-Artifact Creature Golem
-no text
-3/3
-1, Sacrifice CARDNAME: Add G W U to your mana pool.
-
-Rith's Attendant
-5
-Artifact Creature Golem
-no text
-3/3
-1, Sacrifice CARDNAME: Add R G W to your mana pool.
-
-Dromar's Attendant
-5
-Artifact Creature Golem
-no text
-3/3
-1, Sacrifice CARDNAME: Add W U B to your mana pool.
-
-Darigaaz's Attendant
-5
-Artifact Creature Golem
-no text
-3/3
-1, Sacrifice CARDNAME: Add B R G to your mana pool.
-
-Crosis's Attendant
-5
-Artifact Creature Golem
-no text
-3/3
-1, Sacrifice CARDNAME: Add U B R to your mana pool.
-
-Blood Vassal
-2 B
-Creature Thrull
-no text
-2/2
-Sacrifice CARDNAME: Add B B to your mana pool.
-
-Composite Golem
-6
-Artifact Creature Golem
-no text
-4/4
-Sacrifice CARDNAME: Add W U B R G to your mana pool.
 
 Blood Pet
 B
@@ -7861,14 +8922,6 @@ Glimmerdust Nap
 Enchantment Aura
 Enchanted creature doesn't untap during its controller's untap step.
 Enchant tapped creature
-
-Basalt Monolith
-3
-Artifact
-no text
-CARDNAME doesn't untap during your untap step.
-Untap:3
-tap: add 3
 
 Dehydration
 3 U
@@ -7893,14 +8946,6 @@ no text
 abDamageTgtCP T:1
 CARDNAME doesn't untap during your untap step.
 Whenever a creature is put into a graveyard from the battlefield, untap Goblin Sharpshooter.
-
-Grim Monolith
-2
-Artifact
-no text
-CARDNAME doesn't untap during your untap step.
-Untap:4
-tap: add 3
 
 Leaden Fists
 2 U
@@ -8189,12 +9234,6 @@ When Tuktuk the Explorer is put into a graveyard from the battlefield, put a leg
 1/1
 Haste
 
-Dreamstone Hedron
-6
-Artifact
-no text
-tap: add 3
-
 Beastbreaker of Bala Ged
 1 G
 Creature Human Warrior
@@ -8331,12 +9370,6 @@ Aura Gnarlid gets +1/+1 for each Aura on the battlefield.
 2/2
 Creatures with power less than CARDNAME's power can't block it.
 
-Lull
-1 G
-Instant
-no text
-Cycling:2
-
 Sliver Legion
 W U B R G
 Legendary Creature Sliver
@@ -8395,11 +9428,6 @@ no text
 2/2
 abPumpTgt R T:+2/+0
 
-Near-Death Experience
-2 W W W
-Enchantment
-At the beginning of your upkeep, if you have exactly 1 life, you win the game.
-
 Bottle of Suleiman
 4
 Artifact
@@ -8427,11 +9455,6 @@ Sorcery
 no text
 spGainLife:X:You gain 2 life for each Plains you control.:Landbind Ritual - player gains X life
 SVar:X:Count$TypeYouCtrl.Plains/Times.2
-
-Epic Struggle
-2 G G
-Enchantment
-At the beginning of your upkeep, if you control twenty or more creatures, you win the game.
 
 Reinforcements
 W
@@ -8864,11 +9887,6 @@ tap: add U
 tap: add R
 tap: add G
 
-Channel the Suns
-3 G
-Sorcery
-Add W U B R G to your mana pool.
-
 Wall of Tears
 1 U
 Creature Wall
@@ -8940,16 +9958,6 @@ Crumble
 G
 Instant
 Destroy target artifact. It can't be regenerated. That artifact's controller gains life equal to its converted mana cost.
-
-Flashfires
-3 R
-Sorcery
-Destroy all Plains.
-
-Karma
-2 W W
-Enchantment
-At the beginning of each player's upkeep, Karma deals damage to that player equal to the number of Swamps he or she controls.
 
 Clinging Darkness
 1 B
@@ -9310,13 +10318,6 @@ no text
 spGainLife:X:You gain 2 life for each card in your hand.:Presence of the Wise - player gains X life
 SVar:X:Count$CardsInYourHand/Times.2
 
-Renewing Dawn
-1 W
-Sorcery
-no text
-spGainLife:X:You gain 2 life for each Mountain target opponent controls.:Renewing Dawn - player gains X life
-SVar:X:Count$TypeOppCtrl.Mountain/Times.2
-
 Soothing Balm
 1 W
 Instant
@@ -9328,13 +10329,6 @@ Spring of Eternal Peace
 Sorcery
 no text
 spGainLife:8
-
-Starlight
-1 W
-Sorcery
-no text
-spGainLife:X:You gain life for each black creature target opponent controls.:Starlight - player gains X life
-SVar:X:Count$BlackTypeOppCtrl.Creature/Times.3
 
 Sylvan Bounty
 5 G
@@ -9586,31 +10580,6 @@ Borrowing the East Wind
 X G G
 Sorcery
 no text
-
-Holy Day
-W
-Instant
-Prevent all combat damage that would be dealt this turn.
-
-Moment's Peace
-1 G
-Instant
-Prevent all combat damage that would be dealt this turn.
-
-Darkness
-B
-Instant
-Prevent all combat damage that would be dealt this turn.
-
-Respite
-1 G
-Instant
-Prevent all combat damage that would be dealt this turn. You gain 1 life for each attacking creature.
-
-Fog
-G
-Instant
-Prevent all combat damage that would be dealt this turn.
 
 Wall of Reverence
 3 W
@@ -9942,86 +10911,6 @@ Prosperity
 X U
 Sorcery
 no text
-
-Azorius Chancery
-no cost
-Land
-no text
-Azorius Chancery enters the battlefield tapped.
-When Azorius Chancery enters the battlefield, return a land you control to its owner's hand.
-Tap: add WU
-
-Boros Garrison
-no cost
-Land
-no text
-Boros Garrison enters the battlefield tapped.
-When Boros Garrison enters the battlefield, return a land you control to its owner's hand.
-Tap: add RW
-
-Dimir Aqueduct
-no cost
-Land
-no text
-Dimir Aqueduct enters the battlefield tapped.
-When Dimir Aqueduct enters the battlefield, return a land you control to its owner's hand.
-Tap: add UB
-
-Golgari Rot Farm
-no cost
-Land
-no text
-Golgari Rot Farm enters the battlefield tapped.
-When Golgari Rot Farm enters the battlefield, return a land you control to its owner's hand.
-Tap: add BG
-
-Gruul Turf
-no cost
-Land
-no text
-Gruul Turf enters the battlefield tapped.
-When Gruul Turf enters the battlefield, return a land you control to its owner's hand.
-Tap: add RG
-
-Izzet Boilerworks
-no cost
-Land
-no text
-Izzet Boilerworks enters the battlefield tapped.
-When Izzet Boilerworks enters the battlefield, return a land you control to its owner's hand.
-Tap: add UR
-
-Orzhov Basilica
-no cost
-Land
-no text
-Orzhov Basilica enters the battlefield tapped.
-When Orzhov Basilica enters the battlefield, return a land you control to its owner's hand.
-Tap: add WB
-
-Rakdos Carnarium
-no cost
-Land
-no text
-Rakdos Carnarium enters the battlefield tapped.
-When Rakdos Carnarium enters the battlefield, return a land you control to its owner's hand.
-Tap: add BR
-
-Selesnya Sanctuary
-no cost
-Land
-no text
-Selesnya Sanctuary enters the battlefield tapped.
-When Selesnya Sanctuary enters the battlefield, return a land you control to its owner's hand.
-Tap: add GW
-
-Simic Growth Chamber
-no cost
-Land
-no text
-Simic Growth Chamber enters the battlefield tapped.
-When Simic Growth Chamber enters the battlefield, return a land you control to its owner's hand.
-Tap: add GU
 
 Viridian Joiner
 2 G
@@ -10511,17 +11400,6 @@ Creature Vampire Rogue
 Whenever Pulse Tracker attacks, each opponent loses 1 life.
 1/1
 
-Harabaz Druid
-1 G
-Creature Human Druid Ally
-no text
-0/1
-tap: add W to your mana pool for each Ally you control.
-tap: add B to your mana pool for each Ally you control.
-tap: add U to your mana pool for each Ally you control.
-tap: add R to your mana pool for each Ally you control.
-tap: add G to your mana pool for each Ally you control.
-
 Amulet of Vigor
 1
 Artifact
@@ -10690,13 +11568,6 @@ Instant
 no text
 spPumpTgt:+X/+X:Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.:Wirewood Pride - Target creature get +X/+X until end of turn.
 SVar:X:Count$TypeOnBattlefield.Elf
-
-Rofellos, Llanowar Emissary
-G G
-Legendary Creature Elf Druid
-no text
-2/1
-tap: add G to your mana pool for each Forest you control.
 
 Battle Hurda
 4 W
@@ -11453,56 +12324,6 @@ Snow Creature Centaur Warrior
 Play this ability only once each turn.
 2/2
 abPump S:+1/+1
-
-Wooded Foothills
-no cost
-Land
-no text
-
-Windswept Heath
-no cost
-Land
-no text
-
-Polluted Delta
-no cost
-Land
-no text
-
-Flooded Strand
-no cost
-Land
-no text
-
-Bloodstained Mire
-no cost
-Land
-no text
-
-Verdant Catacombs
-no cost
-Land
-no text
-
-Scalding Tarn
-no cost
-Land
-no text
-
-Misty Rainforest
-no cost
-Land
-no text
-
-Marsh Flats
-no cost
-Land
-no text
-
-Arid Mesa
-no cost
-Land
-no text
 
 Serpent Generator
 6
@@ -12657,19 +13478,6 @@ Creature Human Soldier Archer
 no text
 1/1
 
-Magus of the Coffers
-4 B
-Creature Human Wizard
-no text
-4/4
-2,tap: add B to your mana pool for each Swamp you control.
-
-Cabal Coffers
-no cost
-Land
-no text
-2,tap: add B to your mana pool for each Swamp you control.
-
 Xiahou Dun, the One-Eyed
 2 B B
 Legendary Creature Human Soldier
@@ -12894,11 +13702,6 @@ no text
 0/1
 abLoseLifeTgt 1 B T:1
 
-Barren Glory
-4 W W
-Enchantment
-At the beginning of your upkeep, if you control no permanents other than Barren Glory and have no cards in hand, you win the game.
-
 Cartographer
 2 G
 Creature Human
@@ -13064,12 +13867,6 @@ Moonlit Wake
 Enchantment
 no text
 Whenever a creature is put into a graveyard from the battlefield, you gain 1 life.
-
-Fecundity
-2 G
-Enchantment
-no text
-Whenever a creature is put into a graveyard from the battlefield, that creature's controller may draw a card.
 
 Dauthi Ghoul
 1 B
@@ -13911,477 +14708,6 @@ R
 Sorcery
 As an additional cost to cast Goblin Grenade, sacrifice a Goblin.
 
-Ceta Disciple
-U
-Creature Merfolk Wizard
-no text
-1/1
-abPumpTgt R T:+2/+0
-G,tap: add W
-G,tap: add U
-G,tap: add B
-G,tap: add R
-G,tap: add G
-
-Sunglasses of Urza
-3
-Artifact
-You may spend white mana as though it were red mana.
-W: add R
-
-Agent of Stromgald
-R
-Creature Human Knight
-no text
-1/1
-R: add B
-
-Apprentice Wizard
-1 U U
-Creature Human Wizard
-no text
-0/1
-U,tap: add 3
-
-Azorius Signet
-2
-Artifact
-no text
-1,tap: add WU
-
-Bog Initiate
-1 B
-Creature Human Wizard
-no text
-1/1
-1: add B
-
-Boros Signet
-2
-Artifact
-no text
-1,tap: add WR
-
-Celestial Prism
-3
-Artifact
-no text
-2,tap: add W
-2,tap: add U
-2,tap: add B
-2,tap: add R
-2,tap: add G
-
-Dimir Signet
-2
-Artifact
-no text
-1,tap: add UB
-
-Fire Sprites
-1 G
-Creature Faerie
-no text
-1/1
-Flying
-G,tap: add R
-
-Fyndhorn Elder
-2 G
-Creature Elf Druid
-no text
-1/1
-tap: add GG
-
-Gilded Lotus
-5
-Artifact
-no text
-tap: add WWW
-tap: add UUU
-tap: add BBB
-tap: add RRR
-tap: add GGG
-
-Golgari Signet
-2
-Artifact
-no text
-1,tap: add BG
-
-Greenweaver Druid
-2 G
-Creature Elf Druid
-no text
-1/1
-tap: add GG
-
-Gruul Signet
-2
-Artifact
-no text
-1,tap: add RG
-
-Helionaut
-2 W
-Creature Human Soldier
-no text
-1/2
-Flying
-1,tap: add W
-1,tap: add U
-1,tap: add B
-1,tap: add R
-1,tap: add G
-
-Izzet Signet
-2
-Artifact
-no text
-1,tap: add UR
-
-Knotvine Mystic
-W R G
-Creature Elf Druid
-no text
-2/2
-1, tap: add WRG
-
-Mana Cylix
-1
-Artifact
-no text
-1,tap: add W
-1,tap: add U
-1,tap: add B
-1,tap: add R
-1,tap: add G
-
-Mana Prism
-3
-Artifact
-no text
-tap: add 1
-1,tap: add W
-1,tap: add U
-1,tap: add B
-1,tap: add R
-1,tap: add G
-
-Nantuko Elder
-2 G
-Creature Insect Druid
-no text
-1/2
-tap: add 1G
-
-Nomadic Elf
-1 G
-Creature Elf Nomad
-no text
-2/2
-1 G: add W
-1 G: add U
-1 G: add B
-1 G: add R
-1 G: add G
-
-Orochi Leafcaller
-G
-Creature Snake Shaman
-no text
-1/1
-G: add W
-G: add U
-G: add B
-G: add R
-
-Orzhov Signet
-2
-Artifact
-no text
-1,tap: add WB
-
-Prismatic Lens
-2
-Artifact
-no text
-tap: add 1
-1,tap: add W
-1,tap: add U
-1,tap: add B
-1,tap: add R
-1,tap: add G
-
-Rakdos Signet
-2
-Artifact
-no text
-1,tap: add BR
-
-Sea Scryer
-1 U
-Creature Merfolk Wizard
-no text
-1/1
-tap: add 1
-1, tap: add U
-
-Selesnya Signet
-2
-Artifact
-no text
-1,tap: add WG
-
-Simic Signet
-2
-Artifact
-no text
-1,tap: add UG
-
-Sisay's Ring
-4
-Artifact
-no text
-tap: add 2
-
-Skyshroud Elf
-1 G
-Creature Elf Druid
-no text
-1/1
-tap: add G
-1: add W
-1: add R
-
-Ur-Golem's Eye
-4
-Artifact
-no text
-tap: add 2
-
-Viridian Acolyte
-G
-Creature Elf Shaman
-no text
-1/1
-1,tap: add W
-1,tap: add U
-1,tap: add B
-1,tap: add R
-1,tap: add G
-
-Worn Powerstone
-3
-Artifact
-no text
-Comes into play tapped.
-tap: add 2
-
-An-Havva Township
-no cost
-Land
-no text
-tap: add 1
-1,tap: add G
-2,tap: add W
-2,tap: add R
-
-Aysen Abbey
-no cost
-Land
-no text
-tap: add 1
-1,tap: add W
-2,tap: add U
-2,tap: add G
-
-Cascade Bluffs
-no cost
-Land
-no text
-tap: add 1
-UR,tap: add UU
-UR,tap: add UR
-UR,tap: add RR
-
-Castle Sengir
-no cost
-Land
-no text
-tap: add 1
-1,tap: add B
-2,tap: add U
-2,tap: add R
-
-Crystal Quarry
-no cost
-Land
-no text
-tap: add 1
-5,tap: add WUBRG
-
-Darkwater Catacombs
-no cost
-Land
-no text
-1,tap: add UB
-
-Fetid Heath
-no cost
-Land
-no text
-tap: add 1
-WB,tap: add WW
-WB,tap: add WB
-WB,tap: add BB
-
-Fire-Lit Thicket
-no cost
-Land
-no text
-tap: add 1
-RG,tap: add RR
-RG,tap: add RG
-RG,tap: add GG
-
-Flooded Grove
-no cost
-Land
-no text
-tap: add 1
-UG,tap: add UU
-UG,tap: add UG
-UG,tap: add GG
-
-Graven Cairns
-no cost
-Land
-no text
-tap: add 1
-BR,tap: add BB
-BR,tap: add BR
-BR,tap: add RR
-
-Henge of Ramos
-no cost
-Land
-no text
-tap: add 1
-2,tap: add W
-2,tap: add U
-2,tap: add B
-2,tap: add R
-2,tap: add G
-
-Koskun Keep
-no cost
-Land
-no text
-tap: add 1
-1,tap: add R
-2,tap: add B
-2,tap: add G
-
-Mossfire Valley
-no cost
-Land
-no text
-1,tap: add RG
-
-Mystic Gate
-no cost
-Land
-no text
-tap: add 1
-WU,tap: add WW
-WU,tap: add WU
-WU,tap: add UU
-
-Rugged Prairie
-no cost
-Land
-no text
-tap: add 1
-WR,tap: add WW
-WR,tap: add WR
-WR,tap: add RR
-
-School of the Unseen
-no cost
-Land
-no text
-tap: add 1
-2,tap: add W
-2,tap: add U
-2,tap: add B
-2,tap: add R
-2,tap: add G
-
-Shadowblood Ridge
-no cost
-Land
-no text
-1,tap: add BR
-
-Shimmering Grotto
-no cost
-Land
-no text
-tap: add 1
-1,tap: add W
-1,tap: add U
-1,tap: add B
-1,tap: add R
-1,tap: add G
-
-Skycloud Expanse
-no cost
-Land
-no text
-1,tap: add WU
-
-Sungrass Prairie
-no cost
-Land
-1,tap: add WG
-
-Sunken Ruins
-no cost
-Land
-no text
-tap: add 1
-UB,tap: add UU
-UB,tap: add UB
-UB,tap: add BB
-
-Twilight Mire
-no cost
-Land
-no text
-tap: add 1
-BG,tap: add BB
-BG,tap: add BG
-BG,tap: add GG
-
-Wizards' School
-no cost
-Land
-no text
-tap: add 1
-1,tap: add U
-2,tap: add W
-2,tap: add B
-
-Wooded Bastion
-no cost
-Land
-no text
-tap: add 1
-WG,tap: add WW
-WG,tap: add WG
-WG,tap: add GG
-
 Hero's Resolve
 1 W
 Enchantment Aura
@@ -14492,11 +14818,6 @@ When Hunted Phantasm enters the battlefield, put five 1/1 red Goblin creature to
 4/6
 Unblockable
 
-Boiling Seas
-3 R
-Sorcery
-Destroy all Islands.
-
 Rats of Rath
 1 B
 Creature Rat
@@ -14596,12 +14917,6 @@ Ashnod's Transmogrant
 1
 Artifact
 no text
-
-Thran Dynamo
-4
-Artifact
-no text
-tap: add 3
 
 Guilty Conscience
 W
@@ -14761,11 +15076,6 @@ Oversold Cemetery
 1 B
 Enchantment
 At the beginning of your upkeep, if you have four or more creature cards in your graveyard, you may return target creature card from your graveyard to your hand.
-
-Whispers of the Muse
-U
-Instant
-no text
 
 Dismiss
 2 U U 
@@ -15004,13 +15314,6 @@ Femeref Archers
 Creature Human Archer
 no text
 2/2
-
-Lotus Cobra
-1 G
-Creature Snake
-Landfall - Whenever a land enters the battlefield under your control, you may add one mana of any color to your mana pool.
-2/1
-Landfall
 
 Ior Ruin Expedition
 1 U
@@ -15720,13 +16023,6 @@ Creature Elf
 Other Elf creatures get +1/+1 and have forestwalk.
 2/2
 
-Elvish Archdruid
-1 G G
-Creature Elf Druid
-Other Elf creatures you control get +1/+1.
-2/2
-tap: add G to your mana pool for each Elf you control.
-
 Warren-Scourge Elf
 1 G
 Creature Elf Warrior
@@ -16264,47 +16560,6 @@ no text
 2/2
 abPumpTgt T:Haste
 
-Priest of Titania
-1 G
-Creature Elf Druid
-no text
-1/1
-tap: add G to your mana pool for each Elf on the battlefield.
-
-Serra's Sanctum
-no cost
-Legendary Land
-no text
-tap: add W to your mana pool for each Enchantment you control.
-
-Tolarian Academy
-no cost
-Legendary Land
-no text
-tap: add U to your mana pool for each Artifact you control.
-
-Gaea's Cradle
-no cost
-Legendary Land
-no text
-tap: add G to your mana pool for each Creature you control.
-
-Sol Ring
-1 
-Artifact
-no text
-tap: add 2
-
-Dark Ritual
-B
-Instant
-Add B B B to your mana pool.
-
-Seething Song
-2 R
-Instant
-Add R R R R R to your mana pool.
-
 Dauntless Dourbark
 3 G
 Creature Treefolk Warrior
@@ -16574,11 +16829,6 @@ Creature Shapeshifter
 Champion a creature
 7/7
 Changeling
-
-Capsize
-1 U U
-Instant
-no text
 
 Gilder Bairn
 1 GU GU
@@ -18725,11 +18975,6 @@ no text
 Flash
 Devour:1
 
-Night of Souls' Betrayal
-2 B B
-Legendary Enchantment
-All creatures get -1/-1.
-
 Belbe's Portal
 5
 Artifact
@@ -19153,11 +19398,6 @@ Marrow-Gnawer
 Legendary Creature Rat Rogue
 All rats have fear.
 2/3
-
-Lab Rats
-B
-Sorcery
-no text
 
 Patrol Signaler
 1 W
@@ -23156,11 +23396,6 @@ no text
 3/3
 Flying
 
-Boil
-3 R
-Instant
-Destroy all Islands.
-
 Dryad Arbor
 no cost
 Land Creature Forest Dryad
@@ -23270,11 +23505,6 @@ Animate Dead
 1 B
 Sorcery
 Put target creature card from any graveyard into play under your control.  That creature gets -1/-0. (NOTE: This spell is currently treated as a Sorcery rather than as an Enchantment.)
-
-Sprout Swarm
-1 G
-Instant
-(NOTE: "Convoke" is not implemented.)
 
 Llanowar Mentor
 G
@@ -23400,11 +23630,6 @@ Gift of Estates
 1 W
 Sorcery
 If an opponent controls more lands than you, search your library for up to three Plains cards and put them into your hand.
-
-Elvish Fury
-G
-Instant
-no text
 
 Primal Boost
 2 G
@@ -26038,11 +26263,6 @@ When Cavern Harpy comes into play, return a blue or black creature you control t
 2/1
 Flying
 
-Cleanse
-2 W W
-Sorcery
-Destroy all black creatures.
-
 Crusade
 W W
 Enchantment
@@ -26160,11 +26380,6 @@ Muraganda Petroglyphs
 Enchantment
 Creatures with no abilities get +2/+2.
 
-Nature's Ruin
-2 B
-Sorcery
-Destroy all green creatures.
-
 Nemata, Grove Guardian
 4 G G
 Legendary Creature Treefolk
@@ -26187,11 +26402,6 @@ Overwhelming Intellect
 4 U U
 Instant
 Counter target creature spell. Draw cards equal to that spell's converted mana cost.
-
-Perish
-2 B
-Sorcery
-Destroy all green creatures. They can't be regenerated.
 
 Punish Ignorance
 W U U B
@@ -26270,11 +26480,6 @@ Viridian Shaman
 Creature Elf Shaman
 When Viridian Shaman comes into play, destroy target artifact.
 2/2
-
-Virtue's Ruin
-2 B
-Sorcery
-Destroy all white creatures.
 
 Warrior Angel
 4 W W
