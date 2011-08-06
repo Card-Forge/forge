@@ -1727,7 +1727,7 @@ public class CombatUtil {
             AllZone.EndOfCombat.addAt(atEOC);
         }
 
-        else if(b.getName().equals("AEther Membrane") || b.getName().equals("Aether Membrane")) {
+        else if(b.getName().equals("AEther Membrane") || b.getName().equals("Aether Membrane") || b.getName().equals("Wall of Tears")) {
             final Card attacker = a;
             final Ability ability = new Ability(b, "0") {
                 @Override

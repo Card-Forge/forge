@@ -16966,6 +16966,57 @@ public class CardFactory_Creatures {
         }
         //**************END****************END***********************
         
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Borderland Ranger")) {
+            
+            final Ability ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
+                    
+                    CardList basic = new CardList(lib.getCards());
+                    basic = basic.getType("Basic");
+                    
+                    if(card.getController().equals(Constant.Player.Computer)) {
+                        if(basic.size() > 0) {
+                            Card c = basic.get(0);
+                            lib.remove(c);
+                            hand.add(c);
+                            
+                        }
+                    } else // human
+                    {
+                        if(basic.size() > 0) {
+                            Object o = AllZone.Display.getChoiceOptional(
+                                    "Select Basic Land card to put into your hand: ", basic.toArray());
+                            if(o != null) {
+                                Card c = (Card) o;
+                                lib.remove(c);
+                                hand.add(c);
+                            }
+                        }
+                    }
+                    AllZone.GameAction.shuffle(card.getController());
+                }//resolve()
+            };//Ability
+            
+            Command fetchBasicLand = new Command() {
+                
+				private static final long serialVersionUID = 7042012311958529153L;
+
+				public void execute() {
+                    ability.setStackDescription(card.getName()
+                            + " - search library for a basic land card and put it into your hand.");
+                    AllZone.Stack.add(ability);
+                }
+            };
+            card.addComesIntoPlayCommand(fetchBasicLand);
+            
+        }//*************** END ************ END **************************
+        
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(shouldCycle(card) != -1) {

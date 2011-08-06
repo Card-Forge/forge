@@ -102,6 +102,27 @@ public class GameActionUtil {
         // creats in play when aluren is there
     }
     
+    public static void executeTapSideEffects(Card c) {
+        
+        /* cards with Tap side effects can be listed here, just like in
+         * the CardFactory classes
+         */
+        if(c.getName().equals("City of Brass")) {
+           final String player = c.getController();
+           final Card crd = c;
+           Ability ability = new Ability(c, "0") {
+                 @Override
+                 public void resolve() {
+                    AllZone.GameAction.addDamage(player, 1, crd);
+                 }
+             };// Ability
+             ability.setStackDescription("City of Brass deals 1 damage to " + player);
+             AllZone.Stack.add(ability);
+        }//end City of Brass
+        
+     }
+
+    
     public static void executePlayCardEffects(SpellAbility sa) {
         // experimental:
         // this method check for cards that have triggered abilities whenever a

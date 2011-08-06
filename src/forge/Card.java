@@ -1281,7 +1281,9 @@ public class Card extends MyObservable {
     }
     
     public void tap() {
-        setTapped(true);
+    	if (isUntapped())
+    		GameActionUtil.executeTapSideEffects(this);
+    	setTapped(true);
     }
     
     public void untap() {

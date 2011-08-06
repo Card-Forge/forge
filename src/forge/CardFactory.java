@@ -17328,6 +17328,36 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        
+        
+      //*************** START *********** START **************************
+        else if(cardName.equals("Channel the Suns")) {
+            final SpellAbility spell = new Spell(card) {
+               
+                private static final long serialVersionUID = -8509187529151755266L;
+               
+                @Override
+                public void resolve() {
+                    Card mp = AllZone.ManaPool;
+                    mp.addExtrinsicKeyword("ManaPool:W");
+                    mp.addExtrinsicKeyword("ManaPool:U");
+                    mp.addExtrinsicKeyword("ManaPool:B");
+                    mp.addExtrinsicKeyword("ManaPool:R");
+                    mp.addExtrinsicKeyword("ManaPool:G");
+                }
+               
+                @Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+            };
+           
+            spell.setStackDescription(cardName + " adds W U B R G to your mana pool");
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+           
+            return card;
+        }//*************** END ************ END **************************
 
         
         // Cards with Cycling abilities
