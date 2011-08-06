@@ -1,0 +1,11 @@
+Name:Soratami Mindsweeper
+ManaCost:3 U
+Types:Creature Moonfolk Wizard
+Text:no text
+PT:1/4
+K:Flying
+A:AB$Mill|Cost$2 Return<1/Land>|NumCards$2|ValidTgts$Player|TgtPrompt$Choose a player to mill|SpellDescription$Target player puts the top two cards of his or her library into his or her graveyard.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soratami_mindsweeper.jpg
+End
