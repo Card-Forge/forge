@@ -8155,7 +8155,7 @@ public class CardFactory_Creatures {
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
 
-        
+        /* Converteded to AF Trigger
         //*************** START *********** START **************************
         else if(cardName.equals("Reveillark")) {
 
@@ -8229,7 +8229,7 @@ public class CardFactory_Creatures {
                 }
             });
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Phyrexian War Beast")) {
