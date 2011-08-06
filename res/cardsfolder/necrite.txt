@@ -8,4 +8,6 @@ SVar:TrigDestroy:AB$Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.YouDon
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necrite.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/43.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/22.jpg
 End

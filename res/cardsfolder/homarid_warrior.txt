@@ -8,4 +8,6 @@ SVar:DBPumpNoUntap:DB$Pump | Defined$ Self | KW$ HIDDEN This card doesn't untap 
 SVar:DBTap:DB$Tap | Defined$ Self
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homarid_warrior.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/92.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/44.jpg
 End

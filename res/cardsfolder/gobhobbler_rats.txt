@@ -7,4 +7,5 @@ K:stPumpSelf:Permanent:1/0/SVar=Pump:Hellbent:Hellbent - As long as you have no 
 SVar:Pump:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gobhobbler_rats.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/111.jpg
 End

@@ -6,4 +6,5 @@ A:SP$Destroy | Cost$ 4 B | ValidTgts$ Creature.nonZombie | TgtPrompt$ Select tar
 SVar:DBReturn:DB$ChangeZone | Cost$ 0 | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target Zombie card in your graveyard | ValidTgts$ Zombie.YouCtrl | Origin$ Graveyard | Destination$ Hand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cruel_revival.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/135.jpg
 End

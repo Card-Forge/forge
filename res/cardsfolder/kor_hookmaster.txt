@@ -8,4 +8,5 @@ SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Cho
 SVar:DBPump:DB$Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_hookmaster.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/20.jpg
 End

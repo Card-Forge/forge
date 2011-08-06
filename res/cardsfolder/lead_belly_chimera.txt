@@ -9,4 +9,5 @@ SVar:DBPump:DB$Pump | KW$ Trample | Defined$ Targeted | Permanent$ True
 SVar:Rarity:Uncommon
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lead_belly_chimera.jpg
+SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/148.jpg
 End

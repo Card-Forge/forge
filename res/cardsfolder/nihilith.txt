@@ -9,5 +9,5 @@ T:Mode$ ChangesZone | ValidCard$ Card.YouDontCtrl | Origin$ Any | Destination$ G
 SVar:TrigRemoveCounter:AB$RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ TIME | CounterNum$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nihilith.jpg
+SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/72.jpg
 End
-

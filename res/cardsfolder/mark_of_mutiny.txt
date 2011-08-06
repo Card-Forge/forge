@@ -6,6 +6,5 @@ A:SP$ GainControl | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target c
 SVar:DBPutCounter:DB$PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mark_of_mutiny.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/137.jpg
 End
-
-

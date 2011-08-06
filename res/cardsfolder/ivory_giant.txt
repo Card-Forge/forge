@@ -9,4 +9,5 @@ SVar:TrigTapAll:AB$TapAll | Cost$ 0 | ValidCards$ Creature.nonWhite
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ivory_giant.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/24.jpg
 End

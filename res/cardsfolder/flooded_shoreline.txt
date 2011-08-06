@@ -6,4 +6,5 @@ A:AB$ChangeZone | Cost$ U U Return<2/Island> | ValidTgts$ Creature | TgtPrompt$ 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flooded_shoreline.jpg
+SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/32.jpg
 End

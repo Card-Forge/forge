@@ -7,4 +7,5 @@ SVar:DBPump:DB$Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature th
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azorius_ploy.jpg
+SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/106.jpg
 End

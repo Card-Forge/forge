@@ -7,4 +7,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | IsPresent$ Card | Presen
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ Opponent | NumDmg$ 3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lavaborn_muse.jpg
+SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/105.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/216.jpg
 End
