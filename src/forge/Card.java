@@ -941,10 +941,6 @@ public class Card extends MyObservable {
     	for (int i = 0; i < keyword.size(); i++) {
             if (!keyword.get(i).toString().contains("CostChange") 
             		&& 
-            		!keyword.get(i).toString().contains("Whenever CARDNAME blocks a creature, destroy that creature at end of combat")
-            		&& 
-            		!keyword.get(i).toString().contains("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat")
-            		&& 
             		!keyword.get(i).toString().contains("Permanents don't untap during their controllers' untap steps")
             		&& 
             		!keyword.get(i).toString().contains("PreventAllDamageBy")

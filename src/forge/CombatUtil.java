@@ -977,15 +977,6 @@ public class CombatUtil {
     //can the blocker destroy the attacker?
     public static boolean canDestroyAttacker(Card attacker, Card defender) {
         
-        if(defender.hasStartOfKeyword("Whenever CARDNAME blocks a creature, destroy that creature at end of combat")) {
-    		int KeywordPosition = defender.getKeywordPosition("Whenever CARDNAME blocks a creature, destroy that creature at end of combat");
-    		String parse = defender.getKeyword().get(KeywordPosition).toString();
-    		String k[] = parse.split(":");
-    		final String restrictions[] = k[1].split(",");
-    		if(attacker.isValidCard(restrictions, defender.getController(), defender) && !attacker.getKeyword().contains("Indestructible"))
-    			return true;
-        }
-        
         if(attacker.getName().equals("Sylvan Basilisk") && !defender.getKeyword().contains("Indestructible")) return false;
         
         int flankingMagnitude = 0;
@@ -1001,6 +992,9 @@ public class CombatUtil {
         
         if(attacker.getKeyword().contains("Indestructible") && 
         		!(defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect"))) return false;
+        
+        //unused
+        //int attBushidoMagnitude = attacker.getKeywordMagnitude("Bushido");
         
         int defenderDamage = defender.getNetAttack() + predictPowerBonusOfBlocker(attacker, defender);
         int attackerDamage = attacker.getNetAttack() + predictPowerBonusOfAttacker(attacker, defender);
@@ -1078,19 +1072,6 @@ public class CombatUtil {
         		!(attacker.getKeyword().contains("Wither") || attacker.getKeyword().contains("Infect"))) return false;
         
         if(attacker.getName().equals("Sylvan Basilisk") && !defender.getKeyword().contains("Indestructible")) return true;
-        
-        if(attacker.hasStartOfKeyword("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat")) {
-        	int KeywordPosition = attacker.getKeywordPosition(
-        			"Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat");
-        	String parse = attacker.getKeyword().get(KeywordPosition).toString();
-    		String k[] = parse.split(":");
-    		final String restrictions[] = k[1].split(",");
-    		if(defender.isValidCard(restrictions,attacker.getController(),attacker) && !defender.getKeyword().contains("Indestructible"))
-    			return true;
-        }
-        
-        //unused
-        //int attBushidoMagnitude = attacker.getKeywordMagnitude("Bushido");
         
         int defenderDamage = defender.getNetAttack() + predictPowerBonusOfBlocker(attacker, defender);
         int attackerDamage = attacker.getNetAttack() + predictPowerBonusOfAttacker(attacker, defender);
@@ -1709,12 +1690,10 @@ public class CombatUtil {
     	
         if(!a.getCreatureGotBlockedThisCombat()) {
         	final int blockers = AllZone.Combat.getBlockers(a).size();
-        	
         	runParams.put("NumBlockers", blockers);
     		AllZone.TriggerHandler.runTrigger("AttackerBlocked", runParams);
-        	
-    		//AllZone.GameAction.checkWheneverKeyword(a,"BecomesBlocked",null); No longer needed
     	
+    		//Bushido
             for(Ability ab:CardFactoryUtil.getBushidoEffects(a))
                 AllZone.Stack.add(ab);
         	
@@ -1732,7 +1711,7 @@ public class CombatUtil {
         				executeRampageAbility(a, magnitude, numBlockers);
         			}
         		} //find
-        	}//Rampage
+        	}//end Rampage
         }
         
         if(a.getKeyword().contains("Flanking") && !b.getKeyword().contains("Flanking")) {
@@ -1780,77 +1759,8 @@ public class CombatUtil {
             
             AllZone.Stack.add(ability2);
             Log.debug("Adding Flanking!");
-            //AllZone.GameAction.checkStateEffects();
             
         }//flanking
-        
-        
-        if(b.hasStartOfKeyword("Whenever CARDNAME blocks a creature, destroy that creature at end of combat")) {
-    		int KeywordPosition = b.getKeywordPosition("Whenever CARDNAME blocks a creature, destroy that creature at end of combat");
-    		String parse = b.getKeyword().get(KeywordPosition).toString();
-    		String k[] = parse.split(":");
-    		final String restrictions[] = k[1].split(",");
-    		if(a.isValidCard(restrictions,b.getController(),b)) {
-            	final Card attacker = a;
-            	final Ability ability = new Ability(b, "0") {
-                	@Override
-               	public void resolve() {
-                		//this isCardInPlay is probably not necessary since
-                		//if is checked in the atEOC before being put on stack
-                    	if(AllZone.GameAction.isCardInPlay(attacker)) {
-                        	AllZone.GameAction.destroy(attacker);
-                    	}
-                	}
-            	};
-            
-            	StringBuilder sb = new StringBuilder();
-            	sb.append(b).append(" - destroy blocked creature.");
-            	ability.setStackDescription(sb.toString());
-            
-            	final Command atEOC = new Command() {
-                	private static final long serialVersionUID = 5854485314766349980L;
-                
-                	public void execute() {
-                		if(AllZone.GameAction.isCardInPlay(attacker)) {
-                			AllZone.Stack.add(ability);
-                		}
-                	}
-            	};
-            
-            	AllZone.EndOfCombat.addAt(atEOC);
-    		}
-        }// Whenever CARDNAME blocks a creature, destroy that creature at end of combat 
-
-        if(a.hasStartOfKeyword("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat")) {
-        	int KeywordPosition = a.getKeywordPosition("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat");
-        	String parse = a.getKeyword().get(KeywordPosition).toString();
-    		String k[] = parse.split(":");
-    		final String restrictions[] = k[1].split(",");
-    		if(b.isValidCard(restrictions,a.getController(),a)) {
-                final Card blocker = b;
-                final Ability ability = new Ability(a, "0") {
-                    @Override
-                    public void resolve() {
-                        AllZone.GameAction.destroy(blocker);
-                    }
-                };
-                
-                StringBuilder sb = new StringBuilder();
-                sb.append(a).append(" - destroy blocking creature.");
-                ability.setStackDescription(sb.toString());
-                
-                final Command atEOC = new Command() {
-                    
-                    private static final long serialVersionUID = -9077416427198135373L;
-                    
-                    public void execute() {
-                        if(AllZone.GameAction.isCardInPlay(blocker)) AllZone.Stack.add(ability);
-                    }
-                };
-                
-                AllZone.EndOfCombat.addAt(atEOC);
-    		}
-        }//Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat
         
         
         if (a.getName().equals("Robber Fly") && !a.getCreatureGotBlockedThisCombat()) {

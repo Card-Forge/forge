@@ -329,8 +329,6 @@ public class CardFactoryUtil {
         value += c.getKeywordMagnitude("Rampage");
         value += c.getKeywordMagnitude("Annihilator") * 50;
         if (c.hasKeyword("Changeling")) value += 5;
-        if (c.hasKeyword("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat") 
-        		&& power > 0) value += power * 5;
         if (c.hasKeyword("Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.") 
         		&& power > 0) value += 2;
         if (c.hasKeyword("Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +2/+2 counter on CARDNAME.") 
@@ -340,7 +338,6 @@ public class CardFactoryUtil {
         //Defensive Keywords
         if (c.hasKeyword("Reach")) value += 5;
         if (c.hasKeyword("CARDNAME can block creatures with shadow as though they didn't have shadow.")) value += 3;
-        if (c.hasKeyword("Whenever CARDNAME blocks a creature, destroy that creature at end of combat")) value += 15;
 
         //Protection
         if (c.hasKeyword("Indestructible")) value += 70;
