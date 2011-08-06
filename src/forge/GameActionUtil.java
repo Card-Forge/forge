@@ -10418,7 +10418,6 @@ public class GameActionUtil {
 							player.drawCards(2);
 							for(int i = 0; i < 2; i++) {
 								final String prompt = source.getName()+" - Select a card drawn this turn: "+(2-i)+" of 2";
-								//TODO - add enforcement of "drawn this turn"
 								AllZone.InputControl.setInput(new Input() {
 									private static final long serialVersionUID = -3389565833121544797L;
 
