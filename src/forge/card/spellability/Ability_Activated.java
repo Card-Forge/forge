@@ -6,7 +6,6 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
-import forge.Constant;
 
 
 abstract public class Ability_Activated extends SpellAbility implements java.io.Serializable {

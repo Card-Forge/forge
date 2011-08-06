@@ -5,12 +5,9 @@ import javax.swing.JOptionPane;
 import forge.*;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.mana.ManaCost;
-import forge.card.mana.Mana_PartPhyrexian;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCostUtil;
-
-import java.util.ArrayList;
 
 public class Cost_Payment {
 	private Cost cost = null;

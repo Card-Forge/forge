@@ -237,7 +237,9 @@ public class GameAction {
 					};
 
                     Command notPaid = new Command() {
-                        public void execute()
+						private static final long serialVersionUID = 5812397026869965462L;
+
+						public void execute()
                         {
                             AllZone.GameAction.exile(recoverable);
                         }

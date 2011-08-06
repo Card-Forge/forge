@@ -6,8 +6,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 
-import javax.swing.text.html.MinimalHTMLWriter;
-
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
