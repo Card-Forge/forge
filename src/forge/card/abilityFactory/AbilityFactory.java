@@ -603,6 +603,15 @@ public class AbilityFactory {
 				SA = AbilityFactory_ZoneAffecting.createDrawbackRevealHand(this);
 		}
 		
+		if (API.equals("Reveal")){
+			if (isAb)
+				SA = AbilityFactory_Reveal.createAbilityReveal(this);
+			else if (isSp)
+				SA = AbilityFactory_Reveal.createSpellReveal(this);
+			else if (isDb)
+				SA = AbilityFactory_Reveal.createDrawbackReveal(this);
+		}
+		
 		if (SA == null)
 			throw new RuntimeException("AbilityFactory : SpellAbility was not created for "+hostCard.getName()+". Looking for API: "+API);
 

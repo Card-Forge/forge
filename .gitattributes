@@ -8694,6 +8694,7 @@ src/forge/card/abilityFactory/AbilityFactory_Mana.java -text svneol=native#text/
 src/forge/card/abilityFactory/AbilityFactory_PermanentState.java -text svneol=native#text/plain
 src/forge/card/abilityFactory/AbilityFactory_Pump.java -text svneol=native#text/plain
 src/forge/card/abilityFactory/AbilityFactory_Regenerate.java -text svneol=native#text/plain
+src/forge/card/abilityFactory/AbilityFactory_Reveal.java -text svneol=native#text/plain
 src/forge/card/abilityFactory/AbilityFactory_Sacrifice.java -text svneol=native#text/plain
 src/forge/card/abilityFactory/AbilityFactory_Token.java -text svneol=native#text/plain
 src/forge/card/abilityFactory/AbilityFactory_Turns.java -text svneol=native#text/plain
