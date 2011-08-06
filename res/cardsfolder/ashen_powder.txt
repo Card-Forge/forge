@@ -2,7 +2,7 @@ Name:Ashen Powder
 ManaCost:2 B B
 Types:Sorcery
 Text:no text
-A:SP$Retrieve|Cost$2 B B|Destination$Battlefield|GainControl$True|TgtPrompt$Choose target creature card in an opponent's graveyard|ValidTgts$Creature.YouDontCtrl|SpellDescription$Put target creature card from an opponent's graveyard onto the battlefield under your control.
+A:SP$Retrieve | Cost$ 2 B B | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature card in an opponent's graveyard | ValidTgts$ Creature.YouDontCtrl | SpellDescription$ Put target creature card from an opponent's graveyard onto the battlefield under your control.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashen_powder.jpg
 End
