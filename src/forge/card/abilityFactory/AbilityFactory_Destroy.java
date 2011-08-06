@@ -355,11 +355,8 @@ public class AbilityFactory_Destroy {
 		if (tgt != null)
 			tgtCards = tgt.getTargetCards();
 		else{
-			tgtCards = new ArrayList<Card>();
-			tgtCards.add(card);
+			tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
 		}
-
-		Card firstTarget = tgtCards.get(0);
 
 		for(Card tgtC : tgtCards){
 			if(AllZone.GameAction.isCardInPlay(tgtC) && (tgt == null || CardFactoryUtil.canTarget(card, tgtC))) {
@@ -376,7 +373,7 @@ public class AbilityFactory_Destroy {
 				abSub.resolve();
 			}
 			else
-				CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, firstTarget, sa);
+				CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, tgtCards.get(0), sa);
 		}
 	}
 	
