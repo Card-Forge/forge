@@ -16083,7 +16083,7 @@ public class CardFactory_Creatures {
                                 PlayerZone zone = AllZone.getZone(c);
                                 zone.remove(c);
                                 play.add(c);
-                                card.untap();
+                                c.untap();
                                 c.addExtrinsicKeyword(c.getName() + " is black.");
                                 c.addType("Nightmare");
                                 c.setController(card.getController());
@@ -16093,7 +16093,10 @@ public class CardFactory_Creatures {
                             PlayerZone zone = AllZone.getZone(c);
                             zone.remove(c);
                             play.add(c);
-                            card.untap();
+                            c.untap();
+                            c.addExtrinsicKeyword(c.getName() + " is black.");
+                            c.addType("Nightmare");
+                            c.setController(card.getController());
                         }
                     }
                 }
