@@ -6,4 +6,5 @@ T:Mode$ SpellCast | ValidCard$ Instant | ValidActivatingPlayer$ Opponent | Trigg
 SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Creature,Ape | OverwriteTypes$ True | Permanent$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hidden_gibbons.jpg
+SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/104.jpg
 End

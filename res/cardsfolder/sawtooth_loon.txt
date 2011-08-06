@@ -12,4 +12,5 @@ SVar:DBChangeZone:DB$ChangeZone | Origin$ Hand | Destination$ Library | LibraryP
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sawtooth_loon.jpg
+SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/123.jpg
 End

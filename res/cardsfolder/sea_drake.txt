@@ -9,4 +9,5 @@ SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Han
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_drake.jpg
+SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/45.jpg
 End

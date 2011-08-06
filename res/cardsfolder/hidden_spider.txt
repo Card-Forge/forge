@@ -6,4 +6,5 @@ T:Mode$ SpellCast | ValidCard$ Creature.withFlying | ValidActivatingPlayer$ Oppo
 SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 3 | Toughness$ 5  | Keywords$ Reach | Types$ Creature,Spider | OverwriteTypes$ True | Permanent$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hidden_spider.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/264.jpg
 End

@@ -11,4 +11,5 @@ A:AB$ Mana | Cost$ SubCounter<1/M1M1> | Produced$ G | SpellDescription$ Add G to
 A:AB$ Mana | Cost$ SubCounter<1/M1M1> | Produced$ B | SpellDescription$ Add B to your mana pool.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morselhoarder.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/212.jpg
 End
