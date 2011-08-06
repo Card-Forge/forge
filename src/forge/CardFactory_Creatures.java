@@ -303,6 +303,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
 
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Filigree Angel")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -336,84 +337,6 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Venerable Monk") || cardName.equals("Kitchen Finks")
-                || cardName.equals("Shu Grain Caravan")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    Card c = card;
-
-                    c.getController().gainLife(2, card);
-                }
-            };
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = 1832932499373431651L;
-                
-                public void execute() {
-                	
-                	StringBuilder sb = new StringBuilder();
-                	sb.append(card.getController()).append(" gains 2 life");
-                	ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
-                }
-            };
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        */
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Radiant's Dragoons")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-					card.getController().gainLife(5, card);
-                }
-            };
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = -7748429739046909730L;
-                
-                public void execute() {
-                	
-                	StringBuilder sb = new StringBuilder();
-                	sb.append(card.getController()).append(" gains 5 life");
-                	ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
-                }
-            };
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        */
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Shu Soldier-Farmers") || cardName.equals("Staunch Defenders")
-                || cardName.equals("Spiritual Guardian") || cardName.equals("Teroh's Faithful")
-                || cardName.equals("Jedit's Dragoons") 
-                || cardName.equals("Lone Missionary") || cardName.equals("Obstinate Baloth")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    card.getController().gainLife(4, card);
-                }
-            };
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = -1537994957313929513L;
-                
-                public void execute() {
-                	
-                	StringBuilder sb = new StringBuilder();
-                	sb.append(card.getController()).append(" gains 4 life");
-                	ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
-                }
-            };
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Loxodon Hierarch")) {
@@ -562,8 +485,7 @@ public class CardFactory_Creatures {
             sb.append(card.getName()).append(" - return target creature card with converted mana cost 3 or less from your graveyard to the battlefield.");
             a1.setStackDescription(sb.toString());
             
-            a1.setBeforePayMana(new Input_PayManaCost(a1));
-            
+            a1.setBeforePayMana(new Input_PayManaCost(a1));       
         }//*************** END ************ END **************************
         
         
@@ -2017,7 +1939,6 @@ public class CardFactory_Creatures {
                         }
                     };//Input target
                     
-
                     if(card.getController().equals(AllZone.HumanPlayer)) {
                         //get all creatures
                     	CardList creatures = AllZoneUtil.getTypeInPlay("Creature");
@@ -2137,8 +2058,7 @@ public class CardFactory_Creatures {
                     Object o = getArt.execute();
                     return (o != null) && AllZone.getZone(getSourceCard()).is(Constant.Zone.Hand);
                 }
-            });
-            
+            });          
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
@@ -2479,8 +2399,7 @@ public class CardFactory_Creatures {
                     
                     return (list.size() > 0) && AllZone.getZone(getSourceCard()).is(Constant.Zone.Hand);
                 }
-            });
-            
+            });        
         }//*************** END ************ END **************************
         
 
@@ -2544,8 +2463,7 @@ public class CardFactory_Creatures {
                     
                     return (list.size() > 0) && AllZone.getZone(getSourceCard()).is(Constant.Zone.Hand);
                 }
-            });
-            
+            });            
         }//*************** END ************ END **************************
 
         
@@ -3123,7 +3041,6 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
 
 
-       
         //*************** START *********** START **************************
         else if(cardName.equals("Lightning Crafter")) {
             final CommandReturn getCreature = new CommandReturn() {
@@ -4074,8 +3991,7 @@ public class CardFactory_Creatures {
                 public boolean canPlayAI() {
                     // todo: figure out when the AI would want to use the Druid
 					return false;
-                }
-                
+                }                
                 
                 @Override
                 public void resolve() {
@@ -4527,15 +4443,16 @@ public class CardFactory_Creatures {
                             }
                         });
                         if(TopCreatures.size() > 0) {
-                        Object o2 = AllZone.Display.getChoiceOptional(
-                                "Put a creature with a power 5 or greater onto the battlefield: ", TopCreatures.toArray());
-                        if(o2 != null) {
-                            Card c = (Card) o2;
-                            lib.remove(c);
-                            play.add(c);
-                            TopCards.remove(c);
-                        }
-                        } else JOptionPane.showMessageDialog(null, "No creatures in top 5 cards with a power greater than 5.", "", JOptionPane.INFORMATION_MESSAGE); 
+	                        Object o2 = AllZone.Display.getChoiceOptional(
+	                                "Put a creature with a power 5 or greater onto the battlefield: ", TopCreatures.toArray());
+	                        if(o2 != null) {
+	                            Card c = (Card) o2;
+	                            lib.remove(c);
+	                            play.add(c);
+	                            TopCards.remove(c);
+	                        }
+                        } else 
+                        	JOptionPane.showMessageDialog(null, "No creatures in top 5 cards with a power greater than 5.", "", JOptionPane.INFORMATION_MESSAGE); 
                         
                         Count = TopCards.size();
                     	for(int i = 0; i < Count; i++) {   
@@ -4544,7 +4461,7 @@ public class CardFactory_Creatures {
                             Object check = AllZone.Display.getChoice("Select a card: ", TopCards.toArray());   
                             AllZone.GameAction.moveTo(lib, (Card) check);
                             TopCards.remove((Card) check);
-                        	}
+                        }
                         }  else JOptionPane.showMessageDialog(null, "No more cards in library.", "", JOptionPane.INFORMATION_MESSAGE);
                     }
                         else {
@@ -4760,7 +4677,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Scourge of Kher Ridges")) {
             
@@ -4818,7 +4735,7 @@ public class CardFactory_Creatures {
             a2.setDescription("5 R: Scourge of Kher Ridges deals 6 damage to each creature with flying.");
             card.addSpellAbility(a2);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Flowstone Sculpture")) {
