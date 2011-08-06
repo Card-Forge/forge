@@ -5,7 +5,7 @@ Text:no text
 PT:4/4
 K:First Strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a green or white creature you control to its owner's hand.
-SVar:TrigChange:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 0 | Hidden$ True | ChangeType$ Creature.White+YouCtrl,Creature.Green+YouCtrl
+SVar:TrigChange:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 0 | Hidden$ True | Mandatory$ True | ChangeType$ Creature.White+YouCtrl,Creature.Green+YouCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steel_leaf_paladin.jpg
