@@ -250,6 +250,9 @@ public class Spell_Permanent extends Spell {
         	if (params.containsKey("ValidCard") && !params.get("ValidCard").contains("Self"))
         		continue;
         	
+        	if (tr.getOverridingAbility() != null)	// Don't look at Overriding Abilities yet
+        		continue;
+        	
         	// Maybe better considerations 
         	AbilityFactory af = new AbilityFactory();
         	SpellAbility exSA = af.getAbility(card.getSVar(params.get("Execute")), card);
