@@ -416,6 +416,18 @@ public class QuestUtil {
 			
 			qa.setCardRewardList(pack.getRare(4));
 		}
+		else if (id == 13)  // The Court Jester
+		{
+			CardList humanList = new CardList();
+			Card c = AllZone.CardFactory.getCard("Sensei's Divining Top", Constant.Player.Human);
+			humanList.add(c);
+			
+			qa.setHuman(humanList);
+			
+			qa.addCompy("Teferi's Puzzle Box");
+			
+			qa.setCardRewardList(pack.getRare(4, 0));
+		}
 			
 	}
 	

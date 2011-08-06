@@ -118,4 +118,14 @@ Four random rares
 250
 noIcon
 
+13
+The Court Jester
+The Court Jester pulls a prank on you. Will you laugh it off or pay him back?
+Hard
+Not Repeatable
+50
+Four multi-colored rares
+300
+noIcon
+
 End
