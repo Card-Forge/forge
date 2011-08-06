@@ -38,6 +38,9 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+roiling_terrain.jpg		http://www.wizards.com/global/images/magic/general/roiling_terrain.jpg	
+tectonic_edge.jpg		http://www.wizards.com/global/images/magic/general/tectonic_edge.jpg
+evolving_wilds.jpg		http://www.wizards.com/global/images/magic/general/evolving_wilds.jpg
 lorthos_the_tidemaker.jpg		http://www.wizards.com/global/images/magic/general/lorthos_the_tidemaker.jpg
 adarkar_wastes.jpg		http://www.wizards.com/global/images/magic/general/adarkar_wastes.jpg
 brushland.jpg			http://www.wizards.com/global/images/magic/general/brushland.jpg

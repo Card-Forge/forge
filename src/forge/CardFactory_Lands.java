@@ -824,7 +824,7 @@ class CardFactory_Lands {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Terramorphic Expanse")) {
+        else if(cardName.equals("Terramorphic Expanse") || cardName.equals("Evolving Wilds")) {
             //tap sacrifice
             final Ability_Tap ability = new Ability_Tap(card, "0") {
                 private static final long serialVersionUID = 5441740362881917927L;
@@ -931,21 +931,23 @@ class CardFactory_Lands {
                 }//showMessage()
             };
             card.addSpellAbility(ability);
-            ability.setDescription("tap, Sacrifice Terramorphic Expanse: Search your library for a basic land card and put it into play tapped. Then shuffle your library.");
+            ability.setDescription("tap, Sacrifice " + card.getName() + ": Search your library for a basic land card and put it into play tapped. Then shuffle your library.");
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Wasteland") || cardName.equals("Strip Mine")) {
+        else if(cardName.equals("Wasteland") || cardName.equals("Strip Mine") || cardName.equals("Tectonic Edge")) {
         	
         	final CardListFilter landFilter = new CardListFilter() {
                 public boolean addCard(Card c) {
-                    if(card.getName().equals("Wasteland")) return !c.getType().contains("Basic");
+                    if(card.getName().equals("Wasteland") || card.getName().equals("Tectonic Edge")) return !c.getType().contains("Basic");
                     else return true;
                 }
             };
             //tap sacrifice
-            final Ability_Tap ability = new Ability_Tap(card, "0") {
+            String cost = "0";
+            if(cardName.equals("Tectonic Edge")) cost = "1";
+            final Ability_Tap ability = new Ability_Tap(card, cost) {
                 private static final long serialVersionUID = 6865042319287843154L;
                 
                 @Override
@@ -957,7 +959,9 @@ class CardFactory_Lands {
                 public boolean canPlay() {
                     CardList list = AllZoneUtil.getTypeInPlay("Land");
                     list = list.filter(landFilter);
-                    if(super.canPlay() && list.size() > 0 && AllZone.GameAction.isCardInPlay(card)) return true;
+                    CardList Tectonic_EdgeList = AllZoneUtil.getPlayerLandsInPlay(AllZone.GameAction.getOpponent(card.getController()));
+                    if(card.getName().equals("Tectonic Edge") && Tectonic_EdgeList.size() < 4) return false;
+                    if(super.canPlay() && list.size() > 0 && AllZone.GameAction.isCardInPlay(card)) return true;                   
                     else return false;
                 }//canPlay()
                 
@@ -981,7 +985,7 @@ class CardFactory_Lands {
             	public void selectCard(Card c, PlayerZone zone) {
             		if(zone.is(Constant.Zone.Play)) {
             			if((c.isLand() && card.getName().equals("Strip Mine")) ||
-            					(!c.isBasicLand() && card.getName().equals("Wasteland"))) {
+            					(!c.isBasicLand() && (card.getName().equals("Wasteland") || card.getName().equals("Tectonic Edge")))) {
             			card.tap(); //tapping Strip Mine
             			ability.setTargetCard(c);
             			AllZone.Stack.add(ability);
@@ -992,9 +996,12 @@ class CardFactory_Lands {
             };
             
             card.addSpellAbility(ability);
-            ability.setDescription("Tap, Sacrifice " + card.getName() + ": Destroy target "
-                    + (card.getName().equals("Wasteland")? "nonbasic":"") + " land.");
-            ability.setBeforePayMana(runtime);
+            ability.setDescription((card.getName().equals("Tectonic Edge")? "1, ":"")
+            		+ "Tap, Sacrifice " + card.getName() + ": Destroy target "
+                    + ((card.getName().equals("Wasteland") || (card.getName().equals("Tectonic Edge")))? "nonbasic":"") + " land."
+                    + (card.getName().equals("Tectonic Edge")? " Activate this ability only if an opponent controls four or more lands.":""));
+            if(cardName.equals("Tectonic Edge")) ability.setAfterPayMana(runtime);
+            else ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
