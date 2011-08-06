@@ -7440,7 +7440,7 @@ public class GameActionUtil {
 		                                    break;   
 			                            } 
 			                            else{
-			                            	AllZone.GameAction.moveTo(graveyard, c);
+			                            	AllZone.GameAction.moveToGraveyard(c);
 			                            }
 			                        }
 			                  }

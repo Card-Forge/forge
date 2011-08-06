@@ -1345,11 +1345,11 @@ public class CardFactory_Instants {
                         if(Pile1CMC >= Pile2CMC) {
                         	JOptionPane.showMessageDialog(null, "Computer adds the first pile to its hand and puts the second pile into the graveyard", "", JOptionPane.INFORMATION_MESSAGE);
 	                    	  for(int i = 0; i < Pile1.size(); i++) AllZone.GameAction.moveTo(Hand, Pile1.get(i));
-	                    	  for(int i = 0; i < Pile2.size(); i++) AllZone.GameAction.moveTo(Grave, Pile2.get(i));
+	                    	  for(int i = 0; i < Pile2.size(); i++) AllZone.GameAction.moveToGraveyard(Pile2.get(i));
                         } else {
                         	JOptionPane.showMessageDialog(null, "Computer adds the second pile to its hand and puts the first pile into the graveyard", "", JOptionPane.INFORMATION_MESSAGE);
 	                    	  for(int i = 0; i < Pile2.size(); i++) AllZone.GameAction.moveTo(Hand, Pile2.get(i));
-	                    	  for(int i = 0; i < Pile1.size(); i++) AllZone.GameAction.moveTo(Grave, Pile1.get(i));		
+	                    	  for(int i = 0; i < Pile1.size(); i++) AllZone.GameAction.moveToGraveyard(Pile1.get(i));		
 		    		}
                         
                     } else//Computer chooses (It picks the highest converted mana cost card and 1 random card.)
@@ -1381,10 +1381,10 @@ public class CardFactory_Instants {
 			        			null, possibleValues, possibleValues[0]);
 	                      if(q.equals(0)) {	                    	 
 	                    	  for(int i = 0; i < Pile1.size(); i++) AllZone.GameAction.moveTo(Hand, Pile1.get(i));
-	                    	  for(int i = 0; i < Pile2.size(); i++) AllZone.GameAction.moveTo(Grave, Pile2.get(i));
+	                    	  for(int i = 0; i < Pile2.size(); i++) AllZone.GameAction.moveToGraveyard(Pile2.get(i));
 			    		} else {
 	                    	  for(int i = 0; i < Pile2.size(); i++) AllZone.GameAction.moveTo(Hand, Pile2.get(i));
-	                    	  for(int i = 0; i < Pile1.size(); i++) AllZone.GameAction.moveTo(Grave, Pile1.get(i));	
+	                    	  for(int i = 0; i < Pile1.size(); i++) AllZone.GameAction.moveToGraveyard(Pile1.get(i));	
 			    		}
                     }
                    Pile1.clear();

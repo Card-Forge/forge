@@ -93,9 +93,14 @@ public class GameAction {
     
     //card can be anywhere like in Hand or in Play
     public void moveToGraveyard(Card c) {
-        //must put card in OWNER's graveyard not controller's
-        PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getOwner());
-        moveTo(grave, c);
+    	if (AllZoneUtil.isCardInPlay("Leyline of the Void", getOpponent(c.getOwner()))) {
+    		moveTo(AllZone.getZone(Constant.Zone.Removed_From_Play, c.getOwner()), c);
+    	}
+    	else {
+    		//must put card in OWNER's graveyard not controller's
+    		PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getOwner());
+    		moveTo(grave, c);
+    	}
     }
     
     public void moveToHand(Card c) {
