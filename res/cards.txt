@@ -1,3 +1,25 @@
+Primal Frenzy
+G
+Enchantment Aura
+Enchanted creature has trample.
+Enchant creature
+enPump:Trample
+
+Shielding Plax
+2 GU
+Enchantment Aura
+Enchanted creature can't be the target of spells or abilities your opponents control.
+Enchant creature
+enPump:This card can't be the target of spells or abilities your opponents control.
+When this card comes into play, draw a card.
+
+Squee's Embrace
+R W
+Enchantment Aura
+Enchanted creature gets +2/+2 and has "When enchanted creature is put into a graveyard, return that card to its owner's hand."
+Enchant creature
+enPump:+2/+2/When this card is put into a graveyard from the battlefield, return this card to its owner's hand
+
 Leshrac's Rite
 B
 Enchantment Aura
@@ -4779,6 +4801,7 @@ Lightning Talons
 Enchantment Aura
 Enchanted creature gets +3/+0 and has first strike.
 Enchant creature
+enPump:+3/+0/First Strike
 
 Despondency
 1 B
@@ -4868,8 +4891,9 @@ Mageta's Boon
 1 W
 Enchantment Aura
 Enchanted creature gets +1/+2.
-Enchant creature
 Flash
+Enchant creature
+enPump:+1/+2
 
 Buoyancy
 1 U
@@ -4910,6 +4934,7 @@ U R
 Enchantment Aura
 Enchanted creature gets +2/+0 and has flying.
 Enchant creature
+enPump:+2/+0/Flying
 
 Benalish Trapper
 1 W
