@@ -41,7 +41,7 @@ package javazoom.jl.decoder;
  */
 final class LayerIIIDecoder implements FrameDecoder
 {
-	final double d43 = (4.0/3.0);
+	final static double d43 = (4.0/3.0);
 	
 	public int[]				scalefac_buffer;
 
@@ -2407,7 +2407,7 @@ final class LayerIIIDecoder implements FrameDecoder
 	/*                         END OF INV_MDCT                     */
 	/***************************************************************/
 
-	class Sftable
+	static class Sftable
 	{
 		public int[]	 l;
 		public int[]	 s;

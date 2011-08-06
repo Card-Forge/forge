@@ -9628,7 +9628,13 @@ public class CardFactory_Creatures {
 	          {
 	            if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
 	            {
-	              getTargetCard().addType("Artifact");
+	            	Card crd = getTargetCard();
+	            	ArrayList<String> types = crd.getType();
+	            	crd.setType(new ArrayList<String>()); //clear
+	            	getTargetCard().addType("Artifact"); //make sure artifact is at the beginning
+	            	for (String type : types)
+	            		crd.addType(type);
+	            	
 	            }
 	          }//resolve()
 	          public boolean canPlayAI()

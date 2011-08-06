@@ -29,8 +29,7 @@ public class AnchorLayout implements LayoutManager2 {
 	@SuppressWarnings("unchecked")
 	private HashMap constraintMap = new HashMap();
 	private boolean sizesCalculated = false;
-	@SuppressWarnings("unused")
-	private Container container;
+	//private Container container;
 
 	public AnchorLayout() {
 		super();

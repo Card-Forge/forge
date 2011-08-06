@@ -15,7 +15,7 @@ import forge.properties.NewConstants;
 //balance the number of colors and creature/spells for
 //new cards that are won in quest mode
 public class QuestData_BoosterPack implements NewConstants {
-    final private String      comment          = "//";
+    final private static String      comment          = "//";
     
     private ArrayList<String> commonCreature   = new ArrayList<String>();
     private ArrayList<String> commonSpell      = new ArrayList<String>();

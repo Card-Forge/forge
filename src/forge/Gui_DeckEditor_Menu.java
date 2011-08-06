@@ -58,7 +58,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
     private static File       previousDirectory = null;
     
 
-    private final boolean     debugPrint        = false;
+    private static final boolean     debugPrint        = false;
     
 //    private final DeckIO      deckIO            = new OldDeckIO(ForgeProps.getFile(DECKS));
 //    private final DeckIO      boosterDeckIO     = new OldDeckIO(ForgeProps.getFile(BOOSTER_DECKS));

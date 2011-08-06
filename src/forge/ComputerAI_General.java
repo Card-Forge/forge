@@ -169,7 +169,7 @@ public class ComputerAI_General implements Computer {
                 Collection<Card> play = playMain1Cards;
                 if(c.isLand()) return false;
                 if(play.contains(c.getName()) || (c.isCreature() && c.getKeyword().contains("Haste"))) return true;
-                return false;
+                	return false;
             }
         });
         CardList all = new CardList();

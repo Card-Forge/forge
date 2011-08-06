@@ -32,7 +32,7 @@ public class WaveFile extends RiffFile
 {
     public static final int 	MAX_WAVE_CHANNELS = 2;
     
-	class WaveFormat_ChunkData
+	static class WaveFormat_ChunkData
 	{
    	   public short         wFormatTag = 0;       // Format category (PCM=1)
    	   public short         nChannels = 0;        // Number of channels (mono=1, stereo=2)
@@ -88,7 +88,7 @@ public class WaveFile extends RiffFile
    		}
 	}
 
-	public class WaveFileSample
+	public static class WaveFileSample
 	{
    		public short[] 				chan;
 		

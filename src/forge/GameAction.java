@@ -459,7 +459,8 @@ private Card getCurrentCard(int ID)
       if(c.getCounters(Counters.LOYALTY) <= 0)
         AllZone.GameAction.moveToGraveyard(c);
       
-      CardList cl = getPlaneswalkerSubtype(list, c);
+      String subtype = c.getType().get(c.getType().size()-1);
+      CardList cl = getPlaneswalkerSubtype(list, subtype, c);
       
       if (cl.size() > 1)
       {
@@ -505,15 +506,15 @@ private Card getCurrentCard(int ID)
     return a;
   }
   
-  public CardList getPlaneswalkerSubtype(CardList search, Card planeswalker)
+  public CardList getPlaneswalkerSubtype(CardList search, String subtype, Card planeswalker)
   {
-	  final String type = planeswalker.getType().toString();
 	  CardList list = search;
+	  final String type = subtype;
 	  list = list.filter(new CardListFilter()
 	  {
 		  public boolean addCard(Card c)
 		  {
-			  return c.getType().toString().equals(type);
+			  return c.getType().toString().contains(type);
 		  }
 	  });
 	  

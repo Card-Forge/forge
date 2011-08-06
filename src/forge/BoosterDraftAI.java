@@ -6,8 +6,8 @@ public class BoosterDraftAI
   //once a deck has this number of creatures the computer randomly
   //picks a card, so the final computer deck has 12-20 creatures
   //minimum of creatures per deck
-  private final int nCreatures = 16;
-  private final int nDecks = 7;
+  private static final int nCreatures = 16;
+  private static final int nDecks = 7;
 
   //holds all the cards for each of the computer's decks
   private CardList[] deck = new CardList[nDecks];

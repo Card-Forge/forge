@@ -100,7 +100,7 @@ public class jlap
     return player;
   }
 
-  public class InfoListener extends PlaybackListener
+  public static class InfoListener extends PlaybackListener
   {
     public void playbackStarted(PlaybackEvent evt)
     {

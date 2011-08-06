@@ -294,16 +294,17 @@ public class Card extends MyObservable
       return sb.toString();
     }
 
-    String s = "";
+    StringBuilder sb = new StringBuilder();
     ArrayList<String> keyword = getKeyword();
     for(int i = 0; i < keyword.size(); i++)
     {
       if(i != 0)
-        s += ", ";
-      s += keyword.get(i).toString();
+        sb.append(", ");
+      sb.append(keyword.get(i).toString());
     }
-
-    s += "\r\n" +text +"\r\n";
+    sb.append("\r\n");
+    sb.append(text);
+    sb.append("\r\n");
 
     SpellAbility[] sa = getSpellAbility();
     for(int i = 0; i < sa.length; i++)
@@ -312,10 +313,13 @@ public class Card extends MyObservable
       //skip the first SpellAbility for creatures, since it says "Summon this creature"
       //looks bad on the Gui card detail
       if(isPermanent() && (isLand() || i != 0) && !(manaAbility.contains(sa[i]) && ((Ability_Mana) sa[i]).isBasic()))//prevent mana ability duplication
-        s += sa[i].toString() +"\r\n";
+      {
+        sb.append(sa[i].toString());
+        sb.append("\r\n");
+      }
     }
 
-    return s.trim();
+    return sb.toString().trim();
   }//getText()
 
  /* private ArrayList<Ability_Mana> addLandAbilities ()

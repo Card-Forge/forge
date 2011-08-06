@@ -45,7 +45,7 @@ public class Gui_BoosterDraft extends JFrame implements CardDetail, NewConstants
     
     private BoosterDraft      boosterDraft;
     
-    private final boolean     limitedDeckEditor = true;
+    private static final boolean limitedDeckEditor = true;
     
     private TableModel        allCardModel;
     private TableModel        deckModel;

@@ -33,7 +33,7 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
     //if true, the Quest Deck editor will let you edit the computer's decks
     private final boolean     canEditComputerDecks;
     
-    private final String      deckEditorName    = "Deck Editor";
+    private static final String      deckEditorName    = "Deck Editor";
     
     //used for import and export, try to made the gui user friendly
     private static File       previousDirectory = null;

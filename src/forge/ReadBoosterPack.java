@@ -17,7 +17,7 @@ public class ReadBoosterPack implements NewConstants {
 //  final private String uncommonFilename = Constant.IO.baseDir +"data/uncommon.txt";
 //  final private String rareFilename     = Constant.IO.baseDir +"data/rare.txt";
     
-    final private String comment = "//";
+    final private static String comment = "//";
     
     private CardList     commonCreatureList;
     private CardList     commonNonCreatureList;

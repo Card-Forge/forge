@@ -39,10 +39,10 @@ public class ImagePreviewPanel extends JPanel
              * handle so we don't try to draw something silly.
              */
             if ((name != null) &&
-                    name.toLowerCase().endsWith(".jpg") ||
+                   (name.toLowerCase().endsWith(".jpg") ||
                     name.toLowerCase().endsWith(".jpeg") ||
                     name.toLowerCase().endsWith(".gif") ||
-                    name.toLowerCase().endsWith(".png")) {
+                    name.toLowerCase().endsWith(".png")) ) {
                 icon = new ImageIcon(name);
                 image = icon.getImage();
                 scaleImage();

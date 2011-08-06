@@ -43,7 +43,7 @@ public class AdvancedPlayer
 	/** The AudioDevice the audio samples are written to. */
 	private AudioDevice audio;
 	/** Has the player been closed? */
-	private boolean closed = false;
+	//private boolean closed = false;
 	/** Has the player played back all frames from the stream? */
 	
 	//private boolean complete = false;
@@ -124,7 +124,7 @@ public class AdvancedPlayer
 		AudioDevice out = audio;
 		if (out != null)
 		{
-			closed = true;
+			//closed = true;
 			audio = null;
 			// this may fail, so ensure object state is set up before
 			// calling this method.

@@ -886,7 +886,7 @@ public class CardFactory implements NewConstants {
         final String DrawBack[] = {"none"};
         final String spDesc[] = {"none"};
         final String stDesc[] = {"none"};
-        String d = new String("none");
+        String d = "none";
        
         if ((AttackX[0].equals("none") && !(NumAttack[0] == -1138)) && (DefenseX[0].equals("none") && !(NumDefense[0] == -1138)) && Keyword[0].equals("none"))
         {
@@ -1772,7 +1772,7 @@ public class CardFactory implements NewConstants {
            
             final String manaCost = tmpCost;
            
-            String tempDesc = new String();
+            String tempDesc = "";
             tempDesc = cardName + " deals " + dmg[0] + " damage to target creature or player.";
             final String Desc = tempDesc;
 
@@ -13026,6 +13026,8 @@ public class CardFactory implements NewConstants {
       	    	CardList lands = new CardList();
       	    	lands.addAll(play.getCards());
       	    	lands = lands.getType("Land");
+      	    	
+      	    	c = lands.get(0);
       	    	
       	    	setTargetCard(c);
             	  

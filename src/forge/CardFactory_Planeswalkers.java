@@ -315,9 +315,6 @@ class CardFactory_Planeswalkers {
 	
 	         public boolean canPlay()
 	         {
-	           @SuppressWarnings("unused") // library
-			   PlayerZone library = AllZone.getZone(Constant.Zone.Library, card2.getController());
-	
 	           return 0 < card2.getCounters(Counters.LOYALTY) &&
 	                       AllZone.getZone(card2).is(Constant.Zone.Play) &&
 	                       turn[0] != AllZone.Phase.getTurn() &&
@@ -941,8 +938,6 @@ class CardFactory_Planeswalkers {
 	
 	        public boolean canPlay()
 	        {
-	          @SuppressWarnings("unused") // library
-			  PlayerZone library = AllZone.getZone(Constant.Zone.Library, card2.getController());
 	
 	          return 0 < card2.getCounters(Counters.LOYALTY) &&
 	                                  AllZone.getZone(card2).is(Constant.Zone.Play) &&
@@ -979,13 +974,13 @@ class CardFactory_Planeswalkers {
 	          card2.subtractCounter(Counters.LOYALTY, 6);
 	          turn[0] = AllZone.Phase.getTurn();
 	
-	          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+	          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card2.getController());
 	
 	          //Create token
 	          Card c = new Card();
 	
-	          c.setOwner(card.getController());
-	          c.setController(card.getController());
+	          c.setOwner(card2.getController());
+	          c.setController(card2.getController());
 	
 	          c.setImageName("W N N Avatar");
 	          c.setName("Avatar");
@@ -1042,7 +1037,7 @@ class CardFactory_Planeswalkers {
 	          turn[0] = AllZone.Phase.getTurn();
 	          
 	          
-	          AllZone.GameAction.getPlayerLife(card.getController()).addLife(2);
+	          AllZone.GameAction.getPlayerLife(card2.getController()).addLife(2);
 	          System.out.println("current phase: " +AllZone.Phase.getPhase());
 	        }
 	        public boolean canPlayAI()
@@ -2783,8 +2778,8 @@ class CardFactory_Planeswalkers {
 	        {
 	          Card c = new Card();
 
-	          c.setOwner(card.getController());
-	          c.setController(card.getController());
+	          c.setOwner(card2.getController());
+	          c.setController(card2.getController());
 	          
 	          c.setImageName("R 4 4 Dragon");
 	          c.setName("Dragon");

@@ -30,7 +30,7 @@ package javazoom.jl.converter;
 
 import java.io.PrintWriter;
 
-import javazoom.jl.decoder.Crc16;
+//import javazoom.jl.decoder.Crc16;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.decoder.OutputChannels;
 

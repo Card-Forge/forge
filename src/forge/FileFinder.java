@@ -14,8 +14,8 @@ public class FileFinder {
     private long totalLength = 0;
     private int filesNumber = 0;
     private long directoriesNumber = 0;
-    private final int FILES = 0;
-    private final int DIRECTORIES = 1;
+    private static final int FILES = 0;
+    private static final int DIRECTORIES = 1;
     private ArrayList<String> fileNames;
     private ArrayList<String> fName;
    
