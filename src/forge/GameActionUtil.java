@@ -2527,28 +2527,11 @@ public class GameActionUtil {
     
     	if(c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")) 
 			playerCombatDamage_Whirling_Dervish(c);
-		else if(AllZoneUtil.isCardInPlay("Living Artifact", player)) execute_Living_Artifact(player, damage);
     	
     	if (player.isPlayer(AllZone.HumanPlayer)) c.setDealtDmgToHumanThisTurn(true);
     	if (player.isPlayer(AllZone.ComputerPlayer)) c.setDealtDmgToComputerThisTurn(true);
-
-
     }
     
-    private static void execute_Living_Artifact(final Player p, final int num) {
-    	CardList las = AllZoneUtil.getPlayerCardsInPlay(p, "Living Artifact");
-    	for(final Card la:las) {
-    		Ability addCounter = new Ability(la, "0") {
-    			public void resolve() {
-    				la.addCounter(Counters.VITALITY, num);
-    			}
-    		};
-    		addCounter.setStackDescription(la.getName()+" - Put "+num+" vitality counters on "+la);
-
-            AllZone.Stack.addSimultaneousStackEntry(addCounter);
-
-    	}
-    }
     
     //restricted to combat damage, restricted to players
 	public static void executeCombatDamageToPlayerEffects(final Player player, final Card c, final int damage) {
