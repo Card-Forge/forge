@@ -234,11 +234,10 @@ public abstract class Player extends MyObservable{
     	if(isCombat) {
     		if(source.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) return 0;
     		if(source.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME.")) return 0;
-    		if (AllZoneUtil.isCardInPlay("Purity", this)) return 0;
     	}
     	if(source.getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME.")) return 0;
     	if(source.getKeyword().contains("Prevent all damage that would be dealt by CARDNAME.")) return 0;
-    	
+    	if (AllZoneUtil.isCardInPlay("Purity", this) && !isCombat) return 0;
     	
     	//specific cards
     	if (AllZoneUtil.isCardInPlay("Energy Storm") && source.isSpell()) return 0;

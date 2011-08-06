@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:tap: add 1
-A:AB$Destroy | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land. | Cost$ 1 T Sac<1/CARDNAME> | IsPresent$ Land | PresentCompare $ GE4| SpellDescription$ Destroy target nonbasic land. Activate this ability only if an opponent controls four or more lands.
+A:AB$Destroy | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land. | Cost$ 1 T Sac<1/CARDNAME> | IsPresent$ Land.YouDontCtrl | PresentCompare$ GE4 | SpellDescription$ Destroy target nonbasic land. Activate this ability only if an opponent controls four or more lands.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tectonic_edge.jpg

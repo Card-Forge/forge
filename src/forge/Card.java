@@ -2811,7 +2811,7 @@ public class Card extends MyObservable {
     	if(AllZoneUtil.isCardInPlay("Leyline of Punishment")) return damage;
 		
 		int restDamage = damage;
-		Player player = source.getController();
+		Player player = getController();
 		
     	if(isCombat) {
     		if(getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME."))return 0;
@@ -2836,15 +2836,6 @@ public class Card extends MyObservable {
     		if (source.isValid(valid,this.getController(),this))
     			return 0;
     	}
-    	
-		/* Should use the PreventAllDamageBy
-    	if((getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by artifact creatures.") 
-				&& source.isCreature() && source.isArtifact()))return 0;
-    	if((getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by artifacts.") 
-				&& source.isArtifact()))return 0;
-    	if((getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by creatures.")
-				&& source.isCreature()))return 0;
-		*/
 		
 		// specific Cards
     	if(isCreature()) { //and not a planeswalker
