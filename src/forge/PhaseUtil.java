@@ -252,6 +252,8 @@ public class PhaseUtil {
 			}
 		} // end of Permanents don't untap during their controllers' untap steps
 		
+		if(c.isEnchantedBy("Venarian Gold") && (c.getCounters(Counters.SLEEP) > 0)) return false;
+		
     	if(isAnZerrinRuinsType(getAnZerrinRuinsTypes(), c)) return false;
     	
     	return true;
