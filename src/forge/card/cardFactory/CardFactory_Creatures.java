@@ -1818,7 +1818,7 @@ public class CardFactory_Creatures {
 				@Override
                 public boolean canPlayAI() {
                     // todo: figure out when the AI would want to use the Druid
-					return false;
+					return true;
                 }                
                 
                 @Override
@@ -1856,7 +1856,8 @@ public class CardFactory_Creatures {
 					}
                 }
             };
-            ability.setStackDescription(abCost+"Reveal cards until you reveal a basic land. Put that in your hand, and put the rest in your graveyard");
+            ability.setStackDescription(abCost+"Reveal cards from the top of your library until you reveal a basic land card." +
+            		" Put that card into your hand and all other cards revealed this way into your graveyard.");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
