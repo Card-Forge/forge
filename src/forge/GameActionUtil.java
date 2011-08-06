@@ -9193,7 +9193,7 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	}; // Muscles_Sliver
-
+	
 	public static Command Sliver_Legion               = new Command() {
 		private static final long serialVersionUID   = -4564640511791858445L;
 
@@ -10926,7 +10926,38 @@ public class GameActionUtil {
 		}
 
 	};
+	
+	public static Command Aura_Gnarlid       = new Command() {
+		private static final long serialVersionUID = 7072465568184131512L;
 
+		public void execute() {
+              // get all creatures
+              CardList list = new CardList();
+              list.addAll(AllZone.Human_Play.getCards());
+              list.addAll(AllZone.Computer_Play.getCards());
+              list = list.getName("Aura Gnarlid");
+              
+              for(int i = 0; i < list.size(); i++) {
+                  Card c = list.get(i);
+                  c.setBaseAttack(2 + countAuras());
+                  c.setBaseDefense(2 + countAuras());
+              }
+          }// execute()
+          
+          private int countAuras() {
+              PlayerZone cplay = AllZone.getZone(
+                      Constant.Zone.Play, Constant.Player.Computer);
+              PlayerZone hplay = AllZone.getZone(
+                      Constant.Zone.Play, Constant.Player.Human);
+              
+              CardList auras = new CardList();
+              auras.addAll(hplay.getCards());
+              auras.addAll(cplay.getCards());
+              
+              auras = auras.getType("Aura");
+              return auras.size();
+          }
+      };
 
 	public static Command Yavimaya_Enchantress        = new Command() {
 		private static final long serialVersionUID = -5650088477640877743L;
@@ -15132,6 +15163,7 @@ public class GameActionUtil {
 		commands.put("Werebear", Werebear);
 		commands.put("Divinity_of_Pride", Divinity_of_Pride);
 		commands.put("Yavimaya_Enchantress", Yavimaya_Enchantress);
+		commands.put("Aura_Gnarlid", Aura_Gnarlid);
 		commands.put("Knight_of_the_Reliquary", Knight_of_the_Reliquary);
 		commands.put("Zuberi", Zuberi);
 		commands.put("Loxodon_Punisher", Loxodon_Punisher);
