@@ -786,6 +786,7 @@ res/cardsfolder/brass_gnat.txt -text svneol=native#text/plain
 res/cardsfolder/brass_man.txt -text svneol=native#text/plain
 res/cardsfolder/brass_secretary.txt -text svneol=native#text/plain
 res/cardsfolder/brass_squire.txt svneol=native#text/plain
+res/cardsfolder/brass_talon_chimera.txt -text svneol=native#text/plain
 res/cardsfolder/brassclaw_orcs.txt -text svneol=native#text/plain
 res/cardsfolder/bravado.txt -text svneol=native#text/plain
 res/cardsfolder/brave_the_elements.txt -text svneol=native#text/plain
