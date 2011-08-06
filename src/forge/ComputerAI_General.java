@@ -83,18 +83,19 @@ public class ComputerAI_General implements Computer {
                 Vengevines.addAll(AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer).getCards());       
                 Vengevines = Vengevines.getName("Vengevine");
                 if(Vengevines.size() > 0) {
-                CardList Creatures = new CardList();  
-                CardList Creatures2 = new CardList();       
-                Creatures.addAll(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
-        		for(int i = 0; i < Creatures.size(); i++) {
-        			if(Creatures.get(i).getType().contains("Creature") && CardUtil.getConvertedManaCost(Creatures.get(i).getManaCost()) <= 3) {
-        				Creatures2.add(Creatures.get(i));
-        			}
-        		}
-                if(Creatures2.size() + Phase.ComputerCreatureSpellCount > 1 && c.getType().contains("Creature") && CardUtil.getConvertedManaCost(c.getManaCost()) <= 3) return true;	
-                } // AI Improvement for Vengevine
+	                CardList Creatures = new CardList();  
+	                CardList Creatures2 = new CardList();       
+	                Creatures.addAll(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
+	        		for(int i = 0; i < Creatures.size(); i++) {
+	        			if(Creatures.get(i).getType().contains("Creature") && CardUtil.getConvertedManaCost(Creatures.get(i).getManaCost()) <= 3) {
+	        				Creatures2.add(Creatures.get(i));
+	        			}
+	        		}
+	                if(Creatures2.size() + Phase.ComputerCreatureSpellCount > 1 
+	                	&& c.getType().contains("Creature") && CardUtil.getConvertedManaCost(c.getManaCost()) <= 3) return true;	
+	            } // AI Improvement for Vengevine
             	// Beached As End
-                	return false;
+                return false;
             }
         });
         CardList all = new CardList();
@@ -121,6 +122,15 @@ public class ComputerAI_General implements Computer {
         //Card list of all cards to consider
         CardList all = new CardList();
         all.addAll(AllZone.Computer_Hand.getCards());
+        //Don't play permanents with Flash before humans declare attackers step
+        all = all.filter(new CardListFilter() {
+            public boolean addCard(Card c) {
+                if(c.isPermanent() && c.getKeyword().contains("Flash") && (AllZone.Phase.isPlayerTurn(AllZone.ComputerPlayer)
+                	|| AllZone.Phase.isBefore(Constant.Phase.Combat_Declare_Attackers_InstantAbility)))
+                	return false;
+                return true;
+            }
+        });
         all.addAll(AllZone.Computer_Battlefield.getCards());
         all.addAll(CardFactoryUtil.getFlashbackCards(AllZone.ComputerPlayer).toArray());
         
@@ -151,6 +161,15 @@ public class ComputerAI_General implements Computer {
     private CardList getAvailableSpellAbilities(){
         CardList all = new CardList();
         all.addAll(AllZone.Computer_Hand.getCards());
+        //Don't play permanents with Flash before humans declare attackers step
+        all = all.filter(new CardListFilter() {
+            public boolean addCard(Card c) {
+                if(c.isPermanent() && c.getKeyword().contains("Flash") && (AllZone.Phase.isPlayerTurn(AllZone.ComputerPlayer)
+                	|| AllZone.Phase.isBefore(Constant.Phase.Combat_Declare_Attackers_InstantAbility)))
+                	return false;
+                return true;
+            }
+        });
         all.addAll(AllZone.Computer_Battlefield.getCards());
         all.addAll(CardFactoryUtil.getFlashbackCards(AllZone.ComputerPlayer).toArray());
 
