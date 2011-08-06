@@ -1,0 +1,11 @@
+Name:Fieldmist Borderpost
+ManaCost:1 W U
+Types:Artifact
+Text:no text
+K:CARDNAME enters the battlefield tapped.
+K:tap: add W
+K:tap: add U
+SVar:AltCost:1 Return<1/Land.Basic>$You may pay 1 and return a basic land you control to its owner's hand rather than pay Fieldmist Borderpost's mana cost.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fieldmist_borderpost.jpg
+End

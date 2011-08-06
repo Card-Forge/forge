@@ -1,0 +1,11 @@
+Name:Firewild Borderpost
+ManaCost:1 R G
+Types:Artifact
+Text:no text
+K:CARDNAME enters the battlefield tapped.
+K:tap: add R
+K:tap: add G
+SVar:AltCost:1 Return<1/Land.Basic>$You may pay 1 and return a basic land you control to its owner's hand rather than pay Firewild Borderpost's mana cost.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/firewild_borderpost.jpg
+End
