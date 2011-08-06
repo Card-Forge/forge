@@ -500,7 +500,7 @@ public class CardFactory_Instants {
                         PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
                         AllZone.GameAction.moveTo(grave, (Card) check);
                     }
-                    AllZone.GameAction.shuffle(AllZone.HumanPlayer);
+                    AllZone.HumanPlayer.shuffle();
                 }
                 
                 public void computerResolve() {
@@ -559,7 +559,7 @@ public class CardFactory_Instants {
                     //shuffle card back into the library
                     PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
                     AllZone.GameAction.moveTo(library,card);
-                    AllZone.GameAction.shuffle(card.getController());
+                    card.getController().shuffle();
                 }
             };
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHumanCreatureOrPlayer());
@@ -2111,7 +2111,7 @@ public class CardFactory_Instants {
                     creature = creature.getType("Creature");
                     if(creature.size() != 0) {
                         Card c = creature.get(0);
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                         
                         //move to top of library
                         AllZone.Computer_Library.remove(c);
@@ -2132,7 +2132,7 @@ public class CardFactory_Instants {
                     if(list.size() != 0) {
                         Object o = AllZone.Display.getChoiceOptional("Select a creature", list.toArray());
                         
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                         if(o != null) {
                             //put creature on top of library
                             library.remove(o);
@@ -2597,7 +2597,7 @@ public class CardFactory_Instants {
                         PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                         AllZone.GameAction.moveTo(hand, (Card) check);
                     }
-                    AllZone.GameAction.shuffle(AllZone.HumanPlayer);
+                    AllZone.HumanPlayer.shuffle();
                 }
                 
                 public void computerResolve() {
@@ -2832,7 +2832,7 @@ public class CardFactory_Instants {
                             c = creature.get(0);
                         }
                         
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                         
                         //move to top of library
                         AllZone.Computer_Library.remove(c);
@@ -2853,7 +2853,7 @@ public class CardFactory_Instants {
                     if(list.size() != 0) {
                         Object o = AllZone.Display.getChoiceOptional("Select a card", list.toArray());
                         
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                         if(o != null) {
                             //put card on top of library
                             library.remove(o);
@@ -2933,7 +2933,7 @@ public class CardFactory_Instants {
                     grave.add(toGrave1);
                     grave.add(toGrave2);
                     
-                    AllZone.GameAction.shuffle(AllZone.HumanPlayer);
+                    AllZone.HumanPlayer.shuffle();
                 }
                 
                 public void computerResolve() {
@@ -3378,7 +3378,7 @@ public class CardFactory_Instants {
                                     AllZone.Human_Play.add(card);
                                     card.tap();
                                     lands.remove(card);
-                                    AllZone.GameAction.shuffle(player);
+                                    player.shuffle();
                                 }
                             }// if choice yes
                         } // player equals human
@@ -3389,7 +3389,7 @@ public class CardFactory_Instants {
                             AllZone.Computer_Play.add(card);
                             card.tap();
                             lands.remove(card);
-                            AllZone.GameAction.shuffle(player);
+                            player.shuffle();
                         }
                     }
                 }//resolve()

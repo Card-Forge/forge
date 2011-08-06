@@ -6192,7 +6192,7 @@ public class GameActionUtil {
 
 									}
 								}
-								AllZone.GameAction.shuffle(AllZone.HumanPlayer);
+								AllZone.HumanPlayer.shuffle();
 							}// if choice yes
 						} // player equals human
 						else if(player.equals(AllZone.ComputerPlayer) && lands.size() > 0) {
@@ -6214,7 +6214,7 @@ public class GameActionUtil {
 									lands.remove(card);
 								}
 							}
-							AllZone.GameAction.shuffle(AllZone.ComputerPlayer);
+							AllZone.ComputerPlayer.shuffle();
 						}
 					}
 
@@ -6775,7 +6775,7 @@ public class GameActionUtil {
 								hand.add(card);
 
 							}
-							AllZone.GameAction.shuffle(player);
+							player.shuffle();
 						}
 					}
 
@@ -7734,7 +7734,7 @@ public class GameActionUtil {
 							play.add(creature2);
 						}
 
-						AllZone.GameAction.shuffle(card.getController());
+						card.getController().shuffle();
 
 					}
 

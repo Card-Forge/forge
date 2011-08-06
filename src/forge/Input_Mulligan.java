@@ -32,7 +32,7 @@ public class Input_Mulligan extends Input {
         }
         
         for(int i = 0; i < 100; i++)
-            AllZone.GameAction.shuffle(AllZone.HumanPlayer);
+            AllZone.HumanPlayer.shuffle();
         
         
         int newHand = hand.length - 1;

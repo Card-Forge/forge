@@ -446,7 +446,7 @@ class CardFactory_Planeswalkers {
                                 play.add(c);
                             }
                         }
-                        AllZone.GameAction.shuffle(AllZone.HumanPlayer);
+                        AllZone.HumanPlayer.shuffle();
                     }//human
                     else {
                         PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card2.getController());
@@ -459,7 +459,7 @@ class CardFactory_Planeswalkers {
                             lib.remove(nissa);
                             play.add(nissa);
                         }
-                        AllZone.GameAction.shuffle(AllZone.ComputerPlayer);
+                        AllZone.ComputerPlayer.shuffle();
                     }
                     
                 }
@@ -1105,7 +1105,7 @@ class CardFactory_Planeswalkers {
                     creature = creature.getType("Creature");
                     if(creature.size() != 0) {
                         Card c = creature.get(0);
-                        AllZone.GameAction.shuffle(card2.getController());
+                        card2.getController().shuffle();
                         
                         //move to top of library
                         AllZone.Computer_Library.remove(c);
@@ -1121,7 +1121,7 @@ class CardFactory_Planeswalkers {
                     if(list.size() != 0) {
                         Object o = AllZone.Display.getChoiceOptional("Select any card", list.toArray());
                         
-                        AllZone.GameAction.shuffle(card2.getController());
+                        card2.getController().shuffle();
                         if(o != null) {
                             //put creature on top of library
                             library.remove(o);

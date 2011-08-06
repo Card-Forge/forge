@@ -30,7 +30,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
     {
     	PlayerZone lib = AllZone.getZone(Constant.Zone.Library, c.getOwner());
     	lib.add(c);
-    	AllZone.GameAction.shuffle(c.getOwner());
+    	c.getOwner().shuffle();
     	return;
     }
     //slight difference from above I guess, the card gets put into the grave first, then shuffled into library.
@@ -43,7 +43,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
        	grave.addOnce(c);
        	grave.remove(c);
        	lib.add(c);
-       	AllZone.GameAction.shuffle(c.getOwner());
+       	c.getOwner().shuffle();
        	return;
     }
     	
@@ -57,7 +57,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
        	for(Card gc : grave.getCards())
        		lib.add(gc);
        	grave.reset();
-       	AllZone.GameAction.shuffle(c.getOwner());
+       	c.getOwner().shuffle();
        	return;
     }
     

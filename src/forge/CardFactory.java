@@ -572,7 +572,7 @@ public class CardFactory implements NewConstants {
         			else if(Destination.equals("Shuffle"))
         			{
         				AllZone.GameAction.moveToBottomOfLibrary(sa.getSourceCard());
-        				AllZone.GameAction.shuffle(sa.getSourceCard().getController());
+        				sa.getSourceCard().getController().shuffle();
         			}
         			else
         			{
@@ -3286,7 +3286,7 @@ public class CardFactory implements NewConstants {
                     		else if(Destination.equals("ShuffleIntoLibrary"))
                     		{
                     			AllZone.GameAction.moveToTopOfLibrary(tgtC);
-                    			AllZone.GameAction.shuffle(tgtC.getOwner());
+                    			tgtC.getOwner().shuffle();
                     		}
                     		else if(Destination.equals("Exile"))
                     			AllZone.GameAction.exile(tgtC); 
@@ -3449,7 +3449,7 @@ public class CardFactory implements NewConstants {
         					else if (Destination.equals("ShuffleIntoLibrary"))
         					{
         						AllZone.GameAction.moveToTopOfLibrary(tgtC);
-        						AllZone.GameAction.shuffle(tgtC.getOwner());
+        						tgtC.getOwner().shuffle();
         					}
         					else if (Destination.equals("Exile"))
         						AllZone.GameAction.exile(tgtC);
@@ -3625,7 +3625,7 @@ public class CardFactory implements NewConstants {
 					else if(Destination.equals("BottomofLibrary")) AllZone.GameAction.moveToBottomOfLibrary(c);
 					else if(Destination.equals("ShuffleIntoLibrary")) {
 							AllZone.GameAction.moveToTopOfLibrary(c);
-							AllZone.GameAction.shuffle(c.getOwner());
+							c.getOwner().shuffle();
 						}
 					else if(Destination.equals("Exile")) AllZone.GameAction.exile(c); 
 					else if(Destination.equals("Hand")) {
@@ -4170,7 +4170,7 @@ public class CardFactory implements NewConstants {
                     		list = list.getNotName(card.getName());
                     	}
                         Card c = list.get(0);
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                         AllZone.Computer_Library.remove(c);
                         if (Destination.equals("Hand")) AllZone.Computer_Hand.add(c);         			//move to hand
                         if (Destination.equals("TopOfLibrary")) AllZone.Computer_Library.add(c, 0); //move to top of library
@@ -4192,7 +4192,7 @@ public class CardFactory implements NewConstants {
                     if(list.size() != 0) {
                         Object o = AllZone.Display.getChoiceOptional("Select a card", list.toArray());
                         
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                         if(o != null) {
                         	AllZone.Human_Library.remove(o);
                         	if (Destination.equals("Hand")) AllZone.Human_Hand.add((Card) o);         			//move to hand
@@ -5839,7 +5839,7 @@ public class CardFactory implements NewConstants {
         				
         				
         			}
-        			AllZone.GameAction.shuffle(card.getController());
+        			card.getController().shuffle();
         		}
         		
         	};
@@ -10717,7 +10717,7 @@ public class CardFactory implements NewConstants {
         				lib.add(c);
         			}
         			AllZone.getZone(Constant.Zone.Graveyard, player).reset();
-        			AllZone.GameAction.shuffle(player);
+        			player.shuffle();
         		}
 
         		@Override
@@ -10853,7 +10853,7 @@ public class CardFactory implements NewConstants {
         				AllZone.GameAction.exile(c);
         			}
         			AllZone.getZone(Constant.Zone.Graveyard, player).reset();
-        			AllZone.GameAction.shuffle(player);
+        			player.shuffle();
         		}
 
         		@Override

@@ -1327,7 +1327,7 @@ public class CombatUtil {
                                     }
                                 }
                             }
-                            AllZone.GameAction.shuffle(c.getController());
+                            c.getController().shuffle();
                             //we have to have cards like glorious anthem take effect immediately:
                             for(String effect:AllZone.StaticEffects.getStateBasedMap().keySet()) {
                                 Command com = GameActionUtil.commands.get(effect);
@@ -1346,7 +1346,7 @@ public class CombatUtil {
                             Card card = enchantments.get(0);
                             library.remove(card);
                             play.add(card);
-                            AllZone.GameAction.shuffle(c.getController());
+                            c.getController().shuffle();
                             //we have to have cards like glorious anthem take effect immediately:
                             GameActionUtil.executeCardStateEffects();
                         }
@@ -2767,7 +2767,7 @@ public class CombatUtil {
 	                    	play.add(Enchantment);
 	                    	Enchantment.enchantCard(attacker);
 	                    }
-                        if(player.isHuman()) AllZone.GameAction.shuffle(attacker.getController());	                    
+                        if(player.isHuman()) attacker.getController().shuffle();	                    
                 }//resolve
             };// ability4
             ability4.setStackDescription(c + " - (Exalted) searches library for an Aura card that could enchant that creature, put it into play attached to that creature, then shuffles library. ");
