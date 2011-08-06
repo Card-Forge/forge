@@ -1098,8 +1098,7 @@ public class CardFactory_Sorceries {
             };//SpellAbility
             spell.setBeforePayMana(CardFactoryUtil.input_targetType(spell, "Land"));
             card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
+            card.addSpellAbility(spell);           
         }//*************** END ************ END **************************
         
         
@@ -2781,7 +2780,7 @@ public class CardFactory_Sorceries {
             card.setFlashback(true);
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Allied Strategies")) {
             SpellAbility spell = new Spell(card) {
@@ -2878,7 +2877,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-
+		*/
         
         //*************** START *********** START **************************
         else if(cardName.equals("Pulse of the Tangle")) {
@@ -3790,29 +3789,6 @@ public class CardFactory_Sorceries {
 
         }//*************** END ************ END **************************
         
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Cruel Edict") || cardName.equals("Imperial Edict")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 4782606423085170723L;
-                
-                @Override
-                public void resolve() {
-                    card.getController().getOpponent().sacrificeCreature();
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-                    CardList hList = new CardList(hPlay.getCards());
-                    hList = hList.getType("Creature");
-                    return hList.size() > 0;
-                }
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Rite of Replication")) {
@@ -4128,8 +4104,7 @@ public class CardFactory_Sorceries {
             
 
             card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
+            card.addSpellAbility(spell);            
         }//*************** END ************ END **************************
         
         
