@@ -2509,6 +2509,8 @@ public class CardFactory implements NewConstants {
         			if (tmpCost.length() == 0)
         				tapOnlyCost = true;
         		}
+        		else
+        			tmpCost = tmpCost.trim();
         		
         		final String manaCost = tmpCost;
         		
