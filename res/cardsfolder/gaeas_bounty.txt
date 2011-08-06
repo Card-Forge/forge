@@ -2,7 +2,7 @@ Name:Gaea's Bounty
 ManaCost:2 G
 Types:Sorcery
 Text:no text
-A:SP$Fetch|Cost$2 G|Destination$Hand|FetchType$Forest|FetchNum$2|SpellDescription$Search your library for up to two Forest cards, reveal those cards, and put them into your hand. Then shuffle your library.
+A:SP$Fetch | Cost$ 2 G | Destination$ Hand | FetchType$ Forest | FetchNum$ 2 | SpellDescription$ Search your library for up to two Forest cards, reveal those cards, and put them into your hand. Then shuffle your library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaeas_bounty.jpg
 End

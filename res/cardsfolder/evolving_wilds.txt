@@ -2,7 +2,7 @@ Name:Evolving Wilds
 ManaCost:no cost
 Types:Land
 Text:no text
-A:AB$Fetch|Cost$T Sac<1/CARDNAME>|Destination$Battlefield|Tapped$True|FetchType$Land.Basic|FetchNum$1|SpellDescription$Search your library for a basic land card and put it onto the battlefield tapped. Then shuffle your library.
+A:AB$Fetch | Cost$ T Sac<1/CARDNAME> | Destination$ Battlefield | Tapped$ True | FetchType$ Land.Basic | FetchNum$ 1 | SpellDescription$ Search your library for a basic land card and put it onto the battlefield tapped. Then shuffle your library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evolving_wilds.jpg
 End
