@@ -2573,21 +2573,6 @@ public class GameAction {
         return list.contains(card);
     }
     
-    public boolean payLife(Player player, int lifePayment, Card source){
-    	if( null == player ) return false;
-    	else return player.payLife(lifePayment, source);
-    	//    	if(player == null) return false;
-    	//    	
-    	//    	int curLife = player.getLife();
-    	//    	
-    	//    	if (lifePayment <= curLife){
-    	//    		player.subtractLife(lifePayment, source);
-    	//    		return true;
-    	//    	}
-    	//    	return false;
-    	
-    }
-    
     //removes all damage from player's creatures
     public void removeDamage(Player player) {
         PlayerZone p = AllZone.getZone(Constant.Zone.Play, player);

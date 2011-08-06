@@ -7691,7 +7691,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void showMessage() {
-                	boolean paid = AllZone.GameAction.payLife(card.getController(), 1, card);
+                	boolean paid = card.getController().payLife(1, card);
                     
                     //this order is very important, do not change
                     stop();
@@ -7755,7 +7755,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void showMessage() {
-                	boolean paid = AllZone.GameAction.payLife(card.getController(), 1, card);
+                	boolean paid = card.getController().payLife(1, card);
                     
                     //this order is very important, do not change
                     stop();
