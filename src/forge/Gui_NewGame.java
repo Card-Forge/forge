@@ -308,13 +308,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         titleLabel.setFont(new java.awt.Font("Dialog", 0, 26));
         
         /*CHOPPIC*/
-        // We are having java heap space errors when displaying a background picture.
-        // The picture has been removed from the project until someone can fix this error.
-        // We want the titleLabel to be visible so we change the color to black.
-        
-        // titleLabel.setForeground(Color.WHITE);
-        
-        titleLabel.setForeground(Color.BLACK);
+        titleLabel.setForeground(Color.WHITE);
         /*CHOPPIC*/
         
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
