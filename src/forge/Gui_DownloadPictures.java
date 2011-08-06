@@ -187,12 +187,21 @@ public class Gui_DownloadPictures extends DefaultBoundedRangeModel implements Ru
         
         if(p != null) {
             byte[] buf = new byte[1024];
-            int len;
-            System.out.println("basedir: " + base);
+            int len;          
             for(update(0); card < cards.length && !cancel; update(card + 1)) {
                 try {
                     String url = cards[card].url;
-                    File f = new File(base, cards[card].name);
+                    String cName;
+                    if(cards[card].name.substring(0, 3).equals("[T]")){
+                    	base = ForgeProps.getFile(IMAGE_TOKEN);
+                    	cName = cards[card].name.substring(3, cards[card].name.length());
+                    }else
+                    {
+                    	base = ForgeProps.getFile(IMAGE_BASE);
+                    	cName=cards[card].name;
+                    }                    
+                    
+                    File f = new File(base, cName);
                     
                     in = new BufferedInputStream(new URL(url).openConnection(p).getInputStream());
                     out = new BufferedOutputStream(new FileOutputStream(f));
@@ -271,6 +280,7 @@ public class Gui_DownloadPictures extends DefaultBoundedRangeModel implements Ru
         Card[] cardY = readFile(CARD_PICTURES_Y);
         Card[] cardZ = readFile(CARD_PICTURES_Z);
         Card[] cardOther = readFile(CARD_PICTURES_OTHER);
+        Card[] cardTokenHQ = readFile(CARD_PICTURES_TOKEN_HQ);
         ArrayList<Card> list = new ArrayList<Card>();
         File file;
         
@@ -556,7 +566,11 @@ public class Gui_DownloadPictures extends DefaultBoundedRangeModel implements Ru
             file = new File(base, cardOther[i].name);
             if(!file.exists()) list.add(cardOther[i]);
         }
-        
+        base = ForgeProps.getFile(IMAGE_TOKEN);
+        for(int i = 0; i < cardTokenHQ.length; i++) {
+        	 file = new File(base, cardTokenHQ[i].name.substring(3, cardTokenHQ[i].name.length()));
+            if(!file.exists()) list.add(cardTokenHQ[i]);
+        }
         
         
         //return all card names and urls that are needed

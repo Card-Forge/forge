@@ -444,11 +444,6 @@ vedalken_plotter.jpg		http://www.wizards.com/global/images/magic/general/vedalke
 political_trickery.jpg		http://www.wizards.com/global/images/magic/general/political_trickery.jpg
 obsidian_fireheart.jpg		http://www.wizards.com/global/images/magic/general/obsidian_fireheart.jpg
 armadillo_cloak.jpg			http://www.wizards.com/global/images/magic/general/armadillo_cloak.jpg
-w_n_n_avatar.jpg			http://www.magickartenmarkt.de/img/cards/Lorwyn/avatar_token_white_xx.jpg
-w_4_4_angel.jpg				http://www.magickartenmarkt.de/img/cards/Conflux/angel_token_white_44.jpg
-g_1_1_insect.jpg			http://www.magickartenmarkt.de/img/cards/Player_Rewards_Promos/insect_token_green_11.jpg
-u_1_1_bird.jpg				http://www.magickartenmarkt.de/img/cards/Player_Rewards_Promos/bird_token_blue_11.jpg
-w_1_1_bird.jpg				http://www.magickartenmarkt.de/img/cards/Zendikar/bird_token_white_11.jpg
 great_sable_stag.jpg		http://www.wizards.com/global/images/magic/general/great_sable_stag.jpg
 blurred_mongoose.jpg		http://www.wizards.com/global/images/magic/general/blurred_mongoose.jpg
 break_asunder.jpg			http://www.wizards.com/global/images/magic/general/break_asunder.jpg
@@ -743,7 +738,6 @@ shivan_hellkite.jpg			http://www.wizards.com/global/images/magic/general/shivan_
 stinging_barrier.jpg		http://www.wizards.com/global/images/magic/general/stinging_barrier.jpg
 thornwind_faeries.jpg		http://www.wizards.com/global/images/magic/general/thornwind_faeries.jpg
 zuran_spellcaster.jpg		http://www.wizards.com/global/images/magic/general/zuran_spellcaster.jpg
-rg_1_1_dragon.jpg			http://www.magickartenmarkt.de/img/cards/Alara_Reborn/dragon_token_red_and_green_11.jpg
 chatter_of_the_squirrel.jpg http://www.wizards.com/global/images/magic/general/chatter_of_the_squirrel.jpg
 tradewind_rider.jpg			http://www.wizards.com/global/images/magic/general/tradewind_rider.jpg
 dragon_broodmother.jpg		http://www.wizards.com/global/images/magic/general/dragon_broodmother.jpg
@@ -769,10 +763,6 @@ wrens_run_packmaster.jpg		http://www.wizards.com/global/images/magic/general/wre
 changeling_berserker.jpg		http://www.wizards.com/global/images/magic/general/changeling_berserker.jpg
 changeling_hero.jpg		http://www.wizards.com/global/images/magic/general/changeling_hero.jpg
 changeling_titan.jpg		http://www.wizards.com/global/images/magic/general/changeling_titan.jpg
-g_4_4_beast.jpg			http://www.magickartenmarkt.de/img/cards/Player_Rewards_Promos/beast_token_green_44.jpg
-g_3_3_elephant.jpg		http://www.magickartenmarkt.de/img/cards/Player_Rewards_Promos/elephant_token2.jpg
-g_1_1_squirrel.jpg		http://www.magickartenmarkt.de/img/cards/Player_Rewards_Promos/squirrel_token.jpg
-g_6_6_wurm.jpg			http://www.magickartenmarkt.de/img/cards/Player_Rewards_Promos/wurm_token.jpg
 acorn_harvest.jpg		http://www.wizards.com/global/images/magic/general/acorn_harvest.jpg
 ashen_monstrosity.jpg		http://www.wizards.com/global/images/magic/general/ashen_monstrosity.jpg
 beast_attack.jpg		http://www.wizards.com/global/images/magic/general/beast_attack.jpg
@@ -1128,8 +1118,6 @@ avian_changeling.jpg		http://resources.wizards.com/magic/cards/lrw/en/card145813
 axegrinder_giant.jpg		http://resources.wizards.com/magic/cards/lrw/en/card145976.jpg
 azimaet_drake.jpg		http://mi.wizards.com/global/images/magic/general/azimaet_drake.jpg
 azure_drake.jpg		http://resources.wizards.com/magic/cards/9ed/en-us/card83084.jpg
-b_1_1_faerie_rogue.jpg		http://www.magickartenmarkt.de/img/cards/Morningtide/faerie_rogue_token.jpg
-b_2_2_zombie.jpg		http://www.magickartenmarkt.de/img/cards/Shards_of_Alara/zombie_token_black_22.jpg
 bad_moon.jpg		http://www.wizards.com/global/images/magic/general/bad_moon.jpg
 badlands.jpg		http://www.wizards.com/global/images/magic/general/badlands.jpg
 balduvian_barbarians.jpg		http://resources.wizards.com/magic/cards/9ed/en-us/card83001.jpg
@@ -1210,9 +1198,6 @@ broodmate_dragon.jpg		http://www.wizards.com/global/images/magic/general/broodma
 brute_force.jpg		http://resources.wizards.com/magic/cards/plc/en-us/card122373.jpg
 bull_cerodon.jpg		http://www.wizards.com/global/images/magic/general/bull_cerodon.jpg
 bull_hippo.jpg		http://resources.wizards.com/magic/cards/7e/en-us/card13103.jpg
-c_1_1_shapeshifter.jpg		http://www.magickartenmarkt.de/img/cards/Lorwyn/shapeshifter_token.jpg
-c_1_1_sliver.jpg		http://www.magickartenmarkt.de/img/cards/Player_Rewards_Promos/sliver_token.jpg
-c_1_1_wasp.jpg		http://www.magickartenmarkt.de/img/cards/Tenth_Edition/wasp_token.jpg
 cackling_flames.jpg		http://resources.wizards.com/magic/cards/dis/en-us/card107258.jpg
 cackling_imp.jpg		http://resources.wizards.com/magic/cards/5dn/en-us/card73597.jpg
 caldera_hellion.jpg 		http://www.wizards.com/global/images/magic/general/caldera_hellion.jpg
@@ -1475,10 +1460,6 @@ fury_sliver.jpg		http://www.wizards.com/global/images/magic/general/fury_sliver.
 fusion_elemental.jpg		http://www.wizards.com/global/images/magic/general/fusion_elemental.jpg
 fyndhorn_bow.jpg		http://www.wizards.com/global/images/magic/general/fyndhorn_bow.jpg
 fyndhorn_elves.jpg		http://resources.wizards.com/magic/cards/ia/en-us/card2568.jpg
-g_1_1_saproling.jpg		http://www.magickartenmarkt.de/img/cards/Shards_of_Alara/saproling_token_green_11.jpg
-g_2_2_bear.jpg		http://www.magickartenmarkt.de/img/cards/Player_Rewards_Promos/bear_token1.jpg
-g_2_5_treefolk_shaman.jpg		http://www.magickartenmarkt.de/img/cards/Morningtide/treefolk_shaman_token.jpg
-g_3_3_beast.jpg		http://www.magickartenmarkt.de/img/cards/Eventide/beast_token_green_33.jpg
 gaeas_anthem.jpg		http://resources.wizards.com/magic/cards/plc/en-us/card122367.jpg
 gaeas_skyfolk.jpg		http://resources.wizards.com/magic/cards/ap/en-us/card26757.jpg
 garruk_wildspeaker.jpg		http://resources.wizards.com/magic/cards/lrw/en/card140205.jpg
@@ -1754,7 +1735,6 @@ mantis_engine.jpg		http://www.wizards.com/global/images/magic/general/mantis_eng
 marble_diamond.jpg		http://www.wizards.com/global/images/magic/general/marble_diamond.jpg
 marble_titan.jpg		http://resources.wizards.com/magic/cards/9ed/en-us/card84533.jpg
 march_of_souls.jpg		http://resources.wizards.com/magic/cards/ps/en-us/card26277.jpg
-c_20_20_marit_lage.jpg		http://www.magickartenmarkt.de/img/cards/Game_Day_Cards/marit_lage_token.jpg
 marrow_gnawer.jpg		http://www.wizards.com/global/images/magic/general/marrow_gnawer.jpg
 marsh_boa.jpg		http://resources.wizards.com/magic/cards/pr/en-us/card24664.jpg
 marsh_goblins.jpg		http://resources.wizards.com/magic/cards/dk/en-us/card1821.jpg
@@ -1944,10 +1924,6 @@ pyroclasm.jpg		http://resources.wizards.com/magic/cards/9ed/en-us/card83216.jpg
 pyrohemia.jpg		http://resources.wizards.com/magic/cards/plc/en-us/card122436.jpg
 python.jpg		http://resources.wizards.com/magic/cards/6e/en-us/card15392.jpg
 quirion_dryad.jpg		http://www.wizards.com/global/images/magic/general/quirion_dryad.jpg
-r_1_1_goblin.jpg		http://www.magickartenmarkt.de/img/cards/Shards_of_Alara/goblin_token_red_11.jpg
-r_3_1_elemental.jpg		http://www.magickartenmarkt.de/img/cards/Conflux/elemental_token_red_31.jpg
-r_4_4_dragon.jpg		http://www.magickartenmarkt.de/img/cards/Shards_of_Alara/dragon_token_red_44.jpg
-r_5_5_dragon.jpg		http://www.magickartenmarkt.de/img/cards/Tenth_Edition/dragon_token.jpg
 radiant_archangel.jpg		http://resources.wizards.com/magic/cards/gu/en-us/card12368.jpg
 rafiq_of_the_many.jpg		http://www.wizards.com/global/images/magic/general/rafiq_of_the_many.jpg
 raging_bull.jpg		http://www.wizards.com/global/images/magic/general/raging_bull.jpg
@@ -1998,7 +1974,6 @@ retribution_of_the_meek.jpg		http://www.wizards.com/global/images/magic/general/
 revered_dead.jpg		http://resources.wizards.com/magic/cards/plc/en-us/card122282.jpg
 reviving_dose.jpg		http://resources.wizards.com/magic/cards/in/en-us/card22941.jpg
 reya_dawnbringer.jpg		http://resources.wizards.com/magic/cards/in/en-us/card22965.jpg
-rgw_8_8_beast.jpg		http://www.magickartenmarkt.de/img/cards/Shards_of_Alara/beast_token_red_green_and_white_88.jpg
 rhox_bodyguard.jpg		http://www.wizards.com/global/images/magic/general/rhox_bodyguard.jpg
 rhox_charger.jpg		http://www.wizards.com/global/images/magic/general/rhox_charger.jpg
 rhox_war_monk.jpg		http://www.wizards.com/global/images/magic/general/rhox_war_monk.jpg
@@ -2033,7 +2008,6 @@ royal_assassin.jpg		http://resources.wizards.com/magic/cards/9ed/en-us/card83235
 royal_falcon.jpg		http://www.magickartenmarkt.de/img/cards/Starter_1999/royal_falcon.jpg
 rune_cervin_rider.jpg		http://www.wizards.com/global/images/magic/general/rune_cervin_rider.jpg
 rushwood_dryad.jpg		http://resources.wizards.com/magic/cards/10e/en/card136285.jpg
-rw_1_1_goblin_soldier.jpg		http://www.magickartenmarkt.de/img/cards/Eventide/goblin_soldier_token_red_and_white_11.jpg
 ryusei_the_falling_star.jpg		http://resources.wizards.com/magic/cards/chk/en-us/card79242.jpg
 sabertooth_wyvern.jpg		http://www.wizards.com/global/images/magic/general/sabertooth_wyvern.jpg
 sabretooth_tiger.jpg		http://www.wizards.com/global/images/magic/general/sabretooth_tiger.jpg
@@ -2344,9 +2318,6 @@ volunteer_militia.jpg		http://resources.wizards.com/magic/cards/pk/en-us/card104
 votary_of_the_conclave.jpg		http://www.wizards.com/global/images/magic/general/votary_of_the_conclave.jpg
 vulshok_berserker.jpg		http://resources.wizards.com/magic/cards/mrd/en-us/card5585.jpg
 vulshok_sorcerer.jpg		http://resources.wizards.com/magic/cards/5dn/en-us/card51177.jpg
-w_0_1_goat.jpg		http://www.magickartenmarkt.de/img/cards/Eventide/goat_token_white_01.jpg
-w_1_1_soldier.jpg		http://www.magickartenmarkt.de/img/cards/Shards_of_Alara/soldier_token_white_11.jpg
-w_5_5_giant_warrior.jpg		http://www.magickartenmarkt.de/img/cards/Morningtide/giant_warrior_token.jpg
 walking_dead.jpg		http://www.wizards.com/global/images/magic/general/walking_dead.jpg
 wall_of_air.jpg		http://resources.wizards.com/magic/cards/10e/en/card135274.jpg
 wall_of_blossoms.jpg		http://resources.wizards.com/magic/cards/st/en-us/card5265.jpg

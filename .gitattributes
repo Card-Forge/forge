@@ -6,6 +6,7 @@
 /forge.properties svneol=native#text/plain
 res/AllTokens.txt -text svneol=native#text/plain
 res/booster-decks -text svneol=unset#unset
+res/card-pictures-token.txt -text svneol=native#text/plain
 res/card-pictures.txt -text svneol=native#text/plain
 res/cards.txt -text svneol=native#text/plain
 res/common.txt -text svneol=native#text/plain
@@ -39,6 +40,7 @@ res/pics_link/card-pictures_q.txt -text svneol=native#text/plain
 res/pics_link/card-pictures_r.txt -text svneol=native#text/plain
 res/pics_link/card-pictures_s.txt -text svneol=native#text/plain
 res/pics_link/card-pictures_t.txt -text svneol=native#text/plain
+res/pics_link/card-pictures_token.txt -text svneol=native#text/plain
 res/pics_link/card-pictures_u.txt -text svneol=native#text/plain
 res/pics_link/card-pictures_v.txt -text svneol=native#text/plain
 res/pics_link/card-pictures_w.txt -text svneol=native#text/plain

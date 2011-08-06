@@ -191,7 +191,17 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
             for(update(0); card < cards.length && !cancel; update(card + 1)) {
                 try {
                     String url = cards[card].url;
-                    File f = new File(base, cards[card].name);
+                    String cName;
+                    if(cards[card].name.substring(0, 3).equals("[T]")){
+                    	base = ForgeProps.getFile(IMAGE_TOKEN);
+                    	cName = cards[card].name.substring(3, cards[card].name.length());
+                    }else
+                    {
+                    	base = ForgeProps.getFile(IMAGE_BASE);
+                    	cName=cards[card].name;
+                    }                    
+                    
+                    File f = new File(base, cName);
                     
                     in = new BufferedInputStream(new URL(url).openConnection(p).getInputStream());
                     out = new BufferedOutputStream(new FileOutputStream(f));
@@ -243,17 +253,25 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
     
     private static Card[] getNeededCards() {
         //read all card names and urls
-        Card[] card = readFile();
+    	Card[] cardPlay = readFile(CARD_PICTURES);
+    	Card[] cardTokenLQ = readFile(CARD_PICTURES_TOKEN_LQ);
+        
         ArrayList<Card> list = new ArrayList<Card>();
         File file;
         
         File base = ForgeProps.getFile(IMAGE_BASE);
         
         //check to see which cards we already have
-        for(int i = 0; i < card.length; i++) {
-            file = new File(base, card[i].name);
-            if(!file.exists()) list.add(card[i]);
+        for(int i = 0; i < cardPlay.length; i++) {
+            file = new File(base, cardPlay[i].name);
+            if(!file.exists()) list.add(cardPlay[i]);
         }
+        base = ForgeProps.getFile(IMAGE_TOKEN);
+        for(int i = 0; i < cardTokenLQ.length; i++) {
+        	 file = new File(base, cardTokenLQ[i].name.substring(3, cardTokenLQ[i].name.length()));
+            if(!file.exists()) list.add(cardTokenLQ[i]);
+        }
+        
         //return all card names and urls that are needed
         Card[] out = new Card[list.size()];
         list.toArray(out);
@@ -263,9 +281,10 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
         return out;
     }//getNeededCards()
     
-    private static Card[] readFile() {
+    private static Card[] readFile(String ABC) {
         try {
-            BufferedReader in = new BufferedReader(new FileReader(ForgeProps.getFile(CARD_PICTURES)));
+        	FileReader zrc = new FileReader(ForgeProps.getFile(ABC));
+        	BufferedReader in = new BufferedReader(zrc);
             String line;
             ArrayList<Card> list = new ArrayList<Card>();
             StringTokenizer tok;

@@ -27,6 +27,7 @@ public interface NewConstants {
     
     public static final String TOKENS        = "tokens";
     public static final String CARD_PICTURES = "card-pictures";
+    public static final String CARD_PICTURES_TOKEN_LQ = "card-pictures_token_lq";
     public static final String CARD_PICTURES_A = "card-pictures_a";
     public static final String CARD_PICTURES_B = "card-pictures_b";
     public static final String CARD_PICTURES_C = "card-pictures_c";
@@ -54,6 +55,7 @@ public interface NewConstants {
     public static final String CARD_PICTURES_Y = "card-pictures_y";
     public static final String CARD_PICTURES_Z = "card-pictures_z";
     public static final String CARD_PICTURES_OTHER = "card-pictures_other";
+    public static final String CARD_PICTURES_TOKEN_HQ = "card-pictures_token_hq";
     public static final String CARDS         = "cards";
     public static final String REMOVED       = "removed-cards";
     public static final String NAME_MUTATOR  = "name-mutator";
