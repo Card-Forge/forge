@@ -153,6 +153,14 @@ public class AbilityFactory_Mana {
 
 			amount += bonus;
 		}
+		
+		try{
+			if (params.get("Amount") != null && amount != Integer.parseInt(params.get("Amount")))
+				abMana.undoable = false;
+			}
+		catch(NumberFormatException n){
+			abMana.undoable = false;
+		}
 
 		StringBuilder sb = new StringBuilder();
 		if (amount == 0)

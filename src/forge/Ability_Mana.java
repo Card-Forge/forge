@@ -197,7 +197,8 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
 		return true;
 	}
 
-	public boolean isUndoable() { return getPayCosts().isUndoable() && AllZoneUtil.isCardInPlay(getSourceCard()); }
+	public boolean isUndoable() { return undoable && getPayCosts().isUndoable() && AllZoneUtil.isCardInPlay(getSourceCard()); }
+	public void setUndoable(boolean bUndo) { undoable = bUndo; }
 	
 	public void setCanceled(boolean bCancel) { canceled = bCancel; }
 	public boolean getCanceled() { return canceled; }
