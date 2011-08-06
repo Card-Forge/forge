@@ -75,6 +75,7 @@ public class GameActionUtil {
 		upkeep_Leaf_Crowned_Elder();
 		upkeep_Mudbutton_Clanger();
 		upkeep_Nightshade_Schemers();
+		upkeep_Pyroclast_Consul();
 		upkeep_Sensation_Gorger();
 		upkeep_Squeaking_Pie_Grubfellows();
 		upkeep_Wandering_Graybeard();
@@ -7652,6 +7653,95 @@ public class GameActionUtil {
             AllZone.Stack.add(ability);
         }// for
     }// upkeep_Nightshade_Schemers()
+    
+    
+    private static void upkeep_Pyroclast_Consul() {
+        final Player player = AllZone.Phase.getPlayerTurn();
+        CardList kinship = AllZoneUtil.getPlayerCardsInPlay(player, "Pyroclast Consul");
+        
+        PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+        // Players would not choose to trigger Kinship ability if library is empty.
+        // Useful for games when the "Milling = Loss Condition" check box is unchecked.
+        
+        if (kinship.size() == 0 || library.size() <= 0)
+            return;
+        
+        final String[] shareTypes = { "Elemental", "Shaman" };
+        final Card[] prevCardShown = { null };
+        final Card peek[] = { null };
+        
+        for (final Card k : kinship) {
+            Ability ability = new Ability(k, "0") {    // change to triggered abilities when ready
+                @Override
+                public void resolve() {
+                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+                    if (library.size() <= 0)
+                        return;
+                    
+                    peek[0] = library.get(0);
+                    boolean wantDamageCreatures = false;
+                    String[] smallCreatures = { "Creature.toughnessLE2" };
+                    
+                    CardList humanCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
+                    humanCreatures = humanCreatures.getValidCards(smallCreatures);
+                    humanCreatures = humanCreatures.canBeDamagedBy(k);
+                    humanCreatures = humanCreatures.getNotKeyword("Indestructible");
+                    
+                    CardList computerCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
+                    computerCreatures = computerCreatures.getValidCards(smallCreatures);
+                    computerCreatures = computerCreatures.canBeDamagedBy(k);
+                    computerCreatures = computerCreatures.getNotKeyword("Indestructible");
+                    
+                    // We assume that both players will want to peek, ask if they want to reveal.
+                    // We do not want to slow down the pace of the game by asking too many questions.
+                    // Dialogs outside of the Ability appear at the previous end of turn phase !!!
+                    
+                    if (peek[0].isValidCard(shareTypes)) {
+                        if (player.isHuman()) {
+                            StringBuilder question = new StringBuilder();
+                            question.append("Your top card is ").append(peek[0].getName());
+                            question.append(". Reveal card and Pyroclast Consul deals 2 damage to each creature?");
+                            if (showYesNoDialog(k, question.toString())) {
+                                wantDamageCreatures = true;
+                            }
+                        }
+                        // player isComputer()
+                        else {
+                            if (humanCreatures.size() > computerCreatures.size()) {
+                                String title = "Computer reveals";
+                                revealTopCard(title);
+                                wantDamageCreatures = true;
+                            }
+                        }
+                    } else if (player.isHuman()) {
+                        String title = "Your top card is";
+                        revealTopCard(title);
+                    }
+                    
+                    if (wantDamageCreatures) {
+                        CardList allCreatures = AllZoneUtil.getCreaturesInPlay();
+                        for (final Card crd : allCreatures) {
+                            if (CardFactoryUtil.canDamage(k, crd))
+                                crd.addDamage(2, k);
+                        }
+                    }
+                }// resolve()
+                
+                private void revealTopCard(String title) {
+                    if (peek[0] != prevCardShown[0]) {
+                        AllZone.Display.getChoice(title, peek[0]);
+                        prevCardShown[0] = peek[0];
+                    }
+                }// revealTopCard()
+            };// ability
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Pyroclast Consul - ").append(player);
+            sb.append(" triggers Kinship");
+            ability.setStackDescription(sb.toString());
+            AllZone.Stack.add(ability);
+        }// for
+    }// upkeep_Pyroclast_Consul()
     
     
     private static void upkeep_Sensation_Gorger() {
