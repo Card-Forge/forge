@@ -1,3 +1,26 @@
+Grixis Slavedriver
+5 B
+Creature Zombie Giant
+no text
+4/4
+WheneverKeyword:LeavesBattleField:Self:Any:MakeToken-Zombie-B-2-2-None-/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Grixis Slavedriver leaves the battlefield, put a 2/2 black Zombie creature token onto the battlefield.
+Unearth:3 B
+
+Rotlung Reanimator
+2 B
+Creature Zombie Cleric
+no text
+2/2
+WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:MakeToken-Zombie-B-2-2-None-/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:Whenever Rotlung Reanimator is put into a graveyard from the battlefield, put a 2/2 black Zombie creature token onto the battlefield.
+WheneverKeyword:PermanentIntoGraveyard:Type/Cleric:Play:MakeToken-Zombie-B-2-2-None-/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:Whenever another Cleric is put into a graveyard from the battlefield, put a 2/2 black Zombie creature token onto the battlefield.
+
+Breeding Pit
+2 B B
+Enchantment
+no text
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:B B
+WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MakeToken-Thrull-B-0-1-None-/1:ControllingPlayer_Self:ASAP:No_Condition:ControllerEndStep:At the beginning of your end step, put a 0/1 black Thrull creature token onto the battlefield.
+
 Viashino Cutthroat
 2 R R
 Creature Viashino
