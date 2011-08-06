@@ -1,3 +1,97 @@
+Dark Offering
+4 B B
+Sorcery
+Destroy target nonblack creature. You gain 3 life.
+spDestroyTgt:Creature.Nonblack:Drawback$YouGainLife/3
+
+Desecrated Earth
+4 B
+Sorcery
+Destroy target land. Its controller discards a card.
+spDestryTgt:Land:Drawback$DiscardTgtCtrlr/1
+
+Despoil
+3 B
+Sorcery
+Destroy target land. Its controller loses 2 life.
+spDestroyTgt:Land:Drawback$LoseLifeTgtCtrlr/2
+
+Drain the Well
+2 BG BG
+Sorcery
+Destroy target land. You gain 2 life.
+spDestroyTgt:Land:Drawback$YouGainLife/2
+
+Hideous End
+1 B B
+Instant
+Destroy target nonblack creature. Its controller loses 2 life.
+spDestroyTgt:Creature.Nonblack:Drawback$LoseLifeTgtCtrlr/2
+
+Misfortune's Gain
+3 W
+Sorcery
+Destroy target creature. Its owner gains 4 life.
+spDestroyTgt:Creature:Drawback$TgtOwnerGainLife/4
+
+Nature's Claim
+G
+Instant
+Destroy target artifact or enchantment. Its controller gains 4 life.
+spDestroyTgt:Artifact,Enchantment:Drawback$TgtCtrlrGainLife/4
+
+Path of Peace
+3 W
+Sorcery
+Destroy target creature. Its owner gains 4 life.
+spDestroyTgt:Creature:Drawback$GainLifeTgtOwner/4
+
+Poison Arrow
+4 B B
+Sorcery
+Destroy target nonblack creature. You gain 3 life.
+spDestroyTgt:Creature.nonblack:Drawback$YouGainLife/3
+
+Poison the Well
+2 BR BR
+Sorcery
+Destroy target land. Poison the well deals 2 damage to that land's controller.
+spDestroyTgt:Land:Drawback$DamgeTgtCtrlr/2
+
+Serene Offering
+1 W
+Instant
+Destroy target enchantment. You gain life equal to its converted mana cost.
+spDestroyTgt:Enchantment:Drawback$YouGainLife/dX
+SVar:dX:Count$TgtCardManaCost
+
+Sever Soul
+3 B B
+Sorcery
+Destroy target nonblack creature. It can't be regenerated. You gain life equal to its toughness.
+spDestroyTgt:Creature.nonblack:NoRegen:Drawback$YouGainLife/dX
+SVar:dX:Count$TgtCardToughness
+
+Solemn Offering
+2 W
+Sorcery
+Destroy target artifact or enchantment. You gain 4 life.
+spDestroyTgt:Artifact,Enchantment:Drawback$YouGainLife/4
+
+Terashi's Grasp
+2 W
+Sorcery Arcane
+Destroy target artifact or enchantment. You gain life equal to its converted mana cost.
+spDestroyTgt:Artifact,Enchantment:Drawback$YouGainLife/dX
+SVar:dX:Count$TgtCardManaCost
+
+Vendetta
+B
+Instant
+Destroy target nonblack creature. It can't be regenerated. You lose life equal to that creature's toughness.
+spDestroyTgt:Creature.nonblack:NoRegen:Drawback$YouLoseLife/dX
+SVar:dX:Count$TgtCardToughness
+
 Capsize
 1 U U
 Instant
