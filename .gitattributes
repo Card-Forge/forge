@@ -3666,6 +3666,7 @@ res/cardsfolder/parch.txt -text svneol=native#text/plain
 res/cardsfolder/pardic_collaborator.txt -text svneol=native#text/plain
 res/cardsfolder/pardic_dragon.txt -text svneol=native#text/plain
 res/cardsfolder/pardic_lancer.txt -text svneol=native#text/plain
+res/cardsfolder/part_water.txt -text svneol=native#text/plain
 res/cardsfolder/patagia_golem.txt -text svneol=native#text/plain
 res/cardsfolder/path_of_angers_flame.txt -text svneol=native#text/plain
 res/cardsfolder/path_of_peace.txt -text svneol=native#text/plain
