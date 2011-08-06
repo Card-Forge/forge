@@ -16,7 +16,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     // todo: needs a bit more work to allow mana abilities to put Inputs "on hold" while they are paid and then reinstuted
     
     public void setInput(final Input in) {
-        if(!(input == null || input instanceof Input_PassPriority)) 
+        if(bResolving || !(input == null || input instanceof Input_PassPriority)) 
         	inputStack.add(in);
         else 
         	input = in;
