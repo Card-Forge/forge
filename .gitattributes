@@ -2972,6 +2972,7 @@ res/cardsfolder/greener_pastures.txt -text svneol=native#text/plain
 res/cardsfolder/greenhilt_trainee.txt svneol=native#text/plain
 res/cardsfolder/greenseeker.txt -text svneol=native#text/plain
 res/cardsfolder/greenweaver_druid.txt -text svneol=native#text/plain
+res/cardsfolder/gremlin_mine.txt svneol=native#text/plain
 res/cardsfolder/griffin_guide.txt svneol=native#text/plain
 res/cardsfolder/griffin_sentinel.txt -text svneol=native#text/plain
 res/cardsfolder/grim_affliction.txt svneol=native#text/plain
