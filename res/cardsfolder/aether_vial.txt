@@ -5,7 +5,6 @@ Text:no text
 A:AB$ChangeZone | Cost$ T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.cmcEQX | ChangeNum$ 1 | SpellDescription$ You may put a creature card with converted mana cost equal to the number of charge counters on Æther Vial from your hand onto the battlefield.
 K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:CustomCounter.CHARGE/1:Self:ASAP:Yes_No:ControllerUpkeep:At the beginning of your upkeep, you may put a charge counter on CARDNAME.
 SVar:X:Count$CardCounters.CHARGE
-SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_vial.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/91.jpg
