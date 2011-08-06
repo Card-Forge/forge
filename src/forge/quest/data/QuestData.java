@@ -6,6 +6,7 @@ import forge.*;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.quest.data.item.QuestInventory;
 import forge.quest.data.pet.*;
 
 import java.io.*;
@@ -30,11 +31,7 @@ public class QuestData {
     private int lost;
 
     private int life;
-    private int estatesLevel;
-    private int luckyCoinLevel;
-    private int sleightOfHandLevel;
-
-    private int gearLevel;
+    private int maxLife;
 
     private int questsPlayed;
 
@@ -73,7 +70,8 @@ public class QuestData {
     //TODO: Temporary.
     public boolean useNewQuestUI = false;
 
-    public final QuestPetManager petManager = new QuestPetManager();
+    private QuestInventory inventory = new QuestInventory();
+    private QuestPetManager petManager = new QuestPetManager();
 
     //This field stores the version number of the QuestData format
     private static int VERSION_NUMBER = 0;
@@ -266,10 +264,17 @@ public class QuestData {
         newData.lost = oldData.getLost();
 
         newData.life = oldData.getLife();
-        newData.estatesLevel = oldData.getEstatesLevel();
-        newData.luckyCoinLevel = oldData.getLuckyCoinLevel();
-        newData.sleightOfHandLevel = oldData.getSleightOfHandLevel();
-        newData.gearLevel = oldData.getGearLevel();
+        newData.inventory.setItemLevel("Estates", oldData.getEstatesLevel());
+        newData.inventory.setItemLevel("Lucky Coin", oldData.getLuckyCoinLevel());
+        newData.inventory.setItemLevel("Sleight", oldData.getSleightOfHandLevel());
+        newData.inventory.setItemLevel("Estates", oldData.getEstatesLevel());
+        if (oldData.getGearLevel() >= 1){
+            newData.inventory.setItemLevel("Map", 1);
+        }
+        if (oldData.getGearLevel() == 2){
+            newData.inventory.setItemLevel("Zeppelin", 1);
+        }
+
         newData.questsPlayed = oldData.getQuestsPlayed();
         newData.credits = oldData.getCredits();
         newData.mode = oldData.getMode();
@@ -593,13 +598,13 @@ public class QuestData {
             }
         }
 
-        if (getEstatesLevel() == 1) {
+        if (inventory.getItemLevel("Estates") == 1) {
             creds *= 1.1;
         }
-        else if (getEstatesLevel() == 2) {
+        else if (inventory.getItemLevel("Estates") == 2) {
             creds *= 1.15;
         }
-        else if (getEstatesLevel() == 3) {
+        else if (inventory.getItemLevel("Estates") == 3) {
             creds *= 1.2;
         }
 
@@ -659,37 +664,6 @@ public class QuestData {
         life += n;
     }
 
-    public int getEstatesLevel() {
-        return estatesLevel;
-    }
-
-    public void addEstatesLevel(int n) {
-        estatesLevel += n;
-    }
-
-    public int getLuckyCoinLevel() {
-        return luckyCoinLevel;
-    }
-
-    public void addLuckyCoinLevel(int n) {
-        luckyCoinLevel += n;
-    }
-
-    public int getSleightOfHandLevel() {
-        return sleightOfHandLevel;
-    }
-
-    public void addSleightOfHandLevel(int n) {
-        sleightOfHandLevel += n;
-    }
-
-    public int getGearLevel() {
-        return gearLevel;
-    }
-
-    public void addGearLevel(int n) {
-        gearLevel += n;
-    }
 
     public int getQuestsPlayed() {
         return questsPlayed;
@@ -773,7 +747,7 @@ public class QuestData {
 
     public boolean shouldAddAdditionalCards(boolean didWin) {
         float chance = 0.5f;
-        if (getLuckyCoinLevel() >= 1) {
+        if (inventory.getItemLevel("Lucky Coin") == 1) {
             chance = 0.65f;
         }
 
@@ -824,5 +798,9 @@ public class QuestData {
     public Object readResolve() {
         initTransients();
         return this;
+    }
+
+    public QuestInventory getInventory() {
+        return inventory;
     }
 }
