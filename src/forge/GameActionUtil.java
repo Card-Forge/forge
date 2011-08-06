@@ -11834,7 +11834,7 @@ public class GameActionUtil {
 					c.setBaseAttack(5);
 					c.setBaseDefense(4);
 					c.addNonStackingIntrinsicKeyword("Deathtouch");
-					c.addNonStackingIntrinsicKeyword("First strike");
+					c.addNonStackingIntrinsicKeyword("First Strike");
 				}
 			}
 		}
