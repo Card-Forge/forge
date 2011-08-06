@@ -3,7 +3,8 @@ ManaCost:2 B B
 Types:Creature Zombie Knight
 Text:no text
 PT:3/3
-A:AB$Destroy | Cost$ B B T | ValidTgts$ Creature.White | TgtPrompt$ Select target white creature | SpellDescription$ Destroy target white creature.
+A:AB$ Destroy | Cost$ B B T | ValidTgts$ Creature.White | TgtPrompt$ Select target white creature | SpellDescription$ Destroy target white creature.
+SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/western_paladin.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/173.jpg

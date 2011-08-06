@@ -4,6 +4,7 @@ Types:Creature Human Knight
 Text:no text
 PT:3/3
 A:AB$Destroy | Cost$ W W T | ValidTgts$ Permanent.Black | TgtPrompt$ Select target black permanent | SpellDescription$ Destroy target black permanent.
+SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/northern_paladin.jpg
 SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/213.jpg
