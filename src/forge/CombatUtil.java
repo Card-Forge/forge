@@ -2202,17 +2202,16 @@ public class CombatUtil {
     public static void checkBlockedAttackers(final Card a, Card b) {
         //System.out.println(a.getName() + " got blocked by " + b.getName());
     	
+		//Run triggers
+		HashMap<String, Object> runParams = new HashMap<String,Object>();
+		runParams.put("Attacker",a);
+		runParams.put("Blocker",b);
+		AllZone.TriggerHandler.runTrigger("AttackerBlocked", runParams);
+		AllZone.TriggerHandler.runTrigger("Blocks", runParams);
+    	
         if(!a.getCreatureGotBlockedThisCombat()) { 
         	
     		AllZone.GameAction.checkWheneverKeyword(a,"BecomesBlocked",null);
-    		
-    		//Run triggers
-    		HashMap<String, Object> runParams = new HashMap<String,Object>();
-    		runParams.put("Attacker",a);
-    		runParams.put("Blocker",b);
-    		AllZone.TriggerHandler.runTrigger("AttackerBlocked", runParams);
-    		
-    		AllZone.TriggerHandler.runTrigger("Blocks", runParams);
     	
             for(Ability ab:CardFactoryUtil.getBushidoEffects(a))
                 AllZone.Stack.add(ab);
