@@ -160,9 +160,7 @@ public class GameActionUtil {
 		playCard_Vengevine(c);
 		playCard_Demigod_of_Revenge(c);
 		playCard_Halcyon_Glaze(c);
-		//playCard_Thief_of_Hope(c);
 		playCard_Infernal_Kirin(c);
-		playCard_Cloudhoof_Kirin(c);
 		playCard_Battlegate_Mimic(c);
 		playCard_Nightsky_Mimic(c);
 		playCard_Riverfall_Mimic(c);
@@ -656,52 +654,6 @@ public class GameActionUtil {
 		}
 
 	}//Halcyon Glaze
-	
-	/*
-	public static void playCard_Thief_of_Hope(Card c) {
-		final Player controller = c.getController();
-
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Thief of Hope");
-
-		if(list.size() > 0) {
-			if(c.isType("Spirit") || c.getType().contains("Arcane")) {
-				for(int i = 0; i < list.size(); i++) {
-					final Card card = list.get(i);
-					Ability ability2 = new Ability(card, "0") {
-						@Override
-						public void resolve() {
-							final Player target;
-							if(card.getController().isHuman()) {
-								String[] choices = {"Opponent", "Yourself"};
-								Object choice = GuiUtils.getChoice("Choose target player", choices);
-								if(choice.equals("Opponent")) {
-									target = AllZone.ComputerPlayer; // check for target of spell/abilities should be here
-								}// if choice yes
-								else target = AllZone.HumanPlayer; // check for target of spell/abilities should be here
-							} else target = AllZone.HumanPlayer; // check for target of spell/abilities should be here
-							target.loseLife(1, card);
-							card.getController().gainLife(1, card);
-
-						} //resolve
-					}; //ability
-					ability2.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-					ability2.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability2));
-					
-					StringBuilder sb = new StringBuilder();
-					sb.append(card.getName()).append(" - ").append(c.getController());
-					sb.append(" played a Spirit or Arcane spell, target opponent loses 1 life and you gain 1 life.");
-					ability2.setStackDescription(sb.toString());
-					
-					AllZone.Stack.add(ability2);
-				}
-			}//if
-		}
-	}//Thief of Hope*/
 
 	public static void playCard_Infernal_Kirin(Card c) {
 		final Player controller = c.getController();
@@ -761,56 +713,6 @@ public class GameActionUtil {
 		}
 
 	}//Infernal Kirin
-
-	public static void playCard_Cloudhoof_Kirin(Card c) {
-		final Player controller = c.getController();
-
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Cloudhoof Kirin");
-
-		if(list.size() > 0) {
-			if(c.isType("Spirit") || c.getType().contains("Arcane")) {
-				for(int i = 0; i < list.size(); i++) {
-					final Card card = list.get(i);
-					final int converted = CardUtil.getConvertedManaCost(c.getManaCost());
-					Ability ability2 = new Ability(card, "0") {
-						@Override
-						public void resolve() {
-							final Player target;
-							if(card.getController().isHuman()) {
-								String[] choices = {"Opponent", "Yourself", "None"};
-								Object choice = GuiUtils.getChoice("Choose target player", choices);
-								if(choice.equals("Opponent")) {
-									target = AllZone.ComputerPlayer; // check for target of spell/abilities should be here
-								}// if choice yes
-								else if(!choice.equals("None")) target = AllZone.HumanPlayer; // check for target of spell/abilities should be here
-								else target = null;
-							} else target = AllZone.HumanPlayer; // check for target of spell/abilities should be here						
-							if(null != target) {
-								target.mill(converted);
-							} //if
-						} //resolve
-					}; //ability
-					ability2.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-					ability2.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability2));
-					
-					StringBuilder sb = new StringBuilder();
-					sb.append(card.getName()).append(" - ").append(c.getController());
-					sb.append(" played a Spirit or Arcane spell, target player puts the top ");
-					sb.append(converted).append(" cards of his or her library into his or her graveyard.");
-					ability2.setStackDescription(sb.toString());
-					
-					AllZone.Stack.add(ability2);
-				}
-			}//if
-		}
-
-	}//Cloudhoof Kirin
-
 	
 	public static void playCard_Shorecrasher_Mimic(Card c) {
 		final Player controller = c.getController();
