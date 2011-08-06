@@ -780,7 +780,7 @@ public class CardFactory implements NewConstants {
                 //final String player = card.getController();
                 final int[] numCreatures = new int[1];
                 
-
+                /*
                 final SpellAbility devour = new Spell(card) {
                     private static final long serialVersionUID = 4888189840817163900L;
                     
@@ -804,7 +804,7 @@ public class CardFactory implements NewConstants {
                                 && AllZoneUtil.isCardInPlay(card);
                     }
                     
-                };//devour
+                };//devour*/
                 
                 Command intoPlay = new Command() {
                     private static final long serialVersionUID = -7530312713496897814L;
@@ -846,15 +846,23 @@ public class CardFactory implements NewConstants {
                             }
                             numCreatures[0] = count;
                         }
-                        AllZone.Stack.addSimultaneousStackEntry(devour);
+                        int totalCounters = numCreatures[0] * multiplier;
+
+                        card.addCounter(Counters.P1P1, totalCounters);
+
+                        if(card.getName().equals("Skullmulcher")) {
+                            for(int i = 0; i < numCreatures[0]; i++) {
+                                card.getController().drawCard();
+                            }
+                        }
 
                     }
                 };
-                
+                /*
                 devour.setStackDescription(card.getName() + " - gets " + magnitude
                         + " +1/+1 counter(s) per devoured creature.");
                 devour.setDescription("Devour " + magnitude);
-                card.addSpellAbility(devour);
+                card.addSpellAbility(devour);*/
                 card.addComesIntoPlayCommand(intoPlay);
             }
         }//Devour
