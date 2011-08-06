@@ -1,3 +1,9 @@
+Lull
+1 G
+Instant
+no text
+Cycling:2
+
 Sliver Legion
 W U B R G
 Legendary Creature Sliver
@@ -1447,12 +1453,6 @@ no text
 
 Angelsong
 1 W
-Instant
-Prevent all combat damage that would be dealt this turn.
-Cycling:2
-
-Lull
-1 G
 Instant
 Prevent all combat damage that would be dealt this turn.
 Cycling:2
