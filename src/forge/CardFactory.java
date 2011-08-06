@@ -11494,6 +11494,21 @@ public class CardFactory implements NewConstants {
         	mana.setStackDescription(cardName+" - add one mana of any color to your mana pool.");
         	card.addSpellAbility(mana);
         }//*************** END ************ END **************************
+        
+        //*************** START ************ START **************************
+        else if(cardName.equals("Ring of Renewal")) {
+        	Ability_Cost abCost = new Ability_Cost("5 T", cardName, true);
+            final Ability_Activated draw = new Ability_Activated(card, abCost, null) {
+				private static final long serialVersionUID = 7825072388166910728L;
+                @Override
+                public void resolve() {
+                    AllZone.GameAction.discardRandom(card.getController(), this);
+                    card.getController().drawCards(2);
+                }
+            };
+            draw.setStackDescription(cardName+" - discard 1 at random, the draw 2 cards.");
+            card.addSpellAbility(draw);
+        }//*************** END ************ END **************************
 
         return postFactoryKeywords(card);
     }//getCard2

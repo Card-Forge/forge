@@ -1,0 +1,7 @@
+Name:Ring of Renewal
+ManaCost:5
+Types:Artifact
+Text:5, tap: Discard a card at random, then draw two cards.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ring_of_renewal.jpg
+End
