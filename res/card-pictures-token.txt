@@ -13,3 +13,4 @@
 [T]b_X_X_minion.jpg							http://serv4.tcgimages.eu/img/cards/Duel_Decks_Phyrexia_vs._The_Coalition/minion_token_black_xx.jpg
 [T]c_1_1_myr.jpg							http://serv3.tcgimages.eu/img/cards/New_Phyrexia/myr_token.jpg
 [T]c_3_3_golem.jpg							http://serv2.tcgimages.eu/img/cards/New_Phyrexia/golem_token_artifact_33.jpg
+[T]r_X_X_elemental.jpg						http://serv1.tcgimages.eu/img/cards/Rise_of_the_Eldrazi/elemental_token_red_xx.jpg
