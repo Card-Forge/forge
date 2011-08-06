@@ -2572,11 +2572,10 @@ public class CombatUtil {
 	                        Enchantment = CardFactoryUtil.AI_getBestEnchantment(enchantments,attacker, false);
 	                    }
 	                    if(Enchantment != null && AllZone.GameAction.isCardInPlay(attacker)){
-	                    	library.remove(Enchantment);
-	                    	play.add(Enchantment);
+	                    	AllZone.GameAction.moveToPlay(Enchantment);
 	                    	Enchantment.enchantCard(attacker);
 	                    }
-                        if(player.isHuman()) attacker.getController().shuffle();	                    
+                        attacker.getController().shuffle();	                    
                 }//resolve
             };// ability4
             

@@ -854,11 +854,9 @@ public class CardFactoryUtil {
             private static final long serialVersionUID = -4196027546564209412L;
             
             @Override
-            public void resolve() {
-                PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, sourceCard.getController());
-                
+            public void resolve() {   
                 SpellAbility[] sa = sourceCard.getSpellAbility();
-                grave.remove(sourceCard);
+                AllZone.GameAction.moveToStack(sourceCard);
                 SpellAbility flash = sa[0];
                 flash.setFlashBackAbility(true);
                 AllZone.Stack.add(flash);
@@ -1116,15 +1114,13 @@ public class CardFactoryUtil {
                 
                 if(sourceCard.getController().equals(AllZone.ComputerPlayer)) {
                     Card merc = AI_getBestCreature(mercs);
-                    lib.remove(merc);
-                    play.add(merc);
+                    AllZone.GameAction.moveToPlay(merc);
                 } else //human
                 {
                     Object o = GuiUtils.getChoiceOptional("Select target Mercenary", mercs.toArray());
                     if(o != null) {
                         Card merc = (Card) o;
-                        lib.remove(merc);
-                        play.add(merc);
+                        AllZone.GameAction.moveToPlay(merc);
                     }
                 }
                 sourceCard.getController().shuffle();
@@ -1211,15 +1207,13 @@ public class CardFactoryUtil {
                 
                 if(sourceCard.getController().equals(AllZone.ComputerPlayer)) {
                     Card rebel = AI_getBestCreature(rebels);
-                    lib.remove(rebel);
-                    play.add(rebel);
+                    AllZone.GameAction.moveToPlay(rebel);
                 } else //human
                 {
                     Object o = GuiUtils.getChoiceOptional("Select target Rebel", rebels.toArray());
                     if(o != null) {
                         Card rebel = (Card) o;
-                        lib.remove(rebel);
-                        play.add(rebel);
+                        AllZone.GameAction.moveToPlay(rebel);
                         if(rebel.isAura()) {
                             Object obj = null;
                             if(rebel.getKeyword().contains("Enchant creature")) {
@@ -2051,10 +2045,9 @@ public class CardFactoryUtil {
             
             @Override
             public void resolve() {
-                PlayerZone lib = AllZone.getZone(Constant.Zone.Graveyard, sourceCard.getController());
-                PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, sourceCard.getController());
+                PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, sourceCard.getController());
                 
-                CardList cards = new CardList(lib.getCards());
+                CardList cards = new CardList(grave.getCards());
                 CardList sameCost = new CardList();
                 int Cost = CardUtil.getConvertedManaCost(Manacost);
                 for (int i = 0; i < cards.size(); i++) {
@@ -2086,8 +2079,7 @@ public class CardFactoryUtil {
                     choice = sameCost.getCard(0);
                     
                     if (!(choice == null)) {
-                        lib.remove(choice);
-                        hand.add(choice);
+                        AllZone.GameAction.moveToHand(choice);
                     }
                 }
             }// resolve()

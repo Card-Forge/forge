@@ -3514,28 +3514,25 @@ public class CardFactory implements NewConstants {
 
                 @Override
                 public void resolve() {
-                    CardList all = new CardList();
-                    all.addAll(AllZone.Human_Battlefield.getCards());
-                    all.addAll(AllZone.Computer_Battlefield.getCards());
-                    all = all.getValidCards(Tgts,card.getController(),card);
-                    
-                    for(int i = 0; i < all.size(); i++) {
-                        Card c = all.get(i);
-                        if(c.isToken()) AllZone.getZone(c).remove(c);
-                        else {  
-					if(Destination.equals("TopofLibrary")) AllZone.GameAction.moveToLibrary(c);
-					else if(Destination.equals("BottomofLibrary")) AllZone.GameAction.moveToBottomOfLibrary(c);
-					else if(Destination.equals("ShuffleIntoLibrary")) {
-							AllZone.GameAction.moveToLibrary(c);
-							c.getOwner().shuffle();
-						}
-					else if(Destination.equals("Exile")) AllZone.GameAction.exile(c); 
-					else if(Destination.equals("Hand")) {
-                            			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getOwner());
-                           	 		AllZone.GameAction.moveTo(hand, c);
-						}
-				}
-                    }
+                	CardList all = new CardList();
+                	all.addAll(AllZone.Human_Battlefield.getCards());
+                	all.addAll(AllZone.Computer_Battlefield.getCards());
+                	all = all.getValidCards(Tgts,card.getController(),card);
+
+                	for(int i = 0; i < all.size(); i++) {
+                		Card c = all.get(i);
+                		if(Destination.equals("TopofLibrary")) AllZone.GameAction.moveToLibrary(c);
+                		else if(Destination.equals("BottomofLibrary")) AllZone.GameAction.moveToBottomOfLibrary(c);
+                		else if(Destination.equals("ShuffleIntoLibrary")) {
+                			AllZone.GameAction.moveToLibrary(c);
+                			c.getOwner().shuffle();
+                		}
+                		else if(Destination.equals("Exile")) AllZone.GameAction.exile(c); 
+                		else if(Destination.equals("Hand")) {
+                			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getOwner());
+                			AllZone.GameAction.moveTo(hand, c);
+                		}
+                	}
                 }// resolve()
 
             }; //SpBnceAll
@@ -4726,16 +4723,13 @@ public class CardFactory implements NewConstants {
         				List<Card> selection = GuiUtils.getChoicesOptional("Select cards to fetch from Library", list.toArray());
         				
                         for(int m = 0; m < selection.size(); m++) {
-                        	AllZone.Human_Library.remove(selection.get(m));
-        					AllZone.Human_Hand.add(selection.get(m));
+        					AllZone.GameAction.moveToHand(selection.get(m));
                         }
         			}
         			else
         			{
-        				for (Card c:list)
-        				{
-        					AllZone.Computer_Library.remove(c);
-        					AllZone.Computer_Hand.add(c);
+        				for (Card c:list){
+        					AllZone.GameAction.moveToHand(c);
         				}
         				
         				StringBuilder sb = new StringBuilder();
@@ -5277,13 +5271,9 @@ public class CardFactory implements NewConstants {
                                 c = AllZone.CardFactory.dynamicCopyCard(c);
                                 c.setController(c.getOwner());
                                 
-                                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getOwner());
-                                PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, c.getOwner());
-                                removed.remove(c);
                                 if (c.isTapped())
                                 	c.untap();
-                                play.add(c);
-                                
+                                AllZone.GameAction.moveToPlay(c);
                             }
                         }//resolve()
                     };//SpellAbility
@@ -7065,13 +7055,8 @@ public class CardFactory implements NewConstants {
         						c = AllZone.CardFactory.dynamicCopyCard(c);
         						c.setController(c.getOwner());
 
-        						PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getOwner());
-        						PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, c.getOwner());
-        						removed.remove(c);
         						if (c.isTapped()) c.untap();
-
-        						play.add(c);
-
+        						AllZone.GameAction.moveToPlay(c);
         					}//if
         				}//resolve()
         			};//SpellAbility
@@ -7767,23 +7752,15 @@ public class CardFactory implements NewConstants {
         			Card freeCard = topCard[0];
         			Player player = card.getController();
         				if(freeCard != null) {
-        					if(freeCard.isLand() == true) {
-        						if(card.getController().canPlayLand()) {
-        							card.getController().playLand(freeCard);
+        					if(freeCard.isLand()) {
+        						if(player.canPlayLand()) {
+        							player.playLand(freeCard);
         						}
         						else {
         							JOptionPane.showMessageDialog(null, "You can't play any more lands this turn.", "", JOptionPane.INFORMATION_MESSAGE);
         						}
         					}
-        					else if(freeCard.isPermanent() == true) {
-        						PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-        						PlayerZone orig = AllZone.getZone(freeCard);
-        						orig.remove(freeCard);
-        						play.add(freeCard);
-        					}
-        					else { //sorceries and instants
-        						PlayerZone orig = AllZone.getZone(freeCard);
-        						orig.remove(freeCard);
+        					else{
         						AllZone.GameAction.playCardNoCost(freeCard);
         					}
         				}

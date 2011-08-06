@@ -729,7 +729,6 @@ public class GameActionUtil {
                         while (cascadedCard == null) {
                             crd = topOfLibrary.get(count++);
                             revealed.add(crd);
-                            lib.remove(crd);
                             if ((!crd.isLand() && CardUtil.getConvertedManaCost(crd.getManaCost()) < CardUtil.getConvertedManaCost(cascCard.getManaCost()))) cascadedCard = crd;
 
                             if (count == topOfLibrary.size()) break;
@@ -766,7 +765,7 @@ public class GameActionUtil {
                         }
                         revealed.shuffle();
                         for (Card bottom:revealed) {
-                            lib.add(bottom);
+                        	AllZone.GameAction.moveToBottomOfLibrary(bottom);
                         }
                     }
                 };
@@ -842,7 +841,6 @@ public class GameActionUtil {
 						for(int i = 0; i < RippleNumber; i++){
 							crd = topOfLibrary.get(i);
 							revealed.add(crd);
-							lib.remove(crd);
 							if(crd.getName().equals(RippleCard.getName())) RippledCards[i] = crd;
 						}//For
 							GuiUtils.getChoiceOptional("Revealed cards:", revealed.toArray());
@@ -7815,7 +7813,6 @@ public class GameActionUtil {
                                     break;
                                 }
                             }
-                            library.remove(c);
                         }
                     }// wantToPlayCard
                 }// resolve()

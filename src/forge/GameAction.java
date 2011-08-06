@@ -53,7 +53,6 @@ public class GameAction {
         }
         Card moving = c;
         if (!c.isToken()){
-	        
 	     // If a nontoken card is moving from the Battlefield, to non-Battlefield zone copy it
 	        if (p != null && p.is(Constant.Zone.Battlefield) && !zone.is(Constant.Zone.Battlefield))
 	        	moving = AllZone.CardFactory.copyCard(c);         
@@ -64,6 +63,10 @@ public class GameAction {
 
         	// todo: if zone is battlefied and prevZone is battlefield, temporarily disable enters battlefield triggers
         	zone.add(moving);
+        }
+        
+        if (zone.is(Constant.Zone.Battlefield) && c.isAura()){
+        	// todo: add attachment code here
         }
         
         //Run triggers        
@@ -328,10 +331,6 @@ public class GameAction {
     	final Ability cast = new Ability(madness, madness.getMadnessCost()) {
     		@Override
     		public void resolve() {
-    			if (madness.getOwner().isHuman())
-    				AllZone.Human_Graveyard.remove(madness);
-    			else
-    				AllZone.Computer_Graveyard.remove(madness);
     			playCardNoCost(madness);
     			System.out.println("Madness cost paid");
     		}
@@ -2741,7 +2740,11 @@ public class GameAction {
         		req.fillRequirements();
         	}
     	else if(sa.getBeforePayMana() == null) {
-    		
+    		if (sa.isSpell()){
+    			Card c = sa.getSourceCard();
+    			if (!c.isCopiedSpell())
+    				AllZone.GameAction.moveToStack(c);
+    		}
     		boolean x = false;
         	if (sa.getSourceCard().getManaCost().contains("X"))
         		x = true;

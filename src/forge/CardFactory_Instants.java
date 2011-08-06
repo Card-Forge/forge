@@ -3195,7 +3195,7 @@ public class CardFactory_Instants {
 				@Override
                 public void showMessage() {
 					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
-					hand.remove(card);
+					AllZone.GameAction.moveToStack(card);
 					hand.updateObservers();
 					max = AllZoneUtil.getPlayerHand(card.getController()).size();
 					if(max == targets.size()) done();
@@ -3210,8 +3210,7 @@ public class CardFactory_Instants {
 				@Override
 	            public void selectButtonCancel() { 
 					targets.clear();
-					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
-					hand.add(card);
+					AllZone.GameAction.moveToHand(card);
 					stop();
 				}
 				
@@ -3282,7 +3281,7 @@ public class CardFactory_Instants {
 				@Override
                 public void showMessage() {
 					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
-					hand.remove(card);
+					AllZone.GameAction.moveToStack(card);
 					hand.updateObservers();
 					StringBuilder sb = new StringBuilder();
 					sb.append(card.getName()).append(" - Select target creatures, players, and/or planeswalkers.  Currently, (");
@@ -3295,8 +3294,7 @@ public class CardFactory_Instants {
 				@Override
 	            public void selectButtonCancel() { 
 					targets.clear();
-					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
-					hand.add(card);
+					AllZone.GameAction.moveToHand(card);
 					stop();
 				}
 				
