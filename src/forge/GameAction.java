@@ -176,7 +176,7 @@ public class GameAction {
 		c = moveTo(grave, c);
 		
 		//Recover keyword
-		if(c.isType("Creature"))
+		if(c.isType("Creature") && AllZoneUtil.isCardInPlay(c))
 		{
 			for(final Card recoverable : grave.getCards())
 		    {

@@ -28,7 +28,7 @@ public class Input_Attack extends Input {
             possibleAttackers = possibleAttackers.getType("Creature");
             for(int i = 0; i < possibleAttackers.size(); i++) {
                 Card c = possibleAttackers.get(i);
-                if(c.getKeyword().contains("CARDNAME attacks each turn if able.") && CombatUtil.canAttack(c) && !c.isAttacking()) {
+                if(c.getKeyword().contains("CARDNAME attacks each turn if able.") && CombatUtil.canAttack(c,AllZone.Combat) && !c.isAttacking()) {
                     AllZone.Combat.addAttacker(c);
                     //if(!c.getKeyword().contains("Vigilance")) 
                     //	c.tap();
@@ -54,7 +54,7 @@ public class Input_Attack extends Input {
     	if (card.isAttacking() || card.getController().isComputer())
     		return;
     	
-        if(zone.is(Constant.Zone.Battlefield, AllZone.HumanPlayer) && CombatUtil.canAttack(card)) {
+        if(zone.is(Constant.Zone.Battlefield, AllZone.HumanPlayer) && CombatUtil.canAttack(card,AllZone.Combat)) {
             
         	// todo add the propaganda code here and remove it in Phase.nextPhase()
         	// if (!CombatUtil.checkPropagandaEffects(card))
