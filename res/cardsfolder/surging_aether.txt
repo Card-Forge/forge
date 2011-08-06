@@ -1,9 +1,9 @@
 Name:Surging AEther
 ManaCost:3 U
 Types:Instant
-Text:Return target permanent to its owner's hand.
+Text:
 K:Ripple:4
-K:spBounceTgt:Permanent:Hand
+A:SP$Bounce|Cost$3 U|ValidTgts$Permanent|TgtPrompt$Select target permanent|Destination$Hand|SpellDescription$Return target permanent to its owner's hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surging_aether.jpg
 End
