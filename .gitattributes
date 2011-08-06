@@ -95,6 +95,7 @@ src/GuiDisplayUtil.java svneol=native#text/plain
 src/GuiInput.java svneol=native#text/plain
 src/Gui_BoosterDraft.java svneol=native#text/plain
 src/Gui_DeckEditor.java -text svneol=native#text/plain
+src/Gui_DeckEditorNew.java -text svneol=native#text/plain
 src/Gui_DeckEditor_Menu.java svneol=native#text/plain
 src/Gui_DownloadPictures.java svneol=native#text/plain
 src/Gui_MultipleBlockers.java svneol=native#text/plain
