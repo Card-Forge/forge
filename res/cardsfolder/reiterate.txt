@@ -1,0 +1,8 @@
+Name:Reiterate
+ManaCost:1 R R
+Types:Instant
+Text:no text
+K:SVar:Buyback:3
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/reiterate.jpg
+End

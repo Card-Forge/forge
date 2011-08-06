@@ -1,0 +1,9 @@
+Name:Righteous Avengers
+ManaCost:4 W
+Types:Creature Human Soldier
+Text:no text
+PT:3/1
+K:Plainswalk
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1632.jpg
+End

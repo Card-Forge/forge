@@ -1,0 +1,7 @@
+Name:Roar of the Wurm
+ManaCost:6 G
+Types:Sorcery
+Text:no text
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/roar_of_the_wurm.jpg
+End

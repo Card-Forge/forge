@@ -1,0 +1,8 @@
+Name:Reflecting Pool
+ManaCost:no cost
+Types:Land
+Text:no text
+K:abAddReflectedMana:Type:You
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/reflecting_pool.jpg
+End

@@ -1,0 +1,9 @@
+Name:Rock Badger
+ManaCost:4 R
+Types:Creature Badger Beast
+Text:no text
+PT:3/3
+K:Mountainwalk
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card129715.jpg
+End

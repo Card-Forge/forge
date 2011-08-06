@@ -1,0 +1,9 @@
+Name:Reflexes
+ManaCost:R
+Types:Enchantment Aura
+Text:Enchanted creature has first strike.
+K:Enchant creature
+K:enPump:First Strike
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/reflexes.jpg
+End

@@ -1,0 +1,9 @@
+Name:Ronin Cavekeeper
+ManaCost:5 R
+Types:Creature Human Samurai
+Text:no text
+PT:4/3
+K:Bushido 2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ronin_cavekeeper.jpg
+End

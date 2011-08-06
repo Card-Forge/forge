@@ -1,0 +1,9 @@
+Name:Riven Turnbull
+ManaCost:5 U B
+Types:Legendary Creature Human Advisor
+Text:no text
+PT:5/7
+K:tap: add B
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1680.jpg
+End

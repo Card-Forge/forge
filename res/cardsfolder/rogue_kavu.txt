@@ -1,0 +1,9 @@
+Name:Rogue Kavu
+ManaCost:1 R
+Types:Creature Kavu
+Text:no text
+PT:1/1
+K:WheneverKeyword:Attack - Alone:Self:Play:StatsPumpEOT/2/0:Self:ASAP:No_Condition:No Special Condition:Whenever Rogue Kavu attacks alone, it gets +2/+0 until end of turn.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rogue_kavu.jpg
+End

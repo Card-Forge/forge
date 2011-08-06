@@ -1,0 +1,11 @@
+Name:Reckless One
+ManaCost:3 R
+Types:Creature Goblin Avatar
+Text:no text
+PT:1/1
+K:Haste
+K:StaticEffect:Play:Self:SetPT/Type.Goblin/Type.Goblin:All Permanents:Reckless One's power and toughness are each equal to the number of Goblins on the battlefield.
+K:SVar:BuffedBy:Goblin
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_one.jpg
+End

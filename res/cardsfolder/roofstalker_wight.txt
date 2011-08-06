@@ -1,0 +1,9 @@
+Name:Roofstalker Wight
+ManaCost:1 B
+Types:Creature Zombie
+Text:no text
+PT:2/1
+K:abPump 1 U:Flying
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/roofstalker_wight.jpg
+End

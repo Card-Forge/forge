@@ -1,0 +1,10 @@
+Name:Restless Apparition
+ManaCost:WB WB WB
+Types:Creature Spirit
+Text:no text
+PT:2/2
+K:abPump WB WB WB:+3/+3
+K:Persist
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/restless_apparition.jpg
+End

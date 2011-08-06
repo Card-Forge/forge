@@ -1,0 +1,7 @@
+Name:Repay in Kind
+ManaCost:5 B B
+Types:Sorcery
+Text:Each player's life total becomes the lowest life total among all players.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/repay_in_kind.jpg
+End

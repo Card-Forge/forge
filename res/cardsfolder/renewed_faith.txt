@@ -1,0 +1,9 @@
+Name:Renewed Faith
+ManaCost:2 W
+Types:Instant
+Text:When you cycle Renewed Faith, you may gain 2 life.
+K:spGainLife:6
+K:Cycling:1 W
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card41153.jpg
+End

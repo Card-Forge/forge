@@ -1,0 +1,7 @@
+Name:Riding the Dilu Horse
+ManaCost:2 G
+Types:Sorcery
+Text:no text
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/riding_the_dilu_horse.jpg
+End

@@ -1,0 +1,10 @@
+Name:Razorfoot Griffin
+ManaCost:3 W
+Types:Creature Griffin
+Text:no text
+PT:2/2
+K:Flying
+K:First Strike
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/razorfoot_griffin.jpg
+End

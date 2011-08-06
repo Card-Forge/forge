@@ -1,0 +1,9 @@
+Name:Rift Bolt
+ManaCost:2 R
+Types:Sorcery
+Text:no text
+K:spDamageTgtCP:3
+K:Suspend:1:R
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rift_bolt.jpg
+End

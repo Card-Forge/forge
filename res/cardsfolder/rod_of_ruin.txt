@@ -1,0 +1,8 @@
+Name:Rod of Ruin
+ManaCost:4
+Types:Artifact
+Text:no text
+K:abDamageTgtCP 3 T:1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rod_of_ruin.jpg
+End

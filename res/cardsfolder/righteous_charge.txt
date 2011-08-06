@@ -1,0 +1,8 @@
+Name:Righteous Charge
+ManaCost:1 W W
+Types:Sorcery
+Text:no text
+K:spAllPump:YouCtrl:+2/+2:Creatures you control get +2/+2 until end of turn.:Righteous Charge - Creatures get +2/+2 until EOT
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6503.jpg
+End

@@ -1,0 +1,10 @@
+Name:Rofellos, Llanowar Emissary
+ManaCost:G G
+Types:Legendary Creature Elf Druid
+Text:no text
+PT:2/1
+K:tap: add G to your mana pool for each Forest you control.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rofellos_llanowar_emissary.jpg
+End

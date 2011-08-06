@@ -1,0 +1,9 @@
+Name:Rootbreaker Wurm
+ManaCost:5 G G
+Types:Creature Wurm
+Text:no text
+PT:6/6
+K:Trample
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4785.jpg
+End

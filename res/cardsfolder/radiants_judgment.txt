@@ -1,0 +1,9 @@
+Name:Radiant's Judgment
+ManaCost:2 W
+Types:Instant
+Text:Destroy target creature with power 4 or greater.
+K:spDestroyTgt:Creature.powerGE4
+K:Cycling:2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/radiants_judgment.jpg
+End

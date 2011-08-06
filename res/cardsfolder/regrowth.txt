@@ -1,0 +1,7 @@
+Name:Regrowth
+ManaCost:1 G
+Types:Sorcery
+Text:Return target card from your graveyard to your hand.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/1e/en-us/card170.jpg
+End

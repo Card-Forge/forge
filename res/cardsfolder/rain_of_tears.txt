@@ -1,0 +1,8 @@
+Name:Rain of Tears
+ManaCost:1 B B
+Types:Sorcery
+Text:Destroy target land.
+K:spDestroyTgt:Land
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_tears.jpg
+End

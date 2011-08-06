@@ -1,0 +1,10 @@
+Name:Rorix Bladewing
+ManaCost:3 R R R
+Types:Legendary Creature Dragon
+Text:no text
+PT:6/5
+K:Flying
+K:Haste
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39859.jpg
+End

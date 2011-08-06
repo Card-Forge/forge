@@ -1,0 +1,10 @@
+Name:Rendclaw Trow
+ManaCost:2 BG
+Types:Creature Troll
+Text:no text
+PT:2/2
+K:Persist
+K:Wither
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rendclaw_trow.jpg
+End

@@ -1,0 +1,9 @@
+Name:Rabid Wolverines
+ManaCost:3 G G
+Types:Creature Wolverine
+Text:no text
+PT:4/4
+K:WheneverKeyword:BecomesBlocked:Self:Play:StatsPumpEOT/1/1:Self:ASAP:No_Condition:No Special Condition:Whenever Rabid Wolverines becomes blocked by a creature, Rabid Wolverines gets +1/+1 until end of turn.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rabid_wolverines.jpg
+End

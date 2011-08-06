@@ -1,0 +1,9 @@
+Name:Reliquary Tower
+ManaCost:no cost
+Types:Land
+Text:You have no maximum hand size.
+K:HandSize = INF Self
+K:tap: add 1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/reliquary_tower.jpg
+End

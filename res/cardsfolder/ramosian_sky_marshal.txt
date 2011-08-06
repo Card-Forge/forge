@@ -1,0 +1,10 @@
+Name:Ramosian Sky Marshal
+ManaCost:3 W W
+Types:Creature Human Rebel
+Text:no text
+PT:3/3
+K:Flying
+K:SearchRebel:7
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ramosian_sky_marshal.jpg
+End

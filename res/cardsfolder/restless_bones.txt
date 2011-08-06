@@ -1,0 +1,10 @@
+Name:Restless Bones
+ManaCost:2 B
+Types:Creature Skeleton
+Text:no text
+PT:1/1
+K:abPumpTgtC 3 B T:Swampwalk
+K:RegenerateMe:1 B
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/restless_bones.jpg
+End

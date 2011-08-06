@@ -1,0 +1,9 @@
+Name:Radiant's Dragoons
+ManaCost:3 W
+Types:Creature Human Soldier
+Text:When Radiant's Dragoons enters the battlefield, you gain 5 life.
+PT:2/5
+K:Echo:3 W
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/radiants_dragoons.jpg
+End

@@ -1,0 +1,10 @@
+Name:Ramosian Captain
+ManaCost:1 W W
+Types:Creature Human Rebel
+Text:no text
+PT:2/2
+K:First Strike
+K:SearchRebel:5
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ramosian_captain.jpg
+End

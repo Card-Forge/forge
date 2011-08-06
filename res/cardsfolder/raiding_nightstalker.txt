@@ -1,0 +1,9 @@
+Name:Raiding Nightstalker
+ManaCost:2 B
+Types:Creature Nightstalker
+Text:no text
+PT:2/2
+K:Swampwalk
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6558.jpg
+End

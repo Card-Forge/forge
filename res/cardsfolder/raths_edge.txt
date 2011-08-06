@@ -1,0 +1,9 @@
+Name:Rath's Edge
+ManaCost:no cost
+Types:Legendary Land
+Text:no text
+K:tap: add 1
+K:abDamageTgtCP 4 T Sac-Land:1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/raths_edge.jpg
+End

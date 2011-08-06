@@ -1,0 +1,9 @@
+Name:Riptide Pilferer
+ManaCost:1 U
+Types:Creature Merfolk Rogue
+Text:Whenever Riptide Pilferer deals combat damage to a player, that player discards a card.
+PT:1/1
+K:Morph:U
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide_pilferer.jpg
+End

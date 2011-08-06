@@ -1,0 +1,9 @@
+Name:Raging Minotaur
+ManaCost:2 R R
+Types:Creature Minotaur
+Text:no text
+PT:3/3
+K:Haste
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4358.jpg
+End

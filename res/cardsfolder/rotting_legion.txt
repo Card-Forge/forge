@@ -1,0 +1,9 @@
+Name:Rotting Legion
+ManaCost:4 B
+Types:Creature Zombie
+Text:no text
+PT:4/5
+K:CARDNAME enters the battlefield tapped.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rotting_legion.jpg
+End

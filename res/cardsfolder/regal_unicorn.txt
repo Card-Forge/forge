@@ -1,0 +1,8 @@
+Name:Regal Unicorn
+ManaCost:2 W
+Types:Creature Unicorn
+Text:no text
+PT:2/3
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card14473.jpg
+End

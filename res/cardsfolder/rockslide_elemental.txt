@@ -1,0 +1,10 @@
+Name:Rockslide Elemental
+ManaCost:2 R
+Types:Creature Elemental
+Text:no text
+PT:1/1
+K:First Strike
+K:WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - Other than Self:Whenever another creature is put into a graveyard from the battlefield, you may put a +1/+1 counter on Rockslide Elemental.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rockslide_elemental.jpg
+End

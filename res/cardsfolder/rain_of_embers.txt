@@ -1,0 +1,8 @@
+Name:Rain of Embers
+ManaCost:1 R
+Types:Sorcery
+Text:no text
+K:spDamageAll:Player,Creature:1:Rain of Embers deals 1 damage to each creature and each player.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_embers.jpg
+End

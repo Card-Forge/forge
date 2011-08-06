@@ -1,0 +1,8 @@
+Name:Royal Assassin
+ManaCost:1 B B
+Types:Creature Human Assassin
+Text:no text
+PT:1/1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83235.jpg
+End

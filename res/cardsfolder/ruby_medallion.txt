@@ -1,0 +1,9 @@
+Name:Ruby Medallion
+ManaCost:2
+Types:Artifact
+Text:Red spells you cast cost 1 less to cast.
+K:CostChange:Player:Less:1:Spell:red:All:NoSpecial
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ruby_medallion.jpg
+End

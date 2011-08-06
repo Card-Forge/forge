@@ -1,0 +1,10 @@
+Name:Rustrazor Butcher
+ManaCost:1 R
+Types:Creature Goblin Warrior
+Text:no text
+PT:1/2
+K:First Strike
+K:Wither
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rustrazor_butcher.jpg
+End

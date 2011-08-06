@@ -1,0 +1,7 @@
+Name:Rite of Replication
+ManaCost:2 U U
+Types:Sorcery
+Text:no text
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rite_of_replication.jpg
+End

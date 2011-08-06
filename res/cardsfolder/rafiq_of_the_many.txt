@@ -1,0 +1,9 @@
+Name:Rafiq of the Many
+ManaCost:1 G W U
+Types:Legendary Creature Human Knight
+Text:Whenever a creature you control attacks alone, it gains double strike until end of turn.
+PT:3/3
+K:Exalted
+K:SVar:Rarity:Mythic
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rafiq_of_the_many.jpg
+End

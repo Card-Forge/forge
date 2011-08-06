@@ -1,0 +1,10 @@
+Name:Roughshod Mentor
+ManaCost:5 G
+Types:Creature Giant Warrior
+Text:no text
+PT:5/4
+K:StaticEffect:Play:Permanents you Control:Keyword/Trample:Type.Creature!Color.green:Green creatures you control have trample.
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/roughshod_mentor.jpg
+End

@@ -1,0 +1,7 @@
+Name:Rolling Earthquake
+ManaCost:X R
+Types:Sorcery
+Text:no text
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rolling_earthquake.jpg
+End

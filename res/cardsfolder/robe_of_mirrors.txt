@@ -1,0 +1,9 @@
+Name:Robe of Mirrors
+ManaCost:U
+Types:Enchantment Aura
+Text:Enchanted creature has shroud.
+K:Enchant creature
+K:enPump:Shroud
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/robe_of_mirrors.jpg
+End

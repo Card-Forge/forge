@@ -1,0 +1,9 @@
+Name:Recover
+ManaCost:2 B
+Types:Sorcery
+Text:no text
+K:spRaiseDead:1
+K:Draw a card.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/recover.jpg
+End

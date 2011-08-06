@@ -1,0 +1,9 @@
+Name:Reviving Dose
+ManaCost:2 W
+Types:Instant
+Text:no text
+K:spGainLife:3
+K:Draw a card.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card22941.jpg
+End

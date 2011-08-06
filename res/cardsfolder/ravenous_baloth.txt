@@ -1,0 +1,8 @@
+Name:Ravenous Baloth
+ManaCost:2 G G
+Types:Creature Beast
+Text:no text
+PT:4/4
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_baloth.jpg
+End

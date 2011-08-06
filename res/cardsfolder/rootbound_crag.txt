@@ -1,0 +1,10 @@
+Name:Rootbound Crag
+ManaCost:no cost
+Types:Land
+Text:no text
+K:CARDNAME enters the battlefield tapped unless you control a Mountain or a Forest.
+K:tap: add R
+K:tap: add G
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rootbound_crag.jpg
+End

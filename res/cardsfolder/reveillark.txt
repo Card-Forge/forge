@@ -1,0 +1,9 @@
+Name:Reveillark
+ManaCost:4 W
+Types:Creature Elemental
+Text:When Reveillark leaves the battlefield, return up to two target creature cards with power 2 or less from your graveyard to the battlefield.
+PT:4/3
+K:Flying
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/reveillark.jpg
+End

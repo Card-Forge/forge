@@ -1,0 +1,9 @@
+Name:Rockslide Ambush
+ManaCost:1 R
+Types:Sorcery
+Text:no text
+K:spDamageTgtC:X:Rockslide Ambush deals damage equal to the number of Mountains you control to target creature.
+K:SVar:X:Count$TypeYouCtrl.Mountain
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rockslide_ambush.jpg
+End

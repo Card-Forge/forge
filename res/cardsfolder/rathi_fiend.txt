@@ -1,0 +1,9 @@
+Name:Rathi Fiend
+ManaCost:3 B
+Types:Creature Horror Mercenary
+Text:When Rathi Fiend comes into play, each player loses 3 life.
+PT:2/2
+K:SearchMerc:3
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rathi_fiend.jpg
+End

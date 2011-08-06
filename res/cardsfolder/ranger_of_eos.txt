@@ -1,0 +1,8 @@
+Name:Ranger of Eos
+ManaCost:3 W
+Types:Creature Human Soldier
+Text:When Ranger of Eos comes into play, you may search your library for up to two creature cards with converted mana cost 1 or less, reveal them, and put them into your hand. If you do, shuffle your library.
+PT:3/2
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ranger_of_eos.jpg
+End

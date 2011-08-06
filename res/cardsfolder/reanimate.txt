@@ -1,0 +1,7 @@
+Name:Reanimate
+ManaCost:B
+Types:Sorcery
+Text:Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to its converted mana cost.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/reanimate.jpg
+End

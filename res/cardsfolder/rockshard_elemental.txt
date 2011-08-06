@@ -1,0 +1,10 @@
+Name:Rockshard Elemental
+ManaCost:5 R R
+Types:Creature Elemental
+Text:no text
+PT:4/3
+K:Double Strike
+K:Morph:4 R R
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rockshard_elemental.jpg
+End

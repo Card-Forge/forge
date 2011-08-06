@@ -1,0 +1,9 @@
+Name:Rathi Assassin
+ManaCost:2 B B
+Types:Creature Zombie Mercenary Assassin
+Text:no text
+PT:2/2
+K:SearchMerc:3
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rathi_assassin.jpg
+End

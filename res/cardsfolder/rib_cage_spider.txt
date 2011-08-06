@@ -1,0 +1,9 @@
+Name:Rib Cage Spider
+ManaCost:2 G
+Types:Creature Spider
+Text:no text
+PT:1/4
+K:Reach
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/pr/en-us/card24653.jpg
+End

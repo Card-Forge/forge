@@ -1,0 +1,9 @@
+Name:Raging Cougar
+ManaCost:2 R
+Types:Creature Cat
+Text:no text
+PT:2/2
+K:Haste
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/raging_cougar.jpg
+End

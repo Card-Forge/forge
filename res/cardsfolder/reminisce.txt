@@ -1,0 +1,7 @@
+Name:Reminisce
+ManaCost:2 U
+Types:Sorcery
+Text:Target player shuffles his or her graveyard into his or her library.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/reminisce.jpg
+End

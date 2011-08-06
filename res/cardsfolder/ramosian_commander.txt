@@ -1,0 +1,9 @@
+Name:Ramosian Commander
+ManaCost:2 W W
+Types:Creature Human Rebel
+Text:no text
+PT:2/4
+K:SearchRebel:6
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ramosian_commander.jpg
+End

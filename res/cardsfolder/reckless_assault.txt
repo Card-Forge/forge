@@ -1,0 +1,8 @@
+Name:Reckless Assault
+ManaCost:2 B R
+Types:Enchantment
+Text:no text
+K:abDamageTgtCP 1 PayLife<2>:1
+K:SVar:RemAIDeck:True
+K:SVars:Picture:http://www.wizards.com/global/images/magic/general/reckless_assault.jpg
+End

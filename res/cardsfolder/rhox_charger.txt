@@ -1,0 +1,10 @@
+Name:Rhox Charger
+ManaCost:3 G
+Types:Creature Rhino Soldier
+Text:no text
+PT:3/3
+K:Trample
+K:Exalted
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_charger.jpg
+End

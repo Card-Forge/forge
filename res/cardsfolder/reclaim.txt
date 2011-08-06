@@ -1,0 +1,7 @@
+Name:Reclaim
+ManaCost:G
+Types:Instant
+Text:Put target card from your graveyard on top of your library.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/reclaim.jpg
+End

@@ -1,0 +1,10 @@
+Name:Ronin Houndmaster
+ManaCost:2 R
+Types:Creature Human Samurai
+Text:no text
+PT:2/2
+K:Haste
+K:Bushido 1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ronin_houndmaster.jpg
+End

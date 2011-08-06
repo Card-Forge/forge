@@ -1,0 +1,9 @@
+Name:River Bear
+ManaCost:3 G
+Types:Creature Bear
+Text:no text
+PT:3/3
+K:Islandwalk
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83022.jpg
+End

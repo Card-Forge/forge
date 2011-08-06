@@ -1,0 +1,9 @@
+Name:Rip-Clan Crasher
+ManaCost:R G
+Types:Creature Human Warrior
+Text:no text
+PT:2/2
+K:Haste
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rip_clan_crasher.jpg
+End

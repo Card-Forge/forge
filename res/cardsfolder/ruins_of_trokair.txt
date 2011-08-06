@@ -1,0 +1,11 @@
+Name:Ruins of Trokair
+ManaCost:no cost
+Types:Land
+Text:no text
+K:tap: add W
+K:tap, Sacrifice CARDNAME: Add W W to your mana pool.
+K:Comes into play tapped.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ruins_of_trokair.jpg
+End

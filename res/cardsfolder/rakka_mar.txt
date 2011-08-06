@@ -1,0 +1,9 @@
+Name:Rakka Mar
+ManaCost:2 R R
+Types:Legendary Creature Human Shaman
+Text:no text
+PT:2/2
+K:Haste
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/rakka_mar.jpg
+End
