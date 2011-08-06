@@ -5417,7 +5417,6 @@ res/lib/napkinlaf-1.2.jar -text svneol=unset#unset
 res/lib/nimrodlf.jar -text svneol=unset#unset
 res/lib/substance.jar -text svneol=unset#unset
 res/main.properties svneol=native#text/plain
-res/migratedCardsScript.py -text svneol=native#text/x-python
 res/pics/BookIcon.png -text svneol=unset#image/png
 res/pics/BoxIcon.png -text svneol=unset#image/png
 res/pics/GoldIcon.png -text svneol=unset#image/png
@@ -5719,6 +5718,7 @@ res/quest/themes/Vigilance[!!-~]Meekstone[!!-~]W.thm -text
 res/quest/themes/White.thm -text
 res/quest/uncommon.txt -text svneol=native#text/plain
 res/rare.txt -text svneol=native#text/plain
+res/setInfoScript.py -text svneol=native#text/x-python
 res/sound/tap.mp3 -text svneol=unset#audio/mpeg
 res/uncommon.txt -text svneol=native#text/plain
 src/Deck.java svneol=native#text/plain
