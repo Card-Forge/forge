@@ -134,8 +134,9 @@ public class Phase extends MyObservable
         //	c.setExtrinsicKeyword(new ArrayList<String>());
         //}
         
-
-        AllZone.ManaPool.clearPool();
+        
+        if(!AllZoneUtil.isCardInPlay("Upwelling")) AllZone.ManaPool.clearPool();
+        
         if (getPhase().equals(Constant.Phase.Combat_Declare_Attackers)) {
         	nCombatsThisTurn++;
         } else if (getPhase().equals(Constant.Phase.Main1)) {
