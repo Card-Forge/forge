@@ -4,7 +4,6 @@ Types:Creature Avatar
 Text:no text
 PT:*/*
 K:stSetPT:Count$YourLifeTotal:Count$YourLifeTotal:CARDNAME's power and toughness are each equal to your life total.
-# When Serra Avatar is put into a graveyard from anywhere, shuffle it into its owner's library
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.Self  | Execute$ TrigShuffle | TriggerDescription$ When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library.
 SVar:TrigShuffle:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ Self
 SVar:Rarity:Rare
