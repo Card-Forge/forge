@@ -5516,6 +5516,38 @@ public class CardFactory_Sorceries {
             spell.setBeforePayMana(chooseTwoInput);
         }//*************** END ************ END **************************
         
+      
+        //*************** START *********** START **************************
+        else if(cardName.equals("Praetor's Counsel")) {
+        	final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 2208683667850222369L;
+
+				@Override
+        		public boolean canPlayAI() {
+					return false;
+        		}
+
+				@Override
+				public void resolve() {
+					Player player = card.getController();
+					CardList grave = AllZoneUtil.getPlayerGraveyard(player);
+					for(Card c:grave) AllZone.GameAction.moveToHand(c);
+
+					AllZone.GameAction.exile(card);
+
+					card.setSVar("HSStamp","" + Player.getHandSizeStamp());
+					player.addHandSizeOperation(new HandSizeOp("=", -1, Integer.parseInt(card.getSVar("HSStamp"))));
+				}
+        	};//SpellAbility
+        	
+        	/*StringBuilder sb = new StringBuilder();
+        	sb.append(card.getName()).append(" - Each player's life total becomes the lowest life total among all players.");
+        	spell.setStackDescription(sb.toString()); */
+        	
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         
     	return card;
     }//getCard
