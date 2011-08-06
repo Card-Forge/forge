@@ -3544,10 +3544,11 @@ public class CardFactory_Sorceries {
                     CardFactoryUtil.makeToken("Bear", "G 2 2 Bear", card, "G", new String[] {"Creature", "Bear"},
                             2, 2, new String[] {""});
                 }//resolve()
-            };
+            };//SpellAbility
             
-            spell.setDescription("Put two 2/2 green Bear creature tokens into play. Threshold - Put four 2/2 green Bear creature tokens into play instead if seven or more cards are in your graveyard. ");
-            spell.setStackDescription(card.getController() + " Puts 2/2 green Bear tokens into play.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getController()).append(" Puts 2/2 green Bear tokens into play.");
+            spell.setStackDescription(sb.toString());
             
             card.setFlashback(true);
             card.clearSpellAbility();
