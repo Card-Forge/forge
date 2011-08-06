@@ -1,6 +1,6 @@
 Name:Manabarbs
 ManaCost:3 R
-Types:Enchentment
+Types:Enchantment
 Text:Whenever a player taps a land for mana, Manabarbs deals 1 damage to that player.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
