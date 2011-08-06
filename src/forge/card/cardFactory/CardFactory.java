@@ -514,19 +514,6 @@ public class CardFactory implements NewConstants {
         	}
         }
         
-        if (hasKeyword(card, "Replicate") != -1) {
-        	int n = hasKeyword(card, "Replicate");
-        	if (n!= -1) {
-        		System.out.println("Got replicate for: "+card);
-        		String parse = card.getKeyword().get(n).toString();
-        		String k[] = parse.split("cate ");
-        	
-        		SpellAbility sa = card.getSpellAbility()[0];
-        		sa.setIsReplicate(true);
-        		sa.setReplicateManaCost(k[1]);
-        	}
-        }
-        
         /////////////////////////////////////////////////////////////////////////////
         // NOTE: This cannot currently be converted to triggers because of this line:
         // card.getSpellPermanent().setLoseLifeAmount(num);
@@ -3249,6 +3236,19 @@ public class CardFactory implements NewConstants {
             
             card.addSpellAbility(kickedSpell);
     	}
+    	
+    	if (hasKeyword(card, "Replicate") != -1) {
+        	int n = hasKeyword(card, "Replicate");
+        	if (n!= -1) {
+        		System.out.println("Got replicate for: "+card);
+        		String parse = card.getKeyword().get(n).toString();
+        		String k[] = parse.split("cate ");
+        	
+        		SpellAbility sa = card.getSpellAbility()[0];
+        		sa.setIsReplicate(true);
+        		sa.setReplicateManaCost(k[1]);
+        	}
+        }
     	
     	int evokeKeyword = hasKeyword(card, "Evoke");
     	if (evokeKeyword != -1){
