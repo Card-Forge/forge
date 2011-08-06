@@ -126,9 +126,7 @@ public class PhaseUtil {
     				&& !c.getKeyword().contains("This card doesn't untap during your next untap step.")) {
     			c.untap();
     		}
-    		else c.removeExtrinsicKeyword("This card doesn't untap during your next untap step.");
-
-    		// todo: Issue 70 - Arena of the Ancients to be added somewhere around here    		
+    		else c.removeExtrinsicKeyword("This card doesn't untap during your next untap step.");    		
     	}
     	if( isWinterOrbInEffect() || isMunghaWurmInEffect()[0] || isMunghaWurmInEffect()[1]) {
     		if( AllZone.Phase.getPlayerTurn().equals(AllZone.ComputerPlayer) || isMunghaWurmInEffect()[1] ) {

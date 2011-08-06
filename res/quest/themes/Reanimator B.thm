@@ -1,0 +1,105 @@
+BasicLandPercentage=35
+
+[Group MaxCnt=4 Percentage=13]
+Entomb
+Buried Alive
+[/Group]
+
+[Group MaxCnt=4 Percentage=18]
+Animate Dead
+Animate Dead
+Beacon of Unrest
+Zombify
+Zombify
+Living Death
+Exhume
+Exhume
+[/Group]
+
+[Group MaxCnt=4 Percentage=5]
+Night's Whisper
+Sign in Blood
+[/Group]
+
+[Group MaxCnt=2 Percentage=19]
+Hymn to Tourach
+Sinkhole
+Infest
+Annihilate
+Assassinate
+Befoul
+Chill to the Bone
+Dark Banishing
+Dark Offering
+Death Stroke
+Doom Blade
+Eyeblight's Ending
+Ghostly Visit
+Hand of Death
+Hideous End
+Poison Arrow
+Rend Flesh
+Sever Soul
+Smother
+Stream of Acid
+Terror
+Violet Pall
+[/Group]
+
+[Group MaxCnt=1 Percentage=10]
+Akroma, Angel of Wrath
+Angel of Despair
+Angel of Retribution
+Archangel
+Ashen Monstrosity
+Benthic Behemoth
+Blazing Archon
+Bogardan Hellkite
+Brimstone Dragon
+Crash of Rhinos
+Craw Giant
+Darksteel Gargoyle
+Demon of Death's Gate
+Djinn of the Lamp
+Duskdale Wurm
+Ebon Dragon
+Fungal Shambler
+Gaea's Revenge
+Goliath Spider
+Goliath Sphinx
+Godsire
+Hellkite Overlord
+Inkwell Leviathan
+Iona, Shield of Emeria
+Iridescent Angel
+Isleback Spawn
+Kalonian Behemoth
+Khalni Hydra
+Konda, Lord of Eiganjo
+Luminous Angel
+Oakgnarl Warrior
+Pelakka Wurm
+Penumbra Wurm
+Pestilence Demon
+Plated Slagwurm
+Platinum Angel
+Reya Dawnbringer
+Reya Dawnbringer
+Scaled Wurm
+Silver Seraph
+Simic Sky Swallower
+Skeletal Wurm
+Sphinx of the Steel Wind
+Spirit of the Night
+Symbiotic Wurm
+Teeka's Dragon
+Tidal Kraken
+Titanic Bulvox
+Tsabo Tavoc
+Ulamog's Crusher
+Verdant Force
+Windbrisk Raptor
+Woodfall Primus
+[/Group]
+
+End
