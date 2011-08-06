@@ -1,0 +1,9 @@
+Name:Disrupt
+ManaCost:U
+Types:Instant
+Text:no text
+A:SP$Counter | Cost$ U | Type$ Spell | CounterValid$ Instant,Sorcery | UnlessCost$ 1 | SubAbility$SVar=DBDraw | SpellDescription$ Counter target instant or sorcery spell unless its controller pays 1. Draw a card.
+SVar:DBDraw:DB$Draw | NumCards$ 1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/disrupt.jpg
+End

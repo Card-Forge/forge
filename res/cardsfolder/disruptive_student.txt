@@ -1,0 +1,9 @@
+Name:Disruptive Student
+ManaCost:2 U
+Types:Creature Human Wizard
+Text:no text
+PT:1/1
+A:AB$Counter | Cost$ T | Type$ Spell | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays 1.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/disruptive_student.jpg
+End

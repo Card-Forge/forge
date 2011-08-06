@@ -1,0 +1,9 @@
+Name:Hindering Touch
+ManaCost:3 U
+Types:Instant
+Text:no text
+A:SP$Counter | Cost$ 3 U | Type$ Spell | UnlessCost$ 2 | SpellDescription$ Counter target spell unless its controller pays 2.
+K:Storm
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ghost_lit_warder.jpg
+End
