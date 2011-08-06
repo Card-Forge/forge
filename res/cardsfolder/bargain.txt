@@ -2,7 +2,7 @@ Name:Bargain
 ManaCost:2 W
 Types:Sorcery
 Text:no text
-K:spGainLife:7:Drawback$OppDrawCard/1:Target opponent draws a card. You gain 7 life.:Bargain - opponent draws a card and you gain 7 life
+A:SP$GainLife | Cost$ 2 W | LifeAmount$ 7 | SubAbility$ OppDrawCard/1 | SpellDescription$ Target opponent draws a card. You gain 7 life.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bargain.jpg
 SetInfo:P02|Uncommon|http://magiccards.info/scans/en/po2/134.jpg

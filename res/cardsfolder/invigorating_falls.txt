@@ -2,7 +2,7 @@ Name:Invigorating Falls
 ManaCost:2 G G
 Types:Sorcery
 Text:no text
-K:spGainLife:X:You gain life equal to the number of creature cards in all graveyards.:Invigorating Falls - player gains X life
+A:SP$GainLife | Cost$ 2 G G | LifeAmount$ X | SpellDescription$ You gain life equal to the number of creature cards in all graveyards.
 SVar:X:Count$TypeInAllYards.Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/invigorating_falls.jpg
