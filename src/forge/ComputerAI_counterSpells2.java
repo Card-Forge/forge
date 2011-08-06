@@ -112,7 +112,7 @@ public class ComputerAI_counterSpells2 {
 		{
 			SpellAbility sa = c.getSpellAbility()[0];
 
-			if (s.equals(c.getName()) && ComputerUtil.canPayCost(sa))
+			if (s.equals(c.getName()) && ComputerUtil.canPayCost(sa) && !c.isUnCastable())
 				return true;
 		}
 		return false;
