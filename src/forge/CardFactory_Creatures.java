@@ -1123,7 +1123,8 @@ public class CardFactory_Creatures {
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
         */
-
+        
+        /* Converteded to AF Trigger
         //*************** START *********** START **************************
         else if(cardName.equals("Symbiotic Elf")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -1152,7 +1153,7 @@ public class CardFactory_Creatures {
             };
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Mongrel Pack")) {
