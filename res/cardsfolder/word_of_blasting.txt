@@ -2,7 +2,7 @@ Name:Word of Blasting
 ManaCost:1 R
 Types:Instant
 Text:no text
-A:SP$ Destroy | Cost$ 1 R | ValidTgts$ Wall | TgtPrompt$ Select target Wall | SubAbility$ SVar=DBDamage| SpellDescription$ Destroy target Wall. It can't be regenerated. Word of Blasting deals damage equal to that Wall's converted mana cost to the Wall's controller.
+A:SP$ Destroy | Cost$ 1 R | ValidTgts$ Wall | TgtPrompt$ Select target Wall | SubAbility$ SVar=DBDamage| SpellDescription$ Destroy target Wall. It can't be regenerated. CARDNAME deals damage equal to that Wall's converted mana cost to the Wall's controller.
 SVar:DBDamage:DB$DealDamage | NumDmg$ X | Defined$ TargetedController
 SVar:X:Targeted$CardManaCost
 SVar:RemRandomDeck:True
