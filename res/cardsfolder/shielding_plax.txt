@@ -3,7 +3,7 @@ ManaCost:2 GU
 Types:Enchantment Aura
 Text:Enchanted creature can't be the target of spells or abilities your opponents control.
 K:Enchant creature
-K:enPump:CARDNAME can't be the target of spells or abilities your opponents control.
+K:enPump:HIDDEN CARDNAME can't be the target of spells or abilities your opponents control.
 K:When CARDNAME enters the battlefield, draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shielding_plax.jpg

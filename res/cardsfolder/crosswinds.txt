@@ -2,7 +2,7 @@ Name:Crosswinds
 ManaCost:2 G
 Types:Enchantment
 Text:no text
-K:StaticEffect:Play:All Permanents:PTBonus/-2/0:Type.Creature!with.Flying:Creatures with flying get -2/-0.
+K:stPumpAll:Creature.withFlying:-2/0/:No Condition:Creatures with flying get -2/-0.
 SVar:PlayMain1:TRUE
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
