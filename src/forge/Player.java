@@ -68,6 +68,7 @@ public class Player extends MyObservable{
 		if(toGain > 0) {
 			addLife(toGain);
 			newLifeSet = true;
+			this.updateObservers();
 		}
 		else System.out.println("Player - trying to gain negative or 0 life");
 		
@@ -84,6 +85,7 @@ public class Player extends MyObservable{
 		if(toLose > 0) {
 			life -= toLose;
 			newLifeSet = true;
+			this.updateObservers();
 		}
 		else System.out.println("Player - trying to lose positive or 0 life");
 		return newLifeSet;
@@ -96,6 +98,7 @@ public class Player extends MyObservable{
 	
 	public void payLife(final int cost) {
 		life -= cost;
+		this.updateObservers();
 	}
 	
 	public boolean payLife(int lifePayment, Card source) {

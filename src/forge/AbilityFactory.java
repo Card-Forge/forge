@@ -204,6 +204,14 @@ public class AbilityFactory {
 			}
 		}
 		
+		if (API.equals("LoseLife")){
+			if (isAb)
+				SA = AbilityFactory_AlterLife.createAbilityLoseLife(this);
+			if (isSp){
+				SA = AbilityFactory_AlterLife.createSpellLoseLife(this);
+			}
+		}
+		
 		if (API.equals("Fog")){
 			if (isAb)
 				SA = AbilityFactory_Combat.createAbilityFog(this);
@@ -232,7 +240,7 @@ public class AbilityFactory {
 
         if (!isTargeted)
         	SA.setStackDescription(hostCard.getName());
-		
+        
         return SA;
 	}
 	
