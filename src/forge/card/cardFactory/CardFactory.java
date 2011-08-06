@@ -977,7 +977,11 @@ public class CardFactory implements NewConstants {
                 	else {
                 		toAdd = Integer.parseInt(numCounters);
                 	}
+                    AllZone.TriggerHandler.suppressMode("CounterAdded");
+
                     card.addCounter(counter, toAdd);
+
+                    AllZone.TriggerHandler.clearSuppression("CounterAdded");
                 }
             });//ComesIntoPlayCommand
         } // if etbCounter
@@ -991,7 +995,13 @@ public class CardFactory implements NewConstants {
 
 				public void execute() {
 					if(card.getController().getOpponent().getAssignedDamage() > 0)
+                    {
+                        AllZone.TriggerHandler.suppressMode("CounterAdded");
+
 						card.addCounter(Counters.P1P1, count);
+
+                        AllZone.TriggerHandler.clearSuppression("CounterAdded");
+                    }
 				}
         		
         	});
