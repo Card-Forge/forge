@@ -2938,6 +2938,42 @@ public class CardFactory implements NewConstants {
         	card.addComesIntoPlayCommand(etbGainLife);
         } // etbGainLife
         
+        // Generic enters the battlefield lose life
+        // there is also code in Spell_Permanent canPlayAI to handle that part
+        if (hasKeyword(card, "etbLoseLife") != -1) {
+        	int n = hasKeyword(card, "etbLoseLife");
+
+        	String parse = card.getKeyword().get(n).toString();
+        	card.removeIntrinsicKeyword(parse);
+        	
+        	String k[] = parse.split(":");
+
+        	final int num = Integer.parseInt(k[1]);
+        	card.getSpellPermanent().setLoseLifeAmount(num);
+
+        	// performs the gain
+        	final SpellAbility etbLoseLifeAbility = new Ability(card, "0") {
+        		@Override
+        		public void resolve() {
+        			card.getController().loseLife(num, card);
+        		}
+        	};
+
+        	// when the card enters the battlefield
+        	Command etbLoseLife = new Command() {
+				private static final long serialVersionUID = -6797619430597211329L;
+
+				public void execute() {
+        			StringBuilder sb = new StringBuilder();
+        			sb.append(card.getController()).append(" loses "+num+" life");
+        			etbLoseLifeAbility.setStackDescription(sb.toString());
+
+        			AllZone.Stack.add(etbLoseLifeAbility);
+        		}
+        	};
+        	card.addComesIntoPlayCommand(etbLoseLife);
+        } // etbLoseLife
+        
 
         // Generic destroy all card
         /* Cards converted to AF_DestroyAll

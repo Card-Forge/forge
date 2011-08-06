@@ -1112,6 +1112,13 @@ public class Card extends MyObservable {
         manaAbility.clear();
     }
     
+    public Spell_Permanent getSpellPermanent() {
+    	for(SpellAbility sa:spellAbility) {
+    		if(sa instanceof Spell_Permanent) return (Spell_Permanent)sa;
+    	}
+    	return null;
+    }
+    
     public void clearSpellKeepManaAbility() {
         spellAbility.clear();
     }

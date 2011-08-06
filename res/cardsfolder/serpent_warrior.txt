@@ -3,6 +3,7 @@ ManaCost:2 B
 Types:Creature Snake Warrior
 Text:When CARDNAME enters the battlefield, you lose 3 life.
 PT:3/3
+K:etbLoseLife:3
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83364.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/161.jpg
