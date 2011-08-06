@@ -4,5 +4,6 @@ Types:Sorcery
 Text:no text
 A:SP$Pump|Cost$1 U|TargetMin$1|TargetMax$2|KW$Flying|ValidTgts$Creature|TgtPrompt$Select target Creature|SpellDescription$One or two target creatures gain flying until end of turn.
 SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wind_sail.jpg
+#SVar:Picture:http://www.wizards.com/global/images/magic/general/wind_sail.jpg
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=21076&type=card
 End
