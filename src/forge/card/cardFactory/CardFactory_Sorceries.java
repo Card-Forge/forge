@@ -3911,10 +3911,9 @@ public class CardFactory_Sorceries {
 					}
 					final int num = CardFactoryUtil.getNumberOfManaSymbolsByColor("U", topCards);
 					GuiUtils.getChoiceOptional("Revealed cards - "+num+" U mana symbols", topCards.toArray());
-					maxCards = Math.min(maxCards, num);
 					
 					//opponent moves this many cards to graveyard
-					opp.mill(maxCards);
+					opp.mill(num);
 					
 					//then, move revealed cards to bottom of library
 					for(Card c:topCards) {
