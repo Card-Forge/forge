@@ -439,7 +439,9 @@ public class CardFactory_Creatures {
         else if(cardName.equals("Loxodon Hierarch")) {
         	Ability_Cost abCost = new Ability_Cost("G W Sac<1/CARDNAME>", cardName, true);
             final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
-                @Override
+				private static final long serialVersionUID = 6606519504236074186L;
+
+				@Override
                 public boolean canPlayAI() {
                     return false;
                 }
@@ -1418,19 +1420,38 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    Player opponent = card.getController().getOpponent();
-                    
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opponent);
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, opponent);
+                    final Player opponent = card.getController().getOpponent();
+                    final PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opponent);
                     
                     if(hand.size() == 0) return;
                     
-                    //randomly move card from hand to top of library
-                    int index = MyRandom.random.nextInt(hand.size());
-                    Card card = hand.get(index);
-                    
-                    hand.remove(card);
-                    library.add(card, 0);
+                    if(opponent.isComputer()) {
+                    	//randomly move card from hand to top of library
+                    	int index = MyRandom.random.nextInt(hand.size());
+                    	Card c = hand.get(index);
+                    	AllZone.GameAction.moveToTopOfLibrary(c);
+                    }
+                    else {
+                    	if(hand.size() > 0) {
+                    		AllZone.InputControl.setInput(new Input() {
+								private static final long serialVersionUID = 2358951895134165788L;
+
+								@Override
+								public void showMessage() {
+                    				AllZone.Display.showMessage("Select a card from your hand to put on top of your library.");
+                    				ButtonUtil.disableAll();
+                    			}
+                    			
+								@Override
+                    			public void selectCard(Card c, PlayerZone p) {
+                    				if(p.is(Constant.Zone.Hand, opponent)) {
+                    					AllZone.GameAction.moveToTopOfLibrary(c);
+                    					stop();
+                    				}
+                    			}
+                    		});
+                    	}
+                    }
                 }//resolve()
             };//SpellAbility
             
@@ -1438,7 +1459,7 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = 160195797163952303L;
                 
                 public void execute() {
-                    ability.setStackDescription("Chittering Rats - Opponent randomly puts a card from his hand on top of his library.");
+                    ability.setStackDescription(cardName+" - opponent puts a card from his or her hand on top of his or her library.");
                     AllZone.Stack.add(ability);
                 }
             };
