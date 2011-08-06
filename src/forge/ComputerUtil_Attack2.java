@@ -82,14 +82,16 @@ import java.util.*;
           CardListUtil.sortAttack(humanList);
           int blockersNeeded = computerList.size();
           
-          for(int i = 0; i < computerList.size(); i++) {
+          CardList list = computerList;
+          
+          for(int i = 0; i < list.size(); i++) {
              if(!doesHumanAttackAndWin(i)) {
                 blockersNeeded= i;
                 break;
              }
           }
           
-          if (blockersNeeded == computerList.size()) {
+          if (blockersNeeded == list.size()) {
         	  // Human will win unless everything is kept back to block
         	  return blockersNeeded;
           }
@@ -124,8 +126,8 @@ import java.util.*;
         	  }
            }
          
-          if (blockersNeeded > computerList.size())
-        	  blockersNeeded = computerList.size();
+          if (blockersNeeded > list.size())
+        	  blockersNeeded = list.size();
           return blockersNeeded;
        }
 
@@ -225,6 +227,14 @@ import java.util.*;
              CardListUtil.sortNonFlyingFirst(attackers);
              CardListUtil.sortAttackLowFirst(attackers);
 
+             for (Card c:attackers)
+             {
+            	 if (c.getKeyword().contains("Vigilance"))
+            		 i--;
+             }
+             if (i < 0)
+            	 i = 0;
+             
              for(; i < attackers.size(); i++)
              {
 

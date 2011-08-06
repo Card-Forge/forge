@@ -748,7 +748,6 @@ public class CardFactoryUtil {
                 PlayerLife compLife = AllZone.GameAction.getPlayerLife("Computer");
                 int life = compLife.getLife();
                 
-
                 return (life > (loss + 2));
             }
             
@@ -758,7 +757,10 @@ public class CardFactoryUtil {
                 String phase = AllZone.Phase.getPhase();
                 String activePlayer = AllZone.Phase.getActivePlayer();
                 
-                return AllZone.GameAction.isCardInZone(sourceCard, grave)
+                ArrayList<Card> spellsOnStack = AllZone.Stack.getSourceCards();
+                Card sourceCard = this.getSourceCard();
+                
+                return AllZone.GameAction.isCardInZone(sourceCard, grave) && !spellsOnStack.contains(sourceCard)
                         && (sourceCard.isInstant() || (phase.equals(Constant.Phase.Main1) || phase.equals(Constant.Phase.Main2))
                                 && sourceCard.getController().equals(activePlayer) && AllZone.Stack.size() == 0);
                 
