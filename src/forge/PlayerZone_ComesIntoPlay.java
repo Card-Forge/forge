@@ -191,45 +191,6 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 }
                 
             }//isLand()
-            
-            //hack to make tokens trigger ally effects:
-            CardList clist = new CardList(play.getCards());
-            clist = clist.filter(new CardListFilter() {
-                public boolean addCard(Card c) {
-                    return c.getName().equals("Conspiracy") && c.getChosenType().equals("Ally");
-                }
-            });
-            
-            String[] allyNames = {
-                    "Umara Raptor", "Tuktuk Grunts", "Oran-Rief Survivalist", "Nimana Sell-Sword",
-                    "Makindi Shieldmate", "Kazandu Blademaster", "Turntimber Ranger", "Highland Berserker",
-                    "Joraga Bard", "Bojuka Brigand", "Graypelt Hunter", "Kazuul Warlord"};
-            final ArrayList<String> allyNamesList = new ArrayList<String>();
-            
-            for(int i = 0; i < allyNames.length; i++) {
-                allyNamesList.add(allyNames[i]);
-            }
-            
-            if(SimultaneousEntry == false) { // For Cards with Multiple Token Entry. Only Affects Allies at the moment.
-            	for(int i = 0; i < SimultaneousEntryCounter; i++) {
-            		if(c.getType().contains("Ally") || (c.getKeyword().contains("Changeling") && c.isCreature())
-            				|| (clist.size() > 0 && (c.getType().contains("Creature") || c.getKeyword().contains(
-            				"Changeling"))) || allyNamesList.contains(c.getName())) {
-            			CardList list = new CardList(play.getCards());
-            			list = list.filter(new CardListFilter() {
-            				public boolean addCard(Card c) {
-            					return c.getType().contains("Ally") || c.getKeyword().contains("Changeling")
-            					|| allyNamesList.contains(c.getName());
-            				}
-            			});
-
-            			for(Card var:list) {
-            				GameActionUtil.executeAllyEffects(var);
-            			}
-            		}
-            	}
-            	SimultaneousEntryCounter = 1;
-            } else SimultaneousEntryCounter = SimultaneousEntryCounter + 1;
         }
         
         if(AllZone.StaticEffects.getCardToEffectsList().containsKey(c.getName())) {

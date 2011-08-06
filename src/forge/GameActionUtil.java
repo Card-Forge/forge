@@ -3326,47 +3326,6 @@ public class GameActionUtil {
 		AllZone.GameInfo.setResolvedFirstStrikeDamageThisCombat(false);
 	}
 
-	public static void executeAllyEffects(Card c) {
-		if(c.getName().equals("Kazandu Blademaster") || c.getName().equals("Makindi Shieldmate")
-				|| c.getName().equals("Nimana Sell-Sword") || c.getName().equals("Oran-Rief Survivalist")
-				|| c.getName().equals("Tuktuk Grunts") || c.getName().equals("Umara Raptor")
-				|| c.getName().equals("Hada Freeblade") || c.getName().equals("Bojuka Brigand")
-				|| c.getName().equals("Graypelt Hunter")) ally_Generic_P1P1(c);
-	}
-
-	private static boolean showAllyDialog(Card c) {
-		AllZone.Display.setCard(c);
-		String[] choices = {"Yes", "No"};
-
-		Object q = null;
-
-		q = GuiUtils.getChoiceOptional("Use " + c.getName() + "'s Ally ability?", choices);
-
-		if(q == null || q.equals("No")) return false;
-		else return true;
-	}
-
-	private static void ally_Generic_P1P1(Card c) {
-		final Card crd = c;
-
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				crd.addCounter(Counters.P1P1, 1);
-			}
-		};
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append(c.getName()).append(" - Ally: gets a +1/+1 counter.");
-		ability.setStackDescription(sb.toString());
-
-		if(c.getController().equals(AllZone.HumanPlayer)) {
-			if(showAllyDialog(c)) AllZone.Stack.add(ability);
-		}
-
-		else if(c.getController().equals(AllZone.ComputerPlayer)) AllZone.Stack.add(ability);
-	}
-
 	public static void executeDestroyCardEffects(Card c, Card destroyed) {
 		if(destroyed.isCreature()) executeDestroyCreatureCardEffects(c, destroyed);
 		if(destroyed.isLand()) executeDestroyLandCardEffects(c, destroyed);
