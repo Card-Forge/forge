@@ -1410,6 +1410,7 @@ class CardFactory_Lands {
             
         }//*************** END ************ END **************************
         
+        /*converted to keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Karakas")) {
             final Ability_Tap ability = new Ability_Tap(card, "0") {
@@ -1472,6 +1473,7 @@ class CardFactory_Lands {
             ability.setBeforePayMana(runtime);
             
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Pendelhaven")) {
