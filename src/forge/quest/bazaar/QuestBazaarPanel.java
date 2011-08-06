@@ -3,8 +3,10 @@ package forge.quest.bazaar;
 import forge.quest.QuestMainFrame;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -41,8 +43,6 @@ public class QuestBazaarPanel extends JPanel{
         buttonPanelMain.setLayout(new GridLayout(stallList.size(),1));
         
         stallPanel.setLayout(stallLayout);
-        stallPanel.setBorder(new LineBorder(Color.BLUE, 2));
-
         List<JToggleButton> buttonList = new LinkedList<JToggleButton>();
 
         double maxWidth=0;
@@ -87,7 +87,7 @@ public class QuestBazaarPanel extends JPanel{
         buttonList.get(0).setSelected(true);
         this.selectedStall = buttonList.get(0);
 
-        Dimension max = new Dimension((int)maxWidth,(int)maxHeight);
+        Dimension max = new Dimension((int)maxWidth, (int)maxHeight);
 
         for (JToggleButton button : buttonList){
             button.setMinimumSize(max);
@@ -102,8 +102,6 @@ public class QuestBazaarPanel extends JPanel{
                 QuestBazaarPanel.this.mainFrame.showPane(QuestMainFrame.MAIN_PANEL);
             }
         });
-
-        buttonPanel.setBorder(new LineBorder(Color.RED, 2));
 
         buttonPanel.add(quitButton, BorderLayout.SOUTH);
 

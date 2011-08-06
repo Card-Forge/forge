@@ -69,8 +69,8 @@ public class QuestPetStall extends QuestAbstractBazaarStall {
         switch (petType) {
             case WOLF:
                 if (questData.getWolfPetLevel() == 0) {
-                    sb.append("This ferocious animal may have been raised<br> in captivity, but it has been trained to kill.<br>");
-                    sb.append("Eats goblins for breakfast.<br><br>");
+                    sb.append("This ferocious animal may have been raised in captivity, but it has been trained to<br>kill.<br>");
+                    sb.append("<em>Eats goblins for breakfast.<em><br><br>");
                     sb.append("<u><b>Level 1</b></u>: 1/1<br>");
                     sb.append("<u><b>Next Level</b></u>: 1/2<br>");
                     sb.append("<u><b>Can learn</b></u>: Flanking");
@@ -91,8 +91,8 @@ public class QuestPetStall extends QuestAbstractBazaarStall {
                 break;
             case CROC:
                 if (questData.getCrocPetLevel() == 0) {
-                    sb.append("With its razor sharp teeth, this swamp-dwelling monster is extremely dangerous.");
-                    sb.append("Crikey mate!<br><br>");
+                    sb.append("With its razor sharp teeth, this swamp-dwelling monster is extremely dangerous.<br>");
+                    sb.append("<em>Crikey mate!<em><br><br>");
                     sb.append("<u><b>Level 1</b></u>: 1/1<br>");
                     sb.append("<u><b>Next Level</b></u>: 2/1<br>");
                     sb.append("<u><b>Can learn</b></u>: Swampwalk");

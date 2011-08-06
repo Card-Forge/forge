@@ -7,7 +7,10 @@ import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -75,7 +78,7 @@ public abstract class QuestAbstractBazaarItem {
             }
         });
 
-        if (AllZone.QuestData.getCredits() <= price){
+        if (AllZone.QuestData.getCredits() < price){
             purchaseButton.setEnabled(false);
         }
 
