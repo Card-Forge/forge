@@ -9,6 +9,7 @@ import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
+import forge.CombatUtil;
 import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
@@ -157,7 +158,7 @@ public class AbilityFactory_Pump {
     	return AbilityFactory.calculateAmount(hostCard, numDefense, sa);
     }
 
-    private CardList getPumpCreatures(int defense, int attack) {
+    private CardList getPumpCreatures(final int defense, int attack) {
     	
         final boolean kHaste = Keywords.contains("Haste");
         final boolean kSize = Keywords.size() > 0;
@@ -169,18 +170,28 @@ public class AbilityFactory_Pump {
         CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
         list = list.filter(new CardListFilter() {
             public boolean addCard(Card c) {
-                boolean hSick = c.hasSickness();
                 if (!CardFactoryUtil.canTarget(hostCard, c))
                 	return false;
+                
+                if (c.getNetDefense() + defense <= 0) //don't kill the creature
+                	return false;
             	
-                if(hSick && kHaste) 
+                //give haste to creatures that can attack
+                if(c.hasSickness() && kHaste && AllZone.Phase.isPlayerTurn(AllZone.ComputerPlayer) && CombatUtil.canAttackNextTurn(c))
                     return true;
                     
+                //will the creature attack (only relevant for sorcery speed)
                 boolean toAttack = CardFactoryUtil.AI_doesCreatureAttack(c) && AllZone.Phase.isBefore(Constant.Phase.Combat_Declare_Attackers);
-                boolean combatant = (AllZone.Phase.isAfter(Constant.Phase.Combat_Declare_Attackers) && (c.isBlocking() || AllZone.Combat.isAttacking(c))); 
+                //is the creature in combat (and the opponent has made its choices)
+                boolean combatant = (c.isBlocking()
+                		|| (AllZone.Phase.isAfter(Constant.Phase.Combat_Declare_Blockers) && AllZone.Combat.isAttacking(c)));
+                //if the life of the computer is in danger, try to pump potential blockers before declaring blocks
+                boolean emergencyBlock = (CombatUtil.lifeInDanger(AllZone.Combat) 
+                		&& AllZone.Phase.isAfter(Constant.Phase.Combat_Declare_Attackers) && CombatUtil.canBlock(c, AllZone.Combat));
+                //Don't add duplicate keywords
                 boolean hKW = c.hasAnyKeyword(KWs);
                 
-                return ((toAttack  || combatant) && (kSize && !hKW)); //Don't add duplicate keywords
+                return ((toAttack  || combatant || emergencyBlock) && (kSize && !hKW)); 
             }
         });
         return list;
@@ -226,7 +237,11 @@ public class AbilityFactory_Pump {
     	
     	// temporarily disabled until AI is improved
     	if (AF.getAbCost().getSacCost()) return false;	
-    	if (AF.getAbCost().getLifeCost())	 return false;
+    	if (AF.getAbCost().getLifeCost()) {
+    		if (!AF.isCurse()) return false; //Use life only to kill creatures
+    		if (AllZone.ComputerPlayer.getLife() - AF.getAbCost().getLifeAmount() < 4)
+				return false;
+    	}
     	if (AF.getAbCost().getSubCounter()){
     		// instead of never removing counters, we will have a random possibility of failure.
     		// all the other tests still need to pass if a counter will be removed
@@ -235,7 +250,7 @@ public class AbilityFactory_Pump {
     		if (count.equals(Counters.P1P1)){	// 10% chance to remove +1/+1 to pump
     			chance = .1;
     		}
-    		else if (count.equals(Counters.CHARGE)){ // 50% chance to remove +1/+1 to pump
+    		else if (count.equals(Counters.CHARGE)){ // 50% chance to remove charge to pump
     			chance = .5;
     		}
             Random r = MyRandom.random;
@@ -333,8 +348,7 @@ public class AbilityFactory_Pump {
 
     private boolean doTgtAI(SpellAbility sa, int defense, int attack, boolean mandatory)
     {
-        String curPhase = AllZone.Phase.getPhase();
-        if(!mandatory && curPhase.equals(Constant.Phase.Main2) && !(AF.isCurse() && defense < 0))
+        if(!mandatory && AllZone.Phase.isAfter(Constant.Phase.Combat_Declare_Blockers_InstantAbility) && !(AF.isCurse() && defense < 0))
         	return false;
         
 		Target tgt = AF.getAbTgt();
