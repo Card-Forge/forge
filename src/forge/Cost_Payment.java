@@ -463,7 +463,7 @@ public class Cost_Payment {
     	// make sure ComputerUtil.canPayAdditionalCosts() is updated so the AI knows if they can Pay the cost
     	ArrayList<Card> sacCard = new ArrayList<Card>();
     	ArrayList<Card> exileCard = new ArrayList<Card>();
-    	ArrayList<Card> exileFromGraveCard = new ArrayList<Card>();
+    	CardList exileFromGraveCard = new CardList();
     	ArrayList<Card> tapXCard = new ArrayList<Card>();
     	ArrayList<Card> returnCard = new ArrayList<Card>();
     	ability.setActivatingPlayer(AllZone.ComputerPlayer);
@@ -502,8 +502,8 @@ public class Cost_Payment {
     		if (cost.getExileFromGraveThis())
     			exileFromGraveCard.add(card);
     		else{
-    			for(int i = 0; i < cost.getExileFromGraveAmount(); i++)
-    				exileFromGraveCard.add(ComputerUtil.chooseExileFromGraveType(cost.getExileFromGraveType(), card, ability.getTargetCard()));
+    			exileFromGraveCard = ComputerUtil.chooseExileFromGraveType(
+    					cost.getExileFromGraveType(), card, ability.getTargetCard(),cost.getExileFromGraveAmount());
     		}
     		
 	    	if (exileFromGraveCard.size() != cost.getExileFromGraveAmount()){
@@ -1171,7 +1171,7 @@ public class Cost_Payment {
                         Card c = (Card) o;
                         typeList.remove(c);
                     	AllZone.GameAction.exile(c);
-                    	if (i == nNeeded) done();
+                    	if (i == nNeeded-1) done();
                     }
                 }
 			}
@@ -1195,88 +1195,6 @@ public class Cost_Payment {
         };
         return target;
     }//exileFromGraveType()
-                    /*    
-                if(card.getController().equals(AllZone.HumanPlayer) && AllZoneUtil.isCardInPlayerGraveyard(card.getController(), card)) {
-        			StringBuilder sb = new StringBuilder();
-        			sb.append(card.getName());
-        			sb.append(" - Exile?");
-        			Object[] possibleValues = {"Yes", "No"};
-                	Object choice = JOptionPane.showOptionDialog(null, sb.toString(), card.getName() + " - Cost",  
-                			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-                			null, possibleValues, possibleValues[0]);
-                    if(choice.equals(0)) {
-                    	payment.setPayExileFromGrave(true);
-                    	AllZone.GameAction.exile(card);
-                    	stop();
-                    	payment.payCost();
-                    }
-                    else{
-                    	payment.setCancel(true);
-                    	stop();
-                    	payment.payCost();
-                    }
-                }
-            }
-        };
-        return target;
-    }//input_exile()
-    }
-		private CardList typeList;
-        private int nNeeded = payment.getCost().getExileFromGraveAmount();
-            
-            @Override
-            public void showMessage() {
-            	StringBuilder msg = new StringBuilder("Exile ");
-            	int nLeft = nNeeded - nExiles;
-            	msg.append(nLeft).append(" ");
-            	msg.append(type);
-            	if (nLeft > 1){
-            		msg.append("s");
-            	}
-            	msg.append(" from your graveyard");
-            	
-                PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, spell.getSourceCard().getController());
-                typeList = new CardList(grave.getCards());
-                typeList = typeList.getValidCards(type.split(";"),spell.getActivatingPlayer() ,spell.getSourceCard());
-                AllZone.Display.showMessage(msg.toString());
-                ButtonUtil.enableOnlyCancel();
-            }
-            
-            @Override
-            public void selectButtonCancel() {
-            	cancel();
-            }
-            
-            @Override
-            public void selectCard(Card card, PlayerZone zone) {
-                if(typeList.contains(card)) {
-                	nExiles++;
-                	AllZone.GameAction.exile(card);
-                	typeList.remove(card);
-                    //in case nothing else to exile
-                    if(nExiles == nNeeded) 
-                    	done();
-                    else if (typeList.size() == 0)	// this really shouldn't happen
-                    	cancel();
-                    else
-                    	showMessage();
-                }
-            }
-            
-            public void done(){
-            	payment.setPayExileFromGrave(true);
-            	stop();
-            	payment.payCost();
-            }
-            
-            public void cancel(){
-            	payment.setCancel(true);
-            	stop();
-            	payment.payCost();
-            }
-        };
-        return target;
-    }//exileFromGraveType()*/
     
     public static Input input_tapXCost(final int nCards, final String cardType, final CardList cardList, SpellAbility sa, final Cost_Payment payment) {
         //final SpellAbility sp = sa;

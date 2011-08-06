@@ -2553,7 +2553,8 @@ public class Card extends MyObservable {
             	return false;
             if (incR[0].equals("Permanent") && (isType("Instant") || isType("Sorcery")))
             	return false;
-            if(!incR[0].equals("Card") && !incR[0].equals("Spell") && !incR[0].equals("Permanent") && !(isType(incR[0])))
+            if(!incR[0].equals("card") && !incR[0].equals("Card") && !incR[0].equals("Spell") 
+            		&& !incR[0].equals("Permanent") && !(isType(incR[0])))
             	return false; //Check for wrong type
             
             if(incR.length > 1) {

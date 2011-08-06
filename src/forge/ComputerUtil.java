@@ -682,8 +682,8 @@ public class ComputerUtil
       PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
       CardList typeList = new CardList(play.getCards());
       typeList = typeList.getValidCards(type.split(","),activate.getController() ,activate);
-	  if (target != null && target.getController().equals(AllZone.ComputerPlayer) && typeList.contains(target)) // don't sacrifice the card we're pumping
-		  typeList.remove(target);
+	  if (target != null && target.getController().equals(AllZone.ComputerPlayer) && typeList.contains(target))  
+		  typeList.remove(target);		// don't sacrifice the card we're pumping
 	  
 	  if (typeList.size() == 0)
 		  return null;
@@ -715,7 +715,7 @@ public class ComputerUtil
 	  return typeList.get(0);
   }
   
-  static public Card chooseExileFromGraveType(String type, Card activate, Card target){
+  static public CardList chooseExileFromGraveType(String type, Card activate, Card target, int amount){
 	  PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer);
       CardList typeList = new CardList(grave.getCards());
       typeList = typeList.getValidCards(type.split(","),activate.getController() ,activate);
@@ -726,7 +726,10 @@ public class ComputerUtil
 		  return null;
 	  
       CardListUtil.sortAttackLowFirst(typeList);
-	  return typeList.get(0);
+      CardList exileList = new CardList();
+      
+      for(int i = 0; i < amount; i++) exileList.add(typeList.get(i));
+	  return exileList;
   }
   
   static public Card chooseTapType(String type, Card activate, boolean tap, int index){

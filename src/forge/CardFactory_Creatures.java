@@ -3907,7 +3907,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Psychatog")) {
             final Command untilEOT = new Command() {
@@ -4045,7 +4045,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
             card.addSpellAbility(ability2);
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Jugan, the Rising Star")) {
