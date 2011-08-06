@@ -287,8 +287,14 @@ public class Gui_Quest extends JFrame implements NewConstants{
         	this.getContentPane().add(petComboBox, null);
         	
         	int questsPlayed = questData.getQuestsPlayed();
+        	int div = 6;
+        	if (questData.getGearLevel() == 1)
+        		div = 5;
+        	else if (questData.getGearLevel() == 2)
+        		div = 4;
+        		
         	//System.out.println("questsPlayed: " + questsPlayed);
-        	if (questData.getWin() / 5 < questsPlayed || questData.getWin() < 25)
+        	if (questData.getWin() / div < questsPlayed || questData.getWin() < 25)
         		questsButton.setEnabled(false);
         	else
         		questsButton.setEnabled(true);
@@ -326,8 +332,6 @@ public class Gui_Quest extends JFrame implements NewConstants{
     
     void infoButton_actionPerformed(ActionEvent e)
     {
-        
-        
         StringBuilder sb = new StringBuilder();
         sb.append("Abraham Lincoln 3	hard	Some flying creatures with Flamebreak and life gaining");
         sb.append("\r\n");

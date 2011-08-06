@@ -237,14 +237,18 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     	if (!Constant.Quest.fantasyQuest[0])
     		AllZone.GameAction.newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
     	else{
-    		if (AllZone.QuestAssignment != null)
+    		int extraLife = 0;
+    		if (AllZone.QuestAssignment != null) {
     			QuestUtil.setupQuest(AllZone.QuestAssignment);
+    			if (AllZone.QuestData.getGearLevel() == 2)
+    				extraLife = 3;
+    		}
     		//AllZone.GameAction.newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0], humanList, computerList, humanLife, computerLife);
     		CardList humanList = QuestUtil.getHumanPlantAndPet(AllZone.QuestData, AllZone.QuestAssignment);
     		CardList computerList = new CardList();
     		
 
-    		int humanLife = QuestUtil.getLife(AllZone.QuestData);
+    		int humanLife = QuestUtil.getLife(AllZone.QuestData) + extraLife;
     		int computerLife = 20;
     		if (AllZone.QuestAssignment!=null)
     			computerLife = AllZone.QuestAssignment.getComputerLife();
@@ -262,15 +266,19 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         if (!Constant.Quest.fantasyQuest[0])
     		AllZone.GameAction.newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
     	else{
+    		int extraLife = 0;
     		//AllZone.GameAction.newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0], humanList, computerList, humanLife, computerLife);
-    		if (AllZone.QuestAssignment != null)
+    		if (AllZone.QuestAssignment != null) {
     			QuestUtil.setupQuest(AllZone.QuestAssignment);
-    		
+    			if (AllZone.QuestData.getGearLevel() == 2)
+    				extraLife = 3;
+    		}
+    			
     		CardList humanList = QuestUtil.getHumanPlantAndPet(AllZone.QuestData, AllZone.QuestAssignment);
     		//CardList computerList = QuestUtil.getComputerCreatures(AllZone.QuestData, AllZone.QuestAssignment);
     		CardList computerList = new CardList();
     		
-    		int humanLife = QuestUtil.getLife(AllZone.QuestData);
+    		int humanLife = QuestUtil.getLife(AllZone.QuestData) +extraLife;
     		int computerLife = 20;
     		
     		if (AllZone.QuestAssignment!=null)

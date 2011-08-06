@@ -774,7 +774,7 @@ public class GameAction {
     
     public void destroy(Card c) {
         if(!AllZone.GameAction.isCardInPlay(c)
-                || (c.getKeyword().contains("Indestructible") && (!c.isCreature() || c.getNetDefense() > 0))) return;
+                || (c.getKeyword().contains("Indestructible") && (!c.isCreature() || c.getNetDefense() > 0))) return;        
         
         if(c.getShield() > 0) {
             c.subtractShield();

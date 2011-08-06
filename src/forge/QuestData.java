@@ -60,6 +60,7 @@ public class QuestData implements NewConstants {
     private int 				  estatesLevel;
     private int					  luckyCoinLevel;
     private int					  sleightOfHandLevel;
+    private int					  gearLevel;
     
     private int					  questsPlayed;
     
@@ -263,6 +264,7 @@ public class QuestData implements NewConstants {
             data.estatesLevel = state.estatesLevel;
             data.luckyCoinLevel = state.luckyCoinLevel;
             data.sleightOfHandLevel = state.sleightOfHandLevel;
+            data.gearLevel = state.gearLevel;
             data.questsPlayed = state.questsPlayed;
             data.availableQuests = state.availableQuests;
             data.completedQuests = state.completedQuests;
@@ -719,6 +721,16 @@ public class QuestData implements NewConstants {
     	sleightOfHandLevel+=n;
     }
     
+    public int getGearLevel()
+    {
+    	return gearLevel;
+    }
+    
+    public void addGearLevel(int n)
+    {
+    	gearLevel+=n;
+    }
+    
     public int getQuestsPlayed()
     {
     	return questsPlayed;
@@ -849,6 +861,7 @@ public class QuestData implements NewConstants {
             state.estatesLevel = q.estatesLevel;
             state.luckyCoinLevel = q.luckyCoinLevel;
             state.sleightOfHandLevel = q.sleightOfHandLevel;
+            state.gearLevel = q.gearLevel;
             state.questsPlayed = q.questsPlayed;
             state.availableQuests = q.availableQuests;
             

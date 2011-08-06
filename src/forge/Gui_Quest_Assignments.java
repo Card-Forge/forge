@@ -265,7 +265,10 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
     	
     	Constant.Quest.oppIconName[0] = selectedQuest.getIconName();
     	
-	    AllZone.GameAction.newGame(hDeck, computerDeck, QuestUtil.getHumanPlantAndPet(questData, selectedQuest), new CardList(), questData.getLife(), 
+    	int extraLife = 0;
+    	if (questData.getGearLevel() == 2)
+    		extraLife = 3;
+	    AllZone.GameAction.newGame(hDeck, computerDeck, QuestUtil.getHumanPlantAndPet(questData, selectedQuest), new CardList(), questData.getLife()+extraLife, 
 	    						   selectedQuest.getComputerLife(), selectedQuest);
 	    
 	    AllZone.Display = new GuiDisplay3();
