@@ -1,3 +1,62 @@
+Bogardan Hellkite
+6 R R
+Creature Dragon
+no text
+5/5
+Flash
+Flying
+WheneverKeyword:EntersBattleField:Self:Play:Damage/5:InputType - CreatureORPlayer:ASAP:No_Condition:MultipleTargets:When Bogardan Hellkite enters the battlefield, it deals 5 damage divided as you choose among any number of target creatures and/or players.
+
+Sparkmage Apprentice
+1 R
+Creature Human Cleric
+no text
+1/1
+WheneverKeyword:EntersBattleField:Self:Play:Damage/1:InputType - CreatureORPlayer:ASAP:No_Condition:SingleTarget:When Sparkmage Apprentice enters the battlefield, it deals 1 damage to target creature or player.
+
+Akoum Boulderfoot
+4 R R
+Creature Giant Warrior
+no text
+4/5
+WheneverKeyword:EntersBattleField:Self:Play:Damage/1:InputType - CreatureORPlayer:ASAP:No_Condition:SingleTarget:When Akoum Boulderfoot enters the battlefield, it deals 1 damage to target creature or player.
+
+Ghitu Slinger
+2 R
+Creature Human Nomad
+no text
+2/2
+WheneverKeyword:EntersBattleField:Self:Play:Damage/2:InputType - CreatureORPlayer:ASAP:No_Condition:SingleTarget:When Ghitu Slinger enters the battlefield, it deals 2 damage to target creature or player.
+Echo:2 R
+
+Soldevi Steam Beast
+5
+Artifact Creature Beast
+no text
+4/2
+WheneverKeyword:BecomesTapped:Self:Play:ModifyLife/2:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever Soldevi Steam Beast becomes tapped, target opponent gains 2 life.
+RegenerateMe:2
+
+Runed Servitor
+2
+Artifact Creature Construct
+no text
+2/2
+WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:DrawCards/1!DrawCards/1:ControllingPlayer_Self!ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:When Runed Servitor is put into a graveyard from the battlefield, each player draws a card.
+
+Mind's Eye
+5
+Artifact
+no text
+WheneverKeyword:DrawCard:ControllingPlayer_Opponent:Play:DrawCards/1:ControllingPlayer_Self:ASAP:PayMana/1:No Special Condition:Whenever an opponent draws a card, you may pay {1}. If you do, draw a card.
+
+Enatu Golem
+6
+Artifact Creature Golem
+no text
+3/5
+WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:ModifyLife/4:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Enatu Golem is put into a graveyard from the battlefield, you gain 4 life.
+
 Fauna Shaman
 1 G
 Creature Elf Shaman

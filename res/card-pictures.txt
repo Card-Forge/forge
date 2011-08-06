@@ -38,7 +38,16 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
-arrogant_wurm.jpg              	http://www.wizards.com/global/images/magic/general/arrogant_wurm.jpg
+bogardan_hellkite.jpg              	http://www.wizards.com/global/images/magic/general/bogardan_hellkite.jpg
+sparkmage_apprentice.jpg                http://www.wizards.com/global/images/magic/general/sparkmage_apprentice.jpg
+akoum_boulderfoot.jpg			http://www.wizards.com/global/images/magic/general/akoum_boulderfoot.jpg
+ghitu_slinger.jpg              		http://www.wizards.com/global/images/magic/general/ghitu_slinger.jpg
+soldevi_steam_beast.jpg                 http://www.wizards.com/global/images/magic/general/soldevi_steam_beast.jpg
+runed_servitor.jpg              	http://www.wizards.com/global/images/magic/general/runed_servitor.jpg
+minds_eye.jpg                  		http://www.wizards.com/global/images/magic/general/minds_eye.jpg
+enatu_golem.jpg				http://www.wizards.com/global/images/magic/general/enatu_golem.jpg
+fauna_shaman.jpg              		http://www.wizards.com/global/images/magic/general/fauna_shaman.jpg
+arrogant_wurm.jpg              		http://www.wizards.com/global/images/magic/general/arrogant_wurm.jpg
 basking_rootwalla.jpg              	http://www.wizards.com/global/images/magic/general/basking_rootwalla.jpg
 vedalken_heretic.jpg              	http://www.wizards.com/global/images/magic/general/vedalken_heretic.jpg
 juniper_order_ranger.jpg                http://www.wizards.com/global/images/magic/general/juniper_order_ranger.jpg
