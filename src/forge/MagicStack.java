@@ -486,27 +486,29 @@ public class MagicStack extends MyObservable {
 				}
 
 			}
-			
-			//Run trigger
-    		HashMap<String,Object> runParams = new HashMap<String,Object>();
-    		runParams.put("CastSA", sp);
-    		AllZone.TriggerHandler.runTrigger("SpellAbilityCast", runParams);
-    		
-    		if(sp.isSpell())
-    		{
-    			AllZone.TriggerHandler.runTrigger("SpellCast", runParams);
-    		}
-    		if(sp.isAbility())
-    		{
-    			AllZone.TriggerHandler.runTrigger("AbilityCast", runParams);
-    		}
-    		if(sp.isCycling())
-    		{
-    			runParams.clear();
-    			runParams.put("Card", sp.getSourceCard());
-    			AllZone.TriggerHandler.runTrigger("Cycled", runParams);
-    		}
 
+            if(!sp.getSourceCard().isCopiedSpell()) //Copied spells aren't cast per se so triggers shouldn't run for them.
+            {
+                //Run trigger
+                HashMap<String,Object> runParams = new HashMap<String,Object>();
+                runParams.put("CastSA", sp);
+                AllZone.TriggerHandler.runTrigger("SpellAbilityCast", runParams);
+
+                if(sp.isSpell())
+                {
+                    AllZone.TriggerHandler.runTrigger("SpellCast", runParams);
+                }
+                if(sp.isAbility())
+                {
+                    AllZone.TriggerHandler.runTrigger("AbilityCast", runParams);
+                }
+                if(sp.isCycling())
+                {
+                    runParams.clear();
+                    runParams.put("Card", sp.getSourceCard());
+                    AllZone.TriggerHandler.runTrigger("Cycled", runParams);
+                }
+            }
 		}
 		
 		if(sp instanceof Spell_Permanent && sp.getSourceCard().getName().equals("Mana Vortex")) {
