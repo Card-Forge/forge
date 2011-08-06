@@ -259,7 +259,8 @@ public class AbilityFactory_Sacrifice {
 				CardList computerList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
 				computerList = computerList.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 				
-				if(humanList.size() < amount || computerList.size() >= amount ) return false;
+				//Since all of the cards have remAIDeck:True, I enabled 1 for 1 (or X for X) trades for special decks
+				if(humanList.size() < amount /*|| computerList.size() >= amount */) return false;
 			}
 		}
 		
