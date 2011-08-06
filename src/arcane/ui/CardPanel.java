@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
+import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardContainer;
@@ -47,6 +48,8 @@ public class CardPanel extends JPanel implements CardContainer{
 	static private final float TEXT_GLOW_INTENSITY = 3f;
 	static private final float rotCenterToTopCorner = 1.0295630140987000315797369464196f;
 	static private final float rotCenterToBottomCorner = 0.7071067811865475244008443621048f;
+	
+	static private boolean beenHere = false;
 
 	public Card gameCard;
 	public CardPanel attachedToPanel;
@@ -185,6 +188,7 @@ public class CardPanel extends JPanel implements CardContainer{
 		if (showCastingCost && !isAnimationPanel && cardWidth < 200) {
 			int width = ManaSymbols.getWidth(gameCard.getManaCost());
 			ManaSymbols.draw(g, gameCard.getManaCost(), cardXOffset + cardWidth / 2 - width / 2, cardYOffset + cardHeight / 2);
+			beenHere = true;
 		}
 		
 		//int yOff = (cardHeight/4) + 2;
@@ -195,6 +199,32 @@ public class CardPanel extends JPanel implements CardContainer{
 		
 		if (showCastingCost && !isAnimationPanel && cardWidth < 200 && getCard().isCreature() && getCard().hasSickness() && AllZoneUtil.isCardInPlay(getCard())) 
 			ManaSymbols.drawSymbol("summonsick", g, cardXOffset + cardWidth / 2 - 16, cardYOffset + cardHeight - (cardHeight/8) - 16 );
+		
+		if (beenHere && getCard() != null) {
+			if (getCard().getName().equals("Mana Pool") && !isAnimationPanel) {
+				
+				if (AllZone.ManaPool != null) {
+					String s = AllZone.ManaPool.getManaList();
+					if (!s.equals("|||||||||||")) {
+						System.out.println("ManaList: " + s);
+						
+						String mList[] = s.split("\\|", 12);
+						
+						int n = 0;
+						for (int i=0; i<2; i++) {
+							for (int j=0; j<6; j++) {
+								if (!mList[n].equals("")){
+									int width = ManaSymbols.getWidth(mList[n]);
+									ManaSymbols.draw(g, mList[n], cardXOffset + ((i + 1) * (cardWidth / 3)) - width / 2, cardYOffset + ((j + 1) * (cardHeight / 7)));
+								}
+								
+								n++;
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	public void layout () {		
