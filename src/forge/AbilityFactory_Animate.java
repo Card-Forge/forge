@@ -136,7 +136,10 @@ public class AbilityFactory_Animate {
 		//sb.append(types)
 		//sb.append(keywords)
 		//sb.append(triggers)
-		if(!permanent) sb.append(" until end of turn.");
+		if(!permanent) {
+			if(params.containsKey("UntilEndOfCombat")) sb.append(" until end of combat.");
+			else sb.append(" until end of turn.");
+		}
 		else sb.append(".");
 
 		Ability_Sub abSub = sa.getSubAbility();
@@ -281,7 +284,10 @@ public class AbilityFactory_Animate {
 				}
 			};
 
-			if(!permanent) AllZone.EndOfTurn.addUntil(unactivate);
+			if(!permanent) {
+				if(params.containsKey("UntilEndOfCombat")) AllZone.EndOfCombat.addUntil(unactivate);
+				else AllZone.EndOfTurn.addUntil(unactivate);
+			}
 		}
 
 		if (af.hasSubAbility()){

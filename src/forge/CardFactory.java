@@ -6381,65 +6381,6 @@ public class CardFactory implements NewConstants {
         	ability.setDescription(abCost+"Exchange life totals with target opponent. Activate this ability only during your upkeep.");
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Jade Statue")) {
-        	/*
-        	 * 2: Jade Statue becomes a 3/6 Golem artifact creature until
-        	 * end of combat. Activate this ability only during combat.
-        	 */
-        	final long[] timeStamp = new long[1];
-            
-            final SpellAbility a1 = new Ability(card, "2") {
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public boolean canPlay() {
-                	return Phase.canPlayDuringCombat();
-                }
-                
-                @Override
-                public void resolve() {
-                    Card c = card;
-                    String[] types = { "Creature", "Golem" };
-                    String[] keywords = {  };
-                    timeStamp[0] = CardFactoryUtil.activateManland(c, 3, 6, types, keywords, "4");
-
-                    final Command untilEOC = new Command() {
-        				private static final long serialVersionUID = -8432597117196682284L;
-        				long stamp = timeStamp[0];
-        				public void execute() {
-                            Card c = card;
-                            String[] types = { "Creature", "Golem" };
-                            String[] keywords = {  };
-                            CardFactoryUtil.revertManland(c, types, keywords, "4", stamp);
-                        }
-                    };
-                    
-                    AllZone.EndOfCombat.addUntil(untilEOC);
-                }
-            };//SpellAbility
-            
-            card.addSpellAbility(a1);
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" becomes a 3/6 Golem creature until End of Combat");
-            a1.setStackDescription(sb.toString());
-            
-            Command paid1 = new Command() {
-				private static final long serialVersionUID = 1531378274457977155L;
-
-				public void execute() {
-                    AllZone.Stack.add(a1);
-                }
-            };
-            
-            a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
-        }//*************** END ************ END **************************
 
         
         //*************** START *********** START **************************
