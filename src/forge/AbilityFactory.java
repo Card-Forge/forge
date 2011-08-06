@@ -339,6 +339,15 @@ public class AbilityFactory {
 				SA = AbilityFactory_AlterLife.createDrawbackLoseLife(this);
 		}
 		
+		if (API.equals("SetLife")){
+			if (isAb)
+				SA = AbilityFactory_AlterLife.createAbilitySetLife(this);
+			else if (isSp)
+				SA = AbilityFactory_AlterLife.createSpellSetLife(this);
+			else if (isDb)
+				SA = AbilityFactory_AlterLife.createDrawbackSetLife(this);
+		}
+		
 		if (API.equals("Poison")){
 			if (isAb)
 				SA = AbilityFactory_AlterLife.createAbilityPoison(this);

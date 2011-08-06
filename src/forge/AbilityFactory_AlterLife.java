@@ -742,4 +742,255 @@ public class AbilityFactory_AlterLife {
 		 
 		 return true;
 	}
-}
+
+	// *************************************************************************
+	// ************************** SET LIFE *************************************
+	// *************************************************************************
+
+	public static SpellAbility createAbilitySetLife(final AbilityFactory AF) {
+		final SpellAbility abSetLife = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+			private static final long serialVersionUID = -7375434097541097668L;
+			final AbilityFactory af = AF;
+
+			@Override
+			public String getStackDescription() {
+				return setLifeStackDescription(af, this);
+			}
+
+			public boolean canPlayAI() {
+				return setLifeCanPlayAI(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				setLifeResolve(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return setLifeDoTriggerAI(af, this, mandatory);
+			}
+
+		};
+		return abSetLife;
+	}
+
+	public static SpellAbility createSpellSetLife(final AbilityFactory AF) {
+		final SpellAbility spSetLife = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+			private static final long serialVersionUID = -94657822256270222L;
+			final AbilityFactory af = AF;
+
+			@Override
+			public String getStackDescription() {
+				return setLifeStackDescription(af, this);
+			}
+
+			public boolean canPlayAI() {
+				// if X depends on abCost, the AI needs to choose which card he would sacrifice first
+				// then call xCount with that card to properly calculate the amount
+				// Or choosing how many to sacrifice 
+				return setLifeCanPlayAI(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				setLifeResolve(af, this);
+			}
+
+		};
+		return spSetLife;
+	}
+
+	public static SpellAbility createDrawbackSetLife(final AbilityFactory AF) {
+		final SpellAbility dbSetLife = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()) {
+			private static final long serialVersionUID = -7634729949893534023L;
+			final AbilityFactory af = AF;
+
+			@Override
+			public String getStackDescription() {
+				return setLifeStackDescription(af, this);
+			}
+
+			public boolean canPlayAI() {
+				// if X depends on abCost, the AI needs to choose which card he would sacrifice first
+				// then call xCount with that card to properly calculate the amount
+				// Or choosing how many to sacrifice 
+				return setLifeCanPlayAI(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				setLifeResolve(af, this);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return true;
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return setLifeDoTriggerAI(af, this, mandatory);
+			}
+
+		};
+		return dbSetLife;
+	}
+
+	private static String setLifeStackDescription(AbilityFactory af, SpellAbility sa) {
+		StringBuilder sb = new StringBuilder();
+		int amount = AbilityFactory.calculateAmount(af.getHostCard(), af.getMapParams().get("LifeAmount"), sa);
+
+		if (!(sa instanceof Ability_Sub))
+			sb.append(sa.getSourceCard().getName()).append(" -");
+
+		sb.append(" ");
+
+		ArrayList<Player> tgtPlayers;
+
+		Target tgt = af.getAbTgt();
+		if(tgt != null)
+			tgtPlayers = tgt.getTargetPlayers();
+		else
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+
+		for(Player player : tgtPlayers)
+			sb.append(player).append(" ");
+
+		sb.append("life total becomes ").append(amount).append(".");
+
+		Ability_Sub abSub = sa.getSubAbility();
+		if(abSub != null) {
+			sb.append(abSub.getStackDescription());
+		}
+
+		return sb.toString();
+	}
+
+	private static boolean setLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+		Random r = new Random();
+		//Ability_Cost abCost = sa.getPayCosts();
+		final Card source = sa.getSourceCard();
+		int life = AllZone.ComputerPlayer.getLife();
+		int hlife = AllZone.HumanPlayer.getLife();
+		String amountStr = af.getMapParams().get("LifeAmount");
+
+		if(!ComputerUtil.canPayCost(sa))
+			return false;
+
+		if(!AllZone.ComputerPlayer.canGainLife())
+			return false;
+
+		// TODO handle proper calculation of X values based on Cost and what would be paid
+		int amount;
+		//we shouldn't have to worry too much about PayX for SetLife
+		if(amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
+			// Set PayX here to maximum value.
+			int xPay = ComputerUtil.determineLeftoverMana(sa);
+			source.setSVar("PayX", Integer.toString(xPay));
+			amount = xPay;
+		}
+		else
+			amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+
+		// prevent run-away activations - first time will always return true
+		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
+
+		Target tgt = sa.getTarget();
+		if(tgt != null){
+			tgt.resetTargets();
+			if(tgt.canOnlyTgtOpponent()) {
+				tgt.addTarget(AllZone.HumanPlayer);
+				//if we can only target the human, and the Human's life would go up, don't play it.
+				//possibly add a combo here for Magister Sphinx and Higedetsu's (sp?) Second Rite
+				if(amount > hlife || !AllZone.HumanPlayer.canLoseLife()) return false;
+			}
+			else {
+				if(amount > life && life <= 10) tgt.addTarget(AllZone.ComputerPlayer);
+				else if(hlife > amount) tgt.addTarget(AllZone.HumanPlayer);
+				else if(amount > life) tgt.addTarget(AllZone.ComputerPlayer);
+				else return false;
+			}
+		}
+		else {
+			if(amount < life) return false;
+		}
+		
+		//if life is in danger, always activate
+		if(life < 3 && amount > life) return true;
+		
+		return ((r.nextFloat() < .6667) && chance);
+	}
+
+	private static boolean setLifeDoTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		int life = AllZone.ComputerPlayer.getLife();
+		int hlife = AllZone.HumanPlayer.getLife();
+		Card source = sa.getSourceCard();
+		String amountStr = af.getMapParams().get("LifeAmount");
+		if (!ComputerUtil.canPayCost(sa) && !mandatory)   // If there is a cost payment it's usually not mandatory
+			return false;
+		
+		int amount;
+		if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")){
+			// Set PayX here to maximum value.
+			int xPay = ComputerUtil.determineLeftoverMana(sa);
+			source.setSVar("PayX", Integer.toString(xPay));
+			amount = xPay;
+		}
+		else
+			amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+
+		// If the Target is gaining life, target self.
+		// if the Target is modifying how much life is gained, this needs to be handled better
+		Target tgt = sa.getTarget();
+		if (tgt != null){
+			tgt.resetTargets();
+			if (tgt.canOnlyTgtOpponent())
+				tgt.addTarget(AllZone.HumanPlayer);
+			else {
+				if(amount > life && life <= 10) tgt.addTarget(AllZone.ComputerPlayer);
+				else if(hlife > amount) tgt.addTarget(AllZone.HumanPlayer);
+				else if(amount > life) tgt.addTarget(AllZone.ComputerPlayer);
+				else return false;
+			}
+		}
+
+		// check SubAbilities DoTrigger?
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null) {
+			return abSub.doTrigger(mandatory);
+		}
+
+		return true;
+	}
+
+	private static void setLifeResolve(final AbilityFactory af, final SpellAbility sa) {
+		HashMap<String,String> params = af.getMapParams();
+		Card card = af.getHostCard();
+		int lifeAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
+		ArrayList<Player> tgtPlayers;
+
+		Target tgt = af.getAbTgt();
+		if(tgt != null && !params.containsKey("Defined"))
+			tgtPlayers = tgt.getTargetPlayers();
+		else
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+
+		for(Player p : tgtPlayers)
+			if(tgt == null || p.canTarget(af.getHostCard()))
+				p.setLife(lifeAmount, sa.getSourceCard());
+
+		if(af.hasSubAbility()) {
+			Ability_Sub abSub = sa.getSubAbility();
+			if(abSub != null) {
+				abSub.resolve();
+			}
+			else {
+				String DrawBack = params.get("SubAbility");
+				if(af.hasSubAbility())
+					CardFactoryUtil.doDrawBack(DrawBack, lifeAmount, card.getController(), card.getController().getOpponent(), tgtPlayers.get(0), card, null, sa);
+			}
+		}
+	}
+
+}//end class AbilityFactory_AlterLife
