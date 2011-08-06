@@ -1,0 +1,9 @@
+Name:Mind Ravel
+ManaCost:2 B
+Types:Sorcery
+Text:no text
+K:spDiscardTgt:TgtChoose:1:Target player discards a card.:CARDNAME - target player discards a card.
+K:Draw a card at the beginning of the next turn's upkeep.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_ravel .jpg
+End
