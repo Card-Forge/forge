@@ -1,3 +1,277 @@
+Mad Auntie
+2 B
+Creature Goblin Shaman
+Goblin creatures you control get +1/+1.
+1/1 
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mad_auntie.jpg
+
+Madrush Cyclops
+1 B R G
+Creature Cyclops Warrior
+Creatures you control have haste.
+3/4
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/madrush_cyclops.jpg
+
+Master of Etherium
+2 U
+Artifact Creature Vedalken Wizard
+Master of Etherium's power and toughness are each equal to the number of artifacts you control. Other artifact creatures you control get +1/+1.
+1/1
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_etherium.jpg
+
+Meng Huo, Barbarian King
+3 G G
+Legendary Creature Human Barbarian Soldier
+Other green creatures you control get +1/+1.
+4/4
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/meng_huo_barbarian_king.jpg
+
+Merfolk Sovereign
+1 U U
+Creature Merfolk
+Other Merfolk creatures you control get +1/+1.
+2/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_sovereign.jpg
+
+Oathsworn Giant
+4 W W
+Creature Giant Soldier
+no text
+3/4
+Vigilance
+StaticEffect:Play:Permanents you Control:PTBonus/0/2!Keyword/Vigilance:Type.Creature!NotSelf:Other creatures you control get +0/+2 and have vigilance.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/oathsworn_giant.jpg
+
+Primal Rage
+1 G
+Enchantment
+no text
+StaticEffect:Play:Permanents you Control:Keyword/Trample:Type.Creature:Creatures you control have trample. (If a creature you control would deal enough damage to its blockers to destroy them, you may have it deal the rest of its damage to defending player or planeswalker.)
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_rage.jpg
+
+Rage Reflection
+4 R R
+Enchantment
+no text
+StaticEffect:Play:Permanents you Control:Keyword/Double Strike:Type.Creature:Creatures you control have double strike.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rage_reflection.jpg
+
+Relentless Rats
+1 B B
+Creature Rat
+Relentless Rats gets +1/+1 for each other creature in play named Relentless Rats. A deck can have any number of cards named Relentless Rats.
+2/2
+SVar:RemAIDeck:True
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73573.jpg
+
+Resuscitate
+1 G
+Instant
+Until end of turn, creatures you control gain "1: Regenerate this creature." (NOTE: This ability is not currently implemented.)
+SVar:RemAIDeck:True
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/resuscitate.jpg
+
+Rhox Pikemaster
+2 W W
+Creature Rhino Soldier
+no text
+3/3
+First Strike
+StaticEffect:Play:Permanents you Control:Keyword/First Strike:Type.Creature!Type.Soldier!NotSelf:Other Soldier creatures you control have first strike.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_pikemaster.jpg
+
+Righteous War
+1 W B
+Enchantment
+no text
+StaticEffect:Play:Permanents you Control:Keyword/Protection from black:Type.Creature!Color.white:White creatures you control have protection from black.
+StaticEffect:Play:Permanents you Control:Keyword/Protection from white:Type.Creature!Color.black:Black creatures you control have protection from white.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/righteous_war.jpg
+
+Roughshod Mentor
+5 G
+Creature Giant Warrior
+no text
+5/4
+StaticEffect:Play:Permanents you Control:Keyword/Trample:Type.Creature!Color.green:Green creatures you control have trample.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/roughshod_mentor.jpg
+
+Sarkhan Vol
+2 R G
+Planeswalker - Sarkhan
+no text
+SVar:PlayMain1:TRUE
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sarkhan_vol.jpg
+
+Scion of Oona
+2 U
+Creature Faerie Soldier
+Other Faerie creatures you control get +1/+1. Other Faeries you control have shroud.
+1/1
+Flash
+Flying
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scion_of_oona.jpg
+
+Serra's Blessing
+1 W
+Enchantment
+Creatures you control have vigilance.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/serras_blessing.jpg
+
+Spidersilk Armor
+2 G
+Enchantment
+Creatures you control get +0/+1 and have reach. 
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spidersilk_armor.jpg
+
+Sun Quan, Lord of Wu
+4 U U
+Legendary Creature Human Soldier
+Creatures you control have horsemanship.
+4/4
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sun_quan_lord_of_wu.jpg
+
+Sunrise Sovereign
+5 R
+Creature Giant Warrior
+no text
+5/5
+StaticEffect:Play:Permanents you Control:PTBonus/2/2!Keyword/Trample:Type.Creature!Type.Giant!NotSelf:Other Giant creatures you control get +2/+2 and have trample.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sunrise_sovereign.jpg
+
+Thistledown Liege
+1 WU WU WU
+Creature Kithkin Knight
+no text
+1/3
+Flash
+StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.white!NotSelf:Other white creatures you control get +1/+1.
+StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.blue!NotSelf:Other blue creatures you control get +1/+1.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thistledown_liege.jpg
+
+Timber Protector
+4 G
+Creature Treefolk Warrior
+Other Treefolk creatures you control get +1/+1. Other Treefolk and Forests you control are indestructible.
+4/6
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/timber_protector.jpg
+
+Tolsimir Wolfblood
+4 G W
+Legendary Creature Elf Warrior
+Other green creatures you control get +1/+1. Other white creatures you control get +1/+1.
+3/4
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tolsimir_wolfblood.jpg
+
+Undead Warchief
+2 B B
+Creature Zombie 
+Zombie spells you cast cost 1 less to cast. Zombie creatures you control get +2/+1.
+1/1
+CostChange:Player:Less:1:Spell:All:Zombie:NoSpecial
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_warchief.jpg
+
+Vampire Nocturnus
+1 B B B
+Creature Vampire
+As long as the top card of your library is black, Vampire Nocturnus and other Vampire creatures you control get +2/+1 and have flying.
+3/3
+Play with the top card of your library revealed.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_nocturnus.jpg
+
+Veteran Armorer
+1 W
+Creature Human Soldier
+All creatures you control get +0/+1.
+2/1
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87950.jpg
+
+Veteran Armorsmith
+W W
+Creature Human Soldier 
+Other Soldier creatures you control get +0/+1.
+2/3
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_armorsmith.jpg
+
+Veteran Swordsmith
+2 W
+Creature Human Soldier 
+Other Soldier creatures you control get +1/+0.
+3/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_swordsmith.jpg
+
+Wizened Cenn
+W W
+Creature Kithkin Cleric
+Other Kithkin creatures you control get +1/+1.
+2/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wizened_cenn.jpg
+
+Zuberi, Golden Feather
+4 W
+Legendary Creature Griffin
+Other Griffin creatures get +1/+1.
+3/3
+Flying
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/zuberi_golden_feather.jpg
+
 Eladamri, Lord of Leaves
 G G
 Legendary Creature Elf Warrior
@@ -18249,22 +18523,6 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/machinate.jpg
 
-Mad Auntie
-2 B
-Creature Goblin Shaman
-Goblin creatures you control get +1/+1.
-1/1 
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mad_auntie.jpg
-
-Madrush Cyclops
-1 B R G
-Creature Cyclops Warrior
-Creatures you control have haste.
-3/4
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/madrush_cyclops.jpg
-
 Maelstrom Nexus
 W U B R G
 Enchantment
@@ -18773,14 +19031,6 @@ no text
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/master_decoy.jpg
 
-Master of Etherium
-2 U
-Artifact Creature Vedalken Wizard
-Master of Etherium's power and toughness are each equal to the number of artifacts you control. Other artifact creatures you control get +1/+1.
-1/1
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_etherium.jpg
-
 Master of the Wild Hunt
 2 G G
 Creature Human Shaman
@@ -18927,14 +19177,6 @@ Whenever an opponent casts a spell, that player puts the top two cards of his or
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/memory_erosion.jpg
 
-Meng Huo, Barbarian King
-3 G G
-Legendary Creature Human Barbarian Soldier
-Other green creatures you control get +1/+1.
-4/4
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/meng_huo_barbarian_king.jpg
-
 Meng Huo's Horde
 4 G
 Creature Human Soldier
@@ -18979,14 +19221,6 @@ no text
 1/1
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card10810.jpg
-
-Merfolk Sovereign
-1 U U
-Creature Merfolk
-Other Merfolk creatures you control get +1/+1.
-2/2
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_sovereign.jpg
 
 Merrow Harbinger
 3 U
@@ -20852,16 +21086,6 @@ At the beginning of each player's upkeep, that player chooses target player whos
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oath_of_ghouls.jpg
 
-Oathsworn Giant
-4 W W
-Creature Giant Soldier
-no text
-3/4
-Vigilance
-StaticEffect:Play:Permanents you Control:PTBonus/0/2!Keyword/Vigilance:Type.Creature!NotSelf:Other creatures you control get +0/+2 and have vigilance.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/oathsworn_giant.jpg
-
 Ob Nixilis, the Fallen
 3 B B
 Legendary Creature Demon
@@ -22520,14 +22744,6 @@ As Primal Plasma comes into play, it becomes your choice of a 3/3 creature, a 2/
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card124757.jpg
 
-Primal Rage
-1 G
-Enchantment
-no text
-StaticEffect:Play:Permanents you Control:Keyword/Trample:Type.Creature:Creatures you control have trample. (If a creature you control would deal enough damage to its blockers to destroy them, you may have it deal the rest of its damage to defending player or planeswalker.)
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_rage.jpg
-
 Primeval Shambler
 4 B
 Creature Horror Mercenary
@@ -23001,14 +23217,6 @@ Whenever a creature you control attacks alone, it gains double strike until end 
 Exalted
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rafiq_of_the_many.jpg
-
-Rage Reflection
-4 R R
-Enchantment
-no text
-StaticEffect:Play:Permanents you Control:Keyword/Double Strike:Type.Creature:Creatures you control have double strike.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rage_reflection.jpg
 
 Raging Bull
 2 R
@@ -23641,15 +23849,6 @@ Whenever you play a legendary spell, draw a card.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reki_the_history_of_kamigawa.jpg
 
-Relentless Rats
-1 B B
-Creature Rat
-Relentless Rats gets +1/+1 for each other creature in play named Relentless Rats. A deck can have any number of cards named Relentless Rats.
-2/2
-SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
-SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73573.jpg
-
 Reliquary Tower
 no cost
 Land
@@ -23823,14 +24022,6 @@ Return target creature card from your graveyard to play.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/resurrection.jpg
 
-Resuscitate
-1 G
-Instant
-Until end of turn, creatures you control gain "1: Regenerate this creature." (NOTE: This ability is not currently implemented.)
-SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/resuscitate.jpg
-
 Retribution of the Meek
 2 W
 Sorcery
@@ -23908,16 +24099,6 @@ Trample
 Exalted
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_charger.jpg
-
-Rhox Pikemaster
-2 W W
-Creature Rhino Soldier
-no text
-3/3
-First Strike
-StaticEffect:Play:Permanents you Control:Keyword/First Strike:Type.Creature!Type.Soldier!NotSelf:Other Soldier creatures you control have first strike.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_pikemaster.jpg
 
 Rhox War Monk
 G W U
@@ -24021,15 +24202,6 @@ no text
 spAllPump:YouCtrl:+2/+2:Creatures you control get +2/+2 until end of turn.:Righteous Charge - Creatures get +2/+2 until EOT
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6503.jpg
-
-Righteous War
-1 W B
-Enchantment
-no text
-StaticEffect:Play:Permanents you Control:Keyword/Protection from black:Type.Creature!Color.white:White creatures you control have protection from black.
-StaticEffect:Play:Permanents you Control:Keyword/Protection from white:Type.Creature!Color.black:Black creatures you control have protection from white.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/righteous_war.jpg
 
 Rimebound Dead
 B
@@ -24468,15 +24640,6 @@ WheneverKeyword:EntersBattleField:Self:Play:DiscardCards/1!DiscardCards/1:Contro
 Unearth:1 B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rotting_rats.jpg
-
-Roughshod Mentor
-5 G
-Creature Giant Warrior
-no text
-5/4
-StaticEffect:Play:Permanents you Control:Keyword/Trample:Type.Creature!Color.green:Green creatures you control have trample.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/roughshod_mentor.jpg
 
 Rowan Treefolk
 3 G
@@ -24957,13 +25120,6 @@ no text
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sarkhan_the_mad.jpg
 
-Sarkhan Vol
-2 R G
-Planeswalker - Sarkhan
-no text
-SVar:Rarity:Mythic
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sarkhan_vol.jpg
-
 Sarpadian Empires, Vol. VII
 3
 Artifact
@@ -25199,16 +25355,6 @@ tap: add 1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/school_of_the_unseen.jpg
-
-Scion of Oona
-2 U
-Creature Faerie Soldier
-Other Faerie creatures you control get +1/+1. Other Faeries you control have shroud.
-1/1
-Flash
-Flying
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scion_of_oona.jpg
 
 Scion of the Wild
 1 G G
@@ -25785,13 +25931,6 @@ no text
 First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_zealot.jpg
-
-Serra's Blessing
-1 W
-Enchantment
-Creatures you control have vigilance.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/serras_blessing.jpg
 
 Serra's Embrace
 2 W W
@@ -27645,13 +27784,6 @@ Protection from green
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinx_of_the_steel_wind.jpg
 
-Spidersilk Armor
-2 G
-Enchantment
-Creatures you control get +0/+1 and have reach. 
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spidersilk_armor.jpg
-
 Spidersilk Net
 0
 Artifact Equipment
@@ -28790,14 +28922,6 @@ Horsemanship
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sun_ce_young_conquerer.jpg
 
-Sun Quan, Lord of Wu
-4 U U
-Legendary Creature Human Soldier
-Creatures you control have horsemanship.
-4/4
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sun_quan_lord_of_wu.jpg
-
 Sun Titan
 4 W W
 Creature Giant
@@ -28905,15 +29029,6 @@ tap: add G
 tap: add W
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunpetal_grove.jpg
-
-Sunrise Sovereign
-5 R
-Creature Giant Warrior
-no text
-5/5
-StaticEffect:Play:Permanents you Control:PTBonus/2/2!Keyword/Trample:Type.Creature!Type.Giant!NotSelf:Other Giant creatures you control get +2/+2 and have trample.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sunrise_sovereign.jpg
 
 Sunscape Familiar
 1 W
@@ -29977,17 +30092,6 @@ Whenever you cast a white spell, Thistledown Duo gets +1/+1 until end of turn.  
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thistledown_duo.jpg
 
-Thistledown Liege
-1 WU WU WU
-Creature Kithkin Knight
-no text
-1/3
-Flash
-StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.white!NotSelf:Other white creatures you control get +1/+1.
-StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.blue!NotSelf:Other blue creatures you control get +1/+1.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thistledown_liege.jpg
-
 Thopter Foundry
 WB U
 Artifact
@@ -30362,14 +30466,6 @@ tap: add W
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tigereye_cameo.jpg
 
-Timber Protector
-4 G
-Creature Treefolk Warrior
-Other Treefolk creatures you control get +1/+1. Other Treefolk and Forests you control are indestructible.
-4/6
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/timber_protector.jpg
-
 Timberland Ruins
 no cost
 Land
@@ -30566,14 +30662,6 @@ tap: add U to your mana pool for each Artifact you control.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tolarian_academy.jpg
-
-Tolsimir Wolfblood
-4 G W
-Legendary Creature Elf Warrior
-Other green creatures you control get +1/+1. Other white creatures you control get +1/+1.
-3/4
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tolsimir_wolfblood.jpg
 
 Tome Scour
 U
@@ -31357,15 +31445,6 @@ Unearth:2 B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_leotau.jpg
 
-Undead Warchief
-2 B B
-Creature Zombie 
-Zombie spells you cast cost 1 less to cast. Zombie creatures you control get +2/+1.
-1/1
-CostChange:Player:Less:1:Spell:All:Zombie:NoSpecial
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_warchief.jpg
-
 Undercity Shade
 4 B
 Creature Shade
@@ -31786,15 +31865,6 @@ Lifelink
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_nighthawk.jpg
 
-Vampire Nocturnus
-1 B B B
-Creature Vampire
-As long as the top card of your library is black, Vampire Nocturnus and other Vampire creatures you control get +2/+1 and have flying.
-3/3
-Play with the top card of your library revealed.
-SVar:Rarity:Mythic
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_nocturnus.jpg
-
 Vampiric Embrace
 2 B B
 Enchantment Aura
@@ -32028,22 +32098,6 @@ WheneverKeyword:EntersBattleField:Type/Artifact:Play:StatsPumpEOT/4/4:Self:ASAP:
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vermiculos.jpg
 
-Veteran Armorer
-1 W
-Creature Human Soldier
-All creatures you control get +0/+1.
-2/1
-SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87950.jpg
-
-Veteran Armorsmith
-W W
-Creature Human Soldier 
-Other Soldier creatures you control get +0/+1.
-2/3
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_armorsmith.jpg
-
 Veteran Cavalier
 W W
 Creature Human Knight
@@ -32052,14 +32106,6 @@ no text
 Vigilance
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84622.jpg
-
-Veteran Swordsmith
-2 W
-Creature Human Soldier 
-Other Soldier creatures you control get +1/+0.
-3/2
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_swordsmith.jpg
 
 Veteran's Reflexes
 W
@@ -34040,14 +34086,6 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wizards_school.jpg
 
-Wizened Cenn
-W W
-Creature Kithkin Cleric
-Other Kithkin creatures you control get +1/+1.
-2/2
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wizened_cenn.jpg
-
 Wojek Embermage
 3 R
 Creature Human Wizard
@@ -34826,15 +34864,6 @@ Sorcery
 Return target creature card from your graveyard to play.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83342.jpg
-
-Zuberi, Golden Feather
-4 W
-Legendary Creature Griffin
-Other Griffin creatures get +1/+1.
-3/3
-Flying
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/zuberi_golden_feather.jpg
 
 Zulaport Enforcer
 B
