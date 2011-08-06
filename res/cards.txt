@@ -1,3 +1,132 @@
+Safehold Duo
+3 GW
+Creature Elf Warrior Shaman
+Whenever you cast a green spell, Safehold Duo gets +1/+1 until end of turn.\r\nWhenever you cast a white spell, Safehold Duo gains vigilance until end of turn.
+2/4
+SVar:BuffedBy:Spell.Green,Spell.White
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/safehold_duo.jpg
+
+Sejiri Refuge
+no cost
+Land
+Sejiri Refuge enters the battlefield tapped.\r\nWhen Seijiri Refuge enters the battlefield, you gain 1 life.
+tap: add W
+tap: add U
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sejiri_refuge.jpg
+
+Sengir Autocrat
+3 B
+Creature Human
+When Sengir Autocrat comes into play, put three 0/1 black Serf creature tokens into play.\r\nWhen Sengir Autocrat leaves play, remove all Serf tokens from the game.
+2/2
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card106638.jpg
+
+Skullclamp
+1
+Artifact Equipment
+Equipped creature gets +1/-1.\r\nWhen equipped creature is put into a graveyard, draw two cards.
+eqPump 1:+1/-1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skullclamp.jpg
+
+Sleeper Agent
+B
+Creature Minion
+When Sleeper Agent comes into play, target opponent gains control of it.\r\nAt the beginning of your upkeep, Sleeper Agent deals 2 damage to you.
+3/3
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sleeper_agent.jpg
+
+Slith Strider
+1 U U
+Creature Slith
+Whenever Slith Strider becomes blocked, draw a card.\r\nWhenever Slith Strider deals combat damage to a player, put a +1/+1 counter on it.
+1/1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/slith_strider.jpg
+
+Solemn Simulacrum
+4
+Artifact Creature Golem
+When Solemn Simulacrum comes into play, you may search your library for a basic land card and put that card into play tapped. If you do, shuffle your library.\r\nWhen Solemn Simulacrum is put into a graveyard from play, you may draw a card.
+2/2
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/solemn_simulacrum.jpg
+
+Steely Resolve
+1 G
+Enchantment
+As Steely Resolve comes into play, choose a creature type.\r\nCreatures of the chosen type have shroud. 
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/steely_resolve.jpg
+
+Stitch Together
+B B
+Sorcery
+Return target creature card from your graveyard to your hand.\r\nThreshold - Return that card from your graveyard to the battlefield instead if seven or more cards are in your graveyard.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stitch_together.jpg
+
+Stonecloaker
+2 W
+Creature Gargoyle
+When Stonecloaker comes into play, return a creature you control to its owner's hand.\r\nWhen Stonecloaker comes into play, remove target card in a graveyard from the game.
+3/2
+Flash
+Flying
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stonecloaker.jpg
+
+Sturdy Hatchling
+3 GU
+Creature Elemental
+Sturdy Hatchling enters the battlefield with four -1/-1 counters on it.\r\nWhenever you cast a green spell, remove a -1/-1 counter from Sturdy Hatchling.\r\nWhenever you cast a blue spell, remove a -1/-1 counter from Sturdy Hatchling.
+6/6
+abPump GU:Shroud
+SVar:BuffedBy:Spell.Blue,Spell.Green
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/Sturdy_Hatchling.jpg
+
+Sutured Ghoul
+4 B B B
+Creature Zombie
+As Sutured Ghoul enters the battlefield, exile any number of creature cards from your graveyard.\r\nSutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
+1/1
+Trample
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sutured_ghoul.jpg
+
+Sword of Body and Mind
+3
+Artifact Equipment
+Equipped creature gets +2/+2 and has protection from green and from blue.\r\nWhenever equipped creature deals combat damage to a player, you put a 2/2 green Wolf creature token onto the battlefield and that player puts the top ten cards of his or her library into his or her graveyard.
+SVar:Rarity:Rare
+SVar:Picture:http://serv1.tcgimages.eu/img/cards/From_the_Vault_Relics/sword_of_body_and_mind.jpg
+
+Sword of Fire and Ice
+3
+Artifact Equipment
+Equipped creature gets +2/+2 and has protection from red and from blue.\r\nWhenever equipped creature deals combat damage to a player, Sword of Fire and Ice deals 2 damage to target creature or player and you draw a card.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_fire_and_ice.jpg
+
+Sword of Light and Shadow
+3
+Artifact Equipment
+Equipped creature gets +2/+2 and has protection from white and from black.\r\nWhenever equipped creature deals combat damage to a player, you gain 3 life and you may return up to one target creature card from your graveyard to your hand.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_light_and_shadow.jpg
+
+Sword of the Meek
+2
+Artifact Equipment
+Equipped creature gets +1/+2.\r\nWhenever a 1/1 creature enters the battlefield under your control, you may return Sword of the Meek from your graveyard to the battlefield, then attach it to that creature.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_the_meek.jpg
+
 Reach of Branches
 4 G
 Tribal Instant Treefolk
@@ -25693,15 +25822,6 @@ CARDNAME can't be the target of spells or abilities your opponents control.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sacred_wolf.jpg
 
-Safehold Duo
-3 GW
-Creature Elf Warrior Shaman
-Whenever you cast a green spell, Safehold Duo gets +1/+1 until end of turn. Whenever you cast a white spell, Safehold Duo gains vigilance until end of turn.
-2/4
-SVar:BuffedBy:Spell.Green,Spell.White
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/safehold_duo.jpg
-
 Safehold Elite
 1 GW
 Creature Elf Scout
@@ -26604,15 +26724,6 @@ As long as you control a plains, Sejiri Merfolk has first strike and lifelink.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sejiri_merfolk.jpg
 
-Sejiri Refuge
-no cost
-Land
-Sejiri Refuge enters the battlefield tapped. When Seijiri Refuge enters the battlefield, you gain 1 life.
-tap: add W
-tap: add U
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sejiri_refuge.jpg
-
 Sejiri Steppe
 no cost
 Land
@@ -26650,14 +26761,6 @@ no text
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selesnya_signet.jpg
-
-Sengir Autocrat
-3 B
-Creature Human
-When Sengir Autocrat comes into play, put three 0/1 black Serf creature tokens into play. When Sengir Autocrat leaves play, remove all Serf tokens from the game.
-2/2
-SVar:Rarity:Uncommon
-SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card106638.jpg
 
 Sengir Bats
 1 B B
@@ -27862,14 +27965,6 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skull_of_ramos.jpg
 
-Skullclamp
-1
-Artifact Equipment
-Equipped creature gets +1/-1. When equipped creature is put into a graveyard, draw two cards.
-eqPump 1:+1/-1
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skullclamp.jpg
-
 Skullmulcher
 4 G
 Creature Elemental
@@ -28085,14 +28180,6 @@ Draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slay.jpg
 
-Sleeper Agent
-B
-Creature Minion
-When Sleeper Agent comes into play, target opponent gains control of it. At the beginning of your upkeep, Sleeper Agent deals 2 damage to you.
-3/3
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sleeper_agent.jpg
-
 Sleeper's Guile
 2 B
 Enchantment Aura
@@ -28215,14 +28302,6 @@ Whenever Slith Predator deals combat damage to a player, put a +1/+1 counter on 
 Trample
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slith_predator.jpg
-
-Slith Strider
-1 U U
-Creature Slith
-Whenever Slith Strider becomes blocked, draw a card. Whenever Slith Strider deals combat damage to a player, put a +1/+1 counter on it.
-1/1
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/slith_strider.jpg
 
 Sliver Legion
 W U B R G
@@ -28432,14 +28511,6 @@ spDestroyTgt:Artifact,Enchantment:Drawback$YouGainLife/4
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/solemn_offering.jpg
-
-Solemn Simulacrum
-4
-Artifact Creature Golem
-When Solemn Simulacrum comes into play, you may search your library for a basic land card and put that card into play tapped. If you do, shuffle your library. When Solemn Simulacrum is put into a graveyard from play, you may draw a card.
-2/2
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/solemn_simulacrum.jpg
 
 Solidarity
 3 W
@@ -29550,13 +29621,6 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card48910.jpg
 
-Steely Resolve
-1 G
-Enchantment
-As Steely Resolve comes into play, choose a creature type. Creatures of the chosen type have shroud. 
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/steely_resolve.jpg
-
 Steppe Lynx
 W
 Creature Cat
@@ -29634,13 +29698,6 @@ tap: add G
 Comes into play tapped.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stirring_wildwood.jpg
-
-Stitch Together
-B B
-Sorcery
-Return target creature card from your graveyard to your hand. Threshold - Return that card from your graveyard to the battlefield instead if seven or more cards are in your graveyard.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stitch_together.jpg
 
 Stolen Grain
 4 B B
@@ -29729,16 +29786,6 @@ Trample
 WheneverKeyword:Attacks:No_Initiator:Play:StatsPumpEOT/2/2:Initiating_Card:ASAP:No_Condition:Initiator - OwnedByController!Initiator - Has Keyword/Trample:Whenever a creature you control with trample attacks, it gets +2/+2 until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonebrow_krosan_hero.jpg
-
-Stonecloaker
-2 W
-Creature Gargoyle
-When Stonecloaker comes into play, return a creature you control to its owner's hand. When Stonecloaker comes into play, remove target card in a graveyard from the game.
-3/2
-Flash
-Flying
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stonecloaker.jpg
 
 Stoneforge Mystic
 1 W
@@ -30096,16 +30143,6 @@ spDiscardOpp:AtRandom:1:Drawback$OppDiscard/1:Target opponent discards a card at
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stupor.jpg
 
-Sturdy Hatchling
-3 GU
-Creature Elemental
-Sturdy Hatchling enters the battlefield with four -1/-1 counters on it. Whenever you cast a green spell, remove a -1/-1 counter from Sturdy Hatchling. Whenever you cast a blue spell, remove a -1/-1 counter from Sturdy Hatchling.
-6/6
-abPump GU:Shroud
-SVar:BuffedBy:Spell.Blue,Spell.Green
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/Sturdy_Hatchling.jpg
-
 Subversion
 3 B B
 Enchantment
@@ -30446,15 +30483,6 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sustenance.jpg
 
-Sutured Ghoul
-4 B B B
-Creature Zombie
-As Sutured Ghoul enters the battlefield, exile any number of creature cards from your graveyard. Sutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
-1/1
-Trample
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sutured_ghoul.jpg
-
 Svogthos, the Restless Tomb
 no cost
 Land
@@ -30518,34 +30546,6 @@ spDestroyTgt:Creature.powerLE2
 Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swat.jpg
-
-Sword of Body and Mind
-3
-Artifact Equipment
-Equipped creature gets +2/+2 and has protection from green and from blue. Whenever equipped creature deals combat damage to a player, you put a 2/2 green Wolf creature token onto the battlefield and that player puts the top ten cards of his or her library into his or her graveyard.
-SVar:Rarity:Rare
-SVar:Picture:http://serv1.tcgimages.eu/img/cards/From_the_Vault_Relics/sword_of_body_and_mind.jpg
-
-Sword of Fire and Ice
-3
-Artifact Equipment
-Equipped creature gets +2/+2 and has protection from red and from blue. Whenever equipped creature deals combat damage to a player, Sword of Fire and Ice deals 2 damage to target creature or player and you draw a card.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_fire_and_ice.jpg
-
-Sword of Light and Shadow
-3
-Artifact Equipment
-Equipped creature gets +2/+2 and has protection from white and from black. Whenever equipped creature deals combat damage to a player, you gain 3 life and you may return up to one target creature card from your graveyard to your hand.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_light_and_shadow.jpg
-
-Sword of the Meek
-2
-Artifact Equipment
-Equipped creature gets +1/+2. Whenever a 1/1 creature enters the battlefield under your control, you may return Sword of the Meek from your graveyard to the battlefield, then attach it to that creature.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_the_meek.jpg
 
 Sword of Vengeance
 3
