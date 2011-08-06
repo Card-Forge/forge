@@ -36,9 +36,20 @@ public abstract class Player extends MyObservable{
 	//////////////////////////
 	
 	public boolean setLife(final int newLife) {
-		life = newLife;
+		boolean change = false;
+		//rule 118.5
+		if(life > newLife) {
+			change = loseLife(life - newLife);
+		}
+		else if(newLife > life) {
+			change = gainLife(newLife - life);
+		}
+		else {
+			//life == newLife
+			change = false;
+		}
 		this.updateObservers();
-		return true;
+		return change;
 	}
 	
 	public int getLife() {
@@ -52,6 +63,7 @@ public abstract class Player extends MyObservable{
 	
 	public boolean gainLife(final int toGain) {
 		boolean newLifeSet = false;
+		if(!canGainLife()) return false;
 		if(toGain > 0) {
 			addLife(toGain);
 			newLifeSet = true;
@@ -67,8 +79,13 @@ public abstract class Player extends MyObservable{
 		return newLifeSet;
 	}
 	
+	public boolean canGainLife() {
+		return true;
+	}
+	
 	public boolean loseLife(final int toLose) {
 		boolean newLifeSet = false;
+		if(!canLoseLife()) return false;
 		if(toLose > 0) {
 			life -= toLose;
 			newLifeSet = true;
@@ -76,6 +93,10 @@ public abstract class Player extends MyObservable{
 		}
 		else System.out.println("Player - trying to lose positive or 0 life");
 		return newLifeSet;
+	}
+	
+	public boolean canLoseLife() {
+		return true;
 	}
 	
 	public void subtractLife(final int toSub, final Card c) {
@@ -185,6 +206,13 @@ public abstract class Player extends MyObservable{
 		//TODO
 		return new CardList();
 	}
+	
+	
+	////////////////////////////////
+	//
+	// generic Object overrides
+	//
+	/////////////////////////////////
 	
 	@Override
 	public boolean equals(Object o) {
