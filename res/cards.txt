@@ -1,3 +1,9 @@
+Dimir Cutpurse
+1 U B
+Creature Spirit
+Whenever Dimir Cutpurse deals combat damage to a player, that player discards a card and you draw a card.
+2/2
+
 Maro
 2 G G
 Creature Elemental

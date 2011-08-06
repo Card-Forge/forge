@@ -18,6 +18,7 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+dimir_cutpurse.jpg          http://www.wizards.com/global/images/magic/general/dimir_cutpurse.jpg
 molimo_maro_sorcerer.jpg    http://www.wizards.com/global/images/magic/general/molimo_maro_sorcerer.jpg
 maro.jpg                    http://www.wizards.com/global/images/magic/general/maro.jpg
 multani_maro_sorcerer.jpg   http://www.wizards.com/global/images/magic/general/multani_maro_sorcerer.jpg

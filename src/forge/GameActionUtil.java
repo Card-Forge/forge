@@ -2939,6 +2939,8 @@ public class GameActionUtil
 
 		if (c.getName().equals("Hypnotic Specter"))
 			playerCombatDamage_Hypnotic_Specter(c);
+		else if (c.getName().equals("Dimir Cutpurse"))
+			playerCombatDamage_Dimir_Cutpurse(c);
 		else if (c.getName().equals("Shadowmage Infiltrator")
 				|| c.getName().equals("Thieving Magpie")
 				|| c.getName().equals("Garza Zol, Plague Queen")
@@ -3018,7 +3020,35 @@ public class GameActionUtil
 		else
 			ComputerUtil.playNoStack(sa[1]);
 		
-		
+	
+	}
+	
+	private static void playerCombatDamage_Dimir_Cutpurse(Card c)
+	{
+		final String player = c.getController();
+		final String opponent = AllZone.GameAction.getOpponent(player);
+
+		if (c.getNetAttack() > 0)
+		{
+			Ability ability2 = new Ability(c, "0")
+			{
+				public void resolve()
+				{
+
+					AllZone.GameAction.drawCard(player);					
+					if(opponent.equals(Constant.Player.Human))
+			            AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
+			          else
+			            AllZone.GameAction.discardRandom(Constant.Player.Computer);
+
+				}
+			};// ability2
+
+			ability2.setStackDescription(c.getName() + " - " + player
+					+ " draws a card, opponent discards a card");
+			AllZone.Stack.add(ability2);
+		}
+
 	}
 	
 	private static void playerCombatDamage_Rootwater_Thief(Card c)
