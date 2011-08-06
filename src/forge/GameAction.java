@@ -455,8 +455,11 @@ public class GameAction {
     	if (c.getName().equals("Dodecapod"))
     		c.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(c, Counters.P1P1, 2));
         */
+    	PlayerZone hand = AllZone.getZone(c);
     	PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
-    	moveTo(play, c);
+    	//moveTo(play, c);
+    	hand.remove(c);
+    	play.add(c);
     	if (c.getName().equals("Dodecapod"))
     		c.setCounter(Counters.P1P1, 2);
     }

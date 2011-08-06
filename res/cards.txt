@@ -1,3 +1,10 @@
+Dodecapod
+4
+Artifact Creature Golem
+no text
+3/3
+If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard.
+
 Juniper Order Ranger
 3 W G
 Creature Human Knight
