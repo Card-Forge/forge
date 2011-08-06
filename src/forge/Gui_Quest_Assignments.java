@@ -112,7 +112,7 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
     		ArrayList<Integer> availableInts = new ArrayList<Integer>();
     		
     		int maxQuests = questData.getWin() / 10;
-    		if (maxQuests > 8) maxQuests = 8;
+    		if (maxQuests > 7) maxQuests = 7;
     		if (allAvailableQuests.size() < maxQuests) maxQuests = allAvailableQuests.size();
     		
     		Collections.shuffle(allAvailableQuests);
@@ -134,6 +134,7 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
     	JLabel difficulty;
     	JLabel repeatable;
     	JLabel reward;
+    	JLabel iconLabel;
 
     	
     	int y = 75;
@@ -180,6 +181,13 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
             reward.setText(sb.toString());
             reward.setBounds(new Rectangle(320, y+40, 500, 25));
             
+            /*
+            ImageIcon icon = getIcon(qa.getIconName());
+            iconLabel = new JLabel();
+            iconLabel.setIcon(icon);
+            iconLabel.setBounds(new Rectangle(900, y-35, 128, 128));
+            */
+            
             buttonGroup.add(radio);
             
             this.getContentPane().add(radio);
@@ -187,6 +195,7 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
             this.getContentPane().add(difficulty);
             this.getContentPane().add(repeatable);
             this.getContentPane().add(reward);
+            //this.getContentPane().add(iconLabel);
             
             y+=80;
     	}//for

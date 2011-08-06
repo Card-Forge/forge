@@ -985,11 +985,15 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
         	new Gui_WinLose();
         else {
         	//new Gui_WinLose(Constant.Quest.humanList[0], Constant.Quest.computerList[0],Constant.Quest.humanLife[0], Constant.Quest.computerLife[0]);
-        	CardList humanList = QuestUtil.getHumanPlantAndPet(AllZone.QuestData);
-    		CardList computerList = QuestUtil.getComputerCreatures(AllZone.QuestData);
+        	CardList humanList = QuestUtil.getHumanPlantAndPet(AllZone.QuestData, AllZone.QuestAssignment);
+    		CardList computerList = QuestUtil.getComputerCreatures(AllZone.QuestData, AllZone.QuestAssignment);
     		
     		int humanLife = QuestUtil.getLife(AllZone.QuestData);
-    		new Gui_WinLose(humanList, computerList, humanLife, 20);
+    		int computerLife = 20;
+    		
+    		if (AllZone.QuestAssignment!=null)
+    			computerLife = AllZone.QuestAssignment.getComputerLife();
+    		new Gui_WinLose(humanList, computerList, humanLife, computerLife);
         }
     }
     

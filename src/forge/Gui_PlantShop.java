@@ -215,7 +215,7 @@ public class Gui_PlantShop extends JFrame implements NewConstants{
     	
     	
     	buyPlantButton.setEnabled(true);
-    	if (questData.getCredits() < getPrice())
+    	if (questData.getCredits() < getPrice() || questData.getPlantLevel() >= 5)
     		buyPlantButton.setEnabled(false);
        
         quitButton.setBounds(new Rectangle(140, 297, 120, 50));

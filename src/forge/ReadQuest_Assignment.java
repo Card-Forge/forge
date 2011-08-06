@@ -154,6 +154,9 @@ public class ReadQuest_Assignment implements Runnable, NewConstants {
             long reward = Long.parseLong(s.trim());
             qa.setCreditsReward(reward);
             
+            s = readLine();
+            qa.setIconName(s);
+            
             //s = readLine();
             s = readLine();
             

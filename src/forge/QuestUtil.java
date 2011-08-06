@@ -61,6 +61,8 @@ public class QuestUtil {
 		int baseAttack = 0;
 		int baseDefense = 0;
 		
+		String keyword = "";
+		
 		if (level == 1)
 		{
 			imageName = "G 0 1 Plant Wall";
@@ -82,6 +84,13 @@ public class QuestUtil {
 			baseDefense = 3;
 			baseAttack = 1;
 		}
+		else if (level == 5)
+		{
+			imageName = "G 1 3 Plant Wall Deathtouch";
+			baseDefense = 3;
+			baseAttack = 1;
+			keyword = "Deathtouch";
+		}
 		
 
         Card c = new Card();
@@ -100,9 +109,12 @@ public class QuestUtil {
         c.addType("Wall");
         
         c.addIntrinsicKeyword("Defender");
+        if (!keyword.equals(""))
+        	c.addIntrinsicKeyword("Deathtouch");
         
         c.setBaseAttack(baseAttack);
         c.setBaseDefense(baseDefense);
+        
         
         return c;
 	}//getPlantToken
@@ -154,7 +166,7 @@ public class QuestUtil {
         c.addType("Wolf");
         c.addType("Pet");
         
-        if (level == 4)
+        if (level >= 4)
         	c.addIntrinsicKeyword("Flanking");
         
         c.setBaseAttack(baseAttack);
@@ -181,6 +193,12 @@ public class QuestUtil {
 		int id = qa.getId();
 		if (id == 1) //White Dungeon
 		{
+			CardList humanList = new CardList();
+			Card c = AllZone.CardFactory.getCard("Adventuring Gear", Constant.Player.Human);
+			humanList.add(c);
+			
+			qa.setHuman(humanList);
+
 			for (int i=0;i<2;i++)
 				qa.addCompy("Savannah Lions");
 			

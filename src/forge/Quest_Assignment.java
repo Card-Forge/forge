@@ -13,6 +13,7 @@ public class Quest_Assignment {
 	private String			desc;
 	private String 			difficulty;
 	private String 			cardReward;
+	private String			iconName;
 	
 	private boolean 		repeatable;
 	
@@ -91,6 +92,16 @@ public class Quest_Assignment {
 
 	public String getCardReward() {
 		return cardReward;
+	}
+	
+	public void setIconName(String s)
+	{
+		iconName = s;
+	}
+	
+	public String getIconName()
+	{
+		return iconName;
 	}
 
 	public void setHuman(CardList human) {
