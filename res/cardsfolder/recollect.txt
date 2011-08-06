@@ -2,7 +2,7 @@ Name:Recollect
 ManaCost:2 G
 Types:Sorcery
 Text:Return target card from your graveyard to your hand.
-K:spReturnTgt:1:Artifact,Creature,Enchantment,Land,Instant,Sorcery,Planeswalker:Hand
+K:spReturnTgt:1:Card:Hand
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recollect.jpg
 End
