@@ -244,6 +244,15 @@ public class CardFactory implements NewConstants {
         return -1;
     }
     
+    // Sol's Soulshift fix
+    final static int hasKeyword(Card c, String k, int startPos) {
+        ArrayList<String> a = c.getKeyword();
+        for(int i = startPos; i < a.size(); i++)
+            if(a.get(i).toString().startsWith(k)) return i;
+        
+        return -1;
+    }
+    
     private final int shouldManaAbility(Card c) {
         ArrayList<String> a = c.getIntrinsicKeyword();
         for(int i = 0; i < a.size(); i++)
@@ -10704,6 +10713,20 @@ public class CardFactory implements NewConstants {
             }
         }//transmute
         
+        // Sol's Soulshift fix
+        int shiftPos = hasKeyword(card, "Soulshift");
+        while (shiftPos != -1) {
+           int n = shiftPos;
+           String parse = card.getKeyword().get(n).toString();
+           
+           String k[] = parse.split(":");
+           final String manacost = k[1];
+           
+           card.addDestroyCommand(CardFactoryUtil.ability_Soulshift(card, manacost));
+           shiftPos = hasKeyword(card, "Soulshift", n+1);
+        }//Soulshift
+        
+        /*
         while(hasKeyword(card, "Soulshift") != -1) {
             int n = hasKeyword(card, "Soulshift");
             if(n != -1) {
@@ -10716,6 +10739,7 @@ public class CardFactory implements NewConstants {
                 card.addDestroyCommand(CardFactoryUtil.ability_Soulshift(card, manacost));
             }
         }//Soulshift
+        */
         
         if(hasKeyword(card, "Echo") != -1) {
             int n = hasKeyword(card, "Echo");
