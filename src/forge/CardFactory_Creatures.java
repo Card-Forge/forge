@@ -1606,7 +1606,7 @@ public class CardFactory_Creatures {
             
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Patrol Signaler")) {
             final SpellAbility a1 = new Ability(card, "1 W") {
@@ -1641,7 +1641,7 @@ public class CardFactory_Creatures {
             a1.setBeforePayMana(new Input_PayManaCost(a1));
             
         }//*************** END ************ END **************************
-        
+        */
         /*
         //*************** START *********** START **************************
         else if(cardName.equals("Guardian of Cloverdell")) {
