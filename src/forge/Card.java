@@ -2628,7 +2628,9 @@ public class Card extends MyObservable {
     	
 		//more specific prevents here:
 		reduce = reduce || (getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by artifact creatures.") 
-            		&& source.isCreature() && source.isArtifact());
+				&& source.isCreature() && source.isArtifact());
+		reduce = reduce || (getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by artifacts.") 
+				&& source.isArtifact());
 		return reduce;
     }
     
