@@ -2064,22 +2064,7 @@ public class GameAction {
         // Destroy needs to be called with Last Known Information
         c.destroy();
         
-        //destroy card effects:
-        CardList list = AllZoneUtil.getCardsInPlay();
-        list = list.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                ArrayList<String> keywords = c.getKeyword();
-                for(String kw:keywords) {
-                    if(kw.startsWith("Whenever ") && kw.contains(" put into")
-                            && kw.contains("graveyard from the battlefield,")) return true;
-                }
-                return false;
-            }
-        });
-
         checkWheneverKeyword(c, "PermanentIntoGraveyard",null);
-        for(int i = 0; i < list.size(); i++)
-            GameActionUtil.executeDestroyCardEffects(list.get(i), c);
         
         if(persist) {
         	final Card persistCard = newCard;

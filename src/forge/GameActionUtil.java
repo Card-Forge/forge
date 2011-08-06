@@ -1942,10 +1942,6 @@ public class GameActionUtil {
 		AllZone.GameInfo.setAssignedFirstStrikeDamageThisCombat(false);
 		AllZone.GameInfo.setResolvedFirstStrikeDamageThisCombat(false);
 	}
-
-	public static void executeDestroyCardEffects(Card c, Card destroyed) {
-		if(destroyed.isCreature()) executeDestroyCreatureCardEffects(c, destroyed);
-	}
 	
     public static boolean showYesNoDialog(Card c, String question) {
         AllZone.Display.setCard(c);
@@ -1986,38 +1982,6 @@ public class GameActionUtil {
     		return false;
     	}
     }
-
-    //***CREATURES START HERE***
-
-    public static void executeDestroyCreatureCardEffects(Card c, Card destroyed) {
-        if (c.getName().equals("Fecundity")) destroyCreature_Fecundity(c, destroyed);
-    }
-
-    //***
-
-	private static void destroyCreature_Fecundity(Card c, Card destroyed) {
-        final Card crd = destroyed;
-        final Card crd2 = c;
-
-        Ability ability = new Ability(c, "0") {
-            @Override
-            public void resolve() {
-                Player player = crd.getController();
-                if (player.isHuman()) {
-                    String question = "Draw a card?";
-                    if (showYesNoDialog(crd2, question)) player.drawCard();
-                } else player.drawCard(); //computer
-            }
-        };
-        
-        StringBuilder sb = new StringBuilder();
-        sb.append("Fecundity - ").append(destroyed.getController()).append(" may draw a card.");
-        ability.setStackDescription(sb.toString());
-
-        AllZone.Stack.add(ability);
-    }
-
-	//***CREATURES END HERE***
 
 	public static void executeLandfallEffects(Card c) {
 		if(c.getName().equals("Lotus Cobra")) landfall_Lotus_Cobra(c);
