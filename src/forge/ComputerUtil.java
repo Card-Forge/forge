@@ -4,12 +4,9 @@ import java.util.Arrays;
 import java.util.Comparator;
 //import java.util.HashMap;
 //import java.util.Map;
-import java.util.Random;
 
 public class ComputerUtil
 {
-  @SuppressWarnings("unused") // random
-private static Random random = new Random();
 
   //if return true, go to next phase
   static public boolean playCards()
@@ -61,7 +58,6 @@ private static Random random = new Random();
 		  
 		  AllZone.Stack.add(sa);
 	  }
-	  
   }
   
   final static public void playStackFree(SpellAbility sa)
@@ -74,8 +70,6 @@ private static Random random = new Random();
 		      	AllZone.GameAction.drawCard(sa.getSourceCard().getController());
 		  
 	  AllZone.Stack.add(sa);
-
-	  
   }
   
   final static public void playNoStack(SpellAbility sa)

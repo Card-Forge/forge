@@ -3421,8 +3421,6 @@ public class CardFactory_Creatures {
 	    	 final SpellAbility ability = new Ability(card, "0")
 	         {
 	    		 public void resolve(){
-				    @SuppressWarnings("unused") // opponent
-					String opponent = card.getController();
 	    			((PlayerZone_ComesIntoPlay)AllZone.Human_Play).setTriggers(false);
 				    ((PlayerZone_ComesIntoPlay)AllZone.Computer_Play).setTriggers(false);
 				
@@ -19465,6 +19463,73 @@ public class CardFactory_Creatures {
 		      
 		      card.addDestroyCommand(destroy);
 	      }//*************** END ************ END **************************
+	       
+	     //*************** START *********** START ************************** 
+	      else if (cardName.equals("Gatekeeper of Malakir"))
+	      {
+	    	  final SpellAbility kicker = new Spell(card)
+		  	  {
+		  			private static final long serialVersionUID = -1598664186463358630L;
+		  			public void resolve()
+		  			{
+		  				PlayerZone hand = AllZone.getZone(Constant.Zone.Hand ,card.getController());
+		  				PlayerZone play = AllZone.getZone(Constant.Zone.Play ,card.getController());
+		  				
+		  				card.setKicked(true);
+		  				hand.remove(card);
+		  				play.add(card);
+		  				//card.comesIntoPlay(); //do i need this?
+		  			}
+		  			public boolean canPlay()
+		  			{
+		  				return AllZone.Phase.getActivePlayer().equals(card.getController()) &&
+		                  !AllZone.Phase.getPhase().equals("End of Turn") && !AllZone.GameAction.isCardInPlay(card);
+		  			}
+		  			
+		  			public boolean canPlayAI()
+		  			{
+		  				PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+		  				CardList cl = new CardList(play.getCards());
+		  				cl = cl.getType("Creature");
+		  				
+		  				return cl.size() > 0;
+		  			}
+		  			
+		  		};
+		  		kicker.setManaCost("B B B");
+		  		kicker.setDescription("Kicker B");
+		  		kicker.setStackDescription(card.getName() + " - Creature 2/2 (Kicked)");
+		  		card.addSpellAbility(kicker);
+		  		
+		  		final Ability ability = new Ability(card, "0")
+		  		{
+		  			public void resolve()
+		  			{
+		  				AllZone.GameAction.sacrificeCreature(getTargetPlayer(), this);
+		  			}
+		  		};
+		  		
+		  		
+		  		Command commandComes = new Command()
+			    {
+					private static final long serialVersionUID = -2622859088591798773L;
+
+					public void execute()
+			        {
+					  if (card.isKicked()) {
+						  if(card.getController().equals(Constant.Player.Human))
+				            AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(ability));
+				          else //computer
+				          {
+				        	  ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+				          }//else
+			          }
+			        }//execute()
+			    };//CommandComes
+		  		
+		  		card.addComesIntoPlayCommand(commandComes);
+	      }//*************** END ************ END **************************
+	      
 	      // Cards with Cycling abilities
 	      // -1 means keyword "Cycling" not found
 	      if (shouldCycle(card) != -1)

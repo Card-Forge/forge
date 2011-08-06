@@ -180,7 +180,7 @@ public class GameActionUtil
 					}//while
 					AllZone.Display.getChoiceOptional("Revealed cards:", revealed.toArray());
 					
-					if (cascadedCard != null) {
+					if (cascadedCard != null && !cascadedCard.isUnCastable()) {
 						revealed.remove(cascadedCard);
 						
 						if (cascadedCard.getController().equals(Constant.Player.Human))
@@ -208,7 +208,6 @@ public class GameActionUtil
 						    	}
 						    }
 						}
-						
 					}				
 					revealed.shuffle();
 					for (Card bottom : revealed)
@@ -251,8 +250,6 @@ public class GameActionUtil
 					          {
 					        	  card.addTempAttackBoost(-1);
 								  card.addTempDefenseBoost(-1);
-								
-
 					          }
 					        }
 					      };

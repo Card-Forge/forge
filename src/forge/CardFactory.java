@@ -13657,7 +13657,7 @@ public class CardFactory implements NewConstants {
           card.untap();
       
         }
-
+		
         public boolean canPlayAI()
         {
           return false;

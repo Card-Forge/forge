@@ -5,7 +5,6 @@ enum Counters {
 	AGE, BLAZE, CHARGE, DIVINITY, FADE, HOOFPRINT, ICE, LOYALTY, M1M1, MANA, P0M1, P1P1, QUEST, SPORE
 }
 
-
 public class Card extends MyObservable 
 {
   private static int nextUniqueNumber;
@@ -44,6 +43,7 @@ public class Card extends MyObservable
   private boolean exaltedBonus = false;
   private boolean faceDown = false;
   private boolean sacrificeAtEOT = false;
+  private boolean kicked = false;
   
   private boolean firstStrike = false;
   private boolean doubleStrike = false;
@@ -984,5 +984,11 @@ public class Card extends MyObservable
   public void setFlashback(boolean b)
   {
 	flashback = b;  
+  }
+  public void setKicked(boolean b) {
+	kicked = b;
+  }
+  public boolean isKicked() {
+	return kicked;
   }
 }
