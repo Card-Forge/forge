@@ -979,7 +979,7 @@ public class CardFactory implements NewConstants {
            sbD.append(Math.abs(NumDefense[0]) + " and gains " + Keyword[0] + " until end of turn.");
         }
         //if (!sbD.toString().isEmpty())
-        if (!sbD.toString().trim().equals(""))
+        if (sbD.toString().trim().length()!=0)
         	d = sbD.toString();
        
         if (k.length > 2)
@@ -15999,7 +15999,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 			}
     	};
     	card.clearSpellAbility();
-    	spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+    	spell.setChooseTargetAI(CardFactoryUtil.AI_targetComputer());
     	spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
     	card.addSpellAbility(spell);
     }//*************** END ************ END **************************

@@ -1,5 +1,6 @@
 package forge;
 import java.util.*;
+import java.util.Map.Entry;
 
 enum Counters {
 	AGE, BLAZE, CHARGE, DIVINITY, FADE, HOOFPRINT, ICE, LOYALTY, M1M1, MANA, P0M1, P1P1, QUEST, SPORE, TIME
@@ -557,7 +558,7 @@ public class Card extends MyObservable
   public void unEquip() {  
 	  for (Command var : unEquipCommandList)
 			 var.execute();
-	  }
+  }
   
   public void addEnchantCommand(Command c) {enchantCommandList.add(c); }
   public void removeEnchantCommand(Command c) {enchantCommandList.add(c); }
@@ -602,6 +603,14 @@ public class Card extends MyObservable
   
   public void addDamage(HashMap<Card, Integer> sourcesMap)
   {
+	  Iterator<Entry<Card, Integer>> iter1 = sourcesMap.entrySet().iterator();
+	  while(iter1.hasNext())
+	  {
+		  Entry<Card, Integer> entry = iter1.next();
+		  this.addDamage(entry.getValue(), entry.getKey());
+	  }
+	  
+	  /*
 	  Iterator<Card> iter = sourcesMap.keySet().iterator();
 	  while(iter.hasNext()) {
 			Card source = iter.next();	
@@ -609,6 +618,7 @@ public class Card extends MyObservable
 			
 			this.addDamage(damage, source);
 	  }
+	  */
 	  //for(Card source : sources)
 	  //	  this.addDamage(n, source);
 	  
