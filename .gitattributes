@@ -5898,6 +5898,7 @@ src/forge/AbilityFactory_GainControl.java -text svneol=native#text/plain
 src/forge/AbilityFactory_PermanentState.java -text svneol=native#text/plain
 src/forge/AbilityFactory_Pump.java -text svneol=native#text/plain
 src/forge/AbilityFactory_Regenerate.java -text svneol=native#text/plain
+src/forge/AbilityFactory_Sacrifice.java -text svneol=native#text/plain
 src/forge/AbilityFactory_Token.java -text svneol=native#text/plain
 src/forge/AbilityFactory_ZoneAffecting.java -text svneol=native#text/plain
 src/forge/Ability_Activated.java svneol=native#text/plain

@@ -759,4 +759,43 @@ public class ComputerUtil
 	  };//Comparator
 	  Arrays.sort(sa, c);
   }//sortSpellAbilityByCost()
+  
+	static void sacrificePermanents(int amount, CardList list) {
+		// used in Annihilator and AF_Sacrifice
+		int max = list.size();
+		if (max > amount)
+			max = amount;
+
+		CardListUtil.sortCMC(list);
+		list.reverse();
+
+		for (int i = 0; i < max; i++) {
+			// todo: use getWorstPermanent() would be wayyyy better
+
+			Card c;
+			if (list.getNotType("Creature").size() == 0) {
+				c = CardFactoryUtil.AI_getWorstCreature(list);
+			} else if (list.getNotType("Land").size() == 0) {
+				c = CardFactoryUtil.getWorstLand(AllZone.ComputerPlayer);
+			} else {
+				c = list.get(0);
+			}
+			
+			ArrayList<Card> auras = c.getEnchantedBy();
+
+			if (auras.size() > 0){
+				// todo: choose "worst" controlled enchanting Aura
+				for(int j = 0; j < auras.size(); j++){
+					Card aura = auras.get(j);
+					if (aura.getController().isPlayer(c.getController()) && list.contains(aura)){
+						c = aura;
+						break;
+					}
+				}
+			}
+			
+			list.remove(c);
+			AllZone.GameAction.sacrifice(c);
+		}
+	}
 }

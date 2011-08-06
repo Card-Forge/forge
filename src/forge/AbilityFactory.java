@@ -106,8 +106,12 @@ public class AbilityFactory {
 			for (int aaCnt = 0; aaCnt < aa.length; aaCnt ++)
 		        aa[aaCnt] = aa[aaCnt].trim();
 			
-			if (!(aa.length == 2))
-				throw new RuntimeException("AbilityFactory : getAbility -- aa.length not 2 in " + hostCard.getName());
+			if (aa.length != 2){
+				StringBuilder sb = new StringBuilder();
+				sb.append("AbilityFactory Parsing Error in getAbility() : Split length of ");
+				sb.append(a[i]).append(" in ").append(hostCard.getName()).append(" is not 2.");
+				throw new RuntimeException(sb.toString());
+			}
 			
 			mapParams.put(aa[0], aa[1]);
 		}
@@ -321,6 +325,15 @@ public class AbilityFactory {
 				SA = AbilityFactory_ZoneAffecting.createDrawbackMill(this);
 		}
 		
+		if (API.equals("Sacrifice")){
+			if (isAb)
+				SA = AbilityFactory_Sacrifice.createAbilitySacrifice(this);
+			else if (isSp)
+				SA = AbilityFactory_Sacrifice.createSpellSacrifice(this);
+			else if (isDb)
+				SA = AbilityFactory_Sacrifice.createDrawbackSacrifice(this);
+		}
+		
 		if (API.equals("Destroy")){
 			if (isAb)
 				SA = AbilityFactory_Destroy.createAbilityDestroy(this);
@@ -374,13 +387,14 @@ public class AbilityFactory {
 				SA = c.getSpellCounter(this);
 		}
 		
-		if (SA != null){
-			if(hasSubAbility())
-				SA.setSubAbility(getSubAbility());
-		}
-		
+		if (SA == null)
+			throw new RuntimeException("AbilityFactory : SpellAbility was not created. Did you add the API section?");
+
 		// *********************************************
 		// set universal properties of the SpellAbility
+		if(hasSubAbility())
+			SA.setSubAbility(getSubAbility());
+		
         if (hasSpDesc)
         {
         	StringBuilder sb = new StringBuilder();
@@ -391,7 +405,7 @@ public class AbilityFactory {
         		sb.append(mapParams.get("CostDesc")).append(" ");
         	else sb.append(abCost.toString());
         	
-        	sb.append(mapParams.get("SpellDescription"));
+	        sb.append(mapParams.get("SpellDescription"));
         	
         	SA.setDescription(sb.toString());
         }

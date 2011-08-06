@@ -7065,75 +7065,13 @@ public class CardFactory_Creatures {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Coastal Hornclaw")) {
-            //sacrifice ability - targets itself - until EOT
-            final Command untilEOT = new Command() {
-                private static final long serialVersionUID = 7538741250040204529L;
-                
-                public void execute() {
-                    card.removeIntrinsicKeyword("Flying");
-                }
-            };
-            
-            //mana tap ability
-            final Ability ability = new Ability(card, "0") {
-                @Override
-                public boolean canPlayAI() {
-                    CardList land = new CardList(AllZone.Computer_Play.getCards());
-                    land = land.getType("Land");
-                    
-                    return (land.size() != 0) && (!card.getKeyword().contains("Flying"))
-                            && CardFactoryUtil.AI_getHumanCreature("Flying", card, false).isEmpty()
-                            && (!card.hasSickness()) && (AllZone.Phase.getPhase().equals(Constant.Phase.Main1));
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    CardList land = new CardList(AllZone.Computer_Play.getCards());
-                    land = land.getType("Land");
-                    land.shuffle();
-                    AllZone.GameAction.sacrifice(land.get(0));
-                }
-                
-                @Override
-                public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(card)) {
-                        card.addIntrinsicKeyword("Flying");
-                        AllZone.EndOfTurn.addUntil(untilEOT);
-                    }
-                }//resolve()
-            };//SpellAbility
-            
-
-            Input runtime = new Input() {
-                private static final long serialVersionUID = 4874019210748846864L;
-                
-                @Override
-                public void showMessage() {
-                	StringBuilder sb = new StringBuilder();
-                	sb.append(card).append(" gains flying until EOT.");
-                	ability.setStackDescription(sb.toString());
-                    
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    CardList choice = new CardList(play.getCards());
-                    choice = choice.getType("Land");
-                    stopSetNext(CardFactoryUtil.input_sacrifice(ability, choice, "Select a land to sacrifice."));
-                }
-            };
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" gains flying until end of turn.");
-            ability.setStackDescription(sb.toString());
-            
-            ability.setDescription("Sacrifice a land: Coastal Hornclaw gains flying until end of turn.");
-            card.addSpellAbility(ability);
-            ability.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
-        
-
-        //*************** START *********** START **************************
         else if(cardName.equals("Spitting Spider")) {
-            final Ability ability = new Ability(card, "0") {
-                @Override
+        	// temporary fix until DamageAll is created
+        	Ability_Cost abCost = new Ability_Cost("Sac<1/Land>", cardName, true);
+            final SpellAbility ability = new Ability_Activated(card, abCost, null) {
+				private static final long serialVersionUID = 2560268493829888869L;
+
+				@Override
                 public boolean canPlayAI() {
                     return false;
                 }
@@ -7147,25 +7085,12 @@ public class CardFactory_Creatures {
                 }//resolve()
             };//SpellAbility
             
-            Input runtime = new Input() {
-                private static final long serialVersionUID = 2004031367305867525L;
-                
-                @Override
-                public void showMessage() {
-                    
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    CardList choice = new CardList(play.getCards());
-                    choice = choice.getType("Land");
-                    stopSetNext(CardFactoryUtil.input_sacrifice(ability, choice, "Select a land to sacrifice."));
-                }
-            };
             StringBuilder sb = new StringBuilder();
             sb.append(card).append(" deals 1 damage to each creature with flying.");
             ability.setStackDescription(sb.toString());
-            
             ability.setDescription("Sacrifice a land: Spitting Spider deals 1 damage to each creature with flying.");
+            
             card.addSpellAbility(ability);
-            ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
 

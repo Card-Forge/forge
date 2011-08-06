@@ -1009,14 +1009,7 @@ public class CombatUtil {
 	                    		if (crd.getController().isHuman())
 	                    		{
 	                    			CardList list = new CardList(AllZone.Computer_Play.getCards());
-	                    			CardListUtil.sortCMC(list);
-	                    			list.reverse();
-	                    			int max = list.size();
-	                    			if (max>a)
-	                    				max = a;
-	                    			
-	                    			for (int i=0;i<max;i++)
-	                    				AllZone.GameAction.sacrifice(list.get(i));
+	                    			ComputerUtil.sacrificePermanents(a, list);
 	                    		}
 	                    		else
 	                    		{

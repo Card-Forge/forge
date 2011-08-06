@@ -757,105 +757,29 @@ public class CardFactoryUtil {
         };
         return target;
     }//input_targetPermanent()
-    
 
-    //CardList choices are the only cards the user can successful select
-    //sacrifices one of the CardList choices
-    public static Input input_sacrifice(final SpellAbility spell, final CardList choices, final String message) {
+    
+    public static Input input_destroyNoRegeneration(final CardList choices, final String message) {
         Input target = new Input() {
-            private static final long serialVersionUID = 2685832214519141903L;
-            
-            @Override
+			private static final long serialVersionUID = -6637588517573573232L;
+
+			@Override
             public void showMessage() {
                 AllZone.Display.showMessage(message);
-                ButtonUtil.enableOnlyCancel();
-            }
-            
-            @Override
-            public void selectButtonCancel() {
-                stop();
+                ButtonUtil.disableAll();
             }
             
             @Override
             public void selectCard(Card card, PlayerZone zone) {
                 if(choices.contains(card)) {
-                    AllZone.getZone(card).remove(card);
-                    AllZone.GameAction.moveToGraveyard(card);
-                    
-                    if(spell.getManaCost().equals("0") || this.isFree()) {
-                        this.setFree(false);
-                        AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
-                        stop();
-                    } else stopSetNext(new Input_PayManaCost(spell));
+                    AllZone.GameAction.destroyNoRegeneration(card);
+                    stop();
                 }
             }
         };
         return target;
-    }//input_sacrifice()
-    
-    public static Input input_sacrificeThis(final SpellAbility spell) {
-        Input target = new Input() {
-            private static final long serialVersionUID = 2685832214519141903L;
-            
-            @Override
-            public void showMessage() {
-            	Card card = spell.getSourceCard();
-                String[] choices = {"Yes", "No"};
-                if(card.getController().equals(AllZone.HumanPlayer)) {
-                    Object o = AllZone.Display.getChoice("Sacrifice " + card.getName() + " ?", choices);
-                    if(o.equals("Yes")) {
-                    	sacrifice(card);
-                    }
-                    else{
-                    	//undo?
-                    	stop();
-                    }
-                }
-            }
-            
-            public void sacrifice(Card card)
-            {
-            	AllZone.GameAction.sacrifice(card);
-            	stop();
-            	AllZone.Stack.add(spell);
-            }
-        };
-        return target;
-    }//input_sacrifice()
-    
-    public static Input input_sacrificeType(final SpellAbility spell, final String type, final String message) {
-    // This input should be setAfterManaPaid so it can add the spell to the stack
-        Input target = new Input() {
-            private static final long serialVersionUID = 2685832214519141903L;
-            private CardList typeList;
-            
-            @Override
-            public void showMessage() {
-                PlayerZone play = AllZone.getZone(Constant.Zone.Play, spell.getSourceCard().getController());
-                typeList = new CardList(play.getCards());
-                typeList = typeList.getType(type);
-                AllZone.Display.showMessage(message);
-                ButtonUtil.enableOnlyCancel();
-            }
-            
-            @Override
-            public void selectButtonCancel() {
-                stop();
-            }
-            
-            @Override
-            public void selectCard(Card card, PlayerZone zone) {
-                if(typeList.contains(card)) {
-                	AllZone.GameAction.sacrifice(card);
-                	AllZone.Stack.add(spell);
-                	stop();
-                }
-            }
-        };
-        return target;
-    }//input_sacrificeType()
-    
-    
+    }//input_destroyNoRegeneration()
+   
     public static Input Wheneverinput_sacrifice(final SpellAbility spell, final CardList choices, final String message, final Command Paid) {
         Input target = new Input() {
             private static final long serialVersionUID = 2685832214519141903L;
@@ -883,43 +807,7 @@ public class CardFactoryUtil {
         };
         return target;
     }//Wheneverinput_sacrifice()
-    
-    public static Input input_sacrifice(final SpellAbility spell, final CardList choices, final String message, final boolean free) {
-        Input target = new Input() {
 
-			private static final long serialVersionUID = 3391527854483291332L;
-
-			@Override
-            public void showMessage() {
-                AllZone.Display.showMessage(message);
-                ButtonUtil.enableOnlyCancel();
-            }
-            
-            @Override
-            public void selectButtonCancel() {
-                stop();
-            }
-            
-            @Override
-            public void selectCard(Card card, PlayerZone zone) {
-                if(choices.contains(card)) {
-                    AllZone.getZone(card).remove(card);
-                    AllZone.GameAction.moveToGraveyard(card);
-                    
-                    if (free)
-                    	this.setFree(true);
-                    
-                    if(spell.getManaCost().equals("0") || this.isFree()) {
-                        this.setFree(false);
-                        AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
-                        stop();
-                    } else stopSetNext(new Input_PayManaCost(spell));
-                }
-            }
-        };
-        return target;
-    }//input_sacrifice()
-    
     //this one is used for Phyrexian War Beast:
     public static Input input_sacrificePermanent(final SpellAbility spell, final CardList choices, final String message) {
         Input target = new Input() {
@@ -954,94 +842,25 @@ public class CardFactoryUtil {
         return target;
     }//input_sacrifice()
     
-    
     public static Input input_sacrificePermanent(final CardList choices, final String message) {
-        Input target = new Input() {
-            private static final long serialVersionUID = 2685832214519141903L;
-            
-            @Override
-            public void showMessage() {
-            	if(choices.size() == 0) stop();
-                AllZone.Display.showMessage(message);
-                ButtonUtil.disableAll();
-            }
-            
-            @Override
-            public void selectCard(Card card, PlayerZone zone) {
-                if(choices.contains(card)) {
-                    AllZone.GameAction.sacrifice(card);
-                    stop();
-                }
-            }
-        };
-        return target;
+    	return input_sacrificePermanentsFromList(1, choices, "Select a permanent to sacrifice");
     }//input_sacrifice()
     
-    public static Input input_destroyNoRegeneration(final CardList choices, final String message) {
-        Input target = new Input() {
-			private static final long serialVersionUID = -6637588517573573232L;
-
-			@Override
-            public void showMessage() {
-                AllZone.Display.showMessage(message);
-                ButtonUtil.disableAll();
-            }
-            
-            @Override
-            public void selectCard(Card card, PlayerZone zone) {
-                if(choices.contains(card)) {
-                    AllZone.GameAction.destroyNoRegeneration(card);
-                    stop();
-                }
-            }
-        };
-        return target;
-    }//input_destroyNoRegeneration()
-    
     public static Input input_sacrificePermanents(final int nCards) {
-    	Input target = new Input() {
-			private static final long serialVersionUID = -8149416676562317629L;
-			int                       n                = 0;
-            
-            @Override
-            public void showMessage() {
-            	CardList list = new CardList(AllZone.Human_Play.getCards());
-                list = list.filter(new CardListFilter(){
-                	public boolean addCard(Card c)
-                	{
-                		return c.isPermanent() && !c.getName().equals("Mana Pool");
-                	}
-                });
-                if(n == nCards || list.size() == 0) stop();
-                
-                AllZone.Display.showMessage("Select a permanent to sacrifice (" +(nCards-n) +" left)");
-                ButtonUtil.disableAll();
-            }
-            
-            @Override
-            public void selectCard(Card card, PlayerZone zone) {
-                if(zone.equals(AllZone.Human_Play) && !card.getName().equals("Mana Pool")) {
-                    AllZone.GameAction.sacrifice(card);
-                    n++;
-                    
-                    //in case no more {type}s in play
-                    CardList list = new CardList(AllZone.Human_Play.getCards());
-                    list = list.filter(new CardListFilter(){
-                    	public boolean addCard(Card c)
-                    	{
-                    		return c.isPermanent() && !c.getName().equals("Mana Pool");
-                    	}
-                    });
-                    if(n == nCards || list.size() == 0) stop();
-                    else
-                    	showMessage();
-                }
-            }
-        };
-        return target;
+    	CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
+        list.remove("Mana Pool");			// is this needed?
+    	return input_sacrificePermanentsFromList(nCards, list, "Select a permanent to sacrifice");
     }//input_sacrificePermanents()
     
     public static Input input_sacrificePermanents(final int nCards, final String type) {
+    	CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
+        list.remove("Mana Pool");			// is this needed?
+        
+        list = list.getType(type);
+    	return input_sacrificePermanentsFromList(nCards, list, "Select a " +type +" to sacrifice");
+    }//input_sacrificePermanents()
+    
+    public static Input input_sacrificePermanentsFromList(final int nCards, final CardList list, final String message) {
     	Input target = new Input() {
 			private static final long serialVersionUID = 1981791992623774490L;
 			int                       n                = 0;
@@ -1049,23 +868,20 @@ public class CardFactoryUtil {
             @Override
             public void showMessage() {
             	//in case no more {type}s in play
-                CardList list = new CardList(AllZone.Human_Play.getCards());
-                list = list.getType(type);
                 if(n == nCards || list.size() == 0) stop();
             	
-                AllZone.Display.showMessage("Select a " +type +" to sacrifice (" +(nCards-n) +" left)");
+                AllZone.Display.showMessage(message + " (" +(nCards-n) +" left)");
                 ButtonUtil.disableAll();
             }
             
             @Override
             public void selectCard(Card card, PlayerZone zone) {
-                if(zone.equals(AllZone.Human_Play) && card.getType().contains(type)) {
+                if(zone.equals(AllZone.Human_Play) && list.contains(card)) {
                     AllZone.GameAction.sacrifice(card);
                     n++;
+                    list.remove(card);
                     
                     //in case no more {type}s in play
-                    CardList list = new CardList(AllZone.Human_Play.getCards());
-                    list = list.getType(type);
                     if(n == nCards || list.size() == 0) stop();
                     else
                     	showMessage();

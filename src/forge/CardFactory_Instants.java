@@ -3146,35 +3146,6 @@ public class CardFactory_Instants {
             
             return card;
         }//*************** END ************ END **************************
-        
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Diabolic Edict") ) {
-            final SpellAbility spell = new Spell(card) {
-              
-				private static final long serialVersionUID = 1593405082929818055L;
-
-				@Override
-                public void resolve() {
-                    getTargetPlayer().sacrificeCreature();
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-                    CardList hList = new CardList(hPlay.getCards());
-                    hList = hList.getType("Creature");
-                    return hList.size() > 0;
-                }
-            };
-            spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-        }//*************** END ************ END **************************
-
 
         //*************** START *********** START **************************
         else if(cardName.equals("Path to Exile")) {
