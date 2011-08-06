@@ -5,7 +5,6 @@ package forge.card.cardFactory;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 import java.util.Stack;
 import java.util.Map.Entry;
 
@@ -5476,47 +5475,6 @@ public class CardFactory_Creatures {
         	card.addSpellAbility(ability);
         	ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
         	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
-        }//*************** END ************ END **************************
-        
-        
-         //*************** START *********** START **************************
-        else if(cardName.equals("Arc-Slogger")) {
-        	/*
-        	 * R, Exile the top ten cards of your library: Arc-Slogger deals
-        	 * 2 damage to target creature or player.
-        	 */
-        	final SpellAbility ability = new Ability(card, "R") {
-        		@Override
-        		public boolean canPlayAI() {
-        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer);
-        			int life = AllZone.HumanPlayer.getLife();
-        			if(lib.size() > 10 && life <=2) {
-        				return true;
-        			}
-        			else{
-        				return false;
-        			}
-        		}
-        		@Override
-        		public void resolve() {
-        			int damage = 2;
-        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
-        			int max = Math.min(lib.size(), 10);
-        			for(int i = 0; i < max; i++) {
-        				//remove the top card 10 times
-        				AllZone.GameAction.exile(lib.get(0));
-        			}
-        			if(getTargetCard() != null) {
-        				if(AllZone.GameAction.isCardInPlay(getTargetCard())
-        						&& CardFactoryUtil.canTarget(card, getTargetCard())) {
-        					getTargetCard().addDamage(damage, card);
-        				}
-        			} else getTargetPlayer().addDamage(damage, card);
-
-        		}   
-        	};
-        	card.addSpellAbility(ability);
-        	ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
         }//*************** END ************ END **************************
         
         
