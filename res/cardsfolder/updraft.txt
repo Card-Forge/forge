@@ -1,0 +1,9 @@
+Name:Updraft
+ManaCost:1 U
+Types:Instant
+Text:no text
+A:SP$Pump|Cost$1 U|Tgt$TgtC|KW$Flying|SpellDescription$Target creature gains flying until end of turn.
+K:Draw a card at the beginning of the next turn's upkeep.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/updraft.jpg
+End

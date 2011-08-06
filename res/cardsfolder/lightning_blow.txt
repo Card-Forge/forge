@@ -2,7 +2,7 @@ Name:Lightning Blow
 ManaCost:1 W
 Types:Instant
 Text:no text
-A:SP$Pump|Cost$1 W|ValidTgts$Creature|KW$First Strike|SpellDescription$Target creature gains first strike until end of turn.
+A:SP$Pump|Cost$1 W|Tgt$TgtC|KW$First Strike|SpellDescription$Target creature gains first strike until end of turn.
 K:Draw a card at the beginning of the next turn's upkeep.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_blow.jpg
