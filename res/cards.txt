@@ -1,3 +1,28 @@
+Serra Avatar
+4 W W W
+Creature Avatar
+Serra Avatar's power and toughness are each equal to your life total. If Serra Avatar is destroyed, shuffle it into its owner's library instead.
+1/1
+When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_avatar.jpg
+
+Absolute Grace
+1 W
+Enchantment
+All creatures gain protection from black.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/absolute_grace.jpg
+
+Absolute Law
+1 W
+Enchantment
+All creatures gain protection from red.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/absolute_law.jpg
+
 Fracturing Gust
 2 GW GW GW
 Instant
@@ -37,20 +62,6 @@ Whenever Abomination blocks or becomes blocked by a green or white creature, des
 2/6
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abomination.jpg
-
-Absolute Grace
-1 W
-Enchantment
-All creatures gain protection from black.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/absolute_grace.jpg
-
-Absolute Law
-1 W
-Enchantment
-All creatures gain protection from red.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/absolute_law.jpg
 
 Absorb
 W U U
@@ -26802,15 +26813,6 @@ As long as you have 30 or more life, Serra Ascendant gets +5/+5 and has flying.
 Lifelink
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_ascendant.jpg
-
-Serra Avatar
-4 W W W
-Creature Avatar
-Serra Avatar's power and toughness are each equal to your life total. If Serra Avatar is destroyed, shuffle it into its owner's library instead.
-1/1
-When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_avatar.jpg
 
 Serra Avenger
 W W
