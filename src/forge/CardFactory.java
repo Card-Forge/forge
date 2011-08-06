@@ -655,6 +655,31 @@ public class CardFactory implements NewConstants {
             }
         }
         
+        
+        if (card.isType("World")) // Enforce the "World rule"
+        {
+        	Command intoPlay = new Command() {
+            private static final long serialVersionUID = 6536398032388958127L;
+                    
+            	public void execute() {
+                    CardList CardsinPlay = new CardList();
+              		CardsinPlay.addAll(AllZone.Human_Play.getCards());
+              		CardsinPlay.addAll(AllZone.Computer_Play.getCards());
+              		CardsinPlay = CardsinPlay.getType("World");
+              		CardsinPlay = CardsinPlay.filter(new CardListFilter() {
+        				public boolean addCard(Card c) {
+        					if(!c.equals(card)) return true;
+        					return false;
+        				}
+        	      	});
+              		for(int i = 0; i < CardsinPlay.size(); i++)
+                        AllZone.GameAction.sacrificeDestroy(CardsinPlay.get(i));	 
+                    }//execute()
+                };//Command
+                card.addComesIntoPlayCommand(intoPlay);
+        }
+        
+        
         if (hasKeyword(card, "When CARDNAME enters the battlefield, return a land you control to its owner's hand.") != -1)
         {
         	int n = hasKeyword(card, "When CARDNAME enters the battlefield, return a land you control to its owner's hand.");

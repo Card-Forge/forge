@@ -2234,7 +2234,7 @@ public class GameAction {
 	}
     // Whenever Keyword
 	
-    private void sacrificeDestroy(Card c) {
+   public void sacrificeDestroy(Card c) {
         if(!isCardInPlay(c)) return;
         
         boolean persist = false;
