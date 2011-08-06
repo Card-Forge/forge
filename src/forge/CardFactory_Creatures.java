@@ -383,7 +383,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Radiant's Dragoons")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -406,7 +406,7 @@ public class CardFactory_Creatures {
             };
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Shu Soldier-Farmers") || cardName.equals("Staunch Defenders")
