@@ -109,6 +109,7 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Dr Doom 3", "hard", "GWB Constructed");
 //        addToDeckList("Dr Fate 3", "hard", "UB Infect");
         addToDeckList("Dr No 3", "hard", "WUB Combo & Control deck with The Rack, Balance, Propaganda and discard spells");
+        addToDeckList("Dr Strangelove 3", "hard", "Mono U Sanity Grinding deck");
         
         addToDeckList("Electro 3", "hard", "WRG Naya deck with creatures with power 5 or greater");
         addToDeckList("Elrond 1", "easy", "WG Aura deck with Rabid Wombat");
