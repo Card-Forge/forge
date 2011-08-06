@@ -85,7 +85,7 @@ public class ComputerUtil
 	  // Play higher costing spells first?
 	  Cost cost = sa.getPayCosts();
 	  // Convert cost to CMC
-	  String totalMana = source.getSVar("PayX"); // + cost.getCMC()
+	  //String totalMana = source.getSVar("PayX"); // + cost.getCMC()
 	  
 	  // Consider the costs here for relative "scoring"
 	  if (cost.getDiscardType().equals("Hand")){

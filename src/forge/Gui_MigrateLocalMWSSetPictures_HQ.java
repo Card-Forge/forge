@@ -10,20 +10,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
+//import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
+//import java.io.FileReader;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.Proxy;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.StringTokenizer;
+//import java.util.Random;
+//import java.util.StringTokenizer;
 
 import javax.swing.AbstractButton;
 import javax.swing.Box;
@@ -251,7 +250,7 @@ public class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRangeModel 
         
         File base = ForgeProps.getFile(IMAGE_BASE);
         
-        Random r = MyRandom.random;
+        //Random r = MyRandom.random;
         
         Proxy p = null;
         if(type == 0) p = Proxy.NO_PROXY;
@@ -260,7 +259,7 @@ public class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRangeModel 
         } catch(Exception ex) {
             ErrorViewer.showError(ex, ForgeProps.getLocalized(ERRORS.PROXY_CONNECT), addr.getText(),
                     port.getText());
-//            throw new RuntimeException("Gui_DownloadPictures : error 1 - " +ex);
+            //throw new RuntimeException("Gui_DownloadPictures : error 1 - " +ex);
             return;
         }
         
@@ -439,7 +438,7 @@ public class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRangeModel 
     	}
     	
         //ArrayList<mCard> list = new ArrayList<mCard>();
-        File file;
+        //File file;
         /*
         File base = ForgeProps.getFile(IMAGE_TOKEN);
         for(int i = 0; i < cardTokenLQ.length; i++) {
@@ -455,7 +454,7 @@ public class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRangeModel 
       System.out.println(out[i].name +" " +out[i].url);
         return out;
     }//getNeededCards()
-    
+    /*
     private static mCard[] readFile(String ABC) {
         try {
         	FileReader zrc = new FileReader(ForgeProps.getFile(ABC));
@@ -481,6 +480,7 @@ public class Gui_MigrateLocalMWSSetPictures_HQ extends DefaultBoundedRangeModel 
             throw new RuntimeException("Gui_DownloadPictures : readFile() error");
         }
     }//readFile()
+    */
     
     private class ProxyHandler implements ChangeListener {
         private int type;

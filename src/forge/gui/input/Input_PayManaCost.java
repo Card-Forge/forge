@@ -3,10 +3,7 @@ package forge.gui.input;
 
 import forge.*;
 import forge.card.mana.ManaCost;
-import forge.card.mana.Mana_PartPhyrexian;
 import forge.card.spellability.SpellAbility;
-
-import java.util.ArrayList;
 
 //pays the cost of a card played from the player's hand
 //the card is removed from the players hand if the cost is paid
