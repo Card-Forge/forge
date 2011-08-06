@@ -978,7 +978,8 @@ public class CardFactory implements NewConstants {
           
            sbD.append(Math.abs(NumDefense[0]) + " and gains " + Keyword[0] + " until end of turn.");
         }
-        if (!sbD.toString().isEmpty())
+        //if (!sbD.toString().isEmpty())
+        if (!sbD.toString().trim().equals(""))
         	d = sbD.toString();
        
         if (k.length > 2)
