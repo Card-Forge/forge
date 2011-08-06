@@ -112,7 +112,7 @@ public class AbilityFactory_Regenerate {
 	private static String regenerateStackDescription(AbilityFactory af, SpellAbility sa){
 		final HashMap<String,String> params = af.getMapParams();
 		StringBuilder sb = new StringBuilder();
-		String name = af.getHostCard().getName();
+		Card host = af.getHostCard();
 
 		ArrayList<Card> tgtCards;
 		Target tgt = af.getAbTgt();
@@ -125,14 +125,14 @@ public class AbilityFactory_Regenerate {
 			if (sa instanceof Ability_Sub)
 				sb.append(" ");
 			else
-				sb.append(name).append(" - ");
+				sb.append(host).append(" - ");
 
 			sb.append("Regenerate ");
 			Iterator<Card> it = tgtCards.iterator();
 			while(it.hasNext()) {
 				Card tgtC = it.next();
 				if(tgtC.isFaceDown()) sb.append("Morph");
-				else sb.append(tgtC.getName());
+				else sb.append(tgtC);
 				
 				if(it.hasNext()) sb.append(" ");
 			}

@@ -2,6 +2,7 @@ package forge.card.abilityFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
 
 import forge.AllZone;
@@ -306,11 +307,10 @@ public class AbilityFactory_Destroy {
 		return true;
 	}
 	
-	public static String destroyStackDescription(final AbilityFactory af, SpellAbility sa){
-		// when getStackDesc is called, just build exactly what is happening
+	private static String destroyStackDescription(final AbilityFactory af, SpellAbility sa) {
 		final boolean noRegen = af.getMapParams().containsKey("NoRegen");
 		StringBuilder sb = new StringBuilder();
-		String name = af.getHostCard().getName();
+		Card host = af.getHostCard();
 
 		ArrayList<Card> tgtCards;
 
@@ -320,25 +320,33 @@ public class AbilityFactory_Destroy {
 		else{
 			tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
 		}
+		
+		if (sa instanceof Ability_Sub)
+			sb.append(" ");
+		else
+			sb.append(host).append(" - ");
 
-		sb.append(name).append(" - Destroy ");
+		sb.append("Destroy ");
 
-		for(Card c : tgtCards)
-			sb.append(c.getName()).append(", ");
+		Iterator<Card> it = tgtCards.iterator();
+		while(it.hasNext()) {
+			Card tgtC = it.next();
+			if(tgtC.isFaceDown()) sb.append("Morph ").append("(").append(tgtC.getUniqueNumber()).append(")");
+			else sb.append(tgtC);
+			
+			if(it.hasNext()) sb.append(", ");
+		}
 
 		if (noRegen) {
-			if (sb.toString().endsWith(", ")) {
-				sb.deleteCharAt(sb.toString().length() - 1);
-				sb.deleteCharAt(sb.toString().length() - 1);
-			}
 			sb.append(". ");
 			if (tgtCards.size() == 1)
 				sb.append("It");
 			else
 				sb.append("They");
-			sb.append(" can't be regenerated. ");
+			sb.append(" can't be regenerated");
 		}
-
+		sb.append(".");
+		
 		Ability_Sub abSub = sa.getSubAbility();
 		if (abSub != null) {
 			sb.append(abSub.getStackDescription());
