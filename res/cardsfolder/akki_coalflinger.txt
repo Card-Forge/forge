@@ -1,4 +1,4 @@
-Name:Akki Coalfinger
+Name:Akki Coalflinger
 ManaCost:1 R R
 Types:Creature Goblin Shaman
 Text:no text
@@ -6,5 +6,5 @@ PT:2/2
 A:SP$PumpAll | Cost$ R T | ValidCards$ Creature.attacking | KW$ First Strike | SpellDescription$ Attacking creatures gain first strike until end of turn.
 SVar:Rarity:Uncommon
 SVar:RemAIDeck:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_coalfinger.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_coalflinger.jpg
 End
