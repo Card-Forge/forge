@@ -2934,46 +2934,36 @@ public class GameActionUtil {
 
     public static void playCard_Kor_Firewalker(Card c) {
 
-        //final PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-        //final PlayerZone comp = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-
         CardList list = AllZoneUtil.getCardsInPlay("Kor Firewalker");
 
         if (list.size() > 0) {
-            //ArrayList<String> cl=CardUtil.getColors(c);
             if (c.isRed()) {
                 for (int i=0;i<list.size();i++) {
                     final Card card = list.get(i);
+                    final Player controller = card.getController();
                     
                     Ability ability2 = new Ability(card, "0") {
                         public void resolve() {
-                        	boolean bAccept = false;
-                            if (card.getController().equals(AllZone.HumanPlayer)) {
-                            	StringBuilder title = new StringBuilder();
-                                title.append("Kor Firewalker Ability");
-                                StringBuilder message = new StringBuilder();
-                                message.append("Will you gain 1 life?");
-                                int choice = JOptionPane.showConfirmDialog(null, message.toString(), title.toString(), JOptionPane.YES_NO_OPTION);
-                                
-                                bAccept = (choice == JOptionPane.YES_OPTION);
-                            }// Human
-                            else // computer always wants life
-                            	bAccept = true;
-
-                            if (bAccept) {
-                            	card.getController().gainLife(1, card);
-                            }
+                            
+                            if (controller.isHuman()) {
+                                String question = "Will you gain 1 life?";
+                                if (showYesNoDialog(card, question)) {
+                                    controller.gainLife(1, card);
+                                }
+                            }// controller isComputer()
+                            else controller.gainLife(1, card);
+                            
                         }// resolve()
                     };//ability2
                     
                     StringBuilder sb = new StringBuilder();
                     sb.append(card.getName()).append(" - ").append(c.getController()).append(" played a Red spell, ");
-                    sb.append(card.getController()).append(" gains 1 life.");
+                    sb.append(controller).append(" may gain 1 life.");
                     ability2.setStackDescription(sb.toString());
                     AllZone.Stack.add(ability2);
-                }
-            }//if
-        }
+                }//for
+            }//if c.isRed
+        }//if list
     }//Kor Firewalker
 	
 	public static void playCard_Curse_of_Wizardry(final Card c) {
