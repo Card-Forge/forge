@@ -1,7 +1,7 @@
 Name:Chittering Rats
 ManaCost:1 B B
 Types:Creature Rat
-Text:When Chittering Rats comes into play, target opponent randomly puts a card from his or her hand on top of his or her library.
+Text:When CARDNAME enters the battlefield, target opponent puts a card from his or her hand on top of his or her library.
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card46096.jpg

@@ -1,7 +1,7 @@
 Name:Dripping-Tongue Zubera
 ManaCost:1 G
 Types:Creature Zubera Spirit
-Text:When Dripping-Tongue is put into a graveyard from play, put a 1/1 colorless Spirit creature token into play for each Zubera put into a graveyard from play this turn.
+Text:When CARDNAME is put into a graveyard from the battlefield, put a 1/1 colorless Spirit creature token onto the battlefield for each Zubera put into a graveyard from the battlefield this turn.
 PT:1/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80511.jpg

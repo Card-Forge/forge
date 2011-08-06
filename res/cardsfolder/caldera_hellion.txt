@@ -1,7 +1,7 @@
 Name:Caldera Hellion
 ManaCost:3 R R
 Types:Creature Hellion
-Text:When Caldera Hellion comes into play, it deals 3 damage to each creature.
+Text:When CARDNAME enters the battlefield, it deals 3 damage to each creature.
 PT:3/3
 K:Devour:1
 SVar:Rarity:Rare

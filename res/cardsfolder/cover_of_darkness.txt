@@ -1,7 +1,7 @@
 Name:Cover of Darkness
 ManaCost:1 B
 Types:Enchantment
-Text:As Cover of Darkness comes into play, choose a creature type.
+Text:As CARDNAME enters the battlefield, choose a creature type.
 K:stPumpAll:Creature.ChosenType:0/0/Fear:No Condition:Creatures of the chosen type have fear. (They can't be blocked except by artifact creatures and/or black creatures.)
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cover_of_darkness.jpg

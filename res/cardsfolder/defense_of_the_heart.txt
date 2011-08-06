@@ -1,7 +1,7 @@
 Name:Defense of the Heart
 ManaCost:3 G
 Types:Enchantment
-Text:At the beginning of your upkeep, if an opponent controls three or more creatures, sacrifice Defense of the Heart to search your library for up to two creature cards and put those creatures into play. Then shuffle your library.
+Text:At the beginning of your upkeep, if an opponent controls three or more creatures, sacrifice CARDNAME, search your library for up to two creature cards, and put those cards onto the battlefield. Then shuffle your library.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defense_of_the_heart.jpg
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/100.jpg

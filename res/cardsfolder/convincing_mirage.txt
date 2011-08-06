@@ -1,7 +1,7 @@
 Name:Convincing Mirage
 ManaCost:1 U
 Types:Enchantment Aura
-Text:When Convincing Mirage comes into play, choose a basic land type.\r\nEnchanted land is the chosen type.
+Text:As CARDNAME enters the battlefield, choose a basic land type..\r\nEnchanted land is the chosen type.
 K:Enchant land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/convincing_mirage.jpg

@@ -1,7 +1,7 @@
 Name:Dragon Broodmother
 ManaCost:2 R R R G
 Types:Creature Dragon
-Text:At the beginning of each upkeep, put a 1/1 red and green Dragon creature token with flying and devour 2 into play.
+Text:At the beginning of each upkeep, put a 1/1 red and green Dragon creature token with flying and devour 2 onto the battlefield. (As the token enters the battlefield, you may sacrifice any number of creatures. It enters the battlefield with twice that many +1/+1 counters on it.)
 PT:4/4
 K:Flying
 SVar:Rarity:Mythic

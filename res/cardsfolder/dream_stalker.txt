@@ -1,7 +1,7 @@
 Name:Dream Stalker
 ManaCost:1 U
 Types:Creature Illusion
-Text:When Dream Stalker comes into play, return a permanent you control to its owner's hand.
+Text:When CARDNAME enters the battlefield, return a permanent you control to its owner's hand.
 PT:1/5
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_stalker.jpg

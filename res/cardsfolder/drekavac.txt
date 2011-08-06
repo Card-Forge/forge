@@ -1,7 +1,7 @@
 Name:Drekavac
 ManaCost:1 B
 Types:Creature Beast
-Text:When Drekavac comes into play, sacrifice it unless you discard a noncreature card.
+Text:When CARDNAME enters the battlefield, sacrifice it unless you discard a noncreature card.
 PT:3/3
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
