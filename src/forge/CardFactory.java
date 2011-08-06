@@ -16241,7 +16241,7 @@ public class CardFactory implements NewConstants {
       
                 @Override
                 public boolean canPlay() {
-                    if(AllZone.Human_Life.getLife() >= 5 && AllZone.GameAction.getLastPlayerToDraw().equals(Constant.Player.Human) && AllZone.GameAction.isCardInPlay(card) && super.canPlay()) 
+                    if(AllZone.Human_Life.getLife() >= 5 && AllZone.GameAction.isPlayerTurn(Constant.Player.Human) && super.canPlay()) 
                     	return true;
                     else return false;
                 }
@@ -16249,7 +16249,7 @@ public class CardFactory implements NewConstants {
                 @Override
                 public boolean canPlayAI() {
                 	if (card.getController().equals(Constant.Player.Human) && AllZone.Computer_Life.getLife() >= 9 && 
-                			AllZone.GameAction.getLastPlayerToDraw().equals(Constant.Player.Computer) && 
+                			AllZone.GameAction.isPlayerTurn(Constant.Player.Computer) && 
                 			AllZone.GameAction.isCardInPlay(card)) 
                     	return true;
                     else return false;
@@ -17174,7 +17174,7 @@ public class CardFactory implements NewConstants {
                 public boolean canPlay() {
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
                     
-                    return AllZone.GameAction.isCardInZone(card, grave) && AllZone.GameAction.getLastPlayerToDraw().equals(card.getController());                   
+                    return AllZone.GameAction.isCardInZone(card, grave) && AllZone.GameAction.isPlayerTurn(card.getController());                   
                 }
                 
             };

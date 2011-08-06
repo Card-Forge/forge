@@ -30,8 +30,8 @@ public class Phase extends MyObservable
 	private String phases[][] =
 	{
     //human's turn
-    {Constant.Player.Human    , Constant.Phase.Untap}                                  ,
-//   {Constant.Player.Human    , Constant.Phase.Upkeep}                                ,
+			{Constant.Player.Human, Constant.Phase.Untap},
+//	{Constant.Player.Human, Constant.Phase.Upkeep},
             {Constant.Player.Human, Constant.Phase.Draw},
             {Constant.Player.Human, Constant.Phase.Main1},
             {Constant.Player.Human, Constant.Phase.Combat_Declare_Attackers},
@@ -45,12 +45,13 @@ public class Phase extends MyObservable
             {Constant.Player.Human, Constant.Phase.End_Of_Combat},
             {Constant.Player.Human, Constant.Phase.Main2},
             {Constant.Player.Human, Constant.Phase.At_End_Of_Turn},
-//   {Constant.Player.Computer , Constant.Phase.End_Of_Turn}                           ,
+//	{Constant.Player.Computer , Constant.Phase.End_Of_Turn},
             {Constant.Player.Human, Constant.Phase.Until_End_Of_Turn},
             {Constant.Player.Human, Constant.Phase.Cleanup},
             
             //computer's turn
             {Constant.Player.Computer, Constant.Phase.Untap},
+//	{Constant.Player.Computer, Constant.Phase.Upkeep},
             {Constant.Player.Computer, Constant.Phase.Draw},
             {Constant.Player.Computer, Constant.Phase.Main1},
             {Constant.Player.Human, Constant.Phase.Combat_Before_Declare_Attackers_InstantAbility},
@@ -405,6 +406,6 @@ public class Phase extends MyObservable
 	public static boolean canCastSorcery(String player)
 	{
 		return (AllZone.Phase.getPhase().equals(Constant.Phase.Main2) || (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) 
-				&& AllZone.GameAction.getLastPlayerToDraw().equals(player)) && AllZone.Stack.size() == 0);
+				&& AllZone.GameAction.isPlayerTurn(player)) && AllZone.Stack.size() == 0);
 	}
 }

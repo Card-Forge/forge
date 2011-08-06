@@ -15,6 +15,8 @@ public class Input_Draw extends Input {
             return;
         }
         
+        AllZone.GameInfo.setHumanPlayedLands(0);
+        
         //check if human should skip their draw phase
         CardList humanCards = new CardList();
         humanCards.addAll(AllZone.Human_Play.getCards());
@@ -22,7 +24,6 @@ public class Input_Draw extends Input {
                 || humanCards.containsName("Yawgmoth's Bargain");
         
         if(AllZone.Phase.getPhase().equals(Constant.Phase.Draw) && humanSkipsDrawPhase) {
-            AllZone.GameInfo.setHumanPlayedLands(0);
             AllZone.Phase.setNeedToNextPhase(true);
             
         } else { //continue with draw phase
@@ -52,7 +53,6 @@ public class Input_Draw extends Input {
             if(drawCard && AllZone.Phase.getTurn() > 1) AllZone.GameAction.drawCard(Constant.Player.Human);
             
             if(AllZone.Phase.getPhase().equals(Constant.Phase.Draw)) {
-                AllZone.GameInfo.setHumanPlayedLands(0);
                 
                 //AllZone.Phase.nextPhase();
                 //for debugging: System.out.println("need to nextPhase(from Input_Draw on human's draw) = true");

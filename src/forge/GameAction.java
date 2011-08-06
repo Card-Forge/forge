@@ -2193,6 +2193,15 @@ public class GameAction {
     	removed.add(c);
     }
     
+    private String  playerTurn = Constant.Player.Human;
+    public boolean isPlayerTurn(String player) {
+        return playerTurn.equals(player);
+    }
+    
+    public void setPlayerTurn(String s) {
+    	playerTurn = s;
+    }
+    
     
     private boolean shouldDraw       = false;	// Starts false to skip first draw
     private String  lastPlayerToDraw = Constant.Player.Human;
