@@ -2364,7 +2364,7 @@ public class CardFactory implements NewConstants {
                 CardList getTargets() {
                     CardList tmpList = new CardList();
                     tmpList.addAll(AllZone.Human_Play.getCards());
-                    tmpList.filter(new CardListFilter() {
+                    tmpList = tmpList.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return (CardFactoryUtil.canTarget(card, c));
                         }
