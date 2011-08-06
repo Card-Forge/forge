@@ -1637,6 +1637,8 @@ class CardFactory_Lands {
             
         }//*************** END ************ END **************************
         
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Mikokoro, Center of the Sea")) {
             final Ability_Tap ability = new Ability_Tap(card, "2") {
@@ -1661,6 +1663,8 @@ class CardFactory_Lands {
             //card.addExtrinsicKeyword("tap: add 1");
             
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************  
         else if(cardName.equals("Gargoyle Castle")) {

@@ -3524,6 +3524,7 @@ Scepter of Insight
 1 U U
 Artifact
 no text
+abDrawCards 3 U T:1:Draw a card.:Scepter of Insight - draw a card
 
 Asha's Favor
 2 W
@@ -3537,6 +3538,7 @@ Creature Human Wizard
 no text
 0/1
 Exalted
+abDrawCards U T:1:Drawback$YouDiscard/1:Draw a card, then discard a card.:Frontline Sage - draw a card then discard a card
 
 Blinding Mage
 1 W
@@ -4058,6 +4060,7 @@ Legendary Creature Insect Wizard
 no text
 1/2
 Flying
+abDrawCardsTgt B R G T:1:Target player draws a card.:Xira Arien - target player draws a card
 
 Gwendlyn Di Corci
 R B B U
@@ -11570,6 +11573,7 @@ no cost
 Legendary Land
 no text
 tap: add 1
+abDrawCards 2 T:1:Drawback$OppDraw/1:Each player draws a card.:Mikokoro, Center of the Sea - each player draws a card
 
 Thallid Shell-Dweller
 1 G
@@ -16075,6 +16079,7 @@ Thought Courier
 Creature Human Wizard
 no text
 1/1
+abDrawCards T:1:Drawback$YouDiscard/1:Draw a card, then discard a card.:Thought Courier - draw a card and discard a card
 
 Puppeteer
 2 U

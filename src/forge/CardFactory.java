@@ -14276,7 +14276,9 @@ public class CardFactory implements NewConstants {
             ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
         }//*************** END ************ END **************************
         
-        /*  //*************** START *********** START **************************
+        
+/*
+            //*************** START *********** START **************************
             else if(cardName.equals("Scepter of Insight"))
             {
              final SpellAbility ability = new Ability_Tap(card, "3 U")
@@ -14295,7 +14297,9 @@ public class CardFactory implements NewConstants {
               ability.setDescription("3 U, tap: Draw a card.");
               ability.setStackDescription(card.getName() + " - draw a card.");
             }//*************** END ************ END **************************
-        */
+*/
+        
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Innocent Blood")) {
             final SpellAbility spell = new Spell(card) {

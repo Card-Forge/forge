@@ -6980,6 +6980,8 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Xira Arien")) {
             //mana tap ability
@@ -7022,6 +7024,7 @@ public class CardFactory_Creatures {
             
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
+*/
         
 
         //*************** START *********** START **************************
@@ -14036,6 +14039,8 @@ public class CardFactory_Creatures {
             
         }//*************** END ************ END **************************
         
+        
+/*
         //*************** START *********** START **************************
         if(cardName.equals("Frontline Sage")) {
             final SpellAbility ability = new Ability_Tap(card, "U") {
@@ -14056,6 +14061,7 @@ public class CardFactory_Creatures {
             ability.setDescription("U, tap: Draw a card, then discard a card.");
             ability.setStackDescription("Frontline Sage - draw a card, then discard a card.");
         }//*************** END ************ END **************************
+*/
         
 
         //*************** START *********** START **************************
@@ -14370,6 +14376,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
 
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Thought Courier")) {
             final Ability_Tap ability = new Ability_Tap(card) {
@@ -14391,6 +14398,8 @@ public class CardFactory_Creatures {
             ability.setStackDescription("Thought Courier - draw a card, then discard a card.");
             ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Elvish Hunter")) {
