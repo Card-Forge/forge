@@ -1,3 +1,12 @@
+Obsessive Search
+U
+Instant
+no text
+spDrawCards:1:Draw a card.:Obsessive Search - draw a card.
+Madness:U
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/obsessive_search.jpg
+
 Frantic Purification
 2 W
 Instant
