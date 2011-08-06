@@ -1,7 +1,7 @@
 Name:Transguild Courier
 ManaCost:4
 Types:Artifact Creature Golem
-Text:no text
+Text:Transguild Courier is all colors (even if this card isn't on the battlefield).
 PT:3/3
 K:CARDNAME is white.
 K:CARDNAME is blue.
