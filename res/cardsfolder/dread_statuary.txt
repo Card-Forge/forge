@@ -2,7 +2,7 @@ Name:Dread Statuary
 ManaCost:no cost
 Types:Land
 Text:no text
-A:AB$Mana|Cost$T|Produced$1|SpellDescription$Add 1 to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_statuary.jpg
 SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/135.jpg

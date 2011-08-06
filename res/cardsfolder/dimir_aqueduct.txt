@@ -4,7 +4,7 @@ Types:Land
 Text:no text
 K:Dimir Aqueduct enters the battlefield tapped.
 K:When Dimir Aqueduct enters the battlefield, return a land you control to its owner's hand.
-A:AB$Mana|Cost$T|Produced$U B|SpellDescription$Add U B to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ U B | SpellDescription$ Add U B to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dimir_aqueduct.jpg
