@@ -1187,7 +1187,7 @@ public class CardFactory implements NewConstants {
               ability.setTargetCard(card);
            card.addSpellAbility(ability);
         }
-        if (tapOnlyCost)
+        if (tapCost)
         {
            final SpellAbility ability = new Ability_Tap(card)
            {
@@ -1337,152 +1337,13 @@ public class CardFactory implements NewConstants {
               ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
            else
               ability.setTargetCard(card);
+           
+           if (! tapOnlyCost)
+        	   ability.setManaCost(manaCost);
+           
            card.addSpellAbility(ability);
         }
-        if (! tapOnlyCost && tapCost)
-        {
-           final SpellAbility ability = new Ability_Tap(card, manaCost)
-           {
-              private static final long serialVersionUID = 7593387152288440603L;
-             
-              private int defense;
-              private String keyword;
-             
-              private int getNumAttack()
-              {
-                 if (NumAttack[0] != -1138)
-                    return NumAttack[0];
-                
-                 if (! AttackX[0].equals("none"))
-                    return CardFactoryUtil.xCount(card, AttackX[0]);
-                
-                 return 0;
-              }
-              private int getNumDefense()
-              {
-                 if (NumDefense[0] != -1138)
-                    return NumDefense[0];
-                
-                 if (! DefenseX[0].equals("none"))
-                    return CardFactoryUtil.xCount(card, DefenseX[0]);
-                
-                 return 0;
-              }               
-
-              public boolean canPlayAI()
-              {
-                 defense = getNumDefense();
-                 keyword = Keyword[0];
-                 if(CardFactoryUtil.AI_doesCreatureAttack(card))
-                    return false;
-                
-                 if (AllZone.Phase.getPhase().equals(Constant.Phase.Main2))
-                    return false;
-
-                 CardList list = getCreatures();
-                 if (!list.isEmpty())
-                 {
-                    boolean goodt = false;
-                    Card t = new Card();
-                    while (goodt == false && !list.isEmpty())
-                    {
-                       t = CardFactoryUtil.AI_getBestCreature(list);
-                       if ((t.getNetDefense() + defense) > 0)
-                          goodt = true;
-                       else
-                          list.remove(t);
-                    }
-                    if (goodt == true)
-                    {
-                       setTargetCard(t);
-                       return true;
-                    }
-                 }
-                
-                 return false;
-              }
-              public boolean canPlay()
-              {
-                 boolean sick = true;
-
-                 if (!card.hasSickness() || !card.isCreature())
-                    sick = false;
-
-                 if (card.isUntapped() && AllZone.GameAction.isCardInPlay(card) &&
-                       !sick && !card.isFaceDown())
-                    return true;
-                 else
-                    return false;
-              }
-              CardList getCreatures()
-              {
-                 CardList list = new CardList(AllZone.Computer_Play.getCards());
-                 list = list.filter(new CardListFilter()
-                 {
-                    public boolean addCard(Card c)
-                    {
-                       if (c.hasSickness() && keyword.equals("Haste"))
-                          return CardFactoryUtil.canTarget(card, c);
-                      
-                       return (CardFactoryUtil.AI_doesCreatureAttack(c)) &&
-                       (CardFactoryUtil.canTarget(card, c)) &&
-                       (!keyword.equals("none") && !c.getKeyword().contains(keyword)) &&
-                       (! (! c.hasSickness()) && keyword.equals("Haste"));
-                    }
-                 });
-                 list.remove(card);
-                 return list;
-              }//getCreature()
-              public void resolve()
-              {
-                 if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card ,getTargetCard()))
-                 {
-                    final Card[] creature = new Card[1];
-                    if (Tgt[0] == true)
-                       creature[0] = getTargetCard();
-                    else
-                       creature[0] = card;
-                   
-                    final int a = getNumAttack();
-                    final int d = getNumDefense();
-                   
-                    final Command EOT = new Command()
-                    {
-                       private static final long serialVersionUID = 3532917180149273560L;
-
-                       public void execute()
-                       {
-                          if(AllZone.GameAction.isCardInPlay(creature[0]))
-                          {
-                             creature[0].addTempAttackBoost(-1 * a);
-                             creature[0].addTempDefenseBoost(-1 * d);
-                             if (! Keyword[0].equals("none"))
-                                creature[0].removeExtrinsicKeyword(Keyword[0]);
-                          }
-                       }
-                    };
-                   
-                    creature[0].addTempAttackBoost(a);
-                    creature[0].addTempDefenseBoost(d);
-                    if (! Keyword[0].equals("none"))
-                       creature[0].addExtrinsicKeyword(Keyword[0]);
-                    AllZone.EndOfTurn.addUntil(EOT);
-
-                    if (! DrawBack[0].equals("none"))
-                           CardFactoryUtil.doDrawBack(DrawBack[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), null, card, creature[0]);
-                 }//if (card is in play)
-              }//resolve()
-           };//SpellAbility
-           
-            ability.setDescription(spDesc[0]);
-            ability.setStackDescription(stDesc[0]);
-
-            if (Tgt[0] == true)
-               ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
-            else
-               ability.setTargetCard(card);
-            card.addSpellAbility(ability);
-        }
+        
       }
     }//while
 
