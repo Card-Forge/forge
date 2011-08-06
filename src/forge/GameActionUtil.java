@@ -5805,8 +5805,10 @@ public class GameActionUtil {
 					card.addCounter(Counters.P1P1, 1);
 				}
 			};// ability2
-
-			ability2.setStackDescription(c.getName() + " - gets a +1/+1 counter.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(c.getName()).append(" - gets a +1/+1 counter.");
+			ability2.setStackDescription(sb.toString());
 
 			AllZone.Stack.add(ability2);
 
@@ -5835,9 +5837,12 @@ public class GameActionUtil {
 					}
 				}
 			};// ability
-
-			ability.setStackDescription("Raven Guild Master - " + opponent
-					+ " removes the top ten cards of his or her library from the game");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Raven Guild Master - ").append(opponent);
+			sb.append(" removes the top ten cards of his or her library from the game");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}
 	}
@@ -5852,11 +5857,13 @@ public class GameActionUtil {
 					player.mayDrawCard();
 				}
 			};// ability2
-
-			ability2.setStackDescription(c.getName() + " - " + player + " may draw a card.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(c.getName()).append(" - ").append(player).append(" may draw a card.");
+			ability2.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability2);
 		}
-
 	}
 
 	private static void playerCombatDamage_lose_halflife_up(Card c) {
@@ -5886,12 +5893,14 @@ public class GameActionUtil {
 
 				}
 			};// ability2
-
-			ability2.setStackDescription(c.getName() + " - " + opponent
-					+ " loses half his or her life, rounded up.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(c.getName()).append(" - ").append(opponent);
+			sb.append(" loses half his or her life, rounded up.");
+			ability2.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability2);
 		}
-
 	}
 
 
@@ -5909,8 +5918,11 @@ public class GameActionUtil {
 
 				}
 			};// ability2
-
-			ability2.setStackDescription(c.getName() + " - " + "opponent discards a card.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(c.getName()).append(" - ").append("opponent discards a card.");
+			ability2.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability2);
 		}
 	}
@@ -5964,10 +5976,13 @@ public class GameActionUtil {
 					}
 				}
 			};// ability
-
-			ability.setStackDescription("Scalpelexis - "
-					+ opponent
-					+ " removes the top four cards of his or her library from the game.  If two or more of those cards have the same name, repeat this process.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Scalpelexis - ").append(opponent);
+			sb.append(" removes the top four cards of his or her library from the game. ");
+			sb.append("If two or more of those cards have the same name, repeat this process.");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}
 	}
@@ -6002,8 +6017,12 @@ public class GameActionUtil {
 					player.drawCards(power);
 				}
 			};// ability2
-
-			ability2.setStackDescription(c.getName() + " - " + player + " draws " + power + " card(s).");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(c.getName()).append(" - ").append(player);
+			sb.append(" draws ").append(power).append(" card(s).");
+			ability2.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability2);
 		} // if
 
@@ -6025,8 +6044,11 @@ public class GameActionUtil {
 				}
 			}
 		};// ability2
-
-		ability2.setStackDescription(c.getName() + " - " + player + " puts copy into play.");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(c.getName()).append(" - ").append(player).append(" puts copy into play.");
+		ability2.setStackDescription(sb.toString());
+		
 		AllZone.Stack.add(ability2);
 	}
 
