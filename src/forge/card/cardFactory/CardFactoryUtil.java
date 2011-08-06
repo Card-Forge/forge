@@ -3296,6 +3296,33 @@ public class CardFactoryUtil {
         return count;
     }
     
+    //parser for player targeted X variables
+    public static int playerXCount(ArrayList<Player> players, String s, Card source) {
+    	final String[] l;
+        l = s.split("/");
+        final String m[] = {"none"};
+        if(l.length > 1) m[0] = l[1];
+        
+        int n = 0;
+        
+        final String[] sq;
+        sq = l[0].split("\\.");
+        
+        if(sq[0].contains("CardsInHand")) {
+        	if(players.size() > 0) {
+        		return doXMath(AllZoneUtil.getPlayerHand(players.get(0)).size(), m);
+        	}
+        }
+        
+        if(sq[0].contains("LifeTotal")) {
+        	if(players.size() > 0) {
+        		return doXMath(players.get(0).getLife(), m);
+        	}
+        }
+        
+        return doXMath(n, m);
+    }
+    
     //parser for non-mana X variables
     public static int xCount(Card c, String s) {
         int n = 0;

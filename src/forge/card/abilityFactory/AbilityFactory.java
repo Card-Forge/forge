@@ -748,8 +748,15 @@ public class AbilityFactory {
 				return CardFactoryUtil.xCount(card, calcX[1]) * multiplier;
 
 			else if (ability != null){
-				CardList list;
+				//Player attribute counting
+				if( calcX[0].startsWith("TargetedPlayer")) {
+					ArrayList<Player> players = new ArrayList<Player>();
+					SpellAbility saTargeting = (ability.getTarget() == null) ?  findParentsTargetedPlayer(ability) : ability;
+					players.addAll(saTargeting.getTarget().getTargetPlayers());
+					return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+				}
 				
+				CardList list;
 				if (calcX[0].startsWith("Sacrificed"))
 					list = findRootAbility(ability).getSacrificedCost();
 				
@@ -948,6 +955,18 @@ public class AbilityFactory {
 				return parent;
 			parent = ((Ability_Sub)parent).getParent();
 		}while(parent.getTarget() == null || parent.getTarget().getTargetCards().size() == 0);
+		
+		return parent;
+	}
+	
+	public static SpellAbility findParentsTargetedPlayer(SpellAbility sa){
+		SpellAbility parent = sa;
+		
+		do{
+			if (!(parent instanceof Ability_Sub))
+				return parent;
+			parent = ((Ability_Sub)parent).getParent();
+		}while(parent.getTarget() == null || parent.getTarget().getTargetPlayers().size() == 0);
 		
 		return parent;
 	}
