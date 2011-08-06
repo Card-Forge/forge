@@ -1,0 +1,10 @@
+Name:Blind Creeper
+ManaCost:1 B
+Types:Creature Zombie Beast
+Text:no text
+PT:3/3
+K:WheneverKeyword:CastSpell/Any:No Condition:Play:StatsPumpEOT/-1/-1:Self:ASAP:No_Condition:No Special Condition:Whenever a player casts a spell, Blind Creeper gets -1/-1 until end of turn.
+SVar:AntiBuffedBy:Spell
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blind_creeper.jpg
+End

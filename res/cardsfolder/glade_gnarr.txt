@@ -1,0 +1,11 @@
+Name:Glade Gnarr
+ManaCost:5 G
+Types:Creature Beast
+Text:no text
+PT:4/4
+K:WheneverKeyword:CastSpell/Any:Color/blue:Play:StatsPumpEOT/2/2:Self:ASAP:No_Condition:No Special Condition:Whenever a player casts a blue spell, Glade Gnarr gets +2/+2 until end of turn.
+SVar:BuffedBy:Spell.Blue
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/glade_gnarr.jpg
+End

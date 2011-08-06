@@ -1,0 +1,11 @@
+Name:Ebon Drake
+ManaCost:2 B
+Types:Creature Drake
+Text:no text
+PT:3/3
+K:Flying
+K:WheneverKeyword:CastSpell/Any:No Condition:Play:ModifyLife/-1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:Whenever a player casts a spell, you lose 1 life.
+SVar:AntiBuffedBy:Spell
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ebon_drake.jpg
+End

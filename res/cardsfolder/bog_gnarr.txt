@@ -1,0 +1,11 @@
+Name:Bog Gnarr
+ManaCost:4 G
+Types:Creature Beast
+Text:no text
+PT:2/2
+K:WheneverKeyword:CastSpell/Any:Color/black:Play:StatsPumpEOT/2/2:Self:ASAP:No_Condition:No Special Condition:Whenever a player casts a black spell, Bog Gnarr gets +2/+2 until end of turn.
+SVar:BuffedBy:Spell.Black
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_gnarr.jpg
+End
