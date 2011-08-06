@@ -1,8 +1,10 @@
 Name:Squirrel Mob
 ManaCost:1 G G
 Types:Creature Squirrel
-Text:Squirrel Mob gets +1/+1 for each other Squirrel on the battlefield.
+Text:no text
 PT:2/2
+K:stPumpSelf:Creature:X/X:no Condition:CARDNAME gets +1/+1 for each other Squirrel on the battlefield.
+SVar:X:Count$Valid Squirrel.Other
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squirrel_mob.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/273.jpg

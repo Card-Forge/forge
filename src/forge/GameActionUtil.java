@@ -14750,45 +14750,7 @@ public class GameActionUtil {
 
 	};//Plague_Rats
 	
-	public static Command Squirrel_Mob_Other       = new Command() {
-		
-		private static final long serialVersionUID = 5483285906091676339L;
-		int                       otherSquirrels        = 0;
-
-		private int countOtherSquirrels(Card c) {
-			PlayerZone hplay = AllZone.getZone(
-					Constant.Zone.Play, AllZone.HumanPlayer);
-			PlayerZone cplay = AllZone.getZone(
-					Constant.Zone.Play, AllZone.ComputerPlayer);
-			CardList squirrels = new CardList(hplay.getCards());
-			squirrels.addAll(cplay.getCards());
-			
-			squirrels = squirrels.filter(new CardListFilter()
-			{
-				public boolean addCard(Card crd)
-				{
-					return (crd.getType().contains("Squirrel") || crd.getKeyword().contains("Changeling")); 
-						   
-				}
-			});
-			return squirrels.size() - 1;
-		}
-
-		public void execute() {
-
-			CardList creature = AllZoneUtil.getCardsInPlay("Squirrel Mob");
-
-			for(int i = 0; i < creature.size(); i++) {
-				Card c = creature.get(i);
-				otherSquirrels = countOtherSquirrels(c);
-				c.setOtherAttackBoost(otherSquirrels);
-				c.setOtherDefenseBoost(otherSquirrels);
-
-			}// for inner
-		}// execute()
-
-	};
-
+	
 	public static Command Broodwarden      = new Command() {
 
 		private static final long serialVersionUID = -9033688979680507210L;
@@ -17839,7 +17801,6 @@ public class GameActionUtil {
 		commands.put("Soulsurge_Elemental", Soulsurge_Elemental);
 		commands.put("Sound_the_Call_Wolf", Sound_the_Call_Wolf);
 		commands.put("Spidersilk_Armor", Spidersilk_Armor);
-		commands.put("Squirrel_Mob_Other", Squirrel_Mob_Other);
 		commands.put("Steely_Resolve", Steely_Resolve);
 		commands.put("Student_of_Warfare", Student_of_Warfare);
 		commands.put("Svogthos_the_Restless_Tomb", Svogthos_the_Restless_Tomb);
