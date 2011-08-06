@@ -6,7 +6,7 @@ A:SP$ ChangeZone | Cost$ 1 B B | ValidTgts$ Creature.nonArtifact | TargetMin$ 2 
 SVar:DBDamage:DB$DealDamage | Defined$ You | NumDmg$ 5
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
-SVar:Picture:http://resources.wizards.com/magic/cards/4e/en-us/card2086.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ashes_to_ashes.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/3.jpg
 SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/1.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/3.jpg
