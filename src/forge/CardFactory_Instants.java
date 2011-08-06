@@ -2929,8 +2929,8 @@ public class CardFactory_Instants {
                     list.remove(c);
                     selectedCards.add(c);
                     
-                    Object o = AllZone.Display.getChoiceOptional("Select card to give to computer",
-                            selectedCards.toArray());
+                    // NOTE: Using getChoiceOptional() results in a null error when you click on Cancel.
+                    Object o = AllZone.Display.getChoice("Select card to give to computer", selectedCards.toArray());
                     
                     Card choice = (Card) o;
                     
