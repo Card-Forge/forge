@@ -10052,14 +10052,6 @@ Enchantment
 no text
 Whenever a creature is put into a graveyard from the battlefield, that creature's controller may draw a card.
 
-Soulcatcher
-1 W
-Creature Bird Soldier
-no text
-1/1
-Whenever a creature with flying is put into a graveyard from the battlefield, put a +1/+1 counter on Soulcatcher.
-Flying
-
 Dauthi Ghoul
 1 B
 Creature Dauthi Zombie
