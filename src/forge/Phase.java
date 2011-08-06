@@ -199,6 +199,12 @@ public class Phase extends MyObservable
         
 	    else if(phase.equals(Constant.Phase.Combat_Begin)){
 	    	PhaseUtil.verifyCombat();
+	    	
+	    	//Run triggers
+	    	HashMap<String,Object> runParams = new HashMap<String,Object>();
+	    	runParams.put("Phase", phase);
+	    	runParams.put("Player", getPlayerTurn());
+	    	AllZone.TriggerHandler.runTrigger("Phase", runParams);
 	    }
         
 	    else if (phase.equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility)){
