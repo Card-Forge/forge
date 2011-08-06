@@ -16,7 +16,6 @@ public class Card extends MyObservable {
     
     private long						 value;
     
-
     //private Collection keyword   = new TreeSet();
     //private ArrayList<String> keyword = new ArrayList<String>();
     private ArrayList<String>            intrinsicKeyword                  = new ArrayList<String>();
@@ -1353,6 +1352,13 @@ public class Card extends MyObservable {
     public void addIntrinsicKeyword(String s) {/*if (s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, s){}); else*/
         if (s.trim().length()!=0)
         	intrinsicKeyword.add((getName().trim().length()== 0 ? s :s.replaceAll(getName(), "CARDNAME")));
+    }
+    
+    public void addNonStackingIntrinsicKeyword(String s) {/*if (s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, s){}); else*/
+    	if(!getIntrinsicKeyword().contains(s)){
+	    	if (s.trim().length()!=0)
+	        	intrinsicKeyword.add((getName().trim().length()== 0 ? s :s.replaceAll(getName(), "CARDNAME")));
+    	}
     }
     
     public void removeIntrinsicKeyword(String s) {

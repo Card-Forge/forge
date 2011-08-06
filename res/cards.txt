@@ -1,3 +1,19 @@
+Transcendent Master
+1 W W
+Creature Human Cleric Avatar
+LEVEL 6-11 6/6 Lifelink LEVEL 12+ 9/9 Lifelink Indestructible
+3/3
+Level up:1
+maxLevel:12
+
+Student of Warfare
+W
+Creature Human Knight
+LEVEL 2-6 3/3 First strike LEVEL 7+ 4/4 Double Strike
+1/1
+Level up:W
+maxLevel:7
+
 Aura Gnarlid
 2 G
 Creature Beast

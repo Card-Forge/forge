@@ -9826,6 +9826,79 @@ public class GameActionUtil {
 			old.addAll(newCards.toArray());
 		}// execute()
 	};
+	
+	public static Command Student_of_Warfare 		  = new Command() {
+		private static final long serialVersionUID = 2627513737024865169L;
+
+		public void execute()
+		{
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Student of Warfare");
+			
+			for (Card c:list)
+			{
+				int lcs = c.getCounters(Counters.LEVEL);
+				if ( lcs < 2)
+				{
+					c.setBaseDefense(1);
+					c.setBaseAttack(1);
+					c.removeIntrinsicKeyword("First Strike");
+					c.removeIntrinsicKeyword("Double Strike");
+				}
+				else if ( lcs >=2 && lcs < 7 )
+				{
+					c.setBaseDefense(3);
+					c.setBaseAttack(3);
+					c.addNonStackingIntrinsicKeyword("First Strike");
+				}
+				else
+				{
+					c.setBaseDefense(4);
+					c.setBaseAttack(4);
+					c.removeIntrinsicKeyword("First Strike");
+					c.addNonStackingIntrinsicKeyword("Double Strike");
+				}
+			}
+		}
+	};
+	
+	public static Command Transcendent_Master		  = new Command() {
+		private static final long serialVersionUID = -7568530551652446195L;
+
+		public void execute()
+		{
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Transcendent Master");
+			
+			for (Card c:list)
+			{
+				int lcs = c.getCounters(Counters.LEVEL);
+				if ( lcs < 6)
+				{
+					c.setBaseDefense(3);
+					c.setBaseAttack(3);
+					c.removeIntrinsicKeyword("Lifelink");
+					c.removeIntrinsicKeyword("Indestructible");
+				}
+				else if ( lcs >=6)
+				{
+					c.setBaseDefense(6);
+					c.setBaseAttack(6);
+					c.addNonStackingIntrinsicKeyword("Lifelink");
+				
+					if (lcs >=12) {
+						c.setBaseDefense(9);
+						c.setBaseAttack(9);
+						c.addNonStackingIntrinsicKeyword("Indestructible");
+					}
+				}
+			}
+		}
+	};
 
 	public static Command Dakkon                      = new Command() {
 
@@ -15134,6 +15207,9 @@ public class GameActionUtil {
 		commands.put("Dakkon", Dakkon);
 		commands.put("Korlash", Korlash);
 
+		commands.put("Student_of_Warfare", Student_of_Warfare);
+		commands.put("Transcendent_Master", Transcendent_Master);
+		
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
 		commands.put("People_of_the_Woods", People_of_the_Woods);
 		commands.put("Gaeas_Avenger", Gaeas_Avenger);

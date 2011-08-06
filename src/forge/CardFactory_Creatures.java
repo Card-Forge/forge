@@ -17405,6 +17405,53 @@ public class CardFactory_Creatures {
             }
         }//echo
         
+        if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
+        {
+        	int n = hasKeyword(card, "Level up");
+        	int m = hasKeyword(card, "maxLevel");
+        	if(n != -1) {
+                String parse = card.getKeyword().get(n).toString();
+                String parseMax = card.getKeyword().get(m).toString();
+                
+                card.removeIntrinsicKeyword(parse);
+                card.removeIntrinsicKeyword(parseMax);
+                
+                
+                String k[] = parse.split(":");
+                final String manacost = k[1];
+                
+                String l[] = parseMax.split(":");
+                final int maxLevel = Integer.parseInt(l[1]);
+                
+                final Ability levelUp = new Ability(card, manacost){
+                	public void resolve()
+                	{
+                		card.addCounter(Counters.LEVEL, 1);
+                	}
+                	
+                	public boolean canPlay()
+                	{
+                		//only as sorcery
+                		return AllZone.getZone(card).is(Constant.Zone.Play)                        
+                        	&& AllZone.Phase.getActivePlayer().equals(card.getController())
+                        	&& !AllZone.Phase.getPhase().equals("End of Turn")
+                        	&& (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
+                                "Main2")) && AllZone.Stack.size() == 0;
+                	}
+                	
+                	public boolean canPlayAI()
+                	{
+                		return card.getCounters(Counters.LEVEL) < maxLevel;
+                	}
+                	
+                };
+                card.addSpellAbility(levelUp);
+                levelUp.setDescription("Level up " + manacost + " (" + manacost + ": Put a level counter on this. Level up only as a sorcery.)");
+                levelUp.setStackDescription(card + " - put a level counter on this.");
+                
+            }
+        }//level up
+        
         return card;
     }
 }

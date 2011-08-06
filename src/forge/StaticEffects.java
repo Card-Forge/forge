@@ -54,6 +54,8 @@ public class StaticEffects
 		cardToEffectsList.put("Guul Draz Specter", new String[] {"Guul_Draz_Specter"});
 		cardToEffectsList.put("Dakkon Blackblade", new String[] {"Dakkon"});
 		cardToEffectsList.put("Korlash, Heir to Blackblade", new String[] {"Korlash"});
+		cardToEffectsList.put("Student of Warfare", new String[]{"Student_of_Warfare"});
+		cardToEffectsList.put("Transcendent Master", new String[]{"Transcendent_Master"});
 		cardToEffectsList.put("Dauntless Dourbark", new String[] {"Dauntless_Dourbark"});
 		cardToEffectsList.put("Gaea's Avenger", new String[] {"Gaeas_Avenger"});
 		cardToEffectsList.put("People of the Woods", new String[] {"People_of_the_Woods"});
