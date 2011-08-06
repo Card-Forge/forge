@@ -254,11 +254,35 @@ public class AbilityFactory_ZoneAffecting {
 		if (tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
 		else
-			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+		
+		boolean optional = params.containsKey("Optional");
+		boolean slowDraw = params.containsKey("NextUpkeep");
 		
 		for(Player p : tgtPlayers)
 			if (tgt == null || p.canTarget(af.getHostCard())){
-				if (params.containsKey("NextUpkeep"))
+				if (optional){
+					if (p.isComputer()){
+			            if (numCards >= AllZoneUtil.getPlayerCardsInLibrary(p).size()) {
+			                // AI shouldn't itself
+			                continue;
+			            }
+					}
+					else{
+						StringBuilder sb = new StringBuilder();
+						sb.append("Do you want to draw ").append(numCards).append(" cards(s)");
+						
+						if(slowDraw)
+							sb.append(" next upkeep");
+							
+						sb.append("?");
+						
+						if(!GameActionUtil.showYesNoDialog(sa.getSourceCard(), sb.toString())) 
+							continue;
+					}
+				}
+
+				if (slowDraw)
 					for(int i = 0; i < numCards; i++)
 						p.addSlowtripList(source);
 				else

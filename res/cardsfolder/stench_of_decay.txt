@@ -1,0 +1,9 @@
+Name:Stench of Decay
+ManaCost:1 B B
+Types:Instant
+Text:no text
+A:SP$PumpAll | Cost$ 1 B B | ValidCards$ Creature.nonArtifact | NumAtt$ -1 | NumDef$ -1 | SpellDescription$ Nonartifact creatures get -1/-1 until end of turn.
+SVar:Rarity:Common
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stench_of_decay.jpg
+End
