@@ -1,7 +1,7 @@
 Name:Information Dealer
 ManaCost:1 U
 Types:Creature Human Wizard
-Text:Tap: Look at the top X cards of your library, where X is the number of Wizards on the battlefield, then put them back in any order.
+Text:no text
 PT:1/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/information_dealer.jpg

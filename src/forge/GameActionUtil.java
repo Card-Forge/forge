@@ -12003,8 +12003,9 @@ public class GameActionUtil {
 					}
 					
 					if(!hasAbility) {
-						
-						final Ability_Tap ability = new Ability_Tap(c)
+						Ability_Cost abCost = new Ability_Cost("T", c.getName(), true);
+						Target target = new Target("TgtCP");
+						final Ability_Activated ability = new Ability_Activated(c, abCost, target)
 					    {
 					        private static final long serialVersionUID = -7560349014757367722L;
 							public void chooseTargetAI()
@@ -12030,8 +12031,8 @@ public class GameActionUtil {
 					        }//resolve()
 					    };//SpellAbility
 					    ability.setKothThirdAbility(true);
-					    ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
-					    ability.setDescription("tap: This land deals 1 damage to target creature or player.");
+					    //ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
+					    ability.setDescription(abCost+"This land deals 1 damage to target creature or player.");
 					    
 					    c.addSpellAbility(ability);
 					    

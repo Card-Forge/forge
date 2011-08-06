@@ -10228,68 +10228,6 @@ public class CardFactory_Creatures {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Scarland Thrinax")) {
-            
-            final SpellAbility a2 = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    Card c = getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(c)) {
-                        //AllZone.getZone(c).remove(c);
-                        AllZone.GameAction.sacrifice(c);
-                        
-                        if(AllZone.GameAction.isCardInPlay(card)) card.addCounter(Counters.P1P1, 1);
-                    }
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    SpellAbility sa;
-                    //this is a hack, check the stack to see if this card has an ability on the stack
-                    //if so, we can't use the ability: this is to prevent using a limited ability too many times
-                    for(int i = 0; i < AllZone.Stack.size(); i++) {
-                        sa = AllZone.Stack.peek(i);
-                        if(sa.getSourceCard().equals(card)) return false;
-                    }
-                    if(super.canPlay()) return true;
-                    return false;
-                }
-            };//SpellAbility
-            
-            Input runtime = new Input() {
-                private static final long serialVersionUID = 8445133749305465286L;
-                
-                @Override
-                public void showMessage() {
-                    CardList creats = new CardList(
-                            AllZone.getZone(Constant.Zone.Battlefield, card.getController()).getCards());
-                    creats = creats.getType("Creature");
-                    
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(a2, creats,
-                            "Select a creature to sacrifice.", false, false));
-                }
-            };
-            
-            card.addSpellAbility(a2);
-            
-            StringBuilder sbDesc = new StringBuilder();
-            sbDesc.append("Sacrifice a creature: Put a +1/+1 counter on ").append(card.getName()).append(".");
-            a2.setDescription(sbDesc.toString());
-            
-            StringBuilder sbStack = new StringBuilder();
-            sbStack.append(card.getName()).append(" gets a +1/+1 counter.");
-            a2.setStackDescription(sbStack.toString());
-            
-            a2.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
-
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Feral Hydra")) { 
 
             SpellAbility spell = new Spell_Permanent(card) {
