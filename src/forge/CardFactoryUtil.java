@@ -4386,7 +4386,7 @@ public class CardFactoryUtil {
             
         }
         //Debuffs
-        else if(c.getName().equals("Enginered Plague")) {
+        else if(c.getName().equals("Engineered Plague")) {
             String type = "";
             int number = 0;
             if(c.getName().equals("Engineered Plague") && humanPlay.size() > 6) {
