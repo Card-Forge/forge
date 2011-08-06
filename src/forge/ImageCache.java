@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.imageio.ImageIO;
+import arcane.ui.util.ImageUtil;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ComputationException;
@@ -80,7 +80,7 @@ public class ImageCache implements NewConstants {
                             System.out.println("File not found, no image created");
                             return null;
                         }
-                        BufferedImage image = ImageIO.read(file);
+                        BufferedImage image = ImageUtil.getImage(file);
                         return image;
                     }
                 } catch(Exception ex) {
@@ -186,12 +186,12 @@ public class ImageCache implements NewConstants {
         at.scale((double) tgtWidth / srcWidth, (double) tgtHeight / srcHeight);
 //        at.translate(srcHeight, 0);
 //        at.rotate(PI / 2);
-        
+        double scale = min((double) tgtWidth / srcWidth, (double) tgtHeight / srcHeight);
 
         BufferedImage image = new BufferedImage(tgtWidth, tgtHeight, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = (Graphics2D) image.getGraphics();
         g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-        g2d.drawImage(original, at, null);
+        g2d.drawImage(scale < 0.5 ?  ImageUtil.getBlurredImage(original, 3, 1.0f) : original, at, null);
         g2d.dispose();
         return image;
     }
@@ -210,11 +210,12 @@ public class ImageCache implements NewConstants {
         at.translate(srcHeight, 0);
         at.rotate(Math.PI / 2);
         
+        double scale = min((double) tgtWidth / srcWidth, (double) tgtHeight / srcHeight);
 
         BufferedImage image = new BufferedImage(tgtHeight, tgtWidth, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = (Graphics2D) image.getGraphics();
         g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-        g2d.drawImage(original, at, null);
+        g2d.drawImage(scale < 0.5 ?  ImageUtil.getBlurredImage(original, 3, 1.0f) : original, at, null);
         g2d.dispose();
         return image;
     }
@@ -232,7 +233,7 @@ public class ImageCache implements NewConstants {
                 (int) (original.getHeight() * scale), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = (Graphics2D) image.getGraphics();
         g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-        g2d.drawImage(original, at, null);
+        g2d.drawImage(scale < 0.5 ?  ImageUtil.getBlurredImage(original, 3, 1.0f) : original, at, null);
         g2d.dispose();
         return image;
     }
