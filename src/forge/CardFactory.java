@@ -18606,7 +18606,41 @@ public class CardFactory implements NewConstants {
         	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
-        
+
+        else if(cardName.equals("Everflowing Chalice")) {
+        	final Ability_Mana addMana = new Ability_Mana(card, "tap: add 1 to your mana pool for each charge counter on Everflowing Chalice.") {
+ 				private static final long serialVersionUID = -2661488839088242789L;
+
+ 				@Override
+				public String mana() {
+						return Integer.toString(card.getCounters(Counters.CHARGE));
+                }
+				                      		
+        	};
+
+        	final Ability addChargeCounters = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    card.addCounter(Counters.CHARGE, card.getMultiKickerMagnitude());
+                    card.setMultiKickerMagnitude(0);
+                }
+            };
+            StringBuilder sb = new StringBuilder();
+            sb.append(cardName);
+            sb.append(" enters the battlefield with a charge counter on it for each time it was kicked.");
+            addChargeCounters.setStackDescription(sb.toString());
+            
+            final Command comesIntoPlay = new Command() {
+				private static final long serialVersionUID = 4245563898487609274L;
+
+				public void execute() {
+                    AllZone.Stack.add(addChargeCounters);
+                }
+            };
+            card.addSpellAbility(addMana);
+            card.addComesIntoPlayCommand(comesIntoPlay);
+        }//*************** END ************ END **************************
+
       //*************** START *********** START **************************
         else if (cardName.equals("Burning Inquiry")) {
         	final SpellAbility spell = new Spell(card){
