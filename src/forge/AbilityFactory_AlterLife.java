@@ -245,7 +245,7 @@ public class AbilityFactory_AlterLife {
 		 StringBuilder sb = new StringBuilder();
 		 int amount = AbilityFactory.calculateAmount(af.getHostCard(), af.getMapParams().get("LifeAmount"), sa);
 	
-		 Player player = sa.getActivatingPlayer().getOpponent();
+		 Player player = sa.getActivatingPlayer();
 	
 			if (!(sa instanceof Ability_Sub))
 				sb.append(sa.getSourceCard().getName()).append(" - ");
