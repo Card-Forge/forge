@@ -2666,6 +2666,7 @@ res/cardsfolder/grim_monolith.txt -text svneol=native#text/plain
 res/cardsfolder/grim_poppet.txt -text svneol=native#text/plain
 res/cardsfolder/grim_tutor.txt -text svneol=native#text/plain
 res/cardsfolder/grindclock.txt -text svneol=native#text/plain
+res/cardsfolder/grinding_station.txt -text svneol=native#text/plain
 res/cardsfolder/grindstone.txt -text svneol=native#text/plain
 res/cardsfolder/grinning_demon.txt -text svneol=native#text/plain
 res/cardsfolder/grinning_ignus.txt svneol=native#text/plain
