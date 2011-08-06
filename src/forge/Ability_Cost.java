@@ -218,6 +218,11 @@ public class Ability_Cost {
             parse = parse.replace("Untap", "").trim();
         }
         
+        if (parse.contains("Q")){
+        	untapCost = true;
+            parse = parse.replace("Q", "").trim();
+        }
+        
         if(parse.contains("T")) {
             tapCost = true;
             parse = parse.replace("T", "");
