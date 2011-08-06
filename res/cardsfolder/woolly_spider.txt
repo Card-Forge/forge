@@ -8,4 +8,5 @@ T:Mode$ Blocks | ValidCard$ Card.Self | ValidAttacker$ Creature.withFlying | Exe
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumDef$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/woolly_spider.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/167.jpg
 End

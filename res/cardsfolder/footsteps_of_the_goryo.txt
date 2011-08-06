@@ -7,4 +7,5 @@ SVar:DBPump:DB$Pump | KW$ HIDDEN At the beginning of the end step, sacrifice CAR
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/footsteps_of_the_goryo.jpg
+SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/68.jpg
 End

@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPump:+1/+1/HIDDEN CARDNAME can't be the target of spells.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_shield.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/380.jpg
 End
