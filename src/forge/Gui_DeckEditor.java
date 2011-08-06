@@ -217,7 +217,9 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         }// for
         
         topModel.resort();
+        topTable.repaint();
         bottomModel.resort();
+        bottomTable.repaint();
     }// updateDisplay
     
     public void updateDisplay() {

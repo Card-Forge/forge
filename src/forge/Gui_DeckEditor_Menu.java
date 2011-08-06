@@ -350,11 +350,10 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
 
         for (int i = 0; i < deck.countMain(); i++) {
             String cardName = deck.getMain(i);
-            String setCode = "";
+
             if (cardName.contains("|")) {
                 String s[] = cardName.split("\\|", 2);
                 cardName = s[0];
-                setCode = s[1];
             }
 
             top.add(AllZone.CardFactory.getCard(cardName, AllZone.HumanPlayer));
@@ -375,21 +374,6 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         deckDisplay.updateDisplay(top, new CardList());
     }//new draft
 
-    private FileFilter getFileFilter() {
-        FileFilter filter = new FileFilter() {
-            @Override
-            public boolean accept(File f) {
-                return f.getName().endsWith(".deck") || f.isDirectory();
-            }
-
-            @Override
-            public String getDescription() {
-                return "Deck File .deck";
-            }
-        };
-
-        return filter;
-    }//getFileFilter()
 
     private FileFilter dckFilter = new FileFilter() {
         @Override
@@ -408,7 +392,6 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         JFileChooser chooser = new JFileChooser(previousDirectory);
 
         chooser.addChoosableFileFilter(dckFilter);
-        chooser.addChoosableFileFilter(getFileFilter());
         int returnVal = chooser.showOpenDialog(null);
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -446,7 +429,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         else if (file.getName().endsWith(".dck")) {
             try {
                 FileChannel srcChannel = new FileInputStream(file).getChannel();
-                File dst = new File(ForgeProps.getFile(NEW_DECKS).getAbsolutePath() + java.io.File.pathSeparator
+                File dst = new File(ForgeProps.getFile(NEW_DECKS).getAbsolutePath() + java.io.File.separator
                         + (file.getName()));
                 if (!dst.createNewFile()) {
                     JOptionPane.showMessageDialog(null, "Cannot import deck " + file.getName()
@@ -457,8 +440,11 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
                 dstChannel.transferFrom(srcChannel, 0, srcChannel.size());
                 srcChannel.close();
                 dstChannel.close();
-                JOptionPane.showMessageDialog(null, file.getName()
-                        + "imported succesfully. Restart the deck editor to see it.");
+
+                Deck newDeck = DeckManager.readDeck(file);
+                deckManager.addDeck(newDeck);
+                showDeck(newDeck);
+
             } catch (Exception ex) {
                 ErrorViewer.showError(ex);
                 throw new RuntimeException("Gui_DeckEditor_Menu : importDeck() error, " + ex);
@@ -627,7 +613,6 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         //write one Deck object or
         //many Deck objects if it is a draft deck
         Deck deck = getDeck();
-        Object write = deck;
 
         deck.setName(filename.getName());
 
@@ -640,14 +625,10 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
 
             //replace your deck
             d[0] = deck;
-            write = d;
         }
 
         try {
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename));
-            out.writeObject(write);
-            out.flush();
-            out.close();
+            DeckManager.writeDeck(deck, filename);
         } catch (Exception ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("Gui_DeckEditor_Menu : exportDeck() error, " + ex);
@@ -765,8 +746,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
 
         save.setDialogTitle("Export Deck Filename");
         save.setDialogType(JFileChooser.SAVE_DIALOG);
-        save.addChoosableFileFilter(getFileFilter());
-        save.setSelectedFile(new File(currentDeckName + ".deck"));
+        save.setFileFilter(dckFilter);
 
         int returnVal = save.showSaveDialog(null);
 
@@ -776,17 +756,16 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
 
             previousDirectory = file.getParentFile();
 
-            if (check.endsWith(".deck")) {
+            if (check.endsWith(".dck")) {
                 return file;
             }
             else {
-                return new File(check + ".deck");
+                return new File(check + ".dck");
             }
         }
 
         return null;
-    }//getExportFilename()
-
+    }
 
     private void openConstructed() {
         if (debugPrint) {

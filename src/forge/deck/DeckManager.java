@@ -15,7 +15,7 @@ import static java.lang.String.format;
 import static java.util.Arrays.asList;
 
 
-//reads and write Deck objects
+//reads and writeDeck Deck objects
 public class DeckManager {
     private static FilenameFilter BDKFileFilter = new FilenameFilter() {
         public boolean accept(File dir, String name) {
@@ -51,11 +51,11 @@ public class DeckManager {
                 }
                 this.deckMap = new HashMap<String, Deck>();
                 this.boosterMap = new HashMap<String, Deck[]>();
-                readDir();
+                readAllDecks();
             }
         } catch (IOException ex) {
             ErrorViewer.showError(ex);
-            throw new RuntimeException("DeckManager : write() error, " + ex.getMessage());
+            throw new RuntimeException("DeckManager : writeDeck() error, " + ex.getMessage());
         }
     }
 
@@ -67,6 +67,11 @@ public class DeckManager {
     public boolean isUniqueDraft(String deckName) {
         return !boosterMap.keySet().contains(deckName);
     }
+
+    public Deck getDeck(String deckName) {
+        return deckMap.get(deckName);
+    }
+
 
     public void addDeck(Deck deck) {
         if (deck.getDeckType().equals(Constant.GameType.Draft)) {
@@ -126,7 +131,7 @@ public class DeckManager {
     }
 
 
-    public void readDir() {
+    public void readAllDecks() {
         deckMap.clear();
         boosterMap.clear();
 
@@ -150,7 +155,7 @@ public class DeckManager {
         }
     }
 
-    private Deck readDeck(File deckFile) {
+    public static Deck readDeck(File deckFile) {
 
         List<String> lines = new LinkedList<String>();
 
@@ -190,7 +195,6 @@ public class DeckManager {
         return d;
 
     }
-
 
     private static Deck readDeckOld(ListIterator<String> iterator) {
 
@@ -273,7 +277,7 @@ public class DeckManager {
                 File f = new File(deckDir, deriveFileName(deck.getName()) + ".dck");
                 files.remove(f);
                 BufferedWriter out = new BufferedWriter(new FileWriter(f));
-                write(deck, out);
+                writeDeck(deck, out);
                 out.close();
             }
             //delete the files that were not written out: the decks that were deleted
@@ -291,7 +295,7 @@ public class DeckManager {
                 f.mkdir();
                 for (int i = 0; i < e.getValue().length; i++) {
                     BufferedWriter out = new BufferedWriter(new FileWriter(new File(f, i + ".dck")));
-                    write(e.getValue()[i], out);
+                    writeDeck(e.getValue()[i], out);
                     out.close();
                 }
             }
@@ -305,11 +309,11 @@ public class DeckManager {
             */
         } catch (IOException ex) {
             ErrorViewer.showError(ex);
-            throw new RuntimeException("DeckManager : write() error, " + ex.getMessage());
+            throw new RuntimeException("DeckManager : writeDeck() error, " + ex.getMessage());
         }
     }
 
-    private void write(Deck d, BufferedWriter out) throws IOException {
+    private static void writeDeck(Deck d, BufferedWriter out) throws IOException {
         out.write("[metadata]\n");
 
         for (Entry<String, String> entry : d.getMetadata()) {
@@ -327,7 +331,7 @@ public class DeckManager {
         }
     }
 
-    private Map<String, Integer> count(List<String> src) {
+    private static Map<String, Integer> count(List<String> src) {
         Map<String, Integer> result = new HashMap<String, Integer>();
         for (String s : src) {
             Integer dstValue = result.get(s);
@@ -341,7 +345,16 @@ public class DeckManager {
         return result;
     }
 
-    public Deck getDeck(String deckName) {
-        return deckMap.get(deckName);
+    public static void writeDeck(Deck d, File f){
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(f));
+            writeDeck(d, writer);
+
+            writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
+
 }
