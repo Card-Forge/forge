@@ -1,3 +1,9 @@
+Deserted Temple
+no cost
+Land
+no text
+tap: add 1
+
 Hymn to Tourach
 B B
 Sorcery
