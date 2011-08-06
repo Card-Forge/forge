@@ -1,0 +1,8 @@
+Name:Goblin Warrens
+ManaCost:2 R
+Types:Enchantment
+Text:no text
+K:abMakeToken 2 R Sac<2/Goblin><>3<>Goblin<>R 1 1 Goblin<>Controller<>R<>Creature;Goblin<>1<>1<>None<>Put three 1/1 red Goblin creature tokens onto the battlefield.  
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_warrens.jpg
+End
