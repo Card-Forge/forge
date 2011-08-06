@@ -6018,7 +6018,7 @@ public class CardFactory implements NewConstants {
         /*
          *  Generic untap target ___ activated ability
          *  
-         *  syntax: abUntapTgt {Ability_Cost}:{Valid Targets}:{Description}
+         *  syntax: abUntapAll {Ability_Cost}:{Valid Targets}:{Description}
          */
         if (hasKeyword(card, "abUntapAll") != -1) {
         	int n = hasKeyword(card, "abUntapAll");
