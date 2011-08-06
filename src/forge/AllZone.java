@@ -63,7 +63,7 @@ public class AllZone implements NewConstants {
     
     public static final ManaPool ManaPool = new ManaPool(AllZone.HumanPlayer);
     
-    public static Display Display = new GuiDisplay2();
+    public static Display Display;
 
     private final static Map<String,PlayerZone> map = new HashMap<String,PlayerZone>();
 

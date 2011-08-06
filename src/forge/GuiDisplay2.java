@@ -46,6 +46,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
     
     
     public GuiDisplay2() {
+    	AllZone.Display = this;
         initComponents();
         
         addObservers();

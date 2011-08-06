@@ -104,6 +104,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     //private CardList multiBlockers = new CardList();
    
     public GuiDisplay4() {
+    	AllZone.Display = this;
         setupActions();
         initComponents();
        
