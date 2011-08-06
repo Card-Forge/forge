@@ -1,6 +1,6 @@
 Name:Sima Yi, Wei Field Marshal
 ManaCost:5 B
-Types:Legendary Creature - Human Soldier
+Types:Legendary Creature Human Soldier
 Text:no text
 PT:*/4
 K:stSetPT:Count$Valid Swamp.YouCtrl:4:CARDNAME's power is equal to the number of Swamps you control.
