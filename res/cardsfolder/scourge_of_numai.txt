@@ -1,0 +1,11 @@
+Name:Scourge of Numai
+ManaCost:3 B
+Types:Creature Demon Spirit
+Text:no text
+PT:4/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Creature.Ogre+YouCtrl | PresentCompare$ EQ0 | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you lose 2 life if you don't control an Ogre.
+SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scourge_of_numai.jpg
+End
