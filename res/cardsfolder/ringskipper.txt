@@ -9,4 +9,5 @@ SVar:DBClash:DB$Clash | WinSubAbility$ DBReturn
 SVar:DBReturn:DB$ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Hand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ringskipper.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/81.jpg
 End

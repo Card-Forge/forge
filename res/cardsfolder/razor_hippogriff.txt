@@ -10,4 +10,5 @@ SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Targeted$CardManaCost
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razor_hippogriff.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/17.jpg
 End

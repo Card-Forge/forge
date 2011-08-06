@@ -7,4 +7,5 @@ A:AB$Animate | Cost$ T | ValidTgts$ Land.Snow | TgtPrompt$ Select target snow la
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balduvian_conjurer.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/58.jpg
 End

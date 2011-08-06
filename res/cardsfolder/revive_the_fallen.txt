@@ -7,4 +7,5 @@ SVar:DBClash:DB$Clash | WinSubAbility$ DBReturn
 SVar:DBReturn:DB$ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Hand
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/revive_the_fallen.jpg
+SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/76.jpg
 End

@@ -10,4 +10,5 @@ SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Each | SacValid$ Land
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razing_snidd.jpg
+SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/121.jpg
 End

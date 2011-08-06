@@ -7,4 +7,5 @@ SVar:DBClash:DB$Clash | WinSubAbility$ DBDestroyAll
 SVar:DBDestroyAll:DB$DestroyAll | ValidCards$ Enchantment.YouDontCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spring_cleaning.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/236.jpg
 End

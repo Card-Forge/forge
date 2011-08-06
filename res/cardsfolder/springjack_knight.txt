@@ -7,4 +7,5 @@ SVar:TrigClash:AB$Clash | Cost$ 0 | WinSubAbility$ DBPump
 SVar:DBPump:DB$Pump | Tgt$ TgtC | KW$ Double strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/springjack_knight.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/41.jpg
 End

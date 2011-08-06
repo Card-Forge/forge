@@ -7,4 +7,5 @@ SVar:DBDiscardOne:DB$Discard | Tgt$ TgtP | NumCards$ 1 | Mode$ TgtChoose
 SVar:DBDiscardTwo:DB$Discard | Tgt$ TgtP | NumCards$ 2 | Mode$ TgtChoose
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pulling_teeth.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/75.jpg
 End

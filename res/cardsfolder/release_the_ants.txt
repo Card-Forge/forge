@@ -7,4 +7,5 @@ SVar:DBClash:DB$Clash | WinSubAbility$ DBReturn
 SVar:DBReturn:DB$ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Hand
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/release_the_ants.jpg
+SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/98.jpg
 End

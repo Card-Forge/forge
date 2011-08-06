@@ -7,4 +7,5 @@ SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Land.nonBasic | Defined$ Trigge
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/destructive_flow.jpg
+SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/102.jpg
 End

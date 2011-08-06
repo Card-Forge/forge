@@ -8,4 +8,5 @@ SVar:X:Count$xPaid
 A:AB$ PumpAll | Cost$ RW | ValidCards$ Creature.Red+YouCtrl,Creature.White+YouCtrl | KW$ First Strike | SpellDescription$ Red creatures and white creatures you control gain first strike until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rise_of_the_hobgoblins.jpg
+SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/145.jpg
 End

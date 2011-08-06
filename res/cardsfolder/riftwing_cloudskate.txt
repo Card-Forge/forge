@@ -9,4 +9,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riftwing_cloudskate.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/73.jpg
 End

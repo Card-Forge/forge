@@ -10,4 +10,5 @@ SVar:X:Count$TriggeredDamageAmount
 SVar:Y:Count$TriggeredDamageAmount
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/repercussion.jpg
+SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/95.jpg
 End

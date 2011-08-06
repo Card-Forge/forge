@@ -7,4 +7,5 @@ SVar:DBClash:DB$Clash | WinSubAbility$ DBDamageController
 SVar:DBDamageController:DB$DealDamage | Defined$ TargetedController | NumDmg$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lash_out.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/183.jpg
 End
