@@ -2,7 +2,7 @@ Name:Wrench Mind
 ManaCost:B B
 Types:Sorcery
 Text:no text
-K:spDiscardTgt:TgtChoose:2/UnlessDiscardType.Artifact:Target player discards two cards unless he or she discards an artifact card.:Wrench Mind - target player discards cards
+A:SP$Discard|Cost$B B|ValidTgts$Player|NumCards$2|UnlessType$Artifact|Mode$TgtChoose|SpellDescription$Target player discards two cards unless he or she discards an artifact card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wrench_mind.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/84.jpg

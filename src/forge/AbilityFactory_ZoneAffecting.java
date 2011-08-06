@@ -491,8 +491,8 @@ public class AbilityFactory_ZoneAffecting {
 	//				-TgtChoose
 	//				-RevealYouChoose
 	//				-Hand
-	//DiscardValid - a ValidCards syntax for acceptable cards to discard - not yet tested
-	//UnlessType - a ValidCards expression for "discard x unless you discard a ..." - not yet implemented
+	//DiscardValid - a ValidCards syntax for acceptable cards to discard
+	//UnlessType - a ValidCards expression for "discard x unless you discard a ..."
 	
 	//Examples:
 	//A:SP$Discard | Cost$B | Tgt$TgtP | NumCards$2 | Mode$Random | SpellDescription$<...>
@@ -599,7 +599,10 @@ public class AbilityFactory_ZoneAffecting {
 						p.discardRandom(numCards, sa);
 					}
 					if(mode.equals("TgtChoose")) {
-						p.discard(numCards, sa);
+						if(params.containsKey("UnlessType")) {
+							p.discardUnless(numCards, params.get("UnlessType"), sa);
+						}
+						else p.discard(numCards, sa);
 					}
 
 					if(mode.equals("RevealYouChoose")) {
