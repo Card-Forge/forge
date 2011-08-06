@@ -309,6 +309,10 @@ public class ComputerUtil
             land.get(i).tap();
             cost.payMana(colors.get(j));
             
+            if (land.get(i).getName().equals("Undiscovered Paradise")) {
+            	land.get(i).setBounceAtUntap(true);
+            }
+            
             if (land.get(i).getName().equals("Forbidden Orchard")) {
             	AllZone.Stack.add(CardFactoryUtil.getForbiddenOrchardAbility(land.get(i), Constant.Player.Human));
             }
