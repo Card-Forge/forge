@@ -163,7 +163,7 @@ public class CardFactory_Instants {
                     list.addAll(play.getCards());
                     list = list.filter(new CardListFilter() {
                        public boolean addCard(Card c) {
-                          return CardUtil.getColors(c).contains(Constant.Color.White);
+                          return c.isWhite();
                        }
                     });
                     
@@ -3707,7 +3707,7 @@ public class CardFactory_Instants {
                     CardList list = new CardList(hand.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return CardUtil.getColors(c).contains(Constant.Color.Blue) && !c.equals(card);
+                            return c.isBlue() && !c.equals(card);
                         }
                     });
                     return sa.isSpell() && opponent.equals(sa.getSourceCard().getController())
@@ -3742,7 +3742,7 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void selectCard(Card c, PlayerZone zone) {
-                    if(CardUtil.getColors(c).contains(Constant.Color.Blue) && zone.is(Constant.Zone.Hand)
+                    if(c.isBlue() && zone.is(Constant.Zone.Hand)
                             && !c.equals(card)) {
                         AllZone.GameAction.removeFromGame(c);
                         String player = card.getController();
