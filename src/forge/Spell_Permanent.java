@@ -143,6 +143,14 @@ public class Spell_Permanent extends Spell {
     
     @Override
     public boolean canPlay() {
+    	Card perm = getSourceCard();
+    	Player turn = AllZone.Phase.getPlayerTurn();
+    	
+    	if(perm.getName().equals("Serra Avenger")) {
+        	if (turn.equals(perm.getController()) && turn.getTurn() <= 3)
+        		return false;
+    	}
+    	
         return super.canPlay()
                 || (getSourceCard().getKeyword().contains("Flash") && !AllZone.GameAction.isCardInPlay(getSourceCard())
                     && !getSourceCard().isUnCastable());
@@ -179,6 +187,7 @@ public class Spell_Permanent extends Spell {
         	list = list.getType("World");
         	if(list.size() > 0) return false;
         }
+        
         if(card.getType().contains("Creature") && card.getNetDefense() <= 0) {
         	 return false;
         }

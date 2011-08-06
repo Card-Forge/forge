@@ -100,26 +100,6 @@ public class CardFactory_Creatures {
             a1.setDescription(abCost+"Look at the top card of target player's library. You may put that card into that player's graveyard.");
             a1.setStackDescription(cardName+" - Look at the top card of target player's library. You may put that card into that player's graveyard.");
         }//*************** END ************ END **************************
-
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Serra Avenger")) {
-            SpellAbility spell = new Spell_Permanent(card) {
-                private static final long serialVersionUID = -1148518222979323313L;
-                
-                @Override
-                public boolean canPlay() {
-                	Player turn = AllZone.Phase.getPlayerTurn();
-                	if (turn.equals(card.getController()) && turn.getTurn() <= 3)
-                		return false;
-                	
-                    return super.canPlay();
-                }
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }
-        //*************** END ************ END **************************
         
         
         //*************** START *********** START **************************
@@ -3762,7 +3742,8 @@ public class CardFactory_Creatures {
         }
         //*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+      
+        //*************** START *********** START **************************
         else if(cardName.equals("Jhoira of the Ghitu")) {
             final Stack<Card> chosen= new Stack<Card>();
             final SpellAbility ability = new Ability(card, "2") {
