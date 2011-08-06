@@ -505,6 +505,8 @@ public class QuestMainPanel extends QuestAbstractPanel {
         Constant.Runtime.HumanDeck[0] = humanDeck;
         moveDeckToTop(humanDeckName);
 
+        Constant.Quest.oppIconName[0] = getMatchIcon();
+
         // Dev Mode occurs before Display
         Constant.Runtime.DevMode[0] = devModeCheckBox.isSelected();
 
@@ -539,11 +541,6 @@ public class QuestMainPanel extends QuestAbstractPanel {
         Deck computer = questData.ai_getDeckNewFormat((selectedOpponent).getName());
         Constant.Runtime.ComputerDeck[0] = computer;
 
-        String oppIconName = selectedOpponent.getName();
-        oppIconName = oppIconName.substring(0, oppIconName.length() - 1).trim() + ".jpg";
-
-        Constant.Quest.oppIconName[0] = oppIconName;
-
         AllZone.GameAction.newGame(
                 humanDeck,
                 computer,
@@ -561,7 +558,6 @@ public class QuestMainPanel extends QuestAbstractPanel {
         Constant.Runtime.ComputerDeck[0] = computerDeck;
 
         AllZone.QuestAssignment = selectedQuest;
-        Constant.Quest.oppIconName[0] = selectedQuest.getIconName();
 
         int extraLife = 0;
 
@@ -580,6 +576,20 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
     }
 
+    String getMatchIcon(){
+        String oppIconName;
+
+        if (isShowingQuests){
+            Quest_Assignment selectedQuest = ((QuestQuest) selectedOpponent).getQuestAssignment();
+            oppIconName = selectedQuest.getIconName();
+        }
+
+        else{
+            oppIconName = selectedOpponent.getName();
+            oppIconName = oppIconName.substring(0, oppIconName.length() - 1).trim() + ".jpg";
+        }
+        return oppIconName;
+    }
     void showQuests() {
         if (isShowingQuests) {
             this.nextMatchLayout.show(nextMatchPanel, BATTLES);
