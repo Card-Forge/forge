@@ -10,5 +10,5 @@ K:stPumpSelf:Permanent:1/1:isValid Permanent.countersEQ3TIDE:As long as there ar
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ TIDE | CounterNum$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homarid.jpg
-SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/38.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/38.jpg|4
 End

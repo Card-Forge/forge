@@ -8,5 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/initiates_of_the_ebon_hand.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/31.jpg
-SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/16.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/16.jpg|3
 End

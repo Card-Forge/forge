@@ -9,5 +9,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1 | NextUpkeep$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carrier_pigeons.jpg
-SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/125.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/125.jpg|2
 End

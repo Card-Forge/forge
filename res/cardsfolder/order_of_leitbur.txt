@@ -8,5 +8,5 @@ A:AB$Pump | Cost$ W | KW$ First Strike | SpellDescription$ Order of Leitbur gain
 A:AB$Pump | Cost$ W W | NumAtt$ +1 | SpellDescription$ Order of Leitbur gets +1/+0 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_leitbur.jpg
-SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/163.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/163.jpg|3
 End

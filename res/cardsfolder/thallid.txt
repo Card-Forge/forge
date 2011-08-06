@@ -6,6 +6,6 @@ PT:1/1
 A:AB$Token | Cost$ SubCounter<3/SPORE> | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ Controller | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thallid.jpg
-SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/87.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/87.jpg|4
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/86.jpg
 End

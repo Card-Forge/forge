@@ -7,5 +7,5 @@ A:AB$Pump | Cost$ T | ValidTgts$ Creature.Assembly-Worker | NumAtt$ +1 | NumDef$
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/aq/en-us/card1074.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/181.jpg
-SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/66.jpg
+SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/66.jpg|4
 End

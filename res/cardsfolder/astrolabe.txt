@@ -11,5 +11,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/astrolabe.jpg
-SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/159.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/159.jpg|2
 End

@@ -7,7 +7,7 @@ SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blaze.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/177.jpg
-SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/102.jpg
+SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/102.jpg|2
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/175.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/122.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/175.jpg

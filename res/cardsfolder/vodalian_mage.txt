@@ -7,5 +7,5 @@ A:AB$Counter | Cost$ U T | Type$ Spell | UnlessCost$ 1 | SpellDescription$ Count
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vodalian_mage.jpg
-SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/59.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/59.jpg|3
 End

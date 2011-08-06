@@ -9,5 +9,6 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_power_plan
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/329.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/448.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/328.jpg
-SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/79.jpg
+SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/79.jpg|4
+SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/98.jpg|4
 End

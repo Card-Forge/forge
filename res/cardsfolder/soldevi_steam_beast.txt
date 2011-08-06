@@ -8,5 +8,5 @@ A:AB$Regenerate | Cost$ 2 | SpellDescription$ Regenerate CARDNAME.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Choose target opponent | LifeAmount$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_steam_beast.jpg
-SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/177.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/177.jpg|2
 End

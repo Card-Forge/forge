@@ -7,5 +7,5 @@ T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ 
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/folk_of_an_havva.jpg
-SetInfo:HML|Common|http://magiccards.info/scans/en/hl/58.jpg
+SetInfo:HML|Common|http://magiccards.info/scans/en/hl/58.jpg|2
 End

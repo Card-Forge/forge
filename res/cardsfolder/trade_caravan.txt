@@ -9,5 +9,5 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ CURRE
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trade_caravan.jpg
-SetInfo:HML|Common|http://magiccards.info/scans/en/hl/123.jpg
+SetInfo:HML|Common|http://magiccards.info/scans/en/hl/123.jpg|2
 End

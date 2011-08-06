@@ -7,5 +7,5 @@ A:AB$Pump | Cost$ W T | NumDef$ +3 | SpellDescription$ CARDNAME gets +0/+3 until
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abbey_matron.jpg
-SetInfo:HML|Common|http://magiccards.info/scans/en/hl/102.jpg
+SetInfo:HML|Common|http://magiccards.info/scans/en/hl/102.jpg|2
 End

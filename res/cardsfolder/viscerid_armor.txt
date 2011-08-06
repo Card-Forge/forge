@@ -8,5 +8,5 @@ A:AB$ChangeZone | Cost$ 1 U | Origin$ Battlefield | Destination$ Hand | SpellDes
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viscerid_armor.jpg
-SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/60.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/60.jpg|2
 End

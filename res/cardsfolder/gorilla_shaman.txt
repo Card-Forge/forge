@@ -9,5 +9,5 @@ SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gorilla_shaman.jpg
-SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/106.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/106.jpg|2
 End

@@ -7,5 +7,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDiscard:AB$Discard | Cost$ 1 B | NumCards$ 1 | ValidTgts$ Player | NumCards$ 1 | Mode$ Random
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/insidious_bookworms.jpg
-SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/12.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/12.jpg|2
 End

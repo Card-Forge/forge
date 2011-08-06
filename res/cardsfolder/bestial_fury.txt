@@ -10,5 +10,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1 | NextUpkeep$ True
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Enchanted | NumAtt$ +4 | KW$ Trample
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bestial_fury.jpg
-SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/99.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/99.jpg|2
 End

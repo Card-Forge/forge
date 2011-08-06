@@ -7,5 +7,5 @@ K:Trample
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108849.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/11.jpg
-SetInfo:ARN|Common|http://magiccards.info/scans/en/an/62.jpg
+SetInfo:ARN|Common|http://magiccards.info/scans/en/an/62.jpg|2
 End
