@@ -1047,21 +1047,8 @@ class CardFactory_Lands {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Dark Depths")) {
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = 6805304924956145866L;
-                
-                public boolean            firstTime        = true;
-                
-                public void execute() {
-                    
-                    if(firstTime) {
-                        card.setCounter(Counters.ICE, 10);
-                    }
-                    firstTime = false;
-                }
-            };
-            
-            card.addComesIntoPlayCommand(intoPlay);
+                        
+            card.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(card, Counters.ICE , 10));
             
             final SpellAbility ability = new Ability(card, "3") {
                 @Override
@@ -1086,9 +1073,13 @@ class CardFactory_Lands {
                 public void resolve() {
                     card.subtractCounter(Counters.ICE, 1);
                     
-                    if(card.getCounters(Counters.ICE) == 0) CardFactoryUtil.makeToken("Marit Lage",
+                    if(card.getCounters(Counters.ICE) == 0) 
+                    {CardFactoryUtil.makeToken("Marit Lage",
                             "B 20 20 Marit Lage", card, "B", new String[] {"Legendary", "Creature", "Avatar"}, 20,
                             20, new String[] {"Flying", "Indestructible"});
+                    	AllZone.GameAction.sacrifice(card);
+                    }
+                    
                     
                 }
             };

@@ -12263,6 +12263,13 @@ public class CardFactory_Creatures {
             	{
             		return false;
             	}
+            	
+            	public boolean canPlay()
+            	{
+            		CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+            		list = list.getType("Saproling");
+            		return list.size() > 1;
+            	}
             };
             a1.setDescription("2G: Put a 1/1 green Saproling creature token into play.");
             a1.setStackDescription("Put a 1/1 Saproling into play.");

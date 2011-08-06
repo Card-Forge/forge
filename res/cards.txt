@@ -627,7 +627,7 @@ Creature Human Shaman
 no text
 0/1
 Haste
-abDamageCP T:1
+abDamageTgtCP T:1
 
 Goblin Roughrider
 2 R
@@ -2052,7 +2052,7 @@ Cinder Pyromancer
 Creature Elemental Shaman
 Whenever you cast a red spell, you may untap Cinder Pyromancer. (NOTE: This card can mistakenly damage either a player or a creature.)
 0/1
-abDamageCP T:1
+abDamageTgtCP T:1
 
 Ashenmoor Cohort
 5 B
@@ -2105,7 +2105,7 @@ Gelectrode
 Creature Weird
 Whenever you play an instant or sorcery spell, you may untap Gelectrode.
 0/1
-abDamageCP T:1
+abDamageTgtCP T:1
 
 Rathi Trapper
 1 B
@@ -3484,7 +3484,7 @@ Goblin Sharpshooter
 Creature Goblin
 no text
 1/1
-abDamageCP T:1
+abDamageTgtCP T:1
 This card doesn't untap during your untap step.
 Whenever a creature is put into a graveyard from the battlefield, untap Goblin Sharpshooter.
 
@@ -7313,14 +7313,14 @@ Aladdin's Ring
 8
 Artifact
 no text
-abDamageCP 8 T:4
+abDamageTgtCP 8 T:4
 
 Flamekin Spitfire
 1 R
 Creature Elemental Shaman
 no text
 1/1
-abDamageCP 3 R:1
+abDamageTgtCP 3 R:1
 
 Fledgling Mawcor
 3 U
@@ -7329,20 +7329,20 @@ no text
 2/2
 Flying
 Morph:U U
-abDamageCP T:1
+abDamageTgtCP T:1
 
 Rod of Ruin
 4
 Artifact
 no text
-abDamageCP 3 T:1
+abDamageTgtCP 3 T:1
 
 Rootwater Hunter
 2 U
 Creature Merfolk
 no text
 1/1
-abDamageCP T:1
+abDamageTgtCP T:1
 
 Shivan Hellkite
 5 R R
@@ -7350,7 +7350,7 @@ Creature Dragon
 no text
 5/5
 Flying
-abDamageCP 1 R:1
+abDamageTgtCP 1 R:1
 
 Stinging Barrier
 2 U U
@@ -7358,7 +7358,7 @@ Creature Wall
 no text
 0/4
 Defender
-abDamageCP U T:1
+abDamageTgtCP U T:1
 
 Thornwind Faeries
 1 U U
@@ -7366,14 +7366,14 @@ Creature Faerie
 no text
 1/1
 Flying
-abDamageCP T:1
+abDamageTgtCP T:1
 
 Zuran Spellcaster
 2 U
 Creature Human Wizard
 no text
 1/1
-abDamageCP T:1
+abDamageTgtCP T:1
 
 Debtors' Knell
 4 WB WB WB
@@ -7390,7 +7390,7 @@ Viashino Fangtail
 Creature Viashino Warrior
 no text
 3/3
-abDamageCP T:1
+abDamageTgtCP T:1
 
 Vulshok Sorcerer
 1 R R
@@ -7398,21 +7398,21 @@ Creature Human Shaman
 no text
 1/1
 Haste
-abDamageCP T:1
+abDamageTgtCP T:1
 
 Prodigal Pyromancer
 2 R
 Creature Human Wizard
 no text
 1/1
-abDamageCP T:1
+abDamageTgtCP T:1
 
 Razorfin Hunter
 U R
 Creature Merfolk Goblin
 no text
 1/1
-abDamageCP T:1
+abDamageTgtCP T:1
 
 Jeska, Warrior Adept
 2 R R
@@ -7421,7 +7421,7 @@ no text
 3/1
 First Strike
 Haste
-abDamageCP T:1
+abDamageTgtCP T:1
 
 Prodigal Sorcerer
 2 U
@@ -7436,14 +7436,14 @@ Legendary Creature Human Barbarian
 no text
 6/1
 Haste
-abDamageCP T:3
+abDamageTgtCP T:3
 
 Anaba Shaman
 3 R
 Creature Minotaur Shaman
 no text
 2/2
-abDamageCP R T:1
+abDamageTgtCP R T:1
 
 Tradewind Rider
 3 U
