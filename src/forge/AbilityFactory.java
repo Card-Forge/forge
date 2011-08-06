@@ -480,7 +480,7 @@ public class AbilityFactory {
 		}
 		
 		if (SA == null)
-			throw new RuntimeException("AbilityFactory : SpellAbility was not created. Did you add the API section?");
+			throw new RuntimeException("AbilityFactory : SpellAbility was not created for "+hostCard.getName()+". Did you add the API section?");
 
 		// *********************************************
 		// set universal properties of the SpellAbility
