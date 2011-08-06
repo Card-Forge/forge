@@ -1,0 +1,7 @@
+Name:Reckless Abandon
+ManaCost:R
+Types:Sorcery
+Text:As an additional cost to cast Reckless Abandon, sacrifice a creature.  
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_abandon.jpg
+End

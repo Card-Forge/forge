@@ -4121,7 +4121,9 @@ public class CardFactory_Sorceries {
         
 
         //*************** START ************ START **************************
-        else if(cardName.equals("Goblin Grenade")) {
+        else if(cardName.equals("Goblin Grenade") || cardName.equals("Reckless Abandon")) {
+        	final int damage = cardName.equals("Reckless Abandon") ? 4 : 5;
+        	final String type = cardName.equals("Reckless Abandon") ? "Creature" : "Goblin";
             final SpellAbility DamageCP = new Spell(card) {
                 private static final long serialVersionUID = -4289150611689144985L;
                 Card                      check;
@@ -4129,14 +4131,14 @@ public class CardFactory_Sorceries {
                 @Override
                 public boolean canPlay() {
                     CardList gobs = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
-                    gobs = gobs.getType("Goblin");
+                    gobs = gobs.getType(type);
                     
                     return super.canPlay() && gobs.size() > 0;
                 }
                 
                 @Override
                 public boolean canPlayAI() {
-                    if(AllZone.Human_Life.getLife() <= 5) return true;
+                    if(AllZone.Human_Life.getLife() <= damage) return true;
                     
                     PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
                     CardList hand = new CardList(compHand.getCards());
@@ -4149,7 +4151,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void chooseTargetAI() {
-                    if(AllZone.Human_Life.getLife() <= 5) {
+                    if(AllZone.Human_Life.getLife() <= damage) {
                         setTargetPlayer(Constant.Player.Human);
                         return;
                     }
@@ -4165,7 +4167,7 @@ public class CardFactory_Sorceries {
                     
                     Card c = getFlying();
                     
-                    if(check == null && c != null) Log.debug("Goblin Grenade", "Check equals null");
+                    if(check == null && c != null) Log.debug(card.getName(), "Check equals null");
                     else if((c == null) || (!check.equals(c))) throw new RuntimeException(card
                             + " error in chooseTargetAI() - Card c is " + c + ",  Card check is " + check);
                     
@@ -4176,12 +4178,12 @@ public class CardFactory_Sorceries {
                 Card getFlying() {
                     CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
                     for(int i = 0; i < flying.size(); i++)
-                        if(flying.get(i).getNetDefense() <= 5) {
-                        	Log.debug("Goblin Grenade", "getFlying() returns " + flying.get(i).getName());
+                        if(flying.get(i).getNetDefense() <= damage) {
+                        	Log.debug(card.getName(), "getFlying() returns " + flying.get(i).getName());
                             return flying.get(i);
                         }
                     
-                    Log.debug("Goblin Grenade", "getFlying() returned null");
+                    Log.debug(card.getName(), "getFlying() returned null");
                     return null;
                 }
                 
@@ -4189,7 +4191,7 @@ public class CardFactory_Sorceries {
                 public void resolve() {
                     if(card.getController().equals(Constant.Player.Computer)) {
                         CardList gobs = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
-                        gobs = gobs.getType("Goblin");
+                        gobs = gobs.getType(type);
                         
                         if(gobs.size() > 0) {
                             CardListUtil.sortAttackLowFirst(gobs);
@@ -4203,13 +4205,13 @@ public class CardFactory_Sorceries {
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) {
                             Card c = getTargetCard();
                             //c.addDamage(damage);
-                            AllZone.GameAction.addDamage(c, card, 5);
+                            AllZone.GameAction.addDamage(c, card, damage);
                         }
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(5,card);
+                    } else AllZone.GameAction.addDamage(getTargetPlayer(), card, damage);
                     //resolve()
                 }
             }; //spellAbility
-            DamageCP.setDescription(card.getName() + " deals 5 damage to target creature or player.");
+            DamageCP.setDescription(card.getName() + " deals "+damage+" damage to target creature or player.");
             //DamageCP.setStackDescription(card.getName() +" deals 5 damage.");
             
             Input target = new Input() {
@@ -4253,7 +4255,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void showMessage() {
-                    AllZone.Display.showMessage("Select a Goblin to sacrifice.");
+                    AllZone.Display.showMessage("Select a "+type+" to sacrifice.");
                     ButtonUtil.enableOnlyCancel();
                 }
                 
@@ -4266,7 +4268,7 @@ public class CardFactory_Sorceries {
                 public void selectCard(Card crd, PlayerZone zone) {
                     CardList choices = new CardList(
                             AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
-                    choices = choices.getType("Goblin");
+                    choices = choices.getType(type);
                     
                     if(choices.contains(crd)) {
                         AllZone.GameAction.sacrifice(crd);
