@@ -6,5 +6,5 @@ A:SP$Token | Cost$ 3 W | TokenImage$ W 1 1 Kithkin Soldier | TokenAmount$ 2 | To
 A:SP$Token | Cost$ 3 W Discard<1/Land> |CostDesc$ Retrace| TokenImage$ W 1 1 Kithkin Soldier | TokenAmount$ 2 | TokenName$ Kithkin Soldier | TokenTypes$ Creature,Kithkin,Soldier | TokenOwner$ Controller | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | ActivatingZone$ Graveyard | SpellDescription$ (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
 SVar:RemAIDeck:True
 SVar:Rarity:Common
-SVar:Picture:http://http://www.wizards.com/global/images/magic/general/cenns_enlistment.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cenns_enlistment.jpg
 End
