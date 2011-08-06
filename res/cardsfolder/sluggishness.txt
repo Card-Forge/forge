@@ -1,9 +1,9 @@
 Name:Sluggishness
 ManaCost:1 R
 Types:Enchantment Aura
-Text:Enchanted creature can't block.
+Text:no text
 K:Enchant creature
-K:enPumpCurse:HIDDEN CARDNAME can't block.
+K:enPumpCurse:HIDDEN CARDNAME can't block.:Enchanted creature can't block.
 K:When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sluggishness.jpg

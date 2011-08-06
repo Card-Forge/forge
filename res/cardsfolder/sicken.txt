@@ -1,7 +1,7 @@
 Name:Sicken
 ManaCost:B
 Types:Enchantment Aura
-Text:Enchanted creature gets -1/-1.
+Text:no text
 K:Enchant creature
 K:enPumpCurse:-1/-1
 K:Cycling:2

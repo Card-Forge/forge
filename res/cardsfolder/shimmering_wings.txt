@@ -1,7 +1,7 @@
 Name:Shimmering Wings
 ManaCost:U
 Types:Enchantment Aura
-Text:Enchanted creature has flying. 
+Text:no text
 K:Enchant creature
 K:enPump:Flying
 A:AB$ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.

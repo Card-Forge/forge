@@ -1,7 +1,7 @@
 Name:Sleeper's Guile
 ManaCost:2 B
 Types:Enchantment Aura
-Text:Enchanted creature has fear.
+Text:no text
 K:Enchant creature
 K:enPump:Fear
 K:When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
