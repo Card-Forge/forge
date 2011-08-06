@@ -1,3 +1,35 @@
+Fable of Wolf and Owl
+3 GU GU GU
+Enchantment
+Whenever you play a green spell, you may put a 2/2 green Wolf creature token into play.\r\nWhenever you play a blue spell, you may put a 1/1 blue Bird creature token with flying into play.
+SVar:BuffedBy:Spell.Green,Spell.Blue
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fable_of_wolf_and_owl.jpg
+
+Faceless Butcher
+2 B B
+Creature Nightmare Horror
+When Faceless Butcher comes into play, remove target creature other than Faceless Butcher from the game.\r\nWhen Faceless Butcher is destroyed, return the removed card to play under its owner's control.
+2/3
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108840.jpg
+
+Festering Wound
+1 B
+Enchantment Aura
+At the beginning of your upkeep, you may put an infection counter on Festering Wound.\r\nAt the beginning of the upkeep of enchanted creature's controller, Festering Wound deals X damage to that player, where X is the number of infection counters on Festering Wound.
+Enchant Creature Curse
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/festering_wound.jpg
+
+Fireball
+X R
+Sorcery
+Fireball deals X damage divided evenly, rounded down, among any number of target creatures and/or players.\r\nFireball costs 1 more to cast for each target beyond the first.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fireball.jpg
+
 Eladamri, Lord of Leaves
 G G
 Legendary Creature Elf Warrior
@@ -9750,29 +9782,12 @@ spDestroyTgt:Creature.nonElf
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eyeblights_ending.jpg
 
-Fable of Wolf and Owl
-3 GU GU GU
-Enchantment
-Whenever you play a green spell, you may put a 2/2 green Wolf creature token into play. Whenever you play a blue spell, you may put a 1/1 blue Bird creature token with flying into play.
-SVar:BuffedBy:Spell.Green,Spell.Blue
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fable_of_wolf_and_owl.jpg
-
 Fabricate
 2 U
 Sorcery
 Search your library for an artifact card, reveal it, and put it into your hand. Then shuffle your library.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fabricate.jpg
-
-Faceless Butcher
-2 B B
-Creature Nightmare Horror
-When Faceless Butcher comes into play, remove target creature other than Faceless Butcher from the game. -- When Faceless Butcher is destroyed, return the removed card to play under its owner's control.
-2/3
-SVar:PlayMain1:TRUE
-SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108840.jpg
 
 Fact or Fiction
 3 U
@@ -10134,14 +10149,6 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fervor.jpg
 
-Festering Wound
-1 B
-Enchantment Aura
-At the beginning of your upkeep, you may put an infection counter on Festering Wound. At the beginning of the upkeep of enchanted creature's controller, Festering Wound deals X damage to that player, where X is the number of infection counters on Festering Wound.
-Enchant Creature Curse
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/festering_wound.jpg
-
 Festival of Trokin
 W
 Sorcery
@@ -10384,13 +10391,6 @@ G, tap: add R
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_sprites.jpg
-
-Fireball
-X R
-Sorcery
-Fireball deals X damage divided evenly, rounded down, among any number of target creatures and/or players. Fireball costs 1 more to cast for each target beyond the first.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fireball.jpg
 
 Firebolt
 R
