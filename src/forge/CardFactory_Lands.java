@@ -370,24 +370,23 @@ class CardFactory_Lands {
             a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
         }//*************** END ************ END **************************
         
-
         //*************** START *********** START **************************
         else if(cardName.equals("Blinkmoth Nexus")) {
             final SpellAbility a1 = new Ability(card, "1") {
                 final Command eot1 = new Command() {
-                                       private static final long serialVersionUID = 3564161001279001235L;
-                                       
-                                       public void execute() {
-                                           Card c = card;
+                	private static final long serialVersionUID = 3564161001279001235L;
+				    
+                	public void execute() {
+                		Card c = card;
                                            
-                                           c.setBaseAttack(0);
-                                           c.setBaseDefense(0);
-                                           c.removeIntrinsicKeyword("Flying");
-                                           c.removeType("Artifact");
-                                           c.removeType("Creature");
-                                           c.removeType("Blinkmoth");
-                                       }
-                                   };
+                		c.setBaseAttack(0);
+                		c.setBaseDefense(0);
+                		c.removeIntrinsicKeyword("Flying");
+                		c.removeType("Artifact");
+                		c.removeType("Creature");
+                		c.removeType("Blinkmoth");
+                	}
+                };
                 
                 @Override
                 public boolean canPlayAI() {
@@ -450,14 +449,24 @@ class CardFactory_Lands {
                     setTargetCard(getAttacker());
                 }
                 
+                /*
+                 *  getAttacker() will now filter out non-Blinkmoths and non-Changelings
+                 */
+                
                 public Card getAttacker() {
                     //target creature that is going to attack
-                    Combat c = ComputerUtil.getAttackers();
-                    CardList att = new CardList(c.getAttackers());
-                    att.remove(card);
-                    att.shuffle();
+                    Combat attackers = ComputerUtil.getAttackers();
+                    CardList list = new CardList(attackers.getAttackers());
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return CardFactoryUtil.canTarget(card, c) && 
+                            (c.getType().contains("Blinkmoth") || c.getKeyword().contains("Changeling"));
+                        }
+                    });
+                    list.remove(card);
+                    list.shuffle();
                     
-                    if(att.size() != 0) return att.get(0);
+                    if(list.size() != 0) return list.get(0);
                     else return null;
                 }//getAttacker()
                 
@@ -475,7 +484,7 @@ class CardFactory_Lands {
             card.addSpellAbility(a2[0]);
             a2[0].setDescription("1, tap: Target Blinkmoth gets +1/+1 until end of turn.");
             
-
+/*
             @SuppressWarnings("unused")
             // target unused
             final Input target = new Input() {
@@ -509,7 +518,34 @@ class CardFactory_Lands {
                     stop();
                 }
             };//Input target
-            a2[0].setBeforePayMana(CardFactoryUtil.input_targetType(a2[0], "Blinkmoth"));
+*/
+            /*
+             *  This input method will allow the human to select both Blinkmoths and Changelings
+             */
+            
+            Input runtime = new Input() {
+				private static final long serialVersionUID = 2530992128400417560L;
+
+				@Override
+                public void showMessage() {
+                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    CardList creatures = new CardList();
+                    creatures.addAll(comp.getCards());
+                    creatures.addAll(hum.getCards());
+                    creatures = creatures.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isCreature() && CardFactoryUtil.canTarget(card, c) && 
+                                  (c.getType().contains("Blinkmoth") || c.getKeyword().contains("Changeling"));
+                        }
+                    });
+                    
+                    stopSetNext(CardFactoryUtil.input_targetSpecific(a2[0], creatures, "Select target Blinkmoth", true, false));
+                }
+            };//Input target
+            a2[0].setBeforePayMana(runtime);
+            
+//          a2[0].setBeforePayMana(CardFactoryUtil.input_targetType(a2[0], "Blinkmoth"));
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
