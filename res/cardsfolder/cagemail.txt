@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Enchantment Aura
 Text:Enchanted creature gets +2/+2 and can't attack.
 K:Enchant creature
-K:enPumpCurse:+2/+2/CARDNAME can't attack.
+K:enPumpCurse:+2/+2/HIDDEN CARDNAME can't attack.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cagemail.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/7.jpg

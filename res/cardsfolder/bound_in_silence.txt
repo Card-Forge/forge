@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Tribal Enchantment Rebel Aura
 Text:Enchanted creature can't attack or block.
 K:Enchant creature
-K:enPumpCurse:CARDNAME can't attack or block.
+K:enPumpCurse:HIDDEN CARDNAME can't attack or block.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bound_in_silence.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/20.jpg

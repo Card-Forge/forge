@@ -2948,18 +2948,26 @@ public class Card extends MyObservable {
         	AllZone.Stack.add(ability2);
         }
         
-        if(getKeyword().contains("When CARDNAME is dealt damage, destroy it.")) {
+        if(hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.")) {
 	        final Card damagedCard = this;
 	        final Ability ability = new Ability(source, "0") {
 	        	@Override
 	        	public void resolve() { AllZone.GameAction.destroy(damagedCard); }
 	        };
+	        
+	        final Ability ability2 = new Ability(source, "0") {
+	        	@Override
+	        	public void resolve() { AllZone.GameAction.destroyNoRegeneration(damagedCard); }
+	        };
 	    
 	        StringBuilder sb = new StringBuilder();
 	    	sb.append(damagedCard).append(" - destroy");
 	    	ability.setStackDescription(sb.toString());
-	    
-	    	AllZone.Stack.add(ability);
+	    	ability2.setStackDescription(sb.toString());
+	    	
+	    	if(this.getKeyword().contains("When CARDNAME is dealt damage, destroy it. It can't be regenerated."))
+	    		AllZone.Stack.add(ability2);
+	    	else AllZone.Stack.add(ability);
         }
         
         if(source.getKeyword().contains("Deathtouch") && this.isCreature()) AllZone.GameAction.destroy(this);
