@@ -4,6 +4,7 @@ Types:Instant
 Text:no text
 A:SP$DealDamage | Cost$ X R R | Tgt$ TgtCP | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature or player.
 SVar:X:Count$xPaid
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_geyser.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/215.jpg
