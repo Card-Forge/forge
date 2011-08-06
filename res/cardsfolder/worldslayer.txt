@@ -3,7 +3,7 @@ ManaCost:5
 Types:Artifact Equipment
 Text:no text
 K:eqPump 5:+0/+0
-K:WheneverKeyword:DealsDamage/Opponent:Equipped_Creature:Play:Destroy:All/None:ASAP:No_Condition:AllTargets - Except Self:Whenever equipped creature deals combat damage to a player, destroy all permanents other than Worldslayer.
+K:WheneverKeyword:DealsCombatDamage/Opponent:Equipped_Creature:Play:Destroy:All/None:ASAP:No_Condition:AllTargets - Except Self:Whenever equipped creature deals combat damage to a player, destroy all permanents other than Worldslayer.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/worldslayer.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/276.jpg
