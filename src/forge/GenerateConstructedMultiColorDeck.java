@@ -543,6 +543,10 @@ public class GenerateConstructedMultiColorDeck
     remove.add("Feroz's Ban");
     remove.add("Sphere of Resistance");
     remove.add("Leyline of Singularity");
+    remove.add("Mirror Gallery");
+    remove.add("Night of Souls' Betrayal");
+    remove.add("Planar Void");
+    remove.add("Fecundity");
 
 
     /**
@@ -557,6 +561,16 @@ public class GenerateConstructedMultiColorDeck
     remove.add("Bereavement");
     remove.add("Yawgmoth's Edict");
     remove.add("Havoc");
+    remove.add("Starlight");
+    remove.add("Renewing Dawn");
+    remove.add("Cleanse");
+    remove.add("Virtue's Ruin");
+    remove.add("Perish");
+    remove.add("Nature's Ruin");
+    remove.add("Boiling Seas");
+    remove.add("Boil");
+    remove.add("Flashfires");
+    remove.add("Karma");
 
     
     /**
