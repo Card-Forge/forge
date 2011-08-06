@@ -1,3 +1,46 @@
+Charging Bandits
+4 B
+Creature Human Rogue
+If Charging Bandits attacks, it gets +2/+0 until the end of the turn.
+3/3
+
+Wei Ambush Force
+1 B
+Creature Human Soldier
+When Wei Ambush Force attacks, it gets +2/+0 until the end of the turn.
+1/1
+
+Ravenous Skirge
+2 B
+Creature Imp
+Whenever Ravenous Skirge attacks, it gets +2/+0 until end of turn.
+1/1
+Flying
+
+Vicious Kavu
+1 B R
+Creature Kavu
+Whenever Vicious Kavu attacks, it gets +2/+0 until end of turn.
+2/2
+
+Lurking Nightstalker
+B B
+Creature Nightstalker
+If Lurking Nightstalker attacks, it gets +2/+0 until the end of the turn.
+1/1
+
+Hollow Dogs
+4 B
+Creature Zombie Hound
+Whenever Hollow Dogs attacks, it gets +2/+0 until end of turn.
+3/3
+
+Knotvine Paladin
+G W
+Creature Human Knight
+Whenever Knotvine Paladin attacks, it gets +1/+1 until end of turn for each untapped creature you control.
+2/2
+
 Witch-Maw Nephilim
 G W U B
 Creature Nephilim

@@ -1042,6 +1042,98 @@ public class CombatUtil
 			  
 		  }//Flowstone Charger
 		  
+		  else if(c.getName().equals("Knotvine Paladin") && !c.getCreatureAttackedThisTurn())
+		  {
+			  final Card charger = c;
+			  Ability ability2 = new Ability(c,"0")
+			  {
+				 public void resolve() 
+				 {
+					 String player = charger.getController();
+					 PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+					 CardList list = new CardList();
+					 list.addAll(play.getCards());
+					 list = list.filter(new CardListFilter(){
+		                    public boolean addCard(Card card) {
+		                       return (card.isCreature() && !card.isTapped());
+		                    }
+		                 });
+					 final int k = list.size();					 
+					 					 
+			         final Command untilEOT = new Command()
+			         {
+						private static final long serialVersionUID = -1703473800920781454L;
+
+						public void execute()
+			            {
+			              if(AllZone.GameAction.isCardInPlay(charger))
+			              {
+			                charger.addTempAttackBoost(-1*k);
+			                charger.addTempDefenseBoost(-1*k);
+			              }
+			            }
+			          };//Command
+
+			          
+			          if(AllZone.GameAction.isCardInPlay(charger))
+			          {
+			            charger.addTempAttackBoost(k);
+			            charger.addTempDefenseBoost(k);
+
+			            AllZone.EndOfTurn.addUntil(untilEOT);
+			          }
+				 }//resolve
+				 
+			  };//ability
+			  
+			  ability2.setStackDescription(c.getName() + " - gets +1/+1 until end of turn for each untapped creature" + c.getController() + "controls.");
+			  AllZone.Stack.add(ability2);
+			  
+			  
+		  }//Knotvine Paladin
+
+		  else if((c.getName().equals("Charging Bandits") || c.getName().equals("Wei Ambush Force") 
+				  || c.getName().equals("Ravenous Skirge") || c.getName().equals("Vicious Kavu")  
+				  || c.getName().equals("Lurking Nightstalker") || c.getName().equals("Hollow Dogs")				 
+				  ) && !c.getCreatureAttackedThisTurn())
+		  {
+			  final Card charger = c;
+			  Ability ability2 = new Ability(c,"0")
+			  {
+				 public void resolve() 
+				 {
+					 
+			         final Command untilEOT = new Command()
+			         {
+						private static final long serialVersionUID = -1703473800920781454L;
+
+						public void execute()
+			            {
+			              if(AllZone.GameAction.isCardInPlay(charger))
+			              {
+			                charger.addTempAttackBoost(-2);
+			                charger.addTempDefenseBoost(0);
+			              }
+			            }
+			          };//Command
+
+			          
+			          if(AllZone.GameAction.isCardInPlay(charger))
+			          {
+			            charger.addTempAttackBoost(2);
+			            charger.addTempDefenseBoost(0);
+
+			            AllZone.EndOfTurn.addUntil(untilEOT);
+			          }
+				 }//resolve
+				 
+			  };//ability
+			  
+			  ability2.setStackDescription(c.getName() + " - gets +2/+0 until EOT.");
+			  AllZone.Stack.add(ability2);
+			  			  
+		  }//+2+0 Chargers
+		  
 		  else if(c.getName().equals("Witch-Maw Nephilim") && !c.getCreatureAttackedThisTurn() && c.getNetAttack() >= 10)
 		  {
 			  final Card charger = c;

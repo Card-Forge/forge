@@ -18,6 +18,13 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+hollow_dogs.jpg             http://www.wizards.com/global/images/magic/general/hollow_dogs.jpg
+lurking_nightstalker.jpg    http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=6557
+vicious_kavu.jpg            http://www.wizards.com/global/images/magic/general/vicious_kavu.jpg
+ravenous_skirge.jpg         http://www.wizards.com/global/images/magic/general/ravenous_skirge.jpg
+wei_ambush_force.jpg        http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=10557
+charging_bandits.jpg        http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4212
+knotvine_paladin.jpg        http://www.wizards.com/global/images/magic/general/knotvine_paladin.jpg
 witch_maw_nephilim.jpg      http://www.wizards.com/global/images/magic/general/witch_maw_nephilim.jpg
 scalpelexis.jpg             http://www.wizards.com/global/images/magic/general/scalpelexis.jpg
 riptide_pilferer.jpg        http://www.wizards.com/global/images/magic/general/riptide_pilferer.jpg
