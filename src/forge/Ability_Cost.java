@@ -382,6 +382,9 @@ public class Ability_Cost {
 			else if (discardType.equals("Hand")){
 				cost.append(" your hand");
 			}
+			else if(discardType.equals("LastDrawn")) {
+				cost.append("last drawn card");
+			}
 			else{
 				cost.append(discardAmount);
 				if (!discardType.equals("Any") && !discardType.equals("Random")){

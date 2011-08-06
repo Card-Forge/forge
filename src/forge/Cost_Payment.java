@@ -121,6 +121,11 @@ public class Cost_Payment {
     		else if (discType.equals("Hand")){
     			// this will always work
     		}
+    		else if(discType.equals("LastDrawn")) {
+    			Card c = card.getController().getLastDrawnCard();
+    			CardList hand = AllZoneUtil.getPlayerHand(card.getController());
+    			return hand.contains(c);
+    		}
     		else{
     			if (!discType.equals("Any") && !discType.equals("Random")){
     				String validType[] = discType.split(",");
@@ -259,6 +264,13 @@ public class Cost_Payment {
     		else if (discType.equals("Hand")){
     			AllZone.GameAction.discardHand(card.getController(), ability);
     			payDiscard = true;
+    		}
+    		else if( discType.equals("LastDrawn") ) {
+    			if(handList.contains(card.getController().getLastDrawnCard())) {
+    				AllZone.GameAction.discard(card.getController().getLastDrawnCard(), ability);
+    				payDiscard = true;
+    			}
+    			
     		}
     		else{
     			if (discType.equals("Random")){

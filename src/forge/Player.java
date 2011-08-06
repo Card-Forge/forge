@@ -14,6 +14,8 @@ public abstract class Player extends MyObservable{
 	protected int assignedDamage;
 	protected int numPowerSurgeLands;
 	
+	protected Card lastDrawnCard;
+	
 	public Player(String myName) {
 		this(myName, 20, 0);
 	}
@@ -23,6 +25,7 @@ public abstract class Player extends MyObservable{
 		life = myLife;
 		poisonCounters = myPoisonCounters;
 		assignedDamage = 0;
+		lastDrawnCard = null;
 	}
 	
 	public String getName() {
@@ -271,6 +274,7 @@ public abstract class Player extends MyObservable{
 			Card c = library.get(0);
 			library.remove(0);
 			hand.add(c);
+			setLastDrawnCard(c);
 
 			GameActionUtil.executeDrawCardTriggeredEffects(this);
 		}
@@ -379,8 +383,24 @@ public abstract class Player extends MyObservable{
     	return numPowerSurgeLands;
     }
     
-    public void setNumPowerSurgeLands(int n) {
+    public int setNumPowerSurgeLands(int n) {
     	numPowerSurgeLands = n;
+    	return numPowerSurgeLands;
+    }
+    
+    public Card getLastDrawnCard() {
+    	return lastDrawnCard;
+    }
+    
+    public Card setLastDrawnCard(Card c) {
+    	lastDrawnCard = c;
+    	return lastDrawnCard;
+    }
+    
+    public Card resetLastDrawnCard() {
+    	Card old = lastDrawnCard;
+    	lastDrawnCard = null;
+    	return old;
     }
 	
 	////////////////////////////////

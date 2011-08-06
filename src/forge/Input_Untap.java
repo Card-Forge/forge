@@ -25,6 +25,7 @@ public class Input_Untap extends Input {
         CardList lands = AllZoneUtil.getPlayerLandsInPlay(player);
         lands = lands.filter(AllZoneUtil.untapped);
         player.setNumPowerSurgeLands(lands.size());
+        player.resetLastDrawnCard();
         
         if(!AllZoneUtil.isCardInPlay("Stasis")) doUntap();
         
