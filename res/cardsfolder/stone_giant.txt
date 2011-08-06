@@ -3,7 +3,8 @@ ManaCost:2 R R
 Types:Creature Giant
 Text:no text
 PT:3/4
-SVar:Rarity:Uncommon
 SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_giant.jpg
 End
 #Uses card-specific code!
