@@ -1,0 +1,7 @@
+Name:Disrupting Scepter
+ManaCost:3
+Types:Artifact
+Text:no text
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/disrupting_scepter.jpg
+End

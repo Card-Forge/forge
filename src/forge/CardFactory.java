@@ -11505,7 +11505,7 @@ public class CardFactory implements NewConstants {
                     card.getController().drawCards(2);
                 }
             };
-            draw.setStackDescription(cardName+" - discard 1 at random, the draw 2 cards.");
+            draw.setStackDescription(cardName+" - discard 1 at random, then draw 2 cards.");
             card.addSpellAbility(draw);
         }//*************** END ************ END **************************
         
@@ -11667,6 +11667,42 @@ public class CardFactory implements NewConstants {
         	spell.setStackDescription(sbStack.toString());
 
         	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Disrupting Scepter")) {
+        	/*
+        	 * 3, Tap: Target player discards a card. Activate this
+        	 * ability only during your turn.
+        	 */
+        	//Ability_Cost abCost = new Ability_Cost("3 T", cardName, true);
+        	//Target tgt = new Target("TgtP");
+        	//final Ability_Activated ability = new Ability_Activated(card, abCost, tgt) {
+        	final Ability_Tap ability = new Ability_Tap(card, "3") {
+				private static final long serialVersionUID = -2310727408626665975L;
+
+				@Override
+				public boolean canPlay() {
+					return AllZone.GameAction.isPlayerTurn(card.getController()) && super.canPlay();
+				}
+
+        		@Override
+        		public void resolve() {
+        			Player target = getTargetPlayer();
+        			if(target.isHuman()) {
+        				AllZone.GameAction.discard(target, 1, this);
+        			}
+        			else { //compy
+        				AllZone.GameAction.AI_discardNum(1, this);
+        			}
+        		}
+
+        	};//Ability
+
+        	ability.setDescription("3, tap: "+"Target player discards a card.  Activate this ability only during your turn.");
+        	card.addSpellAbility(ability);
+        	ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+        	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
         }//*************** END ************ END **************************
 
         return postFactoryKeywords(card);

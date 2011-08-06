@@ -1105,6 +1105,7 @@ res/cardsfolder/disorient.txt -text svneol=native#text/plain
 res/cardsfolder/dispel.txt -text svneol=native#text/plain
 res/cardsfolder/dispellers_capsule.txt -text svneol=native#text/plain
 res/cardsfolder/disperse.txt -text svneol=native#text/plain
+res/cardsfolder/disrupting_scepter.txt -text svneol=native#text/plain
 res/cardsfolder/dissipate.txt -text svneol=native#text/plain
 res/cardsfolder/dissipation_field.txt -text svneol=native#text/plain
 res/cardsfolder/distress.txt -text svneol=native#text/plain
