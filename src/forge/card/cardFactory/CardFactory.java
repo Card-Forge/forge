@@ -837,7 +837,7 @@ public class CardFactory implements NewConstants {
                             int count = 0;
                             for(int i = 0; i < creats.size(); i++) {
                                 Card c = creats.get(i);
-                                if(c.getNetAttack() <= 1 && c.getNetDefense() <= 2) {
+                                if(c.getNetAttack() <= 1 && c.getNetAttack()+c.getNetDefense() <= 3) {
                                     AllZone.GameAction.sacrifice(c);
                                     count++;
                                 }
