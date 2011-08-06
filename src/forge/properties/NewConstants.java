@@ -264,8 +264,12 @@ public interface NewConstants {
             }
         }
         
+
         public static interface Gui_NewGame {
         	public static interface NEW_GAME_TEXT {
+        		public static final String GAMETYPE     = "%s/NewGame/gametype";
+        		public static final String LIBRARY     = "%s/NewGame/library";
+        		public static final String SETTINGS     = "%s/NewGame/settings";
         		public static final String NEW_GAME     = "%s/NewGame/new_game";
         		public static final String CONSTRUCTED_TEXT      = "%s/NewGame/constructed_text";
                 public static final String SEALED_TEXT         = "%s/NewGame/sealed_text";
@@ -310,5 +314,28 @@ public interface NewConstants {
             
             public static interface ERRORS {}
         }
+        
+        public static interface Gui_WinLose {
+        	public static interface WINLOSE_TEXT {
+        		public static final String WON     = "%s/WinLose/won";
+        		public static final String LOST     = "%s/WinLose/lost";
+        		public static final String WIN     = "%s/WinLose/win";
+        		public static final String LOSE     = "%s/WinLose/lose";
+        		public static final String CONTINUE     = "%s/WinLose/continue";
+        		public static final String RESTART     = "%s/WinLose/restart";
+        		public static final String QUIT     = "%s/WinLose/quit";
+        	}
+        }
+        
+        public static interface Gui_DownloadPrices {
+        	public static interface DOWNLOADPRICES {
+        		public static final String TITLE     = "%s/DownloadPrices/title";
+        		public static final String START_UPDATE     = "%s/DownloadPrices/startupdate";
+        		public static final String DOWNLOADING     = "%s/DownloadPrices/downloading";
+        		public static final String COMPILING     = "%s/DownloadPrices/compiling";
+        	}
+        }
+        
     }
 }
+

@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.QUEST;
+import forge.properties.NewConstants.LANG.Gui_DownloadPrices.DOWNLOADPRICES;
 
 public class Gui_DownloadPrices extends JFrame {
 
@@ -45,7 +46,7 @@ public class Gui_DownloadPrices extends JFrame {
 	private void initialize() {
 		this.setSize(386, 200);
 		setContentPane(getJContentPane());
-		setTitle("Update Prices");
+		setTitle(ForgeProps.getLocalized(DOWNLOADPRICES.TITLE));
 	}
 
 	/**
@@ -70,7 +71,7 @@ public class Gui_DownloadPrices extends JFrame {
 	private JButton getJButton() {
 		if (jButton == null) {
 			jButton = new JButton();
-			jButton.setText("Start Update");
+			jButton.setText(ForgeProps.getLocalized(DOWNLOADPRICES.START_UPDATE));
 			jButton.setLocation(new Point(120, 46));
 			jButton.setSize(158, 89);
 
@@ -94,7 +95,7 @@ public class Gui_DownloadPrices extends JFrame {
 								.openConnection(p).getInputStream());
 						out = new BufferedOutputStream(new FileOutputStream(f));
 
-						jButton.setText("Downloading");
+						jButton.setText(ForgeProps.getLocalized(DOWNLOADPRICES.DOWNLOADING));
 						jContentPane.paintImmediately(jButton.getBounds());
 
 						
@@ -145,7 +146,7 @@ public class Gui_DownloadPrices extends JFrame {
 						line = inBR.readLine();
 						line = inBR.readLine();
 
-						jButton.setText("Compiling");
+						jButton.setText(ForgeProps.getLocalized(DOWNLOADPRICES.COMPILING));
 						jContentPane.paintImmediately(jButton.getBounds());
 
 						x = 0;

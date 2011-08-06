@@ -25,6 +25,7 @@ import net.miginfocom.swing.MigLayout;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.properties.NewConstants.LANG.Gui_WinLose.WINLOSE_TEXT;
 
 
 public class Gui_WinLose extends JFrame implements NewConstants {
@@ -136,12 +137,12 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         	restartButton.setEnabled(false);
         
         //show Wins and Loses
-        statsLabel.setText("Won: " + winLose.getWin() + ", Lost: " + winLose.getLose());
+        statsLabel.setText(ForgeProps.getLocalized(WINLOSE_TEXT.WON) + winLose.getWin() + ForgeProps.getLocalized(WINLOSE_TEXT.LOST) + winLose.getLose());
         
         //show "You Won" or "You Lost"
         if(winLose.didWinRecently()) 
         {
-        	titleLabel.setText("You Won");
+        	titleLabel.setText(ForgeProps.getLocalized(WINLOSE_TEXT.WIN));
         	
         	int game = 0;
         	if (winLose.getWinTurns()[0] != 0)
@@ -163,7 +164,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         }
         else 
         {
-        	titleLabel.setText("You Lost");
+        	titleLabel.setText(ForgeProps.getLocalized(WINLOSE_TEXT.LOSE));
         	//System.out.println("You lost by turn: " + AllZone.Phase.getTurn());
         }
     }//setup();
@@ -173,21 +174,21 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         border1 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
         titleLabel.setFont(new java.awt.Font("Dialog", 0, 26));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        titleLabel.setText("You Won");
+        titleLabel.setText(ForgeProps.getLocalized(WINLOSE_TEXT.WIN));
         this.getContentPane().setLayout(new MigLayout("fill"));
-        continueButton.setText("Continue Match");
+        continueButton.setText(ForgeProps.getLocalized(WINLOSE_TEXT.CONTINUE));
         continueButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 continueButton_actionPerformed(e);
             }
         });
-        restartButton.setText("Restart Match");
+        restartButton.setText(ForgeProps.getLocalized(WINLOSE_TEXT.RESTART));
         restartButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 restartButton_actionPerformed(e);
             }
         });
-        quitButton.setText("Quit Match");
+        quitButton.setText(ForgeProps.getLocalized(WINLOSE_TEXT.QUIT));
         quitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 quitButton_actionPerformed(e);

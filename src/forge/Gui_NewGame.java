@@ -332,11 +332,11 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     
     private void jbInit() throws Exception {
         border1 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
-        titledBorder1 = new TitledBorder(border1, "Game Type");
+        titledBorder1 = new TitledBorder(border1, ForgeProps.getLocalized(NEW_GAME_TEXT.GAMETYPE));
         border2 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
-        titledBorder2 = new TitledBorder(border2, "Library");
+        titledBorder2 = new TitledBorder(border2, ForgeProps.getLocalized(NEW_GAME_TEXT.LIBRARY));
         border3 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
-        titledBorder3 = new TitledBorder(border3, "Settings");
+        titledBorder3 = new TitledBorder(border3, ForgeProps.getLocalized(NEW_GAME_TEXT.SETTINGS));
         titleLabel.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.NEW_GAME));
         titleLabel.setFont(new java.awt.Font("Dialog", 0, 26));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
