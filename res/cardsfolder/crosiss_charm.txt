@@ -7,6 +7,6 @@ A:SP$Destroy | Cost$ U B R | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select ta
 A:SP$Destroy | Cost$ U B R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ or destroy target artifact.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/Crosiss_charm.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crosiss_charm.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/99.jpg
 End

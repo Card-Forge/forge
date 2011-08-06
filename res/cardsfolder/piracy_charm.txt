@@ -1,7 +1,11 @@
 Name:Piracy Charm
 ManaCost:U
 Types:Instant
-Text:(NOTE: Computer will only use the first ability against you.)
+Text:no text
+A:SP$Pump | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Islandwalk | PrecostDesc$ Choose one - | SpellDescription$ Target creature gains islandwalk until end of turn;
+A:SP$Pump | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ -1 | SpellDescription$ or target creature gets +2/-1 until end of turn;
+A:SP$Discard | Cost$ U | ValidTgts$ Player | TgtPrompt$ Choose a player to discard a card | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ or target player discards a card.
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/piracy_charm.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/58.jpg

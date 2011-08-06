@@ -2320,7 +2320,7 @@ public class CardFactory_Instants {
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
-        
+        /* Converted to AF
         //*************** START *********** START **************************
         else if (cardName.equals("Funeral Charm") || cardName.equals("Piracy Charm")) {
         	final String walk = cardName.equals("Funeral Charm") ? "Swampwalk" : "Islandwalk";
@@ -2415,7 +2415,7 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell_two);
             card.addSpellAbility(spell_three);
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Eladamri's Call")) {
