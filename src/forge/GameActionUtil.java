@@ -5927,6 +5927,9 @@ public class GameActionUtil {
 						else if(keyword.startsWith("Types=")) {
 							String[] tmptypes = keyword.split("=");
 							String[] types = tmptypes[1].split(",");
+							if(types[0].equals("ChosenType")) {
+								types[0] = source.getChosenType();
+							}
 							for(String type : types) affectedCard.addType(type);
 						}
 						else affectedCard.addExtrinsicKeyword(keyword);
@@ -5984,6 +5987,9 @@ public class GameActionUtil {
 					else if(keyword.startsWith("Types=")) {
 						String[] tmptypes = keyword.split("=");
 						String[] types = tmptypes[1].split(",");
+						if(types[0].equals("ChosenType")) {
+							types[0] = source.getChosenType();
+						}
 						for(String type : types) affectedCard.removeType(type);
 					}
 					affectedCard.removeExtrinsicKeyword(keyword);

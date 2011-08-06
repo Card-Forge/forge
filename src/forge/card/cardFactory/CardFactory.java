@@ -1074,7 +1074,7 @@ public class CardFactory implements NewConstants {
         else if(cardName.equals("Conspiracy")           || cardName.equals("Cover of Darkness")
                 || cardName.equals("Door of Destinies") || cardName.equals("Engineered Plague")
                 || cardName.equals("Shared Triumph")    || cardName.equals("Belbe's Portal")
-                || cardName.equals("Steely Resolve")) {
+                || cardName.equals("Steely Resolve")	|| cardName.equals("Xenograft")) {
             final String[] input = new String[1];
             final Player player = card.getController();
             
@@ -1104,7 +1104,7 @@ public class CardFactory implements NewConstants {
                 public void execute() {
                 	
                 	StringBuilder sb = new StringBuilder();
-                	sb.append("When ").append(card.getName()).append(" enters the battlefield, choose a creature type.");
+                	sb.append("As ").append(card.getName()).append(" enters the battlefield, choose a creature type.");
                 	ability.setStackDescription(sb.toString());
                     
                     AllZone.Stack.addSimultaneousStackEntry(ability);
