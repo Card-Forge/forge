@@ -161,6 +161,28 @@ public class CardList implements Iterable<Card> {
         return c;
     }//getType()
     
+    public CardList getTapState(String TappedOrUntapped)
+    {
+    	CardList cl = new CardList();
+    	Card c;
+    	for (int i=0; i<size(); i++)
+    	{
+    		c = getCard(i);
+    		if (TappedOrUntapped.equals("Tapped"))
+    		{
+    			if (c.isTapped() == true)
+    				cl.add(c);
+    		}
+    		else if (TappedOrUntapped.equals("Untapped"))
+    		{
+    			if (c.isUntapped() == true)
+    				cl.add(c);
+    		}
+    	}
+    	
+    	return cl;
+    }
+    
     public CardList getKeyword(final String keyword) {
         return this.filter(new CardListFilter() {
             public boolean addCard(Card c) {
