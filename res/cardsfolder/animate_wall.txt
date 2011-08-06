@@ -3,6 +3,7 @@ ManaCost:W
 Types:Enchantment Aura
 Text:Enchanted Wall can attack as though it didn't have defender.
 K:Enchant Wall
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/animate_wall.jpg
 End

@@ -198,6 +198,7 @@ public class ComputerUtil_Attack2 {
           //or if the computer has 4 creatures and the player has 1
           else if(doAssault() || (humanList.size() == 1 && 3 < attackers.size()))
           {
+        	 CardListUtil.sortAttack(attackers);
              for(int i = 0; i < attackers.size(); i++)
             	 if (CombatUtil.canAttack(attackers.get(i), combat)) combat.addAttacker(attackers.get(i));
           }
@@ -300,16 +301,25 @@ public class ComputerUtil_Attack2 {
     
     public boolean shouldAttack(Card attacker, CardList defenders, Combat combat)
     {
-    	boolean canBeKilled = false;
+    	boolean canBeKilledByOne = false;
     	boolean canKillAll = true;
+    	CardList blockers = new CardList(); //all creatures that can block the attacker
+    	CardList killingBlockers = new CardList(); //all creatures that can kill the attacker alone
     	
     	for (Card defender:defenders) {
     		if(CombatUtil.canBlock(attacker, defender, combat)) {
-    			if(CombatUtil.canDestroyAttacker(attacker, defender)) canBeKilled = true;
+    			if(CombatUtil.canDestroyAttacker(attacker, defender)) {
+    				canBeKilledByOne = true;
+    				killingBlockers.add(defender);
+    			}
     			if(!CombatUtil.canDestroyBlocker(defender, attacker)) canKillAll = false;
+    			blockers.add(defender);
     		}
     	}
-    return (canKillAll || !canBeKilled); // A creature should attack if it can't be killed or can kill any blocker
+    	// A creature should attack if it can't be killed
+    	if (CombatUtil.totalDamageOfBlockers(attacker, blockers) < attacker.getKillDamage()) return true; 
+    	
+    	return (canKillAll && !canBeKilledByOne); // A creature should attack if it can't be killed or can kill any blocker
     }  
     
     //
@@ -318,7 +328,7 @@ public class ComputerUtil_Attack2 {
 		Combat combat = new Combat();
 		CardList attackerCreatures = attackerPermanents.getType("Creature");
 		CardList attackersLeft = new CardList(); //keeps track of all undecided attackers
-		CardList plannedBlockers = new CardList(); //creatures that should be held back to blcok
+		CardList plannedBlockers = new CardList(); //creatures that should be held back to block
 		
 		CardList humanBlockers = new CardList();
 		

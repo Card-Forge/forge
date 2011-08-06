@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 K:First Strike
 K:Haste
-A:AB$Pump|Cost$Discard<1/Random>|KW$Protection from white|SpellDescription$CARDNAME gains protection from white until end of turn.
+A:AB$Pump | Cost$ Discard<1/Random> | KW$ Protection from white | SpellDescription$ CARDNAME gains protection from white until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hell_bent_raider.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/101.jpg

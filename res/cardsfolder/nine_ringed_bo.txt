@@ -1,0 +1,10 @@
+Name:Nine-Ringed Bo
+ManaCost:3
+Types:Artifact
+Text:no text
+A:AB$DealDamage | Cost$ T |  ValidTgts$ Creature.Spirit | NumDmg$ 1 | SubAbility$ SVar=DB | SpellDescription$ CARDNAME deals 1 damage to target Spirit creature. If that creature would be put into a graveyard this turn, exile it instead.
+SVar:DB:DB$Pump | KW$HIDDEN If CARDNAME would be put into a graveyard this turn, exile it instead. | Defined$Targeted
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nine_ringed_bo.jpg
+End
