@@ -3,7 +3,7 @@ ManaCost:W
 Types:Creature Human Soldier Scout
 Text:no text
 PT:1/1
-K:abPumpTgtC 1 T:First Strike
+A:AB$Pump | Cost$ 1 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | SpellDescription$ Target creature gains first strike until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/icatian_scout.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/313.jpg
