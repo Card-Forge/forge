@@ -2,7 +2,7 @@ Name:Book of Rass
 ManaCost:6
 Types:Artifact
 Text:no text
-K:abDrawCards 2 PayLife<2>:1:Draw a card.:Book of Rass - draw a card
+A:AB$Draw | Cost$ 2 PayLife<2> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/book_of_rass.jpg
 End

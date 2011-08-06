@@ -5,7 +5,7 @@ Text:no text
 PT:0/2
 K:Defender
 K:Haste
-K:abDrawCards T:1:Drawback$YouDiscard/1:Draw a card, then discard a card.:Bonded Fetch - draw a card and discard a card
+A:AB$Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ YouDiscard/1
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card132229.jpg
 End
