@@ -447,6 +447,9 @@ public class AbilityFactory {
 				SA = AbilityFactory_Destroy.createAbilityDestroy(this);
 			else if (isSp)
 				SA = AbilityFactory_Destroy.createSpellDestroy(this);
+			else if( isDb ) {
+				SA = AbilityFactory_Destroy.createDrawbackDestroy(this);
+			}
 		}
 		
 		if (API.equals("DestroyAll")){
