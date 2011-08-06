@@ -166,6 +166,9 @@ public class GameActionUtil {
 		// experimental, AI abuse aluren
 		
 		AllZone.Stack.unfreezeStack();
+		
+		if (AllZone.Stack.size() == 0 && !AllZone.Display.stopAtPhase(player, Constant.Phase.Upkeep)) 
+	    	AllZone.Phase.setNeedToNextPhase(true);
 	}
 
 	public static void executeDrawStepEffects() {
@@ -181,6 +184,8 @@ public class GameActionUtil {
 		draw_Sylvan_Library(player);
 		draw_Armageddon_Clock(player);
 		AllZone.Stack.unfreezeStack();
+		if (AllZone.Stack.size() == 0 && !AllZone.Display.stopAtPhase(player, Constant.Phase.Draw)) 
+	    	AllZone.Phase.setNeedToNextPhase(true);
 	}
 
 	public static void executeTapSideEffects(Card c) {

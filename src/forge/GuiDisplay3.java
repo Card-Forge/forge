@@ -1023,9 +1023,15 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
         }
     }
     
-    public boolean stopEOT() {
-        return eotCheckboxForMenu.isSelected();
-    }
+	public boolean stopAtPhase(Player turn, String phase) {
+		// fill this in
+    	if (turn.isComputer()){
+    		if (phase.equals(Constant.Phase.End_Of_Turn))
+    			return eotCheckboxForMenu.isSelected();
+    	}
+    		
+		return true;
+	}
     
     public static JCheckBoxMenuItem eotCheckboxForMenu       = new JCheckBoxMenuItem("Stop at End of Turn", true);
     public static JCheckBoxMenuItem playsoundCheckboxForMenu = new JCheckBoxMenuItem("Play Sound", false);

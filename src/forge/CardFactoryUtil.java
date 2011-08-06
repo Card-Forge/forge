@@ -3967,8 +3967,8 @@ public class CardFactoryUtil {
             }
         });
         
-        //Count$IsMulticolor.<numMC>.<numNotMC>
-        if(sq[0].contains("IsMulticolor"))
+        //Count$CardMulticolor.<numMC>.<numNotMC>
+        if(sq[0].contains("CardMulticolor"))
         {
         	if(CardUtil.getColors(c).size() > 1)
         		return doXMath(Integer.parseInt(sq[1]),m);

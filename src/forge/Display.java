@@ -25,10 +25,10 @@ public interface Display {
     
     public void setVisible(boolean b);
     
-    public boolean stopEOT();
-    
     //assigns combat damage, used by Combat.setAssignedDamage()
     public void assignDamage(Card attacker, CardList blockers, int damage);
     //public void addAssignDamage(Card attacker, Card blocker, int damage);
     //public void addAssignDamage(Card attacker, int damage);
+
+	public boolean stopAtPhase(Player turn, String phase);
 }

@@ -887,5 +887,10 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
     private CardDetailPanel         detail;
     private CardPicturePanel        picture;
     // End of variables declaration//GEN-END:variables
+
+	public boolean stopAtPhase(Player turn, String phase) {
+		// is display2 even used?
+		return true;
+	}
     
 }

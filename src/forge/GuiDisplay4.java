@@ -176,7 +176,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     private void addMenu() {
         Object[] obj = {
                 HUMAN_GRAVEYARD_ACTION, HUMAN_REMOVED_ACTION, HUMAN_FLASHBACK_ACTION, COMPUTER_GRAVEYARD_ACTION,
-                COMPUTER_REMOVED_ACTION, new JSeparator(), GuiDisplay4.eotCheckboxForMenu,
+                COMPUTER_REMOVED_ACTION, new JSeparator(),
                 GuiDisplay4.playsoundCheckboxForMenu, new JSeparator(), ErrorViewer.ALL_THREADS_ACTION,
                 CONCEDE_ACTION};
        
@@ -188,8 +188,21 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
             else throw new AssertionError();
         }
        
+        JMenu gamePhases = new JMenu(ForgeProps.getLocalized(MENU_BAR.PHASE.TITLE)); 
+        
+        JMenuItem aiLabel = new JMenuItem("Computer");
+        JMenuItem humanLabel = new JMenuItem("Human");
+        
+        Component[] objPhases = { aiLabel, GuiDisplay4.cbAIUpkeep , GuiDisplay4.cbAIDraw , GuiDisplay4.cbAIEndOfTurn, new JSeparator(), 
+        						humanLabel, GuiDisplay4.cbHumanUpkeep, GuiDisplay4.cbHumanDraw, GuiDisplay4.cbHumanEndOfTurn };
+        
+        for(Component cmp:objPhases) {
+            gamePhases.add(cmp);
+        }
+
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(gameMenu);
+        menuBar.add(gamePhases);
         menuBar.add(new MenuItem_HowToPlay());
         this.setJMenuBar(menuBar);
     }//addMenu()
@@ -1009,12 +1022,36 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         }
     }
    
-    public boolean stopEOT() {
-        return eotCheckboxForMenu.isSelected();
+    public boolean stopAtPhase(Player turn, String phase) {
+    	if (turn.isComputer()){
+    		if (phase.equals(Constant.Phase.End_Of_Turn))
+    			return cbAIEndOfTurn.isSelected();
+    		else if (phase.equals(Constant.Phase.Upkeep))
+    			return cbAIUpkeep.isSelected();
+    		else if (phase.equals(Constant.Phase.Draw))
+    			return cbAIDraw.isSelected();
+    	}
+    	else{
+    		if (phase.equals(Constant.Phase.End_Of_Turn))
+    			return cbHumanEndOfTurn.isSelected();
+    		else if (phase.equals(Constant.Phase.Upkeep))
+    			return cbHumanUpkeep.isSelected();
+    		else if (phase.equals(Constant.Phase.Draw))
+    			return cbHumanDraw.isSelected();
+    	}
+    	return false;
     }
    
-    public static JCheckBoxMenuItem eotCheckboxForMenu       = new JCheckBoxMenuItem("Stop at End of Turn", true);
     public static JCheckBoxMenuItem playsoundCheckboxForMenu = new JCheckBoxMenuItem("Play Sound", false);
+    
+    // Phases
+    public static JCheckBoxMenuItem cbAIUpkeep		       = new JCheckBoxMenuItem("Upkeep", true);
+    public static JCheckBoxMenuItem cbAIDraw		       = new JCheckBoxMenuItem("Draw", true);
+    public static JCheckBoxMenuItem cbAIEndOfTurn	       = new JCheckBoxMenuItem("End of Turn", true);
+    public static JCheckBoxMenuItem cbHumanUpkeep		   = new JCheckBoxMenuItem("Upkeep", true);
+    public static JCheckBoxMenuItem cbHumanDraw			   = new JCheckBoxMenuItem("Draw", true);
+    public static JCheckBoxMenuItem cbHumanEndOfTurn	   = new JCheckBoxMenuItem("End of Turn", true);
+    
    
     JXMultiSplitPane                pane                     = new JXMultiSplitPane();
     JButton                         cancelButton             = new JButton();

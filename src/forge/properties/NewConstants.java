@@ -162,6 +162,10 @@ public interface NewConstants {
                 public static interface MENU {
                     public static final String TITLE = "%s/Display/menu/title";
                 }
+                
+                public static interface PHASE {
+                	public static final String TITLE = "%s/Display/phase/title";
+                }
             }
             
             public static final String HUMAN_TITLE = "%s/Display/human/title";

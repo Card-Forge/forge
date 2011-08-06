@@ -310,7 +310,7 @@ public class Phase extends MyObservable
 	    else if(phase.equals(Constant.Phase.End_Of_Turn)) {
 	    	AllZone.EndOfTurn.executeAt();
 	    	// todo: when we have a bar for selecting which phases to stop at, we will check that instead of display.stop
-	    	if(!AllZone.Display.stopEOT()) 
+	    	if(AllZone.Stack.size() == 0 && !AllZone.Display.stopAtPhase(turn, phase)) 
 	    		AllZone.Phase.setNeedToNextPhase(true);
         }
         
