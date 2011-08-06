@@ -138,7 +138,7 @@ public class Card extends MyObservable {
         return abilityUsed;
     }
     
-    //****************TODO:Check
+    //****************TOhaveDOne:Use somehow
     public void setX(int i) {
         X = i;
     }
@@ -430,7 +430,7 @@ public class Card extends MyObservable {
                 }
             }
             
-            return sb.toString();
+            return sb.toString().replaceAll("CARDNAME", getName());
         }
         
         StringBuilder sb = new StringBuilder();
@@ -456,7 +456,7 @@ public class Card extends MyObservable {
             }
         }
         
-        return sb.toString().trim();
+        return sb.toString().replaceAll("CARDNAME", getName()).trim();
     }//getText()
     
     /* private ArrayList<Ability_Mana> addLandAbilities ()
@@ -479,7 +479,7 @@ public class Card extends MyObservable {
     				  for (char ch : ManaPool.colors.toCharArray())
     					  have.add(new Ability_Mana(this, "tap: add " + ch){});
       }}
-      catch(NullPointerException ex){}//TODO: fix this to something more memory-efficient than catching 2000 NullPointer Exceptions every time you open deck editor
+      catch(NullPointerException ex){}//TOhaveDOne: fix this to something more memory-efficient than catching 2000 NullPointer Exceptions every time you open deck editor
       return have;
     }*/
     public ArrayList<Ability_Mana> getManaAbility() {
