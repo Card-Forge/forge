@@ -1,3 +1,9 @@
+Monk Idealist
+2 W
+Creature Human Monk Cleric
+When CARDNAME enters the battlefield,  return target enchantment card from your graveyard to your hand.
+2/2
+
 Hermit Druid
 1 G
 Creature Human Druid
@@ -7,7 +13,7 @@ G, tap: Reveal cards from the top of your library until you reveal a basic land 
 Bone Shredder
 2 B
 Creature Minion
-When CARDNAME enters the battlfield, destroy target nonartifact, nonblack creature.
+When CARDNAME enters the battlefield, destroy target nonartifact, nonblack creature.
 1/1
 Flying
 Echo:2 B
@@ -15,7 +21,7 @@ Echo:2 B
 Nekrataal
 2 B B  
 Creature Human Assassin
-When CARDNAME enters the battlfield, destroy target nonartifact, nonblack creature. It can't be regenerated.
+When CARDNAME enters the battlefield, destroy target nonartifact, nonblack creature. It can't be regenerated.
 2/1
 First Strike
 
