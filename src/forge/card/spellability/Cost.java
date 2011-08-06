@@ -18,6 +18,8 @@ public class Cost {
 	public boolean getSacThis() { return sacThis; }
 	private int sacAmount = 0;
 	public int getSacAmount() { return sacAmount; }
+	private boolean sacX = false;
+	public boolean isSacX() { return sacX; }
 	
 	private boolean exileCost = false;
 	public boolean getExileCost() { return exileCost; }
@@ -203,7 +205,8 @@ public class Cost {
         	String[] splitStr = abCostParse(parse, sacStr, 2);
         	parse = abUpdateParse(parse, sacStr);
         	
-        	sacAmount = Integer.parseInt(splitStr[0]);
+        	if(splitStr[0].equals("X")) sacX = true;
+        	else sacAmount = Integer.parseInt(splitStr[0]);
         	sacType = splitStr[1];
         	sacThis = (sacType.equals("CARDNAME"));
         }

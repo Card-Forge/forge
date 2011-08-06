@@ -375,6 +375,7 @@ public class Cost_Payment {
 		if (!paySac && cost.getSacCost()){					// sacrifice stuff here
     		if (cost.getSacThis())
     			setInput(sacrificeThis(ability, this));
+    		else if(cost.isSacX()) setInput(sacrificeXType(ability, cost.getSacType(), this));
     		else
     			setInput(sacrificeType(ability, cost.getSacType(), this));
     		return false;
@@ -1021,6 +1022,64 @@ public class Cost_Payment {
 
         return target;
     }//sacrificeType()
+    
+    public static Input sacrificeXType(final SpellAbility sa, final String type, final Cost_Payment payment){
+        Input target = new Input() {
+			private static final long serialVersionUID = -4496270321029213839L;
+			private CardList typeList;
+            private int nSacrifices = 0;
+            
+            @Override
+            public void showMessage() {
+            	StringBuilder msg = new StringBuilder("Sacrifice X ");
+            	msg.append(type).append("s. ");
+            	msg.append("(").append(nSacrifices).append(" sacrificed so far.)");
+            	
+                typeList = AllZoneUtil.getPlayerCardsInPlay(sa.getSourceCard().getController());
+                typeList = typeList.getValidCards(type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
+                AllZone.Display.showMessage(msg.toString());
+                ButtonUtil.enableAll();
+            }
+            
+            @Override
+            public void selectButtonCancel() {
+            	cancel();
+            }
+            
+            @Override
+            public void selectButtonOK() {
+            	done();
+            }
+            
+            @Override
+            public void selectCard(Card card, PlayerZone zone) {
+                if(typeList.contains(card)) {
+                	nSacrifices++;
+                	payment.getAbility().addSacrificedCost(card);
+                	AllZone.GameAction.sacrifice(card);
+                	typeList.remove(card);
+                    if (typeList.size() == 0)	// this really shouldn't happen
+                    	done();
+                    else
+                    	showMessage();
+                }
+            }
+            
+            public void done(){
+            	payment.setPaySac(true);
+            	stop();
+            	payment.payCost();
+            }
+            
+            public void cancel(){
+            	payment.setCancel(true);
+            	stop();
+            	payment.payCost();
+            }
+        };
+
+        return target;
+    }//sacrificeXType()
     
     public static Input exileThis(final SpellAbility sa, final Cost_Payment payment) {
         Input target = new Input() {
