@@ -162,6 +162,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Harry Potter 2", "medium", "UB Mill and counter spell deck");
         addToDeckList("Harry Potter 3", "hard", "UB Mill and counter spell deck with card draw");
         addToDeckList("Hellboy 3", "hard", "BR direct damage deck");
+        addToDeckList("Hercules 1", "easy", "GW Deck with Safehold Duo, Bant Sureblade and Naya Hushblade");
         addToDeckList("Hercules 2", "medium", "GW Deck with Bant Sureblade and Naya Hushblade");
         addToDeckList("Hercules 3", "hard", "GW Deck with Wilt-Leaf Liege, Bant Sureblade and Naya Hushblade");
         addToDeckList("Higgins 3", "hard", "UBR Grixis Control deck with threat removal and some creatures");
