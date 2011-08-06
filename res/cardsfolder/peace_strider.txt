@@ -1,0 +1,11 @@
+Name:Peace Strider
+ManaCost:4
+Types:Artifact Creature Construct
+Text:no text
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 3
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/peace_strider.jpg
+SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/119.jpg
+End
