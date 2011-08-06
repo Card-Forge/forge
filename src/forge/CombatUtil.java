@@ -820,6 +820,13 @@ public class CombatUtil {
     	
         if(attacker.getKeyword().contains("Flanking") && !defender.getKeyword().contains("Flanking"))          
         	power -= attacker.getAmountOfKeyword("Flanking");
+        
+        //if the attacker has first strike and wither the blocker will deal less damage than expected
+        if((attacker.getKeyword().contains("First Strike") || attacker.getKeyword().contains("Double Strike"))
+        		&& (attacker.getKeyword().contains("Wither") || attacker.getKeyword().contains("Infect"))
+        		&& !(defender.getKeyword().contains("First Strike") || defender.getKeyword().contains("Double Strike")
+        				|| defender.getKeyword().contains("CARDNAME can't have counters placed on it.")))          
+        	power -= attacker.getNetCombatDamage();
         	
         power += defender.getKeywordMagnitude("Bushido");
         
@@ -889,6 +896,13 @@ public class CombatUtil {
     	int power = 0;
         	
         power += attacker.getKeywordMagnitude("Bushido");
+        
+        //if the defender has first strike and wither the attacker will deal less damage than expected
+        if((defender.getKeyword().contains("First Strike") || defender.getKeyword().contains("Double Strike"))
+        		&& (defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect"))
+        		&& !(attacker.getKeyword().contains("First Strike") || attacker.getKeyword().contains("Double Strike")
+        				|| attacker.getKeyword().contains("CARDNAME can't have counters placed on it.")))          
+        	power -= defender.getNetCombatDamage();
         
         ArrayList<Trigger> registeredTriggers = AllZone.TriggerHandler.getRegisteredTriggers();
 		for(Trigger trigger : registeredTriggers)
@@ -987,9 +1001,6 @@ public class CombatUtil {
         
         if(attacker.getKeyword().contains("Indestructible") && 
         		!(defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect"))) return false;
-        
-        //unused
-        //int attBushidoMagnitude = attacker.getKeywordMagnitude("Bushido");
         
         int defenderDamage = defender.getNetAttack() + predictPowerBonusOfBlocker(attacker, defender);
         int attackerDamage = attacker.getNetAttack() + predictPowerBonusOfAttacker(attacker, defender);
