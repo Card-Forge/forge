@@ -2602,7 +2602,7 @@ public class CardFactoryUtil
       {
          if (MY == false)
             someCards.addAll(myYard.getCards());
-         if (OY = false)
+         if (OY == false)
             someCards.addAll(opYard.getCards());
       }
 
@@ -2766,9 +2766,9 @@ public class CardFactoryUtil
      else if (s[0].contains("Twice"))
         return num * 2;
      else if (s[0].contains("HalfUp"))
-        return (int) (Math.ceil(num / 2));
+        return (int) (Math.ceil(num / 2.0));
      else if (s[0].contains("HalfDown"))
-        return (int) (Math.floor(num / 2));
+        return (int) (Math.floor(num / 2.0));
      else if (s[0].contains("Negative")) // 2/10
     	 return (int) num * -1;
     

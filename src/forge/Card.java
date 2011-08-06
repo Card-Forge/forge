@@ -250,7 +250,7 @@ public class Card extends MyObservable
 	  if (SVars.containsKey(Var))
 		  return SVars.get(Var);
 	  else
-		  return new String("");
+		  return "";
   }
   public void SetSVar(String Var, String str)
   {

@@ -7171,12 +7171,11 @@ public class GameActionUtil
 		        	
 						if (q == null || q.equals("No"))
 							return;
+						if (q.equals("Yes"))
+						{
+							CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", crd, "G", new String[] {"Creature", "Beast"}, 3, 3, new String[] {""} );
+						}
 					}
-					if (q.equals("Yes") || player.equals(Constant.Player.Computer))
-					{
-						CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", crd, "G", new String[] {"Creature", "Beast"}, 3, 3, new String[] {""} );
-					}
-					//???
 					else if (player.equals(Constant.Player.Computer))
 					{
 						CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", crd, "G", new String[] {"Creature", "Beast"}, 3, 3, new String[] {""} );
@@ -7249,25 +7248,25 @@ public class GameActionUtil
 							q = AllZone.Display.getChoiceOptional("Use Bringer of the White Dawn?", choices);
 							if (q == null || q.equals("No"))
 								return;
-						}
-						if (q.equals("Yes"))
-						{
-							PlayerZone graveyard = AllZone.getZone(
-									Constant.Zone.Graveyard, player);
-							PlayerZone playZone = AllZone.getZone(Constant.Zone.Play,
-									player);
-	
-							CardList arts = new CardList(graveyard.getCards());
-							arts = arts.getType("Artifact");
-	
-							Object o = AllZone.Display.getChoiceOptional("Pick an artifact to put into play", arts.toArray());
-							if (o != null)
+							if (q.equals("Yes"))
 							{
-								Card card = (Card) o;
-								graveyard.remove(card);
-								playZone.add(card);
+								PlayerZone graveyard = AllZone.getZone(
+										Constant.Zone.Graveyard, player);
+								PlayerZone playZone = AllZone.getZone(Constant.Zone.Play,
+										player);
+		
+								CardList arts = new CardList(graveyard.getCards());
+								arts = arts.getType("Artifact");
+		
+								Object o = AllZone.Display.getChoiceOptional("Pick an artifact to put into play", arts.toArray());
+								if (o != null)
+								{
+									Card card = (Card) o;
+									graveyard.remove(card);
+									playZone.add(card);
+								}
+								 
 							}
-							 
 						}
 						
 						else if (player.equals(Constant.Player.Computer))
@@ -10094,9 +10093,7 @@ public class GameActionUtil
 				{
 					public void resolve()
 					{
-						Card c = null;
-						if (!test.isEmpty())
-							c = test.get(0);
+						Card c = test.get(0);
 
 						CardList all = new CardList(AllZone.getZone(
 								Constant.Zone.Play, c.getController())

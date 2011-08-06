@@ -127,7 +127,7 @@ public class ImageEditor {
             ImageWrite(image,resultpath);
         }else{
             BufferedImage thumbImage = getScaledInstance(image,thumbWidth,thumbHeight,RenderingHints.VALUE_INTERPOLATION_BICUBIC,true);
-            thumbImage = getCropInstance(thumbImage,max_x,max_y,Math.round(Math.abs(thumbWidth-max_x)/2),Math.round(Math.abs(thumbHeight-max_y)/2),RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+            thumbImage = getCropInstance(thumbImage,max_x,max_y,Math.round(Math.abs(thumbWidth-max_x)/2.0f),Math.round(Math.abs(thumbHeight-max_y)/2.0f),RenderingHints.VALUE_INTERPOLATION_BICUBIC);
             ImageWrite(thumbImage,resultpath);
         }
 

@@ -249,8 +249,7 @@ public class BoosterDraftAI
   private int[] getDeckColors()
   {
     int[] out = new int[nDecks];
-    int start = MyRandom.random.nextInt();
-    start = Math.abs(start);//make number positive, stupid number generator
+    int start = MyRandom.random.nextInt(10);
 
     for(int i = 0; i < out.length; i++)
     {

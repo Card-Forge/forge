@@ -81,7 +81,7 @@ final class SynthesisFilter
 	 samples = new float[32];
      channel = channelnumber;
 	 scalefactor = factor;
-	 setEQ(eq);	 
+	 setEQ(eq0);	 
 	 //setQuality(HIGH_QUALITY);
 	 
      reset();

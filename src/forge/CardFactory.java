@@ -888,7 +888,7 @@ public class CardFactory implements NewConstants {
 
         			if (ptk[0].contains("-"))	// handle "-X" or "-Y"
         				if (AttackX[0].contains("/"))	// already contains math element
-        					AttackX[0].replace("/", "/Negative");	// insert into existing math element
+        					AttackX[0] = AttackX[0].replace("/", "/Negative");	// insert into existing math element
         				else
         					AttackX[0] += "/Negative";	// add math element
         		}
@@ -906,7 +906,7 @@ public class CardFactory implements NewConstants {
 
         			if (ptk[1].contains("-"))	//handle "-X" or "-Y"
         				if (DefenseX[0].contains("/"))	// already contains math element
-        					DefenseX[0].replace("/", "/Negative");	// insert into existing math element
+        					DefenseX[0] = DefenseX[0].replace("/", "/Negative");	// insert into existing math element
         				else
         					DefenseX[0] += "/Negative";	// add math element
         		}
@@ -2891,7 +2891,7 @@ public class CardFactory implements NewConstants {
     			   
     			   if (ptk[0].contains("-"))
     				   if (AttackX[0].contains("/"))
-    					   AttackX[0].replace("/", "/Negative");
+    					   AttackX[0] = AttackX[0].replace("/", "/Negative");
     				   else
     					   AttackX[0] += "/Negative";
     		   }
@@ -2909,7 +2909,7 @@ public class CardFactory implements NewConstants {
     		   
     			   if (ptk[1].contains("-"))
     				   if (DefenseX[0].contains("/"))
-    					   DefenseX[0].replace("/", "/Negative");
+    					   DefenseX[0] = DefenseX[0].replace("/", "/Negative");
     				   else
     					   DefenseX[0] += "/Negative";
     		   }
@@ -14889,10 +14889,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     	          else if((c == null) || (! check.equals(c)))
     	            throw new RuntimeException(card +" error in chooseTargetAI() - Card c is " +c +",  Card check is " +check);
     	         
-    	          if (c != null)
-    	        	  setTargetCard(c);
-    	          else
-    	        	  setTargetPlayer(Constant.Player.Human);
+    	          setTargetCard(c);
     	      }//chooseTargetAI()
     	         
     	         //uses "damage" variable
