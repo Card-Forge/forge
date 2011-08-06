@@ -2145,43 +2145,45 @@ public class CombatUtil {
                 	}
                 }
         		
-	        	if (c.getKeyword().contains("Defender") && !c.getCreatureBlockedThisCombat())
-	        	{
-	        		final Card crd = c;
-	        		CardList pcs = AllZoneUtil.getPlayerCardsInPlay(c.getController(), "Perimeter Captain");
-		        	for (int i = 0; i < pcs.size();i++)
-		        	{
-		        		final Card pc = pcs.get(i);
-		        		Ability ability = new Ability(pcs.get(i), "0")
-		        		{
-		        			public void resolve()
-		        			{
-		        				crd.getController().gainLife(2, pc);
-		        			}
-		        		};
-		        		
-		        		StringBuilder sb = new StringBuilder();
-		        		sb.append(pcs.get(i)).append(" - ").append(c.getController()).append(" gains 2 life.");
-		        		ability.setStackDescription(sb.toString());
-		        		
-		        		if (c.getController().equals(AllZone.HumanPlayer)) {
-			        		String[] choices = {"Yes", "No"};
-			        		Object q = null;
-			                q = AllZone.Display.getChoiceOptional("Gain 2 life from Perimeter Captain?", choices);
-			                if (q != null)
-			                	if (q.equals("Yes"))
-			                		AllZone.Stack.add(ability);
-		        		}
-		        		else
-		        			AllZone.Stack.add(ability);
-		        	}
-	        	}
+                if (c.getKeyword().contains("Defender") && !c.getCreatureBlockedThisCombat())
+                {
+                    final Card crd = c;
+                    CardList pcs = AllZoneUtil.getPlayerCardsInPlay(c.getController(), "Perimeter Captain");
+                    for (int i = 0; i < pcs.size();i++)
+                    {
+                        final Card pc = pcs.get(i);
+                        Ability ability = new Ability(pcs.get(i), "0")
+                        {
+                            public void resolve()
+                            {
+                                crd.getController().gainLife(2, pc);
+                            }
+                        };
+                        
+                        StringBuilder sb = new StringBuilder();
+                        sb.append(pcs.get(i)).append(" - ").append(c.getController()).append(" gains 2 life.");
+                        ability.setStackDescription(sb.toString());
+                        
+                        if (c.getController().equals(AllZone.HumanPlayer)) {
+                            StringBuilder question = new StringBuilder();
+                            question.append("Your creature ").append(c).append(" blocked. Gain 2 life from ");
+                            question.append(pcs.get(i)).append("?");
+                            
+                            if (GameActionUtil.showYesNoDialog(pcs.get(i), question.toString())) {
+                                AllZone.Stack.add(ability);
+                            }
+                        }
+                        else
+                            AllZone.Stack.add(ability);
+                    }
+                }// Perimeter Captain
 	        	
 	            if(c.getName().equals("Jedit Ojanen of Efrava") && !c.getCreatureBlockedThisCombat()) {
 	            	CardFactoryUtil.makeToken("Cat Warrior", "G 2 2 Cat Warrior", c.getController(), "G", new String[] {"Creature", "Cat", "Warrior"},
 	            			2, 2, new String[] {"Forestwalk"});
 	                
 	            }//Jedit
+	            
 	            else if(c.getName().equals("Shield Sphere") && !c.getCreatureBlockedThisCombat()) {
 	                c.addCounter(Counters.P0M1, 1);
 	                
