@@ -1,8 +1,8 @@
 Name:Leering Emblem
 ManaCost:2
 Types:Artifact Equipment
-Text:Equipped creature gets +2/+2
-K:eqPump 2:+2/+2
+Text:no text
+K:eqPump 2:+0/+0
 T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a spell, equipped creature gets +2/+2 until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Equipped | NumAtt$ +2 | NumDef$ +2
 SVar:Rarity:Rare
