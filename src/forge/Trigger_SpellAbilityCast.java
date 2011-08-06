@@ -59,40 +59,82 @@ public class Trigger_SpellAbilityCast extends Trigger {
 		
 		if(mapParams.containsKey("TargetsValid"))
 		{
-			Spell sp = ((Spell)runParams.get("CastSA"));
-			if(sp.getTarget() == null)
+			SpellAbility sa = ((SpellAbility)runParams.get("CastSA"));
+			if(sa.getTarget() == null)
 			{
-				return false;
-			}
-			if(sp.getTarget().doesTarget())
-			{
-				boolean validTgtFound = false;
-				for(Card tgt : sp.getTarget().getTargetCards())
+				if(sa.getTargetCard() == null)
 				{
-					if(tgt.isValidCard(mapParams.get("TargetsValid").split(","), hostCard.getController(), hostCard))
+					if(sa.getTargetList() == null)
 					{
-						validTgtFound = true;
-						break;
+						if(sa.getTargetPlayer() == null)
+						{
+							return false;
+						}
+						else
+						{
+							if(!matchesValid(sa.getTargetPlayer(),mapParams.get("TargetsValid").split(","),hostCard))
+							{
+								return false;
+							}
+						}
+					}
+					else
+					{
+						boolean validTgtFound = false;
+						for(Card tgt : sa.getTargetList())
+						{
+							if(matchesValid(tgt,mapParams.get("TargetsValid").split(","),hostCard))
+							{
+								validTgtFound = true;
+								break;
+							}
+						}
+						if(!validTgtFound)
+						{
+							return false;
+						}
 					}
 				}
-				
-				for(Player p : sp.getTarget().getTargetPlayers())
+				else
 				{
-					if(matchesValid(p,mapParams.get("TargetsValid").split(","),hostCard))
+					if(!matchesValid(sa.getTargetCard(),mapParams.get("TargetsValid").split(","),hostCard))
 					{
-						validTgtFound = true;
-						break;
+						return false;
 					}
-				}
-				
-				if(!validTgtFound)
-				{
-					return false;
 				}
 			}
 			else
 			{
-				return false;
+				if(sa.getTarget().doesTarget())
+				{
+					boolean validTgtFound = false;
+					for(Card tgt : sa.getTarget().getTargetCards())
+					{
+						if(tgt.isValidCard(mapParams.get("TargetsValid").split(","), hostCard.getController(), hostCard))
+						{
+							validTgtFound = true;
+							break;
+						}
+					}
+					
+					for(Player p : sa.getTarget().getTargetPlayers())
+					{
+						if(matchesValid(p,mapParams.get("TargetsValid").split(","),hostCard))
+						{
+							validTgtFound = true;
+							break;
+						}
+					}
+					
+					if(!validTgtFound)
+					{
+						return false;
+					}
+				}
+				else
+				{
+					return false;
+				}
 			}
 		}
 		
