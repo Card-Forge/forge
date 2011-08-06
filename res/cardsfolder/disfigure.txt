@@ -3,5 +3,6 @@ ManaCost:B
 Types:Instant
 Text:no text
 K:spPumpTgtCurse:-2/-2
+K:SVar:Rarity:Common
 K:SVars:Picture:http://www.wizards.com/global/images/magic/general/disfigure.jpg
 End

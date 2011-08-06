@@ -7,5 +7,6 @@ K:Flying
 K:Infect
 K:RegenerateMe:B B
 K:abPump B:Haste
+K:SVar:Rarity:Mythic
 K:SVar:Picture:http://serv4.tcgimages.eu/img/cards/Scars_of_Mirrodin/skithiryx_the_blight_dragon.jpg
 End

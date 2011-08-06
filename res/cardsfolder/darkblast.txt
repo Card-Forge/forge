@@ -4,5 +4,6 @@ Types:Instant
 Text:no text
 K:spPumpTgtCurse:-1/-1
 K:Dredge 3
+K:SVar:Rarity:Uncommon
 K:SVar:Picture:http://www.wizards.com/global/images/magic/general/darkblast.jpg
 End

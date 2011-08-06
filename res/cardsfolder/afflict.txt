@@ -4,5 +4,6 @@ Types:Instant
 Text:no text
 K:spPumpTgtCurse:-1/-1
 K:Draw a card.
+K:SVar:Rarity:Common
 K:SVar:Picture:http://www.wizards.com/global/images/magic/general/afflict.jpg
 End
