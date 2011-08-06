@@ -1103,7 +1103,8 @@ public class CardFactory_Sorceries {
         
  
         
-        //*************** START *********** START **************************
+        /* Converted to spMakeToken keyword
+        /*************** START *********** START **************************
         else if(cardName.equals("Dragon Fodder")) {
             SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = -6704097906643840324L;
@@ -1117,8 +1118,8 @@ public class CardFactory_Sorceries {
                 }//resolve()
             };
             card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
+            card.addSpellAbility(spell); 
+        }*/ //*************** END ************ END **************************
        
         //*************** START *********** START **************************
         else if(cardName.equals("Empty the Warrens")) {
@@ -6034,7 +6035,7 @@ public class CardFactory_Sorceries {
           card.addSpellAbility(spell);
        }//*************** END ************ END **************************
         
-        
+        /* Converted to spMakeToken keyword
       //*************** START *********** START **************************
       else if (cardName.equals("Howl of the Night Pack"))
       {
@@ -6061,6 +6062,7 @@ public class CardFactory_Sorceries {
           card.clearSpellAbility();
           card.addSpellAbility(spell);
        }//*************** END ************ END **************************
+       */
         
 
         
