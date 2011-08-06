@@ -393,6 +393,12 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Da Vinci 3		hard	Some Swampwalk creatures, Morph creatures + Angel of Despair");
         sb.append("\r\n");
+        sb.append("Darrin Stephens 1	easy	Sloth' Affinity blue deck, Affinity for artifacts and Modular cards");
+        sb.append("\r\n");
+        sb.append("Darrin Stephens 2	medium	Sloth' Affinity blue deck, Affinity for artifacts and Modular cards");
+        sb.append("\r\n");
+        sb.append("Darrin Stephens 3	hard	Sloth' Affinity blue deck, Affinity for artifacts and Modular cards");
+        sb.append("\r\n");
         sb.append("Darth Vader 3		hard	UW Battle of Wits style alternate win type deck, WoG");
         sb.append("\r\n");
         sb.append("Data 3		hard	Korlash, Heir to Blackblade, Liliana Vess");
