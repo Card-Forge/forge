@@ -2371,45 +2371,49 @@ public class GameActionUtil {
 		}
 	}// Gelectrode
 
-	public static void playCard_Cinder_Pyromancer(Card c) {
-		final String controller = c.getController();
+    public static void playCard_Cinder_Pyromancer(Card c) {
+        final String controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+        final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
 
-		CardList list = new CardList();
-		list.addAll(play.getCards());
+        CardList list = new CardList();
+        list.addAll(play.getCards());
 
-		list = list.getName("Cinder Pyromancer");
+        list = list.getName("Cinder Pyromancer");
 
-		if(list.size() > 0 && CardUtil.getColors(c).contains(Constant.Color.Red)) {
+        if (list.size() > 0 && CardUtil.getColors(c).contains(Constant.Color.Red)) {
 
-			for(int i = 0; i < list.size(); i++) {
-				final Card card = list.get(i);
+            for (int i = 0; i < list.size(); i++) {
+                final Card card = list.get(i);
 
-				Ability ability2 = new Ability(card, "0") {
-					@Override
-					public void resolve() {
-
-						if(card.getController().equals("Human")) {
-							String[] choices = {"Yes", "No"};
-							Object choice = AllZone.Display.getChoice("Untap Cinder Pyromancer?", choices);
-							if(choice.equals("Yes")) {
-								card.untap();
-							}
-						}
-						if(card.getController().equals("Computer")) {
-							card.untap();
-						}
-					}
-
-				}; // ability2
-
-				ability2.setStackDescription(card.getName() + " - " + c.getController()
-						+ " played a red spell, you may untap Cinder Pyromancer.");
-				AllZone.Stack.add(ability2);
-			}
-		}
-	}// Cinder_Pyromancer
+                Ability ability2 = new Ability(card, "0") {
+                    @Override
+                    public void resolve() {
+                        if (card.getController().equals("Human")) {
+                            StringBuffer title = new StringBuffer();
+                            title.append("Cinder Pyromancer Ability");
+                            StringBuffer message = new StringBuffer();
+                            message.append("Will you untap your Cinder Pyromancer?");
+                            int choice = JOptionPane.showConfirmDialog(null, message.toString(), title.toString(), JOptionPane.YES_NO_OPTION);
+                            
+                            if (choice == JOptionPane.YES_OPTION) {
+                                card.untap();
+                            }
+                        }// Human
+                        
+                        if (card.getController().equals("Computer")) {
+                            card.untap();
+                        }// Computer
+                    }// resolve()
+                };// ability2
+                
+                StringBuffer sb = new StringBuffer();
+                sb.append(card.getName()).append(" - ").append(c.getController()).append(" played a red spell, you may untap Cinder Pyromancer.");
+                ability2.setStackDescription(sb.toString());
+                AllZone.Stack.add(ability2);
+            }
+        }
+    }// Cinder_Pyromancer
 
 	public static void playCard_Forced_Fruition(Card c) {
 		PlayerZone hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
