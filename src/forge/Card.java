@@ -2438,7 +2438,7 @@ public class Card extends MyObservable {
 		
         else if (Property.startsWith("ControllerControls")) { 
         	String type = Property.substring(18);
-        	CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, sourceController).getCards());
+        	CardList list = AllZoneUtil.getPlayerCardsInPlay(getController());
         	if (list.getType(type).isEmpty()) return false; 
         }
 		
