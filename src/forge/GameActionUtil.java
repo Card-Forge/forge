@@ -55,7 +55,6 @@ public class GameActionUtil {
 		upkeep_Squee();
 		upkeep_Dragonmaster_Outcast();
 		upkeep_Scute_Mob();
-		upkeep_Lichenthrope();
 		upkeep_Heartmender();
 		upkeep_Nath();
 		upkeep_Anowon();
@@ -4894,41 +4893,7 @@ public class GameActionUtil {
 			} // for
 		} // if creatures > 0
 	}//Scute Mob
-
-	private static void upkeep_Lichenthrope() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.filter(new CardListFilter()
-		{
-			public boolean addCard(Card c)
-			{
-				return c.getName().equals("Lichenthrope") && c.getCounters(Counters.M1M1) > 0;
-			}
-		});
-
-		final CardList cl = list;
-
-		if(list.size() > 0) {
-			for(int i = 0; i < list.size(); i++) {
-
-				final int j = i;
-				Ability ability = new Ability(list.get(i), "0") {
-					@Override
-					public void resolve() {
-						Card c = cl.get(j);
-						c.subtractCounter(Counters.M1M1, 1);
-					}
-
-				};// Ability
-				ability.setStackDescription("Lichenthrope - Remove a -1/-1 counter.");
-				AllZone.Stack.add(ability);
-			} // for
-		} // if creatures > 0
-	}//upkeep_Lichenthrope
-
-
+	
 	private static void upkeep_Heartmender() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
