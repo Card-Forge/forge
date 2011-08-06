@@ -751,7 +751,11 @@ public class CardFactoryUtil {
             @Override
             public void showMessage() {
             	//in case no more {type}s in play
-                if(n == nCards || list.size() == 0) stop();
+                if(n == nCards || list.size() == 0)
+                {
+                    stop();
+                    return;
+                }
             	
                 AllZone.Display.showMessage(message + " (" +(nCards-n) +" left)");
                 ButtonUtil.disableAll();
@@ -765,7 +769,11 @@ public class CardFactoryUtil {
                     list.remove(card);
                     
                     //in case no more {type}s in play
-                    if(n == nCards || list.size() == 0) stop();
+                    if(n == nCards || list.size() == 0)
+                    {
+                        stop();
+                        return;
+                    }
                     else
                     	showMessage();
                 }

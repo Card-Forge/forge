@@ -4915,7 +4915,11 @@ public class GameActionUtil {
 							AllZone.InputControl.setInput(new Input() {
 								private static final long serialVersionUID = 5313424586016061612L;
 								public void showMessage() {
-									if(list.size() == 0) stop();
+									if(list.size() == 0)
+                                    {
+                                        stop();
+                                        return;
+                                    }
 						             AllZone.Display.showMessage(source.getName()+" - Select "+num+" untapped artifact(s), creature(s), or land(s) you control");
 						             ButtonUtil.disableAll();
 						          }
@@ -4923,7 +4927,6 @@ public class GameActionUtil {
 						        	  if(zone.is(Constant.Zone.Battlefield, AllZone.HumanPlayer) && list.contains(card)) {
 						                card.tap();
 						                list.remove(card);
-                                        if(list.size() == 0) AllZone.InputControl.resetInput();
 						                stop();
 						             }
 						          }
