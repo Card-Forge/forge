@@ -897,6 +897,19 @@ public class GameAction {
                            if(S_Amount.equals("Toughness")) I_Amount = F_TriggeringCard.getNetDefense();
                            else if(S_Amount.equals("Power")) I_Amount = F_TriggeringCard.getNetAttack();
                            else if(S_Amount.equals("Life_Gained")) I_Amount = ((Integer)Custom_Parameters[0]);
+                           else if(S_Amount.contains("ControlledAmountType")) {
+                        	   final String[] TypeSplit =  AmountParse.split("/");
+                        		CardList Cards_WithAllTypes = new CardList();
+                        		Cards_WithAllTypes.add(new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards()));
+                        		Cards_WithAllTypes = Cards_WithAllTypes.filter(new CardListFilter() {
+                                     public boolean addCard(Card c) {
+                                    	 for(int z = 0; z < TypeSplit.length - 1; z++)
+                                         if(c.getType().contains(TypeSplit[z + 1])) return true;
+                                         return false;
+                                     }
+                                 });
+                        		I_Amount = Cards_WithAllTypes.size();
+                           }
                            else I_Amount = Integer.valueOf(S_Amount);
                            }
                            int Multiple_Targets = 1;
@@ -1002,6 +1015,47 @@ public class GameAction {
                             StackDescription = StackDescription + F_TargetPlayer[F_Target] + " discards " + F_Amount + " card(s)";                        
                 		}
                 		
+                		// Make Token-Type-color-Power-Toughness-Keywords---Amount
+                		if(Effect[y].contains("MakeToken")) {
+                            String[] TokenConditions = AmountParse.split("-");
+                            
+                            String[] KeyWordConditions = new String[TokenConditions.length - 6];
+                            for(int z = 5; z < TokenConditions.length - 1; z++) 
+                            	if(!TokenConditions[z - 5].equals("None")) KeyWordConditions[z - 5] = TokenConditions[z];
+                            final String[] F_TokenConditions = TokenConditions;
+                            final String[] F_KeyWordConditions = KeyWordConditions;
+                            
+        					String Color = F_TokenConditions[2];
+        					if(F_TokenConditions[2].equals("c")) Color = "Colorless";
+        					else if(F_TokenConditions[2].equals("W")) Color = "White";
+        					else if(F_TokenConditions[2].equals("U")) Color = "Blue";
+        					else if(F_TokenConditions[2].equals("G")) Color = "Green";
+        					else if(F_TokenConditions[2].equals("R")) Color = "Red";
+        					else if(F_TokenConditions[2].equals("B")) Color = "Black";
+        					else Color = "Multicolored";
+        					final String F_Color = Color;
+                    			Command Proper_resolve = new Command() {
+                                	private static final long serialVersionUID = 151367344511590317L;
+
+                        			public void execute() {
+                        				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInZone(F_card,Required_Zone)) {
+                        					String Color = F_TokenConditions[2];
+                        					if(F_TokenConditions[2].equals("c")) Color = "1";
+                        					for(int z = 0; z < F_Amount; z++) 
+                                            CardFactoryUtil.makeToken( F_TokenConditions[1] + " Token", F_TokenConditions[2]+ " " + 
+                                            		Integer.valueOf(F_TokenConditions[3])+ " " + Integer.valueOf(F_TokenConditions[4])
+                                             + " " + F_TokenConditions[1], F_card, Color, new String[] {
+                                             "Creature", F_TokenConditions[1]}, Integer.valueOf(F_TokenConditions[3]), 
+                                             Integer.valueOf(F_TokenConditions[4]), F_KeyWordConditions);
+      			                      }
+
+    			                      }
+                    			};
+                            Command_Effects[F_Target] = Proper_resolve;      
+                            StackDescription = StackDescription + F_TargetPlayer[F_Target] + " puts " + F_Amount + " " +  F_TokenConditions[3] + 
+                            "/" + F_TokenConditions[4] + " " + F_Color + " " + F_TokenConditions[1] + " creature token(s) onto the battlefield";                        
+                		}
+                		
                 		// Copy Spell
                 		if(Effect[y].contains("CopySpell")) {
                     			Command Proper_resolve = new Command() {
@@ -1023,12 +1077,12 @@ public class GameAction {
                             String[] ZoneConditions = AmountParse.split("-");
                             PlayerZone[] PZones = new PlayerZone[ZoneConditions.length];
                             for(int z = 0; z < ZoneConditions.length; z++) {
-                            	if(ZoneConditions[z].equals("Hand")) PZones[z] = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                            	if(ZoneConditions[z].equals("Graveyard")) PZones[z] = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                            	if(ZoneConditions[z].equals("Play")) PZones[z] = AllZone.getZone(Constant.Zone.Play, card.getController());
-                            	if(ZoneConditions[z].contains("Library")) PZones[z] = AllZone.getZone(Constant.Zone.Library, card.getController());
-                            	if(ZoneConditions[z].contains("Exiled")) PZones[z] = AllZone.getZone(Constant.Zone.Removed_From_Play, card.getController());
-                            //	if(ZoneConditions[z].contains("Sideboard")) PZones[z] = AllZone.getZone(Constant.Zone.Sideboard, card.getController());
+                             if(ZoneConditions[z].equals("Hand")) PZones[z] = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                             if(ZoneConditions[z].equals("Graveyard")) PZones[z] = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                             if(ZoneConditions[z].equals("Play")) PZones[z] = AllZone.getZone(Constant.Zone.Play, card.getController());
+                             if(ZoneConditions[z].contains("Library")) PZones[z] = AllZone.getZone(Constant.Zone.Library, card.getController());
+                             if(ZoneConditions[z].contains("Exiled")) PZones[z] = AllZone.getZone(Constant.Zone.Removed_From_Play, card.getController());
+                          // if(ZoneConditions[z].contains("Sideboard")) PZones[z] = AllZone.getZone(Constant.Zone.Sideboard, card.getController());
                             }
                             final PlayerZone[] F_PZones = PZones;
                     			Command Proper_resolve = new Command() {
@@ -1092,7 +1146,7 @@ public class GameAction {
     }
     void Whenever_ManaPaid (Card Source, String[] Keyword_Details, final Command Proper_Resolve, SpellAbility ability) {
 		String S_Amount = "0";
-		if(!Keyword_Details[7].contains("No_Condition") || Keyword_Details[7].equals("Yes_No")) {
+		if(!Keyword_Details[7].contains("No_Condition") && !Keyword_Details[7].equals("Yes_No")) {
 		if(Keyword_Details[7].contains("PayMana")) {
             String PayAmountParse = Keyword_Details[7];                
             S_Amount = PayAmountParse.split("/")[1];
@@ -1128,6 +1182,7 @@ public class GameAction {
         } **/ 
 		}
     		} else Proper_Resolve.execute();
+
     }
 	boolean Whenever_Go (Card Source, String[] Keyword_Details) {
 		boolean Go = true;

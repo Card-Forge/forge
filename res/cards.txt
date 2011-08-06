@@ -1,3 +1,10 @@
+Dune-Brood Nephilim
+B R G W
+Creature Nephilim
+no text
+3/3
+WheneverKeyword:DealsDamage/Opponent:Self:Play:MakeToken-Sand-c-1-1-None-/ControlledAmountType/Land:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:Whenever Dune-Brood Nephilim deals combat damage to a player, put a 1/1 colorless Sand creature token onto the battlefield for each land you control.
+
 Akuta, Born of Ash
 2 B B
 Legendary Creature Spirit
@@ -71,13 +78,13 @@ no text
 2/2
 Flying
 Haste
-WheneverKeyword:DealsDamage/Opponent:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:No Condition:No Special Condition:Whenever Blazing Specter deals combat damage to a player, that player discards a card.
+WheneverKeyword:DealsDamage/Opponent:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever Blazing Specter deals combat damage to a player, that player discards a card.
 
 Liliana's Caress
 1 B
 Enchantment
 no text
-WheneverKeyword:DiscardsCard:ControllingPlayer_Opponent:Play:ModifyLife/-2:ControllingPlayer_Opponent:ASAP:No Condition:No Special Condition:Whenever an opponent discards a card, that player loses 2 life.
+WheneverKeyword:DiscardsCard:ControllingPlayer_Opponent:Play:ModifyLife/-2:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever an opponent discards a card, that player loses 2 life.
 
 Curiosity
 U
@@ -96,7 +103,7 @@ Angelic Chorus
 3 W W
 Enchantment
 no text
-WheneverKeyword:EntersBattleField:Type/Creature:Play:ModifyLife/Toughness:ControllingPlayer_Self:ASAP:No Condition:Initiator - OwnedByController:Whenever a creature enters the battlefield under your control, you gain life equal to its toughness.
+WheneverKeyword:EntersBattleField:Type/Creature:Play:ModifyLife/Toughness:ControllingPlayer_Self:ASAP:No_Condition:Initiator - OwnedByController:Whenever a creature enters the battlefield under your control, you gain life equal to its toughness.
 
 Ajani's Pridemate
 1 W
