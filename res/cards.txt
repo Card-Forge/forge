@@ -1,805 +1,3 @@
-Admonition Angel
-3 W W W
-Creature Angel
-(NOTE: This spell is rather buggy and should not be used at this time.)
-6/6
-Flying
-WheneverKeyword:EntersBattleField:Type/Land:Play:MoveFrom-Play-Exiled:NormalInput/Specific/NonType.Land/NotSelf:ASAP:Yes_No:Initiator - OwnedByController!AttachTarget:Landfall - Whenever a land enters the battlefield under your control, you may exile target nonland permanent other than Admonition Angel.
-WheneverKeyword:LeavesBattleField:Self:Any:MoveFrom-Exiled-Play:All/AttachedCards:ASAP:No_Condition:No Special Condition:When Admonition Angel leaves the battlefield, return all cards exiled with it to the battlefield under their owners' control.
-SVar:RemAIDeck:True
-SVar:BuffedBy:Land
-SVar:RemAIDeck:True
-SVar:Rarity:None
-SVar:Picture:http://www.wizards.com/global/images/magic/general/admonition_angel.jpg
-
-Ageless Entity
-3 G G
-Creature Elemental
-(NOTE: This spell is rather buggy and should not be used at this time.)
-4/4
-WheneverKeyword:GainLife:Controller:Play:+1+1 Counters/Life_Gained:Self:ASAP:No_Condition:No Special Condition:Whenever you gain life, put that many +1/+1 counters on Ageless Entity.
-SVar:RemAIDeck:True
-SVar:Rarity:None
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ageless_entity.jpg
-
-Ajani's Pridemate
-1 W
-Creature Cat Soldier
-(NOTE: This spell is rather buggy and should not be used at this time.)
-2/2
-WheneverKeyword:GainLife:Controller:Play:+1+1 Counters/1:Self:ASAP:Yes_No:No Special Condition:Whenever you gain life, you may put a +1/+1 counter on Ajani's Pridemate.
-SVar:RemAIDeck:True
-SVar:Rarity:None
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ajanis_pridemate.jpg
-
-Petravark
-3 R
-Creature Nightmare Beast
-(NOTE: This spell is rather buggy and should not be used at this time.)
-2/2
-WheneverKeyword:EntersBattleField:Self:Play:MoveFrom-Play-Exiled:NormalInput/Specific/Type.Land:ASAP:Yes_No:AttachTarget:When Petravark enters the battlefield, exile target land.
-WheneverKeyword:LeavesBattleField:Self:Any:MoveFrom-Exiled-Play:All/AttachedCards:ASAP:No_Condition:No Special Condition:When Petravark leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-SVar:RemAIDeck:True
-SVar:Rarity:None
-SVar:Picture:http://www.wizards.com/global/images/magic/general/petravark.jpg
-
-Hellfire
-2 B B B
-Sorcery
-Destroy all nonblack creatures. Hellfire deals X plus 3 damage to you, where X is the number of creatures put into all graveyards this way.
-spDestroyAll:Creature.nonBlack:Drawback$DamageYou/X.Plus.3
-SVar:X:Count$TypeOnBattlefield.Creature.nonBlack
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hellfire.jpg
-
-Kemuri-Onna
-4 B
-Creature Spirit
-When Kemuri-Onna comes into play, target player discards a card.
-3/3
-WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:MoveFrom-Play-Hand:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Spirit or Arcane spell, you may return Kemuri-Onna to its owner's hand.
-SVar:Rarity:Uncommon
-SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card84705.jpg
-
-Multani's Decree
-3 G
-Sorcery
-Destroy all enchantments. You gain 2 life for each enchantment destroyed this way.
-spDestroyAll:Enchantment:Drawback$GainLifeYou/X.Times.2
-
-Righteous Fury
-4 W W
-Sorcery
-Destroy all tapped creatures. You gain 2 life for each creature destroyed this way.
-spDestroyAll:Creature.tapped:Drawback$GainLifeYou/X.Times.2
-SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
-SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal_Second_Age/righteous_fury.jpg
-
-Steady Progress
-2 U
-Instant
-no text
-spDrawCards:1:Draw a card. Proliferate.:Steady Progress - draw a card, proliferate.
-Proliferate
-
-Thrummingbird
-1 U
-Creature Bird Horror
-no text
-1/1
-Flying
-Whenever CARDNAME deals combat damage to a player, proliferate.
-
-Astral Steel
-2 W
-Instant
-Target creature gets +1/+2 until end of turn.
-Storm
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/astral_steel.jpg
-
-Brain Freeze
-1 U
-Instant
-Target player puts the top three cards of his or her library into his or her graveyard.
-Storm
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/brain_freeze.jpg
-
-Dragonstorm
-8 R
-Sorcery
-Search your library for a Dragon permanent card and put it onto the battlefield. Then shuffle your library.
-Storm
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonstorm.jpg
-
-Empty the Warrens
-3 R
-Sorcery
-Put two 1/1 red Goblin creature tokens into play.
-Storm
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/empty_the_warrens.jpg
-
-Grapeshot
-1 R
-Sorcery
-Grapeshot deals 1 damage to target creature or player.
-Storm
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grapeshot.jpg
-
-Haze of Rage
-1 R
-Sorcery
-no text
-spAllPump:YouCtrl:+1/+0:Creatures you control get +1/+0 until end of turn.:Haze of Rage - Creatures get +1/+0 until EOT
-SVar:Buyback:2
-Storm
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/haze_of_rage.jpg
-
-Hunting Pack
-5 G G
-Instant
-Put a 4/4 green Beast creature token onto the battlefield.
-Storm
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_pack.jpg
-
-Ignite Memories
-4 R
-Sorcery
-Target player reveals a card at random from his or her hand. Ignite Memories deals damage to that player equal to that card's converted mana cost.
-Storm
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ignite_memories.jpg
-
-Mind's Desire
-4 U U
-Sorcery
-Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost. (If it has X in its mana cost, X is 0.)
-Storm
-Shroud
-Indestructible
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/minds_desire.jpg
-
-Reaping the Graves
-2 B
-Instant
-Return target creature card from your graveyard to your hand.
-Storm
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reaping_the_graves.jpg
-
-Scattershot
-2 R
-Instant
-Scattershot deals 1 damage to target creature.
-Storm
-SVar:RemAIDeck:True
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scattershot.jpg
-
-Sprouting Vines
-2 G
-Instant
-Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library.
-Storm
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sprouting_vines.jpg
-
-Temporal Fissure
-4 U
-Sorcery
-Return target permanent to its owner's hand.
-spBounceTgt:Permanent:Hand
-Storm
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_fissure.jpg
-
-Tendrils of Agony
-2 B B
-Sorcery
-Target player loses 2 life and you gain 2 life.
-Storm
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tendrils_of_agony.jpg
-
-Volcanic Awakening
-4 R R
-Sorcery
-Destroy target land.
-Storm
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_awakening.jpg
-
-Wing Shards
-1 W W
-Instant
-Target player sacrifices an attacking creature.
-Storm
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wing_shards.jpg
-
-Memnite
-0
-Artifact Creature Construct
-no text
-1/1
-SVar:Rarity:Uncommon
-
-Swat
-1 B B
-Instant
-Destroy target creature with power 2 or less.
-spDestroyTgt:Creature.powerLE2
-Cycling:2
-
-Radiant's Judgment
-2 W
-Instant
-Destroy target creature with power 4 or greater.
-spDestroyTgt:Creature.powerGE4
-Cycling:2
-
-Big Game Hunter
-1 B B
-Creature Human Rebel Assassin
-When Big Game Hunter enters the battlefield, destroy target creature with power 4 or greater. It can't be regenerated.
-1/1
-etbDestroyTgt:Creature.powerGE4:NoRegen
-Madness:B
-
-Nikko-Onna
-2 W
-Creature Spirit
-When Nikko-Onna enters the battlefield, destroy target enchantment.
-2/2
-etbDestroyTgt:Enchantment
-WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:MoveFrom-Play-Hand:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Spirit or Arcane spell, you may return Nikko-Onna to its owner's hand.
-
-Woodfall Primus
-5 G G G
-Creature Treefolk Shaman
-When Woodfall Primus enters the battlefield, destroy target noncreature permanent.
-6/6
-Trample
-etbDestroyTgt:Permanent.nonCreature
-Persist
-
-Gorgon Recluse
-3 B B
-Creature Gorgon
-Whenever Gorgon Recluse blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
-2/4
-Madness:B B
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gorgon_recluse.jpg
-
-Strength of Isolation
-1 W
-Enchantment Aura
-Enchanted creature gets +1/+2 and has protection from black.
-Enchant creature
-enPump:+1/+2/Protection from black
-Madness:W
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_isolation.jpg
-
-Strength of Lunacy
-1 B
-Enchantment Aura
-Enchanted creature gets +2/+1 and has protection from white.
-Enchant creature
-enPump:+2/+1/Protection from white
-Madness:B
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_lunacy.jpg
-
-Obsessive Search
-U
-Instant
-no text
-spDrawCards:1:Draw a card.:Obsessive Search - draw a card.
-Madness:U
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/obsessive_search.jpg
-
-Frantic Purification
-2 W
-Instant
-Destroy target enchantment.
-spDestroyTgt:Enchantment
-Madness:W
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/frantic_purification.jpg
-
-Fiery Temper
-1 R R
-Instant
-no text
-spDamageTgtCP:3
-Madness:R
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_temper.jpg
-
-Dark Withering
-4 B B
-Instant
-Destroy target nonblack creature.
-spDestroyTgt:Creature.nonBlack
-Madness:B
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_withering.jpg
-
-Plague Stinger
-1 B
-Creature Insect Horror
-no text
-1/1
-Flying
-SVar:Rarity:Common
-Infect
-
-Darksteel Axe
-1
-Artifact Equipment
-Equipped creature gets +2/+0.
-Indestructible
-eqPump 2:+2/+0
-SVar:Rarity:Common
-
-Tempered Steel
-1 W W
-Enchantment
-no text
-StaticEffect:Play:Permanents you Control:PTBonus/2/2:Type.Creature!Type.Artifact:Artifact creatures you control get +2/+2.
-
-Skithiryx, the Blight Dragon
-3 B B
-Legendary Creature Dragon Skeleton
-no text
-4/4
-Flying
-Infect
-RegenerateMe:B B
-abPump B:Haste
-
-Ravenous Baloth
-2 G G
-Creature Beast
-no text
-4/4
-
-Elven Cache
-2 G G
-Sorcery
-Return target card from your graveyard to your hand.
-SVar:Rarity:Common
-
-Thran Quarry
-no cost
-Land
-At the beginning of the end step, if you control no creatures, sacrifice CARDNAME.
-tap: add W
-tap: add U
-tap: add B
-tap: add R
-tap: add G
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_quarry.jpg
-
-Tigereye Cameo
-3
-Artifact
-no text
-tap: add W
-tap: add G
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tigereye_cameo.jpg
-
-Troll-Horn Cameo
-3
-Artifact
-no text
-tap: add R
-tap: add G
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/troll_horn_cameo.jpg
-
-Undiscovered Paradise
-no cost
-Land
-Whenever you tap CARDNAME for mana, return it to it's owner's hand during the controller's next untap phase.
-tap: add W
-tap: add U
-tap: add B
-tap: add R
-tap: add G
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/undiscovered_paradise.jpg
-
-Urborg Elf
-1 G
-Creature Elf Druid
-no text
-1/1
-tap: add U
-tap: add B
-tap: add G
-SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card26717.jpg
-
-Utopia Tree
-1 G
-Creature Plant
-no text
-0/2
-tap: add W
-tap: add U
-tap: add B
-tap: add R
-tap: add G
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84434.jpg
-
-Seashell Cameo
-3
-Artifact
-no text
-tap: add W
-tap: add U
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/seashell_cameo.jpg
-
-Seaside Citadel
-no cost
-Land
-no text
-Comes into play tapped.
-tap: add W
-tap: add U
-tap: add G
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/seaside_citadel.jpg
-
-Skyshroud Forest
-no cost
-Land
-no text
-tap: add 1
-paintap:1:U
-paintap:1:G
-Comes into play tapped.
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_forest.jpg
-
-Spectral Searchlight
-3
-Artifact
-(NOTE: "Tap Choose a player. That player adds one mana of any color he or she chooses to his or her mana pool." not implemented.)
-tap: add W
-tap: add U
-tap: add B
-tap: add R
-tap: add G
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_searchlight.jpg
-
-Stirring Wildwood
-no cost
-Land
-no text
-tap: add W
-tap: add G
-Comes into play tapped.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stirring_wildwood.jpg
-
-Sunpetal Grove
-no cost
-Land
-no text
-CARDNAME enters the battlefield tapped unless you control a Forest or a Plains.
-tap: add W
-tap: add G
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sunpetal_grove.jpg
-
-Talisman of Unity
-2
-Artifact
-no text
-tap: add 1
-paintap:1:W
-paintap:1:G
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/talisman_of_unity.jpg
-
-Temple Garden
-no cost
-Land Forest Plains
-As Temple Garden comes into play, you may pay 2 life. If you don't, Temple Garden comes into play tapped instead.
-tap: add W
-tap: add G
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card89093.jpg
-
-Obelisk of Esper
-3
-Artifact
-no text
-tap: add W
-tap: add U
-tap: add B
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_esper.jpg
-
-Obelisk of Grixis
-3
-Artifact
-no text
-tap: add U
-tap: add B
-tap: add R
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_grixis.jpg
-
-Obelisk of Jund
-3
-Artifact
-no text
-tap: add B
-tap: add R
-tap: add G
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_jund.jpg
-
-Obelisk of Naya
-3
-Artifact
-no text
-tap: add W
-tap: add R
-tap: add G
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_naya.jpg
-
-Plateau
-no cost
-Land Mountain Plains
-no text
-tap: add W
-tap: add R
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/plateau.jpg
-
-Prophetic Prism
-2
-Artifact
-no text
-When CARDNAME enters the battlefield, draw a card.
-1, tap: add W
-1, tap: add U
-1, tap: add B
-1, tap: add R
-1, tap: add G
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/prophetic_prism.jpg
-
-Sacred Foundry
-no cost
-Land Mountain Plains
-As Sacred Foundry comes into play, you may pay 2 life. If you don't, Sacred Foundry comes into play tapped instead.
-tap: add W
-tap: add R
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card89066.jpg
-
-Salt Marsh
-no cost
-Land
-no text
-Comes into play tapped.
-tap: add U
-tap: add B
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/salt_marsh.jpg
-
-Scabland
-no cost
-Land
-no text
-tap: add 1
-paintap:1:W
-paintap:1:R
-Comes into play tapped.
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scabland.jpg
-
-Elfhame Palace
-no cost
-Land
-no text
-Comes into play tapped.
-tap: add W
-tap: add G
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elfhame_palace.jpg
-
-Forbidden Orchard
-no cost
-Land
-Whenever you tap Forbidden Orchard for mana, put a 1/1 colorless Spirit creature token onto the battlefield under target opponent's control.
-tap: add W
-tap: add U
-tap: add B
-tap: add R
-tap: add G
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidden_orchard.jpg
-
-Graypelt Refuge
-no cost
-Land
-Graypelt Refuge enters the battlefield tapped. When Graypelt Refuge enters the battlefield, you gain 1 life.
-tap: add W
-tap: add G
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/graypelt_refuge.jpg
-
-Harabaz Druid
-1 G
-Creature Human Druid Ally
-no text
-0/1
-tap: add W to your mana pool for each Ally you control.
-tap: add U to your mana pool for each Ally you control.
-tap: add B to your mana pool for each Ally you control.
-tap: add R to your mana pool for each Ally you control.
-tap: add G to your mana pool for each Ally you control.
-SVar:RemAIDeck:True
-SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/harabaz_druid.jpg
-
-Jungle Shrine
-no cost
-Land
-no text
-Comes into play tapped.
-tap: add W
-tap: add R
-tap: add G
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jungle_shrine.jpg
-
-Mox Diamond
-0
-Artifact
-If Mox Diamond would come into play, you may discard a land card instead. If you do, put Mox Diamond into play. If you don't, put it into its owner's graveyard.
-tap: add W
-tap: add U
-tap: add B
-tap: add R
-tap: add G
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mox_diamond.jpg
-
-Noble Hierarch
-G
-Creature Human Druid
-no text
-0/1
-tap: add W
-tap: add U
-tap: add G
-Exalted
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_hierarch.jpg
-
-Obelisk of Bant
-3
-Artifact
-no text
-tap: add W
-tap: add U
-tap: add G
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_bant.jpg
-
-Arcane Sanctum
-no cost
-Land
-no text
-Comes into play tapped.
-tap: add W
-tap: add U
-tap: add B
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/arcane_sanctum.jpg
-
-Badlands
-no cost
-Land Mountain Swamp
-no text
-tap: add B
-tap: add R
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/badlands.jpg
-
-Breeding Pool
-no cost
-Land Forest Island
-As Breeding Pool into play, you may pay 2 life. If you don't, Breeding Pool comes into play tapped instead.
-tap: add U
-tap: add G
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card97088.jpg
-
-Coastal Tower
-no cost
-Land
-no text
-Comes into play tapped.
-tap: add W
-tap: add U
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/coastal_tower.jpg
-
-Crumbling Necropolis
-no cost
-Land
-no text
-Comes into play tapped.
-tap: add U
-tap: add B
-tap: add R
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crumbling_necropolis.jpg
-
-Darksteel Ingot
-3
-Artifact
-no text
-tap: add W
-tap: add U
-tap: add B
-tap: add R
-tap: add G
-Indestructible
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_ingot.jpg
-
-Drake-Skull Cameo
-3
-Artifact
-no text
-tap: add U
-tap: add B
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/drake_skull_cameo.jpg
-
-Druid of the Anima
-1 G
-Creature Elf Druid
-no text
-1/1
-tap: add W
-tap: add R
-tap: add G
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/druid_of_the_anima.jpg
-
 Abandoned Outpost
 no cost
 Land
@@ -1050,6 +248,20 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/adarkar_wastes.jpg
 
+Admonition Angel
+3 W W W
+Creature Angel
+(NOTE: This spell is rather buggy and should not be used at this time.)
+6/6
+Flying
+WheneverKeyword:EntersBattleField:Type/Land:Play:MoveFrom-Play-Exiled:NormalInput/Specific/NonType.Land/NotSelf:ASAP:Yes_No:Initiator - OwnedByController!AttachTarget:Landfall - Whenever a land enters the battlefield under your control, you may exile target nonland permanent other than Admonition Angel.
+WheneverKeyword:LeavesBattleField:Self:Any:MoveFrom-Exiled-Play:All/AttachedCards:ASAP:No_Condition:No Special Condition:When Admonition Angel leaves the battlefield, return all cards exiled with it to the battlefield under their owners' control.
+SVar:RemAIDeck:True
+SVar:BuffedBy:Land
+SVar:RemAIDeck:True
+SVar:Rarity:None
+SVar:Picture:http://www.wizards.com/global/images/magic/general/admonition_angel.jpg
+
 Adun Oakenshield
 G R B
 Legendary Creature Human Knight
@@ -1196,6 +408,16 @@ Flash
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/affa_guard_hound.jpg
 
+Ageless Entity
+3 G G
+Creature Elemental
+(NOTE: This spell is rather buggy and should not be used at this time.)
+4/4
+WheneverKeyword:GainLife:Controller:Play:+1+1 Counters/Life_Gained:Self:ASAP:No_Condition:No Special Condition:Whenever you gain life, put that many +1/+1 counters on Ageless Entity.
+SVar:RemAIDeck:True
+SVar:Rarity:None
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ageless_entity.jpg
+
 Agent of Masks
 3 W B
 Creature Human Advisor
@@ -1290,6 +512,16 @@ no text
 WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:Yes_No:ControllerUpkeep:At the beginning of your upkeep, you may gain 1 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ajanis_mantra.jpg
+
+Ajani's Pridemate
+1 W
+Creature Cat Soldier
+(NOTE: This spell is rather buggy and should not be used at this time.)
+2/2
+WheneverKeyword:GainLife:Controller:Play:+1+1 Counters/1:Self:ASAP:Yes_No:No Special Condition:Whenever you gain life, you may put a +1/+1 counter on Ajani's Pridemate.
+SVar:RemAIDeck:True
+SVar:Rarity:None
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ajanis_pridemate.jpg
 
 Akki Drillmaster
 2 R
@@ -2091,6 +1323,17 @@ R, Exile the top ten cards of your library: Arc-Slogger deals 2 damage to target
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arc_slogger.jpg
 
+Arcane Sanctum
+no cost
+Land
+no text
+Comes into play tapped.
+tap: add W
+tap: add U
+tap: add B
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/arcane_sanctum.jpg
+
 Arcanis the Omnipotent
 3 U U U
 Legendary Creature Wizard
@@ -2603,6 +1846,14 @@ CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/assert_authority.jpg
 
+Astral Steel
+2 W
+Instant
+Target creature gets +1/+2 until end of turn.
+Storm
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/astral_steel.jpg
+
 Atog
 1 R
 Creature Atog
@@ -2984,6 +2235,15 @@ Black creatures get +1/+1
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bad_moon.jpg
+
+Badlands
+no cost
+Land Mountain Swamp
+no text
+tap: add B
+tap: add R
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/badlands.jpg
 
 Bala Ged Scorpion
 3 B
@@ -3667,6 +2927,16 @@ Sorcery
 Put a 1/1 green Snake creature token, a 2/2 green Wolf creature token, and a 3/3 green Elephant creature token onto the battlefield.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bestial_menace.jpg
+
+Big Game Hunter
+1 B B
+Creature Human Rebel Assassin
+When Big Game Hunter enters the battlefield, destroy target creature with power 4 or greater. It can't be regenerated.
+1/1
+etbDestroyTgt:Creature.powerGE4:NoRegen
+Madness:B
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/big_game_hunter.jpg
 
 Bind
 1 G
@@ -4620,6 +3890,14 @@ abGainLife T:1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/braidwood_cup.jpg
 
+Brain Freeze
+1 U
+Instant
+Target player puts the top three cards of his or her library into his or her graveyard.
+Storm
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brain_freeze.jpg
+
 Brainbite
 2 U B
 Sorcery
@@ -4768,6 +4046,15 @@ At the beginning of your upkeep, sacrifice CARDNAME unless you pay:B B
 WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MakeToken-Thrull-B-0-1-None-/1:ControllingPlayer_Self:ASAP:No_Condition:ControllerEndStep:At the beginning of your end step, put a 0/1 black Thrull creature token onto the battlefield.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/breeding_pit.jpg
+
+Breeding Pool
+no cost
+Land Forest Island
+As Breeding Pool into play, you may pay 2 life. If you don't, Breeding Pool comes into play tapped instead.
+tap: add U
+tap: add G
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card97088.jpg
 
 Briarberry Cohort
 1 U
@@ -6426,6 +5713,16 @@ no text
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/pr/en-us/card24574.jpg
 
+Coastal Tower
+no cost
+Land
+no text
+Comes into play tapped.
+tap: add W
+tap: add U
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/coastal_tower.jpg
+
 Coat of Arms
 5
 Artifact
@@ -7133,6 +6430,17 @@ SVar:dX:Count$TgtCardManaCost
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crumble.jpg
 
+Crumbling Necropolis
+no cost
+Land
+no text
+Comes into play tapped.
+tap: add U
+tap: add B
+tap: add R
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crumbling_necropolis.jpg
+
 Crusade
 W W
 Enchantment
@@ -7514,6 +6822,15 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_ritual.jpg
 
+Dark Withering
+4 B B
+Instant
+Destroy target nonblack creature.
+spDestroyTgt:Creature.nonBlack
+Madness:B
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_withering.jpg
+
 Darkling Stalker
 3 B
 Creature Shade Spirit
@@ -7541,6 +6858,15 @@ Prevent all combat damage that would be dealt this turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darkness.jpg
+
+Darksteel Axe
+1
+Artifact Equipment
+Equipped creature gets +2/+0.
+Indestructible
+eqPump 2:+2/+0
+SVar:Rarity:Common
+SVar:Picture:http://serv3.tcgimages.eu/img/cards/Scars_of_Mirrodin/darksteel_axe.jpg
 
 Darksteel Citadel
 no cost
@@ -7579,6 +6905,19 @@ Flying
 Indestructible
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card46136.jpg
+
+Darksteel Ingot
+3
+Artifact
+no text
+tap: add W
+tap: add U
+tap: add B
+tap: add R
+tap: add G
+Indestructible
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_ingot.jpg
 
 Darkwatch Elves
 2 G
@@ -8788,6 +8127,14 @@ Protection from Dragons
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonstalker.jpg
 
+Dragonstorm
+8 R
+Sorcery
+Search your library for a Dragon permanent card and put it onto the battlefield. Then shuffle your library.
+Storm
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonstorm.jpg
+
 Drain the Well
 2 BG BG
 Sorcery
@@ -8805,6 +8152,15 @@ Flying
 abPump U:+1/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drake_hatchling.jpg
+
+Drake-Skull Cameo
+3
+Artifact
+no text
+tap: add U
+tap: add B
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/drake_skull_cameo.jpg
 
 Dread Drone
 4 B
@@ -9078,6 +8434,17 @@ no text
 RegenerateMe:B
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83061.jpg
+
+Druid of the Anima
+1 G
+Creature Elf Druid
+no text
+1/1
+tap: add W
+tap: add R
+tap: add G
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/druid_of_the_anima.jpg
 
 Dryad Arbor
 no cost
@@ -9459,6 +8826,16 @@ no text
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elephant_ambush.jpg
 
+Elfhame Palace
+no cost
+Land
+no text
+Comes into play tapped.
+tap: add W
+tap: add G
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/elfhame_palace.jpg
+
 Elite Cat Warrior
 2 G
 Creature Cat Warrior
@@ -9482,6 +8859,13 @@ Planeswalker - Elspeth
 no text
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elspeth_knight_errant.jpg
+
+Elven Cache
+2 G G
+Sorcery
+Return target card from your graveyard to your hand.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/elven_cache.jpg
 
 Elven Lyre
 2
@@ -9743,6 +9127,14 @@ no text
 abDrawCards 5 T:2:Drawback$YouDiscard/1:Draw two cards, then discard a card.:Emmessi Tome - draw cards and discard a card
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emmessi_tome.jpg
+
+Empty the Warrens
+3 R
+Sorcery
+Put two 1/1 red Goblin creature tokens into play.
+Storm
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/empty_the_warrens.jpg
 
 Emrakul, the Aeons Torn
 15
@@ -10760,6 +10152,15 @@ abPump R:+1/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_hellhound.jpg
 
+Fiery Temper
+1 R R
+Instant
+no text
+spDamageTgtCP:3
+Madness:R
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_temper.jpg
+
 Fighting Drake
 2 U U
 Creature Drake
@@ -11552,6 +10953,18 @@ abPump G Sac-Forest:+2/+2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foratog.jpg
 
+Forbidden Orchard
+no cost
+Land
+Whenever you tap Forbidden Orchard for mana, put a 1/1 colorless Spirit creature token onto the battlefield under target opponent's control.
+tap: add W
+tap: add U
+tap: add B
+tap: add R
+tap: add G
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidden_orchard.jpg
+
 Forbidding Watchtower
 no cost
 Land
@@ -11689,6 +11102,15 @@ Instant
 Destroy all artifacts and enchantments. You gain 2 life for each permanent destroyed this way.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fracturing_gust.jpg
+
+Frantic Purification
+2 W
+Instant
+Destroy target enchantment.
+spDestroyTgt:Enchantment
+Madness:W
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/frantic_purification.jpg
 
 Frazzle
 3 U
@@ -13374,6 +12796,15 @@ eqPump 2:+1/+1/Deathtouch
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gorgon_flail.jpg
 
+Gorgon Recluse
+3 B B
+Creature Gorgon
+Whenever Gorgon Recluse blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
+2/4
+Madness:B B
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gorgon_recluse.jpg
+
 Gorilla Chieftain
 2 G G
 Creature Ape
@@ -13453,6 +12884,14 @@ abDamageTgtCP 3 T:1
 abDamageTgtCP R T:1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/granite_shard.jpg
+
+Grapeshot
+1 R
+Sorcery
+Grapeshot deals 1 damage to target creature or player.
+Storm
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grapeshot.jpg
 
 Grappler Spider
 1 G
@@ -13557,6 +12996,15 @@ Trample
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graypelt_hunter.jpg
+
+Graypelt Refuge
+no cost
+Land
+Graypelt Refuge enters the battlefield tapped. When Graypelt Refuge enters the battlefield, you gain 1 life.
+tap: add W
+tap: add G
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/graypelt_refuge.jpg
 
 Grayscaled Gharial
 U
@@ -14141,6 +13589,21 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hannas_custody.jpg
 
+Harabaz Druid
+1 G
+Creature Human Druid Ally
+no text
+0/1
+tap: add W to your mana pool for each Ally you control.
+tap: add U to your mana pool for each Ally you control.
+tap: add B to your mana pool for each Ally you control.
+tap: add R to your mana pool for each Ally you control.
+tap: add G to your mana pool for each Ally you control.
+SVar:RemAIDeck:True
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/harabaz_druid.jpg
+
 Harbor Guardian
 2 W U
 Creature Gargoyle
@@ -14302,6 +13765,16 @@ Flying
 Shroud
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hawkeater_moth.jpg
+
+Haze of Rage
+1 R
+Sorcery
+no text
+spAllPump:YouCtrl:+1/+0:Creatures you control get +1/+0 until end of turn.:Haze of Rage - Creatures get +1/+0 until EOT
+SVar:Buyback:2
+Storm
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/haze_of_rage.jpg
 
 Hazerider Drake
 2 W U
@@ -14489,6 +13962,15 @@ no text
 6/5
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card88990.jpg
+
+Hellfire
+2 B B B
+Sorcery
+Destroy all nonblack creatures. Hellfire deals X plus 3 damage to you, where X is the number of creatures put into all graveyards this way.
+spDestroyAll:Creature.nonBlack:Drawback$DamageYou/X.Plus.3
+SVar:X:Count$TypeOnBattlefield.Creature.nonBlack
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hellfire.jpg
 
 Hellion Eruption
 5 R
@@ -15208,6 +14690,14 @@ When Hunted Troll comes into play, put four 1/1 blue Faerie creature tokens with
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card89079.jpg
 
+Hunting Pack
+5 G G
+Instant
+Put a 4/4 green Beast creature token onto the battlefield.
+Storm
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_pack.jpg
+
 Hurkyl's Recall
 1 U
 Instant
@@ -15352,6 +14842,14 @@ TypeCycling:Swamp:2
 TypeCycling:Mountain:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/igneous_pouncer.jpg
+
+Ignite Memories
+4 R
+Sorcery
+Target player reveals a card at random from his or her hand. Ignite Memories deals damage to that player equal to that card's converted mana cost.
+Storm
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ignite_memories.jpg
 
 Ihsan's Shade
 3 B B B
@@ -16470,6 +15968,17 @@ CARDNAME can't block.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4302.jpg
 
+Jungle Shrine
+no cost
+Land
+no text
+Comes into play tapped.
+tap: add W
+tap: add R
+tap: add G
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jungle_shrine.jpg
+
 Jungle Troll
 1 R G
 Creature Troll
@@ -17005,6 +16514,15 @@ no text
 Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kelinore_bat.jpg
+
+Kemuri-Onna
+4 B
+Creature Spirit
+When Kemuri-Onna comes into play, target player discards a card.
+3/3
+WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:MoveFrom-Play-Hand:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Spirit or Arcane spell, you may return Kemuri-Onna to its owner's hand.
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card84705.jpg
 
 Khalni Garden
 no cost
@@ -19554,6 +19072,14 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card51054.jpg
 
+Memnite
+0
+Artifact Creature Construct
+no text
+1/1
+SVar:Rarity:Uncommon
+SVar:Picture:http://serv2.tcgimages.eu/img/cards/Scars_of_Mirrodin/memnite.jpg
+
 Memory Erosion
 1 U U
 Enchantment
@@ -19896,6 +19422,17 @@ spDiscardTgt:AtRandom:X:Target player discards X cards at random.:Mind Twist - t
 SVar:X:Count$xPaid
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_twist.jpg
+
+Mind's Desire
+4 U U
+Sorcery
+Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost. (If it has X in its mana cost, X is 0.)
+Storm
+Shroud
+Indestructible
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/minds_desire.jpg
 
 Mind's Eye
 5
@@ -20550,6 +20087,19 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mouth_of_ronom.jpg
 
+Mox Diamond
+0
+Artifact
+If Mox Diamond would come into play, you may discard a land card instead. If you do, put Mox Diamond into play. If you don't, put it into its owner's graveyard.
+tap: add W
+tap: add U
+tap: add B
+tap: add R
+tap: add G
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mox_diamond.jpg
+
 Mox Emerald
 0
 Artifact
@@ -20670,6 +20220,14 @@ When CARDNAME enters the battlefield, draw a card.
 Echo:G G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/multanis_acolyte.jpg
+
+Multani's Decree
+3 G
+Sorcery
+Destroy all enchantments. You gain 2 life for each enchantment destroyed this way.
+spDestroyAll:Enchantment:Drawback$GainLifeYou/X.Times.2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/multanis_decree.jpg
 
 Muraganda Petroglyphs
 3 G
@@ -21357,6 +20915,16 @@ abPump 1 B:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightwing_shade.jpg
 
+Nikko-Onna
+2 W
+Creature Spirit
+When Nikko-Onna enters the battlefield, destroy target enchantment.
+2/2
+etbDestroyTgt:Enchantment
+WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:MoveFrom-Play-Hand:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Spirit or Arcane spell, you may return Nikko-Onna to its owner's hand.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nikko_onna.jpg
+
 Nimana Sell-Sword
 3 B
 Creature Human Warrior Ally
@@ -21445,6 +21013,18 @@ Equipped creature gets +2/+0 and has first strike.
 eqPump 3:+2/+0/First Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/no_dachi.jpg
+
+Noble Hierarch
+G
+Creature Human Druid
+no text
+0/1
+tap: add W
+tap: add U
+tap: add G
+Exalted
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_hierarch.jpg
 
 Noble Panther
 1 G W
@@ -21634,6 +21214,56 @@ SVar:BuffedBy:Land
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ob_nixilis_the_fallen.jpg
 
+Obelisk of Bant
+3
+Artifact
+no text
+tap: add W
+tap: add U
+tap: add G
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_bant.jpg
+
+Obelisk of Esper
+3
+Artifact
+no text
+tap: add W
+tap: add U
+tap: add B
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_esper.jpg
+
+Obelisk of Grixis
+3
+Artifact
+no text
+tap: add U
+tap: add B
+tap: add R
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_grixis.jpg
+
+Obelisk of Jund
+3
+Artifact
+no text
+tap: add B
+tap: add R
+tap: add G
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_jund.jpg
+
+Obelisk of Naya
+3
+Artifact
+no text
+tap: add W
+tap: add R
+tap: add G
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_naya.jpg
+
 Obliterate
 6 R R
 Sorcery
@@ -21657,6 +21287,15 @@ no text
 tap: add U
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oboro_palace_in_the_clouds.jpg
+
+Obsessive Search
+U
+Instant
+no text
+spDrawCards:1:Draw a card.:Obsessive Search - draw a card.
+Madness:U
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/obsessive_search.jpg
 
 Obsianus Golem
 6
@@ -22681,6 +22320,17 @@ abPump 2 R:First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pestilent_kathari.jpg
 
+Petravark
+3 R
+Creature Nightmare Beast
+(NOTE: This spell is rather buggy and should not be used at this time.)
+2/2
+WheneverKeyword:EntersBattleField:Self:Play:MoveFrom-Play-Exiled:NormalInput/Specific/Type.Land:ASAP:Yes_No:AttachTarget:When Petravark enters the battlefield, exile target land.
+WheneverKeyword:LeavesBattleField:Self:Any:MoveFrom-Exiled-Play:All/AttachedCards:ASAP:No_Condition:No Special Condition:When Petravark leaves the battlefield, return the exiled card to the battlefield under its owner's control.
+SVar:RemAIDeck:True
+SVar:Rarity:None
+SVar:Picture:http://www.wizards.com/global/images/magic/general/petravark.jpg
+
 Pewter Golem
 5
 Artifact Creature Golem
@@ -23001,6 +22651,16 @@ Swampwalk
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card129678.jpg
 
+Plague Stinger
+1 B
+Creature Insect Horror
+no text
+1/1
+Flying
+Infect
+SVar:Rarity:Common
+SVar:Picture:http://serv4.tcgimages.eu/img/cards/Scars_of_Mirrodin/plague_stinger.jpg
+
 Plague Wind
 7 B B
 Sorcery
@@ -23061,6 +22721,15 @@ no text
 Unblockable
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73562.jpg
+
+Plateau
+no cost
+Land Mountain Plains
+no text
+tap: add W
+tap: add R
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/plateau.jpg
 
 Plated Geopede
 1 R
@@ -23499,6 +23168,19 @@ Whenever a creature you control is put into a graveyard from the battlefield, yo
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/proper_burial.jpg
 
+Prophetic Prism
+2
+Artifact
+no text
+When CARDNAME enters the battlefield, draw a card.
+1, tap: add W
+1, tap: add U
+1, tap: add B
+1, tap: add R
+1, tap: add G
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/prophetic_prism.jpg
+
 Prosperity
 X U
 Sorcery
@@ -23872,6 +23554,15 @@ When Radiant's Dragoons enters the battlefield, you gain 5 life.
 Echo:3 W
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/radiants_dragoons.jpg
+
+Radiant's Judgment
+2 W
+Instant
+Destroy target creature with power 4 or greater.
+spDestroyTgt:Creature.powerGE4
+Cycling:2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/radiants_judgment.jpg
 
 Rafiq of the Many
 1 G W U
@@ -24268,6 +23959,14 @@ etbDestroyTgt:Land.nonBasic
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_baboons.jpg
 
+Ravenous Baloth
+2 G G
+Creature Beast
+no text
+4/4
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_baloth.jpg
+
 Ravenous Rats
 1 B
 Creature Rat
@@ -24336,6 +24035,14 @@ Sorcery
 Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to its converted mana cost.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reanimate.jpg
+
+Reaping the Graves
+2 B
+Instant
+Return target creature card from your graveyard to your hand.
+Storm
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reaping_the_graves.jpg
 
 Rebuff the Wicked
 W
@@ -24967,6 +24674,15 @@ no text
 spAllPump:YouCtrl:+2/+2:Creatures you control get +2/+2 until end of turn.:Righteous Charge - Creatures get +2/+2 until EOT
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6503.jpg
+
+Righteous Fury
+4 W W
+Sorcery
+Destroy all tapped creatures. You gain 2 life for each creature destroyed this way.
+spDestroyAll:Creature.tapped:Drawback$GainLifeYou/X.Times.2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal_Second_Age/righteous_fury.jpg
 
 Righteous War
 1 W B
@@ -25669,6 +25385,15 @@ First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sabretooth_tiger.jpg
 
+Sacred Foundry
+no cost
+Land Mountain Plains
+As Sacred Foundry comes into play, you may pay 2 life. If you don't, Sacred Foundry comes into play tapped instead.
+tap: add W
+tap: add R
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card89066.jpg
+
 Sacred Nectar
 1 W
 Sorcery
@@ -25765,6 +25490,16 @@ Comes into play tapped.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/salt_flats.jpg
+
+Salt Marsh
+no cost
+Land
+no text
+Comes into play tapped.
+tap: add U
+tap: add B
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/salt_marsh.jpg
 
 Saltblast
 3 W W
@@ -25978,6 +25713,18 @@ no text
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83246.jpg
 
+Scabland
+no cost
+Land
+no text
+tap: add 1
+paintap:1:W
+paintap:1:R
+Comes into play tapped.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scabland.jpg
+
 Scalding Tarn
 no cost
 Land
@@ -26081,6 +25828,15 @@ no text
 2/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83247.jpg
+
+Scattershot
+2 R
+Instant
+Scattershot deals 1 damage to target creature.
+Storm
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scattershot.jpg
 
 Scavenged Weaponry
 2 B
@@ -26431,6 +26187,26 @@ Whenever Seascape Aerialist or another Ally enters the battlefield under your co
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seascape_aerialist.jpg
+
+Seashell Cameo
+3
+Artifact
+no text
+tap: add W
+tap: add U
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seashell_cameo.jpg
+
+Seaside Citadel
+no cost
+Land
+no text
+Comes into play tapped.
+tap: add W
+tap: add U
+tap: add G
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seaside_citadel.jpg
 
 Seasoned Marshal
 2 W W
@@ -27766,6 +27542,17 @@ Skirk Shaman can't be blocked except by artifact creatures and/or red creatures.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card131011.jpg
 
+Skithiryx, the Blight Dragon
+3 B B
+Legendary Creature Dragon Skeleton
+no text
+4/4
+Flying
+Infect
+RegenerateMe:B B
+abPump B:Haste
+SVar:Picture:http://serv4.tcgimages.eu/img/cards/Scars_of_Mirrodin/skithiryx_the_blight_dragon.jpg
+
 Skitter of Lizards
 R
 Creature Lizard
@@ -27944,6 +27731,18 @@ Flying
 Vigilance
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/st/en-us/card5224.jpg
+
+Skyshroud Forest
+no cost
+Land
+no text
+tap: add 1
+paintap:1:U
+paintap:1:G
+Comes into play tapped.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_forest.jpg
 
 Skyshroud Sentinel
 2 G
@@ -28747,6 +28546,18 @@ Put three 1/1 white Spirit creature tokens with flying into play.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_procession.jpg
 
+Spectral Searchlight
+3
+Artifact
+(NOTE: "Tap Choose a player. That player adds one mana of any color he or she chooses to his or her mana pool." not implemented.)
+tap: add W
+tap: add U
+tap: add B
+tap: add R
+tap: add G
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_searchlight.jpg
+
 Spell Pierce
 U
 Instant
@@ -29133,6 +28944,14 @@ When Sprouting Thrinax is put into a graveyard from play, put three 1/1 green Sa
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sprouting_thrinax.jpg
 
+Sprouting Vines
+2 G
+Instant
+Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library.
+Storm
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sprouting_vines.jpg
+
 Squadron Hawk
 1 W
 Creature Hawk
@@ -29392,6 +29211,14 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://gatherer.wizards.com/handlers/image.ashx?multiverseid=20399&type=card
 
+Steady Progress
+2 U
+Instant
+no text
+spDrawCards:1:Draw a card. Proliferate.:Steady Progress - draw a card, proliferate.
+Proliferate
+SVar:Picture:http://serv2.tcgimages.eu/img/cards/Scars_of_Mirrodin/steady_progress.jpg
+
 Steam Frigate
 2 U
 Creature Human Pirate
@@ -29533,6 +29360,16 @@ Giant spells you cast cost 2 less to cast.
 CostChange:Player:Less:2:Spell:All:Giant:NoSpecial
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stinkdrinker_daredevil.jpg
+
+Stirring Wildwood
+no cost
+Land
+no text
+tap: add W
+tap: add G
+Comes into play tapped.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stirring_wildwood.jpg
 
 Stitch Together
 B B
@@ -29874,6 +29711,26 @@ SVar:X:Count$TypeYouCtrl.Land
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_cedars.jpg
 
+Strength of Isolation
+1 W
+Enchantment Aura
+Enchanted creature gets +1/+2 and has protection from black.
+Enchant creature
+enPump:+1/+2/Protection from black
+Madness:W
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_isolation.jpg
+
+Strength of Lunacy
+1 B
+Enchantment Aura
+Enchanted creature gets +2/+1 and has protection from white.
+Enchant creature
+enPump:+2/+1/Protection from white
+Madness:B
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_lunacy.jpg
+
 Strip Mine
 no cost
 Land
@@ -30162,6 +30019,16 @@ Sunlance deals 3 damage to target nonwhite creature.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122355.jpg
 
+Sunpetal Grove
+no cost
+Land
+no text
+CARDNAME enters the battlefield tapped unless you control a Forest or a Plains.
+tap: add W
+tap: add G
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sunpetal_grove.jpg
+
 Sunrise Sovereign
 5 R
 Creature Giant Warrior
@@ -30378,6 +30245,15 @@ If a source would deal damage to Swans of Bryn Argoll, prevent that damage. The 
 Flying
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swans_of_bryn_argoll.jpg
+
+Swat
+1 B B
+Instant
+Destroy target creature with power 2 or less.
+spDestroyTgt:Creature.powerLE2
+Cycling:2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/swat.jpg
 
 Sword of Body and Mind
 3
@@ -30633,6 +30509,16 @@ paintap:1:W
 paintap:1:U
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talisman_of_progress.jpg
+
+Talisman of Unity
+2
+Artifact
+no text
+tap: add 1
+paintap:1:W
+paintap:1:G
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/talisman_of_unity.jpg
 
 Talon Sliver
 1 W
@@ -30900,6 +30786,12 @@ abDamageTgtP 2 T:1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/telimtors_darts.jpg
 
+Tempered Steel
+1 W W
+Enchantment
+no text
+StaticEffect:Play:Permanents you Control:PTBonus/2/2:Type.Creature!Type.Artifact:Artifact creatures you control get +2/+2.
+
 Tempest Drake
 1 W U
 Creature Drake
@@ -30935,6 +30827,15 @@ abDrawCards T:1:Drawback$OppDraw/1:Each player draws a card.:Temple Bell - each 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temple_bell.jpg
 
+Temple Garden
+no cost
+Land Forest Plains
+As Temple Garden comes into play, you may pay 2 life. If you don't, Temple Garden comes into play tapped instead.
+tap: add W
+tap: add G
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card89093.jpg
+
 Temporal Eddy
 2 U U
 Sorcery
@@ -30942,6 +30843,15 @@ Put target creature or land on top of its owner's library.
 spBounceTgt:Creature,Land:TopofLibrary
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_eddy.jpg
+
+Temporal Fissure
+4 U
+Sorcery
+Return target permanent to its owner's hand.
+spBounceTgt:Permanent:Hand
+Storm
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_fissure.jpg
 
 Temporal Manipulation
 3 U U
@@ -30965,6 +30875,14 @@ CARDNAME enters the battlefield with one charge counter on it.
 tap: add 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tendo_ice_bridge.jpg
+
+Tendrils of Agony
+2 B B
+Sorcery
+Target player loses 2 life and you gain 2 life.
+Storm
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tendrils_of_agony.jpg
 
 Tendrils of Corruption
 3 B
@@ -31489,6 +31407,19 @@ StaticEffect:Play:Self:PTBonus/2/2!Keyword/Flying!Keyword/First Strike!Keyword/T
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_golem.jpg
 
+Thran Quarry
+no cost
+Land
+At the beginning of the end step, if you control no creatures, sacrifice CARDNAME.
+tap: add W
+tap: add U
+tap: add B
+tap: add R
+tap: add G
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_quarry.jpg
+
 Thran War Machine
 4
 Artifact Creature Construct
@@ -31545,6 +31476,15 @@ Legendary Artifact
 Spells you cast have ripple 4.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thrumming_stone.jpg
+
+Thrummingbird
+1 U
+Creature Bird Horror
+no text
+1/1
+Flying
+Whenever CARDNAME deals combat damage to a player, proliferate.
+SVar:Picture:http://serv3.tcgimages.eu/img/cards/Scars_of_Mirrodin/thrummingbird.jpg
 
 Thunder Spirit
 1 W W
@@ -31677,6 +31617,15 @@ Enchant creature
 enPump:+1/+1/Trample
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tiger_claws.jpg
+
+Tigereye Cameo
+3
+Artifact
+no text
+tap: add W
+tap: add G
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tigereye_cameo.jpg
 
 Timber Protector
 4 G
@@ -32459,6 +32408,15 @@ CARDNAME can't be the target of spells or abilities your opponents control.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card49828.jpg
 
+Troll-Horn Cameo
+3
+Artifact
+no text
+tap: add R
+tap: add G
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/troll_horn_cameo.jpg
+
 Tromp the Domains
 5 G
 Sorcery
@@ -32809,6 +32767,18 @@ Whenever an opponent draws a card, Underworld Dreams deals 1 damage to him or he
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/underworld_dreams.jpg
 
+Undiscovered Paradise
+no cost
+Land
+Whenever you tap CARDNAME for mana, return it to it's owner's hand during the controller's next untap phase.
+tap: add W
+tap: add U
+tap: add B
+tap: add R
+tap: add G
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/undiscovered_paradise.jpg
+
 Undying Beast
 3 B
 Creature Beast
@@ -32961,6 +32931,17 @@ CARDNAME attacks each turn if able.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_drake.jpg
 
+Urborg Elf
+1 G
+Creature Elf Druid
+no text
+1/1
+tap: add U
+tap: add B
+tap: add G
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card26717.jpg
+
 Urborg Shambler
 2 B B
 Creature Horror
@@ -33041,6 +33022,19 @@ no text
 RegenerateMe:R
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uthden_troll.jpg
+
+Utopia Tree
+1 G
+Creature Plant
+no text
+0/2
+tap: add W
+tap: add U
+tap: add B
+tap: add R
+tap: add G
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84434.jpg
 
 Utvara Scalper
 1 R
@@ -34031,6 +34025,14 @@ Counter target spell, activated ability, or triggered ability.
 spCounter:SpellOrAbility:None:Graveyard:None
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voidslime.jpg
+
+Volcanic Awakening
+4 R R
+Sorcery
+Destroy target land.
+Storm
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_awakening.jpg
 
 Volcanic Dragon
 4 R R
@@ -35368,6 +35370,14 @@ Lifelink
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windwright_mage.jpg
 
+Wing Shards
+1 W W
+Instant
+Target player sacrifices an attacking creature.
+Storm
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wing_shards.jpg
+
 Wing Snare
 2 G
 Sorcery
@@ -35644,6 +35654,17 @@ no text
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wooded_foothills.jpg
+
+Woodfall Primus
+5 G G G
+Creature Treefolk Shaman
+When Woodfall Primus enters the battlefield, destroy target noncreature permanent.
+6/6
+Trample
+etbDestroyTgt:Permanent.nonCreature
+Persist
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/woodfall_primus.jpg
 
 Woodland Changeling
 1 G
