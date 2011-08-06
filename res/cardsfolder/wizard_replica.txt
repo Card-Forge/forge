@@ -1,5 +1,5 @@
 Name:Wizard Replica
-ManaCost:1 U U
+ManaCost:3
 Types:Artifact Creature Wizard
 Text:no text
 PT:1/3

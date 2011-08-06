@@ -3,7 +3,8 @@ ManaCost:2 U U
 Types:Creature Illusion
 Text:no text
 PT:1/5
-K:WheneverKeyword:Attack - Alone:Self:Play:KeywordPumpEOT/Unblockable:Self:ASAP:No_Condition:No Special Condition:Dream Prowler is unblockable as long as it's attacking alone.
+T:Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | Execute$ TrigPump | TriggerDescription$ CARDNAME is unblockable as long as it's attacking alone.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | KW$ Unblockable
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_prowler.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/29.jpg
