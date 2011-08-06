@@ -1302,6 +1302,12 @@ public class CardFactoryUtil {
             }
             
             @Override
+            public boolean canPlay() {
+            	if(AllZoneUtil.isCardInPlay("Stabilizer")) return false;
+            	return super.canPlay();
+            }
+            
+            @Override
             public void resolve() {
                 sourceCard.getController().drawCard();
                 sourceCard.cycle();
@@ -1393,6 +1399,7 @@ public class CardFactoryUtil {
             
             @Override
             public boolean canPlay() {
+            	if(AllZoneUtil.isCardInPlay("Stabilizer")) return false;
             	return super.canPlay();
             }
             
@@ -1435,7 +1442,7 @@ public class CardFactoryUtil {
                 }
             }
         };
-        if(type.contains("Basic")) description = "basic land";
+        if(type.contains("Basic")) description = "Basic land";
         else description = type;
 
         cycle.setIsCycling(true);

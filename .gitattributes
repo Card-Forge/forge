@@ -6142,6 +6142,7 @@ res/cardsfolder/squirrel_mob.txt -text svneol=native#text/plain
 res/cardsfolder/squirrel_nest.txt -text svneol=native#text/plain
 res/cardsfolder/squirrel_wrangler.txt -text svneol=native#text/plain
 res/cardsfolder/stabbing_pain.txt -text svneol=native#text/plain
+res/cardsfolder/stabilizer.txt svneol=native#text/plain
 res/cardsfolder/staff_of_domination.txt -text svneol=native#text/plain
 res/cardsfolder/staff_of_the_ages.txt -text svneol=native#text/plain
 res/cardsfolder/staff_of_zegon.txt -text svneol=native#text/plain
