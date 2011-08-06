@@ -6,4 +6,5 @@ K:tap: add 1
 K:abPumpTgtC R G T:+1/+1/Trample
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skarrg_the_rage_pits.jpg
+SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/163.jpg
 End

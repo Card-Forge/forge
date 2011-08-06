@@ -7,4 +7,11 @@ K:Flying
 K:Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/tor/en-us/card35086.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/36.jpg
+SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/80.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/44.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/161.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/176.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/37.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/36.jpg
 End

@@ -8,4 +8,5 @@ K:etbDestroyTgt:Creature.nonArtifact+nonBlack
 SVar:Evoke:1 B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shriekmaw.jpg
+SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/139.jpg
 End

@@ -9,4 +9,5 @@ K:UB, tap: add B B
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunken_ruins.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/280.jpg
 End

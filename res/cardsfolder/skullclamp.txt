@@ -5,4 +5,5 @@ Text:Equipped creature gets +1/-1.\r\nWhen equipped creature is put into a grave
 K:eqPump 1:+1/-1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skullclamp.jpg
+SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/140.jpg
 End

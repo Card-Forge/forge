@@ -6,4 +6,5 @@ K:stPumpAll:Equipment.namedSword of Kaldra,Equipment.namedShield of Kaldra,Equip
 K:eqPump 4:HIDDEN Indestructible
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_of_kaldra.jpg
+SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/139.jpg
 End

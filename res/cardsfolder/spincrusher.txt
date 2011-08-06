@@ -8,4 +8,5 @@ K:abPump SubCounter<1/P1P1>:Unblockable
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spincrusher.jpg
+SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/144.jpg
 End

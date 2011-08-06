@@ -8,4 +8,10 @@ K:paintap:1:R
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sulfurous_springs.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/345.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/440.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/325.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/352.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/359.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/328.jpg
 End

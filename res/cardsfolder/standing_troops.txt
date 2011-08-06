@@ -6,4 +6,8 @@ PT:1/4
 K:Vigilance
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/standing_troops.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/48.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/22.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/44.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/48.jpg
 End

@@ -6,4 +6,5 @@ PT:3/3
 K:CARDNAME can't be blocked by white creatures.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sootwalkers.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/196.jpg
 End

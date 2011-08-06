@@ -5,4 +5,5 @@ Text:no text
 K:spAllPump:YouCtrl:+1/+0:Creatures you control get +1/+0 until end of turn.:Scare Tactics - Creatures get +1/+0 until EOT
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ex/en-us/card6086.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/73.jpg
 End

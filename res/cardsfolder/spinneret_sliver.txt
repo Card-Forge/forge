@@ -7,4 +7,5 @@ K:StaticEffect:Play:All Permanents:Keyword/Reach:Type.Creature!Type.Sliver:All S
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spinneret_sliver.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/219.jpg
 End

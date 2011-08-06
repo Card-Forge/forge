@@ -5,4 +5,5 @@ Text:no text
 K:spDiscardOpp:RevealYouChoose/Artifact:1:Target opponent reveals his or her hand. You choose an artifact card from it. That player discards that card.:Shattered Dreams - opponent reveal hand and discards a card
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shattered_dreams.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/59.jpg
 End

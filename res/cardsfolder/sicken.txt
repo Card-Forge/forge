@@ -7,4 +7,5 @@ K:enPumpCurse:-1/-1
 K:Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sicken.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/156.jpg
 End

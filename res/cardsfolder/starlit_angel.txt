@@ -6,4 +6,5 @@ PT:3/4
 K:Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4398.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/192.jpg
 End

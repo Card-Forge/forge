@@ -6,4 +6,11 @@ PT:1/1
 K:Forestwalk
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card11494.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/125.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/269.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/187.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/155.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/252.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/123.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/125.jpg
 End

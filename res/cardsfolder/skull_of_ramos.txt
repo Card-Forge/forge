@@ -7,4 +7,5 @@ K:Sacrifice CARDNAME: Add B to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skull_of_ramos.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/312.jpg
 End

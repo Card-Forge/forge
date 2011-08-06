@@ -6,4 +6,5 @@ A:SP$LoseLife | Cost$ 1 B B | ValidTgts$ player | TgtPrompt$ Target a player to 
 A:SP$LoseLife | Cost$ 1 B B Discard<1/Land> | ActivatingZone$ Graveyard | PrecostDesc$ Retrace - | ValidTgts$ player | TgtPrompt$ Target a player to lose a life | LifeAmount$ 2 | SubAbility$ YouGainLife/2 | SpellDescription$ Target player loses 2 life and you gain 2 life. You may play this card from your graveyard.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/syphon_life.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/46.jpg
 End

@@ -7,4 +7,5 @@ K:WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:+1+1 Counters/1:Self
 K:Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soulcatcher.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/47.jpg
 End

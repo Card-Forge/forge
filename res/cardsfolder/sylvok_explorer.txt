@@ -6,4 +6,5 @@ PT:1/1
 K:abAddReflectedMana:Color:Opp
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvok_explorer.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/93.jpg
 End

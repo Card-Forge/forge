@@ -6,4 +6,5 @@ K:WheneverKeyword:EntersBattleField:Type/Artifact:Play:CustomCounter.CHARGE/1:Se
 A:AB$Draw | Cost$ 3 T SubCounter<1/CHARGE> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serum_tank.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/240.jpg
 End

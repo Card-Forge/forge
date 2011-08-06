@@ -8,4 +8,5 @@ K:WheneverKeyword:CastSpell/Controller:Type/Spirit:Play:StatsPumpEOT/2/2:Self:AS
 SVar:BuffedBy:Arcane,Spirit
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scaled_hulk.jpg
+SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/143.jpg
 End

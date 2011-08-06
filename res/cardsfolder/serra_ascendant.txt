@@ -6,4 +6,5 @@ PT:1/1
 K:Lifelink
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_ascendant.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/28.jpg
 End

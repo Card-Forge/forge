@@ -5,4 +5,6 @@ Text:When Sleeper Agent comes into play, target opponent gains control of it.\r\
 PT:3/3
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sleeper_agent.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/159.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/178.jpg
 End

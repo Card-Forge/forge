@@ -6,4 +6,5 @@ PT:5/4
 K:Exalted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigiled_behemoth.jpg
+SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/79.jpg
 End

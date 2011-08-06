@@ -7,4 +7,5 @@ K:Flying
 K:Haste
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card109082.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/232.jpg
 End

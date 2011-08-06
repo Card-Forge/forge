@@ -6,4 +6,5 @@ K:1, tap: add U G
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simic_signet.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/166.jpg
 End

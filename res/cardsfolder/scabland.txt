@@ -9,4 +9,5 @@ K:Comes into play tapped.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scabland.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/331.jpg
 End

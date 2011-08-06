@@ -7,4 +7,5 @@ K:Flying
 K:WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:When Surveilling Sprite is put into a graveyard from the battlefield, you may draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surveilling_sprite.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/67.jpg
 End

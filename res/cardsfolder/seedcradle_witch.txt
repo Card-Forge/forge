@@ -6,4 +6,5 @@ PT:1/1
 K:abPumpTgtC 2 G W:+3/+3:Drawback$UntapTgt:Target creature gets +3/+3 until end of turn. Untap that creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seedcradle_witch.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/241.jpg
 End

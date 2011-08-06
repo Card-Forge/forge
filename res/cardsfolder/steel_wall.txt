@@ -7,4 +7,5 @@ K:Defender
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card48910.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/248.jpg
 End

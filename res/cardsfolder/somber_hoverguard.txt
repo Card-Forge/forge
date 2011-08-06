@@ -7,4 +7,5 @@ K:Flying
 K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/somber_hoverguard.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/51.jpg
 End

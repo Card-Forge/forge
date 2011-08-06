@@ -9,4 +9,5 @@ K:stPumpEnchanted:Creature.White:1/1/Flying:No Condition:As long as enchanted cr
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_of_the_oversoul.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/242.jpg
 End

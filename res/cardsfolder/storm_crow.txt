@@ -6,4 +6,10 @@ PT:1/2
 K:Flying
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card14753.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/104.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/54.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/100.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/100.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/101.jpg
+SetInfo:S99|Common|http://magiccards.info/scans/en/st/53.jpg
 End

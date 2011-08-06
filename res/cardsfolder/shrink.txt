@@ -6,4 +6,6 @@ K:spPumpTgtCurse:-5/-0
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrink.jpg
+SetInfo:HML|Common|http://magiccards.info/scans/en/hl/70.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/188.jpg
 End

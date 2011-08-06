@@ -11,4 +11,5 @@ K:1, tap: add G
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shimmering_grotto.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/273.jpg
 End

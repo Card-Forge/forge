@@ -5,4 +5,5 @@ Text:no text
 K:spDiscardTgt:AtRandom:1:Target player discards a card at random.:Specter's Wail - target player discards a card
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/specters_wail.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/164.jpg
 End

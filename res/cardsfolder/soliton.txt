@@ -6,4 +6,6 @@ PT:3/4
 K:Untap:U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soliton.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/som/204.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/204.jpg
 End

@@ -7,4 +7,5 @@ K:Flying
 K:etbReturnTgt:1/MayReturn:Artifact:Battlefield
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sharuum_the_hegemon.jpg
+SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/194.jpg
 End

@@ -6,4 +6,5 @@ A:SP$Bounce | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target creatur
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/symbol_of_unsummoning.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/71.jpg
 End

@@ -7,4 +7,5 @@ K:Reach
 K:stPumpSelf:Creature:2/2:Threshold:Threshold - Seton's Scout gets +2/+2 as long as seven or more cards are in your graveyard.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/setons_scout.jpg
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/138.jpg
 End

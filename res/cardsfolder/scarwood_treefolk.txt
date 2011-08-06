@@ -6,4 +6,5 @@ PT:3/5
 K:Comes into play tapped.
 SVar:Rarity:Common
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Time_Spiral/scarwood_treefolk.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/214.jpg
 End

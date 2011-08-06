@@ -11,4 +11,5 @@ K:2, tap: add G
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/school_of_the_unseen.jpg
+SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/186.jpg
 End

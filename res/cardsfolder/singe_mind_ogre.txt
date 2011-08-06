@@ -5,4 +5,5 @@ Text:When Singe-Mind Ogre comes into play, target player reveals a card at rando
 PT:3/2
 SVar:Rarity:Common
 SVar:Picture:http://magic.tcgplayer.com/db/cards/17138.jpg
+SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/45.jpg
 End

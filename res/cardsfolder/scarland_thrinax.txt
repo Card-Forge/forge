@@ -5,4 +5,5 @@ Text:no text
 PT:2/2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scarland_thrinax.jpg
+SetInfo:CON|Uncommon|http://magiccards.info/scans/en/cfx/123.jpg
 End

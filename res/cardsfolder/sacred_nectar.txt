@@ -5,4 +5,9 @@ Text:no text
 K:spGainLife:4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sacred_nectar.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/40.jpg
+SetInfo:S99|Common|http://magiccards.info/scans/en/st/26.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/187.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/38.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/37.jpg
 End

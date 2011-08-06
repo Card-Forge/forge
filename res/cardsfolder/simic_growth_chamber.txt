@@ -8,4 +8,5 @@ K:Tap: add G U
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simic_growth_chamber.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/180.jpg
 End

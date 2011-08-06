@@ -7,4 +7,6 @@ SVar:dX:Count$TgtCardToughness
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sever_soul.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/162.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/159.jpg
 End

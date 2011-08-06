@@ -5,4 +5,5 @@ Text:no text
 SVar:PlayMain1:TRUE
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sarkhan_vol.jpg
+SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/191.jpg
 End

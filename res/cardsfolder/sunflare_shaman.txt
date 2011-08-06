@@ -7,4 +7,5 @@ K:abDamageTgtCP 1 R T:X:Drawback$DamageSelf/X:Sunflare Shaman deals X damage to 
 SVar:X:Count$TypeInYourYard.Elemental
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunflare_shaman.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/108.jpg
 End

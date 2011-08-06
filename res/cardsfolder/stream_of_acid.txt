@@ -5,4 +5,5 @@ Text:Destroy target land or nonblack creature.
 K:spDestroyTgt:Land,Creature.nonBlack
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Starter_1999/stream_of_acid.jpg
+SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/91.jpg
 End

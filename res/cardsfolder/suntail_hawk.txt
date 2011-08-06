@@ -6,4 +6,8 @@ PT:1/1
 K:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/suntail_hawk.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/51.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/49.jpg
+SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/28.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/50.jpg
 End

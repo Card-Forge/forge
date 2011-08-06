@@ -7,4 +7,5 @@ K:Suspend:3:W
 K:abPump W:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shade_of_trokair.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/18.jpg
 End

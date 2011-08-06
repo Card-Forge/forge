@@ -6,4 +6,6 @@ PT:1/2
 K:abDrawCards T Sac<1/Artifact>:1:Draw a card.:Sage of Lat-Nam - Controller draws a card.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sage_of_lat_nam.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/97.jpg
+SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/57.jpg
 End

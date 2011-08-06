@@ -6,4 +6,5 @@ K:spDamageAll:Player,Creature:X:Sulfurous Blast deals 2 damage to each creature 
 SVar:X:Count$IfMainPhase.3.2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sulfurous_blast.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/180.jpg
 End

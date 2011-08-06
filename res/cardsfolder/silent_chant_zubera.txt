@@ -5,4 +5,5 @@ Text:When Silent-Chant Zubera is put into a graveyard from play, you gain 2 life
 PT:1/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80510.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/45.jpg
 End

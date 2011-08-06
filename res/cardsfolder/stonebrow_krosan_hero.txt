@@ -7,4 +7,5 @@ K:Trample
 K:WheneverKeyword:Attacks:No_Initiator:Play:StatsPumpEOT/2/2:Initiating_Card:ASAP:No_Condition:Initiator - OwnedByController!Initiator - Has Keyword/Trample:Whenever a creature you control with trample attacks, it gets +2/+2 until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonebrow_krosan_hero.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/247.jpg
 End

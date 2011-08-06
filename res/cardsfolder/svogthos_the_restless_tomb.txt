@@ -5,4 +5,5 @@ Text:no text
 K:tap: add 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/svogthos_the_restless_tomb.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/283.jpg
 End

@@ -5,4 +5,5 @@ Text:Destroy target nonwhite permanent.
 K:spDestroyTgt:Permanent.nonWhite
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122435.jpg
+SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/15.jpg
 End

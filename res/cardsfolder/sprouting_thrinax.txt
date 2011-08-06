@@ -5,4 +5,5 @@ Text:When Sprouting Thrinax is put into a graveyard from play, put three 1/1 gre
 PT:3/3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sprouting_thrinax.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/197.jpg
 End

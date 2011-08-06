@@ -7,4 +7,7 @@ K:Flying
 K:Vigilance
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83412.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/15.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/45.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/42.jpg
 End

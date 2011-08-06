@@ -6,4 +6,5 @@ Text:Put a 1/1 green Saproling creature token onto the battlefield.
 A:SP$Token | Cost$ G | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ Controller | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sprout.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/221.jpg
 End

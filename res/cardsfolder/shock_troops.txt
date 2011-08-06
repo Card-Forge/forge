@@ -6,4 +6,6 @@ PT:2/2
 K:abDamageTgtCP 0 Sac<1/CARDNAME>:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shock_troops.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/223.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/212.jpg
 End

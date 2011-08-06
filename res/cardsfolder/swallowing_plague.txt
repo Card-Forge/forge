@@ -6,4 +6,5 @@ K:spDamageTgtC:X:Drawback$YouGainLife/X:Swallowing Plague deals X damage to targ
 SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swallowing_plague.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/146.jpg
 End

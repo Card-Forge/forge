@@ -6,4 +6,5 @@ PT:3/3
 K:Untap:U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simic_ragworm.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/93.jpg
 End

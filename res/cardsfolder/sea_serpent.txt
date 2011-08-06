@@ -7,4 +7,9 @@ K:CARDNAME can't attack unless defending player controls an Island.
 K:When you control no Islands, sacrifice CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_serpent.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/118.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/77.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/78.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/98.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/77.jpg
 End

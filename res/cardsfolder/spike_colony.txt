@@ -6,4 +6,5 @@ PT:0/0
 K:Spike 4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spike_colony.jpg
+SetInfo:STH|Common|http://magiccards.info/scans/en/sh/67.jpg
 End

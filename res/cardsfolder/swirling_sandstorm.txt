@@ -6,4 +6,5 @@ K:spDamageAll:Creature.withoutFlying:X:Threshold - Swirling Sandstorm deals 5 da
 SVar:X:Count$Threshold.5.0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swirling_sandstorm.jpg
+SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/102.jpg
 End

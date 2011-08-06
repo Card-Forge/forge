@@ -7,4 +7,5 @@ K:stPumpSelf:Creature:1/1:isNotPresent Creature.White+YouDontCtrl,Creature.Blue+
 SVar:AntiBuffedBy:Creature.White,Creature.Blue
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skittish_kavu.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/168.jpg
 End

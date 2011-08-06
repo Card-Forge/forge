@@ -7,4 +7,5 @@ K:Flying
 K:etbReturnTgt:1/MayReturn:Artifact:Hand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanctum_gargoyle.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/24.jpg
 End

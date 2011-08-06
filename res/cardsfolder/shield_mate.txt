@@ -6,4 +6,5 @@ PT:1/1
 K:abPumpTgtC Sac<1/CARDNAME>:+0/+4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_mate.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/19.jpg
 End

@@ -7,4 +7,5 @@ K:Protection from blue
 K:CARDNAME can't be countered.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scragnoth.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/147.jpg
 End

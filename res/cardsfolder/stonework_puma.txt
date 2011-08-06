@@ -6,4 +6,5 @@ PT:2/2
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonework_puma.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/207.jpg
 End

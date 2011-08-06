@@ -5,4 +5,6 @@ Text:Enchanted land is an Island.
 K:Enchant land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seas_claim.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/113.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/97.jpg
 End

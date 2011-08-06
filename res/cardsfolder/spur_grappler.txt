@@ -7,4 +7,5 @@ K:stPumpSelf:Creature:2/1:isNotPresent Land.untapped+YouCtrl:Spur Grappler gets 
 SVar:BuffedBy:Spell
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spur_grappler.jpg
+SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/104.jpg
 End

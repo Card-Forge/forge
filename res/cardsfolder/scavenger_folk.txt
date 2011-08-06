@@ -6,4 +6,7 @@ PT:1/1
 K:abDestroyTgtV G T Sac<1/CARDNAME>:Artifact:Destroy target artifact.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scavenger_folk.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/185.jpg
+SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/50.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/267.jpg
 End

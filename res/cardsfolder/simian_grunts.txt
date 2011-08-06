@@ -7,4 +7,5 @@ K:Flash
 K:Echo:2 G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simian_grunts.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/113.jpg
 End

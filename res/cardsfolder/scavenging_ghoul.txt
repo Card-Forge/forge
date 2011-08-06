@@ -8,4 +8,8 @@ K:WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:CustomCounter.CORPSE
 A:AB$Regenerate | Cost$ SubCounter<1/CORPSE> | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scavenging_ghoul.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/35.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/36.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/43.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/35.jpg
 End

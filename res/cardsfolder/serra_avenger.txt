@@ -7,4 +7,5 @@ K:Flying
 K:Vigilance
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card113519.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/40.jpg
 End

@@ -6,4 +6,6 @@ K:tap: add 2
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sisays_ring.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/154.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/315.jpg
 End

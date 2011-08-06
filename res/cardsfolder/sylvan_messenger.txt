@@ -7,4 +7,5 @@ K:Trample
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card27666.jpg
+SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/87.jpg
 End

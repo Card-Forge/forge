@@ -4,4 +4,6 @@ Types:Enchantment
 Text:no text
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seal_of_fire.jpg
+SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/98.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/71.jpg
 End

@@ -6,4 +6,5 @@ PT:1/1
 K:Wither
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scuzzback_scrapper.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/217.jpg
 End

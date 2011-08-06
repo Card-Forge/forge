@@ -5,4 +5,5 @@ Text:no text
 PT:2/2
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/tor/en-us/card35082.jpg
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/16.jpg
 End

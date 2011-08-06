@@ -6,4 +6,5 @@ PT:1/1
 K:When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_sentinel.jpg
+SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/121.jpg
 End

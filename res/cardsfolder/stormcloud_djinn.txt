@@ -8,4 +8,5 @@ K:CARDNAME can block only creatures with flying.
 K:abPump R R:+2/+0:Drawback$DamageYou/1:Stormcloud Djinn gets +2/+0 until end of turn and deals 1 damage to you.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormcloud_djinn.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/82.jpg
 End

@@ -6,4 +6,6 @@ K:spDestroyTgt:Artifact,Enchantment:Drawback$YouGainLife/4
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/solemn_offering.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/32.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/33.jpg
 End

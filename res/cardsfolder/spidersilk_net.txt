@@ -5,4 +5,5 @@ Text:Equipped creature gets +0/+2 and has reach.
 K:eqPump 2:+0/+2/Reach
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spidersilk_net.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/206.jpg
 End

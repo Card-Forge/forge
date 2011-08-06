@@ -7,4 +7,5 @@ K:CARDNAME can't attack unless defending player controls an Island.
 K:Cycling:1 U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slipstream_eel.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/114.jpg
 End

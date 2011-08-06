@@ -5,4 +5,5 @@ Text:no text
 K:abTapTgt G G:Creature.withFlying:Tap target creature with flying.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_front.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/153.jpg
 End

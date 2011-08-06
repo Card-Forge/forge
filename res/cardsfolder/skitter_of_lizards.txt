@@ -7,4 +7,5 @@ K:Haste
 K:Multikicker 1 R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skitter_of_lizards.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/91.jpg
 End

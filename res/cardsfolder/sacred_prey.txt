@@ -5,4 +5,5 @@ Text:Whenever Sacred Prey becomes blocked, you gain 1 life.
 PT:1/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sacred_prey.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/268.jpg
 End

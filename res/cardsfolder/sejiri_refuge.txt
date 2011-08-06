@@ -6,4 +6,5 @@ K:tap: add W
 K:tap: add U
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sejiri_refuge.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/224.jpg
 End

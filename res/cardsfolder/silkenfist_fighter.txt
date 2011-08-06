@@ -5,4 +5,5 @@ Text:Whenever Silkenfist Fighter becomes blocked, untap it.
 PT:1/3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silkenfist_fighter.jpg
+SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/19.jpg
 End

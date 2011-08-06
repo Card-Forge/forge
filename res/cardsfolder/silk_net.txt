@@ -5,4 +5,5 @@ Text:no text
 K:spPumpTgt:+1/+1/Reach
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silk_net.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/112.jpg
 End

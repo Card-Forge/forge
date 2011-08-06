@@ -6,4 +6,5 @@ PT:5/5
 K:abPump R G:+1/-1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shambling_strider.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/151.jpg
 End

@@ -6,4 +6,5 @@ PT:0/0
 K:Defender
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shifting_wall.jpg
+SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/134.jpg
 End

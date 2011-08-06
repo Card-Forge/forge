@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPump:Protection from green & Protection from blue
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_of_duty_and_reason.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/16.jpg
 End

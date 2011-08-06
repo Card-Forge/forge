@@ -8,4 +8,5 @@ K:CostChange:Player:Less:X:Self:All:All:No Condition
 SVar:X:Count$Domain
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stratadon.jpg
+SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/135.jpg
 End

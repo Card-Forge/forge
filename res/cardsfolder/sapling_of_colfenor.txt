@@ -6,4 +6,5 @@ PT:2/5
 K:Indestructible
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Sapling_of_Colfenor.jpg
+SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/128.jpg
 End

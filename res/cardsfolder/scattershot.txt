@@ -6,4 +6,5 @@ K:Storm
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scattershot.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/102.jpg
 End

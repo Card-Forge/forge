@@ -7,4 +7,5 @@ K:enPump:+0/+0/Flying
 K:stPumpEnchanted:Creature.blocking:0/0/First Strike:isPresent Land.Snow+YouCtrl:Enchanted creature has first strike as long as it's blocking and you control a snow land.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_devil.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/100.jpg
 End

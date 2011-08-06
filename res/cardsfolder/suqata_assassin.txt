@@ -6,4 +6,5 @@ PT:1/1
 K:Fear
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/suqata_assassin.jpg
+SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/19.jpg
 End

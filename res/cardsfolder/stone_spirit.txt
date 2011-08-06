@@ -6,4 +6,6 @@ PT:4/3
 K:CARDNAME can't be blocked by creatures with flying.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_spirit.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/271.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/218.jpg
 End

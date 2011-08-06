@@ -7,4 +7,5 @@ K:WheneverKeyword:BecomesTapped:Self:Play:ModifyLife/2:ControllingPlayer_Opponen
 A:AB$Regenerate | Cost$ 2 | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_steam_beast.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/177.jpg
 End

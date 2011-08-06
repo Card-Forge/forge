@@ -6,4 +6,5 @@ PT:3/1
 K:Morph:2 B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spined_basher.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/172.jpg
 End

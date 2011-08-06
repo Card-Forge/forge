@@ -6,4 +6,5 @@ K:tap: add W
 K:tap: add R
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card89066.jpg
+SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/280.jpg
 End

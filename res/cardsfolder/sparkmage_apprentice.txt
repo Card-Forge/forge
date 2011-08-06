@@ -6,4 +6,6 @@ PT:1/1
 K:WheneverKeyword:EntersBattleField:Self:Play:Damage/1:InputType - CreatureORPlayer:ASAP:No_Condition:SingleTarget:When Sparkmage Apprentice enters the battlefield, it deals 1 damage to target creature or player.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sparkmage_apprentice.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/144.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/158.jpg
 End

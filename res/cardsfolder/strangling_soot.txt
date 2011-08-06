@@ -4,4 +4,5 @@ Types:Instant
 Text:Destroy target creature with toughness 3 or less.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card109710.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/132.jpg
 End

@@ -7,4 +7,5 @@ K:enPump:+2/+1/Protection from white
 K:Madness:B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_lunacy.jpg
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/86.jpg
 End

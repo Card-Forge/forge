@@ -8,4 +8,6 @@ K:When you control no Islands, sacrifice CARDNAME.
 A:AB$GainControl|Cost$T|ValidTgts$Creature.ControllerControlsIsland|TgtPrompt$Select target creature whose controller controls an Island.|LoseControl$Untap,LeavesPlay,LoseControl|SpellDescription$Gain control of target creature whose controller controls an Island for as long as you control Seasinger and Seasinger remains tapped.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seasinger.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/121.jpg
+SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/52.jpg
 End

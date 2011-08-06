@@ -7,4 +7,5 @@ K:abPump 2 W Untap:+0/+2
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/safehold_sentry.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/22.jpg
 End

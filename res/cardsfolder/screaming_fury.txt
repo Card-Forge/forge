@@ -5,4 +5,5 @@ Text:no text
 K:spPumpTgt:+5/+0/Haste
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/screaming_fury.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/78.jpg
 End

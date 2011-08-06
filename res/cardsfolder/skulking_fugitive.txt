@@ -7,4 +7,5 @@ K:When CARDNAME becomes the target of a spell or ability, sacrifice it.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skulking_fugitive.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/161.jpg
 End

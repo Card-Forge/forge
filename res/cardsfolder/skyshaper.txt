@@ -5,4 +5,5 @@ Text:no text
 K:abAllPump Sac<1/CARDNAME>:YouCtrl:Flying:Creatures you control gain flying until end of turn.:Skyshaper - Creatures gain flying until EOT
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshaper.jpg
+SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/137.jpg
 End

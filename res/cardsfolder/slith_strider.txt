@@ -5,4 +5,5 @@ Text:Whenever Slith Strider becomes blocked, draw a card.\r\nWhenever Slith Stri
 PT:1/1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slith_strider.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/50.jpg
 End

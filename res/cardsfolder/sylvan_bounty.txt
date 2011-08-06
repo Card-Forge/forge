@@ -6,4 +6,5 @@ K:spGainLifeTgt:8
 K:TypeCycling:Basic:1 G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_bounty.jpg
+SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/94.jpg
 End

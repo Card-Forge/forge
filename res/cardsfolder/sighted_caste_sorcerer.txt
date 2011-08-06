@@ -7,4 +7,5 @@ K:Exalted
 K:abPump U:Shroud
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sighted_caste_sorcerer.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/26.jpg
 End

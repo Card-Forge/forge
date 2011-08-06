@@ -7,4 +7,5 @@ K:Level up:W
 K:maxLevel:7
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/student_of_warfare.jpg
+SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/47.jpg
 End

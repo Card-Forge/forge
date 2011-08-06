@@ -6,4 +6,6 @@ PT:3/5
 K:Reach
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/pr/en-us/card24666.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/280.jpg
+SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/125.jpg
 End

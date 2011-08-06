@@ -7,4 +7,5 @@ K:enPump:+0/+0/Fear
 K:WheneverKeyword:DealsDamage/Opponent:Enchanted_Creature:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever enchanted creature deals damage to an opponent, you may draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sleepers_robe.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/273.jpg
 End

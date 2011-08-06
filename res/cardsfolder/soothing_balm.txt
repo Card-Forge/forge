@@ -5,4 +5,5 @@ Text:no text
 K:spGainLifeTgt:5
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soothing_balm.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/48.jpg
 End

@@ -6,4 +6,5 @@ Text:Put two 1/1 green Snake creature tokens onto the battlefield.\r\nWhenever a
 A:SP$Token | Cost$ 2 G | TokenAmount$ 2 | TokenName$ Snake | TokenTypes$ Creature,Snake | TokenOwner$ Controller | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sosukes_summons.jpg
+SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/145.jpg
 End

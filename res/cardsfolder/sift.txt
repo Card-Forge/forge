@@ -5,4 +5,6 @@ Text:no text
 A:SP$Draw | Cost$ 3 U | NumCards$ 3 | SpellDescription$ Draw three cards, then discard a card. | SubAbility$ YouDiscard/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sift.jpg
+SetInfo:STH|Common|http://magiccards.info/scans/en/sh/42.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/98.jpg
 End

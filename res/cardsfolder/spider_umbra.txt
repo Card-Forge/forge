@@ -7,4 +7,5 @@ K:Totem armor
 K:enPump:+1/+1/Reach
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spider_umbra.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/208.jpg
 End

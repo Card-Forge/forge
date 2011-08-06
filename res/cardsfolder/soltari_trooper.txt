@@ -7,4 +7,5 @@ K:Shadow
 K:WheneverKeyword:Attacks:Self:Play:StatsPumpEOT/1/1:Self:ASAP:No_Condition:No Special Condition:Whenever Soltari Trooper attacks, it gets +1/+1 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_trooper.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/259.jpg
 End

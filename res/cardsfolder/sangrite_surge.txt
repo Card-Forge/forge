@@ -5,4 +5,5 @@ Text:no text
 K:spPumpTgt:+3/+3/Double Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sangrite_surge.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/190.jpg
 End

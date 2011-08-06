@@ -6,4 +6,5 @@ PT:1/1
 K:abDestroyTgtV 2 R T Discard<1/Any>:Land:Destroy target land.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seismic_mage.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/211.jpg
 End

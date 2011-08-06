@@ -7,4 +7,5 @@ K:Islandwalk
 K:CostChange:Player:Less:1:Spell:All:Merfolk/Wizard:OnlyOneBonus
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonybrook_banneret.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/51.jpg
 End

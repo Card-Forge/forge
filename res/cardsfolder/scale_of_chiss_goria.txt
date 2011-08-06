@@ -7,4 +7,5 @@ K:abPumpTgtC T:+0/+1
 K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scale_of_chiss_goria.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/236.jpg
 End

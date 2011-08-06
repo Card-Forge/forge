@@ -6,4 +6,5 @@ PT:1/1
 K:abDamageTgtC 1 T:1:Drawback$TapTgt:Stun Sniper deals 1 damage to target creature. Tap that creature.:Stun Sniper - deals 1 damage to target creature. Tap that creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stun_sniper.jpg
+SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/100.jpg
 End

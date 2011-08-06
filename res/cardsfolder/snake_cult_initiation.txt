@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPump:Poisonous 3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snake_cult_initiation.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/89.jpg
 End

@@ -6,4 +6,6 @@ PT:2/2
 K:tap: add R
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/dk/en-us/card1800.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/73.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/239.jpg
 End

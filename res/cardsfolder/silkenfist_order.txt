@@ -5,4 +5,5 @@ Text:Whenever Silkenfist Order becomes blocked, untap it.
 PT:3/5
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silkenfist_order.jpg
+SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/20.jpg
 End

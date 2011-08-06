@@ -5,4 +5,7 @@ Text:At the beginning of your draw step, you may draw two additional cards. If y
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_library.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/191.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/157.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/121.jpg
 End

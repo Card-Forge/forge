@@ -6,4 +6,7 @@ K:spDestroyTgt:Artifact
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smash.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/143.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/69.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/235.jpg
 End

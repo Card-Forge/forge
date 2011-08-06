@@ -6,4 +6,8 @@ PT:3/2
 K:Flying
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87986.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/64.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/72.jpg
+SetInfo:S99|Common|http://magiccards.info/scans/en/st/52.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/110.jpg
 End

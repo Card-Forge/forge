@@ -7,4 +7,5 @@ SVar:dX:Count$TgtCardManaCost
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serene_offering.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/252.jpg
 End

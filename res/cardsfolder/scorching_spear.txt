@@ -5,4 +5,6 @@ Text:no text
 K:spDamageTgtCP:1
 SVar:Rarity:Common
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/scorching_spear.jpg
+SetInfo:S99|Common|http://magiccards.info/scans/en/st/116.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/154.jpg
 End

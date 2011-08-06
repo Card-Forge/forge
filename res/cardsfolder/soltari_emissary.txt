@@ -6,4 +6,5 @@ PT:2/1
 K:abPump W:Shadow
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_emissary.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/254.jpg
 End

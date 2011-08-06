@@ -6,4 +6,5 @@ K:tap: add 1
 K:abPumpTgtC 2 R W T:Double Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunhome_fortress_of_the_legion.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/282.jpg
 End

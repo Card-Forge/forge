@@ -5,4 +5,6 @@ Text:no text
 K:spGainLife:8
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spring_of_eternal_peace.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/p3k/148.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/148.jpg
 End

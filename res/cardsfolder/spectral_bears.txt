@@ -5,4 +5,5 @@ Text:Whenever Spectral Bears attacks, if defending player controls no black nont
 PT:3/3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_bears.jpg
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/72.jpg
 End

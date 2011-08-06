@@ -6,4 +6,5 @@ K:spPumpTgt:+3/+3
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sudden_strength.jpg
+SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/132.jpg
 End

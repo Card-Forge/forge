@@ -4,4 +4,13 @@ Types:Sorcery
 Text:no text
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stream_of_life.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/282.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/126.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/272.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/190.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/156.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/272.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/254.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/124.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/126.jpg
 End

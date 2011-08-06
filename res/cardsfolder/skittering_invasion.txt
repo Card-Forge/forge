@@ -6,4 +6,5 @@ Text:Put five 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. 
 A:SP$Token | Cost$ 7 | TokenAmount$ 5 | TokenName$ Eldrazi Spawn | TokenTypes$ Creature,Eldrazi,Spawn | TokenOwner$ Controller | TokenColors$ Green | TokenPower$ 0 | TokenToughness$ 1 | TokenKeywords$ Sacrifice CARDNAME: Add 1 to your mana pool.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skittering_invasion.jpg
+SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/10.jpg
 End

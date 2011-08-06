@@ -7,4 +7,5 @@ K:Flying
 K:abTapTgt 1 WU Untap:Creature:Tap target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silkbind_faerie.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/148.jpg
 End

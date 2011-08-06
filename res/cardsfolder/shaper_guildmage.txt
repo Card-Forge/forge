@@ -7,4 +7,5 @@ K:abPumpTgtC W T:First Strike
 K:abPumpTgtC B T:+1/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shaper_guildmage.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/91.jpg
 End

@@ -6,4 +6,5 @@ A:SP$GainControl|Cost$3 UR B|Tgt$TgtC|Untap$True|AddKWs$Haste & At the beginning
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slave_of_bolas.jpg
+SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/136.jpg
 End

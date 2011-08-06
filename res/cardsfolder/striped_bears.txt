@@ -6,4 +6,5 @@ PT:2/2
 K:When CARDNAME enters the battlefield, draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/striped_bears.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/82.jpg
 End

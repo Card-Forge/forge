@@ -6,4 +6,5 @@ PT:2/2
 K:abPump 0 Sac<1/Elemental>:+2/+0/First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seething_pathblazer.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/101.jpg
 End

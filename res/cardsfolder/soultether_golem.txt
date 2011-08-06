@@ -8,4 +8,5 @@ K:Vanishing:1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soultether_golem.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/164.jpg
 End

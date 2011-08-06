@@ -6,4 +6,5 @@ K:spPumpTgt:Shadow
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shadow_rift.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/86.jpg
 End

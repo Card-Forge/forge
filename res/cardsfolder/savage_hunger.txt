@@ -7,4 +7,5 @@ K:enPump:+1/+0/Trample
 K:Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_hunger.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/147.jpg
 End

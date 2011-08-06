@@ -7,4 +7,5 @@ K:WheneverKeyword:EntersBattleField:Type/Land:Play:KeywordPumpEOT/Intimidate:Sel
 SVar:BuffedBy:Land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surrakar_marauder.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/113.jpg
 End

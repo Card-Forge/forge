@@ -6,4 +6,5 @@ PT:2/2
 K:abDamageTgtV R T:2:Creature.Blue:Slingshot Goblin deals 2 damage to target blue creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slingshot_goblin.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/72.jpg
 End

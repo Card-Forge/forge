@@ -7,4 +7,5 @@ K:Trample
 K:Persist
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scuzzback_marauders.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/216.jpg
 End

@@ -7,4 +7,6 @@ K:abUntapTgt T:Creature:Untap target creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seeker_of_skybreak.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/148.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/268.jpg
 End

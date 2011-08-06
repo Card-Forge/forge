@@ -6,4 +6,5 @@ PT:1/1
 K:Trample
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sutured_ghoul.jpg
+SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/73.jpg
 End

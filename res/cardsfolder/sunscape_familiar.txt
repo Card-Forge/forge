@@ -7,4 +7,5 @@ K:Defender
 K:CostChange:Player:Less:1:Spell:green/blue:All:OnlyOneBonus
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunscape_familiar.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/17.jpg
 End

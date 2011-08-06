@@ -7,4 +7,6 @@ A:AB$DealDamage | Cost$ 1 R Sac<1/Goblin> | Tgt$ CP | NumDmg$ 2 | SpellDescripti
 K:etbMakeToken<>3<>Goblin<>R 1 1 Goblin<>Controller<>R<>Creature;Goblin<>1<>1<>None<>put three 1/1 red Goblin creature tokens onto the battlefield.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/siege_gang_commander.jpg
+SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/103.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/234.jpg
 End

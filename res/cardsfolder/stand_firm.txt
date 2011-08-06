@@ -6,4 +6,5 @@ K:spPumpTgt:+1/+1:
 K:Scry 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stand_firm.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/17.jpg
 End

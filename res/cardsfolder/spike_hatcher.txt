@@ -7,4 +7,5 @@ K:Spike 6
 A:AB$Regenerate | Cost$ 1 SubCounter<1/P1P1> | SpellDescription$ Regenerate Spike Hatcher.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spike_hatcher.jpg
+SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/126.jpg
 End

@@ -8,4 +8,5 @@ K:tap: add U
 K:tap: add G
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seaside_citadel.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/229.jpg
 End

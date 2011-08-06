@@ -6,4 +6,5 @@ PT:6/6
 A:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiritmonger.jpg
+SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/121.jpg
 End

@@ -6,4 +6,6 @@ PT:2/1
 K:abDestroyTgtV T Sac<1/Creature>:Creature.nonBlack:Destroy target nonblack creature.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_assassin.jpg
+SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/21.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/166.jpg
 End

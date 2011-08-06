@@ -6,4 +6,6 @@ PT:2/1
 A:AB$Pump | Cost$ 2 | ValidTgts$ Creature.Green,Creature.Blue | NumDef$ +1 | SpellDescription$ Target green or blue creature gets +0/+1 until end of turn. | TgtPrompt$ Select target green or blue creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_weaver.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/39.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/46.jpg
 End

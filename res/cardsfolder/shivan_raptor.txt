@@ -8,4 +8,5 @@ K:Haste
 K:Echo:2 R
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_raptor.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/215.jpg
 End

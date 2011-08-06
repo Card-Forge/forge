@@ -4,4 +4,5 @@ Types:Enchantment
 Text:no text
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seal_of_primordium.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/153.jpg
 End

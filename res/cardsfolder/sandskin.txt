@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPumpCurse:HIDDEN Prevent all combat damage that would be dealt to and dealt by CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sandskin.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/52.jpg
 End

@@ -5,4 +5,5 @@ Text:Counter target spell with converted mana cost 2.
 K:spCounter:Spell:CMC(==,2):Graveyard:None
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_snare.jpg
+SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/33.jpg
 End

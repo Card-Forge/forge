@@ -8,4 +8,5 @@ K:abUntapTgt T:Land:Untap target land.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_seeder_hierophant.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/184.jpg
 End

@@ -6,4 +6,5 @@ K:spDamageTgtCP:2
 K:Ripple:4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surging_flame.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/99.jpg
 End

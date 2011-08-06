@@ -5,4 +5,5 @@ Text:(Seat of the Synod isn't a spell.)
 K:tap: add U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seat_of_the_synod.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/283.jpg
 End

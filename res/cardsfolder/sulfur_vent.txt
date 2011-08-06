@@ -8,4 +8,5 @@ K:Comes into play tapped.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sulfur_vent.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/328.jpg
 End

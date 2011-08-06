@@ -5,4 +5,5 @@ Text:no text
 K:spDamageAll:Creature.withoutFlying:1:Seismic Shudder deals 1 damage to each creature without flying.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seismic_shudder.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/147.jpg
 End

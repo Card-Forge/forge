@@ -6,4 +6,6 @@ K:spDrawCards:1:Draw a card. Proliferate.:Steady Progress - draw a card, prolife
 K:Proliferate
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steady_progress.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/som/45.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/45.jpg
 End

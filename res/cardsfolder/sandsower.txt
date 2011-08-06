@@ -7,4 +7,5 @@ K:abTapTgt tapXType<3/Creature>:Creature:Tap target creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sandsower.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/28.jpg
 End

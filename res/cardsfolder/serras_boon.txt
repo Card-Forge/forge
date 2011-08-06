@@ -9,4 +9,5 @@ K:stPumpEnchanted:Creature.nonWhite:-1/-2:No Condition:no text
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serras_boon.jpg
+SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/17.jpg
 End

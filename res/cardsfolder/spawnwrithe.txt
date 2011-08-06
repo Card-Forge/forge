@@ -6,4 +6,5 @@ PT:2/2
 K:Trample
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spawnwrithe.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/129.jpg
 End

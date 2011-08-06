@@ -8,4 +8,5 @@ K:stPumpEnchanted:Creature.untapped:0/0/Shroud:No Condition:Enchanted creature h
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_cloak.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/78.jpg
 End

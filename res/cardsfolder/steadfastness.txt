@@ -6,4 +6,6 @@ K:spAllPump:YouCtrl:+0/+3:Creatures you control get +0/+3 until end of turn.:Ste
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://gatherer.wizards.com/handlers/image.ashx?multiverseid=20399&type=card
+SetInfo:S99|Common|http://magiccards.info/scans/en/st/27.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/193.jpg
 End

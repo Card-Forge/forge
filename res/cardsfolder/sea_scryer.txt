@@ -8,4 +8,5 @@ K:1, tap: add U
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_scryer.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/90.jpg
 End

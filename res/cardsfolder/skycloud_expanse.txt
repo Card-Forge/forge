@@ -6,4 +6,5 @@ K:1, tap: add W U
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skycloud_expanse.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/327.jpg
 End

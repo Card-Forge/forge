@@ -7,4 +7,5 @@ K:WheneverKeyword:EntersBattleField:Self:Play:TapPermanent:NormalInput/Creature:
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/somnomancer.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/149.jpg
 End

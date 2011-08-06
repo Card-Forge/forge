@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPump:+3/-3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sangrite_backlash.jpg
+SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/139.jpg
 End

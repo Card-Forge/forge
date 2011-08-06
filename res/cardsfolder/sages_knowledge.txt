@@ -5,4 +5,6 @@ Text:
 A:SP$Retrieve | Cost$ 2 U | Destination$ Hand | TgtPrompt$ Choose target sorcery card in your graveyard | ValidTgts$ Sorcery.YouCtrl | SpellDescription$ Return target sorcery card from your graveyard to your hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sages_knowledge.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/p3k/52.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/52.jpg
 End

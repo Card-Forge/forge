@@ -9,4 +9,5 @@ SVar:X:Count$Domain
 SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_unity.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/40.jpg
 End

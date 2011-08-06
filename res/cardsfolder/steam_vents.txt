@@ -6,4 +6,5 @@ K:tap: add U
 K:tap: add R
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card96923.jpg
+SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/164.jpg
 End

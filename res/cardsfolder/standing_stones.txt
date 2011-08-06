@@ -5,4 +5,5 @@ Text:no text
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/standing_stones.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/107.jpg
 End

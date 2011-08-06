@@ -6,4 +6,5 @@ K:spPumpTgt:+X/+X:Target creature gets +X/+X until end of turn, where X is the n
 SVar:X:Count$TypeYouCtrl.Land
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_cedars.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/245.jpg
 End

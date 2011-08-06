@@ -4,4 +4,5 @@ Types:Enchantment
 Text:Whenever you play an enchantment spell, put a 4/4 white Angel token with flying into play.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_of_the_empty_throne.jpg
+SetInfo:CON|Rare|http://magiccards.info/scans/en/cfx/18.jpg
 End

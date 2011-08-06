@@ -5,4 +5,6 @@ Text:When Skinrender enters the battlefield, put three -1/-1 counters on target 
 PT:3/3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skinrender.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/som/78.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/78.jpg
 End

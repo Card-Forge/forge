@@ -7,4 +7,5 @@ K:etbMakeToken<>X<>Goat<>W 0 1 Goat<>Controller<>W<>Creature;Goat<>0<>1<>None<>p
 SVar:X:Count$Chroma.W
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/springjack_shepherd.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/15.jpg
 End

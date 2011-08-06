@@ -6,4 +6,6 @@ K:tap: add G
 SVar:PicCount:4
 SVar:Rarity:Land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_forest.jpg\http://www.wizards.com/global/images/magic/general/snow_covered_forest.jpg\http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_forest.jpg\http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_forest.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/155.jpg
+SetInfo:ICE|Land|http://magiccards.info/scans/en/ia/347.jpg
 End

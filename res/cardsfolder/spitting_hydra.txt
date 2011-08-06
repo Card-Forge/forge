@@ -1,8 +1,9 @@
 Name:Spitting Hydra
 ManaCost:3 R R
 Types:Creature Hydra
-Text:Spitting Hydra enters the battlefield with four +1/+1 counters. 
+Text:Spitting Hydra enters the battlefield with four +1/+1 counters.
 PT:0/0
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spitting_hydra.jpg
+SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/99.jpg
 End

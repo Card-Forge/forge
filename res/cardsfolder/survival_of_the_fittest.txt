@@ -6,4 +6,5 @@ A:AB$Fetch | Cost$ G Discard<1/Creature> | Destination$ Hand | FetchType$ Creatu
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/survival_of_the_fittest.jpg
+SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/129.jpg
 End

@@ -9,4 +9,5 @@ K:1: add R
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_elf.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/149.jpg
 End

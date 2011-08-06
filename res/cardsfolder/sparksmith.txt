@@ -7,4 +7,5 @@ K:abDamageTgtC T:X:Drawback$DamageYou/X:Sparksmith deals X damage to target crea
 SVar:X:Count$TypeOnBattlefield.Goblin
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39476.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/235.jpg
 End

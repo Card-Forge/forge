@@ -5,4 +5,5 @@ Text:At the beginning of each player's upkeep, Sulfuric Vortex deals 2 damage to
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sulfuric_vortex.jpg
+SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/106.jpg
 End

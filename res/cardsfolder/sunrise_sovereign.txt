@@ -7,4 +7,5 @@ K:stPumpAll:Creature.Giant+Other+YouCtrl:2/2/Trample:No Condition:Other Giant cr
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunrise_sovereign.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/192.jpg
 End

@@ -5,4 +5,5 @@ Text:Search your library for a basic land card, reveal that card, and put it int
 K:Storm
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sprouting_vines.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/128.jpg
 End

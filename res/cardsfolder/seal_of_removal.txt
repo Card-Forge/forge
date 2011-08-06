@@ -5,4 +5,5 @@ Text:no text
 A:AB$Bounce | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seal_of_removal.jpg
+SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/42.jpg
 End

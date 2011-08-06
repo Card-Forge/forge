@@ -7,4 +7,5 @@ K:abPump GU:Shroud
 SVar:BuffedBy:Spell.Blue,Spell.Green
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Sturdy_Hatchling.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/163.jpg
 End

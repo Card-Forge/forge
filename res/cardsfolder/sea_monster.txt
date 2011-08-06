@@ -6,4 +6,10 @@ PT:6/6
 K:CARDNAME can't attack unless defending player controls an Island.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_monster.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/99.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/85.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/97.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/96.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/106.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/96.jpg
 End

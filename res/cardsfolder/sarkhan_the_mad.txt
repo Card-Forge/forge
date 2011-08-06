@@ -4,4 +4,5 @@ Types:Planeswalker - Sarkhan
 Text:no text
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sarkhan_the_mad.jpg
+SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/214.jpg
 End

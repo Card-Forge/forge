@@ -6,4 +6,5 @@ K:StaticEffect:Play:All Permanents:Keyword/CARDNAME can't attack or block.:Type.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/song_of_serenity.jpg
+SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/125.jpg
 End

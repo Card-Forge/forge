@@ -6,4 +6,5 @@ K:1, tap: add W G
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selesnya_signet.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/270.jpg
 End

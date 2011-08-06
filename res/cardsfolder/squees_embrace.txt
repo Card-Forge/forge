@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPump:+2/+2/When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squees_embrace.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/122.jpg
 End

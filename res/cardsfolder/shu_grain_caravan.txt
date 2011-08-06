@@ -5,4 +5,6 @@ Text:When Shu Grain Caravan enters the battlefield, you gain 2 life.
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shu_grain_caravan.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/p3k/26.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/26.jpg
 End

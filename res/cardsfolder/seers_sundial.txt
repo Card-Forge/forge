@@ -5,4 +5,5 @@ Text:no text
 K:WheneverKeyword:EntersBattleField:Type/Land:Play:DrawCards/1:ControllingPlayer_Self:ASAP:PayMana/2:Initiator - OwnedByController:Landfall - Whenever a land enters the battlefield under your control, you may pay 2. If you do, draw a card.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seers_sundial.jpg
+SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/130.jpg
 End

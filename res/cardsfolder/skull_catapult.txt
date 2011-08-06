@@ -6,4 +6,7 @@ K:abDamageTgtCP 1 T Sac<1/Creature>:2
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skull_catapult.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/399.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/309.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/311.jpg
 End

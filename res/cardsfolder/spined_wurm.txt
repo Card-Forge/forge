@@ -5,4 +5,11 @@ Text:no text
 PT:5/4
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card94914.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/279.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/270.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/111.jpg
+SetInfo:STH|Common|http://magiccards.info/scans/en/sh/71.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9eb/10.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/298.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/197.jpg
 End

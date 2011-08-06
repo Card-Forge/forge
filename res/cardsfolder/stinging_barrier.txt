@@ -7,4 +7,5 @@ K:Defender
 K:abDamageTgtCP U T:1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stinging_barrier.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/107.jpg
 End

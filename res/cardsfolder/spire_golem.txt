@@ -7,4 +7,5 @@ K:Flying
 K:CostChange:Player:Less:1:Self:All:All:Affinity/Island
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spire_golem.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/145.jpg
 End

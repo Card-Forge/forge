@@ -7,4 +7,5 @@ K:Flying
 K:WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Spirit or Arcane spell, you may draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sire_of_the_storm.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/85.jpg
 End

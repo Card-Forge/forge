@@ -6,4 +6,5 @@ PT:6/6
 K:Vigilance
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sun_titan.jpg
+SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/35.jpg
 End

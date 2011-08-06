@@ -7,4 +7,5 @@ K:abDamageTgtV 1 W Sac<1/CARDNAME>:3:Creature.attacking,Creature.blocking:Soldie
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldier_replica.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/244.jpg
 End

@@ -7,4 +7,5 @@ K:Cascade
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormcallers_boon.jpg
+SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/13.jpg
 End

@@ -6,4 +6,5 @@ PT:0/2
 K:abGainLife T:1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silent_attendant.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/51.jpg
 End

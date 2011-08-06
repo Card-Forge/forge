@@ -5,4 +5,5 @@ Text:no text
 K:spDamageTgtOpp:7:Searing Flesh deals 7 damage to target opponent.:Searing Flesh - deals 7 damage
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/searing_flesh.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/225.jpg
 End

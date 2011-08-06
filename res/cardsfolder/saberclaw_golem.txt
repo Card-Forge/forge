@@ -6,4 +6,6 @@ PT:4/2
 K:abPump R:First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saberclaw_golem.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/som/200.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/200.jpg
 End

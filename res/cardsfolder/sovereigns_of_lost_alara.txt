@@ -6,4 +6,5 @@ PT:4/5
 K:Exalted
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sovereigns_of_lost_alara.jpg
+SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/12.jpg
 End

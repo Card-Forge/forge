@@ -6,4 +6,5 @@ K:spDiscardTgt:TgtChoose:1:Target player discards a card.:Surging Dementia - Tar
 K:Ripple:4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surging_dementia.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/72.jpg
 End

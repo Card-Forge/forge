@@ -7,4 +7,5 @@ K:Shadow
 K:stPumpSelf:Creature.attacking:0/0/First Strike:No Condition:Soltari Lancer has first strike as long as it's attacking.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_lancer.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/256.jpg
 End

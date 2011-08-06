@@ -7,4 +7,6 @@ K:tap: add R
 K:tap: add G
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_oasis.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/326.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/327.jpg
 End

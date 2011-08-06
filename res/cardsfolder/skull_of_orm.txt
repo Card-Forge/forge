@@ -5,4 +5,6 @@ Text:no text
 A:AB$Retrieve | Cost$5 T | TgtPrompt$ Choose target enchantment in your graveyard | ValidTgts$ Enchantment | Destination$ Hand | SpellDescription$ Return target enchantment card from your graveyard to your hand.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/argivian_archaeologist.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/313.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/106.jpg
 End

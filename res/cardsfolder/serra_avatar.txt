@@ -6,4 +6,5 @@ PT:1/1
 K:When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_avatar.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/45.jpg
 End

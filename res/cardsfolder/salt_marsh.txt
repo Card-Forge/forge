@@ -7,4 +7,6 @@ K:tap: add U
 K:tap: add B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/salt_marsh.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/325.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/326.jpg
 End

@@ -8,4 +8,5 @@ A:AB$Fog | Cost$ 1 SubCounter<1/P1P1> | SpellDescription$ Prevent all combat dam
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spike_weaver.jpg
+SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/128.jpg
 End

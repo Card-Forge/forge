@@ -6,4 +6,5 @@ PT:1/1
 K:etbReturnTgt:1/MayReturn:Mercenary:Hand
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strongarm_thug.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/165.jpg
 End

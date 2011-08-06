@@ -7,4 +7,5 @@ K:Reach
 K:Morph:4 G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spitting_gourna.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/284.jpg
 End

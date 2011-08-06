@@ -5,4 +5,7 @@ Text:As an additional cost to cast Sacrifice, sacrifice a creature.\r\nAdd to yo
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sacrifice.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/33.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/34.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/33.jpg
 End

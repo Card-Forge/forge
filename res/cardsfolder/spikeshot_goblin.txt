@@ -7,4 +7,5 @@ K:abDamageTgtCP R T:X:Spikeshot Goblin deals damage equal to its power to target
 SVar:X:Count$CardPower
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spikeshot_goblin.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/108.jpg
 End

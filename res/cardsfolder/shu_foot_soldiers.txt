@@ -5,4 +5,6 @@ Text:no text
 PT:2/3
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10489.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/p3k/24.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/24.jpg
 End

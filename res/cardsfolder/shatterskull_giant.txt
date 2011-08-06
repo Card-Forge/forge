@@ -5,4 +5,5 @@ Text:no text
 PT:4/3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shatterskull_giant.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/148.jpg
 End

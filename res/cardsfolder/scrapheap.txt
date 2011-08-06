@@ -5,4 +5,5 @@ Text:no text
 K:WheneverKeyword:PermanentIntoGraveyard:OneTypeOfMany/Artifact/Enchantment:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:No_Condition:Initiator - OwnedByController:Whenever an artifact or enchantment is put into your graveyard from the battlefield, you gain 1 life.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scrapheap.jpg
+SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/132.jpg
 End

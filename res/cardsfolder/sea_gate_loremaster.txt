@@ -8,4 +8,5 @@ SVar:X:Count$TypeYouCtrl.Ally
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_gate_loremaster.jpg
+SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/63.jpg
 End

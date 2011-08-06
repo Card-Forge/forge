@@ -7,4 +7,5 @@ K:enPump:+1/+1
 K:When CARDNAME enters the battlefield, draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scavenged_weaponry.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/123.jpg
 End

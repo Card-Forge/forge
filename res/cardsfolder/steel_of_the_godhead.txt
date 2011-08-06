@@ -9,4 +9,5 @@ K:StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/HIDDEN Unblockable:C
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steel_of_the_godhead.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/150.jpg
 End

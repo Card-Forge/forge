@@ -6,4 +6,5 @@ PT:1/1
 K:abDamageTgtP R Sac<1/Creature>:1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scorched_rusalka.jpg
+SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/74.jpg
 End

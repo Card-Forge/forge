@@ -8,4 +8,5 @@ K:WheneverKeyword:Blocks:Self:Play:StatsPumpEOT/-3/0:Self:ASAP:No_Condition:No S
 K:WheneverKeyword:BecomesBlocked:Self:Play:StatsPumpEOT/-3/0:Self:ASAP:No_Condition:No Special Condition:Whenever Slinking Giant becomes blocked, it gets -3/-0 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slinking_giant.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/106.jpg
 End

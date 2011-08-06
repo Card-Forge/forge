@@ -6,4 +6,5 @@ K:spDamageAll:Creature.withShadow:2:Shadowstorm deals 2 damage to each creature 
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shadowstorm.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/202.jpg
 End

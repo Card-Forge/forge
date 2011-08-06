@@ -7,4 +7,5 @@ K:enPump:+1/+2/Protection from black
 K:Madness:W
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_isolation.jpg
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/17.jpg
 End

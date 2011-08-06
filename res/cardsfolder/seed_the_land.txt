@@ -4,4 +4,5 @@ Types:Enchantment
 Text:Whenever a land enters the battlefield, its controller puts a 1/1 green Snake creature token onto the battlefield.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seed_the_land.jpg
+SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/146.jpg
 End

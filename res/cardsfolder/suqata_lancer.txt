@@ -7,4 +7,5 @@ K:Haste
 K:Flanking
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/suqata_lancer.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/96.jpg
 End

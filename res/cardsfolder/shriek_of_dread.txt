@@ -5,4 +5,5 @@ Text:no text
 K:spPumpTgt:Fear
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shriek_of_dread.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/53.jpg
 End

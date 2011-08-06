@@ -6,4 +6,5 @@ PT:0/2
 K:Defender
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sprouting_phytohydra.jpg
+SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/95.jpg
 End

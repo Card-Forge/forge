@@ -8,4 +8,5 @@ K:tap: add R
 K:tap: add G
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_lands.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/228.jpg
 End

@@ -7,4 +7,6 @@ K:StaticEffect:Play:Self:SetPT/Type.Creature/Type.Creature:Permanents you Contro
 SVar:BuffedBy:Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scion_of_the_wild.jpg
+SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/182.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/295.jpg
 End

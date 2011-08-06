@@ -7,4 +7,5 @@ K:Protection from black
 K:Shadow
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_monk.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/257.jpg
 End

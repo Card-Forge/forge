@@ -6,4 +6,5 @@ Text:Put three 1/1 white Spirit creature tokens with flying into play.
 A:SP$Token | Cost$ 2/W 2/W 2/W | TokenAmount$ 3 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ Controller | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_procession.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/23.jpg
 End

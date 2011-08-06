@@ -8,4 +8,5 @@ K:WheneverKeyword:DealsDamage/Opponent:Enchanted_Creature:Play:DrawCards/1:Contr
 K:Totem armor
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snake_umbra.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/207.jpg
 End

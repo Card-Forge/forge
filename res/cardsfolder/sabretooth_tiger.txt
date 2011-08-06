@@ -6,4 +6,9 @@ PT:2/1
 K:First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sabretooth_tiger.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/217.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/264.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/203.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/215.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/215.jpg
 End
