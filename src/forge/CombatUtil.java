@@ -2092,11 +2092,6 @@ public class CombatUtil {
         	{
         		AllZone.GameAction.checkWheneverKeyword(c,"Blocks",null);
         		
-        		//Run triggers
-        		HashMap<String,Object> runParams = new HashMap<String,Object>();
-        		runParams.put("Blocker", c);
-        		AllZone.TriggerHandler.runTrigger("Blocks", runParams);
-        		
         		if (!c.getCreatureBlockedThisCombat()) {
                 	for(Ability ab:CardFactoryUtil.getBushidoEffects(c)) {
                 		AllZone.Stack.add(ab);
@@ -2167,6 +2162,8 @@ public class CombatUtil {
     		runParams.put("Attacker",a);
     		runParams.put("Blocker",b);
     		AllZone.TriggerHandler.runTrigger("AttackerBlocked", runParams);
+    		
+    		AllZone.TriggerHandler.runTrigger("Blocks", runParams);
     	
             for(Ability ab:CardFactoryUtil.getBushidoEffects(a))
                 AllZone.Stack.add(ab);
