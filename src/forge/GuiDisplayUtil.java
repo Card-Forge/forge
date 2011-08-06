@@ -308,7 +308,7 @@ public class GuiDisplayUtil implements NewConstants {
             
             int x = marginX;
             
-            int cardOffset = 10;
+            int cardOffset = Constant.Runtime.stackOffset[0];
             
             String color = "";
             ArrayList<JPanel> cards = new ArrayList<JPanel>();
@@ -496,7 +496,7 @@ public class GuiDisplayUtil implements NewConstants {
             
             int x = marginX;
             
-            int cardOffset = 10;
+            int cardOffset = Constant.Runtime.stackOffset[0];
             
             String color = "";
             ArrayList<JPanel> cards = new ArrayList<JPanel>();

@@ -269,6 +269,7 @@ public interface NewConstants {
                     public static final String IMPORTPICTURE   = "%s/NewGame/menu/importPicture";
                     public static final String CARD_SIZES = "%s/NewGame/menu/cardSizes";
                     public static final String CARD_STACK = "%s/NewGame/menu/cardStack";
+                    public static final String CARD_STACK_OFFSET = "%s/NewGame/menu/cardStackOffset";
                     public static final String ABOUT      = "%s/NewGame/menu/about";
                 }
                 

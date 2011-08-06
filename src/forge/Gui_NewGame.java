@@ -102,6 +102,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     private Action                  IMPORT_PICTURE       = new ImportPictureAction();
     private Action                  CARD_SIZES_ACTION    = new CardSizesAction();
     private Action					CARD_STACK_ACTION    = new CardStackAction();
+    private Action					CARD_STACK_OFFSET_ACTION = new CardStackOffsetAction();
     private Action                  ABOUT_ACTION         = new AboutAction();
     
     public static void main(String[] args) {
@@ -174,7 +175,9 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         
         if(Constant.Runtime.height[0] == 0) Constant.Runtime.height[0] = 98;
         
-        if(Constant.Runtime.stackSize[0] == 0) Constant.Runtime.stackSize[0] = 8;
+        if(Constant.Runtime.stackSize[0] == 0) Constant.Runtime.stackSize[0] = 4;
+        
+        if(Constant.Runtime.stackOffset[0] == 0) Constant.Runtime.stackOffset[0] = 10;
 
         try {
             jbInit();
@@ -214,7 +217,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     private void setupMenu() {
         Action[] actions = {
                 LOOK_AND_FEEL_ACTION, DOWNLOAD_ACTION, DOWNLOAD_ACTION_LQ, IMPORT_PICTURE, CARD_SIZES_ACTION, CARD_STACK_ACTION,
-                ErrorViewer.ALL_THREADS_ACTION, ABOUT_ACTION};
+                CARD_STACK_OFFSET_ACTION, ErrorViewer.ALL_THREADS_ACTION, ABOUT_ACTION};
         JMenu menu = new JMenu(ForgeProps.getLocalized(MENU.TITLE));
         for(Action a:actions)
             menu.add(a);
@@ -824,8 +827,30 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                 int index = ch.getSelectedIndex();
                 if(index == -1) return;
                 Constant.Runtime.stackSize[0] = values[index];
-                //not needed any more
-//                ImageCache.dumpCache();
+
+            } catch(Exception ex) {
+                ErrorViewer.showError(ex);
+            }
+        }
+    }
+    
+    public static class CardStackOffsetAction extends AbstractAction {
+        
+		private static final long serialVersionUID = 5021304777748833975L;
+		private String[]          keys             = {"Tiny", "Small", "Medium", "Large"};
+        private int[]             offsets          = {5, 7, 10, 15};
+        
+        public CardStackOffsetAction() {
+            super(ForgeProps.getLocalized(MENU_BAR.MENU.CARD_STACK_OFFSET));
+        }
+        
+        public void actionPerformed(ActionEvent e) {
+            ListChooser<String> ch = new ListChooser<String>("Choose one", "Choose a stack offset value", 0, 1, keys);
+            if(ch.show()) try {
+                int index = ch.getSelectedIndex();
+                if(index == -1) return;
+                Constant.Runtime.stackOffset[0] = offsets[index];
+
             } catch(Exception ex) {
                 ErrorViewer.showError(ex);
             }
