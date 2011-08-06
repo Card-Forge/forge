@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Creature Zombie
 Text:When Grave Defiler enters the battlefield, reveal the top four cards of your library. Put all Zombie cards revealed this way into your hand and the rest on the bottom of your library.
 PT:2/1
-K:RegenerateMe:1 B
+A:AB$Regenerate|Cost$1 B|SpellDescription$Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_defiler.jpg
 End

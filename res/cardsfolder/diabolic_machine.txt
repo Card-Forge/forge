@@ -3,7 +3,7 @@ ManaCost:7
 Types:Artifact Creature Construct
 Text:no text
 PT:4/4
-K:RegenerateMe:3
+A:AB$Regenerate|Cost$3|SpellDescription$Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diabolic_machine.jpg
 End

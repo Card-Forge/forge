@@ -4,7 +4,7 @@ Types:Creature Spirit
 Text:no text
 PT:2/4
 K:Flying
-K:RegenerateMe:U U U
+A:AB$Regenerate|Cost$U U U|SpellDescription$Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card107294.jpg
 End
