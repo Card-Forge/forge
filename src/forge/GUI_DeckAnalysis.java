@@ -1,6 +1,7 @@
 package forge;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
@@ -43,6 +44,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 	private JLabel jLabelFiveMana;
 	private JLabel jLabelFourMana;
 	private JLabel jLabelThreeMana;
+	private JButton jButtonRegenerate;
 	private JLabel jLabel4;
 	private JSeparator jSeparator4;
 	private JPanel jPanel4;
@@ -105,6 +107,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			pack();
 			this.setIconImage(null);
 			this.addWindowListener(new WListener());
+			getContentPane().add(getJButton1(), new AnchorConstraint(875, 992, 953, 758, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 			getContentPane().add(getJLabel1xx(), new AnchorConstraint(27, 783, 80, 9, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 			getContentPane().add(getJButtonOk(), new AnchorConstraint(875, 642, 983, 354, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 			getContentPane().add(getJPanel1(), new AnchorConstraint(102, 243, 852, 10, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
@@ -512,25 +515,44 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 	private JList getJList1() {
 		CardList rList = new CardList();
 		rList=tModel.getCards();
-    	rList.shuffle();
+    	rList.shuffle();    	
     	ListModel jList1Model;
-		if(jListFirstHand == null) {
-			if(rList.size()>=40){
-			 jList1Model = 
-				new DefaultComboBoxModel(
-						new String[] { rList.getCard(0).getName(),
-								       rList.getCard(1).getName(),
-								       rList.getCard(2).getName(),
-								       rList.getCard(3).getName(),
-								       rList.getCard(4).getName(),
-								       rList.getCard(5).getName(),
-								       rList.getCard(6).getName()});
-			jListFirstHand = new JList();
+		if (jListFirstHand==null){
+					if(rList.size()>=40){
+					 jList1Model = 
+						new DefaultComboBoxModel(
+								new String[] { rList.getCard(0).getName(),
+										       rList.getCard(1).getName(),
+										       rList.getCard(2).getName(),
+										       rList.getCard(3).getName(),
+										       rList.getCard(4).getName(),
+										       rList.getCard(5).getName(),
+										       rList.getCard(6).getName()});
+					jListFirstHand = new JList();
+					}else{
+						 jList1Model = 
+							new DefaultComboBoxModel(
+									new String[] {"Few cards."});
+						jListFirstHand = new JList();
+					}
 			}else{
-				 jList1Model = 
-					new DefaultComboBoxModel(
-							new String[] {"Few cards."});
-				jListFirstHand = new JList();
+				if(rList.size()>=40){
+					 jList1Model = 
+						new DefaultComboBoxModel(
+								new String[] { rList.getCard(0).getName(),
+										       rList.getCard(1).getName(),
+										       rList.getCard(2).getName(),
+										       rList.getCard(3).getName(),
+										       rList.getCard(4).getName(),
+										       rList.getCard(5).getName(),
+										       rList.getCard(6).getName()});
+			
+					}else{
+						 jList1Model = 
+							new DefaultComboBoxModel(
+									new String[] {"Few cards."});
+						
+					}
 			}
 				
 	
@@ -542,10 +564,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			jListFirstHand.setSelectionBackground(new java.awt.Color(192,192,192));
 			jListFirstHand.setSelectionForeground(new java.awt.Color(0,0,0));
 			jListFirstHand.setFixedCellHeight(25);
-			
-				
-
-		}
+		
 		return jListFirstHand;
 	}
 	
@@ -560,8 +579,19 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			jPanel4.add(getJSeparator4(), new AnchorConstraint(104, 989, 140, 3, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 			jPanel4.add(getJLabel4xxx(), new AnchorConstraint(2, 989, 108, 17, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 			jPanel4.add(getJList1(), new AnchorConstraint(116, 989, 977, 17, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-		}
+		}else{
+			jPanel4.removeAll();
+			AnchorLayout jPanel4Layout = new AnchorLayout();
+			jPanel4.setBackground(new java.awt.Color(192,192,192));
+			jPanel4.setPreferredSize(new java.awt.Dimension(139, 201));
+			jPanel4.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+			jPanel4.setLayout(jPanel4Layout);
+			jPanel4.add(getJSeparator4(), new AnchorConstraint(104, 989, 140, 3, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+			jPanel4.add(getJLabel4xxx(), new AnchorConstraint(2, 989, 108, 17, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+			jPanel4.add(getJList1(), new AnchorConstraint(116, 989, 977, 17, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+		}	
 		return jPanel4;
+		
 	}
 
 	private JSeparator getJSeparator4() {
@@ -583,6 +613,29 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			jLabel4.setLayout(null);
 		}
 		return jLabel4;
+	}
+	
+	private JButton getJButton1() {
+		CardList rList = new CardList();
+		rList=tModel.getCards();
+		if(jButtonRegenerate == null) {
+			if(rList.size()>=40){
+			jButtonRegenerate = new JButton();
+	//		AnchorLayout jButton1Layout = new AnchorLayout();
+			jButtonRegenerate.setLayout(null);
+			jButtonRegenerate.setText("Regenerate hand");
+			jButtonRegenerate.setPreferredSize(new java.awt.Dimension(139, 21));
+			jButtonRegenerate.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	            	jButtonRegenerate_actionPerformed(e);
+	            }
+	        });
+			}else{
+			jButtonRegenerate = new JButton();
+			jButtonRegenerate.setVisible(false);
+			}
+		}
+		return jButtonRegenerate;
 	}
 
 	public class CustomListener implements MouseListener {
@@ -782,4 +835,17 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 	
 	}
 
+	void jButtonRegenerate_actionPerformed(ActionEvent e) {
+		getContentPane().removeAll();
+		getContentPane().add(getJButton1(), new AnchorConstraint(875, 992, 953, 758, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+		getContentPane().add(getJLabel1xx(), new AnchorConstraint(27, 783, 80, 9, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+		getContentPane().add(getJButtonOk(), new AnchorConstraint(875, 642, 983, 354, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+		getContentPane().add(getJPanel1(), new AnchorConstraint(102, 243, 852, 10, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+		getContentPane().add(getJPanel2(), new AnchorConstraint(102, 490, 852, 258, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+		getContentPane().add(getJPanel3(), new AnchorConstraint(102, 741, 852, 507, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+		getContentPane().add(getJPanel4(), new AnchorConstraint(102, 992, 852, 758, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+		getContentPane().repaint();
+		
+	}
+	
 }
