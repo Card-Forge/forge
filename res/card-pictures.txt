@@ -38,6 +38,13 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+havenwood_battleground.jpg		http://www.wizards.com/global/images/magic/general/havenwood_battleground.jpg
+dwarven_ruins.jpg				http://www.wizards.com/global/images/magic/general/dwarven_ruins.jpg
+ebon_stronghold.jpg				http://www.wizards.com/global/images/magic/general/ebon_stronghold.jpg
+irrigation_ditch.jpg			http://www.wizards.com/global/images/magic/general/irrigation_ditch.jpg
+geothermal_crevice.jpg			http://www.wizards.com/global/images/magic/general/geothermal_crevice.jpg
+bog_wreckage.jpg				http://www.wizards.com/global/images/magic/general/bog_wreckage.jpg
+basal_thrull.jpg				http://www.wizards.com/global/images/magic/general/basal_thrull.jpg
 entangling_vines.jpg		http://www.wizards.com/global/images/magic/general/entangling_vines.jpg
 glimmerdust_nap.jpg		http://www.wizards.com/global/images/magic/general/glimmerdust_nap.jpg
 genesis.jpg						http://www.wizards.com/global/images/magic/general/genesis.jpg
