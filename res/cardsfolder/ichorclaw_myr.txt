@@ -6,4 +6,5 @@ PT:1/1
 K:Infect
 K:WheneverKeyword:BecomesBlocked:Self:Play:StatsPumpEOT/2/2:Self:ASAP:No_Condition:No Special Condition:Whenever Ichorclaw Myr becomes blocked, it gets +2/+2 until end of turn. 
 SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ichorclaw_myr.jpg
 End
