@@ -38,7 +38,10 @@ public class GameAction {
     	// Remove card from Current Zone, if it has one
     	String prevZone = "";
         PlayerZone p = AllZone.getZone(c);
+
         if(p != null){
+        	if (p.is(Constant.Zone.Battlefield) && c.isCreature())
+                AllZone.Combat.removeFromCombat(c);
         	prevZone = p.getZoneName();
         	p.remove(c);
         }
@@ -73,30 +76,29 @@ public class GameAction {
     }
     
     //card can be anywhere like in Hand or in Play
-    public void moveToGraveyard(final Card c) {
+    public Card moveToGraveyard(Card c) {
     	
     	final PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getOwner());
 
     	if (AllZoneUtil.isCardInPlay("Leyline of the Void", c.getOwner().getOpponent())) {
-    		moveTo(AllZone.getZone(Constant.Zone.Exile, c.getOwner()), c);
-    		return;
+    		return moveTo(AllZone.getZone(Constant.Zone.Exile, c.getOwner()), c);
     	}
     	
     	if(c.hasKeyword("If CARDNAME would be put into a graveyard this turn, exile it instead.")) {
-    		moveTo(AllZone.getZone(Constant.Zone.Exile, c.getOwner()), c);
-    		return;
+    		return moveTo(AllZone.getZone(Constant.Zone.Exile, c.getOwner()), c);
     	}
     	
     	if (AllZoneUtil.isCardInPlay("Planar Void")) {
     		CardList pVoids = AllZoneUtil.getCardsInPlay("Planar Void");
     		for(int i = 0; i < pVoids.size(); i++) {
     			Card pVoid = pVoids.get(i);
+    			final Card voidingCard = c;
     			if (!c.equals(pVoid)) {
 		    		Ability ability = new Ability(pVoid, "0") {
 						@Override
 						public void resolve() {
-							if(AllZone.GameAction.isCardInZone(c, grave))
-								moveTo(AllZone.getZone(Constant.Zone.Exile, c.getOwner()), c);
+							if(AllZone.GameAction.isCardInZone(voidingCard, grave))
+								moveTo(AllZone.getZone(Constant.Zone.Exile, voidingCard.getOwner()), voidingCard);
 						}
 		
 					};// Ability
@@ -110,7 +112,7 @@ public class GameAction {
     	}
 
 		//must put card in OWNER's graveyard not controller's
-		moveTo(grave, c);
+		c = moveTo(grave, c);
 		
 		//Recover keyword
 		if(c.isType("Creature"))
@@ -176,6 +178,7 @@ public class GameAction {
 		    	}
 		    }
 		}
+		return c;
     }
     
     public void moveToHand(Card c) {
@@ -243,15 +246,8 @@ public class GameAction {
     
     public void discard_PutIntoPlayInstead(Card c)
     {
-    	/*
-    	if (c.getName().equals("Dodecapod"))
-    		c.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(c, Counters.P1P1, 2));
-        */
-    	PlayerZone hand = AllZone.getZone(c);
-    	PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
-    	//moveTo(play, c);
-    	hand.remove(c);
-    	play.add(c);
+    	moveToPlay(c);
+
     	if (c.getName().equals("Dodecapod"))
     		c.setCounter(Counters.P1P1, 2, false);
     }
@@ -1971,15 +1967,13 @@ public class GameAction {
    public void sacrificeDestroy(Card c) {
         if(!isCardInPlay(c)) return;
         
-        boolean persist = false;
         PlayerZone play = AllZone.getZone(c);
         
         Player owner = c.getOwner();
         if (!(owner.isComputer() || owner.isHuman()))
         		throw new RuntimeException("GameAction : destroy() invalid card.getOwner() - " + c + " " + owner);
         
-        
-        if(c.getKeyword().contains("Persist") && c.getCounters(Counters.M1M1) == 0) persist = true;
+        boolean persist = (c.getKeyword().contains("Persist") && c.getCounters(Counters.M1M1) == 0);
         
         if(c.isEquipped()){	// when equipped creature goes to the grave here.
         	// Deathrender & Oathkeeper, Takeno's Daisho have similar triggers to Skullclamp
@@ -1988,9 +1982,10 @@ public class GameAction {
         }
         //tokens don't go into the graveyard
         //TODO: must change this if any cards have effects that trigger "when creatures go to the graveyard"
-        if(!c.isToken())
+        
         //resets the card, untaps the card, removes anything "extra", resets attack and defense
-        moveToGraveyard(c);
+        if(!c.isToken()) 
+        	c = moveToGraveyard(c);
         else play.remove(c);
 
         c.destroy();
@@ -2018,10 +2013,20 @@ public class GameAction {
             GameActionUtil.executeGrvDestroyCardEffects(bridge.get(i), c);
         
         if(persist) {
-        	PlayerZone ownerPlay = AllZone.getZone(Constant.Zone.Battlefield, c.getOwner());
-        	
-        	c = moveTo(ownerPlay, c);
-        	c.addCounter(Counters.M1M1, 1);
+        	final Card persistCard = c;
+        	Ability persistAb = new Ability(persistCard, "0"){
+
+				@Override
+				public void resolve() {
+					if (AllZone.getZone(persistCard).is(Constant.Zone.Graveyard)){
+						PlayerZone ownerPlay = AllZone.getZone(Constant.Zone.Battlefield, persistCard.getOwner());
+						Card card = moveTo(ownerPlay, persistCard);
+			        	card.addCounter(Counters.M1M1, 1);
+					}
+				}
+        	};
+        	persistAb.setStackDescription(c.getName() + " - Returning from Persist");
+        	AllZone.Stack.add(persistAb);
         }
         
         if(c.getKeyword().contains(
