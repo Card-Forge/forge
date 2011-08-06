@@ -5,7 +5,7 @@ Text:no text
 PT:3/3
 K:Flying
 K:Vigilance
-K:stPumpSelf:Creature:X/X:no Condition:Radiant, Archangel gets +1/+1 for each creature with flying in play.
+K:stPumpSelf:Creature:X/X:no Condition:Radiant, Archangel gets +1/+1 for each other creature with flying on the battlefield.
 SVar:X:Count$Valid Creature.Other+withFlying
 SVar:BuffedBy:Creature.withFlying
 SVar:Rarity:Rare
