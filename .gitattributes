@@ -7182,6 +7182,7 @@ res/cardsfolder/veteran_armorer.txt -text svneol=native#text/plain
 res/cardsfolder/veteran_armorsmith.txt -text svneol=native#text/plain
 res/cardsfolder/veteran_brawlers.txt svneol=native#text/plain
 res/cardsfolder/veteran_cavalier.txt -text svneol=native#text/plain
+res/cardsfolder/veteran_explorer.txt -text svneol=native#text/plain
 res/cardsfolder/veteran_of_the_depths.txt -text svneol=native#text/plain
 res/cardsfolder/veteran_swordsmith.txt -text svneol=native#text/plain
 res/cardsfolder/veterans_reflexes.txt -text svneol=native#text/plain
