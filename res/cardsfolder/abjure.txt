@@ -6,4 +6,5 @@ A:SP$Counter|Cost$U Sac<1/Permanent.Blue>|Type$Spell|Destination$Graveyard|Spell
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abjure.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/31.jpg
 End

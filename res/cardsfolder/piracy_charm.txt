@@ -4,4 +4,5 @@ Types:Instant
 Text:(NOTE: Computer will only use the first ability against you.)
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/piracy_charm.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/58.jpg
 End

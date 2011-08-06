@@ -5,4 +5,5 @@ Text:no text
 A:SP$Discard|Cost$B Sac<1/Creature>|Opponent$True|NumCards$2|Mode$TgtChoose|SpellDescription$Target opponent discards two cards.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tendrils_of_despair.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/25.jpg
 End

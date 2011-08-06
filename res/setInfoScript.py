@@ -125,7 +125,7 @@ def initSets():
 	
 	# Alara
 	allSets['Shards of Alara'] = 'ALA'
-	allSets['Conflux'] = 'CON'
+	allSets['Conflux'] = 'CFX'
 	allSets['Alara Reborn'] = 'ARB'
 	
 	# Zendikar

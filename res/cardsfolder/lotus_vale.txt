@@ -10,4 +10,5 @@ K:tap: add G G G
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lotus_vale.jpg
+SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/165.jpg
 End

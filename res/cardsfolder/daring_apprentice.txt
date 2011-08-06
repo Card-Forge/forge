@@ -6,4 +6,9 @@ PT:1/1
 A:AB$Counter|Cost$T Sac<1/CARDNAME>|Type$Spell|Destination$Graveyard|SpellDescription$Counter target spell.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daring_apprentice.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/73.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/62.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/60.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/72.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/68.jpg
 End

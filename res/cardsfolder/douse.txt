@@ -6,4 +6,5 @@ A:AB$Counter|Cost$1 U|Type$Spell|Destination$Graveyard|CounterValid$Card.Red|Spe
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/douse.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/70.jpg
 End

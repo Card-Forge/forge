@@ -5,4 +5,6 @@ Text:Cast Berserk only before the combat damage step.\r\nTarget creature gains t
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/berserk.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/94.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/94.jpg
 End

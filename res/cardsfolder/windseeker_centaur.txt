@@ -4,6 +4,7 @@ Types:Creature Centaur
 Text:no text
 PT:2/2
 K:Vigilance
-SVar:Rarity:Common
+SVar:Rarity:Special
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windseeker_centaur.jpg
+SetInfo:MBP|Special|http://magiccards.info/scans/en/mbp/3.jpg
 End

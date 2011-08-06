@@ -5,4 +5,9 @@ Text:Enchanted creature gets +3/+3.\r\nAt the beginning of the upkeep of enchant
 K:enPump:+3/+3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unstable_mutation.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/33.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/86.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/110.jpg
+SetInfo:ARN|Common|http://magiccards.info/scans/en/an/28.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/131.jpg
 End

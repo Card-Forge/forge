@@ -6,4 +6,5 @@ A:SP$Discard|Cost$B|ValidTgts$Player|NumCards$1|Mode$TgtChoose|SpellDescription$
 K:Flashback:3 B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skull_fracture.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/162.jpg
 End
