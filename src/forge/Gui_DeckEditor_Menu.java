@@ -22,7 +22,6 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import javax.swing.JFileChooser;
-//import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -52,29 +51,29 @@ interface DeckDisplay {
 }
 
 public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
-    private static final long serialVersionUID  = -4037993759604768755L;
+    private static final long    serialVersionUID  = -4037993759604768755L;
     
     //used by importConstructed() and exportConstructected()
-    private static File       previousDirectory = null;
+    private static File          previousDirectory = null;
     
 
-    private static final boolean     debugPrint        = false;
+    private static final boolean debugPrint        = false;
     
 //    private final DeckIO      deckIO            = new OldDeckIO(ForgeProps.getFile(DECKS));
 //    private final DeckIO      boosterDeckIO     = new OldDeckIO(ForgeProps.getFile(BOOSTER_DECKS));
-    private final DeckIO      deckIO            = new NewDeckIO(ForgeProps.getFile(NEW_DECKS));
+    private final DeckIO         deckIO            = new NewDeckIO(ForgeProps.getFile(NEW_DECKS));
     //with the new IO, there's no reason to use different instances
-    private final DeckIO      boosterDeckIO     = deckIO;
+    private final DeckIO         boosterDeckIO     = deckIO;
     
-    private boolean           isDeckSaved;
-    private String            currentDeckName;
-    private String            currentGameType;
+    private boolean              isDeckSaved;
+    private String               currentDeckName;
+    private String               currentGameType;
     
-    private JMenuItem         newDraftItem;
-    private DeckDisplay       deckDisplay;
+    private JMenuItem            newDraftItem;
+    private DeckDisplay          deckDisplay;
     
-    private Command           exitCommand;
-  
+    private Command              exitCommand;
+    
     
     public Gui_DeckEditor_Menu(DeckDisplay in_display, Command exit) {
         deckDisplay = in_display;
@@ -90,58 +89,58 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         setupSortMenu();
     }
     
-    private void setupFilterMenu(){
-    	JMenuItem filter = new JMenuItem("New filter");
-    	JMenuItem clearfilter = new JMenuItem("Clear filter");
-    	JMenu menu = new JMenu("Filter");
-    	menu.add(filter);
-    	menu.add(clearfilter);
-    	this.add(menu);
-    	
-    	 filter.addActionListener(new ActionListener() {
-             public void actionPerformed(ActionEvent ev) {
-            	 Gui_DeckEditor g = (Gui_DeckEditor) deckDisplay;            	         	 
-                 GUI_Filter filt = new GUI_Filter( g,deckDisplay);
-                 g.setEnabled(false);
-                 filt.setVisible(true);
-             }
-         });
-    	 clearfilter.addActionListener(new ActionListener() {
-             public void actionPerformed(ActionEvent ev) {
-            	          	 
-            	 CardList all = AllZone.CardFactory.getAllCards(); 
-            	 deckDisplay.updateDisplay(all, deckDisplay.getBottom()) ;
-            	 Gui_DeckEditor g = (Gui_DeckEditor) deckDisplay;
-            	 g.blackCheckBox.setSelected(true);
- 				 g.blackCheckBox.setEnabled(true);
- 				 g.blueCheckBox.setSelected(true);
-				 g.blueCheckBox.setEnabled(true);
-				 g.greenCheckBox.setSelected(true);
- 				 g.greenCheckBox.setEnabled(true);
- 				 g.redCheckBox.setSelected(true);
-				 g.redCheckBox.setEnabled(true);
-				 g.whiteCheckBox.setSelected(true);
- 				 g.whiteCheckBox.setEnabled(true);
- 				 g.colorlessCheckBox.setSelected(true);
-				 g.colorlessCheckBox.setEnabled(true);
-				 g.artifactCheckBox.setSelected(true);
- 				 g.artifactCheckBox.setEnabled(true);
- 				 g.creatureCheckBox.setSelected(true);
-				 g.creatureCheckBox.setEnabled(true);
-				 g.enchantmentCheckBox.setSelected(true);
- 				 g.enchantmentCheckBox.setEnabled(true);
- 				 g.instantCheckBox.setSelected(true);
-				 g.instantCheckBox.setEnabled(true);
-				 g.landCheckBox.setSelected(true);
- 				 g.landCheckBox.setEnabled(true);
- 				 g.planeswalkerCheckBox.setSelected(true);
-				 g.planeswalkerCheckBox.setEnabled(true);
-				 g.sorceryCheckBox.setSelected(true);
- 				 g.sorceryCheckBox.setEnabled(true);
-                 
-             }
-         });
-    	 
+    private void setupFilterMenu() {
+        JMenuItem filter = new JMenuItem("New filter");
+        JMenuItem clearfilter = new JMenuItem("Clear filter");
+        JMenu menu = new JMenu("Filter");
+        menu.add(filter);
+        menu.add(clearfilter);
+        this.add(menu);
+        
+        filter.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+                Gui_DeckEditor g = (Gui_DeckEditor) deckDisplay;
+                GUI_Filter filt = new GUI_Filter(g, deckDisplay);
+                g.setEnabled(false);
+                filt.setVisible(true);
+            }
+        });
+        clearfilter.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ev) {
+                
+                CardList all = AllZone.CardFactory.getAllCards();
+                deckDisplay.updateDisplay(all, deckDisplay.getBottom());
+                Gui_DeckEditor g = (Gui_DeckEditor) deckDisplay;
+                g.blackCheckBox.setSelected(true);
+                g.blackCheckBox.setEnabled(true);
+                g.blueCheckBox.setSelected(true);
+                g.blueCheckBox.setEnabled(true);
+                g.greenCheckBox.setSelected(true);
+                g.greenCheckBox.setEnabled(true);
+                g.redCheckBox.setSelected(true);
+                g.redCheckBox.setEnabled(true);
+                g.whiteCheckBox.setSelected(true);
+                g.whiteCheckBox.setEnabled(true);
+                g.colorlessCheckBox.setSelected(true);
+                g.colorlessCheckBox.setEnabled(true);
+                g.artifactCheckBox.setSelected(true);
+                g.artifactCheckBox.setEnabled(true);
+                g.creatureCheckBox.setSelected(true);
+                g.creatureCheckBox.setEnabled(true);
+                g.enchantmentCheckBox.setSelected(true);
+                g.enchantmentCheckBox.setEnabled(true);
+                g.instantCheckBox.setSelected(true);
+                g.instantCheckBox.setEnabled(true);
+                g.landCheckBox.setSelected(true);
+                g.landCheckBox.setEnabled(true);
+                g.planeswalkerCheckBox.setSelected(true);
+                g.planeswalkerCheckBox.setEnabled(true);
+                g.sorceryCheckBox.setSelected(true);
+                g.sorceryCheckBox.setEnabled(true);
+                
+            }
+        });
+        
     }
     
     
@@ -363,19 +362,19 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         
         return filter;
     }//getFileFilter()
-    private FileFilter dckFilter = new FileFilter(){
-
-		public boolean accept(File f) {
-			return f.getName().endsWith(".dck") || f.isDirectory();
-		}
-
-		public String getDescription() {
-			return "Simple Deck File .dck";
-		}
-    	
-    };
-
-
+    
+    private FileFilter dckFilter = new FileFilter() {
+                                     @Override
+                                     public boolean accept(File f) {
+                                         return f.getName().endsWith(".dck") || f.isDirectory();
+                                     }
+                                     
+                                     @Override
+                                     public String getDescription() {
+                                         return "Simple Deck File .dck";
+                                     }
+                                 };
+    
     
     private File getImportFilename() {
         JFileChooser chooser = new JFileChooser(previousDirectory);
@@ -409,22 +408,23 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         File file = getImportFilename();
         
         if(file == null) return;
-        else if (file.getName().endsWith(".dck"))
-        {
-        	try {
+        else if(file.getName().endsWith(".dck")) {
+            try {
                 FileChannel srcChannel = new FileInputStream(file).getChannel();
-                File dst =  new File(ForgeProps.getFile(NEW_DECKS).getAbsolutePath() + java.io.File.pathSeparator + (file.getName()));
-                if(!dst.createNewFile())
-                {
-                	JOptionPane.showMessageDialog(null, "Cannot import deck " + file.getName() + ", a deck currently has that name.");
+                File dst = new File(ForgeProps.getFile(NEW_DECKS).getAbsolutePath() + java.io.File.pathSeparator
+                        + (file.getName()));
+                if(!dst.createNewFile()) {
+                    JOptionPane.showMessageDialog(null, "Cannot import deck " + file.getName()
+                            + ", a deck currently has that name.");
                     return;
                 }
                 FileChannel dstChannel = new FileOutputStream(dst).getChannel();
                 dstChannel.transferFrom(srcChannel, 0, srcChannel.size());
                 srcChannel.close();
                 dstChannel.close();
-                JOptionPane.showMessageDialog(null, file.getName() + "imported succesfully. Restart the deck editor to see it.");
-            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, file.getName()
+                        + "imported succesfully. Restart the deck editor to see it.");
+            } catch(Exception ex) {
                 ErrorViewer.showError(ex);
                 throw new RuntimeException("Gui_DeckEditor_Menu : importDeck() error, " + ex);
             }
@@ -470,34 +470,37 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         
     }//importDeck()
     
-    private void downloadDeck(){
-    	
-    	Object o = JOptionPane.showInputDialog(null, "URL(only from http://magic.tcgplayer.com):", "Download Deck", JOptionPane.OK_CANCEL_OPTION);
-    	if(o==null )
-    	{
-    		return;
-    	} 
-    	String url = o.toString();
-    	   	
-    	if((url.length()<37)||(url.substring(0, 39).equalsIgnoreCase("http://magic.tcgplayer.com/db/deck.asp") ) )
-    	{
-    		 JOptionPane.showMessageDialog(null, "Bad URL." +"\n"+ "Support only deck from http://magic.tcgplayer.com"+ "\n"+ "Example: http://magic.tcgplayer.com/db/deck.asp?deck_id=474146", "Information", JOptionPane.INFORMATION_MESSAGE );
-    		 return;
-    	}
-    	Proxy p = null;
-    	p = Proxy.NO_PROXY;
-    	BufferedInputStream in;
+    private void downloadDeck() {
+        
+        Object o = JOptionPane.showInputDialog(null, "URL(only from http://magic.tcgplayer.com):",
+                "Download Deck", JOptionPane.OK_CANCEL_OPTION);
+        if(o == null) {
+            return;
+        }
+        String url = o.toString();
+        
+        if((url.length() < 37)
+                || (url.substring(0, 39).equalsIgnoreCase("http://magic.tcgplayer.com/db/deck.asp"))) {
+            JOptionPane.showMessageDialog(null, "Bad URL." + "\n"
+                    + "Support only deck from http://magic.tcgplayer.com" + "\n"
+                    + "Example: http://magic.tcgplayer.com/db/deck.asp?deck_id=474146", "Information",
+                    JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        Proxy p = null;
+        p = Proxy.NO_PROXY;
+        BufferedInputStream in;
         BufferedOutputStream out;
-    	try {
-    		byte[] buf = new byte[1024];
-    		int len;
-    		File f = new File("deck_temp.html"); 
+        try {
+            byte[] buf = new byte[1024];
+            int len;
+            File f = new File("deck_temp.html");
             in = new BufferedInputStream(new URL(url).openConnection(p).getInputStream());
             out = new BufferedOutputStream(new FileOutputStream(f));
-                      //while - read and write file
+            //while - read and write file
             while((len = in.read(buf)) != -1) {
-               out.write(buf, 0, len);
-             
+                out.write(buf, 0, len);
+                
             }//while - read and write file
             in.close();
             out.flush();
@@ -507,113 +510,107 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
             BufferedReader br = new BufferedReader(fr);
             String s = "";
             String z = "";
-            while((z=br.readLine())!=null){s=s+z;}
+            while((z = br.readLine()) != null) {
+                s = s + z;
+            }
             br.close();
             int start = s.indexOf("MAIN DECK");
             int finish = s.indexOf("SIDEBOARD");
             String rStr = "";
-            rStr = s.substring(start+9, finish);
+            rStr = s.substring(start + 9, finish);
             int first;
             int second;
-           while (rStr.indexOf("<")!=-1)
-           {
-            first = rStr.indexOf("<");
-            second = rStr.indexOf(">", first);
-            	if(first==0){
-            	rStr =rStr.substring(second+1);
-            	}else
-            	{
-            	rStr = rStr.substring(0, first)+" "+rStr.substring(second+1);
-            	}
-           }
-           first = rStr.indexOf("Creatures [");
-           second = rStr.indexOf("]", first);
-           if (first!=-1){
-        	   rStr = rStr.substring(0,first)+rStr.substring(second+1);
-           }
-           first = rStr.indexOf("Spells [");
-           second = rStr.indexOf("]", first);
-           if (first!=-1){
-        	   rStr = rStr.substring(0,first)+rStr.substring(second+1);
-           }
-           first = rStr.indexOf("Lands [");
-           second = rStr.indexOf("]", first);
-           if (first!=-1){
-        	   rStr = rStr.substring(0,first)+rStr.substring(second+1);
-           }
-           String number[] =new String[59];
-           String name[]=new String[59];
-           int count=0;
-           DownloadDeck download = new DownloadDeck();
-           while(rStr.length()!=0)
-           {
-        	   rStr=download.RemoveSpace(rStr);
-        	   number[count]=download.FoundNumberCard(rStr);
-        	   rStr=download.RemoveFoundNumberCard(rStr, number[count]);
-        	   rStr=download.RemoveSpace(rStr);
-        	   name[count]=download.FoundNameCard(rStr);
-        	   name[count]=download.RemoveSpaceBack(name[count]);
-        	   rStr=download.RemoveFoundNameCard(rStr, name[count]);
-        	   rStr=download.RemoveSpace(rStr);
-        	   count=count+1;
-           }
-           String trueName[]=new String[59];
-           String trueNumber[]=new String[59];
-           String falseName[]=new String[59];
-           int trueCount=0;
-           int falseCount=0;
-           for(int i=0;i<count;i++)
-           	{
-        	   if (download.IsCardSupport(name[i])==true)
-        	   {
-        		trueName[trueCount]=name[i];
-        		trueNumber[trueCount]=number[i];
-        		trueCount = trueCount+1;                         
-        	   }else
-        	   {
-        		falseName[falseCount]=name[i];
-           		falseCount = falseCount+1;    
-        	   }
-        	   
-           	}
-           
-           Card c = new Card();   
-           CardList trueList = new CardList();
-           for(int i=0;i<trueCount;i++)
-           {
-        	  for(int k=0; k<Integer.parseInt(trueNumber[i]);k++)
-        	  {
-        		  c=  download.GetCardDownload(c, trueName[i]);
-        		  trueList.add(c);
-        	  }
-        	   
-           }
-             
-           String FalseCards ="";
-           for(int i=0;i<falseCount;i++)
-           {
-        	   FalseCards = FalseCards +"\n" +falseName[i] +","; 
-           }
-           
-         
-           deckDisplay.updateDisplay(deckDisplay.getTop(), trueList);
-           
-           if(falseCount==0){
-        	   JOptionPane.showMessageDialog(null, "Deck downloads.", "Information", JOptionPane.INFORMATION_MESSAGE );   
-           }else
-           {
-        	   JOptionPane.showMessageDialog(null, "Sorry, cards:"+FalseCards+"\nnot supported in this version MTGForge. \nDeck downloads without this cards.", "Information", JOptionPane.INFORMATION_MESSAGE );   
-           }
+            while(rStr.indexOf("<") != -1) {
+                first = rStr.indexOf("<");
+                second = rStr.indexOf(">", first);
+                if(first == 0) {
+                    rStr = rStr.substring(second + 1);
+                } else {
+                    rStr = rStr.substring(0, first) + " " + rStr.substring(second + 1);
+                }
+            }
+            first = rStr.indexOf("Creatures [");
+            second = rStr.indexOf("]", first);
+            if(first != -1) {
+                rStr = rStr.substring(0, first) + rStr.substring(second + 1);
+            }
+            first = rStr.indexOf("Spells [");
+            second = rStr.indexOf("]", first);
+            if(first != -1) {
+                rStr = rStr.substring(0, first) + rStr.substring(second + 1);
+            }
+            first = rStr.indexOf("Lands [");
+            second = rStr.indexOf("]", first);
+            if(first != -1) {
+                rStr = rStr.substring(0, first) + rStr.substring(second + 1);
+            }
+            String number[] = new String[59];
+            String name[] = new String[59];
+            int count = 0;
+            DownloadDeck download = new DownloadDeck();
+            while(rStr.length() != 0) {
+                rStr = download.RemoveSpace(rStr);
+                number[count] = download.FoundNumberCard(rStr);
+                rStr = download.RemoveFoundNumberCard(rStr, number[count]);
+                rStr = download.RemoveSpace(rStr);
+                name[count] = download.FoundNameCard(rStr);
+                name[count] = download.RemoveSpaceBack(name[count]);
+                rStr = download.RemoveFoundNameCard(rStr, name[count]);
+                rStr = download.RemoveSpace(rStr);
+                count = count + 1;
+            }
+            String trueName[] = new String[59];
+            String trueNumber[] = new String[59];
+            String falseName[] = new String[59];
+            int trueCount = 0;
+            int falseCount = 0;
+            for(int i = 0; i < count; i++) {
+                if(download.IsCardSupport(name[i]) == true) {
+                    trueName[trueCount] = name[i];
+                    trueNumber[trueCount] = number[i];
+                    trueCount = trueCount + 1;
+                } else {
+                    falseName[falseCount] = name[i];
+                    falseCount = falseCount + 1;
+                }
+                
+            }
+            
+            Card c = new Card();
+            CardList trueList = new CardList();
+            for(int i = 0; i < trueCount; i++) {
+                for(int k = 0; k < Integer.parseInt(trueNumber[i]); k++) {
+                    c = download.GetCardDownload(c, trueName[i]);
+                    trueList.add(c);
+                }
+                
+            }
+            
+            String FalseCards = "";
+            for(int i = 0; i < falseCount; i++) {
+                FalseCards = FalseCards + "\n" + falseName[i] + ",";
+            }
+            
+
+            deckDisplay.updateDisplay(deckDisplay.getTop(), trueList);
+            
+            if(falseCount == 0) {
+                JOptionPane.showMessageDialog(null, "Deck downloads.", "Information",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Sorry, cards:" + FalseCards
+                        + "\nnot supported in this version MTGForge. \nDeck downloads without this cards.",
+                        "Information", JOptionPane.INFORMATION_MESSAGE);
+            }
             
             f.delete();
-
+            
         } catch(Exception ex) {
-            ErrorViewer.showError(ex, ForgeProps.getLocalized(ERRORS.OTHER), "deck_temp.html",
-                    url);
-          
+            ErrorViewer.showError(ex, ForgeProps.getLocalized(ERRORS.OTHER), "deck_temp.html", url);
+            
         }
-    	 
-                  
+        
+
     }
     
     
@@ -929,7 +926,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
 //      save();
         
         deckIO.close();
-      boosterDeckIO.close();
+        boosterDeckIO.close();
         exitCommand.execute();
     }//close
     
@@ -1134,7 +1131,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
                 try {
                     SwingUtilities.invokeLater(new Runnable() {
                         public void run() {
-                           downloadDeck();
+                            downloadDeck();
                         }
                     });
                 } catch(Exception ex) {
@@ -1143,7 +1140,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
                 }
             }
         });
-
+        
         newConstructed.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ev) {
                 try {

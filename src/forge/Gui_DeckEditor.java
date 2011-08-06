@@ -395,12 +395,10 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         }
     }
     
-    @Override
     public Card getCard() {
         return detail.getCard();
     }
     
-    @Override
     public void setCard(Card card) {
         detail.setCard(card);
         picture.setCard(card);

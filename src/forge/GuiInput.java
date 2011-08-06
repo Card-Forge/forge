@@ -1,39 +1,55 @@
-package forge;
-import java.util.*;
 
-public class GuiInput extends MyObservable implements Observer 
-{
+package forge;
+
+
+import java.util.Observable;
+import java.util.Observer;
+
+
+public class GuiInput extends MyObservable implements Observer {
     Input input;
     
-    public GuiInput()
-    {
-	AllZone.InputControl.addObserver(this);
-	AllZone.Stack.addObserver(this);
-	AllZone.Phase.addObserver(this);
-    }    
-    public void update(Observable observable, Object obj)
-    {
-	    Input tmp = AllZone.InputControl.getInput();
-	    if(tmp != null){
-	    	setInput(tmp);
-	    }
-    }        
-    private void setInput(Input in) 
-    {
-	input = in;
-	input.showMessage();
+    public GuiInput() {
+        AllZone.InputControl.addObserver(this);
+        AllZone.Stack.addObserver(this);
+        AllZone.Phase.addObserver(this);
     }
     
-    public void showMessage()           
-    {
-    	//if (input instanceof Input_PayManaCost)
-    	input.showMessage();
+    public void update(Observable observable, Object obj) {
+        Input tmp = AllZone.InputControl.getInput();
+        if(tmp != null) {
+            setInput(tmp);
+        }
     }
-    public void selectButtonOK()      {input.selectButtonOK();}
-    public void selectButtonCancel(){input.selectButtonCancel();}
     
-    public void selectPlayer(String player)                   {input.selectPlayer(player);}
-    public void selectCard(Card card, PlayerZone zone) {input.selectCard(card, zone);}
+    private void setInput(Input in) {
+        input = in;
+        input.showMessage();
+    }
     
-    public String toString(){return input.toString();}
+    public void showMessage() {
+        //if (input instanceof Input_PayManaCost)
+        input.showMessage();
+    }
+    
+    public void selectButtonOK() {
+        input.selectButtonOK();
+    }
+    
+    public void selectButtonCancel() {
+        input.selectButtonCancel();
+    }
+    
+    public void selectPlayer(String player) {
+        input.selectPlayer(player);
+    }
+    
+    public void selectCard(Card card, PlayerZone zone) {
+        input.selectCard(card, zone);
+    }
+    
+    @Override
+    public String toString() {
+        return input.toString();
+    }
 }

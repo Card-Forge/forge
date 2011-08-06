@@ -2,7 +2,6 @@
 package forge;
 
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -67,13 +66,10 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardContainer, DeckD
     private JButton           analysisButton       = new JButton();
     private JButton           changePictureButton  = new JButton();
     private JButton           removePictureButton  = new JButton();
-    private Border            border3;
-    private TitledBorder      titledBorder3;
     private JLabel            statsLabel           = new JLabel();
     private JTable            topTable             = new JTable();
     private JTable            bottomTable          = new JTable();
     private GridLayout        gridLayout1          = new GridLayout();
-    private BorderLayout      borderLayout1        = new BorderLayout();
     private JLabel            statsLabel2          = new JLabel();
     private JLabel            jLabel1              = new JLabel();
     
@@ -431,12 +427,10 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardContainer, DeckD
         }
     }
     
-    @Override
     public Card getCard() {
         return detail.getCard();
     }
     
-    @Override
     public void setCard(Card card) {
         detail.setCard(card);
         picture.setCard(card);
@@ -449,8 +443,6 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardContainer, DeckD
                 "All Cards");
         border2 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
         titledBorder2 = new TitledBorder(border2, "Deck");
-        border3 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
-        titledBorder3 = new TitledBorder(border3, "Card Detail");
         this.getContentPane().setLayout(null);
         jScrollPane1.setBorder(titledBorder1);
         jScrollPane1.setBounds(new Rectangle(19, 20, 726, 346));

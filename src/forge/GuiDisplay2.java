@@ -316,12 +316,10 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
         
     }//addListener()
     
-    @Override
     public Card getCard() {
         return detail.getCard();
     }
     
-    @Override
     public void setCard(Card card) {
         detail.setCard(card);
         picture.setCard(card);

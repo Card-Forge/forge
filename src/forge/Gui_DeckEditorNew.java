@@ -709,12 +709,10 @@ public class Gui_DeckEditorNew extends JFrame implements CardContainer, NewConst
         return show;
     }//getStats()
     
-    @Override
     public Card getCard() {
         return detail.getCard();
     }
     
-    @Override
     public void setCard(Card card) {
         detail.setCard(card);
         picture.setCard(card);

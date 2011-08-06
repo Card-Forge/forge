@@ -172,12 +172,10 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
         }
     }
     
-    @Override
     public Card getCard() {
         return detail.getCard();
     }
     
-    @Override
     public void setCard(Card card) {
         detail.setCard(card);
         picture.setCard(card);

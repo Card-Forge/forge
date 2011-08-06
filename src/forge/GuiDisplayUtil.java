@@ -5,7 +5,6 @@ package forge;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
@@ -16,6 +15,7 @@ import java.util.Comparator;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
+import javax.swing.event.MouseInputAdapter;
 
 import forge.gui.game.CardPanel;
 import forge.properties.NewConstants;
@@ -41,7 +41,7 @@ public class GuiDisplayUtil implements NewConstants {
      * Returns the listener that updates the card preview panel
      */
     public static MouseMotionListener getCardDetailMouse(final GuiDisplay2 visual) {
-        return new MouseAdapter() {
+        return new MouseInputAdapter() {
             @Override
             public void mouseMoved(MouseEvent me) {
                 JPanel panel = (JPanel) me.getSource();

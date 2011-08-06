@@ -429,12 +429,10 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
 
     }//addListener()
     
-    @Override
     public Card getCard() {
         return detail.getCard();
     }
     
-    @Override
     public void setCard(Card card) {
         detail.setCard(card);
         picture.setCard(card);
