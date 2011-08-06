@@ -22,4 +22,8 @@ public class Trigger_LifeGained extends Trigger {
 		return true;
 	}
 
+	@Override
+	public Trigger getCopy() {
+		return new Trigger_LifeGained(mapParams,hostCard);
+	}
 }

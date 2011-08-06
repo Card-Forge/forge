@@ -27,4 +27,8 @@ public class Trigger_Phase extends Trigger {
 		return true;
 	}
 
+	@Override
+	public Trigger getCopy() {
+		return new Trigger_Phase(mapParams,hostCard);
+	}
 }

@@ -21,4 +21,8 @@ public class Trigger_TurnFaceUp extends Trigger {
 		return true;
 	}
 
+	@Override
+	public Trigger getCopy() {
+		return new Trigger_TurnFaceUp(mapParams,hostCard);
+	}
 }

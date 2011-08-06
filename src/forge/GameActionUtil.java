@@ -6157,7 +6157,6 @@ public class GameActionUtil {
 		else if(c.getName().equals("Guul Draz Specter")) opponent_Discard(c, 1);
 		else if(c.getName().equals("Chilling Apparition")) opponent_Discard(c, 1);
 		else if(c.getName().equals("Sedraxis Specter")) opponent_Discard(c, 1);
-		else if(c.getName().equals("Blazing Specter")) opponent_Discard(c, 1);
 		else if(c.getName().equals("Headhunter")) opponent_Discard(c, 1);
 		else if(c.getName().equals("Riptide Pilferer")) opponent_Discard(c, 1);
 		else if(c.getName().equals("Shadowmage Infiltrator")) playerCombatDamage_Shadowmage_Infiltrator(c);

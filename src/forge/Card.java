@@ -177,7 +177,9 @@ public class Card extends MyObservable {
     
     public void addTrigger(Trigger t)
     {
-    	triggers.add(t);
+    	Trigger newtrig = t.getCopy();
+    	newtrig.setHostCard(this);
+    	triggers.add(newtrig);
     }
     
     public ArrayList<Trigger> getTriggers()
@@ -187,10 +189,11 @@ public class Card extends MyObservable {
     
     public void setTriggers(ArrayList<Trigger> trigs)
     {
-    	triggers = trigs;
-    	for(Trigger t : triggers)
+    	for(Trigger t : trigs)
     	{
-    		t.setHostCard(this);
+    		Trigger newtrig = t.getCopy();
+    		newtrig.setHostCard(this);
+    		triggers.add(newtrig);
     	}
     }
     

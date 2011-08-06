@@ -28,4 +28,8 @@ public class Trigger_Sacrificed extends Trigger {
 		return true;
 	}
 
+	@Override
+	public Trigger getCopy() {
+		return new Trigger_Sacrificed(mapParams,hostCard);
+	}
 }

@@ -24,4 +24,10 @@ public class Trigger_Untaps extends Trigger {
 		return true;
 	}
 
+	@Override
+	public Trigger getCopy() {
+		return new Trigger_Untaps(mapParams,hostCard);
+	}
+
+	
 }

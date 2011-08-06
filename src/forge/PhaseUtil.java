@@ -344,7 +344,6 @@ public class PhaseUtil {
     	HashMap<String,Object> runParams = new HashMap<String,Object>();
     	runParams.put("Phase", Constant.Phase.Draw);
     	runParams.put("Player", playerTurn);
-    	System.out.println("Calling runTrigger from PhaseUtil.handleDraw()");
     	AllZone.TriggerHandler.runTrigger("Phase", runParams);
     	
     	playerTurn.drawCard();

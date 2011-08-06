@@ -28,4 +28,8 @@ public class Trigger_AttackerBlocked extends Trigger {
 		return true;
 	}
 
+	@Override
+	public Trigger getCopy() {
+		return new Trigger_AttackerBlocked(mapParams,hostCard);
+	}
 }

@@ -21,4 +21,8 @@ public class Trigger_AttackerUnblocked extends Trigger {
 		return true;
 	}
 
+	@Override
+	public Trigger getCopy() {
+		return new Trigger_AttackerUnblocked(mapParams,hostCard);
+	}
 }

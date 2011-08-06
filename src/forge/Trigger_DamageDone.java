@@ -51,4 +51,8 @@ public class Trigger_DamageDone extends Trigger {
 		return true;
 	}
 
+	@Override
+	public Trigger getCopy() {
+		return new Trigger_DamageDone(mapParams,hostCard);
+	}
 }

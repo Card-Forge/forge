@@ -67,4 +67,8 @@ public class Trigger_SpellCast extends Trigger {
 		return true;
 	}
 
+	@Override
+	public Trigger getCopy() {
+		return new Trigger_SpellCast(mapParams,hostCard);
+	}
 }

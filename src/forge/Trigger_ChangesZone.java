@@ -45,4 +45,8 @@ public class Trigger_ChangesZone extends Trigger {
 		return true;
 	}
 
+	@Override
+	public Trigger getCopy() {
+		return new Trigger_ChangesZone(mapParams,hostCard);
+	}
 }

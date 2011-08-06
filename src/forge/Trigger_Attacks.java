@@ -41,4 +41,8 @@ public class Trigger_Attacks extends Trigger {
 		return true;
 	}
 
+	@Override
+	public Trigger getCopy() {
+		return new Trigger_Attacks(mapParams,hostCard);
+	}
 }

@@ -22,4 +22,8 @@ public class Trigger_LifeLost extends Trigger {
 		return true;
 	}
 
+	@Override
+	public Trigger getCopy() {
+		return new Trigger_LifeLost(mapParams,hostCard);
+	}
 }

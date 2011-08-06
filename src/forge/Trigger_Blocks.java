@@ -29,4 +29,8 @@ public class Trigger_Blocks extends Trigger {
 		return true;
 	}
 
+	@Override
+	public Trigger getCopy() {
+		return new Trigger_Blocks(mapParams,hostCard);
+	}
 }

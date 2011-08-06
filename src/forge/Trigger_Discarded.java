@@ -20,4 +20,8 @@ public class Trigger_Discarded extends Trigger {
 		return true;
 	}
 
+	@Override
+	public Trigger getCopy() {
+		return new Trigger_Discarded(mapParams,hostCard);
+	}
 }

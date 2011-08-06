@@ -24,4 +24,8 @@ public class Trigger_Taps extends Trigger {
 		return true;
 	}
 
+	@Override
+	public Trigger getCopy() {
+		return new Trigger_Taps(mapParams,hostCard);
+	}
 }

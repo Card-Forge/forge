@@ -33,7 +33,11 @@ public abstract class Trigger {
 	
 	public Trigger(HashMap<String,String> params, Card host)
 	{
-		mapParams = params;
+		mapParams = new HashMap<String,String>();
+		for(String key : params.keySet())
+		{
+			mapParams.put(key,params.get(key));
+		}
 		hostCard = host;
 	}
 	
@@ -181,4 +185,6 @@ public abstract class Trigger {
 	}
 	
 	public abstract boolean performTest(HashMap<String,Object> runParams);
+	
+	public abstract Trigger getCopy();
 }
