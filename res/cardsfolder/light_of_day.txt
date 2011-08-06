@@ -1,0 +1,9 @@
+Name:Light of Day
+ManaCost:3 W
+Types:Enchantment
+Text:no text
+K:stPumpAll:Creature.Black:0/0/HIDDEN CARDNAME can't attack or block.:No Condition:Black creatures can't attack or block.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/light_of_day.jpg
+End

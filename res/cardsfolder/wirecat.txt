@@ -1,0 +1,9 @@
+Name:Wirecat
+ManaCost:4
+Types:Artifact Creature Cat
+Text:no text
+PT:4/3
+K:stPumpSelf:Creature:0/0/HIDDEN CARDNAME can't attack or block.:isPresent Enchantment:Wirecat can't attack or block if an enchantment is on the battlefield.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wirecat.jpg
+End
