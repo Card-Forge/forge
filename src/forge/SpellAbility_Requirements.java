@@ -1,5 +1,7 @@
 package forge;
 
+import java.util.ArrayList;
+
 public class SpellAbility_Requirements {
 	private SpellAbility ability = null;
 	private Target_Selection select = null;
@@ -76,6 +78,22 @@ public class SpellAbility_Requirements {
 	}
 	
 	public void addAbilityToStack(){
+		// For older abilities that don't setStackDescription set it here
+		if (ability.getStackDescription().equals("")){
+			StringBuilder sb = new StringBuilder();
+			sb.append(ability.getSourceCard().getName());
+			if (ability.getTarget() != null){
+				ArrayList<Object> targets = ability.getTarget().getTargets();
+				if (targets.size() > 0){
+					sb.append(" - Targeting ");
+					for(Object o : targets)
+						sb.append(o.toString()).append(" ");
+				}
+			}
+	
+			ability.setStackDescription(sb.toString());
+		}
+		
 		ability.getRestrictions().abilityActivated();
 		if(ability.getRestrictions().getActivationNumberSacrifice() != -1 &&
 				ability.getRestrictions().getNumberTurnActivations() >= ability.getRestrictions().getActivationNumberSacrifice()) {
