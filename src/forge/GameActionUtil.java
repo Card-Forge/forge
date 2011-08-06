@@ -4040,18 +4040,16 @@ public class GameActionUtil {
 
 		Ability ability;
 		for(int i = 0; i < list.size(); i++) {
-			if(AllZoneUtil.getPlayerCardsInLibrary(player).size() <= 0) {
-				return;
-			}
-			
 			final Card F_card = list.get(i);
 			ability = new Ability(F_card, "0") {
 				@Override
 				public void resolve() {
-					PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
-					Card toMove = library.get(0);
-					AllZone.GameAction.moveToHand(toMove);
-					player.loseLife(toMove.getCMC(), F_card);
+					CardList lib = AllZoneUtil.getPlayerCardsInLibrary(player);
+					if(lib.size() > 0) {
+						Card toMove = lib.get(0);
+						AllZone.GameAction.moveToHand(toMove);
+						player.loseLife(toMove.getCMC(), F_card);
+					}
 				}// resolve()
 			};// Ability
 			
