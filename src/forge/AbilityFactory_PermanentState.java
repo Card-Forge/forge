@@ -1072,8 +1072,6 @@ public class AbilityFactory_PermanentState {
 		return true;
 	}
 	
-	//Phasing? Something else? Who knows!
-	
 	
 	// ****************************************
 	// ************** Tap or Untap ************
@@ -1161,7 +1159,7 @@ public class AbilityFactory_PermanentState {
 		return dbTapOrUntap;
 	}
 	
-	public static String tapOrUntapStackDescription(AbilityFactory af, SpellAbility sa){
+	private static String tapOrUntapStackDescription(AbilityFactory af, SpellAbility sa){
 		// when getStackDesc is called, just build exactly what is happening
 		 StringBuilder sb = new StringBuilder();
 		 
@@ -1190,7 +1188,7 @@ public class AbilityFactory_PermanentState {
 		 return sb.toString();
 	}
 	
-	public static boolean tapOrUntapCanPlayAI(final AbilityFactory af, SpellAbility sa){
+	private static boolean tapOrUntapCanPlayAI(final AbilityFactory af, SpellAbility sa){
 		// AI cannot use this properly until he can use SAs during Humans turn
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
@@ -1226,7 +1224,7 @@ public class AbilityFactory_PermanentState {
 		return randomReturn;
 	}
 	
-	public static boolean tapOrUntapTrigger(AbilityFactory af, SpellAbility sa, boolean mandatory){
+	private static boolean tapOrUntapTrigger(AbilityFactory af, SpellAbility sa, boolean mandatory){
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
 		
@@ -1254,7 +1252,7 @@ public class AbilityFactory_PermanentState {
 		return false;
 	}
 	
-	public static boolean tapOrUntapPlayDrawbackAI(final AbilityFactory af, SpellAbility sa){
+	private static boolean tapOrUntapPlayDrawbackAI(final AbilityFactory af, SpellAbility sa){
 		// AI cannot use this properly until he can use SAs during Humans turn
 		Target tgt = af.getAbTgt();
 		Card source = sa.getSourceCard();
@@ -1278,7 +1276,7 @@ public class AbilityFactory_PermanentState {
 		return randomReturn;
 	}
 	
-	public static void tapOrUntapResolve(final AbilityFactory af, final SpellAbility sa){
+	private static void tapOrUntapResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
 		Card card = sa.getSourceCard();
 		
@@ -1315,4 +1313,7 @@ public class AbilityFactory_PermanentState {
 	        }
 		}
 	}
-}
+	
+	//Phasing? Something else? Who knows!
+	
+}// end of AbilityFactory_PermanentState class
