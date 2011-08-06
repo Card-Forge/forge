@@ -5477,7 +5477,7 @@ public class CardFactory_Creatures {
             ability.setDescription(abCost+"Exile an Assassin card from your graveyard: Destroy target creature.");
         }//*************** END ************ END **************************
         
-        
+        /* Converteded to AF Trigger
         //*************** START *********** START **************************
         else if(cardName.equals("Mogg War Marshal") || cardName.equals("Goblin Marshal")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -5506,6 +5506,7 @@ public class CardFactory_Creatures {
             card.addDestroyCommand(intoPlayDestroy);
             
         }//*************** END ************ END **************************
+        */
         
         /* Converteded to AF Trigger
         //*************** START *********** START **************************
