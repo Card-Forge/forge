@@ -4890,8 +4890,7 @@ public class CardFactory implements NewConstants {
                                 }
                         });        
                     	if (NumDefense[0] < 0 && !list.isEmpty()) { // with spells that give -X/-X, compi will try to destroy a creature
-                            int defmalus = - getNumDefense();
-                    		list = CardListUtil.filterToughness(list, defmalus);
+                    		list = CardListUtil.filterToughness(list, - getNumDefense());
                     	} // -X/-X end
                     	if (!list.isEmpty()) {
                     		t = CardFactoryUtil.AI_getBestCreature(list);

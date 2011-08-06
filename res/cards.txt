@@ -1,3 +1,112 @@
+Afflict
+2 B
+Instant
+no text
+spPumpTgtCurse:-1/-1
+Draw a card.
+
+Bewilder
+2 U
+Instant
+no text
+spPumpTgtCurse:-3/-0
+Draw a card.
+SVar:RemAIDeck:True
+
+Constricting Tendrils
+U
+Instant
+no text
+spPumpTgtCurse:-3/-0
+Cycling:2
+SVar:RemAIDeck:True
+
+Darkblast
+B
+Instant
+no text
+spPumpTgtCurse:-1/-1
+Dredge 3
+
+Dizzy Spell
+U
+Instant
+no text
+spPumpTgtCurse:-3/-0
+Transmute:1 U U
+SVar:RemAIDeck:True
+
+Drag Down
+2 B
+Instant
+no text
+spPumpTgtCurse:-X/-X:Domain - Target creature gets -1/-1 until end of turn for each basic land type among lands you control.
+SVar:X:Count$Domain
+
+Feeding Frenzy
+2 B
+Instant
+no text
+spPumpTgtCurse:-X/-X:Target creature gets -X/-X until end of turn, where X is the number of Zombies on the battlefield.
+SVar:X:Count$NumType.Zombie
+SVar:RemAIDeck:True
+
+Fleeting Distraction
+U
+Instant
+no text
+spPumpTgtCurse:-1/-0
+Draw a card.
+
+Irradiate
+3 B
+Instant
+no text
+spPumpTgtCurse:-X/-X:Target creature gets -1/-1 until end of turn for each artifact you control.
+SVar:X:Count$NumTypeYouCtrl.Artifact
+SVar:RemAIDeck:True
+
+Last Gasp
+1 B
+Instant
+no text
+spPumpTgtCurse:-3/-3
+
+Lose Hope
+B
+Instant
+no text
+spPumpTgtCurse:-1/-1
+Scry 2
+
+Pull Under
+5 B
+Instant Arcane
+no text
+spPumpTgtCurse:-5/-5
+
+Shrink
+G
+Instant
+no text
+spPumpTgtCurse:-5/-0
+SVar:RemAIDeck:True
+
+Stabbing Pain
+B
+Instant
+no text
+spPumpTgtCurse:-1/-1:Drawback$TapTgt:Target creature gets -1/-1 until end of turn. Tap that creature.
+
+Disorient
+3 U
+Instant
+no text
+spPumpTgtCurse:-7/-0
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/disorient.jpg
+
 Reckless Assault
 2 B R
 Enchantment
@@ -7953,14 +8062,6 @@ Counter target spell. Draw a card.
 spCounter:Spell:None:Graveyard:My-Draw(1)
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dismiss.jpg
-
-Disorient
-3 U
-Instant
-no text
-spPumpTgt:-7/-0
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/disorient.jpg
 
 Dispel
 U
