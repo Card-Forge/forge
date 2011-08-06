@@ -19,7 +19,7 @@ import java.util.HashMap;
 //A:SP$Counter|Cost$1 G|Type$Ability|SpellDescription$Counter target activated ability.
 //A:AB$Counter|Cost$G G|Type$Spell|Destination$Graveyard|CounterValid$Color.Black|SpellDescription$Counter target black spell.
 
-public class AbilityFactory_Counter {
+public class AbilityFactory_CounterMagic {
 
 	private AbilityFactory af = null;
 	private HashMap<String,String> params = null;
@@ -30,7 +30,7 @@ public class AbilityFactory_Counter {
 
 	private final SpellAbility[] tgt = new SpellAbility[1];
 
-	public AbilityFactory_Counter(AbilityFactory newAF) {
+	public AbilityFactory_CounterMagic(AbilityFactory newAF) {
 		af = newAF;
 		params = af.getMapParams();
 		if (params.containsKey("Type")) {
@@ -144,7 +144,7 @@ public class AbilityFactory_Counter {
 				tgtSA.getSourceCard().getController().shuffle();
 			}
 			else {
-				throw new IllegalArgumentException("spCounter: Invalid Destination argument for card " + source.getName());
+				throw new IllegalArgumentException("AbilityFactory_CounterMagic: Invalid Destination argument for card " + source.getName());
 			}
 
 			for(int ea = 0; ea < splitExtraActions.length; ea++) {
@@ -294,7 +294,7 @@ public class AbilityFactory_Counter {
 					}
 				}
 				else {
-					throw new IllegalArgumentException("spCounter: Invalid Extra Action for card " + sa.getSourceCard().getName());
+					throw new IllegalArgumentException("AbilityFactory_CounterMagic: Invalid Extra Action for card " + sa.getSourceCard().getName());
 				}
 			}
 		}

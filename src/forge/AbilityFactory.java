@@ -368,7 +368,7 @@ public class AbilityFactory {
 		}
 		
 		if(API.equals("Counter")){
-			AbilityFactory_Counter c = new AbilityFactory_Counter(this);
+			AbilityFactory_CounterMagic c = new AbilityFactory_CounterMagic(this);
 			ComputerAI_counterSpells2.KeywordedCounterspells.add(hostC.getName());
 			
 			if(isAb)
