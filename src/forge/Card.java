@@ -3040,6 +3040,13 @@ public class Card extends MyObservable {
 				restDamage += restDamage;
 		}
     	
+    	if( AllZoneUtil.isCardInPlay("Fire Servant", source.getController()) && source.isRed() 
+    			&& (source.isInstant() || source.isSorcery())) {
+			int amount = AllZoneUtil.getPlayerCardsInPlay(source.getController(), "Fire Servant").size();
+			for (int i = 0; i < amount;i++)
+				restDamage += restDamage;
+		}
+    	
     	if( AllZoneUtil.isCardInPlay("Benevolent Unicorn") && source.isSpell() && isCreature() ) {
     		int amount = AllZoneUtil.getCardsInPlay("Benevolent Unicorn").size();
 			for (int i = 0; i < amount;i++)
@@ -3108,12 +3115,6 @@ public class Card extends MyObservable {
         
         addDamageAfterPrevention(damageToAdd,source);
         
-        //Run triggers
-        HashMap<String,Object> runParams = new HashMap<String,Object>();
-        runParams.put("DamageSource", source);
-        runParams.put("DamageTarget", this);
-        runParams.put("DamageAmount", damageToAdd);
-        AllZone.TriggerHandler.runTrigger("DamageDone", runParams);
     }
     
     public void addDamageWithoutPrevention(final int damageIn, final Card source) {
@@ -3140,6 +3141,13 @@ public class Card extends MyObservable {
         
         GameActionUtil.executeDamageDealingEffects(source, damageToAdd);
         
+        //Run triggers
+        HashMap<String,Object> runParams = new HashMap<String,Object>();
+        runParams.put("DamageSource", source);
+        runParams.put("DamageTarget", this);
+        runParams.put("DamageAmount", damageToAdd);
+        AllZone.TriggerHandler.runTrigger("DamageDone", runParams);
+        
         if(this.isPlaneswalker()) {
         	this.subtractCounter(Counters.LOYALTY, damageToAdd);
         	return;
@@ -3154,6 +3162,7 @@ public class Card extends MyObservable {
         if(AllZoneUtil.isCardInPlay(this) && !wither) damage += damageToAdd;
         
     }
+    
     private ArrayList<SetInfo> Sets = new ArrayList<SetInfo>();
     private String curSetCode = "";
     

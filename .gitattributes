@@ -1772,6 +1772,7 @@ res/cardsfolder/fire_elemental.txt -text svneol=native#text/plain
 res/cardsfolder/fire_field_ogre.txt -text svneol=native#text/plain
 res/cardsfolder/fire_imp.txt -text svneol=native#text/plain
 res/cardsfolder/fire_lit_thicket.txt -text svneol=native#text/plain
+res/cardsfolder/fire_servant.txt -text svneol=native#text/plain
 res/cardsfolder/fire_sprites.txt -text svneol=native#text/plain
 res/cardsfolder/fire_tempest.txt -text svneol=native#text/plain
 res/cardsfolder/fireball.txt -text svneol=native#text/plain

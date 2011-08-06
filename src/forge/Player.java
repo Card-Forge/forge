@@ -361,6 +361,13 @@ public abstract class Player extends MyObservable{
 				restDamage += restDamage;
 		}
     	
+    	if( AllZoneUtil.isCardInPlay("Fire Servant", source.getController()) && source.isRed() 
+    			&& (source.isInstant() || source.isSorcery())) {
+			int amount = AllZoneUtil.getPlayerCardsInPlay(source.getController(), "Fire Servant").size();
+			for (int i = 0; i < amount;i++)
+				restDamage += restDamage;
+		}
+    	
     	if( AllZoneUtil.isCardInPlay("Benevolent Unicorn") && source.isSpell()) {
     		int amount = AllZoneUtil.getCardsInPlay("Benevolent Unicorn").size();
 			for (int i = 0; i < amount;i++)
