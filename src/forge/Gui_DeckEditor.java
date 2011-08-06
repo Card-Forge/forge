@@ -618,7 +618,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         });
         /*CHOPPIC*/
         
-        if (!Gui_NewGame.useLAFFonts.isSelected()) addButton.setFont(new java.awt.Font("Dialog", 0, 13));
+        if (!Gui_NewGame.useLAFFonts.isSelected()) filterButton.setFont(new java.awt.Font("Dialog", 0, 13));
         
         clearFilterButton.setText("Clear Filter");
         clearFilterButton.addActionListener(new java.awt.event.ActionListener() {
@@ -626,7 +626,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
             	clearFilterButton_actionPerformed(e);
             }
         });
-        if(!Gui_NewGame.useLAFFonts.isSelected()) filterButton.setFont(new java.awt.Font("Dialog", 0, 13));
+        if(!Gui_NewGame.useLAFFonts.isSelected()) clearFilterButton.setFont(new java.awt.Font("Dialog", 0, 13));
         
         analysisButton.setText("Deck Analysis");
         analysisButton.addActionListener(new java.awt.event.ActionListener() {
@@ -715,6 +715,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         this.getContentPane().add(colorlessCheckBox, "grow");
 
         this.getContentPane().add(filterButton, "wmin 100, hmin 25, wmax 140, hmax 25, grow");
+        this.getContentPane().add(clearFilterButton, "wmin 100, hmin 25, wmax 140, hmax 25, grow");
         
         this.getContentPane().add(jScrollPane1, "cell 0 2 1 2, pushy, grow");
         // this.getContentPane().add(detail, "w 239, h 323, grow, flowy, wrap");
