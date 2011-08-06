@@ -3,7 +3,7 @@ ManaCost:3 G
 Types:Creature Elf Druid
 Text:no text
 PT:2/2
-A:AB$Untap | Cost$ T | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select target land | ValidTgts$ Land | SpellDescription$ Untap two target lands.
+A:AB$Untap | Cost$ T | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Untap two target lands.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/argothian_elder.jpg
