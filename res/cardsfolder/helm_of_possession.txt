@@ -1,0 +1,9 @@
+Name:Helm of Possession
+ManaCost:4
+Types:Artifact
+Text:no text
+K:You may choose not to untap CARDNAME during your untap step.
+A:AB$GainControl|Cost$2 T Sac<1/Creature>|Tgt$TgtC|LoseControl$Untap,LeavesPlay,LoseControl|SpellDescription$Gain control of target creature for as long as you control CARDNAME and CARDNAME remains tapped.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/helm_of_possession.jpg
+End
