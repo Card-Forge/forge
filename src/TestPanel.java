@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import forge.error.ErrorViewer;
+
 
 public class TestPanel extends JFrame {
     /**

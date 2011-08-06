@@ -80,7 +80,6 @@ src/DeckIO.java svneol=native#text/plain
 src/DefaultPlayerZone.java svneol=native#text/plain
 src/Display.java svneol=native#text/plain
 src/EndOfTurn.java svneol=native#text/plain
-src/ErrorViewer.java svneol=native#text/plain
 src/ExternalPanel.java svneol=native#text/plain
 src/FileUtil.java -text svneol=native#text/plain
 src/GameAction.java svneol=native#text/plain

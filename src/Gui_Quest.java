@@ -20,6 +20,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import forge.error.ErrorViewer;
+
 
 //presumes AllZone.QuestData is not null
 //AllZone.QuestData should be set by Gui_QuestOptions
@@ -99,8 +101,7 @@ public class Gui_Quest extends JFrame {
         for(int i = 0; i < list.size(); i++)
             deckComboBox.addItem(list.get(i));
         
-        if(Constant.Runtime.HumanDeck[0] != null)
-            deckComboBox.setSelectedItem(Constant.Runtime.HumanDeck[0].getName());
+        if(Constant.Runtime.HumanDeck[0] != null) deckComboBox.setSelectedItem(Constant.Runtime.HumanDeck[0].getName());
     }//setup()
     
     private void jbInit() throws Exception {

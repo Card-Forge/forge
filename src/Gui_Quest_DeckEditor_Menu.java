@@ -18,6 +18,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.filechooser.FileFilter;
 
+import forge.error.ErrorViewer;
+
 
 //presumes AllZone.QuestData is not null
 public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
@@ -391,9 +393,8 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
                 if(name.equals("")) return;
                 
                 //is the current deck already saved and in QuestData?
-                if(questData.ai_getDeckNames().contains(currentDeck.getName()))
-                    questData.ai_removeDeck(currentDeck.getName());//remove old deck
-                    
+                if(questData.ai_getDeckNames().contains(currentDeck.getName())) questData.ai_removeDeck(currentDeck.getName());//remove old deck
+                
                 currentDeck.setName(name);
                 
                 Deck deck = convertCardListToDeck(deckDisplay.getBottom());
@@ -454,7 +455,7 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
                 int check = JOptionPane.showConfirmDialog(null, "Do you really want to delete this deck?",
                         "Delete", JOptionPane.YES_NO_OPTION);
                 if(check == JOptionPane.NO_OPTION) return;//stop here
-                    
+                
                 questData.ai_removeDeck(currentDeck.getName());
                 
                 //show card pool
@@ -557,9 +558,8 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
                 if(name.equals("")) return;
                 
                 //is the current deck already saved and in QuestData?
-                if(questData.getDeckNames().contains(currentDeck.getName()))
-                    questData.removeDeck(currentDeck.getName());//remove old deck
-                    
+                if(questData.getDeckNames().contains(currentDeck.getName())) questData.removeDeck(currentDeck.getName());//remove old deck
+                
                 currentDeck.setName(name);
                 
                 Deck deck = convertCardListToDeck(deckDisplay.getBottom());
@@ -620,7 +620,7 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
                 int check = JOptionPane.showConfirmDialog(null, "Do you really want to delete this deck?",
                         "Delete", JOptionPane.YES_NO_OPTION);
                 if(check == JOptionPane.NO_OPTION) return;//stop here
-                    
+                
                 questData.removeDeck(currentDeck.getName());
                 
                 //show card pool

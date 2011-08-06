@@ -13,6 +13,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import forge.error.ErrorViewer;
+
 
 public class Gui_SetEditor extends JFrame {
     private static final long serialVersionUID = 519896860030378941L;

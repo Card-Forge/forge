@@ -14,6 +14,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import forge.error.ErrorViewer;
+
 
 public class Gui_WinLose extends JFrame {
     private static final long serialVersionUID = -5800412940994975483L;

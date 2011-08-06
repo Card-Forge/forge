@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import forge.error.ErrorViewer;
+
 
 public class IO {
     private final File                file;

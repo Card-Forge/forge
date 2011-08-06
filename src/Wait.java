@@ -1,3 +1,6 @@
+import forge.error.ErrorViewer;
+
+
 public class Wait {
     public static void delay() {
         try {

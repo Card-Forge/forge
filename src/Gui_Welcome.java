@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 
+import forge.error.ErrorViewer;
+
 
 public class Gui_Welcome extends JFrame {
     private static final long serialVersionUID = -7355345901761929563L;

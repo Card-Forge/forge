@@ -1,3 +1,6 @@
+import forge.error.ErrorViewer;
+
+
 abstract public class Spell extends SpellAbility implements java.io.Serializable, Cloneable {
     
     private static final long serialVersionUID = -7930920571482203460L;

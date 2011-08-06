@@ -147,9 +147,9 @@ public class ListChooser<T> {
      */
     public synchronized boolean show() {
         if(called) throw new IllegalStateException("Already shown");
-        int value;
+        Integer value;
         do {
-            d = p.createDialog(p.getParent(),title);
+            d = p.createDialog(p.getParent(), title);
             if(minChoices != 0) d.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             jList.setSelectedIndex(0);
             d.setVisible(true);
@@ -217,7 +217,7 @@ public class ListChooser<T> {
             }
             
             @SuppressWarnings("unchecked")
-			@Override
+            @Override
             public T get(int index) {
                 return (T) selected[index];
             }
@@ -236,7 +236,7 @@ public class ListChooser<T> {
      * Returns the (first) selected value, or null
      */
     @SuppressWarnings("unchecked")
-	public T getSelectedValue() {
+    public T getSelectedValue() {
         if(!called) throw new IllegalStateException("not yet shown");
         return (T) jList.getSelectedValue();
     }
@@ -246,37 +246,37 @@ public class ListChooser<T> {
     }
     
     private class ChooserListModel extends AbstractListModel {
-
-		private static final long serialVersionUID = 3871965346333840556L;
-
+        
+        private static final long serialVersionUID = 3871965346333840556L;
+        
         public int getSize() {
             return list.size();
         }
         
-
+        
         public Object getElementAt(int index) {
             return list.get(index);
         }
     }
     
     private class CloseAction extends AbstractAction {
-
-		private static final long serialVersionUID = -8426767786083886936L;
-		private int value;
+        
+        private static final long serialVersionUID = -8426767786083886936L;
+        private int               value;
         
         public CloseAction(int value, String label) {
             super(label);
             this.value = value;
         }
         
-
+        
         public void actionPerformed(ActionEvent e) {
             p.setValue(value);
         }
     }
     
     private class SelListener implements ListSelectionListener {
-
+        
         public void valueChanged(ListSelectionEvent e) {
             int num = jList.getSelectedIndices().length;
             ok.setEnabled(num >= minChoices && num <= maxChoices);

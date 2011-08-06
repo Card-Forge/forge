@@ -1,6 +1,8 @@
 //import java.util.*;
 import javax.swing.SwingUtilities;
 
+import forge.error.ErrorViewer;
+
 
 public class ComputerAI_Burn2 implements Computer {
     private volatile boolean playLand = true;
@@ -78,9 +80,8 @@ public class ComputerAI_Burn2 implements Computer {
         AllZone.Phase.setNeedToNextPhase(true);
     }
     
-    public void declare_attackers_before()
-    {
-    	 AllZone.Phase.setNeedToNextPhase(true);
+    public void declare_attackers_before() {
+        AllZone.Phase.setNeedToNextPhase(true);
     }
     
     public void declare_attackers() {
@@ -160,8 +161,8 @@ public class ComputerAI_Burn2 implements Computer {
         for(int i = 0; i < 17; i++)
             library.add(cf.getCard("Mountain", Constant.Player.Computer));
         
-        if(library.size() != 40)
-            throw new RuntimeException("ComputerAI_Burn : getLibrary() error, library size is " + library.size());
+        if(library.size() != 40) throw new RuntimeException(
+                "ComputerAI_Burn : getLibrary() error, library size is " + library.size());
         
         return library.toArray();
     }

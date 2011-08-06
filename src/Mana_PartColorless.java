@@ -1,3 +1,6 @@
+import forge.error.ErrorViewer;
+
+
 public class Mana_PartColorless extends Mana_Part {
     private int manaNeeded;
     
@@ -29,9 +32,9 @@ public class Mana_PartColorless extends Mana_Part {
     @Override
     public void reduce(String mana) {
         //if mana is needed, then this mana cost is all paid up
-        if(!isNeeded(mana))
-            throw new RuntimeException("Mana_PartColorless : reduce() error, argument mana not needed, mana - "
-                    + mana + ", toString() - " + toString());
+        if(!isNeeded(mana)) throw new RuntimeException(
+                "Mana_PartColorless : reduce() error, argument mana not needed, mana - " + mana
+                        + ", toString() - " + toString());
         
         manaNeeded--;
     }

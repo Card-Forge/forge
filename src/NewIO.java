@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.io.WriteAbortedException;
 import java.util.HashMap;
 
+import forge.error.ErrorViewer;
+
 
 public class NewIO {
     private HashMap<String, Serializable> map = new HashMap<String, Serializable>();

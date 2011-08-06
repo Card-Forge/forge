@@ -1,3 +1,4 @@
+
 package forge.error;
 
 
@@ -28,7 +29,6 @@ import javax.swing.KeyStroke;
 
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-
 
 
 /**
@@ -102,7 +102,7 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
     
     private static void showDialog(String fullMessage) {
         JTextArea area = new JTextArea(fullMessage, 40, 90);
-        area.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 10));
+        area.setFont(new Font("Monospaced", Font.PLAIN, 10));
         area.setEditable(false);
         area.setLineWrap(true);
         area.setWrapStyleWord(true);
@@ -113,7 +113,7 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
                 new JButton(new ExitAction())};
         JOptionPane pane = new JOptionPane(new JScrollPane(area), ERROR_MESSAGE, DEFAULT_OPTION, null, options,
                 options[1]);
-        JDialog dlg = pane.createDialog(ForgeProps.getLocalized(TITLE));
+        JDialog dlg = pane.createDialog(null, ForgeProps.getLocalized(TITLE));
         dlg.setResizable(true);
         dlg.setVisible(true);
         dlg.dispose();
@@ -150,10 +150,10 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
     }
     
     private static class SaveAction extends AbstractAction {
-
-		private static final long serialVersionUID = 9146834661273525959L;
-
-		private static JFileChooser c;
+        
+        private static final long   serialVersionUID = 9146834661273525959L;
+        
+        private static JFileChooser c;
         
         private JTextArea           area;
         
@@ -187,27 +187,27 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
     }
     
     private static class ExitAction extends AbstractAction {
-
-		private static final long serialVersionUID = 276202595758381626L;
-
-		public ExitAction() {
+        
+        private static final long serialVersionUID = 276202595758381626L;
+        
+        public ExitAction() {
             super(ForgeProps.getLocalized(BUTTON_EXIT));
         }
         
-
+        
         public void actionPerformed(ActionEvent e) {
             System.exit(0);
         }
     }
     
     private static class ShowAllThreadsAction extends AbstractAction {
-
-		private static final long serialVersionUID = 5638147106706803363L;
-
-		public ShowAllThreadsAction() {
+        
+        private static final long serialVersionUID = 5638147106706803363L;
+        
+        public ShowAllThreadsAction() {
             super(ForgeProps.getLocalized(SHOW_ERROR));
         }
-
+        
         public void actionPerformed(ActionEvent e) {
             showErrorAllThreads(ForgeProps.getLocalized(ERRORS.SHOW_MESSAGE));
         }
