@@ -1,8 +1,9 @@
 Name:Broodwarden
 ManaCost:3 G G
 Types:Creature Eldrazi Drone
-Text:Eldrazi Spawn creatures you control get +2/+1.
+Text:no text
 PT:4/4
+K:stPumpAll:Creature.Eldrazi+Spawn+YouCtrl:2/1:No Condition:Eldrazi Spawn creatures you control get +2/+1.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/broodwarden.jpg

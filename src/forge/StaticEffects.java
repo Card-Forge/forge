@@ -29,7 +29,6 @@ public class StaticEffects
 		cardToEffectsList.put("Beastbreaker of Bala Ged", new String[] {"Beastbreaker_of_Bala_Ged"});
 		//cardToEffectsList.put("Bloodghast", new String[] {"Bloodghast"});
 		//cardToEffectsList.put("Broodstar", new String[] {"Master_of_Etherium"});
-		cardToEffectsList.put("Broodwarden", new String[] {"Broodwarden"});
 		
 		//cardToEffectsList.put("Cantivore", new String[] {"Cantivore"});
 		cardToEffectsList.put("Caravan Escort", new String[] {"Caravan_Escort"});
