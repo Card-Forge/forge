@@ -1,3 +1,117 @@
+Binding Grasp
+3 U
+Enchantment Aura
+You control enchanted creature. Enchanted creature gets +0/+1.
+Enchant creature
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:1 U
+enControlCreature
+enPump:+0/+1
+
+Child of Gaea
+3 G G G
+Creature Elemental
+no text
+7/7
+Trample
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:G G
+
+Drifter il-Dal
+U
+Creature Human Wizard
+no text
+2/1
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:U
+Shadow
+
+Drifting Djinn
+4 U U
+Creature Djinn
+no text
+5/5
+Flying
+Cycling:2
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:1 U
+
+Hungry Mist
+2 G G
+Creature Elemental
+no text
+6/2
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:G G
+
+Junun Efreet
+1 B B
+Creature Efreet
+no text
+3/3
+Flying
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:B B
+
+Kami of the Tended Garden
+3 G
+Creature Spirit
+no text
+4/4
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:G
+Soulshift:3
+
+Krosan Cloudscraper
+7 G G G
+Creature Beast Mutant
+no text
+13/13
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:G G
+Morph:7 G G
+
+Melancholy
+2 B
+Enchantment Aura
+Enchanted creature doesn't untap during its controller's untap step.
+Enchant creature
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:B
+When CARDNAME enters the battlefield, tap enchanted creature.
+
+Nicol Bolas
+2 U U B B R R
+Legendary Creature Elder Dragon
+Whenever Nicol Bolas deals damage to an opponent, that player discards his or her hand.
+7/7
+Flying
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:U B R
+
+Palladia-Mors
+2 W W R R G G
+Legendary Creature Elder Dragon
+no text
+7/7
+Flying
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:R G W
+
+Stasis
+1 U
+Enchantment
+Players skip their untap steps.
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:U
+
+Thirst
+2 U
+Enchantment Aura
+Enchanted creature doesn't untap during its controller's untap step.
+Enchant creature
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:U
+When CARDNAME enters the battlefield, tap enchanted creature.
+
+Vaevictis Asmadi
+2 B B R R G G
+Legendary Creature Elder Dragon
+no text
+7/7
+Flying
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:B R G
+abPump B:+1/+0
+abPump R:+1/+0
+abPump G:+1/+0
+
 Sejiri Steppe
 no cost
 Land
@@ -1480,15 +1594,6 @@ no text
 2/4
 Rampage 2
 
-Binding Grasp
-3 U
-Enchantment Aura
-You control enchanted creature. Enchanted creature gets +0/+1.
-Enchant creature
-At the beginning of your upkeep, sacrifice Binding Grasp unless you pay:1 U
-enControlCreature
-enPump:+0/+1
-
 Control Magic
 2 U U
 Enchantment Aura
@@ -2213,14 +2318,6 @@ LEVEL 1-2 3/3 LEVEL 3+ 5/5 CARDNAME can't be blocked except by black creatures.
 Level up:4
 maxLevel:3
 
-Melancholy
-2 B
-Enchantment Aura
-Enchanted creature doesn't untap during its controller's untap step.
-Enchant creature
-At the beginning of your upkeep, sacrifice Melancholy unless you pay:B
-When CARDNAME enters the battlefield, tap enchanted creature.
-
 Mystic Restraints
 2 U U
 Enchantment Aura
@@ -2234,14 +2331,6 @@ Roots
 Enchantment Aura
 Enchanted creature doesn't untap during its controller's untap step.
 Enchant creature without flying
-When CARDNAME enters the battlefield, tap enchanted creature.
-
-Thirst
-2 U
-Enchantment Aura
-Enchanted creature doesn't untap during its controller's untap step.
-Enchant creature
-At the beginning of your upkeep, sacrifice Thirst unless you pay:U
 When CARDNAME enters the battlefield, tap enchanted creature.
 
 Death Cultist
@@ -3569,14 +3658,6 @@ Imperiosaur
 Creature Lizard
 (NOTE: "Spend only mana produced by basic lands to play Imperiosaur." is not implemented.)
 5/5
-
-Junun Efreet
-1 B B
-Creature Efreet
-no text
-3/3
-Flying
-At the beginning of your upkeep, sacrifice Junun Efreet unless you pay:B B
 
 Diamond Valley
 no cost
@@ -5880,12 +5961,6 @@ Gush
 Instant
 no text
 
-Stasis
-1 U
-Enchantment
-Players skip their untap steps.
-At the beginning of your upkeep, sacrifice Stasis unless you pay:U
-
 Cosmic Horror
 3 B B B
 Creature Horror
@@ -5901,37 +5976,6 @@ no text
 8/8
 Trample
 At the beginning of your upkeep, CARDNAME deals 8 damage to you unless you pay:G G G G
-
-Krosan Cloudscraper
-7 G G G
-Creature Beast Mutant
-no text
-13/13
-At the beginning of your upkeep, sacrifice Krosan Cloudscraper unless you pay:G G
-Morph:7 G G
-
-Kami of the Tended Garden
-3 G
-Creature Spirit
-no text
-4/4
-At the beginning of your upkeep, sacrifice Kami of the Tended Garden unless you pay:G
-Soulshift:3
-
-Hungry Mist
-2 G G
-Creature Elemental
-no text
-6/2
-At the beginning of your upkeep, sacrifice Hungry Mist unless you pay:G G
-
-Child of Gaea
-3 G G G
-Creature Elemental
-no text
-7/7
-Trample
-At the beginning of your upkeep, sacrifice Child of Gaea unless you pay:G G
 
 Burning Fields
 4 R
@@ -6073,23 +6117,6 @@ Enchantment
 When Illusions of Grandeur enters the battlefield, you gain 20 life. When Illusions of Grandeur leaves the battlefield, you lose 20 life.
 Cumulative upkeep:2
 
-Drifting Djinn
-4 U U
-Creature Djinn
-no text
-5/5
-Flying
-Cycling:2
-At the beginning of your upkeep, sacrifice Drifting Djinn unless you pay:1 U
-
-Drifter il-Dal
-U
-Creature Human Wizard
-no text
-2/1
-At the beginning of your upkeep, sacrifice Drifter il-Dal unless you pay:U
-Shadow
-
 Karmic Guide
 3 W W 
 Creature Angel Spirit
@@ -6122,33 +6149,6 @@ Creature Human Rogue
 When Keldon Vandals enters the battlefield, destroy target artifact.
 4/1
 Echo:2 R
-
-Vaevictis Asmadi
-2 B B R R G G
-Legendary Creature Elder Dragon
-no text
-7/7
-Flying
-At the beginning of your upkeep, sacrifice Vaevictis Asmadi unless you pay:B R G
-abPump B:+1/+0
-abPump R:+1/+0
-abPump G:+1/+0
-
-Palladia-Mors
-2 W W R R G G
-Legendary Creature Elder Dragon
-no text
-7/7
-Flying
-At the beginning of your upkeep, sacrifice Palladia-Mors unless you pay:R G W
-
-Nicol Bolas
-2 U U B B R R
-Legendary Creature Elder Dragon
-Whenever Nicol Bolas deals damage to an opponent, that player discards his or her hand.
-7/7
-Flying
-At the beginning of your upkeep, sacrifice Nicol Bolas unless you pay:U B R
 
 Goblin Patrol
 R
