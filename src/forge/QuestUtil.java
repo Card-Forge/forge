@@ -123,6 +123,7 @@ public class QuestUtil {
         c.setOwner(Constant.Player.Human);
         
         c.setManaCost("G");
+        c.addColor("G");
         c.setToken(true);
 
         c.addType("Creature");
@@ -203,6 +204,7 @@ public class QuestUtil {
         c.setOwner(Constant.Player.Human);
         
         c.setManaCost("G");
+        c.addColor("G");
         c.setToken(true);
 
         c.addType("Creature");
@@ -259,6 +261,7 @@ public class QuestUtil {
         c.setOwner(Constant.Player.Human);
         
         c.setManaCost("B");
+        c.addColor("B");
         c.setToken(true);
 
         c.addType("Creature");
@@ -315,6 +318,7 @@ public class QuestUtil {
         c.setOwner(Constant.Player.Human);
         
         c.setManaCost("W");
+        c.addColor("W");
         c.setToken(true);
 
         c.addType("Creature");
@@ -373,6 +377,7 @@ public class QuestUtil {
         c.setOwner(Constant.Player.Human);
         
         c.setManaCost("R");
+        c.addColor("R");
         c.setToken(true);
 
         c.addType("Creature");
@@ -494,6 +499,7 @@ public class QuestUtil {
 		        c.setOwner(Constant.Player.Human);
 		        
 		        c.setManaCost("G");
+		        c.addColor("G");
 		        c.setToken(true);
 		        
 		        c.addType("Creature");
@@ -539,6 +545,7 @@ public class QuestUtil {
 		        c.setOwner(Constant.Player.Human);
 		        
 		        c.setManaCost("W");
+		        c.addColor("W");
 		        c.setToken(true);
 		        
 		        c.addType("Creature");
@@ -585,6 +592,7 @@ public class QuestUtil {
 		        c.setOwner(Constant.Player.Human);
 		        
 		        c.setManaCost("W");
+		        c.addColor("W");
 		        c.setToken(true);
 		        
 		        c.addType("Creature");
