@@ -4,7 +4,7 @@ Types:Creature Human Soldier
 Text:no text
 PT:0/3
 K:Defender
-K:StaticEffect:Play:Permanents you Control:PTBonus/0/2:Type.Creature!with.Defender!NotSelf:Other creatures you control with defender get +0/+2.
+K:stPumpAll:Creature.withDefender+Other+YouCtrl:0/2:No Condition:Other creatures you control with defender get +0/+2.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stalwart_shield_bearers.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/46.jpg
