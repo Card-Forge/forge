@@ -142,6 +142,7 @@ public class TriggerHandler {
 	
 	public void runTrigger(String mode,HashMap<String,Object> runParams)
 	{
+		System.out.println("Running: " + mode);
 		//AP
 		for(Trigger regtrig : registeredTriggers)
 		{

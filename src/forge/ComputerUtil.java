@@ -575,8 +575,9 @@ public class ComputerUtil
   
   static public void playLand(Card land, PlayerZone zone)
   {
-	    zone.remove(land);
-	    AllZone.Computer_Battlefield.add(land);
+	    AllZone.GameAction.moveToPlay(land);
+	    /*zone.remove(land);
+	    AllZone.Computer_Battlefield.add(land);*/
 	    CardFactoryUtil.playLandEffects(land);
 	    AllZone.GameInfo.incrementComputerPlayedLands();
   }

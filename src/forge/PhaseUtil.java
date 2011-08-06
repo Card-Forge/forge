@@ -383,20 +383,6 @@ public class PhaseUtil {
         	boolean last = (i == size-1);
             CombatUtil.checkPropagandaEffects(c, last);
         }
-        
-        //Run triggers
-        HashMap<String,Object> runParams = new HashMap<String,Object>();
-        runParams.put("Side", "Attacker");
-        CardList otherAttackers = new CardList();
-        for(int i=0;i< list.size();i++)
-        {        	
-        	otherAttackers.clear();
-        	otherAttackers.add(list);
-        	otherAttackers.remove(list.get(i));
-        	runParams.put("Attacker", list.get(i));
-        	runParams.put("OtherAttackers", otherAttackers);
-        	AllZone.TriggerHandler.runTrigger("Attacks", runParams);
-        }
 	}
 	
 	public static void handleAttackingTriggers(){
