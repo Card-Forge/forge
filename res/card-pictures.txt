@@ -18,6 +18,12 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+windborn_muse.jpg		http://www.wizards.com/global/images/magic/general/windborn_muse.jpg
+ghostly_prison.jpg		http://www.wizards.com/global/images/magic/general/ghostly_prison.jpg
+propaganda.jpg		http://www.wizards.com/global/images/magic/general/propaganda.jpg
+peacekeeper.jpg		http://www.wizards.com/global/images/magic/general/peacekeeper.jpg
+arctic_nishoba.jpg		http://www.wizards.com/global/images/magic/general/arctic_nishoba.jpg
+marsh_viper.jpg		http://www.wizards.com/global/images/magic/general/marsh_viper.jpg
 force_of_will.jpg		http://www.wizards.com/global/images/magic/general/force_of_will.jpg
 thwart.jpg		http://www.wizards.com/global/images/magic/general/thwart.jpg
 ensnare.jpg		http://www.wizards.com/global/images/magic/general/ensnare.jpg
