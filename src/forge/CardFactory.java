@@ -9464,6 +9464,88 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }// *************** END ************ END **************************
+
+        //*************** START *********** START **************************
+        else if(cardName.equals("Martial Coup")) {
+            SpellAbility spell = new Spell(card) {
+                
+                private static final long serialVersionUID = -29101524966207L;
+                
+                @Override
+                public void resolve() {
+                    CardList all = new CardList();
+                    all.addAll(AllZone.Human_Play.getCards());
+                    all.addAll(AllZone.Computer_Play.getCards());
+                	int Soldiers = card.getXManaCostPaid();
+                	for(int i = 0; i < Soldiers; i++) {
+                    CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier", card, "W", new String[] {
+                            "Creature", "Soldier"}, 1, 1, new String[] {""}); 
+                	}
+                	if(Soldiers >= 5) {
+                    for(int i = 0; i < all.size(); i++) {
+                        Card c = all.get(i);
+                        if(c.isCreature()) AllZone.GameAction.destroy(c);
+                    }
+                	}
+                }// resolve()
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList human = new CardList(AllZone.Human_Play.getCards());
+                    CardList computer = new CardList(AllZone.Computer_Play.getCards());
+                    
+                    human = human.getType("Creature");
+                    computer = computer.getType("Creature");
+                    
+                    // the computer will at least destroy 2 more human creatures
+                    return (computer.size() < human.size() - 1
+                            || (AllZone.Computer_Life.getLife() < 7 && !human.isEmpty())) && ComputerUtil.getAvailableMana().size() >= 7;
+                }
+            };// SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }// *************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Martial Coup")) {
+            SpellAbility spell = new Spell(card) {
+                
+                private static final long serialVersionUID = -29101524966207L;
+                
+                @Override
+                public void resolve() {
+                    CardList all = new CardList();
+                    all.addAll(AllZone.Human_Play.getCards());
+                    all.addAll(AllZone.Computer_Play.getCards());
+                	int Soldiers = card.getXManaCostPaid();
+                	for(int i = 0; i < Soldiers; i++) {
+                    CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier", card, "W", new String[] {
+                            "Creature", "Soldier"}, 1, 1, new String[] {""}); 
+                	}
+                	if(Soldiers >= 5) {
+                    for(int i = 0; i < all.size(); i++) {
+                        Card c = all.get(i);
+                        if(c.isCreature()) AllZone.GameAction.destroy(c);
+                    }
+                	}
+                }// resolve()
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList human = new CardList(AllZone.Human_Play.getCards());
+                    CardList computer = new CardList(AllZone.Computer_Play.getCards());
+                    
+                    human = human.getType("Creature");
+                    computer = computer.getType("Creature");
+                    
+                    // the computer will at least destroy 2 more human creatures
+                    return (computer.size() < human.size() - 1
+                            || (AllZone.Computer_Life.getLife() < 7 && !human.isEmpty())) && ComputerUtil.getAvailableMana().size() >= 7;
+                }
+            };// SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }// *************** END ************ END **************************
         
         //*************** START *********** START **************************
         else if(cardName.equals("Day of Judgment")) {

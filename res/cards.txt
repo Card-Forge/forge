@@ -1,3 +1,8 @@
+Martial Coup
+X W W
+Sorcery
+Put X 1/1 white Soldier creature tokens onto the battlefield. If X is 5 or more, destroy all other creatures.
+
 Linvala, Keeper of Silence
 2 W W
 Legendary Creature Angel

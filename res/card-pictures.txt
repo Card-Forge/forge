@@ -38,6 +38,7 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+martial_coup.jpg				http://www.wizards.com/global/images/magic/general/martial_coup.jpg
 linvala_keeper_of_silence.jpg		http://www.wizards.com/global/images/magic/general/linvala_keeper_of_silence.jpg
 nirkana_revenant.jpg			http://www.wizards.com/global/images/magic/general/nirkana_revenant.jpg
 gigantomancer.jpg				http://www.wizards.com/global/images/magic/general/gigantomancer.jpg
