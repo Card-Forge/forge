@@ -214,7 +214,7 @@ class CardFactory_Lands {
 
 	      card.clearSpellKeepManaAbility();
 	      card.addSpellAbility(a1);
-	      a1.setDescription("1U: Faerie Conclave becomes a 2/1 blue Faerie creature with flying until end of turn. It's still a land.");
+	      a1.setDescription("1 U: Faerie Conclave becomes a 2/1 blue Faerie creature with flying until end of turn. It's still a land.");
 	      a1.setStackDescription(card +" becomes a 2/1 creature with flying until EOT");
 
 	      Command paid1 = new Command() {
@@ -280,6 +280,7 @@ class CardFactory_Lands {
 
 	      card.clearSpellKeepManaAbility();
 	      card.addSpellAbility(a1);
+	      a1.setDescription("1 W: Forbidding Watchtower becomes a 1/5 white Soldier creature until end of turn. It's still a land.");
 	      a1.setStackDescription(card +" becomes a 1/5 creature until EOT");
 
 	      Command paid1 = new Command() {
@@ -349,6 +350,7 @@ class CardFactory_Lands {
 	      card.clearSpellKeepManaAbility();
 	      card.addSpellAbility(a1);
 	      a1.setStackDescription(card +" becomes a 3/3 creature with trample until EOT");
+	      a1.setDescription("1 G: Treetop Village becomes a 3/3 green Ape creature with trample until end of turn. It's still a land.");
 
 	      Command paid1 = new Command() {
 			private static final long serialVersionUID = -6800983290478844750L;

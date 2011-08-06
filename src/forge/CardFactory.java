@@ -10059,6 +10059,10 @@ public class CardFactory implements NewConstants {
             //move to top of library
             AllZone.Computer_Library.remove(c);
             AllZone.Computer_Library.add(c, 0);
+            
+            CardList list = new CardList();
+            list.add(c);
+            AllZone.Display.getChoiceOptional("Computer picked:", list.toArray());
           }
         }//computerResolve()
         public void humanResolve()
@@ -11675,13 +11679,18 @@ public class CardFactory implements NewConstants {
     	  CardList list = new CardList(library);
     	  list = list.getType("Creature");
 
-
-    	  //pick best creature
-    	  Card c = CardFactoryUtil.AI_getBestCreature(list);
-    	  if(c == null)
-    		c = library[0];
-    	  AllZone.Computer_Library.remove(c);
-    	  AllZone.Computer_Hand.add(c);
+    	  if (list.size() > 0) 
+    	  {
+	    	  //pick best creature
+	    	  Card c = CardFactoryUtil.AI_getBestCreature(list);
+	    	  if(c == null)
+	    		c = list.get(0);
+	    	  AllZone.Computer_Library.remove(c);
+	    	  AllZone.Computer_Hand.add(c);
+	    	  CardList cl = new CardList();
+	    	  cl.add(c);
+	    	  AllZone.Display.getChoiceOptional("Computer picked:", cl.toArray());
+    	  }
     	}
     	public boolean canPlay()
     	{

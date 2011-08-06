@@ -7206,8 +7206,18 @@ public class GameActionUtil
 			CardList current = new CardList();
 			current.addAll(AllZone.Human_Play.getCards());
 			current.addAll(AllZone.Computer_Play.getCards());
-			current = current.getType("Creature");
-
+			
+			final ArrayList<String> list = CardFactoryUtil.getCreatureLandNames();
+			
+			current = current.filter(new CardListFilter()
+			{
+				public boolean addCard(Card c)
+				{
+					return c.isCreature() &&  !list.contains(c.getName());
+				}
+			});
+			
+			
 			// Holds Essence Warden's in play
 			CardList wardenList = current.getName("Essence Warden");
 
@@ -7246,11 +7256,9 @@ public class GameActionUtil
 				// Gain life for new Essence Wardens
 				n[0] += newWarden.size();
 
-				final PlayerLife life = AllZone.GameAction
-						.getPlayerLife(wardenList.get(outer).getController());
+				final PlayerLife life = AllZone.GameAction.getPlayerLife(wardenList.get(outer).getController());
 				SpellAbility ability = new Ability(new Card(), "0")
 				{
-
 					public void resolve()
 					{
 						life.addLife(n[0]);
@@ -7285,7 +7293,17 @@ public class GameActionUtil
 			CardList current = new CardList();
 			current.addAll(AllZone.Human_Play.getCards());
 			current.addAll(AllZone.Computer_Play.getCards());
-			current = current.getType("Creature");
+			//current = current.getType("Creature");
+			
+			final ArrayList<String> list = CardFactoryUtil.getCreatureLandNames();
+						
+			current = current.filter(new CardListFilter()
+			{
+				public boolean addCard(Card c)
+				{
+					return c.isCreature() &&  !list.contains(c.getName());
+				}
+			});
 
 			// Holds Soul Warden's in play
 			CardList wardenList = current.getName("Soul Warden");
@@ -7325,8 +7343,7 @@ public class GameActionUtil
 				// Gain life for new Soul Wardens
 				n[0] += newWarden.size();
 
-				final PlayerLife life = AllZone.GameAction
-						.getPlayerLife(wardenList.get(outer).getController());
+				final PlayerLife life = AllZone.GameAction.getPlayerLife(wardenList.get(outer).getController());
 				SpellAbility ability = new Ability(new Card(), "0")
 				{
 
@@ -8442,12 +8459,12 @@ public class GameActionUtil
 		
 		private int countOtherRats(Card c)
 		{
-			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c
-					.getController());
-			CardList rats = new CardList(play.getCards());
+			PlayerZone hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+			PlayerZone cplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+			CardList rats = new CardList(hplay.getCards());
+			rats.addAll(cplay.getCards());
 			rats = rats.getName("Relentless Rats");
 			return rats.size()-1;
-
 		}
 
 		public void execute()

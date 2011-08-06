@@ -1,7 +1,6 @@
 package forge;
 import java.util.ArrayList;
-
-
+import java.util.HashMap;
 
 public class CardFactory_Creatures {
 	
@@ -14406,6 +14405,14 @@ public class CardFactory_Creatures {
 	          }
 	    	  public boolean canPlay()
 	    	  {
+	    		   SpellAbility sa;
+		      	   for (int i=0; i<AllZone.Stack.size(); i++)
+		      	   {
+		      	    	     sa = AllZone.Stack.peek(i);
+		      	    	     if (sa.getSourceCard().equals(card))
+		      	    	          return false;
+		      	   }
+	    		  
 	    		  String controller = card.getController();
 	    		  PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
 		  
@@ -17199,6 +17206,140 @@ public class CardFactory_Creatures {
 		        card.addSpellAbility(ability);
 		        ability.setDescription("tap: Draw a card.");
 		        ability.setStackDescription(card.getName() + " - draw a card.");
+		      }//*************** END ************ END **************************
+	       
+	       	  //*************** START *********** START **************************
+		      else if(cardName.equals("Sygg, River Guide"))
+		      {
+		    	  final HashMap<Card, String[]> creatureMap = new HashMap<Card, String[]>();
+		    	  
+		    	  final Ability ability = new Ability(card, "1 W")
+		    	  {
+		    		  public void resolve()
+		    		  {
+		    			  Card c = getTargetCard();
+		    			  String color = new String();
+		    			  if (AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card,c)){
+	                          
+			                  Object o = AllZone.Display.getChoice("Choose mana color",Constant.Color.Colors);
+			                  color = (String)o;
+			                  c.addExtrinsicKeyword("Protection from " +color); 
+			                  if (creatureMap.containsKey(c)) {
+			                	  int size = creatureMap.get(c).length;
+			                	  String[] newString = new String[size+1];
+			                	  
+			                	  for (int i=0;i<size;i++)
+			                	  {
+			                		  newString[i] = creatureMap.get(c)[i];
+			                	  }
+			                	  newString[size] = color;
+			                	  creatureMap.put(c, newString);
+			                  }
+			                  else
+			                	  creatureMap.put(c, new String[] {color});
+			                  
+			                  final Card crd = c;
+			                  final Command atEOT = new Command()
+			  	           	  {
+								private static final long serialVersionUID = 8630868536866681014L;
+
+								public void execute()
+			                	{	
+			                		  //if(AllZone.GameAction.isCardInPlay(c))
+			                		  //  c.removeExtrinsicKeyword("Protection from "+color);
+									  if (AllZone.GameAction.isCardInPlay(crd))
+									  {
+										  String[] colors = creatureMap.get(crd);
+										  for (String col : colors)
+										  {
+											  crd.removeExtrinsicKeyword("Protection from " + col);
+										  }
+									  }
+			                	}
+			  	           	  };//Command
+			  	           	  AllZone.EndOfTurn.addUntil(atEOT);
+		    			  }
+		    		  }
+		    	  };
+		    	  Input runtime = new Input()
+			      {
+					private static final long serialVersionUID = -2171146532836387392L;
+
+					public void showMessage()
+			        {
+			          CardList creats = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
+			          creats = creats.getType("Merfolk");
+			          
+			          stopSetNext(CardFactoryUtil.input_targetSpecific(ability, creats, "Select a target Merfolk",true));
+			        }
+			      };
+			      ability.setDescription("1 W: Target Merfolk you control gains protection from the color of your choice until end of turn.");
+			      ability.setBeforePayMana(runtime);
+		    	  card.addSpellAbility(ability);
+		      }//*************** END ************ END **************************
+	       
+	       	  //*************** START *********** START **************************
+		      else if (cardName.equals("Laquatus's Champion"))
+		      {
+		    	  final SpellAbility abilityComes = new Ability(card, "0")
+			      {
+			        public void resolve()
+			        {
+			        	  AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(6);
+			        }//resolve()
+			      };
+
+			      final Input inputComes = new Input()
+			      {
+					private static final long serialVersionUID = -2666229064706311L;
+
+					public void showMessage()
+			        {
+			          stopSetNext(CardFactoryUtil.input_targetPlayer(abilityComes));
+			          ButtonUtil.disableAll();//to disable the Cancel button
+			        }
+			      };
+			      Command commandComes = new Command()
+			      {
+			    	private static final long serialVersionUID = -4246229185669164581L;
+
+					public void execute()
+			        {
+			          if(card.getController().equals(Constant.Player.Human))
+			            AllZone.InputControl.setInput(inputComes);
+			          else //computer
+			          {
+			            abilityComes.setTargetPlayer(Constant.Player.Human);
+			            AllZone.Stack.add(abilityComes);
+			          }//else
+			        }//execute()
+			      };//CommandComes
+			      Command commandLeavesPlay = new Command()
+			      {
+
+					private static final long serialVersionUID = 9172348861441804625L;
+
+					public void execute()
+			        {
+			          //System.out.println(abilityComes.getTargetCard().getName());
+
+			          SpellAbility ability = new Ability(card, "0")
+			          {
+			            public void resolve()
+			            {
+			              String player = abilityComes.getTargetPlayer();
+			              AllZone.GameAction.getPlayerLife(player).addLife(6);
+			              
+			            }//resolve()
+			          };//SpellAbility
+			          ability.setStackDescription("Laquatus's Champion - " +abilityComes.getTargetPlayer()  +" regains 6 life.");
+			          AllZone.Stack.add(ability);
+			        }//execute()
+			      };//Command
+
+			      card.addComesIntoPlayCommand(commandComes);
+			      card.addLeavesPlayCommand(commandLeavesPlay);
+		    	  
 		      }//*************** END ************ END **************************
 	      
 	      // Cards with Cycling abilities

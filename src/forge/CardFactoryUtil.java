@@ -2504,6 +2504,16 @@ public class CardFactoryUtil
 	  return false;
   }
   
+  public static ArrayList<String> getCreatureLandNames()
+  {
+	  	String[] creatureLands = {"Faerie Conclave","Forbidding Watchtower","Treetop Village","Ghitu Encampment","Blinkmoth Nexus",
+	  							  "Mishra's Factory"};
+		final ArrayList<String> list = new ArrayList<String>();
+		for(int i = 0; i < creatureLands.length; i++)
+		list.add(creatureLands[i]);
+		return list;
+  }
+  
   //may return null
   static public Card getRandomCard(CardList list)
   {
