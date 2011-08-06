@@ -782,7 +782,7 @@ public class AbilityFactory_ChangeZone {
 			    else if (libraryPosition == 0)
 			    	sb.append(" on top of").append(pronoun).append("owner's library.");
 			    else
-			    	sb.append(libraryPosition-1).append(" from the top of").append(pronoun).append("owner's library.");
+			    	sb.append(" ").append(libraryPosition+1).append(" from the top of").append(pronoun).append("owner's library.");
 	    	 }
 	     }
 		 
@@ -889,5 +889,6 @@ public class AbilityFactory_ChangeZone {
 		
 		return AbilityFactory.getDefinedCards(sa.getSourceCard(), defined, sa).get(0);
 	}
+
 
 }

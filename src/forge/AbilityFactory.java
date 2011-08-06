@@ -695,6 +695,15 @@ public class AbilityFactory {
 			
 			players.addAll(tgt.getTargetPlayers());
 		}
+		else if (defined.equals("TargetedController")){
+			ArrayList<Card> list = getDefinedCards(card, "Targeted", sa);
+
+			for(Card c : list){
+				Player p = c.getController();
+				if (!players.contains(p))
+					players.add(p);
+			}
+		}
 		else{
 			if (defined.equals("You") || defined.equals("Each"))
 				players.add(sa.getActivatingPlayer());

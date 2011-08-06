@@ -248,7 +248,7 @@ public class GameAction {
         // todo is this copy necessary?
         c = AllZone.CardFactory.copyCard(c);
         
-        if (libPosition == -1)
+        if (libPosition == -1 || libPosition > library.getCards().length)
         	libPosition = library.getCards().length;
         
         library.add(c, libPosition);
