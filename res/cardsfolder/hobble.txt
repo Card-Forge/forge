@@ -9,4 +9,5 @@ K:enPumpCurse:0/0/HIDDEN CARDNAME can't attack.:Enchanted creature can't attack.
 K:stPumpEnchanted:Creature:0/0/HIDDEN CARDNAME can't block:isPresent Creature.AttachedBy+Black:Enchanted creature can't block if it's black.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hobble.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/7.jpg
 End

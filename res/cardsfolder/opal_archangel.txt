@@ -6,4 +6,5 @@ T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ Opponent | Trig
 SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 5 | Toughness$ 5  | Keywords$ Flying & Vigilance | Types$ Creature,Angel | OverwriteTypes$ True | Permanent$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opal_archangel.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/23.jpg
 End

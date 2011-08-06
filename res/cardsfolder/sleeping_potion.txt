@@ -10,4 +10,5 @@ T:Mode$ SpellAbilityCast | TargetsValid$ Card.AttachedBy | TriggerZones$ Battlef
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sleeping_potion.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/34.jpg
 End

@@ -6,4 +6,5 @@ A:AB$Animate | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Land | TgtPrompt$ Select tar
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mishras_groundbreaker.jpg
+SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/165.jpg
 End

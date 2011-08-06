@@ -9,4 +9,5 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Enchanted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/triclopean_sight.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/45.jpg
 End
