@@ -16145,6 +16145,173 @@ public class CardFactory implements NewConstants {
             }));
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Rite of Replication")) {
+            SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = -2902112019334177L;
+                @Override
+                public boolean canPlayAI() {
+                    PlayerZone zone = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    Card biggest = null;
+                    if(zone != null) {
+                    CardList creature = new CardList();
+                    creature.addAll(zone.getCards());
+                    creature = creature.getType("Creature"); 
+                    creature = creature.filter(new CardListFilter() {
+						public boolean addCard(Card card) {
+							return (!card.getType().contains("Legendary"));
+						}
+					});
+                    if(creature.size() == 0) return false;
+                    biggest = creature.get(0);
+                    for(int i = 0; i < creature.size(); i++)
+                        if(biggest.getNetAttack() < creature.get(i).getNetAttack()) biggest = creature.get(i);                         
+                    		setTargetCard(biggest);
+                    }
+                    return biggest.getNetAttack() > 4;
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    PlayerZone zone = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    if(zone != null) {
+                    CardList creature = new CardList();
+                    creature.addAll(zone.getCards());
+                    creature = creature.getType("Creature"); 
+                    creature = creature.filter(new CardListFilter() {
+						public boolean addCard(Card card) {
+							return (!card.getType().contains("Legendary"));
+						}
+					});
+                    if(creature.size() > 0) {
+                    Card biggest = creature.get(0);
+                    for(int i = 0; i < creature.size(); i++)
+                        if(biggest.getNetAttack() < creature.get(i).getNetAttack()) biggest = creature.get(i);                         
+                    		setTargetCard(biggest);
+                    }
+                    }
+                }
+                @Override
+                public void resolve() {
+
+                if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                        && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    Card Copy = copyCard(getTargetCard());
+                    CardList all = AllZone.CardFactory.getAllCards();
+                    CardList tokens = new CardList(play.getCards());
+                    tokens = tokens.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isToken();
+                        }
+                    });
+                    all.add(tokens);
+                    int Unumber = 0;
+                    for(int i = 0; i < all.size(); i++) {
+                    if(all.get(i).getUniqueNumber() > Unumber) Unumber = all.get(i).getUniqueNumber();	
+                    }
+                    Copy.setUniqueNumber(Unumber + 1);
+                    Copy.setToken(true);
+                    Copy.setController(card.getController());
+                    play.add(Copy);
+                }             
+                }//resolve()
+            };
+            
+            spell.setDescription("Put a token onto the battlefield that's a copy of target creature.");
+            spell.setStackDescription(card.getName() + " - " + card.getController()
+                    + " puts a token onto the battlefield that's a copy of target creature.");
+            
+            SpellAbility kicker = new Spell(card) {
+                private static final long serialVersionUID = 13762512058673590L;
+                @Override
+                public boolean canPlayAI() {
+                    PlayerZone zone = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    Card biggest = null;
+                    if(zone != null) {
+                    CardList creature = new CardList();
+                    creature.addAll(zone.getCards());
+                    creature = creature.getType("Creature"); 
+                    creature = creature.filter(new CardListFilter() {
+						public boolean addCard(Card card) {
+							return (!card.getType().contains("Legendary"));
+						}
+					});
+                    if(creature.size() == 0) return false;
+                    biggest = creature.get(0);
+                    for(int i = 0; i < creature.size(); i++)
+                        if(biggest.getNetAttack() < creature.get(i).getNetAttack()) biggest = creature.get(i);                         
+                    		setTargetCard(biggest);
+                    }
+                    return biggest.getNetAttack() > 3;
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    PlayerZone zone = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    if(zone != null) {
+                    CardList creature = new CardList();
+                    creature.addAll(zone.getCards());
+                    creature = creature.getType("Creature"); 
+                    creature = creature.filter(new CardListFilter() {
+						public boolean addCard(Card card) {
+							return (!card.getType().contains("Legendary"));
+						}
+					});
+                    if(creature.size() > 0) {
+                    Card biggest = creature.get(0);
+                    for(int i = 0; i < creature.size(); i++)
+                        if(biggest.getNetAttack() < creature.get(i).getNetAttack()) biggest = creature.get(i);                         
+                    		setTargetCard(biggest);
+                    }
+                    }
+                }
+                @Override
+                public void resolve() {
+                	PlayerZone_ComesIntoPlay.SimultaneousEntry = true;
+                    card.setKicked(true);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                    for(int x = 0; x < 5; x++) {
+                    	if(x == 4) PlayerZone_ComesIntoPlay.SimultaneousEntry = false;
+                            Card Copy = copyCard(getTargetCard());
+                            CardList all = AllZone.CardFactory.getAllCards();
+                            CardList tokens = new CardList(play.getCards());
+                            tokens = tokens.filter(new CardListFilter() {
+                                public boolean addCard(Card c) {
+                                    return c.isToken();
+                                }
+                            });
+                            all.add(tokens);
+                            int Unumber = 0;
+                            for(int i = 0; i < all.size(); i++) {
+                            if(all.get(i).getUniqueNumber() > Unumber) Unumber = all.get(i).getUniqueNumber();	
+                            }
+                            Copy.setUniqueNumber(Unumber + 4);
+                            Copy.setToken(true);
+                            Copy.setController(card.getController());
+                            play.add(Copy); 
+                            AllZone.Display.showMessage("Hack for Legendaries going to the graveyard :)"); // Not Working + AI is stuffed
+                    }//for
+                    
+                    }
+             
+                }//resolve()
+            };
+            kicker.setKickerAbility(true);
+            kicker.setManaCost("7 U U");
+            kicker.setAdditionalManaCost("5");
+            kicker.setDescription("Kicker 5: If Rite of Replication was kicked, put five of those tokens onto the battlefield instead.");
+            kicker.setStackDescription(card.getName() + " - " + card.getController()
+                    + " puts five tokens onto the battlefield that's a copy of target creature.");
+            kicker.setBeforePayMana(CardFactoryUtil.input_targetCreature(kicker));
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            card.addSpellAbility(kicker);
+            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+        }//*************** END ************ END **************************
 
         //*************** START *********** START **************************
         else if(cardName.equals("Conqueror's Pledge")) {

@@ -10,6 +10,8 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
     
     private boolean           trigger          = true;
     private boolean           leavesTrigger    = true;
+	static boolean SimultaneousEntry = false; // For Cards with Multiple Token Entry. Only Affects Allies at the moment.
+	static int SimultaneousEntryCounter = 1; // For Cards with Multiple Token Entry. Only Affects Allies at the moment.
     
     public PlayerZone_ComesIntoPlay(String zone, String player) {
         super(zone, player);
@@ -132,6 +134,8 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 allyNamesList.add(allyNames[i]);
             }
             
+            if(SimultaneousEntry == false) { // For Cards with Multiple Token Entry. Only Affects Allies at the moment.
+            	for(int i = 0; i < SimultaneousEntryCounter; i++) {
             if(c.getType().contains("Ally") || (c.getKeyword().contains("Changeling") && c.isCreature())
                     || (clist.size() > 0 && (c.getType().contains("Creature") || c.getKeyword().contains(
                             "Changeling"))) || allyNamesList.contains(c.getName())) {
@@ -147,8 +151,11 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                     GameActionUtil.executeAllyEffects(var);
                 }
             }
-            
+            	}
+            	SimultaneousEntryCounter = 1;
+        } else SimultaneousEntryCounter = SimultaneousEntryCounter + 1;
         }
+        
         if(AllZone.StaticEffects.getCardToEffectsList().containsKey(c.getName())) {
             String[] effects = AllZone.StaticEffects.getCardToEffectsList().get(c.getName());
             for(String effect:effects) {
