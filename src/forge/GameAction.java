@@ -689,9 +689,10 @@ public class GameAction {
  		            	WheneverKeywords = WheneverKeywords + 1;
  		            }
  		        for(int CKeywords = 0; CKeywords < WheneverKeywords; CKeywords++) {
+ 		        	
                  String parse = card.getKeyword().get(WheneverKeyword_Number[CKeywords]).toString();                
                  String k[] = parse.split(":");
-                 if((k[1].equals(Event))) {
+                 if((k[1].contains(Event))) {
                 	 RunWheneverKeyword(Triggering_Card, Event, Custom_Parameters); // Beached
                 	 Triggered = true;
                  }
@@ -702,6 +703,7 @@ public class GameAction {
 	static boolean MultiTarget_Cancelled = false;
     public void RunWheneverKeyword(Card c, String Event, Object[] Custom_Parameters) { 
     	/**
+    	 * TODO DiscardCards/X
     	 * Custom_Parameters Info: 
     	 * For GainLife		: Custom_Parameters[0] = Amount of Life Gained
     	 * For DealsDamage	: Custom_Parameters[0] = Player Target
@@ -743,20 +745,49 @@ public class GameAction {
                         }
                         if(Nullified == true) k[4] = "Null";   
                         }
-                    if(k[2].contains("Self")) {
-                    	if(!card.equals(c)) k[4] = "Null";    
+                    if(k[1].contains("CastSpell")) {
+                    	boolean Nullified = true;              	
+                        String SpellControllerParse = k[1];                
+                        String SpellController[] = SpellControllerParse.split("/");
+                        for(int z = 0; z < SpellController.length - 1; z++) {
+                        //	JOptionPane.showMessageDialog(null, SpellController[z + 1] +  c.getController() + card.getController(), "", JOptionPane.INFORMATION_MESSAGE);
+                        	if(SpellController[z + 1].equals("Controller") && (c.getController()).equals(card.getController())) Nullified = false;  
                         }
-                    if(k[2].contains("ControllingPlayer_Opponent")) {
-                    	if(!card.getController().equals(getOpponent(c.getController()))) k[4] = "Null";    
+                        if(Nullified == true) k[4] = "Null";   
                         }
-                    if(k[2].contains("Enchanted_Creature")) {
-                    	if(((Card)Custom_Parameters[2]).isEnchantedBy(card.getName()) == false) k[4] = "Null";    
-                        }
-                   	if(k[2].contains("Type")) {
-                        String TypeParse = k[2];                
-                        String Type[] = TypeParse.split("/");
-                        for(int z = 0; z < Type.length - 1; z++) if(!(c.getType()).contains(Type[z + 1])) k[4] = "Null";     		
-                             	}
+                    int Initiator_Conditions = 1;
+                    String ConditionsParse = k[2];                
+                    String Conditions[] = ConditionsParse.split("!");
+                    Initiator_Conditions = Conditions.length;
+                        for(int y = 0; y < Initiator_Conditions; y++) {
+                            if(Conditions[y].contains("Self")) {
+                            	if(!card.equals(c)) k[4] = "Null";    
+                                }
+                            if(Conditions[y].contains("ControllingPlayer_Opponent")) {
+                            	if(!card.getController().equals(getOpponent(c.getController()))) k[4] = "Null";    
+                                }
+                            if(Conditions[y].contains("Enchanted_Creature")) {
+                            	if(((Card)Custom_Parameters[2]).isEnchantedBy(card.getName()) == false) k[4] = "Null";    
+                                }
+                           	if(Conditions[y].contains("Type") && !Conditions[y].contains("OneTypeOfMany")) {
+                                String TypeParse = Conditions[y];                
+                                String Type[] = TypeParse.split("/");
+                                for(int z = 0; z < Type.length - 1; z++) if(!(c.getType()).contains(Type[z + 1])) k[4] = "Null";     		
+                                     	}
+                           	if(Conditions[y].contains("OneTypeOfMany")) {
+                           		boolean Nullified = true;
+                                String TypeParse = Conditions[y];                
+                                String Type[] = TypeParse.split("/");
+                                for(int z = 0; z < Type.length - 1; z++) if((c.getType()).contains(Type[z + 1])) Nullified = false;   
+                                if(Nullified == true) k[4] = "Null";
+                                     	}
+                           	if(Conditions[y].contains("Color")) {
+                                String ColorParse = Conditions[y];                
+                                String Color[] = ColorParse.split("/");
+                                for(int z = 0; z < Color.length - 1; z++) if(!CardUtil.getColors(c).contains(Color[z + 1])) k[4] = "Null";     		
+                                     	}
+                            }
+
                   	if(k[8].contains("Initiator - Other than Self")) {
                  		if(card.equals(c)) k[4] = "Null";      		
                  	}
@@ -774,13 +805,21 @@ public class GameAction {
                         if(!getLastPlayerToDraw().equals(card.getController())) k[4] = "Null";	
                  	}
                   	
+                  	// Mana Cost (if Any)
+            		String ManaCost = "0";
+            		if(k[7].contains("PayMana")) {
+                        String PayAmountParse = k[7];                
+                        ManaCost = PayAmountParse.split("/")[1];
+            		}
                   	// Targets
         			String TargetPlayer = "";
     				if(k[5].equals("ControllingPlayer_Self")) TargetPlayer = card.getController();
     				if(k[5].equals("ControllingPlayer_Opponent")) TargetPlayer = getOpponent(card.getController());
+    				if(k[5].equals("ControllingPlayer_Initiator")) TargetPlayer = F_TriggeringCard.getController();
     				final String F_TargetPlayer = TargetPlayer;
     				Card TargetCard = null;
     				if(k[5].equals("Self")) TargetCard = F_card;
+    				if(k[5].equals("Initiating_Card")) TargetCard = c;
     				final Card F_TargetCard = TargetCard;
     				
     				// Effects
@@ -793,11 +832,18 @@ public class GameAction {
                             else if(S_Amount.equals("Life_Gained")) I_Amount = ((Integer)Custom_Parameters[0]);
                             else if(I_Amount == 0) I_Amount = Integer.valueOf(S_Amount);
                         final int F_Amount = I_Amount;
-                		Ability ability = new Ability(F_TargetCard, "0") {
+                		final Ability ability = new Ability(card, ManaCost) {
                 			@Override
                 			public void resolve() {
-			                      if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInPlay(F_TargetCard)) F_TargetCard.addCounter(Counters.P1P1, F_Amount);
+                				Whenever_ManaPaid(F_card, F_k, Proper_resolve, this);
                 			}
+                			public Command Proper_resolve = new Command() {
+                            	private static final long serialVersionUID = 151367344511590317L;
+
+                    			public void execute() {
+                    				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInPlay(F_TargetCard)) F_TargetCard.addCounter(Counters.P1P1, F_Amount);
+			                      }
+                			};
                 		};
                 		ability.setStackDescription(F_TargetCard.getName() + " - gets " + F_Amount + " +1/+1 counters.");
                 		Whenever_Input(F_card,F_k,Command.Blank,ability);  
@@ -810,15 +856,23 @@ public class GameAction {
                             if(S_Amount.equals("Toughness")) I_Amount = F_TriggeringCard.getNetDefense();
                             else I_Amount = Integer.valueOf(S_Amount);
                             final int F_Amount = I_Amount;
-                    		Ability ability = new Ability(card, "0") {
+                    		final Ability ability = new Ability(card, ManaCost) {
                     			@Override
                     			public void resolve() {
-                    				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInPlay(F_card)) {
-    			          				PlayerLife life = AllZone.GameAction.getPlayerLife(F_TargetPlayer);
-    			        				if(F_Amount > -1) life.addLife(F_Amount);
-    			        				else life.subtractLife(F_Amount * -1,F_card);
-    			                      }
+                    				Whenever_ManaPaid(F_card, F_k, Proper_resolve, this);
                     			}
+                    			public Command Proper_resolve = new Command() {
+                                	private static final long serialVersionUID = 151367344511590317L;
+
+                        			public void execute() {
+                        				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInPlay(F_card)) {
+        			          				PlayerLife life = AllZone.GameAction.getPlayerLife(F_TargetPlayer);
+        			        				if(F_Amount > -1) life.addLife(F_Amount);
+        			        				else life.subtractLife(F_Amount * -1,F_card);
+        			                      }
+
+    			                      }
+                    			};
                     		};
                     		ability.setStackDescription(F_card + " - " + F_TargetPlayer + ((F_Amount > -1)? " gains " + F_Amount:"") + ((F_Amount <= -1)? " loses " + F_Amount * -1:"") + " life.");
                     		Whenever_Input(F_card,F_k,Command.Blank,ability);                           
@@ -832,15 +886,73 @@ public class GameAction {
                             if(S_Amount.equals("Toughness")) I_Amount = F_TriggeringCard.getNetDefense(); // LOL wut
                             else I_Amount = Integer.valueOf(S_Amount);
                             final int F_Amount = I_Amount;
-                    		Ability ability = new Ability(card, "0") {
+                    		final Ability ability = new Ability(card, ManaCost) {
                     			@Override
                     			public void resolve() {
-                    				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInPlay(F_card)) {
-    			                    	  AllZone.GameAction.drawCard(F_TargetPlayer);
-    			                      }
+                    				Whenever_ManaPaid(F_card, F_k, Proper_resolve, this);
                     			}
+                    			public Command Proper_resolve = new Command() {
+                                	private static final long serialVersionUID = 151367344511590317L;
+
+                        			public void execute() {
+                        				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInPlay(F_card)) {
+      			                    	  AllZone.GameAction.drawCard(F_TargetPlayer);
+      			                      }
+
+    			                      }
+                    			};
                     		};
-                    		ability.setStackDescription(F_card + " - " + F_card.getController() + " draws " + F_Amount + " card(s).");
+                    		ability.setStackDescription(F_card + " - " + F_TargetPlayer + " draws " + F_Amount + " card(s).");
+                    		Whenever_Input(F_card,F_k,Command.Blank,ability);                       
+                		}
+                		
+                		// Discard Cards
+                		if(k[4].contains("DiscardCards")) {
+                            String AmountParse = k[4];                
+                            String S_Amount = AmountParse.split("/")[1];
+                            int I_Amount = 0;
+                            if(S_Amount.equals("Toughness")) I_Amount = F_TriggeringCard.getNetDefense(); // LOL wut
+                            else I_Amount = Integer.valueOf(S_Amount);
+                            final int F_Amount = I_Amount;
+                    		final Ability ability = new Ability(card, ManaCost) {
+                    			@Override
+                    			public void resolve() {
+                    				Whenever_ManaPaid(F_card, F_k, Proper_resolve, this);
+                    			}
+                    			public Command Proper_resolve = new Command() {
+                                	private static final long serialVersionUID = 151367344511590317L;
+
+                        			public void execute() {
+                        				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInPlay(F_card)) {
+      			                    	  AllZone.GameAction.discard(F_TargetPlayer,F_Amount);
+      			                      }
+
+    			                      }
+                    			};
+                    		};
+                    		ability.setStackDescription(F_card + " - " + F_TargetPlayer + " discards " + F_Amount + " card(s).");
+                    		Whenever_Input(F_card,F_k,Command.Blank,ability);                       
+                		}
+                		
+                		// Copy Spell
+                		if(k[4].contains("CopySpell")) {
+                    		final Ability ability = new Ability(card, ManaCost) {
+                    			@Override
+                    			public void resolve() {
+                    				Whenever_ManaPaid(F_card, F_k, Proper_resolve, this);
+                    			}
+                    			public Command Proper_resolve = new Command() {
+                                	private static final long serialVersionUID = 151367344511590317L;
+
+                        			public void execute() {
+                        				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInPlay(F_card)) {
+                        					AllZone.CardFactory.copySpellontoStack(F_card,F_TargetCard, true);
+                                    };
+
+    			                      }
+                    			};
+                    		};
+                    		ability.setStackDescription(F_card + " - " + F_TargetPlayer + " copies " + TargetCard);
                     		Whenever_Input(F_card,F_k,Command.Blank,ability);                       
                 		}
                 		
@@ -861,27 +973,35 @@ public class GameAction {
                             final int F_Amount = I_Amount;
                         	final Object[] Targets = new Object[Multiple_Targets];
                         	final int[] index = new int[1];
-            	                final Ability ability = new Ability(c, "0") {
-            	                    @Override
-                            			public void resolve() {
+                    		final Ability ability = new Ability(card, ManaCost) {
+                    			@Override
+                    			public void resolve() {
+                    				Whenever_ManaPaid(F_card, F_k, Proper_resolve, this);
+                    			}
+                    			public Command Proper_resolve = new Command() {
+                                	private static final long serialVersionUID = 151367344511590317L;
+
+                        			public void execute() {
             	                    	if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInPlay(F_card)) {
-            			                    	  if(F_card.getController().equals(Constant.Player.Human)) {
-            			                    	  for(int z = 0; z < Targets.length; z++) {
-            			                    		  if(!(Targets[z].equals(Constant.Player.Human) || Targets[z].equals(Constant.Player.Computer))) {
-            			                              if(AllZone.GameAction.isCardInPlay((Card) Targets[z])
-            			                                      && CardFactoryUtil.canTarget(F_card, (Card) Targets[z])) {
-            			                                  Card c = (Card) Targets[z];
-            			                                  AllZone.GameAction.addDamage(c, F_card, F_Amount);
-            			                              }
-            			                          } else {
-            			                             AllZone.GameAction.addDamage( (String) Targets[z], F_Amount,F_card);
-            			                          }
-            			                      }
-            			                      }
-            			                    	  if(F_card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.addDamage(Constant.Player.Human, F_Amount*F_Multiple_Targets,F_card);
-                            			}
-                                        		}
-                            };
+      			                    	  if(F_card.getController().equals(Constant.Player.Human)) {
+      			                    	  for(int z = 0; z < Targets.length; z++) {
+      			                    		  if(!(Targets[z].equals(Constant.Player.Human) || Targets[z].equals(Constant.Player.Computer))) {
+      			                              if(AllZone.GameAction.isCardInPlay((Card) Targets[z])
+      			                                      && CardFactoryUtil.canTarget(F_card, (Card) Targets[z])) {
+      			                                  Card c = (Card) Targets[z];
+      			                                  AllZone.GameAction.addDamage(c, F_card, F_Amount);
+      			                              }
+      			                          } else {
+      			                             AllZone.GameAction.addDamage( (String) Targets[z], F_Amount,F_card);
+      			                          }
+      			                      }
+      			                      }
+      			                    	  if(F_card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.addDamage(Constant.Player.Human, F_Amount*F_Multiple_Targets,F_card);
+                      			}
+                                    };
+
+    			                      };
+                    		};
                            
                             final Command paidCommand = new Command() {
                                 private static final long serialVersionUID = -83034517601871955L;
@@ -903,7 +1023,7 @@ public class GameAction {
                                 	AllZone.Stack.add(ability);
                                 }
                             };
-                    		ability.setStackDescription(F_card.getName() + " - deals " + F_Amount*F_Multiple_Targets + " damage divided among one, two, or three target creatures and/or players.");
+                    		ability.setStackDescription(F_card.getName() + " - deals " + F_Amount*F_Multiple_Targets + " damage" + F_TargetPlayer + ((F_Multiple_Targets != 1)? " divided among up to " +  Multiple_Targets + " target creatures and/or players":""));
                             
                     		Whenever_Input(F_card,F_k,paidCommand,ability);
                 		}
@@ -911,9 +1031,31 @@ public class GameAction {
  		        }
  		}	
     }
-    
+    void Whenever_ManaPaid (Card Source, String[] Keyword_Details, final Command Proper_Resolve, SpellAbility ability) {
+		String S_Amount = "0";
+		if(Keyword_Details[7].contains("PayMana")) {
+            String PayAmountParse = Keyword_Details[7];                
+            S_Amount = PayAmountParse.split("/")[1];
+		
+        if(Source.getController().equals(Constant.Player.Human)) {
+            AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Activate " + Source.getName() + "'s ability: " + "\r\n",
+                    S_Amount, new Command() {
+            	private static final long serialVersionUID = 151367344511590317L;
+
+			public void execute() {
+				Proper_Resolve.execute();
+            } }, Command.Blank));
+        } else {
+            if(ComputerUtil.canPayCost(S_Amount)) {
+            	ComputerUtil.payManaCost(ability);
+            	Proper_Resolve.execute();
+        }
+        }
+    		} else Proper_Resolve.execute();
+    }
 	boolean Whenever_Go (Card Source, String[] Keyword_Details) {
 		boolean Go = true;
+	//	final int[] Paid = new int[1];
 		if(Keyword_Details[3].equals("Play")) {
 			PlayerZone Required_Zone = AllZone.getZone(Constant.Zone.Play, Source.getController());
     		if(AllZone.GameAction.isCardInZone(Source,Required_Zone)) {
@@ -928,12 +1070,14 @@ public class GameAction {
                 }
     	}
 		}
+
     		}
     }
+
 		return Go;
 		}
 	
-	public void Whenever_Input(Card Source, String[] Keyword_Details, Command paidCommand, SpellAbility ability) {
+	public void Whenever_Input(Card Source, String[] Keyword_Details, Command paidCommand, final SpellAbility ability) {
 		if(Keyword_Details[3].equals("Play")) {
 			PlayerZone Required_Zone = AllZone.getZone(Constant.Zone.Play, Source.getController());
     		if(AllZone.GameAction.isCardInZone(Source,Required_Zone)) {
@@ -949,7 +1093,7 @@ public class GameAction {
 		}	
 	}
     // Whenever Keyword
-    
+	
     private void sacrificeDestroy(Card c) {
         if(!isCardInPlay(c)) return;
         

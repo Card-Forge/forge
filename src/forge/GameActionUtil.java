@@ -326,6 +326,8 @@ public class GameActionUtil {
 		playCard_Fable_of_Wolf_and_Owl(c);
 		playCard_Kor_Firewalker(c);
 		playCard_Curse_of_Wizardry(c);
+		
+		AllZone.GameAction.CheckWheneverKeyword(c,"CastSpell",null);
 	}
 
 	public static void playCard_Kozilek(Card c)
@@ -5084,7 +5086,7 @@ public class GameActionUtil {
 		else if(c.getName().equals("Ghastlord of Fugue")) playerCombatDamage_Ghastlord_of_Fugue(c);
 		else if(c.getName().equals("Garza Zol, Plague Queen")) playerCombatDamage_May_draw(c);
 		else if(c.getName().equals("Scalpelexis")) playerCombatDamage_Scalpelexis(c);
-		else if(c.getName().equals("Blazing Specter") || c.getName().equals("Guul Draz Specter")
+		else if(c.getName().equals("Guul Draz Specter")
 				|| c.getName().equals("Chilling Apparition") || c.getName().equals("Sedraxis Specter")) playerCombatDamage_Simple_Discard(c);
 		else if((c.getName().equals("Headhunter") || c.getName().equals("Riptide Pilferer")) && !c.isFaceDown()) playerCombatDamage_Simple_Discard(c);
 		else if(c.getName().equals("Shadowmage Infiltrator") || c.getName().equals("Thieving Magpie")

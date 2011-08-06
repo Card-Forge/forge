@@ -38,6 +38,8 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+mirari.jpg						http://www.wizards.com/global/images/magic/general/mirari.jpg	
+bereavement.jpg					http://www.wizards.com/global/images/magic/general/bereavement.jpg		
 lilianas_caress.jpg				http://www.wizards.com/global/images/magic/general/lilianas_caress.jpg	
 curiosity.jpg		http://www.wizards.com/global/images/magic/general/curiosity.jpg
 pyretic_ritual.jpg		http://www.wizards.com/global/images/magic/general/pyretic_ritual.jpg

@@ -50,7 +50,7 @@ public class PlayerLife extends MyObservable implements java.io.Serializable
     	Object[] DealsDamage_Whenever_Parameters = new Object[3];
     	DealsDamage_Whenever_Parameters[0] = WhoGainedLife.getController();
     	DealsDamage_Whenever_Parameters[2] = SourceCard;
-    	AllZone.GameAction.CheckWheneverKeyword(WhoGainedLife, "DealsDamage/Opponent", DealsDamage_Whenever_Parameters);
+    	AllZone.GameAction.CheckWheneverKeyword(WhoGainedLife, "DealsDamage", DealsDamage_Whenever_Parameters);
     	this.updateObservers();
     }
 }

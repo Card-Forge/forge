@@ -1,3 +1,24 @@
+Mirari
+5
+Legendary Artifact
+no text
+WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Instant/Sorcery:Play:CopySpell:Initiating_Card:ASAP:PayMana/3:No Special Condition:Whenever you cast an instant or sorcery spell, you may pay 3. If you do, copy that spell. You may choose new targets for the copy.
+
+Bereavement
+1 B
+Enchantment
+no text
+WheneverKeyword:PermanentIntoGraveyard:Type/Creature!Color/green:Play:DiscardCards/1:ControllingPlayer_Initiator:ASAP:No_Condition:No Special Condition:Whenever a green creature is put into a graveyard from the battlefield, its controller discards a card.
+
+Blazing Specter
+2 B R
+Creature Specter
+no text
+2/2
+Flying
+Haste
+WheneverKeyword:DealsDamage/Opponent:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:No Condition:No Special Condition:Whenever Blazing Specter deals combat damage to a player, that player discards a card.
+
 Liliana's Caress
 1 B
 Enchantment
@@ -9039,14 +9060,6 @@ G W U B
 Creature Nephilim
 Whenever you play a spell, you may put two +1/+1 counters on Witch-Maw Nephilim. Whenever Witch-Maw Nephilim attacks, it gains trample until end of turn if its power is 10 or greater.
 1/1
-
-Blazing Specter
-2 B R
-Creature Specter
-Whenever Blazing Specter deals combat damage to a player, that player discards a card from his or her hand.
-2/2
-Flying
-Haste
 
 Guul Draz Specter
 2 B B
