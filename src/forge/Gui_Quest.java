@@ -485,6 +485,8 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Luke Skywalker 3	hard	GWU weenie style deck with Garruk Wildspeaker and Gaea's Anthem");
         sb.append("\r\n");
+        sb.append("Maggie Simpson 3	hard	This is a jund deck from the deck forum with some modifications");
+        sb.append("\r\n");
         sb.append("Magneto 3		hard	Shriekmaw, Assassins, creature removal + Liliana Vess");
         sb.append("\r\n");
         sb.append("Marge Simpson 3 	hard   	RG deck, creates tokens which are devoured by R and RG creatures with devour");
