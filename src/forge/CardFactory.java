@@ -6341,7 +6341,7 @@ public class CardFactory implements NewConstants {
                 void done() {
                     //shuffle card back into the library
                     PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    library.add(card);
+                    AllZone.GameAction.moveTo(library,card);
                     AllZone.GameAction.shuffle(card.getController());
                 }
             };
