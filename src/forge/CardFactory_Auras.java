@@ -1943,7 +1943,8 @@ class CardFactory_Auras {
         ////////////////////DRF test generic aura
         //*************** START *********** START **************************
         else if(isAuraType(card, "Land") || isAuraType(card, "Creature") ||
-        		isAuraType(card, "Artifact") || isAuraType(card, "Enchantment")) {
+        		isAuraType(card, "Artifact") || isAuraType(card, "Enchantment") ||
+        		isAuraType(card, "Wall")) {
         	
         	final String type = getAuraType(card);
         	final boolean curse = isCurseAura(card);
