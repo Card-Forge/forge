@@ -3712,44 +3712,43 @@ public class CardFactoryUtil {
         } else if(d[1].matches("[0-9][0-9]?")) X = Integer.parseInt(d[1]);
         
         String dbPlayer = "";
-        if(d[0].contains("You")) dbPlayer = cardController;
-        else if(d[0].contains("Opp")) dbPlayer = Opp;
-        else if(d[0].contains("Tgt")) dbPlayer = TgtP;
+        if(d[0].contains("You"))
+        	dbPlayer = cardController;
+        else if	(d[0].contains("Opp"))
+        	dbPlayer = Opp;
+        else if (d[0].contains("TgtCtrlr"))
+    		dbPlayer = TgtC.getController();
+        else if (d[0].contains("TgtOwner"))
+        	dbPlayer = TgtC.getOwner();
+        else if (d[0].contains("Tgt"))
+        	dbPlayer = TgtP;
+
         
         // 1/10
-        if (d[0].contains("DamageTgtCtrlr"))
-        	AllZone.GameAction.addDamage(TgtC.getController(), X, Src);
-        else if (d[0].contains("DamageTgtC")) 
+        if (d[0].contains("DamageTgtCard")) 
         	AllZone.GameAction.addDamage(TgtC, Src, X);
         else if (d[0].contains("DamageSelf"))
         	AllZone.GameAction.addDamage(Src, Src, X); // 2/10
         else if(d[0].contains("Damage"))
         	AllZone.GameAction.addDamage(dbPlayer, X, Src);
         
-        
 
-        if (d[0].contains("GainLifeTgtCtrlr"))
-        	AllZone.GameAction.getPlayerLife(TgtC.getController()).addLife(X);
-        else if (d[0].contains("GainLifeTgtOwner"))
-        	AllZone.GameAction.getPlayerLife(TgtC.getOwner()).addLife(X);
-        else if(d[0].contains("GainLife")) 
+        if(d[0].contains("GainLife")) 
         	AllZone.GameAction.getPlayerLife(dbPlayer).addLife(X);
 
-        if(d[0].contains("LoseLifeTgtCtrlr")) //2/10
-        	AllZone.GameAction.getPlayerLife(TgtC.getController()).subtractLife(X,Src);
-        else if (d[0].contains("LoseLifeTgtOwner"))
-        	AllZone.GameAction.getPlayerLife(TgtC.getOwner()).subtractLife(X, Src);
-        else if(d[0].contains("LoseLife")) 
+        if(d[0].contains("LoseLife")) 
         	AllZone.GameAction.getPlayerLife(dbPlayer).subtractLife(X,Src);
         
-        if(d[0].contains("Discard")) {
+        
+        if(d[0].contains("Discard")) {        	
             if(d.length > 2) {
                 if(d[2].contains("UnlessDiscardType")) {
                     String dd[] = d[2].split("\\.");
                     AllZone.GameAction.discardUnless(dbPlayer, X, dd[1]);
                 }
                 if(d[2].contains("AtRandom")) AllZone.GameAction.discardRandom(dbPlayer, X);
-            } else AllZone.GameAction.discard(dbPlayer, X);
+            } 
+            else AllZone.GameAction.discard(dbPlayer, X);
         }
         
         if(d[0].contains("HandToLibrary")) AllZone.GameAction.handToLibrary(dbPlayer, X, d[2]);
