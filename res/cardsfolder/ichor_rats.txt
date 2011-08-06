@@ -5,4 +5,5 @@ Text:When Ichor Rats enters the battlefield, each player gets a poison counter.
 PT:2/1
 K:Infect
 SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ichor_rats.jpg
 End
