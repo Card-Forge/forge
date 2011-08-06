@@ -12999,17 +12999,18 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Nantuko Husk") || cardName.equals("Phyrexian Ghoul")) {
+        else if (cardName.equals("Nantuko Husk")       || cardName.equals("Phyrexian Ghoul") || 
+       	         cardName.equals("Vampire Aristocrat") || cardName.equals("Bloodthrone Vampire")) {
             
             final SpellAbility a2 = new Ability(card, "0") {
                 final Command eot1 = new Command() {
-                                       private static final long serialVersionUID = 4450272080079173250L;
+                	private static final long serialVersionUID = 4450272080079173250L;
                                        
-                                       public void execute() {
-                                           card.addTempAttackBoost(-2);
-                                           card.addTempDefenseBoost(-2);
-                                       }
-                                   };
+                	public void execute() {
+                		card.addTempAttackBoost(-2);
+                		card.addTempDefenseBoost(-2);
+                	}
+                };
                 
                 @Override
                 public void resolve() {

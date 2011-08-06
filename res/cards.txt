@@ -1,3 +1,15 @@
+Vampire Aristocrat
+2 B
+Creature Vampire Rogue
+no text
+2/2
+
+Bloodthrone Vampire
+1 B
+Creature Vampire
+no text
+1/1
+
 Lighthouse Chronologist
 1 U
 Creature Human Wizard
