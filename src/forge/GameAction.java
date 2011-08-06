@@ -112,7 +112,7 @@ public class GameAction {
         if(c.length != 0) discard(CardUtil.getRandom(c), sa);
         *
     }*/
-    
+    /*
     @Deprecated
     public void mill(Player player, int n)
     {
@@ -125,9 +125,9 @@ public class GameAction {
         for(int i = 0; i < max; i++) {
             AllZone.GameAction.moveToGraveyard(lib.get(i));
         }
-        */
+        *
     }
-    
+    */
     /*
     public void discard(Card c, SpellAbility sa)
     {

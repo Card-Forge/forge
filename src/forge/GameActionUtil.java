@@ -4939,7 +4939,7 @@ public class GameActionUtil {
 		final Ability ability = new Ability(c, "0") {
 			@Override
 			public void resolve() {
-				AllZone.GameAction.mill(getTargetPlayer(),3);
+				getTargetPlayer().mill(3);
 			}
 		};
 		
@@ -5235,7 +5235,7 @@ public class GameActionUtil {
 				CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", src.getController(), "G",
 						new String[] {"Creature", "Wolf"}, 2, 2, new String[] {""});
 				
-				AllZone.GameAction.mill(opponent,10);
+				opponent.mill(10);
 			}
 		}; // ability
 		
@@ -7510,10 +7510,10 @@ public class GameActionUtil {
                             int choice = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION);
                             
                             if (choice == JOptionPane.YES_OPTION) {
-                                AllZone.GameAction.mill(opponent,3);
+                                opponent.mill(3);
                             }
                         } else {
-                            AllZone.GameAction.mill(opponent,3);
+                            opponent.mill(3);
                         }
                     }
                 }//resolve()
