@@ -6957,7 +6957,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
 */
         
-        
+/* Converted to the abDestroyTgtV keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Ethersworn Adjudicator")) {
             final Ability_Tap ability = new Ability_Tap(card, "1 W B") {
@@ -7050,7 +7050,9 @@ public class CardFactory_Creatures {
             
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
-
+*/
+        
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Wojek Embermage")) {
             final Ability_Tap ability = new Ability_Tap(card) {
