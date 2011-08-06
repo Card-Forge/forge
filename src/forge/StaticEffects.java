@@ -75,7 +75,6 @@ public class StaticEffects
 		cardToEffectsList.put("Homarid", new String[] {"Homarid"});
 		
 		cardToEffectsList.put("Ikiral Outrider", new String[] {"Ikiral_Outrider"});
-		cardToEffectsList.put("Imperious Perfect", new String[] {"Imperious_Perfect"});
 		cardToEffectsList.put("Iona, Shield of Emeria", new String[] {"Iona_Shield_of_Emeria"});
 		
 		cardToEffectsList.put("Joiner Adept", new String[] {"Joiner_Adept"});

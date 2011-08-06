@@ -13081,42 +13081,6 @@ public class GameActionUtil {
 		}// newSnake()
 	}; // Sosukes Summons
 	
-	public static Command Imperious_Perfect           = new Command() {
-		private static final long serialVersionUID   = 5835056455026735693L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Imperious Perfect");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Elf");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addSemiPermanentAttackBoost(1);
-					c.addSemiPermanentDefenseBoost(1);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute
-	}; // Imperious_Perfect()
-
 	public static Command Baru                        = new Command() {
 		private static final long serialVersionUID = 7535910275326543185L;
 
@@ -17171,7 +17135,6 @@ public class GameActionUtil {
 		commands.put("Homarid", Homarid);
 		
 		commands.put("Ikiral_Outrider", Ikiral_Outrider);
-		commands.put("Imperious_Perfect", Imperious_Perfect);
 		commands.put("Iona_Shield_of_Emeria", Iona_Shield_of_Emeria);
 		
 		commands.put("Joiner_Adept", Joiner_Adept);
