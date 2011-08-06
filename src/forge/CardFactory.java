@@ -5708,8 +5708,8 @@ public class CardFactory implements NewConstants {
         	String parse = card.getKeyword().get(n).toString();
             card.removeIntrinsicKeyword(parse);
             final String[] k = parse.split("<>");
-            
-            final int num = "X".equals(k[1]) ? CardFactoryUtil.xCount(card, card.getSVar("X")) : Integer.valueOf(k[1]);
+            final String numString = k[1].equals("X") ? card.getSVar("X") : k[1];
+            final boolean xString = k[1].equals("X") ? true : false;
             final String name = k[2];
             final String imageName = k[3];
             final String controllerString = k[4];
@@ -5724,7 +5724,7 @@ public class CardFactory implements NewConstants {
 				
 				@Override
 				public boolean canPlayAI() {
-					if(num == 0) {
+					if(xString && CardFactoryUtil.xCount(card, numString) > 0) {
 						return false;
 					}
 					else{
@@ -5734,7 +5734,8 @@ public class CardFactory implements NewConstants {
 				
 				@Override
             	public void resolve() {
-					String controller = (controllerString.equals("Controller") ? card.getController() : AllZone.GameAction.getOpponent(card.getController()));
+					int num = xString ? CardFactoryUtil.xCount(card, numString) : Integer.valueOf(numString);
+		            String controller = (controllerString.equals("Controller") ? card.getController() : AllZone.GameAction.getOpponent(card.getController()));
             		for(int i = 0; i < num; i ++ ){
             			if(keywords[0].equals("None")) keywords[0] = "";
                     	CardFactoryUtil.makeToken(name, imageName, controller, manaCost, types, attack, defense, keywords);
