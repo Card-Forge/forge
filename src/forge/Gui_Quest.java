@@ -428,6 +428,12 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("James T Kirk 3		hard	Rares 40 card black discard deck + Liliana Vess");
         sb.append("\r\n");
+        sb.append("King Arthur 1		easy	Wilt-Leaf Cavaliers; Knight of the Skyward Eye and Leonin Skyhunter");
+        sb.append("\r\n");
+        sb.append("King Arthur 2		medium	Wilt-Leaf Cavaliers; Knights with flanking");
+        sb.append("\r\n");
+        sb.append("King Arthur 3		hard	Sir Shandlar of Eberyn; Knights with first strike");
+        sb.append("\r\n");
         sb.append("King Edward 1		easy	Elementals, 5 color deck with Tribal Flames");
         sb.append("\r\n");
         sb.append("King Edward 2		medium	Elementals, 5 color deck with Tribal Flames");
