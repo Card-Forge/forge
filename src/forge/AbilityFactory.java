@@ -143,6 +143,9 @@ public class AbilityFactory {
 				abTgt = new Target("TgtV", mapParams.get("TgtPrompt"), mapParams.get("ValidTgts").split(","));
 			else
 				abTgt = new Target(mapParams.get("Tgt"));
+			
+			if (mapParams.containsKey("TgtZone"))	// if Targeting something not in play, this Key should be set
+				abTgt.setZone(mapParams.get("TgtZone"));
 		}
 		
 		hasSubAb = mapParams.containsKey("SubAbility");

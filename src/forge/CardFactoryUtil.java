@@ -3293,6 +3293,29 @@ public class CardFactoryUtil {
         return result;
     }
     
+    public static boolean isTargetStillValid(SpellAbility ability, Card target) {
+    	Card source = ability.getSourceCard();
+    	Target tgt = ability.getTarget();
+    	if (tgt != null){
+    		// Reconfirm the Validity of a TgtValid, or if the Creature is still a Creature
+    		if (tgt.canTgtValid() && !target.isValidCard(tgt.getValidTgts(), ability.getActivatingPlayer()))
+    			return false;
+    		else if (tgt.canTgtCreature() && !target.isCreature())
+    			return false;
+    		
+    		// Check if the target is in the zone it needs to be in to be targeted
+    		if (!AllZone.getZone(target).is(tgt.getZone()))
+    			return false;
+    	}
+    	
+    	// If an Aura's target is removed before it resolves, the Aura fizzles
+    	if (source.isAura() && !AllZone.getZone(target).is(Constant.Zone.Play))
+    		return false;
+    	
+    	// Make sure it's still targetable as well
+        return canTarget(source, target);
+    }
+    
     public static boolean canTarget(SpellAbility ability, Card target) {
         return canTarget(ability.getSourceCard(), target);
     }
@@ -3300,6 +3323,11 @@ public class CardFactoryUtil {
     public static boolean isColored(Card c)
     {
     	return c.isWhite() || c.isBlue() || c.isBlack() || c.isRed() || c.isGreen();
+    }
+    
+    public static boolean canTarget(Card spell, String player) {
+    	Card c = player.equals(Constant.Player.Computer) ? AllZone.CardFactory.ComputerNullCard : AllZone.CardFactory.HumanNullCard;
+    	return canTarget(spell, c);
     }
     
     public static boolean canTarget(Card spell, Card target) {

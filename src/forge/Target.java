@@ -18,6 +18,10 @@ public class Target {
 	public String getVTSelection() { return vtSelection; }
 	public void setVTSelection(String vtSelStr) { vtSelection = vtSelStr; }
 	
+	private String tgtZone = Constant.Zone.Play;
+	public void setZone(String tZone) { tgtZone = tZone; }
+	public String getZone() { return tgtZone; }
+	
 	private int minTargets = 0;
 	public int getMinTargets() { return minTargets; }
 	private int maxTargets = 0;

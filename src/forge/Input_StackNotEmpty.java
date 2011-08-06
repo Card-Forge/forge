@@ -1,6 +1,8 @@
 
 package forge;
 
+import com.esotericsoftware.minlog.Log;
+
 
 public class Input_StackNotEmpty extends Input implements java.io.Serializable {
     private static final long serialVersionUID = -3015125043127874730L;
@@ -22,53 +24,68 @@ public class Input_StackNotEmpty extends Input implements java.io.Serializable {
         
         SpellAbility sa = AllZone.Stack.pop();
         Card c = sa.getSourceCard();
+        boolean fizzle = false;
         
-        final Card crd = c;
-        if(sa.isBuyBackAbility()) {
-            c.addReplaceMoveToGraveyardCommand(new Command() {
-                private static final long serialVersionUID = -2559488318473330418L;
-                
-                public void execute() {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, crd.getController());
-                    AllZone.GameAction.moveTo(hand, crd);
-                }
-            });
+        if (sa.getTargetCard() != null){
+        	fizzle = !CardFactoryUtil.isTargetStillValid(sa, sa.getTargetCard());
+        }
+        else if (sa.getTargetPlayer() != "") {
+        	fizzle = !CardFactoryUtil.canTarget(c, sa.getTargetPlayer());
         }
         
-        // To stop Copied Spells from going into the graveyard.
-        if(sa.getSourceCard().isCopiedSpell()) {
-            c.addReplaceMoveToGraveyardCommand(new Command() {
-                private static final long serialVersionUID = -2559488318473330418L;                
-                public void execute() {
-                }
-            });
+        if (!fizzle){
+	        final Card crd = c;
+	        if(sa.isBuyBackAbility()) {
+	            c.addReplaceMoveToGraveyardCommand(new Command() {
+	                private static final long serialVersionUID = -2559488318473330418L;
+	                
+	                public void execute() {
+	                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, crd.getController());
+	                    AllZone.GameAction.moveTo(hand, crd);
+	                }
+	            });
+	        }
+	        
+	        // To stop Copied Spells from going into the graveyard.
+	        if(sa.getSourceCard().isCopiedSpell()) {
+	            c.addReplaceMoveToGraveyardCommand(new Command() {
+	                private static final long serialVersionUID = -2559488318473330418L;                
+	                public void execute() {
+	                }
+	            });
+	        }
+	        sa.resolve();
+	        
+	        if(sa.getSourceCard().getKeyword().contains("Draw a card.") 
+	        		&& !(sa.getSourceCard().getKeyword().contains("Ripple:4") && sa.isAbility())) 
+	        	AllZone.GameAction.drawCard(sa.getSourceCard().getController());
+	        
+	        if(sa.getSourceCard().getKeyword().contains("Proliferate"))
+	        	AllZone.GameAction.getProliferateAbility(sa.getSourceCard(), "0").resolve();
+	        
+	        for(int i = 0; i < sa.getSourceCard().getKeyword().size(); i++) {
+	            String k = sa.getSourceCard().getKeyword().get(i);
+	            if(k.startsWith("Scry")) {
+	                String kk[] = k.split(" ");
+	                AllZone.GameAction.scry(sa.getSourceCard().getController(), Integer.parseInt(kk[1]));
+	            }
+	        }
+        
         }
-        sa.resolve();
-        
-        if(sa.getSourceCard().getKeyword().contains("Draw a card.") 
-        		&& !(sa.getSourceCard().getKeyword().contains("Ripple:4") && sa.isAbility())) 
-        	AllZone.GameAction.drawCard(sa.getSourceCard().getController());
-        
-        if(sa.getSourceCard().getKeyword().contains("Proliferate"))
-        	AllZone.GameAction.getProliferateAbility(sa.getSourceCard(), "0").resolve();
-        
-        for(int i = 0; i < sa.getSourceCard().getKeyword().size(); i++) {
-            String k = sa.getSourceCard().getKeyword().get(i);
-            if(k.startsWith("Scry")) {
-                String kk[] = k.split(" ");
-                AllZone.GameAction.scry(sa.getSourceCard().getController(), Integer.parseInt(kk[1]));
-            }
+        else{
+        	// Spell fizzles, alert player?
+        	Log.debug(c.getName() + " ability fizzles.");
         }
+        
         AllZone.GameAction.checkStateEffects();
         
         //special consideration for "Beacon of Unrest" and other "Beacon" cards
-        if((c.isInstant() || c.isSorcery()) && (!c.getName().startsWith("Beacon"))
+        if((c.isInstant() || c.isSorcery() || (c.isAura() && fizzle)) && (!c.getName().startsWith("Beacon"))
                 && (!c.getName().startsWith("Pulse")) && !AllZone.GameAction.isCardRemovedFromGame(c)) //hack to make flashback work
         {
             if(c.getReplaceMoveToGraveyard().size() == 0) AllZone.GameAction.moveToGraveyard(c);
             else c.replaceMoveToGraveyard();
         }
-        
 
         //update all zones, something things arent' updated for some reason
         AllZone.Human_Hand.updateObservers();

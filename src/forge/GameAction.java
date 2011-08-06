@@ -3083,10 +3083,6 @@ public class GameAction {
         return false;
     }//isAttached(Card c)
     
-    public boolean canTarget(String targetPlayer) {
-        return true;
-    }
-    
     public void playCard(Card c) {
         HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
         SpellAbility[] abilities = canPlaySpellAbility(c.getSpellAbility());
