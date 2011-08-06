@@ -3,6 +3,7 @@ ManaCost:3
 Types:Artifact
 Text:no text
 K:abDrawCards 2 T Sac<1/Creature>:1:Draw a card.:Phyrexian Vault - Controller draws a card.
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_vault.jpg
 End
