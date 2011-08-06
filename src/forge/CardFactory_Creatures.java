@@ -8398,14 +8398,7 @@ public class CardFactory_Creatures {
             };//SpellAbility
             
             card.addSpellAbility(ability);
-            ability.setDescription("R: Sacrifice Bloodfire Colossus, Bloodfire Colossus deals 6 damage to each creature and each player.");
-            ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, new Command() {
-                private static final long serialVersionUID = 8283052965865884889L;
-                
-                public void execute() {
-                    AllZone.GameAction.sacrifice(card);
-                }
-            }, true, false));
+            ability.setDescription(abCost.toString() + "Bloodfire Colossus deals 6 damage to each creature and each player.");
         }//*************** END ************ END **************************
         
         
