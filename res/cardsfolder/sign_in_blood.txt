@@ -2,7 +2,7 @@ Name:Sign in Blood
 ManaCost:B B
 Types:Sorcery
 Text:no text
-K:spDrawCardsTgt:2:Drawback$LoseLifeTgt/2:Target player draws two cards and loses 2 life.:Sign in Blood - Target player draws 2 cards and loses 2 life.
+A:SP$Draw | Cost$ B B | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player to draw two cards and lose 2 life | SpellDescription$ Target player draws two cards and loses 2 life. | SubAbility$ LoseLifeTgt/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sign_in_blood.jpg
 End
