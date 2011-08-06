@@ -7864,64 +7864,6 @@ public class CardFactory_Creatures {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Cemetery Reaper")) {
-        	Ability_Cost abCost = new Ability_Cost("2 B T", cardName, true);
-        	final Ability_Activated ability = new Ability_Activated(card, abCost, null)
-        	{
-				private static final long serialVersionUID = 1067370853723993280L;
-
-				public void makeToken(Card c)
-				{
-					AllZone.GameAction.exile(c);
-            		CardFactoryUtil.makeToken("Zombie", "B 2 2 Zombie", card.getController(), "B", new String[] {
-                            "Creature", "Zombie"}, 2, 2, new String[] {""});
-				}
-				
-				public void resolve()
-        		{
-        			CardList list = AllZoneUtil.getCardsInGraveyard();
-        			list = list.getType("Creature");
-        			
-        			if(list.size() > 0) {
-                        if(card.getController().equals(AllZone.HumanPlayer)) {
-                            Object o = GuiUtils.getChoice("Pick creature to exile: ", list.toArray());
-                            if(o != null) {
-                            	Card c = (Card)o;
-                            	if (AllZone.GameAction.isCardInGrave(c))
-                            		makeToken(c);
-                            }
-                        } else {
-                            Card c = list.get(0);
-                            if (AllZone.GameAction.isCardInGrave(c))
-                        		makeToken(c);
-                        }
-                    }
-        		}
-				
-				public boolean canPlayAI()
-				{
-					//AI will only use this when there's creatures in human's graveyard:
-					CardList humanList = AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer);
-					humanList = humanList.getType("Creature");
-					return humanList.size() > 0;
-				}
-        	};
-        	card.addSpellAbility(ability);
-        	
-        	StringBuilder sbDesc = new StringBuilder();
-        	sbDesc.append(abCost);
-        	sbDesc.append("Exile target creature card from a graveyard. ");
-        	sbDesc.append("Put a 2/2 black Zombie creature token onto the battlefield.");
-        	ability.setDescription(sbDesc.toString());
-        	
-        	StringBuilder sbStack = new StringBuilder();
-        	sbStack.append(card).append("Exile target creature card from a graveyard. ");
-        	sbStack.append("Put a 2/2 black Zombie creature token onto the battlefield.");
-        	ability.setStackDescription(sbStack.toString());
-    	}//*************** END ************ END **************************
-
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Vampire Hexmage")) {
         	/*
         	 * Sacrifice Vampire Hexmage: Remove all counters from target permanent.
