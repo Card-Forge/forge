@@ -284,16 +284,13 @@ public class ComputerUtil_Block2
          //the computer blocks 50% of the time or if the computer would lose the game
          shouldBlock = random.nextBoolean() || blockersLife <= sumUnblockedAttackers(combat);
 
-         
          testing("shouldBlock - " +shouldBlock);
 
-         
          //System.out.println("Computer checking to block: "+attack.getName());
          //Lure
          if(attack.isEnchantedBy("Lure")) {
         	 for(Card blocker:possibleBlockers) {
         		 if(CombatUtil.canBlock(attack, blocker)) {
-        			 System.out.println("Computer adding "+blocker+" to block "+attack);
         			 possibleBlockers.remove(blocker);
         			 combat.addBlocker(attack, blocker);
         		 }
@@ -318,7 +315,6 @@ public class ComputerUtil_Block2
                 {
                    possibleBlockers.remove(m[inner]);
                    combat.addBlocker(attack, m[inner]);
-                   System.out.println(m[inner].toString() + " is blocking " + attack.toString());
                 }
              }//for
              continue;
@@ -379,7 +375,6 @@ public class ComputerUtil_Block2
         	 // TODO: creatures that can block more than one don't necessarily get removed
 			possibleBlockers.remove(c);
 			combat.addBlocker(attack, c);
-			System.out.println(c.toString() + " is blocking " + attack.toString());
          }
 
          //multiple blockers
@@ -393,13 +388,12 @@ public class ComputerUtil_Block2
                if(m.length != 1)
                {
                   possibleBlockers.remove(m[inner]);
-                  System.out.println(c.toString() + " is blocking " + attack.toString());
                   combat.addBlocker(attack, m[inner]);
                }
             }//for
          }//if
          else{
-        	 System.out.println(attack.toString() + " is unblocked");
+
          }
       }//for attackers
 
