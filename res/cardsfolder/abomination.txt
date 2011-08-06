@@ -3,6 +3,8 @@ ManaCost:3 B B
 Types:Creature Horror
 Text:Whenever Abomination blocks or becomes blocked by a green or white creature, destroy that creature at end of combat.
 PT:2/6
+K:Whenever CARDNAME blocks a creature, destroy that creature at end of combat:Creature.Green,Creature.White
+K:Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat:Creature.Green,Creature.White
 K:SVar:Rarity:Uncommon
 K:SVar:Picture:http://www.wizards.com/global/images/magic/general/abomination.jpg
 End

@@ -2206,6 +2206,71 @@ public class CombatUtil {
             
         }//flanking
         
+        // if (b.getName().equals("Abomination")) {
+        if(b.hasStartOfKeyword("Whenever CARDNAME blocks a creature, destroy that creature at end of combat")) {
+    		int KeywordPosition = b.getKeywordPosition("Whenever CARDNAME blocks a creature, destroy that creature at end of combat");
+    		String parse = b.getKeyword().get(KeywordPosition).toString();
+    		String k[] = parse.split(":");
+    		final String restrictions[] = k[1].split(",");
+    		if(a.isValidCard(restrictions)) {
+                	final Card attacker = a;
+                	final Ability ability = new Ability(b, "0") {
+                    	@Override
+                   	public void resolve() {
+                        	if(AllZone.GameAction.isCardInPlay(attacker)) {
+                            	AllZone.GameAction.destroy(attacker);
+                        	}
+                    	}
+                	};
+                
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(b).append(" - destroy blocked creature.");
+                	ability.setStackDescription(sb.toString());
+                
+                	final Command atEOC = new Command() {
+                    	private static final long serialVersionUID = 5854485314766349980L;
+                    
+                    	public void execute() {
+                        	AllZone.Stack.add(ability);
+                    	}
+                	};
+                
+                	AllZone.EndOfCombat.addAt(atEOC);
+    		}
+        }// Whenever CARDNAME blocks a creature, destroy that creature at end of combat 
+
+        if(a.hasStartOfKeyword("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat")) {
+        	int KeywordPosition = a.getKeywordPosition("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat");
+        	String parse = a.getKeyword().get(KeywordPosition).toString();
+    		String k[] = parse.split(":");
+    		final String restrictions[] = k[1].split(",");
+    		if(b.isValidCard(restrictions)) {
+                final Card blocker = b;
+                final Ability ability = new Ability(a, "0") {
+                    @Override
+                    public void resolve() {
+                        AllZone.GameAction.destroy(blocker);
+                    }
+                };
+                
+                StringBuilder sb = new StringBuilder();
+                sb.append(a).append(" - destroy blocking creature.");
+                ability.setStackDescription(sb.toString());
+                
+                final Command atEOC = new Command() {
+                    
+                    private static final long serialVersionUID = -9077416427198135373L;
+                    
+                    public void execute() {
+                        if(AllZone.GameAction.isCardInPlay(blocker)) AllZone.Stack.add(ability);
+                    }
+                };
+                
+                AllZone.EndOfCombat.addAt(atEOC);
+    		}
+        }//Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat
+        
+        
         if (a.getName().equals("Slith Strider") && !a.getCreatureGotBlockedThisCombat()) {
             String player = a.getController();
             AllZone.GameAction.drawCard(player);
@@ -2295,6 +2360,7 @@ public class CombatUtil {
             AllZone.EndOfCombat.addAt(atEOC);
         }//Frostweb Spider
         
+        /* converted to keyword
         else if(b.getName().equals("Abomination")
                 && (CardUtil.getColors(a).contains(Constant.Color.White) || CardUtil.getColors(a).contains(
                         Constant.Color.Green))) {
@@ -2401,6 +2467,7 @@ public class CombatUtil {
             
             AllZone.EndOfCombat.addAt(atEOC);
         }//Gorgon Recluse attacking
+        */
         
         else if (b.getName().equals("Alaborn Zealot")) {
         	final Card blocker = b; 

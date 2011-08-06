@@ -1972,6 +1972,21 @@ public class Card extends MyObservable {
 		return getKeyword().contains(keyword);
 	}
 	
+	public boolean hasStartOfKeyword(String keyword)
+	{
+        ArrayList<String> a = getKeyword();
+        for(int i = 0; i < a.size(); i++)
+            if(a.get(i).toString().startsWith(keyword)) return true;
+        return false;
+    }
+	
+	public final int getKeywordPosition(String k) {
+        ArrayList<String> a = getKeyword();
+        for(int i = 0; i < a.size(); i++)
+            if(a.get(i).toString().startsWith(k)) return i;
+        return -1;
+    }
+	
 	public boolean hasAnyKeyword(String keywords[])
 	{
 		for (int i=0; i<keywords.length; i++)
