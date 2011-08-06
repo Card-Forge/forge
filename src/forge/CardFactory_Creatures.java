@@ -11407,13 +11407,21 @@ public class CardFactory_Creatures {
             {
                 //if computer controlled Archon of Justice have it select the best creature, or enchantment, or artifact, whatever the human controllers, and as a last option a card it controls
                
+               Card temp;
+            	
                CardList human_list = new CardList(AllZone.Human_Play.getCards());
-               ability.setTargetCard(CardFactoryUtil.AI_getBestCreature(human_list));
+               temp = CardFactoryUtil.AI_getBestCreature(human_list);
+               if (temp != null)
+            	   ability.setTargetCard(CardFactoryUtil.AI_getBestCreature(human_list));
                if(ability.getTargetCard() == null){
-                  ability.setTargetCard(CardFactoryUtil.AI_getBestEnchantment(human_list, card, true));
+            	  temp = CardFactoryUtil.AI_getBestEnchantment(human_list, card ,false);
+            	  if (temp != null)
+            		  ability.setTargetCard(CardFactoryUtil.AI_getBestEnchantment(human_list, card, true));
                }
                if(ability.getTargetCard() == null){
-                  ability.setTargetCard(CardFactoryUtil.AI_getBestArtifact(human_list));
+            	  temp = CardFactoryUtil.AI_getBestArtifact(human_list);
+            	  if (temp != null)
+            		  ability.setTargetCard(CardFactoryUtil.AI_getBestArtifact(human_list));
                }
                if(ability.getTargetCard() == null){
                   if(human_list.size() == 0){

@@ -811,7 +811,7 @@ Enchanted creature gets +2/+2.
 Enchant creature
 
 Goblin War Paint
-2 R
+1 R
 Enchantment Aura
 Enchanted creature gets +2/+2 and has haste.
 Enchant creature
