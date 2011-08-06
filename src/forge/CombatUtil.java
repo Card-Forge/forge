@@ -683,6 +683,34 @@ public class CombatUtil {
     	return totalDamageOfBlockers(attacker, blockers) >= attacker.getKillDamage();
     }
     
+    //Will this trigger trigger?
+    public static boolean combatTriggerWillTrigger(Card attacker, Card defender, Trigger trigger) {
+		HashMap<String,String> trigParams = trigger.getMapParams();
+		boolean willTrigger = false;
+		Card source = trigger.getHostCard();
+		
+		if (trigParams.get("Mode").equals("Blocks")) {
+			willTrigger = true;
+			if(trigParams.containsKey("ValidBlocked"))
+				if(!trigger.matchesValid(attacker, trigParams.get("ValidBlocked").split(","), source))
+					willTrigger = false;
+			if(trigParams.containsKey("ValidCard"))
+				if(!trigger.matchesValid(defender, trigParams.get("ValidCard").split(","), source))
+					willTrigger = false;
+		}
+		else if (trigParams.get("Mode").equals("AttackerBlocked")) {
+			willTrigger = true;
+			if(trigParams.containsKey("ValidBlocker"))
+				if(!trigger.matchesValid(defender, trigParams.get("ValidBlocked").split(","), source))
+					willTrigger = false;
+			if(trigParams.containsKey("ValidCard"))
+				if(!trigger.matchesValid(attacker, trigParams.get("ValidCard").split(","), source))
+					willTrigger = false;
+		}
+		
+		return willTrigger;
+    }
+    
     //Predict the Power bonus of the blocker if blocking the attacker (Flanking, Bushido and other triggered abilities)
     public static int predictPowerBonusOfBlocker(Card attacker, Card defender) {
     	int power = 0;
@@ -692,32 +720,27 @@ public class CombatUtil {
         	
         power += defender.getKeywordMagnitude("Bushido");
         
-        ArrayList<Trigger> triggers = defender.getTriggers();
-		for(Trigger trigger : triggers)
+        ArrayList<Trigger> registeredTriggers = AllZone.TriggerHandler.getRegisteredTriggers();
+		for(Trigger trigger : registeredTriggers)
 		{
 			HashMap<String,String> trigParams = trigger.getMapParams();
-			if (trigParams.get("Mode").equals("Blocks")) {
-				boolean willTrigger = true;
-				if(trigParams.containsKey("ValidBlocked"))
-					if(!trigger.matchesValid(attacker, trigParams.get("ValidBlocked").split(","), defender))
-						willTrigger = false;
-				if(trigParams.containsKey("ValidCard"))
-					if(!trigger.matchesValid(defender, trigParams.get("ValidCard").split(","), defender))
-						willTrigger = false;
-				if(willTrigger && trigParams.containsKey("Execute")) {
-					String ability = defender.getSVar(trigParams.get("Execute"));
-					AbilityFactory AF = new AbilityFactory();
-	        		HashMap<String,String> abilityParams = AF.getMapParams(ability, defender);
-	        		if (abilityParams.containsKey("AB")) { 
-						if (abilityParams.get("AB").equals("Pump")) 
-							if (abilityParams.containsKey("NumAtt")){
-								String att = abilityParams.get("NumAtt");
-								if (att.startsWith("+"))
-									att = att.substring(1);
-								power += Integer.parseInt(att);
-							}
-	        		}
-				}
+			Card source = trigger.getHostCard();
+				
+			if(combatTriggerWillTrigger(attacker, defender, trigger) && trigParams.containsKey("Execute")) {
+				String ability = source.getSVar(trigParams.get("Execute"));
+				AbilityFactory AF = new AbilityFactory();
+        		HashMap<String,String> abilityParams = AF.getMapParams(ability, source);
+        		if (abilityParams.containsKey("AB")) { 
+					if (abilityParams.get("AB").equals("Pump"))
+						if (!abilityParams.containsKey("ValidTgts") && !abilityParams.containsKey("Tgt"))
+						if (AbilityFactory.getDefinedCards(source, trigParams.get("Defined"), null).contains(defender))
+						if (abilityParams.containsKey("NumAtt")){
+							String att = abilityParams.get("NumAtt");
+							if (att.startsWith("+"))
+								att = att.substring(1);
+							power += Integer.parseInt(att);
+						}
+        		}
 			}
 		}
     	return power;
@@ -732,32 +755,27 @@ public class CombatUtil {
         	
         toughness += defender.getKeywordMagnitude("Bushido");
         
-        ArrayList<Trigger> triggers = defender.getTriggers();
-		for(Trigger trigger : triggers)
+        ArrayList<Trigger> registeredTriggers = AllZone.TriggerHandler.getRegisteredTriggers();
+		for(Trigger trigger : registeredTriggers)
 		{
 			HashMap<String,String> trigParams = trigger.getMapParams();
-			if (trigParams.get("Mode").equals("Blocks")) {
-				boolean willTrigger = true;
-				if(trigParams.containsKey("ValidBlocked"))
-					if(!trigger.matchesValid(attacker, trigParams.get("ValidBlocked").split(","), defender))
-						willTrigger = false;
-				if(trigParams.containsKey("ValidCard"))
-					if(!trigger.matchesValid(defender, trigParams.get("ValidCard").split(","), defender))
-						willTrigger = false;
-				if(willTrigger && trigParams.containsKey("Execute")) {
-					String ability = defender.getSVar(trigParams.get("Execute"));
-					AbilityFactory AF = new AbilityFactory();
-	        		HashMap<String,String> abilityParams = AF.getMapParams(ability, defender);
-	        		if (abilityParams.containsKey("AB")) {
-						if (abilityParams.get("AB").equals("Pump")) 
-							if (abilityParams.containsKey("NumDef")) {
-								String def = abilityParams.get("NumDef");
-								if (def.startsWith("+"))
-									def = def.substring(1);
-								toughness += Integer.parseInt(def);
-							}
-	        		}
-				}
+			Card source = trigger.getHostCard();
+
+			if(combatTriggerWillTrigger(attacker, defender, trigger)  && trigParams.containsKey("Execute")) {
+				String ability = source.getSVar(trigParams.get("Execute"));
+				AbilityFactory AF = new AbilityFactory();
+        		HashMap<String,String> abilityParams = AF.getMapParams(ability, source);
+        		if (abilityParams.containsKey("AB")) {
+					if (abilityParams.get("AB").equals("Pump"))
+						if (!abilityParams.containsKey("ValidTgts") && !abilityParams.containsKey("Tgt"))
+						if (AbilityFactory.getDefinedCards(source, trigParams.get("Defined"), null).contains(defender))
+						if (abilityParams.containsKey("NumDef")) {
+							String def = abilityParams.get("NumDef");
+							if (def.startsWith("+"))
+								def = def.substring(1);
+							toughness += Integer.parseInt(def);
+						}
+        		}
 			}
 		}
     	return toughness;
@@ -769,32 +787,27 @@ public class CombatUtil {
         	
         power += attacker.getKeywordMagnitude("Bushido");
         
-        ArrayList<Trigger> triggers = attacker.getTriggers();
-		for(Trigger trigger : triggers)
+        ArrayList<Trigger> registeredTriggers = AllZone.TriggerHandler.getRegisteredTriggers();
+		for(Trigger trigger : registeredTriggers)
 		{
 			HashMap<String,String> trigParams = trigger.getMapParams();
-			if (trigParams.get("Mode").equals("AttackerBlocked")) {
-				boolean willTrigger = true;
-				if(trigParams.containsKey("ValidBlocker"))
-					if(!trigger.matchesValid(defender, trigParams.get("ValidBlocked").split(","), attacker))
-						willTrigger = false;
-				if(trigParams.containsKey("ValidCard"))
-					if(!trigger.matchesValid(attacker, trigParams.get("ValidCard").split(","), attacker))
-						willTrigger = false;
-				if(willTrigger && trigParams.containsKey("Execute")) {
-					String ability = attacker.getSVar(trigParams.get("Execute"));
-					AbilityFactory AF = new AbilityFactory();
-	        		HashMap<String,String> abilityParams = AF.getMapParams(ability, attacker);
-	        		if (abilityParams.containsKey("AB")) { 
-						if (abilityParams.get("AB").equals("Pump")) 
-							if (abilityParams.containsKey("NumAtt")){
-								String att = abilityParams.get("NumAtt");
-								if (att.startsWith("+"))
-									att = att.substring(1);
-								power += Integer.parseInt(att);
-							}
-	        		}
-				}
+			Card source = trigger.getHostCard();
+
+			if(combatTriggerWillTrigger(attacker, defender, trigger)  && trigParams.containsKey("Execute")) {
+				String ability = source.getSVar(trigParams.get("Execute"));
+				AbilityFactory AF = new AbilityFactory();
+        		HashMap<String,String> abilityParams = AF.getMapParams(ability, source);
+        		if (abilityParams.containsKey("AB")) { 
+					if (abilityParams.get("AB").equals("Pump"))
+						if (!abilityParams.containsKey("ValidTgts") && !abilityParams.containsKey("Tgt"))
+						if (AbilityFactory.getDefinedCards(source, trigParams.get("Defined"), null).contains(attacker))
+						if (abilityParams.containsKey("NumAtt")){
+							String att = abilityParams.get("NumAtt");
+							if (att.startsWith("+"))
+								att = att.substring(1);
+							power += Integer.parseInt(att);
+						}
+        		}
 			}
 		}
     	return power;
@@ -806,32 +819,27 @@ public class CombatUtil {
         	
         toughness += attacker.getKeywordMagnitude("Bushido");
         
-        ArrayList<Trigger> triggers = attacker.getTriggers();
-		for(Trigger trigger : triggers)
+        ArrayList<Trigger> registeredTriggers = AllZone.TriggerHandler.getRegisteredTriggers();
+		for(Trigger trigger : registeredTriggers)
 		{
 			HashMap<String,String> trigParams = trigger.getMapParams();
-			if (trigParams.get("Mode").equals("AttackerBlocked")) {
-				boolean willTrigger = true;
-				if(trigParams.containsKey("ValidBlocker"))
-					if(!trigger.matchesValid(defender, trigParams.get("ValidBlocked").split(","), attacker))
-						willTrigger = false;
-				if(trigParams.containsKey("ValidCard"))
-					if(!trigger.matchesValid(attacker, trigParams.get("ValidCard").split(","), attacker))
-						willTrigger = false;
-				if(willTrigger && trigParams.containsKey("Execute")) {
-					String ability = attacker.getSVar(trigParams.get("Execute"));
-					AbilityFactory AF = new AbilityFactory();
-	        		HashMap<String,String> abilityParams = AF.getMapParams(ability, attacker);
-	        		if (abilityParams.containsKey("AB")) {
-						if (abilityParams.get("AB").equals("Pump")) 
-							if (abilityParams.containsKey("NumDef")) {
-								String def = abilityParams.get("NumDef");
-								if (def.startsWith("+"))
-									def = def.substring(1);
-								toughness += Integer.parseInt(def);
-							}
-	        		}
-				}
+			Card source = trigger.getHostCard();
+
+			if(combatTriggerWillTrigger(attacker, defender, trigger)  && trigParams.containsKey("Execute")) {
+				String ability = source.getSVar(trigParams.get("Execute"));
+				AbilityFactory AF = new AbilityFactory();
+        		HashMap<String,String> abilityParams = AF.getMapParams(ability, source);
+        		if (abilityParams.containsKey("AB")) {
+					if (abilityParams.get("AB").equals("Pump"))
+						if (!abilityParams.containsKey("ValidTgts") && !abilityParams.containsKey("Tgt"))
+						if (AbilityFactory.getDefinedCards(source, trigParams.get("Defined"), null).contains(attacker))
+						if (abilityParams.containsKey("NumDef")) {
+							String def = abilityParams.get("NumDef");
+							if (def.startsWith("+"))
+								def = def.substring(1);
+							toughness += Integer.parseInt(def);
+						}
+        		}
 			}
 		}
     	return toughness;

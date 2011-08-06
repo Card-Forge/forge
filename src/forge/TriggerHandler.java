@@ -171,6 +171,10 @@ public class TriggerHandler {
 		registeredTriggers.remove(trig);
 	}
 	
+	public ArrayList<Trigger> getRegisteredTriggers() {
+		return registeredTriggers;
+	}
+	
 	public void removeAllFromCard(Card crd)
 	{
 		for(int i=0;i<registeredTriggers.size();i++)
