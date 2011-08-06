@@ -1,3 +1,17 @@
+Linvala, Keeper of Silence
+2 W W
+Legendary Creature Angel
+Activated abilities of creatures your opponents control can't be activated.
+3/4
+Flying
+
+Nirkana Revenant
+4 B B
+Creature Vampire Shade
+Whenever you tap a Swamp for mana, add 1 black mana to your mana pool (in addition to the mana the land produces).
+4/4
+abPump B:+1/+1
+
 Burst of Speed
 R
 Sorcery

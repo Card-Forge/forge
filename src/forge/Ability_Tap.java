@@ -21,7 +21,11 @@ abstract public class Ability_Tap extends SpellAbility implements java.io.Serial
         
         if(AllZone.GameAction.isCardInPlay(card) && card.isUntapped()) {
             if(card.isFaceDown()) return false;
-            
+            if(card.isCreature() == true) {
+        		CardList Silence = AllZoneUtil.getPlayerCardsInPlay(AllZone.GameAction.getOpponent(getSourceCard().getController())); 		
+        		Silence = Silence.getName("Linvala, Keeper of Silence");
+        		if(Silence.size() > 0) return false;
+        		}
             if(card.isArtifact() && card.isCreature()) return !card.hasSickness();
             
             if(card.isCreature() && (!card.hasSickness())) return true;

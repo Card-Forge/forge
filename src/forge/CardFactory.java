@@ -886,7 +886,7 @@ public class CardFactory implements NewConstants {
                         @Override
                         public boolean canPlay() {
                             return (CardFactoryUtil.canUseAbility(card))
-                                    && (AllZone.GameAction.isCardInPlay(card)) && (!card.isFaceDown());
+                                    && (AllZone.GameAction.isCardInPlay(card)) && (!card.isFaceDown() && super.canPlay());
                         }
                         
                         private CardList getCreatures() {
@@ -1023,7 +1023,7 @@ public class CardFactory implements NewConstants {
                             if(!card.hasSickness() || !card.isCreature()) sick = false;
                             
                             if(card.isUntapped() && AllZone.GameAction.isCardInPlay(card) && !sick
-                                    && !card.isFaceDown()) return true;
+                                    && !card.isFaceDown() && super.canPlay()) return true;
                             else return false;
                         }
                         

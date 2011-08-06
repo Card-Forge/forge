@@ -38,33 +38,82 @@ public class Input_PayManaCostUtil
     		ability.put(am.toString(), am);
     	chosen = (Ability_Mana) AllZone.Display.getChoice("Choose mana ability", abilities.toArray());
     }
-   {
-	   if (chosen.isReflectedMana()) {
-		   // Choose the mana color
-		   Ability_Reflected_Mana arm = (Ability_Reflected_Mana) chosen;
-		   arm.chooseManaColor();
+    {
+ 	   if (chosen.isReflectedMana()) {
+ 		   // Choose the mana color
+ 		   Ability_Reflected_Mana arm = (Ability_Reflected_Mana) chosen;
+ 		   arm.chooseManaColor();
 
-		   // Only resolve if the choice wasn't cancelled and the mana was actually needed
-		   if (arm.wasCancelled()) {
-			   return manaCost;
-		   } else {
-			   String color = chosen.mana();
-			   if (!manaCost.isNeeded(color)) {
-				   // Don't tap the card if the user chose something invalid
-				   arm.reset(); // Invalidate the choice
-				   return manaCost;
-			   }
-		   }
-		   // A valid choice was made -- resolve the ability and tap the card
-		   arm.resolve();
-		   arm.getSourceCard().tap();
-	   } else {
-		   AllZone.GameAction.playSpellAbility(chosen);
-	   }
-    	manaCost = AllZone.ManaPool.subtractMana(manaCost, chosen);
-    	AllZone.Human_Play.updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap (copied)
-    	return manaCost;	
-    }
+ 		   // Only resolve if the choice wasn't cancelled and the mana was actually needed
+ 		   if (arm.wasCancelled()) {
+ 			   return manaCost;
+ 		   } else {
+ 			   String color = chosen.mana();
+ 			   if (!manaCost.isNeeded(color)) {
+ 				   // Don't tap the card if the user chose something invalid
+ 				   arm.reset(); // Invalidate the choice
+ 				   return manaCost;
+ 			   }
+ 		   }
+ 		   // A valid choice was made -- resolve the ability and tap the card
+ 		   arm.resolve();
+ 		   arm.getSourceCard().tap();
+ 	   } else {
+ 		   AllZone.GameAction.playSpellAbility(chosen);
+ 	   }
+     	manaCost = AllZone.ManaPool.subtractMana(manaCost, chosen);
+     	// Nirkana Revenant Code
+         CardList Nirkana_Human = new CardList();
+         PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);                   
+         Nirkana_Human.addAll(play.getCards());
+         Nirkana_Human = Nirkana_Human.getName("Nirkana Revenant"); 
+         Card mp = AllZone.ManaPool;
+         if(Nirkana_Human.size() > 0 && card.getType().contains("Swamp") && card.getController().equals("Human")) {
+         	for(int x = 0; x < Nirkana_Human.size(); x++) {
+        		for(int i = 0; i < abilities.size(); i++) {
+        			if(abilities.get(i).mana().contains("B") == true) {
+         		if(card.isSnow() == false) {
+         			chosen = abilities.get(i);	
+         			manaCost = AllZone.ManaPool.subtractMana(manaCost, chosen);
+         		} else { 
+         			
+         			if(manaCost.toString().trim() != "") {
+         			if(manaCost.toString().contains("B"))  {
+         				manaCost.subtractMana("B");
+         				if(AllZone.ManaPool.has == "") {
+         					AllZone.ManaPool.paid = AllZone.ManaPool.paid.replaceFirst("B", "");
+         					mp.removeExtrinsicKeyword("ManaPool:B");
+         				}
+         				else  {
+         					AllZone.ManaPool.has = AllZone.ManaPool.has.replaceFirst("B", "");
+         					
+         				}
+         			}
+         			else {
+         				if(manaCost.toString().length() > 0) {
+         				manaCost.subtractMana("1");
+         				
+         				if(AllZone.ManaPool.has == "") {
+         					AllZone.ManaPool.paid = AllZone.ManaPool.paid.replaceFirst("B", "");
+         					mp.removeExtrinsicKeyword("ManaPool:B");
+         				}
+         				else {
+         					AllZone.ManaPool.has = AllZone.ManaPool.has.replaceFirst("B", "");
+         					
+         				}
+         			}
+         			}
+         			
+         			}
+         		}       		
+         	}      		
+         	}
+         } 
+         }
+         	// Nirkana Revenant Code
+     	AllZone.Human_Play.updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap (copied)
+     	return manaCost;	
+     }
 
   }
   public static ArrayList<Ability_Mana> getManaAbilities(Card card)

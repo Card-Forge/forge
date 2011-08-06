@@ -222,7 +222,7 @@ public class CardFactory_Creatures {
                 public boolean canPlay() {
                     if(((AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && AllZone.Phase.getActivePlayer() == card.getController()) || (AllZone.Phase.getPhase().equals(
                             Constant.Phase.Main1) && AllZone.Phase.getActivePlayer() == card.getController()))
-                            && AllZone.GameAction.isCardInPlay(card)) return true;
+                            && AllZone.GameAction.isCardInPlay(card) && super.canPlay()) return true;
                     else return false;
                 }
                 
@@ -258,7 +258,7 @@ public class CardFactory_Creatures {
                 public boolean canPlay() {
                     if(((AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && AllZone.Phase.getActivePlayer() == card.getController()) || (AllZone.Phase.getPhase().equals(
                             Constant.Phase.Main1) && AllZone.Phase.getActivePlayer() == card.getController()))
-                            && AllZone.GameAction.isCardInPlay(card)) return true;
+                            && AllZone.GameAction.isCardInPlay(card) && super.canPlay()) return true;
                     else return false;
                 }
                 
@@ -878,7 +878,7 @@ public class CardFactory_Creatures {
                         if(sa.getSourceCard().equals(card)) return false;
                     }
                     
-                    if(AllZone.GameAction.isCardInPlay(card)) return true;
+                    if(AllZone.GameAction.isCardInPlay(card) && super.canPlay()) return true;
                     else return false;
                 }
                 
@@ -990,7 +990,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.GameAction.isCardInPlay(card);
+                    return AllZone.GameAction.isCardInPlay(card) && super.canPlay();
                     
                 }//canPlay()
             };//SpellAbility ability2
@@ -1033,7 +1033,7 @@ public class CardFactory_Creatures {
                         sa = AllZone.Stack.peek(i);
                         if(sa.getSourceCard().equals(card)) return false;
                     }
-                    return AllZone.GameAction.isCardInPlay(card);
+                    return AllZone.GameAction.isCardInPlay(card) && super.canPlay();
                 }
                 
                 @Override
@@ -1074,7 +1074,7 @@ public class CardFactory_Creatures {
                     PlayerZone p = AllZone.getZone(Constant.Zone.Hand, card.getController());
                     CardList list = new CardList(p.getCards());
                     list = list.getName(card.getName());
-                    return 0 < list.size() && AllZone.getZone(card).getZone().equals(Constant.Zone.Play);
+                    return 0 < list.size() && AllZone.getZone(card).getZone().equals(Constant.Zone.Play) && super.canPlay();
                 }
                 
                 @Override
@@ -1192,7 +1192,7 @@ public class CardFactory_Creatures {
                     PlayerZone p = AllZone.getZone(Constant.Zone.Hand, card.getController());
                     CardList list = new CardList(p.getCards());
                     list = list.getName(card.getName());
-                    return 0 < list.size() && AllZone.getZone(card).getZone().equals(Constant.Zone.Play);
+                    return 0 < list.size() && AllZone.getZone(card).getZone().equals(Constant.Zone.Play) && super.canPlay();
                 }
                 
                 @Override
@@ -1250,7 +1250,7 @@ public class CardFactory_Creatures {
                     PlayerZone p = AllZone.getZone(Constant.Zone.Hand, card.getController());
                     CardList list = new CardList(p.getCards());
                     list = list.getName(card.getName());
-                    return 0 < list.size() && AllZone.getZone(card).getZone().equals(Constant.Zone.Play);
+                    return 0 < list.size() && AllZone.getZone(card).getZone().equals(Constant.Zone.Play) && super.canPlay();
                 }
                 
                 @Override
@@ -1617,7 +1617,7 @@ public class CardFactory_Creatures {
                 @Override
                 public boolean canPlay() {
                     
-                    if(card.isTapped() && !card.hasSickness()) return true;
+                    if(card.isTapped() && !card.hasSickness() && super.canPlay()) return true;
                     else return false;
                 }
                 
@@ -1715,7 +1715,7 @@ public class CardFactory_Creatures {
                         }
                         
                     });
-                    if(card.isTapped() && !card.hasSickness() && creats.size() > 0) return true;
+                    if(card.isTapped() && !card.hasSickness() && creats.size() > 0 && super.canPlay()) return true;
                     else return false;
                 }
                 
@@ -1751,7 +1751,7 @@ public class CardFactory_Creatures {
                         if(sa.getSourceCard().equals(card)) return false;
                     }
                     
-                    if(card.isTapped() && !card.hasSickness()) return true;
+                    if(card.isTapped() && !card.hasSickness() && super.canPlay()) return true;
                     else return false;
                 }
                 
@@ -3730,7 +3730,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlay() {
-                    return super.canPlay() && getGraveCreatures().size() != 0;
+                    return super.canPlay() && getGraveCreatures().size() != 0 && super.canPlay();
                 }
                 
                 CardList getGraveCreatures() {
@@ -4377,7 +4377,7 @@ public class CardFactory_Creatures {
                         sa = AllZone.Stack.peek(i);
                         if(sa.getSourceCard().equals(card)) return false;
                     }
-                    return AllZone.GameAction.isCardInPlay(card);
+                    return AllZone.GameAction.isCardInPlay(card) && super.canPlay();
                     
                 }
                 
@@ -5774,7 +5774,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.GameAction.isCardInPlay(card) && !card.isTapped() && !card.hasSickness();
+                    return AllZone.GameAction.isCardInPlay(card) && !card.isTapped() && !card.hasSickness() && super.canPlay();
                 }
                 
                 @Override
@@ -5920,7 +5920,7 @@ public class CardFactory_Creatures {
                     System.out.println("phase =" + AllZone.Phase.getPhase());
                     if((AllZone.Phase.getPhase().equals(Constant.Phase.Main2) || AllZone.Phase.getPhase().equals(
                             Constant.Phase.End_Of_Turn))
-                            && !card.hasSickness() && card.isUntapped()) return true;
+                            && !card.hasSickness() && card.isUntapped() && super.canPlay()) return true;
                     else return false;
                     
                 }
@@ -6224,7 +6224,7 @@ public class CardFactory_Creatures {
                         if(sa.getSourceCard().equals(card)) return false;
                     }
                     
-                    if(AllZone.GameAction.isCardInPlay(card) && !card.hasSickness() && !card.isTapped()) return true;
+                    if(AllZone.GameAction.isCardInPlay(card) && !card.hasSickness() && !card.isTapped() && super.canPlay()) return true;
                     else return false;
                     
                 }
@@ -8507,7 +8507,7 @@ public class CardFactory_Creatures {
                             return c.getType().contains("Land");
                         }
                     });
-                    return land.size() > 0;
+                    return land.size() > 0 && super.canPlay();
                 }
                 public boolean canPlayAI()
                 {
@@ -9420,7 +9420,7 @@ public class CardFactory_Creatures {
                         if(sa.getSourceCard().equals(card)) return false;
                     }
                     
-                    if(AllZone.GameAction.isCardInPlay(card) && !card.hasSickness() && !card.isTapped()) return true;
+                    if(AllZone.GameAction.isCardInPlay(card) && !card.hasSickness() && !card.isTapped() && super.canPlay()) return true;
                     else return false;
                 }
                 
@@ -9635,7 +9635,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlay() {
-                    return getCreatures().length != 0 && AllZone.GameAction.isCardInPlay(card);
+                    return getCreatures().length != 0 && AllZone.GameAction.isCardInPlay(card) && super.canPlay();
                 }
                 
                 public Card[] getCreatures() {
@@ -9849,7 +9849,7 @@ public class CardFactory_Creatures {
                 public boolean canPlay() {
                     return AllZone.Phase.getActivePlayer().equals(card.getController())
                             && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && !AllZone.GameAction.isCardInPlay(card);
+                            && !AllZone.GameAction.isCardInPlay(card) && super.canPlay();
                 }
                 
             };
@@ -11829,7 +11829,7 @@ public class CardFactory_Creatures {
                     //System.out.println("cards.size(): " + cards.size());
                     //hasSickness is a little hack, I'm not sure about the setBeforeMana input
                     if(cards.size() > 0 && AllZone.GameAction.isCardInPlay(card) && !card.hasSickness()
-                            && card.isUntapped()) return true;
+                            && card.isUntapped() && super.canPlay()) return true;
                     else return false;
                 }
                 
@@ -11892,7 +11892,7 @@ public class CardFactory_Creatures {
                 @Override
                 public boolean canPlay() {
                     return (AllZone.GameAction.isCardInPlay(card) && (AllZone.Combat.isBlocked(card) || AllZone.Combat.getAllBlockers().contains(
-                            card)));
+                            card)) && super.canPlay());
                 }
                 
                 @Override
@@ -12488,7 +12488,7 @@ public class CardFactory_Creatures {
                         sa = AllZone.Stack.peek(i);
                         if(sa.getSourceCard().equals(card)) return false;
                     }
-                    return AllZone.GameAction.isCardInPlay(card);
+                    return AllZone.GameAction.isCardInPlay(card) && super.canPlay();
                     
                 }
                 
@@ -12632,7 +12632,7 @@ public class CardFactory_Creatures {
             	{
             		CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
             		list = list.getType("Saproling");
-            		return list.size() > 1;
+            		return list.size() > 1 && super.canPlay();
             	}
             };
             a1.setDescription("2G: Put a 1/1 green Saproling creature token into play.");
@@ -13206,7 +13206,7 @@ public class CardFactory_Creatures {
                     sins = sins.getType("Assassin");
                     
                     if(sins.size() > 0 && AllZone.GameAction.isCardInPlay(card)
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) return true;
+                            && CardFactoryUtil.canTarget(card, getTargetCard()) && super.canPlay()) return true;
                     else return false;
                     
                 }
@@ -13587,7 +13587,7 @@ public class CardFactory_Creatures {
                     });
                     
                     if(creats.size() > 1 && AllZone.GameAction.isCardInPlay(card) && card.isUntapped()
-                            && !card.hasSickness()) return true;
+                            && !card.hasSickness() && super.canPlay()) return true;
                     else return false;
                 }
                 
@@ -13765,7 +13765,7 @@ public class CardFactory_Creatures {
                         }
                     });
                     
-                    if(creats.size() > 3 && AllZone.GameAction.isCardInPlay(card)) return true;
+                    if(creats.size() > 3 && AllZone.GameAction.isCardInPlay(card) && super.canPlay()) return true;
                     else return false;
                 }
                 
@@ -13901,7 +13901,7 @@ public class CardFactory_Creatures {
                         if(!c.isTapped()) druidsUntapped++;
                     }
                     
-                    if(druids.size() > 6 && druidsUntapped > 6 && AllZone.GameAction.isCardInPlay(card)) return true;
+                    if(druids.size() > 6 && druidsUntapped > 6 && AllZone.GameAction.isCardInPlay(card) && super.canPlay()) return true;
                     else return false;
                 }
                 
@@ -14145,7 +14145,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlay() {
-                    return card.getType().contains("Spirit") || card.getKeyword().contains("Changeling");
+                    return card.getType().contains("Spirit") || card.getKeyword().contains("Changeling") && super.canPlay();
                 }
                 
                 @Override
@@ -14185,7 +14185,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlay() {
-                    return card.getType().contains("Warrior") || card.getKeyword().contains("Changeling");
+                    return card.getType().contains("Warrior") || card.getKeyword().contains("Changeling") && super.canPlay();
                 }
                 
                 @Override
@@ -18663,7 +18663,7 @@ public class CardFactory_Creatures {
 				@Override
 				public boolean canPlay() {
 					//need to check if there are other creatures in play
-					return AllZone.GameAction.isCardInPlay(card) && !card.hasSickness();
+					return AllZone.GameAction.isCardInPlay(card) && !card.hasSickness() && super.canPlay();
 				}
 				@Override
 				public boolean canPlayAI() {
@@ -18759,7 +18759,7 @@ public class CardFactory_Creatures {
 				@Override
 				public boolean canPlay() {
 					//need to check if there are other creatures in play
-					return AllZone.GameAction.isCardInPlay(card) && !card.hasSickness();
+					return AllZone.GameAction.isCardInPlay(card) && !card.hasSickness() && super.canPlay();
 				}
 				@Override
 				public boolean canPlayAI() {
@@ -18881,7 +18881,7 @@ public class CardFactory_Creatures {
         		public boolean canPlay() {
         			CardList targets = AllZoneUtil.getCardsInPlay();
         			targets = targets.filter(AllZoneUtil.unenchanted);
-        			return AllZoneUtil.isCardInPlay(card) && targets.size() > 0;
+        			return AllZoneUtil.isCardInPlay(card) && targets.size() > 0 && super.canPlay();
         		}
 
         		@Override
@@ -18959,7 +18959,7 @@ public class CardFactory_Creatures {
         		
         		@Override
         		public boolean canPlay() {
-        			return AllZoneUtil.isCardInPlay(card);
+        			return AllZoneUtil.isCardInPlay(card) && super.canPlay();
         		}
 
         		@Override
@@ -19095,7 +19095,7 @@ public class CardFactory_Creatures {
 	            @Override
 	            public boolean canPlay() {
 	                return (CardFactoryUtil.canUseAbility(card))
-	                        && (AllZone.GameAction.isCardInPlay(card)) && (!card.isFaceDown() && card.getCounters(Counters.LEVEL) >= 8);
+	                        && (AllZone.GameAction.isCardInPlay(card)) && (!card.isFaceDown() && card.getCounters(Counters.LEVEL) >= 8) && super.canPlay();
 	            }
 	            
 	            @Override
@@ -19336,7 +19336,7 @@ public class CardFactory_Creatures {
                         	&& AllZone.Phase.getActivePlayer().equals(card.getController())
                         	&& !AllZone.Phase.getPhase().equals("End of Turn")
                         	&& (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
-                                "Main2")) && AllZone.Stack.size() == 0;
+                                "Main2")) && AllZone.Stack.size() == 0 && super.canPlay();
                 	}
                 	
                 	public boolean canPlayAI()

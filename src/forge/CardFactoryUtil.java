@@ -721,7 +721,7 @@ public class CardFactoryUtil {
         final SpellAbility a1 = new Ability(sourceCard, cost) {
             @Override
             public boolean canPlay() {
-                return sourceCard.isTapped();
+                return sourceCard.isTapped() && super.canPlay();
             }
             
             @Override
@@ -871,7 +871,7 @@ public class CardFactoryUtil {
                 SpellAbility sa;
                 for(int i = 0; i < AllZone.Stack.size(); i++) {
                     sa = AllZone.Stack.peek(i);
-                    if(sa.getSourceCard().equals(sourceCard)) return false;
+                    if(sa.getSourceCard().equals(sourceCard) && super.canPlay()) return false;
                 }
                 
                 if(sourceCard.getCounters(Counters.SPORE) >= 3 && AllZone.GameAction.isCardInPlay(sourceCard)) return true;
@@ -991,7 +991,7 @@ public class CardFactoryUtil {
             
             @Override
             public boolean canPlay() {
-                return sourceCard.isFaceDown() && AllZone.GameAction.isCardInPlay(sourceCard);
+                return sourceCard.isFaceDown() && AllZone.GameAction.isCardInPlay(sourceCard) && super.canPlay();
             }
             
         };//morph_up
@@ -1146,7 +1146,7 @@ public class CardFactoryUtil {
                 }
                 
                 if(AllZone.GameAction.isCardInPlay(sourceCard) && !sourceCard.hasSickness()
-                        && !sourceCard.isTapped()) return true;
+                        && !sourceCard.isTapped() && super.canPlay()) return true;
                 else return false;
             }
             
@@ -1236,7 +1236,7 @@ public class CardFactoryUtil {
                 }
                 
                 if(AllZone.GameAction.isCardInPlay(sourceCard) && !sourceCard.hasSickness()
-                        && !sourceCard.isTapped()) return true;
+                        && !sourceCard.isTapped() && super.canPlay()) return true;
                 else return false;
             }
             

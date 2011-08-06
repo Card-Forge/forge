@@ -20,7 +20,11 @@ abstract public class Ability_Activated extends SpellAbility implements java.io.
     @Override
     public boolean canPlay() {
         Card c = getSourceCard();
-        
+        if(c.isCreature() == true) {
+		CardList Silence = AllZoneUtil.getPlayerCardsInPlay(AllZone.GameAction.getOpponent(getSourceCard().getController()));
+		Silence = Silence.getName("Linvala, Keeper of Silence");
+        return AllZone.GameAction.isCardInPlay(c) && !c.isFaceDown() && Silence.size() == 0;
+        }
         return AllZone.GameAction.isCardInPlay(c) && !c.isFaceDown();
         //TODO: make sure you can't play the Computer's activated abilities
     }

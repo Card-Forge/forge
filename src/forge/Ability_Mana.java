@@ -240,8 +240,18 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     public void resolve() {
     	if (isSacrifice())
     		AllZone.GameAction.sacrifice(sourceCard);
-
-        AllZone.ManaPool.addMana(this);
+    	AllZone.ManaPool.addMana(this);
+    	// Nirkana Revenant Code
+        CardList Nirkana_Human = new CardList();
+        PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);                   
+        Nirkana_Human.addAll(play.getCards());
+        Nirkana_Human = Nirkana_Human.getName("Nirkana Revenant"); 
+        if(Nirkana_Human.size() > 0 && sourceCard.getType().contains("Swamp") && sourceCard.getController().equals("Human")) {
+        	for(int i = 0; i < Nirkana_Human.size(); i++) {
+        		AllZone.ManaPool.addMana("B");	
+        	}
+        } 
+        	// Nirkana Revenant Code
         if(!runcommands.isEmpty()) for(Command c:runcommands)
             c.execute();
     }
@@ -309,6 +319,12 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     @Override
     public boolean canPlay() {
         Card card = getSourceCard();
+		 if(card.isCreature() == true) {
+    		 
+	 			CardList Silence = AllZoneUtil.getPlayerCardsInPlay(AllZone.GameAction.getOpponent(card.getController())); 	
+	     		Silence = Silence.getName("Linvala, Keeper of Silence");
+	     		if(Silence.size() > 0) return false;
+	     		}
         if(AllZone.GameAction.isCardInPlay(card)
                 & !((isTapAbility() && card.isTapped()) || (isUntapAbility() && card.isUntapped()))) {
             if(card.isFaceDown()) return false;
