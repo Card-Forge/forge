@@ -126,7 +126,7 @@ public class AbilityFactory_Destroy {
 
 			// If NoRegen is not set, filter out creatures that have a regeneration shield
 			if (!noRegen){
-				// todo: filter out things that could regenerate in response? might be tougher?
+				// TODO: filter out things that could regenerate in response? might be tougher?
 				list = list.filter(new CardListFilter() {
 					public boolean addCard(Card c) {
 						return c.getShield() == 0;
@@ -171,7 +171,7 @@ public class AbilityFactory_Destroy {
 						return false;
 					}
 					else{
-						// todo is this good enough? for up to amounts?
+						// TODO is this good enough? for up to amounts?
 						break;
 					}
 				}
@@ -188,7 +188,7 @@ public class AbilityFactory_Destroy {
 						return false;
 					}
 					else{
-						// todo is this good enough? for up to amounts?
+						// TODO is this good enough? for up to amounts?
 						break;
 					}
 				}
@@ -233,7 +233,7 @@ public class AbilityFactory_Destroy {
 			
 			// If NoRegen is not set, filter out creatures that have a regeneration shield
 			if (!noRegen){
-				// todo: filter out things that could regenerate in response? might be tougher?
+				// TODO: filter out things that could regenerate in response? might be tougher?
 				preferred = preferred.filter(new CardListFilter() {
 					public boolean addCard(Card c) {
 						return c.getShield() == 0;

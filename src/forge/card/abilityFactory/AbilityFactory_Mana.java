@@ -117,7 +117,7 @@ public class AbilityFactory_Mana {
 
 			@Override
 			public boolean chkAI_Drawback() {
-				// todo: AI shouldn't use this until he has a mana pool
+				// TODO: AI shouldn't use this until he has a mana pool
 				return false;
 			}
 
@@ -271,7 +271,7 @@ public class AbilityFactory_Mana {
 					return false;
 				}
 
-				// todo: maybe add can produce here, so old AI code can use reflected mana?
+				// TODO: maybe add can produce here, so old AI code can use reflected mana?
 			};
 			//tmpMana.setReflectedMana(true);
 			

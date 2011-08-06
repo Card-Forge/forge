@@ -192,7 +192,7 @@ public class AbilityFactory_Sacrifice {
 		// AI should only activate this during Human's turn
 		boolean chance = sacrificeTgtAI(af, sa);
 
-		// todo: restrict the subAbility a bit
+		// TODO: restrict the subAbility a bit
 			
 		Ability_Sub subAb = sa.getSubAbility();
 		if (subAb != null)
@@ -341,7 +341,7 @@ public class AbilityFactory_Sacrifice {
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(p);
 		list = list.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 		
-		// todo: Wait for Input to finish before moving on with the rest of Resolution
+		// TODO: Wait for Input to finish before moving on with the rest of Resolution
 		AllZone.InputControl.setInput(CardFactoryUtil.input_sacrificePermanentsFromList(amount, list, message), true);
 	}
 	

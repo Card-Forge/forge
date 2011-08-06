@@ -220,7 +220,7 @@ public class AbilityFactory_DealDamage {
 
 		if(source.getName().equals("Stuffy Doll")){
 			// Now stuffy sits around for blocking
-			// todo(sol): this should also happen if Stuffy is going to die
+			// TODO(sol): this should also happen if Stuffy is going to die
 			if (AllZone.Phase.is(Constant.Phase.End_Of_Turn, AllZone.HumanPlayer))
 				return true;
 			else 
@@ -368,7 +368,7 @@ public class AbilityFactory_DealDamage {
 				// When giving priority to targeting Creatures for mandatory triggers
 				// feel free to add the Human after we run out of good targets
 				
-				// todo: add check here if card is about to die from something on the stack
+				// TODO: add check here if card is about to die from something on the stack
 				// or from taking combat damage
 				boolean freePing = mandatory || AbilityFactory.playReusable(saMe);
 
@@ -384,7 +384,7 @@ public class AbilityFactory_DealDamage {
 				}
 			}
 
-			// todo: Improve Damage, we shouldn't just target the player just because we can
+			// TODO: Improve Damage, we shouldn't just target the player just because we can
 			else if (tgt.canTgtPlayer()) {
 				if (tgt.addTarget(AllZone.HumanPlayer))
 					continue;
@@ -401,7 +401,7 @@ public class AbilityFactory_DealDamage {
 					return damageChooseRequiredTargets(saMe, tgt, dmg, mandatory);
 				}
 			} else {
-				// todo is this good enough? for up to amounts?
+				// TODO is this good enough? for up to amounts?
 				break;
 			}
 		}
@@ -409,7 +409,7 @@ public class AbilityFactory_DealDamage {
 	}
 
 	private boolean damageChooseNontargeted(SpellAbility saMe, int dmg){
-		// todo: Improve circumstances where the Defined Damage is unwanted
+		// TODO: Improve circumstances where the Defined Damage is unwanted
 		ArrayList<Object> objects = AbilityFactory.getDefinedObjects(saMe.getSourceCard(), AF.getMapParams().get("Defined"), saMe);
 
 		for(Object o : objects){
@@ -719,7 +719,7 @@ public class AbilityFactory_DealDamage {
 			return false;
 		/////
 
-		// todo: if damage is dependant on mana paid, maybe have X be human's max life
+		// TODO: if damage is dependant on mana paid, maybe have X be human's max life
 		//Don't kill yourself
 		if (validP.contains("Each") 
 				&& AllZone.ComputerPlayer.getLife() <= AllZone.ComputerPlayer.predictDamage(dmg, source, false))

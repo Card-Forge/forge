@@ -221,7 +221,7 @@ public class AbilityFactory_Animate {
 		// AI should only activate this during Human's turn
 		boolean chance = animateTgtAI(af, sa);
 
-		// todo: restrict the subAbility a bit
+		// TODO: restrict the subAbility a bit
 
 		Ability_Sub subAb = sa.getSubAbility();
 		if (subAb != null)

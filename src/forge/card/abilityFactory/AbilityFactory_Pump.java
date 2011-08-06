@@ -262,7 +262,7 @@ public class AbilityFactory_Pump {
     		}
     	}
     	else if (AllZone.Stack.size() > 0){
-    		// todo: pump something only if the top thing on the stack will kill it via damage
+    		// TODO: pump something only if the top thing on the stack will kill it via damage
     		// or if top thing on stack will pump it/enchant it and I want to kill it
     		return false;
     	}
@@ -312,7 +312,7 @@ public class AbilityFactory_Pump {
 
         	// when this happens we need to expand AI to consider if its ok for everything?
 			for(Card card : cards){      
-				// todo: if AI doesn't control Card and Pump is a Curse, than maybe use? 
+				// TODO: if AI doesn't control Card and Pump is a Curse, than maybe use? 
 	            if((card.getNetDefense() + defense > 0) && (!card.hasAnyKeyword(Keywords))) {
 	            	if(card.hasSickness() && Keywords.contains("Haste")) 
 	            		return true;
@@ -378,7 +378,7 @@ public class AbilityFactory_Pump {
 					return false;
 				}
 				else{
-					// todo is this good enough? for up to amounts?
+					// TODO is this good enough? for up to amounts?
 					break;
 				}
 			}
@@ -851,7 +851,7 @@ public class AbilityFactory_Pump {
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
 		
-		// todo: add targeting consideration such as "Creatures target player controls gets"
+		// TODO: add targeting consideration such as "Creatures target player controls gets"
     	
     	return true;
     }

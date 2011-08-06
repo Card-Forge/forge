@@ -202,7 +202,7 @@ public class AbilityFactory_GainControl {
 					return false;
 				}
 				else{
-					// todo is this good enough? for up to amounts?
+					// TODO is this good enough? for up to amounts?
 					break;
 				}
 			}

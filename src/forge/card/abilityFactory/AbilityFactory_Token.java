@@ -223,7 +223,7 @@ public class AbilityFactory_Token extends AbilityFactory {
 		if (AbilityFactory.playReusable(sa))
 			return true;
 
-		// todo: if i don't have enough blockers and my token can block one of the unblocked creatures
+		// TODO: if i don't have enough blockers and my token can block one of the unblocked creatures
 		// create it after attackers are declared
 		//if (AllZone.Phase.is(Constant.Phase.Combat_Declare_Attackers_InstantAbility, AllZone.HumanPlayer))
 		//	return true;

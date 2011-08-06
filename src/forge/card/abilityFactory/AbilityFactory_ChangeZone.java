@@ -271,7 +271,7 @@ public class AbilityFactory_ChangeZone {
 				}
 			}
 			else if (origin.equals("Sideboard")){
-				// todo: once sideboard is added
+				// TODO: once sideboard is added
 				// canPlayAI for Wishes will go here
 			}
 		}
@@ -381,7 +381,7 @@ public class AbilityFactory_ChangeZone {
 				// TODO: add some more improvements based on Destination and Type
 			}
 			else if (origin.equals("Sideboard")){
-				// todo: once sideboard is added
+				// TODO: once sideboard is added
 				// canPlayAI for Wishes will go here
 			}
 		}
@@ -452,7 +452,7 @@ public class AbilityFactory_ChangeZone {
 			 }
 		 }
 		 else if (origin.equals("Battlefield")){
-			 // todo: Expand on this Description as more cards use it
+			 // TODO: Expand on this Description as more cards use it
 			 // for the non-targeted SAs when you choose what is returned on resolution
 			 sb.append("Return ").append(num).append(" ").append(type).append(" card(s) ");
 			 sb.append(" to your ").append(destination);
@@ -888,7 +888,7 @@ public class AbilityFactory_ChangeZone {
 						choice = mostExpensive;
 				}
 	        	else{
-					// todo: AI needs more improvement to it's retrieval (reuse some code from spReturn here)
+					// TODO: AI needs more improvement to it's retrieval (reuse some code from spReturn here)
 	        		list.shuffle();
 	        		choice = list.get(0);
 	        	}
@@ -900,7 +900,7 @@ public class AbilityFactory_ChangeZone {
 					return false;
 				}
 				else{
-					// todo is this good enough? for up to amounts?
+					// TODO is this good enough? for up to amounts?
 					break;
 				}
 			}
@@ -958,7 +958,7 @@ public class AbilityFactory_ChangeZone {
 	        	else if (destination.equals("Battlefield") || origin.equals("Battlefield"))
 	        		choice = CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false);
 	        	else{
-					// todo: AI needs more improvement to it's retrieval (reuse some code from spReturn here)
+					// TODO: AI needs more improvement to it's retrieval (reuse some code from spReturn here)
 	        		list.shuffle();
 	        		choice = list.get(0);
 	        	}
@@ -969,7 +969,7 @@ public class AbilityFactory_ChangeZone {
 					return false;
 				}
 				else{
-					// todo is this good enough? for up to amounts?
+					// TODO is this good enough? for up to amounts?
 					break;
 				}
 			}
@@ -1188,7 +1188,7 @@ public class AbilityFactory_ChangeZone {
 	
 	// **************************** Known Utility **************************************
 	private static CardList knownDetermineDefined(SpellAbility sa, String defined, String origin){
-		// todo: this function should return a ArrayList<Card> and then be handled by the callees
+		// TODO: this function should return a ArrayList<Card> and then be handled by the callees
 		CardList grave = AllZoneUtil.getCardsInZone(origin, sa.getActivatingPlayer());
 		CardList ret = new CardList();
 		
@@ -1320,7 +1320,7 @@ public class AbilityFactory_ChangeZone {
 		// prevent run-away activations - first time will always return true
 		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
 
-		// todo: targeting with ChangeZoneAll
+		// TODO: targeting with ChangeZoneAll
 		// really two types of targeting. 
 		// Target Player has all their types change zones
 		// or target permanent and do something relative to that permanent
@@ -1332,7 +1332,7 @@ public class AbilityFactory_ChangeZone {
 		CardList computerType = AllZoneUtil.getCardsInZone(origin, AllZone.ComputerPlayer);
 		computerType = filterListByType(computerType, params, "ChangeType", sa);
 
-		// todo: improve restrictions on when the AI would want to use this
+		// TODO: improve restrictions on when the AI would want to use this
 		// spBounceAll has some AI we can compare to. 
 		if (origin.equals("Hand")){
 

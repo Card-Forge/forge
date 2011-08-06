@@ -237,7 +237,7 @@ public class AbilityFactory_ZoneAffecting {
 			xPaid = true;
 		}
         
-		// todo: if xPaid and one of the below reasons would fail, instead of bailing
+		// TODO: if xPaid and one of the below reasons would fail, instead of bailing
 		// reduce toPay amount to acceptable level
 		
         if (tgt != null) {

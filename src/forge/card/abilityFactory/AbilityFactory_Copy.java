@@ -182,7 +182,7 @@ public class AbilityFactory_Copy {
 						return false;
 					}
 					else{
-						// todo is this good enough? for up to amounts?
+						// TODO is this good enough? for up to amounts?
 						break;
 					}
 				}
@@ -201,7 +201,7 @@ public class AbilityFactory_Copy {
 						return false;
 					}
 					else{
-						// todo is this good enough? for up to amounts?
+						// TODO is this good enough? for up to amounts?
 						break;
 					}
 				}

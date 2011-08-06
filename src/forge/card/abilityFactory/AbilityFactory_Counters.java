@@ -231,7 +231,7 @@ public class AbilityFactory_Counters {
 			// Set PayX here to maximum value.
 			amount = ComputerUtil.determineLeftoverMana(sa);
 			source.setSVar("PayX", Integer.toString(amount));
-			// todo: 
+			// TODO: 
 		}
 
 		// prevent run-away activations - first time will always return true
@@ -248,7 +248,7 @@ public class AbilityFactory_Counters {
 						return false;
 					}
 					else{
-						// todo is this good enough? for up to amounts?
+						// TODO is this good enough? for up to amounts?
 						break;
 					}
 				}
@@ -266,7 +266,7 @@ public class AbilityFactory_Counters {
 						return false;
 					}
 					else{
-						// todo is this good enough? for up to amounts?
+						// TODO is this good enough? for up to amounts?
 						break;
 					}
 				}
@@ -341,7 +341,7 @@ public class AbilityFactory_Counters {
 						return false;
 					}
 					else{
-						// todo is this good enough? for up to amounts?
+						// TODO is this good enough? for up to amounts?
 						break;
 					}
 				}
@@ -379,7 +379,7 @@ public class AbilityFactory_Counters {
 			list = new CardList(AbilityFactory.getDefinedCards(source, params.get("Defined"), sa).toArray());
 			
 			if (!mandatory){
-				// todo: If Trigger isn't mandatory, when wouldn't we want to put a counter?
+				// TODO: If Trigger isn't mandatory, when wouldn't we want to put a counter?
 				// things like Powder Keg, which are way too complex for the AI
 			}
 		}
@@ -911,7 +911,7 @@ public class AbilityFactory_Counters {
 		if (subAb != null)
 			chance &= subAb.chkAI_Drawback();
 		
-		// todo: Make sure Human has poison counters or there are some counters we want to proliferate
+		// TODO: Make sure Human has poison counters or there are some counters we want to proliferate
 		return chance;
 	}
 	
@@ -921,7 +921,7 @@ public class AbilityFactory_Counters {
 		if (subAb != null)
 			chance &= subAb.doTrigger(mandatory);
 		
-		// todo: Make sure Human has poison counters or there are some counters we want to proliferate
+		// TODO: Make sure Human has poison counters or there are some counters we want to proliferate
 		return chance;
 	}
 	
