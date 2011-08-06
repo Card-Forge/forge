@@ -5820,10 +5820,12 @@ public class CardFactory implements NewConstants {
             card.addComesIntoPlayCommand(cip);
         }//end etbMakeToken
         
-        // Generic tap target ___ activated ability
-        //abTapTgt {Ability_Cost}:{Valid Targets}:{Description}
-        if (hasKeyword(card, "abTapTgt") != -1)
-        {
+        /*
+         * Generic tap target ___ activated ability
+         * 
+         * syntax: abTapTgt {Ability_Cost}:{Valid Targets}:{Description}
+         */
+        if (hasKeyword(card, "abTapTgt") != -1) {
         	int n = hasKeyword(card, "abTapTgt");
 
         	String parse = card.getKeyword().get(n).toString();
@@ -5918,10 +5920,12 @@ public class CardFactory implements NewConstants {
         	card.setSVar("PlayMain1", "TRUE");
         }//End abTapTgt
         
-        // Generic tap target ___ activated ability
-        //abTapAll {Ability_Cost}:{Valid Targets}:{Description}
-        if (hasKeyword(card, "abTapAll") != -1)
-        {
+        /*
+         *  Generic tap all ___ activated ability
+         *  
+         *  syntax: abTapAll {Ability_Cost}:{Valid Targets}:{Description}
+         */
+        if (hasKeyword(card, "abTapAll") != -1) {
         	int n = hasKeyword(card, "abTapAll");
 
         	String parse = card.getKeyword().get(n).toString();
@@ -6003,13 +6007,105 @@ public class CardFactory implements NewConstants {
         				}
         			}
         		}
-        	}; //AbTapTgt
+        	}; //AbTapAll
 
         	AbTapAll.setDescription(abDesc[0]);
         	AbTapAll.setStackDescription(card.getName()+" - "+stackDesc[0]);
         	card.addSpellAbility(AbTapAll);
         	card.setSVar("PlayMain1", "TRUE");
         }//End abTapAll
+        
+        /*
+         *  Generic untap target ___ activated ability
+         *  
+         *  syntax: abUntapTgt {Ability_Cost}:{Valid Targets}:{Description}
+         */
+        if (hasKeyword(card, "abUntapAll") != -1) {
+        	int n = hasKeyword(card, "abUntapAll");
+
+        	String parse = card.getKeyword().get(n).toString();
+        	card.removeIntrinsicKeyword(parse);
+
+        	String k[] = parse.split(":");
+
+        	String tmpCost = k[0].substring(10);
+        	final Ability_Cost abCost = new Ability_Cost(tmpCost, card.getName(), true);
+
+        	String Targets = k[1];
+        	final String Tgts[] = Targets.split(",");
+        	final String abDesc[] = {"none"};
+        	final String stackDesc[] = {"none"};
+        	stackDesc[0] = k[2];
+        	abDesc[0] = abCost.toString() + stackDesc[0];
+
+        	final SpellAbility AbUntapAll = new Ability_Activated(card, abCost, null) {
+				private static final long serialVersionUID = -1335695740641872109L;
+
+				@Override
+        		public boolean canPlayAI() {
+					/**
+					 * All cards using this currently have SVar:RemAIDeck:True
+					 */
+					/*
+        			if (!ComputerUtil.canPayCost(this))
+        				return false;
+
+        			CardList hCards = getTargets();
+
+        			Random r = new Random();
+        			boolean rr = false;
+        			if (r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed()))
+        				rr = true;
+
+        			if(hCards.size() > 0) {
+        				CardList human = hCards.filter(new CardListFilter() {
+        					public boolean addCard(Card c) {
+        						return c.getController().equals(Constant.Player.Human);
+        					}
+        				});
+        				CardList compy = hCards.filter(new CardListFilter() {
+        					public boolean addCard(Card c) {
+        						return c.getController().equals(Constant.Player.Human);
+        					}
+        				});
+        				if(human.size() > compy.size()) {
+        					return rr;
+        				}
+        			} */
+        			return false;
+        		}
+				
+        		private CardList getTargets() {
+        			CardList tmpList = AllZoneUtil.getCardsInPlay();
+        			tmpList = tmpList.getValidCards(Tgts);
+        			tmpList = tmpList.getTargetableCards(card);
+        			//tmpList = tmpList.filter(AllZoneUtil.untapped);
+        			return tmpList;
+        		}
+        		
+
+        		@Override
+        		public boolean canPlay() {
+        			return (Cost_Payment.canPayAdditionalCosts(abCost, this) && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+        		}
+
+        		@Override
+        		public void resolve() {
+        			CardList tgts = getTargets();
+        			for(Card c:tgts) {
+        				if(AllZone.GameAction.isCardInPlay(c)
+        						&& CardFactoryUtil.canTarget(card, c)) {
+        					c.untap();
+        				}
+        			}
+        		}
+        	}; //AbUntapAll
+
+        	AbUntapAll.setDescription(abDesc[0]);
+        	AbUntapAll.setStackDescription(card.getName()+" - "+stackDesc[0]);
+        	card.addSpellAbility(AbUntapAll);
+        	card.setSVar("PlayMain1", "TRUE");
+        }//End abUntapAll
         
         /*
          *  Generic untap target ___ activated ability
@@ -6108,6 +6204,124 @@ public class CardFactory implements NewConstants {
         	AbUntapTgt.setDescription(abDesc[0]);
         	card.addSpellAbility(AbUntapTgt);
         }//End abUntapTgt
+        
+     	/*
+     	 * Generic tap target ___ spell
+     	 * 
+     	 * syntax: spTapTgt:{Valid Targets}:{Description}
+     	 */
+        if (hasKeyword(card, "spTapTgt") != -1) {
+        	int n = hasKeyword(card, "spTapTgt");
+
+        	String parse = card.getKeyword().get(n).toString();
+        	card.removeIntrinsicKeyword(parse);
+
+        	String k[] = parse.split(":");
+        	
+        	final Target tapTargets = new Target("TgtV");
+        	final String Tgts[] = k[1].split(",");
+        	tapTargets.setValidTgts(Tgts);
+        	final String spDesc[] = {"none"};
+        	spDesc[0] = k[2];
+        	
+        	String tmpDesc = spDesc[0].substring(11);
+        	int i = tmpDesc.indexOf(".");
+        	tmpDesc = tmpDesc.substring(0, i);
+        	String Selec = "Select target " + tmpDesc + " to tap.";
+        	
+        	card.clearSpellAbility();
+
+        	final SpellAbility SpTapTgt = new Spell(card) {
+				private static final long serialVersionUID = 6956356114247328396L;
+
+				@Override
+        		public boolean canPlayAI() {
+        			CardList hCards = getTargets();
+
+        			Random r = new Random();
+        			boolean rr = false;
+        			if (r.nextFloat() <= .6667)
+        				rr = true;
+
+        			if(hCards.size() > 0) {
+        				Card c = null;
+        				CardList dChoices = new CardList();
+
+        				for(int i = 0; i < Tgts.length; i++) {
+        					if (Tgts[i].startsWith("Creature")) {
+        						c = CardFactoryUtil.AI_getBestCreature(hCards);
+        						if (c != null)
+        							dChoices.add(c);
+        					}
+
+        					CardListUtil.sortByTextLen(hCards);
+        					dChoices.add(hCards.get(0));
+
+        					CardListUtil.sortCMC(hCards);
+        					dChoices.add(hCards.get(0));
+        				}
+
+        				c = dChoices.get(CardUtil.getRandomIndex(dChoices));
+        				setTargetCard(c);
+
+        				return rr;
+        			}
+
+        			return false;
+        		}
+
+        		CardList getTargets() {
+        			CardList tmpList = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Human);
+        			tmpList = tmpList.getValidCards(Tgts);
+        			tmpList = tmpList.getTargetableCards(card);
+        			tmpList = tmpList.filter(AllZoneUtil.tapped);
+        			return tmpList;
+        		}
+        		
+        		/*
+        		@Override
+        		public boolean canPlay() {
+        			return (CardFactoryUtil.canUseAbility(card) && super.canPlay());
+        		}
+        		*/
+
+        		@Override
+        		public void resolve() {
+        			Card tgtC = getTargetCard();
+        			if(AllZone.GameAction.isCardInPlay(tgtC)
+        					&& CardFactoryUtil.canTarget(card, tgtC)) {
+        				tgtC.tap();
+        			}
+        		}
+        	}; //SpTapTgt
+        	
+        	Input InGetTarget = CardFactoryUtil.input_targetValid(SpTapTgt, Tgts, Selec);
+            
+            SpTapTgt.setBeforePayMana(InGetTarget);
+            
+            SpTapTgt.setDescription(spDesc[0]);
+        	
+        	card.addSpellAbility(SpTapTgt);
+        	card.setSVar("PlayMain1", "TRUE");
+        	
+        	String bbCost = card.getSVar("Buyback");
+            if (!bbCost.equals(""))
+            {
+                SpellAbility bbDstryTgt = SpTapTgt.copy();
+                bbDstryTgt.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
+                
+                StringBuilder sb = new StringBuilder();
+                sb.append("Buyback ").append(bbCost).append(" (You may pay an additional ").append(bbCost);
+                sb.append(" as you cast this spell. If you do, put this card into your hand as it resolves.)");
+                bbDstryTgt.setDescription(sb.toString());
+                // bbDstryTgt.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
+                bbDstryTgt.setIsBuyBackAbility(true);
+                
+                bbDstryTgt.setBeforePayMana(CardFactoryUtil.input_targetValid(bbDstryTgt, Tgts, Selec));
+                
+                card.addSpellAbility(bbDstryTgt);
+             }
+        }//End spTapTgt
 
         
         //**************************************************
