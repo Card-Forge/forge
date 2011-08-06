@@ -439,7 +439,7 @@ public class QuestData implements NewConstants {
     		if (s != null) {
 	    		if (s.equals("Poison Counters") || s.equals("Milled") || s.equals("Battle of Wits") || 
 	    			s.equals("Felidar Sovereign") || s.equals("Helix Pinnacle") || s.equals("Epic Struggle") ||
-	    			s.equals("Door to Nothingness")) {
+	    			s.equals("Door to Nothingness") || s.equals("Barren Glory")) {
 	    			creds+=100;
 	    		}
     		}

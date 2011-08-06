@@ -2465,7 +2465,7 @@ public class GameActionUtil {
             public boolean addCard(Card c) {
                 ArrayList<String> a = c.getKeyword();
                 for(int i = 0; i < a.size(); i++) {
-                    if(a.get(i).toString().startsWith("At the beginning of your upkeep, destroy " + c.getName())) {
+                    if(a.get(i).toString().startsWith("At the beginning of your upkeep, destroy CARDNAME")) {
                         String k[] = a.get(i).toString().split(":");
                         c.setUpkeepCost(k[1]);
                         return true;
@@ -2531,7 +2531,7 @@ public class GameActionUtil {
                 ArrayList<String> a = c.getKeyword();
                 for(int i = 0; i < a.size(); i++) {
                     if(a.get(i).toString().startsWith(
-                            "At the beginning of your upkeep, " + c.getName() + " deals ")) {
+                            "At the beginning of your upkeep, CARDNAME deals ")) {
                         String k[] = a.get(i).toString().split("deals ");
                         String s1 = k[1].substring(0, 2);
                         s1 = s1.trim();

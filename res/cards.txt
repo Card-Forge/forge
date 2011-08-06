@@ -2014,7 +2014,7 @@ Creature Horror
 If Cosmic is destroyed this way, it deals 7 damage to you.
 7/7
 First Strike
-At the beginning of your upkeep, destroy Cosmic Horror unless you pay:3 B B B
+At the beginning of your upkeep, destroy CARDNAME unless you pay:3 B B B
 
 Force of Nature
 2 G G G G
@@ -2022,7 +2022,7 @@ Creature Elemental
 no text
 8/8
 Trample
-At the beginning of your upkeep, Force of Nature deals 8 damage to you unless you pay:G G G G
+At the beginning of your upkeep, CARDNAME deals 8 damage to you unless you pay:G G G G
 
 Krosan Cloudscraper
 7 G G G
