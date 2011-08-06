@@ -9198,7 +9198,7 @@ public class CardFactory_Creatures {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Academy Rector")) {
+        else if(cardName.equals("Academy Rector") || cardName.equals("Lost Auramancers")) {
             final SpellAbility ability = new Ability(card, "0") {
                 
                 @Override
@@ -9206,11 +9206,17 @@ public class CardFactory_Creatures {
                     
                     if (card.getController().equals(AllZone.HumanPlayer)) {
                         StringBuilder question = new StringBuilder();
-                        question.append("Exile ").append(card.getName());
-                        question.append(" and place an enchantment from your library onto the battlefield?");
+                        if (card.getName().equals("Academy Rector")) {
+                            question.append("Exile ").append(card.getName()).append(" and place ");
+                        } else {
+                            question.append("Place ");
+                        }
+                        question.append("an enchantment from your library onto the battlefield?");
                         
                         if (GameActionUtil.showYesNoDialog(card, question.toString())) {
-                            AllZone.GameAction.exile(card);
+                            if (card.getName().equals("Academy Rector")) {
+                                AllZone.GameAction.exile(card);
+                            }
                             PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
                             CardList list = AllZoneUtil.getPlayerCardsInLibrary(AllZone.HumanPlayer);
                             list = list.getType("Enchantment");
@@ -9233,11 +9239,11 @@ public class CardFactory_Creatures {
                                         // Note that I am being overly cautious.
                                         
                                         if (c.getKeyword().contains("Enchant creature without flying") 
-                                        		|| c.getKeyword().contains("Enchant Creature without flying")) {
+                                                || c.getKeyword().contains("Enchant Creature without flying")) {
                                             enchantThisType[0] = "Creature.withoutFlying";
                                             message[0] = "Select a creature without flying";
                                         } else if (c.getKeyword().contains("Enchant creature with converted mana cost 2 or less") 
-                                        		|| c.getKeyword().contains("Enchant Creature with converted mana cost 2 or less")) {
+                                                || c.getKeyword().contains("Enchant Creature with converted mana cost 2 or less")) {
                                             enchantThisType[0] = "Creature.cmcLE2";
                                             message[0] = "Select a creature with converted mana cost 2 or less";
                                         } else if (c.getKeyword().contains("Enchant red or green creature")) {
@@ -9247,27 +9253,27 @@ public class CardFactory_Creatures {
                                             enchantThisType[0] = "Creature.tapped";
                                             message[0] = "Select a tapped creature";
                                         } else if (c.getKeyword().contains("Enchant creature") 
-                                        		|| c.getKeyword().contains("Enchant Creature")) {
+                                                || c.getKeyword().contains("Enchant Creature")) {
                                             enchantThisType[0] = "Creature";
                                             message[0] = "Select a creature";
                                         } else if (c.getKeyword().contains("Enchant wall") 
-                                        		|| c.getKeyword().contains("Enchant Wall")) {
+                                                || c.getKeyword().contains("Enchant Wall")) {
                                             enchantThisType[0] = "Wall";
                                             message[0] = "Select a Wall";
                                         } else if (c.getKeyword().contains("Enchant land you control") 
-                                        		|| c.getKeyword().contains("Enchant Land you control")) {
+                                                || c.getKeyword().contains("Enchant Land you control")) {
                                             enchantThisType[0] = "Land.YouCtrl";
                                             message[0] = "Select a land you control";
                                         } else if (c.getKeyword().contains("Enchant land") 
-                                        		|| c.getKeyword().contains("Enchant Land")) {
+                                                || c.getKeyword().contains("Enchant Land")) {
                                             enchantThisType[0] = "Land";
                                             message[0] = "Select a land";
                                         } else if (c.getKeyword().contains("Enchant artifact") 
-                                        		|| c.getKeyword().contains("Enchant Artifact")) {
+                                                || c.getKeyword().contains("Enchant Artifact")) {
                                             enchantThisType[0] = "Artifact";
                                             message[0] = "Select an artifact";
                                         } else if (c.getKeyword().contains("Enchant enchantment") 
-                                        		|| c.getKeyword().contains("Enchant Enchantment")) {
+                                                || c.getKeyword().contains("Enchant Enchantment")) {
                                             enchantThisType[0] = "Enchantment";
                                             message[0] = "Select an enchantment";
                                         }
@@ -9332,116 +9338,41 @@ public class CardFactory_Creatures {
                             Card c = CardFactoryUtil.AI_getBestEnchantment(list, card, false);
                             lib.remove(c);
                             play.add(c);
-                            AllZone.GameAction.exile(card);
+                            if (card.getName().equals("Academy Rector")) {
+                                AllZone.GameAction.exile(card);
+                            }
                         }
                     }// player is the computer
                 }// resolve()
             };// ability
             
             StringBuilder sb = new StringBuilder();
-            sb.append("Academy Rector - ").append(card.getController());
-            sb.append(" may exile this card and place an enchantment from his library onto the battlefield.");
+            if (card.getName().equals("Academy Rector")) {
+                sb.append("Academy Rector - ").append(card.getController());
+                sb.append(" may exile this card and place an enchantment from his library onto the battlefield.");
+            } else {
+                sb.append("Lost Auramancers - ").append(card.getController());
+                sb.append(" may place an enchantment from his library onto the battlefield.");
+            }
             ability.setStackDescription(sb.toString());
             
             final Command destroy = new Command() {
                 private static final long serialVersionUID = -4352349741511065318L;
                 public void execute() {
                     
-                    AllZone.Stack.add(ability);
+                    if (card.getName().equals("Lost Auramancers") 
+                            && card.getCounters(Counters.TIME) <= 0) {
+                        AllZone.Stack.add(ability);
+                    } else if (card.getName().equals("Academy Rector")) {
+                        AllZone.Stack.add(ability);
+                    }
                     
                 }// execute()
             };// Command destroy
             
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
-
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Academy Rector")) {
-            final Command destroy = new Command() {
-                private static final long serialVersionUID = -4352349741511065318L;
-                
-                public void execute() {
-                    if(card.getController().equals(AllZone.HumanPlayer)) {
-                        String[] choices = {"Yes", "No"};
-                        Object q = null;
-                        
-                        q = AllZone.Display.getChoiceOptional("Exile " + card.getName() + "?", choices);
-                        
-                        if(q == null || q.equals("No")) ;
-                        else {
-                            PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
-                            CardList list = new CardList(lib.getCards());
-                            list = list.filter(new CardListFilter() {
-                                public boolean addCard(Card c) {
-                                    return c.isEnchantment();
-                                }
-                            });
-                            
-                            if(list.size() > 0) {
-                                Object o = AllZone.Display.getChoiceOptional(
-                                        "Choose enchantment card to put onto the battlefield", list.toArray());
-                                if(o != null) {
-                                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-                                    PlayerZone oppPlay = AllZone.getZone(Constant.Zone.Battlefield,
-                                            AllZone.ComputerPlayer);
-                                    Card c = (Card) o;
-                                    lib.remove(c);
-                                    play.add(c);
-                                    
-                                    if(c.isAura()) {
-                                        Object obj = null;
-                                        if(c.getKeyword().contains("Enchant creature")) {
-                                            CardList creats = new CardList(play.getCards());
-                                            creats.addAll(oppPlay.getCards());
-                                            creats = creats.getType("Creature");
-                                            obj = AllZone.Display.getChoiceOptional("Pick a creature to attach "
-                                                    + c.getName() + " to", creats.toArray());
-                                        } else if(c.getKeyword().contains("Enchant land")
-                                                || c.getKeyword().contains("Enchant land you control")) {
-                                            CardList lands = new CardList(play.getCards());
-                                            //lands.addAll(oppPlay.getCards());
-                                            lands = lands.getType("Land");
-                                            if(lands.size() > 0) obj = AllZone.Display.getChoiceOptional(
-                                                    "Pick a land to attach " + c.getName() + " to",
-                                                    lands.toArray());
-                                        }
-                                        if(obj != null) {
-                                            Card target = (Card) obj;
-                                            if(AllZone.GameAction.isCardInPlay(target)) {
-                                                c.enchantCard(target);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            AllZone.GameAction.exile(card);
-                        }
-                    }//if human
-                    else {
-                        PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer);
-                        CardList list = new CardList(lib.getCards());
-                        list = list.filter(new CardListFilter() {
-                            public boolean addCard(Card c) {
-                                return c.isEnchantment() && !c.isAura();
-                            }
-                        });
-                        
-                        if(list.size() > 0) {
-                            PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                            Card c = CardFactoryUtil.AI_getBestEnchantment(list, card, false);
-                            lib.remove(c);
-                            play.add(c);
-                            AllZone.GameAction.exile(card);
-                            
-                        }
-                    }
-                }
-            };
-            
-            card.addDestroyCommand(destroy);
-        }//*************** END ************ END **************************
-        */
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Deadly Grub")) {
