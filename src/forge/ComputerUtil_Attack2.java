@@ -328,7 +328,7 @@ public class ComputerUtil_Attack2 {
                //   sum attacker damage
                int damageThisRound = 0;
                for(int y = 0; y < attritionalAttackers.size(); y++){
-                  damageThisRound += attritionalAttackers.getCard(y).getNetAttack();
+                  damageThisRound += attritionalAttackers.getCard(y).getNetCombatDamage();
                }
                //   remove from player life
                playerLife -= damageThisRound;
@@ -493,16 +493,18 @@ public class ComputerUtil_Attack2 {
         boolean canCauseDamage = true;
         
         // ensure that this attacker can actually cause some damage
-        if(attacker.getNetAttack() > 0){
-        	canCauseDamage = true;
+        if(attacker.getNetCombatDamage() <= 0){
+        	canCauseDamage = false;
         }
 
         // look at the attacker in relation to the blockers to establish a number of factors about the attacking
         // context that will be relevant to the attackers decision according to the selected strategy
     	for (Card defender:defenders) {
     		if(CombatUtil.canBlock(attacker, defender)){ //, combat )) {
+    			System.out.println(defender.getName() + " Can block " + attacker.getName());
                 canBeBlocked = true;
     			if(CombatUtil.canDestroyAttacker(attacker, defender)) {
+    				System.out.println(defender.getName() + " can destroy " + attacker.getName());
     				canBeKilledByOne = true;  // there is a single creature on the battlefield that can kill the creature
     				killingBlockers.add(defender);
     			}
@@ -510,9 +512,9 @@ public class ComputerUtil_Attack2 {
     			if(!CombatUtil.canDestroyBlocker(defender, attacker)){
                     // make exception for walls, they are usually extra tough but not dangerous unless they have
                     // high power, so check for walls that can kill but ignore others
-                    if(!(defender.isWall() && defender.getNetAttack() <= 0)){
+                    if(!(defender.isWall() && defender.getNetCombatDamage() <= 0)){
                     	canKillAllDangerous = false; // there is a dangerous creature that can survive an attack from this creature
-                        // see if the creature is of higher or lower value. We don't want to attack only to lose value
+                        // see if the defending creature is of higher or lower value. We don't want to attack only to lose value
                         if(CardFactoryUtil.evaluateCreature(defender) < CardFactoryUtil.evaluateCreature(attacker)){isWorthLessThanAllKillers = false;}
                     }
                 } else {
