@@ -101,8 +101,8 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Dinosaur 1", "easy", "GR Large Creatures");
 //        addToDeckList("Dinosaur 2", "medium", "WGR Naya");
         addToDeckList("Doc Holiday 1", "easy", "WUG Morph deck with Regenerate creatures");
-        addToDeckList("Doc Holiday 2", "medium", "WUG Morph deck with Regenerate creatures");
-        addToDeckList("Doc Holiday 3", "hard", "WUG Morph deck with Regenerate creatures");
+        addToDeckList("Doc Holiday 2", "medium", "WUG deck with Sunscape Familiar and Bant Sureblade");
+        addToDeckList("Doc Holiday 3", "hard", "WUG deck with Stoic Angel, Murkfiend Liege and Knight of New Alara");
 //        addToDeckList("Dog 2", "medium", "GRB Sacrifice");
         addToDeckList("Doran 3", "hard", "WBG Doran, the Siege Tower deck with high toughness creatures");
 //        addToDeckList("Dr Doom 2", "medium", "GWB");
