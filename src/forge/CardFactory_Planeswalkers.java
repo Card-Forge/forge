@@ -511,20 +511,11 @@ class CardFactory_Planeswalkers {
                     list.addAll(AllZone.Computer_Graveyard.getCards());
                     list = list.getType("Creature");
                     
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    PlayerZone grave = null;
-                    Card c = null;
-                    for(int i = 0; i < list.size(); i++) {
+                    for(Card c : list) {
                         //this is a rough hack, but no one will ever see this code anyways, lol ;+)
                     	// I hate you so much
-                        c = list.get(i);
                         c.setController(card.getController());
-                        
-                        
-                        grave = AllZone.getZone(c);
-                        if(grave != null) grave.remove(c);
-                        
-                        play.add(c);
+                        AllZone.GameAction.moveToPlay(c);
                     }
                 }
                 
@@ -1394,7 +1385,7 @@ class CardFactory_Planeswalkers {
                     card.subtractCounter(Counters.LOYALTY, dam);
                     
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
+
                     CardList list = new CardList(lib.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
@@ -1408,8 +1399,7 @@ class CardFactory_Planeswalkers {
                         if(o != null) {
                             Card c = (Card) o;
                             if(list.contains(c)) {
-                                lib.remove(c);
-                                play.add(c);
+                                AllZone.GameAction.moveToPlay(c);
                             }
                         }
                     }
@@ -1578,8 +1568,7 @@ class CardFactory_Planeswalkers {
                         question.append(c.getController()).append("'s library?");
                         
                         if (GameActionUtil.showYesNoDialog(card, question.toString())) {
-                            lib.remove(c);
-                            lib.add(c);
+                            AllZone.GameAction.moveToBottomOfLibrary(c);
                         }
                         
                     } else //compy
@@ -1591,8 +1580,7 @@ class CardFactory_Planeswalkers {
                         //TODO: improve this:
                         if(land.size() > 4 && c.isLand()) ;
                         else {
-                            lib.remove(c);
-                            lib.add(c);
+                        	AllZone.GameAction.moveToBottomOfLibrary(c);
                         }
                     }
                 }
@@ -1675,11 +1663,7 @@ class CardFactory_Planeswalkers {
                     
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        if(getTargetCard().isToken()) AllZone.getZone(getTargetCard()).remove(getTargetCard());
-                        else {
-                            PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, getTargetCard().getOwner());
-                            AllZone.GameAction.moveTo(hand, getTargetCard());
-                        }
+                            AllZone.GameAction.moveToHand(getTargetCard());
                     }//if
                 }//resolve()
                 
@@ -1716,11 +1700,10 @@ class CardFactory_Planeswalkers {
                     for(Card c:libList)
                         AllZone.GameAction.exile(c);
                     
-                    handList.shuffle();
                     for(Card c:handList) {
-                        hand.remove(c);
-                        lib.add(c);
+                        AllZone.GameAction.moveToLibrary(c);
                     }
+                    player.shuffle();
                 }
                 
                 @Override
@@ -1774,16 +1757,15 @@ class CardFactory_Planeswalkers {
                     
                     final Player player = card.getController();
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+
                     Card topCard = lib.get(0);
                     int convertedManaTopCard = CardUtil.getConvertedManaCost(topCard.getManaCost());
                     CardList showTop = new CardList();
                     showTop.add(topCard);
                     GuiUtils.getChoiceOptional("Revealed top card: ", showTop.toArray());
                     
-                    //now, move it to player's hand
-                    lib.remove(topCard);
-                    hand.add(topCard);                    
+                    //now, move it to player's hand                
+                    AllZone.GameAction.moveToHand(topCard);
                     
                     //now, do X damage to Sarkhan
                     card.addDamage(convertedManaTopCard, card);
