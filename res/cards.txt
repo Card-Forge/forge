@@ -1,3 +1,48 @@
+Forest
+no cost
+Basic Land Forest
+no text
+tap: add G
+SVar:PicCount:4
+SVar:Rarity:Land
+SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+
+Island
+no cost
+Basic Land Island
+no text
+tap: add U
+SVar:PicCount:4
+SVar:Rarity:Land
+SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73951.jpg\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159281\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159282\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=25964
+
+Mountain
+no cost
+Basic Land Mountain
+no text
+tap: add R
+SVar:PicCount:4
+SVar:Rarity:Land
+SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73958.jpg\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159286\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159285\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159284
+
+Plains
+no cost
+Basic Land Plains
+no text
+tap: add W
+SVar:PicCount:4
+SVar:Rarity:Land
+SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73963.jpg\http://gatherer.wizards.com/handlers/image.ashx?multiverseid=8322&type=card\http://gatherer.wizards.com/handlers/image.ashx?multiverseid=159288&type=card\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=4428
+
+Swamp
+no cost
+Basic Land Swamp
+no text
+tap: add B
+SVar:PicCount:4
+SVar:Rarity:Land
+SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73973.jpg\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159290\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159291\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159292
+
 Glimmervoid
 no cost
 Land
@@ -11278,15 +11323,6 @@ spBounceTgt:Creature:TopofLibrary
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forced_retreat.jpg
 
-Forest
-no cost
-Basic Land Forest
-no text
-tap: add G
-SVar:PicCount:4
-SVar:Rarity:Land
-SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
-
 Forest Bear
 1 G
 Creature Bear
@@ -15697,15 +15733,6 @@ no text
 2/2
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card79217.jpg
-
-Island
-no cost
-Basic Land Island
-no text
-tap: add U
-SVar:PicCount:4
-SVar:Rarity:Land
-SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73951.jpg
 
 Isochron Scepter
 2
@@ -20123,15 +20150,6 @@ Bushido 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mothrider_samurai.jpg
 
-Mountain
-no cost
-Basic Land Mountain
-no text
-tap: add R
-SVar:PicCount:4
-SVar:Rarity:Land
-SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73958.jpg
-
 Mountain Bandit
 R
 Creature Human Soldier Rogue
@@ -22694,15 +22712,6 @@ abPumpTgtC B Sac-Creature:-1/-1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plagued_rusalka.jpg
-
-Plains
-no cost
-Basic Land Plains
-no text
-tap: add W
-SVar:PicCount:4
-SVar:Rarity:Land
-SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73963.jpg
 
 Planar Cleansing
 3 W W W
@@ -30071,15 +30080,6 @@ spDamageTgtC:X:Drawback$YouGainLife/X:Swallowing Plague deals X damage to target
 SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swallowing_plague.jpg
-
-Swamp
-no cost
-Basic Land Swamp
-no text
-tap: add B
-SVar:PicCount:4
-SVar:Rarity:Land
-SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73973.jpg
 
 Swamp Mosquito
 1 B
