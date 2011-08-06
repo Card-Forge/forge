@@ -2493,7 +2493,6 @@ public class GameActionUtil {
 
 	public static void executeLandfallEffects(Card c) {
 		if(c.getName().equals("Lotus Cobra")) landfall_Lotus_Cobra(c);
-		else if(c.getName().equals("Avenger of Zendikar")) landfall_Avenger_of_Zendikar(c);
 		else if(c.getName().equals("Eternity Vessel")) landfall_Eternity_Vessel(c);
 	}
 	
@@ -2650,36 +2649,6 @@ public class GameActionUtil {
 			// todo: once AI has a mana pool he should choose add Ability and choose a mana as appropriate
 		}
 	}
-
-	private static void landfall_Avenger_of_Zendikar(Card c) {
-		final Card crd = c;
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, crd.getController());
-				CardList plants = new CardList(play.getCards());
-				plants = plants.filter(new CardListFilter() {
-					public boolean addCard(Card card) {
-						return (card.isCreature() && card.isType("Plant"));
-					}
-				});
-
-				for(Card plant:plants)
-					plant.addCounter(Counters.P1P1, 1);
-			}
-		};
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append(c).append(" - put a +1/+1 counter on each Plant creature you control.");
-		ability.setStackDescription(sb.toString());
-
-		if(c.getController().equals(AllZone.HumanPlayer)) {
-			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
-		} else if(c.getController().equals(AllZone.ComputerPlayer)) {
-			AllZone.Stack.add(ability);
-		}
-
-	}//landfall_Avenger
 	
 	private static void landfall_Eternity_Vessel(final Card c) {
 		final Card crd = c;
