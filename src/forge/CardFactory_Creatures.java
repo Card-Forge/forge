@@ -123,62 +123,46 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Lurking Informant")) {
-            final SpellAbility a1 = new Ability_Tap(card, "2") {
+            Target target = new Target("Select target player", new String[] {"Player"});
+        	Ability_Cost abCost = new Ability_Cost("2 T", cardName, true);
+            final SpellAbility a1 = new Ability_Activated(card, abCost, target) {
                 private static final long serialVersionUID = 1446529067071763245L;
                 
                 @Override
                 public void resolve() {
                     Player player = getTargetPlayer();
-                    
+                    if(player == null) player = AllZone.HumanPlayer;
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-                    CardList libList = new CardList(lib.getCards());
-                    Card c = libList.get(0);
-                    String[] choices = {"Yes", "No"};
+                    Card c = lib.get(0);
+                    
                     if(card.getController().equals(AllZone.HumanPlayer)) {
-                        Object o = AllZone.Display.getChoice("Mill " + c.getName() + " ?", choices);
-                        if(o.equals("Yes")) {
-                            lib.remove(c);
-                            grave.add(c);
-                        }
+                    	if(GameActionUtil.showYesNoDialog(card, "Mill "+c.getName()+"?")) {
+                            AllZone.GameAction.moveToGraveyard(c);
+                    	}
                     } else {
-                        CardList landlist = new CardList();
-                        landlist.addAll(AllZone.Human_Battlefield.getCards());
-                        // i have no better idea how AI could use it then letting draw unneeded lands
-                        // this part will be good place to use card values lists or card values deck info 
-                        if(countLands(card) > 5 && !c.getType().contains("Land")) {
-                            lib.remove(c);
-                            grave.add(c);
+                        CardList landlist = AllZoneUtil.getPlayerLandsInPlay(AllZone.HumanPlayer);
+                        //AI will just land starve or land feed human.  Perhaps this could use overall card ranking
+                        if(landlist.size() >= 5 && !c.getType().contains("Land")) {
+                        	AllZone.GameAction.moveToGraveyard(c);
                         }
-                        if(countLands(card) <= 5) {
-                            lib.remove(c);
-                            grave.add(c);
+                        else if(landlist.size() < 5 && c.getType().contains("Land")) {
+                        	AllZone.GameAction.moveToGraveyard(c);
+                        }
+                        else if(lib.size() <= 5) {
+                        	AllZone.GameAction.moveToGraveyard(c);
                         }
                     }
-                    
-
-                }
-                
-                private int countLands(Card c) {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
-                    CardList lands = new CardList(play.getCards());
-                    lands = lands.getType("Land");
-                    return lands.size();
                 }
                 
                 @Override
                 public boolean canPlayAI() {
-                    Player player = getTargetPlayer();
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    CardList libList = new CardList(lib.getCards());
+                    CardList libList = AllZoneUtil.getPlayerCardsInLibrary(AllZone.HumanPlayer);
                     return libList.size() > 0;
                 }
             };//SpellAbility
             card.addSpellAbility(a1);
-            a1.setDescription("2, tap: Look at the top card of target player's library. You may put that card into that player's graveyard.");
-            a1.setStackDescription("Lurking Informant ability");
-            a1.setBeforePayMana(new Input_PayManaCost(a1));
-            a1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(a1));
+            a1.setDescription(abCost+"Look at the top card of target player's library. You may put that card into that player's graveyard.");
+            a1.setStackDescription(cardName+" - Look at the top card of target player's library. You may put that card into that player's graveyard.");
         }//*************** END ************ END **************************
 
         
