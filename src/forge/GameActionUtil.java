@@ -13600,7 +13600,7 @@ public class GameActionUtil {
 		}
 	};
 	*/
-
+	/*
 	public static Command Korlash_Heir_to_Blackblade = new Command() {
 		private static final long serialVersionUID = 1791221644995716398L;
 
@@ -13619,7 +13619,7 @@ public class GameActionUtil {
 			return swamps.size();
 		}
 	};
-	
+	*/
 	/*
 	public static Command Dauntless_Dourbark          = new Command() {
 
@@ -15983,7 +15983,7 @@ public class GameActionUtil {
 		//commands.put("Keldon_Warlord", Keldon_Warlord);
 		commands.put("Kithkin_Rabble", Kithkin_Rabble);
 		commands.put("Knight_of_Cliffhaven", Knight_of_Cliffhaven);
-		commands.put("Korlash_Heir_to_Blackblade", Korlash_Heir_to_Blackblade);
+		//commands.put("Korlash_Heir_to_Blackblade", Korlash_Heir_to_Blackblade);
 		commands.put("Koth_Emblem", Koth_Emblem);
 		
 		commands.put("Leyline_of_Singularity", Leyline_of_Singularity);

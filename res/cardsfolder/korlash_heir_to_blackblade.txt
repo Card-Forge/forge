@@ -1,8 +1,9 @@
 Name:Korlash, Heir to Blackblade
 ManaCost:2 B B
 Types:Legendary Creature Zombie Warrior
-Text:Korlash, Heir to Blackblade's power and toughness are each equal to the number of Swamps you control.
-PT:1/1
+Text:no text
+PT:*/*
+K:stSetPT:Count$TypeYouCtrl.Swamp:Count$TypeYouCtrl.Swamp:CARDNAME's power and toughness are each equal to the number of Swamps you control.  
 A:AB$Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
 SVar:BuffedBy:Swamp
 SVar:Rarity:Rare
