@@ -2,7 +2,7 @@ Name:Carnage Altar
 ManaCost:3
 Types:Artifact
 Text:no text
-K:abDrawCards 3 Sac<1/Creature>:1:Draw a card.:Carnage Altar - Controller draws a card.
+A:AB$Draw | Cost$ 3 Sac<1/Creature> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carnage_altar.jpg
