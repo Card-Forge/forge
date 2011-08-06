@@ -1138,6 +1138,18 @@ public class AbilityFactory_ChangeZone {
 			if (cards.getOwner(AllZone.ComputerPlayer).size() > 0)
 				AllZone.ComputerPlayer.shuffle();
 		}
+		
+		if (af.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+			   abSub.resolve();
+			}
+			else{
+				String DrawBack = af.getMapParams().get("SubAbility");
+				Card card = sa.getSourceCard();
+				CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
+			}
+		}
 	}
 	
 
