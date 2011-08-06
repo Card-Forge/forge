@@ -6477,6 +6477,7 @@ public class CardFactory_Creatures {
                     
          */
         
+/* Converted to the abDestroyTgtV keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Rathi Assassin")) {
             final Ability_Tap ability = new Ability_Tap(card, "1 B B") {
@@ -6557,7 +6558,7 @@ public class CardFactory_Creatures {
             //ability.setBeforePayMana(target);
             //ability.setAfterPayMana(target);
         }//*************** END ************ END **************************
-        
+*/
         
 /* Converted to the abDestroyTgtV keyword
         //*************** START *********** START **************************
