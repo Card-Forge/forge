@@ -173,8 +173,8 @@ public class AbilityFactory_DealDamage {
 
 		// TODO handle proper calculation of X values based on Cost
 
-		// todo(sol): this should only happen during Humans EOT or if Stuffy is going to die
-		if(AF.getHostCard().getName().equals("Stuffy Doll")) {
+		// todo(sol): this should also happen if Stuffy is going to die
+		if(AF.getHostCard().getName().equals("Stuffy Doll") && AllZone.Phase.is(Constant.Phase.End_Of_Turn, AllZone.HumanPlayer)) {
 			return true;
 		}
 

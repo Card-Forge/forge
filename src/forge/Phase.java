@@ -85,6 +85,15 @@ public class Phase extends MyObservable
     	bPhaseEffects = b;
     } 
     
+    private boolean bSkipPhase = true;
+    public boolean doSkipPhase() {
+    	return bSkipPhase;
+    }
+    
+    public void setSkipPhase(boolean b) {
+    	bSkipPhase = b;
+    } 
+    
     private boolean bCombat = false;
     public boolean inCombat() {
     	return bCombat;
@@ -152,6 +161,7 @@ public class Phase extends MyObservable
 		// Handle effects that happen at the beginning of phases
         final String phase = AllZone.Phase.getPhase();
         final Player turn = AllZone.Phase.getPlayerTurn();
+        AllZone.Phase.setSkipPhase(true);
         
         if(phase.equals(Constant.Phase.Untap)) {
             PhaseUtil.handleUntap();
@@ -188,12 +198,7 @@ public class Phase extends MyObservable
 	    }
         
 	    else if(phase.equals(Constant.Phase.Combat_Begin)){
-	    	if (AllZone.Display.stopAtPhase(turn, phase)){
-	    		PhaseUtil.verifyCombat();
-	    	}
-            else {
-                this.setNeedToNextPhase(true);
-            }
+	    	PhaseUtil.verifyCombat();
 	    }
         
 	    else if (phase.equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility)){
@@ -267,17 +272,11 @@ public class Phase extends MyObservable
 		    	runParams.put("Phase", phase);
 		    	runParams.put("Player", getPlayerTurn());
 		    	AllZone.TriggerHandler.runTrigger("Phase", runParams);
-		    	
-		    	if(AllZone.Stack.size() == 0 && !AllZone.Display.stopAtPhase(turn, phase)) 
-		    		AllZone.Phase.setNeedToNextPhase(true);
 			}
         }
 
 	    else if(phase.equals(Constant.Phase.End_Of_Turn)) {
 	    	AllZone.EndOfTurn.executeAt();
-	    	// todo: when we have a bar for selecting which phases to stop at, we will check that instead of display.stop
-	    	if(AllZone.Stack.size() == 0 && !AllZone.Display.stopAtPhase(turn, phase)) 
-	    		AllZone.Phase.setNeedToNextPhase(true);
         }
         
 	    else if(phase.equals(Constant.Phase.Cleanup)){
@@ -292,8 +291,7 @@ public class Phase extends MyObservable
         
         //This line fixes Combat Damage triggers not going off when they should
         AllZone.Stack.unfreezeStack();
-        
-        
+
 		resetPriority();
 	}
 	

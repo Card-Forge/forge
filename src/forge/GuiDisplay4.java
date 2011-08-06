@@ -1038,7 +1038,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     		else if (phase.equals(Constant.Phase.Combat_End))
     			return cbHumanEndCombat.isSelected();
     	}
-    	return false;
+    	return true;
     }
     
     public boolean loadPrefs(){

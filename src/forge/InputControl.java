@@ -122,8 +122,9 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         }
         
         else if(phase.equals(Constant.Phase.End_Of_Turn)){
-            if (priority.isComputer()){
-        		// AI passes priority in his end of turn phase to player automatically
+            if (priority.isComputer() && playerTurn.isComputer()){
+        		// this section may not be needed
+				// AI passes priority in his end of turn phase to player automatically
         		AllZone.Phase.passPriority();
         		return null;
         	}
@@ -138,7 +139,14 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         // Special phases handled above, everything else is handled simply by priority
         
         if (priority.isHuman()){
-        	return new Input_PassPriority();
+        	boolean skip = AllZone.Phase.doSkipPhase();
+        	AllZone.Phase.setSkipPhase(false);
+	    	if(AllZone.Stack.size() == 0 && !AllZone.Display.stopAtPhase(playerTurn, phase) && skip) {
+            	AllZone.Phase.passPriority();
+            	return null;
+            }
+	    	else
+	    		return new Input_PassPriority();
     	}
         
         else if (playerTurn.isComputer())
