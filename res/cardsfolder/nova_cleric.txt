@@ -1,5 +1,5 @@
 Name:Nova Cleric
-ManaCost:2 W
+ManaCost:W
 Types:Creature Human Cleric
 Text:no text
 PT:1/2
