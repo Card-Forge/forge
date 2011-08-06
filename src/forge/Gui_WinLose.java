@@ -291,6 +291,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     
     private String getWinText(long creds, WinLose winLose, QuestData q)
     {
+    	// This text isn't up-to-date with the quest.preferences
     	StringBuilder sb = new StringBuilder();
     	String[] wins = winLose.getWinMethods();
     	
@@ -302,7 +303,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
 	    		if (s.equals("Poison Counters") || s.equals("Milled") || s.equals("Battle of Wits") || 
 	    			s.equals("Felidar Sovereign") || s.equals("Helix Pinnacle") || s.equals("Epic Struggle") ||
 	    			s.equals("Door to Nothingness") || s.equals("Barren Glory") || s.equals("Near-Death Experience") ||
-	    			s.equals("Mortal Combat") ) {
+	    			s.equals("Mortal Combat") || s.equals("Test of Endurance") ) {
 	    			sb.append("Alternate win condition: ");
 	    			sb.append("<u>");
 	    			sb.append(s);
