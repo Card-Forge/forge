@@ -866,15 +866,13 @@ public class GameAction {
                             if(Conditions[y].contains("ControllingPlayer_Self")) {
                             	if(!card.getController().equals(Custom_Parameters[0])) k[4] = "Null";    
                                 }
-                            //TODO - fix this up for the Player class conversion
-                            /*
                             if(Conditions[y].contains("ControllingPlayer_Opponent")) {
                             	// Special Case for Draw Card
                             	if(Event.equals("DrawCard")) {
-                            		if(!card.getController().equals(getOpponent((String) Custom_Parameters[0]))) k[4] = "Null"; 	
+                            		if(!card.getController().equals(((Player) Custom_Parameters[0]).getOpponent())) k[4] = "Null"; 	
                             	} else if(!card.getController().equals(c.getController().getOpponent())) k[4] = "Null";    
                                 }
-                                */
+                                
                             if(Conditions[y].contains("Enchanted_Creature")) {
                             	if(((Card)Custom_Parameters[2]).getEnchantedBy().contains(card) == false) k[4] = "Null";    
                                 }
