@@ -1766,7 +1766,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
-
+        /* Converteded to AF Trigger
         //*************** START *********** START **************************
         else if(cardName.equals("Briarhorn")) {
             final CommandReturn getCreature = new CommandReturn() {
@@ -1870,7 +1870,7 @@ public class CardFactory_Creatures {
                 }
             });
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Inner-Flame Acolyte") || cardName.equals("Vulshok Heartstoker")) {
