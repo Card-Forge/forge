@@ -2,7 +2,7 @@ Name:Condemn
 ManaCost:W
 Types:Instant
 Text:no text
-A:SP$Bounce|Cost$W|ValidTgts$Creature.attacking|TgtPrompt$Select target attacking creature|Destination$BottomofLibrary|SpellDescription$Put target attacking creature on the bottom of its owner's library. Its controller gains life equal to its toughness.|SubAbility$GainLifeTgtOwner/dX
+A:SP$Bounce | Cost$ W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Destination$ BottomofLibrary | SpellDescription$ Put target attacking creature on the bottom of its owner's library. Its controller gains life equal to its toughness. | SubAbility$ GainLifeTgtOwner/dX
 SVar:dX:Count$TgtCardToughness
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

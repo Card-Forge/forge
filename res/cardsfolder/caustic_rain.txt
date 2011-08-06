@@ -2,7 +2,7 @@ Name:Caustic Rain
 ManaCost:2 B B
 Types:Sorcery
 Text:no text
-A:SP$Bounce|Cost$2 B B|ValidTgts$Land|TgtPrompt$Select target land|Destination$Exile|SpellDescription$Exile target land.
+A:SP$Bounce | Cost$ 2 B B | ValidTgts$ Land | TgtPrompt$ Select target land | Destination$ Exile | SpellDescription$ Exile target land.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caustic_rain.jpg
 End

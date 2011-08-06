@@ -2,7 +2,7 @@ Name:Repel
 ManaCost:3 U
 Types:Instant
 Text:no text
-A:SP$Bounce|Cost$3 U|ValidTgts$Creature|TgtPrompt$Select target creature|Destination$TopofLibrary|SpellDescription$Put target creature on top of its owner's library.
+A:SP$Bounce | Cost$ 3 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Destination$ TopofLibrary | SpellDescription$ Put target creature on top of its owner's library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/repel.jpg
 End

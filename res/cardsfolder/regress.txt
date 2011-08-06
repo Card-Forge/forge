@@ -2,7 +2,7 @@ Name:Regress
 ManaCost:2 U
 Types:Instant
 Text:no text
-A:SP$Bounce|Cost$2 U|ValidTgts$Permanent|TgtPrompt$Select target permanent|Destination$Hand|SpellDescription$Return target permanent to its owner's hand.
+A:SP$Bounce | Cost$ 2 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card49061.jpg
 End
