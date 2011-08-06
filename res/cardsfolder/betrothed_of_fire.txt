@@ -9,6 +9,5 @@ A:AB$PumpAll | Cost$ Sac<1/Card.AttachedBy> | ValidCards$ Creature.YouCtrl | Num
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/betrothed_of_fire.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/89.jpg
 End
-
-

@@ -7,4 +7,5 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDamage | Trigger
 SVar:TrigDamage:AB$DamageAll | Cost$ 0 | ValidCards$ Creature.YouCtrl+Other | NumDmg$ 2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cinder_giant.jpg
+SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/93.jpg
 End

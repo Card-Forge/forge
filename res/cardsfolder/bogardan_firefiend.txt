@@ -7,4 +7,6 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ 
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bogardan_firefiend.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/91.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/193.jpg
 End
