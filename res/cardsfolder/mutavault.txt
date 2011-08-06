@@ -2,7 +2,7 @@ Name:Mutavault
 ManaCost:no cost
 Types:Land
 Text:no text
-A:AB$Mana|Cost$T|Produced$1|SpellDescription$Add 1 to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mutavault.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/148.jpg
