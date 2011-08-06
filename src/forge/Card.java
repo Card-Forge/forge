@@ -1674,6 +1674,12 @@ public class Card extends MyObservable {
         this.unEquip();
         equipping.remove(c);
         c.removeEquippedBy(this);
+        
+        //Run triggers
+        HashMap<String,Object> runParams = new HashMap<String,Object>();
+        runParams.put("Equipment", this);
+        runParams.put("Card", c);
+        AllZone.TriggerHandler.runTrigger("Unequip", runParams);
     }
     
     public void unEquipAllCards() {
