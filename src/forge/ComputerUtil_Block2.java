@@ -105,7 +105,7 @@ public class ComputerUtil_Block2
 	  }
 	  
 	  // Lure effects
-	  CardList attackersWithLure = attackers.getKeyword("All creatures able to block CARDNAME do so.");
+	  CardList attackersWithLure = attackersLeft.getKeyword("All creatures able to block CARDNAME do so.");
 	  combat.setAttackersWithLure(attackersWithLure);
 	  CardList canBlockAttackerWithLure = new CardList();
 	  for(Card attacker : attackersWithLure) {
@@ -188,7 +188,8 @@ public class ComputerUtil_Block2
 	  //if computer life is not in danger, try to make good gangblocks
 	  if(!bLifeInDanger) 
 		  for(Card attacker : attackersLeft) {
-			  if(!attacker.getKeyword().contains("First Strike") && !attacker.getKeyword().contains("Double Strike")) {
+			  if(!attacker.getKeyword().contains("First Strike") && !attacker.getKeyword().contains("Double Strike")
+					   && !attacker.hasStartOfKeyword("Rampage")) {
 				  blockers = getPossibleBlockers(attacker, blockersLeft, combat);
 				  CardList firstStrikeBlockers = new CardList();
 				  CardList blockGang = new CardList();
@@ -199,7 +200,7 @@ public class ComputerUtil_Block2
 			      if(!firstStrikeBlockers.isEmpty()) {
 			    	  CardListUtil.sortAttack(firstStrikeBlockers);
 			    	  for(Card blocker : firstStrikeBlockers) {
-			    		  //if the total damage of the blockgang was not enough without but is enough with a blocker finish the blockgang
+			    		  //if the total damage of the blockgang was not enough without but is enough with this blocker finish the blockgang
 			    		  if (CombatUtil.totalDamageOfBlockers(attacker, blockGang) < attacker.getKillDamage()) {
 			    			  blockGang.add(blocker);
 			    			  if (CombatUtil.totalDamageOfBlockers(attacker, blockGang) >= attacker.getKillDamage()) {

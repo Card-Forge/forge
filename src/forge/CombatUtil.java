@@ -697,6 +697,9 @@ public class CombatUtil {
 				if(trigParams.containsKey("ValidBlocked"))
 					if(!trigger.matchesValid(attacker, trigParams.get("ValidBlocked").split(","), defender))
 						willTrigger = false;
+				if(trigParams.containsKey("ValidCard"))
+					if(!trigger.matchesValid(defender, trigParams.get("ValidCard").split(","), defender))
+						willTrigger = false;
 				if(willTrigger && trigParams.containsKey("Execute")) {
 					String ability = defender.getSVar(trigParams.get("Execute"));
 					AbilityFactory AF = new AbilityFactory();
@@ -733,6 +736,9 @@ public class CombatUtil {
 				boolean willTrigger = true;
 				if(trigParams.containsKey("ValidBlocked"))
 					if(!trigger.matchesValid(attacker, trigParams.get("ValidBlocked").split(","), defender))
+						willTrigger = false;
+				if(trigParams.containsKey("ValidCard"))
+					if(!trigger.matchesValid(defender, trigParams.get("ValidCard").split(","), defender))
 						willTrigger = false;
 				if(willTrigger && trigParams.containsKey("Execute")) {
 					String ability = defender.getSVar(trigParams.get("Execute"));
