@@ -1,0 +1,8 @@
+Name:Adamaro, First to Desire
+ManaCost:1 R R
+Types:Legendary Creature Spirit
+Text:Adamaro's power and toughness are equal to number of cards in opponent's hand.
+PT:1/1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/adamaro_first_to_desire.jpg
+End

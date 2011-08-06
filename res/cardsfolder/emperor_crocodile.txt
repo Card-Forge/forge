@@ -1,0 +1,8 @@
+Name:Emperor Crocodile
+ManaCost:3 G
+Types:Creature Crocodile
+Text:When you control no other creatures, sacrifice Emperor Crocodile.
+PT:5/5
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/emperor_crocodile.jpg
+End

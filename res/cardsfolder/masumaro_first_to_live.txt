@@ -1,0 +1,8 @@
+Name:Masumaro, First to Live
+ManaCost:3 G G G
+Types:Legendary Creature Spirit
+Text:Masumaro's power and toughness are equal to twice the number of cards in your hand.
+PT:1/1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/masumaro_first_to_live.jpg
+End

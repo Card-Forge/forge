@@ -1,0 +1,8 @@
+Name:Seedborn Muse
+ManaCost:3 G G
+Types:Creature Spirit
+Text:Untap all permanents you control during each other player's untap step.
+PT:2/4
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seedborn_muse.jpg
+End

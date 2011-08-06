@@ -1,0 +1,8 @@
+Name:Kavu Titan
+ManaCost:1 G
+Types:Creature Kavu
+Text:Kavu Titan enters the battlefield with 3 +1/+1 counters and gains trample if it is kicked.
+PT:2/2
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_titan.jpg
+End

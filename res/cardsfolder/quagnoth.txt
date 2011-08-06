@@ -1,0 +1,11 @@
+Name:Quagnoth
+ManaCost:5 G
+Types:Creature Beast
+Text:(NOTE: currently Split Second is implemented as can't be countered.)
+PT:4/5
+K:If a spell or ability an opponent controls causes you to discard CARDNAME, return it to your hand.
+K:CARDNAME can't be countered.
+K:Shroud
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/quagnoth.jpg
+End
