@@ -2,7 +2,7 @@ Name:Magnify
 ManaCost:G
 Types:Instant
 Text:no text
-K:spAllPump:All:+1/+1:All creatures get +1/+1 until end of turn.:Magnify - Creatures get +1/+1 until EOT
+A:SP$PumpAll | Cost$ G | ValidCards$ Creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ All creatures get +1/+1 until end of turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/cg/en-us/card15819.jpg
