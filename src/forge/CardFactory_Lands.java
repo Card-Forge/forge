@@ -2,7 +2,6 @@
 package forge;
 
 import java.util.HashMap;
-import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -12,7 +11,7 @@ class CardFactory_Lands {
 
     public static Card getCard(final Card card, final String cardName, Player owner) {
         
-//	    computer plays 2 land of these type instead of just 1 per turn
+    	//computer plays 2 land of these type instead of just 1 per turn
         
 
         //*************** START *********** START **************************
@@ -229,53 +228,6 @@ class CardFactory_Lands {
         		}
         	};         
         	card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Blinkmoth Nexus") || cardName.equals("Inkmoth Nexus")) {
-        	final long[] timeStamp = new long[1];
-        	Ability_Cost abCost = new Ability_Cost("1", cardName, true);
-            final SpellAbility a1 = new Ability_Activated(card, abCost, null) {
-				private static final long serialVersionUID = -8834858776517935070L;
-
-				@Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    Card c = card;
-                    final String[] types = { "Artifact", "Creature", "Blinkmoth" };
-                    final ArrayList<String> keywords = new ArrayList<String>();
-                    keywords.add("Flying");
-                    if(cardName.equals("Inkmoth Nexus")) keywords.add("Infect");
-                    final String[] kwArray = new String[keywords.size()];
-                    timeStamp[0] = CardFactoryUtil.activateManland(c, 1, 1, types, keywords.toArray(kwArray), "0");
-                    
-                    final Command eot1 = new Command() {
-                    	private static final long serialVersionUID = 3564161001279001235L;
-                    	long stamp = timeStamp[0];
-                    	public void execute() {
-                    		CardFactoryUtil.revertManland(card, types, keywords.toArray(kwArray), "", stamp);
-                    	}
-                    };
-                    
-                    AllZone.EndOfTurn.addUntil(eot1);
-                }
-            };//SpellAbility
-            card.addSpellAbility(a1);
-            StringBuilder sbDesc = new StringBuilder();
-            sbDesc.append(abCost).append(cardName).append(" becomes a 1/1 Blinkmoth artifact creature with flying ");
-            if(cardName.equals("Inkmoth Nexus")) sbDesc.append("and infect ");
-            sbDesc.append("until end of turn. It's still a land.");
-            a1.setDescription(sbDesc.toString());
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" becomes a 1/1 creature with flying ");
-            if(cardName.equals("Inkmoth Nexus")) sb.append("and infect ");
-            sb.append("until EOT");
-            a1.setStackDescription(sb.toString());
         }//*************** END ************ END **************************
         
         
@@ -690,89 +642,6 @@ class CardFactory_Lands {
             sb.append(card).append(" - until end of turn, Lavaclaw Reaches becomes a 2/2 black and red Elemental creature with \"X: This creature gets +X/+0 until end of turn.\"");
             a1.setStackDescription(sb.toString());
             a1.setDescription("1 B R: Until end of turn, Lavaclaw Reaches becomes a 2/2 black and red Elemental creature with \"X: This creature gets +X/+0 until end of turn.\" It's still a land.");
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Stirring Wildwood")) {
-        	final long[] timeStamp = new long[1];
-            
-            final SpellAbility a1 = new Ability(card, "1 G W") {
-                @Override
-                public boolean canPlayAI() {
-                    return !card.hasSickness() && super.canPlayAI();
-                }
-                
-                @Override
-                public void resolve() {
-                    Card c = card;
-                    String[] types = { "Creature", "Elemental" };
-                    String[] keywords = { "Reach" };
-                    
-                    timeStamp[0] = CardFactoryUtil.activateManland(c, 3, 4, types, keywords, "G W");
-                    
-                    final Command eot1 = new Command() {
-                        private static final long serialVersionUID = -1329533520874994575L;
-                        long stamp = timeStamp[0];
-                        public void execute() {
-                            Card c = card;
-                            String[] types = { "Creature", "Elemental" };
-                            String[] keywords = { "Reach" };
-                            CardFactoryUtil.revertManland(c, types, keywords, "G W", stamp);
-                        }
-                    };
-                    
-                    AllZone.EndOfTurn.addUntil(eot1);
-                }
-            };//SpellAbility
-            
-            card.clearSpellKeepManaAbility();
-            card.addSpellAbility(a1);
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" - until end of turn, Stirring Wildwood becomes a 3/4 green and white Elemental creature with reach.");
-            a1.setStackDescription(sb.toString());
-            a1.setDescription("1 G W: Until end of turn, Stirring Wildwood becomes a 3/4 green and white Elemental creature with reach. It's still a land.");
-        }//*************** END ************ END **************************
-        
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Creeping Tar Pit")) {
-        	final long[] timeStamp = new long[1];
-            
-            final SpellAbility a1 = new Ability(card, "1 U B") {
-                @Override
-                public boolean canPlayAI() {
-                    return !card.hasSickness() && super.canPlayAI();
-                }
-                
-                @Override
-                public void resolve() {
-                    Card c = card;
-                    String[] types = { "Creature", "Elemental" };
-                    String[] keywords = { "Unblockable" };
-                    timeStamp[0] = CardFactoryUtil.activateManland(c, 3, 2, types, keywords, "U B");
-                    
-                    final Command eot1 = new Command() {
-                        private static final long serialVersionUID = -6004932967127014386L;
-                        long stamp = timeStamp[0];
-                        public void execute() {
-                            Card c = card;
-                            String[] types = { "Creature", "Elemental" };
-                            String[] keywords = { "Unblockable" };
-                            CardFactoryUtil.revertManland(c, types, keywords, "U B", stamp);	
-                        }
-                    };
-                    
-                    AllZone.EndOfTurn.addUntil(eot1);
-                }
-            };//SpellAbility
-            
-            card.clearSpellKeepManaAbility();
-            card.addSpellAbility(a1);
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" - Until end of turn, Creeping Tar Pit becomes a 3/2 blue and black Elemental creature and is unblockable.");
-            a1.setStackDescription(sb.toString());
-            a1.setDescription("1 U B: Until end of turn, Creeping Tar Pit becomes a 3/2 blue and black Elemental creature and is unblockable. It's still a land.");
         }//*************** END ************ END **************************
         
 
