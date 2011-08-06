@@ -10208,8 +10208,7 @@ public class CardFactory_Creatures {
                     CardList creatures = new CardList();
                     
                     for(int i = 0; i < cards.size(); i++) {
-                        if(cards.get(i).getType().contains("Goblin")
-                                || cards.get(i).getKeyword().contains("Changeling")) {
+                        if(cards.get(i).isType("Goblin")) {
                             Card k = cards.get(i);
                             creatures.add(k);
                         }
@@ -10246,8 +10245,7 @@ public class CardFactory_Creatures {
                     CardList creatures = new CardList();
                     
                     for(int i = 0; i < cards.size(); i++) {
-                        if(cards.get(i).getType().contains("Goblin")
-                                || cards.get(i).getType().contains("Changeling")) {
+                        if(cards.get(i).isType("Goblin")) {
                             Card k = cards.get(i);
                             creatures.add(k);
                         }
@@ -10442,8 +10440,7 @@ public class CardFactory_Creatures {
                     CardList goblins = new CardList();
                     
                     for(int i = 0; i < cards.size(); i++) {
-                        if(cards.get(i).getType().contains("Goblin")
-                                || cards.get(i).getKeyword().contains("Changeling")) {
+                        if(cards.get(i).isType("Goblin")) {
                             goblins.add(cards.get(i));
                         }
                     }
@@ -10496,8 +10493,7 @@ public class CardFactory_Creatures {
                     CardList kithkin = new CardList();
                     
                     for(int i = 0; i < cards.size(); i++) {
-                        if(cards.get(i).getType().contains("Kithkin")
-                                || cards.get(i).getKeyword().contains("Changeling")) {
+                        if(cards.get(i).isType("Kithkin")) {
                             kithkin.add(cards.get(i));
                         }
                     }
@@ -11220,7 +11216,7 @@ public class CardFactory_Creatures {
                         for(int i = 0; i < creats.size(); i++) {
                             Card creat = creats.get(i);
                             
-                            if(creat.getType().contains("Fungus") || creat.getType().contains("Saproling")) {
+                            if(creat.isType("Fungus") || creat.isType("Saproling")) {
                                 creat.addTempAttackBoost(1);
                                 creat.addTempDefenseBoost(1);
                             }
@@ -15153,7 +15149,7 @@ public class CardFactory_Creatures {
                     CardList dwarves = new CardList(play.getCards());
                     dwarves = dwarves.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.isCreature() && c.getType().contains("Dwarf")
+                            return c.isCreature() && c.isType("Dwarf")
                                     && CardFactoryUtil.AI_doesCreatureAttack(c) && !c.equals(card)
                                     && !c.getKeyword().contains("Mountainwalk");
                         }
@@ -15191,7 +15187,7 @@ public class CardFactory_Creatures {
                     list.addAll(AllZone.Computer_Play.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.isCreature() && c.getType().contains("Dwarf")
+                            return c.isCreature() && c.isType("Dwarf")
                                     && CardFactoryUtil.canTarget(card, c);
                         }
                     });
