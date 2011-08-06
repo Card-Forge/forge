@@ -271,10 +271,61 @@ public class CardFactory implements NewConstants {
                 private static final long serialVersionUID = 203335252453049234L;
                 
                 public void execute() {
+                	System.out.println("Executing previous keyword");
                     card.tap();
                 }
             });
         }//if "Comes into play tapped."
+        if(card.getKeyword().contains("CARDNAME enters the battlefield tapped unless you control two or fewer other lands.")) {
+        	card.addComesIntoPlayCommand(new Command() {
+				private static final long serialVersionUID = 6436821515525468682L;
+
+				public void execute() {
+					CardList lands = AllZoneUtil.getPlayerLandsInPlay(card.getController());
+					lands.remove(card);
+                    if(!(lands.size() <= 2)) {
+                    	card.tap();
+                    }
+                }
+            });
+        }
+        if (hasKeyword(card, "CARDNAME enters the battlefield tapped unless you control a") != -1)
+        {
+        	int n = hasKeyword(card, "CARDNAME enters the battlefield tapped unless you control a");
+        	String parse = card.getKeyword().get(n).toString();
+        	
+        	String splitString;
+        	if (parse.contains(" or a "))
+        		splitString = " or a ";
+        	else
+        		splitString = " or an ";
+        	
+        	final String types[] = parse.substring(60, parse.length() - 1).split(splitString);
+        	
+        	card.addComesIntoPlayCommand(new Command()
+        	{
+        		private static final long serialVersionUID = 403635232455049834L;
+        		
+        		public void execute()
+        		{
+        			PlayerZone pzICtrl = AllZone.getZone(Constant.Zone.Play, card.getOwner());
+        			CardList clICtrl = new CardList(pzICtrl.getCards());
+        			
+        			boolean fnd = false;
+        			
+        			for (int i = 0; i < clICtrl.size(); i++)
+        			{
+        				Card c = clICtrl.get(i);
+        				for (int j = 0; j < types.length; j++)
+        					if (c.getType().contains(types[j].trim()))
+        						fnd = true;
+        			}
+        			
+        			if (!fnd)
+        				card.tap();
+        		}
+        	});
+        }
         if(hasKeyword(card,"spCounter") != -1) {
         	//System.out.println("Processing spCounter for card " + card.getName());
         	ComputerAI_counterSpells2.KeywordedCounterspells.add(card.getName());
@@ -587,43 +638,7 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spCounterAbility);
         } //spCounter
         
-        if (hasKeyword(card, "CARDNAME enters the battlefield tapped unless you control") != -1)
-        {
-        	int n = hasKeyword(card, "CARDNAME enters the battlefield tapped unless you control");
-        	String parse = card.getKeyword().get(n).toString();
-        	
-        	String splitString;
-        	if (parse.contains(" or a "))
-        		splitString = " or a ";
-        	else
-        		splitString = " or an ";
-        	
-        	final String types[] = parse.substring(60, parse.length() - 1).split(splitString);
-        	
-        	card.addComesIntoPlayCommand(new Command()
-        	{
-        		private static final long serialVersionUID = 403635232455049834L;
-        		
-        		public void execute()
-        		{
-        			PlayerZone pzICtrl = AllZone.getZone(Constant.Zone.Play, card.getOwner());
-        			CardList clICtrl = new CardList(pzICtrl.getCards());
-        			
-        			boolean fnd = false;
-        			
-        			for (int i = 0; i < clICtrl.size(); i++)
-        			{
-        				Card c = clICtrl.get(i);
-        				for (int j = 0; j < types.length; j++)
-        					if (c.getType().contains(types[j].trim()))
-        						fnd = true;
-        			}
-        			
-        			if (!fnd)
-        				card.tap();
-        		}
-        	});
-        }
+        
 
         // Support for using string variables to define Count$ for X or Y
         // Or just about any other String that a card object needs at any given time
