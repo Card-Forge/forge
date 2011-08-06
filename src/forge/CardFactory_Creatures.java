@@ -11057,7 +11057,7 @@ public class CardFactory_Creatures {
 	  				
 	  				hand.remove(card);
 	  				play.add(card);
-	  				card.comesIntoPlay(); //do i need this?
+	  				//card.comesIntoPlay(); //do i need this?
 	  			}
 	  			public boolean canPlay()
 	  			{

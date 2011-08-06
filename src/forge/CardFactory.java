@@ -16393,9 +16393,12 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 
 		public void resolve()
         {
+			
+		  card.setKicked(true);
           PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
           for (int i = 0; i < 12; i++)
           {
+        	
             Card c = new Card();
 
             c.setOwner(card.getController());
@@ -16420,6 +16423,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
       kicker.setManaCost("8 W W W");
       kicker.setDescription("Kicker 6: If Conqueror's Pledge was kicked, put twelve of those tokens onto the battlefield instead.");
       kicker.setStackDescription(card.getName() + " - " + card.getController() + " puts twelve 1/1 white Kor Soldier creature tokens onto the battlefield.");
+      
       
       card.clearSpellAbility();
       card.addSpellAbility(spell);
