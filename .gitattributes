@@ -1249,6 +1249,7 @@ res/cardsfolder/cruel_edict.txt -text svneol=native#text/plain
 res/cardsfolder/cruel_tutor.txt -text svneol=native#text/plain
 res/cardsfolder/cruel_ultimatum.txt -text svneol=native#text/plain
 res/cardsfolder/crumble.txt -text svneol=native#text/plain
+res/cardsfolder/crumbling_ashes.txt -text svneol=native#text/plain
 res/cardsfolder/crumbling_necropolis.txt -text svneol=native#text/plain
 res/cardsfolder/crumbling_sanctuary.txt -text svneol=native#text/plain
 res/cardsfolder/crusade.txt -text svneol=native#text/plain
@@ -1275,6 +1276,7 @@ res/cardsfolder/cudgel_troll.txt -text svneol=native#text/plain
 res/cardsfolder/culling_dais.txt -text svneol=native#text/plain
 res/cardsfolder/culling_sun.txt -text svneol=native#text/plain
 res/cardsfolder/culling_the_weak.txt -text svneol=native#text/plain
+res/cardsfolder/cultbrand_cinder.txt -text svneol=native#text/plain
 res/cardsfolder/cultivate.txt -text svneol=native#text/plain
 res/cardsfolder/cumber_stone.txt -text svneol=native#text/plain
 res/cardsfolder/cunning_advisor.txt -text svneol=native#text/plain
@@ -3974,6 +3976,7 @@ res/cardsfolder/necropede.txt -text svneol=native#text/plain
 res/cardsfolder/necroplasm.txt svneol=native#text/plain
 res/cardsfolder/necropotence.txt -text svneol=native#text/plain
 res/cardsfolder/necrosavant.txt -text svneol=native#text/plain
+res/cardsfolder/necroskitter.txt -text svneol=native#text/plain
 res/cardsfolder/necrotic_sliver.txt -text svneol=native#text/plain
 res/cardsfolder/need_for_speed.txt -text svneol=native#text/plain
 res/cardsfolder/needle_storm.txt -text svneol=native#text/plain
@@ -7265,6 +7268,7 @@ res/quest/price.txt -text svneol=native#text/plain
 res/quest/quest.preferences -text
 res/quest/quest.properties svneol=native#text/plain
 res/quest/quests.txt -text svneol=native#text/plain
+res/quest/themes/-1[!!-~]-1[!!-~]Counters[!!-~]BG.thm -text
 res/quest/themes/Anti[!!-~]Black[!!-~]WB.thm -text
 res/quest/themes/Anti[!!-~]Black[!!-~]WG.thm -text
 res/quest/themes/Anti[!!-~]Red[!!-~]WR.thm -text
