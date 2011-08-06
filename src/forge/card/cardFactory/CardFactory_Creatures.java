@@ -227,6 +227,7 @@ public class CardFactory_Creatures {
 	                            copy.setController(c.getController());
 	                            
 	                            copy.setManaCost(c.getManaCost());
+	                            copy.setColor(token.getColor());
 	                            copy.setToken(true);
 	                            
 	                            copy.setType(c.getType());
@@ -2666,6 +2667,7 @@ public class CardFactory_Creatures {
                     copy.setOwner(token.getController());
                     copy.setController(token.getController());
                     copy.setManaCost(token.getManaCost());
+                    copy.setColor(token.getColor());
                     copy.setToken(true);
                     copy.setType(token.getType());
                     copy.setBaseAttack(token.getBaseAttack());
