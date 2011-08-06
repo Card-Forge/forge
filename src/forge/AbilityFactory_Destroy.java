@@ -414,7 +414,7 @@ public class AbilityFactory_Destroy {
 		 	tgtCards.add(sa.getSourceCard());
 		 }
 		 
-		 sb.append(name).append(" - Destroy permanets");
+		 sb.append(name).append(" - Destroy permanents");
 						 
 		 if(noRegen) sb.append(". They can't be regenerated");
 		
