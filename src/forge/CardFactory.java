@@ -19793,8 +19793,9 @@ public class CardFactory implements NewConstants {
                     PlayerZone grave = AllZone.getZone(c);
                     
                     if(AllZone.GameAction.isCardInZone(c, grave)) {
-                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
                         AllZone.GameAction.moveTo(play, c);
+                        c.setController(card.getController());
                     }
                     AllZone.GameAction.getPlayerLife(c.getController()).subtractLife(cmc);
                 }//resolve()
