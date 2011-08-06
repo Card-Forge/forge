@@ -16020,6 +16020,7 @@ public class GameActionUtil {
 
 	public static Command Lovisa_Coldeyes_Pump = new Command() {
 
+		private static final long serialVersionUID = 6864062675875861848L;
 		CardList                  gloriousAnthemList = new CardList();
 
 		public void execute() {

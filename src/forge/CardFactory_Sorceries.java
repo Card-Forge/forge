@@ -4290,8 +4290,9 @@ public class CardFactory_Sorceries {
         //*************** START *********** START **************************
         else if(cardName.equals("Cruel Tutor") || cardName.equals("Imperial Seal")) {
             SpellAbility spell = new Spell(card) {
-                
-                @Override
+				private static final long serialVersionUID = -948983382014193129L;
+
+				@Override
                 public boolean canPlayAI() {
                     PlayerLife compLife = AllZone.GameAction.getPlayerLife("Computer");
                     int life = compLife.getLife();
@@ -6108,7 +6109,8 @@ public class CardFactory_Sorceries {
         {
       	  final SpellAbility spell = new Spell(card)
       	  {
-  			public void resolve()
+			private static final long serialVersionUID = -2579177525478645067L;
+			public void resolve()
       		{
   				CardList all = new CardList();
                   all.addAll(AllZone.Human_Play.getCards());

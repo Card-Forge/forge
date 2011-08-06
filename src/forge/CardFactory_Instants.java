@@ -4103,7 +4103,8 @@ public class CardFactory_Instants {
         {
       	  final SpellAbility spell = new Spell(card)
       	  {
-  			public void resolve()
+			private static final long serialVersionUID = 8031146002062605694L;
+			public void resolve()
       		{
   				int damage = card.getXManaCostPaid();
   				CardList all = new CardList();
