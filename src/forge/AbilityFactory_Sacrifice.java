@@ -30,7 +30,7 @@ public class AbilityFactory_Sacrifice {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				return sacrificeCanPlayAI(af, this);
+				return sacrificeTriggerAI(af, this, mandatory);
 			}
 		};
 		return abSacrifice;
@@ -81,7 +81,7 @@ public class AbilityFactory_Sacrifice {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				return sacrificePlayDrawbackAI(af, this);
+				return sacrificeTriggerAI(af, this, mandatory);
 			}
 		};
 		return dbSacrifice;
@@ -173,6 +173,26 @@ public class AbilityFactory_Sacrifice {
 			chance &= subAb.chkAI_Drawback();
 		
 		return chance;
+	}
+	
+	public static boolean sacrificeTriggerAI(final AbilityFactory af, SpellAbility sa, boolean mandatory){
+		if (!ComputerUtil.canPayCost(sa))	// If there is a cost payment
+			return false;
+		
+		// AI should only activate this during Human's turn
+		boolean chance = sacrificeTgtAI(af, sa);
+
+		// Improve AI for triggers. If source is a creature with:
+		// When ETB, sacrifice a creature. Check to see if the AI has something to sacrifice
+		
+		// Eventually, we can call the trigger of ETB abilities with not mandatory as part of the checks to cast something
+		
+		
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			chance &= subAb.chkAI_Drawback();
+		
+		return chance || mandatory;
 	}
 	
 	public static boolean sacrificeTgtAI(AbilityFactory af, SpellAbility sa){
