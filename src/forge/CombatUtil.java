@@ -11,9 +11,46 @@ import com.esotericsoftware.minlog.Log;
 
 public class CombatUtil {
 	static boolean Lorthos_Cancelled;
-    public static boolean canBlock(Card attacker, Card blocker) {
+	
+	public static boolean canBlock(Card blocker) {
+		
+		if(blocker == null) return false;
+		
+		if(blocker.isTapped()) return false;
+		
+        if(blocker.getKeyword().contains("CARDNAME can't block.") || blocker.getKeyword().contains("CARDNAME can't attack or block.")) 
+        	return false;
+		
+        if (blocker.getCounters(Counters.BRIBERY) > 0 && AllZoneUtil.isCardInPlay("Gwafa Hazid, Profiteer"))
+        	return false;
+
+        if (AllZone.Combat.getAllBlockers().size() > 1 && AllZoneUtil.isCardInPlay("Caverns of Despair"))
+        	return false;
         
+        if (AllZone.Combat.getAllBlockers().size() > 0 && AllZoneUtil.isCardInPlay("Silent Arbiter"))
+        	return false;
+        
+        CardList kulrath = AllZoneUtil.getCardsInPlay("Kulrath Knight");
+        if (kulrath.size() > 0)
+        {
+        	for (int i=0; i<kulrath.size(); i++)
+        	{
+        		Card cKK = kulrath.get(i);
+        		Player oppKK = cKK.getController().getOpponent();
+        		
+        		if (blocker.getController().equals(oppKK) && blocker.hasCounters())
+        			return false;
+        	}
+        }
+		
+		return true;
+	}
+	
+    public static boolean canBlock(Card attacker, Card blocker) {
+    	
         if(attacker == null || blocker == null) return false;
+    	
+    	if (canBlock(blocker) == false) return false;
         
         if(CardFactoryUtil.hasProtectionFrom(blocker,attacker)) return false;
         
@@ -176,9 +213,6 @@ public class CombatUtil {
         
         if(attacker.getKeyword().contains("Unblockable")) return false;
         
-        if(blocker.getKeyword().contains("CARDNAME can't block.")
-                || blocker.getKeyword().contains("CARDNAME can't attack or block.")) return false;
-        
         if(attacker.getKeyword().contains("Flying")) {
             if(!blocker.getKeyword().contains("Flying")
                     && !blocker.getKeyword().contains("CARDNAME can block creatures with flying.")
@@ -254,28 +288,6 @@ public class CombatUtil {
         
         if (attacker.getKeyword().contains("CARDNAME can't be blocked by more than one creature.") 
         		&& AllZone.Combat.getBlockers(attacker).size() > 0)  return false;
-        
-        if (blocker.getCounters(Counters.BRIBERY) > 0 && AllZoneUtil.isCardInPlay("Gwafa Hazid, Profiteer"))
-        	return false;
-
-        if (AllZone.Combat.getAllBlockers().size() > 1 && AllZoneUtil.isCardInPlay("Caverns of Despair"))
-        	return false;
-        
-        if (AllZone.Combat.getAllBlockers().size() > 0 && AllZoneUtil.isCardInPlay("Silent Arbiter"))
-        	return false;
-        
-        CardList kulrath = AllZoneUtil.getCardsInPlay("Kulrath Knight");
-        if (kulrath.size() > 0)
-        {
-        	for (int i=0; i<kulrath.size(); i++)
-        	{
-        		Card cKK = kulrath.get(i);
-        		Player oppKK = cKK.getController().getOpponent();
-        		
-        		if (blocker.getController().equals(oppKK) && blocker.hasCounters())
-        			return false;
-        	}
-        }
         
         return true;
     }//canBlock()

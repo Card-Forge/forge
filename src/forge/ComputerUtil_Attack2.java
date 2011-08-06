@@ -66,7 +66,7 @@ import java.util.*;
        //this checks to make sure that the computer player
        //doesn't lose when the human player attacks
        //this method is used by getAttackers()
-       public int getStartIndex()
+       public int blockersNeeded()
        {
           CardListUtil.sortAttack(humanList);
           int blockersNeeded = computerList.size();
@@ -165,6 +165,7 @@ import java.util.*;
             	   || attackers.get(i).getKeyword().contains("At the beginning of the end step, destroy CARDNAME.")
                    || attackers.get(i).getKeyword().contains("At the beginning of the end step, exile CARDNAME.")
                    || attackers.get(i).getKeyword().contains("At the beginning of the end step, sacrifice CARDNAME.")
+                   || attackers.get(i).getSacrificeAtEOT()
             	   || attackers.get(i).getSirenAttackOrDestroy())
                 combat.addAttacker(attackers.get(i));
           }
@@ -195,9 +196,6 @@ import java.util.*;
           }
           else
           {
-             Card bigDef;
-             Card bigAtt;
-
              //should the computer randomly not attack with one attacker?
              //this should only happen 10% of the time when the computer
              //has at least 3 creatures
@@ -210,7 +208,7 @@ import java.util.*;
 
              //this has to be before the sorting below
              //because this sorts attackers
-             int i = getStartIndex(); //new
+             int i = blockersNeeded(); //new
 
              //so the biggest creature will usually attack
              //I think this works, not sure, may have to change it
@@ -228,34 +226,13 @@ import java.util.*;
              
              for(; i < attackers.size(); i++)
              {
-
-            	 bigAtt = getBiggestAttack(attackers.get(i));
-            	 bigDef = getBiggestDefense(attackers.get(i));
-        
-		        /*
-		        System.out.println("bigDef: " + bigDef.getName());
-		        System.out.println("attackers.get(i): " + attackers.get(i).getName());
-		        if (CombatUtil.canDestroyBlocker(bigDef, attackers.get(i)))
-		        	System.out.println(attackers.get(i).getName() + " can destroy blocker " +bigDef.getName());
-		         */
-            	 
             	 int totalFirstStrikeBlockPower = 0;
             	 if (!attackers.get(i).hasFirstStrike() && !attackers.get(i).hasDoubleStrike())
             		 totalFirstStrikeBlockPower = CombatUtil.getTotalFirstStrikeBlockPower(attackers.get(i), AllZone.HumanPlayer);
         
-                //if attacker can destroy biggest blocker or
-                //biggest blocker cannot destroy attacker
-            	if (bigDef == null) {
-            		combat.addAttacker(attackers.get(i));
-            	}
-            	else if ( (CombatUtil.canDestroyBlocker(bigDef, attackers.get(i)) ||
-            			( bigAtt != null && !CombatUtil.canDestroyAttacker(attackers.get(i), bigAtt) ) ) &&
-            			totalFirstStrikeBlockPower < attackers.get(i).getKillDamage() ){
+                if ( shouldAttack(attackers.get(i),blockers) &&	totalFirstStrikeBlockPower < attackers.get(i).getKillDamage() )
                    combat.addAttacker(attackers.get(i));
-                }
-                else if(attackers.get(i).getSacrificeAtEOT()){
-                   combat.addAttacker(attackers.get(i));
-                }
+                
              }
           }//getAttackers()
 
@@ -310,7 +287,21 @@ import java.util.*;
 
           return n;
        }   
-    }
+    
+    public boolean shouldAttack(Card attacker, CardList defenders)
+    {
+    	boolean canBeKilled = false;
+    	boolean canKillAll = true;
+    	
+    	for (Card defender:defenders) {
+    		if(CombatUtil.canBlock(attacker, defender)) {
+    			if(CombatUtil.canDestroyAttacker(attacker, defender)) canBeKilled = true;
+    			if(!CombatUtil.canDestroyBlocker(attacker, defender)) canKillAll = false;
+    		}
+    	}
+    return (canKillAll || !canBeKilled); // A creature should attack if it can't be killed or can kill any blocker
+    }   
+ }
 
     /*   
        //this returns the attacking power that is needed to destroy
