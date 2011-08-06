@@ -165,14 +165,14 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Hercules 1", "easy", "GW Deck with Safehold Duo, Bant Sureblade and Naya Hushblade");
         addToDeckList("Hercules 2", "medium", "GW Deck with Bant Sureblade and Naya Hushblade");
         addToDeckList("Hercules 3", "hard", "GW Deck with Wilt-Leaf Liege, Bant Sureblade and Naya Hushblade");
-        addToDeckList("Higgins 3", "hard", "UBR Grixis Control deck with threat removal and some creatures");
+        addToDeckList("Higgins 3", "hard", "UBR Grixis Control deck");
         addToDeckList("Homer Simpson 1", "easy", "UBR Sacrifice deck with Mortician Beetle");
         addToDeckList("Homer Simpson 2", "medium", "UBR Sacrifice deck with Mortician Beetle");
         addToDeckList("Homer Simpson 3", "hard", "UBR Sacrifice deck with Mortician Beetle");
 //        addToDeckList("Hulk 2", "medium", "G Men with Pants deck");
 //        addToDeckList("Hulk 3", "hard", "G Midrange deck");
         
-        addToDeckList("Iceman 3", "hard", "UB Bounce and Control deck");
+        addToDeckList("Iceman 3", "hard", "UB Bounce deck with Warped Devotion");
         addToDeckList("Indiana Jones 1", "easy", "UBR Sol'kanar the Swamp King and buff");
         addToDeckList("Indiana Jones 2", "medium", "UBR Sol'kanar the Swamp King, buff and Raise Dead");
         addToDeckList("Indiana Jones 3", "hard", "UBR Sol'kanar the Swamp King, buff and Terminate");
