@@ -2239,7 +2239,7 @@ public class Card extends MyObservable {
     
     /*
     // This takes a player and a card argument for YouCtrl and Other
-    public boolean isValidCard(String Restris[], Player You, Card source) {
+    public boolean isValidCards(String Restris[], Player You, Card source) {
     	
     	String Restriction[] = new String[Restris.length];
     	String st = "";
@@ -2287,7 +2287,7 @@ public class Card extends MyObservable {
                Restriction[i] = st;
             }
         }
-        return isValidCard(Restriction);
+        return isValidCard(Restriction,null,null);
     }
     
     // This takes a card argument Self, Attached and Other
@@ -2393,7 +2393,7 @@ public class Card extends MyObservable {
     }//isValidCard(String Restriction)
 
     // Takes arguments like Blue or withFlying
-	public boolean hasProperty(String Property, Player You, Card source) {
+	public boolean hasProperty(String Property, final Player You, final Card source) {
 		if (Property.contains("White") || // ... Card colors
                 Property.contains("Blue") ||
                 Property.contains("Black") ||
@@ -2420,16 +2420,18 @@ public class Card extends MyObservable {
              	if (!Property.startsWith("non") && (CardUtil.getColors(this).size() > 1 || isColorless())) return false;
              }
              
-             else if (Property.contains("YouCtrl") && !getController().isPlayer(You)) return false;
-             else if (Property.contains("YouDontCtrl") && getController().isPlayer(You)) return false;
+             else if (Property.startsWith("YouCtrl")) { if (!getController().isPlayer(You)) return false; }
+             else if (Property.startsWith("YouDontCtrl")) { if (getController().isPlayer(You)) return false; }
 		
-             else if (Property.contains("Other") && this.equals(source)) return false;
-             else if (Property.contains("Self") && !this.equals(source)) return false;
+             else if (Property.startsWith("Other")) { if(this.equals(source)) return false; }
+             else if (Property.startsWith("Self")) { if(!this.equals(source)) return false; }
 		
-             else if (Property.contains("Attached") && !this.equipping.contains(source) && !this.enchanting.contains(source)) return false;
-			
+             else if (Property.startsWith("Attached")) {
+            	 if (!equipping.contains(source) && !enchanting.contains(source)) return false;
+             }
+             else if (Property.startsWith("SharesColorWith")) { if(!sharesColorWith(source)) return false; }
 				
-             else if (Property.contains("with")) // ... Card keywords
+             else if (Property.startsWith("with")) // ... Card keywords
              {
               	if (Property.startsWith("without") && getKeyword().contains(Property.substring(7))) return false;
              	if (!Property.startsWith("without") && !getKeyword().contains(Property.substring(4))) return false;
