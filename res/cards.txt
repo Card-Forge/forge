@@ -1,3 +1,11 @@
+Lighthouse Chronologist
+1 U
+Creature Human Wizard
+LEVEL 4-6 2/4 LEVEL 7+ 3/5 At the beginning of each end step, if it's not your turn, take an extra turn after this one.
+1/3
+Level up:U
+maxLevel:7
+
 Tooth of Chiss-Goria
 3
 Artifact
@@ -4411,14 +4419,6 @@ LEVEL 1-2 2/2 Flying LEVEL 3+ 4/2 Flying
 1/1
 Level up:3
 maxLevel:3
-
-Lighthouse Chronologist
-1 U
-Creature Human Wizard
-LEVEL 4-6 2/4 LEVEL 7+ 3/5
-1/3
-Level up:U
-maxLevel:7
 
 Lodestone Bauble
 0
