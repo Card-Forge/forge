@@ -23571,6 +23571,107 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         //*************** START ********** START *************************
+        if (cardName.equals("Destructive Force") || cardName.equals("Wildfire"))
+        {
+        	SpellAbility spDFWf = new Spell(card)
+        	{
+        		private static final long serialVersionUID = 976372017492853L;
+        		
+        		private int getNum()
+        		{
+        			if (cardName.equals("Wildfire"))
+        				return 4;
+        			else if (cardName.equals("Destructive Force"))
+        				return 5;
+        			
+        			return 0;
+        		}
+        		
+        		public boolean canPlayAI()
+        		{
+        			int number = getNum();
+        			
+        			CardList cPlay = new CardList(AllZone.Computer_Play.getCards());
+        			CardList cLands = cPlay.getType("Land");
+        			CardList cCreatures = cPlay.getType("Creature");
+        			
+        			CardList hPlay = new CardList(AllZone.Human_Play.getCards());
+        			CardList hLands = hPlay.getType("Land");
+        			CardList hCreatures = hPlay.getType("Creature");
+        			
+        			if (hLands.size() < number)
+        				return false;
+        			
+        			if (cLands.size() < (number + 2))
+        				return false;
+        			
+        			int nCDie = 0;
+        			for (int i=0; i<cCreatures.size(); i++)
+        			{
+        				if ((cCreatures.get(i).getNetDefense() - number) < 1)
+        					nCDie++;
+        			}
+        			
+        			int nHDie = 0;
+        			for (int i=0; i<hCreatures.size(); i++)
+        			{
+        				if ((hCreatures.get(i).getNetDefense() - number) < 1)
+        					nHDie++;
+        			}
+        			
+        			if (nCDie > nHDie)
+        				return false;
+        			
+        			return true;
+        		}
+        		
+        		public void resolve()
+        		{
+        			int number = getNum();
+
+        			String actPlayer = card.getController();
+        			String oppPlayer = AllZone.GameAction.getOpponent(actPlayer);
+        			
+        			CardList aPlay = new CardList(AllZone.getZone(Constant.Zone.Play, actPlayer).getCards());
+        			CardList aLands = null;
+        			CardList aCreatures = aPlay.getType("Creature");
+        			
+        			CardList oPlay = new CardList(AllZone.getZone(Constant.Zone.Play, oppPlayer).getCards());
+        			CardList oLands = null;
+        			CardList oCreatures = oPlay.getType("Creature");
+
+        			for (int i=0; i<number; i++)
+        			{
+        				aPlay = new CardList(AllZone.getZone(Constant.Zone.Play, actPlayer).getCards());
+        				aLands = aPlay.getType("Land");
+
+        				AllZone.GameAction.sacrificePermanent(actPlayer, "Select a Land to sacrifice", aLands);
+        			}
+        			
+        			for (int i=0; i<number; i++)
+        			{
+        				oPlay = new CardList(AllZone.getZone(Constant.Zone.Play, oppPlayer).getCards());
+        				oLands = oPlay.getType("Land");
+        				
+        				AllZone.GameAction.sacrificePermanent(oppPlayer, "Select a land to sacrifice", oLands);
+        			}
+        				
+        			for (int i=0; i<aCreatures.size(); i++)
+        				AllZone.GameAction.addDamage(aCreatures.get(i), card, number);
+        			
+        			for (int i=0; i<oCreatures.size(); i++)
+        				AllZone.GameAction.addDamage(oCreatures.get(i), card, number);
+        			
+        			return;
+        		}
+        	};
+        	
+        	card.clearSpellAbility();
+        	spDFWf.setStackDescription(cardName + " - Each player sacrifices lands and damage is dealt to each creature");
+        	card.addSpellAbility(spDFWf);
+        }//*************** END ************ END **************************
+        
+        //*************** START ********** START *************************
         if (cardName.equals("Finest Hour") || cardName.equals("Gaea's Anthem") ||
         		cardName.equals("Glorious Anthem"))  
         	// no card factory code, cards handled elsewhere, 
