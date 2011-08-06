@@ -1,0 +1,11 @@
+Name:Krosan Restorer
+ManaCost:2 G
+Types:Creature Human Druid
+Text:no text
+PT:1/2
+A:AB$Untap|Cost$T|TgtPrompt$Choose target land|ValidTgts$Land|SpellDescription$Untap target land.
+A:AB$Untap|Cost$T|TgtPrompt$Choose target land|ValidTgts$Land|TargetMin$0|TargetMax$3|Threshold$True|PrecostDesc$Threshold - |SpellDescription$Untap up to three target lands. Activate this ability only if seven or more cards are in your graveyard.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_restorer.jpg
+End
