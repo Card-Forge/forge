@@ -6037,6 +6037,7 @@ res/cardsfolder/spike_drone.txt -text svneol=native#text/plain
 res/cardsfolder/spike_feeder.txt -text svneol=native#text/plain
 res/cardsfolder/spike_hatcher.txt -text svneol=native#text/plain
 res/cardsfolder/spike_soldier.txt svneol=native#text/plain
+res/cardsfolder/spike_tiller.txt -text svneol=native#text/plain
 res/cardsfolder/spike_weaver.txt -text svneol=native#text/plain
 res/cardsfolder/spike_worker.txt -text svneol=native#text/plain
 res/cardsfolder/spikeshot_elder.txt -text svneol=native#text/plain
