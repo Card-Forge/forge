@@ -130,38 +130,6 @@ public class Combat {
 	public Player getDefendingPlayer() {
 		return defendingPlayer;
 	}
-	
-	public void setAttackersWithLure(CardList list) {
-		attackersWithLure = list;
-	}
-
-	public void addAttackersWithLure(Card a) {
-		attackersWithLure.add(a);
-	}
-	
-	public CardList getAttackersWithLure() {
-		return attackersWithLure;
-	}
-	
-	public boolean isAttackerWithLure(Card c) {
-		return attackersWithLure.contains(c);
-	}
-	
-	public void setCanBlockAttackerWithLure(CardList list) {
-		canBlockAttackerWithLure = list;
-	}
-
-	public void addCanBlockAttackerWithLure(Card a) {
-		canBlockAttackerWithLure.add(a);
-	}
-	
-	public CardList getCanBlockAttackerWithLure() {
-		return canBlockAttackerWithLure;
-	}
-	
-	public boolean canBlockAttackerWithLure(Card c) {
-		return canBlockAttackerWithLure.contains(c);
-	}
 
 	// relates to defending player damage
 	// public int getDefendingDamage() {return defendingDamage;}

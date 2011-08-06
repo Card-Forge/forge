@@ -207,7 +207,39 @@ public class CombatUtil {
         }
         return true;
 	}
+	
+	// Has the player chosen all mandatory blocks?
+    public static boolean finishedMandatotyBlocks(Combat combat) {
+    	
+    	CardList blockers = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
+    	
+    	//if a creature does not block but should, return false
+		for(Card blocker : blockers) {
+				if(!combat.getAllBlockers().contains(blocker) 
+						&& (canBlockAnAttackerWithLure(blocker, combat) || 
+								blocker.getKeyword().contains("CARDNAME blocks each turn if able."))) 
+					return false;
+		}
         
+        return true;
+    }
+	
+	// can the blocker block an attacker with a lure effect?
+    public static boolean canBlockAnAttackerWithLure(Card blocker, Combat combat) {
+    	
+        if(blocker == null) return false;
+        
+    	if (canBlock(blocker, combat) == false) return false;
+    	
+  	  	CardList attackersWithLure = new CardList(combat.getAttackers());
+  	  	attackersWithLure = attackersWithLure.getKeyword("All creatures able to block CARDNAME do so.");
+    	
+		for(Card attacker : attackersWithLure) {
+				if(canBlock(blocker, combat) && canBlock(attacker, blocker)) return true;
+		}
+        
+        return false;
+    }
 	
 	// can the blocker block the attacker given the combat state?
     public static boolean canBlock(Card attacker, Card blocker, Combat combat) {
@@ -217,7 +249,9 @@ public class CombatUtil {
     	if (canBlock(blocker, combat) == false) return false;
     	if (canBeBlocked(attacker, combat) == false) return false;
     	
-    	if (!combat.isAttackerWithLure(attacker) && combat.canBlockAttackerWithLure(blocker)) return false;
+    	//if the attacker has no lure effect, but the blocker can block another attacker with lure, the blocker can't block the former
+    	if (!attacker.getKeyword().contains("All creatures able to block CARDNAME do so.") 
+    			&& canBlockAnAttackerWithLure(blocker,combat)) return false;
         
         return canBlock(attacker, blocker);
     }

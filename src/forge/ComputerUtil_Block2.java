@@ -334,17 +334,6 @@ public class ComputerUtil_Block2
 		  if(!CombatUtil.canBlock(b, combat)) blockersLeft.remove(b);
 	  }
 	  
-	  // Lure effects
-	  CardList attackersWithLure = attackersLeft.getKeyword("All creatures able to block CARDNAME do so.");
-	  combat.setAttackersWithLure(attackersWithLure);
-	  CardList canBlockAttackerWithLure = new CardList();
-	  for(Card attacker : attackersWithLure) {
-		  for(Card b : possibleBlockers) {
-			  if(CombatUtil.canBlock(attacker, b)) canBlockAttackerWithLure.add(b);
-		  }
-	  }
-	  combat.setCanBlockAttackerWithLure(canBlockAttackerWithLure);
-	  
 	  if (attackersLeft.size() == 0)
 		  return combat;
 	  
@@ -390,7 +379,7 @@ public class ComputerUtil_Block2
 	  chumpBlockers = blockersLeft.getKeyword("CARDNAME blocks each turn if able.");
 	  // if an attacker with lure attacks - all that can block
 	  for(Card blocker : blockersLeft) {
-		  if(canBlockAttackerWithLure.contains(blocker)) chumpBlockers.add(blocker);
+		  if(CombatUtil.canBlockAnAttackerWithLure(blocker,combat)) chumpBlockers.add(blocker);
 	  }
 	  if (!chumpBlockers.isEmpty()) {
 		  attackers.shuffle();

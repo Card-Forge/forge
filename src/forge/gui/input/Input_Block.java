@@ -10,6 +10,7 @@ import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardUtil;
+import forge.Combat;
 import forge.CombatUtil;
 import forge.Command;
 import forge.Constant;
@@ -41,6 +42,7 @@ public class Input_Block extends Input {
         
         
         if(currentAttacker == null) {
+        	/*
         	//Lure
         	CardList attackers = new CardList(AllZone.Combat.getAttackers());
         	for(Card attacker:attackers) {
@@ -53,7 +55,7 @@ public class Input_Block extends Input {
         				}
         			}
         		}
-        	}
+        	}*/
         	
         	AllZone.Display.showMessage("To Block, click on your Opponents attacker first, then your blocker(s)");
         }
@@ -68,10 +70,12 @@ public class Input_Block extends Input {
     
     @Override
     public void selectButtonOK() {
-        // Done blocking
-        ButtonUtil.reset();
-
-        AllZone.Phase.setNeedToNextPhase(true);
+    	if(CombatUtil.finishedMandatotyBlocks(AllZone.Combat)) {
+	        // Done blocking
+	        ButtonUtil.reset();
+	
+	        AllZone.Phase.setNeedToNextPhase(true);
+    	}
     }
     
     @Override
