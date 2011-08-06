@@ -242,7 +242,7 @@ public class AbilityFactory_AlterLife {
 			return false;
 		
 		// TODO handle proper calculation of X values based on Cost and what would be paid
-		final int amount = calculateAmount(af.getHostCard(), amountStr, sa);
+		//final int amount = calculateAmount(af.getHostCard(), amountStr, sa);
 		
 		 // prevent run-away activations - first time will always return true
 		 boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());

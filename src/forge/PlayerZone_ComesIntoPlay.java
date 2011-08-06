@@ -24,7 +24,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         super.add(o);
         
         Card c = (Card) o;
-        final Player player = c.getController();
+        //final Player player = c.getController();
         
         if(trigger && ((CardFactoryUtil.oppHasKismet(c.getController()) && (c.isLand() || c.isCreature() || c.isArtifact()))
         		|| (AllZoneUtil.isCardInPlay("Root Maze") && (c.isLand() || c.isArtifact()))

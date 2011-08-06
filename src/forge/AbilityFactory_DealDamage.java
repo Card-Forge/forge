@@ -6,9 +6,6 @@ public class AbilityFactory_DealDamage {
 
 	private AbilityFactory AF = null;
 	
-	private AbilityFactory getAF(){
-		return AF;
-	}
 	private int nDamage = -1;
 	
 	private String XDamage = "none";
