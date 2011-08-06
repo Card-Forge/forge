@@ -1,6 +1,6 @@
 Name:Badlands
 ManaCost:no cost
-Types:Land Mountain Swamp
+Types:Land Swamp Mountain
 Text:no text
 K:tap: add B
 K:tap: add R
