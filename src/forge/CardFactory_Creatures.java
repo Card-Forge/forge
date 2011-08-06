@@ -240,7 +240,7 @@ public class CardFactory_Creatures {
             a1.setBeforePayMana(new Input_PayManaCost(a1));
             a1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(a1));
         }//*************** END ************ END **************************
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Dimir Guildmage")) {
             final SpellAbility a1 = new Ability(card, "3 B") {
@@ -325,7 +325,7 @@ public class CardFactory_Creatures {
             a2.setBeforePayMana(new Input_PayManaCost(a2));
             a2.setBeforePayMana(CardFactoryUtil.input_targetPlayer(a2));
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Shinka Gatekeeper")) {
