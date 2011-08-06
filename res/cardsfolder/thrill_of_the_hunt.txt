@@ -1,0 +1,9 @@
+Name:Thrill of the Hunt
+ManaCost:G
+Types:Instant
+Text:no text
+A:SP$Pump|Cost$G|Tgt$TgtC|NumAtt$+2|NumDef$+2|SpellDescription$Target creature gets +1/+2 until end of turn.
+K:Flashback:W
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thrill_of_the_hunt.jpg
+End

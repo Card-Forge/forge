@@ -1,0 +1,9 @@
+Name:Dematerialize
+ManaCost:3 U
+Types:Sorcery
+Text:no text
+A:SP$Bounce|Cost$3 U|ValidTgts$Permanent|Destination$Hand|TgtPrompt$Select target permanent.|SpellDescription$Return target permanent to its owner's hand.
+K:Flashback:5 U U
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dematerialize.jpg
+End
