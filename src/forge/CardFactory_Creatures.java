@@ -287,16 +287,6 @@ public class CardFactory_Creatures {
 	                            copy.setToken(true);
 	                            copy.setCopiedToken(true);
 	                            
-	                            if(getTargetCard().isFaceDown()) {
-	                                copy.setIsFaceDown(true);
-	                                copy.setManaCost("");
-	                                copy.setBaseAttack(2);
-	                                copy.setBaseDefense(2);
-	                                copy.setIntrinsicKeyword(new ArrayList<String>()); //remove all keywords
-	                                copy.setType(new ArrayList<String>()); //remove all types
-	                                copy.addType("Creature");
-	                                copy.clearSpellAbility(); //disallow "morph_up"
-	                            }
 	                            copy.addIntrinsicKeyword("Haste");
 	                        } else //isToken()
 	                        {
@@ -322,6 +312,20 @@ public class CardFactory_Creatures {
 	                        
 	                        copy.setCurSetCode(getTargetCard().getCurSetCode());
 	                        copy.setImageFilename(getTargetCard().getImageFilename());
+	                        
+                            if(getTargetCard().isFaceDown()) {
+                                copy.setIsFaceDown(true);
+                                copy.setManaCost("");
+                                copy.setBaseAttack(2);
+                                copy.setBaseDefense(2);
+                                copy.setIntrinsicKeyword(new ArrayList<String>()); //remove all keywords
+                                copy.setType(new ArrayList<String>()); //remove all types
+                                copy.addType("Creature");
+                                copy.clearSpellAbility(); //disallow "morph_up"
+                                copy.setCurSetCode("");
+                                copy.setImageFilename("morph.jpg");
+                            }
+
 	                        
 	                        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
 	                        play.add(copy);
@@ -7828,6 +7832,10 @@ public class CardFactory_Creatures {
                         
                         if(!c.isToken()) {
                             Card newCard = AllZone.CardFactory.getCard(c.getName(), c.getOwner());
+                            
+                            newCard.setCurSetCode(c.getCurSetCode());
+                            newCard.setImageFilename(c.getImageFilename());
+                            
                             hand.add(newCard);
                         }
                     }
@@ -7879,6 +7887,10 @@ public class CardFactory_Creatures {
                         
                         if(!c.isToken()) {
                             Card newCard = AllZone.CardFactory.getCard(c.getName(), c.getOwner());
+                            
+                            newCard.setCurSetCode(c.getCurSetCode());
+                            newCard.setImageFilename(c.getImageFilename());
+                            
                             hand.add(newCard);
                         }
                     }
@@ -7941,6 +7953,10 @@ public class CardFactory_Creatures {
                         
                         if(!c.isToken()) {
                             Card newCard = AllZone.CardFactory.getCard(c.getName(), c.getOwner());
+                            
+                            newCard.setCurSetCode(c.getCurSetCode());
+                            newCard.setImageFilename(c.getImageFilename());
+                            
                             hand.add(newCard);
                         }
                     }
@@ -8002,6 +8018,10 @@ public class CardFactory_Creatures {
                         
                         if(!c.isToken()) {
                             Card newCard = AllZone.CardFactory.getCard(c.getName(), c.getOwner());
+                            
+                            newCard.setCurSetCode(c.getCurSetCode());
+                            newCard.setImageFilename(c.getImageFilename());
+
                             hand.add(newCard);
                         }
                     }
