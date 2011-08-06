@@ -828,7 +828,8 @@ public class CardFactory_Creatures {
           }//*************** END ************ END **************************  
           
         */
-
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Wellwisher")) {
             final SpellAbility ability = new Ability_Tap(card, "0") {
@@ -860,6 +861,7 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(new Input_NoCost_TapAbility((Ability_Tap) ability));
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
+*/
         
 
         //*************** START *********** START **************************
@@ -8795,7 +8797,8 @@ public class CardFactory_Creatures {
             
         }//*************** END ************ END **************************
         
-
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Silent Attendant")) {
             final Ability_Tap ability = new Ability_Tap(card) {
@@ -8823,6 +8826,8 @@ public class CardFactory_Creatures {
             ability.setStackDescription(card.getName() + " -  you gain 1 life.");
             ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Ghost-Lit Redeemer")) {

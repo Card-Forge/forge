@@ -3863,7 +3863,8 @@ public class CardFactory implements NewConstants {
             ability.setStackDescription("Destroy all artifacts, creatures, and enchantments.");
         }//*************** END ************ END **************************
         
-
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Tanglebloom")) {
             final SpellAbility a1 = new Ability_Tap(card, "1") {
@@ -3885,6 +3886,7 @@ public class CardFactory implements NewConstants {
             
             a1.setBeforePayMana(new Input_PayManaCost(a1));
         }//*************** END ************ END **************************
+*/
         
 
         //*************** START *********** START **************************
@@ -13947,7 +13949,8 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(DamageCP);
         }//*************** END ************ END **************************
         
-
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Braidwood Cup")) {
             final Ability_Tap ability = new Ability_Tap(card) {
@@ -13968,8 +13971,7 @@ public class CardFactory implements NewConstants {
             ability.setStackDescription("Braidwood Cup - " + card.getController() + " gains 1 life.");
             ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
         }//*************** END ************ END **************************
-        
-        
+*/
         
         
         //*************** START *********** START **************************

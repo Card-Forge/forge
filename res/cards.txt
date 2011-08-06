@@ -4626,6 +4626,7 @@ Braidwood Cup
 3
 Artifact
 no text
+abGainLife T:1
 
 Onyx Goblet
 2 B
@@ -5787,6 +5788,7 @@ Silent Attendant
 Creature Human Cleric
 no text
 0/2
+abGainLife T:1
 
 Zephid's Embrace
 2 U U
@@ -16123,6 +16125,8 @@ Wellwisher
 Creature Elf
 no text
 1/1
+abGainLife T:X:You gain 1 life for each Elf on the battlefield.:Wellwisher - you gain life
+SVar:X:Count$TypeOnBattlefield.Elf
 
 Sylvan Messenger
 3 G
@@ -17173,6 +17177,7 @@ Tanglebloom
 1
 Artifact
 no text
+abGainLife 1 T:1
 
 Nevinyrral's Disk
 4
