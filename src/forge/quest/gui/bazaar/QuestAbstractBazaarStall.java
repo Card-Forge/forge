@@ -1,4 +1,4 @@
-package forge.quest.bazaar;
+package forge.quest.gui.bazaar;
 
 import forge.AllZone;
 import forge.QuestData;

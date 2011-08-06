@@ -1,4 +1,4 @@
-package forge.quest.main;
+package forge.quest.gui.main;
 
 import forge.AllZone;
 import forge.QuestData;

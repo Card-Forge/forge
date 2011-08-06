@@ -1,9 +1,9 @@
-package forge.quest.main;
+package forge.quest.gui.main;
 
 import forge.*;
 import forge.gui.GuiUtils;
-import forge.quest.QuestAbstractPanel;
-import forge.quest.QuestFrame;
+import forge.quest.gui.QuestAbstractPanel;
+import forge.quest.gui.QuestFrame;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

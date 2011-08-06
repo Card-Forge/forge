@@ -1,7 +1,7 @@
-package forge.quest.bazaar;
+package forge.quest.gui.bazaar;
 
-import forge.quest.QuestAbstractPanel;
-import forge.quest.QuestFrame;
+import forge.quest.gui.QuestAbstractPanel;
+import forge.quest.gui.QuestFrame;
 
 import javax.swing.*;
 import java.awt.BorderLayout;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class QuestBazaarPanel extends QuestAbstractPanel{
+public class QuestBazaarPanel extends QuestAbstractPanel {
 	private static final long serialVersionUID = 1418913010051869222L;
 	
     static List<QuestAbstractBazaarStall> stallList = new ArrayList<QuestAbstractBazaarStall>();

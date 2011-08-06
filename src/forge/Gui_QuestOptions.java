@@ -2,7 +2,7 @@ package forge;
 
 import forge.error.ErrorViewer;
 import forge.gui.GuiUtils;
-import forge.quest.QuestFrame;
+import forge.quest.gui.QuestFrame;
 
 import javax.swing.*;
 import javax.swing.border.Border;

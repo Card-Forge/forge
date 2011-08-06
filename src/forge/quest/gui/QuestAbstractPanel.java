@@ -1,4 +1,4 @@
-package forge.quest;
+package forge.quest.gui;
 
 import javax.swing.*;
 

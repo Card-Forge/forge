@@ -1,0 +1,95 @@
+package forge.quest.data.pet;
+
+import forge.AllZone;
+import forge.Card;
+
+public class QuestPetHound extends QuestPetAbstract{
+    public QuestPetHound(){
+        super("Hound", "Dogs are said to be man's best friend. Definitely not this one.", 4);
+    }
+
+    @Override
+    public Card getPetCard() {
+        Card petCard = new Card();
+
+        petCard.setName("Hound Pet");
+        petCard.setController(AllZone.HumanPlayer);
+        petCard.setOwner(AllZone.HumanPlayer);
+
+        petCard.addColor("R");
+        petCard.setToken(true);
+
+        petCard.addType("Creature");
+        petCard.addType("Hound");
+        petCard.addType("Pet");
+
+        if (level == 1)
+		{
+			petCard.setImageName("R 0 1 Hound Pet");
+            petCard.setBaseAttack(0);
+            petCard.setBaseDefense(1);
+		}
+		else if (level == 2)
+		{
+            petCard.setImageName("R 1 1 Hound Pet Haste");
+            petCard.setBaseAttack(1);
+            petCard.setBaseDefense(1);
+            petCard.addIntrinsicKeyword("Haste");
+		}
+		else if (level == 3)
+		{
+            petCard.setImageName("R 2 1 Hound Pet");
+            petCard.setBaseAttack(2);
+            petCard.setBaseDefense(1);
+            petCard.addIntrinsicKeyword("Haste");
+
+		}
+		else if (level == 4)
+		{
+            petCard.setImageName("R 2 1 Hound Pet Alone");
+            petCard.setBaseAttack(2);
+            petCard.setBaseDefense(1);
+            petCard.addIntrinsicKeyword("Haste");
+            petCard.addIntrinsicKeyword("Whenever this creature attacks alone, it gets +2/+0 until end of turn.");
+		}
+
+
+
+        return petCard;
+    }
+
+    @Override
+    public int[] getAllUpgradePrices() {
+        return new int[]{200, 350, 450, 750};
+    }
+
+    @Override
+    public String[] getAllUpgradeDescriptions() {
+        return new String[]{
+                "Purchase hound",
+                "Give Haste to your hound.",
+                "Improve the attack power of your hound.",
+                "Greatly improves your hound's attack power if it attacks alone.",
+                "You cannot train your hound any further"};
+    }
+
+    @Override
+    public String[] getAllStats() {
+        return new String[]{"You do not own a hound",
+        "1/1, R",
+        "1/1, R, Haste",
+        "2/1, R, Haste",
+        "2/1, R, Haste, Whenever this creature attacks alone, it gets +2/+0 until end of turn."};
+    }
+
+    @Override
+    public String[] getAllImageNames() {
+        return new String[]{
+                "",
+                "r_1_1_hound_pet_small.jpg",
+                "r_1_1_hound_pet_haste_small.jpg",
+                "r_2_1_hound_pet_small.jpg",
+                "r_2_1_hound_pet_alone_small.jpg"
+        };       
+    }
+}
