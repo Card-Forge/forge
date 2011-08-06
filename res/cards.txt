@@ -1,3 +1,33 @@
+Goldenglow Moth
+W
+Creature Insect
+no text
+0/1
+Flying
+WheneverKeyword:Blocks:Self:Play:ModifyLife/4:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever Goldenglow Moth blocks, you may gain 4 life.
+
+Oyobi, Who Split the Heavens
+6 W
+Legendary Creature Spirit 
+no text
+3/6
+Flying
+WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:MakeToken-Spirit-W-3-3-Flying-/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:Whenever you cast a Spirit or Arcane spell, put a 3/3 white Spirit creature token with flying onto the battlefield.
+
+Shield Mate
+W
+Creature Human Soldier
+no text
+1/1
+abPumpTgt 0 Sac-CARDNAME:+0/+4
+
+Stonybrook Schoolmaster
+2 W
+Creature Merfolk Wizard
+no text
+1/2
+WheneverKeyword:BecomesTapped:Self:Play:MakeToken-Merfolk Wizard-U-1-1-None-/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever Stonybrook Schoolmaster becomes tapped, you may put a 1/1 blue Merfolk Wizard creature token onto the battlefield.
+
 Plummet
 1 G
 Instant
