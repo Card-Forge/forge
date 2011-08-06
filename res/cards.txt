@@ -14508,7 +14508,6 @@ B B
 Sorcery
 no text
 spDiscardTgt:AtRandom:2:Target player discards two cards at random.:Hymn to Tourach - target player discards cards
-SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/fe/en-us/card1849.jpg
 
@@ -17540,6 +17539,7 @@ Legendary Creature Angel
 Activated abilities of creatures your opponents control can't be activated.
 3/4
 Flying
+SVar:PlayMain1:TRUE
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/linvala_keeper_of_silence.jpg
 
@@ -17577,6 +17577,7 @@ Legendary Creature Human Soldier
 Liu Bei, Lord of Shu gets +2/+2 as long as you control a permanent named Guan Yu, Sainted Warrior or a permanent named Zhang Fei, Fierce Warrior.
 2/4
 Horsemanship
+SVar:BuffedBy:Permanent.named
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/liu_bei_lord_of_shu.jpg
 
@@ -18259,6 +18260,7 @@ Magus of the Tabernacle
 Creature Human Wizard
 All creatures have "At the beginning of your upkeep, sacrifice this creature unless you pay 1."
 2/6
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_tabernacle.jpg
 
@@ -30520,6 +30522,7 @@ The Tabernacle at Pendrell Vale
 no cost
 Legendary Land
 All creatures have "At the beginning of your upkeep, destroy this creature unless you pay 1."
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_tabernacle_at_pendrell_vale.jpg
 
