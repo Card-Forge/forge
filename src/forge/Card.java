@@ -2280,9 +2280,9 @@ public class Card extends MyObservable {
     	
     
     public boolean isValidCard(String Restris[], String You) {
-    	String Restriction[] = {""};
+    	String Restriction[] = new String[Restris.length];
     	String st = "";
-        for (int i=0; i<Restriction.length; i++)
+        for (int i=0; i<Restris.length; i++)
         {
         	Restriction[i] = Restris[i];
             if (Restriction[i].contains("YouCtrl"))
@@ -2306,7 +2306,7 @@ public class Card extends MyObservable {
     }
     
     public boolean isValidCard(String Restrictions[]) {
-        
+    	
         if (getName().equals("Mana Pool") || isImmutable()) return false;
 
         for(int i = 0; i < Restrictions.length; i++) {
