@@ -1632,33 +1632,6 @@ class CardFactory_Lands {
         }//*************** END ************ END **************************
         
         
-/*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Mikokoro, Center of the Sea")) {
-            final Ability_Tap ability = new Ability_Tap(card, "2") {
-                private static final long serialVersionUID = -199960897120235012L;
-                
-                @Override
-                public void resolve() {
-                    AllZone.GameAction.drawCard(Constant.Player.Computer);
-                    AllZone.GameAction.drawCard(Constant.Player.Human);
-                }
-            };
-            
-            ability.setDescription("2, tap: Each player draws a card.");
-            ability.setStackDescription(card.getName() + " - Each player draws a card.");
-            
-            card.addSpellAbility(ability);
-            
-            //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
-            //anyway, this does the trick:
-            //card.removeIntrinsicKeyword("tap: add 1");
-            //card.setText(card.getSpellText() +  "\r\n2, tap: Each player draws a card.");
-            //card.addExtrinsicKeyword("tap: add 1");
-            
-        }//*************** END ************ END **************************
-*/
-        
         
         //*************** START *********** START **************************  
         else if(cardName.equals("Gargoyle Castle")) {
@@ -2227,107 +2200,6 @@ class CardFactory_Lands {
             
         }//*************** END ************ END **************************
         
-        /*
-        //*************** START *********** START **************************
-         else if(cardName.equals("Skarrg, the Rage Pits"))
-         {
-           final SpellAbility[] a2 = new SpellAbility[1];
-           final Command eot2 = new Command()
-             {
-              private static final long serialVersionUID = 6180724472470740160L;
-
-              public void execute()
-               {
-                 Card c = a2[0].getTargetCard();
-                 if(AllZone.GameAction.isCardInPlay(c))
-                 {
-                   c.addTempAttackBoost(-1);
-                   c.addTempDefenseBoost(-1);
-                   c.removeIntrinsicKeyword("Trample");
-                                        }
-               }
-             };
-
-           a2[0] = new Ability_Tap(card, "G R")
-           {
-           private static final long serialVersionUID = 3561450520225198222L;
-
-           public boolean canPlayAI()
-             {
-               return getAttacker() != null;
-             }
-             public void chooseTargetAI()
-             {
-               setTargetCard(getAttacker());
-             }
-             public Card getAttacker()
-             {
-               //target creature that is going to attack
-               Combat c = ComputerUtil.getAttackers();
-               CardList att = new CardList(c.getAttackers());
-               att.remove(card);
-               att.shuffle();
-
-               if(att.size() != 0)
-                 return att.get(0);
-               else
-                 return null;
-             }//getAttacker()
-
-             public void resolve()
-             {
-               Card c = a2[0].getTargetCard();
-               if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card,c) )
-               {
-                 c.addTempAttackBoost(1);
-                 c.addTempDefenseBoost(1);
-                 c.addIntrinsicKeyword("Trample");
-                 AllZone.EndOfTurn.addUntil(eot2);
-               }
-             }//resolve()
-           };//SpellAbility
-           card.addSpellAbility(a2[0]);
-           a2[0].setDescription("G R, tap: Target creature gets +1/+1 and gains trample until end of turn.");
-
-
-           @SuppressWarnings("unused") // target unused
-           final Input target = new Input()
-           {
-            private static final long serialVersionUID = 8913477363141356082L;
-           
-            public void showMessage()
-             {
-               ButtonUtil.enableOnlyCancel();
-               AllZone.Display.showMessage("Select Creature to get +1/+1 and trample");
-             }
-             public void selectCard(Card c, PlayerZone zone)
-             {
-              if(!CardFactoryUtil.canTarget(card, c)){
-                    AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-              }
-              else if(c.isCreature())
-              {
-                 card.tap();
-                 AllZone.Human_Play.updateObservers();
-
-                 a2[0].setTargetCard(c);//since setTargetCard() changes stack description
-                 a2[0].setStackDescription(c +" gets +1/+1 and trample until EOT");
-
-                 AllZone.InputControl.resetInput();
-                 AllZone.Stack.add(a2[0]);
-               }
-             }//selectCard()
-             public void selectButtonCancel()
-             {
-               card.untap();
-               stop();
-             }
-           };//Input target
-           a2[0].setBeforePayMana(CardFactoryUtil.input_targetType(a2[0], "Creature"));
-
-         }//*************** END ************ END **************************
-         
-         */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Daru Encampment")) {
@@ -2538,31 +2410,6 @@ class CardFactory_Lands {
         }
         //*************** END ************ END **************************        
         
-        
-/*
-        //*************** START *********** START **************************
-        if(cardName.equals("Orzhova, the Church of Deals")) {
-            card.clearSpellKeepManaAbility();
-            
-            Ability_Tap ability = new Ability_Tap(card, "3 W B") {
-                private static final long serialVersionUID = 42470566751344693L;
-                
-                
-                @Override
-                public void resolve() {
-                    AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1);
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                    life.addLife(1);
-                }
-            };
-            ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
-            ability.setDescription("tap 3 W B: Target player loses 1 life and you gain 1 life.");
-            ability.setStackDescription("Target player loses 1 life and you gain 1 life.");
-            card.addSpellAbility(ability);
-        }
-        //*************** END ************ END **************************
-*/
         
         
         //*************** START *********** START **************************
