@@ -4,10 +4,7 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
 import javax.swing.*;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Collection;
@@ -41,6 +38,7 @@ public class GuiUtils {
     public static void addExpandingHorizontalSpace(JPanel panel) {
         panel.add(Box.createHorizontalGlue());
     }
+
     /**
      * Adds a Vertical Glue to panel
      */
@@ -65,25 +63,41 @@ public class GuiUtils {
     /**
      * Sets the font size of a component
      */
-    public static void setFontSize(Component component, int newSize){
+    public static void setFontSize(Component component, int newSize) {
         Font oldFont = component.getFont();
-        component.setFont(oldFont.deriveFont((float )newSize));
+        component.setFont(oldFont.deriveFont((float) newSize));
     }
 
     public static ImageIcon getIconFromFile(String iconName) {
-    	File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
-    	File file = new File(base, iconName);
-        if (file.exists())
+        File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
+        File file = new File(base, iconName);
+        if (file.exists()) {
             return new ImageIcon(file.toString());
-        else
+        }
+        else {
             return null;
+        }
     }
 
-    public static ImageIcon getResizedIcon(ImageIcon icon, int width, int height){
+    public static ImageIcon getResizedIcon(ImageIcon icon, int width, int height) {
         return new ImageIcon(icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
     }
 
-    public static ImageIcon getEmptyIcon(int width, int height){
+    public static ImageIcon getEmptyIcon(int width, int height) {
         return new ImageIcon(new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB));
+    }
+
+    /**
+     * Centers a frame on the screen based on its current size
+     * @param frame a fully laid-out frame
+     */
+    public static void centerFrame(Frame frame) {
+        Dimension screen = frame.getToolkit().getScreenSize();
+        Rectangle bounds = frame.getBounds();
+        bounds.width = frame.getWidth();
+        bounds.height = frame.getHeight();
+        bounds.x = (screen.width - bounds.width) / 2;
+        bounds.y = (screen.height - bounds.height) / 2;
+        frame.setBounds(bounds);
     }
 }

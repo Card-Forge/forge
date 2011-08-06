@@ -3,6 +3,7 @@ package forge.quest;
 import forge.AllZone;
 import forge.Gui_NewGame;
 import forge.QuestData;
+import forge.gui.GuiUtils;
 import forge.quest.bazaar.QuestBazaarPanel;
 
 import javax.swing.*;
@@ -53,7 +54,11 @@ public class QuestFrame extends JFrame {
         this.pack();
         this.setVisible(true);
 
+        GuiUtils.centerFrame(this);
+
     }
+
+
 
     public void showPane(String paneName){
         subPanelMap.get(paneName).refreshState();

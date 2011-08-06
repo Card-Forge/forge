@@ -1,12 +1,12 @@
 package forge;
 import forge.error.ErrorViewer;
+import forge.gui.GuiUtils;
 import forge.quest.QuestFrame;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -59,18 +59,16 @@ public class Gui_QuestOptions extends JFrame {
         
         setup();
         setupRadioButtonText();
-        
+
+        this.setSize(420,570);
+        GuiUtils.centerFrame(this);
         setVisible(true);
     }
     
     private void setup() {
         //make the text look correct on the screen
         jTextArea1.setBackground(getBackground());
-        
-        //center window on the screen
-        Dimension screen = this.getToolkit().getScreenSize();
-        setBounds(screen.width / 4, 50, //position
-                420, 570); //size
+
         
         //if user closes this window, go back to "New Game" screen
         this.addWindowListener(new WindowAdapter() {
