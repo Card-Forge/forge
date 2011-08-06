@@ -1,3 +1,12 @@
+Palladia-Mors
+2 W W R R G G
+Legendary Creature Elder Dragon
+no text
+7/7
+Flying
+Trample
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:R G W
+
 Vampire Aristocrat
 2 B
 Creature Vampire Rogue
@@ -1331,14 +1340,6 @@ Whenever Nicol Bolas deals damage to an opponent, that player discards his or he
 7/7
 Flying
 At the beginning of your upkeep, sacrifice CARDNAME unless you pay:U B R
-
-Palladia-Mors
-2 W W R R G G
-Legendary Creature Elder Dragon
-no text
-7/7
-Flying
-At the beginning of your upkeep, sacrifice CARDNAME unless you pay:R G W
 
 Stasis
 1 U
