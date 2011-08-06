@@ -5,5 +5,5 @@ Text:no text
 PT:1/2
 A:AB$GainLife|Cost$T|LifeAmount$1|PlayerTurn$True|ActivatingPhases$Upkeep,Draw,Main1,BeginCombat|SpellDescription$You gain 1 life. Activate this ability only during your turn, before attackers are declared.
 SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/temple_elder.jpg
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=6507&type=card
 End
