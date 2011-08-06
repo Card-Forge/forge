@@ -11,6 +11,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.net.InetSocketAddress;
@@ -242,10 +243,14 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
                     	out.close();
                     }
                     catch(MalformedURLException mURLe) {
-                    	System.out.println("bad URL for: "+cards[card].name);
+                    	System.out.println("Error - possibly missing URL for: "+cards[card].name);
                     	//Log.error("LQ Pictures", "Malformed URL for: "+cards[card].name, mURLe);
                     }
-                } catch(Exception ex) {
+                } 
+                catch(FileNotFoundException fnfe) {
+                	System.out.println("Error - the LQ picture for "+cards[card].name+" could not be found on the server.");
+                }
+                catch(Exception ex) {
                 	Log.error("LQ Pictures", "Error downloading pictures", ex);
                 }
             }//for
