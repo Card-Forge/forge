@@ -751,7 +751,7 @@ public class Card extends MyObservable {
     	String NonAbilityText = getNonAbilityText();
     	if (NonAbilityText.length() > 0) {
     		sb.append("\r\n \r\nNon ability features: \r\n");
-    		sb.append(NonAbilityText);
+    		sb.append(NonAbilityText.replaceAll("CARDNAME", getName()));
     	}
     	
     	return sb.toString();
