@@ -833,7 +833,9 @@ public class GameAction {
         PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
         PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
         
-        if(0 < getDredge().size()) {
+        //only allow dredge by the human for now
+        //TODO - allow dredge by the computer (probably 50% of the time at random so compy doesn't mill itself
+        if(0 < getDredge().size() && player.equals(Constant.Player.Human)) {
             String choices[] = {"Yes", "No"};
             Object o = AllZone.Display.getChoice("Do you want to dredge?", choices);
             if(o.equals("Yes")) {
