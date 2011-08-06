@@ -14484,7 +14484,8 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Duress")) {
             final SpellAbility spell = new Spell(card) {
@@ -14553,7 +14554,9 @@ public class CardFactory implements NewConstants {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
+*/
         
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Ostracize")) {
             final SpellAbility spell = new Spell(card) {
@@ -14615,6 +14618,8 @@ public class CardFactory implements NewConstants {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Hoofprints of the Stag")) {

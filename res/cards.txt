@@ -1,3 +1,15 @@
+Duress
+B
+Sorcery
+no text
+spDiscardOpp:RevealYouChoose/Artifact.nonCreature.nonLand,Enchantment.nonCreature,Instant,Planeswalker,Sorcery:1:Target opponent reveals his or her hand. Choose a noncreature, nonland card from it. That player discards that card.:Duress - opponent reveals hand and discards a card
+
+Ostracize
+B
+Sorcery
+no text
+spDiscardOpp:RevealYouChoose/Creature:1:Target opponent reveals his or her hand. Choose a creature card from it. That player discards that card.:Ostracize - opponent reveals hand and discards a card
+
 Distress
 B B
 Sorcery
@@ -24094,11 +24106,6 @@ Creature Illusion
 When Dream Stalker comes into play, return a permanent you control to its owner's hand.
 1/5
 
-Duress
-B
-Sorcery
-Target opponent reveals his or her hand. Choose a noncreature, nonland card from it. That player discards that card.
-
 Fleetfoot Panther
 1 G W
 Creature Cat
@@ -24204,11 +24211,6 @@ Creature Faerie Wizard
 At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Nightshade Schemers, you may reveal it. If you do, each opponent loses 2 life.
 3/2
 Flying
-
-Ostracize
-B
-Sorcery
-Target opponent reveals his or her hand. Choose a creature card from it. That player discards that card.
 
 Overwhelming Forces
 6 B B
