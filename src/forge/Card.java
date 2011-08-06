@@ -262,6 +262,17 @@ public class Card extends MyObservable {
         return triggeringObjects.get(type);
     }
 
+    public void setAllTriggeringObjects(HashMap<String, Object> map)
+    {
+        triggeringObjects = map;
+    }
+
+    public HashMap<String, Object> getAllTriggeringObjects()
+    {
+        return triggeringObjects;
+    }
+
+
     public void setAbilityUsed(int i) {
         abilityUsed = i;
     }

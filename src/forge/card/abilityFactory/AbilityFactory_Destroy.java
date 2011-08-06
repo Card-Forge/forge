@@ -215,12 +215,13 @@ public class AbilityFactory_Destroy {
 		final Card source = sa.getSourceCard();
 		final boolean noRegen = af.getMapParams().containsKey("NoRegen");
 
-		CardList list;
-		list = AllZoneUtil.getCardsInPlay();
-		list = list.getTargetableCards(source);
-		list = list.getValidCards(tgt.getValidTgts(), source.getController(), source);
-		
+
 		if (tgt != null){
+            CardList list;
+		    list = AllZoneUtil.getCardsInPlay();
+		    list = list.getTargetableCards(source);
+		    list = list.getValidCards(tgt.getValidTgts(), source.getController(), source);
+
 			if (list.size() == 0 || list.size() < tgt.getMinTargets(sa.getSourceCard(), sa))
 				return false;
 			
