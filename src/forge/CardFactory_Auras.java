@@ -47,6 +47,28 @@ class CardFactory_Auras {
                 private static final long serialVersionUID = 5394181222737344498L;
                 
                 @Override
+                /*
+                 * The computer will now place this aura on unenchanted lands, but
+                 * it will tap an enchanted land for mana to produce the token.
+                 */
+                
+                public boolean canPlayAI() {
+
+                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isLand() && !c.isEnchanted() && CardFactoryUtil.canTarget(card, c);
+                        }
+                    });
+
+                    if (list.isEmpty()) return false;
+                    else {
+                        list.shuffle();
+                        setTargetCard(list.get(0));
+                        return true;
+                    }
+                }//canPlayAI()
+/*
                 public boolean canPlayAI() {
                     CardList list = new CardList(AllZone.Computer_Play.getCards());
                     list = list.getType("Land");
@@ -56,7 +78,7 @@ class CardFactory_Auras {
                     setTargetCard(list.get(0));
                     return true;
                 }//canPlayAI()
-                
+*/
                 @Override
                 public void resolve() {
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
@@ -255,6 +277,28 @@ class CardFactory_Auras {
                 private static final long serialVersionUID = -4695012002471107694L;
                 
                 @Override
+                /*
+                 * The computer will now place this aura on unenchanted lands, but
+                 * it will tap an enchanted land for mana to produce the token.
+                 */
+                
+                public boolean canPlayAI() {
+
+                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isLand() && !c.isEnchanted() && CardFactoryUtil.canTarget(card, c);
+                        }
+                    });
+
+                    if (list.isEmpty()) return false;
+                    else {
+                        list.shuffle();
+                        setTargetCard(list.get(0));
+                        return true;
+                    }
+                }//canPlayAI()
+/*
                 public boolean canPlayAI() {
                     CardList list = new CardList(AllZone.Computer_Play.getCards());
                     list = list.getType("Land");
@@ -264,7 +308,7 @@ class CardFactory_Auras {
                     setTargetCard(list.get(0));
                     return true;
                 }//canPlayAI()
-                
+*/
                 @Override
                 public void resolve() {
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
@@ -294,7 +338,7 @@ class CardFactory_Auras {
                     Card crd = spell.getTargetCard();
                     
                     c.setName("Drake");
-                    c.setImageName("G U 2 2 Drake");
+                    c.setImageName("GU 2 2 Drake");
                     
                     c.setOwner(crd.getController());
                     c.setController(crd.getController());
