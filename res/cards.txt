@@ -1,3 +1,18 @@
+Serpent of the Endless Sea
+4 U
+Creature Serpent
+Serpent of the Endless Sea's power and toughness are each equal to the number of Islands you control.
+0/0
+This creature can't attack unless defending player controls an Island
+
+Sedraxis Specter
+U B R
+Creature Specter
+Whenever Sedraxis Specter deals combat damage to a player, that player discards a card.
+2/2
+Flying
+Unearth:1 B
+
 Power Matrix
 4
 Artifact
@@ -840,12 +855,6 @@ Creature Kor Wizard
 8: Tap all creatures target player controls.
 2/1
 Flying
-
-Serpent of the Endless Sea
-4 U
-Creature Serpent
-Serpent of the Endless Sea's power and toughness are each equal to the number of Islands you control.
-0/0
 
 Burrowing
 R
@@ -2512,14 +2521,6 @@ no text
 3/4
 abPump R:+1/-1
 Unearth:2 B
-
-Sedraxis Specter
-U B R
-Creature
-Whenever Sedraxis Specter deals combat damage to a player, that player discards a card.
-2/2
-Flying
-Unearth:1 B
 
 Kathari Screecher
 2 U
