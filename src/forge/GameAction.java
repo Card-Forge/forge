@@ -942,12 +942,11 @@ public class GameAction {
                            int Multiple_Targets = 1;
                            
                            for(int b = 0; b < S_Amount.length - 1; b++) {
-                           
                            if(S_Amount[b+1].equals("Toughness")) I_Amount[b] = F_TriggeringCard.getNetDefense();
                            else if(S_Amount[b+1].equals("Power")) I_Amount[b] = F_TriggeringCard.getNetAttack();
                            else if(S_Amount[b+1].equals("Life_Gained")) I_Amount[b] = ((Integer)Custom_Parameters[0]);
                            else if(S_Amount[b+1].contains("ControlledAmountType")) {
-                        	   final String[] TypeSplit =  AmountParse.split(".");
+                        	   final String[] TypeSplit =  AmountParse.split("/");
                         		CardList Cards_WithAllTypes = new CardList();
                         		Cards_WithAllTypes.add(new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards()));
                         		Cards_WithAllTypes = Cards_WithAllTypes.filter(new CardListFilter() {
@@ -959,7 +958,7 @@ public class GameAction {
                                  });
                         		I_Amount[b] = Cards_WithAllTypes.size();
                            }
-                           else if(!S_Amount[0].equals("KeywordPumpEOT")) I_Amount[b] = Integer.valueOf(S_Amount[b+1]);
+                           else if(!S_Amount[0].equals("KeywordPumpEOT")&& !S_Amount[1].contains("ControlledAmountType")) I_Amount[b] = Integer.valueOf(S_Amount[b+1]);
                            
                            // NOTE: Multiple Targets and Groups of Integers is not supported
                            
