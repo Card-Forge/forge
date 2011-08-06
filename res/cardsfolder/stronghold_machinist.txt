@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Creature Human Spellshaper
 Text:no text
 PT:1/1
-A:AB$ Counter | Cost$ U U T Discard<1/Card> | Type$ Spell | CounterValid$ Card.nonCreature | SpellDescription$ Counter target noncreature spell.
+A:AB$ Counter | Cost$ U U T Discard<1/Card> | TargetType$ Spell | TgtPrompt$ Select target nonCreature spell | ValidTgts$ Card.nonCreature | SpellDescription$ Counter target noncreature spell.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_machinist.jpg

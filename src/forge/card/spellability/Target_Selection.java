@@ -1,6 +1,7 @@
 package forge.card.spellability;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
@@ -76,14 +77,10 @@ public class Target_Selection {
 		}
 		
 		//targets still needed
-		if(target.getMandatory())
-		{
-			AllZone.InputControl.setInput(input_targetValid(ability, target.getValidTgts(), target.getVTSelection(), this, req, target.hasCandidates()));
-		}
-		else
-		{
-			AllZone.InputControl.setInput(input_targetValid(ability, target.getValidTgts(), target.getVTSelection(), this, req, false));
-		}
+		boolean mandatoryTarget = target.getMandatory() ? target.hasCandidates() : false;
+		
+		AllZone.InputControl.setInput(input_targetValid(ability, target.getValidTgts(), target.getVTSelection(), this, req, mandatoryTarget));
+
         return false;
 	}
 
@@ -99,6 +96,12 @@ public class Target_Selection {
 	        public void showMessage() {
 				Target tgt = select.getTgt();
 				String zone = tgt.getZone();
+				
+				if (zone.equals(Constant.Zone.Stack)){
+					// If Zone is Stack, the choices are handled slightly differently
+					stopSetNext(input_cardFromStack(sa, message, select, req, mandatory));
+					return;
+				}
 				
 				CardList choices = AllZoneUtil.getCardsInZone(zone).getValidCards(Tgts, sa.getActivatingPlayer(), sa.getSourceCard());
 				
@@ -120,10 +123,10 @@ public class Target_Selection {
 		            		canTargetOpponent = true;
 		            }
 	
-		            stopSetNext(input_targetSpecific(sa, choices, message, true, canTargetPlayer, canTargetOpponent, select, req,mandatory));
+		            stopSetNext(input_targetSpecific(sa, choices, message, true, canTargetPlayer, canTargetOpponent, select, req, mandatory));
 				}
 				else{
-					stopSetNext(input_cardFromList(sa, choices, message, true, select, req,mandatory));
+					stopSetNext(input_cardFromList(sa, choices, message, true, select, req, mandatory));
 				}
 	        }
     	};
@@ -245,5 +248,140 @@ public class Target_Selection {
 	    };//Input
 
 	    return target;
-    } 
+    }
+    
+    public static Input input_cardFromStack(final SpellAbility sa, final String message,
+    		final Target_Selection select, final SpellAbility_Requirements req, final boolean mandatory){
+    	
+    	Input targetOnStack = new Input() {
+			private static final long serialVersionUID = 5360660530175041997L;
+	
+			@Override
+			public void showMessage() {
+				// Find what's targetable, then allow human to choose 
+				ArrayList<SpellAbility> choosables = getTargetableOnStack(sa, select.getTgt());
+
+				HashMap<String,SpellAbility> map = new HashMap<String,SpellAbility>();
+	
+				for(SpellAbility sa : choosables) {
+					map.put(sa.getStackDescription(),sa);
+				}
+	
+				String[] choices = new String[map.keySet().size()];
+				choices = map.keySet().toArray(choices);
+	
+				if (choices.length == 0){
+					select.setCancel(true);
+				}
+				else{
+					String madeChoice = GuiUtils.getChoiceOptional(message, choices);
+		
+					if (madeChoice != null){
+						Target tgt = select.getTgt();
+						tgt.addTarget(map.get(madeChoice));
+					}
+					else
+						select.setCancel(true);
+				}
+				
+				stop();
+				req.finishedTargeting();
+			}//showMessage()
+    	};
+    	return targetOnStack;
+    }
+    
+    // TODO: The following three functions are Utility functions for TargetOnStack, probably should be moved
+    // The following should be select.getTargetableOnStack()
+    public static ArrayList<SpellAbility> getTargetableOnStack(SpellAbility sa, Target tgt){
+		ArrayList<SpellAbility> choosables = new ArrayList<SpellAbility>();
+
+		for(int i = 0; i < AllZone.Stack.size(); i++) {
+			choosables.add(AllZone.Stack.peek(i));
+		}
+		
+		for(int i = 0; i < choosables.size(); i++) {
+			if (!matchSpellAbility(sa, choosables.get(i), tgt)){
+				choosables.remove(i);
+			}
+		}
+		return choosables;
+    }
+    
+    public static boolean matchSpellAbility(SpellAbility sa, SpellAbility match, Target tgt){
+    	String saType = tgt.getTargetSpellAbilityType();
+    	
+    	if (match.isSpell()){
+    		if (!saType.contains("Spell"))
+    			return false;
+    	}
+    	else if (match.isTrigger()){
+    		if (!saType.contains("Triggered"))
+    			return false;
+    	}
+    	else if (match.isAbility()){
+    		if (!saType.contains("Activated"))
+    			return false;
+    	}
+    	
+    	String splitTargetRestrictions = tgt.getSAValidTargeting();
+		if(splitTargetRestrictions != null){
+			// TODO: What about spells with SubAbilities with Targets?
+			
+			Target matchTgt = match.getTarget();
+			
+			if (matchTgt == null)
+				return false;
+			
+			boolean result = false;
+			
+			for(Object o : matchTgt.getTargets()){
+				if(matchesValid(o, splitTargetRestrictions.split(","), sa)){
+					result = true;
+					break;
+				}
+			}
+
+			if (!result)
+				return false;
+		}
+		
+		if(!matchesValid(match, tgt.getValidTgts(), sa)){
+			return false;
+		}
+	
+    	return true;
+    }
+    
+	private static boolean matchesValid(Object o, String[] valids, SpellAbility sa)
+	{
+		Card srcCard = sa.getSourceCard();
+		Player activatingPlayer = sa.getActivatingPlayer();
+		if(o instanceof Card){
+			Card c = (Card)o;
+			return c.isValidCard(valids, activatingPlayer, srcCard);
+		}
+		
+		if(o instanceof Player){
+			for(String v : valids){
+				if(v.equalsIgnoreCase("Player"))
+					return true;
+
+				if(v.equalsIgnoreCase("Opponent")){
+					if(o.equals(activatingPlayer.getOpponent())){
+						return true;
+					}
+				}
+				if(v.equalsIgnoreCase("You"))
+					return o.equals(activatingPlayer);
+			}
+		}
+		
+		if (o instanceof SpellAbility){
+			Card c = ((SpellAbility)o).getSourceCard();
+			return c.isValidCard(valids, activatingPlayer, srcCard);
+		}
+		
+		return false;
+	}
 }

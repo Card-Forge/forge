@@ -3,7 +3,7 @@ ManaCost:1 W W
 Types:Creature Human Knight
 Text:no text
 PT:2/2
-A:AB$ Counter | Cost$ T PayLife<1> | Type$ Spell | CounterValid$ Card.Black | SpellDescription$ Counter target black spell.
+A:AB$ Counter | Cost$ T PayLife<1> | TargetType$ Spell | TgtPrompt$ Select target Black spell | ValidTgts$ Card.Black | SpellDescription$ Counter target black spell.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_the_sacred_torch.jpg

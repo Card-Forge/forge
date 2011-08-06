@@ -2,7 +2,7 @@ Name:Force Void
 ManaCost:2 U
 Types:Instant
 Text:no text
-A:SP$ Counter | Cost$ 2 U | Type$ Spell | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays 1. | SubAbility$ SVar=DBDraw
+A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays 1. | SubAbility$ SVar=DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True | SpellDescription$ Draw a card at the beginning of the next upkeep.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

@@ -2,7 +2,7 @@ Name:Blue Elemental Blast
 ManaCost:U
 Types:Instant
 Text:no text
-A:SP$ Counter | Cost$ U | Type$ Spell | Destination$ Graveyard | CounterValid$ Card.Red | SpellDescription$ Choose one - Counter target red spell;
+A:SP$ Counter | Cost$ U | TargetType$ Spell | ValidTgts$ Card.Red | TgtPrompt$ Select target Red Spell | SpellDescription$ Choose one - Counter target red spell;
 A:SP$ Destroy | Cost$ U | ValidTgts$ Permanent.Red | TgtPrompt$ Select target red permanent. | SpellDescription$ or destroy target red permanent.
 SVar:RemAIDeck:True
 SVar:Rarity:Common

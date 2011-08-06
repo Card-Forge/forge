@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 
+import javax.swing.text.html.MinimalHTMLWriter;
+
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
@@ -33,6 +35,12 @@ public class ComputerUtil
 	//    MyRandom.shuffle(all);
 	
 	    for(SpellAbility sa : all){
+	    	// Don't add Counterspells to the "normal" playcard lookupss
+	    	AbilityFactory af = sa.getAbilityFactory();
+	    	if (af != null && af.getAPI().equals("Counter"))
+	    		continue;
+	    	
+	    	
 	    	sa.setActivatingPlayer(AllZone.ComputerPlayer);
 	    	if(canPayCost(sa) && sa.canPlay() && sa.canPlayAI())
 	    	{
@@ -64,6 +72,112 @@ public class ComputerUtil
 	    }//while
 	    return true;
   }//playCards()
+  
+  static public int counterSpellRestriction(SpellAbility sa){
+	  // Move this to AF?
+	  // Restriction Level is Based off a handful of factors
+
+	  int restrict = 0;
+	  
+	  Card source = sa.getSourceCard();
+	  Target tgt = sa.getTarget();
+	  AbilityFactory af = sa.getAbilityFactory();
+	  HashMap<String, String> params = af.getMapParams();
+	  
+	  // Play higher costing spells first?
+	  Cost cost = sa.getPayCosts();
+	  // Convert cost to CMC
+	  String totalMana = source.getSVar("PayX"); // + cost.getCMC()
+	  
+	  // Consider the costs here for relative "scoring"
+	  if (cost.getDiscardType().equals("Hand")){
+		  // Null Brooch aid
+		  restrict -= (AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer).size() * 20);
+	  }
+	  
+	  // Abilities before Spells (card advantage)
+	  if (af.isAbility())
+		  restrict += 40;
+	  
+	  // TargetValidTargeting gets biggest bonus
+	  if (tgt.getSAValidTargeting() != null){
+		  restrict += 35;
+	  }
+	  
+	  // Unless Cost gets significant bonus + 10-Payment Amount
+	  String unless = params.get("UnlessCost");
+	  if (unless != null){
+		  int amount = AbilityFactory.calculateAmount(source, unless, sa);
+		  restrict += 20 - (2*amount);
+	  }
+	  
+	  // Then base on Targeting Restriction
+	  String[] validTgts = tgt.getValidTgts(); 
+	  if (validTgts.length != 1 || !validTgts[0].equals("Card"))
+		  restrict += 10;
+	  
+	  // And lastly give some bonus points to least restrictive TargetType (Spell,Ability,Triggered)
+	  String tgtType = tgt.getTargetSpellAbilityType();
+	  restrict -= (5*tgtType.split(",").length);
+	  
+	  return restrict;
+  }
+  
+  //if return true, go to next phase
+  static public boolean playCounterSpell(ArrayList<SpellAbility> possibleCounters)
+  {
+	SpellAbility bestSA = null;
+	int bestRestriction = Integer.MIN_VALUE;
+
+	for(SpellAbility sa : possibleCounters){
+		sa.setActivatingPlayer(AllZone.ComputerPlayer);
+		if(canPayCost(sa) && sa.canPlay() && sa.canPlayAI()){
+			if (bestSA == null){
+				bestSA = sa;
+				bestRestriction = counterSpellRestriction(sa);
+			}
+			else{
+				// Compare bestSA with this SA
+				int restrictionLevel = counterSpellRestriction(sa);
+				
+				if (restrictionLevel > bestRestriction){
+					bestRestriction = restrictionLevel;
+					bestSA = sa;
+				}
+			}
+		}
+	}//while
+	
+	if (bestSA == null) 
+		return false;
+	
+	// TODO
+	// "Look" at Targeted SA and "calculate" the threshold
+	// if (bestRestriction < targetedThreshold) return false;
+	
+	AllZone.Stack.freezeStack();
+	Card source = bestSA.getSourceCard();
+	
+	if(bestSA.isSpell() && !source.isCopiedSpell())
+		AllZone.GameAction.moveToStack(source);
+	
+	Cost cost = bestSA.getPayCosts();
+	
+	if (cost == null){
+		// Honestly Counterspells shouldn't use this branch
+	    payManaCost(bestSA);
+	    bestSA.chooseTargetAI();
+	    bestSA.getBeforePayManaAI().execute();
+	    AllZone.Stack.addAndUnfreeze(bestSA);
+	}
+	else{
+		Cost_Payment pay = new Cost_Payment(cost, bestSA);
+		pay.payComputerCosts();
+	}
+	
+	return true;
+  }//playCounterSpell()
+  
   
   //this is used for AI's counterspells
   final static public void playStack(SpellAbility sa)

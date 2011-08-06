@@ -8383,7 +8383,6 @@ src/forge/CommandReturn.java svneol=native#text/plain
 src/forge/Computer.java svneol=native#text/plain
 src/forge/ComputerAI_General.java -text svneol=native#text/plain
 src/forge/ComputerAI_Input.java svneol=native#text/plain
-src/forge/ComputerAI_counterSpells2.java -text svneol=native#text/plain
 src/forge/ComputerUtil.java -text svneol=native#text/plain
 src/forge/ComputerUtil_Attack2.java svneol=native#text/plain
 src/forge/ComputerUtil_Block2.java svneol=native#text/plain

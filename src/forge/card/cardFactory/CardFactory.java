@@ -22,7 +22,6 @@ import forge.CardListFilter;
 import forge.CardListUtil;
 import forge.CardUtil;
 import forge.Command;
-import forge.ComputerAI_counterSpells2;
 import forge.ComputerUtil;
 import forge.Constant;
 import forge.Counters;
@@ -2055,13 +2054,10 @@ public class CardFactory implements NewConstants {
 				
         			if (getSourceCard().getAttachedCards().length > 0)
         			{
+        				// Isochron Scepter might be broken?
         				Card c = copyCard(getSourceCard().getAttachedCards()[0]);
-        				if (ComputerAI_counterSpells2.KeywordedCounterspells.contains(c.getName()))
-        				{
-        					SpellAbility sa = c.getSpellAbility()[0];
-        					return sa.canPlay();
-        				}
-        				else return true;
+        				SpellAbility sa = c.getSpellAbility()[0];
+    					return sa.canPlay();
         			}
         			else
         				return false;

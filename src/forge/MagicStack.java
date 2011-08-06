@@ -16,6 +16,7 @@ import forge.card.spellability.Ability_Triggered;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Spell_Permanent;
 import forge.card.spellability.Target;
+import forge.card.spellability.Target_Selection;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCost_Ability;
@@ -634,12 +635,8 @@ public class MagicStack extends MyObservable {
 				}
 			}
 			// attempt to counter human spell 
-			// TODO this needs to move to the stack response section for the AI
-			if (sp.getSourceCard().getController().equals(AllZone.HumanPlayer) && CardFactoryUtil.isCounterable(sp.getSourceCard()))
-				ComputerAI_counterSpells2.counter_Spell(sp);
 
 			GameActionUtil.executePlayCardEffects(sp);
-
 		}
 	}
 
@@ -758,6 +755,10 @@ public class MagicStack extends MyObservable {
 					if (o instanceof Card){
 						Card card = (Card)o;
 						fizzle &= !(CardFactoryUtil.isTargetStillValid(fizzSA, card));
+					}
+					if (o instanceof SpellAbility){
+						SpellAbility tgtSA = (SpellAbility)o;
+						fizzle &= !(Target_Selection.matchSpellAbility(fizzSA, tgtSA, tgt));
 					}
 				}
 			}

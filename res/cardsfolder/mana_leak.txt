@@ -2,7 +2,7 @@ Name:Mana Leak
 ManaCost:1 U
 Types:Instant
 Text:no text
-A:SP$ Counter | Cost$ 1 U | Type$ Spell | UnlessCost$ 3 | SpellDescription$ Counter target spell unless its controller pays 3.
+A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 3 | SpellDescription$ Counter target spell unless its controller pays 3.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_leak.jpg

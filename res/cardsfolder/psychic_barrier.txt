@@ -2,7 +2,7 @@ Name:Psychic Barrier
 ManaCost:U U
 Types:Instant
 Text:no text
-A:SP$ Counter | Cost$ U U | Type$ Spell | CounterValid$ Creature | ExtraActions$ CC-LoseLife(1) | SpellDescription$ Counter target creature spell. Its controller loses 1 life.
+A:SP$ Counter | Cost$ U U | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | ExtraActions$ CC-LoseLife(1) | SpellDescription$ Counter target creature spell. Its controller loses 1 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_barrier.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/43.jpg

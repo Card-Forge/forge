@@ -2,7 +2,7 @@ Name:Thwart
 ManaCost:2 U U
 Types:Instant
 Text:no text
-A:SP$ Counter | Cost$ 2 U U | Type$ Spell | Destination$ Graveyard | SpellDescription$ Counter target spell.
+A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
 SVar:AltCost:Return<3/Island>
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

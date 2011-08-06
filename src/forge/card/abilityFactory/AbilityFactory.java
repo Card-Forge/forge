@@ -7,7 +7,6 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardList;
-import forge.ComputerAI_counterSpells2;
 import forge.Constant;
 import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
@@ -95,6 +94,9 @@ public class AbilityFactory {
 		return hasSpDesc;
 	}
 	
+	private String API = "";
+	public String getAPI() { return API; }
+	
 	//*******************************************************
 	
 	public HashMap<String,String> getMapParams(String abString, Card hostCard) {
@@ -140,8 +142,7 @@ public class AbilityFactory {
 		mapParams = getMapParams(abString, hostCard);
 		
 		// parse universal parameters
-		
-		String API = "";
+
 		if (mapParams.containsKey("AB"))
 		{
 			isAb = true;
@@ -194,6 +195,15 @@ public class AbilityFactory {
 			
 			if (mapParams.containsKey("TgtZone"))	// if Targeting something not in play, this Key should be set
 				abTgt.setZone(mapParams.get("TgtZone"));
+			
+			// Target Type mostly for Counter: Spell,Activated,Triggered,Ability (or any combination of) 
+			// Ability = both activated and triggered abilities
+			if (mapParams.containsKey("TargetType"))
+				abTgt.setTargetSpellAbilityType(mapParams.get("TargetType"));
+			
+			// TargetValidTargeting most for Counter: e.g. target spell that targets X.
+			if (mapParams.containsKey("TargetValidTargeting"))
+				abTgt.setSAValidTargeting(mapParams.get("TargetValidTargeting"));
 		}
 		
 		hasSubAb = mapParams.containsKey("SubAbility");
@@ -261,7 +271,6 @@ public class AbilityFactory {
 				SA = AbilityFactory_Counters.createDrawbackProliferate(this);
 		}
 
-
 		if (API.equals("ChangeZone")){
 			if (isAb)
 				SA = AbilityFactory_ChangeZone.createAbilityChangeZone(this);
@@ -279,32 +288,6 @@ public class AbilityFactory {
 			else if (isDb)
 				SA = AbilityFactory_ChangeZone.createDrawbackChangeZoneAll(this);
 		}
-		
-		// Fetch, Retrieve and Bounce should be converted ChangeZone 
-		/*
-		if (API.equals("Fetch")){
-			if (isAb)
-				SA = AbilityFactory_Fetch.createAbilityFetch(this);
-			else if (isSp)
-				SA = AbilityFactory_Fetch.createSpellFetch(this);
-		}
-		
-		if (API.equals("Retrieve")){
-			if (isAb)
-				SA = AbilityFactory_Fetch.createAbilityRetrieve(this);
-			else if (isSp)
-				SA = AbilityFactory_Fetch.createSpellRetrieve(this);
-		}
-		
-		if (API.equals("Bounce")){
-			if (isAb)
-				SA = AbilityFactory_Bounce.createAbilityBounce(this);
-			else if (isSp)
-				SA = AbilityFactory_Bounce.createSpellBounce(this);
-			hostCard.setSVar("PlayMain1", "TRUE");
-		}
-		*/
-		// Convert above abilities to gain Drawback
 		
 		if (API.equals("Pump"))
 		{
@@ -546,7 +529,9 @@ public class AbilityFactory {
 		
 		if(API.equals("Counter")){
 			AbilityFactory_CounterMagic c = new AbilityFactory_CounterMagic(this);
-			ComputerAI_counterSpells2.KeywordedCounterspells.add(hostC.getName());
+			
+			if (isTargeted)	// Since all "Counter" ABs Counter things on the Stack no need for it to be everywhere
+				abTgt.setZone("Stack");
 			
 			if(isAb)
 				SA = c.getAbilityCounter(this);
@@ -969,12 +954,21 @@ public class AbilityFactory {
 		return players;
 	}
 	
+	public static ArrayList<SpellAbility> getDefinedSpellAbilities(Card card, String def, SpellAbility sa){
+		ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
+		
+		// TODO: Define SpellAbilities
+		
+		return sas;
+	}
+	
 	public static ArrayList<Object> getDefinedObjects(Card card, String def, SpellAbility sa){
 		ArrayList<Object> objects = new ArrayList<Object>();
 		String defined = (def == null) ? "Self" : def;
 		
 		objects.addAll(getDefinedPlayers(card, defined, sa));
 		objects.addAll(getDefinedCards(card, defined, sa));
+		objects.addAll(getDefinedSpellAbilities(card, defined, sa));
 		return objects;
 	}
 	

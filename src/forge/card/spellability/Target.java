@@ -13,15 +13,8 @@ public class Target {
 	private boolean bMandatory = false;
 	private Card srcCard;
 	
-	public boolean getMandatory()
-	{
-		return bMandatory;
-	}
-	
-	public void setMandatory(boolean m)
-	{
-		bMandatory = m;
-	}
+	public boolean getMandatory() { return bMandatory; }
+	public void setMandatory(boolean m)	{ bMandatory = m; }
 	
 	private boolean tgtValid = false;
 	private String ValidTgts[];
@@ -43,21 +36,30 @@ public class Target {
 	public void setZone(String tZone) { tgtZone = tZone; }
 	public String getZone() { return tgtZone; }
 	
+	// Used for Counters. Currently, Spell,Activated,Triggered can be Comma-separated
+	private String targetSpellAbilityType = null;
+	public void setTargetSpellAbilityType(String tgtSAType) { targetSpellAbilityType = tgtSAType; }
+	public String getTargetSpellAbilityType() { return targetSpellAbilityType; }
+	
+	// Used for Counters. The target SA of this SA must be targeting a Valid X
+	private String saValidTargeting = null;
+	public void setSAValidTargeting(String saValidTgting) { saValidTargeting = saValidTgting; }
+	public String getSAValidTargeting() { return saValidTargeting; }
+	
 	// Card or Player are legal targets.
 	private ArrayList<Card> targetCards = new ArrayList<Card>();
 	private ArrayList<Player> targetPlayers = new ArrayList<Player>();
+	private ArrayList<SpellAbility> targetSAs = new ArrayList<SpellAbility>();
 	
 	public void addTarget(Object o){
-		if (o instanceof Player){
-			Player p = (Player)o;
-			if (!targetPlayers.contains(p))
-				targetPlayers.add(p);
-		}
-		if (o instanceof Card){
-			Card c = (Card)o;
-			if (!targetCards.contains(c))
-				targetCards.add(c);
-		}
+		if (o instanceof Player)
+			addTarget((Player)o);
+		
+		else if (o instanceof Card)
+			addTarget((Card)o);
+		
+		else if (o instanceof SpellAbility)
+			addTarget((SpellAbility)o);
 	}
 	
 	public boolean addTarget(Card c){
@@ -77,6 +79,15 @@ public class Target {
 		}
 		return false;
 	}
+	
+	public boolean addTarget(SpellAbility sa){
+		if (!targetSAs.contains(sa)){
+			targetSAs.add(sa);
+			numTargeted++;
+			return true;
+		}
+		return false;
+	}
 
 	public ArrayList<Card> getTargetCards(){
 		return targetCards;
@@ -86,10 +97,15 @@ public class Target {
 		return targetPlayers;
 	}
 	
+	public ArrayList<SpellAbility> getTargetSAs(){
+		return targetSAs;
+	}
+	
 	public ArrayList<Object> getTargets(){
 		ArrayList<Object> tgts = new ArrayList<Object>();
 		tgts.addAll(targetPlayers);
 		tgts.addAll(targetCards);
+		tgts.addAll(targetSAs);
 
 		return tgts;
 	}
@@ -101,6 +117,7 @@ public class Target {
 		numTargeted = 0; 
 		targetCards.clear();
 		targetPlayers.clear();
+		targetSAs.clear();
 	}
 	
 	public Target(Card src,String parse){

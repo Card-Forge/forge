@@ -168,6 +168,27 @@ public class ComputerAI_General implements Computer {
         return getPlayable(all);
     }
     
+    private ArrayList<SpellAbility> getPossibleCounters(){
+        CardList all = new CardList();
+        all.addAll(AllZone.Computer_Hand.getCards());
+        all.addAll(AllZone.Computer_Battlefield.getCards());
+        all.addAll(CardFactoryUtil.getFlashbackCards(AllZone.ComputerPlayer).toArray());
+
+        
+        CardList humanPlayable = new CardList();
+        humanPlayable.addAll(AllZone.Human_Battlefield.getCards());
+        humanPlayable = humanPlayable.filter(new CardListFilter()
+        {
+          public boolean addCard(Card c)
+          {
+            return (c.canAnyPlayerActivate());
+          }
+        });
+        all.addAll(humanPlayable.toArray());
+        
+        return getPlayableCounters(all);
+    }
+    
     /**
      * Returns the spellAbilities from the card list that the computer is able to play
      */
@@ -175,6 +196,7 @@ public class ComputerAI_General implements Computer {
         ArrayList<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
         for(Card c:l)
             for(SpellAbility sa:c.getSpellAbility())
+            	// if SA is from AF_Counter don't add to getPlayable
                 //This try/catch should fix the "computer is thinking" bug
                 try {
                 	sa.setActivatingPlayer(AllZone.ComputerPlayer);
@@ -185,6 +207,16 @@ public class ComputerAI_General implements Computer {
                     showError(ex, "There is an error in the card code for %s:%n", c.getName(), ex.getMessage());
                 }
         return spellAbility.toArray(new SpellAbility[spellAbility.size()]);
+    }
+    
+    private ArrayList<SpellAbility> getPlayableCounters(CardList l) {
+        ArrayList<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
+        for(Card c:l)
+            for(SpellAbility sa:c.getSpellAbility())
+            	if (sa.getAbilityFactory() != null && sa.getAbilityFactory().getAPI().equals("Counter"))
+            		spellAbility.add(sa);
+        
+        return spellAbility;
     }
     
 	public void begin_combat() {
@@ -270,20 +302,27 @@ public class ComputerAI_General implements Computer {
     		return;
     	}
     	
-    	// top of stack is owned by human, 
+    	// top of stack is owned by human,
+    	ArrayList<SpellAbility> possibleCounters = getPossibleCounters();
     	sas = getOtherPhases();
     	
-    	if (sas.length > 0){
+    	if (possibleCounters.size() > 0 && ComputerUtil.playCounterSpell(possibleCounters)){
+    		// Responding CounterSpell is on the Stack trying to Counter the Spell
+    		// If playCounterSpell returns true, a Spell is hitting the Stack
+    		return;
+    	}
+    	else if (sas.length > 0){
+			// Spell not Countered 
     		// each AF should check the Stack/Phase on it's own
+			
+			//ArrayList<Object> targets = topSA.getTarget().getTargets();
+	    	// does it target me or something I own?
+	    	// can i protect it? can I counter it?
+	    	
+	    	// if i can't save it, can I activate an ability on that card in response? sacrifice etc?
+	    	
+	    	// does it target his stuff? can I kill it in response?
 
-
-    			//ArrayList<Object> targets = topSA.getTarget().getTargets();
-		    	// does it target me or something I own?
-		    	// can i protect it? can I counter it?
-		    	
-		    	// if i can't save it, can I activate an ability on that card in response? sacrifice etc?
-		    	
-		    	// does it target his stuff? can I kill it in response?
     	}
     	// if this hasn't been covered above, just PassPriority()
     	AllZone.Phase.passPriority();
