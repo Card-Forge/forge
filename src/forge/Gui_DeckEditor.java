@@ -567,7 +567,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         if(!Gui_NewGame.useLAFFonts.isSelected()) addButton.setFont(new java.awt.Font("Dialog", 0, 13));
         
         /*CHOPPIC*/
-        filterButton.setText("Filter");
+        filterButton.setText("Apply Filter");
         filterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	filterButton_actionPerformed(e);
@@ -664,27 +664,28 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         this.getContentPane().add(greenCheckBox, "");
         this.getContentPane().add(colorlessCheckBox, "");
 
-        // jLabel1.setText("with Name includes");
-        // this.getContentPane().add(jLabel1, "");
-        // this.getContentPane().add(searchTextField, "wmin 120");
         this.getContentPane().add(filterButton, "wmin 100, hmin 25");
         
-        this.getContentPane().add(jScrollPane1, "cell 0 1 1 2, pushy, grow");
+        this.getContentPane().add(jScrollPane1, "cell 0 2 1 2, pushy, grow");
         // this.getContentPane().add(detail, "w 239, h 323, grow, flowy, wrap");
-        this.getContentPane().add(detail, "w 239, h 323, cell 1 0 1 2, grow, flowy, wrap");
+        this.getContentPane().add(detail, "w 239, h 323, cell 1 0 1 3, grow, flowy, wrap");
         // this.getContentPane().add(detail, "align 50% 50%, wmin 239, hmin 323, cell 1 0 1 2, flowy");
-        this.getContentPane().add(changePictureButton, "align 50% 0%, cell 1 2, split 2, flowx");
+        this.getContentPane().add(changePictureButton, "align 50% 0%, cell 1 3, split 2, flowx");
         this.getContentPane().add(removePictureButton, "align 50% 0%, wrap");
         
-        this.getContentPane().add(statsLabel2, "cell 0 3");
-        this.getContentPane().add(pictureViewPanel, "wmin 239, hmin 323, grow, cell 1 3 1 4");
+        jLabel1.setText("By name: ");
+        this.getContentPane().add(jLabel1, "cell 0 1, split 2");
+        this.getContentPane().add(searchTextField, "wmin 120, wrap");
         
-        this.getContentPane().add(addButton, "w 100, h 49, sg button, cell 0 4, split 3");
+        this.getContentPane().add(statsLabel2, "cell 0 4");
+        this.getContentPane().add(pictureViewPanel, "wmin 239, hmin 323, grow, cell 1 4 1 4");
+        
+        this.getContentPane().add(addButton, "w 100, h 49, sg button, cell 0 5, split 3");
         this.getContentPane().add(removeButton, "w 100, h 49, sg button");
         this.getContentPane().add(analysisButton, "w 100, h 49, wrap");   
         
-        this.getContentPane().add(jScrollPane2, "cell 0 5, grow");
-        this.getContentPane().add(statsLabel, "cell 0 6");
+        this.getContentPane().add(jScrollPane2, "cell 0 6, grow");
+        this.getContentPane().add(statsLabel, "cell 0 7");
 
         jScrollPane2.getViewport().add(bottomTable, null);
         jScrollPane1.getViewport().add(topTable, null);
