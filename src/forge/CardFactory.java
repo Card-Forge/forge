@@ -2949,12 +2949,20 @@ public class CardFactory implements NewConstants {
                     
                     human = human.getValidCards(Tgts);
                     human = human.getNotKeyword("Indestructible");
+                    int humanvalue = CardListUtil.sumCMC(human);
+                    humanvalue += human.size();
+                    humanvalue += human.getType("Land").size();        // X = total converted mana cost + number of permanents + number of lands  (Human)
+                    if (AllZone.Computer_Life.getLife() < 7) { humanvalue += CardListUtil.sumAttack(human); } // in Low Life Emergency X = X + total power of human creatures
+
                     computer = computer.getValidCards(Tgts);
                     computer = computer.getNotKeyword("Indestructible");
+                    int computervalue = CardListUtil.sumCMC(computer);
+                    computervalue += computer.size();
+                    computervalue += computer.getType("Land").size();  // Y = total converted mana cost + number of permanents + number of lands (Computer)
                     
-                    // the computer will at least destroy 2 more human permanents
+                    // the computer will play the spell if Y < X - 3
                     return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
-                    		(computer.size() < human.size() - 1);
+                    		(computer.size() < human.size() - 3);
                 }
 
                 @Override
