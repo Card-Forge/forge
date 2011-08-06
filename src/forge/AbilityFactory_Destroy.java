@@ -6,9 +6,10 @@ import java.util.Random;
 
 public class AbilityFactory_Destroy {
 	// An AbilityFactory subclass for destroying permanents
-	
+	// *********************************************************************************
+	// ************************** DESTROY **********************************************
+	// *********************************************************************************
 	public static SpellAbility createAbilityDestroy(final AbilityFactory AF){
-
 		final SpellAbility abDestroy = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
 			private static final long serialVersionUID = -4153613567150919283L;
 			
@@ -20,11 +21,6 @@ public class AbilityFactory_Destroy {
 			@Override
 			public String getStackDescription(){
 				return destroyStackDescription(af, this, noRegen);
-			}
-			
-			public boolean canPlay(){
-				// super takes care of AdditionalCosts
-				return super.canPlay();	
 			}
 			
 			public boolean canPlayAI()
@@ -40,40 +36,6 @@ public class AbilityFactory_Destroy {
 		};
 		return abDestroy;
 	}
-	
-	public static SpellAbility createAbilityDestroyAll(final AbilityFactory AF){
-
-		final SpellAbility abDestroyAll = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
-			private static final long serialVersionUID = -1376444173137861437L;
-			
-			final AbilityFactory af = AF;
-			final HashMap<String,String> params = af.getMapParams();
-
-			final boolean noRegen = params.containsKey("NoRegen");
-		
-			@Override
-			public String getStackDescription(){
-				return destroyAllStackDescription(af, this, noRegen);
-			}
-			
-			public boolean canPlay(){
-				// super takes care of AdditionalCosts
-				return super.canPlay();	
-			}
-			
-			public boolean canPlayAI()
-			{
-				return destroyAllCanPlayAI(af, this, noRegen);
-			}
-			
-			@Override
-			public void resolve() {
-				destroyAllResolve(af, this, noRegen);
-			}
-			
-		};
-		return abDestroyAll;
-	}
 
 	public static SpellAbility createSpellDestroy(final AbilityFactory AF){
 		final SpellAbility spDestroy = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
@@ -88,12 +50,7 @@ public class AbilityFactory_Destroy {
 			public String getStackDescription(){
 				return destroyStackDescription(af, this, noRegen);
 			}
-			
-			public boolean canPlay(){
-				// super takes care of AdditionalCosts
-				return super.canPlay();	
-			}
-			
+
 			public boolean canPlayAI()
 			{
 				return destroyCanPlayAI(af, this, noRegen);
@@ -106,81 +63,6 @@ public class AbilityFactory_Destroy {
 			
 		};
 		return spDestroy;
-	}
-	
-	public static SpellAbility createSpellDestroyAll(final AbilityFactory AF){
-		final SpellAbility spDestroyAll = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
-			private static final long serialVersionUID = -3712659336576469102L;
-			
-			final AbilityFactory af = AF;
-			final HashMap<String,String> params = af.getMapParams();
-			
-			final boolean noRegen = params.containsKey("NoRegen");
-			
-			@Override
-			public String getStackDescription(){
-				if(params.containsKey("SpellDescription"))
-					return AF.getHostCard().getName() + " - " + params.get("SpellDescription");
-				else
-					return destroyAllStackDescription(af, this, noRegen);
-			}
-			
-			public boolean canPlay(){
-				// super takes care of AdditionalCosts
-				return super.canPlay();	
-			}
-			
-			public boolean canPlayAI()
-			{
-				return destroyAllCanPlayAI(af, this, noRegen);
-			}
-			
-			@Override
-			public void resolve() {
-				destroyAllResolve(af, this, noRegen);
-			}
-			
-		};
-		return spDestroyAll;
-	}
-	
-	public static SpellAbility createDrawbackDestroyAll(final AbilityFactory AF){
-		final SpellAbility dbDestroyAll = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()){
-			private static final long serialVersionUID = -242160421677518351L;
-			final AbilityFactory af = AF;
-			final HashMap<String,String> params = af.getMapParams();
-			
-			final boolean noRegen = params.containsKey("NoRegen");
-			
-			@Override
-			public String getStackDescription(){
-				if(params.containsKey("SpellDescription"))
-					return AF.getHostCard().getName() + " - " + params.get("SpellDescription");
-				else
-					return destroyAllStackDescription(af, this, noRegen);
-			}
-			
-			public boolean canPlay(){
-				// super takes care of AdditionalCosts
-				return super.canPlay();	
-			}
-			
-			public boolean canPlayAI() {
-				return destroyAllCanPlayAI(af, this, noRegen);
-			}
-			
-			@Override
-			public void resolve() {
-				destroyAllResolve(af, this, noRegen);
-			}
-			
-			@Override
-			public boolean chkAI_Drawback() {
-				return true;
-			}
-			
-		};
-		return dbDestroyAll;
 	}
 	
 	public static boolean destroyCanPlayAI(final AbilityFactory af, final SpellAbility sa, final boolean noRegen){
@@ -273,132 +155,7 @@ public class AbilityFactory_Destroy {
 		 
 		 return ((r.nextFloat() < .6667) && chance);
 	}
-	
-	public static boolean destroyAllCanPlayAI(final AbilityFactory af, final SpellAbility sa, final boolean noRegen){
-		// AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
-		Random r = new Random();
-		Ability_Cost abCost = sa.getPayCosts();
-		final Card source = sa.getSourceCard();
-		final HashMap<String,String> params = af.getMapParams();
-		String Valid = "";
-		
-		if(params.containsKey("ValidCards")) 
-			Valid = params.get("ValidCards");
-		
-		CardList humanlist = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
-		CardList computerlist = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
-		
-		humanlist = humanlist.getValidCards(Valid.split(","), source.getController(), source);
-		computerlist = computerlist.getValidCards(Valid.split(","), source.getController(), source);
-		
-		humanlist = humanlist.getNotKeyword("Indestructible");
-		computerlist = computerlist.getNotKeyword("Indestructible");
-		
-		if (abCost != null){
-			// AI currently disabled for some costs
-			if (abCost.getSacCost()){ 
-				//OK
-			}
-			if (abCost.getLifeCost()){
-				if (AllZone.ComputerPlayer.getLife() - abCost.getLifeAmount() < 4)
-					return false;
-			}
-			if (abCost.getDiscardCost()) //OK
-			
-			if (abCost.getSubCounter()){
-					// OK
-			}
-		}
-		
-		if (!ComputerUtil.canPayCost(sa))
-			return false;
-		
-		 // prevent run-away activations - first time will always return true
-		 boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
-		 
-		 // if only creatures are affected evaluate both lists and pass only if human creatures are more valuable
-		 if (humanlist.getNotType("Creature").size() == 0 && computerlist.getNotType("Creature").size() == 0) {
-			 if(CardFactoryUtil.evaluateCreatureList(computerlist) + 200 >= CardFactoryUtil.evaluateCreatureList(humanlist))
-				 return false;
-		 } // otherwise evaluate both lists by CMC and pass only if human permanents are more valuable
-		 else if(CardFactoryUtil.evaluatePermanentList(computerlist) + 3 >= CardFactoryUtil.evaluatePermanentList(humanlist))
-			 return false;
-		 
-		 Ability_Sub subAb = sa.getSubAbility();
-		 if (subAb != null)
-		 	chance &= subAb.chkAI_Drawback();
-		 
-		 return ((r.nextFloat() < .6667) && chance);
-	}
-	
-	
-	public static void destroyResolve(final AbilityFactory af, final SpellAbility sa, final boolean noRegen){
-		HashMap<String,String> params = af.getMapParams();
-		String DrawBack = params.get("SubAbility");
-		Card card = sa.getSourceCard();
-		
-		ArrayList<Card> tgtCards;
 
-		Target tgt = af.getAbTgt();
-		if (tgt != null)
-			tgtCards = tgt.getTargetCards();
-		else{
-			tgtCards = new ArrayList<Card>();
-			tgtCards.add(card);
-		}
-		
-		Card firstTarget = tgtCards.get(0);
-		
-		for(Card tgtC : tgtCards){
-	 	   if(AllZone.GameAction.isCardInPlay(tgtC) && (tgt == null || CardFactoryUtil.canTarget(card, tgtC))) {
-	 		  if(noRegen) 
-	 			 AllZone.GameAction.destroyNoRegeneration(tgtC);
-	 		  else
-	 		   AllZone.GameAction.destroy(tgtC);
-	       }
-		}
-		
-		if (af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-			   abSub.resolve();
-			}
-			else
-				CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, firstTarget, sa);
-		}
-     }
-	
-	public static void destroyAllResolve(final AbilityFactory af, final SpellAbility sa, final boolean noRegen){
-		HashMap<String,String> params = af.getMapParams();
-		String DrawBack = params.get("SubAbility");
-		Card card = sa.getSourceCard();
-		
-		String Valid = "";
-		
-		if(params.containsKey("ValidCards")) 
-			Valid = params.get("ValidCards");
-		
-		
-		CardList list = AllZoneUtil.getCardsInPlay();
-		
-		list = list.getValidCards(Valid.split(","), card.getController(), card);
-
-	 	if(noRegen) 
-	 		for(int i = 0; i < list.size(); i++) AllZone.GameAction.destroyNoRegeneration(list.get(i));
-	 	else
-	 		for(int i = 0; i < list.size(); i++) AllZone.GameAction.destroy(list.get(i));
-		
-	 	if (af.hasSubAbility()){
-	 		Ability_Sub abSub = sa.getSubAbility();
-	 		if (abSub != null){
-	 		   abSub.resolve();
-	 		}
-	 		else
-	 			CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
-	 	}
-     }
-	
-	
 	public static String destroyStackDescription(final AbilityFactory af, SpellAbility sa, boolean noRegen){
 		// when getStackDesc is called, just build exactly what is happening
 
@@ -439,6 +196,144 @@ public class AbilityFactory_Destroy {
 		 return sb.toString();
 	}
 	
+	public static void destroyResolve(final AbilityFactory af, final SpellAbility sa, final boolean noRegen){
+		HashMap<String,String> params = af.getMapParams();
+		String DrawBack = params.get("SubAbility");
+		Card card = sa.getSourceCard();
+		
+		ArrayList<Card> tgtCards;
+
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtCards = tgt.getTargetCards();
+		else{
+			tgtCards = new ArrayList<Card>();
+			tgtCards.add(card);
+		}
+		
+		Card firstTarget = tgtCards.get(0);
+		
+		for(Card tgtC : tgtCards){
+	 	   if(AllZone.GameAction.isCardInPlay(tgtC) && (tgt == null || CardFactoryUtil.canTarget(card, tgtC))) {
+	 		  if(noRegen) 
+	 			 AllZone.GameAction.destroyNoRegeneration(tgtC);
+	 		  else
+	 		   AllZone.GameAction.destroy(tgtC);
+	       }
+		}
+		
+		if (af.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+			   abSub.resolve();
+			}
+			else
+				CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, firstTarget, sa);
+		}
+     }
+	
+	// *********************************************************************************
+	// ************************ DESTROY ALL ********************************************
+	// *********************************************************************************
+	public static SpellAbility createAbilityDestroyAll(final AbilityFactory AF){
+
+		final SpellAbility abDestroyAll = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+			private static final long serialVersionUID = -1376444173137861437L;
+			
+			final AbilityFactory af = AF;
+			final HashMap<String,String> params = af.getMapParams();
+
+			final boolean noRegen = params.containsKey("NoRegen");
+		
+			@Override
+			public String getStackDescription(){
+				return destroyAllStackDescription(af, this, noRegen);
+			}
+			
+			public boolean canPlayAI()
+			{
+				return destroyAllCanPlayAI(af, this, noRegen);
+			}
+			
+			@Override
+			public void resolve() {
+				destroyAllResolve(af, this, noRegen);
+			}
+			
+		};
+		return abDestroyAll;
+	}
+	
+	public static SpellAbility createSpellDestroyAll(final AbilityFactory AF){
+		final SpellAbility spDestroyAll = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+			private static final long serialVersionUID = -3712659336576469102L;
+			
+			final AbilityFactory af = AF;
+			final HashMap<String,String> params = af.getMapParams();
+			
+			final boolean noRegen = params.containsKey("NoRegen");
+			
+			@Override
+			public String getStackDescription(){
+				if(params.containsKey("SpellDescription"))
+					return AF.getHostCard().getName() + " - " + params.get("SpellDescription");
+				else
+					return destroyAllStackDescription(af, this, noRegen);
+			}
+
+			public boolean canPlayAI()
+			{
+				return destroyAllCanPlayAI(af, this, noRegen);
+			}
+			
+			@Override
+			public void resolve() {
+				destroyAllResolve(af, this, noRegen);
+			}
+			
+		};
+		return spDestroyAll;
+	}
+	
+	public static SpellAbility createDrawbackDestroyAll(final AbilityFactory AF){
+		final SpellAbility dbDestroyAll = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()){
+			private static final long serialVersionUID = -242160421677518351L;
+			final AbilityFactory af = AF;
+			final HashMap<String,String> params = af.getMapParams();
+			
+			final boolean noRegen = params.containsKey("NoRegen");
+			
+			@Override
+			public String getStackDescription(){
+				if(params.containsKey("SpellDescription"))
+					return AF.getHostCard().getName() + " - " + params.get("SpellDescription");
+				else
+					return destroyAllStackDescription(af, this, noRegen);
+			}
+			
+			public boolean canPlay(){
+				// super takes care of AdditionalCosts
+				return super.canPlay();	
+			}
+			
+			public boolean canPlayAI() {
+				return destroyAllCanPlayAI(af, this, noRegen);
+			}
+			
+			@Override
+			public void resolve() {
+				destroyAllResolve(af, this, noRegen);
+			}
+			
+			@Override
+			public boolean chkAI_Drawback() {
+				return true;
+			}
+			
+		};
+		return dbDestroyAll;
+	}
+	
 	public static String destroyAllStackDescription(final AbilityFactory af, SpellAbility sa, boolean noRegen){
 		// when getStackDesc is called, just build exactly what is happening
 
@@ -466,4 +361,91 @@ public class AbilityFactory_Destroy {
 		 
 		 return sb.toString();
 	}
+	
+	public static boolean destroyAllCanPlayAI(final AbilityFactory af, final SpellAbility sa, final boolean noRegen){
+		// AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
+		Random r = new Random();
+		Ability_Cost abCost = sa.getPayCosts();
+		final Card source = sa.getSourceCard();
+		final HashMap<String,String> params = af.getMapParams();
+		String Valid = "";
+		
+		if(params.containsKey("ValidCards")) 
+			Valid = params.get("ValidCards");
+		
+		CardList humanlist = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
+		CardList computerlist = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
+		
+		humanlist = humanlist.getValidCards(Valid.split(","), source.getController(), source);
+		computerlist = computerlist.getValidCards(Valid.split(","), source.getController(), source);
+		
+		humanlist = humanlist.getNotKeyword("Indestructible");
+		computerlist = computerlist.getNotKeyword("Indestructible");
+		
+		if (abCost != null){
+			// AI currently disabled for some costs
+			if (abCost.getSacCost()){ 
+				//OK
+			}
+			if (abCost.getLifeCost()){
+				if (AllZone.ComputerPlayer.getLife() - abCost.getLifeAmount() < 4)
+					return false;
+			}
+			if (abCost.getDiscardCost()) ;//OK
+			
+			if (abCost.getSubCounter()){
+					// OK
+			}
+		}
+		
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+		
+		 // prevent run-away activations - first time will always return true
+		 boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
+		 
+		 // if only creatures are affected evaluate both lists and pass only if human creatures are more valuable
+		 if (humanlist.getNotType("Creature").size() == 0 && computerlist.getNotType("Creature").size() == 0) {
+			 if(CardFactoryUtil.evaluateCreatureList(computerlist) + 200 >= CardFactoryUtil.evaluateCreatureList(humanlist))
+				 return false;
+		 } // otherwise evaluate both lists by CMC and pass only if human permanents are more valuable
+		 else if(CardFactoryUtil.evaluatePermanentList(computerlist) + 3 >= CardFactoryUtil.evaluatePermanentList(humanlist))
+			 return false;
+		 
+		 Ability_Sub subAb = sa.getSubAbility();
+		 if (subAb != null)
+		 	chance &= subAb.chkAI_Drawback();
+		 
+		 return ((r.nextFloat() < .6667) && chance);
+	}
+	
+	public static void destroyAllResolve(final AbilityFactory af, final SpellAbility sa, final boolean noRegen){
+		HashMap<String,String> params = af.getMapParams();
+		String DrawBack = params.get("SubAbility");
+		Card card = sa.getSourceCard();
+		
+		String Valid = "";
+		
+		if(params.containsKey("ValidCards")) 
+			Valid = params.get("ValidCards");
+		
+		
+		CardList list = AllZoneUtil.getCardsInPlay();
+		
+		list = list.getValidCards(Valid.split(","), card.getController(), card);
+
+	 	if(noRegen) 
+	 		for(int i = 0; i < list.size(); i++) AllZone.GameAction.destroyNoRegeneration(list.get(i));
+	 	else
+	 		for(int i = 0; i < list.size(); i++) AllZone.GameAction.destroy(list.get(i));
+		
+	 	if (af.hasSubAbility()){
+	 		Ability_Sub abSub = sa.getSubAbility();
+	 		if (abSub != null){
+	 		   abSub.resolve();
+	 		}
+	 		else
+	 			CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
+	 	}
+     }
 }
