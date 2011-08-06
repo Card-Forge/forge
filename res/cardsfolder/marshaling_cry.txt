@@ -1,0 +1,10 @@
+Name:Marshaling Cry
+ManaCost:1 W W
+Types:Sorcery
+Text:no text
+K:spAllPump:YouCtrl:+1/+1/Vigilance:Creatures you control get +1/+1 and gain vigilance until end of turn.:Marshaling Cry - Creatures you control get +1/+1 and gain vigilance until EOT
+K:Cycling:2
+K:Flashback:3 W
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/marshaling_cry.jpg
+End
