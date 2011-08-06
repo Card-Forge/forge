@@ -88,14 +88,8 @@ public class GameActionUtil {
 		
 		upkeep_Oversold_Cemetery();
 		upkeep_Nether_Spirit();
-		//upkeep_Nettletooth_Djinn();
-		//upkeep_Fledgling_Djinn();
-		//upkeep_Juzam_Djinn();
-		//upkeep_Grinning_Demon();
-		//upkeep_Moroii();
 		upkeep_Vampire_Lacerator();
 		upkeep_Seizan_Perverter_of_Truth();
-		//upkeep_Serendib_Efreet();
 		upkeep_Sleeper_Agent();
 		upkeep_Cursed_Land();
 		upkeep_Pillory_of_the_Sleepless();
@@ -130,7 +124,6 @@ public class GameActionUtil {
 		upkeep_Suspend();
 		upkeep_Vanishing();
 		upkeep_Fading();
-		//upkeep_Benthic_Djinn();
 		upkeep_Masticore();
 		upkeep_Eldrazi_Monument();
 		upkeep_Blaze_Counters();
@@ -5241,52 +5234,6 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}
 	}*/
-	
-	private static void opponent_Discard_You_Choose(final Card source) {
-		final Player player = source.getController().getOpponent();
-
-		if(source.getNetAttack() > 0) {
-			SpellAbility ability = new Ability(source, "0") {
-				@Override
-				public void resolve() {
-					PlayerZone pzH = AllZone.getZone(Constant.Zone.Hand, player);
-					if(pzH.size() != 0) {
-						CardList dPHand = new CardList(pzH.getCards());
-						CardList dPChHand = new CardList(dPHand.toArray());
-
-						if(source.getController().isComputer()){
-							//hardcoded to 1, but if it needs to be changed...
-							for(int i = 0; i < 1; i++) {
-								if (dPChHand.size() > 0){
-									Card c = CardFactoryUtil.AI_getMostExpensivePermanent(dPChHand, source, false);
-									GuiUtils.getChoiceOptional("Computer has chosen", new Card[] {c});
-									AllZone.HumanPlayer.discard(c, this);
-								}
-							}
-						}
-						else {
-							//human
-							GuiUtils.getChoiceOptional("Revealed computer hand", dPHand.toArray());
-
-							//hardcode for 1, but if it needs to be expanded, it's here
-							for(int i = 0; i < 1; i++) {
-								if (dPChHand.size() > 0) {
-									Card dC = GuiUtils.getChoice("Choose a card to be discarded", dPChHand.toArray());
-									AllZone.ComputerPlayer.discard(dC, this);
-								}
-							}
-						}
-					}
-				}
-			};// ability
-
-			StringBuilder sb = new StringBuilder();
-			sb.append(source.getName()).append(" - ").append(player).append(" discards a card of opponent's choice.");
-			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
-		}
-	}
 
 	private static void upkeep_AI_Aluren() {
 		CardList alurens = AllZoneUtil.getCardsInPlay("Aluren");
@@ -6028,30 +5975,6 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}
 	}
-
-	/*
-	private static void upkeep_Benthic_Djinn() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Benthic Djinn");
-
-		Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-
-			final Card crd = list.get(i);
-			ability = new Ability(list.get(i), "0") {
-				@Override
-				public void resolve() {
-                    crd.getController().loseLife(2, crd);    
-				}// resolve()
-			};// Ability
-
-			AllZone.Stack.add(ability);
-		}// for
-	}// upkeep_Benthic_Djinn()   
-	*/
 	
     /////////////////////////
     // Start of Kinship cards
@@ -7732,7 +7655,7 @@ public class GameActionUtil {
 	
 	private static void upkeep_Test_of_Endurance() {
 		/*
-		 * At the beginning of your upkeep, if you have exactly 50 or more life, you win the game.
+		 * At the beginning of your upkeep, if you have 50 or more life, you win the game.
 		 */
 		final Player player = AllZone.Phase.getPlayerTurn();
 		
@@ -8479,58 +8402,6 @@ public class GameActionUtil {
 		}// for
 	}// upkeep_Dragon_Broodmother()
 	
-	/*
-	private static void upkeep_Serendib_Efreet() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Serendib Efreet");
-
-		Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-			final Card crd = list.get(i);
-			ability = new Ability(list.get(i), "0") {
-				@Override
-				public void resolve() {
-					player.addDamage(1, crd);
-				}
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("Serendib Efreet - deals 1 damage to ").append(player);
-			ability.setStackDescription(sb.toString());
-
-			AllZone.Stack.add(ability);
-		}// for
-	}// upkeep_Serendib_Efreet()
-	
-	private static void upkeep_Nettletooth_Djinn() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Nettletooth Djinn");
-
-		Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-			final Card crd = list.get(i);
-			ability = new Ability(list.get(i), "0") {
-				@Override
-				public void resolve() {
-					player.addDamage(1, crd);
-				}
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("Nettletooth Djinn - deals 1 damage to ").append(player);
-			ability.setStackDescription(sb.toString());
-
-			AllZone.Stack.add(ability);
-		}// for
-	}// upkeep_Nettletooth_Djinn()
-	*/
-	
 	private static void draw_Howling_Mine(Player player) {
 		CardList list = AllZoneUtil.getCardsInPlay("Howling Mine");
 
@@ -8773,7 +8644,6 @@ public class GameActionUtil {
 	}// upkeep_Master_of_the_Wild_Hunt
 	
 	
-
 	private static void upkeep_Seizan_Perverter_of_Truth() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 
@@ -8799,17 +8669,6 @@ public class GameActionUtil {
 		//drawing cards doesn't seem to work during upkeep if it's in an ability
 		player.drawCards(2);
 	}// upkeep_Seizan_Perverter_of_Truth()
-	
-	/*
-	private static void upkeep_Moroii() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Moroii");
-		for(int i = 0; i < list.size(); i++) {
-			final Card F_card = list.get(i);
-			player.loseLife(1, F_card);
-		}
-	}// upkeep_Moroii
-	*/
 
 	private static void upkeep_Vampire_Lacerator() {
 		final Player player = AllZone.Phase.getPlayerTurn();
@@ -8831,79 +8690,6 @@ public class GameActionUtil {
 			}
 		}
 	}// upkeep_Vampire_Lacerator
-	
-	/*
-	private static void upkeep_Grinning_Demon() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Grinning Demon");
-
-		Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-			if(!list.get(i).isFaceDown()) {
-				final Card F_card = list.get(i);
-				ability = new Ability(list.get(i), "0") {
-					@Override
-					public void resolve() {
-						player.loseLife(2,F_card);
-					}
-				};// Ability
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append("Grinning Demon - ").append(player).append(" loses 2 life");
-				ability.setStackDescription(sb.toString());
-
-				AllZone.Stack.add(ability);
-			}
-		}// for
-	}// upkeep_Grinning_Demon()
-	
-	private static void upkeep_Juzam_Djinn() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Juzam Djinn");
-
-		Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-			final Card crd = list.get(i);
-			ability = new Ability(list.get(i), "0") {
-				@Override
-				public void resolve() {
-					player.addDamage(1, crd);
-				}
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("Juzam Djinn - deals 1 damage to ").append(player);
-			ability.setStackDescription(sb.toString());
-
-			AllZone.Stack.add(ability);
-		}// for
-	}// upkeep_Juzam_Djinn()
-
-	private static void upkeep_Fledgling_Djinn() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Fledgling Djinn");
-
-		Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-			final Card crd = list.get(i);
-			ability = new Ability(list.get(i), "0") {
-				@Override
-				public void resolve() {
-					player.addDamage(1, crd);
-				}
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("Fledgling Djinn - deals 1 damage to ").append(player);
-			ability.setStackDescription(sb.toString());
-
-			AllZone.Stack.add(ability);
-		}// for
-	}// upkeep_Fledgling_Djinn()
-	*/
 	
     private static void upkeep_Creakwood_Liege() {
         final Player player = AllZone.Phase.getPlayerTurn();
