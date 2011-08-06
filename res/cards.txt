@@ -1,3 +1,9 @@
+Omen
+1 U
+Sorcery
+Look at the top three cards of your library, then put them back in any order. You may shuffle your library.
+Draw a card.
+
 Inkfathom Divers
 3 U U
 Creature Merfolk Soldier

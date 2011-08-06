@@ -19195,7 +19195,7 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Ponder")) {
+        else if(cardName.equals("Ponder") || cardName.equals("Omen")) {
         	/* 
         	 * Look at the top three cards of your library, then put them back
         	 * in any order. You may shuffle your library.  Draw a card. 
