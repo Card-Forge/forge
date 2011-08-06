@@ -240,7 +240,7 @@ public class CardFactory implements NewConstants {
         String Desc = new String();
         Desc = cardName + " gains " + keyword + " until end of turn.";
 
-        ability.setDescription(manaCost + " : " + Desc);
+        ability.setDescription(manaCost + ": " + Desc);
         ability.setStackDescription(Desc);
 
         card.addSpellAbility(ability);
@@ -340,7 +340,7 @@ public class CardFactory implements NewConstants {
               Desc = Desc + defense[0];
           Desc = Desc + " until end of turn.";
 
-          ability.setDescription(manaCost + " : " + Desc);
+          ability.setDescription(manaCost + ": " + Desc);
           ability.setStackDescription(Desc);
 
           card.addSpellAbility(ability);
@@ -440,7 +440,7 @@ public class CardFactory implements NewConstants {
               Desc = Desc + defense[0];
           Desc = Desc + " and gains " + keyword + " until end of turn.";
    
-          ability.setDescription(manaCost + " : " + Desc);
+          ability.setDescription(manaCost + ": " + Desc);
           ability.setStackDescription(Desc);
    
           card.addSpellAbility(ability);
@@ -560,7 +560,7 @@ public class CardFactory implements NewConstants {
                 }//resolve()
               };//SpellAbility
              
-              ability.setDescription(manaCost + ":" + Desc);
+              ability.setDescription(manaCost + ": " + Desc);
               ability.setStackDescription(Desc);
 
               ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
@@ -637,7 +637,7 @@ public class CardFactory implements NewConstants {
                 }//resolve()
               };//SpellAbility
              
-              ability.setDescription("tap:" + Desc);
+              ability.setDescription("tap: " + Desc);
               ability.setStackDescription(Desc);
 
               ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
@@ -714,7 +714,7 @@ public class CardFactory implements NewConstants {
                 }//resolve()
               };//SpellAbility
              
-              ability.setDescription(manaCost + ", tap:" + Desc);
+              ability.setDescription(manaCost + ", tap: " + Desc);
               ability.setStackDescription(Desc);
 
               ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
@@ -811,7 +811,7 @@ public class CardFactory implements NewConstants {
         String Desc = new String();
         Desc = "Regenerate " + cardName;
 
-        a1.setDescription(manacost + " : " + Desc);
+        a1.setDescription(manacost + ": " + Desc);
         a1.setStackDescription(Desc);
 
         a1.setBeforePayMana(new Input_PayManaCost(a1));
