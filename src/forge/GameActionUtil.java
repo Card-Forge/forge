@@ -4903,21 +4903,24 @@ public class GameActionUtil {
 					AllZone.Stack.add(ability);
 			}
 		}
+		
+		if(CardFactoryUtil.hasNumberEquipments(c, "Mask of Riddles") > 0 && c.getNetAttack() > 0) {
+			for(int k = 0; k < CardFactoryUtil.hasNumberEquipments(c, "Mask of Riddles"); k++) {
+				playerCombatDamage_May_draw(c);
+			}
+		}
+		if(CardFactoryUtil.hasNumberEquipments(c, "Quietus Spike") > 0 && c.getNetAttack() > 0) {
+			for(int k = 0; k < CardFactoryUtil.hasNumberEquipments(c, "Quietus Spike"); k++) {
+				playerCombatDamage_lose_halflife_up(c);
+			}
+		} 
 
 		if(c.getName().equals("Marsh Viper")) playerCombatDamage_PoisonCounter(c, 2);
 		else if(c.getName().equals("Hypnotic Specter")) playerCombatDamage_Hypnotic_Specter(c);
 		else if(c.getName().equals("Dimir Cutpurse")) playerCombatDamage_Dimir_Cutpurse(c);
 		else if(c.getName().equals("Ghastlord of Fugue")) playerCombatDamage_Ghastlord_of_Fugue(c);
 		else if(c.getName().equals("Garza Zol, Plague Queen")) playerCombatDamage_May_draw(c);
-		else if(CardFactoryUtil.hasNumberEquipments(c, "Mask of Riddles") > 0 && c.getNetAttack() > 0) {
-			for(int k = 0; k < CardFactoryUtil.hasNumberEquipments(c, "Mask of Riddles"); k++) {
-				playerCombatDamage_May_draw(c);
-			}
-		} else if(CardFactoryUtil.hasNumberEquipments(c, "Quietus Spike") > 0 && c.getNetAttack() > 0) {
-			for(int k = 0; k < CardFactoryUtil.hasNumberEquipments(c, "Quietus Spike"); k++) {
-				playerCombatDamage_lose_halflife_up(c);
-			}
-		} else if(c.getName().equals("Scalpelexis")) playerCombatDamage_Scalpelexis(c);
+		else if(c.getName().equals("Scalpelexis")) playerCombatDamage_Scalpelexis(c);
 		else if(c.getName().equals("Blazing Specter") || c.getName().equals("Guul Draz Specter")
 				|| c.getName().equals("Chilling Apparition") || c.getName().equals("Sedraxis Specter")) playerCombatDamage_Simple_Discard(c);
 		else if((c.getName().equals("Headhunter") || c.getName().equals("Riptide Pilferer")) && !c.isFaceDown()) playerCombatDamage_Simple_Discard(c);
