@@ -4458,6 +4458,7 @@ res/cardsfolder/paralyzing_grasp.txt -text svneol=native#text/plain
 res/cardsfolder/parapet_watchers.txt -text svneol=native#text/plain
 res/cardsfolder/parasitic_strix.txt -text svneol=native#text/plain
 res/cardsfolder/parch.txt -text svneol=native#text/plain
+res/cardsfolder/pardic_arsonist.txt svneol=native#text/plain
 res/cardsfolder/pardic_collaborator.txt -text svneol=native#text/plain
 res/cardsfolder/pardic_dragon.txt -text svneol=native#text/plain
 res/cardsfolder/pardic_lancer.txt -text svneol=native#text/plain
