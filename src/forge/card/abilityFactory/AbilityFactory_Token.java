@@ -9,6 +9,7 @@ import forge.Card;
 import forge.CardList;
 import forge.Command;
 import forge.ComputerUtil;
+import forge.Counters;
 import forge.MyRandom;
 import forge.Player;
 import forge.card.cardFactory.CardFactoryUtil;
@@ -212,9 +213,9 @@ public class AbilityFactory_Token extends AbilityFactory {
 				if (AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer, tokenName).size() > 0)
 					return false;
 				
-				// Kill Human's Legendary tokens
+				/*// Kill Human's Legendary tokens
 				if (AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer, tokenName).size() > 0)
-					return true;
+					return true;*/ // Never use "return true" in canPlayAI
 			}
 		}
 		
@@ -244,12 +245,14 @@ public class AbilityFactory_Token extends AbilityFactory {
 		if (cost != null){
 			// AI currently disabled for these costs
 			if (cost.getSubCounter()){
-				// A card has a 25% chance per counter to be able to pass through here
-				// 4+ counters will always pass. 0 counters will never
-				int currentNum = source.getCounters(cost.getCounterType());
-				double percent = .25 * (currentNum / cost.getCounterNum());
-				if (percent <= r.nextFloat())
-					return false;
+				if (cost.getCounterType().equals(Counters.P1P1)) {
+					// A card has a 25% chance per counter to be able to pass through here
+					// 4+ counters will always pass. 0 counters will never
+					int currentNum = source.getCounters(cost.getCounterType());
+					double percent = .25 * (currentNum / cost.getCounterNum());
+					if (percent <= r.nextFloat())
+						return false;
+				}
 			}
 		}
 		
@@ -259,7 +262,7 @@ public class AbilityFactory_Token extends AbilityFactory {
 			source.setSVar("PayX", Integer.toString(xPay));
 		}
 		
-		return ((r.nextFloat() < .33) && chance);
+		return ((r.nextFloat() < .6667) && chance);
 	}
 	
 	private boolean tokenDoTriggerAI(SpellAbility sa, boolean mandatory){
