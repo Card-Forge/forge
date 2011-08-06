@@ -1702,15 +1702,15 @@ public class GameAction {
       			                    	  if(F_card.getController().equals(AllZone.HumanPlayer)) {
       			                    	  for(int z = 0; z < Targets_Multi.length; z++) {
       			                    		  if(!(Targets_Multi[z].equals(AllZone.HumanPlayer) || Targets_Multi[z].equals(AllZone.ComputerPlayer))) {
-      			                              if(AllZone.GameAction.isCardInPlay((Card) Targets_Multi[z])
-      			                                      && CardFactoryUtil.canTarget(F_card, (Card) Targets_Multi[z])) {
-      			                                  Card c = (Card) Targets_Multi[z];
-      			                                  c.addDamage(F_Amount[0], F_card);
-      			                              }
-      			                          } else {
-      			                             //AllZone.GameAction.addDamage( (String) Targets_Multi[z], F_card, F_Amount[0]);
-      			                        	  //TODO - player
-      			                          }
+      			                    			  if(AllZone.GameAction.isCardInPlay((Card) Targets_Multi[z])
+      			                    					  && CardFactoryUtil.canTarget(F_card, (Card) Targets_Multi[z])) {
+      			                    				  Card c = (Card) Targets_Multi[z];
+      			                    				  c.addDamage(F_Amount[0], F_card);
+      			                    			  }
+      			                    		  } 
+      			                    		  else {
+      			                    			  ((Player) Targets_Multi[z]).addDamage(F_Amount[0], F_card);
+      			                    		  }
       			                      }
       			                      }
       			                    	  if(F_card.getController().equals(AllZone.ComputerPlayer)) AllZone.HumanPlayer.addDamage(F_Amount[0]*F_Multiple_Targets, F_card);
