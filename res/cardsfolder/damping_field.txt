@@ -1,0 +1,7 @@
+Name:Damping Field
+ManaCost:2 W
+Types:Enchantment
+Text:Players can't untap more than one artifact during their untap steps.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/damping_field.jpg
+End

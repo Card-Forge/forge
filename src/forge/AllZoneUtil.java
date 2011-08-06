@@ -47,12 +47,6 @@ public class AllZoneUtil {
 		return cards.filter(lands);
 	}
 	
-	private static CardListFilter lands = new CardListFilter() {
-		public boolean addCard(Card c) {
-			return c.isLand();
-		}
-	};
-	
 	//=============================================================================
 	//
 	// These functions handle getting all cards for a given player
@@ -315,13 +309,6 @@ public class AllZoneUtil {
 		return cards;
 	}
 	
-	////////////// cardListFilter for different types
-	public static CardListFilter artifacts = new CardListFilter() {
-		public boolean addCard(Card c) {
-			return c.isArtifact();
-		}
-	};
-	
 	//////////////// getting all cards of a given color
 	
 	public static CardList getColorInPlay(final String color) {
@@ -457,6 +444,18 @@ public class AllZoneUtil {
 	public static CardListFilter nonToken = new CardListFilter() {
 		public boolean addCard(Card c) {
 			return !c.isToken();
+		}
+	};
+	
+	public static CardListFilter artifacts = new CardListFilter() {
+		public boolean addCard(Card c) {
+			return c.isArtifact();
+		}
+	};
+	
+	public static CardListFilter lands = new CardListFilter() {
+		public boolean addCard(Card c) {
+			return c.isLand();
 		}
 	};
 }

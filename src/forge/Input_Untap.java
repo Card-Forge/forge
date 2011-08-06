@@ -9,8 +9,6 @@ public class Input_Untap extends Input {
     
     @Override
     public void showMessage() {
-        //GameActionUtil.executeUpkeepEffects();
-        
         PlayerZone p = AllZone.getZone(Constant.Zone.Play, AllZone.Phase.getActivePlayer());
         Card[] c = p.getCards();
         
@@ -23,8 +21,6 @@ public class Input_Untap extends Input {
 	            c[i].setSickness(false);
         }
         
-        //if(isMarbleTitanInPlay()) marbleUntap();
-        //if(!isStasisInPlay()) doUntap();
         if(!AllZoneUtil.isCardInPlay("Stasis")) doUntap();
         
         if (AllZone.Phase.getTurn() != 1)
@@ -37,13 +33,7 @@ public class Input_Untap extends Input {
         //for debugging: System.out.println("need to nextPhase(Input_Untap) = true");
         AllZone.Phase.setNeedToNextPhase(true);
     }
-    
-    /*    Converted to keyword
-    private boolean untapLessThanPower3()
-    {
-    	//checks for Marble Titan or Meekstone
-        return AllZoneUtil.isCardInPlay("Marble Titan") || AllZoneUtil.isCardInPlay("Meekstone");
-    } */
+
     
     private void doUntap()
     {
@@ -84,6 +74,12 @@ public class Input_Untap extends Input {
     			return true;
     		}
     	});
+    	list = list.filter(new CardListFilter() {
+    		public boolean addCard(Card c) {
+    			if(AllZoneUtil.isCardInPlay("Damping Field") && c.isArtifact()) return false;
+    			return true;
+    		}
+    	});
 
     	for(Card c : list) {
     		if(c.getKeyword().contains("You may choose not to untap CARDNAME during your untap step.")) {
@@ -118,14 +114,8 @@ public class Input_Untap extends Input {
     	if( isWinterOrbInEffect() ) {
     		if( AllZone.Phase.getActivePlayer().equals(Constant.Player.Computer) ) {
     			//search for lands the computer has and only untap 1
-    			CardList landList = new CardList(p.getCards());
-    			landList = landList.filter(new CardListFilter()
-    			{
-    				public boolean addCard(Card c)
-    				{
-    					return c.isLand() && c.isTapped();
-    				}
-    			});
+    			CardList landList = AllZoneUtil.getPlayerLandsInPlay(Constant.Player.Computer);
+    			landList = landList.filter(AllZoneUtil.tapped);
     			if( landList.size() > 0 ) {
     				landList.get(0).untap();
     			}
@@ -145,18 +135,45 @@ public class Input_Untap extends Input {
     					}
     				}//selectCard()
     			};//Input
-    			CardList landList = new CardList(p.getCards());
-    			landList = landList.filter(new CardListFilter()
-    			{
-    				public boolean addCard(Card c)
-    				{
-    					return c.isLand() && c.isTapped();
-    				}
-    			});
+    			CardList landList = AllZoneUtil.getPlayerLandsInPlay(Constant.Player.Human);
+    			landList = landList.filter(AllZoneUtil.tapped);
     			if( landList.size() > 0 ) {
     				AllZone.InputControl.setInput(target);
     			}
 
+    		}
+    	}
+    	if( AllZoneUtil.isCardInPlay("Damping Field") ) {
+    		if( AllZone.Phase.getActivePlayer().equals(Constant.Player.Computer) ) {
+    			CardList artList = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+    			artList = artList.filter(AllZoneUtil.artifacts);
+    			artList = artList.filter(AllZoneUtil.tapped);
+    			if( artList.size() > 0 ) {
+    				artList.get(0).untap();
+    			}
+    		}
+    		else {
+    			Input target = new Input() {
+					private static final long serialVersionUID = 5555427219659889707L;
+					public void showMessage() {
+    					AllZone.Display.showMessage("Damping Field - Select one artifact to untap");
+    					ButtonUtil.enableOnlyCancel();
+    				}
+    				public void selectButtonCancel() {stop();}
+    				public void selectCard(Card c, PlayerZone zone) {
+    					if(c.isArtifact() && zone.is(Constant.Zone.Play) 
+    							&& c.getController().equals(Constant.Player.Human)) {
+    						c.untap();
+    						stop();
+    					}
+    				}//selectCard()
+    			};//Input
+    			CardList artList = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Human);
+    			artList = artList.filter(AllZoneUtil.artifacts);
+    			artList = artList.filter(AllZoneUtil.tapped);
+    			if( artList.size() > 0 ) {
+    				AllZone.InputControl.setInput(target);
+    			}
     		}
     	}
     }//end doUntap
