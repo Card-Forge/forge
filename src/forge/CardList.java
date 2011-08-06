@@ -35,7 +35,7 @@ public class CardList implements Iterable<Card> {
         for(int i = 0; i < size(); i++) {
             card = getCard(i);
             
-            if(0 < card.getManaCost().indexOf(cardColor)) //hopefully this line works
+            if(-1 < card.getManaCost().indexOf(cardColor)) //hopefully this line works
             c.add(getCard(i));
         }
         return c;

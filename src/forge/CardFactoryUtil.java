@@ -295,6 +295,22 @@ public class CardFactoryUtil {
         return biggest;
     }
     
+  //returns null if list.size() == 0
+    public static Card AI_getWorstCreature(CardList list) {
+        CardList all = list;
+        all = all.getType("Creature");
+        //get smallest creature
+        Card smallest = null;
+        
+        if(all.size() != 0) {
+            smallest = all.get(0);
+            
+            for(int i = 0; i < all.size(); i++)
+                if(smallest.getNetAttack() > all.get(i).getNetAttack()) smallest = all.get(i);
+        }
+        return smallest;
+    }
+    
     public static Input input_targetCreaturePlayer(final SpellAbility spell, boolean targeted, boolean free) {
         return input_targetCreaturePlayer(spell, Command.Blank, targeted, free);
     }

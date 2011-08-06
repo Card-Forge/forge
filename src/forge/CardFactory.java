@@ -18635,7 +18635,7 @@ public class CardFactory implements NewConstants {
                 	PlayerZone library = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
                 	CardList list = new CardList(library.getCards());
                 	list = list.getType("Basic");
-                	PlayerZone inPlay = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
+                	PlayerZone inPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
                 	CardList listInPlay = new CardList(inPlay.getCards());
                 	listInPlay = listInPlay.getType("Land");
                 	// One or more lands in library, 2 or more lands in play
@@ -21048,7 +21048,91 @@ public class CardFactory implements NewConstants {
 
         }//*************** END ************ END **************************
         
-    
+      //*************** START *********** START **************************
+        else if (cardName.equals("Natural Order")){
+            final SpellAbility spell = new Spell(card) {
+
+				private static final long serialVersionUID = -6598323179507468746L;
+
+				@Override
+                public void resolve() {
+					String controller = card.getController();
+					
+					PlayerZone battlezone = AllZone.getZone(Constant.Zone.Play, controller);
+			        PlayerZone library = AllZone.getZone(Constant.Zone.Library, controller);
+			        
+					CardList list = new CardList(library.getCards());
+			        list = list.getType("Creature").getColor("G");
+			        
+			        if(list.size() == 0) return;
+			        
+					if(controller.equals(Constant.Player.Human)) {
+				        
+				        Card c = AllZone.Display.getChoiceOptional("Choose a green creature", list.toArray());
+				        if(c != null) {
+				            list.remove(c);
+				            library.remove(c);
+				            battlezone.add(c);
+				            
+				        }//if
+			        } else {
+			        	Card c = CardFactoryUtil.AI_getBestCreature(new CardList(library.getCards()));
+			        	if(c != null) {
+				            list.remove(c);
+				            library.remove(c);
+				            battlezone.add(c);
+				            
+				        }//if
+			        }
+                } // resolve
+               
+        		public void chooseTargetAI() {
+        			Card target = null;
+        			target = CardFactoryUtil.AI_getWorstCreature(new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards()));
+        			setTargetCard(target);
+        			AllZone.GameAction.sacrifice(getTargetCard());
+        		}//chooseTargetAI()
+
+                
+                public boolean canPlayAI()
+                {
+                	PlayerZone library = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
+                	CardList list = new CardList(library.getCards());
+                	list = list.getType("Creature").getColor("G");
+                	PlayerZone inPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                	CardList listInPlay = new CardList(inPlay.getCards());
+                	listInPlay = listInPlay.getType("Creature").getColor("G");
+                	Card inPlayCreature = CardFactoryUtil.AI_getWorstCreature(new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards()));
+                	Card inLibraryCreature = CardFactoryUtil.AI_getBestCreature(new CardList(AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer).getCards()));
+                	return (list.size() > 0) && (listInPlay.size() > 0) && (inPlayCreature.getNetAttack() < inLibraryCreature.getNetAttack());
+                }
+            };//SpellAbility
+            Input runtime = new Input() {
+                
+				private static final long serialVersionUID = -7551607354431165941L;
+
+				@Override
+                public void showMessage() {
+                    String player = card.getController();
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+                    CardList choice = new CardList(play.getCards());
+                    choice = choice.getType("Creature").getColor("G");   
+                    
+                    boolean free = false;
+                    if (this.isFree())
+                    	free = true;
+                    
+                    if (player.equals(Constant.Player.Human)) {
+                    	stopSetNext(CardFactoryUtil.input_sacrifice(spell, choice, "Select a green creature to sacrifice.", free));
+                    }
+                }
+            };
+
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            spell.setBeforePayMana(runtime);
+
+        } //*************** END ************ END **************************
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

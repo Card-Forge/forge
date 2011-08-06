@@ -164,7 +164,7 @@ public class ListChooser<T> {
         //this assert checks if we really don't return on a cancel if input is mandatory
         assert minChoices == 0 || value == OK_OPTION;
         called = true;
-        return value == OK_OPTION;
+        return value != null && value == OK_OPTION;
     }
     
     /**

@@ -1,3 +1,8 @@
+Natural Order
+2 G G
+Sorcery
+As an additional cost to cast Natural Order, sacrifice a green creature. Search your library for a green creature card and put it onto the battlefield. Then shuffle your library.
+
 Elvish Farmer
 1 G
 Creature Elf
