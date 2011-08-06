@@ -2,10 +2,10 @@
 package forge;
 
 
+import forge.properties.NewConstants;
+
 import java.util.ArrayList;
 import java.util.Comparator;
-
-import forge.properties.NewConstants;
 @SuppressWarnings("unchecked") // Comparable needs <type>
 
 public class TableSorter implements Comparator<Card>, NewConstants
@@ -20,7 +20,7 @@ public class TableSorter implements Comparator<Card>, NewConstants
   private Comparable aCom = null;
   @SuppressWarnings("rawtypes")
   private Comparable bCom = null;
-  
+
   //used if in_column is 7, new cards first - the order is based on cards.txt
   //static because this should only be read once
   //static to try to reduce file io operations
@@ -37,7 +37,7 @@ public class TableSorter implements Comparator<Card>, NewConstants
 
   final public int compare(Card a, Card b)
   {
-    
+
     if(column == 0)//Qty
     {
       aCom = Integer.valueOf(countCardName(a.getName(), all));
@@ -70,13 +70,19 @@ public class TableSorter implements Comparator<Card>, NewConstants
     }
     else if (column == 5)//Stats, attack and defense
     {
-      //aCom = new Float(-1);
-      //bCom = new Float(-1);
-
-      if(a.isCreature())
+      if(a.isCreature()){
         aCom = a.getBaseAttackString() +"." +a.getBaseDefenseString();
-      if(b.isCreature())
+      }
+      else{
+          aCom = "";
+      }
+
+      if(b.isCreature()){
         bCom = b.getBaseAttackString() +"." +b.getBaseDefenseString();
+      }
+      else{
+          bCom = "";
+      }
     }
     else if (column == 6)//Rarity
     {
@@ -128,7 +134,7 @@ public class TableSorter implements Comparator<Card>, NewConstants
   {
 	  return c.getValue();
   }
-  
+
   final public static String getColor(Card c)
   {
     ArrayList<String> list = CardUtil.getColors(c);
