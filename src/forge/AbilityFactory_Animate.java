@@ -307,6 +307,8 @@ public class AbilityFactory_Animate {
 		for(final Card c : tgts){
 			//final ArrayList<Card_Color> originalColors = c.getColor();
 			final ArrayList<String> originalTypes = c.getType();
+			final int origPower = c.getBaseAttack();
+			final int origToughness = c.getBaseDefense();
 			
 			final long timestamp = doAnimate(c, af, power, toughness, types, finalDesc, keywords);
 			
@@ -337,7 +339,7 @@ public class AbilityFactory_Animate {
 				private static final long serialVersionUID = -5861759814760561373L;
 
 				public void execute() {
-					doUnanimate(c, originalTypes, finalDesc, keywords, actualAbilities, actualTriggers, timestamp);
+					doUnanimate(c, origPower, origToughness, originalTypes, finalDesc, keywords, actualAbilities, actualTriggers, timestamp);
 				}
 			};
 
@@ -378,9 +380,9 @@ public class AbilityFactory_Animate {
 		return timestamp;
 	}
 
-	private static void doUnanimate(Card c, ArrayList<String> originalTypes, String colorDesc, ArrayList<String> originalKeywords, ArrayList<SpellAbility> actualAbilities, ArrayList<Trigger> actualTriggers, long timestamp) {
-		c.setBaseAttack(0);
-		c.setBaseDefense(0);
+	private static void doUnanimate(Card c, int originalPower, int originalToughness, ArrayList<String> originalTypes, String colorDesc, ArrayList<String> originalKeywords, ArrayList<SpellAbility> actualAbilities, ArrayList<Trigger> actualTriggers, long timestamp) {
+		c.setBaseAttack(originalPower);
+		c.setBaseDefense(originalToughness);
 
 		c.clearAllTypes();
 		for(String type : originalTypes) {
