@@ -2644,6 +2644,7 @@ Battlegate Mimic
 Creature Shapeshifter
 Whenever you cast a spell that's both red and white, Battlegate Mimic becomes 4/2 and gains first strike until end of turn.
 2/1
+SVar:BuffedBy:Spell.Red+White
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Battlegate_Mimic.jpg
 
@@ -2805,6 +2806,7 @@ Creature Elemental
 Belligerent Hatchling enters the battlefield with four -1/-1 counters on it.  Whenever you cast a red spell, remove a -1/-1 counter from Belligerent Hatchling.  Whenever you cast a white spell, remove a -1/-1 counter from Belligerent Hatchling.
 6/6
 First Strike
+SVar:BuffedBy:Spell.Red,Spell.White
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Belligerent_Hatchling.jpg
 
@@ -8867,6 +8869,7 @@ Emberstrike Duo
 Creature Elemental Warrior Shaman
 Whenever you cast a black spell, Emberstrike Duo gets +1/+1 until end of turn.  Whenever you cast a red spell, Emberstrike Duo gains first strike until end of turn.
 1/1
+SVar:BuffedBy:Spell.Black,Spell.Red
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emberstrike_duo.jpg
 
@@ -9496,6 +9499,7 @@ Fable of Wolf and Owl
 3 GU GU GU
 Enchantment
 Whenever you play a green spell, you may put a 2/2 green Wolf creature token into play. Whenever you play a blue spell, you may put a 1/1 blue Bird creature token with flying into play.
+SVar:BuffedBy:Spell.Green,Spell.Blue
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fable_of_wolf_and_owl.jpg
 
@@ -11728,6 +11732,7 @@ Instant
 no text
 spAllPump:YouCtrl:+1/+2:Drawback$UntapAllTypeYouCtrl.Creature:Creatures you control get +1/+2 until end of turn. Untap those creatures.:Gleam of Resistance - Creatures get +1/+2 until EOT; untap those creatures
 TypeCycling:Basic:1 W
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gleam_of_resistance.jpg
 
@@ -12690,6 +12695,7 @@ Gravelgill Duo
 Creature Merfolk Rogue Warrior
 Whenever you cast a blue spell, Gravelgill Duo gets +1/+1 until end of turn.  Whenever you cast a black spell, Gravelgill Duo gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
 2/1
+SVar:BuffedBy:Spell.Blue,Spell.Black
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravelgill_duo.jpg
 
@@ -20481,6 +20487,7 @@ Nightsky Mimic
 Creature Shapeshifter
 Whenever you cast a spell that's both white and black, Nightsky Mimic becomes 4/4 and gains flying until end of turn.
 2/1
+SVar:BuffedBy:Spell.Black+White
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Nightsky_Mimic.jpg
 
@@ -20720,6 +20727,7 @@ Creature Elemental
 Noxious Hatchling enters the battlefield with four -1/-1 counters on it. Whenever you cast a black spell, remove a -1/-1 counter from Noxious Hatchling.  Whenever you cast a green spell, remove a -1/-1 counter from Noxious Hatchling.
 6/6
 Wither
+SVar:BuffedBy:Spell.Black,Spell.Green
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Noxious_Hatchling.jpg
 
@@ -24318,6 +24326,7 @@ Riverfall Mimic
 Creature Shapeshifter
 Whenever you cast a spell that's both blue and red, Riverfall Mimic becomes 3/3 and is unblockable until end of turn.
 2/1
+SVar:BuffedBy:Spell.Blue+Red
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Riverfall_Mimic.jpg
 
@@ -24888,6 +24897,7 @@ Safehold Duo
 Creature Elf Warrior Shaman
 Whenever you cast a green spell, Safehold Duo gets +1/+1 until end of turn.  Whenever you cast a white spell, Safehold Duo gains vigilance until end of turn.
 2/4
+SVar:BuffedBy:Spell.Green,Spell.White
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/safehold_duo.jpg
 
@@ -26456,6 +26466,7 @@ Shorecrasher Mimic
 Creature Shapeshifter
 Whenever you cast a spell that's both green and blue, Shorecrasher Mimic becomes 5/3 and gains trample until end of turn.
 2/1
+SVar:BuffedBy:Spell.Blue+Green
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Shorecrasher_Mimic.jpg
 
@@ -27288,7 +27299,7 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card23149.jpg
 
 Slippery Bogle
-UG
+GU
 Creature Beast
 no text
 1/1
@@ -29192,6 +29203,7 @@ Creature Elemental
 Sturdy Hatchling enters the battlefield with four -1/-1 counters on it. Whenever you cast a green spell, remove a -1/-1 counter from Sturdy Hatchling.  Whenever you cast a blue spell, remove a -1/-1 counter from Sturdy Hatchling.
 6/6
 abPump GU:Shroud
+SVar:BuffedBy:Spell.Blue,Spell.Green
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Sturdy_Hatchling.jpg
 
@@ -29997,6 +30009,7 @@ Tattermunge Duo
 Creature Goblin Warrior Shaman
 Whenever you cast a red spell, Tattermunge Duo gets +1/+1 until end of turn.  Whenever you cast a green spell, Tattermunge Duo gains forestwalk until end of turn.
 2/3
+SVar:BuffedBy:Spell.Red,Spell.Green
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tattermunge_duo.jpg
 
@@ -30517,6 +30530,7 @@ Thistledown Duo
 Creature Kithkin Soldier Wizard
 Whenever you cast a white spell, Thistledown Duo gets +1/+1 until end of turn.  Whenever you cast a blue spell, Thistledown Duo gains flying until end of turn.
 2/2
+SVar:BuffedBy:Spell.White,Spell.Blue
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thistledown_duo.jpg
 
@@ -33432,6 +33446,7 @@ Creature Elemental
 Voracious Hatchling enters the battlefield with four -1/-1 counters on it.  Whenever you cast a white spell, remove a -1/-1 counter from Voracious Hatchling.  Whenever you cast a black spell, remove a -1/-1 counter from Voracious Hatchling.
 6/6
 Lifelink
+SVar:BuffedBy:Spell.White,Spell.Black
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Voracious_Hatchling.jpg
 
@@ -34104,6 +34119,7 @@ no text
 1/3
 Flying
 WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Instant/Sorcery:Play:StatsPumpEOT/2/0:Self:ASAP:No_Condition:No Special Condition:Whenever you cast an instant or sorcery spell, Wee Dragonauts gets +2/+0 until end of turn.
+SVar:BuffedBy:Instant,Sorcery
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wee_dragonauts.jpg
 
@@ -34928,6 +34944,7 @@ Woodlurker Mimic
 Creature Shapeshifter
 Whenever you cast a spell that's both black and green, Woodlurker Mimic becomes 4/5 and gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)
 2/1
+SVar:BuffedBy:Spell.Black+Green
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Woodlurker_Mimic.jpg
 
