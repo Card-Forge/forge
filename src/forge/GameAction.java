@@ -645,7 +645,7 @@ public class GameAction {
             a.remove(0);
             if(1 < b.size()) {
                 for(int i = 0; i < b.size(); i++)
-                    AllZone.GameAction.destroy(b.get(i));
+                    AllZone.GameAction.sacrificeDestroy(b.get(i));
                 
 
             }
