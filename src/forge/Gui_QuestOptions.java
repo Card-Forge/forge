@@ -1,4 +1,9 @@
 package forge;
+import forge.error.ErrorViewer;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -7,21 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
-
-import forge.error.ErrorViewer;
 
 
 public class Gui_QuestOptions extends JFrame {
@@ -208,7 +198,7 @@ public class Gui_QuestOptions extends JFrame {
     void newQuestButton_actionPerformed(ActionEvent e) {
         int difficulty = 0;
 
-        String mode = fantasyRadio.isSelected() ? "Fantasy" : "Realistic";
+        String mode = fantasyRadio.isSelected() ? QuestData.FANTASY : QuestData.REALISTIC;
         
         if(easyRadio.isSelected()) difficulty = 0;
         
