@@ -13,6 +13,7 @@ Advance Scout
 Advanced Hoverguard
 Adventuring Gear
 Aesthir Glider
+AEther Adept
 Agent of Stromgald
 Aggressive Urge
 Agility
@@ -48,6 +49,7 @@ Anurid Murkdiver
 Apex Hawks
 Apprentice Wizard
 Araba Mothrider
+Arc Runner
 Arcbound Bruiser
 Arcbound Hybrid
 Arcbound Stinger
@@ -56,6 +58,7 @@ Ardent Militia
 Argothian Pixies
 Argothian Swine
 Armadillo Cloak
+Armored Cancrix
 Armored Pegasus
 Armorer Guildmage
 Arnjlot's Ascent
@@ -66,8 +69,10 @@ Ashcoat Bear
 Ashen-Skin Zubera
 Ashenmoor Cohort
 Ashnod's Transmogrant
+Assault Griffin
 Assault Zeppelid
 Astral Steel
+Augury Owl
 Aura Blast
 Aura Gnarlid
 Auramancer
@@ -96,6 +101,7 @@ Barbarian Horde
 Barbary Apes
 Barbtooth Wurm
 Barkhide Mauler
+Barony Vampire
 Barren Moor
 Barrenton Cragtreads
 Basal Thrull
@@ -142,6 +148,7 @@ Bog Smugglers
 Bog Tatters
 Bog Wreckage
 Boggart Birth Rite
+Bojuka Bog
 Bojuka Brigand
 Bone Saw
 Bonesplitter
@@ -218,11 +225,13 @@ Cerodon Yearling
 Cessation
 Ceta Disciple
 Champion's Drake
+Chandra's Outrage
 Changeling Sentinel
 Charging Slateback
 Chartooth Cougar
 Chatter of the Squirrel
 Child of Night
+Chill to the Bone
 Chilling Shade
 Chittering Rats
 Chorus of Woe
@@ -234,6 +243,7 @@ Cliff Threader
 Clinging Darkness
 Cloak of Feathers
 Cloak of Mists
+Cloud Crusader
 Cloud Elemental
 Cloud Pirates
 Cloud Spirit
@@ -304,6 +314,7 @@ Death Cultist
 Death Speakers
 Death's Duet
 Deathgreeter
+Deception
 Deep Analysis
 Deeptread Merrow
 Defender of Chaos
@@ -364,6 +375,7 @@ Drowned
 Drudge Reavers
 Drudge Skeletons
 Druid of the Anima
+Dryad's Favor
 Dungeon Shade
 Duress
 Durkwood Boars
@@ -437,6 +449,7 @@ Festival of Trokin
 Fetid Horror
 Fiery Fall
 Fiery Hellhound
+Fill with Fright
 Filthy Cur
 Fire Ambush
 Fire Elemental
@@ -458,6 +471,7 @@ Flamekin Brawler
 Flamewave Invoker
 Flaming Sword
 Fledgling Djinn
+Fledgling Griffin
 Fleet-Footed Monk
 Flight
 Flight of Fancy
@@ -499,6 +513,7 @@ Gaea's Might
 Gaea's Skyfolk
 Galina's Knight
 Game-Trail Changeling
+Garruk's Companion
 Gemhide Sliver
 Geothermal Crevice
 Gerrard's Command
@@ -571,6 +586,7 @@ Gray Ogre
 Graypelt Hunter
 Grayscaled Gharial
 Great Furnace
+Greater Basilisk
 Greater Mossdog
 Greel's Caress
 Griffin Sentinel
@@ -594,6 +610,7 @@ Hammerhead Shark
 Hand of Death
 Harrow
 Harvest Gwyllion
+Haunting Misery
 Havenwood Wurm
 Headless Horseman
 Heart Sliver
@@ -621,6 +638,7 @@ Horned Kavu
 Horned Troll
 Horned Turtle
 Hornet Cobra
+Hornet Sting
 Horseshoe Crab
 Howl from Beyond
 Howling Fury
@@ -656,6 +674,7 @@ Inner Calm, Outer Strength
 Inner-Flame Acolyte
 Innocent Blood
 Inspiration
+Inspired Charge
 Invigorating Falls
 Invisibility
 Ior Ruin Expedition
@@ -788,10 +807,12 @@ Mana Cylix
 Mana Leak
 Mana Tithe
 Manakin
+Manic Vandal
 Maniacal Rage
 Manta Ray
 Manta Riders
 Marble Chalice
+Maritime Guard
 Marsh Boa
 Marsh Goblins
 Marsh Threader
@@ -799,6 +820,7 @@ Marsh Viper
 Mask of Law and Grace
 Mass of Ghouls
 Master Decoy
+Matca Rioters
 Meadowboon
 Melancholy
 Meng Huo's Horde
@@ -812,6 +834,10 @@ Metathran Soldier
 Metathran Zombie
 Might of Alara
 Might of the Masses
+Mighty Leap
+Mind Burst
+Mind Knives
+Mind Rot
 Minamo Scrollkeeper
 Minister of Impediments
 Minotaur Warrior
@@ -865,6 +891,7 @@ Nantuko Disciple
 Nantuko Husk
 Natural Spring
 Naturalize
+Nature's Lore
 Naya Hushblade
 Necrogen Spellbomb
 Needlepeak Spider
@@ -872,6 +899,7 @@ Needleshot Gourna
 Nema Siltlurker
 Nessian Courser
 Nest Invader
+Nether Horror
 Neurok Hoversail
 Nezumi Cutthroat
 Nezumi Ronin
@@ -882,6 +910,7 @@ Nightshade Stinger
 Nightsky Mimic
 Nightsoil Kami
 Nightwind Glider
+Nightwing Shade
 Nimana Sell-Sword
 Nimbus Wings
 Nip Gwyllion
@@ -913,6 +942,7 @@ Ondu Cleric
 Onulet
 Onyx Goblet
 Oona's Gatewarden
+Ophidian Eye
 Opt
 Oran-Rief Survivalist
 Oraxid
@@ -987,6 +1017,7 @@ Pulse Tracker
 Putrid Leech
 Pygmy Pyrosaur
 Pygmy Razorback
+Pyretic Ritual
 Pyrite Spellbomb
 Python
 Qasali Pridemage
@@ -1019,6 +1050,7 @@ Razorfoot Griffin
 Razortooth Rats
 Reaping the Graves
 Reckless Scholar
+Reclaim
 Recover
 Red Cliffs Armada
 Redwood Treefolk
@@ -1030,6 +1062,8 @@ Reinforcements
 Rejuvenate
 Remote Isle
 Remove Soul
+Rend Flesh
+Rend Spirit
 Rendclaw Trow
 Renewed Faith
 Repentant Blacksmith
@@ -1058,6 +1092,7 @@ River Kaijin
 Riverfall Mimic
 Robe of Mirrors
 Rock Badger
+Rogue Kavu
 Roiling Terrain
 Ronin Cavekeeper
 Ronin Houndmaster
@@ -1068,6 +1103,7 @@ Rootwalla
 Rootwater Commando
 Rootwater Hunter
 Roterothopter
+Rotting Legion
 Rowan Treefolk
 Royal Falcon
 Rukh Egg
@@ -1081,6 +1117,7 @@ Ruthless Cullblade
 Sabretooth Tiger
 Sacred Nectar
 Sacred Prey
+Sacred Wolf
 Safehold Duo
 Safehold Elite
 Sage Aven
@@ -1102,6 +1139,7 @@ Scathe Zombies
 Scattershot
 Scavenged Weaponry
 Scavenging Scarab
+School of Piranha
 Scorching Spear
 Scornful Egotist
 Scrap
@@ -1187,6 +1225,7 @@ Sisters of the Flame
 Skeletal Changeling
 Skeletal Crocodile
 Skeletal Snake
+Skirk Prospector
 Skirk Shaman
 Skitter of Lizards
 Skred
@@ -1225,11 +1264,13 @@ Sound the Call
 Southern Elephant
 Spark Spray
 Sparksmith
+Specter's Wail
 Spell Pierce
 Spell Snip
 Spidersilk Armor
 Spidersilk Net
 Spikeshot Goblin
+Spindrift Drake
 Spined Basher
 Spined Wurm
 Spineless Thug
@@ -1296,6 +1337,7 @@ Surging Might
 Surging Sentinels
 Swamp Mosquito
 Sylvan Bounty
+Sylvan Ranger
 Symbiotic Elf
 Synchronous Sliver
 Talas Air Ship
@@ -1339,6 +1381,8 @@ Thornwind Faeries
 Thought Courier
 Thought Nibbler
 Thoughtcast
+Three Visits
+Thunder Strike
 Thunderscape Apprentice
 Thunderscape Familiar
 Tidehollow Strix
@@ -1347,6 +1391,7 @@ Timberland Ruins
 Timbermaw Larva
 Timberwatch Elf
 Tinder Farm
+Tireless Missionaries
 Titanic Bulvox
 Titanium Golem
 Tome Scour
@@ -1391,11 +1436,14 @@ Uktabi Drake
 Uktabi Efreet
 Ulamog's Crusher
 Umara Raptor
+Unburden
 Uncontrollable Anger
 Undead Leotau
+Unhinge
 Unholy Strength
 Unmake
 Unnatural Speed
+Unnerve
 Unsummon
 Unworthy Dead
 Ur-Golem's Eye
@@ -1452,6 +1500,7 @@ Vodalian Merchant
 Vodalian Soldiers
 Vodalian Zombie
 Volcanic Hammer
+Volcanic Strength
 Volcanic Submersion
 Volcano Imp
 Volunteer Militia
@@ -1460,6 +1509,7 @@ Vulshok Berserker
 Vulshok Gauntlets
 Vulshok Morningstar
 Vulshok Sorcerer
+Waking Nightmare
 Walking Dead
 Wall of Diffusion
 Wall of Earth
@@ -1467,6 +1517,7 @@ Wall of Faith
 Wall of Heat
 Wall of Ice
 Wall of Spears
+Wall of Vines
 Wall of Wood
 Wanderbrine Rootcutters
 Wandering Goblins
@@ -1492,6 +1543,7 @@ Welkin Tern
 Wellwisher
 Werebear
 Whip-Spine Drake
+Whipstitched Zombie
 Whiptail Wurm
 Whiptongue Frog
 Whirlpool Rider
@@ -1504,6 +1556,7 @@ Wild Colos
 Wild Elephant
 Wild Griffin
 Wild Jhovall
+Wild Leotau
 Wild Mongrel
 Wild Nacatl
 Wildheart Invoker
@@ -1535,6 +1588,7 @@ Words of Wisdom
 Wormwood Dryad
 Wrap in Vigor
 Wrecking Ball
+Wrench Mind
 Wu Elite Cavalry
 Wu Infantry
 Wu Light Cavalry

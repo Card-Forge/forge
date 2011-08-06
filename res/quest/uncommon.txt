@@ -1,16 +1,20 @@
 AErathi Berserker
 AEther Membrane
 AEther Vial
+Abyssal Specter
 Abbey Gargoyles
 Abomination
 Absolute Grace
 Absolute Law
+Abyssal Nightstalker
 Abyssal Specter
 Acidic Soil
 Act of Treason
 Adarkar Sentinel
 Affa Guard Hound
+Agent of Masks
 Air Elemental
+Ajani's Pridemate
 Akoum Refuge
 Alaborn Zealot
 Albino Troll
@@ -21,8 +25,10 @@ Amnesia
 An-Havva Inn
 An-Havva Township
 Anaconda
+Ancient Runes
 Angel of Light
 Angel of Mercy
+Angelic Benediction
 Anger
 Animate Artifact
 Animate Dead
@@ -52,6 +58,7 @@ Aven Fateshaper
 Aven Smokeweaver
 Aysen Abbey
 Azure Drake
+Back to Nature
 Balshan Collaborator
 Bant Battlemage
 Barbarian General
@@ -60,6 +67,7 @@ Barktooth Warbeard
 Basalt Gargoyle
 Basalt Monolith
 Battle Mastery
+Battle Strain
 Battlefield Percher
 Bazaar of Baghdad
 Beast Attack
@@ -69,6 +77,7 @@ Behemoth Sledge
 Belligerent Hatchling
 Beloved Chaplain
 Benalish Heralds
+Bereavement
 Bestial Menace
 Binding Grasp
 Bituminous Blast
@@ -92,6 +101,7 @@ Boggart Ram-Gang
 Boil
 Boiling Seas
 Bonded Fetch
+Bone Shredder
 Boreal Shelf
 Boros Guildmage
 Boros Swiftblade
@@ -172,6 +182,7 @@ Crystal Vein
 Crystalline Sliver
 Cudgel Troll
 Cunning Sparkmage
+Curiosity
 Curse of Wizardry
 Cursed Land
 Cursed Rack
@@ -180,6 +191,7 @@ Dakmor Ghoul
 Dakmor Salvage
 Dance of Shadows
 Dancing Scimitar
+Darba
 Darigaaz's Attendant
 Darksteel Gargoyle
 Darkwatch Elves
@@ -295,6 +307,7 @@ Forked-Branch Garami
 Frost Giant
 Frost Marsh
 Frozen AEther
+Fugue
 Furnace Whelp
 Fury Sliver
 Fusion Elemental
@@ -303,6 +316,7 @@ Fyndhorn Elder
 Gatekeeper of Malakir
 Gelectrode
 Gemstone Array
+Gemstone Mine
 Gerrard's Verdict
 Gerrard's Wisdom
 Ghitu Encampment
@@ -361,6 +375,7 @@ Hand of Honor
 Harmattan Efreet
 Harmonize
 Haunted Angel
+Haunting Hymn
 Havenwood Battleground
 Hawkeater Moth
 Haze of Rage
@@ -418,6 +433,7 @@ Isochron Scepter
 Ivory Tower
 Ivy Dancer
 Jabari's Banner
+Jace's Ingenuity
 Jackal Pup
 Jalum Tome
 Jasmine Boreal
@@ -445,6 +461,7 @@ Kasimir the Lone Wolf
 Kathari Remnant
 Kazandu Blademaster
 Kazandu Refuge
+Keen Sense
 Keening Banshee
 Keldon Warlord
 Kemuri-Onna
@@ -483,6 +500,7 @@ Lifetap
 Lightkeeper of Emeria
 Lightning Greaves
 Lightning Helix
+Liliana's Caress
 Lingering Tormentor
 Living Wall
 Llanowar Behemoth
@@ -514,6 +532,8 @@ Millstone
 Mind Control
 Mind Funeral
 Mind Harness
+Mind Peel
+Mind Sludge
 Minions' Murmurs
 Minotaur Explorer
 Mishra's Factory
@@ -522,6 +542,8 @@ Mogg Fanatic
 Mogg Jailer
 Mold Adder
 Moldervine Cloak
+Molting Harpy
+Monk Idealist
 Moon Sprite
 Moonlit Wake
 Moroii
@@ -536,6 +558,7 @@ Nature's Ruin
 Naya Battlemage
 Needle Storm
 Needlebug
+Nekrataal
 Nettletooth Djinn
 Night's Whisper
 Nightshade Schemers
@@ -573,6 +596,7 @@ Perimeter Captain
 Perish
 Persuasion
 Pestilence
+Phantasmal Forces
 Phantom Centaur
 Phantom Monster
 Phantom Warrior
@@ -582,6 +606,7 @@ Phyrexian Hulk
 Phyrexian Ironfoot
 Phyrexian Snowcrusher
 Pillage
+Pit Raptor
 Plasma Elemental
 Plumeveil
 Pongify
@@ -596,6 +621,7 @@ Propaganda
 Prosperity
 Prowess of the Fair
 Psionic Blast
+Psychatog
 Psychic Drain
 Psychotrope Thallid
 Puppeteer
@@ -642,6 +668,7 @@ River Bear
 Rix Maadi, Dungeon Palace
 Roar of the Wurm
 Robber Fly
+Roc Egg
 Rockslide Ambush
 Rod of Ruin
 Rootbreaker Wurm
@@ -702,6 +729,7 @@ Sky Diamond
 Sky Spirit
 Skyhunter Skirmisher
 Slay
+Sleeper's Robe
 Slinking Serpent
 Slith Ascendant
 Slith Bloodletter
@@ -748,6 +776,7 @@ Stern Judge
 Stitch Together
 Stolen Grain
 Stone Calendar
+Stone Golem
 Stone Spirit
 Stonecloaker
 Storm Entity
@@ -762,8 +791,10 @@ Strip Mine
 Stromgald Crusader
 Stronghold Zeppelin
 Stun Sniper
+Stupor
 Sturdy Hatchling
 Suffer the Past
+Summer Bloom
 Sunastian Falconer
 Sunder from Within
 Sunhome, Fortress of the Legion
@@ -804,6 +835,7 @@ Thousand-legged Kami
 Thran Dynamo
 Thran War Machine
 Threaten
+Three Tragedies
 Thunder Spirit
 Thunder Wall
 Thunder-Thrash Elder
@@ -829,6 +861,7 @@ Treva's Attendant
 Troll-Horn Cameo
 Tromp the Domains
 Trusty Machete
+Tunnel
 Turtleshell Changeling
 Twinblade Slasher
 Uktabi Orangutan
@@ -861,12 +894,18 @@ Virtue's Ruin
 Vitalizing Cascade
 Vithian Renegades
 Vitu-Ghazi, the City-Tree
+Vivid Crag
+Vivid Creek
+Vivid Grove
+Vivid Marsh
+Vivid Meadow
 Vodalian Knights
 Voice of Duty
 Voice of Grace
 Voice of Law
 Voice of Reason
 Voice of Truth
+Voices from the Void
 Volcanic Awakening
 Volcanic Fallout
 Volcanic Geyser
@@ -895,11 +934,13 @@ Wall of Water
 Wanderlust
 Waning Wurm
 War Chariot
+Warlord's Axe
 Warthog
 Wasp Lancer
 Wasteland
 Watchwolf
 Water Elemental
+Water Servant
 Web
 Wei Elite Companions
 Whip Sergeant

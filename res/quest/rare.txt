@@ -8,12 +8,14 @@ Acid Rain
 Adarkar Valkyrie
 Adarkar Wastes
 Adun Oakenshield
+Ageless Entity
 Ajani Goldmane
 Ajani Vengeant
 Akroma's Memorial
 Akroma's Vengeance
 Akroma, Angel of Fury
 Akroma, Angel of Wrath
+Akuta, Born of Ash
 Alabaster Leech
 Aladdin's Ring
 Ali from Cairo
@@ -28,6 +30,7 @@ Ancient Spider
 Andradite Leech
 Angel of Despair
 Angel of Retribution
+Angelic Chorus
 Anowon, the Ruin Sage
 Ant Queen
 Apocalypse Hydra
@@ -157,6 +160,7 @@ Cranial Extraction
 Creeping Tar Pit
 Cromat
 Crucible of Fire
+Crucible of Worlds
 Cruel Bargain
 Cruel Tutor
 Cruel Ultimatum
@@ -181,6 +185,7 @@ Deathless Angel
 Debtors' Knell
 Defense Grid
 Defense of the Heart
+Delusions of Mediocrity
 Demigod of Revenge
 Deranged Hermit
 Derelor
@@ -204,7 +209,9 @@ Dragonmaster Outcast
 Dragonskull Summit
 Dragonstorm
 Drifting Djinn
+Dross Harvester
 Drowned Catacomb
+Dune-Brood Nephilim
 Dwarven Pony
 Earthcraft
 Earthquake
@@ -290,6 +297,7 @@ Gilded Lotus
 Gilt-Leaf Archdruid
 Giltspire Avenger
 Glacial Fortress
+Glimmervoid
 Glimpse the Unthinkable
 Glint-Eye Nephilim
 Global Ruin
@@ -311,6 +319,7 @@ Goliath Sphinx
 Grand Arbiter Augustin IV
 Grand Coliseum
 Granite Gargoyle
+Grave Titan
 Grave-Shell Scarab
 Graven Cairns
 Great Sable Stag
@@ -342,12 +351,14 @@ Helldozer
 Hellion Eruption
 Hellkite Overlord
 Herald of Serra
+Hermit Druid
 Hero's Demise
 Hex
 Hidetsugu's Second Rite
 Honor of the Pure
 Hoofprints of the Stag
 Horde of Notions
+Horn of Greed
 Horn of Ramos
 Howling Mine
 Hum of the Radix
@@ -369,6 +380,7 @@ Indomitable Ancients
 Infernal Contract
 Infernal Kirin
 Inferno
+Inferno Titan
 Inkwell Leviathan
 Intrepid Hero
 Intuition
@@ -397,6 +409,7 @@ Juzam Djinn
 Kaervek's Spite
 Kalonian Behemoth
 Kamahl, Pit Fighter
+Kami of the Crescent Moon
 Kargan Dragonlord
 Karmic Guide
 Karplusan Forest
@@ -411,6 +424,7 @@ Kiki-Jiki, Mirror Breaker
 Kinsbaile Borderguard
 Kinsbaile Cavalier
 Kjeldoran Outpost
+Knight Exemplar
 Knight of the Reliquary
 Knight of the White Orchid
 Knotvine Paladin
@@ -421,6 +435,7 @@ Konda, Lord of Eiganjo
 Kongming, "Sleeping Dragon"
 Korlash, Heir to Blackblade
 Kozilek, Butcher of Truth
+Kresh the Bloodbraided
 Krosan Cloudscraper
 Krosan Colossus
 Lady Zhurong, Warrior Queen
@@ -482,6 +497,7 @@ Maro
 Marrow-Gnawer
 Marsh Flats
 Martial Coup
+Masked Admirers
 Mass Calcify
 Mass Hysteria
 Master Transmuter
@@ -505,10 +521,12 @@ Mind Shatter
 Mind Spring
 Mind Twist
 Mind's Desire
+Mirari
 Mirri the Cursed
 Mirri, Cat Warrior
 Mirror Entity
 Mirror-Sigil Sergeant
+Mishra, Artificer Prodigy
 Misty Rainforest
 Moat
 Mobilization
@@ -556,7 +574,9 @@ Noble Hierarch
 Noble Panther
 Nova Chaser
 Novablast Wurm
+Nut Collector
 Nyxathid
+Oath of Ghouls
 Oath of Druids
 Ob Nixilis, the Fallen
 Obliterate
@@ -586,7 +606,10 @@ Pearl Medallion
 Penumbra Wurm
 Pestilence Demon
 Phantom Nishoba
+Phylactery Lich
 Phyrexian Arena
+Phyrexian Plaguelord
+Phyrexian Tower
 Phytohydra
 Pianna, Nomad Captain
 Pine Barrens
@@ -605,6 +628,7 @@ Predator Dragon
 Predatory Advantage
 Preeminent Captain
 Primal Clay
+Primeval Titan
 Primordial Sage
 Privileged Position
 Progenitus
@@ -636,6 +660,7 @@ Reflecting Pool
 Reiterate
 Reki, the History of Kamigawa
 Repay in Kind
+Reiterate
 Retribution of the Meek
 Reveillark
 Reya Dawnbringer
@@ -691,6 +716,7 @@ Serendib Efreet
 Serendib Sorcerer
 Serpent Generator
 Serra Angel
+Serra Ascendant
 Serra Avatar
 Serra Avenger
 Serra Sphinx
@@ -738,6 +764,7 @@ Spiritual Guardian
 Squall Line
 Squee, Goblin Nabob
 Squeeze
+Squirrel Mob
 Staff of Domination
 Stalking Assassin
 Stangg
@@ -759,6 +786,7 @@ Stuffy Doll
 Sulfurous Springs
 Sun Ce, Young Conquerer
 Sun Quan, Lord of Wu
+Sun Titan
 Sunglasses of Urza
 Sungrass Prairie
 Sunken Ruins
@@ -769,6 +797,7 @@ Survival of the Fittest
 Swans of Bryn Argoll
 Sword of Fire and Ice
 Sword of Light and Shadow
+Sword of Vengeance
 Sygg, River Guide
 Sylvan Tutor
 Symbiotic Wurm
@@ -780,6 +809,7 @@ Tarmogoyf
 Tarox Bladewing
 Teeka's Dragon
 Teferi's Puzzle Box
+Temple Bell
 Temple Garden
 Temporal Manipulation
 Terra Stomper
@@ -797,12 +827,14 @@ Thornling
 Thornscape Master
 Thought Devourer
 Thoughtseize
+Thran Quarry
 Threads of Disloyalty
 Thriss, Nantuko Primus
 Thrumming Stone
 Tidal Kraken
 Timber Protector
 Time Elemental
+Time Reversal
 Time Stretch
 Time Vault
 Time Walk
@@ -840,6 +872,7 @@ Undead Gladiator
 Underground River
 Underground Sea
 Undermine
+Undiscovered Paradise
 Undying Beast
 Uril, the Miststalker
 Ursapine
@@ -875,6 +908,7 @@ Warrior Angel
 Watery Grave
 Weathered Wayfarer
 Weatherseed Treefolk
+Wheel and Deal
 Wheel of Fortune
 Will-o'-the-Wisp
 Windborn Muse
@@ -885,6 +919,7 @@ Witch-Maw Nephilim
 Wolfbriar Elemental
 Wooded Bastion
 Wooded Foothills
+Worldslayer
 Wormwood Treefolk
 Wort, Boggart Auntie
 Wrath of God
