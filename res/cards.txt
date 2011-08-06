@@ -1,3 +1,18 @@
+Admonition Angel
+3 W W W
+Creature Angel
+no text
+6/6
+Flying
+WheneverKeyword:EntersBattleField:Type/Land:Play:MoveFrom-Play-Exiled:NormalInput/Specific/NotSelf:ASAP:No_Condition:Initiator - OwnedByController!AttachTarget:Landfall — Whenever a land enters the battlefield under your control, you may exile target nonland permanent other than Admonition Angel.
+WheneverKeyword:LeavesBattleField:Self:Any:MoveFrom-Exiled-Play:All/AttachedCards:ASAP:No_Condition:No Special Condition:When Admonition Angel leaves the battlefield, return all cards exiled with it to the battlefield under their owners' control.
+
+Midsummer Revel
+3 G G
+Enchantment
+no text
+WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:CustomCounter.VERSE/1:Self:ASAP:Yes_No:ControllerUpkeep:At the beginning of your upkeep, you may put a verse counter on Midsummer Revel.
+
 Ifh-Biff Efreet
 2 G G
 Creature Efreet

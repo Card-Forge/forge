@@ -9710,7 +9710,32 @@ public class CardFactory implements NewConstants {
             spell.setBeforePayMana(new Input_PayManaCost(spell));
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        if(cardName.equals("Midsummer Revel")) {   
+           
+        	final SpellAbility ability = new Ability(card, "G") {
 
+        		@Override
+        		public boolean canPlayAI() {
+        			if(card.getCounters(Counters.VERSE) > 0) return true;
+        			return false;
+        		}
+
+        		@Override
+        		public void resolve() { 
+        				for(int i = 0; i < card.getCounters(Counters.VERSE); i++) {
+                            CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", card, "G", new String[] {
+                                    "Creature", "Beast"}, 3, 3, new String[] {""});
+        				}
+        			AllZone.GameAction.sacrifice(card);
+        		}
+        	};
+            card.addSpellAbility(ability);
+            ability.setStackDescription(cardName
+                    + " puts X 3/3 green Beast creature tokens onto the battlefield");
+            ability.setDescription("G, Sacrifice Midsummer Revel: Put X 3/3 green Beast creature tokens onto the battlefield, where X is the number of verse counters on Midsummer Revel.");
+        }//*************** END ************ END **************************
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Thoughtseize") || cardName.equals("Distress")) {
             final SpellAbility spell = new Spell(card) {

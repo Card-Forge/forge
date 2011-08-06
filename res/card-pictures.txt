@@ -38,6 +38,8 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+admonition_angel.jpg	http://www.wizards.com/global/images/magic/general/admonition_angel.jpg
+midsummer_revel.jpg		http://www.wizards.com/global/images/magic/general/midsummer_revel.jpg
 abyssal_horror.jpg		http://www.wizards.com/global/images/magic/general/abyssal_horror.jpg
 deathgreeter.jpg		http://www.wizards.com/global/images/magic/general/deathgreeter.jpg
 disciple_of_the_vault.jpg		http://www.wizards.com/global/images/magic/general/disciple_of_the_vault.jpg	

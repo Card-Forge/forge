@@ -35,7 +35,8 @@ public enum Counters {
     QUEST(),
     SPORE(),
     TIME(),
-    TOWER("tower");
+    TOWER("tower"),
+    VERSE();
     
     private String name;
     
