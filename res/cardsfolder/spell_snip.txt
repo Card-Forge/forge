@@ -1,7 +1,8 @@
 Name:Spell Snip
 ManaCost:2 U
 Types:Instant
-Text:Counter target spell unless its controller pays 1.
+Text:no text
+A:SP$Counter | Cost$ 2 U | Type$ Spell | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays 1.
 K:Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_snip.jpg

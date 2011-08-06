@@ -1,7 +1,8 @@
 Name:Mana Leak
 ManaCost:1 U
 Types:Instant
-Text:Counter target spell unless its controller pays 3.
+Text:no text
+A:SP$Counter | Cost$ 1 U | Type$ Spell | UnlessCost$ 3 | SpellDescription$ Counter target spell unless its controller pays 3.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_leak.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/62.jpg

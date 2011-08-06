@@ -1210,7 +1210,7 @@ public class CardFactory_Instants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
 
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Spell Pierce")) {
             SpellAbility spell = new Spell(card) {
@@ -1405,7 +1405,7 @@ public class CardFactory_Instants {
                 card.setText("");
             }
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Impulse")) {

@@ -1,7 +1,8 @@
 Name:Convolute
 ManaCost:2 U
 Types:Instant
-Text:Counter target spell unless its controller pays 4.
+Text:no text
+A:SP$Counter | Cost$ 2 U | Type$ Spell | UnlessCost$ 4 | SpellDescription$ Counter target spell unless its controller pays 4.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/convolute.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/41.jpg

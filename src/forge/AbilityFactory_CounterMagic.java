@@ -27,6 +27,7 @@ public class AbilityFactory_CounterMagic {
 	private String destination = null;
 	private String[] splitTargetingRestrictions = null;
 	private String[] splitExtraActions;
+	private String unlessCost = null;
 
 	private final SpellAbility[] tgt = new SpellAbility[1];
 
@@ -45,6 +46,9 @@ public class AbilityFactory_CounterMagic {
 			splitExtraActions = params.get("ExtraActions").split(" ");
 		}
 		else splitExtraActions = new String[] {"None"};
+		
+		if(params.containsKey("UnlessCost")) 
+			unlessCost = params.get("UnlessCost");
 
 		tgt[0] = null;
 	}
@@ -116,191 +120,44 @@ public class AbilityFactory_CounterMagic {
 		if(matchSpellAbility(sa.getSourceCard(), tgt[0], splitTargetingRestrictions, targetType) 
 				&& AllZone.Stack.contains(tgt[0])
 				&& !tgt[0].getSourceCard().keywordsContain("CARDNAME can't be countered.")) {
-			SpellAbility tgtSA = tgt[0];
-			AllZone.Stack.remove(tgt[0]);
+			final SpellAbility tgtSA = tgt[0];
 
 			System.out.println("Send countered spell to " + destination);
 
-			if(tgtSA.isAbility())  {
-				//For Ability-targeted counterspells - do not move it anywhere, even if Destination$ is specified.
+			if(unlessCost != null) {
+				Ability ability = new Ability(af.getHostCard(), unlessCost) {
+                    @Override
+                    public void resolve() {
+                        ;
+                    }
+                };
+                
+                final Command unpaidCommand = new Command() {
+                    private static final long serialVersionUID = 8094833091127334678L;
+                    
+                    public void execute() {
+                    	removeFromStack(tgtSA,sa);
+                    }
+                };
+                
+                if(AllZone.Stack.peek().getActivatingPlayer().isHuman()) {
+                	GameActionUtil.payManaDuringAbilityResolve(af.getHostCard() + "\r\n", ability.getManaCost(), 
+                			Command.Blank, unpaidCommand);
+                } else {
+                    if(ComputerUtil.canPayCost(ability)) ComputerUtil.playNoStack(ability);
+                    else {
+                        removeFromStack(tgtSA,sa);
+                    }
+                }
+                doExtraActions(tgtSA,sa);
 			}
-			else if(destination.equals("Graveyard")) {
-				AllZone.GameAction.moveToGraveyard(tgtSA.getSourceCard());
+			else
+			{
+				removeFromStack(tgtSA,sa);
+				doExtraActions(tgtSA,sa);
 			}
-			else if(destination.equals("Exile")) {
-				AllZone.GameAction.exile(tgtSA.getSourceCard());
-			}
-			else if(destination.equals("Topdeck")) {
-				AllZone.GameAction.moveToTopOfLibrary(tgtSA.getSourceCard());
-			}
-			else if(destination.equals("Hand")) {
-				AllZone.GameAction.moveToHand(tgtSA.getSourceCard());
-			}
-			else if(destination.equals("BottomDeck")) {
-				AllZone.GameAction.moveToBottomOfLibrary(tgtSA.getSourceCard());
-			}
-			else if(destination.equals("Shuffle")) {
-				AllZone.GameAction.moveToBottomOfLibrary(tgtSA.getSourceCard());
-				tgtSA.getSourceCard().getController().shuffle();
-			}
-			else {
-				throw new IllegalArgumentException("AbilityFactory_CounterMagic: Invalid Destination argument for card " + source.getName());
-			}
-
-			for(int ea = 0; ea < splitExtraActions.length; ea++) {
-				boolean isOptional = false;
-
-				if(splitExtraActions[0].equals("None")) {
-					break;
-				}
-				String ActionID = splitExtraActions[ea].substring(0,splitExtraActions[ea].indexOf('('));
-
-				Player Target = null;
-
-				String ActionParams = splitExtraActions[ea].substring(splitExtraActions[ea].indexOf('(')+1);
-				ActionParams = ActionParams.substring(0,ActionParams.length()-1);
-
-				String[] SplitActionParams = ActionParams.split(",");
-
-				System.out.println("Extra Action: " + ActionID);
-				System.out.println("Parameters: " + ActionParams);
-
-				if(ActionID.startsWith("My-")) {
-					ActionID = ActionID.substring(3);
-					Target = source.getController();
-				}
-				else if(ActionID.startsWith("Opp-")) {
-					ActionID = ActionID.substring(4);
-					Target = source.getController().getOpponent();
-				}
-				else if(ActionID.startsWith("CC-")) {
-					ActionID = ActionID.substring(3);
-					Target = tgtSA.getSourceCard().getController();
-				}
-
-				if(ActionID.startsWith("May-")) {
-					ActionID = ActionID.substring(4);
-					isOptional = true;
-				}
-
-				if(ActionID.equals("Draw")) {
-					if(isOptional) {
-						if(Target == AllZone.HumanPlayer) {
-							if(GameActionUtil.showYesNoDialog(source, "Do you want to draw " + SplitActionParams[0] + " card(s)?")) {
-								Target.drawCards(Integer.parseInt(SplitActionParams[0]));
-							}
-						}
-						else {
-							//AI decision-making, only draws a card if it doesn't risk discarding it.
-							if(AllZone.getZone(Constant.Zone.Hand,AllZone.ComputerPlayer).getCards().length + Integer.parseInt(SplitActionParams[0]) < 6) {
-								Target.drawCards(Integer.parseInt(SplitActionParams[0]));
-							}
-						}
-					}
-					else {
-						Target.drawCards(Integer.parseInt(SplitActionParams[0]));
-					}
-
-				}
-				else if(ActionID.equals("Discard")) {
-					if(isOptional) {
-						if(Target == AllZone.HumanPlayer) {
-							if(GameActionUtil.showYesNoDialog(source, "Do you want to discard " + SplitActionParams[0] + " card(s)?")) {
-								Target.discard(Integer.parseInt(SplitActionParams[0]), sa, true);
-							}
-						}
-						else {
-							//AI decisionmaking. Should take Madness cards and the like into account in the future.  Right now always refuses to discard.
-						}
-					}
-					else {
-						Target.discard(Integer.parseInt(SplitActionParams[0]), sa, true);
-					}
-				}
-				else if(ActionID.equals("LoseLife")) {
-					if(isOptional) {
-						if(Target == AllZone.HumanPlayer) {
-							if(GameActionUtil.showYesNoDialog(source, "Do you want to lose " + SplitActionParams[0] + " life?")) {
-								Target.loseLife(Integer.parseInt(SplitActionParams[0]), source);
-							}
-						}
-						else {
-							//AI decisionmaking. Not sure why one would ever want to agree to this, except for the rare case of Near-Death Experience+Ali Baba.
-						}
-					}
-					else {
-						Target.loseLife(Integer.parseInt(SplitActionParams[0]), source);
-					}
-
-				}
-				else if(ActionID.equals("GainLife")) {
-					if(isOptional) {
-						if(Target == AllZone.HumanPlayer) {
-							if(AllZone.Display.getChoice("Do you want to gain" + SplitActionParams[0] + "life?","Yes","No").equals("Yes")) {
-								Target.gainLife(Integer.parseInt(SplitActionParams[0]), source);
-							}
-						}
-						else {
-							//AI decisionmaking. Not sure why one would ever want to decline this, except for the rare case of Near-Death Experience.
-							Target.gainLife(Integer.parseInt(SplitActionParams[0]), source);
-						}
-					}
-					else {
-						Target.gainLife(Integer.parseInt(SplitActionParams[0]), source);
-					}
-				}
-				else if(ActionID.equals("RevealHand")) {
-					if(isOptional) {
-						System.out.println(Target);
-						if(Target == AllZone.HumanPlayer) {
-							if(AllZone.Display.getChoice("Do you want to reveal your hand?","Yes","No").equals("Yes")) {
-								//Does nothing now, of course, but sometime in the future the AI may be able to remember cards revealed and prioritize discard spells accordingly.
-							}
-						}
-						else {
-							//AI decisionmaking. Not sure why one would ever want to agree to this
-						}
-					}
-					else {
-						System.out.println(Target);
-						if(Target == AllZone.HumanPlayer) {
-							//Does nothing now, of course, but sometime in the future the AI may be able to remember cards revealed and prioritize discard spells accordingly.
-						}
-						else {
-							CardList list = new CardList(AllZone.getZone(Constant.Zone.Hand,AllZone.ComputerPlayer).getCards());
-							AllZone.Display.getChoiceOptional("Revealed cards",list.toArray());
-						}
-					}
-				}
-				else if(ActionID.equals("RearrangeTopOfLibrary")) {
-					if(isOptional) {
-						if(Target == AllZone.HumanPlayer) {
-							if(AllZone.Display.getChoice("Do you want to rearrange the top " + SplitActionParams[0] + " cards of your library?","Yes","No").equals("Yes")) {
-								AllZoneUtil.rearrangeTopOfLibrary(Target, Integer.parseInt(SplitActionParams[0]), false);
-							}
-						}
-						else {
-							//AI decisionmaking. AI simply can't atm, and wouldn't know how best to do it anyway.
-						}
-					}
-					else {
-						if(Target == AllZone.HumanPlayer) {
-							AllZoneUtil.rearrangeTopOfLibrary(Target, Integer.parseInt(SplitActionParams[0]), false);
-						}
-						else {
-							CardList list = new CardList(AllZone.getZone(Constant.Zone.Hand,AllZone.ComputerPlayer).getCards());
-							AllZone.Display.getChoiceOptional("Revealed cards",list.toArray());
-						}
-					}
-				}
-				else {
-					throw new IllegalArgumentException("AbilityFactory_CounterMagic: Invalid Extra Action for card " + sa.getSourceCard().getName());
-				}
-			}
+			
 		}
-
-		//end copied from spCounter
-		//}
 
 		if (af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
@@ -316,6 +173,7 @@ public class AbilityFactory_CounterMagic {
 
 		//reset tgts
 		tgt[0] = null;
+		
 	}
 
 	private String counterStackDescription(AbilityFactory af, SpellAbility sa){
@@ -372,7 +230,193 @@ public class AbilityFactory_CounterMagic {
 		Ability_Sub subAb = sa.getSubAbility();
 		if (subAb != null)
 			toReturn &= subAb.chkAI_Drawback();
+		
 		return toReturn;
+	}
+	
+	private void removeFromStack(SpellAbility tgtSA,SpellAbility srcSA)
+	{
+		AllZone.Stack.remove(tgtSA);
+		
+		if(tgtSA.isAbility())  {
+			//For Ability-targeted counterspells - do not move it anywhere, even if Destination$ is specified.
+		}
+		else if(destination.equals("Graveyard")) {
+			AllZone.GameAction.moveToGraveyard(tgtSA.getSourceCard());
+		}
+		else if(destination.equals("Exile")) {
+			AllZone.GameAction.exile(tgtSA.getSourceCard());
+		}
+		else if(destination.equals("Topdeck")) {
+			AllZone.GameAction.moveToTopOfLibrary(tgtSA.getSourceCard());
+		}
+		else if(destination.equals("Hand")) {
+			AllZone.GameAction.moveToHand(tgtSA.getSourceCard());
+		}
+		else if(destination.equals("BottomDeck")) {
+			AllZone.GameAction.moveToBottomOfLibrary(tgtSA.getSourceCard());
+		}
+		else if(destination.equals("Shuffle")) {
+			AllZone.GameAction.moveToBottomOfLibrary(tgtSA.getSourceCard());
+			tgtSA.getSourceCard().getController().shuffle();
+		}
+		else {
+			throw new IllegalArgumentException("AbilityFactory_CounterMagic: Invalid Destination argument for card " + srcSA.getSourceCard().getName());
+		}		
+	}
+	
+	private void doExtraActions(SpellAbility tgtSA,SpellAbility srcSA)
+	{
+		for(int ea = 0; ea < splitExtraActions.length; ea++) {
+			boolean isOptional = false;
+
+			if(splitExtraActions[0].equals("None")) {
+				break;
+			}
+			String ActionID = splitExtraActions[ea].substring(0,splitExtraActions[ea].indexOf('('));
+
+			Player Target = null;
+
+			String ActionParams = splitExtraActions[ea].substring(splitExtraActions[ea].indexOf('(')+1);
+			ActionParams = ActionParams.substring(0,ActionParams.length()-1);
+
+			String[] SplitActionParams = ActionParams.split(",");
+
+			System.out.println("Extra Action: " + ActionID);
+			System.out.println("Parameters: " + ActionParams);
+
+			if(ActionID.startsWith("My-")) {
+				ActionID = ActionID.substring(3);
+				Target = srcSA.getSourceCard().getController();
+			}
+			else if(ActionID.startsWith("Opp-")) {
+				ActionID = ActionID.substring(4);
+				Target = srcSA.getSourceCard().getController().getOpponent();
+			}
+			else if(ActionID.startsWith("CC-")) {
+				ActionID = ActionID.substring(3);
+				Target = tgtSA.getSourceCard().getController();
+			}
+
+			if(ActionID.startsWith("May-")) {
+				ActionID = ActionID.substring(4);
+				isOptional = true;
+			}
+
+			if(ActionID.equals("Draw")) {
+				if(isOptional) {
+					if(Target == AllZone.HumanPlayer) {
+						if(GameActionUtil.showYesNoDialog(srcSA.getSourceCard(), "Do you want to draw " + SplitActionParams[0] + " card(s)?")) {
+							Target.drawCards(Integer.parseInt(SplitActionParams[0]));
+						}
+					}
+					else {
+						//AI decision-making, only draws a card if it doesn't risk discarding it.
+						if(AllZone.getZone(Constant.Zone.Hand,AllZone.ComputerPlayer).getCards().length + Integer.parseInt(SplitActionParams[0]) < 6) {
+							Target.drawCards(Integer.parseInt(SplitActionParams[0]));
+						}
+					}
+				}
+				else {
+					Target.drawCards(Integer.parseInt(SplitActionParams[0]));
+				}
+
+			}
+			else if(ActionID.equals("Discard")) {
+				if(isOptional) {
+					if(Target == AllZone.HumanPlayer) {
+						if(GameActionUtil.showYesNoDialog(srcSA.getSourceCard(), "Do you want to discard " + SplitActionParams[0] + " card(s)?")) {
+							Target.discard(Integer.parseInt(SplitActionParams[0]), srcSA, true);
+						}
+					}
+					else {
+						//AI decisionmaking. Should take Madness cards and the like into account in the future.  Right now always refuses to discard.
+					}
+				}
+				else {
+					Target.discard(Integer.parseInt(SplitActionParams[0]), srcSA, true);
+				}
+			}
+			else if(ActionID.equals("LoseLife")) {
+				if(isOptional) {
+					if(Target == AllZone.HumanPlayer) {
+						if(GameActionUtil.showYesNoDialog(srcSA.getSourceCard(), "Do you want to lose " + SplitActionParams[0] + " life?")) {
+							Target.loseLife(Integer.parseInt(SplitActionParams[0]), srcSA.getSourceCard());
+						}
+					}
+					else {
+						//AI decisionmaking. Not sure why one would ever want to agree to this, except for the rare case of Near-Death Experience+Ali Baba.
+					}
+				}
+				else {
+					Target.loseLife(Integer.parseInt(SplitActionParams[0]), srcSA.getSourceCard());
+				}
+
+			}
+			else if(ActionID.equals("GainLife")) {
+				if(isOptional) {
+					if(Target == AllZone.HumanPlayer) {
+						if(AllZone.Display.getChoice("Do you want to gain" + SplitActionParams[0] + "life?","Yes","No").equals("Yes")) {
+							Target.gainLife(Integer.parseInt(SplitActionParams[0]), srcSA.getSourceCard());
+						}
+					}
+					else {
+						//AI decisionmaking. Not sure why one would ever want to decline this, except for the rare case of Near-Death Experience.
+						Target.gainLife(Integer.parseInt(SplitActionParams[0]), srcSA.getSourceCard());
+					}
+				}
+				else {
+					Target.gainLife(Integer.parseInt(SplitActionParams[0]), srcSA.getSourceCard());
+				}
+			}
+			else if(ActionID.equals("RevealHand")) {
+				if(isOptional) {
+					System.out.println(Target);
+					if(Target == AllZone.HumanPlayer) {
+						if(AllZone.Display.getChoice("Do you want to reveal your hand?","Yes","No").equals("Yes")) {
+							//Does nothing now, of course, but sometime in the future the AI may be able to remember cards revealed and prioritize discard spells accordingly.
+						}
+					}
+					else {
+						//AI decisionmaking. Not sure why one would ever want to agree to this
+					}
+				}
+				else {
+					System.out.println(Target);
+					if(Target == AllZone.HumanPlayer) {
+						//Does nothing now, of course, but sometime in the future the AI may be able to remember cards revealed and prioritize discard spells accordingly.
+					}
+					else {
+						CardList list = new CardList(AllZone.getZone(Constant.Zone.Hand,AllZone.ComputerPlayer).getCards());
+						AllZone.Display.getChoiceOptional("Revealed cards",list.toArray());
+					}
+				}
+			}
+			else if(ActionID.equals("RearrangeTopOfLibrary")) {
+				if(isOptional) {
+					if(Target == AllZone.HumanPlayer) {
+						if(AllZone.Display.getChoice("Do you want to rearrange the top " + SplitActionParams[0] + " cards of your library?","Yes","No").equals("Yes")) {
+							AllZoneUtil.rearrangeTopOfLibrary(Target, Integer.parseInt(SplitActionParams[0]), false);
+						}
+					}
+					else {
+						//AI decisionmaking. AI simply can't atm, and wouldn't know how best to do it anyway.
+					}
+				}
+				else {
+					if(Target == AllZone.HumanPlayer) {
+						AllZoneUtil.rearrangeTopOfLibrary(Target, Integer.parseInt(SplitActionParams[0]), false);
+					}
+					else {
+						CardList list = new CardList(AllZone.getZone(Constant.Zone.Hand,AllZone.ComputerPlayer).getCards());
+						AllZone.Display.getChoiceOptional("Revealed cards",list.toArray());
+					}
+				}
+			}
+			else {
+				throw new IllegalArgumentException("AbilityFactory_CounterMagic: Invalid Extra Action for card " + srcSA.getSourceCard().getName());
+			}
+		}
 	}
 
 	private static boolean matchSpellAbility(Card srcCard, SpellAbility sa, String[] splitRestrictions, String targetType) {

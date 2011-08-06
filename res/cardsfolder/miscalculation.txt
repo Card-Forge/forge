@@ -1,7 +1,8 @@
 Name:Miscalculation
 ManaCost:1 U
 Types:Instant
-Text:Counter target spell unless its controller pays 2.
+Text:no text
+A:SP$Counter | Cost$ 1 U | Type$ Spell | UnlessCost$ 2 | SpellDescription$ Counter target spell unless its controller pays 2.
 K:Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/miscalculation.jpg
