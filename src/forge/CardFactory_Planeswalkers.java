@@ -197,8 +197,8 @@ class CardFactory_Planeswalkers {
                 }//showMessage()
             });
             
-            ability1.setDescription("+1: Put a white 1/1 Soldier creature token into play.");
-            ability1.setStackDescription("Elspeth, Knight-Errant - put 1/1 token into play.");
+            ability1.setDescription("+1: Put a 1/1 white Soldier creature token onto the battlefield.");
+            ability1.setStackDescription("Elspeth, Knight-Errant - put 1/1 token onto the battlefield.");
             card.addSpellAbility(ability1);
             
             ability2.setDescription("+1: Target creature gets +3/+3 and gains flying until end of turn.");
@@ -519,7 +519,7 @@ class CardFactory_Planeswalkers {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Ajani Goldmane")) {
-            //computer only plays ability 1 and 3, gain life and put X\X token into play
+            //computer only plays ability 1 and 3, gain life and put X/X token onto battlefield
             final int turn[] = new int[1];
             turn[0] = -1;
             
@@ -704,8 +704,8 @@ class CardFactory_Planeswalkers {
             ability2.setStackDescription("Ajani Goldmane - Put a +1/+1 counter on each creature you control. They get vigilance.");
             card.addSpellAbility(ability2);
             
-            ability3.setDescription("-6: Put a white Avatar creature token into play with \"This creature's power and toughness are each equal to your life total.\"");
-            ability3.setStackDescription("Ajani Goldmane - Put X\\X white Avatar creature token into play.");
+            ability3.setDescription("-6: Put a white Avatar creature token onto the battlefield. It has \"This creature's power and toughness are each equal to your life total.\"");
+            ability3.setStackDescription("Ajani Goldmane - Put a X/X white Avatar creature token onto the battlefield.");
             card.addSpellAbility(ability3);
             
             card.setSVars(card.getSVars());
@@ -714,6 +714,7 @@ class CardFactory_Planeswalkers {
             return card;
         }
         //*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Liliana Vess")) {
@@ -919,8 +920,8 @@ class CardFactory_Planeswalkers {
             ability2.setStackDescription("Liliana Vess - Search your library for a card, then shuffle your library and put that card on top of it.");
             card.addSpellAbility(ability2);
             
-            ability3.setDescription("-8: Put all creature cards in all graveyards into play under your control.");
-            ability3.setStackDescription("Liliana Vess - Put all creature cards in all graveyards into play under your control.");
+            ability3.setDescription("-8: Put all creature cards in all graveyards onto the battlefield under your control.");
+            ability3.setStackDescription(cardName+" - Put all creature cards in all graveyards onto the battlefield under your control.");
             card.addSpellAbility(ability3);
             
             card.setSVars(card.getSVars());
@@ -1314,10 +1315,9 @@ class CardFactory_Planeswalkers {
                 }
             };//Input
             StringBuilder stack2 = new StringBuilder();
-            stack2.append(card.getName()).append(" -  Put a 3/3 green Beast creature token into play.");
+            stack2.append(card.getName()).append(" -  Put a 3/3 green Beast creature token onto the battlefield.");
             ability2.setStackDescription(stack2.toString());
-            // ability2.setStackDescription(card.getName() + " -  Put a 3/3 green Beast creature token into play.");
-            ability2.setDescription("-1: Put a 3/3 green Beast creature token into play.");
+            ability2.setDescription("-1: Put a 3/3 green Beast creature token onto the battlefield.");
             ability2.setBeforePayMana(runtime2);
             card.addSpellAbility(ability2);
             //end ability 2
@@ -1402,8 +1402,6 @@ class CardFactory_Planeswalkers {
             StringBuilder stack3 = new StringBuilder();
             stack3.append(card.getName()).append(" -  Creatures you control get +3/+3 and trample until end of turn.");
             ability3.setStackDescription(stack3.toString());
-            // ability3.setStackDescription(card.getName()
-            //         + " -  Creatures you control get +3/+3 and trample until end of turn.");
             ability3.setDescription("-4: Creatures you control get +3/+3 and trample until end of turn.");
             ability3.setBeforePayMana(runtime3);
             card.addSpellAbility(ability3);
@@ -1414,6 +1412,7 @@ class CardFactory_Planeswalkers {
             
             return card;
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Ajani Vengeant")) {
@@ -1463,57 +1462,8 @@ class CardFactory_Planeswalkers {
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }//canPlay()
-                
-                
-                
-                /*
-                Card getPermanent() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-                    int highestCost = 0;
-                    Card bestCard = null;
-                    CardList perms = new CardList(play.getCards());
-                    perms = perms.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return CardFactoryUtil.canTarget(card, c);
-                        }
-                    });
-                    
-                    for(int i = 0; i < perms.size(); i++) {
-                        if(CardUtil.getConvertedManaCost(perms.get(i).getManaCost()) > highestCost
-                                && perms.get(i).isTapped()) {
-                            highestCost = CardUtil.getConvertedManaCost(perms.get(i).getManaCost());
-                            bestCard = perms.get(i);
-                        }
-                    }
-                    if(bestCard == null && perms.size() > 0) {
-                        bestCard = perms.get(0);
-                        return bestCard;
-                    }
-                    
-                    return null;
-                }
-                */
     			
             };//SpellAbility ability1
-            
-            /*
-            ability1.setBeforePayMana(new Input()
-            {
-              private static final long serialVersionUID = 9167121234861249451L;
-              
-              int check = -1;
-               public void showMessage()
-               {
-                 if(check != AllZone.Phase.getTurn())
-                 {
-                   check = AllZone.Phase.getTurn();
-                   turn[0] = AllZone.Phase.getTurn();
-                   AllZone.Stack.add(ability1);
-                 }
-                 stop();
-               }//showMessage()
-            });
-             */
             ability1.setDescription("+1: Target permanent doesn't untap during its controller's next untap step.");
             ability1.setBeforePayMana(CardFactoryUtil.input_targetPermanent(ability1));
             
@@ -1576,7 +1526,6 @@ class CardFactory_Planeswalkers {
                         AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
                     } else if((card.isCreature() || card.isPlaneswalker()) && zone.is(Constant.Zone.Battlefield)) {
                         ability2.setTargetCard(card);
-                        //stopSetNext(new Input_PayManaCost(ability2));
                         AllZone.Stack.add(ability2);
                         stop();
                     }
@@ -1585,7 +1534,6 @@ class CardFactory_Planeswalkers {
                 @Override
                 public void selectPlayer(Player player) {
                     ability2.setTargetPlayer(player);
-                    //stopSetNext(new Input_PayManaCost(ability2));
                     AllZone.Stack.add(ability2);
                     stop();
                 }
@@ -1643,6 +1591,7 @@ class CardFactory_Planeswalkers {
             
             return card;
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Tezzeret the Seeker")) {
@@ -1788,8 +1737,6 @@ class CardFactory_Planeswalkers {
             stack2.append(card.getName());
             stack2.append(" - Search your library for an artifact card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.");
             ability2.setStackDescription(stack2.toString());
-            // ability2.setStackDescription(card.getName()
-            //         + " - Search your library for an artifact card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.");
             card.addSpellAbility(ability2);
             
 
@@ -1834,20 +1781,6 @@ class CardFactory_Planeswalkers {
                                         final int id = art[0].getUniqueNumber();
                                         
                                         Card tempCard = tempCardMap.get(id);
-                                        
-                                        //CardList cl = new CardList();
-                                        /*
-                                        cl = cl.filter(new CardListFilter(){
-                                        	public boolean addCard(Card c)
-                                        	{
-                                        		
-                                        		return c.getUniqueNumber() == id;
-                                        	}
-                                        });
-                                        */
-
-                                        //Card temp = cl.get(0);
-                                        
                                         art[0].setBaseAttack(tempCard.getBaseAttack());
                                         art[0].setBaseDefense(tempCard.getBaseDefense());
                                         
@@ -1911,8 +1844,6 @@ class CardFactory_Planeswalkers {
             StringBuilder stack3 = new StringBuilder();
             stack3.append(card.getName()).append(" - Artifacts you control become 5/5 artifact creatures until end of turn.");
             ability3.setStackDescription(stack3.toString());
-            // ability3.setStackDescription(card.getName()
-            //         + " - Artifacts you control become 5/5 artifact creatures until end of turn.");
             card.addSpellAbility(ability3);
             
             card.setSVars(card.getSVars());
@@ -1920,6 +1851,7 @@ class CardFactory_Planeswalkers {
             
             return card;
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Sarkhan Vol")) {
@@ -1998,8 +1930,6 @@ class CardFactory_Planeswalkers {
             StringBuilder stack1 = new StringBuilder();
             stack1.append(card.getName()).append(" - Creatures you control get +1/+1 and gain haste until end of turn.");
             ability1.setStackDescription(stack1.toString());
-            // ability1.setStackDescription(card.getName()
-            //         + " - Creatures you control get +1/+1 and gain haste until end of turn.");
             ability1.setDescription("+1: Creatures you control get +1/+1 and gain haste until end of turn.");
             ability1.setBeforePayMana(runtime1);
             card.addSpellAbility(ability1);
@@ -2114,8 +2044,6 @@ class CardFactory_Planeswalkers {
             StringBuilder stack3 = new StringBuilder();
             stack3.append(card.getName()).append(" - Put five 4/4 red Dragon creature tokens with flying onto the battlefield.");
             ability3.setStackDescription(stack3.toString());
-            // ability3.setStackDescription(card.getName()
-            //         + " - Put five 4/4 red Dragon creature tokens with flying onto the battlefield.");
             ability3.setDescription("-6: Put five 4/4 red Dragon creature tokens with flying onto the battlefield.");
             card.addSpellAbility(ability3);
             //end ability 3
@@ -2386,7 +2314,6 @@ class CardFactory_Planeswalkers {
             StringBuilder stack1 = new StringBuilder();
             stack1.append(card.getName()).append(" - Reveal top card and do damage.");
             ability1.setStackDescription(stack1.toString());
-            // ability1.setStackDescription(cardName + " - Reveal top card and do damage.");
             
             //ability2
             /*
@@ -2505,6 +2432,7 @@ class CardFactory_Planeswalkers {
             
             return card;
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Koth of the Hammer")) {
@@ -2742,6 +2670,7 @@ class CardFactory_Planeswalkers {
         }
         //*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Venser, the Sojourner")) {
             
@@ -2931,16 +2860,7 @@ class CardFactory_Planeswalkers {
                     emblem.setOwner(card.getOwner());
                     
                     PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    play.add(emblem);
-                    
-                    /*
-                    //AllZone.GameAction.checkStateEffects();
-                    AllZone.StaticEffects.rePopulateStateBasedList();
-                    for(String effect:AllZone.StaticEffects.getStateBasedMap().keySet()) {
-                        Command com = GameActionUtil.commands.get(effect);
-                        com.execute();
-                    }           
-                    */           
+                    play.add(emblem);        
                 }
                 
                 @Override
@@ -2979,7 +2899,6 @@ class CardFactory_Planeswalkers {
             StringBuilder stack3 = new StringBuilder();
             stack3.append(card.getName()).append("You get an emblem with \"Whenever you cast a spell, exile target permanent.\"");
             ability3.setStackDescription(stack3.toString());
-            // ability3.setStackDescription(card + "You get an emblem with \"Whenever you cast a spell, exile target permanent.\"");
             card.addSpellAbility(ability3);
             
             card.setSVars(card.getSVars());
