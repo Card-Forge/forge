@@ -2,7 +2,7 @@ Name:Unhinge
 ManaCost:2 B
 Types:Sorcery
 Text:no text
-K:spDiscardTgt:TgtChoose:1:Target player discards a card.:Unhinge - target player discards a card
+A:SP$Discard|Cost$2 B|ValidTgts$Player|NumCards$1|Mode$TgtChoose|SpellDescription$Target player discards a card.
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unhinge.jpg
