@@ -6345,6 +6345,7 @@ res/cardsfolder/stonework_puma.txt -text svneol=native#text/plain
 res/cardsfolder/stonybrook_angler.txt -text svneol=native#text/plain
 res/cardsfolder/stonybrook_banneret.txt -text svneol=native#text/plain
 res/cardsfolder/stonybrook_schoolmaster.txt -text svneol=native#text/plain
+res/cardsfolder/storm_cauldron.txt svneol=native#text/plain
 res/cardsfolder/storm_crow.txt -text svneol=native#text/plain
 res/cardsfolder/storm_elemental.txt svneol=native#text/plain
 res/cardsfolder/storm_entity.txt -text svneol=native#text/plain
