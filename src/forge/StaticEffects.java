@@ -161,7 +161,6 @@ public class StaticEffects
 		cardToEffectsList.put("Tolsimir Wolfblood", new String[] {"Tolsimir"});
 		cardToEffectsList.put("Imperious Perfect", new String[] {"Imperious_Perfect"});
 		//cardToEffectsList.put("Mad Auntie", new String[] {"Mad_Auntie"});
-		//cardToEffectsList.put("Veteran Armorer", new String[] {"Veteran_Armorer"});
 		cardToEffectsList.put("Kongming, \"Sleeping Dragon\"", new String[] {"Kongming"});
 		cardToEffectsList.put("Radiant, Archangel", new String[] {"Radiant_Archangel"});
 		cardToEffectsList.put("Castle", new String[] {"Castle"});
@@ -191,12 +190,10 @@ public class StaticEffects
 		cardToEffectsList.put("Madrush Cyclops", new String[] {"Madrush_Cyclops"});
 		cardToEffectsList.put("Rolling Stones", new String[] {"Rolling_Stones"});
 		cardToEffectsList.put("Sun Quan, Lord of Wu", new String[] {"Sun_Quan"});
-		//cardToEffectsList.put("Kobold Overlord", new String[] {"Kobold_Overlord"});
 		cardToEffectsList.put("Kinsbaile Cavalier", new String[] {"Kinsbaile_Cavalier"});
 		cardToEffectsList.put("Wren's Run Packmaster", new String[] {"Wrens_Run_Packmaster"});
 		
 		cardToEffectsList.put("Sliver Legion", new String[] {"Sliver_Legion"});
-		cardToEffectsList.put("Muscle Sliver", new String[] {"Muscle_Sliver"});
 		cardToEffectsList.put("Bonesplitter Sliver", new String[] {"Bonesplitter_Sliver"});
 		cardToEffectsList.put("Might Sliver", new String[] {"Might_Sliver"});
 		cardToEffectsList.put("Watcher Sliver", new String[] {"Watcher_Sliver"});

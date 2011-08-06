@@ -11381,43 +11381,6 @@ public class GameActionUtil {
 		}// execute()
 	}; //Rolling Stones
 	
-	/*
-	public static Command Kobold_Overlord             = new Command() {
-		private static final long serialVersionUID   = 4620370378774187573L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "First Strike";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Kobold Overlord");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Kobold");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(!c.getKeyword().contains("First Strike")) {
-						c.addExtrinsicKeyword(keyword);
-						gloriousAnthemList.add(c);
-					}
-				}// for inner
-			}// for outer
-		}// execute()
-	};
-	*/
-	
 	public static Command Mul_Daya_Channelers          = new Command() {
 		private static final long serialVersionUID   = -2543659953307485051L;
 
@@ -13415,24 +13378,17 @@ public class GameActionUtil {
 			}
 
 			list.clear();
-			CardList cards = new CardList();
-			cards.addAll(AllZone.Human_Play.getCards());
-			cards.addAll(AllZone.Computer_Play.getCards());
-			cards = cards.getName("Cover of Darkness");
+			CardList cards = AllZoneUtil.getCardsInPlay("Cover of Darkness");
 
 			for(int outer = 0; outer < cards.size(); outer++) {
 				Card card = cards.get(outer);
 
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType(card.getChosenType());
+				CardList creature = AllZoneUtil.getTypeInPlay(card.getChosenType());
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
 					if(c.getType().contains(card.getChosenType())
-							|| c.getKeyword().contains(
-									"Changeling")) {
+							|| c.getKeyword().contains("Changeling")) {
 						c.addExtrinsicKeyword("Fear");
 						gloriousAnthemList.add(c);
 					}
@@ -14111,40 +14067,6 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	}; // Watcher_Sliver
-
-	public static Command Muscle_Sliver               = new Command() {
-		private static final long serialVersionUID   = -2791476542570951362L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Muscle Sliver");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addSemiPermanentAttackBoost(1);
-					c.addSemiPermanentDefenseBoost(1);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Muscles_Sliver
 	
 	public static Command Sliver_Legion               = new Command() {
 		private static final long serialVersionUID   = -4564640511791858445L;
@@ -19026,41 +18948,7 @@ public class GameActionUtil {
 		}
 	}; // Radiant, Archangel
 
-	/*
-	public static Command Veteran_Armorer             = new Command() {
-		private static final long serialVersionUID = 6081997041540911467L;
-
-		CardList                  old              = new CardList();
-
-		public void execute() {
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < old.size(); i++) {
-				c = old.get(i);
-				c.addSemiPermanentDefenseBoost(-1);
-			}
-
-			// add +1/+1 to cards
-			old.clear();
-			PlayerZone[] zone = getZone("Veteran Armorer");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Creature");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addSemiPermanentDefenseBoost(1);
-
-					old.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Veteran_Armorer
-	*/
-
+	
 	public static Command Kongming					 = new Command() {
 
 		private static final long serialVersionUID = 5376204832608673379L;
@@ -20935,7 +20823,6 @@ public class GameActionUtil {
 		commands.put("Imperious_Perfect", Imperious_Perfect);
 		//commands.put("Mad_Auntie", Mad_Auntie);
 
-		//commands.put("Veteran_Armorer", Veteran_Armorer);
 		commands.put("Kongming", Kongming);
 		commands.put("Radiant_Archangel", Radiant_Archangel);
 		commands.put("Castle", Castle);
@@ -20971,20 +20858,21 @@ public class GameActionUtil {
 		commands.put("Sun_Quan", Sun_Quan);
 
 		commands.put("Rolling_Stones", Rolling_Stones);
-		//commands.put("Kobold_Overlord", Kobold_Overlord);
 		commands.put("Kinsbaile_Cavalier", Kinsbaile_Cavalier);
 		commands.put("Wrens_Run_Packmaster", Wrens_Run_Packmaster);
+		
+		////////////////////
 
 		commands.put("Sliver_Legion", Sliver_Legion);
-		commands.put("Muscle_Sliver", Muscle_Sliver);
-
+		
 		commands.put("Bonesplitter_Sliver", Bonesplitter_Sliver);
 		commands.put("Might_Sliver", Might_Sliver);
+		
 		commands.put("Watcher_Sliver", Watcher_Sliver);
-
 		commands.put("Plated_Sliver", Plated_Sliver);
 		commands.put("Crystalline_Sliver", Crystalline_Sliver);
 		commands.put("Virulent_Sliver", Virulent_Sliver);
+		
 		commands.put("Sidewinder_Sliver", Sidewinder_Sliver);
 		commands.put("Essence_Sliver", Essence_Sliver);
 		commands.put("Sinew_Sliver", Sinew_Sliver);
@@ -20993,8 +20881,9 @@ public class GameActionUtil {
 		commands.put("Heart_Sliver", Heart_Sliver);
 		commands.put("Reflex_Sliver", Reflex_Sliver);
 		commands.put("Gemhide_Sliver", Gemhide_Sliver);
-
 		commands.put("Blade_Sliver", Blade_Sliver);
+		
+		///////////////////
 
 		commands.put("Marrow_Gnawer", Marrow_Gnawer);
 
