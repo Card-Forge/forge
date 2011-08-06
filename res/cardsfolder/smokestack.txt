@@ -1,5 +1,5 @@
 Name:Smokestack
-ManaCost:3
+ManaCost:4
 Types:Artifact
 Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You |TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ At the beginning of your upkeep .
