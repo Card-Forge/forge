@@ -8020,6 +8020,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
 
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Kazandu Tuskcaller"))
         {
@@ -8355,6 +8356,7 @@ public class CardFactory_Creatures {
         	card.addTurnFaceUpCommand(turnsFaceUp);
         }//*************** END ************ END **************************
 
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Storm Entity")) {
         	final SpellAbility intoPlay = new Ability(card, "0") {
@@ -8387,6 +8389,7 @@ public class CardFactory_Creatures {
         	
         	card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END ************************** 
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Dawnglare Invoker")) {
@@ -8774,22 +8777,6 @@ public class CardFactory_Creatures {
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
         
-        /*
-        //*************** START *********** START **************************
-        else if (cardName.equals("Yavimaya Elder")) {
-    	        
-    	        final Command destroy = new Command()
-    	        {
-					private static final long serialVersionUID = -5552202665064265632L;
-
-					public void execute()
-    	        	{
-    	        		AllZone.GameAction.searchLibraryTwoBasicLand(card.getController(), Constant.Zone.Hand, false, Constant.Zone.Hand, false);
-    	        	}
-    	        };
-    	        card.addDestroyCommand(destroy);   	    
-        }//*************** END ************ END **************************
-       */
         
         //*************** START *********** START **************************
           else if(cardName.equals("Sutured Ghoul")) {
@@ -9023,6 +9010,7 @@ public class CardFactory_Creatures {
         	card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
        
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Banshee")) {
         	/*
@@ -9060,6 +9048,7 @@ public class CardFactory_Creatures {
         	ability.setStackDescription(card.getName()+" - Banshee deals half X damage, rounded down, to target creature or player, and half X damage, rounded up, to you.");
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Shapeshifter")) {
@@ -9428,27 +9417,6 @@ public class CardFactory_Creatures {
             card.addSpellAbility(kicker);
         }//*************** END ************ END **************************
         
-        /* Converteded to AF Trigger
-        //*************** START *********** START **************************
-        else if(cardName.equals("Eater of Days")) {
-        	final Ability ability = new Ability(card, "") {
-        		@Override
-        		public void resolve() {
-        			AllZone.Phase.addExtraTurn(card.getController().getOpponent());
-        			AllZone.Phase.addExtraTurn(card.getController().getOpponent());
-        		}
-        	};
-        	ability.setStackDescription(cardName+" - "+card.getController()+" skips his or her next two turns.");
-        	Command intoPlay = new Command() {
-				private static final long serialVersionUID = 2021250034977097040L;
-
-				public void execute() {
-        			AllZone.Stack.add(ability);
-        		}
-        	};
-        	card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Yosei, the Morning Star")) {
@@ -9662,6 +9630,8 @@ public class CardFactory_Creatures {
 					
 					if (copyTarget[0] != null) {
 						cloned[0] = CardFactory.copyStats(copyTarget[0]);
+						cloned[0].setOwner(card.getController());
+						cloned[0].setController(card.getController());
 						cloned[0].setCloneOrigin(card);
 						cloned[0].addLeavesPlayCommand(leaves);
 						cloned[0].setCloneLeavesPlayCommand(leaves);
@@ -9908,7 +9878,8 @@ public class CardFactory_Creatures {
         	card.addSpellAbility(toExile);
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+      
+        //*************** START *********** START **************************
         else if(cardName.equals("Frost Titan")) {
         	final Trigger targetedTrigger = TriggerHandler.parseTrigger("FrostTitanCounter","Mode$ SpellAbilityCast | TargetsValid$ Card.Self | ValidControllingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigOverridden | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays 2.", card);
         	final Ability FrostTitanCounterAbility = new Ability(card,"0")
@@ -9959,6 +9930,7 @@ public class CardFactory_Creatures {
         	
         	card.addTrigger(targetedTrigger);
         }//*************** END ************ END **************************
+        
         
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
         {
