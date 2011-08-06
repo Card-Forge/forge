@@ -4307,8 +4307,7 @@ public class GameActionUtil {
     	if(c.getKeyword().contains("Whenever this creature deals damage to a player, that player gets a poison counter."))
 			playerCombatDamage_PoisonCounter(c, 1);
     
-    	if(c.getName().equals("Nicol Bolas")) playerCombatDamage_Nicol_Bolas(c);
-		else if(c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")) 
+    	if(c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")) 
 			playerCombatDamage_Whirling_Dervish(c);
 		else if(AllZoneUtil.isCardInPlay("Living Artifact", player)) execute_Living_Artifact(player, damage);
     	
