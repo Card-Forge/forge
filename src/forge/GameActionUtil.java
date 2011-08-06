@@ -50,6 +50,7 @@ public class GameActionUtil {
 		upkeep_Land_Tax();
 		upkeep_Mana_Vault();
 		upkeep_Feedback();
+		upkeep_Unstable_Mutation();
 		upkeep_Warp_Artifact();
 		upkeep_Soul_Bleed();
 		upkeep_Wanderlust();
@@ -6709,6 +6710,43 @@ public class GameActionUtil {
         	}
         }//list > 0
     }//upkeep_Feedback()
+	
+	private static void upkeep_Unstable_Mutation() {
+		final String auraName = "Unstable Mutation";
+        final Player player = AllZone.Phase.getPlayerTurn();
+        
+        CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
+        list = list.filter(new CardListFilter() {
+            public boolean addCard(Card c) {
+                return c.isCreature() && c.isEnchanted();
+            }
+        });
+        
+        if(list.size() > 0) {
+        	Ability ability;
+        	for(final Card creature:list) {
+        		if(creature.isEnchantedBy(auraName)) {
+        			CardList auras = new CardList(creature.getEnchantedBy().toArray());
+        			auras = auras.getName(auraName);
+        			for(Card aura:auras) {
+        				final Card source = aura;
+        				ability = new Ability(source, "0") {
+        					@Override
+        					public void resolve() {
+        						creature.addCounter(Counters.M1M1, 1);
+        					}
+        				};
+        				
+        				StringBuilder sb = new StringBuilder();
+        				sb.append(source.getName()).append(" -  put a -1/-1 counter on ").append(creature.getName());
+        				ability.setStackDescription(sb.toString());
+        				
+                        AllZone.Stack.add(ability);
+        			} 
+        		}
+        	}
+        }//list > 0
+    }//upkeep_Unstable_Mutation()
 	
 	private static void upkeep_Warp_Artifact() {
 		final String auraName = "Warp Artifact";

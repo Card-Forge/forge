@@ -1,0 +1,8 @@
+Name:Unstable Mutation
+ManaCost:U
+Types:Enchantment Aura
+Text:Enchanted creature gets +3/+3.\r\nAt the beginning of the upkeep of enchanted creature's controller, put a -1/-1 counter on that creature.
+K:enPump:+3/+3
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/unstable_mutation.jpg
+End
