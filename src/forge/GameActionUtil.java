@@ -4411,7 +4411,24 @@ public class GameActionUtil {
 		if(destroyed.isLand()) executeDestroyLandCardEffects(c, destroyed);
 		if(destroyed.isEnchantment()) executeDestroyEnchantmentCardEffects(c, destroyed);
 	}
-
+	
+    public static boolean showYesNoDialog(Card c, String question) {
+        
+        StringBuilder title = new StringBuilder();
+        title.append(c.getName()).append(" - Ability");
+        
+        Object answer = null;
+        
+        if (!(question.length() > 0)) {
+            question = "Activate card's ability?";
+        }
+        
+        answer = JOptionPane.showConfirmDialog(null, question, title.toString(), JOptionPane.YES_NO_OPTION);
+        
+        if (answer == null || answer.equals("No")) return false;
+        else return true;
+    }
+/*
 	private static boolean showDialog(Card c) {
 		String[] choices = {"Yes", "No"};
 
@@ -4424,7 +4441,7 @@ public class GameActionUtil {
 	}
 
 	//***CREATURES START HERE***
-
+*/
 	public static void executeDestroyCreatureCardEffects(Card c, Card destroyed) {
 		//if (AllZone.GameAction.isCardInPlay(c)){
 		if(c.getName().equals("Goblin Sharpshooter")) destroyCreature_Goblin_Sharpshooter(c, destroyed);
@@ -4482,51 +4499,54 @@ public class GameActionUtil {
 	}
 
 	private static void destroyCreature_Prowess_of_the_Fair(Card c, Card destroyed) {
-		final Card crd = c;
-		final Card crd2 = c;
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				Player player = crd.getController();
-				if(player.isHuman()) {
-					if(showDialog(crd2)) makeToken();
-				} else makeToken();
-			}
+        final Card crd = c;
+        final Card crd2 = c;
+        
+        Ability ability = new Ability(c, "0") {
+            @Override
+            public void resolve() {
+                Player player = crd.getController();
+                if (player.isHuman()) {
+                    String question = "Put a 1/1 green Elf Warrior creature token onto the battlefield?";
+                    if (showYesNoDialog(crd2, question)) makeToken();
+                } else makeToken();
+            }
 
-			public void makeToken() {
-				CardFactoryUtil.makeToken("Elf Warrior", "G 1 1 Elf Warrior", crd.getController(), "G", new String[] {
-						"Creature", "Elf", "Warrior"}, 1, 1, new String[] {""});
-			}
-		};
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("Prowess of the Fair - ").append(c.getController());
-		sb.append(" may put a 1/1 green Elf Warrior creature token onto the battlefield.");
-		ability.setStackDescription(sb.toString());
-		
-		AllZone.Stack.add(ability);
-	}
+            public void makeToken() {
+                CardFactoryUtil.makeToken("Elf Warrior", "G 1 1 Elf Warrior", crd.getController(), "G", 
+                        new String[] {"Creature", "Elf", "Warrior"}, 1, 1, new String[] {""});
+            }
+        };
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append("Prowess of the Fair - ").append(c.getController());
+        sb.append(" may put a 1/1 green Elf Warrior creature token onto the battlefield.");
+        ability.setStackDescription(sb.toString());
+        
+        AllZone.Stack.add(ability);
+    }
 
 	private static void destroyCreature_Fecundity(Card c, Card destroyed) {
-		final Card crd = destroyed;
-		final Card crd2 = c;
+        final Card crd = destroyed;
+        final Card crd2 = c;
 
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				Player player = crd.getController();
-				if(player.equals(AllZone.HumanPlayer)) {
-					if(showDialog(crd2)) player.drawCard();
-				} else player.drawCard(); //computer
-			}
-		};
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("Fecundity - ").append(destroyed.getController()).append(" may draw a card.");
-		ability.setStackDescription(sb.toString());
+        Ability ability = new Ability(c, "0") {
+            @Override
+            public void resolve() {
+                Player player = crd.getController();
+                if (player.isHuman()) {
+                    String question = "Draw a card?";
+                    if (showYesNoDialog(crd2, question)) player.drawCard();
+                } else player.drawCard(); //computer
+            }
+        };
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append("Fecundity - ").append(destroyed.getController()).append(" may draw a card.");
+        ability.setStackDescription(sb.toString());
 
-		AllZone.Stack.add(ability);
-	}
+        AllZone.Stack.add(ability);
+    }
 
 	private static void destroyCreature_Moonlit_Wake(final Card c, Card destroyed) {
 		Ability ability = new Ability(c, "0") {
