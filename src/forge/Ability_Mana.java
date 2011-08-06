@@ -349,7 +349,11 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     @Override
     public boolean canPlay() {
         Card card = getSourceCard();
-		 if(card.isCreature() == true) {
+        
+        if (card.getController().isComputer())
+        	return false;
+        
+		 if(card.isCreature()) {
     		 
 	 			CardList Silence = AllZoneUtil.getPlayerCardsInPlay(card.getController().getOpponent()); 	
 	     		Silence = Silence.getName("Linvala, Keeper of Silence");
