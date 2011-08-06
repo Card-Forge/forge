@@ -1,7 +1,7 @@
 Name:Plated Rootwalla
 ManaCost:4 G
 Types:Creature Lizard
-Text:Play this ability only once each turn.
+Text:Activate this ability only once each turn.
 PT:3/3
 K:abPump 2 G:+3/+3
 SVar:Rarity:Common

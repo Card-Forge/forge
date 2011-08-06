@@ -1,7 +1,7 @@
 Name:Putrid Leech
 ManaCost:B G
 Types:Creature Zombie Leech
-Text:no text
+Text:Activate this ability only once each turn.
 PT:2/2
 K:abPump PayLife<2>:+2/+2
 SVar:Rarity:Common

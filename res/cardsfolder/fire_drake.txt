@@ -1,7 +1,7 @@
 Name:Fire Drake
 ManaCost:1 R R
 Types:Creature Drake
-Text:Play this ability only once each turn.
+Text:Activate this ability only once each turn.
 PT:1/2
 K:Flying
 K:abPump R:+1/+0

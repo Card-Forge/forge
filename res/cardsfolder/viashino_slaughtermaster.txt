@@ -1,7 +1,7 @@
 Name:Viashino Slaughtermaster
 ManaCost:1 R
 Types:Creature Viashino Warrior
-Text:Play this ability only once each turn.
+Text:Activate this ability only once each turn.
 PT:1/1
 K:Double Strike
 K:abPump B G:+1/+1

@@ -1,7 +1,7 @@
 Name:Wild Aesthir
 ManaCost:2 W
 Types:Creature Bird
-Text:Play this ability only once each turn.
+Text:Activate this ability only once each turn.
 PT:1/1
 K:Flying
 K:First Strike

@@ -1,7 +1,7 @@
 Name:Boreal Centaur
 ManaCost:1 G
 Types:Snow Creature Centaur Warrior
-Text:Play this ability only once each turn.
+Text:Activate this ability only once each turn.
 PT:2/2
 K:abPump S:+1/+1
 SVar:Rarity:Common
