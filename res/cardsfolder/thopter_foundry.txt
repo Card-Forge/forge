@@ -2,6 +2,7 @@ Name:Thopter Foundry
 ManaCost:WB U
 Types:Artifact
 Text:no text
+A:AB$Token | Cost$ 1 Sac<1/Artifact.nonToken> |CostDesc$1, Sacrifice a nontoken artifact:| TokenAmount$ 1 | TokenName$ Thopter | TokenTypes$ Artifact,Creature,Thopter | TokenOwner$ Controller | TokenColors$ Blue | TokenPower$ 1 | TokenToughness$ 1 |TokenKeyWords$Flying| SubAbility$YouGainLife/1| SpellDescription$ Put a 1/1 blue Thopter artifact creature token with flying onto the battlefield. You gain 1 life.
 SVar:AIPreference:SacCost$Permanent.namedSword of the Meek
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thopter_foundry.jpg

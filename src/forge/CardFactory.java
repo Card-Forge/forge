@@ -8271,7 +8271,7 @@ public class CardFactory implements NewConstants {
             
         }//*************** END ************ END **************************
         
-       
+       /*
         //*************** START *********** START **************************
         else if(cardName.equals("Thopter Foundry")) {
 
@@ -8304,6 +8304,7 @@ public class CardFactory implements NewConstants {
             sb.append(card.getName()).append(" - Put a 1/1 blue Thopter artifact creature token with flying onto the battlefield. You gain 1 life.");
             ability.setStackDescription(sb.toString());
         }//*************** END ************ END **************************
+        */
 
         
         //*************** START *********** START **************************
