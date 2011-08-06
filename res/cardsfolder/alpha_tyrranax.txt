@@ -4,5 +4,5 @@ Types:Creature Beast
 Text:no text
 PT:6/5
 SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/alpha_tyrannax.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/alpha_tyrranax.jpg
 End
