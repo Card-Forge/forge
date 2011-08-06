@@ -898,72 +898,31 @@ public class CardFactoryUtil {
         
     }//ability_Flashback()
     
-    public static Ability ability_Unearth(final Card sourceCard, String manaCost) {
+    public static Ability_Activated ability_Unearth(final Card sourceCard, String manaCost) {
 
-        final Ability unearth = new Ability(sourceCard, manaCost) {
-            
+    	Ability_Cost cost = new Ability_Cost(manaCost, sourceCard.getName(), true);
+        final Ability_Activated unearth = new Ability_Activated(sourceCard, cost, null) {          
 			private static final long serialVersionUID = -5633945565395478009L;
-
 
 			@Override
             public void resolve() {
-                PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, sourceCard.getController());
-                //PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, sourceCard.getController());
-                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, sourceCard.getController());
-                
-                grave.remove(sourceCard);
-                play.add(sourceCard);
-                
-                sourceCard.addIntrinsicKeyword("At the beginning of the end step, sacrifice CARDNAME.");
-                sourceCard.addIntrinsicKeyword("Haste");
-                sourceCard.setUnearthed(true);
-                /*
-                final Command entersPlay = new Command()
-                {
-                	public void execute()
-                	{
-                		sourceCard.setUnearthed(true);
-                	}
-                };
-                sourceCard.addComesIntoPlayCommand(entersPlay);
-                
-                
-                final Command leavesPlay = new Command()
-                {
-					private static final long serialVersionUID = -8640915882354670864L;
+                Card card = AllZone.GameAction.moveToPlay(sourceCard);
 
-					public void execute()
-                	{
-                		AllZone.GameAction.removeUnearth(sourceCard);
-                	}
-                };
-                sourceCard.addLeavesPlayCommand(leavesPlay);
-                */
-                
+                card.addIntrinsicKeyword("At the beginning of the end step, sacrifice CARDNAME.");
+                card.addIntrinsicKeyword("Haste");
+                card.setUnearthed(true);
             }
-            
-            
-            @Override
-            public boolean canPlay() {
-                PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, sourceCard.getController());
-                
-                return AllZone.GameAction.isCardInZone(sourceCard, grave)
-                        && Phase.canCastSorcery(sourceCard.getController());
-                
-            }
-            
         };
-        
-        unearth.setFlashBackAbility(true);
-        //unearth.setManaCost(manaCost);
-        //unearth.setDescription("Unearth: " + manaCost);
+        SpellAbility_Restriction restrict = new SpellAbility_Restriction();
+        restrict.setActivateZone("Graveyard");
+        restrict.setSorcerySpeed(true);
+        unearth.setRestrictions(restrict);
         
         StringBuilder sbStack = new StringBuilder();
         sbStack.append("Unearth: ").append(sourceCard.getName());
         unearth.setStackDescription(sbStack.toString());
         
         return unearth;
-        
     }//ability_Unearth()
     
     /*
@@ -1896,7 +1855,7 @@ public class CardFactoryUtil {
     	
     	return onLeavesPlay;
     }//enPump_LeavesPlay
-
+    
     public static Ability_Reflected_Mana getReflectedManaAbility(final Card card, String colorOrType, String who) {
     	
     	String whoString;
@@ -2048,7 +2007,7 @@ public class CardFactoryUtil {
     	SpellAbility mana = new Ability_Mana(c, "Sacrifice CARDNAME: Add 1 to your mana pool.") {
 			private static final long serialVersionUID = 2384540533244132975L;
 		};
-		
+    	
 		return (Ability_Mana)mana;
     }
     

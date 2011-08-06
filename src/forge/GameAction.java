@@ -177,9 +177,9 @@ public class GameAction {
         else moveTo(hand, c);
     }
     
-    public void moveToPlay(Card c) {
+    public Card moveToPlay(Card c) {
         PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getOwner());
-        moveTo(play, c);
+        return moveTo(play, c);
     }
     
     public void moveToTopOfLibrary(Card c) {
