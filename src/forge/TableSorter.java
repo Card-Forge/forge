@@ -22,7 +22,7 @@ public class TableSorter implements Comparator<Card>, NewConstants
   //used if in_column is 7, new cards first - the order is based on cards.txt
   //static because this should only be read once
   //static to try to reduce file io operations
-  private static HashMap<String, Integer> cardsTxt = null;
+  //private static HashMap<String, Integer> cardsTxt = null;
 
   //                             0       1       2       3        4     5          6          7
   //private String column[] = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "Rarity"}; New cards first - the order is based on cards.txt
