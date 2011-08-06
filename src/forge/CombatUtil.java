@@ -483,22 +483,8 @@ public class CombatUtil {
     		}
     	});
     	
-    	int flankingMagnitude = 0;
-    	if(attacker.getKeyword().contains("Flanking"))	flankingMagnitude = attacker.getAmountOfKeyword("Flanking");
+    	return totalDamageOfBlockers(attacker, list);
     	
-    	for (Card c:list)
-    	{
-    		int flankingOffset = 0;
-    		if (!c.getKeyword().contains("Flanking"))
-    			flankingOffset = flankingMagnitude;
-    			
-    		if (!isDoranInPlay())
-    			i+= c.getNetAttack() - flankingOffset;
-    		else
-    			i+= c.getNetDefense() - flankingOffset;
-    	}
-    	
-    	return i;
     }
     
     //This function take Doran and Double Strike into account

@@ -69,23 +69,25 @@ public class ComputerUtil_Attack2 {
        //this checks to make sure that the computer player
        //doesn't lose when the human player attacks
        //this method is used by getAttackers()
-       public int blockersNeeded(Combat combat)
+       public CardList notNeededAsBlockers(CardList attackers, Combat combat)
        {
-          CardListUtil.sortAttack(humanList);
-          int blockersNeeded = computerList.size();
+    	  CardList notNeededAsBlockers = new CardList(attackers.toArray());
+          CardListUtil.sortAttackLowFirst(attackers);
+          int blockersNeeded = attackers.size();
           
-          CardList list = getPossibleBlockers(computerList);
+          CardList list = getPossibleBlockers(attackers);
           
           for(int i = 0; i < list.size(); i++) {
              if(!doesHumanAttackAndWin(i)) {
                 blockersNeeded= i;
                 break;
              }
+             else notNeededAsBlockers.remove(list.get(i));
           }
           
           if (blockersNeeded == list.size()) {
         	  // Human will win unless everything is kept back to block
-        	  return blockersNeeded;
+        	  return notNeededAsBlockers;
           }
           
           // Increase the total number of blockers needed by 1 if Finest Hour in play
@@ -93,6 +95,7 @@ public class ComputerUtil_Attack2 {
           // In addition, if the computer guesses it needs no blockers, make sure that
           // it won't be surprised by Exalted
           int humanExaltedBonus = countExaltedBonus(AllZone.HumanPlayer);
+
           if (humanExaltedBonus > 0) {
         	  int nFinestHours = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer, "Finest Hour").size();
         	  
@@ -108,19 +111,24 @@ public class ComputerUtil_Attack2 {
         				  2 * humanBaseAttack: humanBaseAttack;
         		  if ((AllZone.ComputerPlayer.getLife() - 3) <= totalExaltedAttack) {
         			  // We will lose if there is an Exalted attack -- keep one blocker
-        			  if (blockersNeeded == 0)
-        				  blockersNeeded++;
+        			  if (blockersNeeded == 0 && notNeededAsBlockers.size() > 0)
+        				  notNeededAsBlockers.remove(0);
         			  
         			  // Finest Hour allows a second Exalted attack: keep a blocker for that too
-            		  if (nFinestHours > 0)
-            			  blockersNeeded++;
+            		  if (nFinestHours > 0 && notNeededAsBlockers.size() > 0)
+            			  notNeededAsBlockers.remove(0);
         		  }
         	  }
            }
+          
+          //re-add creatures with vigilance
+          for (Card c:attackers)
+          {
+         	 if (c.getKeyword().contains("Vigilance"))
+         		notNeededAsBlockers.add(c);
+          }
          
-          if (blockersNeeded > list.size())
-        	  blockersNeeded = list.size();
-          return blockersNeeded;
+          return notNeededAsBlockers;
        }
 
        //this uses a global variable, which isn't perfect
@@ -162,17 +170,22 @@ public class ComputerUtil_Attack2 {
 
           Combat combat = new Combat();
           
+          CardList attackersLeft = new CardList(attackers.toArray());
+          
           //Atackers that don't really have a choice
-          for (int i=0; i<attackers.size();i++)
+          for (int i=0; i<attackersLeft.size();i++)
           {
-             if ( (attackers.get(i).getKeyword().contains("CARDNAME attacks each turn if able.") 
-            	   || attackers.get(i).getKeyword().contains("At the beginning of the end step, destroy CARDNAME.")
-                   || attackers.get(i).getKeyword().contains("At the beginning of the end step, exile CARDNAME.")
-                   || attackers.get(i).getKeyword().contains("At the beginning of the end step, sacrifice CARDNAME.")
-                   || attackers.get(i).getSacrificeAtEOT()
-            	   || attackers.get(i).getSirenAttackOrDestroy())
-            	   && CombatUtil.canAttack(attackers.get(i), combat))
-                combat.addAttacker(attackers.get(i));
+        	  Card attacker = attackersLeft.get(i);
+             if ( (attacker.getKeyword().contains("CARDNAME attacks each turn if able.") 
+            	   || attacker.getKeyword().contains("At the beginning of the end step, destroy CARDNAME.")
+                   || attacker.getKeyword().contains("At the beginning of the end step, exile CARDNAME.")
+                   || attacker.getKeyword().contains("At the beginning of the end step, sacrifice CARDNAME.")
+                   || attacker.getSacrificeAtEOT()
+            	   || attacker.getSirenAttackOrDestroy())
+            	   && CombatUtil.canAttack(attacker, combat)) {
+                combat.addAttacker(attacker);
+                attackersLeft.remove(attacker);
+             }
           }
           
           //Exalted
@@ -184,10 +197,10 @@ public class ComputerUtil_Attack2 {
           {
              int biggest = 0;
              Card att = null;
-             for(int i=0; i<attackers.size();i++){
-                if (getAttack(attackers.get(i)) > biggest) {
-                   biggest = getAttack(attackers.get(i));
-                   att = attackers.get(i);
+             for(int i=0; i<attackersLeft.size();i++){
+                if (getAttack(attackersLeft.get(i)) > biggest) {
+                   biggest = getAttack(attackersLeft.get(i));
+                   att = attackersLeft.get(i);
                 }
              }
              if (att!= null && CombatUtil.canAttack(att, combat))
@@ -198,9 +211,9 @@ public class ComputerUtil_Attack2 {
           //or if the computer has 4 creatures and the player has 1
           else if(doAssault() || (humanList.size() == 1 && 3 < attackers.size()))
           {
-        	 CardListUtil.sortAttack(attackers);
-             for(int i = 0; i < attackers.size(); i++)
-            	 if (CombatUtil.canAttack(attackers.get(i), combat)) combat.addAttacker(attackers.get(i));
+        	 CardListUtil.sortAttack(attackersLeft);
+             for(int i = 0; i < attackersLeft.size(); i++)
+            	 if (CombatUtil.canAttack(attackersLeft.get(i), combat)) combat.addAttacker(attackersLeft.get(i));
           }
           
           else
@@ -209,40 +222,35 @@ public class ComputerUtil_Attack2 {
              //this should only happen 10% of the time when the computer
              //has at least 3 creatures
              boolean notAttack = (Math.abs(random.nextInt(100)) <= 10);
-             if(notAttack && 3 <= attackers.size())
+             if(notAttack && 3 <= attackersLeft.size())
              {
-                attackers.shuffle();
-                attackers.remove(0);
+            	 attackersLeft.shuffle();
+            	 attackersLeft.remove(0);
              }
 
              //this has to be before the sorting below
              //because this sorts attackers
-             int i = blockersNeeded(combat); //new
+             //int i = blockersNeeded(combat); //new
 
              //so the biggest creature will usually attack
              //I think this works, not sure, may have to change it
              //sortNonFlyingFirst has to be done first, because it reverses everything
-             CardListUtil.sortNonFlyingFirst(attackers);
-             CardListUtil.sortAttackLowFirst(attackers);
-
-             for (Card c:attackers)
-             {
-            	 if (c.getKeyword().contains("Vigilance"))
-            		 i--;
-             }
-             if (i < 0)
-            	 i = 0;
+             CardListUtil.sortNonFlyingFirst(attackersLeft);
+             CardListUtil.sortAttackLowFirst(attackersLeft);
              
-             for(; i < attackers.size(); i++)
+             attackersLeft = notNeededAsBlockers(attackersLeft, combat);
+
+             
+             for(int i = 0; i < attackersLeft.size(); i++)
              {
+            	Card attacker = attackersLeft.get(i);
             	int totalFirstStrikeBlockPower = 0;
-            	if (!attackers.get(i).hasFirstStrike() && !attackers.get(i).hasDoubleStrike())
-            		 totalFirstStrikeBlockPower = CombatUtil.getTotalFirstStrikeBlockPower(attackers.get(i), AllZone.HumanPlayer);
+            	if (!attacker.hasFirstStrike() && !attacker.hasDoubleStrike())
+            		 totalFirstStrikeBlockPower = CombatUtil.getTotalFirstStrikeBlockPower(attacker, AllZone.HumanPlayer);
         
-                if ( shouldAttack(attackers.get(i),blockers, combat) &&	totalFirstStrikeBlockPower < attackers.get(i).getKillDamage() 
-                		&& CombatUtil.canAttack(attackers.get(i), combat))
-                   combat.addAttacker(attackers.get(i));
-                
+                if ( shouldAttack(attacker,blockers, combat) &&	totalFirstStrikeBlockPower < attacker.getKillDamage() 
+                		&& CombatUtil.canAttack(attacker, combat))
+                   combat.addAttacker(attacker);
              }
           }//getAttackers()
 
