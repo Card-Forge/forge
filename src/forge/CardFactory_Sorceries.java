@@ -2857,27 +2857,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
 
-        //*************** START *********** START **************************
-        else if(cardName.equals("Kodama's Reach") || cardName.equals("Cultivate"))  {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -3361422153566629825L;
-                
-                @Override
-                public void resolve() {
-                	// Look for two basic lands: one goes onto the battlefield tapped, one
-                	// goes into your hand
-                	AllZone.GameAction.searchLibraryTwoBasicLand(card.getController(),
-                			Constant.Zone.Battlefield, true, 
-                			Constant.Zone.Hand, false);
-                }
-                
-            };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-         
         
         //*************** START *********** START **************************
         else if(cardName.equals("Global Ruin")) {

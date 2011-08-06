@@ -3258,11 +3258,7 @@ public class GameAction {
         	AllZone.Stack.add(draw);
         }
     }
-    
-    public void searchLibraryLand(String type, Player player, String Zone1, boolean tapLand) {
-    	searchLibraryTwoLand(type, player, Zone1, tapLand, "", false);
-    }
-    
+
     public void searchLibraryBasicLand(Player player, String Zone1, boolean tapLand) {
     	searchLibraryTwoLand("Basic", player, Zone1, tapLand, "", false);
     }
