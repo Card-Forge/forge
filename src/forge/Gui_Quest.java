@@ -197,7 +197,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
                 }
             });
         	
-        	questsButton.setBounds(new Rectangle(150, 558, 161, 37));
+        	questsButton.setBounds(new Rectangle(338, 497, 142, 37));
         	questsButton.setFont(new java.awt.Font("Dialog", 0, 18));
         	questsButton.setText("Quests");
         	questsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -228,7 +228,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         jPanel2.setBorder(titledBorder1);
         jPanel2.setBounds(new Rectangle(20, 223, 300, 198));
         jPanel2.setLayout(null);
-        playGameButton.setBounds(new Rectangle(150, 516, 161, 37));
+        playGameButton.setBounds(new Rectangle(338, 538, 142, 37));
         playGameButton.setFont(new java.awt.Font("Dialog", 0, 18));
         playGameButton.setText("Play Game");
         playGameButton.addActionListener(new java.awt.event.ActionListener() {
@@ -248,14 +248,14 @@ public class Gui_Quest extends JFrame implements NewConstants{
         jLabel5.setText("Your Deck:");
         jLabel5.setBounds(new Rectangle(15, 151, 125, 29));
         deckComboBox.setBounds(new Rectangle(98, 152, 185, 29));
-        petComboBox.setBounds(new Rectangle(338, 516, 142, 38));
+        petComboBox.setBounds(new Rectangle(338, 437, 142, 38));
         smoothLandCheckBox.setText("Stack AI land");
         smoothLandCheckBox.setBounds(new Rectangle(154, 455, 153, 21));
         //smoothLandCheckBox.setSelected(true);
         resizeCheckbox.setText("Resizable Game Area");
-        resizeCheckbox.setBounds(new Rectangle(154, 424, 156, 24));
+        resizeCheckbox.setBounds(new Rectangle(154, 424, 165, 24));
         millLoseCheckBox.setText("Milling = Loss Condition");
-        millLoseCheckBox.setBounds(new Rectangle(154, 484, 165, 25));
+        millLoseCheckBox.setBounds(new Rectangle(154, 484, 190, 25));
         
         //resizeCheckbox.setSelected(true);
         this.getContentPane().add(rankLabel, null);
