@@ -253,6 +253,13 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
         	}
         }
         
+        if(sourceCard.getType().contains("Mountain") && AllZoneUtil.isCardInPlay("Gauntlet of Might")) {
+        	CardList list = AllZoneUtil.getCardsInPlay("Gauntlet of Might");
+        	for(int i = 0; i < list.size(); i++) {
+        		AllZone.ManaPool.addManaToFloating("R", list.get(i));
+        	}
+        }
+        
         if(sourceCard.isLand() && sourceCard.isEnchantedBy("Overgrowth")) {
         	if(sourceCard.getController().equals(AllZone.HumanPlayer)) {
         		AllZone.ManaPool.addExtrinsicKeyword("ManaPool:G");
