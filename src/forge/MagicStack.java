@@ -72,7 +72,12 @@ public class MagicStack extends MyObservable
 	          } 
 			  else //computer
 	          {
-				  while(ComputerUtil.canPayCost(ability)) ComputerUtil.playNoStack(ability);
+				  int neededDamage = CardFactoryUtil.getNeededXDamage(sa);
+					  
+				  while(ComputerUtil.canPayCost(ability) && neededDamage != sa.getSourceCard().getXManaCostPaid()) 
+				  {
+					  ComputerUtil.playNoStack(ability);
+				  }
 				  push(sa);
 	          }
 		  }

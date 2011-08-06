@@ -3051,6 +3051,20 @@ public class CardFactoryUtil {
         return list;
     }
     
+    static public int getNeededXDamage(SpellAbility ability)
+    {
+    	//when targeting a creature, make sure the AI won't overkill on X damage
+		Card target = ability.getTargetCard();
+		int neededDamage = -1;
+		
+		Card c = ability.getSourceCard();
+		
+		if (target != null && c.getText().contains("deals X damage to target") && !c.getName().equals("Death Grasp"))
+			neededDamage = target.getNetDefense() - target.getDamage();
+		
+		return neededDamage;
+    }
+    
     //may return null
     static public Card getRandomCard(CardList list) {
         if(list.size() == 0) return null;
