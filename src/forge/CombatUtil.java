@@ -2058,13 +2058,6 @@ public class CombatUtil {
             
             AllZone.Stack.add(ability2);
             
-        } else if(c.getName().equals("Crypt Cobra") || c.getName().equals("Suq'Ata Assassin")
-                || c.getName().equals("Swamp Mosquito")) {
-            Player controller = c.getController();
-            Player opp = controller.getOpponent();
-            
-            if(opp.equals(AllZone.HumanPlayer)) AllZone.HumanPlayer.addPoisonCounters(1);
-            else AllZone.ComputerPlayer.addPoisonCounters(1);
         }
         
     }
