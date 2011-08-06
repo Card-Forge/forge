@@ -2281,7 +2281,7 @@ class CardFactory_Lands {
                 public void selectCard(Card c, PlayerZone zone) {
                     if(!CardFactoryUtil.canTarget(card, c)) {
                         AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-                    } else if(c.isCreature() && c.getType().contains("Soldier")) {
+                    } else if(c.isCreature() && (c.getType().contains("Soldier") || c.getKeyword().contains("Changeling") ) )  {
                         card.tap();
                         AllZone.Human_Play.updateObservers();
                         
