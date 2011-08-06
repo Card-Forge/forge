@@ -13030,30 +13030,6 @@ public class CardFactory_Creatures {
 
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Voice of the Woods"))
-        {
-        	final Ability ability = new Ability(card, "0")
-        	{
-        		public void resolve()
-        		{
-        			CardFactoryUtil.makeToken("Elemental", "G 7 7 Elemental", getActivatingPlayer(), "G", new String[] {
-                        "Creature", "Elemental"}, 7, 7, new String[] {"Trample"});
-        		}
-        	};
-        	
-        	final Ability_Cost cost = new Ability_Cost("tapXType<5/Elf>", card.getName(), true);
-            ability.setPayCosts(cost);
-        	
-        	ability.setDescription("Tap five untapped Elves you control: Put a 7/7 green Elemental creature token with trample onto the battlefield.");
-        	
-        	StringBuilder sb = new StringBuilder();
-        	sb.append(card).append(" - Put a 7/7 green Elemental creature token with trample onto the battlefield.");
-        	ability.setStackDescription(sb.toString());
-        	
-        	card.addSpellAbility(ability);
-	    }//*************** END ************ END **************************
-
-        //*************** START *********** START **************************
         else if(cardName.equals("Singing Tree")) {
             final String Tgts[] = {"Creature.attacking"};
             Target target = new Target("Select target attacking creature.", Tgts);
