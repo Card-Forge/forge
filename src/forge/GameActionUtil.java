@@ -7447,6 +7447,70 @@ public class GameActionUtil {
 		}// for
 	}// upkeep_Wandering_Graybeard()
 
+    private static void upkeep_Wolf_Skull_Shaman() {
+        final Player player = AllZone.Phase.getPlayerTurn();
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+        PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+
+        CardList list = new CardList(playZone.getCards());
+        list = list.getName("Wolf-Skull Shaman");
+        Card prevCardShown = null;
+
+        Ability ability;
+        for (int i = 0; i < list.size(); i++) {
+            if (library.size() <= 0) return;
+
+            String creatureType = library.get(0).getType().toString();
+            String cardName = library.get(0).getName();
+            final Card crd = list.get(i);
+            boolean wantToken = false;
+            
+            // We assume that both players will want to look at the top card of their library. 
+            // We do not want to slow down the pace of the game by asking too many questions.
+            
+            if (creatureType.contains("Elf") 
+                    || creatureType.contains("Shaman")
+                    || library.get(0).getKeyword().contains("Changeling")) {
+                
+                if (player.isHuman()) {
+                    StringBuilder question = new StringBuilder();
+                    question.append("Your top card is ").append(cardName);
+                    question.append(", put a 2/2 green Wolf creature token into play?");
+                    if (showYesNoDialog(crd, question.toString())) {
+                        wantToken = true;
+                    }
+                }
+                // player isComputer()
+                else wantToken = true;
+            }
+            else if (player.isHuman()) {
+                Card topCard = library.get(0);
+                if (topCard != prevCardShown) {
+                    String title = "Top card is";
+                    AllZone.Display.getChoice(title, topCard);
+                    prevCardShown = topCard;
+                }
+            }
+            
+            if (wantToken) {
+                ability = new Ability(crd, "0") {
+                    @Override
+                    public void resolve() {
+                        CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", crd.getController(), "G", 
+                                new String[] {"Creature", "Wolf"}, 2, 2, new String[] {""});
+                    }// resolve()
+                };// ability
+                
+                StringBuilder sb = new StringBuilder();
+                sb.append("Wolf-Skull Shaman - ").append(player);
+                sb.append(" reveals: ").append(cardName).append(", and puts a 2/2 Wolf into play.");
+                ability.setStackDescription(sb.toString());
+                AllZone.Stack.add(ability);
+            }// if wantToken
+        }// for
+    }// upkeep_Wolf_Skull_Shaman()
+	
+/*
 	private static void upkeep_Wolf_Skull_Shaman() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
@@ -7498,7 +7562,8 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}// for
 	}// upkeep_Wolf_Skull_Shaman()
-
+*/
+	
 	private static void upkeep_Benthic_Djinn() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
