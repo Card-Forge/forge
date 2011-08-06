@@ -6,4 +6,5 @@ PT:1/3
 A:AB$Tap | Cost$ PW T | Tgt$ TgtC | SpellDescription$ Tap target creature.
 Svar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinding_souleater.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/131.jpg
 End

@@ -8,4 +8,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.Y
 SVar:TrigGain:AB$GainLife | Cost$ 0 | LifeAmount$ 3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shattered_angel.jpg
+SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/23.jpg
 End

@@ -6,4 +6,5 @@ A:SP$DamageAll | Cost$ X PG | ValidCards$ Creature.withFlying | ValidDescription
 SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corrosive_gale.jpg
+SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/107.jpg
 End

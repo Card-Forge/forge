@@ -7,4 +7,5 @@ K:Flying
 K:Infect
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shriek_raptor.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/24.jpg
 End

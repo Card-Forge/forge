@@ -6,4 +6,5 @@ A:AB$ GainLife | Cost$ 3 T Sac<1/Artifact> | LifeAmount$ 1 | SpellDescription$ Y
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexias_core.jpg
+SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/165.jpg
 End

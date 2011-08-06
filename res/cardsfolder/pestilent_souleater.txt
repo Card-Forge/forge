@@ -6,4 +6,5 @@ PT:3/3
 A:AB$Pump | Cost$ PB | Defined$ Self | KW$ Infect | SpellDescription$ CARDNAME gains infect until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pestilent_souleater.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/149.jpg
 End

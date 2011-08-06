@@ -6,4 +6,5 @@ A:SP$Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | 
 A:SP$Pump | Cost$ G 5 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +5 | NumDef$ +5 | SpellDescription$ Kicker 5 (You may pay an additional 5 as you cast this spell.)
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/explosive_growth.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/187.jpg
 End

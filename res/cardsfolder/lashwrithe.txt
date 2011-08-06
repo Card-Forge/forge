@@ -8,4 +8,5 @@ K:stPumpEquipped:Creature:X/X:no Condition:Equipped creature gets +1/+1 for each
 SVar:X:Count$Valid Swamp.YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lashwrithe.jpg
+SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/143.jpg
 End

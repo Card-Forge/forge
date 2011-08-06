@@ -8,4 +8,5 @@ SVar:X:Count$TriggeredLifeAmount
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindcrank.jpg
+SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/144.jpg
 End

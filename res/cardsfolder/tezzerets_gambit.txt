@@ -6,4 +6,5 @@ A:SP$Draw | Cost$ 3 PU | Defined$ You | NumCards$ 2 | SubAbility$SVar=DBProlif |
 SVar:DBProlif:DB$Proliferate
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tezzerets_gambit.jpg
+SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/47.jpg
 End
