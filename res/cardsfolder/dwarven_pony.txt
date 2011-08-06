@@ -1,0 +1,8 @@
+Name:Dwarven Pony
+ManaCost:R
+Types:Creature Horse
+Text:no text
+PT:1/1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_pony.jpg
+End

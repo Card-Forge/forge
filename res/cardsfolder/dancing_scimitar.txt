@@ -1,0 +1,9 @@
+Name:Dancing Scimitar
+ManaCost:4
+Types:Artifact Creature Spirit
+Text:no text
+PT:1/5
+K:Flying
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84114.jpg
+End

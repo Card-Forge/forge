@@ -1,0 +1,10 @@
+Name:Dandan
+ManaCost:U U
+Types:Creature Fish
+Text:no text
+PT:4/1
+K:CARDNAME can't attack unless defending player controls an Island.
+K:When you control no Islands, sacrifice CARDNAME.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card106631.jpg
+End

@@ -1,0 +1,7 @@
+Name:Deep Analysis
+ManaCost:3 U
+Types:Sorcery
+Text:no text
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/deep_analysis.jpg
+End

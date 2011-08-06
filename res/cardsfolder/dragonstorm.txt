@@ -1,0 +1,8 @@
+Name:Dragonstorm
+ManaCost:8 R
+Types:Sorcery
+Text:Search your library for a Dragon permanent card and put it onto the battlefield. Then shuffle your library.
+K:Storm
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonstorm.jpg
+End

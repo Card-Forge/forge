@@ -1,0 +1,11 @@
+Name:Dross Harvester
+ManaCost:1 B B
+Types:Creature Horror
+Text:no text
+PT:4/4
+K:Protection from white
+K:WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:ModifyLife/2:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:Whenever a creature is put into a graveyard from the battlefield, you gain 2 life.
+K:WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:ModifyLife/-4:ControllingPlayer_Self:ASAP:No_Condition:ControllerEndStep:At the beginning of your end step, you lose 4 life.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dross_harvester.jpg
+End

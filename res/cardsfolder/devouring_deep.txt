@@ -1,0 +1,9 @@
+Name:Devouring Deep
+ManaCost:2 U
+Types:Creature Fish
+Text:no text
+PT:1/2
+K:Islandwalk
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1476.jpg
+End

@@ -1,0 +1,10 @@
+Name:Disciple of Malice
+ManaCost:1 B
+Types:Creature Human Cleric
+Text:no text
+PT:1/2
+K:Protection from white
+K:Cycling:2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/disciple_of_malice.jpg
+End

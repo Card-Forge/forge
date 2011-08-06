@@ -1,0 +1,8 @@
+Name:Door to Nothingness
+ManaCost:5
+Types:Artifact
+Text:no text
+K:Comes into play tapped.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/door_to_nothingness.jpg
+End

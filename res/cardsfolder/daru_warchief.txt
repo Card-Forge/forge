@@ -1,0 +1,10 @@
+Name:Daru Warchief
+ManaCost:2 W W
+Types:Creature Human Soldier
+Text:Soldier spells you cast cost 1 less to cast.\r\nSoldier creatures you control get +1/+2.
+PT:1/1
+K:CostChange:Player:Less:1:Spell:All:Soldier:NoSpecial
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/daru_warchief.jpg
+End

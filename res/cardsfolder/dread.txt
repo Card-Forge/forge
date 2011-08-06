@@ -1,0 +1,10 @@
+Name:Dread
+ManaCost:3 B B B
+Types:Creature Elemental Incarnation
+Text:Whenever a creature deals damage to you, destroy it.
+PT:6/6
+K:Fear
+K:When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dread.jpg
+End

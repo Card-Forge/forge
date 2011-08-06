@@ -1,0 +1,8 @@
+Name:Desert Sandstorm
+ManaCost:2 R
+Types:Sorcery
+Text:no text
+K:spDamageAll:Creature:1:Desert Sandstorm deals 1 damage to each creature.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/desert_sandstorm.jpg
+End

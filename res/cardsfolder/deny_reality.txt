@@ -1,0 +1,9 @@
+Name:Deny Reality
+ManaCost:3 U B
+Types:Instant
+Text:Return target permanent to its owner's hand.
+K:Cascade
+K:spBounceTgt:Permanent:Hand
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/deny_reality.jpg
+End

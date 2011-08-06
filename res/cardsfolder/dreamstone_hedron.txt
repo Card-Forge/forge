@@ -1,0 +1,9 @@
+Name:Dreamstone Hedron
+ManaCost:6
+Types:Artifact
+Text:no text
+K:tap: add 3
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dreamstone_hedron.jpg
+End

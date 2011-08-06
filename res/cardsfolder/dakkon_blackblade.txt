@@ -1,0 +1,9 @@
+Name:Dakkon Blackblade
+ManaCost:2 B U U W
+Types:Legendary Creature Human Warrior
+Text:Dakkon Blackblade's power and toughness are each equal to the number of lands you control.
+PT:1/1
+K:SVar:BuffedBy:Land
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dakkon_blackblade.jpg
+End

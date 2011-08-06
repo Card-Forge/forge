@@ -1,0 +1,9 @@
+Name:Drake-Skull Cameo
+ManaCost:3
+Types:Artifact
+Text:no text
+K:tap: add U
+K:tap: add B
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/drake_skull_cameo.jpg
+End

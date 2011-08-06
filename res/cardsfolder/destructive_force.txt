@@ -1,0 +1,7 @@
+Name:Destructive Force
+ManaCost:5 R R
+Types:Sorcery
+Text:Each player sacrifices five lands. Destructive Force deals 5 damage to each creature.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/destructive_force.jpg
+End

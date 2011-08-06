@@ -1,0 +1,10 @@
+Name:Day of Destiny
+ManaCost:3 W
+Types:Legendary Enchantment
+Text:no text
+K:StaticEffect:Play:Permanents you Control:PTBonus/2/2:Type.Creature!Type.Legendary:Legendary creatures you control get +2/+2.
+K:SVar:RemAIDeck:True
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/day_of_destiny.jpg
+End

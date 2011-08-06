@@ -1,0 +1,10 @@
+Name:Dragonskull Summit
+ManaCost:no cost
+Types:Land
+Text:no text
+K:CARDNAME enters the battlefield tapped unless you control a Swamp or a Mountain.
+K:tap: add B
+K:tap: add R
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonskull_summit.jpg
+End

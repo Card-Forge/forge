@@ -1,0 +1,8 @@
+Name:Double Cleave
+ManaCost:1 RW
+Types:Instant
+Text:no text
+K:spPumpTgt:Double Strike
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/double_cleave.jpg
+End

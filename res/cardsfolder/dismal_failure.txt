@@ -1,0 +1,8 @@
+Name:Dismal Failure
+ManaCost:2 U U
+Types:Instant
+Text:Counter target spell. Its controller discards a card.
+K:spCounter:Spell:None:Graveyard:CC-Discard(1)
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dismal_failure.jpg
+End

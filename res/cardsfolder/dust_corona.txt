@@ -1,0 +1,9 @@
+Name:Dust Corona
+ManaCost:R
+Types:Enchantment Aura
+Text:Enchanted creature gets +2/+0 and can't be blocked by creatures with flying.
+K:Enchant creature
+K:enPump:+2/+0/CARDNAME can't be blocked by creatures with flying.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dust_corona.jpg
+End

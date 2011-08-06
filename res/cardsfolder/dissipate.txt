@@ -1,0 +1,8 @@
+Name:Dissipate
+ManaCost:1 U U
+Types:Instant
+Text:Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
+K:spCounter:Spell:None:Exile:None
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dissipate.jpg
+End

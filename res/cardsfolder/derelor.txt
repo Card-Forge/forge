@@ -1,0 +1,9 @@
+Name:Derelor
+ManaCost:3 B
+Types:Creature Thrull
+Text:Black spells you cast cost Black more to cast.
+PT:4/4
+K:CostChange:Player:More:B:Spell:black:All:NoSpecial
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/derelor.jpg
+End

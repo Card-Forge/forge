@@ -1,0 +1,10 @@
+Name:Defender of Law
+ManaCost:2 W
+Types:Creature Human Knight
+Text:no text
+PT:2/1
+K:Flash
+K:Protection from red
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/defender_of_law.jpg
+End

@@ -1,0 +1,8 @@
+Name:Drelnoch
+ManaCost:4 U
+Types:Creature Yeti Mutant
+Text:Whenever Drelnoch becomes blocked, you may draw two cards.
+PT:3/3
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/drelnoch.jpg
+End

@@ -1,0 +1,8 @@
+Name:Drain the Well
+ManaCost:2 BG BG
+Types:Sorcery
+Text:Destroy target land. You gain 2 life.
+K:spDestroyTgt:Land:Drawback$YouGainLife/2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/drain_the_well.jpg
+End

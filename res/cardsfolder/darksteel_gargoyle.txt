@@ -1,0 +1,10 @@
+Name:Darksteel Gargoyle
+ManaCost:7
+Types:Artifact Creature Gargoyle
+Text:no text
+PT:3/3
+K:Flying
+K:Indestructible
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card46136.jpg
+End

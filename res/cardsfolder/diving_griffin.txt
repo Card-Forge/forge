@@ -1,0 +1,10 @@
+Name:Diving Griffin
+ManaCost:1 W W
+Types:Creature Griffin
+Text:no text
+PT:2/2
+K:Flying
+K:Vigilance
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/8ed/en-us/card45176.jpg
+End

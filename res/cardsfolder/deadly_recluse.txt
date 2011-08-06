@@ -1,0 +1,10 @@
+Name:Deadly Recluse
+ManaCost:1 G
+Types:Creature Spider
+Text:no text
+PT:1/2
+K:Reach
+K:Deathtouch
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/deadly_recluse.jpg
+End

@@ -1,0 +1,8 @@
+Name:Death's Shadow
+ManaCost:B
+Types:Creature Avatar
+Text:Death's Shadow gets -X/-X, where X is your life total.
+PT:13/13
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/deaths_shadow.jpg
+End

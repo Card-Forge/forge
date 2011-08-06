@@ -1,0 +1,8 @@
+Name:Death Baron
+ManaCost:1 B B
+Types:Creature Zombie Wizard
+Text:Skeleton creatures you control and other Zombie creatures you control get +1/+1 and have deathtouch.
+PT:2/2
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/death_baron.jpg
+End

@@ -1,0 +1,9 @@
+Name:Duskdale Wurm
+ManaCost:5 G G
+Types:Creature Wurm
+Text:no text
+PT:7/7
+K:Trample
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/duskdale_wurm.jpg
+End

@@ -1,0 +1,8 @@
+Name:Dismiss
+ManaCost:2 U U
+Types:Instant
+Text:Counter target spell. Draw a card.
+K:spCounter:Spell:None:Graveyard:My-Draw(1)
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dismiss.jpg
+End

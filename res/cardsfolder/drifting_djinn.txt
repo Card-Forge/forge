@@ -1,0 +1,11 @@
+Name:Drifting Djinn
+ManaCost:4 U U
+Types:Creature Djinn
+Text:no text
+PT:5/5
+K:Flying
+K:Cycling:2
+K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay:1 U
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/drifting_djinn.jpg
+End

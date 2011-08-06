@@ -1,0 +1,8 @@
+Name:Devastation
+ManaCost:5 R R
+Types:Sorcery
+Text:Destroy all creatures and lands.
+K:spDestroyAll:Creature,Land
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/devastation.jpg
+End

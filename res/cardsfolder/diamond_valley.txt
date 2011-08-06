@@ -1,0 +1,7 @@
+Name:Diamond Valley
+ManaCost:no cost
+Types:Land
+Text:tap: Sacrifice a creature: You gain life equal to the sacrificed creature's toughness.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/diamond_valley.jpg
+End

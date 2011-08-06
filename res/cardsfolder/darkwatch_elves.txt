@@ -1,0 +1,10 @@
+Name:Darkwatch Elves
+ManaCost:2 G
+Types:Creature Elf
+Text:no text
+PT:2/2
+K:Protection from black
+K:Cycling:2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/darkwatch_elves.jpg
+End

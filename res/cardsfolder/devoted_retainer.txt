@@ -1,0 +1,9 @@
+Name:Devoted Retainer
+ManaCost:W
+Types:Creature Human Samurai
+Text:no text
+PT:1/1
+K:Bushido 1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/devoted_retainer.jpg
+End

@@ -1,0 +1,8 @@
+Name:Desecrated Earth
+ManaCost:4 B
+Types:Sorcery
+Text:Destroy target land. Its controller discards a card.
+K:spDestroyTgt:Land:Drawback$DiscardTgtCtrlr/1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/desecrated_earth.jpg
+End

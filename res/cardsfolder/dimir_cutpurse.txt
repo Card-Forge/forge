@@ -1,0 +1,8 @@
+Name:Dimir Cutpurse
+ManaCost:1 U B
+Types:Creature Spirit
+Text:Whenever Dimir Cutpurse deals combat damage to a player, that player discards a card and you draw a card.
+PT:2/2
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dimir_cutpurse.jpg
+End

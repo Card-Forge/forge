@@ -1,0 +1,8 @@
+Name:Disempower
+ManaCost:1 W
+Types:Instant
+Text:Put target artifact or enchantment on top of its owner's library.
+K:spBounceTgt:Artifact,Enchantment:TopofLibrary
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/disempower.jpg
+End

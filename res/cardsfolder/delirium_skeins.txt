@@ -1,0 +1,8 @@
+Name:Delirium Skeins
+ManaCost:2 B
+Types:Sorcery
+Text:Each player discards three cards.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card107435.jpg
+End

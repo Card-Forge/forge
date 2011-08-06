@@ -1,0 +1,7 @@
+Name:Diabolic Tutor
+ManaCost:2 B B
+Types:Sorcery
+Text:Search your library for a card and put that card into your hand. Then shuffle your library.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/diabolic_tutor.jpg
+End

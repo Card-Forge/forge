@@ -1,0 +1,9 @@
+Name:Defiant Elf
+ManaCost:G
+Types:Creature Elf
+Text:no text
+PT:1/1
+K:Trample
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/lgn/en-us/card39707.jpg
+End

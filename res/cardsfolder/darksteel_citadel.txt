@@ -1,0 +1,9 @@
+Name:Darksteel Citadel
+ManaCost:no cost
+Types:Artifact Land
+Text:("Destroy" effects and lethal damage don't destroy it.)
+K:tap: add 1
+K:Indestructible
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_citadel.jpg
+End

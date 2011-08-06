@@ -1,0 +1,9 @@
+Name:Diabolic Machine
+ManaCost:7
+Types:Artifact Creature Construct
+Text:no text
+PT:4/4
+K:RegenerateMe:3
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/diabolic_machine.jpg
+End

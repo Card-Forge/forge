@@ -1,0 +1,7 @@
+Name:Darksteel Forge
+ManaCost:9
+Types:Artifact
+Text:Artifacts you control are indestructible.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_forge.jpg
+End

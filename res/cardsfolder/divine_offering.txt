@@ -1,0 +1,10 @@
+Name:Divine Offering
+ManaCost:1 W
+Types:Instant
+Text:Destroy target artifact. You gain life equal to its converted mana cost.
+K:spDestroyTgt:Artifact:Drawback$YouGainLife/dX
+K:SVar:dX:Count$TgtCardManaCost
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_offering.jpg
+End

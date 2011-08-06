@@ -1,0 +1,10 @@
+Name:Deathless Angel
+ManaCost:4 W W
+Types:Creature Angel
+Text:no text
+PT:5/7
+K:Flying
+K:abPumpTgtC W W:Indestructible
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/deathless_angel.jpg
+End

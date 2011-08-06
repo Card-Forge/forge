@@ -1,0 +1,7 @@
+Name:Debtors' Knell
+ManaCost:4 WB WB WB
+Types:Enchantment
+Text:At the beginning of your upkeep, put target creature card in a graveyard into play under your control.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/debtors_knell.jpg
+End

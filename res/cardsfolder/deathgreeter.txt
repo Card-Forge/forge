@@ -1,0 +1,9 @@
+Name:Deathgreeter
+ManaCost:B
+Types:Creature Human Shaman
+Text:no text
+PT:1/1
+K:WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:No_Condition:Initiator - Other than Self:Whenever another creature is put into a graveyard from the battlefield, you gain 1 life.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/deathgreeter.jpg
+End

@@ -1,0 +1,8 @@
+Name:Dauthi Embrace
+ManaCost:2 B
+Types:Enchantment
+Text:no text
+K:abPumpTgtC B B:Shadow
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_embrace.jpg
+End

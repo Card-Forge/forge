@@ -1,0 +1,8 @@
+Name:Deglamer
+ManaCost:1 G
+Types:Instant
+Text:Choose target artifact or enchantment. Its owner shuffles it into his or her library.
+K:spBounceTgt:Artifact,Enchantment:ShuffleIntoLibrary
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/deglamer.jpg
+End

@@ -1,0 +1,8 @@
+Name:Dark Ritual
+ManaCost:B
+Types:Instant
+Text:Add B B B to your mana pool.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_ritual.jpg
+End

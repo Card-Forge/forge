@@ -1,0 +1,10 @@
+Name:Dark Hatchling
+ManaCost:4 B B
+Types:Creature Horror
+Text:When Dark Hatchling enters the battlefield, destroy target nonblack creature. It can't be regenerated.
+PT:3/3
+K:Flying
+K:etbDestroyTgt:Creature.nonBlack:NoRegen
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_hatchling.jpg
+End

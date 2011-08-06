@@ -1,0 +1,8 @@
+Name:Deja Vu
+ManaCost:2 U
+Types:Sorcery
+Text:no text
+K:spRaiseDead:1/Sorcery
+K:SVar:Rarity:Common
+K:SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/deja_vu.jpg
+End

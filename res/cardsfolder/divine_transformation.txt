@@ -1,0 +1,9 @@
+Name:Divine Transformation
+ManaCost:2 W W
+Types:Enchantment Aura
+Text:Enchanted creature gets +3/+3.
+K:Enchant creature
+K:enPump:+3/+3
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_transformation.jpg
+End

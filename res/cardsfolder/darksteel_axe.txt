@@ -1,0 +1,9 @@
+Name:Darksteel Axe
+ManaCost:1
+Types:Artifact Equipment
+Text:Equipped creature gets +2/+0.
+K:Indestructible
+K:eqPump 2:+2/+0
+K:SVar:Rarity:Common
+K:SVar:Picture:http://serv3.tcgimages.eu/img/cards/Scars_of_Mirrodin/darksteel_axe.jpg
+End

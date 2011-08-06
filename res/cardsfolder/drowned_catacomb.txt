@@ -1,0 +1,10 @@
+Name:Drowned Catacomb
+ManaCost:no cost
+Types:Land
+Text:no text
+K:CARDNAME enters the battlefield tapped unless you control an Island or a Swamp.
+K:tap: add U
+K:tap: add B
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/drowned_catacomb.jpg
+End

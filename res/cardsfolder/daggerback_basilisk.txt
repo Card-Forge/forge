@@ -1,0 +1,9 @@
+Name:Daggerback Basilisk
+ManaCost:2 G
+Types:Creature Basilisk
+Text:no text
+PT:2/2
+K:Deathtouch
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/daggerback_basilisk.jpg
+End

@@ -1,0 +1,8 @@
+Name:Desperate Charge
+ManaCost:2 B
+Types:Sorcery
+Text:no text
+K:spAllPump:YouCtrl:+2/+0:Creatures you control get +2/+0 until end of turn.:Desperate Charge - Creatures get +2/+0 until EOT
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10512.jpg
+End

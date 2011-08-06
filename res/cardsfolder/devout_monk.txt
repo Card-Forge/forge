@@ -1,0 +1,9 @@
+Name:Devout Monk
+ManaCost:W
+Types:Creature Human Monk Cleric
+Text:no text
+PT:1/1
+K:WheneverKeyword:EntersBattleField:Self:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Devout Monk enters the battlefield, you gain 1 life.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://serv3.tcgimages.eu/img/cards/Starter_1999/devout_monk.jpg
+End

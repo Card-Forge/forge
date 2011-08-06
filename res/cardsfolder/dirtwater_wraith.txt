@@ -1,0 +1,10 @@
+Name:Dirtwater Wraith
+ManaCost:3 B
+Types:Creature Wraith
+Text:no text
+PT:1/3
+K:Swampwalk
+K:abPump B:+1/+0
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dirtwater_wraith.jpg
+End

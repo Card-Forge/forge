@@ -1,0 +1,7 @@
+Name:Dragon Fodder
+ManaCost:1 R
+Types:Sorcery
+Text:Put two 1/1 red Goblin creature tokens onto the battlefield.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_fodder.jpg
+End

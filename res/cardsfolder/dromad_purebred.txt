@@ -1,0 +1,8 @@
+Name:Dromad Purebred
+ManaCost:4 W
+Types:Creature Camel Beast
+Text:Whenever Dromad Purebred is dealt damage, you gain 1 life.
+PT:1/5
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dromad_purebred.jpg
+End

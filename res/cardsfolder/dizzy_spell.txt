@@ -1,0 +1,8 @@
+Name:Dizzy Spell
+ManaCost:U
+Types:Instant
+Text:no text
+K:spPumpTgtCurse:-3/-0
+K:Transmute:1 U U
+K:SVar:RemAIDeck:True
+End
