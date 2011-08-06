@@ -357,7 +357,8 @@ public class AbilityFactory_ChangeZone {
                 if (destination.equals("Library")) {
                     // this needs to be zero indexed. Top = 0, Third = 2
                     int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
-                    if (origin.equals("Library")) {
+                    // do not shuffle the library once we have placed a fetched card on top.
+                    if (origin.equals("Library") && i < 1) {
                         player.shuffle();
                     }
                     destZone.add(c, libraryPos);
