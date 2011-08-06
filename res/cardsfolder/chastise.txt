@@ -2,7 +2,8 @@ Name:Chastise
 ManaCost:3 W
 Types:Instant
 Text:no text
-A:SP$Destroy | Cost$ 3 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SubAbility$ YouGainLife/dX | SpellDescription$ Destroy target attacking creature. You gain life equal to its power.
+A:SP$ Destroy | Cost$ 3 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SubAbility$ SVar=DBGainLife | SpellDescription$ Destroy target attacking creature. You gain life equal to its power.
+SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ dX
 SVar:dX:Count$TgtCardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chastise.jpg
