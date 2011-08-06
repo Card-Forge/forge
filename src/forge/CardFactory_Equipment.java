@@ -1,5 +1,17 @@
 package forge;
+import java.util.ArrayList;
+
 class CardFactory_Equipment {
+	
+	public static int shouldEquip(Card c) {
+		ArrayList<String> a = c.getKeyword();
+		for (int i = 0; i < a.size(); i++)
+			if (a.get(i).toString().startsWith("VanillaEquipment"))
+				return i;
+
+		return -1;
+	}
+
 	public static Card getCard(final Card card, String cardName, String owner)
 	{
 
@@ -2003,7 +2015,30 @@ class CardFactory_Equipment {
 
 	    } //*************** END ************ END **************************
 	    
-
+	    if (shouldEquip(card) != -1)
+	      {
+	        int n = shouldEquip(card);
+	        if (n != -1)
+	        {
+	          String parse = card.getKeyword().get(n).toString();
+	          card.removeIntrinsicKeyword(parse);
+	
+	          String k[] = parse.split(":");
+	          final String P = k[1];
+	          final String T = k[2];
+	          final String manacost = k[3];
+	          final String Ab1 = k[4];
+	          final String Ab2 = k[5];
+	          final String Ab3 = k[6];     //quantity of keyword abilities could be modified	          
+	          final int Power = Integer.parseInt(P);
+	          final int Tough = Integer.parseInt(T);
+	          	          
+	          card.addSpellAbility(CardFactoryUtil.vanila_equip(card, Power, Tough, Ab1, Ab2, Ab3, manacost));
+		      card.addEquipCommand(CardFactoryUtil.vanila_onequip(card, Power, Tough, Ab1, Ab2, Ab3, manacost));
+		      card.addUnEquipCommand(CardFactoryUtil.vanila_unequip(card, Power, Tough, Ab1, Ab2, Ab3, manacost));
+	         
+	        }
+	      }//VanillaEquipment
 		
 		return card;
 	}

@@ -1318,6 +1318,138 @@ public class CardFactoryUtil
     return transmute;
   }//ability_transmute()
 
+  public static SpellAbility vanila_equip(final Card sourceCard, final int Power, final int Tough, final String Ab1, final String Ab2, final String Ab3, final String Manacost)
+  {
+  	final Ability equip = new Ability(sourceCard, Manacost)
+	{
+  		private static final long serialVersionUID = -4960704261761785512L;
+  		
+		public void resolve()
+		{
+			if (AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(sourceCard, getTargetCard()) )
+			{
+    			if (sourceCard.isEquipping())
+    			{
+    				Card crd = sourceCard.getEquipping().get(0);
+    				if (crd.equals(getTargetCard()) )
+    					return;
+    				
+    				sourceCard.unEquipCard(crd);
+    			}	
+    			sourceCard.equipCard(getTargetCard());
+			}
+		}
+		
+		public boolean canPlay()
+		{
+			return AllZone.getZone(sourceCard).is(Constant.Zone.Play) &&            
+            	   AllZone.Phase.getActivePlayer().equals(sourceCard.getController()) &&
+            	   (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2") );
+		}
+		
+		public boolean canPlayAI()
+        {
+          return getCreature().size() != 0 && !sourceCard.isEquipping();
+        }
+		
+		
+		public void chooseTargetAI()
+        {
+          Card target = CardFactoryUtil.AI_getBestCreature(getCreature());
+          setTargetCard(target);
+        }
+        CardList getCreature()
+        {
+          CardList list = new CardList(AllZone.Computer_Play.getCards());
+          list = list.filter(new CardListFilter()
+          {
+            public boolean addCard(Card c)
+            {
+              return c.isCreature() && (!CardFactoryUtil.AI_doesCreatureAttack(c)) && CardFactoryUtil.canTarget(sourceCard, c) && 
+                     (! c.getKeyword().contains("Defender"));
+            }
+          });
+          // list.remove(card);      // if mana-only cost, allow self-target
+          return list;
+        }//getCreature()
+		
+	};//equip ability	
+    
+	Input runtime = new Input()
+	{
+		private static final long serialVersionUID = -6785656229070523470L;
+
+		public void showMessage()
+          {
+            //get all creatures you control
+            CardList list = new CardList();
+            list.addAll(AllZone.Human_Play.getCards());
+            list = list.getType("Creature");
+            
+            stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true));
+          }
+    };//Input
+    
+	equip.setBeforePayMana(runtime);
+	
+	equip.setDescription("Equip: " + Manacost);
+	return equip;
+  }//vanila_equip()
+
+  public static Command vanila_onequip(final Card sourceCard, final int Power, final int Tough, final String Ab1, final String Ab2, final String Ab3, final String Manacost)
+  {
+  		
+	Command onEquip = new Command()
+    {    
+
+		private static final long serialVersionUID = 8130682765214560887L;
+
+		public void execute()
+        {
+			if (sourceCard.isEquipping())
+			{
+				Card crd = sourceCard.getEquipping().get(0);
+				if (!(Ab1 == "none")) crd.addExtrinsicKeyword(Ab1);
+				if (!(Ab2 == "none")) crd.addExtrinsicKeyword(Ab2);
+				if (!(Ab3 == "none")) crd.addExtrinsicKeyword(Ab3);
+				crd.addSemiPermanentAttackBoost(Power);
+				crd.addSemiPermanentDefenseBoost(Tough);
+			}  
+        }//execute()
+    };//Command
+    
+
+	return onEquip;
+  }//vanila_onequip()
+  
+  public static Command vanila_unequip(final Card sourceCard, final int Power, final int Tough, final String Ab1, final String Ab2, final String Ab3, final String Manacost)
+  {
+  	    
+	Command onUnEquip = new Command()
+    {    
+
+		private static final long serialVersionUID = 5783423127748320501L;
+
+		public void execute()
+        {
+			if (sourceCard.isEquipping())
+			{
+				Card crd = sourceCard.getEquipping().get(0);
+				if (!(Ab1 == "none")) crd.removeExtrinsicKeyword(Ab1);
+				if (!(Ab2 == "none")) crd.removeExtrinsicKeyword(Ab2);
+				if (!(Ab3 == "none")) crd.removeExtrinsicKeyword(Ab3);
+				crd.addSemiPermanentAttackBoost(-1*Power);
+				crd.addSemiPermanentDefenseBoost(-1*Tough);
+					
+			}
+          
+        }//execute()
+    };//Command
+    	    	
+	return onUnEquip;
+  }//vanila_unequip()
+
+  
   //CardList choices are the only cards the user can successful select
   public static Input input_targetSpecific(final SpellAbility spell, final CardList choices, final String message, final boolean targeted)
   {

@@ -18,6 +18,16 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+slagwurm_armor.jpg          http://www.wizards.com/global/images/magic/general/slagwurm_armor.jpg
+neurok_hoversail.jpg        http://www.wizards.com/global/images/magic/general/neurok_hoversail.jpg
+vulshok_morningstar.jpg     http://www.wizards.com/global/images/magic/general/vulshok_morningstar.jpg
+vulshok_gauntlets.jpg       http://www.wizards.com/global/images/magic/general/vulshok_gauntlets.jpg
+vulshok_battlegear.jpg      http://www.wizards.com/global/images/magic/general/vulshok_battlegear.jpg
+gorgon_flail.jpg            http://www.wizards.com/global/images/magic/general/gorgon_flail.jpg
+bone_saw.jpg                http://www.wizards.com/global/images/magic/general/bone_saw.jpg
+runed_stalactite.jpg        http://www.wizards.com/global/images/magic/general/runed_stalactite.jpg
+leonin_scimitar.jpg         http://www.wizards.com/global/images/magic/general/leonin_scimitar.jpg
+peregrine_mask.jpg          http://www.wizards.com/global/images/magic/general/peregrine_mask.jpg
 cinder_pyromancer.jpg       http://www.wizards.com/global/images/magic/general/cinder_pyromancer.jpg
 antler_skulkin.jpg          http://www.wizards.com/global/images/magic/general/antler_skulkin.jpg
 ballynock_trapper.jpg       http://www.wizards.com/global/images/magic/general/ballynock_trapper.jpg
