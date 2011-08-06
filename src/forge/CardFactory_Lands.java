@@ -2030,6 +2030,7 @@ class CardFactory_Lands {
                     AllZone.EndOfTurn.addUntil(untilEOT);
                 }
             };//SpellAbility
+            a2.setType("Extrinsic"); // Required for Spreading Seas
             a2.setDescription("B: Regenerate Spawning Pool.");
             a2.setStackDescription("Regenerate Spawning Pool");
             
