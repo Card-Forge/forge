@@ -3722,7 +3722,56 @@ class CardFactory_Lands {
         	
         	skipTurn.setBeforePayMana(new Input_PayManaCost(skipTurn));
         }//*************** END ************ END **************************
+        
+        //*************** START ********** START *************************
+        else if(cardName.equals("Elephant Graveyard")) {
+        	final Card[] tgt = new Card[1];
+        	final Command untilEOT = new Command() {
+				private static final long serialVersionUID = -5392534004045270599L;
 
+				public void execute() {
+        			tgt[0].setShield(0);                    
+        		}
+        	};
+
+        	final SpellAbility ability = new Ability_Activated(card, "0") {
+				private static final long serialVersionUID = -3783236452506062253L;
+
+				@Override
+        		public void resolve() {
+        			tgt[0] = this.getTargetCard();
+
+        			tgt[0].addShield();
+        			AllZone.EndOfTurn.addUntil(untilEOT);
+        		}
+
+        		@Override
+        		public boolean canPlayAI() {
+        			return false;
+        		}
+
+        		@Override
+        		public boolean canPlay() {
+        			CardList elephants = AllZoneUtil.getTypeInPlay("Elephant");
+        			return elephants.size() != 0;
+        		}
+        	};
+
+        	ability.setDescription("tap: Regenerate target Elephant.");
+
+        	Target target = new Target("TgtV");
+        	target.setVTSelection("Select target Elephant.");
+        	final String Tgts[] = {"Creature.Elephant"};
+        	target.setValidTgts(Tgts);
+
+        	ability.setTarget(target);
+
+        	final Ability_Cost cost = new Ability_Cost("T", card.getName(), true);
+        	ability.setPayCosts(cost);
+
+        	card.addSpellAbility(ability);
+        }//*************** END ************ END **************************
+        
         if(hasKeyword(card, "Cycling") != -1) {
             int n = hasKeyword(card, "Cycling");
             if(n != -1) {
