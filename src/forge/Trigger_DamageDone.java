@@ -14,17 +14,17 @@ public class Trigger_DamageDone extends Trigger {
 		Card src = (Card)runParams.get("DamageSource");
 		Object tgt = runParams.get("DamageTarget");
 		
-		if(mapParams.containsKey("SourceValid"))
+		if(mapParams.containsKey("ValidSource"))
 		{
-			if(!src.isValidCard(mapParams.get("SourceValid").split(" "), hostCard.getController(), hostCard))
+			if(!src.isValidCard(mapParams.get("ValidSource").split(" "), hostCard.getController(), hostCard))
 			{
 				return false;
 			}
 		}
 		
-		if(mapParams.containsKey("TargetValid"))
+		if(mapParams.containsKey("ValidTarget"))
 		{
-			if(!matchesValid(tgt,mapParams.get("TargetValid").split(","),hostCard))
+			if(!matchesValid(tgt,mapParams.get("ValidTarget").split(","),hostCard))
 			{
 				return false;
 			}
