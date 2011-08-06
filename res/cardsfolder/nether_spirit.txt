@@ -1,7 +1,7 @@
 Name:Nether Spirit
 ManaCost:1 B B
 Types:Creature Spirit
-Text:At the beginning of your upkeep, if Nether Spirit is the only creature card in your graveyard, you may return Nether Spirit to play.
+Text:At the beginning of your upkeep, if Nether Spirit is the only creature card in your graveyard, you may return Nether Spirit to the battlefield.
 PT:2/2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nether_spirit.jpg

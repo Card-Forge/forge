@@ -8948,42 +8948,44 @@ public class GameActionUtil {
 		} // if creatures > 0
 	} // Wort
 
-	private static void upkeep_Nether_Spirit() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		final PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
+    private static void upkeep_Nether_Spirit() {
+        final Player player = AllZone.Phase.getPlayerTurn();
+        final PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
+        final PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
-		CardList all = new CardList(graveyard.getCards());
-		all = all.getType("Creature");
+        CardList all = new CardList(graveyard.getCards());
+        all = all.getType("Creature");
 
-		CardList list = new CardList(graveyard.getCards());
-		list = list.getName("Nether Spirit");
+        CardList list = new CardList(graveyard.getCards());
+        list = list.getName("Nether Spirit");
 
-		if(all.size() == 1 && list.size() == 1) {
-			final Card nether = list.get(0);
-			Ability ability = new Ability(list.get(0), "0") {
-				@Override
-				public void resolve() {
-					graveyard.remove(nether);
-					playZone.add(nether);
-				}
-			};
+        if (all.size() == 1 && list.size() == 1) {
+            final Card nether = list.get(0);
+            Ability ability = new Ability(list.get(0), "0") {
+                @Override
+                public void resolve() {
+                    graveyard.remove(nether);
+                    playZone.add(nether);
+                }
+            };
 
-			boolean returnNether = false;
+            boolean returnNether = false;
 
-			if(player.equals(AllZone.HumanPlayer)) {
-				String[] choices = {"Yes", "No"};
+            if (player.equals(AllZone.HumanPlayer)) {
+                String question = "Return Nether Spirit to the battlefield?";
+                if (GameActionUtil.showYesNoDialog(nether, question)) {
+                    returnNether = true;
+                }
+            }
 
-				Object q = AllZone.Display.getChoiceOptional("Return Nether Spirit to play?", choices);
-				if(q != null && q.equals("Yes")) returnNether = true;
-			}
-
-			if(player.equals(AllZone.ComputerPlayer) || returnNether) {
-				ability.setStackDescription("Nether Spirit returns to play.");
-				AllZone.Stack.add(ability);
-			}
-		} //if
-	}//nether spirit
+            if (player.equals(AllZone.ComputerPlayer) || returnNether) {
+                StringBuilder sb = new StringBuilder();
+                sb.append("Nether Spirit - ").append(player).append(" returns Nether Spirit to the battlefield");
+                ability.setStackDescription(sb.toString());
+                AllZone.Stack.add(ability);
+            }
+        } //if
+    }//nether spirit
 
 	private static void upkeep_Spore_Counters() {
 		final Player player = AllZone.Phase.getPlayerTurn();
