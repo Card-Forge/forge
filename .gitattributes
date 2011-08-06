@@ -2124,6 +2124,7 @@ res/cardsfolder/ghost_lit_raider.txt -text svneol=native#text/plain
 res/cardsfolder/ghost_lit_redeemer.txt -text svneol=native#text/plain
 res/cardsfolder/ghost_lit_stalker.txt -text svneol=native#text/plain
 res/cardsfolder/ghost_lit_warder.txt -text svneol=native#text/plain
+res/cardsfolder/ghost_quarter.txt -text svneol=native#text/plain
 res/cardsfolder/ghost_ship.txt -text svneol=native#text/plain
 res/cardsfolder/ghost_tactician.txt -text svneol=native#text/plain
 res/cardsfolder/ghost_town.txt -text svneol=native#text/plain
