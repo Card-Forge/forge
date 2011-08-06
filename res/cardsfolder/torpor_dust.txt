@@ -1,7 +1,7 @@
 Name:Torpor Dust
 ManaCost:2 UB
 Types:Enchantment Aura
-Text:Enchanted creature gets -3/-0.
+Text:no text
 K:Flash
 K:Enchant creature
 K:enPumpCurse:-3/-0

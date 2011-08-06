@@ -1,7 +1,7 @@
 Name:Torment
 ManaCost:1 B
 Types:Enchantment Aura
-Text:Enchanted creature gets -3/-0.
+Text:no text
 K:Enchant creature
 K:enPumpCurse:-3/-0
 SVar:Rarity:Common

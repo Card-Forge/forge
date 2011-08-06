@@ -1,7 +1,7 @@
 Name:Zephyr Net
 ManaCost:1 U
 Types:Enchantment Aura
-Text:Enchanted creature has defender and flying.
+Text:no text
 K:Enchant creature
 K:enPumpCurse:Defender & Flying
 SVar:Rarity:Common

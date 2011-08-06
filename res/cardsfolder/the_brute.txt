@@ -1,7 +1,7 @@
 Name:The Brute
 ManaCost:1 R
 Types:Enchantment Aura
-Text:Enchanted creature gets +1/+0.
+Text:no text
 K:Enchant creature
 K:enPump:+1/+0
 A:AB$Regenerate | Cost$ R R R | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.

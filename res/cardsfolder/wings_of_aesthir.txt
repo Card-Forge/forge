@@ -1,7 +1,7 @@
 Name:Wings of Aesthir
 ManaCost:W U
 Types:Enchantment Aura
-Text:Enchanted creature gets +1/+0 and has flying and first strike.
+Text:no text
 K:Enchant creature
 K:enPump:+1/+0/Flying & First Strike
 SVar:Rarity:Uncommon

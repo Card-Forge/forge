@@ -1,7 +1,7 @@
 Name:Zephid's Embrace
 ManaCost:2 U U
 Types:Enchantment Aura
-Text:Enchanted creature gets +2/+2 and has flying and shroud.
+Text:no text
 K:Enchant creature
 K:enPump:+2/+2/Flying & Shroud
 SVar:Rarity:Uncommon

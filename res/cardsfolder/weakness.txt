@@ -1,7 +1,7 @@
 Name:Weakness
 ManaCost:B
 Types:Enchantment Aura
-Text:Enchanted creature gets -2/-1.
+Text:no text
 K:Enchant creature
 K:enPumpCurse:-2/-1
 SVar:Rarity:Common
