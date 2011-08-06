@@ -14,7 +14,7 @@ import java.util.*;
 //balance the number of colors and creature/spells for
 
 //new cards that are won in quest mode
-public class QuestData_BoosterPack implements NewConstants {
+public class QuestBoosterPack implements NewConstants {
 //    final private static String      comment          = "//";
     
     private ArrayList<String> commonCreature   = new ArrayList<String>();
@@ -42,7 +42,7 @@ public class QuestData_BoosterPack implements NewConstants {
     
     //prints statistics to make sure everything is working
     public static void main(String[] args) {
-        QuestData_BoosterPack q = new QuestData_BoosterPack();
+        QuestBoosterPack q = new QuestBoosterPack();
         
         for(int i = 0; i < 100; i++)
             q.print(q.getNewCards(6, 3, 1));
@@ -95,7 +95,7 @@ public class QuestData_BoosterPack implements NewConstants {
         }
     }//colorStats()
     
-    public QuestData_BoosterPack() {
+    public QuestBoosterPack() {
         //setup(ForgeProps.getFile(QUEST.COMMON), commonCreature, commonSpell);
         //setup(ForgeProps.getFile(QUEST.UNCOMMON), uncommonCreature, uncommonSpell);
         //setup(ForgeProps.getFile(QUEST.RARE), rareCreature, rareSpell);
@@ -310,7 +310,7 @@ public class QuestData_BoosterPack implements NewConstants {
             
         } catch(Exception ex) {
             ErrorViewer.showError(ex);
-            throw new RuntimeException("QuestData_BoosterPack : readFile() error, " + ex);
+            throw new RuntimeException("QuestBoosterPack : readFile() error, " + ex);
         }
         
         return cardList;

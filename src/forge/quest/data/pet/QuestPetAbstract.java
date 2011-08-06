@@ -51,4 +51,8 @@ public abstract class QuestPetAbstract {
         this.name = name;
         this.maxLevel = maxLevel;
     }
+
+    public void setLevel(int level){
+        this.level = level;
+    }
 }

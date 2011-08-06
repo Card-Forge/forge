@@ -434,7 +434,7 @@ public class QuestUtil {
 		 *  White = 6
 		 */
 		
-		QuestData_BoosterPack pack = new QuestData_BoosterPack(); 
+		QuestBoosterPack pack = new QuestBoosterPack();
 		qa.clearCompy();
 		
 		int id = qa.getId();

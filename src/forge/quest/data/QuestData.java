@@ -1,13 +1,17 @@
 package forge.quest.data;
 
 import com.esotericsoftware.minlog.Log;
+import com.thoughtworks.xstream.XStream;
 import forge.*;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.quest.data.pet.*;
 
 import java.io.*;
 import java.util.*;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 
 //when you create QuestData and AFTER you copy the AI decks over
@@ -19,19 +23,15 @@ import java.util.*;
 //OR non-static readAIQuestDeckFiles()
 //which reads the files "questDecks-easy", "questDecks-medium","questDecks-hard",
 public class QuestData {
-    QuestData_Prefs qdPrefs = null;
+    QuestPreferences qdPrefs = null;
 
     private int rankIndex;
     private int win;
     private int lost;
 
-    private int plantLevel;
-    private int wolfPetLevel;
-    private int crocPetLevel;
-    private int birdPetLevel;
-    private int houndPetLevel;
+    private List<QuestPetAbstract> pets;
 
-    private String selectedPet;
+    private QuestPetAbstract selectedPet;
 
     private int life;
     private int estatesLevel;
@@ -47,12 +47,12 @@ public class QuestData {
     private String difficulty;
     private String mode = "";
 
-    private ArrayList<String> easyAIDecks;
-    private ArrayList<String> mediumAIDecks;
-    private ArrayList<String> hardAIDecks;
+    private transient ArrayList<String> easyAIDecks;
+    private transient ArrayList<String> mediumAIDecks;
+    private transient ArrayList<String> hardAIDecks;
 
     private Map<String, Deck> myDecks = new HashMap<String, Deck>();
-    private Map<String, Deck> aiDecks = new HashMap<String, Deck>();
+    private transient Map<String, Deck> aiDecks = new HashMap<String, Deck>();
 
     //holds String card names
     private ArrayList<String> cardPool = new ArrayList<String>();
@@ -62,13 +62,13 @@ public class QuestData {
     private ArrayList<Integer> availableQuests = new ArrayList<Integer>();
     private ArrayList<Integer> completedQuests = new ArrayList<Integer>();
 
-    private QuestData_BoosterPack boosterPack = new QuestData_BoosterPack();
+    private transient QuestBoosterPack boosterPack = new QuestBoosterPack();
 
     //used by shouldAddAdditionalCards()
     private Random random = new Random();
 
     //feel free to change this to something funnier
-    private String[] rankArray = {
+    private transient String[] rankArray = {
             "Level 0 - Confused Wizard", "Level 1 - Mana Mage", "Level 2 - Death by Megrim",
             "Level 3 - Shattered the Competition", "Level 4 - Black Knighted", "Level 5 - Shockingly Good",
             "Level 6 - Regressed into Timmy", "Level 7 - Loves Blue Control", "Level 8 - Immobilized by Fear",
@@ -82,7 +82,7 @@ public class QuestData {
     public boolean useNewQuestUI = false;
 
     public QuestData() {
-        qdPrefs = new QuestData_Prefs();
+        qdPrefs = new QuestPreferences();
 
         for (int i = 0; i < qdPrefs.getStartingBasic(); i++) {
             cardPool.add("Forest");
@@ -99,6 +99,8 @@ public class QuestData {
             cardPool.add("Snow-Covered Island");
             cardPool.add("Snow-Covered Plains");
         }
+
+        readAIQuestDeckFiles();
     }//QuestData
 
     //adds cards to card pool and sets difficulty
@@ -125,7 +127,7 @@ public class QuestData {
 
 
     public String[] getOpponents() {
-        int index = getDiffIndex();
+        int index = getDifficultyIndex();
 
         if (getWin() < qdPrefs.getWinsForMediumAI(index)) {
             return getOpponents(easyAIDecks);
@@ -139,17 +141,10 @@ public class QuestData {
     }//getOpponents()
 
 
-    static public void readAIQuestDeckFiles(QuestData data, ArrayList<String> aiDeckNames) {
+    private void readAIQuestDeckFiles(QuestData data, ArrayList<String> aiDeckNames) {
         data.easyAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.EASY), aiDeckNames);
         data.mediumAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.MEDIUM), aiDeckNames);
-        data.hardAIDecks = readFile(ForgeProps.getFile(
-                NewConstants.QUEST.HARD), aiDeckNames);
-    }
-
-    public void refreshAIQuestDeckFiles(ArrayList<String> aiDeckNames) {
-        easyAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.EASY), aiDeckNames);
-        mediumAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.MEDIUM), aiDeckNames);
-        hardAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.HARD), aiDeckNames);
+        data.hardAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.HARD), aiDeckNames);
     }
 
     public String[] getOpponents(ArrayList<String> aiDeck) {
@@ -200,54 +195,101 @@ public class QuestData {
     static public QuestData loadData() {
         try {
             //read file "questData"
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream(ForgeProps.getFile(NewConstants.QUEST.DATA)));
-            Object o = in.readObject();
-            in.close();
+            QuestData data;
 
-            QuestData_State state = (QuestData_State) o;
+            File xmlSaveFile = ForgeProps.getFile(NewConstants.QUEST.XMLDATA);
 
-            QuestData data = new QuestData();
+            //if the new file format does not exist, convert the old one and save it as the new copy
 
-            data.win = state.win;
-            data.lost = state.lost;
-            data.credits = state.credits;
-            data.rankIndex = state.rankIndex;
-            data.difficulty = state.difficulty;
-
-            data.mode = state.mode;
-            if (data.mode == null) {
-                data.mode = REALISTIC;
+            if (!xmlSaveFile.exists()) {
+                data = convertSaveFormat();
+                data.saveData();
             }
 
-            data.plantLevel = state.plantLevel;
-            data.wolfPetLevel = state.wolfPetLevel;
-            data.crocPetLevel = state.crocPetLevel;
-            data.birdPetLevel = state.birdPetLevel;
-            data.houndPetLevel = state.houndPetLevel;
-            data.selectedPet = state.selectedPet;
-            data.life = state.life;
-            data.estatesLevel = state.estatesLevel;
-            data.luckyCoinLevel = state.luckyCoinLevel;
-            data.sleightOfHandLevel = state.sleightOfHandLevel;
-            data.gearLevel = state.gearLevel;
-            data.questsPlayed = state.questsPlayed;
-            data.availableQuests = state.availableQuests;
-            data.completedQuests = state.completedQuests;
+            else {
+                BufferedInputStream bin = new BufferedInputStream(new FileInputStream(xmlSaveFile));
+                GZIPInputStream zin = new GZIPInputStream(bin);
 
-            data.shopList = state.shopList;
-            data.cardPool = state.cardPool;
-            data.myDecks = state.myDecks;
-            data.aiDecks = state.aiDecks;
+                XStream xStream = new XStream();
 
-            readAIQuestDeckFiles(data, new ArrayList<String>(data.aiDecks.keySet()));
+                data = (QuestData) xStream.fromXML(zin);
+                data.readAIQuestDeckFiles(data, new ArrayList<String>());
 
+                zin.close();
+            }
             return data;
-        }//try
+        }
+
         catch (Exception ex) {
             ErrorViewer.showError(ex, "Error loading Quest Data");
             throw new RuntimeException(ex);
         }
-    }//loadData()
+    }
+
+    private static QuestData convertSaveFormat() {
+        forge.QuestData oldData = forge.QuestData.loadData();
+        QuestData newData = new QuestData();
+
+
+        newData.difficulty = oldData.getDifficulty();
+        newData.diffIndex = oldData.getDiffIndex();
+        newData.rankIndex = oldData.getWin()/newData.qdPrefs.getWinsForRankIncrease(newData.diffIndex);
+
+        newData.win = oldData.getWin();
+        newData.lost = oldData.getLost();
+
+        newData.life = oldData.getLife();
+        newData.estatesLevel = oldData.getEstatesLevel();
+        newData.luckyCoinLevel = oldData.getLuckyCoinLevel();
+        newData.sleightOfHandLevel = oldData.getSleightOfHandLevel();
+        newData.gearLevel = oldData.getGearLevel();
+        newData.questsPlayed = oldData.getQuestsPlayed();
+        newData.credits = oldData.getCredits();
+        newData.mode = oldData.getMode();
+
+        newData.myDecks = new HashMap<String, Deck>();
+        for (String deckName : oldData.getDeckNames()) {
+            newData.myDecks.put(deckName, oldData.getDeck(deckName));
+        }
+
+        newData.cardPool = oldData.getCardpool();
+        newData.newCardList = oldData.getAddedCards();
+        newData.shopList = oldData.getShopList();
+
+        newData.availableQuests = oldData.getAvailableQuests();
+        newData.completedQuests = oldData.getCompletedQuests();
+
+        newData.pets = new ArrayList<QuestPetAbstract>();
+        QuestPetAbstract newPet;
+
+        if(oldData.getBirdPetLevel() > 0){
+            newPet = new QuestPetBird();
+            newPet.setLevel(oldData.getBirdPetLevel());
+            newData.pets.add(newPet);
+        }
+        if(oldData.getHoundPetLevel() > 0){
+            newPet = new QuestPetHound();
+            newPet.setLevel(oldData.getHoundPetLevel());
+            newData.pets.add(newPet);
+        }
+        if(oldData.getWolfPetLevel() > 0){
+            newPet = new QuestPetWolf();
+            newPet.setLevel(oldData.getWolfPetLevel());
+            newData.pets.add(newPet);
+        }
+        if(oldData.getCrocPetLevel() > 0){
+            newPet = new QuestPetCrocodile();
+            newPet.setLevel(oldData.getCrocPetLevel());
+            newData.pets.add(newPet);
+        }
+        if(oldData.getPlantLevel() > 0){
+            newPet = new QuestPetPlant();
+            newPet.setLevel(oldData.getPlantLevel());
+            newData.pets.add(newPet);
+        }
+
+        return newData;
+    }
 
 
     //returns Strings of the card names
@@ -498,13 +540,13 @@ public class QuestData {
         }
     }
 
-    public long getCreditsToAdd(WinLose winLose) {
+    public long getCreditsToAdd(QuestMatchState matchState) {
         long creds = (long) (qdPrefs.getMatchRewardBase() + (qdPrefs.getMatchRewardTotalWins() * win));
-        String[] wins = winLose.getWinMethods();
-        int[] winTurns = winLose.getWinTurns();
-        boolean[] mulliganedToZero = winLose.getMulliganedToZero();
+        String[] wins = matchState.getWinMethods();
+        int[] winTurns = matchState.getWinTurns();
+        boolean[] mulliganedToZero = matchState.getMulliganedToZero();
 
-        if (winLose.getLose() == 0) {
+        if (matchState.getLose() == 0) {
             creds += qdPrefs.getMatchRewardNoLosses();
         }
 
@@ -599,54 +641,14 @@ public class QuestData {
 
     //********************FANTASY STUFF START***********************
 
-    public void addPlantLevel() {
-        plantLevel++;
+
+    public void setSelectedPet(QuestPetAbstract pet) {
+        selectedPet = pet;
     }
 
-    public int getPlantLevel() {
-        return plantLevel;
-    }
-
-    public void addWolfPetLevel() {
-        wolfPetLevel++;
-    }
-
-    public int getWolfPetLevel() {
-        return wolfPetLevel;
-    }
-
-    public void addCrocPetLevel() {
-        crocPetLevel++;
-    }
-
-    public int getCrocPetLevel() {
-        return crocPetLevel;
-    }
-
-    public void addBirdPetLevel() {
-        birdPetLevel++;
-    }
-
-    public int getBirdPetLevel() {
-        return birdPetLevel;
-    }
-
-    public void addHoundPetLevel() {
-        houndPetLevel++;
-    }
-
-    public int getHoundPetLevel() {
-        return houndPetLevel;
-    }
-
-    public void setSelectedPet(String s) {
-        selectedPet = s;
-    }
-
-    public String getSelectedPet() {
+    public QuestPetAbstract getSelectedPet() {
         return selectedPet;
     }
-
 
     public void setLife(int n) {
         life = n;
@@ -724,12 +726,8 @@ public class QuestData {
         return mode;
     }
 
-    //should be called first, because the difficultly won't change
-    public String getDifficulty() {
-        return difficulty;
-    }
 
-    public int getDiffIndex() {
+    public int getDifficultyIndex() {
         return diffIndex;
     }
 
@@ -738,18 +736,6 @@ public class QuestData {
         difficulty = qdPrefs.getDifficulty(i);
     }
 
-    public void setDifficultyIndex() {
-        String[] diffStr = qdPrefs.getDifficulty();
-        for (int i = 0; i < diffStr.length; i++) {
-            if (difficulty.equals(diffStr[i])) {
-                diffIndex = i;
-            }
-        }
-    }
-
-    public String[] getDifficutlyChoices() {
-        return qdPrefs.getDifficulty();
-    }
 
     public String getRank() {
         //is rankIndex too big?
@@ -790,79 +776,21 @@ public class QuestData {
         }
     }
 
-
-    //opponentName is one of the Strings returned by getOpponents()
-    public Deck getOpponentDeck(String opponentName) {
-        return null;
-    }
-
     public boolean hasSaveFile() {
-        //File f = new File(this.saveFileName); // The static field QuestData.saveFileName should be accessed in a static way
-        // No warning is given for it below in getBackupFilename
         return ForgeProps.getFile(NewConstants.QUEST.DATA).exists();
     }
 
-    //returns somethings like "questData-10"
-    //find a new filename
-    @SuppressWarnings("unused")
-    static private File getBackupFilename() {
-        //I made this a long because maybe an int would overflow, but who knows
-        File original = ForgeProps.getFile(NewConstants.QUEST.DATA);
-        File parent = original.getParentFile();
-        String name = original.getName();
-        long n = 1;
-
-        File f;
-        while ((f = new File(parent, name + "-" + n)).exists()) {
-            n++;
-        }
-
-        return f;
-    }//getBackupFilename()
-
-    static public void saveData(QuestData q) {
+    public void saveData() {
         try {
-            /*	
-                  //rename previous file "questData" to something like questData-23
-                  //just in case there is an error when playing the game or saving
-                  File file = new File(saveFileName);
-                  if(file.exists())
-                    file.renameTo(getBackupFilename());
-            */
+            File f = ForgeProps.getFile(NewConstants.QUEST.XMLDATA);
+            BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(f));
+            GZIPOutputStream zout = new GZIPOutputStream(bout);
 
-            //setup QuestData_State
-            QuestData_State state = new QuestData_State();
-            state.win = q.win;
-            state.lost = q.lost;
-            state.credits = q.credits;
-            state.difficulty = q.difficulty;
-            state.mode = q.mode;
-            state.rankIndex = q.rankIndex;
+            XStream xStream = new XStream();
+            xStream.toXML(this, zout);
 
-            state.plantLevel = q.plantLevel;
-            state.wolfPetLevel = q.wolfPetLevel;
-            state.crocPetLevel = q.crocPetLevel;
-            state.birdPetLevel = q.birdPetLevel;
-            state.houndPetLevel = q.houndPetLevel;
-            state.selectedPet = q.selectedPet;
-            state.life = q.life;
-            state.estatesLevel = q.estatesLevel;
-            state.luckyCoinLevel = q.luckyCoinLevel;
-            state.sleightOfHandLevel = q.sleightOfHandLevel;
-            state.gearLevel = q.gearLevel;
-            state.questsPlayed = q.questsPlayed;
-            state.availableQuests = q.availableQuests;
-
-            state.cardPool = q.cardPool;
-            state.shopList = q.shopList;
-            state.myDecks = q.myDecks;
-            state.aiDecks = q.aiDecks;
-
-            //write object
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(ForgeProps.getFile(NewConstants.QUEST.DATA)));
-            out.writeObject(state);
-            out.flush();
-            out.close();
+            zout.flush();
+            zout.close();
         } catch (Exception ex) {
             ErrorViewer.showError(ex, "Error saving Quest Data");
             throw new RuntimeException(ex);
@@ -876,8 +804,8 @@ public class QuestData {
         }
 
         for (int i = 0; i < 10; i++) {
-            QuestData.saveData(q);
-            QuestData.loadData();
+            q.saveData();
+            q = QuestData.loadData();
         }
 
         System.exit(1);

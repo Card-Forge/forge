@@ -7,7 +7,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.Serializable;
 
-public class QuestData_Prefs implements Serializable {
+public class QuestPreferences implements Serializable {
 	private static final long serialVersionUID = 3266336025656577905L;
 
 	private int numDiff = 4; 
@@ -50,7 +50,7 @@ public class QuestData_Prefs implements Serializable {
 	private int matchRewardWinByTurnFifteen = 5;
 	private int matchRewardMullToZero = 500;
 	
-	public QuestData_Prefs()
+	public QuestPreferences()
 	{
 		// if quest.prefs exists
 		grabPrefsFromFile();

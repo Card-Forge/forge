@@ -104,6 +104,7 @@ public interface NewConstants {
         public static final String PREFS    = "quest/prefs";
         
         public static final String DECKS    = "quest/decks-dir";
+        public static final String XMLDATA  = "quest/data-xml";
     }
     
     /**

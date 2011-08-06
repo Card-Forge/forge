@@ -2,13 +2,10 @@ package forge;
 //import java.io.BufferedReader;
 //import java.io.File;
 //import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
 
 import forge.properties.NewConstants;
+
+import java.util.*;
 
 //balance the number of colors and creature/spells for
 //new cards that are won in quest mode
@@ -308,7 +305,7 @@ public class QuestData_BoosterPack implements NewConstants {
             
         } catch(Exception ex) {
             ErrorViewer.showError(ex);
-            throw new RuntimeException("QuestData_BoosterPack : readFile() error, " + ex);
+            throw new RuntimeException("QuestBoosterPack : readFile() error, " + ex);
         }
         
         return cardList;
