@@ -1,3 +1,8 @@
+Psychic Drain
+X U B
+Sorcery
+no text
+
 Mind Shatter
 X B B
 Sorcery

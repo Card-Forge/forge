@@ -17660,6 +17660,52 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         
+        //*************** START *********** START **************************
+        else if (cardName.equals("Psychic Drain"))
+        {
+        	final SpellAbility spell = new Spell(card){
+        		private static final long serialVersionUID = -5739635875246083152L;
+
+        		public void resolve()
+        		{
+        			String player = getTargetPlayer();
+        			
+        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+        			PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+        			CardList libList = new CardList(lib.getCards());
+        			
+        			for (int i = 0; i < card.getXManaCostPaid(); i++) {
+        				Card c = libList.get(i);
+        				lib.remove(c);
+        				grave.add(c);
+        			}
+        			
+        			AllZone.GameAction.getPlayerLife(card.getController()).addLife(card.getXManaCostPaid());
+        			card.setXManaCostPaid(0);
+        		}
+      		  
+        		public boolean canPlayAI()
+        		{
+        			String player = getTargetPlayer();
+        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+        			CardList libList = new CardList(lib.getCards());
+      			  
+        			int humanLife = AllZone.Human_Life.getLife();
+        			int computerLife = AllZone.Computer_Life.getLife();
+      			  
+        			final int maxX = ComputerUtil.getAvailableMana().size() - 2;
+        			return (maxX >= 3) && (humanLife >= computerLife) && (libList.size() > 0);
+        		}
+        	};
+        	spell.setDescription("Target player puts the top X cards of his or her library into his or her graveyard and you gain X life.");
+        	spell.setStackDescription("Psychic Drain - Target player puts the top X cards of his or her library into his or her graveyard and you gain X life.");
+        	spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }
+        //*************** END ************ END **************************
+        
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
