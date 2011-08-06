@@ -4113,6 +4113,65 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Sun Titan")) {
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    if(AllZone.GameAction.isCardInZone(getTargetCard(), grave)) {
+                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                        play.add(getTargetCard());
+                        grave.remove(getTargetCard());
+                    }
+                }//resolve()
+            };
+            Command intoPlay = new Command() {
+                                
+				private static final long serialVersionUID = 6483805330273377116L;
+
+				public void execute() {
+                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    CardList graveList = new CardList(grave.getCards());
+                    graveList = graveList.filter(new CardListFilter()
+                    {
+                    	public boolean addCard(Card crd)
+                    	{
+                    		return crd.isPermanent() && CardUtil.getConvertedManaCost(crd.getManaCost()) <=3;
+                    	}
+                    });
+                    
+                    if(graveList.size() == 0) return;
+                    
+                    if(card.getController().equals(Constant.Player.Human)) {
+                        Object o = AllZone.Display.getChoiceOptional("Select target card", grave.getCards());
+                        if(o != null) {
+                            ability.setTargetCard((Card) o);
+                            AllZone.Stack.add(ability);
+                        }
+                    } else//computer
+                    {
+                        CardList list = new CardList(grave.getCards());
+                        list = list.filter(new CardListFilter(){
+                        	public boolean addCard(Card crd)
+                        	{
+                        		return crd.isPermanent() && CardUtil.getConvertedManaCost(crd.getManaCost()) <=3;
+                        	}
+                        });
+                        Card best = CardFactoryUtil.AI_getBestCreature(list);
+                        
+                        if(best == null) {
+                            list.shuffle();
+                            best = list.get(0);
+                        }
+                        ability.setTargetCard(best);
+                        AllZone.Stack.add(ability);
+                    }
+                }//execute()
+            };//Command
+            card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Karmic Guide")) {
             final SpellAbility ability = new Ability(card, "0") {

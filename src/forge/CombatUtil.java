@@ -1582,6 +1582,71 @@ public class CombatUtil {
                 
             }//Primeval Titan
             
+            else if(c.getName().equals("Sun Titan") && !c.getCreatureAttackedThisCombat()) {
+                final Card sun = c;
+                final Ability ability2 = new Ability(c, "0") {
+                    @Override
+                    public void resolve() {
+                    	PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, sun.getController());
+                        if(AllZone.GameAction.isCardInZone(getTargetCard(), grave)) {
+                            PlayerZone play = AllZone.getZone(Constant.Zone.Play, sun.getController());
+                            play.add(getTargetCard());
+                            grave.remove(getTargetCard());
+                        }
+                    }
+                }; //Ability
+                
+
+                //ability2.setStackDescription(c.getName() + " - ");
+                
+
+                Command command = new Command() {
+                    private static final long serialVersionUID = 1658050744890095441L;
+                    
+                    public void execute() {
+                        PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, sun.getController());
+                        CardList graveList = new CardList(grave.getCards());
+                        graveList = graveList.filter(new CardListFilter()
+                        {
+                        	public boolean addCard(Card crd)
+                        	{
+                        		return crd.isPermanent() && CardUtil.getConvertedManaCost(crd.getManaCost()) <=3;
+                        	}
+                        });
+                        
+                        if(graveList.size() == 0) return;
+                        
+                        if(sun.getController().equals(Constant.Player.Human)) {
+                            Object o = AllZone.Display.getChoiceOptional("Select target card", grave.getCards());
+                            if(o != null) {
+                                ability2.setTargetCard((Card) o);
+                                AllZone.Stack.add(ability2);
+                            }
+                        } else//computer
+                        {
+                            CardList list = new CardList(grave.getCards());
+                            list = list.filter(new CardListFilter(){
+                            	public boolean addCard(Card crd)
+                            	{
+                            		return crd.isPermanent() && CardUtil.getConvertedManaCost(crd.getManaCost()) <=3;
+                            	}
+                            });
+                            Card best = CardFactoryUtil.AI_getBestCreature(list);
+                            
+                            if(best == null) {
+                                list.shuffle();
+                                best = list.get(0);
+                            }
+                            ability2.setTargetCard(best);
+                            AllZone.Stack.add(ability2);
+                        }
+                    }//execute()
+                };//Command
+                command.execute();
+                
+            }//Sun Titan
+            
+            
             else if(c.getName().equals("Preeminent Captain") && !c.getCreatureAttackedThisCombat()) {
                 System.out.println("Preeminent Captain Attacks");
                 PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getController());

@@ -1,3 +1,10 @@
+Sun Titan
+4 W W
+Creature Giant
+Whenever Sun Titan enters the battlefield or attacks, you may return target permanent card with converted mana cost 3 or less from your graveyard to the battlefield.
+6/6
+Vigilance
+
 Roc Egg
 2 W
 Creature Bird
