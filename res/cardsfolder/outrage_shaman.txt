@@ -1,0 +1,10 @@
+Name:Outrage Shaman
+ManaCost:3 R R
+Types:Creature Goblin Shaman
+Text:no text
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Chroma - When CARDNAME enters the battlefield, it deals damage to target creature equal to the number of red mana symbols in the mana costs of permanents you control.
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtC | NumDmg$ X
+SVar:X:Count$Chroma.R
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/outrage_shaman.jpg
+End
