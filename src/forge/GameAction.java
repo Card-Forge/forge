@@ -859,6 +859,48 @@ public class GameAction {
     public void destroyNoRegeneration(Card c) {
         if(!AllZone.GameAction.isCardInPlay(c) || c.getKeyword().contains("Indestructible")) return;
         
+        if (c.isEnchanted())
+        {
+        	CardList list = new CardList(c.getEnchantedBy().toArray());
+        	list = list.filter(new CardListFilter()
+        	{
+        		public boolean addCard(Card crd)
+        		{
+        			return crd.getKeyword().contains("Totem armor");
+        		}
+        	});
+        	CardListUtil.sortCMC(list);
+        	
+        	if (list.size() != 0)
+        	{
+        		final Card crd;
+	        	if (list.size() == 1)
+	        	{
+	        		crd = list.get(0);
+	        	}
+	        	else {
+	        		if (c.getController().equals(Constant.Player.Human))
+	        			crd = AllZone.Display.getChoiceOptional("Select totem armor to destroy", list.toArray());
+	        		else 
+	        			crd = list.get(0);
+	        	}
+	        	
+	        	final Card card = c;
+	        	Ability ability = new Ability(crd, "0")
+	        	{
+	        		public void resolve()
+	        		{
+	        			destroy(crd);
+	    	        	card.setDamage(0);
+	    	        	
+	        		}
+	        	};
+	        	ability.setStackDescription(crd + " - Totem armor: destroy this aura.");
+	        	AllZone.Stack.add(ability);
+	        	return;
+        	}
+        }//totem armor
+        
         sacrificeDestroy(c);
     }
     
@@ -2316,6 +2358,51 @@ public class GameAction {
             c.tap();
             return false;
         }
+        
+        if (c.isEnchanted())
+        {
+        	CardList list = new CardList(c.getEnchantedBy().toArray());
+        	list = list.filter(new CardListFilter()
+        	{
+        		public boolean addCard(Card crd)
+        		{
+        			return crd.getKeyword().contains("Totem armor");
+        		}
+        	});
+        	CardListUtil.sortCMC(list);
+        	
+        	
+        	
+        	if (list.size() != 0)
+        	{
+        		final Card crd;
+	        	if (list.size() == 1)
+	        	{
+	        		crd = list.get(0);
+	        	}
+	        	else {
+	        		if (c.getController().equals(Constant.Player.Human))
+	        			crd = AllZone.Display.getChoiceOptional("Select totem armor to destroy", list.toArray());
+	        		else 
+	        			crd = list.get(0);
+	        	}
+	        	
+	        	final Card card = c;
+	        	Ability ability = new Ability(crd, "0")
+	        	{
+	        		public void resolve()
+	        		{
+	        			destroy(crd);
+	    	        	card.setDamage(0);
+	    	        	
+	        		}
+	        	};
+	        	ability.setStackDescription(crd + " - Totem armor: destroy this aura.");
+	        	AllZone.Stack.add(ability);
+	        	return false;
+        	}
+        }//totem armor
+        
         //System.out.println("Card " + c.getName() + " is getting sent to GY, and this turn it got damaged by: ");
         for(Card crd:c.getReceivedDamageFromThisTurn().keySet()) {
             if(c.getReceivedDamageFromThisTurn().get(crd) > 0) {

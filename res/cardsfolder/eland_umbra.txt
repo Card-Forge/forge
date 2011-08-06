@@ -1,0 +1,10 @@
+Name:Eland Umbra
+ManaCost:1 W
+Types:Enchantment Aura
+Text:Enchanted creature gets +0/+4.
+K:Enchant creature
+K:Totem armor
+K:enPump:+0/+4
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/eland_umbra.jpg
+End
