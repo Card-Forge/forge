@@ -7209,7 +7209,10 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     CardList attackers = new CardList(AllZone.Combat.getAttackers());
+                    attackers.addAll(AllZone.pwCombat.getAttackers());
+                    
                     CardList blockers = AllZone.Combat.getAllBlockers();
+                    attackers.add(AllZone.pwCombat.getAllBlockers());
                     
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())
@@ -7242,7 +7245,10 @@ public class CardFactory_Creatures {
                 @Override
                 public void selectCard(Card card, PlayerZone zone) {
                     CardList attackers = new CardList(AllZone.Combat.getAttackers());
+                    attackers.addAll(AllZone.pwCombat.getAttackers());
                     CardList blockers = AllZone.Combat.getAllBlockers();
+                    blockers.add(AllZone.pwCombat.getAllBlockers());
+                    
                     if(card.isCreature() && zone.is(Constant.Zone.Play)
                             && (attackers.contains(card) || blockers.contains(card))) {
                         ability.setTargetCard(card);
@@ -7269,7 +7275,9 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     CardList attackers = new CardList(AllZone.Combat.getAttackers());
+                    attackers.addAll(AllZone.pwCombat.getAttackers());
                     CardList blockers = AllZone.Combat.getAllBlockers();
+                    blockers.add(AllZone.pwCombat.getAllBlockers());
                     
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())
@@ -7302,7 +7310,9 @@ public class CardFactory_Creatures {
                 @Override
                 public void selectCard(Card card, PlayerZone zone) {
                     CardList attackers = new CardList(AllZone.Combat.getAttackers());
+                    attackers.addAll(AllZone.pwCombat.getAttackers());
                     CardList blockers = AllZone.Combat.getAllBlockers();
+                    blockers.add(AllZone.pwCombat.getAllBlockers());
                     if(card.isCreature() && zone.is(Constant.Zone.Play)
                             && (attackers.contains(card) || blockers.contains(card))) {
                         ability.setTargetCard(card);
@@ -7328,6 +7338,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     CardList attackers = new CardList(AllZone.Combat.getAttackers());
+                    attackers.addAll(AllZone.pwCombat.getAttackers());
                     
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())
@@ -7361,6 +7372,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void selectCard(Card card, PlayerZone zone) {
                     CardList attackers = new CardList(AllZone.Combat.getAttackers());
+                    attackers.addAll(AllZone.pwCombat.getAttackers());
                     if (card.isCreature() 
                     		&& zone.is(Constant.Zone.Play) 
                     		&& card.getKeyword().contains("Flying") 
