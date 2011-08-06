@@ -13825,7 +13825,7 @@ public class GameActionUtil {
 		}// execute()
 	}; // Vampire Nocturnus
 	
-
+	/*
 	public static Command Dauntless_Dourbark          = new Command() {
 
 		private static final long serialVersionUID = -8843070116088984774L;
@@ -13886,7 +13886,7 @@ public class GameActionUtil {
 			return list.size();
 		}
 	};
-
+	*/
 	public static Command Guul_Draz_Vampire           = new Command() {
 		private static final long serialVersionUID = -4252257530318024113L;
 
@@ -16317,7 +16317,7 @@ public class GameActionUtil {
 		//commands.put("Crowd_of_Cinders", Crowd_of_Cinders);
 		
 		//commands.put("Dakkon_Blackblade", Dakkon_Blackblade);
-		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
+		//commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
 		//commands.put("Drove_of_Elves", Drove_of_Elves);
 		
 		//commands.put("Eldrazi_Monument", Eldrazi_Monument);
