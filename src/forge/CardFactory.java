@@ -10024,8 +10024,11 @@ public class CardFactory implements NewConstants {
             
             card.addSpellAbility(ability);
             ability.setDescription("1, Sacrifice a nontoken artifact: Put a 1/1 blue Thopter artifact creature token with flying onto the battlefield. You gain 1 life.");
-            ability.setStackDescription(card.getName()
-                    + " - Put a 1/1 blue Thopter artifact creature token with flying onto the battlefield. You gain 1 life.");
+
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - Put a 1/1 blue Thopter artifact creature token with flying onto the battlefield. You gain 1 life.");
+            ability.setStackDescription(sb.toString());
+            
             ability.setBeforePayMana(runtime);
             
         }//*************** END ************ END **************************
@@ -10045,7 +10048,11 @@ public class CardFactory implements NewConstants {
                 }
             };
             card.addSpellAbility(ability);
-            ability.setStackDescription(card + " - take an extra turn after this one.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" - take an extra turn after this one.");
+            ability.setStackDescription(sb.toString());
+            
             ability.setDescription("Tap: Take an extra turn after this one.");
         }//*************** END ************ END **************************
 
@@ -10131,7 +10138,11 @@ public class CardFactory implements NewConstants {
                 private static final long serialVersionUID = 502892931516451254L;
                 
                 public void execute() {
-                    gainLife.setStackDescription(card.getController() + " gains 20 life");
+                	
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(card.getController()).append(" gains 20 life");
+                	gainLife.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(gainLife);
                 }
             };
@@ -10140,7 +10151,11 @@ public class CardFactory implements NewConstants {
                 private static final long serialVersionUID = 5772999389072757369L;
                 
                 public void execute() {
-                    loseLife.setStackDescription(card.getController() + " loses 20 life");
+                	
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(card.getController()).append(" loses 20 life");
+                	loseLife.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(loseLife);
                 }
             };
@@ -10264,8 +10279,12 @@ public class CardFactory implements NewConstants {
               private static final long serialVersionUID = 9202753910259054021L;
               
               public void execute() {
-                  ability.setStackDescription("Imprint - " + card.getController()
-                		  + " may exile an instant card with converted mana cost 2 or less from their hand.");
+            	  
+            	  StringBuilder sb = new StringBuilder();
+            	  sb.append("Imprint - ").append(card.getController());
+            	  sb.append(" may exile an instant card with converted mana cost 2 or less from their hand.");
+            	  ability.setStackDescription(sb.toString());
+                  
                   AllZone.Stack.add(ability);
               }
           };
@@ -10443,7 +10462,7 @@ public class CardFactory implements NewConstants {
       		};//SpellAbility
 
       		card.addSpellAbility(ability);
-      		ability.setDescription("1, Sacrifice Bottle of Suleiman: Flip a coin.  Win: Put 5/5 Djinn in play.  Lose: Does 5 damage to you.");
+      		ability.setDescription("1, Sacrifice Bottle of Suleiman: Flip a coin. Win: Put 5/5 Djinn in play. Lose: Does 5 damage to you.");
       		ability.setStackDescription("Bottle of Suleiman - flip a coin");
       	}//*************** END ************ END **************************
         
@@ -10653,7 +10672,11 @@ public class CardFactory implements NewConstants {
 				}
         	};
         	ability.setDescription("3, tap: Sacrifice Dreamstone Hedron: Draw 3 cards.");
-        	ability.setStackDescription(cardName+" - Draw 3 cards.");
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(cardName).append(" - Draw 3 cards.");
+        	ability.setStackDescription(sb.toString());
+        	
         	ability.setBeforePayMana(new Input_PayManaCost(ability));
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
@@ -10692,7 +10715,11 @@ public class CardFactory implements NewConstants {
             };//Ability_Tap
             
             ability.setDescription("4, tap: Discard your hand: Draw a card for each creature you control.");
-            ability.setStackDescription(cardName+" - discard hand and draw 1 card for every creature you control.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(cardName).append(" - discard hand and draw 1 card for every creature you control.");
+            ability.setStackDescription(sb.toString());
+            
             ability.setBeforePayMana(new Input_PayManaCost(ability));
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
@@ -10776,7 +10803,11 @@ public class CardFactory implements NewConstants {
 				private static final long serialVersionUID = 7982507967024313067L;
 
 				public void execute() {
-                    ability.setStackDescription(card.getName() + " - " + card.getController() + " draws a card");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - ").append(card.getController()).append(" draws a card");
+					ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
@@ -10814,8 +10845,11 @@ public class CardFactory implements NewConstants {
         		}
 
         	};//SpellAbility
-
-        	ability.setStackDescription(cardName+" - Player shuffles grave into library.");
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(cardName).append(" - Player shuffles grave into library.");
+        	ability.setStackDescription(sb.toString());
+        	
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
 
@@ -10855,7 +10889,11 @@ public class CardFactory implements NewConstants {
                     AllZone.Stack.add(ability);
                 }
             };//Command
-            ability.setStackDescription("As "+cardName+" enters the battlefield, choose a color.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("As ").append(cardName).append(" enters the battlefield, choose a color.");
+            ability.setStackDescription(sb.toString());
+            
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
  
@@ -10881,8 +10919,11 @@ public class CardFactory implements NewConstants {
 				private static final long serialVersionUID = 3564466123797650567L;
 
 				public void execute() {
-        			ability.setStackDescription("When " + card.getName()
-        					+ " comes into play, tap all Legendary creatures.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append("When ").append(card.getName()).append(" comes into play, tap all Legendary creatures.");
+					ability.setStackDescription(sb.toString());
+        			
         			AllZone.Stack.add(ability);
         		}
         	};
@@ -11237,7 +11278,10 @@ public class CardFactory implements NewConstants {
         		}
         	};//SpellAbility
         	
-        	ability.setStackDescription(cardName+" - Exchange life totals with target opponent.");
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(cardName).append(" - Exchange life totals with target opponent.");
+        	ability.setStackDescription(sb.toString());
+        	
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
@@ -11285,7 +11329,10 @@ public class CardFactory implements NewConstants {
             
             //card.clearSpellKeepManaAbility();
             card.addSpellAbility(a1);
-            a1.setStackDescription(card + " becomes a 3/6 Golem creature until End of Combat");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" becomes a 3/6 Golem creature until End of Combat");
+            a1.setStackDescription(sb.toString());
             
             Command paid1 = new Command() {
 				private static final long serialVersionUID = 1531378274457977155L;
@@ -11359,7 +11406,11 @@ public class CardFactory implements NewConstants {
 				private static final long serialVersionUID = 2985015252466920757L;
 
 				public void execute() {
-                	comesIntoPlayAbility.setStackDescription(card.getName()+" - choose a creature type.  Creatures of that type do not untap during their controller's untap step.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - choose a creature type. Creatures of that type do not untap during their controller's untap step.");
+					comesIntoPlayAbility.setStackDescription(sb.toString());
+                	
                 	AllZone.Stack.add(comesIntoPlayAbility);
                 }
             };
@@ -11537,7 +11588,11 @@ public class CardFactory implements NewConstants {
                 }
             };
             addTurn.setDescription("tap, Remove three charge counters from Magistrate's Scepter: Take an extra turn after this one.");
-            addTurn.setStackDescription(cardName+" - take an extra turn after this one.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(cardName).append(" - take an extra turn after this one.");
+            addTurn.setStackDescription(sb.toString());
+            
             card.addSpellAbility(addTurn);
         }//*************** END ************ END **************************
         
@@ -11567,9 +11622,15 @@ public class CardFactory implements NewConstants {
         			mp.addExtrinsicKeyword("ManaPool:" + color);
         		}
         	};
-
-        	mana.setDescription(abCost+"Add one mana of any color to your mana pool.");
-        	mana.setStackDescription(cardName+" - add one mana of any color to your mana pool.");
+        	
+        	StringBuilder sbDesc = new StringBuilder();
+        	sbDesc.append(abCost).append("Add one mana of any color to your mana pool.");
+        	mana.setDescription(sbDesc.toString());
+        	
+        	StringBuilder sbStack = new StringBuilder();
+        	sbStack.append(cardName).append(" - add one mana of any color to your mana pool.");
+        	mana.setStackDescription(sbStack.toString());
+        	
         	card.addSpellAbility(mana);
         }//*************** END ************ END **************************
         
@@ -11584,7 +11645,10 @@ public class CardFactory implements NewConstants {
                     card.getController().drawCards(2);
                 }
             };
-            draw.setStackDescription(cardName+" - discard 1 at random, then draw 2 cards.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(cardName).append(" - discard 1 at random, then draw 2 cards.");
+            draw.setStackDescription(sb.toString());
+            
             card.addSpellAbility(draw);
         }//*************** END ************ END **************************
         
@@ -11623,11 +11687,17 @@ public class CardFactory implements NewConstants {
         	};//SpellAbility
 
         	card.addSpellAbility(ability);
-        	ability.setDescription(abCost+"Flip a coin. If you win the flip, sacrifice Sorcerer's Strongbox and draw three cards.");
-        	ability.setStackDescription(card.getName()+" - flip a coin");
+        	
+        	StringBuilder sbDesc = new StringBuilder();
+        	sbDesc.append(abCost).append("Flip a coin. If you win the flip, sacrifice Sorcerer's Strongbox and draw three cards.");
+        	ability.setDescription(sbDesc.toString());
+        	
+        	StringBuilder sbStack = new StringBuilder();
+        	sbStack.append(card.getName()).append(" - flip a coin");
+        	ability.setStackDescription(sbStack.toString());
         }//*************** END ************ END **************************
         
-      //*************** START ********** START *************************
+        //*************** START ********** START *************************
         else if(cardName.equals("Horror of Horrors")) {
         	/*
         	 * Sacrifice a swamp: Regenerate target blackcreature.
