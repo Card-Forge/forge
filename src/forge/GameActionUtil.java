@@ -12829,41 +12829,7 @@ public class GameActionUtil {
 		}// execute()
 	};
     
-	public static Command Levitation                  = new Command() {
-
-		private static final long serialVersionUID   = -6707183535529395830L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Flying";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Levitation");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Creature");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(!c.getKeyword().contains(keyword)) {
-						c.addExtrinsicKeyword(keyword);
-						gloriousAnthemList.add(c);
-					}
-				}// for inner
-			}// for outer
-		}// execute()
-	};
-
+	
 	/**
 	 * stores the Command
 	 */
@@ -19200,6 +19166,7 @@ public class GameActionUtil {
 		commands.put("Cover_of_Darkness", Cover_of_Darkness);
 		commands.put("Crowd_of_Cinders", Crowd_of_Cinders);
 		
+		commands.put("Dakkon", Dakkon);
 		commands.put("Deaths_Shadow", Deaths_Shadow);
 		commands.put("Drove_of_Elves", Drove_of_Elves);
 		
@@ -19209,22 +19176,27 @@ public class GameActionUtil {
 		
 		commands.put("Gaeas_Anthem", Gaeas_Anthem);
 		commands.put("Gemhide_Sliver", Gemhide_Sliver);
+		commands.put("Giant_Tortoise", Giant_Tortoise);
 		commands.put("Glorious_Anthem", Glorious_Anthem);
 		commands.put("Goblin_Assault", Goblin_Assault);
 		commands.put("Guul_Draz_Specter", Guul_Draz_Specter);
 		
 		commands.put("Hada_Spy_Patrol", Hada_Spy_Patrol);
 		commands.put("Halimar_Wavewatch", Halimar_Wavewatch);
+		commands.put("Heedless_One", Heedless_One);
 		commands.put("Homarid", Homarid);
 		
 		commands.put("Imperious_Perfect", Imperious_Perfect);
+		commands.put("Iona_Shield_of_Emeria", Iona_Shield_of_Emeria);
 		
 		commands.put("Joiner_Adept", Joiner_Adept);
 		
 		commands.put("Kargan_Dragonlord", Kargan_Dragonlord);
-		
+		commands.put("Keldon_Warlord", Keldon_Warlord);
 		commands.put("Kithkin_Rabble", Kithkin_Rabble);
 		commands.put("Knight_of_the_Reliquary", Knight_of_the_Reliquary);
+		commands.put("Knighthood", Knighthood);
+		commands.put("Kor_Duelist", Kor_Duelist);
 		commands.put("Kor_Spiritdancer", Kor_Spiritdancer);
 		commands.put("Korlash_Heir_to_Blackblade", Korlash_Heir_to_Blackblade);
 		
@@ -19232,6 +19204,7 @@ public class GameActionUtil {
 		commands.put("Lord_of_Extinction", Lord_of_Extinction);
 		
 		commands.put("Magnivore", Magnivore);
+		commands.put("Maraxus_of_Keld", Maraxus_of_Keld);
 		commands.put("Maro", Maro);
 		commands.put("Marrow_Gnawer", Marrow_Gnawer);
 		commands.put("Masumaro_First_to_Live", Masumaro_First_to_Live);
@@ -19246,6 +19219,7 @@ public class GameActionUtil {
 		commands.put("Nyxathid", Nyxathid);
 		
 		commands.put("Old_Man_of_the_Sea", Old_Man_of_the_Sea);
+		commands.put("Omnath", Omnath);
 		commands.put("Overbeing_of_Myth", Overbeing_of_Myth);
 		
 		commands.put("People_of_the_Woods", People_of_the_Woods);
@@ -19264,11 +19238,14 @@ public class GameActionUtil {
 		commands.put("Student_of_Warfare", Student_of_Warfare);
 		commands.put("Svogthos_the_Restless_Tomb", Svogthos_the_Restless_Tomb);
 		
+		commands.put("Tabernacle", Tabernacle);
 		commands.put("Tarmogoyf", Tarmogoyf);
 		commands.put("Terravore", Terravore);
 		commands.put("That_Which_Was_Taken", That_Which_Was_Taken);
+		commands.put("Time_of_Heroes", Time_of_Heroes);
 		commands.put("Transcendent_Master", Transcendent_Master);
 		
+		commands.put("Umbra_Stalker", Umbra_Stalker);
 		commands.put("Uril", Uril);
 		
 		commands.put("Vampire_Nocturnus", Vampire_Nocturnus);
@@ -19287,7 +19264,7 @@ public class GameActionUtil {
 		///The commands above are in alphabetical order by cardname.  The cammands.put() below need to be filed above
 		
 		
-		commands.put("Dakkon", Dakkon);
+		
 		commands.put("Lighthouse_Chronologist", Lighthouse_Chronologist);
 		commands.put("Caravan_Escort", Caravan_Escort);
 		commands.put("Ikiral_Outrider", Ikiral_Outrider);
@@ -19341,7 +19318,7 @@ public class GameActionUtil {
 
 		commands.put("Shared_Triumph", Shared_Triumph);
 		commands.put("Crucible_of_Fire", Crucible_of_Fire);
-		commands.put("Time_of_Heroes", Time_of_Heroes);
+		
 		
 		commands.put("Honor_of_the_Pure", Honor_of_the_Pure);
 		commands.put("Beastmaster_Ascension", Beastmaster_Ascension);
@@ -19360,9 +19337,6 @@ public class GameActionUtil {
 		commands.put("Meng_Huo", Meng_Huo);
 		
 		commands.put("Tolsimir", Tolsimir);
-		
-		commands.put("Giant_Tortoise", Giant_Tortoise);
-
 		commands.put("Darksteel_Forge", Darksteel_Forge);
 		commands.put("Elspeth_Emblem", Elspeth_Emblem);
 		commands.put("Koth_Emblem", Koth_Emblem);
@@ -19372,10 +19346,6 @@ public class GameActionUtil {
 		commands.put("Undead_Warchief", Undead_Warchief);
 		commands.put("Coat_of_Arms", Coat_of_Arms);	
 		commands.put("Daru_Warchief", Daru_Warchief);
-		commands.put("Levitation", Levitation);
-		commands.put("Knighthood", Knighthood);
-		
-		commands.put("Tabernacle", Tabernacle);
 		commands.put("Magus_of_the_Tabernacle", Magus_of_the_Tabernacle);
 		
 		commands.put("Concordant_Crossroads", Concordant_Crossroads);
@@ -19389,15 +19359,6 @@ public class GameActionUtil {
 		commands.put("Kinsbaile_Cavalier", Kinsbaile_Cavalier);
 		commands.put("Meddling_Mage", Meddling_Mage);
 		commands.put("Gaddock_Teeg", Gaddock_Teeg);
-		commands.put("Iona_Shield_of_Emeria", Iona_Shield_of_Emeria);
-		commands.put("Kor_Duelist", Kor_Duelist);
-		commands.put("Keldon_Warlord", Keldon_Warlord);
-		commands.put("Heedless_One", Heedless_One);
-		commands.put("Omnath", Omnath);
-		
-		commands.put("Maraxus_of_Keld", Maraxus_of_Keld);
-		commands.put("Umbra_Stalker", Umbra_Stalker);
-		
 		
 		//System.out.println("size of commands: " + commands.size());
 
