@@ -13610,6 +13610,68 @@ public class CardFactory_Creatures {
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
+        
+        //*************** START *********** START **************************  
+        else if(cardName.equals("Plague Spitter")) {
+            
+            final Ability ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                	for(Player p:AllZoneUtil.getPlayersInGame()) p.addDamage(1, card);
+					for(Card c:AllZoneUtil.getCreaturesInPlay()) c.addDamage(1, card);
+                }
+            };
+            
+            Command damage = new Command() {
+                private static final long serialVersionUID = 206350020224577500L;
+                
+                public void execute() {
+                	StringBuilder sb = new StringBuilder();
+        			sb.append(card.getName()).append(" - deals 1 damage to each creature and each player.");
+        			ability.setStackDescription(sb.toString());
+                    
+                    AllZone.Stack.add(ability);
+                }
+            };
+            
+            card.addDestroyCommand(damage);
+        }//*************** END ************ END **************************
+        
+        
+        //*************** START *********** START ************************** 
+        else if(cardName.equals("Phyrexian Scuta")) {
+        	Ability_Cost abCost = new Ability_Cost("3 B PayLife<3>", cardName, false);
+            final SpellAbility kicker = new Spell(card, abCost, null) {
+				private static final long serialVersionUID = -6420757044982294960L;
+
+				@Override
+                public void resolve() {
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
+                    
+                    card.setKicked(true);
+                    hand.remove(card);
+                    play.add(card);
+                    card.addCounterFromNonEffect(Counters.P1P1, 2);
+                }
+                
+                @Override
+                public boolean canPlay() {
+                    return super.canPlay() && card.getController().getLife() >= 3;
+                }
+                
+            };
+            kicker.setKickerAbility(true);
+            kicker.setManaCost("3 B");
+            kicker.setDescription("Kicker - Pay 3 life.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - Creature 3/3 (Kicked)");
+            kicker.setStackDescription(sb.toString());
+            
+            card.addSpellAbility(kicker);
+        }//*************** END ************ END **************************
+        
                
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
         {

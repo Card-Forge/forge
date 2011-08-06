@@ -55,6 +55,7 @@ public class GameActionUtil {
 		upkeep_Farmstead();
 		upkeep_Unstable_Mutation();
 		upkeep_Warp_Artifact();
+		upkeep_Plague_Spitter();
 		upkeep_Soul_Bleed();
 		upkeep_Wanderlust();
 		upkeep_Curse_of_Chains();
@@ -9628,6 +9629,33 @@ public class GameActionUtil {
 			}
 		}
 	}// upkeep_Ebony_Owl_Netsuke
+	
+	private static void upkeep_Plague_Spitter() {
+		/*
+		 * At the beginning of your upkeep, Plague Spitter deals 1 damage
+		 * to each creature and each player
+		 */
+		final Player player = AllZone.Phase.getPlayerTurn();
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Plague Spitter");
+
+		Ability ability;
+		for(Card spitter:list) {
+			final Card source = spitter;
+			ability = new Ability(source, "0") {
+				@Override
+				public void resolve() {
+					for(Player p:AllZoneUtil.getPlayersInGame()) p.addDamage(1, source);
+					for(Card c:AllZoneUtil.getCreaturesInPlay()) c.addDamage(1, source);
+				}
+			};// Ability
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(source.getName()).append(" - deals 1 damage to each creature and each player.");
+			ability.setStackDescription(sb.toString());
+
+			AllZone.Stack.add(ability);
+		}// for
+	}// upkeep_Copper_Tablet()
 
 	private static void upkeep_Copper_Tablet() {
 		/*

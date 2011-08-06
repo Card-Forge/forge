@@ -1,0 +1,8 @@
+Name:Plague Spitter
+ManaCost:2 B
+Types:Creature Horror
+Text:At the beginning of your upkeep, CARDNAME deals 1 damage to each creature and each player.\r\nWhen CARDNAME is put into a graveyard from the battlefield, CARDNAME deals 1 damage to each creature and each player.
+PT:2/2
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/plague_spitter.jpg
+End
