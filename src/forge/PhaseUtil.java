@@ -6,35 +6,20 @@ import java.util.HashMap;
 public class PhaseUtil {
 	// ******* UNTAP PHASE *****
 	private static boolean skipUntap(Player p) {
-		if (AllZoneUtil.isCardInPlay("Sands of Time"))
-    		return true;
-		if (AllZoneUtil.isCardInPlay("Stasis"))
+		if (AllZoneUtil.isCardInPlay("Sands of Time") || AllZoneUtil.isCardInPlay("Stasis"))
     		return true;
 		
 		if(p.skipNextUntap()) {
 			p.setSkipNextUntap(false);
 			return true;
 		}
-		else return false;
+		
+		return false;
 	}
 	
 	public static void handleUntap(){
-
 		Player turn = AllZone.Phase.getPlayerTurn();
-		
-		if (skipUntap(turn)){
-    		AllZone.Phase.setNeedToNextPhase(true);
-    		return;
-    	}
-		
-    	//Run triggers
-    	HashMap<String,Object> runParams = new HashMap<String,Object>();
-    	runParams.put("Phase", Constant.Phase.Untap);
-    	runParams.put("Player", AllZone.Phase.getPlayerTurn());
-    	AllZone.TriggerHandler.runTrigger("Phase", runParams);
-		
 
-        
         AllZone.Phase.turnReset();
         
         AllZone.Combat.reset();
@@ -49,15 +34,28 @@ public class PhaseUtil {
         }
         turn.incrementTurn();
         
-        // Phasing would happen around here
-        
+        AllZone.GameAction.resetActivationsPerTurn();
+		
         CardList lands = AllZoneUtil.getPlayerLandsInPlay(turn);
         lands = lands.filter(AllZoneUtil.untapped);
         turn.setNumPowerSurgeLands(lands.size());
         
-        if(!AllZoneUtil.isCardInPlay("Stasis") && !AllZoneUtil.isCardInPlay("Sands of Time")) doUntap();
+        // anything before this point happens regardless of whether the Untap phase is skipped
         
-        AllZone.GameAction.resetActivationsPerTurn();
+		if (skipUntap(turn)){
+    		AllZone.Phase.setNeedToNextPhase(true);
+    		return;
+    	}
+		
+    	//Run triggers
+    	HashMap<String,Object> runParams = new HashMap<String,Object>();
+    	runParams.put("Phase", Constant.Phase.Untap);
+    	runParams.put("Player", AllZone.Phase.getPlayerTurn());
+    	AllZone.TriggerHandler.runTrigger("Phase", runParams);
+		
+        // Phasing would happen here
+        
+        doUntap();
         
         //otherwise land seems to stay tapped when it is really untapped
         AllZone.Human_Battlefield.updateObservers();
