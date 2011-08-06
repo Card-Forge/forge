@@ -13313,7 +13313,7 @@ public class CardFactory implements NewConstants {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Kodama's Reach")) {
+        else if(cardName.equals("Kodama's Reach") || cardName.equals("Cultivate"))  {
             SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = -3361422153566629825L;
                 
@@ -14023,7 +14023,7 @@ public class CardFactory implements NewConstants {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Boomerang") || cardName.equals("Eye of Nowhere") || cardName.equals("Surging AEther")) {
+        else if(cardName.equals("Boomerang") || cardName.equals("Eye of Nowhere") || cardName.equals("Rescind") || cardName.equals("Surging AEther") || cardName.equals("Deny Reality")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 5383879224433456795L;
                 

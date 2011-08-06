@@ -1,3 +1,20 @@
+Cultivate
+2 G
+Sorcery  
+Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Then shuffle your library.
+
+Deny Reality
+3 U B
+Instant
+Return target permanent to its owner's hand.
+Cascade
+
+Rescind
+1 U U
+Instant
+Return target permanent to its owner's hand.
+Cycling:2
+
 Rotting Rats
 1 B
 Creature Zombie Rat
@@ -22368,7 +22385,7 @@ Until end of turn, target land is 3/3 creature that's still a land.
 
 Kodama's Reach
 2 G
-Sorcery  
+Sorcery Arcane
 Search your library for two basic land cards, reveal those cards, and put one into play tapped and the other into your hand. Then shuffle your library.
 
 Wandering Stream
