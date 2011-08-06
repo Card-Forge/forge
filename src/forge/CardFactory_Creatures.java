@@ -18275,6 +18275,60 @@ public class CardFactory_Creatures {
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START ************************** 
+        else if(cardName.equals("Kavu Titan")) {
+            final SpellAbility kicker = new Spell(card) {
+                private static final long serialVersionUID = -1598664196463358630L;
+                
+                @Override
+                public void resolve() {
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    
+                    card.setKicked(true);
+                    hand.remove(card);
+                    play.add(card);
+                }
+                
+                @Override
+                public boolean canPlay() {
+                    return super.canPlay() && AllZone.Phase.getActivePlayer().equals(card.getController())
+                            && !AllZone.Phase.getPhase().equals("End of Turn")
+                            && !AllZone.GameAction.isCardInPlay(card);
+                }
+                
+            };
+            kicker.setKickerAbility(true);
+            kicker.setManaCost("3 G G");
+            kicker.setAdditionalManaCost("2 G");
+            kicker.setDescription("Kicker 2 G");
+            kicker.setStackDescription(card.getName() + " - Creature 5/5 (Kicked)");
+            
+            card.addSpellAbility(kicker);
+            
+            final Ability ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    card.addCounter(Counters.P1P1, 3);
+                    card.addIntrinsicKeyword("Trample");
+
+                	card.setKicked(false);
+                }
+            };
+            
+            Command commandComes = new Command() {
+                private static final long serialVersionUID = -2622859088591798773L;
+                
+                public void execute() {
+                    if(card.isKicked()) {
+                            ability.setStackDescription("Kavu Titan gets 3 +1/+1 counters and gains trample.");
+                            AllZone.Stack.add(ability);
+                    }
+                }//execute()
+            };//CommandComes
+            
+            card.addComesIntoPlayCommand(commandComes);
+        }//*************** END ************ END **************************
         
         //*************** START *********** START ************************** 
         else if(cardName.equals("Gatekeeper of Malakir")) {

@@ -86,6 +86,7 @@ public class GameActionUtil {
 		upkeep_Bringer_of_the_Blue_Dawn();
 		upkeep_Bringer_of_the_White_Dawn();
 		upkeep_Murkfiend_Liege();
+		upkeep_Seedborn_Muse();
 		upkeep_Mirror_Sigil_Sergeant();
 		//upkeep_Luminous_Angel();
 		upkeep_Verdant_Force();
@@ -1030,7 +1031,7 @@ public class GameActionUtil {
 			for(int i = 0; i < list.size(); i++) {
 				final Card card = list.get(i);
 				final Command untilEOT = new Command() {
-					private static final long serialVersionUID = -4569751606008597903L;
+					private static final long serialVersionUID = -4569751606008597913L;
 
 					public void execute() {
 						if(AllZone.GameAction.isCardInPlay(card)) {
@@ -9777,6 +9778,42 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}
 	}
+	
+	private static void upkeep_Seedborn_Muse()
+	{
+		final String player = AllZone.Phase.getActivePlayer();
+		final String opp = AllZone.GameAction.getOpponent(player);
+		
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(opp);
+		list = list.getName("Seedborn Muse");
+		
+		Ability ability;
+		for (int i = 0; i < list.size(); i++) {
+			final Card card = list.get(i);
+			
+			ability = new Ability(card, "0")
+			{
+				public void resolve()
+				{
+					CardList permanents = AllZoneUtil.getPlayerCardsInPlay(opp);
+					permanents = permanents.filter(new CardListFilter() {
+						public boolean addCard(Card c)
+						{
+							return c.isTapped();
+						}
+					});
+					
+					for (Card crd:permanents)
+					{
+						crd.untap();
+					}
+				}
+			};
+			
+			ability.setStackDescription(card + " - Untap all permanents you control during each other player's untap step.");
+			AllZone.Stack.add(ability);
+		}
+	}
 
 	private static void upkeep_Mirror_Sigil_Sergeant()
 	{
@@ -12455,6 +12492,42 @@ public class GameActionUtil {
 					}
 				}// for inner
 			}// for outer
+		}// execute()
+	};
+	
+	
+	public static Command Emperor_Crocodile                      = new Command() {
+		private static final long serialVersionUID   = -5406532269475480827L;
+
+		@SuppressWarnings("unused")
+		// gloriousAnthemList
+		CardList                  gloriousAnthemList = new CardList();
+
+		public void execute() {
+			// get all cards
+
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.filter(new CardListFilter() {
+                public boolean addCard(Card c) {
+                    return c.getName().equals("Emperor Crocodile");
+                }
+            });
+			
+			for (int i=0;i<list.size();i++) {
+				
+				Card c = list.get(i);
+				
+			
+			//Player only has one creature in play (the crocodile) then it dies.
+			if (AllZoneUtil.getCreaturesInPlay(c.getController()).size() == 1) {
+	            AllZone.GameAction.sacrifice(c);	
+			}
+            
+			}
+			
+
 		}// execute()
 	};
 
@@ -18240,6 +18313,87 @@ public class GameActionUtil {
 		}
 
 	}; //Maro
+	
+	public static Command Masumaro_First_to_Live                       = new Command() {
+		private static final long serialVersionUID = -8778922687347191964L;
+
+		public void execute() {
+			// get all creatures
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Masumaro, First to Live");
+
+			for(int i = 0; i < list.size(); i++) {
+				Card c = list.get(i);
+				int k = 0;
+				if(c.getController().equals(
+						Constant.Player.Human)) {
+					k = countHand_Human();
+				} else k = countHand_Computer();
+				c.setBaseAttack(2*k);
+				c.setBaseDefense(2*k);
+			}
+		}
+
+		private int countHand_Human() {
+			PlayerZone Play = AllZone.getZone(
+					Constant.Zone.Hand, Constant.Player.Human);
+			CardList list = new CardList();
+			list.addAll(Play.getCards());
+			return list.size();
+		}
+
+		private int countHand_Computer() {
+			PlayerZone Play = AllZone.getZone(
+					Constant.Zone.Hand, Constant.Player.Computer);
+			CardList list = new CardList();
+			list.addAll(Play.getCards());
+			return list.size();
+		}
+
+	}; //Masumaro, first to live
+	
+	
+	public static Command Adamaro_First_to_Desire                       = new Command() {
+		private static final long serialVersionUID = -8778912687347191965L;
+
+		public void execute() {
+			// get all creatures
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Adamaro, First to Desire");
+
+			for(int i = 0; i < list.size(); i++) {
+				Card c = list.get(i);
+				int k = 0;
+				if(c.getController().equals(
+						Constant.Player.Human)) {
+					k = countHand_Computer();
+				} else k = countHand_Human();
+				c.setBaseAttack(k);
+				c.setBaseDefense(k);
+			}
+		}
+
+		private int countHand_Human() {
+			PlayerZone Play = AllZone.getZone(
+					Constant.Zone.Hand, Constant.Player.Human);
+			CardList list = new CardList();
+			list.addAll(Play.getCards());
+			return list.size();
+		}
+
+		private int countHand_Computer() {
+			PlayerZone Play = AllZone.getZone(
+					Constant.Zone.Hand, Constant.Player.Computer);
+			CardList list = new CardList();
+			list.addAll(Play.getCards());
+			return list.size();
+		}
+
+	}; //Adamaro, first to desire
 
 	public static Command Overbeing_of_Myth           = new Command() {
 		private static final long serialVersionUID = -2250795040532050455L;
@@ -20892,6 +21046,8 @@ public class GameActionUtil {
 		commands.put("Multani_Maro_Sorcerer", Multani_Maro_Sorcerer);
 		commands.put("Molimo_Maro_Sorcerer", Molimo_Maro_Sorcerer);
 		commands.put("Maro", Maro);
+		commands.put("Masumaro_First_to_Live", Masumaro_First_to_Live);
+		commands.put("Adamaro_First_to_Desire", Adamaro_First_to_Desire);
 		commands.put("Overbeing_of_Myth", Overbeing_of_Myth);
 		commands.put("Guul_Draz_Specter", Guul_Draz_Specter);
 		commands.put("Dakkon", Dakkon);
@@ -21063,7 +21219,7 @@ public class GameActionUtil {
 		commands.put("Mass_Hysteria", Mass_Hysteria);
 		commands.put("Fervor", Fervor);
 		commands.put("Madrush_Cyclops", Madrush_Cyclops);
-
+		commands.put("Emperor_Crocodile", Emperor_Crocodile);
 		commands.put("Sun_Quan", Sun_Quan);
 
 		commands.put("Rolling_Stones", Rolling_Stones);

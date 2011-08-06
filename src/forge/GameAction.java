@@ -176,6 +176,8 @@ public class GameAction {
         	c.getKeyword().contains("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard."))	
         	&& !c.getController().equals(sa.getSourceCard().getController()))
         	discard_PutIntoPlayInstead(c);
+        else if (c.getKeyword().contains("If a spell or ability an opponent controls causes you to discard CARDNAME, return it to your hand."))
+        		;
         else
         	moveToGraveyard(c);
     }

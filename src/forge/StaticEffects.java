@@ -46,6 +46,7 @@ public class StaticEffects
 		cardToEffectsList.put("Magnivore", new String[] {"Magnivore"});
 		cardToEffectsList.put("Tarmogoyf", new String[] {"Tarmogoyf"});
 		cardToEffectsList.put("Lhurgoyf", new String[] {"Lhurgoyf"});
+		cardToEffectsList.put("Emperor Crocodile", new String[] {"Emperor_Crocodile"});		
 		cardToEffectsList.put("Wolf", new String[] {"Sound_the_Call_Wolf"});
 		cardToEffectsList.put("Drove of Elves", new String[] {"Drove_of_Elves"});		
 		cardToEffectsList.put("Crowd of Cinders", new String[] {"Crowd_of_Cinders"});
@@ -54,6 +55,8 @@ public class StaticEffects
 		cardToEffectsList.put("Multani, Maro-Sorcerer", new String[] {"Multani_Maro_Sorcerer"});
 		cardToEffectsList.put("Molimo, Maro-Sorcerer", new String[] {"Molimo_Maro_Sorcerer"});
 		cardToEffectsList.put("Maro", new String[] {"Maro"});
+		cardToEffectsList.put("Masumaro, First to Live", new String[] {"Masumaro_First_to_Live"});
+		cardToEffectsList.put("Adamaro, First to Desire", new String[] {"Adamaro_First_to_Desire"});
 		cardToEffectsList.put("Overbeing of Myth", new String[] {"Overbeing_of_Myth"});
 		cardToEffectsList.put("Guul Draz Specter", new String[] {"Guul_Draz_Specter"});
 		cardToEffectsList.put("Dakkon Blackblade", new String[] {"Dakkon"});
