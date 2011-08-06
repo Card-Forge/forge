@@ -152,7 +152,33 @@ public class AbilityFactory_Reveal {
 	}
 
 	private static boolean digCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-		return false;
+		HashMap<String,String> params = af.getMapParams();
+		Card source = sa.getSourceCard();
+		
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+		
+		//currently to restrict everything except Mulch
+		if(!params.get("ChangeNum").equalsIgnoreCase("All")) return false;
+		
+
+		double chance = .4;	// 40 percent chance with instant speed stuff
+		if (AbilityFactory.isSorcerySpeed(sa))
+			chance = .667;	// 66.7% chance for sorcery speed (since it will never activate EOT)
+		Random r = MyRandom.random;
+		boolean randomReturn = r.nextFloat() <= Math.pow(chance, source.getAbilityUsed() + 1);
+
+		if (AbilityFactory.playReusable(sa))
+			randomReturn = true;
+
+		if (af.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+				return randomReturn && abSub.chkAI_Drawback();
+			}
+		}
+		return randomReturn;
+		
 		/*
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
@@ -200,7 +226,7 @@ public class AbilityFactory_Reveal {
 		int numToDig = AbilityFactory.calculateAmount(af.getHostCard(), params.get("DigNum"), sa);
 		String destZone1 = params.containsKey("DestinationZone") ? params.get("DestinationZone") : "Hand";
 		int libraryPosition = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : -1;
-		int destZone1ChangeNum = params.containsKey("ChangeNum") ? Integer.parseInt(params.get("ChangeNum")) : 1;
+		int destZone1ChangeNum = 1;
 		boolean mitosis = params.containsKey("Mitosis");
 		String changeValid = params.containsKey("ChangeValid") ? params.get("ChangeValid") : "";
 		boolean anyNumber = params.containsKey("AnyNumber");
@@ -208,6 +234,12 @@ public class AbilityFactory_Reveal {
 		int libraryPosition2 = params.containsKey("LibraryPosition2") ? Integer.parseInt(params.get("LibraryPosition2")) : -1;
 		boolean optional = params.containsKey("Optional");
 		boolean noMove = params.containsKey("NoMove");
+		boolean changeAll = false;
+		
+		if(params.containsKey("ChangeNum")) {
+			if(params.get("ChangeNum").equalsIgnoreCase("All")) changeAll = true;
+			else destZone1ChangeNum = Integer.parseInt(params.get("ChangeNum"));
+		}
 
 		ArrayList<Player> tgtPlayers;
 
@@ -234,8 +266,14 @@ public class AbilityFactory_Reveal {
 					Card dummy = new Card();
 					dummy.setName("[No valid cards]");
 					
-					//show the user the revealed cards
-					GuiUtils.getChoice("Looking at cards from library", top.toArray());
+					if(params.containsKey("Reveal")) {
+						GuiUtils.getChoice("Revealing cards from library", top.toArray());
+						//AllZone.GameAction.revealToCopmuter(top.toArray()); - for when it exists
+					}
+					else {
+						//show the user the revealed cards
+						GuiUtils.getChoice("Looking at cards from library", top.toArray());
+					}
 
 					if(!noMove) {
 						if(mitosis) {
@@ -256,33 +294,46 @@ public class AbilityFactory_Reveal {
 						else {
 							valid = top;
 						}
-
-						int j = 0;
-						while(j < destZone1ChangeNum || (anyNumber && j < numToDig)) {
-							//let user get choice
-							Card chosen = null;
-							if(anyNumber || optional) {
-								chosen = GuiUtils.getChoiceOptional("Choose a card to put into "+destZone1, valid.toArray());
+						
+						if(changeAll) {
+							for(Card c:valid) {
+								PlayerZone zone = AllZone.getZone(destZone1, c.getOwner());
+								if(zone.is("Library")) {
+									AllZone.GameAction.moveToLibrary(c, libraryPosition);
+								}
+								else {
+									AllZone.GameAction.moveTo(zone, c);
+								}
 							}
-							else {
-								chosen = GuiUtils.getChoice("Choose a card to put into "+destZone1, valid.toArray());
+						}
+						else {
+							int j = 0;
+							while(j < destZone1ChangeNum || (anyNumber && j < numToDig)) {
+								//let user get choice
+								Card chosen = null;
+								if(anyNumber || optional) {
+									chosen = GuiUtils.getChoiceOptional("Choose a card to put into "+destZone1, valid.toArray());
+								}
+								else {
+									chosen = GuiUtils.getChoice("Choose a card to put into "+destZone1, valid.toArray());
+								}
+								if(chosen == null || chosen.getName().equals("[No valid cards]")) break;
+								valid.remove(chosen);
+								PlayerZone zone = AllZone.getZone(destZone1, chosen.getOwner());
+								if(zone.is("Library")) {
+									//System.out.println("Moving to lib position: "+libraryPosition);
+									AllZone.GameAction.moveToLibrary(chosen, libraryPosition);
+								}
+								else {
+									AllZone.GameAction.moveTo(zone, chosen);
+								}
+								//AllZone.GameAction.revealToComputer() - for when this exists
+								j++;
 							}
-							if(chosen == null || chosen.getName().equals("[No valid cards]")) break;
-							valid.remove(chosen);
-							PlayerZone zone = AllZone.getZone(destZone1, chosen.getOwner());
-							if(zone.is("Library")) {
-								//System.out.println("Moving to lib position: "+libraryPosition);
-								AllZone.GameAction.moveToLibrary(chosen, libraryPosition);
-							}
-							else {
-								AllZone.GameAction.moveTo(zone, chosen);
-							}
-							//AllZone.GameAction.revealToComputer() - for when this exists
-							j++;
 						}
 
 						//dump anything not selected from valid back into the rest
-						rest.addAll(valid.toArray());
+						if(!changeAll) rest.addAll(valid.toArray());
 						if(rest.contains(dummy)) rest.remove(dummy);
 
 						//now, move the rest to destZone2
