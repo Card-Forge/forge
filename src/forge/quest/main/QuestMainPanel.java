@@ -284,7 +284,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
                         questData.setSelectedPet((String) petComboBox.getSelectedItem());
                     }
                     else {
-                        questData.setSelectedPet("");
+                        questData.setSelectedPet("No Plant/Pet");
                     }
 
                     petComboBox.setEnabled(petCheckBox.isSelected());
@@ -299,7 +299,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
                         questData.setSelectedPet((String) petComboBox.getSelectedItem());
                     }
                     else {
-                        questData.setSelectedPet("");
+                        questData.setSelectedPet("No Plant/Pet");
                     }
                 }
             });
@@ -397,6 +397,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
         if (questData.getMode().equals(QuestData.FANTASY)) {
             lifeLabel.setText(" " + questData.getLife());
+            
             petComboBox.removeAllItems();
 
             List<String> petList = QuestUtil.getPetNames(questData);
@@ -415,7 +416,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
                 petCheckBox.setEnabled(false);
             }
 
-            if (questData.getSelectedPet() == null || questData.getSelectedPet().equals("")) {
+            if (questData.getSelectedPet() == null || questData.getSelectedPet().equals("No Plant/Pet")) {
                 petCheckBox.setSelected(false);
                 petComboBox.setEnabled(false);
             }
