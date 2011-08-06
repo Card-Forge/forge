@@ -8616,7 +8616,8 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         */
-      
+        
+        /* Converteded to AF Trigger
         //*************** START *********** START **************************
         else if(cardName.equals("Cyclopean Mummy")) {
             Command exile = new Command() {
@@ -8628,7 +8629,7 @@ public class CardFactory_Creatures {
             };//Command
             card.addDestroyCommand(exile);
         }//*************** END ************ END **************************
-        
+        */
       
         //*************** START *********** START **************************
         else if(cardName.equals("Anurid Brushhopper")) {
