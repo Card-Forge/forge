@@ -15,6 +15,11 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
         return (orig.length() == 10 && orig.startsWith("tap: add ") && "1WBURG".contains("" + orig.charAt(9)));
     }
     
+    public boolean isUndoableMana() {
+    	// isBasic, plus "2" so Sol Ring is counted
+    	return (orig.length() == 10 && orig.startsWith("tap: add ") && "21WBURG".contains("" + orig.charAt(9)));
+    }
+    
     private static final long serialVersionUID = 8292723782268822439L;
     
     /*public Ability_Mana(Card sourceCard, String mana)
@@ -154,7 +159,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     }//override undo() and set undoable for custom undo costs
     
     public boolean undoable() {
-        return isBasic() || undoable;
+        return isUndoableMana() || undoable;
     }
     
     public void parseCosts() {
