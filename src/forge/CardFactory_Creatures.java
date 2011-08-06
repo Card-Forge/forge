@@ -6807,6 +6807,42 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
             ability.setDescription(abCost+"Flip a coin. If you win the flip, target Orc creature gets +2/+0 until end of turn. If you lose the flip, it gets -0/-2 until end of turn.");
         }//*************** END ************ END **************************
+        
+      
+        //*************** START *********** START **************************
+        else if(cardName.equals("Orcish Spy")) {
+        	Target target = new Target(card,"Select target player", new String[] {"Player"});
+        	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
+            final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
+				private static final long serialVersionUID = -7781215422160018196L;
+
+				@Override
+                public void resolve() {
+                    final Player player = getTargetPlayer();
+                    CardList lib = AllZoneUtil.getPlayerCardsInLibrary(player);
+                    CardList toDisplay = new CardList();
+                    for(int i = 0; i < 3 && i < lib.size(); i++) {
+                    	toDisplay.add(lib.get(i));
+                    }
+                    if (lib.size() > 0) {
+                        GuiUtils.getChoice("Top three cards of "+player+"'s library", toDisplay.toArray());
+                    } else {
+                    	StringBuilder sb = new StringBuilder();
+                        sb.append(getTargetPlayer()).append("'s library is empty!");
+                        javax.swing.JOptionPane.showMessageDialog(null, sb.toString(), "Target player's library", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }//resolve()
+
+                @Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+
+            };//SpellAbility
+
+            ability.setDescription(abCost+"Look at the top three cards of target player's library.");
+            card.addSpellAbility(ability);
+        }//*************** END ************ END **************************  
 
         else if(cardName.equals("Awakener Druid"))
         {
