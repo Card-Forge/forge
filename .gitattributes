@@ -3317,6 +3317,7 @@ res/cardsfolder/lava_dart.txt -text svneol=native#text/plain
 res/cardsfolder/lava_flow.txt -text svneol=native#text/plain
 res/cardsfolder/lava_hounds.txt -text svneol=native#text/plain
 res/cardsfolder/lava_spike.txt -text svneol=native#text/plain
+res/cardsfolder/lava_storm.txt -text svneol=native#text/plain
 res/cardsfolder/lava_zombie.txt -text svneol=native#text/plain
 res/cardsfolder/lavaclaw_reaches.txt -text svneol=native#text/plain
 res/cardsfolder/lavafume_invoker.txt -text svneol=native#text/plain
