@@ -6727,8 +6727,11 @@ public class CardFactory_Creatures {
                 @Override
                 public void selectCard(Card card, PlayerZone zone) {
                     CardList attackers = new CardList(AllZone.Combat.getAttackers());
-                    if(card.isCreature() && zone.is(Constant.Zone.Play) && card.getKeyword().contains("Flying")
-                            && attackers.contains(card)) {
+                    if (card.isCreature() 
+                    		&& zone.is(Constant.Zone.Play) 
+                    		&& card.getKeyword().contains("Flying") 
+                            && attackers.contains(card) 
+                            && CardFactoryUtil.canTarget(ability, card)) {
                         ability.setTargetCard(card);
                         stopSetNext(new Input_NoCost_TapAbility(ability));
                     }
@@ -6741,7 +6744,6 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(target);
         }//*************** END ************ END **************************
         
-
         //*************** START *********** START **************************
         else if(cardName.equals("Adarkar Valkyrie")) {
             //tap ability - no cost - target creature - EOT
