@@ -1732,6 +1732,7 @@ res/cardsfolder/dwarven_miner.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_nomad.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_pony.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_ruins.txt -text svneol=native#text/plain
+res/cardsfolder/dwarven_soldier.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_strike_force.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_thaumaturgist.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_trader.txt -text svneol=native#text/plain
