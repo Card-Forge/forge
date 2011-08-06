@@ -1,3 +1,19 @@
+Ancestral Vision
+no cost
+Sorcery
+Ancestral Vision is blue. (Note: Ancestral Vision currently draws 0 cards due to the combined upkeep/draw phases. Once they are seperated, this should work as expected.)
+CARDNAME is blue.
+Suspend:4:U
+spDrawCardsTgt:3:Target player draws three cards.:CARDNAME - draw 3 cards.
+
+Giant Dustwasp
+3 G G
+Creature Insect
+no text
+3/3
+Flying
+Suspend:4:1 G
+
 Reckless One
 3 R
 Creature  Goblin Avatar
@@ -64,13 +80,6 @@ Flying
 Protection from black
 Suspend:3:1 W
 
-Ancestral Vision
-no cost
-Sorcery
-(Note: Ancestral Vision currently draws 0 cards due to the combined upkeep/draw phases. Once they are seperated, this should work as expected.)
-Suspend:4:U
-spDrawCardsTgt:3:Target player draws three cards.:CARDNAME - draw 3 cards.
-
 Errant Ephemeron
 6 U
 Creature - Illusion
@@ -112,14 +121,6 @@ no text
 1/2
 Suspend:3:W
 abPump W:+1/+1
-
-Giant Dustwasp
-3 G G
-Creature Insect
-No Text
-3/3
-Flying
-Suspend:4:1 G
 
 Pardic Dragon
 4 R R
