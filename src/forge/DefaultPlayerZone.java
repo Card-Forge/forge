@@ -26,7 +26,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
     Card c = (Card)o;
     
     if (is("Graveyard")
-    	&& c.getKeyword().contains("When this card is put into a graveyard from anywhere, reveal this card and shuffle it into its owner's library instead."))
+    	&& c.getKeyword().contains("When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead."))
     {
     	PlayerZone lib = AllZone.getZone(Constant.Zone.Library, c.getOwner());
     	lib.add(c);

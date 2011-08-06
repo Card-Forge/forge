@@ -1,3 +1,61 @@
+Darksteel Colossus
+11
+Artifact Creature Golem
+no text
+11/11
+Trample
+Indestructible
+When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
+
+Emrakul, the Aeons Torn
+15
+Legendary Creature Eldrazi
+When you cast Emrakul, take an extra turn after this one.
+15/15
+This card can't be countered.
+Flying
+Protection from colored spells
+Annihilator 6
+When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
+
+Kozilek, Butcher of Truth
+10
+Legendary Creature Eldrazi
+When you cast Kozilek, Butcher of Truth, draw four cards.
+12/12
+Annihilator 4
+When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
+
+Legacy Weapon
+7
+Legendary Artifact
+no text
+When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
+
+Progenitus
+W W U U B B R R G G
+Legendary Creature Hydra Avatar
+no text
+10/10
+Protection from everything
+When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
+
+Serra Avatar
+4 W W W
+Creature Avatar
+Serra Avatar's power and toughness are each equal to your life total. If Serra Avatar is destroyed, shuffle it into its owner's library instead.
+1/1
+When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
+
+Ulamog, the Infinite Gyre
+11
+Legendary Creature Eldrazi
+When you cast Ulamog, the Infinite Gyre, destroy target permanent.
+10/10
+Indestructible
+Annihilator 4
+When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
+
 Mnemonic Wall
 4 U
 Creature Wall
@@ -559,17 +617,6 @@ Creature Eldrazi
 When you cast Artisan of Kozilek, you may return target creature card from your graveyard to the battlefield.
 10/9
 Annihilator 2
-
-Emrakul, the Aeons Torn
-15
-Legendary Creature Eldrazi
-When you cast Emrakul, take an extra turn after this one.
-15/15
-This card can't be countered.
-Flying
-Protection from colored spells
-Annihilator 6
-When this card is put into a graveyard from anywhere, reveal this card and shuffle it into its owner's library instead.
 
 Blight
 B B
@@ -1391,15 +1438,6 @@ Buried Alive
 Sorcery
 Search your library for up to three creature cards and put them into your graveyard. Then shuffle your library.
 
-Ulamog, the Infinite Gyre
-11
-Legendary Creature Eldrazi
-When you cast Ulamog, the Infinite Gyre, destroy target permanent.
-10/10
-Indestructible
-Annihilator 4
-When this card is put into a graveyard from anywhere, reveal this card and shuffle it into its owner's library instead.
-
 Alaborn Zealot
 W
 Creature Human Soldier
@@ -2157,14 +2195,6 @@ Phyrexian War Beast
 Artifact Creature Beast
 When Phyrexian War Beast leaves the battlefield, sacrifice a land and Phyrexian War Beast deals 1 damage to you.
 3/4
-
-Kozilek, Butcher of Truth
-10
-Legendary Creature Eldrazi
-When you cast Kozilek, Butcher of Truth, draw four cards.
-12/12
-Annihilator 4
-When this card is put into a graveyard from anywhere, reveal this card and shuffle it into its owner's library instead.
 
 Glasses of Urza
 1
@@ -10880,36 +10910,6 @@ Dauntless Dourbark
 Creature Treefolk Warrior
 Dauntless Dourbark's power and toughness are each equal to the number of Forests you control plus the number of Treefolk you control. Dauntless Dourbark has trample as long as you control another Treefolk.
 1/1
-
-Legacy Weapon
-7
-Legendary Artifact
-no text
-When this card is put into a graveyard from anywhere, reveal this card and shuffle it into its owner's library instead.
-
-Progenitus
-W W U U B B R R G G
-Legendary Creature Hydra Avatar
-no text
-10/10
-Protection from everything
-When this card is put into a graveyard from anywhere, reveal this card and shuffle it into its owner's library instead.
-
-Darksteel Colossus
-11
-Artifact Creature Golem
-no text
-11/11
-Trample
-Indestructible
-When this card is put into a graveyard from anywhere, reveal this card and shuffle it into its owner's library instead.
-
-Serra Avatar
-4 W W W
-Creature Avatar
-Serra Avatar's power and toughness are each equal to your life total. If Serra Avatar is destroyed, shuffle it into its owner's library instead.
-1/1
-When this card is put into a graveyard from anywhere, reveal this card and shuffle it into its owner's library instead.
 
 Brawn
 3 G
