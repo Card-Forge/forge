@@ -6177,7 +6177,7 @@ public class CardFactory_Creatures {
                 }
             };
             StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" gets +1/+1 and becomes the color of your choiceuntil end of turn.");
+            sb.append(card).append(" gets +1/+1 and becomes the color of your choice until end of turn.");
             ability.setStackDescription(sb.toString());
             
             ability.setDescription("Discard a card: Wild Mongrel gets +1/+1 and becomes the color of your choice until end of turn.");
@@ -6193,7 +6193,8 @@ public class CardFactory_Creatures {
         	final long[] timeStamp = new long[1];
             
             //color change ability
-            final Ability ability = new Ability(card, "G") {
+        	Ability_Cost abCost = new Ability_Cost("G", cardName, true);
+            final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
             	
                 @Override
                 public boolean canPlayAI() {
@@ -6233,7 +6234,7 @@ public class CardFactory_Creatures {
             sb.append(card).append(" becomes the color of your choice until end of turn.");
             ability.setStackDescription(sb.toString());
             
-            ability.setDescription("G: Spiritmonger becomes the color of your choice until end of turn.");
+            ability.setDescription(abCost+cardName+" becomes the color of your choice until end of turn.");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
@@ -6854,7 +6855,7 @@ public class CardFactory_Creatures {
             };//SpellAbility
             
             card.addSpellAbility(ability);
-            ability.setDescription("W, Sacrifice Transluminant: Put a 1/1 white Spirit creature token with flying into play at end of turn.");
+            ability.setDescription("W, Sacrifice Transluminant: Put a 1/1 white Spirit creature token with flying onto the battlefield at the beginning of the next end step.");
             ability.setStackDescription("Put a 1/1 white Spirit creature token with flying into play at end of turn.");
             ability.setBeforePayMana(new Input_PayManaCost_Ability(ability.getManaCost(), new Command() {
                 private static final long serialVersionUID = -6553009833190713980L;
@@ -7073,11 +7074,11 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
             
             StringBuilder sb = new StringBuilder();
-            sb.append("W, tap, Discard a card: Put a 1/1 white Kithkin Soldier creature token ");
-            sb.append("named Goldmeadow Harrier into play with \"W, T: tap target creature.\"");
+            sb.append("W, tap, Discard a card: Put a 1/1 white Kithkin Soldier creature token named ");
+            sb.append("Goldmeadow Harrier onto the battlefield. It has \"W, tap : Tap target creature.\"");
             ability.setDescription(sb.toString());
             
-            ability.setStackDescription("Goldmeadow Lookout - Put a 1/1 token into play");
+            ability.setStackDescription(cardName+" - Put a 1/1 token into play");
         }//*************** END ************ END **************************
         
         
@@ -7128,10 +7129,8 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
             
             ability.setDescription("W U B R G: You may play target Elemental card from your graveyard without paying its mana cost.");
-            //ability.setBeforePayMana(new Input_);
             ability.setStackDescription("Horde of Notions - play Elemental card from graveyard without paying its mana cost.");
             ability.setBeforePayMana(new Input_PayManaCost(ability));
-            
         }//*************** END ************ END **************************
         
 
