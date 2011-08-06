@@ -127,6 +127,7 @@ public class AbilityFactory_PermanentState {
 				return false;
 		}
 		else{
+			tgt.resetTargets();
 			CardList untapList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
 			untapList = untapList.filter(AllZoneUtil.tapped);
 			untapList = untapList.getValidCards(tgt.getValidTgts(), source.getController(), source);
@@ -398,6 +399,7 @@ public class AbilityFactory_PermanentState {
 				return false;
 		}
 		else{
+			tgt.resetTargets();
 			CardList tapList = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
 			tapList = tapList.filter(AllZoneUtil.untapped);
 			tapList = tapList.getValidCards(tgt.getValidTgts(), source.getController(), source);

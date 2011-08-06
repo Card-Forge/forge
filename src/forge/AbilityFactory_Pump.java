@@ -226,9 +226,10 @@ public class AbilityFactory_Pump {
     	if (!ComputerUtil.canPayCost(sa))
     		return false;
     	
+    	int activations = sa.getRestrictions().getNumberTurnActivations();
+    	int sacActivations = sa.getRestrictions().getActivationNumberSacrifice();
     	//don't risk sacrificing a creature just to pump it
-    	if(sa.getRestrictions().getActivationNumberSacrifice() != -1 &&
-				sa.getRestrictions().getNumberTurnActivations() >= (sa.getRestrictions().getActivationNumberSacrifice() - 1)) {
+    	if(sacActivations != -1 && activations >= (sacActivations - 1)) {
     		return false;
 		}
     	
@@ -237,22 +238,39 @@ public class AbilityFactory_Pump {
         if(AllZone.Phase.is(Constant.Phase.Main2)) return false;
         
         if(AF.getAbTgt() == null || !AF.getAbTgt().doesTarget()) {
-        	Card creature;
-            //if (bPumpEquipped)
-            //	creature = card.getEquippingCard();
-            //else 
-            creature = hostCard;
+        	Card card = null;
+			String defined = params.get("Defined");
+			if (defined == null || defined.equals("Self"))
+				// default to Self
+				card = hostCard;
+			else if (defined.equals("Equipped")){
+				card = hostCard.getEquippingCard();
+			}
+			else if (defined.equals("Enchanted")){
+				card = hostCard.getEnchantingCard();
+			}
+			else if (defined.equals("Targeted")){
+				// todo: Use Target of parent ability
+			}
+			
+			if (card == null)
+				return false;
             
-            if((creature.getNetDefense() + defense > 0) && (!creature.hasAnyKeyword(Keywords))) {
-            	if(creature.hasSickness() && Keywords.contains("Haste")) 
+			// todo: if AI doesn't control Card and Pump is a Curse, than maybe use? 
+            if((card.getNetDefense() + defense > 0) && (!card.hasAnyKeyword(Keywords))) {
+            	if(card.hasSickness() && Keywords.contains("Haste")) 
             		return true;
-            	else if (creature.hasSickness() ^ Keywords.contains("Haste"))
+            	else if (card.hasSickness() ^ Keywords.contains("Haste"))
                     return false;
-            	else {
+            	else if (hostCard.equals(card)){
                     Random r = new Random();
-                    if(r.nextFloat() <= Math.pow(.6667, hostCard.getAbilityUsed())) 
-                    	return CardFactoryUtil.AI_doesCreatureAttack(creature);
+                    if(r.nextFloat() <= Math.pow(.6667, activations)) 
+                    	return CardFactoryUtil.AI_doesCreatureAttack(card) && !sa.getPayCosts().getTap();
                 }
+            	else{
+            		Random r = new Random();
+                    return (r.nextFloat() <= Math.pow(.6667, activations));
+            	}
             }
         }
         else
@@ -331,6 +349,8 @@ public class AbilityFactory_Pump {
     {
     	 if(AF.getAbTgt() == null || !AF.getAbTgt().doesTarget()) {
     		 int defense = getNumDefense(sa);
+    		 
+    		 
     		 if (hostCard.isCreature()){
     			 if (!hostCard.hasKeyword("Indestructible") && hostCard.getNetDefense() + defense <= hostCard.getDamage())
     				 return false;
@@ -355,7 +375,24 @@ public class AbilityFactory_Pump {
 			tgtCards = tgt.getTargetCards();
 		else{
 			tgtCards = new ArrayList<Card>();
-			tgtCards.add(hostCard);
+			Card c;
+			String defined = params.get("Defined");
+			if (defined == null || defined.equals("Self"))
+				// default to Self
+				tgtCards.add(hostCard);
+			else if (defined.equals("Equipped")){
+				c = hostCard.getEquippingCard();
+				if (c != null)
+					tgtCards.add(c);
+			}
+			else if (defined.equals("Enchanted")){
+				c = hostCard.getEnchantingCard();
+				if (c != null)
+					tgtCards.add(c);
+			}
+			else if (defined.equals("Targeted")){
+				// todo: Use Target of parent ability
+			}
 		}
 	     
 		if (sa instanceof Ability_Sub)
@@ -411,7 +448,24 @@ public class AbilityFactory_Pump {
 			tgtCards = tgt.getTargetCards();
 		else{
 			tgtCards = new ArrayList<Card>();
-			tgtCards.add(hostCard);
+			Card c;
+			String defined = params.get("Defined");
+			if (defined == null || defined.equals("Self"))
+				// default to Self
+				tgtCards.add(hostCard);
+			else if (defined.equals("Equipped")){
+				c = hostCard.getEquippingCard();
+				if (c != null)
+					tgtCards.add(c);
+			}
+			else if (defined.equals("Enchanted")){
+				c = hostCard.getEnchantingCard();
+				if (c != null)
+					tgtCards.add(c);
+			}
+			else if (defined.equals("Targeted")){
+				// todo: Use Target of parent ability
+			}
 		}
 
 		int size = tgtCards.size();
@@ -466,8 +520,6 @@ public class AbilityFactory_Pump {
 		        AllZone.EndOfTurn.addUntil(untilEOT);
 	        }
 		}
-		
-		
 		
 		if (AF.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
