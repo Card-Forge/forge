@@ -19640,6 +19640,30 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Thundermare")) {
+        	/*
+        	 * When Thundermare enters the battlefield, tap all other creatures.
+        	 */
+        	final SpellAbility ability = new Ability(card, "0") {
+        		@Override
+        		public void resolve() {
+        			CardList cards = AllZoneUtil.getCreaturesInPlay();
+        			cards.remove(card);
+        			for(Card c:cards) c.tap();
+        		}//resolve()
+        	};//SpellAbility
+        	Command intoPlay = new Command() {
+				private static final long serialVersionUID = -692103773738198353L;
+
+				public void execute() {
+        			AllZone.Stack.add(ability);
+        		}
+        	};
+        	ability.setStackDescription(cardName + " - tap all other creatures.");
+        	card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
