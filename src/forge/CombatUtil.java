@@ -687,6 +687,12 @@ public class CombatUtil {
         		if(equip.getName().equals("Umezawa's Jitte")) {
         			equip.addCounter(Counters.CHARGE, 2);
         		}
+        		if(c.getDealtCombatDmgToOppThisTurn() && equip.getName().equals("Sword of Fire and Ice")) {
+        			GameActionUtil.executeSwordOfFireAndIceEffects(equip);
+        		}
+        		if(c.getDealtCombatDmgToOppThisTurn() && equip.getName().equals("Sword of Light and Shadow")) {
+        			GameActionUtil.executeSwordOfLightandShadowEffects(equip);
+        		}
         	}
         }
     }

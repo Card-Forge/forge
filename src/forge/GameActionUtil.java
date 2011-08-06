@@ -4697,6 +4697,88 @@ public class GameActionUtil {
 		AllZone.Stack.add(ability2);
 	}
 
+	public static void executeSwordOfFireAndIceEffects(Card source) {
+		final Card src = source;
+		Ability ability = new Ability(src, "0") {
+			@Override
+			public void resolve() {
+				Card target = getTargetCard();
+				if(target != null)
+					target.addDamage(2, src);
+				else 
+					AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(2);
+				
+				AllZone.GameAction.drawCard(src.getController());
+			}
+		}; // ability
+
+		ability.setChooseTargetAI(CardFactoryUtil.AI_targetHumanCreatureOrPlayer());
+		ability.setStackDescription("Sword of Fire and Ice - Deals 2 damage to target creature or player and you draw a card." );
+		if (src.getController() == Constant.Player.Human) {
+	       	AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreaturePlayer(ability, true, true));
+	    } else {
+	    	ability.chooseTargetAI();
+	       	AllZone.Stack.add(ability);
+	    }
+	}
+	
+	public static void executeSwordOfLightandShadowEffects(Card source) {
+		final Card src = source;
+		final Ability ability = new Ability(src, "0") {
+			@Override
+			public void resolve() {
+				Card target = getTargetCard();
+				if(target != null){
+					PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, src.getController());
+                    if(AllZone.GameAction.isCardInZone(getTargetCard(), grave)) {
+                        PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, src.getController());
+                        AllZone.GameAction.moveTo(hand, getTargetCard());
+                    }
+				}
+				
+				AllZone.GameAction.getPlayerLife(src.getController()).addLife(3);
+			}
+		}; // ability
+
+		Command res = new Command() {
+             private static final long serialVersionUID = -7433708170033536384L;
+             
+             public void execute() {
+                 PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, src.getController());
+                 CardList list = new CardList(grave.getCards());
+                 
+                 list = list.filter(new CardListFilter() {
+                     public boolean addCard(Card crd) {
+                         return crd.isCreature();
+                     }
+                 });
+                 // list = list.getType("Creature");
+                 
+                 if(list.isEmpty()) {
+                	 AllZone.Stack.add(ability);
+                	 return;
+                 }
+                 
+                 if(src.getController().equals(Constant.Player.Human)) {
+                     Object o = AllZone.Display.getChoiceOptional("Select target card", list.toArray());
+                     if(o != null) {
+                         ability.setTargetCard((Card) o);
+                         AllZone.Stack.add(ability);
+                     }
+                 }//if
+                 else//computer
+                 {
+                     Card best = CardFactoryUtil.AI_getBestCreature(list);
+                     ability.setTargetCard(best);
+                     AllZone.Stack.add(ability);
+                 }
+             }//execute()
+        };//Command
+        
+		ability.setStackDescription("Sword of Light and Shadow - You gain 3 life and you may return up to one target creature card from your graveyard to your hand" );
+		res.execute();
+	}
+	
     //this is for cards like Sengir Vampire
     public static void executeVampiricEffects(Card c) {
         ArrayList<String> a = c.getKeyword();
