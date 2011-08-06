@@ -5472,8 +5472,9 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Helldozer")) {
-            //mana tap ability
-            final Ability_Tap ability = new Ability_Tap(card, "B B B") {
+            Ability_Cost abCost = new Ability_Cost("B B B T", cardName, true);
+            Target target = new Target("Select target land.", new String[]{"Land"});
+            final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
                 private static final long serialVersionUID = 6426884086364885861L;
                 
                 @Override
@@ -5487,11 +5488,8 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void chooseTargetAI() {
-                    card.tap();
-                    
                     //target basic land that Human only has 1 or 2 in play
-                    CardList land = new CardList(AllZone.Human_Battlefield.getCards());
-                    land = land.getType("Land");
+                    CardList land = AllZoneUtil.getPlayerLandsInPlay(AllZone.HumanPlayer);
                     
                     Card target = null;
                     
@@ -5524,67 +5522,16 @@ public class CardFactory_Creatures {
                         AllZone.GameAction.destroy(getTargetCard());
                         
                         //if non-basic, untap Helldozer
-                        if(!getTargetCard().getType().contains("Basic")) card.untap();
+                        if(!getTargetCard().isBasicLand()) card.untap();
                     }
                 }//resolve()
             };//SpellAbility
             
             card.addSpellAbility(ability);
-            ability.setDescription("BBB, tap: Destroy target land. If that land is nonbasic, untap Helldozer.");
-            ability.setBeforePayMana(CardFactoryUtil.input_targetType(ability, "Land"));
+            ability.setDescription(abCost+"Destroy target land. If that land was nonbasic, untap Helldozer.");
         }//*************** END ************ END **************************
                
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Wayward Soul")) {
-            //mana ability
-            final Ability ability = new Ability(card, "U") {
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(card)) {
-                        card.setBaseAttack(3);
-                        card.setBaseDefense(2);
-                        card.setIntrinsicKeyword(new ArrayList<String>());
-                        card.addIntrinsicKeyword("Flying");
-                        
-                        card.clearAssignedDamage();
-                        card.setDamage(0);
-                        card.untap();
-                        AllZone.getZone(card).remove(card);
-                        
-                        //put card on top of library
-                        PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getOwner());
-                        library.add(card, 0);
-                    }
-                }//resolve()
-            };//SpellAbility
-            
-            Input runtime = new Input() {
-                private static final long serialVersionUID = 1469011418219527227L;
-                
-                @Override
-                public void showMessage() {
-                	
-                	StringBuilder sb = new StringBuilder();
-                	sb.append("Put ").append(card).append(" on top of its owner's library");
-                	ability.setStackDescription(sb.toString());
-                    
-                    stopSetNext(new Input_PayManaCost(ability));
-                }
-            };
-            ability.setDescription("U: Put Wayward Soul on top of its owner's library.");
-            ability.setStackDescription("Put Wayward Soul on top of its owner's library.");
-            card.addSpellAbility(ability);
-            ability.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
-        */
         
-
         //*************** START *********** START **************************
         else if(cardName.equals("Spitting Spider")) {
         	// temporary fix until DamageAll is created
