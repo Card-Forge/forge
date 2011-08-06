@@ -1,3 +1,11 @@
+Grave-Shell Scarab
+2 B G G
+Creature Insect
+no text
+4/4
+1, Sacrifice CARDNAME: Draw a card.
+Dredge 1
+
 Binding Grasp
 3 U
 Enchantment Aura
