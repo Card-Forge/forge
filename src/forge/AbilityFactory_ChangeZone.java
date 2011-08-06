@@ -29,7 +29,7 @@ public class AbilityFactory_ChangeZone {
 			public String getStackDescription(){
 				return changeZoneDescription(AF, this);
 			}
-		
+
 		};
 		setMiscellaneous(AF, abChangeZone);
 		return abChangeZone;
@@ -939,7 +939,7 @@ public class AbilityFactory_ChangeZone {
 			public String getStackDescription(){
 				return changeZoneAllDescription(AF, this);
 			}
-		
+
 		};
 		setMiscellaneous(AF, abChangeZone);
 		return abChangeZone;
@@ -1149,8 +1149,10 @@ public class AbilityFactory_ChangeZone {
 		for(Card c : cards){
 			if (destination.equals("Battlefield") && params.containsKey("Tapped"))
                 c.tap();
-			if (params.containsKey("GainControl"))
+			if (params.containsKey("GainControl")){
+				c.setController(sa.getActivatingPlayer());
 				AllZone.GameAction.moveToPlay(c, sa.getActivatingPlayer());
+			}
 			else
 				AllZone.GameAction.moveTo(destination, c, libraryPos);
 		}
