@@ -209,6 +209,10 @@ public class TriggerHandler {
 		{
 			return;
 		}
+        if(!regtrig.phaseCheck())
+        {
+            return;
+        }
 		if(!regtrig.requirementsCheck())
 		{
 			return;

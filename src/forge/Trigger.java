@@ -101,6 +101,24 @@ public abstract class Trigger {
 		
 		return true;
 	}
+
+    public boolean phaseCheck()
+    {
+        if(mapParams.containsKey("TriggerPhases"))
+        {
+            ArrayList<String> triggerPhases = new ArrayList<String>();
+            for(String s :  mapParams.get("TriggerPhases").split(","))
+			{
+				triggerPhases.add(s);
+			}
+            if(!triggerPhases.contains(AllZone.Phase.getPhase()))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 	
 	public boolean requirementsCheck()
 	{
@@ -197,7 +215,7 @@ public abstract class Trigger {
 		{
 			for(String v : valids)
 			{
-				if(v.equalsIgnoreCase("Player"))
+				if(v.equalsIgnoreCase("Player") || v.equalsIgnoreCase("Each"))
 				{
 					return true;
 				}
