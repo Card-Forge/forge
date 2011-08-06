@@ -103,8 +103,7 @@ public class HumanPlayer extends Player{
 		int num = N;
 		for(int i = 0; i < num; i++) {
             Object o;
-            o = AllZone.Display.getChoiceOptional("Choose a card to put on the bottom of your library.",
-                    topN.toArray());
+            o = AllZone.Display.getChoiceOptional("Put on bottom of library.",topN.toArray());
             if(o != null) {
                 Card c = (Card) o;
                 topN.remove(c);
@@ -115,7 +114,7 @@ public class HumanPlayer extends Player{
         num = topN.size();
         if(num > 0) for(int i = 0; i < num; i++) {
             Object o;
-            o = AllZone.Display.getChoice("Choose a card to put on the top of your library.", topN.toArray());
+            o = AllZone.Display.getChoice("Put on top of library.", topN.toArray());
             if(o != null) {
                 Card c = (Card) o;
                 topN.remove(c);

@@ -354,6 +354,15 @@ public class AbilityFactory {
 				SA = AbilityFactory_ZoneAffecting.createDrawbackMill(this);
 		}
 		
+		if (API.equals("Scry")){
+			if (isAb)
+				SA = AbilityFactory_ZoneAffecting.createAbilityScry(this);
+			else if (isSp)
+				SA = AbilityFactory_ZoneAffecting.createSpellScry(this);
+			else if (isDb)
+				SA = AbilityFactory_ZoneAffecting.createDrawbackScry(this);
+		}
+		
 		if (API.equals("Sacrifice")){
 			if (isAb)
 				SA = AbilityFactory_Sacrifice.createAbilitySacrifice(this);

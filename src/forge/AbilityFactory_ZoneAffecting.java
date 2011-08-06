@@ -875,4 +875,175 @@ public class AbilityFactory_ZoneAffecting {
 		// if parent draws cards, make sure cards in hand + cards drawn > 0
 		return true;
 	}// discardCheckDrawbackAI()
+	
+	//**********************************************************************
+	//******************************* SCRY *********************************
+	//**********************************************************************
+	
+	public static SpellAbility createDrawbackScry(final AbilityFactory AF){
+		final SpellAbility dbScry = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()){
+			private static final long serialVersionUID = 7763043327497404630L;
+			final AbilityFactory af = AF;
+			
+			@Override
+			public String getStackDescription(){
+				// when getStackDesc is called, just build exactly what is happening
+				return scryStackDescription(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				scryResolve(af, this);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return scryTargetAI(af, this);
+			}
+			
+		};
+		return dbScry;
+	}
+	
+	private static void scryResolve(final AbilityFactory af, final SpellAbility sa){
+		HashMap<String,String> params = af.getMapParams();
+		
+		Card source = sa.getSourceCard();
+        int num = 1;
+        if (params.containsKey("ScryNum"))
+        	num = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("ScryNum"), sa);
+		
+		ArrayList<Player> tgtPlayers;
+
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtPlayers = tgt.getTargetPlayers();
+		else
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+		
+		for(Player p : tgtPlayers) {
+			if (tgt == null || p.canTarget(af.getHostCard())){
+				p.scry(num);
+			}
+		}
+
+		if (af.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+	     	   abSub.resolve();
+	        }
+	        else{
+				String DrawBack = params.get("SubAbility");
+				if (af.hasSubAbility())
+					 CardFactoryUtil.doDrawBack(DrawBack, 0, source.getController(), source.getController().getOpponent(), tgtPlayers.get(0), source, null, sa);
+	        }
+		}
+	}
+	
+	private static boolean scryTargetAI(AbilityFactory af, SpellAbility sa) {
+        Target tgt = af.getAbTgt();
+        
+        if (tgt != null) {
+            // ability is targeted
+            tgt.resetTargets();
+            
+            tgt.addTarget(AllZone.ComputerPlayer);
+        }
+        
+        return true;
+    }// scryTargetAI()
+	
+	public static String scryStackDescription(AbilityFactory af, SpellAbility sa){
+		StringBuilder sb = new StringBuilder();
+		
+		if (!(sa instanceof Ability_Sub))
+			sb.append(sa.getSourceCard().getName()).append(" - ");
+		else
+			sb.append(" ");
+		
+		ArrayList<Player> tgtPlayers;
+
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtPlayers = tgt.getTargetPlayers();
+		else
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+		
+		for(Player p : tgtPlayers)
+			sb.append(p.toString()).append(" ");
+
+        int num = 1;
+        if (af.getMapParams().containsKey("ScryNum"))
+        	num = AbilityFactory.calculateAmount(sa.getSourceCard(), af.getMapParams().get("ScryNum"), sa);
+		
+		sb.append("scrys (").append(num).append(").");
+		
+		Ability_Sub abSub = sa.getSubAbility();
+        if (abSub != null){
+        	sb.append(abSub.getStackDescription());
+        }
+		
+		return sb.toString();
+	}
+	
+	private static boolean scryCanPlayAI(final AbilityFactory af, SpellAbility sa){
+		return true;
+	}
+	
+	public static SpellAbility createAbilityScry(final AbilityFactory AF){
+		final SpellAbility abScry = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+			private static final long serialVersionUID = 2631175859655699419L;
+			final AbilityFactory af = AF;
+			
+			@Override
+			public String getStackDescription(){
+				return scryStackDescription(af, this);
+			}
+			
+			public boolean canPlay(){
+				// super takes care of AdditionalCosts
+				return super.canPlay();		
+			}
+			
+			public boolean canPlayAI()
+			{
+				return scryCanPlayAI(af,this);
+			}
+			
+			@Override
+			public void resolve() {
+				scryResolve(af, this);
+			}
+			
+		};
+		return abScry;
+	}
+	
+	public static SpellAbility createSpellScry(final AbilityFactory AF){
+		final SpellAbility spScry = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+			private static final long serialVersionUID = 6273876397392154403L;
+			final AbilityFactory af = AF;
+			
+			@Override
+			public String getStackDescription(){
+				return scryStackDescription(af, this);
+			}
+			
+			public boolean canPlay(){
+				return super.canPlay();	
+			}
+			
+			public boolean canPlayAI()
+			{
+				return scryCanPlayAI(af, this);
+			}
+			
+			@Override
+			public void resolve() {
+				scryResolve(af, this);
+			}
+			
+		};
+		return spScry;
+	}
 }
