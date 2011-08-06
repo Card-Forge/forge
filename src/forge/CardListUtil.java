@@ -271,6 +271,19 @@ public class CardListUtil
     return attack;
   }//sumAttack()
   
+  public static int sumDefense(CardList c)
+  {
+    int defense = 0;
+    
+    for(int i  = 0; i < c.size(); i++){
+      //if(c.get(i).isCreature() && c.get(i).hasSecondStrike()) {
+       if(c.get(i).isCreature() )
+    	  defense += c.get(i).getNetDefense();       
+    }
+    //System.out.println("Total attack: " +attack);
+    return defense;
+  }//sumAttack()
+  
   public static int sumFirstStrikeAttack(CardList c)
   {
     int attack = 0;

@@ -74,6 +74,16 @@ public class ComputerUtil_Block2
 
       return list;
    }
+   
+   private CardList getPossibleBlockersWithFirstStrike(Card attacker)
+   {
+	   CardList list = new CardList();
+	      for(int i = 0; i < possibleBlockers.size(); i++)
+	         if(CombatUtil.canBlock(attacker, possibleBlockers.get(i)) && (attacker.hasFirstStrike() || attacker.hasDoubleStrike()))
+	            list.add(possibleBlockers.get(i));
+
+	   return list;
+   }
 
    //finds a blocker that destroys the attacker, the blocker is not destroyed
    //returns null if no blocker is found
@@ -125,28 +135,60 @@ public class ComputerUtil_Block2
    //returns an array of size 0 if not multiple blocking
    Card[] multipleBlock(Card attacker)
    {
-      CardList c = getPossibleBlockers(attacker);
+	  CardList c;
+	  if (attacker.hasDoubleStrike() || attacker.hasFirstStrike())
+		 c = getPossibleBlockersWithFirstStrike(attacker); 
+	  else
+		  c = getPossibleBlockers(attacker);
 
       int defense = getDefense(attacker) - attacker.getDamage();
       //if attacker cannot be destroyed
       if(defense > CardListUtil.sumAttack(c))
-      return new Card[] {};
+    	  return new Card[] {};
 
       CardList block = new CardList();
       c.shuffle();
 
       while(defense > CardListUtil.sumAttack(block))
-      block.add(c.remove(0));
+    	  block.add(c.remove(0));
 
       Card check[] = block.toArray();
 
       //no single blockers, that should be handled somewhere else
       if(check.length == 1)
-      return new Card[] {};
+    	  return new Card[] {};
 
       return check;
    }//multipleBlock()
 
+   Card[] multipleTrampleBlock(Card attacker)
+   {
+	  CardList c;
+	  if (attacker.hasDoubleStrike() || attacker.hasFirstStrike())
+		 c = getPossibleBlockersWithFirstStrike(attacker); 
+	  else
+		  c = getPossibleBlockers(attacker);
+
+      int attack = getAttack(attacker);
+      //if computer can't save himself:
+      if(attack > (CardListUtil.sumDefense(c) + AllZone.GameAction.getPlayerLife(Constant.Player.Computer).getLife() ))
+    	  return new Card[] {};
+		
+      CardList block = new CardList();
+      c.shuffle();
+
+      while(attack >= (CardListUtil.sumDefense(block) + AllZone.GameAction.getPlayerLife(Constant.Player.Computer).getLife() )
+    		&& c.size() != 0)
+    	  block.add(c.remove(0));
+
+      Card check[] = block.toArray();
+
+      //no single blockers, that should be handled somewhere else
+      if(check.length == 1)
+    	  return new Card[] {};
+
+      return check; 
+   }
 
    //finds a blocker, both the attacker lives and blockers dies
    //returns null if no blocker is found
@@ -219,6 +261,7 @@ public class ComputerUtil_Block2
       {
 
          boolean doubleStrike = attackers.get(i).hasDoubleStrike();
+         boolean trample = attackers.get(i).getKeyword().contains("Trample");
 
          //the computer blocks 50% of the time or if the computer would lose the game
          shouldBlock = random.nextBoolean() || blockersLife <= sumUnblockedAttackers(combat);
@@ -234,68 +277,87 @@ public class ComputerUtil_Block2
          Random random = new Random();
          int randomInt = random.nextInt(100);
          
-         if (randomInt >= 10)
-         { 	 
-	         c = safeSingleBlock(attackers.get(i));
+         boolean multiTrample = false;
+         //multiblocks for trample
+         if (trample && AllZone.Computer_Life.getLife() <= getAttack(attackers.get(i)) )
+         {
+        	 Card[] m = multipleTrampleBlock(attackers.get(i));
+             for(int inner = 0; inner < m.length; inner++)
+             {
+                if(m.length != 1)
+                {
+                   possibleBlockers.remove(m[inner]);
+                   combat.addBlocker(attackers.get(i), m[inner]);
+                   multiTrample = true;
+                }
+             }//for
+         }
+         
+         if (!multiTrample)
+         {
+	         if (randomInt >= 10)
+	         { 	 
+		         c = safeSingleBlock(attackers.get(i));
+		         if(c != null)
+		        	 testing("safe");
+	         }
+	         if(c == null && randomInt >= 15)
+	         {
+	            //shield block - attacker lives, blocker lives
+	            c = shieldSingleBlock(attackers.get(i));
+	            if(c != null)
+	            testing("shield");
+	         }
+	
+	         if(c == null && shouldBlock)
+	         {
+	            //trade block - attacker dies, blocker dies
+	            c = tradeSingleBlock(attackers.get(i));
+	
+	            if(c != null)
+	            testing("trading");
+	         }
+	
+	
+	         if(c == null && shouldBlock)
+	         {
+	            //chump block - attacker lives, blocker dies
+	            c = chumpSingleBlock(attackers.get(i));
+	            if(c != null)
+	            testing("chumping");
+	         }
+	
+	         if(c == null && doubleStrike && AllZone.Computer_Life.getLife() <= (getAttack(attackers.get(i))*2))
+	         {
+	            c = forceBlock(attackers.get(i));
+	            if (c != null)
+	            testing("forcing");
+	         }
+	         
 	         if(c != null)
-	        	 testing("safe");
+	         {
+	        	
+	        	//if (!c.getKeyword().contains("This card can block any number of creatures."))
+	        		possibleBlockers.remove(c);
+	            combat.addBlocker(attackers.get(i), c);
+	         }
+	
+	         //multiple blockers
+	         if(c == null && shouldBlock)
+	         {
+	            Card[] m = multipleBlock(attackers.get(i));
+	            for(int inner = 0; inner < m.length; inner++)
+	            {
+	               //to prevent a single flyer from blocking a single non-flyer
+	               //tradeSingleBlock() checks for a flyer blocking a non-flyer also
+	               if(m.length != 1)
+	               {
+	                  possibleBlockers.remove(m[inner]);
+	                  combat.addBlocker(attackers.get(i), m[inner]);
+	               }
+	            }//for
+	         }//if
          }
-         if(c == null && randomInt >= 15)
-         {
-            //shield block - attacker lives, blocker lives
-            c = shieldSingleBlock(attackers.get(i));
-            if(c != null)
-            testing("shield");
-         }
-
-         if(c == null && shouldBlock)
-         {
-            //trade block - attacker dies, blocker dies
-            c = tradeSingleBlock(attackers.get(i));
-
-            if(c != null)
-            testing("trading");
-         }
-
-
-         if(c == null && shouldBlock)
-         {
-            //chump block - attacker lives, blocker dies
-            c = chumpSingleBlock(attackers.get(i));
-            if(c != null)
-            testing("chumping");
-         }
-
-         if(c == null && doubleStrike && AllZone.Computer_Life.getLife() <= (getAttack(attackers.get(i))*2))
-         {
-            c = forceBlock(attackers.get(i));
-            if (c != null)
-            testing("forcing");
-         }
-
-         if(c != null)
-         {
-        	
-        	//if (!c.getKeyword().contains("This card can block any number of creatures."))
-        		possibleBlockers.remove(c);
-            combat.addBlocker(attackers.get(i), c);
-         }
-
-         //multiple blockers
-         if(c == null && shouldBlock)
-         {
-            Card[] m = multipleBlock(attackers.get(i));
-            for(int inner = 0; inner < m.length; inner++)
-            {
-               //to prevent a single flyer from blocking a single non-flyer
-               //tradeSingleBlock() checks for a flyer blocking a non-flyer also
-               if(m.length != 1)
-               {
-                  possibleBlockers.remove(m[inner]);
-                  combat.addBlocker(attackers.get(i), m[inner]);
-               }
-            }//for
-         }//if
       }//for attackers
 
       return combat;

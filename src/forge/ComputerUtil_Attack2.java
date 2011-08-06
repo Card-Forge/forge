@@ -138,8 +138,10 @@ import java.util.*;
           for(int i = 0; i < stop; i++)
         	  totalAttack += getAttack(humanList.get(i));
                     
-    	  //-3 so the computer will try to stay at 3 life
-    	  return (AllZone.Computer_Life.getLife() - 3) <= totalAttack;
+    	  //originally -3 so the computer will try to stay at 3 life
+          //+1 now to prevent the AI from not attacking when it's got low life
+          //(seems to happen too often)
+    	  return (AllZone.Computer_Life.getLife() + 1) <= totalAttack;
        }
 
        private boolean doAssault()
