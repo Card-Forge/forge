@@ -1,3 +1,9 @@
+Muddle the Mixture
+U U
+Instant
+(NOTE: The computer can not use this spell.)
+Transmute:1 U U
+
 Journey to Nowhere
 1 W
 Enchantment

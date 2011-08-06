@@ -22635,6 +22635,40 @@ public class CardFactory implements NewConstants {
         	});//addSpellAbility
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Muddle the Mixture")) {
+        	/*
+        	 *  This card can not be used by the computer at this time.
+        	 */
+        	SpellAbility spell = new Spell(card) {
+        		private static final long serialVersionUID = -2489268054171391552L;
+
+        		@Override
+        		public void resolve() {
+        			SpellAbility sa = AllZone.Stack.pop();
+        			AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
+        		}//resolve()
+
+        		@Override
+        		public boolean canPlay() {
+        			if(AllZone.Stack.size() == 0) return false;
+
+        			//see if spell is on stack and that opponent played it
+        			String opponent = AllZone.GameAction.getOpponent(card.getController());
+        			SpellAbility sa = AllZone.Stack.peek();
+
+        			return sa.isSpell() 
+        					&& opponent.equals(sa.getSourceCard().getController())
+        					&& CardFactoryUtil.isCounterable(sa.getSourceCard())
+        					&& (sa.getSourceCard().isInstant() || sa.getSourceCard().isSorcery());
+        		}//canPlay()
+        	};//SpellAbility
+        	card.clearSpellAbility();
+        	spell.setDescription("Counter target instant or sorcery spell.");
+        	spell.setStackDescription("Muddle The Mixture - Counters target instant or sorcery.");
+        	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         //*************** START ********** START *************************
         if (cardName.equals("Finest Hour") || cardName.equals("Gaea's Anthem") ||
         		cardName.equals("Glorious Anthem"))  
