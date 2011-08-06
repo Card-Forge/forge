@@ -4,8 +4,8 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant creature
 K:enPump:+0/+0
-K:StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Double Strike:Color.red:As long as enchanted creature is red, it gets +1/+1 and has double strike. (It deals both first-strike and regular combat damage.)
-K:StaticEffect:Play:Enchanted Permanent:PTBonus/1/1!Keyword/Trample:Color.green:As long as enchanted creature is green, it gets +1/+1 and has trample.
+K:stPumpEnchanted:Creature.Red:1/1/Double Strike:No Condition:As long as enchanted creature is red, it gets +1/+1 and has double strike. (It deals both first-strike and regular combat damage.)
+K:stPumpEnchanted:Creature.Green:1/1/Trample:No Condition:As long as enchanted creature is green, it gets +1/+1 and has trample.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runes_of_the_deus.jpg
