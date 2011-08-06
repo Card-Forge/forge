@@ -149,4 +149,63 @@ public class AllZoneUtil {
 		}
 		return cards;
 	}
+	
+	////////////// REMOVED FROM GAME
+	
+	/**
+	 * gets a list of all cards owned by both players that have been removed from the game
+	 * 
+	 * @return a CardList with all cards removed from the game
+	 */
+	public static CardList getCardsRemovedFromGame() {
+		CardList cards = new CardList();
+		cards.add(getPlayerCardsRemovedFromGame(Constant.Player.Computer));
+		cards.add(getPlayerCardsRemovedFromGame(Constant.Player.Human));
+		return cards;
+	}
+	
+	/**
+	 * gets a list of all cards removed from the game for a given player
+	 * 
+	 * @param player the player whose cards we want that are removed from the game
+	 * @return a CardList withh all cards removed from the game for a given player
+	 */
+	public static CardList getPlayerCardsRemovedFromGame(final String player) {
+		CardList cards = new CardList();
+		if( player.equals(Constant.Player.Human) || player.equals(Constant.Player.Computer) ){
+			PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, player);
+			cards.addAll(removed.getCards());
+		}
+		return cards;
+	}
+	
+	//////////////////////// LIBRARY
+	
+	/**
+	 * gets a list of all cards in a given player's library
+	 * 
+	 * @return a CardList with all the cards currently in that player's library
+	 */
+	public static CardList getPlayerCardsInLibrary(final String player) {
+		CardList cards = new CardList();
+		if( player.equals(Constant.Player.Human) || player.equals(Constant.Player.Computer) ){
+			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+			cards.addAll(lib.getCards());
+		}
+		return cards;
+	}
+	
+	/**
+	 * gets a list of all cards with a certain name in a given player's library
+	 * 
+	 * @param player the player's library one is interested in
+	 * @param cardName the card's name that one is interested in
+	 * @return a CardList of all cards of the given name in the given player's library
+	 */
+	public static CardList getPlayerCardsInLibrary(final String player, final String cardName) {
+		CardList cards = new CardList();
+		cards = getPlayerCardsInLibrary(player);
+		return cards.getName(cardName);
+	}
+	
 }
