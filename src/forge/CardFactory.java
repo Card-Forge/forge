@@ -4319,7 +4319,9 @@ public class CardFactory implements NewConstants {
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
     
-  //*************** START *********** START **************************
+    
+/*    
+    //*************** START *********** START **************************
     else if(cardName.equals("Kinsbaile Borderguard"))
     {
     	final SpellAbility ability = new Ability(card, "0")
@@ -4431,7 +4433,7 @@ public class CardFactory implements NewConstants {
         card.addDestroyCommand(destroy);
     	
     }//*************** END ************ END **************************
-    
+*/
 
     
   //*************** START *********** START **************************
@@ -9845,6 +9847,9 @@ public class CardFactory implements NewConstants {
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
     
+    
+/*
+    //*************** END ************ END **************************
     else if (cardName.equals("Lockjaw Snapper"))
     {
     	
@@ -9885,6 +9890,8 @@ public class CardFactory implements NewConstants {
     	};//command
     	card.addDestroyCommand(destroy);
     }//*************** START *********** START **************************
+*/
+    
     
     //*************** START *********** START **************************
     else if(cardName.equals("Deep Analysis"))

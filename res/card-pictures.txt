@@ -18,6 +18,11 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+chronatog.jpg		http://www.wizards.com/global/images/magic/general/chronatog.jpg
+loxodon_gatekeeper.jpg		http://www.wizards.com/global/images/magic/general/loxodon_gatekeeper.jpg
+frozen_aether.jpg		http://www.wizards.com/global/images/magic/general/frozen_aether.jpg
+kismet.jpg		http://www.wizards.com/global/images/magic/general/kismet.jpg
+gush.jpg		http://www.wizards.com/global/images/magic/general/gush.jpg
 stasis.jpg		http://www.wizards.com/global/images/magic/general/stasis.jpg
 cosmic_horror.jpg		http://www.wizards.com/global/images/magic/general/cosmic_horror.jpg
 force_of_nature.jpg		http://www.wizards.com/global/images/magic/general/force_of_nature.jpg

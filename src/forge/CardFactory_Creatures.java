@@ -19254,6 +19254,162 @@ public class CardFactory_Creatures {
 	    	  card.addSpellAbility(ability);
 	      }//*************** END ************ END **************************
 	       
+	       
+	       //*************** START *********** START **************************
+	      else if(cardName.equals("Kinsbaile Borderguard"))
+	      {
+	      	final SpellAbility ability = new Ability(card, "0")
+	          {
+	            public void resolve()
+	            {
+	               card.addCounter(Counters.P1P1, countKithkin());
+	               //System.out.println("all counters: " +card.sumAllCounters());
+	            }//resolve()
+	            
+	            public int countKithkin()
+	            {
+	          	  PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+	          	  CardList kithkin = new CardList(play.getCards());
+	          	  kithkin = kithkin.filter(new CardListFilter()        	  
+	          	  {
+
+	  				public boolean addCard(Card c)
+	  				{
+	  					return (c.getType().contains("Kithkin") || c.getKeyword().contains("Changeling"))&& !c.equals(card);
+	  				}
+	          		  
+	          	  });
+	          	  return kithkin.size();
+	          	  
+	            }
+	            @SuppressWarnings("unused") // makeToken
+	  		  public void makeToken()
+	            {
+	          	  Card c = new Card();
+
+	                c.setOwner(card.getController());
+	                c.setController(card.getController());
+
+	                c.setName("Kithkin Soldier");
+	                c.setImageName("W 1 1 Kithkin Soldier");
+	                c.setManaCost("W");
+	                c.setToken(true);
+
+	                c.addType("Creature");
+	                c.addType("Kithkin");
+	                c.addType("Soldier");
+
+	                c.setBaseAttack(1);
+	                c.setBaseDefense(1);
+
+	                PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+	                play.add(c);
+	            }
+	          };
+	          Command intoPlay = new Command()
+	          {
+	  		  private static final long serialVersionUID = -7067218066522935060L;
+
+	  		  public void execute()
+	            {
+	              ability.setStackDescription("Kinsbaile Borderguard comes into play with a +1/+1 counter on it for each other Kithkin you control.");
+	              AllZone.Stack.add(ability);
+	            }
+	          };
+	          
+	          final SpellAbility ability2 = new Ability(card, "0")
+	          {
+	            public void resolve()
+	            {
+	               for (int i=0;i<card.sumAllCounters();i++)
+	               {
+	              	 makeToken();
+	               }
+	            }//resolve()
+	            
+	            public void makeToken()
+	            {
+	          	  Card c = new Card();
+
+	                c.setOwner(card.getController());
+	                c.setController(card.getController());
+
+	                c.setName("Kithkin Soldier");
+	                c.setImageName("W 1 1 Kithkin Soldier");
+	                c.setManaCost("W");
+	                c.setToken(true);
+
+	                c.addType("Creature");
+	                c.addType("Kithkin");
+	                c.addType("Soldier");
+
+	                c.setBaseAttack(1);
+	                c.setBaseDefense(1);
+
+	                PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+	                play.add(c);
+	            }
+	            
+	          };
+	          
+	          Command destroy = new Command()
+	          {
+	  		  private static final long serialVersionUID = 304026662487997331L;
+
+	  		  public void execute()
+	            {
+	              ability2.setStackDescription("When Kinsbaile Borderguard is put into a graveyard from play, put a 1/1 white Kithkin Soldier creature token into play for each counter on it.");
+	              AllZone.Stack.add(ability2);
+	            }
+	          };     
+	          
+	          card.addComesIntoPlayCommand(intoPlay);
+	          card.addDestroyCommand(destroy);
+	      	
+	      }//*************** END ************ END **************************
+	       
+	      //*************** END ************ END **************************
+	      else if (cardName.equals("Lockjaw Snapper"))
+	      {
+	      	
+	      	final Ability ability = new Ability(card, "0")
+	          {
+	            public void resolve()
+	            {
+	          	PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+	    			PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+	    			
+	    			CardList creatures = new CardList();
+	    			creatures.addAll(hPlay.getCards());
+	    			creatures.addAll(cPlay.getCards());
+	    			creatures = creatures.filter(new CardListFilter()
+	    			{
+	  					public boolean addCard(Card c) {
+	  						return c.getCounters(Counters.M1M1) > 0;
+	  					}
+	    			});
+	    			
+	    			for (int i=0; i<creatures.size();i++)
+	    			{
+	    				Card c = creatures.get(i);
+	    				c.addCounter(Counters.M1M1, 1);
+	    			}
+	            }
+	          };
+	      	
+	      	Command destroy = new Command()
+	      	{
+	      		private static final long serialVersionUID = 6389028698247230474L;
+
+	  			public void execute()
+	      		{
+	      			ability.setStackDescription(card.getName()+ " - put -1/-1 counter on each creature that has a -1/-1 counter on it.");
+	                  AllZone.Stack.add(ability);
+	      		}
+	      	};//command
+	      	card.addDestroyCommand(destroy);
+	      }//*************** START *********** START **************************
+	       
 	      // Cards with Cycling abilities
 	      // -1 means keyword "Cycling" not found
 	      if (shouldCycle(card) != -1)
