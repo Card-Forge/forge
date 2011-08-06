@@ -227,6 +227,18 @@ public class ManaPool extends Card {
             } else Colorless += s;
         }
         addOne(cless + "");
+        //Omnath, Locus of Mana Pump Trigger
+        if(Phase.GameBegins == 1) {
+            CardList Omnath_Human = new CardList();
+            PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);                   
+            Omnath_Human.addAll(play.getCards());
+            Omnath_Human = Omnath_Human.getName("Omnath, Locus of Mana"); 
+            if(Omnath_Human.size() > 0) {
+            	Command com = GameActionUtil.commands.get("Omnath");
+                com.execute();
+            }
+        }
+        //Omnath, Locus of Mana Pump Trigger
         //has[0]+=cless;
     }
     
@@ -242,6 +254,18 @@ public class ManaPool extends Card {
         } catch(NumberFormatException ex) {
             throw new RuntimeException("Mana_Pool.AddOne : Error, noncolor mana cost is not a number - " + Mana);
         }
+        //Omnath, Locus of Mana Pump Trigger
+        if(Phase.GameBegins == 1) {
+            CardList Omnath_Human = new CardList();
+            PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);                   
+            Omnath_Human.addAll(play.getCards());
+            Omnath_Human = Omnath_Human.getName("Omnath, Locus of Mana"); 
+            if(Omnath_Human.size() > 0) {
+            	Command com = GameActionUtil.commands.get("Omnath");
+                com.execute();
+            }
+        }
+        //Omnath, Locus of Mana Pump Trigger
     }
     
     public static String[] getManaParts(Ability_Mana manaAbility) {
@@ -332,6 +356,18 @@ public class ManaPool extends Card {
             	}
             }
         }
+        //Omnath, Locus of Mana Pump Trigger
+        if(Phase.GameBegins == 1) {
+            CardList Omnath_Human = new CardList();
+            PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);                   
+            Omnath_Human.addAll(play.getCards());
+            Omnath_Human = Omnath_Human.getName("Omnath, Locus of Mana"); 
+            if(Omnath_Human.size() > 0) {
+            	Command com = GameActionUtil.commands.get("Omnath");
+                com.execute();
+            }
+        }
+        //Omnath, Locus of Mana Pump Trigger
         return m;
     }
     
@@ -403,6 +439,18 @@ public class ManaPool extends Card {
                 }
             }
         }
+        //Omnath, Locus of Mana Pump Trigger
+        if(Phase.GameBegins == 1) {
+            CardList Omnath_Human = new CardList();
+            PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);                   
+            Omnath_Human.addAll(play.getCards());
+            Omnath_Human = Omnath_Human.getName("Omnath, Locus of Mana"); 
+            if(Omnath_Human.size() > 0) {
+            	Command com = GameActionUtil.commands.get("Omnath");
+                com.execute();
+            }
+        }
+        //Omnath, Locus of Mana Pump Trigger
         return manaCost;
     }
     
@@ -430,7 +478,32 @@ public class ManaPool extends Card {
         if(!isSnow()) smp.clear();
         used.clear();
         paid = "";//Arrays.fill(paid, 0);
-        has = "";//Arrays.fill(has, 0);
+        //Omnath, Locus of Mana Mana Storage
+        if(Phase.GameBegins == 1) {
+        CardList Omnath_Human = new CardList();
+        PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);                   
+        Omnath_Human.addAll(play.getCards());
+        Omnath_Human = Omnath_Human.getName("Omnath, Locus of Mana"); 
+        String New_ManaPool = "";
+        if(Omnath_Human.size() > 0) {
+	        String Human_ManaPool = has;
+	        int Count = Human_ManaPool.length();
+            for(int i = 0; i < Count; i++) {          	
+            	if(Human_ManaPool.contains("G") == true) {
+            		Human_ManaPool = Human_ManaPool.replaceFirst("G", "");
+            		New_ManaPool = New_ManaPool + "G";
+            	}
+            }
+    		New_ManaPool = New_ManaPool.trim();
+            has = New_ManaPool;
+          //Omnath, Locus of Mana Mana Storage
+        } else {
+            has = "";//Arrays.fill(has, 0); 	
+        }
+        } else {
+            has = "";//Arrays.fill(has, 0); // This is required to prevent crashing on the first turn.
+        }
+
     }
     
     public void paid() {

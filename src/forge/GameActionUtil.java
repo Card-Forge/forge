@@ -12455,6 +12455,41 @@ public class GameActionUtil {
 		}
 	}; 
 
+	public static Command Omnath = new Command() {
+		private static final long serialVersionUID = -22045167326100804L;
+
+		public void execute() {
+			CardList list = AllZoneUtil.getCardsInPlay("Omnath, Locus of Mana");
+			
+			for(int i = 0; i < list.size(); i++) { // Should be 1.
+				Card c = list.get(i);
+				if(c.getController() == "Human") {
+				String Mana = AllZone.ManaPool.has + AllZone.ManaPool.smp.getText();
+				
+				int Count = 0;
+		        if(Mana != null) Count = Mana.length();		        
+		        int Bonus = 0;
+		        if(Count > 0) {
+	            for(int x = 0; x < Count; x++) {
+	            	if(Mana.contains("G") == true) {
+	    				
+	            		Mana = Mana.replaceFirst("G", "");
+	            		Bonus = Bonus + 1;
+	            		
+	            	}
+	            }	           	
+				c.setBaseAttack(Bonus + 1);
+				c.setBaseDefense(Bonus + 1);
+		        }
+				
+			} else {
+				c.setBaseAttack(1);
+				c.setBaseDefense(1);
+			}
+			}
+		}// execute()
+	};
+	
 	public static Command Dauntless_Escort = new Command() {
 		private static final long serialVersionUID = -2201201455269804L;
 		CardList  old = new CardList();	
@@ -18084,6 +18119,7 @@ public class GameActionUtil {
 		commands.put("Kor_Duelist", Kor_Duelist);
 		commands.put("Keldon_Warlord", Keldon_Warlord);
 		commands.put("Heedless_One", Heedless_One);
+		commands.put("Omnath", Omnath);
 		commands.put("Arena_of_the_Ancients", Arena_of_the_Ancients);
 		
 		//System.out.println("size of commands: " + commands.size());

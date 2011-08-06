@@ -9,6 +9,7 @@ public class Phase extends MyObservable
 {
 	private int phaseIndex;
 	private int turn;
+	static int	 	GameBegins = 0; // Omnath
     static int	   StormCount;
     static int	   PlayerSpellCount;
     static int	   PlayerCreatureSpellCount;   
@@ -75,6 +76,7 @@ public class Phase extends MyObservable
     
     public void reset() {
         turn = 1;
+        GameBegins = 0;
         phaseIndex = 0;
         humanExtraTurns = 0;
         computerExtraTurns = 0;
@@ -256,6 +258,7 @@ public class Phase extends MyObservable
         }
         if(is(Constant.Phase.Main1, Constant.Player.Human)) {
         	if(turn == 1) {
+        	GameBegins = 1; // Omnath
         	StormCount = 0;
             PlayerSpellCount = 0;
             PlayerCreatureSpellCount = 0;   

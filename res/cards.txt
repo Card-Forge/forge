@@ -1,3 +1,9 @@
+Omnath, Locus of Mana
+2 G
+Legendary Creature Elemental
+Green mana doesn't empty from your mana pool as steps and phases end. Omnath, Locus of Mana gets +1/+1 for each green mana in your mana pool.
+1/1
+
 Fear
 B B
 Enchantment Aura
