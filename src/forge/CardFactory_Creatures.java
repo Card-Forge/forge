@@ -17309,7 +17309,7 @@ public class CardFactory_Creatures {
         	card.addSpellAbility(ma);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Wolfbriar Elemental"))
         {
@@ -17338,7 +17338,7 @@ public class CardFactory_Creatures {
             };
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if (cardName.equals("Lightkeeper of Emeria"))
