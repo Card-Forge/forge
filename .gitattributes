@@ -1870,6 +1870,7 @@ res/cardsfolder/fluctuator.txt -text svneol=native#text/plain
 res/cardsfolder/flying_carpet.txt -text svneol=native#text/plain
 res/cardsfolder/flying_men.txt -text svneol=native#text/plain
 res/cardsfolder/fodder_cannon.txt -text svneol=native#text/plain
+res/cardsfolder/fodder_launch.txt -text svneol=native#text/plain
 res/cardsfolder/fog.txt -text svneol=native#text/plain
 res/cardsfolder/fog_bank.txt -text svneol=native#text/plain
 res/cardsfolder/fog_of_gnats.txt -text svneol=native#text/plain
