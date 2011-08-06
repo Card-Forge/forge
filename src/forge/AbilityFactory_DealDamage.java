@@ -248,7 +248,7 @@ public class AbilityFactory_DealDamage {
 		 }
 	        
 		 sb.append(name).append(" - ");
-		 sb.append("Deals").append(damage).append(" damage to ");
+		 sb.append("Deals ").append(damage).append(" damage to ");
 		 for(int i = 0; i < tgts.size(); i++){
 			 Object o = tgts.get(0);
 			 if (o instanceof Player){

@@ -194,7 +194,7 @@ public class ComputerUtil
        land.remove(sa.getSourceCard());
     }
  // Beached - Delete old
-    String mana = sa.getPayCosts() != null ? sa.getPayCosts().getMana() : sa.getManaCost();
+    String mana = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : sa.getManaCost();
     ManaCost cost = new ManaCost(mana);
     
     cost = AllZone.GameAction.GetSpellCostChange(sa, cost);
@@ -240,7 +240,7 @@ public class ComputerUtil
     	
     	if (cost.getUntap() && (card.isUntapped() || card.isSick()))
     		return false;
-		
+    	
 		if (cost.getTapXTypeCost())
 		{
 			PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
@@ -396,7 +396,7 @@ public class ComputerUtil
        land.remove(sa.getSourceCard());
     }
     
-    String mana = sa.getPayCosts() != null ? sa.getPayCosts().getMana() : sa.getManaCost();
+    String mana = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : sa.getManaCost();
     
     ManaCost cost = AllZone.GameAction.GetSpellCostChange(sa, new ManaCost(mana));
     // Beached - Delete old

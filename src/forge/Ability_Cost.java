@@ -68,10 +68,30 @@ public class Ability_Cost {
 	private int returnAmount = 0;
 	public int getReturnAmount() { return returnAmount; }
 	
-	public boolean hasNoManaCost() { return manaCost.equals("") || manaCost.equals("0"); };
+	public boolean hasNoManaCost() { return manaCost.equals("") || manaCost.equals("0"); }
 	private String manaCost = "";
-	public String getMana() { return manaCost; }
+	public String getMana() { return manaCost; }	// Only used for Human to pay for non-X cost first
 	public void setMana(String sCost) { manaCost = sCost; }
+	
+	public boolean hasNoXManaCost() { return manaXCost == 0; }
+	private int manaXCost = 0;
+	public int getXMana() { return manaXCost; }
+	public void setXMana(int xCost) { manaXCost = xCost; }
+	
+	public String getTotalMana() { 
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i < manaXCost; i++)
+			sb.append("X ");
+		
+		if (!hasNoManaCost())
+			sb.append(manaCost);	
+		
+		if (sb.toString().equals(""))
+			return "0";
+		
+		return sb.toString().trim();
+	}
+	
 	
 	private String name;
 	
@@ -170,7 +190,11 @@ public class Ability_Cost {
             parse = parse.trim();
         }
         
-        manaCost = parse.trim();
+        String stripXCost = parse.replaceAll("X", "");
+        
+        manaXCost = parse.length() - stripXCost.length();
+        
+        manaCost = stripXCost.trim();
         if (manaCost.equals(""))
         	manaCost = "0";
 	}
@@ -194,8 +218,8 @@ public class Ability_Cost {
 	}
 	
 	public void changeCost(SpellAbility sa){
-		if (manaCost != "0"){
-		    String mana = getMana();
+		if (getTotalMana() != "0"){	// 11/15/10 use getTotalMana() to account for X reduction
+		    String mana = getTotalMana();
 			manaCost = AllZone.GameAction.GetSpellCostChange(sa, new ManaCost(mana)).toString();
 		}
 	}
@@ -226,8 +250,8 @@ public class Ability_Cost {
 		if (!bFlag){
 			// usually no additional mana cost for spells
 			// only three Alliances cards have additional mana costs, but they are basically kicker/multikicker
-			if (!getMana().equals("") && !getMana().equals("0")){
-				cost.append("pay ").append(getMana());
+			if (!getTotalMana().equals("0")){
+				cost.append("pay ").append(getTotalMana());
 				first = false;
 			}
 		}
@@ -306,6 +330,12 @@ public class Ability_Cost {
 	private String abilityToString() {
 		StringBuilder cost = new StringBuilder();
 		boolean first = true;
+		if (manaXCost > 0){
+			for(int i = 0; i < manaXCost; i++){
+				cost.append("X").append(" ");
+			}
+		}
+		
 		if (!(manaCost.equals("0") || manaCost.equals(""))){
 			cost.append(manaCost);
 			first = false;

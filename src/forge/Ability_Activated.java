@@ -7,7 +7,7 @@ abstract public class Ability_Activated extends SpellAbility implements java.io.
     
     public Ability_Activated(Card sourceCard, Ability_Cost abCost, Target tgt) {
         super(SpellAbility.Ability, sourceCard);
-        setManaCost(abCost.getMana());
+        setManaCost(abCost.getTotalMana());
         setPayCosts(abCost);
         if (tgt != null && tgt.doesTarget())
         	setTarget(tgt);

@@ -21,6 +21,7 @@ public class Cost_Payment {
 	private boolean payTap;
 	private boolean payUntap; 
 	private boolean payMana;
+	private boolean payXMana;
 	private boolean paySubCounter;
 	private boolean paySac;
 	private boolean payExile;
@@ -38,6 +39,7 @@ public class Cost_Payment {
 	}
 
 	public void setPayMana(boolean bPay){	payMana = bPay;	}
+	public void setPayXMana(boolean bPay){	payXMana = bPay;	}
 	public void setPayDiscard(boolean bSac){	payDiscard = bSac;	}
 	public void setPaySac(boolean bSac){	paySac = bSac;	}
 	public void setPayExile(boolean bExile) { payExile = bExile; }
@@ -54,6 +56,7 @@ public class Cost_Payment {
 		payTap = !cost.getTap();
 		payUntap = !cost.getUntap();
 		payMana = cost.hasNoManaCost();
+		payXMana = cost.hasNoXManaCost();
 		paySubCounter = !cost.getSubCounter();
 		paySac = !cost.getSacCost();
 		payExile = !cost.getExileCost();
@@ -206,6 +209,12 @@ public class Cost_Payment {
 			return false;
 		}
 		
+		if (!payXMana && !cost.hasNoXManaCost()){		// pay mana here
+			card.setXManaCostPaid(0);
+			changeInput.stopSetNext(input_payXMana(getCost().getXMana(), getAbility(), this));
+			return false;
+		}
+		
 		if (!payTapXType && cost.getTapXTypeCost()){
 			PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
             CardList typeList = new CardList(play.getCards());
@@ -317,7 +326,7 @@ public class Cost_Payment {
 	}
 
 	public boolean isAllPaid(){
-		return (payTap && payUntap && payMana && paySubCounter && paySac && payExile && payLife && payDiscard && payTapXType && payReturn);
+		return (payTap && payUntap && payMana && payXMana && paySubCounter && paySac && payExile && payLife && payDiscard && payTapXType && payReturn);
 	}
 	
 	public void cancelPayment(){
@@ -363,7 +372,8 @@ public class Cost_Payment {
 	}
     
     public void payComputerCosts(){
-    	// make sure ComputerUtil.canPayAdditionalCosts() is updated when updating new Costs
+    	// ******** NOTE for Adding Costs ************
+    	// make sure ComputerUtil.canPayAdditionalCosts() is updated so the AI knows if they can Pay the cost
     	ArrayList<Card> sacCard = new ArrayList<Card>();
     	ArrayList<Card> exileCard = new ArrayList<Card>();
     	ArrayList<Card> tapXCard = new ArrayList<Card>();
@@ -509,6 +519,69 @@ public class Cost_Payment {
 	public void changeCost(){
 		cost.changeCost(ability);
 	}
+	
+	
+	
+	
+
+	// *********** Inputs used by Cost_Payment below here ***************************
+	// 
+	
+	public static Input input_payXMana(final int numX, final SpellAbility sa, final Cost_Payment payment){
+		Input payX = new Input(){
+			private static final long serialVersionUID = -6900234444347364050L;
+			int 					xPaid = 0;
+			ManaCost 				manaCost = new ManaCost(Integer.toString(numX));
+			
+		    @Override
+		    public void showMessage() {
+		    	if (manaCost.toString().equals(Integer.toString(numX))) // Can only cancel if partially paid an X value
+		    		ButtonUtil.enableAll();
+		    	else
+		    		ButtonUtil.enableOnlyCancel();
+		    	
+		        AllZone.Display.showMessage("Pay X Mana Cost for " + sa.getSourceCard().getName()+"\n"+xPaid+ " Paid so far.");
+		    }
+		    
+		    // selectCard 
+		    @Override
+		    public void selectCard(Card card, PlayerZone zone) {
+		        if(sa.getSourceCard().equals(card) && sa.isTapAbility()) {
+		        	// this really shouldn't happen but just in case
+		            return;
+		        }
+		        boolean canUse = false;
+		        for(Ability_Mana am:card.getManaAbility())
+		            canUse |= am.canPlay();
+		        manaCost = Input_PayManaCostUtil.tapCard(card, manaCost);
+		        if(manaCost.isPaid()){
+		        	manaCost = new ManaCost(Integer.toString(numX));
+		        	xPaid++;
+		        }
+		        
+		        showMessage();
+		    }
+		    
+		    @Override
+		    public void selectButtonCancel() {
+		        payment.setCancel(true);
+		        payment.payCost();
+		        AllZone.Human_Play.updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap
+		        stop();
+		    }
+		    
+		    @Override
+		    public void selectButtonOK() {
+		    	payment.setPayXMana(true);
+		    	payment.getCard().setXManaCostPaid(xPaid);
+		    	stop();
+		    	payment.payCost();
+		    }
+			
+		};
+		return payX;
+	}
+	
     
     public static Input input_discardCost(final int nCards, final String discType, final CardList handList, SpellAbility sa, final Cost_Payment payment) {
         final SpellAbility sp = sa;
