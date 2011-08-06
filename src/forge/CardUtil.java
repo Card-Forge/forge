@@ -216,4 +216,10 @@ public class CardUtil {
                 && !cardType.equals("Island") && !cardType.equals("Forest")
                 && !cardType.equals("Swamp"));
     }
+    
+    public static boolean isBasicLandType(String cardType) {
+    	return (cardType.equals("Plains")
+    			|| cardType.equals("Island") || cardType.equals("Swamp")
+    			|| cardType.equals("Mountain") || cardType.equals("Forest"));
+    }
 }

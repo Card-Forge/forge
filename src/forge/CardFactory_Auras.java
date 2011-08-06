@@ -3,6 +3,7 @@ package forge;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.StringTokenizer;
 import com.esotericsoftware.minlog.Log;
 
@@ -594,7 +595,53 @@ class CardFactory_Auras {
                 	}
                 	else
                 	{
-                		NewType[0] = AllZone.Display.getChoice("Select land type.", "Plains","Island","Swamp","Mountain","Forest");
+                		String[] LandTypes = new String[] { "Plains","Island","Swamp","Mountain","Forest"};
+                		if(card.getController().equals(Constant.Player.Computer))
+                		{
+                			HashMap<String,Integer> humanLandCount = new HashMap<String,Integer>();
+                			CardList humanlands = new CardList(AllZone.Human_Play.getCards());
+                			humanlands = humanlands.getType("Land");
+                			humanlands = humanlands.filter(new CardListFilter() {
+                            	public boolean addCard(Card c) {
+                            		return c.getType().contains("Land");
+                            	}
+                            });
+                			
+                			for(int i=0;i<LandTypes.length;i++)
+                			{
+                				humanLandCount.put(LandTypes[i],0);
+                			}
+                			
+                			for(Card c:humanlands)
+                			{
+                				for(String singleType:c.getType())
+                				{
+                					if(CardUtil.isBasicLandType(singleType))
+                					{
+                						humanLandCount.put(singleType, humanLandCount.get(singleType)+1);
+                					}
+                				}
+                			}
+                			
+                			int minAt = 0;
+                			int minVal = Integer.MAX_VALUE;
+                			for(int i=0;i<LandTypes.length;i++)
+                			{
+                				if(getTargetCard().getType().contains(LandTypes[i])) continue;
+                				
+                				if(humanLandCount.get(LandTypes[i]) < minVal)
+                				{
+                					minVal = humanLandCount.get(LandTypes[i]);
+                					minAt = i;
+                				}
+                			}
+                			
+                			NewType[0] = LandTypes[minAt];
+                		}
+                		else
+                		{
+                			NewType[0] = AllZone.Display.getChoice("Select land type.", "Plains","Island","Swamp","Mountain","Forest");
+                		}
                 	}
                 	PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
                     play.add(card);
