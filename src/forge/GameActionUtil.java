@@ -106,7 +106,6 @@ public class GameActionUtil {
 		AllZone.Stack.freezeStack();
 		final Player player = AllZone.Phase.getPlayerTurn();
 		draw_Teferi_Puzzle_Box(player);
-		draw_Anvil_of_Bogardan(player);
 		draw_Sylvan_Library(player);
 		AllZone.Stack.unfreezeStack();	
 	}
@@ -5733,15 +5732,6 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}// for
 	}// upkeep_Dragon_Broodmother()
-	
-	private static void draw_Anvil_of_Bogardan(Player player) {
-		CardList list = AllZoneUtil.getCardsInPlay("Anvil of Bogardan");
-
-		for(int i = 0; i < list.size(); i++){
-				player.drawCard();
-				player.discard(null);
-		}
-	}// Anvil_of_Bogarden()
 	
 	private static void draw_Sylvan_Library(final Player player) {
 		/*
