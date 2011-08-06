@@ -1,0 +1,9 @@
+Name:Volcanic Spray
+ManaCost:1 R
+Types:Sorcery
+Text:no text
+K:spDamageAll:Player,Creature.withoutFlying:1:Volcanic Spray deals 1 damage to each creature without flying and each player.
+K:Flashback:1 R
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_spray.jpg
+End
