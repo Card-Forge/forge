@@ -1,8 +1,11 @@
 BasicLandPercentage=0
 
-[Group MaxCnt=4 Percentage=37]
+[Group MaxCnt=20 Percentage=20]
 Forest
 Snow-Covered Forest
+[/Group]
+
+[Group MaxCnt=4 Percentage=17]
 Bayou
 Savannah
 Windswept Heath
