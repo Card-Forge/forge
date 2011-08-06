@@ -574,6 +574,7 @@ public class GameAction {
 	        }
 	        
 	        GameActionUtil.executeCardStateEffects();
+	        GameActionUtil.stSetPT.execute();
 	        GameActionUtil.StaticEffectKeyword.execute();
 	        GameActionUtil.stPump.execute();
 	        

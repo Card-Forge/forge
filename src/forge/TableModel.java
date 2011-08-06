@@ -185,7 +185,7 @@ class TableModel extends AbstractTableModel {
             case 4:
                 return GuiDisplayUtil.formatCardType(c);
             case 5:
-                return c.isCreature()? c.getBaseAttack() + "/" + c.getBaseDefense():"";
+                return c.isCreature()? c.getBaseAttackString() + "/" + c.getBaseDefenseString():"";
             case 6:
                 String rarity = c.getRarity();
                 if(rarity.length() > 0) rarity = rarity.substring(0, 1);

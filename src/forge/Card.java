@@ -89,6 +89,8 @@ public class Card extends MyObservable {
     private int                          baseAttack;
     private int                          baseDefense;
     private int							 baseLoyalty 					   = 0;
+    private String						baseAttackString = null;
+    private String						baseDefenseString = null;
     
     private int                          damage;
     
@@ -820,6 +822,10 @@ public class Card extends MyObservable {
                 } else if (keyword.get(i).toString().contains("stPump")) {
                     String k[] = keyword.get(i).split(":");
                     if (!k[4].contains("no text")) sbLong.append(k[4]).append("\r\n");
+                } else if (keyword.get(i).toString().contains("stSetPT")) {
+                    String k[] = keyword.get(i).split(":");
+                    if(k.length > 5) sbLong.append(k[6]).append("\r\n");
+                    else sbLong.append(k[3]).append("\r\n");
                 } else if (keyword.get(i).toString().contains("Protection:")) {
                     String k[] = keyword.get(i).split(":");
                     sbLong.append(k[2]).append("\r\n");
@@ -1697,6 +1703,26 @@ public class Card extends MyObservable {
     
     public void setBaseDefense(int n) {
         baseDefense = n;
+        this.updateObservers();
+    }
+    
+  //values that are printed on card
+    public String getBaseAttackString() {
+        return (null == baseAttackString) ? ""+getBaseAttack() : baseAttackString;
+    }
+    
+    public String getBaseDefenseString() {
+    	return (null == baseDefenseString) ? ""+getBaseDefense() : baseDefenseString;
+    }
+    
+    //values that are printed on card
+    public void setBaseAttackString(String s) {
+        baseAttackString = s;
+        this.updateObservers();
+    }
+    
+    public void setBaseDefenseString(String s) {
+        baseDefenseString = s;
         this.updateObservers();
     }
     

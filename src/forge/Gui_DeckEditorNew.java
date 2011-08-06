@@ -867,7 +867,7 @@ public class Gui_DeckEditorNew extends JFrame implements CardContainer, NewConst
                 case 4: //Type
                     return GuiDisplayUtil.formatCardType(c);
                 case 5: //Stats
-                    return c.isCreature()? c.getBaseAttack() + "/" + c.getBaseDefense():"";
+                    return c.isCreature()? c.getBaseAttackString() + "/" + c.getBaseDefenseString():"";
                 case 6: //R
                     String rarity = c.getRarity();
                     if(rarity.length() > 0) rarity = rarity.substring(0, 1);

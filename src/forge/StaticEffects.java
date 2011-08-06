@@ -23,7 +23,7 @@ public class StaticEffects
 		
 		cardToEffectsList.put("Adamaro, First to Desire", new String[] {"Adamaro_First_to_Desire"});
 		cardToEffectsList.put("Akroma's Memorial", new String[] {"Akromas_Memorial"});
-		cardToEffectsList.put("Angry Mob", new String[] {"Angry_Mob"});
+		//cardToEffectsList.put("Angry Mob", new String[] {"Angry_Mob"});
 		cardToEffectsList.put("Avatar",  new String[] {"Ajani_Avatar_Token"});
 		cardToEffectsList.put("Aven Trailblazer", new String[] {"Aven_Trailblazer"});
 		
@@ -100,7 +100,7 @@ public class StaticEffects
 		cardToEffectsList.put("Multani, Maro-Sorcerer", new String[] {"Multani_Maro_Sorcerer"});
 		cardToEffectsList.put("Muraganda Petroglyphs", new String[] {"Muraganda_Petroglyphs"});
 		
-		cardToEffectsList.put("Nightmare", new String[] {"Nightmare"});
+		//cardToEffectsList.put("Nightmare", new String[] {"Nightmare"});
 		cardToEffectsList.put("Nirkana Cutthroat", new String[] {"Nirkana_Cutthroat"});
 		cardToEffectsList.put("Nut Collector", new String[] {"Nut_Collector"});
 		cardToEffectsList.put("Nyxathid", new String[] {"Nyxathid"});

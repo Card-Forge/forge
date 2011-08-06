@@ -68,13 +68,13 @@ public class TableSorter implements Comparator<Card>, NewConstants
     }
     else if (column == 5)//Stats, attack and defense
     {
-      aCom = new Float(-1);
-      bCom = new Float(-1);
+      //aCom = new Float(-1);
+      //bCom = new Float(-1);
 
       if(a.isCreature())
-        aCom = new Float(a.getBaseAttack() +"." +a.getBaseDefense());
+        aCom = a.getBaseAttackString() +"." +a.getBaseDefenseString();
       if(b.isCreature())
-        bCom = new Float(b.getBaseAttack() +"." +b.getBaseDefense());
+        bCom = b.getBaseAttackString() +"." +b.getBaseDefenseString();
     }
     else if (column == 6)//Rarity
     {

@@ -132,8 +132,10 @@ public class ReadCard implements Runnable, NewConstants {
             	{
             		String t = s.substring(3);
             		String pt[] = t.split("/");
-            		int att = Integer.parseInt(pt[0]);
-            		int def = Integer.parseInt(pt[1]);
+            		int att = pt[0].contains("*") ? 0 : Integer.parseInt(pt[0]);
+            		int def = pt[1].contains("*") ? 0 : Integer.parseInt(pt[1]);
+            		c.setBaseAttackString(pt[0]);
+            		c.setBaseDefenseString(pt[1]);
             		c.setBaseAttack(att);
             		c.setBaseDefense(def);
             	}

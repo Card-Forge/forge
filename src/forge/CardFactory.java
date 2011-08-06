@@ -10945,6 +10945,8 @@ public class CardFactory implements NewConstants {
         c.setBaseAttack(sim.getBaseAttack());
         c.setBaseDefense(sim.getBaseDefense());
         c.setBaseLoyalty(sim.getBaseLoyalty());
+        c.setBaseAttackString(sim.getBaseAttackString());
+        c.setBaseDefenseString(sim.getBaseDefenseString());
         c.setIntrinsicKeyword(sim.getKeyword());
         c.setName(sim.getName());
         c.setImageName(sim.getImageName());
