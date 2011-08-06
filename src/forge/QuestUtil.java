@@ -2,9 +2,12 @@ package forge;
 
 import java.util.ArrayList;
 
+import forge.card.abilityFactory.AbilityFactory;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Cost;
 import forge.card.spellability.SpellAbility;
+import forge.card.trigger.Trigger;
+import forge.card.trigger.TriggerHandler;
 
 @Deprecated
 @SuppressWarnings("deprecation")
@@ -402,8 +405,12 @@ public class QuestUtil {
         if (level >= 2)
         	c.addIntrinsicKeyword("Haste");
         
-        if (level >= 4)
-        	c.addIntrinsicKeyword("Whenever this creature attacks alone, it gets +2/+0 until end of turn.");
+        if (level >= 4) {
+        	final Trigger myTrigger = TriggerHandler.parseTrigger("Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | Execute$ TrigOverride | TriggerDescription$ Whenever CARDNAME attacks alone, it gets +2/+0 until end of turn.", c);
+            AbilityFactory af = new AbilityFactory();
+            myTrigger.setOverridingAbility(af.getAbility("AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2", c));
+            c.addTrigger(myTrigger);
+        }
         
         c.setBaseAttack(baseAttack);
         c.setBaseDefense(baseDefense);

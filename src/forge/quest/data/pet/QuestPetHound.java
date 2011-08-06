@@ -2,6 +2,9 @@ package forge.quest.data.pet;
 
 import forge.AllZone;
 import forge.Card;
+import forge.card.trigger.Trigger;
+import forge.card.trigger.TriggerHandler;
+import forge.card.abilityFactory.*;
 
 public class QuestPetHound extends QuestPetAbstract{
     public QuestPetHound(){
@@ -50,7 +53,12 @@ public class QuestPetHound extends QuestPetAbstract{
             petCard.setBaseAttack(2);
             petCard.setBaseDefense(1);
             petCard.addIntrinsicKeyword("Haste");
-            petCard.addIntrinsicKeyword("Whenever this creature attacks alone, it gets +2/+0 until end of turn.");
+            //petCard.addIntrinsicKeyword("Whenever this creature attacks alone, it gets +2/+0 until end of turn.");
+            
+            final Trigger myTrigger = TriggerHandler.parseTrigger("Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | TriggerDescription$ Whenever CARDNAME attacks alone, it gets +2/+0 until end of turn.", petCard);
+            AbilityFactory af = new AbilityFactory();
+            myTrigger.setOverridingAbility(af.getAbility("AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2", petCard));
+            petCard.addTrigger(myTrigger);
 		}
 
 
