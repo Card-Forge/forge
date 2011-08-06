@@ -1,0 +1,11 @@
+Name:Coral Reef
+ManaCost:U U
+Types:Enchantment
+Text:no text
+K:etbCounter:POLYP:2
+A:AB$PutCounter | Cost$ Sac<1/Island> | CounterType$ POLYP | CounterNum$ 2 | SpellDescription$ Put two polyp counters on CARDNAME.
+A:AB$PutCounter | Cost$ tapXType<1/Creature.Blue> SubCounter<1/POLYP> | CounterType$ P0P1 | CounterNum$ 1 | Tgt$TgtC | SpellDescription$ Put a +0/+1 counter on target creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/coral_reef.jpg
+End
