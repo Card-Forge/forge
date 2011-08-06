@@ -214,7 +214,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Luke Skywalker 3", "hard", "WU Rebels deck with Training Grounds");
         
         addToDeckList("Maggie Simpson 3", "hard", "BRG jund deck with Sprouting Thrinax, Jund Hackblade and Bloodbraid Elf");
-        addToDeckList("Magneto 3", "hard", "B deck with Shriekmaw, Assassins, creature removal and Liliana Vess");
+        addToDeckList("Magneto 3", "hard", "B Shriekmaw deck with creature removal and re-animation");
         addToDeckList("Magnum 1", "easy", "UG deck with Sturdy Hatchling and Shorecrasher Mimic");
         addToDeckList("Magnum 2", "medium", "UG deck with Sturdy Hatchling and Shorecrasher Mimic");
         addToDeckList("Magnum 3", "hard", "UG deck with Sturdy Hatchling and Shorecrasher Mimic");
