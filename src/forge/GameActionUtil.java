@@ -2718,24 +2718,6 @@ public class GameActionUtil {
 	public static void executeCombatDamageToCreatureEffects(final Card source, final Card affected, int damage) {
 		
 		if (damage <= 0) return;
-		
-        if(source.getKeyword().contains("Whenever CARDNAME deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.")) {
-			
-	    	Ability ability = new Ability(affected, "0") {
-	    		@Override
-	    		public void resolve() {
-	    			affected.tap();
-	    			affected.addExtrinsicKeyword("HIDDEN This card doesn't untap during your next untap step.");
-	    		}
-	    	};
-	    	StringBuilder sb = new StringBuilder();
-	        sb.append(affected.getName()+" - tap");
-	        ability.setStackDescription(sb.toString());
-        	int amount = source.getAmountOfKeyword("Whenever CARDNAME deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.");
-	        
-	        for(int i=0 ; i < amount ; i++)
-	        	AllZone.Stack.add(ability);
-        }
         
     	if(source.getName().equals("Mirri the Cursed") ) {
 	        final Card thisCard = source;
