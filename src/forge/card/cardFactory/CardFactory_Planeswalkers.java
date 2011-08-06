@@ -1073,17 +1073,24 @@ class CardFactory_Planeswalkers {
                     
                     CardList putOnTop = new CardList(hand.getCards());
                     
-                    Object o = GuiUtils.getChoiceOptional("First card to put on top: ", putOnTop.toArray());
-                    if(o != null) {
-                        Card c1 = (Card) o;
-                        putOnTop.remove(c1);
-                        AllZone.GameAction.moveToLibrary(c1);
+                    if(putOnTop.size() > 0) {
+                    Object o = GuiUtils.getChoice("First card to put on top: ", putOnTop.toArray());
+	                    if(o != null) {
+	                        Card c1 = (Card) o;
+	                        putOnTop.remove(c1);
+	                        AllZone.GameAction.moveToLibrary(c1);
+	                    }
                     }
-                    o = GuiUtils.getChoiceOptional("Second card to put on top: ", putOnTop.toArray());
-                    if(o != null) {
-                        Card c2 = (Card) o;
-                        putOnTop.remove(c2);
-                        AllZone.GameAction.moveToLibrary(c2);
+                    
+                    putOnTop = new CardList(hand.getCards());
+                    
+                    if(putOnTop.size() > 0) {
+                    	Object o = GuiUtils.getChoice("Second card to put on top: ", putOnTop.toArray());
+	                    if(o != null) {
+	                        Card c2 = (Card) o;
+	                        putOnTop.remove(c2);
+	                        AllZone.GameAction.moveToLibrary(c2);
+	                    }
                     }
                 }
                 
