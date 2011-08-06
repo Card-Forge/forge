@@ -574,7 +574,7 @@ class CardFactory_Lands {
                 
                 public void execute() {
                     Card c = card;
-                    String[] types = { "Creature", "Solider" };
+                    String[] types = { "Creature", "Soldier" };
                     String[] keywords = {  };
 
                     CardFactoryUtil.revertManland(c, types, keywords);
@@ -590,7 +590,7 @@ class CardFactory_Lands {
                 @Override
                 public void resolve() {
                     Card c = card;
-                    String[] types = { "Creature", "Solider" };
+                    String[] types = { "Creature", "Soldier" };
                     String[] keywords = {  };
                     CardFactoryUtil.activateManland(c, 1, 5, types, keywords, "W");
 
