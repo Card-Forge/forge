@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigPump:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.Mercenary+Other | NumAtt$ +1 | NumDef$ +1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_driver.jpg
+SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/64.jpg
 End

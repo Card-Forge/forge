@@ -8,5 +8,5 @@ SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.nonZombie | NumAtt$
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noxious_ghoul.jpg
+SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/77.jpg
 End
-

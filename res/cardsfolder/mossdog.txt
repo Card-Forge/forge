@@ -7,4 +7,5 @@ T:Mode$ SpellAbilityCast | TargetsValid$ Card.Self | ValidControllingPlayer$ Opp
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterNum$ 1 | CounterType$ P1P1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mossdog.jpg
+SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/106.jpg
 End

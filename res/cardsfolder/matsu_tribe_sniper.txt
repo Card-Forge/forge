@@ -9,4 +9,5 @@ SVar:TrigTap:AB$Tap | Cost$ 0 | Defined$ TriggeredTarget | SubAbility$ SVar=DBPu
 SVar:DBPump:DB$Pump | Defined$ TriggeredTarget | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | IsCurse$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/matsu_tribe_sniper.jpg
+SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/136.jpg
 End

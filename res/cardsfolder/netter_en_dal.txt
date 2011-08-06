@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ W T Discard<1/Card> | ValidTgts$ Creature | TgtPrompt$ Select
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/netter_en_dal.jpg
+SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/13.jpg
 End

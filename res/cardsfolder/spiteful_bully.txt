@@ -8,4 +8,5 @@ SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtProm
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiteful_bully.jpg
+SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/72.jpg
 End

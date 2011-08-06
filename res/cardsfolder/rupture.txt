@@ -7,4 +7,5 @@ SVar:X:Sacrificed$CardPower
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rupture.jpg
+SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/97.jpg
 End
