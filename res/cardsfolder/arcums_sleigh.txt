@@ -4,5 +4,5 @@ Types:Artifact
 Text:no text
 A:AB$Pump | Cost$ 2 T | KW$ Vigilance | Tgt$C | IsPresent$Land.Snow+YouDontCtrl | ActivatingPhases$ BeginCombat,Declare Attackers - Play Instants and Abilities,Declare Blockers - Play Instants and Abilities,Combat Damage,First Strike Damage,EndCombat | SpellDescription$ Target creature gains vigilance until end of turn. Activate this ability only during combat and only if defending player controls a snow land.
 SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/arcum's_sleigh.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/arcums_sleigh.jpg
 End
