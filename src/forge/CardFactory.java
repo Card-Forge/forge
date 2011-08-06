@@ -11547,6 +11547,50 @@ public class CardFactory implements NewConstants {
         	ability.setDescription(abCost+"Flip a coin. If you win the flip, sacrifice Sorcerer's Strongbox and draw three cards.");
         	ability.setStackDescription(card.getName()+" - flip a coin");
         }//*************** END ************ END **************************
+        
+      //*************** START ********** START *************************
+        else if(cardName.equals("Horror of Horrors")) {
+        	/*
+        	 * Sacrifice a swamp: Regenerate target blackcreature.
+        	 */
+
+        	final String Tgts[] = {"Creature.Black"};
+        	Target target = new Target("TgtV", "Select target black creature.", Tgts);
+        	
+        	final Ability_Cost abCost = new Ability_Cost("Sac<1/Swamp>", card.getName(), true);
+        	final Card[] tgt = new Card[1];
+        	final Command untilEOT = new Command() {
+				private static final long serialVersionUID = -6575451478523662280L;
+
+				public void execute() {
+        			tgt[0].setShield(0);                    
+        		}
+        	};
+
+        	SpellAbility ability = new Ability_Activated(card, abCost, target) {
+				private static final long serialVersionUID = -4468313446505196923L;
+
+				@Override
+        		public void resolve() {
+        			tgt[0] = getTargetCard();
+        			tgt[0].addShield();
+        			AllZone.EndOfTurn.addUntil(untilEOT);
+        		}
+
+        		@Override
+        		public boolean canPlayAI() {
+        			return false;
+        		}
+
+        		@Override
+        		public boolean canPlay() {
+        			CardList creats = AllZoneUtil.getCreaturesInPlay();
+        			return creats.size() != 0 && super.canPlay();
+        		}
+        	};
+        	ability.setDescription(abCost+"Regenerate target black creature.");
+        	card.addSpellAbility(ability); 
+        }//*************** END ************ END **************************
 
         return postFactoryKeywords(card);
     }//getCard2

@@ -1,0 +1,7 @@
+Name:Horror of Horrors
+ManaCost:3 B B
+Types:Enchantment
+Text:no text
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/horror_of_horrors.jpg
+End
