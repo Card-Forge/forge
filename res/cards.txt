@@ -621,7 +621,7 @@ Vampiric Touch
 2 B
 Sorcery
 no text
-spDamageTgtOpp:2Drawback$YouGainLife/2:Vampiric Touch deals 2 damage to target opponent and you gain 2 life.:Vampiric Touch - deals 2 damage and you gain 2 life.
+spDamageTgtOpp:2:Drawback$YouGainLife/2:Vampiric Touch deals 2 damage to target opponent and you gain 2 life.:Vampiric Touch - deals 2 damage and you gain 2 life.
 
 Eternal Flame
 2 R R
