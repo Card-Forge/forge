@@ -2399,6 +2399,7 @@ res/cardsfolder/fireball.txt -text svneol=native#text/plain
 res/cardsfolder/fireblast.txt -text svneol=native#text/plain
 res/cardsfolder/firebolt.txt -text svneol=native#text/plain
 res/cardsfolder/firebreathing.txt -text svneol=native#text/plain
+res/cardsfolder/firecat_blitz.txt -text svneol=native#text/plain
 res/cardsfolder/firefly.txt -text svneol=native#text/plain
 res/cardsfolder/firemane_angel.txt -text svneol=native#text/plain
 res/cardsfolder/firemaw_kavu.txt svneol=native#text/plain
