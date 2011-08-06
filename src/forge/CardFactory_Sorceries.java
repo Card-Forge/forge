@@ -256,7 +256,7 @@ public class CardFactory_Sorceries {
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Hex")) {
             final Card[] target = new Card[6];
@@ -346,7 +346,7 @@ public class CardFactory_Sorceries {
             
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Political Trickery")) {
@@ -7247,11 +7247,10 @@ public class CardFactory_Sorceries {
             spell.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
+        /*
       //*************** START *********** START **************************
         else if(cardName.equals("Dust to Dust")) {
-        	/*
-        	 * Exile two target artifacts.
-        	 */
+        	
             final Card[] target = new Card[2];
             final int[] index = new int[1];
             
@@ -7342,7 +7341,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
             spell.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Take Possession")) {

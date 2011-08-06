@@ -1585,6 +1585,7 @@ res/cardsfolder/flaming_sword.txt -text svneol=native#text/plain
 res/cardsfolder/flanking_troops.txt -text svneol=native#text/plain
 res/cardsfolder/flare.txt -text svneol=native#text/plain
 res/cardsfolder/flash_counter.txt -text svneol=native#text/plain
+res/cardsfolder/flash_flood.txt -text svneol=native#text/plain
 res/cardsfolder/flashfires.txt -text svneol=native#text/plain
 res/cardsfolder/flashfreeze.txt -text svneol=native#text/plain
 res/cardsfolder/fledgling_djinn.txt -text svneol=native#text/plain

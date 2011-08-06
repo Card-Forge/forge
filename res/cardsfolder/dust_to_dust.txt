@@ -1,8 +1,8 @@
 Name:Dust to Dust
 ManaCost:1 W W
 Types:Sorcery
-Text:Exile two target artifacts.
-SVar:RemAIDeck:True
-SVar:Rarity:Common
+Text:no text
+A:SP$Bounce|Cost$1 W W|TargetMin$2|TargetMax$2|ValidTgts$Artifact|TgtPrompt$Select target artifact|Destination$Exile|SpellDescription$Exile two target artifacts.
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dust_to_dust.jpg
 End
