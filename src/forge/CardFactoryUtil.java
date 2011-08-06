@@ -5,6 +5,7 @@ public class CardFactoryUtil
 {
   private static Random random = new Random();
 
+  // who uses this function?
   public final static String getPumpString(int n)
   {
     if(0 <= n)
@@ -2518,7 +2519,6 @@ public class CardFactoryUtil
       if (sq[0].contains("CardToughness"))
          return doXMath(c.getNetDefense(), m);
       
-      
       //Generic Zone-based counting
      // Count$QualityAndZones.Subquality
      
@@ -2710,7 +2710,22 @@ public class CardFactoryUtil
                return (CardUtil.getColors(c).size() == 1);
             }
          });
-
+      
+      // 1/10 - Count$MaxCMCYouCtrl
+      if (sq[0].contains("MaxCMC"))
+      {
+    	  int mmc = 0;
+    	  int cmc = 0;
+    	  for (int i=0;i<someCards.size();i++)
+    	  {
+    		  cmc = CardUtil.getConvertedManaCost(someCards.getCard(i).getManaCost());
+    		  if (cmc > mmc)
+    			  mmc = cmc;
+    	  }
+  
+    	  return doXMath(mmc, m);
+      }
+      
       n = someCards.size();
      
       return doXMath(n, m);
@@ -2746,22 +2761,23 @@ public class CardFactoryUtil
      // not just the negative ones
     
      String d[] = DB.split("/");
-     int X;
-     if (d[1].contains("X"))
-     {
-        X = nDB;
-        if (d[1].contains("."))
-        {
-        	String dd[] = d[1].split("\\.");
-        	ArrayList<String> ddd = new ArrayList<String>();
-        	for (int i=1; i<dd.length; i++)
-        		ddd.add(dd[i]);
-        	
-        	X = doXMath(X, ddd.toArray(new String [3]));
-        }
-     }
-     else
-        X = Integer.parseInt(d[1]);
+     int X = 0;
+     if (d.length > 0)
+	     if (d[1].contains("X"))
+	     {
+	        X = nDB;
+	        if (d[1].contains("."))
+	        {
+	        	String dd[] = d[1].split("\\.");
+	        	ArrayList<String> ddd = new ArrayList<String>();
+	        	for (int i=1; i<dd.length; i++)
+	        		ddd.add(dd[i]);
+	        	
+	        	X = doXMath(X, ddd.toArray(new String [3]));
+	        }
+	     }
+	     else
+	        X = Integer.parseInt(d[1]);
     
      String dbPlayer = "";
      if (d[0].contains("You"))
@@ -2770,9 +2786,13 @@ public class CardFactoryUtil
         dbPlayer = Opp;
      else if (d[0].contains("Tgt"))
         dbPlayer = TgtP;
-    
-     if (d[0].contains("Damage"))
-        AllZone.GameAction.addDamage(dbPlayer, X);
+         
+     // 1/10
+     if (d[0].contains("DamageTgtC"))
+    	 AllZone.GameAction.addDamage(TgtC, Src, X);
+     else if (d[0].contains("Damage"))
+         AllZone.GameAction.addDamage(dbPlayer, X);
+
     
      if (d[0].contains("GainLife"))
         AllZone.GameAction.addLife(dbPlayer, X);
