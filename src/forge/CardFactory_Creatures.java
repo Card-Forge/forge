@@ -1509,146 +1509,6 @@ public class CardFactory_Creatures {
             
         }//*************** END ************ END **************************
         
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Patrol Signaler")) {
-            final SpellAbility a1 = new Ability(card, "1 W") {
-                @Override
-                public void resolve() {
-                    CardFactoryUtil.makeToken("Kithkin Soldier", "W 1 1 Kithkin Soldier", card, "W", new String[] {
-                            "Creature", "Kithkin", "Soldier"}, 1, 1, new String[] {""});
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    SpellAbility sa;
-                    for(int i = 0; i < AllZone.Stack.size(); i++) {
-                        sa = AllZone.Stack.peek(i);
-                        if(sa.getSourceCard().equals(card)) return false;
-                    }
-                    
-                    if(card.isTapped() && !card.hasSickness() && super.canPlay()) return true;
-                    else return false;
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return true;
-                }
-            };//SpellAbility
-            a1.makeUntapAbility();
-            card.addSpellAbility(a1);
-            a1.setDescription("1 W, Untap:  Put a 1/1 white Kithkin Soldier creature token into play.");
-            a1.setStackDescription(card.getName() + " - put a 1/1 white Kithkin Soldier creature token into play.");
-            
-            a1.setBeforePayMana(new Input_PayManaCost(a1));
-            
-        }//*************** END ************ END **************************
-        */
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Guardian of Cloverdell")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    makeToken();
-                    makeToken();
-                    makeToken();
-                }//resolve()
-                
-                public void makeToken() {
-                    CardFactoryUtil.makeToken("Kithkin Soldier", "W 1 1 Kithkin Soldier", card, "W", new String[] {
-                            "Creature", "Kithkin", "Soldier"}, 1, 1, new String[] {""});
-                }
-                
-            }; //ability
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = -2030165469109890833L;
-                
-                public void execute() {
-                    ability.setStackDescription(card.getName()
-                            + " - put three 1/1 white Kithkin Soldier creature tokens into play.");
-                    AllZone.Stack.add(ability);
-                }
-            };
-            
-            card.addComesIntoPlayCommand(intoPlay);
-            
-            final SpellAbility a2 = new Ability(card, "G") {
-                @Override
-                public void resolve() {
-                    //get all Kithkin:
-                    Card c = getTargetCard();
-                    
-                    if(AllZone.GameAction.isCardInPlay(c)) {
-                        //AllZone.getZone(c).remove(c);
-                        AllZone.GameAction.sacrifice(c);
-                        
-                        AllZone.GameAction.gainLife(c.getController(), 1);
-                    }
-                }//resolve
-                
-                @Override
-                public boolean canPlayAI() {
-                	PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-                    CardList kiths = new CardList(play.getCards());
-                    kiths = kiths.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            if(c.getType().contains("Kithkin") || c.getKeyword().contains("Changeling")) return true;
-                            return false;
-                        }
-                    });
-                    
-                    if(kiths.size() != 0) setTargetCard(kiths.getCard(0));
-                    
-                    if(AllZone.ComputerPlayer.getLife() < 4 && kiths.size() > 0) return true;
-                    else return false;
-                }
-            };//SpellAbility
-            
-            Input runtime = new Input() {
-                private static final long serialVersionUID = 1775972794359668520L;
-                
-                @Override
-                public void showMessage() {
-                    CardList kith = new CardList(
-                            AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
-                    kith = kith.getType("Kithkin");
-                    
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(a2, kith, "Select a Kithkin to sacrifice.",
-                            true, false));
-                }
-            };
-            
-            card.addSpellAbility(a2);
-            a2.setDescription("Sacrifice a Kithkin: You gain 1 life.");
-            a2.setStackDescription(card.getController() + " gains 1 life.");
-            a2.setBeforePayMana(runtime);
-            
-        }//*************** END ************ END **************************
-        */
-        
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Ambassador Oak")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    CardFactoryUtil.makeToken("Elf Warrior", "G 1 1 Elf Warrior", card, "G", new String[] {
-                            "Creature", "Elf", "Warrior"}, 1, 1, new String[] {""});
-                }//resolve()
-            };
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = -8593037498281765796L;
-                
-                public void execute() {
-                    ability.setStackDescription("Ambassador Oak - put a 1/1 green Elf Warrior creature token into play.");
-                    AllZone.Stack.add(ability);
-                }
-            };
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Mudbutton Torchrunner")) {
@@ -17062,7 +16922,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Ambassador Laquatus")) {
             final SpellAbility a1 = new Ability(card, "3") {
@@ -17123,7 +16983,7 @@ public class CardFactory_Creatures {
             a1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(a1, tap));
             card.addSpellAbility(a1);
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Meddling Mage")) {
