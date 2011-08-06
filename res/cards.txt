@@ -12590,7 +12590,8 @@ no text
 Primal Boost
 2 G
 Instant
-Target creature gets +4/+4 until end of turn. Cycling 2G. When you cycle Primal Boost, you may have target creature get +1/+1 until end of turn.
+(NOTE: "When you cycle Primal Boost, you may have target creature get +1/+1 until end of turn." not implemented.)
+Cycling:2 G
 
 Redwood Treefolk
 4 G

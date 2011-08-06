@@ -14512,11 +14512,11 @@ public class CardFactory implements NewConstants {
           }
         }//resolve()
       };
-      spell.setDescription("Target creature gets +4/+4 until end of turn.");
+      spell.setDescription("\r\nTarget creature gets +4/+4 until end of turn.");
       spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
       card.clearSpellAbility();
       card.addSpellAbility(spell);
-      card.addSpellAbility(CardFactoryUtil.ability_cycle(card, "2 G"));
+      //card.addSpellAbility(CardFactoryUtil.ability_cycle(card, "2 G"));
     }//*************** END ************ END **************************
 
     //*************** START *********** START **************************
