@@ -574,11 +574,12 @@ public class Combat {
         	if (bFirstStrike)
         		CombatUtil.checkUnblockedAttackers(unblocked.get(j));
         	else{
-	            if(!unblocked.getCard(j).hasFirstStrike() || unblocked.getCard(j).hasDoubleStrike())
+	            if(!unblocked.getCard(j).hasFirstStrike() && !unblocked.getCard(j).hasDoubleStrike())
 	                CombatUtil.checkUnblockedAttackers(unblocked.get(j));
         	}
         }
-
+        
+        /*
         if (bFirstStrike){
             CardList pwAttackers = new CardList(AllZone.pwCombat.getAttackers());
             CardList pwBlockers = new CardList(AllZone.pwCombat.getAllBlockers().toArray());
@@ -594,7 +595,7 @@ public class Combat {
                     CombatUtil.executeCombatDamageEffects(pwBlockers.getCard(i));
                 }
             }
-        }
+        }*/
         
         //get all attackers and blockers
         CardList check = new CardList();
@@ -610,6 +611,7 @@ public class Combat {
         CardList pwBlockers = new CardList(AllZone.pwCombat.getAllBlockers().toArray());
         
         if (!bFirstStrike){
+        	/*
 	        for(int i = 0; i < pwAttackers.size(); i++) {
 	            //System.out.println("attacker #" + i + ": " + attackers.getCard(i).getName() +" " + attackers.getCard(i).getAttack());
 	            if((!pwAttackers.getCard(i).hasFirstStrike() || (pwAttackers.getCard(i).hasFirstStrike() && pwAttackers.getCard(
@@ -624,6 +626,7 @@ public class Combat {
 	                
 	            }
 	        }
+	        */
 	        
 	        //hacky stuff, hope it won't cause any bugs:
 	        for(int i = 0; i < pwAttackers.size(); i++) {

@@ -325,7 +325,7 @@ public class CardFactoryUtil {
     }
     
     
-//The AI doesn't really pick the best enchantment, just the most expensive.
+    //The AI doesn't really pick the best enchantment, just the most expensive.
     public static Card AI_getBestEnchantment(CardList list, final Card spell, boolean targeted) {
         CardList all = list;
         all = all.getType("Enchantment");

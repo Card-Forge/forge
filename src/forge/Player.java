@@ -222,7 +222,7 @@ public abstract class Player extends MyObservable{
         	
         GameActionUtil.executeDamageDealingEffects(source, damageToDo);
         
-        GameActionUtil.executePlayerDamageEffects(this, source, damageToDo, false);
+        GameActionUtil.executeDamageToPlayerEffects(this, source, damageToDo);
 	}
 	
 	//This should be also usable by the AI to forecast an effect (so it must not change the game state) 
@@ -327,8 +327,9 @@ public abstract class Player extends MyObservable{
     	addDamageWithoutPrevention(damageToDo, source);   //damage prevention is already checked
     	
     	//GameActionUtil.executePlayerDamageEffects(player, source, damage, true);
-    	GameActionUtil.executePlayerCombatDamageEffects(source);
-    	CombatUtil.executeCombatDamageEffects(source);
+    	GameActionUtil.executeCombatDamageToPlayerEffects(source, damageToDo);
+    	GameActionUtil.executeCombatDamageEffects(source, damageToDo);
+    	source.setDealtCombatDmgToOppThisTurn(true);
     }
 	
 	//////////////////////////

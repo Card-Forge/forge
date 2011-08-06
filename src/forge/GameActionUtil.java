@@ -5333,7 +5333,7 @@ public class GameActionUtil {
 		AllZone.Stack.add(ability2);
 	}
 	
-	//not restricted to combat damage, not restricted to dealing damage to creatures
+	//not restricted to combat damage, not restricted to dealing damage to creatures/players
 	public static void executeDamageDealingEffects(final Card source, int damage) {
 		
         if(source.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(source, damage);
@@ -5363,7 +5363,43 @@ public class GameActionUtil {
         }
 	}
 	
-	//not restricted to combat damage and dealing damage to creatures
+	//effects restricted to combat damage but not to dealing to creatures/players
+    public static void executeCombatDamageEffects(final Card source, int damage) {
+    	
+        if(source.getKeyword().contains("Whenever CARDNAME deals combat damage, you gain that much life.")) {
+			final int life = damage;
+			final Player player = source.getController();
+			
+	    	Ability ability = new Ability(source, "0") {
+	    		@Override
+	    		public void resolve() {
+	    			player.gainLife(life, source);
+	    		}
+	    	};
+	    	StringBuilder sb = new StringBuilder();
+	        sb.append(source.getName()+" - ").append(player).append(" gains ").append(life).append(" life");
+	        ability.setStackDescription(sb.toString());
+        	int amount = source.getAmountOfKeyword("Whenever CARDNAME deals combat damage, you gain that much life.");
+	        
+	        for(int i=0 ; i < amount ; i++)
+	        	AllZone.Stack.add(ability);
+        }
+        
+        if(source.isEquipped()) {
+        	ArrayList<Card> equips = source.getEquippedBy();
+        	for(Card equip:equips) {
+        		/*
+                 * Whenever equipped creature deals combat damage, put two
+                 * charge counters on Umezawa's Jitte.
+                 */
+        		if(equip.getName().equals("Umezawa's Jitte")) {
+        			equip.addCounter(Counters.CHARGE, 2);
+        		}
+        	}
+        }//isEquipped
+    }
+	
+	//restricted to combat damage and dealing damage to creatures
 	public static void executeCombatDamageToCreatureEffects(final Card source, final Card affected, int damage) {
 		
         if(source.getKeyword().contains("Whenever CARDNAME deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.")) {
@@ -5399,7 +5435,6 @@ public class GameActionUtil {
 	        
 	        AllZone.Stack.add(ability2);
     	}
-
 
         if( source.hasKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.")) {
         	final Card damagedCard = affected;
@@ -5727,8 +5762,8 @@ public class GameActionUtil {
         }
     }
 
-    //not restricted to just combat damage:
-    public static void executePlayerDamageEffects(final Player player, final Card c, final int damage, boolean isCombatDamage)
+    //not restricted to just combat damage, restricted to players
+    public static void executeDamageToPlayerEffects(final Player player, final Card c, final int damage)
     {
     	if (damage > 0)
     	{
@@ -5839,15 +5874,11 @@ public class GameActionUtil {
 			else if(c.getName().equals("Thieving Magpie")|| c.getName().equals("Lu Xun, Scholar General")) playerCombatDamage_Shadowmage_Infiltrator(c);
 			else if(c.getName().equals("Warren Instigator")) playerCombatDamage_Warren_Instigator(c);
 			else if(c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")) 
-				playerCombatDamage_Whirling_Dervish(c);
-	    	
-	    	if (isCombatDamage)
-	    		c.setDealtCombatDmgToOppThisTurn(true);
-	    		
+				playerCombatDamage_Whirling_Dervish(c);		
     	}
     }
-    
-	public static void executePlayerCombatDamageEffects(Card c) {
+    //restricted to combat damage, restricted to players
+	public static void executeCombatDamageToPlayerEffects(Card c, final int damage) {
 		// Whenever Keyword
     	Object[] DealsDamage_Whenever_Parameters = new Object[3];
     	DealsDamage_Whenever_Parameters[0] = c.getController().getOpponent();
@@ -5906,7 +5937,23 @@ public class GameActionUtil {
 			for(int k = 0; k < CardFactoryUtil.hasNumberEquipments(c, "Quietus Spike"); k++) {
 				playerCombatDamage_lose_halflife_up(c);
 			}
-		} 
+		}
+		
+        if(c.isEquipped()) {
+        	ArrayList<Card> equips = c.getEquippedBy();
+        	for(Card equip:equips) {
+
+        		if(equip.getName().equals("Sword of Fire and Ice")) {
+        			GameActionUtil.executeSwordOfFireAndIceEffects(equip);
+        		}
+        		if(equip.getName().equals("Sword of Light and Shadow")) {
+        			GameActionUtil.executeSwordOfLightAndShadowEffects(equip);
+        		}
+        		if(equip.getName().equals("Sword of Body and Mind")) {
+        			GameActionUtil.executeSwordOfBodyAndMindEffects(equip);
+        		}
+        	}
+        }//isEquipped
 
 		if(c.getName().equals("Hypnotic Specter")) playerCombatDamage_Hypnotic_Specter(c);
 		else if(c.getName().equals("Dimir Cutpurse")) playerCombatDamage_Dimir_Cutpurse(c);

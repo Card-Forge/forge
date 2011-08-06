@@ -2708,20 +2708,16 @@ public class Card extends MyObservable {
             
             damageToAdd = preventDamage(damageToAdd, source, true);
             
-            if( damageToAdd == 0 ) return;  //Rule 119.8
-            
-            GameActionUtil.executeCombatDamageToCreatureEffects(source, this, damageToAdd);
-            
-	        map.put(source, damageToAdd);
+            if( damageToAdd != 0 ) {
+            	if (isCreature())
+            		GameActionUtil.executeCombatDamageToCreatureEffects(source, this, damageToAdd);
+            	GameActionUtil.executeCombatDamageEffects(source, damageToAdd);
+            	map.put(source, damageToAdd);
+            }
         }
         
         if(AllZoneUtil.isCardInPlay(this)) {
         	addDamage(map);
-        }
-        
-        for(Entry<Card, Integer> entry : map.entrySet()){
-        	Card source = entry.getKey();
-        	CombatUtil.executeCombatDamageEffects(source);
         }
     }
     
