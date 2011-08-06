@@ -133,8 +133,6 @@ public class GameActionUtil {
 		upkeep_Eldrazi_Monument();
 		upkeep_Blaze_Counters();
 		upkeep_Dark_Confidant(); // keep this one semi-last
-
-		upkeep_Copper_Tablet();
 		upkeep_Sulfuric_Vortex();
 		upkeep_Power_Surge();	
 		upkeep_AI_Aluren(); 
@@ -7673,34 +7671,8 @@ public class GameActionUtil {
 
 			AllZone.Stack.add(ability);
 		}// for
-	}// upkeep_Copper_Tablet()
-
-	private static void upkeep_Copper_Tablet() {
-		/*
-		 * At the beginning of each player's upkeep, Copper Tablet deals 1
-		 * damage to that player.
-		 */
-		final Player player = AllZone.Phase.getPlayerTurn();
-		CardList list = AllZoneUtil.getCardsInPlay("Copper Tablet");
-
-		Ability ability;
-		for(Card tablet:list) {
-			final Card source = tablet;
-			ability = new Ability(source, "0") {
-				@Override
-				public void resolve() {
-					player.addDamage(1, source);
-				}
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append(source).append(" - deals 1 damage to ").append(player);
-			ability.setStackDescription(sb.toString());
-
-			AllZone.Stack.add(ability);
-		}// for
-	}// upkeep_Copper_Tablet()
-	
+	}
+		
 	private static void upkeep_Sulfuric_Vortex() {
 		/*
 		 * At the beginning of each player's upkeep, Sulfuric Vortex deals 2
