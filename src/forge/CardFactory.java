@@ -2046,15 +2046,22 @@ public class CardFactory implements NewConstants {
                                 //c.addDamage(damage);
                                 AllZone.GameAction.addDamage(c, card, damage);
                                 tgtP = c.getController();
+                                
+                                if(!DrawBack[0].equals("none")) 
+                                	CardFactoryUtil.doDrawBack(DrawBack[0], damage,
+                                        card.getController(), AllZone.GameAction.getOpponent(card.getController()), tgtP,
+                                        card, getTargetCard(), this);
                             }
                         } else {
-                            AllZone.GameAction.addDamage(getTargetPlayer(), card, damage);
-                            tgtP = getTargetPlayer();
+                        	tgtP = getTargetPlayer();
+                            AllZone.GameAction.addDamage(tgtP, card, damage);
+                            
+                            if(!DrawBack[0].equals("none")) CardFactoryUtil.doDrawBack(DrawBack[0], damage,
+                                    card.getController(), AllZone.GameAction.getOpponent(card.getController()), tgtP,
+                                    card, null, this);
                         }
                         
-                        if(!DrawBack[0].equals("none")) CardFactoryUtil.doDrawBack(DrawBack[0], damage,
-                                card.getController(), AllZone.GameAction.getOpponent(card.getController()), tgtP,
-                                card, getTargetCard(), this);
+                        
                     }// resolove
                 }; //spellAbility
                 
