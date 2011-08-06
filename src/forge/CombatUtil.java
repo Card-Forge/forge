@@ -870,26 +870,27 @@ public class CombatUtil {
     	return AllZoneUtil.isCardInPlay("Doran, the Siege Tower");
     }
     
-    public static boolean checkPropagandaEffects(Card c) {
+    public static void checkPropagandaEffects(Card c, final boolean bLast) {
     	String cost = CardFactoryUtil.getPropagandaCost(c);
         if(cost.equals("0")){
         	if(!c.getKeyword().contains("Vigilance")) 
         		c.tap();
-        	return true;
+        	
+        	if (bLast)
+            	PhaseUtil.handleAttackingTriggers();
+        	return;
         }
         
         final Card crd = c;
-        final boolean[] canAttack = new boolean[1];
-        canAttack[0] = false;
 
         String phase = AllZone.Phase.getPhase();
         
-        if(phase.equals(Constant.Phase.Combat_Declare_Attackers) || phase.equals(Constant.Phase.Combat_Declare_Attackers)) {
+        if(phase.equals(Constant.Phase.Combat_Declare_Attackers) || phase.equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility)) {
             if(!cost.equals("0")) {
                 final Ability ability = new Ability(c, cost) {
                     @Override
                     public void resolve() {
-                        canAttack[0] = true;
+                        
                     }
                 };
                 
@@ -898,9 +899,10 @@ public class CombatUtil {
                     private static final long serialVersionUID = -6483405139208343935L;
                     
                     public void execute() {
-                        canAttack[0] = false;
-                        // TODO: remove the below line after Propaganda occurs during Declare_Attackers
                         AllZone.Combat.removeFromCombat(crd);
+                        
+                        if (bLast)
+                        	PhaseUtil.handleAttackingTriggers();
                     }
                 };
                 
@@ -911,7 +913,9 @@ public class CombatUtil {
                     	// if Propaganda is paid, tap this card
                     	if(!crd.getKeyword().contains("Vigilance")) 
                     		crd.tap();   
-                        canAttack[0] = true;
+
+                        if (bLast)
+                        	PhaseUtil.handleAttackingTriggers();
                     }
                 };
                 
@@ -926,15 +930,12 @@ public class CombatUtil {
                     		crd.tap();
                     }
                     else {
-                        canAttack[0] = false;
-                        // TODO: remove the below two lines after Propaganda occurs during Declare_Attackers
+                        // TODO: remove the below line after Propaganda occurs during Declare_Attackers
                         AllZone.Combat.removeFromCombat(crd);
-                        //crd.untap();
                     }
                 }
             }
         }
-        return canAttack[0];
     }
     
     public static void checkDeclareAttackers(Card c) //this method checks triggered effects of attacking creatures, right before defending player declares blockers

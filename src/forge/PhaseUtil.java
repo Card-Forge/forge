@@ -359,9 +359,18 @@ public class PhaseUtil {
         
         // TODO move propaganda to happen as the Attacker is Declared
         // Remove illegal Propaganda attacks first only for attacking the Player
-        for(Card c:list)
-            CombatUtil.checkPropagandaEffects(c);
         
+        int size = list.size();
+        for(int i = 0; i < size; i++){
+        	Card c = list.get(i);
+        	boolean last = (i == size-1);
+            CombatUtil.checkPropagandaEffects(c, last);
+        }
+	}
+	
+	public static void handleAttackingTriggers(){
+    	CardList list = new CardList();
+        list.addAll(AllZone.Combat.getAttackers());
         AllZone.Stack.freezeStack();
         // Then run other Attacker bonuses
         //check for exalted:
