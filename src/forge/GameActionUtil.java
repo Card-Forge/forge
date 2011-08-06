@@ -111,11 +111,7 @@ public class GameActionUtil {
 		AllZone.Stack.freezeStack();
 		final Player player = AllZone.Phase.getPlayerTurn();
 		draw_Teferi_Puzzle_Box(player);
-		draw_Howling_Mine(player);
-		draw_Rites_of_Flourishing(player);
 		draw_Anvil_of_Bogardan(player);
-		draw_Kami_Crescent_Moon(player);
-		draw_Font_of_Mythos(player);
 		draw_Overbeing_of_Myth(player);
 		draw_Sylvan_Library(player);
 		AllZone.Stack.unfreezeStack();	
@@ -6039,16 +6035,6 @@ public class GameActionUtil {
 		}// for
 	}// upkeep_Dragon_Broodmother()
 	
-	private static void draw_Howling_Mine(Player player) {
-		CardList list = AllZoneUtil.getCardsInPlay("Howling Mine");
-
-		for(int i = 0; i < list.size(); i++){
-			if( list.getCard(i).isUntapped() ) {
-				player.drawCard();
-			}
-		}
-	}// Howling_Mine()
-	
 	private static void draw_Anvil_of_Bogardan(Player player) {
 		CardList list = AllZoneUtil.getCardsInPlay("Anvil of Bogardan");
 
@@ -6121,21 +6107,6 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}//end for
 	}
-	
-	private static void draw_Kami_Crescent_Moon(Player player) {
-		CardList list = AllZoneUtil.getCardsInPlay("Kami of the Crescent Moon");
-		player.drawCards(list.size());
-	}// Kami_Crescent_Moon()
-	
-	private static void draw_Rites_of_Flourishing(Player player) {
-		CardList list = AllZoneUtil.getCardsInPlay("Rites of Flourishing");
-		player.drawCards(list.size());
-	}// draw_Rites_of_Flourishing
-
-	private static void draw_Font_of_Mythos(Player player) {
-		CardList list = AllZoneUtil.getCardsInPlay("Font of Mythos");
-		player.drawCards(2*list.size());
-	}// Font_of_Mythos()
 	
 	private static void draw_Teferi_Puzzle_Box(Player player) {
 		CardList list = AllZoneUtil.getCardsInPlay("Teferi's Puzzle Box");
