@@ -1,0 +1,8 @@
+Name:Seize the Initiative
+ManaCost:W
+Types:Instant
+Text:no text
+K:spPumpTgt:+1/+1/First Strike
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seize_the_initiative.jpg
+End

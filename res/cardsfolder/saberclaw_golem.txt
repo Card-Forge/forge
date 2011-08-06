@@ -1,0 +1,9 @@
+Name:Saberclaw Golem
+ManaCost:5
+Types:Artifact Creature Golem
+Text:no text
+PT:4/2
+K:abPump R:First Strike
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/saberclaw_golem.jpg
+End
