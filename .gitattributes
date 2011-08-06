@@ -2616,6 +2616,7 @@ res/cardsfolder/goblin_digging_team.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_dirigible.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_dynamo.txt svneol=native#text/plain
 res/cardsfolder/goblin_elite_infantry.txt svneol=native#text/plain
+res/cardsfolder/goblin_firebug.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_firestarter.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_gardener.txt svneol=native#text/plain
 res/cardsfolder/goblin_gaveleer.txt -text svneol=native#text/plain
