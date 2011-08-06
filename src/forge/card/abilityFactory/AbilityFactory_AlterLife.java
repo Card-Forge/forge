@@ -762,7 +762,7 @@ public class AbilityFactory_AlterLife {
 		int aiLife = AllZone.ComputerPlayer.getLife();
 
 		// TODO handle proper calculation of X values based on Cost and what would be paid
-		final int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+		//final int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
 		
 		if (abCost != null){
 			// AI currently disabled for these costs

@@ -205,9 +205,8 @@ public class AbilityFactory_ChangeZone {
 		Cost abCost = af.getAbCost();
 		Card source = af.getHostCard();
 		HashMap<String,String> params = af.getMapParams();
-        //String destination = params.get("Destination");
         String origin = params.get("Origin");
-		String destination = params.get("Destination");
+		//String destination = params.get("Destination");
 		
 		if (abCost != null){
 			// AI currently disabled for these costs
@@ -549,9 +548,7 @@ public class AbilityFactory_ChangeZone {
         
         if ((origin.contains("Library") && !destination.equals("Library")) || params.containsKey("Shuffle"))
             player.shuffle();
-	            
-		String DrawBack = params.get("SubAbility");
-        
+	    
         if (af.hasSubAbility()){
         	Ability_Sub abSub = sa.getSubAbility();
         	if (abSub != null)

@@ -1,6 +1,5 @@
 package forge.card.abilityFactory;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 

@@ -7,7 +7,6 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 
 import java.util.HashMap;
-import java.util.Hashtable;
 
 public class AbilityFactory_Clash {
 
