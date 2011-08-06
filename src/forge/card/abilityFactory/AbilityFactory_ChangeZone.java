@@ -464,6 +464,8 @@ public class AbilityFactory_ChangeZone {
 		HashMap<String,String> params = af.getMapParams();
 
 		ArrayList<Player> fetchers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+		if (params.containsKey("Chooser"))
+			fetchers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Chooser"), sa);
 
 		for(Player player : fetchers){
 			if (player.isComputer()){
@@ -506,7 +508,11 @@ public class AbilityFactory_ChangeZone {
             if (fetchList.size() == 0 || destination == null) 
                 break;
                 
-            Object o = GuiUtils.getChoiceOptional("Select a card", fetchList.toArray());
+            Object o = new Object();
+            if (params.containsKey("Mandatory"))
+                o = GuiUtils.getChoice("Select a card", fetchList.toArray());
+            else
+            	o = GuiUtils.getChoiceOptional("Select a card", fetchList.toArray());
             
             if (o != null) {
                 Card c = (Card) o;
