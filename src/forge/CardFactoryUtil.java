@@ -3718,19 +3718,6 @@ public class CardFactoryUtil {
         if(d[0].contains("LoseLife"))  {
         	dbPlayer.loseLife(X, Src);
         }
-        	
-        
-        
-        if(d[0].contains("Discard")) {        	
-            if(d.length > 2) {
-                if(d[2].contains("UnlessDiscardType")) {
-                    String dd[] = d[2].split("\\.");
-                    dbPlayer.discardUnless(X, dd[1], sa);
-                }
-                if(d[2].contains("AtRandom")) dbPlayer.discardRandom(X, sa);
-            } 
-            else dbPlayer.discard(X, sa, false);
-        }
         
         if(d[0].contains("HandToLibrary")) dbPlayer.handToLibrary(X, d[2]);
         

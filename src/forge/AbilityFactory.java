@@ -792,6 +792,15 @@ public class AbilityFactory {
 					players.add(p);
 			}
 		}
+		else if (defined.equals("TargetedOwner")){
+			ArrayList<Card> list = getDefinedCards(card, "Targeted", sa);
+
+			for(Card c : list){
+				Player p = c.getOwner();
+				if (!players.contains(p))
+					players.add(p);
+			}
+		}
 		else if (defined.equals("TriggeredController")){
 				Player p = sa.getTriggeringCard().getController();
 				if (!players.contains(p))
