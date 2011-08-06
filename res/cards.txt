@@ -1,3 +1,10 @@
+Rubinia Soulsinger
+2 G W U
+Legendary Creature Faerie
+tap: Gain control of target creature for as long as you control Rubinia and Rubinia remains tapped.
+2/3
+You may choose not to untap CARDNAME during your untap step.
+
 Cemetery Reaper
 1 B B
 Creature Zombie
@@ -62,18 +69,6 @@ Flying
 Protection from colored spells
 Annihilator 6
 When this card is put into a graveyard from anywhere, reveal this card and shuffle it into its owner's library instead.
-
-Warp Artifact
-B B
-Enchantment Aura
-At the beginning of the upkeep of enchanted artifact's controller, Warp Artifact deals 1 damage to that player.
-Enchant Artifact Curse
-
-Feedback
-2 U
-Enchantment Aura
-At the beginning of the upkeep of enchanted enchantment's controller, Feedback deals 1 damage to that player.
-Enchant Enchantment Curse
 
 Blight
 B B

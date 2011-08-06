@@ -18071,6 +18071,101 @@ public class CardFactory_Creatures {
         
     	}//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Rubinia Soulsinger")) {
+        	/*
+        	 * Tap: Gain control of target creature for as long as you
+        	 * control Rubinia and Rubinia remains tapped.
+        	 */
+        	final Card movedCreature[] = new Card[1];
+            final Ability_Tap ability = new Ability_Tap(card, "0") {
+				private static final long serialVersionUID = 7018915669688488647L;
+				@Override
+				public boolean canPlay() {
+					//need to check if there are other creatures in play
+					return true;
+				}
+				@Override
+				public boolean canPlayAI() {
+					CardList human = AllZoneUtil.getCreaturesInPlay(Constant.Player.Human);
+					human = human.filter(new CardListFilter() {
+						public boolean addCard(Card c) {
+							return CardFactoryUtil.canTarget(card, getTargetCard());
+						}
+					});
+					return human.size() > 0;
+				}
+				@Override
+                public void resolve() {
+                    Card c = getTargetCard();
+                    movedCreature[0] = c;
+                    
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                        //set summoning sickness
+                        if(c.getKeyword().contains("Haste")) {
+                            c.setSickness(false);
+                        } else {
+                            c.setSickness(true);
+                        }
+                        
+                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+                        
+                        c.setSickness(true);
+                        c.setController(card.getController());
+                        
+                        PlayerZone from = AllZone.getZone(c);
+                        from.remove(c);
+                        
+                        PlayerZone to = AllZone.getZone(Constant.Zone.Play, card.getController());
+                        to.add(c);
+                        
+                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+                    }
+                }//resolve()
+            };//SpellAbility
+            
+            final Command untapLeavesPlay = new Command() {
+				private static final long serialVersionUID = 2783051953965817611L;
+
+				public void execute() {
+                    Card c = movedCreature[0];
+                    
+                    if(AllZone.GameAction.isCardInPlay(c)) {
+                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+                        
+                        c.setSickness(true);
+                        c.setController(AllZone.GameAction.getOpponent(c.getController()));
+                        
+                        PlayerZone from = AllZone.getZone(c);
+                        from.remove(c);
+                        
+                        //make sure the creature is removed from combat:
+                        CardList list = new CardList(AllZone.Combat.getAttackers());
+                        if(list.contains(c)) AllZone.Combat.removeFromCombat(c);
+                        
+                        CardList pwlist = new CardList(AllZone.pwCombat.getAttackers());
+                        if(pwlist.contains(c)) AllZone.pwCombat.removeFromCombat(c);
+                        
+                        PlayerZone to = AllZone.getZone(Constant.Zone.Play, c.getOwner());
+                        to.add(c);
+                        
+                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+                    }//if
+                }//execute()
+            };//Command
+            card.addUntapCommand(untapLeavesPlay);
+            card.addLeavesPlayCommand(untapLeavesPlay);
+            card.addChangeControllerCommand(untapLeavesPlay);
+            
+            card.addSpellAbility(ability);            
+            ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
+        }//*************** END ************ END **************************
+        
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(shouldCycle(card) != -1) {

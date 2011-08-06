@@ -117,6 +117,8 @@ public class Card extends MyObservable {
     private ArrayList<Command>           unEquipCommandList                = new ArrayList<Command>();
     private ArrayList<Command>           enchantCommandList                = new ArrayList<Command>();
     private ArrayList<Command>           unEnchantCommandList              = new ArrayList<Command>();
+    private ArrayList<Command>			untapCommandList					= new ArrayList<Command>();
+    private ArrayList<Command>			changeControllerCommandList			= new ArrayList<Command>();
     private ArrayList<Command>           replaceMoveToGraveyardCommandList = new ArrayList<Command>();
     private ArrayList<Command>           cycleCommandList                  = new ArrayList<Command>();
     
@@ -817,6 +819,14 @@ public class Card extends MyObservable {
             var.execute();
     }
     
+    public void addUntapCommand(Command c) {
+    	untapCommandList.add(c);
+    }
+    
+    public void addChangeControllerCommand(Command c) {
+    	changeControllerCommandList.add(c);
+    }
+    
     public ArrayList<Command> getReplaceMoveToGraveyard() {
         return replaceMoveToGraveyardCommandList;
     }
@@ -966,6 +976,10 @@ public class Card extends MyObservable {
     }
     
     public void setController(String player) {
+    	if( "" != controller && !controller.equals(player)) {
+    		for(Command var:changeControllerCommandList)
+                var.execute();
+    	}
         controller = player;
         this.updateObservers();
     }
@@ -1348,6 +1362,9 @@ public class Card extends MyObservable {
     	if (isTapped() && isReflectedLand()) {
     		Ability_Reflected_Mana am = (Ability_Reflected_Mana) getManaAbility().get(0);
     		am.reset();
+    	}
+    	for(Command var:untapCommandList) {
+            var.execute();
     	}
         setTapped(false);
     }

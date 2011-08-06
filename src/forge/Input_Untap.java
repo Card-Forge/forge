@@ -92,8 +92,25 @@ public class Input_Untap extends Input {
     	});
 
     	for(Card c : list) {
-    		if(!c.getKeyword().contains("CARDNAME doesn't untap during your untap step.")
-    				&& !c.getKeyword().contains("This card doesn't untap during your next untap step.")) c.untap();
+    		if(c.getKeyword().contains("You may choose not to untap CARDNAME during your untap step.")) {
+    			if(c.isUntapped()) {
+    				if(c.getController().equals(Constant.Player.Human)) {
+    					String[] choices = {"Yes", "No"};
+    					Object o = AllZone.Display.getChoice("Untap "+c.getName()+"?", choices);
+    					String answer = (String) o;
+    					if(null != answer && answer.equals("Yes")) {
+    						c.untap();
+    					}
+    				}
+    				else {  //computer
+    					//computer probably doesn't want to untap based on this ability...
+    				}
+    			}
+    		}
+    		else if(!c.getKeyword().contains("CARDNAME doesn't untap during your untap step.")
+    				&& !c.getKeyword().contains("This card doesn't untap during your next untap step.")) {
+    			c.untap();
+    		}
     		else c.removeExtrinsicKeyword("This card doesn't untap during your next untap step.");
 
     	}
