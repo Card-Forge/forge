@@ -1,0 +1,40 @@
+BasicLandPercentage=16
+
+[Group MaxCnt=4 Percentage=21]
+Bayou
+Overgrown Tomb
+Savage Lands
+Verdant Catacombs
+[/Group]
+
+[Group MaxCnt=4 Percentage=20]
+Creakwood Liege
+Noxious Hatchling
+Woodlurker Mimic
+[/Group]
+
+[Group MaxCnt=4 Percentage=15]
+Odious Trow
+Llanowar Dead
+Putrid Leech
+[/Group]
+
+[Group MaxCnt=4 Percentage=27]
+Ebony Treefolk
+Maelstrom Pulse
+Putrefy
+Rendclaw Trow
+Stalker Hag
+[/Group]
+
+[Group MaxCnt=1 Percentage=11]
+Drain the Well
+Lord of Extinction
+Nath of the Gilt-Leaf
+Grave-Shell Scarab
+Sapling of Colfenor
+Spiritmonger
+Death Mutation
+[/Group]
+
+End
