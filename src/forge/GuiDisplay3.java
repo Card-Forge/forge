@@ -570,6 +570,11 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         	counterText.append(c.getCounters(Counters.SPORE));
         	counterText.append("\r\n");
         }
+        if(c.getCounters(Counters.TIME) != 0) {
+        	counterText.append("Time counters: "); 
+        	counterText.append(c.getCounters(Counters.TIME));
+        	counterText.append("\r\n");
+        }
         
         String chosenTypeText = "";
         if(c.getChosenType() != "") chosenTypeText = "(chosen type: " + c.getChosenType() + ")";
@@ -1259,7 +1264,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         */
         
         cardImagePanel.setScalingBlur(false); //use blured image if scaling down more than 50%
-        cardImagePanel.setScaleLarger(false); //upscale if needed true
+        //cardImagePanel.setScaleLarger(false); //upscale if needed true
         cardImagePanel.setScalingType(ScalingType.bicubic); // type of scaling bicubic has good quality / speed ratio
         cardImagePanel.setScalingMultiPassType(MultipassType.none);
         

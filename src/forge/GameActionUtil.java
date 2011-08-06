@@ -2995,6 +2995,8 @@ public class GameActionUtil
 		}
 	}
 
+
+	/*
 	public static void executeExaltedEffects2(Card c, Combat combats)
 	{
 		boolean exalted = false;
@@ -3101,7 +3103,8 @@ public class GameActionUtil
 		}
 
 	}
-
+	*/
+	/*
 	public static void removeExaltedEffects() // at EOT
 	{
 		PlayerZone playerZone = AllZone.getZone(Constant.Zone.Play,
@@ -3138,7 +3141,7 @@ public class GameActionUtil
 			}
 		}
 	}
-
+	*/
 	public static boolean isRafiqInPlay(String player)
 	{
 		PlayerZone playerZone = AllZone.getZone(Constant.Zone.Play, player);
@@ -16141,7 +16144,7 @@ public class GameActionUtil
 		commands.put("Meddling_Mage", Meddling_Mage);
 		commands.put("Gaddock_Teeg", Gaddock_Teeg);
 		commands.put("Iona_Shield_of_Emeria", Iona_Shield_of_Emeria);
-		System.out.println("size of commands: " + commands.size());
+		//System.out.println("size of commands: " + commands.size());
 		
 	}
 

@@ -88,7 +88,23 @@ import java.util.*;
         	   {
         		   CardList list = new CardList();
         	   	   list.addAll(AllZone.Combat.getAttackers());
-        	   	   //list.addAll(AllZone.pwCombat.getAttackers());
+        	   	   list.addAll(AllZone.pwCombat.getAttackers());
+        	   	   
+        	   	   //check for exalted:
+        	   	   if (list.size() == 1)
+        	   	   {
+    	    	   		String attackingPlayer = AllZone.Combat.getAttackingPlayer();
+    	    			PlayerZone play = AllZone.getZone(Constant.Zone.Play, attackingPlayer);
+    	    			CardList exalted = new CardList(play.getCards());
+    	    			exalted = exalted.filter(new CardListFilter(){
+    	    				public boolean addCard(Card c)
+    	    				{
+    	    					return c.getKeyword().contains("Exalted");
+    	    				}
+    	    			});
+    	    			if (exalted.size() > 0)
+    	    				CombatUtil.executeExaltedAbility(list.get(0), exalted.size());
+        	   	   }
         	   	   
 	        	   for (Card c : list)
 	     	   		   CombatUtil.checkPropagandaEffects(c);
@@ -301,7 +317,23 @@ import java.util.*;
            {
     		   CardList list = new CardList();
     	   	   list.addAll(AllZone.Combat.getAttackers());
-    	   	   //list.addAll(AllZone.pwCombat.getAttackers());
+    	   	   list.addAll(AllZone.pwCombat.getAttackers());
+    	   	   
+    	   	   //check for exalted:
+    	   	   if (list.size() == 1)
+    	   	   {
+	    	   		String attackingPlayer = AllZone.Combat.getAttackingPlayer();
+	    			PlayerZone play = AllZone.getZone(Constant.Zone.Play, attackingPlayer);
+	    			CardList exalted = new CardList(play.getCards());
+	    			exalted = exalted.filter(new CardListFilter(){
+	    				public boolean addCard(Card c)
+	    				{
+	    					return c.getKeyword().contains("Exalted");
+	    				}
+	    			});
+	    			if (exalted.size() > 0)
+	    				CombatUtil.executeExaltedAbility(list.get(0), exalted.size());
+    	   	   }
     	   	   
 	    	   for (Card c : list)
 	 	   	   {

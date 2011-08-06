@@ -14080,7 +14080,6 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
 */
 
-
     //*************** START *********** START **************************
     else if(cardName.equals("Nameless Inversion"))
     {

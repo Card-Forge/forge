@@ -504,7 +504,7 @@ public class CombatUtil
     //loop through attackers
     for(int i = 0; i < attack.length; i++)
     {
-      GameActionUtil.executeExaltedEffects2(attack[i], AllZone.Combat);
+      //GameActionUtil.executeExaltedEffects2(attack[i], AllZone.Combat);
       //checkDeclareAttackers(attack[i]);
       attackerName = attack[i].getName();
       if (attack[i].isFaceDown())
@@ -559,7 +559,8 @@ public class CombatUtil
     //loop through attackers
     for(int i = 0; i < attack.length; i++)
     {
-      GameActionUtil.executeExaltedEffects2(attack[i], AllZone.pwCombat);
+      //GameActionUtil.executeExaltedEffects2(attack[i], AllZone.pwCombat);
+    	
       //checkDeclareAttackers(attack[i]);
       attackerName = attack[i].getName();
          if (attack[i].isFaceDown())
@@ -2004,4 +2005,99 @@ public class CombatUtil
 	  	  	  
 	  a.setCreatureGotBlockedThisTurn(true);
   }
+  
+  public static void executeExaltedAbility(Card c, int magnitude)
+  {
+	  final Card crd = c;
+	  final int n = magnitude;
+	  Ability ability = new Ability(c,"0")
+	  {
+		 public void resolve() 
+		 {
+	         final Command untilEOT = new Command()
+	         {
+				private static final long serialVersionUID = 1497565871061029469L;
+
+				public void execute()
+	            {
+	              if(AllZone.GameAction.isCardInPlay(crd))
+	              {
+	                crd.addTempAttackBoost(-n);
+	                crd.addTempDefenseBoost(-n);
+	              }
+	            }
+	          };//Command
+	          
+	          if(AllZone.GameAction.isCardInPlay(crd))
+	          {
+	            crd.addTempAttackBoost(n);
+	            crd.addTempDefenseBoost(n);
+
+	            AllZone.EndOfTurn.addUntil(untilEOT);
+	          }
+		 }//resolve
+		 
+	  };//ability
+	  ability.setStackDescription(c +" - (Exalted) gets +" +n +"/+" +n +" until EOT.");
+	  AllZone.Stack.add(ability);
+	  
+	  if (GameActionUtil.isRafiqInPlay(c.getController()))
+	  {
+		  Ability ability2 = new Ability(c,"0")
+		  {
+			 public void resolve() 
+			 {
+		         final Command untilEOT = new Command()
+		         {
+					private static final long serialVersionUID = -8943526706248389725L;
+
+					public void execute()
+		            {
+		              if(AllZone.GameAction.isCardInPlay(crd))
+		                crd.removeExtrinsicKeyword("Double Strike");
+		            }
+		          };//Command
+		          
+		          if(AllZone.GameAction.isCardInPlay(crd))
+		          {
+		            crd.addExtrinsicKeyword("Double Strike");
+		            AllZone.EndOfTurn.addUntil(untilEOT);
+		          }
+			 }//resolve
+			 
+		  };//ability2
+		  ability2.setStackDescription(c +" - (Exalted) gets Double Strike until EOT.");
+		  AllZone.Stack.add(ability2);
+	  }
+	  
+	  if (GameActionUtil.getBattleGraceAngels(c.getController()) > 0)
+	  {
+		  Ability ability3 = new Ability(c,"0")
+		  {
+			 public void resolve() 
+			 {
+		         final Command untilEOT = new Command()
+		         {
+					private static final long serialVersionUID = -8154692281049657338L;
+
+					public void execute()
+		            {
+		              if(AllZone.GameAction.isCardInPlay(crd))
+		                crd.removeExtrinsicKeyword("Lifelink");
+		            }
+		          };//Command
+		          
+		          if(AllZone.GameAction.isCardInPlay(crd))
+		          {
+		            crd.addExtrinsicKeyword("Lifelink");
+		            AllZone.EndOfTurn.addUntil(untilEOT);
+		          }
+			 }//resolve
+			 
+		  };//ability2
+		  ability3.setStackDescription(c +" - (Exalted) gets Lifelink until EOT.");
+		  AllZone.Stack.add(ability3);
+	  }
+  }
+  
 }//Class CombatUtil
