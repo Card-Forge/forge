@@ -37,6 +37,10 @@ public class ComputerAI_counterSpells2 {
 			""
 		};
 		
+		final String[] nonCreatureUnlessPay2 = {
+			"Spell Pierce"
+		};
+		
 		final String[] unlessPay1 = { 
 			"Force Spike", "Daze", "Runeboggle", "Spell Snip"
 		};
@@ -83,6 +87,11 @@ public class ComputerAI_counterSpells2 {
 
 				else if (!sa.getSourceCard().isCreature()) {
 					if (checkArray(c, nonCreature))
+						return true;
+				}
+				
+				else if (!sa.getSourceCard().isCreature() && usableManaSources < 2) {
+					if (checkArray(c, nonCreatureUnlessPay2))
 						return true;
 				}
 				

@@ -70,6 +70,7 @@ import com.google.common.collect.MapMaker;
 //import org.omg.CORBA.portable.InputStream;
 
 import arcane.ui.ScaledImagePanel;
+import arcane.ui.ScaledImagePanel.MultipassType;
 import arcane.ui.ScaledImagePanel.ScalingType;
 
 import forge.error.ErrorViewer;
@@ -662,9 +663,8 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     	else {
     		InputStream stream;
 			try {
-				//stream = new URL(GuiDisplayUtil.getURL(c)).openStream();
 				stream = GuiDisplayUtil.getURL(c).openStream();
-				srcImage = ImageIO.read(stream);
+				srcImage = arcane.ui.util.ImageUtil.getImage(stream);
 	    		imageCache.put(imageName, srcImage);
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
@@ -675,25 +675,9 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
 			}
     		
     	}
-    	//BufferedImage srcImageBlurred = arcane.ui.util.ImageUtil.getBlurredImage(srcImage, 3, 1.0f); // get a blurred image
-    	cardImagePanel.setImage(srcImage, srcImage);
-		cardImagePanel.repaint();
     	
-    	/*
-    	BufferedInputStream stream = (BufferedInputStream) GuiDisplayUtil.getPictureStream(c);
-    	BufferedImage srcImage;
-		try {
-			srcImage = arcane.ui.util.ImageUtil.getImage(stream);
-			BufferedImage srcImageBlurred = arcane.ui.util.ImageUtil.getBlurredImage(srcImage, 3, 1.0f); // get a blurred image
-			
-			cardImagePanel.setImage(srcImage, srcImageBlurred);
-			cardImagePanel.repaint();
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} // only need stream
-    	*/
+    	cardImagePanel.setImage(srcImage, null);
+		cardImagePanel.repaint();
     	
     	//System.out.println(picturePanel.getComponentCount());
     }//updateCardDetail()
@@ -1274,9 +1258,10 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         pane.add(new ExternalPanel(picturePanel), "picture");
         */
         
-        cardImagePanel.setScalingBlur(true); //use blured image if scaling down more than 50%
+        cardImagePanel.setScalingBlur(false); //use blured image if scaling down more than 50%
         cardImagePanel.setScaleLarger(true); //upscale if needed true
         cardImagePanel.setScalingType(ScalingType.bicubic); // type of scaling bicubic has good quality / speed ratio
+        cardImagePanel.setScalingMultiPassType(MultipassType.none);
         
         cardImagePanel.setLayout(new BoxLayout(cardImagePanel, BoxLayout.Y_AXIS));
         cardImagePanel.setBackground(c1);

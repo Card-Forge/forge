@@ -8910,25 +8910,56 @@ public class CardFactory implements NewConstants {
           //is spell?, did opponent play it?, is this a creature spell?
           return sa.isSpell() &&
                  opponent.equals(sa.getSourceCard().getController()) &&
-                 sa.getSourceCard().getType().contains("Creature");
+                 sa.getSourceCard().getType().contains("Creature") &&
+                 CardFactoryUtil.isCounterable(sa.getSourceCard());
         }//canPlay()
       };
       card.clearSpellAbility();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
 
-
-    //*************** START *********** START **************************
-    else if(cardName.equals("Counterspell") || cardName.equals("Cancel") || cardName.equals("Last Word") || cardName.equals("Traumatic Visions"))
+  //*************** START *********** START **************************
+    else if(cardName.equals("Spell Pierce"))
     {
       SpellAbility spell = new Spell(card)
       {
-		private static final long serialVersionUID = -2489268054171391552L;
+		private static final long serialVersionUID = 4685055135070191326L;
 		
 		public void resolve()
         {
-          SpellAbility sa = AllZone.Stack.pop();
-          AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
+			String manaCost = "2";
+			Ability ability = new Ability(card, manaCost){
+		    	  public void resolve()
+		    	  {
+		    		  ;
+		    	  }
+		      };
+		      
+		      final Command unpaidCommand = new Command()
+		      {
+				private static final long serialVersionUID = 8094833091127334678L;
+
+				public void execute()
+		    	{
+					  SpellAbility sa = AllZone.Stack.pop();
+			          AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
+		    	}
+		      };
+		      
+		      if (card.getController().equals(Constant.Player.Computer))
+		      {
+		    	  AllZone.InputControl.setInput(new Input_PayManaCost_Ability(card +"\r\n", ability.getManaCost(), Command.Blank, unpaidCommand));
+		      }
+		      else
+		      {
+		    	  if (ComputerUtil.canPayCost(ability))
+			  			ComputerUtil.playNoStack(ability);
+			  		else 
+			  		{
+			  			SpellAbility sa = AllZone.Stack.pop();
+		          		AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
+			  		}
+		      }
         }
         public boolean canPlay()
         {
@@ -8939,6 +8970,43 @@ public class CardFactory implements NewConstants {
           String opponent = AllZone.GameAction.getOpponent(card.getController());
           SpellAbility sa = AllZone.Stack.peek();
 
+          //is spell?, did opponent play it?, is this a creature spell?
+          return sa.isSpell() &&
+                 opponent.equals(sa.getSourceCard().getController()) &&
+                 !sa.getSourceCard().getType().contains("Creature") &&
+                 CardFactoryUtil.isCounterable(sa.getSourceCard());
+        }//canPlay()
+      };
+      card.clearSpellAbility();
+      card.addSpellAbility(spell);
+    }//*************** END ************ END **************************
+
+    //*************** START *********** START **************************
+    else if(cardName.equals("Counterspell") || cardName.equals("Cancel") || cardName.equals("Last Word") || cardName.equals("Traumatic Visions") || cardName.equals("Stifle"))
+    {
+      SpellAbility spell = new Spell(card)
+      {
+		private static final long serialVersionUID = -2489268054171391552L;
+		
+		public void resolve()
+        {
+          SpellAbility sa = AllZone.Stack.pop();
+          if(!cardName.equals("Stifle"))
+        	  AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
+        }
+        public boolean canPlay()
+        {
+          if(AllZone.Stack.size() == 0)
+            return false;
+
+          //see if spell is on stack and that opponent played it
+          String opponent = AllZone.GameAction.getOpponent(card.getController());
+          SpellAbility sa = AllZone.Stack.peek();
+
+          if(cardName.equals("Stifle"))
+        	  return !sa.isSpell() && CardFactoryUtil.isCounterable(sa.getSourceCard());
+          
+         
           return sa.isSpell() && opponent.equals(sa.getSourceCard().getController()) 
           		 && CardFactoryUtil.isCounterable(sa.getSourceCard());
         }
@@ -8949,8 +9017,14 @@ public class CardFactory implements NewConstants {
       {
     	desc = "Last Word can't be countered by spells or abilities.\r\n";
       }
-      spell.setDescription(desc + "Counter target spell.");
-      spell.setStackDescription(card.getName() + " - Counters target spell.");
+      if(cardName.equals("Stifle")){
+        spell.setDescription(desc + "Counter target triggered or activated ability.");
+        spell.setStackDescription(card.getName() + " - Counters target triggered or activated ability.");
+      } else 
+      {
+    	spell.setDescription(desc + "Counter target spell.");
+        spell.setStackDescription(card.getName() + " - Counters target spell.");
+      }
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
 
@@ -9545,7 +9619,7 @@ public class CardFactory implements NewConstants {
 
 
     //*************** START *********** START **************************
-    else if(cardName.equals("Evacuation"))
+    else if(cardName.equals("Evacuation") || cardName.equals("Rebuild"))
     {
       SpellAbility spell = new Spell(card)
       {
@@ -9556,7 +9630,10 @@ public class CardFactory implements NewConstants {
           CardList all = new CardList();
           all.addAll(AllZone.Human_Play.getCards());
           all.addAll(AllZone.Computer_Play.getCards());
-          all = all.getType("Creature");
+          if(cardName.equals("Rebuild"))
+        	  all = all.getType("Artifact");
+          else
+        	  all = all.getType("Creature");
 
           for(int i = 0; i < all.size(); i++)
           {
@@ -9577,6 +9654,11 @@ public class CardFactory implements NewConstants {
           return AllZone.getZone(Constant.Zone.Hand, c.getOwner());
         }
       };
+      if(cardName.equals("Rebuild"))
+      {
+    	  spell.setDescription("Return all artifacts to their owners' hands.");
+	  	  spell.setStackDescription(card.getName() + " - return all artifacts to their owners' hands.");
+      }
       card.clearSpellAbility();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
@@ -9915,6 +9997,83 @@ public class CardFactory implements NewConstants {
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
 
+  //*************** START *********** START **************************
+    else if(cardName.equals("Mystical Tutor"))
+    {
+      SpellAbility spell = new Spell(card)
+      {
+		private static final long serialVersionUID = 2281623056004772379L;
+		public boolean canPlayAI()
+        {
+          return 4 < AllZone.Phase.getTurn();
+        }
+
+        public void resolve()
+        {
+          String player = card.getController();
+          if(player.equals(Constant.Player.Human))
+            humanResolve();
+          else
+            computerResolve();
+        }
+        public void computerResolve()
+        {
+          CardList list = new CardList(AllZone.Computer_Library.getCards());
+          CardList instantsAndSorceries = new CardList();
+          
+          for (int i=0;i<list.size();i++)
+          {
+        	  if (list.get(i).getType().contains("Instant") || list.get(i).getType().contains("Sorcery"))
+        		  instantsAndSorceries.add(list.get(i));
+          }
+          
+          if(instantsAndSorceries.size() != 0)
+          {
+        	  //comp will just grab the first one it finds
+            Card c = instantsAndSorceries.get(0);
+            AllZone.GameAction.shuffle(card.getController());
+            
+            
+            //move to top of library
+            AllZone.Computer_Library.remove(c);
+            AllZone.Computer_Library.add(c, 0);
+            
+            CardList l = new CardList();
+            l.add(c);
+            AllZone.Display.getChoiceOptional("Computer picked:", l.toArray());
+          }
+        }//computerResolve()
+        public void humanResolve()
+        {
+          PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
+          
+          CardList list = new CardList(library.getCards());
+          CardList instantsAndSorceries = new CardList();
+          
+          for (int i=0;i<list.size();i++)
+          {
+        	  if (list.get(i).getType().contains("Instant") || list.get(i).getType().contains("Sorcery"))
+        		  instantsAndSorceries.add(list.get(i));
+          }
+
+
+          if(instantsAndSorceries.size() != 0)
+          {
+            Object o = AllZone.Display.getChoiceOptional("Select an instant or sorcery", instantsAndSorceries.toArray());
+
+            AllZone.GameAction.shuffle(card.getController());
+            if(o != null)
+            {
+              //put card on top of library
+              library.remove(o);
+              library.add((Card)o, 0);
+            }
+          }//if
+        }//resolve()
+      };
+      card.clearSpellAbility();
+      card.addSpellAbility(spell);
+    }//*************** END ************ END **************************
 
     //*************** START *********** START **************************
     else if(cardName.equals("Pulse of the Tangle"))

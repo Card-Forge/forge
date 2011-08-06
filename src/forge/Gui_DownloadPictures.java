@@ -5,6 +5,7 @@ import static javax.swing.JOptionPane.*;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
@@ -181,11 +182,20 @@ public class Gui_DownloadPictures extends DefaultBoundedRangeModel implements Ru
     
     private void update(int card) {
         this.card = card;
-        fireStateChanged();
-        bar.setString(String.format(ForgeProps.getLocalized(card == cards.length? BAR_CLOSE:BAR_WAIT), this.card,
-                cards.length));
-        System.out.println(card + "/" + cards.length);
-        
+        final class Worker implements Runnable{
+			private int card;
+			Worker(int card){
+				this.card = card;
+			}
+
+			public void run() {
+		        fireStateChanged();
+		        bar.setString(String.format(ForgeProps.getLocalized(card == cards.length? BAR_CLOSE:BAR_WAIT), card,
+		                cards.length));
+		        System.out.println(card + "/" + cards.length);
+			}
+		};
+		EventQueue.invokeLater(new Worker(card));
     }
     
     public JDialog getDlg(JFrame frame) {

@@ -769,6 +769,110 @@ class CardFactory_Lands {
 	         ability.setBeforePayMana(runtime);
 	       }//*************** END ************ END **************************
 	    
+	       //*************** START *********** START **************************
+	       else if(cardName.equals("Wasteland") || cardName.equals("Strip Mine"))
+	       {
+	    	 
+	    	 
+	         //tap sacrifice
+	         final Ability_Tap ability = new Ability_Tap(card, "0")
+	         {
+
+			   private static final long serialVersionUID = 6865042319287843154L;
+			   
+			   public boolean canPlayAI()
+	           {
+	             return false;
+	           }
+	           public void chooseTargetAI()
+	           {
+	             AllZone.GameAction.sacrifice(card);
+	           }
+	           public boolean canPlay()
+	           {
+	             PlayerZone compBattlezone = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+	             PlayerZone playerBattlezone = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+	             CardList list = new CardList(compBattlezone.getCards());
+	             list.addAll(playerBattlezone.getCards());
+	             list = list.filter(new CardListFilter()
+	             {
+	               public boolean addCard(Card c)
+	               {
+	            	   if(card.getName().equals("Wasteland"))
+	 	 		          return c.getType().contains("Land") && !c.getType().contains("Basic");
+	 	 		        else
+	 	 		          return c.getType().contains("Land");
+	               }
+	             });
+	             if (super.canPlay() && list.size() > 0 && AllZone.GameAction.isCardInPlay(card))
+	           	  return true;
+	             else
+	           	  return false;
+	             		
+	           }//canPlay()
+	           public void resolve()
+	           {
+	             if(card.getOwner().equals(Constant.Player.Human))
+	               humanResolve();
+	             //else
+	             //  computerResolve();
+	           }
+
+	           public void humanResolve()
+	           {
+	        	 Card target = getTargetCard();
+	        	 if(target != null)
+	        		 AllZone.GameAction.destroy(target);
+	           }//resolve()
+	         };//SpellAbility
+
+	         Input runtime = new Input()
+	         {
+
+			   private static final long serialVersionUID = -7328086812286814833L;
+			   boolean once = true;
+	           public void showMessage()
+	           {
+	             //this is necessary in order not to have a StackOverflowException
+	             //because this updates a card, it creates a circular loop of observers
+	             if(once)
+	             {
+	               once = false;
+	               String player = card.getController();
+	               
+	        	   PlayerZone compBattlezone = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+			       PlayerZone playerBattlezone = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+			       CardList list = new CardList(compBattlezone.getCards());
+			       list.addAll(playerBattlezone.getCards());
+			       
+			       list = list.filter(new CardListFilter()
+		           {
+		            public boolean addCard(Card c)
+		            {
+		 		      if(card.getName().equals("Wasteland"))
+		 		        return c.getType().contains("Land") && !c.getType().contains("Basic");
+		 		      else
+		 		        return c.getType().contains("Land");  
+		            }
+		           });
+
+                   Object o = AllZone.Display.getChoice("Choose a " + (card.getName().equals("Wasteland") ? "nonbasic" : "")  + "land to destroy", list.toArray());
+		           ability.setTargetCard((Card)o);
+		             
+	               AllZone.GameAction.sacrifice(card);
+	               
+	               //ability.setStackDescription(card.getController() +" - Destroy target " + (card.getName().equals("Wasteland") ? "nonbasic" : "")  + "land.");
+	               
+	               AllZone.Stack.add(ability);
+
+	               stop();
+	             }
+	           }//showMessage()
+	         };
+	         card.addSpellAbility(ability);
+	         ability.setDescription("Tap, Sacrifice " + card.getName() +": Destroy target " + (card.getName().equals("Wasteland") ? "nonbasic" : "")  + "land.");
+	         ability.setBeforePayMana(runtime);
+	       }//*************** END ************ END **************************
 	    
 	       //*************** START *********** START **************************
 	       else if(cardName.equals("Arid Mesa") || cardName.equals("Marsh Flats") || cardName.equals("Misty Rainforest") || 
