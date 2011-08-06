@@ -16154,8 +16154,6 @@ public class CardFactory_Creatures {
 	        	AllZone.GameAction.shuffle(card.getController());
 	        	lib.remove(c);
 		        lib.add(c, 0);  	
-	        	
-
 	          }
 	        }//resolve()
 	      };
@@ -16304,7 +16302,7 @@ public class CardFactory_Creatures {
 	        	  }
 	        	  else //comp
 	        	  {
-	        		  if (AllZone.Phase.getTurn() > 12 && nonLandList.size() > 0)
+	        		  if (AllZone.Phase.getTurn() >= 12 && nonLandList.size() > 0)
 	        		  {
 	        			  Card c = CardFactoryUtil.AI_getMostExpensivePermanent(nonLandList, card, false);
 	        			  hand.remove(c);

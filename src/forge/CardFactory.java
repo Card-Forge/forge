@@ -17138,6 +17138,303 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
       
   	}//*************** END ************ END **************************
 	
+	//*************** START *********** START **************************
+	if (cardName.equals("Goblin Charbelcher"))
+	{
+		final Ability_Tap ability = new Ability_Tap(card, "3")
+		{
+			private static final long serialVersionUID = -840041589720758423L;
+
+			public void resolve() {
+				PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
+				CardList topOfLibrary = new CardList(lib.getCards());
+				CardList revealed = new CardList();
+				
+				if (topOfLibrary.size() == 0)
+					return;
+				
+				int damage = 0;
+				int count = 0;
+				Card c = null;
+				Card crd;
+				while (c == null)
+				{
+					revealed.add(topOfLibrary.get(count));
+					crd = topOfLibrary.get(count++);
+					if (crd.isLand() || count == topOfLibrary.size() ) {
+						c = crd;
+						damage = count;
+						if (crd.getName().equals("Mountain"))
+							damage = damage * 2;
+					}
+				}//while
+				AllZone.Display.getChoiceOptional("Revealed cards:", revealed.toArray());
+			}
+		};
+		ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+		ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true));
+		card.addSpellAbility(ability);
+
+		
+    }//*************** END ************ END **************************
+	
+	//*************** START *********** START **************************
+	if (cardName.equals("Tinker"))
+	{
+		final SpellAbility spell = new Spell(card)
+		{
+			private static final long serialVersionUID = -5878957726445248334L;
+
+			public boolean canPlay() {
+				PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+				CardList list = new CardList(play.getCards());
+				list = list.getType("Artifact");
+				
+				return list.size() > 0;
+			}
+			
+			public boolean canPlayAI()
+			{
+				PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+				PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
+				
+				CardList playList = new CardList(play.getCards());
+				playList = playList.filter(new CardListFilter()
+				{
+					public boolean addCard(Card c) {
+						return c.isArtifact() && CardUtil.getConvertedManaCost(c.getManaCost()) <= 2;
+					}
+				});
+				
+				CardList libList = new CardList(lib.getCards());
+				libList = libList.filter(new CardListFilter()
+				{
+					public boolean addCard(Card c){
+						return c.isArtifact() && CardUtil.getConvertedManaCost(c.getManaCost()) > 5;
+					}
+				});
+				
+				if (libList.size() > 0 && playList.size() > 0)
+				{
+					playList.shuffle();
+					setTargetCard(playList.get(0));
+					return true;
+				}
+				return false;
+				
+			}
+
+			public void resolve() {
+				Card c = getTargetCard();
+				
+				PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+				PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
+				
+				if (AllZone.GameAction.isCardInPlay(c))
+				{
+				
+					AllZone.GameAction.sacrifice(c);
+					
+					if (card.getController().equals(Constant.Player.Computer)) {
+						
+						CardList list = new CardList(lib.getCards());
+						list = list.filter(new CardListFilter()
+						{
+							public boolean addCard(Card c)
+							{
+								return c.isArtifact() && CardUtil.getConvertedManaCost(c.getManaCost()) > 5;
+							}
+						});
+						
+						if (list.size() > 0)
+						{
+							Card crd = CardFactoryUtil.AI_getBestArtifact(list);
+							lib.remove(crd);
+							play.add(crd);
+							AllZone.GameAction.shuffle(Constant.Player.Computer);
+						}
+					}
+					else //human
+					{
+						CardList list = new CardList(lib.getCards());
+						list = list.filter(new CardListFilter()
+						{
+							public boolean addCard(Card c)
+							{
+								return c.isArtifact();
+							}
+						});
+						if (list.size() > 0) {
+							Object o = AllZone.Display.getChoiceOptional("Select artifact", list.toArray());
+				       		 
+							if (o != null)
+							{
+								Card crd = (Card)o;
+								lib.remove(crd);
+								play.add(crd);
+								
+							}
+							AllZone.GameAction.shuffle(Constant.Player.Human);
+						}
+					}
+				}//if isCardInPlay
+			}
+		};
+		/*
+		final Command sac = new Command()
+		{
+			private static final long serialVersionUID = -8925816099640324876L;
+
+			public void execute() {
+				AllZone.GameAction.sacrifice(spell.getTargetCard());
+			}
+		};
+		*/
+		
+		Input runtime = new Input()
+	    {
+			private static final long serialVersionUID = -4653972223582155502L;
+
+			public void showMessage()
+	        {
+	          CardList choice = new CardList();
+	          choice.addAll(AllZone.Human_Play.getCards());
+	          choice = choice.getType("Artifact");
+	          
+	          stopSetNext(CardFactoryUtil.input_targetSpecific(spell, choice, "Select artifact to sacrifice.", false));
+	        }
+	    };
+	    spell.setBeforePayMana(runtime);  
+		
+		
+		card.clearSpellAbility();
+		card.addSpellAbility(spell);
+		
+    }//*************** END ************ END **************************
+	
+	//*************** START *********** START **************************
+    else if (cardName.equals("Thopter Foundry"))
+    {
+    	final String player = card.getController();
+    	
+    	final SpellAbility ability = new Ability(card, "1")
+        {
+    		public void chooseTargetAI()
+            {
+    			Card c;
+    			PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+      	    	
+      	    	CardList meek = new CardList();
+      	    	meek.addAll(play.getCards());
+      	    	meek = meek.getName("Sword of the Meek");
+      	    	
+      	    	if (meek.size() >= 1)
+      	    		c = meek.get(0); 
+      	    	else
+      	    		c = getArtifact();
+      	    	setTargetCard(c);
+
+            }
+            public Card getArtifact()
+            {
+            	//target creature that is going to attack
+            	PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+    	    	
+    	    	CardList arts = new CardList();
+    	    	arts.addAll(play.getCards());
+    	    	arts = arts.filter(new CardListFilter()
+    	    	{
+    	    		public boolean addCard(Card c)
+    	    		{
+    	    			return c.isArtifact() && !c.isToken() && (CardUtil.getConvertedManaCost(c.getManaCost()) <= 1 || c.getName().equals("Sword of the Meek"));
+    	    		}
+    	    	});
+    	    	
+    	    	if (arts.size() > 0) {
+    	    		arts.shuffle();
+    	    		return arts.get(0);
+    	    	}
+    	    	else
+    	    		return null;
+            }//getAttacker()
+    		
+    		
+    		public boolean canPlayAI()
+    		{
+    		   String phase = AllZone.Phase.getPhase();
+         	   return phase.equals(Constant.Phase.Main2);
+    		}
+    		
+    		public void resolve()
+    		{
+    			Card c = getTargetCard();
+    			if (AllZone.GameAction.isCardInPlay(c)){
+	    			AllZone.GameAction.sacrifice(c);
+	    	    	makeToken();
+	    	    	PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
+	                life.addLife(1);
+    			}
+    	    	
+    	    	
+    		}//resolve
+    		
+    		public void makeToken()
+    		{
+    			  Card c = new Card();
+
+    			  c.setName("Thopter");
+    	          c.setImageName("U 1 1 Thopter");
+
+    	          c.setOwner(card.getController());
+    	          c.setController(card.getController());
+
+    	          c.setManaCost("U");
+    	          c.setToken(true);
+    	         
+    	          c.addType("Creature");
+    	          c.addType("Thopter");
+    	          c.setBaseAttack(1);
+    	          c.setBaseDefense(1);
+    	          c.addIntrinsicKeyword("Flying");
+
+    	          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+    	          play.add(c);
+    			
+    		}
+        };
+        
+        Input runtime = new Input()
+        {
+
+		private static final long serialVersionUID = 3557158378851031238L;
+
+		public void showMessage()
+          {
+        	PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+  	    	
+        	CardList arts = new CardList();
+  	    	arts.addAll(play.getCards());
+  	    	arts = arts.filter(new CardListFilter()
+  	    	{
+  	    		public boolean addCard(Card c)
+  	    		{
+  	    			return c.isArtifact() && !c.isToken();
+  	    		}
+  	    	});
+
+            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, arts, "Select a non-token Artifact to sacrifice", false));
+
+          }//showMessage()
+        };//Input
+        
+    	card.addSpellAbility(ability);
+    	ability.setDescription("1, Sacrifice a nontoken artifact: Put a 1/1 blue Thopter artifact creature token with flying onto the battlefield. You gain 1 life.");
+    	ability.setStackDescription(card.getName() + " - Put a 1/1 blue Thopter artifact creature token with flying onto the battlefield. You gain 1 life.");
+    	ability.setBeforePayMana(runtime);
+    
+    }//*************** END ************ END **************************
+
+	
     
     // Cards with Cycling abilities
     // -1 means keyword "Cycling" not found

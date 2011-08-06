@@ -108,6 +108,58 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone
 			}	
 		}
 		
+		PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getController());
+		PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+		CardList meek = new CardList(grave.getCards());
+		
+		if (meek.size() > 0 && c.isCreature() && c.getNetAttack() == 1 && c.getNetDefense() == 1)
+		{
+			for (int i=0;i<meek.size();i++)
+			{
+				final Card crd = meek.get(i);
+				final Card creat = c;
+				final PlayerZone graveZone = grave;
+				final PlayerZone playZone = play;
+				Ability ability = new Ability(meek.get(i), "0")
+				{
+					public void resolve() {
+						if (crd.getController().equals(Constant.Player.Human))
+						{
+							String[] choices = { "Yes", "No" };
+					    	  
+							Object q = null;
+
+							q = AllZone.Display.getChoiceOptional("Attach " +crd + " to " +creat + "?", choices);
+							if (q == null || q.equals("No"))
+								;
+							else if (AllZone.GameAction.isCardInZone(crd, graveZone) && AllZone.GameAction.isCardInPlay(creat) && creat.isCreature() && 
+									 creat.getNetAttack() == 1 && creat.getNetDefense() == 1){
+								graveZone.remove(crd);
+								playZone.add(crd);
+								
+								crd.equipCard(creat);
+							}
+
+						}
+						else //computer
+						{
+							if (AllZone.GameAction.isCardInZone(crd, graveZone) && AllZone.GameAction.isCardInPlay(creat) && creat.isCreature() && 
+								creat.getNetAttack() == 1 && creat.getNetDefense() == 1) {
+								graveZone.remove(crd);
+								playZone.add(crd);
+								
+								crd.equipCard(creat);
+							}
+						}
+					}						
+				};
+				
+				ability.setStackDescription("Sword of the Meek - Whenever a 1/1 creature enters the battlefield under your control, you may return Sword of the Meek from your graveyard to the battlefield, then attach it to that creature.");
+				AllZone.Stack.add(ability);
+			}
+		}
+		
+
 		
 		/*
 		for (String effect : AllZone.StateBasedEffects.getStateBasedMap().keySet() ) {

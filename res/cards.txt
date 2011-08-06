@@ -1,3 +1,23 @@
+Sword of the Meek
+2
+Artifact Equipment
+Equipped creature gets +1/+2. Whenever a 1/1 creature enters the battlefield under your control, you may return Sword of the Meek from your graveyard to the battlefield, then attach it to that creature.
+
+Thopter Foundry
+WB U
+Artifact
+no text
+
+Tinker
+2 U
+Sorcery
+As an additional cost to cast Tinker, sacrifice an artifact. Search your library for an artifact card and put that card onto the battlefield. Then shuffle your library.
+
+Goblin Charbelcher
+4
+Artifact
+no text
+
 Umezawa's Jitte
 2
 Artifact Equipment
