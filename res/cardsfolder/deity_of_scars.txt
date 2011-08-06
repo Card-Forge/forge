@@ -5,7 +5,7 @@ Text:no text
 PT:7/7
 K:Trample
 K:etbCounter:M1M1:2
-A:AB$Regenerate|Cost$BG SubCounter<1/M1M1>|SpellDescription$Regenerate Deity of Scars.
+A:AB$Regenerate | Cost$ BG SubCounter<1/M1M1> | SpellDescription$ Regenerate Deity of Scars.
 SVar:Rarity:Rare
 SVar:Picture:http://wizards.com/global/images/magic/general/deity_of_scars.jpg
 End

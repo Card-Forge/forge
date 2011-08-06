@@ -4,7 +4,7 @@ Types:Creature Wall
 Text:no text
 PT:3/2
 K:Defender
-A:AB$Regenerate|Cost$1 B|SpellDescription$Regenerate CARDNAME.
+A:AB$Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carrion_wall.jpg
 End

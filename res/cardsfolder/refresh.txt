@@ -2,7 +2,7 @@ Name:Refresh
 ManaCost:2 G
 Types:Instant
 Text:no text
-A:SP$Regenerate|Cost$2 G|Tgt$TgtC|SpellDescription$Regenerate target creature.
+A:SP$Regenerate | Cost$ 2 G | Tgt$ TgtC | SpellDescription$ Regenerate target creature.
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/refresh.jpg

@@ -7,7 +7,7 @@ K:Flying
 K:Trample
 K:Haste
 K:abPump R:+1/+0
-A:AB$Regenerate|Cost$B G|SpellDescription$Regenerate CARDNAME.
+A:AB$Regenerate | Cost$ B G | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellkite_overlord.jpg
 End

@@ -5,7 +5,7 @@ Text:no text
 PT:2/1
 K:CARDNAME can't be countered.
 K:Bushido 2
-A:AB$Regenerate|Cost$2|ValidTgts$Samurai|TgtPrompt$Select target Samurai.|SpellDescription$Regenerate target Samurai.
+A:AB$Regenerate | Cost$ 2 | ValidTgts$ Samurai | TgtPrompt$ Select target Samurai. | SpellDescription$ Regenerate target Samurai.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/isao_enlightened_bushi.jpg
 End

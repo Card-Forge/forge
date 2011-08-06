@@ -3,7 +3,7 @@ ManaCost:5 W
 Types:Creature Elephant Cleric
 Text:no text
 PT:3/3
-A:AB$Regenerate|Cost$W T|ValidTgts$Artifact|TgtPrompt$Select target artifact.|SpellDescription$Regenerate target artifact.
+A:AB$Regenerate | Cost$ W T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | SpellDescription$ Regenerate target artifact.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_mender.jpg
 End

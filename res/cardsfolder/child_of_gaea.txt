@@ -5,7 +5,7 @@ Text:no text
 PT:7/7
 K:Trample
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay G G
-A:AB$Regenerate|Cost$1 G|SpellDescription$Regenerate CARDNAME.
+A:AB$Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_gaea.jpg
 End

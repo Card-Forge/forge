@@ -4,7 +4,7 @@ Types:Creature Elemental Skeleton
 Text:no text
 PT:1/1
 K:Wither
-A:AB$Regenerate|Cost$1 B|SpellDescription$Regenerate CARDNAME.
+A:AB$Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cinderbones.jpg
 End

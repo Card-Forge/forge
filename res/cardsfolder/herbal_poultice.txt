@@ -2,7 +2,7 @@ Name:Herbal Poultice
 ManaCost:0
 Types:Artifact
 Text:no text
-A:AB$Regenerate|Tgt$TgtC|Cost$3 Sac<1/CARDNAME>|SpellDescription$Regenerate target creature.
+A:AB$Regenerate | Tgt$ TgtC | Cost$ 3 Sac<1/CARDNAME> | SpellDescription$ Regenerate target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/herbal_poultice.jpg
 End

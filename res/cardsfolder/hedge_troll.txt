@@ -4,7 +4,7 @@ Types:Creature Troll Cleric
 Text:no text
 PT:2/2
 K:stPumpSelf:Creature:1/1:isPresent Plains.YouCtrl:CARDNAME gets +1/+1 as long as you control a Plains.
-A:AB$Regenerate|Cost$W|SpellDescription$Regenerate CARDNAME.
+A:AB$Regenerate | Cost$ W | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hedge_troll.jpg
 End

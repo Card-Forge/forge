@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Creature Skeleton
 Text:no text
 PT:1/1
-A:AB$Regenerate|Cost$B|SpellDescription$Regenerate CARDNAME.
+A:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83061.jpg
 End

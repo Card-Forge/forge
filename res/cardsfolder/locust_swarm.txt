@@ -4,7 +4,7 @@ Types:Creature Insect
 Text:no text
 PT:1/1
 K:Flying
-A:AB$Regenerate|Cost$G|SpellDescription$Regenerate CARDNAME.
+A:AB$Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
 A:AB$Untap | Cost$ G | ActivationLimit$ 1 | SpellDescription$ Untap Locust Swarm. Activate this ability only once each turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/locust_swarm.jpg

@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Beast
 Text:Beast spells you cast cost 1 less to cast.
 PT:2/2
-A:AB$Regenerate|Cost$1 G|ValidTgts$Beast|TgtPrompt$Select target Beast.|SpellDescription$Regenerate target Beast.
+A:AB$Regenerate | Cost$ 1 G | ValidTgts$ Beast | TgtPrompt$ Select target Beast. | SpellDescription$ Regenerate target Beast.
 K:CostChange:Player:Less:1:Spell:All:Beast:NoSpecial
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_warchief.jpg

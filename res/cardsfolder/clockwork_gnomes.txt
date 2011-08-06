@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact Creature Gnome
 Text:no text
 PT:2/2
-A:AB$Regenerate|Cost$3 T|ValidTgts$Creature.Artifact|TgtPrompt$Select target artifact creature.|SpellDescription$Regenerate target artifact creature.
+A:AB$Regenerate | Cost$ 3 T | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature. | SpellDescription$ Regenerate target artifact creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clockwork_gnomes.jpg
 End

@@ -4,7 +4,7 @@ Types:Creature Human Druid
 Text:no text
 PT:1/2
 K:stPumpSelf:Creature:X/X:no Condition:Gatherer of Graces gets +1/+1 for each Aura attached to it.
-A:AB$Regenerate|Cost$Sac<1/Aura>|SpellDescription$Regenerate Gatherer of Graces.
+A:AB$Regenerate | Cost$ Sac<1/Aura> | SpellDescription$ Regenerate Gatherer of Graces.
 SVar:X:Count$Valid Aura.Attached
 SVar:EnchantMe:Multiple
 SVar:Rarity:Uncommon

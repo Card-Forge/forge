@@ -4,7 +4,7 @@ Types:Legendary Creature Human Rogue
 Text:no text
 PT:5/2
 K:Haste
-A:AB$Regenerate|Cost$R R R|SpellDescription$Regenerate CARDNAME.
+A:AB$Regenerate | Cost$ R R R | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eron_the_relentless.jpg
 End

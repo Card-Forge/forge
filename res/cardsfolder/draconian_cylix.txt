@@ -2,7 +2,7 @@ Name:Draconian Cylix
 ManaCost:3
 Types:Artifact
 Text:no text
-A:AB$Regenerate|Cost$2 T Discard<1/Random>|Tgt$TgtC|SpellDescription$Regenerate target creature.
+A:AB$Regenerate | Cost$ 2 T Discard<1/Random> | Tgt$ TgtC | SpellDescription$ Regenerate target creature.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/draconian_cylix.jpg
 End

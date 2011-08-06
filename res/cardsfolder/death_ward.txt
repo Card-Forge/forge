@@ -2,7 +2,7 @@ Name:Death Ward
 ManaCost:W
 Types:Instant
 Text:no text
-A:SP$Regenerate|Cost$W|Tgt$TgtC|SpellDescription$Regenerate target creature.
+A:SP$Regenerate | Cost$ W | Tgt$ TgtC | SpellDescription$ Regenerate target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_ward.jpg
 End

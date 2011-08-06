@@ -3,7 +3,7 @@ ManaCost:2 G G
 Types:Creature Ape
 Text:no text
 PT:3/3
-A:AB$Regenerate|Cost$1 G|SpellDescription$Regenerate CARDNAME.
+A:AB$Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gorilla_chieftain.jpg
 End

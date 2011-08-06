@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Creature Shade Spirit
 Text:no text
 PT:1/1
-A:AB$Regenerate|Cost$B|SpellDescription$Regenerate CARDNAME.
+A:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 K:abPump B:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darkling_stalker.jpg

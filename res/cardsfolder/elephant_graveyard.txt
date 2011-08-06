@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:tap: add 1
-A:AB$Regenerate|ValidTgts$Creature.Elephant|TgtPrompt$Select target Elephant|Cost$T|SpellDescription$Regenerate target Elephant.
+A:AB$Regenerate | ValidTgts$ Creature.Elephant | TgtPrompt$ Select target Elephant | Cost$ T | SpellDescription$ Regenerate target Elephant.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elephant_graveyard.jpg
 End

@@ -3,7 +3,7 @@ ManaCost:X G G
 Types:Creature Beast
 Text:Krakilin enters the battlefield with X +1/+1 counters on it.
 PT:0/0
-A:AB$Regenerate|Cost$1 G|SpellDescription$Regenerate CARDNAME.
+A:AB$Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4769&type=card
 End

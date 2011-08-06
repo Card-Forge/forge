@@ -4,7 +4,7 @@ Types:Creature Skeleton
 Text:no text
 PT:2/1
 K:Flash
-A:AB$Regenerate|Cost$B|SpellDescription$Regenerate CARDNAME.
+A:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drudge_reavers.jpg
 End
