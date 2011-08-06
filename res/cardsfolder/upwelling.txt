@@ -2,6 +2,7 @@ Name:Upwelling
 ManaCost:3 G
 Types:Enchantment
 Text:Mana pools don't empty as steps and phases end.
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/upwelling.jpg
 End

@@ -3,6 +3,7 @@ ManaCost:G
 Types:enchantment
 Text:no text
 A:AB$Pump|Cost$1 G|ValidTgts$Creature.blocking|NumDef$+1|SpellDescription$Target blocking creature gets +0/+1 until end of turn.|TgtPrompt$Select target blocking creature.  
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elven_fortress.jpg
 End
