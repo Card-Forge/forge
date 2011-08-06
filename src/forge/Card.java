@@ -2315,9 +2315,6 @@ public class Card extends MyObservable {
     }
     
     public boolean isValidCard(String Restrictions[]) {
-    	/////////////////// temporary DEBUG code
-    	System.out.println("DEBUG: "+this.getName()+" - WARNING - isValidCard is not checking YouCtrl/YouDontCtrl");
-    	/////////////////// end temp DEBUG code
     	
         if (getName().equals("Mana Pool") || isImmutable()) return false;
 
