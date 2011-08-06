@@ -13333,7 +13333,7 @@ public class CardFactory_Creatures {
             
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Broodmate Dragon")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -13354,8 +13354,8 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
             
         }//*************** END ************ END **************************
-        
-        
+        */
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Deranged Hermit")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -13381,8 +13381,8 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
             
         }//*************** END ************ END **************************
-        
-        
+        */
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Grave Titan")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -13409,7 +13409,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
             
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Primeval Titan")) {
@@ -13480,7 +13480,7 @@ public class CardFactory_Creatures {
             
         }//*************** END ************ END **************************
 
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Godsire")) {
             final SpellAbility a1 = new Ability_Tap(card) {
@@ -13508,7 +13508,7 @@ public class CardFactory_Creatures {
             
             //a1.setBeforePayMana(new Input_PayManaCost(a1));
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Wydwen, the Biting Gale")) {

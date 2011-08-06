@@ -4,6 +4,7 @@ Types:Creature Dragon
 Text:When Broodmate Dragon comes into play, put a 4/4 red Dragon creature token with flying into play.
 PT:4/4
 K:Flying
+K:etbMakeToken<>1<>Dragon<>R 4 4 Dragon<>Controller<>R<>Creature;Dragon<>4<>4<>Flying<>put a 4/4 red Dragon creature token with flying onto the battlefield.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/broodmate_dragon.jpg
 End
