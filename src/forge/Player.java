@@ -113,10 +113,19 @@ public abstract class Player extends MyObservable{
 	public boolean gainLife(final int toGain, final Card source) {
 		boolean newLifeSet = false;
 		if(!canGainLife()) return false;
+		
 		if(toGain > 0) {
-			addLife(toGain);
-			newLifeSet = true;
-			this.updateObservers();
+			//Lich
+			if(AllZoneUtil.isCardInPlay("Lich", this)) {
+				//draw cards instead of gain life
+				drawCards(toGain);
+				newLifeSet = false;
+			}
+			else {
+				addLife(toGain);
+				newLifeSet = true;
+				this.updateObservers();
+			}
 		}
 		else System.out.println("Player - trying to gain negative or 0 life");
 		
@@ -219,6 +228,16 @@ public abstract class Player extends MyObservable{
         else {
         	if(PlayerUtil.worshipFlag(this) && life <= damageToDo) {
         		damageToDo = Math.min(damageToDo, life - 1);
+        	}
+        	if(AllZoneUtil.isCardInPlay("Lich", this)) {
+        		for(int i = 0; i < damageToDo; i++) {
+        			CardList nonTokens = AllZoneUtil.getPlayerCardsInPlay(this);
+        			nonTokens = nonTokens.filter(AllZoneUtil.nonToken);
+        			if(nonTokens.size() == 0) {
+        				this.altLoseConditionMet("Lich");
+        			}
+        			else sacrificePermanent("Select a permanent to sacrifice", nonTokens);
+        		}
         	}
         	//rule 118.2. Damage dealt to a player normally causes that player to lose that much life.
         	loseLife(damageToDo, source);
@@ -814,6 +833,10 @@ public abstract class Player extends MyObservable{
     	return false;
     }
     
+    public boolean cantLoseForZeroOrLessLife() {
+    	return AllZoneUtil.isCardInPlay("Lich", this);
+    }
+    
     public boolean cantWin(){
     	if ((AllZoneUtil.getPlayerCardsInPlay(getOpponent(), "Platinum Angel").size() > 0) ||
     			(AllZoneUtil.getPlayerCardsInPlay(this, "Abyssal Persecutor").size() > 0)){
@@ -823,6 +846,7 @@ public abstract class Player extends MyObservable{
     }
     
     public boolean hasLost(){
+    	
     	if (cantLose())
     		return false;
     	
@@ -833,6 +857,10 @@ public abstract class Player extends MyObservable{
     	if (poisonCounters >= 10){
     		altLoseConditionMet("Poison Counters");
     		return true;
+    	}
+    	
+    	if(cantLoseForZeroOrLessLife()) {
+    		return false;
     	}
     	
     	return getLife() <= 0;

@@ -8292,6 +8292,56 @@ public class CardFactory implements NewConstants {
             card.addLeavesPlayCommand(leavesPlay);
         }//*************** END ************ END **************************
         
+      
+        //*************** START *********** START **************************
+        else if(cardName.equals("Lich")) {
+            final SpellAbility loseAllLife = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    int life = card.getController().getLife();
+                    card.getController().loseLife(life, card);
+                }
+            };
+            
+            Command intoPlay = new Command() {
+				private static final long serialVersionUID = 1337794055075168785L;
+
+				public void execute() {
+                	
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(cardName).append(" - ").append(card.getController());
+                	sb.append(" loses life equal to his or her life total.");
+                	loseAllLife.setStackDescription(sb.toString());
+                    
+                    AllZone.Stack.add(loseAllLife);
+                }
+            };
+            
+            final SpellAbility loseGame = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                	card.getController().altLoseConditionMet(card.getName());
+                }
+            };
+            
+            Command toGrave = new Command() {
+				private static final long serialVersionUID = 5863295714122376047L;
+
+				public void execute() {
+                	
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(cardName).append(" - ").append(card.getController());
+                	sb.append("loses the game.");
+                	loseGame.setStackDescription(sb.toString());
+                    
+                    AllZone.Stack.add(loseGame);
+                }
+            };
+            
+            card.addComesIntoPlayCommand(intoPlay);
+            card.addDestroyCommand(toGrave);
+        }//*************** END ************ END **************************
+        
 
         return postFactoryKeywords(card);
     }//getCard2
