@@ -323,17 +323,19 @@ public class AbilityFactory_Destroy {
 		sb.append(name).append(" - Destroy ");
 
 		for(Card c : tgtCards)
-			sb.append(c.getName()).append(" ");
+			sb.append(c.getName()).append(", ");
 
 		if (noRegen) {
-			if (sb.toString().endsWith(" "))
+			if (sb.toString().endsWith(", ")) {
 				sb.deleteCharAt(sb.toString().length() - 1);
+				sb.deleteCharAt(sb.toString().length() - 1);
+			}
 			sb.append(". ");
 			if (tgtCards.size() == 1)
 				sb.append("It");
 			else
 				sb.append("They");
-			sb.append(" can't be regenerated");
+			sb.append(" can't be regenerated. ");
 		}
 
 		Ability_Sub abSub = sa.getSubAbility();
