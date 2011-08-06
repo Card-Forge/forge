@@ -1,8 +1,8 @@
 Name:Multani's Decree
 ManaCost:3 G
 Types:Sorcery
-Text:Destroy all enchantments. You gain 2 life for each enchantment destroyed this way.
-K:spDestroyAll:Enchantment:Drawback$GainLifeYou/X.Times.2
+Text:no text
+A:SP$DestroyAll | Cost$ 3 G | ValidCards$ Enchantment | SubAbility$ GainLifeYou/X.Times.2 | SpellDescription$ Destroy all enchantments. You gain 2 life for each enchantment destroyed this way.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/multanis_decree.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/114.jpg

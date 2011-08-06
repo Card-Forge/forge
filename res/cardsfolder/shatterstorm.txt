@@ -1,8 +1,8 @@
 Name:Shatterstorm
 ManaCost:2 R R
 Types:Sorcery
-Text:Destroy all artifacts. They can't be regenerated.
-K:spDestroyAll:Artifact:NoRegen
+Text:no text
+A:SP$DestroyAll | Cost$ 2 R R | ValidCards$ Artifact | NoRegen$ True | SpellDescription$ Destroy all artifacts. They can't be regenerated.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shatterstorm.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/266.jpg

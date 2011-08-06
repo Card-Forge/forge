@@ -1,8 +1,8 @@
 Name:Nature's Ruin
 ManaCost:2 B
 Types:Sorcery
-Text:Destroy all green creatures.
-K:spDestroyAll:Creature.Green
+Text:no text
+A:SP$DestroyAll | Cost$ 2 B | ValidCards$ Creature.Green | SpellDescription$ Destroy all green creatures.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/natures_ruin.jpg

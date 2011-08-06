@@ -1,8 +1,8 @@
 Name:Virtue's Ruin
 ManaCost:2 B
 Types:Sorcery
-Text:Destroy all white creatures.
-K:spDestroyAll:Creature.White
+Text:no text
+A:SP$DestroyAll | Cost$ 2 B | ValidCards$ Creature.White | SpellDescription$ Destroy all white creatures.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/virtues_ruin.jpg

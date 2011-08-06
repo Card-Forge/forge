@@ -1,8 +1,8 @@
 Name:Tsunami
 ManaCost:3 G
 Types:Sorcery
-Text:Destroy all Islands.
-K:spDestroyAll:Island
+Text:no text
+A:SP$DestroyAll | Cost$ 3 G | ValidCards$ Island | SpellDescription$ Destroy all Islands.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tsunami.jpg

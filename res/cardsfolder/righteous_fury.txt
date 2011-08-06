@@ -1,8 +1,8 @@
 Name:Righteous Fury
 ManaCost:4 W W
 Types:Sorcery
-Text:Destroy all tapped creatures. You gain 2 life for each creature destroyed this way.
-K:spDestroyAll:Creature.tapped:Drawback$GainLifeYou/X.Times.2
+Text:no text
+A:SP$DestroyAll | Cost$ 4 W W | ValidCards$ Creature.tapped | SubAbility$ GainLifeYou/X.Times.2 | SpellDescription$ Destroy all tapped creatures. You gain 2 life for each creature destroyed this way.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal_Second_Age/righteous_fury.jpg
