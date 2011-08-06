@@ -57,6 +57,7 @@ public interface NewConstants {
     public static final String CARD_PICTURES_OTHER = "card-pictures_other";
     public static final String CARD_PICTURES_TOKEN_HQ = "card-pictures_token_hq";
     public static final String CARDS         = "cards";
+    public static final String CARDSFOLDER   = "cardsfolder";
     public static final String REMOVED       = "removed-cards";
     public static final String NAME_MUTATOR  = "name-mutator";
     

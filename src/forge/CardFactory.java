@@ -86,7 +86,8 @@ public class CardFactory implements NewConstants {
     private void readCards(File file) {
         map.clear();
         
-        ReadCard read = new ReadCard(ForgeProps.getFile(CARDS));
+        //ReadCard read = new ReadCard(ForgeProps.getFile(CARDS));
+        ReadCard read = new ReadCard(ForgeProps.getFile(CARDSFOLDER));
         try {
             read.run();
             // javax.swing.SwingUtilities.invokeAndWait(read);
@@ -2946,6 +2947,7 @@ public class CardFactory implements NewConstants {
             	card.addSpellAbility(evDestroyTgt);
             }
         } // etbDestoryTgt
+        
 
         // Generic destroy all card
         if(hasKeyword(card, "spDestroyAll") != -1) {

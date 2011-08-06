@@ -2,6 +2,7 @@ package forge;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -12,6 +13,7 @@ import forge.properties.NewConstants;
 
 public class ReadCard implements Runnable, NewConstants {
     private BufferedReader  in;
+    private String fileList[]; 
     private ArrayList<Card> allCards = new ArrayList<Card>();
     
     public static void main(String args[]) throws Exception {
@@ -50,70 +52,104 @@ public class ReadCard implements Runnable, NewConstants {
             throw new RuntimeException("ReadCard : constructor error -- file not found -- filename is "
                     + file.getAbsolutePath());
         
+        if (!file.isDirectory())
+        	throw new RuntimeException("ReadCard : constructor error -- not a direcotry -- "
+        			+ file.getAbsolutePath());
+        
+        fileList = file.list();
         //makes the checked exception, into an unchecked runtime exception
-        try {
-            in = new BufferedReader(new FileReader(file));
-        } catch(Exception ex) {
-            ErrorViewer.showError(ex, "File \"%s\" not found", file.getAbsolutePath());
-            throw new RuntimeException("ReadCard : constructor error -- file not found -- filename is "
-                    + file.getPath());
-        }
+        //try {
+        //    in = new BufferedReader(new FileReader(file));
+        //} catch(Exception ex) {
+        //    ErrorViewer.showError(ex, "File \"%s\" not found", file.getAbsolutePath());
+        //    throw new RuntimeException("ReadCard : constructor error -- file not found -- filename is "
+        //            + file.getPath());
+        //}
     }//ReadCard()
     
     public void run() {
-        Card c;
-        String s = readLine();
-        ArrayList<String> cardNames = new ArrayList<String>();
-        int linenum = 1;
-        
-        while(!s.equals("End")) {
+    	Card c = null;
+    	ArrayList<String> cardNames = new ArrayList<String>();
+    	File fl = null;
+    	
+    	for (int i=0; i<fileList.length; i++)
+    	{
+            try {
+            	fl = new File("res/cardsfolder/" + fileList[i]);
+                in = new BufferedReader(new FileReader(fl));
+            } catch(Exception ex) {
+                ErrorViewer.showError(ex, "File \"%s\" exception", fl.getAbsolutePath());
+                throw new RuntimeException("ReadCard : run error -- file exception -- filename is "
+                        + fl.getPath());
+            }
+            
             c = new Card();
-            if(s.equals("")) throw new RuntimeException("ReadCard : run() reading error, cardname is blank! Line: " + Integer.toString(linenum));
-            linenum += 4;
-            c.setName(s);
             
-//for debugging
-//System.out.println(c.getName());
-            
+            String s = readLine();
+            while (!s.equals("End"))
+            {
+            	if (s.startsWith("Name:"))
+            	{
+            		String t = s.substring(5);
+            		//System.out.println(s);
+            		if (cardNames.contains(t))
+            		{
+                        System.out.println("ReadCard:run() error - duplicate card name: " + t);
+                        throw new RuntimeException("ReadCard:run() error - duplicate card name: " + t);
+            		}
+            		else
+            			c.setName(t);
+            	}
+            	
+            	else if (s.startsWith("ManaCost:"))
+            	{
+            		String t = s.substring(9);
+            		//System.out.println(s);
+            		if (!t.equals("no cost"))
+            			c.setManaCost(t);
+            	}
+            	
+            	else if (s.startsWith("Types:"))
+            		addTypes(c, s.substring(6));
+            	
+            	else if (s.startsWith("Text:"))
+            	{
+            		String t = s.substring(5);
+            		if (!t.equals("no text"));
+            			c.setText(t);
+            	}
+            	
+            	else if (s.startsWith("PT:"))
+            	{
+            		String t = s.substring(3);
+            		String pt[] = t.split("/");
+            		int att = Integer.parseInt(pt[0]);
+            		int def = Integer.parseInt(pt[1]);
+            		c.setBaseAttack(att);
+            		c.setBaseDefense(def);
+            	}
+            	
+            	else if (s.startsWith("K:"))
+            	{
+            		String t = s.substring(2);
+            		c.addIntrinsicKeyword(t);
+            	}
+            	
+            	s = readLine();
+            } // while !End
 
-            s = readLine();
-            if(!s.equals("no cost")) c.setManaCost(s);
-            
-            s = readLine();
-            addTypes(c, s);
-            
-            s = readLine();
-            if(!s.equals("no text")) c.setText(s);
-            
-            s = readLine();
-            if(c.isCreature()) {
-                
-            	//System.out.println("Creature name:" + c.getName());
-                int n = s.indexOf("/");
-                int att = Integer.parseInt(s.substring(0, n));
-                int def = Integer.parseInt(s.substring(n + 1));
-                c.setBaseAttack(att);
-                c.setBaseDefense(def);
-                s = readLine();
-                linenum++;
-            }
-            
-            while(!s.equals("")) {
-                c.addIntrinsicKeyword(s);
-                s = readLine();
-                linenum++;
-            }
-            s = readLine();
-            linenum++;
-            
-            if(cardNames.contains(c.getName())) {
-                System.out.println("ReadCard:run() error - duplicate card name: " + c.getName());
-                throw new RuntimeException("ReadCard:run() error - duplicate card name: " + c.getName());
-            }
-            
             cardNames.add(c.getName());
             allCards.add(c);
-        }
+           
+            try {
+				in.close();
+			} catch (IOException ex) {
+                ErrorViewer.showError(ex, "File \"%s\" exception", fl.getAbsolutePath());
+                throw new RuntimeException("ReadCard : run error -- file exception -- filename is "
+                        + fl.getPath());
+			}
+    	}
+    	
     }//run()
     
     private void addTypes(Card c, String types) {
