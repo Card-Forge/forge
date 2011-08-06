@@ -3886,7 +3886,7 @@ public class GameAction {
         else {
         	int damageToDo = damage;
         	PlayerLife life = getPlayerLife(player);
-        	if(AllZoneUtil.isCardInPlay("Ali from Cairo", player) && life.getLife() <= damageToDo) {
+        	if(worshipFlag(player) && life.getLife() <= damageToDo) {
         		damageToDo = Math.min(damageToDo, life.getLife() - 1);
         	}
         	life.subtractLife(damageToDo,source);
