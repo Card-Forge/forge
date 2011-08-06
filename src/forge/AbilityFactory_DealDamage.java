@@ -19,6 +19,10 @@ public class AbilityFactory_DealDamage {
 		// Note: TgtOpp should not be used, Please use ValidTgts$ Opponent instead
 	}
 
+	// ******************************************************************************************************
+	// ***************************** DAMAGE *****************************************************************
+	// ******************************************************************************************************
+
 	public SpellAbility getAbility() {
 		final SpellAbility abDamage = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
 			private static final long serialVersionUID = -7560349014757367722L;
@@ -43,43 +47,11 @@ public class AbilityFactory_DealDamage {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return damageDoTriggerAI(AF, this, mandatory);
 			}
 		};// Ability_Activated
 
 		return abDamage;
-	}
-
-	public SpellAbility getAbilityDamageAll(){
-
-		final SpellAbility abDamageAll = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
-			private static final long serialVersionUID = -1831356710492849854L;
-			final AbilityFactory af = AF;
-
-			@Override
-			public String getStackDescription(){
-				return damageAllStackDescription(af, this);
-			}
-
-			@Override
-			public boolean canPlayAI() {
-				return damageAllCanPlayAI(af, this);
-			}
-
-			@Override
-			public void resolve() {
-				damageAllResolve(af, this);
-			}
-
-			@Override
-			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
-			}
-
-		};
-		return abDamageAll;
 	}
 
 	public SpellAbility getSpell() {
@@ -100,45 +72,11 @@ public class AbilityFactory_DealDamage {
 			@Override
 			public void resolve() {
 				doResolve(this);
-
 			}
 
 		}; // Spell
 
 		return spDealDamage;
-	}
-
-	public SpellAbility getSpellDamageAll(){
-		final SpellAbility spDamageAll = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
-			private static final long serialVersionUID = 8004957182752984818L;
-			final AbilityFactory af = AF;
-			final HashMap<String,String> params = af.getMapParams();
-
-			@Override
-			public String getStackDescription(){
-				if(params.containsKey("SpellDescription"))
-					return AF.getHostCard().getName() + " - " + params.get("SpellDescription");
-				else
-					return damageAllStackDescription(af, this);
-			}
-
-			public boolean canPlay(){
-				// super takes care of AdditionalCosts
-				return super.canPlay();	
-			}
-
-			public boolean canPlayAI()
-			{
-				return damageAllCanPlayAI(af, this);
-			}
-
-			@Override
-			public void resolve() {
-				damageAllResolve(af, this);
-			}
-
-		};
-		return spDamageAll;
 	}
 
 	public SpellAbility getDrawback() {
@@ -163,219 +101,12 @@ public class AbilityFactory_DealDamage {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return damageDoTriggerAI(AF, this, mandatory);
 			}
 
 		}; // Drawback
 
 		return dbDealDamage;
-	}
-
-	public SpellAbility getDrawbackDamageAll(){
-		final SpellAbility dbDamageAll = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()){
-			private static final long serialVersionUID = -6169562107675964474L;
-			final AbilityFactory af = AF;
-
-			@Override
-			public String getStackDescription(){
-				return damageAllStackDescription(af, this);
-			}
-
-			@Override
-			public void resolve() {
-				damageAllResolve(af, this);
-			}
-
-			@Override
-			public boolean chkAI_Drawback() {
-				//check AI life before playing this drawback?
-				return true;
-			}
-
-			@Override
-			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
-			}
-
-		};
-		return dbDamageAll;
-	}
-
-	private int getNumDamage(SpellAbility saMe) {
-		return AbilityFactory.calculateAmount(saMe.getSourceCard(), damage, saMe);
-	}
-
-	private boolean shouldTgtP(SpellAbility sa, int d, final boolean noPrevention) {
-		int restDamage = d;
-		Player human = AllZone.HumanPlayer;
-		Player comp = AllZone.ComputerPlayer;
-		
-		if (!noPrevention)
-			restDamage = human.predictDamage(restDamage, AF.getHostCard(), false);
-		else restDamage = human.staticReplaceDamage(restDamage, AF.getHostCard(), false);
-
-		if (restDamage == 0) return false;
-
-		if (!human.canLoseLife()) return false;
-		
-		CardList hand = AllZoneUtil.getPlayerHand(comp);
-
-		if (AF.isSpell()){
-			// If this is a spell, cast it instead of discarding
-			if ((AllZone.Phase.is(Constant.Phase.End_Of_Turn) || AllZone.Phase.is(Constant.Phase.Main2)) && 
-					AllZone.Phase.isPlayerTurn(comp) && (hand.size() > comp.getMaxHandSize()))
-				return true;
-		}
-
-		if(human.getLife() - restDamage < 5) // if damage from this spell would drop the human to less than 5 life
-			return true;
-
-		return false;
-	}
-
-	private Card chooseTgtC(final int d, final boolean noPrevention) {
-		CardList hPlay = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
-		hPlay = hPlay.getValidCards(AF.getAbTgt().getValidTgts(), AllZone.ComputerPlayer, AF.getHostCard());
-
-		hPlay = hPlay.filter(new CardListFilter() {
-			public boolean addCard(Card c) {
-				int restDamage = d;
-				if (!noPrevention)
-					restDamage = c.predictDamage(d,AF.getHostCard(),false);
-				else restDamage = AllZone.HumanPlayer.staticReplaceDamage(restDamage, AF.getHostCard(), false);
-				// will include creatures already dealt damage
-				return c.getKillDamage() <= restDamage && CardFactoryUtil.canTarget(AF.getHostCard(), c)
-				&& !c.getKeyword().contains("Indestructible") && !(c.getSVar("SacMe").length() > 0);
-			}
-		});
-
-		if(hPlay.size() > 0) {
-			Card best = CardFactoryUtil.AI_getBestCreature(hPlay);
-			return best;
-		}
-
-		return null;
-	}
-
-	private boolean doCanPlayAI(SpellAbility saMe)
-	{           
-		int dmg = getNumDamage(saMe);
-		boolean rr = AF.isSpell();
-
-		// temporarily disabled until better AI
-		if (AF.getAbCost().getSacCost())    {
-			if(AllZone.HumanPlayer.getLife() - dmg > 0) // only if damage from this ability would kill the human
-				return false;
-		}
-		if (AF.getAbCost().getSubCounter())  {
-			// +1/+1 counters only if damage from this ability would kill the human, otherwise ok
-			if(AllZone.HumanPlayer.getLife() - dmg > 0 && AF.getAbCost().getCounterType().equals(Counters.P1P1))
-				return false;
-		}
-		if (AF.getAbCost().getLifeCost())    {
-			if(AllZone.HumanPlayer.getLife() - dmg > 0) // only if damage from this ability would kill the human
-				return false;
-		}
-
-		if (!ComputerUtil.canPayCost(saMe))
-			return false;
-
-		// TODO handle proper calculation of X values based on Cost
-
-		// todo(sol): this should only happen during Players EOT or if Stuffy is going to die
-		if(AF.getHostCard().getName().equals("Stuffy Doll")) {
-			return true;
-		}
-
-		if (AF.isAbility())
-		{
-			Random r = new Random(); // prevent run-away activations
-			if(r.nextFloat() <= Math.pow(.6667, AF.getHostCard().getAbilityUsed()))
-				rr = true;
-		}
-
-		boolean bFlag = damageTargetAI(saMe);
-		if (!bFlag)
-			return false;
-
-		Ability_Sub subAb = saMe.getSubAbility();
-		if (subAb != null)
-			rr &= subAb.chkAI_Drawback();
-		return rr;
-
-	}
-
-	private boolean damageTargetAI(SpellAbility saMe) {
-		int dmg = getNumDamage(saMe);
-		Target tgt = AF.getAbTgt();
-		HashMap<String,String> params = AF.getMapParams();
-
-		boolean noPrevention = params.containsKey("NoPrevention");
-
-		if (tgt == null){
-			// todo: Improve circumstances where the Defined Damage is unwanted
-			ArrayList<Object> objects = AbilityFactory.getDefinedObjects(saMe.getSourceCard(), params.get("Defined"), saMe);
-
-			for(Object o : objects){
-				if (o instanceof Card){
-					//Card c = (Card)o;
-				}
-				else if (o instanceof Player){
-					Player p = (Player)o;
-					if (p.isComputer() && dmg >= p.getLife())	// Damage from this spell will kill me
-						return false;
-					if (p.isHuman() && !p.canLoseLife())
-						return false;
-				}			
-			}
-			return true;
-		}
-
-
-		tgt.resetTargets();
-
-		// target loop
-		while (tgt.getNumTargeted() < tgt.getMaxTargets(saMe.getSourceCard(), saMe)) {
-			// TODO: Consider targeting the planeswalker
-			if (tgt.canTgtCreatureAndPlayer()) {
-
-				if (shouldTgtP(saMe, dmg, noPrevention)) {
-					tgt.addTarget(AllZone.HumanPlayer);
-					continue;
-				}
-
-				Card c = chooseTgtC(dmg,noPrevention);
-				if (c != null) {
-					tgt.addTarget(c);
-					continue;
-				}
-			}
-
-			if (tgt.canTgtPlayer()) {
-				tgt.addTarget(AllZone.HumanPlayer);
-				continue;
-			}
-
-			if (tgt.canTgtCreature()) {
-				Card c = chooseTgtC(dmg,noPrevention);
-				if (c != null) {
-					tgt.addTarget(c);
-					continue;
-				}
-			}
-			// fell through all the choices, no targets left?
-			if (tgt.getNumTargeted() < tgt.getMinTargets(saMe.getSourceCard(), saMe)
-					|| tgt.getNumTargeted() == 0) {
-				tgt.resetTargets();
-				return false;
-			} else {
-				// todo is this good enough? for up to amounts?
-				break;
-			}
-		}
-		return true;
 	}
 
 	private String damageStackDescription(AbilityFactory af, SpellAbility sa){
@@ -412,6 +143,264 @@ public class AbilityFactory_DealDamage {
 
 		return sb.toString();
 	}
+
+	private int getNumDamage(SpellAbility saMe) {
+		return AbilityFactory.calculateAmount(saMe.getSourceCard(), damage, saMe);
+	}
+
+	private boolean doCanPlayAI(SpellAbility saMe)
+	{           
+		int dmg = getNumDamage(saMe);
+		boolean rr = AF.isSpell();
+
+		// temporarily disabled until better AI
+		if (AF.getAbCost().getSacCost())    {
+			if(AllZone.HumanPlayer.getLife() - dmg > 0) // only if damage from this ability would kill the human
+				return false;
+		}
+		if (AF.getAbCost().getSubCounter())  {
+			// +1/+1 counters only if damage from this ability would kill the human, otherwise ok
+			if(AllZone.HumanPlayer.getLife() - dmg > 0 && AF.getAbCost().getCounterType().equals(Counters.P1P1))
+				return false;
+		}
+		if (AF.getAbCost().getLifeCost())    {
+			if(AllZone.HumanPlayer.getLife() - dmg > 0) // only if damage from this ability would kill the human
+				return false;
+		}
+
+		if (!ComputerUtil.canPayCost(saMe))
+			return false;
+
+		// TODO handle proper calculation of X values based on Cost
+
+		// todo(sol): this should only happen during Humans EOT or if Stuffy is going to die
+		if(AF.getHostCard().getName().equals("Stuffy Doll")) {
+			return true;
+		}
+
+		if (AF.isAbility())
+		{
+			Random r = new Random(); // prevent run-away activations
+			if(r.nextFloat() <= Math.pow(.6667, AF.getHostCard().getAbilityUsed()))
+				rr = true;
+		}
+
+		boolean bFlag = damageTargetAI(saMe);
+		if (!bFlag)
+			return false;
+
+		Ability_Sub subAb = saMe.getSubAbility();
+		if (subAb != null)
+			rr &= subAb.chkAI_Drawback();
+		return rr;
+
+	}
+
+	private boolean shouldTgtP(SpellAbility sa, int d, final boolean noPrevention) {
+		int restDamage = d;
+		Player human = AllZone.HumanPlayer;
+		Player comp = AllZone.ComputerPlayer;
+
+		if (!noPrevention)
+			restDamage = human.predictDamage(restDamage, AF.getHostCard(), false);
+		else restDamage = human.staticReplaceDamage(restDamage, AF.getHostCard(), false);
+
+		if (restDamage == 0) return false;
+
+		if (!human.canLoseLife()) return false;
+
+		CardList hand = AllZoneUtil.getPlayerHand(comp);
+
+		if (AF.isSpell()){
+			// If this is a spell, cast it instead of discarding
+			if ((AllZone.Phase.is(Constant.Phase.End_Of_Turn) || AllZone.Phase.is(Constant.Phase.Main2)) && 
+					AllZone.Phase.isPlayerTurn(comp) && (hand.size() > comp.getMaxHandSize()))
+				return true;
+		}
+
+		if(human.getLife() - restDamage < 5) // if damage from this spell would drop the human to less than 5 life
+			return true;
+
+		return false;
+	}
+
+	private Card chooseTgtC(final int d, final boolean noPrevention, final Player pl, final boolean mandatory) {
+		Target tgt = AF.getAbTgt();
+		CardList hPlay = AllZoneUtil.getPlayerCardsInPlay(pl);
+		hPlay = hPlay.getValidCards(tgt.getValidTgts(), AllZone.ComputerPlayer, AF.getHostCard());
+
+		ArrayList<Object> objects = tgt.getTargets();
+		for(Object o : objects){
+			if (o instanceof Card){
+				Card c = (Card)o;
+				if (hPlay.contains(c))
+					hPlay.remove(c);
+			}
+		}
+		hPlay = hPlay.getTargetableCards(AF.getHostCard());
+
+		CardList killables = hPlay.filter(new CardListFilter() {
+			public boolean addCard(Card c) {
+				int restDamage = d;
+				if (!noPrevention)
+					restDamage = c.predictDamage(d,AF.getHostCard(),false);
+				else restDamage = pl.staticReplaceDamage(restDamage, AF.getHostCard(), false);
+				// will include creatures already dealt damage
+				return c.getKillDamage() <= restDamage && c.getShield() > 0 &&
+				!c.getKeyword().contains("Indestructible") && !(c.getSVar("SacMe").length() > 0);
+			}
+		});
+
+		Card targetCard;
+		if(pl.isHuman() && killables.size() > 0) {
+			targetCard = CardFactoryUtil.AI_getBestCreature(killables);
+
+			return targetCard;
+		}
+
+		if(hPlay.size() > 0) {
+			if (pl.isHuman())
+				targetCard = CardFactoryUtil.AI_getBestCreature(hPlay);
+			else
+				targetCard = CardFactoryUtil.AI_getWorstCreature(hPlay);
+
+			return targetCard;
+		}
+
+		return null;
+	}
+
+	private boolean damageTargetAI(SpellAbility saMe) {
+		int dmg = getNumDamage(saMe);
+		Target tgt = AF.getAbTgt();
+
+		if (tgt == null)
+			return damageChooseNontargeted(saMe, dmg);
+
+		return damageChoosingTargets(saMe, tgt, dmg, false);
+	}
+
+	private boolean damageChoosingTargets(SpellAbility saMe, Target tgt, int dmg, boolean mandatory){
+		boolean noPrevention = AF.getMapParams().containsKey("NoPrevention");
+
+		// target loop
+		tgt.resetTargets();
+
+		while (tgt.getNumTargeted() < tgt.getMaxTargets(saMe.getSourceCard(), saMe)) {
+			// TODO: Consider targeting the planeswalker
+			if (tgt.canTgtCreatureAndPlayer()) {
+
+				if (shouldTgtP(saMe, dmg, noPrevention)) {
+					if (tgt.addTarget(AllZone.HumanPlayer))
+						continue;
+				}
+
+				Card c = chooseTgtC(dmg,noPrevention, AllZone.HumanPlayer, mandatory);
+				if (c != null) {
+					tgt.addTarget(c);
+					continue;
+				}
+			}
+
+			if (tgt.canTgtCreature()) {
+				Card c = chooseTgtC(dmg, noPrevention, AllZone.HumanPlayer, mandatory);
+				if (c != null) {
+					tgt.addTarget(c);
+					continue;
+				}
+			}
+
+			// todo: Improve Damage, we shouldn't just target the player just because we can
+			if (tgt.canTgtPlayer()) {
+				if (tgt.addTarget(AllZone.HumanPlayer))
+					continue;
+			}
+			// fell through all the choices, no targets left?
+			if ((tgt.getNumTargeted() < tgt.getMinTargets(saMe.getSourceCard(), saMe)
+					|| tgt.getNumTargeted() == 0)) {
+				if (!mandatory){
+					tgt.resetTargets();
+					return false;
+				}
+				else{
+					// If the trigger is mandatory, gotta choose my own stuff now
+					return damageChooseRequiredTargets(saMe, tgt, dmg, mandatory);
+				}
+			} else {
+				// todo is this good enough? for up to amounts?
+				break;
+			}
+		}
+		return true;
+	}
+
+	private boolean damageChooseNontargeted(SpellAbility saMe, int dmg){
+		// todo: Improve circumstances where the Defined Damage is unwanted
+		ArrayList<Object> objects = AbilityFactory.getDefinedObjects(saMe.getSourceCard(), AF.getMapParams().get("Defined"), saMe);
+
+		for(Object o : objects){
+			if (o instanceof Card){
+				//Card c = (Card)o;
+			}
+			else if (o instanceof Player){
+				Player p = (Player)o;
+				if (p.isComputer() && dmg >= p.getLife())	// Damage from this spell will kill me
+					return false;
+				if (p.isHuman() && !p.canLoseLife())
+					return false;
+			}			
+		}
+		return true;
+	}
+
+	private boolean damageChooseRequiredTargets(SpellAbility saMe, Target tgt, int dmg, boolean mandatory){
+		// this is for Triggered targets that are mandatory
+		boolean noPrevention = AF.getMapParams().containsKey("NoPrevention");
+
+		while (tgt.getNumTargeted() < tgt.getMinTargets(saMe.getSourceCard(), saMe)) {
+			// TODO: Consider targeting the planeswalker
+			if (tgt.canTgtCreature()) {
+				Card c = chooseTgtC(dmg, noPrevention, AllZone.ComputerPlayer, mandatory);
+				if (c != null) {
+					tgt.addTarget(c);
+					continue;
+				}
+			}
+
+			if (tgt.canTgtPlayer()) {
+				if (tgt.addTarget(AllZone.ComputerPlayer))
+					continue;
+			}
+
+			// if we get here then there isn't enough targets, this is the only time we can return false
+			return false;
+		}
+		return true;
+	}
+
+	private boolean damageDoTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		if (!ComputerUtil.canPayCost(sa) && !mandatory)
+			return false;
+
+		int dmg = getNumDamage(sa);
+		Target tgt = sa.getTarget();
+		if(tgt == null) {
+			// If it's not mandatory check a few things
+			if (!mandatory && !damageChooseNontargeted(sa, dmg)){
+				return false;
+			}
+		}
+		else{
+			if (!damageChoosingTargets(sa, tgt, dmg, mandatory) && !mandatory)
+				return false;
+		}
+
+		if (sa.getSubAbility() != null)
+			return sa.getSubAbility().doTrigger(mandatory);
+
+		return true;
+	}
+
 
 	private void doResolve(SpellAbility saMe)
 	{
@@ -474,6 +463,256 @@ public class AbilityFactory_DealDamage {
 		}
 	}
 
+	// ******************************************************************************************************
+	// ***************************** DAMAGEALL **************************************************************
+	// ******************************************************************************************************
+	public SpellAbility getAbilityDamageAll(){
+
+		final SpellAbility abDamageAll = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+			private static final long serialVersionUID = -1831356710492849854L;
+			final AbilityFactory af = AF;
+
+			@Override
+			public String getStackDescription(){
+				return damageAllStackDescription(af, this);
+			}
+
+			@Override
+			public boolean canPlayAI() {
+				return damageAllCanPlayAI(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				damageAllResolve(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return damageAllDoTriggerAI(AF, this, mandatory);
+			}
+
+		};
+		return abDamageAll;
+	}
+
+	public SpellAbility getSpellDamageAll(){
+		final SpellAbility spDamageAll = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+			private static final long serialVersionUID = 8004957182752984818L;
+			final AbilityFactory af = AF;
+			final HashMap<String,String> params = af.getMapParams();
+
+			@Override
+			public String getStackDescription(){
+				if(params.containsKey("SpellDescription"))
+					return AF.getHostCard().getName() + " - " + params.get("SpellDescription");
+				else
+					return damageAllStackDescription(af, this);
+			}
+
+			public boolean canPlayAI()
+			{
+				return damageAllCanPlayAI(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				damageAllResolve(af, this);
+			}
+
+		};
+		return spDamageAll;
+	}
+
+	public SpellAbility getDrawbackDamageAll(){
+		final SpellAbility dbDamageAll = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()){
+			private static final long serialVersionUID = -6169562107675964474L;
+			final AbilityFactory af = AF;
+
+			@Override
+			public String getStackDescription(){
+				return damageAllStackDescription(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				damageAllResolve(af, this);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				//check AI life before playing this drawback?
+				return true;
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return damageAllDoTriggerAI(AF, this, mandatory);
+			}
+
+		};
+		return dbDamageAll;
+	}
+
+	private String damageAllStackDescription(final AbilityFactory af, SpellAbility sa){
+		StringBuilder sb = new StringBuilder();
+		String name = af.getHostCard().getName();
+		HashMap<String,String> params = af.getMapParams();
+		String desc = "";
+		if(params.containsKey("ValidDescription")) 
+			desc = params.get("ValidDescription");
+		int dmg = getNumDamage(sa);
+
+		sb.append(name).append(" - Deals "+dmg+" damage to "+desc);
+
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null) {
+			sb.append(abSub.getStackDescription());
+		}
+
+		return sb.toString();
+	}
+
+	private boolean damageAllCanPlayAI(final AbilityFactory af, final SpellAbility sa){
+		// AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
+		Random r = new Random();
+		Ability_Cost abCost = sa.getPayCosts();
+		final Card source = sa.getSourceCard();
+		final HashMap<String,String> params = af.getMapParams();
+
+		String validP = "";
+
+		//TODO: X may be something different than X paid
+		final int maxX = ComputerUtil.getAvailableMana().size() - CardUtil.getConvertedManaCost(source);
+		final int dmg = params.get("NumDmg").equals("X") ? maxX : getNumDamage(sa);
+
+
+		if(params.containsKey("ValidPlayers"))
+			validP = params.get("ValidPlayers");
+
+		CardList humanList = getKillableCreatures(af, sa, AllZone.HumanPlayer, dmg);
+		CardList computerList = getKillableCreatures(af, sa, AllZone.ComputerPlayer, dmg);
+
+		//abCost stuff that should probably be centralized...
+		if (abCost != null){
+			// AI currently disabled for some costs
+			if (abCost.getSacCost()){ 
+				//OK
+			}
+			if (abCost.getLifeCost()){
+				if (AllZone.ComputerPlayer.getLife() - abCost.getLifeAmount() < 4)
+					return false;
+			}
+			if (abCost.getDiscardCost()) ; //OK
+
+			if (abCost.getSubCounter()){
+				// OK
+			}
+		}
+
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+		/////
+
+		//Don't kill yourself
+		if (validP.contains("Each") 
+				&& AllZone.ComputerPlayer.getLife() <= AllZone.ComputerPlayer.predictDamage(dmg, source, false))
+			return false;
+
+		//if we can kill human, do it
+		if((validP.contains("Each") || validP.contains("EachOpponent")) 
+				&& AllZone.HumanPlayer.getLife() <= AllZone.HumanPlayer.predictDamage(dmg, source, false))
+			return true;
+
+		// prevent run-away activations - first time will always return true
+		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
+
+		// evaluate both lists and pass only if human creatures are more valuable
+		if(CardFactoryUtil.evaluateCreatureList(computerList) + 200 >= CardFactoryUtil.evaluateCreatureList(humanList))
+			return false;
+
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			chance &= subAb.chkAI_Drawback();
+
+		return ((r.nextFloat() < .6667) && chance);
+	}
+
+	private CardList getKillableCreatures(final AbilityFactory af, final SpellAbility sa, Player player, final int dmg){
+		final HashMap<String,String> params = af.getMapParams();
+		final Card source = af.getHostCard();
+
+		String validC = "";
+		if(params.containsKey("ValidCards")) 
+			validC = params.get("ValidCards");
+
+		//TODO: X may be something different than X paid		
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
+		list = list.getValidCards(validC.split(","), source.getController(), source);
+
+		CardListFilter filterKillable = new CardListFilter(){
+			public boolean addCard(Card c)
+			{
+				return (c.predictDamage(dmg, source, false) >= c.getKillDamage());
+			}
+		};
+
+		list = list.getNotKeyword("Indestructible");
+		list = list.filter(filterKillable);
+
+		return list;
+	}
+
+	private boolean damageAllDoTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		if (!ComputerUtil.canPayCost(sa) && !mandatory)
+			return false;
+
+		final Card source = sa.getSourceCard();
+		final HashMap<String,String> params = af.getMapParams();
+		String validP = "";
+
+		int maxX = ComputerUtil.getAvailableMana().size() - CardUtil.getConvertedManaCost(source);
+		final int dmg = params.get("NumDmg").equals("X") ? maxX : getNumDamage(sa);
+
+		if(params.containsKey("ValidPlayers"))
+			validP = params.get("ValidPlayers");
+
+		Target tgt = sa.getTarget();
+		do{	// A little trick to still check the SubAbilities, once we know we want to play it
+			if(tgt == null) {
+				// If it's not mandatory check a few things
+				if (mandatory)
+					return true;
+
+				else{
+					// Don't get yourself killed
+					if (validP.contains("Each") 
+							&& AllZone.ComputerPlayer.getLife() <= AllZone.ComputerPlayer.predictDamage(dmg, source, false))
+						return false;
+
+					//if we can kill human, do it
+					if((validP.contains("Each") || validP.contains("EachOpponent")) 
+							&& AllZone.HumanPlayer.getLife() <= AllZone.HumanPlayer.predictDamage(dmg, source, false))
+						break;
+
+					// Evaluate creatures getting killed
+					CardList humanList = getKillableCreatures(af, sa, AllZone.HumanPlayer, dmg);
+					CardList computerList = getKillableCreatures(af, sa, AllZone.ComputerPlayer, dmg);
+					if(CardFactoryUtil.evaluateCreatureList(computerList) + 50 >= CardFactoryUtil.evaluateCreatureList(humanList))
+						return false;
+				}
+			}
+			else{
+				// DamageAll doesn't really target right now
+			}
+		}while(false);
+
+		if (sa.getSubAbility() != null)
+			return sa.getSubAbility().doTrigger(mandatory);
+
+		return true;
+	}
+
 	private void damageAllResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
 		String DrawBack = params.get("SubAbility");
@@ -516,125 +755,5 @@ public class AbilityFactory_DealDamage {
 			else
 				CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
 		}
-	}
-
-	private String damageAllStackDescription(final AbilityFactory af, SpellAbility sa){
-		StringBuilder sb = new StringBuilder();
-		String name = af.getHostCard().getName();
-		HashMap<String,String> params = af.getMapParams();
-		String desc = "";
-		if(params.containsKey("ValidDescription")) 
-			desc = params.get("ValidDescription");
-		int dmg = getNumDamage(sa);
-
-		sb.append(name).append(" - Deals "+dmg+" damage to "+desc);
-
-		Ability_Sub abSub = sa.getSubAbility();
-		if (abSub != null) {
-			sb.append(abSub.getStackDescription());
-		}
-
-		return sb.toString();
-	}
-
-	private boolean damageAllCanPlayAI(final AbilityFactory af, final SpellAbility sa){
-    		// AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
-    		Random r = new Random();
-    		Ability_Cost abCost = sa.getPayCosts();
-    		final Card source = sa.getSourceCard();
-    		final HashMap<String,String> params = af.getMapParams();
-    		String numDmg = params.get("NumDmg");
-    		final int dmg = getNumDamage(sa); 
-    		String validC = "";
-    		String validP = "";
-    		final int maxX = ComputerUtil.getAvailableMana().size() - CardUtil.getConvertedManaCost(source);
-
-    		if(params.containsKey("ValidCards")) 
-    			validC = params.get("ValidCards");
-    		if(params.containsKey("ValidPlayers"))
-    			validP = params.get("ValidPlayers");
-
-    		CardList humanlist = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
-    		CardList computerlist = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
-
-    		humanlist = humanlist.getValidCards(validC.split(","), source.getController(), source);
-    		computerlist = computerlist.getValidCards(validC.split(","), source.getController(), source);
-    		
-    		CardListFilter filterX = new CardListFilter(){
-    			public boolean addCard(Card c)
-    			{
-    				return (c.predictDamage(maxX, source, false) >= c.getKillDamage());
-    			}
-    		};
-    		
-    		CardListFilter filter = new CardListFilter(){
-    			public boolean addCard(Card c)
-    			{
-    				return (c.predictDamage(dmg, source, false) >= c.getKillDamage());
-    			}
-    		};
-
-    		humanlist = humanlist.getNotKeyword("Indestructible");
-    		computerlist = computerlist.getNotKeyword("Indestructible");
-    		
-    		//TODO: X may be something different than X paid
-    		if(numDmg.equals("X")) {
-    			humanlist = humanlist.filter(filterX);
-    			computerlist = computerlist.filter(filterX);
-    		}
-    		else {
-    			humanlist = humanlist.filter(filter);
-    			computerlist = computerlist.filter(filter);
-    		}
-    		
-    		
-    		//abCost stuff that should probably be centralized...
-    		if (abCost != null){
-    			// AI currently disabled for some costs
-    			if (abCost.getSacCost()){ 
-    				//OK
-    			}
-    			if (abCost.getLifeCost()){
-    				if (AllZone.ComputerPlayer.getLife() - abCost.getLifeAmount() < 4)
-    					return false;
-    			}
-    			if (abCost.getDiscardCost()) //OK
-
-    			if (abCost.getSubCounter()){
-    					// OK
-    			}
-    		}
-
-    		if (!ComputerUtil.canPayCost(sa))
-    			return false;
-    		/////
-    		
-    		//Don't kill yourself
-    		if (validP.contains("Each") 
-    				&& AllZone.ComputerPlayer.getLife() <= AllZone.ComputerPlayer.predictDamage(dmg, source, false))
-				return false;
-    		
-    		//TODO: X may be something different than X paid
-			if ((validP.contains("Each") || validP.contains("EachOpponent")) && numDmg.equals("X") 
-					&& AllZone.HumanPlayer.getLife() <= AllZone.HumanPlayer.predictDamage(maxX, source, false))
-					return true;
-    		
-    		//if we can kill human, do it
-    		if((validP.contains("Each") || validP.contains("EachOpponent")) 
-    				&& AllZone.HumanPlayer.getLife() <= AllZone.HumanPlayer.predictDamage(dmg, source, false))
-    			return true;
-
-    		 // prevent run-away activations - first time will always return true
-    		 boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
-
-    		 // evaluate both lists and pass only if human creatures are more valuable
-			 if(CardFactoryUtil.evaluateCreatureList(computerlist) + 200 >= CardFactoryUtil.evaluateCreatureList(humanlist))
-				 return false;
-
-    		 Ability_Sub subAb = sa.getSubAbility();
-    		 if (subAb != null)
-    		 	chance &= subAb.chkAI_Drawback();
-
-    		 return ((r.nextFloat() < .6667) && chance);
 	}
 }
