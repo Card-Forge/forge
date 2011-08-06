@@ -2777,6 +2777,7 @@ res/cardsfolder/inferno_titan.txt -text svneol=native#text/plain
 res/cardsfolder/infest.txt svneol=native#text/plain
 res/cardsfolder/infested_roothold.txt -text svneol=native#text/plain
 res/cardsfolder/infiltrate.txt -text svneol=native#text/plain
+res/cardsfolder/infiltration_lens.txt -text svneol=native#text/plain
 res/cardsfolder/infiltrator_il_kor.txt -text svneol=native#text/plain
 res/cardsfolder/inflame.txt svneol=native#text/plain
 res/cardsfolder/information_dealer.txt -text svneol=native#text/plain
