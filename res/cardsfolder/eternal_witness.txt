@@ -1,9 +1,10 @@
 Name:Eternal Witness
 ManaCost:1 G G
 Types:Creature Human Shaman
-Text:When Eternal Witness enters the battlefield, you may return target card from your graveyard to your hand.
+Text:no text
 PT:2/1
-K:etbReturnTgt:1/MayReturn:Card:Hand
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | Optional$ True | TriggerDescription$ When CARDNAME enters the battlefield, you may return target card from your graveyard to your hand.
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card51628.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/86.jpg
