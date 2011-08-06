@@ -36,9 +36,7 @@ public class AbilityFactory_CounterMagic {
 	public AbilityFactory_CounterMagic(AbilityFactory newAF) {
 		af = newAF;
 		params = af.getMapParams();
-		if (params.containsKey("Type")) {
-			targetType = params.get("Type");
-		}
+		targetType = params.containsKey("Type") ? params.get("Type") : "Spell";
 		destination = params.containsKey("Destination") ? params.get("Destination") : "Graveyard";
 		if(params.containsKey("CounterValid")) {
 			splitTargetingRestrictions = params.get("CounterValid").split(",");
@@ -69,7 +67,7 @@ public class AbilityFactory_CounterMagic {
 			public boolean canPlay() {
 				// super takes care of AdditionalCosts
 				//important to keep super.canPlay() first due to targeting hack in counterCanPlay
-				return super.canPlay() && counterCanPlay(af, this);	
+				return super.canPlay() && counterCanPlay(af, this);	 
 			}
 
 			@Override

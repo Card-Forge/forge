@@ -519,7 +519,7 @@ public class GameActionUtil {
 		playCard_Primordial_Sage(c);
 		playCard_Quirion_Dryad(c);
 		//playCard_Enchantress_Draw(c);
-		playCard_Mold_Adder(c);
+		//playCard_Mold_Adder(c);
 		playCard_Fable_of_Wolf_and_Owl(c);
 		playCard_Kor_Firewalker(c);
 		playCard_Curse_of_Wizardry(c);
@@ -2730,7 +2730,8 @@ public class GameActionUtil {
 		}
 
 	}//Quirion
-
+	
+	/*
 	public static void playCard_Mold_Adder(Card c) {
 		Player opponent = c.getController().getOpponent();
 
@@ -2764,7 +2765,7 @@ public class GameActionUtil {
 			}
 		}
 
-	}//Quirion
+	}//Quirion*/
 
 	public static void playCard_Fable_of_Wolf_and_Owl(Card c) {
 		final Player controller = c.getController();
@@ -4531,8 +4532,6 @@ public class GameActionUtil {
 		//if (AllZone.GameAction.isCardInPlay(c)){
 		if(c.getName().equals("Goblin Sharpshooter")) destroyCreature_Goblin_Sharpshooter(c, destroyed);
 		else if(c.getName().equals("Dingus Staff")) destroyCreature_Dingus_Staff(c, destroyed);
-		else if(c.getName().equals("Dauthi Ghoul") && destroyed.getKeyword().contains("Shadow")) destroyCreature_Dauthi_Ghoul(
-				c, destroyed);
 		else if(c.getName().equals("Prowess of the Fair") && destroyed.isType("Elf")
 				&& !destroyed.isToken() && !c.equals(destroyed)
 				&& destroyed.getController().equals(c.getController())) destroyCreature_Prowess_of_the_Fair(c,
@@ -4570,7 +4569,8 @@ public class GameActionUtil {
 		
 		AllZone.Stack.add(ability);
 	}
-
+	
+	/*
 	private static void destroyCreature_Dauthi_Ghoul(Card c, Card destroyed) {
 		final Card crd = c;
 		Ability ability = new Ability(c, "0") {
@@ -4581,7 +4581,7 @@ public class GameActionUtil {
 		};
 		if(AllZone.GameAction.isCardInPlay(c)) ability.setStackDescription("Dauthi Ghoul - gets a +1/+1 counter.");
 		AllZone.Stack.add(ability);
-	}
+	}*/
 
 	private static void destroyCreature_Prowess_of_the_Fair(Card c, Card destroyed) {
         final Card crd = c;
