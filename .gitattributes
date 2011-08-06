@@ -4924,6 +4924,7 @@ res/cardsfolder/quest_for_the_nihil_stone.txt -text svneol=native#text/plain
 res/cardsfolder/quick_sliver.txt -text svneol=native#text/plain
 res/cardsfolder/quicksand.txt -text svneol=native#text/plain
 res/cardsfolder/quicksilver_amulet.txt -text svneol=native#text/plain
+res/cardsfolder/quicksilver_behemoth.txt -text svneol=native#text/plain
 res/cardsfolder/quicksilver_dagger.txt -text svneol=native#text/plain
 res/cardsfolder/quicksilver_gargantuan.txt svneol=native#text/plain
 res/cardsfolder/quicksilver_geyser.txt -text svneol=native#text/plain
