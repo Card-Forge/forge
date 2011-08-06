@@ -1,0 +1,11 @@
+Name:Leonin Battlemage
+ManaCost:3 W
+Types:Creature Cat Wizard
+Text:no text
+PT:2/3
+K:WheneverKeyword:CastSpell/Controller::Play:UntapPermanent:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a spell, you may untap Leonin Battlemage.
+K:abPumpTgtC T:+1/+1
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_battlemage.jpg
+End
