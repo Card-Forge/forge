@@ -8,4 +8,5 @@ T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescri
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Creature.nonBlack | NoRegen$ True | TgtPrompt$ Select target nonblack creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skinthinner.jpg
+SetInfo:LGN|Common|http://magiccards.info/scans/en/le/80.jpg
 End

@@ -7,4 +7,5 @@ A:SP$PumpAll | Cost$ R T | ValidCards$ Creature.attacking | KW$ First Strike | S
 SVar:Rarity:Uncommon
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_coalflinger.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/152.jpg
 End

@@ -10,4 +10,5 @@ SVar:MaxTgts:Count$Valid Creature
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alexi_zephyr_mage.jpg
+SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/28.jpg
 End

@@ -8,4 +8,5 @@ A:AB$ChangeZone | Cost$ T Sac<1/Land> | Origin$ Library | Destination$ Battlefie
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_glider.jpg
+SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/58.jpg
 End

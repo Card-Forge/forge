@@ -7,4 +7,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact,Enchantment | TgtPro
 SVar:BuffedBy:Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_shards.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/233.jpg
 End

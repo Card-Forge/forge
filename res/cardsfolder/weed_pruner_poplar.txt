@@ -7,4 +7,5 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/weed_pruner_poplar.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/83.jpg
 End

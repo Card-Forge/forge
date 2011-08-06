@@ -7,4 +7,5 @@ A:AB$Pump | Cost$ Sac<1/Land> | NumAtt$ +2 | ActivationLimit$ 1 | SpellDescripti
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_avalanchers.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/151.jpg
 End
