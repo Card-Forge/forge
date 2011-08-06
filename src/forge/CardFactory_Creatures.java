@@ -5806,7 +5806,7 @@ public class CardFactory_Creatures {
                 
                 CardList getCreature() {
 
-                	final int total = CardFactoryUtil.getLandsInPlay(AllZone.ComputerPlayer).size();
+                	final int total = AllZoneUtil.getPlayerLandsInPlay(AllZone.ComputerPlayer).size();
                     //toughness of 1
                     CardList list = CardFactoryUtil.AI_getHumanCreature(total, card, true);
                     list = list.filter(new CardListFilter() {

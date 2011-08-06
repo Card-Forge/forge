@@ -4288,21 +4288,25 @@ public class CardFactoryUtil {
         }
         return s;
     }
-
+    
+    @Deprecated
     public static CardList getCards(String cardName)
     {
-    	CardList list = new CardList();
+    	return AllZoneUtil.getCardsInPlay(cardName);
+    	/*CardList list = new CardList();
     	list.addAll(AllZone.Human_Play.getCards());
     	list.addAll(AllZone.Computer_Play.getCards());
     	list = list.getName(cardName);
-    	return list;
+    	return list;*/
     }
     
+    @Deprecated
     public static CardList getCards(String cardName, Player player) {
-    	PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+    	return AllZoneUtil.getPlayerCardsInPlay(player, cardName);
+    	/*PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
         CardList list = new CardList(play.getCards());
         list = list.getName(cardName);
-        return list;
+        return list;*/
     }
     
     public static int countBasicLandTypes(Player player) {
@@ -4388,8 +4392,9 @@ public class CardFactoryUtil {
     		return null;
     }
     
+    @Deprecated
     public static CardList makeToken(String name, String imageName, Card source, String manaCost, String[] types, int baseAttack, int baseDefense, String[] intrinsicKeywords) {
-    	// todo(sol) this function shouldn't be called, better to call makeToken with String controller as third paramter
+    	// todo(sol) this function shouldn't be called, better to call makeToken with Player controller as third paramter
     	CardList list = new CardList();
         Card c = new Card();
         c.setName(name);
@@ -4598,7 +4603,7 @@ public class CardFactoryUtil {
      */
     public static Card getWorstLand(Player player) {
     	Card worstLand = null;
-    	CardList lands = CardFactoryUtil.getLandsInPlay(player);
+    	CardList lands = AllZoneUtil.getPlayerLandsInPlay(player);
     	//first, check for tapped, basic lands
     	for( int i = 0; i < lands.size(); i++ ) {
     		Card tmp = lands.get(i);
@@ -4636,28 +4641,6 @@ public class CardFactoryUtil {
     	return worstLand;
     }//end getWorstLand
 
-    /**
-     * getLandsInPlay(Player)
-     *
-     * This function returns a CardList of all lands that the given
-     * player has in Constant.Zone.Play
-     *
-     * @param player - AllZone.HumanPlayer or AllZone.ComputerPlayer
-     * @return a CardList of that players lands
-     */
-    public static CardList getLandsInPlay(Player player) {
-    	PlayerZone compBattlezone = AllZone.getZone(Constant.Zone.Play, player);
-    	CardList list = new CardList(compBattlezone.getCards());
-    	list = list.filter(new CardListFilter() {
-    		public boolean addCard(Card c) {
-    			if(c.isLand()) return true;
-    			else return false;
-    		}
-    	});
-    	return list;
-    }
-
-    
     //may return null
     static public Card getRandomCard(CardList list) {
         if(list.size() == 0) return null;
