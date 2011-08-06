@@ -1041,7 +1041,7 @@ public class CardFactory_Creatures {
                     list = list.getName(card.getName());
                     list.get(0).getController().discard(list.get(0), ability);
                     
-                    AllZone.Stack.push(ability);
+                    AllZone.Stack.add(ability);
                     stop();
                 }
             };
@@ -1112,7 +1112,7 @@ public class CardFactory_Creatures {
                     list = list.getName(card.getName());
                     list.get(0).getController().discard(list.get(0), ability);
                     
-                    AllZone.Stack.push(ability);
+                    AllZone.Stack.add(ability);
                     stop();
                 }
             };
@@ -1173,7 +1173,7 @@ public class CardFactory_Creatures {
                     list = list.getName(card.getName());
                     list.get(0).getController().discard(list.get(0), ability);
                     
-                    AllZone.Stack.push(ability);
+                    AllZone.Stack.add(ability);
                     stop();
                 }
             };
@@ -8400,7 +8400,7 @@ public class CardFactory_Creatures {
                     else if(ability.canPlayAI()) {
                         ability.chooseTargetAI();
                         //need to add this to the stack
-                        AllZone.Stack.push(ability);
+                        AllZone.Stack.add(ability);
                     }
                     
                 }//execute()

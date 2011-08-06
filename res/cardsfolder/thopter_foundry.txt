@@ -2,6 +2,7 @@ Name:Thopter Foundry
 ManaCost:WB U
 Types:Artifact
 Text:no text
+SVar:AIPreference:SacCost$Permanent.namedSword of the Meek
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thopter_foundry.jpg
 End

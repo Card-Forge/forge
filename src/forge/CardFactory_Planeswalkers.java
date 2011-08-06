@@ -93,7 +93,7 @@ class CardFactory_Planeswalkers {
                         check = AllZone.Phase.getTurn();
                         turn[0] = AllZone.Phase.getTurn();
                         
-                        AllZone.Stack.push(ability2);
+                        AllZone.Stack.add(ability2);
                     }
                     stop();
                 }//showMessage()
@@ -183,7 +183,7 @@ class CardFactory_Planeswalkers {
                     if(check != AllZone.Phase.getTurn()) {
                         check = AllZone.Phase.getTurn();
                         turn[0] = AllZone.Phase.getTurn();
-                        AllZone.Stack.push(ability3);
+                        AllZone.Stack.add(ability3);
                     }
                     stop();
                 }//showMessage()
@@ -228,7 +228,7 @@ class CardFactory_Planeswalkers {
                     if(check != AllZone.Phase.getTurn()) {
                         check = AllZone.Phase.getTurn();
                         turn[0] = AllZone.Phase.getTurn();
-                        AllZone.Stack.push(ability1);
+                        AllZone.Stack.add(ability1);
                     }
                     stop();
                 }//showMessage()
@@ -329,7 +329,7 @@ class CardFactory_Planeswalkers {
                         turn[0] = AllZone.Phase.getTurn();
                         
 
-                        AllZone.Stack.push(ability2);
+                        AllZone.Stack.add(ability2);
                     }
                     stop();
                 }//showMessage()
@@ -403,7 +403,7 @@ class CardFactory_Planeswalkers {
                     if(check != AllZone.Phase.getTurn()) {
                         check = AllZone.Phase.getTurn();
                         turn[0] = AllZone.Phase.getTurn();
-                        AllZone.Stack.push(ability3);
+                        AllZone.Stack.add(ability3);
                     }
                     stop();
                 }//showMessage()
@@ -476,7 +476,7 @@ class CardFactory_Planeswalkers {
                     if(check != AllZone.Phase.getTurn()) {
                         check = AllZone.Phase.getTurn();
                         turn[0] = AllZone.Phase.getTurn();
-                        AllZone.Stack.push(ability1);
+                        AllZone.Stack.add(ability1);
                     }
                     stop();
                 }//showMessage()
@@ -607,7 +607,7 @@ class CardFactory_Planeswalkers {
                     if(check != AllZone.Phase.getTurn()) {
                         check = AllZone.Phase.getTurn();
                         turn[0] = AllZone.Phase.getTurn();
-                        AllZone.Stack.push(ability3);
+                        AllZone.Stack.add(ability3);
                     }
                     stop();
                 }//showMessage()
@@ -702,7 +702,7 @@ class CardFactory_Planeswalkers {
                         turn[0] = AllZone.Phase.getTurn();
                         
 
-                        AllZone.Stack.push(ability2);
+                        AllZone.Stack.add(ability2);
                     }
                     stop();
                 }//showMessage()
@@ -787,7 +787,7 @@ class CardFactory_Planeswalkers {
                     if(check != AllZone.Phase.getTurn()) {
                         check = AllZone.Phase.getTurn();
                         turn[0] = AllZone.Phase.getTurn();
-                        AllZone.Stack.push(ability1);
+                        AllZone.Stack.add(ability1);
                     }
                     stop();
                 }//showMessage()
@@ -911,7 +911,7 @@ class CardFactory_Planeswalkers {
                     if(check != AllZone.Phase.getTurn()) {
                         check = AllZone.Phase.getTurn();
                         turn[0] = AllZone.Phase.getTurn();
-                        AllZone.Stack.push(ability2);
+                        AllZone.Stack.add(ability2);
                     }
                     stop();
                 }//showMessage()
@@ -955,7 +955,7 @@ class CardFactory_Planeswalkers {
                     if(check != AllZone.Phase.getTurn()) {
                         check = AllZone.Phase.getTurn();
                         turn[0] = AllZone.Phase.getTurn();
-                        AllZone.Stack.push(ability3);
+                        AllZone.Stack.add(ability3);
                     }
                     stop();
                 }//showMessage()
@@ -1001,7 +1001,7 @@ class CardFactory_Planeswalkers {
                     if(check != AllZone.Phase.getTurn()) {
                         check = AllZone.Phase.getTurn();
                         turn[0] = AllZone.Phase.getTurn();
-                        AllZone.Stack.push(ability1);
+                        AllZone.Stack.add(ability1);
                     }
                     stop();
                 }//showMessage()
@@ -1119,7 +1119,7 @@ class CardFactory_Planeswalkers {
                     if(check != AllZone.Phase.getTurn()) {
                         check = AllZone.Phase.getTurn();
                         turn[0] = AllZone.Phase.getTurn();
-                        AllZone.Stack.push(ability2);
+                        AllZone.Stack.add(ability2);
                     }
                     stop();
                 }//showMessage()
@@ -1181,7 +1181,7 @@ class CardFactory_Planeswalkers {
                     if(check != AllZone.Phase.getTurn()) {
                         check = AllZone.Phase.getTurn();
                         turn[0] = AllZone.Phase.getTurn();
-                        AllZone.Stack.push(ability3);
+                        AllZone.Stack.add(ability3);
                     }
                     stop();
                 }//showMessage()
@@ -1667,7 +1667,7 @@ class CardFactory_Planeswalkers {
                         check = AllZone.Phase.getTurn();
                         turn[0] = AllZone.Phase.getTurn();
                         
-                        AllZone.Stack.push(ability2);
+                        AllZone.Stack.add(ability2);
                         stop();
                     }
                 }
@@ -1752,7 +1752,7 @@ class CardFactory_Planeswalkers {
                         check = AllZone.Phase.getTurn();
                         turn[0] = AllZone.Phase.getTurn();
                         
-                        AllZone.Stack.push(ability3);
+                        AllZone.Stack.add(ability3);
                         stop();
                     }
                 }
@@ -2004,7 +2004,7 @@ class CardFactory_Planeswalkers {
                  {
                    check = AllZone.Phase.getTurn();
                    turn[0] = AllZone.Phase.getTurn();
-                   AllZone.Stack.push(ability1);
+                   AllZone.Stack.add(ability1);
                  }
                  stop();
                }//showMessage()
@@ -2516,7 +2516,7 @@ class CardFactory_Planeswalkers {
                         check = AllZone.Phase.getTurn();
                         turn[0] = AllZone.Phase.getTurn();
                         
-                        AllZone.Stack.push(ability1);
+                        AllZone.Stack.add(ability1);
                         stop();
                     }
                 }
@@ -3156,7 +3156,7 @@ class CardFactory_Planeswalkers {
                     if(check != AllZone.Phase.getTurn()) {
                         check = AllZone.Phase.getTurn();
                         turn[0] = AllZone.Phase.getTurn();
-                        AllZone.Stack.push(ability3);
+                        AllZone.Stack.add(ability3);
                     }
                     stop();
                 }//showMessage()
@@ -3200,7 +3200,7 @@ class CardFactory_Planeswalkers {
                     if(check != AllZone.Phase.getTurn()) {
                         check = AllZone.Phase.getTurn();
                         turn[0] = AllZone.Phase.getTurn();
-                        AllZone.Stack.push(ability1);
+                        AllZone.Stack.add(ability1);
                     }
                     stop();
                 }//showMessage()
@@ -3243,7 +3243,7 @@ class CardFactory_Planeswalkers {
                     if(check != AllZone.Phase.getTurn()) {
                         check = AllZone.Phase.getTurn();
                         turn[0] = AllZone.Phase.getTurn();
-                        AllZone.Stack.push(ability2);
+                        AllZone.Stack.add(ability2);
                     }
                     stop();
                 }//showMessage()
@@ -3394,7 +3394,7 @@ class CardFactory_Planeswalkers {
                     if(check != AllZone.Phase.getTurn()) {
                         check = AllZone.Phase.getTurn();
                         turn[0] = AllZone.Phase.getTurn();
-                        AllZone.Stack.push(ability3);
+                        AllZone.Stack.add(ability3);
                     }
                     stop();
                 }//showMessage()

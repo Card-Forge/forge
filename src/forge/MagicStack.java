@@ -396,7 +396,8 @@ public class MagicStack extends MyObservable {
 		return stack.size();
 	}
 
-	public void push(SpellAbility sp) {
+	// Push should only be used by add.
+	private void push(SpellAbility sp) {
 		if (null == sp.getActivatingPlayer()) {
 			sp.setActivatingPlayer(sp.getSourceCard().getController());
 			System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
@@ -490,7 +491,7 @@ public class MagicStack extends MyObservable {
 				}
 			}
 		} else {
-			// Spell fizzles, alert player?
+			// TODO: Spell fizzles, what's the best way to alert player?
 			Log.debug(c.getName() + " ability fizzles.");
 		}
 

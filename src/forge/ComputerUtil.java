@@ -612,6 +612,17 @@ public class ComputerUtil
 	  }
   }
   
+  static public Card getCardPreference(Card activate, String pref, CardList typeList){
+	     String[] prefValid = activate.getSVar("AIPreference").split("\\$");
+	     if (prefValid[0].equals(pref)){
+	        CardList prefList = typeList.getValidCards(prefValid[1].split(","));
+	        if (prefList.size() != 0){
+	           prefList.shuffle();
+	           return prefList.get(0);
+	        }    
+	     }
+	     return null;
+	  }
   
   static public Card chooseSacrificeType(String type, Card activate, Card target){
       PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
@@ -622,6 +633,10 @@ public class ComputerUtil
 	  
 	  if (typeList.size() == 0)
 		  return null;
+	  
+	  Card prefCard = getCardPreference(activate, "SacCost", typeList);
+	  if (prefCard != null)
+		  return prefCard;
 	  
       CardListUtil.sortAttackLowFirst(typeList);
 	  return typeList.get(0);

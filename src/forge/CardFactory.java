@@ -8304,7 +8304,7 @@ public class CardFactory implements NewConstants {
                     //this order is very important, do not change
                     stop();
                     if (paid)
-                    	AllZone.Stack.push(ability);
+                    	AllZone.Stack.add(ability);
                 }
             };//Input
             ability.setBeforePayMana(payLife);
@@ -8775,7 +8775,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void showMessage() {
-                    AllZone.Stack.push(ability2);
+                    AllZone.Stack.add(ability2);
                     stop();
                 }//showMessage()
             });
@@ -10205,89 +10205,28 @@ public class CardFactory implements NewConstants {
        
         //*************** START *********** START **************************
         else if(cardName.equals("Thopter Foundry")) {
-            final Player player = card.getController();
-            
-            final SpellAbility ability = new Ability(card, "1") {
-                @Override
-                public void chooseTargetAI() {
-                    Card c;
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-                    
-                    CardList meek = new CardList();
-                    meek.addAll(play.getCards());
-                    meek = meek.getName("Sword of the Meek");
-                    
-                    if(meek.size() >= 1) c = meek.get(0);
-                    else c = getArtifact();
-                    if(c != null) setTargetCard(c);
-                    
-                }
-                
-                public Card getArtifact() {
-                    //target creature that is going to attack
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-                    
-                    CardList arts = new CardList();
-                    arts.addAll(play.getCards());
-                    arts = arts.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isArtifact()
-                                    && !c.isToken()
-                                    && (CardUtil.getConvertedManaCost(c.getManaCost()) <= 1 && !c.equals(card) || c.getName().equals(
-                                            "Sword of the Meek"));
-                        }
-                    });
-                    
-                    if(arts.size() > 0) {
-                        arts.shuffle();
-                        return arts.get(0);
-                    } else return null;
-                }
 
+            Ability_Cost abCost = new Ability_Cost("1 Sac<1/Artifact.nonToken>", cardName, true);
+            final SpellAbility ability = new Ability_Activated(card, abCost, null) {
+				private static final long serialVersionUID = 1L;
 
                 @Override
                 public boolean canPlayAI() {
                     String phase = AllZone.Phase.getPhase();
-                    return phase.equals(Constant.Phase.Main2) && getArtifact() != null;
+                    return phase.equals(Constant.Phase.Main2);
                 }
                 
                 @Override
                 public void resolve() {
-                    Card c = getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(c)) {
-                        AllZone.GameAction.sacrifice(c);
                     makeToken();
                     card.getController().gainLife(1, card);
-                    }
                 }//resolve
                 
                 public void makeToken() {
-                    CardFactoryUtil.makeToken("Thopter", "U 1 1 Thopter", card.getController(), "U", new String[] {
+                    CardFactoryUtil.makeToken("Thopter", "U 1 1 Thopter", getActivatingPlayer(), "U", new String[] {
                             "Artifact", "Creature", "Thopter"}, 1, 1, new String[] {"Flying"});
                 }
             };
-            
-            Input runtime = new Input() {
-                
-                private static final long serialVersionUID = 3557158378851031238L;
-                
-                @Override
-                public void showMessage() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-                    
-                    CardList arts = new CardList();
-                    arts.addAll(play.getCards());
-                    arts = arts.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isArtifact() && !c.isToken();
-                        }
-                    });
-                    
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(ability, arts,
-                            "Select a non-token Artifact to sacrifice", false, false));
-                    
-                }//showMessage()
-            };//Input
             
             card.addSpellAbility(ability);
             ability.setDescription("1, Sacrifice a nontoken artifact: Put a 1/1 blue Thopter artifact creature token with flying onto the battlefield. You gain 1 life.");
@@ -10295,9 +10234,6 @@ public class CardFactory implements NewConstants {
             StringBuilder sb = new StringBuilder();
             sb.append(card.getName()).append(" - Put a 1/1 blue Thopter artifact creature token with flying onto the battlefield. You gain 1 life.");
             ability.setStackDescription(sb.toString());
-            
-            ability.setBeforePayMana(runtime);
-            
         }//*************** END ************ END **************************
 
         

@@ -2770,7 +2770,7 @@ public class CardFactoryUtil {
                 if(card.isCreature() && zone.is(Constant.Zone.Play) && canTarget(spell, card)) {
                     spell.setTargetCard(card);
                     spell.getSourceCard().tap();
-                    AllZone.Stack.push(spell);
+                    AllZone.Stack.add(spell);
                     stop();
                 }
             }
@@ -2803,7 +2803,7 @@ public class CardFactoryUtil {
                 		&& card.getKeyword().contains(keyword)) {
                     spell.setTargetCard(card);
                     spell.getSourceCard().tap();
-                    AllZone.Stack.push(spell);
+                    AllZone.Stack.add(spell);
                     stop();
                 }
             }
@@ -2933,7 +2933,7 @@ public class CardFactoryUtil {
                         && !card.getKeyword().contains("Shroud")) {
                     spell.setTargetCard(card);
                     spell.getSourceCard().tap();
-                    AllZone.Stack.push(spell);
+                    AllZone.Stack.add(spell);
                     stop();
                 }
             }

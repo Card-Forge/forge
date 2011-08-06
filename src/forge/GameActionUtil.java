@@ -6843,7 +6843,7 @@ public class GameActionUtil {
 
 			};// Ability
 			ability.setStackDescription("Squee gets returned from graveyard to hand.");
-			AllZone.Stack.push(ability);
+			AllZone.Stack.add(ability);
 		} // if creatures > 0
 
 	}
@@ -13985,7 +13985,7 @@ public class GameActionUtil {
 				};
 				ability.setStackDescription("Baru, Fist of Krosa - creatures get +1/+1 until end of turn.");
 
-				if(!all.getName("Baru, Fist of Krosa").isEmpty()) AllZone.Stack.push(ability);
+				if(!all.getName("Baru, Fist of Krosa").isEmpty()) AllZone.Stack.add(ability);
 			}// outer for
 
 			old = current;
@@ -14064,7 +14064,7 @@ public class GameActionUtil {
 				ability.setStackDescription(sb.toString());
 
 				if(n[0] != 0) {
-					AllZone.Stack.push(ability);
+					AllZone.Stack.add(ability);
 				}
 			}// outer for
 
