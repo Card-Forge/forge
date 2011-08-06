@@ -314,7 +314,7 @@ public class QuestBattle extends QuestSelectablePanel {
         
         addToDeckList("Tarzan 1", "easy", "WG deck with jungle creatures and pump spells");
         addToDeckList("Tarzan 2", "medium", "WG deck with Silverback Ape, jungle creatures and pump spells");
-        addToDeckList("Terminator 3", "hard", "U deck with Master of Etherium, Control Magic, Memnarch and many artifacts");
+        addToDeckList("Terminator 3", "hard", "Mono B artifact deck with The Abyss");
         addToDeckList("The Great Gazoo 3", "hard", "WR deck with, red damage all spells and pro from red creatures");
 //        addToDeckList("Thing 2", "medium", "WG Elves deck");
 //        addToDeckList("Thing 3", "hard", "G Garruk Elves deck");
