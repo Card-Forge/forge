@@ -18778,12 +18778,11 @@ public class CardFactory implements NewConstants {
         		@Override
         		public void resolve() {
         			CardList all = new CardList();
-        			all.addAll(getHumanCreatures().toArray());
-        			all.addAll(getComputerCreatures().toArray());
+        			all.add(getHumanCreatures());
+        			all.add(getComputerCreatures());
 
         			for(int i = 0; i < all.size(); i++) {
         				Card c = all.get(i);
-        				System.out.println("Consume the Meek: " + c);
         				AllZone.GameAction.destroyNoRegeneration(c);
         			}
         		}// resolve()
@@ -18795,17 +18794,13 @@ public class CardFactory implements NewConstants {
         		};
 
         		private CardList getHumanCreatures() {
-        			CardList human = new CardList();
-        			human.addAll(AllZone.Human_Play.getCards());
-        			human = human.filter(filter);
-        			return human;
+        			CardList human = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Human);
+        			return human.filter(filter);
         		}
 
         		private CardList getComputerCreatures() {
-        			CardList comp = new CardList();
-        			comp.addAll(AllZone.Computer_Play.getCards());
-        			comp = comp.filter(filter);
-        			return comp;
+        			CardList comp = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+        			return comp.filter(filter);
         		}
 
         		@Override
