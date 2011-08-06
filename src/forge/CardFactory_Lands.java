@@ -2985,7 +2985,7 @@ class CardFactory_Lands {
 
            card.addComesIntoPlayCommand(comesIntoPlay);
            card.addSpellAbility(ability2);
-           ability2.setDescription("tap: Put a 1/1 white soldier token in play.");
+           ability2.setDescription("1 W, tap: Put a 1/1 white soldier token in play.");
            ability2.setStackDescription("Kjeldoran Outpost - put a 1/1 white soldier token in play");
            ability2.setBeforePayMana(new Input_PayManaCost(ability2));
 

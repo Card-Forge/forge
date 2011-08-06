@@ -84,7 +84,7 @@ public class Phase extends MyObservable
     
     public void nextPhase() {
         
-    	System.out.println("Current Phase:" + AllZone.Phase.getPhase());
+    	//System.out.println("Current Phase:" + AllZone.Phase.getPhase());
         //System.out.println("current active Player: " + getActivePlayer());  
         //experimental, add executeCardStateEffects() here:
         for(String effect:AllZone.StaticEffects.getStateBasedMap().keySet()) {
