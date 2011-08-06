@@ -304,7 +304,9 @@ class CardFactory_Auras {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
             
-            final SpellAbility produceDrakes = new Ability_Tap(spell.getTargetCard(), "G U") {
+            Ability_Cost abCost = new Ability_Cost("G U T", spell.getTargetCard() != null ? spell.getTargetCard().getName(): "", true);
+            final Ability_Activated produceDrakes = new Ability_Activated(spell.getTargetCard(), abCost, null) {
+            	//final SpellAbility produceDrakes = new Ability_Tap(spell.getTargetCard(), "G U") {
                 
                 private static final long serialVersionUID = -3849765771560556442L;
                 
@@ -317,7 +319,7 @@ class CardFactory_Auras {
             };//SpellAbility
             
             produceDrakes.setType("Extrinsic"); // Required for Spreading Seas
-            produceDrakes.setDescription("G U, Tap: Put a 2/2 green and blue Drake creature token with flying onto the battlefield.");
+            produceDrakes.setDescription(abCost+"Put a 2/2 green and blue Drake creature token with flying onto the battlefield.");
             produceDrakes.setStackDescription("Put a 2/2 green and blue Drake creature token with flying onto the battlefield.");
             
             Command onEnchant = new Command() {
@@ -327,7 +329,6 @@ class CardFactory_Auras {
                 public void execute() {
                     if(card.isEnchanting()) {
                         Card crd = card.getEnchanting().get(0);
-                        //crd.clearSpellAbility();
                         crd.addSpellAbility(produceDrakes);
                         
                     }
@@ -370,16 +371,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void showMessage() {
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-                    CardList land = new CardList();
-                    land.addAll(comp.getCards());
-                    land.addAll(hum.getCards());
-                    land = land.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isLand();
-                        }
-                    });
+                	CardList land = AllZoneUtil.getLandsInPlay();
                     
                     stopSetNext(CardFactoryUtil.input_targetSpecific(spell, land, "Select target land", true,
                             false));
@@ -432,7 +424,9 @@ class CardFactory_Auras {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
             
-            final SpellAbility produceSquirrels = new Ability_Tap(spell.getTargetCard()) {
+            Ability_Cost abCost = new Ability_Cost("T", spell.getTargetCard() != null ? spell.getTargetCard().getName(): "", true);
+            final Ability_Activated produceSquirrels = new Ability_Activated(spell.getTargetCard(), abCost, null) {
+            	//final SpellAbility produceSquirrels = new Ability_Tap(spell.getTargetCard()) {
                 private static final long serialVersionUID = -4800170026789001271L;
                 
                 @Override
@@ -445,8 +439,8 @@ class CardFactory_Auras {
             };//SpellAbility
             
             produceSquirrels.setType("Extrinsic"); // Required for Spreading Seas
-            produceSquirrels.setDescription("Tap: Put a 1/1 green Squirrel creature token into play.");
-            produceSquirrels.setStackDescription("Put a 1/1 green Squirrel creature token into play.");
+            produceSquirrels.setDescription(abCost+"Put a 1/1 green Squirrel creature token onto the battlefield.");
+            produceSquirrels.setStackDescription("Put a 1/1 green Squirrel creature token onto the battlefield.");
             
             Command onEnchant = new Command() {
                 
@@ -820,16 +814,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void showMessage() {
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-                    CardList land = new CardList();
-                    land.addAll(comp.getCards());
-                    land.addAll(hum.getCards());
-                    land = land.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isLand();
-                        }
-                    });
+                    CardList land = AllZoneUtil.getLandsInPlay();
                     
                     stopSetNext(CardFactoryUtil.input_targetSpecific(spell, land, "Select target land", true,
                             false));
