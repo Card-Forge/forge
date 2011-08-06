@@ -1,3 +1,146 @@
+Acidic Slime
+3 G G
+Creature Ooze
+When Acidic Slime enters the battlefield, destroy target artifact, enchantment, or land.
+2/2
+Deathtouch
+etbDestroyTgt:Artifact,Enchantment,Land
+
+Bala Ged Scorpion
+3 B
+Creature Scorpion
+When Bala Ged Scorpion enters the battlefield, you may destroy target creature with power 1 or less.
+2/3
+etbDestroyTgtMay:Creature.powerLE1
+
+Dakmor Lancer
+4 B B
+Creature Human Knight
+When Dakmor Lancer enters the battlefield, destroy target nonblack creature.
+3/3
+etbDestroyTgt:Creature.nonBlack
+
+Dark Hatchling
+4 B B
+Creature Horror
+When Dark Hatchling enters the battlefield, destroy target nonblack creature. It can't be regenerated.
+3/3
+Flying
+etbDestroyTgt:Creature.nonBlack:NoRegen
+
+Faultgrinder
+6 R
+Creature Elemental
+When Faultgrinder enters the battlefield, destroy target land.
+4/4
+Trample
+etbDestroyTgt:Land
+SVar:Evoke:4 R
+
+Goblin Settler
+3 R
+Creature Goblin
+When Goblin Settler enters the battlefield, destroy target land.
+1/1
+etbDestroyTgt:Land
+
+Halo Hunter
+2 B B B
+Creature Demon
+When Halo Hunter enters the battlefield, destroy target Angel.
+6/3
+Intimidate
+etbDestroyTgt:Angel
+
+Hammerheim Deadeye
+3 R
+Creature Giant Warrior
+When Hammerheim Deadeye enters the battlefield, destroy target creature with flying.
+3/3
+Echo:5 R
+etbDestroyTgt:Creature.withFlying
+
+Indrik Stomphowler
+4 G
+Creature Beast
+When Indrik Stomphowler enters the battlefield, destroy target artifact or enchantment.
+4/4
+etbDestroyTgt:Artfact,Enchantment
+
+Ingot Chewer
+4 R
+Creature Elemental
+When Ingot Chewer enters the battlefield, destroy target artifact.
+3/3
+etbDestroyTgt:Artifact
+SVar:Evoke:R
+
+Ogre Arsonist
+4 R
+Creature Ogre
+When Ogre Arsonist enters the battlefield, destroy target land.
+3/3
+etbDestroyTgt:Land
+
+Ogre Gatecrasher
+3 R
+Creature Ogre Rogue
+When Ogre Gatecrasher enters the battlefield, destroy target creature with defender.
+3/3
+etbDestroyTgt:Creature.withDefender
+
+Ravaging Horde
+3 R R
+Creature Human Soldier
+When Ravaging Horde enters the battlefield, destroy target land.
+3/3
+etbDestroyTgt:Land
+
+Ravenous Baboons
+3 R
+Creature Ape
+When Ravenous Baboons enters the battlefield, destroy target nonbasic land.
+2/2
+etbDestroyTgt:Land.nonBasic
+
+Rustspore Ram
+4
+Artifact Creature Sheep
+When Rustspore Ram enters the battlefield, destroy target Equipment.
+1/3
+etbDestroyTgt:Equipment
+
+Serpent Assassin
+3 B B
+Creature Snake Assassin
+When Serpent Assassin enters the battlefield, you may destroy target nonblack creature.
+2/2
+etbDestroyTgtMay:Creature.nonBlack
+
+Tivadar of Thorn
+1 W W
+Legendary Creature Human Knight
+When Tivadar of Thorn enters the battlefield, destroy target Goblin.
+2/2
+First Strike
+Protection from red
+etbDestroyTgt:Goblin
+
+War Priest of Thune
+1 W
+Creature Human Cleric
+When War Priest of Thune enters the battlefield, you may destroy target enchantment.
+2/2
+etbDestroyTgtMay:Enchantment
+
+Wispmare
+2 W
+Creature Elemental
+When Wispmare enters the battlefield, destroy target enchantment.
+1/3
+etbDestroyTgt:Enchantment
+SVar:Evoke:W
+
 Dodecapod
 4
 Artifact Creature Golem
