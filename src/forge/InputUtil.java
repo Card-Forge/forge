@@ -52,7 +52,8 @@ public class InputUtil
 	    AllZone.Human_Hand.remove(card);
 	    AllZone.Stack.add(card.getSpellAbility()[0]);
 	}
-	else if (zone.is(Constant.Zone.Hand, Constant.Player.Human) || zone.is(Constant.Zone.Play, Constant.Player.Human))
+	else if (zone.is(Constant.Zone.Hand, Constant.Player.Human) || zone.is(Constant.Zone.Play, Constant.Player.Human)
+			 || (zone.is(Constant.Zone.Play, Constant.Player.Computer)) && (card.isEquipment() || card.isAura()) && card.getController().equals(Constant.Player.Human) )
 	    AllZone.GameAction.playCard(card);
     }//selectCard()
 }
