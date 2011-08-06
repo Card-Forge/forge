@@ -5207,9 +5207,14 @@ public class GameActionUtil {
     	DealsDamage_Whenever_Parameters[2] = c;
     	AllZone.GameAction.CheckWheneverKeyword(c, "DealsDamage/Opponent", DealsDamage_Whenever_Parameters);
 
-		if (c.getKeyword().contains("Poisonous 1"))
+		if (c.hasStartOfKeyword("Poisonous"))
 		{
+        	int KeywordPosition = c.getKeywordPosition("Poisonous");
+        	String parse = c.getKeyword().get(KeywordPosition).toString();
+    		String k[] = parse.split(" ");
+    		final int poison = Integer.parseInt(k[1]);
 			final Card crd = c;
+			
 			Ability ability = new Ability(c, "0")
 			{
 				public void resolve()
@@ -5218,24 +5223,24 @@ public class GameActionUtil {
 					final String opponent = AllZone.GameAction.getOpponent(player);
 
 					if(opponent.equals(Constant.Player.Human)) 
-						AllZone.Human_PoisonCounter.addPoisonCounters(1);
+						AllZone.Human_PoisonCounter.addPoisonCounters(poison);
 					else
-						AllZone.Computer_PoisonCounter.addPoisonCounters(1);
+						AllZone.Computer_PoisonCounter.addPoisonCounters(poison);
 				}
 			};
 
 			StringBuilder sb = new StringBuilder();
 			sb.append(c);
-			sb.append(" - Poisonous 1: ");
+			sb.append(" - Poisonous: ");
 			sb.append(AllZone.GameAction.getOpponent(c.getController()));
-			sb.append(" gets a poison counter.");
+			sb.append(" gets poison counters.");
 
 			ability.setStackDescription(sb.toString());
 			ArrayList<String> keywords = c.getKeyword();
 
 			for (int i=0;i<keywords.size();i++)
 			{
-				if (keywords.get(i).equals("Poisonous 1"))
+				if (keywords.get(i).contains("Poisonous"))
 					AllZone.Stack.add(ability);
 			}
 		}

@@ -1,0 +1,9 @@
+Name:Snake Cult Initiation
+ManaCost:3 B
+Types:Enchantment Aura
+Text:Enchanted creature has poisonous 3.
+K:Enchant creature
+K:enPump:Poisonous 3
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/snake_cult_initiation.jpg
+End
