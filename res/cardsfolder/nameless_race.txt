@@ -1,0 +1,10 @@
+Name:Nameless Race
+ManaCost:3 B
+Types:Creature
+Text:As Nameless Race enters the battlefield, pay any amount of life. The amount you pay can't be more than the total number of white nontoken permanents your opponents control plus the total number of white cards in their graveyards.\r\nNameless Race's power and toughness are each equal to the life paid as it entered the battlefield.
+PT:1/1
+K:Trample
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nameless_race.jpg
+End

@@ -19641,6 +19641,63 @@ public class CardFactory_Creatures {
         	card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Nameless Race")) {
+        	/*
+        	 * As Nameless Race enters the battlefield, pay any amount of life.
+        	 * The amount you pay can't be more than the total number of white
+        	 * nontoken permanents your opponents control plus the total number
+        	 * of white cards in their graveyards.
+        	 * Nameless Race's power and toughness are each equal to the life
+        	 * paid as it entered the battlefield.
+        	 */
+        	final SpellAbility ability = new Ability(card, "0") {
+        		@Override
+        		public void resolve() {
+        			String player = card.getController();
+        			String opp = AllZone.GameAction.getOpponent(player);
+        			int max = 0;
+        			CardList play = AllZoneUtil.getPlayerCardsInPlay(opp);
+        			play = play.filter(AllZoneUtil.nonToken);
+        			play = play.filter(AllZoneUtil.white);
+        			max += play.size();
+        			
+        			CardList grave = AllZoneUtil.getPlayerGraveyard(opp);
+        			grave = grave.filter(AllZoneUtil.white);
+        			max += grave.size();
+        			
+        			String[] life = new String[max+1];
+        			for(int i = 0; i <= max; i++) {
+        				life[i] = String.valueOf(i);
+        			}
+        			
+        			Object o = AllZone.Display.getChoice("Nameless Race - pay X life", life);
+        			String answer = (String) o;
+        			int loseLife = 0;
+        			try {
+        				loseLife = Integer.parseInt(answer.trim());
+        			}
+        			catch (NumberFormatException nfe) {
+        				System.out.println(card.getName()+" - NumberFormatException: " + nfe.getMessage());
+        			}
+        			
+        			card.setBaseAttack(loseLife);
+        			card.setBaseDefense(loseLife);
+        			
+        			AllZone.GameAction.loseLife(player, loseLife);
+        		}//resolve()
+        	};//SpellAbility
+        	Command intoPlay = new Command() {
+				private static final long serialVersionUID = 931101364538995898L;
+
+				public void execute() {
+        			AllZone.Stack.add(ability);
+        		}
+        	};
+        	ability.setStackDescription(cardName + " - pay any amount of life.");
+        	card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
