@@ -827,14 +827,17 @@ public class Card extends MyObservable {
                     String k = keyword.get(i);
                     k = k.replace("Curse", "");
                     sbLong.append(k).append("\r\n");
-                } else if (keyword.get(i).startsWith("Soulshift")) {
+                } else if (keyword.get(i).startsWith("Soulshift") || keyword.get(i).startsWith("Cumulative upkeep") 
+                        || keyword.get(i).startsWith("Echo")      || keyword.get(i).startsWith("Fading") 
+                        || keyword.get(i).startsWith("Ripple")    || keyword.get(i).startsWith("Unearth") 
+                        || keyword.get(i).startsWith("Vanishing")) {
                     String k = keyword.get(i);
                     k = k.replace(":", " ");
                     sbLong.append(k).append("\r\n");
                 } else if (keyword.get(i).endsWith(".")) {
                     sbLong.append(keyword.get(i).toString()).append("\r\n");
                 } else if (keyword.get(i).contains("At the beginning of your upkeep, ") 
-                        && keyword.get(i).contains(" unless you pay:")) {
+                        && keyword.get(i).contains(" unless you pay")) {
                     sbLong.append(keyword.get(i).toString()).append("\r\n");
                 } else if (keyword.get(i).toString().contains("tap: add ")) {
                     sbMana.append(keyword.get(i).toString()).append("\r\n");
