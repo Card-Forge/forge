@@ -2,6 +2,7 @@ Name:Black Carriage
 ManaCost:3 B B
 Types:Creature Horse
 Text:no text
+PT:4/4
 K:Trample
 K:CARDNAME doesn't untap during your untap step.
 A:AB$ Untap | Cost$ Sac<1/Creature> | ActivatingPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Untap CARDNAME. Activate this ability only during your upkeep.
