@@ -1,3 +1,43 @@
+Dragonskull Summit
+no cost
+Land
+no text
+CARDNAME enters the battlefield tapped unless you control a Swamp or a Mountain.
+tap: add B
+tap: add R
+
+Drowned Catacomb
+no cost
+Land
+no text
+CARDNAME enters the battlefield tapped unless you control an Island or a Swamp.
+tap: add U
+tap: add B
+
+Glacial Fortress
+no cost
+Land
+no text
+CARDNAME enters the battlefield tapped unless you control a Plains or an Island.
+tap: add W
+tap: add U
+
+Rootbound Crag
+no cost
+Land
+no text
+CARDNAME enters the battlefield tapped unless you control a Mountain or a Forest.
+tap: add R
+tap: add G
+
+Sunpetal Grove
+no cost
+Land
+no text
+CARDNAME enters the battlefield tapped unless you control a Forest or a Plains.
+tap: add G
+tap: add W
+
 Drelnoch
 4 U
 Creature Yeti Mutant
