@@ -5,5 +5,5 @@ Text:no text
 PT:3/4
 K:WheneverKeyword:PlayLand/Opponent:Type/Land:Play:+1+1 Counters/1:Self:ASAP:No_Condition:No Special Condition:Whenever an opponent plays a land, put a +1/+1 counter on CARDNAME.
 SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/citanul_druid.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dirtcowl_wurm.jpg
 End
