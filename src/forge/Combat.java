@@ -535,10 +535,10 @@ public class Combat {
 				
 				int trample = damage - damageNeeded;
 				
-				if (0 < trample) {
-					blocker.addAssignedDamage(damageNeeded, attacker);
+				if (0 < trample) 	// If Extra trample damage, assign to defending player/planeswalker
 					this.addDefendingDamage(trample, attacker);
-				}
+				
+				blocker.addAssignedDamage(damageNeeded, attacker);
 			}
 			else blocker.addAssignedDamage(damage, attacker);
 		}// 1 blocker
