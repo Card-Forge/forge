@@ -63,9 +63,12 @@ public class AbilityFactory_GainControl {
 			public String getStackDescription(){
 				 StringBuilder sb = new StringBuilder();
 				 String name = AF.getHostCard().getName();
-				 sb.append(name).append(" - targeting ");
+				 sb.append(name).append(" - gain control of ");
 				 Card tgt = getTargetCard();
-				 if (tgt != null) sb.append(tgt.getName());
+				 if (tgt != null) {
+					 if(tgt.isFaceDown()) sb.append("Morph");
+					 else sb.append(tgt.getName());
+				 }
 				 return sb.toString();
 			}
         };//SpellAbility
@@ -98,9 +101,12 @@ public class AbilityFactory_GainControl {
     			public String getStackDescription(){
     				 StringBuilder sb = new StringBuilder();
     				 String name = AF.getHostCard().getName();
-    				 sb.append(name).append(" - targeting ");
+    				 sb.append(name).append(" - gain control of ");
     				 Card tgt = getTargetCard();
-    				 if (tgt != null) sb.append(tgt.getName());
+    				 if (tgt != null) {
+    					 if(tgt.isFaceDown()) sb.append("Morph");
+    					 else sb.append(tgt.getName());
+    				 }
     				 return sb.toString();
     			}
     		};//Ability_Activated
