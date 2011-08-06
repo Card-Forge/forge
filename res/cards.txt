@@ -80,8 +80,8 @@ Counter target spell unless its controller pays 4.
 Runeboggle
 2 U
 Instant
-Counter target spell unless its controller pays 1. Draw a card.
-Cantrip
+Counter target spell unless its controller pays 1.
+Draw a card.
 
 Spell Snip
 2 U
@@ -2060,9 +2060,9 @@ spRaiseDead:2
 Urborg Uprising
 4 B
 Sorcery
-Draw a card.
+no text
 spRaiseDead:2/Some
-Cantrip
+Draw a card.
 
 Sarkhan Vol
 2 R G
@@ -2898,9 +2898,9 @@ spRaiseDead:1
 Recover
 2 B
 Sorcery
-Draw a card.
+no text
 spRaiseDead:1
-Cantrip
+Draw a card.
 
 Return to Battle
 B
@@ -3110,9 +3110,9 @@ Enchant creature
 Scavenged Weaponry
 2 B
 Enchantment Aura
-Enchanted creature gets +1/+1. Draw a card.
+Enchanted creature gets +1/+1.
 Enchant creature
-Cantrip
+Draw a card.
 
 Shield of Duty and Reason
 W
@@ -3158,8 +3158,8 @@ Orcish Cannonade
 1 R R
 Instant
 no text
-spDamageTgtCP:2:Drawback$DamageYou/3:Orcish Cannonade deals 2 damage to target creature or player and 3 damage to you. Draw a card.
-Cantrip
+spDamageTgtCP:2:Drawback$DamageYou/3:Orcish Cannonade deals 2 damage to target creature or player and 3 damage to you.
+Draw a card.
 
 Kindle
 1 R
@@ -4529,8 +4529,8 @@ Protection from green
 Dosan's Oldest Chant
 4 G
 Sorcery
+no text
 Draw a card.
-Cantrip
 
 Sluggishness
 1 R
@@ -5026,9 +5026,9 @@ Creatures you control have horsemanship.
 Last Caress
 2 B
 Sorcery
-Draw a card.
+no text
 spLoseLifeGainLife:1
-Cantrip
+Draw a card.
 
 Morsel Theft
 2 B B
@@ -5273,9 +5273,9 @@ spDrawCardsTgt:2:Drawback$TgtDiscard/4:Target player draws two cards, then disca
 Wildsize
 2 G
 Instant
-Target creature gets +2/+2 and gains trample until end of turn. Draw a card.
+Target creature gets +2/+2 and gains trample until end of turn.
 spPumpTgt:+2/+2/Trample
-Cantrip
+Draw a card.
 
 Biomantic Mastery
 4 UG UG UG
@@ -5292,10 +5292,9 @@ spPumpTgt:Unblockable
 Touch of Invisibility
 3 U
 Sorcery
-Target creature is unblockable this turn. Draw a card.
-Draw a card.
+Target creature is unblockable this turn.
 spPumpTgt:Unblockable
-Cantrip
+Draw a card.
 
 Trailblazer
 2 G G
@@ -5551,16 +5550,16 @@ spDestroyTgt:Creature.nonBlack
 Annihilate
 3 B B
 Instant
-Destroy target nonblack creature. It can't be regenerated. Draw a card.
+Destroy target nonblack creature. It can't be regenerated.
 spDestroyTgt:Creature.nonBlack:NoRegen
-Cantrip
+Draw a card.
 
 Aura Blast
 1 W
 Instant
-Destroy target enchantment. Draw a card.
+Destroy target enchantment.
 spDestroyTgt:Enchantment
-Cantrip
+Draw a card.
 
 Befoul
 2 B B
@@ -5589,9 +5588,9 @@ spDestroyTgt:Permanent
 Execute
 2 B
 Instant
-Destroy target white creature. It can't be regenerated. Draw a card.
+Destroy target white creature. It can't be regenerated.
 spDestroyTgt:Creature.White:NoRegen
-Cantrip
+Draw a card.
 
 Fissure
 3 R R
@@ -5614,9 +5613,9 @@ spDestroyTgt:Creature.nonBlack
 Implode
 4 R
 Sorcery
-Destroy target land. Draw a card.
+Destroy target land.
 spDestroyTgt:Land
-Cantrip
+Draw a card.
 
 Lava Flow
 3 R R
@@ -5663,16 +5662,16 @@ spDestroyTgt:Land
 Slay
 2 B
 Instant
-Destroy target green creature. It can't be regenerated. Draw a card.
+Destroy target green creature. It can't be regenerated.
 spDestroyTgt:Creature.Green:NoRegen
-Cantrip
+Draw a card.
 
 Smash
 2 R
 Instant
-Destroy target artifact. Draw a card.
+Destroy target artifact.
 spDestroyTgt:Artifact
-Cantrip
+Draw a card.
 
 Stream of Acid
 2 B B
@@ -6021,16 +6020,16 @@ spPumpTgt:+3/+3
 Accelerate
 1 R
 Instant
-Target creature gains haste until end of turn. Draw a card.
+Target creature gains haste until end of turn.
 spPumpTgt:Haste
-Cantrip
+Draw a card.
 
 Cloak of Feathers
 U
 Sorcery
-Target creature gains flying until end of turn. Draw a card.
+Target creature gains flying until end of turn.
 spPumpTgt:Flying
-Cantrip
+Draw a card.
 
 Unnatural Speed
 R
@@ -6047,23 +6046,23 @@ spPumpTgt:Fear
 Shadow Rift
 U
 Instant
-Target creature gains shadow until end of turn. Draw a card.
+Target creature gains shadow until end of turn.
 spPumpTgt:Shadow
-Cantrip
+Draw a card.
 
 Leap
 U
 Instant
-Target creature gains flying until end of turn. Draw a card.
+Target creature gains flying until end of turn.
 spPumpTgt:Flying
-Cantrip
+Draw a card.
 
 Lace with Moonglove
 2 G
 Instant
-Target creature gains deathtouch until end of turn. Draw a card.
+Target creature gains deathtouch until end of turn.
 spPumpTgt:Deathtouch
-Cantrip
+Draw a card.
 
 Jump
 U
@@ -6122,9 +6121,9 @@ spPumpTgt:+3/+3/First Strike
 Sudden Strength
 3 G
 Instant
-Target creature gets +3/+3 until end of turn. Draw a card.
+Target creature gets +3/+3 until end of turn.
 spPumpTgt:+3/+3
-Cantrip
+Draw a card.
 
 Silk Net
 G
@@ -6317,9 +6316,9 @@ TgtKPump B B:Shadow
 Ember Shot
 6 R
 Instant
-Draw a card. 
+no text
 spDamageTgtCP:3
-Cantrip
+Draw a card.
 
 Noble Steeds
 2 W
@@ -6330,9 +6329,9 @@ TgtKPump 1 W:First Strike
 Zap
 2 R
 Instant
-Draw a card.
+no text
 spDamageTgtCP:1
-Cantrip
+Draw a card.
 
 Black Lotus
 0
@@ -9598,9 +9597,9 @@ no text
 Guided Strike
 1 W
 Instant
-Target creature gets +1/+0 and gains first strike until end of turn. Draw a card.
+Target creature gets +1/+0 and gains first strike until end of turn.
 spPumpTgt:+1/+0/First Strike
-Cantrip
+Draw a card.
 
 Mobilization
 2 W
@@ -15169,9 +15168,9 @@ You gain 2 life for each basic land type among lands you control.
 Aggressive Urge
 1 G
 Instant
-Target creature gets +1/+1 until end of turn. Draw a card.
+Target creature gets +1/+1 until end of turn.
 spPumpTgt:+1/+1
-Cantrip
+Draw a card.
 
 Needle Storm
 2 G
