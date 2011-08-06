@@ -2,7 +2,7 @@ Name:Veteran Armorer
 ManaCost:1 W
 Types:Creature Human Soldier
 Text:no text
-PT:2/1
+PT:2/2
 K:stPumpAll:Creature.Other+YouCtrl:0/1:No Condition:Other creatures you control get +0/+1.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
