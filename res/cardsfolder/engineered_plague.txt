@@ -1,7 +1,8 @@
 Name:Engineered Plague
 ManaCost:2 B
 Types:Enchantment
-Text:As Engineered Plague comes into play, choose a creature type.\r\nAll creatures of the chosen type get -1/-1.
+Text:As Engineered Plague comes into play, choose a creature type.
+K:stPumpAll:Creature.ChosenType:-1/-1:No Condition:All creatures of the chosen type get -1/-1.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/engineered_plague.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/51.jpg

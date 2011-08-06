@@ -53,7 +53,6 @@ public class StaticEffects
 		
 		cardToEffectsList.put("Eldrazi Monument", new String[] {"Eldrazi_Monument"});
 		cardToEffectsList.put("Emperor Crocodile", new String[] {"Emperor_Crocodile"});
-		cardToEffectsList.put("Engineered Plague", new String[] {"Engineered_Plague"});
 		cardToEffectsList.put("Esper Stormblade", new String[] {"Esper_Stormblade"});
 		cardToEffectsList.put("Faerie Swarm", new String[] {"Faerie_Swarm"});
 		

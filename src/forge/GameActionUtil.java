@@ -11262,48 +11262,7 @@ public class GameActionUtil {
 		}// execute()
 	}; //Conspiracy
 
-	public static Command Engineered_Plague           = new Command() {
-		private static final long serialVersionUID   = -7941528835392424702L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(1);
-				c.addSemiPermanentDefenseBoost(1);
-			}
-
-			list.clear();
-			CardList cards = AllZoneUtil.getCardsInPlay("Engineered Plague");
-
-			for(int outer = 0; outer < cards.size(); outer++) {
-				Card card = cards.get(outer);
-
-				CardList creature = AllZoneUtil.getTypeInPlay(card.getChosenType());
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(c.getType().contains(card.getChosenType())
-							|| c.getKeyword().contains(
-									"Changeling")) {
-						c.addSemiPermanentAttackBoost(-1);
-						c.addSemiPermanentDefenseBoost(-1);
-
-						gloriousAnthemList.add(c);
-					}
-
-
-				}// for inner
-			}// for outer
-		}// execute()
-	}; //Engineered Plague
 	
-
 	public static Command Rolling_Stones              = new Command() {
 		private static final long serialVersionUID   = -3317318747868440229L;
 
@@ -16919,7 +16878,6 @@ public class GameActionUtil {
 		commands.put("Eldrazi_Monument", Eldrazi_Monument);
 		commands.put("Elspeth_Emblem", Elspeth_Emblem);
 		commands.put("Emperor_Crocodile", Emperor_Crocodile);
-		commands.put("Engineered_Plague", Engineered_Plague);
 		commands.put("Esper_Stormblade", Esper_Stormblade);
 		
 		commands.put("Faerie_Swarm", Faerie_Swarm);
