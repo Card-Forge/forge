@@ -4001,9 +4001,9 @@ public class CardFactoryUtil {
         
         // 1/10
         if (d[0].contains("DamageTgtCard")) 
-        	AllZone.GameAction.addDamage(TgtC, Src, X);
+        	TgtC.addDamage(X, Src);
         else if (d[0].contains("DamageSelf"))
-        	AllZone.GameAction.addDamage(Src, Src, X); // 2/10
+        	Src.addDamage(X, Src); // 2/10
         else if(d[0].contains("Damage"))
         	dbPlayer.addDamage(X, Src);
         

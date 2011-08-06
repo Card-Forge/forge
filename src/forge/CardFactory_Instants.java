@@ -4550,7 +4550,7 @@ public class CardFactory_Instants {
         			int damage = 6;
         			CardList all = AllZoneUtil.getCreaturesInPlay();
         			for(Card c:all) {
-        				AllZone.GameAction.addDamage(c, card, damage);
+        				c.addDamage(damage, card);
         			}
         			AllZone.ComputerPlayer.addDamage(damage, card);
         			AllZone.HumanPlayer.addDamage(damage, card);

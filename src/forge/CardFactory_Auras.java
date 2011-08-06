@@ -1062,7 +1062,7 @@ class CardFactory_Auras {
                         Card crd = card.getEnchanting().get(0);
                         if(crd.getKeyword().contains("Flying")) {
                             badTarget[0] = false;
-                            AllZone.GameAction.addDamage(crd, card, 2);
+                            crd.addDamage(2, card);
                             crd.removeIntrinsicKeyword("Flying");
                             crd.removeExtrinsicKeyword("Flying");
                         } else badTarget[0] = true;

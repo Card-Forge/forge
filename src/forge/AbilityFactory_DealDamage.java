@@ -223,7 +223,7 @@ public class AbilityFactory_DealDamage {
         Card c = saMe.getTargetCard();
         if(c != null) {
             if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(AF.getHostCard(), c)) {
-                AllZone.GameAction.addDamage(c, AF.getHostCard(), damage);
+                c.addDamage(damage, AF.getHostCard());
                 tgtP = c.getController();
                 
                 if(AF.hasSubAbility())

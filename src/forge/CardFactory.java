@@ -2114,8 +2114,7 @@ public class CardFactory implements NewConstants {
                             if(AllZone.GameAction.isCardInPlay(getTargetCard())
                                     && CardFactoryUtil.canTarget(card, getTargetCard())) {
                                 Card c = getTargetCard();
-                                //c.addDamage(damage);
-                                AllZone.GameAction.addDamage(c, card, damage);
+                                c.addDamage(damage, card);
                                 tgtP = c.getController();
                                 
                                 if(!DrawBack[0].equals("none")) 
@@ -2520,7 +2519,7 @@ public class CardFactory implements NewConstants {
                         Card c = getTargetCard();
                         if(c != null) {
                             if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                                AllZone.GameAction.addDamage(c, card, damage);
+                                c.addDamage(damage, card);
                                 tgtP = c.getController();
                                 
                                 if(!DrawBack[0].equals("none")) CardFactoryUtil.doDrawBack(DrawBack[0], damage,
