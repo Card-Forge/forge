@@ -42,6 +42,10 @@ public class StateBasedEffects
 		cardToEffectsList.put("Terravore", new String[] {"Terravore"});
 		cardToEffectsList.put("Magnivore", new String[] {"Magnivore"});
 		cardToEffectsList.put("Tarmogoyf", new String[] {"Tarmogoyf"});
+		cardToEffectsList.put("Drove of Elves", new String[] {"Drove_of_Elves"});		
+		cardToEffectsList.put("Crowd of Cinders", new String[] {"Crowd_of_Cinders"});
+		cardToEffectsList.put("Faerie Swarm", new String[] {"Faerie_Swarm"});
+		cardToEffectsList.put("Svogthos, the Restless Tomb", new String[] {"Svogthos_the_Restless_Tomb"});
 		cardToEffectsList.put("Multani, Maro-Sorcerer", new String[] {"Multani_Maro_Sorcerer"});
 		cardToEffectsList.put("Molimo, Maro-Sorcerer", new String[] {"Molimo_Maro_Sorcerer"});
 		cardToEffectsList.put("Maro", new String[] {"Maro"});

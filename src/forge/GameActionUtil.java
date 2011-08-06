@@ -12294,6 +12294,121 @@ public class GameActionUtil
 			return whitePermanents.size();
 		}
 	};
+
+	public static Command Crowd_of_Cinders = new Command()
+	{
+		private static final long serialVersionUID = 6686690505949642328L;
+
+		public void execute()
+		{
+			// get all creatures
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Crowd of Cinders");
+
+			for (int i = 0; i < list.size(); i++)
+			{
+				Card c = list.get(i);
+				c.setBaseAttack(countWhitePermanents(c));
+				c.setBaseDefense(c.getBaseAttack());
+			}
+
+		}// execute()
+
+		private int countWhitePermanents(Card c)
+		{
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c
+					.getController());
+			CardList whitePermanents = new CardList(play.getCards());
+			whitePermanents = whitePermanents.filter(new CardListFilter()
+			{
+				public boolean addCard(Card c)
+				{
+					return CardUtil.getColors(c).contains(Constant.Color.Black);
+				}
+			
+			});
+			return whitePermanents.size();
+		}
+	}; // Crowd of Cinders
+	
+	public static Command Faerie_Swarm = new Command()
+	{
+		private static final long serialVersionUID = 6686690505949642328L;
+
+		public void execute()
+		{
+			// get all creatures
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Faerie Swarm");
+
+			for (int i = 0; i < list.size(); i++)
+			{
+				Card c = list.get(i);
+				c.setBaseAttack(countWhitePermanents(c));
+				c.setBaseDefense(c.getBaseAttack());
+			}
+
+		}// execute()
+
+		private int countWhitePermanents(Card c)
+		{
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c
+					.getController());
+			CardList whitePermanents = new CardList(play.getCards());
+			whitePermanents = whitePermanents.filter(new CardListFilter()
+			{
+				public boolean addCard(Card c)
+				{
+					return CardUtil.getColors(c).contains(Constant.Color.Blue);
+				}
+			
+			});
+			return whitePermanents.size();
+		}
+	}; // Faerie Swarm
+	
+	public static Command Drove_of_Elves = new Command()
+	{
+		private static final long serialVersionUID = 6686690505949642328L;
+
+		public void execute()
+		{
+			// get all creatures
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Drove of Elves");
+
+			for (int i = 0; i < list.size(); i++)
+			{
+				Card c = list.get(i);
+				c.setBaseAttack(countWhitePermanents(c));
+				c.setBaseDefense(c.getBaseAttack());
+			}
+
+		}// execute()
+
+		private int countWhitePermanents(Card c)
+		{
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c
+					.getController());
+			CardList whitePermanents = new CardList(play.getCards());
+			whitePermanents = whitePermanents.filter(new CardListFilter()
+			{
+				public boolean addCard(Card c)
+				{
+					return CardUtil.getColors(c).contains(Constant.Color.Green);
+				}
+			
+			});
+			return whitePermanents.size();
+		}
+	}; // Drove of Elves
+
 	
 	public static Command Multani_Maro_Sorcerer = new Command()
 	   {
@@ -12602,6 +12717,54 @@ public class GameActionUtil
       }
          
    };//Lhurgoyf
+   
+   public static Command Svogthos_the_Restless_Tomb = new Command()
+   {
+      private static final long serialVersionUID = -8778902687347191964L;
+      public void execute()
+      {
+         // get all creatures
+         CardList list = new CardList();
+         list.addAll(AllZone.Human_Play.getCards());
+         list.addAll(AllZone.Computer_Play.getCards());
+         list = list.getName("Svogthos, the Restless Tomb");
+
+         for (int i = 0; i < list.size(); i++)
+         {
+            Card c = list.get(i);
+            int x = 0;
+            if (c.getController() == "Human") x= countCreatures_Hum(); else x=countCreatures_Comp();
+            if (c.isCreature()) {
+            c.setBaseAttack(x);
+            c.setBaseDefense(x); }
+         }
+      }
+      private int countCreatures_Comp()
+      {
+         PlayerZone compGrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer);         
+         CardList list = new CardList();
+         list.addAll(compGrave.getCards());       
+         list = list.filter(new CardListFilter(){
+            public boolean addCard(Card c) {
+               return c.isCreature();
+            }
+         });
+         return list.size();
+      }
+      private int countCreatures_Hum()
+      {         
+         PlayerZone humGrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human);
+         CardList list = new CardList();       
+         list.addAll(humGrave.getCards());
+         list = list.filter(new CardListFilter(){
+            public boolean addCard(Card c) {
+               return c.isCreature();
+            }
+         });
+         return list.size();
+      }
+         
+   };//Svogthos, the Restless Tomb
 
 
 	public static Command Nightmare = new Command()
@@ -14394,6 +14557,10 @@ public class GameActionUtil
 		commands.put("Uril", Uril);
 		commands.put("Rabid_Wombat", Rabid_Wombat);
 		commands.put("Kithkin_Rabble", Kithkin_Rabble);
+		commands.put("Crowd_of_Cinders", Crowd_of_Cinders);
+		commands.put("Faerie_Swarm", Faerie_Swarm);
+		commands.put("Drove_of_Elves", Drove_of_Elves);
+		commands.put("Svogthos_the_Restless_Tomb", Svogthos_the_Restless_Tomb);
 		commands.put("Lhurgoyf", Lhurgoyf);
 		commands.put("Nightmare", Nightmare);
 		commands.put("Aven_Trailblazer", Aven_Trailblazer);

@@ -18,6 +18,14 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+svogthos_the_restless_tomb.jpg   http://www.wizards.com/global/images/magic/general/svogthos_the_restless_tomb.jpg
+rix_maadi_dungeon_palace.jpg     http://www.wizards.com/global/images/magic/general/rix_maadi_dungeon_palace.jpg
+orzhova_the_church_of_deals.jpg  http://www.wizards.com/global/images/magic/general/orzhova_the_church_of_deals.jpg
+crowd_of_cinders.jpg        http://www.wizards.com/global/images/magic/general/crowd_of_cinders.jpg
+faerie_swarm.jpg            http://www.wizards.com/global/images/magic/general/faerie_swarm.jpg
+drove_of_elves.jpg          http://www.wizards.com/global/images/magic/general/drove_of_elves.jpg
+ghitu_encampment.jpg        http://www.wizards.com/global/images/magic/general/ghitu_encampment.jpg
+stalking_stones.jpg         http://www.wizards.com/global/images/magic/general/stalking_stones.jpg
 dimir_guildmage.jpg         http://www.wizards.com/global/images/magic/general/dimir_guildmage.jpg
 street_wraith.jpg           http://www.wizards.com/global/images/magic/general/street_wraith.jpg
 cathartic_adept.jpg         http://www.wizards.com/global/images/magic/general/cathartic_adept.jpg

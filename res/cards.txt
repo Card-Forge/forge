@@ -1,3 +1,55 @@
+Drove of Elves
+3 G
+Creature Elf
+Drove of Elves’s power and toughness are each equal to the number of green permanents you control.
+1/1
+This card can't be the target of spells or abilities your opponents control.
+
+Faerie Swarm
+3 U
+Creature Faerie
+Faerie Swarm’s power and toughness are each equal to the number of blue permanents you control.
+1/1
+Flying
+
+Crowd of Cinders
+3 B
+Creature Elemental
+Crowd of Cinders’s power and toughness are each equal to the number of black permanents you control.
+1/1
+Fear
+
+Ghitu Encampment
+no cost
+Land
+no text
+Comes into play tapped.
+tap: add R
+
+Stalking Stones
+no cost
+Land
+no text
+tap: add 1
+
+Orzhova, the Church of Deals
+no cost
+Land
+no text
+tap: add 1
+
+Rix Maadi, Dungeon Palace
+no cost
+Land
+no text
+tap: add 1
+
+Svogthos, the Restless Tomb
+no cost
+Land
+no text
+tap: add 1
+
 Dimir Guildmage
 UB UB
 Creature Human Wizard

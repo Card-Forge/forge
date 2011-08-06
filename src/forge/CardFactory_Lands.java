@@ -2707,6 +2707,233 @@ class CardFactory_Lands {
 	          return card;
 	       }//*************** END ************ END **************************
 
+			
+		      //*************** START *********** START **************************
+	        if(cardName.equals("Rix Maadi, Dungeon Palace"))
+	        {
+	           card.clearSpellKeepManaAbility();
+	           
+	           Ability_Tap ability = new Ability_Tap(card,"1 B R")
+	           {
+	              private static final long serialVersionUID = 42470566751344693L;
+	              
+	              public boolean canPlay()
+		            {
+		            	 if (((AllZone.Phase.getPhase().equals(Constant.Phase.Main2)&& AllZone.Phase.getActivePlayer() == card.getController()) || (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && AllZone.Phase.getActivePlayer() == card.getController())) && AllZone.GameAction.isCardInPlay(card) )
+		            	        return true;
+		            	     else  
+		            	          return false;
+		            }
+
+	                public boolean canPlayAI()
+	                {
+	                	PlayerZone hand_c = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
+	                	PlayerZone hand_h = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human);                	
+	                    CardList hand_comp = new CardList(hand_c.getCards());
+	                    CardList hand_hum = new CardList(hand_h.getCards());
+	                    return ((hand_comp.size()-hand_hum.size())>1 && hand_hum.size()>0);
+	                }
+
+	                public void resolve()
+	                {
+	                	AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
+	                	AllZone.GameAction.discardRandom(Constant.Player.Computer);  // wise discard should be here  
+	                }
+	           };          
+	           ability.setDescription("tap 1 B R: Each player discards a card. Activate this ability only any time you could cast a sorcery.");
+	           ability.setStackDescription("Each player discards a card.");
+	           card.addSpellAbility(ability);
+	        }
+	        //*************** END ************ END **************************        
+	        
+	 
+	      //*************** START *********** START **************************
+	        if(cardName.equals("Orzhova, the Church of Deals"))
+	        {
+	           card.clearSpellKeepManaAbility();
+	           
+	           Ability_Tap ability = new Ability_Tap(card,"3 W B")
+	           {
+	              private static final long serialVersionUID = 42470566751344693L;
+	                            	   		   
+	               
+	                public void resolve()
+	                {                	                         
+	                     AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1);
+	                     PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
+	                     life.addLife(1);
+	              }
+	           };
+	           ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());           
+	           ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
+	           ability.setDescription("tap 3 W B: Target player loses 1 life and you gain 1 life.");
+	           ability.setStackDescription("Target player loses 1 life and you gain 1 life.");
+	           card.addSpellAbility(ability);
+	        }
+	        //*************** END ************ END **************************
+	 
+	        //*************** START *********** START **************************
+	        else if(cardName.equals("Svogthos, the Restless Tomb"))
+	        {
+	          final Command eot1 = new Command()
+	          {
+	          private static final long serialVersionUID = -8535770979347971863L;
+	         
+	          public void execute()
+	            {
+	              Card c = card;
+
+	              c.setBaseAttack(0);
+	              c.setBaseDefense(0);
+	              c.removeType("Creature");
+	              c.removeType("Zombie");
+	              c.removeType("Plant");              
+	              c.setManaCost("");
+	              
+	            }
+	          };
+
+	          final SpellAbility a1 = new Ability(card, "3 B G")
+	          {            
+	            	 public boolean canPlayAI()
+	                 {
+	               	  PlayerZone compGrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer);         
+	                     CardList list = new CardList();
+	                     list.addAll(compGrave.getCards());       
+	                     list = list.filter(new CardListFilter(){
+	                        public boolean addCard(Card c) {
+	                           return c.isCreature();
+	                        }
+	                     });
+	                     return ((list.size()>0)&!card.getType().contains("Creature"));
+	                 }
+	            	            	            
+	            public void resolve()
+	            {
+	              Card c = card;
+
+	              c.setBaseAttack(1);
+	              c.setBaseDefense(1);
+	              c.setManaCost("B");
+
+	              //to prevent like duplication like "Creature Creature"              
+	                if(!c.getType().contains("Creature"))
+	                  c.addType("Creature");
+	                if(!c.getType().contains("Zombie"))
+	                  c.addType("Zombie");
+	                if(!c.getType().contains("Plant"))
+	                    c.addType("Plant");
+	              AllZone.EndOfTurn.addUntil(eot1);
+	            }
+	          };//SpellAbility
+
+	          card.clearSpellKeepManaAbility();
+	          card.addSpellAbility(a1);
+	          a1.setStackDescription(card +" becomes a black and green Plant Zombie creature with power and toughness each equal to the number of creature cards in your graveyard until EOT");
+	          a1.setDescription("3 B G: Until end of turn, Svogthos, the Restless Tomb becomes a black and green Plant Zombie creature with This creature's power and toughness are each equal to the number of creature cards in your graveyard. It's still a land.");
+
+	        }//*************** END ************ END **************************
+	 
+	        //*************** START *********** START **************************
+	        else if(cardName.equals("Ghitu Encampment"))
+	        {
+	          final Command eot1 = new Command()
+	          {
+	          private static final long serialVersionUID = -8535770979347971863L;
+
+	          public void execute()
+	            {
+	              Card c = card;
+
+	              c.setBaseAttack(0);
+	              c.setBaseDefense(0);
+	              c.removeType("Creature");
+	              c.removeType("Warrior");
+	              c.removeIntrinsicKeyword("First Strike");
+	              c.setManaCost("");
+	              
+	            }
+	          };
+
+	          final SpellAbility a1 = new Ability(card, "1 R")
+	          {
+	            public boolean canPlayAI()
+	            {
+	              return ! card.getType().contains("Creature");
+	            }
+	            public void resolve()
+	            {
+	              Card c = card;
+
+	              c.setBaseAttack(2);
+	              c.setBaseDefense(1);
+	              c.setManaCost("R");
+
+	              //to prevent like duplication like "Creature Creature"
+	              if(!c.getIntrinsicKeyword().contains("First Strike"))
+	                  c.addIntrinsicKeyword("First Strike");
+	                if(!c.getType().contains("Creature"))
+	                  c.addType("Creature");
+	                if(!c.getType().contains("Warrior"))
+	                  c.addType("Warrior");
+	              AllZone.EndOfTurn.addUntil(eot1);
+	            }
+	          };//SpellAbility
+
+	          card.clearSpellKeepManaAbility();
+	          card.addSpellAbility(a1);
+	          a1.setStackDescription(card +" becomes a 2/1 creature with first strike until EOT");
+	          a1.setDescription("1 R: Ghitu Encampment becomes a 2/1 red Warrior creature with first strike until end of turn. It's still a land.");
+	          Command paid1 = new Command() {
+	          private static final long serialVersionUID = -6800983290478844750L;
+
+	          public void execute() {AllZone.Stack.add(a1);}
+	         };
+	          a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
+	        }//*************** END ************ END **************************
+	        
+	        //*************** START *********** START **************************
+	        else if(cardName.equals("Stalking Stones"))
+	        {
+	        
+	          final SpellAbility a1 = new Ability(card, "6")
+	          {
+	            public boolean canPlayAI()
+	            {
+	              return ! card.getType().contains("Creature");
+	            }
+	            public void resolve()
+	            {
+	              Card c = card;
+
+	              c.setBaseAttack(3);
+	              c.setBaseDefense(3);
+	              c.setManaCost("");
+
+	              //to prevent like duplication like "Creature Creature"
+	              if(!c.getType().contains("Elemental"))
+	                  c.addType("Elemental");
+	                      if(!c.getType().contains("Artifact"))
+	                  c.addType("Artifact");
+	                 if(!c.getType().contains("Creature"))
+	                  c.addType("Creature");
+
+	              
+	            }
+	          };//SpellAbility
+
+	          card.clearSpellKeepManaAbility();
+	          card.addSpellAbility(a1);
+	          a1.setStackDescription(card +" becomes a 3/3 Elemental artifact creature that's still a land.");
+	               a1.setDescription("6: Stalking Stones becomes a 3/3 Elemental artifact creature that's still a land. (This effect lasts indefinitely.)");
+	          Command paid1 = new Command() {
+	          private static final long serialVersionUID = -6800983290478844750L;
+
+	          public void execute() {AllZone.Stack.add(a1);}
+	         };
+	          a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
+	        }//*************** END ************ END **************************
+
          
 		return card;
 	}
