@@ -18165,6 +18165,125 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Old Man of the Sea")) {
+        	/*
+        	 * Tap: Gain control of target creature with power less than or
+        	 * equal to Old Man of the Sea's power for as long as Old Man of
+        	 * the Sea remains tapped and that creature's power remains less
+        	 * than or equal to Old Man of the Sea's power.
+        	 */
+        	//final Card movedCreature[] = new Card[1];
+            final Ability_Tap ability = new Ability_Tap(card, "0") {
+				private static final long serialVersionUID = -7792654590884377028L;
+				@Override
+				public boolean canPlay() {
+					//need to check if there are other creatures in play
+					return AllZone.GameAction.isCardInPlay(card) && !card.hasSickness();
+				}
+				@Override
+				public boolean canPlayAI() {
+					CardList human = AllZoneUtil.getCreaturesInPlay(Constant.Player.Human);
+					human = human.filter(new CardListFilter() {
+						public boolean addCard(Card c) {
+							int power = card.getNetAttack();
+							return c.getNetAttack() <= power &&CardFactoryUtil.canTarget(card, getTargetCard());
+						}
+					});
+					setTargetCard(human.get(0));
+					return human.size() > 0;
+				}
+				@Override
+                public void resolve() {
+                    Card c = getTargetCard();
+                    //movedCreature[0] = c;
+                    card.setOldManTarget(c);
+                    
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                        //set summoning sickness
+                        if(c.getKeyword().contains("Haste")) {
+                            c.setSickness(false);
+                        } else {
+                            c.setSickness(true);
+                        }
+                        
+                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+                        
+                        c.setSickness(true);
+                        c.setController(card.getController());
+                        
+                        PlayerZone from = AllZone.getZone(c);
+                        from.remove(c);
+                        
+                        PlayerZone to = AllZone.getZone(Constant.Zone.Play, card.getController());
+                        to.add(c);
+                        
+                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+                    }
+                }//resolve()
+            };//SpellAbility
+            
+            final Command untapLeavesPlay = new Command() {
+				private static final long serialVersionUID = 2533029843361717840L;
+
+				public void execute() {
+                    //Card c = movedCreature[0];
+					Card c = card.getOldManTarget();
+                    
+                    if(AllZone.GameAction.isCardInPlay(c)) {
+                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+                        
+                        c.setSickness(true);
+                        c.setController(AllZone.GameAction.getOpponent(c.getController()));
+                        
+                        PlayerZone from = AllZone.getZone(c);
+                        from.remove(c);
+                        
+                        //make sure the creature is removed from combat:
+                        CardList list = new CardList(AllZone.Combat.getAttackers());
+                        if(list.contains(c)) AllZone.Combat.removeFromCombat(c);
+                        
+                        CardList pwlist = new CardList(AllZone.pwCombat.getAttackers());
+                        if(pwlist.contains(c)) AllZone.pwCombat.removeFromCombat(c);
+                        
+                        PlayerZone to = AllZone.getZone(Constant.Zone.Play, c.getOwner());
+                        to.add(c);
+                        
+                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+                    }//if
+                }//execute()
+            };//Command
+            card.addUntapCommand(untapLeavesPlay);
+            card.addLeavesPlayCommand(untapLeavesPlay);
+            card.setOldManReleaseCommand(untapLeavesPlay);
+            
+            card.addSpellAbility(ability);
+            
+            Input target = new Input() {
+				private static final long serialVersionUID = -2079490830593191467L;
+				final private int power = card.getNetAttack();
+    			public void showMessage() {
+                    AllZone.Display.showMessage("Select target Creature with power less or equal to: "+power);
+                    ButtonUtil.enableOnlyCancel();
+                 }
+                 public void selectButtonCancel() {
+                    stop();
+                 }
+                 public void selectCard(Card c, PlayerZone zone) {
+                    if(zone.is(Constant.Zone.Play) && c.isCreature() && (c.getNetAttack() <= power)) {
+                       ability.setTargetCard(c);
+                    	   this.setFree(false);
+                    	   AllZone.Stack.add(ability);
+                    }
+                 }
+              };//input
+            ability.setBeforePayMana(target);
+        }//*************** END ************ END **************************
+        
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

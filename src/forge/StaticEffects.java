@@ -73,6 +73,7 @@ public class StaticEffects
 		cardToEffectsList.put("Dauntless Dourbark", new String[] {"Dauntless_Dourbark"});
 		cardToEffectsList.put("Gaea's Avenger", new String[] {"Gaeas_Avenger"});
 		cardToEffectsList.put("People of the Woods", new String[] {"People_of_the_Woods"});
+		cardToEffectsList.put("Old Man of the Sea", new String[] {"Old_Man_of_the_Sea"});
 		cardToEffectsList.put("Serpent of the Endless Sea", new String[] {"Serpent_of_the_Endless_Sea"});
 		cardToEffectsList.put("Vexing Beetle", new String[] {"Vexing_Beetle"});
 		cardToEffectsList.put("Sejiri Merfolk", new String[] {"Sejiri_Merfolk"});

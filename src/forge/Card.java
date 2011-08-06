@@ -106,6 +106,8 @@ public class Card extends MyObservable {
     private String                       chosenColor                       = "";
     private String                       namedCard                         = "";
     private String						 topCardName					   = "";
+    private Card						oldManTarget;
+    private Command						oldManReleaseCommand;
     
 
     private ArrayList<Ability_Triggered>  zcTriggers                        = new ArrayList<Ability_Triggered>();
@@ -450,6 +452,25 @@ public class Card extends MyObservable {
         topCardName = s;
     }
     
+    /**
+     * 
+     * @return
+     */
+    public Card getOldManTarget() {
+    	return oldManTarget;
+    }
+    
+    public void setOldManTarget(Card c) {
+    	oldManTarget = c;
+    }
+    
+    public Command getOldManReleaseCommand() {
+    	return oldManReleaseCommand;
+    }
+    
+    public void setOldManReleaseCommand(Command c) {
+    	oldManReleaseCommand = c;
+    }
     
     public String getSpellText() {
         return text;

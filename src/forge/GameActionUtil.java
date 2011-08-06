@@ -11384,6 +11384,21 @@ public class GameActionUtil {
 		}
 	};
 	
+	public static Command Old_Man_of_the_Sea = new Command() {
+		private static final long serialVersionUID = 8076177362922156784L;
+
+		public void execute() {
+			CardList list = AllZoneUtil.getCardsInPlay("Old Man of the Sea");
+			for(Card oldman:list) {
+				if(null != oldman.getOldManTarget()) {
+					if(oldman.getNetAttack() < oldman.getOldManTarget().getNetAttack()) {
+						oldman.getOldManReleaseCommand().execute();
+					}
+				}
+			}
+		}
+	};//Old Man of the Sea
+	
 	public static Command Serpent_of_the_Endless_Sea = new Command() {
 		private static final long serialVersionUID = 8263339065128877297L;
 
@@ -16642,6 +16657,7 @@ public class GameActionUtil {
 		commands.put("Vampire_Nocturnus", Vampire_Nocturnus);
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
 		commands.put("People_of_the_Woods", People_of_the_Woods);
+		commands.put("Old_Man_of_the_Sea", Old_Man_of_the_Sea);
 		commands.put("Serpent_of_the_Endless_Sea", Serpent_of_the_Endless_Sea);
 		commands.put("Gaeas_Avenger", Gaeas_Avenger);
 		commands.put("Vexing_Beetle", Vexing_Beetle);

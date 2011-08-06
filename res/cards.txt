@@ -1,3 +1,10 @@
+Old Man of the Sea
+1 U U
+Creature Djinn
+tap: Gain control of target creature with power less than or equal to Old Man of the Sea's power for as long as Old Man of the Sea remains tapped and that creature's power remains less than or equal to Old Man of the Sea's power.
+2/3
+You may choose not to untap CARDNAME during your untap step.
+
 Rubinia Soulsinger
 2 G W U
 Legendary Creature Faerie
