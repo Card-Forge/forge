@@ -12,6 +12,7 @@ Warren Instigator
 [/Group]
 
 [Group MaxCnt=1 Percentage=16]
+Boggart Shenanigans
 Goblin Matron
 Sensation Gorger
 Goblin Grenade
@@ -47,6 +48,8 @@ Tattermunge Maniac
 [/Group]
 
 [Group MaxCnt=4 Percentage=4]
+Adder-Staff Boggart
+Akki Blizzard-Herder
 Akki Raider
 Akki Underling
 Bloodmark Mentor
@@ -54,16 +57,20 @@ Bloodmark Mentor
 Ember Hauler
 Goblin Brigand
 Goblin Bully
+Goblin Elite Infantry
+Goblin Firebug
 Goblin Glider
 Dragon Fodder
 Goblin Piker
 Goblin Raider
+Goblin Shortcutter
 Goblin Striker
 Goblin War Buggy
 Goblin Wardriver
 Hulking Goblin
 Kyren Glider
 Mogg Jailer
+Mogg Maniac
 Mudbrawler Cohort
 Mudbrawler Cohort
 Rustrazor Butcher
@@ -77,6 +84,7 @@ Boggart Arsonists
 Boggart Ram-Gang
 Enslaved Scout
 Flamewave Invoker
+Goatnapper
 Goblin Artillery
 Goblin Cavaliers
 Goblin Chariot
@@ -100,10 +108,13 @@ Tuktuk the Explorer
 [/Group]
 
 [Group MaxCnt=4 Percentage=4]
+Akki Underminer
+Battle-Rattle Shaman
 Boartusk Liege
 Goblin Berserker
 Goblin Gardener
 Goblin Settler
+Lightning Crafter
 Murderous Redcap
 Tar Pitcher
 [/Group]
@@ -112,6 +123,7 @@ Tar Pitcher
 Battle Squadron
 Goblin Commando
 Kiki-Jiki, Mirror Breaker
+Outrage Shaman
 Scuzzback Marauders
 Tuktuk Grunts
 [/Group]

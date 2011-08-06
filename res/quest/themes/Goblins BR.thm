@@ -36,6 +36,7 @@ Siege-Gang Commander
 
 [Group MaxCnt=4 Percentage=6]
 Boggart Birth Rite
+Boggart Shenanigans
 Goblin Grenade
 Goblin Grenade
 Fodder Launch
@@ -71,20 +72,26 @@ Tattermunge Maniac
 [/Group]
 
 [Group MaxCnt=4 Percentage=4]
+Adder-Staff Boggart
+Akki Blizzard-Herder
 Akki Raider
 Akki Underling
 Bloodmark Mentor
 Exiled Boggart
+Goatnapper
 Goblin Brigand
 Goblin Bully
 Goblin Deathraiders
 Goblin Deathraiders
+Goblin Elite Infantry
+Goblin Firebug
 Goblin Glider
 Dragon Fodder
 Goblin Outlander
 Goblin Outlander
 Goblin Piker
 Goblin Raider
+Goblin Shortcutter
 Goblin Striker
 Goblin War Buggy
 Hulking Goblin
@@ -92,9 +99,11 @@ Jund Hackblade
 Kyren Glider
 Marsh Goblins
 Mogg Jailer
+Mogg Maniac
 Mudbrawler Cohort
 Nath's Buffoon
 Rustrazor Butcher
+Slavering Nulls
 Utvara Scalper
 [/Group]
 
@@ -102,6 +111,7 @@ Utvara Scalper
 Arms Dealer
 Blisterstick Shaman
 Boggart Arsonists
+Boggart Loggers
 Enslaved Scout
 Flamewave Invoker
 Goblin Cavaliers
@@ -117,25 +127,33 @@ Kyren Sniper
 Lavafume Invoker
 Mudbutton Torchrunner
 Slingshot Goblin
+Spiderwig Boggart
 Spikeshot Goblin
+Squeaking Pie Grubfellows
 Squee, Goblin Nabob
 Tattermunge Duo
 Tuktuk the Explorer
 [/Group]
 
 [Group MaxCnt=4 Percentage=4]
+Akki Underminer
+Battle-Rattle Shaman
 Blackcleave Goblin
+Boggart Mob
 Goblin Berserker
 Goblin Settler
 Hornet Harasser
+Lightning Crafter
 Murderous Redcap
 Murderous Redcap
 Murderous Redcap
+Quill-Slinger Boggart
 Tar Pitcher
 [/Group]
 
 [Group MaxCnt=1 Percentage=2]
 Battle Squadron
+Bog Hoodlums
 Goblin Commando
 Scuzzback Marauders
 Tuktuk Grunts
