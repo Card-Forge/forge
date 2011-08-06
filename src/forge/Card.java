@@ -693,6 +693,73 @@ public class Card extends MyObservable {
     }
     
     public String getText() {
+    	StringBuilder sb = new StringBuilder();
+    	sb.append(this.getAbilityText());
+    	String NonAbilityText = getNonAbilityText();
+    	if (NonAbilityText.length() > 0) {
+    		sb.append("\r\n \r\nNon ability characteristics: \r\n");
+    		sb.append(NonAbilityText);
+    	}
+    	
+    	return sb.toString();
+    }
+    
+    public String getNonAbilityText() {
+        StringBuilder sb = new StringBuilder();
+        ArrayList<String> keyword = getHiddenExtrinsicKeyword();
+        
+        sb.append(keywordsToText(keyword));
+        
+        return sb.toString();
+    }
+    
+    public String keywordsToText(ArrayList<String> keyword) {
+        StringBuilder sb = new StringBuilder();
+        StringBuilder sbLong = new StringBuilder();
+        StringBuilder sbMana = new StringBuilder();
+    	
+    	for (int i = 0; i < keyword.size(); i++) {
+            if (!keyword.get(i).toString().contains("CostChange") 
+            		&& 
+            		!keyword.get(i).toString().contains("Whenever CARDNAME blocks a creature, destroy that creature at end of combat")
+            		&& 
+            		!keyword.get(i).toString().contains("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat")
+            		&& 
+            		!keyword.get(i).toString().contains("Permanents don't untap during their controllers' untap steps"))
+            	{
+                if (keyword.get(i).toString().contains("WheneverKeyword")) {
+                    String k[] = keyword.get(i).split(":");
+                    sbLong.append(k[9]).append("\r\n");
+                } else if (keyword.get(i).toString().contains("StaticEffect")) {
+                    String k[] = keyword.get(i).split(":");
+                    sbLong.append(k[5]).append("\r\n");
+                } else if (keyword.get(i).toString().contains("stPump")) {
+                    String k[] = keyword.get(i).split(":");
+                    if (!k[4].contains("no text")) sbLong.append(k[4]).append("\r\n");
+                } else if (keyword.get(i).toString().contains("Protection:")) {
+                    String k[] = keyword.get(i).split(":");
+                    sbLong.append(k[2]).append("\r\n");
+                } else if (keyword.get(i).endsWith(".")) {
+                    sbLong.append(keyword.get(i).toString()).append("\r\n");
+                } else if (keyword.get(i).contains("At the beginning of your upkeep, ") 
+                        && keyword.get(i).contains(" unless you pay:")) {
+                    sbLong.append(keyword.get(i).toString()).append("\r\n");
+                } else if (keyword.get(i).toString().contains("tap: add ")) {
+                    sbMana.append(keyword.get(i).toString()).append("\r\n");
+                } else {
+                    if (i != 0 && sb.length() != 0) sb.append(", ");
+                    sb.append(keyword.get(i).toString());
+                }
+            }
+        }
+        if (sb.length() > 0) sb.append("\r\n\r\n");
+        if (sbLong.length() > 0) sbLong.append("\r\n");
+        sb.append(sbLong);
+        sb.append(sbMana);
+    	return sb.toString();
+    }
+    
+    public String getAbilityText() {
         if(isInstant() || isSorcery()) {
             String s = getSpellText();
             StringBuilder sb = new StringBuilder();
@@ -707,6 +774,7 @@ public class Card extends MyObservable {
             if (sb.toString().contains("(NOTE: ") && sb.toString().endsWith(".)") && !sb.toString().endsWith("\r\n")) {
                 sb.append("\r\n");
             }
+            
             
             // Add SpellAbilities
             SpellAbility[] sa = getSpellAbility();
@@ -770,49 +838,9 @@ public class Card extends MyObservable {
         }
         
         StringBuilder sb = new StringBuilder();
-        StringBuilder sbLong = new StringBuilder();
-        StringBuilder sbMana = new StringBuilder();
         ArrayList<String> keyword = getUnhiddenKeyword();
         
-        for (int i = 0; i < keyword.size(); i++) {
-            if (!keyword.get(i).toString().contains("CostChange") 
-            		&& 
-            		!keyword.get(i).toString().contains("Whenever CARDNAME blocks a creature, destroy that creature at end of combat")
-            		&& 
-            		!keyword.get(i).toString().contains("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat")
-            		&& 
-            		!keyword.get(i).toString().contains("Permanents don't untap during their controllers' untap steps"))
-            	{
-                if (keyword.get(i).toString().contains("WheneverKeyword")) {
-                    String k[] = keyword.get(i).split(":");
-                    sbLong.append(k[9]).append("\r\n");
-                } else if (keyword.get(i).toString().contains("StaticEffect")) {
-                    String k[] = keyword.get(i).split(":");
-                    sbLong.append(k[5]).append("\r\n");
-                } else if (keyword.get(i).toString().contains("stPump")) {
-                    String k[] = keyword.get(i).split(":");
-                    if (!k[4].contains("no text")) sbLong.append(k[4]).append("\r\n");
-                } else if (keyword.get(i).toString().contains("Protection:")) {
-                    String k[] = keyword.get(i).split(":");
-                    sbLong.append(k[2]).append("\r\n");
-                } else if (keyword.get(i).endsWith(".")) {
-                    sbLong.append(keyword.get(i).toString()).append("\r\n");
-                } else if (keyword.get(i).contains("At the beginning of your upkeep, ") 
-                        && keyword.get(i).contains(" unless you pay:")) {
-                    sbLong.append(keyword.get(i).toString()).append("\r\n");
-                } else if (keyword.get(i).toString().contains("tap: add ")) {
-                    sbMana.append(keyword.get(i).toString()).append("\r\n");
-                } else {
-                    if (i != 0 && sb.length() != 0) sb.append(", ");
-                    sb.append(keyword.get(i).toString());
-                }
-            }
-        }
-        
-        if (sb.length() > 0) sb.append("\r\n\r\n");
-        if (sbLong.length() > 0) sbLong.append("\r\n");
-        sb.append(sbLong);
-        sb.append(sbMana);
+        sb.append(keywordsToText(keyword));
         
 /*
         for(int i = 0; i < keyword.size(); i++) {
@@ -1913,9 +1941,10 @@ public class Card extends MyObservable {
     
     // Hidden Keywords will be returned without the indicator HIDDEN
     public ArrayList<String> getHiddenExtrinsicKeyword() {
-    	ArrayList<String> Keyword = this.HiddenExtrinsicKeyword;
-    	for (int i = 0; i < Keyword.size(); i++) {
-    		Keyword.set(i, Keyword.get(i).replace("HIDDEN ", ""));
+    	ArrayList<String> Keyword = new ArrayList<String>();
+    	for (int i = 0; i < HiddenExtrinsicKeyword.size(); i++) {
+    		String keyword = HiddenExtrinsicKeyword.get(i);
+    		Keyword.add(keyword.replace("HIDDEN ", ""));
     	}
         return Keyword;
     }
@@ -1926,7 +1955,7 @@ public class Card extends MyObservable {
     
     public void removeHiddenExtrinsicKeyword(String s) {
     	HiddenExtrinsicKeyword.remove(s);
-        this.updateObservers();
+        //this.updateObservers();
     }
     
     public boolean isPermanent() {
