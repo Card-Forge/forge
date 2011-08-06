@@ -1,3 +1,11 @@
+Ulamog's Crusher
+8
+Creature Eldrazi
+no text
+8/8
+Annihilator 2
+This card attacks each turn if able.
+
 Kozilek, Butcher of Truth
 10
 Legendary Creature Eldrazi
