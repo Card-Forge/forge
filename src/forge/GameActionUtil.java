@@ -5469,23 +5469,43 @@ public class GameActionUtil {
 		}
 	}
 
-	private static void playerCombatDamage_Hystrodon(Card c) {
-		final String player = c.getController();
-		final int power = c.getNetAttack();
+    private static void playerCombatDamage_Hystrodon(final Card c) {
+        final String player = c.getController();
+        final int power = c.getNetAttack();
 
-		if(power > 0) {
-			Ability ability2 = new Ability(c, "0") {
-				@Override
-				public void resolve() {
-					AllZone.GameAction.drawCard(player);
-				}
-			};// ability2
-
-			ability2.setStackDescription(c.getName() + " - " + player + " draws a card.");
-			AllZone.Stack.add(ability2);
-		} // if
-
-	}
+        if (power > 0) {
+            Ability ability2 = new Ability(c, "0") {
+                @Override
+                public void resolve() {
+                    if (player.equals("Human")) {
+                        StringBuffer title = new StringBuffer();
+                        title.append(c.getName()).append(" Ability");
+                        StringBuffer message = new StringBuffer();
+                        message.append("Will you draw a card?");
+                        int choice = JOptionPane.showConfirmDialog(null, message.toString(), title.toString(), JOptionPane.YES_NO_OPTION);
+                        
+                        if (choice == JOptionPane.YES_OPTION) {
+                            AllZone.GameAction.drawCard(player);
+                        }// May Draw a card
+                    }// Human
+                    
+                    if (player.equals("Computer")) {
+                        int compLibSize = AllZone.getZone(Constant.Zone.Library, player).size();
+                        int compHandSize = AllZone.getZone(Constant.Zone.Hand, player).size();
+                        
+                        if (compLibSize >= 5  && compHandSize < 7) {
+                            AllZone.GameAction.drawCard(player);
+                        }// May Draw a card
+                    }// Computer
+                }//resolve()
+            };// ability2
+            
+            StringBuffer sb = new StringBuffer();
+            sb.append(c.getName()).append(" - ").append(player).append(" may draw a card.");
+            ability2.setStackDescription(sb.toString());
+            AllZone.Stack.add(ability2);
+        }// if
+    }//playerCombatDamage_Hystrodon()
 
 	private static void playerCombatDamage_Glint_Eye_Nephilim(Card c) {
 		final String player = c.getController();
