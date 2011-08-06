@@ -722,6 +722,7 @@ res/cardsfolder/cascade_bluffs.txt -text svneol=native#text/plain
 res/cardsfolder/castle.txt -text svneol=native#text/plain
 res/cardsfolder/castle_raptors.txt -text svneol=native#text/plain
 res/cardsfolder/castle_sengir.txt -text svneol=native#text/plain
+res/cardsfolder/cat_burglar.txt -text svneol=native#text/plain
 res/cardsfolder/cat_warriors.txt -text svneol=native#text/plain
 res/cardsfolder/catalog.txt -text svneol=native#text/plain
 res/cardsfolder/catapult_master.txt -text svneol=native#text/plain
