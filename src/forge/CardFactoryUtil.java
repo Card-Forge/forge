@@ -1819,11 +1819,15 @@ public class CardFactoryUtil {
         final SpellAbility enchant = new Spell(sourceCard) {
 			private static final long serialVersionUID = -4021229901439299033L;
 
+			/*
+			 *  for flash, which is not working through the keyword for some reason
+			 *  if not flash then limit to main 1 and 2 on controller's turn and card in hand
+			 */
 			@Override
             public boolean canPlay() {
                 return (sourceCard.getKeyword().contains("Flash") && (AllZone.GameAction.isCardInZone(sourceCard, AllZone.Human_Hand) || 
-                        AllZone.GameAction.isCardInZone(sourceCard, AllZone.Computer_Hand))    // for flash, which is not working through the keyword for some reason
-                            ||    // if not flash then limit to main 1 and 2 on controller's turn and card in hand
+                        AllZone.GameAction.isCardInZone(sourceCard, AllZone.Computer_Hand))
+                            || 
                        (! sourceCard.getKeyword().contains("Flash") && (sourceCard.getController().equals(AllZone.Phase.getActivePlayer()) &&
                        (AllZone.GameAction.isCardInZone(sourceCard, AllZone.Human_Hand) || AllZone.GameAction.isCardInZone(sourceCard, AllZone.Computer_Hand)) && 
                        (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) || AllZone.Phase.getPhase().equals(Constant.Phase.Main2)))));
@@ -1836,23 +1840,25 @@ public class CardFactoryUtil {
                 if (list.isEmpty()) return false;
                 
                 //else we may need to filter the list and remove inappropriate targets
-                
-                // If extrinsicKeywords contains "CARDNAME can't attack." or "CARDNAME can't attack or block."
-                //     then remove creatures with Defender from the list
-                
+
+                /* If extrinsicKeywords contains "CARDNAME can't attack." or "CARDNAME can't attack or block."
+                 *     then remove creatures with Defender from the list and remove creatures that have one
+                 *     or more of these keywords to start with
+                 */
                 final ArrayList<String> extKeywords = new ArrayList<String>(Arrays.asList(extrinsicKeywords));
                 
                 if (extKeywords.contains("CARDNAME can't attack.") || extKeywords.contains("CARDNAME can't attack or block.")) {
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                        	return c.isCreature() && !c.getKeyword().contains("Defender");
+                        	return c.isCreature() && !c.getKeyword().contains("Defender") && 
+                        	!c.getKeyword().contains("CARDNAME can't attack.") && !c.getKeyword().contains("CARDNAME can't attack or block.");
                         }
                     });
                 }
                 
-                // If extrinsicKeywords contains "CARDNAME doesn't untap during your untap step."
-                //     then remove creatures with Vigilance from the list
-                
+                /* If extrinsicKeywords contains "CARDNAME doesn't untap during your untap step."
+                 *     then remove creatures with Vigilance from the list
+                */
                 if (extKeywords.contains("CARDNAME doesn't untap during your untap step.")) {
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {

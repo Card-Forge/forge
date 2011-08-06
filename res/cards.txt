@@ -1,3 +1,11 @@
+Sedraxis Specter
+U B R
+Creature Specter
+Whenever Sedraxis Specter deals combat damage to a player, that player discards a card.
+3/2
+Flying
+Unearth:1 B
+
 Lifelink
 W
 Enchantment Aura
@@ -712,14 +720,6 @@ Land
 Whenever a Mountain enters the battlefield under your control, if you control at least five other Mountains, you may have Valakut, the Molten Pinnacle deal 3 damage to target creature or player.
 Valakut, the Molten Pinnacle enters the battlefield tapped.
 tap: add R
-
-Sedraxis Specter
-U B R
-Creature Specter
-Whenever Sedraxis Specter deals combat damage to a player, that player discards a card.
-2/2
-Flying
-Unearth:1 B
 
 Power Matrix
 4
