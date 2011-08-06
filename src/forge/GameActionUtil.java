@@ -86,6 +86,7 @@ public class GameActionUtil
 		// cause black vise to do an extra point of
 		// damage if black vise was in play
 		upkeep_Font_of_Mythos();
+		upkeep_Overbeing_of_Myth();
 		
 		upkeep_AI_Aluren(); // experimental, just have the AI dump his small
 		// creats in play when aluren is there
@@ -7567,6 +7568,20 @@ public class GameActionUtil
 		}
 	}// upkeep_Font_of_Mythos()
 	
+	private static void upkeep_Overbeing_of_Myth()
+	{
+		final String player = AllZone.Phase.getActivePlayer();
+
+		CardList list = new CardList();
+		list.addAll(AllZone.Human_Play.getCards());
+		list.addAll(AllZone.Computer_Play.getCards());
+
+		list = list.getName("Overbeing of Myth");
+
+		for (int i = 0; i < list.size(); i++)
+			AllZone.GameAction.drawCard(player);
+	}// upkeep_Overbeing_of_Myth()
+	
 	private static void upkeep_Carnophage()
 	{
 		final String player = AllZone.Phase.getActivePlayer();
@@ -13997,6 +14012,45 @@ public class GameActionUtil
 	               
 	   };//Maro
 	   
+	   public static Command Overbeing_of_Myth = new Command()
+	   {
+		private static final long serialVersionUID = -2250795040532050455L;
+		public void execute()
+	      {
+	         // get all creatures
+	         CardList list = new CardList();
+	         list.addAll(AllZone.Human_Play.getCards());
+	         list.addAll(AllZone.Computer_Play.getCards());
+	         list = list.getName("Overbeing of Myth");
+
+	         for (int i = 0; i < list.size(); i++)
+	         {
+	            Card c = list.get(i);
+	            int k = 0;
+	            if (c.getController().equals(Constant.Player.Human)) 
+	            	{k = countHand_Human ();}
+	             else  k = countHand_Computer();
+	            c.setBaseAttack(k);
+	            c.setBaseDefense(k);
+	         }
+	      }   
+	         private int countHand_Human()
+	         {
+	            PlayerZone Play = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human);
+	            CardList list = new CardList();
+	            list.addAll(Play.getCards());
+	            return list.size();
+	         }
+	         private int countHand_Computer()
+	         {
+	            PlayerZone Play = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
+	            CardList list = new CardList();
+	            list.addAll(Play.getCards());
+	            return list.size();
+	         }	     
+	               
+	   };//overbeing of myth
+	   
 	   public static Command Guul_Draz_Specter = new Command()
        {
           private static final long serialVersionUID = -8778902687347191964L;
@@ -16088,6 +16142,7 @@ public class GameActionUtil
 		commands.put("Multani_Maro_Sorcerer", Multani_Maro_Sorcerer);
 		commands.put("Molimo_Maro_Sorcerer", Molimo_Maro_Sorcerer);
 		commands.put("Maro", Maro);
+		commands.put("Overbeing_of_Myth", Overbeing_of_Myth);
 		commands.put("Guul_Draz_Specter", Guul_Draz_Specter);
 		commands.put("Dakkon", Dakkon);
 		commands.put("Korlash", Korlash);

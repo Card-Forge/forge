@@ -1353,7 +1353,8 @@ private int getDifferentLand(CardList list, String land)
 			int damageToAdd = damage;
     		//AllZone.GameAction.addDamage(c, crd , assignedDamageMap.get(crd));
 			
-			  if (source.getKeyword().contains("Wither"))
+			  if (source.getKeyword().contains("Wither") && 
+				  card.isCreature())
 			  {
 				  damageToAdd = 0;
 				  card.addCounter(Counters.M1M1, damage);
@@ -1390,7 +1391,8 @@ private int getDifferentLand(CardList list, String land)
   public void addDamage(Card card, Card source, int damage)
   {
 	  int damageToAdd = damage;
-	  if (source.getKeyword().contains("Wither"))
+	  if (source.getKeyword().contains("Wither") &&
+		  card.isCreature())
 	  {
 		  damageToAdd = 0;
 		  card.addCounter(Counters.M1M1, damage);

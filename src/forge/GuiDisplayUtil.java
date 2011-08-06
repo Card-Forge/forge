@@ -9,8 +9,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -274,10 +280,92 @@ public class GuiDisplayUtil implements NewConstants {
         return new ImageIcon();
     }
     
+    @SuppressWarnings("deprecation")
+	public static URL getURL(Card c)
+    {
+    	File dir1 = new File (".");
+    	
+    	/*
+    	try {
+			System.out.println ("Current dir : " + dir1.getCanonicalPath());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+
+    	String path = "";
+    	try {
+			path = dir1.getCanonicalPath();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	String suffix = ".jpg";
+        String filename = "";
+        if(!c.isFaceDown()) {
+            String basicLandSuffix = "";
+            if(c.isBasicLand()) {
+                if(c.getRandomPicture() != 0) { 
+                	basicLandSuffix = Integer.toString(c.getRandomPicture());
+                	//c.setImageName(c.getImageName() + basicLandSuffix);
+                }
+
+            }
+            filename = cleanString(c.getImageName())+ basicLandSuffix + suffix;
+        } else filename = "morph" + suffix;
+        
+        String loc = "";
+        if (!c.isToken())
+        	loc = IMAGE_BASE;
+        else
+        	loc = IMAGE_TOKEN;
+        
+        String fileString = path + "\\" +ForgeProps.getFile(loc)+"\\" +filename;
+        //System.out.println(fileString);
+        File file = new File(fileString);
+        
+        URL url = null; try { url = file.toURL(); return url; } catch (MalformedURLException e) { } 
+        return null;
+        
+    }
+    
+    public static InputStream getPictureStream(Card c)
+    {
+    	String suffix = ".jpg";
+        String filename = "";
+        if(!c.isFaceDown()) {
+            String basicLandSuffix = "";
+            if(c.isBasicLand()) {
+                if(c.getRandomPicture() != 0) { 
+                	basicLandSuffix = Integer.toString(c.getRandomPicture());
+                	//c.setImageName(c.getImageName() + basicLandSuffix);
+                }
+
+            }
+            filename = cleanString(c.getImageName())+ basicLandSuffix + suffix;
+        } else filename = "morph" + suffix;
+        
+        String loc = "";
+        if (!c.isToken())
+        	loc = IMAGE_BASE;
+        else
+        	loc = IMAGE_TOKEN;
+        
+        String fileString = ForgeProps.getFile(loc)+"\\" +filename;
+    	
+        try {
+			BufferedInputStream is = new BufferedInputStream(new FileInputStream(fileString));
+			return is;
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+    }
+    
     public static JPanel getPicture(Card c) {
         if(AllZone.NameChanger.shouldChangeCardName()) return new JPanel();
         
-
         String suffix = ".jpg";
         String filename = "";
         if(!c.isFaceDown()) {

@@ -140,6 +140,13 @@ public class CombatUtil
     		return false;
     }
     
+    if (attacker.getName().equals("Wanderbrine Rootcutters"))
+    {
+    	if (CardUtil.getColors(blocker).contains(Constant.Color.Green))
+    		return false;
+    }
+    
+    
     if (attacker.getName().equals("Amrou Seekers"))
     {
     	if (!blocker.getType().contains("Artifact") &&
@@ -1572,6 +1579,33 @@ public class CombatUtil
 	            	                                  
 
 		  }//Sapling of Colfenor
+		  
+		  else if(c.getName().equals("Goblin Guide") && !c.getCreatureAttackedThisTurn())
+		  {
+			     final String opp =  AllZone.GameAction.getOpponent(c.getController());
+			    
+			     Ability ability = new Ability(c, "0")
+			     {
+			    	public void resolve()
+			    	{
+			    		PlayerZone lib = AllZone.getZone(Constant.Zone.Library, opp);
+			    		if (lib.size() > 0)
+			    		{
+			    			CardList cl = new CardList();
+					    	cl.add(lib.get(0));
+					    	AllZone.Display.getChoiceOptional("Top card:", cl.toArray());
+					    	
+					    	Card c = cl.get(0);
+					    	if(c.isLand()) {
+					    		AllZone.GameAction.moveToHand(c);
+					    	}
+			    		}
+			    	}
+			     };
+			     ability.setStackDescription("Goblin Guide - defending player reveals the top card of his or her library. If it's a land card, that player puts it into his or her hand.");
+			     AllZone.Stack.add(ability);
+		  }//Goblin Guide
+		  
 		  c.setCreatureAttackedThisTurn(true);
 		  
 	  }//if Phase = declare attackers

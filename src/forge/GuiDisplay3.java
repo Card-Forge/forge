@@ -24,6 +24,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;
@@ -32,9 +33,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.concurrent.ConcurrentMap;
 
+import javax.imageio.ImageIO;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -60,6 +65,12 @@ import javax.swing.event.ListSelectionListener;
 
 import org.jdesktop.swingx.MultiSplitPane;
 import org.jdesktop.swingx.MultiSplitLayout.Node;
+
+import com.google.common.collect.MapMaker;
+//import org.omg.CORBA.portable.InputStream;
+
+import arcane.ui.ScaledImagePanel;
+import arcane.ui.ScaledImagePanel.ScalingType;
 
 import forge.error.ErrorViewer;
 import forge.gui.ForgeAction;
@@ -87,6 +98,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     public Color c3 = new Color(204,204,204);
     */
     
+    private ConcurrentMap<String, BufferedImage> imageCache = new MapMaker().softValues().makeMap();
     private String current_picture = "";
     //private int count = 0;
 
@@ -561,6 +573,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     		
         //picture
     	//System.out.println("UPDATING PICTURE!!! #:" + count++);
+    	/*
     	current_picture = c.getImageName();
         picturePanel.removeAll();
         JPanel pic = GuiDisplayUtil.getPicture(c);
@@ -568,6 +581,48 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         picturePanel.add(pic);
         picturePanel.revalidate();
         System.gc();
+    	*/
+    	
+    	current_picture = c.getImageName();
+    	
+    	BufferedImage srcImage = null;
+    	if(imageCache.containsKey(c.getImageName()))
+    		srcImage = imageCache.get(c.getImageName());
+    	else {
+    		InputStream stream;
+			try {
+				//stream = new URL(GuiDisplayUtil.getURL(c)).openStream();
+				stream = GuiDisplayUtil.getURL(c).openStream();
+				srcImage = ImageIO.read(stream);
+	    		imageCache.put(c.getImageName(), srcImage);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		
+    	}
+    	//BufferedImage srcImageBlurred = arcane.ui.util.ImageUtil.getBlurredImage(srcImage, 3, 1.0f); // get a blurred image
+    	cardImagePanel.setImage(srcImage, srcImage);
+		cardImagePanel.repaint();
+    	
+    	/*
+    	BufferedInputStream stream = (BufferedInputStream) GuiDisplayUtil.getPictureStream(c);
+    	BufferedImage srcImage;
+		try {
+			srcImage = arcane.ui.util.ImageUtil.getImage(stream);
+			BufferedImage srcImageBlurred = arcane.ui.util.ImageUtil.getBlurredImage(srcImage, 3, 1.0f); // get a blurred image
+			
+			cardImagePanel.setImage(srcImage, srcImageBlurred);
+			cardImagePanel.repaint();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} // only need stream
+    	*/
     	
     	//System.out.println(picturePanel.getComponentCount());
     }//updateCardDetail()
@@ -1141,10 +1196,21 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         
         //~ picturePanel.setBorder(new EtchedBorder());
         
+        /*
         picturePanel.setLayout(new BoxLayout(picturePanel, BoxLayout.Y_AXIS));
         picturePanel.setBackground(c1);
         picturePanel.addMouseListener(new CustomListener());
         pane.add(new ExternalPanel(picturePanel), "picture");
+        */
+        
+        cardImagePanel.setScalingBlur(true); //use blured image if scaling down more than 50%
+        cardImagePanel.setScaleLarger(true); //upscale if needed true
+        cardImagePanel.setScalingType(ScalingType.bicubic); // type of scaling bicubic has good quality / speed ratio
+        
+        cardImagePanel.setLayout(new BoxLayout(cardImagePanel, BoxLayout.Y_AXIS));
+        cardImagePanel.setBackground(c1);
+        cardImagePanel.addMouseListener(new CustomListener());
+        pane.add(new ExternalPanel(cardImagePanel), "picture");
     }
     
     private void cancelButtonActionPerformed(ActionEvent evt) {
@@ -1190,6 +1256,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     JPanel                          cdPanel             = new JPanel();
     //JPanel    picturePanel        = new JPanel();
    public  JPanel                          picturePanel        = new JPanel();
+   
     JLabel                          oppLifeLabel        = new JLabel();
     JLabel                          playerLifeLabel     = new JLabel();
     JLabel 							oppPCLabel			= new JLabel();
@@ -1210,6 +1277,9 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     JLabel                          playerGraveValue    = new JLabel();
     JLabel                          playerFBValue       = new JLabel();
     JLabel                          playerRemovedValue  = new JLabel();
+    
+    
+    ScaledImagePanel cardImagePanel = new ScaledImagePanel(); // < our JPanel
     
     private class ZoneAction extends ForgeAction {
         private static final long serialVersionUID = -5822976087772388839L;

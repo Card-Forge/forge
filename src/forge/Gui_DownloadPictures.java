@@ -279,7 +279,11 @@ public class Gui_DownloadPictures extends DefaultBoundedRangeModel implements Ru
                     ErrorViewer.showError(ex, ForgeProps.getLocalized(ERRORS.OTHER), cards[card].name,
                             url);
 //                    throw new RuntimeException("Gui_DownloadPictures : error 1 - " +ex);
-                    break;
+                    int more = JOptionPane.showConfirmDialog(null, "Some error occured. Continue downloading pictures?", "Error",
+                            JOptionPane.YES_NO_OPTION);
+                    if (more == JOptionPane.NO_OPTION) {
+                    	break;
+                    }
                 }
             }//for
         }

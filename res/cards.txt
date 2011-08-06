@@ -1,3 +1,22 @@
+Goblin Guide
+R
+Creature Goblin
+Whenever Goblin Guide attacks, defending player reveals the top card of his or her library. If it's a land card, that player puts it into his or her hand.
+2/2
+Haste
+
+Overbeing of Myth
+GU GU GU GU GU
+Creature Spirit Avatar
+Overbeing of Myth's power and toughness are each equal to the number of cards in your hand. At the beginning of your draw step, draw an additional card.
+0/0
+
+Wanderbrine Rootcutters
+2 UB UB
+Creature Merfolk Rogue
+Wanderbrine Rootcutters can't be blocked by green creatures.
+3/3
+
 Time Vault
 2
 Artifact

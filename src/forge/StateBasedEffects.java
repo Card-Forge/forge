@@ -42,6 +42,7 @@ public class StateBasedEffects
 		cardToEffectsList.put("Terravore", new String[] {"Terravore"});
 		cardToEffectsList.put("Magnivore", new String[] {"Magnivore"});
 		cardToEffectsList.put("Tarmogoyf", new String[] {"Tarmogoyf"});
+		cardToEffectsList.put("Lhurgoyf", new String[] {"Lhurgoyf"});
 		cardToEffectsList.put("Drove of Elves", new String[] {"Drove_of_Elves"});		
 		cardToEffectsList.put("Crowd of Cinders", new String[] {"Crowd_of_Cinders"});
 		cardToEffectsList.put("Faerie Swarm", new String[] {"Faerie_Swarm"});
@@ -49,6 +50,7 @@ public class StateBasedEffects
 		cardToEffectsList.put("Multani, Maro-Sorcerer", new String[] {"Multani_Maro_Sorcerer"});
 		cardToEffectsList.put("Molimo, Maro-Sorcerer", new String[] {"Molimo_Maro_Sorcerer"});
 		cardToEffectsList.put("Maro", new String[] {"Maro"});
+		cardToEffectsList.put("Overbeing of Myth", new String[] {"Overbeing_of_Myth"});
 		cardToEffectsList.put("Guul Draz Specter", new String[] {"Guul_Draz_Specter"});
 		cardToEffectsList.put("Dakkon Blackblade", new String[] {"Dakkon"});
 		cardToEffectsList.put("Korlash, Heir to Blackblade", new String[] {"Korlash"});
