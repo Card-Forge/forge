@@ -7497,8 +7497,8 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public boolean canPlay(){
-					CardList grave = new CardList(AllZone.Human_Graveyard.getCards());
-					CardList aiGrave = new CardList(AllZone.Computer_Graveyard.getCards());
+					CardList grave = AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer);
+					CardList aiGrave = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
 					return (grave.getType("Creature").size() > 1 || aiGrave.getType("Creature").size() > 1) && super.canPlay();
                 }
             };
@@ -7509,8 +7509,8 @@ public class CardFactory implements NewConstants {
 
 				@Override
                 public void showMessage() {
-					CardList grave = new CardList(AllZone.Human_Graveyard.getCards());
-					CardList aiGrave = new CardList(AllZone.Computer_Graveyard.getCards());
+					CardList grave = AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer);
+					CardList aiGrave = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
 					grave = grave.getType("Creature");
 					aiGrave = aiGrave.getType("Creature");
 					
@@ -7529,22 +7529,22 @@ public class CardFactory implements NewConstants {
 							chooseGrave.addAll(grave.toArray());
 						}
 						
-						Object o = AllZone.Display.getChoice("Choose first card to exile", chooseGrave.toArray());
+						Object o = AllZone.Display.getChoice("Choose first creature to exile", chooseGrave.toArray());
 						if (o!=null)
 						{
 							CardList newGrave;
 							Card c = (Card)o;
 							if (c.getOwner().equals(AllZone.HumanPlayer)){
-								newGrave = new CardList(AllZone.Human_Graveyard.getCards());
+								newGrave = AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer);
 							}
 							else {
-								newGrave = new CardList(AllZone.Computer_Graveyard.getCards());
+								newGrave = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
 							}
 							
 							newGrave = newGrave.getType("Creature");
 							newGrave.remove(c);
 							
-							Object o2 = AllZone.Display.getChoice("Choose second card to exile", newGrave.toArray());
+							Object o2 = AllZone.Display.getChoice("Choose second creature to exile", newGrave.toArray());
 							if (o2!=null)
 							{
 								Card c2 = (Card)o2;
@@ -7560,10 +7560,10 @@ public class CardFactory implements NewConstants {
                 }
             };
             
-            nightSoil.setDescription("1, Exile target creature card in a graveyard: Put a 1/1 green Saproling creature token into play.");
+            nightSoil.setDescription("1, Exile two creature cards from a single graveyard: Put a 1/1 green Saproling creature token onto the battlefield.");
             
             StringBuilder sb = new StringBuilder();
-            sb.append(card.getController()).append(" put a 1/1 green Saproling creature token into play.");
+            sb.append(card.getController()).append(" puts a 1/1 green Saproling creature token onto the battlefield.");
             nightSoil.setStackDescription(sb.toString());
             
             nightSoil.setAfterPayMana(soilTarget);
