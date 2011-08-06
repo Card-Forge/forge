@@ -10451,7 +10451,58 @@ public class CardFactory_Creatures {
         	toExile.setStackDescription(card+" - exile "+card+".");
         	card.addSpellAbility(toExile);
         }//*************** END ************ END **************************
-               
+        
+      //*************** START *********** START **************************
+        else if(cardName.equals("Frost Titan")) {
+        	final Trigger targetedTrigger = TriggerHandler.parseTrigger("FrostTitanCounter","Mode$ SpellAbilityCast | TargetsValid$ Card.Self | ValidControllingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigOverridden | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays 2.", card);
+        	final Ability FrostTitanCounterAbility = new Ability(card,"0")
+        	{
+
+				@Override
+				public void resolve() {
+					Trigger trig = card.getNamedTrigger("FrostTitanCounter");
+					HashMap<String,Object> runParams = trig.getRunParams();
+					final SpellAbility tgtSA = (SpellAbility)runParams.get("CastSA");
+					
+					Ability ability = new Ability(card, "2") {
+	                    @Override
+	                    public void resolve() {
+	                        ;
+	                    }
+	                };
+	                
+	                final Command unpaidCommand = new Command() {
+	                    private static final long serialVersionUID = 8094833091127334678L;
+	                    
+	                    public void execute() {
+	                    	AllZone.Stack.remove(tgtSA);
+	                    	if(tgtSA.isSpell())
+	                    		AllZone.GameAction.moveToGraveyard(tgtSA.getSourceCard());
+	                    }
+	                };
+	                
+	                if(tgtSA.getActivatingPlayer().equals(AllZone.HumanPlayer))
+	                {
+	                	GameActionUtil.payManaDuringAbilityResolve(card + "\r\n", ability.getManaCost(), 
+	                			Command.Blank, unpaidCommand);
+	                }
+	                else
+	                {
+	                	if(ComputerUtil.canPayCost(ability)) ComputerUtil.playNoStack(ability);
+	                    else {
+	                    	AllZone.Stack.remove(tgtSA);
+	                    	if(tgtSA.isSpell())
+	                    		AllZone.GameAction.moveToGraveyard(tgtSA.getSourceCard());
+	                    }
+	                }
+				}
+        		
+        	};
+        	
+        	targetedTrigger.setOverridingAbility(FrostTitanCounterAbility);
+        	
+        	card.addTrigger(targetedTrigger);
+        }//*************** END ************ END **************************
         
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
         {
