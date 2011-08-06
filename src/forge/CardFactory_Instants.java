@@ -550,7 +550,7 @@ public class CardFactory_Instants {
                             done();
                         } else AllZone.GameAction.moveToGraveyard(card);
                     } else {
-                        AllZone.GameAction.addDamage(getTargetPlayer(), card, 5);
+                        getTargetPlayer().addDamage(5, card);
                         done();
                     }
                 }//resolve()
@@ -3791,8 +3791,8 @@ public class CardFactory_Instants {
                   for(int i = 0; i < all.size(); i++)
                       	all.get(i).addDamage(card.getXManaCostPaid(), card);
                   
-                  AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, damage);
-                  AllZone.GameAction.addDamage(AllZone.ComputerPlayer, card, damage);
+                  AllZone.HumanPlayer.addDamage(damage, card);
+                  AllZone.ComputerPlayer.addDamage(damage, card);
                   
       			card.setXManaCostPaid(0);
       		}
@@ -3857,8 +3857,8 @@ public class CardFactory_Instants {
                   for(int i = 0; i < all.size(); i++)
                       	all.get(i).addDamage(card.getXManaCostPaid(), card);
                   
-                  AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, damage);
-                  AllZone.GameAction.addDamage(AllZone.ComputerPlayer, card, damage);
+                  AllZone.HumanPlayer.addDamage(damage, card);
+                  AllZone.ComputerPlayer.addDamage(damage, card);
                   
       			card.setXManaCostPaid(0);
       		}
@@ -4330,7 +4330,7 @@ public class CardFactory_Instants {
                             Card c = getTargetCard();
                             c.addDamage(damage, card);
                         }
-                    } else AllZone.GameAction.addDamage(getTargetPlayer(), card, damage);
+                    } else getTargetPlayer().addDamage(damage, card);
                 }
             };//SpellAbility
             
@@ -4366,7 +4366,7 @@ public class CardFactory_Instants {
                             Card c = getTargetCard();
                             c.addDamage(damage, card);
                         }
-                    } else AllZone.GameAction.addDamage(getTargetPlayer(), card, damage);
+                    } else getTargetPlayer().addDamage(damage, card);
                     
                     card.setKicked(true);
                 }
@@ -4436,7 +4436,7 @@ public class CardFactory_Instants {
         			if( damage < 0 )
         				damage = 0;
 
-        			AllZone.GameAction.addDamage(getTargetPlayer(), card, damage);
+        			getTargetPlayer().addDamage(damage, card);
         		}
         	};
         	spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
@@ -4552,8 +4552,8 @@ public class CardFactory_Instants {
         			for(Card c:all) {
         				AllZone.GameAction.addDamage(c, card, damage);
         			}
-        			AllZone.GameAction.addDamage(AllZone.ComputerPlayer, card, damage);
-        			AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, damage);
+        			AllZone.ComputerPlayer.addDamage(damage, card);
+        			AllZone.HumanPlayer.addDamage(damage, card);
         		}// resolve()
 
         		@Override
