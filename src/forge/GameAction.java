@@ -715,6 +715,7 @@ private Card getCurrentCard(int ID)
     {
 	     PlayerLife life = AllZone.GameAction.getPlayerLife(player);
 	     life.setLife(0);
+	     checkStateEffects();
     }
   }
   
