@@ -203,14 +203,14 @@ for fileName in os.listdir(folder):
 		continue
 
 # parse cardsfolder for Card Lines and Rarity/Picture SVars. Filling in any gaps
-	file = open(folder + '\\' + fileName)
+	file = open(folder + os.sep + fileName)
 	cleanName = fileName.replace('.txt', '')
 	
 	line = file.readline().strip()
 	# Handle name and creation
 	name = line.replace('Name:','')
 	
-	card = Card(name, cleanName)
+	card = Card(name.replace(' ','+'), cleanName) #This makes it work on Mac OS X.  Will test Windows and FreeBSD when I can.
 	cardDict[cleanName] = card
 	card.lines = line + '\n'
 	
@@ -223,7 +223,7 @@ for fileName in os.listdir(folder):
 			line = file.readline().strip()
 			continue
 		
-		# We really shouldn
+		# We really shouldn't
 		if line == 'End':
 			break
 	
@@ -242,7 +242,7 @@ for fileName in os.listdir(folder):
 		addSets(card)
 		card.hasSet = True
 			
-		file = open(folder + "/" + fileName, 'w')
+		file = open(folder + os.sep + fileName, 'w')
 		file.write(card.lines)
 		if card.hasSet:
 			for s in card.sets.values():
