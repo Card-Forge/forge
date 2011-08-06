@@ -33,9 +33,6 @@ public class Input_Attack extends Input {
     	
         Card check = getPlaneswalker();
         if(check == null) {
-            
-            //AllZone.Phase.nextPhase();
-            //for debugging: System.out.println("need to nextPhase(Input_Attack.selectButtonOK,check==null) = true");
             AllZone.Phase.setNeedToNextPhase(true);
         } else {
             AllZone.pwCombat.setPlaneswalker(check);

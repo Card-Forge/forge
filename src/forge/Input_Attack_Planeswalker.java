@@ -28,10 +28,9 @@ public class Input_Attack_Planeswalker extends Input {
     
     @Override
     public void selectButtonOK() {
-        
-        //AllZone.Phase.nextPhase();
-        //for debugging: System.out.println("need to nextPhase(Input_Attack_Planeswalker.selectButtonOK) = true; Note, this has not been tested, did it work?");
-        AllZone.Phase.setNeedToNextPhase(true);
+    	if (AllZone.pwCombat.getAttackers().length > 0)
+    		AllZone.Phase.setCombat(true);
+    	AllZone.Phase.setNeedToNextPhase(true);
         this.stop();
     }
     
