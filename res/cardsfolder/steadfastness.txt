@@ -2,7 +2,7 @@ Name:Steadfastness
 ManaCost:1 W
 Types:Sorcery
 Text:no text
-K:spAllPump:YouCtrl:+0/+3:Creatures you control get +0/+3 until end of turn.:Steadfastness - Creatures get +0/+3 until EOT
+A:SP$ PumpAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl | NumDef$ +3 | SpellDescription$ Creatures you control get +0/+3 until end of turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://gatherer.wizards.com/handlers/image.ashx?multiverseid=20399&type=card
