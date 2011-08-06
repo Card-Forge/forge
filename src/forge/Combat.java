@@ -392,15 +392,19 @@ public class Combat {
 
 		CardList block;
 		CardList attacking = new CardList(getAttackers());
+		
+		
 		for (int i = 0; i < attacking.size(); i++) {
+			
 			block = getBlockers(attacking.get(i));
+			
+			int damageDealt = attacking.get(i).getNetCombatDamage();
 
 			// attacker always gets all blockers' attack
 
 			for (Card b : block) {
 				if (b.hasFirstStrike() || b.hasDoubleStrike()) {
-					int attack = b.getNetCombatDamage();
-					attacking.get(i).addAssignedDamage(attack, b);
+					attacking.get(i).addAssignedDamage(damageDealt, b);
 				}
 			}
 
@@ -410,43 +414,33 @@ public class Combat {
 			}
 
 			else if (attacking.get(i).hasFirstStrike() || attacking.get(i).hasDoubleStrike()) {
-				if (block.size() == 1) {
-					int damageDealt = attacking.get(i).getNetCombatDamage();
-
-					CardList cl = new CardList();
-					cl.add(attacking.get(i));
-
-					block.get(0).addAssignedDamage(damageDealt, attacking.get(i));
-
-					// trample
-					int trampleDamage = damageDealt - block.get(0).getKillDamage();
-					
-					if (attacking.get(i).getKeyword().contains("Trample") && 0 < trampleDamage) {
-						this.addDefendingFirstStrikeDamage(trampleDamage,	attacking.get(i));
-						// System.out.println("First Strike trample damage: " + trample);
-					}
-				}// 1 blocker
-				else if (getAttackingPlayer().isComputer()) {
-					if (attacking.get(i).hasFirstStrike() || attacking.get(i).hasDoubleStrike()) {
-						int damageDealt = attacking.get(i).getNetCombatDamage();
-						addAssignedFirstStrikeDamage(attacking.get(i), block, damageDealt);
-					}
-				} 
-				else{
-					// human
-					if (attacking.get(i).hasFirstStrike() || attacking.get(i).hasDoubleStrike()) {
-						int damageDealt = attacking.get(i).getNetCombatDamage();
-						AllZone.Display.assignDamage(attacking.get(i), block, damageDealt);
-
-					}
+				
+				if (getAttackingPlayer().isHuman()) {// human attacks
+					AllZone.Display.assignDamage(attacking.get(i), block, damageDealt);
 				}
+				else  {// computer attacks
+					if (block.size() == 1) {
+						
+						int trample = damageDealt - block.get(0).getKillDamage();
+						
+						// trample
+						if (attacking.get(i).getKeyword().contains("Trample") && 0 < trample) {
+							block.get(0).addAssignedDamage(block.get(0).getKillDamage(), attacking.get(i));
+							this.addDefendingDamage(trample, attacking.get(i));
+						}
+						else block.get(0).addAssignedDamage(damageDealt, attacking.get(i));
+					}// 1 blocker
+					else {
+						distributeAIDamage(attacking.get(i), block, damageDealt);
+					} 
+				} //Computer
 
 			}// if(hasFirstStrike || doubleStrike)
 		}// for
 	}// setAssignedFirstStrikeDamage()
-
-	private void addAssignedFirstStrikeDamage(Card attacker, CardList block,
-			int damage) {
+	
+	/*
+	private void addAssignedFirstStrikeDamage(Card attacker, CardList block, int damage) {
 
 		Card c = attacker;
 		for (Card b : block) {
@@ -461,7 +455,7 @@ public class Combat {
 
 		// if attacker has no trample, and there's damage left, assign the rest
 		// to a random blocker
-		if (damage > 0) {
+		if (damage > 0 && !c.getKeyword().contains("Trample")) {
 			int index = CardUtil.getRandomIndex(block);
 			block.get(index).addAssignedDamage(damage, c);
 			damage = 0;
@@ -469,7 +463,8 @@ public class Combat {
 			this.addDefendingDamage(damage, c);
 		}
 	}// setAssignedFirstStrikeDamage()
-
+	*/
+	
 	// set Card.setAssignedDamage() for all creatures in combat
 	// also assigns player damage by setPlayerDamage()
 	public void setAssignedDamage() {
@@ -484,8 +479,7 @@ public class Combat {
 
 			// attacker always gets all blockers' attack
 			for (Card b : block) {
-				if (!b.hasFirstStrike()
-						|| (b.hasFirstStrike() && b.hasDoubleStrike())) {
+				if (!b.hasFirstStrike()	|| (b.hasFirstStrike() && b.hasDoubleStrike())) {
 					int attack = b.getNetCombatDamage();
 					attacking.get(i).addAssignedDamage(attack, b);
 				}
@@ -497,27 +491,26 @@ public class Combat {
 			}
 
 			else if (!attacking.get(i).hasFirstStrike() || attacking.get(i).hasDoubleStrike()) {
-				if (block.size() == 1) {
-
-					block.get(0).addAssignedDamage(damageDealt, attacking.get(i));
-
-					// trample
-					int trample = damageDealt - block.get(0).getKillDamage();
-					if (attacking.get(i).getKeyword().contains("Trample") && 0 < trample) {
-						this.addDefendingDamage(trample, attacking.get(i));
-					}
-				}// 1 blocker
-
-				else if (getAttackingPlayer().isComputer()) {
-					addAssignedDamage(attacking.get(i), block, damageDealt);
-
-				} 
-				else{ // human attacks
-
+				
+				if (getAttackingPlayer().isHuman()) {// human attacks
 					AllZone.Display.assignDamage(attacking.get(i), block, damageDealt);
-
 				}
-
+				else  {// computer attacks
+					if (block.size() == 1) {
+						
+						int trample = damageDealt - block.get(0).getKillDamage();
+						
+						// trample
+						if (attacking.get(i).getKeyword().contains("Trample") && 0 < trample) {
+							block.get(0).addAssignedDamage(block.get(0).getKillDamage(), attacking.get(i));
+							this.addDefendingDamage(trample, attacking.get(i));
+						}
+						else block.get(0).addAssignedDamage(damageDealt, attacking.get(i));
+					}// 1 blocker
+					else {
+						distributeAIDamage(attacking.get(i), block, damageDealt);
+					} 
+				} //Computer
 			}// if !hasFirstStrike ...
 		}// for
 
@@ -525,7 +518,7 @@ public class Combat {
 
 	}// assignDamage()
 
-	private void addAssignedDamage(Card attacker, CardList block, int damage) {
+	private void distributeAIDamage(Card attacker, CardList block, int damage) {
 		Card c = attacker;
 		for (Card b : block) {
 			if (b.getKillDamage() <= damage) {

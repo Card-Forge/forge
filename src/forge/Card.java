@@ -2834,7 +2834,7 @@ public class Card extends MyObservable {
     
     //the amount of damage needed to kill the creature (for AI)
     public int getKillDamage() {
-    	int killDamage = getNetDefense() + preventNextDamage - getDamage();
+    	int killDamage = getLethalDamage() + preventNextDamage;
         if(killDamage > preventNextDamage && hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.")) killDamage = 1 + preventNextDamage;
         
         return killDamage;
@@ -2842,7 +2842,7 @@ public class Card extends MyObservable {
     
     //this is the minimal damage a trampling creature has to assign to a blocker
     public int getLethalDamage() {
-    	int lethalDamage = getNetDefense() - getDamage();
+    	int lethalDamage = getNetDefense() - getDamage() - getTotalAssignedDamage();
         
         return lethalDamage;
     }
