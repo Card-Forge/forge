@@ -2,7 +2,7 @@ Name:Emmessi Tome
 ManaCost:4
 Types:Artifact
 Text:no text
-K:abDrawCards 5 T:2:Drawback$YouDiscard/1:Draw two cards, then discard a card.:Emmessi Tome - draw cards and discard a card
+A:AB$Draw | Cost$ 5 T | NumCards$ 2 | SpellDescription$ Draw two cards, then discard a card. | SubAbility$ YouDiscard/1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emmessi_tome.jpg
 End
