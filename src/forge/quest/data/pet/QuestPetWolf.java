@@ -73,7 +73,7 @@ public class QuestPetWolf extends QuestPetAbstract{
     public String[] getAllStats() {
         return new String[]{"You do not own a wolf",
         "1/1, G",
-        "2/1, G",
+        "1/2, G",
         "2/2, G",
         "2/2, G, Flanking"};
     }
