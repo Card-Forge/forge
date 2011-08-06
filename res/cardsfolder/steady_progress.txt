@@ -2,8 +2,8 @@ Name:Steady Progress
 ManaCost:2 U
 Types:Instant
 Text:no text
-K:spDrawCards:1:Draw a card. Proliferate.:Steady Progress - draw a card, proliferate.
 K:Proliferate
+A:SP$Draw | Cost$ 2 U | NumCards$ 1 | SpellDescription$ Draw a card. Proliferate.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steady_progress.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/som/45.jpg
