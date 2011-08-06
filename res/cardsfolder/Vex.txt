@@ -1,0 +1,7 @@
+Name:Vex
+ManaCost:2 U
+Types:Instant
+Text:Counter target spell. Its controller draws a card.
+K:spCounter:Spell:None:Graveyard:CC-Draw(1)
+SVar:Rarity:Common
+End
