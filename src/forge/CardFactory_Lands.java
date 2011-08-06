@@ -2442,7 +2442,7 @@ class CardFactory_Lands {
                 @Override
                 public void resolve() {
                     Card c = a2[0].getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                    if (AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                         if(!c.getIntrinsicKeyword().contains("Fear")) c.addIntrinsicKeyword("Fear");
                         
                         AllZone.EndOfTurn.addUntil(eot2);
@@ -2452,6 +2452,29 @@ class CardFactory_Lands {
             card.addSpellAbility(a2[0]);
             a2[0].setDescription("B, tap: Target legendary creature gains fear until end of turn.");
             
+            Input target = new Input() {
+				private static final long serialVersionUID = 1032601702189887609L;
+            	
+				@Override
+			    public void showMessage() {
+					PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+			        PlayerZone hum = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+			        CardList legendaryCreats = new CardList();
+			        legendaryCreats.addAll(comp.getCards());
+			        legendaryCreats.addAll(hum.getCards());
+			        legendaryCreats = legendaryCreats.filter(new CardListFilter() {
+			        	public boolean addCard(Card c) {
+			        		return c.isCreature() 
+			        				&& c.getType().contains("Legendary") 
+			        				&& CardFactoryUtil.canTarget(card, c);
+			        	}
+			        });
+					stopSetNext(CardFactoryUtil.input_targetSpecific(a2[0], legendaryCreats, "Select target legendary creature", true, false));
+				}//showMessage()
+            };//Input target
+            a2[0].setBeforePayMana(target);
+            
+/* This input allows the human to target any legendary card, creature or not!
 
             @SuppressWarnings("unused")
             // target unused
@@ -2487,7 +2510,7 @@ class CardFactory_Lands {
                 }
             };//Input target
             a2[0].setBeforePayMana(CardFactoryUtil.input_targetType(a2[0], "Legendary"));
-            
+*/
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
