@@ -3,6 +3,7 @@ ManaCost:1 U U
 Types:Creature Human Wizard
 Text:When AEther Adept enters the battlefield, return target creature to its owner's hand.
 PT:2/2
+K:etbBounceTgt:Creature:Hand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_adept.jpg
 End
