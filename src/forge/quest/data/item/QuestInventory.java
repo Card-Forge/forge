@@ -5,6 +5,13 @@ import java.util.*;
 public class QuestInventory {
     Map<String, QuestItemAbstract> inventory = new HashMap<String, QuestItemAbstract>();
 
+    public QuestInventory() {
+        Set<QuestItemAbstract> allItems = getAllItems();
+        for (QuestItemAbstract item : allItems) {
+            inventory.put(item.getName(), item);
+        }
+    }
+
     public boolean hasItem(String itemName) {
         return inventory.containsKey(itemName) && inventory.get(itemName).getLevel() > 0;
     }
@@ -25,7 +32,8 @@ public class QuestInventory {
         inventory.get(itemName).setLevel(level);
     }
 
-    public static Set<QuestItemAbstract> getAllItems() {
+
+    private static Set<QuestItemAbstract> getAllItems() {
         SortedSet<QuestItemAbstract> set = new TreeSet<QuestItemAbstract>();
 
         set.add(new QuestItemElixir());
@@ -42,11 +50,14 @@ public class QuestInventory {
     private Object readResolve() {
         for (QuestItemAbstract item : getAllItems()) {
             if (!inventory.containsKey(item.getName())) {
-                inventory.put(item.getImageName(), item);
+                inventory.put(item.getName(), item);
             }
         }
         return this;
     }
 
-    
+
+    public Collection<QuestItemAbstract> getItems() {
+        return inventory.values();
+    }
 }

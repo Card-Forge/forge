@@ -1,8 +1,6 @@
 package forge.quest.data.bazaar;
 
-import forge.quest.data.item.QuestInventory;
-import forge.quest.data.pet.QuestPetManager;
-import forge.quest.data.pet.QuestPetPlant;
+import forge.AllZone;
 
 import java.util.*;
 
@@ -68,10 +66,8 @@ public class QuestStallManager {
     public static void buildItems(){
         SortedSet<QuestStallPurchasable> itemSet = new TreeSet<QuestStallPurchasable>();
 
-        itemSet.addAll(QuestPetManager.getAllPets());
-        itemSet.addAll(QuestInventory.getAllItems());
-        itemSet.add(new QuestPetPlant());
-
+        itemSet.addAll(AllZone.QuestData.getInventory().getItems());
+        itemSet.addAll(AllZone.QuestData.getPetManager().getPetsAndPlants());
 
         items = new HashMap<String, SortedSet<QuestStallPurchasable>>();
 

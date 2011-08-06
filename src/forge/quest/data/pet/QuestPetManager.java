@@ -62,7 +62,7 @@ public class QuestPetManager{
         return selectedPet != null;
     }
 
-    public static Set<QuestPetAbstract> getAllPets() {
+    private static Set<QuestPetAbstract> getAllPets() {
         SortedSet<QuestPetAbstract> set = new TreeSet<QuestPetAbstract>();
 
         set.add(new QuestPetBird());
@@ -72,7 +72,6 @@ public class QuestPetManager{
 
         return set;
     }
-
 
 
     public Set<String> getAvailablePetNames() {
@@ -86,8 +85,11 @@ public class QuestPetManager{
     }
 
 
-    public Collection<QuestPetAbstract> getPets() {
-        return pets.values();
+    public Collection<QuestPetAbstract> getPetsAndPlants() {
+        Set <QuestPetAbstract> petsAndPlants = new HashSet<QuestPetAbstract>(pets.values());
+        petsAndPlants.add(plant);
+
+        return petsAndPlants;
     }
 
     //Magic to support added pet types when reading saves.
