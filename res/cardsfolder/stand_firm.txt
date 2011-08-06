@@ -2,7 +2,7 @@ Name:Stand Firm
 ManaCost:W
 Types:Instant
 Text:no text
-K:spPumpTgt:+1/+1:
+A:SP$Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target creature gets +1/+1 until end of turn.
 K:Scry 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stand_firm.jpg
