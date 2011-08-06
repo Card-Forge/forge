@@ -11888,6 +11888,24 @@ public class CardFactory implements NewConstants {
                 private static final long serialVersionUID = -6305494177352031326L;
                 
                 @Override
+                public boolean canPlayAI() {
+                    CardList human = new CardList(AllZone.Human_Play.getCards());
+                    CardList computer = new CardList(AllZone.Computer_Play.getCards());
+                    
+                    String bounceType;
+                    if (cardName.equals("Rebuild")) bounceType = "Artifact";
+                    else bounceType = "Creature";
+                    
+                    human = human.getType(bounceType);
+                    computer = computer.getType(bounceType);
+                    
+                    // the computer will at least bounce 2 more human creatures/artifacts
+                    return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
+                            (computer.size() < human.size() - 1
+                            || (AllZone.Computer_Life.getLife() < 7 && !human.isEmpty()));
+                }
+                
+                @Override
                 public void resolve() {
                     CardList all = new CardList();
                     all.addAll(AllZone.Human_Play.getCards());
