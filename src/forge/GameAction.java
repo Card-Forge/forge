@@ -2294,14 +2294,17 @@ public class GameAction {
                 card.setUniqueNumber(nextUniqueNumber++);
                 
                 //if(card.isBasicLand()) {
-                String PC = card.getSVar("PicCount");
-                int n = 0;
-                if (PC.matches("[0-9][0-9]?"))
-                	n = Integer.parseInt(PC);
-                if (n > 1)
-                    card.setRandomPicture(generator.nextInt(n));
+                //String PC = card.getSVar("PicCount");
+                //if (PC.matches("[0-9][0-9]?"))
+                //	n = Integer.parseInt(PC);
+                
                 if ((card.getSets().size() > 0) && card.getCurSetCode().equals(""))
                 	card.setRandomSetCode();
+                
+                int n = SetInfoUtil.getSetInfo_Code(card.getSets(), card.getCurSetCode()).PicCount;
+                if (n > 1)
+                    card.setRandomPicture(generator.nextInt(n));
+                
                 card.setImageFilename(CardUtil.buildFilename(card));
 
                     //System.out.println("human random number:" + card.getRandomPicture());
@@ -2321,16 +2324,21 @@ public class GameAction {
                 card.setUniqueNumber(nextUniqueNumber++);
                 
                 //if(card.isBasicLand()) {
-                String PC = card.getSVar("PicCount");
-                int n = 0;
-                if (PC.matches("[0-9][0-9]?"))
-                	n = Integer.parseInt(PC);
-                if (n > 1)
-                    card.setRandomPicture(generator.nextInt(n));
+                //String PC = card.getSVar("PicCount");
+                //int n = 0;
+                //if (PC.matches("[0-9][0-9]?"))
+                //	n = Integer.parseInt(PC);
+                //if (n > 1)
+                //    card.setRandomPicture(generator.nextInt(n));
                     //System.out.println("computer random number:" + card.getRandomPicture());
                 //}
                 if ((card.getSets().size() > 0) && card.getCurSetCode().equals(""))
                 	card.setRandomSetCode();
+                
+                int n = SetInfoUtil.getSetInfo_Code(card.getSets(), card.getCurSetCode()).PicCount;
+                if (n > 1)
+                    card.setRandomPicture(generator.nextInt(n));
+                
                 card.setImageFilename(CardUtil.buildFilename(card));
                 
                 AllZone.Computer_Library.add(card);

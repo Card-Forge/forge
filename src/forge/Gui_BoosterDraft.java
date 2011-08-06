@@ -507,19 +507,23 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
             c = list.get(i);
             c.setRarity(pack.getRarity(c.getName()));
             
-            String PC = c.getSVar("PicCount");
+            //String PC = c.getSVar("PicCount");
             Random r = new Random();
-            int n = 0;
-            if (PC.matches("[0-9][0-9]?"))
-            	n = Integer.parseInt(PC);
+            //int n = 0;
+            //if (PC.matches("[0-9][0-9]?"))
+            //	n = Integer.parseInt(PC);
+            //if (n > 1)
+            //   c.setRandomPicture(r.nextInt(n));
+            
+            if (c.getCurSetCode().equals(""))
+            	c.setCurSetCode(c.getMostRecentSet());
+            	
+            int n = SetInfoUtil.getSetInfo_Code(c.getSets(), c.getCurSetCode()).PicCount;
             if (n > 1)
                 c.setRandomPicture(r.nextInt(n));
             
-            if (c.getCurSetCode().equals(""))
-            {
-            	c.setCurSetCode(c.getMostRecentSet());
-            	c.setImageFilename(CardUtil.buildFilename(c));
-            }
+            c.setImageFilename(CardUtil.buildFilename(c));
+            
             
             allCardModel.addCard(c);
         }

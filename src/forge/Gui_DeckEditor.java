@@ -182,21 +182,24 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
                 filteredOut = filterByType(c);
             }
             
-            String PC = c.getSVar("PicCount");
+            //String PC = c.getSVar("PicCount");
             Random r = new Random();
-            int n = 0;
-            if (!PC.equals("")) {
-	            if (PC.matches("[0-9][0-9]?"))
-	            	n = Integer.parseInt(PC);
-	            if (n > 1)
-	                c.setRandomPicture(r.nextInt(n));
-            }
+            //int n = 0;
+            //if (!PC.equals("")) {
+	        //    if (PC.matches("[0-9][0-9]?"))
+	        //    	n = Integer.parseInt(PC);
+	        //    if (n > 1)
+	        //        c.setRandomPicture(r.nextInt(n));
+            //}
             
             if (c.getCurSetCode().equals(""))
-        	{
         		c.setCurSetCode(c.getMostRecentSet());
-        		c.setImageFilename(CardUtil.buildFilename(c));
-        	}
+        		
+            int n = SetInfoUtil.getSetInfo_Code(c.getSets(), c.getCurSetCode()).PicCount;
+            if (n > 1)
+                c.setRandomPicture(r.nextInt(n));
+            
+            c.setImageFilename(CardUtil.buildFilename(c));
             
 
             if(!filteredOut) {
@@ -211,21 +214,25 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
             // add rarity to card if this is a sealed card pool
             if(!customMenu.getGameType().equals(Constant.GameType.Constructed)) c.setRarity(pack.getRarity(c.getName()));
             
-            String PC = c.getSVar("PicCount");
+            //String PC = c.getSVar("PicCount");
             Random r = new Random();
-            int n = 0;
-            if (!PC.equals("")) {
-	            if (PC.matches("[0-9][0-9]?"))
-	            	n = Integer.parseInt(PC);
-	            if (n > 1)
-	                c.setRandomPicture(r.nextInt(n));
-            }
+            //int n = 0;
+            //if (!PC.equals("")) {
+	        //    if (PC.matches("[0-9][0-9]?"))
+	        //    	n = Integer.parseInt(PC);
+	        //    if (n > 1)
+	        //        c.setRandomPicture(r.nextInt(n));
+            //}
             
             if (c.getCurSetCode().equals(""))
-        	{
         		c.setCurSetCode(c.getMostRecentSet());
-        		c.setImageFilename(CardUtil.buildFilename(c));
-        	}
+        	
+            int n = SetInfoUtil.getSetInfo_Code(c.getSets(), c.getCurSetCode()).PicCount;
+            if (n > 1)
+                c.setRandomPicture(r.nextInt(n));
+            
+            c.setImageFilename(CardUtil.buildFilename(c));
+        	
 
             bottomModel.addCard(c);
         }// for
