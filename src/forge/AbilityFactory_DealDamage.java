@@ -174,7 +174,7 @@ import java.util.Random;
           return 0;
         }
        
-        private boolean shouldTgtP(int d) {
+        private boolean shouldTgtP(int d, final boolean noPrevention) {
         	
         	if (AllZone.HumanPlayer.preventAllDamageToPlayer(AF.getHostCard(), false) 
         			|| !AllZone.HumanPlayer.canTarget(AF.getHostCard())) 	return false;
@@ -191,7 +191,7 @@ import java.util.Random;
             return false;
         }
        
-        private Card chooseTgtC(final int d) {
+        private Card chooseTgtC(final int d, final boolean noPrevention) {
            
             PlayerZone human = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
             CardList hPlay = new CardList(human.getCards());
@@ -200,7 +200,7 @@ import java.util.Random;
                     // will include creatures already dealt damage
                     return c.isCreature() && ((c.getNetDefense() + c.getDamage()) <= d)
                             && CardFactoryUtil.canTarget(AF.getHostCard(), c)
-                            && !c.preventAllDamageToCard(AF.getHostCard(),false)
+                            && !(c.preventAllDamageToCard(AF.getHostCard(),false) && !noPrevention) 
                             && !c.getKeyword().contains("Indestructible")
                             && !(c.getSVar("SacMe").length() > 0);
                 }
@@ -266,6 +266,10 @@ import java.util.Random;
 	private boolean damageTargetAI(SpellAbility saMe) {
 		int damage = getNumDamage(saMe);
 		Target tgt = AF.getAbTgt();
+        HashMap<String,String> params = AF.getMapParams();
+		
+		boolean noPrevention = params.containsKey("NoPrevention");
+		
 		// AI handle multi-targeting?
 		if (tgt == null){
 			if (AF.getMapParams().containsKey("Affected")){
@@ -288,12 +292,12 @@ import java.util.Random;
 			// TODO: Consider targeting the planeswalker
 			if (tgt.canTgtCreatureAndPlayer()) {
 
-				if (shouldTgtP(damage)) {
+				if (shouldTgtP(damage,noPrevention)) {
 					tgt.addTarget(AllZone.HumanPlayer);
 					continue;
 				}
 
-				Card c = chooseTgtC(damage);
+				Card c = chooseTgtC(damage,noPrevention);
 				if (c != null) {
 					tgt.addTarget(c);
 					continue;
@@ -306,7 +310,7 @@ import java.util.Random;
 			}
 
 			if (tgt.canTgtCreature()) {
-				Card c = chooseTgtC(damage);
+				Card c = chooseTgtC(damage,noPrevention);
 				if (c != null) {
 					tgt.addTarget(c);
 					continue;
