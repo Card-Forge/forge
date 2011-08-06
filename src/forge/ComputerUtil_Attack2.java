@@ -38,14 +38,6 @@ public class ComputerUtil_Attack2 {
 		attackers = getPossibleAttackers(possibleAttackers);
 		blockers  = getPossibleBlockers(possibleBlockers);
 		this.blockerLife = blockerLife;
-		
-		attackers = attackers.filter(new CardListFilter()
-		{
-		  public boolean addCard(Card c)
-		  {
-		    return (0 < AllZone.HumanPlayer.predictDamage(c.getNetCombatDamage(),c,true) || c.getName().equals("Guiltfeeder"));
-		  }
-		});
 	}//constructor
        
 	public CardList getPossibleAttackers(CardList in)
@@ -204,7 +196,7 @@ public class ComputerUtil_Attack2 {
           //Atackers that don't really have a choice
           for (int i=0; i < attackersLeft.size(); i++)
           {
-        	  Card attacker = attackersLeft.get(i);
+        	 Card attacker = attackersLeft.get(i);
              if ( (attacker.getKeyword().contains("CARDNAME attacks each turn if able.") 
             	   || attacker.getKeyword().contains("At the beginning of the end step, destroy CARDNAME.")
                    || attacker.getKeyword().contains("At the beginning of the end step, exile CARDNAME.")
@@ -216,6 +208,14 @@ public class ComputerUtil_Attack2 {
                 attackersLeft.remove(attacker);
              }
           }
+          
+        attackersLeft = attackersLeft.filter(new CardListFilter()
+  		{
+  		  public boolean addCard(Card c)
+  		  {
+  		    return (0 < AllZone.HumanPlayer.predictDamage(c.getNetCombatDamage(),c,true) || c.getName().equals("Guiltfeeder"));
+  		  }
+  		});
 
            // *******************
            // start of edits
@@ -254,18 +254,14 @@ public class ComputerUtil_Attack2 {
            int candidateUnblockedDamage = 0;
            for(Card pCard:computerList){
                // if the creature can attack then it's a potential attacker this turn, assume summoning sickness creatures will be able to
-               if(CombatUtil.canAttack(pCard) || pCard.isSick()){
-                   boolean wasSick = false;
-                   if(pCard.isSick()){
-                       wasSick = true;
-                       pCard.setSickness(false);
-                   }
+               if(CombatUtil.canAttackNextTurn(pCard)){
+            	   
                    candidateAttackers.add(pCard);
                    if(pCard.getNetCombatDamage() > 0){
                        candidateUnblockedDamage += pCard.getNetCombatDamage();
                        computerForces += 1;
                    }
-                   if(wasSick){pCard.setSickness(true);}
+
                }
            }
 
@@ -431,8 +427,6 @@ public class ComputerUtil_Attack2 {
              }
           }//getAttackers()
 
-          
-          
     return combat;
   }//getAttackers()
 
