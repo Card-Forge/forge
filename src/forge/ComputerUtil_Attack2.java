@@ -104,7 +104,7 @@ import java.util.*;
           if (humanExaltedBonus > 0) {
         	  int nFinestHours = GameActionUtil.countFinestHours(Constant.Player.Human);
         	  
-        	  if ((blockersNeeded == 0) || (nFinestHours > 0) && humanList.size() > 0) {
+        	  if ( (blockersNeeded == 0 || nFinestHours > 0) && humanList.size() > 0) {
         		  //
         		  // total attack = biggest creature + exalted, *2 if Rafiq is in play
         		  int humanBaseAttack = getAttack(humanList.get(0)) + humanExaltedBonus;
