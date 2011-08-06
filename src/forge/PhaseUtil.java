@@ -6,6 +6,11 @@ import java.util.HashMap;
 public class PhaseUtil {
 	// ******* UNTAP PHASE *****
 	private static boolean skipUntap(Player p) {
+		if (AllZoneUtil.isCardInPlay("Sands of Time"))
+    		return true;
+		if (AllZoneUtil.isCardInPlay("Stasis"))
+    		return true;
+		
 		if(p.skipNextUntap()) {
 			p.setSkipNextUntap(false);
 			return true;
@@ -50,7 +55,7 @@ public class PhaseUtil {
         lands = lands.filter(AllZoneUtil.untapped);
         turn.setNumPowerSurgeLands(lands.size());
         
-        if(!AllZoneUtil.isCardInPlay("Stasis")) doUntap();
+        if(!AllZoneUtil.isCardInPlay("Stasis") && !AllZoneUtil.isCardInPlay("Sands of Time")) doUntap();
         
         AllZone.GameAction.resetActivationsPerTurn();
         
