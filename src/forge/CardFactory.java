@@ -3661,7 +3661,7 @@ public class CardFactory implements NewConstants {
             String np[] = k[1].split("/");
             final int numCardsToReturn = Integer.parseInt(np[0]);
             if (np.length > 1) {
-                if (np[1].equals("Return Up To")) {
+                if (np[1].equals("UpTo")) {
                     returnUpTo[0] = true;
                 }
             }
