@@ -33,6 +33,7 @@ public enum Counters {
     LOYALTY(),
     M0M1("-0/-1"),
     M1M1("-1/-1"),
+    M2M1("-2/-1"),
     MANA(),
     MINING(),
     PRESSURE(),

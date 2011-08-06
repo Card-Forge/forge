@@ -4143,6 +4143,61 @@ public class CardFactory_Instants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Contagion")) {
+        	final Input runtime = new Input() {
+				private static final long serialVersionUID = 5261183989797221059L;
+				int n = 0;
+
+				@Override
+                public void showMessage() {
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - Select target creature for a -2/-1 counter");
+                    AllZone.Display.showMessage(sb.toString());
+                    ButtonUtil.enableOnlyCancel();
+                }
+				
+				@Override
+	            public void selectButtonCancel() {
+					stop();
+				}
+				
+				@Override
+                public void selectCard(Card c, PlayerZone zone) {
+					if(zone.is(Constant.Zone.Battlefield) && CardFactoryUtil.canTarget(card, c) && 
+							c.isCreature()) {
+						c.addCounter(Counters.M2M1, 1);
+						n++;
+						if(n >= 2) stop();
+						else showMessage();
+					}
+				}
+            };
+        	
+        	final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 3818559481920103914L;
+
+				@Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+                
+                @Override
+                public void resolve() {
+                	if(card.getController().isHuman()) {
+                		AllZone.InputControl.setInput(runtime);
+                	}
+                }
+            };
+            spell.setDescription("Distribute two -2/-1 counters among one or two target creatures.");
+            spell.setStackDescription(cardName+" - Distribute two -2/-1 counters among one or two target creatures.");
+            spell.setBeforePayMana(runtime);
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
         
     	return card;
     }//getCard

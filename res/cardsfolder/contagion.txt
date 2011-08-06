@@ -1,0 +1,9 @@
+Name:Contagion
+ManaCost:3 B B
+Types:Instant
+Text:no text
+SVar:AltCost:PayLife<1> ExileFromHand<1/Card.Black>$You may pay 1 life and exile a black card from your hand rather than pay Contagion's mana cost.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/contagion.jpg
+End
