@@ -5480,6 +5480,7 @@ public class CardFactory implements NewConstants {
                     
                     @Override
                     public boolean canPlay() {
+                    	if (weReturnUpTo) return true;
                         return getGraveCreatures().size() >= numCreatures;
                     }
                     
