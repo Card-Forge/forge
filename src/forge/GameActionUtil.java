@@ -3065,7 +3065,7 @@ public class GameActionUtil {
 
 						for(int j = 0; j < creats.size(); j++) {
 							Card c = creats.get(j);
-							if(c.getCounters(Counters.M1M1) > 0) c.addCounter(Counters.M1M1, -1);
+							if(c.getCounters(Counters.M1M1) > 0) c.subtractCounter(Counters.M1M1,1);
 						}
 
 					}
