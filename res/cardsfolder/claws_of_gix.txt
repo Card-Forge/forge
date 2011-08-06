@@ -1,0 +1,9 @@
+Name:Claws of Gix
+ManaCost:0
+Types:Artifact
+Text:no text
+A:AB$GainLife|Cost$1 Sac<1/Permanent>|LifeAmount$1|SpellDescription$You gain 1 life.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/claws_of_gix.jpg
+End

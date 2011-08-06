@@ -1,0 +1,9 @@
+Name:Ancestor's Prophet
+ManaCost:4 W
+Types:Creature Human Cleric
+Text:no text
+PT:1/5
+A:AB$GainLife|Cost$tapXType<5/Cleric>|LifeAmount$10|SpellDescription$You gain 10 life.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ancestors_prophet.jpg
+End
