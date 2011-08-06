@@ -8878,8 +8878,8 @@ public class CardFactory_Creatures {
             ability.setStackDescription("Captain Sisay searches for a legendary card...");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
-        */
-
+        
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Brion Stoutarm")) {
             
@@ -8960,7 +8960,7 @@ public class CardFactory_Creatures {
             
             ability.setStackDescription("Brion Stoutarm deals damage equal to sacrificed creature's power");
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Trinket Mage")) {
