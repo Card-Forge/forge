@@ -1,3 +1,9 @@
+Eternity Vessel
+6
+Artifact
+Eternity Vessel enters the battlefield with X charge counters on it, where X is your life total. Landfall - Whenever a land enters the battlefield under your control, you may have your life total become the number of charge counters on Eternity Vessel.
+Landfall
+
 Undead Gladiator
 1 B B
 Creature Zombie Barbarian
@@ -952,12 +958,6 @@ no text
 2/1
 Flying
 CARDNAME can block only creatures with flying.
-
-Eternity Vessel
-6
-Artifact
-Eternity Vessel enters the battlefield with X charge counters on it, where X is your life total. Landfall — Whenever a land enters the battlefield under your control, you may have your life total become the number of charge counters on Eternity Vessel.
-Landfall
 
 Vengevine
 2 G G

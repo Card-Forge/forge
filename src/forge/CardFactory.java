@@ -3832,7 +3832,6 @@ public class CardFactory implements NewConstants {
         //*************** START *********** START **************************
         if (cardName.equals("Brave the Elements")) {
         	/**
-        	 *  This card is currently under construction.
         	 *  This card now works slightly better than it did before the spAllPump 
         	 *  keyword was created. The AI is too simple and needs some work.
         	 */
@@ -3841,7 +3840,6 @@ public class CardFactory implements NewConstants {
 				
 				@Override
                 public boolean canPlayAI() {
-					card.setSVar("PlayMain1", "TRUE");
                     return getAttacker() != null;
                 }
 				
@@ -3929,6 +3927,7 @@ public class CardFactory implements NewConstants {
                     }//for
 				}//resolve
         	};//SpellAbility
+        	card.setSVar("PlayMain1", "TRUE");
         	card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
