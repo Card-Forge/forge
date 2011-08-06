@@ -2,7 +2,7 @@ Name:Sylvan Bounty
 ManaCost:5 G
 Types:Instant
 Text:no text
-K:spGainLifeTgt:8
+A:SP$GainLife | Cost$ 5 G | LifeAmount$ 8 | ValidTgts$ Player | TgtPrompt$ Choose a player to gain 8 life | SpellDescription$ Target player gains 8 life.
 K:TypeCycling:Basic:1 G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_bounty.jpg

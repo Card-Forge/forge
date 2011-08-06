@@ -2,7 +2,7 @@ Name:Rejuvenate
 ManaCost:3 G
 Types:Sorcery
 Text:no text
-K:spGainLife:6
+A:SP$GainLife | Cost$ 3 G | LifeAmount$ 6 | SpellDescription$ You gain 6 life.
 K:Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rejuvenate.jpg

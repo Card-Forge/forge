@@ -2,7 +2,7 @@ Name:Dosan's Oldest Chant
 ManaCost:4 G
 Types:Sorcery
 Text:no text
-K:spGainLife:6
+A:SP$GainLife | Cost$ 4 G | LifeAmount$ 6 | SpellDescription$ You gain 6 life.
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dosans_oldest_chant.jpg

@@ -2,7 +2,7 @@ Name:Soothing Balm
 ManaCost:1 W
 Types:Instant
 Text:no text
-K:spGainLifeTgt:5
+A:SP$GainLife | Cost$ 1 W | LifeAmount$ 5 | ValidTgts$ Player | TgtPrompt$ Choose a player to gain 5 life | SpellDescription$ Target player gains 5 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soothing_balm.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/48.jpg

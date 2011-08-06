@@ -2,7 +2,7 @@ Name:Natural Spring
 ManaCost:3 G G
 Types:Sorcery
 Text:no text
-K:spGainLifeTgt:8
+A:SP$GainLife | Cost$ 3 G G | LifeAmount$ 8 | ValidTgts$ Player | TgtPrompt$ Choose a player to gain 8 life | SpellDescription$ Target player gains 8 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natural_spring.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/133.jpg

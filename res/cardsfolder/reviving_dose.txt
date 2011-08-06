@@ -2,7 +2,7 @@ Name:Reviving Dose
 ManaCost:2 W
 Types:Instant
 Text:no text
-K:spGainLife:3
+A:SP$GainLife | Cost$ 2 W | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card22941.jpg
