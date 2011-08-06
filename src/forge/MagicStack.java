@@ -387,6 +387,12 @@ public class MagicStack extends MyObservable {
     		{
     			AllZone.TriggerHandler.runTrigger("AbilityCast", runParams);
     		}
+    		if(sp.isCycling())
+    		{
+    			runParams.clear();
+    			runParams.put("Card", sp.getSourceCard());
+    			AllZone.TriggerHandler.runTrigger("Cycled", runParams);
+    		}
 		}
 		
 		if(sp instanceof Spell_Permanent && sp.getSourceCard().getName().equals("Mana Vortex")) {

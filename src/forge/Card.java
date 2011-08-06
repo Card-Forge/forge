@@ -1442,11 +1442,6 @@ public class Card extends MyObservable {
     public void cycle() {
         for(Command var:cycleCommandList)
             var.execute();
-        
-        //Run triggers
-        HashMap<String,Object> runParams = new HashMap<String,Object>();
-        runParams.put("Card", this);
-        AllZone.TriggerHandler.runTrigger("Cycled", runParams);
     }
     
     public void setSickness(boolean b) {
