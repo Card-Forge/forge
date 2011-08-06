@@ -3430,6 +3430,28 @@ public class CardFactoryUtil {
         
         if(d[0].contains("UntapTgt")) TgtC.untap();
         
+        if(d[0].contains("UntapAll")) // 6/10
+        {
+        	CardList ut = new CardList();
+        	if (d[0].contains("YouCtrl"))
+        		ut.addAll(AllZone.getZone(Constant.Zone.Play, dbPlayer).getCards());
+        	else if (d[0].contains("OppCtrl"))
+        		ut.addAll(AllZone.getZone(Constant.Zone.Play, Opp).getCards());
+        	else
+        	{
+        		ut.addAll(AllZone.getZone(Constant.Zone.Play, dbPlayer).getCards());
+        		ut.addAll(AllZone.getZone(Constant.Zone.Play, Opp).getCards());
+        	}
+        	if (d[0].contains("Type"))
+        	{
+        		String dd[] = d[0].split("\\.");
+        		ut = ut.getValidCards(dd);
+        	}
+        	
+        	for (int i=0; i<ut.size(); i++)
+        		ut.get(i).untap();
+        }
+        
         if(d[0].contains("TapTgt")) // 2/10
         TgtC.tap();
         
