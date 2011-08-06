@@ -2822,11 +2822,9 @@ public class GameAction {
     	if (sa.getPayCosts() != null){
         		Target_Selection ts = new Target_Selection(sa.getTarget(), sa);    		
         		Cost_Payment payment = new Cost_Payment(sa.getPayCosts(), sa);
-        		
-        		payment.getCost().setMana(sa.getAdditionalManaCost());
-        		payment.changeCost();
-        		
+
         		SpellAbility_Requirements req = new SpellAbility_Requirements(sa, ts, payment);
+        		req.setFree(true);
         		req.fillRequirements();
         	}
     	else if(sa.getBeforePayMana() == null) {

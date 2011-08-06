@@ -6,6 +6,8 @@ public class SpellAbility_Requirements {
 	private SpellAbility ability = null;
 	private Target_Selection select = null;
 	private Cost_Payment payment = null;
+	private boolean isFree = false;
+	public void setFree(boolean bFree) { isFree = bFree; }
 	
 	private PlayerZone fromZone = null;
 	private boolean bCasting = false;
@@ -32,13 +34,13 @@ public class SpellAbility_Requirements {
 		AllZone.Stack.freezeStack();
 		
 		// Skip to paying if parent ability doesn't target and has no subAbilities.
-		if (!select.doesTarget() && ability.getSubAbility() == null)
-			startPaying();
-		else{
+		if (select.doesTarget() || ability.getSubAbility() != null){
 			select.setRequirements(this);
 			select.resetTargets();
 			select.chooseTargets();
 		}
+		else 
+			needPayment();
 	}
 	
 	public void finishedTargeting(){
@@ -53,7 +55,15 @@ public class SpellAbility_Requirements {
 			AllZone.Stack.clearFrozen();
 			return;
 		}
-		startPaying();
+		else
+			needPayment();
+	}
+	
+	public void needPayment(){
+		if (!isFree)
+			startPaying();
+		else
+			finishPaying();
 	}
 	
 	public void startPaying(){
@@ -62,13 +72,12 @@ public class SpellAbility_Requirements {
 	}
 	
 	public void finishPaying(){
-		if (payment.isAllPaid())
+		if (isFree || payment.isAllPaid())
 			addAbilityToStack();
 		else if (payment.isCanceled()){
-			if (bCasting){	// and not a copy
-				// add back to hand
-				fromZone.add(ability.getSourceCard());
-			}
+			if (bCasting && !ability.getSourceCard().isCopiedSpell())
+				fromZone.add(ability.getSourceCard()); // add back to hand
+			
 			if (select != null)
 				select.resetTargets();
 			
