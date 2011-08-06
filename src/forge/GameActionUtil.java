@@ -261,7 +261,39 @@ public class GameActionUtil {
 		}//end Spirit Shackle
 
 	}//end executeTapSideEffects()
-
+	
+	public static void executeUntapSideEffects(Card c) {
+		/*
+		 * This is currently only for Hollowsage, Mesmeric Orb and Wake Thrasher
+		 * I don't think WheneverKeyword is implemented for BecomesUntapped
+		 */
+		//AllZone.GameAction.CheckWheneverKeyword(c,"BecomesUntapped",null);
+		
+		/*
+		 * Mesmeric Orb - Whenever a permanent becomes untapped, that permanent's
+		 * controller puts the top card of his or her library into his or her graveyard.
+		 */
+		if(c.isPermanent()) {
+			final String controller = c.getController();
+			final CardList orbs = AllZoneUtil.getCardsInPlay("Mesmeric Orb");
+			for(Card orb:orbs) {
+				Ability ability = new Ability(orb, "0") {
+					@Override
+					public void resolve() {
+						CardList lib = AllZoneUtil.getPlayerCardsInLibrary(controller);
+						if(lib.size() >0) {
+							AllZone.GameAction.moveToGraveyard(lib.get(0));
+						}
+					}
+				};//Ability
+				ability.setStackDescription(orb.getName()+" - "+c+" was untapped, "+controller+" puts top card of library into graveyard.");
+				if(AllZoneUtil.getPlayerCardsInLibrary(controller).size() > 0) {
+					AllZone.Stack.add(ability);
+				}
+			}//for
+		}//end Mesmeric Orb
+		
+	}
 
 	public static void executePlayCardEffects(SpellAbility sa) {
 		// experimental:
