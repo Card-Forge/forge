@@ -199,7 +199,19 @@ public abstract class Player extends MyObservable{
 	public void addDamageWithoutPrevention(final int damage, final Card source) {
 		int damageToDo = damage;
 		
-		if( source.getKeyword().contains("Infect") ) {
+		if( AllZoneUtil.isCardInPlay("Crumbling Sanctuary")) {
+			
+			System.out.println("Crumbling Sanctuary ("+source+") - exile number of cards:"+damageToDo);
+			for(int i = 0; i < damageToDo; i++) {
+				CardList lib = AllZoneUtil.getPlayerCardsInLibrary(this);
+				if(lib.size() > 0) {
+					AllZone.GameAction.exile(lib.get(0));
+				}
+			}
+			//return so things like Lifelink, etc do not trigger.  This is a replacement effect I think.
+			return;
+		}
+		else if( source.getKeyword().contains("Infect") ) {
         	addPoisonCounters(damageToDo);
         }
         else {

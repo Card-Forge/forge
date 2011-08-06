@@ -1,0 +1,8 @@
+Name:Crumbling Sanctuary
+ManaCost:5
+Types:Artifact
+Text:For each 1 damage that would be dealt to a player, that player exiles the top card of his or her library instead.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crumbling_sanctuary.jpg
+End
