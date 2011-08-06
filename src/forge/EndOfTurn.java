@@ -84,6 +84,17 @@ public class EndOfTurn implements java.io.Serializable
     		exile.setStackDescription("Exile " + card);
     		AllZone.Stack.add(exile);
     	}
+    	if(!c.isFaceDown() && c.getKeyword().contains("At the beginning of the end step, destroy CARDNAME.")) {
+    		final Card card = c;
+    		final SpellAbility destroy = new Ability(card, "0") {
+    			@Override
+    			public void resolve() {
+    				if(AllZone.GameAction.isCardInPlay(card)) AllZone.GameAction.destroy(card);
+    			}
+    		};
+    		destroy.setStackDescription("Destroy " + card);
+    		AllZone.Stack.add(destroy);
+    	}
     }
     execute(at);
   }//executeAt()
