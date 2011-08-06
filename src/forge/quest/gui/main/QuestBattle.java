@@ -267,7 +267,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Saruman 2", "medium", "Discard deck with Megrim, Liliana's Caress and Burning Inquiry ");
         addToDeckList("Saruman 3", "hard", "Discard deck with Megrim, Liliana's Caress and Burning Inquiry ");
         addToDeckList("Sauron 2", "medium", "Black Vise and Underworld Dreams with lots of card draw for both players");
-        addToDeckList("Scooby Doo 3", "hard", "Red deck, Dragonmaster Outcast, Rakdos Pit Dragon, Kamahl, Pit Fighter");
+        addToDeckList("Scooby Doo 3", "hard", "RW Giants");
         addToDeckList("Scotty 2", "medium", "Pestilence + Castle + Penumbra Kavu/Spider/Wurm but no pro black");
         addToDeckList("Seabiscuit 1", "easy", "White Metalcraft deck, Ardent Recruit, Indomitable Archangel etc");
         addToDeckList("Seabiscuit 2", "medium", "White Metalcraft deck, Ardent Recruit, Indomitable Archangel etc");
