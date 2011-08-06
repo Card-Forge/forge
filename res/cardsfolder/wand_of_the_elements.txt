@@ -5,6 +5,6 @@ Text:no text
 A:AB$Token | Cost$ T Sac<1/Island> | TokenImage$ U 2 2 Elemental Flying | TokenAmount$ 1 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ Controller | TokenColors$ Blue | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Flying| SpellDescription$ Put a 2/2 blue Elemental creature tokens with flying into play.
 A:AB$Token | Cost$ T Sac<1/Mountain> | TokenImage$ R 3 3 Elemental | TokenAmount$ 1 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ Controller | TokenColors$ Red | TokenPower$ 3 | TokenToughness$ 3 | SpellDescription$ Put a 3/3 Red Elemental creature token into play.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
+SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wand_of_the_elements.jpg
 End

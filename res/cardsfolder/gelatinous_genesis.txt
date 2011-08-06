@@ -1,0 +1,10 @@
+Name:Gelatinous Genesis
+ManaCost:X X G
+Types:Sorcery
+Text:no text
+A:SP$Token | Cost$ X X G | TokenImage$ G X X Merfolk Wizard | TokenAmount$ X | TokenName$ Ooze | TokenTypes$ Creature,Ooze | TokenOwner$ Controller | TokenColors$ Green | TokenPower$ X | TokenToughness$ X | SpellDescription$ Put X X/X green Ooze creature tokens onto the battlefield.
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gelatinous_genesis.jpg
+End
